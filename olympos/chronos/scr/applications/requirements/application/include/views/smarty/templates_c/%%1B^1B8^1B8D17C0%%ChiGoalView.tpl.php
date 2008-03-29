@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-29 18:02:49
+<?php /* Smarty version 2.6.19, created on 2008-03-29 20:12:29
          compiled from C:%5CProgramme%5Cxampp%5Chtdocs%5C26%5Capplication%5Cinclude%5Cviews%5CChiGoalView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'count_items', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 32, false),array('function', 'math', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 33, false),array('function', 'translate', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 43, false),array('modifier', 'replace', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 54, false),array('modifier', 'default', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 107, false),)), $this); ?>
@@ -210,13 +210,6 @@ unset($_smarty_tpl_vars);
 "><?php echo $this->_tpl_vars['node']->getValueDisplayName('Alias'); ?>
 </span>
 	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Alias'); ?>
-</span>
-
-	<span class="dottedSeparator"></span>
-	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Author'); ?>
-"><?php echo $this->_tpl_vars['node']->getValueDisplayName('Author'); ?>
-</span>
-	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Author'); ?>
 </span>
 
 	<span class="dottedSeparator"></span>
