@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xmi:XMI xmi:version="2.1"
+	xmlns:uml="http://schema.omg.org/spec/UML/2.1"
+	xmlns:xmi="http://schema.omg.org/spec/XMI/2.1"
+	xmlns:thecustomprofile="http://www.sparxsystems.com/profiles/thecustomprofile/1.0"
+	xmlns:Chronos="http://www.sparxsystems.com/profiles/Chronos/1.0">
+	<xmi:Documentation exporter="Enterprise Architect"
+		exporterVersion="6.5" />
+	<uml:Model xmi:type="uml:Model" name="EA_Model"
+		visibility="public">
+		<packagedElement xmi:type="uml:Package"
+			xmi:id="ChiRequirementsPackage.000" name="requirement"
+			visibility="public">
+		</packagedElement>
+		<uml:Profile xmi:version="2.1"
+			xmlns:uml="http://schema.omg.org/spec/UML/2.1/uml.xml"
+			xmlns:xmi="http://schema.omg.org/spec/XMI/2.1"
+			xmi:id="thecustomprofile" nsPrefix="thecustomprofile"
+			name="thecustomprofile" metamodelReference="mmref01">
+			<ownedComment xmi:type="uml:Comment" xmi:id="comment01"
+				annotatedElement="thecustomprofile">
+				<body>Version:1.0</body>
+			</ownedComment>
+			<packageImport xmi:id="mmref01">
+				<importedPackage
+					href="http://schema.omg.org/spec/UML/2.1/uml.xml" />
+			</packageImport>
+			<packagedElement xmi:type="uml:Stereotype" xmi:id="brakes"
+				name="brakes">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="brakes-base_Dependency" name="base_Dependency"
+					association="Dependency_brakes">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Dependency" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Dependency_brakes" name="A_Dependency_brakes"
+				memberEnd="extension_brakes brakes-base_Dependency">
+				<ownedEnd xmi:id="extension_brakes"
+					name="extension_brakes" type="brakes" isComposite="true" lower="0"
+					upper="1" memberEnd="extension_brakes brakes-base_Dependency" />
+			</packagedElement>
+		</uml:Profile>
+		<uml:Profile xmi:version="2.1"
+			xmlns:uml="http://schema.omg.org/spec/UML/2.1/uml.xml"
+			xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:id="E232EAF0-2"
+			nsPrefix="Chronos" name="Chronos" metamodelReference="mmref01">
+			<ownedComment xmi:type="uml:Comment" xmi:id="comment01"
+				annotatedElement="E232EAF0-2">
+				<body>Chronos Version:1.0</body>
+			</ownedComment>
+			<packageImport xmi:id="mmref01">
+				<importedPackage
+					href="http://schema.omg.org/spec/UML/2.1/uml.xml" />
+			</packageImport>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiWorkerInternal" name="ChiWorkerInternal">
+				<generalization xmi:type="uml:Generalization"
+					xmi:id="ChiWorkerInternal_generalization" general="ChiWorker" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiWorkerExternal" name="ChiWorkerExternal">
+				<generalization xmi:type="uml:Generalization"
+					xmi:id="ChiWorkerExternal_generalization" general="ChiWorker" />
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiWorkerExternal-is_OfflineUser" name="is_OfflineUser">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiBusinessPartnerActive" name="ChiBusinessPartnerActive">
+				<generalization xmi:type="uml:Generalization"
+					xmi:id="ChiBusinessPartnerActive_generalization"
+					general="ChiBusinessPartner" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiBusinessProcess" name="ChiBusinessProcess">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessProcess-base_Package" name="base_Package"
+					association="Package_ChiBusinessProcess">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Package" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Package_ChiBusinessProcess"
+				name="A_Package_ChiBusinessProcess"
+				memberEnd="extension_ChiBusinessProcess ChiBusinessProcess-base_Package">
+				<ownedEnd xmi:id="extension_ChiBusinessProcess"
+					name="extension_ChiBusinessProcess" type="ChiBusinessProcess"
+					isComposite="true" lower="0" upper="1"
+					memberEnd="extension_ChiBusinessProcess ChiBusinessProcess-base_Package" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiAction" name="ChiAction">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiAction-base_Association" name="base_Association"
+					association="Association_ChiAction">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Association" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Association_ChiAction" name="A_Association_ChiAction"
+				memberEnd="extension_ChiAction ChiAction-base_Association">
+				<ownedEnd xmi:id="extension_ChiAction"
+					name="extension_ChiAction" type="ChiAction" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiAction ChiAction-base_Association" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiManyToMany" name="ChiManyToMany">
+				<generalization xmi:type="uml:Generalization"
+					xmi:id="ChiManyToMany_generalization" general="ChiNode" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiDiscord" name="ChiDiscord">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiDiscord-base_Association" name="base_Association"
+					association="Association_ChiDiscord">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Association" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Association_ChiDiscord" name="A_Association_ChiDiscord"
+				memberEnd="extension_ChiDiscord ChiDiscord-base_Association">
+				<ownedEnd xmi:id="extension_ChiDiscord"
+					name="extension_ChiDiscord" type="ChiDiscord" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiDiscord ChiDiscord-base_Association" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiRelationEnd" name="ChiRelationEnd">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiRelationEnd-base_Association" name="base_Association"
+					association="Association_ChiRelationEnd">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Association" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiRelationEnd-fk_name" name="fk_name">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Association_ChiRelationEnd"
+				name="A_Association_ChiRelationEnd"
+				memberEnd="extension_ChiRelationEnd ChiRelationEnd-base_Association">
+				<ownedEnd xmi:id="extension_ChiRelationEnd"
+					name="extension_ChiRelationEnd" type="ChiRelationEnd"
+					isComposite="true" lower="0" upper="1"
+					memberEnd="extension_ChiRelationEnd ChiRelationEnd-base_Association" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiActionKey" name="ChiActionKey">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiActionKey-base_Association" name="base_Association"
+					association="Association_ChiActionKey">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Association" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiActionKey-config" name="config">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiActionKey-action" name="action">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiActionKey-context" name="context">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Association_ChiActionKey" name="A_Association_ChiActionKey"
+				memberEnd="extension_ChiActionKey ChiActionKey-base_Association">
+				<ownedEnd xmi:id="extension_ChiActionKey"
+					name="extension_ChiActionKey" type="ChiActionKey"
+					isComposite="true" lower="0" upper="1"
+					memberEnd="extension_ChiActionKey ChiActionKey-base_Association" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype" xmi:id="ChiIssue"
+				name="ChiIssue">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiIssue-base_Issue" name="base_Issue"
+					association="Issue_ChiIssue">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Issue" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiIssue-Author" name="Author">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiIssue-Responsible" name="Responsible">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Issue_ChiIssue" name="A_Issue_ChiIssue"
+				memberEnd="extension_ChiIssue ChiIssue-base_Issue">
+				<ownedEnd xmi:id="extension_ChiIssue"
+					name="extension_ChiIssue" type="ChiIssue" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiIssue ChiIssue-base_Issue" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiBusinessPartnerPassive"
+				name="ChiBusinessPartnerPassive">
+				<generalization xmi:type="uml:Generalization"
+					xmi:id="ChiBusinessPartnerPassive_generalization"
+					general="ChiBusinessPartner" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiController" name="ChiController">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiController-base_Class" name="base_Class"
+					association="Class_ChiController">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Class" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Class_ChiController" name="A_Class_ChiController"
+				memberEnd="extension_ChiController ChiController-base_Class">
+				<ownedEnd xmi:id="extension_ChiController"
+					name="extension_ChiController" type="ChiController"
+					isComposite="true" lower="0" upper="1"
+					memberEnd="extension_ChiController ChiController-base_Class" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiOpinion" name="ChiOpinion">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiOpinion-base_Activity" name="base_Activity"
+					association="Activity_ChiOpinion">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Activity" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Activity_ChiOpinion" name="A_Activity_ChiOpinion"
+				memberEnd="extension_ChiOpinion ChiOpinion-base_Activity">
+				<ownedEnd xmi:id="extension_ChiOpinion"
+					name="extension_ChiOpinion" type="ChiOpinion" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiOpinion ChiOpinion-base_Activity" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiActivity" name="ChiActivity">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiActivity-base_Activity" name="base_Activity"
+					association="Activity_ChiActivity">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Activity" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Activity_ChiActivity" name="A_Activity_ChiActivity"
+				memberEnd="extension_ChiActivity ChiActivity-base_Activity">
+				<ownedEnd xmi:id="extension_ChiActivity"
+					name="extension_ChiActivity" type="ChiActivity" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiActivity ChiActivity-base_Activity" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiValueRef" name="ChiValueRef">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValueRef-base_Attribute" name="base_Attribute"
+					association="Attribute_ChiValueRef">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Attribute" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValueRef-reference_value" name="reference_value">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Attribute_ChiValueRef" name="A_Attribute_ChiValueRef"
+				memberEnd="extension_ChiValueRef ChiValueRef-base_Attribute">
+				<ownedEnd xmi:id="extension_ChiValueRef"
+					name="extension_ChiValueRef" type="ChiValueRef" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiValueRef ChiValueRef-base_Attribute" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiBusinessUseCase" name="ChiBusinessUseCase">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-base_UseCase" name="base_UseCase"
+					association="UseCase_ChiBusinessUseCase">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#UseCase" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-Extensions" name="Extensions">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-GoalInContext" name="GoalInContext">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-PrimaryActor" name="PrimaryActor">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-Trigger" name="Trigger">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-Stakeholders" name="Stakeholders">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-OtherActors" name="OtherActors">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-Precondition" name="Precondition">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-Level" name="Level">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-MainSuccessScenario"
+					name="MainSuccessScenario">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessUseCase-Scope" name="Scope">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="UseCase_ChiBusinessUseCase"
+				name="A_UseCase_ChiBusinessUseCase"
+				memberEnd="extension_ChiBusinessUseCase ChiBusinessUseCase-base_UseCase">
+				<ownedEnd xmi:id="extension_ChiBusinessUseCase"
+					name="extension_ChiBusinessUseCase" type="ChiBusinessUseCase"
+					isComposite="true" lower="0" upper="1"
+					memberEnd="extension_ChiBusinessUseCase ChiBusinessUseCase-base_UseCase" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiSystem" name="ChiSystem">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiSystem-base_Class" name="base_Class"
+					association="Class_ChiSystem">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Class" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiSystem-plattform" name="plattform">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiSystem-config" name="config">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Class_ChiSystem" name="A_Class_ChiSystem"
+				memberEnd="extension_ChiSystem ChiSystem-base_Class">
+				<ownedEnd xmi:id="extension_ChiSystem"
+					name="extension_ChiSystem" type="ChiSystem" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiSystem ChiSystem-base_Class" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiWorker" name="ChiWorker">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiWorker-base_Actor" name="base_Actor"
+					association="Actor_ChiWorker">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Actor" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Actor_ChiWorker" name="A_Actor_ChiWorker"
+				memberEnd="extension_ChiWorker ChiWorker-base_Actor">
+				<ownedEnd xmi:id="extension_ChiWorker"
+					name="extension_ChiWorker" type="ChiWorker" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiWorker ChiWorker-base_Actor" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiBusinessPartner" name="ChiBusinessPartner">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessPartner-base_Actor" name="base_Actor"
+					association="Actor_ChiBusinessPartner">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Actor" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiBusinessPartner-base_Activity" name="base_Activity"
+					association="Activity_ChiBusinessPartner">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Activity" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Actor_ChiBusinessPartner" name="A_Actor_ChiBusinessPartner"
+				memberEnd="extension_ChiBusinessPartner ChiBusinessPartner-base_Actor">
+				<ownedEnd xmi:id="extension_ChiBusinessPartner"
+					name="extension_ChiBusinessPartner" type="ChiBusinessPartner"
+					isComposite="true" lower="0" upper="1"
+					memberEnd="extension_ChiBusinessPartner ChiBusinessPartner-base_Actor" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Activity_ChiBusinessPartner"
+				name="A_Activity_ChiBusinessPartner"
+				memberEnd="extension_ChiBusinessPartner ChiBusinessPartner-base_Activity">
+				<ownedEnd xmi:id="extension_ChiBusinessPartner"
+					name="extension_ChiBusinessPartner" type="ChiBusinessPartner"
+					isComposite="true" lower="0" upper="1"
+					memberEnd="extension_ChiBusinessPartner ChiBusinessPartner-base_Activity" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiBusinessUseCaseCore" name="ChiBusinessUseCaseCore">
+				<generalization xmi:type="uml:Generalization"
+					xmi:id="ChiBusinessUseCaseCore_generalization"
+					general="ChiBusinessUseCase" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype" xmi:id="ChiValue"
+				name="ChiValue">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-base_Attribute" name="base_Attribute"
+					association="Attribute_ChiValue">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Attribute" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-restrictions_not_match"
+					name="restrictions_not_match">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-app_data_type" name="app_data_type">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-restrictions_match" name="restrictions_match">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-column_name" name="column_name">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-input_type" name="input_type">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-is_editable" name="is_editable">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-display_type" name="display_type">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-restrictions_description"
+					name="restrictions_description">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiValue-db_data_type" name="db_data_type">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Attribute_ChiValue" name="A_Attribute_ChiValue"
+				memberEnd="extension_ChiValue ChiValue-base_Attribute">
+				<ownedEnd xmi:id="extension_ChiValue"
+					name="extension_ChiValue" type="ChiValue" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiValue ChiValue-base_Attribute" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype" xmi:id="ChiNode"
+				name="ChiNode">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-base_Class" name="base_Class"
+					association="Class_ChiNode">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Class" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-parent_order" name="parent_order">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-initparams" name="initparams">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-table_name" name="table_name">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-is_searchable" name="is_searchable">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-display_value" name="display_value">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-reference_type" name="reference_type">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-child_order" name="child_order">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-pk_name" name="pk_name">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-is_soap" name="is_soap">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiNode-orderby" name="orderby">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Class_ChiNode" name="A_Class_ChiNode"
+				memberEnd="extension_ChiNode ChiNode-base_Class">
+				<ownedEnd xmi:id="extension_ChiNode"
+					name="extension_ChiNode" type="ChiNode" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiNode ChiNode-base_Class" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiRequirement" name="ChiRequirement">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiRequirement-base_Requirement" name="base_Requirement"
+					association="Requirement_ChiRequirement">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Requirement" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiRequirement-Priority" name="Priority">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiRequirement-Author" name="Author">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiRequirement-Type" name="Type">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiRequirement-Proofreader" name="Proofreader">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiRequirement-Status" name="Status">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Requirement_ChiRequirement"
+				name="A_Requirement_ChiRequirement"
+				memberEnd="extension_ChiRequirement ChiRequirement-base_Requirement">
+				<ownedEnd xmi:id="extension_ChiRequirement"
+					name="extension_ChiRequirement" type="ChiRequirement"
+					isComposite="true" lower="0" upper="1"
+					memberEnd="extension_ChiRequirement ChiRequirement-base_Requirement" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype" xmi:id="ChiGoal"
+				name="ChiGoal">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiGoal-base_Requirement" name="base_Requirement"
+					association="Requirement_ChiGoal">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Requirement" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiGoal-Value_Name" name="Value_Name">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiGoal-Priority" name="Priority">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiGoal-Value_Goal" name="Value_Goal">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiGoal-Value_ammount" name="Value_ammount">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Requirement_ChiGoal" name="A_Requirement_ChiGoal"
+				memberEnd="extension_ChiGoal ChiGoal-base_Requirement">
+				<ownedEnd xmi:id="extension_ChiGoal"
+					name="extension_ChiGoal" type="ChiGoal" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiGoal ChiGoal-base_Requirement" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiAccord" name="ChiAccord">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiAccord-base_Association" name="base_Association"
+					association="Association_ChiAccord">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Association" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Association_ChiAccord" name="A_Association_ChiAccord"
+				memberEnd="extension_ChiAccord ChiAccord-base_Association">
+				<ownedEnd xmi:id="extension_ChiAccord"
+					name="extension_ChiAccord" type="ChiAccord" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiAccord ChiAccord-base_Association" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiStakeHolder" name="ChiStakeHolder">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiStakeHolder-base_Actor" name="base_Actor"
+					association="Actor_ChiStakeHolder">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Actor" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiStakeHolder-Urgency" name="Urgency">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiStakeHolder-Legitimacy" name="Legitimacy">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiStakeHolder-Power" name="Power">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Actor_ChiStakeHolder" name="A_Actor_ChiStakeHolder"
+				memberEnd="extension_ChiStakeHolder ChiStakeHolder-base_Actor">
+				<ownedEnd xmi:id="extension_ChiStakeHolder"
+					name="extension_ChiStakeHolder" type="ChiStakeHolder"
+					isComposite="true" lower="0" upper="1"
+					memberEnd="extension_ChiStakeHolder ChiStakeHolder-base_Actor" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype" xmi:id="ChiView"
+				name="ChiView">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiView-base_Class" name="base_Class"
+					association="Class_ChiView">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Class" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Class_ChiView" name="A_Class_ChiView"
+				memberEnd="extension_ChiView ChiView-base_Class">
+				<ownedEnd xmi:id="extension_ChiView"
+					name="extension_ChiView" type="ChiView" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiView ChiView-base_Class" />
+			</packagedElement>
+			<packagedElement xmi:type="uml:Stereotype"
+				xmi:id="ChiFeature" name="ChiFeature">
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiFeature-base_Feature" name="base_Feature"
+					association="Feature_ChiFeature">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#Feature" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiFeature-Author" name="Author">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiFeature-Proofreader" name="Proofreader">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property"
+					xmi:id="ChiFeature-Status" name="Status">
+					<type
+						href="http://schema.omg.org/spec/UML/2.1/uml.xml#String" />
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Extension"
+				xmi:id="Feature_ChiFeature" name="A_Feature_ChiFeature"
+				memberEnd="extension_ChiFeature ChiFeature-base_Feature">
+				<ownedEnd xmi:id="extension_ChiFeature"
+					name="extension_ChiFeature" type="ChiFeature" isComposite="true"
+					lower="0" upper="1"
+					memberEnd="extension_ChiFeature ChiFeature-base_Feature" />
+			</packagedElement>
+		</uml:Profile>
+	</uml:Model>
+	<xmi:Extension extender="Enterprise Architect" extenderID="6.5">
+		<elements>
+			<element
+				xmi:idref="ChiRequirementsPackage.000"
+				xmi:type="uml:Package" name="requirement" scope="public">
+				<properties isSpecification="false" sType="Package"
+					nType="0" scope="public" />
+				<style
+					appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;" />
+				<modelDocument />
+				<tags />
+				<xrefs />
+				<extendedProperties tagged="0" package_name="help" />
+				<packageproperties version="1.0" />
+				<paths />
+			</element>
+		</elements>
+		<connectors>
+		</connectors>
+	</xmi:Extension>
+</xmi:XMI>
