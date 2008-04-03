@@ -7,6 +7,8 @@
     {/if}
 		<li><a href="javascript:submitAction('edituser');" id="navuserdata">{translate text="User data"}</a></li>
 		<li><a href="javascript:submitAction('logout');" target="_top" id="navlogout">{translate text="Logout"}</a></li>
+		
+		
 	{/if}
 {/if}
 </ul>
@@ -24,10 +26,12 @@
   	<li><a href="javascript:doSave(); submitAction('save');" id="navsave">{translate text="Save"}</a></li>
   	<li><a href="javascript:newWindowEx('DisplayController', '', 'treeview', 'treeviewWindow', 'width=700,height=700,resizable=no,scrollbars=no,locationbar=no', '&sid={sessionid}')" id="navcontenttree">{translate text="Content Tree"}</a></li>
     <li><a href="javascript:newWindowEx('', '', 'browseresources', 'browseWindow', 'resizable=yes,scrollbars=yes,status=yes,locationbar=no', '&type=image&subtype=resource')">{translate text="Browse Server"}</a></li>
+	
   		{if $authUser->hasRole('administrators')}
   	<li><a href="javascript:newWindowEx('', '', 'export', 'exportWindow', 'width=360,height=120,scrollbars=no,resizable=yes,locationbar=no', '&sid={sessionid}')" id="navexport">{translate text="Export"}</a></li>
 	  	{/if}
-    <li><a href="javascript:submitAction('search');">{translate text="Search"}</a> {$formUtil->getInputControl("searchterm", "text[class='small']", $searchterm, true)}</li>
+<li><a href="javascript:newWindowEx('', '', 'exportXMI', 'exportWindow', 'width=360,height=120,scrollbars=no,resizable=yes,locationbar=no', '&sid={sessionid}')" id="navexport">{translate text="Export"}</a></li>   
+   <li><a href="javascript:submitAction('search');">{translate text="Search"}</a> {$formUtil->getInputControl("searchterm", "text[class='small']", $searchterm, true)}</li>
     <li><a href="javascript:newWindowEx('{$_controller}', '', 'definesearch', 'definesearchWindow', 'width=600,height=600,scrollbars=yes,locationbar=no,resizable=yes', '&sid={sessionid}');">{translate text="Advanced Search"}</a></li>
 	  {/if}
 	{/if}
