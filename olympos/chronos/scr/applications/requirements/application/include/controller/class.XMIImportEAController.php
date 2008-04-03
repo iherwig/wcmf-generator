@@ -1,3 +1,4 @@
+<!--PROTECTED REGION ID(application/include/controller/class.XMIExportEAController.php/Body) START -->
 <?php
 /**
  * wCMF - wemove Content Management Framework
@@ -700,3 +701,4 @@ echo "<pre>";
 	}
 }
 ?>
+<!-- PROTECTED REGION END -->
