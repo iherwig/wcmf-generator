@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-29 17:24:30
+<?php /* Smarty version 2.6.19, created on 2008-04-03 21:04:00
          compiled from C:%5CProgramme%5Cxampp%5Chtdocs%5C26%5Cwcmf%5Capplication%5Cviews%5Cdisplayfailure.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'translate', 'C:\\Programme\\xampp\\htdocs\\26\\wcmf\\application\\views\\displayfailure.tpl', 10, false),)), $this); ?>

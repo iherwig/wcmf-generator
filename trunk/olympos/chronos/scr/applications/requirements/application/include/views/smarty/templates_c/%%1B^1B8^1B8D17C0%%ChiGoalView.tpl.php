@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-29 20:12:29
+<?php /* Smarty version 2.6.19, created on 2008-04-03 22:16:19
          compiled from C:%5CProgramme%5Cxampp%5Chtdocs%5C26%5Capplication%5Cinclude%5Cviews%5CChiGoalView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'count_items', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 32, false),array('function', 'math', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 33, false),array('function', 'translate', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 43, false),array('modifier', 'replace', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 54, false),array('modifier', 'default', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 107, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'count_items', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 32, false),array('function', 'math', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 33, false),array('function', 'translate', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 43, false),array('modifier', 'replace', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 54, false),array('modifier', 'default', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiGoalView.tpl', 111, false),)), $this); ?>
 
 
 
@@ -168,16 +168,41 @@ unset($_smarty_tpl_vars);
 
 <?php if ($this->_tpl_vars['viewMode'] == 'detail'): ?>
 
+ <?php echo smarty_function_translate(array('text' => "Create new %1%",'r1' => $this->_tpl_vars['nodeUtil']->getDisplayNameFromType($this->_tpl_vars['node']->getType()),'varname' => 'createText'), $this);?>
 
+  <span class="all"><a href="javascript:doSetParent(''); doNew('<?php echo $this->_tpl_vars['node']->getType(); ?>
+'); setContext('<?php echo $this->_tpl_vars['node']->getType(); ?>
+'); submitAction('new');"><img src="images/new.png" 
+    alt="<?php echo $this->_tpl_vars['createText']; ?>
+" title="<?php echo $this->_tpl_vars['createText']; ?>
+" border="0"> <?php echo $this->_tpl_vars['createText']; ?>
+</a></span>
+    
 <div id="leftcol">
 
 <div class="contentblock">
+	<img align="right" src="images/ChiRequirementGoal.PNG" width="50" height="50" alt="ChiGoal border="0" />
 	<h2 title="<?php echo smarty_function_translate(array('text' => 'object ID'), $this);?>
 : <?php echo ((is_array($_tmp=@$this->_tpl_vars['oid'])) ? $this->_run_mod_handler('default', true, $_tmp, "-") : smarty_modifier_default($_tmp, "-")); ?>
 "><?php echo $this->_tpl_vars['nodeUtil']->getDisplayValue($this->_tpl_vars['node'],true); ?>
 &nbsp;</h2>
 	<span class="spacer"></span>
+
+	
+	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Name'); ?>
+"><?php echo $this->_tpl_vars['node']->getValueDisplayName('Name'); ?>
+</span>
+	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Name'); ?>
+</span>
+
 	<span class="dottedSeparator"></span>
+	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Notes'); ?>
+"><?php echo $this->_tpl_vars['node']->getValueDisplayName('Notes'); ?>
+</span>
+	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Notes'); ?>
+</span>
+	<span class="dottedSeparator"></span>
+	
 	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Priority'); ?>
 "><?php echo $this->_tpl_vars['node']->getValueDisplayName('Priority'); ?>
 </span>
@@ -220,20 +245,6 @@ unset($_smarty_tpl_vars);
 </span>
 
 	<span class="dottedSeparator"></span>
-	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Name'); ?>
-"><?php echo $this->_tpl_vars['node']->getValueDisplayName('Name'); ?>
-</span>
-	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Name'); ?>
-</span>
-
-	<span class="dottedSeparator"></span>
-	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Notes'); ?>
-"><?php echo $this->_tpl_vars['node']->getValueDisplayName('Notes'); ?>
-</span>
-	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Notes'); ?>
-</span>
-
-	<span class="dottedSeparator"></span>
 	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('created'); ?>
 "><?php echo $this->_tpl_vars['node']->getValueDisplayName('created'); ?>
 </span>
@@ -263,15 +274,7 @@ unset($_smarty_tpl_vars);
 
 	<span class="spacer"></span>
 
-  <?php echo smarty_function_translate(array('text' => "Create new %1%",'r1' => $this->_tpl_vars['nodeUtil']->getDisplayNameFromType($this->_tpl_vars['node']->getType()),'varname' => 'createText'), $this);?>
-
-  <span class="all"><a href="javascript:doSetParent(''); doNew('<?php echo $this->_tpl_vars['node']->getType(); ?>
-'); setContext('<?php echo $this->_tpl_vars['node']->getType(); ?>
-'); submitAction('new');"><img src="images/new.png" 
-    alt="<?php echo $this->_tpl_vars['createText']; ?>
-" title="<?php echo $this->_tpl_vars['createText']; ?>
-" border="0"> <?php echo $this->_tpl_vars['createText']; ?>
-</a></span>
+ 
 
 </div>
 

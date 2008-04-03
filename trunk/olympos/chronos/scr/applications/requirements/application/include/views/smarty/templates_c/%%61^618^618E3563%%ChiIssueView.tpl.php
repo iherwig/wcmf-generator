@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-29 18:06:11
+<?php /* Smarty version 2.6.19, created on 2008-04-03 21:02:57
          compiled from C:%5CProgramme%5Cxampp%5Chtdocs%5C26%5Capplication%5Cinclude%5Cviews%5CChiIssueView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'count_items', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 31, false),array('function', 'math', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 32, false),array('function', 'translate', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 41, false),array('modifier', 'replace', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 45, false),array('modifier', 'default', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 101, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'count_items', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 31, false),array('function', 'math', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 32, false),array('function', 'translate', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 41, false),array('modifier', 'replace', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 45, false),array('modifier', 'default', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiIssueView.tpl', 102, false),)), $this); ?>
 
 
 
@@ -159,11 +159,20 @@ unset($_smarty_tpl_vars);
 <div id="leftcol">
 
 <div class="contentblock">
+<img align="right" src="images/ChiRequirementIssue.PNG" width="50" height="50" alt="ChiIssues" border="0" />
 	<h2 title="<?php echo smarty_function_translate(array('text' => 'object ID'), $this);?>
 : <?php echo ((is_array($_tmp=@$this->_tpl_vars['oid'])) ? $this->_run_mod_handler('default', true, $_tmp, "-") : smarty_modifier_default($_tmp, "-")); ?>
 "><?php echo $this->_tpl_vars['nodeUtil']->getDisplayValue($this->_tpl_vars['node'],true); ?>
 &nbsp;</h2>
 	<span class="spacer"></span>
+
+	<span class="dottedSeparator"></span>
+	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Name'); ?>
+"><?php echo $this->_tpl_vars['node']->getValueDisplayName('Name'); ?>
+</span>
+	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Name'); ?>
+</span>
+	
 	<span class="dottedSeparator"></span>
 	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Author'); ?>
 "><?php echo $this->_tpl_vars['node']->getValueDisplayName('Author'); ?>
@@ -192,12 +201,7 @@ unset($_smarty_tpl_vars);
 	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Version'); ?>
 </span>
 
-	<span class="dottedSeparator"></span>
-	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Name'); ?>
-"><?php echo $this->_tpl_vars['node']->getValueDisplayName('Name'); ?>
-</span>
-	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Name'); ?>
-</span>
+	
 
 	<span class="dottedSeparator"></span>
 	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Notes'); ?>
