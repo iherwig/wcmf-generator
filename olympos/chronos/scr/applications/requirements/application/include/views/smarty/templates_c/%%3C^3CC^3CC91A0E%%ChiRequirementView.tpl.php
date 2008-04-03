@@ -1,7 +1,7 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-29 20:26:25
+<?php /* Smarty version 2.6.19, created on 2008-04-03 20:54:27
          compiled from C:%5CProgramme%5Cxampp%5Chtdocs%5C26%5Capplication%5Cinclude%5Cviews%5CChiRequirementView.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'count_items', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 31, false),array('function', 'math', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 32, false),array('function', 'translate', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 41, false),array('modifier', 'replace', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 45, false),array('modifier', 'default', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 175, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'count_items', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 31, false),array('function', 'math', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 32, false),array('function', 'translate', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 41, false),array('modifier', 'replace', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 45, false),array('modifier', 'default', 'C:\\Programme\\xampp\\htdocs\\26\\application\\include\\views\\ChiRequirementView.tpl', 176, false),)), $this); ?>
 
 
 
@@ -273,11 +273,20 @@ unset($_smarty_tpl_vars);
 <div id="leftcol">
 
 <div class="contentblock">
+	<img align="right" src="images/ChiRequirement.PNG" width="50" height="50" alt="ChiRequirement" border="0" />
 	<h2 title="<?php echo smarty_function_translate(array('text' => 'object ID'), $this);?>
 : <?php echo ((is_array($_tmp=@$this->_tpl_vars['oid'])) ? $this->_run_mod_handler('default', true, $_tmp, "-") : smarty_modifier_default($_tmp, "-")); ?>
 "><?php echo $this->_tpl_vars['nodeUtil']->getDisplayValue($this->_tpl_vars['node'],true); ?>
-&nbsp;</h2>
-	<span class="spacer"></span>
+&nbsp;</span></h2>
+	<span class="spacer">
+	
+	<span class="dottedSeparator"></span>
+	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Name'); ?>
+"><?php echo $this->_tpl_vars['node']->getValueDisplayName('Name'); ?>
+</span>
+	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Name'); ?>
+</span>
+	
 	<span class="dottedSeparator"></span>
 	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('reqType'); ?>
 "><?php echo $this->_tpl_vars['node']->getValueDisplayName('reqType'); ?>
@@ -309,7 +318,7 @@ unset($_smarty_tpl_vars);
 	<span class="dottedSeparator"></span>
 	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Status'); ?>
 "><?php echo $this->_tpl_vars['node']->getValueDisplayName('Status'); ?>
-</span>
+</span><a href="javascript:doSetParent(''); doNew('ChiRequirementType'); setContext('ChiRequirementType'); submitAction('new');">new</a>
 	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Status'); ?>
 </span>
 
@@ -327,12 +336,7 @@ unset($_smarty_tpl_vars);
 	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Version'); ?>
 </span>
 
-	<span class="dottedSeparator"></span>
-	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Name'); ?>
-"><?php echo $this->_tpl_vars['node']->getValueDisplayName('Name'); ?>
-</span>
-	<span class="right"><?php echo $this->_tpl_vars['nodeUtil']->getInputControl($this->_tpl_vars['node'],'Name'); ?>
-</span>
+	
 
 	<span class="dottedSeparator"></span>
 	<span class="left" title="<?php echo $this->_tpl_vars['node']->getValueDescription('Notes'); ?>
@@ -394,14 +398,14 @@ unset($_smarty_tpl_vars);
 </div>
 <div id="rightcol">
 
-
+<h3>Parents</h3>
 <!-- ChiGoal -->
 <div class="contentblock">
   <div id="ChiGoalParentGrid" style="border:1px solid #99bbe8;overflow: hidden; width: 445px;"></div>
 </div>
 
 
-
+<h3>Children</h3>
 <!-- ChiIssue -->
 <div class="contentblock">
   <div id="ChiIssueChildGrid" style="border:1px solid #99bbe8;overflow: hidden; width: 445px;"></div>

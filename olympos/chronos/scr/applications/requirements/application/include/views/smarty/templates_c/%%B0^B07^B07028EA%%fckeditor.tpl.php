@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-22 13:15:49
+<?php /* Smarty version 2.6.19, created on 2008-04-03 20:26:52
          compiled from C:%5CProgramme%5Cxampp%5Chtdocs%5C26/wcmf/application/views/forms/fckeditor.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sessionid', 'C:\\Programme\\xampp\\htdocs\\26/wcmf/application/views/forms/fckeditor.tpl', 13, false),array('modifier', 'escape', 'C:\\Programme\\xampp\\htdocs\\26/wcmf/application/views/forms/fckeditor.tpl', 22, false),array('modifier', 'strip_tags', 'C:\\Programme\\xampp\\htdocs\\26/wcmf/application/views/forms/fckeditor.tpl', 26, false),)), $this); ?>
