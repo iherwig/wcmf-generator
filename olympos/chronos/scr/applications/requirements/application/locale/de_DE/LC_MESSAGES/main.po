@@ -381,6 +381,10 @@ msgstr "Abmelden"
 msgid "m/d/Y"
 msgstr "d.m.Y"
 
+#: wcmf/application/views/include/navigation.tpl, application/include/views/application/views/include/navigation.tpl
+msgid "Media Pool"
+msgstr "Medienpool"
+
 #: wcmf/application/views/admintool/role.tpl
 msgid "Members"
 msgstr "Mitglieder"

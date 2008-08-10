@@ -175,7 +175,7 @@
 
 
 {*------ Children grouped by type ------*}
-
+<h3>Children</h3>
 <!-- ChiRequirement -->
 <div class="contentblock">
   <div id="ChiRequirementChildGrid" style="border:1px solid #99bbe8;overflow: hidden; width: 445px;"></div>

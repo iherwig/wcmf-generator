@@ -111,11 +111,12 @@
 	
 	<span class="dottedSeparator"></span>
 	<span class="left" title="{$node->getValueDescription('Author')}">{$node->getValueDisplayName('Author')}</span>
-	<span class="right">{$nodeUtil->getInputControl($node, 'Author')}</span>
+	<span class="right">{$nodeUtil->getInputControl($node, 'Author')}<a href="javascript:doSetParent(''); doNew('ChiAuthors'); setContext('ChiAuthors'); submitAction('new');"><img align="top" src="images/new.png" width="10" height="10" alt="new Author" border="0" /></a></span>
 
 	<span class="dottedSeparator"></span>
 	<span class="left" title="{$node->getValueDescription('Responsible')}">{$node->getValueDisplayName('Responsible')}</span>
-	<span class="right">{$nodeUtil->getInputControl($node, 'Responsible')}</span>
+	<span class="right">{$nodeUtil->getInputControl($node, 'Responsible')}<a href="javascript:doSetParent(''); doNew('ChiAuthors'); setContext('ChiAuthors'); submitAction('new');"><img align="top" src="images/new.png" width="10" height="10" alt="new Author" border="0" /></a></span>
+
 
 	<span class="dottedSeparator"></span>
 	<span class="left" title="{$node->getValueDescription('Alias')}">{$node->getValueDisplayName('Alias')}</span>

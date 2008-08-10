@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-22 13:15:35
+<?php /* Smarty version 2.6.19, created on 2008-08-07 17:14:38
          compiled from lib:application/views/include/root_type_tabs.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'configvalue', 'lib:application/views/include/root_type_tabs.tpl', 3, false),)), $this); ?>

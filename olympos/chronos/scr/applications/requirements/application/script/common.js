@@ -76,14 +76,12 @@ function setTarget(_target) { getForm().target=_target; }
 //                                                   type 'datatype' at node with
 //                                                   oid 'oid'. NOTE: the '-' in variablename
 //                                                   may be any application defined delimiter
-// new       poid                     oid            add new node(s) of type(s) 
-//           newtypes                 types array*   'newtypes' to parent node
+// new       poid                     oid            add a new node of type 
+//           newtype                  type           'newtype' to the parent node
 //                                                   with oid 'poid'.
 // delete    deleteoids               oids  array*   delete node(s) with oid(s)
 //                                                   'deleteoids'
 // paste     poid                     oid            add existing node(s) with oid(s)
-//           clipboardoids            oids  array*   'clipboardoids' to parent node
-//                                                   with oid 'poid'
 //
 // *array is a comma-separated string
 //
@@ -103,16 +101,7 @@ function doDisplay(_oid)
 //
 function doNew(_type)
 {
-  getForm().newtypes.value=addToStringArray(_type, getForm().newtypes.value);
-}
-//
-// Copy node with oid 'oid'.
-// We actually only store the oid of the node to copy for later paste.
-// The parent node of the 'paste' action is defined by using 'doSetParent'.
-//
-function doCopy(_oid)
-{
-  getForm().clipboardoids.value=addToStringArray(_oid, getForm().clipboardoids.value);
+  getForm().newtype.value=_type;
 }
 //
 // Set the parent node for 'new' and 'paste' action to the node with oid 'poid'.
