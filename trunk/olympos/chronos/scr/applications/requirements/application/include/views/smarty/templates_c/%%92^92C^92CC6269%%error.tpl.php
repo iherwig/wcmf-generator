@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-22 13:15:31
+<?php /* Smarty version 2.6.19, created on 2008-08-07 17:14:38
          compiled from lib:application/views/include/error.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('modifier', 'escape', 'lib:application/views/include/error.tpl', 7, false),array('modifier', 'strip_tags', 'lib:application/views/include/error.tpl', 7, false),array('modifier', 'strip', 'lib:application/views/include/error.tpl', 7, false),array('function', 'translate', 'lib:application/views/include/error.tpl', 11, false),)), $this); ?>

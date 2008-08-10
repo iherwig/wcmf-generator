@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-22 13:15:30
+<?php /* Smarty version 2.6.19, created on 2008-08-07 17:14:38
          compiled from lib:application/views/include/docheader.tpl */ ?>
 <?php 
 	// Date in the past

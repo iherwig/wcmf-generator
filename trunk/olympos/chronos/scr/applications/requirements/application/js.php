@@ -42,7 +42,7 @@ if ($_GET['initApp'] == 1)
 }
 
 // the script url
-$SCRIPT_URL = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'];
+$SCRIPT_URL = UriUtil::getProtocolStr().$_SERVER['HTTP_HOST'].$_SERVER['SCRIPT_NAME'];
 
 // the application url (used for Ajax calls)
 $APP_URL = URIUtil::makeAbsolute("main.php", $SCRIPT_URL);

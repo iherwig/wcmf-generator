@@ -94,6 +94,7 @@ $messages_de_DE["Log in"] = "Anmelden";
 $messages_de_DE["Login failed. Try again."] = "Anmeldung fehlgeschlagen. Bitte versuchen Sie es erneut.";
 $messages_de_DE["Logout"] = "Abmelden";
 $messages_de_DE["m/d/Y"] = "d.m.Y";
+$messages_de_DE["Media Pool"] = "Medienpool";
 $messages_de_DE["Members"] = "Mitglieder";
 $messages_de_DE["modified"] = "zuletzt geändert";
 $messages_de_DE["name"] = "Name";

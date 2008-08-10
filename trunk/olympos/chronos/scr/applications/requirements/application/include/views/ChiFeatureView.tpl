@@ -121,15 +121,15 @@
 	
 	<span class="dottedSeparator"></span>
 	<span class="left" title="{$node->getValueDescription('Author')}">{$node->getValueDisplayName('Author')}</span>
-	<span class="right">{$nodeUtil->getInputControl($node, 'Author')}</span>
+	<span class="right">{$nodeUtil->getInputControl($node, 'Author')}<a href="javascript:doSetParent(''); doNew('ChiAuthors'); setContext('ChiAuthors'); submitAction('new');"><img align="top" src="images/new.png" width="10" height="10" alt="new Author" border="0" /></a></span>
 
 	<span class="dottedSeparator"></span>
 	<span class="left" title="{$node->getValueDescription('Proofreader')}">{$node->getValueDisplayName('Proofreader')}</span>
-	<span class="right">{$nodeUtil->getInputControl($node, 'Proofreader')}</span>
+	<span class="right">{$nodeUtil->getInputControl($node, 'Proofreader')}<a href="javascript:doSetParent(''); doNew('ChiAuthors'); setContext('ChiAuthors'); submitAction('new');"><img align="top" src="images/new.png" width="10" height="10" alt="new Author" border="0" /></a></span>
 
 	<span class="dottedSeparator"></span>
 	<span class="left" title="{$node->getValueDescription('Status')}">{$node->getValueDisplayName('Status')}</span>
-	<span class="right">{$nodeUtil->getInputControl($node, 'Status')}</span>
+	<span class="right">{$nodeUtil->getInputControl($node, 'Status')}<a href="javascript:doSetParent(''); doNew('ChiFeatureStatus'); setContext('ChiFeatureStatus'); submitAction('new');"><img align="top" src="images/new.png" width="10" height="10" alt="new Feature's Status" border="0" /></a></span>
 
 	<span class="dottedSeparator"></span>
 	<span class="left" title="{$node->getValueDescription('Alias')}">{$node->getValueDisplayName('Alias')}</span>

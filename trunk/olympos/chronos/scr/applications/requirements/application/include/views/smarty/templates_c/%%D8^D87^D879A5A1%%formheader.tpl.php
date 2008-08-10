@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.19, created on 2008-03-22 13:15:30
+<?php /* Smarty version 2.6.19, created on 2008-08-07 17:14:38
          compiled from lib:application/views/include/formheader.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
 smarty_core_load_plugins(array('plugins' => array(array('function', 'sessionid', 'lib:application/views/include/formheader.tpl', 5, false),)), $this); ?>

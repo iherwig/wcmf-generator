@@ -17,12 +17,15 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: main.php 599 2007-12-07 17:13:18Z iherwig $
+ * $Id: main.php 711 2008-07-30 13:32:19Z iherwig $
  */
 error_reporting(E_ERROR | E_PARSE);
 
 require_once("base_dir.php");  
+require_once(BASE."wcmf/lib/util/class.Message.php");
+require_once(BASE."wcmf/lib/presentation/class.Request.php");
 require_once(BASE."wcmf/lib/presentation/class.Application.php");
+require_once(BASE."wcmf/lib/presentation/class.ActionMapper.php");
 
 // initialize the application
 $application = &Application::getInstance();
@@ -32,7 +35,14 @@ $callParams = &$application->initialize();
 $GLOBALS['MESSAGE_ERROR_HANDLER'] = "onError";
 
 // process the requested action (we don't use the result here)
-$result = ActionMapper::processAction($callParams['controller'], $callParams['context'], $callParams['action'], $callParams['data']);
+$request = new Request(
+  $callParams['controller'], 
+  $callParams['context'], 
+  $callParams['action'], 
+  $callParams['data']
+);
+$request->setResponseFormat($callParams['responseFormat']);
+$result = ActionMapper::processAction($request);
 exit;
 
 /**
@@ -45,7 +55,7 @@ exit;
  */
 function onError($message, $file='', $line='') 
 { 
-  global $controller, $context, $action, $data, $MESSAGE_LOG_FILE;
+  global $controller, $context, $action, $data, $responseFormat, $MESSAGE_LOG_FILE;
   static $numCalled = 0;
   
   $data['errorMsg'] = $message;
@@ -59,7 +69,9 @@ function onError($message, $file='', $line='')
   $numCalled++;
   if ($numCalled == 2)
   {
-    ActionMapper::processAction('FailureController', '', 'fatal', $data); 
+    $request = new Request('FailureController', '', 'fatal', $data);
+    $request->setResponseFormat($responseFormat);
+    ActionMapper::processAction($request); 
   }
   else if ($numCalled == 3)
   {
@@ -68,13 +80,16 @@ function onError($message, $file='', $line='')
   }
   else
   {    
-    // get old contoller/context/action triple to restore application status
+    // get old controller/context/action triple to restore application status
     $controller = Application::getCallParameter('old_controller', $controller);
     $context = Application::getCallParameter('old_context', $context);
     $action = Application::getCallParameter('old_usr_action', $action);
+    $responseFormat = Application::getCallParameter('old_response_format', $responseFormat);
   
     // process old action
-    ActionMapper::processAction($controller, $context, $action, $data);
+    $request = new Request($controller, $context, $action, $data);
+    $request->setResponseFormat($responseFormat);
+    ActionMapper::processAction($request);
   }
   exit;
 }
