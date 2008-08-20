@@ -1,0 +1,17 @@
+2008-08-10 11:08:53 class.Controller.php:243 - View definition missing for XMIExportEAController. Action key: 
+  -> onError (called at class.Message.php:101)
+  -> Message->error (called at class.Controller.php:243)
+  -> Controller->getViewTemplate (called at class.Controller.php:152)
+  -> Controller->execute (called at class.ActionMapper.php:164)
+  -> ActionMapper::processAction (called at main.php:45)
+2008-08-10 11:08:53 class.Controller.php:243 - View definition missing for XMIExportEAController. Action key: 
+  -> onError (called at class.Message.php:101)
+  -> Message->error (called at class.Controller.php:243)
+  -> Controller->getViewTemplate (called at class.Controller.php:152)
+  -> Controller->execute (called at class.ActionMapper.php:164)
+  -> ActionMapper::processAction (called at main.php:92)
+  -> onError (called at class.Message.php:101)
+  -> Message->error (called at class.Controller.php:243)
+  -> Controller->getViewTemplate (called at class.Controller.php:152)
+  -> Controller->execute (called at class.ActionMapper.php:164)
+  -> ActionMapper::processAction (called at main.php:45)
