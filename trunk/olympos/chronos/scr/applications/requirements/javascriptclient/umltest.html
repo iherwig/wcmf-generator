@@ -1,0 +1,935 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>UML Test</title>
+		<link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />
+		<style type="text/css">
+			.hover {
+			    /*border: 2px solid red;*/
+			}
+			
+			.ChiElements {
+			    display: inline-block;
+			    height: 24px;
+			    padding: 2px;
+			    padding-left: 26px;
+			    margin: 2px;
+			    background-repeat: no-repeat;
+			    background-position: 2px 2px;
+			    border: 1px solid black;
+			}
+			
+			.ChiGoal {
+			    background-image: url("img/ChiGoal.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiRequirement {
+			    background-image: url("img/ChiRequirement.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiIssue {
+			    background-image: url("img/ChiIssue.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiFeature {
+			    background-image: url("img/ChiFeature.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiBusinessProcess {
+			    background-image: url("img/ChiBusinessProcess.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiBusinessUseCase {
+			    background-image: url("img/ChiBusinessUseCase.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiBusinessUseCaseCore {
+			    background-image: url("img/ChiBusinessUseCaseCore.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiBusinessPartnerActive {
+			    background-image: url("img/ChiBusinessPartnerActive.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiBusinessPartnerPassive {
+			    background-image: url("img/ChiBusinessPartnerPassive.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiWorkerExternal {
+			    background-image: url("img/ChiWorkerExternal.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+			
+			.ChiWorkerInternal {
+			    background-image: url("img/ChiWorkerInternal.png");
+			    min-height: 24px;
+			    min-width: 4px;
+			}
+		</style>
+		<!--script type="text/javascript" src="lib/draw2d/wz_jsgraphics.js">
+		</script>
+		<script type="text/javascript" src="lib/draw2d/draw2d.js">
+		</script-->
+		<SCRIPT src="lib/draw2d/normal/String.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/wz_jsgraphics.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/events.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/debug.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/dragdrop.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/UUID.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PositionConstants.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Graphics.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Color.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ArrayList.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Point.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Dimension.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Border.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineBorder.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Figure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Node.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/VectorFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SVGFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Label.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Oval.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Circle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Rectangle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ImageFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Port.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/InputPort.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/OutputPort.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Line.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/NullConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ManhattanConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/BezierConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/FanConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Connection.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionAnchor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ChopboxConnectionAnchor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionDecorator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ArrowConnectionDecorator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CompartmentFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CanvasDocument.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Annotation.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ResizeHandle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineStartResizeHandle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineEndResizeHandle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Canvas.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Workflow.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/WindowFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Button.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToggleButton.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToHelper.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToGeometry.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToGeometryEntry.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToGrid.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToggleButton.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToolGeneric.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToolPalette.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Dialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/InputDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PropertyDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/AnnotationDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PropertyWindow.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ColorDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineColorDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/BackgroundColorDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/EditPartFactory.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/AbstractObjectModel.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PropertyChangeEvent.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/GraphicalViewer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/GraphicalEditor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/xmlsax.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/xmlw3cdom.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/XMLSerializer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/XMLDeserializer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/EditPolicy.js">
+		</SCRIPT>
+		<!-- undo/redo support (all times required too) -->
+		<SCRIPT src="lib/draw2d/normal/Command.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandStack.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandStackEvent.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandStackEventListener.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandAdd.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandDelete.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandMove.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandMoveLine.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandMovePort.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandResize.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandSetText.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandSetColor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandSetBackgroundColor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandConnect.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandReconnect.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Locator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionLocator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/XMLSerializer.js">
+		</SCRIPT>
+		<script type="text/javascript" src="AbstractClass.js">
+		</script>
+		<script type="text/javascript" src="AbstractFigure.js">
+		</script>
+		<script type="text/javascript" src="LabelBelowFigure.js">
+		</script>
+		<script type="text/javascript" src="LabelCenterFigure.js">
+		</script>
+		<script type="text/javascript" src="BusinessProcess.js">
+		</script>
+		<script type="text/javascript" src="BusinessUseCase.js">
+		</script>
+		<script type="text/javascript" src="BusinessUseCaseCore.js">
+		</script>
+		<script type="text/javascript" src="BusinessPartnerActive.js">
+		</script>
+		<script type="text/javascript" src="BusinessPartnerPassive.js">
+		</script>
+		<script type="text/javascript" src="WorkerExternal.js">
+		</script>
+		<script type="text/javascript" src="WorkerInternal.js">
+		</script>
+		<script type="text/javascript" src="PortGraphics.js">
+		</script>
+		<script type="text/javascript" src="ModelMidpointLocator.js">
+		</script>
+		<script type="text/javascript" src="ModelConnectionDecorator.js">
+		</script>
+		<script type="text/javascript" src="ModelConnection.js">
+		</script>
+		<script type="text/javascript" src="ModelPort.js">
+		</script>
+		<script type="text/javascript" src="PropertyHandler.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/adapter/ext/ext-base.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/ext-all.js">
+		</script>
+		<script type="text/javascript" src="edits/CreateChiGoal.js">
+		</script>
+		<script type="text/javascript" src="edits/CreateChiRequirement.js">
+		</script>
+		<script type="text/javascript">
+			
+			/***********************************************
+			 * Disable Text Selection script- © Dynamic Drive DHTML code library (www.dynamicdrive.com)
+			 * This notice MUST stay intact for legal use
+			 * Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+			 ***********************************************/
+			function disableSelection(target){
+				if (typeof target.onselectstart != "undefined") //IE route
+					target.onselectstart = function(){
+						return false
+					}
+				else if (typeof target.style.MozUserSelect != "undefined") //Firefox route
+					target.style.MozUserSelect = "none"
+				else //All other route (ie: Opera)
+			 		target.onmousedown = function(){
+						return false
+					}
+				target.style.cursor = "default"
+			}
+		</script>
+		<script type="text/javascript">
+			
+			Ext.onReady(function(){
+				
+				Ext.QuickTips.init();
+			
+				sid = window.prompt("Please enter the SID");		
+			
+				var ChiGoalStore = new Ext.data.Store({
+					url: "../application/main.php?sid=" + sid + "&usr_action=list&response_format=JSON&type=ChiGoal",
+					reader: new Ext.data.JsonReader({
+						totalProperty: "totalCount",
+						root: "objects",
+						id: "oid",
+						fields: [{
+							name: "Name",
+							mapping: "values[1].Name.value"
+						}]
+					})
+				});
+				
+				var viewport = new Ext.Viewport({
+					layout: "border",
+					items: [{
+						region: "west",
+						contentEl: "west",
+						title: "Available Content",
+						collapsible: true,
+						split: true,
+						width: 300,
+						layout: "fit",
+						items: {
+							layout: "border",
+							items: [{
+								region: "north",
+								contentEl: "westNorth",
+								title: "New Elements",
+								collapsible: true,
+								split: true,
+								autoScroll: true,
+								height: 300,
+								items: [new Ext.BoxComponent({
+									el: "ChiGoal",
+									listeners: {
+										render: function(v){
+											initializeElemDragZone(v, "ChiGoal", "img/ChiGoal.png");
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiRequirement",
+									listeners: {
+										render: function(v){
+											initializeElemDragZone(v, "ChiRequirement", "img/ChiRequirement.png");
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiIssue",
+									listeners: {
+										render: function(v){
+											initializeElemDragZone(v, "ChiIssue", "img/ChiIssue.png");
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiFeature",
+									listeners: {
+										render: function(v){
+											initializeElemDragZone(v, "ChiFeature", "img/ChiFeature.png");
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiBusinessProcess",
+									listeners: {
+										render: function(v){
+											initializeElemDragZoneShape(v, "ChiBusinessProcess", BusinessProcess);
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiBusinessUseCase",
+									listeners: {
+										render: function(v){
+											initializeElemDragZoneShape(v, "ChiBusinessUseCase", BusinessUseCase);
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiBusinessUseCaseCore",
+									listeners: {
+										render: function(v){
+											initializeElemDragZoneShape(v, "ChiBusinessUseCaseCore", BusinessUseCaseCore);
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiBusinessPartnerActive",
+									listeners: {
+										render: function(v){
+											initializeElemDragZoneShape(v, "ChiBusinessPartnerActive", BusinessPartnerActive);
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiBusinessPartnerPassive",
+									listeners: {
+										render: function(v){
+											initializeElemDragZoneShape(v, "ChiBusinessPartnerPassive", BusinessPartnerPassive);
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiWorkerExternal",
+									listeners: {
+										render: function(v){
+											initializeElemDragZoneShape(v, "ChiWorkerExternal", WorkerExternal);
+										}
+									}
+								}), new Ext.BoxComponent({
+									el: "ChiWorkerInternal",
+									listeners: {
+										render: function(v){
+											initializeElemDragZoneShape(v, "ChiWorkerInternal", WorkerInternal);
+										}
+									}
+								})]
+							}, {
+								region: "center",
+								title: "Existing Classes",
+								xtype: "tabpanel",
+								activeItem: 0,
+								draggable: true,
+								tabPosition: "bottom",
+								items: [{
+									iconCls: "ChiGoal",
+									layout: "fit",
+									items: new Ext.grid.GridPanel({
+										columns: [{
+											header: "Goal",
+											dataIndex: "Name",
+											sortable: true
+										}],
+										store: ChiGoalStore,
+										enableDragDrop: true,
+										selModel: new Ext.grid.RowSelectionModel({
+											singleSelect: true
+										}),
+											ddGroup          : 'gridDDGroup',
+											className: "ChiGoal",
+											iconPath: "img/ChiGoal.png"
+									})
+								}, {
+									iconCls: "ChiRequirement",
+								}, {
+									iconCls: "ChiIssue",
+								}, {
+									iconCls: "ChiFeature",
+								}, {
+									iconCls: "ChiBusinessProcess",
+								}, {
+									iconCls: "ChiBusinessUseCase",
+								}, {
+									iconCls: "ChiBusinessUseCaseCore",
+								}, {
+									iconCls: "ChiBusinessPartnerActive",
+								}, {
+									iconCls: "ChiBusinessPartnerPassive",
+								}, {
+									iconCls: "ChiWorkerExternal",
+								}, {
+									iconCls: "ChiWorkerInternal",
+								}]
+							}]
+						}
+					}, {
+						region: "east",
+						title: "Settings",
+						collapsible: true,
+						split: true,
+						width: 200,
+						layout: "fit",
+						items: {
+							layout: "border",
+							items: [{
+								region: "north",
+								title: "Controls",
+								collapsible: true,
+								split: true,
+								height: 100,
+								contentEl: "controls"
+							}, {
+								region: "center",
+								title: "Properties",
+								contentEl: "east"
+							}]
+						}
+					}, new Ext.BoxComponent({
+						region: "center",
+						el: "viewport",
+						listeners: {
+							render: function(g){
+								initializeElemDropZone(g);
+							}
+						}
+					})]
+				});
+				
+				ChiGoalStore.load();
+				
+				new Ext.Button({
+					renderTo: "controls",
+					enableToggle: true,
+					text: "Snap to Objects",
+					toggleHandler: function(self, pressed){
+						workflow.setSnapToGeometry(pressed);
+					}
+				});
+				var undoButton = new Ext.Button({
+					renderTo: "controls",
+					text: "Undo",
+					disabled: true,
+					handler: function(self, oEvent){
+						workflow.getCommandStack().undo();
+					}
+				});
+				var redoButton = new Ext.Button({
+					renderTo: "controls",
+					text: "Redo",
+					disabled: true,
+					handler: function(self, oEvent){
+						workflow.getCommandStack().redo();
+					}
+				});
+				
+				UndoButtonHandler = function(undoButton, redoButton){
+					draw2d.CommandStackEventListener.call(this);
+					
+					this.undoButton = undoButton;
+					this.redoButton = redoButton;
+				}
+				UndoButtonHandler.prototype = draw2d.CommandStackEventListener;
+				UndoButtonHandler.prototype.stackChanged = function(oEvent){
+					this.undoButton.setDisabled(!workflow.getCommandStack().canUndo());
+					this.redoButton.setDisabled(!workflow.getCommandStack().canRedo());
+				}
+				
+				nameEditor = new Ext.form.TextField({
+					renderTo: "east",
+					enableKeyEvents: true
+				})
+				
+				var nameHandler = function(self, oEvent){
+					var sel = workflow.getCurrentSelection();
+					
+					if (sel) {
+						if (sel.setClassName) {
+							sel.setClassName(self.getValue());
+						}
+					}
+				}
+				
+				nameEditor.on("keydown", nameHandler);
+				nameEditor.on("keypress", nameHandler);
+				nameEditor.on("keyup", nameHandler);
+				
+				disableSelection(document.getElementById("canvas"));
+				
+				workflow = new draw2d.Workflow("canvas");
+				workflow.setViewPort("viewport");
+				
+				workflow.scrollTo(workflow.getHeight() / 2, workflow.getWidth() / 2);
+				
+				var propertyHandler = new PropertyHandler("message");
+				workflow.addSelectionListener(propertyHandler);
+				workflow.getCommandStack().addCommandStackEventListener(propertyHandler);
+				workflow.getCommandStack().addCommandStackEventListener(new UndoButtonHandler(undoButton, redoButton));
+			});
+			
+			function initializeElemDragZone(v, className, iconPath){
+				v.dragZone = new Ext.dd.DragZone(v.getEl(), {
+					ddGroup: 'gridDDGroup',
+				
+					//      On receipt of a mousedown event, see if it is within a draggable element.
+					//      Return a drag data object if so. The data object can contain arbitrary application
+					//      data, but it should also contain a DOM element in the ddel property to provide
+					//      a proxy to drag.
+					getDragData: function(e){
+						var sourceEl = e.getTarget(v.itemSelector, 10);
+						if (sourceEl) {
+							d = sourceEl.cloneNode(true);
+							d.id = Ext.id();
+							
+							return v.dragData = {
+								sourceEl: sourceEl,
+								repairXY: Ext.fly(sourceEl).getXY(),
+								className: className,
+								iconPath: iconPath,
+								ddel: d
+							}
+						}
+					},
+					
+					//      Provide coordinates for the proxy to slide back to on failed drag.
+					//      This is the original XY coordinates of the draggable element.
+					getRepairXY: function(){
+						return this.dragData.repairXY;
+					}
+				});
+			}
+			
+			function initializeElemDragZoneShape(v, className, shape){
+				v.dragZone = new Ext.dd.DragZone(v.getEl(), {
+					ddGroup: 'gridDDGroup',
+				
+					//      On receipt of a mousedown event, see if it is within a draggable element.
+					//      Return a drag data object if so. The data object can contain arbitrary application
+					//      data, but it should also contain a DOM element in the ddel property to provide
+					//      a proxy to drag.
+					getDragData: function(e){
+						var sourceEl = e.getTarget(v.itemSelector, 10);
+						if (sourceEl) {
+							d = sourceEl.cloneNode(true);
+							d.id = Ext.id();
+							
+							return v.dragData = {
+								sourceEl: sourceEl,
+								repairXY: Ext.fly(sourceEl).getXY(),
+								className: className,
+								shape: shape,
+								ddel: d
+							}
+						}
+					},
+					
+					//      Provide coordinates for the proxy to slide back to on failed drag.
+					//      This is the original XY coordinates of the draggable element.
+					getRepairXY: function(){
+						return this.dragData.repairXY;
+					}
+				});
+			}
+			
+			function initializeElemDropZone(g){
+				g.dropZone = new Ext.dd.DropZone(g.getEl(), {
+					ddGroup: 'gridDDGroup',
+				
+					//      If the mouse is over a target node, return that node. This is
+					//      provided as the "target" parameter in all "onNodeXXXX" node event handling functions
+					getTargetFromEvent: function(e){
+						return e.getTarget();
+					},
+					
+					//      On entry into a target node, highlight that node.
+					onNodeEnter: function(target, dd, e, data){
+					},
+					
+					//      On exit from a target node, unhighlight that node.
+					onNodeOut: function(target, dd, e, data){
+					},
+					
+					//      While over a target node, return the default drop allowed class which
+					//      places a "tick" icon into the drag proxy.
+					onNodeOver: function(target, dd, e, data){
+						return Ext.dd.DropZone.prototype.dropAllowed;
+					},
+					
+					//      On node drop, we can interrogate the target node to find the underlying
+					//      application object that is the real target of the dragged data.
+					//      In this case, it is a Record in the GridPanel's Store.
+					//      We can use the data set up by the DragZone's getDragData method to read
+					//      any data we decided to attach.
+					onNodeDrop: function(target, dd, e, data){
+						var xOffset = workflow.getAbsoluteX();
+						var yOffset = workflow.getAbsoluteY();
+						var scrollLeft = workflow.getScrollLeft();
+						var scrollTop = workflow.getScrollTop();
+						
+						if (data.grid) {
+							var drawElem = new AbstractClass(data.grid.className, data.grid.iconPath);
+							
+							var selectedRecord = data.selections[0];
+							
+							drawElem.setClassName(selectedRecord.get("Name"));
+						} else if (dd.dragData.iconPath) {
+							var drawElem = new AbstractClass(dd.dragData.className, dd.dragData.iconPath);
+						}
+						else {
+							var drawElem = new dd.dragData.shape(dd.dragData.className);
+						}
+						
+						var x = e.xy[0] - xOffset + scrollLeft;
+						var y = e.xy[1] - yOffset + scrollTop;
+						
+						var compartment = workflow.getBestCompartmentFigure(x, y);
+						workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, drawElem, x, y, compartment));
+						return true;
+					}
+				});
+			}
+			
+			function ellipseX(centerX, deg){
+				return centerX + centerX * Math.cos(deg2rad(deg));
+			}
+			
+			function ellipseY(centerY, deg){
+				return centerY + centerY * Math.sin(deg2rad(deg));
+			}
+			
+			function deg2rad(deg){
+				return deg * Math.PI / 180;
+			}
+			
+			function getConnectionData(sourceClass, targetClass){
+				var connections = {
+					ChiGoal: {
+						ChiGoal: {
+							label: "depends on",
+							inverse: false,
+							sourceMaxConns: -1,
+							targetMaxConns: -1
+						},
+						ChiRequirement: {
+							label: "defines",
+							inverse: true,
+							sourceMaxConns: -1,
+							targetMaxConns: 1
+						
+						}
+					},
+					
+					ChiRequirement: {
+						ChiGoal: {
+							label: "defines",
+							inverse: false,
+							sourceMaxConns: 1,
+							targetMaxConns: -1
+						
+						},
+						ChiRequirement: {
+							label: "defines",
+							inverse: false,
+							sourceMaxConns: -1,
+							targetMaxConns: -1
+						
+						},
+						ChiIssue: {
+							label: "contradicts",
+							inverse: true,
+							sourceMaxConns: -1,
+							targetMaxConns: 1
+						
+						},
+						ChiFeature: {
+							label: "implements",
+							inverse: true,
+							sourceMaxConns: -1,
+							targetMaxConns: -1
+						
+						}
+					},
+					
+					ChiIssue: {
+						ChiRequirement: {
+							label: "contradicts",
+							inverse: false,
+							sourceMaxConns: 1,
+							targetMaxConns: -1
+						
+						}
+					},
+					
+					ChiFeature: {
+						ChiRequirement: {
+							label: "implements",
+							inverse: false,
+							sourceMaxConns: -1,
+							targetMaxConns: -1
+						
+						}
+					},
+					
+					ChiBusinessProcess: {
+						ChiBusinessUseCase: {
+							label: "contains",
+							inverse: false,
+							sourceMaxConns: -1,
+							targetMaxConns: 1
+						
+						},
+						ChiBusinessUseCaseCore: {
+							label: "contains",
+							inverse: false,
+							sourceMaxConns: -1,
+							targetMaxConns: 1
+						
+						}
+					},
+					
+					ChiBusinessUseCase: {
+						ChiBusinessProcess: {
+							label: "contains",
+							inverse: true,
+							sourceMaxConns: 1,
+							targetMaxConns: -1
+						
+						}
+					},
+					
+					ChiBusinessUseCaseCore: {
+						ChiBusinessProcess: {
+							label: "contains",
+							inverse: true,
+							sourceMaxConns: 1,
+							targetMaxConns: -1
+						
+						}
+					
+					},
+					
+					ChiBusinessPartnerActive: {},
+					
+					ChiBusinessPartnerPassive: {},
+					
+					ChiWorkerExternal: {},
+					
+					ChiWorkerInternal: {}
+				
+				};
+				
+				return connections[sourceClass][targetClass];
+			}
+			
+			function serialize(){
+				var result = "";
+				
+				var figures = workflow.getDocument().getFigures();
+				
+				for (var i = 0; i < figures.getSize(); i++) {
+					var figure = figures.get(i);
+					result += draw2d.XMLSerializer.toXML(figure);
+				}
+				
+				return result;
+			}
+			
+			
+			
+			
+			
+		</script>
+	</head>
+	<body onselectstart="return false;" style="background-color: white;">
+		<div id="west">
+			<div id="westNorth">
+				<div id="ChiGoal" class="ChiGoal ChiElements">
+					ChiGoal
+				</div>
+				<div id="ChiRequirement" class="ChiRequirement ChiElements">
+					ChiRequirement
+				</div>
+				<div id="ChiIssue" class="ChiIssue ChiElements">
+					ChiIssue
+				</div>
+				<div id="ChiFeature" class="ChiFeature ChiElements">
+					ChiFeature
+				</div>
+				<div id="ChiBusinessProcess" class="ChiBusinessProcess ChiElements">
+					ChiBusinessProcess
+				</div>
+				<div id="ChiBusinessUseCase" class="ChiBusinessUseCase ChiElements">
+					ChiBusinessUseCase
+				</div>
+				<div id="ChiBusinessUseCaseCore" class="ChiBusinessUseCaseCore ChiElements">
+					ChiBusinessUseCaseCore
+				</div>
+				<div id="ChiBusinessPartnerActive" class="ChiBusinessPartnerActive ChiElements">
+					ChiBusinessPartnerActive
+				</div>
+				<div id="ChiBusinessPartnerPassive" class="ChiBusinessPartnerPassive ChiElements">
+					ChiBusinessPartnerPassive
+				</div>
+				<div id="ChiWorkerExternal" class="ChiWorkerExternal ChiElements">
+					ChiWorkerExternal
+				</div>
+				<div id="ChiWorkerInternal" class="ChiWorkerInternal ChiElements">
+					ChiWorkerInternal
+				</div>
+			</div>
+			<div id="westCenter">
+				<input type="button" onclick="alert(serialize())" value="Serialize (only first 4 elements)"/>
+			</div>
+		</div>
+		<div id="east">
+			<div id="message">
+			</div>
+		</div>
+		<div id="controls">
+		</div>
+		<div id="viewport" style="overflow: auto;">
+			<div id="canvas" style="width: 10000px; height: 10000px;">
+			</div>
+		</div>
+	</body>
+</html>
