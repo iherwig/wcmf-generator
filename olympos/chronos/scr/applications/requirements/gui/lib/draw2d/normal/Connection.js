@@ -149,8 +149,8 @@ draw2d.Connection.prototype.addFigure=function(/*:draw2d.Figure*/ figure, /*:dra
 
   if (figure.getHTMLElement().addEventListener)
     figure.getHTMLElement().addEventListener("mousedown", mouseDown, false);
-  else if (this.html.attachEvent)
-     figure.getHTMLElement().attachEvent("onmouseup", mouseUp);
+  else if (this.getHTMLElement().attachEvent)
+     figure.getHTMLElement().attachEvent("onmousedown", mouseDown);
 }
 
 /**

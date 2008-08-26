@@ -24,43 +24,43 @@ req.edit.createChiGoal = function(bd){
 			fieldLabel: 'id',
 			name: 'id',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'fk_chibusinessprocess_id',
 			name: 'fk_chibusinessprocess_id',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'fk_package_id',
 			name: 'fk_package_id',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'fk_chigoal_id',
 			name: 'fk_chigoal_id',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'Priority',
 			name: 'Priority',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'Value_Name',
 			name: 'Value_Name',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'Value_ammount',
 			name: 'Value_ammount',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'Value_Goal',
 			name: 'Value_Goal',
 			allowBlank: false,
-			inputType: 'textfield',
-		}, ],
+			inputType: 'textfield'
+		}],
 		buttons: [{
 			text: 'Save',
 			handler: function(){
@@ -112,53 +112,53 @@ req.edit.createChiRequirement = function(bd){
 			fieldLabel: 'id',
 			name: 'id',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'fk_chibusinessprocess_id',
 			name: 'fk_chibusinessprocess_id',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'fk_package_id',
 			name: 'fk_package_id',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'fk_chirequirement_id',
 			name: 'fk_chirequirement_id',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'fk_chigoal_id',
 			name: 'fk_chigoal_id',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'reqType',
 			name: 'reqType',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'Priority',
 			name: 'Priority',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'Author',
 			name: 'Author',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'Proofreader',
 			name: 'Proofreader',
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'Status',
 			name: 'Status',
 			allowBlank: false,
-			inputType: 'textfield',
-		}, ],
+			inputType: 'textfield'
+		}],
 		buttons: [{
 			text: 'Save',
 			handler: function(){
