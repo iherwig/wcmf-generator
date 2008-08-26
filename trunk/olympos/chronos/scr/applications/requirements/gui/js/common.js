@@ -15,9 +15,12 @@ req.figure.BaseFigure = function(reqClassName, label, minWidth, minHeight, start
 	
 	draw2d.VectorFigure.call(this);
 	
-	this.setDimension(startWidth, startHeight);
-	
-	this.setLabel(label);
+	if (startWidth && startHeight) {
+		this.setDimension(startWidth, startHeight);
+	}
+	if (label) {
+		this.setLabel(label);
+	}
 }
 
 req.figure.BaseFigure.prototype = new draw2d.VectorFigure;
@@ -37,11 +40,22 @@ req.figure.BaseFigure.prototype.getReqClass = function(){
 }
 
 req.figure.BaseFigure.prototype.getMinWidth = function(){
-	return this.minWidth;
+	var result = draw2d.VectorFigure.prototype.getMinWidth.call(this);
+
+	if (this.minWidth) {
+		result = this.minWidth;
+	}
+	return result;
 }
 
 req.figure.BaseFigure.prototype.getMinHeight = function(){
-	return this.minHeight;
+	var result = draw2d.VectorFigure.prototype.getMinHeight.call(this);
+
+	if (this.minHeight) {
+		result = this.minHeight;
+	}
+	
+	return result;
 }
 
 req.figure.BaseFigure.prototype.setDimension = function(width, height){
@@ -208,10 +222,15 @@ req.connection.BaseConnection = function(label){
 	
 	this.stroke = jsgStroke.DOTTED;
 	
-	this.label = new draw2d.Label(label);
-	this.label.setBackgroundColor(new draw2d.Color(255, 255, 255));
-	
-	this.addFigure(this.label, new req.connection.MidpointLocator(this));
+	if (label) {
+		this.label = new draw2d.Label(label);
+		this.label.setBackgroundColor(new draw2d.Color(255, 255, 255));
+		
+		this.createHTMLElement();
+		this.html = this.getHTMLElement();
+		
+		this.addFigure(this.label, new req.connection.MidpointLocator(this));
+	}
 	
 	this.setDeleteable(true);
 }
