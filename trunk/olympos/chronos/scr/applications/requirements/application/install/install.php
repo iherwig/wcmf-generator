@@ -33,7 +33,8 @@ require_once(BASE."wcmf/lib/util/class.ObjectFactory.php");
 Message::hint("initializing wCMF database tables...");
 
 // get configuration from file
-$configFile = '../include/config.ini';
+$CONFIG_PATH = '../include/';
+$configFile = $CONFIG_PATH.'config.ini';
 Message::hint("configuration file: ".$configFile);
 $parser = &InifileParser::getInstance();
 if (!$parser->parseIniFile($configFile, true))
