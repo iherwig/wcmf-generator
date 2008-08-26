@@ -1,0 +1,45 @@
+
+
+.FigureChiGoal {
+	background-image: url("../img/ChiGoal.png");
+}
+
+.FigureChiRequirement {
+	background-image: url("../img/ChiRequirement.png");
+}
+
+.FigureChiIssue {
+	background-image: url("../img/ChiIssue.png");
+}
+
+.FigureChiFeature {
+	background-image: url("../img/ChiFeature.png");
+}
+
+.FigureChiBusinessProcess {
+	background-image: url("../img/ChiBusinessProcess.png");
+}
+
+.FigureChiBusinessUseCase {
+	background-image: url("../img/ChiBusinessUseCase.png");
+}
+
+.FigureChiBusinessUseCaseCore {
+	background-image: url("../img/ChiBusinessUseCaseCore.png");
+}
+
+.FigureChiBusinessPartnerActive {
+	background-image: url("../img/ChiBusinessPartnerActive.png");
+}
+
+.FigureChiBusinessPartnerPassive {
+	background-image: url("../img/ChiBusinessPartnerPassive.png");
+}
+
+.FigureChiWorkerExternal {
+	background-image: url("../img/ChiWorkerExternal.png");
+}
+
+.FigureChiWorkerInternal {
+	background-image: url("../img/ChiWorkerInternal.png");
+}
