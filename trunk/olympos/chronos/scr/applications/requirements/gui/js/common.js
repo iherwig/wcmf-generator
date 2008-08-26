@@ -1,4 +1,4 @@
-Ext.namespace("req", "req.ui", "req.figure", "req.store", "req.data", "req.connection", "req.edit", "req.util");
+Ext.namespace("req", "req.ui", "req.figure", "req.data", "req.connection", "req.util");
 
 req.setUnselectable = function(elem){
 	if (elem) {
@@ -399,7 +399,7 @@ req.connection.PortGraphics.prototype.paint = function(){
 }
 
 req.connection.getConstraints = function(sourceClass, targetClass) {
-	return req.connection.constraints[sourceClass][targetClass];
+	return eval("if (req.figure." + sourceClass + " && req.figure." + sourceClass + ".prototype.getConstraints) req.figure." + sourceClass + ".prototype.getConstraints()[targetClass]");
 }				
 
 
@@ -444,7 +444,7 @@ req.PropertyHandler.prototype.onSelectionChanged = function(figure){
 				currChild = nextChild;
 			}
 			
-			eval("if (req.edit.create"+ className + ") req.edit.create" + className + "(this.target)");
+			eval("if (req.figure."+ className + " && req.figure." + className + ".prototype.showEdit) req.figure." + className + ".prototype.showEdit(this.target)");
 		}
 	}
 }
@@ -562,7 +562,7 @@ req.UndoButtonHandler.prototype.stackChanged = function(oEvent){
 
 req.initSession = function() {
 	Ext.Ajax.request({
-		url: "../application/main.php",
+		url: req.data.jsonUrl,
 		method: "post",
 		success: req.handleLogin,
 		params: {

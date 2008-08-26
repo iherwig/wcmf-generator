@@ -120,7 +120,7 @@ req.ui.createExistingFigureTabs = function(container){
 	for (var currIndex = 0; currIndex < req.figure.list.length; currIndex++) {
 		var currFigure = req.figure.list[currIndex];
 		
-		var store = eval("if (req.store.create" + currFigure + ") req.store.create" + currFigure + "()");
+		var store = eval("if (req.figure." + currFigure + " && req.figure." + currFigure + ".prototype.getStore) req.figure." + currFigure + ".prototype.getStore(req.data.jsonUrl + '?sid=' + req.data.sid + '&usr_action=list&response_format=JSON')");
 		
 		if (store) {
 			req.data.stores.add(store);
@@ -128,20 +128,7 @@ req.ui.createExistingFigureTabs = function(container){
 			container.add(new Ext.Panel({
 				iconCls: "FigureGraphic Figure" + currFigure,
 				layout: "fit",
-				items: new Ext.grid.GridPanel({
-					columns: [{
-						header: currFigure,
-						dataIndex: "Name",
-						sortable: true
-					}],
-					store: store,
-					enableDragDrop: true,
-					selModel: new Ext.grid.RowSelectionModel({
-						singleSelect: true
-					}),
-					ddGroup: 'gridDDGroup',
-					reqClassName: currFigure
-				})
+				items: eval("if (req.figure." + currFigure + " && req.figure." + currFigure + ".prototype.getGrid) req.figure." + currFigure + ".prototype.getGrid(store)")
 			}));
 		}
 	}
