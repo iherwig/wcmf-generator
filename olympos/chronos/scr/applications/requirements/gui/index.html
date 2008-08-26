@@ -206,17 +206,13 @@
 		</script>
 		<script type="text/javascript" src="js/figure.js">
 		</script>
-		<script type="text/javascript" src="js/edit.js">
-		</script>
-		<script type="text/javascript" src="js/store.js">
-		</script>
-		<script type="text/javascript" src="js/connectionConstraints.js">
-		</script>
 		<script type="text/javascript">
 			
 			Ext.onReady(function(){
 			
 				Ext.QuickTips.init();
+				
+				req.data.jsonUrl = "../application/main.php?";
 
 				req.ui.create();
 								
