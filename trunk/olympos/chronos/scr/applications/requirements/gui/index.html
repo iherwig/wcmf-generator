@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Requirements Graphical Editor</title>
+		<link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/figures.css" />
+		<script type="text/javascript" src="lib/draw2d/wz_jsgraphics.js">
+		</script>
+		<script type="text/javascript" src="lib/draw2d/draw2d.js">
+		</script>
+		<!--
+		<SCRIPT src="lib/draw2d/normal/String.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/wz_jsgraphics.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/events.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/debug.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/dragdrop.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/UUID.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PositionConstants.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Graphics.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Color.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ArrayList.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Point.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Dimension.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Border.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineBorder.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Figure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Node.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/VectorFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SVGFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Label.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Oval.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Circle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Rectangle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ImageFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Port.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/InputPort.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/OutputPort.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Line.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/NullConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ManhattanConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/BezierConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/FanConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Connection.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionAnchor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ChopboxConnectionAnchor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionDecorator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ArrowConnectionDecorator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CompartmentFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CanvasDocument.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Annotation.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ResizeHandle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineStartResizeHandle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineEndResizeHandle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Canvas.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Workflow.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/WindowFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Button.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToggleButton.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToHelper.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToGeometry.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToGeometryEntry.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToGrid.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToggleButton.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToolGeneric.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToolPalette.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Dialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/InputDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PropertyDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/AnnotationDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PropertyWindow.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ColorDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineColorDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/BackgroundColorDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/EditPartFactory.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/AbstractObjectModel.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PropertyChangeEvent.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/GraphicalViewer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/GraphicalEditor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/xmlsax.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/xmlw3cdom.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/XMLSerializer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/XMLDeserializer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/EditPolicy.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Command.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandStack.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandStackEvent.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandStackEventListener.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandAdd.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandDelete.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandMove.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandMoveLine.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandMovePort.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandResize.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandSetText.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandSetColor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandSetBackgroundColor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandConnect.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandReconnect.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Locator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionLocator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/XMLSerializer.js">
+		</SCRIPT>
+		-->
+		<script type="text/javascript" src="lib/ext/adapter/ext/ext-base.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/ext-all.js">
+		</script>
+		<script type="text/javascript" src="js/common.js">
+		</script>
+		<script type="text/javascript" src="js/ui.js">
+		</script>
+		<script type="text/javascript" src="js/figure.js">
+		</script>
+		<script type="text/javascript" src="js/edit.js">
+		</script>
+		<script type="text/javascript" src="js/store.js">
+		</script>
+		<script type="text/javascript" src="js/connectionConstraints.js">
+		</script>
+		<script type="text/javascript">
+			
+			Ext.onReady(function(){
+			
+				Ext.QuickTips.init();
+
+				req.ui.create();
+								
+			});
+			
+			
+			/*			
+			
+			
+			 function serialize(){
+			
+			
+			 var result = "";
+			
+			
+			 
+			
+			
+			 var figures = workflow.getDocument().getFigures();
+			
+			
+			 
+			
+			
+			 for (var i = 0; i < figures.getSize(); i++) {
+			
+			
+			 var figure = figures.get(i);
+			
+			
+			 result += draw2d.XMLSerializer.toXML(figure);
+			
+			
+			 }
+			
+			
+			 
+			
+			
+			 return result;
+			
+			
+			 }
+			
+			
+			 */
+			
+			
+			
+			
+		</script>
+	</head>
+	<body style="background-color: white;">
+		<div id="viewport" style="overflow: auto;">
+			<div id="canvas" style="width: 10000px; height: 10000px;">
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+* {
+	-moz-user-select: inherit;
+	-khtml-user-select: inherit;
+}
+
+.FigureTemplate {
+	display: inline-block;
+	height: 24px;
+	padding: 2px;
+	padding-left: 26px;
+	margin: 2px;
+	background-repeat: no-repeat;
+	background-position: 2px 2px;
+	border: 1px solid black;
+}
+
+.FigureGraphic {
+	min-height: 24px;
+	min-width: 4px;
+}
+
