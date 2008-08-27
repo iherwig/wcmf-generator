@@ -162,3 +162,4 @@ req.figure.ChiController.prototype.getConstraints = function() {
 		
 	};
 }
+

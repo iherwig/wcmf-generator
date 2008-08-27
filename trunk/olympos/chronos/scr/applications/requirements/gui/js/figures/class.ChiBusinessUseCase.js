@@ -231,3 +231,4 @@ req.figure.ChiBusinessUseCase.prototype.getConstraints = function() {
 		},
 	};
 }
+

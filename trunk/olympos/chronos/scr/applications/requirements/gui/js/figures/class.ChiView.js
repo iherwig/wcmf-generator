@@ -155,3 +155,4 @@ req.figure.ChiView.prototype.getConstraints = function() {
 	
 	};
 }
+

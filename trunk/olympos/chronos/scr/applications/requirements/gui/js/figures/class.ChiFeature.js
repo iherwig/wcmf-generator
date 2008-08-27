@@ -195,3 +195,4 @@ req.figure.ChiFeature.prototype.getConstraints = function() {
 		
 	};
 }
+

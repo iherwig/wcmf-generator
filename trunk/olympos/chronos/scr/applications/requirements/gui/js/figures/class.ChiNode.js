@@ -224,3 +224,4 @@ req.figure.ChiNode.prototype.getConstraints = function() {
 		
 	};
 }
+

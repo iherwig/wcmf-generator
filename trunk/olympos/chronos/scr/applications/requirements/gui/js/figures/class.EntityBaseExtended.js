@@ -141,3 +141,4 @@ req.figure.EntityBaseExtended.prototype.getConstraints = function() {
 	
 	};
 }
+
