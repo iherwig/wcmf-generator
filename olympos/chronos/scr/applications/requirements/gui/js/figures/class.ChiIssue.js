@@ -187,3 +187,4 @@ req.figure.ChiIssue.prototype.getConstraints = function() {
 		},
 	};
 }
+

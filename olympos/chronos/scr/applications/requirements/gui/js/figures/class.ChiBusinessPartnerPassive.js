@@ -167,3 +167,4 @@ req.figure.ChiBusinessPartnerPassive.prototype.getConstraints = function() {
 		},
 	};
 }
+

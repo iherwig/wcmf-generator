@@ -224,3 +224,4 @@ req.figure.ChiValue.prototype.getConstraints = function() {
 		},
 	};
 }
+

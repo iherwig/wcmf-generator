@@ -215,3 +215,4 @@ req.figure.ChiGoal.prototype.getConstraints = function() {
 		
 	};
 }
+

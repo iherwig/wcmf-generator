@@ -141,3 +141,4 @@ req.figure.ChiFeatureStatus.prototype.getConstraints = function() {
 	
 	};
 }
+

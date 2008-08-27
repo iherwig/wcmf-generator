@@ -155,3 +155,4 @@ req.figure.ChiBase.prototype.getConstraints = function() {
 	
 	};
 }
+

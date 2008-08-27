@@ -148,3 +148,4 @@ req.figure.ChiAuthors.prototype.getConstraints = function() {
 	
 	};
 }
+

@@ -8,10 +8,20 @@ req.setUnselectable = function(elem){
 	}
 }
 
-req.figure.BaseFigure = function(reqClassName, label, minWidth, minHeight, startWidth, startHeight){
+req.data.oidList = new Array();
+
+req.figure.BaseFigure = function(reqClassName, label, oid, parentoids, childoids, minWidth, minHeight, startWidth, startHeight){
 	this.reqClassName = reqClassName;
 	this.minWidth = minWidth;
 	this.minHeight = minHeight;
+	
+	this.oid = oid;
+	this.parentoids = parentoids;
+	this.childoids = childoids;
+	
+	if (oid) {
+		req.addOid(oid, this);
+	}
 	
 	draw2d.VectorFigure.call(this);
 	
@@ -41,7 +51,7 @@ req.figure.BaseFigure.prototype.getReqClass = function(){
 
 req.figure.BaseFigure.prototype.getMinWidth = function(){
 	var result = draw2d.VectorFigure.prototype.getMinWidth.call(this);
-
+	
 	if (this.minWidth) {
 		result = this.minWidth;
 	}
@@ -50,12 +60,24 @@ req.figure.BaseFigure.prototype.getMinWidth = function(){
 
 req.figure.BaseFigure.prototype.getMinHeight = function(){
 	var result = draw2d.VectorFigure.prototype.getMinHeight.call(this);
-
+	
 	if (this.minHeight) {
 		result = this.minHeight;
 	}
 	
 	return result;
+}
+
+req.figure.BaseFigure.prototype.getParentOids = function(){
+	return this.parentoids;
+}
+
+req.figure.BaseFigure.prototype.getChildOids = function(){
+	return this.childoids;
+}
+
+req.figure.BaseFigure.prototype.getOid = function(){
+	return this.oid;
 }
 
 req.figure.BaseFigure.prototype.setDimension = function(width, height){
@@ -88,8 +110,8 @@ req.figure.BaseFigure.prototype.getLabel = function(){
 
 
 
-req.figure.RectFigure = function(reqClassName, label){
-	req.figure.BaseFigure.call(this, reqClassName, label, 80, 30, 150, 50);
+req.figure.RectFigure = function(reqClassName, label, oid, parentoids, childoids){
+	req.figure.BaseFigure.call(this, reqClassName, label, oid, parentoids, childoids, 80, 30, 150, 50);
 }
 
 req.figure.RectFigure.prototype = new req.figure.BaseFigure;
@@ -398,9 +420,9 @@ req.connection.PortGraphics.prototype.paint = function(){
 	
 }
 
-req.connection.getConstraints = function(sourceClass, targetClass) {
+req.connection.getConstraints = function(sourceClass, targetClass){
 	return eval("if (req.figure." + sourceClass + " && req.figure." + sourceClass + ".prototype.getConstraints) req.figure." + sourceClass + ".prototype.getConstraints()[targetClass]");
-}				
+}
 
 
 req.PropertyHandler = function(targetId){
@@ -444,7 +466,7 @@ req.PropertyHandler.prototype.onSelectionChanged = function(figure){
 				currChild = nextChild;
 			}
 			
-			eval("if (req.figure."+ className + " && req.figure." + className + ".prototype.showEdit) req.figure." + className + ".prototype.showEdit(this.target)");
+			eval("if (req.figure." + className + " && req.figure." + className + ".prototype.showEdit) req.figure." + className + ".prototype.showEdit(this.target, figure.getOid())");
 		}
 	}
 }
@@ -466,7 +488,7 @@ req.PropertyHandler.prototype.stackChanged = function(event){
 	}
 }
 
-req.initializeTemplateDragZone = function(v, reqClassName) {
+req.initializeTemplateDragZone = function(v, reqClassName){
 	v.dragZone = new Ext.dd.DragZone(v.getEl(), {
 		ddGroup: 'gridDDGroup',
 		
@@ -512,7 +534,17 @@ req.initializeDropZone = function(g){
 		//      While over a target node, return the default drop allowed class which
 		//      places a "tick" icon into the drag proxy.
 		onNodeOver: function(target, dd, e, data){
-			return Ext.dd.DropZone.prototype.dropAllowed;
+			var result = Ext.dd.DropZone.prototype.dropAllowed;
+			
+			if (data.grid) {
+				var oid = data.selections[0].id;
+				
+				if (req.getByOid(oid)) {
+					result = false;
+				}
+			}
+			
+			return result;
 		},
 		
 		//      On node drop, we can interrogate the target node to find the underlying
@@ -521,29 +553,72 @@ req.initializeDropZone = function(g){
 		//      We can use the data set up by the DragZone's getDragData method to read
 		//      any data we decided to attach.
 		onNodeDrop: function(target, dd, e, data){
-			var xOffset = req.ui.workflow.getAbsoluteX();
-			var yOffset = req.ui.workflow.getAbsoluteY();
-			var scrollLeft = req.ui.workflow.getScrollLeft();
-			var scrollTop = req.ui.workflow.getScrollTop();
+			var result = true;
 			
 			if (data.grid) {
-				var drawElem = new (eval("req.figure." + data.grid.reqClassName)) (data.selections[0].get("Name"));
-			}
-			else {
-				var drawElem = new (eval("req.figure." + dd.dragData.reqClassName)) (dd.dragData.reqClassName);
+				var oid = data.selections[0].id;
+				
+				if (req.getByOid(oid)) {
+					result = false;
+				}
 			}
 			
-			var x = e.xy[0] - xOffset + scrollLeft;
-			var y = e.xy[1] - yOffset + scrollTop;
+			if (result) {
+				var xOffset = req.ui.workflow.getAbsoluteX();
+				var yOffset = req.ui.workflow.getAbsoluteY();
+				var scrollLeft = req.ui.workflow.getScrollLeft();
+				var scrollTop = req.ui.workflow.getScrollTop();
+				
+				if (data.grid) {
+					var drawElem = new (eval("req.figure." + data.grid.reqClassName))(data.selections[0].get("Name"), data.selections[0].id, data.selections[0].get("parentoids"), data.selections[0].get("childoids"));
+				}
+				else {
+					var drawElem = new (eval("req.figure." + dd.dragData.reqClassName))(dd.dragData.reqClassName);
+				}
+				
+				var x = e.xy[0] - xOffset + scrollLeft;
+				var y = e.xy[1] - yOffset + scrollTop;
+				
+				var compartment = req.ui.workflow.getBestCompartmentFigure(x, y);
+				req.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(req.ui.workflow, drawElem, x, y, compartment));
+				
+				req.establishExistingConnections(drawElem, drawElem.getParentOids());
+				req.establishExistingConnections(drawElem, drawElem.getChildOids());
+			}
 			
-			var compartment = req.ui.workflow.getBestCompartmentFigure(x, y);
-			req.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(req.ui.workflow, drawElem, x, y, compartment));
-			return true;
+			return result;
 		}
 	});
 }
 
-
+req.establishExistingConnections = function(drawElem, list){
+	if (list) {
+	
+		for (var i = 0; i < list.length; i++) {
+			var target = req.getByOid(list[i]);
+			
+			if (target) {
+				var connectionData = req.connection.getConstraints(drawElem.getReqClass(), target.getReqClass());
+				
+				if (connectionData != null && drawElem.getPorts().get(0).checkConnection(drawElem.getPorts().get(0), target.getPorts().get(0), connectionData)) {
+					if (connectionData.inverse) {
+						var startPort = target.getPorts().get(0);
+						var endPort = drawElem.getPorts().get(0);
+					}
+					else {
+						var startPort = drawElem.getPorts().get(0);
+						var endPort = target.getPorts().get(0);
+					}
+					
+					var command = new draw2d.CommandConnect(drawElem.workflow, startPort, endPort);
+					command.setConnection(new req.connection.BaseConnection(connectionData.label));
+					drawElem.workflow.getCommandStack().execute(command);
+				}
+				
+			}
+		}
+	}
+}
 
 req.UndoButtonHandler = function(undoButton, redoButton){
 	draw2d.CommandStackEventListener.call(this);
@@ -560,7 +635,7 @@ req.UndoButtonHandler.prototype.stackChanged = function(oEvent){
 }
 
 
-req.initSession = function() {
+req.initSession = function(){
 	Ext.Ajax.request({
 		url: req.data.jsonUrl,
 		method: "post",
@@ -574,18 +649,18 @@ req.initSession = function() {
 	});
 }
 
-req.handleLogin = function(response) {
+req.handleLogin = function(response){
 	var data = Ext.util.JSON.decode(response.responseText.match(/\{[^\}]+\}/));
 	
 	req.data.sid = data.sid;
-
+	
 	req.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
-
+	
 	req.loadStores();
 }
 
 
-req.loadStores = function() {
+req.loadStores = function(){
 	for (var i = 0; i < req.data.stores.getSize(); i++) {
 		var store = req.data.stores.get(i);
 		
@@ -606,3 +681,10 @@ req.util.deg2rad = function(deg){
 	return deg * Math.PI / 180;
 }
 
+req.addOid = function(oid, figure){
+	req.data.oidList[oid] = figure;
+}
+
+req.getByOid = function(oid){
+	return req.data.oidList[oid];
+}

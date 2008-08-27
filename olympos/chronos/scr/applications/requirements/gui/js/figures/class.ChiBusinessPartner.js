@@ -167,3 +167,4 @@ req.figure.ChiBusinessPartner.prototype.getConstraints = function() {
 		},
 	};
 }
+

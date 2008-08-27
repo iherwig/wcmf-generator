@@ -141,3 +141,4 @@ req.figure.ChiRequirementType.prototype.getConstraints = function() {
 	
 	};
 }
+
