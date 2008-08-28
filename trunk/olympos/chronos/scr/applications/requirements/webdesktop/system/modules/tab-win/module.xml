@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+    <moduleName>QoDesk.TabWindow</moduleName>
+    <moduleType>demo</moduleType>
+    <moduleId>demo-tabs</moduleId>
+    <version>1.0</version>
+    <author>Jack Slocum</author>
+    <description>Demo of window with tabs.</description>
+    <files>
+        <css>
+            <file>tab-win.css</file>
+        </css>
+        <js>
+            <file>tab-win.js</file>
+        </js>
+        <php>
+        	<file></file>
+        </php>
+    </files>
+</module>

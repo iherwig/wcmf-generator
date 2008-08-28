@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+    <moduleName>QoDesk.QoAdminModuleFiles</moduleName>
+    <moduleType>system</moduleType>
+    <moduleId>qo-admin-module-files</moduleId>
+    <version>1.1.0</version>
+    <author>Paul Simmons</author>
+    <description>Admin module to edit/delete/add module files</description>
+    <files>
+        <css>
+            <file></file>
+        </css>
+        <js>
+            <file>qo-admin-module-files.js</file>
+        </js>
+        <php>
+        	<file>qo-admin-module-files.php</file>
+        </php>
+    </files>
+</module>

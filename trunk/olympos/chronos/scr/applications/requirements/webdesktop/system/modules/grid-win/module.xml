@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+    <moduleName>QoDesk.GridWindow</moduleName>
+    <moduleType>demo</moduleType>
+    <moduleId>demo-grid</moduleId>
+    <version>1.0</version>
+    <author>Jack Slocum</author>
+    <description>Demo of window with grid.</description>
+    <files>
+        <css>
+            <file>grid-win.css</file>
+        </css>
+        <js>
+            <file>grid-win.js</file>
+        </js>
+        <php>
+        	<file></file>
+        </php>
+    </files>
+</module>

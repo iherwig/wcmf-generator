@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+    <moduleName>QoDesk.QoAdminMembers</moduleName>
+    <moduleType>system</moduleType>
+    <moduleId>qo-admin-members</moduleId>
+    <version>1.1.0</version>
+    <author>Paul Simmons</author>
+    <description>Admin module to edit/delete/add members</description>
+    <files>
+        <css>
+            <file></file>
+        </css>
+        <js>
+            <file>qo-admin-members.js</file>
+        </js>
+        <php>
+        	<file>qo-admin-members.php</file>
+        </php>
+    </files>
+</module>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+    <moduleName>QoDesk.LayoutWindow</moduleName>
+    <moduleType>demo</moduleType>
+    <moduleId>demo-layout</moduleId>
+    <version>1.0</version>
+    <author>Todd Murdock</author>
+    <description>Demo of window with Layout.</description>
+    <files>
+        <css>
+            <file>layout-win.css</file>
+        </css>
+        <js>
+            <file>layout-win.js</file>
+        </js>
+        <php>
+        	<file></file>
+        </php>
+    </files>
+</module>

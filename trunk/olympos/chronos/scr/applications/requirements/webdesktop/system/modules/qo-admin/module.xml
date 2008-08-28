@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+    <moduleName>QoDesk.QoAdminMenu</moduleName>
+    <moduleType>menu</moduleType>
+    <moduleId>qo-admin-menu</moduleId>
+    <version>1.1.0</version>
+    <author>Paul Simmons</author>
+    <description>Menu for QO Admin modules</description>
+    <files>
+        <css>
+            <file></file>
+        </css>
+        <js>
+            <file>qo-admin-menu.js</file>
+        </js>
+        <php>
+        	<file></file>
+        </php>
+    </files>
+</module>
