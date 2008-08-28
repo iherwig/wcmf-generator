@@ -1,0 +1,24 @@
+
+Importing Model from XMI
+Root Package: template
+Add Classifier: 
+Add Classifier: TemplateActor
+Add Classifier: TemplateChiWorker
+Add Classifier: template ChiBusinessPartner
+Add Classifier: templateStakeHolder
+Add Classifier: ChiBusinessUseCasetemplate
+Add Classifier: Use CaseTemplate
+Add Classifier: templateComponent
+Add Classifier: ActivityTemplate
+Add Classifier: TemplateActivity
+Add Classifier: templateActivity
+Resolving Classifiers
+Resolving Owners
+Resolving Attribute Types
+Resolving Parameter Types
+Resolving Association-Classes
+Resolving Note links
+Add Diagrams
+Resolving DiagramIDs
+Fixup external references
+Import Complete!
