@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+    <moduleName>QoDesk.QoAdminModuleLaunchers</moduleName>
+    <moduleType>system</moduleType>
+    <moduleId>qo-admin-module-launchers</moduleId>
+    <version>1.1.0</version>
+    <author>Paul Simmons</author>
+    <description>Admin module to edit/delete/add module launcher authorities</description>
+    <files>
+        <css>
+            <file></file>
+        </css>
+        <js>
+            <file>qo-admin-module-launchers.js</file>
+        </js>
+        <php>
+        	<file>qo-admin-module-launchers.php</file>
+        </php>
+    </files>
+</module>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+    <moduleName>QoDesk.NavigateurWindow</moduleName>
+    <moduleType>demo</moduleType>
+    <moduleId>demo-navigateur</moduleId>
+    <version>1.0</version>
+    <author>Franck Carrouget</author>
+    <description>Navigateur internet.</description>
+    <files>
+        <css>
+            <file>navigateur-win.css</file>
+        </css>
+        <js>
+            <file>navigateur-win.js</file>
+        </js>
+        <php>
+        	<file></file>
+        </php>
+    </files>
+</module>

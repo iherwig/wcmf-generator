@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+    <moduleName>QoDesk.QoAdminMyGroups</moduleName>
+    <moduleType>system</moduleType>
+    <moduleId>qo-admin-my-groups</moduleId>
+    <version>1.1.0</version>
+    <author>Paul Simmons</author>
+    <description>Admin module to edit/delete/add member group authorities</description>
+    <files>
+        <css>
+            <file></file>
+        </css>
+        <js>
+            <file>qo-admin-my-groups.js</file>
+        </js>
+        <php>
+        	<file>qo-admin-my-groups.php</file>
+        </php>
+    </files>
+</module>

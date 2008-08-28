@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<module>
+	<moduleName>QoDesk.AccordionWindow</moduleName>
+    <moduleType>demo</moduleType>
+    <moduleId>demo-acc</moduleId>
+    <version>1.0</version>
+    <author>Jack Slocum</author>
+    <description>Demo of window with accordion.</description>
+    <files>
+        <css>
+            <file>acc-win.css</file>
+        </css>
+        <js>
+            <file>acc-win.js</file>
+        </js>
+        <php>
+        	<file></file>
+        </php>
+    </files>
+</module>
