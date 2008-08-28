@@ -2259,7 +2259,7 @@ req.figure.ChiGoal.prototype.showEdit = function(bd, oid){
 			url: req.data.jsonUrl,
 			params: {
 				sid: req.data.sid,
-				usr_action: "Display",
+				usr_action: "display",
 				response_format: "JSON",
 				oid: oid
 			}
@@ -2916,7 +2916,7 @@ req.figure.ChiRequirement.prototype.showEdit = function(bd, oid){
 			url: req.data.jsonUrl,
 			params: {
 				sid: req.data.sid,
-				usr_action: "Display",
+				usr_action: "display",
 				response_format: "JSON",
 				oid: oid
 			}
