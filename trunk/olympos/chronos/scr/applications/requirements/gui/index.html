@@ -212,9 +212,10 @@
 			
 				Ext.QuickTips.init();
 				
-				req.data.jsonUrl = "../application/main.php?";
+				req.data.jsonUrl = "../application/main.php";
+				
+				req.ui.createLogin();
 
-				req.ui.create();
 								
 			});
 			
@@ -266,7 +267,8 @@
 		</script>
 	</head>
 	<body style="background-color: white;">
-		<div id="viewport" style="overflow: auto;">
+		<div id="login" style="margin: auto;"></div>
+		<div id="viewport" style="overflow: auto; display: none;">
 			<div id="canvas" style="width: 10000px; height: 10000px;">
 			</div>
 		</div>
