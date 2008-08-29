@@ -2021,9 +2021,15 @@ req.figure.ChiGoal.prototype.getGrid = function(store){
 	});
 }
 
-req.figure.ChiGoal.prototype.getStore = function(url){
+req.figure.ChiGoal.prototype.getStore = function(){
 	return new Ext.data.Store({
-		url: url + "&type=ChiGoal",
+		url: req.data.jsonUrl,
+		baseParams: {
+			sid: req.data.sid,
+			usr_action: "list",
+			response_format: "JSON",
+			type: "ChiGoal"
+		},
 		reader: new Ext.data.JsonReader({
 			totalProperty: "totalCount",
 			root: "objects",
@@ -2045,167 +2051,138 @@ req.figure.ChiGoal.prototype.getStore = function(url){
 req.figure.ChiGoal.prototype.showEdit = function(bd, oid){
 
 	Ext.form.Field.prototype.msgTarget = 'side';
-
-/*
-	var store = new Ext.data.Store({
-		url: req.data.jsonUrl,
-		baseParams: {
-			sid: req.data.sid,
-			usr_action: "display",
-			response_format: "JSON",
-			oid: oid
-		},
-		 listeners: {
-			 "load": function(self, records, options) {
-				alert(records.length);
-
-			 }
-		 },
-		reader: new Ext.data.JsonReader({
-			root: "node",
-			id: "oid",
-			fields: [{
-				name: "Priority",
-				mapping: "values[1].Priority.value"
-			}, {
-				name: "Value_Name",
-				mapping: "values[1].Value_Name.value"
-			}]
-		})
-	});
-*/
+	
+	var listeners = {
+		"change": function(field, newValue, oldValue){
+			req.fieldChanged(field, newValue, oldValue, oid);
+		}
+	};
 	
 	var form = new Ext.FormPanel({
-		labelWidth: 150,
+		oid: oid,
+		labelWidth: 100,
 		frame: true,
 		title: 'ChiGoal Edit View',
 		bodyStyle: 'padding:5px 5px 0',
 		width: 500,
 		defaults: {
-			width: 230
+			width: 100
 		},
 		defaultType: 'textfield',
 		items: [{
 			fieldLabel: 'Priority',
 			name: 'Priority',
-			id: "Priority",
 			
 			allowBlank: false,
 			inputType: 'textfield',
+			listeners: listeners
 		}, {
 			fieldLabel: 'Value_Name',
 			name: 'Value_Name',
-			id: "Value_Name",
 			
 			allowBlank: false,
 			inputType: 'textfield',
+			listeners: listeners
 		}, {
 			fieldLabel: 'Value_ammount',
 			name: 'Value_ammount',
 			
 			allowBlank: false,
 			inputType: 'textfield',
+			listeners: listeners
 		}, {
 			fieldLabel: 'Value_Goal',
 			name: 'Value_Goal',
 			
 			allowBlank: false,
 			inputType: 'textfield',
+			listeners: listeners
 		}, {
 			fieldLabel: 'Alias',
 			name: 'Alias',
 			
 			allowBlank: false,
 			inputType: 'textfield',
+			listeners: listeners
 		}, {
 			fieldLabel: 'Version',
 			name: 'Version',
 			
 			allowBlank: false,
 			inputType: 'textfield',
+			listeners: listeners
 		}, {
 			fieldLabel: 'Name',
 			name: 'Name',
-			id: "Name",
 			
 			allowBlank: false,
 			inputType: 'textfield',
+			listeners: listeners
 		}, {
 			fieldLabel: 'Notes',
 			name: 'Notes',
-			id: "Notes",
 			
 			allowBlank: false,
 			inputType: 'htmleditor',
+			listeners: listeners
 		}, {
 			fieldLabel: 'created',
 			name: 'created',
 			readOnly: true,
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'creator',
 			name: 'creator',
 			readOnly: true,
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			readOnly: true,
 			allowBlank: false,
-			inputType: 'textfield',
+			inputType: 'textfield'
 		}, {
 			fieldLabel: 'modified',
 			name: 'modified',
 			readOnly: true,
 			allowBlank: false,
-			inputType: 'textfield',
-		}, ],
-		buttons: [{
-			text: 'Save',
-			handler: function(){
-				form.getForm().submit({
-					url: 'main.php',
-					method: 'POST',
-					success: function(form, action){
-						alert('Success: ' + action.response.responseText);
-					},
-					failure: function(form, action){
-						alert('Failure: ' + action.failureType);
-					}
-				});
-			}
-		}, {
-			text: 'Cancel',
-			handler: function(){
-				form.getForm().reset();
-			}
-		}]
+			inputType: 'textfield'
+		}, ]
 	});
 	
 	form.render(bd);
-
-//	store.load();
+	
 	Ext.Ajax.request({
 		url: req.data.jsonUrl,
 		method: "post",
-		success: function(response) {
-			var data = Ext.util.JSON.decode(response.responseText);
-
-			 form.findById("Priority").setValue(data.node.values[1].Priority.value);
-			 form.findById("Value_Name").setValue(data.node.values[1].Value_Name.value);
-			 form.findById("Name").setValue(data.node.values[1].Name.value);
-			 form.findById("Notes").setValue(data.node.values[1].Notes.value);
-		},
 		params: {
 			sid: req.data.sid,
 			usr_action: "display",
 			response_format: "JSON",
 			oid: oid
+		},
+		success: function(response){
+			var data = Ext.util.JSON.decode(response.responseText);
+			
+			var realForm = form.getForm();
+						
+			realForm.findField("Priority").setValue(data.node.values[1].Priority.value);
+			realForm.findField("Value_Name").setValue(data.node.values[1].Value_Name.value);
+			realForm.findField("Value_ammount").setValue(data.node.values[1].Value_ammount.value);
+			realForm.findField("Value_Goal").setValue(data.node.values[1].Value_Goal.value);
+			realForm.findField("Alias").setValue(data.node.values[1].Alias.value);
+			realForm.findField("Version").setValue(data.node.values[1].Version.value);
+			realForm.findField("Name").setValue(data.node.values[1].Name.value);
+			realForm.findField("Notes").setValue(data.node.values[1].Notes.value);
+			realForm.findField("created").setValue(data.node.values[1].created.value);
+			realForm.findField("creator").setValue(data.node.values[1].creator.value);
+			realForm.findField("last_editor").setValue(data.node.values[1].last_editor.value);
+			realForm.findField("modified").setValue(data.node.values[1].modified.value);
 		}
 	});
-
+	
 	
 };
 

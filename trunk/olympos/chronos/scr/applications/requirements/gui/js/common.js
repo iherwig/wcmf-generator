@@ -657,7 +657,7 @@ req.handleLogin = function(response, form){
 	if (data.errorMsg) {
 		req.util.showMessage("Login Failed", data.errorMsg);
 		
-		var passwordField = form.findById("password");
+		var passwordField = form.getForm().findField("password");
 		
 		passwordField.setValue("");
 		passwordField.focus();
@@ -729,4 +729,21 @@ req.addOid = function(oid, figure){
 
 req.getByOid = function(oid){
 	return req.data.oidList[oid];
+}
+
+req.fieldChanged = function(field, newValue, oldValue, oid) {
+	var params = {
+		sid: req.data.sid,
+		controller: "ExitController",
+		usr_action: "save",
+		response_format: "JSON"
+	}
+	
+	params["value--" + field.getName() + "-" + oid] = newValue;
+
+	Ext.Ajax.request({
+		url: req.data.jsonUrl,
+		method: "POST",
+		params: params
+	});
 }

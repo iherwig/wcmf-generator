@@ -1,7 +1,7 @@
 req.ui.createLogin = function(){
 	var submitHandler = function(){
 		if (loginForm.getForm().isValid()) {
-			req.initSession(loginForm.findById("login").getValue(), loginForm.findById("password").getValue(), loginForm);
+			req.initSession(loginForm.getForm().findField("login").getValue(), loginForm.getForm().findField("password").getValue(), loginForm);
 		}
 	};
 	
@@ -25,12 +25,10 @@ req.ui.createLogin = function(){
 		items: [new Ext.form.TextField({
 			fieldLabel: 'Login',
 			name: 'login',
-			id: "login",
 			allowBlank: false
 		}), new Ext.form.TextField({
 			fieldLabel: 'Password',
 			name: 'password',
-			id: "password",
 			inputType: "password",
 			allowBlank: false
 		})],
@@ -56,7 +54,7 @@ req.ui.createLogin = function(){
 	var y = viewportSize.height / 2 - formSize.height / 2;
 	
 	loginForm.setPosition(x, y);
-	loginForm.findById("login").focus();
+	loginForm.getForm().findField("login").focus();
 }
 
 
@@ -180,7 +178,7 @@ req.ui.createExistingFigureTabs = function(container){
 	for (var currIndex = 0; currIndex < req.figure.list.length; currIndex++) {
 		var currFigure = req.figure.list[currIndex];
 		
-		var store = eval("if (req.figure." + currFigure + " && req.figure." + currFigure + ".prototype.getStore) req.figure." + currFigure + ".prototype.getStore(req.data.jsonUrl + '?sid=' + req.data.sid + '&usr_action=list&response_format=JSON')");
+		var store = eval("if (req.figure." + currFigure + " && req.figure." + currFigure + ".prototype.getStore) req.figure." + currFigure + ".prototype.getStore()");
 		
 		if (store) {
 			req.data.stores.add(store);
