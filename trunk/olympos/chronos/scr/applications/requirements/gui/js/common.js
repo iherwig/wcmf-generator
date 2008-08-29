@@ -650,7 +650,7 @@ req.initSession = function(){
 }
 
 req.handleLogin = function(response){
-	var data = Ext.util.JSON.decode(response.responseText.match(/\{[^\}]+\}/));
+	var data = Ext.util.JSON.decode(response.responseText);
 	
 	req.data.sid = data.sid;
 	
