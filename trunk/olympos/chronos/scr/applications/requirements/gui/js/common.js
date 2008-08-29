@@ -569,21 +569,22 @@ req.initializeDropZone = function(g){
 				var scrollLeft = req.ui.workflow.getScrollLeft();
 				var scrollTop = req.ui.workflow.getScrollTop();
 				
-				if (data.grid) {
-					var drawElem = new (eval("req.figure." + data.grid.reqClassName))(data.selections[0].get("Name"), data.selections[0].id, data.selections[0].get("parentoids"), data.selections[0].get("childoids"));
-				}
-				else {
-					var drawElem = new (eval("req.figure." + dd.dragData.reqClassName))(dd.dragData.reqClassName);
-				}
-				
 				var x = e.xy[0] - xOffset + scrollLeft;
 				var y = e.xy[1] - yOffset + scrollTop;
 				
 				var compartment = req.ui.workflow.getBestCompartmentFigure(x, y);
-				req.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(req.ui.workflow, drawElem, x, y, compartment));
+
+				if (data.grid) {
+					var drawElem = new (eval("req.figure." + data.grid.reqClassName))(data.selections[0].get("Name"), data.selections[0].id, data.selections[0].get("parentoids"), data.selections[0].get("childoids"));
+					req.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(req.ui.workflow, drawElem, x, y, compartment));
+					
+					req.establishExistingConnections(drawElem, drawElem.getParentOids());
+					req.establishExistingConnections(drawElem, drawElem.getChildOids());
+				}
+				else {
+					req.createNewFigure(dd.dragData.reqClassName, x, y, compartment);
+				}
 				
-				req.establishExistingConnections(drawElem, drawElem.getParentOids());
-				req.establishExistingConnections(drawElem, drawElem.getChildOids());
 			}
 			
 			return result;
@@ -620,6 +621,41 @@ req.establishExistingConnections = function(drawElem, list){
 	}
 }
 
+req.createNewFigure = function(reqClassName, x, y, compartment) {
+	Ext.MessageBox.prompt("Create new " + reqClassName, "Please enter name of new " + reqClassName +":", function(button, text) { req.handleFigureName(button, text, reqClassName, x, y, compartment)});
+}
+
+req.handleFigureName = function(button, newClassName, reqClassName, x, y, compartment) {
+	if (button == "ok") {
+	Ext.Ajax.request({
+		url: req.data.jsonUrl,
+		method: "post",
+		params: {
+			sid: req.data.sid,
+			usr_action: "new",
+			response_format: "JSON",
+			newtype: reqClassName
+		},
+		success: function(response){
+			req.handleFigureCreated(response, newClassName, reqClassName, x, y, compartment);
+		}
+	});
+	}
+}
+
+req.handleFigureCreated = function(response, newClassName, reqClassName, x, y, compartment) {
+	var data = Ext.util.JSON.decode(response.responseText);
+
+	if (data.oid) {
+		var oid = data.oid;
+		
+		req.changeField("Name", newClassName, oid);
+		
+		var drawElem = new (eval("req.figure." + reqClassName))(newClassName, oid, [], []);
+		req.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(req.ui.workflow, drawElem, x, y, compartment));
+	}
+}
+
 req.UndoButtonHandler = function(undoButton, redoButton){
 	draw2d.CommandStackEventListener.call(this);
 	
@@ -639,15 +675,15 @@ req.initSession = function(login, password, form){
 	Ext.Ajax.request({
 		url: req.data.jsonUrl,
 		method: "post",
-		success: function(response){
-			req.handleLogin(response, form)
-		},
 		params: {
 			usr_action: "dologin",
 			login: login,
 			password: password,
 			response_format: "JSON"
 		},
+		success: function(response){
+			req.handleLogin(response, form)
+		}
 	});
 }
 
@@ -732,6 +768,10 @@ req.getByOid = function(oid){
 }
 
 req.fieldChanged = function(field, newValue, oldValue, oid) {
+	req.changeField(field.getName(), newValue, oid);
+}
+
+req.changeField = function(fieldName, newValue, oid) {
 	var params = {
 		sid: req.data.sid,
 		controller: "ExitController",
@@ -739,7 +779,7 @@ req.fieldChanged = function(field, newValue, oldValue, oid) {
 		response_format: "JSON"
 	}
 	
-	params["value--" + field.getName() + "-" + oid] = newValue;
+	params["value--" + fieldName + "-" + oid] = newValue;
 
 	Ext.Ajax.request({
 		url: req.data.jsonUrl,
