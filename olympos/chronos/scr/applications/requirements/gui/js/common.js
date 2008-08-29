@@ -635,28 +635,70 @@ req.UndoButtonHandler.prototype.stackChanged = function(oEvent){
 }
 
 
-req.initSession = function(){
+req.initSession = function(login, password, form){
 	Ext.Ajax.request({
 		url: req.data.jsonUrl,
 		method: "post",
-		success: req.handleLogin,
+		success: function(response){
+			req.handleLogin(response, form)
+		},
 		params: {
 			usr_action: "dologin",
-			login: "admin",
-			password: "admin",
+			login: login,
+			password: password,
 			response_format: "JSON"
-		}
+		},
 	});
 }
 
-req.handleLogin = function(response){
+req.handleLogin = function(response, form){
 	var data = Ext.util.JSON.decode(response.responseText);
 	
-	req.data.sid = data.sid;
+	if (data.errorMsg) {
+		req.util.showMessage("Login Failed", data.errorMsg);
+		
+		var passwordField = form.findById("password");
+		
+		passwordField.setValue("");
+		passwordField.focus();
+	}
+	else {
+		req.data.sid = data.sid;
+		
+		Ext.getCmp("loginViewport").destroy();
+		Ext.get("viewport").dom.style.display = "block";
+		
+		req.ui.create();
+		
+		req.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
+		
+		req.loadStores();
+	}
 	
-	req.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
-	
-	req.loadStores();
+}
+
+req.util.showMessage = function(title, message){
+	var messageContainer = Ext.getCmp("messageContainer");
+	if (!messageContainer) {
+		messageContainer = Ext.DomHelper.insertFirst(document.body, {
+			id: "messageContainer"
+		}, true);
+	}
+	messageContainer.alignTo(document, 't-t');
+	var messageBox = Ext.DomHelper.append(messageContainer, {
+		html: '<div class="msg">' +
+		'<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>' +
+		'<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>' +
+		title +
+		'</h3>' +
+		message +
+		'</div></div></div>' +
+		'<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>' +
+		'</div>'
+	}, true);
+	messageBox.slideIn('t').pause(1).ghost("t", {
+		remove: true
+	});
 }
 
 

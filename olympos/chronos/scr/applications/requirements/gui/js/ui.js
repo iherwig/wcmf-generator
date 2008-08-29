@@ -1,3 +1,65 @@
+req.ui.createLogin = function(){
+	var submitHandler = function(){
+		if (loginForm.getForm().isValid()) {
+			req.initSession(loginForm.findById("login").getValue(), loginForm.findById("password").getValue(), loginForm);
+		}
+	};
+	
+	var loginForm = new Ext.FormPanel({
+		labelWidth: 75,
+		frame: true,
+		title: 'Login',
+		bodyStyle: 'padding:5px 5px 0',
+		width: 350,
+		defaults: {
+			width: 230
+		},
+		keys: [{
+			key: [10, 13],
+			handler: function(){
+				submitHandler(loginForm);
+			}
+			
+		}],
+		
+		items: [new Ext.form.TextField({
+			fieldLabel: 'Login',
+			name: 'login',
+			id: "login",
+			allowBlank: false
+		}), new Ext.form.TextField({
+			fieldLabel: 'Password',
+			name: 'password',
+			id: "password",
+			inputType: "password",
+			allowBlank: false
+		})],
+		buttons: [{
+			text: 'Login',
+			type: 'submit',
+			handler: function(){
+				submitHandler(loginForm);
+			}
+		}]
+	});
+	
+	var viewport = new Ext.Viewport({
+		id: "loginViewport",
+		layout: "absolute",
+		items: [loginForm]
+	});
+	
+	var viewportSize = viewport.getSize();
+	var formSize = loginForm.getSize();
+	
+	var x = viewportSize.width / 2 - formSize.width / 2;
+	var y = viewportSize.height / 2 - formSize.height / 2;
+	
+	loginForm.setPosition(x, y);
+	loginForm.findById("login").focus();
+}
+
+
 req.ui.create = function(){
 	var viewport = new Ext.Viewport({
 		layout: "border",
@@ -87,8 +149,6 @@ req.ui.create = function(){
 	req.ui.initWorkflow();
 	
 	req.setUnselectable(document.getElementById("viewport"));
-	
-	req.initSession();	
 	
 }
 
