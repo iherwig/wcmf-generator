@@ -91,9 +91,72 @@ req.ui.create = function(){
 						layout: "fit",
 						iconCls: "TreeTab",
 						autoScroll: true,
-						enableDrag: true,
+						enableDD: true,
 						dragConfig: {
 							ddGroup: "gridDDGroup"
+						},
+						dropConfig: {
+							ddGroup: "gridDDGroup",
+							appendOnly: true,
+							onNodeOver: function(nodeData, source, e, data){
+								return this.checkDrop(data, nodeData.node);
+							},
+							onNodeDrop: function(nodeData, source, e, data){
+								var source = data.node;
+								var target = nodeData.node;
+								
+								var result = this.checkDrop(data, target);
+								
+								if (result) {
+									if (source) {
+									
+										target.appendChild(source);
+										req.postConnection(source.id, target.id);
+									}
+									else {
+										req.createNewFigure(data.reqClassName, null, null, null, function(response, newClassName, reqClassName, x, y, compartment){
+											var data = Ext.util.JSON.decode(response.responseText);
+											
+											if (data.oid) {
+												var oid = data.oid;
+												
+												req.changeField("Name", newClassName, oid);
+												
+												req.postConnection(oid, target.id);
+												
+												target.appendChild(new Ext.tree.TreeNode({
+													id: oid,
+													iconCls: "Figure" + reqClassName,
+													leaf: false,
+													text: newClassName
+												}))
+											}
+										});
+									}
+								}
+								
+								return result;
+							},
+							checkDrop: function(source, target){
+								var result = false;
+								
+								if (source.node != target) {
+								
+									var sourceReqClassName;
+									if (source.node) {
+										sourceReqClassName = source.node.id.match(/[^:]+/);
+									}
+									else {
+										sourceReqClassName = source.reqClassName;
+									}
+									var targetReqClassName = target.id.match(/[^:]+/);
+									
+									result = (req.connection.getConstraints(sourceReqClassName, targetReqClassName)) ? true : false;
+									
+								}
+								
+								return result;
+							}
 						},
 						rootVisible: false,
 						root: new Ext.tree.AsyncTreeNode({
