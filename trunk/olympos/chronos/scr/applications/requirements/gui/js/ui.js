@@ -85,7 +85,34 @@ req.ui.create = function(){
 					xtype: "tabpanel",
 					draggable: true,
 					tabPosition: "bottom",
-					id: "existingFiguresContainer"
+					id: "existingFiguresContainer",
+					items: [new Ext.tree.TreePanel({
+						layout: "fit",
+						iconCls: "TreeTab",
+						autoScroll: true,
+						enableDrag: true,
+						dragConfig: {
+							ddGroup: "gridDDGroup"
+						},
+						rootVisible: false,
+						root: new Ext.tree.AsyncTreeNode({
+							id: "root"
+						}),
+						loader: new Ext.tree.TreeLoader({
+							url: req.data.jsonUrl,
+							baseParams: {
+								sid: req.data.sid,
+								controller: "TreeViewController",
+								response_format: "JSON",
+								usr_action: "loadChildren"
+							},
+							listeners: {
+								load: function(self, node, response){
+									req.changeTreeNode(node);
+								}
+							}
+						})
+					})]
 				}]
 			}
 		}, {
@@ -190,8 +217,8 @@ req.ui.createExistingFigureTabs = function(container){
 			}));
 		}
 	}
-
-
+	
+	
 	container.setActiveTab(0);
 	
 	Ext.getCmp("contentContainer").doLayout();

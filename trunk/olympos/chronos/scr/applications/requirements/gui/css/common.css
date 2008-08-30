@@ -19,3 +19,8 @@
 	min-width: 4px;
 }
 
+.TreeTab {
+	min-height: 24px;
+	min-width: 4px;
+	background-image: url("../img/tree.png");
+}
