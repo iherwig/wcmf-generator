@@ -239,6 +239,19 @@ req.ui.create = function(){
 	
 	req.setUnselectable(document.getElementById("viewport"));
 	
+	Ext.EventManager.on(window, 'beforeunload', function(e){
+		Ext.Ajax.request({
+			url: req.data.jsonUrl,
+			method: "post",
+			params: {
+				sid: req.data.sid,
+				usr_action: "logout",
+				response_format: "JSON"
+			}
+		});
+		
+		req.util.sleep(1111);
+	});
 }
 
 req.ui.createNewFigureTemplates = function(container){
@@ -254,6 +267,7 @@ req.ui.createNewFigureTemplates = function(container){
 			reqClassName: currFigure,
 			listeners: {
 				render: function(v){
+					req.setUnselectable(v.getEl().dom);
 					req.initializeTemplateDragZone(v, v.reqClassName);
 				}
 			}

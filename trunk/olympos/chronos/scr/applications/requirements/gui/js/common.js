@@ -4,7 +4,7 @@ req.setUnselectable = function(elem){
 	if (elem) {
 		elem.style.MozUserSelect = "none";
 		elem.style.KhtmlUserSelect = "none";
-		elem.unselectable = true;
+		elem.unselectable = "on";
 	}
 }
 
@@ -445,34 +445,13 @@ req.connection.getConstraints = function(sourceClass, targetClass){
 
 req.PropertyHandler = function(targetId){
 	this.target = Ext.get(targetId);
-	this.currentSelection = null;
+	this.currentSelectionOid = null;
 }
 
 req.PropertyHandler.prototype.onSelectionChanged = function(figure){
-	/*
-	 if (figure != this.currentSelection) {
-	 if (this.currentSelection != null) {
-	 this.currentSelection.detachMoveListener(this);
-	 }
-	 
-	 this.currentSelection = figure;
-	 if (figure != null) {
-	 figure.attachMoveListener(this);
-	 }
-	 }
-	 
-	 if (figure != null) {
-	 this.target.innerHTML = figure.type + Math.random();
-	 
-	 if (figure.getClassName) {
-	 nameEditor.setValue(figure.getClassName());
-	 }
-	 else {
-	 nameEditor.setValue("");
-	 }
-	 }
-	 */
-	if (figure != null) {
+	if (figure != null && figure.getOid != null && figure.getOid() != this.currentSelectionOid) {
+		this.currentSelectionOid = figure.getOid();
+		
 		if (figure.getReqClass) {
 			var className = figure.getReqClass();
 			
@@ -486,6 +465,8 @@ req.PropertyHandler.prototype.onSelectionChanged = function(figure){
 			
 			eval("if (req.figure." + className + " && req.figure." + className + ".prototype.showEdit) req.figure." + className + ".prototype.showEdit(this.target, figure.getOid())");
 		}
+	} else {
+		this.currentSelection = null;
 	}
 }
 
@@ -858,4 +839,13 @@ req.changeTreeNode = function(node){
 	
 	node.eachChild(req.changeTreeNode);
 	
+}
+
+req.util.sleep = function(milliseconds) {
+	var start = new Date();
+	
+	var now = new Date();
+	while (now.getElapsed(start) < milliseconds) {
+		now = new Date();
+	}
 }
