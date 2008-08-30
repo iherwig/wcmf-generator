@@ -342,9 +342,27 @@ req.connection.Port.prototype.onDrop = function(port){
 			var command = new draw2d.CommandConnect(this.parentNode.workflow, startPort, endPort);
 			command.setConnection(new req.connection.BaseConnection(connectionData.label));
 			this.parentNode.workflow.getCommandStack().execute(command);
+			
+			req.postConnection(startPort.parentNode.getOid(), endPort.parentNode.getOid());
 		}
 		
 	}
+}
+
+req.postConnection = function(parentOid, childOid) {
+		Ext.Ajax.request({
+		url: req.data.jsonUrl,
+		method: "post",
+		params: {
+			sid: req.data.sid,
+			usr_action: "associate",
+			response_format: "JSON",
+			oid: parentOid,
+			associateoids: childOid,
+			associateAs: "parent"
+		},
+	});
+
 }
 
 req.connection.Port.prototype.checkConnection = function(sourcePort, targetPort, connectionData){
@@ -587,7 +605,7 @@ req.initializeDropZone = function(g){
 					req.createFigureFromTree(dd.dragData.node.id, x, y, compartment);
 				}
 				else {
-					req.createNewFigure(dd.dragData.reqClassName, x, y, compartment);
+					req.createNewFigure(dd.dragData.reqClassName, x, y, compartment, req.handleFigureCreated);
 				}
 				
 			}
@@ -658,13 +676,13 @@ req.createFigureFromTree = function(oid, x, y, compartment){
 }
 
 
-req.createNewFigure = function(reqClassName, x, y, compartment){
+req.createNewFigure = function(reqClassName, x, y, compartment, successHandler){
 	Ext.MessageBox.prompt("Create new " + reqClassName, "Please enter name of new " + reqClassName + ":", function(button, text){
-		req.handleFigureName(button, text, reqClassName, x, y, compartment)
+		req.handleFigureName(button, text, reqClassName, x, y, compartment, successHandler)
 	});
 }
 
-req.handleFigureName = function(button, newClassName, reqClassName, x, y, compartment){
+req.handleFigureName = function(button, newClassName, reqClassName, x, y, compartment, successHandler){
 	if (button == "ok") {
 		Ext.Ajax.request({
 			url: req.data.jsonUrl,
@@ -676,7 +694,7 @@ req.handleFigureName = function(button, newClassName, reqClassName, x, y, compar
 				newtype: reqClassName
 			},
 			success: function(response){
-				req.handleFigureCreated(response, newClassName, reqClassName, x, y, compartment);
+				successHandler(response, newClassName, reqClassName, x, y, compartment);
 			}
 		});
 	}
