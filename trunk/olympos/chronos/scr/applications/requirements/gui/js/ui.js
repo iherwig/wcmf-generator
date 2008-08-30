@@ -84,7 +84,8 @@ req.ui.create = function(){
 					title: "Existing Classes",
 					xtype: "tabpanel",
 					draggable: true,
-					tabPosition: "bottom",
+					//tabPosition: "bottom",
+					enableTabScroll: true,
 					id: "existingFiguresContainer",
 					items: [new Ext.tree.TreePanel({
 						layout: "fit",
