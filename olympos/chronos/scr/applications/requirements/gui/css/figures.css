@@ -1,45 +1,45 @@
 
 
 .FigureChiGoal {
-	background-image: url("../img/ChiGoal.png");
+	background-image: url("../img/ChiGoal.png") !important;
 }
 
 .FigureChiRequirement {
-	background-image: url("../img/ChiRequirement.png");
+	background-image: url("../img/ChiRequirement.png") !important;
 }
 
 .FigureChiIssue {
-	background-image: url("../img/ChiIssue.png");
+	background-image: url("../img/ChiIssue.png") !important;
 }
 
 .FigureChiFeature {
-	background-image: url("../img/ChiFeature.png");
+	background-image: url("../img/ChiFeature.png") !important;
 }
 
 .FigureChiBusinessProcess {
-	background-image: url("../img/ChiBusinessProcess.png");
+	background-image: url("../img/ChiBusinessProcess.png") !important;
 }
 
 .FigureChiBusinessUseCase {
-	background-image: url("../img/ChiBusinessUseCase.png");
+	background-image: url("../img/ChiBusinessUseCase.png") !important;
 }
 
 .FigureChiBusinessUseCaseCore {
-	background-image: url("../img/ChiBusinessUseCaseCore.png");
+	background-image: url("../img/ChiBusinessUseCaseCore.png") !important;
 }
 
 .FigureChiBusinessPartnerActive {
-	background-image: url("../img/ChiBusinessPartnerActive.png");
+	background-image: url("../img/ChiBusinessPartnerActive.png") !important;
 }
 
 .FigureChiBusinessPartnerPassive {
-	background-image: url("../img/ChiBusinessPartnerPassive.png");
+	background-image: url("../img/ChiBusinessPartnerPassive.png") !important;
 }
 
 .FigureChiWorkerExternal {
-	background-image: url("../img/ChiWorkerExternal.png");
+	background-image: url("../img/ChiWorkerExternal.png") !important;
 }
 
 .FigureChiWorkerInternal {
-	background-image: url("../img/ChiWorkerInternal.png");
+	background-image: url("../img/ChiWorkerInternal.png") !important;
 }

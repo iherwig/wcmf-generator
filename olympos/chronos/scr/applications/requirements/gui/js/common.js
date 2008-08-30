@@ -536,12 +536,15 @@ req.initializeDropZone = function(g){
 		onNodeOver: function(target, dd, e, data){
 			var result = Ext.dd.DropZone.prototype.dropAllowed;
 			
-			if (data.grid) {
+			if (data.grid != undefined) {
 				var oid = data.selections[0].id;
-				
-				if (req.getByOid(oid)) {
-					result = false;
-				}
+			}
+			else if (data.node != undefined) {
+				var oid = dd.dragData.node.id;
+			}
+			
+			if (oid && req.getByOid(oid)) {
+				result = false;
 			}
 			
 			return result;
@@ -555,12 +558,15 @@ req.initializeDropZone = function(g){
 		onNodeDrop: function(target, dd, e, data){
 			var result = true;
 			
-			if (data.grid) {
+			if (data.grid != undefined) {
 				var oid = data.selections[0].id;
-				
-				if (req.getByOid(oid)) {
-					result = false;
-				}
+			}
+			else if (data.node != undefined) {
+				var oid = dd.dragData.node.id;
+			}
+			
+			if (oid && req.getByOid(oid)) {
+				result = false;
 			}
 			
 			if (result) {
@@ -573,13 +579,12 @@ req.initializeDropZone = function(g){
 				var y = e.xy[1] - yOffset + scrollTop;
 				
 				var compartment = req.ui.workflow.getBestCompartmentFigure(x, y);
-
-				if (data.grid) {
-					var drawElem = new (eval("req.figure." + data.grid.reqClassName))(data.selections[0].get("Name"), data.selections[0].id, data.selections[0].get("parentoids"), data.selections[0].get("childoids"));
-					req.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(req.ui.workflow, drawElem, x, y, compartment));
-					
-					req.establishExistingConnections(drawElem, drawElem.getParentOids());
-					req.establishExistingConnections(drawElem, drawElem.getChildOids());
+				
+				if (data.grid != undefined) {
+					req.createExistingFigure(data.grid.reqClassName, data.selections[0].get("Name"), oid, data.selections[0].get("parentoids"), data.selections[0].get("childoids"), x, y, compartment);
+				}
+				else if (data.node != undefined) {
+					req.createFigureFromTree(dd.dragData.node.id, x, y, compartment);
 				}
 				else {
 					req.createNewFigure(dd.dragData.reqClassName, x, y, compartment);
@@ -590,6 +595,14 @@ req.initializeDropZone = function(g){
 			return result;
 		}
 	});
+}
+
+req.createExistingFigure = function(reqClassName, label, oid, parentoids, childoids, x, y, compartment){
+	var drawElem = new (eval("req.figure." + reqClassName))(label, oid, parentoids, childoids);
+	req.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(req.ui.workflow, drawElem, x, y, compartment));
+	
+	req.establishExistingConnections(drawElem, drawElem.getParentOids());
+	req.establishExistingConnections(drawElem, drawElem.getChildOids());
 }
 
 req.establishExistingConnections = function(drawElem, list){
@@ -621,31 +634,57 @@ req.establishExistingConnections = function(drawElem, list){
 	}
 }
 
-req.createNewFigure = function(reqClassName, x, y, compartment) {
-	Ext.MessageBox.prompt("Create new " + reqClassName, "Please enter name of new " + reqClassName +":", function(button, text) { req.handleFigureName(button, text, reqClassName, x, y, compartment)});
-}
-
-req.handleFigureName = function(button, newClassName, reqClassName, x, y, compartment) {
-	if (button == "ok") {
+req.createFigureFromTree = function(oid, x, y, compartment){
 	Ext.Ajax.request({
 		url: req.data.jsonUrl,
 		method: "post",
 		params: {
 			sid: req.data.sid,
-			usr_action: "new",
+			usr_action: "display",
 			response_format: "JSON",
-			newtype: reqClassName
+			oid: oid
 		},
 		success: function(response){
-			req.handleFigureCreated(response, newClassName, reqClassName, x, y, compartment);
+			var data = Ext.util.JSON.decode(response.responseText);
+			
+			var reqClassName = data.rootType;
+			var parentoids = data.node.properties.parentoids;
+			var childoids = data.node.properties.childoids;
+			var label = data.node.values[1].Name.value;
+			
+			req.createExistingFigure(reqClassName, label, oid, parentoids, childoids, x, y, compartment);
 		}
 	});
+}
+
+
+req.createNewFigure = function(reqClassName, x, y, compartment){
+	Ext.MessageBox.prompt("Create new " + reqClassName, "Please enter name of new " + reqClassName + ":", function(button, text){
+		req.handleFigureName(button, text, reqClassName, x, y, compartment)
+	});
+}
+
+req.handleFigureName = function(button, newClassName, reqClassName, x, y, compartment){
+	if (button == "ok") {
+		Ext.Ajax.request({
+			url: req.data.jsonUrl,
+			method: "post",
+			params: {
+				sid: req.data.sid,
+				usr_action: "new",
+				response_format: "JSON",
+				newtype: reqClassName
+			},
+			success: function(response){
+				req.handleFigureCreated(response, newClassName, reqClassName, x, y, compartment);
+			}
+		});
 	}
 }
 
-req.handleFigureCreated = function(response, newClassName, reqClassName, x, y, compartment) {
+req.handleFigureCreated = function(response, newClassName, reqClassName, x, y, compartment){
 	var data = Ext.util.JSON.decode(response.responseText);
-
+	
 	if (data.oid) {
 		var oid = data.oid;
 		
@@ -767,11 +806,11 @@ req.getByOid = function(oid){
 	return req.data.oidList[oid];
 }
 
-req.fieldChanged = function(field, newValue, oldValue, oid) {
+req.fieldChanged = function(field, newValue, oldValue, oid){
 	req.changeField(field.getName(), newValue, oid);
 }
 
-req.changeField = function(fieldName, newValue, oid) {
+req.changeField = function(fieldName, newValue, oid){
 	var params = {
 		sid: req.data.sid,
 		controller: "ExitController",
@@ -780,10 +819,25 @@ req.changeField = function(fieldName, newValue, oid) {
 	}
 	
 	params["value--" + fieldName + "-" + oid] = newValue;
-
+	
 	Ext.Ajax.request({
 		url: req.data.jsonUrl,
 		method: "POST",
 		params: params
 	});
+}
+
+req.changeTreeNode = function(node){
+	if (node.id != "root") {
+		var reqClassName = node.id.match(/^[^:]+/);
+		
+		var iconEl = node.ui.getIconEl();
+		iconEl.className += " Figure" + reqClassName;
+		
+		var anchorEl = node.ui.getAnchor();
+		anchorEl.removeAttribute("href");
+	}
+	
+	node.eachChild(req.changeTreeNode);
+	
 }
