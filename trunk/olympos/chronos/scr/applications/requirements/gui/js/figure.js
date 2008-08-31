@@ -17,6 +17,9 @@ cwm.figure.ChiGoal.prototype.type = "cwm.figure.ChiGoal";
 
 cwm.figure.ChiGoal.prototype.getGrid = function(store){
 	return new Ext.grid.GridPanel({
+		id: "GridChiGoal",
+		iconCls: "FigureGraphic FigureChiGoal",
+		layout: "fit",
 		columns: [{
 			header: "ChiGoal",
 			dataIndex: "Name",
@@ -44,12 +47,29 @@ cwm.figure.ChiGoal.prototype.getGrid = function(store){
 				uwm.showProperties(grid.uwmClassName, grid.getStore().getAt(rowIndex).id);
 			},
 			cellcontextmenu: function(grid, rowIndex, columnIndex, e){
+				var node = grid.getStore().getAt(rowIndex);
+				
 				var contextMenu = new Ext.menu.Menu({
-					items: [{
+					items: [new Ext.menu.Item({
+						text: "Show in diagram",
+						handler: function(item, e){
+							var oid = node.id;
+							
+							uwm.showInDiagram(oid);
+						},
+						disabled: !uwm.getByOid(node.id)
+					}), new Ext.menu.Item({
+						text: "Show in Tree",
+						handler: function(item, e){
+							var oid = node.id;
+							
+							uwm.showInTree(oid);
+						}
+					}), "-", {
 						text: "Delete from model",
 						handler: function(){
 							var record = grid.getStore().getAt(rowIndex);
-
+							
 							grid.getStore().remove(record);
 							uwm.deleteFigureFromModel(record.id);
 						}

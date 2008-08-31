@@ -89,6 +89,7 @@ uwm.ui.create = function(){
 					id: "existingFiguresContainer",
 					items: [new Ext.tree.TreePanel({
 						layout: "fit",
+						id: "figureTree",
 						iconCls: "TreeTab",
 						autoScroll: true,
 						enableDD: true,
@@ -185,18 +186,6 @@ uwm.ui.create = function(){
 								}
 							}
 						}),
-						contextMenu: new Ext.menu.Menu({
-							items: [{
-								text: "Delete from model",
-								handler: function(item){
-									var n = item.parentMenu.contextNode;
-									if (n.parentNode) {
-										n.remove();
-									}
-									uwm.deleteFigureFromModel(n.id);
-								}
-							}]
-						}),
 						listeners: {
 							click: function(node, e){
 								var uwmClassName = node.id.match(/[^:]+/);
@@ -204,10 +193,37 @@ uwm.ui.create = function(){
 								uwm.showProperties(uwmClassName, node.id);
 							},
 							contextmenu: function(node, e){
+								var contextMenu = new Ext.menu.Menu({
+									items: [new Ext.menu.Item({
+										text: "Show in diagram",
+										handler: function(item, e){
+											var oid = node.id;
+											
+											uwm.showInDiagram(oid);
+										},
+										disabled: !uwm.getByOid(node.id)
+									}), new Ext.menu.Item({
+										text: "Show in grid",
+										handler: function(item, e){
+											var oid = node.id;
+											var uwmClassName = oid.match(/[^:]+/);
+											
+											uwm.showInGrid(uwmClassName, oid);
+										}
+									}), "-", {
+										text: "Delete from model",
+										handler: function(item){
+											var n = item.parentMenu.contextNode;
+											if (n.parentNode) {
+												n.remove();
+											}
+											uwm.deleteFigureFromModel(n.id);
+										}
+									}]
+								});
 								node.select();
-								var c = node.getOwnerTree().contextMenu;
-								c.contextNode = node;
-								c.showAt(e.getXY());
+								
+								contextMenu.showAt(e.getXY());
 							}
 						}
 					})]
@@ -226,6 +242,7 @@ uwm.ui.create = function(){
 		}, new Ext.BoxComponent({
 			region: "center",
 			el: "viewport",
+			id: "canvas",
 			listeners: {
 				render: function(g){
 					uwm.initializeDropZone(g);
@@ -285,11 +302,7 @@ uwm.ui.createExistingFigureTabs = function(container){
 			
 			uwm.data.stores.add(store);
 			
-			container.add(new Ext.Panel({
-				iconCls: "FigureGraphic Figure" + currFigure,
-				layout: "fit",
-				items: eval(uwm.getModelFunction(currFigure, "getGrid") + "(store)")
-			}));
+			container.add(eval(uwm.getModelFunction(currFigure, "getGrid") + "(store)"));
 		}
 	}
 	

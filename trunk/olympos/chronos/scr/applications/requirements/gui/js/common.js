@@ -122,7 +122,21 @@ uwm.figure.BaseFigure.prototype.showContextMenu = function(e, figure){
 	if (e.button == 2) {
 	
 		var contextMenu = new Ext.menu.Menu({
-			items: ([new Ext.menu.Item({
+			items: [
+			new Ext.menu.Item({
+				text: "Show in tree",
+				handler: function(item, e) {
+					uwm.showInTree(figure.getOid());
+				}
+			}),
+			new Ext.menu.Item({
+				text: "Show in grid",
+				handler: function(item, e) {
+					uwm.showInGrid(figure.getUwmClass(), figure.getOid());
+				}
+			}),
+			"-",
+			new Ext.menu.Item({
 				text: "Delete from diagram",
 				handler: function(item, e){
 					uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
@@ -132,7 +146,7 @@ uwm.figure.BaseFigure.prototype.showContextMenu = function(e, figure){
 				handler: function(tiem, e){
 					uwm.deleteFigureFromModel(figure.getOid());
 				}
-			})])
+			})]
 		});
 		
 		contextMenu.showAt(e.xy);
@@ -1002,4 +1016,37 @@ uwm.deleteConnectionFromModel = function(parentOid, childOid){
 		associateoids: childOid,
 		associateAs: "parent"
 	})
+}
+
+uwm.showInTree = function(oid) {
+	var tree = Ext.getCmp("figureTree");
+	tree.show();
+	
+	var node = tree.getNodeById(oid);
+	
+	node.ensureVisible();
+	node.select();
+}
+
+uwm.showInGrid = function(uwmClassName, oid) {
+	var grid = Ext.getCmp("Grid"+ uwmClassName);
+	grid.show();
+	
+	var store = grid.getStore();
+	var index = store.indexOfId(oid);
+	
+	var selection = grid.getSelectionModel();
+	selection.selectRow(index);
+
+	var view = grid.getView();
+	view.focusRow(index);
+	view.refresh();
+}
+
+uwm.showInDiagram = function(oid) {
+	var figure = uwm.getByOid(oid);
+	
+	var canvas = Ext.getCmp("canvas");
+	
+	uwm.ui.workflow.scrollTo(figure.x - canvas.getSize()["width"] / 2 + figure.getWidth() / 2, figure.y - canvas.getSize()["height"] / 2 + figure.getHeight() / 2);
 }
