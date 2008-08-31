@@ -66,7 +66,7 @@ uwm.ui.create = function(){
 			title: "Available Content",
 			collapsible: true,
 			split: true,
-			width: 300,
+			width: 250,
 			layout: "fit",
 			id: "contentContainer",
 			items: {
@@ -77,7 +77,7 @@ uwm.ui.create = function(){
 					collapsible: true,
 					split: true,
 					autoScroll: true,
-					height: 300,
+					height: 250,
 					id: "newFiguresContainer"
 				}, {
 					region: "center",
@@ -215,47 +215,14 @@ uwm.ui.create = function(){
 			}
 		}, {
 			region: "east",
-			title: "Settings",
 			collapsible: true,
 			split: true,
-			width: 200,
+			width: 250,
 			layout: "fit",
-			items: {
-				layout: "border",
-				items: [{
-					region: "north",
-					title: "Controls",
-					collapsible: true,
-					split: true,
-					height: 100,
-					id: "controlsContainer",
-					items: [new Ext.Button({
-						enableToggle: true,
-						text: "Snap to Objects",
-						toggleHandler: function(self, pressed){
-							uwm.ui.workflow.setSnapToGeometry(pressed);
-						}
-					}), new Ext.Button({
-						text: "Undo",
-						disabled: true,
-						id: "undoButton",
-						handler: function(self, oEvent){
-							uwm.ui.workflow.getCommandStack().undo();
-						}
-					}), new Ext.Button({
-						text: "Redo",
-						disabled: true,
-						id: "redoButton",
-						handler: function(self, oEvent){
-							uwm.ui.workflow.getCommandStack().redo();
-						}
-					})]
-				}, {
-					region: "center",
-					title: "Properties",
-					id: "propertiesContainer"
-				}]
-			}
+			title: "Properties",
+			items: [{
+				id: "propertiesContainer"
+			}]
 		}, new Ext.BoxComponent({
 			region: "center",
 			el: "viewport",
@@ -341,8 +308,32 @@ uwm.ui.initWorkflow = function(){
 	var propertyHandler = new uwm.PropertyHandler();
 	uwm.ui.workflow.addSelectionListener(propertyHandler);
 	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(propertyHandler);
-	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(new uwm.UndoButtonHandler(Ext.getCmp("undoButton"), Ext.getCmp("redoButton")));
 	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(new uwm.DeleteHandler());
+	
+	uwm.data.snapToObjects = false;
+	
+	Ext.fly("canvas").on("mousedown", function(e){
+		if (e.button == 2) {
+			var contextMenu = new Ext.menu.Menu({
+				items: [new Ext.menu.CheckItem({
+					text: "Snap to objects",
+					checked: uwm.data.snapToObjects,
+					listeners: {
+						checkchange: function(self, checked){
+							uwm.data.snapToObjects = checked;
+							uwm.ui.workflow.setSnapToGeometry(checked);
+						}
+					}
+				})]
+			});
+			
+			contextMenu.showAt(e.xy);
+			
+			e.stopEvent();
+			
+			return false;
+		}
+	});
 }
 
 
