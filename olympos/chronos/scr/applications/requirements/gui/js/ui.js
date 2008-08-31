@@ -157,9 +157,10 @@ uwm.ui.create = function(){
 									
 									if (uwm.connection.getConstraints(targetUwmClassName, sourceUwmClassName).relationship == "child") {
 										//result = true
-									} else {
+									}
+									else {
 										result = false;
-									} 
+									}
 									
 								}
 								
@@ -184,11 +185,29 @@ uwm.ui.create = function(){
 								}
 							}
 						}),
+						contextMenu: new Ext.menu.Menu({
+							items: [{
+								text: "Delete from model",
+								handler: function(item){
+									var n = item.parentMenu.contextNode;
+									if (n.parentNode) {
+										n.remove();
+									}
+									uwm.deleteFigureFromModel(n.id);
+								}
+							}]
+						}),
 						listeners: {
 							click: function(node, e){
 								var uwmClassName = node.id.match(/[^:]+/);
 								
 								uwm.showProperties(uwmClassName, node.id);
+							},
+							contextmenu: function(node, e){
+								node.select();
+								var c = node.getOwnerTree().contextMenu;
+								c.contextNode = node;
+								c.showAt(e.getXY());
 							}
 						}
 					})]
@@ -295,7 +314,7 @@ uwm.ui.createExistingFigureTabs = function(container){
 		var storeString = uwm.getModelFunction(currFigure, "getStore");
 		
 		if (storeString) {
-			var store =  eval(storeString+ "()");
+			var store = eval(storeString + "()");
 			
 			uwm.data.stores.add(store);
 			
@@ -323,6 +342,7 @@ uwm.ui.initWorkflow = function(){
 	uwm.ui.workflow.addSelectionListener(propertyHandler);
 	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(propertyHandler);
 	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(new uwm.UndoButtonHandler(Ext.getCmp("undoButton"), Ext.getCmp("redoButton")));
+	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(new uwm.DeleteHandler());
 }
 
 
