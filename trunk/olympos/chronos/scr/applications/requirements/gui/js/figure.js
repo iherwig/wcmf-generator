@@ -40,8 +40,27 @@ cwm.figure.ChiGoal.prototype.getGrid = function(store){
 		ddGroup: "gridDDGroup",
 		uwmClassName: "ChiGoal",
 		listeners: {
-			cellclick: function(grid, rowIndex, columnIndex, e) {
+			cellclick: function(grid, rowIndex, columnIndex, e){
 				uwm.showProperties(grid.uwmClassName, grid.getStore().getAt(rowIndex).id);
+			},
+			cellcontextmenu: function(grid, rowIndex, columnIndex, e){
+				var contextMenu = new Ext.menu.Menu({
+					items: [{
+						text: "Delete from model",
+						handler: function(){
+							var record = grid.getStore().getAt(rowIndex);
+
+							grid.getStore().remove(record);
+							uwm.deleteFigureFromModel(record.id);
+						}
+					}]
+				});
+				
+				contextMenu.showAt(e.getXY());
+				
+				e.stopPropagation();
+				
+				return false;
 			}
 		}
 	});
@@ -172,27 +191,25 @@ cwm.figure.ChiGoal.prototype.showEdit = function(bd, oid){
 	
 	
 	uwm.jsonRequest({
-			usr_action: "display",
-			oid: oid
-		}, "Loading properties",
-		function(data){
-			var realForm = form.getForm();
-			
-			
-			realForm.findField("Priority").setValue(data.node.values[1].Priority.value);
-			realForm.findField("Value_Name").setValue(data.node.values[1].Value_Name.value);
-			realForm.findField("Value_ammount").setValue(data.node.values[1].Value_ammount.value);
-			realForm.findField("Value_Goal").setValue(data.node.values[1].Value_Goal.value);
-			realForm.findField("Alias").setValue(data.node.values[1].Alias.value);
-			realForm.findField("Version").setValue(data.node.values[1].Version.value);
-			realForm.findField("Name").setValue(data.node.values[1].Name.value);
-			realForm.findField("Notes").setValue(data.node.values[1].Notes.value);
-			realForm.findField("created").setValue(data.node.values[1].created.value);
-			realForm.findField("creator").setValue(data.node.values[1].creator.value);
-			realForm.findField("last_editor").setValue(data.node.values[1].last_editor.value);
-			realForm.findField("modified").setValue(data.node.values[1].modified.value);
-		}
-	);
+		usr_action: "display",
+		oid: oid
+	}, "Loading properties", function(data){
+		var realForm = form.getForm();
+		
+		
+		realForm.findField("Priority").setValue(data.node.values[1].Priority.value);
+		realForm.findField("Value_Name").setValue(data.node.values[1].Value_Name.value);
+		realForm.findField("Value_ammount").setValue(data.node.values[1].Value_ammount.value);
+		realForm.findField("Value_Goal").setValue(data.node.values[1].Value_Goal.value);
+		realForm.findField("Alias").setValue(data.node.values[1].Alias.value);
+		realForm.findField("Version").setValue(data.node.values[1].Version.value);
+		realForm.findField("Name").setValue(data.node.values[1].Name.value);
+		realForm.findField("Notes").setValue(data.node.values[1].Notes.value);
+		realForm.findField("created").setValue(data.node.values[1].created.value);
+		realForm.findField("creator").setValue(data.node.values[1].creator.value);
+		realForm.findField("last_editor").setValue(data.node.values[1].last_editor.value);
+		realForm.findField("modified").setValue(data.node.values[1].modified.value);
+	});
 };
 cwm.figure.ChiGoal.prototype.getConstraints = function(){
 	return {

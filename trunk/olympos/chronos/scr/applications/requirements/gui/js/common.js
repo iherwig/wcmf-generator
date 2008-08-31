@@ -43,9 +43,18 @@ uwm.figure.BaseFigure.prototype.setWorkflow = function(workflow){
 		this.port.setWorkflow(workflow);
 		this.addPort(this.port, this.width + 8, 0);
 	}
+	
+	var htmlElem = this.getHTMLElement();
+	if (htmlElem) {
+		var self = this;
+		
+		Ext.fly(htmlElem).on("mousedown", function(e){
+			self.showContextMenu(e, self)
+		})
+	}
 }
 
-uwm.figure.BaseFigure.prototype.getuwmClass = function(){
+uwm.figure.BaseFigure.prototype.getUwmClass = function(){
 	return this.uwmClassName;
 }
 
@@ -90,6 +99,7 @@ uwm.figure.BaseFigure.prototype.setDimension = function(width, height){
 
 uwm.figure.BaseFigure.prototype.createHTMLElement = function(){
 	var item = draw2d.Figure.prototype.createHTMLElement.call(this);
+	item.className = "uwmFigure";
 	
 	uwm.setUnselectable(item);
 	
@@ -105,6 +115,31 @@ uwm.figure.BaseFigure.prototype.setLabel = function(newText){
 uwm.figure.BaseFigure.prototype.getLabel = function(){
 	if (this.label) {
 		return this.label.innerHTML;
+	}
+}
+
+uwm.figure.BaseFigure.prototype.showContextMenu = function(e, figure){
+	if (e.button == 2) {
+	
+		var contextMenu = new Ext.menu.Menu({
+			items: ([new Ext.menu.Item({
+				text: "Delete from diagram",
+				handler: function(item, e){
+					uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
+				}
+			}), new Ext.menu.Item({
+				text: "Delete from model",
+				handler: function(tiem, e){
+					uwm.deleteFigureFromModel(figure.getOid());
+				}
+			})])
+		});
+		
+		contextMenu.showAt(e.xy);
+		
+		e.stopEvent();
+		
+		return false;
 	}
 }
 
@@ -135,7 +170,7 @@ uwm.figure.RectFigure.prototype.createHTMLElement = function(){
 	this.label.style.overflow = "hidden";
 	
 	this.image = document.createElement("div");
-	this.image.className = "Figure" + this.getuwmClass();
+	this.image.className = "Figure" + this.getUwmClass();
 	this.image.style.position = "absolute";
 	this.image.style.top = "2px";
 	this.image.style.right = "2px";
@@ -260,9 +295,49 @@ uwm.connection.BaseConnection = function(label){
 uwm.connection.BaseConnection.prototype = new draw2d.Connection();
 uwm.connection.BaseConnection.prototype.type = "uwm.connection.BaseConnection";
 
+uwm.connection.BaseConnection.prototype.setWorkflow = function(workflow){
+	draw2d.Connection.prototype.setWorkflow.call(this, workflow);
+	
+	var htmlElem = this.getHTMLElement();
+	if (htmlElem) {
+		var self = this;
+		
+		Ext.fly(htmlElem).on("mousedown", function(e){
+			self.showContextMenu(e, self)
+		})
+	}
+}
+
 uwm.connection.BaseConnection.prototype.getLabel = function(){
 	return this.label;
 }
+
+uwm.connection.BaseConnection.prototype.showContextMenu = function(e, connection){
+	if (e.button == 2) {
+	
+		var contextMenu = new Ext.menu.Menu({
+			items: ([new Ext.menu.Item({
+				text: "Delete from diagram",
+				handler: function(item, e){
+					uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
+				}
+			}), new Ext.menu.Item({
+				text: "Delete from model",
+				handler: function(tiem, e){
+					uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
+					uwm.deleteConnectionFromModel(connection.sourcePort.parentNode.getOid(), connection.targetPort.parentNode.getOid());
+				}
+			})])
+		});
+		
+		contextMenu.showAt(e.xy);
+		
+		e.stopEvent();
+		
+		return false;
+	}
+}
+
 
 
 uwm.connection.ArrowDecorator = function(){
@@ -315,7 +390,7 @@ uwm.connection.Port.prototype.type = "uwm.connection.Port";
 
 
 uwm.connection.Port.prototype.onDragEnter = function(port){
-	var connectionData = uwm.connection.getConstraints(port.parentNode.getuwmClass(), this.parentNode.getuwmClass());
+	var connectionData = uwm.connection.getConstraints(port.parentNode.getUwmClass(), this.parentNode.getUwmClass());
 	
 	if (connectionData != null && this.checkConnection(port, this, connectionData)) {
 		draw2d.Port.prototype.onDragEnter.call(this, port);
@@ -327,7 +402,7 @@ uwm.connection.Port.prototype.onDrop = function(port){
 		// same parentNode -> do nothing
 	}
 	else {
-		var connectionData = uwm.connection.getConstraints(this.parentNode.getuwmClass(), port.parentNode.getuwmClass());
+		var connectionData = uwm.connection.getConstraints(this.parentNode.getUwmClass(), port.parentNode.getUwmClass());
 		
 		if (connectionData != null && this.checkConnection(this, port, connectionData)) {
 			if (connectionData.inverse) {
@@ -365,8 +440,8 @@ uwm.connection.Port.prototype.checkConnection = function(sourcePort, targetPort,
 	var sourceConnections = 0;
 	var targetConnections = 0;
 	
-	var sourceClass = targetPort.parentNode.getuwmClass();
-	var targetClass = sourcePort.parentNode.getuwmClass();
+	var sourceClass = targetPort.parentNode.getUwmClass();
+	var targetClass = sourcePort.parentNode.getUwmClass();
 	
 	
 	result = this.testConnections(sourcePort, targetPort, sourceClass, connectionData.sourceMaxConns);
@@ -395,7 +470,7 @@ uwm.connection.Port.prototype.testConnections = function(thisPort, otherPort, cl
 		if (maxConns != -1) {
 			var foreignPort = connection.targetPort != thisPort ? connection.targetPort : connection.sourcePort;
 			
-			if (foreignPort.parentNode.getuwmClass() == className) {
+			if (foreignPort.parentNode.getUwmClass() == className) {
 				connCount++;
 				if (connCount >= maxConns) {
 					result = false;
@@ -445,8 +520,8 @@ uwm.PropertyHandler.prototype.onSelectionChanged = function(figure){
 	if (figure != null && figure.getOid != null && figure.getOid() != this.currentSelectionOid) {
 		this.currentSelectionOid = figure.getOid();
 		
-		if (figure.getuwmClass) {
-			var uwmClassName = figure.getuwmClass();
+		if (figure.getUwmClass) {
+			var uwmClassName = figure.getUwmClass();
 			
 			uwm.showProperties(uwmClassName, figure.getOid());
 		}
@@ -472,6 +547,26 @@ uwm.PropertyHandler.prototype.stackChanged = function(event){
 		
 	}
 }
+
+
+uwm.DeleteHandler = function(){
+
+}
+
+uwm.DeleteHandler.prototype = new draw2d.CommandStackEventListener;
+
+uwm.DeleteHandler.prototype.stackChanged = function(event){
+	var command = event.getCommand();
+	
+	if (command instanceof draw2d.CommandDelete) {
+		var source = command.figure;
+		
+		if (source instanceof uwm.figure.BaseFigure) {
+			uwm.removeOid(source.getOid());
+		}
+	}
+}
+
 
 uwm.showProperties = function(uwmClassName, oid){
 	var target = Ext.get("propertiesContainer");
@@ -613,7 +708,7 @@ uwm.establishExistingConnections = function(drawElem, list){
 			var target = uwm.getByOid(list[i]);
 			
 			if (target) {
-				var connectionData = uwm.connection.getConstraints(drawElem.getuwmClass(), target.getuwmClass());
+				var connectionData = uwm.connection.getConstraints(drawElem.getUwmClass(), target.getUwmClass());
 				
 				if (connectionData != null && drawElem.getPorts().get(0).checkConnection(drawElem.getPorts().get(0), target.getPorts().get(0), connectionData)) {
 					if (connectionData.inverse) {
@@ -733,16 +828,15 @@ uwm.handleLogin = function(data, form){
 }
 
 uwm.util.showMessage = function(title, message){
-	var messageContainer = Ext.getCmp("messageContainer");
+	var messageContainer = Ext.get("messageContainer");
 	if (!messageContainer) {
 		messageContainer = Ext.DomHelper.insertFirst(document.body, {
-			id: "messageContainer",
-			style: "z-index: 30000;"
+			id: "messageContainer"
 		}, true);
 	}
 	messageContainer.alignTo(document, 't-t');
 	var messageBox = Ext.DomHelper.append(messageContainer, {
-		html: '<div class="msg">' +
+		html: '<div>' +
 		'<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>' +
 		'<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>' +
 		title +
@@ -752,7 +846,7 @@ uwm.util.showMessage = function(title, message){
 		'<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>' +
 		'</div>'
 	}, true);
-	messageBox.slideIn('t').pause(1).ghost("t", {
+	messageBox.slideIn('t').pause(3).ghost("t", {
 		remove: true
 	});
 }
@@ -781,6 +875,10 @@ uwm.util.deg2rad = function(deg){
 
 uwm.addOid = function(oid, figure){
 	uwm.data.oidList[oid] = figure;
+}
+
+uwm.removeOid = function(oid){
+	uwm.data.oidList[oid] = null;
 }
 
 uwm.getByOid = function(oid){
@@ -831,7 +929,7 @@ uwm.util.sleep = function(milliseconds){
 uwm.processConfig = function(){
 	Ext.namespace(uwm.config.namespace, uwm.config.namespace + ".figure");
 	
-	Ext.getDom("title").innerHTML = uwm.config.appTitle;
+	document.title = uwm.config.appTitle;
 }
 
 uwm.getModelFunction = function(uwmClassName, functionName){
@@ -891,10 +989,31 @@ uwm.jsonRequest = function(params, context, successFunction, failureFunction){
 			}
 			else {
 				uwm.util.showMessage("JSON request failed", "JSON request failed.");
-					if (failureFunction) {
-						failureFunction(null, options);
-					}
+				if (failureFunction) {
+					failureFunction(null, options);
+				}
 			}
 		}
 	});
+}
+
+uwm.deleteFigureFromModel = function(oid){
+	var figure = uwm.getByOid(oid);
+	if (figure) {
+		uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
+	}
+	
+	uwm.jsonRequest({
+		usr_action: "delete",
+		deleteoids: oid
+	}, "Deleting element");
+}
+
+uwm.deleteConnectionFromModel = function(parentOid, childOid){
+	uwm.jsonRequest({
+		usr_action: "disassociate",
+		oid: parentOid,
+		associateoids: childOid,
+		associateAs: "parent"
+	})
 }

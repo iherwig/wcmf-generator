@@ -26,3 +26,8 @@
 	min-width: 4px;
 	background-image: url("../img/tree.png");
 }
+
+#messageContainer {
+	width: 55%;
+	z-index: 30000;
+}
