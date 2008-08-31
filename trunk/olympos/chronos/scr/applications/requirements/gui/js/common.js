@@ -1,6 +1,6 @@
-Ext.namespace("req", "req.ui", "req.figure", "req.data", "req.connection", "req.util");
+Ext.namespace("uwm", "uwm.ui", "uwm.config", "uwm.figure", "uwm.data", "uwm.connection", "uwm.util");
 
-req.setUnselectable = function(elem){
+uwm.setUnselectable = function(elem){
 	if (elem) {
 		elem.style.MozUserSelect = "none";
 		elem.style.KhtmlUserSelect = "none";
@@ -8,10 +8,10 @@ req.setUnselectable = function(elem){
 	}
 }
 
-req.data.oidList = new Array();
+uwm.data.oidList = new Array();
 
-req.figure.BaseFigure = function(reqClassName, label, oid, parentoids, childoids, minWidth, minHeight, startWidth, startHeight){
-	this.reqClassName = reqClassName;
+uwm.figure.BaseFigure = function(uwmClassName, label, oid, parentoids, childoids, minWidth, minHeight, startWidth, startHeight){
+	this.uwmClassName = uwmClassName;
 	this.minWidth = minWidth;
 	this.minHeight = minHeight;
 	
@@ -20,7 +20,7 @@ req.figure.BaseFigure = function(reqClassName, label, oid, parentoids, childoids
 	this.childoids = childoids;
 	
 	if (oid) {
-		req.addOid(oid, this);
+		uwm.addOid(oid, this);
 	}
 	
 	draw2d.VectorFigure.call(this);
@@ -33,23 +33,23 @@ req.figure.BaseFigure = function(reqClassName, label, oid, parentoids, childoids
 	}
 }
 
-req.figure.BaseFigure.prototype = new draw2d.VectorFigure;
+uwm.figure.BaseFigure.prototype = new draw2d.VectorFigure;
 
-req.figure.BaseFigure.prototype.setWorkflow = function(workflow){
+uwm.figure.BaseFigure.prototype.setWorkflow = function(workflow){
 	draw2d.VectorFigure.prototype.setWorkflow.call(this, workflow);
 	
 	if (workflow != null && this.port == null) {
-		this.port = new req.connection.Port();
+		this.port = new uwm.connection.Port();
 		this.port.setWorkflow(workflow);
 		this.addPort(this.port, this.width + 8, 0);
 	}
 }
 
-req.figure.BaseFigure.prototype.getReqClass = function(){
-	return this.reqClassName;
+uwm.figure.BaseFigure.prototype.getuwmClass = function(){
+	return this.uwmClassName;
 }
 
-req.figure.BaseFigure.prototype.getMinWidth = function(){
+uwm.figure.BaseFigure.prototype.getMinWidth = function(){
 	var result = draw2d.VectorFigure.prototype.getMinWidth.call(this);
 	
 	if (this.minWidth) {
@@ -58,7 +58,7 @@ req.figure.BaseFigure.prototype.getMinWidth = function(){
 	return result;
 }
 
-req.figure.BaseFigure.prototype.getMinHeight = function(){
+uwm.figure.BaseFigure.prototype.getMinHeight = function(){
 	var result = draw2d.VectorFigure.prototype.getMinHeight.call(this);
 	
 	if (this.minHeight) {
@@ -68,19 +68,19 @@ req.figure.BaseFigure.prototype.getMinHeight = function(){
 	return result;
 }
 
-req.figure.BaseFigure.prototype.getParentOids = function(){
+uwm.figure.BaseFigure.prototype.getParentOids = function(){
 	return this.parentoids;
 }
 
-req.figure.BaseFigure.prototype.getChildOids = function(){
+uwm.figure.BaseFigure.prototype.getChildOids = function(){
 	return this.childoids;
 }
 
-req.figure.BaseFigure.prototype.getOid = function(){
+uwm.figure.BaseFigure.prototype.getOid = function(){
 	return this.oid;
 }
 
-req.figure.BaseFigure.prototype.setDimension = function(width, height){
+uwm.figure.BaseFigure.prototype.setDimension = function(width, height){
 	draw2d.VectorFigure.prototype.setDimension.call(this, width, height);
 	
 	if (this.port != null) {
@@ -88,21 +88,21 @@ req.figure.BaseFigure.prototype.setDimension = function(width, height){
 	}
 }
 
-req.figure.BaseFigure.prototype.createHTMLElement = function(){
+uwm.figure.BaseFigure.prototype.createHTMLElement = function(){
 	var item = draw2d.Figure.prototype.createHTMLElement.call(this);
 	
-	req.setUnselectable(item);
+	uwm.setUnselectable(item);
 	
 	return item;
 }
 
-req.figure.BaseFigure.prototype.setLabel = function(newText){
+uwm.figure.BaseFigure.prototype.setLabel = function(newText){
 	if (this.label) {
 		this.label.innerHTML = newText;
 	}
 }
 
-req.figure.BaseFigure.prototype.getLabel = function(){
+uwm.figure.BaseFigure.prototype.getLabel = function(){
 	if (this.label) {
 		return this.label.innerHTML;
 	}
@@ -110,14 +110,14 @@ req.figure.BaseFigure.prototype.getLabel = function(){
 
 
 
-req.figure.RectFigure = function(reqClassName, label, oid, parentoids, childoids){
-	req.figure.BaseFigure.call(this, reqClassName, label, oid, parentoids, childoids, 80, 30, 150, 50);
+uwm.figure.RectFigure = function(uwmClassName, label, oid, parentoids, childoids){
+	uwm.figure.BaseFigure.call(this, uwmClassName, label, oid, parentoids, childoids, 80, 30, 150, 50);
 }
 
-req.figure.RectFigure.prototype = new req.figure.BaseFigure;
+uwm.figure.RectFigure.prototype = new uwm.figure.BaseFigure;
 
-req.figure.RectFigure.prototype.setDimension = function(width, height){
-	req.figure.BaseFigure.prototype.setDimension.call(this, width, height);
+uwm.figure.RectFigure.prototype.setDimension = function(width, height){
+	uwm.figure.BaseFigure.prototype.setDimension.call(this, width, height);
 	
 	if (this.label != null) {
 		this.label.style.width = this.getWidth() - 40 + "px";
@@ -125,8 +125,8 @@ req.figure.RectFigure.prototype.setDimension = function(width, height){
 	}
 }
 
-req.figure.RectFigure.prototype.createHTMLElement = function(){
-	var item = req.figure.BaseFigure.prototype.createHTMLElement.call(this);
+uwm.figure.RectFigure.prototype.createHTMLElement = function(){
+	var item = uwm.figure.BaseFigure.prototype.createHTMLElement.call(this);
 	
 	this.label = document.createElement("div");
 	this.label.style.position = "absolute";
@@ -135,7 +135,7 @@ req.figure.RectFigure.prototype.createHTMLElement = function(){
 	this.label.style.overflow = "hidden";
 	
 	this.image = document.createElement("div");
-	this.image.className = "Figure" + this.getReqClass();
+	this.image.className = "Figure" + this.getuwmClass();
 	this.image.style.position = "absolute";
 	this.image.style.top = "2px";
 	this.image.style.right = "2px";
@@ -146,8 +146,8 @@ req.figure.RectFigure.prototype.createHTMLElement = function(){
 	return item;
 }
 
-req.figure.RectFigure.prototype.paint = function(){
-	req.figure.BaseFigure.prototype.paint.call(this);
+uwm.figure.RectFigure.prototype.paint = function(){
+	uwm.figure.BaseFigure.prototype.paint.call(this);
 	
 	var width = this.getWidth() - 1;
 	var height = this.getHeight() - 1;
@@ -165,39 +165,39 @@ req.figure.RectFigure.prototype.paint = function(){
 
 
 
-req.figure.ComplexFigure = function(reqClassName, label, minWidth, minHeight, startWidth, startHeight){
-	req.figure.BaseFigure.call(this, reqClassName, label, minWidth, minHeight, startWidth, startHeight);
+uwm.figure.ComplexFigure = function(uwmClassName, label, minWidth, minHeight, startWidth, startHeight){
+	uwm.figure.BaseFigure.call(this, uwmClassName, label, minWidth, minHeight, startWidth, startHeight);
 }
 
-req.figure.ComplexFigure.prototype = new req.figure.BaseFigure;
+uwm.figure.ComplexFigure.prototype = new uwm.figure.BaseFigure;
 
-req.figure.ComplexFigure.prototype.setDimension = function(width, height){
-	req.figure.BaseFigure.prototype.setDimension.call(this, width, height);
+uwm.figure.ComplexFigure.prototype.setDimension = function(width, height){
+	uwm.figure.BaseFigure.prototype.setDimension.call(this, width, height);
 	
 	this.setLabelDimension();
 }
 
-req.figure.ComplexFigure.prototype.setLabelDimension = function(){
+uwm.figure.ComplexFigure.prototype.setLabelDimension = function(){
 
 }
 
 
 
-req.figure.LabelBelowFigure = function(reqClassName, label, minWidth, minHeight, startWidth, startHeight){
-	req.figure.ComplexFigure.call(this, reqClassName, label, minWidth, minHeight, startWidth, startHeight);
+uwm.figure.LabelBelowFigure = function(uwmClassName, label, minWidth, minHeight, startWidth, startHeight){
+	uwm.figure.ComplexFigure.call(this, uwmClassName, label, minWidth, minHeight, startWidth, startHeight);
 }
 
-req.figure.LabelBelowFigure.prototype = new req.figure.ComplexFigure;
+uwm.figure.LabelBelowFigure.prototype = new uwm.figure.ComplexFigure;
 
-req.figure.LabelBelowFigure.prototype.setLabelDimension = function(){
+uwm.figure.LabelBelowFigure.prototype.setLabelDimension = function(){
 	if (this.label != null) {
 		this.label.style.left = (-(this.label.clientWidth - this.width) / 2) + "px";
 	}
 	
 }
 
-req.figure.LabelBelowFigure.prototype.createHTMLElement = function(){
-	var item = req.figure.ComplexFigure.prototype.createHTMLElement.call(this);
+uwm.figure.LabelBelowFigure.prototype.createHTMLElement = function(){
+	var item = uwm.figure.ComplexFigure.prototype.createHTMLElement.call(this);
 	
 	this.label = document.createElement("div");
 	this.label.style.position = "absolute";
@@ -211,14 +211,14 @@ req.figure.LabelBelowFigure.prototype.createHTMLElement = function(){
 
 
 
-req.figure.LabelCenterFigure = function(reqClassName, label, minWidth, minHeight, startWidth, startHeight){
-	req.figure.ComplexFigure.call(this, reqClassName, label, minWidth, minHeight, startWidth, startHeight);
+uwm.figure.LabelCenterFigure = function(uwmClassName, label, minWidth, minHeight, startWidth, startHeight){
+	uwm.figure.ComplexFigure.call(this, uwmClassName, label, minWidth, minHeight, startWidth, startHeight);
 }
 
-req.figure.LabelCenterFigure.prototype = new req.figure.ComplexFigure;
+uwm.figure.LabelCenterFigure.prototype = new uwm.figure.ComplexFigure;
 
-req.figure.LabelCenterFigure.prototype.createHTMLElement = function(){
-	var item = req.figure.ComplexFigure.prototype.createHTMLElement.call(this);
+uwm.figure.LabelCenterFigure.prototype.createHTMLElement = function(){
+	var item = uwm.figure.ComplexFigure.prototype.createHTMLElement.call(this);
 	
 	this.label = document.createElement("div");
 	this.label.style.position = "absolute";
@@ -233,10 +233,10 @@ req.figure.LabelCenterFigure.prototype.createHTMLElement = function(){
 
 
 
-req.connection.BaseConnection = function(label){
+uwm.connection.BaseConnection = function(label){
 	draw2d.Connection.call(this);
 	
-	this.setTargetDecorator(new req.connection.ArrowDecorator());
+	this.setTargetDecorator(new uwm.connection.ArrowDecorator());
 	
 	this.setSourceAnchor(new draw2d.ChopboxConnectionAnchor(this));
 	this.setTargetAnchor(new draw2d.ChopboxConnectionAnchor(this));
@@ -251,28 +251,28 @@ req.connection.BaseConnection = function(label){
 		this.createHTMLElement();
 		this.html = this.getHTMLElement();
 		
-		this.addFigure(this.label, new req.connection.MidpointLocator(this));
+		this.addFigure(this.label, new uwm.connection.MidpointLocator(this));
 	}
 	
 	this.setDeleteable(true);
 }
 
-req.connection.BaseConnection.prototype = new draw2d.Connection();
-req.connection.BaseConnection.prototype.type = "req.connection.BaseConnection";
+uwm.connection.BaseConnection.prototype = new draw2d.Connection();
+uwm.connection.BaseConnection.prototype.type = "uwm.connection.BaseConnection";
 
-req.connection.BaseConnection.prototype.getLabel = function(){
+uwm.connection.BaseConnection.prototype.getLabel = function(){
 	return this.label;
 }
 
 
-req.connection.ArrowDecorator = function(){
+uwm.connection.ArrowDecorator = function(){
 	this.setBackgroundColor(new draw2d.Color(255, 255, 255));
 }
 
-req.connection.ArrowDecorator.prototype = new draw2d.ConnectionDecorator;
-req.connection.ArrowDecorator.prototype.type = "req.connection.ArrowDecorator";
+uwm.connection.ArrowDecorator.prototype = new draw2d.ConnectionDecorator;
+uwm.connection.ArrowDecorator.prototype.type = "uwm.connection.ArrowDecorator";
 
-req.connection.ArrowDecorator.prototype.paint = function(g){
+uwm.connection.ArrowDecorator.prototype.paint = function(g){
 	g.setColor(this.color);
 	g.setStroke(1);
 	g.drawLine(20, 8, 0, 0);
@@ -280,15 +280,15 @@ req.connection.ArrowDecorator.prototype.paint = function(g){
 }
 
 
-req.connection.MidpointLocator = function(connection){
+uwm.connection.MidpointLocator = function(connection){
 	draw2d.ConnectionLocator.call(this, connection);
 }
 
-req.connection.MidpointLocator.prototype = new draw2d.ConnectionLocator;
+uwm.connection.MidpointLocator.prototype = new draw2d.ConnectionLocator;
 
-req.connection.MidpointLocator.prototype.type = "req.connection.MidpointLocator";
+uwm.connection.MidpointLocator.prototype.type = "uwm.connection.MidpointLocator";
 
-req.connection.MidpointLocator.prototype.relocate = function(target){
+uwm.connection.MidpointLocator.prototype.relocate = function(target){
 	var conn = this.getConnection();
 	var p = new draw2d.Point();
 	var points = conn.getPoints();
@@ -304,30 +304,30 @@ req.connection.MidpointLocator.prototype.relocate = function(target){
 
 
 
-req.connection.Port = function(){
-	draw2d.Port.call(this, new req.connection.PortGraphics());
+uwm.connection.Port = function(){
+	draw2d.Port.call(this, new uwm.connection.PortGraphics());
 	
 	this.setDimension(10, 10);
 }
 
-req.connection.Port.prototype = new draw2d.Port;
-req.connection.Port.prototype.type = "req.connection.Port";
+uwm.connection.Port.prototype = new draw2d.Port;
+uwm.connection.Port.prototype.type = "uwm.connection.Port";
 
 
-req.connection.Port.prototype.onDragEnter = function(port){
-	var connectionData = req.connection.getConstraints(port.parentNode.getReqClass(), this.parentNode.getReqClass());
+uwm.connection.Port.prototype.onDragEnter = function(port){
+	var connectionData = uwm.connection.getConstraints(port.parentNode.getuwmClass(), this.parentNode.getuwmClass());
 	
 	if (connectionData != null && this.checkConnection(port, this, connectionData)) {
 		draw2d.Port.prototype.onDragEnter.call(this, port);
 	}
 }
 
-req.connection.Port.prototype.onDrop = function(port){
+uwm.connection.Port.prototype.onDrop = function(port){
 	if (this.parentNode.id == port.parentNode.id) {
 		// same parentNode -> do nothing
 	}
 	else {
-		var connectionData = req.connection.getConstraints(this.parentNode.getReqClass(), port.parentNode.getReqClass());
+		var connectionData = uwm.connection.getConstraints(this.parentNode.getuwmClass(), port.parentNode.getuwmClass());
 		
 		if (connectionData != null && this.checkConnection(this, port, connectionData)) {
 			if (connectionData.inverse) {
@@ -340,39 +340,33 @@ req.connection.Port.prototype.onDrop = function(port){
 			}
 			
 			var command = new draw2d.CommandConnect(this.parentNode.workflow, startPort, endPort);
-			command.setConnection(new req.connection.BaseConnection(connectionData.label));
+			command.setConnection(new uwm.connection.BaseConnection(connectionData.label));
 			this.parentNode.workflow.getCommandStack().execute(command);
 			
-			req.postConnection(startPort.parentNode.getOid(), endPort.parentNode.getOid());
+			uwm.postConnection(startPort.parentNode.getOid(), endPort.parentNode.getOid());
 		}
 		
 	}
 }
 
-req.postConnection = function(parentOid, childOid) {
-		Ext.Ajax.request({
-		url: req.data.jsonUrl,
-		method: "post",
-		params: {
-			sid: req.data.sid,
-			usr_action: "associate",
-			response_format: "JSON",
-			oid: parentOid,
-			associateoids: childOid,
-			associateAs: "parent"
-		},
-	});
-
+uwm.postConnection = function(parentOid, childOid){
+	uwm.jsonRequest({
+		usr_action: "associate",
+		oid: parentOid,
+		associateoids: childOid,
+		associateAs: "parent"
+	}, "Creating new connection");
+	
 }
 
-req.connection.Port.prototype.checkConnection = function(sourcePort, targetPort, connectionData){
+uwm.connection.Port.prototype.checkConnection = function(sourcePort, targetPort, connectionData){
 	var result = true;
 	
 	var sourceConnections = 0;
 	var targetConnections = 0;
 	
-	var sourceClass = targetPort.parentNode.getReqClass();
-	var targetClass = sourcePort.parentNode.getReqClass();
+	var sourceClass = targetPort.parentNode.getuwmClass();
+	var targetClass = sourcePort.parentNode.getuwmClass();
 	
 	
 	result = this.testConnections(sourcePort, targetPort, sourceClass, connectionData.sourceMaxConns);
@@ -384,7 +378,7 @@ req.connection.Port.prototype.checkConnection = function(sourcePort, targetPort,
 	return result;
 }
 
-req.connection.Port.prototype.testConnections = function(thisPort, otherPort, className, maxConns){
+uwm.connection.Port.prototype.testConnections = function(thisPort, otherPort, className, maxConns){
 	var result = true;
 	
 	var connections = thisPort.getConnections();
@@ -401,7 +395,7 @@ req.connection.Port.prototype.testConnections = function(thisPort, otherPort, cl
 		if (maxConns != -1) {
 			var foreignPort = connection.targetPort != thisPort ? connection.targetPort : connection.sourcePort;
 			
-			if (foreignPort.parentNode.getReqClass() == className) {
+			if (foreignPort.parentNode.getuwmClass() == className) {
 				connCount++;
 				if (connCount >= maxConns) {
 					result = false;
@@ -415,15 +409,15 @@ req.connection.Port.prototype.testConnections = function(thisPort, otherPort, cl
 }
 
 
-req.connection.PortGraphics = function(){
+uwm.connection.PortGraphics = function(){
 	draw2d.VectorFigure.call(this);
 	this.setDimension(10, 10);
 }
 
-req.connection.PortGraphics.prototype = new draw2d.VectorFigure;
-req.connection.PortGraphics.prototype.type = "req.connection.PortGraphics";
+uwm.connection.PortGraphics.prototype = new draw2d.VectorFigure;
+uwm.connection.PortGraphics.prototype.type = "uwm.connection.PortGraphics";
 
-req.connection.PortGraphics.prototype.paint = function(){
+uwm.connection.PortGraphics.prototype.paint = function(){
 	draw2d.VectorFigure.prototype.paint.call(this);
 	
 	var width = this.getWidth();
@@ -438,43 +432,35 @@ req.connection.PortGraphics.prototype.paint = function(){
 	
 }
 
-req.connection.getConstraints = function(sourceClass, targetClass){
-	return eval("if (req.figure." + sourceClass + " && req.figure." + sourceClass + ".prototype.getConstraints) req.figure." + sourceClass + ".prototype.getConstraints()[targetClass]");
+uwm.connection.getConstraints = function(sourceClass, targetClass){
+	return eval(uwm.getModelFunction(sourceClass, "getConstraints") + "()[targetClass]");
 }
 
 
-req.PropertyHandler = function(targetId){
-	this.target = Ext.get(targetId);
+uwm.PropertyHandler = function(){
 	this.currentSelectionOid = null;
 }
 
-req.PropertyHandler.prototype.onSelectionChanged = function(figure){
+uwm.PropertyHandler.prototype.onSelectionChanged = function(figure){
 	if (figure != null && figure.getOid != null && figure.getOid() != this.currentSelectionOid) {
 		this.currentSelectionOid = figure.getOid();
 		
-		if (figure.getReqClass) {
-			var className = figure.getReqClass();
+		if (figure.getuwmClass) {
+			var uwmClassName = figure.getuwmClass();
 			
-			var currChild = this.target.first();
-			
-			while (currChild) {
-				var nextChild = currChild.next();
-				currChild.remove();
-				currChild = nextChild;
-			}
-			
-			eval("if (req.figure." + className + " && req.figure." + className + ".prototype.showEdit) req.figure." + className + ".prototype.showEdit(this.target, figure.getOid())");
+			uwm.showProperties(uwmClassName, figure.getOid());
 		}
-	} else {
+	}
+	else {
 		this.currentSelection = null;
 	}
 }
 
-req.PropertyHandler.prototype.onOtherFigureMoved = function(figure){
+uwm.PropertyHandler.prototype.onOtherFigureMoved = function(figure){
 	this.onSelectionChanged(figure);
 }
 
-req.PropertyHandler.prototype.stackChanged = function(event){
+uwm.PropertyHandler.prototype.stackChanged = function(event){
 	if (event.getCommand() instanceof draw2d.CommandConnect) {
 		var command = event.getCommand();
 		var source = command.source;
@@ -487,7 +473,21 @@ req.PropertyHandler.prototype.stackChanged = function(event){
 	}
 }
 
-req.initializeTemplateDragZone = function(v, reqClassName){
+uwm.showProperties = function(uwmClassName, oid){
+	var target = Ext.get("propertiesContainer");
+	
+	var currChild = target.first();
+	
+	while (currChild) {
+		var nextChild = currChild.next();
+		currChild.remove();
+		currChild = nextChild;
+	}
+	
+	eval(uwm.getModelFunction(uwmClassName, "showEdit") + "(target, oid)");
+}
+
+uwm.initializeTemplateDragZone = function(v, uwmClassName){
 	v.dragZone = new Ext.dd.DragZone(v.getEl(), {
 		ddGroup: 'gridDDGroup',
 		
@@ -500,7 +500,7 @@ req.initializeTemplateDragZone = function(v, reqClassName){
 				return v.dragData = {
 					sourceEl: sourceEl,
 					repairXY: Ext.fly(sourceEl).getXY(),
-					reqClassName: reqClassName,
+					uwmClassName: uwmClassName,
 					ddel: d
 				}
 			}
@@ -512,7 +512,7 @@ req.initializeTemplateDragZone = function(v, reqClassName){
 	});
 }
 
-req.initializeDropZone = function(g){
+uwm.initializeDropZone = function(g){
 	g.dropZone = new Ext.dd.DropZone(g.getEl(), {
 		ddGroup: 'gridDDGroup',
 		
@@ -542,7 +542,7 @@ req.initializeDropZone = function(g){
 				var oid = dd.dragData.node.id;
 			}
 			
-			if (oid && req.getByOid(oid)) {
+			if (oid && uwm.getByOid(oid)) {
 				result = false;
 			}
 			
@@ -564,29 +564,29 @@ req.initializeDropZone = function(g){
 				var oid = dd.dragData.node.id;
 			}
 			
-			if (oid && req.getByOid(oid)) {
+			if (oid && uwm.getByOid(oid)) {
 				result = false;
 			}
 			
 			if (result) {
-				var xOffset = req.ui.workflow.getAbsoluteX();
-				var yOffset = req.ui.workflow.getAbsoluteY();
-				var scrollLeft = req.ui.workflow.getScrollLeft();
-				var scrollTop = req.ui.workflow.getScrollTop();
+				var xOffset = uwm.ui.workflow.getAbsoluteX();
+				var yOffset = uwm.ui.workflow.getAbsoluteY();
+				var scrollLeft = uwm.ui.workflow.getScrollLeft();
+				var scrollTop = uwm.ui.workflow.getScrollTop();
 				
 				var x = e.xy[0] - xOffset + scrollLeft;
 				var y = e.xy[1] - yOffset + scrollTop;
 				
-				var compartment = req.ui.workflow.getBestCompartmentFigure(x, y);
+				var compartment = uwm.ui.workflow.getBestCompartmentFigure(x, y);
 				
 				if (data.grid != undefined) {
-					req.createExistingFigure(data.grid.reqClassName, data.selections[0].get("Name"), oid, data.selections[0].get("parentoids"), data.selections[0].get("childoids"), x, y, compartment);
+					uwm.createExistingFigure(data.grid.uwmClassName, data.selections[0].get("Name"), oid, data.selections[0].get("parentoids"), data.selections[0].get("childoids"), x, y, compartment);
 				}
 				else if (data.node != undefined) {
-					req.createFigureFromTree(dd.dragData.node.id, x, y, compartment);
+					uwm.createFigureFromTree(dd.dragData.node.id, x, y, compartment);
 				}
 				else {
-					req.createNewFigure(dd.dragData.reqClassName, x, y, compartment, req.handleFigureCreated);
+					uwm.createNewFigure(dd.dragData.uwmClassName, x, y, compartment, uwm.handleFigureCreated);
 				}
 				
 			}
@@ -596,22 +596,24 @@ req.initializeDropZone = function(g){
 	});
 }
 
-req.createExistingFigure = function(reqClassName, label, oid, parentoids, childoids, x, y, compartment){
-	var drawElem = new (eval("req.figure." + reqClassName))(label, oid, parentoids, childoids);
-	req.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(req.ui.workflow, drawElem, x, y, compartment));
-	
-	req.establishExistingConnections(drawElem, drawElem.getParentOids());
-	req.establishExistingConnections(drawElem, drawElem.getChildOids());
+uwm.createExistingFigure = function(uwmClassName, label, oid, parentoids, childoids, x, y, compartment){
+	var drawElem = uwm.createModelClass(uwmClassName, label, oid, parentoids, childoids);
+	if (drawElem) {
+		uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(uwm.ui.workflow, drawElem, x, y, compartment));
+		
+		uwm.establishExistingConnections(drawElem, drawElem.getParentOids());
+		uwm.establishExistingConnections(drawElem, drawElem.getChildOids());
+	}
 }
 
-req.establishExistingConnections = function(drawElem, list){
+uwm.establishExistingConnections = function(drawElem, list){
 	if (list) {
 	
 		for (var i = 0; i < list.length; i++) {
-			var target = req.getByOid(list[i]);
+			var target = uwm.getByOid(list[i]);
 			
 			if (target) {
-				var connectionData = req.connection.getConstraints(drawElem.getReqClass(), target.getReqClass());
+				var connectionData = uwm.connection.getConstraints(drawElem.getuwmClass(), target.getuwmClass());
 				
 				if (connectionData != null && drawElem.getPorts().get(0).checkConnection(drawElem.getPorts().get(0), target.getPorts().get(0), connectionData)) {
 					if (connectionData.inverse) {
@@ -624,7 +626,7 @@ req.establishExistingConnections = function(drawElem, list){
 					}
 					
 					var command = new draw2d.CommandConnect(drawElem.workflow, startPort, endPort);
-					command.setConnection(new req.connection.BaseConnection(connectionData.label));
+					command.setConnection(new uwm.connection.BaseConnection(connectionData.label));
 					drawElem.workflow.getCommandStack().execute(command);
 				}
 				
@@ -633,103 +635,82 @@ req.establishExistingConnections = function(drawElem, list){
 	}
 }
 
-req.createFigureFromTree = function(oid, x, y, compartment){
-	Ext.Ajax.request({
-		url: req.data.jsonUrl,
-		method: "post",
-		params: {
-			sid: req.data.sid,
-			usr_action: "display",
-			response_format: "JSON",
-			oid: oid
-		},
-		success: function(response){
-			var data = Ext.util.JSON.decode(response.responseText);
-			
-			var reqClassName = data.rootType;
-			var parentoids = data.node.properties.parentoids;
-			var childoids = data.node.properties.childoids;
-			var label = data.node.values[1].Name.value;
-			
-			req.createExistingFigure(reqClassName, label, oid, parentoids, childoids, x, y, compartment);
-		}
+uwm.createFigureFromTree = function(oid, x, y, compartment){
+	uwm.jsonRequest({
+		usr_action: "display",
+		oid: oid
+	}, "Creating new figure", function(data){
+		var uwmClassName = data.rootType;
+		var parentoids = data.node.properties.parentoids;
+		var childoids = data.node.properties.childoids;
+		var label = data.node.values[1].Name.value;
+		
+		uwm.createExistingFigure(uwmClassName, label, oid, parentoids, childoids, x, y, compartment);
 	});
 }
 
 
-req.createNewFigure = function(reqClassName, x, y, compartment, successHandler){
-	Ext.MessageBox.prompt("Create new " + reqClassName, "Please enter name of new " + reqClassName + ":", function(button, text){
-		req.handleFigureName(button, text, reqClassName, x, y, compartment, successHandler)
+uwm.createNewFigure = function(uwmClassName, x, y, compartment, successHandler){
+	Ext.MessageBox.prompt("Create new " + uwmClassName, "Please enter name of new " + uwmClassName + ":", function(button, text){
+		uwm.handleFigureName(button, text, uwmClassName, x, y, compartment, successHandler)
 	});
 }
 
-req.handleFigureName = function(button, newClassName, reqClassName, x, y, compartment, successHandler){
+uwm.handleFigureName = function(button, newClassName, uwmClassName, x, y, compartment, successHandler){
 	if (button == "ok") {
-		Ext.Ajax.request({
-			url: req.data.jsonUrl,
-			method: "post",
-			params: {
-				sid: req.data.sid,
-				usr_action: "new",
-				response_format: "JSON",
-				newtype: reqClassName
-			},
-			success: function(response){
-				successHandler(response, newClassName, reqClassName, x, y, compartment);
-			}
+		uwm.jsonRequest({
+			usr_action: "new",
+			newtype: uwmClassName
+		}, "Creating new figure", function(data){
+			successHandler(data, newClassName, uwmClassName, x, y, compartment);
 		});
 	}
 }
 
-req.handleFigureCreated = function(response, newClassName, reqClassName, x, y, compartment){
-	var data = Ext.util.JSON.decode(response.responseText);
-	
+uwm.handleFigureCreated = function(data, newClassName, uwmClassName, x, y, compartment){
 	if (data.oid) {
 		var oid = data.oid;
 		
-		req.changeField("Name", newClassName, oid);
+		uwm.changeField("Name", newClassName, oid);
 		
-		var drawElem = new (eval("req.figure." + reqClassName))(newClassName, oid, [], []);
-		req.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(req.ui.workflow, drawElem, x, y, compartment));
+		var drawElem = uwm.createModelClass(uwmClassName, newClassName, oid, [], []);
+		if (drawElem) {
+			uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(uwm.ui.workflow, drawElem, x, y, compartment));
+		}
 	}
 }
 
-req.UndoButtonHandler = function(undoButton, redoButton){
+uwm.UndoButtonHandler = function(undoButton, redoButton){
 	draw2d.CommandStackEventListener.call(this);
 	
 	this.undoButton = undoButton;
 	this.redoButton = redoButton;
 }
 
-req.UndoButtonHandler.prototype = draw2d.CommandStackEventListener;
+uwm.UndoButtonHandler.prototype = draw2d.CommandStackEventListener;
 
-req.UndoButtonHandler.prototype.stackChanged = function(oEvent){
-	this.undoButton.setDisabled(!req.ui.workflow.getCommandStack().canUndo());
-	this.redoButton.setDisabled(!req.ui.workflow.getCommandStack().canRedo());
+uwm.UndoButtonHandler.prototype.stackChanged = function(oEvent){
+	this.undoButton.setDisabled(!uwm.ui.workflow.getCommandStack().canUndo());
+	this.redoButton.setDisabled(!uwm.ui.workflow.getCommandStack().canRedo());
 }
 
 
-req.initSession = function(login, password, form){
-	Ext.Ajax.request({
-		url: req.data.jsonUrl,
-		method: "post",
-		params: {
-			usr_action: "dologin",
-			login: login,
-			password: password,
-			response_format: "JSON"
-		},
-		success: function(response){
-			req.handleLogin(response, form)
-		}
+uwm.initSession = function(login, password, form){
+	uwm.jsonRequest({
+		usr_action: "dologin",
+		login: login,
+		password: password
+	}, "Login", function(data){
+		uwm.handleLogin(data, form)
+	}, function(data){
+		uwm.handleLogin(data, form)
+		
 	});
 }
 
-req.handleLogin = function(response, form){
-	var data = Ext.util.JSON.decode(response.responseText);
-	
+uwm.handleLogin = function(data, form){
 	if (data.errorMsg) {
-		req.util.showMessage("Login Failed", data.errorMsg);
+		uwm.util.showMessage("Login Failed", data.errorMsg);
 		
 		var passwordField = form.getForm().findField("password");
 		
@@ -737,25 +718,26 @@ req.handleLogin = function(response, form){
 		passwordField.focus();
 	}
 	else {
-		req.data.sid = data.sid;
+		uwm.data.sid = data.sid;
 		
 		Ext.getCmp("loginViewport").destroy();
 		Ext.get("viewport").dom.style.display = "block";
 		
-		req.ui.create();
+		uwm.ui.create();
 		
-		req.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
+		uwm.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
 		
-		req.loadStores();
+		uwm.loadStores();
 	}
 	
 }
 
-req.util.showMessage = function(title, message){
+uwm.util.showMessage = function(title, message){
 	var messageContainer = Ext.getCmp("messageContainer");
 	if (!messageContainer) {
 		messageContainer = Ext.DomHelper.insertFirst(document.body, {
-			id: "messageContainer"
+			id: "messageContainer",
+			style: "z-index: 30000;"
 		}, true);
 	}
 	messageContainer.alignTo(document, 't-t');
@@ -776,42 +758,42 @@ req.util.showMessage = function(title, message){
 }
 
 
-req.loadStores = function(){
-	for (var i = 0; i < req.data.stores.getSize(); i++) {
-		var store = req.data.stores.get(i);
+uwm.loadStores = function(){
+	for (var i = 0; i < uwm.data.stores.getSize(); i++) {
+		var store = uwm.data.stores.get(i);
 		
 		store.load();
 	}
 }
 
 
-req.util.ellipseX = function(centerX, deg){
-	return centerX + centerX * Math.cos(req.util.deg2rad(deg));
+uwm.util.ellipseX = function(centerX, deg){
+	return centerX + centerX * Math.cos(uwm.util.deg2rad(deg));
 }
 
-req.util.ellipseY = function(centerY, deg){
-	return centerY + centerY * Math.sin(req.util.deg2rad(deg));
+uwm.util.ellipseY = function(centerY, deg){
+	return centerY + centerY * Math.sin(uwm.util.deg2rad(deg));
 }
 
-req.util.deg2rad = function(deg){
+uwm.util.deg2rad = function(deg){
 	return deg * Math.PI / 180;
 }
 
-req.addOid = function(oid, figure){
-	req.data.oidList[oid] = figure;
+uwm.addOid = function(oid, figure){
+	uwm.data.oidList[oid] = figure;
 }
 
-req.getByOid = function(oid){
-	return req.data.oidList[oid];
+uwm.getByOid = function(oid){
+	return uwm.data.oidList[oid];
 }
 
-req.fieldChanged = function(field, newValue, oldValue, oid){
-	req.changeField(field.getName(), newValue, oid);
+uwm.fieldChanged = function(field, newValue, oldValue, oid){
+	uwm.changeField(field.getName(), newValue, oid);
 }
 
-req.changeField = function(fieldName, newValue, oid){
+uwm.changeField = function(fieldName, newValue, oid){
 	var params = {
-		sid: req.data.sid,
+		sid: uwm.data.sid,
 		controller: "ExitController",
 		usr_action: "save",
 		response_format: "JSON"
@@ -819,33 +801,100 @@ req.changeField = function(fieldName, newValue, oid){
 	
 	params["value--" + fieldName + "-" + oid] = newValue;
 	
-	Ext.Ajax.request({
-		url: req.data.jsonUrl,
-		method: "POST",
-		params: params
-	});
+	uwm.jsonRequest(params, "Showing properties");
 }
 
-req.changeTreeNode = function(node){
+uwm.changeTreeNode = function(node){
 	if (node.id != "root") {
-		var reqClassName = node.id.match(/^[^:]+/);
+		var uwmClassName = node.id.match(/^[^:]+/);
 		
 		var iconEl = node.ui.getIconEl();
-		iconEl.className += " Figure" + reqClassName;
+		iconEl.className += " Figure" + uwmClassName;
 		
 		var anchorEl = node.ui.getAnchor();
 		anchorEl.removeAttribute("href");
 	}
 	
-	node.eachChild(req.changeTreeNode);
+	node.eachChild(uwm.changeTreeNode);
 	
 }
 
-req.util.sleep = function(milliseconds) {
+uwm.util.sleep = function(milliseconds){
 	var start = new Date();
 	
 	var now = new Date();
 	while (now.getElapsed(start) < milliseconds) {
 		now = new Date();
 	}
+}
+
+uwm.processConfig = function(){
+	Ext.namespace(uwm.config.namespace, uwm.config.namespace + ".figure");
+	
+	Ext.getDom("title").innerHTML = uwm.config.appTitle;
+}
+
+uwm.getModelFunction = function(uwmClassName, functionName){
+	var result = null;
+	
+	var qualifiedClassName = uwm.config.namespace + ".figure." + uwmClassName;
+	var qualifiedFunctionName = qualifiedClassName + ".prototype." + functionName;
+	
+	if (eval(qualifiedClassName + " && " + qualifiedFunctionName)) {
+		result = qualifiedFunctionName;
+	}
+	else {
+		uwm.util.showMessage("Invalid model function called", "Cannot find function " + qualifiedFunctionName);
+	}
+	
+	return result;
+}
+
+uwm.createModelClass = function(uwmClassName, label, oid, parentoids, childoids){
+	var result = null;
+	
+	var qualifiedName = uwm.config.namespace + ".figure." + uwmClassName;
+	
+	if (eval(qualifiedName)) {
+		result = new (eval(qualifiedName))(label, oid, parentoids, childoids);
+	}
+	else {
+		uwm.util.showMessage("Invalid model class instantiated", "Cannot find class " + qualifiedName);
+	}
+	
+	return result;
+}
+
+uwm.jsonRequest = function(params, context, successFunction, failureFunction){
+	params.sid = uwm.data.sid;
+	params.response_format = "JSON";
+	
+	Ext.Ajax.request({
+		url: uwm.config.jsonUrl,
+		method: "post",
+		params: params,
+		callback: function(options, success, response){
+			if (success) {
+				var data = Ext.util.JSON.decode(response.responseText);
+				
+				if (!data.errorMsg) {
+					if (successFunction) {
+						successFunction(data, options);
+					}
+				}
+				else {
+					uwm.util.showMessage(context + " failed", data.errorMsg);
+					if (failureFunction) {
+						failureFunction(data, options);
+					}
+				}
+			}
+			else {
+				uwm.util.showMessage("JSON request failed", "JSON request failed.");
+					if (failureFunction) {
+						failureFunction(null, options);
+					}
+			}
+		}
+	});
 }

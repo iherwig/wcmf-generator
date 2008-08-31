@@ -1,7 +1,7 @@
-req.ui.createLogin = function(){
+uwm.ui.createLogin = function(){
 	var submitHandler = function(){
 		if (loginForm.getForm().isValid()) {
-			req.initSession(loginForm.getForm().findField("login").getValue(), loginForm.getForm().findField("password").getValue(), loginForm);
+			uwm.initSession(loginForm.getForm().findField("login").getValue(), loginForm.getForm().findField("password").getValue(), loginForm);
 		}
 	};
 	
@@ -58,7 +58,7 @@ req.ui.createLogin = function(){
 }
 
 
-req.ui.create = function(){
+uwm.ui.create = function(){
 	var viewport = new Ext.Viewport({
 		layout: "border",
 		items: [{
@@ -99,34 +99,34 @@ req.ui.create = function(){
 							ddGroup: "gridDDGroup",
 							appendOnly: true,
 							onNodeOver: function(nodeData, source, e, data){
-								return this.checkDrop(data, nodeData.node);
+								return this.checkDrop(nodeData, source, e, data);
 							},
 							onNodeDrop: function(nodeData, source, e, data){
 								var source = data.node;
 								var target = nodeData.node;
 								
-								var result = this.checkDrop(data, target);
+								var result = this.checkDrop(nodeData, source, e, data);
 								
 								if (result) {
 									if (source) {
 									
 										target.appendChild(source);
-										req.postConnection(source.id, target.id);
+										uwm.postConnection(source.id, target.id);
 									}
 									else {
-										req.createNewFigure(data.reqClassName, null, null, null, function(response, newClassName, reqClassName, x, y, compartment){
+										uwm.createNewFigure(data.uwmClassName, null, null, null, function(response, newClassName, uwmClassName, x, y, compartment){
 											var data = Ext.util.JSON.decode(response.responseText);
 											
 											if (data.oid) {
 												var oid = data.oid;
 												
-												req.changeField("Name", newClassName, oid);
+												uwm.changeField("Name", newClassName, oid);
 												
-												req.postConnection(oid, target.id);
+												uwm.postConnection(oid, target.id);
 												
 												target.appendChild(new Ext.tree.TreeNode({
 													id: oid,
-													iconCls: "Figure" + reqClassName,
+													iconCls: "Figure" + uwmClassName,
 													leaf: false,
 													text: newClassName
 												}))
@@ -137,21 +137,29 @@ req.ui.create = function(){
 								
 								return result;
 							},
-							checkDrop: function(source, target){
-								var result = false;
+							checkDrop: function(nodeData, source, e, data){
+								var result = Ext.tree.TreeDropZone.prototype.onNodeOver.call(this, nodeData, source, e, data);
 								
-								if (source.node != target) {
+								var sourceNode = data.node;
+								var sourceClass = data.uwmClassName;
+								var targetNode = nodeData.node
 								
-									var sourceReqClassName;
-									if (source.node) {
-										sourceReqClassName = source.node.id.match(/[^:]+/);
+								if (sourceNode != targetNode) {
+								
+									var sourceUwmClassName;
+									if (sourceNode) {
+										sourceUwmClassName = sourceNode.id.match(/[^:]+/);
 									}
 									else {
-										sourceReqClassName = source.reqClassName;
+										sourceUwmClassName = sourceClass;
 									}
-									var targetReqClassName = target.id.match(/[^:]+/);
+									var targetUwmClassName = targetNode.id.match(/[^:]+/);
 									
-									result = (req.connection.getConstraints(sourceReqClassName, targetReqClassName)) ? true : false;
+									if (uwm.connection.getConstraints(targetUwmClassName, sourceUwmClassName).relationship == "child") {
+										//result = true
+									} else {
+										result = false;
+									} 
 									
 								}
 								
@@ -163,19 +171,26 @@ req.ui.create = function(){
 							id: "root"
 						}),
 						loader: new Ext.tree.TreeLoader({
-							url: req.data.jsonUrl,
+							url: uwm.config.jsonUrl,
 							baseParams: {
-								sid: req.data.sid,
+								sid: uwm.data.sid,
 								controller: "TreeViewController",
 								response_format: "JSON",
 								usr_action: "loadChildren"
 							},
 							listeners: {
 								load: function(self, node, response){
-									req.changeTreeNode(node);
+									uwm.changeTreeNode(node);
 								}
 							}
-						})
+						}),
+						listeners: {
+							click: function(node, e){
+								var uwmClassName = node.id.match(/[^:]+/);
+								
+								uwm.showProperties(uwmClassName, node.id);
+							}
+						}
 					})]
 				}]
 			}
@@ -199,21 +214,21 @@ req.ui.create = function(){
 						enableToggle: true,
 						text: "Snap to Objects",
 						toggleHandler: function(self, pressed){
-							req.ui.workflow.setSnapToGeometry(pressed);
+							uwm.ui.workflow.setSnapToGeometry(pressed);
 						}
 					}), new Ext.Button({
 						text: "Undo",
 						disabled: true,
 						id: "undoButton",
 						handler: function(self, oEvent){
-							req.ui.workflow.getCommandStack().undo();
+							uwm.ui.workflow.getCommandStack().undo();
 						}
 					}), new Ext.Button({
 						text: "Redo",
 						disabled: true,
 						id: "redoButton",
 						handler: function(self, oEvent){
-							req.ui.workflow.getCommandStack().redo();
+							uwm.ui.workflow.getCommandStack().redo();
 						}
 					})]
 				}, {
@@ -227,36 +242,30 @@ req.ui.create = function(){
 			el: "viewport",
 			listeners: {
 				render: function(g){
-					req.initializeDropZone(g);
+					uwm.initializeDropZone(g);
 				}
 			}
 		})]
 	});
 	
-	req.ui.createNewFigureTemplates(Ext.getCmp("newFiguresContainer"));
+	uwm.ui.createNewFigureTemplates(Ext.getCmp("newFiguresContainer"));
 	
-	req.ui.initWorkflow();
+	uwm.ui.initWorkflow();
 	
-	req.setUnselectable(document.getElementById("viewport"));
+	uwm.setUnselectable(document.getElementById("viewport"));
 	
 	Ext.EventManager.on(window, 'beforeunload', function(e){
-		Ext.Ajax.request({
-			url: req.data.jsonUrl,
-			method: "post",
-			params: {
-				sid: req.data.sid,
-				usr_action: "logout",
-				response_format: "JSON"
-			}
-		});
+		uwm.jsonRequest({
+			usr_action: "logout",
+		}, "Logging out");
 		
-		req.util.sleep(1111);
+		uwm.util.sleep(1111);
 	});
 }
 
-req.ui.createNewFigureTemplates = function(container){
-	for (var currIndex = 0; currIndex < req.figure.list.length; currIndex++) {
-		var currFigure = req.figure.list[currIndex];
+uwm.ui.createNewFigureTemplates = function(container){
+	for (var currIndex = 0; currIndex < uwm.config.figureList.length; currIndex++) {
+		var currFigure = uwm.config.figureList[currIndex];
 		
 		container.add(new Ext.BoxComponent({
 			autoEl: {
@@ -264,11 +273,11 @@ req.ui.createNewFigureTemplates = function(container){
 				html: currFigure
 			},
 			cls: "FigureTemplate Figure" + currFigure,
-			reqClassName: currFigure,
+			uwmClassName: currFigure,
 			listeners: {
 				render: function(v){
-					req.setUnselectable(v.getEl().dom);
-					req.initializeTemplateDragZone(v, v.reqClassName);
+					uwm.setUnselectable(v.getEl().dom);
+					uwm.initializeTemplateDragZone(v, v.uwmClassName);
 				}
 			}
 		}));
@@ -277,21 +286,23 @@ req.ui.createNewFigureTemplates = function(container){
 	container.doLayout();
 }
 
-req.ui.createExistingFigureTabs = function(container){
-	req.data.stores = new draw2d.ArrayList();
+uwm.ui.createExistingFigureTabs = function(container){
+	uwm.data.stores = new draw2d.ArrayList();
 	
-	for (var currIndex = 0; currIndex < req.figure.list.length; currIndex++) {
-		var currFigure = req.figure.list[currIndex];
+	for (var currIndex = 0; currIndex < uwm.config.tabList.length; currIndex++) {
+		var currFigure = uwm.config.tabList[currIndex];
 		
-		var store = eval("if (req.figure." + currFigure + " && req.figure." + currFigure + ".prototype.getStore) req.figure." + currFigure + ".prototype.getStore()");
+		var storeString = uwm.getModelFunction(currFigure, "getStore");
 		
-		if (store) {
-			req.data.stores.add(store);
+		if (storeString) {
+			var store =  eval(storeString+ "()");
+			
+			uwm.data.stores.add(store);
 			
 			container.add(new Ext.Panel({
 				iconCls: "FigureGraphic Figure" + currFigure,
 				layout: "fit",
-				items: eval("if (req.figure." + currFigure + " && req.figure." + currFigure + ".prototype.getGrid) req.figure." + currFigure + ".prototype.getGrid(store)")
+				items: eval(uwm.getModelFunction(currFigure, "getGrid") + "(store)")
 			}));
 		}
 	}
@@ -302,16 +313,16 @@ req.ui.createExistingFigureTabs = function(container){
 	Ext.getCmp("contentContainer").doLayout();
 }
 
-req.ui.initWorkflow = function(){
-	req.ui.workflow = new draw2d.Workflow("canvas");
-	req.ui.workflow.setViewPort("viewport");
+uwm.ui.initWorkflow = function(){
+	uwm.ui.workflow = new draw2d.Workflow("canvas");
+	uwm.ui.workflow.setViewPort("viewport");
 	
-	req.ui.workflow.scrollTo(req.ui.workflow.getHeight() / 2, req.ui.workflow.getWidth() / 2);
+	uwm.ui.workflow.scrollTo(uwm.ui.workflow.getHeight() / 2, uwm.ui.workflow.getWidth() / 2);
 	
-	var propertyHandler = new req.PropertyHandler("propertiesContainer");
-	req.ui.workflow.addSelectionListener(propertyHandler);
-	req.ui.workflow.getCommandStack().addCommandStackEventListener(propertyHandler);
-	req.ui.workflow.getCommandStack().addCommandStackEventListener(new req.UndoButtonHandler(Ext.getCmp("undoButton"), Ext.getCmp("redoButton")));
+	var propertyHandler = new uwm.PropertyHandler();
+	uwm.ui.workflow.addSelectionListener(propertyHandler);
+	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(propertyHandler);
+	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(new uwm.UndoButtonHandler(Ext.getCmp("undoButton"), Ext.getCmp("redoButton")));
 }
 
 
