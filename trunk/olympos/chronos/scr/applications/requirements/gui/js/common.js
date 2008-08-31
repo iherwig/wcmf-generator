@@ -775,20 +775,6 @@ uwm.handleFigureCreated = function(data, newClassName, uwmClassName, x, y, compa
 	}
 }
 
-uwm.UndoButtonHandler = function(undoButton, redoButton){
-	draw2d.CommandStackEventListener.call(this);
-	
-	this.undoButton = undoButton;
-	this.redoButton = redoButton;
-}
-
-uwm.UndoButtonHandler.prototype = draw2d.CommandStackEventListener;
-
-uwm.UndoButtonHandler.prototype.stackChanged = function(oEvent){
-	this.undoButton.setDisabled(!uwm.ui.workflow.getCommandStack().canUndo());
-	this.redoButton.setDisabled(!uwm.ui.workflow.getCommandStack().canRedo());
-}
-
 
 uwm.initSession = function(login, password, form){
 	uwm.jsonRequest({
