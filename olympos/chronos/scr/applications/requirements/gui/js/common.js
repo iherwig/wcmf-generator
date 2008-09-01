@@ -43,15 +43,12 @@ uwm.figure.BaseFigure.prototype.setWorkflow = function(workflow){
 		this.port.setWorkflow(workflow);
 		this.addPort(this.port, this.width + 8, 0);
 	}
+}
+
+uwm.figure.BaseFigure.prototype.onContextMenu = function(x, y){
+	var contextMenu = this.getUwmContextMenu();
 	
-	var htmlElem = this.getHTMLElement();
-	if (htmlElem) {
-		var self = this;
-		
-		Ext.fly(htmlElem).on("mousedown", function(e){
-			self.showContextMenu(e, self)
-		})
-	}
+	contextMenu.showAt(uwm.ui.getContextMenuPosition(x, y));
 }
 
 uwm.figure.BaseFigure.prototype.getUwmClass = function(){
@@ -118,43 +115,34 @@ uwm.figure.BaseFigure.prototype.getLabel = function(){
 	}
 }
 
-uwm.figure.BaseFigure.prototype.showContextMenu = function(e, figure){
-	if (e.button == 2) {
+uwm.figure.BaseFigure.prototype.getUwmContextMenu = function(){
+	figure = this;
 	
-		var contextMenu = new Ext.menu.Menu({
-			items: [
-			new Ext.menu.Item({
-				text: "Show in tree",
-				handler: function(item, e) {
-					uwm.showInTree(figure.getOid());
-				}
-			}),
-			new Ext.menu.Item({
-				text: "Show in grid",
-				handler: function(item, e) {
-					uwm.showInGrid(figure.getUwmClass(), figure.getOid());
-				}
-			}),
-			"-",
-			new Ext.menu.Item({
-				text: "Delete from diagram",
-				handler: function(item, e){
-					uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
-				}
-			}), new Ext.menu.Item({
-				text: "Delete from model",
-				handler: function(tiem, e){
-					uwm.deleteFigureFromModel(figure.getOid());
-				}
-			})]
-		});
-		
-		contextMenu.showAt(e.xy);
-		
-		e.stopEvent();
-		
-		return false;
-	}
+	var contextMenu = new Ext.menu.Menu({
+		items: [new Ext.menu.Item({
+			text: "Show in tree",
+			handler: function(item, e){
+				uwm.showInTree(figure.getOid());
+			}
+		}), new Ext.menu.Item({
+			text: "Show in grid",
+			handler: function(item, e){
+				uwm.showInGrid(figure.getUwmClass(), figure.getOid());
+			}
+		}), "-", new Ext.menu.Item({
+			text: "Delete from diagram",
+			handler: function(item, e){
+				uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
+			}
+		}), new Ext.menu.Item({
+			text: "Delete from model",
+			handler: function(tiem, e){
+				uwm.deleteFigureFromModel(figure.getOid());
+			}
+		})]
+	});
+	
+	return contextMenu;
 }
 
 
@@ -312,13 +300,30 @@ uwm.connection.BaseConnection.prototype.type = "uwm.connection.BaseConnection";
 uwm.connection.BaseConnection.prototype.setWorkflow = function(workflow){
 	draw2d.Connection.prototype.setWorkflow.call(this, workflow);
 	
-	var htmlElem = this.getHTMLElement();
-	if (htmlElem) {
+	var htmlElement = this.getHTMLElement();
+	if (htmlElement) {
+	
+		var contextMenu = this.getContextMenu();
 		var self = this;
 		
-		Ext.fly(htmlElem).on("mousedown", function(e){
-			self.showContextMenu(e, self)
-		})
+		this.tmpContextMenu = function(e){
+			var viewport = Ext.get("viewport");
+			var scroll = viewport.getScroll();
+			var xy = viewport.getXY();
+			
+			contextMenu.showAt([e.xy[0] + 2, e.xy[1] + 2]);
+			
+			e.stopEvent();
+			
+			return false;
+		}
+		
+		var event = "mousedown";
+		if (Ext.isWindows) {
+			event = "mouseup";
+		}
+		Ext.fly(htmlElement).on(event, this.tmpContextMenu);
+		
 	}
 }
 
@@ -326,30 +331,25 @@ uwm.connection.BaseConnection.prototype.getLabel = function(){
 	return this.label;
 }
 
-uwm.connection.BaseConnection.prototype.showContextMenu = function(e, connection){
-	if (e.button == 2) {
+uwm.connection.BaseConnection.prototype.getContextMenu = function(){
+
+	var connection = this;
+	var contextMenu = new Ext.menu.Menu({
+		items: ([new Ext.menu.Item({
+			text: "Delete from diagram",
+			handler: function(item, e){
+				uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
+			}
+		}), new Ext.menu.Item({
+			text: "Delete from model",
+			handler: function(tiem, e){
+				uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
+				uwm.deleteConnectionFromModel(connection.sourcePort.parentNode.getOid(), connection.targetPort.parentNode.getOid());
+			}
+		})])
+	});
 	
-		var contextMenu = new Ext.menu.Menu({
-			items: ([new Ext.menu.Item({
-				text: "Delete from diagram",
-				handler: function(item, e){
-					uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
-				}
-			}), new Ext.menu.Item({
-				text: "Delete from model",
-				handler: function(tiem, e){
-					uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
-					uwm.deleteConnectionFromModel(connection.sourcePort.parentNode.getOid(), connection.targetPort.parentNode.getOid());
-				}
-			})])
-		});
-		
-		contextMenu.showAt(e.xy);
-		
-		e.stopEvent();
-		
-		return false;
-	}
+	return contextMenu;
 }
 
 
@@ -812,13 +812,8 @@ uwm.handleLogin = function(data, form){
 		uwm.data.sid = data.sid;
 		
 		Ext.getCmp("loginViewport").destroy();
-		Ext.get("viewport").dom.style.display = "block";
 		
 		uwm.ui.create();
-		
-		uwm.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
-		
-		uwm.loadStores();
 	}
 	
 }
@@ -1014,7 +1009,7 @@ uwm.deleteConnectionFromModel = function(parentOid, childOid){
 	})
 }
 
-uwm.showInTree = function(oid) {
+uwm.showInTree = function(oid){
 	var tree = Ext.getCmp("figureTree");
 	tree.show();
 	
@@ -1024,8 +1019,8 @@ uwm.showInTree = function(oid) {
 	node.select();
 }
 
-uwm.showInGrid = function(uwmClassName, oid) {
-	var grid = Ext.getCmp("Grid"+ uwmClassName);
+uwm.showInGrid = function(uwmClassName, oid){
+	var grid = Ext.getCmp("Grid" + uwmClassName);
 	grid.show();
 	
 	var store = grid.getStore();
@@ -1033,16 +1028,41 @@ uwm.showInGrid = function(uwmClassName, oid) {
 	
 	var selection = grid.getSelectionModel();
 	selection.selectRow(index);
-
+	
 	var view = grid.getView();
 	view.focusRow(index);
 	view.refresh();
 }
 
-uwm.showInDiagram = function(oid) {
+uwm.showInDiagram = function(oid){
 	var figure = uwm.getByOid(oid);
 	
 	var canvas = Ext.getCmp("canvas");
 	
 	uwm.ui.workflow.scrollTo(figure.x - canvas.getSize()["width"] / 2 + figure.getWidth() / 2, figure.y - canvas.getSize()["height"] / 2 + figure.getHeight() / 2);
+}
+
+
+uwm.startApplication = function(){
+	var params = location.search.split(/&/);
+	
+	var sid = null;
+	
+	for (var i = 0; i < params.length; i++) {
+		var parts = params[i].split(/=/);
+		
+		if (parts[0] = "sid") {
+			sid = parts[1];
+			break;
+		}
+	}
+	
+	if (sid) {
+		uwm.data.sid = sid;
+		
+		uwm.ui.create();
+	}
+	else {
+		uwm.ui.createLogin();
+	}
 }
