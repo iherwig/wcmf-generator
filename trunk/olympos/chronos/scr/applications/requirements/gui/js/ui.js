@@ -25,12 +25,14 @@ uwm.ui.createLogin = function(){
 		items: [new Ext.form.TextField({
 			fieldLabel: 'Login',
 			name: 'login',
-			allowBlank: false
+			allowBlank: false,
+			value: uwm.config.defaultLogin
 		}), new Ext.form.TextField({
 			fieldLabel: 'Password',
 			name: 'password',
 			inputType: "password",
-			allowBlank: false
+			allowBlank: false,
+			value: uwm.config.defaultPassword
 		})],
 		buttons: [{
 			text: 'Login',
@@ -59,6 +61,8 @@ uwm.ui.createLogin = function(){
 
 
 uwm.ui.create = function(){
+	Ext.get("viewport").dom.style.display = "block";
+	
 	var viewport = new Ext.Viewport({
 		layout: "border",
 		items: [{
@@ -264,6 +268,11 @@ uwm.ui.create = function(){
 		
 		uwm.util.sleep(1111);
 	});
+	
+	
+	uwm.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
+	
+	uwm.loadStores();
 }
 
 uwm.ui.createNewFigureTemplates = function(container){
@@ -325,28 +334,29 @@ uwm.ui.initWorkflow = function(){
 	
 	uwm.data.snapToObjects = false;
 	
-	Ext.fly("canvas").on("mousedown", function(e){
-		if (e.button == 2) {
-			var contextMenu = new Ext.menu.Menu({
-				items: [new Ext.menu.CheckItem({
-					text: "Snap to objects",
-					checked: uwm.data.snapToObjects,
-					listeners: {
-						checkchange: function(self, checked){
-							uwm.data.snapToObjects = checked;
-							uwm.ui.workflow.setSnapToGeometry(checked);
-						}
+	uwm.ui.workflow.onContextMenu = function(x, y){
+		var contextMenu = new Ext.menu.Menu({
+			items: [new Ext.menu.CheckItem({
+				text: "Snap to objects",
+				checked: uwm.data.snapToObjects,
+				listeners: {
+					checkchange: function(self, checked){
+						uwm.data.snapToObjects = checked;
+						uwm.ui.workflow.setSnapToGeometry(checked);
 					}
-				})]
-			});
-			
-			contextMenu.showAt(e.xy);
-			
-			e.stopEvent();
-			
-			return false;
-		}
-	});
+				}
+			})]
+		});
+		
+		contextMenu.showAt(uwm.ui.getContextMenuPostion(x, y));
+	}
 }
 
 
+uwm.ui.getContextMenuPostion = function(x, y){
+	var viewport = Ext.get("viewport");
+	var scroll = viewport.getScroll();
+	var xy = viewport.getXY();
+	
+	return [x - scroll.left + xy[0] + 2, y - scroll.top + xy[1] + 2];
+}
