@@ -348,12 +348,12 @@ uwm.ui.initWorkflow = function(){
 			})]
 		});
 		
-		contextMenu.showAt(uwm.ui.getContextMenuPostion(x, y));
+		contextMenu.showAt(uwm.ui.getContextMenuPosition(x, y));
 	}
 }
 
 
-uwm.ui.getContextMenuPostion = function(x, y){
+uwm.ui.getContextMenuPosition = function(x, y){
 	var viewport = Ext.get("viewport");
 	var scroll = viewport.getScroll();
 	var xy = viewport.getXY();
