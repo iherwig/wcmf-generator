@@ -583,14 +583,10 @@ uwm.DeleteHandler.prototype.stackChanged = function(event){
 
 
 uwm.showProperties = function(uwmClassName, oid){
-	var target = Ext.get("propertiesContainer");
+	var target = Ext.getCmp("propertiesContainer");
 	
-	var currChild = target.first();
-	
-	while (currChild) {
-		var nextChild = currChild.next();
-		currChild.remove();
-		currChild = nextChild;
+	while (target.items && target.items.getCount() > 0) {
+		target.remove(target.getComponent(0), true);
 	}
 	
 	eval(uwm.getModelFunction(uwmClassName, "showEdit") + "(target, oid)");
@@ -899,7 +895,7 @@ uwm.changeField = function(fieldName, newValue, oid){
 	
 	params["value--" + fieldName + "-" + oid] = newValue;
 	
-	uwm.jsonRequest(params, "Showing properties");
+	uwm.jsonRequest(params, "Saving properties");
 }
 
 uwm.changeTreeNode = function(node){
