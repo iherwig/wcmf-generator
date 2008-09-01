@@ -113,23 +113,36 @@ cwm.figure.ChiGoal.prototype.getStore = function(){
 	});
 }
 
-cwm.figure.ChiGoal.prototype.showEdit = function(bd, oid){
+cwm.figure.ChiGoal.prototype.showEdit = function(parentComponent, oid){
 
 	Ext.form.Field.prototype.msgTarget = 'side';
+	
 	var listeners = {
 		"change": function(field, newValue, oldValue){
 			uwm.fieldChanged(field, newValue, oldValue, oid);
 		}
 	};
+	
+	var htmlListeners = {
+		"sync": function(field, html){
+			field.contentChanged = true;
+		},
+		"beforedestroy": function(field){
+			if (field.contentChanged) {
+				uwm.fieldChanged(field, field.getValue(), null, oid);
+			}
+		}
+	};
+	
 	var form = new Ext.FormPanel({
 		oid: oid,
-		labelWidth: 100,
+		labelWidth: 90,
 		frame: true,
+		labelAlign: "top",
+		autoScroll: true,
 		title: 'ChiGoal Edit View',
-		bodyStyle: 'padding:5px 5px 0',
-		width: 500,
 		defaults: {
-			width: 100
+			width: 222
 		},
 		defaultType: 'textfield',
 		items: [{
@@ -138,13 +151,38 @@ cwm.figure.ChiGoal.prototype.showEdit = function(bd, oid){
 			
 			inputType: 'textfield',
 			listeners: listeners
-		}, {
+		}, new Ext.form.ComboBox({
+			// This is just an example, I know this is not the right place for this combobox
 			fieldLabel: 'Value_Name',
 			name: 'Value_Name',
-			
-			inputType: 'textfield',
+			store: new Ext.data.Store({
+				url: uwm.config.jsonUrl,
+				method: "POST",
+				baseParams: {
+					sid: uwm.data.sid,
+					response_format: "JSON",
+					usr_action: "listbox",
+					type: "ChiRequirementType"
+				},
+				reader: new Ext.data.JsonReader({
+					root: "objects",
+					totalPorperty: "totalCount",
+					id: "key"
+				}, [{
+					name: "key",
+					mapping: "key"
+				}, {
+					name: "val",
+					mapping: "val"
+				}])
+			}),
+			displayField: 'val',
+			valueField: 'key',
+			mode: "remote",
+			triggerAction: 'all',
+			editable: false,
 			listeners: listeners
-		}, {
+		}), {
 			fieldLabel: 'Value_ammount',
 			name: 'Value_ammount',
 			
@@ -174,13 +212,18 @@ cwm.figure.ChiGoal.prototype.showEdit = function(bd, oid){
 			
 			inputType: 'textfield',
 			listeners: listeners
-		}, {
+		}, new Ext.form.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
+			enableAlignments: false,
+			enableColors: false,
+			enableFont: false,
+			enableFontSize: false,
+			enableLinks: false,
+			enableSourceEdit: false,
 			
-			inputType: 'htmleditor',
-			listeners: listeners
-		}, {
+			listeners: htmlListeners
+		}), {
 			fieldLabel: 'created',
 			name: 'created',
 			readOnly: true,
@@ -207,7 +250,8 @@ cwm.figure.ChiGoal.prototype.showEdit = function(bd, oid){
 		}]
 	});
 	
-	form.render(bd);
+	parentComponent.add(form);
+	parentComponent.doLayout();
 	
 	
 	uwm.jsonRequest({
