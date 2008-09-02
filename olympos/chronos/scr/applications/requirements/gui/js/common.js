@@ -1059,10 +1059,12 @@ uwm.startApplication = function(){
 	
 	if (sid) {
 		uwm.data.sid = sid;
+		uwm.data.autoLogout = false;
 		
 		uwm.ui.create();
 	}
 	else {
+		uwm.data.autoLogout = true;
 		uwm.ui.createLogin();
 	}
 }
