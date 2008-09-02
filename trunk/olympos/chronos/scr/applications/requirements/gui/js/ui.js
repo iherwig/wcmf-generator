@@ -87,7 +87,6 @@ uwm.ui.create = function(){
 					region: "center",
 					title: "Existing Classes",
 					xtype: "tabpanel",
-					draggable: true,
 					//tabPosition: "bottom",
 					enableTabScroll: true,
 					id: "existingFiguresContainer",
@@ -119,9 +118,7 @@ uwm.ui.create = function(){
 										uwm.postConnection(source.id, target.id);
 									}
 									else {
-										uwm.createNewFigure(data.uwmClassName, null, null, null, function(response, newClassName, uwmClassName, x, y, compartment){
-											var data = Ext.util.JSON.decode(response.responseText);
-											
+										uwm.createNewFigure(data.uwmClassName, null, null, null, function(data, newClassName, uwmClassName, x, y, compartment){
 											if (data.oid) {
 												var oid = data.oid;
 												
@@ -160,7 +157,9 @@ uwm.ui.create = function(){
 									}
 									var targetUwmClassName = targetNode.id.match(/[^:]+/);
 									
-									if (uwm.connection.getConstraints(targetUwmClassName, sourceUwmClassName).relationship == "child") {
+									var constraints = uwm.connection.getConstraints(targetUwmClassName, sourceUwmClassName);
+									
+									if (constraints && constraints.relationship == "child") {
 										//result = true
 									}
 									else {
