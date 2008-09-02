@@ -270,10 +270,15 @@ uwm.figure.LabelCenterFigure.prototype.createHTMLElement = function(){
 
 
 
-uwm.connection.BaseConnection = function(label){
+uwm.connection.BaseConnection = function(label, decorators){
 	draw2d.Connection.call(this);
 	
-	this.setTargetDecorator(new uwm.connection.ArrowDecorator());
+	if (decorators.source) {
+		this.setSourceDecorator(decorators.source);
+	}
+	if (decorators.target) {
+		this.setTargetDecorator(decorators.target);
+	}
 	
 	this.setSourceAnchor(new draw2d.ChopboxConnectionAnchor(this));
 	this.setTargetAnchor(new draw2d.ChopboxConnectionAnchor(this));
@@ -364,9 +369,41 @@ uwm.connection.ArrowDecorator.prototype.type = "uwm.connection.ArrowDecorator";
 uwm.connection.ArrowDecorator.prototype.paint = function(g){
 	g.setColor(this.color);
 	g.setStroke(1);
-	g.drawLine(20, 8, 0, 0);
-	g.drawLine(0, 0, 20, -8);
+	g.drawLine(12, 8, 0, 0);
+	g.drawLine(0, 0, 12, -8);
 }
+
+
+uwm.connection.OpenDiamondDecorator = function(){
+	this.setBackgroundColor(new draw2d.Color(255, 255, 255));
+}
+
+uwm.connection.OpenDiamondDecorator.prototype = new draw2d.ConnectionDecorator;
+uwm.connection.OpenDiamondDecorator.prototype.type = "uwm.connection.OpenDiamondDecorator";
+
+uwm.connection.OpenDiamondDecorator.prototype.paint = function(g){
+	g.setColor(this.backgroundColor);
+	g.setStroke(1);
+	g.fillPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
+	g.setColor(this.color);
+	g.drawPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
+}
+
+
+uwm.connection.FilledDiamondDecorator = function(){
+	this.setBackgroundColor(new draw2d.Color(0, 0, 0));
+}
+
+uwm.connection.FilledDiamondDecorator.prototype = new draw2d.ConnectionDecorator;
+uwm.connection.FilledDiamondDecorator.prototype.type = "uwm.connection.FilledDiamondDecorator";
+
+uwm.connection.FilledDiamondDecorator.prototype.paint = function(g){
+	g.setColor(this.backgroundColor);
+	g.setStroke(1);
+	g.fillPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
+}
+
+
 
 
 uwm.connection.MidpointLocator = function(connection){
@@ -428,14 +465,42 @@ uwm.connection.Port.prototype.onDrop = function(port){
 				var endPort = port;
 			}
 			
+			var connectionType = connectionData.ConnectionType;
+			if (!connectionType) {
+				var invConnectionData = uwm.connection.getConstraints(port.parentNode.getUwmClass(), this.parentNode.getUwmClass());
+				connectionType = invConnectionData.ConnectionType;
+			}
+			decorators = uwm.connection.getConnectionTypeDecorators(connectionType);
+			
 			var command = new draw2d.CommandConnect(this.parentNode.workflow, startPort, endPort);
-			command.setConnection(new uwm.connection.BaseConnection(connectionData.label));
+			command.setConnection(new uwm.connection.BaseConnection(connectionData.label, decorators));
 			this.parentNode.workflow.getCommandStack().execute(command);
 			
 			uwm.postConnection(startPort.parentNode.getOid(), endPort.parentNode.getOid());
 		}
 		
 	}
+}
+
+uwm.connection.getConnectionTypeDecorators = function(connectionType){
+	var result = new Array();
+	
+	switch (connectionType) {
+		case "aggregation":
+			result.source = new uwm.connection.OpenDiamondDecorator();
+			result.target = new uwm.connection.ArrowDecorator();
+			break;
+			
+		case "composition":
+			result.source = new uwm.connection.FilledDiamondDecorator();
+			result.target = new uwm.connection.ArrowDecorator();
+			break;
+
+		default:
+			result.target = new uwm.connection.ArrowDecorator();
+	}
+	
+	return result;
 }
 
 uwm.postConnection = function(parentOid, childOid){
@@ -730,8 +795,15 @@ uwm.establishExistingConnections = function(drawElem, list){
 						var endPort = target.getPorts().get(0);
 					}
 					
+					var connectionType = connectionData.ConnectionType;
+					if (!connectionType) {
+						var invConnectionData = uwm.connection.getConstraints(target.getUwmClass(), drawElem.getUwmClass());
+						connectionType = invConnectionData.ConnectionType;
+					}
+					decorators = uwm.connection.getConnectionTypeDecorators(connectionType);
+					
 					var command = new draw2d.CommandConnect(drawElem.workflow, startPort, endPort);
-					command.setConnection(new uwm.connection.BaseConnection(connectionData.label));
+					command.setConnection(new uwm.connection.BaseConnection(connectionData.label, decorators));
 					drawElem.workflow.getCommandStack().execute(command);
 				}
 				

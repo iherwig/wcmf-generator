@@ -260,14 +260,15 @@ uwm.ui.create = function(){
 	
 	uwm.setUnselectable(document.getElementById("viewport"));
 	
-	Ext.EventManager.on(window, 'beforeunload', function(e){
-		uwm.jsonRequest({
-			usr_action: "logout",
-		}, "Logging out");
-		
-		uwm.util.sleep(1111);
-	});
-	
+	if (uwm.data.autoLogout) {
+		Ext.EventManager.on(window, 'beforeunload', function(e){
+			uwm.jsonRequest({
+				usr_action: "logout",
+			}, "Logging out");
+			
+			uwm.util.sleep(1111);
+		});
+	}
 	
 	uwm.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
 	
