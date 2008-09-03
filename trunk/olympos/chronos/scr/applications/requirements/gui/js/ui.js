@@ -237,7 +237,7 @@ uwm.ui.create = function(){
 			collapsible: true,
 			split: true,
 			width: 250,
-			layout: "fit",
+			autoScroll: true,
 			title: "Properties",
 			items: [{
 				id: "propertiesContainer"
@@ -279,10 +279,11 @@ uwm.ui.createNewFigureTemplates = function(container){
 	for (var currIndex = 0; currIndex < uwm.config.figureList.length; currIndex++) {
 		var currFigure = uwm.config.figureList[currIndex];
 		
-		container.add(new Ext.BoxComponent({
+		var component = new Ext.BoxComponent({
 			autoEl: {
 				tag: "div",
-				html: currFigure
+				html: currFigure,
+				id: "new" + currFigure
 			},
 			cls: "FigureTemplate Figure" + currFigure,
 			uwmClassName: currFigure,
@@ -292,10 +293,24 @@ uwm.ui.createNewFigureTemplates = function(container){
 					uwm.initializeTemplateDragZone(v, v.uwmClassName);
 				}
 			}
-		}));
+		});
+		
+		container.add(component);
+		container.doLayout();
+		
+		
+		var descFunc = uwm.getModelFunction(currFigure, "getDescription");
+		
+		if (descFunc) {
+		var description = eval(descFunc + "()");
+		
+		if (description) {
+			new Ext.ToolTip({
+				target: "new" + currFigure,
+				html: description
+			});
+		}}
 	}
-	
-	container.doLayout();
 }
 
 uwm.ui.createExistingFigureTabs = function(container){
@@ -322,7 +337,7 @@ uwm.ui.createExistingFigureTabs = function(container){
 }
 
 uwm.ui.initWorkflow = function(){
-	uwm.ui.workflow = new draw2d.Workflow("canvas");
+	uwm.ui.workflow = new uwm.Workflow("canvas");
 	uwm.ui.workflow.setViewPort("viewport");
 	
 	uwm.ui.workflow.scrollTo(uwm.ui.workflow.getHeight() / 2, uwm.ui.workflow.getWidth() / 2);
@@ -333,23 +348,6 @@ uwm.ui.initWorkflow = function(){
 	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(new uwm.DeleteHandler());
 	
 	uwm.data.snapToObjects = false;
-	
-	uwm.ui.workflow.onContextMenu = function(x, y){
-		var contextMenu = new Ext.menu.Menu({
-			items: [new Ext.menu.CheckItem({
-				text: "Snap to objects",
-				checked: uwm.data.snapToObjects,
-				listeners: {
-					checkchange: function(self, checked){
-						uwm.data.snapToObjects = checked;
-						uwm.ui.workflow.setSnapToGeometry(checked);
-					}
-				}
-			})]
-		});
-		
-		contextMenu.showAt(uwm.ui.getContextMenuPosition(x, y));
-	}
 }
 
 
