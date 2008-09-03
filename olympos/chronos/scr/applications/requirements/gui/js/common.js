@@ -318,7 +318,7 @@ uwm.connection.BaseConnection.prototype.setWorkflow = function(workflow){
 			
 			contextMenu.showAt([e.xy[0] + 2, e.xy[1] + 2]);
 			
-			e.stopEvent();
+			e.preventDefault();
 			
 			return false;
 		}
@@ -495,7 +495,7 @@ uwm.connection.getConnectionTypeDecorators = function(connectionType){
 			result.source = new uwm.connection.FilledDiamondDecorator();
 			result.target = new uwm.connection.ArrowDecorator();
 			break;
-
+			
 		default:
 			result.target = new uwm.connection.ArrowDecorator();
 	}
@@ -1139,4 +1139,35 @@ uwm.startApplication = function(){
 		uwm.data.autoLogout = true;
 		uwm.ui.createLogin();
 	}
+}
+
+
+uwm.Workflow = function(id){
+	draw2d.Workflow.call(this, id);
+}
+
+uwm.Workflow.prototype = new draw2d.Workflow;
+
+uwm.Workflow.prototype.type = "uwm.Workflow";
+
+
+uwm.Workflow.prototype.onContextMenu = function(x, y){
+	var contextMenu = new Ext.menu.Menu({
+		items: [new Ext.menu.CheckItem({
+			text: "Snap to objects",
+			checked: uwm.data.snapToObjects,
+			listeners: {
+				checkchange: function(self, checked){
+					uwm.data.snapToObjects = checked;
+					uwm.ui.workflow.setSnapToGeometry(checked);
+				}
+			}
+		})]
+	});
+	
+	contextMenu.showAt(uwm.ui.getContextMenuPosition(x, y));
+}
+
+uwm.Workflow.prototype.showMenu=function(/*:draw2d.Menu*/menu ,/*:int*/ xPos ,/*:int*/ yPos) {
+	
 }

@@ -17,6 +17,11 @@ cwm.figure.ChiGoal.prototype = new uwm.figure.RectFigure;
 
 cwm.figure.ChiGoal.prototype.type = "cwm.figure.ChiGoal";
 
+//Changed 2008-09-03: Added function
+cwm.figure.ChiGoal.prototype.getDescription = function() {
+	return "A measurable scope that the enterprise wants to achieve.";
+}
+
 cwm.figure.ChiGoal.prototype.getGrid = function(store){
 	return new Ext.grid.GridPanel({
 		id: "GridChiGoal",
@@ -48,7 +53,7 @@ cwm.figure.ChiGoal.prototype.getGrid = function(store){
 			cellclick: function(grid, rowIndex, columnIndex, e){
 				uwm.showProperties(grid.uwmClassName, grid.getStore().getAt(rowIndex).id);
 			},
-			cellcontextmenu: function(grid, rowIndex, columnIndex, e){
+			rowcontextmenu: function(grid, rowIndex, e){
 				var node = grid.getStore().getAt(rowIndex);
 				
 				var contextMenu = new Ext.menu.Menu({
@@ -77,10 +82,13 @@ cwm.figure.ChiGoal.prototype.getGrid = function(store){
 					}]
 				});
 				
-				contextMenu.showAt(e.getXY());
-				e.stopPropagation();
-				return false;
+				//Change 2008-09-03
+				contextMenu.showAt([e.getXY()[0] + 2, e.getXY()[1] + 2]);
+				
+				e.preventDefault();
 			}
+			
+			
 		}
 	});
 }
@@ -139,7 +147,6 @@ cwm.figure.ChiGoal.prototype.showEdit = function(parentComponent, oid){
 		frame: true,
 		labelAlign: "top",
 		title: 'ChiGoal Edit View',
-		autoScroll: true,
 		defaults: {
 			width: 222
 		},
