@@ -815,12 +815,14 @@ uwm.establishExistingConnections = function(drawElem, list){
 uwm.createFigureFromTree = function(oid, x, y, compartment){
 	uwm.jsonRequest({
 		usr_action: "display",
+		depth: 0,
+		omitMetaData: true,
 		oid: oid
 	}, "Creating new figure", function(data){
-		var uwmClassName = data.rootType;
+		var uwmClassName = data.node.type;
 		var parentoids = data.node.properties.parentoids;
 		var childoids = data.node.properties.childoids;
-		var label = data.node.values[1].Name.value;
+		var label = data.node.values[1].Name;
 		
 		uwm.createExistingFigure(uwmClassName, label, oid, parentoids, childoids, x, y, compartment);
 	});
@@ -963,21 +965,6 @@ uwm.changeField = function(fieldName, newValue, oid){
 	params["value--" + fieldName + "-" + oid] = newValue;
 	
 	uwm.jsonRequest(params, "Saving properties");
-}
-
-uwm.changeTreeNode = function(node){
-	if (node.id != "root") {
-		var uwmClassName = node.id.match(/^[^:]+/);
-		
-		var iconEl = node.ui.getIconEl();
-		iconEl.className += " Figure" + uwmClassName;
-		
-		var anchorEl = node.ui.getAnchor();
-		anchorEl.removeAttribute("href");
-	}
-	
-	node.eachChild(uwm.changeTreeNode);
-	
 }
 
 uwm.util.sleep = function(milliseconds){
