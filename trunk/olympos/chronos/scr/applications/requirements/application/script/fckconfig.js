@@ -103,6 +103,13 @@ FCKConfig.ToolbarSets["wCMFDefault"] = [
 	['Image','Link','Unlink'],['About']
 ] ;
 
+FCKConfig.ToolbarSets["Default"] = [
+	['FitWindow'],['Source'],
+	['Cut','Copy','Paste'],['Bold','Italic'],
+	['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
+	['Image','Link','Unlink']
+] ;
+
 FCKConfig.EnterMode = 'p' ;			// p | div | br
 FCKConfig.ShiftEnterMode = 'br' ;	// p | div | br
 
