@@ -202,11 +202,10 @@ uwm.ui.create = function(){
 									}), "-", {
 										text: "Delete from model",
 										handler: function(item){
-											var n = item.parentMenu.contextNode;
-											if (n.parentNode) {
-												n.remove();
-											}
-											uwm.deleteFigureFromModel(n.id);
+											var oid = node.id;
+											var uwmClassName = oid.match(/[^:]+/);
+											
+											uwm.deleteFigureFromModel(uwmClassName, oid);
 										}
 									}]
 								});
