@@ -137,7 +137,7 @@ uwm.figure.BaseFigure.prototype.getUwmContextMenu = function(){
 		}), new Ext.menu.Item({
 			text: "Delete from model",
 			handler: function(tiem, e){
-				uwm.deleteFigureFromModel(figure.getOid());
+				uwm.deleteFigureFromModel(figure.getUwmClass(), figure.getOid());
 			}
 		})]
 	});
@@ -1047,7 +1047,7 @@ uwm.jsonRequest = function(params, context, successFunction, failureFunction){
 	});
 }
 
-uwm.deleteFigureFromModel = function(oid){
+uwm.deleteFigureFromModel = function(uwmClassName, oid){
 	var figure = uwm.getByOid(oid);
 	if (figure) {
 		uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
@@ -1057,6 +1057,8 @@ uwm.deleteFigureFromModel = function(oid){
 		usr_action: "delete",
 		deleteoids: oid
 	}, "Deleting element");
+	
+	uwm.updateElementDisplay(oid, uwmClassName, "delete");
 }
 
 uwm.deleteConnectionFromModel = function(parentOid, childOid){
@@ -1155,6 +1157,63 @@ uwm.Workflow.prototype.onContextMenu = function(x, y){
 	contextMenu.showAt(uwm.ui.getContextMenuPosition(x, y));
 }
 
-uwm.Workflow.prototype.showMenu=function(/*:draw2d.Menu*/menu ,/*:int*/ xPos ,/*:int*/ yPos) {
+uwm.Workflow.prototype.showMenu = function(/*:draw2d.Menu*/menu,/*:int*/ xPos,/*:int*/ yPos){
+
+}
+
+uwm.updateElementDisplay = function(oid, uwmClassName, action, newLabels){
+	uwm.updateTree(oid, uwmClassName, action, newLabels);
+	uwm.updateGrid(oid, uwmClassName, action, newLabels);
+	uwm.updateDiagram(oid, uwmClassName, action, newLabels);
+}
+
+uwm.updateTree = function(oid, uwmClassName, action, newLabels){
+	var tree = Ext.getCmp("figureTree");
 	
+	var node = tree.getNodeById(oid);
+	if (node) {
+		switch (action) {
+			case "delete":
+				node.remove();
+				break;
+				
+			case "labelChange":
+				node.setText(eval(uwm.getModelFunction(uwmClassName, "getLabel") + "(newLabels)"));
+				break;
+		}
+	}
+}
+
+uwm.updateGrid = function(oid, uwmClassName, action, newLabels) {
+	var grid = Ext.getCmp("Grid" + uwmClassName);
+	
+	var store = grid.getStore();
+	
+	var record = store.getById(oid);
+	
+	switch(action) {
+		case "delete":
+			store.remove(record);
+			break;
+			
+		case "labelChange":
+			eval(uwm.getModelFunction(uwmClassName, "setRecordLabel") + "(record, newLabels)");
+			break;
+	}
+}
+
+uwm.updateDiagram = function(oid, uwmClassName, action, newLabels) {
+	var figure = uwm.getByOid(oid);
+	
+	if (figure) {
+		switch (action) {
+			case "delete":
+				uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
+				break;
+			
+			case "labelChange":
+				figure.setLabel(eval(uwm.getModelFunction(uwmClassName, "getLabel") + "(newLabels)"));
+				break;
+		}
+	}
 }

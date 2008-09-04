@@ -18,8 +18,19 @@ cwm.figure.ChiGoal.prototype = new uwm.figure.RectFigure;
 cwm.figure.ChiGoal.prototype.type = "cwm.figure.ChiGoal";
 
 //Changed 2008-09-03: Added function
-cwm.figure.ChiGoal.prototype.getDescription = function() {
+cwm.figure.ChiGoal.prototype.getDescription = function(){
 	return "A measurable scope that the enterprise wants to achieve.";
+}
+
+//Changed 2008-09-04: Added function
+cwm.figure.ChiGoal.prototype.getLabel = function(newLabels){
+	return newLabels.Name + " - " + newLabels.Priority;
+}
+
+//Changed 2008-09-04: Added function
+cwm.figure.ChiGoal.prototype.setRecordLabel = function(record, newLabels){
+	record.set("Name", newLabels.Name);
+	record.set("Priority", newLabels.Priority);
 }
 
 cwm.figure.ChiGoal.prototype.getGrid = function(store){
@@ -77,7 +88,8 @@ cwm.figure.ChiGoal.prototype.getGrid = function(store){
 							var record = grid.getStore().getAt(rowIndex);
 							
 							grid.getStore().remove(record);
-							uwm.deleteFigureFromModel(record.id);
+							//Changed 2008-09-04: Added "ChiGoal"
+							uwm.deleteFigureFromModel("ChiGoal", record.id);
 						}
 					}]
 				});
@@ -156,7 +168,16 @@ cwm.figure.ChiGoal.prototype.showEdit = function(parentComponent, oid){
 			name: 'Priority',
 			
 			inputType: 'textfield',
-			listeners: listeners
+			listeners: {
+				"change": function(field, newValue, oldValue){
+					uwm.fieldChanged(field, newValue, oldValue, oid);
+					uwm.updateElementDisplay(oid, "ChiGoal", "labelChange", {
+						Name: form.getForm().findField("Name").getValue(),
+						Priority: newValue
+					});
+				}
+			}
+		
 		}, {
 			fieldLabel: 'Value_Name',
 			name: 'Value_Name',
@@ -192,9 +213,17 @@ cwm.figure.ChiGoal.prototype.showEdit = function(parentComponent, oid){
 			name: 'Name',
 			
 			inputType: 'textfield',
-			listeners: listeners
-		},  // TODO check this manually
-		new Ext.form.HtmlEditor({
+			listeners: {
+				"change": function(field, newValue, oldValue){
+					uwm.fieldChanged(field, newValue, oldValue, oid);
+					uwm.updateElementDisplay(oid, "ChiGoal", "labelChange", {
+						Name: newValue,
+						Priority: form.getForm().findField("Priority").getValue()
+					});
+				}
+			}
+		}, // TODO check this manually
+ new Ext.form.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			enableAlignments: false,
@@ -204,7 +233,7 @@ cwm.figure.ChiGoal.prototype.showEdit = function(parentComponent, oid){
 			enableLinks: false,
 			enableSourceEdit: false,
 			listeners: htmlListeners
-		//Change: removed one comma
+			//Change: removed one comma
 		}), {
 			fieldLabel: 'created',
 			name: 'created',
@@ -390,7 +419,7 @@ cwm.figure.ChiRequirement.prototype.getGrid = function(store) {
 							var record = grid.getStore().getAt(rowIndex);
 							
 							grid.getStore().remove(record);
-							uwm.deleteFigureFromModel(record.id);
+							uwm.deleteFigureFromModel("ChiRequirement", record.id);
 						}
 					}]
 				});
@@ -441,10 +470,11 @@ cwm.figure.ChiRequirement.prototype.showEdit = function(parentComponent, oid){
 
 	Ext.form.Field.prototype.msgTarget = 'side';
 	var listeners = {
-					"change": function(field, newValue, oldValue){
-																	uwm.fieldChanged(field, newValue, oldValue, oid);
-																}
-					};
+		"change": function(field, newValue, oldValue){
+			uwm.fieldChanged(field, newValue, oldValue, oid);
+			uwm.updateElementDisplay(oid, "ChiRequirement")
+		}
+	};
 	var htmlListeners = {
 						"sync": function(field, html){
 						field.contentChanged = true;
@@ -885,7 +915,7 @@ cwm.figure.ChiIssue.prototype.getGrid = function(store){
 							var record = grid.getStore().getAt(rowIndex);
 							
 							grid.getStore().remove(record);
-							uwm.deleteFigureFromModel(record.id);
+							uwm.deleteFigureFromModel("ChiIssue", record.id);
 						}
 					}]
 				});
@@ -1035,8 +1065,8 @@ cwm.figure.ChiIssue.prototype.showEdit = function(parentComponent, oid){
 			
 			inputType: 'textfield',
 			listeners: listeners
-		},  // TODO check this manually
-		new Ext.form.HtmlEditor({
+		}, // TODO check this manually
+ new Ext.form.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			enableAlignments: false,
@@ -1196,7 +1226,7 @@ cwm.figure.ChiFeature.prototype.getGrid = function(store){
 							var record = grid.getStore().getAt(rowIndex);
 							
 							grid.getStore().remove(record);
-							uwm.deleteFigureFromModel(record.id);
+							uwm.deleteFigureFromModel("ChiFeature", record.id);
 						}
 					}]
 				});
@@ -1377,8 +1407,8 @@ cwm.figure.ChiFeature.prototype.showEdit = function(parentComponent, oid){
 			
 			inputType: 'textfield',
 			listeners: listeners
-		},  // TODO check this manually
-		new Ext.form.HtmlEditor({
+		}, // TODO check this manually
+ new Ext.form.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			enableAlignments: false,
