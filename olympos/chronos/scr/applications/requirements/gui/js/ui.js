@@ -90,7 +90,7 @@ uwm.ui.create = function(){
 					//tabPosition: "bottom",
 					enableTabScroll: true,
 					id: "existingFiguresContainer",
-					items: [new Ext.tree.TreePanel({
+					items: [new uwm.TreePanel({
 						layout: "fit",
 						id: "figureTree",
 						iconCls: "TreeTab",
@@ -174,20 +174,6 @@ uwm.ui.create = function(){
 						rootVisible: false,
 						root: new Ext.tree.AsyncTreeNode({
 							id: "root"
-						}),
-						loader: new Ext.tree.TreeLoader({
-							url: uwm.config.jsonUrl,
-							baseParams: {
-								sid: uwm.data.sid,
-								controller: "TreeViewController",
-								response_format: "JSON",
-								usr_action: "loadChildren"
-							},
-							listeners: {
-								load: function(self, node, response){
-									uwm.changeTreeNode(node);
-								}
-							}
 						}),
 						listeners: {
 							click: function(node, e){
