@@ -199,6 +199,13 @@ uwm.ui.create = function(){
 											
 											uwm.showInGrid(uwmClassName, oid);
 										}
+									}), new Ext.menu.Item({
+										text: "Show in Hierarchy",
+										handler: function(item, e){
+											var oid = node.id;
+											
+											uwm.showInHierarchy(oid);
+										}
 									}), "-", {
 										text: "Delete from model",
 										handler: function(item){
@@ -214,6 +221,92 @@ uwm.ui.create = function(){
 								contextMenu.showAt(e.getXY());
 							}
 						}
+					}), new Ext.tree.TreePanel({
+						layout: "fit",
+						id: "hierarchyTree",
+						iconCls: "TreeTab",
+						autoScroll: true,
+						enableDD: true,
+						dragConfig: {
+							ddGroup: "gridDDGroup"
+						},
+						root: new Ext.tree.TreeNode(),
+						rootVisible: false,
+						listeners: {
+							click: function(node, e){
+								var uwmClassName = node.attributes.oid.match(/[^:]+/);
+								
+								uwm.showProperties(uwmClassName, node.attributes.oid);
+							},
+							contextmenu: function(node, e){
+								var contextMenu = new Ext.menu.Menu({
+									items: [new Ext.menu.Item({
+										text: "Show in diagram",
+										handler: function(item, e){
+											var oid = node.attributes.oid;
+											
+											uwm.showInDiagram(oid);
+										},
+										disabled: !uwm.getByOid(node.attributes.oid)
+									}), new Ext.menu.Item({
+										text: "Show in grid",
+										handler: function(item, e){
+											var oid = node.attributes.oid;
+											var uwmClassName = oid.match(/[^:]+/);
+											
+											uwm.showInGrid(uwmClassName, oid);
+										}
+									}), new Ext.menu.Item({
+										text: "Show in tree",
+										handler: function(item, e){
+											var oid = node.attributes.oid;
+											
+											uwm.showInTree(oid);
+										}
+									}), new Ext.menu.Item({
+										text: "Show in Hierarchy",
+										handler: function(item, e){
+											var oid = node.attributes.oid;
+											
+											uwm.showInHierarchy(oid);
+										}
+									}), "-", {
+										text: "Delete from model",
+										handler: function(item){
+											var oid = node.attributes.oid;
+											var uwmClassName = oid.match(/[^:]+/);
+											
+											uwm.deleteFigureFromModel(uwmClassName, oid);
+										}
+									}]
+								});
+								node.select();
+								
+								contextMenu.showAt(e.getXY());
+							}
+							
+						},
+						loader: new Ext.tree.TreeLoader({
+							dataUrl: uwm.config.jsonUrl,
+							baseParams: {
+								sid: uwm.data.sid,
+								response_format: "JSON",
+								usr_action: "display",
+								depth: 2,
+								omitMetaData: true
+							},
+							listeners: {
+								beforeload: function(self, node, callback){
+									self.baseParams.oid = node.attributes.oid;
+								},
+								load: function(self, node, response){
+									var responseArray = Ext.decode(response.responseText);
+									
+									uwm.loadHierarchyNode(responseArray.node, node, null);
+								}
+								
+							}
+						})
 					})]
 				}]
 			}
@@ -287,14 +380,15 @@ uwm.ui.createNewFigureTemplates = function(container){
 		var descFunc = uwm.getModelFunction(currFigure, "getDescription");
 		
 		if (descFunc) {
-		var description = eval(descFunc + "()");
-		
-		if (description) {
-			new Ext.ToolTip({
-				target: "new" + currFigure,
-				html: description
-			});
-		}}
+			var description = eval(descFunc + "()");
+			
+			if (description) {
+				new Ext.ToolTip({
+					target: "new" + currFigure,
+					html: description
+				});
+			}
+		}
 	}
 }
 

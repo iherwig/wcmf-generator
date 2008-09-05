@@ -1,6 +1,3 @@
-/**
- * @class wcmf.tree.Tree. Build on Ext.tree.TreePanel
- */
 uwm.TreePanel = function(config){
 	/**
 	 * @cfg {Array} customParams An assoziative array of additional values passed to the controller [optional]
@@ -39,9 +36,6 @@ uwm.TreePanel = function(config){
 
 Ext.extend(uwm.TreePanel, Ext.tree.TreePanel, {});
 
-/**
- * @class wcmf.tree.TreeLoader. Build on Ext.tree.TreeLoader
- */
 uwm.TreeLoader = function(config){
 	uwm.TreeLoader.superclass.constructor.call(this, config);
 }
@@ -61,6 +55,7 @@ Ext.extend(uwm.TreeLoader, Ext.tree.TreeLoader, {
 					'qtip': '',
 					'qtipTitle': responseNode.oid,
 					'iconCls': "Figure" + uwmClassName,
+					oid: responseNode.oid
 				}
 				var n = this.createNode(nodeDef);
 				if (n) {
