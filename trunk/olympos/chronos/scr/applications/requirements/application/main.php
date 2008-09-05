@@ -17,7 +17,7 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: main.php 711 2008-07-30 13:32:19Z iherwig $
+ * $Id: main.php 746 2008-09-01 21:45:51Z iherwig $
  */
 error_reporting(E_ERROR | E_PARSE);
 
@@ -75,7 +75,12 @@ function onError($message, $file='', $line='')
   }
   else if ($numCalled == 3)
   {
-    Message::hint('FATAL. See \''.$MESSAGE_LOG_FILE.'\' for details.');
+    // make sure that no error can happen in this stage
+    $msg = 'FATAL. See \''.$MESSAGE_LOG_FILE.'\' for details.';
+    if ($responseFormat == MSG_FORMAT_JSON)
+      print JSONUtil::encode(array('success' => false, 'errorMsg' => $msg));
+    else
+      Message::hint($msg);
     exit;
   }
   else
