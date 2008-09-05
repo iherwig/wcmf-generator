@@ -129,6 +129,11 @@ uwm.figure.BaseFigure.prototype.getUwmContextMenu = function(){
 			handler: function(item, e){
 				uwm.showInGrid(figure.getUwmClass(), figure.getOid());
 			}
+		}), new Ext.menu.Item({
+			text: "Show in Hierarchy",
+			handler: function(item, e){
+				uwm.showInHierarchy(figure.getOid());
+			}
 		}), "-", new Ext.menu.Item({
 			text: "Delete from diagram",
 			handler: function(item, e){
@@ -753,7 +758,7 @@ uwm.initializeDropZone = function(g){
 					uwm.createExistingFigure(data.grid.uwmClassName, data.selections[0].get("Name"), oid, data.selections[0].get("parentoids"), data.selections[0].get("childoids"), x, y, compartment);
 				}
 				else if (data.node != undefined) {
-					uwm.createFigureFromTree(dd.dragData.node.id, x, y, compartment);
+					uwm.createFigureFromTree(dd.dragData.node.attributes.oid, x, y, compartment);
 				}
 				else {
 					uwm.createNewFigure(dd.dragData.uwmClassName, x, y, compartment, uwm.handleFigureCreated);
@@ -1165,6 +1170,7 @@ uwm.updateElementDisplay = function(oid, uwmClassName, action, newLabels){
 	uwm.updateTree(oid, uwmClassName, action, newLabels);
 	uwm.updateGrid(oid, uwmClassName, action, newLabels);
 	uwm.updateDiagram(oid, uwmClassName, action, newLabels);
+	uwm.updateHierarchy(oid, uwmClassName, action, newLabels);
 }
 
 uwm.updateTree = function(oid, uwmClassName, action, newLabels){
@@ -1184,14 +1190,14 @@ uwm.updateTree = function(oid, uwmClassName, action, newLabels){
 	}
 }
 
-uwm.updateGrid = function(oid, uwmClassName, action, newLabels) {
+uwm.updateGrid = function(oid, uwmClassName, action, newLabels){
 	var grid = Ext.getCmp("Grid" + uwmClassName);
 	
 	var store = grid.getStore();
 	
 	var record = store.getById(oid);
 	
-	switch(action) {
+	switch (action) {
 		case "delete":
 			store.remove(record);
 			break;
@@ -1202,7 +1208,7 @@ uwm.updateGrid = function(oid, uwmClassName, action, newLabels) {
 	}
 }
 
-uwm.updateDiagram = function(oid, uwmClassName, action, newLabels) {
+uwm.updateDiagram = function(oid, uwmClassName, action, newLabels){
 	var figure = uwm.getByOid(oid);
 	
 	if (figure) {
@@ -1210,10 +1216,166 @@ uwm.updateDiagram = function(oid, uwmClassName, action, newLabels) {
 			case "delete":
 				uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
 				break;
-			
+				
 			case "labelChange":
 				figure.setLabel(eval(uwm.getModelFunction(uwmClassName, "getLabel") + "(newLabels)"));
 				break;
 		}
 	}
+}
+
+uwm.updateHierarchy = function(oid, uwmClassName, action, newLabels){
+	var tree = Ext.getCmp("hierarchyTree");
+	
+	uwm.walkUpdateHierarchy(tree.getRootNode(), oid, uwmClassName, action, newLabels);
+}
+
+uwm.walkUpdateHierarchy = function(node, oid, uwmClassName, action, newLabels){
+	var resume = true;
+	
+	if (node && node.attributes && node.attributes.oid && node.attributes.oid == oid) {
+		switch (action) {
+			case "delete":
+				var parent = node.parentNode;
+				node.remove();
+				
+				if (!parent.hasChildNodes()) {
+					parent.remove();
+				}
+				resume = false;
+				break;
+				
+			case "labelChange":
+				node.setText(eval(uwm.getModelFunction(uwmClassName, "getLabel") + "(newLabels)"));
+				break;
+		}
+	}
+	
+	if (resume) {
+		for (var i = 0; i < node.childNodes.length; i++) {
+			uwm.walkUpdateHierarchy(node.childNodes[i], oid, uwmClassName, action, newLabels);
+		}
+	}
+}
+
+uwm.showInHierarchy = function(oid){
+	var tree = Ext.getCmp("hierarchyTree");
+	
+	tree.show();
+	
+	var firstChild = tree.getRootNode().firstChild;
+	
+	if (firstChild) {
+		firstChild.remove();
+	}
+	
+	uwm.jsonRequest({
+		oid: oid,
+		omitMetaData: true,
+		usr_action: "display",
+		depth: 1
+	}, "Loading hierarchy", function(data){
+		uwm.loadHierarchyNode(data.node, null, tree);
+	});
+}
+
+uwm.loadHierarchyNode = function(nodeData, parentNode, tree){
+	var uwmClassName = nodeData.type;
+	var oid = nodeData.oid;
+	var childoids = nodeData.properties.childoids;
+	
+	var label = uwm.buildLabel(uwmClassName, nodeData);
+	
+	var subClasses = new Array();
+	for (var i = 0; i < childoids.length; i++) {
+		var subUwmClassName = childoids[i].match(/^[^:]+/);
+		var count = subClasses[subUwmClassName];
+		if (count) {
+			count++;
+		}
+		else {
+			count = 1;
+		}
+		subClasses[subUwmClassName] = count;
+		subClasses["last"] = subUwmClassName;
+	}
+	
+	var thisTreeNode;
+	
+	if (tree != null) {
+		if (nodeData[subClasses["last"]] || childoids.length == 0) {
+		
+			thisTreeNode = new Ext.tree.TreeNode({
+				text: label,
+				iconCls: "Figure" + uwmClassName,
+				isLeaf: childoids.length > 0,
+				oid: oid
+			});
+		}
+		else {
+			thisTreeNode = new Ext.tree.AsyncTreeNode({
+				text: label,
+				iconCls: "Figure" + uwmClassName,
+				isLeaf: false,
+				oid: oid
+			});
+		}
+		
+		if (parentNode != null) {
+			parentNode.appendChild(thisTreeNode);
+			parentNode.expand();
+		}
+		else {
+			tree.getRootNode().appendChild(thisTreeNode);
+			tree.getRootNode().expand();
+		}
+	}
+	else {
+		thisTreeNode = parentNode;
+		tree = true;
+	}
+	
+	for (var currClass in subClasses) {
+		if (currClass != "remove") {
+			var subNodesData = nodeData[currClass];
+			
+			if (subNodesData) {
+				var constraintsData = uwm.connection.getConstraints(uwmClassName, currClass);
+				
+				var connectionNode = new Ext.tree.TreeNode({
+					text: constraintsData.label,
+					iconCls: "HierarchyChild",
+					isLeaf: false,
+					draggable: false
+				});
+				
+				thisTreeNode.appendChild(connectionNode);
+				thisTreeNode.expand();
+				
+				for (var currSubNodeIndex = 0; currSubNodeIndex < subNodesData.length; currSubNodeIndex++) {
+					var currSubNodeData = subNodesData[currSubNodeIndex];
+					
+					uwm.loadHierarchyNode(currSubNodeData, connectionNode, tree);
+				}
+			}
+		}
+	}
+	
+	if (parentNode == null) {
+		tree.root.firstChild.render();
+	}
+}
+
+uwm.buildLabel = function(uwmClassName, nodeData){
+	var displayValue = nodeData.properties.display_value;
+	
+	var displayValues = displayValue.split(/\|/);
+	
+	var labels = new Array();
+	for (var i = 0; i < displayValues.length; i++) {
+		labels[displayValues[i]] = nodeData.values[1][displayValues[i]];
+	}
+	
+	return eval(uwm.getModelFunction(uwmClassName, "getLabel") + "(labels)");
+	
 }
