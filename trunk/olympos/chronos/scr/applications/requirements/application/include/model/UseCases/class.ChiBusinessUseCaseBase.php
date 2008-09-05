@@ -65,7 +65,7 @@ class ChiBusinessUseCaseBase extends ChiBase
       if ($name == 'fk_chibusinessprocess_id') $description = Message::get("");
       if ($name == 'PrimaryActor') $description = Message::get("the main actor of this use case");
       if ($name == 'OtherActors') $description = Message::get("The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.");
-      if ($name == 'GoalInContext') $description = Message::get("The goal should implicitly express the actor's intent or purpose of the use case, such as "Enrol Student in Seminar."");
+      if ($name == 'GoalInContext') $description = Message::get("The goal should implicitly express the actor's intent or purpose of the use case, such as *Enrol Student in Seminar.*");
       if ($name == 'Scope') $description = Message::get("Boundaries in which the use case is operated when invoked (E.g. CMS)");
       if ($name == 'Level') $description = Message::get("Authorizations for operations/actions to be performed against the Chi business objects in scope. Against every object/process 4 CRUD basic operations are possible:
 Create (Write)
