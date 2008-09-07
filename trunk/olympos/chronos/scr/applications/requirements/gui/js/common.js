@@ -1156,6 +1156,13 @@ uwm.Workflow.prototype.onContextMenu = function(x, y){
 					uwm.ui.workflow.setSnapToGeometry(checked);
 				}
 			}
+		}), new Ext.menu.Item({
+			text: "Auto-layout",
+			listeners: {
+				click: function() {
+					uwm.autolayout.doLayout(uwm.ui.workflow);
+				}
+			}
 		})]
 	});
 	
