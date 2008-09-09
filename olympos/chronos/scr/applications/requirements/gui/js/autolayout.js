@@ -6,7 +6,7 @@ uwm.autolayout.JiggleObject = function(){
 	this.booleanField = false;
 	this.intField = 0;
 	this.objectField = null;
-	/* The context of a JiggleObject identifies the parent JiggleObject
+	/** The context of a JiggleObject identifies the parent JiggleObject
 	 (if any) that contains it.  The context of a Vertex or Cell is either
 	 a Graph or a Cell; the context of an Edge is a Graph; the context of
 	 an EdgeLabel is an Edge.  For now, we assume that the	context of a
@@ -1335,12 +1335,15 @@ uwm.autolayout.doLayout = function(workflow){
 	}
 	
 	for (var i = 1; i < clusters.length; i++) {
-		for (var j = 1; j < clusters.length; j++) {
-			if (i != j) {
-				var from = clusters[i].vertex;
-				var to = clusters[j].vertex;
-				var edge = graph.insertEdge(from, to, false);
-			}
+		if (i != 1) {
+			var from = clusters[i - 1].vertex;
+			var to = clusters[i].vertex;
+			var edge = graph.insertEdge(from, to, false);
+		}
+		else {
+			var from = clusters[clusters.length - 1].vertex;
+			var to = clusters[1].vertex;
+			var edge = graph.insertEdge(from, to, false);
 		}
 	}
 	
@@ -1359,11 +1362,11 @@ uwm.autolayout.doLayout = function(workflow){
 		forceModel.addConstraint(new uwm.autolayout.ProjectionConstraint(graph, projDim));
 	}
 	
-	var accuracy = 0.00001;
-	var restartThreshold = 2;
+	var accuracy = 0.00000001;
+	var restartThreshold = 0.2;
 	var opt = new uwm.autolayout.ConjugateGradients(graph, forceModel, accuracy, restartThreshold);
 	
-	for (var i = 0; i < 100; i++) {
+	for (var i = 0; i < 25; i++) {
 		opt.improveGraph();
 	}
 	
