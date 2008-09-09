@@ -6,7 +6,7 @@ uwm.autolayout.JiggleObject = function(){
 	this.booleanField = false;
 	this.intField = 0;
 	this.objectField = null;
-	/** The context of a JiggleObject identifies the parent JiggleObject
+	/* The context of a JiggleObject identifies the parent JiggleObject
 	 (if any) that contains it.  The context of a Vertex or Cell is either
 	 a Graph or a Cell; the context of an Edge is a Graph; the context of
 	 an EdgeLabel is an Edge.  For now, we assume that the	context of a
@@ -42,9 +42,9 @@ uwm.autolayout.JiggleObject.prototype.power = function(base, d){
 	else if (d == 1) 
 		return base;
 	else if (d % 2 == 0) 
-		return intSquare(power(base, d / 2));
+		return this.intSquare(this.power(base, d / 2));
 	else 
-		return base * intSquare(power(base, d / 2));
+		return base * this.intSquare(this.power(base, d / 2));
 }
 
 ///ForceLaw
@@ -113,6 +113,7 @@ uwm.autolayout.QuadraticSpringLaw.prototype.springAttraction = function(edge){
 }
 
 ///VertexVertexRepulsionLaw
+
 uwm.autolayout.VertexVertexRepulsionLaw = function(graph, preferredEdgeLength){
 	uwm.autolayout.ForceLaw.call(this, graph);
 	this.preferredEdgeLength = preferredEdgeLength;
@@ -153,8 +154,8 @@ uwm.autolayout.VertexVertexRepulsionLaw.prototype.apply = function(negativeGradi
 }
 
 uwm.autolayout.VertexVertexRepulsionLaw.prototype.applyUsingBarnesHut = function(negativeGradient){
-	var n = graph.numberOfVertices;
-	var d = graph.getDimensions();
+	var n = this.graph.numberOfVertices;
+	var d = this.graph.getDimensions();
 	if (n <= 1) 
 		return;
 	this.graph.recomputeBoundaries();
@@ -177,10 +178,11 @@ uwm.autolayout.VertexVertexRepulsionLaw.prototype.applyUsingBarnesHut = function
 	}
 	this.pushForcesDownTree(root);
 	for (var i = 0; i < n; i++) {
-		var v = graph.vertices.get(i);
+		var v = this.graph.vertices.get(i);
 		var qt = v.getContext();
-		for (var j = 0; j < d; j++) 
+		for (var j = 0; j < d; j++) {
 			negativeGradient[i][j] += qt.force[j];
+		}
 		v.setContext(this.graph);
 	}
 }
@@ -196,7 +198,7 @@ uwm.autolayout.VertexVertexRepulsionLaw.prototype.computeQTRepulsion = function(
 		}
 	}
 	else {
-		var w = Math.min(this.pairwiseRepulsion(leaf, cell), this.cap / uwm.autolayout.Cell.getDistance(leaf, cell));
+		var w = Math.min(this.pairwiseRepulsion(leaf, cell), this.cap / uwm.autolayout.Cell.prototype.getDistance(leaf, cell));
 		var leafWeight = leaf.getWeight();
 		var cellWeight = cell.getWeight();
 		var leafCoords = leaf.getCoords();
@@ -223,7 +225,7 @@ uwm.autolayout.VertexVertexRepulsionLaw.prototype.wellSeparated = function(leaf,
 		for (var i = 0; i < d; i++) {
 			len = Math.min(len, hi[i] - lo[i]);
 		}
-		var dist = uwm.autolayout.Cell.getDistance(leaf, cell);
+		var dist = uwm.autolayout.Cell.prototype.getDistance(leaf, cell);
 		return ((len / dist) < this.barnesHutTheta);
 	}
 }
@@ -238,7 +240,7 @@ uwm.autolayout.VertexVertexRepulsionLaw.prototype.pushForcesDownTree = function(
 			}
 		}
 		for (var i = 0; i < numberOfSubtrees; i++) {
-			pushForcesDownTree(qt.subtrees[i]);
+			this.pushForcesDownTree(qt.subtrees[i]);
 		}
 	}
 }
@@ -791,13 +793,13 @@ uwm.autolayout.Cell.prototype.radiusSegment = function(d, cellSize, segment){
 uwm.autolayout.QuadTree = function(graph, max, parent){
 	uwm.autolayout.Cell.call(this);
 	
-	this.setContext(graph);
 	this.objectField = null;
 	this.subtrees = new Array();
 	
 	var d;
 	
 	if (!max) {
+		this.setContext(graph);
 		d = graph.getDimensions();
 		this.setDimensions(d);
 		var n = graph.numberOfVertices;
@@ -812,6 +814,7 @@ uwm.autolayout.QuadTree = function(graph, max, parent){
 	}
 	else {
 		//graph == min
+		this.setContext(parent);
 		d = parent.getDimensions();
 		this.setDimensions(d);
 		this.setMin(graph);
@@ -820,7 +823,7 @@ uwm.autolayout.QuadTree = function(graph, max, parent){
 	
 	this.force = new Array();
 	for (var i = 0; i < d; i++) {
-		force[i] = 0;
+		this.force[i] = 0;
 	}
 }
 
@@ -1095,7 +1098,7 @@ uwm.autolayout.Edge.prototype.setPreferredLength = function(len){
 }
 
 uwm.autolayout.Edge.prototype.getLengthSquared = function(){
-	return uwm.autolayout.Vertex.getDistanceSquared(this.from, this.to);
+	return uwm.autolayout.Vertex.prototype.getDistanceSquared(this.from, this.to);
 }
 
 uwm.autolayout.Edge.prototype.getLength = function(){
@@ -1224,7 +1227,7 @@ uwm.autolayout.Graph.prototype.recomputeBoundaries = function(){
 		hi[i] = -Number.MAX_VALUE;
 	}
 	for (var i = 0; i < this.numberOfVertices; i++) {
-		var v = vertices.get(i);
+		var v = this.vertices.get(i);
 		var c = v.getCoords();
 		for (var j = 0; j < d; j++) {
 			lo[j] = Math.min(lo[j], c[j]);
@@ -1271,21 +1274,516 @@ uwm.autolayout.Graph.prototype.dft = function(v){
 	}
 }
 
+///VertexEdgeRepulsionLaw
 
-uwm.autolayout.doLayout = function(workflow){
-	var dimensions = 2;
+uwm.autolayout.VertexEdgeRepulsionLaw = function(graph, preferredEdgeLength, strength){
+	uwm.autolayout.ForceLaw.call(this, graph);
 	
-	var graph = new uwm.autolayout.Graph(dimensions);
+	this.preferredEdgeLength = preferredEdgeLength;
+	this.strength = 1;
 	
-	var figures = workflow.getFigures();
-	var vertexes = new draw2d.ArrayList();
-	for (var i = 0; i < figures.getSize(); i++) {
-		var figure = figures.get(i);
-		var vertex = graph.insertVertex();
+	this.gridding = false;
+	
+	if (strength) {
+		this.strength = strength;
+	}
+}
+uwm.autolayout.VertexEdgeRepulsionLaw.prototype = new uwm.autolayout.ForceLaw;
+
+uwm.autolayout.VertexEdgeRepulsionLaw.prototype.getGridding = function(){
+	return gridding;
+}
+
+uwm.autolayout.VertexEdgeRepulsionLaw.prototype.setGridding = function(b){
+	this.gridding = b;
+}
+
+uwm.autolayout.VertexEdgeRepulsionLaw.prototype.apply = function(negativeGradient){
+	if (this.gridding) {
+		this.applyUsingGridding(negativeGradient);
+	}
+	var n = this.graph.numberOfVertices;
+	var m = this.graph.numberOfEdges;
+	var d = this.graph.getDimensions();
+	for (var i = 0; i < n; i++) {
+		var v = this.graph.vertices.get(i);
+		for (var j = 0; j < m; j++) {
+			var e = this.graph.edges.get(j);
+			var from = e.getFrom();
+			var to = e.getTo();
+			this.computeRepulsion(v, e, negativeGradient);
+		}
+	}
+}
+
+uwm.autolayout.VertexEdgeRepulsionLaw.prototype.applyUsingGridding = function(negativeGradient){
+	this.graph.recomputeBoundaries();
+	var n = this.graph.numberOfVertices;
+	var m = this.graph.numberOfEdges;
+	var d = this.graph.getDimensions();
+	var gridSize = new Array();
+	var drawingArea = this.graph.getSize();
+	var k = this.preferredEdgeLength;
+	for (var i = 0; i < d; i++) {
+		gridSize[i] = parseInt(drawingArea[i] / k) + 1;
+	}
+	var grid = new draw2d.ArrayList();
+	var gMin = this.graph.getMin();
+	var index = new Array();
+	var sign = new Array();
+	for (var i = 0; i < n; i++) {
+		var v = this.graph.vertices.get(i);
+		var c = v.getCoords();
+		for (var j = 0; j < d; j++) {
+			index[j] = parseInt((c[j] - gMin[j]) / k);
+		}
+		var gridCell = grid.get(index);
+		if (gridCell == null) {
+			grid.insertElementAt(new draw2d.ArrayList(), index);
+		}
+		else {
+			gridCell.add(v);
+		}
+		v.objectField = index;
+	}
+	for (var i = 0; i < m; i++) {
+		var e = this.graph.edges.get(i);
+		var from = e.getFrom();
+		var to = e.getTo();
+		var fCoords = from.getCoords();
+		var tCoords = to.getCoords();
+		for (var j = 0; j < d; j++) {
+			if (fCoords[j] < tCoords[j]) {
+				sign[j] = 1;
+			}
+			else if (fCoords[j] > tCoords[j]) {
+				sign[j] = -1;
+			}
+			else {
+				sign[j] = 0;
+			}
+		}
+		var current = from.objectField;
+		var numberOfAdjs = this.power(3, d);
+		var flag = true;
+		while (flag || (!this.equal(current, to.objectField))) {
+			flag = false;
+			for (var adj = 0; adj < numberOfAdjs; adj++) {
+				var temp = adj;
+				var doSecondPart = true;
+				for (var j = 0; j < d; j++) {
+					index[j] = current[j] + (temp % 3) - 1;
+					if ((index[j] < 0) || (index[j] >= gridSize[j])) {
+						doSecondPart = false
+						temp /= 3;
+					}
+				}
+				if (doSecondPart) {
+					var gridCell = grid.get(index);
+					if ((gridCell != null) && (!gridCell.booleanField)) {
+						for (var en = 0; en < gridCell.length; en++) {
+							var v = gridCell[en];
+							this.computeRepulsion(v, e, negativeGradient);
+						}
+						gridCell.booleanField = true;
+					}
+				}
+			}
+			var time;
+			var minTime = Number.MAX_VALUE;
+			var nextAxis = 0;
+			for (var axis = 0; axis < d; axis++) {
+				if (sign[axis] == 0) {
+					continue;
+				}
+				if (sign[axis] == 1) {
+					time = (current[axis] + 1) * k /
+					(tCoords[axis] - fCoords[axis]);
+				}
+				else {
+					time = current[axis] * k /
+					(fCoords[axis] - tCoords[axis]);
+				}
+				if (time < minTime) {
+					minTime = time;
+					nextAxis = axis;
+				}
+			}
+			current[nextAxis] += sign[nextAxis];
+		}
+	}
+}
+
+uwm.autolayout.VertexEdgeRepulsionLaw.prototype.equal = function(u, v){
+	var d = u.length;
+	for (var i = 0; i < d; i++) {
+		if (u[i] != v[i]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+uwm.autolayout.VertexEdgeRepulsionLaw.prototype.computeRepulsion = function(v, e, negativeGradient){
+	var from = e.getFrom();
+	var to = e.getTo();
+	if ((from == v) || (to == v)) {
+		return;
+	}
+	var d = v.getDimensions();
+	var vCoords = v.getCoords();
+	var fCoords = from.getCoords();
+	var tCoords = to.getCoords();
+	var dp = 0;
+	var lenSquared;
+	for (var i = 0; i < d; i++) {
+		dp += (vCoords[i] - fCoords[i]) * (tCoords[i] - fCoords[i]);
+	}
+	if (dp <= 0) {
+		this.computeRepulsionVertex(v, from, negativeGradient);
+	}
+	else if (dp >= (lenSquared = e.getLengthSquared())) {
+		this.computeRepulsionVertex(v, to, negativeGradient);
+	}
+	else {
+		var len = Math.sqrt(lenSquared);
+		var alpha = dp / len;
+		var pCoords = new Array();
+		for (var i = 0; i < d; i++) {
+			pCoords[i] = (1 - alpha) * fCoords[i] + alpha * tCoords[i];
+		}
+		var w = Math.min(this.strength * this.pairwiseRepulsionCoords(v, pCoords), this.cap / uwm.autolayout.Vertex.prototype.getDistancePoint(v, pCoords));
+		if (w == 0) {
+			return;
+		}
+		var vWeight = v.getWeight();
+		var fWeight = from.getWeight();
+		var tWeight = to.getWeight();
+		for (var i = 0; i < d; i++) {
+			var force1 = (vCoords[i] - fCoords[i]) * w * (1 - alpha);
+			var force2 = (vCoords[i] - tCoords[i]) * w * alpha;
+			negativeGradient[v.intField][i] += force1 * fWeight;
+			negativeGradient[from.intField][i] -= force1 * vWeight;
+			negativeGradient[v.intField][i] += force2 * tWeight;
+			negativeGradient[to.intField][i] -= force2 * vWeight;
+		}
+	}
+}
+
+uwm.autolayout.VertexEdgeRepulsionLaw.prototype.computeRepulsionVertex = function(v1, v2, negativeGradient){
+	var d = v1.getDimensions();
+	var w = Math.min(this.strength * this.pairwiseRepulsion(v1, v2), this.cap / uwm.autolayout.Vertex.prototype.getDistance(v1, v2));
+	if (w == 0) {
+		return;
+	}
+	var v1Coords = v1.getCoords();
+	var weight1 = v1.getWeight();
+	var v2Coords = v2.getCoords();
+	var weight2 = v2.getWeight();
+	for (var i = 0; i < d; i++) {
+		var force = (v1Coords[i] - v2Coords[i]) * w;
+		negativeGradient[v1.intField][i] += force * weight2;
+		negativeGradient[v2.intField][i] -= force * weight1;
+	}
+}
+
+///InverseSquareVertexEdgeRepulsionLaw
+
+uwm.autolayout.InverseSquareVertexEdgeRepulsionLaw = function(graph, preferredEdgeLength, strength){
+	if (!strength) {
+		strength = 1;
+	}
+	
+	uwm.autolayout.VertexEdgeRepulsionLaw.call(this, graph, preferredEdgeLength, strength);
+}
+
+uwm.autolayout.InverseSquareVertexEdgeRepulsionLaw.prototype = new uwm.autolayout.VertexEdgeRepulsionLaw;
+
+uwm.autolayout.InverseSquareVertexEdgeRepulsionLaw.prototype.pairwiseRepulsion = function(c1, c2){
+	var k = this.preferredEdgeLength + uwm.autolayout.Cell.prototype.sumOfRadii(c1, c2);
+	var d = uwm.autolayout.Cell.prototype.getDistance(c1, c2);
+	if (d >= k) {
+		return 0;
+	}
+	else {
+		return this.cube(k / d) - k / d;
+	}
+}
+
+uwm.autolayout.InverseSquareVertexEdgeRepulsionLaw.prototype.pairwiseRepulsionCoords = function(cell, coords){
+	var k = this.preferredEdgeLength + uwm.autolayout.Cell.prototype.radius(cell, coords);
+	var d = uwm.autolayout.Cell.prototype.getDistancePoint(cell, coords);
+	if (d >= k) {
+		return 0;
+	}
+	else {
+		return this.cube(k / d) - k / d;
+	}
+}
+
+///InverseSquareVertexVertexRepulsionLaw
+
+uwm.autolayout.InverseSquareVertexVertexRepulsionLaw = function(graph, preferredEdgeLength){
+	uwm.autolayout.VertexVertexRepulsionLaw.call(this, graph, preferredEdgeLength);
+}
+
+uwm.autolayout.InverseSquareVertexVertexRepulsionLaw.prototype = new uwm.autolayout.VertexVertexRepulsionLaw;
+
+uwm.autolayout.InverseSquareVertexVertexRepulsionLaw.prototype.pairwiseRepulsion = function(c1, c2){
+	var k = this.preferredEdgeLength + uwm.autolayout.Cell.prototype.sumOfRadii(c1, c2);
+	return this.cube(k / uwm.autolayout.Cell.prototype.getDistance(c1, c2));
+}
+
+///InverseVertexEdgeRepulsionLaw
+
+uwm.autolayout.InverseVertexEdgeRepulsionLaw = function(graph, preferredEdgeLength, strength){
+	if (!strength) {
+		strength = 1;
+	}
+	
+	uwm.autolayout.VertexEdgeRepulsionLaw.call(this, graph, preferredEdgeLength, strength);
+}
+
+uwm.autolayout.InverseVertexEdgeRepulsionLaw.prototype = new uwm.autolayout.VertexEdgeRepulsionLaw;
+
+uwm.autolayout.InverseVertexEdgeRepulsionLaw.prototype.pairwiseRepulsion = function(c1, c2){
+	var k = this.preferredEdgeLength + uwm.autolayout.Cell.prototype.sumOfRadii(c1, c2);
+	var dSquared = uwm.autolayout.Cell.prototype.getDistanceSquared(c1, c2);
+	if (dSquared >= this.square(k)) {
+		return 0;
+	}
+	else {
+		return k * k / dSquared - k / Math.sqrt(dSquared);
+	}
+}
+
+uwm.autolayout.InverseVertexEdgeRepulsionLaw.prototype.pairwiseRepulsionCoords = function(cell, coords){
+	var k = this.preferredEdgeLength + uwm.autolayout.Cell.prototype.radius(cell, coords);
+	var dSquared = uwm.autolayout.Cell.prototype.getDistanceSquaredPoint(cell, coords);
+	if (dSquared >= this.square(k)) {
+		return 0;
+	}
+	else {
+		return k * k / dSquared - k / Math.sqrt(dSquared);
+	}
+}
+
+///InverseVertexVertexRepulsionLaw
+
+uwm.autolayout.InverseVertexVertexRepulsionLaw = function(graph, preferredEdgeLength){
+	uwm.autolayout.VertexVertexRepulsionLaw.call(this, graph, preferredEdgeLength);
+}
+
+uwm.autolayout.InverseVertexVertexRepulsionLaw.prototype = new uwm.autolayout.VertexVertexRepulsionLaw;
+
+uwm.autolayout.InverseVertexVertexRepulsionLaw.prototype.pairwiseRepulsion = function(c1, c2){
+	var k = this.preferredEdgeLength + uwm.autolayout.Cell.prototype.sumOfRadii(c1, c2);
+	return k * k / uwm.autolayout.Cell.prototype.getDistanceSquared(c1, c2);
+}
+
+///LinearSpringLaw
+
+uwm.autolayout.LinearSpringLaw = function(graph, preferredEdgeLength){
+	uwm.autolayout.SpringLaw.call(this, graph, preferredEdgeLength);
+}
+
+uwm.autolayout.LinearSpringLaw.prototype = new uwm.autolayout.SpringLaw;
+
+uwm.autolayout.LinearSpringLaw.prototype.springAttraction = function(e){
+	var r = uwm.autolayout.Cell.prototype.sumOfRadii(e.getFrom(), e.getTo());
+	if (r == 0) {
+		return 1;
+	}
+	else {
+		return 1 - r / e.getLength();
+	}
+}
+
+///StandardForceModel
+
+/** Class for standard force model of graph-drawing aesthetics. */
+
+uwm.autolayout.StandardForceModel = function(graph, preferredEdgeLength, theta){
+	uwm.autolayout.ForceModel.call(this, graph);
+	this.preferredEdgeLength = preferredEdgeLength;
+	var springLaw = new uwm.autolayout.QuadraticSpringLaw(graph, preferredEdgeLength);
+	var vvRepulsionLaw = new uwm.autolayout.HybridVertexVertexRepulsionLaw(graph, preferredEdgeLength);
+	this.addForceLaw(springLaw);
+	this.addForceLaw(vvRepulsionLaw);
+	this.addConstraint(new uwm.autolayout.ProjectionConstraint(graph, 2));
+}
+
+///SteepestDescent
+
+/** Class for method of steepest descent. */
+
+uwm.autolayout.SteepestDescent = function(graph, fm, accuracy){
+	uwm.autolayout.FirstOrderOptimizationProcedure.call(this, graph, fm, accuracy);
+}
+
+uwm.autolayout.SteepestDescent.prototype = new uwm.autolayout.FirstOrderOptimizationProcedure;
+
+uwm.autolayout.SteepestDescent.prototype.computeDescentDirection = function(){
+	var n = this.graph.numberOfVertices;
+	var d = this.graph.getDimensions();
+	if ((this.descentDirection == null) || (this.descentDirection.length != n)) {
+		this.descentDirection = new Array();
+		for (var i = 0; i < n; i++) {
+			this.descentDirection[i] = new Array();
+		}
+	}
+	
+	for (var i = 0; i < n; i++) {
+		for (var j = 0; j < d; j++) {
+			this.descentDirection[i][j] = this.negativeGradient[i][j];
+		}
+	}
+}
+
+
+///doLayout
+
+uwm.autolayout.Layouter = function(workflow){
+	this.workflow = workflow;
+	this.dimensions = 2;
+	this.preferredEdgeLength = 100;
+	this.optimizationProcedure = uwm.autolayout.Layouter.opt.CONJUGATE_GRADIENTS;
+	this.lineSearchAccuracy = 0.5;
+	this.cgRestartThreshold = 0.2;
+	this.springs = uwm.autolayout.Layouter.spring.QUADRATIC;
+	this.vertexVertexRepulsion = uwm.autolayout.Layouter.vvRepulsion.INVERSE_SQUARE;
+	this.gridding = false;
+	this.barnesHut = false;
+	this.theta = 0.9;
+	this.iterations = 25;
+}
+
+uwm.autolayout.Layouter.opt = {
+	CONJUGATE_GRADIENTS: uwm.autolayout.ConjugateGradients,
+	STEEPEST_DESCENT: uwm.autolayout.SteepestDescent
+};
+
+uwm.autolayout.Layouter.spring = {
+	QUADRATIC: uwm.autolayout.QuadraticSpringLaw,
+	LINEAR: uwm.autolayout.LinearSpringLaw
+};
+
+uwm.autolayout.Layouter.vvRepulsion = {
+	INVERSE_SQUARE: uwm.autolayout.InverseSquareVertexVertexRepulsionLaw,
+	INVERSE: uwm.autolayout.InverseVertexVertexRepulsionLaw,
+	HYBRID: uwm.autolayout.HybridVertexVertexRepulsionLaw,
+	INVERSE_SQUARE_EDGE: uwm.autolayout.InverseSquareVertexEdgeRepulsionLaw,
+	INVERSE_EDGE: uwm.autolayout.InverseVertexEdgeRepulsionLaw
+}
+
+uwm.autolayout.Layouter.prototype.getDimensions = function(){
+	return this.dimensions;
+}
+
+uwm.autolayout.Layouter.prototype.setDimenstion = function(d){
+	this.dimensions = d;
+}
+
+uwm.autolayout.Layouter.prototype.getPreferredEdgeLength = function(){
+	return this.preferredEdgeLength;
+}
+
+uwm.autolayout.Layouter.prototype.setPreferredEdgeLength = function(k){
+	this.preferredEdgeLength = k;
+}
+
+uwm.autolayout.Layouter.prototype.getOptimizationProcedure = function(){
+	return this.optimizationProcedure;
+}
+
+uwm.autolayout.Layouter.prototype.setOptimizationProcedure = function(o){
+	this.optimizationProcedure = o;
+}
+
+uwm.autolayout.Layouter.prototype.getLineSearchAccuracy = function(){
+	return this.lineSearchAccuracy;
+}
+
+uwm.autolayout.Layouter.prototype.setLineSearchAccuracy = function(l){
+	this.lineSearchAccuracy = l;
+}
+
+uwm.autolayout.Layouter.prototype.getCgRestartThreshold = function(){
+	return this.cgRestartThreshold;
+}
+
+uwm.autolayout.Layouter.prototype.setCgRestartThreshold = function(c){
+	this.cgRestartThreshold = c;
+}
+
+uwm.autolayout.Layouter.prototype.getSprings = function(){
+	return this.springs;
+}
+
+uwm.autolayout.Layouter.prototype.setSprings = function(s){
+	this.springs = s;
+}
+
+uwm.autolayout.Layouter.prototype.getVertexVertexRepulsion = function(){
+	return this.vertexVertexRepulsion;
+}
+
+uwm.autolayout.Layouter.prototype.setVertexVertexRepulsion = function(v){
+	this.vertexVertexRepulsion = v;
+}
+
+uwm.autolayout.Layouter.prototype.getGridding = function(){
+	return this.gridding;
+}
+
+uwm.autolayout.Layouter.prototype.setGridding = function(u){
+	this.gridding = u;
+}
+
+uwm.autolayout.Layouter.prototype.getBarnesHut = function(){
+	return this.barnesHut;
+}
+
+uwm.autolayout.Layouter.prototype.setBarnesHut = function(b){
+	this.barnesHut = b;
+}
+
+uwm.autolayout.Layouter.prototype.getTheta = function(){
+	return this.theta;
+}
+
+uwm.autolayout.Layouter.prototype.setTheta = function(t){
+	this.theta = t;
+}
+
+uwm.autolayout.Layouter.prototype.getIterations = function(){
+	return this.iterations;
+}
+
+uwm.autolayout.Layouter.prototype.setIterations = function(i){
+	this.iterations = i;
+}
+
+uwm.autolayout.Layouter.prototype.doLayout = function(){
+	this.setupGraph();
+	this.setupAndExecuteOptimization();
+	this.moveFigures();
+}
+
+uwm.autolayout.Layouter.prototype.setupGraph = function(){
+	this.graph = new uwm.autolayout.Graph(this.dimensions);
+	
+	this.graph.setSize([this.workflow.getWidth(), this.workflow.getHeight()]);
+	
+	this.figures = this.workflow.getFigures();
+	this.vertexes = new draw2d.ArrayList();
+	for (var i = 0; i < this.figures.getSize(); i++) {
+		var figure = this.figures.get(i);
+		var vertex = this.graph.insertVertex();
 		vertex.setName(figure.getId());
 		vertex.setCoords([figure.getX(), figure.getY()]);
 		vertex.setSize([figure.getWidth(), figure.getHeight()]);
-		vertexes.add(vertex);
+		this.vertexes.add(vertex);
 	}
 	
 	var clusterIds = new Array();
@@ -1293,13 +1791,13 @@ uwm.autolayout.doLayout = function(workflow){
 	
 	var clusters = new Array();
 	
-	for (var i = 0; i < figures.getSize(); i++) {
+	for (var i = 0; i < this.figures.getSize(); i++) {
 		if (!clusterIds[i]) {
-			uwm.autolayout.walkAndPopulateClusters(figures, i, clusterIds, nextClusterId);
+			this.walkAndPopulateClusters(i, clusterIds, nextClusterId);
 			nextClusterId++;
 		}
 		
-		var figure = figures.get(i);
+		var figure = this.figures.get(i);
 		var ports = figure.getPorts();
 		var numConnections = 0;
 		for (var j = 0; j < ports.getSize(); j++) {
@@ -1310,12 +1808,12 @@ uwm.autolayout.doLayout = function(workflow){
 				
 				var connection = connections.get(k);
 				if (connection.getSource() == port) {
-					var from = vertexes.get(i);
+					var from = this.vertexes.get(i);
 					var targetPort = connection.getTarget();
 					var targetFigure = targetPort.getParent();
-					var targetIndex = figures.indexOf(targetFigure);
-					var to = vertexes.get(targetIndex)
-					var edge = graph.insertEdge(from, to, true);
+					var targetIndex = this.figures.indexOf(targetFigure);
+					var to = this.vertexes.get(targetIndex)
+					var edge = this.graph.insertEdge(from, to, true);
 				}
 			}
 		}
@@ -1323,13 +1821,13 @@ uwm.autolayout.doLayout = function(workflow){
 		if (clustersEntry) {
 			if (clustersEntry.maxConnections < numConnections) {
 				clustersEntry.maxConnections = numConnections;
-				clustersEntry.vertex = vertexes.get(i);
+				clustersEntry.vertex = this.vertexes.get(i);
 			}
 		}
 		else {
 			clusters[clusterIds[i]] = {
 				maxConnections: numConnections,
-				vertex: vertexes.get(i)
+				vertex: this.vertexes.get(i)
 			};
 		}
 	}
@@ -1338,56 +1836,59 @@ uwm.autolayout.doLayout = function(workflow){
 		if (i != 1) {
 			var from = clusters[i - 1].vertex;
 			var to = clusters[i].vertex;
-			var edge = graph.insertEdge(from, to, false);
+			var edge = this.graph.insertEdge(from, to, false);
 		}
 		else {
 			var from = clusters[clusters.length - 1].vertex;
 			var to = clusters[1].vertex;
-			var edge = graph.insertEdge(from, to, false);
+			var edge = this.graph.insertEdge(from, to, false);
 		}
 	}
 	
-	var preferredEdgeLength = 100;
+}
+
+uwm.autolayout.Layouter.prototype.setupAndExecuteOptimization = function(){
+	var springLaw = new this.springs(this.graph, this.preferredEdgeLength);
 	
-	var springLaw = new uwm.autolayout.QuadraticSpringLaw(graph, preferredEdgeLength);
+	var vvRepulsionLaw = new this.vertexVertexRepulsion(this.graph, this.preferredEdgeLength);
 	
-	var vvRepulsionLaw = new uwm.autolayout.HybridVertexVertexRepulsionLaw(graph, preferredEdgeLength);
+	if (vvRepulsionLaw instanceof uwm.autolayout.VertexVertexRepulsionLaw && this.barnesHut) {
+		vvRepulsionLaw.setBarnesHutTheta(this.theta);
+	}
 	
-	var forceModel = new uwm.autolayout.ForceModel(graph);
+	if (vvRepulsionLaw instanceof uwm.autolayout.VertexEdgeRepulsionLaw) {
+		vvRepulsionLaw.setGridding(this.gridding);
+	}
+	
+	
+	var forceModel = new uwm.autolayout.ForceModel(this.graph);
 	forceModel.addForceLaw(springLaw);
 	forceModel.addForceLaw(vvRepulsionLaw);
 	
-	var projDim = 2;
-	if (projDim > 0) {
-		forceModel.addConstraint(new uwm.autolayout.ProjectionConstraint(graph, projDim));
+	if (this.dimensions > 0) {
+		forceModel.addConstraint(new uwm.autolayout.ProjectionConstraint(this.graph, this.dimensions));
 	}
 	
-	var accuracy = 0.00000001;
-	var restartThreshold = 0.2;
-	var opt = new uwm.autolayout.ConjugateGradients(graph, forceModel, accuracy, restartThreshold);
+	var opt = new this.optimizationProcedure(this.graph, forceModel, this.lineSearchAccuracy, this.cgRestartThreshold);
 	
-	for (var i = 0; i < 25; i++) {
+	for (var i = 0; i < this.iterations; i++) {
 		opt.improveGraph();
-	}
-	
-	for (var i = 0; i < vertexes.getSize(); i++) {
-		var vertex = vertexes.get(i);
-		var figure = figures.get(i);
-		
-		var coords = vertex.getCoords();
-		
-		while (!isFinite(coords[0])) {
-			coords = coords[0];
-		}
-		
-		if (coords) {
-			figure.setPosition(coords[0], coords[1]);
-		}
 	}
 }
 
-uwm.autolayout.walkAndPopulateClusters = function(figures, index, clusterIds, thisClusterId){
-	var figure = figures.get(index);
+uwm.autolayout.Layouter.prototype.moveFigures = function(){
+	for (var i = 0; i < this.vertexes.getSize(); i++) {
+		var vertex = this.vertexes.get(i);
+		var figure = this.figures.get(i);
+		
+		var coords = vertex.getCoords();
+		
+		figure.setPosition(coords[0], coords[1]);
+	}
+}
+
+uwm.autolayout.Layouter.prototype.walkAndPopulateClusters = function(index, clusterIds, thisClusterId){
+	var figure = this.figures.get(index);
 	if (!clusterIds[index]) {
 		clusterIds[index] = thisClusterId;
 		
@@ -1400,14 +1901,14 @@ uwm.autolayout.walkAndPopulateClusters = function(figures, index, clusterIds, th
 				if (connection.getSource() == port) {
 					var targetPort = connection.getTarget();
 					var targetFigure = targetPort.getParent();
-					var targetIndex = figures.indexOf(targetFigure);
-					uwm.autolayout.walkAndPopulateClusters(figures, targetIndex, clusterIds, thisClusterId);
+					var targetIndex = this.figures.indexOf(targetFigure);
+					this.walkAndPopulateClusters(targetIndex, clusterIds, thisClusterId);
 				}
 				else {
 					var sourcePort = connection.getSource();
 					var sourceFigure = sourcePort.getParent();
-					var sourceIndex = figures.indexOf(sourceFigure);
-					uwm.autolayout.walkAndPopulateClusters(figures, sourceIndex, clusterIds, thisClusterId);
+					var sourceIndex = this.figures.indexOf(sourceFigure);
+					this.walkAndPopulateClusters(sourceIndex, clusterIds, thisClusterId);
 				}
 			}
 		}

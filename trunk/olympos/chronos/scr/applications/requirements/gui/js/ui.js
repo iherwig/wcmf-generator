@@ -427,6 +427,8 @@ uwm.ui.initWorkflow = function(){
 	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(new uwm.DeleteHandler());
 	
 	uwm.data.snapToObjects = false;
+	
+	uwm.data.layouter = new uwm.autolayout.Layouter(uwm.ui.workflow);
 }
 
 
@@ -436,4 +438,153 @@ uwm.ui.getContextMenuPosition = function(x, y){
 	var xy = viewport.getXY();
 	
 	return [x - scroll.left + xy[0] + 2, y - scroll.top + xy[1] + 2];
+}
+
+uwm.ui.showDiagramEdit = function(parentComponent){
+	var getKey = function(hash, key){
+		for (curr in hash) {
+			if (hash[curr] == key) {
+				return curr;
+			}
+		}
+	}
+	
+	var getArray = function(hash){
+		var result = new Array();
+		for (curr in hash) {
+			if (curr != "remove") {
+				result[result.length] = curr;
+			}
+		}
+		
+		return result;
+	}
+	
+	var form = new Ext.form.FormPanel({
+		labelWidth: 90,
+		frame: true,
+		labelAlign: "top",
+		title: 'Diagram Edit View',
+		defaults: {
+			width: 222
+		},
+		defaultType: 'textfield',
+		items: [new Ext.form.NumberField({
+			fieldLabel: "Preferred connection length",
+			value: uwm.data.layouter.getPreferredEdgeLength(),
+			allowBlank: false,
+			allowDecimals: false,
+			allowNegative: false,
+			listeners: {
+				change: function(self, newValue, oldValue){
+					uwm.data.layouter.setPreferredEdgeLength(newValue);
+				}
+			}
+		}), new Ext.form.ComboBox({
+			fieldLabel: "Optimization procedure",
+			value: getKey(uwm.autolayout.Layouter.opt, uwm.data.layouter.getOptimizationProcedure()),
+			typeAhead: true,
+			mode: "local",
+			forceSelection: true,
+			triggerAction: "all",
+			store: getArray(uwm.autolayout.Layouter.opt),
+			listeners: {
+				select: function(self, record, index){
+					uwm.data.layouter.setOptimizationProcedure(uwm.autolayout.Layouter.opt[record.data.text]);
+				}
+			}
+		}), new Ext.form.NumberField({
+			fieldLabel: "Line Search Accuracy",
+			value: uwm.data.layouter.getLineSearchAccuracy(),
+			allowBlank: false,
+			allowDecimals: true,
+			allowNegative: false,
+			decimalPrecision: 6,
+			listeners: {
+				change: function(self, newValue, oldValue){
+					uwm.data.layouter.setLineSearcHAccuracy(newValue);
+				}
+			}
+		}), new Ext.form.NumberField({
+			fieldLabel: "Conjugate Gradients Restart Threshold",
+			value: uwm.data.layouter.getCgRestartThreshold(),
+			allowBlank: false,
+			allowDecimals: true,
+			allowNegative: false,
+			decimalPrecision: 3,
+			listeners: {
+				change: function(self, newValue, oldValue){
+					uwm.data.layouter.setCgRestartThreshold(newValue);
+				}
+			}
+		}), new Ext.form.ComboBox({
+			fieldLabel: "Spring Type",
+			value: getKey(uwm.autolayout.Layouter.spring, uwm.data.layouter.getSprings()),
+			typeAhead: true,
+			mode: "local",
+			forceSelection: true,
+			triggerAction: "all",
+			store: getArray(uwm.autolayout.Layouter.spring),
+			listeners: {
+				select: function(self, record, index){
+					uwm.data.layouter.setSprings(uwm.autolayout.Layouter.spring[record.data.text]);
+				}
+			}
+		}), new Ext.form.ComboBox({
+			fieldLabel: "Vertex Vertex Repulsion",
+			value: getKey(uwm.autolayout.Layouter.vvRepulsion, uwm.data.layouter.getVertexVertexRepulsion()),
+			typeAhead: true,
+			mode: "local",
+			forceSelection: true,
+			triggerAction: "all",
+			store: getArray(uwm.autolayout.Layouter.vvRepulsion),
+			listeners: {
+				select: function(self, record, index){
+					uwm.data.layouter.setVertexVertexRepulsion(uwm.autolayout.Layouter.vvRepulsion[record.data.text]);
+				}
+			}
+		}), new Ext.form.Checkbox({
+			fieldLabel: "Use Barnes-Hut",
+			checked: uwm.data.layouter.getBarnesHut(),
+			listeners: {
+				check: function(self, checked){
+					uwm.data.layouter.setBarnesHut(checked);
+				}
+			}
+		}), new Ext.form.NumberField({
+			fieldLabel: "Theta",
+			value: uwm.data.layouter.getTheta(),
+			allowBlank: false,
+			allowDecimals: true,
+			allowNegative: false,
+			decimalPrecision: 3,
+			listeners: {
+				change: function(self, newValue, oldValue){
+					uwm.data.layouter.setTheta(newValue);
+				}
+			}
+		}), new Ext.form.Checkbox({
+			fieldLabel: "Use Gridding",
+			checked: uwm.data.layouter.getGridding(),
+			listeners: {
+				check: function(self, checked){
+					uwm.data.layouter.setGridding(checked);
+				}
+			}
+		}), new Ext.form.NumberField({
+			fieldLabel: "Iterations",
+			value: uwm.data.layouter.getIterations(),
+			allowBlank: false,
+			allowDecimals: false,
+			allowNegative: false,
+			listeners: {
+				change: function(self, newValue, oldValue){
+					uwm.data.layouter.setIterations(newValue);
+				}
+			}
+		})]
+	});
+	
+	parentComponent.add(form);
+	parentComponent.doLayout();
 }

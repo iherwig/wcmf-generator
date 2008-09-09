@@ -601,17 +601,29 @@ uwm.PropertyHandler = function(){
 }
 
 uwm.PropertyHandler.prototype.onSelectionChanged = function(figure){
-	if (figure != null && figure.getOid != null && figure.getOid() != this.currentSelectionOid) {
-		this.currentSelectionOid = figure.getOid();
+	if (figure != null && figure.getOid != null) {
+		if (figure.getOid() != this.currentSelectionOid) {
 		
-		if (figure.getUwmClass) {
-			var uwmClassName = figure.getUwmClass();
+			this.currentSelectionOid = figure.getOid();
 			
-			uwm.showProperties(uwmClassName, figure.getOid());
+			if (figure.getUwmClass) {
+				var uwmClassName = figure.getUwmClass();
+				
+				uwm.showProperties(uwmClassName, figure.getOid());
+			}
 		}
 	}
 	else {
 		this.currentSelection = null;
+		
+		var target = Ext.getCmp("propertiesContainer");
+		
+		while (target.items && target.items.getCount() > 0) {
+			target.remove(target.getComponent(0), true);
+		}
+		
+		uwm.ui.showDiagramEdit(target);
+		
 	}
 }
 
@@ -1159,8 +1171,8 @@ uwm.Workflow.prototype.onContextMenu = function(x, y){
 		}), new Ext.menu.Item({
 			text: "Auto-layout",
 			listeners: {
-				click: function() {
-					uwm.autolayout.doLayout(uwm.ui.workflow);
+				click: function(){
+					uwm.data.layouter.doLayout();
 				}
 			}
 		})]
