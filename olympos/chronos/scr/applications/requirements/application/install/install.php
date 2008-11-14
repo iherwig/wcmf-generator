@@ -33,7 +33,7 @@ require_once(BASE."wcmf/lib/util/class.ObjectFactory.php");
 Message::hint("initializing wCMF database tables...");
 
 // get configuration from file
-$CONFIG_PATH = '../include/';
+$CONFIG_PATH = BASE.'application/include/';
 $configFile = $CONFIG_PATH.'config.ini';
 Message::hint("configuration file: ".$configFile);
 $parser = &InifileParser::getInstance();
@@ -66,19 +66,19 @@ if(sizeof($persistenceFacade->getOIDs("Adodbseq")) == 0)
 $objectFactory = &ObjectFactory::getInstance();
 $userManager = &$objectFactory->createInstanceFromConfig('implementation', 'UserManager');
 $userManager->startTransaction();
-if (sizeof($userManager->listRoles()) == 0)
+if (!$userManager->getRole("administrators"))
 {
   Message::hint("creating role with name 'administrators'...");
   $userManager->createRole("administrators");
 }
-if (sizeof($userManager->listUsers()) == 0)
+if (!$userManager->getUser("admin"))
 {
   Message::hint("creating user with login 'admin' password 'admin'...");
   $userManager->createUser("Administrator", "", "admin", "admin", "admin");
-  $userManager->setUserProperty("admin", USER_PROPERTY_CONFIG, "include/admin.ini");
+  $userManager->setUserProperty("admin", USER_PROPERTY_CONFIG, "admin.ini");
 }
 $admin = $userManager->getUser("admin");
-if (!$admin->hasRole('administrators'))
+if ($admin && !$admin->hasRole('administrators'))
 {
   Message::hint("adding user 'admin' to role 'administrators'...");
   $userManager->addUserToRole("administrators", "admin");

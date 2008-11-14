@@ -17,9 +17,9 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: main.php 746 2008-09-01 21:45:51Z iherwig $
+ * $Id: main.php 747 2008-09-01 21:50:23Z iherwig $
  */
-error_reporting(E_ERROR | E_PARSE);
+error_reporting(E_ALL);
 
 require_once("base_dir.php");  
 require_once(BASE."wcmf/lib/util/class.Message.php");

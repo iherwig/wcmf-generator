@@ -30,7 +30,7 @@ require_once(BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
 Message::hint("updating wCMF database tables...");
 
 // get configuration from file
-$CONFIG_PATH = '../include/';
+$CONFIG_PATH = BASE.'application/include/';
 $configFile = $CONFIG_PATH.'config.ini';
 Message::hint("configuration file: ".$configFile);
 $parser = &InifileParser::getInstance();
