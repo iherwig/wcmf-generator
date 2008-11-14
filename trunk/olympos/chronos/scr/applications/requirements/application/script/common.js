@@ -45,6 +45,7 @@ function newWindowEx(_controller, _context, _action, _name, _windowDef, _additio
             "&context="+_context+
             "&usr_action="+_action+_additionalQueryString, 
             _name, _windowDef);
+	if (window.focus) {_name.focus()}
 }
 function setController(_controller) { getForm().controller.value=_controller; }
 function setContext(_context) { getForm().context.value=_context; }
