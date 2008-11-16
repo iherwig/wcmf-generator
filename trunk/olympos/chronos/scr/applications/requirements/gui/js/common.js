@@ -8,8 +8,6 @@ uwm.setUnselectable = function(elem){
 	}
 }
 
-uwm.data.oidList = new Array();
-
 uwm.figure.BaseFigure = function(uwmClassName, label, oid, parentoids, childoids, minWidth, minHeight, startWidth, startHeight){
 	this.uwmClassName = uwmClassName;
 	this.minWidth = minWidth;
@@ -20,7 +18,7 @@ uwm.figure.BaseFigure = function(uwmClassName, label, oid, parentoids, childoids
 	this.childoids = childoids;
 	
 	if (oid) {
-		uwm.addOid(oid, this);
+		uwm.data.currentDiagram.addOid(oid, this);
 	}
 	
 	draw2d.VectorFigure.call(this);
@@ -137,7 +135,7 @@ uwm.figure.BaseFigure.prototype.getUwmContextMenu = function(){
 		}), "-", new Ext.menu.Item({
 			text: "Delete from diagram",
 			handler: function(item, e){
-				uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
+				uwm.data.currentDiagram.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
 			}
 		}), new Ext.menu.Item({
 			text: "Delete from model",
@@ -348,12 +346,12 @@ uwm.connection.BaseConnection.prototype.getContextMenu = function(){
 		items: ([new Ext.menu.Item({
 			text: "Delete from diagram",
 			handler: function(item, e){
-				uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
+				uwm.data.currentDiagram.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
 			}
 		}), new Ext.menu.Item({
 			text: "Delete from model",
 			handler: function(tiem, e){
-				uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
+				uwm.data.currentDiagram.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));
 				uwm.deleteConnectionFromModel(connection.sourcePort.parentNode.getOid(), connection.targetPort.parentNode.getOid());
 			}
 		})])
@@ -614,7 +612,7 @@ uwm.PropertyHandler.prototype.onSelectionChanged = function(figure){
 		}
 	}
 	else {
-		this.currentSelection = null;
+		this.currentSelectionOid = null;
 		
 		var target = Ext.getCmp("propertiesContainer");
 		
@@ -658,7 +656,9 @@ uwm.DeleteHandler.prototype.stackChanged = function(event){
 		var source = command.figure;
 		
 		if (source instanceof uwm.figure.BaseFigure) {
-			uwm.removeOid(source.getOid());
+			var diagram = command.workflow.diagram;
+
+			diagram.removeOid(source.getOid());
 		}
 	}
 }
@@ -699,94 +699,10 @@ uwm.initializeTemplateDragZone = function(v, uwmClassName){
 	});
 }
 
-uwm.initializeDropZone = function(g){
-	g.dropZone = new Ext.dd.DropZone(g.getEl(), {
-		ddGroup: 'gridDDGroup',
-		
-		//      If the mouse is over a target node, return that node. This is
-		//      provided as the "target" parameter in all "onNodeXXXX" node event handling functions
-		getTargetFromEvent: function(e){
-			return e.getTarget();
-		},
-		
-		//      On entry into a target node, highlight that node.
-		onNodeEnter: function(target, dd, e, data){
-		},
-		
-		//      On exit from a target node, unhighlight that node.
-		onNodeOut: function(target, dd, e, data){
-		},
-		
-		//      While over a target node, return the default drop allowed class which
-		//      places a "tick" icon into the drag proxy.
-		onNodeOver: function(target, dd, e, data){
-			var result = Ext.dd.DropZone.prototype.dropAllowed;
-			
-			if (data.grid != undefined) {
-				var oid = data.selections[0].id;
-			}
-			else if (data.node != undefined) {
-				var oid = dd.dragData.node.id;
-			}
-			
-			if (oid && uwm.getByOid(oid)) {
-				result = false;
-			}
-			
-			return result;
-		},
-		
-		//      On node drop, we can interrogate the target node to find the underlying
-		//      application object that is the real target of the dragged data.
-		//      In this case, it is a Record in the GridPanel's Store.
-		//      We can use the data set up by the DragZone's getDragData method to read
-		//      any data we decided to attach.
-		onNodeDrop: function(target, dd, e, data){
-			var result = true;
-			
-			if (data.grid != undefined) {
-				var oid = data.selections[0].id;
-			}
-			else if (data.node != undefined) {
-				var oid = dd.dragData.node.id;
-			}
-			
-			if (oid && uwm.getByOid(oid)) {
-				result = false;
-			}
-			
-			if (result) {
-				var xOffset = uwm.ui.workflow.getAbsoluteX();
-				var yOffset = uwm.ui.workflow.getAbsoluteY();
-				var scrollLeft = uwm.ui.workflow.getScrollLeft();
-				var scrollTop = uwm.ui.workflow.getScrollTop();
-				
-				var x = e.xy[0] - xOffset + scrollLeft;
-				var y = e.xy[1] - yOffset + scrollTop;
-				
-				var compartment = uwm.ui.workflow.getBestCompartmentFigure(x, y);
-				
-				if (data.grid != undefined) {
-					uwm.createExistingFigure(data.grid.uwmClassName, data.selections[0].get("Name"), oid, data.selections[0].get("parentoids"), data.selections[0].get("childoids"), x, y, compartment);
-				}
-				else if (data.node != undefined) {
-					uwm.createFigureFromTree(dd.dragData.node.attributes.oid, x, y, compartment);
-				}
-				else {
-					uwm.createNewFigure(dd.dragData.uwmClassName, x, y, compartment, uwm.handleFigureCreated);
-				}
-				
-			}
-			
-			return result;
-		}
-	});
-}
-
 uwm.createExistingFigure = function(uwmClassName, label, oid, parentoids, childoids, x, y, compartment){
 	var drawElem = uwm.createModelClass(uwmClassName, label, oid, parentoids, childoids);
 	if (drawElem) {
-		uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(uwm.ui.workflow, drawElem, x, y, compartment));
+		uwm.data.currentDiagram.workflow.getCommandStack().execute(new draw2d.CommandAdd(uwm.data.currentDiagram.workflow, drawElem, x, y, compartment));
 		
 		uwm.establishExistingConnections(drawElem, drawElem.getParentOids());
 		uwm.establishExistingConnections(drawElem, drawElem.getChildOids());
@@ -797,7 +713,7 @@ uwm.establishExistingConnections = function(drawElem, list){
 	if (list) {
 	
 		for (var i = 0; i < list.length; i++) {
-			var target = uwm.getByOid(list[i]);
+			var target = uwm.data.currentDiagram.getByOid(list[i]);
 			
 			if (target) {
 				var connectionData = uwm.connection.getConstraints(drawElem.getUwmClass(), target.getUwmClass());
@@ -871,7 +787,7 @@ uwm.handleFigureCreated = function(data, newClassName, uwmClassName, x, y, compa
 		
 		var drawElem = uwm.createModelClass(uwmClassName, newClassName, oid, [], []);
 		if (drawElem) {
-			uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandAdd(uwm.ui.workflow, drawElem, x, y, compartment));
+			uwm.data.currentDiagram.workflow.getCommandStack().execute(new draw2d.CommandAdd(uwm.data.currentDiagram.workflow, drawElem, x, y, compartment));
 		}
 	}
 }
@@ -953,18 +869,6 @@ uwm.util.ellipseY = function(centerY, deg){
 
 uwm.util.deg2rad = function(deg){
 	return deg * Math.PI / 180;
-}
-
-uwm.addOid = function(oid, figure){
-	uwm.data.oidList[oid] = figure;
-}
-
-uwm.removeOid = function(oid){
-	uwm.data.oidList[oid] = null;
-}
-
-uwm.getByOid = function(oid){
-	return uwm.data.oidList[oid];
 }
 
 uwm.fieldChanged = function(field, newValue, oldValue, oid){
@@ -1065,17 +969,25 @@ uwm.jsonRequest = function(params, context, successFunction, failureFunction){
 }
 
 uwm.deleteFigureFromModel = function(uwmClassName, oid){
-	var figure = uwm.getByOid(oid);
-	if (figure) {
-		uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
+/*
+	var container = Ext.getCmp("diagramsContainer").items;
+	var numDiagrams = container.getCount();
+
+	for (var currDiagramNo = 0; currDiagramNo < numDiagrams; currDiagramNo++) {
+		var diagram = container.get(currDiagramNo);
+		var figure = diagram.getByOid(oid);
+		if (figure) {
+			diagram.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
+		}
 	}
-	
+*/
 	uwm.jsonRequest({
 		usr_action: "delete",
 		deleteoids: oid
 	}, "Deleting element");
 	
 	uwm.updateElementDisplay(oid, uwmClassName, "delete");
+	
 }
 
 uwm.deleteConnectionFromModel = function(parentOid, childOid){
@@ -1113,11 +1025,13 @@ uwm.showInGrid = function(uwmClassName, oid){
 }
 
 uwm.showInDiagram = function(oid){
-	var figure = uwm.getByOid(oid);
+	var figure = uwm.data.currentDiagram.getByOid(oid);
 	
-	var canvas = Ext.getCmp("canvas");
+	var canvas = uwm.data.currentDiagram.getSize();
 	
-	uwm.ui.workflow.scrollTo(figure.x - canvas.getSize()["width"] / 2 + figure.getWidth() / 2, figure.y - canvas.getSize()["height"] / 2 + figure.getHeight() / 2);
+	var diagram = uwm.data.currentDiagram;
+	
+	diagram.workflow.scrollTo(figure.x - canvas.width / 2 + figure.getWidth() / 2, figure.y - canvas.height / 2 + figure.getHeight() / 2);
 }
 
 
@@ -1161,18 +1075,18 @@ uwm.Workflow.prototype.onContextMenu = function(x, y){
 	var contextMenu = new Ext.menu.Menu({
 		items: [new Ext.menu.CheckItem({
 			text: "Snap to objects",
-			checked: uwm.data.snapToObjects,
+			checked: uwm.data.currentDiagram.snapToObjects,
 			listeners: {
 				checkchange: function(self, checked){
-					uwm.data.snapToObjects = checked;
-					uwm.ui.workflow.setSnapToGeometry(checked);
+					uwm.data.currentDiagram.snapToObjects = checked;
+					uwm.data.currentDiagram.workflow.setSnapToGeometry(checked);
 				}
 			}
 		}), new Ext.menu.Item({
 			text: "Auto-layout",
 			listeners: {
 				click: function(){
-					uwm.data.layouter.doLayout();
+					uwm.data.currentDiagram.layouter.doLayout();
 				}
 			}
 		})]
@@ -1228,17 +1142,23 @@ uwm.updateGrid = function(oid, uwmClassName, action, newLabels){
 }
 
 uwm.updateDiagram = function(oid, uwmClassName, action, newLabels){
-	var figure = uwm.getByOid(oid);
-	
-	if (figure) {
-		switch (action) {
-			case "delete":
-				uwm.ui.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
-				break;
-				
-			case "labelChange":
-				figure.setLabel(eval(uwm.getModelFunction(uwmClassName, "getLabel") + "(newLabels)"));
-				break;
+	var container = Ext.getCmp("diagramsContainer").items;
+	var numDiagrams = container.getCount();
+
+	for (var currDiagramNo = 0; currDiagramNo < numDiagrams; currDiagramNo++) {
+		var diagram = container.get(currDiagramNo);
+		var figure = diagram.getByOid(oid);
+		
+		if (figure) {
+			switch (action) {
+				case "delete":
+					diagram.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
+					break;
+					
+				case "labelChange":
+					figure.setLabel(eval(uwm.getModelFunction(uwmClassName, "getLabel") + "(newLabels)"));
+					break;
+			}
 		}
 	}
 }

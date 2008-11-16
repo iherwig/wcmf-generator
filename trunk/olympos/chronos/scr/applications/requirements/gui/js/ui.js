@@ -61,8 +61,6 @@ uwm.ui.createLogin = function(){
 
 
 uwm.ui.create = function(){
-	Ext.get("viewport").dom.style.display = "block";
-	
 	var viewport = new Ext.Viewport({
 		layout: "border",
 		items: [{
@@ -320,23 +318,31 @@ uwm.ui.create = function(){
 			items: [{
 				id: "propertiesContainer"
 			}]
-		}, new Ext.BoxComponent({
+		}, {
 			region: "center",
-			el: "viewport",
-			id: "canvas",
+			xtype: "tabpanel",
+			//tabPosition: "bottom",
+			enableTabScroll: true,
+			activeTab: 0,
+			id: "diagramsContainer",
+			items: [new uwm.Diagram({
+				layout: "fit",
+				title: "Diagram 1"
+			}), new uwm.Diagram({
+				layout: "fit",
+				title: "Diagram 2"
+			})],
 			listeners: {
-				render: function(g){
-					uwm.initializeDropZone(g);
+				tabchange: function(self, tab){
+					uwm.data.currentDiagram = tab;
+					tab.workflow.setCurrentSelection(null);
 				}
+				
 			}
-		})]
+		}]
 	});
 	
 	uwm.ui.createNewFigureTemplates(Ext.getCmp("newFiguresContainer"));
-	
-	uwm.ui.initWorkflow();
-	
-	uwm.setUnselectable(document.getElementById("viewport"));
 	
 	if (uwm.data.autoLogout) {
 		Ext.EventManager.on(window, 'beforeunload', function(e){
@@ -415,25 +421,9 @@ uwm.ui.createExistingFigureTabs = function(container){
 	Ext.getCmp("contentContainer").doLayout();
 }
 
-uwm.ui.initWorkflow = function(){
-	uwm.ui.workflow = new uwm.Workflow("canvas");
-	uwm.ui.workflow.setViewPort("viewport");
-	
-	uwm.ui.workflow.scrollTo(uwm.ui.workflow.getHeight() / 2, uwm.ui.workflow.getWidth() / 2);
-	
-	var propertyHandler = new uwm.PropertyHandler();
-	uwm.ui.workflow.addSelectionListener(propertyHandler);
-	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(propertyHandler);
-	uwm.ui.workflow.getCommandStack().addCommandStackEventListener(new uwm.DeleteHandler());
-	
-	uwm.data.snapToObjects = false;
-	
-	uwm.data.layouter = new uwm.autolayout.Layouter(uwm.ui.workflow);
-}
-
 
 uwm.ui.getContextMenuPosition = function(x, y){
-	var viewport = Ext.get("viewport");
+	var viewport = uwm.data.currentDiagram.viewPort;
 	var scroll = viewport.getScroll();
 	var xy = viewport.getXY();
 	
@@ -471,18 +461,18 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 		defaultType: 'textfield',
 		items: [new Ext.form.NumberField({
 			fieldLabel: "Preferred connection length",
-			value: uwm.data.layouter.getPreferredEdgeLength(),
+			value: uwm.data.currentDiagram.layouter.getPreferredEdgeLength(),
 			allowBlank: false,
 			allowDecimals: false,
 			allowNegative: false,
 			listeners: {
 				change: function(self, newValue, oldValue){
-					uwm.data.layouter.setPreferredEdgeLength(newValue);
+					uwm.data.currentDiagram.layouter.setPreferredEdgeLength(newValue);
 				}
 			}
 		}), new Ext.form.ComboBox({
 			fieldLabel: "Optimization procedure",
-			value: getKey(uwm.autolayout.Layouter.opt, uwm.data.layouter.getOptimizationProcedure()),
+			value: getKey(uwm.autolayout.Layouter.opt, uwm.data.currentDiagram.layouter.getOptimizationProcedure()),
 			typeAhead: true,
 			mode: "local",
 			forceSelection: true,
@@ -490,36 +480,36 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			store: getArray(uwm.autolayout.Layouter.opt),
 			listeners: {
 				select: function(self, record, index){
-					uwm.data.layouter.setOptimizationProcedure(uwm.autolayout.Layouter.opt[record.data.text]);
+					uwm.data.currentDiagram.layouter.setOptimizationProcedure(uwm.autolayout.Layouter.opt[record.data.text]);
 				}
 			}
 		}), new Ext.form.NumberField({
 			fieldLabel: "Line Search Accuracy",
-			value: uwm.data.layouter.getLineSearchAccuracy(),
+			value: uwm.data.currentDiagram.layouter.getLineSearchAccuracy(),
 			allowBlank: false,
 			allowDecimals: true,
 			allowNegative: false,
 			decimalPrecision: 6,
 			listeners: {
 				change: function(self, newValue, oldValue){
-					uwm.data.layouter.setLineSearcHAccuracy(newValue);
+					uwm.data.currentDiagram.layouter.setLineSearcHAccuracy(newValue);
 				}
 			}
 		}), new Ext.form.NumberField({
 			fieldLabel: "Conjugate Gradients Restart Threshold",
-			value: uwm.data.layouter.getCgRestartThreshold(),
+			value: uwm.data.currentDiagram.layouter.getCgRestartThreshold(),
 			allowBlank: false,
 			allowDecimals: true,
 			allowNegative: false,
 			decimalPrecision: 3,
 			listeners: {
 				change: function(self, newValue, oldValue){
-					uwm.data.layouter.setCgRestartThreshold(newValue);
+					uwm.data.currentDiagram.layouter.setCgRestartThreshold(newValue);
 				}
 			}
 		}), new Ext.form.ComboBox({
 			fieldLabel: "Spring Type",
-			value: getKey(uwm.autolayout.Layouter.spring, uwm.data.layouter.getSprings()),
+			value: getKey(uwm.autolayout.Layouter.spring, uwm.data.currentDiagram.layouter.getSprings()),
 			typeAhead: true,
 			mode: "local",
 			forceSelection: true,
@@ -527,12 +517,12 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			store: getArray(uwm.autolayout.Layouter.spring),
 			listeners: {
 				select: function(self, record, index){
-					uwm.data.layouter.setSprings(uwm.autolayout.Layouter.spring[record.data.text]);
+					uwm.data.currentDiagram.layouter.setSprings(uwm.autolayout.Layouter.spring[record.data.text]);
 				}
 			}
 		}), new Ext.form.ComboBox({
 			fieldLabel: "Vertex Vertex Repulsion",
-			value: getKey(uwm.autolayout.Layouter.vvRepulsion, uwm.data.layouter.getVertexVertexRepulsion()),
+			value: getKey(uwm.autolayout.Layouter.vvRepulsion, uwm.data.currentDiagram.layouter.getVertexVertexRepulsion()),
 			typeAhead: true,
 			mode: "local",
 			forceSelection: true,
@@ -540,46 +530,46 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			store: getArray(uwm.autolayout.Layouter.vvRepulsion),
 			listeners: {
 				select: function(self, record, index){
-					uwm.data.layouter.setVertexVertexRepulsion(uwm.autolayout.Layouter.vvRepulsion[record.data.text]);
+					uwm.data.currentDiagram.layouter.setVertexVertexRepulsion(uwm.autolayout.Layouter.vvRepulsion[record.data.text]);
 				}
 			}
 		}), new Ext.form.Checkbox({
 			fieldLabel: "Use Barnes-Hut",
-			checked: uwm.data.layouter.getBarnesHut(),
+			checked: uwm.data.currentDiagram.layouter.getBarnesHut(),
 			listeners: {
 				check: function(self, checked){
-					uwm.data.layouter.setBarnesHut(checked);
+					uwm.data.currentDiagram.layouter.setBarnesHut(checked);
 				}
 			}
 		}), new Ext.form.NumberField({
 			fieldLabel: "Theta",
-			value: uwm.data.layouter.getTheta(),
+			value: uwm.data.currentDiagram.layouter.getTheta(),
 			allowBlank: false,
 			allowDecimals: true,
 			allowNegative: false,
 			decimalPrecision: 3,
 			listeners: {
 				change: function(self, newValue, oldValue){
-					uwm.data.layouter.setTheta(newValue);
+					uwm.data.currentDiagram.layouter.setTheta(newValue);
 				}
 			}
 		}), new Ext.form.Checkbox({
 			fieldLabel: "Use Gridding",
-			checked: uwm.data.layouter.getGridding(),
+			checked: uwm.data.currentDiagram.layouter.getGridding(),
 			listeners: {
 				check: function(self, checked){
-					uwm.data.layouter.setGridding(checked);
+					uwm.data.currentDiagram.layouter.setGridding(checked);
 				}
 			}
 		}), new Ext.form.NumberField({
 			fieldLabel: "Iterations",
-			value: uwm.data.layouter.getIterations(),
+			value: uwm.data.currentDiagram.layouter.getIterations(),
 			allowBlank: false,
 			allowDecimals: false,
 			allowNegative: false,
 			listeners: {
 				change: function(self, newValue, oldValue){
-					uwm.data.layouter.setIterations(newValue);
+					uwm.data.currentDiagram.layouter.setIterations(newValue);
 				}
 			}
 		})]
@@ -588,3 +578,4 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 	parentComponent.add(form);
 	parentComponent.doLayout();
 }
+
