@@ -88,137 +88,8 @@ uwm.ui.create = function(){
 					//tabPosition: "bottom",
 					enableTabScroll: true,
 					id: "existingFiguresContainer",
-					items: [new uwm.TreePanel({
-						layout: "fit",
-						id: "figureTree",
-						iconCls: "TreeTab",
-						autoScroll: true,
-						enableDD: true,
-						dragConfig: {
-							ddGroup: "gridDDGroup"
-						},
-						dropConfig: {
-							ddGroup: "gridDDGroup",
-							appendOnly: true,
-							onNodeOver: function(nodeData, source, e, data){
-								return this.checkDrop(nodeData, source, e, data);
-							},
-							onNodeDrop: function(nodeData, source, e, data){
-								var source = data.node;
-								var target = nodeData.node;
-								
-								var result = this.checkDrop(nodeData, source, e, data);
-								
-								if (result) {
-									if (source) {
-									
-										target.appendChild(source);
-										uwm.postConnection(source.id, target.id);
-									}
-									else {
-										uwm.createNewFigure(data.uwmClassName, null, null, null, function(data, newClassName, uwmClassName, x, y, compartment){
-											if (data.oid) {
-												var oid = data.oid;
-												
-												uwm.changeField("Name", newClassName, oid);
-												
-												uwm.postConnection(oid, target.id);
-												
-												target.appendChild(new Ext.tree.TreeNode({
-													id: oid,
-													iconCls: "Figure" + uwmClassName,
-													leaf: false,
-													text: newClassName
-												}))
-											}
-										});
-									}
-								}
-								
-								return result;
-							},
-							checkDrop: function(nodeData, source, e, data){
-								var result = Ext.tree.TreeDropZone.prototype.onNodeOver.call(this, nodeData, source, e, data);
-								
-								var sourceNode = data.node;
-								var sourceClass = data.uwmClassName;
-								var targetNode = nodeData.node
-								
-								if (sourceNode != targetNode) {
-								
-									var sourceUwmClassName;
-									if (sourceNode) {
-										sourceUwmClassName = sourceNode.id.match(/[^:]+/);
-									}
-									else {
-										sourceUwmClassName = sourceClass;
-									}
-									var targetUwmClassName = targetNode.id.match(/[^:]+/);
-									
-									var constraints = uwm.connection.getConstraints(targetUwmClassName, sourceUwmClassName);
-									
-									if (constraints && constraints.relationship == "child") {
-										//result = true
-									}
-									else {
-										result = false;
-									}
-									
-								}
-								
-								return result;
-							}
-						},
-						rootVisible: false,
-						root: new Ext.tree.AsyncTreeNode({
-							id: "root"
-						}),
-						listeners: {
-							click: function(node, e){
-								var uwmClassName = node.id.match(/[^:]+/);
-								
-								uwm.showProperties(uwmClassName, node.id);
-							},
-							contextmenu: function(node, e){
-								var contextMenu = new Ext.menu.Menu({
-									items: [new Ext.menu.Item({
-										text: "Show in diagram",
-										handler: function(item, e){
-											var oid = node.id;
-											
-											uwm.showInDiagram(oid);
-										},
-										disabled: !uwm.getByOid(node.id)
-									}), new Ext.menu.Item({
-										text: "Show in grid",
-										handler: function(item, e){
-											var oid = node.id;
-											var uwmClassName = oid.match(/[^:]+/);
-											
-											uwm.showInGrid(uwmClassName, oid);
-										}
-									}), new Ext.menu.Item({
-										text: "Show in Hierarchy",
-										handler: function(item, e){
-											var oid = node.id;
-											
-											uwm.showInHierarchy(oid);
-										}
-									}), "-", {
-										text: "Delete from model",
-										handler: function(item){
-											var oid = node.id;
-											var uwmClassName = oid.match(/[^:]+/);
-											
-											uwm.deleteFigureFromModel(uwmClassName, oid);
-										}
-									}]
-								});
-								node.select();
-								
-								contextMenu.showAt(e.getXY());
-							}
-						}
+					items: [new uwm.ProjectTree({
+						id: uwm.ProjectTree.TREE_ID
 					}), new Ext.tree.TreePanel({
 						layout: "fit",
 						id: "hierarchyTree",
@@ -274,7 +145,7 @@ uwm.ui.create = function(){
 											var oid = node.attributes.oid;
 											var uwmClassName = oid.match(/[^:]+/);
 											
-											uwm.deleteFigureFromModel(uwmClassName, oid);
+											uwm.deleteElementFromModel(uwmClassName, oid);
 										}
 									}]
 								});

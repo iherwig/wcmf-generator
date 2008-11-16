@@ -140,7 +140,7 @@ uwm.figure.BaseFigure.prototype.getUwmContextMenu = function(){
 		}), new Ext.menu.Item({
 			text: "Delete from model",
 			handler: function(tiem, e){
-				uwm.deleteFigureFromModel(figure.getUwmClass(), figure.getOid());
+				uwm.deleteElementFromModel(figure.getUwmClass(), figure.getOid());
 			}
 		})]
 	});
@@ -657,7 +657,7 @@ uwm.DeleteHandler.prototype.stackChanged = function(event){
 		
 		if (source instanceof uwm.figure.BaseFigure) {
 			var diagram = command.workflow.diagram;
-
+			
 			diagram.removeOid(source.getOid());
 		}
 	}
@@ -789,6 +789,33 @@ uwm.handleFigureCreated = function(data, newClassName, uwmClassName, x, y, compa
 		if (drawElem) {
 			uwm.data.currentDiagram.workflow.getCommandStack().execute(new draw2d.CommandAdd(uwm.data.currentDiagram.workflow, drawElem, x, y, compartment));
 		}
+	}
+}
+
+uwm.handleModelName = function(button, newModelName){
+	if (button == "ok") {
+		uwm.jsonRequest({
+			usr_action: "new",
+			newtype: "Model"
+		}, "Creating new Model", function(data){
+			uwm.changeField("Name", newModelName, data.oid);
+			
+			var tree = Ext.getCmp(uwm.ProjectTree.TREE_ID);
+			
+			var newModel = new Ext.tree.AsyncTreeNode({
+				'text': newModelName,
+				'id': data.oid,
+				'leaf': true,
+				'qtip': '',
+				'qtipTitle': data.oid,
+				'iconCls': "FigureModel",
+				oid: data.oid,
+				uwmClassName: "Model"
+			});
+			
+			var root = tree.root;
+			root.appendChild(newModel);
+		});
 	}
 }
 
@@ -968,19 +995,7 @@ uwm.jsonRequest = function(params, context, successFunction, failureFunction){
 	});
 }
 
-uwm.deleteFigureFromModel = function(uwmClassName, oid){
-/*
-	var container = Ext.getCmp("diagramsContainer").items;
-	var numDiagrams = container.getCount();
-
-	for (var currDiagramNo = 0; currDiagramNo < numDiagrams; currDiagramNo++) {
-		var diagram = container.get(currDiagramNo);
-		var figure = diagram.getByOid(oid);
-		if (figure) {
-			diagram.workflow.getCommandStack().execute(new draw2d.CommandDelete(figure));
-		}
-	}
-*/
+uwm.deleteElementFromModel = function(uwmClassName, oid){
 	uwm.jsonRequest({
 		usr_action: "delete",
 		deleteoids: oid
@@ -1000,7 +1015,7 @@ uwm.deleteConnectionFromModel = function(parentOid, childOid){
 }
 
 uwm.showInTree = function(oid){
-	var tree = Ext.getCmp("figureTree");
+	var tree = Ext.getCmp(uwm.ProjectTree.TREE_ID);
 	tree.show();
 	
 	var node = tree.getNodeById(oid);
@@ -1107,7 +1122,7 @@ uwm.updateElementDisplay = function(oid, uwmClassName, action, newLabels){
 }
 
 uwm.updateTree = function(oid, uwmClassName, action, newLabels){
-	var tree = Ext.getCmp("figureTree");
+	var tree = Ext.getCmp(uwm.ProjectTree.TREE_ID);
 	
 	var node = tree.getNodeById(oid);
 	if (node) {
@@ -1126,25 +1141,27 @@ uwm.updateTree = function(oid, uwmClassName, action, newLabels){
 uwm.updateGrid = function(oid, uwmClassName, action, newLabels){
 	var grid = Ext.getCmp("Grid" + uwmClassName);
 	
-	var store = grid.getStore();
-	
-	var record = store.getById(oid);
-	
-	switch (action) {
-		case "delete":
-			store.remove(record);
-			break;
-			
-		case "labelChange":
-			eval(uwm.getModelFunction(uwmClassName, "setRecordLabel") + "(record, newLabels)");
-			break;
+	if (grid) {
+		var store = grid.getStore();
+		
+		var record = store.getById(oid);
+		
+		switch (action) {
+			case "delete":
+				store.remove(record);
+				break;
+				
+			case "labelChange":
+				eval(uwm.getModelFunction(uwmClassName, "setRecordLabel") + "(record, newLabels)");
+				break;
+		}
 	}
 }
 
 uwm.updateDiagram = function(oid, uwmClassName, action, newLabels){
 	var container = Ext.getCmp("diagramsContainer").items;
 	var numDiagrams = container.getCount();
-
+	
 	for (var currDiagramNo = 0; currDiagramNo < numDiagrams; currDiagramNo++) {
 		var diagram = container.get(currDiagramNo);
 		var figure = diagram.getByOid(oid);
@@ -1317,4 +1334,42 @@ uwm.buildLabel = function(uwmClassName, nodeData){
 	
 	return eval(uwm.getModelFunction(uwmClassName, "getLabel") + "(labels)");
 	
+}
+
+uwm.createNewPackage = function(parentOid, parentNode){
+	Ext.MessageBox.prompt("Create new Package", "Please enter name of new Package:", function(button, text){
+		uwm.handlePackageName(button, text, parentOid, parentNode);
+	});
+}
+
+uwm.handlePackageName = function(button, newPackageName, parentOid, parentNode){
+	if (button == "ok") {
+		uwm.jsonRequest({
+			usr_action: "new",
+			newtype: "Package"
+		}, "Creating new Package", function(data){
+			uwm.changeField("Name", newPackageName, data.oid);
+			uwm.postConnection(data.oid, parentOid);
+			
+			var newPackage = new Ext.tree.AsyncTreeNode({
+				'text': newPackageName,
+				'id': data.oid,
+				'leaf': true,
+				'qtip': '',
+				'qtipTitle': data.oid,
+				'iconCls': "FigurePackage",
+				oid: data.oid,
+				uwmClassName: "Package"
+			});
+			
+			parentNode.appendChild(newPackage);
+			
+			newPackage.ensureVisible();
+			newPackage.select();
+		});
+	}
+}
+
+
+uwm.createNewDiagram = function(parentOid, parentNode) {
 }
