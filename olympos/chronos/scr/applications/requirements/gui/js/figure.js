@@ -73,7 +73,7 @@ cwm.figure.ChiGoal.prototype.getGrid = function(store){
 							var oid = node.id;
 							uwm.showInDiagram(oid);
 						},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -132,11 +132,11 @@ cwm.figure.ChiGoal.prototype.getStore = function(){
 			}, {
 				name: "parentoids",
 				//Change: removed properties.
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
 				//Change: removed properties.
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -394,7 +394,7 @@ cwm.figure.ChiRequirement.prototype.getGrid = function(store){
 							var oid = node.id;
 							uwm.showInDiagram(oid);
 						},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -449,10 +449,10 @@ cwm.figure.ChiRequirement.prototype.getStore = function(){
 				mapping: "values[1].Priority"
 			}, {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -855,7 +855,7 @@ cwm.figure.ChiIssue.prototype.getGrid = function(store){
 							var oid = node.id;
 							uwm.showInDiagram(oid);
 						},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -909,10 +909,10 @@ cwm.figure.ChiIssue.prototype.getStore = function(){
 				mapping: "values[1].Name"
 			}, {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -1189,7 +1189,7 @@ cwm.figure.ChiFeature.prototype.getGrid = function(store){
 							var oid = node.id;
 							uwm.showInDiagram(oid);
 						},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -1243,10 +1243,10 @@ cwm.figure.ChiFeature.prototype.getStore = function(){
 				mapping: "values[1].Name"
 			}, {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -1562,7 +1562,7 @@ cwm.figure.Figure.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -1606,10 +1606,10 @@ cwm.figure.Figure.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -1979,7 +1979,7 @@ cwm.figure.Model.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -2027,10 +2027,10 @@ cwm.figure.Model.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -2249,7 +2249,7 @@ cwm.figure.Model.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -2297,10 +2297,10 @@ cwm.figure.Model.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -2519,7 +2519,7 @@ cwm.figure.ChiBusinessPartner.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -2567,10 +2567,10 @@ cwm.figure.ChiBusinessPartner.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -2809,7 +2809,7 @@ cwm.figure.ChiBusinessPartnerActive.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -2857,10 +2857,10 @@ cwm.figure.ChiBusinessPartnerActive.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -3107,7 +3107,7 @@ cwm.figure.ChiBusinessProcess.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -3155,10 +3155,10 @@ cwm.figure.ChiBusinessProcess.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -3417,7 +3417,7 @@ cwm.figure.ChiBusinessUseCaseCore.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -3465,10 +3465,10 @@ cwm.figure.ChiBusinessUseCaseCore.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -3851,7 +3851,7 @@ cwm.figure.ChiBusinessUseCase.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -3899,10 +3899,10 @@ cwm.figure.ChiBusinessUseCase.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -4328,7 +4328,7 @@ cwm.figure.Package.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -4376,10 +4376,10 @@ cwm.figure.Package.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -4782,7 +4782,7 @@ cwm.figure.ChiWorkerExternal.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -4830,10 +4830,10 @@ cwm.figure.ChiWorkerExternal.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -5091,7 +5091,7 @@ cwm.figure.ChiWorkerInternal.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -5139,10 +5139,10 @@ cwm.figure.ChiWorkerInternal.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -5389,7 +5389,7 @@ cwm.figure.ChiBusinessPartnerPassive.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -5437,10 +5437,10 @@ cwm.figure.ChiBusinessPartnerPassive.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -5687,7 +5687,7 @@ cwm.figure.ChiBusinessUseCase.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -5735,10 +5735,10 @@ cwm.figure.ChiBusinessUseCase.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -6171,7 +6171,7 @@ cwm.figure.ChiAuthors.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -6223,10 +6223,10 @@ cwm.figure.ChiAuthors.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -6446,7 +6446,7 @@ cwm.figure.ChiFeatureStatus.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -6494,10 +6494,10 @@ cwm.figure.ChiFeatureStatus.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -6708,7 +6708,7 @@ cwm.figure.ChiRequirementStatus.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -6756,10 +6756,10 @@ cwm.figure.ChiRequirementStatus.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
@@ -6969,7 +6969,7 @@ cwm.figure.ChiRequirementType.prototype.getGrid = function(store) {
 										var oid = node.id;							
 										uwm.showInDiagram(oid);
 															},
-						disabled: !uwm.getByOid(node.id)
+						disabled: !uwm.data.currentDiagram.getByOid(node.id)
 					}), new Ext.menu.Item({
 						text: "Show in Tree",
 						handler: function(item, e){
@@ -7017,10 +7017,10 @@ cwm.figure.ChiRequirementType.prototype.getStore = function(){
 
 			 {
 				name: "parentoids",
-				mapping: "parentoids"
+				mapping: "properties.parentoids"
 			}, {
 				name: "childoids",
-				mapping: "childoids"
+				mapping: "properties.childoids"
 			}]
 		})
 	});
