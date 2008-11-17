@@ -12,7 +12,23 @@ uwm.ProjectTree = Ext.extend(Ext.tree.TreePanel, {
 		click: function(node, e){
 			var uwmClassName = node.id.match(/[^:]+/);
 			
-			uwm.showProperties(uwmClassName, node.id);
+			var diagramContainer = Ext.getCmp(uwm.Diagram.CONTAINER_ID);
+			
+			if (uwmClassName == "Diagram") {
+				if (!node.attributes.diagram) {
+					node.attributes.diagram = new uwm.Diagram({
+						title: node.text,
+						oid: node.id
+					});
+					
+					diagramContainer.add(node.attributes.diagram);
+					
+				}
+				diagramContainer.activate(node.attributes.diagram);
+			}
+			else {
+				uwm.showProperties(uwmClassName, node.id);
+			}
 		},
 		contextmenu: function(node, e){
 			this.contextMenuShown = true;
@@ -55,7 +71,7 @@ uwm.ProjectTree = Ext.extend(Ext.tree.TreePanel, {
 								
 								uwm.createNewPackage(oid, node);
 							}
-						}),new Ext.menu.Item({
+						}), new Ext.menu.Item({
 							text: "Add diagram",
 							handler: function(item, e){
 								var oid = node.id;

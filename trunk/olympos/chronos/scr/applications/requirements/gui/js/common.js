@@ -702,6 +702,7 @@ uwm.initializeTemplateDragZone = function(v, uwmClassName){
 uwm.createExistingFigure = function(uwmClassName, label, oid, parentoids, childoids, x, y, compartment){
 	var drawElem = uwm.createModelClass(uwmClassName, label, oid, parentoids, childoids);
 	if (drawElem) {
+		uwm.data.currentDiagram.addOid(oid, drawElem);
 		uwm.data.currentDiagram.workflow.getCommandStack().execute(new draw2d.CommandAdd(uwm.data.currentDiagram.workflow, drawElem, x, y, compartment));
 		
 		uwm.establishExistingConnections(drawElem, drawElem.getParentOids());
@@ -735,9 +736,16 @@ uwm.establishExistingConnections = function(drawElem, list){
 					}
 					decorators = uwm.connection.getConnectionTypeDecorators(connectionType);
 					
-					var command = new draw2d.CommandConnect(drawElem.workflow, startPort, endPort);
-					command.setConnection(new uwm.connection.BaseConnection(connectionData.label, decorators));
-					drawElem.workflow.getCommandStack().execute(command);
+					 var command = new draw2d.CommandConnect(drawElem.workflow, startPort, endPort);
+					 command.setConnection(new uwm.connection.BaseConnection(connectionData.label, decorators));
+					 drawElem.workflow.getCommandStack().execute(command);
+					/*
+					var connection = new uwm.connection.BaseConnection(connectionData.label, decorators);
+					connection.setSource(startPort);
+					connection.setTarget(endPort);
+					drawElem.workflow.addFigure(connection);
+					 */
+					
 				}
 				
 			}
@@ -911,6 +919,23 @@ uwm.changeField = function(fieldName, newValue, oid){
 	}
 	
 	params["value--" + fieldName + "-" + oid] = newValue;
+	
+	uwm.jsonRequest(params, "Saving properties");
+}
+
+uwm.changeFields = function(values, oid){
+	var params = {
+		sid: uwm.data.sid,
+		controller: "ExitController",
+		usr_action: "save",
+		response_format: "JSON"
+	}
+	
+	for (var i in values) {
+		if (i != "remove") {
+			params["value--" + i + "-" + oid] = values[i];
+		}
+	}
 	
 	uwm.jsonRequest(params, "Saving properties");
 }
@@ -1371,5 +1396,47 @@ uwm.handlePackageName = function(button, newPackageName, parentOid, parentNode){
 }
 
 
-uwm.createNewDiagram = function(parentOid, parentNode) {
+uwm.createNewDiagram = function(parentOid, parentNode){
+	Ext.MessageBox.prompt("Create new Diagram", "Please enter name of new Diagram:", function(button, text){
+		uwm.handleDiagramName(button, text, parentOid, parentNode);
+	});
 }
+
+uwm.handleDiagramName = function(button, newDiagramName, parentOid, parentNode){
+	if (button == "ok") {
+		uwm.jsonRequest({
+			usr_action: "new",
+			newtype: "Diagram"
+		}, "Creating new Diagram", function(data){
+			uwm.changeField("Name", newDiagramName, data.oid);
+			uwm.postConnection(data.oid, parentOid);
+			
+			var newDiagram = new uwm.Diagram({
+				oid: data.oid,
+				title: newDiagramName
+			});
+			
+			var newDiagramNode = new Ext.tree.AsyncTreeNode({
+				'text': newDiagramName,
+				'id': data.oid,
+				'leaf': true,
+				'qtip': '',
+				'qtipTitle': data.oid,
+				'iconCls': "FigureDiagram",
+				oid: data.oid,
+				uwmClassName: "Diagram",
+				diagram: newDiagram
+			});
+			
+			var diagramContainer = Ext.getCmp(uwm.Diagram.CONTAINER_ID);
+			diagramContainer.add(newDiagram);
+			diagramContainer.activate(newDiagram);
+			
+			parentNode.appendChild(newDiagramNode);
+			
+			newDiagramNode.ensureVisible();
+			newDiagramNode.select();
+		});
+	}
+}
+

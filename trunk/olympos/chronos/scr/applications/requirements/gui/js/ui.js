@@ -195,18 +195,18 @@ uwm.ui.create = function(){
 			//tabPosition: "bottom",
 			enableTabScroll: true,
 			activeTab: 0,
-			id: "diagramsContainer",
-			items: [new uwm.Diagram({
-				layout: "fit",
-				title: "Diagram 1"
-			}), new uwm.Diagram({
-				layout: "fit",
-				title: "Diagram 2"
-			})],
+			id: uwm.Diagram.CONTAINER_ID,
 			listeners: {
 				tabchange: function(self, tab){
 					uwm.data.currentDiagram = tab;
 					tab.workflow.setCurrentSelection(null);
+				},
+				remove: function(tabpanel, tab){
+					var projectTree = Ext.getCmp(uwm.ProjectTree.TREE_ID);
+					var diagramNode = projectTree.getNodeById(tab.oid);
+					if (diagramNode) {
+						diagramNode.attributes.diagram = null;
+					}
 				}
 				
 			}
