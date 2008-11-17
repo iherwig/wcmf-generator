@@ -7,12 +7,23 @@ uwm.Diagram = Ext.extend(Ext.BoxComponent, {
 		Ext.apply(this, {
 			el: Ext.DomHelper.append(Ext.getBody(), {
 				tag: 'div'
-			}, true)
+			}, true),
+			closable: true,
+			listener: {
+				close: function(tab){
+					var projectTree = Ext.getCmp(uwm.ProjectTree.TREE_ID);
+					var diagramNode = projectTree.getNodeById(tab.oid);
+					if (diagramNode) {
+						diagramNode.attributes.diagram = null;
+					}
+				}
+			}
 		})
 		
 		uwm.Diagram.superclass.initComponent.apply(this, arguments);
 		
 		this.oidList = new Array();
+		this.oid = this.initialConfig.oid;
 	},
 	
 	
@@ -21,8 +32,10 @@ uwm.Diagram = Ext.extend(Ext.BoxComponent, {
 		
 		this.initWorkflow();
 		this.initializeDropZone();
+		this.loadDiagram();
 		
 	},
+	
 	
 	initWorkflow: function(){
 	
@@ -63,6 +76,7 @@ uwm.Diagram = Ext.extend(Ext.BoxComponent, {
 		this.workflow.addSelectionListener(propertyHandler);
 		this.workflow.getCommandStack().addCommandStackEventListener(propertyHandler);
 		this.workflow.getCommandStack().addCommandStackEventListener(new uwm.DeleteHandler());
+		this.workflow.getCommandStack().addCommandStackEventListener(new uwm.DiagramPersistenceListener(this.oid, this));
 		
 		this.snapToObjects = false;
 		
@@ -154,6 +168,47 @@ uwm.Diagram = Ext.extend(Ext.BoxComponent, {
 		});
 	},
 	
+	loadDiagram: function(){
+		if (this.oid) {
+			uwm.data.currentDiagram = this;
+			var self = this;
+			
+			uwm.jsonRequest({
+				usr_action: "display",
+				depth: 3,
+				omitMetaData: true,
+				oid: self.oid
+			}, "Loading diagram", function(data){
+				var figures = data.node.Figure;
+				
+				if (figures) {
+					self.initialLoad = true;
+					
+					for (var i = 0; i < figures.length; i++) {
+						var currFigure = figures[i];
+						
+						var modelElem = currFigure.properties.childoids[0];
+						
+						if (modelElem) {
+							var uwmClassName = modelElem.match(/^[^:]+/)[0];
+							var data = figures[0][uwmClassName][0];
+							
+							if (data) {
+								var parentoids = data.properties.parentoids;
+								var childoids = data.properties.childoids;
+								var label = data.values[1].Name;
+								//FIXME: PositionX
+								uwm.createExistingFigure(uwmClassName, label, modelElem, parentoids, childoids, parseInt(currFigure.values[1].PostionX), parseInt(currFigure.values[1].PositionY));
+								
+							}
+						}
+					}
+					self.initalLoad = false;
+				}
+			});
+		}
+	},
+	
 	
 	addOid: function(oid, figure){
 		this.oidList[oid] = figure;
@@ -167,3 +222,57 @@ uwm.Diagram = Ext.extend(Ext.BoxComponent, {
 		return this.oidList[oid];
 	}
 });
+
+uwm.Diagram.CONTAINER_ID = "diagramsContainer";
+
+uwm.DiagramPersistenceListener = function(diagramOid, diagram){
+	this.oid = diagramOid;
+	this.diagram = diagram;
+}
+
+uwm.DiagramPersistenceListener.prototype = new draw2d.CommandStackEventListener;
+
+uwm.DiagramPersistenceListener.prototype.stackChanged = function(stackEvent){
+	var command = stackEvent.command;
+	var self = this;
+	
+	if (!this.diagram.initialLoad && stackEvent.getDetails() == draw2d.CommandStack.POST_EXECUTE) {
+		if (command instanceof draw2d.CommandAdd) {
+			uwm.jsonRequest({
+				usr_action: "new",
+				newtype: "Figure"
+			}, "Creating new Figure", function(data){
+				command.figure.figureOid = data.oid;
+				uwm.changeFields({
+					//FIXME: PositionX
+					PostionX: command.x,
+					PositionY: command.y,
+					Height: command.figure.getHeight(),
+					Width: command.figure.getWidth()
+				}, data.oid);
+				uwm.postConnection(command.figure.oid, data.oid);
+				uwm.postConnection(data.oid, self.oid);
+			});
+		}
+		else if (command instanceof draw2d.CommandDelete) {
+			uwm.deleteElementFromModel(command.figure.uwmClassName, command.figure.figureOid);
+		}
+		else if (command instanceof draw2d.CommandMove) {
+			uwm.changeFields({
+				//FIXME: PositionX
+				PostionX: command.newX,
+				PositionY: command.newY
+			}, command.figure.figureOid);
+		}
+		else if (command instanceof draw2d.CommandResize) {
+			uwm.changeFields({
+				Height: command.newHeight,
+				Width: command.newWidth
+			}, command.figure.figureOid);
+		}
+		else if (command instanceof draw2d.CommandSetBackgroundColor) {
+		}
+		else if (command instanceof draw2d.CommandSetColor) {
+		}
+	}
+}
