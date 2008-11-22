@@ -31,8 +31,8 @@
   		{if $authUser->hasRole('administrators')}
   	<li><a href="javascript:newWindowEx('', '', 'export', 'exportWindow', 'width=360,height=120,scrollbars=no,resizable=yes,locationbar=no', '&sid={sessionid}')" id="navexport">{translate text="Export"}</a></li>
 	  	{/if}
-<li><a href="javascript:newWindowEx('', '', 'exportXMI', 'exportWindow', 'width=360,height=120,scrollbars=no,resizable=yes,locationbar=no', '&sid={sessionid}')" id="navexport">{translate text="Export"}</a></li>   
-<li><a href="javascript:newWindowEx('', '', 'importXMI', 'exportWindow', 'width=360,height=120,scrollbars=no,resizable=yes,locationbar=no', '&sid={sessionid}')" id="navexport">{translate text="Import"}</a></li>   
+<li><a href="javascript:newWindowEx('', '', 'exportXMI', 'exportWindow', 'width=360,height=120,scrollbars=no,resizable=yes,locationbar=no', '&sid={sessionid}')" id="navexport">{translate text="Export UML"}</a></li>   
+<li><a href="javascript:newWindowEx('', '', 'importXMI', 'exportWindow', 'width=360,height=120,scrollbars=no,resizable=yes,locationbar=no', '&sid={sessionid}')" id="navexport">{translate text="Import UML"}</a></li>   
    <li><a href="javascript:submitAction('search');"><img src="images/search.png" width="7" height="9" alt="{translate text="Search"}" border="0" /></a> {$formUtil->getInputControl("searchterm", "text[class='small']", $searchterm, true)}</li>
     <li><a href="javascript:newWindowEx('{$_controller}', '', 'definesearch', 'definesearchWindow', 'width=600,height=600,scrollbars=yes,locationbar=no,resizable=yes', '&sid={sessionid}');">{translate text="Advanced Search"}</a></li>
 	  {/if}
