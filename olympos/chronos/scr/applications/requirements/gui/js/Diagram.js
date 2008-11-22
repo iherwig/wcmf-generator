@@ -184,26 +184,47 @@ uwm.Diagram = Ext.extend(Ext.BoxComponent, {
 				if (figures) {
 					self.initialLoad = true;
 					
+					var numFigures = 0;
+					var processedFigures = 0;
+					
 					for (var i = 0; i < figures.length; i++) {
 						var currFigure = figures[i];
 						
-						var modelElem = currFigure.properties.childoids[0];
+						for (var j = 0; j < currFigure.properties.parentoids.length; j++) {
 						
-						if (modelElem) {
-							var uwmClassName = modelElem.match(/^[^:]+/)[0];
-							var data = figures[0][uwmClassName][0];
+							var modelElem = currFigure.properties.parentoids[j];
 							
-							if (data) {
-								var parentoids = data.properties.parentoids;
-								var childoids = data.properties.childoids;
-								var label = data.values[1].Name;
-								//FIXME: PositionX
-								uwm.createExistingFigure(uwmClassName, label, modelElem, parentoids, childoids, parseInt(currFigure.values[1].PostionX), parseInt(currFigure.values[1].PositionY));
-								
+							if (modelElem) {
+								if (modelElem != self.oid) {
+									numFigures++;
+
+									uwm.jsonRequest({
+										usr_action: "display",
+										depth: 0,
+										omitMetaData: true,
+										oid: modelElem,
+										xpos: parseInt(currFigure.values[1].PositionX),
+										ypos: parseInt(currFigure.values[1].PositionY),
+										self: self
+									}, "Loading diagram element", function(data, request){
+										var oid = data.node.oid;
+										var uwmClassName = data.node.type;
+										var parentoids = data.node.properties.parentoids;
+										var childoids = data.node.properties.childoids;
+										var label = data.node.values[1].Name;
+										uwm.createExistingFigure(uwmClassName, label, oid, parentoids, childoids, request.params.xpos, request.params.ypos);
+										
+										processedFigures++;
+										
+										if (processedFigures >= numFigures) {
+											self.initialLoad = false;
+										}
+										
+									});
+								}
 							}
 						}
 					}
-					self.initalLoad = false;
 				}
 			});
 		}
@@ -244,14 +265,13 @@ uwm.DiagramPersistenceListener.prototype.stackChanged = function(stackEvent){
 			}, "Creating new Figure", function(data){
 				command.figure.figureOid = data.oid;
 				uwm.changeFields({
-					//FIXME: PositionX
-					PostionX: command.x,
+					PositionX: command.x,
 					PositionY: command.y,
 					Height: command.figure.getHeight(),
 					Width: command.figure.getWidth()
 				}, data.oid);
-				uwm.postConnection(command.figure.oid, data.oid);
 				uwm.postConnection(data.oid, self.oid);
+				uwm.postConnection(data.oid, command.figure.oid);
 			});
 		}
 		else if (command instanceof draw2d.CommandDelete) {
@@ -259,8 +279,7 @@ uwm.DiagramPersistenceListener.prototype.stackChanged = function(stackEvent){
 		}
 		else if (command instanceof draw2d.CommandMove) {
 			uwm.changeFields({
-				//FIXME: PositionX
-				PostionX: command.newX,
+				PositionX: command.newX,
 				PositionY: command.newY
 			}, command.figure.figureOid);
 		}

@@ -506,12 +506,12 @@ uwm.connection.getConnectionTypeDecorators = function(connectionType){
 	return result;
 }
 
-uwm.postConnection = function(parentOid, childOid){
+uwm.postConnection = function(parentOid, childOid, invert){
 	uwm.jsonRequest({
 		usr_action: "associate",
 		oid: parentOid,
 		associateoids: childOid,
-		associateAs: "parent"
+		associateAs: (invert ? "child" : "parent")
 	}, "Creating new connection");
 	
 }
@@ -601,13 +601,14 @@ uwm.PropertyHandler = function(){
 uwm.PropertyHandler.prototype.onSelectionChanged = function(figure){
 	if (figure != null && figure.getOid != null) {
 		if (figure.getOid() != this.currentSelectionOid) {
-		
-			this.currentSelectionOid = figure.getOid();
-			
-			if (figure.getUwmClass) {
-				var uwmClassName = figure.getUwmClass();
+			if (!uwm.data.currentDiagram.initialLoad) {
+				this.currentSelectionOid = figure.getOid();
 				
-				uwm.showProperties(uwmClassName, figure.getOid());
+				if (figure.getUwmClass) {
+					var uwmClassName = figure.getUwmClass();
+					
+					uwm.showProperties(uwmClassName, figure.getOid());
+				}
 			}
 		}
 	}
