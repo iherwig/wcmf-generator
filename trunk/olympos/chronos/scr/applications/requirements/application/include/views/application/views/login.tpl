@@ -10,7 +10,7 @@
 {include file="lib:application/views/include/error.tpl" displayMessageDialog="false"}
 
 <script language="Javascript" src="script/login.js"></script>
-welcome to the requirement application
+welcome to the Requirement application
 <div class="contentblock">
 	<span class="spacer"></span>
 	<span class="left">{translate text="Login"}</span>
