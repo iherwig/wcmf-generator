@@ -14,10 +14,11 @@ uwm.ProjectTree = Ext.extend(Ext.tree.TreePanel, {
 			
 			var diagramContainer = Ext.getCmp(uwm.Diagram.CONTAINER_ID);
 			
-			if (false && uwmClassName == "Diagram") {
+			if (uwmClassName == "Diagram") {
 				if (!node.attributes.diagram) {
 					node.attributes.diagram = new uwm.Diagram({
 						title: node.text,
+						packageOid: node.parentNode.id,
 						oid: node.id
 					});
 					

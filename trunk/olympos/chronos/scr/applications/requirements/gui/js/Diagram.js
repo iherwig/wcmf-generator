@@ -24,6 +24,7 @@ uwm.Diagram = Ext.extend(Ext.BoxComponent, {
 		
 		this.oidList = new Array();
 		this.oid = this.initialConfig.oid;
+		this.packageOid = this.initialConfig.packageOid;
 	},
 	
 	
