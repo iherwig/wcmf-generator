@@ -793,6 +793,7 @@ uwm.handleFigureCreated = function(data, newClassName, uwmClassName, x, y, compa
 		var oid = data.oid;
 		
 		uwm.changeField("Name", newClassName, oid);
+		uwm.postConnection(oid, uwm.data.currentDiagram.packageOid);
 		
 		var drawElem = uwm.createModelClass(uwmClassName, newClassName, oid, [], []);
 		if (drawElem) {
@@ -1414,6 +1415,7 @@ uwm.handleDiagramName = function(button, newDiagramName, parentOid, parentNode){
 			
 			var newDiagram = new uwm.Diagram({
 				oid: data.oid,
+				packageOid: parentOid,
 				title: newDiagramName
 			});
 			
