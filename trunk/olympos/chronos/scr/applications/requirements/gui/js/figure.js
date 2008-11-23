@@ -477,6 +477,17 @@ cwm.figure.ChiRequirement.prototype.showEdit = function(parentComponent, oid){
 			}
 		}
 	};
+	//Changed 2008-11-23: Added comboListeners
+	var comboListeners = {
+		"change": function(field, newValue, oldValue){
+			uwm.fieldChanged(field, newValue, oldValue, oid);
+			uwm.updateElementDisplay(oid, "ChiRequirement")
+		},
+		"render": function(self){
+			self.store.load();
+		}
+	};
+	//End Change
 	var form = new Ext.FormPanel({
 		oid: oid,
 		labelWidth: 90,
@@ -519,7 +530,8 @@ cwm.figure.ChiRequirement.prototype.showEdit = function(parentComponent, oid){
 			mode: "remote",
 			triggerAction: 'all',
 			editable: false,
-			listeners: listeners
+			//Changed 2008-11-23: Changed to comboListener
+			listeners: comboListeners
 		}), {
 			fieldLabel: 'Priority',
 			name: 'Priority',
@@ -566,7 +578,8 @@ cwm.figure.ChiRequirement.prototype.showEdit = function(parentComponent, oid){
 			mode: "remote",
 			triggerAction: 'all',
 			editable: false,
-			listeners: listeners
+			//Changed 2008-11-23: Changed to comboListener
+			listeners: comboListeners
 		}), new Ext.form.ComboBox({
 			fieldLabel: 'Proofreader',
 			id: 'IDProofreader',
@@ -598,7 +611,8 @@ cwm.figure.ChiRequirement.prototype.showEdit = function(parentComponent, oid){
 			mode: "remote",
 			triggerAction: 'all',
 			editable: false,
-			listeners: listeners
+			//Changed 2008-11-23: Changed to comboListener
+			listeners: comboListeners
 		}), new Ext.form.ComboBox({
 			fieldLabel: 'Status',
 			id: 'IDStatus',
@@ -630,7 +644,8 @@ cwm.figure.ChiRequirement.prototype.showEdit = function(parentComponent, oid){
 			mode: "remote",
 			triggerAction: 'all',
 			editable: false,
-			listeners: listeners
+			//Changed 2008-11-23: Changed to comboListener
+			listeners: comboListeners
 		}), {
 			fieldLabel: 'Alias',
 			name: 'Alias',

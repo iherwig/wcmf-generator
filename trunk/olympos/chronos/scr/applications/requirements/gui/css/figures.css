@@ -5,8 +5,18 @@
  * NOTE: This file was created in the application root directory to 
  *       ensure that everything is working correctly
  */
+/*
 .FigurePackage {
 	background-image: url("../img/Package.png") !important;
+} 
+*/
+
+.FigureModel {
+	background-image: url("../img/Model.png") !important;
+} 
+
+.FigureDiagram {
+	background-image: url("../img/Diagram.png") !important;
 } 
 
 .FigureChiGoal {

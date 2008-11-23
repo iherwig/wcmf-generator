@@ -14,7 +14,7 @@ uwm.ProjectTree = Ext.extend(Ext.tree.TreePanel, {
 			
 			var diagramContainer = Ext.getCmp(uwm.Diagram.CONTAINER_ID);
 			
-			if (uwmClassName == "Diagram") {
+			if (false && uwmClassName == "Diagram") {
 				if (!node.attributes.diagram) {
 					node.attributes.diagram = new uwm.Diagram({
 						title: node.text,
