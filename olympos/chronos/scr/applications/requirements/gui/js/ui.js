@@ -93,7 +93,7 @@ uwm.ui.create = function(){
 					}), new Ext.tree.TreePanel({
 						layout: "fit",
 						id: "hierarchyTree",
-						iconCls: "TreeTab",
+						iconCls: "HierarchyTab",
 						autoScroll: true,
 						enableDD: true,
 						dragConfig: {

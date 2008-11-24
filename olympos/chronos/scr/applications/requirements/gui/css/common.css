@@ -27,6 +27,12 @@
 	background-image: url("../img/tree.png");
 }
 
+.HierarchyTab {
+	min-height: 24px;
+	min-width: 4px;
+	background-image: url("../img/hierarchy.png");
+}
+
 #messageContainer {
 	width: 55%;
 	z-index: 30000;
