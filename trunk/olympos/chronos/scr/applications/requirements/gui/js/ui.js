@@ -1,5 +1,5 @@
-uwm.ui.createLogin = function(){
-	var submitHandler = function(){
+uwm.ui.createLogin = function() {
+	var submitHandler = function() {
 		if (loginForm.getForm().isValid()) {
 			uwm.initSession(loginForm.getForm().findField("login").getValue(), loginForm.getForm().findField("password").getValue(), loginForm);
 		}
@@ -16,7 +16,7 @@ uwm.ui.createLogin = function(){
 		},
 		keys: [{
 			key: [10, 13],
-			handler: function(){
+			handler: function() {
 				submitHandler(loginForm);
 			}
 			
@@ -37,7 +37,7 @@ uwm.ui.createLogin = function(){
 		buttons: [{
 			text: 'Login',
 			type: 'submit',
-			handler: function(){
+			handler: function() {
 				submitHandler(loginForm);
 			}
 		}]
@@ -60,7 +60,7 @@ uwm.ui.createLogin = function(){
 }
 
 
-uwm.ui.create = function(){
+uwm.ui.create = function() {
 	var viewport = new Ext.Viewport({
 		layout: "border",
 		items: [{
@@ -73,150 +73,23 @@ uwm.ui.create = function(){
 			id: "contentContainer",
 			items: {
 				layout: "border",
-				items: [{
-					region: "north",
-					title: "New Elements",
-					collapsible: true,
-					split: true,
-					autoScroll: true,
-					height: 250,
-					id: "newFiguresContainer"
-				}, {
+				items: [new uwm.newobjects.NewObjectsGrid({}), {
 					region: "center",
 					title: "Existing Classes",
 					xtype: "tabpanel",
 					//tabPosition: "bottom",
 					enableTabScroll: true,
 					id: "existingFiguresContainer",
-					items: [new uwm.ProjectTree({
-						id: uwm.ProjectTree.TREE_ID
-					}), new Ext.tree.TreePanel({
-						layout: "fit",
-						id: "hierarchyTree",
-						iconCls: "HierarchyTab",
-						autoScroll: true,
-						enableDD: true,
-						dragConfig: {
-							ddGroup: "gridDDGroup"
-						},
-						root: new Ext.tree.TreeNode(),
-						rootVisible: false,
-						listeners: {
-							click: function(node, e){
-								var uwmClassName = node.attributes.oid.match(/[^:]+/);
-								
-								uwm.showProperties(uwmClassName, node.attributes.oid);
-							},
-							contextmenu: function(node, e){
-								var contextMenu = new Ext.menu.Menu({
-									items: [new Ext.menu.Item({
-										text: "Show in diagram",
-										handler: function(item, e){
-											var oid = node.attributes.oid;
-											
-											uwm.showInDiagram(oid);
-										},
-										disabled: !uwm.getByOid(node.attributes.oid)
-									}), new Ext.menu.Item({
-										text: "Show in grid",
-										handler: function(item, e){
-											var oid = node.attributes.oid;
-											var uwmClassName = oid.match(/[^:]+/);
-											
-											uwm.showInGrid(uwmClassName, oid);
-										}
-									}), new Ext.menu.Item({
-										text: "Show in tree",
-										handler: function(item, e){
-											var oid = node.attributes.oid;
-											
-											uwm.showInTree(oid);
-										}
-									}), new Ext.menu.Item({
-										text: "Show in Hierarchy",
-										handler: function(item, e){
-											var oid = node.attributes.oid;
-											
-											uwm.showInHierarchy(oid);
-										}
-									}), "-", {
-										text: "Delete from model",
-										handler: function(item){
-											var oid = node.attributes.oid;
-											var uwmClassName = oid.match(/[^:]+/);
-											
-											uwm.deleteElementFromModel(uwmClassName, oid);
-										}
-									}]
-								});
-								node.select();
-								
-								contextMenu.showAt(e.getXY());
-							}
-							
-						},
-						loader: new Ext.tree.TreeLoader({
-							dataUrl: uwm.config.jsonUrl,
-							baseParams: {
-								sid: uwm.data.sid,
-								response_format: "JSON",
-								usr_action: "display",
-								depth: 2,
-								omitMetaData: true
-							},
-							listeners: {
-								beforeload: function(self, node, callback){
-									self.baseParams.oid = node.attributes.oid;
-								},
-								load: function(self, node, response){
-									var responseArray = Ext.decode(response.responseText);
-									
-									uwm.loadHierarchyNode(responseArray.node, node, null);
-								}
-								
-							}
-						})
-					})]
+					items: [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()]
 				}]
 			}
-		}, {
-			region: "east",
-			collapsible: true,
-			split: true,
-			width: 250,
-			autoScroll: true,
-			title: "Properties",
-			items: [{
-				id: "propertiesContainer"
-			}]
-		}, {
-			region: "center",
-			xtype: "tabpanel",
-			//tabPosition: "bottom",
-			enableTabScroll: true,
-			activeTab: 0,
-			id: uwm.Diagram.CONTAINER_ID,
-			listeners: {
-				tabchange: function(self, tab){
-					uwm.data.currentDiagram = tab;
-					tab.workflow.setCurrentSelection(null);
-				},
-				remove: function(tabpanel, tab){
-					var projectTree = Ext.getCmp(uwm.ProjectTree.TREE_ID);
-					var diagramNode = projectTree.getNodeById(tab.oid);
-					if (diagramNode) {
-						diagramNode.attributes.diagram = null;
-					}
-				}
-				
-			}
-		}]
+		}, new uwm.ui.PropertyContainer(), uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
 	});
 	
-	uwm.ui.createNewFigureTemplates(Ext.getCmp("newFiguresContainer"));
+	//uwm.ui.createNewFigureTemplates(Ext.getCmp("newFiguresContainer"));
 	
 	if (uwm.data.autoLogout) {
-		Ext.EventManager.on(window, 'beforeunload', function(e){
+		Ext.EventManager.on(window, 'beforeunload', function(e) {
 			uwm.jsonRequest({
 				usr_action: "logout",
 			}, "Logging out");
@@ -225,12 +98,14 @@ uwm.ui.create = function(){
 		});
 	}
 	
+	uwm.diagram.DiagramContainer.getInstance().createNewDiagram();
+	
 	uwm.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
 	
 	uwm.loadStores();
 }
 
-uwm.ui.createNewFigureTemplates = function(container){
+uwm.ui.createNewFigureTemplates = function(container) {
 	for (var currIndex = 0; currIndex < uwm.config.figureList.length; currIndex++) {
 		var currFigure = uwm.config.figureList[currIndex];
 		
@@ -243,7 +118,7 @@ uwm.ui.createNewFigureTemplates = function(container){
 			cls: "FigureTemplate Figure" + currFigure,
 			uwmClassName: currFigure,
 			listeners: {
-				render: function(v){
+				render: function(v) {
 					uwm.setUnselectable(v.getEl().dom);
 					uwm.initializeTemplateDragZone(v, v.uwmClassName);
 				}
@@ -269,7 +144,7 @@ uwm.ui.createNewFigureTemplates = function(container){
 	}
 }
 
-uwm.ui.createExistingFigureTabs = function(container){
+uwm.ui.createExistingFigureTabs = function(container) {
 	uwm.data.stores = new draw2d.ArrayList();
 	
 	for (var currIndex = 0; currIndex < uwm.config.tabList.length; currIndex++) {
@@ -293,7 +168,7 @@ uwm.ui.createExistingFigureTabs = function(container){
 }
 
 
-uwm.ui.getContextMenuPosition = function(x, y){
+uwm.ui.getContextMenuPosition = function(x, y) {
 	var viewport = uwm.data.currentDiagram.viewPort;
 	var scroll = viewport.getScroll();
 	var xy = viewport.getXY();
@@ -301,8 +176,8 @@ uwm.ui.getContextMenuPosition = function(x, y){
 	return [x - scroll.left + xy[0] + 2, y - scroll.top + xy[1] + 2];
 }
 
-uwm.ui.showDiagramEdit = function(parentComponent){
-	var getKey = function(hash, key){
+uwm.ui.showDiagramEdit = function(parentComponent) {
+	var getKey = function(hash, key) {
 		for (curr in hash) {
 			if (hash[curr] == key) {
 				return curr;
@@ -310,7 +185,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 		}
 	}
 	
-	var getArray = function(hash){
+	var getArray = function(hash) {
 		var result = new Array();
 		for (curr in hash) {
 			if (curr != "remove") {
@@ -337,7 +212,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			allowDecimals: false,
 			allowNegative: false,
 			listeners: {
-				change: function(self, newValue, oldValue){
+				change: function(self, newValue, oldValue) {
 					uwm.data.currentDiagram.layouter.setPreferredEdgeLength(newValue);
 				}
 			}
@@ -350,7 +225,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			triggerAction: "all",
 			store: getArray(uwm.autolayout.Layouter.opt),
 			listeners: {
-				select: function(self, record, index){
+				select: function(self, record, index) {
 					uwm.data.currentDiagram.layouter.setOptimizationProcedure(uwm.autolayout.Layouter.opt[record.data.text]);
 				}
 			}
@@ -362,7 +237,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			allowNegative: false,
 			decimalPrecision: 6,
 			listeners: {
-				change: function(self, newValue, oldValue){
+				change: function(self, newValue, oldValue) {
 					uwm.data.currentDiagram.layouter.setLineSearcHAccuracy(newValue);
 				}
 			}
@@ -374,7 +249,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			allowNegative: false,
 			decimalPrecision: 3,
 			listeners: {
-				change: function(self, newValue, oldValue){
+				change: function(self, newValue, oldValue) {
 					uwm.data.currentDiagram.layouter.setCgRestartThreshold(newValue);
 				}
 			}
@@ -387,7 +262,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			triggerAction: "all",
 			store: getArray(uwm.autolayout.Layouter.spring),
 			listeners: {
-				select: function(self, record, index){
+				select: function(self, record, index) {
 					uwm.data.currentDiagram.layouter.setSprings(uwm.autolayout.Layouter.spring[record.data.text]);
 				}
 			}
@@ -400,7 +275,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			triggerAction: "all",
 			store: getArray(uwm.autolayout.Layouter.vvRepulsion),
 			listeners: {
-				select: function(self, record, index){
+				select: function(self, record, index) {
 					uwm.data.currentDiagram.layouter.setVertexVertexRepulsion(uwm.autolayout.Layouter.vvRepulsion[record.data.text]);
 				}
 			}
@@ -408,7 +283,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			fieldLabel: "Use Barnes-Hut",
 			checked: uwm.data.currentDiagram.layouter.getBarnesHut(),
 			listeners: {
-				check: function(self, checked){
+				check: function(self, checked) {
 					uwm.data.currentDiagram.layouter.setBarnesHut(checked);
 				}
 			}
@@ -420,7 +295,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			allowNegative: false,
 			decimalPrecision: 3,
 			listeners: {
-				change: function(self, newValue, oldValue){
+				change: function(self, newValue, oldValue) {
 					uwm.data.currentDiagram.layouter.setTheta(newValue);
 				}
 			}
@@ -428,7 +303,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			fieldLabel: "Use Gridding",
 			checked: uwm.data.currentDiagram.layouter.getGridding(),
 			listeners: {
-				check: function(self, checked){
+				check: function(self, checked) {
 					uwm.data.currentDiagram.layouter.setGridding(checked);
 				}
 			}
@@ -439,7 +314,7 @@ uwm.ui.showDiagramEdit = function(parentComponent){
 			allowDecimals: false,
 			allowNegative: false,
 			listeners: {
-				change: function(self, newValue, oldValue){
+				change: function(self, newValue, oldValue) {
 					uwm.data.currentDiagram.layouter.setIterations(newValue);
 				}
 			}
