@@ -37,3 +37,18 @@
 	width: 55%;
 	z-index: 30000;
 }
+
+.uwm-grid-icon {
+	margin: 0;
+	padding: 0;
+	width: 16px !important;
+	height: 16px !important;
+	background-position: 0 0 !important;
+}
+
+.uwm-grid-fullText {
+	margin: 0;
+	padding: 0;
+	height: auto !important;
+	white-space: normal !important;
+}
