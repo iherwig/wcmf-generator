@@ -23,7 +23,8 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 			}),
 			iconCls: "HierarchyTab",
 			rootVisible: false,
-			root: new Ext.tree.TreeNode()
+			root: new Ext.tree.TreeNode(),
+			tabTip: "<b>Hierarchy Tree</b><p>Shows all dependencies of a specific object. Use context menu on an object to show it here.</p>"
 		});
 		
 		uwm.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);

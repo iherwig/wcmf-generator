@@ -42,7 +42,7 @@ Ext.extend(uwm.hierarchytree.Node, uwm.objecttree.ObjectNode, {
 	},
 	
 	showInModelTree: function(self, e) {
-		alert("TODO: Show in model tree");
+		uwm.modeltree.ModelTree.getInstance().markNodeByOid(this.getModelNode().getOid());
 	},
 	
 	removeDirectParent: function(parent, parentOids) {

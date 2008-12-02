@@ -52,3 +52,9 @@
 	height: auto !important;
 	white-space: normal !important;
 }
+
+.uwm-helpViewer-frame {
+	border: none;
+	width: 100%;
+	height: 100%;
+}
