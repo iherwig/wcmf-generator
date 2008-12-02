@@ -19,7 +19,7 @@ uwm.ui.PropertyForm = Ext.extend(Ext.FormPanel, {
 			labelAlign: "top",
 			autoScroll: true,
 			defaults: {
-				width: 222
+				width: 220
 			},
 			defaultType: "textfield",
 			msgTarget: "side"

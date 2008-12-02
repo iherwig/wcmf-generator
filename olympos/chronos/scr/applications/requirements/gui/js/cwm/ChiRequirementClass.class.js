@@ -92,22 +92,4 @@ cwm.ChiRequirementClass.prototype.getPropertyForm = function() {
 	});
 }
 
-cwm.ChiRequirementClass.prototype.clearPropertiesForm = function(form) {
-	var realForm = form.getForm();
-	
-	realForm.findField("reqType").setValue("");
-	realForm.findField("Priority").setValue("");
-	realForm.findField("Author").setValue("");
-	realForm.findField("Proofreader").setValue("");
-	realForm.findField("Status").setValue("");
-	realForm.findField("Alias").setValue("");
-	realForm.findField("Version").setValue("");
-	realForm.findField("Name").setValue("");
-	realForm.findField("Notes").setValue("");
-	realForm.findField("created").setValue("");
-	realForm.findField("creator").setValue("");
-	realForm.findField("last_editor").setValue("");
-	realForm.findField("modified").setValue("");
-}
-
 uwm.Session.getInstance().getModelNodeClassContainer().registerClass(new cwm.ChiRequirementClass());

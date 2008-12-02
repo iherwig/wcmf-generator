@@ -56,17 +56,4 @@ uwm.diagram.DiagramClass.prototype.getPropertyForm = function() {
 	});
 }
 
-uwm.diagram.DiagramClass.prototype.clearPropertiesForm = function(form) {
-	var realForm = form.getForm();
-	
-	realForm.findField("Width").setValue("");
-	realForm.findField("Height").setValue("");
-	realForm.findField("Name").setValue("");
-	realForm.findField("Notes").setValue("");
-	realForm.findField("created").setValue("");
-	realForm.findField("creator").setValue("");
-	realForm.findField("last_editor").setValue("");
-	realForm.findField("modified").setValue("");
-}
-
 uwm.Session.getInstance().getModelNodeClassContainer().registerClass(new uwm.diagram.DiagramClass());
