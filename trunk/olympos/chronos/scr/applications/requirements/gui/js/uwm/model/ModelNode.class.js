@@ -100,11 +100,13 @@ uwm.model.ModelNode.prototype.reload = function(callback) {
 	});
 }
 
-uwm.model.ModelNode.prototype.fillPropertyForm = function(form) {
+uwm.model.ModelNode.prototype.fillPropertyForm = function(form, mask) {
 	var self = this;
 	
 	this.reload(function() {
 		self.populatePropertyForm(form);
+		
+		mask.hide();
 	});
 }
 

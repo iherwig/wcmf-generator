@@ -50,15 +50,4 @@ uwm.model.builtin.PackageClass.prototype.getPropertyForm = function() {
 	});
 }
 
-uwm.model.builtin.PackageClass.prototype.clearPropertiesForm = function(form) {
-	var realForm = form.getForm();
-	
-	realForm.findField("Name").setValue("");
-	realForm.findField("Notes").setValue("");
-	realForm.findField("created").setValue("");
-	realForm.findField("creator").setValue("");
-	realForm.findField("last_editor").setValue("");
-	realForm.findField("modified").setValue("");
-}
-
 uwm.Session.getInstance().getModelNodeClassContainer().registerClass(new uwm.model.builtin.PackageClass());

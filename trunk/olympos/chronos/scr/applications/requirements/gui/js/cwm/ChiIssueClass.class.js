@@ -73,19 +73,4 @@ cwm.ChiIssueClass.prototype.getPropertyForm = function() {
 	});
 }
 
-cwm.ChiIssueClass.prototype.clearPropertiesForm = function(form) {
-	var realForm = form.getForm();
-	
-	realForm.findField("Author").setValue("");
-	realForm.findField("Responsible").setValue("");
-	realForm.findField("Alias").setValue("");
-	realForm.findField("Version").setValue("");
-	realForm.findField("Name").setValue("");
-	realForm.findField("Notes").setValue("");
-	realForm.findField("created").setValue("");
-	realForm.findField("creator").setValue("");
-	realForm.findField("last_editor").setValue("");
-	realForm.findField("modified").setValue("");
-}
-
 uwm.Session.getInstance().getModelNodeClassContainer().registerClass(new cwm.ChiIssueClass());

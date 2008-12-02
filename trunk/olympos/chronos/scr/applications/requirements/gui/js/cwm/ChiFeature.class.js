@@ -20,7 +20,7 @@ cwm.ChiFeature = function(modelNodeClass) {
 cwm.ChiFeature.prototype = new uwm.model.ModelObject;
 
 cwm.ChiFeature.prototype.initByDisplayResult = function(node) {
-	cwmChiFeature.superclass.initByDisplayResult.call(this, node);
+	uwm.model.ModelNode.prototype.initByDisplayResult.call(this, node);
 	
 	this.data.Author = node.values[1].Author;
 	this.data.Proofreader = node.values[1].Proofreader;
