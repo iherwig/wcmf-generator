@@ -23,7 +23,7 @@ uwm.modeltree.DiagramNode = function(config) {
 	
 	var self = this;
 	
-	this.on("click", function(item, e) {
+	this.on("dblclick", function(item, e) {
 		self.open(item, e);
 	});
 

@@ -19,7 +19,8 @@ uwm.diagram.DiagramTabPanel = Ext.extend(Ext.TabPanel, {
 			//tabPosition: "bottom",
 			enableTabScroll: true,
 			activeTab: 0,
-			id: uwm.diagram.DiagramTabPanel.COMPONENT_ID
+			id: uwm.diagram.DiagramTabPanel.COMPONENT_ID,
+			items: new uwm.ui.HelpViewer({})
 		})
 		
 		uwm.diagram.DiagramTabPanel.superclass.initComponent.apply(this, arguments);

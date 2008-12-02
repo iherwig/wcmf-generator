@@ -52,8 +52,8 @@ uwm.hierarchytree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 	},
 	
 	attachFollowers: function(currNode, modelNode, parentModel) {
-		var childOids = modelNode.getChildOids(true);
-		var parentOids = modelNode.getParentOids(true);
+		var childOids = modelNode.getChildOids();
+		var parentOids = modelNode.getParentOids();
 		
 		var parentNodeOid = null;
 		if (parentModel) {
@@ -70,29 +70,47 @@ uwm.hierarchytree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 		}
 		
 		var oidList = new Ext.util.MixedCollection();
-		oidList.addAll(childOids);
 		
-		for (var i = 0; i < parentOids.length; i++) {
-			var currOid = parentOids[i];
-			
-			if (currOid != parentNodeOid && currOid != grandParentNodeOid && !oidList.contains(currOid)) {
-				oidList.add(currOid);
-			}
-		}
+		oidList = this.filterOidList(oidList, childOids, parentNodeOid, grandParentNodeOid);
+		oidList = this.filterOidList(oidList, parentOids, parentNodeOid, grandParentNodeOid);
 		
 		this.attachFollowersList(currNode, modelNode, oidList.getRange());
 		
 	},
 	
+	filterOidList: function(oidList, checkOidList, parentNodeOid, grandParentNodeOid) {
+		if (checkOidList) {
+			for (var i = 0; i < checkOidList.length; i++) {
+				var currOid = checkOidList[i];
+				
+				if (currOid != parentNodeOid && currOid != grandParentNodeOid && !oidList.contains(currOid)) {
+					oidList.add(currOid);
+				}
+			}
+		}
+		
+		return oidList;
+	},
 	
 	attachFollowersList: function(currNode, modelNode, oidList) {
 	
 		var subClasses = new Array();
+		var container = uwm.Session.getInstance().getModelContainer();
 		
 		for (var i = 0; i < oidList.length; i++) {
-			var childModelNode = uwm.Session.getInstance().getModelContainer().getByOid(oidList[i]);
+			var childModelNode = container.getByOid(oidList[i]);
 			
-			if (childModelNode && childModelNode instanceof uwm.model.ModelObject) {
+			if (!childModelNode) {
+				var self = this;
+				
+				container.loadByOid(oidList[i], function() {
+					self.attachFollowersList(currNode, modelNode, oidList);
+				});
+				
+				return;
+			}
+			
+			if (childModelNode instanceof uwm.model.ModelObject) {
 				var subUwmClassName = childModelNode.getUwmClassName();
 				var subArray = subClasses[subUwmClassName];
 				if (!subArray) {
@@ -100,6 +118,7 @@ uwm.hierarchytree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 				}
 				subArray.push(childModelNode)
 				subClasses[subUwmClassName] = subArray;
+				console.log("added class: " + subUwmClassName);
 			}
 		}
 		
@@ -122,8 +141,6 @@ uwm.hierarchytree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 					});
 					
 					connectionNode.appendChild(subNode);
-					
-					this.attachFollowers(subNode, childModelNode, modelNode);
 				}
 			}
 		}

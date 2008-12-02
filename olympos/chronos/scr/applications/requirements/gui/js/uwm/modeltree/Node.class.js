@@ -40,5 +40,11 @@ Ext.extend(uwm.modeltree.Node, uwm.objecttree.ObjectNode, {
 	
 	showInHierarchy: function(self, e) {
 		uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelNode().getOid());
+	},
+	
+	expand: function(deep, anim, callback) {
+		if (callback instanceof Function) {
+			callback(this);
+		}
 	}
 });

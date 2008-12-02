@@ -70,7 +70,7 @@ uwm.diagram.Figure.prototype.showInGrid = function() {
 }
 
 uwm.diagram.Figure.prototype.showInHierarchy = function() {
-	alert("TODO: Show in hierarchy");
+	uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelObject().getOid());
 }
 
 uwm.diagram.Figure.prototype.deleteFromDiagram = function() {
