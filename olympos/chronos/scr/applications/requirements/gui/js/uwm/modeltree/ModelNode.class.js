@@ -11,6 +11,10 @@
  */
 Ext.namespace("uwm.modeltree");
 
+/**
+ * @constructor
+ * @param {Object} config
+ */
 uwm.modeltree.ModelNode = function(config) {
 	this.modelNode = uwm.Session.getInstance().getModelContainer().createByClassAndOid("Model", config.oid);
 

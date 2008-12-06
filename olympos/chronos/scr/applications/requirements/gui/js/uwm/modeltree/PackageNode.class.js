@@ -11,6 +11,10 @@
  */
 Ext.namespace("uwm.modeltree");
 
+/**
+ * @constructor
+ * @param {Object} config
+ */
 uwm.modeltree.PackageNode = function(config) {
 	this.modelNode = uwm.Session.getInstance().getModelContainer().createByClassAndOid("Package", config.oid);
 
@@ -21,6 +25,9 @@ uwm.modeltree.PackageNode = function(config) {
 }
 
 Ext.extend(uwm.modeltree.PackageNode, uwm.objecttree.Node, {
+	/**
+	 * @member uwm.modeltree.PackageNode
+	 */
 	buildContextMenu: function() {
 		var self = this;
 		

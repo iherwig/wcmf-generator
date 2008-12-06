@@ -11,6 +11,10 @@
  */
 Ext.namespace("uwm.diagram");
 
+/**
+ * @constructor
+ * @param {uwm.model.ModelNodeClass} modelNodeClass
+ */
 uwm.diagram.Diagram = function(modelNodeClass) {
 	uwm.model.ModelNode.call(this, modelNodeClass);
 }
