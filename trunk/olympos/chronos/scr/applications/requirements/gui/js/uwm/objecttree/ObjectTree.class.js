@@ -11,30 +11,27 @@
  */
 Ext.namespace("uwm.objecttree");
 
-uwm.objecttree.ObjectTree = Ext.extend(Ext.tree.TreePanel, {
+uwm.objecttree.ObjectTree = function(config) {
 
-	initComponent: function() {
-	
-		Ext.apply(this, {
-			autoScroll: true,
-			animate: true,
-			containerScroll: true,
-			layout: "fit",
-			enableDD: true,
-			dragConfig: {
-				ddGroup: uwm.Constants.DD_GROUP
-			},
-			dropConfig: {
-				ddGroup: uwm.Constants.DD_GROUP
-			}
-		});
-		
-		uwm.objecttree.ObjectTree.superclass.initComponent.apply(this, arguments);
-	},
-	
-	render: function(container, position) {
-		uwm.objecttree.ObjectTree.superclass.render.call(this, container, position);
+	uwm.objecttree.ObjectTree.superclass.constructor.call(this, Ext.apply(this, {
+		autoScroll: true,
+		animate: true,
+		containerScroll: true,
+		layout: "fit",
+		enableDD: true,
+		dragConfig: {
+			ddGroup: uwm.Constants.DD_GROUP
+		},
+		dropConfig: {
+			ddGroup: uwm.Constants.DD_GROUP
+		}
+	}, config));
+}
 
-		new uwm.objecttree.DragZone(this, {});
-	},
-});
+Ext.extend(uwm.objecttree.ObjectTree, Ext.tree.TreePanel);
+
+uwm.objecttree.ObjectTree.prototype.render = function(container, position) {
+	uwm.objecttree.ObjectTree.superclass.render.apply(this, arguments);
+	
+	new uwm.objecttree.DragZone(this, {});
+}

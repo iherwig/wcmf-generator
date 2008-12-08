@@ -118,7 +118,6 @@ uwm.hierarchytree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 				}
 				subArray.push(childModelNode)
 				subClasses[subUwmClassName] = subArray;
-				console.log("added class: " + subUwmClassName);
 			}
 		}
 		

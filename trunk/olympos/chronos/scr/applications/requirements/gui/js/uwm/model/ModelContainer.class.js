@@ -81,7 +81,6 @@ uwm.model.ModelContainer.prototype.createByClassAndNameAndOid = function(uwmClas
 }
 
 uwm.model.ModelContainer.prototype.loadByOid = function(oid, callback) {
-	console.log("loadByOid: oid: " + oid);
 	var self = this;
 	
 	uwm.persistency.Persistency.getInstance().display(oid, 0, function(request, data) {

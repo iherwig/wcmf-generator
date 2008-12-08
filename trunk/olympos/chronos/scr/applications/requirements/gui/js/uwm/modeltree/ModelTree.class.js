@@ -13,9 +13,11 @@ Ext.namespace("uwm.modeltree");
 
 /**
  * @class The Model Tree (lower left view).
- * 
- * This tree displays models, packages and contained diagrams and model objects.
- * 
+ *
+ * <p>This tree displays models, packages and contained diagrams and model objects.</p>
+ *
+ * <p>The Model Tree is a <i>Singleton</i>.</p>
+ *
  * @constructor
  * @extends Ext.tree.TreePanel
  * @param {Object} config The configuration object.
@@ -38,22 +40,22 @@ uwm.modeltree.ModelTree = function(config) {
 	
 	/**
 	 * The instance of ModelTree.
-	 * 
+	 *
 	 * @private
 	 * @type uwm.modeltree.ModelTree
 	 */
 	uwm.modeltree.ModelTree.instance = this;
 }
 
-Ext.extend(uwm.modeltree.ModelTree, Ext.tree.TreePanel);
+Ext.extend(uwm.modeltree.ModelTree, uwm.objecttree.ObjectTree);
 
 /**
  * Registers the not node specific context menu.
- * 
+ *
  * @private
  */
-uwm.modeltree.ModelTree.prototype.render = function() {
-	Ext.tree.TreePanel.superclass.render.apply(this, arguments);
+uwm.modeltree.ModelTree.prototype.render = function(container, position) {
+	uwm.modeltree.ModelTree.superclass.render.apply(this, arguments);
 	
 	var self = this;
 	
@@ -64,7 +66,7 @@ uwm.modeltree.ModelTree.prototype.render = function() {
 
 /**
  * Builds the not node specific context menu.
- * 
+ *
  * @private
  */
 uwm.modeltree.ModelTree.prototype.buildContextMenu = function() {
@@ -72,9 +74,9 @@ uwm.modeltree.ModelTree.prototype.buildContextMenu = function() {
 	
 	this.contextMenu = new Ext.menu.Menu({
 		items: [{
-			text: "Add model",
+			text: "Create model",
 			handler: function(item, e) {
-				self.addModel();
+				self.createModel();
 				
 			}
 		}]
@@ -83,7 +85,7 @@ uwm.modeltree.ModelTree.prototype.buildContextMenu = function() {
 
 /**
  * Shows the not node specific context menu.
- * 
+ *
  * @private
  * @param {uwm.modeltree.ModelTree} self This ModelTree.
  * @param {Ext.EventObject} e The event object.
@@ -96,17 +98,17 @@ uwm.modeltree.ModelTree.prototype.showContextMenu = function(self, e, el) {
 }
 
 /**
- * 
+ * Creates a new Model.
  */
-uwm.modeltree.ModelTree.prototype.addModel = function() {
+uwm.modeltree.ModelTree.prototype.createModel = function() {
 	alert("TODO: add Model");
 }
 
 /**
- * Marks the given oid in this tree. 
- * 
+ * Marks the given oid in this tree.
+ *
  * Makes best efforts to find the node, even if it's not currently loaded.
- * 
+ *
  * @param {oid} oid The oid to mark.
  */
 uwm.modeltree.ModelTree.prototype.markNodeByOid = function(oid) {
@@ -166,7 +168,7 @@ uwm.modeltree.ModelTree.prototype.markNodeByOid = function(oid) {
 
 /**
  * Recursively expands all the nodes in <code>parents</code>.
- * 
+ *
  * @private
  * @param {Array} parents List of parents to expand, sorted from innermost to outermost.
  * @param {uwm.modeltree.Node} currNode The last expanded node.
@@ -198,7 +200,7 @@ uwm.modeltree.ModelTree.prototype.expandListAsync = function(parents, currNode) 
 
 /**
  * Returns the instance of ModelTree.
- * 
+ *
  * @return The instance of ModelTree.
  * @type uwm.modeltree.ModelTree
  */

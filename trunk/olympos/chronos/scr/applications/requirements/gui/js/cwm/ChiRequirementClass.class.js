@@ -12,7 +12,7 @@
 Ext.namespace("cwm");
 
 cwm.ChiRequirementClass = function() {
-	uwm.model.ModelNodeClass.call(this);
+	cwm.ChiRequirementClass.superclass.constructor.call(this);
 	
 	this.uwmClassName = "ChiRequirement";
 	this.instanceClassName = "cwm.ChiRequirement";
@@ -41,7 +41,7 @@ cwm.ChiRequirementClass = function() {
 	};
 }
 
-cwm.ChiRequirementClass.prototype = new uwm.model.ModelClass;
+Ext.extend(cwm.ChiRequirementClass, uwm.model.ModelClass);
 
 cwm.ChiRequirementClass.prototype.getPropertyForm = function() {
 	return new uwm.ui.PropertyForm({

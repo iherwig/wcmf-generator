@@ -11,25 +11,41 @@
  */
 Ext.namespace("uwm.diagram");
 
-uwm.diagram.DiagramTab = Ext.extend(Ext.BoxComponent, {
-	initComponent: function() {
-		Ext.apply(this, {
-			el: Ext.DomHelper.append(Ext.getBody(), {
-				tag: 'div'
-			}, true),
-			closable: true
-		})
-		
-		uwm.diagram.DiagramTab.superclass.initComponent.apply(this, arguments);
-		
-		this.diagram = this.initialConfig.diagram;
-	},
+/**
+ * @class One tab containing a Diagram.
+ * 
+ * @constructor
+ * @param {Object} config Configuraton of this tab.
+ * @config diagram The diagram of this tab.
+ */
+uwm.diagram.DiagramTab = function(config) {
+	uwm.diagram.DiagramTab.superclass.constructor.call(this, Ext.apply(this, {
+		el: Ext.DomHelper.append(Ext.getBody(), {
+			tag: 'div'
+		}, true),
+		closable: true
+	}, config));
 	
-	onRender: function() {
-		uwm.diagram.DiagramTab.superclass.onRender.apply(this, arguments);
-		
-		this.diagram.initWorkflow();
-		this.diagram.initDropZone();
-		this.diagram.loadFigures();
-	},
-});
+	/**
+	 * The diagram of this tab.
+	 * 
+	 * @private
+	 * @type uwm.diagram.Diagram
+	 */
+	this.diagram = config.diagram;
+}
+
+Ext.extend(uwm.diagram.DiagramTab, Ext.BoxComponent);
+
+/**
+ * Initiates the contained diagram.
+ * 
+ * @private
+ */
+uwm.diagram.DiagramTab.prototype.render = function() {
+	uwm.diagram.DiagramTab.superclass.render.apply(this, arguments);
+	
+	this.diagram.initWorkflow();
+	this.diagram.initDropZone();
+	this.diagram.loadFigures();
+}

@@ -12,7 +12,7 @@
 Ext.namespace("uwm.diagram");
 
 uwm.diagram.DiagramClass = function() {
-	uwm.model.ModelNodeClass.call(this);
+	uwm.diagram.DiagramClass.superclass.constructor.call(this);
 	
 	this.uwmClassName = "Diagram";
 	this.instanceClassName = "uwm.diagram.Diagram";
@@ -20,7 +20,7 @@ uwm.diagram.DiagramClass = function() {
 	this.defaultLabel = "New Diagram";
 }
 
-uwm.diagram.DiagramClass.prototype = new uwm.model.ModelNodeClass;
+Ext.extend(uwm.diagram.DiagramClass, uwm.model.ModelNodeClass);
 
 uwm.diagram.DiagramClass.prototype.getPropertyForm = function() {
 	return new uwm.ui.PropertyForm({
