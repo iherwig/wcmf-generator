@@ -12,13 +12,13 @@
 Ext.namespace("cwm");
 
 cwm.ChiRequirement = function(modelNodeClass) {
-	uwm.model.ModelNode.call(this, modelNodeClass);
+	cwm.ChiRequirement.superclass.constructor.call(this, modelNodeClass);
 }
 
-cwm.ChiRequirement.prototype = new uwm.model.ModelObject;
+Ext.extend(cwm.ChiRequirement, uwm.model.ModelObject);
 
 cwm.ChiRequirement.prototype.initByDisplayResult = function(node) {
-	uwm.model.ModelNode.prototype.initByDisplayResult.call(this, node);
+	cwm.ChiRequirement.superclass.initByDisplayResult.call(this, node);
 	
 	this.data.reqType = node.values[1].reqType;
 	this.data.Priority = node.values[1].Priority;

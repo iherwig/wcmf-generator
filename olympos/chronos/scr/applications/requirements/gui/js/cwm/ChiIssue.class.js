@@ -12,13 +12,13 @@
 Ext.namespace("cwm");
 
 cwm.ChiIssue = function(modelNodeClass) {
-	uwm.model.ModelNode.call(this, modelNodeClass);
+	cwm.ChiIssue.superclass.constructor.call(this, modelNodeClass);
 }
 
-cwm.ChiIssue.prototype = new uwm.model.ModelObject;
+Ext.extend(cwm.ChiIssue, uwm.model.ModelObject);
 
 cwm.ChiIssue.prototype.initByDisplayResult = function(node) {
-	uwm.model.ModelNode.prototype.initByDisplayResult.call(this, node);
+	cwm.ChiIssue.superclass.initByDisplayResult.call(this, node);
 	
 	this.data.Author = node.values[1].Author;
 	this.data.Responsible = node.values[1].Responsible;

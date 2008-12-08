@@ -12,7 +12,7 @@
 Ext.namespace("cwm");
 
 cwm.ChiIssueClass = function() {
-	uwm.model.ModelNodeClass.call(this);
+	cwm.ChiIssueClass.superclass.constructor.call(this);
 	
 	this.uwmClassName = "ChiIssue";
 	this.instanceClassName = "cwm.ChiIssue";
@@ -20,7 +20,7 @@ cwm.ChiIssueClass = function() {
 	this.figureIcon = "FigureChiIssue";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = "Issue Description";
-	this.defaultLabel = "New Goal";
+	this.defaultLabel = "New Issue";
 	
 	this.connectionInfo = {
 		"ChiRequirement": {
@@ -31,7 +31,7 @@ cwm.ChiIssueClass = function() {
 	};
 }
 
-cwm.ChiIssueClass.prototype = new uwm.model.ModelClass;
+Ext.extend(cwm.ChiIssueClass, uwm.model.ModelClass);
 
 cwm.ChiIssueClass.prototype.getPropertyForm = function() {
 	return new uwm.ui.PropertyForm({

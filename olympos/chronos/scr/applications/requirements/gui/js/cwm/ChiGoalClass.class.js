@@ -12,7 +12,7 @@
 Ext.namespace("cwm");
 
 cwm.ChiGoalClass = function() {
-	uwm.model.ModelNodeClass.call(this);
+	cwm.ChiGoalClass.superclass.constructor.call(this);
 	
 	this.uwmClassName = "ChiGoal";
 	this.instanceClassName = "cwm.ChiGoal";
@@ -36,7 +36,7 @@ cwm.ChiGoalClass = function() {
 	}
 }
 
-cwm.ChiGoalClass.prototype = new uwm.model.ModelClass;
+Ext.extend(cwm.ChiGoalClass, uwm.model.ModelClass);
 
 cwm.ChiGoalClass.prototype.getPropertyForm = function() {
 	return new uwm.ui.PropertyForm({

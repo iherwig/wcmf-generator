@@ -12,13 +12,13 @@
 Ext.namespace("cwm");
 
 cwm.ChiGoal = function(modelNodeClass) {
-	uwm.model.ModelNode.call(this, modelNodeClass);
+	cwm.ChiGoal.superclass.constructor.call(this, modelNodeClass);
 }
 
-cwm.ChiGoal.prototype = new uwm.model.ModelObject;
+Ext.extend(cwm.ChiGoal, uwm.model.ModelObject);
 
 cwm.ChiGoal.prototype.initByDisplayResult = function(node) {
-	uwm.model.ModelNode.prototype.initByDisplayResult.call(this, node);
+	cwm.ChiGoal.superclass.initByDisplayResult.call(this, node);
 	
 	this.data.Priority = node.values[1].Priority;
 	this.data.Value_Name = node.values[1].Value_Name;

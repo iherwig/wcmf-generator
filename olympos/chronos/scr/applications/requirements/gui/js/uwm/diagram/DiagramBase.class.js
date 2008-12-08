@@ -12,13 +12,13 @@
 Ext.namespace("uwm.diagram");
 
 uwm.diagram.DiagramBase = function(modelNodeClass) {
-	uwm.model.ModelNode.call(this, modelNodeClass);
+	uwm.diagram.DiagramBase.superclass.constructor.call(this, modelNodeClass);
 }
 
-uwm.diagram.DiagramBase.prototype = new uwm.model.ModelNode;
+Ext.extend(uwm.diagram.DiagramBase, uwm.model.ModelNode);
 
 uwm.diagram.DiagramBase.prototype.initByDisplayResult = function(node) {
-	uwm.model.ModelNode.prototype.initByDisplayResult.call(this, node);
+	uwm.diagram.DiagramBase.superclass.initByDisplayResult.call(this, node);
 	
 	this.data.Width = node.values[1].Width;
 	this.data.Height = node.values[1].Height;

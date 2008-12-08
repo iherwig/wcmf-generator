@@ -12,15 +12,15 @@
 Ext.namespace("cwm");
 
 cwm.ChiFeature = function(modelNodeClass) {
-	uwm.model.ModelNode.call(this, modelNodeClass);
+	cwm.ChiFeature.superclass.constructor.call(this, modelNodeClass);
 	
 	this.oid = "test";
 }
 
-cwm.ChiFeature.prototype = new uwm.model.ModelObject;
+Ext.extend(cwm.ChiFeature, uwm.model.ModelObject);
 
 cwm.ChiFeature.prototype.initByDisplayResult = function(node) {
-	uwm.model.ModelNode.prototype.initByDisplayResult.call(this, node);
+	cwm.ChiFeature.superclass.initByDisplayResult.call(this, node);
 	
 	this.data.Author = node.values[1].Author;
 	this.data.Proofreader = node.values[1].Proofreader;

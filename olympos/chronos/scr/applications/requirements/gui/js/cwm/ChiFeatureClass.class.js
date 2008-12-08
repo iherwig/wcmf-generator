@@ -12,7 +12,7 @@
 Ext.namespace("cwm");
 
 cwm.ChiFeatureClass = function() {
-	uwm.model.ModelNodeClass.call(this);
+	cwm.ChiFeatureClass.superclass.constructor.call(this);
 	
 	this.uwmClassName = "ChiFeature";
 	this.instanceClassName = "cwm.ChiFeature";
@@ -31,7 +31,7 @@ cwm.ChiFeatureClass = function() {
 	};
 }
 
-cwm.ChiFeatureClass.prototype = new uwm.model.ModelClass;
+Ext.extend(cwm.ChiFeatureClass, uwm.model.ModelClass);
 
 cwm.ChiFeatureClass.prototype.getPropertyForm = function() {
 	return new uwm.ui.PropertyForm({
