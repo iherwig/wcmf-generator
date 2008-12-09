@@ -18,6 +18,9 @@ uwm.graphics.connection.UwmPortGraphics = function() {
 
 uwm.graphics.connection.UwmPortGraphics.prototype = new draw2d.VectorFigure;
 
+/**
+ * Type identifier of this class.
+ */
 uwm.graphics.connection.UwmPortGraphics.prototype.type = "uwm.graphics.connection.UwmPortGraphics";
 
 uwm.graphics.connection.UwmPortGraphics.prototype.paint = function() {

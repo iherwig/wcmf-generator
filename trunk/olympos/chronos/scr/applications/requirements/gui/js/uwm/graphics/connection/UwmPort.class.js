@@ -18,6 +18,9 @@ uwm.graphics.connection.UwmPort = function() {
 }
 
 uwm.graphics.connection.UwmPort.prototype = new draw2d.Port;
+/**
+ * Type identifier of this class.
+ */
 uwm.graphics.connection.UwmPort.prototype.type = "uwm.graphics.connection.UwmPort";
 
 

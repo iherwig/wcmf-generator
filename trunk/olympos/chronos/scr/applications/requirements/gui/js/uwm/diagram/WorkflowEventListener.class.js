@@ -11,13 +11,31 @@
  */
 Ext.namespace("uwm.diagram");
 
+/**
+ * @class Initiates all changes coming from the draw2d event system.
+ * 
+ * @constructor
+ * @param {uwm.diagram.Diagram} diagram The Diagram containing this listener.
+ */
 uwm.diagram.WorkflowEventListener = function(diagram) {
+	/**
+	 * The containing Diagram.
+	 * 
+	 * @private
+	 * @type uwm.diagram.Diagram
+	 */
 	this.diagram = diagram;
 	
 	draw2d.CommandStackEventListener.call(this);
 }
 
-uwm.diagram.WorkflowEventListener.prototype = new draw2d.CommandStackEventListener;
+Ext.extend(uwm.diagram.WorkflowEventListener, draw2d.CommandStackEventListener);
 
+/**
+ * Handler for all events of the draw2d event system.
+ * 
+ * @private
+ * @param {draw2d.Event} stackEvent The draw2d Event.
+ */
 uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) {
 }

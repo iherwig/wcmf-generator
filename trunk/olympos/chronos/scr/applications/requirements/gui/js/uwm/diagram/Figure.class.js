@@ -11,72 +11,158 @@
  */
 Ext.namespace("uwm.diagram");
 
-uwm.diagram.Figure = function(modelNodeClass) {
-	uwm.model.ModelNode.call(this, modelNodeClass);
+/**
+ * @class Graphical representation of a {@link uwm.model.ModelObject} on a {@link uwm.diagram.Diagram}.
+ *
+ * @constructor
+ * @param {uwm.model.ModelNodeClass} modelNodeClass The instance of {@link uwm.diagram.FigureClass}.
+ */
+uwm.diagram.Figure = function(modelNodeClass){
+    uwm.model.ModelNode.call(this, modelNodeClass);
 }
 
-uwm.diagram.Figure.prototype = new uwm.model.ModelNode;
+Ext.extend(uwm.diagram.Figure, uwm.model.ModelNode);
 
-uwm.diagram.Figure.prototype.createNewObject = function(diagram, modelClass, x, y) {
-	this.diagram = diagram;
-	this.modelObject = eval("new " + modelClass.getInstanceClassName() + "(modelClass)");
-	
-	var workflow = diagram.getWorkflow();
-	
-	var compartment = workflow.getBestCompartmentFigure(x, y);
-	
-	
-	
-	this.graphics = this.getFigure(modelClass, modelClass.getDefaultLabel());
-	
-	workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
+/**
+ * Creates a graphical representation of a new ModelObject on the associated Diagram.
+ *
+ * @param {uwm.diagram.Diagram} diagram The Diagram to create the ModelObject on.
+ * @param {uwm.model.ModelClass} modelClass The ModelClass of the ModelObject to create.
+ * @param {int} x X position where to create the Figure.
+ * @param {int} y Y position where to create the Figure.
+ */
+uwm.diagram.Figure.prototype.createNewObject = function(diagram, modelClass, x, y){
+    /**
+     * The associated Diagram.
+     *
+     * @private
+     * @type uwm.diagram.Diagram
+     */
+    this.diagram = diagram;
+    
+    /**
+     * The associated ModelObject.
+     *
+     * @private
+     * @type uwm.model.ModelObject
+     */
+    this.modelObject = eval("new " + modelClass.getInstanceClassName() + "(modelClass)");
+    
+    var workflow = diagram.getWorkflow();
+    var compartment = workflow.getBestCompartmentFigure(x, y);
+    
+    /**
+     * The graphical (draw2d) figure.
+     *
+     * @private
+     * @type uwm.graphics.figure.BaseFigure
+     */
+    this.graphics = this.getFigure(modelClass, modelClass.getDefaultLabel());
+    
+    workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
 }
 
-uwm.diagram.Figure.prototype.createExistingObject = function(diagram, modelObject, x, y) {
-	this.diagram = diagram;
-	this.modelObject = modelObject;
-	
-	var workflow = diagram.getWorkflow();
-	
-	var compartment = workflow.getBestCompartmentFigure(x, y);
-	
-	this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
-	
-	workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
+/**
+ * Creates a graphical representation of an existing ModelObject on the associated Diagram.
+ *
+ * @param {uwm.diagram.Diagram} diagram The Diagram to create the ModelObject on.
+ * @param {uwm.model.ModelClass} modelClass The ModelClass of the ModelObject to create.
+ * @param {int} x X position where to create the Figure.
+ * @param {int} y Y position where to create the Figure.
+ */
+uwm.diagram.Figure.prototype.createExistingObject = function(diagram, modelObject, x, y){
+    this.diagram = diagram;
+    this.modelObject = modelObject;
+    
+    var workflow = diagram.getWorkflow();
+    
+    var compartment = workflow.getBestCompartmentFigure(x, y);
+    
+    this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
+    
+    workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
 }
 
-uwm.diagram.Figure.prototype.getFigure = function(modelClass, label) {
-	return eval("new " + modelClass.getFigureClass() + "(label, this)");
+/**
+ * Creates a new ModelObject.
+ *
+ * @private
+ * @param {uwm.model.ModelClass} The ModelClass to create a ModelObject from.
+ * @param {String} label Label of the new ModelObject.
+ * @return The created ModelObject.
+ * @type uwm.model.ModelObject
+ */
+uwm.diagram.Figure.prototype.getFigure = function(modelClass, label){
+    return eval("new " + modelClass.getFigureClass() + "(label, this)");
 }
 
-uwm.diagram.Figure.prototype.getModelObject = function() {
-	return this.modelObject;
+/**
+ * Returns the ModelObject associated with this Figure.
+ *
+ * @return The ModelObject associated with this Figure.
+ * @type uwm.model.ModelObject
+ */
+uwm.diagram.Figure.prototype.getModelObject = function(){
+    return this.modelObject;
 }
 
-uwm.diagram.Figure.prototype.getDiagram = function() {
-	return this.diagram;
+/**
+ * Returns the Diagram associated with this Figure.
+ *
+ * @return The Diagram associated with this Figure.
+ * @type uwm.diagram.Diagram
+ */
+uwm.diagram.Figure.prototype.getDiagram = function(){
+    return this.diagram;
 }
 
-uwm.diagram.Figure.prototype.getGraphics = function() {
-	return this.graphics;
+/**
+ * Returns the graphics associated with this Figure.
+ *
+ * @return The graphics associated with this Figure.
+ * @type uwm.graphics.figure.BaseFigure
+ */
+uwm.diagram.Figure.prototype.getGraphics = function(){
+    return this.graphics;
 }
 
-uwm.diagram.Figure.prototype.showInModelTree = function() {
-	alert("TODO: Show in model tree");
+/**
+ * Shows the associated ModelObject in Model Tree.
+ *
+ * @see uwm.modeltree.ModelTree
+ */
+uwm.diagram.Figure.prototype.showInModelTree = function(){
+    alert("TODO: Show in model tree");
 }
 
-uwm.diagram.Figure.prototype.showInGrid = function() {
-	alert("TODO: Show in gird");
+/**
+ * Shows the associated ModelObject in Grid.
+ */
+uwm.diagram.Figure.prototype.showInGrid = function(){
+    alert("TODO: Show in gird");
 }
 
-uwm.diagram.Figure.prototype.showInHierarchy = function() {
-	uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelObject().getOid());
+/**
+ * Shows the associated ModelObject in Hierarchy Tree.
+ *
+ * @see uwm.hierarchytree.HierarchyTree
+ */
+uwm.diagram.Figure.prototype.showInHierarchy = function(){
+    uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelObject().getOid());
 }
 
-uwm.diagram.Figure.prototype.deleteFromDiagram = function() {
-	alert("TODO: Delete from diagram");
+/**
+ * Deletes this Figure from associated Diagram.
+ *
+ * @see uwm.diagram.Diagram
+ */
+uwm.diagram.Figure.prototype.deleteFromDiagram = function(){
+    alert("TODO: Delete from diagram");
 }
 
-uwm.diagram.Figure.prototype.deleteFromModel = function() {
-	alert("TODO: Show in model tree");
+/**
+ * Deletes this Figure and the associated ModelObject from Model.
+ */
+uwm.diagram.Figure.prototype.deleteFromModel = function(){
+    alert("TODO: Delete from Model");
 }

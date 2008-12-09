@@ -11,10 +11,28 @@
  */
 Ext.namespace("uwm.diagram");
 
+/**
+ * @class Changes the property view to the appropriate ModelObject when clicked on it in the diagram.
+ * 
+ * @constructor
+ * @param {uwm.diagram.Diagram} diagram The diagram of this Selection Listener.
+ * @see uwm.ui.PropertyContainer
+ */
 uwm.diagram.SelectionListener = function(diagram) {
+	/**
+	 * The containing diagram.
+	 * 
+	 * @private
+	 * @type uwm.diagram.Diagram
+	 */
 	this.diagram = diagram;
 }
 
+/**
+ * Handler for changed selection in diagram.
+ * 
+ * @param {uwm.graphics.figure.BaseFigure} figure The graphical figure the user clicked on.
+ */
 uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
 	if (figure) {
 		uwm.ui.PropertyContainer.getInstance().showProperty(figure.getFigure().getModelObject());

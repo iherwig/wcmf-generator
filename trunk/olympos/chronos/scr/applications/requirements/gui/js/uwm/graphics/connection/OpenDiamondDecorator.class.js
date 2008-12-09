@@ -17,6 +17,9 @@ uwm.graphics.connection.OpenDiamondDecorator = function() {
 
 uwm.graphics.connection.OpenDiamondDecorator.prototype = new draw2d.ConnectionDecorator;
 
+/**
+ * Type identifier of this class.
+ */
 uwm.graphics.connection.OpenDiamondDecorator.prototype.type = "uwm.graphics.connection.OpenDiamondDecorator";
 
 uwm.graphics.connection.OpenDiamondDecorator.prototype.paint = function(g) {

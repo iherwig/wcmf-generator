@@ -17,6 +17,9 @@ uwm.graphics.connection.FilledDiamondDecorator = function() {
 
 uwm.graphics.connection.FilledDiamondDecorator.prototype = new draw2d.ConnectionDecorator;
 
+/**
+ * Type identifier of this class.
+ */
 uwm.graphics.connection.FilledDiamondDecorator.prototype.type = "uwm.graphics.connection.FilledDiamondDecorator";
 
 uwm.graphics.connection.FilledDiamondDecorator.prototype.paint = function(g) {
