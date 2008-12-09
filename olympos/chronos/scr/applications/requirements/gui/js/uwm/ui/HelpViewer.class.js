@@ -11,7 +11,6 @@
 uwm.ui.HelpViewer = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 		Ext.apply(this, {
-			layout: "fit",
 			closable: true,
 			title: "Help Viewer",
 			html: "<iframe class='uwm-helpViewer-frame' src='" + uwm.Session.getInstance().getHelpUrl() + "'/>"

@@ -11,72 +11,80 @@
  */
 Ext.namespace("uwm.diagram");
 
+/*
+ * Note: The extension mechanism used for this class differs from all other's
+ * extension mechanism. The mechanism used elsewhere led to errors in this component.
+ */
+
 /**
  * @class The tab panel of center view.
- * 
+ *
  * @constructor
  * @param {Object} config Configuration of this TabPanel.
  * @config diagramContainer The DigramContainer object.
  */
-uwm.diagram.DiagramTabPanel = function(config) {
-	uwm.diagram.DiagramTabPanel.superclass.constructor.call(this, Ext.apply(this, {
-		region: "center",
-		xtype: "tabpanel",
-		enableTabScroll: true,
-		activeTab: 0,
-		id: uwm.diagram.DiagramTabPanel.COMPONENT_ID,
-		items: new uwm.ui.HelpViewer({})
-	}, config));
-	
-	/**
-	 * The Diagram Container object.
-	 * 
-	 * @private
-	 * @type uwm.diagram.DiagramContainer
-	 */
-	this.diagramContainer = config.diagramContainer;
-	
-	var self = this;
-	
-	this.on("tabchange", function(tabPanel, tab) {
-		self.tabChange(tabPanel, tab);
-	});
-	this.on("remove", function(tabPanel, tab) {
-		self.tabClose(tabPanel, tab);
-	});
-}
-
-Ext.extend(uwm.diagram.DiagramTabPanel, Ext.TabPanel);
+uwm.diagram.DiagramTabPanel = Ext.extend(Ext.TabPanel, {
+    initComponent: function(){
+        Ext.apply(this, {
+            region: "center",
+            xtype: "tabpanel",
+            //tabPosition: "bottom",
+            enableTabScroll: true,
+            activeTab: 0,
+            id: uwm.diagram.DiagramTabPanel.COMPONENT_ID,
+            items: new uwm.ui.HelpViewer({})
+        })
+        
+        uwm.diagram.DiagramTabPanel.superclass.initComponent.apply(this, arguments);
+        
+        /**
+         * The Diagram Container object.
+         *
+         * @private
+         * @type uwm.diagram.DiagramContainer
+         */
+        this.diagramContainer = this.initialConfig.diagramContainer;
+        
+        var self = this;
+        
+        this.on("tabchange", function(tabPanel, tab){
+            self.tabChange(tabPanel, tab);
+        });
+        this.on("remove", function(tabPanel, tab){
+            self.tabClose(tabPanel, tab);
+        });
+    }
+});
 
 /**
  * Handler when tab is changed.
- * 
+ *
  * <p>Refreshes DiagramContainer's current diagram setting.</p>
- * 
+ *
  * @private
  * @param {uwm.diagram.DiagramTabPanel} tabPanel This TabPanel.
  * @param {Ext.Panel} tab The new active tab.
  */
-uwm.diagram.DiagramTabPanel.prototype.tabChange = function(tabPanel, tab) {
-	//alert("TODO: tabChange");
+uwm.diagram.DiagramTabPanel.prototype.tabChange = function(tabPanel, tab){
+    //alert("TODO: tabChange");
 }
 
 /**
  * Handler when tab is closed.
- * 
+ *
  * <p>Removes all references to the closed diagram from DiagramContainer.</p>
- * 
+ *
  * @private
  * @param {uwm.diagram.DiagramTabPanel} tabPanel This TabPanel.
  * @param {Ext.Panel} tab The closed tab.
  */
-uwm.diagram.DiagramTabPanel.prototype.tabClose = function(tabPanel, tab) {
-	alert("TODO: tabClose");
+uwm.diagram.DiagramTabPanel.prototype.tabClose = function(tabPanel, tab){
+    alert("TODO: tabClose");
 }
 
 /**
  * Component ID of DiagramTabPanel.
- * 
+ *
  * @private
  * @type String
  */

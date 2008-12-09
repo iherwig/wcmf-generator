@@ -11,14 +11,29 @@
  */
 Ext.namespace("uwm.graphics.connection");
 
+/**
+ * @class Provides a simple arrow as connection end.
+ * 
+ * @constructor
+ */
 uwm.graphics.connection.ArrowDecorator = function() {
+	uwm.graphics.connection.ArrowDecorator.superclass.constructor.call(this);
+
 	this.setBackgroundColor(new draw2d.Color(255, 255, 255));
 }
 
-uwm.graphics.connection.ArrowDecorator.prototype = new draw2d.ConnectionDecorator;
+Ext.extend(uwm.graphics.connection.ArrowDecorator, draw2d.ConnectionDecorator);
 
+/**
+ * Type identifier of this class.
+ */
 uwm.graphics.connection.ArrowDecorator.prototype.type = "uwm.graphics.connection.ArrowDecorator";
 
+/**
+ * Draws a simple arrow.
+ * 
+ * @param {draw2d.Graphics} g The graphics object to draw with.
+ */
 uwm.graphics.connection.ArrowDecorator.prototype.paint = function(g) {
 	g.setColor(this.color);
 	g.setStroke(1);

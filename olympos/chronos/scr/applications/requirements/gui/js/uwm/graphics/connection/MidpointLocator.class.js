@@ -17,6 +17,9 @@ uwm.graphics.connection.MidpointLocator = function(connection) {
 
 uwm.graphics.connection.MidpointLocator.prototype = new draw2d.ConnectionLocator;
 
+/**
+ * Type identifier of this class.
+ */
 uwm.graphics.connection.MidpointLocator.prototype.type = "uwm.graphics.connection.MidpointLocator";
 
 uwm.graphics.connection.MidpointLocator.prototype.relocate = function(target) {
