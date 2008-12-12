@@ -11,17 +11,30 @@
  */
 Ext.namespace("uwm.graphics.connection");
 
+/**
+ * @class Provides a filled diamond as connection end.
+ * 
+ * @constructor
+ */
 uwm.graphics.connection.FilledDiamondDecorator = function() {
+	draw2d.ConnectionDecorator.call(this);
+	
 	this.setBackgroundColor(new draw2d.Color(0, 0, 0));
 }
 
-uwm.graphics.connection.FilledDiamondDecorator.prototype = new draw2d.ConnectionDecorator;
+Ext.extend(uwm.graphics.connection.FilledDiamondDecorator, draw2d.ConnectionDecorator);
 
 /**
  * Type identifier of this class.
  */
 uwm.graphics.connection.FilledDiamondDecorator.prototype.type = "uwm.graphics.connection.FilledDiamondDecorator";
 
+/**
+ * Draws a filled diamond.
+ * 
+ * @private
+ * @param {draw2d.Graphics} g The graphic used for drawing.
+ */
 uwm.graphics.connection.FilledDiamondDecorator.prototype.paint = function(g) {
 	g.setColor(this.backgroundColor);
 	g.setStroke(1);
