@@ -11,21 +11,33 @@
  */
 Ext.namespace("uwm.graphics.connection");
 
-uwm.graphics.connection.OpenDiamondDecorator = function() {
-	this.setBackgroundColor(new draw2d.Color(255, 255, 255));
+/**
+ * @class Provides an open (non-filled) diamond as connection end.
+ *
+ * @constructor
+ */
+uwm.graphics.connection.OpenDiamondDecorator = function(){
+    draw2d.ConnectionDecorator.call(this);
+    
+    this.setBackgroundColor(new draw2d.Color(255, 255, 255));
 }
 
-uwm.graphics.connection.OpenDiamondDecorator.prototype = new draw2d.ConnectionDecorator;
+Ext.extend(uwm.graphics.connection.OpenDiamondDecorator, draw2d.ConnectionDecorator);
 
 /**
  * Type identifier of this class.
  */
 uwm.graphics.connection.OpenDiamondDecorator.prototype.type = "uwm.graphics.connection.OpenDiamondDecorator";
 
-uwm.graphics.connection.OpenDiamondDecorator.prototype.paint = function(g) {
-	g.setColor(this.backgroundColor);
-	g.setStroke(1);
-	g.fillPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
-	g.setColor(this.color);
-	g.drawPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
+/**
+ * Draws an open (non-filled) diamond.
+ *
+ * @param {draw2d.Graphics} g The graphic used for drawing.
+ */
+uwm.graphics.connection.OpenDiamondDecorator.prototype.paint = function(g){
+    g.setColor(this.backgroundColor);
+    g.setStroke(1);
+    g.fillPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
+    g.setColor(this.color);
+    g.drawPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
 }

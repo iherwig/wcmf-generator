@@ -11,6 +11,10 @@
  */
 Ext.namespace("uwm.hierarchytree");
 
+/**
+ * @class 
+ * @param {Object} config
+ */
 uwm.hierarchytree.ConnectionNode = function(config) {
 	uwm.hierarchytree.ConnectionNode.superclass.constructor.call(this, Ext.apply(this, {
 		leaf: false,
@@ -18,4 +22,4 @@ uwm.hierarchytree.ConnectionNode = function(config) {
 	}, config));
 }
 
-Ext.extend(uwm.hierarchytree.ConnectionNode, Ext.tree.TreeNode, {});
+Ext.extend(uwm.hierarchytree.ConnectionNode, Ext.tree.TreeNode);

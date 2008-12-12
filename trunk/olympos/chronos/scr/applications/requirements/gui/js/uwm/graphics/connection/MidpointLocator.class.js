@@ -11,17 +11,29 @@
  */
 Ext.namespace("uwm.graphics.connection");
 
+/**
+ * @class Positions the connection label at the center of a Manhattan connection.
+ * 
+ * @constructor
+ * @param {Object} connection
+ */
 uwm.graphics.connection.MidpointLocator = function(connection) {
 	draw2d.ConnectionLocator.call(this, connection);
 }
 
-uwm.graphics.connection.MidpointLocator.prototype = new draw2d.ConnectionLocator;
+Ext.extend(uwm.graphics.connection.MidpointLocator, draw2d.ConnectionLocator);
 
 /**
  * Type identifier of this class.
  */
 uwm.graphics.connection.MidpointLocator.prototype.type = "uwm.graphics.connection.MidpointLocator";
 
+/**
+ * Moves the connection label to the center of a Manhattan connection.
+ * 
+ * @private
+ * @param {Object} target
+ */
 uwm.graphics.connection.MidpointLocator.prototype.relocate = function(target) {
 	var conn = this.getConnection();
 	var p = new draw2d.Point();

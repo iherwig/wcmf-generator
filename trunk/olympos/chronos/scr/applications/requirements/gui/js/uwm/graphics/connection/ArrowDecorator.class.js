@@ -17,7 +17,7 @@ Ext.namespace("uwm.graphics.connection");
  * @constructor
  */
 uwm.graphics.connection.ArrowDecorator = function() {
-	uwm.graphics.connection.ArrowDecorator.superclass.constructor.call(this);
+	draw2d.ConnectionDecorator.call(this);
 
 	this.setBackgroundColor(new draw2d.Color(255, 255, 255));
 }
