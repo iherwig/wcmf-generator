@@ -49,18 +49,18 @@ uwm.persistency.Json.prototype.jsonRequest = function(params, successHandler, er
 uwm.persistency.Json.prototype.array2CommaList = function(array) {
 	var result = array;
 	
-	if (oid instanceof Array) {
+	if (array instanceof Array) {
 		var first = true;
 		result = "";
 		
-		for (var i = 0; i < oid.length; i++) {
+		for (var i = 0; i < array.length; i++) {
 			if (!first) {
 				result += ",";
 			}
 			else {
 				first = false;
 			}
-			result += oid[i];
+			result += array[i];
 		}
 	}
 	
@@ -90,7 +90,7 @@ uwm.persistency.Json.prototype.newObject = function(uwmClassName, successHandler
 
 uwm.persistency.Json.prototype.deleteObject = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
-		usr_action: "new",
+		usr_action: "delete",
 		deleteoids: this.array2CommaList(oid)
 	}, successHandler, errorHandler);
 }
@@ -105,7 +105,7 @@ uwm.persistency.Json.prototype.associate = function(parentOid, childOid, invert,
 	this.jsonRequest({
 		usr_action: "associate",
 		oid: parentOid,
-		associateOids: this.array2CommaList(childOid),
+		associateoids: this.array2CommaList(childOid),
 		associateAs: direction
 	}, successHandler, errorHandler);
 }
@@ -114,7 +114,7 @@ uwm.persistency.Json.prototype.disassociate = function(parentOid, childOid, succ
 	this.jsonRequest({
 		usr_action: "disassociate",
 		oid: parentOid,
-		associateOids: this.array2CommaList(childOid),
+		associateoids: this.array2CommaList(childOid),
 		associateAs: direction
 	}, successHandler, errorHandler);
 }

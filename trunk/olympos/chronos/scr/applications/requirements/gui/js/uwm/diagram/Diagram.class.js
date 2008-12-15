@@ -289,5 +289,5 @@ uwm.diagram.Diagram.prototype.createNewObject = function(modelClass, x, y) {
  * @type uwm.diagram.Figure
  */
 uwm.diagram.Diagram.prototype.getFigure = function() {
-	return new uwm.diagram.Figure(uwm.Session.getInstance().getModelNodeClassContainer().getClass("Figure"));
+	return new uwm.diagram.Figure(uwm.model.ModelNodeClassContainer.getInstance().getClass("Figure"));
 }

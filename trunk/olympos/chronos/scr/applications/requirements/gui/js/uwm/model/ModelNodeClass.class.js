@@ -29,3 +29,7 @@ uwm.model.ModelNodeClass.prototype.getPropertyForm = function() {
 uwm.model.ModelNodeClass.prototype.getDefaultLabel = function() {
 	return this.defaultLabel;
 }
+
+uwm.model.ModelNodeClass.prototype.isLabelProperty = function(propertyName) {
+	return this.labelProperties[propertyName] != undefined;
+}

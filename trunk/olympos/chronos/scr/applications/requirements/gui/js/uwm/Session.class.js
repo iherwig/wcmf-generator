@@ -13,8 +13,6 @@ uwm.Session = function() {
 	this.jsonUrl = uwm.config.jsonUrl;
 	this.helpUrl = "help/index.html";
 	this.persistencyClass = "uwm.persistency.Json";
-	this.modelNodeClassContainer = new uwm.model.ModelNodeClassContainer();
-	this.modelContainer = new uwm.model.ModelContainer();
 }
 
 uwm.Session.getInstance = function() {
@@ -39,12 +37,4 @@ uwm.Session.prototype.getHelpUrl = function() {
 
 uwm.Session.prototype.getPersistencyClass = function() {
 	return this.persistencyClass;
-}
-
-uwm.Session.prototype.getModelNodeClassContainer = function() {
-	return this.modelNodeClassContainer;
-}
-
-uwm.Session.prototype.getModelContainer = function() {
-	return this.modelContainer;
 }

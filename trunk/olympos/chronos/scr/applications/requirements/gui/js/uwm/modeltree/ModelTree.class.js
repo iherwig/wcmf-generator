@@ -45,6 +45,26 @@ uwm.modeltree.ModelTree = function(config) {
 	 * @type uwm.modeltree.ModelTree
 	 */
 	uwm.modeltree.ModelTree.instance = this;
+	
+	this.createdModels = new Ext.util.MixedCollection();
+	this.createdPackages = new Ext.util.MixedCollection();
+	this.createdDiagrams = new Ext.util.MixedCollection();
+	
+	var self = this;
+	uwm.event.EventBroker.getInstance().addListener({
+		"create": function(modelObject) {
+			self.handleCreateEvent(modelObject);
+		},
+		"delete": function(modelObject) {
+			self.handleDeleteEvent(modelObject);
+		},
+		"changeLabel": function(modelObject, oldLabel) {
+			self.handleChangeLabelEvent(modelObject, oldLabel);
+		},
+		"associate": function(parentModelObject, childModelObject) {
+			self.handleAssociateEvent(parentModelObject, childModelObject);
+		}
+	});
 }
 
 Ext.extend(uwm.modeltree.ModelTree, uwm.objecttree.ObjectTree);
@@ -101,7 +121,7 @@ uwm.modeltree.ModelTree.prototype.showContextMenu = function(self, e, el) {
  * Creates a new Model.
  */
 uwm.modeltree.ModelTree.prototype.createModel = function() {
-	alert("TODO: add Model");
+	uwm.model.ModelContainer.getInstance().createModel();
 }
 
 /**
@@ -117,7 +137,7 @@ uwm.modeltree.ModelTree.prototype.markNodeByOid = function(oid) {
 	
 	var parents = new Array();
 	
-	var container = uwm.Session.getInstance().getModelContainer();
+	var container = uwm.model.ModelContainer.getInstance();
 	
 	do {
 		parents.push(currOid);
@@ -197,6 +217,85 @@ uwm.modeltree.ModelTree.prototype.expandListAsync = function(parents, currNode) 
 	}
 }
 
+uwm.modeltree.ModelTree.prototype.handleCreateEvent = function(modelObject) {
+	if (modelObject instanceof uwm.model.builtin.Model) {
+		this.createdModels.add(modelObject.getOid(), modelObject);
+	}
+	else if (modelObject instanceof uwm.model.builtin.Package) {
+		this.createdPackages.add(modelObject.getOid(), modelObject);
+	}
+	else if (modelObject instanceof uwm.diagram.Diagram) {
+		this.createdDiagrams.add(modelObject.getOid(), modelObject);
+	}
+}
+
+uwm.modeltree.ModelTree.prototype.handleDeleteEvent = function(modelObject) {
+	var node = this.getNodeById(modelObject.getOid());
+	
+	if (node) {
+		node.remove();
+	}
+}
+
+uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject, oldLabel) {
+	var oid = modelObject.getOid();
+	
+	var createdModel = this.createdModels.get(oid);
+	
+	if (!createdModel) {
+		var node = this.getNodeById(oid);
+		if (node) {
+			node.setText(modelObject.getLabel());
+		}
+	}
+	else {
+		this.createdModels.remove(oid);
+		
+		var node = new uwm.modeltree.ModelNode({
+			oid: oid,
+			text: modelObject.getLabel(),
+			leaf: true
+		});
+		
+		this.getRootNode().appendChild(node);
+	}
+}
+
+uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObject, childModelObject) {
+	var parentOid = parentModelObject.getOid();
+	
+	var parentNode = this.getNodeById(parentOid);
+	if (parentNode) {
+		var childNode;
+		
+		if (childModelObject instanceof uwm.model.builtin.Package && this.createdPackages.get(childModelObject.getOid())) {
+			this.createdPackages.remove(childModelObject.getOid());
+			
+			childNode = new uwm.modeltree.PackageNode({
+				oid: childModelObject.getOid(),
+				text: childModelObject.getLabel(),
+				leaf: true
+			});
+		}
+		else if (childModelObject instanceof uwm.diagram.Diagram && this.createdDiagrams.get(childModelObject.getOid())) {
+			this.createdPackages.remove(childModelObject.getOid());
+			
+			childNode = new uwm.modeltree.DiagramNode({
+				oid: childModelObject.getOid(),
+				text: childModelObject.getLabel(),
+				leaf: true
+			});
+		}
+		
+		if (parentNode.isExpanded()) {
+			parentNode.appendChild(childNode);
+			childNode.ensureVisible();
+		}
+		else {
+			parentNode.expand();
+		}
+	}
+}
 
 /**
  * Returns the instance of ModelTree.

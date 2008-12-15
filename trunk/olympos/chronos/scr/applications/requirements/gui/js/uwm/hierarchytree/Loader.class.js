@@ -37,7 +37,7 @@ uwm.hierarchytree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 	},
 	
 	reformatData: function(self, node, callback, data) {
-		var modelNode = uwm.Session.getInstance().getModelContainer().createByDisplayResult(data);
+		var modelNode = uwm.model.ModelContainer.getInstance().createByDisplayResult(data);
 		
 		var currNode = node;
 		
@@ -95,7 +95,7 @@ uwm.hierarchytree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 	attachFollowersList: function(currNode, modelNode, oidList) {
 	
 		var subClasses = new Array();
-		var container = uwm.Session.getInstance().getModelContainer();
+		var container = uwm.model.ModelContainer.getInstance();
 		
 		for (var i = 0; i < oidList.length; i++) {
 			var childModelNode = container.getByOid(oidList[i]);

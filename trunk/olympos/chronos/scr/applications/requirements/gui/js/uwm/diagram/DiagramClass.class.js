@@ -18,42 +18,53 @@ uwm.diagram.DiagramClass = function() {
 	this.instanceClassName = "uwm.diagram.Diagram";
 	this.treeIcon = "FigureDiagram";
 	this.defaultLabel = "New Diagram";
+	this.labelProperties = {
+		Name: true
+	};
 }
 
 Ext.extend(uwm.diagram.DiagramClass, uwm.model.ModelNodeClass);
 
-uwm.diagram.DiagramClass.prototype.getPropertyForm = function() {
+uwm.diagram.DiagramClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.ui.PropertyForm({
-		items: [{
+		items: [new uwm.ui.TextField({
 			fieldLabel: 'Width',
-			name: 'Width'
-		}, {
+			name: 'Width',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Height',
-			name: 'Height'
-		}, {
+			name: 'Height',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Name',
-			name: 'Name'
-		}, new uwm.ui.HtmlEditor({
+			name: 'Name',
+			modelNode: modelNode
+		}), new uwm.ui.HtmlEditor({
 			fieldLabel: 'Notes',
-			name: 'Notes'
-		}), {
+			name: 'Notes',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'created',
 			name: 'created',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'creator',
 			name: 'creator',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'last_editor',
 			name: 'last_editor',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'modified',
 			name: 'modified',
+			modelNode: modelNode,
 			readOnly: true
-		}]
+		})]
 	});
 }
 
-uwm.Session.getInstance().getModelNodeClassContainer().registerClass(new uwm.diagram.DiagramClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new uwm.diagram.DiagramClass());

@@ -11,17 +11,33 @@
  */
 Ext.namespace("uwm.ui");
 
-uwm.ui.HtmlEditor = Ext.extend(Ext.form.HtmlEditor, {
-	initComponent: function() {
-		Ext.apply(this, {
-			enableAlignments: false,
-			enableColors: false,
-			enableFont: false,
-			enableFontSize: false,
-			enableLinks: false,
-			enableSourceEdit: false
-		})
+uwm.ui.HtmlEditor = function(config) {
+	var self = this;
+	
+	uwm.ui.HtmlEditor.superclass.constructor.call(this, Ext.apply(this, {
+		enableAlignments: false,
+		enableColors: false,
+		enableFont: false,
+		enableFontSize: false,
+		enableLinks: false,
+		enableSourceEdit: false,
+		listeners: {
+			"beforedestroy": function(field) {
+				self.fieldChanged(field);
+			}
+		}
+	}, config));
+	
+	this.modelNode = config.modelNode;
+}
+
+Ext.extend(uwm.ui.HtmlEditor, Ext.form.HtmlEditor);
+
+uwm.ui.HtmlEditor.prototype.fieldChanged = function(field) {
+	if (this.isDirty()) {
+		var tmp = new Object();
+		tmp[this.getName()] = this.getValue();
 		
-		uwm.ui.HtmlEditor.superclass.initComponent.apply(this, arguments);
+		this.modelNode.changeProperties(tmp);
 	}
-})
+}

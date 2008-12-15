@@ -70,10 +70,10 @@ uwm.model.ModelNode.prototype.getOid = function() {
 }
 
 uwm.model.ModelNode.prototype.getName = function() {
-	var result = this.name;
+	var result = this.data.Name;
 	
 	if (!result) {
-		result = this.data.Name;
+		result = this.name;
 	}
 	
 	return result;
@@ -111,4 +111,47 @@ uwm.model.ModelNode.prototype.fillPropertyForm = function(form, mask) {
 }
 
 uwm.model.ModelNode.prototype.populatePropertyForm = function(form) {
+}
+
+uwm.model.ModelNode.prototype.changeProperties = function(values) {
+	var oldValues = new Object();
+	var oldLabels = new Object();
+	
+	var changedLabel = false;
+	
+	for (var i in values) {
+		if (i != "remove") {
+			oldValues[i] = this.data[i];
+			this.data[i] = values[i];
+			
+			if (this.getModelNodeClass().isLabelProperty(i)) {
+				oldLabels[i] = oldValues[i];
+				changedLabel = true;
+			}
+		}
+	}
+	
+	var self = this;
+	
+	uwm.persistency.Persistency.getInstance().save(this.getOid(), values, function(request, data) {
+		uwm.event.EventBroker.getInstance().fireEvent("changeProperty", self, oldValues);
+		
+		if (changedLabel) {
+			uwm.event.EventBroker.getInstance().fireEvent("changeLabel", self, oldLabels);
+		}
+	});
+}
+
+uwm.model.ModelNode.prototype.setDefaultLabel = function() {
+	this.changeProperties({
+		"Name": this.getModelNodeClass().getDefaultLabel()
+	});
+}
+
+uwm.model.ModelNode.prototype.associate = function(parentModelObject) {
+	var self = this;
+	
+	uwm.persistency.Persistency.getInstance().associate(parentModelObject.getOid(), self.getOid(), false, function(request, data) {
+		uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
+	});
 }

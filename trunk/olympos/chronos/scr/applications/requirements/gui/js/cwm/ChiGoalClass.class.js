@@ -21,6 +21,9 @@ cwm.ChiGoalClass = function() {
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = "Goal Description";
 	this.defaultLabel = "New Goal";
+	this.labelProperties = {
+		Name: true
+	};
 	
 	this.connectionInfo = {
 		"ChiGoal": {
@@ -38,50 +41,61 @@ cwm.ChiGoalClass = function() {
 
 Ext.extend(cwm.ChiGoalClass, uwm.model.ModelClass);
 
-cwm.ChiGoalClass.prototype.getPropertyForm = function() {
+cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.ui.PropertyForm({
-		items: [{
+		items: [new uwm.ui.TextField({
 			fieldLabel: 'Priority',
-			name: 'Priority'
-		}, {
+			name: 'Priority',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Value_Name',
-			name: 'Value_Name'
-		}, {
+			name: 'Value_Name',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Value_ammount',
-			name: 'Value_ammount'
-		}, {
+			name: 'Value_ammount',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Value_Goal',
-			name: 'Value_Goal'
-		}, {
+			name: 'Value_Goal',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Alias',
-			name: 'Alias'
-		}, {
+			name: 'Alias',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Version',
-			name: 'Version'
-		}, {
+			name: 'Version',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Name',
-			name: 'Name'
-		}, new uwm.ui.HtmlEditor({
+			name: 'Name',
+			modelNode: modelNode
+		}), new uwm.ui.HtmlEditor({
 			fieldLabel: 'Notes',
-			name: 'Notes'
-		}), {
+			name: 'Notes',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'created',
 			name: 'created',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'creator',
 			name: 'creator',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'modified',
 			name: 'modified',
+			modelNode: modelNode,
 			readOnly: true
-		}]
+		})]
 	});
 }
 
-uwm.Session.getInstance().getModelNodeClassContainer().registerClass(new cwm.ChiGoalClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiGoalClass());

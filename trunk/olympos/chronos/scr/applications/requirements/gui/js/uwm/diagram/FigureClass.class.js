@@ -21,4 +21,4 @@ uwm.diagram.FigureClass = function() {
 
 uwm.diagram.FigureClass.prototype = new uwm.model.ModelNodeClass;
 
-uwm.Session.getInstance().getModelNodeClassContainer().registerClass(new uwm.diagram.FigureClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new uwm.diagram.FigureClass());

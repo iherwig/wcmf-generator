@@ -87,7 +87,15 @@ uwm.diagram.DiagramContainer.prototype.createNewDiagram = function() {
  * @type uwm.diagram.DiagramClass
  */
 uwm.diagram.DiagramContainer.prototype.getDiagramClass = function() {
-	return uwm.Session.getInstance().getModelNodeClassContainer().getClass("Diagram");
+	return uwm.model.ModelNodeClassContainer.getInstance().getClass("Diagram");
+}
+
+uwm.diagram.DiagramContainer.prototype.loadDiagram = function(modelObject) {
+	modelObject.init();
+	
+	this.items.add(modelObject);
+	
+	this.tabPanel.activate(modelObject.getTab());
 }
 
 /**
