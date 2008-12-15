@@ -30,12 +30,22 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 		uwm.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);
 		
 		uwm.hierarchytree.HierarchyTree.instance = this;
+		
+		var self = this;
+		uwm.event.EventBroker.getInstance().addListener({
+			"delete": function(modelObject) {
+				self.handleDeleteEvent(modelObject);
+			},
+			"changeLabel": function(modelObject, oldLabel) {
+				self.handleChangeLabelEvent(modelObject, oldLabel);
+			}
+		});
 	},
 	
 	loadNode: function(oid) {
 		this.show();
 		
-		var modelNode = uwm.Session.getInstance().getModelContainer().getByOid(oid);
+		var modelNode = uwm.model.ModelContainer.getInstance().getByOid(oid);
 		
 		currNode = new uwm.hierarchytree.Node({
 			parent: null,
@@ -48,6 +58,50 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 		
 		this.root.appendChild(currNode);
 		currNode.expand();
+	},
+	
+	handleDeleteEvent: function(modelObject) {
+		var instances = this.getInstances(modelObject.getOid());
+		
+		for (var i in instances) {
+			if (i != "remove") {
+				instances[i].remove();
+			}
+		}
+	},
+	
+	handleChangeLabelEvent: function(modelObject, oldLabel) {
+		var instances = this.getInstances(modelObject.getOid());
+		var label = modelObject.getLabel();
+		
+		for (var i in instances) {
+			if (i != "remove") {
+				instances[i].setText(label);
+			}
+		}
+	},
+	
+	getInstances: function(oid) {
+		result = new Array();
+		
+		return this.walkTree(this.getRootNode(), oid, result);
+		
+	},
+	
+	walkTree: function(currNode, oid, result) {
+		for (var i in currNode.childNodes) {
+			if (i != "remove") {
+				var currChild = currNode.childNodes[i];
+				
+				if (currChild instanceof uwm.hierarchytree.Node && currChild.getModelNode().getOid() == oid) {
+					result.push(currChild);
+				}
+				
+				result = this.walkTree(currChild, oid, result);
+			}
+		}
+		
+		return result;
 	}
 });
 

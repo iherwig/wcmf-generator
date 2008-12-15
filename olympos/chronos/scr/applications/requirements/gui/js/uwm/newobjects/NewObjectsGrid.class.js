@@ -61,7 +61,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 	getStore: function() {
 		var data = new Array();
 		
-		var classes = uwm.Session.getInstance().getModelNodeClassContainer().getAllClasses();
+		var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
 		
 		for (var i = 0; i < classes.getCount(); i++) {
 			var currClass = classes.itemAt(i);

@@ -42,7 +42,7 @@ uwm.ui.PropertyContainer = Ext.extend(Ext.Panel, {
 					this.remove(items.get(0), true);
 				}
 				
-				var form = this.add(modelNode.getModelNodeClass().getPropertyForm());
+				var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode));
 				this.doLayout();
 				
 				var mask = new Ext.LoadMask(form.getEl());

@@ -16,8 +16,8 @@ Ext.namespace("uwm.modeltree");
  * @param {Object} config
  */
 uwm.modeltree.ModelNode = function(config) {
-	this.modelNode = uwm.Session.getInstance().getModelContainer().createByClassAndOid("Model", config.oid);
-
+	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("Model", config.oid);
+	
 	uwm.modeltree.ModelNode.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,
 		iconCls: this.modelNode.getModelNodeClass().getTreeIcon(),
@@ -48,6 +48,6 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 	},
 	
 	addPackage: function(self, e) {
-		alert("TODO: Add package");
+		uwm.model.ModelContainer.getInstance().createPackage(this.getModelNode());
 	}
 });

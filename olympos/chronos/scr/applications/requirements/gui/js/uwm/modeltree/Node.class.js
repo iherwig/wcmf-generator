@@ -12,7 +12,7 @@
 Ext.namespace("uwm.modeltree");
 
 uwm.modeltree.Node = function(config) {
-	this.modelNode = uwm.Session.getInstance().getModelContainer().createByClassAndNameAndOid(config.uwmClassName, config.text, config.oid);
+	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndNameAndOid(config.uwmClassName, config.text, config.oid);
 
 	uwm.modeltree.Node.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,

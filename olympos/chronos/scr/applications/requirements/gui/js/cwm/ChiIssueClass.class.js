@@ -21,6 +21,9 @@ cwm.ChiIssueClass = function() {
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = "Issue Description";
 	this.defaultLabel = "New Issue";
+	this.labelProperties = {
+		Name: true
+	};
 	
 	this.connectionInfo = {
 		"ChiRequirement": {
@@ -33,44 +36,54 @@ cwm.ChiIssueClass = function() {
 
 Ext.extend(cwm.ChiIssueClass, uwm.model.ModelClass);
 
-cwm.ChiIssueClass.prototype.getPropertyForm = function() {
+cwm.ChiIssueClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.ui.PropertyForm({
 		items: [new Ext.form.ComboBox({
 			fieldLabel: 'Author',
-			name: 'Author'
+			name: 'Author',
+			modelNode: modelNode
 		}), new Ext.form.ComboBox({
 			fieldLabel: 'Responsible',
-			name: 'Responsible'
-		}), {
+			name: 'Responsible',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Alias',
-			name: 'Alias'
-		}, {
+			name: 'Alias',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Version',
-			name: 'Version'
-		}, {
+			name: 'Version',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'Name',
-			name: 'Name'
-		}, new uwm.ui.HtmlEditor({
+			name: 'Name',
+			modelNode: modelNode
+		}), new uwm.ui.HtmlEditor({
 			fieldLabel: 'Notes',
-			name: 'Notes'
-		}), {
+			name: 'Notes',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'created',
 			name: 'created',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'creator',
 			name: 'creator',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'last_editor',
 			name: 'last_editor',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'modified',
 			name: 'modified',
+			modelNode: modelNode,
 			readOnly: true
-		}]
+		})]
 	});
 }
 
-uwm.Session.getInstance().getModelNodeClassContainer().registerClass(new cwm.ChiIssueClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiIssueClass());

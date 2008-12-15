@@ -17,37 +17,46 @@ uwm.model.builtin.ModelClass = function() {
 	this.uwmClassName = "Model";
 	this.instanceClassName = "uwm.model.builtin.Model";
 	this.treeIcon = "FigureModel";
-	this.defaultLabel = "New Goal";
+	this.defaultLabel = "New Model";
+	this.labelProperties = {
+		Name: true
+	};
 }
 
 uwm.model.builtin.ModelClass.prototype = new uwm.model.ModelNodeClass;
 
-uwm.model.builtin.ModelClass.prototype.getPropertyForm = function() {
+uwm.model.builtin.ModelClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.ui.PropertyForm({
-		items: [{
+		items: [new uwm.ui.TextField({
 			fieldLabel: 'Name',
-			name: 'Name'
-		}, new uwm.ui.HtmlEditor({
+			name: 'Name',
+			modelNode: modelNode
+		}), new uwm.ui.HtmlEditor({
 			fieldLabel: 'Notes',
-			name: 'Notes'
-		}), {
+			name: 'Notes',
+			modelNode: modelNode
+		}), new uwm.ui.TextField({
 			fieldLabel: 'created',
 			name: 'created',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'creator',
 			name: 'creator',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'last_editor',
 			name: 'last_editor',
+			modelNode: modelNode,
 			readOnly: true
-		}, {
+		}), new uwm.ui.TextField({
 			fieldLabel: 'modified',
 			name: 'modified',
+			modelNode: modelNode,
 			readOnly: true
-		}]
+		})]
 	});
 }
 
-uwm.Session.getInstance().getModelNodeClassContainer().registerClass(new uwm.model.builtin.ModelClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new uwm.model.builtin.ModelClass());

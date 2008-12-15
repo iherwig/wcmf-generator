@@ -50,7 +50,7 @@ Ext.extend(uwm.objecttree.Node, Ext.tree.AsyncTreeNode, {
 	},
 	
 	deleteFromModel: function(self, e) {
-		alert("TODO: Delete from Model");
+		uwm.model.ModelContainer.getInstance().deleteByModelNode(this.getModelNode());
 	},
 	
 	getModelNode: function() {

@@ -27,3 +27,11 @@ uwm.model.ModelNodeClassContainer.prototype.getClass = function(uwmClassName) {
 uwm.model.ModelNodeClassContainer.prototype.getAllClasses = function() {
 	return this.items;
 }
+
+uwm.model.ModelNodeClassContainer.getInstance = function() {
+	if (!uwm.model.ModelNodeClassContainer.instance) {
+		uwm.model.ModelNodeClassContainer.instance = new uwm.model.ModelNodeClassContainer();
+	}
+	
+	return uwm.model.ModelNodeClassContainer.instance;
+}
