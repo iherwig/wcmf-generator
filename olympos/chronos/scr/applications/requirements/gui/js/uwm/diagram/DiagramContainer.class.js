@@ -91,11 +91,17 @@ uwm.diagram.DiagramContainer.prototype.getDiagramClass = function() {
 }
 
 uwm.diagram.DiagramContainer.prototype.loadDiagram = function(modelObject) {
-	modelObject.init();
+	var self = this;
 	
-	this.items.add(modelObject);
+	uwm.model.ModelContainer.getInstance().loadByOid(modelObject.getOid(), function(diagram) { self.handleLoadedDiagram(diagram);});
+}
+
+uwm.diagram.DiagramContainer.prototype.handleLoadedDiagram = function(diagram) {
+	diagram.init();
 	
-	this.tabPanel.activate(modelObject.getTab());
+	this.items.add(diagram);
+	
+	this.tabPanel.activate(diagram.getTab());
 }
 
 /**

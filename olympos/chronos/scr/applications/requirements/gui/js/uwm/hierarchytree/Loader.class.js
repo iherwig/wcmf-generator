@@ -122,7 +122,7 @@ uwm.hierarchytree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 		}
 		
 		for (var currClass in subClasses) {
-			if (currClass != "remove") {
+			if (!(subClasses[currClass] instanceof Function)) {
 				var currEntry = subClasses[currClass];
 				
 				var connectionNode = new uwm.hierarchytree.ConnectionNode({

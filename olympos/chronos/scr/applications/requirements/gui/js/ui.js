@@ -98,7 +98,7 @@ uwm.ui.create = function() {
 		});
 	}
 	
-	uwm.diagram.DiagramContainer.getInstance().createNewDiagram();
+	//uwm.diagram.DiagramContainer.getInstance().createNewDiagram();
 	
 	uwm.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
 	

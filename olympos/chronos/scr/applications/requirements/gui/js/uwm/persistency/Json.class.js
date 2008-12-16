@@ -125,7 +125,7 @@ uwm.persistency.Json.prototype.save = function(oid, values, successHandler, erro
 	};
 	
 	for (var i in values) {
-		if (i != "remove") {
+		if (!(values[i] instanceof Function)) {
 			data["value--" + i + "-" + oid] = values[i];
 		}
 	}

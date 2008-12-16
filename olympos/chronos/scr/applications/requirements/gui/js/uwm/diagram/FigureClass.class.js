@@ -17,6 +17,7 @@ uwm.diagram.FigureClass = function() {
 	this.uwmClassName = "Figure";
 	this.instanceClassName = "uwm.diagram.Figure";
 	this.treeIcon = "FigureFigure";
+	this.labelProperties = {};
 }
 
 uwm.diagram.FigureClass.prototype = new uwm.model.ModelNodeClass;
