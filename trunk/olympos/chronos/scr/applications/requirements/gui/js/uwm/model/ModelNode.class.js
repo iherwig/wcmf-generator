@@ -26,6 +26,16 @@ uwm.model.ModelNode.prototype.initByDisplayResult = function(node) {
 	this.parentOids = node.properties.parentoids;
 	this.childOids = node.properties.childoids;
 	this.name = node.values[1].Name;
+	
+	for (var i in node.values) {
+		if (!(node.values[i] instanceof Function)) {
+			for (var j in node.values[i]) {
+				if (!(node.values[i][j] instanceof Function)) {
+					this.data[j] = node.values[i][j];
+				}
+			}
+		}
+	}
 }
 
 uwm.model.ModelNode.prototype.initByOid = function(oid) {
@@ -120,7 +130,7 @@ uwm.model.ModelNode.prototype.changeProperties = function(values) {
 	var changedLabel = false;
 	
 	for (var i in values) {
-		if (i != "remove") {
+		if (!(values[i] instanceof Function)) {
 			oldValues[i] = this.data[i];
 			this.data[i] = values[i];
 			

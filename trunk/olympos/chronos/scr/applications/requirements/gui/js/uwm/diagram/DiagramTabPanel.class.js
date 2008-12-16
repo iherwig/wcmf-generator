@@ -79,7 +79,7 @@ uwm.diagram.DiagramTabPanel.prototype.tabChange = function(tabPanel, tab){
  * @param {Ext.Panel} tab The closed tab.
  */
 uwm.diagram.DiagramTabPanel.prototype.tabClose = function(tabPanel, tab){
-    alert("TODO: tabClose");
+    //alert("TODO: tabClose");
 }
 
 /**

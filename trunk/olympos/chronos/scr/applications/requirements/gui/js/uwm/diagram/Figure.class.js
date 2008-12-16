@@ -65,19 +65,32 @@ uwm.diagram.Figure.prototype.createNewObject = function(diagram, modelClass, x, 
 /**
  * Creates a graphical representation of an existing ModelObject on the associated Diagram.
  *
- * @param {uwm.diagram.Diagram} diagram The Diagram to create the ModelObject on.
- * @param {uwm.model.ModelClass} modelClass The ModelClass of the ModelObject to create.
+ * @param {uwm.model.ModelObject} modelObject The ModelObject to create a figure for.
  * @param {int} x X position where to create the Figure.
  * @param {int} y Y position where to create the Figure.
  */
-uwm.diagram.Figure.prototype.createExistingObject = function(diagram, modelObject, x, y){
-    this.diagram = diagram;
+uwm.diagram.Figure.prototype.init = function(modelObject, x, y){
     this.modelObject = modelObject;
     
-    var workflow = diagram.getWorkflow();
+    var workflow = this.diagram.getWorkflow();
     
     var compartment = workflow.getBestCompartmentFigure(x, y);
     
+    this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
+    
+    workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
+}
+
+uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
+	this.modelObject = modelObject;
+	this.diagram = diagram;
+	
+	var x = this.getPositionX();
+	var y = this.getPositionY();
+	
+	var workflow = diagram.getWorkflow();
+	var compartment = workflow.getBestCompartmentFigure(x, y);
+	
     this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
     
     workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
@@ -126,13 +139,21 @@ uwm.diagram.Figure.prototype.getGraphics = function(){
     return this.graphics;
 }
 
+uwm.diagram.Figure.prototype.getPositionX = function() {
+	return parseInt(this.data.PositionX);
+}
+
+uwm.diagram.Figure.prototype.getPositionY = function() {
+	return parseInt(this.data.PositionY);
+}
+
 /**
  * Shows the associated ModelObject in Model Tree.
  *
  * @see uwm.modeltree.ModelTree
  */
 uwm.diagram.Figure.prototype.showInModelTree = function(){
-    alert("TODO: Show in model tree");
+		uwm.modeltree.ModelTree.getInstance().markNodeByOid(this.getModelObject().getOid());
 }
 
 /**
@@ -164,5 +185,5 @@ uwm.diagram.Figure.prototype.deleteFromDiagram = function(){
  * Deletes this Figure and the associated ModelObject from Model.
  */
 uwm.diagram.Figure.prototype.deleteFromModel = function(){
-    alert("TODO: Delete from Model");
+	uwm.model.ModelContainer.getInstance().deleteByModelNode(this.getModelObject());
 }

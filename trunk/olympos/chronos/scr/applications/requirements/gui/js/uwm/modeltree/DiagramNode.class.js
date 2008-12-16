@@ -52,6 +52,6 @@ Ext.extend(uwm.modeltree.DiagramNode, uwm.objecttree.Node, {
 	},
 	
 	open: function(self, e) {
-		alert("TODO: Open Diagram");
+		uwm.diagram.DiagramContainer.getInstance().loadDiagram(this.getModelNode());
 	}
 });

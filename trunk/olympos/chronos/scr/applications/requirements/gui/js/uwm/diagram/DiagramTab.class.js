@@ -20,9 +20,7 @@ Ext.namespace("uwm.diagram");
  */
 uwm.diagram.DiagramTab = function(config) {
 	uwm.diagram.DiagramTab.superclass.constructor.call(this, Ext.apply(this, {
-		el: Ext.DomHelper.append(Ext.getBody(), {
-			tag: 'div'
-		}, true),
+		elements: "body",
 		closable: true
 	}, config));
 	
@@ -35,7 +33,7 @@ uwm.diagram.DiagramTab = function(config) {
 	this.diagram = config.diagram;
 }
 
-Ext.extend(uwm.diagram.DiagramTab, Ext.BoxComponent);
+Ext.extend(uwm.diagram.DiagramTab, Ext.Panel);
 
 /**
  * Initiates the contained diagram.

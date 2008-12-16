@@ -64,7 +64,7 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 		var instances = this.getInstances(modelObject.getOid());
 		
 		for (var i in instances) {
-			if (i != "remove") {
+			if (!(instances[i] instanceof Function)) {
 				instances[i].remove();
 			}
 		}
@@ -75,7 +75,7 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 		var label = modelObject.getLabel();
 		
 		for (var i in instances) {
-			if (i != "remove") {
+			if (!(instances[i] instanceof Function)) {
 				instances[i].setText(label);
 			}
 		}
@@ -90,7 +90,7 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 	
 	walkTree: function(currNode, oid, result) {
 		for (var i in currNode.childNodes) {
-			if (i != "remove") {
+			if (!(currNode.childNodes[i] instanceof Function)) {
 				var currChild = currNode.childNodes[i];
 				
 				if (currChild instanceof uwm.hierarchytree.Node && currChild.getModelNode().getOid() == oid) {
