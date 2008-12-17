@@ -54,51 +54,6 @@ uwm.graphics.connection.UwmPort.prototype.onDrop = function(port){
         var portModelObject = port.parentNode.getFigure().getModelObject();
         var thisModelObject = this.parentNode.getFigure().getModelObject();
         
-        if (portModelObject.connectableWith(thisModelObject)) {
-            var connectionInfo = portModelObject.getModelNodeClass().getConnectionInfo(thisModelObject.getModelNodeClass());
-            
-            var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
-            
-            var startPort = this;
-            var endPort = port;
-            
-            if (connectionInfo.invert) {
-                startPort = port;
-                endPort = this;
-            }
-            
-            var command = new draw2d.CommandConnect(this.parentNode.workflow, startPort, endPort);
-            command.setConnection(new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators));
-            this.parentNode.workflow.getCommandStack().execute(command);
-        }
-        
+        this.parentNode.getFigure().getDiagram().createConnection(thisModelObject, portModelObject, this, port);
     }
-}
-
-/**
- * Assigns proper graphical representations according to connection type.
- *
- * @param {String} connectionType The type of connection. Currently supported are <code>aggregation</code> and <code>composition</code>.
- * @return Array of proper connection decorators.
- * @type Array
- */
-uwm.graphics.connection.UwmPort.prototype.getConnectionTypeDecorators = function(connectionType){
-    var result = new Array();
-    
-    switch (connectionType) {
-        case "aggregation":
-            result.source = new uwm.connection.OpenDiamondDecorator();
-            result.target = new uwm.connection.ArrowDecorator();
-            break;
-            
-        case "composition":
-            result.source = new uwm.connection.FilledDiamondDecorator();
-            result.target = new uwm.connection.ArrowDecorator();
-            break;
-            
-        default:
-            result.target = new uwm.connection.ArrowDecorator();
-    }
-    
-    return result;
 }

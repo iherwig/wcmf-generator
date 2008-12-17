@@ -48,25 +48,29 @@ Ext.extend(cwm.ChiRequirementClass, uwm.model.ModelClass);
 
 cwm.ChiRequirementClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.ui.PropertyForm({
-		items: [new Ext.form.ComboBox({
+		items: [new uwm.ui.ComboBox({
 			fieldLabel: 'reqType',
 			name: 'reqType',
+			listType: "ChiRequirementType",
 			modelNode: modelNode
 		}), new uwm.ui.TextField({
 			fieldLabel: 'Priority',
 			name: 'Priority',
 			modelNode: modelNode
-		}), new Ext.form.ComboBox({
+		}), new uwm.ui.ComboBox({
 			fieldLabel: 'Author',
 			name: 'Author',
+			listType: "ChiAuthors",
 			modelNode: modelNode
-		}), new Ext.form.ComboBox({
+		}), new uwm.ui.ComboBox({
 			fieldLabel: 'Proofreader',
 			name: 'Proofreader',
+			listType: "ChiAuthors",
 			modelNode: modelNode
-		}), new Ext.form.ComboBox({
+		}), new uwm.ui.ComboBox({
 			fieldLabel: 'Status',
 			name: 'Status',
+			listType: "ChiRequirementStatus",
 			modelNode: modelNode
 		}), new uwm.ui.TextField({
 			fieldLabel: 'Alias',

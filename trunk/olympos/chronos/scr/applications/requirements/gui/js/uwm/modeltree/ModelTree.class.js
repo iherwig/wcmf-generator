@@ -45,6 +45,15 @@ uwm.modeltree.ModelTree = function(config){
      * @type uwm.modeltree.ModelTree
      */
     uwm.modeltree.ModelTree.instance = this;
+
+	var self = this;
+	
+	this.on("nodedragover", function(dragOverEvent) {
+		self.checkDroppable(dragOverEvent);
+	});
+	this.on("nodedrop", function(dropEvent) {
+		self.associateDroppedNode(dropEvent);
+	});
     
     this.createdModels = new Ext.util.MixedCollection();
     this.createdPackages = new Ext.util.MixedCollection();
@@ -115,6 +124,26 @@ uwm.modeltree.ModelTree.prototype.showContextMenu = function(self, e, el){
     e.preventDefault();
     
     self.contextMenu.showAt(e.getXY());
+}
+
+uwm.modeltree.ModelTree.prototype.checkDroppable = function(dragOverEvent) {
+	var dropModelNode = dragOverEvent.dropNode.getModelNode();
+	var targetModelNode = dragOverEvent.target.getModelNode();
+	
+	if (dragOverEvent.dropNode.parentNode == dragOverEvent.target) {
+		dragOverEvent.cancel = true;
+	} else if (dropModelNode instanceof uwm.model.builtin.Package) {
+		dragOverEvent.cancel = false;
+	} else if (targetModelNode instanceof uwm.model.builtin.Model) {
+		//Only allowed for packages, but they are handled above
+		dragOverEvent.cancel = true;
+	}
+	
+	return !dragOverEvent.cancel;
+}
+
+uwm.modeltree.ModelTree.prototype.associateDroppedNode = function(dropEvent) {
+	dropEvent.dropNode.getModelNode().associate(dropEvent.target.getModelNode());
 }
 
 /**
@@ -276,7 +305,6 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
             childNode = new uwm.modeltree.PackageNode({
                 oid: childModelObject.getOid(),
                 text: childModelObject.getLabel(),
-                leaf: true
             });
         }
         else 
@@ -298,13 +326,15 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
                 }
         
         if (childNode) {
-            if (parentNode.isExpanded()) {
-                parentNode.appendChild(childNode);
-                childNode.ensureVisible();
-            }
-            else {
-                parentNode.expand();
-            }
+			if (!parentNode.findChild("id", childNode.id)) {
+				if (parentNode.isExpanded()) {
+					parentNode.appendChild(childNode);
+					childNode.ensureVisible();
+				}
+				else {
+					parentNode.expand();
+				}
+			}
         }
     }
 }

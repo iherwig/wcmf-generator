@@ -138,7 +138,8 @@ uwm.persistency.Json.prototype.display = function(oid, depth, successHandler, er
 		usr_action: "display",
 		oid: oid,
 		depth: depth,
-		omitMetaData: true
+		omitMetaData: true,
+		translateValues: true
 	}, successHandler, errorHandler);
 }
 

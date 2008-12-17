@@ -13,29 +13,65 @@ Ext.namespace("uwm.diagram");
 
 /**
  * @class Initiates all changes coming from the draw2d event system.
- * 
+ *
  * @constructor
  * @param {uwm.diagram.Diagram} diagram The Diagram containing this listener.
  */
-uwm.diagram.WorkflowEventListener = function(diagram) {
-	/**
-	 * The containing Diagram.
-	 * 
-	 * @private
-	 * @type uwm.diagram.Diagram
-	 */
-	this.diagram = diagram;
-	
-	draw2d.CommandStackEventListener.call(this);
+uwm.diagram.WorkflowEventListener = function(diagram){
+    /**
+     * The containing Diagram.
+     *
+     * @private
+     * @type uwm.diagram.Diagram
+     */
+    this.diagram = diagram;
+    
+    draw2d.CommandStackEventListener.call(this);
 }
 
 Ext.extend(uwm.diagram.WorkflowEventListener, draw2d.CommandStackEventListener);
 
 /**
  * Handler for all events of the draw2d event system.
- * 
+ *
  * @private
  * @param {draw2d.Event} stackEvent The draw2d Event.
  */
-uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) {
+uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent){
+    if (this.diagram.isEventHandler()) {
+        if (stackEvent.isPostChangeEvent()) {
+            var command = stackEvent.getCommand();
+            if (command instanceof draw2d.CommandConnect) {
+                var source = command.source.getParent().getFigure().getModelObject();
+                var target = command.target.getParent().getFigure().getModelObject();
+                
+                var connectionInfo = source.getModelNodeClass().getConnectionInfo(target.getModelNodeClass());
+                
+                if (connectionInfo.invert) {
+                    source.associate(target);
+                }
+                else {
+                    target.associate(source);
+                }
+            }
+            else 
+                if (command instanceof draw2d.CommandMove) {
+                    var modelObject = command.figure.getFigure();
+                    
+                    modelObject.changeProperties({
+                        PositionX: command.newX,
+                        PositionY: command.newY
+                    });
+                }
+                else 
+                    if (command instanceof draw2d.CommandResize) {
+                        var modelObject = command.figure.getFigure();
+                        
+                        modelObject.changeProperties({
+                            Width: command.newWidth,
+                            Height: command.newHeight
+                        });
+                    }
+        }
+    }
 }

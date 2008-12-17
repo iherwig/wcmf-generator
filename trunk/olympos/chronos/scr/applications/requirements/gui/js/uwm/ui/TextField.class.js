@@ -25,10 +25,23 @@ uwm.ui.TextField = function(config) {
 		cls: cls		
 	}, config));
 	
+	this.toolTipText = config.toolTip;
+	
 	this.modelNode = config.modelNode;
 }
 
 Ext.extend(uwm.ui.TextField, Ext.form.TextField);
+
+uwm.ui.TextField.prototype.render = function(container, position) {
+	uwm.ui.TextField.superclass.render.apply(this, arguments);
+	
+	if (this.toolTipText) {
+		this.toolTip = new Ext.ToolTip({
+			target: container,
+			html: this.toolTipText
+		});
+	}
+}
 
 uwm.ui.TextField.prototype.fieldChanged = function(field, newValue, oldValue) {
 	var tmp = new Object();

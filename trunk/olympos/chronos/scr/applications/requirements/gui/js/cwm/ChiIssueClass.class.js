@@ -38,13 +38,15 @@ Ext.extend(cwm.ChiIssueClass, uwm.model.ModelClass);
 
 cwm.ChiIssueClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.ui.PropertyForm({
-		items: [new Ext.form.ComboBox({
+		items: [new uwm.ui.ComboBox({
 			fieldLabel: 'Author',
 			name: 'Author',
+			listType: "ChiAuthors",
 			modelNode: modelNode
-		}), new Ext.form.ComboBox({
+		}), new uwm.ui.ComboBox({
 			fieldLabel: 'Responsible',
 			name: 'Responsible',
+			listType: "ChiAuthors",
 			modelNode: modelNode
 		}), new uwm.ui.TextField({
 			fieldLabel: 'Alias',

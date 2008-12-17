@@ -23,7 +23,8 @@ uwm.objecttree.ObjectTree = function(config) {
 			ddGroup: uwm.Constants.DD_GROUP
 		},
 		dropConfig: {
-			ddGroup: uwm.Constants.DD_GROUP
+			ddGroup: uwm.Constants.DD_GROUP,
+			appendOnly: true
 		}
 	}, config));
 }

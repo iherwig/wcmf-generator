@@ -46,6 +46,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
 		items: [new uwm.ui.TextField({
 			fieldLabel: 'Priority',
 			name: 'Priority',
+			toolTip: "This is the tooltip for priority. It is quite long.",
 			modelNode: modelNode
 		}), new uwm.ui.TextField({
 			fieldLabel: 'Value_Name',
@@ -74,6 +75,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
 		}), new uwm.ui.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
+			toolTip: "Notes is the ultimate E-Mail and workflow platform.",
 			modelNode: modelNode
 		}), new uwm.ui.TextField({
 			fieldLabel: 'created',
