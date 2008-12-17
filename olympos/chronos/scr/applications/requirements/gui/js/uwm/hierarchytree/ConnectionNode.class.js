@@ -18,7 +18,8 @@ Ext.namespace("uwm.hierarchytree");
 uwm.hierarchytree.ConnectionNode = function(config) {
 	uwm.hierarchytree.ConnectionNode.superclass.constructor.call(this, Ext.apply(this, {
 		leaf: false,
-		draggable: false
+		allowDrag: false,
+		allowDrop: false
 	}, config));
 }
 

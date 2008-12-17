@@ -121,9 +121,7 @@ uwm.diagram.DropZone.prototype.checkDropable = function(modelData) {
 	var result = false;
 	
 	if (modelData instanceof uwm.model.ModelObject) {
-		var oid = modelData.getOid();
-		
-		if (!this.diagram.containsByOid(oid)) {
+		if (!this.diagram.containsObject(modelData)) {
 			result = Ext.dd.DropZone.prototype.dropAllowed;
 		}
 	}

@@ -92,6 +92,7 @@ uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
 	var compartment = workflow.getBestCompartmentFigure(x, y);
 	
     this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
+	this.graphics.setDimension(this.getWidth(), this.getHeight());
     
     workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
 }
@@ -145,6 +146,14 @@ uwm.diagram.Figure.prototype.getPositionX = function() {
 
 uwm.diagram.Figure.prototype.getPositionY = function() {
 	return parseInt(this.data.PositionY);
+}
+
+uwm.diagram.Figure.prototype.getWidth = function() {
+	return parseInt(this.data.Width);
+}
+
+uwm.diagram.Figure.prototype.getHeight = function() {
+	return parseInt(this.data.Height);
 }
 
 /**

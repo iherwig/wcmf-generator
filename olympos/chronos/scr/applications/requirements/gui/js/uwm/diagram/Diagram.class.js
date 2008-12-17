@@ -25,6 +25,8 @@ uwm.diagram.Diagram = function(modelNodeClass){
     uwm.diagram.Diagram.superclass.constructor.call(this, modelNodeClass);
     
     this.containedPackage = null;
+    this.propertyDisplayEnabled = true;
+    this.eventHandlerEnabled = true;
 }
 
 Ext.extend(uwm.diagram.Diagram, uwm.diagram.DiagramBase);
@@ -190,8 +192,23 @@ uwm.diagram.Diagram.prototype.initWorkflow = function(){
     this.layouter = new uwm.diagram.autolayout.Layouter(this.workflow);
 }
 
+/**
+ * Checks whether a @link{uwm.model.ModelObject} with the given oid is contained in this diagram.
+ *
+ * @param {modelObject} modelObject The ModelObject to check.
+ * @return <code>true</code> if a Model Object with <code>oid</code> is contained in this diagram. <code>false</code> otherwise.
+ * @type boolean
+ */
 uwm.diagram.Diagram.prototype.containsObject = function(modelObject){
     return this.objects.containsKey(modelObject.getOid());
+}
+
+uwm.diagram.Diagram.prototype.isPropertyDisplay = function(){
+    return this.propertyDisplayEnabled;
+}
+
+uwm.diagram.Diagram.prototype.isEventHandler = function(){
+    return this.eventHandlerEnabled;
 }
 
 /**
@@ -229,6 +246,13 @@ uwm.diagram.Diagram.prototype.initDropZone = function(){
  * @private
  */
 uwm.diagram.Diagram.prototype.loadFigures = function(){
+    this.propertyDisplayEnabled = false;
+    this.eventHandlerEnabled = false;
+	
+	//workaround: shows over all tabs
+	this.loadMask = new Ext.LoadMask(this.tab.container);
+	this.loadMask.show();
+    
     var self = this;
     
     uwm.model.ModelContainer.getInstance().loadByOid(this.getOid(), function(modelNode){
@@ -237,10 +261,12 @@ uwm.diagram.Diagram.prototype.loadFigures = function(){
 }
 
 uwm.diagram.Diagram.prototype.handleLoaded = function(){
+    this.figuresToLoad = 0;
+    
     for (i in this.childOids) {
         if (!(this.childOids[i] instanceof Function)) {
             var figure = uwm.model.ModelContainer.getInstance().getByOid(this.childOids[i]);
- 			
+            
             var self = this;
             
             var parentOids = figure.getParentOids();
@@ -249,8 +275,9 @@ uwm.diagram.Diagram.prototype.handleLoaded = function(){
                 var parentOid = parentOids[j];
                 
                 if (!(parentOid instanceof Function) && parentOid != this.getOid()) {
-					this.figures.add(parentOid, figure);
-					
+                    this.figures.add(parentOid, figure);
+                    this.figuresToLoad++;
+                    
                     uwm.model.ModelContainer.getInstance().loadByOid(parentOid, function(modelObject){
                         self.handleLoadedObject(modelObject);
                     });
@@ -261,22 +288,92 @@ uwm.diagram.Diagram.prototype.handleLoaded = function(){
 }
 
 uwm.diagram.Diagram.prototype.handleLoadedObject = function(modelObject){
-	var figure = this.figures.get(modelObject.getOid());
-
+    var figure = this.figures.get(modelObject.getOid());
+    
     figure.load(modelObject, this);
     
     this.objects.add(modelObject.getOid(), modelObject);
+    
+    this.establishExistingConnections(modelObject, modelObject.getParentOids());
+    this.establishExistingConnections(modelObject, modelObject.getChildOids());
+    
+    this.figuresToLoad--;
+    
+    if (this.figuresToLoad == 0) {
+        this.propertyDisplayEnabled = true;
+        this.eventHandlerEnabled = true;
+		this.loadMask.hide();
+    }
+}
+
+uwm.diagram.Diagram.prototype.establishExistingConnections = function(newObject, list){
+    if (list) {
+        for (var i = 0; i < list.length; i++) {
+            var connectedObject = this.objects.get(list[i]);
+            
+            if (connectedObject) {
+                var newFigure = this.figures.get(newObject.getOid());
+                var connectedFigure = this.figures.get(connectedObject.getOid());
+                
+                var newPort = newFigure.getGraphics().getPorts().get(0);
+                var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
+                
+                this.createConnection(newObject, connectedObject, newPort, connectedPort);
+            }
+        }
+    }
+}
+
+uwm.diagram.Diagram.prototype.createConnection = function(sourceObject, targetObject, sourcePort, targetPort){
+    if (sourceObject.connectableWith(targetObject)) {
+        var connectionInfo = sourceObject.getModelNodeClass().getConnectionInfo(targetObject.getModelNodeClass());
+        
+        var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
+        
+        var startPort;
+        var endPort;
+        
+        if (connectionInfo.invert) {
+            startPort = targetPort;
+            endPort = sourcePort;
+        }
+        else {
+            startPort = sourcePort;
+            endPort = targetPort;
+        }
+        
+        var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
+        command.setConnection(new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators));
+        this.workflow.getCommandStack().execute(command);
+    }
 }
 
 /**
- * Checks whether a @link{uwm.model.ModelObject} with the given oid is contained in this diagram.
+ * Assigns proper graphical representations according to connection type.
  *
- * @param {String} oid The oid to check.
- * @return <code>true</code> if a Model Object with <code>oid</code> is contained in this diagram. <code>false</code> otherwise.
- * @type boolean
+ * @param {String} connectionType The type of connection. Currently supported are <code>aggregation</code> and <code>composition</code>.
+ * @return Array of proper connection decorators.
+ * @type Array
  */
-uwm.diagram.Diagram.prototype.containsByOid = function(oid){
-    return false;
+uwm.diagram.Diagram.prototype.getConnectionTypeDecorators = function(connectionType){
+    var result = new Array();
+    
+    switch (connectionType) {
+        case "aggregation":
+            result.source = new uwm.connection.OpenDiamondDecorator();
+            result.target = new uwm.connection.ArrowDecorator();
+            break;
+            
+        case "composition":
+            result.source = new uwm.connection.FilledDiamondDecorator();
+            result.target = new uwm.connection.ArrowDecorator();
+            break;
+            
+        default:
+            result.target = new uwm.connection.ArrowDecorator();
+    }
+    
+    return result;
 }
 
 /**
@@ -410,10 +507,12 @@ uwm.diagram.Diagram.prototype.handleAssociateEvent = function(parentModelNode, c
             
             if (diagram == this) {
                 var config = this.createdObjects.shift();
-                
+				
                 childModelNode.changeProperties({
                     PositionX: config.x,
-                    PositionY: config.y
+                    PositionY: config.y,
+					Width: childModelNode.getGraphics().getWidth(),
+					Height: childModelNode.getGraphics().getHeight()
                 });
                 
                 childModelNode.init(parentModelNode, config.x, config.y);

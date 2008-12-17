@@ -28,10 +28,22 @@ uwm.ui.HtmlEditor = function(config) {
 		}
 	}, config));
 	
+	this.toolTipText = config.toolTip
 	this.modelNode = config.modelNode;
 }
 
 Ext.extend(uwm.ui.HtmlEditor, Ext.form.HtmlEditor);
+
+uwm.ui.HtmlEditor.prototype.render = function(container, position) {
+	uwm.ui.HtmlEditor.superclass.render.apply(this, arguments);
+	
+	if (this.toolTipText) {
+		this.toolTip = new Ext.ToolTip({
+			target: container,
+			html: this.toolTipText
+		});
+	}
+}
 
 uwm.ui.HtmlEditor.prototype.fieldChanged = function(field) {
 	if (this.isDirty()) {

@@ -13,8 +13,6 @@ Ext.namespace("cwm");
 
 cwm.ChiFeature = function(modelNodeClass) {
 	cwm.ChiFeature.superclass.constructor.call(this, modelNodeClass);
-	
-	this.oid = "test";
 }
 
 Ext.extend(cwm.ChiFeature, uwm.model.ModelObject);
