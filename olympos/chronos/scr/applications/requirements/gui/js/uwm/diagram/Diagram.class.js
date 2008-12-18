@@ -317,7 +317,7 @@ uwm.diagram.Diagram.prototype.establishExistingConnections = function(newObject,
 					var parentOids = childObject.getParentOids();
 					
 					for (var j = 0; j < parentOids.length; j++) {
-						if (parentOids[j] != childObject.getOid()) {
+						if (parentOids[j] != newObject.getOid()) {
 							connectedObject = this.objects.get(parentOids[j]);
 							break;
 						}
@@ -522,14 +522,14 @@ uwm.diagram.Diagram.prototype.handleAssociateEvent = function(parentModelNode, c
             if (diagram == this) {
                 var config = this.createdObjects.shift();
 				
+                childModelNode.init(parentModelNode, config.x, config.y);
+
                 childModelNode.changeProperties({
                     PositionX: config.x,
                     PositionY: config.y,
 					Width: childModelNode.getGraphics().getWidth(),
 					Height: childModelNode.getGraphics().getHeight()
                 });
-                
-                childModelNode.init(parentModelNode, config.x, config.y);
             }
         }
 }
