@@ -11,24 +11,44 @@
  */
 Ext.namespace("uwm.Util");
 
-uwm.Util.getUwmClassNameFromOid = function(oid) {
-	return oid.match(/^[^:]+/)[0];
+uwm.Util.getUwmClassNameFromOid = function(oid){
+    return oid.match(/^[^:]+/)[0];
 }
 
-uwm.Util.showMessage = function(title, message, messageType) {
-	uwm.util.showMessage(title, message);
+uwm.Util.showMessage = function(title, message, messageType){
+    var messageContainer = Ext.get("messageContainer");
+    if (!messageContainer) {
+        messageContainer = Ext.DomHelper.insertFirst(document.body, {
+            id: "messageContainer"
+        }, true);
+    }
+    messageContainer.alignTo(document, 't-t');
+    var messageBox = Ext.DomHelper.append(messageContainer, {
+        html: '<div>' +
+        '<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>' +
+        '<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>' +
+        title +
+        '</h3>' +
+        message +
+        '</div></div></div>' +
+        '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>' +
+        '</div>'
+    }, true);
+    messageBox.slideIn('t').pause(3).ghost("t", {
+        remove: true
+    });
 }
 
 uwm.Util.messageType = {
-	INFO: 1,
-	WARNING: 2,
-	ERROR: 3
+    INFO: 1,
+    WARNING: 2,
+    ERROR: 3
 }
 
-uwm.Util.setElementUnselectable = function(elem) {
-	if (elem) {
-		elem.style.MozUserSelect = "none";
-		elem.style.KhtmlUserSelect = "none";
-		elem.unselectable = "on";
-	}
+uwm.Util.setElementUnselectable = function(elem){
+    if (elem) {
+        elem.style.MozUserSelect = "none";
+        elem.style.KhtmlUserSelect = "none";
+        elem.unselectable = "on";
+    }
 }

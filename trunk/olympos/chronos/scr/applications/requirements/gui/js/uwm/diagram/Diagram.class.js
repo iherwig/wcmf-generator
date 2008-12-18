@@ -280,7 +280,7 @@ uwm.diagram.Diagram.prototype.handleLoaded = function(){
                     
                     uwm.model.ModelContainer.getInstance().loadByOid(parentOid, function(modelObject){
                         self.handleLoadedObject(modelObject);
-                    });
+                    }, 1);
                 }
             }
         }
@@ -311,6 +311,20 @@ uwm.diagram.Diagram.prototype.establishExistingConnections = function(newObject,
         for (var i = 0; i < list.length; i++) {
             var connectedObject = this.objects.get(list[i]);
             
+			if (!connectedObject) {
+				var childObject = uwm.model.ModelContainer.getInstance().getByOid(list[i]);
+				if (childObject instanceof uwm.model.Relation) {
+					var parentOids = childObject.getParentOids();
+					
+					for (var j = 0; j < parentOids.length; j++) {
+						if (parentOids[j] != childObject.getOid()) {
+							connectedObject = this.objects.get(parentOids[j]);
+							break;
+						}
+					}
+				}
+			}
+
             if (connectedObject) {
                 var newFigure = this.figures.get(newObject.getOid());
                 var connectedFigure = this.figures.get(connectedObject.getOid());

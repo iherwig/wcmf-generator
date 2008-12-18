@@ -91,7 +91,7 @@ uwm.graphics.figure.BaseFigure.prototype.setWorkflow = function(workflow){
  * @private
  */
 uwm.graphics.figure.BaseFigure.prototype.buildContextMenu = function(){
-    figure = this.getFigure();
+    var figure = this.getFigure();
     
     /**
      * The context menu of this figure.

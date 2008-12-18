@@ -12,48 +12,61 @@
 Ext.namespace("uwm.ui");
 
 uwm.ui.PropertyContainer = Ext.extend(Ext.Panel, {
-	initComponent: function() {
-		Ext.apply(this, {
-			region: "east",
-			layout: "fit",
-			collapsible: true,
-			split: true,
-			width: 250,
-			autoScroll: true,
-			title: "Properties",
-		})
+    initComponent: function(){
+        Ext.apply(this, {
+            region: "east",
+            layout: "fit",
+            collapsible: true,
+            split: true,
+            width: 250,
+            autoScroll: true,
+            title: "Properties"
+        })
+        
+        uwm.ui.PropertyContainer.instance = this;
+        
+        uwm.ui.PropertyContainer.superclass.initComponent.apply(this, arguments);
+        
+        this.currentOid = null;
+        
+        this.on("afterlayout", this.showInfoMask);
+    },
+    
+    showInfoMask: function(){
+        this.mask = new uwm.ui.InfoMask(this.body, {
+            msg: "This panel shows the properties of each object selected by a single click."
+        });
+        this.mask.show();
 		
-		uwm.ui.PropertyContainer.instance = this;
-		
-		uwm.ui.PropertyContainer.superclass.initComponent.apply(this, arguments);
-		
-		this.currentOid = null;
-	},
-	
-	showProperty: function(modelNode) {
-		if (modelNode != null) {
-			var oid = modelNode.getOid();
-			
-			if (oid != null && this.currentOid != oid) {
-				this.currentOid = modelNode.getOid();
-				
-				var items = this.items;
-				while(items && items.getCount() > 0) {
-					this.remove(items.get(0), true);
-				}
-				
-				var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode));
-				this.doLayout();
-				
-				var mask = new Ext.LoadMask(form.getEl());
-				mask.show();
-				
-				modelNode.fillPropertyForm(form, mask);
-			}
-		}
-	}
+		this.un("afterlayout", this.showInfoMask);
+    },
+    
+    showProperty: function(modelNode){
+        if (modelNode != null) {
+            var oid = modelNode.getOid();
+            
+            if (oid != null && this.currentOid != oid) {
+                this.mask.hide();
+                
+                this.currentOid = modelNode.getOid();
+                
+                var items = this.items;
+                while (items && items.getCount() > 0) {
+                    this.remove(items.get(0), true);
+                }
+                
+                var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode));
+                this.doLayout();
+                
+                var mask = new Ext.LoadMask(form.getEl());
+                mask.show();
+                
+                modelNode.fillPropertyForm(form, mask);
+            }
+        }
+    }
 })
 
-uwm.ui.PropertyContainer.getInstance = function() {
-	return uwm.ui.PropertyContainer.instance;
+uwm.ui.PropertyContainer.getInstance = function(){
+    return uwm.ui.PropertyContainer.instance;
 }
