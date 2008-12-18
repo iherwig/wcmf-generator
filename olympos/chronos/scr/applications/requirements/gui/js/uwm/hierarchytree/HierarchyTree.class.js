@@ -41,9 +41,28 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 				self.handleChangeLabelEvent(modelObject, oldLabel);
 			}
 		});
+		
+        this.on("afterlayout", this.showInfoMask);
+
+		this.wasActive = false;
 	},
 	
+    showInfoMask: function(){
+		if (!this.wasActive) {
+			this.infoMask = new uwm.ui.InfoMask(this.body, {
+				msg: "This tree shows all dependencies of an object. Select an object, right-click and select &quot;Show in hierarchy&quot; to show it here."
+			});
+			this.infoMask.show();
+		}
+		this.un("afterlayout", this.showInfoMask);
+    },
+    
 	loadNode: function(oid) {
+		this.wasActive = true;
+
+		if (this.infoMask) {
+			this.infoMask.hide();
+		}
 		this.show();
 		
 		var modelNode = uwm.model.ModelContainer.getInstance().getByOid(oid);

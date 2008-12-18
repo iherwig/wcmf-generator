@@ -25,7 +25,6 @@ uwm.model.ModelNode.prototype.initByDisplayResult = function(node) {
 	this.uwmClassName = node.type;
 	this.parentOids = node.properties.parentoids;
 	this.childOids = node.properties.childoids;
-	this.name = node.values[1].Name;
 	
 	for (var i in node.values) {
 		if (!(node.values[i] instanceof Function)) {

@@ -80,6 +80,7 @@ uwm.ui.create = function() {
 					//tabPosition: "bottom",
 					enableTabScroll: true,
 					id: "existingFiguresContainer",
+					activeTab: 0,
 					items: [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()]
 				}]
 			}
@@ -100,9 +101,9 @@ uwm.ui.create = function() {
 	
 	//uwm.diagram.DiagramContainer.getInstance().createNewDiagram();
 	
-	uwm.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
+	//uwm.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
 	
-	uwm.loadStores();
+	//uwm.loadStores();
 }
 
 uwm.ui.createNewFigureTemplates = function(container) {
