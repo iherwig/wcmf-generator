@@ -62,3 +62,11 @@
 .uwm-field-readOnly {
 	opacity: 0.6;
 }
+
+.uwm-infoMask {
+	margin: 10%;
+}
+
+.uwm-infoMask div {
+	background: white;
+}
