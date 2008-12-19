@@ -17,7 +17,7 @@ Ext.namespace("uwm.modeltree");
  */
 uwm.modeltree.PackageNode = function(config) {
 	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("Package", config.oid);
-
+	
 	uwm.modeltree.PackageNode.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,
 		iconCls: this.modelNode.getModelNodeClass().getTreeIcon(),
@@ -47,6 +47,11 @@ Ext.extend(uwm.modeltree.PackageNode, uwm.objecttree.Node, {
 				handler: function(item, e) {
 					self.deleteFromModel(item, e);
 				}
+			}, {
+				text: "Select as grid scope",
+				handler: function(item, e) {
+					self.selectAsScope(item, e);
+				}
 			}]
 		});
 		
@@ -59,5 +64,9 @@ Ext.extend(uwm.modeltree.PackageNode, uwm.objecttree.Node, {
 	
 	addDiagram: function(self, e) {
 		uwm.model.ModelContainer.getInstance().createDiagram(this.getModelNode());
+	},
+	
+	selectAsScope: function(self, e) {
+		uwm.objectgrid.ObjectGridContainer.getInstance().loadScope(this.modelNode);
 	}
 });

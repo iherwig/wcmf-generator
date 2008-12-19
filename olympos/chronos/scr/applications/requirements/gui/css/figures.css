@@ -23,9 +23,22 @@
 	background-image: url("../img/ChiGoal.png") !important;
 }
 
+.ChiGoalTab {
+	background-image: url("../img/ChiGoal.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
 .FigureChiRequirement {
 	background-image: url("../img/ChiRequirement.png") !important;
 }
+
+.ChiRequirementTab {
+	background-image: url("../img/ChiRequirement.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
 .FigureChiFeature {
 	background-image: url("../img/ChiFeature.png") !important;
 }

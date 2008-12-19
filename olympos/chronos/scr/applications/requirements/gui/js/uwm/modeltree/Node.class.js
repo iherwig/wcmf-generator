@@ -42,6 +42,10 @@ Ext.extend(uwm.modeltree.Node, uwm.objecttree.ObjectNode, {
 		uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelNode().getOid());
 	},
 	
+	gridAvailable: function() {
+		return uwm.objectgrid.ObjectGridContainer.getInstance().isGridAvailable(this.modelNode, this.parentNode.getModelNode().getOid());
+	},
+	
 	expand: function(deep, anim, callback) {
 		if (callback instanceof Function) {
 			callback(this);

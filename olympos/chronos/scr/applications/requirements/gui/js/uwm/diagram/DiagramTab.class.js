@@ -13,7 +13,7 @@ Ext.namespace("uwm.diagram");
 
 /**
  * @class One tab containing a Diagram.
- * 
+ *
  * @constructor
  * @param {Object} config Configuraton of this tab.
  * @config diagram The diagram of this tab.
@@ -26,18 +26,26 @@ uwm.diagram.DiagramTab = function(config) {
 	
 	/**
 	 * The diagram of this tab.
-	 * 
+	 *
 	 * @private
 	 * @type uwm.diagram.Diagram
 	 */
 	this.diagram = config.diagram;
+	
+	var self = this;
+	this.on("activate", function(panel) {
+		self.restoreScrollPosition();
+	});
+	this.on("deactivate", function(panel) {
+		self.saveScrollPosition();
+	});
 }
 
 Ext.extend(uwm.diagram.DiagramTab, Ext.Panel);
 
 /**
  * Initiates the contained diagram.
- * 
+ *
  * @private
  */
 uwm.diagram.DiagramTab.prototype.render = function() {
@@ -46,4 +54,19 @@ uwm.diagram.DiagramTab.prototype.render = function() {
 	this.diagram.initWorkflow();
 	this.diagram.initDropZone();
 	this.diagram.loadFigures();
+}
+
+uwm.diagram.DiagramTab.prototype.getDiagram = function() {
+	return this.diagram;
+}
+
+uwm.diagram.DiagramTab.prototype.saveScrollPosition = function() {
+	this.scrollX = this.getDiagram().getWorkflow().getScrollLeft();
+	this.scrollY = this.getDiagram().getWorkflow().getScrollTop();
+}
+
+uwm.diagram.DiagramTab.prototype.restoreScrollPosition = function() {
+	if (this.scrollX) {
+		this.getDiagram().getWorkflow().scrollTo(this.scrollX, this.scrollY, true);
+	}
 }

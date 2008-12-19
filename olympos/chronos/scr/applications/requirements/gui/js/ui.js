@@ -81,7 +81,11 @@ uwm.ui.create = function() {
 					enableTabScroll: true,
 					id: "existingFiguresContainer",
 					activeTab: 0,
-					items: [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()]
+					items: [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree(), new uwm.objectgrid.ObjectGrid({
+						uwmClassName: "ChiGoal"
+					}), new uwm.objectgrid.ObjectGrid({
+						uwmClassName: "ChiRequirement"
+					})]
 				}]
 			}
 		}, new uwm.ui.PropertyContainer(), uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
@@ -100,9 +104,9 @@ uwm.ui.create = function() {
 	}
 	
 	//uwm.diagram.DiagramContainer.getInstance().createNewDiagram();
-	
+
 	//uwm.ui.createExistingFigureTabs(Ext.getCmp("existingFiguresContainer"));
-	
+
 	//uwm.loadStores();
 }
 
