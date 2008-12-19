@@ -21,33 +21,33 @@ Ext.namespace("uwm.diagram");
  * @constructor
  * @param {uwm.model.ModelNodeClass} modelNodeClass
  */
-uwm.diagram.Diagram = function(modelNodeClass){
-    uwm.diagram.Diagram.superclass.constructor.call(this, modelNodeClass);
-    
-    this.containedPackage = null;
-    this.propertyDisplayEnabled = true;
-    this.eventHandlerEnabled = true;
+uwm.diagram.Diagram = function(modelNodeClass) {
+	uwm.diagram.Diagram.superclass.constructor.call(this, modelNodeClass);
+	
+	this.containedPackage = null;
+	this.propertyDisplayEnabled = true;
+	this.eventHandlerEnabled = true;
+	
+	this.figures = new Ext.util.MixedCollection();
+	this.objects = new Ext.util.MixedCollection();
 }
 
 Ext.extend(uwm.diagram.Diagram, uwm.diagram.DiagramBase);
 
-uwm.diagram.Diagram.prototype.initByDisplayResult = function(node){
-    uwm.diagram.Diagram.superclass.initByDisplayResult.call(this, node);
-    
-    if (!this.containedPackage) {
-        var self = this;
-        
-        uwm.model.ModelContainer.getInstance().loadByOid(this.parentOids[0], function(packageModel){
-            self.setContainedPackage(packageModel);
-        });
-    }
-    
-    this.figures = new Ext.util.MixedCollection();
-    this.objects = new Ext.util.MixedCollection();
+uwm.diagram.Diagram.prototype.initByDisplayResult = function(node) {
+	uwm.diagram.Diagram.superclass.initByDisplayResult.call(this, node);
+	
+	if (!this.containedPackage) {
+		var self = this;
+		
+		uwm.model.ModelContainer.getInstance().loadByOid(this.parentOids[0], function(packageModel) {
+			self.setContainedPackage(packageModel);
+		});
+	}
 }
 
-uwm.diagram.Diagram.prototype.setContainedPackage = function(packageModel){
-    this.containedPackage = packageModel;
+uwm.diagram.Diagram.prototype.setContainedPackage = function(packageModel) {
+	this.containedPackage = packageModel;
 }
 
 /**
@@ -55,61 +55,61 @@ uwm.diagram.Diagram.prototype.setContainedPackage = function(packageModel){
  *
  * <p>Creates a new panel for the tab, initiates internal state to default values.</p>
  */
-uwm.diagram.Diagram.prototype.init = function(){
-    var container = uwm.diagram.DiagramContainer.getInstance();
-    
-    /**
-     * The panel for the tab of this diagram.
-     *
-     * @private
-     * @type uwm.diagram.DiagramTab
-     */
-    this.tab = new uwm.diagram.DiagramTab({
-        title: this.getLabel(),
-        diagram: this
-    });
-    
-    /**
-     * Whether Objects should snap to other objects when moving.
-     *
-     * @private
-     * @type boolean
-     */
-    this.snapToObjects = false;
-    
-    /**
-     * The width of this diagram.
-     *
-     * @private
-     * @type int
-     */
-    this.workspaceWidth = 10000;
-    
-    /**
-     * The height of this diagram.
-     *
-     * @private
-     * @type int
-     */
-    this.workspaceHeight = 10000;
-    
-    container.getTabPanel().add(this.tab);
-    
-    this.createdObjects = new Array();
-    
-    var self = this;
-    
-    uwm.event.EventBroker.getInstance().addListener({
-        "delete": function(modelObject){
-            self.handleDeleteEvent(modelObject);
-        },
-        "changeLabel": function(modelObject, oldLabel){
-            self.handleChangeLabelEvent(modelObject, oldLabel);
-        },
-        "associate": function(parentModelObject, childModelObject){
-            self.handleAssociateEvent(parentModelObject, childModelObject);
-        }
-    });
+uwm.diagram.Diagram.prototype.init = function() {
+	var container = uwm.diagram.DiagramContainer.getInstance();
+	
+	/**
+	 * The panel for the tab of this diagram.
+	 *
+	 * @private
+	 * @type uwm.diagram.DiagramTab
+	 */
+	this.tab = new uwm.diagram.DiagramTab({
+		title: this.getLabel(),
+		diagram: this
+	});
+	
+	/**
+	 * Whether Objects should snap to other objects when moving.
+	 *
+	 * @private
+	 * @type boolean
+	 */
+	this.snapToObjects = false;
+	
+	/**
+	 * The width of this diagram.
+	 *
+	 * @private
+	 * @type int
+	 */
+	this.workspaceWidth = 10000;
+	
+	/**
+	 * The height of this diagram.
+	 *
+	 * @private
+	 * @type int
+	 */
+	this.workspaceHeight = 10000;
+	
+	container.getTabPanel().add(this.tab);
+	
+	this.createdObjects = new Array();
+	
+	var self = this;
+	
+	uwm.event.EventBroker.getInstance().addListener({
+		"delete": function(modelObject) {
+			self.handleDeleteEvent(modelObject);
+		},
+		"changeLabel": function(modelObject, oldLabel) {
+			self.handleChangeLabelEvent(modelObject, oldLabel);
+		},
+		"associate": function(parentModelObject, childModelObject) {
+			self.handleAssociateEvent(parentModelObject, childModelObject);
+		}
+	});
 }
 
 /**
@@ -117,79 +117,79 @@ uwm.diagram.Diagram.prototype.init = function(){
  *
  * @private
  */
-uwm.diagram.Diagram.prototype.initWorkflow = function(){
-    /**
-     * The viewport of this diagram.
-     *
-     * @private
-     * @type Ext.Element
-     */
-    this.viewPort = this.tab.body;
-    this.viewPort.applyStyles({
-        overflow: "auto",
-        display: "block",
-        position: "fixed"
-    });
-    
-    var canvas = Ext.DomHelper.append(this.viewPort, {
-        tag: "div"
-    }, true);
-    canvas.applyStyles({
-        width: this.workspaceWidth + "px",
-        height: this.workspaceHeight + "px"
-    })
-    
-    uwm.Util.setElementUnselectable(this.viewPort.dom);
-    
-    /**
-     * The draw2d workflow of this diagram.
-     *
-     * @private
-     * @type uwm.diagram.UwmWorkflow
-     */
-    this.workflow = new uwm.diagram.UwmWorkflow(canvas.id, this);
-    
-    this.workflow.diagram = this;
-    
-    this.workflow.setViewPort(this.viewPort.id);
-    
-    //this.workflow.scrollTo(this.workspaceHeight / 2, this.workspaceWidth / 2);
-    
-    var workflow = this.workflow;
-    var height = this.workspaceHeight / 2;
-    var width = this.workspaceWidth / 2;
-    
-    var self = this;
-    
-    setTimeout(function(){
-        workflow.scrollTo(height, width, true);
-    }, 500);
-    
-    /**
-     * The Selection Lister of this diagram.
-     *
-     * @private
-     * @type uwm.diagram.SelectionListener
-     */
-    this.selectionListener = new uwm.diagram.SelectionListener(this);
-    this.workflow.addSelectionListener(this.selectionListener);
-    
-    /**
-     * The Workflow Event Listener of this diagram.
-     *
-     *  @private
-     *  @type uwm.diagram.WorkflowEventListener
-     */
-    this.workflowEventListener = new uwm.diagram.WorkflowEventListener(this);
-    this.workflow.getCommandStack().addCommandStackEventListener(this.workflowEventListener);
-    
-    /**
-     * The auto-layouter of this diagram.
-     *
-     * @private
-     * @type uwm.diagram.autolayout.Layouter
-     */
-    this.layouter = new uwm.diagram.autolayout.Layouter(this.workflow);
+uwm.diagram.Diagram.prototype.initWorkflow = function() {
+	/**
+	 * The viewport of this diagram.
+	 *
+	 * @private
+	 * @type Ext.Element
+	 */
+	this.viewPort = this.tab.body;
+	this.viewPort.applyStyles({
+		overflow: "auto",
+		display: "block",
+		position: "fixed"
+	});
+	
+	var canvas = Ext.DomHelper.append(this.viewPort, {
+		tag: "div"
+	}, true);
+	canvas.applyStyles({
+		width: this.workspaceWidth + "px",
+		height: this.workspaceHeight + "px"
+	})
+	
+	uwm.Util.setElementUnselectable(this.viewPort.dom);
+	
+	/**
+	 * The draw2d workflow of this diagram.
+	 *
+	 * @private
+	 * @type uwm.diagram.UwmWorkflow
+	 */
+	this.workflow = new uwm.diagram.UwmWorkflow(canvas.id, this);
+	
+	this.workflow.diagram = this;
+	
+	this.workflow.setViewPort(this.viewPort.id);
+	
+	//this.workflow.scrollTo(this.workspaceHeight / 2, this.workspaceWidth / 2);
+	
+	var workflow = this.workflow;
+	var height = this.workspaceHeight / 2;
+	var width = this.workspaceWidth / 2;
+	
+	var self = this;
+	
+	setTimeout(function() {
+		workflow.scrollTo(height, width, true);
+	}, 500);
+	
+	/**
+	 * The Selection Lister of this diagram.
+	 *
+	 * @private
+	 * @type uwm.diagram.SelectionListener
+	 */
+	this.selectionListener = new uwm.diagram.SelectionListener(this);
+	this.workflow.addSelectionListener(this.selectionListener);
+	
+	/**
+	 * The Workflow Event Listener of this diagram.
+	 *
+	 *  @private
+	 *  @type uwm.diagram.WorkflowEventListener
+	 */
+	this.workflowEventListener = new uwm.diagram.WorkflowEventListener(this);
+	this.workflow.getCommandStack().addCommandStackEventListener(this.workflowEventListener);
+	
+	/**
+	 * The auto-layouter of this diagram.
+	 *
+	 * @private
+	 * @type uwm.diagram.autolayout.Layouter
+	 */
+	this.layouter = new uwm.diagram.autolayout.Layouter(this.workflow);
 }
 
 /**
@@ -199,16 +199,24 @@ uwm.diagram.Diagram.prototype.initWorkflow = function(){
  * @return <code>true</code> if a Model Object with <code>oid</code> is contained in this diagram. <code>false</code> otherwise.
  * @type boolean
  */
-uwm.diagram.Diagram.prototype.containsObject = function(modelObject){
-    return this.objects.containsKey(modelObject.getOid());
+uwm.diagram.Diagram.prototype.containsObject = function(modelObject) {
+	return this.objects.containsKey(modelObject.getOid());
 }
 
-uwm.diagram.Diagram.prototype.isPropertyDisplay = function(){
-    return this.propertyDisplayEnabled;
+uwm.diagram.Diagram.prototype.scrollToObject = function(modelObject) {
+	var figure = this.figures.get(modelObject.getOid());
+	var graphics = figure.getGraphics();
+	var canvas = this.viewPort.getSize();
+	
+	this.getWorkflow().scrollTo(graphics.x - canvas.width / 2 + graphics.getWidth() / 2, graphics.y - canvas.height / 2 + graphics.getHeight() / 2);
 }
 
-uwm.diagram.Diagram.prototype.isEventHandler = function(){
-    return this.eventHandlerEnabled;
+uwm.diagram.Diagram.prototype.isPropertyDisplay = function() {
+	return this.propertyDisplayEnabled;
+}
+
+uwm.diagram.Diagram.prototype.isEventHandler = function() {
+	return this.eventHandlerEnabled;
 }
 
 /**
@@ -217,8 +225,8 @@ uwm.diagram.Diagram.prototype.isEventHandler = function(){
  * @return The tab of this diagram.
  * @type uwm.diagram.DiagramTab
  */
-uwm.diagram.Diagram.prototype.getTab = function(){
-    return this.tab;
+uwm.diagram.Diagram.prototype.getTab = function() {
+	return this.tab;
 }
 
 /**
@@ -226,18 +234,18 @@ uwm.diagram.Diagram.prototype.getTab = function(){
  *
  * @private
  */
-uwm.diagram.Diagram.prototype.initDropZone = function(){
-    var self = this;
-    
-    /**
-     * The drop zone of this diagram.
-     *
-     * @private
-     * @type uwm.diagram.DropZone
-     */
-    this.dropZone = new uwm.diagram.DropZone(this.viewPort, {
-        diagram: this
-    });
+uwm.diagram.Diagram.prototype.initDropZone = function() {
+	var self = this;
+	
+	/**
+	 * The drop zone of this diagram.
+	 *
+	 * @private
+	 * @type uwm.diagram.DropZone
+	 */
+	this.dropZone = new uwm.diagram.DropZone(this.viewPort, {
+		diagram: this
+	});
 }
 
 /**
@@ -245,72 +253,72 @@ uwm.diagram.Diagram.prototype.initDropZone = function(){
  *
  * @private
  */
-uwm.diagram.Diagram.prototype.loadFigures = function(){
-    this.propertyDisplayEnabled = false;
-    this.eventHandlerEnabled = false;
+uwm.diagram.Diagram.prototype.loadFigures = function() {
+	this.propertyDisplayEnabled = false;
+	this.eventHandlerEnabled = false;
 	
 	//workaround: shows over all tabs
 	this.loadMask = new Ext.LoadMask(this.tab.container);
 	this.loadMask.show();
-    
-    var self = this;
-    
-    uwm.model.ModelContainer.getInstance().loadByOid(this.getOid(), function(modelNode){
-        self.handleLoaded();
-    }, 1);
+	
+	var self = this;
+	
+	uwm.model.ModelContainer.getInstance().loadByOid(this.getOid(), function(modelNode) {
+		self.handleLoaded();
+	}, 1);
 }
 
-uwm.diagram.Diagram.prototype.handleLoaded = function(){
-    this.figuresToLoad = 0;
-    
-    for (i in this.childOids) {
-        if (!(this.childOids[i] instanceof Function)) {
-            var figure = uwm.model.ModelContainer.getInstance().getByOid(this.childOids[i]);
-            
-            var self = this;
-            
-            var parentOids = figure.getParentOids();
-            
-            for (var j in parentOids) {
-                var parentOid = parentOids[j];
-                
-                if (!(parentOid instanceof Function) && parentOid != this.getOid()) {
-                    this.figures.add(parentOid, figure);
-                    this.figuresToLoad++;
-                    
-                    uwm.model.ModelContainer.getInstance().loadByOid(parentOid, function(modelObject){
-                        self.handleLoadedObject(modelObject);
-                    }, 1);
-                }
-            }
-        }
-    }
+uwm.diagram.Diagram.prototype.handleLoaded = function() {
+	this.figuresToLoad = 0;
+	
+	for (i in this.childOids) {
+		if (!(this.childOids[i] instanceof Function)) {
+			var figure = uwm.model.ModelContainer.getInstance().getByOid(this.childOids[i]);
+			
+			var self = this;
+			
+			var parentOids = figure.getParentOids();
+			
+			for (var j in parentOids) {
+				var parentOid = parentOids[j];
+				
+				if (!(parentOid instanceof Function) && parentOid != this.getOid()) {
+					this.figures.add(parentOid, figure);
+					this.figuresToLoad++;
+					
+					uwm.model.ModelContainer.getInstance().loadByOid(parentOid, function(modelObject) {
+						self.handleLoadedObject(modelObject);
+					}, 1);
+				}
+			}
+		}
+	}
 }
 
-uwm.diagram.Diagram.prototype.handleLoadedObject = function(modelObject){
-    var figure = this.figures.get(modelObject.getOid());
-    
-    figure.load(modelObject, this);
-    
-    this.objects.add(modelObject.getOid(), modelObject);
-    
-    this.establishExistingConnections(modelObject, modelObject.getParentOids());
-    this.establishExistingConnections(modelObject, modelObject.getChildOids());
-    
-    this.figuresToLoad--;
-    
-    if (this.figuresToLoad == 0) {
-        this.propertyDisplayEnabled = true;
-        this.eventHandlerEnabled = true;
+uwm.diagram.Diagram.prototype.handleLoadedObject = function(modelObject) {
+	var figure = this.figures.get(modelObject.getOid());
+	
+	figure.load(modelObject, this);
+	
+	this.objects.add(modelObject.getOid(), modelObject);
+	
+	this.establishExistingConnections(modelObject, modelObject.getParentOids());
+	this.establishExistingConnections(modelObject, modelObject.getChildOids());
+	
+	this.figuresToLoad--;
+	
+	if (this.figuresToLoad == 0) {
+		this.propertyDisplayEnabled = true;
+		this.eventHandlerEnabled = true;
 		this.loadMask.hide();
-    }
+	}
 }
 
-uwm.diagram.Diagram.prototype.establishExistingConnections = function(newObject, list){
-    if (list) {
-        for (var i = 0; i < list.length; i++) {
-            var connectedObject = this.objects.get(list[i]);
-            
+uwm.diagram.Diagram.prototype.establishExistingConnections = function(newObject, list) {
+	if (list) {
+		for (var i = 0; i < list.length; i++) {
+			var connectedObject = this.objects.get(list[i]);
+			
 			if (!connectedObject) {
 				var childObject = uwm.model.ModelContainer.getInstance().getByOid(list[i]);
 				if (childObject instanceof uwm.model.Relation) {
@@ -324,42 +332,42 @@ uwm.diagram.Diagram.prototype.establishExistingConnections = function(newObject,
 					}
 				}
 			}
-
-            if (connectedObject) {
-                var newFigure = this.figures.get(newObject.getOid());
-                var connectedFigure = this.figures.get(connectedObject.getOid());
-                
-                var newPort = newFigure.getGraphics().getPorts().get(0);
-                var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
-                
-                this.createConnection(newObject, connectedObject, newPort, connectedPort);
-            }
-        }
-    }
+			
+			if (connectedObject) {
+				var newFigure = this.figures.get(newObject.getOid());
+				var connectedFigure = this.figures.get(connectedObject.getOid());
+				
+				var newPort = newFigure.getGraphics().getPorts().get(0);
+				var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
+				
+				this.createConnection(newObject, connectedObject, newPort, connectedPort);
+			}
+		}
+	}
 }
 
-uwm.diagram.Diagram.prototype.createConnection = function(sourceObject, targetObject, sourcePort, targetPort){
-    if (sourceObject.connectableWith(targetObject)) {
-        var connectionInfo = sourceObject.getModelNodeClass().getConnectionInfo(targetObject.getModelNodeClass());
-        
-        var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
-        
-        var startPort;
-        var endPort;
-        
-        if (connectionInfo.invert) {
-            startPort = targetPort;
-            endPort = sourcePort;
-        }
-        else {
-            startPort = sourcePort;
-            endPort = targetPort;
-        }
-        
-        var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
-        command.setConnection(new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators));
-        this.workflow.getCommandStack().execute(command);
-    }
+uwm.diagram.Diagram.prototype.createConnection = function(sourceObject, targetObject, sourcePort, targetPort) {
+	if (sourceObject.connectableWith(targetObject)) {
+		var connectionInfo = sourceObject.getModelNodeClass().getConnectionInfo(targetObject.getModelNodeClass());
+		
+		var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
+		
+		var startPort;
+		var endPort;
+		
+		if (connectionInfo.invert) {
+			startPort = targetPort;
+			endPort = sourcePort;
+		}
+		else {
+			startPort = sourcePort;
+			endPort = targetPort;
+		}
+		
+		var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
+		command.setConnection(new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators));
+		this.workflow.getCommandStack().execute(command);
+	}
 }
 
 /**
@@ -369,25 +377,25 @@ uwm.diagram.Diagram.prototype.createConnection = function(sourceObject, targetOb
  * @return Array of proper connection decorators.
  * @type Array
  */
-uwm.diagram.Diagram.prototype.getConnectionTypeDecorators = function(connectionType){
-    var result = new Array();
-    
-    switch (connectionType) {
-        case "aggregation":
-            result.source = new uwm.connection.OpenDiamondDecorator();
-            result.target = new uwm.connection.ArrowDecorator();
-            break;
-            
-        case "composition":
-            result.source = new uwm.connection.FilledDiamondDecorator();
-            result.target = new uwm.connection.ArrowDecorator();
-            break;
-            
-        default:
-            result.target = new uwm.connection.ArrowDecorator();
-    }
-    
-    return result;
+uwm.diagram.Diagram.prototype.getConnectionTypeDecorators = function(connectionType) {
+	var result = new Array();
+	
+	switch (connectionType) {
+		case "aggregation":
+			result.source = new uwm.connection.OpenDiamondDecorator();
+			result.target = new uwm.connection.ArrowDecorator();
+			break;
+			
+		case "composition":
+			result.source = new uwm.connection.FilledDiamondDecorator();
+			result.target = new uwm.connection.ArrowDecorator();
+			break;
+			
+		default:
+			result.target = new uwm.connection.ArrowDecorator();
+	}
+	
+	return result;
 }
 
 /**
@@ -396,8 +404,8 @@ uwm.diagram.Diagram.prototype.getConnectionTypeDecorators = function(connectionT
  * @return The draw2d workflow of this diagram.
  * @type uwm.diagram.UwmWorkflow
  */
-uwm.diagram.Diagram.prototype.getWorkflow = function(){
-    return this.workflow;
+uwm.diagram.Diagram.prototype.getWorkflow = function() {
+	return this.workflow;
 }
 
 /**
@@ -406,8 +414,8 @@ uwm.diagram.Diagram.prototype.getWorkflow = function(){
  * @return <code>true</code> if snap to objects is activated for this diagram, <code>false</code> otherwise.
  * @type boolean
  */
-uwm.diagram.Diagram.prototype.isSnapToObjects = function(){
-    return this.snapToObjects;
+uwm.diagram.Diagram.prototype.isSnapToObjects = function() {
+	return this.snapToObjects;
 }
 
 /**
@@ -415,15 +423,16 @@ uwm.diagram.Diagram.prototype.isSnapToObjects = function(){
  *
  * @param {boolean} snapToObjects <code>true</code> if object should snap to other objects, <code>false</code> if objects should not snap to other objects when moving.
  */
-uwm.diagram.Diagram.prototype.setSnapToObjects = function(snapToObjects){
-    this.snapToObjects = snapToObjects;
+uwm.diagram.Diagram.prototype.setSnapToObjects = function(snapToObjects) {
+	this.snapToObjects = snapToObjects;
+	this.workflow.setSnapToGeometry(snapToObjects);
 }
 
 /**
  * Starts the auto-layouter.
  */
-uwm.diagram.Diagram.prototype.doLayout = function(){
-    this.layouter.doLayout();
+uwm.diagram.Diagram.prototype.doLayout = function() {
+	this.layouter.doLayout();
 }
 
 /**
@@ -434,11 +443,11 @@ uwm.diagram.Diagram.prototype.doLayout = function(){
  * @return The position of the context menu in Ext format.
  * @type Object
  */
-uwm.diagram.Diagram.prototype.getContextMenuPosition = function(x, y){
-    var scroll = this.viewPort.getScroll();
-    var xy = this.viewPort.getXY();
-    
-    return [x - scroll.left + xy[0] + 2, y - scroll.top + xy[1] + 2];
+uwm.diagram.Diagram.prototype.getContextMenuPosition = function(x, y) {
+	var scroll = this.viewPort.getScroll();
+	var xy = this.viewPort.getXY();
+	
+	return [x - scroll.left + xy[0] + 2, y - scroll.top + xy[1] + 2];
 }
 
 /**
@@ -448,14 +457,14 @@ uwm.diagram.Diagram.prototype.getContextMenuPosition = function(x, y){
  * @param {int} x The draw2d x position to add the ModelObject at.
  * @param {int} y The draw2d x position to add the ModelObject at.
  */
-uwm.diagram.Diagram.prototype.addExistingObject = function(modelObject, x, y){
-    this.createdObjects.push({
-        modelClass: null,
-        x: x,
-        y: y
-    });
-    
-    uwm.model.ModelContainer.getInstance().createFigure(this, modelObject);
+uwm.diagram.Diagram.prototype.addExistingObject = function(modelObject, x, y) {
+	this.createdObjects.push({
+		modelClass: null,
+		x: x,
+		y: y
+	});
+	
+	uwm.model.ModelContainer.getInstance().createFigure(this, modelObject);
 }
 
 /**
@@ -467,14 +476,14 @@ uwm.diagram.Diagram.prototype.addExistingObject = function(modelObject, x, y){
  * @param {int} x The draw2d x position to add the ModelObject at.
  * @param {int} y The draw2d x position to add the ModelObject at.
  */
-uwm.diagram.Diagram.prototype.createNewObject = function(modelClass, x, y){
-    this.createdObjects.push({
-        modelClass: modelClass,
-        x: x,
-        y: y
-    });
-    
-    uwm.model.ModelContainer.getInstance().createFigure(this);
+uwm.diagram.Diagram.prototype.createNewObject = function(modelClass, x, y) {
+	this.createdObjects.push({
+		modelClass: modelClass,
+		x: x,
+		y: y
+	});
+	
+	uwm.model.ModelContainer.getInstance().createFigure(this);
 }
 
 /**
@@ -484,52 +493,50 @@ uwm.diagram.Diagram.prototype.createNewObject = function(modelClass, x, y){
  * @return the new Figure.
  * @type uwm.diagram.Figure
  */
-uwm.diagram.Diagram.prototype.getFigure = function(){
-    return new uwm.diagram.Figure(uwm.model.ModelNodeClassContainer.getInstance().getClass("Figure"));
+uwm.diagram.Diagram.prototype.getFigure = function() {
+	return new uwm.diagram.Figure(uwm.model.ModelNodeClassContainer.getInstance().getClass("Figure"));
 }
 
-uwm.diagram.Diagram.prototype.handleDeleteEvent = function(modelNode){
+uwm.diagram.Diagram.prototype.handleDeleteEvent = function(modelNode) {
 
 }
 
-uwm.diagram.Diagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel){
-    if (modelNode == this) {
-        this.tab.setTitle(this.getLabel());
-    }
-    else 
-        if (this.containsObject(modelNode)) {
-            var figure = this.figures.get(modelNode.getOid());
-            
-            figure.getGraphics().setLabel(modelNode.getLabel());
-        }
+uwm.diagram.Diagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel) {
+	if (modelNode == this) {
+		this.tab.setTitle(this.getLabel());
+	}
+	else if (this.containsObject(modelNode)) {
+		var figure = this.figures.get(modelNode.getOid());
+		
+		figure.getGraphics().setLabel(modelNode.getLabel());
+	}
 }
 
-uwm.diagram.Diagram.prototype.handleAssociateEvent = function(parentModelNode, childModelNode){
-    if (parentModelNode == this) {
-        var config = this.createdObjects[0];
-        
-        if (config.modelClass) {
-            uwm.model.ModelContainer.getInstance().createModelObject(config.modelClass.getUwmClassName(), this.containedPackage, childModelNode);
-        }
-    }
-    else 
-        if (childModelNode instanceof uwm.diagram.Figure) {
-            this.objects.add(parentModelNode.getOid(), parentModelNode);
-            this.figures.add(parentModelNode.getOid(), childModelNode);
-            
-            var diagram = childModelNode.getDiagram();
-            
-            if (diagram == this) {
-                var config = this.createdObjects.shift();
-				
-                childModelNode.init(parentModelNode, config.x, config.y);
-
-                childModelNode.changeProperties({
-                    PositionX: config.x,
-                    PositionY: config.y,
-					Width: childModelNode.getGraphics().getWidth(),
-					Height: childModelNode.getGraphics().getHeight()
-                });
-            }
-        }
+uwm.diagram.Diagram.prototype.handleAssociateEvent = function(parentModelNode, childModelNode) {
+	if (parentModelNode == this) {
+		var config = this.createdObjects[0];
+		
+		if (config.modelClass) {
+			uwm.model.ModelContainer.getInstance().createModelObject(config.modelClass.getUwmClassName(), this.containedPackage, childModelNode);
+		}
+	}
+	else if (childModelNode instanceof uwm.diagram.Figure) {
+		this.objects.add(parentModelNode.getOid(), parentModelNode);
+		this.figures.add(parentModelNode.getOid(), childModelNode);
+		
+		var diagram = childModelNode.getDiagram();
+		
+		if (diagram == this) {
+			var config = this.createdObjects.shift();
+			
+			childModelNode.init(parentModelNode, config.x, config.y);
+			
+			childModelNode.changeProperties({
+				PositionX: config.x,
+				PositionY: config.y,
+				Width: childModelNode.getGraphics().getWidth(),
+				Height: childModelNode.getGraphics().getHeight()
+			});
+		}
+	}
 }

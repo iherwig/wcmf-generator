@@ -25,6 +25,28 @@ cwm.ChiRequirementClass = function() {
 		Name: true
 	};
 	
+	this.gridTabIconClass = "ChiRequirementTab";
+	this.gridTabTip = "Shows all <b>Requirements</b> within selected scope";
+	this.gridFields = [{
+		name: "oid",
+		mapping: "oid"
+	}, {
+		name: "Label",
+		mapping: "Label"
+	}, {
+		name: "Priority",
+		mapping: "Priority"
+	}];
+	this.gridColumns = [{
+		header: "Label",
+		dataIndex: "Label",
+		sortable: true
+	}, {
+		header: "Priority",
+		dataIndex: "Priority",
+		sortable: true
+	}];
+	
 	this.connectionInfo = {
 		"ChiFeature": {
 			label: "realized by",

@@ -25,6 +25,21 @@ cwm.ChiGoalClass = function() {
 		Name: true
 	};
 	
+	this.gridTabIconClass = "ChiGoalTab";
+	this.gridTabTip = "Shows all <b>Goals</b> within selected scope";
+	this.gridFields = [{
+		name: "oid",
+		mapping: "oid"
+	}, {
+		name: "Label",
+		mapping: "Label"
+	}];
+	this.gridColumns = [{
+		header: "Label",
+		dataIndex: "Label",
+		sortable: true
+	}];
+	
 	this.connectionInfo = {
 		"ChiGoal": {
 			label: "depends on",

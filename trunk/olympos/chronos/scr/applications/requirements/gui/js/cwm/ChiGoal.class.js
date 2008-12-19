@@ -50,3 +50,10 @@ cwm.ChiGoal.prototype.populatePropertyForm = function(form) {
 	realForm.findField("last_editor").setValue(this.data.last_editor);
 	realForm.findField("modified").setValue(this.data.modified);
 }
+
+cwm.ChiGoal.prototype.getGridData = function() {
+	return {
+		oid: this.getOid(),
+		Label: this.getLabel()
+	}
+}

@@ -36,3 +36,19 @@ uwm.model.ModelNodeClass.prototype.getFigureClass = function() {
 uwm.model.ModelClass.prototype.getConnectionInfo = function(otherClass) {
 	return this.connectionInfo[otherClass.getUwmClassName()];
 }
+
+uwm.model.ModelNodeClass.prototype.getGridTabIconClass = function() {
+	return this.gridTabIconClass;
+}
+
+uwm.model.ModelNodeClass.prototype.getGridTabTip = function() {
+	return this.gridTabTip;
+}
+
+uwm.model.ModelNodeClass.prototype.getGridFields = function() {
+	return this.gridFields;
+}
+
+uwm.model.ModelNodeClass.prototype.getGridColumns = function() {
+	return this.gridColumns;
+}

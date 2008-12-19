@@ -39,7 +39,12 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 			}, {
 				text: "Delete from model",
 				handler: function(item, e) {
-					self.deleteFromModel(item.e);
+					self.deleteFromModel(item, e);
+				}
+			}, {
+				text: "Select as grid scope",
+				handler: function(item, e) {
+					self.selectAsScope(item, e);
 				}
 			}]
 		});
@@ -49,5 +54,9 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 	
 	addPackage: function(self, e) {
 		uwm.model.ModelContainer.getInstance().createPackage(this.getModelNode());
+	},
+	
+	selectAsScope: function(self, e) {
+		uwm.objectgrid.ObjectGridContainer.getInstance().loadScope(this.modelNode);
 	}
 });

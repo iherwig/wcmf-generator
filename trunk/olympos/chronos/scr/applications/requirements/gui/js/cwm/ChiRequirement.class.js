@@ -52,3 +52,11 @@ cwm.ChiRequirement.prototype.populatePropertyForm = function(form) {
 	realForm.findField("last_editor").setValue(this.data.last_editor);
 	realForm.findField("modified").setValue(this.data.modified);
 }
+
+cwm.ChiRequirement.prototype.getGridData = function() {
+	return {
+		oid: this.getOid(),
+		Label: this.getLabel(),
+		Priority: this.data.Priority
+	}
+}

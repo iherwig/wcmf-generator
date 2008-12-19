@@ -27,15 +27,10 @@ Ext.extend(uwm.objecttree.ObjectNode, uwm.objecttree.Node, {
 					self.showInDiagram(item, e);
 				}
 			}, {
+				id: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID,
 				text: "Show in grid",
 				handler: function(item, e) {
 					self.showInGrid(item.e);
-				}
-			}, {
-				id: uwm.objecttree.ObjectNode.CONTEXTMENU_DELETE_FROM_DIAGRAM_ID,
-				text: "Delete from diagram",
-				handler: function(item, e) {
-					self.deleteFromDiagram(item, e);
 				}
 			}, {
 				text: "Delete from model",
@@ -50,32 +45,33 @@ Ext.extend(uwm.objecttree.ObjectNode, uwm.objecttree.Node, {
 	
 	showContextMenu: function(self, e) {
 		var showInDiagram = this.contextMenu.items.get(uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID);
-		var deleteFromDiagram = this.contextMenu.items.get(uwm.objecttree.ObjectNode.CONTEXTMENU_DELETE_FROM_DIAGRAM_ID);
+		var showInGrid = this.contextMenu.items.get(uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID);
 		
 		var isInDiagram = this.containedInCurrentDiagram();
-		
-		showInDiagram.disabled = !isInDiagram;
-		deleteFromDiagram.disabled = !isInDiagram;
+		showInDiagram.setDisabled(!isInDiagram);
+
+		var isGridAvailable = this.gridAvailable();
+		showInGrid.setDisabled(!isGridAvailable);
 		
 		uwm.objecttree.ObjectNode.superclass.showContextMenu(self, e);
 	},
 	
 	containedInCurrentDiagram: function() {
-		return false;
+		return uwm.diagram.DiagramContainer.getInstance().isModelObjectContainedInCurrentDiagram(this.modelNode);
+	},
+	
+	gridAvailable: function() {
+		return uwm.objectgrid.ObjectGridContainer.getInstance().isGridAvailable(this.modelNode);
 	},
 	
 	showInDiagram: function(self, e) {
-		alert("TODO: Show in Diagram");
+		uwm.diagram.DiagramContainer.getInstance().getCurrentDiagram().scrollToObject(this.modelNode);
 	},
 	
 	showInGrid: function(self, e) {
-		alert("TODO: Show in Grid");
+		uwm.objectgrid.ObjectGridContainer.getInstance().selectRow(this.modelNode);
 	},
-	
-	deleteFromDiagram: function(self, e) {
-		alert("TODO: Delete from Diagram");
-	}
 });
 
 uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID = "showInDiagram";
-uwm.objecttree.ObjectNode.CONTEXTMENU_DELETE_FROM_DIAGRAM_ID = "deleteFromDiagram";
+uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID = "showInGrid";
