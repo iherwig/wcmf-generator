@@ -58,6 +58,6 @@ Ext.extend(uwm.objecttree.Node, Ext.tree.AsyncTreeNode, {
 	},
 	
 	showProperties: function(self, e) {
-		uwm.ui.PropertyContainer.getInstance().showProperty(this.getModelNode());
+		uwm.property.PropertyContainer.getInstance().showProperty(this.getModelNode());
 	}
 });

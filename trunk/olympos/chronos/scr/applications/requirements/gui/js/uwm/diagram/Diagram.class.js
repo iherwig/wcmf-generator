@@ -382,17 +382,17 @@ uwm.diagram.Diagram.prototype.getConnectionTypeDecorators = function(connectionT
 	
 	switch (connectionType) {
 		case "aggregation":
-			result.source = new uwm.connection.OpenDiamondDecorator();
+			result.source = new uwm.graphics.connection.OpenDiamondDecorator();
 			result.target = new uwm.connection.ArrowDecorator();
 			break;
 			
 		case "composition":
-			result.source = new uwm.connection.FilledDiamondDecorator();
-			result.target = new uwm.connection.ArrowDecorator();
+			result.source = new uwm.graphics.connection.FilledDiamondDecorator();
+			result.target = new uwm.graphics.connection.ArrowDecorator();
 			break;
 			
 		default:
-			result.target = new uwm.connection.ArrowDecorator();
+			result.target = new uwm.graphics.connection.ArrowDecorator();
 	}
 	
 	return result;

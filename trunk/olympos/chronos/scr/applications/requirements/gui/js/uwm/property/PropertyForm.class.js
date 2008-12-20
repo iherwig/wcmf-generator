@@ -9,9 +9,9 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("uwm.ui");
+Ext.namespace("uwm.property");
 
-uwm.ui.PropertyForm = Ext.extend(Ext.FormPanel, {
+uwm.property.PropertyForm = Ext.extend(Ext.FormPanel, {
 	initComponent: function() {
 		Ext.apply(this, {
 			labelWidth: 90,
@@ -25,6 +25,6 @@ uwm.ui.PropertyForm = Ext.extend(Ext.FormPanel, {
 			msgTarget: "side"
 		})
 		
-		uwm.ui.PropertyForm.superclass.initComponent.apply(this, arguments);
+		uwm.property.PropertyForm.superclass.initComponent.apply(this, arguments);
 	}
 })

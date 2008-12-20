@@ -9,12 +9,12 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("uwm.ui");
+Ext.namespace("uwm.property");
 
-uwm.ui.HtmlEditor = function(config) {
+uwm.property.HtmlEditor = function(config) {
 	var self = this;
 	
-	uwm.ui.HtmlEditor.superclass.constructor.call(this, Ext.apply(this, {
+	uwm.property.HtmlEditor.superclass.constructor.call(this, Ext.apply(this, {
 		enableAlignments: false,
 		enableColors: false,
 		enableFont: false,
@@ -32,10 +32,10 @@ uwm.ui.HtmlEditor = function(config) {
 	this.modelNode = config.modelNode;
 }
 
-Ext.extend(uwm.ui.HtmlEditor, Ext.form.HtmlEditor);
+Ext.extend(uwm.property.HtmlEditor, Ext.form.HtmlEditor);
 
-uwm.ui.HtmlEditor.prototype.render = function(container, position) {
-	uwm.ui.HtmlEditor.superclass.render.apply(this, arguments);
+uwm.property.HtmlEditor.prototype.render = function(container, position) {
+	uwm.property.HtmlEditor.superclass.render.apply(this, arguments);
 	
 	if (this.toolTipText) {
 		this.toolTip = new Ext.ToolTip({
@@ -45,7 +45,7 @@ uwm.ui.HtmlEditor.prototype.render = function(container, position) {
 	}
 }
 
-uwm.ui.HtmlEditor.prototype.fieldChanged = function(field) {
+uwm.property.HtmlEditor.prototype.fieldChanged = function(field) {
 	if (this.isDirty()) {
 		var tmp = new Object();
 		tmp[this.getName()] = this.getValue();

@@ -125,7 +125,7 @@ uwm.objectgrid.ObjectGrid.prototype.showProperties = function(grid, rowIndex, co
 	var oid = this.getStore().getAt(rowIndex).get("oid");
 	var modelObject = uwm.model.ModelContainer.getInstance().getByOid(oid);
 	
-	uwm.ui.PropertyContainer.getInstance().showProperty(modelObject);
+	uwm.property.PropertyContainer.getInstance().showProperty(modelObject);
 }
 
 uwm.objectgrid.ObjectGrid.prototype.containedInCurrentDiagram = function() {
