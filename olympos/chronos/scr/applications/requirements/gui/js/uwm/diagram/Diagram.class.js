@@ -293,6 +293,12 @@ uwm.diagram.Diagram.prototype.handleLoaded = function() {
 			}
 		}
 	}
+	
+	if (this.figuresToLoad == 0) {
+		this.loadMask.hide();
+		this.propertyDisplayEnabled = true;
+		this.eventHandlerEnabled = true;
+	}
 }
 
 uwm.diagram.Diagram.prototype.handleLoadedObject = function(modelObject) {
