@@ -115,7 +115,6 @@ uwm.persistency.Json.prototype.disassociate = function(parentOid, childOid, succ
 		usr_action: "disassociate",
 		oid: parentOid,
 		associateoids: this.array2CommaList(childOid),
-		associateAs: direction
 	}, successHandler, errorHandler);
 }
 

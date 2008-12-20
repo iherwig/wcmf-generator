@@ -504,7 +504,13 @@ uwm.diagram.Diagram.prototype.getFigure = function() {
 }
 
 uwm.diagram.Diagram.prototype.handleDeleteEvent = function(modelNode) {
-
+	var figure = this.figures.get(modelNode.getOid());
+	
+	if (figure) {
+		this.figures.removeKey(modelNode.getOid());
+		this.objects.removeKey(modelNode.getOid());
+		figure.remove();
+	}
 }
 
 uwm.diagram.Diagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel) {
@@ -522,7 +528,7 @@ uwm.diagram.Diagram.prototype.handleAssociateEvent = function(parentModelNode, c
 	if (parentModelNode == this) {
 		var config = this.createdObjects[0];
 		
-		if (config.modelClass) {
+		if (config && config.modelClass) {
 			uwm.model.ModelContainer.getInstance().createModelObject(config.modelClass.getUwmClassName(), this.containedPackage, childModelNode);
 		}
 	}

@@ -122,17 +122,17 @@ uwm.graphics.connection.BaseConnection.prototype.buildContextMenu = function() {
 	 * @type Ext.menu.Menu
 	 */
 	this.uwmContextMenu = new Ext.menu.Menu({
-		items: ([new Ext.menu.Item({
+		items: [/*new Ext.menu.Item({
 			text: "Delete from diagram",
 			handler: function(item, e) {
 				self.deleteFromDiagram(item, e);
 			}
-		}), new Ext.menu.Item({
+		}),*/ new Ext.menu.Item({
 			text: "Delete from model",
 			handler: function(item, e) {
 				self.deleteFromModel(item, e);
 			}
-		})])
+		})]
 	});
 }
 
@@ -156,6 +156,5 @@ uwm.graphics.connection.BaseConnection.prototype.deleteFromDiagram = function(it
  * @param {Ext.EventObject} e The Ext Event.
  */
 uwm.graphics.connection.BaseConnection.prototype.deleteFromModel = function(item, e) {
-	alert("TODO: Delete connection from model");
-	//uwm.deleteConnectionFromModel(connection.sourcePort.parentNode.getOid(), connection.targetPort.parentNode.getOid());
+	this.getWorkflow().getCommandStack().execute(new draw2d.CommandDelete(this));
 }
