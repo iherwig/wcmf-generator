@@ -43,11 +43,6 @@ uwm.hierarchytree.Loader = Ext.extend(Ext.tree.TreeLoader, {
         
         this.attachFollowers(currNode, modelNode);
         
-        /*
-         if (node instanceof String) {
-         this.tree.root.firstChild.render();
-         }
-         */
         if (callback instanceof Function) {
             callback(this, node);
         }
