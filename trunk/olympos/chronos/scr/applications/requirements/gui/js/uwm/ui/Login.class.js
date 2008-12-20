@@ -30,7 +30,7 @@ uwm.ui.Login = function(config) {
 			}
 		}],
 		
-		items: [new Ext.BoxComponent({
+		items: [/*new Ext.BoxComponent({
 			autoEl: {
 				tag: "div",
 				cls: "cwm-logo-container",
@@ -46,7 +46,7 @@ uwm.ui.Login = function(config) {
 					html: "http://sourceforge.net/projects/olympos/"
 				}]
 			}
-		}), new Ext.form.TextField({
+		}),*/ new Ext.form.TextField({
 			fieldLabel: 'Login',
 			name: 'login',
 			allowBlank: false,
