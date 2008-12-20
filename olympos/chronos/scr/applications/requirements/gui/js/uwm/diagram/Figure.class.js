@@ -17,8 +17,8 @@ Ext.namespace("uwm.diagram");
  * @constructor
  * @param {uwm.model.ModelNodeClass} modelNodeClass The instance of {@link uwm.diagram.FigureClass}.
  */
-uwm.diagram.Figure = function(modelNodeClass){
-    uwm.model.ModelNode.call(this, modelNodeClass);
+uwm.diagram.Figure = function(modelNodeClass) {
+	uwm.model.ModelNode.call(this, modelNodeClass);
 }
 
 Ext.extend(uwm.diagram.Figure, uwm.model.ModelNode);
@@ -31,35 +31,35 @@ Ext.extend(uwm.diagram.Figure, uwm.model.ModelNode);
  * @param {int} x X position where to create the Figure.
  * @param {int} y Y position where to create the Figure.
  */
-uwm.diagram.Figure.prototype.createNewObject = function(diagram, modelClass, x, y){
-    /**
-     * The associated Diagram.
-     *
-     * @private
-     * @type uwm.diagram.Diagram
-     */
-    this.diagram = diagram;
-    
-    /**
-     * The associated ModelObject.
-     *
-     * @private
-     * @type uwm.model.ModelObject
-     */
-    this.modelObject = eval("new " + modelClass.getInstanceClassName() + "(modelClass)");
-    
-    var workflow = diagram.getWorkflow();
-    var compartment = workflow.getBestCompartmentFigure(x, y);
-    
-    /**
-     * The graphical (draw2d) figure.
-     *
-     * @private
-     * @type uwm.graphics.figure.BaseFigure
-     */
-    this.graphics = this.getFigure(modelClass, modelClass.getDefaultLabel());
-    
-    workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
+uwm.diagram.Figure.prototype.createNewObject = function(diagram, modelClass, x, y) {
+	/**
+	 * The associated Diagram.
+	 *
+	 * @private
+	 * @type uwm.diagram.Diagram
+	 */
+	this.diagram = diagram;
+	
+	/**
+	 * The associated ModelObject.
+	 *
+	 * @private
+	 * @type uwm.model.ModelObject
+	 */
+	this.modelObject = eval("new " + modelClass.getInstanceClassName() + "(modelClass)");
+	
+	var workflow = diagram.getWorkflow();
+	var compartment = workflow.getBestCompartmentFigure(x, y);
+	
+	/**
+	 * The graphical (draw2d) figure.
+	 *
+	 * @private
+	 * @type uwm.graphics.figure.BaseFigure
+	 */
+	this.graphics = this.getFigure(modelClass, modelClass.getDefaultLabel());
+	
+	workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
 }
 
 /**
@@ -69,16 +69,16 @@ uwm.diagram.Figure.prototype.createNewObject = function(diagram, modelClass, x, 
  * @param {int} x X position where to create the Figure.
  * @param {int} y Y position where to create the Figure.
  */
-uwm.diagram.Figure.prototype.init = function(modelObject, x, y){
-    this.modelObject = modelObject;
-    
-    var workflow = this.diagram.getWorkflow();
-    
-    var compartment = workflow.getBestCompartmentFigure(x, y);
-    
-    this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
-    
-    workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
+uwm.diagram.Figure.prototype.init = function(modelObject, x, y) {
+	this.modelObject = modelObject;
+	
+	var workflow = this.diagram.getWorkflow();
+	
+	var compartment = workflow.getBestCompartmentFigure(x, y);
+	
+	this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
+	
+	workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
 }
 
 uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
@@ -91,10 +91,10 @@ uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
 	var workflow = diagram.getWorkflow();
 	var compartment = workflow.getBestCompartmentFigure(x, y);
 	
-    this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
+	this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
 	this.graphics.setDimension(this.getWidth(), this.getHeight());
-    
-    workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
+	
+	workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
 }
 
 /**
@@ -106,8 +106,8 @@ uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
  * @return The created ModelObject.
  * @type uwm.model.ModelObject
  */
-uwm.diagram.Figure.prototype.getFigure = function(modelClass, label){
-    return eval("new " + modelClass.getFigureClass() + "(label, this)");
+uwm.diagram.Figure.prototype.getFigure = function(modelClass, label) {
+	return eval("new " + modelClass.getFigureClass() + "(label, this)");
 }
 
 /**
@@ -116,8 +116,8 @@ uwm.diagram.Figure.prototype.getFigure = function(modelClass, label){
  * @return The ModelObject associated with this Figure.
  * @type uwm.model.ModelObject
  */
-uwm.diagram.Figure.prototype.getModelObject = function(){
-    return this.modelObject;
+uwm.diagram.Figure.prototype.getModelObject = function() {
+	return this.modelObject;
 }
 
 /**
@@ -126,8 +126,8 @@ uwm.diagram.Figure.prototype.getModelObject = function(){
  * @return The Diagram associated with this Figure.
  * @type uwm.diagram.Diagram
  */
-uwm.diagram.Figure.prototype.getDiagram = function(){
-    return this.diagram;
+uwm.diagram.Figure.prototype.getDiagram = function() {
+	return this.diagram;
 }
 
 /**
@@ -136,8 +136,8 @@ uwm.diagram.Figure.prototype.getDiagram = function(){
  * @return The graphics associated with this Figure.
  * @type uwm.graphics.figure.BaseFigure
  */
-uwm.diagram.Figure.prototype.getGraphics = function(){
-    return this.graphics;
+uwm.diagram.Figure.prototype.getGraphics = function() {
+	return this.graphics;
 }
 
 uwm.diagram.Figure.prototype.getPositionX = function() {
@@ -161,15 +161,19 @@ uwm.diagram.Figure.prototype.getHeight = function() {
  *
  * @see uwm.modeltree.ModelTree
  */
-uwm.diagram.Figure.prototype.showInModelTree = function(){
-		uwm.modeltree.ModelTree.getInstance().markNodeByOid(this.getModelObject().getOid());
+uwm.diagram.Figure.prototype.showInModelTree = function() {
+	uwm.modeltree.ModelTree.getInstance().markNodeByOid(this.getModelObject().getOid());
+}
+
+uwm.diagram.Figure.prototype.gridAvailable = function() {
+	return uwm.objectgrid.ObjectGridContainer.getInstance().isGridAvailable(this.getModelObject());
 }
 
 /**
  * Shows the associated ModelObject in Grid.
  */
-uwm.diagram.Figure.prototype.showInGrid = function(){
-    alert("TODO: Show in gird");
+uwm.diagram.Figure.prototype.showInGrid = function() {
+	uwm.objectgrid.ObjectGridContainer.getInstance().selectRow(this.getModelObject());
 }
 
 /**
@@ -177,8 +181,8 @@ uwm.diagram.Figure.prototype.showInGrid = function(){
  *
  * @see uwm.hierarchytree.HierarchyTree
  */
-uwm.diagram.Figure.prototype.showInHierarchy = function(){
-    uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelObject().getOid());
+uwm.diagram.Figure.prototype.showInHierarchy = function() {
+	uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelObject().getOid());
 }
 
 /**
@@ -186,13 +190,13 @@ uwm.diagram.Figure.prototype.showInHierarchy = function(){
  *
  * @see uwm.diagram.Diagram
  */
-uwm.diagram.Figure.prototype.deleteFromDiagram = function(){
-    alert("TODO: Delete from diagram");
+uwm.diagram.Figure.prototype.deleteFromDiagram = function() {
+	alert("TODO: Delete from diagram");
 }
 
 /**
  * Deletes this Figure and the associated ModelObject from Model.
  */
-uwm.diagram.Figure.prototype.deleteFromModel = function(){
+uwm.diagram.Figure.prototype.deleteFromModel = function() {
 	uwm.model.ModelContainer.getInstance().deleteByModelNode(this.getModelObject());
 }
