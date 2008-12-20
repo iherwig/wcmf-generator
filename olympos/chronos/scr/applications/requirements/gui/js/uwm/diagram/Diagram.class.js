@@ -504,12 +504,16 @@ uwm.diagram.Diagram.prototype.getFigure = function() {
 }
 
 uwm.diagram.Diagram.prototype.handleDeleteEvent = function(modelNode) {
-	var figure = this.figures.get(modelNode.getOid());
-	
-	if (figure) {
-		this.figures.removeKey(modelNode.getOid());
-		this.objects.removeKey(modelNode.getOid());
-		figure.remove();
+	if (modelNode == this) {
+		uwm.diagram.DiagramContainer.getInstance().getTabPanel().remove(this.tab);
+	} else {
+		var figure = this.figures.get(modelNode.getOid());
+		
+		if (figure) {
+			this.figures.removeKey(modelNode.getOid());
+			this.objects.removeKey(modelNode.getOid());
+			figure.remove();
+		}
 	}
 }
 
