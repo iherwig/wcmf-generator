@@ -9,18 +9,14 @@
  */Ext.namespace("uwm");
 
 uwm.Session = function() {
-	this.sid = uwm.data.sid;
-	this.jsonUrl = uwm.config.jsonUrl;
+	this.sid = null;
+	this.jsonUrl = uwm.Config.jsonUrl;
 	this.helpUrl = "help/index.html";
 	this.persistencyClass = "uwm.persistency.Json";
 }
 
-uwm.Session.getInstance = function() {
-	if (!uwm.Session.instance) {
-		uwm.Session.instance = new uwm.Session();
-	}
-	
-	return uwm.Session.instance;
+uwm.Session.prototype.init = function(sid) {
+	this.sid = sid;
 }
 
 uwm.Session.prototype.getSid = function() {
@@ -37,4 +33,12 @@ uwm.Session.prototype.getHelpUrl = function() {
 
 uwm.Session.prototype.getPersistencyClass = function() {
 	return this.persistencyClass;
+}
+
+uwm.Session.getInstance = function() {
+	if (!uwm.Session.instance) {
+		uwm.Session.instance = new uwm.Session();
+	}
+	
+	return uwm.Session.instance;
 }

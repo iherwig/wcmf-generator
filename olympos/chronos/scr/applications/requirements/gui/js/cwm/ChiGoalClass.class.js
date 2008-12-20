@@ -57,56 +57,56 @@ cwm.ChiGoalClass = function() {
 Ext.extend(cwm.ChiGoalClass, uwm.model.ModelClass);
 
 cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
-	return new uwm.ui.PropertyForm({
-		items: [new uwm.ui.TextField({
+	return new uwm.property.PropertyForm({
+		items: [new uwm.property.TextField({
 			fieldLabel: 'Priority',
 			name: 'Priority',
 			toolTip: "This is the tooltip for priority. It is quite long.",
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'Value_Name',
 			name: 'Value_Name',
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'Value_ammount',
 			name: 'Value_ammount',
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'Value_Goal',
 			name: 'Value_Goal',
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'Version',
 			name: 'Version',
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
 			modelNode: modelNode
-		}), new uwm.ui.HtmlEditor({
+		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			toolTip: "Notes is the ultimate E-Mail and workflow platform.",
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,
 			readOnly: true
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'creator',
 			name: 'creator',
 			modelNode: modelNode,
 			readOnly: true
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			readOnly: true
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'modified',
 			name: 'modified',
 			modelNode: modelNode,

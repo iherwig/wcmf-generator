@@ -205,7 +205,7 @@ uwm.graphics.figure.BaseFigure.prototype.createHTMLElement = function(){
     var item = draw2d.Figure.prototype.createHTMLElement.call(this);
     item.className = "uwmFigure";
     
-    uwm.setUnselectable(item);
+    uwm.Util.setElementUnselectable(item);
     
     return item;
 }

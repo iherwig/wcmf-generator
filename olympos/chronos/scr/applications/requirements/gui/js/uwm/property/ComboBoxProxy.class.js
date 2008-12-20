@@ -9,17 +9,17 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("uwm.ui");
+Ext.namespace("uwm.property");
 
-uwm.ui.ComboBoxProxy = function(config){
-    uwm.ui.ComboBoxProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
+uwm.property.ComboBoxProxy = function(config){
+    uwm.property.ComboBoxProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 	
 	this.listType = config.listType;
 }
 
-Ext.extend(uwm.ui.ComboBoxProxy, Ext.data.DataProxy);
+Ext.extend(uwm.property.ComboBoxProxy, Ext.data.DataProxy);
 
-uwm.ui.ComboBoxProxy.prototype.load = function(params, reader, callback, scope, arg){
+uwm.property.ComboBoxProxy.prototype.load = function(params, reader, callback, scope, arg){
     if (this.fireEvent("beforeload", this, params) !== false) {
         var self = this;
         
@@ -34,7 +34,7 @@ uwm.ui.ComboBoxProxy.prototype.load = function(params, reader, callback, scope, 
     }
 }
 
-uwm.ui.ComboBoxProxy.prototype.loadResponse = function(options, data, callback, scope, arg){
+uwm.property.ComboBoxProxy.prototype.loadResponse = function(options, data, callback, scope, arg){
     var records = new Array();
     
     for (var i = 0; i < data.objects.length; i++) {
@@ -54,7 +54,7 @@ uwm.ui.ComboBoxProxy.prototype.loadResponse = function(options, data, callback, 
     callback.call(scope, result, arg, true);
 }
 
-uwm.ui.ComboBoxProxy.prototype.loadFailed = function(options, data, errorMsg, callback, scope, arg){
+uwm.property.ComboBoxProxy.prototype.loadFailed = function(options, data, errorMsg, callback, scope, arg){
     this.fireEvent("loadexception", this, options, data);
     callback.call(scope, null, arg, false);
 }

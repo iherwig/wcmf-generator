@@ -26,39 +26,39 @@ uwm.diagram.DiagramClass = function() {
 Ext.extend(uwm.diagram.DiagramClass, uwm.model.ModelNodeClass);
 
 uwm.diagram.DiagramClass.prototype.getPropertyForm = function(modelNode) {
-	return new uwm.ui.PropertyForm({
-		items: [new uwm.ui.TextField({
+	return new uwm.property.PropertyForm({
+		items: [new uwm.property.TextField({
 			fieldLabel: 'Width',
 			name: 'Width',
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'Height',
 			name: 'Height',
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
 			modelNode: modelNode
-		}), new uwm.ui.HtmlEditor({
+		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			modelNode: modelNode
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,
 			readOnly: true
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'creator',
 			name: 'creator',
 			modelNode: modelNode,
 			readOnly: true
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			modelNode: modelNode,
 			readOnly: true
-		}), new uwm.ui.TextField({
+		}), new uwm.property.TextField({
 			fieldLabel: 'modified',
 			name: 'modified',
 			modelNode: modelNode,

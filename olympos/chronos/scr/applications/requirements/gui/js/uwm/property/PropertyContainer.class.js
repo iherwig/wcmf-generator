@@ -9,9 +9,9 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("uwm.ui");
+Ext.namespace("uwm.property");
 
-uwm.ui.PropertyContainer = Ext.extend(Ext.Panel, {
+uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
     initComponent: function(){
         Ext.apply(this, {
             region: "east",
@@ -23,9 +23,9 @@ uwm.ui.PropertyContainer = Ext.extend(Ext.Panel, {
             title: "Properties"
         })
         
-        uwm.ui.PropertyContainer.instance = this;
+        uwm.property.PropertyContainer.instance = this;
         
-        uwm.ui.PropertyContainer.superclass.initComponent.apply(this, arguments);
+        uwm.property.PropertyContainer.superclass.initComponent.apply(this, arguments);
         
         this.currentOid = null;
         
@@ -67,6 +67,6 @@ uwm.ui.PropertyContainer = Ext.extend(Ext.Panel, {
     }
 })
 
-uwm.ui.PropertyContainer.getInstance = function(){
-    return uwm.ui.PropertyContainer.instance;
+uwm.property.PropertyContainer.getInstance = function(){
+    return uwm.property.PropertyContainer.instance;
 }

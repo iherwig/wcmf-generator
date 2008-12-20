@@ -16,7 +16,7 @@ Ext.namespace("uwm.diagram");
  * 
  * @constructor
  * @param {uwm.diagram.Diagram} diagram The diagram of this Selection Listener.
- * @see uwm.ui.PropertyContainer
+ * @see uwm.property.PropertyContainer
  */
 uwm.diagram.SelectionListener = function(diagram) {
 	/**
@@ -36,7 +36,7 @@ uwm.diagram.SelectionListener = function(diagram) {
 uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
 	if (figure) {
 		if (this.diagram.isPropertyDisplay()) {
-			uwm.ui.PropertyContainer.getInstance().showProperty(figure.getFigure().getModelObject());
+			uwm.property.PropertyContainer.getInstance().showProperty(figure.getFigure().getModelObject());
 		}
 	}
 }
