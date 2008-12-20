@@ -156,6 +156,10 @@ uwm.diagram.Figure.prototype.getHeight = function() {
 	return parseInt(this.data.Height);
 }
 
+uwm.diagram.Figure.prototype.remove = function() {
+	this.diagram.getWorkflow().getCommandStack().execute(new draw2d.CommandDelete(this.graphics));
+}
+
 /**
  * Shows the associated ModelObject in Model Tree.
  *
@@ -191,7 +195,7 @@ uwm.diagram.Figure.prototype.showInHierarchy = function() {
  * @see uwm.diagram.Diagram
  */
 uwm.diagram.Figure.prototype.deleteFromDiagram = function() {
-	alert("TODO: Delete from diagram");
+	this.remove();
 }
 
 /**

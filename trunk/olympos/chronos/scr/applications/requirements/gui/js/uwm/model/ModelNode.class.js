@@ -164,3 +164,11 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject) {
 		uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
 	});
 }
+
+uwm.model.ModelNode.prototype.disassociate = function(parentModelObject) {
+	var self = this;
+	
+	uwm.persistency.Persistency.getInstance().disassociate(parentModelObject.getOid(), self.getOid(), false, function(request, data) {
+		uwm.event.EventBroker.getInstance().fireEvent("disassociate", parentModelObject, self);
+	});
+}

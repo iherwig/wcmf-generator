@@ -17,16 +17,16 @@ Ext.namespace("uwm.diagram");
  * @constructor
  * @param {uwm.diagram.Diagram} diagram The Diagram containing this listener.
  */
-uwm.diagram.WorkflowEventListener = function(diagram){
-    /**
-     * The containing Diagram.
-     *
-     * @private
-     * @type uwm.diagram.Diagram
-     */
-    this.diagram = diagram;
-    
-    draw2d.CommandStackEventListener.call(this);
+uwm.diagram.WorkflowEventListener = function(diagram) {
+	/**
+	 * The containing Diagram.
+	 *
+	 * @private
+	 * @type uwm.diagram.Diagram
+	 */
+	this.diagram = diagram;
+	
+	draw2d.CommandStackEventListener.call(this);
 }
 
 Ext.extend(uwm.diagram.WorkflowEventListener, draw2d.CommandStackEventListener);
@@ -37,41 +37,52 @@ Ext.extend(uwm.diagram.WorkflowEventListener, draw2d.CommandStackEventListener);
  * @private
  * @param {draw2d.Event} stackEvent The draw2d Event.
  */
-uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent){
-    if (this.diagram.isEventHandler()) {
-        if (stackEvent.isPostChangeEvent()) {
-            var command = stackEvent.getCommand();
-            if (command instanceof draw2d.CommandConnect) {
-                var source = command.source.getParent().getFigure().getModelObject();
-                var target = command.target.getParent().getFigure().getModelObject();
-                
-                var connectionInfo = source.getModelNodeClass().getConnectionInfo(target.getModelNodeClass());
-                
-                if (connectionInfo.invert) {
-                    source.associate(target);
-                }
-                else {
-                    target.associate(source);
-                }
-            }
-            else 
-                if (command instanceof draw2d.CommandMove) {
-                    var modelObject = command.figure.getFigure();
-                    
-                    modelObject.changeProperties({
-                        PositionX: command.newX,
-                        PositionY: command.newY
-                    });
-                }
-                else 
-                    if (command instanceof draw2d.CommandResize) {
-                        var modelObject = command.figure.getFigure();
-                        
-                        modelObject.changeProperties({
-                            Width: command.newWidth,
-                            Height: command.newHeight
-                        });
-                    }
-        }
-    }
+uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) {
+	if (this.diagram.isEventHandler()) {
+		if (stackEvent.isPostChangeEvent()) {
+			var command = stackEvent.getCommand();
+			
+			if (command instanceof draw2d.CommandConnect) {
+				var source = command.source.getParent().getFigure().getModelObject();
+				var target = command.target.getParent().getFigure().getModelObject();
+				
+				var connectionInfo = source.getModelNodeClass().getConnectionInfo(target.getModelNodeClass());
+				
+				if (connectionInfo.invert) {
+					source.associate(target);
+				} else {
+					target.associate(source);
+				}
+			} else if (command instanceof draw2d.CommandMove) {
+				var modelObject = command.figure.getFigure();
+				
+				modelObject.changeProperties({
+					PositionX: command.newX,
+					PositionY: command.newY
+				});
+			} else if (command instanceof draw2d.CommandResize) {
+				var modelObject = command.figure.getFigure();
+				
+				modelObject.changeProperties({
+					Width: command.newWidth,
+					Height: command.newHeight
+				});
+			} else if (command instanceof draw2d.CommandDelete) {
+				var figure = command.figure;
+				
+				if (figure instanceof uwm.graphics.figure.BaseFigure) {
+					uwm.model.ModelContainer.getInstance().deleteByModelNode(figure.getFigure());
+					
+					var oid = figure.getFigure().getModelObject().getOid();
+					this.diagram.figures.removeKey(oid);
+					this.diagram.objects.removeKey(oid);
+				} else {
+					var source = figure.getSource().getParent().getFigure().getModelObject();
+					var target = figure.getTarget().getParent().getFigure().getModelObject();
+					
+					source.disassociate(target);
+				}
+			}
+		}
+	}
 }
