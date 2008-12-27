@@ -204,3 +204,7 @@ uwm.diagram.Figure.prototype.deleteFromDiagram = function() {
 uwm.diagram.Figure.prototype.deleteFromModel = function() {
 	uwm.model.ModelContainer.getInstance().deleteByModelNode(this.getModelObject());
 }
+
+uwm.diagram.Figure.prototype.showHelp = function() {
+	uwm.ui.HelpViewer.getInstance().loadUrl(this.getModelObject().getModelNodeClass().getHelpUrl());
+}

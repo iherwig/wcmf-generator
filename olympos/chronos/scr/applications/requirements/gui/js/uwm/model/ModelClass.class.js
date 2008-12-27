@@ -25,6 +25,10 @@ uwm.model.ModelClass.prototype.getDescription = function() {
 	return this.description;
 }
 
+uwm.model.ModelClass.prototype.getHelpUrl = function() {
+	return this.helpUrl;
+}
+
 uwm.model.ModelClass.prototype.getFigureIcon = function() {
 	return this.figureIcon;
 }
