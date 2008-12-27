@@ -126,6 +126,12 @@ uwm.graphics.figure.BaseFigure.prototype.buildContextMenu = function() {
 			handler: function(tiem, e) {
 				figure.deleteFromModel();
 			}
+		}), new Ext.menu.Item({
+			text: "Help",
+			//iconCls: "uwm-help-icon",
+			handler: function(item, e) {
+				figure.showHelp(item, e);
+			}
 		})]
 	});
 }

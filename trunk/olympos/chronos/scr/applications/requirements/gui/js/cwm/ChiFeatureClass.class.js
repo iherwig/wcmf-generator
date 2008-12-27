@@ -20,6 +20,7 @@ cwm.ChiFeatureClass = function() {
 	this.figureIcon = "FigureChiFeature";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = "Feature Description";
+	this.helpUrl = "help/index.html#4.3.Feature|outline";
 	this.defaultLabel = "New Feature";
 	this.labelProperties = {
 		Name: true

@@ -20,6 +20,7 @@ cwm.ChiRequirementClass = function() {
 	this.figureIcon = "FigureChiRequirement";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = "Requirement Description";
+	this.helpUrl = "help/index.html#4.2.Requirement|outline";
 	this.defaultLabel = "New Requirement";
 	this.labelProperties = {
 		Name: true

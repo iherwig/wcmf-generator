@@ -20,6 +20,7 @@ cwm.ChiIssueClass = function() {
 	this.figureIcon = "FigureChiIssue";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = "Issue Description";
+	this.helpUrl = "help/index.html#4.4.Issue|outline";
 	this.defaultLabel = "New Issue";
 	this.labelProperties = {
 		Name: true

@@ -13,7 +13,17 @@ Ext.namespace("uwm.newobjects");
 
 uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 	initComponent: function(config) {
-	
+		var self = this;
+		
+		this.cellActions = new Ext.ux.grid.CellActions({
+			listeners: {
+				action: function(grid, record, action, value) {
+					self.helpClick(grid, record, action, value);
+				}
+			},
+			align: "left"
+		});
+		
 		Ext.apply(this, {
 			region: "north",
 			collapsible: true,
@@ -28,6 +38,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 				singleSelect: true
 			}),
 			store: this.getStore(),
+			plugins: [this.cellActions],
 			columns: [{
 				header: "",
 				width: 24,
@@ -43,10 +54,17 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 				dataIndex: "title",
 				sortable: true
 			}, {
-				header: "Description",
-				dataIndex: "description",
-				renderer: this.fullText,
-				sortable: true
+				header: "",
+				dataIndex: "none",
+				width: 24,
+				fixed: true,
+				hideable: false,
+				menuDisabled: true,
+				resizable: false,
+				cellActions: {
+					iconCls: "uwm-help-icon",
+					qtipIndex: "description"
+				}
 			}, {
 				header: "modelClass",
 				dataIndex: "modelClass",
@@ -71,6 +89,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 					iconClass: currClass.getTreeIcon(),
 					title: currClass.getUwmClassName(),
 					description: currClass.getDescription(),
+					helpUrl: currClass.getHelpUrl(),
 					modelClass: currClass
 				});
 			}
@@ -90,6 +109,9 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 			}, {
 				name: "modelClass",
 				mapping: "modelClass"
+			}, {
+				name: "helpUrl",
+				mapping: "helpUrl"
 			}]
 		});
 	},
@@ -108,7 +130,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 		return "<div class='uwm-grid-icon " + value + "'>&nbsp;</div>";
 	},
 	
-	fullText: function(value) {
-		return "<div class='uwm-grid-fullText'>" + value + "</div>";
+	helpClick: function(grid, record, action, value) {
+		uwm.ui.HelpViewer.getInstance().loadUrl(record.get("helpUrl"));
 	}
 })

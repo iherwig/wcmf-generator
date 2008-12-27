@@ -37,6 +37,12 @@ Ext.extend(uwm.objecttree.ObjectNode, uwm.objecttree.Node, {
 				handler: function(item, e) {
 					self.deleteFromModel(item, e);
 				}
+			}, {
+				text: "Help",
+				//iconCls: "uwm-help-icon",
+				handler: function(item, e) {
+					self.showHelp(item, e);
+				}
 			}]
 		});
 		
@@ -71,6 +77,10 @@ Ext.extend(uwm.objecttree.ObjectNode, uwm.objecttree.Node, {
 	showInGrid: function(self, e) {
 		uwm.objectgrid.ObjectGridContainer.getInstance().selectRow(this.modelNode);
 	},
+	
+	showHelp: function(self, e) {
+		uwm.ui.HelpViewer.getInstance().loadUrl(this.modelNode.getModelNodeClass().getHelpUrl());
+	}
 });
 
 uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID = "showInDiagram";

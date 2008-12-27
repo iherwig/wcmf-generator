@@ -20,6 +20,7 @@ cwm.ChiGoalClass = function() {
 	this.figureIcon = "FigureChiGoal";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = "Goal Description";
+	this.helpUrl = "help/index.html#4.1.Goal|outline";
 	this.defaultLabel = "New Goal";
 	this.labelProperties = {
 		Name: true
