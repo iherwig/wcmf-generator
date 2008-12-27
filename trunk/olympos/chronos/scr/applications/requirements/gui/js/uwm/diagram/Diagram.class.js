@@ -364,8 +364,7 @@ uwm.diagram.Diagram.prototype.createConnection = function(sourceObject, targetOb
 		if (connectionInfo.invert) {
 			startPort = targetPort;
 			endPort = sourcePort;
-		}
-		else {
+		} else {
 			startPort = sourcePort;
 			endPort = targetPort;
 		}
@@ -520,8 +519,7 @@ uwm.diagram.Diagram.prototype.handleDeleteEvent = function(modelNode) {
 uwm.diagram.Diagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel) {
 	if (modelNode == this) {
 		this.tab.setTitle(this.getLabel());
-	}
-	else if (this.containsObject(modelNode)) {
+	} else if (this.containsObject(modelNode)) {
 		var figure = this.figures.get(modelNode.getOid());
 		
 		figure.getGraphics().setLabel(modelNode.getLabel());
@@ -535,14 +533,13 @@ uwm.diagram.Diagram.prototype.handleAssociateEvent = function(parentModelNode, c
 		if (config && config.modelClass) {
 			uwm.model.ModelContainer.getInstance().createModelObject(config.modelClass.getUwmClassName(), this.containedPackage, childModelNode);
 		}
-	}
-	else if (childModelNode instanceof uwm.diagram.Figure) {
-		this.objects.add(parentModelNode.getOid(), parentModelNode);
-		this.figures.add(parentModelNode.getOid(), childModelNode);
-		
+	} else if (childModelNode instanceof uwm.diagram.Figure) {
 		var diagram = childModelNode.getDiagram();
 		
 		if (diagram == this) {
+			this.objects.add(parentModelNode.getOid(), parentModelNode);
+			this.figures.add(parentModelNode.getOid(), childModelNode);
+			
 			var config = this.createdObjects.shift();
 			
 			childModelNode.init(parentModelNode, config.x, config.y);
@@ -553,6 +550,9 @@ uwm.diagram.Diagram.prototype.handleAssociateEvent = function(parentModelNode, c
 				Width: childModelNode.getGraphics().getWidth(),
 				Height: childModelNode.getGraphics().getHeight()
 			});
+			
+			this.establishExistingConnections(parentModelNode, parentModelNode.getParentOids());
+			this.establishExistingConnections(parentModelNode, parentModelNode.getChildOids());
 		}
 	}
 }
