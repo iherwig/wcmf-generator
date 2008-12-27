@@ -1,11 +1,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML>
 <HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
 	<TITLE></TITLE>
-	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Unix)">
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Win32)">
 	<META NAME="CREATED" CONTENT="20081221;20463000">
-	<META NAME="CHANGED" CONTENT="20081222;184100">
+	<META NAME="CHANGEDBY" CONTENT="giuseppe platania">
+	<META NAME="CHANGED" CONTENT="20081227;16010200">
 	<META NAME="Info 1" CONTENT="">
 	<META NAME="Info 2" CONTENT="">
 	<META NAME="Info 3" CONTENT="">
@@ -39,7 +40,7 @@
 <P ALIGN=CENTER STYLE="margin-top: 0.42cm; background: transparent; page-break-after: avoid">
 <FONT COLOR="#000000"><FONT FACE="Arial, sans-serif"><FONT SIZE=6><B>Chronos
 Web Modeler</B></FONT></FONT></FONT></P>
-<P><IMG SRC="index_html_487efd2e.png" NAME="Grafik1" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=300 HEIGHT=300 BORDER=0><BR CLEAR=LEFT>Welcome
+<P><IMG SRC="index_html_487efd2e.png" NAME="Grafik1" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=291 HEIGHT=291 BORDER=0><BR CLEAR=LEFT>Welcome
 to Chronos Web Modeler! This document describes the usage of the
 application.</P>
 <DIV ID="Inhaltsverzeichnis1" DIR="LTR">
@@ -90,14 +91,18 @@ application.</P>
 	 Read-Only Fields</A></P>
 	<P STYLE="margin-bottom: 0.1cm"><A HREF="#4.Model Description|outline">4
 	 Model Description</A></P>
-	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.1.Goal|outline">4.1
-	 Goal</A></P>
-	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.2.Requirement|outline">4.2
-	 Requirement</A></P>
-	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.3.Feature|outline">4.3
-	 Feature</A></P>
-	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.4.Issue|outline">4.4
-	 Issue</A></P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.1.ChiGoal|outline">4.1
+	 ChiGoal</A></P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.2.ChiRequirement|outline">4.2
+	 ChiRequirement</A></P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.3.ChiFeature|outline">4.3
+	 ChiFeature</A></P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.4.ChiIssue|outline">4.4
+	 ChiIssue</A></P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.5.ChiBusinessProcess|outline">4.5
+	 ChiBusinessProcess</A></P>
+	<P STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.6.ChiBusinessUseCase|outline">4.6
+	 ChiBusinessUseCase</A></P>
 </DIV>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
@@ -108,68 +113,68 @@ Browsers</H2>
 Firefox 3. Occasional tests with other browsers show no principal
 incompatibilities.	</P>
 <H1 CLASS="western"><A NAME="2.Terminology|outline"></A>2 Terminology</H1>
-<TABLE WIDTH=663 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-	<COL WIDTH=155>
-	<COL WIDTH=490>
+<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+	<COL WIDTH=150>
+	<COL WIDTH=475>
 	<TR VALIGN=TOP>
-		<TH WIDTH=155>
+		<TH WIDTH=150>
 			<P>Term</P>
 		</TH>
-		<TH WIDTH=490>
+		<TH WIDTH=475>
 			<P>Description</P>
 		</TH>
 	</TR>
 	<TR VALIGN=TOP>
-		<TD WIDTH=155>
+		<TD WIDTH=150>
 			<P>Model</P>
 		</TD>
-		<TD WIDTH=490>
+		<TD WIDTH=475>
 			<P><BR>
 			</P>
 		</TD>
 	</TR>
 	<TR VALIGN=TOP>
-		<TD WIDTH=155>
+		<TD WIDTH=150>
 			<P>Package</P>
 		</TD>
-		<TD WIDTH=490>
+		<TD WIDTH=475>
 			<P><BR>
 			</P>
 		</TD>
 	</TR>
 	<TR VALIGN=TOP>
-		<TD WIDTH=155>
+		<TD WIDTH=150>
 			<P>Diagram</P>
 		</TD>
-		<TD WIDTH=490>
+		<TD WIDTH=475>
 			<P><BR>
 			</P>
 		</TD>
 	</TR>
 	<TR VALIGN=TOP>
-		<TD WIDTH=155>
+		<TD WIDTH=150>
 			<P>Model Object</P>
 		</TD>
-		<TD WIDTH=490>
+		<TD WIDTH=475>
 			<P>Object which is part of the model. Figurative: Everything you
 			can put on a diagram.</P>
 		</TD>
 	</TR>
 	<TR VALIGN=TOP>
-		<TD WIDTH=155>
+		<TD WIDTH=150>
 			<P>Model Object Type</P>
 		</TD>
-		<TD WIDTH=490>
+		<TD WIDTH=475>
 			<P>Each model object has a type, depicted by its icon. Each model
 			object type has a different set of properties, to be reviewed in
 			properties view.</P>
 		</TD>
 	</TR>
 	<TR VALIGN=TOP>
-		<TD WIDTH=155>
+		<TD WIDTH=150>
 			<P>metamodel</P>
 		</TD>
-		<TD WIDTH=490>
+		<TD WIDTH=475>
 			<P><BR>
 			</P>
 		</TD>
@@ -181,18 +186,20 @@ Interface</H1>
 like a desktop application. For example, the paradigms of drag&amp;drop
 and context menus are used throughout the application.</P>
 <H2 CLASS="western"><A NAME="3.1.Login|outline"></A>3.1 Login</H2>
-<P><IMG SRC="index_html_6772eeb.png" NAME="Grafik2" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=663 HEIGHT=382 BORDER=0><BR CLEAR=LEFT>At
+<P><IMG SRC="index_html_m6a9bbcb2.png" NAME="Grafik2" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=642 HEIGHT=370 BORDER=0><BR CLEAR=LEFT>At
 the login screen, the login and password credentials are entered.
 They are checked against the system database. If successful, The user
 is automatically forwarded to the workbench. Otherwise, an error
 message is displayed.</P>
 <H2 CLASS="western"><A NAME="3.2.Workbench|outline"></A>3.2 Workbench</H2>
-<P><IMG SRC="index_html_7d8ea2cc.png" NAME="Grafik3" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=663 HEIGHT=382 BORDER=0><BR CLEAR=LEFT>The
+<P><IMG SRC="index_html_m160136e0.png" NAME="Grafik3" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=642 HEIGHT=370 BORDER=0><BR CLEAR=LEFT>The
 workbench consists of several areas, called views. All views except
-the main model view can be collapsed by the <FONT FACE="Times New Roman, serif">»
+the main model view can be collapsed by the <FONT FACE="Times New Roman, serif">&raquo;
 buttons in the title bar.</FONT></P>
 <H3 CLASS="western"><A NAME="3.2.1.New Objects|outline"></A>3.2.1 New
 Objects</H3>
+<P><IMG SRC="index_html_284f0a6.png" NAME="Grafik13" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=244 HEIGHT=241 BORDER=0><BR CLEAR=LEFT><BR><BR>
+</P>
 <P>The new objects view is located in the upper left part of the
 workbench. It lists all model objects the user may add to a diagram.
 For each object, an icon, the title and a description is listed.</P>
@@ -228,6 +235,8 @@ For each object, an icon, the title and a description is listed.</P>
 </TABLE>
 <H3 CLASS="western"><A NAME="3.2.2.Model Tree|outline"></A>3.2.2 Model
 Tree</H3>
+<P><IMG SRC="index_html_m43dbdd07.png" NAME="Grafik12" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=246 HEIGHT=253 BORDER=0><BR CLEAR=LEFT><BR><BR>
+</P>
 <P>The model tree view is the first tab in the lower left part of the
 workbench. It contains all models of this application. It shows the
 logical position of each object in the application.</P>
@@ -251,8 +260,8 @@ logical position of each object in the application.</P>
 			<P>Create new model in application</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on empty space in model tree, select “Create
-			model” in context menu 
+			<P>Right-click on empty space in model tree, select &ldquo;Create
+			model&rdquo; in context menu 
 			</P>
 		</TD>
 		<TD WIDTH=33%>
@@ -308,8 +317,8 @@ logical position of each object in the application.</P>
 			<P>Add package to model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model, select “Add package” from context
-			menu</P>
+			<P>Right-click on the model, select &ldquo;Add package&rdquo; from
+			context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Adds a package below the selected model. The default name is
@@ -321,8 +330,8 @@ logical position of each object in the application.</P>
 			<P>Delete model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model, select “Delete from application”
-			from context menu</P>
+			<P>Right-click on the model, select &ldquo;Delete from
+			application&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Deletes the model and all contained packages, diagrams and
@@ -335,7 +344,7 @@ logical position of each object in the application.</P>
 			model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model, select “Select as grid scope”
+			<P>Right-click on the model, select &ldquo;Select as grid scope&rdquo;
 			from the context menu 
 			</P>
 		</TD>
@@ -394,8 +403,8 @@ file system.</P>
 			<P>Add sub-package to package</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the package, select “Add package” from
-			context menu</P>
+			<P>Right-click on the package, select &ldquo;Add package&rdquo;
+			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Adds a package below the selected package. The default name is
@@ -407,8 +416,8 @@ file system.</P>
 			<P>Delete package from model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the package, select “Delete from model” from
-			context menu</P>
+			<P>Right-click on the package, select &ldquo;Delete from model&rdquo;
+			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Deletes the package and all contained packages, diagrams and
@@ -420,8 +429,8 @@ file system.</P>
 			<P>Add diagram to package</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the package, select “Add diagram” from
-			context menu</P>
+			<P>Right-click on the package, select &ldquo;Add diagram&rdquo;
+			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Adds a new diagram below the selected package. The default name
@@ -435,7 +444,7 @@ file system.</P>
 			package</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the package, select “Select as grid scope”
+			<P>Right-click on the package, select &ldquo;Select as grid scope&rdquo;
 			from the context menu 
 			</P>
 		</TD>
@@ -505,8 +514,8 @@ file system.</P>
 			<P>Delete diagram from model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the diagram, select “Delete from model” from
-			context menu</P>
+			<P>Right-click on the diagram, select &ldquo;Delete from model&rdquo;
+			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Deletes the diagram from the model.</P>
@@ -530,7 +539,8 @@ file system.</P>
 		<TD WIDTH=33%>
 			<P>Double-click the diagram</P>
 			<P>OR</P>
-			<P>Right-click on the diagram, select “Open” from context menu</P>
+			<P>Right-click on the diagram, select &ldquo;Open&rdquo; from
+			context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Opens the diagram in diagram view or selects the diagram's tab
@@ -586,8 +596,8 @@ Objects</H4>
 			<P>Delete model object from model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Delete from model”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Delete from
+			model&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Deletes the model object from the model.</P>
@@ -622,7 +632,7 @@ Objects</H4>
 			<P>Show model object in current diagram</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in diagram”
+			<P>Right-click on the model object, select &ldquo;Show in diagram&rdquo;
 			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
@@ -636,8 +646,8 @@ Objects</H4>
 			<P>Show model object in grid</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in grid” from
-			context menu</P>
+			<P>Right-click on the model object, select &ldquo;Show in grid&rdquo;
+			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Shows the appropriate grid and selects the selected model
@@ -651,8 +661,8 @@ Objects</H4>
 			<P>Show model object in hierarchy view</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in hierarchy”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Show in
+			hierarchy&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Shows the selected model object as root element of the
@@ -662,10 +672,13 @@ Objects</H4>
 </TABLE>
 <H3 CLASS="western"><A NAME="3.2.3.Hierarchy Tree|outline"></A>3.2.3 Hierarchy
 Tree</H3>
-<P>The hierarchy tree view is the second tab in the lower left part
-of the workbench. It shows all dependencies of a selected model
-object. In deeper dependency levels, the dependencies directly above
-are omitted for clarity.</P>
+<P><IMG SRC="index_html_74346f60.jpg" NAME="Grafik11" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=246 HEIGHT=201 BORDER=0><BR CLEAR=LEFT>The
+hierarchy tree view is the second tab in the lower left part of the
+workbench. It shows all dependencies of a selected model object. In
+deeper dependency levels, the dependencies directly above are omitted
+for clarity.</P>
+<P><BR><BR>
+</P>
 <TABLE WIDTH=100% BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
 	<COL WIDTH=85*>
 	<COL WIDTH=85*>
@@ -687,7 +700,7 @@ are omitted for clarity.</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Right-click on the model object in model tree, grid, or
-			diagram, select “Show in hierarchy” from context menu</P>
+			diagram, select &ldquo;Show in hierarchy&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Shows the selected model object as root element of the
@@ -724,8 +737,8 @@ are omitted for clarity.</P>
 			<P>Delete model object from model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Delete from model”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Delete from
+			model&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Deletes the model object from the model.</P>
@@ -749,7 +762,7 @@ are omitted for clarity.</P>
 			<P>Show model object in current diagram</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in diagram”
+			<P>Right-click on the model object, select &ldquo;Show in diagram&rdquo;
 			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
@@ -763,8 +776,8 @@ are omitted for clarity.</P>
 			<P>Show model object in grid</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in grid” from
-			context menu</P>
+			<P>Right-click on the model object, select &ldquo;Show in grid&rdquo;
+			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Shows the appropriate grid and selects the selected model
@@ -778,8 +791,8 @@ are omitted for clarity.</P>
 			<P>Show model object in model tree</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in model tree”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Show in model
+			tree&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Selects the model object in context menu. If any of the
@@ -815,7 +828,7 @@ object type within the selected scope.</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Right-click on a model or a  package in model tree, select
-			“Select as grid scope” from the context menu 
+			&ldquo;Select as grid scope&rdquo; from the context menu 
 			</P>
 		</TD>
 		<TD WIDTH=33%>
@@ -853,8 +866,8 @@ object type within the selected scope.</P>
 			<P>Delete model object from model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Delete from model”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Delete from
+			model&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Deletes the model object from the model.</P>
@@ -878,7 +891,7 @@ object type within the selected scope.</P>
 			<P>Show model object in current diagram</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in diagram”
+			<P>Right-click on the model object, select &ldquo;Show in diagram&rdquo;
 			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
@@ -892,8 +905,8 @@ object type within the selected scope.</P>
 			<P>Show model object in model tree</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in model tree”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Show in model
+			tree&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Selects the model object in context menu. If any of the
@@ -906,8 +919,8 @@ object type within the selected scope.</P>
 			<P>Show model object in hierarchy view</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in hierarchy”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Show in
+			hierarchy&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Shows the selected model object as root element of the
@@ -938,12 +951,12 @@ the diagrams, containing of model objects and their connections.</P>
 			<P>Toggle snap to objects</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on empty space in diagram, select “Snap to
-			objects” from context menu</P>
+			<P>Right-click on empty space in diagram, select &ldquo;Snap to
+			objects&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>If enabled, model objects “snap in” to other model objects
-			at a nearby horizontal or vertical axis when moving them.</P>
+			<P>If enabled, model objects &ldquo;snap in&rdquo; to other model
+			objects at a nearby horizontal or vertical axis when moving them.</P>
 		</TD>
 	</TR>
 	<TR VALIGN=TOP>
@@ -951,7 +964,7 @@ the diagrams, containing of model objects and their connections.</P>
 			<P>Auto-layout diagram</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on empty space in diagram, select “Auto-layout”
+			<P>Right-click on empty space in diagram, select &ldquo;Auto-layout&rdquo;
 			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
@@ -1007,8 +1020,8 @@ the diagrams, containing of model objects and their connections.</P>
 			<P>Delete model object from diagram</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Delete from diagram”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Delete from
+			diagram&rdquo; from context menu</P>
 			<P>OR</P>
 			<P>single-click on the model object, press DEL key</P>
 		</TD>
@@ -1022,8 +1035,8 @@ the diagrams, containing of model objects and their connections.</P>
 			<P>Delete model object from model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Delete from model”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Delete from
+			model&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Deletes the model object from the model.</P>
@@ -1034,8 +1047,8 @@ the diagrams, containing of model objects and their connections.</P>
 			<P>Delete connection from model</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the connection, selelct “Delete from model”
-			from context menu</P>
+			<P>Right-click on the connection, selelct &ldquo;Delete from
+			model&rdquo; from context menu</P>
 			<P>OR</P>
 			<P>single-click on the connection, press DEL key</P>
 		</TD>
@@ -1048,8 +1061,8 @@ the diagrams, containing of model objects and their connections.</P>
 			<P>Show model object in model tree</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in model tree”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Show in model
+			tree&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Selects the model object in context menu. If any of the
@@ -1062,8 +1075,8 @@ the diagrams, containing of model objects and their connections.</P>
 			<P>Show model object in hierarchy view</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in hierarchy”
-			from context menu</P>
+			<P>Right-click on the model object, select &ldquo;Show in
+			hierarchy&rdquo; from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Shows the selected model object as root element of the
@@ -1075,8 +1088,8 @@ the diagrams, containing of model objects and their connections.</P>
 			<P>Show model object in grid</P>
 		</TD>
 		<TD WIDTH=33%>
-			<P>Right-click on the model object, select “Show in grid” from
-			context menu</P>
+			<P>Right-click on the model object, select &ldquo;Show in grid&rdquo;
+			from context menu</P>
 		</TD>
 		<TD WIDTH=33%>
 			<P>Shows the appropriate grid and selects the selected model
@@ -1110,17 +1123,876 @@ Fields</H4>
 be edited.</P>
 <H1 CLASS="western"><A NAME="4.Model Description|outline"></A>4 Model
 Description</H1>
-<H2 CLASS="western"><A NAME="4.1.Goal|outline"></A>4.1 Goal</H2>
-<P><BR><BR>
+<H2 CLASS="western"><A NAME="4.1.ChiGoal|outline"></A>4.1 ChiGoal</H2>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m55254e5d.png" NAME="Grafik4" ALIGN=BOTTOM VSPACE=8 WIDTH=62 HEIGHT=56 BORDER=0></P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+</SPAN>a Measurable scope that the enterprise (or the project) wants
+to achieve.<SPAN LANG="en-GB"> </SPAN>
 </P>
-<H2 CLASS="western"><A NAME="4.2.Requirement|outline"></A>4.2 Requirement</H2>
-<P><BR><BR>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm">A ChiGoal represent a
+certain status or valour that a variable in the considered model MUST
+achieve.</P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">The root Goal of a
+Chronos Model is cal</SPAN><SPAN LANG="en-GB">led Vision. </SPAN>
 </P>
-<H2 CLASS="western"><A NAME="4.3.Feature|outline"></A>4.3 Feature</H2>
-<P><BR><BR>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Difference between
+ChiGoal and ChiRequirement</B></P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">While a goal
+represent</SPAN><SPAN LANG="en-GB">s a wide (but concrete!) scope, a
+requirement is a specific milestone within this scope that needs to
+be addressed. </SPAN>
 </P>
-<H2 CLASS="western"><A NAME="4.4.Issue|outline"></A>4.4 Issue</H2>
-<P><BR><BR>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m14113f68.png" NAME="Grafik8" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=258 HEIGHT=263 BORDER=0><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">A ChiRequirement
+underline question &ldquo;</SPAN><SPAN LANG="en-GB"><I>is achieved?</I></SPAN><SPAN LANG="en-GB">&rdquo;
+and the answer is &ldquo;Yes&rdquo; if a ChiFeature is attached to
+the requirement. A Goal is considered to be achieved if al the
+attached requirements are true.</SPAN></P>
+<P LANG="de-DE" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P LANG="de-DE" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">A ChiGoal
+	should be measurable the </SPAN><SPAN LANG="en-GB"><I>Value_Goal</I></SPAN>
+	SHOULD be an integer. If this is &ldquo;0&rdquo; (default) <SPAN LANG="en-GB">the
+	goal is not valid and the generator produces a WARNING.</SPAN></P>
+	<LI><P LANG="en-GB" STYLE="margin-bottom: 0cm">A ChiGoal contains
+	one or more ChiGoals or ChiRequirements. A ChiGoals that contains a
+	child ChiGoals SHOULD NOT contain a ChiRequirement.</P>
+</UL>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">All the
+	ChiGoals</SPAN><SPAN LANG="en-GB"> &ldquo;</SPAN><SPAN LANG="en-GB"><I>is
+	specified by</I></SPAN><SPAN LANG="en-GB">&rdquo; (and MUST be
+	linked with) one or more ChiRequirements with a shared or
+	composition link. </SPAN>
+	</P>
+	<LI><P LANG="en-GB" STYLE="margin-bottom: 0cm">A ChiGoals that
+	contains a child ChiGoals SHOULD NOT contain a ChiRequirement.</P>
+	<LI><P LANG="en-GB" STYLE="margin-bottom: 0cm">A ChiGoal is
+	considered achieved when all the attached ChiRequirements are
+	realized by a ChiFeature.</P>
+	<LI><P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">If a Goal
+	hierarchy is present ALL the element of the hierarchy are supposed
+	to be checkef for their values. The fact that a child Goal ha</SPAN><SPAN LANG="en-GB">s
+	achieved his proposed Value_Name DON&rsquo;T automatically set the
+	parents values.</SPAN></P>
+</UL>
+<P LANG="en-GB" STYLE="margin-left: 1.27cm; text-indent: -0.64cm; margin-bottom: 0cm">
+<BR>
+</P>
+<P LANG="en-GB" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-left: 0.64cm; margin-bottom: 0cm"><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Tagged Values:</B></P>
+<TABLE WIDTH=649 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=157>
+	<COL WIDTH=246>
+	<COL WIDTH=202>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=157 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+			</TD>
+			<TD WIDTH=246 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
+			</TD>
+			<TD WIDTH=202 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=157>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
+			</TD>
+			<TD WIDTH=246>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				unique ID of this object. CHI + 3 numbers + object name. MUST.</FONT></P>
+			</TD>
+			<TD WIDTH=202>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
+				001GOA</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=157>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name</FONT></P>
+			</TD>
+			<TD WIDTH=246>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				short sentence that give an idea of the sense of this object.
+				MUST</FONT></P>
+			</TD>
+			<TD WIDTH=202>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=157>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Description</FONT></P>
+			</TD>
+			<TD WIDTH=246>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				complete text description of the object. OPTIONAL</FONT></P>
+			</TD>
+			<TD WIDTH=202>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=157>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Type</FONT></P>
+			</TD>
+			<TD WIDTH=246>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Type
+				of goal. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=202>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Strategic
+				| Operational | Vision | Mission</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=157>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Priority</FONT></P>
+			</TD>
+			<TD WIDTH=246>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				priority in %. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=202>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">1-100</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=157>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Value_Name</FONT></P>
+			</TD>
+			<TD WIDTH=246>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				name of the value this goal intends to alter. OPTIONAL</FONT></P>
+			</TD>
+			<TD WIDTH=202>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=157>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Value_ammount</FONT></P>
+			</TD>
+			<TD WIDTH=246>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				actual amount of the value this goal intends to alter. OPTIONAL</FONT></P>
+			</TD>
+			<TD WIDTH=202>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">0</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=157>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Value_Goal</FONT></P>
+			</TD>
+			<TD WIDTH=246>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				amount by which the value is to be altered. OPTIONAL</FONT></P>
+			</TD>
+			<TD WIDTH=202>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">0</FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western"><A NAME="4.2.ChiRequirement|outline"></A>4.2 ChiRequirement</H2>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_10a7e864.png" NAME="Grafik5" ALIGN=BOTTOM VSPACE=8 WIDTH=62 HEIGHT=56 BORDER=0></P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+</SPAN>A Business guide line about the Enterprise or the project.</P>
+<P STYLE="margin-bottom: 0cm">A ChiRequirement represents a condition
+that needs to be <SPAN LANG="en-GB">Satisfied</SPAN> by certain
+achievement (a ChiFeature ).</P>
+<P STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m22211df3.png" NAME="Grafik14" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=491 HEIGHT=372 BORDER=0><BR CLEAR=LEFT><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">All the
+	ChiRequirements MUST be linked with a parent ChiGoal either directly
+	or in a hierarchy of further requirements. The sum of all
+	requirements being true () will set the </SPAN><SPAN LANG="en-GB"><I>Value_Name</I></SPAN><SPAN LANG="en-GB">
+	of the first Parent ChiGoal in the hierarchy to the expected
+	</SPAN><SPAN LANG="en-GB"><I>Value_Goal</I></SPAN><SPAN LANG="en-GB">.</SPAN></P>
+	<LI><P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">When is created
+	a ChiRequirement has the status of </SPAN>Proposed until he is
+	checked by a proofreader. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm">When the field of the proof reader
+	is filled (with a name) the ChiRequirement take the status 
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">To achieve the
+	status of &ldquo;Satisfied&rdquo; a ChiRequirement </SPAN><SPAN LANG="en-GB">MUST
+	be linked with a ChiFeature with the realizazion &ldquo;</SPAN><SPAN LANG="en-GB"><I>is
+	realized by</I></SPAN><SPAN LANG="en-GB">&rdquo;. </SPAN>
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">CAN be linked</SPAN><SPAN LANG="en-GB">
+	a ChiIssue wit the stereotype &ldquo;is negated by&rdquo;. </SPAN>
+	</P>
+	<LI><P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">Each
+	requirement needs to be confirmed by a </SPAN><I>proofreader</I><SPAN LANG="en-GB">.
+	If </SPAN>proofreader<SPAN LANG="en-GB"> is &ldquo;none&rdquo;
+	(default) the requirement is not valid and the generator produces a
+	WARNING.</SPAN></P>
+	<LI><P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">A
+	ChiRequirement</SPAN><SPAN LANG="en-GB"> becomes &ldquo;Satisfied&rdquo;
+	when a ChiFeature is attached to him. Until a requirement has not
+	the status &ldquo;Validated&rdquo; the generator produces a warning.</SPAN></P>
+</UL>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Tagged Values:</B></P>
+<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=76>
+	<COL WIDTH=241>
+	<COL WIDTH=282>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=76 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+			</TD>
+			<TD WIDTH=241 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
+			</TD>
+			<TD WIDTH=282 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=76>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
+			</TD>
+			<TD WIDTH=241>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				ID of this object. CHI + 3 numbers + object name. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=282>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
+				001REQ</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=76>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name</FONT></P>
+			</TD>
+			<TD WIDTH=241>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				short sentence that give an idea of the sense of this object.
+				MUST</FONT></P>
+			</TD>
+			<TD WIDTH=282>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=76>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Description</FONT></P>
+			</TD>
+			<TD WIDTH=241>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				complete text description of the object. OPTIONAL</FONT></P>
+			</TD>
+			<TD WIDTH=282>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=76>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Type</FONT></P>
+			</TD>
+			<TD WIDTH=241>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Type
+				of requirement MUST</FONT></P>
+			</TD>
+			<TD WIDTH=282>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Business
+				Rule| Security |Performance |Persistence |Scalability |Transport</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=76>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Priority</FONT></P>
+			</TD>
+			<TD WIDTH=241>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				priority in %. Requirements are ordered by priority. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=282>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">1-100</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=76>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Author</FONT></P>
+			</TD>
+			<TD WIDTH=241>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+				requirement&rsquo;s author&rsquo;s name and role in the project
+				MUST</FONT></P>
+			</TD>
+			<TD WIDTH=282>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name,
+				Role</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=76>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Proofreader</FONT></P>
+			</TD>
+			<TD WIDTH=241>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
+				<FONT SIZE=2 STYLE="font-size: 9pt">This requirement&rsquo;s
+				proofreader&rsquo;s name and role in the project.</FONT></P>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Each
+				requirement needs to be confirmed by a proofreader to become the
+				status Validated or mandatory. OPTIONAL</FONT></P>
+			</TD>
+			<TD WIDTH=282>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name,
+				Role</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=76>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Status</FONT></P>
+			</TD>
+			<TD WIDTH=241>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+				requirement&rsquo;s status. Stati are tipically defined within
+				the project. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=282>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Proposed|Mandatory|Validated|<SPAN LANG="en-GB">Satisfied</SPAN></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western"><A NAME="4.3.ChiFeature|outline"></A>4.3 ChiFeature</H2>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m426bc76f.png" NAME="Grafik6" ALIGN=BOTTOM VSPACE=8 WIDTH=62 HEIGHT=56 BORDER=0></P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+A characteristic of a (proposed) system that </SPAN><SPAN LANG="en-GB"><I>realizes</I></SPAN><SPAN LANG="en-GB">
+a ChiRequirement</SPAN>. 
+</P>
+<P STYLE="margin-bottom: 0cm">A ChiFeature is a small, high level,
+granular function or characteristic expressed in client-valued terms
+as a satisfaction of a ChiRequirement; 
+</P>
+<P STYLE="margin-bottom: 0cm">This means that the ChiFeature is an
+event or condition that set the requirement condition to be <I>true</I>.</P>
+<P STYLE="margin-bottom: 0cm">A ChiFeature CANNOT exist without a
+ChiRequirement (&ldquo;No solution without request&rdquo;). 
+</P>
+<P STYLE="margin-bottom: 0cm">ChiFeature have a relationship (of type
+Implementation) with ChiRequirement.</P>
+<P STYLE="margin-bottom: 0cm">A  ChiFeature might realize one or more
+ChiRequirements, and one ChiRequirement might be realized by more
+than one ChiFeature.</P>
+<P STYLE="margin-bottom: 0cm">ChiFeature also have relationships (of
+type Realization, stereotype &lt;&lt;Refines&gt;&gt;) with one or
+more ChiUseCases or <SPAN LANG="en-GB">ChiBusinessProcess</SPAN>. 
+</P>
+<P STYLE="margin-bottom: 0cm">A ChiUseCases defines the interaction
+that a user has with the system in order to satisfy one or more
+Requirements. The ChiFeature identifies the facility that provides
+the means for that interaction.<BR><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">E</SPAN><SPAN LANG="en-GB">ach
+feature that has the Status &ldquo;Implemented&rdquo; MUST specified
+by a further </SPAN>ChiUseCases or <SPAN LANG="en-GB">ChiBusinessProcess
+objekt. In other case the generator produces a WARNING.</SPAN></P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Tagged Values:</B></P>
+<TABLE WIDTH=637 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=146>
+	<COL WIDTH=220>
+	<COL WIDTH=227>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+			</TD>
+			<TD WIDTH=220 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
+			</TD>
+			<TD WIDTH=227 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				ID of this object. CHI + 3 numbers + object name. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=227>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
+				001FEA</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				short sentence that give an idea of the sense of this object.
+				MUST</FONT></P>
+			</TD>
+			<TD WIDTH=227>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Description</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				complete text description of the object. OPTIONAL</FONT></P>
+			</TD>
+			<TD WIDTH=227>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Author</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+				feature's author's name and role in the project. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=227>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name,
+				Role</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Proofreader</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+				feature's reviser&rsquo;s name and role in the project. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=227>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name,
+				Role</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Status</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+				feature's status. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=227>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Proposed
+				| Validated | Rejected | Implemented</FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western"><A NAME="4.4.ChiIssue|outline"></A>4.4 ChiIssue</H2>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_6f2cdcd.png" NAME="Grafik7" ALIGN=BOTTOM VSPACE=8 WIDTH=62 HEIGHT=56 BORDER=0></P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+A characteristic of a system that could slow down or even completely
+stop the realization of a ChiRequirement. </SPAN>
+</P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">From </SPAN><SPAN LANG="en-GB">a
+logical point of view a ChiIssue is a condition that disallows a
+linked ChiRequirement to become </SPAN><SPAN LANG="en-GB"><I>true</I></SPAN><SPAN LANG="en-GB">.
+</SPAN>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm">A ChiIssue is linked with
+a ChiRequirement with a &ldquo;trace&rdquo; and the stereotype
+&ldquo;brakes&rdquo;.</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm">An Issue MUST be linked to
+a ChiRequirement element (&ldquo;no problem without request&rdquo;).
+The generator spawns an ERROR if this connection doesn&rsquo;t exist.</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Tagged Values:</B></P>
+<TABLE WIDTH=637 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=146>
+	<COL WIDTH=220>
+	<COL WIDTH=227>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+			</TD>
+			<TD WIDTH=220 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
+			</TD>
+			<TD WIDTH=227 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				ID of this object. CHI + 3 numbers + object name. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=227>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
+				001ISS</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">Author</SPAN></EM></FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">This
+				issue&rsquo;s author&rsquo;s name and role in the project. </SPAN></EM>MUST</FONT></P>
+			</TD>
+			<TD WIDTH=227>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">Name,
+				Role</SPAN></EM></FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=146>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">Responsible</SPAN></EM></FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">The
+				responsible to close the present issue. OPTIONAL</SPAN></EM></FONT></P>
+			</TD>
+			<TD WIDTH=227>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">Name,
+				Role</SPAN></EM></FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western"><A NAME="4.5.ChiBusinessProcess|outline"></A>4.5 ChiBusinessProcess</H2>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m74221ad2.gif" NAME="Grafik9" ALIGN=BOTTOM VSPACE=8 WIDTH=107 HEIGHT=44 BORDER=0></P>
+<P STYLE="margin-bottom: 0cm"><A NAME="OLE_LINK1"></A><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+</SPAN>A Business Process is a sum of actions that produces a
+business advantage to the enterprise. It is <I>composed by</I> one or
+many ChiBusinessUseCases</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">At lease one
+</SPAN>ChiBusinessUseCases or ChiBusinessUseCasesCore must linked.</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><B>Tagged Values:</B></P>
+<TABLE WIDTH=636 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=145>
+	<COL WIDTH=220>
+	<COL WIDTH=227>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145 BGCOLOR="#d9d9d9">
+				<P LANG="en-GB">Key</P>
+			</TD>
+			<TD WIDTH=220 BGCOLOR="#d9d9d9">
+				<P LANG="en-GB">Notice</P>
+			</TD>
+			<TD WIDTH=227 BGCOLOR="#d9d9d9">
+				<P LANG="en-GB">Value</P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145>
+				<P LANG="en-GB" STYLE="margin-left: 0.64cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=220>
+				<P STYLE="margin-left: 0.64cm"><BR>
+				</P>
+			</TD>
+			<TD WIDTH=227>
+				<P STYLE="margin-left: 0.64cm"><BR>
+				</P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<H2 CLASS="western"><A NAME="4.6.ChiBusinessUseCase|outline"></A>4.6 ChiBusinessUseCase</H2>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_63d7858d.gif" NAME="Grafik10" ALIGN=BOTTOM VSPACE=8 WIDTH=110 HEIGHT=74 BORDER=0></P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+</SPAN>A Business Use Case is part of a business process that
+produces an advantage to the enterprise.</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Condition</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
+<P STYLE="margin-bottom: 0cm">It SHOULD have a name composed by a
+Verb and an Object. 
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Tagged Values</B></SPAN><SPAN LANG="en-GB">:
+</SPAN>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<TABLE WIDTH=641 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+	<COL WIDTH=145>
+	<COL WIDTH=220>
+	<COL WIDTH=232>
+	<THEAD>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+			</TD>
+			<TD WIDTH=220 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
+			</TD>
+			<TD WIDTH=232 BGCOLOR="#d9d9d9">
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+			</TD>
+		</TR>
+	</THEAD>
+	<TBODY>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145 HEIGHT=38>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				ID of this object. CHI + 3 numbers + object name. MUST</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
+				001UC</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145 HEIGHT=52>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				name of a use case MUST be composed by a Verb and a object. CAN
+				have also the name of the primary actor but this is not a good
+				praxis.  MUST</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Creates
+				Contract </FONT>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145 HEIGHT=29>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Description</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				complete text description of the Use case. OPTIONAL</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145 HEIGHT=10>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Primary
+				Actor</FONT></P>
+			</TD>
+			<TD ROWSPAN=2 WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				list of actors associated with the use case. Although this
+				information is contained in the use case itself, it helps to
+				increase the understandability of the use case when the diagram
+				is unavailable.</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Other
+				Actors</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Goal
+				in Context</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				goal should implicitly express the actor's intent or purpose of
+				the use case, such as &quot;Enrol Student in Seminar.&quot;</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Scope</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Boundaries
+				in which the use case is operated when invoked (E.g. CMS)</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">systemA</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Level</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
+				<FONT SIZE=2 STYLE="font-size: 9pt">Authorizations for
+				operations/actions to be performed against the Chi business
+				objects in scope. Against every object/process 4 CRUD basic
+				operations are possible:</FONT></P>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
+				<FONT SIZE=2 STYLE="font-size: 9pt">Create (Write)</FONT></P>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
+				<FONT SIZE=2 STYLE="font-size: 9pt">Read (Open)</FONT></P>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
+				<FONT SIZE=2 STYLE="font-size: 9pt">Update (Change)</FONT></P>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Delete
+				 (Destroy)</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ObjectNameA(CRUD)|
+				ObjectNameB(CRUD);</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Stakeholders
+				and Interests</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">List
+				of actors that have a special interest (i.e. to be informed every
+				time) in completion of the use case</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ActorA|ActorB</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Precondition</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
+				list of the conditions, if any, that must be met before a use
+				case may be invoked. Can be a previous Use case or self the
+				presence of the system in Scope.</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">(ConditionA|ConditionB)</FONT></P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Trigger</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Event
+				that is responsible for invocation of the use case</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145 HEIGHT=23>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Main
+				Success Scenario</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				main path of logic an actor follows through a use case. Often
+				referred to as the &ldquo;happy path&rdquo; or the &ldquo;main
+				path&rdquo; because it describes how the use case works when
+				everything works as it normally should.</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+				</P>
+			</TD>
+		</TR>
+		<TR VALIGN=TOP>
+			<TD WIDTH=145>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Extensions</FONT></P>
+			</TD>
+			<TD WIDTH=220>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+				use case that this use case extends (if any). An extend
+				association is a generalization relationship where an extending
+				use case continues the behaviour of a base use case. The
+				extending use case accomplishes this by inserting additional
+				action sequences into the base use-case sequence.</FONT></P>
+			</TD>
+			<TD WIDTH=232>
+				<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
+			</TD>
+		</TR>
+	</TBODY>
+</TABLE>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
+</P>
+<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
 </P>
 </BODY>
 </HTML>
