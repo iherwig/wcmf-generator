@@ -59,20 +59,29 @@ Ext.extend(cwm.ChiGoalClass, uwm.model.ModelClass);
 
 cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({
-		items: [new uwm.property.TextField({
+		items: [new uwm.property.Checkbox({
 			fieldLabel: 'Priority',
+			boxLabel: "Next to Box",
 			name: 'Priority',
 			toolTip: "This is the tooltip for priority. It is quite long.",
 			modelNode: modelNode
-		}), new uwm.property.TextField({
+		}), new uwm.property.Radio({
 			fieldLabel: 'Value_Name',
+			boxLabel: "Test 01 01",
+			value: "thisGetsIntoDatabase",
 			name: 'Value_Name',
 			modelNode: modelNode
-		}), new uwm.property.TextField({
+		}), new uwm.property.Radio({
+			fieldLabel: 'Value_Name-2',
+			boxLabel: "Test 02 02",
+			value: "thisGetsIntoOtherDatabase",
+			name: 'Value_Name',
+			modelNode: modelNode
+		}), new uwm.property.Radio({
 			fieldLabel: 'Value_ammount',
 			name: 'Value_ammount',
 			modelNode: modelNode
-		}), new uwm.property.TextField({
+		}), new uwm.property.DateField({
 			fieldLabel: 'Value_Goal',
 			name: 'Value_Goal',
 			modelNode: modelNode
@@ -80,13 +89,27 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
 			fieldLabel: 'Alias',
 			name: 'Alias',
 			modelNode: modelNode
-		}), new uwm.property.TextField({
+		}), new uwm.property.StaticComboBox({
 			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode
-		}), new uwm.property.TextField({
+			modelNode: modelNode,
+			data: [{
+				key: "0.5",
+				val: "Beta Version 0.5"
+			}, {
+				key: "1.0",
+				val: "First Release"
+			}, {
+				key: "2.0",
+				val: "mature"
+			}, {
+				key: "3.0",
+				val: "Outdated"
+			}, ]
+		}), new uwm.property.TextArea({
 			fieldLabel: 'Name',
 			name: 'Name',
+			toolTip: "Names are <b>totally</b> secret!",
 			modelNode: modelNode
 		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
