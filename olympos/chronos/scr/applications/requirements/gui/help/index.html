@@ -5,8 +5,8 @@
 	<TITLE></TITLE>
 	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Win32)">
 	<META NAME="CREATED" CONTENT="20081221;20463000">
-	<META NAME="CHANGEDBY" CONTENT="giuseppe platania">
-	<META NAME="CHANGED" CONTENT="20081227;16010200">
+	<META NAME="CHANGEDBY" CONTENT="Giuseppe Platania">
+	<META NAME="CHANGED" CONTENT="20081228;13163500">
 	<META NAME="Info 1" CONTENT="">
 	<META NAME="Info 2" CONTENT="">
 	<META NAME="Info 3" CONTENT="">
@@ -43,7 +43,7 @@ Web Modeler</B></FONT></FONT></FONT></P>
 <P><IMG SRC="index_html_487efd2e.png" NAME="Grafik1" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=291 HEIGHT=291 BORDER=0><BR CLEAR=LEFT>Welcome
 to Chronos Web Modeler! This document describes the usage of the
 application.</P>
-<DIV ID="Inhaltsverzeichnis1" DIR="LTR">
+<DIV ID="Table of Contents1" DIR="LTR">
 	<DIV ID="Inhaltsverzeichnis1_Head" DIR="LTR">
 		<P STYLE="margin-top: 0.42cm; background: transparent; page-break-before: auto; page-break-after: avoid">
 		<FONT COLOR="#000000"><FONT FACE="Arial, sans-serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>Table
@@ -107,11 +107,33 @@ application.</P>
 <P STYLE="margin-bottom: 0cm"><BR>
 </P>
 <H1 CLASS="western"><A NAME="1.Introduction|outline"></A>1 Introduction</H1>
-<H2 CLASS="western"><A NAME="1.1.Compatible Browsers|outline"></A>1.1 Compatible
+<H2 CLASS="western">1.1 About the Chronos Web Modeler</H2>
+<P>The Chronos Web Modeler (CWM) aims to provide an collaborative
+environment to create and manage models. The resulting models can be
+exported as XMI and transformed in code and/or a documentation.</P>
+<P><BR><BR>
+</P>
+<P>We are developing the CWM with simplicity in mind.<BR>Especially
+for the gathering of requirements and use cases a complete modeling
+tool can be an over kill f. A web client, featuring zero
+installation, allows multiple users to works on the same model
+contemporaneously. 
+</P>
+<H2 CLASS="western">1.2 License</H2>
+<P>The CWM  the accompanying materials are made available under the
+terms of the Eclipse Public License v1.0  which accompanies this
+distribution, and is available at 
+<A HREF="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</A>.</P>
+<P><BR><BR>
+</P>
+<P>You can download the most recent version from: 
+<A HREF="http://sourceforge.net/projects/olympos/">http://sourceforge.net/projects/olympos/</A>
+</P>
+<H2 CLASS="western"><A NAME="1.1.Compatible Browsers|outline"></A>1.3 Compatible
 Browsers</H2>
-<P>At the moment, the only browser with extensive test coverage is
-Firefox 3. Occasional tests with other browsers show no principal
-incompatibilities.	</P>
+<P>At the moment (alpha version), the only browser with extensive
+test coverage is Firefox 3. Occasional tests with other browsers show
+no principal incompatibilities.	</P>
 <H1 CLASS="western"><A NAME="2.Terminology|outline"></A>2 Terminology</H1>
 <TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
 	<COL WIDTH=150>
@@ -198,7 +220,7 @@ the main model view can be collapsed by the <FONT FACE="Times New Roman, serif">
 buttons in the title bar.</FONT></P>
 <H3 CLASS="western"><A NAME="3.2.1.New Objects|outline"></A>3.2.1 New
 Objects</H3>
-<P><IMG SRC="index_html_284f0a6.png" NAME="Grafik13" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=244 HEIGHT=241 BORDER=0><BR CLEAR=LEFT><BR><BR>
+<P><IMG SRC="index_html_m35ced798.jpg" NAME="graphics1" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=243 HEIGHT=156 BORDER=0><BR CLEAR=LEFT><BR><BR>
 </P>
 <P>The new objects view is located in the upper left part of the
 workbench. It lists all model objects the user may add to a diagram.
@@ -803,6 +825,8 @@ for clarity.</P>
 </TABLE>
 <H3 CLASS="western"><A NAME="3.2.4.Object Grids|outline"></A>3.2.4 Object
 Grids</H3>
+<P><IMG SRC="index_html_m71c36b6c.jpg" NAME="graphics2" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=245 HEIGHT=319 BORDER=0><BR CLEAR=LEFT><BR><BR>
+</P>
 <P>Object grid views are one tab per model object type in the lower
 left part of the workbench. Not all model object types have an object
 grid. The object grids list all objects of the appropriate model
@@ -1100,6 +1124,8 @@ the diagrams, containing of model objects and their connections.</P>
 	</TR>
 </TABLE>
 <H3 CLASS="western"><A NAME="3.2.6.Properties|outline"></A>3.2.6 Properties</H3>
+<P><IMG SRC="index_html_m5452a1d4.jpg" NAME="graphics3" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=251 HEIGHT=478 BORDER=0><BR CLEAR=LEFT><BR><BR>
+</P>
 <P>The properties view is located at the right part of the workbench.
 It shows the properties of a selected object. Each object has
 different properties.</P>
@@ -1113,7 +1139,7 @@ Lists</H4>
 Changes are saved to the model when leaving the input field.</P>
 <H4 CLASS="western"><A NAME="3.2.6.3.Rich Text Edit Boxes|outline"></A>
 3.2.6.3 Rich Text Edit Boxes</H4>
-<P>Richt text edit boxes allow multiple lines or paragraphs of
+<P>Rich text edit boxes allow multiple lines or paragraphs of
 formatted text. The formats bold, italic, underline, ordered list and
 unordered list are available. Changes are saved to the model when a
 different object's properties are displayed.</P>
@@ -1123,6 +1149,11 @@ Fields</H4>
 be edited.</P>
 <H1 CLASS="western"><A NAME="4.Model Description|outline"></A>4 Model
 Description</H1>
+<P>This part of the help describes in details the Chronos model,
+their objects (e.g ChiGoal, ChiRequirements, etc) and properties
+(e.g. Name, text, etc.). Because this structure is generated from a
+UML model the final information you can find  can varies depending
+from the situation.</P>
 <H2 CLASS="western"><A NAME="4.1.ChiGoal|outline"></A>4.1 ChiGoal</H2>
 <P LANG="en-GB" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m55254e5d.png" NAME="Grafik4" ALIGN=BOTTOM VSPACE=8 WIDTH=62 HEIGHT=56 BORDER=0></P>
 <P STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
