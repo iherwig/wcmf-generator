@@ -22,6 +22,36 @@ uwm.property.HtmlEditor = function(config) {
 		enableLinks: false,
 		enableSourceEdit: false,
 		listeners: {
+			"initialize": function() {
+				this.doc.getElementsByTagName("head")[0].innerHTML += '<link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />';
+				
+				Ext.EventManager.on(this.doc, 'keypress', function(e) {
+					if (e.shiftKey && e.getKey() == e.SPACE) {
+						this.insertAtCursor("<span id='ASDFASDFASDF' />");
+						
+						this.span = this.doc.getElementById("ASDFASDFASDF");
+						var fullPreText = this.span.previousSibling.nodeValue;
+						this.preText = "";
+						
+						if (fullPreText) {
+							this.preText = fullPreText.match(/[^\t\n ]+$/)[0];
+							this.span.previousSibling.nodeValue = fullPreText.substr(0, fullPreText.length - this.preText.length);
+						}
+						
+						this.comboBox = new uwm.property.InlineComboBox({
+							htmledit: this,
+							doc: this.doc,
+							renderTo: this.span,
+							mode: "local",
+							value: this.preText
+						});
+						this.suspendEvents();
+						Ext.TaskMgr.stop(this.monitorTask);
+						this.doc.designMode = "off";
+						this.comboBox.focus();
+					}
+				}, this);
+			},
 			"beforedestroy": function(field) {
 				self.fieldChanged(field);
 			}
@@ -33,6 +63,26 @@ uwm.property.HtmlEditor = function(config) {
 }
 
 Ext.extend(uwm.property.HtmlEditor, Ext.form.HtmlEditor);
+
+uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue) {
+	this.comboBox.destroy();
+	this.span.previousSibling.nodeValue += newValue;
+	this.span.parentNode.removeChild(this.span);
+	this.doc.designMode = "on",
+	Ext.TaskMgr.start(this.monitorTask);
+	this.resumeEvents();
+	this.focus();
+}
+
+uwm.property.HtmlEditor.prototype.revertInlineComboBox = function() {
+	this.comboBox.destroy();
+	this.span.previousSibling.nodeValue += this.preText;
+	this.span.parentNode.removeChild(this.span);
+	this.doc.designMode = "on",
+	Ext.TaskMgr.start(this.monitorTask);
+	this.resumeEvents();
+	this.focus();
+}
 
 uwm.property.HtmlEditor.prototype.render = function(container, position) {
 	uwm.property.HtmlEditor.superclass.render.apply(this, arguments);
