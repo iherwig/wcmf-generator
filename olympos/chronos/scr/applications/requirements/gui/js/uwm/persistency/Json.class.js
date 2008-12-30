@@ -145,7 +145,7 @@ uwm.persistency.Json.prototype.display = function(oid, depth, successHandler, er
 uwm.persistency.Json.prototype.list = function(uwmClassName, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "list",
-		type: umwClassName
+		type: uwmClassName
 	}, successHandler, errorHandler);
 }
 

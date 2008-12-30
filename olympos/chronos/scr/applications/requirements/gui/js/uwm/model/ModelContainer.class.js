@@ -184,7 +184,9 @@ uwm.model.ModelContainer.prototype.handleCreatedModelObject = function(oid, uwmC
 	
 	newObject.setDefaultLabel();
 	
-	newObject.associate(packageNode);
+	if (packageNode) {
+		newObject.associate(packageNode);
+	}
 	
 	if (figureNode) {
 		figureNode.associate(newObject);
