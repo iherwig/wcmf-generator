@@ -15,11 +15,11 @@ uwm.ui.Login = function(config) {
 	var self = this;
 	
 	this.form = new Ext.FormPanel({
-		labelWidth: 75,
+		labelWidth: 100,
 		frame: true,
 		title: 'Login',
 		bodyStyle: 'padding:5px 5px 0',
-		width: 350,
+		width: 375,
 		defaults: {
 			width: 230
 		},
@@ -30,23 +30,24 @@ uwm.ui.Login = function(config) {
 			}
 		}],
 		
-		items: [/*new Ext.BoxComponent({
-			autoEl: {
-				tag: "div",
-				cls: "cwm-logo-container",
-				children: [{
-					tag: "h1",
-					html: "Chronos Web Modeler"
-				}, {
-					tag: "div"
-				}, {
-					tag: "a",
-					target: "_blank",
-					href: "http://sourceforge.net/projects/olympos/",
-					html: "http://sourceforge.net/projects/olympos/"
-				}]
-			}
-		}),*/ new Ext.form.TextField({
+		items: [		/*new Ext.BoxComponent({
+		 autoEl: {
+		 tag: "div",
+		 cls: "cwm-logo-container",
+		 children: [{
+		 tag: "h1",
+		 html: "Chronos Web Modeler"
+		 }, {
+		 tag: "div"
+		 }, {
+		 tag: "a",
+		 target: "_blank",
+		 href: "http://sourceforge.net/projects/olympos/",
+		 html: "http://sourceforge.net/projects/olympos/"
+		 }]
+		 }
+		 }),*/
+		new Ext.form.TextField({
 			fieldLabel: 'Login',
 			name: 'login',
 			allowBlank: false,
@@ -57,6 +58,26 @@ uwm.ui.Login = function(config) {
 			inputType: "password",
 			allowBlank: false,
 			value: uwm.Config.defaultPassword
+		}), new Ext.form.RadioGroup({
+			fieldLabel: "Workbench Type",
+			columns: 1,
+			items: [{
+				boxLabel: "Default",
+				id: "workbenchTypeDefault",
+				name: "workbenchType",
+				inputValue: "default",
+				checked: true
+			}, {
+				boxLabel: "Admin Tabs",
+				id: "workbenchTypeTabs",
+				name: "workbenchType",
+				inputValue: "tabs"
+			}, {
+				boxLabel: "Admin Tree",
+				id: "workbenchTypeTree",
+				name: "workbenchType",
+				inputValue: "tree"
+			}]
 		})],
 		buttons: [{
 			text: 'Login',
@@ -102,7 +123,10 @@ uwm.ui.Login.prototype.initSession = function() {
 }
 
 uwm.ui.Login.prototype.handleLogin = function(options, data) {
-	uwm.Uwm.getInstance().startSession(data.sid);
+	var workbenchType = Ext.getCmp("workbenchTypeDefault").getValue() ? "default" : Ext.getCmp("workbenchTypeTabs").getValue() ? "tabs" : Ext.getCmp("workbenchTypeTree").getValue() ? "tree" : false;
+	console.log(workbenchType);
+
+	uwm.Uwm.getInstance().startSession(data.sid, workbenchType);
 }
 
 uwm.ui.Login.prototype.handleLoginFailure = function(options, data, errorMsg) {

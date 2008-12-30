@@ -122,6 +122,10 @@ uwm.model.ModelNode.prototype.fillPropertyForm = function(form, mask) {
 uwm.model.ModelNode.prototype.populatePropertyForm = function(form) {
 }
 
+uwm.model.ModelNode.prototype.getProperty = function(propertyName) {
+	return this.data[propertyName];
+}
+
 uwm.model.ModelNode.prototype.changeProperties = function(values) {
 	var oldValues = new Object();
 	var oldLabels = new Object();

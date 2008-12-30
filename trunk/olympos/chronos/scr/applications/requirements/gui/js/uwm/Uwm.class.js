@@ -38,12 +38,19 @@ uwm.Uwm.prototype.startApplication = function() {
 	}
 }
 
-uwm.Uwm.prototype.startSession = function(sid) {
+uwm.Uwm.prototype.startSession = function(sid, workbenchType) {
 	uwm.Session.getInstance().init(sid);
 
 	this.login.destroy();
 	
-	this.workbench = new uwm.ui.Workbench();
+	switch (workbenchType) {
+		case "tabs":
+			this.workbench = new uwm.tabadmin.Workbench();
+			break;
+
+		default:
+			this.workbench = new uwm.ui.Workbench();
+	}
 }
 
 uwm.Uwm.getInstance = function() {
