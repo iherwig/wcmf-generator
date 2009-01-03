@@ -14,10 +14,10 @@ Ext.namespace("uwm.property");
 uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
     initComponent: function(){
         Ext.apply(this, {
-            region: "east",
+            region: "center",
             layout: "fit",
-            collapsible: true,
-            split: true,
+            collapsible: false,
+            split: false,
             width: 250,
             autoScroll: true,
             title: "Properties"
