@@ -124,7 +124,6 @@ uwm.ui.Login.prototype.initSession = function() {
 
 uwm.ui.Login.prototype.handleLogin = function(options, data) {
 	var workbenchType = Ext.getCmp("workbenchTypeDefault").getValue() ? "default" : Ext.getCmp("workbenchTypeTabs").getValue() ? "tabs" : Ext.getCmp("workbenchTypeTree").getValue() ? "tree" : false;
-	console.log(workbenchType);
 
 	uwm.Uwm.getInstance().startSession(data.sid, workbenchType);
 }
