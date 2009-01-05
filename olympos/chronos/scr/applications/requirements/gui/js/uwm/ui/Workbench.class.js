@@ -38,28 +38,8 @@ uwm.ui.Workbench = function(config) {
 					})]
 				}]
 			}
-		}, new Ext.Panel({
-			region: "east",
-			layout: "border",
-			collapsible: true,
-			split: true,
-			width: 250,
-			title: "Perspectives",
-			
-			items: [new Ext.Toolbar({
-				region: "north",
-				collapsible: false,
-				split: false,
-				items: [new Ext.Toolbar.Button({
-					enableToggle: true,
-					pressed: true,
-					text: "Default"
-				}), new Ext.Toolbar.Button({
-					text: "Admin Tabs"
-				}), new Ext.Toolbar.Button({
-					text: "Admin Tree"
-				})]
-			}), new uwm.property.PropertyContainer()]
+		}, new uwm.ui.EastPanel({
+			highlight: "default"
 		}), uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
 	}, config));
 }

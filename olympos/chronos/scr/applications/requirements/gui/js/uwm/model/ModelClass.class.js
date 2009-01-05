@@ -41,6 +41,10 @@ uwm.model.ModelClass.prototype.getConnectionInfo = function(otherClass) {
 	return this.connectionInfo[otherClass.getUwmClassName()];
 }
 
+uwm.model.ModelClass.prototype.getAllConnectionInfo = function() {
+	return this.connectionInfo;
+}
+
 uwm.model.ModelNodeClass.prototype.getGridTabIconClass = function() {
 	return this.gridTabIconClass;
 }
