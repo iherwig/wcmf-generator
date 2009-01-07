@@ -139,4 +139,8 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
 	});
 }
 
+cwm.ChiGoalClass.prototype.getGraphics = function(label, figure) {
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiRequirementGoal.PNG", 96, 95, 96, 95);
+}
+
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiGoalClass());

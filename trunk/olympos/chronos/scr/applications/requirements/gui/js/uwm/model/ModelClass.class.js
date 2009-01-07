@@ -60,3 +60,7 @@ uwm.model.ModelNodeClass.prototype.getGridFields = function() {
 uwm.model.ModelNodeClass.prototype.getGridColumns = function() {
 	return this.gridColumns;
 }
+
+uwm.model.ModelNodeClass.prototype.getGraphics = function(label, figure) {
+	return eval("new " + this.getFigureClass() + "(label, this)");
+}
