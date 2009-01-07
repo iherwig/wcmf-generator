@@ -30,6 +30,12 @@ uwm.graphics.figure.ComplexFigure = function(label, figure, minWidth, minHeight,
 
 Ext.extend(uwm.graphics.figure.ComplexFigure, uwm.graphics.figure.BaseFigure);
 
+uwm.graphics.figure.ComplexFigure.prototype.setWorkflow = function(workflow) {
+	uwm.graphics.figure.BaseFigure.prototype.setWorkflow.call(this, workflow);
+	
+	this.setLabelDimension();
+}
+
 /**
  * Adjusts the label position.
  *

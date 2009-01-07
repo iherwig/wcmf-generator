@@ -107,7 +107,7 @@ uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
  * @type uwm.model.ModelObject
  */
 uwm.diagram.Figure.prototype.getFigure = function(modelClass, label) {
-	return eval("new " + modelClass.getFigureClass() + "(label, this)");
+	return modelClass.getGraphics(label, this);
 }
 
 /**

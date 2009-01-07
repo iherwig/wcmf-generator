@@ -24,8 +24,8 @@ Ext.namespace("uwm.graphics.figure");
  * @param {int} startWidth Initial width of figure.
  * @param {int} startHeight Initial height of figure.
  */
-uwm.graphics.figure.LabelBelowFigure = function(label, figure, minWidth, minHeight, startWidth, startHeight){
-    uwm.graphics.figure.ComplexFigure.call(this, label, figure, minWidth, minHeight, startWidth, startHeight);
+uwm.graphics.figure.LabelBelowFigure = function(label, figure, minWidth, minHeight, startWidth, startHeight) {
+	uwm.graphics.figure.ComplexFigure.call(this, label, figure, minWidth, minHeight, startWidth, startHeight);
 }
 
 Ext.extend(uwm.graphics.figure.LabelBelowFigure, uwm.graphics.figure.ComplexFigure);
@@ -35,10 +35,10 @@ Ext.extend(uwm.graphics.figure.LabelBelowFigure, uwm.graphics.figure.ComplexFigu
  *
  * @private
  */
-uwm.graphics.figure.LabelBelowFigure.prototype.setLabelDimension = function(){
-    if (this.label != null) {
-        this.label.style.left = (-(this.label.clientWidth - this.width) / 2) + "px";
-    }
+uwm.graphics.figure.LabelBelowFigure.prototype.setLabelDimension = function() {
+	if (this.label != null) {
+		this.label.style.left = (-(this.label.clientWidth - this.width) / 2) + "px";
+	}
 }
 
 /**
@@ -46,21 +46,22 @@ uwm.graphics.figure.LabelBelowFigure.prototype.setLabelDimension = function(){
  *
  * @private
  */
-uwm.graphics.figure.LabelBelowFigure.prototype.createHTMLElement = function(){
-    var item = uwm.graphics.figure.ComplexFigure.prototype.createHTMLElement.call(this);
-    
-    /**
-     * The label of this figure.
-     *
-     * @private
-     * @type HTMLElement
-     */
-    this.label = document.createElement("div");
-    this.label.style.position = "absolute";
-    this.label.style.width = "auto";
-    this.label.style.textAlign = "center";
-    this.label.style.bottom = "-24px";
-    this.label.style.height = "20px";
-    
-    return item;
+uwm.graphics.figure.LabelBelowFigure.prototype.createHTMLElement = function() {
+	var item = uwm.graphics.figure.ComplexFigure.prototype.createHTMLElement.call(this);
+	
+	/**
+	 * The label of this figure.
+	 *
+	 * @private
+	 * @type HTMLElement
+	 */
+	this.label = document.createElement("div");
+	this.label.style.position = "absolute";
+	this.label.style.width = "auto";
+	this.label.style.textAlign = "center";
+	this.label.style.bottom = "-24px";
+	this.label.style.height = "20px";
+	item.appendChild(this.label);
+	
+	return item;
 }
