@@ -23,34 +23,7 @@ uwm.property.HtmlEditor = function(config) {
 		enableSourceEdit: false,
 		listeners: {
 			"initialize": function() {
-				this.doc.getElementsByTagName("head")[0].innerHTML += '<link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />';
-				
-				Ext.EventManager.on(this.doc, 'keypress', function(e) {
-					if (e.shiftKey && e.getKey() == e.SPACE) {
-						this.insertAtCursor("<span id='ASDFASDFASDF' />");
-						
-						this.span = this.doc.getElementById("ASDFASDFASDF");
-						var fullPreText = this.span.previousSibling.nodeValue;
-						this.preText = "";
-						
-						if (fullPreText) {
-							this.preText = fullPreText.match(/[^\t\n ]+$/)[0];
-							this.span.previousSibling.nodeValue = fullPreText.substr(0, fullPreText.length - this.preText.length);
-						}
-						
-						this.comboBox = new uwm.property.InlineComboBox({
-							htmledit: this,
-							doc: this.doc,
-							renderTo: this.span,
-							mode: "local",
-							value: this.preText
-						});
-						this.suspendEvents();
-						Ext.TaskMgr.stop(this.monitorTask);
-						this.doc.designMode = "off";
-						this.comboBox.focus();
-					}
-				}, this);
+				self.handleInitialize();
 			},
 			"beforedestroy": function(field) {
 				self.fieldChanged(field);
@@ -64,24 +37,61 @@ uwm.property.HtmlEditor = function(config) {
 
 Ext.extend(uwm.property.HtmlEditor, Ext.form.HtmlEditor);
 
+uwm.property.HtmlEditor.prototype.handleInitialize = function() {
+	Ext.EventManager.on(this.doc, 'keypress', function(e) {
+		if (e.shiftKey && e.getKey() == e.SPACE) {
+			this.insertAtCursor("<span id='" + uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID + "' />");
+			
+			this.span = this.doc.getElementById(uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID);
+			var fullPreText = this.span.previousSibling.nodeValue;
+			this.preText = "";
+			
+			if (fullPreText) {
+				var matchArray = fullPreText.match(/[^\t\n ]+$/);
+				if (matchArray) {
+					this.preText = matchArray[0];
+					this.span.previousSibling.nodeValue = fullPreText.substr(0, fullPreText.length - this.preText.length);
+				}
+			}
+			
+			//this.wrap = Ext.DomHelper.append(Ext.getBody(), "<div />", true);
+			this.wrap = new Ext.Layer();
+			
+			this.comboBox = new uwm.property.InlineComboBox({
+				htmledit: this,
+				doc: this.doc,
+				renderTo: this.wrap.dom,
+				value: this.preText.trim()
+			});
+			
+			var htmlpos = this.getPosition(true);
+			var htmlbox = this.getBox();
+			var combobox = this.comboBox.getBox();
+			var spanbox = this.span.getBoundingClientRect();
+			
+			// the fixed offsets are determined by trial & error, no deeper meaning (just looks better this way)
+			this.wrap.setBounds(htmlbox.x - htmlpos[0] + spanbox.left, htmlbox.y - htmlpos[1] + spanbox.top + combobox.height * 1.1, combobox.width + 20, combobox.height);
+			this.wrap.show();
+			
+			this.comboBox.focus(undefined, true);
+		}
+	}, this);
+}
+
 uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue) {
 	this.comboBox.destroy();
-	this.span.previousSibling.nodeValue += newValue;
+	this.wrap.remove();
 	this.span.parentNode.removeChild(this.span);
-	this.doc.designMode = "on",
-	Ext.TaskMgr.start(this.monitorTask);
-	this.resumeEvents();
-	this.focus();
+	this.insertAtCursor(" <b>" + newValue + "</b>&ensp;");
+	this.focus(undefined, 100);
 }
 
 uwm.property.HtmlEditor.prototype.revertInlineComboBox = function() {
 	this.comboBox.destroy();
-	this.span.previousSibling.nodeValue += this.preText;
+	this.wrap.remove();
 	this.span.parentNode.removeChild(this.span);
-	this.doc.designMode = "on",
-	Ext.TaskMgr.start(this.monitorTask);
-	this.resumeEvents();
-	this.focus();
+	this.insertAtCursor(this.preText);
+	this.focus(undefined, 100);
 }
 
 uwm.property.HtmlEditor.prototype.render = function(container, position) {
@@ -103,3 +113,5 @@ uwm.property.HtmlEditor.prototype.fieldChanged = function(field) {
 		this.modelNode.changeProperties(tmp);
 	}
 }
+
+uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID = "inlineComboBoxSpanId";

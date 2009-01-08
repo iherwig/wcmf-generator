@@ -51,8 +51,10 @@ uwm.property.InlineComboBox = function(config) {
 		}),
 		displayField: 'val',
 		valueField: 'val',
+		mode: "local",
 		triggerAction: 'all',
-		enableKeyEvents: true
+		enableKeyEvents: true,
+		typeAhead: true
 	}, config));
 	
 	var self = this;
@@ -63,26 +65,11 @@ uwm.property.InlineComboBox = function(config) {
 		}
 	});
 	
-	this.htmledit = config.htmledit;
 	this.doc = config.doc;
-	this.layerElem = this.doc.createElement("div");
-	this.doc.getElementsByTagName("body")[0].appendChild(this.layerElem);
+	this.htmledit = config.htmledit;
 }
 
 Ext.extend(uwm.property.InlineComboBox, Ext.form.ComboBox);
-
-uwm.property.InlineComboBox.prototype.onRender = function(ct, position) {
-	uwm.property.InlineComboBox.superclass.onRender.call(this, ct, position);
-	
-	this.wrap = Ext.DomHelper.append(Ext.getBody(), "<div />", true);
-	this.wrap.setStyle("visibility", "hidden");
-	
-	var htmlpos = this.htmledit.getPosition(true);
-	var htmlbox = this.htmledit.getBox();
-	var combobox = this.getBox();
-	
-	this.wrap.setBounds(htmlbox.x + combobox.x - htmlpos[0], htmlbox.y + combobox.y - htmlpos[1] + combobox.height * 1.5, combobox.width, combobox.height);
-}
 
 uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 	var keycode = e.getKey();
@@ -96,5 +83,8 @@ uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 		case e.ESC:
 			this.htmledit.revertInlineComboBox();
 			break;
+			
+		default:
+		//do nothing
 	}
 }
