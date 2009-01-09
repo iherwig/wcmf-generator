@@ -44,4 +44,4 @@ uwm.ui.Workbench = function(config) {
 	}, config));
 }
 
-Ext.extend(uwm.ui.Workbench, Ext.Viewport);
+Ext.extend(uwm.ui.Workbench, Ext.Panel);

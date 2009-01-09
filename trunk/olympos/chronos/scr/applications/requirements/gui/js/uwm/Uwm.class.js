@@ -40,22 +40,34 @@ uwm.Uwm.prototype.startApplication = function() {
 	}
 }
 
-uwm.Uwm.prototype.startSession = function(sid, workbenchType) {
+uwm.Uwm.prototype.startSession = function(sid) {
 	uwm.Session.getInstance().init(sid);
 	
 	this.login.destroy();
 	
-	switch (workbenchType) {
-		case "tabs":
-			this.workbench = new uwm.tabadmin.Workbench();
+	this.defaultWorkbench = new uwm.ui.Workbench();
+	this.adminWorkbench = new uwm.tabadmin.Workbench();
+	
+	this.viewport = new Ext.Viewport({
+		layout: "card",
+		activeItem: 0,
+		items: [
+			this.defaultWorkbench,
+			this.adminWorkbench
+		]
+	})
+}
+
+uwm.Uwm.prototype.switchWorkbench = function(newWorkbench) {
+	switch (newWorkbench) {
+		case "admin":
+			this.viewport.getLayout().setActiveItem(1);
 			break;
 			
-		case "tree":
-			this.workbench = new uwm.treeadmin.Workbench();
-			break;
-			
+		case "default":
 		default:
-			this.workbench = new uwm.ui.Workbench();
+			this.viewport.getLayout().setActiveItem(0);
+			break;
 	}
 }
 
