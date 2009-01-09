@@ -13,10 +13,12 @@ uwm.Session = function() {
 	this.jsonUrl = uwm.Config.jsonUrl;
 	this.helpUrl = "help/index.html";
 	this.persistencyClass = "uwm.persistency.Json";
+	this.lang = "en";
 }
 
-uwm.Session.prototype.init = function(sid) {
+uwm.Session.prototype.init = function(sid, lang) {
 	this.sid = sid;
+	this.lang = lang;
 }
 
 uwm.Session.prototype.getSid = function() {
@@ -34,6 +36,11 @@ uwm.Session.prototype.getHelpUrl = function() {
 uwm.Session.prototype.getPersistencyClass = function() {
 	return this.persistencyClass;
 }
+
+uwm.Session.prototype.getLang = function() {
+	return this.lang;	
+}
+
 
 uwm.Session.getInstance = function() {
 	if (!uwm.Session.instance) {

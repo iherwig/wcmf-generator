@@ -21,9 +21,8 @@ uwm.ui.EastPanel = Ext.extend(Ext.Panel, {
 			collapsible: true,
 			split: true,
 			width: 250,
-			title: "Perspectives",
+			title: uwm.Dict.translate('Perspectives'),
 			items: [new uwm.ui.Perspective({
-				highlight: this.highlight
 			}), this.propertyContainer]
 		});
 		

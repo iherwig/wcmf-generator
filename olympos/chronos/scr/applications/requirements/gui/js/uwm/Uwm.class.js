@@ -40,8 +40,8 @@ uwm.Uwm.prototype.startApplication = function() {
 	}
 }
 
-uwm.Uwm.prototype.startSession = function(sid) {
-	uwm.Session.getInstance().init(sid);
+uwm.Uwm.prototype.startSession = function(sid, lang) {
+	uwm.Session.getInstance().init(sid, lang);
 	
 	this.login.destroy();
 	
