@@ -12,8 +12,11 @@
 Ext.namespace("uwm.ui");
 
 uwm.ui.Workbench = function(config) {
+	this.eastPanel = new uwm.ui.EastPanel({
+			highlight: "default"
+		});
+	
 	uwm.ui.Workbench.superclass.constructor.call(this, Ext.apply(this, {
-		layout: "border",
 		items: [{
 			region: "west",
 			title: "Available Content",
@@ -38,10 +41,8 @@ uwm.ui.Workbench = function(config) {
 					})]
 				}]
 			}
-		}, new uwm.ui.EastPanel({
-			highlight: "default"
-		}), uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
+		}, this.eastPanel, uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
 	}, config));
 }
 
-Ext.extend(uwm.ui.Workbench, Ext.Panel);
+Ext.extend(uwm.ui.Workbench, uwm.ui.AbstractWorkbench);

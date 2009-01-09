@@ -46,7 +46,9 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
             var oid = modelNode.getOid();
             
             if (oid != null && this.currentOid != oid) {
-                this.mask.hide();
+                if (this.mask) {
+					this.mask.hide();
+				}
                 
                 this.currentOid = modelNode.getOid();
                 
@@ -68,5 +70,5 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 })
 
 uwm.property.PropertyContainer.getInstance = function(){
-    return uwm.property.PropertyContainer.instance;
+    return uwm.Uwm.getInstance().getActiveWorkbench().getEastPanel().getPropertyContainer();
 }

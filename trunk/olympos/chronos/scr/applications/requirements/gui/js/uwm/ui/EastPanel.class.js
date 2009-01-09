@@ -13,6 +13,8 @@ Ext.namespace("uwm.ui");
 
 uwm.ui.EastPanel = Ext.extend(Ext.Panel, {
 	initComponent: function() {
+		this.propertyContainer = new uwm.property.PropertyContainer();
+		
 		Ext.apply(this, {
 			region: "east",
 			layout: "border",
@@ -22,9 +24,13 @@ uwm.ui.EastPanel = Ext.extend(Ext.Panel, {
 			title: "Perspectives",
 			items: [new uwm.ui.Perspective({
 				highlight: this.highlight
-			}), new uwm.property.PropertyContainer()]
+			}), this.propertyContainer]
 		});
 		
 		uwm.ui.EastPanel.superclass.initComponent.apply(this, arguments);
 	}
 });
+
+uwm.ui.EastPanel.prototype.getPropertyContainer = function() {
+	return this.propertyContainer;
+}

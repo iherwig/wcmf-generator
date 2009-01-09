@@ -71,6 +71,10 @@ uwm.Uwm.prototype.switchWorkbench = function(newWorkbench) {
 	}
 }
 
+uwm.Uwm.prototype.getActiveWorkbench = function() {
+	return this.viewport.getLayout().activeItem;
+}
+
 uwm.Uwm.getInstance = function() {
 	if (!uwm.Uwm.instance) {
 		uwm.Uwm.instance = new uwm.Uwm();
