@@ -15,12 +15,12 @@ uwm.tabadmin.Workbench = function(config) {
 	this.tabPanel = new Ext.TabPanel({
 		region: "center"
 	});
+	this.eastPanel = new uwm.ui.EastPanel({
+		highlight: "admin"
+	})
 	
 	uwm.tabadmin.Workbench.superclass.constructor.call(this, Ext.apply(this, {
-		layout: "border",
-		items: [this.tabPanel, new uwm.ui.EastPanel({
-			highlight: "admin"
-		})]
+		items: [this.tabPanel, this.eastPanel]
 	}, config));
 	
 	
@@ -32,4 +32,4 @@ uwm.tabadmin.Workbench = function(config) {
 	}));
 }
 
-Ext.extend(uwm.tabadmin.Workbench, Ext.Panel);
+Ext.extend(uwm.tabadmin.Workbench, uwm.ui.AbstractWorkbench);
