@@ -62,5 +62,5 @@ uwm.model.ModelNodeClass.prototype.getGridColumns = function() {
 }
 
 uwm.model.ModelNodeClass.prototype.getGraphics = function(label, figure) {
-	return eval("new " + this.getFigureClass() + "(label, this)");
+	return eval("new " + this.getFigureClass() + "(label, figure)");
 }
