@@ -20,7 +20,7 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
             split: false,
             width: 250,
             autoScroll: true,
-            title: "Properties"
+            title: uwm.Dict.translate('Properties')
         })
         
         uwm.property.PropertyContainer.instance = this;
