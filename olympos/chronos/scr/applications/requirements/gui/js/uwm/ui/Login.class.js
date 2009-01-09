@@ -58,26 +58,6 @@ uwm.ui.Login = function(config) {
 			inputType: "password",
 			allowBlank: false,
 			value: uwm.Config.defaultPassword
-		}), new Ext.form.RadioGroup({
-			fieldLabel: "Workbench Type",
-			columns: 1,
-			items: [{
-				boxLabel: "Default",
-				id: "workbenchTypeDefault",
-				name: "workbenchType",
-				inputValue: "default",
-				checked: true
-			}, {
-				boxLabel: "Admin Tabs",
-				id: "workbenchTypeTabs",
-				name: "workbenchType",
-				inputValue: "tabs"
-			}, {
-				boxLabel: "Admin Tree",
-				id: "workbenchTypeTree",
-				name: "workbenchType",
-				inputValue: "tree"
-			}]
 		})],
 		buttons: [{
 			text: 'Login',
@@ -123,9 +103,7 @@ uwm.ui.Login.prototype.initSession = function() {
 }
 
 uwm.ui.Login.prototype.handleLogin = function(options, data) {
-	var workbenchType = Ext.getCmp("workbenchTypeDefault").getValue() ? "default" : Ext.getCmp("workbenchTypeTabs").getValue() ? "tabs" : Ext.getCmp("workbenchTypeTree").getValue() ? "tree" : false;
-
-	uwm.Uwm.getInstance().startSession(data.sid, workbenchType);
+	uwm.Uwm.getInstance().startSession(data.sid);
 }
 
 uwm.ui.Login.prototype.handleLoginFailure = function(options, data, errorMsg) {

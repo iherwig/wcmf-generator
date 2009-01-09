@@ -19,7 +19,7 @@ uwm.tabadmin.Workbench = function(config) {
 	uwm.tabadmin.Workbench.superclass.constructor.call(this, Ext.apply(this, {
 		layout: "border",
 		items: [this.tabPanel, new uwm.ui.EastPanel({
-			highlight: "tab"
+			highlight: "admin"
 		})]
 	}, config));
 	
@@ -32,4 +32,4 @@ uwm.tabadmin.Workbench = function(config) {
 	}));
 }
 
-Ext.extend(uwm.tabadmin.Workbench, Ext.Viewport);
+Ext.extend(uwm.tabadmin.Workbench, Ext.Panel);

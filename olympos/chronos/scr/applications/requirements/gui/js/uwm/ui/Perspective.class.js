@@ -13,30 +13,37 @@ Ext.namespace("uwm.ui");
 
 uwm.ui.Perspective = Ext.extend(Ext.Toolbar, {
 	initComponent: function() {
+		var self = this;
 	
 		this.defaultButton = new Ext.Toolbar.Button({
 			text: "Default",
 			enableToggle: true,
-			pressed: this.highlight == "default"
+			pressed: this.highlight == "default",
+			highlight: this.highlight,
+			highlightState: "default",
+			handler: self.handleClick
 		});
-		this.tabButton = new Ext.Toolbar.Button({
-			text: "Admin Tabs",
+		this.adminButton = new Ext.Toolbar.Button({
+			text: "Admin",
 			enableToggle: true,
-			pressed: this.highlight == "tab"
-		});
-		this.treeButton = new Ext.Toolbar.Button({
-			text: "Admin Tree",
-			enableToggle: true,
-			pressed: this.highlight == "tree"
+			pressed: this.highlight == "admin",
+			highlight: this.highlight,
+			highlightState: "admin",
+			handler: self.handleClick
 		});
 		
 		Ext.apply(this, {
 			region: "north",
 			collapsible: false,
 			split: false,
-			items: [this.defaultButton, this.tabButton, this.treeButton]
+			items: [this.defaultButton, this.adminButton]
 		});
 		
 		uwm.ui.Perspective.superclass.initComponent.apply(this, arguments);
 	}
 });
+
+uwm.ui.Perspective.prototype.handleClick = function(button, e) {
+	button.toggle(this.highlight == button.highlightState);
+	uwm.Uwm.getInstance().switchWorkbench(button.highlightState);
+}
