@@ -23,6 +23,7 @@ uwm.ui.EastPanel = Ext.extend(Ext.Panel, {
 			width: 250,
 			title: uwm.Dict.translate('Perspectives'),
 			items: [new uwm.ui.Perspective({
+				highlight: this.highlight
 			}), this.propertyContainer]
 		});
 		
