@@ -53,6 +53,11 @@
 	white-space: normal !important;
 }
 
+.ux-cell-value {
+	min-width: 16px;
+	min-height: 16px;
+}
+
 .uwm-help-icon {
 	margin: 0;
 	padding: 0;
@@ -66,6 +71,12 @@
 	border: none;
 	width: 100%;
 	height: 100%;
+}
+
+.uwm-download-frame {
+	border: none;
+	width: 0;
+	height: 0;
 }
 
 .uwm-field-readOnly {

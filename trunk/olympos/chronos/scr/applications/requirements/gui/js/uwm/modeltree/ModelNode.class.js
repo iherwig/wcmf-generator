@@ -46,6 +46,14 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 				handler: function(item, e) {
 					self.selectAsScope(item, e);
 				}
+			}, {
+				text: "Download as XML",
+				handler: function(item, e) {
+					new uwm.ui.Download({
+						title: "Downloading XML ...",
+						downloadURL: "../application/main.php?response_format=JSON&usr_action=execJava"
+					}).show();
+				}
 			}]
 		});
 		
