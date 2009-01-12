@@ -19,7 +19,7 @@ uwm.ui.Workbench = function(config) {
 	uwm.ui.Workbench.superclass.constructor.call(this, Ext.apply(this, {
 		items: [{
 			region: "west",
-			title: "Available Content",
+			title: uwm.Dict.translate('Available Content'),
 			collapsible: true,
 			split: true,
 			width: 250,

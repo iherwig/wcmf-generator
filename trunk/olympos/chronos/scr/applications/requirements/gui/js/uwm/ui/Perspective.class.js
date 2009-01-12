@@ -16,7 +16,7 @@ uwm.ui.Perspective = Ext.extend(Ext.Toolbar, {
 		var self = this;
 	
 		this.defaultButton = new Ext.Toolbar.Button({
-			text: "Default",
+			text: uwm.Dict.translate('Default'),
 			enableToggle: true,
 			pressed: this.highlight == "default",
 			highlight: this.highlight,
@@ -24,7 +24,7 @@ uwm.ui.Perspective = Ext.extend(Ext.Toolbar, {
 			handler: self.handleClick
 		});
 		this.adminButton = new Ext.Toolbar.Button({
-			text: "Admin",
+			text: uwm.Dict.translate('Admin'),
 			enableToggle: true,
 			pressed: this.highlight == "admin",
 			highlight: this.highlight,

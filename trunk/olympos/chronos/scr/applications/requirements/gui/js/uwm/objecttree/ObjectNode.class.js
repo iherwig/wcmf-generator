@@ -22,23 +22,23 @@ Ext.extend(uwm.objecttree.ObjectNode, uwm.objecttree.Node, {
 		this.contextMenu = new Ext.menu.Menu({
 			items: [{
 				id: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
-				text: "Show in diagram",
+				text: uwm.Dict.translate('Show in diagram'),
 				handler: function(item, e) {
 					self.showInDiagram(item, e);
 				}
 			}, {
 				id: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID,
-				text: "Show in grid",
+				text: uwm.Dict.translate('Show in grid'),
 				handler: function(item, e) {
 					self.showInGrid(item.e);
 				}
 			}, {
-				text: "Delete from model",
+				text: uwm.Dict.translate('Delete from model'),
 				handler: function(item, e) {
 					self.deleteFromModel(item, e);
 				}
 			}, {
-				text: "Help",
+				text: uwm.Dict.translate('Help'),
 				//iconCls: "uwm-help-icon",
 				handler: function(item, e) {
 					self.showHelp(item, e);

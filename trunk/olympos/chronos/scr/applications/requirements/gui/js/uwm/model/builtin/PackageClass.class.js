@@ -28,30 +28,30 @@ uwm.model.builtin.PackageClass.prototype = new uwm.model.ModelNodeClass;
 uwm.model.builtin.PackageClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
-			fieldLabel: 'Name',
+			fieldLabel: uwm.Dict.translate('Name'),
 			name: 'Name',
 			modelNode: modelNode
 		}), new uwm.property.HtmlEditor({
-			fieldLabel: 'Notes',
+			fieldLabel: uwm.Dict.translate('Notes'),
 			name: 'Notes',
 			modelNode: modelNode
 		}), new uwm.property.TextField({
-			fieldLabel: 'created',
+			fieldLabel: uwm.Dict.translate('created'),
 			name: 'created',
 			modelNode: modelNode,
 			readOnly: true
 		}), new uwm.property.TextField({
-			fieldLabel: 'creator',
+			fieldLabel: uwm.Dict.translate('creator'),
 			name: 'creator',
 			modelNode: modelNode,
 			readOnly: true
 		}), new uwm.property.TextField({
-			fieldLabel: 'last_editor',
+			fieldLabel: uwm.Dict.translate('last_editor'),
 			name: 'last_editor',
 			modelNode: modelNode,
 			readOnly: true
 		}), new uwm.property.TextField({
-			fieldLabel: 'modified',
+			fieldLabel: uwm.Dict.translate('modified'),
 			name: 'modified',
 			modelNode: modelNode,
 			readOnly: true

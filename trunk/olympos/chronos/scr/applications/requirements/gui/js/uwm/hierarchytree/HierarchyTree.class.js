@@ -25,7 +25,7 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 			rootVisible: false,
 			enableDrop: false,
 			root: new Ext.tree.TreeNode(),
-			tabTip: "<b>Hierarchy Tree</b><p>Shows all dependencies of a specific object. Use context menu on an object to show it here.</p>"
+			tabTip: "<b>" + uwm.Dict.translate('Hierarchy Tree')+ "</b><p>" + uwm.Dict.translate('Shows all dependencies of a specific object. Use context menu on an object to show it here.') + "</p>"
 		});
 		
 		uwm.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);
@@ -56,7 +56,7 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 	showInfoMask: function() {
 		if (!this.wasActive) {
 			this.infoMask = new uwm.ui.InfoMask(this.body, {
-				msg: "This tree shows all dependencies of an object. Select an object, right-click and select &quot;Show in hierarchy&quot; to show it here."
+				msg: uwm.Dict.translate('This tree shows all dependencies of an object. Select an object, right-click and select &quot;Show in hierarchy&quot; to show it here.')
 			});
 			this.infoMask.show();
 		}

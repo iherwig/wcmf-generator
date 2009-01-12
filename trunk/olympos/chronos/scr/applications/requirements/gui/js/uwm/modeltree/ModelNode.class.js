@@ -32,17 +32,17 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 		
 		this.contextMenu = new Ext.menu.Menu({
 			items: [{
-				text: "Add package",
+				text: uwm.Dict.translate('Add package'),
 				handler: function(item, e) {
 					self.addPackage(item, e);
 				}
 			}, {
-				text: "Delete from model",
+				text: uwm.Dict.translate('Delete from model'),
 				handler: function(item, e) {
 					self.deleteFromModel(item, e);
 				}
 			}, {
-				text: "Select as grid scope",
+				text: uwm.Dict.translate('Select as grid scope'),
 				handler: function(item, e) {
 					self.selectAsScope(item, e);
 				}
