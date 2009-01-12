@@ -30,7 +30,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 			split: true,
 			autoScroll: true,
 			height: 250,
-			title: "New Objects",
+			title: uwm.Dict.translate('New Objects'),
 			layout: "fit",
 			enableDragDrop: true,
 			ddGroup: uwm.Constants.DD_GROUP,
@@ -50,7 +50,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 				resizable: false,
 				renderer: this.showImage
 			}, {
-				header: "Title",
+				header: uwm.Dict.translate('Title'),
 				dataIndex: "title",
 				sortable: true
 			}, {

@@ -35,7 +35,7 @@ uwm.modeltree.ModelTree = function(config) {
 		loader: new uwm.modeltree.Loader(),
 		iconCls: "TreeTab",
 		rootVisible: false,
-		tabTip: "<b>Model Tree</b><p>Shows all models, packages, and contained objects.</p>"
+		tabTip: "<b>" + uwm.Dict.translate('Model Tree') + "</b><p>" + uwm.Dict.translate('Shows all models, packages, and contained objects.') + "</p>"
 	}, config));
 	
 	/**
@@ -103,7 +103,7 @@ uwm.modeltree.ModelTree.prototype.buildContextMenu = function() {
 	
 	this.contextMenu = new Ext.menu.Menu({
 		items: [{
-			text: "Create model",
+			text: uwm.Dict.translate('Create model'),
 			handler: function(item, e) {
 				self.createModel();
 				

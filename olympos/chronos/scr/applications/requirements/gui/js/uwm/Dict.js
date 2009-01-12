@@ -12,8 +12,75 @@
 Ext.namespace("uwm.Dict");
  
 uwm.Dict.voc = {
-		'Perspectives': {'de':'Perspektiven'},
-		'Properties' : {'de':'Eigenschaften','kl':'Aignschaffdn'}
+	
+		'Perspectives'		: {'de': 'Perspektiven'},
+		'Properties'  		: {'de': 'Eigenschaften','kl':'Aignschaffdn'},
+		'Available Content' : {'de': 'Verfügbarer Inhalt'},
+		'New Objects' 		: {'de': 'Neue Objekte'},
+		'Default' 			: {'de': 'Standard'},
+		'Admin' 			: {'de': 'Administrator'},
+		'Help Viewer' 		: {'de': 'Hilfe Betrachter'},
+		'Hierarchy Tree' 	: {'de': 'Hierarchie Baum'},
+		'Model Tree' 		: {'de': 'Modell Baum'},
+		
+		'Shows all'		: {'de': 'Zeigt alle'},
+		'within selected scope'
+							: {'de': 'innerhalb des ausgewählten Bereiches'},
+		'Shows all dependencies of a specific object. Use context menu on an object to show it here.' : 
+			 {'de'	: 'Zeigt alle Abhängigkeiten eines Objekts an. Kontextmenü benutzen.'},
+		'Shows all models, packages, and contained objects.' : 
+			 {'de'	: 'Zeigt alle Modelle, Pakete und enthaltenen Objekte an.'},
+							
+		'Goals' 			: {'de': 'Ziele'},
+		'Goal' 				: {'de': 'Ziel'},
+		'Requirements' 		: {'de': 'Anforderungen'},
+		'Requirement' 		: {'de': 'Anforderung'},
+		'Features' 			: {'de': 'Fähigkeiten'},
+		'Feature' 			: {'de': 'Fahigkeit'},
+		'Issues' 			: {'de': 'Probleme'},
+		'Issue' 			: {'de': 'Problem'},
+			 
+		'Title' 			: {'de': 'Titel'},
+		'Label' 			: {'de': 'Beschriftung'},
+		'Priority' 			: {'de': 'Priorität'},
+		
+		'Show in tree' 			: {'de': 'Im Baum anzeigen'},
+		'Show in grid' 			: {'de': 'Im Gitter anzeigen'},
+		'Show in Hierarchy' 	: {'de': 'In Hierarchie anzeigen'},
+		'Show in hierarchy' 	: {'de': 'In Hierarchie anzeigen'},
+		'Show in diagram' 		: {'de': 'Im Diagramm anzeigen'},
+		'Show in model tree' 	: {'de': 'Im Modellbaum anzeigen'},		
+		'Delete from diagram' 	: {'de': 'Aus dem Diagramm löschen'},
+		'Delete from model' 	: {'de': 'Aus dem Modell löschen'},
+		'Add package' 			: {'de': 'Paket hinzufügen'},
+		'Add diagram' 			: {'de': 'Diagramm hinzufügen'},
+		'Select as grid scope' 	: {'de': 'Als Gitterbereich auswählen'},
+		'Create model' 			: {'de': 'Modell erstellen'},		
+		
+		'This tree shows all dependencies of an object. Select an object, right-click and select &quot;Show in hierarchy&quot; to show it here.': 
+			 {'de': 'Dieser Baum zeigt alle Abhängigkeiten eines Objektes. Objekt auswählen, Rechtsklick und Auswahl &quot;In Hierarchie anzeigen&quot;, um es hier anzuzeigen.'},
+
+		'Name' 				: {'de': 'Name'},
+		'Notes' 			: {'de': 'Notiz'},
+		'created' 			: {'de': 'erstellt am'},
+		'creator' 			: {'de': 'Ersteller'},
+		'last_editor' 		: {'de': 'zuletzt geändert von'},
+		'modified' 			: {'de': 'geändert am'},
+		
+		'Shows all objects within selected scope. To select a scope, select the <i>Model Tree</i>, right-click on a Model or Package and select &quot;Select as grid scope&quot;.' 			: 
+			 {'de': 'Zeigt alle Objekte innerhalb des ausgewählten Bereiches. Um einen Bereich auszuwählen, <i>Model Tree</i> auswählen, Rechtsklick auf ein Modell or Paket und &quot;Als Gitterbereich wählen&quot;.'},
+		
+		'Help' 				: {'de': 'Hilfe'},
+		
+		'Open' 		: {'de': 'Öffnen'},
+		'' 			: {'de': ''},
+		'' 			: {'de': ''},
+		'' 			: {'de': ''},
+		'' 			: {'de': ''},
+		'' 			: {'de': ''},
+		'' 			: {'de': ''},
+		'' 			: {'de': ''},
+		
 }
 uwm.Dict.translate = function(){
 		strword=arguments[0];

@@ -29,7 +29,7 @@ Ext.extend(uwm.modeltree.Node, uwm.objecttree.ObjectNode, {
 		this.contextMenu = uwm.modeltree.Node.superclass.buildContextMenu.apply(this);
 		
 		this.contextMenu.add({
-			text: "Show in hierarchy",
+			text: uwm.Dict.translate('Show in hierarchy'),
 			handler: function(item, e) {
 				self.showInHierarchy(item, e);
 			}

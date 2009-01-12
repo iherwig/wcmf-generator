@@ -33,7 +33,7 @@ Ext.extend(uwm.objecttree.Node, Ext.tree.AsyncTreeNode, {
 		
 		this.contextMenu = new Ext.menu.Menu({
 			items: [{
-				text: "Delete from model",
+				text: uwm.Dict.translate('Delete from model'),
 				handler: function(item, e) {
 					self.deleteFromModel(item, e);
 				}

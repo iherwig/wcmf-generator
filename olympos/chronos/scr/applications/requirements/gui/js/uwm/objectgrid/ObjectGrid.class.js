@@ -55,7 +55,7 @@ Ext.extend(uwm.objectgrid.ObjectGrid, Ext.grid.GridPanel);
 uwm.objectgrid.ObjectGrid.prototype.showInfoMask = function() {
 	if (!this.wasActive) {
 		this.infoMask = new uwm.ui.InfoMask(this.body, {
-			msg: "Shows all objects within selected scope. To select a scope, select the <i>Model Tree</i>, right-click on a Model or Package and select &quot;Select as grid scope&quot;."
+			msg: uwm.Dict.translate('Shows all objects within selected scope. To select a scope, select the <i>Model Tree</i>, right-click on a Model or Package and select &quot;Select as grid scope&quot;.')
 		});
 		this.infoMask.show();
 	}
@@ -76,22 +76,22 @@ uwm.objectgrid.ObjectGrid.prototype.buildContextMenu = function() {
 	this.contextMenu = new Ext.menu.Menu({
 		items: [new Ext.menu.Item({
 			id: uwm.objectgrid.ObjectGrid.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
-			text: "Show in diagram",
+			text: uwm.Dict.translate('Show in diagram'),
 			handler: function(item, e) {
 				self.showInDiagram(item, e);
 			},
 		}), new Ext.menu.Item({
-			text: "Show in model tree",
+			text: uwm.Dict.translate('Show in model tree'),
 			handler: function(item, e) {
 				self.showInModelTree(item, e);
 			}
 		}), new Ext.menu.Item({
-			text: "Show in hierarchy",
+			text: uwm.Dict.translate('Show in hierarchy'),
 			handler: function(item, e) {
 				self.showInHierarchy(item, e);
 			}
 		}), "-", {
-			text: "Delete from model",
+			text: uwm.Dict.translate('Delete from model'),
 			handler: function(item, e) {
 				self.deleteFromModel(item, e);
 			}

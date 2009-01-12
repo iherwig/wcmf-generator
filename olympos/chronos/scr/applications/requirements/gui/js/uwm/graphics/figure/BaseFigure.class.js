@@ -101,28 +101,28 @@ uwm.graphics.figure.BaseFigure.prototype.buildContextMenu = function() {
 	 */
 	this.uwmContextMenu = new Ext.menu.Menu({
 		items: [new Ext.menu.Item({
-			text: "Show in tree",
+			text: uwm.Dict.translate('Show in tree'),
 			handler: function(item, e) {
 				figure.showInModelTree();
 			}
 		}), new Ext.menu.Item({
 			id: uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID,
-			text: "Show in grid",
+			text: uwm.Dict.translate('Show in grid'),
 			handler: function(item, e) {
 				figure.showInGrid();
 			}
 		}), new Ext.menu.Item({
-			text: "Show in Hierarchy",
+			text: uwm.Dict.translate('Show in Hierarchy'),
 			handler: function(item, e) {
 				figure.showInHierarchy();
 			}
 		}), "-", new Ext.menu.Item({
-			text: "Delete from diagram",
+			text: uwm.Dict.translate('Delete from diagram'),
 			handler: function(item, e) {
 				figure.deleteFromDiagram();
 			}
 		}), new Ext.menu.Item({
-			text: "Delete from model",
+			text: uwm.Dict.translate('Delete from model'),
 			handler: function(tiem, e) {
 				figure.deleteFromModel();
 			}
