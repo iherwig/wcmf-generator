@@ -71,7 +71,7 @@ cwm.RoleRDBClass = function() {
 	}
 }
 
-Ext.extend(cwm.RoleRDBClass, uwm.model.ModelClass);
+Ext.extend(cwm.RoleRDBClass, uwm.model.TechnicalObjectClass);
 
 cwm.RoleRDBClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({

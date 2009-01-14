@@ -15,7 +15,7 @@ cwm.ChiFeatureStatus = function(modelNodeClass) {
 	cwm.ChiFeatureStatus.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.ChiFeatureStatus, uwm.model.ModelObject);
+Ext.extend(cwm.ChiFeatureStatus, uwm.model.TechnicalObject);
 
 cwm.ChiFeatureStatus.prototype.initByDisplayResult = function(node) {
 	cwm.ChiFeatureStatus.superclass.initByDisplayResult.call(this, node);

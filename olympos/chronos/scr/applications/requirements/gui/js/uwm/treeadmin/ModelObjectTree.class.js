@@ -18,7 +18,7 @@ uwm.treeadmin.ModelObjectTree = Ext.extend(Ext.tree.TreePanel, {
 			region: "west",
 			layout: "fit",
 			width: 250,
-			title: "Model Objects",
+			title: uwm.Dict.translate('Model Objects'),
 			autoScroll: true,
 			animate: true,
 			containerScroll: true,
