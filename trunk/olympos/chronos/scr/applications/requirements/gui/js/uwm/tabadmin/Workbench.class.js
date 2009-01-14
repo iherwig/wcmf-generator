@@ -13,7 +13,8 @@ Ext.namespace("uwm.tabadmin");
 
 uwm.tabadmin.Workbench = function(config) {
 	this.tabPanel = new Ext.TabPanel({
-		region: "center"
+		region: "center",
+		activeTab : 0
 	});
 	this.eastPanel = new uwm.ui.EastPanel({
 		highlight: "admin"
@@ -23,13 +24,17 @@ uwm.tabadmin.Workbench = function(config) {
 		items: [this.tabPanel, this.eastPanel]
 	}, config));
 	
+	var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
 	
-	this.tabPanel.activate(this.tabPanel.add(new uwm.tabadmin.EnumTab({
-		uwmClassName: "ChiFeatureStatus"
-	})));
-	this.tabPanel.add(new uwm.tabadmin.EnumTab({
-		uwmClassName: "ChiRequirementType"
-	}));
+	for (var i = 0; i < classes.getCount(); i++) {
+		var currClass = classes.itemAt(i);
+		
+		if (currClass instanceof uwm.model.TechnicalObjectClass) {
+			this.tabPanel.add(new uwm.tabadmin.EnumTab({
+				uwmClassName: currClass.getUwmClassName()
+			}));
+		}
+	}
 }
 
 Ext.extend(uwm.tabadmin.Workbench, uwm.ui.AbstractWorkbench);

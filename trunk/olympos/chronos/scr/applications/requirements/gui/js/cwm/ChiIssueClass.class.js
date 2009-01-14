@@ -29,7 +29,7 @@ cwm.ChiIssueClass = function() {
 	};
 
 	this.gridTabIconClass = "ChiIssueTab";
-	this.gridTabTip = "Shows all <b>ChiIssue</b> within selected scope";
+	this.gridTabTip = "Shows all <b>ChiIssues</b> within selected scope";
 	this.gridFields = [{
 		name: "oid",
 		mapping: "oid"
@@ -44,24 +44,12 @@ cwm.ChiIssueClass = function() {
 	}];
 	
 	this.connectionInfo = {
-			
-		
-		"Figure": {
-			label: "",
-			invert: true,
-			connectionType: 'aggregation'
-		}					, 								"ChiRequirement": {
+ 						
+		"ChiRequirement": {
 			label: "is negated by",
 			invert: true,
-			connectionType:  'association'
-		}
-	
-		,					"Package": {
-			label: "",
-			invert: true,
-			connectionType:  'association'
-		}
-	
+			connectionType:  'associationType'
+		},
 
 	};
 }
@@ -69,65 +57,56 @@ cwm.ChiIssueClass = function() {
 Ext.extend(cwm.ChiIssueClass, uwm.model.ModelClass);
 
 cwm.ChiIssueClass.prototype.getPropertyForm = function(modelNode) {
-	return new uwm.ui.PropertyForm({
-		items: [	,	,	,	new uwm.ui.ComboBox({
-fieldLabel: 'Author',
+	return new uwm.property.PropertyForm({
+		items: [new uwm.property.ComboBox({
+			fieldLabel: 'Author',
 			name: 'Author',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.ComboBox({
-fieldLabel: 'Responsible',
+			listType: "ChiAuthors",
+			modelNode: modelNode
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Responsible',
 			name: 'Responsible',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Alias',
+			listType: "ChiAuthors",
+			modelNode: modelNode
+		}), new uwm.property.TextField({
+			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Version',
+			modelNode: modelNode
+		}),	new uwm.property.TextField({
+			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Name',
+			modelNode: modelNode
+		}),	new uwm.property.TextField({
+			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.HtmlEditor({
-fieldLabel: 'Notes',
+			modelNode: modelNode
+		}),	new uwm.property.HtmlEditor({
+			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'created',
+			modelNode: modelNode
+		}),	new uwm.property.TextField({
+			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'creator',
+			readOnly: true
+		}), new uwm.property.TextField({
+			fieldLabel: 'creator',
 			name: 'creator',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'last_editor',
+			readOnly: true
+		}), new uwm.property.TextField({
+			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'modified',
+			readOnly: true
+		}), new uwm.property.TextField({
+			fieldLabel: 'modified',
 			name: 'modified',
 			modelNode: modelNode,
-			readOnly: true		}) 
-]
+			readOnly: true
+		})]
 	});
-}
-
-cwm.ChiIssueClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiIssue.PNG", 96, 95, 96, 95);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiIssueClass());
 
-	

@@ -15,7 +15,7 @@ uwm.ui.Download = function(config) {
 	uwm.ui.Download.superclass.constructor.call(this, Ext.apply(this, {
 		layout: "fit",
 		items: [new Ext.Panel({
-			html: "<div class='x-mask-loading'><div>Please wait while your download is prepared ...</p><iframe class='uwm-download-frame' id='" + uwm.ui.Download.IFRAME_ID + "' src='" + config.downloadURL + "'/></div>"
+			html: "<div class='x-mask-loading'><div>" + uwm.Dict.translate('Please wait while your download is prepared ...') + "</p><iframe class='uwm-download-frame' id='" + uwm.ui.Download.IFRAME_ID + "' src='" + config.downloadURL + "'/></div>"
 		})]
 	}, config));
 	

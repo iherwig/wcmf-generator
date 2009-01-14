@@ -76,7 +76,7 @@ cwm.UserRDBClass = function() {
 	}
 }
 
-Ext.extend(cwm.UserRDBClass, uwm.model.ModelClass);
+Ext.extend(cwm.UserRDBClass, uwm.model.TechnicalObjectClass);
 
 cwm.UserRDBClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({

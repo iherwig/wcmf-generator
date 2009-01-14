@@ -48,18 +48,18 @@ uwm.ui.Login = function(config){
          }
          }),*/
         new Ext.form.TextField({
-            fieldLabel: 'Login',
+            fieldLabel: uwm.Dict.translate('Login'),
             name: 'login',
             allowBlank: false,
             value: uwm.Config.defaultLogin
         }), new Ext.form.TextField({
-            fieldLabel: 'Password',
+            fieldLabel: uwm.Dict.translate('Password'),
             name: 'password',
             inputType: "password",
             allowBlank: false,
             value: uwm.Config.defaultPassword
         }), new Ext.form.ComboBox({
-            fieldLabel: 'Language',
+            fieldLabel: uwm.Dict.translate('Language'),
             forceSelection: 'true',
             value: 'en',
             name: 'Language',
@@ -94,7 +94,7 @@ uwm.ui.Login = function(config){
         
         })],
          buttons: [{
-            text: 'Login',
+            text: uwm.Dict.translate('Login'),
             type: 'submit',
             handler: function(){
                 self.initSession();

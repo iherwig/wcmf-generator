@@ -1,0 +1,34 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Untitled Document</title>
+		<script>
+			voc = {
+				'Perspectives': {'de':'Perspektiven','xx':'Bärsbegdiewe'},
+				'Properites' : {'de':'Eigenschaften','xx':'Aignschaffdn'}
+			}
+			getTrl = function(){
+				wd = arguments[0];
+				lg = arguments[1];
+				
+				try {
+					rs = voc[wd][lg];
+				}catch(e){
+					rs = wd;
+				}
+				return rs;
+				
+			}
+		</script>
+	</head>
+	<body>
+		<script>
+		 	alert(getTrl('Perspectives','de'));
+		</script>
+	</body>
+</html>
+
+
+
+ 

@@ -15,7 +15,7 @@ cwm.ChiRequirementType = function(modelNodeClass) {
 	cwm.ChiRequirementType.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.ChiRequirementType, uwm.model.ModelObject);
+Ext.extend(cwm.ChiRequirementType, uwm.model.TechnicalObject);
 
 cwm.ChiRequirementType.prototype.initByDisplayResult = function(node) {
 	cwm.ChiRequirementType.superclass.initByDisplayResult.call(this, node);

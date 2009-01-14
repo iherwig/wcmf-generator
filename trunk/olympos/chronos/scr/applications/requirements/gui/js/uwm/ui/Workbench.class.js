@@ -29,7 +29,7 @@ uwm.ui.Workbench = function(config) {
 				layout: "border",
 				items: [new uwm.newobjects.NewObjectsGrid({}), {
 					region: "center",
-					title: "Existing Classes",
+					title: uwm.Dict.translate('Existing Classes'),
 					xtype: "tabpanel",
 					enableTabScroll: true,
 					id: "existingFiguresContainer",

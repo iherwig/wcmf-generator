@@ -66,7 +66,7 @@ cwm.ChiFeatureStatusClass = function() {
 	}
 }
 
-Ext.extend(cwm.ChiFeatureStatusClass, uwm.model.ModelClass);
+Ext.extend(cwm.ChiFeatureStatusClass, uwm.model.TechnicalObjectClass);
 
 cwm.ChiFeatureStatusClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({

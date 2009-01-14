@@ -66,7 +66,7 @@ cwm.ChiRequirementTypeClass = function() {
 	}
 }
 
-Ext.extend(cwm.ChiRequirementTypeClass, uwm.model.ModelClass);
+Ext.extend(cwm.ChiRequirementTypeClass, uwm.model.TechnicalObjectClass);
 
 cwm.ChiRequirementTypeClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({

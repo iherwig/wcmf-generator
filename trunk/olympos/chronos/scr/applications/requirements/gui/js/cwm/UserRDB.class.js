@@ -23,7 +23,7 @@ cwm.UserRDB = function(modelNodeClass) {
 	cwm.UserRDB.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.UserRDB, uwm.model.ModelObject);
+Ext.extend(cwm.UserRDB, uwm.model.TechnicalObject);
 
 cwm.UserRDB.prototype.initByDisplayResult = function(node) {
 	cwm.UserRDB.superclass.initByDisplayResult.call(this, node);

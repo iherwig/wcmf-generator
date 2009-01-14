@@ -18,14 +18,14 @@ uwm.tabadmin.EnumTab = function(config) {
 	
 	this.addEntryButton = new Ext.Toolbar.Button({
 		id: "addEntry",
-		text: "Add new entry",
+		text: uwm.Dict.translate('Add new entry'),
 		handler: function(e, toolEl, panel) {
 			self.addEntry();
 		}
 	});
 	this.removeEntryButton = new Ext.Toolbar.Button({
 		id: "removeEntry",
-		text: "Remove entry",
+		text: uwm.Dict.translate('Remove entry'),
 		disabled: true,
 		handler: function(e, toolEl, panel) {
 			self.removeEntry();
@@ -40,7 +40,7 @@ uwm.tabadmin.EnumTab = function(config) {
 		title: this.modelClass.getUwmClassName(),
 		iconCls: this.modelClass.getGridTabIconClass(),
 		columns: [{
-			header: "Name",
+			header: uwm.Dict.translate('Name'),
 			dataIndex: "Name",
 			width: 255,
 			sortable: true

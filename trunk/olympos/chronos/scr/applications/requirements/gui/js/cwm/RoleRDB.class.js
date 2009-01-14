@@ -23,7 +23,7 @@ cwm.RoleRDB = function(modelNodeClass) {
 	cwm.RoleRDB.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.RoleRDB, uwm.model.ModelObject);
+Ext.extend(cwm.RoleRDB, uwm.model.TechnicalObject);
 
 cwm.RoleRDB.prototype.initByDisplayResult = function(node) {
 	cwm.RoleRDB.superclass.initByDisplayResult.call(this, node);
