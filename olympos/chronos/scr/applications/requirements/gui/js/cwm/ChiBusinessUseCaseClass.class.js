@@ -65,7 +65,7 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode) {
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'PrimaryActor',
 			name: 'PrimaryActor',
-			listType: "ChiAuthors",
+			listType: "",
 			modelNode: modelNode,
 		}), new uwm.property.TextField({
 			fieldLabel: 'OtherActors',
