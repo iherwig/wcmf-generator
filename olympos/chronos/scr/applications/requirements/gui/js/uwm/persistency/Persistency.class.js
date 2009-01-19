@@ -30,15 +30,12 @@ uwm.persistency.Persistency.prototype.processErrorHandler = function(errorHandle
 		errorHandler(request, data);
 	}
 	else if (errorHandler instanceof String) {
-		uwm.Util.showMessage("Persistency layer error", errorHandler + errorMessage, uwm.Util.messageType.ERROR);
+		uwm.Util.showMessage(uwm.Dict.translate('Persistency layer error'), errorHandler + errorMessage, uwm.Util.messageType.ERROR);
 	}
 	else if (errorMessage) {
-		uwm.Util.showMessage(
-uwm.Dict.translate('Persistency layer error'), errorMessage, uwm.Util.messageType.ERROR);
+		uwm.Util.showMessage(uwm.Dict.translate('Persistency layer error'), errorMessage, uwm.Util.messageType.ERROR);
 	} else {
-		uwm.Util.showMessage(
-uwm.Dict.translate('Persistency layer error'), 
-uwm.Dict.translate('An unspecified error has occured in persistency layer.'), uwm.Util.messageType.ERROR);
+		uwm.Util.showMessage(uwm.Dict.translate('Persistency layer error'), uwm.Dict.translate('An unspecified error has occured in persistency layer.'), uwm.Util.messageType.ERROR);
 	}
 }
 
