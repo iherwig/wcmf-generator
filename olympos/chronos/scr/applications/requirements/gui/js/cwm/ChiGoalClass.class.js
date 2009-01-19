@@ -65,7 +65,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'GoalType',
 			name: 'GoalType',
-			listType: "ChiAuthors",
+			listType: "ChiGoalTypes",
 			modelNode: modelNode
 		}), new uwm.property.TextField({
 			fieldLabel: 'Value_Name',
