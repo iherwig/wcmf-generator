@@ -59,7 +59,7 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
                 
 				
 				
-				islocked = true ;
+				islocked = false ;
                 var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, islocked));
                 this.doLayout();
                 
