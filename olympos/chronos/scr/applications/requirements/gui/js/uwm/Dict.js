@@ -81,6 +81,7 @@ uwm.Dict.voc = {
 		'Login' 				: {'de': 'Einloggen'},
 		'Password' 				: {'de': 'Passwort'},
 		'Language' 				: {'de': 'Sprache'},
+		'This panel shows the properties of each object selected by a single click.' : {'de': 'zeigt mit Click die Eigenschaften jedes Objekts an'}
 		
 }
 uwm.Dict.translate = function(){
