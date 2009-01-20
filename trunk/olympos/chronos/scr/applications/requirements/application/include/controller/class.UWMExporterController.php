@@ -20,6 +20,12 @@ class UWMExporterController extends Controller
 	const ENCODING = "UTF-8";
 	const STANDALONE = "yes";
 
+	const INI_SECTION = 'generator';
+	const INI_EXECUTABLE = 'executable';
+
+	private static $TEMP_PATHS = array('/tmp', '/temp', '/var/tmp', '/var/temp', 'C:/temp', 'C:/tmp', 'C:/windows/temp');
+	private $tempPath;
+
 	private $dom;
 	private $persistenceFacade;
 
@@ -38,17 +44,100 @@ class UWMExporterController extends Controller
 	{
 		$this->check("start");
 	
-		echo $this->_request->getValue('werst');
+		$tmpUwmExportPath = $this->tempName();
+		
+		$this->exportXml($tmpUwmExportPath);
+		
+	    $parser = InifileParser::getInstance();
+	    if (($params = $parser->getSection(self::INI_SECTION)) === false) {
+	    	Message::error($parser->getErrorMsg(), __FILE__, __LINE__);
+		}
+		$executablePath = $params[self::INI_EXECUTABLE];
 	
-		$tmpFileName = tempnam(null, 'uwm');
+		$cwd = dirname(realpath($executablePath));
+		$executable = basename($executablePath);
+		
+		$numSlashes = substr_count(str_replace('\\', '/', $cwd), '/');
+		$relativeCwdPath = '';
+		for ($i = 0; $i < $numSlashes; $i++) {
+			$relativeCwdPath .= '../';
+		}
+		$tmpUmlPath = $this->tempName();
+		//echo "tmpUmlPath: '$tmpUmlPath'<br/>";
+		$tmpUmlRelativePath = $relativeCwdPath . preg_replace('/^[a-zA-Z]:\\\\/', '', $tmpUmlPath);
+		
+		$tmpPropertiesPath = $this->tempName();
+		$propertiesFile = fopen($tmpPropertiesPath, 'w');
+		fwrite($propertiesFile, "inputUri = file://$tmpUwmExportPath\n");
+		fwrite($propertiesFile, "outputRelativePath = $tmpUmlRelativePath\n");
+		fclose($propertiesFile);
+
+		//header('Content-type: text/plain');
+		header('Content-type: application/octet-stream');
+		header('Content-Disposition: attachment; filename="uwm-export.uml2"');
 	
+		$this->check("start generator");
+	
+		$descriptorspec = array (
+		0=> array ('pipe', 'r'), // stdin is a pipe that the child will read from
+		1=> array ('pipe', 'w'), // stdout is a pipe that the child will write to
+		2=> array ('pipe', 'w')
+		);
+	
+		$cmd = "java -Djava.library.path=./lib/ -jar $executable templates/uwm/uwm2uml2.oaw -basePath=. \"-propertyFile=$tmpPropertiesPath\"";
+	
+		//echo "cwd: $cwd<br />\n";
+		//echo "cmd: $cmd<br />\n";
+
+		mkdir($tmpUmlPath);
+
+		$process = proc_open($cmd, $descriptorspec, $pipes, $cwd, $env);
+	
+		if (is_resource($process)) {
+			// $pipes now looks like this:
+			// 0 => writeable handle connected to child stdin
+			// 1 => readable handle connected to child stdout
+			
+			fclose($pipes[0]);
+		
+			//echo 'Output: ', stream_get_contents($pipes[1]), "\n";
+			fclose($pipes[1]);
+		
+			//echo 'Error: ', stream_get_contents($pipes[2]), "\n";
+			fclose($pipes[2]);
+		
+			// It is important that you close any pipes before calling
+			// proc_close in order to avoid a deadlock
+			$return_value = proc_close($process);
+		
+			//echo "command returned $return_value\n";
+		}
+		$this->check('Generator finished');
+		
+		$exportFile = "$tmpUmlPath/uml-output.uml";
+		
+		readfile($exportFile);
+		
+		$this->check('File written to output');
+
+		unlink($tmpUwmExportPath);
+		unlink($tmpPropertiesPath);
+		unlink($exportFile);
+		rmdir($tmpUmlPath);
+		
+		$this->check("finished");
+	
+		return false;
+	}
+
+	private function exportXml($tmpUwmExportPath) {
 		$this->dom = new XMLWriter();
 		//$this->dom->setIndent(true);
 		//$this->dom->setIndentString("\t");
-		$this->dom->openURI($tmpFileName);
+		$this->dom->openURI($tmpUwmExportPath);
 		$this->dom->startDocument($this->XML_VERSION, $this->ENCODING, $this->STANDALONE);
 	
-		$this->dom->startElement("uwm-export");
+		$this->dom->startElement("UwmExport");
 	
 		$this->persistenceFacade = PersistenceFacade::getInstance();
 	
@@ -64,7 +153,9 @@ class UWMExporterController extends Controller
 		} else if ($startPackage) {
 			$currPackage = $this->persistenceFacade->load($startPackage);
 			if ($currPackage) {
+				$this->dom->startElement('Model');
 				$this->processPackage($currPackage);
+				$this->dom->endElement();
 			} else {
 				echo 'Error: Unknown package id '+$startPackage;
 			}
@@ -77,17 +168,8 @@ class UWMExporterController extends Controller
 		
 		$this->dom->endDocument();
 		$this->dom->flush();
-		echo $tmpFileName;
-	
-		//header('Content-type: application/octet-stream');
-		//header('Content-Disposition: attachment; filename="cwm.xmi"');
-		//header('Content-type: text/xml');
 		
-		//echo $this->dom->outputMemory();
-		
-		$this->check("finished");
-	
-		return false;
+		unset($this->dom);
 	}
 
 	private function appendAttributes($node)
@@ -96,7 +178,10 @@ class UWMExporterController extends Controller
 	
 		foreach ($valueNames as $currValueName)
 		{
-			$this->dom->writeAttribute($currValueName, $node->getValue($currValueName));
+			$value = $node->getValue($currValueName);
+			if ($value !== null && $value !== '') {
+				$this->dom->writeAttribute($currValueName, $value);
+			}
 		}
 	}
 
@@ -168,7 +253,7 @@ class UWMExporterController extends Controller
 				{
 					if ($currParent->getId() != $currNode->getId())
 					{
-						$this->dom->startElement('manyToMany');
+						$this->dom->startElement('ManyToMany');
 						$this->dom->writeAttribute('targetType', $currParent->getType());
 						$this->dom->writeAttribute('targetOid', $currParent->getValue('id'));
 						$this->dom->endElement();
@@ -184,6 +269,34 @@ class UWMExporterController extends Controller
 		}
 	
 		$this->dom->endElement();
+	}
+
+	private function tempName() {
+		$tempPath = $this->getTempPath();
+		
+		$result = '';
+		
+		do {
+			$rand = rand(0, 0xffffff);
+			$result = "$tempPath/uwm$rand.tmp";
+		} while (file_exists($result));
+
+		return $result;
+	}
+	
+	private function getTempPath() {
+		if (!$this->tempPath) {
+			for ($i = 0; $i < count(self::$TEMP_PATHS); $i++) {
+				$currPath = self::$TEMP_PATHS[$i];
+				
+				if (is_dir($currPath)) {
+					$this->tempPath = $currPath;
+					break;
+				}
+			}
+		}
+		
+		return $this->tempPath;
 	}
 
 	public function hasView()
