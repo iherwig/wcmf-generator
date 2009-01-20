@@ -34,14 +34,14 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
     
     showInfoMask: function(){
         this.mask = new uwm.ui.InfoMask(this.body, {
-            msg: "This panel shows the properties of each object selected by a single click."
+            msg: uwm.Dict.translate('This panel shows the properties of each object selected by a single click.')
         });
         this.mask.show();
 		
 		this.un("afterlayout", this.showInfoMask);
     },
     
-    showProperty: function(modelNode){
+    showProperty: function( modelNode ){
         if (modelNode != null) {
             var oid = modelNode.getOid();
             
@@ -49,7 +49,7 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
                 if (this.mask) {
 					this.mask.hide();
 				}
-                
+				
                 this.currentOid = modelNode.getOid();
                 
                 var items = this.items;
@@ -57,7 +57,10 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
                     this.remove(items.get(0), true);
                 }
                 
-                var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode));
+				
+				
+				islocked = true ;
+                var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, islocked));
                 this.doLayout();
                 
                 var mask = new Ext.LoadMask(form.getEl());
