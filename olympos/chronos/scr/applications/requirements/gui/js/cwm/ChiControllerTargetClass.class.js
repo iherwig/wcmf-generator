@@ -44,8 +44,7 @@ cwm.ChiControllerTargetClass = function() {
 	}];
 	
 	this.connectionInfo = {
-			
-		
+
 		"ChiNode": {
 			label: "instantiates",
 			invert: true,
@@ -60,66 +59,51 @@ cwm.ChiControllerTargetClass = function() {
 			label: "",
 			invert: true,
 			connectionType: 'aggregation'
-		}		,				
-		"Figure": {
-			label: "",
-			invert: true,
-			connectionType: 'aggregation'
-		}					, 								"Package": {
-			label: "",
-			invert: true,
-			connectionType:  'association'
-		}
-	
-
+		}		
 	};
 }
 
 Ext.extend(cwm.ChiControllerTargetClass, uwm.model.ModelClass);
 
 cwm.ChiControllerTargetClass.prototype.getPropertyForm = function(modelNode) {
-	return new uwm.ui.PropertyForm({
-		items: [	,	,	new uwm.ui.TextField({
-fieldLabel: 'Alias',
+	return new uwm.property.PropertyForm({
+		items: [new uwm.property.TextField({
+			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Version',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Name',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.HtmlEditor({
-fieldLabel: 'Notes',
+			modelNode: modelNode
+		}) ,	new uwm.property.HtmlEditor({
+			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'created',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'creator',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'creator',
 			name: 'creator',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'last_editor',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'modified',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'modified',
 			name: 'modified',
 			modelNode: modelNode,
-			readOnly: true		}) 
-]
+			readOnly: true		
+		}) ]
 	});
 }
 

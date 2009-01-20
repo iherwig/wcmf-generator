@@ -60,121 +60,104 @@ cwm.ChiNodeClass = function() {
 			label: "",
 			invert: true,
 			connectionType: 'aggregation'
-		}		,				
-		"Figure": {
-			label: "",
-			invert: true,
-			connectionType: 'aggregation'
-		}					, 								"ChiController": {
+		}		,			
+		"ChiController": {
 			label: "instantiates",
 			invert: true,
 			connectionType:  'association'
 		}
-	
-		,					"Package": {
-			label: "",
-			invert: true,
-			connectionType:  'association'
-		}
-	
-
 	};
 }
 
 Ext.extend(cwm.ChiNodeClass, uwm.model.ModelClass);
 
 cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode) {
-	return new uwm.ui.PropertyForm({
-		items: [	,	,	,	new uwm.ui.TextField({
-fieldLabel: 'display_value',
+	return new uwm.property.PropertyForm({
+		items: [new uwm.property.TextField({
+			fieldLabel: 'display_value',
 			name: 'display_value',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'parent_order',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'parent_order',
 			name: 'parent_order',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'child_order',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'child_order',
 			name: 'child_order',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'pk_name',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'pk_name',
 			name: 'pk_name',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'is_searchable',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'is_searchable',
 			name: 'is_searchable',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'orderby',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'orderby',
 			name: 'orderby',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'is_soap',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'is_soap',
 			name: 'is_soap',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'initparams',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'initparams',
 			name: 'initparams',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'table_name',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'table_name',
 			name: 'table_name',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'is_ordered',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'is_ordered',
 			name: 'is_ordered',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Alias',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Version',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Name',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.HtmlEditor({
-fieldLabel: 'Notes',
+			modelNode: modelNode
+		}) ,	new uwm.property.HtmlEditor({
+			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'created',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'creator',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'creator',
 			name: 'creator',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'last_editor',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'modified',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'modified',
 			name: 'modified',
 			modelNode: modelNode,
-			readOnly: true		}) 
+			readOnly: true		
+		}) 
 ]
 	});
 }

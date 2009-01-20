@@ -50,8 +50,7 @@ cwm.UserRDBClass = function() {
 		sortable: true
 	}];
 	
-	this.connectionInfo = {
-	
+	this.connectionInfo = {	
 	
 		"NMUserRole": {
 			label: "",

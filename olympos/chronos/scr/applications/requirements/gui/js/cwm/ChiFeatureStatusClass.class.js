@@ -51,8 +51,7 @@ cwm.ChiFeatureStatusClass = function() {
 	}];
 	
 	this.connectionInfo = {
-	
-	
+
 		"ChiFeatureStatus": {
 			label: "depends on",
 			invert: false,

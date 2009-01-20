@@ -51,8 +51,7 @@ cwm.RoleRDBClass = function() {
 	}];
 	
 	this.connectionInfo = {
-	
-	
+
 		"NMUserRole": {
 			label: "",
 			invert: true,
