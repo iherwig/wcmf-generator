@@ -46,7 +46,7 @@ cwm.ChiGoalClass = function() {
 	this.connectionInfo = {
 	
 		"ChiGoal": {
-			label: "associates",
+			label: "contains",
 			invert: false,
 			connectionType: 'association'
 		},
@@ -65,7 +65,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'GoalType',
 			name: 'GoalType',
-			listType: "ChiGoalTypes",
+			listType: "ChiGoalType",
 			modelNode: modelNode
 		}), new uwm.property.TextField({
 			fieldLabel: 'Value_Name',

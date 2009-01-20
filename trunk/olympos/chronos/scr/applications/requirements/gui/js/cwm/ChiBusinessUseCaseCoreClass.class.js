@@ -44,128 +44,101 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 	}];
 	
 	this.connectionInfo = {
-			
-		
+
 		"NMUCActor": {
 			label: "",
 			invert: true,
 			connectionType: 'aggregation'
-		}		,				
-		"Figure": {
-			label: "",
-			invert: true,
-			connectionType: 'aggregation'
-		}					, 								"ChiBusinessProcess": {
+		},	
+		"ChiBusinessProcess": {
 			label: "",
 			invert: true,
 			connectionType:  'association'
-		}
-	
-		,					"Package": {
-			label: "",
-			invert: true,
-			connectionType:  'association'
-		}
-	
-
+		}				
 	};
 }
 
 Ext.extend(cwm.ChiBusinessUseCaseCoreClass, uwm.model.ModelClass);
 
 cwm.ChiBusinessUseCaseCoreClass.prototype.getPropertyForm = function(modelNode) {
-	return new uwm.ui.PropertyForm({
-		items: [	,	,	,	new uwm.ui.ComboBox({
-fieldLabel: 'PrimaryActor',
+	return new uwm.property.PropertyForm({
+		items: [new uwm.property.ComboBox({
+			fieldLabel: 'PrimaryActor',
 			name: 'PrimaryActor',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'OtherActors',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'OtherActors',
 			name: 'OtherActors',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'GoalInContext',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'GoalInContext',
 			name: 'GoalInContext',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Scope',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Scope',
 			name: 'Scope',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Level',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Level',
 			name: 'Level',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Stakeholders',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Stakeholders',
 			name: 'Stakeholders',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Precondition',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+				fieldLabel: 'Precondition',
 			name: 'Precondition',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Trigger',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Trigger',
 			name: 'Trigger',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'MainSuccessScenario',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'MainSuccessScenario',
 			name: 'MainSuccessScenario',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Extensions',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Extensions',
 			name: 'Extensions',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Alias',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Version',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'Name',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.HtmlEditor({
-fieldLabel: 'Notes',
+			modelNode: modelNode
+		}) ,	new uwm.property.HtmlEditor({
+			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'created',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'creator',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'creator',
 			name: 'creator',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'last_editor',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'modified',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'modified',
 			name: 'modified',
 			modelNode: modelNode,
-			readOnly: true		}) 
-]
+			readOnly: true		
+		}) ]
 	});
 }
 

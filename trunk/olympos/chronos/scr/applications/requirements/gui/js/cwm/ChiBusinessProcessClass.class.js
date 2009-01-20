@@ -63,45 +63,42 @@ Ext.extend(cwm.ChiBusinessProcessClass, uwm.model.ModelClass);
 cwm.ChiBusinessProcessClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
-fieldLabel: 'Alias',
+			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode,
-		}) 
-,	new uwm.property.TextField({
-fieldLabel: 'Version',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode,
-		}) 
-,	new uwm.property.TextField({
-fieldLabel: 'Name',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode,
-		}) 
-,	new uwm.property.HtmlEditor({
-fieldLabel: 'Notes',
+			modelNode: modelNode
+		}) ,	new uwm.property.HtmlEditor({
+			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode,
-		}) 
-,	new uwm.property.TextField({
-fieldLabel: 'created',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.property.TextField({
-fieldLabel: 'creator',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'creator',
 			name: 'creator',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.property.TextField({
-fieldLabel: 'last_editor',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.property.TextField({
-fieldLabel: 'modified',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'modified',
 			name: 'modified',
 			modelNode: modelNode,
-			readOnly: true		}) 
+			readOnly: true		
+		}) 
 ]
 	});
 }

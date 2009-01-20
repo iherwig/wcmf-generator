@@ -52,12 +52,12 @@ cwm.ChiRequirementClass = function() {
 		},
 		"ChiFeature": {
 			label: "is realized by",
-			invert: false,
+			invert: true,
 			connectionType: 'realization'
 		},
 		"ChiIssue": {
 			label: "is negated by",
-			invert: false,
+			invert: true,
 			connectionType: 'associationType'
 		},
 		"ChiGoal": {

@@ -43,16 +43,13 @@ cwm.AdodbseqClass = function() {
 		sortable: true
 	}];
 	
-	this.connectionInfo = {
-			
-			, 			
-	};
+	this.connectionInfo = {};
 }
 
 Ext.extend(cwm.AdodbseqClass, uwm.model.ModelClass);
 
 cwm.AdodbseqClass.prototype.getPropertyForm = function(modelNode) {
-	return new uwm.ui.PropertyForm({
+	return new uwm.property.PropertyForm({
 		items: [	]
 	});
 }

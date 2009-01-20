@@ -43,47 +43,42 @@ cwm.ChiRequirementStatusClass = function() {
 		sortable: true
 	}];
 	
-	this.connectionInfo = {
-			
-			, 			
-	};
+	this.connectionInfo = {};
 }
 
 Ext.extend(cwm.ChiRequirementStatusClass, uwm.model.ModelClass);
 
 cwm.ChiRequirementStatusClass.prototype.getPropertyForm = function(modelNode) {
-	return new uwm.ui.PropertyForm({
-		items: [	,	new uwm.ui.TextField({
-fieldLabel: 'Name',
+	return new uwm.property.PropertyForm({
+		items: [new uwm.property.TextField({
+			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.HtmlEditor({
-fieldLabel: 'Notes',
+			modelNode: modelNode
+		}) ,	new uwm.property.HtmlEditor({
+			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode,
-		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'created',
+			modelNode: modelNode
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'creator',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'creator',
 			name: 'creator',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'last_editor',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'last_editor',
 			name: 'last_editor',
 			modelNode: modelNode,
-			readOnly: true		}) 
-,	new uwm.ui.TextField({
-fieldLabel: 'modified',
+			readOnly: true		
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'modified',
 			name: 'modified',
 			modelNode: modelNode,
-			readOnly: true		}) 
-]
+			readOnly: true		
+		}) ]
 	});
 }
 
