@@ -295,6 +295,9 @@ class UWMExporterController extends Controller
 				}
 			}
 		}
+		if (!$this->tempPath) {
+			$this->tempPath = '/tmp';
+		}
 		
 		return $this->tempPath;
 	}
