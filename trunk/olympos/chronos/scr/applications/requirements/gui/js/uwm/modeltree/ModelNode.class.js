@@ -47,11 +47,11 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 					self.selectAsScope(item, e);
 				}
 			}, {
-				text: "Download as XML",
+				text: uwm.Dict.translate('Download as UML'),
 				handler: function(item, e) {
 					new uwm.ui.Download({
-						title: "Downloading XML ...",
-						downloadURL: "../application/main.php?response_format=JSON&usr_action=execJava"
+						title: uwm.Dict.translate('Downloading UML ...'),
+						downloadURL: "../application/main.php?response_format=JSON&usr_action=exportUWM&startModel=" + self.getModelNode().getOid()
 					}).show();
 				}
 			}]
