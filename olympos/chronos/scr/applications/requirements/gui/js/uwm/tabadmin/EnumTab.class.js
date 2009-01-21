@@ -91,11 +91,13 @@ uwm.tabadmin.EnumTab.prototype.handleChangeLabelEvent = function(modelObject, ol
 }
 
 uwm.tabadmin.EnumTab.prototype.handleCreateEvent = function(modelObject) {
-	this.getStore().add([new Ext.data.Record({
-		oid: modelObject.getOid(),
-		uwmClassName: modelObject.getUwmClassName(),
-		Name: modelObject.getProperty("Name")
-	})]);
+	if (modelObject.getUwmClassName() == this.modelClass.getUwmClassName()) {
+		this.getStore().add([new Ext.data.Record({
+			oid: modelObject.getOid(),
+			uwmClassName: modelObject.getUwmClassName(),
+			Name: modelObject.getProperty("Name")
+		})]);
+	}
 }
 
 uwm.tabadmin.EnumTab.prototype.handleDeleteEvent = function(modelObject) {

@@ -46,7 +46,7 @@ cwm.DisplayTypeClass = function() {
 	this.connectionInfo = {};
 }
 
-Ext.extend(cwm.DisplayTypeClass, uwm.model.ModelClass);
+Ext.extend(cwm.DisplayTypeClass, uwm.model.TechnicalObjectClass);
 
 cwm.DisplayTypeClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({
