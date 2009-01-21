@@ -226,7 +226,11 @@ class UWMExporterController extends Controller
 		$children = $currPackage->getChildren();
 		foreach ($children as $currChild)
 		{
-			$this->processNode($currChild);
+			if ($currChild->getType() != 'Package') {
+				$this->processNode($currChild);
+			} else {
+				$this->processPackage($currChild);
+			}
 		
 			$currChild = $currChild->getNextSibling();
 		}
@@ -263,9 +267,20 @@ class UWMExporterController extends Controller
 			 {
 			 $this->processNode($currChild);
 			 }*/
-
+			else {
+				$this->dom->startElement('Child');
+				$this->dom->writeAttribute('targetType', $currChild->getType());
+				$this->dom->writeAttribute('targetOid', $currChild->getValue('id'));
+				$this->dom->endElement();
+			}
+		}
 		
-			
+		$parents = $currNode->getParents();
+		foreach($parents as $currParent) {
+			$this->dom->startElement('Parent');
+			$this->dom->writeAttribute('targetType', $currParent->getType());
+			$this->dom->writeAttribute('targetOid', $currParent->getValue('id'));
+			$this->dom->endElement();
 		}
 	
 		$this->dom->endElement();
