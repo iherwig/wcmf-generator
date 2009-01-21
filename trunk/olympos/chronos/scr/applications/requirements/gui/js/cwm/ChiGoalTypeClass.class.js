@@ -46,7 +46,7 @@ cwm.ChiGoalTypeClass = function() {
 	this.connectionInfo = {};
 }
 
-Ext.extend(cwm.ChiGoalTypeClass, uwm.model.ModelClass);
+Ext.extend(cwm.ChiGoalTypeClass, uwm.model.TechnicalObjectClass);
 
 cwm.ChiGoalTypeClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({

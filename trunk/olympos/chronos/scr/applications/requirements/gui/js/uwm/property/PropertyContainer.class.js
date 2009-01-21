@@ -12,66 +12,77 @@
 Ext.namespace("uwm.property");
 
 uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
-    initComponent: function(){
-        Ext.apply(this, {
-            region: "center",
-            layout: "fit",
-            collapsible: false,
-            split: false,
-            width: 250,
-            autoScroll: true,
-            title: uwm.Dict.translate('Properties')
-        })
-        
-        uwm.property.PropertyContainer.instance = this;
-        
-        uwm.property.PropertyContainer.superclass.initComponent.apply(this, arguments);
-        
-        this.currentOid = null;
-        
-        this.on("afterlayout", this.showInfoMask);
-    },
-    
-    showInfoMask: function(){
-        this.mask = new uwm.ui.InfoMask(this.body, {
-            msg: uwm.Dict.translate('This panel shows the properties of each object selected by a single click.')
-        });
-        this.mask.show();
+	initComponent: function() {
+		Ext.apply(this, {
+			region: "center",
+			layout: "fit",
+			collapsible: false,
+			split: false,
+			width: 250,
+			autoScroll: true,
+			title: uwm.Dict.translate('Properties')
+		})
 		
-		this.un("afterlayout", this.showInfoMask);
-    },
-    
-    showProperty: function( modelNode ){
-        if (modelNode != null) {
-            var oid = modelNode.getOid();
-            
-            if (oid != null && this.currentOid != oid) {
-                if (this.mask) {
-					this.mask.hide();
-				}
-				
-                this.currentOid = modelNode.getOid();
-                
-                var items = this.items;
-                while (items && items.getCount() > 0) {
-                    this.remove(items.get(0), true);
-                }
-                
-				
-				
-				islocked = false ;
-                var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, islocked));
-                this.doLayout();
-                
-                var mask = new Ext.LoadMask(form.getEl());
-                mask.show();
-                
-                modelNode.fillPropertyForm(form, mask);
-            }
-        }
-    }
+		uwm.property.PropertyContainer.instance = this;
+		
+		uwm.property.PropertyContainer.superclass.initComponent.apply(this, arguments);
+		
+		this.currentOid = null;
+		
+		this.on("afterlayout", this.showInfoMask);
+	}
 })
 
-uwm.property.PropertyContainer.getInstance = function(){
-    return uwm.Uwm.getInstance().getActiveWorkbench().getEastPanel().getPropertyContainer();
+uwm.property.PropertyContainer.prototype.showInfoMask = function() {
+	this.mask = new uwm.ui.InfoMask(this.body, {
+		msg: uwm.Dict.translate('This panel shows the properties of each object selected by a single click.')
+	});
+	this.mask.show();
+	
+	this.un("afterlayout", this.showInfoMask);
+}
+
+uwm.property.PropertyContainer.prototype.showProperty = function(modelNode) {
+	if (modelNode != null) {
+		var oid = modelNode.getOid();
+		
+		if (oid != null && this.currentOid != oid) {
+			if (this.mask) {
+				this.mask.hide();
+			}
+			
+			this.currentOid = modelNode.getOid();
+			
+			var items = this.items;
+			while (items && items.getCount() > 0) {
+				this.remove(items.get(0), true);
+			}
+			
+			var self = this;
+			
+			uwm.persistency.Persistency.getInstance().lock(
+						this.currentOid, 
+						function(request, data) {self.showLockedProperty(modelNode);}, 
+						function(request, data) {alert("locking failed");}
+			);
+		}
+	}
+}
+
+uwm.property.PropertyContainer.prototype.showLockedProperty = function(modelNode) {
+
+	var islocked = true;
+	window.status = "islocked is " + islocked;
+	
+	var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, islocked));
+	this.doLayout();
+	
+	var mask = new Ext.LoadMask(form.getEl());
+	mask.show();
+	
+	modelNode.fillPropertyForm(form, mask);
+}
+
+uwm.property.PropertyContainer.getInstance = function() {
+	return uwm.Uwm.getInstance().getActiveWorkbench().getEastPanel().getPropertyContainer();
 }

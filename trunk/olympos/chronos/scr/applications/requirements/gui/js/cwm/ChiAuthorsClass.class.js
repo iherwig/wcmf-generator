@@ -46,7 +46,7 @@ cwm.ChiAuthorsClass = function() {
 	this.connectionInfo = {};
 }
 
-Ext.extend(cwm.ChiAuthorsClass, uwm.model.ModelClass);
+Ext.extend( cwm.ChiAuthorsClass, uwm.model.TechnicalObjectClass );
 
 cwm.ChiAuthorsClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({

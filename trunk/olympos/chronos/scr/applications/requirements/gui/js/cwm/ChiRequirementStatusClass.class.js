@@ -46,7 +46,7 @@ cwm.ChiRequirementStatusClass = function() {
 	this.connectionInfo = {};
 }
 
-Ext.extend(cwm.ChiRequirementStatusClass, uwm.model.ModelClass);
+Ext.extend(cwm.ChiRequirementStatusClass, uwm.model.TechnicalObjectClass);
 
 cwm.ChiRequirementStatusClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({

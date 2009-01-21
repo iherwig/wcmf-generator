@@ -32,7 +32,7 @@ cwm.UserRDB.prototype.initByDisplayResult = function(node) {
 	this.data.password = node.values[1].password;
 	this.data.name = node.values[1].name;
 	this.data.firstname = node.values[1].firstname;
-	this.data.config = node.values[1].config;
+	//this.data.config = node.values[1].config;
 	
 }
 
@@ -43,7 +43,7 @@ cwm.UserRDB.prototype.populatePropertyForm = function(form) {
 	realForm.findField("password").setValue(this.data.password);
 	realForm.findField("name").setValue(this.data.name);
 	realForm.findField("firstname").setValue(this.data.firstname);
-	realForm.findField("config").setValue(this.data.config);
+	//realForm.findField("config").setValue(this.data.config);
 }
 
 cwm.UserRDB.prototype.getGridData = function() {

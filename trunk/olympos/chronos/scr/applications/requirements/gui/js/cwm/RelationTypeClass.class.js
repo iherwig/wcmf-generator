@@ -46,7 +46,7 @@ cwm.RelationTypeClass = function() {
 	this.connectionInfo = {};
 }
 
-Ext.extend(cwm.RelationTypeClass, uwm.model.ModelClass);
+Ext.extend(cwm.RelationTypeClass, uwm.model.TechnicalObjectClass);
 
 cwm.RelationTypeClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({

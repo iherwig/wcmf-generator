@@ -46,7 +46,7 @@ cwm.InputTypeClass = function() {
 	this.connectionInfo = {};
 }
 
-Ext.extend(cwm.InputTypeClass, uwm.model.ModelClass);
+Ext.extend(cwm.InputTypeClass, uwm.model.TechnicalObjectClass);
 
 cwm.InputTypeClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({

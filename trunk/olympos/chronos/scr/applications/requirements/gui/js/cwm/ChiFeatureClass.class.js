@@ -52,7 +52,7 @@ cwm.ChiFeatureClass = function() {
 		},
 		"ChiRequirement": {
 			label: "Realizes",
-			invert: false,
+			invert: true,
 			connectionType: 'realization'
 		},
 		"ChiFeature": {
