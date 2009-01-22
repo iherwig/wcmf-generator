@@ -51,8 +51,8 @@ uwm.modeltree.ModelTree = function(config) {
 	this.on("nodedragover", function(dragOverEvent) {
 		self.checkDroppable(dragOverEvent);
 	});
-	this.on("nodedrop", function(dropEvent) {
-		self.associateDroppedNode(dropEvent);
+	this.on("movenode", function(tree, node, oldParent, newParent, index) {
+		self.associateDroppedNode(tree, node, oldParent, newParent, index);
 	});
 	
 	this.createdModels = new Ext.util.MixedCollection();
@@ -147,17 +147,17 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(dragOverEvent) {
 	return !dragOverEvent.cancel;
 }
 
-uwm.modeltree.ModelTree.prototype.associateDroppedNode = function(dropEvent) {
-	this.disassociatedNodes.add(dropEvent.dropNode.getModelNode().getOid(), dropEvent);
-	dropEvent.dropNode.getModelNode().disassociate(dropEvent.source.dragData.node.getModelNode())
+uwm.modeltree.ModelTree.prototype.associateDroppedNode = function(tree, node, oldParent, newParent, index) {
+	this.disassociatedNodes.add(node.getModelNode().getOid(), newParent);
+	node.getModelNode().disassociate(oldParent.getModelNode())
 }
 
 uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function (parentModelNode, childModelNode) {
-	var dropEvent = this.disassociatedNodes.get(parentModelNode.getOid());
-	if (dropEvent) {
-		this.disassociatedNodes.remove(dropEvent);
+	var newParent = this.disassociatedNodes.get(childModelNode.getOid());
+	if (newParent) {
+		this.disassociatedNodes.remove(newParent);
 		
-		dropEvent.dropNode.getModelNode().associate(dropEvent.target.getModelNode());
+		childModelNode.associate(newParent.getModelNode());
 	}
 }
 
