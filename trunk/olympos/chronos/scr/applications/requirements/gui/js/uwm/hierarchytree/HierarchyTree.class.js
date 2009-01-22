@@ -155,12 +155,27 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 						currNode.appendChild(connectionNode);
 					}
 					
-					var subNode = new uwm.hierarchytree.Node({
-						parent: parentModelObject,
-						modelNode: childModelObject
-					});
+					var existingNodes = connectionNode.childNodes;
+					var alreadyThere = false;
+					for (var j in existingNodes) {
+						var existingNode = existingNodes[j];
+						
+						if (!(existingNode instanceof Function)) {
+							if (existingNode.getModelNode().getOid() == childModelObject.getOid()) {
+								alreadyThere = true;
+								break;
+							}
+						}
+					}
 					
-					connectionNode.appendChild(subNode);
+					if (!alreadyThere) {
+						var subNode = new uwm.hierarchytree.Node({
+							parent: parentModelObject,
+							modelNode: childModelObject
+						});
+						
+						connectionNode.appendChild(subNode);
+					}
 				}
 			}
 		}
