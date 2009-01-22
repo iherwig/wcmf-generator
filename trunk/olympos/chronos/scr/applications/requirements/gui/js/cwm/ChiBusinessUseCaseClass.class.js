@@ -46,7 +46,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 	this.connectionInfo = {
 	
 		"ChiWorkerExternal": {
-			label: "associates",
+			label: "participates in",
 			invert: false,
 			connectionType: 'association'
 		},
