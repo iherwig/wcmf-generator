@@ -59,6 +59,8 @@ uwm.modeltree.ModelTree = function(config) {
 	this.createdPackages = new Ext.util.MixedCollection();
 	this.createdDiagrams = new Ext.util.MixedCollection();
 	
+	this.disassociatedNodes = new Ext.util.MixedCollection();
+	
 	var self = this;
 	uwm.event.EventBroker.getInstance().addListener({
 		"create": function(modelObject) {
@@ -72,6 +74,9 @@ uwm.modeltree.ModelTree = function(config) {
 		},
 		"associate": function(parentModelObject, childModelObject) {
 			self.handleAssociateEvent(parentModelObject, childModelObject);
+		},
+		"disassociate": function(parentModelObject, childModelObject) {
+			self.handleDisassociateEvent(parentModelObject, childModelObject);
 		}
 	});
 }
@@ -143,7 +148,17 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(dragOverEvent) {
 }
 
 uwm.modeltree.ModelTree.prototype.associateDroppedNode = function(dropEvent) {
-	dropEvent.dropNode.getModelNode().associate(dropEvent.target.getModelNode());
+	this.disassociatedNodes.add(dropEvent.dropNode.getModelNode().getOid(), dropEvent);
+	dropEvent.dropNode.getModelNode().disassociate(dropEvent.source.dragData.node.getModelNode())
+}
+
+uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function (parentModelNode, childModelNode) {
+	var dropEvent = this.disassociatedNodes.get(parentModelNode.getOid());
+	if (dropEvent) {
+		this.disassociatedNodes.remove(dropEvent);
+		
+		dropEvent.dropNode.getModelNode().associate(dropEvent.target.getModelNode());
+	}
 }
 
 /**
