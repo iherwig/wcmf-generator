@@ -22,7 +22,7 @@ cwm.ChiIssueClass = function() {
 	this.figureIcon = "FigureChiIssue";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = " ";
-	this.helpUrl = "help/index.html#ChiIssue|outline";
+	this.helpUrl = "help/index.html#4.4.ChiIssue|outline";
 	this.defaultLabel = "New ChiIssue";
 	this.labelProperties = {
 		Name: true

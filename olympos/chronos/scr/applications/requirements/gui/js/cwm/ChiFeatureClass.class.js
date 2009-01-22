@@ -22,7 +22,7 @@ cwm.ChiFeatureClass = function() {
 	this.figureIcon = "FigureChiFeature";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = " ";
-	this.helpUrl = "help/index.html#ChiFeature|outline";
+	this.helpUrl = "help/index.html#4.3.ChiFeature|outline";
 	this.defaultLabel = "New ChiFeature";
 	this.labelProperties = {
 		Name: true

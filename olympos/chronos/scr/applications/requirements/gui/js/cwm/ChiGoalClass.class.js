@@ -22,7 +22,7 @@ cwm.ChiGoalClass = function() {
 	this.figureIcon = "FigureChiGoal";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = " a Measurable scope that the enterprise wants to achieve. ";
-	this.helpUrl = "help/index.html#ChiGoal|outline";
+	this.helpUrl = "help/index.html#4.1.ChiGoal|outline";
 	this.defaultLabel = "New ChiGoal";
 	this.labelProperties = {
 		Name: true

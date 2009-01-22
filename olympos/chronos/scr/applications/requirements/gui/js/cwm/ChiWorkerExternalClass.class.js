@@ -106,5 +106,9 @@ cwm.ChiWorkerExternalClass.prototype.getPropertyForm = function(modelNode) {
 	});
 }
 
+cwm.ChiWorkerExternalClass.prototype.getGraphics = function(label, figure) {
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorkerExternal.png", 52, 50, 52, 50);
+}
+
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiWorkerExternalClass());
 
