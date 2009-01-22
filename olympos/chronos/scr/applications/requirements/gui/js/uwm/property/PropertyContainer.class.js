@@ -60,21 +60,18 @@ uwm.property.PropertyContainer.prototype.showProperty = function(modelNode) {
 			
 			var self = this;
 			
-			uwm.persistency.Persistency.getInstance().lock(
-						this.currentOid, 
-						function(request, data) {self.showLockedProperty(modelNode);}, 
-						function(request, data) {alert("locking failed");}
-			);
+			uwm.persistency.Persistency.getInstance().lock(this.currentOid, function(request, data) {
+				self.showLockedProperty(modelNode);
+			}, function(request, data) {
+				alert("locking failed");
+			});
 		}
 	}
 }
 
 uwm.property.PropertyContainer.prototype.showLockedProperty = function(modelNode) {
 
-	var islocked = true;
-	window.status = "islocked is " + islocked;
-	
-	var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, islocked));
+	var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, false));
 	this.doLayout();
 	
 	var mask = new Ext.LoadMask(form.getEl());
