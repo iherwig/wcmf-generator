@@ -67,6 +67,7 @@ class ChiGoalTypeRDBMapper extends NodeUnifiedRDBMapper
     $nodeDef['_properties'] = array
     (
       array('name' => 'is_searchable', 'value' => true),
+	    array('name' => 'display_value', 'value' => 'Name'),
 // PROTECTED REGION ID(application/include/model/requirements/class.ChiGoalTypeRDBMapper.php/Properties) ENABLED START
 // PROTECTED REGION END
     );
