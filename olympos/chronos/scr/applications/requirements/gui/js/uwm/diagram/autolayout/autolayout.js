@@ -1882,8 +1882,11 @@ uwm.diagram.autolayout.Layouter.prototype.moveFigures = function() {
 		var figure = this.figures.get(i);
 		
 		var coords = vertex.getCoords();
-		
-		figure.setPosition(coords[0], coords[1]);
+
+		var command = new draw2d.CommandMove(figure);
+		command.setPosition(parseInt(coords[0]), parseInt(coords[1]));
+
+		this.workflow.getCommandStack().execute(command);
 	}
 }
 
