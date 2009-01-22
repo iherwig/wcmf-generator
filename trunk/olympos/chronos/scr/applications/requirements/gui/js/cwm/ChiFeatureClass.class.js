@@ -59,6 +59,11 @@ cwm.ChiFeatureClass = function() {
 			label: "associates",
 			invert: true,
 			connectionType: 'associationType'
+		},
+		"ChiBusinessUseCase": {
+			label: "refines",
+			invert: false,
+			connectionType: 'realization'
 		}
 	};
 }
