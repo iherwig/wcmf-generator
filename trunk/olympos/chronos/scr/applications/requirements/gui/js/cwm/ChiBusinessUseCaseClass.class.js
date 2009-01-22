@@ -22,7 +22,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 	this.figureIcon = "FigureChiBusinessUseCase";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = " A Business Use Case is part of a business process that produces an advantage to the enterprise.";
-	this.helpUrl = "help/index.html#ChiBusinessUseCase|outline";
+	this.helpUrl = "help/index.html#4.6.ChiBusinessUseCase|outline";
 	this.defaultLabel = "New ChiBusinessUseCase";
 	this.labelProperties = {
 		Name: true
@@ -65,7 +65,7 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode) {
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'PrimaryActor',
 			name: 'PrimaryActor',
-			listType: "",
+			listType: "ChiWorkerExternal",
 			modelNode: modelNode,
 		}), new uwm.property.TextField({
 			fieldLabel: 'OtherActors',

@@ -19,7 +19,8 @@ uwm.Util.showMessage = function(title, message, messageType){
     var messageContainer = Ext.get("messageContainer");
     if (!messageContainer) {
         messageContainer = Ext.DomHelper.insertFirst(document.body, {
-            id: "messageContainer"
+            id: "messageContainer",
+            style: "position: absolute"
         }, true);
     }
     messageContainer.alignTo(document, 't-t');

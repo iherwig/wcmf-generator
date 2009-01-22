@@ -22,7 +22,7 @@ cwm.ChiRequirementClass = function() {
 	this.figureIcon = "FigureChiRequirement";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.description = " A Business guide line about the Enterprise or the project.";
-	this.helpUrl = "help/index.html#ChiRequirement|outline";
+	this.helpUrl = "help/index.html#4.2.ChiRequirement|outline";
 	this.defaultLabel = "New ChiRequirement";
 	this.labelProperties = {
 		Name: true
