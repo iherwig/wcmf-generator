@@ -143,7 +143,7 @@ uwm.ui.Login.prototype.handleLogin = function(options, data){
 uwm.ui.Login.prototype.handleLoginFailure = function(options, data, errorMsg){
     uwm.Util.showMessage("Login Failed", data.errorMsg, uwm.Util.messageType.ERROR);
     
-    var passwordField = this.form.findField("password");
+    var passwordField = this.form.getForm().findField("password");
     
     passwordField.setValue("");
     passwordField.focus();
