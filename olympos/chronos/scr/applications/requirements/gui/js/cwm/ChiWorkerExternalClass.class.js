@@ -51,7 +51,7 @@ cwm.ChiWorkerExternalClass = function() {
 			connectionType: 'association'
 		},
 		"ChiBusinessUseCase": {
-			label: "associates",
+			label: "participates in",
 			invert: true,
 			connectionType: 'association'
 		}
