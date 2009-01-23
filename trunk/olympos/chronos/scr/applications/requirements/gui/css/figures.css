@@ -14,7 +14,6 @@
 .FigureModel {
 	background-image: url("../img/Model.png") !important;
 } 
-
 .FigureDiagram {
 	background-image: url("../img/Diagram.png") !important;
 } 
@@ -22,7 +21,6 @@
 .FigureChiGoal {
 	background-image: url("../img/ChiGoal.png") !important;
 }
-
 .ChiGoalTab {
 	background-image: url("../img/ChiGoal.png") !important;
 	min-height:24px;
@@ -32,7 +30,6 @@
 .FigureChiRequirement {
 	background-image: url("../img/ChiRequirement.png") !important;
 }
-
 .ChiRequirementTab {
 	background-image: url("../img/ChiRequirement.png") !important;
 	min-height:24px;
@@ -42,46 +39,89 @@
 .FigureChiFeature {
 	background-image: url("../img/ChiFeature.png") !important;
 }
+.ChiFeatureTab {
+	background-image: url("../img/ChiFeature.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
 .FigureChiIssue {
 	background-image: url("../img/ChiIssue.png") !important;
+}
+.ChiIssueTab {
+	background-image: url("../img/ChiIssue.png") !important;
+	min-height:24px;
+	min-width:4px;
 }
 
 .FigureChiBusinessPartnerPassive {
 	background-image: url("../img/ChiBusinessPartnerPassive.png") !important;
 }
+
 .FigureChiWorker {
 	background-image: url("../img/ChiWorker.png") !important;
 }
+
 .FigureChiWorkerExternal {
 	background-image: url("../img/ChiWorkerExternal.png") !important;
 }
+.ChiWorkerExternalTab {
+	background-image: url("../img/ChiWorkerExternal.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
 .FigureChiWorkerInternal {
 	background-image: url("../img/ChiWorkerInternal.png") !important;
 }
+
 .FigureChiBusinessProcess {
 	background-image: url("../img/ChiBusinessProcess.png") !important;
 }
+.ChiBusinessProcessTab {
+	background-image: url("../img/ChiBusinessProcess.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
 .FigureChiBusinessUseCase {
 	background-image: url("../img/ChiBusinessUseCase.png") !important;
 }
+.ChiBusinessUseCaseTab {
+	background-image: url("../img/ChiBusinessUseCase.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
 .FigureChiBusinessUseCaseCore {
 	background-image: url("../img/ChiBusinessUseCaseCore.png") !important;
 }
+.ChiBusinessUseCaseCoreTab {
+	background-image: url("../img/ChiBusinessUseCaseCore.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
 .FigureChiBusinessPartner {
 	background-image: url("../img/ChiBusinessPartner.png") !important;
 }
+
 .FigureChiBusinessPartnerActive {
 	background-image: url("../img/ChiBusinessPartnerActive.png") !important;
 }
+
 .FigureChiNode {
 	background-image: url("../img/ChiNode.png") !important;
 }
+
 .FigureChiValue {
 	background-image: url("../img/ChiValue.png") !important;
 }
+
 .FigureChiController {
 	background-image: url("../img/ChiController.png") !important;
 }
+
 .FigureChiView {
 	background-image: url("../img/ChiView.png") !important;
 }
