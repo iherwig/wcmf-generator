@@ -13,8 +13,11 @@ Ext.namespace("uwm.ui");
 
 uwm.ui.Workbench = function(config) {
 	this.eastPanel = new uwm.ui.EastPanel({
-			highlight: "default"
-		});
+		highlight: "default"
+	});
+	
+	this.existingContent = [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()];
+	this.getObjectGrids();
 	
 	uwm.ui.Workbench.superclass.constructor.call(this, Ext.apply(this, {
 		items: [{
@@ -34,11 +37,7 @@ uwm.ui.Workbench = function(config) {
 					enableTabScroll: true,
 					id: "existingFiguresContainer",
 					activeTab: 0,
-					items: [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree(), new uwm.objectgrid.ObjectGrid({
-						uwmClassName: "ChiGoal"
-					}), new uwm.objectgrid.ObjectGrid({
-						uwmClassName: "ChiRequirement"
-					})]
+					items: this.existingContent
 				}]
 			}
 		}, this.eastPanel, uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
@@ -46,3 +45,19 @@ uwm.ui.Workbench = function(config) {
 }
 
 Ext.extend(uwm.ui.Workbench, uwm.ui.AbstractWorkbench);
+
+uwm.ui.Workbench.prototype.getObjectGrids = function() {
+
+	var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
+	var clsct = classes.getCount();
+	for (var i = 0; i < clsct; i++) {
+		var currClass = classes.itemAt(i);
+		if (currClass instanceof uwm.model.ModelClass) {
+			this.existingContent.push(new uwm.objectgrid.ObjectGrid({
+				uwmClassName: currClass.getUwmClassName()
+			}));
+		}
+	}
+}
+
+
