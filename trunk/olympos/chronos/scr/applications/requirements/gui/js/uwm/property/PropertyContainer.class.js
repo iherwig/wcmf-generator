@@ -60,11 +60,11 @@ uwm.property.PropertyContainer.prototype.showProperty = function(modelNode) {
 			
 			var self = this;
 			
-			uwm.persistency.Persistency.getInstance().lock(this.currentOid, function(request, data) {
+			//uwm.persistency.Persistency.getInstance().lock(this.currentOid, function(request, data) {
 				self.showLockedProperty(modelNode);
-			}, function(request, data) {
-				alert("locking failed");
-			});
+			//}, function(request, data) {
+			//	alert("locking failed");
+			//});
 		}
 	}
 }

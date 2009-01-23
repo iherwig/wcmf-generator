@@ -77,39 +77,39 @@ cwm.ChiFeatureClass.prototype.getPropertyForm = function(modelNode, islocked ) {
 			name: 'Author',
 			listType: "ChiAuthors",
 			modelNode: modelNode,
-			readOnly: islocked
+			//readOnly: islocked
 		}), new uwm.property.ComboBox({
 			fieldLabel: 'Proofreader',
 			name: 'Proofreader',
 			listType: "ChiAuthors",
 			modelNode: modelNode,
-			readOnly: islocked
+			//readOnly: islocked
 		}), new uwm.property.ComboBox({
 			fieldLabel: 'Status',
 			name: 'Status',
 			listType: "ChiFeatureStatus",
 			modelNode: modelNode,
-			readOnly: islocked
+			//readOnly: islocked
 		}), new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
 			modelNode: modelNode,
-			readOnly: islocked
+			//readOnly: islocked
 		}), new uwm.property.TextField({
 			fieldLabel: 'Version',
 			name: 'Version',
 			modelNode: modelNode,
-			readOnly: islocked
+			//readOnly: islocked
 		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
 			modelNode: modelNode,
-			readOnly: islocked
+			//readOnly: islocked
 		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			modelNode: modelNode,
-			readOnly: islocked
+			//readOnly: islocked
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',
