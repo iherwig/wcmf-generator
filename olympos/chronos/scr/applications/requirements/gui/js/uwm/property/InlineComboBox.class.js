@@ -15,46 +15,26 @@ uwm.property.InlineComboBox = function(config) {
 	var self = this;
 	
 	uwm.property.InlineComboBox.superclass.constructor.call(this, Ext.apply(this, {
-		store: new Ext.data.SimpleStore({
-			fields: [{
-				name: "key",
-				mapping: "key"
-			}, {
-				name: "val",
-				mapping: "val"
-			}],
-			data: [{
-				key: "1",
-				val: "werden"
-			}, {
-				key: "2",
-				val: "wer denn"
-			}, {
-				key: "3",
-				val: "asdf asdf asdf"
-			}, {
-				key: "4",
-				val: "asdfjklö"
-			}, {
-				key: "5",
-				val: "hallo"
-			}, {
-				key: "6",
-				val: "WER denn?"
-			}, {
-				key: "7",
-				val: "AsDf so geht es weiter"
-			}, {
-				key: "8",
-				val: "Ganz was neues"
-			}]
+		store: new Ext.data.JsonStore({
+			url: '../application/main.php',
+			baseParams: {
+				sid: uwm.Session.getInstance().getSid(),
+				usr_action: 'autocomplete',
+				limit_end: 50,
+				limit_start: 1,
+				response_format: 'JSON'
+			},
+			totalProperty: "totalCount",
+			root: 'data',
+			fields: ['type', 'val'],
 		}),
 		displayField: 'val',
-		valueField: 'val',
-		mode: "local",
+		mode: "remote",
 		triggerAction: 'all',
 		enableKeyEvents: true,
-		typeAhead: true
+		typeAhead: true,
+		minChars : 1 
+				
 	}, config));
 	
 	var self = this;
@@ -83,8 +63,8 @@ uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 		case e.ESC:
 			this.htmledit.revertInlineComboBox();
 			break;
-			
+
 		default:
-		//do nothing
+			break;
 	}
 }
