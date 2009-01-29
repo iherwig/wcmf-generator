@@ -47,10 +47,9 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 					self.selectAsScope(item, e);
 				}
 			}, {
-				text: uwm.Dict.translate('Download as UML'),
+				text: uwm.Dict.translate('Export as UML'),
 				handler: function(item, e) {
 					new uwm.ui.Download({
-						title: uwm.Dict.translate('Downloading UML ...'),
 						downloadURL: "../application/main.php?response_format=JSON&usr_action=exportUWM&startModel=" + self.getModelNode().getOid()
 					}).show();
 				}

@@ -75,6 +75,13 @@ uwm.Uwm.prototype.getActiveWorkbench = function() {
 	return this.viewport.getLayout().activeItem;
 }
 
+uwm.Uwm.prototype.reload = function() {
+	this.viewport.destroy();
+	uwm.persistency.Persistency.getInstance().logout(function() {
+		window.location.reload();
+	});
+}
+
 uwm.Uwm.getInstance = function() {
 	if (!uwm.Uwm.instance) {
 		uwm.Uwm.instance = new uwm.Uwm();

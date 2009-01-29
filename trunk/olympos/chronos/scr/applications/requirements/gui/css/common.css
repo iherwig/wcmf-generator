@@ -87,7 +87,11 @@
 	margin: 10%;
 }
 
-.uwm-infoMask div {
+.uwm-dialogBox {
+	margin: 10px;
+}
+
+.uwm-infoMask div, .uwm-dialogBox div {
 	background: white;
 }
 
