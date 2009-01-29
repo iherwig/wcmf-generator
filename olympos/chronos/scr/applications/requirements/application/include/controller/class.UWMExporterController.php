@@ -11,20 +11,16 @@
  * this entire header must remain intact.
  */
 
-require_once (BASE."wcmf/lib/presentation/class.Controller.php");
-require_once (BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
+require_once (BASE . 'wcmf/lib/presentation/class.Controller.php');
+require_once (BASE . 'wcmf/lib/persistence/class.PersistenceFacade.php');
+
+require_once ('class.OawUtil.php');
 
 class UWMExporterController extends Controller
 {
 	const XML_VERSION = "1.0";
 	const ENCODING = "UTF-8";
 	const STANDALONE = "yes";
-
-	const INI_SECTION = 'generator';
-	const INI_EXECUTABLE = 'executable';
-
-	private static $TEMP_PATHS = array('/tmp', '/temp', '/var/tmp', '/var/temp', 'C:/temp', 'C:/tmp', 'C:/windows/temp');
-	private $tempPath;
 
 	private $dom;
 	private $persistenceFacade;
@@ -44,74 +40,24 @@ class UWMExporterController extends Controller
 	{
 		$this->check("start");
 	
-		$tmpUwmExportPath = $this->tempName();
+		$tmpUwmExportPath = OawUtil::tempName();
 		
 		$this->exportXml($tmpUwmExportPath);
 		
-	    $parser = InifileParser::getInstance();
-	    if (($params = $parser->getSection(self::INI_SECTION)) === false) {
-	    	Message::error($parser->getErrorMsg(), __FILE__, __LINE__);
-		}
-		$executablePath = $params[self::INI_EXECUTABLE];
-	
-		$cwd = dirname(realpath($executablePath));
-		$executable = basename($executablePath);
-		
-		$numSlashes = substr_count(str_replace('\\', '/', $cwd), '/');
-		$relativeCwdPath = '';
-		for ($i = 0; $i < $numSlashes; $i++) {
-			$relativeCwdPath .= '../';
-		}
-		$tmpUmlPath = $this->tempName();
-		//echo "tmpUmlPath: '$tmpUmlPath'<br/>";
-		$tmpUmlRelativePath = $relativeCwdPath . preg_replace('/^[a-zA-Z]:\\\\/', '', $tmpUmlPath);
-		
-		$tmpPropertiesPath = $this->tempName();
-		$propertiesFile = fopen($tmpPropertiesPath, 'w');
-		fwrite($propertiesFile, "inputUri = file://$tmpUwmExportPath\n");
-		fwrite($propertiesFile, "outputRelativePath = $tmpUmlRelativePath\n");
-		fclose($propertiesFile);
+		$tmpUmlPath = OawUtil::tempName();
+
+		$tmpPropertiesPath = OawUtil::createPropertyFile('file://' . $tmpUwmExportPath, $tmpUmlPath);
 
 		//header('Content-type: text/plain');
 		header('Content-type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="uwm-export.uml2"');
+		header('Content-Disposition: attachment; filename="uwm-export.uml"');
+
+		mkdir($tmpUmlPath);
 	
 		$this->check("start generator");
 	
-		$descriptorspec = array (
-		0=> array ('pipe', 'r'), // stdin is a pipe that the child will read from
-		1=> array ('pipe', 'w'), // stdout is a pipe that the child will write to
-		2=> array ('pipe', 'w')
-		);
-	
-		$cmd = "java -Djava.library.path=./lib/ -jar $executable templates/uwm/uwm2uml2.oaw -basePath=. \"-propertyFile=$tmpPropertiesPath\"";
-	
-		//echo "cwd: $cwd<br />\n";
-		//echo "cmd: $cmd<br />\n";
-
-		mkdir($tmpUmlPath);
-
-		$process = proc_open($cmd, $descriptorspec, $pipes, $cwd, $env);
-	
-		if (is_resource($process)) {
-			// $pipes now looks like this:
-			// 0 => writeable handle connected to child stdin
-			// 1 => readable handle connected to child stdout
-			
-			fclose($pipes[0]);
+		$runCfg = OawUtil::runOaw($tmpPropertiesPath, 'templates/uwm/uwm2uml2.oaw');
 		
-			//echo 'Output: ', stream_get_contents($pipes[1]), "\n";
-			fclose($pipes[1]);
-		
-			//echo 'Error: ', stream_get_contents($pipes[2]), "\n";
-			fclose($pipes[2]);
-		
-			// It is important that you close any pipes before calling
-			// proc_close in order to avoid a deadlock
-			$return_value = proc_close($process);
-		
-			//echo "command returned $return_value\n";
-		}
 		$this->check('Generator finished');
 		
 		$exportFile = "$tmpUmlPath/uml-output.uml";
@@ -284,37 +230,6 @@ class UWMExporterController extends Controller
 		}
 	
 		$this->dom->endElement();
-	}
-
-	private function tempName() {
-		$tempPath = $this->getTempPath();
-		
-		$result = '';
-		
-		do {
-			$rand = rand(0, 0xffffff);
-			$result = "$tempPath/uwm$rand.tmp";
-		} while (file_exists($result));
-
-		return $result;
-	}
-	
-	private function getTempPath() {
-		if (!$this->tempPath) {
-			for ($i = 0; $i < count(self::$TEMP_PATHS); $i++) {
-				$currPath = self::$TEMP_PATHS[$i];
-				
-				if (is_dir($currPath)) {
-					$this->tempPath = $currPath;
-					break;
-				}
-			}
-		}
-		if (!$this->tempPath) {
-			$this->tempPath = '/tmp';
-		}
-		
-		return $this->tempPath;
 	}
 
 	public function hasView()

@@ -24,8 +24,8 @@ uwm.Dict.voc = {
 							: {'de': 'Dieser Baum zeigt alle Abhängigkeiten eines Objektes. Objekt auswählen, Rechtsklick und Auswahl &quot;In Hierarchie anzeigen&quot;, um es hier anzuzeigen.'},
 		'Shows all objects within selected scope. To select a scope, select the <i>Model Tree</i>, right-click on a Model or Package and select &quot;Select as grid scope&quot;.' 
 							: {'de': 'Zeigt alle Objekte innerhalb des ausgewählten Bereiches. Um einen Bereich auszuwählen, <i>Model Tree</i> auswählen, Rechtsklick auf ein Modell or Paket und &quot;Als Gitterbereich wählen&quot;.'},
-		'Please wait while your download is prepared ...' 			
-							: {'de': 'Bitte warten, Download wird vorbereitet ...'},
+		'Please wait while your export is prepared ...' 			
+							: {'de': 'Bitte warten, Export wird vorbereitet ...'},
 		'Persistency layer error'
 							: {'de': 'Fehler in Persistenzschicht'},
 		'An unspecified error has occured in persistency layer.'			
@@ -82,8 +82,18 @@ uwm.Dict.voc = {
 		'Password' 				: {'de': 'Passwort'},
 		'Language' 				: {'de': 'Sprache'},
 		'This panel shows the properties of each object selected by a single click.' : {'de': 'zeigt mit Click die Eigenschaften jedes Objekts an'},
-		'Download as UML'       : {'de': 'Als UML herunterladen'},
-		'Downloading UML ...'   : {'de': 'Lade UML herunter ...'}
+		'Export as UML'       : {'de': 'Als UML exportieren'},
+		'Exporting UML ...'   : {'de': 'Exportiere UML ...'},
+		'Model Upload'          : {'de': 'Modelle hochladen'},
+		'Select UML model'      : {'de': 'Wählen Sie ein UML-Modell aus'},
+		'File to upload'        : {'de': 'Hochzuladende Datei'},
+		'Send model'            : {'de': 'Sende Modell'},
+		'Sending the model ...' : {'de': 'Sende das Modell ...'},
+		'Import successful'     : {'de': 'Import erfolgreich'},
+		'Your import finished successfully. The application is going to restart.': {'de': 'Der Import wurde erfolgreich beendet. Die Anwendung wird nun neu gestartet.'},
+		'OK'                    : {'de': 'OK'},
+		'Import failed'         : {'de': 'Import fehlgeschlagen'},
+		'Your import failed. See below for errors.' : {'de': 'Ihr Import ist fehlgeschlagen. Siehe unten für Fehlermeldungen (auf Englisch).'}
 		
 }
 uwm.Dict.translate = function(){

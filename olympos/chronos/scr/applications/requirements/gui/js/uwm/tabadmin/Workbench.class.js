@@ -15,7 +15,10 @@ uwm.tabadmin.Workbench = function(config) {
 	this.tabPanel = new Ext.TabPanel({
 		region: "center",
 		activeTab: 0,
-		enableTabScroll: true
+		enableTabScroll: true,
+		items: [
+			new uwm.tabadmin.ImportPanel()
+		]
 	});
 	this.eastPanel = new uwm.ui.EastPanel({
 		highlight: "admin"
