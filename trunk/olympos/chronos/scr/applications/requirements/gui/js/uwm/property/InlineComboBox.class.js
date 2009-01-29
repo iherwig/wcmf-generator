@@ -55,15 +55,17 @@ uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 	var keycode = e.getKey();
 	
 	switch (keycode) {
+		
 		case e.ENTER:
 		case e.TAB:
-			this.htmledit.resolveInlineComboBox(this.getValue());
+			//this.htmledit.resolveInlineComboBox(this.getValue(),this.store.getAt(this.selectedIndex).get('type'));
+			this.htmledit.resolveInlineComboBox(this.getValue(),this.view.getSelectedRecords()[0].get('type'));
 			break;
 			
 		case e.ESC:
 			this.htmledit.revertInlineComboBox();
 			break;
-
+			
 		default:
 			break;
 	}
