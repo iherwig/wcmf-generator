@@ -78,11 +78,24 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 	}, this);
 }
 
-uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue) {
+uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue,newValueType) {
 	this.comboBox.destroy();
 	this.wrap.remove();
 	this.span.parentNode.removeChild(this.span);
-	this.insertAtCursor(" <b>" + newValue + "</b>&ensp;");
+	switch(newValueType){
+		case 'ChiRequirement':
+		this.insertAtCursor(" <b>" + newValue + "</b>&ensp;");
+		break;
+		case 'ChiWorkerExternal':
+		this.insertAtCursor(" <u>" + newValue + "</u>&ensp;");
+		break;
+		case 'ChiBusinessUseCase' || 'ChiBusinessUseCaseCore' :
+		this.insertAtCursor(" <i>" + newValue + "</i>&ensp;");
+		break;
+		default:
+		this.insertAtCursor(" " + newValue + "&ensp;");
+		break;
+	}	
 	this.focus(undefined, 100);
 }
 
