@@ -61,28 +61,34 @@ cwm.ChiIssueClass.prototype.getPropertyForm = function(modelNode) {
 			fieldLabel: 'Author',
 			name: 'Author',
 			listType: "ChiAuthors",
-			modelNode: modelNode
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
 		}), new uwm.property.ComboBox({
 			fieldLabel: 'Responsible',
 			name: 'Responsible',
 			listType: "ChiAuthors",
-			modelNode: modelNode
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}),	new uwm.property.TextField({
 			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}),	new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}),	new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}),	new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',
