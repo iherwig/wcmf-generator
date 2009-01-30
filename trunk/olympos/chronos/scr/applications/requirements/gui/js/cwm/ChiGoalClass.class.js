@@ -66,35 +66,43 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
 			fieldLabel: 'GoalType',
 			name: 'GoalType',
 			listType: "ChiGoalType",
-			modelNode: modelNode
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Value_Name',
 			name: 'Value_Name',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Value_ammount',
 			name: 'Value_ammount',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Value_Goal',
 			name: 'Value_Goal',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Version',
 			name: 'Version',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',

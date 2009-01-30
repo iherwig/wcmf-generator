@@ -72,58 +72,72 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode) {
 			name: 'PrimaryActor',
 			listType: "ChiWorkerExternal",
 			modelNode: modelNode,
+			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'OtherActors',
 			name: 'OtherActors',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'GoalInContext',
 			name: 'GoalInContext',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Scope',
 			name: 'Scope',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Level',
 			name: 'Level',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Stakeholders',
 			name: 'Stakeholders',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Precondition',
 			name: 'Precondition',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Trigger',
 			name: 'Trigger',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'MainSuccessScenario',
 			name: 'MainSuccessScenario',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Extensions',
 			name: 'Extensions',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Version',
 			name: 'Version',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',

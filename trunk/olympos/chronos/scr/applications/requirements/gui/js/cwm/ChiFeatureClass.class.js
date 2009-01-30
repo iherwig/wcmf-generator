@@ -70,46 +70,46 @@ cwm.ChiFeatureClass = function() {
 
 Ext.extend(cwm.ChiFeatureClass, uwm.model.ModelClass);
 
-cwm.ChiFeatureClass.prototype.getPropertyForm = function(modelNode, islocked ) {
+cwm.ChiFeatureClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser ) {
 		return new uwm.property.PropertyForm({
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'Author',
 			name: 'Author',
 			listType: "ChiAuthors",
 			modelNode: modelNode,
-			//readOnly: islocked
+			 disabled : isLockedByOtherUser
 		}), new uwm.property.ComboBox({
 			fieldLabel: 'Proofreader',
 			name: 'Proofreader',
 			listType: "ChiAuthors",
 			modelNode: modelNode,
-			//readOnly: islocked
+			 disabled : isLockedByOtherUser
 		}), new uwm.property.ComboBox({
 			fieldLabel: 'Status',
 			name: 'Status',
 			listType: "ChiFeatureStatus",
 			modelNode: modelNode,
-			//readOnly: islocked
+			 disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
 			modelNode: modelNode,
-			//readOnly: islocked
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Version',
 			name: 'Version',
 			modelNode: modelNode,
-			//readOnly: islocked
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
 			modelNode: modelNode,
-			//readOnly: islocked
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			modelNode: modelNode,
-			//readOnly: islocked
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',

@@ -65,59 +65,73 @@ cwm.ChiBusinessUseCaseCoreClass.prototype.getPropertyForm = function(modelNode) 
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'PrimaryActor',
 			name: 'PrimaryActor',
-			modelNode: modelNode
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'OtherActors',
 			name: 'OtherActors',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'GoalInContext',
 			name: 'GoalInContext',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Scope',
 			name: 'Scope',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Level',
 			name: 'Level',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Stakeholders',
 			name: 'Stakeholders',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 				fieldLabel: 'Precondition',
 			name: 'Precondition',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Trigger',
 			name: 'Trigger',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'MainSuccessScenario',
 			name: 'MainSuccessScenario',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Extensions',
 			name: 'Extensions',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',

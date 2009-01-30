@@ -65,23 +65,28 @@ cwm.ChiWorkerExternalClass.prototype.getPropertyForm = function(modelNode) {
 		items: [new uwm.property.TextField({
 			fieldLabel: 'is_OfflineUser',
 			name: 'is_OfflineUser',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',
