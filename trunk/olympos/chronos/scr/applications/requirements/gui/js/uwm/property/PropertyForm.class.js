@@ -11,7 +11,7 @@
  */
 Ext.namespace("uwm.property");
 
-uwm.property.PropertyForm = Ext.extend(Ext.FormPanel, {
+uwm.property.PropertyForm = Ext.extend(Ext.form.FormPanel, {
 	initComponent: function() {
 		Ext.apply(this, {
 			labelWidth: 90,

@@ -60,18 +60,33 @@ uwm.property.PropertyContainer.prototype.showProperty = function(modelNode) {
 			
 			var self = this;
 			
-			//uwm.persistency.Persistency.getInstance().lock(this.currentOid, function(request, data) {
-				self.showLockedProperty(modelNode);
-			//}, function(request, data) {
-			//	alert("locking failed");
-			//});
+			uwm.persistency.Persistency.getInstance().lock(this.currentOid, function(request, data) {
+				var isLockedByOtherUser = false;
+				self.showLockedProperty(modelNode, isLockedByOtherUser);
+				//alert("locked "+self.currentOid);
+			}, function(request, data) {
+				var isLockedByOtherUser = true;
+				self.showLockedProperty(modelNode, isLockedByOtherUser);
+				//alert("locking failed");
+			});
 		}
 	}
 }
 
-uwm.property.PropertyContainer.prototype.showLockedProperty = function(modelNode) {
+uwm.property.PropertyContainer.prototype.showLockedProperty = function(modelNode, isLockedByOtherUser) {
 
-	var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, false));
+	var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, isLockedByOtherUser));
+
+	form.on("destroy", function(){
+		this.currentOid = modelNode.getOid();
+		var self = this;
+		uwm.persistency.Persistency.getInstance().unlock( self.currentOid, function(request, data) {
+				//alert("unlocked "+ self.currentOid);
+			}, function(request, data) {
+				//alert("unlocking failed "+ self.currentOid );
+			});
+	});
+	
 	this.doLayout();
 	
 	var mask = new Ext.LoadMask(form.getEl());
