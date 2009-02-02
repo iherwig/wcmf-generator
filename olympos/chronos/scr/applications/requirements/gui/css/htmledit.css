@@ -1,0 +1,15 @@
+body.islockedByAnotherUser {
+	background-color: grey;	
+}
+
+.autocomplete-ChiWorkerExternal {
+	font-weight: bold;
+}
+
+.autocomplete-ChiBusinessUseCase {
+	text-decoration: underline;
+}
+
+.autocomplete-ChiRequirement {
+	font-style: italic;
+}
