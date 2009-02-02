@@ -70,7 +70,7 @@ cwm.ChiRequirementClass = function() {
 
 Ext.extend(cwm.ChiRequirementClass, uwm.model.ModelClass);
 
-cwm.ChiRequirementClass.prototype.getPropertyForm = function(modelNode) {
+cwm.ChiRequirementClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'reqType',

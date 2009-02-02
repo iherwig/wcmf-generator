@@ -55,7 +55,7 @@ cwm.ChiIssueClass = function() {
 
 Ext.extend(cwm.ChiIssueClass, uwm.model.ModelClass);
 
-cwm.ChiIssueClass.prototype.getPropertyForm = function(modelNode) {
+cwm.ChiIssueClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'Author',

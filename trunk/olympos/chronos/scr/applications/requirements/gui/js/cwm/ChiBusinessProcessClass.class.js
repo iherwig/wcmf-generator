@@ -60,7 +60,7 @@ cwm.ChiBusinessProcessClass = function() {
 
 Ext.extend(cwm.ChiBusinessProcessClass, uwm.model.ModelClass);
 
-cwm.ChiBusinessProcessClass.prototype.getPropertyForm = function(modelNode) {
+cwm.ChiBusinessProcessClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
 			fieldLabel: 'Alias',

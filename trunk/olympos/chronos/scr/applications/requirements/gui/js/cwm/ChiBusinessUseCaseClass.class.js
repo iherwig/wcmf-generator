@@ -65,7 +65,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 
 Ext.extend(cwm.ChiBusinessUseCaseClass, uwm.model.ModelClass);
 
-cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode) {
+cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'PrimaryActor',
