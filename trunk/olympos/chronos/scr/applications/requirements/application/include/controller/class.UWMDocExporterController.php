@@ -94,7 +94,7 @@ class UWMDocExporterController extends Controller
 
 	private function createTempFile($path) {
 		touch($path);
-		chmod($path, 777);
+		chmod($path, 0777);
 	
 		return $path;
 	}
