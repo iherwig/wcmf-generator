@@ -17,7 +17,7 @@ require_once (BASE . 'wcmf/lib/persistence/class.PersistenceFacade.php');
 require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
 
-class UWMExporterController extends Controller
+class UWMDocExporterController extends Controller
 {
 	private $lastTime = 0;
 
@@ -34,39 +34,52 @@ class UWMExporterController extends Controller
 	{
 		$this->check("start");
 	
-		$tmpUwmExportPath = OawUtil::tempName();
+		$workingDir = OawUtil::tempName();
+		mkdir($workingDir);
+	
+		$tmpUwmExportPath = "$workingDir/uwm-export.xml";
+		touch($tmpUwmExportPath);
 		
 		$startModel = $this->_request->getValue('startModel');
 		$startPackage = $this->_request->getValue('startPackage');
 
 		UwmUtil::exportXml($tmpUwmExportPath, $startModel, $startPackage);
 		
-		$tmpUmlPath = OawUtil::tempName();
+		OawUtil::setupExecutable();
+		
+		$propertyPath = "$workingDir/doc-export.properties";
+		$propertyFile = fopen($propertyPath, 'w');
+		fwrite($propertyFile, "workingDir = $workingDir\n");
+		fclose($propertyFile);
+		
+		$contentPath = "$workingDir/content.xml";
+		touch($contentPath);
 
-		$tmpPropertiesPath = OawUtil::createPropertyFile('file://' . $tmpUwmExportPath, $tmpUmlPath);
-
+		$openofficePath = "$workingDir/openoffice-export.odt";
+		touch($openofficePath);
+		
 		//header('Content-type: text/plain');
 		header('Content-type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="uwm-export.uml"');
+		header('Content-Disposition: attachment; filename="uwm-export.doc"');
 
-		mkdir($tmpUmlPath);
-	
 		$this->check("start generator");
 	
-		$runCfg = OawUtil::runOaw($tmpPropertiesPath, 'templates/uwm/uwm2uml2.oaw');
+		$runCfg = OawUtil::runOaw($propertyPath, 'templates/uwm/doc/openoffice.oaw');
 		
 		$this->check('Generator finished');
 		
-		$exportFile = "$tmpUmlPath/uml-output.uml";
+		$exportFile = "$workingDir/uwm-export.doc";
 		
 		readfile($exportFile);
 		
 		$this->check('File written to output');
 
-		unlink($tmpUwmExportPath);
-		unlink($tmpPropertiesPath);
 		unlink($exportFile);
-		rmdir($tmpUmlPath);
+		unlink($openofficePath);
+		unlink($contentPath);
+		unlink($propertyPath);
+		unlink($tmpUwmExportPath);
+		rmdir($workingDir);
 		
 		$this->check("finished");
 	
