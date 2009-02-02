@@ -21,7 +21,7 @@ cwm.ChiFeatureClass = function() {
 	this.treeIcon = "FigureChiFeature";
 	this.figureIcon = "FigureChiFeature";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
-	this.description = " ";
+	this.description = "A characteristic of a (proposed) system that realizes a ChiRequirement.";
 	this.helpUrl = "help/index.html#4.3.ChiFeature|outline";
 	this.defaultLabel = "New ChiFeature";
 	this.labelProperties = {
@@ -109,7 +109,7 @@ cwm.ChiFeatureClass.prototype.getPropertyForm = function(modelNode, isLockedByOt
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
+			designMode: 'off'
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',
