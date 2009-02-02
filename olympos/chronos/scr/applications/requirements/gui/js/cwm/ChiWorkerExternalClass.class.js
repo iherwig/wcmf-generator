@@ -60,7 +60,7 @@ cwm.ChiWorkerExternalClass = function() {
 
 Ext.extend(cwm.ChiWorkerExternalClass, uwm.model.ModelClass);
 
-cwm.ChiWorkerExternalClass.prototype.getPropertyForm = function(modelNode) {
+cwm.ChiWorkerExternalClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
 			fieldLabel: 'is_OfflineUser',
