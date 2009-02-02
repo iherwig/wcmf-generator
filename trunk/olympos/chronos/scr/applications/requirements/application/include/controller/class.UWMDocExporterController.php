@@ -72,7 +72,7 @@ class UWMDocExporterController extends Controller
 		readfile($exportFile);
 	
 		$this->check('File written to output');
-	
+
 		unlink($exportFile);
 		unlink($openofficePath);
 		unlink($openofficeTmp0Path);
@@ -81,7 +81,7 @@ class UWMDocExporterController extends Controller
 		unlink($propertyPath);
 		unlink($tmpUwmExportPath);
 		rmdir($workingDir);
-	
+
 		$this->check("finished");
 	
 		return false;
