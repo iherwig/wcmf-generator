@@ -38,6 +38,14 @@ uwm.property.HtmlEditor = function(config) {
 Ext.extend(uwm.property.HtmlEditor, Ext.form.HtmlEditor);
 
 uwm.property.HtmlEditor.prototype.handleInitialize = function() {
+
+	var link = this.doc.createElement("link");
+	link.setAttribute("rel", "stylesheet");
+	link.setAttribute("type", "text/css");
+	link.setAttribute("href", "css/htmledit.css");
+	var head = this.doc.getElementsByTagName("head")[0];
+	head.appendChild(link);
+	
 	Ext.EventManager.on(this.doc, 'keypress', function(e) {
 		if (e.shiftKey && e.getKey() == e.SPACE) {
 			this.insertAtCursor("<span id='" + uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID + "' />");
@@ -78,24 +86,11 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 	}, this);
 }
 
-uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue,newValueType) {
+uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue, newValueType) {
 	this.comboBox.destroy();
 	this.wrap.remove();
 	this.span.parentNode.removeChild(this.span);
-	switch(newValueType){
-		case 'ChiRequirement':
-		this.insertAtCursor(" <b>" + newValue + "</b>&ensp;");
-		break;
-		case 'ChiWorkerExternal':
-		this.insertAtCursor(" <u>" + newValue + "</u>&ensp;");
-		break;
-		case 'ChiBusinessUseCase' || 'ChiBusinessUseCaseCore' :
-		this.insertAtCursor(" <i>" + newValue + "</i>&ensp;");
-		break;
-		default:
-		this.insertAtCursor(" " + newValue + "&ensp;");
-		break;
-	}	
+	this.insertAtCursor(" <span class='autocomplete-" + newValueType + "'>" + newValue + "</span>&ensp;");
 	this.focus(undefined, 100);
 }
 
