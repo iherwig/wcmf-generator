@@ -57,7 +57,12 @@ class UWMDocExporterController extends Controller
 
 		$openofficePath = "$workingDir/openoffice-export.odt";
 		touch($openofficePath);
+		chmod($openofficePath, 0777);
 		
+		$exportFile = "$workingDir/uwm-export.doc";
+		touch($exportFile);
+		chmod($exportFile, 0777);
+
 		//header('Content-type: text/plain');
 		header('Content-type: application/octet-stream');
 		header('Content-Disposition: attachment; filename="uwm-export.doc"');
@@ -68,7 +73,6 @@ class UWMDocExporterController extends Controller
 		
 		$this->check('Generator finished');
 		
-		$exportFile = "$workingDir/uwm-export.doc";
 		
 		readfile($exportFile);
 		
