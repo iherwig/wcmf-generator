@@ -1,4 +1,16 @@
 <?php
+/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ * 
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+
 class OawUtil {
 	const INI_SECTION = 'generator';
 	const INI_EXECUTABLE = 'executable';
@@ -41,7 +53,7 @@ class OawUtil {
 		return self::$tempPath;
 	}
 	
-	public static function createPropertyFile($uwmPath, $umlPath) {
+	public static function setupExecutable() {
 	    $parser = InifileParser::getInstance();
 	    if (($params = $parser->getSection(self::INI_SECTION)) === false) {
 	    	Message::error($parser->getErrorMsg(), __FILE__, __LINE__);
@@ -50,6 +62,10 @@ class OawUtil {
 	
 		self::$cwd = dirname(realpath($executablePath));
 		self::$executable = basename($executablePath);
+	}
+
+	public static function createPropertyFile($uwmPath, $umlPath) {
+		self::setupExecutable();
 		
 		$numSlashes = substr_count(str_replace('\\', '/', self::$cwd), '/');
 		$relativeCwdPath = '';

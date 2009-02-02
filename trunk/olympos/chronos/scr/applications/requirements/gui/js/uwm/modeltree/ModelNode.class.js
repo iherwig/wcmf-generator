@@ -50,7 +50,16 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 				text: uwm.Dict.translate('Export as UML'),
 				handler: function(item, e) {
 					new uwm.ui.Download({
+						title: uwm.Dict.translate('Exporting UML ...'),
 						downloadURL: "../application/main.php?response_format=JSON&usr_action=exportUWM&startModel=" + self.getModelNode().getOid()
+					}).show();
+				}
+			}, {
+				text: uwm.Dict.translate('Export as Word Document'),
+				handler: function(item, e) {
+					new uwm.ui.Download({
+						title: uwm.Dict.translate('Exporting Word Document ...'),
+						downloadURL: "../application/main.php?response_format=JSON&usr_action=exportDoc&startModel=" + self.getModelNode().getOid()
 					}).show();
 				}
 			}]

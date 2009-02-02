@@ -93,17 +93,21 @@ uwm.Dict.voc = {
 		'Your import finished successfully. The application is going to restart.': {'de': 'Der Import wurde erfolgreich beendet. Die Anwendung wird nun neu gestartet.'},
 		'OK'                    : {'de': 'OK'},
 		'Import failed'         : {'de': 'Import fehlgeschlagen'},
-		'Your import failed. See below for errors.' : {'de': 'Ihr Import ist fehlgeschlagen. Siehe unten für Fehlermeldungen (auf Englisch).'}
+		'Your import failed. See below for errors.' : {'de': 'Ihr Import ist fehlgeschlagen. Siehe unten für Fehlermeldungen (auf Englisch).'},
+		'Export as Word Document': {'de': 'Als Word-Dokument exportieren'},
+		'Exporting Word Document ...' : {'de': 'Exportiere Word-Dokument ...'}
 		
 }
 uwm.Dict.translate = function(){
-		strword=arguments[0];
-		try {
-			strresult = uwm.Dict.voc[strword][uwm.Session.getInstance().getLang()];
-			if(!strresult){strresult = strword;}
-		}catch(e){
-			strresult = strword;
-		}
-		return strresult;
+	strword=arguments[0];
+
+	try {
+		strresult = uwm.Dict.voc[strword][uwm.Session.getInstance().getLang()];
+		if(!strresult){strresult = strword;}
+	}catch(e){
+		strresult = strword;
+	}
+
+	return strresult;
 }
 
