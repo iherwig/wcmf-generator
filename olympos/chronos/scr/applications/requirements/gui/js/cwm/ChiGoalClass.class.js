@@ -60,7 +60,7 @@ cwm.ChiGoalClass = function() {
 
 Ext.extend(cwm.ChiGoalClass, uwm.model.ModelClass);
 
-cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode) {
+cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'GoalType',
