@@ -24,7 +24,7 @@ class AutoCompleteController extends Controller
 			$searchlimitend = $_REQUEST["limit_end"];
 			$searchlimitstart = $_REQUEST["limit_start"];
 			/*$domObj =  $_REQUEST["domobj"];*/
-			$domObj = array ('ChiBusinessUseCase', 'ChiWorkerExternal', 'ChiRequirement');
+			$domObj = array ('ChiBusinessUseCase','ChiBusinessUseCaseCore','ChiWorkerExternal');
 			$datastore = array ();
 		
 			//	create and execute query
