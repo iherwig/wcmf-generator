@@ -33,6 +33,11 @@ uwm.property.HtmlEditor = function(config) {
 	
 	this.toolTipText = config.toolTip
 	this.modelNode = config.modelNode;
+	
+	if (config.readOnly) {
+		
+		this.autoMonitorDesignMode = false;
+	}
 }
 
 Ext.extend(uwm.property.HtmlEditor, Ext.form.HtmlEditor);
@@ -46,44 +51,57 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 	var head = this.doc.getElementsByTagName("head")[0];
 	head.appendChild(link);
 	
-	Ext.EventManager.on(this.doc, 'keypress', function(e) {
-		if (e.shiftKey && e.getKey() == e.SPACE) {
-			this.insertAtCursor("<span id='" + uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID + "' />");
-			
-			this.span = this.doc.getElementById(uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID);
-			var fullPreText = this.span.previousSibling.nodeValue;
-			this.preText = "";
-			
-			if (fullPreText) {
-				var matchArray = fullPreText.match(/[^\t\n ]+$/);
-				if (matchArray) {
-					this.preText = matchArray[0];
-					this.span.previousSibling.nodeValue = fullPreText.substr(0, fullPreText.length - this.preText.length);
-				}
-			}
-			
-			//this.wrap = Ext.DomHelper.append(Ext.getBody(), "<div />", true);
-			this.wrap = new Ext.Layer();
-			
-			this.comboBox = new uwm.property.InlineComboBox({
-				htmledit: this,
-				doc: this.doc,
-				renderTo: this.wrap.dom,
-				value: this.preText.trim()
-			});
-			
-			var htmlpos = this.getPosition(true);
-			var htmlbox = this.getBox();
-			var combobox = this.comboBox.getBox();
-			var spanbox = this.span.getBoundingClientRect();
-			
-			// the fixed offsets are determined by trial & error, no deeper meaning (just looks better this way)
-			this.wrap.setBounds(htmlbox.x - htmlpos[0] + spanbox.left, htmlbox.y - htmlpos[1] + spanbox.top + combobox.height * 1.1, combobox.width + 20, combobox.height);
-			this.wrap.show();
-			
-			this.comboBox.focus(undefined, true);
+	if (this.readOnly) {
+		
+		this.doc.body.setAttribute("class", 'readOnly');
+		try {
+			Ext.EventManager.removeAll(this.doc);
+		} catch (e) {
 		}
-	}, this);
+
+		this.doc.designMode = "off";
+	} else {
+		this.doc.body.setAttribute("class", 'editable');
+		
+		Ext.EventManager.on(this.doc, 'keypress', function(e) {
+			if (e.shiftKey && e.getKey() == e.SPACE) {
+				this.insertAtCursor("<span id='" + uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID + "' />");
+				
+				this.span = this.doc.getElementById(uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID);
+				var fullPreText = this.span.previousSibling.nodeValue;
+				this.preText = "";
+				
+				if (fullPreText) {
+					var matchArray = fullPreText.match(/[^\t\n ]+$/);
+					if (matchArray) {
+						this.preText = matchArray[0];
+						this.span.previousSibling.nodeValue = fullPreText.substr(0, fullPreText.length - this.preText.length);
+					}
+				}
+				
+				//this.wrap = Ext.DomHelper.append(Ext.getBody(), "<div />", true);
+				this.wrap = new Ext.Layer();
+				
+				this.comboBox = new uwm.property.InlineComboBox({
+					htmledit: this,
+					doc: this.doc,
+					renderTo: this.wrap.dom,
+					value: this.preText.trim()
+				});
+				
+				var htmlpos = this.getPosition(true);
+				var htmlbox = this.getBox();
+				var combobox = this.comboBox.getBox();
+				var spanbox = this.span.getBoundingClientRect();
+				
+				// the fixed offsets are determined by trial & error, no deeper meaning (just looks better this way)
+				this.wrap.setBounds(htmlbox.x - htmlpos[0] + spanbox.left, htmlbox.y - htmlpos[1] + spanbox.top + combobox.height * 1.1, combobox.width + 20, combobox.height);
+				this.wrap.show();
+				
+				this.comboBox.focus(undefined, true);
+			}
+		}, this);
+	}
 }
 
 uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue, newValueType) {

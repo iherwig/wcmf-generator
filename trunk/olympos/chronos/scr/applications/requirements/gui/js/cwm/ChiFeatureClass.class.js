@@ -109,7 +109,7 @@ cwm.ChiFeatureClass.prototype.getPropertyForm = function(modelNode, isLockedByOt
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			modelNode: modelNode,
-			designMode: 'off'
+			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',

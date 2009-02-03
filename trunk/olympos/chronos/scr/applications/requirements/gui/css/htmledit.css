@@ -1,15 +1,30 @@
-body.islockedByAnotherUser {
-	background-color: grey;	
+
+body {
+	background-image: none !important;
 }
 
-.autocomplete-ChiWorkerExternal {
+/*greyed out if uneditable*/
+body.readOnly {
+	background-color: rgb(242,246,251);
+}
+body.editable {
+	background-color: white;
+}
+
+/*autocomplete Domain Objects*/
+.autocomplete-DomObjects {
 	font-weight: bold;
 }
 
-.autocomplete-ChiBusinessUseCase {
+/*autocomplete Actors*/
+.autocomplete-ChiWorkerExternal {
 	text-decoration: underline;
 }
 
-.autocomplete-ChiRequirement {
+/*autocomplete Use Cases*/
+.autocomplete-ChiBusinessUseCase {
+	font-style: italic;
+}
+.autocomplete-ChiBusinessUseCaseCore {
 	font-style: italic;
 }
