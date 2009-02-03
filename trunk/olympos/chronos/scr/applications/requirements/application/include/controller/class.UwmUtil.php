@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright (c) 2008 The Olympos Development Team.
- * 
+ *
  * http://sourceforge.net/projects/olympos/
  *
  * All rights reserved. This program and the accompanying materials
@@ -10,6 +10,8 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
+
+require_once (BASE."wcmf/lib/model/class.NodeUtil.php");
 
 class UwmUtil {
 	const XML_VERSION = "1.0";
@@ -66,12 +68,15 @@ class UwmUtil {
 		
 		self::$dom->endDocument();
 		self::$dom->flush();
-		
+	
 		self::$dom = null;
 	}
 
 	private function appendAttributes($node)
 	{
+		$nodes = array ($node);
+		NodeUtil::translateValues($nodes);
+	
 		$valueNames = $node->getValueNames();
 	
 		foreach ($valueNames as $currValueName)
@@ -172,9 +177,9 @@ class UwmUtil {
 				self::$dom->endElement();
 			}
 		}
-		
+	
 		$parents = $currNode->getParents();
-		foreach($parents as $currParent) {
+		foreach ($parents as $currParent) {
 			self::$dom->startElement('Parent');
 			self::$dom->writeAttribute('targetType', $currParent->getType());
 			self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
@@ -183,6 +188,7 @@ class UwmUtil {
 	
 		self::$dom->endElement();
 	}
+
 }
 
 ?>
