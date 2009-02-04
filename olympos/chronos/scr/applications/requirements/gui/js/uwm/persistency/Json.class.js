@@ -177,3 +177,19 @@ uwm.persistency.Json.prototype.unlock = function(oid, successHandler, errorHandl
 		oid: oid
 	}, successHandler, errorHandler);
 }
+
+uwm.persistency.Json.prototype.log = function(logtype, msg, successHandler, errorHandler) {
+	var self = this;
+	
+	this.jsonRequest({
+		usr_action: "log",
+		logtype: logtype,
+		msg: msg
+	}, successHandler, function(request, data, errorMessage) {
+		if (errorMessage) {
+			self.processSuccessHandler(successHandler);
+		} else {
+			self.processErrorHandler(errorHandler, request, data);
+		}
+	});
+}

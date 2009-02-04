@@ -95,7 +95,10 @@ uwm.Dict.voc = {
 		'Import failed'         : {'de': 'Import fehlgeschlagen'},
 		'Your import failed. See below for errors.' : {'de': 'Ihr Import ist fehlgeschlagen. Siehe unten für Fehlermeldungen (auf Englisch).'},
 		'Export as Word Document': {'de': 'Als Word-Dokument exportieren'},
-		'Exporting Word Document ...' : {'de': 'Exportiere Word-Dokument ...'}
+		'Exporting Word Document ...' : {'de': 'Exportiere Word-Dokument ...'},
+		'Error occured'         : {'de': 'Ein Fehler ist aufgetreten'},
+		'An application error occured. Your data will be saved and the application will be restarted.' : {'de': 'Ein Anwendungsfehler ist aufgetreten. Ihre Daten werden gespeichert und die Anwedung neu gestartet.'},
+		'Error details'         : {'de': 'Fehlerdetails'}
 		
 }
 uwm.Dict.translate = function(){
