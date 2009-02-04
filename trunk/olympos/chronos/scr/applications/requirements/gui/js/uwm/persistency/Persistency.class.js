@@ -27,7 +27,7 @@ uwm.persistency.Persistency.prototype.processSuccessHandler = function(successHa
 
 uwm.persistency.Persistency.prototype.processErrorHandler = function(errorHandler, request, data, errorMessage) {
 	if (errorHandler instanceof Function) {
-		errorHandler(request, data);
+		errorHandler(request, data, errorMessage);
 	}
 	else if (errorHandler instanceof String) {
 		uwm.Util.showMessage(uwm.Dict.translate('Persistency layer error'), errorHandler + errorMessage, uwm.Util.messageType.ERROR);
@@ -76,4 +76,7 @@ uwm.persistency.Persistency.prototype.lock = function(oid, successHandler, error
 }
 
 uwm.persistency.Persistency.prototype.unlock = function(oid, successHandler, errorHandler) {
+}
+
+uwm.persistency.Persistency.prototype.log = function(logtype, msg, successHandler, errorHandler) {
 }
