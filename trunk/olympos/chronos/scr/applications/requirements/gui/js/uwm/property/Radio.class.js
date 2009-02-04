@@ -13,15 +13,18 @@ Ext.namespace("uwm.property");
 
 uwm.property.Radio = function(config) {
 	var self = this;
-	
+
 	uwm.property.Radio.superclass.constructor.call(this, Ext.apply(this, {
-		listeners: {
-			"check": function(field, checked) {
+		listeners : {
+			"check" : function(field, checked) {
 				self.fieldChecked(field, checked);
+			},
+			"beforedestroy" : function(field) {
+				self.handleDestroy(field);
 			}
 		}
 	}, config));
-	
+
 	this.toolTipText = config.toolTip;
 	this.value = config.value;
 	this.modelNode = config.modelNode;
@@ -31,20 +34,30 @@ Ext.extend(uwm.property.Radio, Ext.form.Radio);
 
 uwm.property.Radio.prototype.render = function(container, position) {
 	uwm.property.Radio.superclass.render.apply(this, arguments);
-	
+
 	if (this.toolTipText) {
-		this.toolTip = new Ext.ToolTip({
-			target: container,
-			html: this.toolTipText
+		this.toolTip = new Ext.ToolTip( {
+			target :container,
+			html :this.toolTipText
 		});
 	}
 }
 
 uwm.property.Radio.prototype.fieldChecked = function(field, checked) {
 	if (checked) {
-		var tmp = new Object();
-		tmp[this.getName()] = this.value;
-		
-		this.modelNode.changeProperties(tmp);
+		this.persistValue();
 	}
+}
+
+uwm.property.Radio.prototype.handleDestroy = function(field) {
+	if (this.isDirty()) {
+		this.persistValue(this.getValue());
+	}
+}
+
+uwm.property.Radio.prototype.persistValue = function() {
+	var tmp = new Object();
+	tmp[this.getName()] = this.value;
+
+	this.modelNode.changeProperties(tmp);
 }

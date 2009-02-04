@@ -18,6 +18,9 @@ uwm.property.ComboBox = function(config){
         listeners: {
             "change": function(field, newValue, oldValue){
                 self.fieldChanged(field, newValue, oldValue);
+            },
+            "beforedestroy": function(field) {
+            	self.handleDestroy(field);
             }
         },
         store: new Ext.data.Store({
@@ -51,6 +54,16 @@ uwm.property.ComboBox.prototype.render = function(container, position){
 }
 
 uwm.property.ComboBox.prototype.fieldChanged = function(field, newValue, oldValue){
+	this.persistValue(newValue);
+}
+
+uwm.property.ComboBox.prototype.handleDestroy = function(field) {
+	if (this.isDirty()) {
+		this.persistValue(this.getValue());
+	}
+}
+
+uwm.property.ComboBox.prototype.persistValue = function(newValue) {
     var tmp = new Object();
     tmp[this.getName()] = newValue;
     

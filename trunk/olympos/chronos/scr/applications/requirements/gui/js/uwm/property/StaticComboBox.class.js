@@ -18,6 +18,9 @@ uwm.property.StaticComboBox = function(config) {
 		listeners: {
 			"change": function(field, newValue, oldValue) {
 				self.fieldChanged(field, newValue, oldValue);
+			},
+			"beforedestroy" : function(field) {
+				self.handleDestroy(field);
 			}
 		},
 		store: new Ext.data.SimpleStore({
@@ -56,6 +59,16 @@ uwm.property.StaticComboBox.prototype.render = function(container, position) {
 }
 
 uwm.property.StaticComboBox.prototype.fieldChanged = function(field, newValue, oldValue) {
+	self.persistValue(newValue);
+}
+
+uwm.property.StaticComboBox.prototype.handleDestroy = function(field) {
+	if (this.isDirty()) {
+		this.persistValue(this.getValue());
+	}
+}
+
+uwm.property.StaticComboBox.prototype.persistValue = function(newValue) {
 	var tmp = new Object();
 	tmp[this.getName()] = newValue;
 	

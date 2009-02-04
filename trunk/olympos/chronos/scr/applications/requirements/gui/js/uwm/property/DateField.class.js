@@ -13,16 +13,19 @@ Ext.namespace("uwm.property");
 
 uwm.property.DateField = function(config) {
 	var self = this;
-	
+
 	uwm.property.DateField.superclass.constructor.call(this, Ext.apply(this, {
-		listeners: {
-			"change": function(field, newValue, oldValue) {
+		listeners : {
+			"change" : function(field, newValue, oldValue) {
 				self.fieldChanged(field, newValue, oldValue);
+			},
+			"beforedestroy" : function(field) {
+				self.handleDestroy(field);
 			}
 		},
-		format: "d.m.Y"
+		format :"d.m.Y"
 	}, config));
-	
+
 	this.toolTipText = config.toolTip;
 	this.modelNode = config.modelNode;
 }
@@ -31,18 +34,29 @@ Ext.extend(uwm.property.DateField, Ext.form.DateField);
 
 uwm.property.DateField.prototype.render = function(container, position) {
 	uwm.property.DateField.superclass.render.apply(this, arguments);
-	
+
 	if (this.toolTipText) {
-		this.toolTip = new Ext.ToolTip({
-			target: container,
-			html: this.toolTipText
+		this.toolTip = new Ext.ToolTip( {
+			target :container,
+			html :this.toolTipText
 		});
 	}
 }
 
-uwm.property.DateField.prototype.fieldChanged = function(field, newValue, oldValue) {
+uwm.property.DateField.prototype.fieldChanged = function(field, newValue,
+		oldValue) {
+	this.persistValue(newValue);
+}
+
+uwm.property.DateField.prototype.handleDestroy = function(field) {
+	if (this.isDirty()) {
+		this.persistValue(this.getValue());
+	}
+}
+
+uwm.property.DateField.prototype.persistValue = function(newValue) {
 	var tmp = new Object();
 	tmp[this.getName()] = newValue.format("Y-m-d");
-	
+
 	this.modelNode.changeProperties(tmp);
 }
