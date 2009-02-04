@@ -13,17 +13,20 @@ Ext.namespace("uwm.property");
 
 uwm.property.Checkbox = function(config) {
 	var self = this;
-	
+
 	uwm.property.Checkbox.superclass.constructor.call(this, Ext.apply(this, {
-		listeners: {
-			"check": function(field, checked) {
+		listeners : {
+			"check" : function(field, checked) {
 				self.fieldChecked(field, checked);
+			},
+			"beforedestroy" : function(field) {
+				self.handleDestroy(field);
 			}
 		}
 	}, config));
-	
+
 	this.toolTipText = config.toolTip;
-	
+
 	this.modelNode = config.modelNode;
 }
 
@@ -31,18 +34,28 @@ Ext.extend(uwm.property.Checkbox, Ext.form.Checkbox);
 
 uwm.property.Checkbox.prototype.render = function(container, position) {
 	uwm.property.Checkbox.superclass.render.apply(this, arguments);
-	
+
 	if (this.toolTipText) {
-		this.toolTip = new Ext.ToolTip({
-			target: container,
-			html: this.toolTipText
+		this.toolTip = new Ext.ToolTip( {
+			target :container,
+			html :this.toolTipText
 		});
 	}
 }
 
 uwm.property.Checkbox.prototype.fieldChecked = function(field, checked) {
+	this.persistValue(checked);
+}
+
+uwm.property.Checkbox.prototype.handleDestroy = function(field) {
+	if (this.isDirty()) {
+		this.persistValue(this.getValue());
+	}
+}
+
+uwm.property.Checkbox.prototype.persistValue = function(checked) {
 	var tmp = new Object();
 	tmp[this.getName()] = checked ? 1 : 0;
-	
+
 	this.modelNode.changeProperties(tmp);
 }

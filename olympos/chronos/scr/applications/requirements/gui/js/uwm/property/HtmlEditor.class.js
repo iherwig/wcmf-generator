@@ -26,7 +26,7 @@ uwm.property.HtmlEditor = function(config) {
 				self.handleInitialize();
 			},
 			"beforedestroy": function(field) {
-				self.fieldChanged(field);
+				self.handleDestroy(field);
 			}
 		}
 	}, config));
@@ -131,7 +131,7 @@ uwm.property.HtmlEditor.prototype.render = function(container, position) {
 	}
 }
 
-uwm.property.HtmlEditor.prototype.fieldChanged = function(field) {
+uwm.property.HtmlEditor.prototype.handleDestroy = function(field) {
 	if (this.isDirty()) {
 		var tmp = new Object();
 		tmp[this.getName()] = this.getValue();

@@ -13,20 +13,23 @@ Ext.namespace("uwm.property");
 
 uwm.property.TextArea = function(config) {
 	var self = this;
-	
+
 	var cls = config.readOnly ? "uwm-field-readOnly" : null;
-	
+
 	uwm.property.TextArea.superclass.constructor.call(this, Ext.apply(this, {
-		listeners: {
-			"change": function(field, newValue, oldValue) {
+		listeners : {
+			"change" : function(field, newValue, oldValue) {
 				self.fieldChanged(field, newValue, oldValue);
+			},
+			"beforedestroy" : function(field) {
+				self.handleDestroy(field);
 			}
 		},
-		cls: cls		
+		cls :cls
 	}, config));
-	
+
 	this.toolTipText = config.toolTip;
-	
+
 	this.modelNode = config.modelNode;
 }
 
@@ -34,18 +37,29 @@ Ext.extend(uwm.property.TextArea, Ext.form.TextArea);
 
 uwm.property.TextArea.prototype.render = function(container, position) {
 	uwm.property.TextArea.superclass.render.apply(this, arguments);
-	
+
 	if (this.toolTipText) {
-		this.toolTip = new Ext.ToolTip({
-			target: container,
-			html: this.toolTipText
+		this.toolTip = new Ext.ToolTip( {
+			target :container,
+			html :this.toolTipText
 		});
 	}
 }
 
-uwm.property.TextArea.prototype.fieldChanged = function(field, newValue, oldValue) {
+uwm.property.TextArea.prototype.fieldChanged = function(field, newValue,
+		oldValue) {
+	this.persistValue(newValue);
+}
+
+uwm.property.TextArea.prototype.handleDestroy = function(field) {
+	if (this.isDirty()) {
+		this.persistValue(this.getValue());
+	}
+}
+
+uwm.property.TextArea.prototype.persistValue = function(newValue) {
 	var tmp = new Object();
 	tmp[this.getName()] = newValue;
-	
+
 	this.modelNode.changeProperties(tmp);
 }

@@ -13,18 +13,22 @@ Ext.namespace("uwm.property");
 
 uwm.property.PasswordField = function(config) {
 	var self = this;
-	
-	uwm.property.PasswordField.superclass.constructor.call(this, Ext.apply(this, {
-		listeners: {
-			"change": function(field, newValue, oldValue) {
-				self.fieldChanged(field, newValue, oldValue);
-			}
-		},
-		inputType: "password"
-	}, config));
-	
+
+	uwm.property.PasswordField.superclass.constructor.call(this, Ext.apply(
+			this, {
+				listeners : {
+					"change" : function(field, newValue, oldValue) {
+						self.fieldChanged(field, newValue, oldValue);
+					},
+					"beforedestroy" : function(field) {
+						self.handleDestroy(field);
+					}
+				},
+				inputType :"password"
+			}, config));
+
 	this.toolTipText = config.toolTip;
-	
+
 	this.modelNode = config.modelNode;
 }
 
@@ -32,18 +36,29 @@ Ext.extend(uwm.property.PasswordField, Ext.form.TextField);
 
 uwm.property.PasswordField.prototype.render = function(container, position) {
 	uwm.property.PasswordField.superclass.render.apply(this, arguments);
-	
+
 	if (this.toolTipText) {
-		this.toolTip = new Ext.ToolTip({
-			target: container,
-			html: this.toolTipText
+		this.toolTip = new Ext.ToolTip( {
+			target :container,
+			html :this.toolTipText
 		});
 	}
 }
 
-uwm.property.PasswordField.prototype.fieldChanged = function(field, newValue, oldValue) {
+uwm.property.PasswordField.prototype.fieldChanged = function(field, newValue,
+		oldValue) {
+	this.persistValue(newValue);
+}
+
+uwm.property.PasswordField.prototype.handleDestroy = function(field) {
+	if (this.isDirty()) {
+		this.persistValue(this.getValue());
+	}
+}
+
+uwm.property.PasswordField.prototype.persistValue = function(newValue) {
 	var tmp = new Object();
 	tmp[this.getName()] = newValue;
-	
+
 	this.modelNode.changeProperties(tmp);
 }
