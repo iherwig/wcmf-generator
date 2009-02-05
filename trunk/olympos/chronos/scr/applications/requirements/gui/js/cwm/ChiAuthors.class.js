@@ -35,13 +35,13 @@ cwm.ChiAuthors.prototype.initByDisplayResult = function(node) {
 
 cwm.ChiAuthors.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("Role").setValue(this.data.Role);
-      realForm.findField("Name").setValue(this.data.Name);
-      realForm.findField("Notes").setValue(this.data.Notes);
-      realForm.findField("created").setValue(this.data.created);
-      realForm.findField("creator").setValue(this.data.creator);
-      realForm.findField("last_editor").setValue(this.data.last_editor);
-      realForm.findField("modified").setValue(this.data.modified);
+      realForm.findField("Role").loadValue(this.data.Role);
+      realForm.findField("Name").loadValue(this.data.Name);
+      realForm.findField("Notes").loadValue(this.data.Notes);
+      realForm.findField("created").loadValue(this.data.created);
+      realForm.findField("creator").loadValue(this.data.creator);
+      realForm.findField("last_editor").loadValue(this.data.last_editor);
+      realForm.findField("modified").loadValue(this.data.modified);
 }
 
 cwm.ChiAuthors.prototype.getGridData = function() {

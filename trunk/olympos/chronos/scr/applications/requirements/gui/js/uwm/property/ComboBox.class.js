@@ -64,6 +64,8 @@ uwm.property.ComboBox.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.ComboBox.prototype.persistValue = function(newValue) {
+	this.originalValue = newValue;
+	
     var tmp = new Object();
     tmp[this.getName()] = newValue;
     

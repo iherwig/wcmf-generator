@@ -46,24 +46,24 @@ cwm.ChiNodeSource.prototype.initByDisplayResult = function(node) {
 
 cwm.ChiNodeSource.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("display_value").setValue(this.data.display_value);
-      realForm.findField("parent_order").setValue(this.data.parent_order);
-      realForm.findField("child_order").setValue(this.data.child_order);
-      realForm.findField("pk_name").setValue(this.data.pk_name);
-      realForm.findField("is_searchable").setValue(this.data.is_searchable);
-      realForm.findField("orderby").setValue(this.data.orderby);
-      realForm.findField("is_soap").setValue(this.data.is_soap);
-      realForm.findField("initparams").setValue(this.data.initparams);
-      realForm.findField("table_name").setValue(this.data.table_name);
-      realForm.findField("is_ordered").setValue(this.data.is_ordered);
-      realForm.findField("Alias").setValue(this.data.Alias);
-      realForm.findField("Version").setValue(this.data.Version);
-      realForm.findField("Name").setValue(this.data.Name);
-      realForm.findField("Notes").setValue(this.data.Notes);
-      realForm.findField("created").setValue(this.data.created);
-      realForm.findField("creator").setValue(this.data.creator);
-      realForm.findField("last_editor").setValue(this.data.last_editor);
-      realForm.findField("modified").setValue(this.data.modified);
+      realForm.findField("display_value").loadValue(this.data.display_value);
+      realForm.findField("parent_order").loadValue(this.data.parent_order);
+      realForm.findField("child_order").loadValue(this.data.child_order);
+      realForm.findField("pk_name").loadValue(this.data.pk_name);
+      realForm.findField("is_searchable").loadValue(this.data.is_searchable);
+      realForm.findField("orderby").loadValue(this.data.orderby);
+      realForm.findField("is_soap").loadValue(this.data.is_soap);
+      realForm.findField("initparams").loadValue(this.data.initparams);
+      realForm.findField("table_name").loadValue(this.data.table_name);
+      realForm.findField("is_ordered").loadValue(this.data.is_ordered);
+      realForm.findField("Alias").loadValue(this.data.Alias);
+      realForm.findField("Version").loadValue(this.data.Version);
+      realForm.findField("Name").loadValue(this.data.Name);
+      realForm.findField("Notes").loadValue(this.data.Notes);
+      realForm.findField("created").loadValue(this.data.created);
+      realForm.findField("creator").loadValue(this.data.creator);
+      realForm.findField("last_editor").loadValue(this.data.last_editor);
+      realForm.findField("modified").loadValue(this.data.modified);
 }
 
 cwm.ChiNodeSource.prototype.getGridData = function() {

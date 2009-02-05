@@ -56,6 +56,8 @@ uwm.property.Radio.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.Radio.prototype.persistValue = function() {
+	this.originalValue = this.value;
+	
 	var tmp = new Object();
 	tmp[this.getName()] = this.value;
 

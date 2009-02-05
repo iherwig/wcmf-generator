@@ -31,9 +31,9 @@ cwm.Locktable.prototype.initByDisplayResult = function(node) {
 
 cwm.Locktable.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("objectid").setValue(this.data.objectid);
-      realForm.findField("sessionid").setValue(this.data.sessionid);
-      realForm.findField("since").setValue(this.data.since);
+      realForm.findField("objectid").loadValue(this.data.objectid);
+      realForm.findField("sessionid").loadValue(this.data.sessionid);
+      realForm.findField("since").loadValue(this.data.since);
 }
 
 cwm.Locktable.prototype.getGridData = function() {

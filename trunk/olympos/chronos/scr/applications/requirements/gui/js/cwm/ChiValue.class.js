@@ -45,23 +45,23 @@ cwm.ChiValue.prototype.initByDisplayResult = function(node) {
 
 cwm.ChiValue.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("display_type").setValue(this.data.display_type);
-      realForm.findField("restrictions_description").setValue(this.data.restrictions_description);
-      realForm.findField("restrictions_match").setValue(this.data.restrictions_match);
-      realForm.findField("restrictions_not_match").setValue(this.data.restrictions_not_match);
-      realForm.findField("input_type").setValue(this.data.input_type);
-      realForm.findField("app_data_type").setValue(this.data.app_data_type);
-      realForm.findField("db_data_type").setValue(this.data.db_data_type);
-      realForm.findField("is_editable").setValue(this.data.is_editable);
-      realForm.findField("column_name").setValue(this.data.column_name);
-      realForm.findField("Alias").setValue(this.data.Alias);
-      realForm.findField("Version").setValue(this.data.Version);
-      realForm.findField("Name").setValue(this.data.Name);
-      realForm.findField("Notes").setValue(this.data.Notes);
-      realForm.findField("created").setValue(this.data.created);
-      realForm.findField("creator").setValue(this.data.creator);
-      realForm.findField("last_editor").setValue(this.data.last_editor);
-      realForm.findField("modified").setValue(this.data.modified);
+      realForm.findField("display_type").loadValue(this.data.display_type);
+      realForm.findField("restrictions_description").loadValue(this.data.restrictions_description);
+      realForm.findField("restrictions_match").loadValue(this.data.restrictions_match);
+      realForm.findField("restrictions_not_match").loadValue(this.data.restrictions_not_match);
+      realForm.findField("input_type").loadValue(this.data.input_type);
+      realForm.findField("app_data_type").loadValue(this.data.app_data_type);
+      realForm.findField("db_data_type").loadValue(this.data.db_data_type);
+      realForm.findField("is_editable").loadValue(this.data.is_editable);
+      realForm.findField("column_name").loadValue(this.data.column_name);
+      realForm.findField("Alias").loadValue(this.data.Alias);
+      realForm.findField("Version").loadValue(this.data.Version);
+      realForm.findField("Name").loadValue(this.data.Name);
+      realForm.findField("Notes").loadValue(this.data.Notes);
+      realForm.findField("created").loadValue(this.data.created);
+      realForm.findField("creator").loadValue(this.data.creator);
+      realForm.findField("last_editor").loadValue(this.data.last_editor);
+      realForm.findField("modified").loadValue(this.data.modified);
 }
 
 cwm.ChiValue.prototype.getGridData = function() {
