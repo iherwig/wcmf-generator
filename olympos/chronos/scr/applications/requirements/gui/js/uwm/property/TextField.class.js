@@ -58,6 +58,8 @@ uwm.property.TextField.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.TextField.prototype.persistValue = function(newValue) {
+	this.originalValue = newValue;
+	
 	var tmp = new Object();
 	tmp[this.getName()] = newValue;
 

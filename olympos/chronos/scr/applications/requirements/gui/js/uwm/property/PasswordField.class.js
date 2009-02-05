@@ -57,6 +57,8 @@ uwm.property.PasswordField.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.PasswordField.prototype.persistValue = function(newValue) {
+	this.originalValue = newValue;
+	
 	var tmp = new Object();
 	tmp[this.getName()] = newValue;
 

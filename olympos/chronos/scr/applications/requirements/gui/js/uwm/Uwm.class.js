@@ -20,6 +20,7 @@ uwm.Uwm.prototype.processConfig = function() {
 
 uwm.Uwm.prototype.startApplication = function() {
 	this.installErrorHandler();
+	this.installOverrides();
 
 	var params = location.search.split(/&/);
 
@@ -155,25 +156,24 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 														.translate("An application error occured. Your data will be saved and the application will be restarted.")
 												+ "</p>"
 									}),
-							new Ext.Panel(
-									{
-										id :uwm.Uwm.ERROR_DETAILS_ID,
-										title :uwm.Dict
-												.translate("Error details"),
-										collapsed :true,
-										collapsible :true,
-										animCollapse :false,
-										collapseFirst :true,
-										html :"<div class='uwm-errorDialogDetails'>" + html + "</div>",
-										listeners : {
-											"collapse" : function() {
-												window.center();
-											},
-											"expand" : function() {
-												window.center();
-											}
-										}
-									}) ],
+							new Ext.Panel( {
+								id :uwm.Uwm.ERROR_DETAILS_ID,
+								title :uwm.Dict.translate("Error details"),
+								collapsed :true,
+								collapsible :true,
+								animCollapse :false,
+								collapseFirst :true,
+								html :"<div class='uwm-errorDialogDetails'>"
+										+ html + "</div>",
+								listeners : {
+									"collapse" : function() {
+										window.center();
+									},
+									"expand" : function() {
+										window.center();
+									}
+								}
+							}) ],
 					buttons : [ {
 						text :uwm.Dict.translate("OK"),
 						handler : function() {
@@ -184,6 +184,15 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 
 		window.show();
 	}
+}
+
+uwm.Uwm.prototype.installOverrides = function() {
+	Ext.override(Ext.form.Field, {
+		loadValue : function(value) {
+			this.setValue(value);
+			this.originalValue = this.getValue();
+		}
+	});
 }
 
 uwm.Uwm.getInstance = function() {

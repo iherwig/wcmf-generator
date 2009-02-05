@@ -55,6 +55,8 @@ uwm.property.DateField.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.DateField.prototype.persistValue = function(newValue) {
+	this.originalValue = newValue;
+	
 	var tmp = new Object();
 	tmp[this.getName()] = newValue.format("Y-m-d");
 

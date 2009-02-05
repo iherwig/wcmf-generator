@@ -32,10 +32,10 @@ cwm.EntityBase.prototype.initByDisplayResult = function(node) {
 
 cwm.EntityBase.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("created").setValue(this.data.created);
-      realForm.findField("creator").setValue(this.data.creator);
-      realForm.findField("last_editor").setValue(this.data.last_editor);
-      realForm.findField("modified").setValue(this.data.modified);
+      realForm.findField("created").loadValue(this.data.created);
+      realForm.findField("creator").loadValue(this.data.creator);
+      realForm.findField("last_editor").loadValue(this.data.last_editor);
+      realForm.findField("modified").loadValue(this.data.modified);
 }
 
 cwm.EntityBase.prototype.getGridData = function() {

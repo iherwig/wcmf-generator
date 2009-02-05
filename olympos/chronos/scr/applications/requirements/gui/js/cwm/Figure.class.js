@@ -39,17 +39,17 @@ cwm.Figure.prototype.initByDisplayResult = function(node) {
 
 cwm.Figure.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("BackgroundColor").setValue(this.data.BackgroundColor);
-      realForm.findField("ForegroundColor").setValue(this.data.ForegroundColor);
-      realForm.findField("GID").setValue(this.data.GID);
-      realForm.findField("Height").setValue(this.data.Height);
-      realForm.findField("PositionY").setValue(this.data.PositionY);
-      realForm.findField("PositionX").setValue(this.data.PositionX);
-      realForm.findField("Width").setValue(this.data.Width);
-      realForm.findField("created").setValue(this.data.created);
-      realForm.findField("creator").setValue(this.data.creator);
-      realForm.findField("last_editor").setValue(this.data.last_editor);
-      realForm.findField("modified").setValue(this.data.modified);
+      realForm.findField("BackgroundColor").loadValue(this.data.BackgroundColor);
+      realForm.findField("ForegroundColor").loadValue(this.data.ForegroundColor);
+      realForm.findField("GID").loadValue(this.data.GID);
+      realForm.findField("Height").loadValue(this.data.Height);
+      realForm.findField("PositionY").loadValue(this.data.PositionY);
+      realForm.findField("PositionX").loadValue(this.data.PositionX);
+      realForm.findField("Width").loadValue(this.data.Width);
+      realForm.findField("created").loadValue(this.data.created);
+      realForm.findField("creator").loadValue(this.data.creator);
+      realForm.findField("last_editor").loadValue(this.data.last_editor);
+      realForm.findField("modified").loadValue(this.data.modified);
 }
 
 cwm.Figure.prototype.getGridData = function() {

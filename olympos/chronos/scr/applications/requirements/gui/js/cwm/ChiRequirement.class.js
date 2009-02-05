@@ -41,19 +41,19 @@ cwm.ChiRequirement.prototype.initByDisplayResult = function(node) {
 
 cwm.ChiRequirement.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("reqType").setValue(this.data.reqType);
-      realForm.findField("Priority").setValue(this.data.Priority);
-      realForm.findField("Author").setValue(this.data.Author);
-      realForm.findField("Proofreader").setValue(this.data.Proofreader);
-      realForm.findField("Status").setValue(this.data.Status);
-      realForm.findField("Alias").setValue(this.data.Alias);
-      realForm.findField("Version").setValue(this.data.Version);
-      realForm.findField("Name").setValue(this.data.Name);
-      realForm.findField("Notes").setValue(this.data.Notes);
-      realForm.findField("created").setValue(this.data.created);
-      realForm.findField("creator").setValue(this.data.creator);
-      realForm.findField("last_editor").setValue(this.data.last_editor);
-      realForm.findField("modified").setValue(this.data.modified);
+      realForm.findField("reqType").loadValue(this.data.reqType);
+      realForm.findField("Priority").loadValue(this.data.Priority);
+      realForm.findField("Author").loadValue(this.data.Author);
+      realForm.findField("Proofreader").loadValue(this.data.Proofreader);
+      realForm.findField("Status").loadValue(this.data.Status);
+      realForm.findField("Alias").loadValue(this.data.Alias);
+      realForm.findField("Version").loadValue(this.data.Version);
+      realForm.findField("Name").loadValue(this.data.Name);
+      realForm.findField("Notes").loadValue(this.data.Notes);
+      realForm.findField("created").loadValue(this.data.created);
+      realForm.findField("creator").loadValue(this.data.creator);
+      realForm.findField("last_editor").loadValue(this.data.last_editor);
+      realForm.findField("modified").loadValue(this.data.modified);
 }
 
 cwm.ChiRequirement.prototype.getGridData = function() {

@@ -35,7 +35,7 @@ cwm.RoleRDB.prototype.initByDisplayResult = function(node) {
 cwm.RoleRDB.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
 	
-	realForm.findField("name").setValue(this.data.name);
+	realForm.findField("name").loadValue(this.data.name);
 }
 
 cwm.RoleRDB.prototype.getGridData = function() {

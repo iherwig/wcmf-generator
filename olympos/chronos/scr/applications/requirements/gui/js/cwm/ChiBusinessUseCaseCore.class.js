@@ -46,24 +46,24 @@ cwm.ChiBusinessUseCaseCore.prototype.initByDisplayResult = function(node) {
 
 cwm.ChiBusinessUseCaseCore.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("PrimaryActor").setValue(this.data.PrimaryActor);
-      realForm.findField("OtherActors").setValue(this.data.OtherActors);
-      realForm.findField("GoalInContext").setValue(this.data.GoalInContext);
-      realForm.findField("Scope").setValue(this.data.Scope);
-      realForm.findField("Level").setValue(this.data.Level);
-      realForm.findField("Stakeholders").setValue(this.data.Stakeholders);
-      realForm.findField("Precondition").setValue(this.data.Precondition);
-      realForm.findField("Trigger").setValue(this.data.Trigger);
-      realForm.findField("MainSuccessScenario").setValue(this.data.MainSuccessScenario);
-      realForm.findField("Extensions").setValue(this.data.Extensions);
-      realForm.findField("Alias").setValue(this.data.Alias);
-      realForm.findField("Version").setValue(this.data.Version);
-      realForm.findField("Name").setValue(this.data.Name);
-      realForm.findField("Notes").setValue(this.data.Notes);
-      realForm.findField("created").setValue(this.data.created);
-      realForm.findField("creator").setValue(this.data.creator);
-      realForm.findField("last_editor").setValue(this.data.last_editor);
-      realForm.findField("modified").setValue(this.data.modified);
+      realForm.findField("PrimaryActor").loadValue(this.data.PrimaryActor);
+      realForm.findField("OtherActors").loadValue(this.data.OtherActors);
+      realForm.findField("GoalInContext").loadValue(this.data.GoalInContext);
+      realForm.findField("Scope").loadValue(this.data.Scope);
+      realForm.findField("Level").loadValue(this.data.Level);
+      realForm.findField("Stakeholders").loadValue(this.data.Stakeholders);
+      realForm.findField("Precondition").loadValue(this.data.Precondition);
+      realForm.findField("Trigger").loadValue(this.data.Trigger);
+      realForm.findField("MainSuccessScenario").loadValue(this.data.MainSuccessScenario);
+      realForm.findField("Extensions").loadValue(this.data.Extensions);
+      realForm.findField("Alias").loadValue(this.data.Alias);
+      realForm.findField("Version").loadValue(this.data.Version);
+      realForm.findField("Name").loadValue(this.data.Name);
+      realForm.findField("Notes").loadValue(this.data.Notes);
+      realForm.findField("created").loadValue(this.data.created);
+      realForm.findField("creator").loadValue(this.data.creator);
+      realForm.findField("last_editor").loadValue(this.data.last_editor);
+      realForm.findField("modified").loadValue(this.data.modified);
 }
 
 cwm.ChiBusinessUseCaseCore.prototype.getGridData = function() {
