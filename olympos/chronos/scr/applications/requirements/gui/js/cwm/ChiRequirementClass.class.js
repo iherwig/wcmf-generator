@@ -24,6 +24,7 @@ cwm.ChiRequirementClass = function() {
 	this.description = " A Business guide line about the Enterprise or the project.";
 	this.helpUrl = "help/index.html#4.2.ChiRequirement|outline";
 	this.defaultLabel = "New ChiRequirement";
+	this.semanticGroup = "requirements";
 	this.labelProperties = {
 		Name: true
 	};

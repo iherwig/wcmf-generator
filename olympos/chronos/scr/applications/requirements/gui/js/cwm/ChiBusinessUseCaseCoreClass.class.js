@@ -24,6 +24,7 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 	this.description = " A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money).";
 	this.helpUrl = "help/index.html#ChiBusinessUseCaseCore|outline";
 	this.defaultLabel = "New ChiBusinessUseCaseCore";
+	this.semanticGroup = "UseCases";
 	this.labelProperties = {
 		Name: true
 	};

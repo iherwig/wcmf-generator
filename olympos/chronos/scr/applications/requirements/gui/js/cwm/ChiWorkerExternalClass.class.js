@@ -24,6 +24,7 @@ cwm.ChiWorkerExternalClass = function() {
 	this.description = " A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise.";
 	this.helpUrl = "help/index.html#ChiWorkerExternal|outline";
 	this.defaultLabel = "New ChiWorkerExternal";
+	this.semanticGroup = "UseCases";
 	this.labelProperties = {
 		Name: true
 	};

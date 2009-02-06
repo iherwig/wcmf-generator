@@ -24,6 +24,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 	this.description = " A Business Use Case is part of a business process that produces an advantage to the enterprise.";
 	this.helpUrl = "help/index.html#4.6.ChiBusinessUseCase|outline";
 	this.defaultLabel = "New ChiBusinessUseCase";
+	this.semanticGroup = "UseCases";
 	this.labelProperties = {
 		Name: true
 	};

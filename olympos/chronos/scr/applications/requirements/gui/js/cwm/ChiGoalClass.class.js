@@ -24,6 +24,7 @@ cwm.ChiGoalClass = function() {
 	this.description = " a Measurable scope that the enterprise wants to achieve. ";
 	this.helpUrl = "help/index.html#ChiGoal|outline";
 	this.defaultLabel = "New ChiGoal";
+	this.semanticGroup = "requirements";
 	this.labelProperties = {
 		Name :true
 	};
