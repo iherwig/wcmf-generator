@@ -24,6 +24,7 @@ cwm.ChiBusinessProcessClass = function() {
 	this.description = " A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases.";
 	this.helpUrl = "help/index.html#4.5.ChiBusinessProcess|outline";
 	this.defaultLabel = "New ChiBusinessProcess";
+	this.semanticGroup = "UseCases";
 	this.labelProperties = {
 		Name: true
 	};

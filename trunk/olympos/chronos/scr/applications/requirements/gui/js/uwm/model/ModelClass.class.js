@@ -41,26 +41,22 @@ uwm.model.ModelClass.prototype.getConnectionInfo = function(otherClass) {
 	return this.connectionInfo[otherClass.getUwmClassName()];
 }
 
-uwm.model.ModelClass.prototype.getAllConnectionInfo = function() {
-	return this.connectionInfo;
-}
-
-uwm.model.ModelNodeClass.prototype.getGridTabIconClass = function() {
-	return this.gridTabIconClass;
-}
-
-uwm.model.ModelNodeClass.prototype.getGridTabTip = function() {
+uwm.model.ModelClass.prototype.getGridTabTip = function() {
 	return this.gridTabTip;
 }
 
-uwm.model.ModelNodeClass.prototype.getGridFields = function() {
+uwm.model.ModelClass.prototype.getGridFields = function() {
 	return this.gridFields;
 }
 
-uwm.model.ModelNodeClass.prototype.getGridColumns = function() {
+uwm.model.ModelClass.prototype.getGridColumns = function() {
 	return this.gridColumns;
 }
 
-uwm.model.ModelNodeClass.prototype.getGraphics = function(label, figure) {
-	return eval("new " + this.getFigureClass() + "(label, figure)");
+uwm.model.ModelClass.prototype.getSemanticGroup = function() {
+	return this.semanticGroup;
+}
+
+uwm.model.ModelClass.prototype.getAllConnectionInfo = function() {
+	return this.connectionInfo;
 }

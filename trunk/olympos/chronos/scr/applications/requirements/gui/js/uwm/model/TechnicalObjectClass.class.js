@@ -12,6 +12,7 @@
 Ext.namespace("uwm.model");
 
 uwm.model.TechnicalObjectClass = function() {
+	uwm.model.ModelNodeClass.call(this);
 }
 
 uwm.model.TechnicalObjectClass.prototype = new uwm.model.ModelNodeClass;

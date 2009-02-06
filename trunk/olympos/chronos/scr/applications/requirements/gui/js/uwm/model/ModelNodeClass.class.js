@@ -33,3 +33,12 @@ uwm.model.ModelNodeClass.prototype.getDefaultLabel = function() {
 uwm.model.ModelNodeClass.prototype.isLabelProperty = function(propertyName) {
 	return this.labelProperties[propertyName] != undefined;
 }
+
+uwm.model.ModelNodeClass.prototype.getGridTabIconClass = function() {
+	return this.gridTabIconClass;
+}
+
+uwm.model.ModelNodeClass.prototype.getGraphics = function(label, figure) {
+	return eval("new " + this.getFigureClass() + "(label, figure)");
+}
+

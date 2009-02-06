@@ -24,6 +24,7 @@ cwm.ChiFeatureClass = function() {
 	this.description = "A characteristic of a (proposed) system that realizes a ChiRequirement.";
 	this.helpUrl = "help/index.html#4.3.ChiFeature|outline";
 	this.defaultLabel = "New ChiFeature";
+	this.semanticGroup = "requirements";
 	this.labelProperties = {
 		Name: true
 	};

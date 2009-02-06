@@ -24,6 +24,7 @@ cwm.ChiIssueClass = function() {
 	this.description = "a characteristic of a system that could slow down or even completely stop the realization of a ChiRequirement";
 	this.helpUrl = "help/index.html#4.4.ChiIssue|outline";
 	this.defaultLabel = "New ChiIssue";
+	this.semanticGroup = "requirements";
 	this.labelProperties = {
 		Name: true
 	};
