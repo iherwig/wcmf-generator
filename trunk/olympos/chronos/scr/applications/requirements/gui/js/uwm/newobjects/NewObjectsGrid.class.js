@@ -12,7 +12,7 @@
 Ext.namespace("uwm.newobjects");
 
 uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
-	initComponent: function(config) {
+	initComponent: function() {
 		var self = this;
 		
 		this.cellActions = new Ext.ux.grid.CellActions({
@@ -30,7 +30,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 			split: true,
 			autoScroll: true,
 			height: 250,
-			title: uwm.Dict.translate('New Objects'),
+			title: this.semanticGroup,
 			layout: "fit",
 			enableDragDrop: true,
 			ddGroup: uwm.Constants.DD_GROUP,
@@ -85,7 +85,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 		for (var i = 0; i < classes.getCount(); i++) {
 			var currClass = classes.itemAt(i);
 			
-			if (currClass instanceof uwm.model.ModelClass) {
+			if (currClass instanceof uwm.model.ModelClass && currClass.semanticGroup==this.semanticGroup) {
 				data.push({
 					iconClass: currClass.getTreeIcon(),
 					title: currClass.getUwmClassName(),
