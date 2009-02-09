@@ -23,7 +23,7 @@ uwm.model.ModelNodeClassContainer.prototype.registerClass = function(
 
 	if (modelNodeClass instanceof uwm.model.ModelClass) {
 		var semanticGroup = modelNodeClass.getSemanticGroup();
-console.log(semanticGroup);
+
 		var entries = this.semanticGroups[semanticGroup];
 		if (!entries) {
 			this.semanticGroups[semanticGroup] = new Array();
