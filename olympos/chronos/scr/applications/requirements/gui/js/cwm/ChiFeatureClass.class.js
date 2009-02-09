@@ -75,59 +75,70 @@ cwm.ChiFeatureClass.prototype.getPropertyForm = function(modelNode, isLockedByOt
 		return new uwm.property.PropertyForm({
 		items: [new uwm.property.ComboBox({
 			fieldLabel: 'Author',
+			toolTip: "This feature's author's name and role in the project",
 			name: 'Author',
 			listType: "ChiAuthors",
 			modelNode: modelNode,
 			 disabled : isLockedByOtherUser
 		}), new uwm.property.ComboBox({
 			fieldLabel: 'Proofreader',
+			toolTip: "This feature's revisor's name and role in the project",
 			name: 'Proofreader',
 			listType: "ChiAuthors",
 			modelNode: modelNode,
 			 disabled : isLockedByOtherUser
 		}), new uwm.property.ComboBox({
 			fieldLabel: 'Status',
+			toolTip: "This feature's status",
 			name: 'Status',
 			listType: "ChiFeatureStatus",
 			modelNode: modelNode,
 			 disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Alias',
+			toolTip: "the Project Id of this object.",
 			name: 'Alias',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Version',
+			toolTip: "the model version of this object",
 			name: 'Version',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
+			toolTip: "the name of this object.",
 			name: 'Name',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
 		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
+			toolTip: "the actual description of the object.",
 			name: 'Notes',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
+			toolTip: "the creation date of this object",
 			name: 'created',
 			modelNode: modelNode,
 			readOnly: true
 		}), new uwm.property.TextField({
 			fieldLabel: 'creator',
+			toolTip: "the user that created this object",
 			name: 'creator',
 			modelNode: modelNode,
 			readOnly: true
 		}), new uwm.property.TextField({
 			fieldLabel: 'last_editor',
+			toolTip: "the last user that edited this object",
 			name: 'last_editor',
 			modelNode: modelNode,
 			readOnly: true
 		}), new uwm.property.TextField({
 			fieldLabel: 'modified',
+			toolTip: "the date when this object was modified",
 			name: 'modified',
 			modelNode: modelNode,
 			readOnly: true
