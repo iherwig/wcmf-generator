@@ -81,7 +81,7 @@ class UwmUtil {
 	
 		foreach ($valueNames as $currValueName)
 		{
-			$value = $node->getValue($currValueName);
+			$value = utf8_encode($node->getValue($currValueName));
 			if ($value !== null && $value !== '') {
 				self::$dom->writeAttribute($currValueName, $value);
 			}
