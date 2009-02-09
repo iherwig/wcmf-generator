@@ -24,6 +24,7 @@ cwm.ChiBusinessPartnerActiveClass = function() {
 	this.description = " A ChiBusinesPartnerActive is a direct customer of the enterprise.";
 	this.helpUrl = "help/index.html#ChiBusinessPartnerActive|outline";
 	this.defaultLabel = "New ChiBusinessPartnerActive";
+	this.semanticGroup = "UseCases";
 	this.labelProperties = {
 		Name: true
 	};

@@ -24,6 +24,7 @@ cwm.ChiWorkerInternalClass = function() {
 	this.description = " A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners.";
 	this.helpUrl = "help/index.html#ChiWorkerInternal|outline";
 	this.defaultLabel = "New ChiWorkerInternal";
+	this.semanticGroup = "UseCases";
 	this.labelProperties = {
 		Name: true
 	};
@@ -98,7 +99,7 @@ cwm.ChiWorkerInternalClass.prototype.getPropertyForm = function(modelNode) {
 }
 
 cwm.ChiWorkerInternalClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorkerInternal.PNG", 96, 95, 96, 95);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorkerInternal.PNG", 52, 50, 52, 50);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiWorkerInternalClass());

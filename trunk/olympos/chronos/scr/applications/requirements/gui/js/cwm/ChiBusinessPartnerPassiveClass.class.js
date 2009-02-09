@@ -24,6 +24,7 @@ cwm.ChiBusinessPartnerPassiveClass = function() {
 	this.description = " A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise.";
 	this.helpUrl = "help/index.html#ChiBusinessPartnerPassive|outline";
 	this.defaultLabel = "New ChiBusinessPartnerPassive";
+	this.semanticGroup = "UseCases";
 	this.labelProperties = {
 		Name: true
 	};

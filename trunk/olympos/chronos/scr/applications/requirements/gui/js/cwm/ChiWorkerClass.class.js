@@ -24,6 +24,7 @@ cwm.ChiWorkerClass = function() {
 	this.description = " A ChiWorker is a special actor that works within the enterprise. ";
 	this.helpUrl = "help/index.html#ChiWorker|outline";
 	this.defaultLabel = "New ChiWorker";
+	this.semanticGroup = "UseCases";
 	this.labelProperties = {
 		Name: true
 	};

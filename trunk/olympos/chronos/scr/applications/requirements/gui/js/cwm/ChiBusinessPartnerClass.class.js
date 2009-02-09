@@ -24,6 +24,7 @@ cwm.ChiBusinessPartnerClass = function() {
 	this.description = " A ChiBusinesPartner is an external person that has a Business relation with the enterprise.";
 	this.helpUrl = "help/index.html#ChiBusinessPartner|outline";
 	this.defaultLabel = "New ChiBusinessPartner";
+	this.semanticGroup = "UseCases";
 	this.labelProperties = {
 		Name: true
 	};
