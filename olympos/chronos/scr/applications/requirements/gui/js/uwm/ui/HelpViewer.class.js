@@ -37,12 +37,6 @@ uwm.ui.HelpViewer.prototype.loadUrl = function(url) {
 	}
 	
 	iframe.dom.src = url;
-	
-	Ext.getBody().scrollTo("top", 0);
-	
-	setTimeout(function() {
-		Ext.getBody().scrollTo("top", 0);
-	}, 500);
 }
 
 uwm.ui.HelpViewer.getInstance = function() {
