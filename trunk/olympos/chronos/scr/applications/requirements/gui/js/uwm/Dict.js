@@ -98,7 +98,9 @@ uwm.Dict.voc = {
 		'Exporting Word Document ...' : {'de': 'Exportiere Word-Dokument ...'},
 		'Error occured'         : {'de': 'Ein Fehler ist aufgetreten'},
 		'An application error occured. Your data will be saved and the application will be restarted.' : {'de': 'Ein Anwendungsfehler ist aufgetreten. Ihre Daten werden gespeichert und die Anwedung neu gestartet.'},
-		'Error details'         : {'de': 'Fehlerdetails'}
+		'Error details'         : {'de': 'Fehlerdetails'},
+		"Snap to objects"       : {'de': "An Objekten ausrichten"},
+		"Auto-layout"           : {'de': "Auto-Layout"}
 		
 }
 uwm.Dict.translate = function(){
