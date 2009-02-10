@@ -450,6 +450,15 @@ uwm.diagram.Diagram.prototype.setSnapToObjects = function(snapToObjects) {
 }
 
 /**
+ * Shows the Diagram in Model Tree.
+ *
+ * @see uwm.modeltree.ModelTree
+ */
+uwm.diagram.Diagram.prototype.showInModelTree = function() {
+	uwm.modeltree.ModelTree.getInstance().markNodeByOid(this.getOid());
+}
+
+/**
  * Starts the auto-layouter.
  */
 uwm.diagram.Diagram.prototype.doLayout = function() {
