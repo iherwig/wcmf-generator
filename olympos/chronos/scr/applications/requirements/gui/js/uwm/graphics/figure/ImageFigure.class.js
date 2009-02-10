@@ -60,7 +60,7 @@ uwm.graphics.figure.ImageFigure.prototype.createHTMLElement = function() {
 }
 
 uwm.graphics.figure.ImageFigure.prototype.paint = function() {
-	draw2d.Node.prototype.paint.call(this);
+    uwm.graphics.figure.BaseFigure.prototype.paint.call(this);
 }
 
 uwm.graphics.figure.ImageFigure.prototype.setDimension = function(w, h) {

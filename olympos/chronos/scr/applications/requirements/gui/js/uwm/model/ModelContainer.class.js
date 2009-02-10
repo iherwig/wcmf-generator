@@ -206,6 +206,8 @@ uwm.model.ModelContainer.prototype.loadByOid = function(oid, callback, depth) {
 }
 
 uwm.model.ModelContainer.prototype.deleteByModelNode = function(modelNode) {
+	modelNode.markDeleted();
+
 	uwm.persistency.Persistency.getInstance().deleteObject(modelNode.getOid(), function(request, data) {
 		uwm.event.EventBroker.getInstance().fireEvent("delete", modelNode);
 	});
