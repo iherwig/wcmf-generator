@@ -47,6 +47,11 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 					self.selectAsScope(item, e);
 				}
 			}, {
+				text: uwm.Dict.translate("Reload"),
+				handler: function(item, e) {
+					self.reload();
+				}
+			}, {
 				text: uwm.Dict.translate('Export as UML'),
 				handler: function(item, e) {
 					new uwm.ui.Download({

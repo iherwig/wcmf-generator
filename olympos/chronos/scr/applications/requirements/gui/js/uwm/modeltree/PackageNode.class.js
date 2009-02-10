@@ -13,7 +13,8 @@ Ext.namespace("uwm.modeltree");
 
 /**
  * @constructor
- * @param {Object} config
+ * @param {Object}
+ *            config
  */
 uwm.modeltree.PackageNode = function(config) {
 	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("Package", config.oid);
@@ -53,11 +54,24 @@ Ext.extend(uwm.modeltree.PackageNode, uwm.objecttree.Node, {
 					self.selectAsScope(item, e);
 				}
 			}, {
-				text: uwm.Dict.translate('Download as UML'),
+				text: uwm.Dict.translate("Reload"),
+				handler: function(item, e) {
+					self.reload();
+				}
+			}, {
+				text: uwm.Dict.translate('Export as UML'),
 				handler: function(item, e) {
 					new uwm.ui.Download({
-						title: uwm.Dict.translate('Downloading UML ...'),
+						title: uwm.Dict.translate('Exporting UML ...'),
 						downloadURL: "../application/main.php?response_format=JSON&usr_action=exportUWM&startPackage=" + self.getModelNode().getOid()
+					}).show();
+				}
+			}, {
+				text: uwm.Dict.translate('Export as Word Document'),
+				handler: function(item, e) {
+					new uwm.ui.Download({
+						title: uwm.Dict.translate('Exporting Word Document ...'),
+						downloadURL: "../application/main.php?response_format=JSON&usr_action=exportDoc&startPackage=" + self.getModelNode().getOid()
 					}).show();
 				}
 			}]

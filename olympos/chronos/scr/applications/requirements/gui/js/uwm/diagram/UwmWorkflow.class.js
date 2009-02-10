@@ -76,6 +76,13 @@ uwm.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
 					self.doLayout();
 				}
 			}
+		}), new Ext.menu.Item( {
+			text :uwm.Dict.translate("Reload"),
+			listeners : {
+				click : function() {
+					self.reloadDiagram();
+				}
+			}
 		}) ]
 	});
 }
@@ -127,6 +134,15 @@ uwm.diagram.UwmWorkflow.prototype.doLayout = function() {
  */
 uwm.diagram.UwmWorkflow.prototype.showInModelTree = function() {
 	this.diagram.showInModelTree();
+}
+
+/**
+ * Reloads the diagram.
+ * 
+ * @see uwm.modeltree.ModelTree
+ */
+uwm.diagram.UwmWorkflow.prototype.reloadDiagram = function() {
+	this.diagram.reloadDiagram();
 }
 
 /**
