@@ -57,7 +57,7 @@ cwm.ChiBusinessPartnerClass = function() {
 Ext.extend(cwm.ChiBusinessPartnerClass, uwm.model.ModelClass);
 
 cwm.ChiBusinessPartnerClass.prototype.getPropertyForm = function(modelNode) {
-	return new uwm.ui.PropertyForm({
+	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
@@ -99,7 +99,7 @@ cwm.ChiBusinessPartnerClass.prototype.getPropertyForm = function(modelNode) {
 }
 
 cwm.ChiBusinessPartnerClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartner.PNG", 96, 95, 96, 95);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartner.PNG", 26,52,26,52);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBusinessPartnerClass());
