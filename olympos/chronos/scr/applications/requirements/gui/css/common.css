@@ -148,3 +148,19 @@ body {
 .uwm-errorDialogDetails {
 	margin: 4px;
 }
+
+.uwm-browserWarning {
+	width: 323px !important;
+	background-color: white;
+	border: 2px solid #7f0000;
+	color: #7f0000;
+	padding: 4px;
+}
+
+.uwm-browserWarning div {
+	width: 100% !important;
+}
+
+.uwm-browserWarning .nonLast {
+	margin-bottom: 0.5em;
+}

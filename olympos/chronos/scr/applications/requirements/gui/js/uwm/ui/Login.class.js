@@ -30,23 +30,14 @@ uwm.ui.Login = function(config){
             }
         }],
         
-        items: [        /*new Ext.BoxComponent({
-         autoEl: {
-         tag: "div",
-         cls: "cwm-logo-container",
-         children: [{
-         tag: "h1",
-         html: "Chronos Web Modeler"
-         }, {
-         tag: "div"
-         }, {
-         tag: "a",
-         target: "_blank",
-         href: "http://sourceforge.net/projects/olympos/",
-         html: "http://sourceforge.net/projects/olympos/"
-         }]
-         }
-         }),*/
+        items: [        /*
+						 * new Ext.BoxComponent({ autoEl: { tag: "div", cls:
+						 * "cwm-logo-container", children: [{ tag: "h1", html:
+						 * "Chronos Web Modeler" }, { tag: "div" }, { tag: "a",
+						 * target: "_blank", href:
+						 * "http://sourceforge.net/projects/olympos/", html:
+						 * "http://sourceforge.net/projects/olympos/" }] } }),
+						 */
         new Ext.form.TextField({
             fieldLabel: uwm.Dict.translate('Login'),
             name: 'login',
@@ -102,6 +93,16 @@ uwm.ui.Login = function(config){
         }]
     });
     
+    if (!Ext.isGecko3) {
+		this.form.add(new Ext.Panel({
+			cls: "uwm-browserWarning",
+	    	html: "<div>" +
+	    			"<p class='nonLast'><b>Attention:</b> You're using an unsupported browser. If you continue, the application may behave strangely or work not at all.</p>" +
+	    			"<p>Currently, the supported browser is Firefox 3.</p>" +
+	    			"</div>"
+	    }));
+    }
+
     uwm.ui.Login.superclass.constructor.call(this, Ext.apply(this, {
         id: "loginViewport",
         layout: "absolute",
