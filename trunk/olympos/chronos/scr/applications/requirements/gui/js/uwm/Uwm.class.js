@@ -110,11 +110,11 @@ uwm.Uwm.prototype.installErrorHandler = function() {
 uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 	var data = new Object();
 
-	data["file"] = uri ? uri : e.fileName;
-	data["line number"] = line ? line : e.lineNumber ? e.lineNumber : "unknown";
-	data["error name"] = e.name;
-	data["error message"] = message ? message : e.message;
-	data["stack"] = e.stack;
+	data["file"] = uri ? uri : e && e.fileName ? e.fileName : "unknown";
+	data["line number"] = line ? line : e && e.lineNumber ? e.lineNumber : "unknown";
+	data["error name"] = e && e.name ? e.name : "unknown";
+	data["error message"] = message ? message : e && e.message ? e.message : "unknown";
+	data["stack"] = e && e.stack ? e.stack : "unknown";
 
 	var plainText = "";
 	for ( var i in data) {
