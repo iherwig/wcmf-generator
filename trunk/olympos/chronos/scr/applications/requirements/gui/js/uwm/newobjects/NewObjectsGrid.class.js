@@ -51,7 +51,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 				renderer: this.showImage
 			}, {
 				header: uwm.Dict.translate('Title'),
-				width: 190,
+				width: 174,
 				dataIndex: "title",
 				sortable: true
 			}, {
