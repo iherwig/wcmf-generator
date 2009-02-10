@@ -18,7 +18,6 @@ uwm.ui.Workbench = function(config) {
 	
 	this.existingContent = [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()];
 	this.getObjectGrids();
-	var semanticgroup='requirements';
 	
 	uwm.ui.Workbench.superclass.constructor.call(this, Ext.apply(this, {
 		items: [{
@@ -29,19 +28,9 @@ uwm.ui.Workbench = function(config) {
 			width: 250,
 			layout: "fit",
 			id: "contentContainer",
-			items: {
+			items: new Ext.Panel({
 				layout: "border",
-				items: [	{region: 'north',
-							
-							layout: 'accordion',
-							height: 280,
-							id: 'newObjectsAccordion',
-							items: [new uwm.newobjects.NewObjectsGrid({
-								semanticGroup: 'requirements'
-							}),new uwm.newobjects.NewObjectsGrid({
-								semanticGroup: 'UseCases'
-							})]
-					},{
+				items: [new uwm.newobjects.Accordion(), {
 					region: "center",
 					title: uwm.Dict.translate('Existing Classes'),
 					xtype: "tabpanel",
@@ -49,9 +38,8 @@ uwm.ui.Workbench = function(config) {
 					id: "existingFiguresContainer",
 					activeTab: 0,
 					items: this.existingContent
-				}
-				]
-			}
+				}]
+			})
 		}, this.eastPanel, uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
 	}, config));
 }
