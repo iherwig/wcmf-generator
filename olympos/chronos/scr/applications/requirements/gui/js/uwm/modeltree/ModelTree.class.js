@@ -288,7 +288,7 @@ uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject,
 			node.setText(modelObject.getLabel());
 		}
 	} else {
-		this.createdModels.remove(oid);
+		this.createdModels.removeKey(oid);
 		
 		var node = new uwm.modeltree.ModelNode({
 			oid: oid,
