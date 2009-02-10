@@ -18,6 +18,8 @@ uwm.model.ModelNode = function(modelNodeClass) {
 	}
 	
 	this.data = new Object();
+	
+	this.alreadyDeleted = false;
 }
 
 uwm.model.ModelNode.prototype.initByDisplayResult = function(node) {
@@ -159,6 +161,14 @@ uwm.model.ModelNode.prototype.setDefaultLabel = function() {
 	this.changeProperties({
 		"Name": this.getModelNodeClass().getDefaultLabel()
 	});
+}
+
+uwm.model.ModelNode.prototype.markDeleted = function() {
+	this.alreadyDeleted = true;
+}
+
+uwm.model.ModelNode.prototype.isDeleted = function() {
+	return this.alreadyDeleted;
 }
 
 uwm.model.ModelNode.prototype.associate = function(parentModelObject) {
