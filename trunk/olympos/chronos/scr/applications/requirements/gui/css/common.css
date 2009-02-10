@@ -95,13 +95,12 @@
 	background: white;
 }
 
-/*
 body {
-	background-image: url("../../application/images/Chronos_webModeller2.jpg");
-	background-position: center center;
+	background-color: white;
+	background-image: url("../../application/images/Chronos_webModeller3.jpg");
+	background-position: top left;
 	background-repeat: no-repeat;
 }
-*/
 
 .cwm-logo-container {
 	width: 100% !important;
