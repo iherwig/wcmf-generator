@@ -149,6 +149,13 @@ body {
 	margin: 4px;
 }
 
+.uwm-ieWarning {
+	position: absolute;
+	margin: auto;
+	left: 40%;
+	top: 45%;
+}
+
 .uwm-browserWarning {
 	width: 323px !important;
 	background-color: white;
