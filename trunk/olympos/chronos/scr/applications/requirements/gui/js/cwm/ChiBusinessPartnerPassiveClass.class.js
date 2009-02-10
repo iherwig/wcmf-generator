@@ -100,7 +100,7 @@ cwm.ChiBusinessPartnerPassiveClass.prototype.getPropertyForm = function(modelNod
 }
 
 cwm.ChiBusinessPartnerPassiveClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartnerPassive.PNG", 96, 95, 96, 95);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartnerPassive.PNG", 24,52,24,52);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBusinessPartnerPassiveClass());
