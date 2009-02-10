@@ -459,6 +459,18 @@ uwm.diagram.Diagram.prototype.showInModelTree = function() {
 }
 
 /**
+ * Reloads the diagram.
+ *
+ * @see uwm.modeltree.ModelTree
+ */
+uwm.diagram.Diagram.prototype.reloadDiagram = function() {
+	var container = uwm.diagram.DiagramContainer.getInstance();
+	container.getTabPanel().remove(this.tab);
+	
+	uwm.diagram.DiagramContainer.getInstance().loadDiagram(this);
+}
+
+/**
  * Starts the auto-layouter.
  */
 uwm.diagram.Diagram.prototype.doLayout = function() {
