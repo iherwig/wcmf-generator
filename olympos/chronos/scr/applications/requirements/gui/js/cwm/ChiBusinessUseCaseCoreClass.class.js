@@ -55,7 +55,12 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 			label: "",
 			invert: true,
 			connectionType:  'association'
-		}				
+		},
+		"ChiFeature": {
+			label: "refines",
+			invert: true,
+			connectionType: 'realization'
+		}
 	};
 }
 

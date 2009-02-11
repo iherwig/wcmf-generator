@@ -46,11 +46,6 @@ cwm.ChiFeatureClass = function() {
 	
 	this.connectionInfo = {
 	
-		"ChiBusinessProcess": {
-			label: "Associates",
-			invert: false,
-			connectionType: 'associationType'
-		},
 		"ChiRequirement": {
 			label: "Realizes",
 			invert: true,
@@ -62,6 +57,11 @@ cwm.ChiFeatureClass = function() {
 			connectionType: 'associationType'
 		},
 		"ChiBusinessUseCase": {
+			label: "refines",
+			invert: false,
+			connectionType: 'realization'
+		},
+		"ChiBusinessUseCaseCore": {
 			label: "refines",
 			invert: false,
 			connectionType: 'realization'
