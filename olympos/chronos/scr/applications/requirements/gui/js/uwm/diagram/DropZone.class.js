@@ -88,6 +88,17 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 	var result = this.checkDropable(modelData);
 	
 	if (result) {
+		this.diagram.dropWindow = new Ext.Window({
+			x: e.xy[0],
+			y: e.xy[1],
+			plain: true,
+			closable: false,
+			items: [new Ext.Panel({
+				html: "<div class='x-mask-loading'><div>" + uwm.Dict.translate('Loading ...') + "</div></div>"
+			})]
+		});
+		this.diagram.dropWindow.show();
+		
 		var xOffset = this.diagram.getWorkflow().getAbsoluteX();
 		var yOffset = this.diagram.getWorkflow().getAbsoluteY();
 		var scrollLeft = this.diagram.getWorkflow().getScrollLeft();
