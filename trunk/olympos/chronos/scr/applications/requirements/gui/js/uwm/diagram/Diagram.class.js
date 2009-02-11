@@ -30,6 +30,8 @@ uwm.diagram.Diagram = function(modelNodeClass) {
 	
 	this.figures = new Ext.util.MixedCollection();
 	this.objects = new Ext.util.MixedCollection();
+	
+	this.dropWindow = null;
 }
 
 Ext.extend(uwm.diagram.Diagram, uwm.diagram.DiagramBase);
@@ -590,6 +592,8 @@ uwm.diagram.Diagram.prototype.handleAssociateEvent = function(parentModelNode, c
 			
 			this.establishExistingConnections(parentModelNode, parentModelNode.getParentOids());
 			this.establishExistingConnections(parentModelNode, parentModelNode.getChildOids());
+			
+			this.dropWindow.destroy();
 		}
 	}
 }
