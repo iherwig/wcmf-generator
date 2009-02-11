@@ -35,6 +35,7 @@ uwm.modeltree.ModelTree = function(config) {
 		loader: new uwm.modeltree.Loader(),
 		iconCls: "TreeTab",
 		rootVisible: false,
+		name: 'Model Tree',
 		tabTip: "<b>" + uwm.Dict.translate('Model Tree') + "</b><p>" + uwm.Dict.translate('Shows all models, packages, and contained objects.') + "</p>"
 	}, config));
 	

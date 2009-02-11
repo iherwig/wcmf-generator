@@ -180,3 +180,4 @@ uwm.objectgrid.ObjectGridContainer.getInstance = function() {
 	
 	return uwm.objectgrid.ObjectGridContainer.instance;
 }
+
