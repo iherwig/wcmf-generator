@@ -46,10 +46,35 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 	
 	this.connectionInfo = {
 
-		"NMUCActor": {
-			label: "",
-			invert: true,
-			connectionType: 'aggregation'
+		"ChiWorkerExternal": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},
+		"ChiWorkerInternal": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},
+		"ChiWorker": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},
+		"ChiBusinessPartnerActive": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},
+		"ChiBusinessPartnerPassive": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},
+		"ChiBusinessPartner": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
 		},	
 		"ChiBusinessProcess": {
 			label: "",

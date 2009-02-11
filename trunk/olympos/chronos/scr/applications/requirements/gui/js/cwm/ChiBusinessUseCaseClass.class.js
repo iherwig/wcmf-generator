@@ -51,6 +51,31 @@ cwm.ChiBusinessUseCaseClass = function() {
 			invert: false,
 			connectionType: 'association'
 		},
+		"ChiWorkerInternal": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},
+		"ChiWorker": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},
+		"ChiBusinessPartnerActive": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},
+		"ChiBusinessPartnerPassive": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},
+		"ChiBusinessPartner": {
+			label: "participates in",
+			invert: false,
+			connectionType: 'association'
+		},	
 		"ChiBusinessProcess": {
 			label: "contains",
 			invert: true,

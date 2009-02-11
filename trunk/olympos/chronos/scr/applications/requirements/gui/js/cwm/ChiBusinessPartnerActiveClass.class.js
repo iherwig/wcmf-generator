@@ -46,34 +46,43 @@ cwm.ChiBusinessPartnerActiveClass = function() {
 	
 	this.connectionInfo = {			
 		
-		"NMUCActor": {
-			label: "",
+		"ChiBusinessPartnerActive": {
+			label: "associates",
 			invert: true,
-			connectionType: 'aggregation'
-		}								
+			connectionType: 'association'
+		},
+		"ChiBusinessUseCase": {
+			label: "participates in",
+			invert: true,
+			connectionType: 'association'
+		}							
 	};
 }
 
 Ext.extend(cwm.ChiBusinessPartnerActiveClass, uwm.model.ModelClass);
 
-cwm.ChiBusinessPartnerActiveClass.prototype.getPropertyForm = function(modelNode) {
+cwm.ChiBusinessPartnerActiveClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			name: 'Alias',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Version',
 			name: 'Version',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
-			modelNode: modelNode
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',
