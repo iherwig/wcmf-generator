@@ -16,48 +16,24 @@ uwm.ui.Workbench = function(config) {
 		highlight: "default"
 	});
 	
-	this.existingContent = [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()];
-	this.getObjectGrids();
-	
 	uwm.ui.Workbench.superclass.constructor.call(this, Ext.apply(this, {
 		items: [{
 			region: "west",
 			title: uwm.Dict.translate('Available Content'),
 			collapsible: true,
 			split: true,
-			width: 250,
+			width: 260,
 			layout: "fit",
 			id: "contentContainer",
 			items: new Ext.Panel({
 				layout: "border",
-				items: [new uwm.newobjects.Accordion(), {
-					region: "center",
-					title: uwm.Dict.translate('Existing Classes'),
-					xtype: "tabpanel",
-					enableTabScroll: true,
-					id: "existingFiguresContainer",
-					activeTab: 0,
-					items: this.existingContent
-				}]
+				items: [this.accordion=new uwm.newobjects.Accordion(), new uwm.ui.ExistingContentContainer({
+					Accordion: this.accordion
+				})]
 			})
 		}, this.eastPanel, uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
 	}, config));
 }
 
 Ext.extend(uwm.ui.Workbench, uwm.ui.AbstractWorkbench);
-
-uwm.ui.Workbench.prototype.getObjectGrids = function() {
-
-	var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
-	var clsct = classes.getCount();
-	for (var i = 0; i < clsct; i++) {
-		var currClass = classes.itemAt(i);
-		if (currClass instanceof uwm.model.ModelClass) {
-			this.existingContent.push(new uwm.objectgrid.ObjectGrid({
-				uwmClassName: currClass.getUwmClassName()
-			}));
-		}
-	}
-}
-
 

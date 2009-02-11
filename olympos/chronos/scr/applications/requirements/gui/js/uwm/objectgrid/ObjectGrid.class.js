@@ -45,6 +45,10 @@ uwm.objectgrid.ObjectGrid = function(config) {
 	
 	this.on("afterlayout", this.showInfoMask);
 	
+	this.on('show', function() {
+		uwm.ui.ExistingContentContainer.getInstance().showPanel(self);
+	});
+	
 	this.wasActive = false;
 	
 	uwm.objectgrid.ObjectGridContainer.getInstance().registerGrid(this);
@@ -146,6 +150,12 @@ uwm.objectgrid.ObjectGrid.prototype.showInHierarchy = function(item, e) {
 
 uwm.objectgrid.ObjectGrid.prototype.deleteFromModel = function(item, e) {
 	uwm.model.ModelContainer.getInstance().deleteByModelNode(this.getSelectedModelObject());
+}
+uwm.objectgrid.ObjectGrid.prototype.getTreeIcon = function() {
+	return ('Figure'+this.getUwmClassName());
+}
+uwm.objectgrid.ObjectGrid.prototype.getName = function() {
+	return this.uwmClassName;
 }
 
 uwm.objectgrid.ObjectGrid.CONTEXTMENU_SHOW_IN_DIAGRAM_ID = "showInDiagram";

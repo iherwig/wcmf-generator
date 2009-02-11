@@ -27,6 +27,13 @@ uwm.objecttree.ObjectTree = function(config) {
 			appendOnly: true
 		}
 	}, config));
+	
+	var self = this;
+	
+	this.on('show', function() {
+		uwm.ui.ExistingContentContainer.getInstance().showPanel(self);
+	});
+	
 }
 
 Ext.extend(uwm.objecttree.ObjectTree, Ext.tree.TreePanel);
@@ -35,4 +42,10 @@ uwm.objecttree.ObjectTree.prototype.render = function(container, position) {
 	uwm.objecttree.ObjectTree.superclass.render.apply(this, arguments);
 	
 	new uwm.objecttree.DragZone(this, {});
+}
+uwm.objecttree.ObjectTree.prototype.getTreeIcon = function() {
+	return this.iconCls;
+}
+uwm.objecttree.ObjectTree.prototype.getName = function() {
+	return this.name;
 }

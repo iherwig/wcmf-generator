@@ -22,10 +22,11 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 				tree: self
 			}),
 			iconCls: "HierarchyTab",
+			name: "Hierarchy Tree",
 			rootVisible: false,
 			enableDrop: false,
 			root: new Ext.tree.TreeNode(),
-			tabTip: "<b>" + uwm.Dict.translate('Hierarchy Tree')+ "</b><p>" + uwm.Dict.translate('Shows all dependencies of a specific object. Use context menu on an object to show it here.') + "</p>"
+			tabTip: "<b>" + uwm.Dict.translate('Hierarchy Tree') + "</b><p>" + uwm.Dict.translate('Shows all dependencies of a specific object. Use context menu on an object to show it here.') + "</p>"
 		});
 		
 		uwm.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);
