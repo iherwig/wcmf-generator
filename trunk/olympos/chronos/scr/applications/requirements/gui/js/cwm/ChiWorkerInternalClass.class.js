@@ -107,7 +107,7 @@ cwm.ChiWorkerInternalClass.prototype.getPropertyForm = function(modelNode, isLoc
 }
 
 cwm.ChiWorkerInternalClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorkerInternal.PNG", 48,52,48,52);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorkerInternal.png", 48,52,48,52);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiWorkerInternalClass());
