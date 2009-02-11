@@ -55,7 +55,12 @@ cwm.ChiBusinessPartnerPassiveClass = function() {
 			label: "participates in",
 			invert: true,
 			connectionType: 'association'
-		}					
+		},
+		"ChiBusinessUseCaseCore": {
+			label: "participates in",
+			invert: true,
+			connectionType: 'association'
+		}				
 	};
 }
 
