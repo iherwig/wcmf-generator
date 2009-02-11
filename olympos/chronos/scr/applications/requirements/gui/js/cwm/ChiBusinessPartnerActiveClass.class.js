@@ -109,7 +109,7 @@ cwm.ChiBusinessPartnerActiveClass.prototype.getPropertyForm = function(modelNode
 }
 
 cwm.ChiBusinessPartnerActiveClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartnerActive.PNG", 25,52,27,52);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartnerActive.png", 25,52,27,52);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBusinessPartnerActiveClass());

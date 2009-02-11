@@ -108,7 +108,7 @@ cwm.ChiWorkerClass.prototype.getPropertyForm = function(modelNode, isLockedByOth
 }
 
 cwm.ChiWorkerClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorker.PNG", 52, 52, 52, 52);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorker.png", 52, 52, 52, 52);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiWorkerClass());
