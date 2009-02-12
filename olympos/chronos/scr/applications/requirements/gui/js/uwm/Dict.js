@@ -102,7 +102,8 @@ uwm.Dict.voc = {
 		'Error details'         : {'de': 'Fehlerdetails'},
 		"Snap to objects"       : {'de': "An Objekten ausrichten"},
 		"Auto-layout"           : {'de': "Auto-Layout"},
-		"Reload"                : {'de': "Neu laden"}
+		"Reload"                : {'de': "Neu laden"},
+		"New"					: {'de': "Neue"}
 		
 }
 uwm.Dict.translate = function(){
