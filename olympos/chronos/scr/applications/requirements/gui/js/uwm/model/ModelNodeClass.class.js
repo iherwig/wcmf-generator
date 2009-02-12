@@ -38,6 +38,33 @@ uwm.model.ModelNodeClass.prototype.getGridTabIconClass = function() {
 	return this.gridTabIconClass;
 }
 
+uwm.model.ModelNodeClass.prototype.demaskOid = function(orgOid) {
+	var result = orgOid;
+	
+	var uwmClassName = uwm.Util.getUwmClassNameFromOid(orgOid);
+
+	if (this.realUwmClassName && this.uwmClassName == uwmClassName) {
+		result = this.realUwmClassName + ":" + uwm.Util.getNumericFromOid(orgOid);
+	} else if (this.maskInfo) {
+		var demaskedUwmClassName = this.maskInfo[uwmClassName];
+		if (demaskedUwmClassName) {
+			result = demaskedUwmClassName + ":" + uwm.Util.getNumericFromOid(orgOid);
+		}
+	}
+	
+	return result;
+}
+
+uwm.model.ModelNodeClass.prototype.getRealModelClass = function() {
+	var result = this;
+	
+	if (this.realUwmClassName) {
+		result = uwm.model.ModelNodeClassContainer.getInstance().getClass(this.realUwmClassName);
+	}
+	
+	return result;
+}
+
 uwm.model.ModelNodeClass.prototype.getGraphics = function(label, figure) {
 	return eval("new " + this.getFigureClass() + "(label, figure)");
 }

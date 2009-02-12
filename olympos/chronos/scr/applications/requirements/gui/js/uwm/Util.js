@@ -15,6 +15,10 @@ uwm.Util.getUwmClassNameFromOid = function(oid){
     return oid.match(/^[^:]+/)[0];
 }
 
+uwm.Util.getNumericFromOid = function(oid) {
+	return oid.match(/:([0-9]+)/)[1];
+}
+
 uwm.Util.showMessage = function(title, message, messageType){
     var messageContainer = Ext.get("messageContainer");
     if (!messageContainer) {

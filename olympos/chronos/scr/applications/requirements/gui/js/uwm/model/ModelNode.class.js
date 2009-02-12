@@ -16,21 +16,22 @@ uwm.model.ModelNode = function(modelNodeClass) {
 		this.modelNodeClass = modelNodeClass;
 		this.uwmClassName = modelNodeClass.getUwmClassName();
 	}
-	
+
 	this.data = new Object();
-	
+
 	this.alreadyDeleted = false;
 }
 
 uwm.model.ModelNode.prototype.initByDisplayResult = function(node) {
 	this.oid = node.oid;
 	this.uwmClassName = node.type;
-	this.parentOids = node.properties.parentoids;
-	this.childOids = node.properties.childoids;
-	
-	for (var i in node.values) {
+	this.maskedOids = {};
+	this.parentOids = this.deMaskOids(node.properties.parentoids);
+	this.childOids = this.deMaskOids(node.properties.childoids);
+
+	for ( var i in node.values) {
 		if (!(node.values[i] instanceof Function)) {
-			for (var j in node.values[i]) {
+			for ( var j in node.values[i]) {
 				if (!(node.values[i][j] instanceof Function)) {
 					this.data[j] = node.values[i][j];
 				}
@@ -39,16 +40,43 @@ uwm.model.ModelNode.prototype.initByDisplayResult = function(node) {
 	}
 }
 
+uwm.model.ModelNode.prototype.deMaskOids = function(oidList) {
+	var modelNodeClass = this.getModelNodeClass();
+
+	var result = [];
+
+	if (oidList) {
+		for ( var i = 0; i < oidList.length; i++) {
+			var currOid = oidList[i];
+
+			var demaskedOid = modelNodeClass.demaskOid(currOid);
+			if (!demaskedOid) {
+				result.push(currOid);
+			} else {
+				result.push(demaskedOid);
+
+				// Limitation: If Objects A and B have both a xxx and a yyy
+				// connection, this fails
+				this.maskedOids[demaskedOid] = currOid;
+			}
+		}
+	}
+
+	return result;
+}
+
 uwm.model.ModelNode.prototype.initByOid = function(oid) {
 	this.oid = oid;
 	this.parentOids = null;
 	this.childOids = null;
+	this.maskedOids = {};
 }
 
 uwm.model.ModelNode.prototype.initByNameAndOid = function(name, oid) {
 	this.oid = oid;
 	this.parentOids = null;
 	this.childOids = null;
+	this.maskedOids = {};
 	this.name = name;
 }
 
@@ -57,14 +85,22 @@ uwm.model.ModelNode.prototype.getUwmClassName = function() {
 }
 
 uwm.model.ModelNode.prototype.getModelNodeClass = function() {
-	return this.modelNodeClass;
+	var result = this.modelNodeClass;
+	
+	if (!result) {
+		this.modelNodeClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(this.uwmClassName);
+		
+		result = this.modelNodeClass;
+	}
+	
+	return result;
 }
 
 uwm.model.ModelNode.prototype.getParentOids = function(preventReload) {
 	if (!preventReload && !this.parentOids) {
 		this.reload();
 	}
-	
+
 	return this.parentOids;
 }
 
@@ -72,7 +108,7 @@ uwm.model.ModelNode.prototype.getChildOids = function(preventReload) {
 	if (!preventReload && !this.childOids) {
 		this.reload();
 	}
-	
+
 	return this.childOids;
 }
 
@@ -82,41 +118,42 @@ uwm.model.ModelNode.prototype.getOid = function() {
 
 uwm.model.ModelNode.prototype.getName = function() {
 	var result = this.data.Name;
-	
+
 	if (!result) {
 		result = this.name;
 	}
-	
+
 	return result;
 }
 
 uwm.model.ModelNode.prototype.getLabel = function() {
 	var result = this.getName();
-	
+
 	if (!result) {
 		result = this.getOid();
 	}
-	
+
 	return result;
 }
 
 uwm.model.ModelNode.prototype.reload = function(callback) {
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().display(this.oid, 0, function(request, data) {
-		self.initByDisplayResult(data.node);
-		if (callback instanceof Function) {
-			callback(self);
-		}
-	});
+
+	uwm.persistency.Persistency.getInstance().display(this.oid, 0,
+			function(request, data) {
+				self.initByDisplayResult(data.node);
+				if (callback instanceof Function) {
+					callback(self);
+				}
+			});
 }
 
 uwm.model.ModelNode.prototype.fillPropertyForm = function(form, mask) {
 	var self = this;
-	
-	this.reload(function() {
+
+	this.reload( function() {
 		self.populatePropertyForm(form);
-		
+
 		mask.hide();
 	});
 }
@@ -131,35 +168,40 @@ uwm.model.ModelNode.prototype.getProperty = function(propertyName) {
 uwm.model.ModelNode.prototype.changeProperties = function(values) {
 	var oldValues = new Object();
 	var oldLabels = new Object();
-	
+
 	var changedLabel = false;
-	
-	for (var i in values) {
+
+	for ( var i in values) {
 		if (!(values[i] instanceof Function)) {
 			oldValues[i] = this.data[i];
 			this.data[i] = values[i];
-			
+
 			if (this.getModelNodeClass().isLabelProperty(i)) {
 				oldLabels[i] = oldValues[i];
 				changedLabel = true;
 			}
 		}
 	}
-	
+
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().save(this.getOid(), values, function(request, data) {
-		uwm.event.EventBroker.getInstance().fireEvent("changeProperty", self, oldValues);
-		
-		if (changedLabel) {
-			uwm.event.EventBroker.getInstance().fireEvent("changeLabel", self, oldLabels);
-		}
-	});
+
+	uwm.persistency.Persistency.getInstance().save(
+			this.getOid(),
+			values,
+			function(request, data) {
+				uwm.event.EventBroker.getInstance().fireEvent("changeProperty",
+						self, oldValues);
+
+				if (changedLabel) {
+					uwm.event.EventBroker.getInstance().fireEvent(
+							"changeLabel", self, oldLabels);
+				}
+			});
 }
 
 uwm.model.ModelNode.prototype.setDefaultLabel = function() {
-	this.changeProperties({
-		"Name": this.getModelNodeClass().getDefaultLabel()
+	this.changeProperties( {
+		"Name" :this.getModelNodeClass().getDefaultLabel()
 	});
 }
 
@@ -171,18 +213,43 @@ uwm.model.ModelNode.prototype.isDeleted = function() {
 	return this.alreadyDeleted;
 }
 
-uwm.model.ModelNode.prototype.associate = function(parentModelObject) {
+uwm.model.ModelNode.prototype.associate = function(parentModelObject, nmSelf) {
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().associate(parentModelObject.getOid(), self.getOid(), false, function(request, data) {
-		uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
-	});
+
+	var childOid = this.getOid();
+	var parentOid = parentModelObject.getOid();
+
+	if (nmSelf) {
+		childOid = this.insertDirectionInOid(childOid, "Source");
+		parentOid = this.insertDirectionInOid(parentOid, "Target");
+	}
+
+	uwm.persistency.Persistency.getInstance().associate(
+			parentOid,
+			childOid,
+			false,
+			function(request, data) {
+				uwm.event.EventBroker.getInstance().fireEvent("associate",
+						parentModelObject, self);
+			});
+}
+
+uwm.model.ModelNode.prototype.insertDirectionInOid = function(oldOid, direction) {
+
+	var result = uwm.Util.getUwmClassNameFromOid(oldOid) + direction + ":"
+			+ uwm.Util.getNumericFromOid(oldOid);
+
+	return result;
 }
 
 uwm.model.ModelNode.prototype.disassociate = function(parentModelObject) {
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().disassociate(parentModelObject.getOid(), self.getOid(), function(request, data) {
-		uwm.event.EventBroker.getInstance().fireEvent("disassociate", parentModelObject, self);
-	});
+
+	uwm.persistency.Persistency.getInstance().disassociate(
+			parentModelObject.getOid(),
+			self.getOid(),
+			function(request, data) {
+				uwm.event.EventBroker.getInstance().fireEvent("disassociate",
+						parentModelObject, self);
+			});
 }

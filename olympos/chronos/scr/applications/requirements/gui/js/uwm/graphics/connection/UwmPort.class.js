@@ -54,6 +54,6 @@ uwm.graphics.connection.UwmPort.prototype.onDrop = function(port){
         var portModelObject = port.parentNode.getFigure().getModelObject();
         var thisModelObject = this.parentNode.getFigure().getModelObject();
         
-        this.parentNode.getFigure().getDiagram().createConnection(thisModelObject, portModelObject, this, port);
+        this.parentNode.getFigure().getDiagram().createConnection(thisModelObject, portModelObject, this, port, port.parentNode.x, port.parentNode.y);
     }
 }
