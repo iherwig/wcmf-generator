@@ -140,6 +140,66 @@
 	min-width:4px;
 }
 
+.FigureActivity {
+	background-image: url("../img/16x16/Activity.png") !important;
+}
+
+.ActivityTab {
+	background-image: url("../img/24x24/Activity.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
+.FigureActivityDecision {
+	background-image: url("../img/16x16/ActivityDecision.png") !important;
+}
+
+.ActivityDecisionTab {
+	background-image: url("../img/24x24/ActivityDecision.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
+.FigureActivityInitial {
+	background-image: url("../img/16x16/ActivityInitial.png") !important;
+}
+
+.ActivityInitialTab {
+	background-image: url("../img/24x24/ActivityInitial.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
+.FigureActivityFinal {
+	background-image: url("../img/16x16/ActivityFinal.png") !important;
+}
+
+.ActivityFinalTab {
+	background-image: url("../img/24x24/ActivityFinal.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
+.FigureActivitySend {
+	background-image: url("../img/16x16/ActivitySend.png") !important;
+}
+
+.ActivitySendTab {
+	background-image: url("../img/24x24/ActivitySend.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
+.FigureActivityReceive {
+	background-image: url("../img/16x16/ActivityReceive.png") !important;
+}
+
+.ActivityReceiveTab {
+	background-image: url("../img/24x24/ActivityReceive.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
 .FigureChiNode {
 	background-image: url("../img/ChiNode.png") !important;
 }

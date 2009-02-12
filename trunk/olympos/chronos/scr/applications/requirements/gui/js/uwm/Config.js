@@ -3,7 +3,7 @@ Ext.namespace("uwm.Config");
 uwm.Config.jsonUrl = "../application/main.php";
 uwm.Config.appTitle = "Chronos Web Modeler";
 
-uwm.Config.debug = false;
+uwm.Config.debug = true;
 
 uwm.Config.defaultLogin = "admin";
 uwm.Config.defaultPassword = "admin";
