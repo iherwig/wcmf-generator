@@ -48,7 +48,7 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.MenuButton, {
 				}
 			} else {
 				menue.add({
-					text: currContent.getName(),
+					text: uwm.Dict.translate(currContent.getName()),
 					iconCls: currContent.getTreeIcon(),
 					connectedPanel: currContent,
 					handler: function(item) {
