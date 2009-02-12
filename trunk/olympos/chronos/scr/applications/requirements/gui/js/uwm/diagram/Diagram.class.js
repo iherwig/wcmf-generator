@@ -348,33 +348,66 @@ uwm.diagram.Diagram.prototype.establishExistingConnections = function(newObject,
 				var newPort = newFigure.getGraphics().getPorts().get(0);
 				var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
 				
-				this.createConnection(newObject, connectedObject, newPort, connectedPort);
+				var connectionInfo = newObject.getModelNodeClass().getConnectionInfo(connectedObject.getModelNodeClass());
+
+				if (Ext.isArray(connectionInfo)) {
+					//TODO: Select appropriate connection type
+					connectionInfo = connectionInfo[0];
+				}
+				
+				//TODO: prevent re-establish existing connections in WorkflowEventListener
+				this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo);
 			}
 		}
 	}
 }
 
-uwm.diagram.Diagram.prototype.createConnection = function(sourceObject, targetObject, sourcePort, targetPort) {
+uwm.diagram.Diagram.prototype.createConnection = function(sourceObject, targetObject, sourcePort, targetPort, x, y) {
 	if (sourceObject.connectableWith(targetObject)) {
 		var connectionInfo = sourceObject.getModelNodeClass().getConnectionInfo(targetObject.getModelNodeClass());
 		
-		var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
-		
-		var startPort;
-		var endPort;
-		
-		if (connectionInfo.invert) {
-			startPort = targetPort;
-			endPort = sourcePort;
+		if (!Ext.isArray(connectionInfo)) {
+			this.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, connectionInfo);
 		} else {
-			startPort = sourcePort;
-			endPort = targetPort;
+			var menu = new Ext.menu.Menu();
+
+			var self = this;
+			
+			for (var i = 0; i < connectionInfo.length; i++) {
+				
+				var currConnectionInfo = connectionInfo[i];
+				menu.add(new Ext.menu.Item({
+					text: currConnectionInfo.label,
+					connectionInfo: currConnectionInfo,
+					handler: function() {
+						self.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, this.connectionInfo);
+				}
+				}));
+			}
+			
+			menu.showAt(this.getContextMenuPosition(x, y));
 		}
-		
-		var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
-		command.setConnection(new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators));
-		this.workflow.getCommandStack().execute(command);
 	}
+}
+
+uwm.diagram.Diagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo) {
+	var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
+	
+	var startPort;
+	var endPort;
+	
+	if (connectionInfo.invert) {
+		startPort = targetPort;
+		endPort = sourcePort;
+	} else {
+		startPort = sourcePort;
+		endPort = targetPort;
+	}
+	
+	var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
+	command.connectionInfo = connectionInfo;
+	command.setConnection(new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators));
+	this.workflow.getCommandStack().execute(command);
 }
 
 /**

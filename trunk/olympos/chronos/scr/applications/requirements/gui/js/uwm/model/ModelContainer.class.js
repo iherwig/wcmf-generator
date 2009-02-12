@@ -32,6 +32,7 @@ uwm.model.ModelContainer.prototype.createByDisplayResult = function(displayResul
 		var oid = node.oid;
 		
 		var newModelNode = this.getNode(uwmClassName, oid);
+		oid = newModelNode.oid;
 		
 		newModelNode.initByDisplayResult(node);
 		
@@ -62,6 +63,7 @@ uwm.model.ModelContainer.prototype.createByDisplayResult = function(displayResul
 
 uwm.model.ModelContainer.prototype.createByClassAndOid = function(uwmClassName, oid) {
 	var newModelNode = this.getNode(uwmClassName, oid);
+	oid = newModelNode.oid;
 	
 	newModelNode.initByOid(oid);
 	
@@ -72,6 +74,7 @@ uwm.model.ModelContainer.prototype.createByClassAndOid = function(uwmClassName, 
 
 uwm.model.ModelContainer.prototype.createByClassAndNameAndOid = function(uwmClassName, name, oid) {
 	var newModelNode = this.getNode(uwmClassName, oid);
+	oid = newModelNode.oid;
 	
 	newModelNode.initByNameAndOid(name, oid);
 	
@@ -90,6 +93,7 @@ uwm.model.ModelContainer.prototype.createModel = function() {
 
 uwm.model.ModelContainer.prototype.handleCreatedModel = function(oid) {
 	var newModelNode = this.getNode("Model", oid);
+	oid = newModelNode.oid;
 	
 	this.items.add(oid, newModelNode);
 	
@@ -109,6 +113,7 @@ uwm.model.ModelContainer.prototype.createPackage = function(parentModelNode) {
 
 uwm.model.ModelContainer.prototype.handleCreatedPackage = function(oid, parentModelNode) {
 	var newModelNode = this.getNode("Package", oid);
+	oid = newModelNode.oid;
 	
 	this.items.add(oid, newModelNode);
 	
@@ -129,6 +134,7 @@ uwm.model.ModelContainer.prototype.createDiagram = function(parentModelNode) {
 
 uwm.model.ModelContainer.prototype.handleCreatedDiagram = function(oid, parentModelNode) {
 	var newModelNode = this.getNode("Diagram", oid);
+	oid = newModelNode.oid;
 	
 	this.items.add(oid, newModelNode);
 	
@@ -153,6 +159,7 @@ uwm.model.ModelContainer.prototype.createFigure = function(diagramModelNode, mod
 
 uwm.model.ModelContainer.prototype.handleCreatedFigure = function(oid, diagramModelNode, modelObject) {
 	var newFigure = this.getNode("Figure", oid);
+	oid = newFigure.oid;
 	
 	this.items.add(oid, newFigure);
 	
@@ -177,6 +184,7 @@ uwm.model.ModelContainer.prototype.createModelObject = function(uwmClassName, pa
 
 uwm.model.ModelContainer.prototype.handleCreatedModelObject = function(oid, uwmClassName, packageNode, figureNode) {
 	var newObject = this.getNode(uwmClassName, oid);
+	oid = newObject.oid;
 	
 	this.items.add(oid, newObject);
 	
@@ -214,11 +222,15 @@ uwm.model.ModelContainer.prototype.deleteByModelNode = function(modelNode) {
 }
 
 uwm.model.ModelContainer.prototype.getNode = function(uwmClassName, oid) {
+	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwmClassName);
+
+	oid = modelClass.demaskOid(oid);
+	
 	var newModelNode = this.items.get(oid);
 	
 	if (!newModelNode) {
-		var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwmClassName);
-		var newModelNode = eval("new " + modelClass.getInstanceClassName() + "(modelClass)");
+		var realModelClass = modelClass.getRealModelClass();
+		var newModelNode = eval("new " + modelClass.getInstanceClassName() + "(realModelClass)");
 		newModelNode.oid = oid;
 	}
 	
