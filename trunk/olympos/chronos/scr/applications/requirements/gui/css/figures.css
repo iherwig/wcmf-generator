@@ -201,7 +201,7 @@
 }
 
 .FigureChiNode {
-	background-image: url("../img/ChiNode.png") !important;
+	background-image: url("../img/16x16/ChiNode.png") !important;
 }
 
 .FigureChiValue {
@@ -209,9 +209,9 @@
 }
 
 .FigureChiController {
-	background-image: url("../img/ChiController.png") !important;
+	background-image: url("../img/16x16/ChiController.png") !important;
 }
 
 .FigureChiView {
-	background-image: url("../img/ChiView.png") !important;
+	background-image: url("../img/16x16/ChiView.png") !important;
 }
