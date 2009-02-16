@@ -49,22 +49,26 @@ cwm.ChiRequirementClass = function() {
 		"ChiRequirement": {
 			label: "contains",
 			invert: true,
-			connectionType: 'aggregation'
+			connectionType: 'aggregation',
+			number: -1
 		},
 		"ChiFeature": {
 			label: "is realized by",
 			invert: false,
-			connectionType: 'realization'
+			connectionType: 'realization',
+			number: -1
 		},
 		"ChiIssue": {
 			label: "is negated by",
 			invert: false,
-			connectionType: 'associationType'
+			connectionType: 'associationType', 
+			number: -1
 		},
 		"ChiGoal": {
 			label: "is specified by",
 			invert: true,
-			connectionType: 'composition'
+			connectionType: 'composition', 
+			number: 1
 		}
 	};
 }

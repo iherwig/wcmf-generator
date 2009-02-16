@@ -18,5 +18,52 @@ uwm.model.ModelObject = function(modelNodeClass) {
 uwm.model.ModelObject.prototype = new uwm.model.ModelNode;
 
 uwm.model.ModelObject.prototype.connectableWith = function(otherObject) {
-	return this.getModelNodeClass().getConnectionInfo(otherObject.getModelNodeClass()) != null;
+	var result = false;
+	if (this.getModelNodeClass().getConnectionInfo(otherObject.getModelNodeClass()) != null) {
+		if (this.checkCardinality(otherObject) && otherObject.checkCardinality(this)) {
+			result = true;
+		}
+		
+	}
+	return result;
+}
+
+uwm.model.ModelObject.prototype.checkCardinality = function(otherObject) {
+	var result = false;
+	var connections = this.getNumberOfConnections(otherObject);
+	
+	
+	var allowedConnections = this.getModelNodeClass().getConnectionInfo(otherObject.getModelNodeClass()).number;
+	
+	if (connections < allowedConnections || allowedConnections == -1 || !allowedConnections) {
+		result = true;
+	}
+	
+	return result;
+}
+
+uwm.model.ModelObject.prototype.getNumberOfConnections = function(otherObject) {
+	parentOids = this.getParentOids();
+	childOids = this.getChildOids();
+	
+	var result = 0;
+	if (parentOids) {
+		for (var i = 0; i < parentOids.length; i++) {
+			var parentClassName = uwm.Util.getUwmClassNameFromOid(parentOids[i]);
+			var targetClassName = otherObject.getUwmClassName();
+			if (parentClassName == targetClassName) {
+				result++;
+			}
+		}
+	}
+	if (childOids) {
+		for (var i = 0; i < childOids.length; i++) {
+			var childClassName = uwm.Util.getUwmClassNameFromOid(childOids[i]);
+			var targetClassName = otherObject.getUwmClassName();
+			if (childClassName == targetClassName) {
+				result++;
+			}
+		}
+	}
+	return result;
 }

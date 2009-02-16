@@ -48,7 +48,8 @@ cwm.ChiGoalClass = function() {
 		"ChiGoal" : {
 			label :"contains",
 			invert :true,
-			connectionType :'association'
+			connectionType :'association', 
+			number: -1
 		}
 
 		,
@@ -56,7 +57,8 @@ cwm.ChiGoalClass = function() {
 		"ChiGoal" : {
 			label :"contains",
 			invert :false,
-			connectionType :'composition'
+			connectionType :'composition',
+			number: -1
 		}
 
 		,
@@ -64,7 +66,8 @@ cwm.ChiGoalClass = function() {
 		"ChiRequirement" : {
 			label :"is specified by",
 			invert :false,
-			connectionType :'composition'
+			connectionType :'composition',
+			number: -1
 		}
 
 	};
