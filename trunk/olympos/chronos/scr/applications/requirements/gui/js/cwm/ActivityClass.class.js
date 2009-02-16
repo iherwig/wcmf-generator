@@ -57,7 +57,7 @@ cwm.ActivityClass = function() {
 		},
 		"ActivityInitial" : {
 			label :"Associates",
-			invert :true,
+			invert :false,
 			connectionType :"Association"
 		}
 
@@ -65,7 +65,7 @@ cwm.ActivityClass = function() {
 
 		"ActivityDecision" : {
 			label :"Associates",
-			invert :false,
+			invert :true,
 			connectionType :"Association"
 		}
 
