@@ -11,6 +11,15 @@
  */
 Ext.namespace("uwm.model");
 
+/**
+ * @class An n:m Relation.
+ * 
+ * <p>This class should not be instantiated, but extended.</p>
+ * 
+ * @extends uwm.model.ModelNode
+ * @constructor
+ * @param {uwm.model.ModelNodeClass} modelNodeClass The ModelNodeClass of this ModelNode.
+ */
 uwm.model.Relation = function(modelNodeClass) {
 	uwm.model.Relation.superclass.constructor.call(this, modelNodeClass);
 }

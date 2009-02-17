@@ -11,6 +11,12 @@
  */
 Ext.namespace("uwm.model.builtin");
 
+/**
+ * @class Defines common characteristics of all Packages.
+ * 
+ * @extends uwm.model.ModelNodeClass
+ * @constructor
+ */
 uwm.model.builtin.PackageClass = function() {
 	uwm.model.ModelNodeClass.call(this);
 	

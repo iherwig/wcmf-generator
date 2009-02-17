@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class Shows a text as hint for usage of a view.
+ * 
+ * @extends Ext.LoadMask
+ * @constructor
+ * @param {Ext.Component} el The Component to show the text in.
+ * @param {Object} config The configuration object.
+ */
 uwm.ui.InfoMask = function(el, config){
     uwm.ui.InfoMask.superclass.constructor.call(this, el, Ext.apply(this, {
 		removeMask: true,

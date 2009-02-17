@@ -11,6 +11,12 @@
  */
 Ext.namespace("uwm.objectgrid");
 
+/**
+ * @class Logical container for managing all Object Grids.
+ * 
+ * @see uwm.objectgrid.ObjectGrid
+ * @constructor
+ */
 uwm.objectgrid.ObjectGridContainer = function() {
 	this.items = new Object();
 	this.containersInScope = new Array();

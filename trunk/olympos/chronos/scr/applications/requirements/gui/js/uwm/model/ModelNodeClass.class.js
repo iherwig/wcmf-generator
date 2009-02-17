@@ -8,6 +8,16 @@
  * this entire header must remain intact.
  */Ext.namespace("uwm.model");
 
+/**
+ * Defines common characteristics of a class of ModelNodes.
+ * 
+ * <p>This class should not be instantiated, but extended.</p>
+ * 
+ * <p>Every child of this class is a <i>Singleton</i>.</p>
+ * 
+ * @see uwm.model.ModelNode
+ * @constructor
+ */
 uwm.model.ModelNodeClass = function() {
 }
 

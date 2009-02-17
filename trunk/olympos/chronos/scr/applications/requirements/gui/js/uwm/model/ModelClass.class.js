@@ -12,6 +12,15 @@
 
 Ext.namespace("uwm.model");
 
+/**
+ * @class Defines common characteristics of a class of ModelObjects.
+ * 
+ * <p>This class should not be instantiated, but extended.</p>
+ * 
+ * @extends uwm.model.ModelNodeClass
+ * @see uwm.model.ModelObject
+ * @constructor
+ */
 uwm.model.ModelClass = function() {
 }
 

@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.hierarchytree");
 
+/**
+ * @class A Model Object inside the Hierarchy Tree.
+ * 
+ * @extends uwm.objecttree.ObjectNode
+ * @see uwm.hierarchytree.HierarchyTree
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.hierarchytree.Node = function(config) {
 	var childOids = config.modelNode.getChildOids(true);
 	var parentOids = this.removeDirectParent(config.parent, config.modelNode.getParentOids(true));

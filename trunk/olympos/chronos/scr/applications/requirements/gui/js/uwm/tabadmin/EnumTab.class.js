@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.tabadmin");
 
+/**
+ * @class One tab in admin view, allowing management of a class of TechnicalObjcts.
+ * 
+ * @extends Ext.grid.GridPanel
+ * @see uwm.model.TechnicalObject
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.tabadmin.EnumTab = function(config) {
 	this.modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(config.uwmClassName);
 	

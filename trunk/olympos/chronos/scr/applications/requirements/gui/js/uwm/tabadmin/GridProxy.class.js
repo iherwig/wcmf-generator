@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.tabadmin");
 
+/**
+ * @class Routes requests of a class of TechnicalObjects through persistency layer.
+ * 
+ * @extends Ext.data.DataProxy
+ * @see uwm.tabadmin.EnumTab
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.tabadmin.GridProxy = function(config) {
 	uwm.tabadmin.GridProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 	

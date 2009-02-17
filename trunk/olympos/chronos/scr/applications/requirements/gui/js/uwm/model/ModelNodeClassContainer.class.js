@@ -12,6 +12,12 @@
 
 Ext.namespace("uwm.model");
 
+/**
+ * @class Contains all ModelNodeClasses known to UWM.
+ * 
+ * @see uwm.model.ModelNodeClass
+ * @constructor
+ */
 uwm.model.ModelNodeClassContainer = function() {
 	this.items = new Ext.util.MixedCollection();
 	this.semanticGroups = new Object();

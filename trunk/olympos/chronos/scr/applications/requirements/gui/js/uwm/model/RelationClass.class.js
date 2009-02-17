@@ -12,6 +12,14 @@
 
 Ext.namespace("uwm.model");
 
+/**
+ * @class Common characteristics of an n:m Relation Class.
+ * 
+ * <p>This class should not be instantiated, but extended.</p>
+ * 
+ * @extends uwm.model.ModelNodeClass
+ * @constructor
+ */
 uwm.model.RelationClass = function() {
 	uwm.model.RelationClass.superclass.constructor.call(this);
 }

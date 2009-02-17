@@ -11,6 +11,15 @@
  */
 Ext.namespace("uwm.model");
 
+/**
+ * @class Common characteristics of a class of Technical Objects.
+ * 
+ * <p>This class should not be instantiated, but extended.</p>
+ * 
+ * @extends uwm.model.ModelNodeClass
+ * @see uwm.model.TechnicalObject
+ * @constructor
+ */
 uwm.model.TechnicalObjectClass = function() {
 	uwm.model.ModelNodeClass.call(this);
 }

@@ -14,6 +14,7 @@ Ext.namespace("uwm.graphics.connection");
 /**
  * @class Positions the connection label at the center of a Manhattan connection.
  * 
+ * @extends draw2d.ConnectionLocator
  * @constructor
  * @param {Object} connection
  */

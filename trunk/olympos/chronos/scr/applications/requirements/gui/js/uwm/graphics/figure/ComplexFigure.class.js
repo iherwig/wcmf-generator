@@ -15,7 +15,8 @@ Ext.namespace("uwm.graphics.figure");
  * @class The base class for all complex (i. e. non-rectangular) figures in UWM.
  *
  * <p>This class is not intended to be instantiated, it should rather be extended.</p>
- *
+ * 
+ * @extends uwm.graphics.figure.BaseFigure
  * @constructor
  * @param {String} label The label of the figure.
  * @param {uwm.diagram.Figure} figure The associated figure object.

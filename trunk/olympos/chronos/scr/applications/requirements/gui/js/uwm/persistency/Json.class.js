@@ -11,6 +11,12 @@
  */
 Ext.namespace("uwm.persistency");
 
+/**
+ * @class Implements persistency against a wCMF backend via JSON calls.
+ * 
+ * @extends uwm.persistency.Persistency.
+ * @constructor
+ */
 uwm.persistency.Json = function() {
 	this.sid = uwm.Session.getInstance().getSid();
 	this.jsonUrl = uwm.Session.getInstance().getJsonUrl();

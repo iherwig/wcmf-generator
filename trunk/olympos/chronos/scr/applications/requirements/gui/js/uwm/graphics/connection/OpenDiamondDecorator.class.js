@@ -14,6 +14,7 @@ Ext.namespace("uwm.graphics.connection");
 /**
  * @class Provides an open (non-filled) diamond as connection end.
  *
+ * @extends draw2d.ConnectionDecorator
  * @constructor
  */
 uwm.graphics.connection.OpenDiamondDecorator = function(){

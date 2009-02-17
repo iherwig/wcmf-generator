@@ -11,6 +11,9 @@
  */
 Ext.namespace("uwm.treeadmin");
 
+uwm.treeadmin.ModelObjectPanel = function() {
+}
+
 uwm.treeadmin.ModelObjectPanel = Ext.extend(Ext.tree.TreePanel, {
 	initComponent: function() {
 		Ext.apply(this, {

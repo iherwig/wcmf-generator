@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class Abstract base class for all workbenches (perspectives).
+ * 
+ * @extens Ext.Panel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.ui.AbstractWorkbench = function(config) {
 	uwm.ui.AbstractWorkbench.superclass.constructor.call(this, Ext.apply(this, {
 		layout: "border"

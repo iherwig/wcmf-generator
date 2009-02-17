@@ -11,11 +11,19 @@
  */
 Ext.namespace("uwm.newobjects");
 
+/**
+ * @class The Accordion containing the new objects.
+ *
+ * @extends Ext.Panel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.newobjects.Accordion = function() {
+}
+
 uwm.newobjects.Accordion = Ext.extend(Ext.Panel, {
 
 	initComponent: function() {
-	
-	
 		Ext.apply(this, {
 			region: 'north',
 			layout: "accordion",
@@ -57,6 +65,6 @@ uwm.newobjects.Accordion = Ext.extend(Ext.Panel, {
 	}
 });
 
-uwm.newobjects.Accordion.prototype.getGroupArray=function(){
+uwm.newobjects.Accordion.prototype.getGroupArray = function() {
 	return this.data;
 }

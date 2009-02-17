@@ -11,6 +11,12 @@
  */
 Ext.namespace("uwm.model");
 
+/**
+ * @class A persisted Object.
+ * 
+ * @constructor
+ * @param {uwm.model.ModelNodeClass} modelNodeClass The ModelNodeClass of this ModelNode.
+ */
 uwm.model.ModelNode = function(modelNodeClass) {
 	if (modelNodeClass) {
 		this.modelNodeClass = modelNodeClass;

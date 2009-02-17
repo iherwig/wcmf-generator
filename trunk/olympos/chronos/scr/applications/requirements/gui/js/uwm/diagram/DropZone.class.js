@@ -15,7 +15,8 @@ Ext.namespace("uwm.diagram");
  * @class Customized DropZone for diagram.
  *
  * <p>This DropZone receives new and existing ModelObjects.</p>
- *
+ * 
+ * @extends Ext.dd.DropZone
  * @constructor
  * @param {Ext.Element} el The element this DropZone should act on.
  * @param {Object} config Configuration Object

@@ -11,14 +11,33 @@
  */
 Ext.namespace("uwm.Util");
 
+/**
+ * Extracts the UWM Class Name out of an OID.
+ * 
+ * @param {String} oid The OID to extract UWM Class Name from.
+ * @return {String} The UWM Class Name of the OID.
+ */
 uwm.Util.getUwmClassNameFromOid = function(oid){
     return oid.match(/^[^:]+/)[0];
 }
 
+/**
+ * Extracts the numeric part out of an OID.
+ * 
+ * @param {String} oid The OID to extract numeric part from.
+ * @return {int} The numeric part of the OID
+ */
 uwm.Util.getNumericFromOid = function(oid) {
 	return oid.match(/:([0-9]+)/)[1];
 }
 
+/**
+ * Displays a message to the user.
+ * 
+ * @param {String} title Title of the message.
+ * @param {String} message The message body. May contain HTML tags.
+ * @param {uwm.Util.messageType} messageType The type of the message.
+ */
 uwm.Util.showMessage = function(title, message, messageType){
     var messageContainer = Ext.get("messageContainer");
     if (!messageContainer) {
@@ -44,12 +63,20 @@ uwm.Util.showMessage = function(title, message, messageType){
     });
 }
 
+/**
+ * List of message types.
+ */
 uwm.Util.messageType = {
     INFO: 1,
     WARNING: 2,
     ERROR: 3
 }
 
+/**
+ * Disables text selection on a DOM element.
+ * 
+ * @param {DOMElement} elem The DOM element to disable selection on.
+ */
 uwm.Util.setElementUnselectable = function(elem){
     if (elem) {
         elem.style.MozUserSelect = "none";

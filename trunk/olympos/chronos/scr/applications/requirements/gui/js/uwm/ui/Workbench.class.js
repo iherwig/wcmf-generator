@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class The main Workbench (perspective).
+ * 
+ * @extends uwm.ui.AbstractWorkbench
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.ui.Workbench = function(config) {
 	this.eastPanel = new uwm.ui.EastPanel({
 		highlight: "default"

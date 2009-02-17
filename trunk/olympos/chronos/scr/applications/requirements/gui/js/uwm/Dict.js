@@ -11,6 +11,11 @@
  */
 Ext.namespace("uwm.Dict");
  
+/**
+ * List of all strings and translations.
+ * 
+ * @type Array
+ */
 uwm.Dict.voc = {
 	
 		'Shows all'			: {'de': 'Zeigt alle'},
@@ -106,6 +111,14 @@ uwm.Dict.voc = {
 		"New"					: {'de': "Neue"}
 		
 }
+
+
+/**
+ * Translates a string to the currently set language.
+ * 
+ * @param {String} englishText The english text to translate.
+ * @return {String} The translated text, if a translation exists. English text otherwise.
+ */
 uwm.Dict.translate = function(){
 	strword=arguments[0];
 
@@ -118,4 +131,3 @@ uwm.Dict.translate = function(){
 
 	return strresult;
 }
-

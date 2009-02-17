@@ -11,6 +11,16 @@
  */
 Ext.namespace("uwm.hierarchytree");
 
+/**
+ * @class The Hierarchy Tree displays all relations of a selected ModelObject.
+ * 
+ * @extends uwm.objecttree.ObjectTree
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.hierarchytree.HierarchyTree = function() {
+}
+
 uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 	initComponent: function() {
 	

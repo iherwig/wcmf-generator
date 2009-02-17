@@ -13,7 +13,8 @@ Ext.namespace("uwm.diagram");
 
 /**
  * @class Initiates all changes coming from the draw2d event system.
- *
+ * 
+ * @extends draw2d.CommandStackEventListener
  * @constructor
  * @param {uwm.diagram.Diagram} diagram The Diagram containing this listener.
  */

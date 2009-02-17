@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class A password field for use in Property View.
+ * 
+ * @extends Ext.form.TextField
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.PasswordField = function(config) {
 	var self = this;
 

@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class A static (pre-defined values) ComboBox for use in Property View.
+ * 
+ * @extends Ext.form.ComboBox
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.StaticComboBox = function(config) {
 	var self = this;
 	

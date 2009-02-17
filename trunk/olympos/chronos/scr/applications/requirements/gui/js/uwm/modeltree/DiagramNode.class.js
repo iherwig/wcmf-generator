@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.modeltree");
 
+/**
+ * @class A diagram in the Model Tree.
+ * 
+ * @extends uwm.objecttree.Node
+ * @see uwm.modeltree.ModelTree
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.modeltree.DiagramNode = function(config) {
 	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("Diagram", config.oid);
 

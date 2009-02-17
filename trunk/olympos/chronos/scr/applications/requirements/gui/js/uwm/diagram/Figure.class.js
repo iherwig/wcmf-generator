@@ -13,7 +13,8 @@ Ext.namespace("uwm.diagram");
 
 /**
  * @class Graphical representation of a {@link uwm.model.ModelObject} on a {@link uwm.diagram.Diagram}.
- *
+ * 
+ * @extends uwm.model.ModelNode
  * @constructor
  * @param {uwm.model.ModelNodeClass} modelNodeClass The instance of {@link uwm.diagram.FigureClass}.
  */

@@ -18,8 +18,8 @@ Ext.namespace("uwm.modeltree");
  *
  * <p>The Model Tree is a <i>Singleton</i>.</p>
  *
- * @constructor
  * @extends Ext.tree.TreePanel
+ * @constructor
  * @param {Object} config The configuration object.
  */
 uwm.modeltree.ModelTree = function(config) {

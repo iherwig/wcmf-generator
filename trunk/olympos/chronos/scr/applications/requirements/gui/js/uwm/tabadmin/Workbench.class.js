@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.tabadmin");
 
+/**
+ * @class The tabadmin workbench (perspective).
+ * 
+ * @extends uwm.ui.AbstractWorkbench
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.tabadmin.Workbench = function(config) {
 	this.tabPanel = new Ext.TabPanel({
 		region: "center",

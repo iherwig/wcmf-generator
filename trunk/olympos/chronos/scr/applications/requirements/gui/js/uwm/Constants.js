@@ -8,4 +8,9 @@
  * this entire header must remain intact.
  */Ext.namespace("uwm.Constants");
 
+/**
+ * Name of the ExtJS Drag&amp;Drop group for Model Objects.
+ * 
+ * @type String
+ */
 uwm.Constants.DD_GROUP = "uwmDDGroup";

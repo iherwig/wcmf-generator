@@ -8,6 +8,13 @@
  * this entire header must remain intact.
  */Ext.namespace("uwm.persistency");
 
+/**
+ * @class Abstract base class defining the persistency layer.
+ * 
+ * <p>This class is a <i>Singleton</i>, redirecting to the appropriate concrete implementation.</p>
+ * 
+ * @constructor
+ */
 uwm.persistency.Persistency = function() {
 }
 

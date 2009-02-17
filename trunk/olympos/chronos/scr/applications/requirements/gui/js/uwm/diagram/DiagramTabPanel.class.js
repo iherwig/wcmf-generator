@@ -18,16 +18,18 @@ Ext.namespace("uwm.diagram");
 /**
  * @class The tab panel of center view.
  *
+ * @extends Ext.TabPanel
  * @constructor
  * @param {Object} config Configuration of this TabPanel.
  * @config diagramContainer The DigramContainer object.
  */
+uwm.diagram.DiagramTabPanel = function() {
+}
 uwm.diagram.DiagramTabPanel = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
 		Ext.apply(this, {
 			region: "center",
 			xtype: "tabpanel",
-			//tabPosition: "bottom",
 			enableTabScroll: true,
 			activeTab: 0,
 			id: uwm.diagram.DiagramTabPanel.COMPONENT_ID,

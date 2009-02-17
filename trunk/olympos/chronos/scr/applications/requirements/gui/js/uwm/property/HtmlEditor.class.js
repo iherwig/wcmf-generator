@@ -11,6 +11,15 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class An HTML Editor for use in Property View.
+ * 
+ * <p>Additional feature: On pressing Shift-Space, an inline autocomplete helper is invoked.</p>
+ * 
+ * @extends Ext.form.HtmlEditor
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.HtmlEditor = function(config) {
 	var self = this;
 	
