@@ -1,0 +1,382 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Chronos Web Modeler Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="Figure.class.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>Figure.class.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'Figure.class.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="uwm/diagram/Figure.html">uwm.diagram.Figure</a></b></td>
+    <td>Graphical representation of a <a href="../../uwm/model/ModelObject.html#">uwm.model.ModelObject</a> on a <a href="../../uwm/diagram/Diagram.html#">uwm.diagram.Diagram</a>.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */</span>
+Ext.namespace(<span class="literal">"uwm.diagram"</span>);
+
+<span class="comment">/**
+ * <span class="attrib">@class</span> Graphical representation of a {<span class="attrib">@link</span> uwm.model.ModelObject} on a {<span class="attrib">@link</span> uwm.diagram.Diagram}.
+ * 
+ * <span class="attrib">@extends</span> uwm.model.ModelNode
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> {uwm.model.ModelNodeClass} modelNodeClass The instance of {<span class="attrib">@link</span> uwm.diagram.FigureClass}.
+ */</span>
+uwm.diagram.Figure = <span class="reserved">function</span>(modelNodeClass) {
+	uwm.model.ModelNode.call(<span class="reserved">this</span>, modelNodeClass);
+}
+
+Ext.extend(uwm.diagram.Figure, uwm.model.ModelNode);
+
+<span class="comment">/**
+ * Creates a graphical representation of a new ModelObject on the associated Diagram.
+ *
+ * <span class="attrib">@param</span> {uwm.diagram.Diagram} diagram The Diagram to create the ModelObject on.
+ * <span class="attrib">@param</span> {uwm.model.ModelClass} modelClass The ModelClass of the ModelObject to create.
+ * <span class="attrib">@param</span> {int} x X position where to create the Figure.
+ * <span class="attrib">@param</span> {int} y Y position where to create the Figure.
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.createNewObject = <span class="reserved">function</span>(diagram, modelClass, x, y) {
+	<span class="comment">/**
+	 * The associated Diagram.
+	 *
+	 * <span class="attrib">@private</span>
+	 * <span class="attrib">@type</span> uwm.diagram.Diagram
+	 */</span>
+	<span class="reserved">this</span>.diagram = diagram;
+	
+	<span class="comment">/**
+	 * The associated ModelObject.
+	 *
+	 * <span class="attrib">@private</span>
+	 * <span class="attrib">@type</span> uwm.model.ModelObject
+	 */</span>
+	<span class="reserved">this</span>.modelObject = eval(<span class="literal">"new "</span> + modelClass.getInstanceClassName() + <span class="literal">"(modelClass)"</span>);
+	
+	var workflow = diagram.getWorkflow();
+	var compartment = workflow.getBestCompartmentFigure(x, y);
+	
+	<span class="comment">/**
+	 * The graphical (draw2d) figure.
+	 *
+	 * <span class="attrib">@private</span>
+	 * <span class="attrib">@type</span> uwm.graphics.figure.BaseFigure
+	 */</span>
+	<span class="reserved">this</span>.graphics = <span class="reserved">this</span>.getFigure(modelClass, modelClass.getDefaultLabel());
+	
+	workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, <span class="reserved">this</span>.graphics, x, y, compartment));
+}
+
+<span class="comment">/**
+ * Creates a graphical representation of an existing ModelObject on the associated Diagram.
+ *
+ * <span class="attrib">@param</span> {uwm.model.ModelObject} modelObject The ModelObject to create a figure for.
+ * <span class="attrib">@param</span> {int} x X position where to create the Figure.
+ * <span class="attrib">@param</span> {int} y Y position where to create the Figure.
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(modelObject, x, y) {
+	<span class="reserved">this</span>.modelObject = modelObject;
+	
+	var workflow = <span class="reserved">this</span>.diagram.getWorkflow();
+	
+	var compartment = workflow.getBestCompartmentFigure(x, y);
+	
+	<span class="reserved">this</span>.graphics = <span class="reserved">this</span>.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
+	
+	workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, <span class="reserved">this</span>.graphics, x, y, compartment));
+}
+
+uwm.diagram.Figure.<span class="reserved">prototype</span>.load = <span class="reserved">function</span>(modelObject, diagram) {
+	<span class="reserved">this</span>.modelObject = modelObject;
+	<span class="reserved">this</span>.diagram = diagram;
+	
+	var x = <span class="reserved">this</span>.getPositionX();
+	var y = <span class="reserved">this</span>.getPositionY();
+	
+	var workflow = diagram.getWorkflow();
+	var compartment = workflow.getBestCompartmentFigure(x, y);
+	
+	<span class="reserved">this</span>.graphics = <span class="reserved">this</span>.getFigure(modelObject.getModelNodeClass(), modelObject.getLabel());
+	<span class="reserved">this</span>.graphics.setDimension(<span class="reserved">this</span>.getWidth(), <span class="reserved">this</span>.getHeight());
+	
+	workflow.getCommandStack().execute(new draw2d.CommandAdd(workflow, <span class="reserved">this</span>.graphics, x, y, compartment));
+}
+
+<span class="comment">/**
+ * Creates a new ModelObject.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {uwm.model.ModelClass} The ModelClass to create a ModelObject from.
+ * <span class="attrib">@param</span> {String} label Label of the new ModelObject.
+ * <span class="attrib">@return</span> The created ModelObject.
+ * <span class="attrib">@type</span> uwm.model.ModelObject
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.getFigure = <span class="reserved">function</span>(modelClass, label) {
+	<span class="reserved">return</span> modelClass.getGraphics(label, <span class="reserved">this</span>);
+}
+
+<span class="comment">/**
+ * Returns the ModelObject associated with this Figure.
+ *
+ * <span class="attrib">@return</span> The ModelObject associated with this Figure.
+ * <span class="attrib">@type</span> uwm.model.ModelObject
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.getModelObject = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.modelObject;
+}
+
+<span class="comment">/**
+ * Returns the Diagram associated with this Figure.
+ *
+ * <span class="attrib">@return</span> The Diagram associated with this Figure.
+ * <span class="attrib">@type</span> uwm.diagram.Diagram
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.getDiagram = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.diagram;
+}
+
+<span class="comment">/**
+ * Returns the graphics associated with this Figure.
+ *
+ * <span class="attrib">@return</span> The graphics associated with this Figure.
+ * <span class="attrib">@type</span> uwm.graphics.figure.BaseFigure
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.getGraphics = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.graphics;
+}
+
+uwm.diagram.Figure.<span class="reserved">prototype</span>.getPositionX = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> parseInt(<span class="reserved">this</span>.data.PositionX);
+}
+
+uwm.diagram.Figure.<span class="reserved">prototype</span>.getPositionY = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> parseInt(<span class="reserved">this</span>.data.PositionY);
+}
+
+uwm.diagram.Figure.<span class="reserved">prototype</span>.getWidth = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> parseInt(<span class="reserved">this</span>.data.Width);
+}
+
+uwm.diagram.Figure.<span class="reserved">prototype</span>.getHeight = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> parseInt(<span class="reserved">this</span>.data.Height);
+}
+
+uwm.diagram.Figure.<span class="reserved">prototype</span>.remove = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.diagram.getWorkflow().getCommandStack().execute(new draw2d.CommandDelete(<span class="reserved">this</span>.graphics));
+}
+
+<span class="comment">/**
+ * Shows the associated ModelObject in Model Tree.
+ *
+ * <span class="attrib">@see</span> uwm.modeltree.ModelTree
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.showInModelTree = <span class="reserved">function</span>() {
+	uwm.modeltree.ModelTree.getInstance().markNodeByOid(<span class="reserved">this</span>.getModelObject().getOid());
+}
+
+uwm.diagram.Figure.<span class="reserved">prototype</span>.gridAvailable = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> uwm.objectgrid.ObjectGridContainer.getInstance().isGridAvailable(<span class="reserved">this</span>.getModelObject());
+}
+
+<span class="comment">/**
+ * Shows the associated ModelObject in Grid.
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.showInGrid = <span class="reserved">function</span>() {
+	uwm.objectgrid.ObjectGridContainer.getInstance().selectRow(<span class="reserved">this</span>.getModelObject());
+}
+
+<span class="comment">/**
+ * Shows the associated ModelObject in Hierarchy Tree.
+ *
+ * <span class="attrib">@see</span> uwm.hierarchytree.HierarchyTree
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.showInHierarchy = <span class="reserved">function</span>() {
+	uwm.hierarchytree.HierarchyTree.getInstance().loadNode(<span class="reserved">this</span>.getModelObject().getOid());
+}
+
+<span class="comment">/**
+ * Deletes this Figure from associated Diagram.
+ *
+ * <span class="attrib">@see</span> uwm.diagram.Diagram
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.deleteFromDiagram = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.remove();
+}
+
+<span class="comment">/**
+ * Deletes this Figure and the associated ModelObject from Model.
+ */</span>
+uwm.diagram.Figure.<span class="reserved">prototype</span>.deleteFromModel = <span class="reserved">function</span>() {
+	uwm.model.ModelContainer.getInstance().deleteByModelNode(<span class="reserved">this</span>.getModelObject());
+}
+
+uwm.diagram.Figure.<span class="reserved">prototype</span>.showHelp = <span class="reserved">function</span>() {
+	uwm.ui.HelpViewer.getInstance().loadUrl(<span class="reserved">this</span>.getModelObject().getModelNodeClass().getHelpUrl());
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+</body>
+</html>

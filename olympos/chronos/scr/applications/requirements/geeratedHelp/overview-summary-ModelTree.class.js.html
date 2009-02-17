@@ -1,0 +1,531 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Chronos Web Modeler Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="ModelTree.class.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>ModelTree.class.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'ModelTree.class.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="uwm/modeltree/ModelTree.html">uwm.modeltree.ModelTree</a></b></td>
+    <td>The Model Tree (lower left view).</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */</span>
+Ext.namespace(<span class="literal">"uwm.modeltree"</span>);
+
+<span class="comment">/**
+ * <span class="attrib">@class</span> The Model Tree (lower left view).
+ *
+ * &lt;p&gt;This tree displays models, packages and contained diagrams and model objects.&lt;/p&gt;
+ *
+ * &lt;p&gt;The Model Tree is a &lt;i&gt;Singleton&lt;/i&gt;.&lt;/p&gt;
+ *
+ * <span class="attrib">@extends</span> Ext.tree.TreePanel
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> {Object} config The configuration object.
+ */</span>
+uwm.modeltree.ModelTree = <span class="reserved">function</span>(config) {
+	<span class="reserved">this</span>.buildContextMenu();
+	
+	uwm.modeltree.ModelTree.superclass.constructor.call(<span class="reserved">this</span>, Ext.apply(<span class="reserved">this</span>, {
+		id: uwm.modeltree.ModelTree.COMPONENT_ID,
+		root: new Ext.tree.AsyncTreeNode({
+			text: <span class="literal">"root"</span>,
+			draggable: false,
+			id: <span class="literal">'root'</span>
+		}),
+		loader: new uwm.modeltree.Loader(),
+		iconCls: <span class="literal">"TreeTab"</span>,
+		rootVisible: false,
+		name: <span class="literal">'Model Tree'</span>,
+		tabTip: <span class="literal">"&lt;b&gt;"</span> + uwm.Dict.translate(<span class="literal">'Model Tree'</span>) + <span class="literal">"&lt;/b&gt;&lt;p&gt;"</span> + uwm.Dict.translate(<span class="literal">'Shows all models, packages, and contained objects.'</span>) + <span class="literal">"&lt;/p&gt;"</span>
+	}, config));
+	
+	<span class="comment">/**
+	 * The instance of ModelTree.
+	 *
+	 * <span class="attrib">@private</span>
+	 * <span class="attrib">@type</span> uwm.modeltree.ModelTree
+	 */</span>
+	uwm.modeltree.ModelTree.instance = <span class="reserved">this</span>;
+	
+	var self = <span class="reserved">this</span>;
+	
+	<span class="reserved">this</span>.on(<span class="literal">"nodedragover"</span>, <span class="reserved">function</span>(dragOverEvent) {
+		self.checkDroppable(dragOverEvent);
+	});
+	<span class="reserved">this</span>.on(<span class="literal">"movenode"</span>, <span class="reserved">function</span>(tree, node, oldParent, newParent, index) {
+		self.associateDroppedNode(tree, node, oldParent, newParent, index);
+	});
+	
+	<span class="reserved">this</span>.createdModels = new Ext.util.MixedCollection();
+	<span class="reserved">this</span>.createdPackages = new Ext.util.MixedCollection();
+	<span class="reserved">this</span>.createdDiagrams = new Ext.util.MixedCollection();
+	
+	<span class="reserved">this</span>.disassociatedNodes = new Ext.util.MixedCollection();
+	
+	var self = <span class="reserved">this</span>;
+	uwm.event.EventBroker.getInstance().addListener({
+		<span class="literal">"create"</span>: <span class="reserved">function</span>(modelObject) {
+			self.handleCreateEvent(modelObject);
+		},
+		<span class="literal">"delete"</span>: <span class="reserved">function</span>(modelObject) {
+			self.handleDeleteEvent(modelObject);
+		},
+		<span class="literal">"changeLabel"</span>: <span class="reserved">function</span>(modelObject, oldLabel) {
+			self.handleChangeLabelEvent(modelObject, oldLabel);
+		},
+		<span class="literal">"associate"</span>: <span class="reserved">function</span>(parentModelObject, childModelObject) {
+			self.handleAssociateEvent(parentModelObject, childModelObject);
+		},
+		<span class="literal">"disassociate"</span>: <span class="reserved">function</span>(parentModelObject, childModelObject) {
+			self.handleDisassociateEvent(parentModelObject, childModelObject);
+		}
+	});
+}
+
+Ext.extend(uwm.modeltree.ModelTree, uwm.objecttree.ObjectTree);
+
+<span class="comment">/**
+ * Registers the not node specific context menu.
+ *
+ * <span class="attrib">@private</span>
+ */</span>
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.render = <span class="reserved">function</span>(container, position) {
+	uwm.modeltree.ModelTree.superclass.render.apply(<span class="reserved">this</span>, arguments);
+	
+	var self = <span class="reserved">this</span>;
+	
+	<span class="reserved">this</span>.el.on(<span class="literal">"contextmenu"</span>, <span class="reserved">function</span>(e, el) {
+		self.showContextMenu(self, e, el);
+	});
+}
+
+<span class="comment">/**
+ * Builds the not node specific context menu.
+ *
+ * <span class="attrib">@private</span>
+ */</span>
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.buildContextMenu = <span class="reserved">function</span>() {
+	var self = <span class="reserved">this</span>;
+	
+	<span class="reserved">this</span>.contextMenu = new Ext.menu.Menu({
+		items: [{
+			text: uwm.Dict.translate(<span class="literal">'Create model'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.createModel();
+				
+			}
+		}]
+	});
+}
+
+<span class="comment">/**
+ * Shows the not node specific context menu.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {uwm.modeltree.ModelTree} self This ModelTree.
+ * <span class="attrib">@param</span> {Ext.EventObject} e The event object.
+ * <span class="attrib">@param</span> {Ext.Element} el The element representing the ModelTree background.
+ */</span>
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.showContextMenu = <span class="reserved">function</span>(self, e, el) {
+	e.preventDefault();
+	
+	self.contextMenu.showAt(e.getXY());
+}
+
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.checkDroppable = <span class="reserved">function</span>(dragOverEvent) {
+	var dropModelNode = dragOverEvent.dropNode.getModelNode();
+	var targetModelNode = dragOverEvent.target.getModelNode();
+	
+	<span class="reserved">if</span> (dragOverEvent.dropNode.parentNode == dragOverEvent.target) {
+		dragOverEvent.cancel = true;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (dropModelNode instanceof uwm.model.builtin.Package) {
+		dragOverEvent.cancel = false;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (targetModelNode instanceof uwm.model.builtin.Model) {
+		<span class="comment">//Only allowed for packages, but they are handled above</span>
+		dragOverEvent.cancel = true;
+	}
+	
+	<span class="reserved">return</span> !dragOverEvent.cancel;
+}
+
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.associateDroppedNode = <span class="reserved">function</span>(tree, node, oldParent, newParent, index) {
+	<span class="reserved">this</span>.disassociatedNodes.add(node.getModelNode().getOid(), newParent);
+	node.getModelNode().disassociate(oldParent.getModelNode())
+}
+
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.handleDisassociateEvent = <span class="reserved">function</span> (parentModelNode, childModelNode) {
+	var newParent = <span class="reserved">this</span>.disassociatedNodes.get(childModelNode.getOid());
+	<span class="reserved">if</span> (newParent) {
+		<span class="reserved">this</span>.disassociatedNodes.remove(newParent);
+		
+		childModelNode.associate(newParent.getModelNode());
+	}
+}
+
+<span class="comment">/**
+ * Creates a new Model.
+ */</span>
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.createModel = <span class="reserved">function</span>() {
+	uwm.model.ModelContainer.getInstance().createModel();
+}
+
+<span class="comment">/**
+ * Marks the given oid in this tree.
+ *
+ * Makes best efforts to find the node, even if it's not currently loaded.
+ *
+ * <span class="attrib">@param</span> {oid} oid The oid to mark.
+ */</span>
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.markNodeByOid = <span class="reserved">function</span>(oid) {
+	var node = null;
+	var currOid = oid;
+	
+	var parents = new Array();
+	
+	var container = uwm.model.ModelContainer.getInstance();
+	
+	do {
+		parents.push(currOid);
+		
+		node = <span class="reserved">this</span>.getNodeById(currOid);
+		
+		<span class="reserved">if</span> (node == null) {
+		
+			var modelObject = container.getByOid(currOid);
+			
+			<span class="reserved">if</span> (modelObject == null) {
+				var self = <span class="reserved">this</span>;
+				container.loadByOid(currOid, <span class="reserved">function</span>() {
+					self.markNodeByOid(oid);
+				});
+				
+				<span class="reserved">return</span>;
+			}
+			
+			var parentOids = modelObject.getParentOids();
+			var goodParent = null;
+			<span class="reserved">for</span> (var i = 0; i &lt; parentOids.length; i++) {
+				goodParent = parentOids[i];
+				var parentUwmClassName = uwm.Util.getUwmClassNameFromOid(goodParent);
+				<span class="reserved">if</span> (parentUwmClassName == <span class="literal">"Package"</span> || parentUwmClassName == <span class="literal">"Model"</span>) {
+					break;
+				}
+			}
+			
+			currOid = goodParent;
+		}
+	}
+	<span class="reserved">while</span> (node == null);
+	
+	<span class="reserved">this</span>.show();
+	
+	<span class="reserved">if</span> (parents.length == 1) {
+		var parentNode = node.parentNode;
+		parentNode.ensureVisible();
+		parentNode.expand();
+		
+		node.select();
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.expandListAsync(parents);
+	}
+}
+
+<span class="comment">/**
+ * Recursively expands all the nodes in &lt;code&gt;parents&lt;/code&gt;.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {Array} parents List of parents to expand, sorted from innermost to outermost.
+ * <span class="attrib">@param</span> {uwm.modeltree.Node} currNode The last expanded node.
+ */</span>
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.expandListAsync = <span class="reserved">function</span>(parents, currNode) {
+	var oid = parents.pop();
+	
+	<span class="reserved">if</span> (parents.length &gt; 0) {
+		<span class="reserved">if</span> (currNode) {
+			currNode.expandChildNodes(false);
+		}
+		
+		var node = <span class="reserved">this</span>.getNodeById(oid);
+		node.ensureVisible();
+		
+		var self = <span class="reserved">this</span>;
+		
+		node.expand(false, true, <span class="reserved">function</span>(currNode) {
+			self.expandListAsync(parents, currNode);
+		});
+	} <span class="reserved">else</span> {
+		var node = <span class="reserved">this</span>.getNodeById(oid);
+		node.ensureVisible();
+		node.select();
+	}
+}
+
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.handleCreateEvent = <span class="reserved">function</span>(modelObject) {
+	<span class="reserved">if</span> (modelObject instanceof uwm.model.builtin.Model) {
+		<span class="reserved">this</span>.createdModels.add(modelObject.getOid(), modelObject);
+	} <span class="reserved">else</span> <span class="reserved">if</span> (modelObject instanceof uwm.model.builtin.Package) {
+		<span class="reserved">this</span>.createdPackages.add(modelObject.getOid(), modelObject);
+	} <span class="reserved">else</span> <span class="reserved">if</span> (modelObject instanceof uwm.diagram.Diagram) {
+		<span class="reserved">this</span>.createdDiagrams.add(modelObject.getOid(), modelObject);
+	}
+}
+
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.handleDeleteEvent = <span class="reserved">function</span>(modelObject) {
+	var node = <span class="reserved">this</span>.getNodeById(modelObject.getOid());
+	
+	<span class="reserved">if</span> (node) {
+		node.remove();
+	}
+}
+
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.handleChangeLabelEvent = <span class="reserved">function</span>(modelObject, oldLabel) {
+	var oid = modelObject.getOid();
+	
+	var createdModel = <span class="reserved">this</span>.createdModels.get(oid);
+	
+	<span class="reserved">if</span> (!createdModel) {
+		var node = <span class="reserved">this</span>.getNodeById(oid);
+		<span class="reserved">if</span> (node) {
+			node.setText(modelObject.getLabel());
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.createdModels.removeKey(oid);
+		
+		var node = new uwm.modeltree.ModelNode({
+			oid: oid,
+			text: modelObject.getLabel(),
+			leaf: true
+		});
+		
+		<span class="reserved">this</span>.getRootNode().appendChild(node);
+	}
+}
+
+uwm.modeltree.ModelTree.<span class="reserved">prototype</span>.handleAssociateEvent = <span class="reserved">function</span>(parentModelObject, childModelObject) {
+	var parentOid = parentModelObject.getOid();
+	
+	var parentNode = <span class="reserved">this</span>.getNodeById(parentOid);
+	<span class="reserved">if</span> (parentNode) {
+		var childNode = null;
+		
+		<span class="reserved">if</span> (childModelObject instanceof uwm.model.builtin.Package &amp;&amp; <span class="reserved">this</span>.createdPackages.get(childModelObject.getOid())) {
+			<span class="reserved">this</span>.createdPackages.remove(childModelObject.getOid());
+			
+			childNode = new uwm.modeltree.PackageNode({
+				oid: childModelObject.getOid(),
+				text: childModelObject.getLabel(),
+			});
+		} <span class="reserved">else</span> <span class="reserved">if</span> (childModelObject instanceof uwm.diagram.Diagram &amp;&amp; <span class="reserved">this</span>.createdDiagrams.get(childModelObject.getOid())) {
+			<span class="reserved">this</span>.createdPackages.remove(childModelObject.getOid());
+			
+			childNode = new uwm.modeltree.DiagramNode({
+				oid: childModelObject.getOid(),
+				text: childModelObject.getLabel()
+			});
+		} <span class="reserved">else</span> <span class="reserved">if</span> (childModelObject instanceof uwm.model.ModelObject) {
+			childNode = new uwm.modeltree.Node({
+				oid: childModelObject.getOid(),
+				text: childModelObject.getLabel(),
+				uwmClassName: childModelObject.getModelNodeClass().getUwmClassName()
+			})
+		}
+		
+		<span class="reserved">if</span> (childNode) {
+			<span class="reserved">if</span> (!parentNode.findChild(<span class="literal">"id"</span>, childNode.id)) {
+				<span class="reserved">if</span> (parentNode.isExpanded()) {
+					parentNode.appendChild(childNode);
+					childNode.ensureVisible();
+				} <span class="reserved">else</span> {
+					parentNode.expand();
+				}
+			}
+		}
+	}
+}
+
+<span class="comment">/**
+ * Returns the instance of ModelTree.
+ *
+ * <span class="attrib">@return</span> The instance of ModelTree.
+ * <span class="attrib">@type</span> uwm.modeltree.ModelTree
+ */</span>
+uwm.modeltree.ModelTree.getInstance = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> uwm.modeltree.ModelTree.instance;
+}
+
+<span class="comment">/**
+ * ID of the ModelTree component.
+ * <span class="attrib">@type</span> String
+ */</span>
+uwm.modeltree.ModelTree.COMPONENT_ID = <span class="literal">"uwm.modeltree.ModelTree.ID"</span>;
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+</body>
+</html>
