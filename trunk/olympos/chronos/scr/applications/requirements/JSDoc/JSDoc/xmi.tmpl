@@ -72,7 +72,7 @@
                   <Foundation.Core.Generalization 
                       xmi.idref="<TMPL_VAR NAME=specializationid >"/>
                 </Foundation.Core.GeneralizableElement.specialization>
-                </TMPL_LOOP>
+  				</TMPL_LOOP>
                 <!-- END REFERENCE TO INHERITANCE -->
 
                 <Foundation.Core.Classifier.feature>
@@ -234,14 +234,14 @@
           <Foundation.Core.ModelElement.namespace>
             <Foundation.Core.Namespace xmi.idref="xmi.1"/>
           </Foundation.Core.ModelElement.namespace>
-          <Foundation.Core.Generalization.child>
-            <Foundation.Core.GeneralizableElement 
-                xmi.idref="<TMPL_VAR NAME=generalizationchild >"/>
-          </Foundation.Core.Generalization.child>
           <Foundation.Core.Generalization.parent>
             <Foundation.Core.GeneralizableElement 
-                xmi.idref="<TMPL_VAR NAME=generalizationparent >"/>
+                xmi.idref="<TMPL_VAR NAME=generalizationchild >"/>
           </Foundation.Core.Generalization.parent>
+          <Foundation.Core.Generalization.child>
+            <Foundation.Core.GeneralizableElement 
+                xmi.idref="<TMPL_VAR NAME=generalizationparent >"/>
+          </Foundation.Core.Generalization.child>
         </Foundation.Core.Generalization>
         <!-- END GENERALIZATION --> 
       </TMPL_LOOP>
