@@ -22,7 +22,8 @@ Ext.namespace("uwm.diagram");
 uwm.diagram.DiagramTab = function(config) {
 	uwm.diagram.DiagramTab.superclass.constructor.call(this, Ext.apply(this, {
 		elements: "body",
-		closable: true
+		closable: true,
+		isHelpViewer: false
 	}, config));
 	
 	/**

@@ -13,7 +13,7 @@ Ext.namespace("uwm");
 
 /**
  * @class The main class of the application.
- * 
+ *
  * @constructor
  */
 uwm.Uwm = function() {
@@ -66,14 +66,18 @@ uwm.Uwm.prototype.startSession = function(sid, lang) {
 uwm.Uwm.prototype.switchWorkbench = function(newWorkbench) {
 	switch (newWorkbench) {
 		case "admin":
-			uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().saveScrollPosition();
+			if (!(uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().isHelpViewer)) {
+				uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().saveScrollPosition();
+			}
 			this.viewport.getLayout().setActiveItem(1);
 			break;
 			
 		case "default":
 		default:
 			this.viewport.getLayout().setActiveItem(0);
-			uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().restoreScrollPosition();
+			if (!(uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().isHelpViewer)) {
+				uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().restoreScrollPosition();
+			}
 			break;
 	}
 }
