@@ -1,0 +1,428 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Chronos Web Modeler Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="ModelContainer.class.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>ModelContainer.class.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'ModelContainer.class.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="uwm/model/ModelContainer.html">uwm.model.ModelContainer</a></b></td>
+    <td>Container for all ModelNodes.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */</span>
+Ext.namespace(<span class="literal">"uwm.model"</span>);
+
+<span class="comment">/**
+ * <span class="attrib">@class</span> Container for all ModelNodes.
+ * 
+ * &lt;p&gt;This class manages all loading and event fireing for Model Nodes.&lt;/p&gt;
+ * 
+ * &lt;p&gt;TODO: no ModelNode is ever deleted from this container.&lt;/p&gt;
+ * 
+ * <span class="attrib">@see</span> uwm.model.ModelNode
+ * <span class="attrib">@see</span> uwm.model.ModelNodeClass
+ * <span class="attrib">@constructor</span>
+ */</span>
+uwm.model.ModelContainer = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.items = new Ext.util.MixedCollection();
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.getByOid = <span class="reserved">function</span>(oid) {
+	<span class="reserved">return</span> <span class="reserved">this</span>.items.get(oid);
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.createByDisplayResult = <span class="reserved">function</span>(displayResult) {
+	var firstModelNode = null;
+	var node = displayResult.node;
+	
+	var furtherElements = true;
+	
+	var outstandingNodes = new Ext.util.MixedCollection();
+	
+	<span class="reserved">while</span> (furtherElements) {
+		var uwmClassName = node.type;
+		var oid = node.oid;
+		
+		var newModelNode = <span class="reserved">this</span>.getNode(uwmClassName, oid);
+		oid = newModelNode.oid;
+		
+		newModelNode.initByDisplayResult(node);
+		
+		<span class="reserved">this</span>.items.add(oid, newModelNode);
+		
+		<span class="reserved">if</span> (!firstModelNode) {
+			firstModelNode = newModelNode;
+		}
+
+		<span class="reserved">for</span> (var i in node) {
+			<span class="reserved">if</span> (i != <span class="literal">"values"</span> &amp;&amp; i != <span class="literal">"oid"</span> &amp;&amp; i != <span class="literal">"type"</span> &amp;&amp; i != <span class="literal">"properties"</span> &amp;&amp; !(node[i] instanceof Function)) {
+				var container = node[i];
+				
+				<span class="reserved">for</span> (var j = 0; j &lt; container.length; j++) {
+					outstandingNodes.add(container[j].oid, container[j]);
+				}
+			}
+		}
+		
+		outstandingNodes.removeKey(oid);
+		
+		furtherElements = outstandingNodes.getCount() &gt; 0;
+		
+		node = outstandingNodes.first();
+	}
+	<span class="reserved">return</span> firstModelNode;
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.createByClassAndOid = <span class="reserved">function</span>(uwmClassName, oid) {
+	var newModelNode = <span class="reserved">this</span>.getNode(uwmClassName, oid);
+	oid = newModelNode.oid;
+	
+	newModelNode.initByOid(oid);
+	
+	<span class="reserved">this</span>.items.add(oid, newModelNode);
+	
+	<span class="reserved">return</span> newModelNode;
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.createByClassAndNameAndOid = <span class="reserved">function</span>(uwmClassName, name, oid) {
+	var newModelNode = <span class="reserved">this</span>.getNode(uwmClassName, oid);
+	oid = newModelNode.oid;
+	
+	newModelNode.initByNameAndOid(name, oid);
+	
+	<span class="reserved">this</span>.items.add(oid, newModelNode);
+	
+	<span class="reserved">return</span> newModelNode;
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.createModel = <span class="reserved">function</span>() {
+	var self = <span class="reserved">this</span>;
+	
+	uwm.persistency.Persistency.getInstance().newObject(<span class="literal">"Model"</span>, <span class="reserved">function</span>(request, data) {
+		self.handleCreatedModel(data.oid);
+	});
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.handleCreatedModel = <span class="reserved">function</span>(oid) {
+	var newModelNode = <span class="reserved">this</span>.getNode(<span class="literal">"Model"</span>, oid);
+	oid = newModelNode.oid;
+	
+	<span class="reserved">this</span>.items.add(oid, newModelNode);
+	
+	uwm.event.EventBroker.getInstance().fireEvent(<span class="literal">"create"</span>, newModelNode);
+	
+	newModelNode.setDefaultLabel();
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.createPackage = <span class="reserved">function</span>(parentModelNode) {
+	var self = <span class="reserved">this</span>;
+	
+	uwm.persistency.Persistency.getInstance().newObject(<span class="literal">"Package"</span>, <span class="reserved">function</span>(request, data) {
+		self.handleCreatedPackage(data.oid, parentModelNode);
+	});
+	
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.handleCreatedPackage = <span class="reserved">function</span>(oid, parentModelNode) {
+	var newModelNode = <span class="reserved">this</span>.getNode(<span class="literal">"Package"</span>, oid);
+	oid = newModelNode.oid;
+	
+	<span class="reserved">this</span>.items.add(oid, newModelNode);
+	
+	uwm.event.EventBroker.getInstance().fireEvent(<span class="literal">"create"</span>, newModelNode);
+	
+	newModelNode.setDefaultLabel();
+	
+	newModelNode.associate(parentModelNode);
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.createDiagram = <span class="reserved">function</span>(parentModelNode) {
+	var self = <span class="reserved">this</span>;
+	
+	uwm.persistency.Persistency.getInstance().newObject(<span class="literal">"Diagram"</span>, <span class="reserved">function</span>(request, data) {
+		self.handleCreatedDiagram(data.oid, parentModelNode);
+	});
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.handleCreatedDiagram = <span class="reserved">function</span>(oid, parentModelNode) {
+	var newModelNode = <span class="reserved">this</span>.getNode(<span class="literal">"Diagram"</span>, oid);
+	oid = newModelNode.oid;
+	
+	<span class="reserved">this</span>.items.add(oid, newModelNode);
+	
+	newModelNode.containedPackage = parentModelNode;
+	
+	uwm.event.EventBroker.getInstance().fireEvent(<span class="literal">"create"</span>, newModelNode);
+	
+	newModelNode.setDefaultLabel();
+	
+	newModelNode.associate(parentModelNode);
+	
+	uwm.diagram.DiagramContainer.getInstance().loadDiagram(newModelNode);
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.createFigure = <span class="reserved">function</span>(diagramModelNode, modelObject) {
+	var self = <span class="reserved">this</span>;
+	
+	uwm.persistency.Persistency.getInstance().newObject(<span class="literal">"Figure"</span>, <span class="reserved">function</span>(request, data) {
+		self.handleCreatedFigure(data.oid, diagramModelNode, modelObject);
+	});
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.handleCreatedFigure = <span class="reserved">function</span>(oid, diagramModelNode, modelObject) {
+	var newFigure = <span class="reserved">this</span>.getNode(<span class="literal">"Figure"</span>, oid);
+	oid = newFigure.oid;
+	
+	<span class="reserved">this</span>.items.add(oid, newFigure);
+	
+	newFigure.diagram = diagramModelNode;
+	
+	uwm.event.EventBroker.getInstance().fireEvent(<span class="literal">"create"</span>, newFigure);
+	
+	newFigure.associate(diagramModelNode);
+	
+	<span class="reserved">if</span> (modelObject) {
+		newFigure.associate(modelObject);
+	}
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.createModelObject = <span class="reserved">function</span>(uwmClassName, packageNode, figureNode) {
+	var self = <span class="reserved">this</span>;
+	
+	uwm.persistency.Persistency.getInstance().newObject(uwmClassName, <span class="reserved">function</span>(request, data) {
+		self.handleCreatedModelObject(data.oid, uwmClassName, packageNode, figureNode);
+	});
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.handleCreatedModelObject = <span class="reserved">function</span>(oid, uwmClassName, packageNode, figureNode) {
+	var newObject = <span class="reserved">this</span>.getNode(uwmClassName, oid);
+	oid = newObject.oid;
+	
+	<span class="reserved">this</span>.items.add(oid, newObject);
+	
+	uwm.event.EventBroker.getInstance().fireEvent(<span class="literal">"create"</span>, newObject);
+	
+	newObject.setDefaultLabel();
+	
+	<span class="reserved">if</span> (packageNode) {
+		newObject.associate(packageNode);
+	}
+	
+	<span class="reserved">if</span> (figureNode) {
+		figureNode.associate(newObject);
+	}
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.loadByOid = <span class="reserved">function</span>(oid, callback, depth) {
+	var self = <span class="reserved">this</span>;
+	
+	<span class="reserved">if</span> (!depth) {
+		depth = 0;
+	}
+	
+	uwm.persistency.Persistency.getInstance().display(oid, depth, <span class="reserved">function</span>(request, data) {
+		callback(self.createByDisplayResult(data));
+	});
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.deleteByModelNode = <span class="reserved">function</span>(modelNode) {
+	modelNode.markDeleted();
+
+	uwm.persistency.Persistency.getInstance().deleteObject(modelNode.getOid(), <span class="reserved">function</span>(request, data) {
+		uwm.event.EventBroker.getInstance().fireEvent(<span class="literal">"delete"</span>, modelNode);
+	});
+}
+
+uwm.model.ModelContainer.<span class="reserved">prototype</span>.getNode = <span class="reserved">function</span>(uwmClassName, oid) {
+	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwmClassName);
+
+	oid = modelClass.demaskOid(oid);
+	
+	var newModelNode = <span class="reserved">this</span>.items.get(oid);
+	
+	<span class="reserved">if</span> (!newModelNode) {
+		var realModelClass = modelClass.getRealModelClass();
+		var newModelNode = eval(<span class="literal">"new "</span> + modelClass.getInstanceClassName() + <span class="literal">"(realModelClass)"</span>);
+		newModelNode.oid = oid;
+	}
+	
+	<span class="reserved">return</span> newModelNode;
+}
+
+uwm.model.ModelContainer.getInstance = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!uwm.model.ModelContainer.instance) {
+		uwm.model.ModelContainer.instance = new uwm.model.ModelContainer();
+	}
+	
+	<span class="reserved">return</span> uwm.model.ModelContainer.instance;
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+</body>
+</html>

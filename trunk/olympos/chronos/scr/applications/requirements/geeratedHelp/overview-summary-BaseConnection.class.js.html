@@ -1,0 +1,332 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Chronos Web Modeler Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="BaseConnection.class.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>BaseConnection.class.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'BaseConnection.class.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="uwm/graphics/connection/BaseConnection.html">uwm.graphics.connection.BaseConnection</a></b></td>
+    <td>The default connection of UWM.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */</span>
+Ext.namespace(<span class="literal">"uwm.graphics.connection"</span>);
+
+<span class="comment">/**
+ * <span class="attrib">@class</span> The default connection of UWM.
+ * 
+ * <span class="attrib">@extends</span> draw2d.Connection
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> {String} label Label of this connection.
+ * <span class="attrib">@param</span> {Array} decorators Array of 0..2 draw2d.ConnectionDecorator objects.
+ */</span>
+uwm.graphics.connection.BaseConnection = <span class="reserved">function</span>(label, decorators) {
+	draw2d.Connection.call(<span class="reserved">this</span>);
+	
+	<span class="reserved">if</span> (decorators.source) {
+		<span class="reserved">this</span>.setSourceDecorator(decorators.source);
+	}
+	<span class="reserved">if</span> (decorators.target) {
+		<span class="reserved">this</span>.setTargetDecorator(decorators.target);
+	}
+	
+	<span class="reserved">this</span>.setSourceAnchor(new draw2d.ChopboxConnectionAnchor(<span class="reserved">this</span>));
+	<span class="reserved">this</span>.setTargetAnchor(new draw2d.ChopboxConnectionAnchor(<span class="reserved">this</span>));
+	<span class="reserved">this</span>.setRouter(new draw2d.ManhattanConnectionRouter());
+	
+	<span class="reserved">this</span>.stroke = jsgStroke.DOTTED;
+	
+	<span class="reserved">if</span> (label) {
+		<span class="comment">/**
+		 * The label of this Connection.
+		 * 
+		 * <span class="attrib">@private</span>
+		 * <span class="attrib">@type</span> draw2d.Label
+		 */</span>
+		<span class="reserved">this</span>.label = new draw2d.Label(label);
+		<span class="reserved">this</span>.label.setBackgroundColor(new draw2d.Color(255, 255, 255));
+		
+		<span class="reserved">this</span>.createHTMLElement();
+		<span class="reserved">this</span>.html = <span class="reserved">this</span>.getHTMLElement();
+		
+		<span class="reserved">this</span>.addFigure(<span class="reserved">this</span>.label, new uwm.graphics.connection.MidpointLocator(<span class="reserved">this</span>));
+	}
+	
+	<span class="reserved">this</span>.setDeleteable(true);
+	
+	<span class="reserved">this</span>.buildContextMenu();
+}
+
+Ext.extend(uwm.graphics.connection.BaseConnection, draw2d.Connection);
+
+<span class="comment">/**
+ * Type identifier of this class.
+ */</span>
+uwm.graphics.connection.BaseConnection.<span class="reserved">prototype</span>.type = <span class="literal">"uwm.graphics.connection.BaseConnection"</span>;
+
+<span class="comment">/**
+ * Initiates this connection.
+ * 
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {uwm.diagram.UwmWorkflow} workflow The workflow containing this connection.
+ */</span>
+uwm.graphics.connection.BaseConnection.<span class="reserved">prototype</span>.setWorkflow = <span class="reserved">function</span>(workflow) {
+	draw2d.Connection.<span class="reserved">prototype</span>.setWorkflow.call(<span class="reserved">this</span>, workflow);
+	
+	var htmlElement = <span class="reserved">this</span>.getHTMLElement();
+	<span class="reserved">if</span> (htmlElement) {
+	
+		var contextMenu = <span class="reserved">this</span>.uwmContextMenu;
+		var self = <span class="reserved">this</span>;
+		
+		<span class="reserved">this</span>.tmpContextMenu = <span class="reserved">function</span>(e) {
+			<span class="comment">//var position = workflow.getDiagram().getContextMenuPosition(e.xy[0], e.xy[1]);</span>
+			var position = e.getXY();
+			
+			contextMenu.showAt(position);
+			
+			e.preventDefault();
+			
+			<span class="reserved">return</span> false;
+		}
+		
+		var event = <span class="literal">"mousedown"</span>;
+		<span class="reserved">if</span> (Ext.isWindows) {
+			event = <span class="literal">"mouseup"</span>;
+		}
+		Ext.fly(htmlElement).on(event, <span class="reserved">this</span>.tmpContextMenu);
+		
+	}
+}
+
+<span class="comment">/**
+ * Returns the label object of this connection.
+ * 
+ * <span class="attrib">@return</span> The label object of this connection.
+ * <span class="attrib">@type</span> draw2d.Label
+ */</span>
+uwm.graphics.connection.BaseConnection.<span class="reserved">prototype</span>.getLabel = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.label;
+}
+
+<span class="comment">/**
+ * Builds the context menu for this connection.
+ * 
+ * <span class="attrib">@private</span>
+ */</span>
+uwm.graphics.connection.BaseConnection.<span class="reserved">prototype</span>.buildContextMenu = <span class="reserved">function</span>() {
+	var self = <span class="reserved">this</span>;
+	
+	<span class="comment">/**
+	 * The context menu for this connection.
+	 * 
+	 * <span class="attrib">@private</span>
+	 * <span class="attrib">@type</span> Ext.menu.Menu
+	 */</span>
+	<span class="reserved">this</span>.uwmContextMenu = new Ext.menu.Menu({
+		items: [<span class="comment">/*new Ext.menu.Item({
+			text: "Delete from diagram",
+			handler: function(item, e) {
+				self.deleteFromDiagram(item, e);
+			}
+		}),*/</span> new Ext.menu.Item({
+			text: <span class="literal">"Delete from model"</span>,
+			handler: <span class="reserved">function</span>(item, e) {
+				self.deleteFromModel(item, e);
+			}
+		})]
+	});
+}
+
+<span class="comment">/**
+ * Handler for "Delete from diagram" context menu entry.
+ * 
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {Ext.menu.Item} item The selected menu item.
+ * <span class="attrib">@param</span> {Ext.EventObject} e The Ext Event.
+ */</span>
+uwm.graphics.connection.BaseConnection.<span class="reserved">prototype</span>.deleteFromDiagram = <span class="reserved">function</span>(item, e) {
+	alert(<span class="literal">"TODO: Delete connection from diagram"</span>);
+	<span class="comment">//uwm.data.currentDiagram.workflow.getCommandStack().execute(new draw2d.CommandDelete(connection));</span>
+}
+
+<span class="comment">/**
+ * Handler for "Delete from model" context menu entry.
+ * 
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {Ext.menu.Item} item The selected menu item.
+ * <span class="attrib">@param</span> {Ext.EventObject} e The Ext Event.
+ */</span>
+uwm.graphics.connection.BaseConnection.<span class="reserved">prototype</span>.deleteFromModel = <span class="reserved">function</span>(item, e) {
+	<span class="reserved">this</span>.getWorkflow().getCommandStack().execute(new draw2d.CommandDelete(<span class="reserved">this</span>));
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+</body>
+</html>

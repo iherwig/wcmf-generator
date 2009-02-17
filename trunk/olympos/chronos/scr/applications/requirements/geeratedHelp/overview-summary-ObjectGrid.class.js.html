@@ -1,0 +1,339 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Chronos Web Modeler Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="ObjectGrid.class.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>ObjectGrid.class.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'ObjectGrid.class.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="uwm/objectgrid/ObjectGrid.html">uwm.objectgrid.ObjectGrid</a></b></td>
+    <td>A list of all objects of one type in a selected scope.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */</span>
+Ext.namespace(<span class="literal">"uwm.objectgrid"</span>);
+
+<span class="comment">/**
+ * <span class="attrib">@class</span> A list of all objects of one type in a selected scope.
+ * 
+ * <span class="attrib">@extends</span> Ext.grid.GridPanel
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> {Object} config The configuration object.
+ */</span>
+uwm.objectgrid.ObjectGrid = <span class="reserved">function</span>(config) {
+	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(config.uwmClassName);
+	
+	uwm.objectgrid.ObjectGrid.superclass.constructor.call(<span class="reserved">this</span>, Ext.apply(<span class="reserved">this</span>, {
+		layout: <span class="literal">"fit"</span>,
+		enableDragDrop: true,
+		selModel: new Ext.grid.RowSelectionModel({
+			singleSelect: true
+		}),
+		iconCls: modelClass.getGridTabIconClass(),
+		tabTip: modelClass.getGridTabTip(),
+		columns: modelClass.getGridColumns(),
+		store: new Ext.data.SimpleStore({
+			id: <span class="literal">"oid"</span>,
+			fields: modelClass.getGridFields()
+		})
+	}, config));
+	
+	<span class="reserved">this</span>.uwmClassName = config.uwmClassName;
+	
+	<span class="reserved">this</span>.buildContextMenu();
+	
+	var self = <span class="reserved">this</span>;
+	
+	<span class="reserved">this</span>.on(<span class="literal">"cellclick"</span>, <span class="reserved">function</span>(grid, rowIndex, columnIndex, e) {
+		self.showProperties(grid, rowIndex, columnIndex, e);
+	});
+	
+	<span class="reserved">this</span>.on(<span class="literal">"rowcontextmenu"</span>, <span class="reserved">function</span>(grid, rowIndex, e) {
+		self.showContextMenu(grid, rowIndex, e);
+	});
+	
+	<span class="reserved">this</span>.on(<span class="literal">"afterlayout"</span>, <span class="reserved">this</span>.showInfoMask);
+	
+	<span class="reserved">this</span>.on(<span class="literal">'show'</span>, <span class="reserved">function</span>() {
+		uwm.ui.ExistingContentContainer.getInstance().showPanel(self);
+	});
+	
+	<span class="reserved">this</span>.wasActive = false;
+	
+	uwm.objectgrid.ObjectGridContainer.getInstance().registerGrid(<span class="reserved">this</span>);
+}
+
+Ext.extend(uwm.objectgrid.ObjectGrid, Ext.grid.GridPanel);
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.showInfoMask = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.wasActive) {
+		<span class="reserved">this</span>.infoMask = new uwm.ui.InfoMask(<span class="reserved">this</span>.body, {
+			msg: uwm.Dict.translate(<span class="literal">'Shows all objects within selected scope. To select a scope, select the &lt;i&gt;Model Tree&lt;/i&gt;, right-click on a Model or Package and select &amp;quot;Select as grid scope&amp;quot;.'</span>)
+		});
+		<span class="reserved">this</span>.infoMask.show();
+	}
+	<span class="reserved">this</span>.un(<span class="literal">"afterlayout"</span>, <span class="reserved">this</span>.showInfoMask);
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.hideInfoMask = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.infoMask) {
+		<span class="reserved">this</span>.infoMask.hide();
+	}
+	
+	<span class="reserved">this</span>.wasActive = true;
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.buildContextMenu = <span class="reserved">function</span>() {
+	var self = <span class="reserved">this</span>;
+	
+	<span class="reserved">this</span>.contextMenu = new Ext.menu.Menu({
+		items: [new Ext.menu.Item({
+			id: uwm.objectgrid.ObjectGrid.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
+			text: uwm.Dict.translate(<span class="literal">'Show in diagram'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.showInDiagram(item, e);
+			},
+		}), new Ext.menu.Item({
+			text: uwm.Dict.translate(<span class="literal">'Show in model tree'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.showInModelTree(item, e);
+			}
+		}), new Ext.menu.Item({
+			text: uwm.Dict.translate(<span class="literal">'Show in hierarchy'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.showInHierarchy(item, e);
+			}
+		}), <span class="literal">"-"</span>, {
+			text: uwm.Dict.translate(<span class="literal">'Delete from model'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.deleteFromModel(item, e);
+			}
+		}]
+	});
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.showContextMenu = <span class="reserved">function</span>(grid, rowIndex, e) {
+	var showInDiagram = <span class="reserved">this</span>.contextMenu.items.get(uwm.objectgrid.ObjectGrid.CONTEXTMENU_SHOW_IN_DIAGRAM_ID);
+	
+	<span class="reserved">this</span>.contextMenu.rowIndex = rowIndex;
+	
+	showInDiagram.setDisabled(!<span class="reserved">this</span>.containedInCurrentDiagram());
+	
+	<span class="reserved">this</span>.contextMenu.showAt([e.getXY()[0] + 2, e.getXY()[1] + 2]);
+	
+	e.preventDefault();
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.getUwmClassName = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.uwmClassName;
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.getSelectedModelObject = <span class="reserved">function</span>() {
+	var oid = <span class="reserved">this</span>.getStore().getAt(<span class="reserved">this</span>.contextMenu.rowIndex).get(<span class="literal">"oid"</span>);
+	
+	<span class="reserved">return</span> uwm.model.ModelContainer.getInstance().getByOid(oid);
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.showProperties = <span class="reserved">function</span>(grid, rowIndex, columnIndex, e) {
+	var oid = <span class="reserved">this</span>.getStore().getAt(rowIndex).get(<span class="literal">"oid"</span>);
+	var modelObject = uwm.model.ModelContainer.getInstance().getByOid(oid);
+	
+	uwm.property.PropertyContainer.getInstance().showProperty(modelObject);
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.containedInCurrentDiagram = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> uwm.diagram.DiagramContainer.getInstance().isModelObjectContainedInCurrentDiagram(<span class="reserved">this</span>.getSelectedModelObject());
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.showInDiagram = <span class="reserved">function</span>(item, e) {
+	uwm.diagram.DiagramContainer.getInstance().getCurrentDiagram().scrollToObject(<span class="reserved">this</span>.getSelectedModelObject());
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.showInModelTree = <span class="reserved">function</span>(item, e) {
+	uwm.modeltree.ModelTree.getInstance().markNodeByOid(<span class="reserved">this</span>.getSelectedModelObject().getOid());
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.showInHierarchy = <span class="reserved">function</span>(item, e) {
+	uwm.hierarchytree.HierarchyTree.getInstance().loadNode(<span class="reserved">this</span>.getSelectedModelObject().getOid());
+}
+
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.deleteFromModel = <span class="reserved">function</span>(item, e) {
+	uwm.model.ModelContainer.getInstance().deleteByModelNode(<span class="reserved">this</span>.getSelectedModelObject());
+}
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.getTreeIcon = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> (<span class="literal">'Figure'</span>+<span class="reserved">this</span>.getUwmClassName());
+}
+uwm.objectgrid.ObjectGrid.<span class="reserved">prototype</span>.getName = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.uwmClassName;
+}
+
+uwm.objectgrid.ObjectGrid.CONTEXTMENU_SHOW_IN_DIAGRAM_ID = <span class="literal">"showInDiagram"</span>;
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Chronos Web Modeler</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+</body>
+</html>
