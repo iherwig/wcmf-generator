@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.objectgrid");
 
+/**
+ * @class A list of all objects of one type in a selected scope.
+ * 
+ * @extends Ext.grid.GridPanel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.objectgrid.ObjectGrid = function(config) {
 	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(config.uwmClassName);
 	

@@ -12,8 +12,11 @@
 Ext.namespace("uwm.hierarchytree");
 
 /**
- * @class 
- * @param {Object} config
+ * @class Represents a connection within the Hierarchy Tree.
+ * 
+ * @extends Ext.tree.TreeNode
+ * @constructor
+ * @param {Object} config The configuration object.
  */
 uwm.hierarchytree.ConnectionNode = function(config) {
 	uwm.hierarchytree.ConnectionNode.superclass.constructor.call(this, Ext.apply(this, {

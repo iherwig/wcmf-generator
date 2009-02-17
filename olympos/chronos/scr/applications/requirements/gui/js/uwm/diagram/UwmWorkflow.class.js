@@ -12,6 +12,7 @@
 /**
  * @class A draw2d Workflow specified for usage in UWM.
  * 
+ * @extends draw2d.Workflow
  * @constructor
  * @param {String}
  *            id id of workflow container DOM element.

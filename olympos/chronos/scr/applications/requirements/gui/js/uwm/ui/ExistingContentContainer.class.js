@@ -11,6 +11,16 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * Graphical container for all Existing Content.
+ *
+ * @extends Ext.Panel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.ui.ExistingContentContainer = function() {
+}
+
 uwm.ui.ExistingContentContainer = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 	

@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class A window allowing downloading of files.
+ * 
+ * @extends Ext.Window
+ * @constructor
+ * @param {Object} config The configuration object.
+ * @config downloadURL The URL to download from.
+ */
 uwm.ui.Download = function(config) {
 	uwm.ui.Download.superclass.constructor.call(this, Ext.apply(this, {
 		layout: "fit",

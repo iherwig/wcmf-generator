@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.diagram");
 
+/**
+ * @class The generated base class of a Diagram.
+ * 
+ * @extends uwm.model.ModelNode
+ * @constructor
+ * @see uwm.diagram.Diagram
+ * @param {uwm.model.ModelNodeClass} modelNodeClass The ModelNodeClass of this ModelNode.
+ */
 uwm.diagram.DiagramBase = function(modelNodeClass) {
 	uwm.diagram.DiagramBase.superclass.constructor.call(this, modelNodeClass);
 }

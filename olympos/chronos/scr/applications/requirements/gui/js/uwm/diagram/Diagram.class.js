@@ -18,6 +18,7 @@ Ext.namespace("uwm.diagram");
  * It contains an auto-layouter, the panel for its tab, and two lists for
  * both the contained figures and the contained Model Objects.</p>
  *
+ * @extends uwm.diagram.DiagramBase
  * @constructor
  * @param {uwm.model.ModelNodeClass} modelNodeClass
  */

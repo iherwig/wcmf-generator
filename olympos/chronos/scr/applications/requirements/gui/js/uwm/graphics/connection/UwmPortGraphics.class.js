@@ -13,7 +13,8 @@ Ext.namespace("uwm.graphics.connection");
 
 /**
  * @class Provides an arrow as UWM port graphics (upper right corner of each graphical figure).
- *
+ * 
+ * @extends draw2d.VectorFigure
  * @constructor
  */
 uwm.graphics.connection.UwmPortGraphics = function(){

@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class A dynamic ComboBox (loading its contents via JSON on request) for use in Property View.
+ * 
+ * @extends Ext.form.ComboBox
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.ComboBox = function(config){
     var self = this;
     

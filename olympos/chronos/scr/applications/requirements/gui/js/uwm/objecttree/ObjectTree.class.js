@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.objecttree");
 
+/**
+ * @class Abstract base class of Model Tree and Hierarchy Tree.
+ * 
+ * @extends Ext.tree.TreePanel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.objecttree.ObjectTree = function(config) {
 
 	uwm.objecttree.ObjectTree.superclass.constructor.call(this, Ext.apply(this, {

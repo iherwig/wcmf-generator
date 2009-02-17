@@ -11,6 +11,15 @@
  */
 Ext.namespace("uwm.model");
 
+/**
+ * @constructor A persisted list entry.
+ * 
+ * <p>This class should not be instantiated, but extended.</p>
+ * 
+ * @extends uwm.model.ModelNode
+ * @constructor
+ * @param {uwm.model.ModelNodeClass} modelNodeClass The ModelNodeClass of this ModelNode.
+ */
 uwm.model.TechnicalObject = function(modelNodeClass) {
 	uwm.model.ModelNode.call(this, modelNodeClass);
 }

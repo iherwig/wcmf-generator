@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class A simple TextArea for use in Property View.
+ * 
+ * @extends Ext.form.TextArea
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.TextArea = function(config) {
 	var self = this;
 

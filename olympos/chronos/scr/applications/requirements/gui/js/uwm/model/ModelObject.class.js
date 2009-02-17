@@ -11,6 +11,16 @@
  */
 Ext.namespace("uwm.model");
 
+/**
+ * @class Parent class of all Model Objects.
+ * 
+ * <p>A Model Object is everything the user can place on a diagram by drag&amp;drop. It also exists as a leaf in Model Tree. It is always persisted.</p>
+ * 
+ * <p>This class should not be instantiated, but extended.</p>
+ * 
+ * @extends uwm.model.ModelNode
+ * @constructor
+ */
 uwm.model.ModelObject = function(modelNodeClass) {
 	uwm.model.ModelNode.call(this, modelNodeClass);
 }

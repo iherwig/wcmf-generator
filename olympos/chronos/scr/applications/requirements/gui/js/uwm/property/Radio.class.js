@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class A radio button for use in Property View.
+ * 
+ * @extends Ext.form.Radio
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.Radio = function(config) {
 	var self = this;
 

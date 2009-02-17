@@ -11,6 +11,12 @@
  */
 Ext.namespace("uwm.diagram");
 
+/**
+ * @class Defines common characteristics of all Figures.
+ * 
+ * @extends uwm.Model.ModelNodeClass
+ * @constructor
+ */
 uwm.diagram.FigureClass = function() {
 	uwm.model.ModelNodeClass.call(this);
 	

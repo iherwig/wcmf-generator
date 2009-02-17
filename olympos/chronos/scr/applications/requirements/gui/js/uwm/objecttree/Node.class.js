@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.objecttree");
 
+/**
+ * @class Abstract base class for all ObjectTree nodes.
+ * 
+ * @extends Ext.tree.AsyncTreeNode
+ * @see uwm.objecttree.ObjectTree
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.objecttree.Node = function(config) {
 	uwm.objecttree.Node.superclass.constructor.call(this, Ext.apply(this, {}, config));
 	

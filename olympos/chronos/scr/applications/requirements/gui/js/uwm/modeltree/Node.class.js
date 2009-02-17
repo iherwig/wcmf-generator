@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.modeltree");
 
+/**
+ * @class A ModelObject representation in Model Tree.
+ * 
+ * @extends uwm.objecttree.ObjectNode
+ * @see uwm.modeltree.ModelTree
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.modeltree.Node = function(config) {
 	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndNameAndOid(config.uwmClassName, config.text, config.oid);
 

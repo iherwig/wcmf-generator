@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class Routes the ComboBox request through persistency layer.
+ * 
+ * @extends Ext.data.DataProxy
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.ComboBoxProxy = function(config){
     uwm.property.ComboBoxProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 	

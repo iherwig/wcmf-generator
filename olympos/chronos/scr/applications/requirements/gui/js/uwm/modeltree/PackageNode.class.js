@@ -12,9 +12,12 @@
 Ext.namespace("uwm.modeltree");
 
 /**
+ * @class A Package in Model Tree.
+ * 
+ * @extends uwm.objecttree.Node
+ * @see uwm.modeltree.ModelTree
  * @constructor
- * @param {Object}
- *            config
+ * @param {Object} config The configuration object.
  */
 uwm.modeltree.PackageNode = function(config) {
 	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("Package", config.oid);

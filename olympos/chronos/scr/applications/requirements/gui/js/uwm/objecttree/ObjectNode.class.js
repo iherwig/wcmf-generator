@@ -11,6 +11,15 @@
  */
 Ext.namespace("uwm.objecttree");
 
+/**
+ * @class Represants a Model Object in Model Tree or Hierarchy Tree.
+ * 
+ * @extends uwm.objecttree.Node
+ * @see uwm.objecttree.ObjectTree
+ * @see uwm.model.ModelObject
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.objecttree.ObjectNode = function(config) {
 	uwm.objecttree.ObjectNode.superclass.constructor.call(this, Ext.apply(this, {}, config));
 }

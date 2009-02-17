@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class The login form.
+ * 
+ * @extends Ext.Viewport
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.ui.Login = function(config){
     var self = this;
     

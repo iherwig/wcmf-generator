@@ -11,6 +11,14 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class The autocomplete ComboBox for use in HtmlEditor.
+ *
+ * @extends Ext.form.ComboBox
+ * @see uwm.property.HtmlEditor
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.InlineComboBox = function(config) {
 	var self = this;
 	
@@ -33,8 +41,8 @@ uwm.property.InlineComboBox = function(config) {
 		triggerAction: 'all',
 		enableKeyEvents: true,
 		typeAhead: true,
-		minChars : 1 
-				
+		minChars: 1
+	
 	}, config));
 	
 	var self = this;
@@ -55,11 +63,10 @@ uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 	var keycode = e.getKey();
 	
 	switch (keycode) {
-		
+	
 		case e.ENTER:
 		case e.TAB:
-			//this.htmledit.resolveInlineComboBox(this.getValue(),this.store.getAt(this.selectedIndex).get('type'));
-			this.htmledit.resolveInlineComboBox(this.getValue(),this.view.getSelectedRecords()[0].get('type'));
+			this.htmledit.resolveInlineComboBox(this.getValue(), this.view.getSelectedRecords()[0].get('type'));
 			break;
 			
 		case e.ESC:

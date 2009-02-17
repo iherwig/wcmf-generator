@@ -11,6 +11,17 @@
  */
 Ext.namespace("uwm.model");
 
+/**
+ * @class Container for all ModelNodes.
+ * 
+ * <p>This class manages all loading and event fireing for Model Nodes.</p>
+ * 
+ * <p>TODO: no ModelNode is ever deleted from this container.</p>
+ * 
+ * @see uwm.model.ModelNode
+ * @see uwm.model.ModelNodeClass
+ * @constructor
+ */
 uwm.model.ModelContainer = function() {
 	this.items = new Ext.util.MixedCollection();
 }

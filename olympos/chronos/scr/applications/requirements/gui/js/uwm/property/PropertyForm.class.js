@@ -11,6 +11,17 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class Abstract base class for all Property forms.
+ *
+ * @extends Ext.form.FormPanel
+ * @see uwm.property.PropertyContainer
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.property.PropertyForm = function() {
+}
+
 uwm.property.PropertyForm = Ext.extend(Ext.form.FormPanel, {
 	initComponent: function() {
 		Ext.apply(this, {

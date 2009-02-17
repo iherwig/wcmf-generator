@@ -14,9 +14,10 @@ Ext.namespace("uwm.graphics.connection");
 /**
  * @class The default connection of UWM.
  * 
+ * @extends draw2d.Connection
  * @constructor
  * @param {String} label Label of this connection.
- * @param {Array} decorators Array of 0..2 {@link draw2d.ConnectionDecorator} objects.
+ * @param {Array} decorators Array of 0..2 draw2d.ConnectionDecorator objects.
  */
 uwm.graphics.connection.BaseConnection = function(label, decorators) {
 	draw2d.Connection.call(this);

@@ -11,6 +11,16 @@
  */
 Ext.namespace("uwm.newobjects");
 
+/**
+ * @class Shows a list of new Model Objects to be dragged on a Diagram.
+ * 
+ * @extends Ext.grid.GridPanel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.newobjects.NewObjectsGrid = function() {
+}
+
 uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 	initComponent: function() {
 		var self = this;

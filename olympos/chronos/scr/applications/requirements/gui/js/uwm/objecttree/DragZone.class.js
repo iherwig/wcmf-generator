@@ -11,6 +11,15 @@
  */
 Ext.namespace("uwm.objecttree");
 
+/**
+ * @class Enables dragging elements from the Model Tree or the Hierarchy Tree to a Diagram.
+ * 
+ * @extends Ext.tree.TreeDragZone
+ * @see uwm.objecttree.ObjectTree
+ * @constructor
+ * @param {Ext.Element} el The Tree to apply this Drag Zone to.
+ * @param {Object} config The configuration object.
+ */
 uwm.objecttree.DragZone = function(el, config) {
 	uwm.objecttree.DragZone.superclass.constructor.call(this, el, Ext.apply(this, {
 		ddGroup: uwm.Constants.DD_GROUP

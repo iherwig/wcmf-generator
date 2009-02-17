@@ -11,10 +11,20 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class Shows the perspective switching buttonbar.
+ *
+ * @extends Ext.Toolbar
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.ui.Perspective = function() {
+}
+
 uwm.ui.Perspective = Ext.extend(Ext.Toolbar, {
 	initComponent: function() {
 		var self = this;
-	
+		
 		this.defaultButton = new Ext.Toolbar.Button({
 			text: uwm.Dict.translate('Default'),
 			enableToggle: true,

@@ -11,10 +11,20 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class Panel for importing UML files into UWM.
+ *
+ * @extends Ext.form.FormPanel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.tabadmin.ImportPanel = function() {
+}
+
 uwm.tabadmin.ImportPanel = Ext.extend(Ext.form.FormPanel, {
 	initComponent: function() {
 		var self = this;
-	
+		
 		Ext.apply(this, {
 			title: uwm.Dict.translate('Model Upload'),
 			frame: true,

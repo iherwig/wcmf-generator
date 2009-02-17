@@ -13,7 +13,8 @@ Ext.namespace("uwm.graphics.figure");
 
 /**
  * @class A simple, rectangular figure.
- *
+ * 
+ * @extends uwm.graphics.figure.BaseFigure
  * @constructor
  * @param {String} label The label of the figure.
  * @param {uwm.diagram.Figure} figure The associated figure object.

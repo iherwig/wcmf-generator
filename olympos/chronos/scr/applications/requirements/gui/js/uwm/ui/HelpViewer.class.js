@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class Viewer for Help Files.
+ * 
+ * @extends Ext.Panel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.ui.HelpViewer = function(config) {
 	uwm.ui.HelpViewer.superclass.constructor.call(this, Ext.apply(this, {
 		closable: true,

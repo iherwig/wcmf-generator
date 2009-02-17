@@ -11,6 +11,25 @@
  */
 Ext.namespace("uwm.event");
 
+/**
+ * Receives events on ModelNodes and distributes them to all listeners.
+ * 
+ * <p>Available events:</p>
+ * <ul>
+ * 	<li><b>create:</b> When a new ModelNode was created.</li>
+ * 	<li><b>load:</b> When a new ModelNode was loaded.</li>
+ * 	<li><b>delete:</b> When an existing ModelNode was deleted.</li>
+ * 	<li><b>changeLabel:</b> When a label property of an ModelNode was changed. Fires additionally to the changeProperty event.</li>
+ * 	<li><b>changeProperty:</b> When a property of an ModelNode was changed.</li>
+ * 	<li><b>associate:</b> When a ModelNode was associated to another modelNode.</li>
+ * 	<li><b>disassociate:</b> When a ModelNode was disassociated from another modelNode.</li>
+ * </ul>
+ * 
+ * <p>This class is a <i>Singleton</i>.</p>
+ * 
+ * @extends Ext.util.Observable.
+ * @constructor
+ */
 uwm.event.EventBroker = function() {
 	uwm.event.EventBroker.superclass.constructor.call(this);
 	

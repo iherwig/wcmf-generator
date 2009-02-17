@@ -11,6 +11,9 @@
  */
 Ext.namespace("uwm.treeadmin");
 
+uwm.treeadmin.ModelObjectContainer = function() {
+}
+
 uwm.treeadmin.ModelObjectContainer = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
 		Ext.apply(this, {

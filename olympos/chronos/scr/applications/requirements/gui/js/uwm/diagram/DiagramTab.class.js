@@ -13,7 +13,8 @@ Ext.namespace("uwm.diagram");
 
 /**
  * @class One tab containing a Diagram.
- *
+ * 
+ * @extends Ext.Panel
  * @constructor
  * @param {Object} config Configuraton of this tab.
  * @config diagram The diagram of this tab.

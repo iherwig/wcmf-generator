@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class A checkbox for use in Property View.
+ * 
+ * @extends Ext.form.Checkbox
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.Checkbox = function(config) {
 	var self = this;
 

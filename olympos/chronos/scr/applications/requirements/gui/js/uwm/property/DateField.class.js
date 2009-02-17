@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * @class A date field for use in Property View.
+ * 
+ * @extends Ext.form.DateField
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
 uwm.property.DateField = function(config) {
 	var self = this;
 

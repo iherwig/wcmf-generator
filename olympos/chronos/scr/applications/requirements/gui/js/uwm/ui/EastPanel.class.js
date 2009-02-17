@@ -11,6 +11,16 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class Container for showing perspective switching buttons and Property View.
+ * 
+ * @extends Ext.Panel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.ui.EastPanel = function() {
+}
+
 uwm.ui.EastPanel = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 		this.propertyContainer = new uwm.property.PropertyContainer();

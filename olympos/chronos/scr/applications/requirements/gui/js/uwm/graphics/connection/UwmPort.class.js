@@ -14,6 +14,7 @@ Ext.namespace("uwm.graphics.connection");
 /**
  * @class A port for docking connections.
  *
+ * @extends draw2d.Port
  * @constructor
  */
 uwm.graphics.connection.UwmPort = function(){

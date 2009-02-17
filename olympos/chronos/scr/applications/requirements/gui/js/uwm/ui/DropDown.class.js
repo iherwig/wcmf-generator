@@ -11,6 +11,16 @@
  */
 Ext.namespace("uwm.ui");
 
+/**
+ * @class Temporary replacement of tabs in Existing Content view by a dropdown menu.
+ *
+ * @extends Ext.Toolbar.MenuButton
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.ui.DropDown = function() {
+}
+
 uwm.ui.DropDown = Ext.extend(Ext.Toolbar.MenuButton, {
 
 	initComponent: function() {

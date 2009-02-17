@@ -11,6 +11,13 @@
  */
 Ext.namespace("uwm.model.builtin");
 
+/**
+ * @class A Model (root object in Model Tree).
+ * 
+ * @extends uwm.model.ModelNode
+ * @constructor
+ * @param {uwm.model.ModelNodeClass} modelNodeClass The ModelNodeClass of this ModelNode.
+*/
 uwm.model.builtin.Model = function(modelNodeClass) {
 	uwm.model.ModelNode.call(this, modelNodeClass);
 }

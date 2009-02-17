@@ -15,7 +15,8 @@ Ext.namespace("uwm.graphics.figure");
  * @class Base class showing the label below the figure.
  *
  * <p>This class is not intended to be instantiated, it should rather be extended.</p>
- *
+ * 
+ * @extends uwm.graphics.figure.ComplexFigure
  * @constructor
  * @param {String} label The label of the figure.
  * @param {uwm.diagram.Figure} figure The associated figure object.

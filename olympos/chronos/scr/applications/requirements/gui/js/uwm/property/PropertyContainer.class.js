@@ -11,6 +11,16 @@
  */
 Ext.namespace("uwm.property");
 
+/**
+ * Container managing display/removal of properties as well as locking/unlocking of shown ModelNodes.
+ *
+ * @extends Ext.Panel
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.property.PropertyContainer = function() {
+}
+
 uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 		Ext.apply(this, {
@@ -76,15 +86,15 @@ uwm.property.PropertyContainer.prototype.showProperty = function(modelNode) {
 uwm.property.PropertyContainer.prototype.showLockedProperty = function(modelNode, isLockedByOtherUser) {
 
 	var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, isLockedByOtherUser));
-
-	form.on("destroy", function(){
+	
+	form.on("destroy", function() {
 		this.currentOid = modelNode.getOid();
 		var self = this;
-		uwm.persistency.Persistency.getInstance().unlock( self.currentOid, function(request, data) {
-				//alert("unlocked "+ self.currentOid);
-			}, function(request, data) {
-				//alert("unlocking failed "+ self.currentOid );
-			});
+		uwm.persistency.Persistency.getInstance().unlock(self.currentOid, function(request, data) {
+			//alert("unlocked "+ self.currentOid);
+		}, function(request, data) {
+			//alert("unlocking failed "+ self.currentOid );
+		});
 	});
 	
 	this.doLayout();

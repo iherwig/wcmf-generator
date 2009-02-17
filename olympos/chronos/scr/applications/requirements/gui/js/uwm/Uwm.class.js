@@ -11,6 +11,11 @@
  */
 Ext.namespace("uwm");
 
+/**
+ * @class The main class of the application.
+ * 
+ * @constructor
+ */
 uwm.Uwm = function() {
 }
 

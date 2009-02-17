@@ -11,6 +11,12 @@
  */
 Ext.namespace("uwm.diagram");
 
+/**
+ * @class <i>Singleton</i> defining common characteristics of all Diagrams.
+ * 
+ * @extends uwm.model.ModelNodeClass
+ * @constructor
+ */
 uwm.diagram.DiagramClass = function() {
 	uwm.diagram.DiagramClass.superclass.constructor.call(this);
 	

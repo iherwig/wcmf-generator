@@ -12,8 +12,9 @@
 Ext.namespace("uwm.graphics.connection");
 
 /**
- * @class Provides a simple arrow as connection end.
+ * @class Provides a closed arrow as connection end.
  * 
+ * @extends draw2d.ConnectionDecorator
  * @constructor
  */
 uwm.graphics.connection.ClosedArrowDecorator = function() {

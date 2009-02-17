@@ -11,6 +11,19 @@
  */
 Ext.namespace("uwm.graphics.figure");
 
+/**
+ * @class A figure displaying an image.
+ * 
+ * @extends uwm.graphics.figure.LabelBelowFigure
+ * @constructor
+ * @param {String} label The label of the figure.
+ * @param {uwm.diagram.Figure} figure The associated figure object.
+ * @param {String} imageUrl URL to the image to be displayed by this figure.
+ * @param {int} minWidth Minimum width of figure.
+ * @param {int} minHeight Minimum height of figure.
+ * @param {int} startWidth Initial width of figure.
+ * @param {int} startHeight Initial height of figure.
+ */
 uwm.graphics.figure.ImageFigure = function(label, figure, imageUrl, minWidth, minHeight, startWidth, startHeight) {
 	this.url = imageUrl;
 	

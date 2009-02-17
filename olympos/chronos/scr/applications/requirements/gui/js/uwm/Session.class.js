@@ -8,6 +8,11 @@
  * this entire header must remain intact.
  */Ext.namespace("uwm");
 
+/**
+ * @class A <i>Singleton</i> representing the current session.
+ * 
+ * @constructor
+ */
 uwm.Session = function() {
 	this.sid = null;
 	this.jsonUrl = uwm.Config.jsonUrl;

@@ -11,6 +11,17 @@
  */
 Ext.namespace("uwm.modeltree");
 
+/**
+ * @class Asynchronously loads elements in Model Tree.
+ * 
+ * @extends Ext.tree.TreeLoader
+ * @see uwm.modeltree.ModelTree
+ * @constructor
+ * @param {Object} config The configuration object.
+ */
+uwm.modeltree.Loader = function() {
+}
+
 uwm.modeltree.Loader = Ext.extend(Ext.tree.TreeLoader, {
     initComponent: function(){
         Ext.apply(this, {});
