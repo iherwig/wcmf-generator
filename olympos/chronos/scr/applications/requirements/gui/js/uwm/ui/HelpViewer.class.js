@@ -23,6 +23,7 @@ uwm.ui.HelpViewer = function(config) {
 		closable: true,
 		title: uwm.Dict.translate('Help Viewer'),
 		autoDestroy: false,
+		isHelpViewer: true,
 		html: "<iframe id='" + uwm.ui.HelpViewer.IFRAME_ID + "' class='uwm-helpViewer-frame' src='" + uwm.Session.getInstance().getHelpUrl() + "'/>"
 	}, config));
 }
