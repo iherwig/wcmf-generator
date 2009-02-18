@@ -13,11 +13,11 @@ Ext.namespace("uwm.model");
 
 /**
  * @class Container for all ModelNodes.
- * 
+ *
  * <p>This class manages all loading and event fireing for Model Nodes.</p>
- * 
+ *
  * <p>TODO: no ModelNode is ever deleted from this container.</p>
- * 
+ *
  * @see uwm.model.ModelNode
  * @see uwm.model.ModelNodeClass
  * @constructor
@@ -52,7 +52,7 @@ uwm.model.ModelContainer.prototype.createByDisplayResult = function(displayResul
 		if (!firstModelNode) {
 			firstModelNode = newModelNode;
 		}
-
+		
 		for (var i in node) {
 			if (i != "values" && i != "oid" && i != "type" && i != "properties" && !(node[i] instanceof Function)) {
 				var container = node[i];
@@ -139,17 +139,35 @@ uwm.model.ModelContainer.prototype.createDiagram = function(parentModelNode) {
 	var self = this;
 	
 	uwm.persistency.Persistency.getInstance().newObject("Diagram", function(request, data) {
-		self.handleCreatedDiagram(data.oid, parentModelNode);
+		self.handleCreatedDiagram(data.oid, parentModelNode, "Diagram");
 	});
 }
 
-uwm.model.ModelContainer.prototype.handleCreatedDiagram = function(oid, parentModelNode) {
-	var newModelNode = this.getNode("Diagram", oid);
+uwm.model.ModelContainer.prototype.createActivitySet = function(parentModelNode) {
+	var self = this;
+	
+	uwm.persistency.Persistency.getInstance().newObject("ActivitySet", function(request, data) {
+		self.handleCreatedDiagram(data.oid, parentModelNode, "ActivitySet");
+	});
+}
+
+uwm.model.ModelContainer.prototype.handleCreatedDiagram = function(oid, parentModelNode, type) {
+	var newModelNode;
+	switch (type) {
+		case 'ActivitySet':
+			newModelNode = this.getNode("ActivitySet", oid);
+			newModelNode.containedPackage = newModelNode;
+			break;
+		case 'default':
+		default:
+			newModelNode = this.getNode("Diagram", oid);
+			newModelNode.containedPackage = parentModelNode;
+			break;
+	}
+	
 	oid = newModelNode.oid;
 	
 	this.items.add(oid, newModelNode);
-	
-	newModelNode.containedPackage = parentModelNode;
 	
 	uwm.event.EventBroker.getInstance().fireEvent("create", newModelNode);
 	
@@ -226,7 +244,7 @@ uwm.model.ModelContainer.prototype.loadByOid = function(oid, callback, depth) {
 
 uwm.model.ModelContainer.prototype.deleteByModelNode = function(modelNode) {
 	modelNode.markDeleted();
-
+	
 	uwm.persistency.Persistency.getInstance().deleteObject(modelNode.getOid(), function(request, data) {
 		uwm.event.EventBroker.getInstance().fireEvent("delete", modelNode);
 	});
@@ -234,7 +252,7 @@ uwm.model.ModelContainer.prototype.deleteByModelNode = function(modelNode) {
 
 uwm.model.ModelContainer.prototype.getNode = function(uwmClassName, oid) {
 	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwmClassName);
-
+	
 	oid = modelClass.demaskOid(oid);
 	
 	var newModelNode = this.items.get(oid);

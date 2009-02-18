@@ -15,7 +15,7 @@ Ext.namespace("uwm.diagram");
  * @class Customized DropZone for diagram.
  *
  * <p>This DropZone receives new and existing ModelObjects.</p>
- * 
+ *
  * @extends Ext.dd.DropZone
  * @constructor
  * @param {Ext.Element} el The element this DropZone should act on.
@@ -110,8 +110,7 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 		
 		if (modelData instanceof uwm.model.ModelObject) {
 			this.diagram.addExistingObject(modelData, x, y);
-		}
-		else {
+		} else {
 			this.diagram.createNewObject(modelData, x, y);
 		}
 	}
@@ -122,7 +121,7 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 /**
  * Checks if a dragged object may be dropped here.
  *
- * <p><code>modelObject</code> may be dropped here if it is an instance of {@link uwm.model.ModelObject} or {@link uwm.model.ModelClass}.</p>
+ * <p><code>modelObject</code> may be dropped here if it is an instance of {@link uwm.model.ModelObject} or {@link uwm.model.ModelClass} and its semantic group is supported by the diagram type.</p>
  *
  * @private
  * @param {Object} modelData Data of the dragged object.
@@ -131,15 +130,35 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
  */
 uwm.diagram.DropZone.prototype.checkDropable = function(modelData) {
 	var result = false;
-	
 	if (modelData instanceof uwm.model.ModelObject) {
 		if (!this.diagram.containsObject(modelData)) {
 			result = Ext.dd.DropZone.prototype.dropAllowed;
 		}
-	}
-	else if (modelData instanceof uwm.model.ModelClass) {
+	} else if (modelData instanceof uwm.model.ModelClass) {
 		result = Ext.dd.DropZone.prototype.dropAllowed;
 	}
 	
+	if (!this.checkSemanticGroup(modelData)) {
+		result = false;
+	}
+	
+	return result;
+}
+
+/**
+ * Checks if the semantic group of the dragged object is supported by the diagram.
+ *
+ * @private
+ * @param {Object} modelData Data of the dragged object.
+ * @return <code>true</code> If the semantic group is supported, <code>false</code> otherwise.
+ * @type boolean
+ */
+uwm.diagram.DropZone.prototype.checkSemanticGroup = function(modelData) {
+	var result = false;
+	for (var i = 0; i < this.diagram.supportedGroups.length; i++) {
+		if (this.diagram.supportedGroups[i] == modelData.getSemanticGroup()) {
+			result = true;
+		}
+	}
 	return result;
 }

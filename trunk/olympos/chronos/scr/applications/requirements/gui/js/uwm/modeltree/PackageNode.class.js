@@ -90,7 +90,7 @@ Ext.extend(uwm.modeltree.PackageNode, uwm.objecttree.Node, {
 	addDiagram: function(self, e) {
 		uwm.model.ModelContainer.getInstance().createDiagram(this.getModelNode());
 	},
-	
+		
 	selectAsScope: function(self, e) {
 		uwm.objectgrid.ObjectGridContainer.getInstance().loadScope(this.modelNode);
 	}

@@ -38,6 +38,15 @@ uwm.model.ModelObject.prototype.connectableWith = function(otherObject) {
 	return result;
 }
 
+/**
+ * Checks if the object cardinality allows the connection.
+ *
+ * <p>The cardinality defines with how many <code>modelObjects</code> of a certain class an object may be connected.</p>
+ *
+ * @param {Object} otherObject The <code>modelObject</code> this ojcect shall be connected with.
+ * @return <code>true</code> if the cardinality allows this connection, <code>false</code> otherwise.
+ * @type boolean
+ */
 uwm.model.ModelObject.prototype.checkCardinality = function(otherObject) {
 	var result = false;
 	var connections = this.getNumberOfConnections(otherObject);
@@ -52,6 +61,14 @@ uwm.model.ModelObject.prototype.checkCardinality = function(otherObject) {
 	return result;
 }
 
+/**
+ * Counts the existing connections from this object to objects of the same class as the other object.
+ *
+ * @private
+ * @param {Object} otherObject The <code>modelObject</code> this ojcect shall be connected with.
+ * @return The number of existing connections.
+ * @type int
+ */
 uwm.model.ModelObject.prototype.getNumberOfConnections = function(otherObject) {
 	parentOids = this.getParentOids();
 	childOids = this.getChildOids();

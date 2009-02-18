@@ -12,14 +12,19 @@
 Ext.namespace("uwm.diagram");
 
 /**
- * @class Special diagram type for requirements (default diagram).
+ * @class Special diagram type for activities.
  *
  * @extends uwm.diagram.StandardDiagram
  * @constructor
  * @param {uwm.model.ModelNodeClass} modelNodeClass
  */
-uwm.diagram.Diagram = function(modelNodeClass) {
-	this.supportedGroups=['UseCases', 'requirements'];
-	uwm.diagram.Diagram.superclass.constructor.call(this, modelNodeClass);
+uwm.diagram.ActivitySet = function(modelNodeClass) {
+	this.supportedGroups=['activity'];
+	uwm.diagram.ActivitySet.superclass.constructor.call(this, modelNodeClass);
 }
-Ext.extend(uwm.diagram.Diagram, uwm.diagram.StandardDiagram);
+
+Ext.extend(uwm.diagram.ActivitySet, uwm.diagram.StandardDiagram);
+
+uwm.diagram.ActivitySet.prototype.getOwnContainer=function(){
+	this.containedPackage=this;
+}
