@@ -21,7 +21,7 @@ Ext.namespace("uwm.modeltree");
  */
 uwm.modeltree.DiagramNode = function(config) {
 	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("Diagram", config.oid);
-
+	
 	uwm.modeltree.DiagramNode.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,
 		iconCls: this.modelNode.getModelNodeClass().getTreeIcon(),
@@ -29,37 +29,6 @@ uwm.modeltree.DiagramNode = function(config) {
 		leaf: true
 	}, config));
 	
-	var self = this;
-	
-	this.on("dblclick", function(item, e) {
-		self.open(item, e);
-	});
-
 }
 
-Ext.extend(uwm.modeltree.DiagramNode, uwm.objecttree.Node, {
-
-	buildContextMenu: function() {
-		var self = this;
-		
-		this.contextMenu = new Ext.menu.Menu({
-			items: [{
-				text: uwm.Dict.translate('Open'),
-				handler: function(item, e) {
-					self.open(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate('Delete from model'),
-				handler: function(item, e) {
-					self.deleteFromModel(item.e);
-				}
-			}]
-		});
-		
-		return this.contextMenu;
-	},
-	
-	open: function(self, e) {
-		uwm.diagram.DiagramContainer.getInstance().loadDiagram(this.getModelNode());
-	}
-});
+Ext.extend(uwm.modeltree.DiagramNode, uwm.modeltree.StandardDiagramNode);

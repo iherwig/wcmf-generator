@@ -76,6 +76,7 @@ uwm.Dict.voc = {
 		'Delete from model' 	: {'de': 'Aus dem Modell löschen'},
 		'Add package' 			: {'de': 'Paket hinzufügen'},
 		'Add diagram' 			: {'de': 'Diagramm hinzufügen'},
+		'Add activity set'		: {'de': 'Aktivitätsdiagramm hinzufügen'},
 		'Select as grid scope' 	: {'de': 'Als Gitterbereich auswählen'},
 		'Create model' 			: {'de': 'Modell erstellen'},		
 		'Add new entry' 		: {'de': 'Neuen Eintrag hinzufügen'},

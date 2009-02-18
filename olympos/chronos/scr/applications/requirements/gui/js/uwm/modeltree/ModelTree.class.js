@@ -153,7 +153,7 @@ uwm.modeltree.ModelTree.prototype.associateDroppedNode = function(tree, node, ol
 	node.getModelNode().disassociate(oldParent.getModelNode())
 }
 
-uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function (parentModelNode, childModelNode) {
+uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function(parentModelNode, childModelNode) {
 	var newParent = this.disassociatedNodes.get(childModelNode.getOid());
 	if (newParent) {
 		this.disassociatedNodes.remove(newParent);
@@ -214,8 +214,7 @@ uwm.modeltree.ModelTree.prototype.markNodeByOid = function(oid) {
 			
 			currOid = goodParent;
 		}
-	}
-	while (node == null);
+	} while (node == null);
 	
 	this.show();
 	
@@ -265,8 +264,10 @@ uwm.modeltree.ModelTree.prototype.handleCreateEvent = function(modelObject) {
 		this.createdModels.add(modelObject.getOid(), modelObject);
 	} else if (modelObject instanceof uwm.model.builtin.Package) {
 		this.createdPackages.add(modelObject.getOid(), modelObject);
-	} else if (modelObject instanceof uwm.diagram.Diagram) {
-		this.createdDiagrams.add(modelObject.getOid(), modelObject);
+	} else {
+		if (modelObject instanceof uwm.diagram.Diagram || modelObject instanceof uwm.diagram.ActivitySet) {
+			this.createdDiagrams.add(modelObject.getOid(), modelObject);
+		}
 	}
 }
 
@@ -315,9 +316,26 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 				oid: childModelObject.getOid(),
 				text: childModelObject.getLabel(),
 			});
+		} else if (childModelObject instanceof uwm.diagram.ActivitySet && this.createdDiagrams.get(childModelObject.getOid())) {
+			this.createdPackages.remove(childModelObject.getOid());
+			childNode = new uwm.modeltree.ActivitySetNode({
+				oid: childModelObject.getOid(),
+				text: childModelObject.getLabel()
+			});
+		} else if (childModelObject instanceof cwm.ChiBusinessUseCase) {
+			this.createdPackages.remove(childModelObject.getOid());
+			childNode = new uwm.modeltree.UseCaseNode({
+				oid: childModelObject.getOid(),
+				text: childModelObject.getLabel()
+			});
+		} else if (childModelObject instanceof cwm.ChiBusinessUseCaseCore) {
+			this.createdPackages.remove(childModelObject.getOid());
+			childNode = new uwm.modeltree.UseCaseCoreNode({
+				oid: childModelObject.getOid(),
+				text: childModelObject.getLabel()
+			});
 		} else if (childModelObject instanceof uwm.diagram.Diagram && this.createdDiagrams.get(childModelObject.getOid())) {
 			this.createdPackages.remove(childModelObject.getOid());
-			
 			childNode = new uwm.modeltree.DiagramNode({
 				oid: childModelObject.getOid(),
 				text: childModelObject.getLabel()
