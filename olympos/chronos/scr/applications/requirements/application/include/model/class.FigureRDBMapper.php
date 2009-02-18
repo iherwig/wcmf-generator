@@ -4,7 +4,7 @@
  * Manual modifications should be placed inside the protected regions.
  */
 require_once(BASE."wcmf/lib/model/mapper/class.NodeUnifiedRDBMapper.php");
-require_once(BASE."application/include/model/activity/class.Figure.php");
+require_once(BASE."application/include/model/class.Figure.php");
 
 /**
  * @class FigureRDBMapper
