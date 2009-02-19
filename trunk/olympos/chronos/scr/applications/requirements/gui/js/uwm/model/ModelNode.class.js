@@ -21,6 +21,7 @@ uwm.model.ModelNode = function(modelNodeClass) {
 	if (modelNodeClass) {
 		this.modelNodeClass = modelNodeClass;
 		this.uwmClassName = modelNodeClass.getUwmClassName();
+		this.semanticGroup = modelNodeClass.getSemanticGroup();
 	}
 	
 	this.data = new Object();

@@ -14,7 +14,7 @@ Ext.namespace("uwm.diagram");
 /**
  * @class <i>Singleton</i> defining common characteristics of all ActivitySet diagrams.
  * 
- * @extends uwm.diagram.StandardDiagramClass
+ * @extends uwm.diagram.AbstractDiagramClass
  * @constructor
  */
 uwm.diagram.ActivitySetClass = function() {
@@ -24,6 +24,6 @@ uwm.diagram.ActivitySetClass = function() {
 	this.defaultLabel = "New ActivitySet";
 	this.treeIcon = "FigureActivity";
 	}
-Ext.extend(uwm.diagram.ActivitySetClass,uwm.diagram.StandardDiagramClass);
+Ext.extend(uwm.diagram.ActivitySetClass,uwm.diagram.AbstractDiagramClass);
 	
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new uwm.diagram.ActivitySetClass());

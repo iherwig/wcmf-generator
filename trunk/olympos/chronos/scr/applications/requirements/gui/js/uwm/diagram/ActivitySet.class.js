@@ -14,7 +14,7 @@ Ext.namespace("uwm.diagram");
 /**
  * @class Special diagram type for activities.
  *
- * @extends uwm.diagram.StandardDiagram
+ * @extends uwm.diagram.AbstractDiagram
  * @constructor
  * @param {uwm.model.ModelNodeClass} modelNodeClass
  */
@@ -23,7 +23,7 @@ uwm.diagram.ActivitySet = function(modelNodeClass) {
 	uwm.diagram.ActivitySet.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(uwm.diagram.ActivitySet, uwm.diagram.StandardDiagram);
+Ext.extend(uwm.diagram.ActivitySet, uwm.diagram.AbstractDiagram);
 
 uwm.diagram.ActivitySet.prototype.getOwnContainer=function(){
 	this.containedPackage=this;

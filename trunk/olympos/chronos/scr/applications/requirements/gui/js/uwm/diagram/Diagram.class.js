@@ -14,7 +14,7 @@ Ext.namespace("uwm.diagram");
 /**
  * @class Special diagram type for requirements (default diagram).
  *
- * @extends uwm.diagram.StandardDiagram
+ * @extends uwm.diagram.AbstractDiagram
  * @constructor
  * @param {uwm.model.ModelNodeClass} modelNodeClass
  */
@@ -22,4 +22,4 @@ uwm.diagram.Diagram = function(modelNodeClass) {
 	this.supportedGroups=['UseCases', 'requirements'];
 	uwm.diagram.Diagram.superclass.constructor.call(this, modelNodeClass);
 }
-Ext.extend(uwm.diagram.Diagram, uwm.diagram.StandardDiagram);
+Ext.extend(uwm.diagram.Diagram, uwm.diagram.AbstractDiagram);

@@ -14,7 +14,7 @@ Ext.namespace("uwm.modeltree");
 /**
  * @class A diagram in the Model Tree.
  * 
- * @extends uwm.objecttree.Node
+ * @extends uwm.modeltree.AbstractDiagramNode
  * @see uwm.modeltree.ModelTree
  * @constructor
  * @param {Object} config The configuration object.
@@ -31,4 +31,4 @@ uwm.modeltree.DiagramNode = function(config) {
 	
 }
 
-Ext.extend(uwm.modeltree.DiagramNode, uwm.modeltree.StandardDiagramNode);
+Ext.extend(uwm.modeltree.DiagramNode, uwm.modeltree.AbstractDiagramNode);

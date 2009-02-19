@@ -14,7 +14,7 @@ Ext.namespace("uwm.modeltree");
 /**
  * @class An ActivitySet in the Model Tree.
  * 
- * @extends uwm.modeltree.DiagramNode
+ * @extends uwm.modeltree.AbstractDiagramNode
  * @constructor
  * @param {Object} config The configuration object.
  */
@@ -29,4 +29,4 @@ uwm.modeltree.ActivitySetNode = function(config) {
 	
 	}
 
-Ext.extend(uwm.modeltree.ActivitySetNode, uwm.modeltree.StandardDiagramNode);
+Ext.extend(uwm.modeltree.ActivitySetNode, uwm.modeltree.AbstractDiagramNode);

@@ -20,7 +20,7 @@ Ext.namespace("uwm.modeltree");
  * @param {Object} config The configuration object.
  */
 uwm.modeltree.UseCaseCoreNode = function(config) {
-	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("ChiBusinessUseCase", config.oid);
+	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("ChiBusinessUseCaseCore", config.oid);
 	
 	uwm.modeltree.UseCaseCoreNode.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,
