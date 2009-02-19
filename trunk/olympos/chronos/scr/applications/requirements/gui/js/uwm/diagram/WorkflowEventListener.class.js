@@ -68,7 +68,7 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 			} else if (command instanceof draw2d.CommandDelete) {
 				var figure = command.figure;
 				
-				if (figure instanceof uwm.graphics.figure.BaseFigure) {
+				if (figure instanceof uwm.graphics.figure.BaseFigure || figure instanceof uwm.graphics.figure.ClassFigure) {
 					var persistencyFigure = figure.getFigure();
 					
 					if (!persistencyFigure.getModelObject().isDeleted()) {
@@ -78,11 +78,15 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 					var oid = persistencyFigure.getModelObject().getOid();
 					this.diagram.figures.removeKey(oid);
 					this.diagram.objects.removeKey(oid);
-				} else {
+				} else if (figure instanceof uwm.graphics.connection.BaseConnection){
 					var source = figure.getSource().getParent().getFigure().getModelObject();
 					var target = figure.getTarget().getParent().getFigure().getModelObject();
 					
 					source.disassociate(target);
+				} else if (figure instanceof uwm.graphics.figure.AbstractClassPart) {
+					var modelObject = figure.getModelObject();
+					
+					uwm.model.ModelContainer.getInstance().deleteByModelNode(modelObject);
 				}
 			}
 		}

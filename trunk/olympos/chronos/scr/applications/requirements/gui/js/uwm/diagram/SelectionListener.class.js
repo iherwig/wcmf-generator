@@ -35,9 +35,13 @@ uwm.diagram.SelectionListener = function(diagram) {
  */
 uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
 	if (figure) {
-		if (figure instanceof uwm.graphics.figure.BaseFigure) {
+		if (figure instanceof uwm.graphics.figure.BaseFigure || figure instanceof uwm.graphics.figure.ClassFigure) {
 			if (this.diagram.isPropertyDisplay()) {
 				uwm.property.PropertyContainer.getInstance().showProperty(figure.getFigure().getModelObject());
+			}
+		} else if (figure instanceof uwm.graphics.figure.AbstractClassPart) {
+			if (this.diagram.isPropertyDisplay()) {
+				uwm.property.PropertyContainer.getInstance().showProperty(figure.getModelObject());
 			}
 		}
 	}
