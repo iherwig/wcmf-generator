@@ -241,7 +241,7 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 }
 
 cwm.ChiNodeClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiNode.PNG", 96, 95, 96, 95);
+	return new uwm.graphics.figure.ClassFigure(label, figure);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiNodeClass());

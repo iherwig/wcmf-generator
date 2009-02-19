@@ -279,9 +279,11 @@ uwm.diagram.AbstractDiagram.prototype.loadFigures = function() {
 uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 	this.figuresToLoad = 0;
 	
+	var modelContainer = uwm.model.ModelContainer.getInstance();
+	
 	for (i in this.childOids) {
 		if (!(this.childOids[i] instanceof Function)) {
-			var figure = uwm.model.ModelContainer.getInstance().getByOid(this.childOids[i]);
+			var figure = modelContainer.getByOid(this.childOids[i]);
 			
 			var self = this;
 			
@@ -294,9 +296,9 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 					this.figures.add(parentOid, figure);
 					this.figuresToLoad++;
 					
-					uwm.model.ModelContainer.getInstance().loadByOid(parentOid, function(modelObject) {
+					modelContainer.loadByOid(parentOid, function(modelObject) {
 						self.handleLoadedObject(modelObject);
-					}, 1);
+					}, 2);
 				}
 			}
 		}
@@ -318,7 +320,24 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject)
 		
 		this.establishExistingConnections(modelObject, modelObject.getParentOids());
 		this.establishExistingConnections(modelObject, modelObject.getChildOids());
-	
+
+		if (modelObject instanceof cwm.ChiNode) {
+			var childOids = modelObject.getChildOids();
+			var modelContainer = uwm.model.ModelContainer.getInstance();
+			
+			for (var i = 0; i < childOids.length; i++) {
+				var currChild = modelContainer.getByOid(childOids[i]);
+				
+				if (currChild instanceof cwm.ChiValue) {
+					var propertyGraphics = new uwm.graphics.figure.Property(currChild.getLabel(), currChild);
+					figure.getGraphics().addChildElement(propertyGraphics, false);
+				} else if (currChild instanceof cwm.Operation) {
+					var operationGraphics = new uwm.graphics.figure.Operation(currChild.getLabel(), currChild);
+					figure.getGraphics().addChildElement(operationGraphics, false);
+				}
+			}
+		}
+		
 		this.figuresToLoad--;
 		
 		if (this.figuresToLoad == 0) {
@@ -584,6 +603,12 @@ uwm.diagram.AbstractDiagram.prototype.getFigure = function() {
 uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 	if (modelNode == this) {
 		uwm.diagram.DiagramContainer.getInstance().getTabPanel().remove(this.tab);
+	} else if (modelNode instanceof cwm.ChiValue || modelNode instanceof cwm.Operation) {
+		var parentModelNode = uwm.model.ModelContainer.getInstance().getByOid(modelNode.getParentOids()[0]);
+		
+		if (this.containsObject(parentModelNode)) {
+			parentModelNode.removeChild(modelNode, this.figures.get(parentModelNode.getOid()));
+		}
 	} else {
 		var figure = this.figures.get(modelNode.getOid());
 		
@@ -602,6 +627,17 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNod
 		var figure = this.figures.get(modelNode.getOid());
 		
 		figure.getGraphics().setLabel(modelNode.getLabel());
+	//TODO: Remove dependency on CWM
+	} else if (modelNode instanceof cwm.ChiValue || modelNode instanceof cwm.Operation) {
+		parentOids = modelNode.getParentOids();
+		
+		if (parentOids) {
+			var parentModelNode = uwm.model.ModelContainer.getInstance().getByOid(parentOids[0]);
+			
+			if (this.containsObject(parentModelNode)) {
+				parentModelNode.updateChildLabel(modelNode, this.figures.get(parentModelNode.getOid()));
+			}
+		}
 	}
 }
 
@@ -635,5 +671,20 @@ uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentMode
 			
 			this.dropWindow.destroy();
 		}
+	//TODO: remove dependency on CWM
+	} else if (childModelNode instanceof cwm.ChiValue) {
+		var figure = this.figures.get(parentModelNode.getOid());
+		
+		var graphics = figure.getGraphics();
+		var propertyGraphics = new uwm.graphics.figure.Property(childModelNode.getLabel(), childModelNode);
+		
+		graphics.addChildElement(propertyGraphics, true);
+	} else if (childModelNode instanceof cwm.Operation) {
+		var figure = this.figures.get(parentModelNode.getOid());
+		
+		var graphics = figure.getGraphics();
+		var operationGraphics = new uwm.graphics.figure.Operation(childModelNode.getLabel(), childModelNode);
+		
+		graphics.addChildElement(operationGraphics, true);
 	}
 }

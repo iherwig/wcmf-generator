@@ -14,7 +14,7 @@ Ext.namespace("uwm.model");
 /**
  * @class Container for all ModelNodes.
  *
- * <p>This class manages all loading and event fireing for Model Nodes.</p>
+ * <p>This class manages all loading and event firing for Model Nodes.</p>
  *
  * <p>TODO: no ModelNode is ever deleted from this container.</p>
  *
