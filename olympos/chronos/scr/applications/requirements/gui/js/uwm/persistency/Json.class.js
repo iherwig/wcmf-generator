@@ -13,7 +13,7 @@ Ext.namespace("uwm.persistency");
 
 /**
  * @class Implements persistency against a wCMF backend via JSON calls.
- * 
+ *
  * @extends uwm.persistency.Persistency.
  * @constructor
  */
@@ -40,12 +40,10 @@ uwm.persistency.Json.prototype.jsonRequest = function(params, successHandler, er
 				
 				if (!data.errorMsg) {
 					self.processSuccessHandler(successHandler, options, data);
-				}
-				else {
+				} else {
 					self.processErrorHandler(errorHandler, options, data, data.errorMsg);
 				}
-			}
-			else {
+			} else {
 				self.processErrorHandler(errorHandler, options, data);
 			}
 		}
@@ -62,8 +60,7 @@ uwm.persistency.Json.prototype.array2CommaList = function(array) {
 		for (var i = 0; i < array.length; i++) {
 			if (!first) {
 				result += ",";
-			}
-			else {
+			} else {
 				first = false;
 			}
 			result += array[i];
@@ -160,6 +157,14 @@ uwm.persistency.Json.prototype.listbox = function(type, successHandler, errorHan
 		usr_action: "listbox",
 		type: type
 	}, successHandler, errorHandler);
+}
+
+uwm.persistency.Json.prototype.autocomplete = function(query, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'autocomplete',
+		query: query,
+	}, successHandler, errorHandler);
+	
 }
 
 uwm.persistency.Json.prototype.loadChildren = function(oid, successHandler, errorHandler) {
