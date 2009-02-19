@@ -76,6 +76,9 @@ uwm.persistency.Persistency.prototype.list = function(uwmClassName, successHandl
 uwm.persistency.Persistency.prototype.listbox = function(type, successHandler, errorHandler) {
 }
 
+uwm.persistency.Persistency.prototype.autocomplete = function(query, successHandler, errorHandler){
+}
+
 uwm.persistency.Persistency.prototype.loadChildren = function(oid, successHandler, errorHandler) {
 }
 

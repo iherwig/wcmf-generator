@@ -23,18 +23,11 @@ uwm.property.InlineComboBox = function(config) {
 	var self = this;
 	
 	uwm.property.InlineComboBox.superclass.constructor.call(this, Ext.apply(this, {
-		store: new Ext.data.JsonStore({
-			url: '../application/main.php',
-			baseParams: {
-				sid: uwm.Session.getInstance().getSid(),
-				usr_action: 'autocomplete',
-				limit_end: 50,
-				limit_start: 1,
-				response_format: 'JSON'
-			},
-			totalProperty: "totalCount",
-			root: 'data',
-			fields: ['type', 'val'],
+		store: new Ext.data.Store({
+			proxy: new uwm.property.InlineComboBoxProxy({
+				comboBox: this,
+				value: this.getValue()
+			})
 		}),
 		displayField: 'val',
 		mode: "remote",
