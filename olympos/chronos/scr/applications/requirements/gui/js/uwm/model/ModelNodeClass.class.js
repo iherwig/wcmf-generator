@@ -79,3 +79,7 @@ uwm.model.ModelNodeClass.prototype.getGraphics = function(label, figure) {
 	return eval("new " + this.getFigureClass() + "(label, figure)");
 }
 
+uwm.model.ModelNodeClass.prototype.getSemanticGroup = function(){
+	return this.semanticGroup;
+}
+

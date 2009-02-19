@@ -17,11 +17,11 @@ Ext.namespace("uwm.diagram");
  * @extends uwm.model.ModelNodeClass
  * @constructor
  */
-uwm.diagram.StandardDiagramClass = function() {
-	uwm.diagram.StandardDiagramClass.superclass.constructor.call(this);
+uwm.diagram.AbstractDiagramClass = function() {
+	uwm.diagram.AbstractDiagramClass.superclass.constructor.call(this);
 	
-	this.uwmClassName = "StandardDiagram";
-	this.instanceClassName = "uwm.diagram.StandardDiagram";
+	this.uwmClassName = "AbstractDiagram";
+	this.instanceClassName = "uwm.diagram.AbstractDiagram";
 	this.treeIcon = "FigureDiagram";
 	this.defaultLabel = "New Diagram";
 	this.labelProperties = {
@@ -29,9 +29,9 @@ uwm.diagram.StandardDiagramClass = function() {
 	};
 }
 
-Ext.extend(uwm.diagram.StandardDiagramClass, uwm.model.ModelNodeClass);
+Ext.extend(uwm.diagram.AbstractDiagramClass, uwm.model.ModelNodeClass);
 
-uwm.diagram.StandardDiagramClass.prototype.getPropertyForm = function(modelNode) {
+uwm.diagram.AbstractDiagramClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
 			fieldLabel: 'Width',

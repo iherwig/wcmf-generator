@@ -22,8 +22,8 @@ Ext.namespace("uwm.diagram");
  * @constructor
  * @param {uwm.model.ModelNodeClass} modelNodeClass
  */
-uwm.diagram.StandardDiagram = function(modelNodeClass) {
-	uwm.diagram.StandardDiagram.superclass.constructor.call(this, modelNodeClass);
+uwm.diagram.AbstractDiagram = function(modelNodeClass) {
+	uwm.diagram.AbstractDiagram.superclass.constructor.call(this, modelNodeClass);
 	
 	this.containedPackage = null;
 	this.propertyDisplayEnabled = true;
@@ -36,17 +36,17 @@ uwm.diagram.StandardDiagram = function(modelNodeClass) {
 	this.dropWindow = null;
 }
 
-Ext.extend(uwm.diagram.StandardDiagram, uwm.diagram.DiagramBase);
+Ext.extend(uwm.diagram.AbstractDiagram, uwm.diagram.DiagramBase);
 
-uwm.diagram.StandardDiagram.prototype.initByDisplayResult = function(node) {
-	uwm.diagram.StandardDiagram.superclass.initByDisplayResult.call(this, node);
+uwm.diagram.AbstractDiagram.prototype.initByDisplayResult = function(node) {
+	uwm.diagram.AbstractDiagram.superclass.initByDisplayResult.call(this, node);
 	
 	if (!this.containedPackage) {
 		this.getOwnContainer();
 	}
 }
 
-uwm.diagram.StandardDiagram.prototype.getOwnContainer=function(){
+uwm.diagram.AbstractDiagram.prototype.getOwnContainer=function(){
 	var self = this;
 		
 		uwm.model.ModelContainer.getInstance().loadByOid(this.parentOids[0], function(packageModel) {
@@ -54,7 +54,7 @@ uwm.diagram.StandardDiagram.prototype.getOwnContainer=function(){
 		});
 }
 
-uwm.diagram.StandardDiagram.prototype.setContainedPackage = function(packageModel) {
+uwm.diagram.AbstractDiagram.prototype.setContainedPackage = function(packageModel) {
 	this.containedPackage = packageModel;
 }
 
@@ -63,7 +63,7 @@ uwm.diagram.StandardDiagram.prototype.setContainedPackage = function(packageMode
  *
  * <p>Creates a new panel for the tab, initiates internal state to default values.</p>
  */
-uwm.diagram.StandardDiagram.prototype.init = function() {
+uwm.diagram.AbstractDiagram.prototype.init = function() {
 	var container = uwm.diagram.DiagramContainer.getInstance();
 	
 	/**
@@ -125,7 +125,7 @@ uwm.diagram.StandardDiagram.prototype.init = function() {
  *
  * @private
  */
-uwm.diagram.StandardDiagram.prototype.initWorkflow = function() {
+uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 	/**
 	 * The viewport of this diagram.
 	 *
@@ -207,11 +207,11 @@ uwm.diagram.StandardDiagram.prototype.initWorkflow = function() {
  * @return <code>true</code> if a Model Object with <code>oid</code> is contained in this diagram. <code>false</code> otherwise.
  * @type boolean
  */
-uwm.diagram.StandardDiagram.prototype.containsObject = function(modelObject) {
+uwm.diagram.AbstractDiagram.prototype.containsObject = function(modelObject) {
 	return this.objects.containsKey(modelObject.getOid());
 }
 
-uwm.diagram.StandardDiagram.prototype.scrollToObject = function(modelObject) {
+uwm.diagram.AbstractDiagram.prototype.scrollToObject = function(modelObject) {
 	var figure = this.figures.get(modelObject.getOid());
 	var graphics = figure.getGraphics();
 	var canvas = this.viewPort.getSize();
@@ -219,11 +219,11 @@ uwm.diagram.StandardDiagram.prototype.scrollToObject = function(modelObject) {
 	this.getWorkflow().scrollTo(graphics.x - canvas.width / 2 + graphics.getWidth() / 2, graphics.y - canvas.height / 2 + graphics.getHeight() / 2);
 }
 
-uwm.diagram.StandardDiagram.prototype.isPropertyDisplay = function() {
+uwm.diagram.AbstractDiagram.prototype.isPropertyDisplay = function() {
 	return this.propertyDisplayEnabled;
 }
 
-uwm.diagram.StandardDiagram.prototype.isEventHandler = function() {
+uwm.diagram.AbstractDiagram.prototype.isEventHandler = function() {
 	return this.eventHandlerEnabled;
 }
 
@@ -233,7 +233,7 @@ uwm.diagram.StandardDiagram.prototype.isEventHandler = function() {
  * @return The tab of this diagram.
  * @type uwm.diagram.DiagramTab
  */
-uwm.diagram.StandardDiagram.prototype.getTab = function() {
+uwm.diagram.AbstractDiagram.prototype.getTab = function() {
 	return this.tab;
 }
 
@@ -242,7 +242,7 @@ uwm.diagram.StandardDiagram.prototype.getTab = function() {
  *
  * @private
  */
-uwm.diagram.StandardDiagram.prototype.initDropZone = function() {
+uwm.diagram.AbstractDiagram.prototype.initDropZone = function() {
 	var self = this;
 	
 	/**
@@ -261,7 +261,7 @@ uwm.diagram.StandardDiagram.prototype.initDropZone = function() {
  *
  * @private
  */
-uwm.diagram.StandardDiagram.prototype.loadFigures = function() {
+uwm.diagram.AbstractDiagram.prototype.loadFigures = function() {
 	this.propertyDisplayEnabled = false;
 	this.eventHandlerEnabled = false;
 	
@@ -276,7 +276,7 @@ uwm.diagram.StandardDiagram.prototype.loadFigures = function() {
 	}, 1);
 }
 
-uwm.diagram.StandardDiagram.prototype.handleLoaded = function() {
+uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 	this.figuresToLoad = 0;
 	
 	for (i in this.childOids) {
@@ -290,7 +290,7 @@ uwm.diagram.StandardDiagram.prototype.handleLoaded = function() {
 			for (var j in parentOids) {
 				var parentOid = parentOids[j];
 				
-				if (!(parentOid instanceof Function) && parentOid != this.getOid()) {
+				if (!(parentOid instanceof Function) && parentOid != this.getOid() && figure instanceof uwm.diagram.Figure) {
 					this.figures.add(parentOid, figure);
 					this.figuresToLoad++;
 					
@@ -309,17 +309,16 @@ uwm.diagram.StandardDiagram.prototype.handleLoaded = function() {
 	}
 }
 
-uwm.diagram.StandardDiagram.prototype.handleLoadedObject = function(modelObject) {
+uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject) {
 	var figure = this.figures.get(modelObject.getOid());
 	
-	if (figure instanceof uwm.diagram.Figure) {
 		figure.load(modelObject, this);
 		
 		this.objects.add(modelObject.getOid(), modelObject);
 		
 		this.establishExistingConnections(modelObject, modelObject.getParentOids());
 		this.establishExistingConnections(modelObject, modelObject.getChildOids());
-	}
+	
 		this.figuresToLoad--;
 		
 		if (this.figuresToLoad == 0) {
@@ -330,7 +329,7 @@ uwm.diagram.StandardDiagram.prototype.handleLoadedObject = function(modelObject)
 	
 }
 
-uwm.diagram.StandardDiagram.prototype.establishExistingConnections = function(newObject, list) {
+uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(newObject, list) {
 	if (list) {
 		for (var i = 0; i < list.length; i++) {
 			var connectedObject = this.objects.get(list[i]);
@@ -370,7 +369,7 @@ uwm.diagram.StandardDiagram.prototype.establishExistingConnections = function(ne
 	}
 }
 
-uwm.diagram.StandardDiagram.prototype.createConnection = function(sourceObject, targetObject, sourcePort, targetPort, x, y) {
+uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, targetObject, sourcePort, targetPort, x, y) {
 	if (sourceObject.connectableWith(targetObject)) {
 		var connectionInfo = sourceObject.getModelNodeClass().getConnectionInfo(targetObject.getModelNodeClass());
 		
@@ -398,7 +397,7 @@ uwm.diagram.StandardDiagram.prototype.createConnection = function(sourceObject, 
 	}
 }
 
-uwm.diagram.StandardDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo) {
+uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo) {
 	var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
 	
 	var startPort;
@@ -425,7 +424,7 @@ uwm.diagram.StandardDiagram.prototype.createSpecificConnection = function(source
  * @return Array of proper connection decorators.
  * @type Array
  */
-uwm.diagram.StandardDiagram.prototype.getConnectionTypeDecorators = function(connectionType) {
+uwm.diagram.AbstractDiagram.prototype.getConnectionTypeDecorators = function(connectionType) {
 	var result = new Array();
 	
 	switch (connectionType) {
@@ -468,7 +467,7 @@ uwm.diagram.StandardDiagram.prototype.getConnectionTypeDecorators = function(con
  * @return The draw2d workflow of this diagram.
  * @type uwm.diagram.UwmWorkflow
  */
-uwm.diagram.StandardDiagram.prototype.getWorkflow = function() {
+uwm.diagram.AbstractDiagram.prototype.getWorkflow = function() {
 	return this.workflow;
 }
 
@@ -478,7 +477,7 @@ uwm.diagram.StandardDiagram.prototype.getWorkflow = function() {
  * @return <code>true</code> if snap to objects is activated for this diagram, <code>false</code> otherwise.
  * @type boolean
  */
-uwm.diagram.StandardDiagram.prototype.isSnapToObjects = function() {
+uwm.diagram.AbstractDiagram.prototype.isSnapToObjects = function() {
 	return this.snapToObjects;
 }
 
@@ -487,7 +486,7 @@ uwm.diagram.StandardDiagram.prototype.isSnapToObjects = function() {
  *
  * @param {boolean} snapToObjects <code>true</code> if object should snap to other objects, <code>false</code> if objects should not snap to other objects when moving.
  */
-uwm.diagram.StandardDiagram.prototype.setSnapToObjects = function(snapToObjects) {
+uwm.diagram.AbstractDiagram.prototype.setSnapToObjects = function(snapToObjects) {
 	this.snapToObjects = snapToObjects;
 	this.workflow.setSnapToGeometry(snapToObjects);
 }
@@ -497,7 +496,7 @@ uwm.diagram.StandardDiagram.prototype.setSnapToObjects = function(snapToObjects)
  *
  * @see uwm.modeltree.ModelTree
  */
-uwm.diagram.StandardDiagram.prototype.showInModelTree = function() {
+uwm.diagram.AbstractDiagram.prototype.showInModelTree = function() {
 	uwm.modeltree.ModelTree.getInstance().markNodeByOid(this.getOid());
 }
 
@@ -506,7 +505,7 @@ uwm.diagram.StandardDiagram.prototype.showInModelTree = function() {
  *
  * @see uwm.modeltree.ModelTree
  */
-uwm.diagram.StandardDiagram.prototype.reloadDiagram = function() {
+uwm.diagram.AbstractDiagram.prototype.reloadDiagram = function() {
 	var container = uwm.diagram.DiagramContainer.getInstance();
 	container.getTabPanel().remove(this.tab);
 	
@@ -516,7 +515,7 @@ uwm.diagram.StandardDiagram.prototype.reloadDiagram = function() {
 /**
  * Starts the auto-layouter.
  */
-uwm.diagram.StandardDiagram.prototype.doLayout = function() {
+uwm.diagram.AbstractDiagram.prototype.doLayout = function() {
 	this.layouter.doLayout();
 }
 
@@ -528,7 +527,7 @@ uwm.diagram.StandardDiagram.prototype.doLayout = function() {
  * @return The position of the context menu in Ext format.
  * @type Object
  */
-uwm.diagram.StandardDiagram.prototype.getContextMenuPosition = function(x, y) {
+uwm.diagram.AbstractDiagram.prototype.getContextMenuPosition = function(x, y) {
 	var scroll = this.viewPort.getScroll();
 	var xy = this.viewPort.getXY();
 	
@@ -542,7 +541,7 @@ uwm.diagram.StandardDiagram.prototype.getContextMenuPosition = function(x, y) {
  * @param {int} x The draw2d x position to add the ModelObject at.
  * @param {int} y The draw2d x position to add the ModelObject at.
  */
-uwm.diagram.StandardDiagram.prototype.addExistingObject = function(modelObject, x, y) {
+uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, x, y) {
 	this.createdObjects.push({
 		modelClass: null,
 		x: x,
@@ -561,7 +560,7 @@ uwm.diagram.StandardDiagram.prototype.addExistingObject = function(modelObject, 
  * @param {int} x The draw2d x position to add the ModelObject at.
  * @param {int} y The draw2d x position to add the ModelObject at.
  */
-uwm.diagram.StandardDiagram.prototype.createNewObject = function(modelClass, x, y) {
+uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, y) {
 	this.createdObjects.push({
 		modelClass: modelClass,
 		x: x,
@@ -578,11 +577,11 @@ uwm.diagram.StandardDiagram.prototype.createNewObject = function(modelClass, x, 
  * @return the new Figure.
  * @type uwm.diagram.Figure
  */
-uwm.diagram.StandardDiagram.prototype.getFigure = function() {
+uwm.diagram.AbstractDiagram.prototype.getFigure = function() {
 	return new uwm.diagram.Figure(uwm.model.ModelNodeClassContainer.getInstance().getClass("Figure"));
 }
 
-uwm.diagram.StandardDiagram.prototype.handleDeleteEvent = function(modelNode) {
+uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 	if (modelNode == this) {
 		uwm.diagram.DiagramContainer.getInstance().getTabPanel().remove(this.tab);
 	} else {
@@ -596,7 +595,7 @@ uwm.diagram.StandardDiagram.prototype.handleDeleteEvent = function(modelNode) {
 	}
 }
 
-uwm.diagram.StandardDiagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel) {
+uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel) {
 	if (modelNode == this) {
 		this.tab.setTitle(this.getLabel());
 	} else if (this.containsObject(modelNode)) {
@@ -606,7 +605,7 @@ uwm.diagram.StandardDiagram.prototype.handleChangeLabelEvent = function(modelNod
 	}
 }
 
-uwm.diagram.StandardDiagram.prototype.handleAssociateEvent = function(parentModelNode, childModelNode) {
+uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentModelNode, childModelNode) {
 	if (parentModelNode == this) {
 		var config = this.createdObjects[0];
 		

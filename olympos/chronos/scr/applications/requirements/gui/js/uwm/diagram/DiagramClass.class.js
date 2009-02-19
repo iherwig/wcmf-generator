@@ -14,7 +14,7 @@ Ext.namespace("uwm.diagram");
 /**
  * @class <i>Singleton</i> defining common characteristics of all (default) Diagrams.
  *
- * @extends uwm.diagram.StandardDiagram.Class
+ * @extends uwm.diagram.AbstractDiagram.Class
  * @constructor
  */
 uwm.diagram.DiagramClass = function() {
@@ -23,6 +23,6 @@ uwm.diagram.DiagramClass = function() {
 	this.instanceClassName = 'uwm.diagram.Diagram';
 	this.defaultLabel = "New Diagram";
 }
-Ext.extend(uwm.diagram.DiagramClass, uwm.diagram.StandardDiagramClass);
+Ext.extend(uwm.diagram.DiagramClass, uwm.diagram.AbstractDiagramClass);
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new uwm.diagram.DiagramClass());

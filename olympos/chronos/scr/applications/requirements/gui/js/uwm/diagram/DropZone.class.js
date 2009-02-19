@@ -156,7 +156,7 @@ uwm.diagram.DropZone.prototype.checkDropable = function(modelData) {
 uwm.diagram.DropZone.prototype.checkSemanticGroup = function(modelData) {
 	var result = false;
 	for (var i = 0; i < this.diagram.supportedGroups.length; i++) {
-		if (this.diagram.supportedGroups[i] == modelData.getSemanticGroup()) {
+		if (this.diagram.supportedGroups[i] == modelData.semanticGroup) {
 			result = true;
 		}
 	}

@@ -19,9 +19,9 @@ Ext.namespace("uwm.modeltree");
  * @constructor
  * @param {Object} config The configuration object.
  */
-uwm.modeltree.StandardDiagramNode = function(config) {
+uwm.modeltree.AbstractDiagramNode = function(config) {
 	
-	uwm.modeltree.StandardDiagramNode.superclass.constructor.call(this, Ext.apply(this, {}, config));
+	uwm.modeltree.AbstractDiagramNode.superclass.constructor.call(this, Ext.apply(this, {}, config));
 	
 	var self = this;
 	
@@ -31,7 +31,7 @@ uwm.modeltree.StandardDiagramNode = function(config) {
 
 }
 
-Ext.extend(uwm.modeltree.StandardDiagramNode, uwm.objecttree.Node, {
+Ext.extend(uwm.modeltree.AbstractDiagramNode, uwm.objecttree.Node, {
 
 	buildContextMenu: function() {
 		var self = this;
