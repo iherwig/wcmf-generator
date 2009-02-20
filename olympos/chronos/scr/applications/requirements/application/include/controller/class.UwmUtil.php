@@ -48,7 +48,7 @@ class UwmUtil {
 			if ($currModel) {
 				self::processModel($currModel);
 			} else {
-				echo 'Error: Unknown model id '+$startModel;
+				echo 'Error: Unknown model id ' . $startModel;
 			}
 		} else if ($startPackage) {
 			$currPackage = self::$persistenceFacade->load($startPackage);
@@ -57,7 +57,7 @@ class UwmUtil {
 				self::processPackage($currPackage);
 				self::$dom->endElement();
 			} else {
-				echo 'Error: Unknown package id '+$startPackage;
+				echo 'Error: Unknown package id ' . $startPackage;
 			}
 		} else {
 			self::processModels();
@@ -72,7 +72,7 @@ class UwmUtil {
 		self::$dom = null;
 	}
 
-	private function appendAttributes($node)
+	private static function appendAttributes($node)
 	{
 		$nodes = array ($node);
 		NodeUtil::translateValues($nodes);
@@ -88,7 +88,7 @@ class UwmUtil {
 		}
 	}
 
-	private function processModels()
+	private static function processModels()
 	{
 		$modelIds = self::$persistenceFacade->getOIDs('Model');
 		foreach ($modelIds as $currModelId)
@@ -100,7 +100,8 @@ class UwmUtil {
 		}
 	}
 
-	private function processModel($currModel) {
+	private static function processModel($currModel) {
+		self::check($currModel->getId());
 		self::$dom->startElement('Model');
 	
 		self::appendAttributes($currModel);
@@ -118,7 +119,7 @@ class UwmUtil {
 		self::$dom->endElement();
 	}
 
-	private function processPackage($currPackage)
+	private static function processPackage($currPackage)
 	{
 		self::check($currPackage->getId());
 		self::$dom->startElement('Package');
@@ -129,19 +130,93 @@ class UwmUtil {
 		$children = $currPackage->getChildren();
 		foreach ($children as $currChild)
 		{
-			if ($currChild->getType() != 'Package') {
-				self::processNode($currChild);
-			} else {
-				self::processPackage($currChild);
-			}
+			$childType = $currChild->getType();
 		
-			$currChild = $currChild->getNextSibling();
+			switch($childType) {
+				case 'Package':
+					self::processPackage($currChild);
+					break;
+			
+				case 'ChiBusinessUseCase':
+				case 'ChiBusinessUseCaseCore':
+					self::processUseCase($currChild);
+					break;
+			
+				case 'ChiNode':
+					self::processChiNode($currChild);
+					break;
+			
+				default:
+					self::processNode($currChild);
+			}
 		}
 	
 		self::$dom->endElement();
 	}
 
-	private function processNode($currNode)
+	private static function processUseCase($currNode) {
+		self::check($currNode->getId());
+		self::$dom->startElement($currNode->getType());
+	
+		self::appendAttributes($currNode);
+	
+		$currNode->loadChildren();
+		$children = $currNode->getChildren();
+		foreach ($children as $currChild)
+		{
+			$childType = self::getRealType($currChild);
+			
+			if ($childType == 'ActivitySet') {
+				self::processActivitySet($currChild);
+			} else if (self::processManyToMany($currChild, $currNode->getId())) {
+				//do nothing
+			} else {
+		    	Message::error('Invalid child of UseCase: ' . $currChild->getId(), __FILE__, __LINE__);
+			}
+		}
+
+		self::$dom->endElement();
+	}
+
+	private static function processChiNode($currNode) {
+		self::check($currNode->getId());
+		self::$dom->startElement($currNode->getType());
+	
+		self::appendAttributes($currNode);
+	
+		$currNode->loadChildren();
+		$children = $currNode->getChildren();
+		foreach ($children as $currChild)
+		{
+			$childType = self::getRealType($currChild);
+			
+			if ($childType != 'Figure') {
+				self::processNode($currChild);
+			}
+		}
+
+		self::$dom->endElement();
+	}
+
+	private static function processActivitySet($currNode) {
+		self::check($currNode->getId());
+		self::$dom->startElement('ActivitySet');
+	
+		self::appendAttributes($currNode);
+	
+		$currNode->loadChildren();
+		$children = $currNode->getChildren();
+		foreach ($children as $currChild)
+		{
+			if ($currChild->getType() != 'Figure') {
+				self::processNode($currChild);
+			}
+		}
+
+		self::$dom->endElement();
+	}
+
+	private static function processNode($currNode)
 	{
 		self::check($currNode->getId());
 		self::$dom->startElement($currNode->getType());
@@ -152,21 +227,10 @@ class UwmUtil {
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild)
 		{
-			if ($currChild->isManyToManyObject())
-			{
-				$currChild->loadParents();
-				$parents = $currChild->getParents();
-				foreach ($parents as $currParent)
-				{
-					if ($currParent->getId() != $currNode->getId())
-					{
-						self::$dom->startElement('ManyToMany');
-						self::$dom->writeAttribute('targetType', $currParent->getType());
-						self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
-						self::$dom->endElement();
-					}
-				}
-			}   /*else if ($currNode->getType() != 'Diagram' && $currChild->getType() == 'Figure')
+			if (self::processManyToMany($currChild, $currNode->getId())) {
+				//do nothing
+			}
+			 /*else if ($currNode->getType() != 'Diagram' && $currChild->getType() == 'Figure')
 			 {
 			 self::processNode($currChild);
 			 }*/
@@ -187,6 +251,48 @@ class UwmUtil {
 		}
 	
 		self::$dom->endElement();
+	}
+	
+	private static function processManyToMany($currChild, $parentId) {
+		$result = false;
+
+		if ($currChild->isManyToManyObject())
+		{
+			$result = true;
+			
+			$currChild->loadParents();
+			$parents = $currChild->getParents();
+			foreach ($parents as $currParent)
+			{
+				if ($currParent->getId() != $parentId)
+				{
+					$className = self::getRealType($currParent);
+				
+					self::$dom->startElement('ManyToMany');
+					self::$dom->writeAttribute('targetType', $className);
+					self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
+					self::$dom->writeAttribute('targetRole', $currParent->getType());
+					self::$dom->endElement();
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	private static function getRealType($node) {
+		$superClass = get_class($node);
+		do {
+			$className = $superClass;
+			$superClass = get_parent_class($className);
+			$superSuperClass = get_parent_class($superClass);
+		} while ($superSuperClass != 'ChiBase' && $superSuperClass != '');
+		
+		if ($superSuperClass == '') {
+			$className = get_class($node);
+		}
+	
+		return $className;
 	}
 
 }
