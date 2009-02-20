@@ -60,6 +60,7 @@ class UWMExporterController extends Controller
 		$exportFile = "$tmpUmlPath/uml-output.uml";
 		
 		readfile($exportFile);
+		//readfile($tmpUwmExportPath);
 		
 		$this->check('File written to output');
 
