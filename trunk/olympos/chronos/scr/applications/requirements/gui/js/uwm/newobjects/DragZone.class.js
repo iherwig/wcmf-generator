@@ -28,21 +28,21 @@ uwm.newobjects.DragZone = function(el, config) {
 	this.el = el;
 }
 
-Ext.extend(uwm.newobjects.DragZone, Ext.grid.GridDragZone, {
-	getDragData: function(e) {
-		var result = uwm.newobjects.DragZone.superclass.getDragData.call(this, e);
-		
-		var sourceElement = e.getTarget();
-		
-		result.repairXY = Ext.fly(sourceElement).getXY();
-		result.data = this.grid.getSelectionModel().getSelected().get("modelClass");
-		
-		this.el.dragData = result;
-		
-		return result;
-	},
+Ext.extend(uwm.newobjects.DragZone, Ext.grid.GridDragZone);
+
+uwm.newobjects.DragZone.prototype.getDragData = function(e) {
+	var result = uwm.newobjects.DragZone.superclass.getDragData.call(this, e);
 	
-	getRepairXY: function() {
-		return this.dragData.repairXY;
-	}
-})
+	var sourceElement = e.getTarget();
+	
+	result.repairXY = Ext.fly(sourceElement).getXY();
+	result.data = this.grid.getSelectionModel().getSelected().get("modelClass");
+	
+	this.el.dragData = result;
+	
+	return result;
+}
+
+uwm.newobjects.DragZone.prototype.getRepairXY = function() {
+	return this.dragData.repairXY;
+}

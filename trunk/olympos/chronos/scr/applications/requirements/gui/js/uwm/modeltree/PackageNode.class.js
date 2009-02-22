@@ -13,7 +13,7 @@ Ext.namespace("uwm.modeltree");
 
 /**
  * @class A Package in Model Tree.
- * 
+ *
  * @extends uwm.objecttree.Node
  * @see uwm.modeltree.ModelTree
  * @constructor
@@ -28,70 +28,68 @@ uwm.modeltree.PackageNode = function(config) {
 	}, config));
 }
 
-Ext.extend(uwm.modeltree.PackageNode, uwm.objecttree.Node, {
-	/**
-	 * @member uwm.modeltree.PackageNode
-	 */
-	buildContextMenu: function() {
-		var self = this;
-		
-		this.contextMenu = new Ext.menu.Menu({
-			items: [{
-				text: uwm.Dict.translate('Add package'),
-				handler: function(item, e) {
-					self.addPackage(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate('Add diagram'),
-				handler: function(item, e) {
-					self.addDiagram(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate('Delete from model'),
-				handler: function(item, e) {
-					self.deleteFromModel(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate('Select as grid scope'),
-				handler: function(item, e) {
-					self.selectAsScope(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate("Reload"),
-				handler: function(item, e) {
-					self.reload();
-				}
-			}, {
-				text: uwm.Dict.translate('Export as UML'),
-				handler: function(item, e) {
-					new uwm.ui.Download({
-						title: uwm.Dict.translate('Exporting UML ...'),
-						downloadURL: "../application/main.php?response_format=JSON&usr_action=exportUWM&startPackage=" + self.getModelNode().getOid()
-					}).show();
-				}
-			}, {
-				text: uwm.Dict.translate('Export as Word Document'),
-				handler: function(item, e) {
-					new uwm.ui.Download({
-						title: uwm.Dict.translate('Exporting Word Document ...'),
-						downloadURL: "../application/main.php?response_format=JSON&usr_action=exportDoc&startPackage=" + self.getModelNode().getOid()
-					}).show();
-				}
-			}]
-		});
-		
-		return this.contextMenu;
-	},
+Ext.extend(uwm.modeltree.PackageNode, uwm.objecttree.Node);
+
+/**
+ * @member uwm.modeltree.PackageNode
+ */
+uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
+	var self = this;
 	
-	addPackage: function(self, e) {
-		uwm.model.ModelContainer.getInstance().createPackage(this.getModelNode());
-	},
+	this.contextMenu = new Ext.menu.Menu({
+		items: [{
+			text: uwm.Dict.translate('Add package'),
+			handler: function(item, e) {
+				self.addPackage(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate('Add diagram'),
+			handler: function(item, e) {
+				self.addDiagram(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate('Delete from model'),
+			handler: function(item, e) {
+				self.deleteFromModel(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate('Select as grid scope'),
+			handler: function(item, e) {
+				self.selectAsScope(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate("Reload"),
+			handler: function(item, e) {
+				self.reload();
+			}
+		}, {
+			text: uwm.Dict.translate('Export as UML'),
+			handler: function(item, e) {
+				new uwm.ui.Download({
+					title: uwm.Dict.translate('Exporting UML ...'),
+					downloadURL: "../application/main.php?response_format=JSON&usr_action=exportUWM&startPackage=" + self.getModelNode().getOid()
+				}).show();
+			}
+		}, {
+			text: uwm.Dict.translate('Export as Word Document'),
+			handler: function(item, e) {
+				new uwm.ui.Download({
+					title: uwm.Dict.translate('Exporting Word Document ...'),
+					downloadURL: "../application/main.php?response_format=JSON&usr_action=exportDoc&startPackage=" + self.getModelNode().getOid()
+				}).show();
+			}
+		}]
+	});
 	
-	addDiagram: function(self, e) {
-		uwm.model.ModelContainer.getInstance().createDiagram(this.getModelNode());
-	},
-		
-	selectAsScope: function(self, e) {
-		uwm.objectgrid.ObjectGridContainer.getInstance().loadScope(this.modelNode);
-	}
-});
+	return this.contextMenu;
+}
+
+uwm.modeltree.PackageNode.prototype.addPackage = function(self, e) {
+	uwm.model.ModelContainer.getInstance().createPackage(this.getModelNode());
+}
+
+uwm.modeltree.PackageNode.prototype.addDiagram = function(self, e) {
+	uwm.model.ModelContainer.getInstance().createDiagram(this.getModelNode());
+}, uwm.modeltree.PackageNode.prototype.selectAsScope = function(self, e) {
+	uwm.objectgrid.ObjectGridContainer.getInstance().loadScope(this.modelNode);
+}

@@ -28,38 +28,37 @@ uwm.modeltree.UseCaseNode = function(config) {
 	}, config));
 }
 
-Ext.extend(uwm.modeltree.UseCaseNode, uwm.objecttree.Node, {
-	/**
-	 * @member uwm.modeltree.PackageNode
-	 */
-	buildContextMenu: function() {
-		var self = this;
-		
-		this.contextMenu = new Ext.menu.Menu({
-			items: [{
-				text: uwm.Dict.translate('Add activity set'),
-				handler: function(item, e) {
-					self.addActivitySet(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate('Delete from model'),
-				handler: function(item, e) {
-					self.deleteFromModel(item, e);
-				}
-			},  {
-				text: uwm.Dict.translate("Reload"),
-				handler: function(item, e) {
-					self.reload();
-				}
-			}]
-		});
-		
-		return this.contextMenu;
-	},
+Ext.extend(uwm.modeltree.UseCaseNode, uwm.objecttree.Node);
+
+/**
+ * @member uwm.modeltree.PackageNode
+ */
+uwm.modeltree.UseCaseNode.prototype.buildContextMenu = function() {
+	var self = this;
 	
+	this.contextMenu = new Ext.menu.Menu({
+		items: [{
+			text: uwm.Dict.translate('Add activity set'),
+			handler: function(item, e) {
+				self.addActivitySet(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate('Delete from model'),
+			handler: function(item, e) {
+				self.deleteFromModel(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate("Reload"),
+			handler: function(item, e) {
+				self.reload();
+			}
+		}]
+	});
 	
-	addActivitySet: function(self, e) {
-		uwm.model.ModelContainer.getInstance().createActivitySet(this.getModelNode());
-	}
-	
-});
+	return this.contextMenu;
+}
+
+
+uwm.modeltree.UseCaseNode.prototype.addActivitySet = function(self, e) {
+	uwm.model.ModelContainer.getInstance().createActivitySet(this.getModelNode());
+}
