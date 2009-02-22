@@ -128,7 +128,7 @@ Ext.namespace(<span class="literal">"uwm.modeltree"</span>);
 
 <span class="comment">/**
  * <span class="attrib">@class</span> Asynchronously loads elements in Model Tree.
- * 
+ *
  * <span class="attrib">@extends</span> Ext.tree.TreeLoader
  * <span class="attrib">@see</span> uwm.modeltree.ModelTree
  * <span class="attrib">@constructor</span>
@@ -138,72 +138,98 @@ uwm.modeltree.Loader = <span class="reserved">function</span>() {
 }
 
 uwm.modeltree.Loader = Ext.extend(Ext.tree.TreeLoader, {
-    initComponent: <span class="reserved">function</span>(){
-        Ext.apply(<span class="reserved">this</span>, {});
-        
-        uwm.modeltree.Loader.superclass.initComponent.apply(<span class="reserved">this</span>, arguments);
-    },
-    
-    load: <span class="reserved">function</span>(node, callback){
-        var self = <span class="reserved">this</span>;
-        
-        uwm.persistency.Persistency.getInstance().loadChildren(node.id, <span class="reserved">function</span>(request, data){
-            self.reformatData(self, node, callback, data);
-        });
-    },
-    
-    reformatData: <span class="reserved">function</span>(self, node, callback, data){
-        var changed = false;
-        
-        <span class="reserved">for</span> (var i = 0; i &lt; data.objects.length; i++) {
-            changed = true;
-            
-            var responseNode = data[<span class="literal">'objects'</span>][i];
-            var uwmClassName = uwm.Util.getUwmClassNameFromOid(responseNode.oid);
-            
-            var newNode = null;
-            
-            switch (uwmClassName) {
-                case <span class="literal">"Model"</span>:
-                    newNode = new uwm.modeltree.ModelNode({
-                        text: responseNode.text,
-                        <span class="comment">//leaf: !responseNode.hasChildren,</span>
-                        oid: responseNode.oid
-                    });
-                    break;
-                    
-                case <span class="literal">"Package"</span>:
-                    newNode = new uwm.modeltree.PackageNode({
-                        text: responseNode.text,
-                        <span class="comment">//leaf: !responseNode.hasChildren,</span>
-                        oid: responseNode.oid
-                    });
-                    break;
-                    
-                case <span class="literal">"Diagram"</span>:
-                    newNode = new uwm.modeltree.DiagramNode({
-                        text: responseNode.text,
-                        oid: responseNode.oid
-                    });
-                    break;
-                    
-                default:
-                    newNode = new uwm.modeltree.Node({
-                        text: responseNode.text,
-                        oid: responseNode.oid,
-                        uwmClassName: uwmClassName
-                    });
-                    break;
-            }
-            
-            node.appendChild(newNode);
-        }
-        
-        <span class="reserved">if</span> (callback instanceof Function) {
-            callback(<span class="reserved">this</span>, node);
-        }
-    }
-});
+	initComponent: <span class="reserved">function</span>() {
+		Ext.apply(<span class="reserved">this</span>, {});
+		
+		uwm.modeltree.Loader.superclass.initComponent.apply(<span class="reserved">this</span>, arguments);
+	}
+})
+
+uwm.modeltree.Loader.<span class="reserved">prototype</span>.load = <span class="reserved">function</span>(node, callback) {
+	var self = <span class="reserved">this</span>;
+	
+	uwm.persistency.Persistency.getInstance().loadChildren(node.id, <span class="reserved">function</span>(request, data) {
+		self.reformatData(self, node, callback, data);
+	});
+}
+
+uwm.modeltree.Loader.<span class="reserved">prototype</span>.reformatData = <span class="reserved">function</span>(self, node, callback, data) {
+	var changed = false;
+	
+	<span class="reserved">for</span> (var i = 0; i &lt; data.objects.length; i++) {
+		changed = true;
+		
+		var responseNode = data[<span class="literal">'objects'</span>][i];
+		var uwmClassName = uwm.Util.getUwmClassNameFromOid(responseNode.oid);
+		
+		var newNode = null;
+		
+		switch (uwmClassName) {
+			case <span class="literal">"Model"</span>:
+				newNode = new uwm.modeltree.ModelNode({
+					text: responseNode.text,
+					<span class="comment">//leaf: !responseNode.hasChildren,</span>
+					oid: responseNode.oid
+				});
+				break;
+				
+			case <span class="literal">"Package"</span>:
+				newNode = new uwm.modeltree.PackageNode({
+					text: responseNode.text,
+					<span class="comment">//leaf: !responseNode.hasChildren,</span>
+					oid: responseNode.oid
+				});
+				break;
+				
+			case <span class="literal">"Diagram"</span>:
+				newNode = new uwm.modeltree.DiagramNode({
+					text: responseNode.text,
+					oid: responseNode.oid
+				});
+				break;
+				
+			case <span class="literal">"ActivitySet"</span>:
+				newNode = new uwm.modeltree.ActivitySetNode({
+					text: responseNode.text,
+					oid: responseNode.oid
+				});
+				break;
+				
+			case <span class="literal">"ChiBusinessUseCase"</span>:
+				newNode = new uwm.modeltree.UseCaseNode({
+					text: responseNode.text,
+					oid: responseNode.oid
+				});
+				break;
+				
+			case <span class="literal">"ChiBusinessUseCaseCore"</span>:
+				newNode = new uwm.modeltree.UseCaseCoreNode({
+					text: responseNode.text,
+					oid: responseNode.oid
+				});
+				break;
+				
+			case <span class="literal">"Figure"</span>:
+			case <span class="literal">"NMUCActor"</span>:
+				break;
+				
+			default:
+				newNode = new uwm.modeltree.Node({
+					text: responseNode.text,
+					oid: responseNode.oid,
+					uwmClassName: uwmClassName
+				});
+				break;
+		}
+		<span class="reserved">if</span> (newNode) {
+			node.appendChild(newNode);
+		}
+	}
+	
+	<span class="reserved">if</span> (callback instanceof Function) {
+		callback(<span class="reserved">this</span>, node);
+	}
+}
 </pre>
 	<hr>
 
@@ -262,6 +288,6 @@ uwm.modeltree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Sun Feb 22 12:55:09 2009</div>
 </body>
 </html>

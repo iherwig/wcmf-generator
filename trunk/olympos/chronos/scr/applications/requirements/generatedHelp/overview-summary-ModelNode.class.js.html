@@ -128,7 +128,7 @@ Ext.namespace(<span class="literal">"uwm.modeltree"</span>);
 
 <span class="comment">/**
  * <span class="attrib">@class</span> A Model in Model Tree.
- * 
+ *
  * <span class="attrib">@extends</span> uwm.objecttree.Node
  * <span class="attrib">@see</span> uwm.modeltree.ModelTree
  * <span class="attrib">@constructor</span>
@@ -144,62 +144,61 @@ uwm.modeltree.ModelNode = <span class="reserved">function</span>(config) {
 	}, config));
 }
 
-Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
+Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node);
 
-	buildContextMenu: <span class="reserved">function</span>() {
-		var self = <span class="reserved">this</span>;
-		
-		<span class="reserved">this</span>.contextMenu = new Ext.menu.Menu({
-			items: [{
-				text: uwm.Dict.translate(<span class="literal">'Add package'</span>),
-				handler: <span class="reserved">function</span>(item, e) {
-					self.addPackage(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate(<span class="literal">'Delete from model'</span>),
-				handler: <span class="reserved">function</span>(item, e) {
-					self.deleteFromModel(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate(<span class="literal">'Select as grid scope'</span>),
-				handler: <span class="reserved">function</span>(item, e) {
-					self.selectAsScope(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate(<span class="literal">"Reload"</span>),
-				handler: <span class="reserved">function</span>(item, e) {
-					self.reload();
-				}
-			}, {
-				text: uwm.Dict.translate(<span class="literal">'Export as UML'</span>),
-				handler: <span class="reserved">function</span>(item, e) {
-					new uwm.ui.Download({
-						title: uwm.Dict.translate(<span class="literal">'Exporting UML ...'</span>),
-						downloadURL: <span class="literal">"../application/main.php?response_format=JSON&amp;usr_action=exportUWM&amp;startModel="</span> + self.getModelNode().getOid()
-					}).show();
-				}
-			}, {
-				text: uwm.Dict.translate(<span class="literal">'Export as Word Document'</span>),
-				handler: <span class="reserved">function</span>(item, e) {
-					new uwm.ui.Download({
-						title: uwm.Dict.translate(<span class="literal">'Exporting Word Document ...'</span>),
-						downloadURL: <span class="literal">"../application/main.php?response_format=JSON&amp;usr_action=exportDoc&amp;startModel="</span> + self.getModelNode().getOid()
-					}).show();
-				}
-			}]
-		});
-		
-		<span class="reserved">return</span> <span class="reserved">this</span>.contextMenu;
-	},
+uwm.modeltree.ModelNode.<span class="reserved">prototype</span>.buildContextMenu = <span class="reserved">function</span>() {
+	var self = <span class="reserved">this</span>;
 	
-	addPackage: <span class="reserved">function</span>(self, e) {
-		uwm.model.ModelContainer.getInstance().createPackage(<span class="reserved">this</span>.getModelNode());
-	},
+	<span class="reserved">this</span>.contextMenu = new Ext.menu.Menu({
+		items: [{
+			text: uwm.Dict.translate(<span class="literal">'Add package'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.addPackage(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate(<span class="literal">'Delete from model'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.deleteFromModel(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate(<span class="literal">'Select as grid scope'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.selectAsScope(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate(<span class="literal">"Reload"</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.reload();
+			}
+		}, {
+			text: uwm.Dict.translate(<span class="literal">'Export as UML'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				new uwm.ui.Download({
+					title: uwm.Dict.translate(<span class="literal">'Exporting UML ...'</span>),
+					downloadURL: <span class="literal">"../application/main.php?response_format=JSON&amp;usr_action=exportUWM&amp;startModel="</span> + self.getModelNode().getOid()
+				}).show();
+			}
+		}, {
+			text: uwm.Dict.translate(<span class="literal">'Export as Word Document'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				new uwm.ui.Download({
+					title: uwm.Dict.translate(<span class="literal">'Exporting Word Document ...'</span>),
+					downloadURL: <span class="literal">"../application/main.php?response_format=JSON&amp;usr_action=exportDoc&amp;startModel="</span> + self.getModelNode().getOid()
+				}).show();
+			}
+		}]
+	});
 	
-	selectAsScope: <span class="reserved">function</span>(self, e) {
-		uwm.objectgrid.ObjectGridContainer.getInstance().loadScope(<span class="reserved">this</span>.modelNode);
-	}
-});
+	<span class="reserved">return</span> <span class="reserved">this</span>.contextMenu;
+}
+
+uwm.modeltree.ModelNode.<span class="reserved">prototype</span>.addPackage = <span class="reserved">function</span>(self, e) {
+	uwm.model.ModelContainer.getInstance().createPackage(<span class="reserved">this</span>.getModelNode());
+}
+
+uwm.modeltree.ModelNode.<span class="reserved">prototype</span>.selectAsScope = <span class="reserved">function</span>(self, e) {
+	uwm.objectgrid.ObjectGridContainer.getInstance().loadScope(<span class="reserved">this</span>.modelNode);
+}
 </pre>
 	<hr>
 
@@ -258,6 +257,6 @@ Ext.extend(uwm.modeltree.ModelNode, uwm.objecttree.Node, {
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Sun Feb 22 12:55:09 2009</div>
 </body>
 </html>

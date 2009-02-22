@@ -123,7 +123,7 @@ Ext.namespace(<span class="literal">"uwm.objecttree"</span>);
 
 <span class="comment">/**
  * <span class="attrib">@class</span> Represants a Model Object in Model Tree or Hierarchy Tree.
- * 
+ *
  * <span class="attrib">@extends</span> uwm.objecttree.Node
  * <span class="attrib">@see</span> uwm.objecttree.ObjectTree
  * <span class="attrib">@see</span> uwm.model.ModelObject
@@ -134,73 +134,73 @@ uwm.objecttree.ObjectNode = <span class="reserved">function</span>(config) {
 	uwm.objecttree.ObjectNode.superclass.constructor.call(<span class="reserved">this</span>, Ext.apply(<span class="reserved">this</span>, {}, config));
 }
 
-Ext.extend(uwm.objecttree.ObjectNode, uwm.objecttree.Node, {
-	buildContextMenu: <span class="reserved">function</span>() {
-		var self = <span class="reserved">this</span>;
-		
-		<span class="reserved">this</span>.contextMenu = new Ext.menu.Menu({
-			items: [{
-				id: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
-				text: uwm.Dict.translate(<span class="literal">'Show in diagram'</span>),
-				handler: <span class="reserved">function</span>(item, e) {
-					self.showInDiagram(item, e);
-				}
-			}, {
-				id: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID,
-				text: uwm.Dict.translate(<span class="literal">'Show in grid'</span>),
-				handler: <span class="reserved">function</span>(item, e) {
-					self.showInGrid(item.e);
-				}
-			}, {
-				text: uwm.Dict.translate(<span class="literal">'Delete from model'</span>),
-				handler: <span class="reserved">function</span>(item, e) {
-					self.deleteFromModel(item, e);
-				}
-			}, {
-				text: uwm.Dict.translate(<span class="literal">'Help'</span>),
-				<span class="comment">//iconCls: "uwm-help-icon",</span>
-				handler: <span class="reserved">function</span>(item, e) {
-					self.showHelp(item, e);
-				}
-			}]
-		});
-		
-		<span class="reserved">return</span> <span class="reserved">this</span>.contextMenu;
-	},
-	
-	showContextMenu: <span class="reserved">function</span>(self, e) {
-		var showInDiagram = <span class="reserved">this</span>.contextMenu.items.get(uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID);
-		var showInGrid = <span class="reserved">this</span>.contextMenu.items.get(uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID);
-		
-		var isInDiagram = <span class="reserved">this</span>.containedInCurrentDiagram();
-		showInDiagram.setDisabled(!isInDiagram);
+Ext.extend(uwm.objecttree.ObjectNode, uwm.objecttree.Node);
 
-		var isGridAvailable = <span class="reserved">this</span>.gridAvailable();
-		showInGrid.setDisabled(!isGridAvailable);
-		
-		uwm.objecttree.ObjectNode.superclass.showContextMenu(self, e);
-	},
+uwm.objecttree.ObjectNode.<span class="reserved">prototype</span>.buildContextMenu = <span class="reserved">function</span>() {
+	var self = <span class="reserved">this</span>;
 	
-	containedInCurrentDiagram: <span class="reserved">function</span>() {
-		<span class="reserved">return</span> uwm.diagram.DiagramContainer.getInstance().isModelObjectContainedInCurrentDiagram(<span class="reserved">this</span>.modelNode);
-	},
+	<span class="reserved">this</span>.contextMenu = new Ext.menu.Menu({
+		items: [{
+			id: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
+			text: uwm.Dict.translate(<span class="literal">'Show in diagram'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.showInDiagram(item, e);
+			}
+		}, {
+			id: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID,
+			text: uwm.Dict.translate(<span class="literal">'Show in grid'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.showInGrid(item.e);
+			}
+		}, {
+			text: uwm.Dict.translate(<span class="literal">'Delete from model'</span>),
+			handler: <span class="reserved">function</span>(item, e) {
+				self.deleteFromModel(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate(<span class="literal">'Help'</span>),
+			<span class="comment">//iconCls: "uwm-help-icon",</span>
+			handler: <span class="reserved">function</span>(item, e) {
+				self.showHelp(item, e);
+			}
+		}]
+	});
 	
-	gridAvailable: <span class="reserved">function</span>() {
-		<span class="reserved">return</span> uwm.objectgrid.ObjectGridContainer.getInstance().isGridAvailable(<span class="reserved">this</span>.modelNode);
-	},
+	<span class="reserved">return</span> <span class="reserved">this</span>.contextMenu;
+}
+
+uwm.objecttree.ObjectNode.<span class="reserved">prototype</span>.showContextMenu = <span class="reserved">function</span>(self, e) {
+	var showInDiagram = <span class="reserved">this</span>.contextMenu.items.get(uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID);
+	var showInGrid = <span class="reserved">this</span>.contextMenu.items.get(uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID);
 	
-	showInDiagram: <span class="reserved">function</span>(self, e) {
-		uwm.diagram.DiagramContainer.getInstance().getCurrentDiagram().scrollToObject(<span class="reserved">this</span>.modelNode);
-	},
+	var isInDiagram = <span class="reserved">this</span>.containedInCurrentDiagram();
+	showInDiagram.setDisabled(!isInDiagram);
 	
-	showInGrid: <span class="reserved">function</span>(self, e) {
-		uwm.objectgrid.ObjectGridContainer.getInstance().selectRow(<span class="reserved">this</span>.modelNode);
-	},
+	var isGridAvailable = <span class="reserved">this</span>.gridAvailable();
+	showInGrid.setDisabled(!isGridAvailable);
 	
-	showHelp: <span class="reserved">function</span>(self, e) {
-		uwm.ui.HelpViewer.getInstance().loadUrl(<span class="reserved">this</span>.modelNode.getModelNodeClass().getHelpUrl());
-	}
-});
+	uwm.objecttree.ObjectNode.superclass.showContextMenu(self, e);
+}
+
+uwm.objecttree.ObjectNode.<span class="reserved">prototype</span>.containedInCurrentDiagram = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> uwm.diagram.DiagramContainer.getInstance().isModelObjectContainedInCurrentDiagram(<span class="reserved">this</span>.modelNode);
+}
+
+uwm.objecttree.ObjectNode.<span class="reserved">prototype</span>.gridAvailable = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> uwm.objectgrid.ObjectGridContainer.getInstance().isGridAvailable(<span class="reserved">this</span>.modelNode);
+}
+
+uwm.objecttree.ObjectNode.<span class="reserved">prototype</span>.showInDiagram = <span class="reserved">function</span>(self, e) {
+	uwm.diagram.DiagramContainer.getInstance().getCurrentDiagram().scrollToObject(<span class="reserved">this</span>.modelNode);
+}
+
+uwm.objecttree.ObjectNode.<span class="reserved">prototype</span>.showInGrid = <span class="reserved">function</span>(self, e) {
+	uwm.objectgrid.ObjectGridContainer.getInstance().selectRow(<span class="reserved">this</span>.modelNode);
+}
+
+uwm.objecttree.ObjectNode.<span class="reserved">prototype</span>.showHelp = <span class="reserved">function</span>(self, e) {
+	uwm.ui.HelpViewer.getInstance().loadUrl(<span class="reserved">this</span>.modelNode.getModelNodeClass().getHelpUrl());
+}
 
 uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID = <span class="literal">"showInDiagram"</span>;
 uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID = <span class="literal">"showInGrid"</span>;
@@ -262,6 +262,6 @@ uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID = <span class="literal">"s
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Sun Feb 22 12:55:09 2009</div>
 </body>
 </html>
