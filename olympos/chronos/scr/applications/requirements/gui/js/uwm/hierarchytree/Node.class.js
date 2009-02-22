@@ -13,7 +13,7 @@ Ext.namespace("uwm.hierarchytree");
 
 /**
  * @class A Model Object inside the Hierarchy Tree.
- * 
+ *
  * @extends uwm.objecttree.ObjectNode
  * @see uwm.hierarchytree.HierarchyTree
  * @constructor
@@ -33,43 +33,42 @@ uwm.hierarchytree.Node = function(config) {
 	this.modelNode = config.modelNode;
 }
 
-Ext.extend(uwm.hierarchytree.Node, uwm.objecttree.ObjectNode, {
-	buildContextMenu: function() {
-		var self = this;
-		
-		this.contextMenu = uwm.hierarchytree.Node.superclass.buildContextMenu.apply(this);
-		
-		this.contextMenu.add({
-			text: uwm.Dict.translate('Show in model tree'),
-			handler: function(item, e) {
-				self.showInModelTree(item, e);
-			}
-		});
-		
-		return this.contextMenu;
-	},
+Ext.extend(uwm.hierarchytree.Node, uwm.objecttree.ObjectNode);
+
+uwm.hierarchytree.Node.prototype.buildContextMenu = function() {
+	var self = this;
 	
-	showInModelTree: function(self, e) {
-		uwm.modeltree.ModelTree.getInstance().markNodeByOid(this.getModelNode().getOid());
-	},
+	this.contextMenu = uwm.hierarchytree.Node.superclass.buildContextMenu.apply(this);
 	
-	removeDirectParent: function(parent, parentOids) {
+	this.contextMenu.add({
+		text: uwm.Dict.translate('Show in model tree'),
+		handler: function(item, e) {
+			self.showInModelTree(item, e);
+		}
+	});
 	
-		var result = new Array();
+	return this.contextMenu;
+}
+
+uwm.hierarchytree.Node.prototype.showInModelTree = function(self, e) {
+	uwm.modeltree.ModelTree.getInstance().markNodeByOid(this.getModelNode().getOid());
+}
+
+uwm.hierarchytree.Node.prototype.removeDirectParent = function(parent, parentOids) {
+
+	var result = new Array();
+	
+	if (parentOid) {
+		var parentOid = parent.getOid();
 		
-		if (parentOid) {
-			var parentOid = parent.getOid();
-			
-			for (var i = 0; i < parentOids; i++) {
-				if (parentOids[i] != parentOid) {
-					result.push(parentOids[i]);
-				}
+		for (var i = 0; i < parentOids; i++) {
+			if (parentOids[i] != parentOid) {
+				result.push(parentOids[i]);
 			}
 		}
-		else {
-			result = parentOids;
-		}
-		
-		return result;
+	} else {
+		result = parentOids;
 	}
-});
+	
+	return result;
+}

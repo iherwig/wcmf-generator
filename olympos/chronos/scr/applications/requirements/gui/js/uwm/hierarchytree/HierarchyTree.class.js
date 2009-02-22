@@ -13,7 +13,7 @@ Ext.namespace("uwm.hierarchytree");
 
 /**
  * @class The Hierarchy Tree displays all relations of a selected ModelObject.
- * 
+ *
  * @extends uwm.objecttree.ObjectTree
  * @constructor
  * @param {Object} config The configuration object.
@@ -62,208 +62,209 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 		this.on("afterlayout", this.showInfoMask);
 		
 		this.wasActive = false;
-	},
-	
-	showInfoMask: function() {
-		if (!this.wasActive) {
-			this.infoMask = new uwm.ui.InfoMask(this.body, {
-				msg: uwm.Dict.translate('This tree shows all dependencies of an object. Select an object, right-click and select &quot;Show in hierarchy&quot; to show it here.')
-			});
-			this.infoMask.show();
-		}
-		this.un("afterlayout", this.showInfoMask);
-	},
-	
-	loadNode: function(oid) {
-		this.wasActive = true;
-		
-		if (this.infoMask) {
-			this.infoMask.hide();
-		}
-		this.show();
-		
-		var modelNode = uwm.model.ModelContainer.getInstance().getByOid(oid);
-		
-		currNode = new uwm.hierarchytree.Node({
-			parent: null,
-			modelNode: modelNode,
+	}
+})
+
+uwm.hierarchytree.HierarchyTree.prototype.showInfoMask = function() {
+	if (!this.wasActive) {
+		this.infoMask = new uwm.ui.InfoMask(this.body, {
+			msg: uwm.Dict.translate('This tree shows all dependencies of an object. Select an object, right-click and select &quot;Show in hierarchy&quot; to show it here.')
 		});
-		
-		if (this.root.firstChild) {
-			this.root.firstChild.remove();
-		}
-		
-		this.root.appendChild(currNode);
-		currNode.expand();
-	},
+		this.infoMask.show();
+	}
+	this.un("afterlayout", this.showInfoMask);
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.loadNode = function(oid) {
+	this.wasActive = true;
 	
-	handleDeleteEvent: function(modelObject) {
-		var instances = this.getInstances(modelObject.getOid());
-		
-		for (var i in instances) {
-			if (!(instances[i] instanceof Function)) {
-				var parent = instances[i].parentNode;
-				
-				instances[i].remove();
-				
-				if (!parent.hasChildNodes()) {
-					parent.remove();
-				}
-			}
-		}
-	},
+	if (this.infoMask) {
+		this.infoMask.hide();
+	}
+	this.show();
 	
-	handleChangeLabelEvent: function(modelObject, oldLabel) {
-		var instances = this.getInstances(modelObject.getOid());
-		var label = modelObject.getLabel();
-		
-		for (var i in instances) {
-			if (!(instances[i] instanceof Function)) {
-				instances[i].setText(label);
-			}
-		}
-	},
+	var modelNode = uwm.model.ModelContainer.getInstance().getByOid(oid);
 	
-	handleAssociateEvent: function(parentModelObject, childModelObject) {
-		if (parentModelObject instanceof uwm.model.ModelObject && childModelObject instanceof uwm.model.ModelObject) {
-			this.addPossibleNewChildren(parentModelObject, childModelObject);
-			this.addPossibleNewChildren(childModelObject, parentModelObject);
-		}
-	},
+	currNode = new uwm.hierarchytree.Node({
+		parent: null,
+		modelNode: modelNode,
+	});
 	
-	addPossibleNewChildren: function(parentModelObject, childModelObject) {
-		var instances = this.getInstances(parentModelObject.getOid());
-		
-		for (var i in instances) {
-			var currNode = instances[i];
+	if (this.root.firstChild) {
+		this.root.firstChild.remove();
+	}
+	
+	this.root.appendChild(currNode);
+	currNode.expand();
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.handleDeleteEvent = function(modelObject) {
+	var instances = this.getInstances(modelObject.getOid());
+	
+	for (var i in instances) {
+		if (!(instances[i] instanceof Function)) {
+			var parent = instances[i].parentNode;
 			
-			if (!(currNode instanceof Function)) {
-				var found = false;
-				
-				var searchNode = currNode;
-				for (var j = 0; j < 4; j++) {
-					if (searchNode) {
-						if (searchNode instanceof uwm.hierarchytree.Node && searchNode.getModelNode().getOid() == childModelObject.getOid()) {
-							found = true;
-							break;
-						}
-						
-						searchNode = searchNode.parentNode;
-					} else {
+			instances[i].remove();
+			
+			if (!parent.hasChildNodes()) {
+				parent.remove();
+			}
+		}
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.handleChangeLabelEvent = function(modelObject, oldLabel) {
+	var instances = this.getInstances(modelObject.getOid());
+	var label = modelObject.getLabel();
+	
+	for (var i in instances) {
+		if (!(instances[i] instanceof Function)) {
+			instances[i].setText(label);
+		}
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.handleAssociateEvent = function(parentModelObject, childModelObject) {
+	if (parentModelObject instanceof uwm.model.ModelObject && childModelObject instanceof uwm.model.ModelObject) {
+		this.addPossibleNewChildren(parentModelObject, childModelObject);
+		this.addPossibleNewChildren(childModelObject, parentModelObject);
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.addPossibleNewChildren = function(parentModelObject, childModelObject) {
+	var instances = this.getInstances(parentModelObject.getOid());
+	
+	for (var i in instances) {
+		var currNode = instances[i];
+		
+		if (!(currNode instanceof Function)) {
+			var found = false;
+			
+			var searchNode = currNode;
+			for (var j = 0; j < 4; j++) {
+				if (searchNode) {
+					if (searchNode instanceof uwm.hierarchytree.Node && searchNode.getModelNode().getOid() == childModelObject.getOid()) {
+						found = true;
 						break;
 					}
-				}
-				
-				if (!found) {
-					var connectionType = parentModelObject.getModelNodeClass().getConnectionInfo(childModelObject.getModelNodeClass()).label;
 					
-					var connectionNode = currNode.findChild("text", connectionType);
-					if (!connectionNode) {
-						connectionNode = new uwm.hierarchytree.ConnectionNode({
-							text: connectionType
-						});
-						
-						currNode.appendChild(connectionNode);
-					}
-					
-					var existingNodes = connectionNode.childNodes;
-					var alreadyThere = false;
-					for (var j in existingNodes) {
-						var existingNode = existingNodes[j];
-						
-						if (!(existingNode instanceof Function)) {
-							if (existingNode.getModelNode().getOid() == childModelObject.getOid()) {
-								alreadyThere = true;
-								break;
-							}
-						}
-					}
-					
-					if (!alreadyThere) {
-						var subNode = new uwm.hierarchytree.Node({
-							parent: parentModelObject,
-							modelNode: childModelObject
-						});
-						
-						connectionNode.appendChild(subNode);
-					}
+					searchNode = searchNode.parentNode;
+				} else {
+					break;
 				}
 			}
-		}
-	},
-	
-	handleDisassociateEvent: function(parentModelObject, childModelObject) {
-		if (parentModelObject instanceof uwm.model.ModelObject && childModelObject instanceof uwm.model.ModelObject) {
-			this.deletePossibleChildren(parentModelObject, childModelObject);
-			this.deletePossibleChildren(childModelObject, parentModelObject);
-		}
-	},
-	
-	deletePossibleChildren: function(parentModelObject, childModelObject) {
-		var instances = this.getInstances(parentModelObject.getOid());
-		
-		var self = this;
-		var childOid = childModelObject.getOid();
-		
-		for (var i in instances) {
-			var currNode = instances[i];
 			
-			if (!(currNode instanceof Function)) {
-				var connectionNodes = currNode.childNodes;
+			if (!found) {
+				var connectionType = parentModelObject.getModelNodeClass().getConnectionInfo(childModelObject.getModelNodeClass()).label;
 				
-				for (var j in connectionNodes) {
-					if (!(connectionNodes[j] instanceof Function)) {
-						var child = connectionNodes[j].findChildBy(function(node) {
-							return self.isNodeWithOid(node, childOid);
-						});
+				var connectionNode = currNode.findChild("text", connectionType);
+				if (!connectionNode) {
+					connectionNode = new uwm.hierarchytree.ConnectionNode({
+						text: connectionType
+					});
+					
+					currNode.appendChild(connectionNode);
+				}
+				
+				var existingNodes = connectionNode.childNodes;
+				var alreadyThere = false;
+				for (var j in existingNodes) {
+					var existingNode = existingNodes[j];
+					
+					if (!(existingNode instanceof Function)) {
+						if (existingNode.getModelNode().getOid() == childModelObject.getOid()) {
+							alreadyThere = true;
+							break;
+						}
+					}
+				}
+				
+				if (!alreadyThere) {
+					var subNode = new uwm.hierarchytree.Node({
+						parent: parentModelObject,
+						modelNode: childModelObject
+					});
+					
+					connectionNode.appendChild(subNode);
+				}
+			}
+		}
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.handleDisassociateEvent = function(parentModelObject, childModelObject) {
+	if (parentModelObject instanceof uwm.model.ModelObject && childModelObject instanceof uwm.model.ModelObject) {
+		this.deletePossibleChildren(parentModelObject, childModelObject);
+		this.deletePossibleChildren(childModelObject, parentModelObject);
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.deletePossibleChildren = function(parentModelObject, childModelObject) {
+	var instances = this.getInstances(parentModelObject.getOid());
+	
+	var self = this;
+	var childOid = childModelObject.getOid();
+	
+	for (var i in instances) {
+		var currNode = instances[i];
+		
+		if (!(currNode instanceof Function)) {
+			var connectionNodes = currNode.childNodes;
+			
+			for (var j in connectionNodes) {
+				if (!(connectionNodes[j] instanceof Function)) {
+					var child = connectionNodes[j].findChildBy(function(node) {
+						return self.isNodeWithOid(node, childOid);
+					});
+					
+					if (child) {
+						var parent = child.parentNode;
+						child.remove();
 						
-						if (child) {
-							var parent = child.parentNode;
-							child.remove();
-							
-							if (!parent.hasChildNodes()) {
-								parent.remove();
-							}
+						if (!parent.hasChildNodes()) {
+							parent.remove();
 						}
 					}
 				}
 			}
 		}
-	},
-	
-	isNodeWithOid: function(node, childOid) {
-		var result = false;
-		
-		if (node instanceof uwm.hierarchytree.Node) {
-			result = node.getModelNode().getOid() == childOid;
-		}
-		
-		return result;
-	},
-	
-	getInstances: function(oid) {
-		result = new Array();
-		
-		return this.walkTree(this.getRootNode(), oid, result);
-		
-	},
-	
-	walkTree: function(currNode, oid, result) {
-		for (var i in currNode.childNodes) {
-			if (!(currNode.childNodes[i] instanceof Function)) {
-				var currChild = currNode.childNodes[i];
-				
-				if (currChild instanceof uwm.hierarchytree.Node && currChild.getModelNode().getOid() == oid) {
-					result.push(currChild);
-				}
-				
-				result = this.walkTree(currChild, oid, result);
-			}
-		}
-		
-		return result;
 	}
-});
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.isNodeWithOid = function(node, childOid) {
+	var result = false;
+	
+	if (node instanceof uwm.hierarchytree.Node) {
+		result = node.getModelNode().getOid() == childOid;
+	}
+	
+	return result;
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.getInstances = function(oid) {
+	result = new Array();
+	
+	return this.walkTree(this.getRootNode(), oid, result);
+	
+}
+
+uwm.hierarchytree.HierarchyTree.prototype.walkTree = function(currNode, oid, result) {
+	for (var i in currNode.childNodes) {
+		if (!(currNode.childNodes[i] instanceof Function)) {
+			var currChild = currNode.childNodes[i];
+			
+			if (currChild instanceof uwm.hierarchytree.Node && currChild.getModelNode().getOid() == oid) {
+				result.push(currChild);
+			}
+			
+			result = this.walkTree(currChild, oid, result);
+		}
+	}
+	
+	return result;
+}
+
 
 uwm.hierarchytree.HierarchyTree.getInstance = function() {
 	return uwm.hierarchytree.HierarchyTree.instance;

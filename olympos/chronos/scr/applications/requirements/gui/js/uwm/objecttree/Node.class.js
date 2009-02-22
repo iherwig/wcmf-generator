@@ -13,7 +13,7 @@ Ext.namespace("uwm.objecttree");
 
 /**
  * @class Abstract base class for all ObjectTree nodes.
- * 
+ *
  * @extends Ext.tree.AsyncTreeNode
  * @see uwm.objecttree.ObjectTree
  * @constructor
@@ -35,37 +35,37 @@ uwm.objecttree.Node = function(config) {
 	});
 }
 
-Ext.extend(uwm.objecttree.Node, Ext.tree.AsyncTreeNode, {
-	buildContextMenu: function() {
-		var self = this;
-		
-		this.contextMenu = new Ext.menu.Menu({
-			items: [{
-				text: uwm.Dict.translate('Delete from model'),
-				handler: function(item, e) {
-					self.deleteFromModel(item, e);
-				}
-			}]
-		});
-		
-		return this.contextMenu;
-	},
+Ext.extend(uwm.objecttree.Node, Ext.tree.AsyncTreeNode);
+
+uwm.objecttree.Node.prototype.buildContextMenu = function() {
+	var self = this;
 	
-	showContextMenu: function(self, e) {
-		e.stopPropagation();
-		
-		self.contextMenu.showAt(e.getXY());
-	},
+	this.contextMenu = new Ext.menu.Menu({
+		items: [{
+			text: uwm.Dict.translate('Delete from model'),
+			handler: function(item, e) {
+				self.deleteFromModel(item, e);
+			}
+		}]
+	});
 	
-	deleteFromModel: function(self, e) {
-		uwm.model.ModelContainer.getInstance().deleteByModelNode(this.getModelNode());
-	},
+	return this.contextMenu;
+}
+
+uwm.objecttree.Node.prototype.showContextMenu = function(self, e) {
+	e.stopPropagation();
 	
-	getModelNode: function() {
-		return this.modelNode;
-	},
-	
-	showProperties: function(self, e) {
-		uwm.property.PropertyContainer.getInstance().showProperty(this.getModelNode());
-	}
-});
+	self.contextMenu.showAt(e.getXY());
+}
+
+uwm.objecttree.Node.prototype.deleteFromModel = function(self, e) {
+	uwm.model.ModelContainer.getInstance().deleteByModelNode(this.getModelNode());
+}
+
+uwm.objecttree.Node.prototype.getModelNode = function() {
+	return this.modelNode;
+}
+
+uwm.objecttree.Node.prototype.showProperties = function(self, e) {
+	uwm.property.PropertyContainer.getInstance().showProperty(this.getModelNode());
+}

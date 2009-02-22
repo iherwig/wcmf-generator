@@ -13,7 +13,7 @@ Ext.namespace("uwm.newobjects");
 
 /**
  * @class Shows a list of new Model Objects to be dragged on a Diagram.
- * 
+ *
  * @extends Ext.grid.GridPanel
  * @constructor
  * @param {Object} config The configuration object.
@@ -40,7 +40,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 			split: true,
 			autoScroll: true,
 			height: 250,
-			title: uwm.Dict.translate("New")+" "+this.semanticGroup,
+			title: uwm.Dict.translate("New") + " " + this.semanticGroup,
 			layout: "fit",
 			enableDragDrop: true,
 			ddGroup: uwm.Constants.DD_GROUP,
@@ -85,63 +85,63 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 		});
 		
 		uwm.newobjects.NewObjectsGrid.superclass.initComponent.apply(this, arguments);
-	},
-	
-	getStore: function() {
-		var data = new Array();
-		
-		var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
-		
-		for (var i = 0; i < classes.getCount(); i++) {
-			var currClass = classes.itemAt(i);
-			
-			if (currClass instanceof uwm.model.ModelClass && currClass.semanticGroup==this.semanticGroup) {
-				data.push({
-					iconClass: currClass.getTreeIcon(),
-					title: currClass.getUwmClassName(),
-					description: currClass.getDescription(),
-					helpUrl: currClass.getHelpUrl(),
-					modelClass: currClass
-				});
-			}
-		}
-		
-		return new Ext.data.SimpleStore({
-			data: data,
-			fields: [{
-				name: "iconClass",
-				mapping: "iconClass",
-			}, {
-				name: "title",
-				mapping: "title"
-			}, {
-				name: "description",
-				mapping: "description"
-			}, {
-				name: "modelClass",
-				mapping: "modelClass"
-			}, {
-				name: "helpUrl",
-				mapping: "helpUrl"
-			}]
-		});
-	},
-	
-	render: function(container, position) {
-		uwm.newobjects.NewObjectsGrid.superclass.render.call(this, container, position);
-		
-		this.initDragZone();
-	},
-	
-	initDragZone: function() {
-		new uwm.newobjects.DragZone(this, {});
-	},
-	
-	showImage: function(value) {
-		return "<div class='uwm-grid-icon " + value + "'>&nbsp;</div>";
-	},
-	
-	helpClick: function(grid, record, action, value) {
-		uwm.ui.HelpViewer.getInstance().loadUrl(record.get("helpUrl"));
 	}
 })
+
+uwm.newobjects.NewObjectsGrid.prototype.getStore = function() {
+	var data = new Array();
+	
+	var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
+	
+	for (var i = 0; i < classes.getCount(); i++) {
+		var currClass = classes.itemAt(i);
+		
+		if (currClass instanceof uwm.model.ModelClass && currClass.semanticGroup == this.semanticGroup) {
+			data.push({
+				iconClass: currClass.getTreeIcon(),
+				title: currClass.getUwmClassName(),
+				description: currClass.getDescription(),
+				helpUrl: currClass.getHelpUrl(),
+				modelClass: currClass
+			});
+		}
+	}
+	
+	return new Ext.data.SimpleStore({
+		data: data,
+		fields: [{
+			name: "iconClass",
+			mapping: "iconClass",
+		}, {
+			name: "title",
+			mapping: "title"
+		}, {
+			name: "description",
+			mapping: "description"
+		}, {
+			name: "modelClass",
+			mapping: "modelClass"
+		}, {
+			name: "helpUrl",
+			mapping: "helpUrl"
+		}]
+	});
+}
+
+uwm.newobjects.NewObjectsGrid.prototype.render = function(container, position) {
+	uwm.newobjects.NewObjectsGrid.superclass.render.call(this, container, position);
+	
+	this.initDragZone();
+}
+
+uwm.newobjects.NewObjectsGrid.prototype.initDragZone = function() {
+	new uwm.newobjects.DragZone(this, {});
+}
+
+uwm.newobjects.NewObjectsGrid.prototype.showImage = function(value) {
+	return "<div class='uwm-grid-icon " + value + "'>&nbsp;</div>";
+}
+
+uwm.newobjects.NewObjectsGrid.prototype.helpClick = function(grid, record, action, value) {
+	uwm.ui.HelpViewer.getInstance().loadUrl(record.get("helpUrl"));
+}

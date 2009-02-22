@@ -13,7 +13,7 @@ Ext.namespace("uwm.objecttree");
 
 /**
  * @class Abstract base class of Model Tree and Hierarchy Tree.
- * 
+ *
  * @extends Ext.tree.TreePanel
  * @constructor
  * @param {Object} config The configuration object.
@@ -50,9 +50,11 @@ uwm.objecttree.ObjectTree.prototype.render = function(container, position) {
 	
 	new uwm.objecttree.DragZone(this, {});
 }
+
 uwm.objecttree.ObjectTree.prototype.getTreeIcon = function() {
 	return this.iconCls;
 }
+
 uwm.objecttree.ObjectTree.prototype.getName = function() {
 	return this.name;
 }

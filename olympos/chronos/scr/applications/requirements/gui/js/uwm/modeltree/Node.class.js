@@ -13,7 +13,7 @@ Ext.namespace("uwm.modeltree");
 
 /**
  * @class A ModelObject representation in Model Tree.
- * 
+ *
  * @extends uwm.objecttree.ObjectNode
  * @see uwm.modeltree.ModelTree
  * @constructor
@@ -21,7 +21,7 @@ Ext.namespace("uwm.modeltree");
  */
 uwm.modeltree.Node = function(config) {
 	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndNameAndOid(config.uwmClassName, config.text, config.oid);
-
+	
 	uwm.modeltree.Node.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,
 		iconCls: this.modelNode.getModelNodeClass().getTreeIcon(),
@@ -30,33 +30,33 @@ uwm.modeltree.Node = function(config) {
 	}, config));
 }
 
-Ext.extend(uwm.modeltree.Node, uwm.objecttree.ObjectNode, {
-	buildContextMenu: function() {
-		var self = this;
-		
-		this.contextMenu = uwm.modeltree.Node.superclass.buildContextMenu.apply(this);
-		
-		this.contextMenu.add({
-			text: uwm.Dict.translate('Show in hierarchy'),
-			handler: function(item, e) {
-				self.showInHierarchy(item, e);
-			}
-		});
-		
-		return this.contextMenu;
-	},
+Ext.extend(uwm.modeltree.Node, uwm.objecttree.ObjectNode);
+
+uwm.modeltree.Node.prototype.buildContextMenu = function() {
+	var self = this;
 	
-	showInHierarchy: function(self, e) {
-		uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelNode().getOid());
-	},
+	this.contextMenu = uwm.modeltree.Node.superclass.buildContextMenu.apply(this);
 	
-	gridAvailable: function() {
-		return uwm.objectgrid.ObjectGridContainer.getInstance().isGridAvailable(this.modelNode, this.parentNode.getModelNode().getOid());
-	},
-	
-	expand: function(deep, anim, callback) {
-		if (callback instanceof Function) {
-			callback(this);
+	this.contextMenu.add({
+		text: uwm.Dict.translate('Show in hierarchy'),
+		handler: function(item, e) {
+			self.showInHierarchy(item, e);
 		}
+	});
+	
+	return this.contextMenu;
+}
+
+uwm.modeltree.Node.prototype.showInHierarchy = function(self, e) {
+	uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelNode().getOid());
+}
+
+uwm.modeltree.Node.prototype.gridAvailable = function() {
+	return uwm.objectgrid.ObjectGridContainer.getInstance().isGridAvailable(this.modelNode, this.parentNode.getModelNode().getOid());
+}
+
+uwm.modeltree.Node.prototype.expand = function(deep, anim, callback) {
+	if (callback instanceof Function) {
+		callback(this);
 	}
-});
+}
