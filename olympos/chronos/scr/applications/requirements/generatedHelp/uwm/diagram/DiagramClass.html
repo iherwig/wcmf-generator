@@ -75,7 +75,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <H2>Class uwm.diagram.DiagramClass</H2>
 <PRE>Object
    |
-   +--<a href='../../uwm/model/ModelNodeClass.html'>uwm.model.ModelNodeClass</a>
+   +--uwm.diagram.AbstractDiagram.Class
          |
          +--<b>uwm.diagram.DiagramClass</b>
 </PRE>
@@ -87,14 +87,14 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    <DT>class 
    <B>uwm.diagram.DiagramClass</B>
    
-      <DT>extends <a href='../../uwm/model/ModelNodeClass.html'>uwm.model.ModelNodeClass</a> 
+      <DT>extends uwm.diagram.AbstractDiagram.Class 
    
 
 </DL>
    
    <P>
-   <BR/><i>Singleton</i> defining common characteristics of all Diagrams.
- 
+   <BR/><i>Singleton</i> defining common characteristics of all (default) Diagrams.
+
  <BR/><I>Defined in <a href='../../overview-summary-DiagramClass.class.js.html'>DiagramClass.class.js</a></I><BR/><BR/>
    </P>
    
@@ -128,22 +128,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
    <CODE>&nbsp;Object</CODE></FONT></TD>
    <TD><CODE><B><A HREF="#instanceClassName">instanceClassName</A></B></CODE>
-   <BR>
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-   </TR>
-   
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-   <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-   <CODE>&nbsp;Object</CODE></FONT></TD>
-   <TD><CODE><B><A HREF="#labelProperties">labelProperties</A></B></CODE>
-   <BR>
-   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
-   </TR>
-   
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-   <TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
-   <CODE>&nbsp;Object</CODE></FONT></TD>
-   <TD><CODE><B><A HREF="#treeIcon">treeIcon</A></B></CODE>
    <BR>
    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
    </TR>
@@ -193,49 +177,7 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 
 <!-- ========== METHOD SUMMARY =========== -->
 
-<A NAME="method_summary"><!-- --></A>
-<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
-<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-<TD COLSPAN=2><FONT SIZE="+2">
-<B>Method Summary</B></FONT></TD>
-</TR>
 
-
-   <TR BGCOLOR="white" CLASS="TableRowColor">
-      <TD ALIGN="right" VALIGN="top" WIDTH="1%">
-	 <FONT SIZE="-1">
-	    <CODE>&nbsp;void</CODE>
-	 </FONT>
-      </TD>
-      <TD>
-	 <CODE>
-	    <B>
-	       <A HREF="#getPropertyForm">getPropertyForm</A></B>(modelNode)
-	 </CODE>
-	 <BR>
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	 
-      </TD>
-   </TR>
-
-
-</TABLE>
-
-
-
-&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
-<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
-<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
-<TD><B>Methods inherited from class <a href="../../uwm/model/ModelNodeClass.html">uwm.model.ModelNodeClass</a></B></TD>
-</TR>
-<TR BGCOLOR="white" CLASS="TableRowColor">
-<TD><CODE>
-<!-- Inherited methods -->
-<a href='../../uwm/model/ModelNodeClass.html#getFigureClass'>getFigureClass</a>, <a href='../../uwm/model/ModelNodeClass.html#getUwmClassName'>getUwmClassName</a>, <a href='../../uwm/model/ModelNodeClass.html#getInstanceClassName'>getInstanceClassName</a>, <a href='../../uwm/model/ModelNodeClass.html#getTreeIcon'>getTreeIcon</a>, <a href='../../uwm/model/ModelNodeClass.html#getDefaultLabel'>getDefaultLabel</a>, <a href='../../uwm/model/ModelNodeClass.html#isLabelProperty'>isLabelProperty</a>, <a href='../../uwm/model/ModelNodeClass.html#getGridTabIconClass'>getGridTabIconClass</a>, <a href='../../uwm/model/ModelNodeClass.html#demaskOid'>demaskOid</a>, <a href='../../uwm/model/ModelNodeClass.html#getRealModelClass'>getRealModelClass</a>, <a href='../../uwm/model/ModelNodeClass.html#getGraphics'>getGraphics</a>
-</CODE></TD>
-</TR>
-</TABLE>
-&nbsp;
 
 <P>
 <!-- ========== END METHOD SUMMARY =========== -->
@@ -263,24 +205,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
    <A NAME="instanceClassName"><!-- --></A>
    <H3>instanceClassName</H3>
    <PRE>Object&nbsp;<B>instanceClassName</B></PRE>
-   <UL>
-   
-   
-   </UL>
-   <HR>
-   
-   <A NAME="labelProperties"><!-- --></A>
-   <H3>labelProperties</H3>
-   <PRE>Object&nbsp;<B>labelProperties</B></PRE>
-   <UL>
-   
-   
-   </UL>
-   <HR>
-   
-   <A NAME="treeIcon"><!-- --></A>
-   <H3>treeIcon</H3>
-   <PRE>Object&nbsp;<B>treeIcon</B></PRE>
    <UL>
    
    
@@ -334,34 +258,6 @@ uwm.diagram.DiagramClass</H3>
 
 
 <!-- ============ METHOD DETAIL START ========== -->
-
-<A NAME="method_detail"><!-- --></A>
-<TABLE BORDER="1" CELLPADDING="3" CELLSPACING="0" WIDTH="100%">
-   <TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
-      <TD COLSPAN=1><FONT SIZE="+2">
-         <B>Method Detail</B></FONT>
-      </TD>
-   </TR>
-</TABLE>
-
-<!-- One single method detail entry -->
-
-   <A NAME="getPropertyForm"><!-- --></A>
-   <H3>getPropertyForm</H3>
-   <PRE>void <B>getPropertyForm</B>(modelNode)</PRE>
-   
-
-   <!-- METHOD PARAMETERS START -->
-   
-   <!-- METHOD PARAMETERS END -->
-
-   
-
-   <!-- ADDITIONAL ATTRIBUTES START -->
-   
-   <!-- ADDITIONAL ATTRIBUTES  END -->
-<HR>
-
 
 
 <!-- ============ METHOD DETAIL END ========== -->
@@ -428,6 +324,6 @@ DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor
 <FONT SIZE="-1">
 
 </FONT>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Sun Feb 22 12:55:09 2009</div>
 </BODY>
 </HTML>

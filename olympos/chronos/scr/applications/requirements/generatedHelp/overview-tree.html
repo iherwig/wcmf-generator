@@ -76,6 +76,8 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
                 <LI TYPE="circle"><B><a href='cwm/ActivityReceiveClass.html'>cwm.ActivityReceiveClass</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/ActivitySend.html'>cwm.ActivitySend</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/ActivitySendClass.html'>cwm.ActivitySendClass</a></B></LI> 
+                <LI TYPE="circle"><B><a href='cwm/ActivitySet.html'>cwm.ActivitySet</a></B></LI> 
+                <LI TYPE="circle"><B><a href='cwm/ActivitySetClass.html'>cwm.ActivitySetClass</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/Actor.html'>cwm.Actor</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/ActorClass.html'>cwm.ActorClass</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/Adodbseq.html'>cwm.Adodbseq</a></B></LI> 
@@ -113,6 +115,7 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
                 <LI TYPE="circle"><B><a href='cwm/ChiIssue.html'>cwm.ChiIssue</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/ChiIssueClass.html'>cwm.ChiIssueClass</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/ChiNode.html'>cwm.ChiNode</a></B></LI> 
+                <LI TYPE="circle"><B><a href='cwm/ChiNodeBase.html'>cwm.ChiNodeBase</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/ChiNodeClass.html'>cwm.ChiNodeClass</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/ChiNodeSource.html'>cwm.ChiNodeSource</a></B></LI> 
                 <LI TYPE="circle"><B><a href='cwm/ChiNodeSourceClass.html'>cwm.ChiNodeSourceClass</a></B></LI> 
@@ -167,6 +170,10 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
             <UL>
                 <LI TYPE="circle"><B><a href='uwm/diagram/WorkflowEventListener.html'>uwm.diagram.WorkflowEventListener</a></B></LI> </UL>
                 <LI TYPE="circle">
+                draw2d.CompartmentFigure</LI>
+            <UL>
+                <LI TYPE="circle"><B><a href='uwm/graphics/figure/ClassFigure.html'>uwm.graphics.figure.ClassFigure</a></B></LI> </UL>
+                <LI TYPE="circle">
                 draw2d.Connection</LI>
             <UL>
                 <LI TYPE="circle"><B><a href='uwm/graphics/connection/BaseConnection.html'>uwm.graphics.connection.BaseConnection</a></B></LI> </UL>
@@ -181,6 +188,12 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
                 draw2d.ConnectionLocator</LI>
             <UL>
                 <LI TYPE="circle"><B><a href='uwm/graphics/connection/MidpointLocator.html'>uwm.graphics.connection.MidpointLocator</a></B></LI> </UL>
+                <LI TYPE="circle">
+                draw2d.Node</LI>
+            <UL>
+                <LI TYPE="circle"><B><a href='uwm/graphics/figure/AbstractClassPart.html'>uwm.graphics.figure.AbstractClassPart</a></B></LI> <UL>
+                <LI TYPE="circle"><B><a href='uwm/graphics/figure/Operation.html'>uwm.graphics.figure.Operation</a></B></LI> 
+                <LI TYPE="circle"><B><a href='uwm/graphics/figure/Property.html'>uwm.graphics.figure.Property</a></B></LI> </UL></UL>
                 <LI TYPE="circle">
                 draw2d.Port</LI>
             <UL>
@@ -203,6 +216,7 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
                 Ext.data.DataProxy</LI>
             <UL>
                 <LI TYPE="circle"><B><a href='uwm/property/ComboBoxProxy.html'>uwm.property.ComboBoxProxy</a></B></LI> 
+                <LI TYPE="circle"><B><a href='uwm/property/InlineComboBoxProxy.html'>uwm.property.InlineComboBoxProxy</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/tabadmin/GridProxy.html'>uwm.tabadmin.GridProxy</a></B></LI> </UL>
                 <LI TYPE="circle">
                 Ext.dd.DropZone</LI>
@@ -283,9 +297,13 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
                 Ext.tree.AsyncTreeNode</LI>
             <UL>
                 <LI TYPE="circle"><B><a href='uwm/objecttree/Node.html'>uwm.objecttree.Node</a></B></LI> <UL>
-                <LI TYPE="circle"><B><a href='uwm/modeltree/DiagramNode.html'>uwm.modeltree.DiagramNode</a></B></LI> 
+                <LI TYPE="circle"><B><a href='uwm/modeltree/AbstractDiagramNode.html'>uwm.modeltree.AbstractDiagramNode</a></B></LI> <UL>
+                <LI TYPE="circle"><B><a href='uwm/modeltree/ActivitySetNode.html'>uwm.modeltree.ActivitySetNode</a></B></LI> 
+                <LI TYPE="circle"><B><a href='uwm/modeltree/DiagramNode.html'>uwm.modeltree.DiagramNode</a></B></LI> </UL>
                 <LI TYPE="circle"><B><a href='uwm/modeltree/ModelNode.html'>uwm.modeltree.ModelNode</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/modeltree/PackageNode.html'>uwm.modeltree.PackageNode</a></B></LI> 
+                <LI TYPE="circle"><B><a href='uwm/modeltree/UseCaseCoreNode.html'>uwm.modeltree.UseCaseCoreNode</a></B></LI> 
+                <LI TYPE="circle"><B><a href='uwm/modeltree/UseCaseNode.html'>uwm.modeltree.UseCaseNode</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/objecttree/ObjectNode.html'>uwm.objecttree.ObjectNode</a></B></LI> <UL>
                 <LI TYPE="circle"><B><a href='uwm/hierarchytree/Node.html'>uwm.hierarchytree.Node</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/modeltree/Node.html'>uwm.modeltree.Node</a></B></LI> </UL></UL></UL>
@@ -322,6 +340,10 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
                 <LI TYPE="circle"><B><a href='uwm/ui/Download.html'>uwm.ui.Download</a></B></LI> </UL>
                 <LI TYPE="circle"><B><a href='uwm.html'>uwm</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/diagram.html'>uwm.diagram</a></B></LI> 
+                <LI TYPE="circle">
+                uwm.diagram.AbstractDiagram.Class</LI>
+            <UL>
+                <LI TYPE="circle"><B><a href='uwm/diagram/DiagramClass.html'>uwm.diagram.DiagramClass</a></B></LI> </UL>
                 <LI TYPE="circle"><B><a href='uwm/diagram/autolayout/ForceModel.html'>uwm.diagram.autolayout.ForceModel</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/diagram/autolayout/JiggleObject.html'>uwm.diagram.autolayout.JiggleObject</a></B></LI> <UL>
                 <LI TYPE="circle"><B><a href='uwm/diagram/autolayout/Cell.html'>uwm.diagram.autolayout.Cell</a></B></LI> <UL>
@@ -359,7 +381,9 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
                 <LI TYPE="circle"><B><a href='uwm/model/ModelContainer.html'>uwm.model.ModelContainer</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/model/ModelNode.html'>uwm.model.ModelNode</a></B></LI> <UL>
                 <LI TYPE="circle"><B><a href='uwm/diagram/DiagramBase.html'>uwm.diagram.DiagramBase</a></B></LI> <UL>
-                <LI TYPE="circle"><B><a href='uwm/diagram/Diagram.html'>uwm.diagram.Diagram</a></B></LI> </UL>
+                <LI TYPE="circle"><B><a href='uwm/diagram/AbstractDiagram.html'>uwm.diagram.AbstractDiagram</a></B></LI> <UL>
+                <LI TYPE="circle"><B><a href='uwm/diagram/ActivitySet.html'>uwm.diagram.ActivitySet</a></B></LI> 
+                <LI TYPE="circle"><B><a href='uwm/diagram/Diagram.html'>uwm.diagram.Diagram</a></B></LI> </UL></UL>
                 <LI TYPE="circle"><B><a href='uwm/diagram/Figure.html'>uwm.diagram.Figure</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/model/builtin/Model.html'>uwm.model.builtin.Model</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/model/builtin/Package.html'>uwm.model.builtin.Package</a></B></LI> 
@@ -367,7 +391,8 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
                 <LI TYPE="circle"><B><a href='uwm/model/Relation.html'>uwm.model.Relation</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/model/TechnicalObject.html'>uwm.model.TechnicalObject</a></B></LI> </UL>
                 <LI TYPE="circle"><B><a href='uwm/model/ModelNodeClass.html'>uwm.model.ModelNodeClass</a></B></LI> <UL>
-                <LI TYPE="circle"><B><a href='uwm/diagram/DiagramClass.html'>uwm.diagram.DiagramClass</a></B></LI> 
+                <LI TYPE="circle"><B><a href='uwm/diagram/AbstractDiagramClass.html'>uwm.diagram.AbstractDiagramClass</a></B></LI> <UL>
+                <LI TYPE="circle"><B><a href='uwm/diagram/ActivitySetClass.html'>uwm.diagram.ActivitySetClass</a></B></LI> </UL>
                 <LI TYPE="circle"><B><a href='uwm/model/builtin/ModelClass.html'>uwm.model.builtin.ModelClass</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/model/builtin/PackageClass.html'>uwm.model.builtin.PackageClass</a></B></LI> 
                 <LI TYPE="circle"><B><a href='uwm/model/ModelClass.html'>uwm.model.ModelClass</a></B></LI> 
@@ -450,6 +475,6 @@ parent.document.title="Chronos Web Modeler Class Hierarchy";
 <FONT SIZE="-1">
 
 </FONT>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" parent="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" parent="_parent">JSDoc</a> on Sun Feb 22 12:55:09 2009</div>
 </BODY>
 </HTML>

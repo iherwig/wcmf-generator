@@ -123,7 +123,7 @@ Ext.namespace(<span class="literal">"uwm.newobjects"</span>);
 
 <span class="comment">/**
  * <span class="attrib">@class</span> Shows a list of new Model Objects to be dragged on a Diagram.
- * 
+ *
  * <span class="attrib">@extends</span> Ext.grid.GridPanel
  * <span class="attrib">@constructor</span>
  * <span class="attrib">@param</span> {Object} config The configuration object.
@@ -150,7 +150,7 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 			split: true,
 			autoScroll: true,
 			height: 250,
-			title: uwm.Dict.translate(<span class="literal">"New"</span>)+<span class="literal">" "</span>+<span class="reserved">this</span>.semanticGroup,
+			title: uwm.Dict.translate(<span class="literal">"New"</span>) + <span class="literal">" "</span> + <span class="reserved">this</span>.semanticGroup,
 			layout: <span class="literal">"fit"</span>,
 			enableDragDrop: true,
 			ddGroup: uwm.Constants.DD_GROUP,
@@ -195,66 +195,66 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 		});
 		
 		uwm.newobjects.NewObjectsGrid.superclass.initComponent.apply(<span class="reserved">this</span>, arguments);
-	},
-	
-	getStore: <span class="reserved">function</span>() {
-		var data = new Array();
-		
-		var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
-		
-		<span class="reserved">for</span> (var i = 0; i &lt; classes.getCount(); i++) {
-			var currClass = classes.itemAt(i);
-			
-			<span class="reserved">if</span> (currClass instanceof uwm.model.ModelClass &amp;&amp; currClass.semanticGroup==<span class="reserved">this</span>.semanticGroup) {
-				data.push({
-					iconClass: currClass.getTreeIcon(),
-					title: currClass.getUwmClassName(),
-					description: currClass.getDescription(),
-					helpUrl: currClass.getHelpUrl(),
-					modelClass: currClass
-				});
-			}
-		}
-		
-		<span class="reserved">return</span> new Ext.data.SimpleStore({
-			data: data,
-			fields: [{
-				name: <span class="literal">"iconClass"</span>,
-				mapping: <span class="literal">"iconClass"</span>,
-			}, {
-				name: <span class="literal">"title"</span>,
-				mapping: <span class="literal">"title"</span>
-			}, {
-				name: <span class="literal">"description"</span>,
-				mapping: <span class="literal">"description"</span>
-			}, {
-				name: <span class="literal">"modelClass"</span>,
-				mapping: <span class="literal">"modelClass"</span>
-			}, {
-				name: <span class="literal">"helpUrl"</span>,
-				mapping: <span class="literal">"helpUrl"</span>
-			}]
-		});
-	},
-	
-	render: <span class="reserved">function</span>(container, position) {
-		uwm.newobjects.NewObjectsGrid.superclass.render.call(<span class="reserved">this</span>, container, position);
-		
-		<span class="reserved">this</span>.initDragZone();
-	},
-	
-	initDragZone: <span class="reserved">function</span>() {
-		new uwm.newobjects.DragZone(<span class="reserved">this</span>, {});
-	},
-	
-	showImage: <span class="reserved">function</span>(value) {
-		<span class="reserved">return</span> <span class="literal">"&lt;div class='uwm-grid-icon "</span> + value + <span class="literal">"'&gt;&amp;nbsp;&lt;/div&gt;"</span>;
-	},
-	
-	helpClick: <span class="reserved">function</span>(grid, record, action, value) {
-		uwm.ui.HelpViewer.getInstance().loadUrl(record.get(<span class="literal">"helpUrl"</span>));
 	}
 })
+
+uwm.newobjects.NewObjectsGrid.<span class="reserved">prototype</span>.getStore = <span class="reserved">function</span>() {
+	var data = new Array();
+	
+	var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
+	
+	<span class="reserved">for</span> (var i = 0; i &lt; classes.getCount(); i++) {
+		var currClass = classes.itemAt(i);
+		
+		<span class="reserved">if</span> (currClass instanceof uwm.model.ModelClass &amp;&amp; currClass.semanticGroup == <span class="reserved">this</span>.semanticGroup) {
+			data.push({
+				iconClass: currClass.getTreeIcon(),
+				title: currClass.getUwmClassName(),
+				description: currClass.getDescription(),
+				helpUrl: currClass.getHelpUrl(),
+				modelClass: currClass
+			});
+		}
+	}
+	
+	<span class="reserved">return</span> new Ext.data.SimpleStore({
+		data: data,
+		fields: [{
+			name: <span class="literal">"iconClass"</span>,
+			mapping: <span class="literal">"iconClass"</span>,
+		}, {
+			name: <span class="literal">"title"</span>,
+			mapping: <span class="literal">"title"</span>
+		}, {
+			name: <span class="literal">"description"</span>,
+			mapping: <span class="literal">"description"</span>
+		}, {
+			name: <span class="literal">"modelClass"</span>,
+			mapping: <span class="literal">"modelClass"</span>
+		}, {
+			name: <span class="literal">"helpUrl"</span>,
+			mapping: <span class="literal">"helpUrl"</span>
+		}]
+	});
+}
+
+uwm.newobjects.NewObjectsGrid.<span class="reserved">prototype</span>.render = <span class="reserved">function</span>(container, position) {
+	uwm.newobjects.NewObjectsGrid.superclass.render.call(<span class="reserved">this</span>, container, position);
+	
+	<span class="reserved">this</span>.initDragZone();
+}
+
+uwm.newobjects.NewObjectsGrid.<span class="reserved">prototype</span>.initDragZone = <span class="reserved">function</span>() {
+	new uwm.newobjects.DragZone(<span class="reserved">this</span>, {});
+}
+
+uwm.newobjects.NewObjectsGrid.<span class="reserved">prototype</span>.showImage = <span class="reserved">function</span>(value) {
+	<span class="reserved">return</span> <span class="literal">"&lt;div class='uwm-grid-icon "</span> + value + <span class="literal">"'&gt;&amp;nbsp;&lt;/div&gt;"</span>;
+}
+
+uwm.newobjects.NewObjectsGrid.<span class="reserved">prototype</span>.helpClick = <span class="reserved">function</span>(grid, record, action, value) {
+	uwm.ui.HelpViewer.getInstance().loadUrl(record.get(<span class="literal">"helpUrl"</span>));
+}
 </pre>
 	<hr>
 
@@ -313,6 +313,6 @@ uwm.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Sun Feb 22 12:55:09 2009</div>
 </body>
 </html>

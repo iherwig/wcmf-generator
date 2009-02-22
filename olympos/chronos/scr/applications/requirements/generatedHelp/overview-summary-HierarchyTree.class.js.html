@@ -123,7 +123,7 @@ Ext.namespace(<span class="literal">"uwm.hierarchytree"</span>);
 
 <span class="comment">/**
  * <span class="attrib">@class</span> The Hierarchy Tree displays all relations of a selected ModelObject.
- * 
+ *
  * <span class="attrib">@extends</span> uwm.objecttree.ObjectTree
  * <span class="attrib">@constructor</span>
  * <span class="attrib">@param</span> {Object} config The configuration object.
@@ -172,208 +172,209 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 		<span class="reserved">this</span>.on(<span class="literal">"afterlayout"</span>, <span class="reserved">this</span>.showInfoMask);
 		
 		<span class="reserved">this</span>.wasActive = false;
-	},
-	
-	showInfoMask: <span class="reserved">function</span>() {
-		<span class="reserved">if</span> (!<span class="reserved">this</span>.wasActive) {
-			<span class="reserved">this</span>.infoMask = new uwm.ui.InfoMask(<span class="reserved">this</span>.body, {
-				msg: uwm.Dict.translate(<span class="literal">'This tree shows all dependencies of an object. Select an object, right-click and select &amp;quot;Show in hierarchy&amp;quot; to show it here.'</span>)
-			});
-			<span class="reserved">this</span>.infoMask.show();
-		}
-		<span class="reserved">this</span>.un(<span class="literal">"afterlayout"</span>, <span class="reserved">this</span>.showInfoMask);
-	},
-	
-	loadNode: <span class="reserved">function</span>(oid) {
-		<span class="reserved">this</span>.wasActive = true;
-		
-		<span class="reserved">if</span> (<span class="reserved">this</span>.infoMask) {
-			<span class="reserved">this</span>.infoMask.hide();
-		}
-		<span class="reserved">this</span>.show();
-		
-		var modelNode = uwm.model.ModelContainer.getInstance().getByOid(oid);
-		
-		currNode = new uwm.hierarchytree.Node({
-			parent: null,
-			modelNode: modelNode,
+	}
+})
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.showInfoMask = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.wasActive) {
+		<span class="reserved">this</span>.infoMask = new uwm.ui.InfoMask(<span class="reserved">this</span>.body, {
+			msg: uwm.Dict.translate(<span class="literal">'This tree shows all dependencies of an object. Select an object, right-click and select &amp;quot;Show in hierarchy&amp;quot; to show it here.'</span>)
 		});
-		
-		<span class="reserved">if</span> (<span class="reserved">this</span>.root.firstChild) {
-			<span class="reserved">this</span>.root.firstChild.remove();
-		}
-		
-		<span class="reserved">this</span>.root.appendChild(currNode);
-		currNode.expand();
-	},
+		<span class="reserved">this</span>.infoMask.show();
+	}
+	<span class="reserved">this</span>.un(<span class="literal">"afterlayout"</span>, <span class="reserved">this</span>.showInfoMask);
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.loadNode = <span class="reserved">function</span>(oid) {
+	<span class="reserved">this</span>.wasActive = true;
 	
-	handleDeleteEvent: <span class="reserved">function</span>(modelObject) {
-		var instances = <span class="reserved">this</span>.getInstances(modelObject.getOid());
-		
-		<span class="reserved">for</span> (var i in instances) {
-			<span class="reserved">if</span> (!(instances[i] instanceof Function)) {
-				var parent = instances[i].parentNode;
-				
-				instances[i].remove();
-				
-				<span class="reserved">if</span> (!parent.hasChildNodes()) {
-					parent.remove();
-				}
-			}
-		}
-	},
+	<span class="reserved">if</span> (<span class="reserved">this</span>.infoMask) {
+		<span class="reserved">this</span>.infoMask.hide();
+	}
+	<span class="reserved">this</span>.show();
 	
-	handleChangeLabelEvent: <span class="reserved">function</span>(modelObject, oldLabel) {
-		var instances = <span class="reserved">this</span>.getInstances(modelObject.getOid());
-		var label = modelObject.getLabel();
-		
-		<span class="reserved">for</span> (var i in instances) {
-			<span class="reserved">if</span> (!(instances[i] instanceof Function)) {
-				instances[i].setText(label);
-			}
-		}
-	},
+	var modelNode = uwm.model.ModelContainer.getInstance().getByOid(oid);
 	
-	handleAssociateEvent: <span class="reserved">function</span>(parentModelObject, childModelObject) {
-		<span class="reserved">if</span> (parentModelObject instanceof uwm.model.ModelObject &amp;&amp; childModelObject instanceof uwm.model.ModelObject) {
-			<span class="reserved">this</span>.addPossibleNewChildren(parentModelObject, childModelObject);
-			<span class="reserved">this</span>.addPossibleNewChildren(childModelObject, parentModelObject);
-		}
-	},
+	currNode = new uwm.hierarchytree.Node({
+		parent: null,
+		modelNode: modelNode,
+	});
 	
-	addPossibleNewChildren: <span class="reserved">function</span>(parentModelObject, childModelObject) {
-		var instances = <span class="reserved">this</span>.getInstances(parentModelObject.getOid());
-		
-		<span class="reserved">for</span> (var i in instances) {
-			var currNode = instances[i];
+	<span class="reserved">if</span> (<span class="reserved">this</span>.root.firstChild) {
+		<span class="reserved">this</span>.root.firstChild.remove();
+	}
+	
+	<span class="reserved">this</span>.root.appendChild(currNode);
+	currNode.expand();
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.handleDeleteEvent = <span class="reserved">function</span>(modelObject) {
+	var instances = <span class="reserved">this</span>.getInstances(modelObject.getOid());
+	
+	<span class="reserved">for</span> (var i in instances) {
+		<span class="reserved">if</span> (!(instances[i] instanceof Function)) {
+			var parent = instances[i].parentNode;
 			
-			<span class="reserved">if</span> (!(currNode instanceof Function)) {
-				var found = false;
-				
-				var searchNode = currNode;
-				<span class="reserved">for</span> (var j = 0; j &lt; 4; j++) {
-					<span class="reserved">if</span> (searchNode) {
-						<span class="reserved">if</span> (searchNode instanceof uwm.hierarchytree.Node &amp;&amp; searchNode.getModelNode().getOid() == childModelObject.getOid()) {
-							found = true;
-							break;
-						}
-						
-						searchNode = searchNode.parentNode;
-					} <span class="reserved">else</span> {
+			instances[i].remove();
+			
+			<span class="reserved">if</span> (!parent.hasChildNodes()) {
+				parent.remove();
+			}
+		}
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.handleChangeLabelEvent = <span class="reserved">function</span>(modelObject, oldLabel) {
+	var instances = <span class="reserved">this</span>.getInstances(modelObject.getOid());
+	var label = modelObject.getLabel();
+	
+	<span class="reserved">for</span> (var i in instances) {
+		<span class="reserved">if</span> (!(instances[i] instanceof Function)) {
+			instances[i].setText(label);
+		}
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.handleAssociateEvent = <span class="reserved">function</span>(parentModelObject, childModelObject) {
+	<span class="reserved">if</span> (parentModelObject instanceof uwm.model.ModelObject &amp;&amp; childModelObject instanceof uwm.model.ModelObject) {
+		<span class="reserved">this</span>.addPossibleNewChildren(parentModelObject, childModelObject);
+		<span class="reserved">this</span>.addPossibleNewChildren(childModelObject, parentModelObject);
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.addPossibleNewChildren = <span class="reserved">function</span>(parentModelObject, childModelObject) {
+	var instances = <span class="reserved">this</span>.getInstances(parentModelObject.getOid());
+	
+	<span class="reserved">for</span> (var i in instances) {
+		var currNode = instances[i];
+		
+		<span class="reserved">if</span> (!(currNode instanceof Function)) {
+			var found = false;
+			
+			var searchNode = currNode;
+			<span class="reserved">for</span> (var j = 0; j &lt; 4; j++) {
+				<span class="reserved">if</span> (searchNode) {
+					<span class="reserved">if</span> (searchNode instanceof uwm.hierarchytree.Node &amp;&amp; searchNode.getModelNode().getOid() == childModelObject.getOid()) {
+						found = true;
 						break;
 					}
-				}
-				
-				<span class="reserved">if</span> (!found) {
-					var connectionType = parentModelObject.getModelNodeClass().getConnectionInfo(childModelObject.getModelNodeClass()).label;
 					
-					var connectionNode = currNode.findChild(<span class="literal">"text"</span>, connectionType);
-					<span class="reserved">if</span> (!connectionNode) {
-						connectionNode = new uwm.hierarchytree.ConnectionNode({
-							text: connectionType
-						});
-						
-						currNode.appendChild(connectionNode);
-					}
-					
-					var existingNodes = connectionNode.childNodes;
-					var alreadyThere = false;
-					<span class="reserved">for</span> (var j in existingNodes) {
-						var existingNode = existingNodes[j];
-						
-						<span class="reserved">if</span> (!(existingNode instanceof Function)) {
-							<span class="reserved">if</span> (existingNode.getModelNode().getOid() == childModelObject.getOid()) {
-								alreadyThere = true;
-								break;
-							}
-						}
-					}
-					
-					<span class="reserved">if</span> (!alreadyThere) {
-						var subNode = new uwm.hierarchytree.Node({
-							parent: parentModelObject,
-							modelNode: childModelObject
-						});
-						
-						connectionNode.appendChild(subNode);
-					}
+					searchNode = searchNode.parentNode;
+				} <span class="reserved">else</span> {
+					break;
 				}
 			}
-		}
-	},
-	
-	handleDisassociateEvent: <span class="reserved">function</span>(parentModelObject, childModelObject) {
-		<span class="reserved">if</span> (parentModelObject instanceof uwm.model.ModelObject &amp;&amp; childModelObject instanceof uwm.model.ModelObject) {
-			<span class="reserved">this</span>.deletePossibleChildren(parentModelObject, childModelObject);
-			<span class="reserved">this</span>.deletePossibleChildren(childModelObject, parentModelObject);
-		}
-	},
-	
-	deletePossibleChildren: <span class="reserved">function</span>(parentModelObject, childModelObject) {
-		var instances = <span class="reserved">this</span>.getInstances(parentModelObject.getOid());
-		
-		var self = <span class="reserved">this</span>;
-		var childOid = childModelObject.getOid();
-		
-		<span class="reserved">for</span> (var i in instances) {
-			var currNode = instances[i];
 			
-			<span class="reserved">if</span> (!(currNode instanceof Function)) {
-				var connectionNodes = currNode.childNodes;
+			<span class="reserved">if</span> (!found) {
+				var connectionType = parentModelObject.getModelNodeClass().getConnectionInfo(childModelObject.getModelNodeClass()).label;
 				
-				<span class="reserved">for</span> (var j in connectionNodes) {
-					<span class="reserved">if</span> (!(connectionNodes[j] instanceof Function)) {
-						var child = connectionNodes[j].findChildBy(<span class="reserved">function</span>(node) {
-							<span class="reserved">return</span> self.isNodeWithOid(node, childOid);
-						});
+				var connectionNode = currNode.findChild(<span class="literal">"text"</span>, connectionType);
+				<span class="reserved">if</span> (!connectionNode) {
+					connectionNode = new uwm.hierarchytree.ConnectionNode({
+						text: connectionType
+					});
+					
+					currNode.appendChild(connectionNode);
+				}
+				
+				var existingNodes = connectionNode.childNodes;
+				var alreadyThere = false;
+				<span class="reserved">for</span> (var j in existingNodes) {
+					var existingNode = existingNodes[j];
+					
+					<span class="reserved">if</span> (!(existingNode instanceof Function)) {
+						<span class="reserved">if</span> (existingNode.getModelNode().getOid() == childModelObject.getOid()) {
+							alreadyThere = true;
+							break;
+						}
+					}
+				}
+				
+				<span class="reserved">if</span> (!alreadyThere) {
+					var subNode = new uwm.hierarchytree.Node({
+						parent: parentModelObject,
+						modelNode: childModelObject
+					});
+					
+					connectionNode.appendChild(subNode);
+				}
+			}
+		}
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.handleDisassociateEvent = <span class="reserved">function</span>(parentModelObject, childModelObject) {
+	<span class="reserved">if</span> (parentModelObject instanceof uwm.model.ModelObject &amp;&amp; childModelObject instanceof uwm.model.ModelObject) {
+		<span class="reserved">this</span>.deletePossibleChildren(parentModelObject, childModelObject);
+		<span class="reserved">this</span>.deletePossibleChildren(childModelObject, parentModelObject);
+	}
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.deletePossibleChildren = <span class="reserved">function</span>(parentModelObject, childModelObject) {
+	var instances = <span class="reserved">this</span>.getInstances(parentModelObject.getOid());
+	
+	var self = <span class="reserved">this</span>;
+	var childOid = childModelObject.getOid();
+	
+	<span class="reserved">for</span> (var i in instances) {
+		var currNode = instances[i];
+		
+		<span class="reserved">if</span> (!(currNode instanceof Function)) {
+			var connectionNodes = currNode.childNodes;
+			
+			<span class="reserved">for</span> (var j in connectionNodes) {
+				<span class="reserved">if</span> (!(connectionNodes[j] instanceof Function)) {
+					var child = connectionNodes[j].findChildBy(<span class="reserved">function</span>(node) {
+						<span class="reserved">return</span> self.isNodeWithOid(node, childOid);
+					});
+					
+					<span class="reserved">if</span> (child) {
+						var parent = child.parentNode;
+						child.remove();
 						
-						<span class="reserved">if</span> (child) {
-							var parent = child.parentNode;
-							child.remove();
-							
-							<span class="reserved">if</span> (!parent.hasChildNodes()) {
-								parent.remove();
-							}
+						<span class="reserved">if</span> (!parent.hasChildNodes()) {
+							parent.remove();
 						}
 					}
 				}
 			}
 		}
-	},
-	
-	isNodeWithOid: <span class="reserved">function</span>(node, childOid) {
-		var result = false;
-		
-		<span class="reserved">if</span> (node instanceof uwm.hierarchytree.Node) {
-			result = node.getModelNode().getOid() == childOid;
-		}
-		
-		<span class="reserved">return</span> result;
-	},
-	
-	getInstances: <span class="reserved">function</span>(oid) {
-		result = new Array();
-		
-		<span class="reserved">return</span> <span class="reserved">this</span>.walkTree(<span class="reserved">this</span>.getRootNode(), oid, result);
-		
-	},
-	
-	walkTree: <span class="reserved">function</span>(currNode, oid, result) {
-		<span class="reserved">for</span> (var i in currNode.childNodes) {
-			<span class="reserved">if</span> (!(currNode.childNodes[i] instanceof Function)) {
-				var currChild = currNode.childNodes[i];
-				
-				<span class="reserved">if</span> (currChild instanceof uwm.hierarchytree.Node &amp;&amp; currChild.getModelNode().getOid() == oid) {
-					result.push(currChild);
-				}
-				
-				result = <span class="reserved">this</span>.walkTree(currChild, oid, result);
-			}
-		}
-		
-		<span class="reserved">return</span> result;
 	}
-});
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.isNodeWithOid = <span class="reserved">function</span>(node, childOid) {
+	var result = false;
+	
+	<span class="reserved">if</span> (node instanceof uwm.hierarchytree.Node) {
+		result = node.getModelNode().getOid() == childOid;
+	}
+	
+	<span class="reserved">return</span> result;
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.getInstances = <span class="reserved">function</span>(oid) {
+	result = new Array();
+	
+	<span class="reserved">return</span> <span class="reserved">this</span>.walkTree(<span class="reserved">this</span>.getRootNode(), oid, result);
+	
+}
+
+uwm.hierarchytree.HierarchyTree.<span class="reserved">prototype</span>.walkTree = <span class="reserved">function</span>(currNode, oid, result) {
+	<span class="reserved">for</span> (var i in currNode.childNodes) {
+		<span class="reserved">if</span> (!(currNode.childNodes[i] instanceof Function)) {
+			var currChild = currNode.childNodes[i];
+			
+			<span class="reserved">if</span> (currChild instanceof uwm.hierarchytree.Node &amp;&amp; currChild.getModelNode().getOid() == oid) {
+				result.push(currChild);
+			}
+			
+			result = <span class="reserved">this</span>.walkTree(currChild, oid, result);
+		}
+	}
+	
+	<span class="reserved">return</span> result;
+}
+
 
 uwm.hierarchytree.HierarchyTree.getInstance = <span class="reserved">function</span>() {
 	<span class="reserved">return</span> uwm.hierarchytree.HierarchyTree.instance;
@@ -438,6 +439,6 @@ uwm.hierarchytree.HierarchyTree.COMPONENT_ID = <span class="literal">"uwm.hierar
 <font size="-1">
 
 </font>
-<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Tue Feb 17 01:13:07 2009</div>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Sun Feb 22 12:55:09 2009</div>
 </body>
 </html>
