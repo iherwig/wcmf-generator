@@ -23,22 +23,24 @@ class LoggingController extends Controller
 	function executeKernel()
 	{
 		$logType = $this->_request->getValue('logtype');
+
+		$logger = LoggerManager::getLogger('LoggingController');
 		
 		switch($logType) {
 			case 'trace':
-				Message::trace("Front-end message:\n" . $this->_request->getValue('msg'), __FILE__, __LINE__);
+				$logger->trace("Front-end message:\n" . $this->_request->getValue('msg'), __FILE__, __LINE__);
 				break;
 				
 			case 'log':
-				Message::log("Front-end message:\n" . $this->_request->getValue('msg'), __FILE__, __LINE__);
+				$logger->log("Front-end message:\n" . $this->_request->getValue('msg'), __FILE__, __LINE__);
 				break;
 
 			case 'error':
-				Message::error("Front-end message:\n" . $this->_request->getValue('msg'), __FILE__, __LINE__);
+				$logger->error("Front-end message:\n" . $this->_request->getValue('msg'), __FILE__, __LINE__);
 				break;
 
 			default:
-				Message::error('Invalid logtype given: $logType', __FILE__, __LINE__);
+				$logger->error('Invalid logtype given: $logType', __FILE__, __LINE__);
 		}
 	
 		//	Success
