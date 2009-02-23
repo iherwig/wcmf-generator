@@ -56,7 +56,9 @@ class OawUtil {
 	public static function setupExecutable() {
 	    $parser = InifileParser::getInstance();
 	    if (($params = $parser->getSection(self::INI_SECTION)) === false) {
-	    	Message::error($parser->getErrorMsg(), __FILE__, __LINE__);
+			$logger = LoggerManager::getLogger('OawUtil');
+
+			$logger->error($parser->getErrorMsg(), __FILE__, __LINE__);
 		}
 		$executablePath = $params[self::INI_EXECUTABLE];
 	
@@ -116,7 +118,9 @@ class OawUtil {
 			$returnCode = proc_close($process);
 			$result['returncode'] = $returnCode;
 
-			Message::log("oAW run\nstdout: " . $result['stdout'] . "\nstderr: " . $result['stderr'] . "\nreturncode: " . $result['returncode'], __FILE__, __LINE__);
+			$logger = LoggerManager::getLogger('OawUtil');
+
+			$logger->error("oAW run\nstdout: " . $result['stdout'] . "\nstderr: " . $result['stderr'] . "\nreturncode: " . $result['returncode'], __FILE__, __LINE__);
 		}
 		
 		return $result;
