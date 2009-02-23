@@ -187,3 +187,43 @@ body {
 .uwm-browserWarning .nonLast {
 	margin-bottom: 0.5em;
 }
+
+.uwm-historyGrid .x-grid3-row td {
+	font-weight: bold;
+}
+
+.uwm-historyGrid-changes-first td {
+    background-color: #f0f0f0;
+    font-weight: normal !important;
+    font-size: 12px;
+    border-style: none none none none;
+} 
+
+.uwm-historyGrid-changes-second td {
+    background-color: #e7e7e7;
+    font-weight: normal !important;
+    font-size: 12px;
+    border-style: none none none none;
+}
+
+.uwm-historyGrid-tableWidth {
+	border-spacing: 2px;
+    border-style: none none none none;
+    border-collapse: separate;
+    margin-right: 17px;
+	width: 100%;
+}
+
+.uwm-historyGrid-propertyWidth {
+	background-color: #d0d0d0;
+    border-style: none none none none;
+    font-size: 12px;
+	width: 20%;
+}
+
+.uwm-historyGrid-valueWidth {
+	background-color: #d0d0d0;
+    border-style: none none none none;
+    font-size: 12px;
+	width: 40%;
+}
