@@ -97,7 +97,7 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLo
 			fieldLabel: 'PrimaryActor',
 			toolTip: "the main actor of this use case",
 			name: 'PrimaryActor',
-			listType: "ChiWorkerExternal",
+			listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({
