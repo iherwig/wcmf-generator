@@ -48,6 +48,13 @@ uwm.objecttree.ObjectNode.prototype.buildContextMenu = function() {
 				self.deleteFromModel(item, e);
 			}
 		}, {
+			text: 'Show object history',
+			//iconCls: "uwm-help-icon",
+			handler: function(item, e) {
+				self.showObjectHistory(item, e);
+			}
+			
+		}, {
 			text: uwm.Dict.translate('Help'),
 			//iconCls: "uwm-help-icon",
 			handler: function(item, e) {
@@ -91,6 +98,11 @@ uwm.objecttree.ObjectNode.prototype.showInGrid = function(self, e) {
 uwm.objecttree.ObjectNode.prototype.showHelp = function(self, e) {
 	uwm.ui.HelpViewer.getInstance().loadUrl(this.modelNode.getModelNodeClass().getHelpUrl());
 }
+
+uwm.objecttree.ObjectNode.prototype.showObjectHistory = function(self, e) {
+	new uwm.ui.History(this.modelNode);
+}
+
 
 uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID = "showInDiagram";
 uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID = "showInGrid";
