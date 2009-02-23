@@ -136,7 +136,7 @@ cwm.ActivityReceiveClass.prototype.getPropertyForm = function(modelNode,
 }
 
 cwm.ActivityReceiveClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure,
+	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure,
 			"../application/images/ActivityReceive.png", 75, 45, 75, 45);
 }
 
