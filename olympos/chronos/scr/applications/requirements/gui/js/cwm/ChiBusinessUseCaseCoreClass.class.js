@@ -206,7 +206,7 @@ cwm.ChiBusinessUseCaseCoreClass.prototype.getPropertyForm = function(modelNode, 
 }
 
 cwm.ChiBusinessUseCaseCoreClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessUseCaseCore.png", 96, 95, 96, 95);
+	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure, "../application/images/ChiBusinessUseCaseCore.png", 96, 95, 96, 95);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBusinessUseCaseCoreClass());

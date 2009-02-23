@@ -31,6 +31,13 @@ uwm.graphics.figure.LabelCenterFigure = function(label, figure, minWidth, minHei
 
 Ext.extend(uwm.graphics.figure.LabelCenterFigure, uwm.graphics.figure.ComplexFigure);
 
+uwm.graphics.figure.LabelCenterFigure.prototype.setLabelDimension = function() {
+	if (this.label != null) {
+		this.label.style.left = (-(this.label.clientWidth - this.width) / 2) + "px";
+		this.label.style.top = (-(this.label.clientHeight - this.height) /  2) + "px";
+	}
+}
+
 /**
  * Creates the label element.
  *
@@ -51,7 +58,8 @@ uwm.graphics.figure.LabelCenterFigure.prototype.createHTMLElement = function(){
     this.label.style.textAlign = "center";
     this.label.style.left = "5px";
     this.label.style.overflow = "hidden";
-    this.label.style.height = "20px";
-    
-    return item;
+    this.label.style.zIndex = 1111;
+	item.appendChild(this.label);
+
+	return item;
 }

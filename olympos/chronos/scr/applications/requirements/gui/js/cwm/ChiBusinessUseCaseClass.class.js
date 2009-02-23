@@ -207,7 +207,7 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLo
 }
 
 cwm.ChiBusinessUseCaseClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessUseCase.PNG", 96, 95, 96, 95);
+	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure, "../application/images/ChiBusinessUseCase.PNG", 96, 95, 96, 95);
 }
 
 

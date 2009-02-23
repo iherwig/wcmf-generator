@@ -44,6 +44,7 @@ uwm.graphics.connection.BaseConnection = function(label, decorators) {
 		 */
 		this.label = new draw2d.Label(label);
 		this.label.setBackgroundColor(new draw2d.Color(255, 255, 255));
+		this.label.setFontSize(8);
 		
 		this.createHTMLElement();
 		this.html = this.getHTMLElement();

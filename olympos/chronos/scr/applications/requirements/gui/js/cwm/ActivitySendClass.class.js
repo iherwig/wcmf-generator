@@ -136,7 +136,7 @@ cwm.ActivitySendClass.prototype.getPropertyForm = function(modelNode,
 }
 
 cwm.ActivitySendClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure,
+	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure,
 			"../application/images/ActivitySend.png", 80, 45, 80, 45);
 }
 

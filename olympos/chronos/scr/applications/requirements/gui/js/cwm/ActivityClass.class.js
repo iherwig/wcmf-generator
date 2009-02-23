@@ -170,7 +170,7 @@ cwm.ActivityClass.prototype.getPropertyForm = function(modelNode,
 }
 
 cwm.ActivityClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure,
+	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure,
 			"../application/images/Activity.png", 95, 60, 95, 60);
 }
 
