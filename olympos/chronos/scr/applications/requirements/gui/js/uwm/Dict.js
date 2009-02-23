@@ -110,7 +110,11 @@ uwm.Dict.voc = {
 		"Auto-layout"           : {'de': "Auto-Layout"},
 		"Reload"                : {'de': "Neu laden"},
 		"New"					: {'de': "Neue"},
-		"Continue on your own risk" : {'de': "Auf eigene Verantwortung fortfahren"}
+		"Continue on your own risk" : {'de': "Auf eigene Verantwortung fortfahren"},
+		"Object History"		: {'de': "Object History"},
+		"No changes have been made."	: {'de': "Es wurden keine Veränderungen vorgenommen."},
+		"Undo selected"			: {'de': "Änderungen rückgängig"},
+		"Undo all changes since"	: {'de': "Zeitpunkt wiederherstellen"}
 		
 }
 
