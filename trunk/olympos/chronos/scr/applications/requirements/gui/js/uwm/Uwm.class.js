@@ -185,6 +185,11 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 				handler: function() {
 					self.reload();
 				}
+			}, {
+				text: uwm.Dict.translate("Continue on your own risk"),
+				handler: function() {
+					window.destroy();
+				}
 			}]
 		});
 		

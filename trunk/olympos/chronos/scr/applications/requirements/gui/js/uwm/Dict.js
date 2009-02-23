@@ -109,7 +109,8 @@ uwm.Dict.voc = {
 		"Snap to objects"       : {'de': "An Objekten ausrichten"},
 		"Auto-layout"           : {'de': "Auto-Layout"},
 		"Reload"                : {'de': "Neu laden"},
-		"New"					: {'de': "Neue"}
+		"New"					: {'de': "Neue"},
+		"Continue on your own risk" : {'de': "Auf eigene Verantwortung fortfahren"}
 		
 }
 
