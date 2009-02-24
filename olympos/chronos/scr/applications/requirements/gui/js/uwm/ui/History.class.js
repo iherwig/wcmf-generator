@@ -6,7 +6,7 @@ uwm.ui.History = function(object) {
 		layout: 'border',
 		height: 350,
 		width: 550,
-		title: "Object History",//uwm.Dict.translate('Object History')
+		title: uwm.Dict.translate('Object History'),
 		selection: this.getSelectionModel()
 	}));
 	
@@ -21,17 +21,17 @@ uwm.ui.History = function(object) {
 	
 	this.addButton(new Ext.Button({
 		selection: this.selection,
-		text: "Undo selected",//uwm.Dict.translate('Undo selected'),
+		text: uwm.Dict.translate('Undo selected'),
 		handler: this.undoSelected
 	}));
 	this.addButton(new Ext.Button({
 		selection: this.selection,
-		text: "Undo all changes since",//uwm.Dict.translate('Undo all changes since'),
+		text: uwm.Dict.translate('Undo all changes since'),
 		handler: this.undoAll
 	}));
 	this.addButton(new Ext.Button({
 		window: this,
-		text: "Cancel",//uwm.Dict.translate('Cancel'),
+		text: uwm.Dict.translate('Cancel'),
 		handler: function() {
 			this.window.close();
 		}
@@ -144,7 +144,7 @@ uwm.ui.History.prototype.getToolbar = function() {
 		pageSize: 3,
 		store: this.store,
 		displayInfo: false,
-		emptyMsg: "No changes have been made." //uwm.Dict.translate("No changes have been made.")
+		emptyMsg: uwm.Dict.translate("No changes have been made.")
 	});
 	return result;
 }
@@ -164,7 +164,7 @@ uwm.ui.History.prototype.getExpander = function() {
 		getBodyContent: function(record, index) {
 			var result = '';
 			result += '<TABLE class="uwm-historyGrid-tableWidth">';
-			result += '<THEAD><TR><TH class="uwm-historyGrid-propertyWidth">Property</TH><TH class="uwm-historyGrid-valueWidth">Old value</TH><TH class="uwm-historyGrid-valueWidth">New Value</TH></TR></THEAD><TBODY>';
+			result += '<THEAD><TR><TH class="uwm-historyGrid-propertyWidth">' + uwm.Dict.translate('Property') + '</TH><TH class="uwm-historyGrid-valueWidth">' + uwm.Dict.translate('Old value') + '</TH><TH class="uwm-historyGrid-valueWidth">' + uwm.Dict.translate('New value') + '</TH></TR></THEAD><TBODY>';
 			for (var i = 0; i < record.data.changedProperty.length; i++) {
 				if (i % 2 == 1) {
 					var color = ' class="uwm-historyGrid-changes-second"';
@@ -201,19 +201,19 @@ uwm.ui.History.prototype.getGrid = function(object) {
 		plugins: expander,
 		sm: this.getSelectionModel(),
 		columns: [expander, {
-			header: "Date",
+			header: uwm.Dict.translate("Date"),
 			dataIndex: 'date',
 			displayField: 'date',
 			width: 100,
 			sortable: true
 		}, {
-			header: "Author",
+			header: uwm.Dict.translate("Author"),
 			dataIndex: 'author',
 			width: 150,
 			hidden: false,
 			sortable: true
 		}, {
-			header: "Items changed",
+			header: uwm.Dict.translate("Items changed"),
 			dataIndex: 'changedProperty',
 			width: 250,
 			align: 'right',
@@ -230,7 +230,7 @@ uwm.ui.History.prototype.getGrid = function(object) {
 
 uwm.ui.History.prototype.undoAll = function() {
 	var sm = this.selection;
-	if (sm.getSelections().length==0) {
+	if (sm.getSelections().length == 0) {
 		alert("No items selected.")
 		return;
 	}
@@ -244,7 +244,7 @@ uwm.ui.History.prototype.undoAll = function() {
 }
 
 uwm.ui.History.prototype.undoSelected = function() {
-	if (this.selection.getSelections().length==0) {
+	if (this.selection.getSelections().length == 0) {
 		alert("No items selected.")
 		return;
 	}
