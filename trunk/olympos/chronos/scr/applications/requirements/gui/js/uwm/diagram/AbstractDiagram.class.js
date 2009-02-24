@@ -629,7 +629,7 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNod
 		figure.getGraphics().setLabel(modelNode.getLabel());
 	//TODO: Remove dependency on CWM
 	} else if (modelNode instanceof cwm.ChiValue || modelNode instanceof cwm.Operation) {
-		parentOids = modelNode.getParentOids();
+		var parentOids = modelNode.getParentOids();
 		
 		if (parentOids) {
 			var parentModelNode = uwm.model.ModelContainer.getInstance().getByOid(parentOids[0]);

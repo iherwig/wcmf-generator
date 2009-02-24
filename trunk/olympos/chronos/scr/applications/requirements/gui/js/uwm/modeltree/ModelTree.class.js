@@ -136,6 +136,7 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(dragOverEvent) {
 	var dropModelNode = dragOverEvent.dropNode.getModelNode();
 	var targetModelNode = dragOverEvent.target.getModelNode();
 	
+	
 	if (dragOverEvent.dropNode.parentNode == dragOverEvent.target) {
 		dragOverEvent.cancel = true;
 	} else if (dropModelNode instanceof uwm.model.builtin.Package) {
@@ -143,6 +144,12 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(dragOverEvent) {
 	} else if (targetModelNode instanceof uwm.model.builtin.Model) {
 		//Only allowed for packages, but they are handled above
 		dragOverEvent.cancel = true;
+	} else if (dragOverEvent.target instanceof uwm.modeltree.UseCaseNode || dragOverEvent.target instanceof uwm.modeltree.UseCaseCoreNode) {
+		if (dragOverEvent.dropNode instanceof uwm.modeltree.ActivitySetNode) {
+			dragOverEvent.cancel = false;
+		} else {
+			dragOverEvent.cancel = true;
+		}
 	}
 	
 	return !dragOverEvent.cancel;
@@ -341,12 +348,16 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 				text: childModelObject.getLabel()
 			});
 		} else if (childModelObject instanceof uwm.model.ModelObject) {
-			childNode = new uwm.modeltree.Node({
-				oid: childModelObject.getOid(),
-				text: childModelObject.getLabel(),
-				uwmClassName: childModelObject.getModelNodeClass().getUwmClassName()
-			})
-		}
+			childNode = this.getNodeById(childModelObject.getOid());
+			if (!childNode) {
+				childNode = new uwm.modeltree.Node({
+					oid: childModelObject.getOid(),
+					text: childModelObject.getLabel(),
+					uwmClassName: childModelObject.getModelNodeClass().getUwmClassName()
+				
+				})
+			};
+					}
 		
 		if (childNode) {
 			if (!parentNode.findChild("id", childNode.id)) {

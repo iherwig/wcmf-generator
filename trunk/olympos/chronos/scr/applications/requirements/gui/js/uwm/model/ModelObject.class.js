@@ -70,24 +70,31 @@ uwm.model.ModelObject.prototype.checkCardinality = function(otherObject) {
  * @type int
  */
 uwm.model.ModelObject.prototype.getNumberOfConnections = function(otherObject) {
-	parentOids = this.getParentOids();
-	childOids = this.getChildOids();
+	var parentOids = this.getParentOids();
+	var childOids = this.getChildOids();
 	
 	var result = 0;
-	if (parentOids) {
-		for (var i = 0; i < parentOids.length; i++) {
-			var parentClassName = uwm.Util.getUwmClassNameFromOid(parentOids[i]);
-			var targetClassName = otherObject.getUwmClassName();
-			if (parentClassName == targetClassName) {
-				result++;
-			}
-		}
-	}
-	if (childOids) {
-		for (var i = 0; i < childOids.length; i++) {
-			var childClassName = uwm.Util.getUwmClassNameFromOid(childOids[i]);
-			var targetClassName = otherObject.getUwmClassName();
-			if (childClassName == targetClassName) {
+	result += this.getConnections(parentOids, otherObject.getUwmClassName());
+	result += this.getConnections(childOids, otherObject.getUwmClassName());
+	
+	return result;
+}
+
+/**
+ * Counts the Oids in the list which link to an object object of the named type.
+ *
+ * @private
+ * @param oidList The list of Oids which is compared.
+ * @param otherObjectClassName Name of the class to which the counted connections lead.
+ * @return The number of fitting Oids.
+ * @type int
+ */
+uwm.model.ModelObject.prototype.getConnections=function(oidList, otherObjectClassName){
+	var result = 0;
+	if (oidList){
+		for (var i=0;i<oidList.length;i++){
+			var childClassName = uwm.Util.getUwmClassNameFromOid(oidList[i]);
+			if (childClassName == otherObjectClassName){
 				result++;
 			}
 		}
