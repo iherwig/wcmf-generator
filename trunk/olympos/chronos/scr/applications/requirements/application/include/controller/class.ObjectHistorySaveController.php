@@ -30,20 +30,27 @@ class ObjectHistorySaveController extends SaveController
 		
 			//prepare write to table
 			self::prepareWriteToTable();
-		
+
+			$persistenceFacade = & PersistenceFacade::getInstance();
+			
 			foreach ($this->requestdata as $key=>$value) {
 				if (PersistenceFacade::isValidOID($key) && PersistenceFacade::isKnownType(PersistenceFacade::getOIDParameter($key, 'type'))) {
 					$this->node = & $value;
 				
 					$this->data = array ();
+
+					$affectedObj  = $persistenceFacade->load($key);
+		
 					foreach ($this->node->getDataTypes() as $dataType) {
 						foreach ($this->node->getValueNames($dataType) as $name) {
+						
 							if ($name !== 'id') {
 								$tmp = array ();
-								$tmp['oldValue'] = '';
+								$tmp['oldValue'] = $affectedObj->getValue($name);
 								$tmp['newValue'] = $this->node->getValue($name, $dataType);
 								array_push($this->data, array ($name=>$tmp));
 							}
+						
 						}
 					}
 				
@@ -75,7 +82,7 @@ class ObjectHistorySaveController extends SaveController
 		$this->persistenceFacade = & PersistenceFacade::getInstance();
 		$this->objQuery = & $this->persistenceFacade->createObjectQuery($this->tablename);
 	}
-	
+
 	private function writeToTable() {
 	
 		$objTpl = & $this->objQuery->getObjectTemplate($this->tablename); //new row
@@ -109,28 +116,29 @@ class ObjectHistorySaveController extends SaveController
 		$this->changelist['id'] = null;
 		$this->changelist['data'] = serialize($this->data);
 		$this->changelist['duplicate'] = 'tbd';
-		$this->changelist['eventtype'] = 'tbd';
+		$this->changelist['eventtype'] = 'changeProperty';
 		$this->changelist['affectedoid'] = $oid;
 		$this->changelist['otheroid'] = 'tbd';
 		$this->changelist['timestamp'] = self::getTimeStamp();
 		$this->changelist['user'] = self::getCurrentUser();
 	
 	}
-	
-	private function getCurrentUser(){
-		
-		$rightsManager = RightsManager::getInstance();
-      	$authUser = &$rightsManager->getAuthUser();
-		$currUser = $authUser->getLogin();
 
+	private function getCurrentUser() {
+	
+		$rightsManager = RightsManager::getInstance();
+		$authUser = & $rightsManager->getAuthUser();
+		$currUser = $authUser->getLogin();
+	
 		return $currUser;
 	}
+
+	private function getTimeStamp() {
 	
-	private function getTimeStamp(){
-		
 		//$now   = mktime(date("H"), date("i"), date("s"), date("m")  , date("d"), date("Y"));
-		$now   = microtime( true );
-		return $now;
+		$now = microtime();
+		return substr($now, -10).substr($now, 2, 6);
+		
 	}
 
 }
