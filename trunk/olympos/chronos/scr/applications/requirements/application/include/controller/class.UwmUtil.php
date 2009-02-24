@@ -170,8 +170,10 @@ class UwmUtil {
 				self::processActivitySet($currChild);
 			} else if (self::processManyToMany($currChild, $currNode->getId())) {
 				//do nothing
-			} else {
-		    	Message::error('Invalid child of UseCase: ' . $currChild->getId(), __FILE__, __LINE__);
+			} else if ($childType != 'Figure') {
+			$logger = LoggerManager::getLogger('OawUtil');
+
+			$logger->error('Invalid child of UseCase: ' . $currChild->getId(), __FILE__, __LINE__);
 			}
 		}
 
@@ -272,12 +274,24 @@ class UwmUtil {
 					self::$dom->writeAttribute('targetType', $className);
 					self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
 					self::$dom->writeAttribute('targetRole', $currParent->getType());
+
+					$valueNames = array('relationType', 'sourceMultiplicity', 'sourceNavigability', 'targetMultiplicity', 'targetNavigability');
+				
+					foreach ($valueNames as $currValueName)
+					{
+						$value = utf8_encode($currChild->getValue($currValueName));
+						if ($value !== null && $value !== '') {
+							self::$dom->writeAttribute($currValueName, $value);
+						}
+					}
+
+
 					self::$dom->endElement();
 				}
 			}
 		}
 		
-		return result;
+		return $result;
 	}
 
 	private static function getRealType($node) {
