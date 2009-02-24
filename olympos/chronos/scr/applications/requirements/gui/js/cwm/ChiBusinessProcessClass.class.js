@@ -50,7 +50,12 @@ cwm.ChiBusinessProcessClass = function() {
 			label: "Contains",
 			invert: false,
 			connectionType: 'composition'
-		}		,				
+		},
+		"ChiBusinessUseCaseCore": {
+			label: "Contains",
+			invert: false,
+			connectionType: 'composition'
+		},
 		"ChiFeature": {
 			label: "associates",
 			invert: true,

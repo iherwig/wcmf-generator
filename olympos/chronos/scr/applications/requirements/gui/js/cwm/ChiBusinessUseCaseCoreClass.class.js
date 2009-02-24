@@ -77,9 +77,9 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 			connectionType: 'association'
 		},	
 		"ChiBusinessProcess": {
-			label: "",
+			label: "contains",
 			invert: true,
-			connectionType:  'association'
+			connectionType:  'composition'
 		},
 		"ChiFeature": {
 			label: "refines",
