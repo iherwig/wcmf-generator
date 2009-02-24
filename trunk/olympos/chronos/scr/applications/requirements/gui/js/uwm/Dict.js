@@ -111,10 +111,19 @@ uwm.Dict.voc = {
 		"Reload"                : {'de': "Neu laden"},
 		"New"					: {'de': "Neue"},
 		"Continue on your own risk" : {'de': "Auf eigene Verantwortung fortfahren"},
-		"Object History"		: {'de': "Object History"},
+		"Object History"		: {'de': "Objekt History"},
 		"No changes have been made."	: {'de': "Es wurden keine Veränderungen vorgenommen."},
 		"Undo selected"			: {'de': "Änderungen rückgängig"},
-		"Undo all changes since"	: {'de': "Zeitpunkt wiederherstellen"}
+		"Undo all changes since"	: {'de': "Zeitpunkt wiederherstellen"},
+		"Cancel"				: {'de': "Abbrechen"},
+		"Property"				: {'de': "Eigenschaft"},
+		"Date"					: {'de': "Datum"},
+		"Author"				: {'de': "Autor"},
+		"Items changed"			: {'de': "Änderungen"},
+		"Show object history"	: {'de': "Objekt History zeigen"},
+		"Old value"				: {'de': "Alter Wert"},
+		"New value"				: {'de': "Neuer Wert"}
+		
 		
 }
 
