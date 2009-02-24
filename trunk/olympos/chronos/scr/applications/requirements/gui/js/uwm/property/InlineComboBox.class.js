@@ -59,7 +59,7 @@ uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 	
 		case e.ENTER:
 		case e.TAB:
-			this.htmledit.resolveInlineComboBox(this.getValue(), this.view.getSelectedRecords()[0].get('type'));
+			this.htmledit.resolveInlineComboBox(this.getValue());
 			break;
 			
 		case e.ESC:
