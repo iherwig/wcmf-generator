@@ -48,8 +48,7 @@ uwm.objecttree.ObjectNode.prototype.buildContextMenu = function() {
 				self.deleteFromModel(item, e);
 			}
 		}, {
-			text: 'Show object history',
-			//iconCls: "uwm-help-icon",
+			text: uwm.Dict.translate('Show object history'),
 			handler: function(item, e) {
 				self.showObjectHistory(item, e);
 			}
