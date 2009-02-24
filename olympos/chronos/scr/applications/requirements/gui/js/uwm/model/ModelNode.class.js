@@ -229,7 +229,7 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, nmSelf) {
 		uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
 	});
 	if (this.parentOids) {
-		this.parentOids[this.parentOids.length] = parentModelObject.getOid();
+		this.parentOids.push(parentModelObject.getOid());
 	}
 }
 

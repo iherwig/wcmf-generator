@@ -33,7 +33,10 @@ uwm.objectgrid.ObjectGrid = function(config) {
 		store: new Ext.data.SimpleStore({
 			id: "oid",
 			fields: modelClass.getGridFields()
-		})
+		}),
+		viewConfig:{
+			forceFit: true
+		}
 	}, config));
 	
 	this.uwmClassName = config.uwmClassName;
