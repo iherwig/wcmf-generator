@@ -313,6 +313,19 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 	var parentOid = parentModelObject.getOid();
 	
 	var parentNode = this.getNodeById(parentOid);
+	if (parentNode instanceof uwm.modeltree.UseCaseNode || parentNode instanceof uwm.modeltree.UseCaseCoreNode) {
+		if (!(childModelObject instanceof uwm.diagram.ActivitySet)) {
+			if (parentModelObject.parentOids) {
+				for (var i = 0; i < parentModelObject.parentOids.length; i++) {
+					if (this.getNodeById(parentModelObject.parentOids[i]) instanceof uwm.modeltree.PackageNode) {
+						parentNode = this.getNodeById(parentModelObject.parentOids[i]);
+					}
+				}
+			}
+		}
+		
+	}
+	
 	if (parentNode) {
 		var childNode = null;
 		
