@@ -100,19 +100,6 @@ class ObjectHistorySaveController extends SaveController
 	private function setChangeList($oid) {
 	
 		$this->changelist = array ();
-		//'id'; //id generated index
-		//'affectedoid'; //oid of changed object
-		//'eventtype'; //change type //enum('create','delete','changeProperty','associate','disassociate')
-		//'data':{//serialized//
-		//		'&fieldname'//title column//:{
-		//				'oldvalue':&fieldoldvalue	//value column
-		//				'newvalue':&fieldnewvalue	//value column
-		//				}1x
-		//		}nx
-		//'user'; //modified by
-		//'timestamp'; //modified when
-		//'otheroid'; //
-		//'duplicate'; //
 		$this->changelist['id'] = null;
 		$this->changelist['data'] = serialize($this->data);
 		$this->changelist['duplicate'] = 'tbd';
@@ -135,7 +122,6 @@ class ObjectHistorySaveController extends SaveController
 
 	private function getTimeStamp() {
 	
-		//$now   = mktime(date("H"), date("i"), date("s"), date("m")  , date("d"), date("Y"));
 		$now = microtime();
 		return substr($now, -10).substr($now, 2, 6);
 		
