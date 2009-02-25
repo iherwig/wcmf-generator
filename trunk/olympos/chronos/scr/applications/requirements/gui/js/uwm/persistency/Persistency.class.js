@@ -79,6 +79,15 @@ uwm.persistency.Persistency.prototype.listbox = function(type, successHandler, e
 uwm.persistency.Persistency.prototype.autocomplete = function(query, successHandler, errorHandler){
 }
 
+uwm.persistency.Persistency.prototype.histlist = function(oid,start,limit, successHandler, errorHandler){
+}
+
+uwm.persistency.Persistency.prototype.restorehiststate = function(id, successHandler, errorHandler){
+}
+
+uwm.persistency.Persistency.prototype.restorehistfields = function(ids, successHandler, errorHandler){
+}
+
 uwm.persistency.Persistency.prototype.loadChildren = function(oid, successHandler, errorHandler) {
 }
 

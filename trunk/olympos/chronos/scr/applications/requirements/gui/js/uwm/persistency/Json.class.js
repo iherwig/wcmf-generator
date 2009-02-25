@@ -167,6 +167,32 @@ uwm.persistency.Json.prototype.autocomplete = function(query, successHandler, er
 	
 }
 
+uwm.persistency.Json.prototype.histlist = function(oid,start,limit, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'histlist',
+		oid:oid,
+		start: start,
+		limit:limit
+	}, successHandler, errorHandler);
+	
+}
+
+uwm.persistency.Json.prototype.restorehiststate = function(id, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'restorehiststate',
+		id:id,
+	}, successHandler, errorHandler);
+	
+}
+
+uwm.persistency.Json.prototype.restorehistfields = function(ids, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'restorehistfields',
+		ids:ids,
+	}, successHandler, errorHandler);
+	
+}
+
 uwm.persistency.Json.prototype.loadChildren = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		controller: "TreeViewController",
