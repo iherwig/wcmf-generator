@@ -23,6 +23,7 @@ uwm.tabadmin.GridProxy = function(config) {
 	uwm.tabadmin.GridProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 	
 	this.listType = config.listType;
+	this.actionSet = config.actionSet;
 }
 
 Ext.extend(uwm.tabadmin.GridProxy, Ext.data.DataProxy);
@@ -31,7 +32,7 @@ uwm.tabadmin.GridProxy.prototype.load = function(params, reader, callback, scope
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
-		uwm.persistency.Persistency.getInstance().list(this.listType, function(options, data) {
+		this.actionSet.addList(this.listType, function(options, data) {
 			self.loadResponse(options, data, callback, scope, arg);
 		}, function(options, data, errorMsg) {
 			self.loadFailed(options, data, errorMsg, callback, scope, arg)

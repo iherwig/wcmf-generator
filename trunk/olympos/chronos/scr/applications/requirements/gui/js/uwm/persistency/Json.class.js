@@ -13,7 +13,7 @@ Ext.namespace("uwm.persistency");
 
 /**
  * @class Implements persistency against a wCMF backend via JSON calls.
- *
+ * 
  * @extends uwm.persistency.Persistency.
  * @constructor
  */
@@ -228,5 +228,117 @@ uwm.persistency.Json.prototype.log = function(logtype, msg, successHandler, erro
 		} else {
 			self.processErrorHandler(errorHandler, request, data);
 		}
+	});
+}
+
+uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
+	var data = {};
+	
+	var requests = actionSet.getRequests();
+	
+	for (var currActionName in requests) {
+		var currRequest = requests[currActionName];
+		
+		if (!(currRequest instanceof Function)) {
+			var jsonRequest = {};
+			
+			jsonRequest.usr_action = currRequest.action;
+			
+			switch (currRequest.action) {
+			case "dologin":
+				jsonRequest.login = currRequest.login;
+				jsonRequest.password = currRequest.password;
+				break;
+				
+			case "dologout":
+				break;
+				
+			case "new":
+				jsonRequest.newtype = currRequest.uwmClassName;
+				break;
+				
+			case "delete":
+				jsonRequest.deleteoids = this.array2CommaList(currRequest.oid);
+				break;
+				
+			case "associate":
+				var direction = "child";
+				
+				if (currRequest.invert) {
+					direction = "parent";
+				}
+				
+				jsonRequest.oid = currRequest.parentOid;
+				jsonRequest.associateoids = this.array2CommaList(currRequest.childOid);
+				jsonRequest.associateAs = direction;
+				break;
+				
+			case "disassociate":
+				jsonRequest.oid = currRequest.parentOid;
+				jsonRequest.associateoids = this.array2CommaList(currRequest.childOid);
+				break;
+				
+			case "save":
+				for (var i in currRequest.values) {
+					if (!(currRequest.values[i] instanceof Function)) {
+						jsonRequest["value--" + i + "-" + oid] = currRequest.values[i];
+					}
+				}
+				break;
+				
+			case "display":
+				jsonRequest.oid = currRequest.oid;
+				jsonRequest.depth = currRequest.depth;
+				jsonRequest.omitMetaData = true;
+				jsonRequest.translateValues = true;
+				break;
+				
+			case "list":
+				jsonRequest.type = currRequest.uwmClassName;
+				break;
+				
+			case "listbox":
+				jsonRequest.type = currRequest.type;
+				break;
+				
+			case "autocomplete":
+				jsonRequest.query = currRequest.query;
+				break;
+				
+			case "loadChildren":
+				jsonRequest.controller = "TreeViewController";
+				jsonRequest.node = currRequest.oid;
+				break;
+				
+			case "lock":
+				jsonRequest.oid = currRequest.oid;
+				break;
+				
+			case "unlock":
+				jsonRequest.oid = currRequest.oid;
+				break;
+				
+			case "log":
+				jsonRequest.logtype = currRequest.logtype;
+				jsonRequest.msg = currRequest.msg;
+				break;
+				
+			default:
+				uwm.Util.showMessage("Programming Error", "Unknown action in ActionSet: " + currRequest.action, uwm.Util.messageType.ERROR);
+			}
+			data[currActionName] = 	jsonRequest;
+		}
+	}
+	
+	this.jsonRequest({
+		controller: "TerminateController",
+		usr_action: "multipleAction",
+		request_format: "JSON",
+		data: Ext.encode(data),
+		actionSet: actionSet
+	}, function(request, data) {
+		request.params.actionSet.successHandler(request, data);
+	}, function(request, data, errorMessage) {
+		request.params.actionSet.errorHandler(request, data, errorMessage);
 	});
 }

@@ -56,7 +56,8 @@ uwm.tabadmin.EnumTab = function(config) {
 		store: new Ext.data.Store({
 			autoLoad: true,
 			proxy: new uwm.tabadmin.GridProxy({
-				listType: config.uwmClassName
+				listType: config.uwmClassName,
+				actionSet: config.actionSet
 			})
 		}),
 		tbar: [this.addEntryButton, this.removeEntryButton]

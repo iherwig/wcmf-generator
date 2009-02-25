@@ -13,11 +13,15 @@ Ext.namespace("uwm.model");
 
 /**
  * @class Container for all ModelNodes.
- *
- * <p>This class manages all loading and event firing for Model Nodes.</p>
- *
- * <p>TODO: no ModelNode is ever deleted from this container.</p>
- *
+ * 
+ * <p>
+ * This class manages all loading and event firing for Model Nodes.
+ * </p>
+ * 
+ * <p>
+ * TODO: no ModelNode is ever deleted from this container.
+ * </p>
+ * 
  * @see uwm.model.ModelNode
  * @see uwm.model.ModelNodeClass
  * @constructor
@@ -30,239 +34,285 @@ uwm.model.ModelContainer.prototype.getByOid = function(oid) {
 	return this.items.get(oid);
 }
 
-uwm.model.ModelContainer.prototype.createByDisplayResult = function(displayResult) {
+uwm.model.ModelContainer.prototype.createByDisplayResult = function(
+		displayResult) {
 	var firstModelNode = null;
 	var node = displayResult.node;
-	
+
 	var furtherElements = true;
-	
+
 	var outstandingNodes = new Ext.util.MixedCollection();
-	
+
 	while (furtherElements) {
 		var uwmClassName = node.type;
 		var oid = node.oid;
-		
+
 		var newModelNode = this.getNode(uwmClassName, oid);
 		oid = newModelNode.oid;
-		
+
 		newModelNode.initByDisplayResult(node);
-		
+
 		this.items.add(oid, newModelNode);
-		
+
 		if (!firstModelNode) {
 			firstModelNode = newModelNode;
 		}
-		
-		for (var i in node) {
-			if (i != "values" && i != "oid" && i != "type" && i != "properties" && !(node[i] instanceof Function)) {
+
+		for ( var i in node) {
+			if (i != "values" && i != "oid" && i != "type" && i != "properties"
+					&& !(node[i] instanceof Function)) {
 				var container = node[i];
-				
-				for (var j = 0; j < container.length; j++) {
+
+				for ( var j = 0; j < container.length; j++) {
 					outstandingNodes.add(container[j].oid, container[j]);
 				}
 			}
 		}
-		
+
 		outstandingNodes.removeKey(oid);
-		
+
 		furtherElements = outstandingNodes.getCount() > 0;
-		
+
 		node = outstandingNodes.first();
 	}
 	return firstModelNode;
 }
 
-uwm.model.ModelContainer.prototype.createByClassAndOid = function(uwmClassName, oid) {
+uwm.model.ModelContainer.prototype.createByClassAndOid = function(uwmClassName,
+		oid) {
 	var newModelNode = this.getNode(uwmClassName, oid);
 	oid = newModelNode.oid;
-	
+
 	newModelNode.initByOid(oid);
-	
+
 	this.items.add(oid, newModelNode);
-	
+
 	return newModelNode;
 }
 
-uwm.model.ModelContainer.prototype.createByClassAndNameAndOid = function(uwmClassName, name, oid) {
+uwm.model.ModelContainer.prototype.createByClassAndNameAndOid = function(
+		uwmClassName, name, oid) {
 	var newModelNode = this.getNode(uwmClassName, oid);
 	oid = newModelNode.oid;
-	
+
 	newModelNode.initByNameAndOid(name, oid);
-	
+
 	this.items.add(oid, newModelNode);
-	
+
 	return newModelNode;
 }
 
 uwm.model.ModelContainer.prototype.createModel = function() {
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().newObject("Model", function(request, data) {
-		self.handleCreatedModel(data.oid);
-	});
+
+	uwm.persistency.Persistency.getInstance().newObject("Model",
+			function(request, data) {
+				self.handleCreatedModel(data.oid);
+			});
 }
 
 uwm.model.ModelContainer.prototype.handleCreatedModel = function(oid) {
 	var newModelNode = this.getNode("Model", oid);
 	oid = newModelNode.oid;
-	
+
 	this.items.add(oid, newModelNode);
-	
+
 	uwm.event.EventBroker.getInstance().fireEvent("create", newModelNode);
-	
+
 	newModelNode.setDefaultLabel();
 }
 
 uwm.model.ModelContainer.prototype.createPackage = function(parentModelNode) {
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().newObject("Package", function(request, data) {
-		self.handleCreatedPackage(data.oid, parentModelNode);
-	});
-	
+
+	uwm.persistency.Persistency.getInstance().newObject("Package",
+			function(request, data) {
+				self.handleCreatedPackage(data.oid, parentModelNode);
+			});
+
 }
 
-uwm.model.ModelContainer.prototype.handleCreatedPackage = function(oid, parentModelNode) {
+uwm.model.ModelContainer.prototype.handleCreatedPackage = function(oid,
+		parentModelNode) {
 	var newModelNode = this.getNode("Package", oid);
 	oid = newModelNode.oid;
-	
+
 	this.items.add(oid, newModelNode);
-	
+
 	uwm.event.EventBroker.getInstance().fireEvent("create", newModelNode);
-	
+
 	newModelNode.setDefaultLabel();
-	
+
 	newModelNode.associate(parentModelNode);
 }
 
 uwm.model.ModelContainer.prototype.createDiagram = function(parentModelNode) {
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().newObject("Diagram", function(request, data) {
-		self.handleCreatedDiagram(data.oid, parentModelNode, "Diagram");
-	});
+
+	uwm.persistency.Persistency.getInstance()
+			.newObject(
+					"Diagram",
+					function(request, data) {
+						self.handleCreatedDiagram(data.oid, parentModelNode,
+								"Diagram");
+					});
 }
 
 uwm.model.ModelContainer.prototype.createActivitySet = function(parentModelNode) {
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().newObject("ActivitySet", function(request, data) {
-		self.handleCreatedDiagram(data.oid, parentModelNode, "ActivitySet");
-	});
+
+	uwm.persistency.Persistency.getInstance().newObject(
+			"ActivitySet",
+			function(request, data) {
+				self.handleCreatedDiagram(data.oid, parentModelNode,
+						"ActivitySet");
+			});
 }
 
-uwm.model.ModelContainer.prototype.handleCreatedDiagram = function(oid, parentModelNode, type) {
+uwm.model.ModelContainer.prototype.handleCreatedDiagram = function(oid,
+		parentModelNode, type) {
 	var newModelNode;
 	switch (type) {
-		case 'ActivitySet':
-			newModelNode = this.getNode("ActivitySet", oid);
-			newModelNode.containedPackage = newModelNode;
-			break;
-		case 'default':
-		default:
-			newModelNode = this.getNode("Diagram", oid);
-			newModelNode.containedPackage = parentModelNode;
-			break;
+	case 'ActivitySet':
+		newModelNode = this.getNode("ActivitySet", oid);
+		newModelNode.containedPackage = newModelNode;
+		break;
+	case 'default':
+	default:
+		newModelNode = this.getNode("Diagram", oid);
+		newModelNode.containedPackage = parentModelNode;
+		break;
 	}
-	
+
 	oid = newModelNode.oid;
-	
+
 	this.items.add(oid, newModelNode);
-	
+
 	uwm.event.EventBroker.getInstance().fireEvent("create", newModelNode);
-	
+
 	newModelNode.setDefaultLabel();
-	
+
 	newModelNode.associate(parentModelNode);
-	
+
 	uwm.diagram.DiagramContainer.getInstance().loadDiagram(newModelNode);
 }
 
-uwm.model.ModelContainer.prototype.createFigure = function(diagramModelNode, modelObject) {
+uwm.model.ModelContainer.prototype.createFigure = function(diagramModelNode,
+		modelObject) {
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().newObject("Figure", function(request, data) {
-		self.handleCreatedFigure(data.oid, diagramModelNode, modelObject);
-	});
+
+	uwm.persistency.Persistency.getInstance().newObject(
+			"Figure",
+			function(request, data) {
+				self.handleCreatedFigure(data.oid, diagramModelNode,
+						modelObject);
+			});
 }
 
-uwm.model.ModelContainer.prototype.handleCreatedFigure = function(oid, diagramModelNode, modelObject) {
+uwm.model.ModelContainer.prototype.handleCreatedFigure = function(oid,
+		diagramModelNode, modelObject) {
 	var newFigure = this.getNode("Figure", oid);
 	oid = newFigure.oid;
-	
+
 	this.items.add(oid, newFigure);
-	
+
 	newFigure.diagram = diagramModelNode;
-	
+
 	uwm.event.EventBroker.getInstance().fireEvent("create", newFigure);
-	
+
 	newFigure.associate(diagramModelNode);
-	
+
 	if (modelObject) {
 		newFigure.associate(modelObject);
 	}
 }
 
-uwm.model.ModelContainer.prototype.createModelObject = function(uwmClassName, packageNode, figureNode) {
+uwm.model.ModelContainer.prototype.createModelObject = function(uwmClassName,
+		packageNode, figureNode) {
 	var self = this;
-	
-	uwm.persistency.Persistency.getInstance().newObject(uwmClassName, function(request, data) {
-		self.handleCreatedModelObject(data.oid, uwmClassName, packageNode, figureNode);
-	});
+
+	uwm.persistency.Persistency.getInstance().newObject(
+			uwmClassName,
+			function(request, data) {
+				self.handleCreatedModelObject(data.oid, uwmClassName,
+						packageNode, figureNode);
+			});
 }
 
-uwm.model.ModelContainer.prototype.handleCreatedModelObject = function(oid, uwmClassName, packageNode, figureNode) {
+uwm.model.ModelContainer.prototype.handleCreatedModelObject = function(oid,
+		uwmClassName, packageNode, figureNode) {
 	var newObject = this.getNode(uwmClassName, oid);
 	oid = newObject.oid;
-	
+
 	this.items.add(oid, newObject);
-	
+
 	uwm.event.EventBroker.getInstance().fireEvent("create", newObject);
-	
+
 	newObject.setDefaultLabel();
-	
+
 	if (packageNode) {
 		newObject.associate(packageNode);
 	}
-	
+
 	if (figureNode) {
 		figureNode.associate(newObject);
 	}
 }
 
-uwm.model.ModelContainer.prototype.loadByOid = function(oid, callback, depth) {
+uwm.model.ModelContainer.prototype.loadByOid = function(oid, callback, depth,
+		secondCallback) {
 	var self = this;
-	
+
 	if (!depth) {
 		depth = 0;
 	}
-	
-	uwm.persistency.Persistency.getInstance().display(oid, depth, function(request, data) {
-		callback(self.createByDisplayResult(data));
-	});
+
+	if (callback instanceof uwm.persistency.ActionSet) {
+		callback.addDisplay(oid, depth, function(request, data) {
+			var node = self.createByDisplayResult(data);
+
+			if (secondCallback) {
+				secondCallback(node);
+			}
+		});
+	} else {
+		uwm.persistency.Persistency.getInstance().display(oid, depth,
+				function(request, data) {
+					var node = self.createByDisplayResult(data);
+
+					if (callback) {
+						callback(node);
+					}
+				});
+	}
 }
 
 uwm.model.ModelContainer.prototype.deleteByModelNode = function(modelNode) {
 	modelNode.markDeleted();
-	
-	uwm.persistency.Persistency.getInstance().deleteObject(modelNode.getOid(), function(request, data) {
-		uwm.event.EventBroker.getInstance().fireEvent("delete", modelNode);
-	});
+
+	uwm.persistency.Persistency.getInstance().deleteObject(
+			modelNode.getOid(),
+			function(request, data) {
+				uwm.event.EventBroker.getInstance().fireEvent("delete",
+						modelNode);
+			});
 }
 
 uwm.model.ModelContainer.prototype.getNode = function(uwmClassName, oid) {
-	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwmClassName);
-	
+	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(
+			uwmClassName);
+
 	oid = modelClass.demaskOid(oid);
-	
+
 	var newModelNode = this.items.get(oid);
-	
+
 	if (!newModelNode) {
 		var realModelClass = modelClass.getRealModelClass();
-		var newModelNode = eval("new " + modelClass.getInstanceClassName() + "(realModelClass)");
+		var newModelNode = eval("new " + modelClass.getInstanceClassName()
+				+ "(realModelClass)");
 		newModelNode.oid = oid;
 	}
-	
+
 	return newModelNode;
 }
 
@@ -270,6 +320,6 @@ uwm.model.ModelContainer.getInstance = function() {
 	if (!uwm.model.ModelContainer.instance) {
 		uwm.model.ModelContainer.instance = new uwm.model.ModelContainer();
 	}
-	
+
 	return uwm.model.ModelContainer.instance;
 }
