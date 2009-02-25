@@ -20,7 +20,7 @@ Ext.namespace("uwm.ui");
  */
 uwm.ui.History = function(object) {
 	uwm.ui.History.superclass.constructor.call(this, Ext.apply(this, {
-		store: this.getStore(),
+		//store: this.getStore(),
 		layout: 'border',
 		height: 350,
 		width: 550,
@@ -28,8 +28,17 @@ uwm.ui.History = function(object) {
 		selection: this.getSelectionModel()
 	}));
 	
-	this.store = this.getStore();
-	this.store.load();
+	this.store = new Ext.data.Store({
+			proxy: new uwm.ui.HistoryProxy(object),
+			start: 0,
+			limit: 3
+		});
+	this.store.load({
+		params: {
+			start: 0,
+			limit: 3
+		}
+	});
 	this.window = this;
 	this.setPosition(200, 200);
 	this.selection = this.getSelectionModel();
@@ -63,32 +72,8 @@ uwm.ui.History = function(object) {
 Ext.extend(uwm.ui.History, Ext.Window);
 
 
-uwm.ui.History.prototype.getData = function() {
-	var result = [[12345, '27.03.09', 'ichwars', 9, ['type', 'notes', 'blödsinn', 'stuss'], ['functional', 'the outermost circle in which an new item can be created.', 'kaninchen', 'bismarck biss mark bis mark bismarck biss.']], [12345, '27.03.09', 'ichwars', 9, ['type', 'notes'], ['functional', 'the outermost circle in which an new item can be created. some items or classes may have differedt properties.'], ['none', 'alcool and sex serve as interesting examples for test purposes concerning chronos web modelers or rabbits.']], [12345, '27.03.09', 'ichwars', 9, ['type', 'notes'], ['functional', 'the outermost circle in which an new item can be created. some items or classes may have differedt properties.'], ['none', 'alcool and sex serve as interesting examples for test purposes concerning chronos web modelers or rabbits.']], [12345, '27.03.09', 'ichwars', 9, ['type', 'notes'], ['functional', 'the outermost circle in which an new item can be created. some items or classes may have differedt properties.'], ['none', 'alcool and sex serve as interesting examples for test purposes concerning chronos web modelers or rabbits.']], [12345, '27.03.09', 'ichwars', 9, ['type', 'notes'], ['functional', 'the outermost circle in which an new item can be created. some items or classes may have differedt properties.'], ['none', 'alcool and sex serve as interesting examples for test purposes concerning chronos web modelers or rabbits.']]];
-	return result;
-}
-
 uwm.ui.History.prototype.getFields = function() {
-	result = ['id', 'date', 'author', 'changeNumber', 'changedProperty', 'oldValue', 'newValue'];
-	return result;
-}
-
-uwm.ui.History.prototype.getStore = function() {
-	var result = new Ext.data.SimpleStore({
-		baseParams: ['start', 'limit'],
-		totalProperty: 3,
-		totalRecords: 3,
-		autoLoad: {
-			params: {
-				start: 0,
-				limit: 3
-			}
-		},
-		fields: this.getFields(),
-		proxy: new Ext.data.MemoryProxy(this.getData()),
-		start: 0,
-		limit: 3
-	});
+	result = ['id', 'date', 'author', 'propertyString', 'changedProperty', 'oldValue', 'newValue'];
 	return result;
 }
 
@@ -232,7 +217,7 @@ uwm.ui.History.prototype.getGrid = function(object) {
 			sortable: true
 		}, {
 			header: uwm.Dict.translate("Items changed"),
-			dataIndex: 'changedProperty',
+			dataIndex: 'propertyString',
 			width: 250,
 			align: 'right',
 			sortable: true
@@ -256,7 +241,13 @@ uwm.ui.History.prototype.undoAll = function() {
 		alert("Only one item may be selected.");
 	} else {
 		var selectedItem = sm.getSelections()[0];
-		alert(selectedItem.data.id);
+		
+		uwm.persistency.Persistency.getInstance().restorehiststate(selectedItem.id, function(options, data) {
+			//self.loadResponse(options, data, callback, scope, arg);
+			alert("success")
+		}, function(options, data, errorMsg) {
+			alert("error");
+		});
 	}
 	
 }
@@ -269,7 +260,14 @@ uwm.ui.History.prototype.undoSelected = function() {
 	var selectedItems = this.selection.getSelections();
 	var selectedIds = new Array();
 	for (var i = 0; i < selectedItems.length; i++) {
-		selectedIds[selectedIds.length] = selectedItems[i].data.id;
+		selectedIds.push(selectedItems[i].data.id);
 	}
-	alert(selectedIds);
+	
+	uwm.persistency.Persistency.getInstance().restorehistfields(selectedIds, function(options, data) {
+			//self.loadResponse(options, data, callback, scope, arg);
+			alert("success")
+		}, function(options, data, errorMsg) {
+			//self.loadFailed(options, data, errorMsg, callback, scope, arg)
+			alert("error")
+		});
 }
