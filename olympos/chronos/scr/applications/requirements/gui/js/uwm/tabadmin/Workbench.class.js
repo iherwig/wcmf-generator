@@ -16,36 +16,47 @@ Ext.namespace("uwm.tabadmin");
  * 
  * @extends uwm.ui.AbstractWorkbench
  * @constructor
- * @param {Object} config The configuration object.
+ * @param {Object}
+ *            config The configuration object.
  */
 uwm.tabadmin.Workbench = function(config) {
-	this.tabPanel = new Ext.TabPanel({
-		region: "center",
-		activeTab: 0,
-		enableTabScroll: true,
-		items: [
-			new uwm.tabadmin.ImportPanel()
-		]
+	this.tabPanel = new Ext.TabPanel( {
+		region :"center",
+		activeTab :0,
+		enableTabScroll :true,
+		items : [ new uwm.tabadmin.ImportPanel() ]
 	});
-	this.eastPanel = new uwm.ui.EastPanel({
-		highlight: "admin"
+	this.eastPanel = new uwm.ui.EastPanel( {
+		highlight :"admin"
 	})
-	
+
 	uwm.tabadmin.Workbench.superclass.constructor.call(this, Ext.apply(this, {
-		items: [this.tabPanel, this.eastPanel]
+		items : [ this.tabPanel, this.eastPanel ]
 	}, config));
-	
-	var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
-	
-	for (var i = 0; i < classes.getCount(); i++) {
+
+	var classes = uwm.model.ModelNodeClassContainer.getInstance()
+			.getAllClasses();
+
+	this.actionSet = new uwm.persistency.ActionSet();
+
+	for ( var i = 0; i < classes.getCount(); i++) {
 		var currClass = classes.itemAt(i);
-		
+
 		if (currClass instanceof uwm.model.TechnicalObjectClass) {
-			this.tabPanel.add(new uwm.tabadmin.EnumTab({
-				uwmClassName: currClass.getUwmClassName()
+			this.tabPanel.add(new uwm.tabadmin.EnumTab( {
+				uwmClassName :currClass.getUwmClassName(),
+				actionSet :this.actionSet
 			}));
 		}
 	}
+
+	var self = this;
+
+	this.on("afterlayout", function() {
+		self.actionSet.commit();
+	}, undefined, {
+		single :true
+	});
 }
 
 Ext.extend(uwm.tabadmin.Workbench, uwm.ui.AbstractWorkbench);

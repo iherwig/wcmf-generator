@@ -99,3 +99,6 @@ uwm.persistency.Persistency.prototype.unlock = function(oid, successHandler, err
 
 uwm.persistency.Persistency.prototype.log = function(logtype, msg, successHandler, errorHandler) {
 }
+
+uwm.persistency.Persistency.prototype.executeActionSet = function(actionSet) {
+}

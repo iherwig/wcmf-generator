@@ -12,99 +12,118 @@
 Ext.namespace("uwm.property");
 
 /**
- * Container managing display/removal of properties as well as locking/unlocking of shown ModelNodes.
- *
+ * Container managing display/removal of properties as well as locking/unlocking
+ * of shown ModelNodes.
+ * 
  * @extends Ext.Panel
  * @constructor
- * @param {Object} config The configuration object.
+ * @param {Object}
+ *            config The configuration object.
  */
 uwm.property.PropertyContainer = function() {
 }
 
 uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
-	initComponent: function() {
+	initComponent : function() {
 		Ext.apply(this, {
-			region: "center",
-			layout: "fit",
-			collapsible: false,
-			split: false,
-			width: 250,
-			autoScroll: true,
-			title: uwm.Dict.translate('Properties')
+			region :"center",
+			layout :"fit",
+			collapsible :false,
+			split :false,
+			width :250,
+			autoScroll :true,
+			title :uwm.Dict.translate('Properties')
 		})
-		
+
 		uwm.property.PropertyContainer.instance = this;
-		
-		uwm.property.PropertyContainer.superclass.initComponent.apply(this, arguments);
-		
+
+		uwm.property.PropertyContainer.superclass.initComponent.apply(this,
+				arguments);
+
 		this.currentOid = null;
-		
+		this.isLockedByOtherUser = null;
+
 		this.on("afterlayout", this.showInfoMask);
 	}
 })
 
 uwm.property.PropertyContainer.prototype.showInfoMask = function() {
-	this.mask = new uwm.ui.InfoMask(this.body, {
-		msg: uwm.Dict.translate('This panel shows the properties of each object selected by a single click.')
-	});
+	this.mask = new uwm.ui.InfoMask(
+			this.body,
+			{
+				msg :uwm.Dict
+						.translate('This panel shows the properties of each object selected by a single click.')
+			});
 	this.mask.show();
-	
+
 	this.un("afterlayout", this.showInfoMask);
 }
 
 uwm.property.PropertyContainer.prototype.showProperty = function(modelNode) {
 	if (modelNode != null) {
 		var oid = modelNode.getOid();
-		
+
 		if (oid != null && this.currentOid != oid) {
 			if (this.mask) {
 				this.mask.hide();
 			}
-			
+
+			var oldOid = this.currentOid;
+
 			this.currentOid = modelNode.getOid();
-			
+
 			var items = this.items;
 			while (items && items.getCount() > 0) {
 				this.remove(items.get(0), true);
 			}
-			
+
 			var self = this;
-			
-			uwm.persistency.Persistency.getInstance().lock(this.currentOid, function(request, data) {
-				var isLockedByOtherUser = false;
-				self.showLockedProperty(modelNode, isLockedByOtherUser);
-				//alert("locked "+self.currentOid);
+
+			this.mask = new Ext.LoadMask(this.getEl());
+			this.mask.show();
+
+			var actionSet = new uwm.persistency.ActionSet();
+
+			if (oldOid) {
+				actionSet.addUnlock(oldOid);
+			}
+
+			actionSet.addLock(this.currentOid, function(request, data) {
+				self.setLocked(false);
 			}, function(request, data) {
-				var isLockedByOtherUser = true;
-				self.showLockedProperty(modelNode, isLockedByOtherUser);
-				//alert("locking failed");
+				self.setLocked(true);
+			});
+
+			uwm.model.ModelContainer.getInstance().loadByOid(this.currentOid,
+					actionSet);
+
+			actionSet.commit( function() {
+				self.displayForm();
 			});
 		}
 	}
 }
 
-uwm.property.PropertyContainer.prototype.showLockedProperty = function(modelNode, isLockedByOtherUser) {
+uwm.property.PropertyContainer.prototype.setLocked = function(isLocked) {
+	this.isLockedByOtherUser = isLocked;
+}
 
-	var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, isLockedByOtherUser));
-	
-	form.on("destroy", function() {
-		this.currentOid = modelNode.getOid();
-		var self = this;
-		uwm.persistency.Persistency.getInstance().unlock(self.currentOid, function(request, data) {
-			//alert("unlocked "+ self.currentOid);
-		}, function(request, data) {
-			//alert("unlocking failed "+ self.currentOid );
-		});
-	});
-	
+uwm.property.PropertyContainer.prototype.displayForm = function() {
+
+	var modelNode = uwm.model.ModelContainer.getInstance().getByOid(
+			this.currentOid);
+
+	var form = this.add(modelNode.getModelNodeClass().getPropertyForm(
+			modelNode, this.isLockedByOtherUser));
+
 	this.doLayout();
-	
-	var mask = new Ext.LoadMask(form.getEl());
-	mask.show();
-	
-	modelNode.fillPropertyForm(form, mask);
+
+	modelNode.populatePropertyForm(form);
+
+	this.mask.hide();
 }
 
 uwm.property.PropertyContainer.getInstance = function() {
-	return uwm.Uwm.getInstance().getActiveWorkbench().getEastPanel().getPropertyContainer();
+	return uwm.Uwm.getInstance().getActiveWorkbench().getEastPanel()
+			.getPropertyContainer();
 }
