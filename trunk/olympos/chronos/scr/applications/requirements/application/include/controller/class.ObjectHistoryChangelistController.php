@@ -58,12 +58,17 @@ class ObjectHistoryChangelistController extends Controller
 			foreach ($datatab as $k=>$v) {
 				
 				if ($k == '_data') {
-				
+					
 					$datatabval = unserialize($v[1]['data']['value']);
+					$tmp = array();
+					foreach($datatabval as $a=>$b) {
+						array_push($tmp,$b);
+					}
+					
 					array_push($arrdatatabval,
 					array (
 					'id'=>$v[3]['id']['value'],
-					'data'=>$datatabval[0],
+					'data'=> $tmp,
 					'duplicate'=>$v[1]['duplicate']['value'],
 					'eventtype'=>$v[1]['eventtype']['value'],
 					'affectedoid'=>$v[1]['affectedoid']['value'],
