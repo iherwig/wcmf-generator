@@ -234,7 +234,7 @@ uwm.persistency.ActionSet.prototype.successHandler = function(request, data) {
 		if (!(currRequest instanceof Function)) {
 			var currResponse = data.data[currActionName];
 
-			if (!currResponse.success || currResponse.success == 1) {
+			if (currResponse.success == 1) {
 				persistency.processSuccessHandler(currRequest.successHandler,
 						currRequest, currResponse);
 			} else {
