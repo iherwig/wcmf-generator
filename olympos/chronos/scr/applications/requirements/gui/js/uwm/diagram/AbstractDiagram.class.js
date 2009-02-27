@@ -327,14 +327,14 @@ uwm.diagram.AbstractDiagram.prototype.loadFigures = function(forceReload) {
 
 uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 	this.figuresToLoad = 0;
-
+	var self=this;
 	var modelContainer = uwm.model.ModelContainer.getInstance();
 
 	for (i in this.childOids) {
 		if (!(this.childOids[i] instanceof Function)) {
 			var figure = modelContainer.getByOid(this.childOids[i]);
 
-			var self = this;
+			//var self = this;
 
 			var parentOids = figure.getParentOids();
 
