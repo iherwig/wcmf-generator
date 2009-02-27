@@ -22,6 +22,9 @@ Ext.namespace("uwm.model");
  * @constructor
  */
 uwm.model.ModelClass = function() {
+	
+	this.initialWidth = 150;
+	this.initialHeight = 50;
 }
 
 uwm.model.ModelClass.prototype = new uwm.model.ModelNodeClass;
@@ -68,4 +71,12 @@ uwm.model.ModelClass.prototype.getSemanticGroup = function() {
 
 uwm.model.ModelClass.prototype.getAllConnectionInfo = function() {
 	return this.connectionInfo;
+}
+
+uwm.model.ModelClass.prototype.getInitialWidth = function() {
+	return this.initialWidth;
+}
+
+uwm.model.ModelClass.prototype.getInitialHeight = function() {
+	return this.initialHeight;
 }
