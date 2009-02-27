@@ -334,8 +334,6 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 		if (!(this.childOids[i] instanceof Function)) {
 			var figure = modelContainer.getByOid(this.childOids[i]);
 
-			//var self = this;
-
 			var parentOids = figure.getParentOids();
 
 			for ( var j in parentOids) {
