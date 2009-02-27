@@ -279,11 +279,17 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				break;
 				
 			case "save":
+				var changeNode = {};
+				
+				changeNode[3] = {};
+				
 				for (var i in currRequest.values) {
 					if (!(currRequest.values[i] instanceof Function)) {
-						jsonRequest["value--" + i + "-" + oid] = currRequest.values[i];
+						changeNode[3][i] = currRequest.values[i];
 					}
 				}
+				
+				jsonRequest[currRequest.oid] = changeNode;
 				break;
 				
 			case "display":

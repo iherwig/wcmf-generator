@@ -125,10 +125,6 @@ uwm.diagram.AbstractDiagram.prototype.init = function() {
 			self.handleAssociateEvent(parentModelObject, childModelObject);
 		}
 	});
-
-	if (!this.containedPackage) {
-		this.getOwnContainer();
-	}
 }
 
 /**
@@ -294,6 +290,8 @@ uwm.diagram.AbstractDiagram.prototype.loadFigures = function(forceReload) {
 
 	if (!this.childOids || this.childOids.length == 0) {
 		forceReload = true;
+	} else if (!this.containedPackage) {
+		forceReload = true;
 	} else {
 		var firstFigureOid = null;
 
@@ -329,6 +327,8 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 	this.figuresToLoad = 0;
 	var self=this;
 	var modelContainer = uwm.model.ModelContainer.getInstance();
+
+	this.getOwnContainer();
 
 	for (i in this.childOids) {
 		if (!(this.childOids[i] instanceof Function)) {
@@ -651,13 +651,47 @@ uwm.diagram.AbstractDiagram.prototype.getContextMenuPosition = function(x, y) {
  */
 uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject,
 		x, y) {
-	this.createdObjects.push( {
-		modelClass :null,
-		x :x,
-		y :y
-	});
 
-	uwm.model.ModelContainer.getInstance().createFigure(this, modelObject);
+	var self = this;
+
+	var actionSet = new uwm.persistency.ActionSet();
+
+	uwm.model.ModelContainer.getInstance().loadByOid(modelObject.getOid(),
+			actionSet);
+
+	uwm.model.ModelContainer.getInstance().createFigure(
+			this,
+			modelObject,
+			actionSet,
+			function(newFigureNode) {
+				newFigureNode.init(modelObject, x, y);
+
+				var modelClass = modelObject.getModelNodeClass();
+
+				newFigureNode.changeProperties( {
+					PositionX :x,
+					PositionY :y,
+					Width :modelClass.getInitialWidth(),
+					Height :modelClass.getInitialHeight()
+				});
+
+				self.figures.add(modelObject.getOid(), newFigureNode);
+
+				self.establishExistingConnections(modelObject, modelObject
+						.getParentOids());
+				self.establishExistingConnections(modelObject, modelObject
+						.getChildOids());
+
+				self.dropWindow.destroy();
+			});
+
+	/*
+	 * actionSet.addSave("{last_created_oid:Figure}", { PositionX :x, PositionY
+	 * :y, Width :modelClass.getInitialWidth(), Height
+	 * :modelClass.getInitialHeight() });
+	 */
+
+	actionSet.commit();
 }
 
 /**
@@ -677,13 +711,60 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject,
  */
 uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x,
 		y) {
-	this.createdObjects.push( {
-		modelClass :modelClass,
-		x :x,
-		y :y
+	var self = this;
+
+	var actionSet = new uwm.persistency.ActionSet();
+
+	var newObjectOid = null;
+	var newFigureOid = null;
+	var savedObjectNode = null;
+
+	uwm.model.ModelContainer.getInstance().createModelObject(
+			modelClass.getUwmClassName(), this.containedPackage, actionSet,
+			function(newObjectNode) {
+				newObjectOid = newObjectNode.getOid();
+
+				self.objects.add(newObjectNode.getOid(), newObjectNode);
+
+				savedObjectNode = newObjectNode;
+
+				/*
+				 * self.establishExistingConnections(newObjectNode,
+				 * newObjectNode .getParentOids());
+				 * self.establishExistingConnections(newObjectNode,
+				 * newObjectNode .getChildOids());
+				 */
+			});
+
+	uwm.model.ModelContainer.getInstance().createFigure(this, undefined,
+			actionSet, function(newFigureNode) {
+				newFigureOid = newFigureNode.getOid();
+
+				newFigureNode.init(savedObjectNode, x, y);
+
+				newFigureNode.changeProperties( {
+					PositionX :x,
+					PositionY :y,
+					Width :modelClass.getInitialWidth(),
+					Height :modelClass.getInitialHeight()
+				});
+
+				self.figures.add(newObjectOid, newFigureNode);
+
+				self.dropWindow.destroy();
+			});
+
+	/*
+	 * actionSet.addSave("{last_created_oid:Figure}", { PositionX :x, PositionY
+	 * :y, Width :modelClass.getInitialWidth(), Height
+	 * :modelClass.getInitialHeight() });
+	 */
+
+	actionSet.addAssociate("{last_created_oid:Figure}", "{last_created_oid:"
+			+ modelClass.getUwmClassName() + "}", function(request, data) {
 	});
 
-	uwm.model.ModelContainer.getInstance().createFigure(this);
+	actionSet.commit();
 }
 
 /**
@@ -729,7 +810,9 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(
 	} else if (this.containsObject(modelNode)) {
 		var figure = this.figures.get(modelNode.getOid());
 
-		figure.getGraphics().setLabel(modelNode.getLabel());
+		if (figure) {
+			figure.getGraphics().setLabel(modelNode.getLabel());
+		}
 		// TODO: Remove dependency on CWM
 	} else if (modelNode instanceof cwm.ChiValue
 			|| modelNode instanceof cwm.Operation) {
@@ -749,41 +832,9 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(
 
 uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(
 		parentModelNode, childModelNode) {
-	if (parentModelNode == this) {
-		var config = this.createdObjects[0];
 
-		if (config && config.modelClass) {
-			uwm.model.ModelContainer.getInstance().createModelObject(
-					config.modelClass.getUwmClassName(), this.containedPackage,
-					childModelNode);
-		}
-	} else if (childModelNode instanceof uwm.diagram.Figure) {
-		var diagram = childModelNode.getDiagram();
-
-		if (diagram == this) {
-			this.objects.add(parentModelNode.getOid(), parentModelNode);
-			this.figures.add(parentModelNode.getOid(), childModelNode);
-
-			var config = this.createdObjects.shift();
-
-			childModelNode.init(parentModelNode, config.x, config.y);
-
-			childModelNode.changeProperties( {
-				PositionX :config.x,
-				PositionY :config.y,
-				Width :childModelNode.getGraphics().getWidth(),
-				Height :childModelNode.getGraphics().getHeight()
-			});
-
-			this.establishExistingConnections(parentModelNode, parentModelNode
-					.getParentOids());
-			this.establishExistingConnections(parentModelNode, parentModelNode
-					.getChildOids());
-
-			this.dropWindow.destroy();
-		}
-		// TODO: remove dependency on CWM
-	} else if (childModelNode instanceof cwm.ChiValue) {
+	// TODO: remove dependency on CWM
+	if (childModelNode instanceof cwm.ChiValue) {
 		var figure = this.figures.get(parentModelNode.getOid());
 
 		var graphics = figure.getGraphics();

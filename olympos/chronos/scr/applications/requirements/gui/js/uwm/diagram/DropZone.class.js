@@ -94,6 +94,8 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 			y: e.xy[1],
 			plain: true,
 			closable: false,
+			draggable: false,
+			resizable: false,
 			items: [new Ext.Panel({
 				html: "<div class='x-mask-loading'><div>" + uwm.Dict.translate('Loading ...') + "</div></div>"
 			})]

@@ -259,7 +259,7 @@ uwm.persistency.ActionSet.prototype.successHandler = function(request, data) {
 	persistency.processSuccessHandler(this.savedSuccessHandler, request, data);
 }
 
-uwm.persistency.ActionSet.prototype.XXerrorHandler = function(request, data,
+uwm.persistency.ActionSet.prototype.errorHandler = function(request, data,
 		errorMessage) {
 	uwm.persistency.Persistency.getInstance().processErrorHandler(
 			this.savedErrorHandler, request, data, errorMessage);
