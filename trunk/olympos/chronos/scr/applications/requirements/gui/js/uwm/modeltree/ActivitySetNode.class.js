@@ -19,7 +19,7 @@ Ext.namespace("uwm.modeltree");
  * @param {Object} config The configuration object.
  */
 uwm.modeltree.ActivitySetNode = function(config) {
-	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("ActivitySet", config.oid);
+	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndNameAndOid("ActivitySet", config.text, config.oid);
 	
 	uwm.modeltree.ActivitySetNode.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,

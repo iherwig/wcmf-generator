@@ -198,19 +198,33 @@ uwm.model.ModelContainer.prototype.handleCreatedDiagram = function(oid,
 }
 
 uwm.model.ModelContainer.prototype.createFigure = function(diagramModelNode,
-		modelObject) {
+		modelObject, actionSet, callback) {
 	var self = this;
 
-	uwm.persistency.Persistency.getInstance().newObject(
-			"Figure",
-			function(request, data) {
-				self.handleCreatedFigure(data.oid, diagramModelNode,
-						modelObject);
+	var figureOid = null;
+
+	actionSet.addNewObject("Figure", function(request, data) {
+		figureOid = data.oid;
+		self.handleCreatedFigure(data.oid, diagramModelNode, callback);
+	});
+
+	actionSet.addAssociate(diagramModelNode.getOid(),
+			"{last_created_oid:Figure}", false, function(request, data) {
+				uwm.event.EventBroker.getInstance().fireEvent("associate",
+						diagramModelNode, self.getByOid(figureOid));
 			});
+
+	if (modelObject) {
+		actionSet.addAssociate(modelObject.getOid(),
+				"{last_created_oid:Figure}", false, function(request, data) {
+					uwm.event.EventBroker.getInstance().fireEvent("associate",
+							modelObject, self.getByOid(figureOid));
+				});
+	}
 }
 
 uwm.model.ModelContainer.prototype.handleCreatedFigure = function(oid,
-		diagramModelNode, modelObject) {
+		diagramModelNode, callback) {
 	var newFigure = this.getNode("Figure", oid);
 	oid = newFigure.oid;
 
@@ -220,30 +234,43 @@ uwm.model.ModelContainer.prototype.handleCreatedFigure = function(oid,
 
 	uwm.event.EventBroker.getInstance().fireEvent("create", newFigure);
 
-	newFigure.associate(diagramModelNode);
-
-	if (modelObject) {
-		newFigure.associate(modelObject);
+	if (callback instanceof Function) {
+		callback(newFigure);
 	}
 }
 
 uwm.model.ModelContainer.prototype.createModelObject = function(uwmClassName,
-		packageNode, figureNode) {
+		packageNode, actionSet, callback) {
 	var self = this;
 
-	uwm.persistency.Persistency.getInstance().newObject(
-			uwmClassName,
-			function(request, data) {
-				self.handleCreatedModelObject(data.oid, uwmClassName,
-						packageNode, figureNode);
-			});
+	var newObjectOid = null;
+
+	if (actionSet instanceof uwm.persistency.ActionSet) {
+		actionSet.addNewObject(uwmClassName, function(request, data) {
+			var newObjectOid = data.oid;
+
+			self.handleCreatedModelObject(data.oid, uwmClassName, undefined, callback);
+		});
+
+		actionSet.addAssociate("{last_created_oid:" + uwmClassName + "}",
+				packageNode.getOid(), function(request, data) {
+					uwm.event.EventBroker.getInstance().fireEvent("associate",
+							packageNode, self.getByOid(newObjectOid));
+				});
+	} else {
+		uwm.persistency.Persistency.getInstance().newObject(
+				uwmClassName,
+				function(request, data) {
+					self.handleCreatedModelObject(data.oid, uwmClassName,
+							packageNode);
+				});
+	}
 }
 
 uwm.model.ModelContainer.prototype.handleCreatedModelObject = function(oid,
-		uwmClassName, packageNode, figureNode) {
+		uwmClassName, packageNode, callback) {
 	var newObject = this.getNode(uwmClassName, oid);
 	oid = newObject.oid;
-
 	this.items.add(oid, newObject);
 
 	uwm.event.EventBroker.getInstance().fireEvent("create", newObject);
@@ -254,8 +281,8 @@ uwm.model.ModelContainer.prototype.handleCreatedModelObject = function(oid,
 		newObject.associate(packageNode);
 	}
 
-	if (figureNode) {
-		figureNode.associate(newObject);
+	if (callback instanceof Function) {
+		callback(newObject);
 	}
 }
 

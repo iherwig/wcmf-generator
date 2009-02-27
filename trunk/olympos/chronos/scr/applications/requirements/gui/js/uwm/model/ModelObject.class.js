@@ -23,6 +23,9 @@ Ext.namespace("uwm.model");
  */
 uwm.model.ModelObject = function(modelNodeClass) {
 	uwm.model.ModelNode.call(this, modelNodeClass);
+	
+	this.initialWidth = 150;
+	this.initialHeight = 50;
 }
 
 uwm.model.ModelObject.prototype = new uwm.model.ModelNode;
@@ -78,6 +81,14 @@ uwm.model.ModelObject.prototype.getNumberOfConnections = function(otherObject) {
 	result += this.getConnections(childOids, otherObject.getUwmClassName());
 	
 	return result;
+}
+
+uwm.model.ModelObject.prototype.getInitialWidth = function() {
+	return this.initialWidth;
+}
+
+uwm.model.ModelObject.prototype.getInitialHeight = function() {
+	return this.initialHeight;
 }
 
 /**
