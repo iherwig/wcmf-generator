@@ -59,21 +59,19 @@ class ObjectHistoryChangelistController extends Controller
 			
 				if ($k == '_data') {
 				
-					$tmp[id] = $v[3]['id']['value'];
-				
-					$datatabval = unserialize($v[1]['data']['value']);
-					foreach ($datatabval as $z=>$zz) {
-						$tmp[data][$z] = $zz;
-					}
-					$tmp[duplicate] = $v[1]['duplicate']['value'];
-					$tmp[eventtype] = $v[1]['eventtype']['value'];
-					$tmp[affectedoid] = $v[1]['affectedoid']['value'];
-					$tmp[otherid] = $v[1]['otherid']['value'];
-					$tmp[timestamp] = self::makeReadableTimestamp($v[1]['timestamp']['value']);
-					$tmp[user] = $v[1]['user']['value'];
-					$tmp[timestamporig] = $v[1]['timestamp']['value'];
-				
-					array_push($arrdatatabval, $tmp);
+					array_push($arrdatatabval, array (
+					
+					'id'=>$v[3]['id']['value'],
+					'data'=>unserialize($v[1]['data']['value']),
+					'duplicate'=>$v[1]['duplicate']['value'],
+					'eventtype'=>$v[1]['eventtype']['value'],
+					'affectedoid'=>$v[1]['affectedoid']['value'],
+					'otherid'=>$v[1]['otherid']['value'],
+					'timestamp'=>self::makeReadableTimestamp($v[1]['timestamp']['value']),
+					'user'=>$v[1]['user']['value'],
+					'timestamporig'=>$v[1]['timestamp']['value']
+					
+					));
 				
 				}
 			
