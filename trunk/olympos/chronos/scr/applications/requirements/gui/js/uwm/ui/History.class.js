@@ -236,23 +236,22 @@ uwm.ui.History.prototype.getGrid = function(object) {
 uwm.ui.History.prototype.undoAll = function() {
 	var sm = this.selection;
 	if (sm.getSelections().length == 0) {
-		alert("No items selected.")
-		return;
-	}
-	if ((sm.getSelections().length > 1)) {
-		alert("Only one item may be selected.");
+		Ext.MessageBox.alert("Error", "No items selected.");
 	} else {
-		var selectedItem = sm.getSelections()[0];
-	
-		uwm.persistency.Persistency.getInstance().restorehistliststate(selectedItem.data.id, function(options, data) {
-		Ext.MessageBox.alert('Success', uwm.Dict.translate('The selected state has been restored.'));
-		}, function(options, data, errorMsg) {
-			this.restoreError(options, data, errorMsg);
-		});
+		if ((sm.getSelections().length > 1)) {
+			Ext.MessageBox.alert("Error", "Only one item may be selected.");
+		} else {
+			var selectedItem = sm.getSelections()[0];
+			
+			uwm.persistency.Persistency.getInstance().restorehistliststate(selectedItem.data.id, function(options, data) {
+				Ext.MessageBox.alert('Success', uwm.Dict.translate('The selected state has been restored.'));
+			}, function(options, data, errorMsg) {
+				this.restoreError(options, data, errorMsg);
+			});
+		}
+		
+		this.window.close();
 	}
-	 
-	this.window.close();
-	
 }
 
 uwm.ui.History.prototype.undoSelected = function() {
