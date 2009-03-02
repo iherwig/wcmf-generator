@@ -325,7 +325,7 @@ uwm.diagram.AbstractDiagram.prototype.loadFigures = function(forceReload) {
 
 uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 	this.figuresToLoad = 0;
-	var self=this;
+	var self = this;
 	var modelContainer = uwm.model.ModelContainer.getInstance();
 
 	this.getOwnContainer();
@@ -412,6 +412,7 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject)
 
 uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(
 		newObject, list) {
+	
 	if (list) {
 		for ( var i = 0; i < list.length; i++) {
 			var connectedObject = this.objects.get(list[i]);
@@ -718,6 +719,7 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x,
 	var newObjectOid = null;
 	var newFigureOid = null;
 	var savedObjectNode = null;
+	var savedFigureNode = null;
 
 	uwm.model.ModelContainer.getInstance().createModelObject(
 			modelClass.getUwmClassName(), this.containedPackage, actionSet,
@@ -752,6 +754,8 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x,
 				self.figures.add(newObjectOid, newFigureNode);
 
 				self.dropWindow.destroy();
+
+				savedFigureNode = newFigureNode;
 			});
 
 	/*
@@ -762,6 +766,8 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x,
 
 	actionSet.addAssociate("{last_created_oid:Figure}", "{last_created_oid:"
 			+ modelClass.getUwmClassName() + "}", function(request, data) {
+		uwm.event.EventBroker.getInstance().fireEvent("associate",
+				savedFigureNode, savedObjectNode);
 	});
 
 	actionSet.commit();
