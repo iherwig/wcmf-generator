@@ -90,6 +90,9 @@ uwm.ui.Login = function(config){
             triggerAction: 'all',
             editable: false,
         
+        }), new Ext.Panel({
+        	cls: "uwm-revisioninfo",
+        	html: "<p>" + uwm.Dict.translate("Revision") + ": " + uwm.Constants.SVN_REVISION + "</p>"
         })],
          buttons: [{
             text: uwm.Dict.translate('Login'),
