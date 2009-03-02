@@ -1,7 +1,0 @@
-.demo-bogus-shortcut img {
-    background-image: url(images/bogus48x48.png);
-    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='system/modules/bogus/bogus-win/images/chronos_lit.png', sizingMethod='scale');
-}
-#bogus-nav-panel li {
-	margin-bottom:5px;
-}
