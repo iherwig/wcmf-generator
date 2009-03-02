@@ -21,6 +21,8 @@ cwm.ChiWorkerExternalClass = function() {
 	this.treeIcon = "FigureChiWorkerExternal";
 	this.figureIcon = "FigureChiWorkerExternal";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 52;
+	this.initialHeight = 50;
 	this.description = " A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise.";
 	this.helpUrl = "help/index.html#ChiWorkerExternal|outline";
 	this.defaultLabel = "New ChiWorkerExternal";
@@ -127,7 +129,7 @@ cwm.ChiWorkerExternalClass.prototype.getPropertyForm = function(modelNode, isLoc
 }
 
 cwm.ChiWorkerExternalClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorkerExternal.png", 52, 50, 52, 50);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorkerExternal.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiWorkerExternalClass());

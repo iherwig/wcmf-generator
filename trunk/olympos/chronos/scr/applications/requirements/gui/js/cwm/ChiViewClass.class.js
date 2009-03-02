@@ -21,6 +21,8 @@ cwm.ChiViewClass = function() {
 	this.treeIcon = "FigureChiView";
 	this.figureIcon = "FigureChiView";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 96;
+	this.initialHeight = 95;
 	this.description = " A ChiView is a logical class used to display a ChiNode";
 	this.helpUrl = "help/index.html#ChiView|outline";
 	this.defaultLabel = "New ChiView";
@@ -123,7 +125,7 @@ cwm.ChiViewClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 }
 
 cwm.ChiViewClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiView.PNG", 96, 95, 96, 95);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiView.PNG", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiViewClass());

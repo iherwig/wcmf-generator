@@ -21,6 +21,8 @@ cwm.ActivityReceiveClass = function() {
 	this.treeIcon = "FigureActivityReceive";
 	this.figureIcon = "FigureActivityReceive";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 75;
+	this.initialHeight = 45;
 	this.description = " ";
 	this.helpUrl = "help/index.html#ActivityReceive|outline";
 	this.defaultLabel = "New ActivityReceive";
@@ -137,7 +139,7 @@ cwm.ActivityReceiveClass.prototype.getPropertyForm = function(modelNode,
 
 cwm.ActivityReceiveClass.prototype.getGraphics = function(label, figure) {
 	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure,
-			"../application/images/ActivityReceive.png", 75, 45, 75, 45);
+			"../application/images/ActivityReceive.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(

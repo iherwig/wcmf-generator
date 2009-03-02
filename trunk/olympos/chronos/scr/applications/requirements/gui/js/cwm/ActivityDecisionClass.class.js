@@ -21,6 +21,8 @@ cwm.ActivityDecisionClass = function() {
 	this.treeIcon = "FigureActivityDecision";
 	this.figureIcon = "FigureActivityDecision";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 40;
+	this.initialHeight = 40;
 	this.description = " A Decision is used to represent a choice amongst several possibilities.  Each transition usually is labeled with a text describing the response to the question posed by the Decision point.";
 	this.helpUrl = "help/index.html#ActivityDecision|outline";
 	this.defaultLabel = "New ActivityDecision";
@@ -130,7 +132,7 @@ cwm.ActivityDecisionClass.prototype.getPropertyForm = function(modelNode,
 
 cwm.ActivityDecisionClass.prototype.getGraphics = function(label, figure) {
 	return new uwm.graphics.figure.ImageFigure(label, figure,
-			"../application/images/ActivityDecision.png", 40, 40, 40, 40);
+			"../application/images/ActivityDecision.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(

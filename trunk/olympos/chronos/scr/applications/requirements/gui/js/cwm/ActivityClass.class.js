@@ -21,6 +21,8 @@ cwm.ActivityClass = function() {
 	this.treeIcon = "FigureActivity";
 	this.figureIcon = "FigureActivity";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 95;
+	this.initialHeight = 60;
 	this.description = " An activity is the specification of a parameterized sequence of behaviour. An activity is shown as a round-cornered rectangle enclosing all the actions, control flows and other elements that make up the activity.";
 	this.helpUrl = "help/index.html#Activity|outline";
 	this.defaultLabel = "New Activity";
@@ -171,7 +173,7 @@ cwm.ActivityClass.prototype.getPropertyForm = function(modelNode,
 
 cwm.ActivityClass.prototype.getGraphics = function(label, figure) {
 	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure,
-			"../application/images/Activity.png", 95, 60, 95, 60);
+			"../application/images/Activity.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(

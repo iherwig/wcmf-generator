@@ -21,6 +21,8 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 	this.treeIcon = "FigureChiBusinessUseCaseCore";
 	this.figureIcon = "FigureChiBusinessUseCaseCore";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 116;
+	this.initialHeight = 79;
 	this.description = " A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money).";
 	this.helpUrl = "help/index.html#ChiBusinessUseCaseCore|outline";
 	this.defaultLabel = "New ChiBusinessUseCaseCore";
@@ -207,7 +209,7 @@ cwm.ChiBusinessUseCaseCoreClass.prototype.getPropertyForm = function(modelNode, 
 }
 
 cwm.ChiBusinessUseCaseCoreClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure, "../application/images/ChiBusinessUseCaseCore.png", 96, 95, 96, 95);
+	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure, "../application/images/ChiBusinessUseCaseCore.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBusinessUseCaseCoreClass());

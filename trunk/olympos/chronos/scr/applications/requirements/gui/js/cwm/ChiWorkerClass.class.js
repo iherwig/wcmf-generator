@@ -21,6 +21,8 @@ cwm.ChiWorkerClass = function() {
 	this.treeIcon = "FigureChiWorker";
 	this.figureIcon = "FigureChiWorker";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 52;
+	this.initialHeight = 52;
 	this.description = " A ChiWorker is a special actor that works within the enterprise. ";
 	this.helpUrl = "help/index.html#ChiWorker|outline";
 	this.defaultLabel = "New ChiWorker";
@@ -113,7 +115,7 @@ cwm.ChiWorkerClass.prototype.getPropertyForm = function(modelNode, isLockedByOth
 }
 
 cwm.ChiWorkerClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorker.png", 52, 52, 52, 52);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorker.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiWorkerClass());

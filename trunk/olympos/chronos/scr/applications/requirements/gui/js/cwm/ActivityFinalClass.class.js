@@ -21,6 +21,8 @@ cwm.ActivityFinalClass = function() {
 	this.treeIcon = "FigureActivityFinal";
 	this.figureIcon = "FigureActivityFinal";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 40;
+	this.initialHeight = 40;
 	this.description = " ";
 	this.helpUrl = "help/index.html#ActivityFinal|outline";
 	this.defaultLabel = "New ActivityFinal";
@@ -129,7 +131,7 @@ cwm.ActivityFinalClass.prototype.getPropertyForm = function(modelNode,
 
 cwm.ActivityFinalClass.prototype.getGraphics = function(label, figure) {
 	return new uwm.graphics.figure.ImageFigure(label, figure,
-			"../application/images/ActivityFinal.png", 40, 40, 40, 40);
+			"../application/images/ActivityFinal.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(

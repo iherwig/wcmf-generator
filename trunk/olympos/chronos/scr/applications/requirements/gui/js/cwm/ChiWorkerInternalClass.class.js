@@ -21,6 +21,8 @@ cwm.ChiWorkerInternalClass = function() {
 	this.treeIcon = "FigureChiWorkerInternal";
 	this.figureIcon = "FigureChiWorkerInternal";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 48;
+	this.initialHeight = 52;
 	this.description = " A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners.";
 	this.helpUrl = "help/index.html#ChiWorkerInternal|outline";
 	this.defaultLabel = "New ChiWorkerInternal";
@@ -112,7 +114,7 @@ cwm.ChiWorkerInternalClass.prototype.getPropertyForm = function(modelNode, isLoc
 }
 
 cwm.ChiWorkerInternalClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorkerInternal.png", 48,52,48,52);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiWorkerInternal.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiWorkerInternalClass());
