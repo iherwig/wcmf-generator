@@ -1,0 +1,23 @@
+2008-08-25 18:08:29  -  [ C:\Programme\xampp\htdocs\62\requirements4\wcmf\lib\presentation\class.Application.php 137 ] Configuration file include/configSuper.ini not found!
+  -> Message->error (called at class.Application.php:137)
+  -> Application->initialize (called at main.php:32)
+2008-08-25 19:08:58 class.ActionMapper.php:87 - Authorization failed for '' user ''
+2008-08-25 19:08:58 class.ActionMapper.php:88 - You don't have the permission to perform this action.
+  -> onError (called at class.Message.php:101)
+  -> Message::error (called at class.ActionMapper.php:88)
+  -> ActionMapper::processAction (called at main.php:45)
+2008-08-25 19:08:58 class.ActionMapper.php:77 - Authorization failed: no valid user. Maybe your session has expired.
+  -> onError (called at class.Message.php:101)
+  -> Message::error (called at class.ActionMapper.php:77)
+  -> ActionMapper::processAction (called at main.php:92)
+  -> onError (called at class.Message.php:101)
+  -> Message::error (called at class.ActionMapper.php:88)
+  -> ActionMapper::processAction (called at main.php:45)
+2008-08-25 19:08:43 class.UserManager.php:216 - The old password is incorrect
+  -> onError (called at class.Message.php:101)
+  -> Message->error (called at class.UserManager.php:85)
+  -> UserManager->onError (called at class.UserManager.php:216)
+  -> UserManager->changePassword (called at class.PrincipalController.php:204)
+  -> PrincipalController->executeKernel (called at class.Controller.php:138)
+  -> Controller->execute (called at class.ActionMapper.php:164)
+  -> ActionMapper::processAction (called at main.php:45)
