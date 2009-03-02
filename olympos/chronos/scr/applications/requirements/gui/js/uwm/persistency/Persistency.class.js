@@ -82,7 +82,7 @@ uwm.persistency.Persistency.prototype.autocomplete = function(query, successHand
 uwm.persistency.Persistency.prototype.histlist = function(oid,start,limit, successHandler, errorHandler){
 }
 
-uwm.persistency.Persistency.prototype.restorehiststate = function(id, successHandler, errorHandler){
+uwm.persistency.Persistency.prototype.restorehistliststate = function(id, successHandler, errorHandler){
 }
 
 uwm.persistency.Persistency.prototype.restorehistfields = function(ids, successHandler, errorHandler){

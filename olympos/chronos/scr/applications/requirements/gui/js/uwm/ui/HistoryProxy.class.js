@@ -64,7 +64,7 @@ uwm.ui.HistoryProxy.prototype.loadResponse = function(options, data, callback, s
 		
 		records.push(new Ext.data.Record({
 			id: changelist[i].id,
-			date: '',
+			timestamp: changelist[i].timestamp,
 			author: changelist[i].user,
 			propertyString: propertyString,
 			changedProperty: propertyArray,
