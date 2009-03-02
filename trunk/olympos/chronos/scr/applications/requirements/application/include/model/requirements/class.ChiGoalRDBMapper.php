@@ -102,6 +102,10 @@ class ChiGoalRDBMapper extends NodeUnifiedRDBMapper
       */
       array('name' => 'Value_ammount', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'value_ammount', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
+      * Value description: 
+      */
+	  array('name' => 'Priority', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'priority', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
       * Value description: The amount by which the value is to be altered.
       */
       array('name' => 'Value_Goal', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'value_goal', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
