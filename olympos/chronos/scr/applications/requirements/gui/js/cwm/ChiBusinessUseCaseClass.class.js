@@ -95,19 +95,20 @@ Ext.extend(cwm.ChiBusinessUseCaseClass, uwm.model.ModelClass);
 
 cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
-		items: [new uwm.property.ComboBox({
+			items: [new uwm.property.ComboBox({
 			fieldLabel: 'PrimaryActor',
 			toolTip: "the main actor of this use case",
 			name: 'PrimaryActor',
 			listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
-		}), new uwm.property.TextField({
+		}), new uwm.property.ComboBox({
 			fieldLabel: 'OtherActors',
 			toolTip: "The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.",
 			name: 'OtherActors',
+			listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
 			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
+			disabled: isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'GoalInContext',
 			toolTip: "The goal should implicitly express the actor's intent or purpose of the use case, such as *Enrol Student in Seminar.*",
