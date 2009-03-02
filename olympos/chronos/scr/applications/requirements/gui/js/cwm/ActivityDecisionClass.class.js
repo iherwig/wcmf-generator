@@ -51,7 +51,8 @@ cwm.ActivityDecisionClass = function() {
 		"Activity" : {
 			label :"Associates",
 			invert :true,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: -1
 		}
 
 	};

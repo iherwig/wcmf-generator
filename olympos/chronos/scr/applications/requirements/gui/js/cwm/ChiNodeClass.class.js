@@ -50,7 +50,8 @@ cwm.ChiNodeClass = function() {
 			"ChiController": {
 			label: "instantiates",
 			invert: true,
-			connectionType: "Association"
+			connectionType: "Association",
+			cardinality: 1
 		}
 
 			, 			
@@ -59,7 +60,8 @@ cwm.ChiNodeClass = function() {
 		"ChiValue": {
 			label: "has properties",
 			invert: false,
-			connectionType: "Composition"
+			connectionType: "Composition",
+			cardinality: -1
 		}
 
 	
@@ -68,7 +70,8 @@ cwm.ChiNodeClass = function() {
 		"NodeSourceEnd": {
 			label: "",
 			invert: false,
-			connectionType: "fk_chinodesource_id"
+			connectionType: "fk_chinodesource_id",
+			cardinality: -1
 		}
 
 	
@@ -77,7 +80,8 @@ cwm.ChiNodeClass = function() {
 		"NodeTargetEnd": {
 			label: "",
 			invert: false,
-			connectionType: "fk_chinodetarget_id"
+			connectionType: "fk_chinodetarget_id",
+			cardinality: -1
 		}
 
 	
@@ -86,29 +90,34 @@ cwm.ChiNodeClass = function() {
 		"Operation": {
 			label: "Contains",
 			invert: false,
-			connectionType: "Composition"
+			connectionType: "Composition",
+			cardinality: -1
 		}
 		,
 		"ChiNode" : [ {
 			label :"Generalization",
 			invert :false,
 			connectionType :"generalization",
-			nmSelf: true
+			nmSelf: true,
+			cardinality: -1
 		}, {
 			label :"Association",
 			invert :false,
 			connectionType :"association",
-			nmSelf: true
+			nmSelf: true,
+			cardinality: -1
 		},{
 			label: "Aggregation",
 			invert: false,
 			connectionType: "aggregation",
-			nmSelf: true
+			nmSelf: true,
+			cardinality: -1
 		},{
 			label:"Composition",
 			invert: false,
 			connectionType: "composition",
-			nmSelf: true
+			nmSelf: true,
+			cardinality: -1
 		} ]
 
 	

@@ -52,7 +52,7 @@ uwm.model.ModelObject.prototype.checkCardinality = function(otherObject) {
 	var connections = this.getNumberOfConnections(otherObject);
 	
 	
-	var allowedConnections = this.getModelNodeClass().getConnectionInfo(otherObject.getModelNodeClass()).number;
+	var allowedConnections = this.getModelNodeClass().getConnectionInfo(otherObject.getModelNodeClass()).cardinality;
 	
 	if (connections < allowedConnections || allowedConnections == -1 || !allowedConnections) {
 		result = true;

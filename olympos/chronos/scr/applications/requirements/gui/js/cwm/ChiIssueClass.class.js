@@ -51,7 +51,8 @@ cwm.ChiIssueClass = function() {
 		"ChiRequirement": {
 			label: "is negated by",
 			invert: true,
-			connectionType:  'associationType'
+			connectionType:  'associationType',
+			cardinality: 1
 		}
 	};
 }

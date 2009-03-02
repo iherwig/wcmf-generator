@@ -52,19 +52,19 @@ cwm.ChiFeatureClass = function() {
 			label: "Realizes",
 			invert: true,
 			connectionType: 'realization',
-			number: -1
+			cardinality: -1
 		},
 		"ChiBusinessUseCase": {
 			label: "refines",
 			invert: false,
 			connectionType: 'realization',
-			number: -1
+			cardinality: -1
 		},
 		"ChiBusinessUseCaseCore": {
 			label: "refines",
 			invert: false,
 			connectionType: 'realization',
-			number: -1
+			cardinality: -1
 		}
 	};
 }

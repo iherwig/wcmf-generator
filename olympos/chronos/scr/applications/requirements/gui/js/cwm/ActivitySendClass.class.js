@@ -50,7 +50,8 @@ cwm.ActivitySendClass = function() {
 		"Activity" : {
 			label :"Associates",
 			invert :true,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: 1
 		}
 
 		,
@@ -58,7 +59,8 @@ cwm.ActivitySendClass = function() {
 		"ActivityReceive" : {
 			label :"Associates",
 			invert :false,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: -1
 		}
 
 	};
