@@ -767,7 +767,7 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x,
 	actionSet.addAssociate("{last_created_oid:Figure}", "{last_created_oid:"
 			+ modelClass.getUwmClassName() + "}", function(request, data) {
 		uwm.event.EventBroker.getInstance().fireEvent("associate",
-				savedFigureNode, savedObjectNode);
+				savedFigureNode, savedObjectNode, false);
 	});
 
 	actionSet.commit();
