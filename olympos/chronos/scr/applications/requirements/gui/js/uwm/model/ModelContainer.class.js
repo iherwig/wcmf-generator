@@ -211,7 +211,7 @@ uwm.model.ModelContainer.prototype.createFigure = function(diagramModelNode,
 	actionSet.addAssociate(diagramModelNode.getOid(),
 			"{last_created_oid:Figure}", false, function(request, data) {
 				uwm.event.EventBroker.getInstance().fireEvent("associate",
-						diagramModelNode, self.getByOid(figureOid));
+						diagramModelNode, self.getByOid(figureOid), false);
 			});
 
 	if (modelObject) {
@@ -247,16 +247,17 @@ uwm.model.ModelContainer.prototype.createModelObject = function(uwmClassName,
 
 	if (actionSet instanceof uwm.persistency.ActionSet) {
 		actionSet.addNewObject(uwmClassName, function(request, data) {
-			var newObjectOid = data.oid;
+			newObjectOid = data.oid;
 
-			self.handleCreatedModelObject(data.oid, uwmClassName, undefined, callback);
+			self.handleCreatedModelObject(data.oid, uwmClassName, undefined,
+					callback);
 		});
 
-		actionSet.addAssociate("{last_created_oid:" + uwmClassName + "}",
-				packageNode.getOid(), function(request, data) {
-					uwm.event.EventBroker.getInstance().fireEvent("associate",
-							packageNode, self.getByOid(newObjectOid));
-				});
+		actionSet.addAssociate(packageNode.getOid(), "{last_created_oid:"
+				+ uwmClassName + "}", false, function(request, data) {
+			uwm.event.EventBroker.getInstance().fireEvent("associate",
+					packageNode, self.getByOid(newObjectOid));
+		});
 	} else {
 		uwm.persistency.Persistency.getInstance().newObject(
 				uwmClassName,
