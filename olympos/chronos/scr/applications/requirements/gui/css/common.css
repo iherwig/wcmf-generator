@@ -227,3 +227,17 @@ body {
     font-size: 12px;
 	width: 40%;
 }
+
+.uwm-revisioninfo {
+	width: 100% !important;
+	text-align: right;
+	color: grey;
+}
+
+.uwm-revisioninfo div {
+	width: 100% !important;
+}
+
+.uwm-revisioninfo p {
+	padding-right: 16px;
+}
