@@ -21,6 +21,8 @@ cwm.ActivitySendClass = function() {
 	this.treeIcon = "FigureActivitySend";
 	this.figureIcon = "FigureActivitySend";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 80;
+	this.initialHeight = 45;
 	this.description = " ";
 	this.helpUrl = "help/index.html#ActivitySend|outline";
 	this.defaultLabel = "New ActivitySend";
@@ -137,7 +139,7 @@ cwm.ActivitySendClass.prototype.getPropertyForm = function(modelNode,
 
 cwm.ActivitySendClass.prototype.getGraphics = function(label, figure) {
 	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure,
-			"../application/images/ActivitySend.png", 80, 45, 80, 45);
+			"../application/images/ActivitySend.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(

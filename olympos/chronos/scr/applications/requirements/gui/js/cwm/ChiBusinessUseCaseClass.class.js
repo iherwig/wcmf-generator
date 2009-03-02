@@ -21,6 +21,8 @@ cwm.ChiBusinessUseCaseClass = function() {
 	this.treeIcon = "FigureChiBusinessUseCase";
 	this.figureIcon = "FigureChiBusinessUseCase";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 117;
+	this.initialHeight = 78;
 	this.description = " A Business Use Case is part of a business process that produces an advantage to the enterprise.";
 	this.helpUrl = "help/index.html#4.6.ChiBusinessUseCase|outline";
 	this.defaultLabel = "New ChiBusinessUseCase";
@@ -207,7 +209,7 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLo
 }
 
 cwm.ChiBusinessUseCaseClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure, "../application/images/ChiBusinessUseCase.PNG", 96, 95, 96, 95);
+	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure, "../application/images/ChiBusinessUseCase.PNG", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 

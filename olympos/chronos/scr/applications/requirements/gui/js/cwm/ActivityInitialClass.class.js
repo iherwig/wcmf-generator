@@ -21,6 +21,8 @@ cwm.ActivityInitialClass = function() {
 	this.treeIcon = "FigureActivityInitial";
 	this.figureIcon = "FigureActivityInitial";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 40;
+	this.initialHeight = 40;
 	this.description = " An initial or start node is depicted by a large black spot.";
 	this.helpUrl = "help/index.html#ActivityInitial|outline";
 	this.defaultLabel = "New ActivityInitial";
@@ -130,7 +132,7 @@ cwm.ActivityInitialClass.prototype.getPropertyForm = function(modelNode,
 
 cwm.ActivityInitialClass.prototype.getGraphics = function(label, figure) {
 	return new uwm.graphics.figure.ImageFigure(label, figure,
-			"../application/images/ActivityInitial.png", 40, 40, 40, 40);
+			"../application/images/ActivityInitial.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(

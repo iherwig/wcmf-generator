@@ -21,6 +21,8 @@ cwm.ChiControllerClass = function() {
 	this.treeIcon = "FigureChiController";
 	this.figureIcon = "FigureChiController";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 96;
+	this.initialHeight = 95;
 	this.description = " A ChiController, Views and Associations define the application flow. A controller represent the Business logic where a certain flow is physical implemented.";
 	this.helpUrl = "help/index.html#ChiController|outline";
 	this.defaultLabel = "New ChiController";
@@ -48,18 +50,18 @@ cwm.ChiControllerClass = function() {
 		"ChiNode" : {
 			label :"instantiates",
 			invert :false,
-			connectionType :"Association"
+			connectionType :"association"
 		},
 
 		"ChiController" : [ {
 			label :"inherits from",
 			invert :false,
-			connectionType :"Generalization",
+			connectionType :"generalization",
 			nmSelf: true
 		}, {
 			label :"calls",
 			invert :false,
-			connectionType :"Association",
+			connectionType :"association",
 			nmSelf: true
 		} ]
 	};
@@ -145,7 +147,7 @@ cwm.ChiControllerClass.prototype.getPropertyForm = function(modelNode,
 
 cwm.ChiControllerClass.prototype.getGraphics = function(label, figure) {
 	return new uwm.graphics.figure.ImageFigure(label, figure,
-			"../application/images/ChiController.PNG", 96, 95, 96, 95);
+			"../application/images/ChiController.PNG", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(

@@ -21,6 +21,8 @@ cwm.ChiBusinessPartnerPassiveClass = function() {
 	this.treeIcon = "FigureChiBusinessPartnerPassive";
 	this.figureIcon = "FigureChiBusinessPartnerPassive";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 24;
+	this.initialHeight = 52;
 	this.description = " A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise.";
 	this.helpUrl = "help/index.html#ChiBusinessPartnerPassive|outline";
 	this.defaultLabel = "New ChiBusinessPartnerPassive";
@@ -114,7 +116,7 @@ cwm.ChiBusinessPartnerPassiveClass.prototype.getPropertyForm = function(modelNod
 }
 
 cwm.ChiBusinessPartnerPassiveClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartnerPassive.png", 24,52,24,52);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartnerPassive.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBusinessPartnerPassiveClass());

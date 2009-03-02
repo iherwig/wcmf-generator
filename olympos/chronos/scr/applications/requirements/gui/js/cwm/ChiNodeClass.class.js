@@ -21,6 +21,8 @@ cwm.ChiNodeClass = function() {
 	this.treeIcon = "FigureChiNode";
 	this.figureIcon = "FigureChiNode";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 96;
+	this.initialHeight = 95;
 	this.description = " A Domain Object type used in Chronos. ChiNodes and ChiValues define the application data model.";
 	this.helpUrl = "help/index.html#ChiNode|outline";
 	this.defaultLabel = "New ChiNode";
@@ -86,6 +88,28 @@ cwm.ChiNodeClass = function() {
 			invert: false,
 			connectionType: "Composition"
 		}
+		,
+		"ChiNode" : [ {
+			label :"Generalization",
+			invert :false,
+			connectionType :"generalization",
+			nmSelf: true
+		}, {
+			label :"Association",
+			invert :false,
+			connectionType :"association",
+			nmSelf: true
+		},{
+			label: "Aggregation",
+			invert: false,
+			connectionType: "aggregation",
+			nmSelf: true
+		},{
+			label:"Composition",
+			invert: false,
+			connectionType: "composition",
+			nmSelf: true
+		} ]
 
 	
 	};

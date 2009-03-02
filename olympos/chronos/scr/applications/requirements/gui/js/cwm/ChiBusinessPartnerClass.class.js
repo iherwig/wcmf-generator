@@ -21,6 +21,8 @@ cwm.ChiBusinessPartnerClass = function() {
 	this.treeIcon = "FigureChiBusinessPartner";
 	this.figureIcon = "FigureChiBusinessPartner";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 26;
+	this.initialHeight = 52;
 	this.description = " A ChiBusinesPartner is an external person that has a Business relation with the enterprise.";
 	this.helpUrl = "help/index.html#ChiBusinessPartner|outline";
 	this.defaultLabel = "New ChiBusinessPartner";
@@ -113,7 +115,7 @@ cwm.ChiBusinessPartnerClass.prototype.getPropertyForm = function(modelNode, isLo
 }
 
 cwm.ChiBusinessPartnerClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartner.png", 26,52,26,52);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartner.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBusinessPartnerClass());

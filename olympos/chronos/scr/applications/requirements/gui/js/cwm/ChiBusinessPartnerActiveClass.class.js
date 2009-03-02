@@ -21,6 +21,8 @@ cwm.ChiBusinessPartnerActiveClass = function() {
 	this.treeIcon = "FigureChiBusinessPartnerActive";
 	this.figureIcon = "FigureChiBusinessPartnerActive";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
+	this.initialWidth = 25;
+	this.initialHeight = 52;
 	this.description = " A ChiBusinesPartnerActive is a direct customer of the enterprise.";
 	this.helpUrl = "help/index.html#ChiBusinessPartnerActive|outline";
 	this.defaultLabel = "New ChiBusinessPartnerActive";
@@ -114,7 +116,7 @@ cwm.ChiBusinessPartnerActiveClass.prototype.getPropertyForm = function(modelNode
 }
 
 cwm.ChiBusinessPartnerActiveClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartnerActive.png", 25,52,27,52);
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBusinessPartnerActive.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBusinessPartnerActiveClass());
