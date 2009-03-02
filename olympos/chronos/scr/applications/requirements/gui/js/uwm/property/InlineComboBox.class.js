@@ -59,7 +59,12 @@ uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 	
 		case e.ENTER:
 		case e.TAB:
-			this.htmledit.resolveInlineComboBox(this.getValue());
+			if (this.store) {
+				this.htmledit.resolveInlineComboBox(this.getValue());
+			} else {
+				this.htmledit.revertInlineComboBox();
+				this.htmledit.insertAtCursor(this.getValue());
+			}
 			break;
 			
 		case e.ESC:

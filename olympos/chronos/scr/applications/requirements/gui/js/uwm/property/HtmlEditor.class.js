@@ -122,7 +122,9 @@ uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue, new
 }
 
 uwm.property.HtmlEditor.prototype.revertInlineComboBox = function() {
-	this.comboBox.destroy();
+	if (this.store){
+		this.comboBox.destroy();
+	}
 	this.wrap.remove();
 	this.span.parentNode.removeChild(this.span);
 	this.insertAtCursor(this.preText);
