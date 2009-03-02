@@ -20,7 +20,7 @@ Ext.namespace("uwm.modeltree");
  * @param {Object} config The configuration object.
  */
 uwm.modeltree.PackageNode = function(config) {
-	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndOid("Package", config.oid);
+	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndNameAndOid("Package", config.text, config.oid);
 	
 	uwm.modeltree.PackageNode.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,
