@@ -50,17 +50,20 @@ cwm.ActivityClass = function() {
 		"Activity" : {
 			label :"Associates",
 			invert :true,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: -1
 		},
 		"ActivityReceive" : {
 			label :"Associates",
 			invert :true,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: -1
 		},
 		"ActivityInitial" : {
 			label :"Associates",
 			invert :false,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: 1
 		}
 
 		,
@@ -68,7 +71,8 @@ cwm.ActivityClass = function() {
 		"ActivityDecision" : {
 			label :"Associates",
 			invert :true,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: -1
 		}
 
 		,
@@ -76,7 +80,8 @@ cwm.ActivityClass = function() {
 		"Activity" : {
 			label :"Associates",
 			invert :false,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: -1
 		}
 
 		,
@@ -84,7 +89,8 @@ cwm.ActivityClass = function() {
 		"ActivitySend" : {
 			label :"Associates",
 			invert :false,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: -1
 		}
 
 		,
@@ -92,7 +98,8 @@ cwm.ActivityClass = function() {
 		"ActivityFinal" : {
 			label :"Associates",
 			invert :false,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: 1
 		}
 
 	};

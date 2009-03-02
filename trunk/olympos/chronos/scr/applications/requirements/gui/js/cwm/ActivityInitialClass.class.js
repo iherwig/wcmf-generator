@@ -51,7 +51,8 @@ cwm.ActivityInitialClass = function() {
 		"Activity" : {
 			label :"Associates",
 			invert :true,
-			connectionType :"Association"
+			connectionType :"Association",
+			cardinality: -1
 		}
 
 	};

@@ -50,19 +50,22 @@ cwm.ChiControllerClass = function() {
 		"ChiNode" : {
 			label :"instantiates",
 			invert :false,
-			connectionType :"association"
+			connectionType :"association",
+			cardinality: 1
 		},
 
 		"ChiController" : [ {
 			label :"inherits from",
 			invert :false,
 			connectionType :"generalization",
-			nmSelf: true
+			nmSelf: true,
+			cardinality: -1
 		}, {
 			label :"calls",
 			invert :false,
 			connectionType :"association",
-			nmSelf: true
+			nmSelf: true,
+			cardinality: -1
 		} ]
 	};
 	

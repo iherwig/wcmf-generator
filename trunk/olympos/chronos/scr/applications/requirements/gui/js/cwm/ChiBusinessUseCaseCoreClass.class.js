@@ -51,42 +51,50 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 		"ChiWorkerExternal": {
 			label: "participates in",
 			invert: false,
-			connectionType: 'association'
+			connectionType: 'association',
+			cardinality: -1
 		},
 		"ChiWorkerInternal": {
 			label: "participates in",
 			invert: false,
-			connectionType: 'association'
+			connectionType: 'association',
+			cardinality: -1
 		},
 		"ChiWorker": {
 			label: "participates in",
 			invert: false,
-			connectionType: 'association'
+			connectionType: 'association',
+			cardinality: -1
 		},
 		"ChiBusinessPartnerActive": {
 			label: "participates in",
 			invert: false,
-			connectionType: 'association'
+			connectionType: 'association',
+			cardinality: -1
 		},
 		"ChiBusinessPartnerPassive": {
 			label: "participates in",
 			invert: false,
-			connectionType: 'association'
+			connectionType: 'association',
+			cardinality: -1
 		},
 		"ChiBusinessPartner": {
 			label: "participates in",
 			invert: false,
-			connectionType: 'association'
+			connectionType: 'association',
+			cardinality: -1
 		},	
 		"ChiBusinessProcess": {
 			label: "contains",
 			invert: true,
-			connectionType:  'composition'
+			connectionType:  'composition',
+			cardinality: 1
 		},
 		"ChiFeature": {
 			label: "refines",
 			invert: true,
-			connectionType: 'realization'
+			connectionType: 'realization',
+			cardinality: 1
 		}
 	};
 }

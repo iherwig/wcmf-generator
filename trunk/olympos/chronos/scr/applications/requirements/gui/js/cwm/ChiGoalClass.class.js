@@ -49,15 +49,6 @@ cwm.ChiGoalClass = function() {
 	this.connectionInfo = {
 		"ChiGoal" : {
 			label :"contains",
-			invert :true,
-			connectionType :'association', 
-			number: -1
-		}
-
-		,
-
-		"ChiGoal" : {
-			label :"contains",
 			invert :false,
 			connectionType :'composition',
 			number: -1
