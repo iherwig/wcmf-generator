@@ -5,9 +5,12 @@
 	<TITLE></TITLE>
 	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Win32)">
 	<META NAME="AUTHOR" CONTENT="giuseppe platania">
-	<META NAME="CREATED" CONTENT="20090220;12584900">
-	<META NAME="CHANGEDBY" CONTENT="giuseppe platania">
-	<META NAME="CHANGED" CONTENT="20090220;17460700">
+	<META NAME="CREATED" CONTENT="20090302;19131300">
+	<META NAME="CHANGED" CONTENT="20090302;22063500">
+	<META NAME="Info 1" CONTENT="">
+	<META NAME="Info 2" CONTENT="">
+	<META NAME="Info 3" CONTENT="">
+	<META NAME="Info 4" CONTENT="">
 	<STYLE TYPE="text/css">
 	<!--
 		@page { margin: 2cm }
@@ -46,9 +49,12 @@
 <BODY LANG="de-DE" TEXT="#000000" BGCOLOR="#ffffff" DIR="LTR">
 <P LANG="en-US" ALIGN=CENTER STYLE="margin-top: 0.42cm; background: transparent; page-break-after: avoid">
 <FONT FACE="Arial, sans-serif"><FONT SIZE=6><B>Chronos Web Modeler</B></FONT></FONT></P>
-<P LANG="en-US" CLASS="western">W<IMG SRC="index_html_487efd2e.png" NAME="Grafik1" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=291 HEIGHT=291 BORDER=0><BR CLEAR=LEFT>elcome
-to Chronos Web Modeler! This document describes the usage of the
-application.</P>
+<P LANG="en-US" CLASS="western"><BR><BR>
+</P>
+<P LANG="en-US" CLASS="western"><IMG SRC="index_html_487efd2e.png" NAME="Grafik1" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=291 HEIGHT=291 BORDER=0><BR CLEAR=LEFT><BR><BR>
+</P>
+<P LANG="en-US" CLASS="western">Welcome to Chronos Web Modeler! This
+document describes the usage of the application.</P>
 <DIV ID="Bereich1" DIR="LTR">
 	<P LANG="en-US" STYLE="margin-top: 0.42cm; background: transparent; page-break-after: avoid">
 	<FONT FACE="Arial, sans-serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>Table
@@ -86,6 +92,8 @@ application.</P>
 	  Diagrams</A></P>
 	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.2.4.Model Objects|outline">3.3.2.4
 	  Model Objects</A></P>
+	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.2.5.Object history|outline">3.3.2.5
+	  Object history</A></P>
 	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.3.Hierarchy Tree|outline">3.3.3
 	   Hierarchy Tree</A></P>
 	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.4.Object Grids|outline">3.3.4
@@ -128,6 +136,8 @@ application.</P>
 	 Howto</A></P>
 	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#5.1.Get started|outline">5.1
 	   Get started</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#5.2.How to create an activity|outline">5.2
+	   How to create an activity</A></P>
 </DIV>
 <DIV ID="Bereich3" DIR="LTR">
 	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
@@ -138,8 +148,8 @@ application.</P>
 	1.1 About the Chronos Web Modeler</H2>
 	<P LANG="en-US" CLASS="western">The Chronos Web Modeler (CWM) aims
 	to provide an collaborative environment to create and manage models.
-	The resulting models can be exported as XMI and transformed in code
-	and/or a documentation.</P>
+	The resulting models can be exported to be used in other editors or
+	directly transformed in code and/or a documentation.</P>
 	<P LANG="en-US" CLASS="western"><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western">We are developing the CWM with
@@ -150,17 +160,40 @@ application.</P>
 	</P>
 	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="1.2.License	|outline"></A>
 	1.2 License	</H2>
-	<P LANG="en-US" CLASS="western">The CWM  the accompanying materials
-	are made available under the terms of the Eclipse Public License
-	v1.0  which accompanies this distribution, and is available at 
-	<FONT COLOR="#000080"><SPAN LANG="zxx"><U><A HREF="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</A></U></SPAN></FONT>.</P>
+	<P LANG="en-US" CLASS="western">The CWM  and the accompanying
+	materials are made available under the terms of the Eclipse Public
+	License v1.0  which accompanies this distribution, and is available
+	at  <FONT COLOR="#000080"><SPAN LANG="zxx"><U><A HREF="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</A></U></SPAN></FONT>.</P>
 	<P LANG="en-US" CLASS="western"><BR><BR>
 	</P>
-	<P LANG="en-US" CLASS="western">The concept of Chronos is under the
-	Creative common licence.</P>
+	<P LANG="en-US" CLASS="western">The concept of Chronos is made
+	available under the Creative Common license.</P>
+	<P LANG="en-US" CLASS="western">You are free:</P>
+	<P LANG="en-US" CLASS="western">    * to Share &mdash; to copy,
+	distribute and transmit the work</P>
+	<P LANG="en-US" CLASS="western">    * to Remix &mdash; to adapt the
+	work</P>
+	<P LANG="en-US" CLASS="western">Under the following conditions:</P>
 	<P LANG="en-US" CLASS="western"><BR><BR>
 	</P>
-	<P LANG="en-US" CLASS="western">You can download the most recent
+	<P LANG="en-US" CLASS="western">    *  Attribution. You must
+	attribute the work in the manner specified by the author or licensor
+	(but not in any way that suggests that they endorse you or your use
+	of the work).</P>
+	<P LANG="en-US" CLASS="western"><BR><BR>
+	</P>
+	<P LANG="en-US" CLASS="western">    * For any reuse or distribution,
+	you must make clear to others the license terms of this work. The
+	best way to do this is with a link to this web page.</P>
+	<P LANG="en-US" CLASS="western">    * Any of the above conditions
+	can be waived if you get permission from the copyright holder.</P>
+	<P LANG="en-US" CLASS="western">    * Nothing in this license
+	impairs or restricts the author's moral rights.</P>
+	<P LANG="en-US" CLASS="western"><BR><BR>
+	</P>
+	<P LANG="en-US" CLASS="western"><BR><BR>
+	</P>
+	<P LANG="en-US" CLASS="western">You can download the most recent CWM
 	version from:  <FONT COLOR="#000080"><SPAN LANG="zxx"><U><A HREF="http://sourceforge.net/projects/olympos/">http://sourceforge.net/projects/olympos/</A></U></SPAN></FONT>
 		</P>
 	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="1.3.Compatible Browsers|outline"></A>
@@ -168,83 +201,88 @@ application.</P>
 	<P LANG="en-US" CLASS="western">At the moment (Beta version), the
 	only browser with extensive test coverage is Firefox 3. Occasional
 	tests with other modern browsers show no principal
-	incompatibilities.</P>
+	incompatibilities. If you decide to use others browser you can face
+	errors or erratical behaviour.</P>
 	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="2.Terminology|outline"></A>
 	2 Terminology</H1>
 	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
 		<COL WIDTH=150>
 		<COL WIDTH=475>
-		<TR VALIGN=TOP>
-			<TH WIDTH=150>
-				<P LANG="en-US" CLASS="western">Term</P>
-			</TH>
-			<TH WIDTH=475>
-				<P LANG="en-US" CLASS="western">Description</P>
-			</TH>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=150>
-				<P LANG="en-US" CLASS="western">Model</P>
-			</TD>
-			<TD WIDTH=475>
-				<P LANG="en-US" CLASS="western">A model is a an abstraction of a
-				domain of interest.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=150>
-				<P LANG="en-US" CLASS="western">Package</P>
-			</TD>
-			<TD WIDTH=475>
-				<P LANG="en-US" CLASS="western">A package is a container of
-				objects. 
-				</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=150>
-				<P LANG="en-US" CLASS="western">Diagram</P>
-			</TD>
-			<TD WIDTH=475>
-				<P LANG="en-US" CLASS="western">A diagram is a  visual
-				representation of a model part. Object that are in diagrams are
-				also contained in the model. Not all the object in a model are
-				necessarily contained in a diagram.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=150>
-				<P LANG="en-US" CLASS="western">Model Object</P>
-			</TD>
-			<TD WIDTH=475>
-				<P LANG="en-US" CLASS="western">Object which is part of the
-				model. Figurative: Everything you can put on a diagram.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=150>
-				<P LANG="en-US" CLASS="western">Model Object Type</P>
-			</TD>
-			<TD WIDTH=475>
-				<P LANG="en-US" CLASS="western">Each model object has a type,
-				depicted by its icon. Each model object type has a different set
-				of properties, to be reviewed in properties view.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=150>
-				<P LANG="en-US" CLASS="western">Metamodel</P>
-			</TD>
-			<TD WIDTH=475>
-				<P LANG="en-US" CLASS="western">A metamodel describes the
-				concepts necessary to describes a model.</P>
-				<P LANG="en-US" CLASS="western">While a  <FONT COLOR="#000080"><SPAN LANG="zxx"><U><A HREF="http://en.wikipedia.org/wiki/Model_(abstract)">model</A></U></SPAN></FONT>
-				is an abstraction of phenomena in the real world; a metamodel is
-				yet another abstraction, highlighting properties of the model
-				itself. 
-				</P>
-			</TD>
-		</TR>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TH WIDTH=150>
+					<P LANG="en-US" CLASS="western">Term</P>
+				</TH>
+				<TH WIDTH=475>
+					<P LANG="en-US" CLASS="western">Description</P>
+				</TH>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=150>
+					<P LANG="en-US" CLASS="western">Model</P>
+				</TD>
+				<TD WIDTH=475>
+					<P LANG="en-US" CLASS="western">A model is a an abstraction of a
+					domain of interest.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=150>
+					<P LANG="en-US" CLASS="western">Package</P>
+				</TD>
+				<TD WIDTH=475>
+					<P LANG="en-US" CLASS="western">A package is a container of
+					objects. 
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=150>
+					<P LANG="en-US" CLASS="western">Diagram</P>
+				</TD>
+				<TD WIDTH=475>
+					<P LANG="en-US" CLASS="western">A diagram is a  visual
+					representation of a model part. Object that are in diagrams are
+					also contained in the model. Not all the object in a model are
+					necessarily contained in a diagram.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=150>
+					<P LANG="en-US" CLASS="western">Model Object</P>
+				</TD>
+				<TD WIDTH=475>
+					<P LANG="en-US" CLASS="western">Object which is part of the
+					model. Figurative: Everything you can put on a diagram.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=150>
+					<P LANG="en-US" CLASS="western">Model Object Type</P>
+				</TD>
+				<TD WIDTH=475>
+					<P LANG="en-US" CLASS="western">Each model object has a type,
+					depicted by its icon. Each model object type has a different set
+					of properties, to be reviewed in properties view.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=150>
+					<P LANG="en-US" CLASS="western">Metamodel</P>
+				</TD>
+				<TD WIDTH=475>
+					<P LANG="en-US" CLASS="western">A metamodel describes the
+					concepts necessary to describes a model.</P>
+					<P LANG="en-US" CLASS="western">While a  <FONT COLOR="#000080"><SPAN LANG="zxx"><U><A HREF="http://en.wikipedia.org/wiki/Model_(abstract)">model</A></U></SPAN></FONT>
+					is an abstraction of phenomena in the real world; a metamodel is
+					yet another abstraction, highlighting properties of the model
+					itself. 
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
 	</TABLE>
 	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="3.User Interface|outline"></A>
 	3 User Interface</H1>
@@ -254,6 +292,10 @@ application.</P>
 	web browser, it behaves much like a desktop application. For
 	example, the paradigms of drag&amp;drop and context menus are used
 	throughout the application.</P>
+	<P LANG="en-US" CLASS="western">A very large monitor is suggested to
+	be able to display the workplace and the diagrams. To maximize the
+	available urface you can switch your browser to &ldquo;full screen&rdquo;
+	(press &ldquo;F11&rdquo;).</P>
 	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="3.2.Login|outline"></A>
 	3.2 Login</H2>
 	<P LANG="en-US" CLASS="western">A<IMG SRC="index_html_m6a9bbcb2.png" NAME="Grafik2" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=642 HEIGHT=370 BORDER=0><BR CLEAR=LEFT>t
@@ -337,7 +379,7 @@ application.</P>
 	</TABLE>
 	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.2.Model Tree|outline"></A>
 	3.3.2 Model Tree</H3>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_d7922ab.jpg" NAME="Grafik5" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=246 HEIGHT=253 BORDER=0><BR CLEAR=LEFT><BR><BR>
+	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_d7922ab.jpg" NAME="Grafik5" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=246 HEIGHT=237 BORDER=0><BR CLEAR=LEFT><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western">The model tree view is the first tab
 	in the lower left part of the workbench. It contains all models of
@@ -762,7 +804,7 @@ application.</P>
 	</TABLE>
 	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.2.4.Model Objects|outline"></A>
 	3.3.2.4 Model Objects</H4>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_7ba0301a.jpg" NAME="Grafik9" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=244 HEIGHT=180 BORDER=0><BR CLEAR=LEFT><BR><BR>
+	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m4b5f35f2.jpg" NAME="Grafik9" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=244 HEIGHT=180 BORDER=0><BR CLEAR=LEFT><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western">Model Objects are the building
 	blocks of the modeled system.</P>
@@ -906,6 +948,74 @@ application.</P>
 				</TD>
 				<TD WIDTH=205>
 					<P LANG="en-US" CLASS="western">Shows the Help file.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Get previous Object Properties</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Right-click on the model object,
+					select &ldquo;show object History&rdquo; from context menu</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Shows the object history windows
+					(see below).</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<H4 LANG="en-US" CLASS="western"><A NAME="3.3.2.5.Object history|outline"></A>
+	3.3.2.5 Object history</H4>
+	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m37d48ada.jpg" NAME="Grafik34" ALIGN=LEFT WIDTH=240 HEIGHT=154 BORDER=0><BR CLEAR=LEFT><BR><BR>
+	</P>
+	<P LANG="en-US" CLASS="western">The object history offer a complete
+	history of all changes made on an object.</P>
+	<P LANG="en-US" CLASS="western"><BR><BR>
+	</P>
+	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+		<COL WIDTH=205>
+		<COL WIDTH=206>
+		<COL WIDTH=205>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Task</P>
+				</TH>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western"><B>Action</B></P>
+				</TD>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Description</P>
+				</TH>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Check the change made in a date</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Click on the button +</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Visualize the property name, the
+					old and the new value.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Select a point on the history to
+					be restored.</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Mark all the checkbox you intend
+					to restore. Click on the &ldquo;undo all changes since&rdquo;
+					button.</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Restored all the properties
+					values to the previous state.</P>
 				</TD>
 			</TR>
 		</TBODY>
@@ -1064,133 +1174,138 @@ application.</P>
 		<COL WIDTH=205>
 		<COL WIDTH=206>
 		<COL WIDTH=205>
-		<TR VALIGN=TOP>
-			<TH WIDTH=205>
-				<P LANG="en-US" CLASS="western">Task</P>
-			</TH>
-			<TH WIDTH=206>
-				<P LANG="en-US" CLASS="western">Action</P>
-			</TH>
-			<TH WIDTH=205>
-				<P LANG="en-US" CLASS="western">Description</P>
-			</TH>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Select object grid scope</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Right-click on a model or a 
-				package in model tree, select &ldquo;Select as grid scope&rdquo;
-				from the context menu 
-				</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Selects a model or a package (and
-				all directly and indirectly contained packages) as scope for the
-				grids.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">View model object properties</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Single-click on the model object</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">All properties of a model object
-				can be reviewed in the properties view.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Change label of a model object</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Single-click on the model object,
-				change name in properties view, leave name field</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">If you change the model object
-				name in properties view, the model tree is automatically updated.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Delete model object from model</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Right-click on the model object,
-				select &ldquo;Delete from model&rdquo; from context menu</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Deletes the model object from the
-				model.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205 BGCOLOR="#ff0000">
-				<P LANG="en-US" CLASS="western">Add existing model object to a
-				diagram</P>
-			</TD>
-			<TD WIDTH=206 BGCOLOR="#ff0000">
-				<P LANG="en-US" CLASS="western">Drag the model object, drop it on
-				the diagram in diagram view</P>
-			</TD>
-			<TD WIDTH=205 BGCOLOR="#ff0000">
-				<P LANG="en-US" CLASS="western">Adds the dragged model object at
-				the dropped position to the diagram. If the model object is
-				already contained in the diagram, it cannot be added again.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Show model object in current
-				diagram</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Right-click on the model object,
-				select &ldquo;Show in diagram&rdquo; from context menu</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Scrolls the current diagram to
-				the position of the selected model object. Only available if the
-				model object is contained in the current model.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Show model object in model tree</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Right-click on the model object,
-				select &ldquo;Show in model tree&rdquo; from context menu</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Selects the model object in
-				context menu. If any of the containing packages are currently not
-				opened, they are automatically extended.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Show model object in hierarchy
-				view</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Right-click on the model object,
-				select &ldquo;Show in hierarchy&rdquo; from context menu</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Shows the selected model object
-				as root element of the hierarchy tree view.</P>
-			</TD>
-		</TR>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Task</P>
+				</TH>
+				<TH WIDTH=206>
+					<P LANG="en-US" CLASS="western">Action</P>
+				</TH>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Description</P>
+				</TH>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Select object grid scope</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Right-click on a model or a 
+					package in model tree, select &ldquo;Select as grid scope&rdquo;
+					from the context menu 
+					</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Selects a model or a package
+					(and all directly and indirectly contained packages) as scope
+					for the grids.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">View model object properties</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Single-click on the model object</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">All properties of a model object
+					can be reviewed in the properties view.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Change label of a model object</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Single-click on the model
+					object, change name in properties view, leave name field</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">If you change the model object
+					name in properties view, the model tree is automatically
+					updated.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Delete model object from model</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Right-click on the model object,
+					select &ldquo;Delete from model&rdquo; from context menu</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Deletes the model object from
+					the model.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Add existing model object to a
+					diagram</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Drag the model object, drop it
+					on the diagram in diagram view</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Adds the dragged model object at
+					the dropped position to the diagram. If the model object is
+					already contained in the diagram, it cannot be added again.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Show model object in current
+					diagram</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Right-click on the model object,
+					select &ldquo;Show in diagram&rdquo; from context menu</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Scrolls the current diagram to
+					the position of the selected model object. Only available if the
+					model object is contained in the current model.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Show model object in model tree</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Right-click on the model object,
+					select &ldquo;Show in model tree&rdquo; from context menu</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Selects the model object in
+					context menu. If any of the containing packages are currently
+					not opened, they are automatically extended.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Show model object in hierarchy
+					view</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Right-click on the model object,
+					select &ldquo;Show in hierarchy&rdquo; from context menu</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Shows the selected model object
+					as root element of the hierarchy tree view.</P>
+				</TD>
+			</TR>
+		</TBODY>
 	</TABLE>
 	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.5.Diagram|outline"></A>
 	3.3.5 Diagram</H3>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m51dfa46b.jpg" NAME="Grafik12" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=214 HEIGHT=123 BORDER=0><BR CLEAR=LEFT><BR><BR>
+	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m54e49fc9.jpg" NAME="Grafik12" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=160 HEIGHT=88 BORDER=0><BR CLEAR=LEFT><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western">The diagram view takes the center
 	space of the workbench. It shows the diagrams, containing of model
@@ -1215,11 +1330,26 @@ application.</P>
 		<TBODY>
 			<TR VALIGN=TOP>
 				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Toggle snap to objects</P>
+					<P LANG="en-US" CLASS="western">Show diagram in model tree.</P>
 				</TD>
 				<TD WIDTH=206>
 					<P LANG="en-US" CLASS="western">Right-click on empty space in
-					diagram, select &ldquo;Snap to objects&rdquo; from context menu</P>
+					diagram, select &ldquo;Show in model tree&rdquo; from context
+					menu.</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Selects the diagram in the tree.
+					If any of the containing packages are currently not opened, they
+					are automatically extended.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Toggle snap to objects.</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Right-click on empty space in
+					diagram, select &ldquo;Snap to objects&rdquo; from context menu.</P>
 				</TD>
 				<TD WIDTH=205>
 					<P LANG="en-US" CLASS="western">If enabled, model objects &ldquo;snap
@@ -1229,11 +1359,11 @@ application.</P>
 			</TR>
 			<TR VALIGN=TOP>
 				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Auto-layout diagram</P>
+					<P LANG="en-US" CLASS="western">Auto-layout diagram.</P>
 				</TD>
 				<TD WIDTH=206>
 					<P LANG="en-US" CLASS="western">Right-click on empty space in
-					diagram, select &ldquo;Auto-layout&rdquo; from context menu</P>
+					diagram, select &ldquo;Auto-layout&rdquo; from context menu.</P>
 				</TD>
 				<TD WIDTH=205>
 					<P LANG="en-US" CLASS="western">Automatically relocates the
@@ -1244,12 +1374,12 @@ application.</P>
 			<TR VALIGN=TOP>
 				<TD WIDTH=205>
 					<P LANG="en-US" CLASS="western">Add existing model object to a
-					diagram</P>
+					diagram.</P>
 				</TD>
 				<TD WIDTH=206>
 					<P LANG="en-US" CLASS="western">Drag the model object from model
 					tree, hierarchy tree, or object grid, drop it on the diagram in
-					diagram view</P>
+					diagram view.</P>
 				</TD>
 				<TD WIDTH=205>
 					<P LANG="en-US" CLASS="western">Adds the dragged model object at
@@ -1259,11 +1389,11 @@ application.</P>
 			</TR>
 			<TR VALIGN=TOP>
 				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add new model object to diagram</P>
+					<P LANG="en-US" CLASS="western">Add new model object to diagram.</P>
 				</TD>
 				<TD WIDTH=206>
 					<P LANG="en-US" CLASS="western">Drag new object from new objects
-					view, drop on diagram view</P>
+					view, drop on diagram view.</P>
 				</TD>
 				<TD WIDTH=205>
 					<P LANG="en-US" CLASS="western">Adds a new model object of the
@@ -1274,12 +1404,12 @@ application.</P>
 			</TR>
 			<TR VALIGN=TOP>
 				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add connection</P>
+					<P LANG="en-US" CLASS="western">Add connection.</P>
 				</TD>
 				<TD WIDTH=206>
 					<P LANG="en-US" CLASS="western">Drag the connection arrow of the
 					source model object, drop it on the connection arrow of the
-					target model object</P>
+					target model object.</P>
 				</TD>
 				<TD WIDTH=205>
 					<P LANG="en-US" CLASS="western">Connects the two model objects.
@@ -1376,6 +1506,20 @@ application.</P>
 					is within currently selected grid scope.</P>
 				</TD>
 			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western"><BR>
+					</P>
+				</TD>
+			</TR>
 		</TBODY>
 	</TABLE>
 	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.6.Properties|outline"></A>
@@ -1466,8 +1610,10 @@ application.</P>
 	</P>
 	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="3.4.Administration perspective|outline"></A>
 	3.4 Administration perspective</H2>
-	<P LANG="en-US" CLASS="western">To switch to the administration
-	perspective use the Admin button.</P>
+	<P LANG="en-US" CLASS="western">The administration perspective
+	allows to the project configuration. To  switch to the
+	administration perspective use the &ldquo;Admin&rdquo; button
+	located on the top right of your screen.</P>
 	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_5faef263.jpg" NAME="Grafik17" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=248 HEIGHT=57 BORDER=0><BR CLEAR=LEFT><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western"><BR><BR>
@@ -1630,6 +1776,11 @@ application.</P>
 			</TR>
 		</TBODY>
 	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm; page-break-before: always">
+	<BR>
+	</P>
 	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="4.Model Description|outline"></A>
 	4 Model Description</H1>
 	<P LANG="en-US" CLASS="western">This part of the help describes in
@@ -2650,6 +2801,16 @@ application.</P>
 		<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">create
 		use case</FONT></FONT></P>
 	</OL>
+	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
+	</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="5.2.How to create an activity|outline"></A>
+	5.2 How to create an activity</H2>
+	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m354ecc46.jpg" NAME="Grafik33" ALIGN=LEFT WIDTH=195 HEIGHT=271 BORDER=0><BR CLEAR=LEFT>Activities
+	can be only created within an use case. In fact an activity is an
+	enhancement of the Use Case description. 
+	</P>
 	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
