@@ -122,7 +122,8 @@ uwm.Dict.voc = {
 		"Items changed"			: {'de': "Änderungen"},
 		"Show object history"	: {'de': "Objekt History zeigen"},
 		"Old value"				: {'de': "Alter Wert"},
-		"New value"				: {'de': "Neuer Wert"}
+		"New value"				: {'de': "Neuer Wert"},
+		"The selected state has been restored."	: {'de': "Der ausgewählte Status wurde wiederhergestellt."}
 		
 		
 }

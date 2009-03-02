@@ -245,10 +245,12 @@ uwm.ui.History.prototype.undoAll = function() {
 		var selectedItem = sm.getSelections()[0];
 	
 		uwm.persistency.Persistency.getInstance().restorehistliststate(selectedItem.data.id, function(options, data) {
+		Ext.MessageBox.alert('Success', uwm.Dict.translate('The selected state has been restored.'));
 		}, function(options, data, errorMsg) {
 			this.restoreError(options, data, errorMsg);
 		});
 	}
+	 
 	this.window.close();
 	
 }
