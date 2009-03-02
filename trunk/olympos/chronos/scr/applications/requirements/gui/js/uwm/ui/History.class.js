@@ -20,7 +20,6 @@ Ext.namespace("uwm.ui");
  */
 uwm.ui.History = function(object) {
 	uwm.ui.History.superclass.constructor.call(this, Ext.apply(this, {
-		//store: this.getStore(),
 		layout: 'border',
 		height: 350,
 		width: 550,
@@ -47,11 +46,14 @@ uwm.ui.History = function(object) {
 	this.add(this.grid);
 	
 	this.addButton(new Ext.Button({
+		window: this.window,
 		selection: this.selection,
 		text: uwm.Dict.translate('Undo selected'),
-		handler: this.undoSelected
+		handler: this.undoSelected,
+		disabled: true
 	}));
 	this.addButton(new Ext.Button({
+		window: this.window,
 		selection: this.selection,
 		text: uwm.Dict.translate('Undo all changes since'),
 		handler: this.undoAll
@@ -73,7 +75,7 @@ Ext.extend(uwm.ui.History, Ext.Window);
 
 
 uwm.ui.History.prototype.getFields = function() {
-	result = ['id', 'date', 'author', 'propertyString', 'changedProperty', 'oldValue', 'newValue'];
+	result = ['id', 'timestamp', 'author', 'propertyString', 'changedProperty', 'oldValue', 'newValue'];
 	return result;
 }
 
@@ -205,9 +207,9 @@ uwm.ui.History.prototype.getGrid = function(object) {
 		sm: this.getSelectionModel(),
 		columns: [expander, {
 			header: uwm.Dict.translate("Date"),
-			dataIndex: 'date',
+			dataIndex: 'timestamp',
 			displayField: 'date',
-			width: 100,
+			width: 170,
 			sortable: true
 		}, {
 			header: uwm.Dict.translate("Author"),
@@ -218,7 +220,7 @@ uwm.ui.History.prototype.getGrid = function(object) {
 		}, {
 			header: uwm.Dict.translate("Items changed"),
 			dataIndex: 'propertyString',
-			width: 250,
+			width: 180,
 			align: 'right',
 			sortable: true
 		}, this.getSelectionModel()],
@@ -241,14 +243,13 @@ uwm.ui.History.prototype.undoAll = function() {
 		alert("Only one item may be selected.");
 	} else {
 		var selectedItem = sm.getSelections()[0];
-		
-		uwm.persistency.Persistency.getInstance().restorehiststate(selectedItem.id, function(options, data) {
-			//self.loadResponse(options, data, callback, scope, arg);
-			alert("success")
+	
+		uwm.persistency.Persistency.getInstance().restorehistliststate(selectedItem.data.id, function(options, data) {
 		}, function(options, data, errorMsg) {
-			alert("error");
+			this.restoreError(options, data, errorMsg);
 		});
 	}
+	this.window.close();
 	
 }
 
@@ -270,4 +271,9 @@ uwm.ui.History.prototype.undoSelected = function() {
 			//self.loadFailed(options, data, errorMsg, callback, scope, arg)
 			alert("error")
 		});
+}
+
+uwm.ui.History.prototype.restoreError = function(options, data, errorMsg, callback, scope, arg){
+    this.fireEvent("loadexception", this, options, data);
+    callback.call(scope, null, arg, false);
 }

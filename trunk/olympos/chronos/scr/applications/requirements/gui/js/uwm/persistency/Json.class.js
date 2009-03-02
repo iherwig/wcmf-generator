@@ -177,10 +177,10 @@ uwm.persistency.Json.prototype.histlist = function(oid,start,limit, successHandl
 	
 }
 
-uwm.persistency.Json.prototype.restorehiststate = function(id, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.restorehistliststate = function(id, successHandler, errorHandler) {
 	this.jsonRequest({
-		usr_action: 'restorehiststate',
-		id:id,
+		usr_action: 'restorehistliststate',
+		ids:id,
 	}, successHandler, errorHandler);
 	
 }
