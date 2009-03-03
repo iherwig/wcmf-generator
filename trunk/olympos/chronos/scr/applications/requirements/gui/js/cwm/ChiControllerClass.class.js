@@ -75,7 +75,7 @@ cwm.ChiControllerClass = function() {
 	};
 }
 
-Ext.extend(cwm.ChiControllerClass, uwm.model.ModelClass);
+Ext.extend(cwm.ChiControllerClass, uwm.model.ClassObjectClass);
 
 cwm.ChiControllerClass.prototype.getPropertyForm = function(modelNode,
 		isLockedByOtherUser) {
@@ -149,8 +149,11 @@ cwm.ChiControllerClass.prototype.getPropertyForm = function(modelNode,
 }
 
 cwm.ChiControllerClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure,
-			"../application/images/ChiController.PNG", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
+	return new uwm.graphics.figure.ClassFigure(label, figure);
+}
+
+cwm.ChiControllerClass.prototype.isAttributeEnabled = function() {
+	return false;
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(

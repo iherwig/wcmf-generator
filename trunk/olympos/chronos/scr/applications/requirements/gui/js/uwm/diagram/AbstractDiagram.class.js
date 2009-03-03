@@ -381,18 +381,18 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject)
 	this.establishExistingConnections(modelObject, modelObject.getParentOids());
 	this.establishExistingConnections(modelObject, modelObject.getChildOids());
 
-	if (modelObject instanceof cwm.ChiNode) {
+	if (modelObject instanceof uwm.model.ClassObject) {
 		var childOids = modelObject.getChildOids();
 		var modelContainer = uwm.model.ModelContainer.getInstance();
 
 		for ( var i = 0; i < childOids.length; i++) {
 			var currChild = modelContainer.getByOid(childOids[i]);
 
-			if (currChild instanceof cwm.ChiValue) {
-				var propertyGraphics = new uwm.graphics.figure.Property(
+			if (currChild instanceof uwm.model.AttributeObject) {
+				var propertyGraphics = new uwm.graphics.figure.Attribute(
 						currChild.getLabel(), currChild);
 				figure.getGraphics().addChildElement(propertyGraphics, false);
-			} else if (currChild instanceof cwm.Operation) {
+			} else if (currChild instanceof uwm.model.OperationObject) {
 				var operationGraphics = new uwm.graphics.figure.Operation(
 						currChild.getLabel(), currChild);
 				figure.getGraphics().addChildElement(operationGraphics, false);
@@ -789,8 +789,8 @@ uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 	if (modelNode == this) {
 		uwm.diagram.DiagramContainer.getInstance().getTabPanel().remove(
 				this.tab);
-	} else if (modelNode instanceof cwm.ChiValue
-			|| modelNode instanceof cwm.Operation) {
+	} else if (modelNode instanceof uwm.model.AttributeObject
+			|| modelNode instanceof uwm.model.OperationObject) {
 		var parentModelNode = uwm.model.ModelContainer.getInstance().getByOid(
 				modelNode.getParentOids()[0]);
 
@@ -819,9 +819,8 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(
 		if (figure) {
 			figure.getGraphics().setLabel(modelNode.getLabel());
 		}
-		// TODO: Remove dependency on CWM
-	} else if (modelNode instanceof cwm.ChiValue
-			|| modelNode instanceof cwm.Operation) {
+	} else if (modelNode instanceof uwm.model.AttributeObject
+			|| modelNode instanceof uwm.model.OperationObject) {
 		var parentOids = modelNode.getParentOids();
 
 		if (parentOids) {
@@ -839,16 +838,15 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(
 uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(
 		parentModelNode, childModelNode) {
 
-	// TODO: remove dependency on CWM
-	if (childModelNode instanceof cwm.ChiValue) {
+	if (childModelNode instanceof uwm.model.AttributeObject) {
 		var figure = this.figures.get(parentModelNode.getOid());
 
 		var graphics = figure.getGraphics();
-		var propertyGraphics = new uwm.graphics.figure.Property(childModelNode
+		var propertyGraphics = new uwm.graphics.figure.Attribute(childModelNode
 				.getLabel(), childModelNode);
 
 		graphics.addChildElement(propertyGraphics, true);
-	} else if (childModelNode instanceof cwm.Operation) {
+	} else if (childModelNode instanceof uwm.model.OperationObject) {
 		var figure = this.figures.get(parentModelNode.getOid());
 
 		var graphics = figure.getGraphics();

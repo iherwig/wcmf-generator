@@ -20,7 +20,7 @@ cwm.ChiValue = function(modelNodeClass) {
 	cwm.ChiValue.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.ChiValue, uwm.model.ModelNode);
+Ext.extend(cwm.ChiValue, uwm.model.AttributeObject);
 
 cwm.ChiValue.prototype.initByDisplayResult = function(node) {
 	cwm.ChiValue.superclass.initByDisplayResult.call(this, node);

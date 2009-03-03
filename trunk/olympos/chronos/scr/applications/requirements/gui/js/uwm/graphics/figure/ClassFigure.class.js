@@ -81,6 +81,66 @@ uwm.graphics.figure.ClassFigure.prototype.setWorkflow = function(workflow) {
 uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 	var figure = this.getFigure();
 
+	var items = [];
+
+	if (figure.getModelObject().getModelNodeClass().isAttributeEnabled()) {
+		items.push(new Ext.menu.Item( {
+			text :uwm.Dict.translate("Add Attribute"),
+			handler : function(item, e) {
+				figure.getModelObject().addAttribute();
+			}
+		}));
+	}
+
+	if (figure.getModelObject().getModelNodeClass().isOperationEnabled()) {
+		items.push(new Ext.menu.Item( {
+			text :uwm.Dict.translate("Add Operation"),
+			handler : function(item, e) {
+				figure.getModelObject().addOperation();
+			}
+		}));
+	}
+
+	items.push(new Ext.menu.Item( {
+		text :uwm.Dict.translate('Show in tree'),
+		handler : function(item, e) {
+			figure.showInModelTree();
+		}
+	}));
+	items.push(new Ext.menu.Item( {
+		id :uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID,
+		text :uwm.Dict.translate('Show in grid'),
+		handler : function(item, e) {
+			figure.showInGrid();
+		}
+	}));
+	items.push(new Ext.menu.Item( {
+		text :uwm.Dict.translate('Show in Hierarchy'),
+		handler : function(item, e) {
+			figure.showInHierarchy();
+		}
+	}));
+	items.push("-");
+	items.push(new Ext.menu.Item( {
+		text :uwm.Dict.translate('Delete from diagram'),
+		handler : function(item, e) {
+			figure.deleteFromDiagram();
+		}
+	}));
+	items.push(new Ext.menu.Item( {
+		text :uwm.Dict.translate('Delete from model'),
+		handler : function(tiem, e) {
+			figure.deleteFromModel();
+		}
+	}));
+	items.push(new Ext.menu.Item( {
+		text :"Help",
+		// iconCls: "uwm-help-icon",
+		handler : function(item, e) {
+			figure.showHelp(item, e);
+		}
+	}));
+
 	/**
 	 * The context menu of this figure.
 	 * 
@@ -88,49 +148,7 @@ uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 	 * @type Ext.menu.Menu
 	 */
 	this.uwmContextMenu = new Ext.menu.Menu( {
-		items : [ new Ext.menu.Item( {
-			text :uwm.Dict.translate("Add Property"),
-			handler : function(item, e) {
-				figure.getModelObject().addProperty();
-			}
-		}), new Ext.menu.Item( {
-			text :uwm.Dict.translate("Add Operation"),
-			handler : function(item, e) {
-				figure.getModelObject().addOperation();
-			}
-		}), new Ext.menu.Item( {
-			text :uwm.Dict.translate('Show in tree'),
-			handler : function(item, e) {
-				figure.showInModelTree();
-			}
-		}), new Ext.menu.Item( {
-			id :uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID,
-			text :uwm.Dict.translate('Show in grid'),
-			handler : function(item, e) {
-				figure.showInGrid();
-			}
-		}), new Ext.menu.Item( {
-			text :uwm.Dict.translate('Show in Hierarchy'),
-			handler : function(item, e) {
-				figure.showInHierarchy();
-			}
-		}), "-", new Ext.menu.Item( {
-			text :uwm.Dict.translate('Delete from diagram'),
-			handler : function(item, e) {
-				figure.deleteFromDiagram();
-			}
-		}), new Ext.menu.Item( {
-			text :uwm.Dict.translate('Delete from model'),
-			handler : function(tiem, e) {
-				figure.deleteFromModel();
-			}
-		}), new Ext.menu.Item( {
-			text :"Help",
-			// iconCls: "uwm-help-icon",
-			handler : function(item, e) {
-				figure.showHelp(item, e);
-			}
-		}) ]
+		items :items
 	});
 }
 
@@ -265,11 +283,11 @@ uwm.graphics.figure.ClassFigure.prototype.addChildElement = function(newChild,
 		var currChild = children.get(i);
 		var height = currChild.getHeight();
 
-		if (currChild instanceof uwm.graphics.figure.Property) {
+		if (currChild instanceof uwm.graphics.figure.Attribute) {
 			newPropertyPosition += height;
 			newOperationPosition += height;
 		} else if (currChild instanceof uwm.graphics.figure.Operation) {
-			if (newChild instanceof uwm.graphics.figure.Property) {
+			if (newChild instanceof uwm.graphics.figure.Attribute) {
 				var position = currChild.getPosition();
 				currChild.setPosition(position.x, position.y
 						+ newChild.getHeight());
@@ -283,7 +301,7 @@ uwm.graphics.figure.ClassFigure.prototype.addChildElement = function(newChild,
 
 	var myPosition = this.getPosition();
 
-	if (newChild instanceof uwm.graphics.figure.Property) {
+	if (newChild instanceof uwm.graphics.figure.Attribute) {
 		this.workflow.getCommandStack().execute(
 				new draw2d.CommandAdd(this.workflow, newChild,
 						myPosition.x + 2, myPosition.y + newPropertyPosition,
@@ -315,7 +333,7 @@ uwm.graphics.figure.ClassFigure.prototype.removeChildElement = function(
 		this.removeChild(childToRemove);
 	} catch (e) {
 	}
-	
+
 	var existingFigure = this.workflow.getFigure(childToRemove.getId());
 	if (existingFigure) {
 		this.workflow.removeFigure(childToRemove);
@@ -334,7 +352,7 @@ uwm.graphics.figure.ClassFigure.prototype.removeChildElement = function(
 		var height = currChild.getHeight();
 		var childPosition = currChild.getPosition();
 
-		if (currChild instanceof uwm.graphics.figure.Property) {
+		if (currChild instanceof uwm.graphics.figure.Attribute) {
 			currChild.setPosition(childPosition.x, parentPosition.y
 					+ newPropertyPosition);
 
@@ -396,7 +414,7 @@ uwm.graphics.figure.ClassFigure.prototype.paint = function() {
 
 	var propertySize = 0;
 	for ( var i = 0; i < children.getSize(); i++) {
-		if (children.get(i) instanceof uwm.graphics.figure.Property) {
+		if (children.get(i) instanceof uwm.graphics.figure.Attribute) {
 			propertySize += children.get(i).getHeight();
 		}
 	}
