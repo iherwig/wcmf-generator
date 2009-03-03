@@ -124,7 +124,7 @@ cwm.ChiNodeClass = function() {
 	};
 }
 
-Ext.extend(cwm.ChiNodeClass, uwm.model.ModelClass);
+Ext.extend(cwm.ChiNodeClass, uwm.model.ClassObjectClass);
 
 cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({

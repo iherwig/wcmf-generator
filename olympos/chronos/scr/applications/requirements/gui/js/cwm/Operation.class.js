@@ -20,7 +20,7 @@ cwm.Operation = function(modelNodeClass) {
 	cwm.Operation.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.Operation, uwm.model.ModelNode);
+Ext.extend(cwm.Operation, uwm.model.OperationObject);
 
 cwm.Operation.prototype.initByDisplayResult = function(node) {
 	cwm.Operation.superclass.initByDisplayResult.call(this, node);

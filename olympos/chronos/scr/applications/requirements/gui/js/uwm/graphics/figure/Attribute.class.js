@@ -12,23 +12,23 @@
 Ext.namespace("uwm.graphics.figure");
 
 /**
- * @class Graphical representation of a UML class property.
+ * @class Graphical representation of a UML class Attribute.
  * 
  * @extends uwm.graphics.figure.AbstractClassPart
  * @constructor
  * @param {String}
  *            label The label of the figure.
  */
-uwm.graphics.figure.Property = function(label, modelObject) {
+uwm.graphics.figure.Attribute = function(label, modelObject) {
 	uwm.graphics.figure.AbstractClassPart.call(this, label, modelObject);
 }
 
-Ext.extend(uwm.graphics.figure.Property, uwm.graphics.figure.AbstractClassPart);
+Ext.extend(uwm.graphics.figure.Attribute, uwm.graphics.figure.AbstractClassPart);
 
-uwm.graphics.figure.Property.prototype.createHTMLElement = function() {
+uwm.graphics.figure.Attribute.prototype.createHTMLElement = function() {
 	var item = uwm.graphics.figure.AbstractClassPart.prototype.createHTMLElement.call(this);
 
-	this.label.className = "FigureProperty"
+	this.label.className = "FigureAttribute"
 
 	return item;
 }

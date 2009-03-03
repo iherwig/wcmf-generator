@@ -19,9 +19,9 @@ cwm.ChiNode = function(modelNodeClass) {
 	cwm.ChiNode.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.ChiNode, cwm.ChiNodeBase);
+Ext.extend(cwm.ChiNode, uwm.model.ClassObject);
 
-cwm.ChiNode.prototype.addProperty = function() {
+cwm.ChiNode.prototype.addAttribute = function() {
 	uwm.model.ModelContainer.getInstance().createModelObject("ChiValue", this);
 }
 
@@ -29,38 +29,53 @@ cwm.ChiNode.prototype.addOperation = function() {
 	uwm.model.ModelContainer.getInstance().createModelObject("Operation", this);
 }
 
-cwm.ChiNode.prototype.updateChildLabel = function(childModelNode, figure) {
-	var graphics = figure.getGraphics();
-	
-	var childGraphics = this.getChildGraphicsByOid(graphics, childModelNode.getOid());
-	if (childGraphics) {
-		childGraphics.setLabel(childModelNode.getLabel());
-	}
+cwm.ChiNode.prototype.initByDisplayResult = function(node) {
+	cwm.ChiNode.superclass.initByDisplayResult.call(this, node);
+      this.data.display_value = node.values[1].display_value;
+      this.data.parent_order = node.values[1].parent_order;
+      this.data.child_order = node.values[1].child_order;
+      this.data.pk_name = node.values[1].pk_name;
+      this.data.is_searchable = node.values[1].is_searchable;
+      this.data.orderby = node.values[1].orderby;
+      this.data.is_soap = node.values[1].is_soap;
+      this.data.initparams = node.values[1].initparams;
+      this.data.table_name = node.values[1].table_name;
+      this.data.is_ordered = node.values[1].is_ordered;
+      this.data.Alias = node.values[1].Alias;
+      this.data.Version = node.values[1].Version;
+      this.data.Name = node.values[1].Name;
+      this.data.Notes = node.values[1].Notes;
+      this.data.created = node.values[1].created;
+      this.data.creator = node.values[1].creator;
+      this.data.last_editor = node.values[1].last_editor;
+      this.data.modified = node.values[1].modified;
 }
 
-cwm.ChiNode.prototype.removeChild = function(childModelNode, figure) {
-	var graphics = figure.getGraphics();
-	
-	var childGraphics = this.getChildGraphicsByOid(graphics, childModelNode.getOid());
-	if (childGraphics) {
-		graphics.removeChildElement(childGraphics, true);
-	}
+cwm.ChiNode.prototype.populatePropertyForm = function(form) {
+	var realForm = form.getForm();
+      realForm.findField("display_value").loadValue(this.data.display_value);
+      realForm.findField("parent_order").loadValue(this.data.parent_order);
+      realForm.findField("child_order").loadValue(this.data.child_order);
+      realForm.findField("pk_name").loadValue(this.data.pk_name);
+      realForm.findField("is_searchable").loadValue(this.data.is_searchable);
+      realForm.findField("orderby").loadValue(this.data.orderby);
+      realForm.findField("is_soap").loadValue(this.data.is_soap);
+      realForm.findField("initparams").loadValue(this.data.initparams);
+      realForm.findField("table_name").loadValue(this.data.table_name);
+      realForm.findField("is_ordered").loadValue(this.data.is_ordered);
+      realForm.findField("Alias").loadValue(this.data.Alias);
+      realForm.findField("Version").loadValue(this.data.Version);
+      realForm.findField("Name").loadValue(this.data.Name);
+      realForm.findField("Notes").loadValue(this.data.Notes);
+      realForm.findField("created").loadValue(this.data.created);
+      realForm.findField("creator").loadValue(this.data.creator);
+      realForm.findField("last_editor").loadValue(this.data.last_editor);
+      realForm.findField("modified").loadValue(this.data.modified);
 }
 
-cwm.ChiNode.prototype.getChildGraphicsByOid = function(graphics, oid) {
-	var result = null;
-	
-	var childGraphics = graphics.getChildElements();
-
-	for (var i = 0; i < childGraphics.length; i++) {
-		var currChildGraphics = childGraphics[i];
-		
-		if (currChildGraphics.getModelObject().getOid() == oid) {
-			result = currChildGraphics;
-			
-			break;
-		}
+cwm.ChiNode.prototype.getGridData = function() {
+	return {
+		oid: this.getOid(),
+		label: this.getLabel()
 	}
-
-	return result;
 }

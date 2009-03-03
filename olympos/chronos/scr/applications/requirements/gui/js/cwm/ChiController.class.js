@@ -19,7 +19,15 @@ cwm.ChiController = function(modelNodeClass) {
 	cwm.ChiController.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.ChiController, uwm.model.ModelObject);
+Ext.extend(cwm.ChiController, uwm.model.ClassObject);
+
+cwm.ChiController.prototype.addAttribute = function() {
+	uwm.model.ModelContainer.getInstance().createModelObject("ChiValue", this);
+}
+
+cwm.ChiController.prototype.addOperation = function() {
+	uwm.model.ModelContainer.getInstance().createModelObject("Operation", this);
+}
 
 cwm.ChiController.prototype.initByDisplayResult = function(node) {
 	cwm.ChiController.superclass.initByDisplayResult.call(this, node);
