@@ -86,10 +86,14 @@ cwm.ChiRequirementClass.prototype.getPropertyForm = function(modelNode, isLocked
 			listType: "ChiRequirementType",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
-		}), new uwm.property.TextField({
+		}), new uwm.property.NumberField({
 			fieldLabel: 'Priority',
 			toolTip: "A priority in %. Requirements are ordered by priority.",
 			name: 'Priority',
+			allowDecimals: false,
+			allowNegative: false,
+			minValue: 0,
+			maxValue: 100,
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
 		}), new uwm.property.ComboBox({
