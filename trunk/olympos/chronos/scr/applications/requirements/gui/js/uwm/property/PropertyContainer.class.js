@@ -61,45 +61,49 @@ uwm.property.PropertyContainer.prototype.showInfoMask = function() {
 
 uwm.property.PropertyContainer.prototype.showProperty = function(modelNode) {
 	if (modelNode != null) {
-		var oid = modelNode.getOid();
+		var eastPanel = this.findParentByType(uwm.property.EastPanel);
+		
+		if (!eastPanel.isCollapsed()) {
+			var oid = modelNode.getOid();
 
-		if (oid != null && this.currentOid != oid) {
-			if (this.mask) {
-				this.mask.hide();
+			if (oid != null && this.currentOid != oid) {
+				if (this.mask) {
+					this.mask.hide();
+				}
+
+				var oldOid = this.currentOid;
+
+				this.currentOid = modelNode.getOid();
+
+				var items = this.items;
+				while (items && items.getCount() > 0) {
+					this.remove(items.get(0), true);
+				}
+
+				var self = this;
+
+				this.mask = new Ext.LoadMask(this.getEl());
+				this.mask.show();
+
+				var actionSet = new uwm.persistency.ActionSet();
+
+				if (oldOid) {
+					actionSet.addUnlock(oldOid);
+				}
+
+				actionSet.addLock(this.currentOid, function(request, data) {
+					self.setLocked(false);
+				}, function(request, data) {
+					self.setLocked(true);
+				});
+
+				uwm.model.ModelContainer.getInstance().loadByOid(
+						this.currentOid, actionSet);
+
+				actionSet.commit( function() {
+					self.displayForm();
+				});
 			}
-
-			var oldOid = this.currentOid;
-
-			this.currentOid = modelNode.getOid();
-
-			var items = this.items;
-			while (items && items.getCount() > 0) {
-				this.remove(items.get(0), true);
-			}
-
-			var self = this;
-
-			this.mask = new Ext.LoadMask(this.getEl());
-			this.mask.show();
-
-			var actionSet = new uwm.persistency.ActionSet();
-
-			if (oldOid) {
-				actionSet.addUnlock(oldOid);
-			}
-
-			actionSet.addLock(this.currentOid, function(request, data) {
-				self.setLocked(false);
-			}, function(request, data) {
-				self.setLocked(true);
-			});
-
-			uwm.model.ModelContainer.getInstance().loadByOid(this.currentOid,
-					actionSet);
-
-			actionSet.commit( function() {
-				self.displayForm();
-			});
 		}
 	}
 }
