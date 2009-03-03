@@ -16,30 +16,46 @@ Ext.namespace("uwm.ui");
  * 
  * @extends Ext.Panel
  * @constructor
- * @param {Object} config The configuration object.
+ * @param {Object}
+ *            config The configuration object.
  */
 uwm.ui.EastPanel = function() {
 }
 
 uwm.ui.EastPanel = Ext.extend(Ext.Panel, {
-	initComponent: function() {
+	initComponent : function() {
 		this.propertyContainer = new uwm.property.PropertyContainer();
-		
+
 		Ext.apply(this, {
-			region: "east",
-			layout: "border",
-			collapsible: true,
-			split: true,
-			width: 250,
-			title: uwm.Dict.translate('Perspectives'),
-			items: [new uwm.ui.Perspective({
-				highlight: this.highlight
-			}), this.propertyContainer]
+			region :"east",
+			layout :"border",
+			collapsible :true,
+			split :true,
+			width :250,
+			title :uwm.Dict.translate('Perspectives'),
+			items : [ new uwm.ui.Perspective( {
+				highlight :this.highlight
+			}), this.propertyContainer ]
 		});
-		
+
 		uwm.ui.EastPanel.superclass.initComponent.apply(this, arguments);
+
+		this.myCollapsed = false;
+
+		var self = this;
+
+		this.on("collapse", function() {
+			self.myCollapsed = true;
+		});
+		this.on("expand", function() {
+			self.myCollapsed = false;
+		});
 	}
 });
+
+uwm.ui.EastPanel.prototype.isCollapsed = function() {
+	return this.myCollapsed;
+}
 
 uwm.ui.EastPanel.prototype.getPropertyContainer = function() {
 	return this.propertyContainer;
