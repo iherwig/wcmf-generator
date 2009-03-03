@@ -51,7 +51,7 @@ cwm.ChiGoalClass = function() {
 			label :"contains",
 			invert :false,
 			connectionType :'composition',
-			number: -1
+			number :-1
 		}
 
 		,
@@ -60,7 +60,7 @@ cwm.ChiGoalClass = function() {
 			label :"is specified by",
 			invert :false,
 			connectionType :'composition',
-			number: -1
+			number :-1
 		}
 
 	};
@@ -73,13 +73,15 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode,
 	return new uwm.property.PropertyForm(
 			{
 				items : [
-						new uwm.property.TextField( {
+						new uwm.property.NumberField( {
 							fieldLabel :'Priority',
 							toolTip :"A priority in %",
 							name :'Priority',
-
+							allowDecimals :false,
+							allowNegative :false,
+							minValue :0,
+							maxValue :100,
 							modelNode :modelNode,
-
 							readOnly :isLockedByOtherUser
 						}),
 						new uwm.property.TextField(
@@ -120,7 +122,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode,
 							disabled :isLockedByOtherUser
 						}), new uwm.property.TextField( {
 							fieldLabel :'Alias',
-							toolTip: "the Project Id of this object.",
+							toolTip :"the Project Id of this object.",
 							name :'Alias',
 
 							modelNode :modelNode,
@@ -128,7 +130,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode,
 							readOnly :isLockedByOtherUser
 						}), new uwm.property.TextField( {
 							fieldLabel :'Version',
-							toolTip: "the model version of this object",
+							toolTip :"the model version of this object",
 							name :'Version',
 
 							modelNode :modelNode,
@@ -136,7 +138,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode,
 							readOnly :isLockedByOtherUser
 						}), new uwm.property.TextField( {
 							fieldLabel :'Name',
-							toolTip: "the name of this object",
+							toolTip :"the name of this object",
 							name :'Name',
 
 							modelNode :modelNode,
@@ -144,7 +146,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode,
 							readOnly :isLockedByOtherUser
 						}), new uwm.property.HtmlEditor( {
 							fieldLabel :'Notes',
-							toolTip: "the actual description of the object.",
+							toolTip :"the actual description of the object.",
 							name :'Notes',
 
 							modelNode :modelNode,
@@ -152,7 +154,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode,
 							readOnly :isLockedByOtherUser
 						}), new uwm.property.TextField( {
 							fieldLabel :'created',
-							toolTip: "the creation date of this object",
+							toolTip :"the creation date of this object",
 							name :'created',
 
 							modelNode :modelNode,
@@ -160,7 +162,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode,
 							readOnly :true
 						}), new uwm.property.TextField( {
 							fieldLabel :'creator',
-							toolTip: "the user that created this object",
+							toolTip :"the user that created this object",
 							name :'creator',
 
 							modelNode :modelNode,
@@ -168,7 +170,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode,
 							readOnly :true
 						}), new uwm.property.TextField( {
 							fieldLabel :'last_editor',
-							toolTip: "the last user that edited this object",
+							toolTip :"the last user that edited this object",
 							name :'last_editor',
 
 							modelNode :modelNode,
@@ -176,7 +178,7 @@ cwm.ChiGoalClass.prototype.getPropertyForm = function(modelNode,
 							readOnly :true
 						}), new uwm.property.TextField( {
 							fieldLabel :'modified',
-							toolTip: "the date when this object was modified",
+							toolTip :"the date when this object was modified",
 							name :'modified',
 
 							modelNode :modelNode,
