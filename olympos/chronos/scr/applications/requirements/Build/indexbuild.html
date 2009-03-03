@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title id="title">UML Web Modeler</title>
+		<link rel="shortcut icon" href="favicon.ico" /> 
+		<link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/figures.css" />
+		<link rel="stylesheet" type="text/css" href="lib/ext/ux/css/Ext.ux.grid.CellActions.css" />
+		<link rel="stylesheet" type="text/css" href="lib/ext/resources/css/file-upload.css"/>
+
+		<!--[if IE]>
+			<script type="text/javascript">
+				window.onload = function() {
+					document.body.innerHTML += "<div class='uwm-ieWarning'>" +
+						"<div class='uwm-browserWarning'>" +
+							"<p class='nonLast'><b>Attention:</b> You're using Internet Explorer, a browser not supported by this application.</p>" +
+							"<p>Currently, the supported browser is Firefox 3.</p>" +
+						"</div>" +
+					"</div>";
+				}
+			</script>
+		<![endif]-->
+
+
+		<script type="text/javascript" src="lib/draw2d/wz_jsgraphics.js">
+		</script>
+		<script type="text/javascript" src="lib/draw2d/draw2d.js">
+		</script>
+
+-->
+
+
+		<script type="text/javascript" src="lib/ext/adapter/ext/ext-base.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/ext-all.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/ux/js/Ext.ux.grid.CellActions.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/FileUploadField.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/ux/RowExpander.js">
+		</script>
+
+		
+		<script type="text/javascript" src="js/uwm.js">
+		</script>
+		<script type="text/javascript" src="js/cwm.js">
+		</script>
+		
+
+		<script type="text/javascript">
+			Ext.onReady(function(){
+				Ext.BLANK_IMAGE_URL = "img/s.gif";
+				Ext.QuickTips.init();
+				uwm.Uwm.getInstance().startApplication();
+			});
+		</script>
+	</head>
+	<body>
+<!-- 
+		<img src="../application/images/Chronos_webModeller3.jpg" width="1229" height="976" border="0" alt="" usemap="#Chronos_webModeller3_Map" style="position: absolute; top: 0px; left: 0px;, z-index: -10000;" />
+		<map name="Chronos_webModeller3_Map">
+			<area shape="rect" alt="olympos project" coords="734,933,1188,947" href="http://sourceforge.net/projects/olympos/" target="_blank">
+		</map>
+ -->
+	</body>
+</html>
