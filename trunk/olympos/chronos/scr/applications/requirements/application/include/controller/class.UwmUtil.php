@@ -143,7 +143,8 @@ class UwmUtil {
 					break;
 			
 				case 'ChiNode':
-					self::processChiNode($currChild);
+				case 'ChiController':
+					self::processClass($currChild);
 					break;
 			
 				default:
@@ -180,7 +181,7 @@ class UwmUtil {
 		self::$dom->endElement();
 	}
 
-	private static function processChiNode($currNode) {
+	private static function processClass($currNode) {
 		self::check($currNode->getId());
 		self::$dom->startElement($currNode->getType());
 	
@@ -193,7 +194,13 @@ class UwmUtil {
 			$childType = self::getRealType($currChild);
 			
 			if ($childType != 'Figure') {
-				self::processNode($currChild);
+				if (self::processManyToMany($currChild, $currNode->getId())) {
+					//do nothing
+				} else if ($childType == 'ChiValue' || $childType == 'Operation') {
+					self::processNode($currChild);
+				} else {
+					self::processChild($currChild);
+				}
 			}
 		}
 
@@ -237,10 +244,7 @@ class UwmUtil {
 			 self::processNode($currChild);
 			 }*/
 			else {
-				self::$dom->startElement('Child');
-				self::$dom->writeAttribute('targetType', $currChild->getType());
-				self::$dom->writeAttribute('targetOid', $currChild->getValue('id'));
-				self::$dom->endElement();
+				self::processChild($currChild);
 			}
 		}
 	
@@ -252,6 +256,13 @@ class UwmUtil {
 			self::$dom->endElement();
 		}
 	
+		self::$dom->endElement();
+	}
+	
+	private static function processChild($currChild) {
+		self::$dom->startElement('Child');
+		self::$dom->writeAttribute('targetType', $currChild->getType());
+		self::$dom->writeAttribute('targetOid', $currChild->getValue('id'));
 		self::$dom->endElement();
 	}
 	
