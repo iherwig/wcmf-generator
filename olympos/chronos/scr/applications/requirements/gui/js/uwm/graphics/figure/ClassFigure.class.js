@@ -133,6 +133,12 @@ uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 			figure.deleteFromModel();
 		}
 	}));
+	items.push(new Ext.menu.Item({
+			text: uwm.Dict.translate('Show object history'),
+			handler: function(item, e) {
+				figure.showObjectHistory(item, e);
+			}
+		}));
 	items.push(new Ext.menu.Item( {
 		text :"Help",
 		// iconCls: "uwm-help-icon",

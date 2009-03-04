@@ -238,3 +238,8 @@ uwm.diagram.Figure.prototype.showHelp = function() {
 	uwm.ui.HelpViewer.getInstance().loadUrl(
 			this.getModelObject().getModelNodeClass().getHelpUrl());
 }
+
+uwm.diagram.Figure.prototype.showObjectHistory = function(self, e) {
+	new uwm.ui.History(this.modelObject);
+}
+
