@@ -450,7 +450,7 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					
 					// TODO: prevent re-establish existing connections in
 					// WorkflowEventListener
-					this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo);
+					this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true);
 				}
 			}
 		}
@@ -485,7 +485,7 @@ uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, 
 	}
 }
 
-uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo) {
+uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo, noCommand) {
 	var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
 	
 	var startPort;
@@ -499,10 +499,20 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		endPort = targetPort;
 	}
 	
-	var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
-	command.connectionInfo = connectionInfo;
-	command.setConnection(new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators));
-	this.workflow.getCommandStack().execute(command);
+	var connection = new uwm.graphics.connection.BaseConnection(
+			connectionInfo.label, decorators);
+
+	if (!noCommand) {
+		var command = new draw2d.CommandConnect(this.workflow, startPort,
+				endPort);
+		command.connectionInfo = connectionInfo;
+		command.setConnection(connection);
+		this.workflow.getCommandStack().execute(command);
+	} else {
+		connection.setSource(startPort);
+		connection.setTarget(endPort);
+		this.workflow.addFigure(connection);
+	}
 }
 
 /**
