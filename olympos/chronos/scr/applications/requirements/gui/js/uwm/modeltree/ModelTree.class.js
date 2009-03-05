@@ -175,9 +175,13 @@ uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function(parentModel
 	}
 	var parentNode = this.getNodeById(parentModelNode.getOid());
 	var childNode = this.getNodeById(childModelNode.getOid());
+	
 	if ((childNode instanceof uwm.modeltree.UseCaseNode || childNode instanceof uwm.modeltree.UseCaseCoreNode) 
-		&& (parentNode instanceof uwm.modeltree.PackageNode || parentNode instanceof uwm.modeltree.ProcessNode)) {
-		childNode.remove();
+		&& (parentNode instanceof uwm.modeltree.PackageNode)) {
+		if (childNode.parentNode instanceof uwm.modeltree.PackageNode) {
+			parentNode.ensureVisible();
+			childNode.remove();
+		}
 	}
 }
 
