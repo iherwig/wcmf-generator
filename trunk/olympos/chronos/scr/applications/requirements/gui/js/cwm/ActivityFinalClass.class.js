@@ -49,7 +49,8 @@ cwm.ActivityFinalClass = function() {
 	this.connectionInfo = {
 		"Activity" : {
 			label :"Associates",
-			invert :true,
+			invert :false,
+			invertBackendRelation: true,
 			connectionType :"Association",
 			cardinality: 1
 		}

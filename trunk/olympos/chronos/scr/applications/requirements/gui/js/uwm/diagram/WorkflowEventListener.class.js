@@ -49,7 +49,15 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 				
 				var connectionInfo = command.connectionInfo;
 				
-				target.associate(source, connectionInfo.nmSelf);
+				var newSource = source;
+				var newTarget = target;
+				
+				if (connectionInfo.invertBackendRelation) {
+					newSource = target;
+					newTarget = source;
+				}
+				
+				newTarget.associate(newSource, connectionInfo.nmSelf);
 					
 			} else if (command instanceof draw2d.CommandMove) {
 				var modelObject = command.figure.getFigure();

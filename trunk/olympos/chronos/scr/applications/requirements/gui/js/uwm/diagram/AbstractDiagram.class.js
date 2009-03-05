@@ -717,13 +717,6 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, 
 		self.objects.add(newObjectNode.getOid(), newObjectNode);
 		
 		savedObjectNode = newObjectNode;
-		
-		/*
-		 * self.establishExistingConnections(newObjectNode,
-		 * newObjectNode .getParentOids());
-		 * self.establishExistingConnections(newObjectNode,
-		 * newObjectNode .getChildOids());
-		 */
 	});
 	
 	uwm.model.ModelContainer.getInstance().createFigure(this, undefined, actionSet, function(newFigureNode) {
@@ -744,12 +737,16 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, 
 		
 		savedFigureNode = newFigureNode;
 	});
-	
+
 	/*
-	 * actionSet.addSave("{last_created_oid:Figure}", { PositionX :x, PositionY
-	 * :y, Width :modelClass.getInitialWidth(), Height
-	 * :modelClass.getInitialHeight() });
-	 */
+	 actionSet.addSave("{last_created_oid:Figure}", {
+		PositionX :x,
+		PositionY :y,
+		Width :modelClass.getInitialWidth(),
+		Height :modelClass.getInitialHeight()
+	});
+	*/
+
 	actionSet.addAssociate("{last_created_oid:Figure}", "{last_created_oid:" +
 	modelClass.getUwmClassName() +
 	"}", function(request, data) {
