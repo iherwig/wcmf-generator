@@ -117,7 +117,7 @@ uwm.persistency.Json.prototype.disassociate = function(parentOid, childOid, succ
 	this.jsonRequest({
 		usr_action: "disassociate",
 		oid: parentOid,
-		associateoids: this.array2CommaList(childOid),
+		associateoids: this.array2CommaList(childOid)
 	}, successHandler, errorHandler);
 }
 
@@ -162,7 +162,7 @@ uwm.persistency.Json.prototype.listbox = function(type, successHandler, errorHan
 uwm.persistency.Json.prototype.autocomplete = function(query, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'autocomplete',
-		query: query,
+		query: query
 	}, successHandler, errorHandler);
 	
 }
@@ -180,7 +180,7 @@ uwm.persistency.Json.prototype.histlist = function(oid,start,limit, successHandl
 uwm.persistency.Json.prototype.restorehistliststate = function(id, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'restorehistliststate',
-		ids:id,
+		ids:id
 	}, successHandler, errorHandler);
 	
 }
@@ -188,7 +188,7 @@ uwm.persistency.Json.prototype.restorehistliststate = function(id, successHandle
 uwm.persistency.Json.prototype.restorehistfields = function(ids, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'restorehistfields',
-		ids:ids,
+		ids:ids
 	}, successHandler, errorHandler);
 	
 }
@@ -279,13 +279,24 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				break;
 				
 			case "save":
+				/*
+				for (var i in currRequest.values) {
+					if (!(currRequest.values[i] instanceof Function)) {
+						jsonRequest["value--" + i + "-" + currRequest.oid] = currRequest.values[i];
+					}
+				}
+				*/
+					
 				var changeNode = {};
 				
-				changeNode[3] = {};
+				changeNode.oid = currRequest.oid;
+				changeNode.type = uwm.Util.getUwmClassNameFromOid(currRequest.oid);
+				changeNode.values = {};
+				changeNode.values[1] = {};
 				
 				for (var i in currRequest.values) {
 					if (!(currRequest.values[i] instanceof Function)) {
-						changeNode[3][i] = currRequest.values[i];
+						changeNode.values[1][i] = currRequest.values[i];
 					}
 				}
 				
