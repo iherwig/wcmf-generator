@@ -93,6 +93,12 @@ uwm.modeltree.Loader.prototype.reformatData = function(self, node, callback, dat
 					oid: responseNode.oid
 				});
 				break;
+			case "ChiBusinessProcess":
+				newNode = new uwm.modeltree.ProcessNode({
+					text: responseNode.text,
+					oid: responseNode.oid
+				});
+				break;
 				
 			case "Figure":
 			case "NMUCActor":

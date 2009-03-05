@@ -150,6 +150,12 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(dragOverEvent) {
 		} else {
 			dragOverEvent.cancel = true;
 		}
+	} else if (dragOverEvent.target instanceof uwm.modeltree.ProcessNode) {
+		if (dragOverEvent.dropNode instanceof uwm.modeltree.UseCaseNode || dragOverEvent.dropNode instanceof uwm.modeltree.UseCaseCoreNode) {
+			dragOverEvent.cancel = false;
+		} else {
+			dragOverEvent.cancel = true;
+		}
 	}
 	
 	return !dragOverEvent.cancel;
@@ -166,6 +172,12 @@ uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function(parentModel
 		this.disassociatedNodes.remove(newParent);
 		
 		childModelNode.associate(newParent.getModelNode());
+	}
+	var parentNode = this.getNodeById(parentModelNode.getOid());
+	var childNode = this.getNodeById(childModelNode.getOid());
+	if ((childNode instanceof uwm.modeltree.UseCaseNode || childNode instanceof uwm.modeltree.UseCaseCoreNode) 
+		&& (parentNode instanceof uwm.modeltree.PackageNode || parentNode instanceof uwm.modeltree.ProcessNode)) {
+		childNode.remove();
 	}
 }
 
@@ -310,6 +322,7 @@ uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject,
 }
 
 uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObject, childModelObject) {
+
 	var parentOid = parentModelObject.getOid();
 	
 	var parentNode = this.getNodeById(parentOid);
@@ -321,14 +334,41 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 			if (!(childModelObject instanceof uwm.diagram.ActivitySet)) {
 				if (parentModelObject.parentOids) {
 					for (var i = 0; i < parentModelObject.parentOids.length; i++) {
-						if (this.getNodeById(parentModelObject.parentOids[i]) instanceof uwm.modeltree.PackageNode) {
-							parentNode = this.getNodeById(parentModelObject.parentOids[i]);
+						var tempParentNode = this.getNodeById(parentModelObject.parentOids[i]);
+						if (tempParentNode instanceof uwm.modeltree.PackageNode || tempParentNode instanceof uwm.modeltree.ProcessNode) {
+							parentNode = tempParentNode;
+							parentModelObject = uwm.model.ModelContainer.getInstance().getByOid(parentNode.oid);
 						}
 					}
 				}
 			}
 			
 		}
+		
+		if (parentNode instanceof uwm.modeltree.ProcessNode) {
+			if (!(childModelObject instanceof cwm.ChiBusinessUseCase || childModelObject instanceof cwm.ChiBusinessUseCaseCore)) {
+				if (parentModelObject.parentOids) {
+					for (var i = 0; i < parentModelObject.parentOids.length; i++) {
+						var tempParentNode = this.getNodeById(parentModelObject.parentOids[i]);
+						if (tempParentNode instanceof uwm.modeltree.PackageNode) {
+							parentNode = tempParentNode;
+						}
+					}
+				}
+			} else {
+				if (childModelObject.parentOids) {
+					for (var i = 0; i < childModelObject.parentOids.length; i++) {
+						var parentToDelete = uwm.model.ModelContainer.getInstance().getByOid(childModelObject.parentOids[i]);
+						if (parentToDelete instanceof uwm.model.builtin.Package) {
+							childModelObject.disassociate(uwm.model.ModelContainer.getInstance().getByOid(childModelObject.parentOids[i]));
+							return;
+						}
+					}
+				}
+			}
+			
+		}
+		
 		var childNode = null;
 		
 		if (childModelObject instanceof uwm.model.builtin.Package && this.createdPackages.get(childModelObject.getOid())) {
@@ -353,6 +393,12 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 		} else if (childModelObject instanceof cwm.ChiBusinessUseCaseCore) {
 			this.createdPackages.remove(childModelObject.getOid());
 			childNode = new uwm.modeltree.UseCaseCoreNode({
+				oid: childModelObject.getOid(),
+				text: childModelObject.getLabel()
+			});
+		} else if (childModelObject instanceof cwm.ChiBusinessProcess) {
+			this.createdPackages.remove(childModelObject.getOid());
+			childNode = new uwm.modeltree.ProcessNode({
 				oid: childModelObject.getOid(),
 				text: childModelObject.getLabel()
 			});
