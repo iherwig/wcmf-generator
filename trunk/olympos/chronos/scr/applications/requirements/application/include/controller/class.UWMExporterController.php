@@ -16,9 +16,12 @@ require_once (BASE . 'wcmf/lib/persistence/class.PersistenceFacade.php');
 
 require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
+require_once('class.ExportShutdownHandler.php');
 
 class UWMExporterController extends Controller
 {
+	const SHUTDOWN_ERROR_VARIABLE = 'UwmExporterControllerError';
+	
 	private $lastTime = 0;
 
 	private function check($msg)
@@ -45,9 +48,6 @@ class UWMExporterController extends Controller
 
 		$tmpPropertiesPath = OawUtil::createPropertyFile('file://' . $tmpUwmExportPath, $tmpUmlPath);
 
-		//header('Content-type: text/plain');
-		header('Content-type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="uwm-export.uml"');
 
 		mkdir($tmpUmlPath);
 	
@@ -58,7 +58,17 @@ class UWMExporterController extends Controller
 		$this->check('Generator finished');
 		
 		$exportFile = "$tmpUmlPath/uml-output.uml";
+
+		if (filesize($exportFile) == 0) {
+			$this->check('Zero return file size');
+			
+			return;
+		}
 		
+		//header('Content-type: text/plain');
+		header('Content-type: application/octet-stream');
+		header('Content-Disposition: attachment; filename="uwm-export.uml"');
+
 		readfile($exportFile);
 		//readfile($tmpUwmExportPath);
 		
@@ -69,6 +79,8 @@ class UWMExporterController extends Controller
 		unlink($exportFile);
 		rmdir($tmpUmlPath);
 		
+		ExportShutdownHandler::success();
+
 		$this->check("finished");
 	
 		return false;
@@ -78,7 +90,7 @@ class UWMExporterController extends Controller
 	{
 		return false;
 	}
-
+	
 }
 
 ?>

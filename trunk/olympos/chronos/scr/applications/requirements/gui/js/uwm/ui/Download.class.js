@@ -34,6 +34,16 @@ uwm.ui.Download = function(config) {
 			var iframe = Ext.get(uwm.ui.Download.IFRAME_ID);
 			iframe.on("load", function() {
 				window.setTimeout(function() {
+					try {
+						var result = Ext.util.JSON.decode(iframe.dom.contentDocument.body.innerHTML);
+						
+						if (!result.success) {
+							uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+						}
+					} catch (e) {
+						//do nothing, successful download of a file
+					}
+					
 					self.destroy();
 				}, 250);
 			});
