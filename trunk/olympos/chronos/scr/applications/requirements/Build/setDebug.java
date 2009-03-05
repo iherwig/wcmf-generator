@@ -32,15 +32,19 @@ public class setDebug {
 				bw.close();
 				System.exit(0);
 			}
-			if (line.length() > 18) {
 				if (line.replaceAll("\t", "").replaceAll(" ", "").startsWith(
 						"uwm.Config.debug=")) {
 					line = "uwm.Config.debug = false;";
 				}
+			
+			if (line.replaceAll("\t", "").replaceAll(" ", "").startsWith("uwm.Config.defaultLogin")){
+				line="uwm.Config.defaultLogin=\"\"";
+			}
+			if (line.replaceAll("\t", "").replaceAll(" ", "").startsWith("uwm.Config.defaultPassword")){
+				line="uwm.Config.defaultPassword=\"\"";
 			}
 			bw.write(line);
 			bw.newLine();
 		}
 	}
-
 }
