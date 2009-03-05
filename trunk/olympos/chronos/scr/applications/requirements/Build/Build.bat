@@ -13,7 +13,8 @@ if not exist c:\temp md c:\temp
 REM Export Workspace files
 %SUBVERSION%\svn.exe export ..\gui c:\temp\gui
 %SUBVERSION%\svn.exe export ..\application c:\temp\application
-%SUBVERSION%\svn.exe export ..\wcmf c:\temp\wcmf"
+%SUBVERSION%\svn.exe export ..\wcmf c:\temp\wcmf
+%SUBVERSION%\svn.exe export ..\generator c:\temp\generator
 
 REM delete listed files
 call delete.jar
@@ -56,9 +57,11 @@ REM zip
 7z a Package.zip c:\temp\gui
 7z a Package.zip c:\temp\application
 7z a Package.zip c:\temp\wcmf
+7z a Package.zip c:\temp\generator
 
 REM Delete temporary files
 del mergeall.bat
 rd /s /q c:\temp\gui
 rd /s /q c:\temp\application
 rd /s /q c:\temp\wcmf
+rd /s /q c:\temp\generator
