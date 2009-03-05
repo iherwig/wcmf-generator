@@ -1,8 +1,4 @@
-@echo off
-if not exist c:\temp\gui (
-if not exist c:\temp\application (
-if not exist c:\temp\wcmf (
-if not exist Package.zip (
+del Package.zip
 call folders.bat
 
 REM Generate Batch for merging uwm and cwm files
@@ -66,10 +62,3 @@ del mergeall.bat
 rd /s /q c:\temp\gui
 rd /s /q c:\temp\application
 rd /s /q c:\temp\wcmf
-
-exit
-)
-echo Package.zip already exists
-exit
-)))
-echo Error: Directory in c:\temp\ already exists.
