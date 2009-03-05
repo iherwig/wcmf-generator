@@ -16,9 +16,12 @@ require_once (BASE.'wcmf/lib/persistence/class.PersistenceFacade.php');
 
 require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
+require_once('class.ExportShutdownHandler.php');
 
 class UWMDocExporterController extends Controller
 {
+	const SHUTDOWN_ERROR_VARIABLE = 'UwmDocExporterControllerError';
+	
 	private $lastTime = 0;
 
 	private function check($msg)
@@ -68,6 +71,11 @@ class UWMDocExporterController extends Controller
 	
 		$this->check('Generator finished');
 	
+		if (filesize($exportFile) == 0) {
+			$this->check('Zero return file size');
+			
+			return;
+		}
 		
 		readfile($exportFile);
 	
@@ -81,6 +89,8 @@ class UWMDocExporterController extends Controller
 		unlink($propertyPath);
 		unlink($tmpUwmExportPath);
 		rmdir($workingDir);
+
+		ExportShutdownHandler::success();
 
 		$this->check("finished");
 	
