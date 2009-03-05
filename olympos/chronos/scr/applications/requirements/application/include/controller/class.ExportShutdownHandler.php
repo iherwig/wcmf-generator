@@ -13,7 +13,7 @@
 
 
 class ExportShutdownHandler {
-	private $error = true;
+	private static $error = true;
 
 	public static function success() {
 		self::$error = false;
