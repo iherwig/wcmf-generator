@@ -40,7 +40,7 @@ class UWMDocExporterController extends Controller
 		$workingDir = OawUtil::tempName();
 		mkdir($workingDir);
 	
-		$tmpUwmExportPath = "$workingDir/uwm-export.xml";
+		$tmpUwmExportPath = "$workingDir/cwm-source.xml";
 		touch($tmpUwmExportPath);
 	
 		$startModel = $this->_request->getValue('startModel');
@@ -57,24 +57,24 @@ class UWMDocExporterController extends Controller
 	
 		$contentPath = $this->createTempFile("$workingDir/content.xml");
 		$stylesPath = $this->createTempFile("$workingDir/styles.xml");
-		$openofficeTmp0Path = $this->createTempFile("$workingDir/openoffice-tmp0.odt");
-		$openofficePath = $this->createTempFile("$workingDir/openoffice-export.odt");
-		$exportFile = $this->createTempFile("$workingDir/uwm-export.doc");
+		$openofficeTmp0Path = $this->createTempFile("$workingDir/document-tmp0.odt");
+		$openofficePath = $this->createTempFile("$workingDir/document-export.odt");
+		$exportFile = $this->createTempFile("$workingDir/document-export.doc");
 	
 		//header('Content-type: text/plain');
 		header('Content-type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="uwm-export.doc"');
+		header('Content-Disposition: attachment; filename="cwm-export.doc"');
 	
 		$this->check("start generator");
 	
-		$runCfg = OawUtil::runOaw($propertyPath, 'templates/uwm/doc/openoffice.oaw');
+		$runCfg = OawUtil::runOaw($propertyPath, 'workflow/cwm2word.oaw');
 	
 		$this->check('Generator finished');
 	
 		if (filesize($exportFile) == 0) {
 			$this->check('Zero return file size');
 			
-			return;
+			return false;
 		}
 		
 		readfile($exportFile);

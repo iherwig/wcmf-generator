@@ -12,7 +12,7 @@
 
 	<component class="org.openarchitectureware.xsd.XMLReader">
 		<modelSlot value="uwmmodel" />
-		<uri value="${inputUri}" />
+		<uri value="${workingDir}/cwm-source.xml" />
 		<metaModel id="cwm"
 			class="org.openarchitectureware.xsd.XSDMetaModel">
 			<schemaFile value="metamodel/cwm.xsd" />

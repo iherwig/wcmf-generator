@@ -53,21 +53,21 @@ class UWMExporterController extends Controller
 	
 		$this->check("start generator");
 	
-		$runCfg = OawUtil::runOaw($tmpPropertiesPath, 'templates/uwm/uwm2uml2.oaw');
+		$runCfg = OawUtil::runOaw($tmpPropertiesPath, 'workflow/cwm2uml.oaw');
 		
 		$this->check('Generator finished');
 		
-		$exportFile = "$tmpUmlPath/uml-output.uml";
+		$exportFile = "$tmpUmlPath/uml-generated.uml";
 
 		if (filesize($exportFile) == 0) {
 			$this->check('Zero return file size');
 			
-			return;
+			return false;
 		}
 		
 		//header('Content-type: text/plain');
 		header('Content-type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="uwm-export.uml"');
+		header('Content-Disposition: attachment; filename="cwm-export.uml"');
 
 		readfile($exportFile);
 		//readfile($tmpUwmExportPath);

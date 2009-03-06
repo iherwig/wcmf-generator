@@ -116,7 +116,7 @@ class UWMImporterController extends Controller
 	
 		$this->check("start generator");
 	
-		$runCfg = OawUtil::runOaw($this->propertyFilePath, 'templates/uwm/uml22uwm.oaw');
+		$runCfg = OawUtil::runOaw($this->propertyFilePath, 'workflow/uml2cwm.oaw');
 	
 		$this->check('Generator finished');
 	
@@ -142,7 +142,7 @@ class UWMImporterController extends Controller
 				if ($this->dom->nodeType == XMLReader::ELEMENT) {
 					$elementName = $this->dom->name;
 				
-					if ($elementName != 'UwmExport' && $elementName != 'Child' && $elementName != 'Parent' && $elementName != 'ManyToMany' && $elementName != 'Diagram') {
+					if ($elementName != 'CwmExport' && $elementName != 'Child' && $elementName != 'Parent' && $elementName != 'ManyToMany' && $elementName != 'Diagram') {
 						$this->createAndSaveDisplayValues($elementName);
 					}
 				}
@@ -160,7 +160,7 @@ class UWMImporterController extends Controller
 					$elementName = $this->dom->name;
 				
 					switch($elementName) {
-						case 'UwmExport':
+						case 'CwmExport':
 						case 'Parent':
 						case 'Diagram':
 							//do nothing
@@ -187,7 +187,7 @@ class UWMImporterController extends Controller
 				if ($this->dom->isEmptyElement || $this->dom->nodeType == XMLReader::END_ELEMENT) {
 					$elementName = $this->dom->name;
 				
-					if ($elementName != 'UwmExport' && $elementName != 'Parent' && $elementName != 'Diagram' && $elementName != 'Child' && $elementName != 'ManyToMany') {
+					if ($elementName != 'CwmExport' && $elementName != 'Parent' && $elementName != 'Diagram' && $elementName != 'Child' && $elementName != 'ManyToMany') {
 						$obj = array_pop($this->parentObjs);
 						if ($obj) {
 							//$obj->save();
