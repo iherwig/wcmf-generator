@@ -1,0 +1,82 @@
+<project name="wCMF Generator" default="redist" basedir=".">
+
+    <property file="build.properties"/>
+
+    <path id="lib">
+        <fileset dir="${lib.dir}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${lib.dir}/openoffice">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+	<target name="clean">
+		<delete dir="${build.dir}" verbose="false" failonerror="false"/>
+		<delete dir="${redist.dir}" verbose="false" failonerror="false"/>
+	</target>
+
+	<target name="compile" depends="clean">
+		<tstamp/>
+		<mkdir dir="${build.dir}"/>
+		<javac srcdir="${source.dir}" destdir="${build.dir}" debug="${debug}" excludesfile="compile-excludes">
+			<classpath refid="lib"/>
+		</javac>
+	</target>
+
+	<target name="buildinfo" depends="compile">
+		<propertyfile file="${build.info}"
+		 comment="Build Information File - DO NOT MODIFY">
+		    <entry key="version"
+		     value="${version}"/>
+		    <entry key="build"
+		     type="int" default="0000"
+		     operation="+" pattern="0000"/>
+		</propertyfile>		
+	    <property file="${build.info}"/>
+	</target>
+
+	<target name="preparedist" depends="buildinfo">
+		<mkdir dir="${redist.dir}"/>
+	</target>
+	
+	<manifestclasspath property="lib.list" jarfile="${jar.file}">
+		<classpath refid="lib" />
+	</manifestclasspath>
+	
+	<target name="redist" depends="preparedist">
+		<jar jarfile="${redist.dir}/${jar.file}">
+		<fileset dir="${build.dir}"/>
+			<manifest>
+				<attribute name="Main-Class" value="net.sourceforge.olympos.oaw.Generator"/>
+				<attribute name="wCMFGenerator-Version" value="${version}.${build}"/>
+				<attribute name="Class-Path" value=". ${lib.list}"/>
+		   </manifest>
+		</jar>
+
+		<!-- copy all libs ... -->
+		<copy todir="${redist.libdir}" verbose="false">
+			<fileset dir="${lib.dir}">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+
+		<!-- copy all files ... -->
+		<copy todir="${redist.dir}/" verbose="false">
+			<fileset dir="${source.dir}">
+				<include name="cartridge/**/*.*"/>
+				<include name="common/**/*.*"/>
+				<include name="metamodel/**/*.*"/>
+				<include name="workflow/**/*.*"/>
+			</fileset>
+			<fileset dir=".">
+				<include name="example-data/**/*.*"/>
+			</fileset>
+		</copy>
+		<copy file="${res.dir}/run.bat" todir="${redist.dir}"/>
+		<copy file="${build.info}" todir="${redist.dir}"/>
+
+		<zip destfile="${zip.dir}/ChronosGenerator-${version}.zip" basedir="${redist.dir}"/>
+	</target>
+
+</project>
