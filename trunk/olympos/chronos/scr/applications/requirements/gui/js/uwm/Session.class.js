@@ -16,7 +16,7 @@
 uwm.Session = function() {
 	this.sid = null;
 	this.jsonUrl = uwm.Config.jsonUrl;
-	this.helpUrl = "help/index.html";
+	this.helpUrl = "welcome/welcome.html";
 	this.persistencyClass = "uwm.persistency.Json";
 	this.lang = "en";
 }
