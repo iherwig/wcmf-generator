@@ -39,7 +39,7 @@ class UwmUtil {
 		self::$dom->openURI($tmpUwmExportPath);
 		self::$dom->startDocument(self::XML_VERSION, self::ENCODING, self::STANDALONE);
 	
-		self::$dom->startElement("UwmExport");
+		self::$dom->startElement("CwmExport");
 	
 		self::$persistenceFacade = PersistenceFacade::getInstance();
 	
