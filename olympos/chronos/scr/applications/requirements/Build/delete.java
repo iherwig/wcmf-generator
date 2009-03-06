@@ -7,11 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class delete {
-
-	/**
-	 * @param args
-	 * @throws IOException
-	 */
 	public static void main(String[] args) throws IOException {
 		String listPath = "delList.ini";
 		FileInputStream listStream = new FileInputStream(listPath);
@@ -23,9 +18,20 @@ public class delete {
 			if (file == null) {
 				System.exit(0);
 			}
-			String delPath = "c:\\temp\\" + file;
+			String delPath = "c:\\temp\\cwm\\" + file;
 			File delFile = new File(delPath);
-			delFile.delete();
+			delete(delFile);
 		}
 	}
+	public static void delete(File delFile) {
+        if (delFile.isDirectory()) {
+            String[] children = delFile.list();
+            for (int i=0; i<children.length; i++) {
+            	File child=new File(delFile, children[i]);
+                delete(child);
+            }
+            
+        }
+        delFile.delete();
+    } 
 }

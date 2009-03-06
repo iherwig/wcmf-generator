@@ -38,14 +38,14 @@ public class batchgen {
 				inuwm=false;
 			}
 			if(inuwm){
-				line=line.replaceAll("<script type=\"text/javascript\" src=\"", "for %%f in (c:\\\\temp\\\\gui\\\\");
+				line=line.replaceAll("<script type=\"text/javascript\" src=\"", "for %%f in (c:\\\\temp\\\\cwm\\\\gui\\\\");
 				line=line.replaceAll("\">", ") do call mergeuwm.bat \"%%f\"");
 				line=line.replaceAll("</script>", "");
 				line=line.replaceAll("/", "\\\\");
 				bw.write(line);
 				bw.newLine();
 			}else if(incwm){
-				line=line.replaceAll("<script type=\"text/javascript\" src=\"", "for %%f in (c:\\\\temp\\\\gui\\\\");
+				line=line.replaceAll("<script type=\"text/javascript\" src=\"", "for %%f in (c:\\\\temp\\\\cwm\\\\gui\\\\");
 				line=line.replaceAll("\">", ") do call mergecwm.bat \"%%f\"");
 				line=line.replaceAll("</script>", "");
 				line=line.replaceAll("/", "\\\\");
