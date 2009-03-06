@@ -9,14 +9,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class setDebug {
-
-	/**
-	 * @param args
-	 * @throws IOException
-	 */
 	public static void main(String[] args) throws IOException {
-		String configPath = "c:\\temp\\gui\\js\\uwm\\Config.js";
-		String targetPath = "c:\\temp\\gui\\js\\uwm\\ConfigNew.js";
+		String configPath = "c:\\temp\\cwm\\gui\\js\\uwm\\Config.js";
+		String targetPath = "c:\\temp\\cwm\\gui\\js\\uwm\\ConfigNew.js";
 		FileInputStream configStream = new FileInputStream(configPath);
 		DataInputStream configData = new DataInputStream(configStream);
 
