@@ -23,6 +23,7 @@ uwm.ui.HelpViewer = function(config) {
 		closable: true,
 		title: uwm.Dict.translate('Documentation Viewer'),
 		autoDestroy: false,
+		autoShow: true,
 		isHelpViewer: true,
 		html: "<iframe id='" + uwm.ui.HelpViewer.IFRAME_ID + "' class='uwm-helpViewer-frame' src='" + uwm.Session.getInstance().getHelpUrl() + "'/>"
 	}, config));
@@ -34,10 +35,17 @@ uwm.ui.HelpViewer.prototype.loadUrl = function(url) {
 	var tabPanel = uwm.diagram.DiagramContainer.getInstance().getTabPanel();
 	
 	var tab = tabPanel.findById(this.getItemId());
+	
 	if (!tab) {
+		var tempTab=new Ext.Panel();
 		tab = tabPanel.add(this);
+		tabPanel.add(tempTab);
+		tabPanel.activate(tempTab);
 	}
 	tabPanel.activate(tab);
+	if(tempTab){
+		tabPanel.remove(tempTab);
+	}	//TODO: Unsatisfying solution for Help-does-not-show-up problem when there is no other panel. A better one would be welcome. 
 
 	var iframe = Ext.get(uwm.ui.HelpViewer.IFRAME_ID);
 	if (!iframe) {
