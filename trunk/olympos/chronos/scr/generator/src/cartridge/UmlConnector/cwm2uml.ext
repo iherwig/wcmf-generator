@@ -1,0 +1,19 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension cartridge::UmlConnector::objects::Package;
+
+uml::Model createUmlModel(String modelName, cwm::CwmExport export, uml::Profile chronosProfile):
+	//(new uml::Model).app
+	let um = new uml::Model : (
+		um.setName(modelName) ->
+		um.applyProfile(chronosProfile) ->
+		um.nestedPackage.addAll(export.model.package.convert())
+	) ->
+	export.model.package.establishConnections(um) ->
+	export.model.package.transferValues(um) ->
+	um
+;

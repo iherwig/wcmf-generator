@@ -1,0 +1,60 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+
+uml::Actor convert(cwm::ChiBusinessPartner b):
+	let uc = new uml::Actor : {
+		uc.setName("ChiBusinessPartner:" + b.id)
+	} ->
+	uc
+;
+
+Void establishConnections(cwm::ChiBusinessPartner b, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiBusinessPartner:" + b.id).first(): (
+		b.manyToMany.select(e|e.targetType == "ChiBusinessUseCase").establishConnectionsToUseCase(uc, um, "participates in", uml::AggregationKind::none, uml::AggregationKind::none, true, false) ->
+		b.manyToMany.select(e|e.targetType == "ChiBusinessUseCaseCore").establishConnectionsToUseCase(uc, um, "participates in", uml::AggregationKind::none, uml::AggregationKind::none, true, false) ->
+		b.child.select(e|e.targetType == "ChiBusinessPartnerActive").establishGeneralizationToActor(uc, um) ->
+		b.child.select(e|e.targetType == "ChiBusinessPartner").establishGeneralizationToActor(uc, um) ->
+		b.child.select(e|e.targetType == "ChiBusinessPartnerPassive").establishGeneralizationToActor(uc, um)
+	)
+;
+
+Void transferValues(cwm::ChiBusinessPartner c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiBusinessPartner:" + c.id).first(): {
+		uc.applyStereotype("Chronos::ChiBusinessPartner") ->
+		uc.setTaggedValue("Chronos::ChiBusinessPartner", "Alias", c.alias) ->
+		uc.setTaggedValue("Chronos::ChiBusinessPartner", "Version", c.version) ->
+		uc.setName(c.name) ->
+		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
+		uc.setTaggedValue("Chronos::ChiBusinessPartner", "created", c.created) ->
+		uc.setTaggedValue("Chronos::ChiBusinessPartner", "creator", c.creator) ->
+		uc.setTaggedValue("Chronos::ChiBusinessPartner", "last_editor", c.lastEditor) ->
+		uc.setTaggedValue("Chronos::ChiBusinessPartner", "modified", c.modified)
+	}
+;
+
+cwm::ChiBusinessPartner convertToCwm(Chronos::ChiBusinessPartner c) :
+	let un = new cwm::ChiBusinessPartner : (
+		un.setId(c.getId()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiBusinessPartner", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiBusinessPartner", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiBusinessPartner", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiBusinessPartner", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiBusinessPartner", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiBusinessPartner", "modified").toString()) ->
+
+		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiBusinessUseCase).convertToMany()) ->
+		un.child.addAll(c.getGenerals().convertToChild())
+	) ->
+	un
+;

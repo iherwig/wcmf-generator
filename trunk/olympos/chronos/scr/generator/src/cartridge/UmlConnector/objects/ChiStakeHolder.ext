@@ -1,0 +1,52 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+uml::Actor convert(cwm::ChiStakeHolder s):
+	let uc = new uml::Actor : {
+		uc.setName("Chi:StakeHolder" + s.id)
+	} ->
+	uc
+;
+
+Void transferValues(cwm::ChiStakeHolder c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiStakeHolder:" + c.id).first(): {
+		uc.applyStereotype("Chronos::ChiStakeHolder") ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "Power", c.power) ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "Legitimacy", c.legitimacy) ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "Role", c.role) ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "Urgency", c.urgency) ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "Alias", c.alias) ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "Version", c.version) ->
+		uc.setName(c.name) ->
+		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "created", c.created) ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "creator", c.creator) ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "last_editor", c.lastEditor) ->
+		uc.setTaggedValue("Chronos::ChiStakeHolder", "modified", c.modified)
+	}
+;
+
+cwm::ChiStakeHolder convertToCwm(Chronos::ChiStakeHolder c) :
+	let un = new cwm::ChiStakeHolder : (
+		un.setId(c.getId()) ->
+		un.setPower(c.getTaggedValue("Chronos::ChiStakeHolder", "Power").toString()) ->
+		un.setLegitimacy(c.getTaggedValue("Chronos::ChiStakeHolder", "Legitimacy").toString()) ->
+		un.setRole(c.getTaggedValue("Chronos::ChiStakeHolder", "Role").toString()) ->
+		un.setUrgency(c.getTaggedValue("Chronos::ChiStakeHolder", "Urgency").toString()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiStakeHolder", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiStakeHolder", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiStakeHolder", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiStakeHolder", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiStakeHolder", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiStakeHolder", "modified").toString())
+	) ->
+	un
+;

@@ -1,0 +1,29 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+uml::Class convert(cwm::ChiManyToMany m):
+	let uc = new uml::Class : {
+		uc.setName("ChiManyToMany:" + m.id)
+	} ->
+	uc
+;
+
+Void transferValues(cwm::ChiManyToMany c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiManyToMany:" + c.id).first(): {
+		uc.applyStereotype("Chronos::ChiManyToMany") ->
+		uc.setTaggedValue("Chronos::ChiManyToMany", "Alias", c.alias) ->
+		uc.setTaggedValue("Chronos::ChiManyToMany", "Version", c.version) ->
+		uc.setName(c.name) ->
+		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
+		uc.setTaggedValue("Chronos::ChiManyToMany", "created", c.created) ->
+		uc.setTaggedValue("Chronos::ChiManyToMany", "creator", c.creator) ->
+		uc.setTaggedValue("Chronos::ChiManyToMany", "last_editor", c.lastEditor) ->
+		uc.setTaggedValue("Chronos::ChiManyToMany", "modified", c.modified)
+	}
+;

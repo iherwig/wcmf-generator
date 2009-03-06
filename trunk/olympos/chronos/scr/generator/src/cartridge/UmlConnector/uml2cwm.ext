@@ -1,0 +1,22 @@
+import Chronos;
+import uml;
+import cwm;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::objects::Package;
+
+cwm::CwmExport createCwmModel(String modelName, uml::Model model):
+	//(new cwm::Model).set
+	let export = new cwm::CwmExport : (
+		let cwmModel = new cwm::Model : (
+			cwmModel.setId(model.getId()) ->
+			cwmModel.setName(modelName) ->
+			cwmModel.package.addAll(model.nestedPackage.convertToCwm())
+		) ->
+		export.model.add(cwmModel)
+	) ->
+	export
+;

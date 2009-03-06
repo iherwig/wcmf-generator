@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" version="1.0">
+	<xsd:complexType name="ChiRequirement">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chirequirement_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chigoal_id" type="xsd:string"/>
+		<xsd:attribute name="reqType" type="xsd:string"/>
+		<xsd:attribute name="Priority" type="xsd:int"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
+		<xsd:attribute name="Proofreader" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiFeature">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
+		<xsd:attribute name="Proofreader" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiGoal">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chigoal_id" type="xsd:string"/>
+		<xsd:attribute name="Priority" type="xsd:int"/>
+		<xsd:attribute name="GoalType" type="xsd:string"/>
+		<xsd:attribute name="Value_Name" type="xsd:string"/>
+		<xsd:attribute name="Value_ammount" type="xsd:string"/>
+		<xsd:attribute name="Value_Goal" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Diagram">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Width" type="xsd:string"/>
+		<xsd:attribute name="Height" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiIssue">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chirequirement_id" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
+		<xsd:attribute name="Responsible" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiWorkerExternal">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="is_OfflineUser" type="xsd:boolean"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiBusinessProcess">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiBusinessUseCase">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivitySet" type="ActivitySet"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chibusinessprocess_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chifeature_id" type="xsd:string"/>
+		<xsd:attribute name="GoalInContext" type="xsd:string"/>
+		<xsd:attribute name="Precondition" type="xsd:string"/>
+		<xsd:attribute name="Trigger" type="xsd:string"/>
+		<xsd:attribute name="Scope" type="xsd:string"/>
+		<xsd:attribute name="Level" type="xsd:string"/>
+		<xsd:attribute name="PrimaryActor" type="xsd:string"/>
+		<xsd:attribute name="OtherActors" type="xsd:string"/>
+		<xsd:attribute name="Stakeholders" type="xsd:string"/>
+		<xsd:attribute name="MainSuccessScenario" type="xsd:string"/>
+		<xsd:attribute name="Extensions" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiBusinessUseCaseCore">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivitySet" type="ActivitySet"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chibusinessprocess_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chifeature_id" type="xsd:string"/>
+		<xsd:attribute name="GoalInContext" type="xsd:string"/>
+		<xsd:attribute name="Precondition" type="xsd:string"/>
+		<xsd:attribute name="Trigger" type="xsd:string"/>
+		<xsd:attribute name="Scope" type="xsd:string"/>
+		<xsd:attribute name="Level" type="xsd:string"/>
+		<xsd:attribute name="PrimaryActor" type="xsd:string"/>
+		<xsd:attribute name="OtherActors" type="xsd:string"/>
+		<xsd:attribute name="Stakeholders" type="xsd:string"/>
+		<xsd:attribute name="MainSuccessScenario" type="xsd:string"/>
+		<xsd:attribute name="Extensions" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiStakeHolder">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="Power" type="xsd:string"/>
+		<xsd:attribute name="Legitimacy" type="xsd:string"/>
+		<xsd:attribute name="Role" type="xsd:string"/>
+		<xsd:attribute name="Urgency" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiOpinionInner">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiOpinion">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiAccord">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiDiscord">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiAction">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiActionKey">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="action" type="xsd:string"/>
+		<xsd:attribute name="context" type="xsd:string"/>
+		<xsd:attribute name="config" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ActivitySet">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Activity" type="Activity"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivityDecision" type="ActivityDecision"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivityInitial" type="ActivityInitial"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivityFinal" type="ActivityFinal"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivitySend" type="ActivitySend"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivityReceive" type="ActivityReceive"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_chibusinessusecasecore_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chibusinessusecase_id" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Activity">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activityinitial_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activityreceive_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ActivityInitial">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ActivityFinal">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ActivityDecision">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ActivitySend">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ActivityReceive">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
+		<xsd:attribute name="fk_activitysend_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiManyToMany">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiRelationEnd">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_name" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiBusinessPartner">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiBusinessPartnerActive">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiBusinessPartnerPassive">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiWorker">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiWorkerInternal">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiNode">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiValue" type="ChiValue"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Operation" type="Operation"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="table_name" type="xsd:string"/>
+		<xsd:attribute name="pk_name" type="xsd:string"/>
+		<xsd:attribute name="orderby" type="xsd:string"/>
+		<xsd:attribute name="parent_order" type="xsd:string"/>
+		<xsd:attribute name="child_order" type="xsd:string"/>
+		<xsd:attribute name="display_value" type="xsd:string"/>
+		<xsd:attribute name="is_soap" type="xsd:boolean"/>
+		<xsd:attribute name="is_searchable" type="xsd:boolean"/>
+		<xsd:attribute name="initparams" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chicontroller_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiValueRef">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_chivalue_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiValue">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_chinode_id" type="xsd:string"/>
+		<xsd:attribute name="app_data_type" type="xsd:string"/>
+		<xsd:attribute name="db_data_type" type="xsd:string"/>
+		<xsd:attribute name="is_editable" type="xsd:boolean"/>
+		<xsd:attribute name="input_type" type="xsd:string"/>
+		<xsd:attribute name="display_type" type="xsd:string"/>
+		<xsd:attribute name="restrictions_match" type="xsd:string"/>
+		<xsd:attribute name="restrictions_not_match" type="xsd:string"/>
+		<xsd:attribute name="restrictions_description" type="xsd:string"/>
+		<xsd:attribute name="column_name" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Operation">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_chinode_id" type="xsd:string"/>
+		<xsd:attribute name="ReturnType" type="xsd:string"/>
+		<xsd:attribute name="Parameters" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiSystem">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="platform" type="xsd:string"/>
+		<xsd:attribute name="config" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiController">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ChiView">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Package">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Diagram" type="Diagram">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiIssue" type="ChiIssue">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiRequirement" type="ChiRequirement">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiFeature" type="ChiFeature">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiGoal" type="ChiGoal">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiWorkerExternal" type="ChiWorkerExternal">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiBusinessProcess" type="ChiBusinessProcess">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiBusinessUseCase" type="ChiBusinessUseCase">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiBusinessUseCaseCore" type="ChiBusinessUseCaseCore">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiAccord" type="ChiAccord">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiAction" type="ChiAction">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiActionKey" type="ChiActionKey">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Activity" type="Activity">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivityInitial" type="ActivityInitial">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivityFinal" type="ActivityFinal">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivityDecision" type="ActivityDecision">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivitySend" type="ActivitySend">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivityReceive" type="ActivityReceive">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiBusinessPartner" type="ChiBusinessPartner">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiBusinessPartnerActive" type="ChiBusinessPartnerActive">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiBusinessPartnerPassive" type="ChiBusinessPartnerPassive">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiController" type="ChiController">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiDiscord" type="ChiDiscord">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiManyToMany" type="ChiManyToMany">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiNode" type="ChiNode">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiOpinion" type="ChiOpinion">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiOpinionInner" type="ChiOpinionInner">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiRelationEnd" type="ChiRelationEnd">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiStakeHolder" type="ChiStakeHolder">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiSystem" type="ChiSystem">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiValueRef" type="ChiValueRef">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiView" type="ChiView">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiWorker" type="ChiWorker">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiWorkerInternal" type="ChiWorkerInternal">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Package" type="Package">
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_model_id" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Model">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Package" type="Package">
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="CwmExport">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Model" type="Model">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="CwmExport" type="CwmExport">
+	</xsd:element>
+
+	<xsd:complexType name="ManyToMany">
+		<xsd:attribute name="targetType" type="xsd:string"/>
+		<xsd:attribute name="targetOid" type="xsd:string"/>
+		<xsd:attribute name="targetRole" type="xsd:string"/>
+		<xsd:attribute name="relationType" type="xsd:string"/>
+		<xsd:attribute name="sourceMultiplicity" type="xsd:string"/>
+		<xsd:attribute name="sourceNavigability" type="xsd:string"/>
+		<xsd:attribute name="targetMultiplicity" type="xsd:string"/>
+		<xsd:attribute name="targetNavigability" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Child">
+		<xsd:attribute name="targetType" type="xsd:string"/>
+		<xsd:attribute name="targetOid" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="Parent">
+		<xsd:attribute name="targetType" type="xsd:string"/>
+		<xsd:attribute name="targetOid" type="xsd:string"/>
+	</xsd:complexType>
+
+</xsd:schema>

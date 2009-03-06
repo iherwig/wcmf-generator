@@ -1,0 +1,83 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connectionsToCwm;
+
+extension cartridge::UmlConnector::objects::ActivitySet;
+
+uml::UseCase convert(cwm::ChiBusinessUseCaseCore b):
+	let uc = new uml::UseCase : {
+		uc.setName("ChiBusinessUseCaseCore:" + b.id) ->
+		uc.ownedBehavior.addAll(b.activitySet.convert())
+	} ->
+	uc
+;
+
+Void establishConnections(cwm::ChiBusinessUseCaseCore b, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::UseCase).select(e|e.name == "ChiBusinessUseCaseCore:" + b.id).first(): {
+		b.activitySet.establishConnections(um)
+
+		//b.child.select(e|e.targetType == "ChiWorkerExternal").establishConnectionsToActor(uc, um, uml::AggregationKind::none, uml::AggregationKind::none, true, false)
+	}
+;
+
+Void transferValues(cwm::ChiBusinessUseCaseCore b, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::UseCase).select(e|e.name == "ChiBusinessUseCaseCore:" + b.id).first(): {
+		b.activitySet.transferValues(um)->
+
+		uc.applyStereotype("Chronos::ChiBusinessUseCaseCore") ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "GoalInContext", b.goalInContext) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "Precondition", b.precondition) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "Trigger", b.trigger) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "Scope", b.scope) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "Level", b.level) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "PrimaryActor", b.primaryActor) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "OtherActors", b.otherActors) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "Stakeholders", b.stakeholders) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "MainSuccessScenario", b.mainSuccessScenario) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "Extensions", b.extensions) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "Alias", b.alias) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "Version", b.version) ->
+		uc.setName(b.name) ->
+		b.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(b.notes))) : Void ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "created", b.created) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "creator", b.creator) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "last_editor", b.lastEditor) ->
+		uc.setTaggedValue("Chronos::ChiBusinessUseCaseCore", "modified", b.modified)
+	}
+;
+
+cwm::ChiBusinessUseCaseCore convertToCwm(Chronos::ChiBusinessUseCaseCore c) :
+	let un = new cwm::ChiBusinessUseCaseCore : (
+		un.activitySet.addAll(c.ownedBehavior.typeSelect(uml::Activity).convertToCwm()) ->
+
+		un.setId(c.getId()) ->
+		un.setGoalInContext(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "GoalInContext").toString()) ->
+		un.setPrecondition(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "Precondition").toString()) ->
+		un.setTrigger(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "Trigger").toString()) ->
+		un.setScope(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "Scope").toString()) ->
+		un.setLevel(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "Level").toString()) ->
+		un.setPrimaryActor(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "PrimaryActor").toString()) ->
+		un.setOtherActors(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "OtherActors").toString()) ->
+		un.setStakeholders(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "Stakeholders").toString()) ->
+		un.setMainSuccessScenario(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "MainSuccessScenario").toString()) ->
+		un.setExtensions(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "Extensions").toString()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiBusinessUseCaseCore", "modified").toString()) ->
+
+		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiWorkerExternal).convertToChild())
+	) ->
+	un
+;
