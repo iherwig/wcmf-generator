@@ -405,11 +405,45 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject)
 	}
 }
 
+uwm.diagram.AbstractDiagram.prototype.reestablishConnections = function(newObject) {
+	this.establishExistingConnections(newObject, newObject.parentOids, 'parent');
+	this.establishExistingConnections(newObject, newObject.childOids, 'child');
+	var oid = newObject.getOid();
+	for (var i in this.objects.items) {
+		var object = this.objects.items[i];
+		if (!(object instanceof Function)) {
+			if (object.parentOids) {
+				for (var j = 0; j < object.parentOids.length; j++) {
+					if (object.parentOids[j] == oid) {
+						var list = new Array();
+						list.push(object.parentOids[j])
+						this.establishExistingConnections(object, list, 'parent');
+					}
+				}
+			}
+			if (object.childOids) {
+				for (var k = 0; k < object.childOids.length; k++) {
+					if (object.childOids[k] == oid) {
+						var list = new Array();
+						list.push(object.childOids[k]);
+						this.establishExistingConnections(object, list, 'child');
+					}
+				}
+			}
+		}
+	}
+}
+
 uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(newObject, list, listtype) {
 
 	if (list) {
 		for (var i = 0; i < list.length; i++) {
-			var connectedObject = this.objects.get(list[i]);
+			var connectedObject;
+			for (j in this.objects.items){
+				if (this.objects.items[j].oid==list[i]){
+					connectedObject=this.objects.items[j];
+				}
+			}
 			
 			if (!connectedObject) {
 				var childObject = uwm.model.ModelContainer.getInstance().getByOid(list[i]);
@@ -499,12 +533,10 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		endPort = targetPort;
 	}
 	
-	var connection = new uwm.graphics.connection.BaseConnection(
-			connectionInfo.label, decorators);
-
+	var connection = new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators);
+	
 	if (!noCommand) {
-		var command = new draw2d.CommandConnect(this.workflow, startPort,
-				endPort);
+		var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
 		command.connectionInfo = connectionInfo;
 		command.setConnection(connection);
 		this.workflow.getCommandStack().execute(command);
@@ -654,6 +686,11 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 
 	var self = this;
 	
+	if (!this.objects.get(modelObject.getOid())){
+		this.objects.items.push(modelObject);
+		this.objects.keys.push(modelObject.getOid());
+	}
+	
 	var actionSet = new uwm.persistency.ActionSet();
 	
 	uwm.model.ModelContainer.getInstance().loadByOid(modelObject.getOid(), actionSet, 1);
@@ -672,8 +709,9 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 		
 		self.figures.add(modelObject.getOid(), newFigureNode);
 		
-		self.establishExistingConnections(modelObject, modelObject.getParentOids(), 'parent');
-		self.establishExistingConnections(modelObject, modelObject.getChildOids(), 'child');
+		self.reestablishConnections(modelObject);
+		//self.establishExistingConnections(modelObject, modelObject.getParentOids(), 'parent');
+		//self.establishExistingConnections(modelObject, modelObject.getChildOids(), 'child');
 		
 		self.dropWindow.destroy();
 	});
@@ -737,16 +775,15 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, 
 		
 		savedFigureNode = newFigureNode;
 	});
-
+	
 	/*
 	 actionSet.addSave("{last_created_oid:Figure}", {
-		PositionX :x,
-		PositionY :y,
-		Width :modelClass.getInitialWidth(),
-		Height :modelClass.getInitialHeight()
-	});
-	*/
-
+	 PositionX :x,
+	 PositionY :y,
+	 Width :modelClass.getInitialWidth(),
+	 Height :modelClass.getInitialHeight()
+	 });
+	 */
 	actionSet.addAssociate("{last_created_oid:Figure}", "{last_created_oid:" +
 	modelClass.getUwmClassName() +
 	"}", function(request, data) {
