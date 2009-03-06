@@ -6,7 +6,8 @@
 	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Win32)">
 	<META NAME="AUTHOR" CONTENT="giuseppe platania">
 	<META NAME="CREATED" CONTENT="20090302;19131300">
-	<META NAME="CHANGED" CONTENT="20090302;22063500">
+	<META NAME="CHANGEDBY" CONTENT="giuseppe platania">
+	<META NAME="CHANGED" CONTENT="20090306;17162800">
 	<META NAME="Info 1" CONTENT="">
 	<META NAME="Info 2" CONTENT="">
 	<META NAME="Info 3" CONTENT="">
@@ -42,11 +43,33 @@
 		TH P.western { font-family: "Times New Roman", serif; font-size: 12pt; so-language: en-US }
 		TH P.cjk { font-family: "Arial Unicode MS", sans-serif; font-size: 12pt; so-language: zxx }
 		TH P.ctl { font-family: "Tahoma"; font-size: 12pt; so-language: zxx }
+		P.sdfootnote-western { margin-left: 0.5cm; text-indent: -0.5cm; margin-bottom: 0cm; font-family: "Times New Roman", serif; font-size: 10pt; so-language: en-US }
+		P.sdfootnote-cjk { margin-left: 0.5cm; text-indent: -0.5cm; margin-bottom: 0cm; font-family: "Arial Unicode MS", sans-serif; font-size: 10pt; so-language: zxx }
+		P.sdfootnote-ctl { margin-left: 0.5cm; text-indent: -0.5cm; margin-bottom: 0cm; font-family: "Tahoma"; font-size: 10pt; so-language: zxx }
 		A:link { so-language: zxx }
+		A.sdfootnoteanc { font-size: 57% }
 	-->
 	</STYLE>
 </HEAD>
 <BODY LANG="de-DE" TEXT="#000000" BGCOLOR="#ffffff" DIR="LTR">
+<DIV ID="divTranscript" DIR="LTR" STYLE="position: absolute; top: 0cm; left: 0cm; width: 22.15cm; height: 3.76cm; border: none; padding: 0cm; background: #ffffff">
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Tahoma"><FONT SIZE=1 STYLE="font-size: 8pt">Each
+	object class contains information defining how many connections may
+	be drawn to other objects of certain class. When a new connection is
+	created, the existing connections the objects have to other objects
+	of the same kind are counted. The connection may only be created if
+	the resulting number is lower than the number of allowed
+	connections.</FONT></FONT></P>
+</DIV>
+<DIV ID="divTranscript1" DIR="LTR" STYLE="position: absolute; top: 0cm; left: 0cm; width: 22.15cm; height: 3.76cm; border: none; padding: 0cm; background: #ffffff">
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Tahoma"><FONT SIZE=1 STYLE="font-size: 8pt">Each
+	object class contains information defining how many connections may
+	be drawn to other objects of certain class. When a new connection is
+	created, the existing connections the objects have to other objects
+	of the same kind are counted. The connection may only be created if
+	the resulting number is lower than the number of allowed
+	connections.</FONT></FONT></P>
+</DIV>
 <P LANG="en-US" ALIGN=CENTER STYLE="margin-top: 0.42cm; background: transparent; page-break-after: avoid">
 <FONT FACE="Arial, sans-serif"><FONT SIZE=6><B>Chronos Web Modeler</B></FONT></FONT></P>
 <P LANG="en-US" CLASS="western"><BR><BR>
@@ -132,6 +155,26 @@ document describes the usage of the application.</P>
 	   ChiBusinessUseCase</A></P>
 	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.7.ChiWorkerExternal|outline">4.7
 	   ChiWorkerExternal</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.8.Chi Business Partner|outline">4.8
+	   Chi Business Partner</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.9.Chi Business partner Active|outline">4.9
+	   Chi Business partner Active</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.10.Chi Passive Business Partner|outline">4.10
+	   Chi Passive Business Partner</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.11.ChiWorker|outline">4.11
+	   ChiWorker</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.12.ChiWorkerExternal|outline">4.12
+	   ChiWorkerExternal</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.13.ChiWorkerInternal|outline">4.13
+	   ChiWorkerInternal</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.14.ChiNode|outline">4.14
+	   ChiNode</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.15.ChiValue|outline">4.15
+	   ChiValue</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.16.ChiController|outline">4.16
+	   ChiController</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.17.ChiView|outline">4.17
+	   ChiView</A></P>
 	<P LANG="en-US" STYLE="margin-bottom: 0.1cm"><A HREF="#5.Howto|outline">5
 	 Howto</A></P>
 	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#5.1.Get started|outline">5.1
@@ -202,7 +245,7 @@ document describes the usage of the application.</P>
 	only browser with extensive test coverage is Firefox 3. Occasional
 	tests with other modern browsers show no principal
 	incompatibilities. If you decide to use others browser you can face
-	errors or erratical behaviour.</P>
+	errors or erratical behavior.</P>
 	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="2.Terminology|outline"></A>
 	2 Terminology</H1>
 	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
@@ -1415,7 +1458,19 @@ document describes the usage of the application.</P>
 					<P LANG="en-US" CLASS="western">Connects the two model objects.
 					Only available if the two model object types are connected by
 					the metamodel. Connection direction is automatically reversed if
-					required.</P>
+					required. 
+					</P>
+					<P LANG="en-US" CLASS="western">Each object  contains
+					information defining how many connections may be drawn to other
+					objects of certain type. When a new connection is created, the
+					existing connections that the objects has to other objects of
+					the same kind are counted. The connection may only be created if
+					the resulting number is lower than the number of allowed
+					connections.</P>
+					<P LANG="en-US" CLASS="western"><BR>
+					</P>
+					<P LANG="en-US" CLASS="western"><BR>
+					</P>
 				</TD>
 			</TR>
 			<TR VALIGN=TOP>
@@ -2409,6 +2464,8 @@ document describes the usage of the application.</P>
 	Business Process is a sum of actions that produces a business
 	advantage to the enterprise. It is <I>composed by</I> one or many
 	ChiBusinessUseCases</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
 	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">At
 	lease one </SPAN>ChiBusinessUseCases or ChiBusinessUseCasesCore must
@@ -2732,6 +2789,1007 @@ document describes the usage of the application.</P>
 	</TABLE>
 	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 	</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.8.Chi Business Partner|outline"></A>
+	4.8 Chi Business Partner</H2>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m5b713bd1.gif" NAME="Grafik35" ALIGN=BOTTOM WIDTH=29 HEIGHT=56 BORDER=0><SPAN LANG="en-GB"><BR></SPAN><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	</SPAN>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
+	ChiBusinesPartner is an external person that has a Business relation
+	with the enterprise.</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">A
+	business partner must be linked to or more business cases.</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
+	Values:</B></P>
+	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=220>
+		<COL WIDTH=229>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Key</P>
+				</TD>
+				<TD WIDTH=220 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Notice</P>
+				</TD>
+				<TD WIDTH=229 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Value</P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Example</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>MDA
+	Realization:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">HTML
+	documentation is generated. Model is validated against above rule.</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.9.Chi Business partner Active|outline"></A>
+	4.9 Chi Business partner Active</H2>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_b3db2f4.gif" NAME="Grafik36" ALIGN=BOTTOM WIDTH=30 HEIGHT=56 BORDER=0></P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	</SPAN>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
+	ChiBusinesPartnerActive is a direct customer of the enterprise.</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<UL>
+		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Can
+		initiate a Use case</P>
+		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Can
+		have direct access to the system.</P>
+	</UL>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
+	Values:</B></P>
+	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=220>
+		<COL WIDTH=229>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Key</P>
+				</TD>
+				<TD WIDTH=220 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Notice</P>
+				</TD>
+				<TD WIDTH=229 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Value</P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.10.Chi Passive Business Partner|outline"></A>
+	4.10 Chi Passive Business Partner</H2>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_1d15e926.gif" NAME="Grafik37" ALIGN=BOTTOM WIDTH=26 HEIGHT=56 BORDER=0></P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	</SPAN>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
+	ChiBusinesPartnerPassive is an indirect customer (typically a
+	supplier) of the enterprise.</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<UL>
+		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Cannot
+		initiate a Use case.</P>
+		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Has
+		never direct access to the system.</P>
+	</UL>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.11.ChiWorker|outline"></A>
+	4.11 ChiWorker</H2>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_4c8aaa33.gif" NAME="Grafik38" ALIGN=BOTTOM WIDTH=71 HEIGHT=71 BORDER=0></P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	</SPAN><FONT COLOR="#0000ff"><FONT FACE="Courier New, monospace"><SPAN LANG="en-GB">A
+	ChiWorker is a special actor that works within the enterprise.</SPAN></FONT></FONT><SPAN LANG="en-GB">
+	</SPAN>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
+	Values:</B></P>
+	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=220>
+		<COL WIDTH=229>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Key</P>
+				</TD>
+				<TD WIDTH=220 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Notice</P>
+				</TD>
+				<TD WIDTH=229 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Value</P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Example</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>MDA
+	Realization:</B></P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.12.ChiWorkerExternal|outline"></A>
+	4.12 ChiWorkerExternal</H2>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m43e56a0e.gif" NAME="Grafik39" ALIGN=BOTTOM WIDTH=74 HEIGHT=71 BORDER=0></P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	</SPAN>A Chi External Worker is an employee that interacts directly
+	with ChiBusinessPartner outside the enterprise.</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
+	Values:</B></P>
+	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=220>
+		<COL WIDTH=229>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Key</P>
+				</TD>
+				<TD WIDTH=220 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Notice</P>
+				</TD>
+				<TD WIDTH=229 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Value</P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB"><SPAN STYLE="font-style: normal">OfflineUser</SPAN></SPAN></EM></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB"><SPAN STYLE="font-style: normal">Define
+					if the user require to have a offline access to the  system.</SPAN></SPAN></EM></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB">True|false</SPAN></EM></P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.13.ChiWorkerInternal|outline"></A>
+	4.13 ChiWorkerInternal</H2>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_54dc705e.gif" NAME="Grafik40" ALIGN=BOTTOM WIDTH=71 HEIGHT=76 BORDER=0></P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	</SPAN>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A Chi 
+	Worker Internal is an employee of the enterprise that has no contact
+	with Business partners.</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
+	Values:</B></P>
+	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=220>
+		<COL WIDTH=229>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Key</P>
+				</TD>
+				<TD WIDTH=220 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Notice</P>
+				</TD>
+				<TD WIDTH=229 BGCOLOR="#d9d9d9">
+					<P LANG="en-GB" CLASS="western">Value</P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.14.ChiNode|outline"></A>4.14 ChiNode</H2>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_26027cb1.gif" NAME="Grafik41" ALIGN=BOTTOM WIDTH=52 HEIGHT=71 BORDER=0></P>
+	<P STYLE="margin-top: 0.49cm; margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	The ChiNode represents a domain or Business Object type. ChiNodes
+	and ChiValues define the application data model. They describe the
+	identity and properties of the BO. Operations, apart common object
+	manipulation (CRUD), are included only if they govern exclusively
+	the access and modification of the considered ChiNode . </SPAN>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
+	Values:</B></P>
+	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=220>
+		<COL WIDTH=229>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+				</TD>
+				<TD WIDTH=220 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
+				</TD>
+				<TD WIDTH=229 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">table_name</FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+					name of the database table. If not given the name will be taken.</FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">pk_name</FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+					name of the primary key column. The Chronos generator will add
+					this.</FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">id</FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">is_ordered</FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Is
+					this type to be ordered in a list? Chi generates a sort key
+					ChiValue for this type if it is ordered.</FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">true|false</FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">initparams</FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+					configuration section that is used on initialization of the
+					corresponding mapper.</FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">database</FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">child_order</FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
+					order of the associated children e.g. for Enterprise:
+					Worker,Customer,Location</FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">display_value</FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
+					<FONT SIZE=2 STYLE="font-size: 9pt">The display value(s) of a
+					node separates by a pipe &ldquo;|</FONT></P>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm">&rdquo;
+					<FONT SIZE=2 STYLE="font-size: 9pt">e.g. for Enterprise:
+					name|AdminInfo/status|Info/status</FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">is_soap</FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Indicates
+					weather or not a SOAP interface should be generated for this
+					type.</FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">true|false</FONT></P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Example</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
+	<TABLE WIDTH=644 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=458>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+				</TD>
+				<TD WIDTH=458 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">table_name</FONT></P>
+				</TD>
+				<TD WIDTH=458>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">pk_name</FONT></P>
+				</TD>
+				<TD WIDTH=458>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">is_ordered</FONT></P>
+				</TD>
+				<TD WIDTH=458>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">initparams</FONT></P>
+				</TD>
+				<TD WIDTH=458>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">database</FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">child_order</FONT></P>
+				</TD>
+				<TD WIDTH=458>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Worker,Customer,Location</FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">display_value</FONT></P>
+				</TD>
+				<TD WIDTH=458>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name|AdminInfo/status|Info/status</FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">is_soap</FONT></P>
+				</TD>
+				<TD WIDTH=458>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Indicates
+					weather or not a SOAP interface should be generated for this
+					type.</FONT></P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>MDA
+	Realization:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Interpretation
+	 of Abstract</B></P>
+	<TABLE WIDTH=644 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=458>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Abstract
+					&ldquo;Value&rdquo;</B></FONT></P>
+				</TD>
+				<TD WIDTH=458 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Meaning</B></FONT></P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Public</FONT></P>
+				</TD>
+				<TD WIDTH=458>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class reppresent a domain object.</FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Private</FONT></P>
+				</TD>
+				<TD WIDTH=458>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class reppresent an object that is present only to transmit
+					properties trough ineritation. </FONT>
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Interpretation
+	 of Scope</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">The
+	standard property scope (Visibility) is interpreted by the generator
+	as following:</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<TABLE WIDTH=644 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=85>
+		<COL WIDTH=258>
+		<COL WIDTH=258>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=85 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+				</TD>
+				<TD WIDTH=258 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Meaning</B></FONT></P>
+				</TD>
+				<TD WIDTH=258 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>example</B></FONT></P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=85>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Public</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class reppresent a domain object. Is always visible.</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=85>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Private</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class reppresent a helper . Is destinated to be invisible. </FONT>
+					</P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm">
+					<FONT SIZE=2 STYLE="font-size: 9pt">object like &ldquo;figure&rdquo;
+					that is never visible in a tree</FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=85>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Protected</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class reppresent a domain Object . Is destinated to be visible
+					in certain situation only. </FONT>
+					</P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm">
+					<FONT SIZE=2 STYLE="font-size: 9pt">A ChiNode that reppresent an
+					enumeration like ChiRequiementStatus that is visible in a
+					separate User interface.</FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=85>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Package</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class reppresent a container .</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm">
+					<FONT SIZE=2 STYLE="font-size: 9pt">a ChiNode like &ldquo;Model&rdquo;
+					or  &ldquo;Package&rdquo; or diagramm </FONT>
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<H3 LANG="en-GB" CLASS="western" STYLE="font-weight: normal"></H3>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.15.ChiValue|outline"></A>
+	4.15 ChiValue</H2>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	</SPAN><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">A
+	ChiValue represent a property of a ChiNode. </FONT></FONT></FONT>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
+	Values:</B></P>
+	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=220>
+		<COL WIDTH=229>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+				</TD>
+				<TD WIDTH=220 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
+				</TD>
+				<TD WIDTH=229 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">initparams</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US" STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">The
+					attribute's application datatype</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote1anc" HREF="#sdfootnote1sym"><SUP>1</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.
+					This can be used in the application to group attributes and
+					execute special logic on them.</FONT></FONT></FONT></P>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">DATATYPE_DONTCARE,DATATYPE_ATTRIBUTE,DATATYPE_ELEMENT,DATATYPE_IGNORE</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">DATATYPE_ATTRIBUTE</FONT></FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">db_data_type</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US" STYLE="margin-bottom: 0cm"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">The
+					attribute's database type. This will be used  in the table
+					definition according to the database.</FONT></FONT></P>
+					<P LANG="en-US"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">e.g.
+					INT, VARCHAR, TEXT, ...</FONT></FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">is_editable</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">Declares,
+					if the attribute is editable in the UI. The backend can always
+					edit attributes.</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">true|false</FONT></FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">input_type</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">Definition
+					of the attribute's input control in the HTML form</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote2anc" HREF="#sdfootnote2sym"><SUP>2</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.</FONT></FONT></FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US" STYLE="margin-bottom: 0cm"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">text,
+					password, textarea, select, radio, checkbox, file, fileex,
+					fckeditor, filebrowser, linkbrowser, date</FONT></FONT></P>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">+
+					additional definitions (see Wiki)</FONT></FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">display_type</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">The
+					HTML display type for the attribute e.g. image</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote3anc" HREF="#sdfootnote3sym"><SUP>3</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.</FONT></FONT></FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">image,
+					text, links</FONT></FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">restrictions_match</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">Regular
+					expression, which must be matched by the attribute value</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote4anc" HREF="#sdfootnote4sym"><SUP>4</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.</FONT></FONT></FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">e.g.
+					'[0-3][0-9]\.[0-1][0-9]\.[0-9][0-9][0-9][0-9]' for date values</FONT></FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">restrictions_not_match</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">Regular
+					expression, which must not be matched by the attribute value</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote5anc" HREF="#sdfootnote5sym"><SUP>5</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.</FONT></FONT></FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">See
+					above</FONT></FONT></P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">restrictions_description</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">A
+					text describing the restrictions (both the negative and the
+					positives), which will be shown in case of an error.</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">column_name</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">The
+					name of the database column. If not given the attribute name
+					will be used.</FONT></FONT></P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">attribute
+					name</FONT></FONT></P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Example</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>MDA
+	Realization:</B></P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT COLOR="#000000">
+	</FONT><SPAN LANG="en-GB">Those values are persistent.</SPAN></P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.16.ChiController|outline"></A>
+	4.16 ChiController</H2>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m2c81d9af.gif" NAME="Grafik42" ALIGN=BOTTOM WIDTH=51 HEIGHT=67 BORDER=0></P>
+	<P STYLE="margin-top: 0.49cm; margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	</SPAN><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="en-GB">The
+	ChiController defines application behaviour and the Business Logic
+	involving more that one ChiNode. It dispatches requests and selects
+	views for presentation. It interprets user inputs and maps them into
+	actions.</SPAN></FONT></FONT></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">ChiController,
+	with Views and Associations define the application flow. A
+	controller represents the Business logic where a certain flow is
+	physical implemented.</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">In a
+	Service Oriented Architecture a ChiController describes a service.
+	The availability in the system is described below. 
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
+	Values:</B></P>
+	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=220>
+		<COL WIDTH=229>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+				</TD>
+				<TD WIDTH=220 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
+				</TD>
+				<TD WIDTH=229 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Interpretation
+	of Scope</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">The
+	standard UML property scope (Visibility) is interpreted by the
+	generator as following:</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<TABLE WIDTH=622 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=70>
+		<COL WIDTH=258>
+		<COL WIDTH=250>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=70 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+				</TD>
+				<TD WIDTH=258 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Meaning</B></FONT></P>
+				</TD>
+				<TD WIDTH=250 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>example</B></FONT></P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=70>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Public</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class represents a Service that is available outside the
+					system's border. Is always visible.</FONT></P>
+				</TD>
+				<TD WIDTH=250>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=70>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Private</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class represents a Service that is available for a certain
+					amount of Domain Object only  .</FONT></P>
+				</TD>
+				<TD WIDTH=250>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=70>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Protected</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class represents a Service that is available only within the
+					system border.</FONT></P>
+				</TD>
+				<TD WIDTH=250>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=70>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Package</FONT></P>
+				</TD>
+				<TD WIDTH=258>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
+					class represents a Service that is available only within his
+					parent Package.</FONT></P>
+				</TD>
+				<TD WIDTH=250>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<H3 LANG="en-GB" CLASS="western"></H3>
+	<H2 LANG="en-US" CLASS="western"><A NAME="4.17.ChiView|outline"></A>4.17 ChiView</H2>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m7055b48a.gif" NAME="Grafik43" ALIGN=BOTTOM WIDTH=68 HEIGHT=67 BORDER=0></P>
+	<P STYLE="margin-top: 0.49cm; margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
+	</SPAN><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="en-GB">The
+	ChiView (view) display the contents of a Model. Any kind of
+	visualization can be modelled in a view.<BR>It gets data from the
+	model and specifies how that data should be presented. It updates
+	data presentation when the model changes. A view also forwards user
+	input to a controller. A view cannot execute business logic, apart
+	syntactical validation.</SPAN></FONT></FONT></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Views and
+	Node are connected trough a ChiActionKey.</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
+	Values:</B></P>
+	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
+		<COL WIDTH=157>
+		<COL WIDTH=220>
+		<COL WIDTH=229>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
+				</TD>
+				<TD WIDTH=220 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
+				</TD>
+				<TD WIDTH=229 BGCOLOR="#d9d9d9">
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
+				</TD>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=157>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=220>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+				<TD WIDTH=229>
+					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
+					</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 	</P>
 	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="5.Howto|outline"></A>
@@ -2821,6 +3879,31 @@ document describes the usage of the application.</P>
 	</P>
 	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
 	</P>
+</DIV>
+<DIV ID="sdfootnote1">
+	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote1sym" HREF="#sdfootnote1anc">1</A><FONT SIZE=1 STYLE="font-size: 8pt">The
+	application's data types are globally defined e.g. In
+	</FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">PersistentObject</FONT></FONT>.</P>
+</DIV>
+<DIV ID="sdfootnote2">
+	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote2sym" HREF="#sdfootnote2anc">2</A><FONT SIZE=1 STYLE="font-size: 8pt">The
+	interpretation of the input_type is done by </FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">DefaultControlRenderer</FONT></FONT><FONT SIZE=1 STYLE="font-size: 8pt">
+	or its subclasses.</FONT></P>
+</DIV>
+<DIV ID="sdfootnote3">
+	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote3sym" HREF="#sdfootnote3anc">3</A><FONT SIZE=1 STYLE="font-size: 8pt">The
+	interpretation of the display_type is done by </FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">DefaultValueRenderer</FONT></FONT><FONT SIZE=1 STYLE="font-size: 8pt">
+	or its subclasses.</FONT></P>
+</DIV>
+<DIV ID="sdfootnote4">
+	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote4sym" HREF="#sdfootnote4anc">4</A><FONT SIZE=1 STYLE="font-size: 8pt">The
+	PHP function </FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">preg_match</FONT></FONT><FONT SIZE=1 STYLE="font-size: 8pt">
+	is used for comparison.</FONT></P>
+</DIV>
+<DIV ID="sdfootnote5">
+	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote5sym" HREF="#sdfootnote5anc">5</A><FONT SIZE=1 STYLE="font-size: 8pt">The
+	PHP function </FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">preg_match</FONT></FONT><FONT SIZE=1 STYLE="font-size: 8pt">
+	is used for comparison.</FONT></P>
 </DIV>
 </BODY>
 </HTML>
