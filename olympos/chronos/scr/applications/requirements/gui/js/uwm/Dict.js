@@ -51,7 +51,7 @@ uwm.Dict.voc = {
 		'New Objects' 		: {'de': 'Neue Objekte'},
 		'Default' 			: {'de': 'Standard'},
 		'Admin' 			: {'de': 'Administrator'},
-		'Help Viewer' 		: {'de': 'Hilfe Betrachter'},
+		'Documentation Viewer' 		: {'de': 'Dokumentation'},
 		'Hierarchy Tree' 	: {'de': 'Hierarchie Baum'},
 		'Model Tree' 		: {'de': 'Modell Baum'},	 
 		'Title' 			: {'de': 'Titel'},

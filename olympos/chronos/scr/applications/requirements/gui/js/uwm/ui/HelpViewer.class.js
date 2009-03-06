@@ -21,7 +21,7 @@ Ext.namespace("uwm.ui");
 uwm.ui.HelpViewer = function(config) {
 	uwm.ui.HelpViewer.superclass.constructor.call(this, Ext.apply(this, {
 		closable: true,
-		title: uwm.Dict.translate('Help Viewer'),
+		title: uwm.Dict.translate('Documentation Viewer'),
 		autoDestroy: false,
 		isHelpViewer: true,
 		html: "<iframe id='" + uwm.ui.HelpViewer.IFRAME_ID + "' class='uwm-helpViewer-frame' src='" + uwm.Session.getInstance().getHelpUrl() + "'/>"
