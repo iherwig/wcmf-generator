@@ -1,0 +1,59 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+
+uml::Class convert(cwm::ChiController c):
+	let uc = new uml::Class : {
+		uc.setName("ChiController:" + c.id)
+	} ->
+	uc
+;
+
+Void establishConnections(cwm::ChiController b, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiController:" + b.id).first(): (
+		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "Generalization").establishGeneralizationToClass(uc, um) ->
+		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "Association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, false)
+		//Duplicate in connection list
+		//r.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "Association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, false)
+	)
+;
+
+Void transferValues(cwm::ChiController c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiController:" + c.id).first(): {
+		uc.applyStereotype("Chronos::ChiController") ->
+		uc.setTaggedValue("Chronos::ChiController", "Alias", c.alias) ->
+		uc.setTaggedValue("Chronos::ChiController", "Version", c.version) ->
+		uc.setName(c.name) ->
+		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
+		uc.setTaggedValue("Chronos::ChiController", "created", c.created) ->
+		uc.setTaggedValue("Chronos::ChiController", "creator", c.creator) ->
+		uc.setTaggedValue("Chronos::ChiController", "last_editor", c.lastEditor) ->
+		uc.setTaggedValue("Chronos::ChiController", "modified", c.modified)
+	}
+;
+
+cwm::ChiController convertToCwm(Chronos::ChiController c) :
+	let un = new cwm::ChiController : (
+		un.setId(c.getId()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiController", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiController", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiController", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiController", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiController", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiController", "modified").toString()) ->
+
+		un.manyToMany.addAll(c.getGenerals().convertToMany("Generalization")) ->
+		un.manyToMany.addAll(c.getAssociations().select(e|e.memberEnd.selectFirst(f|f.type == c).associationEnd.contains(uml::AggregationKind::none)).memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiNode).convertToMany("Association"))
+	) ->
+	un
+;

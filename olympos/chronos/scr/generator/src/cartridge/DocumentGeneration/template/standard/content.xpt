@@ -1,0 +1,984 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION org::openarchitectureware::uml2::profile::profiling»
+
+«IMPORT org::openarchitectureware::meta::uml::classifier»
+«IMPORT org::openarchitectureware::meta::uml::interface»
+
+«EXTENSION common::umlutils»
+
+«EXTENSION cartridge::DocumentGeneration::static»
+«EXTENSION cartridge::DocumentGeneration::tool»
+
+«DEFINE file FOR uml::Model»
+«FILE "content.xml"
+»<?xml version="1.0" encoding="UTF-8"?>
+<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0" xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" xmlns:draw="urn:oasis:names:tc:opendocument:xmlns:drawing:1.0" xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:number="urn:oasis:names:tc:opendocument:xmlns:datastyle:1.0" xmlns:svg="urn:oasis:names:tc:opendocument:xmlns:svg-compatible:1.0" xmlns:chart="urn:oasis:names:tc:opendocument:xmlns:chart:1.0" xmlns:dr3d="urn:oasis:names:tc:opendocument:xmlns:dr3d:1.0" xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns:form="urn:oasis:names:tc:opendocument:xmlns:form:1.0" xmlns:script="urn:oasis:names:tc:opendocument:xmlns:script:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:ooow="http://openoffice.org/2004/writer" xmlns:oooc="http://openoffice.org/2004/calc" xmlns:dom="http://www.w3.org/2001/xml-events" xmlns:xforms="http://www.w3.org/2002/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rpt="http://openoffice.org/2005/report" xmlns:of="urn:oasis:names:tc:opendocument:xmlns:of:1.2" xmlns:rdfa="http://docs.oasis-open.org/opendocument/meta/rdfa#" office:version="1.2">
+	<office:scripts/>
+	<office:font-face-decls>
+		<style:font-face style:name="OpenSymbol" svg:font-family="OpenSymbol"/>
+		<style:font-face style:name="arial" svg:font-family="arial" style:font-family-generic="swiss"/>
+		<style:font-face style:name="Liberation Serif" svg:font-family="&apos;Liberation Serif&apos;" style:font-family-generic="roman" style:font-pitch="variable"/>
+		<style:font-face style:name="Arial" svg:font-family="Arial" style:font-family-generic="swiss" style:font-pitch="variable"/>
+		<style:font-face style:name="Liberation Sans" svg:font-family="&apos;Liberation Sans&apos;" style:font-family-generic="swiss" style:font-pitch="variable"/>
+		<style:font-face style:name="DejaVu LGC Sans" svg:font-family="&apos;DejaVu LGC Sans&apos;" style:font-family-generic="system" style:font-pitch="variable"/>
+	</office:font-face-decls>
+	<office:automatic-styles>
+		<style:style style:name="Table2" style:family="table">
+			<style:table-properties style:width="17cm" table:align="margins"/>
+		</style:style>
+		<style:style style:name="Table2.A" style:family="table-column">
+			<style:table-column-properties style:column-width="8.5cm" style:rel-column-width="4819*"/>
+		</style:style>
+		<style:style style:name="Table2.A1" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="0.002cm solid #000000" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table2.B1" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table3" style:family="table">
+			<style:table-properties style:width="17cm" table:align="margins"/>
+		</style:style>
+		<style:style style:name="Table3.A" style:family="table-column">
+			<style:table-column-properties style:column-width="1.469cm" style:rel-column-width="833*"/>
+		</style:style>
+		<style:style style:name="Table3.B" style:family="table-column">
+			<style:table-column-properties style:column-width="2.037cm" style:rel-column-width="1155*"/>
+		</style:style>
+		<style:style style:name="Table3.C" style:family="table-column">
+			<style:table-column-properties style:column-width="11.76cm" style:rel-column-width="6667*"/>
+		</style:style>
+		<style:style style:name="Table3.D" style:family="table-column">
+			<style:table-column-properties style:column-width="1.734cm" style:rel-column-width="983*"/>
+		</style:style>
+		<style:style style:name="Table3.A1" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="0.002cm solid #000000" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table3.D1" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table3.A2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table3.D2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="0.002cm solid #000000" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table4" style:family="table">
+			<style:table-properties style:width="17cm" table:align="margins"/>
+		</style:style>
+		<style:style style:name="Table4.A" style:family="table-column">
+			<style:table-column-properties style:column-width="6.279cm" style:rel-column-width="3560*"/>
+		</style:style>
+		<style:style style:name="Table4.B" style:family="table-column">
+			<style:table-column-properties style:column-width="10.721cm" style:rel-column-width="6078*"/>
+		</style:style>
+		<style:style style:name="Table4.A1" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="0.002cm solid #000000" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table4.B1" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table4.A2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table4.B2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="0.002cm solid #000000" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table5" style:family="table">
+			<style:table-properties style:width="17cm" table:align="margins"/>
+		</style:style>
+		<style:style style:name="Table5.A" style:family="table-column">
+			<style:table-column-properties style:column-width="6.279cm" style:rel-column-width="3560*"/>
+		</style:style>
+		<style:style style:name="Table5.B" style:family="table-column">
+			<style:table-column-properties style:column-width="10.721cm" style:rel-column-width="6078*"/>
+		</style:style>
+		<style:style style:name="Table5.A1" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="0.002cm solid #000000" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table5.B1" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table5.A2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table5.B2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="0.002cm solid #000000" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table6" style:family="table">
+			<style:table-properties style:width="17cm" table:align="margins"/>
+		</style:style>
+		<style:style style:name="Table6.A" style:family="table-column">
+			<style:table-column-properties style:column-width="8.5cm" style:rel-column-width="32767*"/>
+		</style:style>
+		<style:style style:name="Table6.A1" style:family="table-cell">
+			<style:table-cell-properties fo:background-color="#c0c0c0" fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="0.002cm solid #000000" fo:border-bottom="0.002cm solid #000000">
+				<style:background-image/>
+			</style:table-cell-properties>
+		</style:style>
+		<style:style style:name="Table6.B1" style:family="table-cell">
+			<style:table-cell-properties fo:background-color="#c0c0c0" fo:padding="0.097cm" fo:border="0.002cm solid #000000">
+				<style:background-image/>
+			</style:table-cell-properties>
+		</style:style>
+		<style:style style:name="Table6.A2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table6.B2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="0.002cm solid #000000" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table7" style:family="table">
+			<style:table-properties style:width="17cm" table:align="margins"/>
+		</style:style>
+		<style:style style:name="Table7.A" style:family="table-column">
+			<style:table-column-properties style:column-width="8.5cm" style:rel-column-width="32767*"/>
+		</style:style>
+		<style:style style:name="Table7.A1" style:family="table-cell">
+			<style:table-cell-properties fo:background-color="#c0c0c0" fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="0.002cm solid #000000" fo:border-bottom="0.002cm solid #000000">
+				<style:background-image/>
+			</style:table-cell-properties>
+		</style:style>
+		<style:style style:name="Table7.B1" style:family="table-cell">
+			<style:table-cell-properties fo:background-color="#c0c0c0" fo:padding="0.097cm" fo:border="0.002cm solid #000000">
+				<style:background-image/>
+			</style:table-cell-properties>
+		</style:style>
+		<style:style style:name="Table7.A2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table7.B2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="0.002cm solid #000000" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table8" style:family="table">
+			<style:table-properties style:width="17cm" table:align="margins"/>
+		</style:style>
+		<style:style style:name="Table8.A" style:family="table-column">
+			<style:table-column-properties style:column-width="8.5cm" style:rel-column-width="32767*"/>
+		</style:style>
+		<style:style style:name="Table8.A1" style:family="table-cell">
+			<style:table-cell-properties fo:background-color="#c0c0c0" fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="0.002cm solid #000000" fo:border-bottom="0.002cm solid #000000">
+				<style:background-image/>
+			</style:table-cell-properties>
+		</style:style>
+		<style:style style:name="Table8.B1" style:family="table-cell">
+			<style:table-cell-properties fo:background-color="#c0c0c0" fo:padding="0.097cm" fo:border="0.002cm solid #000000">
+				<style:background-image/>
+			</style:table-cell-properties>
+		</style:style>
+		<style:style style:name="Table8.A2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="none" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="Table8.B2" style:family="table-cell">
+			<style:table-cell-properties fo:padding="0.097cm" fo:border-left="0.002cm solid #000000" fo:border-right="0.002cm solid #000000" fo:border-top="none" fo:border-bottom="0.002cm solid #000000"/>
+		</style:style>
+		<style:style style:name="P1" style:family="paragraph" style:parent-style-name="Standard">
+			<style:paragraph-properties fo:text-align="end" style:justify-single-word="false"/>
+			<style:text-properties fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+		</style:style>
+		<style:style style:name="P2" style:family="paragraph" style:parent-style-name="Heading_20_2">
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P3" style:family="paragraph" style:parent-style-name="Contents_20_Heading" style:master-page-name="Standard">
+			<style:paragraph-properties style:page-number="auto"/>
+		</style:style>
+		<style:style style:name="P4" style:family="paragraph" style:parent-style-name="Standard">
+			<style:paragraph-properties fo:text-align="end" style:justify-single-word="false"/>
+			<style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+		</style:style>
+		<style:style style:name="P5" style:family="paragraph" style:parent-style-name="Standard">
+			<style:paragraph-properties fo:text-align="end" style:justify-single-word="false"/>
+			<style:text-properties style:font-name="Arial" fo:font-size="16pt" style:font-size-asian="16pt" style:font-size-complex="16pt"/>
+		</style:style>
+		<style:style style:name="P6" style:family="paragraph" style:parent-style-name="Standard">
+			<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+			<style:text-properties style:font-name="Arial" fo:font-size="16pt" style:font-size-asian="16pt" style:font-size-complex="16pt"/>
+		</style:style>
+		<style:style style:name="P7" style:family="paragraph" style:parent-style-name="Text_20_body">
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P8" style:family="paragraph" style:parent-style-name="Text_20_body">
+			<style:text-properties style:font-name="Arial" fo:language="en" fo:country="GB"/>
+		</style:style>
+		<style:style style:name="P9" style:family="paragraph" style:parent-style-name="Text_20_body">
+			<style:text-properties style:font-name="Arial" fo:font-size="10pt" fo:language="en" fo:country="GB" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+		</style:style>
+		<style:style style:name="P10" style:family="paragraph" style:parent-style-name="Text_20_body" style:list-style-name="L1">
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P11" style:family="paragraph" style:parent-style-name="Header">
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P12" style:family="paragraph" style:parent-style-name="Header">
+			<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+			<style:text-properties style:font-name="Arial" fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+		</style:style>
+		<style:style style:name="P13" style:family="paragraph" style:parent-style-name="Header">
+			<style:paragraph-properties fo:text-align="end" style:justify-single-word="false"/>
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P14" style:family="paragraph" style:parent-style-name="Footer">
+			<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+		</style:style>
+		<style:style style:name="P15" style:family="paragraph" style:parent-style-name="Footer">
+			<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+			<style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+		</style:style>
+		<style:style style:name="P16" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P17" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+			<style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+		</style:style>
+		<style:style style:name="P18" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+			<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+			<style:text-properties style:font-name="Arial" fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+		</style:style>
+		<style:style style:name="P19" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+			<style:text-properties style:font-name="Arial" fo:font-size="8pt" fo:font-weight="bold" style:font-size-asian="8pt" style:font-weight-asian="bold" style:font-size-complex="8pt" style:font-weight-complex="bold"/>
+		</style:style>
+		<style:style style:name="P20" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+			<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+			<style:text-properties style:font-name="Arial" fo:font-size="8pt" fo:font-weight="bold" style:font-size-asian="8pt" style:font-weight-asian="bold" style:font-size-complex="8pt" style:font-weight-complex="bold"/>
+		</style:style>
+		<style:style style:name="P21" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+			<style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P22" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+			<style:text-properties fo:font-size="8pt" style:font-size-asian="8pt" style:font-size-complex="8pt"/>
+		</style:style>
+		<style:style style:name="P23" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+			<style:text-properties fo:font-size="8pt" fo:font-weight="bold" style:font-size-asian="8pt" style:font-weight-asian="bold" style:font-size-complex="8pt" style:font-weight-complex="bold"/>
+		</style:style>
+		<style:style style:name="P24" style:family="paragraph" style:parent-style-name="Heading_20_3">
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P25" style:family="paragraph" style:parent-style-name="Heading_20_1" style:master-page-name="Standard">
+			<style:paragraph-properties style:page-number="auto"/>
+		</style:style>
+		<style:style style:name="P26" style:family="paragraph" style:parent-style-name="Heading_20_1" style:master-page-name="Standard">
+			<style:paragraph-properties style:page-number="auto"/>
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P27" style:family="paragraph" style:parent-style-name="Heading_20_1" style:master-page-name="Standard">
+			<style:paragraph-properties style:page-number="auto"/>
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="P28" style:family="paragraph" style:parent-style-name="Contents_20_5">
+			<style:paragraph-properties>
+				<style:tab-stops>
+					<style:tab-stop style:position="15.004cm" style:type="right" style:leader-style="dotted" style:leader-text="."/>
+				</style:tab-stops>
+			</style:paragraph-properties>
+		</style:style>
+		<style:style style:name="P29" style:family="paragraph" style:parent-style-name="Contents_20_4">
+			<style:paragraph-properties>
+				<style:tab-stops>
+					<style:tab-stop style:position="15.503cm" style:type="right" style:leader-style="dotted" style:leader-text="."/>
+				</style:tab-stops>
+			</style:paragraph-properties>
+		</style:style>
+		<style:style style:name="P30" style:family="paragraph" style:parent-style-name="Contents_20_2">
+			<style:paragraph-properties>
+				<style:tab-stops>
+					<style:tab-stop style:position="16.501cm" style:type="right" style:leader-style="dotted" style:leader-text="."/>
+				</style:tab-stops>
+			</style:paragraph-properties>
+		</style:style>
+		<style:style style:name="P31" style:family="paragraph" style:parent-style-name="Contents_20_6">
+			<style:paragraph-properties>
+				<style:tab-stops>
+					<style:tab-stop style:position="14.504cm" style:type="right" style:leader-style="dotted" style:leader-text="."/>
+				</style:tab-stops>
+			</style:paragraph-properties>
+		</style:style>
+		<style:style style:name="P32" style:family="paragraph" style:parent-style-name="Contents_20_1">
+			<style:paragraph-properties>
+				<style:tab-stops>
+					<style:tab-stop style:position="17cm" style:type="right" style:leader-style="dotted" style:leader-text="."/>
+				</style:tab-stops>
+			</style:paragraph-properties>
+		</style:style>
+		<style:style style:name="P33" style:family="paragraph" style:parent-style-name="Contents_20_3">
+			<style:paragraph-properties>
+				<style:tab-stops>
+					<style:tab-stop style:position="16.002cm" style:type="right" style:leader-style="dotted" style:leader-text="."/>
+				</style:tab-stops>
+			</style:paragraph-properties>
+		</style:style>
+		<style:style style:name="T1" style:family="text">
+			<style:text-properties fo:font-weight="bold" style:font-weight-asian="bold" style:font-weight-complex="bold"/>
+		</style:style>
+		<style:style style:name="T2" style:family="text">
+			<style:text-properties style:font-name="Arial"/>
+		</style:style>
+		<style:style style:name="T3" style:family="text">
+			<style:text-properties fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+		</style:style>
+		<style:style style:name="fr1" style:family="graphic" style:parent-style-name="Graphics">
+			<style:graphic-properties fo:margin-left="0cm" fo:margin-right="0cm" style:vertical-pos="middle" style:vertical-rel="baseline" style:horizontal-pos="right" style:horizontal-rel="paragraph" fo:padding-left="0.28cm" fo:padding-right="0.28cm" fo:padding-top="0.153cm" fo:padding-bottom="0.153cm" fo:border="none" style:mirror="none" fo:clip="rect(0cm, 0cm, 0cm, 0cm)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard"/>
+		</style:style>
+		<style:style style:name="fr2" style:family="graphic" style:parent-style-name="Graphics">
+			<style:graphic-properties style:horizontal-pos="center" style:horizontal-rel="paragraph" style:mirror="none" fo:clip="rect(0cm, 0cm, 0cm, 0cm)" draw:luminance="0%" draw:contrast="0%" draw:red="0%" draw:green="0%" draw:blue="0%" draw:gamma="100%" draw:color-inversion="false" draw:image-opacity="100%" draw:color-mode="standard"/>
+		</style:style>
+		<style:style style:name="Sect1" style:family="section">
+			<style:section-properties fo:background-color="transparent" style:editable="false">
+				<style:columns fo:column-count="1" fo:column-gap="0cm"/>
+				<style:background-image/>
+			</style:section-properties>
+		</style:style>
+		<style:style style:name="Sect2" style:family="section">
+			<style:section-properties style:editable="false">
+				<style:columns fo:column-count="1" fo:column-gap="0cm"/>
+			</style:section-properties>
+		</style:style>
+		<text:list-style style:name="L1">
+			<text:list-level-style-bullet text:level="1" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="•">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="1.27cm" fo:text-indent="-0.635cm" fo:margin-left="1.27cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+			<text:list-level-style-bullet text:level="2" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="?">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="1.905cm" fo:text-indent="-0.635cm" fo:margin-left="1.905cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+			<text:list-level-style-bullet text:level="3" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="?">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="2.54cm" fo:text-indent="-0.635cm" fo:margin-left="2.54cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+			<text:list-level-style-bullet text:level="4" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="•">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="3.175cm" fo:text-indent="-0.635cm" fo:margin-left="3.175cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+			<text:list-level-style-bullet text:level="5" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="?">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="3.81cm" fo:text-indent="-0.635cm" fo:margin-left="3.81cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+			<text:list-level-style-bullet text:level="6" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="?">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="4.445cm" fo:text-indent="-0.635cm" fo:margin-left="4.445cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+			<text:list-level-style-bullet text:level="7" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="•">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="5.08cm" fo:text-indent="-0.635cm" fo:margin-left="5.08cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+			<text:list-level-style-bullet text:level="8" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="?">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="5.715cm" fo:text-indent="-0.635cm" fo:margin-left="5.715cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+			<text:list-level-style-bullet text:level="9" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="?">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="6.35cm" fo:text-indent="-0.635cm" fo:margin-left="6.35cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+			<text:list-level-style-bullet text:level="10" text:style-name="Bullet_20_Symbols" style:num-suffix="." text:bullet-char="•">
+				<style:list-level-properties text:list-level-position-and-space-mode="label-alignment">
+					<style:list-level-label-alignment text:label-followed-by="listtab" text:list-tab-stop-position="6.985cm" fo:text-indent="-0.635cm" fo:margin-left="6.985cm"/>
+				</style:list-level-properties>
+			</text:list-level-style-bullet>
+		</text:list-style>
+	</office:automatic-styles>
+	<office:body>
+		<office:text text:use-soft-page-breaks="true">
+			<text:sequence-decls>
+				<text:sequence-decl text:display-outline-level="0" text:name="Illustration"/>
+				<text:sequence-decl text:display-outline-level="0" text:name="Table"/>
+				<text:sequence-decl text:display-outline-level="0" text:name="Text"/>
+				<text:sequence-decl text:display-outline-level="0" text:name="Drawing"/>
+			</text:sequence-decls>
+			<text:p text:style-name="P1"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P6">«tplSubject()»</text:p>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P4"/>
+			<text:p text:style-name="P5">
+				<text:span text:style-name="T1">Author:</text:span>«tplUserName()»</text:p>
+			<text:p text:style-name="P5">
+				<text:span text:style-name="T1">Owner:</text:span>«tplOwner()»</text:p>
+			<text:p text:style-name="P5">
+				<text:span text:style-name="T1">Customer:</text:span>«tplCustomer()»</text:p>
+			<text:h text:style-name="P26" text:outline-level="1">Document Information</text:h>
+			<text:p text:style-name="P9">This is a snapshot of an on-line document.<text:line-break/>Paper copies are valid only on the day they are printed.<text:line-break/>Refer to the author and/or owner if you are in any doubt<text:line-break/>about the currency of this document.</text:p>
+			<text:p text:style-name="P9">This document has been generated by use of the<text:line-break/>following template:</text:p>
+			<text:p text:style-name="P9">
+				<text:tab/>Template name:«tplTemplateName()»</text:p>
+			<text:p text:style-name="P9">
+				<text:tab/>Template version:«tplTemplateVersion()»</text:p>
+			<text:p text:style-name="P8">
+				<text:span text:style-name="T3">Information about the source of this document is provided in the footer section.</text:span>
+				<text:line-break/>Please fill in the information below, when this document is further processed manually.</text:p>
+			<text:h text:style-name="Heading_20_2" text:outline-level="2">Revision History</text:h>
+			<table:table table:name="Table2" table:style-name="Table2">
+				<table:table-column table:style-name="Table2.A" table:number-columns-repeated="2"/>
+				<table:table-row>
+					<table:table-cell table:style-name="Table2.A1" office:value-type="string">
+						<text:p text:style-name="P19">Date of this revision:</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table2.B1" office:value-type="string">
+						<text:p text:style-name="P19">Date of next revision:</text:p>
+					</table:table-cell>
+				</table:table-row>
+			</table:table>
+			<table:table table:name="Table3" table:style-name="Table3">
+				<table:table-column table:style-name="Table3.A"/>
+				<table:table-column table:style-name="Table3.B"/>
+				<table:table-column table:style-name="Table3.C"/>
+				<table:table-column table:style-name="Table3.D"/>
+				<table:table-row>
+					<table:table-cell table:style-name="Table3.A1" office:value-type="string">
+						<text:p text:style-name="P20">Revision Number</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table3.A1" office:value-type="string">
+						<text:p text:style-name="P20">Revision<text:line-break/>Date</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table3.A1" office:value-type="string">
+						<text:p text:style-name="P20">Summary of Changes</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table3.D1" office:value-type="string">
+						<text:p text:style-name="P20">Changes marked</text:p>
+					</table:table-cell>
+				</table:table-row>
+				<table:table-row>
+					<table:table-cell table:style-name="Table3.A2" office:value-type="string">
+						<text:p text:style-name="P21">(#)</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table3.A2" office:value-type="string">
+						<text:p text:style-name="P18">(-)</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table3.A2" office:value-type="string">
+						<text:p text:style-name="P18">(describe changes)</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table3.D2" office:value-type="string">
+						<text:p text:style-name="P18">(N)</text:p>
+					</table:table-cell>
+				</table:table-row>
+			</table:table>
+			<text:p text:style-name="P8"/>
+			<text:h text:style-name="Heading_20_2" text:outline-level="2">Approvals</text:h>
+			<text:p text:style-name="Text_20_body">This document requires the following approvals.</text:p>
+			<text:p text:style-name="Text_20_body">Signed approval forms are to be filed in the Quality Section of the<text:line-break/>Project Control Book, if appropriate.</text:p>
+			<table:table table:name="Table4" table:style-name="Table4">
+				<table:table-column table:style-name="Table4.A"/>
+				<table:table-column table:style-name="Table4.B"/>
+				<table:table-row>
+					<table:table-cell table:style-name="Table4.A1" office:value-type="string">
+						<text:p text:style-name="P23">Name</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table4.B1" office:value-type="string">
+						<text:p text:style-name="P23">Title / Role</text:p>
+					</table:table-cell>
+				</table:table-row>
+				<table:table-row>
+					<table:table-cell table:style-name="Table4.A2" office:value-type="string">
+						<text:p text:style-name="P22">(name)</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table4.B2" office:value-type="string">
+						<text:p text:style-name="P22">(title / role)</text:p>
+					</table:table-cell>
+				</table:table-row>
+			</table:table>
+			<text:p text:style-name="Text_20_body"/>
+			<text:h text:style-name="Heading_20_2" text:outline-level="2">Distribution</text:h>
+			<text:p text:style-name="Text_20_body">This document has been distributed to</text:p>
+			<table:table table:name="Table5" table:style-name="Table5">
+				<table:table-column table:style-name="Table5.A"/>
+				<table:table-column table:style-name="Table5.B"/>
+				<table:table-row>
+					<table:table-cell table:style-name="Table5.A1" office:value-type="string">
+						<text:p text:style-name="P23">Name</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table5.B1" office:value-type="string">
+						<text:p text:style-name="P23">Title / Role</text:p>
+					</table:table-cell>
+				</table:table-row>
+				<table:table-row>
+					<table:table-cell table:style-name="Table5.A2" office:value-type="string">
+						<text:p text:style-name="P22">(name)</text:p>
+					</table:table-cell>
+					<table:table-cell table:style-name="Table5.B2" office:value-type="string">
+						<text:p text:style-name="P22">(title / role)</text:p>
+					</table:table-cell>
+				</table:table-row>
+			</table:table>
+			<text:p text:style-name="Standard"/>
+			<text:table-of-content text:style-name="Sect1" text:protected="true" text:name="Table of Contents1">
+				<text:table-of-content-source text:outline-level="10">
+					<text:index-title-template text:style-name="Contents_20_Heading">Table of Contents</text:index-title-template>
+					<text:table-of-content-entry-template text:outline-level="1" text:style-name="Contents_20_1">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+					<text:table-of-content-entry-template text:outline-level="2" text:style-name="Contents_20_2">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+					<text:table-of-content-entry-template text:outline-level="3" text:style-name="Contents_20_3">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+					<text:table-of-content-entry-template text:outline-level="4" text:style-name="Contents_20_4">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+					<text:table-of-content-entry-template text:outline-level="5" text:style-name="Contents_20_5">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+					<text:table-of-content-entry-template text:outline-level="6" text:style-name="Contents_20_6">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+					<text:table-of-content-entry-template text:outline-level="7" text:style-name="Contents_20_7">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+					<text:table-of-content-entry-template text:outline-level="8" text:style-name="Contents_20_8">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+					<text:table-of-content-entry-template text:outline-level="9" text:style-name="Contents_20_9">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+					<text:table-of-content-entry-template text:outline-level="10" text:style-name="Contents_20_10">
+						<text:index-entry-chapter/>
+						<text:index-entry-text/>
+						<text:index-entry-tab-stop style:type="right" style:leader-char="."/>
+						<text:index-entry-page-number/>
+					</text:table-of-content-entry-template>
+				</text:table-of-content-source>
+				<text:index-body>
+					<text:index-title text:style-name="Sect2" text:name="Table of Contents1_Head">
+						<text:p text:style-name="P3">Table of Contents</text:p>
+					</text:index-title>
+					<text:p text:style-name="P32">Document Information<text:tab/>2</text:p>
+					<text:p text:style-name="P30">Revision History<text:tab/>2</text:p>
+					<text:p text:style-name="P30">Approvals<text:tab/>2</text:p>
+					<text:p text:style-name="P30">Distribution<text:tab/>2</text:p>
+					<text:p text:style-name="P32">License<text:tab/>4</text:p>
+					<text:p text:style-name="P32">Introduction<text:tab/>5</text:p>
+					<text:p text:style-name="P30">How to read this document<text:tab/>5</text:p>
+					<text:p text:style-name="P32">Requirements Analysis<text:tab/>6</text:p>
+					<text:p text:style-name="P30">&lt;&lt;package.name&gt;&gt;<text:tab/>6</text:p>
+					<text:p text:style-name="P33">&lt;&lt;element.type&gt;&gt;: &lt;&lt;element.name&gt;&gt;<text:tab/>6</text:p>
+					<text:p text:style-name="P32">Use Case Analysis<text:tab/>7</text:p>
+					<text:p text:style-name="P30">Processes<text:tab/>7</text:p>
+					<text:p text:style-name="P33">&lt;&lt;package.name&gt;&gt;<text:tab/>7</text:p>
+					<text:p text:style-name="P29">Use Casees<text:tab/>7</text:p>
+					<text:p text:style-name="P28">&lt;&lt;ChiBusinessUseCase.name&gt;&gt;<text:tab/>7</text:p>
+					<text:p text:style-name="P31">Activity:&lt;&lt;ChiActivity.name&gt;&gt;<text:tab/>7</text:p>
+					<text:p text:style-name="P29">Actors<text:tab/>7</text:p>
+					<text:p text:style-name="P28">&lt;&lt;ChiActor.type&gt;&gt;:&lt;ChiActor.name&gt;&gt;<text:tab/>7</text:p>
+				</text:index-body>
+			</text:table-of-content>
+			<text:p text:style-name="Standard"/>
+			<text:h text:style-name="P25" text:outline-level="1">License</text:h>
+			<text:p text:style-name="Text_20_body">«tplLicense()»</text:p>
+			<text:p text:style-name="Text_20_body"/>
+			<text:h text:style-name="P25" text:outline-level="1">Introduction</text:h>
+			<text:p text:style-name="Text_20_body">«tplTemplateDescription()»</text:p>
+			<text:h text:style-name="Heading_20_2" text:outline-level="2">How to read this document</text:h>
+			<text:p text:style-name="Text_20_body">«tplTemplateHelp()»</text:p>
+			<text:h text:style-name="P26" text:outline-level="1">Requirements Analysis</text:h>
+			<text:p text:style-name="P7">This section covers the information regarding</text:p>
+			<text:list xml:id="list37235130" text:style-name="L1">
+				<text:list-item>
+					<text:p text:style-name="P10">Goals</text:p>
+				</text:list-item>
+				<text:list-item>
+					<text:p text:style-name="P10">Requirements</text:p>
+				</text:list-item>
+				<text:list-item>
+					<text:p text:style-name="P10">Features</text:p>
+				</text:list-item>
+			</text:list>
+			<text:p text:style-name="P7">analysis of the project.</text:p>
+			
+			«EXPAND analysisPackage(2) FOREACH this.nestedPackage.typeSelect(uml::Package)»
+
+			<text:h text:style-name="P25" text:outline-level="1">Use Case Analysis</text:h>
+			<text:p text:style-name="P7">This section covers the information regarding Processes and their associated Use Case from the analysis phase of the project.</text:p>
+			<text:h text:style-name="Heading_20_2" text:outline-level="2">Processes</text:h>
+			
+			«EXPAND processPackage(3) FOREACH this.nestedPackage.typeSelect(uml::Package)»
+		</office:text>
+	</office:body>
+</office:document-content>
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE analysisPackage(int outlineLevel) FOR uml::Package»
+	«IF hasAnalysisContent(this)»
+		<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.name»</text:h>
+		«this.getComment().sanitizeHtml()»
+		<text:p text:style-name="P7">&lt;&lt;package.diagramm&gt;&gt;</text:p>
+	
+		«EXPAND analysisClass(outlineLevel + 1) FOREACH this.ownedElement.select(e|
+			e.getAppliedStereotype("Chronos::ChiGoal") != null
+			|| e.getAppliedStereotype("Chronos::ChiRequirement") != null
+			|| e.getAppliedStereotype("Chronos::ChiFeature") != null
+			|| e.getAppliedStereotype("Chronos::ChiIssue") != null
+		)»
+		
+		«EXPAND analysisPackage(outlineLevel + 1) FOREACH this.nestedPackage.typeSelect(uml::Package)»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE analysisClass(int outlineLevel) FOR uml::Element»
+	<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.getAppliedStereotypes().first().name»: «this.name»</text:h>
+	<text:p text:style-name="P7">Description:</text:p>
+	«this.getComment().sanitizeHtml()»
+	<text:p text:style-name="P7">Information:</text:p>
+	<table:table table:name="Table6" table:style-name="Table6">
+		<table:table-column table:style-name="Table6.A" table:number-columns-repeated="2"/>
+		<table:table-row>
+			<table:table-cell table:style-name="Table6.A1" office:value-type="string">
+				<text:p text:style-name="P21">Key</text:p>
+			</table:table-cell>
+			<table:table-cell table:style-name="Table6.B1" office:value-type="string">
+				<text:p text:style-name="P21">Value</text:p>
+			</table:table-cell>
+		</table:table-row>
+
+		«EXPAND analysisTaggedValues FOR this»
+
+	</table:table>
+	<text:p text:style-name="P7"/>
+	<text:p text:style-name="P7">&lt;&lt;element.diagramm&gt;&gt;</text:p>
+	<text:p text:style-name="P7"/>
+«ENDDEFINE»
+
+«DEFINE analysisTaggedValues FOR Chronos::ChiGoal»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "Priority") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "Value_Name") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "Value_ammount") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "Value_Goal") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiGoal", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE analysisTaggedValues FOR Chronos::ChiRequirement»
+	«EXPAND writeEnum("Chronos::ChiRequirement", "Type") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Priority") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Author") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Proofreader") FOR this»
+	«EXPAND writeEnum("Chronos::ChiRequirement", "Status") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE analysisTaggedValues FOR Chronos::ChiFeature»
+	«EXPAND writeTaggedValue("Chronos::ChiFeature", "Author") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiFeature", "Proofreader") FOR this»
+	«EXPAND writeEnum("Chronos::ChiFeature", "Status") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiFeature", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiFeature", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiFeature", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiFeature", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiFeature", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiFeature", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE analysisTaggedValues FOR Chronos::ChiIssue»
+	«EXPAND writeTaggedValue("Chronos::ChiIssue", "Author") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiIssue", "Responsible") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiIssue", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiIssue", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiIssue", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiIssue", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiIssue", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiIssue", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE processPackage(int outlineLevel) FOR uml::Package»
+	«IF this.hasProcessContent()»
+		<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.name»</text:h>
+		«this.getComment().sanitizeHtml()»
+		<text:p text:style-name="P7">&lt;&lt;package.diagramm&gt;&gt;</text:p>
+			
+		«IF this.hasDirectProcessUseCaseContent()»
+			<text:h text:style-name="Heading_20_«outlineLevel + 1»" text:outline-level="«outlineLevel + 1»">Use Casees</text:h>
+			
+			«EXPAND processUseCase(outlineLevel + 2) FOREACH this.ownedElement.select(e|
+				e.getAppliedStereotype("Chronos::ChiBusinessUseCase") != null
+				|| e.getAppliedStereotype("Chronos::ChiBusinessUseCaseCore") != null
+			)»
+		«ENDIF»
+		
+		«IF this.hasDirectProcessActorContent()»
+			<text:h text:style-name="Heading_20_«outlineLevel + 1»" text:outline-level="«outlineLevel + 1»">Actors</text:h>
+	
+			«EXPAND processActor(outlineLevel + 2) FOREACH this.ownedElement.select(e|
+				e.getAppliedStereotype("Chronos::ChiStakeHolder") != null
+				|| e.getAppliedStereotype("Chronos::ChiWorker") != null
+				|| e.getAppliedStereotype("Chronos::ChiWorkerInternal") != null
+				|| e.getAppliedStereotype("Chronos::ChiWorkerExternal") != null
+				|| e.getAppliedStereotype("Chronos::ChiBusinessPartner") != null
+				|| e.getAppliedStereotype("Chronos::ChiBusinessPartnerActive") != null
+				|| e.getAppliedStereotype("Chronos::ChiBusinessPartnerPassive") != null
+			)»
+		«ENDIF»
+
+		«EXPAND processPackage(outlineLevel + 1) FOREACH this.nestedPackage.typeSelect(uml::Package)»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE processUseCase(int outlineLevel) FOR uml::UseCase»
+	<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.getAppliedStereotypes().first().name»: «this.name»</text:h>
+	<text:p text:style-name="P7">Description:</text:p>
+	«this.getComment().sanitizeHtml()»
+	<text:p text:style-name="P7">Information:</text:p>
+	
+	<table:table table:name="Table6" table:style-name="Table6">
+		<table:table-column table:style-name="Table6.A" table:number-columns-repeated="2"/>
+		<table:table-row>
+			<table:table-cell table:style-name="Table6.A1" office:value-type="string">
+				<text:p text:style-name="P21">Key</text:p>
+			</table:table-cell>
+			<table:table-cell table:style-name="Table6.B1" office:value-type="string">
+				<text:p text:style-name="P21">Value</text:p>
+			</table:table-cell>
+		</table:table-row>
+
+		«EXPAND processUseCaseTaggedValues FOR this»
+
+	</table:table>
+	<text:p text:style-name="P7"/>
+	<text:p text:style-name="P7">&lt;&lt;element.diagramm&gt;&gt;</text:p>
+	<text:h text:style-name="Heading_20_«outlineLevel + 1»" text:outline-level="«outlineLevel + 1»">Activity:&lt;&lt;ChiActivity.name&gt;&gt;</text:h>
+	<text:p text:style-name="P7">Description:</text:p>
+	<text:p text:style-name="P7">&lt;&lt;ChiActivity.notes&gt;&gt;</text:p>
+	<text:p text:style-name="P7">Information:</text:p>
+	<table:table table:name="Table6" table:style-name="Table6">
+		<table:table-column table:style-name="Table6.A" table:number-columns-repeated="2"/>
+		<table:table-row>
+			<table:table-cell table:style-name="Table6.A1" office:value-type="string">
+				<text:p text:style-name="P21">Key</text:p>
+			</table:table-cell>
+			<table:table-cell table:style-name="Table6.B1" office:value-type="string">
+				<text:p text:style-name="P21">Value</text:p>
+			</table:table-cell>
+		</table:table-row>
+
+
+
+	</table:table>
+«ENDDEFINE»
+
+«DEFINE processUseCaseTaggedValues FOR Chronos::ChiBusinessUseCase»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "GoalInContext") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "Precondition") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "Trigger") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "Scope") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "Level") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "PrimaryActor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "OtherActors") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "Stakeholders") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "MainSuccessScenario") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "Extensions") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCase", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE processUseCaseTaggedValues FOR Chronos::ChiBusinessUseCaseCore»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "GoalInContext") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "Precondition") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "Trigger") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "Scope") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "Level") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "PrimaryActor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "OtherActors") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "Stakeholders") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "MainSuccessScenario") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "Extensions") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessUseCaseCore", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE processActor(int outlineLevel) FOR uml::Actor»
+	<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.getAppliedStereotypes().first().name»: «this.name»</text:h>
+	«this.getComment().sanitizeHtml()»
+	
+	<table:table table:name="Table6" table:style-name="Table6">
+		<table:table-column table:style-name="Table6.A" table:number-columns-repeated="2"/>
+		<table:table-row>
+			<table:table-cell table:style-name="Table6.A1" office:value-type="string">
+				<text:p text:style-name="P21">Key</text:p>
+			</table:table-cell>
+			<table:table-cell table:style-name="Table6.B1" office:value-type="string">
+				<text:p text:style-name="P21">Value</text:p>
+			</table:table-cell>
+		</table:table-row>
+
+		«EXPAND processActorTaggedValues FOR this»
+
+	</table:table>
+«ENDDEFINE»
+
+«DEFINE processActorTaggedValues FOR Chronos::ChiStakeHolder»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "Power") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "Legitimacy") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "Role") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "Urgency") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiStakeHolder", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE processActorTaggedValues FOR Chronos::ChiWorker»
+	«EXPAND writeTaggedValue("Chronos::ChiWorker", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorker", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorker", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorker", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorker", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorker", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE processActorTaggedValues FOR Chronos::ChiWorkerInternal»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerInternal", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerInternal", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerInternal", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerInternal", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerInternal", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerInternal", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE processActorTaggedValues FOR Chronos::ChiWorkerExternal»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerExternal", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerExternal", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerExternal", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerExternal", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerExternal", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiWorkerExternal", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE processActorTaggedValues FOR Chronos::ChiBusinessPartner»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartner", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartner", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartner", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartner", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartner", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartner", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE processActorTaggedValues FOR Chronos::ChiBusinessPartnerActive»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerActive", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerActive", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerActive", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerActive", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerActive", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerActive", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE processActorTaggedValues FOR Chronos::ChiBusinessPartnerPassive»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerPassive", "Alias") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerPassive", "Version") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerPassive", "created") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerPassive", "creator") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerPassive", "last_editor") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiBusinessPartnerPassive", "modified") FOR this»
+«ENDDEFINE»
+
+«DEFINE writeTaggedValue(String stereotype, String tagName) FOR uml::Class»
+	«EXPAND writeValue(tagName, this.getTaggedValue(stereotype, tagName).toString()) FOR this»
+«ENDDEFINE»
+
+«DEFINE writeEnum(String stereotype, String tagName) FOR uml::Class»
+	«IF this.getTaggedValue(stereotype, tagName) != ""»
+		«EXPAND writeValue(tagName, this.getTaggedValue(stereotype, tagName).name.toString()) FOR this»
+	«ELSE»
+		«EXPAND writeValue(tagName, "") FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE writeValue(String key, String value) FOR uml::Class»
+	<table:table-row>
+		<table:table-cell table:style-name="Table6.A2" office:value-type="string">
+			<text:p text:style-name="P16">«key»</text:p>
+		</table:table-cell>
+		<table:table-cell table:style-name="Table6.B2" office:value-type="string">
+			<text:p text:style-name="P16">«value»</text:p>
+		</table:table-cell>
+	</table:table-row>
+«ENDDEFINE»

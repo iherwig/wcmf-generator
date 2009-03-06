@@ -1,0 +1,58 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+
+uml::Actor convert(cwm::ChiWorkerInternal w):
+	let uc = new uml::Actor : {
+		uc.setName("ChiWorkerInternal:" + w.id)
+	} ->
+	uc
+;
+
+Void establishConnections(cwm::ChiWorkerInternal b, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiWorkerInternal:" + b.id).first(): (
+		b.manyToMany.select(e|e.targetType == "ChiBusinessUseCase").establishConnectionsToUseCase(uc, um, "participates in", uml::AggregationKind::none, uml::AggregationKind::none, true, false) ->
+		b.manyToMany.select(e|e.targetType == "ChiBusinessUseCaseCore").establishConnectionsToUseCase(uc, um, "participates in", uml::AggregationKind::none, uml::AggregationKind::none, true, false) ->
+		b.child.select(e|e.targetType == "ChiWorkerInternal").establishGeneralizationToActor(uc, um)
+	)
+;
+
+Void transferValues(cwm::ChiWorkerInternal c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiWorkerInternal:" + c.id).first(): {
+		uc.applyStereotype("Chronos::ChiWorkerInternal") ->
+		uc.setTaggedValue("Chronos::ChiWorkerInternal", "Alias", c.alias) ->
+		uc.setTaggedValue("Chronos::ChiWorkerInternal", "Version", c.version) ->
+		uc.setName(c.name) ->
+		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
+		uc.setTaggedValue("Chronos::ChiWorkerInternal", "created", c.created) ->
+		uc.setTaggedValue("Chronos::ChiWorkerInternal", "creator", c.creator) ->
+		uc.setTaggedValue("Chronos::ChiWorkerInternal", "last_editor", c.lastEditor) ->
+		uc.setTaggedValue("Chronos::ChiWorkerInternal", "modified", c.modified)
+	}
+;
+
+cwm::ChiWorkerInternal convertToCwm(Chronos::ChiWorkerInternal c) :
+	let un = new cwm::ChiWorkerInternal : (
+		un.setId(c.getId()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiWorkerInternal", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiWorkerInternal", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiWorkerInternal", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiWorkerInternal", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiWorkerInternal", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiWorkerInternal", "modified").toString()) ->
+
+		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiBusinessUseCase).convertToMany()) ->
+		un.child.addAll(c.getGenerals().convertToChild())
+	) ->
+	un
+;

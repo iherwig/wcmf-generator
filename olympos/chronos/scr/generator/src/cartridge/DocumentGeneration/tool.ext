@@ -1,0 +1,50 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+Boolean hasAnalysisContent(uml::Package this) :
+	(this.allOwnedElements().select(e|
+		e.getAppliedStereotype("Chronos::ChiGoal") != null
+		|| e.getAppliedStereotype("Chronos::ChiRequirement") != null
+		|| e.getAppliedStereotype("Chronos::ChiFeature") != null
+		|| e.getAppliedStereotype("Chronos::ChiIssue") != null
+	).size > 0)
+;
+
+Boolean hasDirectProcessUseCaseContent(uml::Package this) :
+	(this.ownedElement.select(e|
+		e.getAppliedStereotype("Chronos::ChiBusinessUseCase") != null
+		|| e.getAppliedStereotype("Chronos::ChiBusinessUseCaseCore") != null
+	).size > 0)
+;
+
+Boolean hasDirectProcessActorContent(uml::Package this) :
+	(this.ownedElement.select(e|
+		e.getAppliedStereotype("Chronos::ChiStakeHolder") != null
+		|| e.getAppliedStereotype("Chronos::ChiWorker") != null
+		|| e.getAppliedStereotype("Chronos::ChiWorkerInternal") != null
+		|| e.getAppliedStereotype("Chronos::ChiWorkerExternal") != null
+		|| e.getAppliedStereotype("Chronos::ChiBusinessPartner") != null
+		|| e.getAppliedStereotype("Chronos::ChiBusinessPartnerActive") != null
+		|| e.getAppliedStereotype("Chronos::ChiBusinessPartnerPassive") != null
+	).size > 0)
+;
+
+Boolean hasProcessContent(uml::Package this) :
+	(this.allOwnedElements().select(e|
+		e.getAppliedStereotype("Chronos::ChiBusinessUseCase") != null
+		|| e.getAppliedStereotype("Chronos::ChiBusinessUseCaseCore") != null
+		|| e.getAppliedStereotype("Chronos::ChiStakeHolder") != null
+		|| e.getAppliedStereotype("Chronos::ChiWorker") != null
+		|| e.getAppliedStereotype("Chronos::ChiWorkerInternal") != null
+		|| e.getAppliedStereotype("Chronos::ChiWorkerExternal") != null
+		|| e.getAppliedStereotype("Chronos::ChiBusinessPartner") != null
+		|| e.getAppliedStereotype("Chronos::ChiBusinessPartnerActive") != null
+		|| e.getAppliedStereotype("Chronos::ChiBusinessPartnerPassive") != null
+	).size > 0)
+;
+
+String sanitizeHtml(String source) :
+	JAVA net.sourceforge.olympos.oaw.openoffice.HtmlConverter.html2openoffice(java.lang.String)
+;

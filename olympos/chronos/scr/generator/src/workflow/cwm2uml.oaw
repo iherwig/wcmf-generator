@@ -1,0 +1,39 @@
+<workflow>
+	<property name="basePath" value="src" />
+
+	<property name="propertyFile" value="${basePath}/workflow/cwm2uml.properties" />
+	<property file="${propertyFile}" />
+
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<component class="org.openarchitectureware.xsd.XMLReader">
+		<modelSlot value="uwmmodel" />
+		<uri value="${inputUri}" />
+		<metaModel id="cwm"
+			class="org.openarchitectureware.xsd.XSDMetaModel">
+			<schemaFile value="metamodel/cwm.xsd" />
+		</metaModel>
+	</component>
+
+	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
+		<modelUrl value='http://cwm.nikostotz.de/chronos.profile.uml'/>
+		<outputSlot value="chronosProfile"/>
+	</component>
+
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="cwm" />
+		<metaModel id="uml2"
+			class="oaw.uml2.UML2MetaModel" />
+		<metaModel id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
+			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
+		</metaModel>
+		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfile)" />
+		<outputSlot value="uml2model" />
+		<globalVarDef name="basePath" value="'${basePath}'" />
+	</component>
+
+	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
+		<inputSlot value="uml2model" />
+		<outPath value="${outputRelativePath}" />
+	</component>
+</workflow>

@@ -1,0 +1,50 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+uml::AcceptEventAction convert(cwm::ActivityReceive a):
+	let uc = new uml::AcceptEventAction: (
+		uc.setName("ActivityReceive:" + a.id)
+	) ->
+	uc
+;
+
+Void transferValues(cwm::ActivityReceive c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::AcceptEventAction).select(e|e.name == "ActivityReceive:" + c.id).first(): {
+		uc.setName(c.name) ->
+		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void
+/*
+		uc.applyStereotype("Chronos::ActivityReceive") ->
+		uc.setTaggedValue("Chronos::ActivityReceive", "Alias", c.alias) ->
+		uc.setTaggedValue("Chronos::ActivityReceive", "Version", c.version) ->
+
+		uc.setTaggedValue("Chronos::ActivityReceive", "created", c.created) ->
+		uc.setTaggedValue("Chronos::ActivityReceive", "creator", c.creator) ->
+		uc.setTaggedValue("Chronos::ActivityReceive", "last_editor", c.lastEditor) ->
+		uc.setTaggedValue("Chronos::ActivityReceive", "modified", c.modified)
+*/
+	}
+;
+
+cwm::ActivityReceive convertToCwm(uml::AcceptEventAction c) :
+	let un = new cwm::ActivityReceive : (
+		un.setId(c.getId()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment())
+/*
+		un.setAlias(c.getTaggedValue("Chronos::ActivityReceive", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ActivityReceive", "Version").toString()) ->
+
+		un.setCreated(c.getTaggedValue("Chronos::ActivityReceive", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ActivityReceive", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ActivityReceive", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ActivityReceive", "modified").toString())
+*/
+	) ->
+	un
+;

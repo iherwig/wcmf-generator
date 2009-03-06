@@ -1,0 +1,51 @@
+import uml;
+
+/**
+ * Logging
+ */
+Void debug(Object o) : 
+	JAVA net.sourceforge.olympos.oaw.extend.Logger.debug(java.lang.Object)
+;	
+Void info(Object o) : 
+	JAVA net.sourceforge.olympos.oaw.extend.Logger.info(java.lang.Object)
+;	
+Void warn(Object o) : 
+	JAVA net.sourceforge.olympos.oaw.extend.Logger.warn(java.lang.Object)
+;	
+Void error(Object o) : 
+	JAVA net.sourceforge.olympos.oaw.extend.Logger.error(java.lang.Object)
+;
+   
+/**
+ * Join a list of strings
+ */
+String join(List list, String separator) : 
+	JAVA net.sourceforge.olympos.oaw.extend.Util.join(java.util.AbstractCollection, java.lang.String)
+;
+
+/**
+ * Check if a string is empty
+ */
+Boolean isNullOrEmpty(String s) :
+	s == null || s.trim().length == 0
+;
+
+/**
+ * Check if a boolean is false
+ */
+Boolean isNullOrFalse(Boolean b) :
+	b == null || !b
+;
+Boolean isNullOrFalse(uml::EnumerationLiteral b) :
+	b == null || b.name.toString().matches("false")
+;
+
+/**
+ * Get the string representation of a boolean
+ */ 
+String boolString(Boolean b) :
+	b == null || !b ? "false" : "true"
+;
+String boolString(uml::EnumerationLiteral b) :
+	b == null || b.name.toString().matches("false") ? "false" : "true"
+;

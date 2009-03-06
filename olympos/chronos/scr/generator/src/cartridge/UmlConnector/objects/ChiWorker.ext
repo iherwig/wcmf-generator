@@ -1,0 +1,60 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+
+uml::Actor convert(cwm::ChiWorker w):
+	let uc = new uml::Actor : {
+		uc.setName("ChiWorker:" + w.id)
+	} ->
+	uc
+;
+
+Void establishConnections(cwm::ChiWorker b, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiWorker:" + b.id).first(): (
+		b.manyToMany.select(e|e.targetType == "ChiBusinessUseCase").establishConnectionsToUseCase(uc, um, "participates in", uml::AggregationKind::none, uml::AggregationKind::none, true, false) ->
+		b.manyToMany.select(e|e.targetType == "ChiBusinessUseCaseCore").establishConnectionsToUseCase(uc, um, "participates in", uml::AggregationKind::none, uml::AggregationKind::none, true, false) ->
+		b.child.select(e|e.targetType == "ChiWorker").establishGeneralizationToActor(uc, um) ->
+		b.child.select(e|e.targetType == "ChiWorkerExternal").establishGeneralizationToActor(uc, um) ->
+		b.child.select(e|e.targetType == "ChiWorkerInternal").establishGeneralizationToActor(uc, um)
+	)
+;
+
+Void transferValues(cwm::ChiWorker c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiWorker:" + c.id).first(): {
+		uc.applyStereotype("Chronos::ChiWorker") ->
+		uc.setTaggedValue("Chronos::ChiWorker", "Alias", c.alias) ->
+		uc.setTaggedValue("Chronos::ChiWorker", "Version", c.version) ->
+		uc.setName(c.name) ->
+		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
+		uc.setTaggedValue("Chronos::ChiWorker", "created", c.created) ->
+		uc.setTaggedValue("Chronos::ChiWorker", "creator", c.creator) ->
+		uc.setTaggedValue("Chronos::ChiWorker", "last_editor", c.lastEditor) ->
+		uc.setTaggedValue("Chronos::ChiWorker", "modified", c.modified)
+	}
+;
+
+cwm::ChiWorker convertToCwm(Chronos::ChiWorker c) :
+	let un = new cwm::ChiWorker : (
+		un.setId(c.getId()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiWorker", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiWorker", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiWorker", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiWorker", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiWorker", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiWorker", "modified").toString()) ->
+
+		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiBusinessUseCase).convertToMany()) ->
+		un.child.addAll(c.getGenerals().convertToChild())
+	) ->
+	un
+;

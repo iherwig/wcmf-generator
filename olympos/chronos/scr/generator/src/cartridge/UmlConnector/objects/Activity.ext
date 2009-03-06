@@ -1,0 +1,73 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+
+//A cwm::Activity is converted to a uml::OpaqueAction
+uml::OpaqueAction convert(cwm::Activity a):
+	//(new uml::OpaqueAction
+	let uc = new uml::OpaqueAction : {
+		uc.setName("Activity:" + a.id)
+	} ->
+	uc
+;
+
+Void establishConnections(cwm::Activity b, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::OpaqueAction).select(e|e.name == "Activity:" + b.id).first(): (
+		b.child.select(e|e.targetType == "ActivityFinal").establishConnectionsToActivityFinalNode(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.child.select(e|e.targetType == "Activity").establishConnectionsToOpaqueAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.manyToMany.select(e|e.targetType == "ActivityDecision").establishConnectionsToDecisionNode(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.child.select(e|e.targetType == "ActivitySend").establishConnectionsToSendSignalAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.child.select(e|e.targetType == "ActivityReceive").establishConnectionsToAcceptEventAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.child.select(e|e.targetType == "ChiNode").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true)
+	)
+;
+
+Void transferValues(cwm::Activity c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::OpaqueAction).select(e|e.name == "Activity:" + c.id).first(): {
+		uc.setName(c.name) ->
+		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void
+/*
+		uc.applyStereotype("Chronos::Activity") ->
+		uc.setTaggedValue("Chronos::Activity", "Alias", c.alias) ->
+		uc.setTaggedValue("Chronos::Activity", "Version", c.version) ->
+
+		uc.setTaggedValue("Chronos::Activity", "created", c.created) ->
+		uc.setTaggedValue("Chronos::Activity", "creator", c.creator) ->
+		uc.setTaggedValue("Chronos::Activity", "last_editor", c.lastEditor) ->
+		uc.setTaggedValue("Chronos::Activity", "modified", c.modified)
+*/
+	}
+;
+
+cwm::Activity convertToCwm(uml::OpaqueAction c) :
+	//(new uml::OpaqueAction).
+	let un = new cwm::Activity : (
+		un.setId(c.getId()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+/*
+		un.setAlias(c.getTaggedValue("Chronos::Activity", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::Activity", "Version").toString()) ->
+
+		un.setCreated(c.getTaggedValue("Chronos::Activity", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::Activity", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::Activity", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::Activity", "modified").toString())
+*/
+		un.child.addAll(c.outgoing.target.typeSelect(uml::ActivityFinalNode).convertToChild()) ->
+		un.child.addAll(c.outgoing.target.typeSelect(uml::OpaqueAction).convertToChild()) ->
+		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::DecisionNode).convertToMany()) ->
+		un.child.addAll(c.outgoing.target.typeSelect(uml::SendSignalAction).convertToChild()) ->
+		un.child.addAll(c.outgoing.target.typeSelect(uml::AcceptEventAction).convertToChild()) ->
+		un.child.addAll(c.outgoing.target.typeSelect(uml::Class).convertToChild())
+	) ->
+	un
+;

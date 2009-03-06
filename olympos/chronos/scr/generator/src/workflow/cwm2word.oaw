@@ -1,0 +1,113 @@
+<workflow>
+	<property name="basePath" value="src" />
+	<property name="workingDir" value="${basePath}/../example-data/doc" />
+	<property name="templateName" value="standard" />
+
+	<property name="propertyFile" value="${basePath}/workflow/cwm2word.properties" />
+	<property file="${propertyFile}" />
+
+	<property file="${basePath}/cartridge/DocumentGeneration/template/${templateName}/static.properties" />
+
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<component class="org.openarchitectureware.xsd.XMLReader">
+		<modelSlot value="uwmmodel" />
+		<uri value="${inputUri}" />
+		<metaModel id="cwm"
+			class="org.openarchitectureware.xsd.XSDMetaModel">
+			<schemaFile value="metamodel/cwm.xsd" />
+		</metaModel>
+	</component>
+
+	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
+		<modelUrl value='http://cwm.nikostotz.de/chronos.profile.uml'/>
+		<outputSlot value="chronosProfile"/>
+	</component>
+
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="cwm" />
+		<metaModel id="uml"
+			class="oaw.uml2.UML2MetaModel" />
+		<metaModel id="Chronos" class="oaw.uml2.profile.ProfileMetaModel">
+			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
+		</metaModel>
+		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfile)" />
+		<outputSlot value="uml2model" />
+		<globalVarDef name="basePath" value="'${basePath}'" />
+	</component>
+
+	<component class="oaw.xpand2.Generator" skipOnErrors="true">
+		<globalVarDef name="tplSubject" value="'${tplSubject}'" />
+		<globalVarDef name="tplUserName" value="'${tplUserName}'" />
+		<globalVarDef name="tplOwner" value="'${tplOwner}'" />
+		<globalVarDef name="tplCustomer" value="'${tplCustomer}'" />
+		<globalVarDef name="tplTemplateName" value="'${tplTemplateName}'" />
+		<globalVarDef name="tplTemplateVersion" value="'${tplTemplateVersion}'" />
+		<globalVarDef name="tplDocumentTitle" value="'${tplDocumentTitle}'" />
+		<globalVarDef name="tplDocumentName" value="'${tplDocumentName}'" />
+		<globalVarDef name="tplDocumentPath" value="'${tplDocumentPath}'" />
+		<globalVarDef name="tplDocumentVersion" value="'${tplDocumentVersion}'" />
+		<globalVarDef name="tplDocumentStatus" value="'${tplDocumentStatus}'" />
+		<globalVarDef name="tplDatePublished" value="'${tplDatePublished}'" />
+		<globalVarDef name="tplLicense" value="'${tplLicense}'" />
+		<globalVarDef name="tplTemplateHelp" value="'${tplTemplateHelp}'" />
+		<globalVarDef name="tplTemplateDescription" value="'${tplTemplateDescription}'" />
+
+		<fileEncoding value="utf-8"/>
+		
+		<metaModel idRef="uml" />
+		<metaModel idRef="Chronos" />
+		
+		<expand value="cartridge::DocumentGeneration::template::${templateName}::content::file FOR uml2model"/>
+		
+		<outlet path="${workingDir}">
+		</outlet>
+	</component>
+	
+	<component class="oaw.xpand2.Generator" skipOnErrors="true">
+		<globalVarDef name="tplSubject" value="'${tplSubject}'" />
+		<globalVarDef name="tplUserName" value="'${tplUserName}'" />
+		<globalVarDef name="tplOwner" value="'${tplOwner}'" />
+		<globalVarDef name="tplCustomer" value="'${tplCustomer}'" />
+		<globalVarDef name="tplTemplateName" value="'${tplTemplateName}'" />
+		<globalVarDef name="tplTemplateVersion" value="'${tplTemplateVersion}'" />
+		<globalVarDef name="tplDocumentTitle" value="'${tplDocumentTitle}'" />
+		<globalVarDef name="tplDocumentName" value="'${tplDocumentName}'" />
+		<globalVarDef name="tplDocumentPath" value="'${tplDocumentPath}'" />
+		<globalVarDef name="tplDocumentVersion" value="'${tplDocumentVersion}'" />
+		<globalVarDef name="tplDocumentStatus" value="'${tplDocumentStatus}'" />
+		<globalVarDef name="tplDatePublished" value="'${tplDatePublished}'" />
+		<globalVarDef name="tplLicense" value="'${tplLicense}'" />
+		<globalVarDef name="tplTemplateHelp" value="'${tplTemplateHelp}'" />
+		<globalVarDef name="tplTemplateDescription" value="'${tplTemplateDescription}'" />
+
+		<fileEncoding value="utf-8"/>
+		
+		<metaModel idRef="uml" />
+		<metaModel idRef="Chronos" />
+		
+		<expand value="cartridge::DocumentGeneration::template::${templateName}::styles::file FOR uml2model"/>
+		
+		<outlet path="${workingDir}">
+		</outlet>
+	</component>
+
+	<component class="net.sourceforge.olympos.oaw.workflow.AddToZip">
+		<sourceFile value="${basePath}/cartridge/DocumentGeneration/template/${templateName}/empty-shell.odt" />
+		<targetFile value="${workingDir}/document-tmp0.odt" />
+		<fileToAdd value="${workingDir}/content.xml" />
+		<newEntry value="content.xml" />
+	</component>
+	
+	<component class="net.sourceforge.olympos.oaw.workflow.AddToZip">
+		<sourceFile value="${workingDir}/document-tmp0.odt" />
+		<targetFile value="${workingDir}/document-export.odt" />
+		<fileToAdd value="${workingDir}/styles.xml" />
+		<newEntry value="styles.xml" />
+	</component>
+
+	<component class="net.cmp4oaw.openofficeconverter.OpenOfficeConverter">
+		<inputFile value="${workingDir}/document-export.odt"/>
+		<outputFile value="${workingDir}/document-export.doc"/>
+	</component>
+</workflow>

@@ -1,0 +1,78 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension common::umlutils;
+
+cwm::Child convertToChild(uml::Class otherClass) :
+	let result = new cwm::Child : (
+		result.setTargetType(otherClass.metaType.name.split("::").last()) ->
+		result.setTargetOid(otherClass.getId())
+	) ->
+	result
+;
+
+cwm::ManyToMany convertToMany(uml::Class other) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType(other.metaType.name.split("::").last()) ->
+		result.setTargetOid(other.getId())
+	) ->
+	result
+;
+
+cwm::Child convertToChild(uml::ActivityFinalNode otherClass) :
+	let result = new cwm::Child : (
+		result.setTargetType("ActivityFinal") ->
+		result.setTargetOid(otherClass.getId())
+	) ->
+	result
+;
+
+cwm::Child convertToChild(uml::OpaqueAction otherClass) :
+	let result = new cwm::Child : (
+		result.setTargetType("Activity") ->
+		result.setTargetOid(otherClass.getId())
+	) ->
+	result
+;
+
+cwm::ManyToMany convertToMany(uml::DecisionNode other) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType("ActivityDecision") ->
+		result.setTargetOid(other.getId())
+	) ->
+	result
+;
+
+cwm::Child convertToChild(uml::SendSignalAction otherClass) :
+	let result = new cwm::Child : (
+		result.setTargetType("ActivitySend") ->
+		result.setTargetOid(otherClass.getId())
+	) ->
+	result
+;
+
+cwm::ManyToMany convertToMany(uml::OpaqueAction other) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType("Activity") ->
+		result.setTargetOid(other.getId())
+	) ->
+	result
+;
+
+cwm::Child convertToChild(uml::AcceptEventAction otherClass) :
+	let result = new cwm::Child : (
+		result.setTargetType("ActivityReceive") ->
+		result.setTargetOid(otherClass.getId())
+	) ->
+	result
+;
+
+cwm::ManyToMany convertToMany(uml::Class other, String relationType) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType(other.metaType.name.split("::").last()) ->
+		result.setRelationType(relationType) ->
+		result.setTargetOid(other.getId())
+	) ->
+	result
+;
