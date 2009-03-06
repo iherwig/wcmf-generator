@@ -1,0 +1,65 @@
+READMEFIRST
+this is the readme for the Chronos Web Modeler (CWM).
+
+LICENCE
+ * Copyright (c) 2009 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+
+ ABOUT CWM
+The CWM is a tool for:
+
+    * collaborative Modeling of Requirements, Use Cases and Domain
+    * Direct generation of Documents & Code
+    * Integration with other UML tools
+
+The CWM is:
+
+    * Open
+    * Extensible
+    * Free
+
+INSTALLATION
+- read the provided pdf File
+
+MANUAL
+- read the provided PDF or the online help.
+	
+History
+0.1	Alpha Black	
+•	Initial help screen
+•	Tooltips for tabs
+•	activity support
+•	Model Intellisense
+•	translation
+
+0.2 Beta Blue	
+•	XMI 2.1 EMF export
+•	Object locking for preventing concurrent update
+
+0.3 Beta Green
+•	Public Demo	
+•	CWM must able to generate documents
+•	Internet demo upgrade
+
+0.4 Beta Red	
+•	XMI 2.1 EMF import
+
+0.5 Beta RC1	
+•	Activities support
+
+0.6	Beta RC2	•	CWM supports classes diagrams
+•	Consolidation above
+•	productive Live 
+
+0.7	Beta RC3	
+•	Revertable history on object level
+
+0.8	Beta Final
+	•	Consolidation 
