@@ -54,14 +54,8 @@ rd /s /q c:\temp\cwm\gui\js\uwm
 rd /s /q c:\temp\cwm\gui\js\cwm
 
 REM zip
-7z a cwm.zip c:\temp\cwm\gui
-7z a cwm.zip c:\temp\cwm\application
-7z a cwm.zip c:\temp\cwm\wcmf
-7z a cwm.zip c:\temp\cwm\generator
+7z a cwm.zip c:\temp\cwm
 
 REM Delete temporary files
 del mergeall.bat
-rd /s /q c:\temp\cwm\gui
-rd /s /q c:\temp\cwm\application
-rd /s /q c:\temp\cwm\wcmf
-rd /s /q c:\temp\cwm\generator
+rd /s /q c:\temp\cwm
