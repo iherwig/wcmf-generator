@@ -1,81 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Chronos="http:///schemas/Chronos/_u0epIOjFEd27WsnyD_sNAA/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/Chronos/_u0epIOjFEd27WsnyD_sNAA/0 http://cwm.nikostotz.de/chronos.profile.uml#_u0w9AejFEd27WsnyD_sNAA">
-  <uml:Model xmi:id="_0sbXYApYEd6FVfjGwhUIOA" name="uml-generated">
-    <packagedElement xmi:type="uml:Package" xmi:id="_0sbXYQpYEd6FVfjGwhUIOA" name="New Package">
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXYgpYEd6FVfjGwhUIOA" name="New ChiController"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXYwpYEd6FVfjGwhUIOA" name="New ChiController"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXZApYEd6FVfjGwhUIOA" name="New ChiController"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXZQpYEd6FVfjGwhUIOA" name="New ChiController"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXZgpYEd6FVfjGwhUIOA" name="New ChiNode"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXZwpYEd6FVfjGwhUIOA">
+  <uml:Model xmi:id="_dT1C0ApkEd6TbN96LXluxA" name="uml-generated">
+    <packagedElement xmi:type="uml:Package" xmi:id="_dT1C0QpkEd6TbN96LXluxA" name="New Package">
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C0gpkEd6TbN96LXluxA" name="New ChiController"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C0wpkEd6TbN96LXluxA" name="New ChiController"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C1ApkEd6TbN96LXluxA" name="New ChiController"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C1QpkEd6TbN96LXluxA" name="New ChiController"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C1gpkEd6TbN96LXluxA" name="New ChiNode"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C1wpkEd6TbN96LXluxA">
         <name xsi:nil="true"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXaApYEd6FVfjGwhUIOA" name="New ChiNode">
-        <ownedAttribute xmi:id="_0sbXaQpYEd6FVfjGwhUIOA" name="New ChiValue"/>
-        <ownedAttribute xmi:id="_0sbXagpYEd6FVfjGwhUIOA" name="New ChiValue"/>
-        <ownedAttribute xmi:id="_0sbXawpYEd6FVfjGwhUIOA" name="New ChiValue"/>
-        <ownedOperation xmi:id="_0sbXbApYEd6FVfjGwhUIOA" name="New Operation"/>
-        <ownedOperation xmi:id="_0sbXbQpYEd6FVfjGwhUIOA" name="New Operation"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C2ApkEd6TbN96LXluxA" name="New ChiNode">
+        <ownedAttribute xmi:id="_dT1C2QpkEd6TbN96LXluxA" name="New ChiValue"/>
+        <ownedAttribute xmi:id="_dT1C2gpkEd6TbN96LXluxA" name="New ChiValue"/>
+        <ownedAttribute xmi:id="_dT1C2wpkEd6TbN96LXluxA" name="New ChiValue"/>
+        <ownedOperation xmi:id="_dT1C3ApkEd6TbN96LXluxA" name="New Operation"/>
+        <ownedOperation xmi:id="_dT1C3QpkEd6TbN96LXluxA" name="New Operation"/>
       </packagedElement>
     </packagedElement>
-    <packagedElement xmi:type="uml:Package" xmi:id="_0sbXbgpYEd6FVfjGwhUIOA" name="AAA">
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_0sbXbwpYEd6FVfjGwhUIOA" name="New ChiBusinessUseCase">
-        <ownedBehavior xmi:type="uml:Activity" xmi:id="_0sbXcApYEd6FVfjGwhUIOA" name="ActivitySet:21032">
-          <node xmi:type="uml:OpaqueAction" xmi:id="_0sbXcQpYEd6FVfjGwhUIOA" name="New Activity" outgoing="_0sbXcwpYEd6FVfjGwhUIOA"/>
-          <node xmi:type="uml:OpaqueAction" xmi:id="_0sbXcgpYEd6FVfjGwhUIOA" name="Activity99" incoming="_0sbXcwpYEd6FVfjGwhUIOA"/>
-          <edge xmi:type="uml:ControlFlow" xmi:id="_0sbXcwpYEd6FVfjGwhUIOA" source="_0sbXcQpYEd6FVfjGwhUIOA" target="_0sbXcgpYEd6FVfjGwhUIOA">
+    <packagedElement xmi:type="uml:Package" xmi:id="_dT1C3gpkEd6TbN96LXluxA" name="AAA">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_dT1C3wpkEd6TbN96LXluxA" name="New ChiBusinessUseCase">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_dT1C4ApkEd6TbN96LXluxA" name="ActivitySet:21032">
+          <node xmi:type="uml:OpaqueAction" xmi:id="_dT1C4QpkEd6TbN96LXluxA" name="New Activity" outgoing="_dT1C4wpkEd6TbN96LXluxA"/>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_dT1C4gpkEd6TbN96LXluxA" name="Activity99" incoming="_dT1C4wpkEd6TbN96LXluxA"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_dT1C4wpkEd6TbN96LXluxA" source="_dT1C4QpkEd6TbN96LXluxA" target="_dT1C4gpkEd6TbN96LXluxA">
             <name xsi:nil="true"/>
           </edge>
         </ownedBehavior>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXdApYEd6FVfjGwhUIOA" name="Feature 99" clientDependency="_0sbXgApYEd6FVfjGwhUIOA"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXdQpYEd6FVfjGwhUIOA" clientDependency="_0sbXgQpYEd6FVfjGwhUIOA _0sbXggpYEd6FVfjGwhUIOA _0sbXgwpYEd6FVfjGwhUIOA _0sbXhApYEd6FVfjGwhUIOA">
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C5ApkEd6TbN96LXluxA" name="Feature 99" clientDependency="_dT1C8ApkEd6TbN96LXluxA"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C5QpkEd6TbN96LXluxA" clientDependency="_dT1C8QpkEd6TbN96LXluxA _dT1C8gpkEd6TbN96LXluxA _dT1C8wpkEd6TbN96LXluxA _dT1C9ApkEd6TbN96LXluxA">
         <name xsi:nil="true"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXdgpYEd6FVfjGwhUIOA" name="New ChiGoal"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXdwpYEd6FVfjGwhUIOA" name="New ChiRequirement"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXeApYEd6FVfjGwhUIOA" name="New ChiRequirement"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXeQpYEd6FVfjGwhUIOA" name="New ChiNode"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXegpYEd6FVfjGwhUIOA" name="New ChiNode"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXewpYEd6FVfjGwhUIOA" name="New ChiNode">
-        <ownedAttribute xmi:id="_0sbXfApYEd6FVfjGwhUIOA" name="New ChiValue"/>
-        <ownedOperation xmi:id="_0sbXfQpYEd6FVfjGwhUIOA" name="New Operation"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C5gpkEd6TbN96LXluxA" name="New ChiGoal"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C5wpkEd6TbN96LXluxA" name="New ChiRequirement"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C6ApkEd6TbN96LXluxA" name="New ChiRequirement"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C6QpkEd6TbN96LXluxA" name="New ChiNode"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C6gpkEd6TbN96LXluxA" name="New ChiNode"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C6wpkEd6TbN96LXluxA" name="New ChiNode">
+        <ownedAttribute xmi:id="_dT1C7ApkEd6TbN96LXluxA" name="New ChiValue"/>
+        <ownedOperation xmi:id="_dT1C7QpkEd6TbN96LXluxA" name="New Operation"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXfgpYEd6FVfjGwhUIOA" name="ChiNode 999"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_0sbXfwpYEd6FVfjGwhUIOA" name="New ChiNode"/>
-      <packagedElement xmi:type="uml:Realization" xmi:id="_0sbXgApYEd6FVfjGwhUIOA" name="is negated by" supplier="_0sbXdwpYEd6FVfjGwhUIOA" client="_0sbXdApYEd6FVfjGwhUIOA"/>
-      <packagedElement xmi:type="uml:Realization" xmi:id="_0sbXgQpYEd6FVfjGwhUIOA" name="is negated by" supplier="_0sbXeApYEd6FVfjGwhUIOA" client="_0sbXdQpYEd6FVfjGwhUIOA"/>
-      <packagedElement xmi:type="uml:Realization" xmi:id="_0sbXggpYEd6FVfjGwhUIOA" name="is negated by" supplier="_0sbXeApYEd6FVfjGwhUIOA" client="_0sbXdQpYEd6FVfjGwhUIOA"/>
-      <packagedElement xmi:type="uml:Realization" xmi:id="_0sbXgwpYEd6FVfjGwhUIOA" name="is negated by" supplier="_0sbXeApYEd6FVfjGwhUIOA" client="_0sbXdQpYEd6FVfjGwhUIOA"/>
-      <packagedElement xmi:type="uml:Realization" xmi:id="_0sbXhApYEd6FVfjGwhUIOA" name="is negated by" supplier="_0sbXeApYEd6FVfjGwhUIOA" client="_0sbXdQpYEd6FVfjGwhUIOA"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C7gpkEd6TbN96LXluxA" name="ChiNode 999"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_dT1C7wpkEd6TbN96LXluxA" name="New ChiNode"/>
+      <packagedElement xmi:type="uml:Realization" xmi:id="_dT1C8ApkEd6TbN96LXluxA" name="is negated by" supplier="_dT1C5wpkEd6TbN96LXluxA" client="_dT1C5ApkEd6TbN96LXluxA"/>
+      <packagedElement xmi:type="uml:Realization" xmi:id="_dT1C8QpkEd6TbN96LXluxA" name="is negated by" supplier="_dT1C6ApkEd6TbN96LXluxA" client="_dT1C5QpkEd6TbN96LXluxA"/>
+      <packagedElement xmi:type="uml:Realization" xmi:id="_dT1C8gpkEd6TbN96LXluxA" name="is negated by" supplier="_dT1C6ApkEd6TbN96LXluxA" client="_dT1C5QpkEd6TbN96LXluxA"/>
+      <packagedElement xmi:type="uml:Realization" xmi:id="_dT1C8wpkEd6TbN96LXluxA" name="is negated by" supplier="_dT1C6ApkEd6TbN96LXluxA" client="_dT1C5QpkEd6TbN96LXluxA"/>
+      <packagedElement xmi:type="uml:Realization" xmi:id="_dT1C9ApkEd6TbN96LXluxA" name="is negated by" supplier="_dT1C6ApkEd6TbN96LXluxA" client="_dT1C5QpkEd6TbN96LXluxA"/>
     </packagedElement>
-    <profileApplication xmi:id="_0sbXhQpYEd6FVfjGwhUIOA">
-      <eAnnotations xmi:id="_0sbXhgpYEd6FVfjGwhUIOA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <profileApplication xmi:id="_dT1C9QpkEd6TbN96LXluxA">
+      <eAnnotations xmi:id="_dT1C9gpkEd6TbN96LXluxA" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://cwm.nikostotz.de/chronos.profile.uml#_u0w9AejFEd27WsnyD_sNAA"/>
       </eAnnotations>
       <appliedProfile href="http://cwm.nikostotz.de/chronos.profile.uml#b54fa5fd-e8c5-11dd-8f0c-a3d1234baf31"/>
     </profileApplication>
   </uml:Model>
-  <Chronos:ChiController xmi:id="_0sbXhwpYEd6FVfjGwhUIOA" base_Class="_0sbXYgpYEd6FVfjGwhUIOA"/>
-  <Chronos:ChiController xmi:id="_0sbXiApYEd6FVfjGwhUIOA" base_Class="_0sbXYwpYEd6FVfjGwhUIOA"/>
-  <Chronos:ChiController xmi:id="_0sbXiQpYEd6FVfjGwhUIOA" base_Class="_0sbXZApYEd6FVfjGwhUIOA"/>
-  <Chronos:ChiController xmi:id="_0sbXigpYEd6FVfjGwhUIOA" base_Class="_0sbXZQpYEd6FVfjGwhUIOA"/>
-  <Chronos:ChiNode xmi:id="_0sbXiwpYEd6FVfjGwhUIOA" Alias="Chi195Nod" created="2009-03-03 13:02:55" creator="admin" last_editor="admin" modified="2009-03-03 13:02:58" base_Class="_0sbXZgpYEd6FVfjGwhUIOA" display_value="name"/>
-  <Chronos:ChiNode xmi:id="_0sbXjApYEd6FVfjGwhUIOA" Alias="Chi193Nod" created="2009-03-03 11:33:11" creator="admin" last_editor="admin" modified="2009-03-03 11:33:12" base_Class="_0sbXZwpYEd6FVfjGwhUIOA" display_value="name"/>
-  <Chronos:ChiNode xmi:id="_0sbXjQpYEd6FVfjGwhUIOA" Alias="Chi194Nod" created="2009-03-03 11:34:21" creator="admin" last_editor="admin" modified="2009-03-03 13:02:47" base_Class="_0sbXaApYEd6FVfjGwhUIOA" display_value="name"/>
-  <Chronos:ChiValue xmi:id="_0sbXjgpYEd6FVfjGwhUIOA" base_Property="_0sbXaQpYEd6FVfjGwhUIOA"/>
-  <Chronos:ChiValue xmi:id="_0sbXjwpYEd6FVfjGwhUIOA" base_Property="_0sbXagpYEd6FVfjGwhUIOA"/>
-  <Chronos:ChiValue xmi:id="_0sbXkApYEd6FVfjGwhUIOA" base_Property="_0sbXawpYEd6FVfjGwhUIOA"/>
-  <Chronos:ChiBusinessUseCase xmi:id="_0slIYApYEd6FVfjGwhUIOA" Alias="Chi176BUC" created="2009-03-02 17:43:02" creator="admin" last_editor="admin" modified="2009-03-02 17:43:06" base_UseCase="_0sbXbwpYEd6FVfjGwhUIOA"/>
-  <Chronos:ChiFeature xmi:id="_0slIYQpYEd6FVfjGwhUIOA" Alias="Chi073Fea" created="2009-02-27 16:27:25" creator="admin" last_editor="admin" modified="2009-02-27 16:42:11" base_Class="_0sbXdApYEd6FVfjGwhUIOA" Author=", " Proofreader=", "/>
-  <Chronos:ChiFeature xmi:id="_0slIYgpYEd6FVfjGwhUIOA" Alias="Chi087Fea" created="2009-03-02 17:42:48" creator="admin" last_editor="admin" modified="2009-03-02 19:35:49" base_Class="_0sbXdQpYEd6FVfjGwhUIOA" Author=", " Proofreader=", " Status="Rejected"/>
-  <Chronos:ChiGoal xmi:id="_0slIYwpYEd6FVfjGwhUIOA" Alias="Chi065Goa" created="2009-02-27 17:46:37" creator="admin" last_editor="admin" modified="2009-02-27 17:46:42" base_Class="_0sbXdgpYEd6FVfjGwhUIOA" Priority="0"/>
-  <Chronos:ChiRequirement xmi:id="_0slIZApYEd6FVfjGwhUIOA" Alias="Chi092Req" created="2009-02-27 17:56:03" creator="admin" last_editor="admin" modified="2009-03-03 14:44:58" base_Class="_0sbXdwpYEd6FVfjGwhUIOA" Priority="100" Author=", " Proofreader=", " Status="Proposed" Type="Performance"/>
-  <Chronos:ChiRequirement xmi:id="_0slIZQpYEd6FVfjGwhUIOA" Alias="Chi093Req" created="2009-02-27 17:58:15" creator="admin" last_editor="admin" modified="2009-03-03 14:45:09" base_Class="_0sbXeApYEd6FVfjGwhUIOA" Author=", " Proofreader=", "/>
-  <Chronos:ChiNode xmi:id="_0slIZgpYEd6FVfjGwhUIOA" Alias="Chi008Nod" created="2009-02-19 16:38:37" creator="admin" last_editor="admin" modified="2009-02-19 16:38:48" base_Class="_0sbXeQpYEd6FVfjGwhUIOA" display_value="name"/>
-  <Chronos:ChiNode xmi:id="_0slIZwpYEd6FVfjGwhUIOA" Alias="Chi007Nod" created="2009-02-19 16:38:35" creator="admin" last_editor="admin" modified="2009-02-19 16:38:42" base_Class="_0sbXegpYEd6FVfjGwhUIOA" display_value="name"/>
-  <Chronos:ChiNode xmi:id="_0slIaApYEd6FVfjGwhUIOA" Alias="Chi006Nod" created="2009-02-19 16:38:35" creator="admin" last_editor="admin" modified="2009-02-19 16:38:40" base_Class="_0sbXewpYEd6FVfjGwhUIOA" display_value="name"/>
-  <Chronos:ChiValue xmi:id="_0slIaQpYEd6FVfjGwhUIOA" base_Property="_0sbXfApYEd6FVfjGwhUIOA"/>
-  <Chronos:ChiNode xmi:id="_0slIagpYEd6FVfjGwhUIOA" Alias="Chi009Nod" created="2009-02-19 16:38:37" creator="admin" last_editor="admin" modified="2009-02-19 18:39:07" base_Class="_0sbXfgpYEd6FVfjGwhUIOA" display_value="name"/>
-  <Chronos:ChiNode xmi:id="_0slIawpYEd6FVfjGwhUIOA" Alias="Chi010Nod" created="2009-02-19 18:35:09" creator="admin" last_editor="admin" modified="2009-02-19 18:35:12" base_Class="_0sbXfwpYEd6FVfjGwhUIOA" display_value="name"/>
+  <Chronos:ChiController xmi:id="_dT1C9wpkEd6TbN96LXluxA" base_Class="_dT1C0gpkEd6TbN96LXluxA"/>
+  <Chronos:ChiController xmi:id="_dT1C-ApkEd6TbN96LXluxA" base_Class="_dT1C0wpkEd6TbN96LXluxA"/>
+  <Chronos:ChiController xmi:id="_dT1C-QpkEd6TbN96LXluxA" base_Class="_dT1C1ApkEd6TbN96LXluxA"/>
+  <Chronos:ChiController xmi:id="_dT1C-gpkEd6TbN96LXluxA" base_Class="_dT1C1QpkEd6TbN96LXluxA"/>
+  <Chronos:ChiNode xmi:id="_dT1C-wpkEd6TbN96LXluxA" Alias="Chi195Nod" created="2009-03-03 13:02:55" creator="admin" last_editor="admin" modified="2009-03-03 13:02:58" base_Class="_dT1C1gpkEd6TbN96LXluxA" display_value="name"/>
+  <Chronos:ChiNode xmi:id="_dT1C_ApkEd6TbN96LXluxA" Alias="Chi193Nod" created="2009-03-03 11:33:11" creator="admin" last_editor="admin" modified="2009-03-03 11:33:12" base_Class="_dT1C1wpkEd6TbN96LXluxA" display_value="name"/>
+  <Chronos:ChiNode xmi:id="_dT1C_QpkEd6TbN96LXluxA" Alias="Chi194Nod" created="2009-03-03 11:34:21" creator="admin" last_editor="admin" modified="2009-03-03 13:02:47" base_Class="_dT1C2ApkEd6TbN96LXluxA" display_value="name"/>
+  <Chronos:ChiValue xmi:id="_dT1C_gpkEd6TbN96LXluxA" base_Property="_dT1C2QpkEd6TbN96LXluxA"/>
+  <Chronos:ChiValue xmi:id="_dT1C_wpkEd6TbN96LXluxA" base_Property="_dT1C2gpkEd6TbN96LXluxA"/>
+  <Chronos:ChiValue xmi:id="_dT1DAApkEd6TbN96LXluxA" base_Property="_dT1C2wpkEd6TbN96LXluxA"/>
+  <Chronos:ChiBusinessUseCase xmi:id="_dT1DAQpkEd6TbN96LXluxA" Alias="Chi176BUC" created="2009-03-02 17:43:02" creator="admin" last_editor="admin" modified="2009-03-02 17:43:06" base_UseCase="_dT1C3wpkEd6TbN96LXluxA"/>
+  <Chronos:ChiFeature xmi:id="_dT1DAgpkEd6TbN96LXluxA" Alias="Chi073Fea" created="2009-02-27 16:27:25" creator="admin" last_editor="admin" modified="2009-02-27 16:42:11" base_Class="_dT1C5ApkEd6TbN96LXluxA" Author=", " Proofreader=", "/>
+  <Chronos:ChiFeature xmi:id="_dT1DAwpkEd6TbN96LXluxA" Alias="Chi087Fea" created="2009-03-02 17:42:48" creator="admin" last_editor="admin" modified="2009-03-02 19:35:49" base_Class="_dT1C5QpkEd6TbN96LXluxA" Author=", " Proofreader=", " Status="Rejected"/>
+  <Chronos:ChiGoal xmi:id="_dT1DBApkEd6TbN96LXluxA" Alias="Chi065Goa" created="2009-02-27 17:46:37" creator="admin" last_editor="admin" modified="2009-02-27 17:46:42" base_Class="_dT1C5gpkEd6TbN96LXluxA" Priority="0"/>
+  <Chronos:ChiRequirement xmi:id="_dT1DBQpkEd6TbN96LXluxA" Alias="Chi092Req" created="2009-02-27 17:56:03" creator="admin" last_editor="admin" modified="2009-03-03 14:44:58" base_Class="_dT1C5wpkEd6TbN96LXluxA" Priority="100" Author=", " Proofreader=", " Status="Proposed" Type="Performance"/>
+  <Chronos:ChiRequirement xmi:id="_dT1DBgpkEd6TbN96LXluxA" Alias="Chi093Req" created="2009-02-27 17:58:15" creator="admin" last_editor="admin" modified="2009-03-03 14:45:09" base_Class="_dT1C6ApkEd6TbN96LXluxA" Author=", " Proofreader=", "/>
+  <Chronos:ChiNode xmi:id="_dT1DBwpkEd6TbN96LXluxA" Alias="Chi008Nod" created="2009-02-19 16:38:37" creator="admin" last_editor="admin" modified="2009-02-19 16:38:48" base_Class="_dT1C6QpkEd6TbN96LXluxA" display_value="name"/>
+  <Chronos:ChiNode xmi:id="_dT1DCApkEd6TbN96LXluxA" Alias="Chi007Nod" created="2009-02-19 16:38:35" creator="admin" last_editor="admin" modified="2009-02-19 16:38:42" base_Class="_dT1C6gpkEd6TbN96LXluxA" display_value="name"/>
+  <Chronos:ChiNode xmi:id="_dT1DCQpkEd6TbN96LXluxA" Alias="Chi006Nod" created="2009-02-19 16:38:35" creator="admin" last_editor="admin" modified="2009-02-19 16:38:40" base_Class="_dT1C6wpkEd6TbN96LXluxA" display_value="name"/>
+  <Chronos:ChiValue xmi:id="_dT1DCgpkEd6TbN96LXluxA" base_Property="_dT1C7ApkEd6TbN96LXluxA"/>
+  <Chronos:ChiNode xmi:id="_dT1DCwpkEd6TbN96LXluxA" Alias="Chi009Nod" created="2009-02-19 16:38:37" creator="admin" last_editor="admin" modified="2009-02-19 18:39:07" base_Class="_dT1C7gpkEd6TbN96LXluxA" display_value="name"/>
+  <Chronos:ChiNode xmi:id="_dT1DDApkEd6TbN96LXluxA" Alias="Chi010Nod" created="2009-02-19 18:35:09" creator="admin" last_editor="admin" modified="2009-02-19 18:35:12" base_Class="_dT1C7wpkEd6TbN96LXluxA" display_value="name"/>
 </xmi:XMI>
