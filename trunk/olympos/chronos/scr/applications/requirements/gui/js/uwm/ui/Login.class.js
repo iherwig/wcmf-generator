@@ -75,10 +75,6 @@ uwm.ui.Login = function(config){
 						val: "English"
 					},
 					{
-						key: "kl",
-						val: "Klingonisch"
-					},
-					{
 						key: "de",
 						val: "Deutsch"
 					}
