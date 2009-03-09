@@ -105,6 +105,9 @@ uwm.diagram.UwmWorkflow.prototype.onContextMenu = function(x, y) {
 	snapToObjects.checked = this.diagram.isSnapToObjects();
 
 	this.uwmContextMenu.showAt(this.diagram.getContextMenuPosition(x, y));
+	
+	this.oldX=null;
+	this.html.style.cursor="default";
 }
 
 /**
@@ -175,7 +178,7 @@ uwm.diagram.UwmWorkflow.prototype.getDiagram = function() {
 uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x,y){
 	this.oldX=x;
 	this.oldY=y;
-	console.log("imhandler");
+	this.html.style.cursor = "pointer";
 }
 
 uwm.diagram.UwmWorkflow.prototype.onMouseUp = function (x,y){
@@ -186,6 +189,7 @@ uwm.diagram.UwmWorkflow.prototype.onMouseUp = function (x,y){
 		this.oldX = null;
 		this.oldY = null;
 	}
+	this.html.style.cursor="default";
 }
 
 uwm.diagram.UwmWorkflow.prototype.onMouseMove = function (x,y){
