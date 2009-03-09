@@ -31,6 +31,7 @@ uwm.diagram.UwmWorkflow = function(id, diagram) {
 	this.diagram = diagram;
 
 	this.buildContextMenu();
+	
 }
 
 Ext.extend(uwm.diagram.UwmWorkflow, draw2d.Workflow);
@@ -171,6 +172,29 @@ uwm.diagram.UwmWorkflow.prototype.getDiagram = function() {
 	return this.diagram;
 }
 
+uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x,y){
+	this.oldX=x;
+	this.oldY=y;
+	console.log("imhandler");
+}
+
+uwm.diagram.UwmWorkflow.prototype.onMouseUp = function (x,y){
+	if (this.oldX) {
+		var deltaX = x - this.oldX;
+		var deltaY = y - this.oldY;
+		this.scrollTo(this.getScrollLeft() - deltaX, this.getScrollTop() - deltaY, true);
+		this.oldX = null;
+		this.oldY = null;
+	}
+}
+
+uwm.diagram.UwmWorkflow.prototype.onMouseMove = function (x,y){
+	if (this.oldX){
+		var deltaX=x-this.oldX;
+		var deltaY=y-this.oldY;
+		this.scrollTo(this.getScrollLeft()-deltaX, this.getScrollTop()-deltaY, true);
+	}
+}
 /**
  * The id of menu item "Snap to Objects".
  * 
