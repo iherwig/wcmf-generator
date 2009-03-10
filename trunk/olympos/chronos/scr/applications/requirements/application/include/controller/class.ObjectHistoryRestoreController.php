@@ -6,9 +6,23 @@ require_once (BASE."wcmf/lib/persistence/class.ObjectQuery.php");
 
 class ObjectHistoryRestoreController extends Controller
 {
-
 	var $ids;
 	var $arrids;
+	var $id;
+	var $histtable;
+	var $persistenceFacade;
+	var $currentUser;
+	var	$currentTimestamp;
+	var $objQueryHistEntry;
+	var $objTplHistEntry;
+	var $objlistHistEntryUnserialized;
+	var $timestamp;
+	var $affectedoid;
+	var $otype;
+	var $oid;
+	var $objQueryHistList;
+	var $objTplHistList;
+	var $objlistHistList;
 
 	function hasView()
 	{
@@ -21,36 +35,16 @@ class ObjectHistoryRestoreController extends Controller
 			case 'restorehistliststate':
 			
 				// init values
-				$this->ids = $this->_request->getValue('ids');
-				$id = $this->ids;
-				$histtable = 'History';
-				$persistenceFacade = & PersistenceFacade::getInstance();
-				$currentUser = self::getCurrentUser();
-				$currentTimestamp = self::getTimeStamp();
-			
+				self::initValues();
+				
 				// get history entry from History Table
-				$objQueryHistEntry = & $persistenceFacade->createObjectQuery($histtable);
-				$objTplHistEntry = & $objQueryHistEntry->getObjectTemplate($histtable);
-				$objTplHistEntry->setValue("id", $id, DATATYPE_IGNORE);
-				$objlistHistEntry = $objQueryHistEntry->execute(BUILDDEPTH_SINGLE, null);
-				$objlistHistEntryUnserialized = self::getDataValue($objlistHistEntry);
-				$timestamp = $objlistHistEntryUnserialized[0]['timestamp'];
-				$affectedoid = $objlistHistEntryUnserialized[0]['affectedoid'];
-				$otype = strstr($affectedoid, ':', true);
-				$oid = strstr($affectedoid, ':', false);
-				list ($otype, $oid) = explode(':', $affectedoid);
+				self::getHistoryFromTable();
 				
 				// get history entries with affectedoid and since timstamp from History Table
-				$objQueryHistList = & $persistenceFacade->createObjectQuery($histtable);
-				$objTplHistList = & $objQueryHistList->getObjectTemplate($histtable);
-				$objTplHistList->setValue("affectedoid", $affectedoid, DATATYPE_ATTRIBUTE);
-				$objTplHistList->setValue("timestamp", '> '.$timestamp, DATATYPE_ATTRIBUTE);
-				$objlistHistList = $objQueryHistList->execute(BUILDDEPTH_SINGLE, array ('timestamp DESC'));
-				array_push($objlistHistList, $objlistHistEntry[0]);
-				//print_r($objlistHistList);
+				self::getObjHistListSince();
 				
 				//current values of object to oldValueArray
-				$ObjCurVal = $persistenceFacade->load($affectedoid);
+				$ObjCurVal = $this->persistenceFacade->load($this->affectedoid);
 				$oldValueArray = array ();
 				foreach ($ObjCurVal as $keyCurValOld=>$valCurValOld) {
 					if($keyCurValOld == '_data' ){
@@ -65,8 +59,8 @@ class ObjectHistoryRestoreController extends Controller
 				
 				//overwrite values of $ObjCurVal to all in histlist, newest change first, last than is the right save on end
 				// get from objectDatabase and write $ObjCurVal->setValue() there 
-				$objlistHistListUnserialized = self::getDataValue($objlistHistList);//unserialize data
-				foreach ($objlistHistListUnserialized as $keyHistList=>$valHistList) {//histlistzeilen
+				$this->objlistHistListUnserialized = self::getDataValue($this->objlistHistList);//unserialize data
+				foreach ($this->objlistHistListUnserialized as $keyHistList=>$valHistList) {//histlistzeilen
 					foreach ($valHistList as $histcolname=>$histcolvalue) {//histlistzeilenfelder
 						if ($histcolname == 'data') {
 							foreach ($histcolvalue as $aendkey=>$aendval) {
@@ -89,20 +83,22 @@ class ObjectHistoryRestoreController extends Controller
 						}
 					}
 				}
-				$persistenceFacade->save($ObjCurVal);
+				$this->persistenceFacade->save($ObjCurVal);
 				
 				//current values of object to newValueArray
-				//$ObjCurVal = $persistenceFacade->load($affectedoid);
+				//$ObjCurVal = $this->persistenceFacade->load($this->affectedoid);
 				$newValueArray = array ();
 				foreach ($ObjCurVal as $keyCurValNew=>$valCurValNew) {
 					if($keyCurValNew == '_data' ){
 						foreach($valCurValNew as $keyVCVNew=>$valVCVNew){
 							foreach($valVCVNew as $keyVVCVNew=>$valVVCVNew){
 								array_push($newValueArray, array ($keyVVCVNew=>$valVVCVNew[value]));
+								if($keyVVCVNew =='Name'){$retval = $valVVCVNew[value];}
 							}
 						}
 					}
 				}
+				//echo $retval ;
 				//echo '<BR/><BR/>newValueArray<BR/>'; print_r($newValueArray);
 				
 				
@@ -126,21 +122,25 @@ class ObjectHistoryRestoreController extends Controller
 							$dataHistEntrySer = serialize($dataHistEntry);
 							//echo '<br>dataHistEntrySer: ' ; print_r(serialize($dataHistEntry));
 
-							$objQueryHistWrite = & $persistenceFacade->createObjectQuery($histtable);
-							$objTplHistWrite = & $objQueryHistWrite->getObjectTemplate($histtable); //new row
+							$objQueryHistWrite = & $this->persistenceFacade->createObjectQuery($this->histtable);
+							$objTplHistWrite = & $objQueryHistWrite->getObjectTemplate($this->histtable); //new row
 							
 							$objTplHistWrite->setValue('id', null, DATATYPE_ATTRIBUTE);
 							$objTplHistWrite->setValue('data', $dataHistEntrySer , DATATYPE_ATTRIBUTE);
 							$objTplHistWrite->setValue('duplicate', 'tbd' , DATATYPE_ATTRIBUTE);
 							$objTplHistWrite->setValue('eventtype', 'changeProperty', DATATYPE_ATTRIBUTE);
-							$objTplHistWrite->setValue('affectedoid', $affectedoid, DATATYPE_ATTRIBUTE);
+							$objTplHistWrite->setValue('affectedoid', $this->affectedoid, DATATYPE_ATTRIBUTE);
 							$objTplHistWrite->setValue('otheroid', 'tbd' , DATATYPE_ATTRIBUTE);
-							$objTplHistWrite->setValue('timestamp', $currentTimestamp , DATATYPE_ATTRIBUTE);
-							$objTplHistWrite->setValue('user', $currentUser , DATATYPE_ATTRIBUTE);
-							$persistenceFacade->save($objTplHistWrite);
+							$objTplHistWrite->setValue('timestamp', $this->currentTimestamp , DATATYPE_ATTRIBUTE);
+							$objTplHistWrite->setValue('user', $this->currentUser , DATATYPE_ATTRIBUTE);
+							$this->persistenceFacade->save($objTplHistWrite);
 						}
 					}
 				}
+			
+			
+			
+			
 			
 			break;
 			case 'restorehistlistfields':
@@ -157,10 +157,51 @@ class ObjectHistoryRestoreController extends Controller
 	//	Set the next action
 	$this->_response->setAction('ok');
 	//	Response
-	//$this->_response->setValue('', '' );
+	$this->_response->setValue('NewName', $retval );
 	return false;
 
-	return false;
+}
+
+private function getObjHistListSince(){
+	
+	// get history entries with affectedoid and since timstamp from History Table
+	$this->objQueryHistList = & $this->persistenceFacade->createObjectQuery($this->histtable);
+	$this->objTplHistList = & $this->objQueryHistList->getObjectTemplate($this->histtable);
+	$this->objTplHistList->setValue("affectedoid", $this->affectedoid, DATATYPE_ATTRIBUTE);
+	$this->objTplHistList->setValue("timestamp", '> '.$this->timestamp, DATATYPE_ATTRIBUTE);
+	$this->objlistHistList = $this->objQueryHistList->execute(BUILDDEPTH_SINGLE, array ('timestamp DESC'));
+	array_push($this->objlistHistList, $this->objlistHistEntry[0]);
+	//print_r($this->objlistHistList);
+					
+}
+
+private function getHistoryFromTable(){
+	
+	// get history entry from History Table
+	$this->objQueryHistEntry = & $this->persistenceFacade->createObjectQuery($this->histtable);
+	$this->objTplHistEntry = & $this->objQueryHistEntry->getObjectTemplate($this->histtable);
+	$this->objTplHistEntry->setValue("id", $this->id, DATATYPE_IGNORE);
+	$this->objlistHistEntry = $this->objQueryHistEntry->execute(BUILDDEPTH_SINGLE, null);
+	$this->objlistHistEntryUnserialized = self::getDataValue($this->objlistHistEntry);
+	$this->timestamp = $this->objlistHistEntryUnserialized[0]['timestamp'];
+	$this->affectedoid = $this->objlistHistEntryUnserialized[0]['affectedoid'];
+	$this->otype = strstr($this->affectedoid, ':', true);
+	$this->oid = strstr($this->affectedoid, ':', false);
+	list ($this->otype, $this->oid) = explode(':', $this->affectedoid);
+	//echo '<br/>this->affectedoid: '; print_r($this->affectedoid);
+	
+}
+
+private function initValues(){
+	
+	// init values
+	$this->ids = $this->_request->getValue('ids');
+	$this->id = $this->ids;
+	$this->histtable = 'History';
+	$this->persistenceFacade = & PersistenceFacade::getInstance();
+	$this->currentUser = self::getCurrentUser();
+	$this->currentTimestamp = self::getTimeStamp();
+		
 }
 
 private function getDataValue($objlist) {
