@@ -434,16 +434,23 @@ uwm.diagram.AbstractDiagram.prototype.reestablishConnections = function(newObjec
 	}
 }
 
+uwm.diagram.AbstractDiagram.prototype.getConnectedObject = function(oid) {
+	var result = this.objects.get(oid);
+	if (!result) {
+		for (i in this.objects.items) {
+			if (this.objects.items[i].oid == oid) {
+				connectedObject = this.objects.items[i];
+			}
+		}
+	}
+	return result;
+}
+
 uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(newObject, list, listtype) {
 
 	if (list) {
 		for (var i = 0; i < list.length; i++) {
-			var connectedObject;
-			for (j in this.objects.items){
-				if (this.objects.items[j].oid==list[i]){
-					connectedObject=this.objects.items[j];
-				}
-			}
+			var connectedObject = this.getConnectedObject(list[i]);
 			
 			if (!connectedObject) {
 				var childObject = uwm.model.ModelContainer.getInstance().getByOid(list[i]);
@@ -452,7 +459,7 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					
 					for (var j = 0; j < parentOids.length; j++) {
 						if (parentOids[j] != newObject.getOid()) {
-							connectedObject = this.objects.get(parentOids[j]);
+							connectedObject = this.getConnectedObject(parentOids[j]);
 							break;
 						}
 					}
@@ -686,7 +693,7 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 
 	var self = this;
 	
-	if (!this.objects.get(modelObject.getOid())){
+	if (!this.objects.get(modelObject.getOid())) {
 		this.objects.items.push(modelObject);
 		this.objects.keys.push(modelObject.getOid());
 	}
