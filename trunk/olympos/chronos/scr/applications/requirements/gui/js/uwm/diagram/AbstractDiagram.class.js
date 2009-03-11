@@ -115,8 +115,8 @@ uwm.diagram.AbstractDiagram.prototype.init = function() {
 		"delete": function(modelObject) {
 			self.handleDeleteEvent(modelObject);
 		},
-		"changeLabel": function(modelObject, oldLabel) {
-			self.handleChangeLabelEvent(modelObject, oldLabel);
+		"changeLabel": function(modelObject, oldLabel, newLabel) {
+			self.handleChangeLabelEvent(modelObject, oldLabel, newLabel);
 		},
 		"associate": function(parentModelObject, childModelObject) {
 			self.handleAssociateEvent(parentModelObject, childModelObject);
@@ -832,14 +832,18 @@ uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 	}
 }
 
-uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel) {
+uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel, newLabel) {
 	if (modelNode == this) {
 		this.tab.setTitle(this.getLabel());
 	} else if (this.containsObject(modelNode)) {
 		var figure = this.figures.get(modelNode.getOid());
 		
 		if (figure) {
-			figure.getGraphics().setLabel(modelNode.getLabel());
+			if (!newLabel) {
+				figure.getGraphics().setLabel(modelNode.getLabel());
+			}else{
+				figure.getGraphics().setLabel(newLabel);
+			}
 		}
 	} else if (modelNode instanceof uwm.model.AttributeObject ||
 	modelNode instanceof uwm.model.OperationObject) {
