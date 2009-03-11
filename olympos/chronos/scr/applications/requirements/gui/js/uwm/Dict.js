@@ -119,7 +119,7 @@ uwm.Dict.voc = {
 		"Property"				: {'de': "Eigenschaft"},
 		"Date"					: {'de': "Datum"},
 		"Author"				: {'de': "Autor"},
-		"Items changed"			: {'de': "Änderungen"},
+		"Changed Items"			: {'de': "Änderungen"},
 		"Show object history"	: {'de': "Objekt History zeigen"},
 		"Old value"				: {'de': "Alter Wert"},
 		"New value"				: {'de': "Neuer Wert"},

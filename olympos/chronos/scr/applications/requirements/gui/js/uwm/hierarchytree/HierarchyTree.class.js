@@ -48,8 +48,8 @@ uwm.hierarchytree.HierarchyTree = Ext.extend(uwm.objecttree.ObjectTree, {
 			"delete": function(modelObject) {
 				self.handleDeleteEvent(modelObject);
 			},
-			"changeLabel": function(modelObject, oldLabel) {
-				self.handleChangeLabelEvent(modelObject, oldLabel);
+			"changeLabel": function(modelObject, oldLabel, newLabel) {
+				self.handleChangeLabelEvent(modelObject, oldLabel, newLabel);
 			},
 			"associate": function(parentModelObject, childModelObject) {
 				self.handleAssociateEvent(parentModelObject, childModelObject);
@@ -114,9 +114,13 @@ uwm.hierarchytree.HierarchyTree.prototype.handleDeleteEvent = function(modelObje
 	}
 }
 
-uwm.hierarchytree.HierarchyTree.prototype.handleChangeLabelEvent = function(modelObject, oldLabel) {
+uwm.hierarchytree.HierarchyTree.prototype.handleChangeLabelEvent = function(modelObject, oldLabel, newLabel) {
 	var instances = this.getInstances(modelObject.getOid());
-	var label = modelObject.getLabel();
+	if (!newLabel) {
+		var label = modelObject.getLabel();
+	}else{
+		var label= newLabel;
+	}
 	
 	for (var i in instances) {
 		if (!(instances[i] instanceof Function)) {

@@ -70,8 +70,8 @@ uwm.modeltree.ModelTree = function(config) {
 		"delete": function(modelObject) {
 			self.handleDeleteEvent(modelObject);
 		},
-		"changeLabel": function(modelObject, oldLabel) {
-			self.handleChangeLabelEvent(modelObject, oldLabel);
+		"changeLabel": function(modelObject, oldLabel, newLabel) {
+			self.handleChangeLabelEvent(modelObject, oldLabel, newLabel);
 		},
 		"associate": function(parentModelObject, childModelObject) {
 			self.handleAssociateEvent(parentModelObject, childModelObject);
@@ -302,15 +302,21 @@ uwm.modeltree.ModelTree.prototype.handleDeleteEvent = function(modelObject) {
 	}
 }
 
-uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject, oldLabel) {
+uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject, oldLabel, newLabel) {
 	var oid = modelObject.getOid();
 	
 	var createdModel = this.createdModels.get(oid);
 	
 	if (!createdModel) {
 		var node = this.getNodeById(oid);
-		if (node) {
-			node.setText(modelObject.getLabel());
+		if (!newLabel) {
+			if (node) {
+				node.setText(modelObject.getLabel());
+			}
+		}else{
+			if (node){
+				node.setText(newLabel);
+			}
 		}
 	} else {
 		this.createdModels.removeKey(oid);

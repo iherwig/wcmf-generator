@@ -13,7 +13,7 @@ Ext.namespace("uwm.ui");
 
 /**
  * @class The window which shows an object's history and allows undo operations.
- * 
+ *
  * @extends Ext.window
  * @constructor
  * @param object The object for which the history shall be shown.
@@ -28,10 +28,10 @@ uwm.ui.History = function(object) {
 	}));
 	
 	this.store = new Ext.data.Store({
-			proxy: new uwm.ui.HistoryProxy(object),
-			start: 0,
-			limit: 3
-		});
+		proxy: new uwm.ui.HistoryProxy(object),
+		start: 0,
+		limit: 3
+	});
 	this.store.load({
 		params: {
 			start: 0,
@@ -55,6 +55,7 @@ uwm.ui.History = function(object) {
 	this.addButton(new Ext.Button({
 		window: this.window,
 		selection: this.selection,
+		object: object,
 		text: uwm.Dict.translate('Undo all changes since'),
 		handler: this.undoAll
 	}));
@@ -218,7 +219,7 @@ uwm.ui.History.prototype.getGrid = function(object) {
 			hidden: false,
 			sortable: true
 		}, {
-			header: uwm.Dict.translate("Items changed"),
+			header: uwm.Dict.translate("Changed Items"),
 			dataIndex: 'propertyString',
 			width: 180,
 			align: 'right',
@@ -234,6 +235,8 @@ uwm.ui.History.prototype.getGrid = function(object) {
 }
 
 uwm.ui.History.prototype.undoAll = function() {
+	var self = this;
+	
 	var sm = this.selection;
 	if (sm.getSelections().length == 0) {
 		Ext.MessageBox.alert("Error", "No items selected.");
@@ -244,9 +247,9 @@ uwm.ui.History.prototype.undoAll = function() {
 			var selectedItem = sm.getSelections()[0];
 			
 			uwm.persistency.Persistency.getInstance().restorehistliststate(selectedItem.data.id, function(options, data) {
-				Ext.MessageBox.alert('Success', uwm.Dict.translate('The selected state has been restored.'));
+				self.window.restoreSuccess(options, data, self.object)
 			}, function(options, data, errorMsg) {
-				this.restoreError(options, data, errorMsg);
+				self.window.restoreError(options, data, errorMsg);
 			});
 		}
 		
@@ -266,15 +269,25 @@ uwm.ui.History.prototype.undoSelected = function() {
 	}
 	
 	uwm.persistency.Persistency.getInstance().restorehistfields(selectedIds, function(options, data) {
-			//self.loadResponse(options, data, callback, scope, arg);
-			alert("success")
-		}, function(options, data, errorMsg) {
-			//self.loadFailed(options, data, errorMsg, callback, scope, arg)
-			alert("error")
-		});
+		//self.loadResponse(options, data, callback, scope, arg);
+		alert("success")
+	}, function(options, data, errorMsg) {
+		//self.loadFailed(options, data, errorMsg, callback, scope, arg)
+		alert("error")
+	});
 }
 
-uwm.ui.History.prototype.restoreError = function(options, data, errorMsg, callback, scope, arg){
-    this.fireEvent("loadexception", this, options, data);
-    callback.call(scope, null, arg, false);
+uwm.ui.History.prototype.restoreError = function(options, data, errorMsg, callback, scope, arg) {
+	this.fireEvent("loadexception", this, options, data);
+	callback.call(scope, null, arg, false);
+}
+
+uwm.ui.History.prototype.restoreSuccess = function(options, data, object) {
+	Ext.MessageBox.alert('Success', uwm.Dict.translate('The selected state has been restored.'));
+	var oldLabel=object.getLabel();
+	if (oldLabel != data.NewName) {
+		uwm.event.EventBroker.getInstance().fireEvent("changeLabel", object, null, data.NewName);
+	}
+	
+	uwm.property.PropertyContainer.getInstance().handleDeleteEvent(object);
 }
