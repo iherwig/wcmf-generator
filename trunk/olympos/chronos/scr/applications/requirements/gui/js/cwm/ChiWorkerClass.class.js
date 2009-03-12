@@ -48,12 +48,24 @@ cwm.ChiWorkerClass = function() {
 	
 	this.connectionInfo = {
 
-		/*"ChiWorker": {
-			label: "associates",
+		"ChiWorker": {
+			label: "",
 			invert: true,
-			connectionType: 'association',
+			connectionType: 'generalization',
 			cardinality: -1
-		},*/
+		},
+		"ChiWorkerInternal": {
+			label: "",
+			invert: true,
+			connectionType: 'generalization',
+			cardinality: -1
+		},
+		"ChiWorkerExternal": {
+			label: "",
+			invert: true,
+			connectionType: 'generalization',
+			cardinality: -1
+		},
 		"ChiBusinessUseCase": {
 			label: "participates in",
 			invert: true,
