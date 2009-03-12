@@ -26,6 +26,10 @@ del c:\temp\cwm\gui\js\uwm\Config.js
 ren c:\temp\cwm\gui\js\uwm\ConfigNew.js Config.js
 )
 
+REM server.ini must be stored separately
+copy c:\temp\cwm\application\include\server.ini c:\temp\cwm\server.ini
+del c:\temp\cwm\application\include\server.ini
+
 REM Merge uwm and cwm files
 copy cwm.js c:\temp\cwm\gui\js\cwm.js
 copy cwm.js c:\temp\cwm\gui\js\uwm.js
