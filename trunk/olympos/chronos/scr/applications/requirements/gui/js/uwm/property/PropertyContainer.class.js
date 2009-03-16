@@ -51,6 +51,9 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 				self.handleDeleteEvent(modelObject);
 			}
 		});
+		this.on("bodyresize", function() {
+			this.handleResizeEvent();
+		})
 	}
 })
 
@@ -125,6 +128,8 @@ uwm.property.PropertyContainer.prototype.displayForm = function() {
 	
 	var form = this.add(modelNode.getModelNodeClass().getPropertyForm(modelNode, this.isLockedByOtherUser));
 	
+	this.handleResizeEvent();
+	
 	this.doLayout();
 	
 	modelNode.populatePropertyForm(form);
@@ -136,11 +141,29 @@ uwm.property.PropertyContainer.prototype.getCurrentOid = function() {
 	return this.currentOid;
 }
 
-uwm.property.PropertyContainer.prototype.handleDeleteEvent = function(modelObject){
+uwm.property.PropertyContainer.prototype.handleDeleteEvent = function(modelObject) {
 	if (this.currentOid == modelObject.getOid()) {
 		this.showInfoMask();
 	}
 }
+
+uwm.property.PropertyContainer.prototype.handleResizeEvent = function() {
+	if (this.items) {
+		for (i in this.items.items) {
+			if (!(this.items.items[i] instanceof Function)) {
+				if (this.items.items[i].items) {
+					for (j in this.items.items[i].items.items) {
+						if (!(this.items.items[i].items.items[j] instanceof Function)) {
+							this.items.items[i].items.items[j].setWidth(this.body.getWidth() - 20);
+						}
+					}
+					
+				}
+			}
+		}
+	}
+}
+
 
 uwm.property.PropertyContainer.getInstance = function() {
 	return uwm.Uwm.getInstance().getActiveWorkbench().getEastPanel().getPropertyContainer();
