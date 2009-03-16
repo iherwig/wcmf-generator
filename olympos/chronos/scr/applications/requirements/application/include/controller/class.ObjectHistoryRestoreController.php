@@ -60,37 +60,36 @@ class ObjectHistoryRestoreController extends Controller
 			
 				//if values differ between $this->oldValueArray and $this->newValueArray write to HistoryTable and save
 				self::writeHistTableDiffOldNewArray();
-			
-				
+								
 				break;
 			case 'restorehistlistfields':
-			
+				
 				// init values
 				self::initValuesListfields();
-			
+					
+				// get first history entry from History Table to get affectedoid
+				self::getHistoryFromTable($this->arrids[0]);
+								
+				// current values of object to oldValueArray
+				$this->ObjCurVal = $this->persistenceFacade->load($this->affectedoid);
+				$this->oldValueArray = self::curValOfObjToValArray();
+					
 				foreach ($this->arrids as $key=>$elemid) {
-				
-					echo '<br/><br/>elemid: ';
-					print_r($elemid);
-				
-					// get history entry from History Table
-					self::getHistoryFromTable($elemid);
-					// echo 'this->objlistHistEntryUnserialized: '; print_r($this->objlistHistEntryUnserialized);
-					
-					// current values of object to oldValueArray
-					$this->ObjCurVal = $this->persistenceFacade->load($this->affectedoid);
-					$this->oldValueArray = self::curValOfObjToValArray();
-					
-					// overwrite values of $this->ObjCurVal
-					self::restoreObjCurValListfields();
-				
-					// current values of object to newValueArray
-					$this->newValueArray = self::curValOfObjToValArray();
-				
-					// if values differ between $this->oldValueArray and $this->newValueArray write to HistoryTable and save
-					self::writeHistTableDiffOldNewArray();
-				
+						
+						// get history entry from History Table
+						self::getHistoryFromTable($elemid);
+						// echo 'this->objlistHistEntryUnserialized: '; print_r($this->objlistHistEntryUnserialized);
+						
+						//echo '<br/><br/>elemid: '; print_r($elemid);
+						// overwrite values of $this->ObjCurVal
+						self::restoreObjCurValListfields();
 				}
+				
+				// current values of object to newValueArray
+				$this->newValueArray = self::curValOfObjToValArray();
+				
+				// if values differ between $this->oldValueArray and $this->newValueArray write to HistoryTable and save
+				self::writeHistTableDiffOldNewArray();
 			
 			break;
 	}
@@ -104,42 +103,44 @@ class ObjectHistoryRestoreController extends Controller
 }
 
 private function writeHistTableDiffOldNewArray() {
-
+	
+	$dataHistEntry = array ();
 	//if values differ between $this->oldValueArray and $this->newValueArray write to HistoryTable and save
 	foreach ($this->oldValueArray as $keyOldValue=>$valOldValue) {
 		foreach ($this->newValueArray as $keyNewValue=>$valNewValue) {
-			if ($keyOldValue == $keyNewValue and $valOldValue !== $valNewValue) {
+			if ($keyOldValue == $keyNewValue and $valOldValue !== $valNewValue ) {
 			
 				foreach ($valOldValue as $kov=>$vol) {
 					foreach ($valNewValue as $knv=>$vnv) {
 					
-						$dataHistEntry = array ();
 						$tmp = array ();
 						$tmp['oldValue'] = $vol;
 						$tmp['newValue'] = $vnv;
 						array_push($dataHistEntry, array ($knv=>$tmp));
-					
+						//echo '<br/>diffoldnew : '. $vol. $vnv;
+						
 					}
 				}
-			
-				$dataHistEntrySer = serialize($dataHistEntry);
-				//echo '<br>dataHistEntrySer: ' ; print_r(serialize($dataHistEntry));
 				
-				$objQueryHistWrite = & $this->persistenceFacade->createObjectQuery($this->histtable);
-				$objTplHistWrite = & $objQueryHistWrite->getObjectTemplate($this->histtable); //new row
-			
-				$objTplHistWrite->setValue('id', null, DATATYPE_ATTRIBUTE);
-				$objTplHistWrite->setValue('data', $dataHistEntrySer, DATATYPE_ATTRIBUTE);
-				$objTplHistWrite->setValue('duplicate', 'tbd', DATATYPE_ATTRIBUTE);
-				$objTplHistWrite->setValue('eventtype', 'changeProperty', DATATYPE_ATTRIBUTE);
-				$objTplHistWrite->setValue('affectedoid', $this->affectedoid, DATATYPE_ATTRIBUTE);
-				$objTplHistWrite->setValue('otheroid', 'tbd', DATATYPE_ATTRIBUTE);
-				$objTplHistWrite->setValue('timestamp', $this->currentTimestamp, DATATYPE_ATTRIBUTE);
-				$objTplHistWrite->setValue('user', $this->currentUser, DATATYPE_ATTRIBUTE);
-				$this->persistenceFacade->save($objTplHistWrite);
 			}
 		}
 	}
+	
+	$dataHistEntrySer = serialize($dataHistEntry);
+	
+	$objQueryHistWrite = & $this->persistenceFacade->createObjectQuery($this->histtable);
+	$objTplHistWrite = & $objQueryHistWrite->getObjectTemplate($this->histtable); //new row
+	
+	$objTplHistWrite->setValue('id', null, DATATYPE_ATTRIBUTE);
+	$objTplHistWrite->setValue('data', $dataHistEntrySer, DATATYPE_ATTRIBUTE);
+	$objTplHistWrite->setValue('duplicate', 'tbd', DATATYPE_ATTRIBUTE);
+	$objTplHistWrite->setValue('eventtype', 'changeProperty', DATATYPE_ATTRIBUTE);
+	$objTplHistWrite->setValue('affectedoid', $this->affectedoid, DATATYPE_ATTRIBUTE);
+	$objTplHistWrite->setValue('otheroid', 'tbd', DATATYPE_ATTRIBUTE);
+	$objTplHistWrite->setValue('timestamp', $this->currentTimestamp, DATATYPE_ATTRIBUTE);
+	$objTplHistWrite->setValue('user', $this->currentUser, DATATYPE_ATTRIBUTE);
+	$this->persistenceFacade->save($objTplHistWrite);
+	
 }
 
 private function restoreObjCurValListfields() {
@@ -158,11 +159,10 @@ private function restoreObjCurValListfields() {
 										$colvalue = $curDVVVval[value];
 										if ($fieldname0 == $colname and ($colname !== 0)) {
 										
-											echo '<br/>'.'colname ';
-											print_r($colname);
-											echo '<br/>'.'fieldvalue ';
-											print_r($fieldvalue);
+											//echo '<br/>'.'colname ';	print_r($colname);
+											//echo '<br/>'.'fieldvalue '; print_r($fieldvalue);
 											$this->ObjCurVal->setValue($colname, $fieldvalue);
+											
 										}
 									}
 								}
@@ -226,7 +226,7 @@ private function curValOfObjToValArray() {
 		}
 	}
 	//echo $retval ;
-	//echo '<BR/><BR/>ValueArray<BR/>'; print_r($ValueArray); echo '<BR/><BR/>ende ValueArray<BR/>';
+	//echo '<BR/><BR/>ValueArray<BR/>'; //print_r($ValueArray); echo '<BR/><BR/>ende ValueArray<BR/>';
 	return $ValueArray;
 
 }
