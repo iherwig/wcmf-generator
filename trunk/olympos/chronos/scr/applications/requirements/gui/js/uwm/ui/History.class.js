@@ -48,9 +48,9 @@ uwm.ui.History = function(object) {
 	this.addButton(new Ext.Button({
 		window: this.window,
 		selection: this.selection,
+		object: object,
 		text: uwm.Dict.translate('Undo selected'),
-		handler: this.undoSelected,
-		disabled: true
+		handler: this.undoSelected
 	}));
 	this.addButton(new Ext.Button({
 		window: this.window,
@@ -258,23 +258,25 @@ uwm.ui.History.prototype.undoAll = function() {
 }
 
 uwm.ui.History.prototype.undoSelected = function() {
-	if (this.selection.getSelections().length == 0) {
-		alert("No items selected.")
-		return;
-	}
-	var selectedItems = this.selection.getSelections();
-	var selectedIds = new Array();
-	for (var i = 0; i < selectedItems.length; i++) {
-		selectedIds.push(selectedItems[i].data.id);
-	}
+	var self = this;
 	
-	uwm.persistency.Persistency.getInstance().restorehistfields(selectedIds, function(options, data) {
-		//self.loadResponse(options, data, callback, scope, arg);
-		alert("success")
-	}, function(options, data, errorMsg) {
-		//self.loadFailed(options, data, errorMsg, callback, scope, arg)
-		alert("error")
-	});
+	if (this.selection.getSelections().length == 0) {
+		Ext.MessageBox.alert("Error", "No items selected.");
+	} else {
+		var selectedItems = this.selection.getSelections();
+		var selectedIds = new Array();
+		for (var i = 0; i < selectedItems.length; i++) {
+			selectedIds.push(selectedItems[i].data.id);
+		}
+		
+		uwm.persistency.Persistency.getInstance().restorehistlistfields(selectedIds, function(options, data) {
+			self.window.restoreSuccess(options, data, self.object)
+		}, function(options, data, errorMsg) {
+			self.window.restoreError(options, data, errorMsg);
+		});
+		
+		this.window.close();
+	}
 }
 
 uwm.ui.History.prototype.restoreError = function(options, data, errorMsg, callback, scope, arg) {
@@ -283,7 +285,7 @@ uwm.ui.History.prototype.restoreError = function(options, data, errorMsg, callba
 }
 
 uwm.ui.History.prototype.restoreSuccess = function(options, data, object) {
-	Ext.MessageBox.alert('Success', uwm.Dict.translate('The selected state has been restored.'));
+	Ext.MessageBox.alert('Success', uwm.Dict.translate('The selected properties have been successfully restored.'));
 	var oldLabel=object.getLabel();
 	if (oldLabel != data.NewName) {
 		uwm.event.EventBroker.getInstance().fireEvent("changeLabel", object, null, data.NewName);

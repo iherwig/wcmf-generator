@@ -123,7 +123,7 @@ uwm.Dict.voc = {
 		"Show object history"	: {'de': "Objekt History zeigen"},
 		"Old value"				: {'de': "Alter Wert"},
 		"New value"				: {'de': "Neuer Wert"},
-		"The selected state has been restored."	: {'de': "Der ausgewählte Status wurde wiederhergestellt."},
+		"The selected properties have been successfully restored."	: {'de': "Die ausgewählten Felder wurden erfolgreich wiederhergestellt."},
 		"Error while exporting" : {'de': "Fehler beim Exportieren"},
 		"The export was unsuccessful. Please try again.": {'de': "Der Export war unerfolgreich. Bitte probieren Sie es erneut."}
 		

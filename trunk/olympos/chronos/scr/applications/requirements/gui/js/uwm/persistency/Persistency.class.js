@@ -85,7 +85,7 @@ uwm.persistency.Persistency.prototype.histlist = function(oid,start,limit, succe
 uwm.persistency.Persistency.prototype.restorehistliststate = function(id, successHandler, errorHandler){
 }
 
-uwm.persistency.Persistency.prototype.restorehistfields = function(ids, successHandler, errorHandler){
+uwm.persistency.Persistency.prototype.restorehistlistfields = function(ids, successHandler, errorHandler){
 }
 
 uwm.persistency.Persistency.prototype.loadChildren = function(oid, successHandler, errorHandler) {
