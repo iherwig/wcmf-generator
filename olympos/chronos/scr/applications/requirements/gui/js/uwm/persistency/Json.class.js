@@ -185,9 +185,9 @@ uwm.persistency.Json.prototype.restorehistliststate = function(id, successHandle
 	
 }
 
-uwm.persistency.Json.prototype.restorehistfields = function(ids, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.restorehistlistfields = function(ids, successHandler, errorHandler) {
 	this.jsonRequest({
-		usr_action: 'restorehistfields',
+		usr_action: 'restorehistlistfields',
 		ids:ids
 	}, successHandler, errorHandler);
 	
