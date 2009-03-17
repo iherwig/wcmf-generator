@@ -18,12 +18,13 @@ class ObjectHistoryChangelistController extends Controller
 		if ($this->_request->getAction() == 'histlist') {
 		
 			//get history table as objectlist
-			$affectedoid = $this->_request->getValue('oid'); // 'ChiBusinessUseCase:15475'
+			$affectedoid = $this->_request->getValue('oid'); // 'ChiGoal:18635'
+			$strt = $this->_request->getValue('start');
+			$limit = $this->_request->getValue('limit');
 			$tablename = 'History';
 			$objlist = array ();
 			$orderby = array ('timestamp DESC');
-			$searchlimit = 5000;
-		
+			
 			// history table
 			$persistenceFacade = & PersistenceFacade::getInstance();
 			$objQuery = & $persistenceFacade->createObjectQuery($tablename);
@@ -31,19 +32,30 @@ class ObjectHistoryChangelistController extends Controller
 			$objTpl = & $objQuery->getObjectTemplate($tablename);
 			$objTpl->setValue("affectedoid", $affectedoid, DATATYPE_ATTRIBUTE);
 			// searchlimit if needed
-			$pagingInfo = new PagingInfo($searchlimit);
-			//$objlist = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby, $pagingInfo);
+			//	$pagingInfo = new PagingInfo($limit);
+			//	$pagingInfo->setIndex($strt);
+			//	$objlist = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby, $pagingInfo);
 			// search
-			$objlist = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby);
-		
+			$objlist = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby );
+			
+			//start/limit (index of paging info not working properly)
+			$pageobjlist = array();
+			$ct = 1;
+			foreach ($objlist as $k=>$v){
+				if ( ($ct >= $strt) and ($ct < ($strt + $limit)) ){
+					array_push($pageobjlist, $v);
+				}
+				$ct = $ct+1;
+			}
+
 			// write new array with unserialized data tab
-			$objlistuns = self::getDataValue($objlist);
-		
+			$pageobjlistuns = self::getDataValue($pageobjlist);
+			
 			//	Set the next action
 			$this->_response->setAction('ok');
-		
+			
 			//	Response
-			$this->_response->setValue('changelist', $objlistuns);
+			$this->_response->setValue('changelist', $pageobjlistuns );
 			return false;
 		
 		}
