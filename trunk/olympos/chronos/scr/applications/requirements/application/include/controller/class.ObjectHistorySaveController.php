@@ -38,6 +38,7 @@ class ObjectHistorySaveController extends SaveController
 					$this->node = & $value;
 				
 					$this->data = array ();
+					$prt = array();
 
 					$affectedObj  = $persistenceFacade->load($key);
 		
@@ -45,10 +46,31 @@ class ObjectHistorySaveController extends SaveController
 						foreach ($this->node->getValueNames($dataType) as $name) {
 						
 							if ($name !== 'id') {
-								$tmp = array ();
-								$tmp['oldValue'] = $affectedObj->getValue($name);
-								$tmp['newValue'] = $this->node->getValue($name, $dataType);
-								array_push($this->data, array ($name=>$tmp));
+								
+								if($name == 'GoalType'){
+									
+									$tmp = array ();
+									
+										//get GoalType of (fieldvalue is GoalTypeId)
+									$this->ObjCurVal = $this->persistenceFacade->load('ChiGoalType:'.$affectedObj->getValue($name));
+									$tmp['oldValue'] = $affectedObj->getValue($name);
+									$tmp['oldValueDisp'] = $this->ObjCurVal->getValue('Name');
+										//get GoalType of (fieldvalue is GoalTypeId)
+									$this->ObjCurVal = $this->persistenceFacade->load('ChiGoalType:'.$this->node->getValue($name, $dataType));
+									$tmp['newValue'] = $this->node->getValue($name, $dataType);
+									$tmp['newValueDisp'] = $this->ObjCurVal->getValue('Name');
+									
+									array_push($this->data, array ($name=>$tmp));
+									
+								}else{
+									
+									$tmp = array ();
+									$tmp['oldValue'] = $affectedObj->getValue($name);
+									$tmp['newValue'] = $this->node->getValue($name, $dataType);
+									array_push($this->data, array ($name=>$tmp));
+								
+								}
+								
 							}
 						
 						}
