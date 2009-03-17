@@ -56,6 +56,8 @@ class ObjectHistoryChangelistController extends Controller
 			
 			//	Response
 			$this->_response->setValue('changelist', $pageobjlistuns );
+			$this->_response->setValue('gescount', $ct-1 );
+			
 			return false;
 		
 		}
