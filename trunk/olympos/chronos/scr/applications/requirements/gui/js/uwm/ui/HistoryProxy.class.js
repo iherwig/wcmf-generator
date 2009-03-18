@@ -19,6 +19,7 @@ Ext.namespace("uwm.property");
  * @param {Object} object The object for which the history shall be shown.
  */
 uwm.ui.HistoryProxy = function(object) {
+	this.totalProperty=0;
 	uwm.ui.HistoryProxy.superclass.constructor.call(this, Ext.apply(this, {}, object));
 	
 	this.oid = object.getOid();
@@ -32,6 +33,7 @@ uwm.ui.HistoryProxy.prototype.load = function(params, reader, callback, scope, a
 		
 		uwm.persistency.Persistency.getInstance().histlist(this.oid, params.start, params.limit, function(options, data) {
 			self.loadResponse(options, data, callback, scope, arg);
+			self.store.totalLength=self.totalProperty;
 		}, function(options, data, errorMsg) {
 			self.loadFailed(options, data, errorMsg, callback, scope, arg)
 		});
@@ -72,10 +74,14 @@ uwm.ui.HistoryProxy.prototype.loadResponse = function(options, data, callback, s
 			newValue: newArray
 		}));
 	}
+	this.totalProperty=parseFloat(data.gescount);
+	
+	this.store.totalLength=this.totalProperty;
+		
 	var result = {
 		success: true,
-		records: records,
-		totalRecords: records.length
+		records: records
+		
 	};
 	
 	this.fireEvent("load", this, options, arg);
