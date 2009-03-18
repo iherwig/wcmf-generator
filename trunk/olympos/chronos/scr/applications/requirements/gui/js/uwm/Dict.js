@@ -125,7 +125,9 @@ uwm.Dict.voc = {
 		"New value"				: {'de': "Neuer Wert"},
 		"The selected properties have been successfully restored."	: {'de': "Die ausgewählten Felder wurden erfolgreich wiederhergestellt."},
 		"Error while exporting" : {'de': "Fehler beim Exportieren"},
-		"The export was unsuccessful. Please try again.": {'de': "Der Export war unerfolgreich. Bitte probieren Sie es erneut."}
+		"The export was unsuccessful. Please try again.": {'de': "Der Export war unerfolgreich. Bitte probieren Sie es erneut."},
+		"Forbidden connection"	: {'de':"Verbotene Verbindung"},
+		"This object already has a parent. Please disconnect it from its parent and redraw this connection to change its parent."	: {'de':"Dieses Objekt hat bereits ein übergeordnetes Objekt. Um es einem anderen Objekt unterzuordnen, löschen Sie bitte die bestehende Verbindung."}
 		
 }
 
