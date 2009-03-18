@@ -27,17 +27,57 @@ uwm.ui.History = function(object) {
 		selection: this.getSelectionModel()
 	}));
 	
+	this.proxy = new uwm.ui.HistoryProxy(object);
+	
 	this.store = new Ext.data.Store({
-		proxy: new uwm.ui.HistoryProxy(object),
-		start: 0,
-		limit: 3
+		loadRecords: function(o, options, success) {
+			if (!o || success === false) {
+				if (success !== false) {
+					this.fireEvent("load", this, [], options);
+				}
+				if (options.callback) {
+					options.callback.call(options.scope || this, [], options, false);
+				}
+				return;
+			}
+			var r = o.records, t = o.totalRecords || r.length;
+			if (!options || options.add !== true) {
+				if (this.pruneModifiedRecords) {
+					this.modified = [];
+				}
+				for (var i = 0, len = r.length; i < len; i++) {
+					r[i].join(this);
+				}
+				if (this.snapshot) {
+					this.data = this.snapshot;
+					delete this.snapshot;
+				}
+				this.data.clear();
+				this.data.addAll(r);
+				//this.totalLength = t;
+				this.applySort();
+				this.fireEvent("datachanged", this);
+			} else {
+				this.totalLength = Math.max(t, this.data.length + r.length);
+				this.add(r);
+			}
+			this.fireEvent("load", this, r, options);
+			if (options.callback) {
+				options.callback.call(options.scope || this, r, options, true);
+			}
+		},
+		proxy: this.proxy
 	});
+	
+	this.store.proxy['store'] = this.store;
+	
 	this.store.load({
 		params: {
 			start: 0,
-			limit: 3
+			limit: 11
 		}
 	});
+	
 	this.window = this;
 	this.setPosition(200, 200);
 	this.selection = this.getSelectionModel();
@@ -147,7 +187,7 @@ uwm.ui.History.prototype.getToolbar = function() {
 			}
 		},
 		
-		pageSize: 3,
+		pageSize: 11,
 		store: this.store,
 		displayInfo: false,
 		emptyMsg: uwm.Dict.translate("No changes have been made.")
@@ -286,7 +326,7 @@ uwm.ui.History.prototype.restoreError = function(options, data, errorMsg, callba
 
 uwm.ui.History.prototype.restoreSuccess = function(options, data, object) {
 	Ext.MessageBox.alert('Success', uwm.Dict.translate('The selected properties have been successfully restored.'));
-	var oldLabel=object.getLabel();
+	var oldLabel = object.getLabel();
 	if (oldLabel != data.NewName) {
 		uwm.event.EventBroker.getInstance().fireEvent("changeLabel", object, null, data.NewName);
 	}
