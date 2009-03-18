@@ -500,28 +500,34 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 
 uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, targetObject, sourcePort, targetPort, x, y) {
 	if (sourceObject.connectableWith(targetObject)) {
-		var connectionInfo = sourceObject.getModelNodeClass().getConnectionInfo(targetObject.getModelNodeClass());
-		
-		if (!Ext.isArray(connectionInfo)) {
-			this.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, connectionInfo);
+		var child;
+							
+		if (sourceObject.getUwmClassName() == targetObject.getUwmClassName() && targetObject.hasParent() && !(sourceObject.getUwmClassName()=='ChiNode')) {
+			Ext.Msg.alert(uwm.Dict.translate('Forbidden connection'),uwm.Dict.translate('This object already has a parent. Please disconnect it from its parent and redraw this connection to change its parent.'))
 		} else {
-			var menu = new Ext.menu.Menu();
+			var connectionInfo = sourceObject.getModelNodeClass().getConnectionInfo(targetObject.getModelNodeClass());
 			
-			var self = this;
-			
-			for (var i = 0; i < connectionInfo.length; i++) {
-			
-				var currConnectionInfo = connectionInfo[i];
-				menu.add(new Ext.menu.Item({
-					text: currConnectionInfo.label,
-					connectionInfo: currConnectionInfo,
-					handler: function() {
-						self.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, this.connectionInfo);
-					}
-				}));
+			if (!Ext.isArray(connectionInfo)) {
+				this.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, connectionInfo);
+			} else {
+				var menu = new Ext.menu.Menu();
+				
+				var self = this;
+				
+				for (var i = 0; i < connectionInfo.length; i++) {
+				
+					var currConnectionInfo = connectionInfo[i];
+					menu.add(new Ext.menu.Item({
+						text: currConnectionInfo.label,
+						connectionInfo: currConnectionInfo,
+						handler: function() {
+							self.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, this.connectionInfo);
+						}
+					}));
+				}
+				
+				menu.showAt(this.getContextMenuPosition(x, y));
 			}
-			
-			menu.showAt(this.getContextMenuPosition(x, y));
 		}
 	}
 }

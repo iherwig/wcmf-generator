@@ -43,9 +43,10 @@ uwm.model.ModelObject.prototype.connectableWith = function(otherObject) {
 		}
 
 	}
-	if (this.isConnected(otherObject)){
+	if (this.isConnected(otherObject) || otherObject.isConnected(this)){
 		result=false;
 	}
+	
 	return result;
 }
 
@@ -139,6 +140,18 @@ uwm.model.ModelObject.prototype.isConnected = function(otherObject){
 	if (this.childOids) {
 		for (var i = 0; i < this.childOids.length; i++) {
 			if (this.childOids[i] == otherOid) {
+				result = true;
+			}
+		}
+	}
+	return result;
+}
+
+uwm.model.ModelObject.prototype.hasParent = function(){
+	var result = false;
+	for (var i in this.parentOids){
+		if (!(this.parentOids[i] instanceof Function)){
+			if (uwm.Util.getUwmClassNameFromOid(this.parentOids[i])==this.getUwmClassName()){
 				result = true;
 			}
 		}

@@ -50,7 +50,7 @@ cwm.ChiRequirementClass = function() {
 	
 		"ChiRequirement": {
 			label: "contains",
-			invert: true,
+			invert: false,
 			connectionType: 'aggregation',
 			cardinality: -1
 		},
