@@ -439,7 +439,7 @@ uwm.diagram.AbstractDiagram.prototype.getConnectedObject = function(oid) {
 	if (!result) {
 		for (i in this.objects.items) {
 			if (this.objects.items[i].oid == oid) {
-				connectedObject = this.objects.items[i];
+				result = this.objects.items[i];
 			}
 		}
 	}
