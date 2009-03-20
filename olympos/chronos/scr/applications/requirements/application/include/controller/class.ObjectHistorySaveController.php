@@ -31,16 +31,14 @@ class ObjectHistorySaveController extends SaveController
 			//prepare write to table
 			self::prepareWriteToTable();
 
-			$persistenceFacade = & PersistenceFacade::getInstance();
-			
 			foreach ($this->requestdata as $key=>$value) {
-				if (PersistenceFacade::isValidOID($key) && PersistenceFacade::isKnownType(PersistenceFacade::getOIDParameter($key, 'type'))) {
+				if ( PersistenceFacade::isValidOID($key) && PersistenceFacade::isKnownType( PersistenceFacade::getOIDParameter($key, 'type'))) {
 					$this->node = & $value;
 				
 					$this->data = array ();
 					$prt = array();
 
-					$affectedObj  = $persistenceFacade->load($key);
+					$affectedObj  = $this->persistenceFacade->load($key);
 		
 					foreach ($this->node->getDataTypes() as $dataType) {
 						foreach ($this->node->getValueNames($dataType) as $name) {
@@ -48,9 +46,7 @@ class ObjectHistorySaveController extends SaveController
 							if ($name !== 'id') {
 								
 								if($name == 'GoalType'){
-									
 									$tmp = array ();
-									
 										//get GoalType of (fieldvalue is GoalTypeId)
 									$this->ObjCurVal = $this->persistenceFacade->load('ChiGoalType:'.$affectedObj->getValue($name));
 									$tmp['oldValue'] = $affectedObj->getValue($name);
@@ -59,16 +55,28 @@ class ObjectHistorySaveController extends SaveController
 									$this->ObjCurVal = $this->persistenceFacade->load('ChiGoalType:'.$this->node->getValue($name, $dataType));
 									$tmp['newValue'] = $this->node->getValue($name, $dataType);
 									$tmp['newValueDisp'] = $this->ObjCurVal->getValue('Name');
-									
 									array_push($this->data, array ($name=>$tmp));
-									
 								}else{
 									
 									$tmp = array ();
-									$tmp['oldValue'] = $affectedObj->getValue($name);
-									$tmp['newValue'] = $this->node->getValue($name, $dataType);
+									
+									$tmp['oldValue'] = $affectedObj->getValue($name);  //value of fieldname GoalType from Object
+									$tmp['newValue'] = $this->node->getValue($name);  // value changed of fieldname GoalType from Request
+									//$name //fieldname GoalType
+									
+									$tmp['oldValueDisp'] = $affectedObj->getValue($name);
+									$tmp['newValueDisp'] = $this->node->getValue($name);
+									
+									//tmp: need mapping from 'GoalType' to 'ChiGoalType' in this direction
+									//$this->node->getValue('input_type',$name);
+									//$tmp['oldValueDisp'] = $affectedObj->getValueDisplayName($name);
+									//$tmp['newValueDisp'] = $this->node->getValueDisplayName($name, $dataType);
+									//$this->ObjCurValOld = $this->persistenceFacade->load($affectedObj->getValueName($name).':'.$affectedObj->getValue($name));
+									//$this->ObjCurValNew = $this->persistenceFacade->load($this->node->getValueDisplayName($name, $dataType).':'.$this->node->getValue($name, $dataType));
+									
+													
 									array_push($this->data, array ($name=>$tmp));
-								
+									
 								}
 								
 							}
@@ -85,6 +93,8 @@ class ObjectHistorySaveController extends SaveController
 		
 			
 			//	Response
+			//$this->_response->setValue('affectedObj old', $affectedObj);
+			//$this->_response->setValue('this->node new', $this->node);
 			$this->_response->setValue('changelist', $this->changelist);
 		
 			//call SaveController
