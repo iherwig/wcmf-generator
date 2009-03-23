@@ -54,8 +54,18 @@ uwm.ui.HistoryProxy.prototype.loadResponse = function(options, data, callback, s
 		for (var j = 0; j < changelist[i].data.length; j++) {
 			for (k in changelist[i].data[j]) {			
 				propertyArray.push(k);
-				oldArray.push(changelist[i].data[j][k].oldValue);
-				newArray.push(changelist[i].data[j][k].newValue);
+				if(changelist[i].data[j][k].oldValueDisp){
+					oldArray.push(changelist[i].data[j][k].oldValueDisp);
+				}else{
+					oldArray.push(changelist[i].data[j][k].oldValue);
+				}
+				
+				if (changelist[i].data[j][k].newValueDisp){
+					newArray.push(changelist[i].data[j][k].newValueDisp);
+				}else{
+					newArray.push(changelist[i].data[j][k].newValue);
+				}
+				
 				if (propertyString == "") {
 					propertyString += k;
 				} else {
