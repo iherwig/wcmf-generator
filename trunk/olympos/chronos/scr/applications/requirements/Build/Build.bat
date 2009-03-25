@@ -1,4 +1,21 @@
-del Package.zip
+@echo off
+
+if not exist ..\gui (
+echo Folder gui does not exist.
+exit
+)
+
+if not exist ..\application (
+echo Folder application does not exist.
+exit
+)
+
+if not exist ..\wcmf (
+echo Folder wcmf does not exist.
+exit
+)
+
+del cwm.zip
 call folders.bat
 
 REM Generate Batch for merging uwm and cwm files
