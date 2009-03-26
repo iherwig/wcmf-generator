@@ -73,7 +73,19 @@ Ext.extend(cwm.ChiFeatureClass, uwm.model.ModelClass);
 
 cwm.ChiFeatureClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser ) {
 		return new uwm.property.PropertyForm({
-		items: [new uwm.property.ComboBox({
+		items: [new uwm.property.TextField({
+			fieldLabel: 'Name',
+			toolTip: "the name of this object.",
+			name: 'Name',
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
+		}), new uwm.property.HtmlEditor({
+			fieldLabel: 'Notes',
+			toolTip: "the actual description of the object.",
+			name: 'Notes',
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
+		}), new uwm.property.ComboBox({
 			fieldLabel: 'Author',
 			toolTip: "This feature's author's name and role in the project",
 			name: 'Author',
@@ -104,18 +116,6 @@ cwm.ChiFeatureClass.prototype.getPropertyForm = function(modelNode, isLockedByOt
 			fieldLabel: 'Version',
 			toolTip: "the model version of this object",
 			name: 'Version',
-			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
-		}), new uwm.property.TextField({
-			fieldLabel: 'Name',
-			toolTip: "the name of this object.",
-			name: 'Name',
-			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
-		}), new uwm.property.HtmlEditor({
-			fieldLabel: 'Notes',
-			toolTip: "the actual description of the object.",
-			name: 'Notes',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({

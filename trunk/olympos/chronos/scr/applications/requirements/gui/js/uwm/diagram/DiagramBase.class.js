@@ -41,10 +41,10 @@ uwm.diagram.DiagramBase.prototype.initByDisplayResult = function(node) {
 uwm.diagram.DiagramBase.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
 	
-	realForm.findField("Width").loadValue(this.data.Width);
-	realForm.findField("Height").loadValue(this.data.Height);
 	realForm.findField("Name").loadValue(this.data.Name);
 	realForm.findField("Notes").loadValue(this.data.Notes);
+	realForm.findField("Width").loadValue(this.data.Width);
+	realForm.findField("Height").loadValue(this.data.Height);
 	realForm.findField("created").loadValue(this.data.created);
 	realForm.findField("creator").loadValue(this.data.creator);
 	realForm.findField("last_editor").loadValue(this.data.last_editor);

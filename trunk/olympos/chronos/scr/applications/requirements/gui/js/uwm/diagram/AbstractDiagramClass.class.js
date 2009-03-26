@@ -34,20 +34,20 @@ Ext.extend(uwm.diagram.AbstractDiagramClass, uwm.model.ModelNodeClass);
 uwm.diagram.AbstractDiagramClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
-			fieldLabel: 'Width',
-			name: 'Width',
-			modelNode: modelNode
-		}), new uwm.property.TextField({
-			fieldLabel: 'Height',
-			name: 'Height',
-			modelNode: modelNode
-		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
 			modelNode: modelNode
 		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
+			modelNode: modelNode
+		}), new uwm.property.TextField({
+			fieldLabel: 'Width',
+			name: 'Width',
+			modelNode: modelNode
+		}), new uwm.property.TextField({
+			fieldLabel: 'Height',
+			name: 'Height',
 			modelNode: modelNode
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',

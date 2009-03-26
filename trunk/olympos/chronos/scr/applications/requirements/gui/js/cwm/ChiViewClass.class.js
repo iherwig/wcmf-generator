@@ -57,22 +57,6 @@ Ext.extend(cwm.ChiViewClass, uwm.model.ModelClass);
 cwm.ChiViewClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [		new uwm.property.TextField({
-			fieldLabel: 'Alias',
-			toolTip: "the Project Id of this object.",
-			name: 'Alias',
-			
-			modelNode: modelNode,
-			
-			readOnly: isLockedByOtherUser		}) 
-,		new uwm.property.TextField({
-			fieldLabel: 'Version',
-			toolTip: "the model version of this object",
-			name: 'Version',
-			
-			modelNode: modelNode,
-			
-			readOnly: isLockedByOtherUser		}) 
-,		new uwm.property.TextField({
 			fieldLabel: 'Name',
 			toolTip: "the name of this object.",
 			name: 'Name',
@@ -84,6 +68,22 @@ cwm.ChiViewClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 			fieldLabel: 'Notes',
 			toolTip: "the actual description of the object.",
 			name: 'Notes',
+			
+			modelNode: modelNode,
+			
+			readOnly: isLockedByOtherUser		}) 
+,		new uwm.property.TextField({
+			fieldLabel: 'Alias',
+			toolTip: "the Project Id of this object.",
+			name: 'Alias',
+			
+			modelNode: modelNode,
+			
+			readOnly: isLockedByOtherUser		}) 
+,		new uwm.property.TextField({
+			fieldLabel: 'Version',
+			toolTip: "the model version of this object",
+			name: 'Version',
 			
 			modelNode: modelNode,
 			
