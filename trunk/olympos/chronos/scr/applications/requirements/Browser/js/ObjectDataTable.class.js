@@ -19,7 +19,7 @@ ObjectDataTable = function(workbench){
 	var self = this;
 	var workbench=workbench;
 	    
-    this.fields = ['id','uwmClassName','object', 'quantity', 'status'];
+    this.fields = ['id','objectList','object', 'quantity', 'status'];
     
     this.store = new Ext.data.SimpleStore({
         fields: this.fields
@@ -60,7 +60,8 @@ ObjectDataTable = function(workbench){
 	
 	this.on('click', function(event){
 		if (ObjectContainer.getInstance().modelLoaded) {
-			workbench.addInformationTab(this.selectionModel.selections.items[0].data.id, this.selectionModel.selections.items[0].data.uwmClassName);
+			workbench.maskTabPanel();
+			workbench.createInformationTab(this.selectionModel.selections.items[0].data.id, this.selectionModel.selections.items[0].data.objectList);
 		}
 	});
 }

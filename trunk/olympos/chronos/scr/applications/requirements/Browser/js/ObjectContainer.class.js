@@ -10,7 +10,7 @@
  * this entire header must remain intact.
  */
 /**
- * @class Loads and handles all data which comes from backend.
+ * @class Loads and handles all data which comes from backend & converts it in JSON for the Jit.
  *
  * @constructor
  */
@@ -64,13 +64,30 @@ ObjectContainer.prototype.handleLoadedModels = function(options, data){
     Workbench.getInstance();
 }
 
+ObjectContainer.prototype.loadModel=function(oid){
+	this.modelLoaded=true;
+	this.loadStructurePanel(oid);
+	this.loadReport();
+	this.loadDiagram();
+}
+
+ObjectContainer.prototype.loadDiagram=function(){
+	var workbench=Workbench.getInstance();
+	
+	workbench.piechartContainer.remove(workbench.piechartPanelEmpty);
+	workbench.piechartContainer.add(workbench.piechartPanel);
+	workbench.barchartContainer.remove(workbench.barchartPanelEmpty);
+	workbench.barchartContainer.add(workbench.barchartPanel);
+	workbench.diagramPanel.doLayout();
+}
+
 /**
  * Loads a model by its oid into two identical variables.
  * Starts loadObject to load the model's objects.
  *
  * @param {String} oid The oid of the model which is to be loaded.
  */
-ObjectContainer.prototype.loadModel = function(oid){
+ObjectContainer.prototype.loadStructurePanel = function(oid){
     var uwmClass = 'Model';
     this.objectsForTreemap = null;
     this.objectsForTreemap = [];
@@ -124,6 +141,15 @@ ObjectContainer.prototype.loadObject = function(oid){
     });
 }
 
+ObjectContainer.prototype.loadOBJECT=function(oid){
+	var self = this;
+	
+	var oid = oid;
+	uwm.persistency.Persistency.getInstance().display(oid,-1,function(options, data){
+        self.handleLoadedObject(options, data, oid)
+    });
+}
+
 ObjectContainer.prototype.handleLoadedObject = function(options, data, oid){
     var oid = oid;
     for (var i = 0; i < data.objects.length; i++) {
@@ -171,7 +197,7 @@ ObjectContainer.prototype.handleLoadedObject = function(options, data, oid){
         this.getTreeList(this.selectedModel);
         this.getWeightList(this.selectedModel);
         
-		Workbench.getInstance().structureTabPanel.getEl().unmask();
+		Workbench.getInstance().unmaskTabPanel();
 		Ext.Msg.updateProgress(0.5,uwm.Dict.translate("Object information"))
 		
         
@@ -398,28 +424,28 @@ ObjectContainer.prototype.getTableData = function(){
 	var result;
 	if (this.modelLoaded){
 		result=[
-	['Goals','ChiGoal','Goals', '<u>4</u>', '<img src="img/ampel2.png">'],  
-	['Achieved Goals','ChiGoal','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;achieved', '<u>1</u>', '<img src="img/ampel5.png">'], 
-	['Not achieved Goals','ChiGoal','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not achieved', '<u>3</u>', '<img src="img/ampel1.png">'], 
-	['Goals without Requirements','ChiGoal','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirements', '<u>1</u>', '<img src="img/ampel3.png">'],
-	['Goals without valid priority','ChiGoal','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without valid priority', '<u>2</u>','<img src="img/ampel2.png">'],
-	['Requirements','ChiRequirement','Requirements', '<u>6</u>', '<img src="img/ampel4.png">'], 
-	['Satisfied Requirements','ChiRequirement','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;satisfied', '<u>2</u>', '<img src="img/ampel4.png">'], 
-	['Not satisfied Requirements','ChiRequirement','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not satisfied', '<u>4</u>', '<img src="img/ampel2.png">'], 
-	['Requirements without Goal','ChiRequirement','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Goal', '<u>0</u>', '<img src="img/ampel5.png">'], 
-	['Requirements without Feature','ChiRequirement','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Feature', '<u>1</u>', '<img src="img/ampel3.png">'], 
-	['Requirements with Issue','ChiRequirement','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with Issue', '<u>2</u>', '<img src="img/ampel1.png">'],
-	['Requirements without Proofreader','ChiRequirement','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Proofreader', '<u>0</u>','<img src="img/ampel2.png">'],
-	['Not validated Requirements','ChiRequirement','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not validated', '<u>1</u>', '<img src="img/ampel2.png">'],
-	['Features','ChiFeature','Features', '<u>10</u>','<img src="img/ampel5.png">'],
-	['Features without Requirement','ChiFeature','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirement','<u>1</u>','<img src="img/ampel1.png">'],
-	['Implemented Features','ChiFeature','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implemented','<u>6</u>','<img src="img/ampel5.png">'],
-	['Implemented Features without UseCase','ChiFeature','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without UseCase','<u>1','<img src="img/ampel2.png">'],
-	['Not implemented Features','ChiFeature','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not implemented', '<u>4</u>','<img src="img/ampel3.png">'],
-	['Issues','ChiIssue','Issues', '<u>5</u>', '<img src="img/ampel2.png">'],
-	['UseCases','ChiBusinessUseCase','UseCases', '<u>8</u>','<img src="img/ampel4.png">'],
-	['UseCases without Actors','ChiBusinessUseCase','&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Actors', '<u>2</u>','<img src="img/ampel2.png">'],
-	['Actors','ChiBusinessPartner','Actors', '<u>7</u>','<img src="img/ampel5.png">']
+	['Goals',["ChiGoal:15270","ChiGoal:21669"],'Goals', '<u>4</u>', '<img src="img/ampel2.png">'],  
+	['Achieved Goals',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;achieved', '<u>1</u>', '<img src="img/ampel5.png">'], 
+	['Not achieved Goals',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not achieved', '<u>3</u>', '<img src="img/ampel1.png">'], 
+	['Goals without Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirements', '<u>1</u>', '<img src="img/ampel3.png">'],
+	['Goals without valid priority',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without valid priority', '<u>2</u>','<img src="img/ampel2.png">'],
+	['Requirements',["ChiGoal:15270","ChiGoal:21669"],'Requirements', '<u>6</u>', '<img src="img/ampel4.png">'], 
+	['Satisfied Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;satisfied', '<u>2</u>', '<img src="img/ampel4.png">'], 
+	['Not satisfied Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not satisfied', '<u>4</u>', '<img src="img/ampel2.png">'], 
+	['Requirements without Goal',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Goal', '<u>0</u>', '<img src="img/ampel5.png">'], 
+	['Requirements without Feature',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Feature', '<u>1</u>', '<img src="img/ampel3.png">'], 
+	['Requirements with Issue',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with Issue', '<u>2</u>', '<img src="img/ampel1.png">'],
+	['Requirements without Proofreader',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Proofreader', '<u>0</u>','<img src="img/ampel2.png">'],
+	['Not validated Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not validated', '<u>1</u>', '<img src="img/ampel2.png">'],
+	['Features',["ChiGoal:15270","ChiGoal:21669"],'Features', '<u>10</u>','<img src="img/ampel5.png">'],
+	['Features without Requirement',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirement','<u>1</u>','<img src="img/ampel1.png">'],
+	['Implemented Features',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implemented','<u>6</u>','<img src="img/ampel5.png">'],
+	['Implemented Features without UseCase',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without UseCase','<u>1','<img src="img/ampel2.png">'],
+	['Not implemented Features',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not implemented', '<u>4</u>','<img src="img/ampel3.png">'],
+	['Issues',["ChiGoal:15270","ChiGoal:21669"],'Issues', '<u>5</u>', '<img src="img/ampel2.png">'],
+	['UseCases',["ChiGoal:15270","ChiGoal:21669"],'UseCases', '<u>8</u>','<img src="img/ampel4.png">'],
+	['UseCases without Actors',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Actors', '<u>2</u>','<img src="img/ampel2.png">'],
+	['Actors',["ChiGoal:15270","ChiGoal:21669"],'Actors', '<u>7</u>','<img src="img/ampel5.png">']
 	];
 	}else{
 		result=[['','',uwm.Dict.translate('Please select a model.'),'','']];
