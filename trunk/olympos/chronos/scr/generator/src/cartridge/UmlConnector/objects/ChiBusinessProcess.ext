@@ -6,25 +6,32 @@ extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::umlutils;
 
+extension cartridge::UmlConnector::objects::ChiBusinessUseCase;
+extension cartridge::UmlConnector::objects::ChiBusinessUseCaseCore;
+
 uml::Package convert(cwm::ChiBusinessProcess b):
 	let uc = new uml::Package : {
-		uc.setName("ChiBusinessProcess:" + b.id)
+		uc.setName("ChiBusinessProcess:" + b.id) ->
+
+		uc.ownedType.addAll(b.chiBusinessUseCase.convert()) ->
+		uc.ownedType.addAll(b.chiBusinessUseCaseCore.convert())
 	} ->
 	uc
 ;
 
-//currently not called
-/*
 Void establishConnections(cwm::ChiBusinessProcess b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Package).select(e|e.name == "ChiBusinessProcess:" + b.id).first(): {
-		b.child.select(e|e.targetType == "ChiBusinessUseCase" || e.targetType == "ChiBusinessUseCaseCore")getUmlElement(uc, um)
+		b.chiBusinessUseCase.establishConnections(um) ->
+		b.chiBusinessUseCaseCore.establishConnections(um)
 	}
 ;
-*/
 
 Void transferValues(cwm::ChiBusinessProcess b, uml::Model um):
 	//(new uml::Class).setT
 	let uc = um.allOwnedElements().typeSelect(uml::Package).select(e|e.name == "ChiBusinessProcess:" + b.id).first(): {
+		b.chiBusinessUseCase.transferValues(um) ->
+		b.chiBusinessUseCaseCore.transferValues(um) ->
+
 		uc.applyStereotype("Chronos::ChiBusinessProcess") ->
 		uc.setTaggedValue("Chronos::ChiBusinessProcess", "Alias", b.alias) ->
 		uc.setTaggedValue("Chronos::ChiBusinessProcess", "Version", b.version) ->
@@ -47,7 +54,10 @@ cwm::ChiBusinessProcess convertToCwm(Chronos::ChiBusinessProcess c) :
 		un.setCreated(c.getTaggedValue("Chronos::ChiBusinessProcess", "created").toString()) ->
 		un.setCreator(c.getTaggedValue("Chronos::ChiBusinessProcess", "creator").toString()) ->
 		un.setLastEditor(c.getTaggedValue("Chronos::ChiBusinessProcess", "last_editor").toString()) ->
-		un.setModified(c.getTaggedValue("Chronos::ChiBusinessProcess", "modified").toString())
+		un.setModified(c.getTaggedValue("Chronos::ChiBusinessProcess", "modified").toString()) ->
+
+		un.chiBusinessUseCase.addAll(c.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCase") != null).convertToCwm()) ->
+		un.chiBusinessUseCaseCore.addAll(c.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCaseCore") != null).convertToCwm())
 	) ->
 	un
 ;

@@ -13,3 +13,5 @@ String tplDatePublished(): GLOBALVAR tplDatePublished;
 String tplLicense(): GLOBALVAR tplLicense;
 String tplTemplateHelp(): GLOBALVAR tplTemplateHelp;
 String tplTemplateDescription(): GLOBALVAR tplTemplateDescription;
+String tplContactPerson(): GLOBALVAR tplContactPerson;
+String tplContactData(): GLOBALVAR tplContactData;

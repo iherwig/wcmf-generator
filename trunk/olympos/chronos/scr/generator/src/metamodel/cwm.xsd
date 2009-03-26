@@ -123,6 +123,10 @@
 		<xsd:sequence>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiBusinessUseCase" type="ChiBusinessUseCase">
+			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiBusinessUseCaseCore" type="ChiBusinessUseCaseCore">
+			</xsd:element>
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
