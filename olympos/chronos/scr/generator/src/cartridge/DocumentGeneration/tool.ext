@@ -48,3 +48,7 @@ Boolean hasProcessContent(uml::Package this) :
 String sanitizeHtml(String source) :
 	JAVA net.sourceforge.olympos.oaw.openoffice.HtmlConverter.html2openoffice(java.lang.String)
 ;
+
+String datePublished() : 
+	JAVA net.sourceforge.olympos.oaw.extend.DateFormatter.now()
+;

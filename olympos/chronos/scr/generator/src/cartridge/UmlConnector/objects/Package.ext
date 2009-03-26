@@ -66,7 +66,7 @@ Void establishConnections(cwm::Package p, uml::Model um):
 	p.chiRequirement.establishConnections(um) ->
 	p.chiFeature.establishConnections(um) ->
 	//p.chiIssue.establishConnections(um) ->
-	//p.chiBusinessProcess.establishConnections(um) ->
+	p.chiBusinessProcess.establishConnections(um) ->
 	p.chiBusinessPartner.establishConnections(um) ->
 	p.chiBusinessUseCase.establishConnections(um) ->
 	p.chiBusinessUseCaseCore.establishConnections(um) ->

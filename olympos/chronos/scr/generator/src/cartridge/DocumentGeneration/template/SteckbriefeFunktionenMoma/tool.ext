@@ -1,0 +1,31 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+extension org::openarchitectureware::uml2::utils;
+
+extension common::umlutils;
+
+List[Chronos::ChiRequirement] getPositiveRequirements(Chronos::ChiBusinessUseCase this) :
+	this.getRequirements().select(e|e.hasParentPackage("funktional"))
+;
+
+List[Chronos::ChiRequirement] getNegativeRequirements(Chronos::ChiBusinessUseCase this) :
+	this.getRequirements().select(e|e.hasParentPackage("einschränkend"))
+;
+
+List[Chronos::ChiRequirement] getRequirements(Chronos::ChiBusinessUseCase this) :
+	this.getFeatures().getRelationships().typeSelect(uml::Realization).supplier.typeSelect(Chronos::ChiRequirement)
+;
+
+List[Chronos::ChiBusinessUseCase] getRelatedBusinessUseCases(Chronos::ChiBusinessUseCase this) :
+	null
+;
+
+List[Chronos::ChiFeature] getFeatures(Chronos::ChiBusinessUseCase this) :
+	this.getRelationships().typeSelect(uml::Realization).supplier.typeSelect(Chronos::ChiFeature)
+;
+
+boolean hasParentPackage(Chronos::ChiRequirement this, String packageName) :
+	this.allOwningPackages().select(e|e.name.toString() == packageName).size > 0
+;

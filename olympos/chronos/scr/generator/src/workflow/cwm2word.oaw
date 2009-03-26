@@ -2,6 +2,9 @@
 	<property name="basePath" value="src" />
 	<property name="workingDir" value="${basePath}/../example-data/doc" />
 	<property name="templateName" value="standard" />
+	<property name="exportFormat" value="doc" />
+
+	<property file="${basePath}/workflow/cwm2word.default.properties" />
 
 	<property name="propertyFile" value="${basePath}/workflow/cwm2word.properties" />
 	<property file="${propertyFile}" />
@@ -36,6 +39,13 @@
 		<globalVarDef name="basePath" value="'${basePath}'" />
 	</component>
 
+<!--
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="example-data/uml-generated.uml"/>
+		<outputSlot value="uml2model"/>
+	</component>
+-->
+
 	<component class="oaw.xpand2.Generator" skipOnErrors="true">
 		<globalVarDef name="tplSubject" value="'${tplSubject}'" />
 		<globalVarDef name="tplUserName" value="'${tplUserName}'" />
@@ -52,9 +62,18 @@
 		<globalVarDef name="tplLicense" value="'${tplLicense}'" />
 		<globalVarDef name="tplTemplateHelp" value="'${tplTemplateHelp}'" />
 		<globalVarDef name="tplTemplateDescription" value="'${tplTemplateDescription}'" />
+		<globalVarDef name="tplContactPerson" value="'${tplContactPerson}'" />
+		<globalVarDef name="tplContactData" value="'${tplContactData}'" />
 
 		<fileEncoding value="utf-8"/>
 		
+<!--
+		<metaModel id="uml"
+			class="oaw.uml2.UML2MetaModel" />
+		<metaModel id="Chronos" class="oaw.uml2.profile.ProfileMetaModel">
+			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
+		</metaModel>
+-->
 		<metaModel idRef="uml" />
 		<metaModel idRef="Chronos" />
 		
@@ -80,6 +99,8 @@
 		<globalVarDef name="tplLicense" value="'${tplLicense}'" />
 		<globalVarDef name="tplTemplateHelp" value="'${tplTemplateHelp}'" />
 		<globalVarDef name="tplTemplateDescription" value="'${tplTemplateDescription}'" />
+		<globalVarDef name="tplContactPerson" value="'${tplContactPerson}'" />
+		<globalVarDef name="tplContactData" value="'${tplContactData}'" />
 
 		<fileEncoding value="utf-8"/>
 		
@@ -101,13 +122,13 @@
 	
 	<component class="net.sourceforge.olympos.oaw.workflow.AddToZip">
 		<sourceFile value="${workingDir}/document-tmp0.odt" />
-		<targetFile value="${workingDir}/document-export.odt" />
+		<targetFile value="${workingDir}/document-tmp1.odt" />
 		<fileToAdd value="${workingDir}/styles.xml" />
 		<newEntry value="styles.xml" />
 	</component>
 
 	<component class="net.cmp4oaw.openofficeconverter.OpenOfficeConverter">
-		<inputFile value="${workingDir}/document-export.odt"/>
-		<outputFile value="${workingDir}/document-export.doc"/>
+		<inputFile value="${workingDir}/document-tmp1.odt"/>
+		<outputFile value="${workingDir}/document-export.${exportFormat}"/>
 	</component>
 </workflow>

@@ -105,6 +105,9 @@ class UwmUtil {
 		self::$dom->startElement('Model');
 	
 		self::appendAttributes($currModel);
+
+		self::$dom->startElement('Package');
+		self::$dom->writeAttribute('Name', $currModel->getName());
 	
 		$currModel->loadChildren();
 		$packages = $currModel->getPackageChildren();
@@ -116,6 +119,7 @@ class UwmUtil {
 		}
 	
 		unset ($currModel);
+		self::$dom->endElement();
 		self::$dom->endElement();
 	}
 
@@ -137,6 +141,10 @@ class UwmUtil {
 					self::processPackage($currChild);
 					break;
 			
+				case 'ChiBusinessProcess':
+					self::processBusinessProcess($currChild);
+					break;
+			
 				case 'ChiBusinessUseCase':
 				case 'ChiBusinessUseCaseCore':
 					self::processUseCase($currChild);
@@ -152,6 +160,32 @@ class UwmUtil {
 			}
 		}
 	
+		self::$dom->endElement();
+	}
+
+	private static function processBusinessProcess($currNode) {
+		self::check($currNode->getId());
+		self::$dom->startElement($currNode->getType());
+	
+		self::appendAttributes($currNode);
+	
+		$currNode->loadChildren();
+		$children = $currNode->getChildren();
+		foreach ($children as $currChild)
+		{
+			$childType = self::getRealType($currChild);
+
+			if ($childType == 'ChiBusinessUseCase' || $childType == 'ChiBusinessUseCaseCore') {
+				self::processUseCase($currChild);
+			} else if (self::processManyToMany($currChild, $currNode->getId())) {
+				//do nothing
+			} else if ($childType != 'Figure') {
+				$logger = LoggerManager::getLogger('OawUtil');
+	
+				$logger->error('Invalid child of BusinessProcess: ' . $currChild->getId(), __FILE__, __LINE__);
+			}
+		}
+
 		self::$dom->endElement();
 	}
 
@@ -172,9 +206,9 @@ class UwmUtil {
 			} else if (self::processManyToMany($currChild, $currNode->getId())) {
 				//do nothing
 			} else if ($childType != 'Figure') {
-			$logger = LoggerManager::getLogger('OawUtil');
-
-			$logger->error('Invalid child of UseCase: ' . $currChild->getId(), __FILE__, __LINE__);
+				$logger = LoggerManager::getLogger('OawUtil');
+	
+				$logger->error('Invalid child of UseCase: ' . $currChild->getId(), __FILE__, __LINE__);
 			}
 		}
 
