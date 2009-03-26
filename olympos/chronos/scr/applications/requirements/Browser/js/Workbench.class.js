@@ -31,20 +31,46 @@ Workbench = function(){
             self.loadModel();
         }
     });
-    
+	
+	this.piechartPanelEmpty= new Ext.Panel({
+		
+		html: uwm.Dict.translate('Please select a model.')
+	});
+	this.barchartPanelEmpty = new Ext.Panel({
+		
+		html:uwm.Dict.translate('Please select a model.')
+	});
+	this.piechartPanel= new Ext.Panel({
+	
+		layout:'fit',
+		html: '<iframe style="height: 100%;width:100%;" src="lib/ofc/piechart.php"/>'
+	});
+	this.barchartPanel = new Ext.Panel({
+		
+		layout: 'fit',
+		html:'<iframe style="height: 100%;width:100%;" src="lib/ofc/barchart.php"/>'
+	});
+	
+    this.piechartContainer=new Ext.Panel({
+		region:'center',
+		layout: 'fit',
+		items: this.piechartPanelEmpty
+	});
+	
+	this.barchartContainer=new Ext.Panel({
+		region:'east',
+		width:550,
+		layout: 'fit',
+		items:this.barchartPanelEmpty
+	});
+	
     this.diagramPanel = new Ext.Panel({
         region: 'north',
         height: 250,
         layout: 'border',
-        items: [{
-            region: 'center',
-            html: '<iframe style="height: 100%;width:100%;" src="lib/ofc/piechart.php"/>'
-        }, {
-            region: 'east',
-            width: 550,
-            html: '<iframe style="height: 100%;width:100%;" src="lib/ofc/barchart.php"/>'
-        }]
-    })
+        items: [this.piechartContainer, this.barchartContainer]
+    });
+	
     
     this.weightPanel = new Ext.Panel({
         title: uwm.Dict.translate('Package weight'),
@@ -99,7 +125,6 @@ Workbench = function(){
         }]
     }));
     this.initWorkbench();
-    
 }
 Ext.extend(Workbench, Ext.Viewport);
 
@@ -107,10 +132,21 @@ Workbench.prototype.initWorkbench = function(){
     Ext.QuickTips.init();
 }
 
-Workbench.prototype.addInformationTab = function(id, uwmClassName){
+Workbench.prototype.createInformationTab=function(id,objectList){
+	var proxy=new InfoGridProxy(id,objectList);
+	
+	var store=new Ext.data.Store({
+		proxy: proxy
+	});
+	
+	proxy['store']=store;
+	store.load();
+}
+
+Workbench.prototype.addInformationTab = function(id,store,columnList){
     var newTab = new Ext.Panel({
         title: id,
-        items: [new InfoGrid(uwmClassName)],
+        items: [new InfoGrid(store,columnList)],
         closable: true
     });
     this.structureTabPanel.add(newTab);
@@ -120,14 +156,12 @@ Workbench.prototype.addInformationTab = function(id, uwmClassName){
 
 Workbench.prototype.loadModel = function(){
     var container = ObjectContainer.getInstance();
-	container.modelLoaded=true;
-    container.selectedModelName = this.selectModelBox.getValue();
-    if (container.setModelOid()) {
-		 this.showMask();
+	container.selectedModelName = this.selectModelBox.getValue();
+    
+	if (container.setModelOid()) {
+		this.showMask();
         this.structureTabPanel.activate(0);
-		container.loadReport();
-        container.loadModel(container.selectedModel);
-       
+        container.loadModel(container.selectedModel);       
     }
     else {
         Ext.Msg.alert(uwm.Dict.translate("Error"), uwm.Dict.translate("Please select a model."));
@@ -139,11 +173,19 @@ Workbench.prototype.loadModel = function(){
 Workbench.prototype.showMask = function(){
     Ext.WindowMgr.zseed = 25000;
     
-    this.structureTabPanel.getEl().mask(uwm.Dict.translate('Loading') + '...');
+    this.maskTabPanel();
     this.objectDataTable.getEl().mask(uwm.Dict.translate('Loading') + '...');
 	this.diagramPanel.getEl().mask(uwm.Dict.translate('Loading')+'...');
     
-    Ext.Msg.progress(uwm.Dict.translate("Loading"), uwm.Dict.translate("Loading report..."), uwm.Dict.translate("Package tree"))
+    Ext.Msg.progress(uwm.Dict.translate("Loading"), uwm.Dict.translate("Loading report..."), uwm.Dict.translate("Package tree"));
+}
+
+Workbench.prototype.maskTabPanel=function(){
+	this.structureTabPanel.getEl().mask(uwm.Dict.translate('Loading') + '...');
+}
+
+Workbench.prototype.unmaskTabPanel=function(){
+	this.structureTabPanel.getEl().unmask();
 }
 
 Workbench.prototype.scrollSpacetree = function(){

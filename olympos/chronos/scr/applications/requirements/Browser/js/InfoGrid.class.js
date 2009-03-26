@@ -15,75 +15,45 @@
  * @extends Ext.grid.GridPanel
  */
 
-InfoGrid = function(uwmClassName){
+InfoGrid = function(store,columnList){
+	var self=this;
 	
-    this.data = [['','New '+uwmClassName,'50','Proposed','','pgiuseppe','2009-03-17 14:05:02','pgiuseppe','2009-03-17 14:05:02'],
-	['','New '+uwmClassName,'20','Satisfied','further information coming soon','pgiuseppe','2009-02-25 09:55:08','pgiuseppe','2009-03-01 20:28:20'],
-	['','New '+uwmClassName,'90','tbd','','pgiuseppe','2009-03-01 20:28:37','enikao','2009-03-24 22:32:42']
-	];
+	this.colModel=new Ext.grid.ColumnModel(columnList);
     
-    this.fields = ['id','name', 'priority', 'status','notes','creator','created','last_editor','modified'];
-    
-    this.store = new Ext.data.SimpleStore({
-        fields: this.fields
-    });
-	
+  	
 	this.selectionModel=new Ext.grid.RowSelectionModel({
             singleSelect: true
         });
 	
-    this.store.loadData(this.data);
 	
     InfoGrid.superclass.constructor.call(this, Ext.apply(this, {
-        store: this.store,
+        store: store,
 		height:1000,
-        columns: [{
-            header: "Name",
-            width: 30,
-            sortable: false,
-            dataIndex: 'name'
-        }, {
-            header: "Priority",
-            width: 21,
-            sortable: false,
-            dataIndex: 'priority'
-        }, {
-            header: "Status",
-            width: 21,
-            sortable: false,
-            dataIndex: 'status'
-        },{
-            header: "Notes",
-            width: 80,
-            sortable: false,
-            dataIndex: 'notes'
-        },{
-            header: "Creator",
-            width: 21,
-            sortable: false,
-            dataIndex: 'creator'
-        },{
-            header: "Created",
-            width: 31,
-            sortable: false,
-            dataIndex: 'created'
-        },{
-            header: "Last editor",
-            width: 21,
-            sortable: false,
-            dataIndex: 'last_editor'
-        },{
-            header: "Modified",
-            width: 31,
-            sortable: false,
-            dataIndex: 'modified'
-        }],
+        columns:columnList,
         viewConfig: {
             forceFit: true,
         },
         sm: this.selectionModel,
         stripeRows: true
     }));
-	this.doLayout();
+	
+	Workbench.getInstance().unmaskTabPanel();
 }
 Ext.extend(InfoGrid, Ext.grid.GridPanel);
+
+InfoGrid.prototype.setColumns=function(columns){
+	for (var i = 0;i<columns.length;i++){
+		this.columnList.push({
+			header: columns[i],
+			width:31,
+			sortable:true,
+			dataIndex:columns[i]
+		});
+	}
+	
+}
+
+InfoGrid.prototype.getColModel=function(){
+	var result=new Ext.grid.ColumnModel(this.columnList);
+	return result;
+}
