@@ -129,6 +129,22 @@ Ext.extend(cwm.ChiNodeClass, uwm.model.ClassObjectClass);
 cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [		new uwm.property.TextField({
+			fieldLabel: 'Name',
+			toolTip: "the name of this object.",
+			name: 'Name',
+			
+			modelNode: modelNode,
+			
+			readOnly: isLockedByOtherUser		}) 
+,		new uwm.property.HtmlEditor({
+			fieldLabel: 'Notes',
+			toolTip: "the actual description of the object.",
+			name: 'Notes',
+			
+			modelNode: modelNode,
+			
+			readOnly: isLockedByOtherUser		}) 
+,		new uwm.property.TextField({
 			fieldLabel: 'display_value',
 			toolTip: "The value that is displayed in a list view. a single value or '|' -separated list of values",
 			name: 'display_value',
@@ -217,22 +233,6 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 			fieldLabel: 'Version',
 			toolTip: "the model version of this object",
 			name: 'Version',
-			
-			modelNode: modelNode,
-			
-			readOnly: isLockedByOtherUser		}) 
-,		new uwm.property.TextField({
-			fieldLabel: 'Name',
-			toolTip: "the name of this object.",
-			name: 'Name',
-			
-			modelNode: modelNode,
-			
-			readOnly: isLockedByOtherUser		}) 
-,		new uwm.property.HtmlEditor({
-			fieldLabel: 'Notes',
-			toolTip: "the actual description of the object.",
-			name: 'Notes',
 			
 			modelNode: modelNode,
 			

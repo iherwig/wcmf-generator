@@ -80,16 +80,6 @@ Ext.extend(cwm.ChiBusinessPartnerActiveClass, uwm.model.ModelClass);
 cwm.ChiBusinessPartnerActiveClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
-			fieldLabel: 'Alias',
-			name: 'Alias',
-			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
-		}) ,	new uwm.property.TextField({
-			fieldLabel: 'Version',
-			name: 'Version',
-			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
-		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
 			modelNode: modelNode,
@@ -97,6 +87,16 @@ cwm.ChiBusinessPartnerActiveClass.prototype.getPropertyForm = function(modelNode
 		}) ,	new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Alias',
+			name: 'Alias',
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
+		}) ,	new uwm.property.TextField({
+			fieldLabel: 'Version',
+			name: 'Version',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
 		}) ,	new uwm.property.TextField({

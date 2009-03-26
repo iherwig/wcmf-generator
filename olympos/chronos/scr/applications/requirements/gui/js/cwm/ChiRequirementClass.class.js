@@ -79,7 +79,19 @@ Ext.extend(cwm.ChiRequirementClass, uwm.model.ModelClass);
 
 cwm.ChiRequirementClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
-		items: [new uwm.property.ComboBox({
+		items: [new uwm.property.TextField({
+			fieldLabel: 'Name',
+			toolTip: "the name of this object.",
+			name: 'Name',
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
+		}), new uwm.property.HtmlEditor({
+			fieldLabel: 'Notes',
+			toolTip: "the actual description of the object.",
+			name: 'Notes',
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
+		}), new uwm.property.ComboBox({
 			fieldLabel: 'reqType',
 			toolTip: "",
 			name: 'reqType',
@@ -127,18 +139,6 @@ cwm.ChiRequirementClass.prototype.getPropertyForm = function(modelNode, isLocked
 			fieldLabel: 'Version',
 			toolTip: "the model version of this object",
 			name: 'Version',
-			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
-		}), new uwm.property.TextField({
-			fieldLabel: 'Name',
-			toolTip: "the name of this object.",
-			name: 'Name',
-			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
-		}), new uwm.property.HtmlEditor({
-			fieldLabel: 'Notes',
-			toolTip: "the actual description of the object.",
-			name: 'Notes',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({

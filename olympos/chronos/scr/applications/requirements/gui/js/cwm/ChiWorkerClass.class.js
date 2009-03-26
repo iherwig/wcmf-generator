@@ -86,16 +86,6 @@ Ext.extend(cwm.ChiWorkerClass, uwm.model.ModelClass);
 cwm.ChiWorkerClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
-			fieldLabel: 'Alias',
-			name: 'Alias',
-			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
-		}), new uwm.property.TextField({
-			fieldLabel: 'Version',
-			name: 'Version',
-			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
-		}), new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
 			modelNode: modelNode,
@@ -103,6 +93,16 @@ cwm.ChiWorkerClass.prototype.getPropertyForm = function(modelNode, isLockedByOth
 		}), new uwm.property.HtmlEditor({
 			fieldLabel: 'Notes',
 			name: 'Notes',
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
+		}), new uwm.property.TextField({
+			fieldLabel: 'Alias',
+			name: 'Alias',
+			modelNode: modelNode,
+			readOnly: isLockedByOtherUser
+		}), new uwm.property.TextField({
+			fieldLabel: 'Version',
+			name: 'Version',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
 		}), new uwm.property.TextField({
