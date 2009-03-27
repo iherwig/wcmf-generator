@@ -56,7 +56,7 @@ function start(){
     makeHTMLFromData: function(data) {
       var html = '';
       html += parent.uwm.Dict.translate('Content')+': ' + data[0].value + '<br />';
-      
+      // Insert further tooltip information here.
       return html;
     }
     });

@@ -142,7 +142,7 @@ uwm.ui.Login.prototype.initSession = function(){
 
 uwm.ui.Login.prototype.handleLogin = function(options, data){
 	uwm.Session.getInstance().init(data.sid, this.form.getForm().findField("Language").getValue());
-	ObjectContainer.getInstance().loadModels();
+	ObjectContainer.getInstance().loadModelList();
 	this.destroy();
 }
 

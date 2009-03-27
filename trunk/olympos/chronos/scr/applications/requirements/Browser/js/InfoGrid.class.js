@@ -52,8 +52,3 @@ InfoGrid.prototype.setColumns=function(columns){
 	}
 	
 }
-
-InfoGrid.prototype.getColModel=function(){
-	var result=new Ext.grid.ColumnModel(this.columnList);
-	return result;
-}

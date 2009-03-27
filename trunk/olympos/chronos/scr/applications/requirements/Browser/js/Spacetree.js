@@ -1,3 +1,7 @@
+/**
+ * Hand tool for scrolling
+ * @param {Event} e
+ */
 startDragScroll=function(e){
 	this.scrolling=true;
 	this.oldPosition=e.screenY;
@@ -20,7 +24,6 @@ stopDragScroll=function(e){
 }
 
 init= function(){
-	//if (ObjectContainer.getInstance().modelLoaded) {
 	if (parent.ObjectContainer.getInstance().modelLoaded) {	
 	start();
 	
