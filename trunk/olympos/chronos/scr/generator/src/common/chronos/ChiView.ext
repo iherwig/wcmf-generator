@@ -1,0 +1,15 @@
+import uml;
+import Chronos;
+
+extension common::chronos::util;
+
+/**
+ * View related methods
+ */
+ 
+/**
+ * Get all nodes that are connected to the view
+ */
+cached List[ChiNode] getChiNodes(ChiView this) :
+	this.getAssociations().memberEnd.class.typeSelect(ChiNode)
+;

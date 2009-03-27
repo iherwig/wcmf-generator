@@ -1,0 +1,52 @@
+import uml;
+import Chronos;
+
+extension common::chronos::util;
+
+/**
+ * Action key related methods
+ */
+ 
+/**
+ * Check if an action key has a source controller
+ */
+boolean hasSourceController(ChiActionKey this) :
+	this.getSourceController() != null
+;
+/**
+ * Get the source controller of an action key 
+ */
+cached ChiController getSourceController(ChiActionKey this) :
+	this.memberEnd.select(e|e.isNavigable()).class.typeSelect(ChiController).first()
+;
+
+/**
+ * Check if an action key has a target controller
+ */
+boolean hasTargetController(ChiActionKey this) :
+	this.getTargetController() != null
+;
+
+/**
+ * Get the target controller of an action key 
+ * (if getEndTypes().size == 1, source and target are the same)
+ */
+cached ChiController getTargetController(ChiActionKey this) :
+	this.getEndTypes().size == 1 ? this.getEndTypes().first() :
+		this.getEndTypes().reject(e|e == this.getSourceController()).typeSelect(ChiController).first()
+;
+
+/**
+ * Check if an action key has a target view
+ */
+boolean hasTargetView(ChiActionKey this) :
+	this.getTargetView() != null
+;
+
+/**
+ * Get the target view of an action key 
+ */
+cached ChiView getTargetView(ChiActionKey this) :
+	this.getEndTypes().reject(e|e == this.getSourceController()).typeSelect(ChiView).first()
+;
+
