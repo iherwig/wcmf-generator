@@ -1,0 +1,21 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::chronos::util;
+extension common::chronos::naming;
+
+/**
+ * Get the primary key tagged value or default pk name if not set
+ */
+String getPKName(ChiManyToMany this) : 
+	this.pk_name == null || this.pk_name.length == 0 ? defaultPKName(this) : this.pk_name
+;
+
+/**
+ * Set the primary key tagged value
+ */
+Void setPKName(ChiManyToMany this, String name) :
+	this.setTaggedValue(STEREOTYPE_CHI_MANY_TO_MANY(), "pk_name", name)
+;

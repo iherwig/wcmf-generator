@@ -1,0 +1,191 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+
+extension common::chronos::util;
+extension common::chronos::naming;
+extension common::chronos::ChiValue;
+
+/**
+ * ChiNode extensions
+ */
+
+/**
+ * Methods for retrieving parent nodes. Parents are at the composite or shared end (uml::Property) or the one 
+ * that is navigable in an association with the node.
+ */
+ 
+/**
+ * Check if a node has parent nodes (including associations added by the generator)
+ */
+Boolean hasParentNodesRecursive(ChiNode this):
+	this.getParentNodesRecursive().size >= 0 ? true : false 
+;
+/**
+ * Get all parent nodes (including associations added by the generator)
+ */
+cached List[uml::Property] getParentNodesRecursive(ChiNode this) : 
+	this.getParentNodes(true).select(e|e.type.isNode())
+;
+/**
+ * Check if a node has parent nodes
+ */
+Boolean hasParentNodes(ChiNode this):
+	this.getParentNodes().size >= 0 ? true : false 
+;
+/**
+ * Get all parent nodes
+ */
+cached List[uml::Property] getParentNodes(ChiNode this) : 
+	this.getParentNodes(false).select(e|e.type.isNode())
+;
+/**
+ * Check if a node is a parent node
+ */
+Boolean isParentNode(ChiNode this, ChiNode other) : 
+	this.isParentNode(other, false)
+;
+/**
+ * Private calls to JAVA extensions
+ */
+private List[uml::Property] getParentNodes(ChiNode this, boolean recursive) : 
+	JAVA net.sourceforge.olympos.oaw.extend.NodeHelper.getParents(org.eclipse.uml2.uml.Class, java.lang.Boolean)
+;
+private Boolean isParentNode(ChiNode this, ChiNode other, Boolean recursive) : 
+	JAVA net.sourceforge.olympos.oaw.extend.NodeHelper.isParent(org.eclipse.uml2.uml.Class, org.eclipse.uml2.uml.Class, java.lang.Boolean)
+;
+
+/**
+ * Methods for retrieving child nodes. Children are at otherEnd (uml::Property) of parent ends.
+ */
+ 
+/**
+ * Check if a node has child nodes (including associations added by the generator)
+ */
+Boolean hasChildNodesRecursive(ChiNode this):
+	this.getChildNodesRecursive().size >= 0 ? true : false
+;
+/**
+ * Get all child nodes (including associations added by the generator)
+ */
+cached List[uml::Property] getChildNodesRecursive(ChiNode this) : 
+	this.getChildNodes(true).select(e|e.type.isNode())
+;
+/**
+ * Check if a node has child nodes (including associations added by the generator)
+ */
+Boolean hasChildNodes(ChiNode this):
+	this.getChildNodes().size >= 0 ? true : false
+;
+/**
+ * Get all child nodes
+ */
+cached List[uml::Property] getChildNodes(ChiNode this) : 
+	this.getChildNodes(false).select(e|e.type.isNode())
+;
+/**
+ * Check if a node is a child node
+ */
+Boolean isChildNode(ChiNode this, ChiNode other) : 
+	this.isChildNode(other, false)
+;
+/**
+ * Private calls to JAVA extensions
+ */
+private List[Property] getChildNodes(ChiNode this, boolean recursive) : 
+	JAVA net.sourceforge.olympos.oaw.extend.NodeHelper.getChildren(org.eclipse.uml2.uml.Class, java.lang.Boolean)
+;
+private Boolean isChildNode(ChiNode this, ChiNode other, Boolean recursive) : 
+	JAVA net.sourceforge.olympos.oaw.extend.NodeHelper.isChild(org.eclipse.uml2.uml.Class, org.eclipse.uml2.uml.Class, java.lang.Boolean)
+;
+
+/**
+ * Methods for retrieving attributes
+ */
+
+/**
+ * Get all attributes (including attributes added by the generator)
+ */
+cached List[ChiValue] getChiValuesRecursive(ChiNode this): 
+	this.attribute.typeSelect(ChiValue)
+;
+/**
+ * Get all attributes
+ */
+cached List[ChiValue] getChiValues(ChiNode this): 
+	this.attribute.typeSelect(ChiValue).select(v|!v.isGeneratorInherited())
+;
+/**
+ * Get all references
+ */
+cached List[ChiValueRef] getChiValueRefs(ChiNode this): 
+	this.attribute.typeSelect(ChiValueRef)
+;
+
+/**
+ * Get the init params
+ */
+String getInitparams(ChiNode this) :
+	// use the next line, if initparams tagged value is of type ChiSystem
+	//this.initparams != null ? this.initparams.name : "database"
+	// use the next line, if initparams tagged value is of type String
+	!this.initparams.isNullOrEmpty() ? this.initparams : "database"
+;
+
+/**
+ * Get the table name
+ */
+String getTableName(ChiNode this) : 
+	this.table_name.length > 0 ? this.table_name : this.name
+;
+
+/**
+ * Get the order column from the orderby tagged value
+ */
+String getOrderByColumn(ChiNode this) : 
+	let col = this.orderby.split(" ").first().trim() : 
+		let orderVal = this.getChiValuesRecursive().select(v|v.name == col).first() :
+			orderVal != null ? orderVal.getColumnName() : (col == defaultOrderByName() ? col : "")
+;
+
+/**
+ * Get the primary key tagged value or default pk name if not set
+ */
+String getPKName(ChiNode this) : 
+	this.pk_name == null || this.pk_name.length == 0 ? defaultPKName(this) : this.pk_name
+;
+
+/**
+ * Set the primary key tagged value
+ */
+Void setPKName(ChiNode this, String name) :
+	this.setTaggedValue(STEREOTYPE_CHI_NODE(), "pk_name", name)
+;
+
+/**
+ * Get the primary keys (from the tagged value)
+ */
+List[ChiValue] getPKValues(ChiNode this) : 
+	let pkNameStr = this.pk_name.split("\\|") : 
+		this.getChiValuesRecursive().select(v|pkNameStr.contains(v.name))
+;
+
+/**
+ * Check if an attribute is a fk value
+ * (this is delegated to the generator, because the result was calcualted during post processing)
+ */
+boolean isFKValue(ChiValue this) : 
+	JAVA net.sourceforge.olympos.oaw.extend.Generator.isFKValue(org.eclipse.uml2.uml.Property)
+;
+
+/**
+ * Get the class that is referenced by a fk value 
+ * (this is delegated to the generator, because the result was calcualted during post processing)
+ */ 
+Class getFKClass(ChiValue this) : 
+	JAVA net.sourceforge.olympos.oaw.extend.Generator.getFKClass(org.eclipse.uml2.uml.Property)
+;
+

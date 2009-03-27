@@ -1,0 +1,32 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+
+extension common::chronos::globals;
+
+/**
+ * Add inherited values and associations to all nodes
+ */
+Void addDefaults(uml::Model this) :
+	info("--------------------------") ->
+	info("M2M Start") ->
+	info("--------------------------") ->
+	info("Apply Chronos profile") ->
+	this.applyProfile(ProfileFile()) ->
+	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
+		postProcessNodes("Model::"+RootPackage()+"::"+ApplicationPackage()) ->
+	info("--------------------------") ->
+	info("M2M End") ->
+	info("--------------------------") ->
+	this
+;
+
+/**
+ * PostProcessor delegates
+ */
+ChiNode postProcessNodes(ChiNode root, String package) :
+	JAVA net.sourceforge.olympos.oaw.extend.PostProcessor.postProcessNodes(org.eclipse.uml2.uml.Class, java.lang.String)
+;
