@@ -35,7 +35,7 @@ ObjectContainer = function(){
     /**
      * The number of objects in the biggest package of the current model
      */
-    this.maxTreeContent = 0;
+    this.maxTreeContent = 1;
 }
 
 
@@ -43,18 +43,18 @@ ObjectContainer = function(){
  * Loads models from persistency into this.models. Used for navigation.
  * Creates the workbench when finished.
  */
-ObjectContainer.prototype.loadModels = function(){
+ObjectContainer.prototype.loadModelList = function(){
     var self = this;
     
     this.models['name'] = [];
     this.models['oid'] = [];
     uwm.persistency.Persistency.getInstance().loadChildren('root', function(options, data){
-        self.handleLoadedModels(options, data);
+        self.handleLoadedModelList(options, data);
     }, function(){
     });
 }
 
-ObjectContainer.prototype.handleLoadedModels = function(options, data){
+ObjectContainer.prototype.handleLoadedModelList = function(options, data){
     for (i in data.objects) {
         if (!(data.objects[i] instanceof Function)) {
             this.models.name.push(data.objects[i].text);
@@ -141,6 +141,12 @@ ObjectContainer.prototype.loadObject = function(oid){
     });
 }
 
+/**
+ * Replacement for the upper load method which does only one JSON call and uses display. 
+ * Is much faster, but currently has no working successhandler.
+ * 
+ * @param {String} oid The oid of the object which is to be loaded.
+ */
 ObjectContainer.prototype.loadOBJECT=function(oid){
 	var self = this;
 	
@@ -194,8 +200,8 @@ ObjectContainer.prototype.handleLoadedObject = function(options, data, oid){
 		Ext.Msg.updateProgress(0.25,uwm.Dict.translate("Package weight"));
 	}
     if (this.objectsToLoad == 0) {
-        this.getTreeList(this.selectedModel);
-        this.getWeightList(this.selectedModel);
+        this.arrangeTreeList(this.selectedModel);
+        this.arrangeWeightList(this.selectedModel);
         
 		Workbench.getInstance().unmaskTabPanel();
 		Ext.Msg.updateProgress(0.5,uwm.Dict.translate("Object information"))
@@ -221,7 +227,7 @@ ObjectContainer.prototype.handleLoadedObject = function(options, data, oid){
  *
  * @param {String} rootOid The oid of the object which is to be the root of the tree.
  */
-ObjectContainer.prototype.getTreeList = function(rootOid){
+ObjectContainer.prototype.arrangeTreeList = function(rootOid){
     var objects = this.objectsForSpacetree;
     var arrayPosition;
     for (var i = 0; i < objects.length; i++) {
@@ -247,7 +253,7 @@ ObjectContainer.prototype.getTreeList = function(rootOid){
  *
  * @param {Object} rootOid The oid of the object which is to be the root of the tree.
  */
-ObjectContainer.prototype.getWeightList = function(rootOid){
+ObjectContainer.prototype.arrangeWeightList = function(rootOid){
     var objects = this.objectsForTreemap;
     var arrayPosition;
     for (var i = 0; i < objects.length; i++) {
@@ -414,38 +420,45 @@ ObjectContainer.prototype.setModelOid = function(){
     return result;
 }
 
+/**
+ * Should load the ObjectDataTable when backend generator for that is finished. 
+ * Currently only shows dummy data.
+ */
 ObjectContainer.prototype.loadReport = function(){
 	Workbench.getInstance().objectDataTable.reload();
 	Workbench.getInstance().objectDataTable.getEl().unmask();
 	Workbench.getInstance().diagramPanel.getEl().unmask();
 }
 
+/**
+ * Supposed to load the report data for the ObjectDataTable. Currently only shows the dummy data.
+ */
 ObjectContainer.prototype.getTableData = function(){
 	var result;
 	if (this.modelLoaded){
 		result=[
-	['Goals',["ChiGoal:15270","ChiGoal:21669"],'Goals', '<u>4</u>', '<img src="img/ampel2.png">'],  
-	['Achieved Goals',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;achieved', '<u>1</u>', '<img src="img/ampel5.png">'], 
-	['Not achieved Goals',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not achieved', '<u>3</u>', '<img src="img/ampel1.png">'], 
-	['Goals without Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirements', '<u>1</u>', '<img src="img/ampel3.png">'],
-	['Goals without valid priority',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without valid priority', '<u>2</u>','<img src="img/ampel2.png">'],
-	['Requirements',["ChiGoal:15270","ChiGoal:21669"],'Requirements', '<u>6</u>', '<img src="img/ampel4.png">'], 
-	['Satisfied Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;satisfied', '<u>2</u>', '<img src="img/ampel4.png">'], 
-	['Not satisfied Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not satisfied', '<u>4</u>', '<img src="img/ampel2.png">'], 
-	['Requirements without Goal',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Goal', '<u>0</u>', '<img src="img/ampel5.png">'], 
-	['Requirements without Feature',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Feature', '<u>1</u>', '<img src="img/ampel3.png">'], 
-	['Requirements with Issue',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with Issue', '<u>2</u>', '<img src="img/ampel1.png">'],
-	['Requirements without Proofreader',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Proofreader', '<u>0</u>','<img src="img/ampel2.png">'],
-	['Not validated Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not validated', '<u>1</u>', '<img src="img/ampel2.png">'],
-	['Features',["ChiGoal:15270","ChiGoal:21669"],'Features', '<u>10</u>','<img src="img/ampel5.png">'],
-	['Features without Requirement',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirement','<u>1</u>','<img src="img/ampel1.png">'],
-	['Implemented Features',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implemented','<u>6</u>','<img src="img/ampel5.png">'],
-	['Implemented Features without UseCase',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without UseCase','<u>1','<img src="img/ampel2.png">'],
-	['Not implemented Features',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not implemented', '<u>4</u>','<img src="img/ampel3.png">'],
-	['Issues',["ChiGoal:15270","ChiGoal:21669"],'Issues', '<u>5</u>', '<img src="img/ampel2.png">'],
-	['UseCases',["ChiGoal:15270","ChiGoal:21669"],'UseCases', '<u>8</u>','<img src="img/ampel4.png">'],
-	['UseCases without Actors',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Actors', '<u>2</u>','<img src="img/ampel2.png">'],
-	['Actors',["ChiGoal:15270","ChiGoal:21669"],'Actors', '<u>7</u>','<img src="img/ampel5.png">']
+	['Goals',["ChiGoal:15270","ChiGoal:21669"],'Goals', '<u>4</u>', '<img src="img/signal2.png">'],  
+	['Achieved Goals',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;achieved', '<u>1</u>', '<img src="img/signal5.png">'], 
+	['Not achieved Goals',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not achieved', '<u>3</u>', '<img src="img/signal1.png">'], 
+	['Goals without Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirements', '<u>1</u>', '<img src="img/signal3.png">'],
+	['Goals without valid priority',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without valid priority', '<u>2</u>','<img src="img/signal2.png">'],
+	['Requirements',["ChiGoal:15270","ChiGoal:21669"],'Requirements', '<u>6</u>', '<img src="img/signal4.png">'], 
+	['Satisfied Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;satisfied', '<u>2</u>', '<img src="img/signal4.png">'], 
+	['Not satisfied Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not satisfied', '<u>4</u>', '<img src="img/signal2.png">'], 
+	['Requirements without Goal',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Goal', '<u>0</u>', '<img src="img/signal5.png">'], 
+	['Requirements without Feature',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Feature', '<u>1</u>', '<img src="img/signal3.png">'], 
+	['Requirements with Issue',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with Issue', '<u>2</u>', '<img src="img/signal1.png">'],
+	['Requirements without Proofreader',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Proofreader', '<u>0</u>','<img src="img/signal2.png">'],
+	['Not validated Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not validated', '<u>1</u>', '<img src="img/signal2.png">'],
+	['Features',["ChiGoal:15270","ChiGoal:21669"],'Features', '<u>10</u>','<img src="img/signal5.png">'],
+	['Features without Requirement',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirement','<u>1</u>','<img src="img/signal1.png">'],
+	['Implemented Features',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implemented','<u>6</u>','<img src="img/signal5.png">'],
+	['Implemented Features without UseCase',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without UseCase','<u>1','<img src="img/signal2.png">'],
+	['Not implemented Features',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not implemented', '<u>4</u>','<img src="img/signal3.png">'],
+	['Issues',["ChiGoal:15270","ChiGoal:21669"],'Issues', '<u>5</u>', '<img src="img/signal2.png">'],
+	['UseCases',["ChiGoal:15270","ChiGoal:21669"],'UseCases', '<u>8</u>','<img src="img/signal4.png">'],
+	['UseCases without Actors',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Actors', '<u>2</u>','<img src="img/signal2.png">'],
+	['Actors',["ChiGoal:15270","ChiGoal:21669"],'Actors', '<u>7</u>','<img src="img/signal5.png">']
 	];
 	}else{
 		result=[['','',uwm.Dict.translate('Please select a model.'),'','']];

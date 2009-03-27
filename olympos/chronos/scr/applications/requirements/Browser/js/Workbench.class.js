@@ -24,6 +24,7 @@ Workbench = function(){
         emptyText: uwm.Dict.translate('Select a model...'),
         selectOnFocus: true
     });
+	
     this.loadModelButton = new Ext.Button({
         text: 'Report',
         type: 'submit',
@@ -32,31 +33,52 @@ Workbench = function(){
         }
     });
 	
+	/**
+	 * Replacement for pie chart when no model is loaded.
+	 */
 	this.piechartPanelEmpty= new Ext.Panel({
 		
 		html: uwm.Dict.translate('Please select a model.')
 	});
+	
+	/**
+	 * Replacement for bar chart when no model is loaded.
+	 */
 	this.barchartPanelEmpty = new Ext.Panel({
 		
 		html:uwm.Dict.translate('Please select a model.')
 	});
+	
+	/**
+	 * Panel containing the pie chart in iframe.
+	 */
 	this.piechartPanel= new Ext.Panel({
 	
 		layout:'fit',
 		html: '<iframe style="height: 100%;width:100%;" src="lib/ofc/piechart.php"/>'
 	});
+	
+	/**
+	 * Panel containing the bar chart in iframe.
+	 */
 	this.barchartPanel = new Ext.Panel({
 		
 		layout: 'fit',
 		html:'<iframe style="height: 100%;width:100%;" src="lib/ofc/barchart.php"/>'
 	});
 	
+	/**
+	 * Panel containing either the pie chart or an empty panel.
+	 */
     this.piechartContainer=new Ext.Panel({
 		region:'center',
 		layout: 'fit',
 		items: this.piechartPanelEmpty
 	});
 	
+	/**
+	 * Panel containing either the bar chart or an empty panel.
+	 */
 	this.barchartContainer=new Ext.Panel({
 		region:'east',
 		width:550,
@@ -64,6 +86,9 @@ Workbench = function(){
 		items:this.barchartPanelEmpty
 	});
 	
+	/**
+	 * Panel containing two diagrams.
+	 */
     this.diagramPanel = new Ext.Panel({
         region: 'north',
         height: 250,
@@ -71,19 +96,27 @@ Workbench = function(){
         items: [this.piechartContainer, this.barchartContainer]
     });
 	
-    
+    /**
+     * Tab containing treemap (package weight).
+     */
     this.weightPanel = new Ext.Panel({
         title: uwm.Dict.translate('Package weight'),
         tabTip: uwm.Dict.translate('Left-click to enter a package or object, right-click to leave it.'),
         html: '<iframe style="height: 100%;width:100%;" src="html/Treemap.html"/>'
     });
     
+	/**
+	 * Tab containing spacetree (package tree).
+	 */
     this.treePanel = new Ext.Panel({
         title: uwm.Dict.translate('Package tree'),
         tabTip: uwm.Dict.translate('Click on an object to see its children.'),
         html: '<iframe style="height: 100%;width:100%;"  src="html/Spacetree.html" />'
     })
     
+	/**
+	 * TabPanel containing package weight, package tree and InfoGrid tabs
+	 */
     this.structureTabPanel = new Ext.TabPanel({
         region: 'center',
         activeTab: 0,
@@ -132,6 +165,11 @@ Workbench.prototype.initWorkbench = function(){
     Ext.QuickTips.init();
 }
 
+/**
+ * Initiates creation of InfoGrid. 
+ * @param {String} id Header of the tab which is to be created.
+ * @param {Array} objectList Array of oids which shall be shown in the InfoGrid.
+ */
 Workbench.prototype.createInformationTab=function(id,objectList){
 	var proxy=new InfoGridProxy(id,objectList);
 	
@@ -143,6 +181,12 @@ Workbench.prototype.createInformationTab=function(id,objectList){
 	store.load();
 }
 
+/**
+ * Creates InfoGrid and adds it to structureTabPanel AFTER loading all objects.
+ * @param {String} id Header of the tab which is to be created
+ * @param {Object} store Ext.data.Store for the InfoGrid.
+ * @param {Array} columnList Array containing all columns which are shown in the grid.
+ */
 Workbench.prototype.addInformationTab = function(id,store,columnList){
     var newTab = new Ext.Panel({
         title: id,
@@ -154,6 +198,9 @@ Workbench.prototype.addInformationTab = function(id,store,columnList){
     this.doLayout();
 }
 
+/**
+ * Starts loading actions.
+ */
 Workbench.prototype.loadModel = function(){
     var container = ObjectContainer.getInstance();
 	container.selectedModelName = this.selectModelBox.getValue();
@@ -188,10 +235,12 @@ Workbench.prototype.unmaskTabPanel=function(){
 	this.structureTabPanel.getEl().unmask();
 }
 
-Workbench.prototype.scrollSpacetree = function(){
-    this.scroll(0, 800);
-}
 
+/**
+ * Sets scroll position to middle of the frame when spacetree is activated.
+ * @param {Object} tabPanel this.structureTabPanel
+ * @param {Object} tab The Tab which is being activated.
+ */
 Workbench.prototype.handleTabChange = function(tabPanel, tab){
     if (tab == tabPanel.getActiveTab()) {
         if (frames[3]) {

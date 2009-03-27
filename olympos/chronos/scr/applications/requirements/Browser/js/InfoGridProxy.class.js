@@ -10,6 +10,13 @@
  * this entire header must remain intact.
  */
 
+
+/**
+ * @class Routes the InfoGrid requests through persistency layer.
+ * @param {String} id Header of the tab which is to be created
+ * @param {Array} objectList List of objects for which the data must be loaded.
+ */
+
 InfoGridProxy = function(id,objectList){
     InfoGridProxy.superclass.constructor.call(this, Ext.apply(this, {
 		record: [],
@@ -83,6 +90,9 @@ InfoGridProxy.prototype.loadFailed = function(options, data, errorMsg, callback,
 	callback.call(scope, null, arg, false);
 }
 
+/**
+ * Creates a column list from the incoming property data.
+ */
 InfoGridProxy.prototype.getColumns=function(){
 	var result=[{
 		header:'Name',

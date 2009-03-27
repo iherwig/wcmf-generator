@@ -17,17 +17,17 @@ Ext.namespace("uwm.Dict");
  * @type Array
  */
 uwm.Dict.voc = {
-	'Select a model...'	: {'de':"Modell ausw‰hlen..."},
+	'Select a model...'	: {'de':"Modell ausw√§hlen..."},
 	'Package weight'	: {'de':"Paketgewicht"},
 	'Package tree'		: {'de':"Paketbaum"},
 	'Object information'	: {'de':"Objektinformationen"},
 	'Error'				: {'de':"Fehler"},
-	'Please select a model.':	{'de':"Bitte w‰hlen Sie ein Modell aus."},
-	'Loading'			: {'de':"L‰dt"},
-	'Loading report...'	: {'de':"L‰dt Report..."},
+	'Please select a model.':	{'de':"Bitte w√§hlen Sie ein Modell aus."},
+	'Loading'			: {'de':"L√§dt"},
+	'Loading report...'	: {'de':"L√§dt Report..."},
 	'Content'			: {'de':"Inhalt"},
 	'Left-click to enter a package or object, right-click to leave it.'	: {'de':"Linksklick auf ein Paket um es zu betrachten, Rechtsklick um es zu verlassen."},
-	'Click on an object to see its children.'	: {'de':"Klick auf ein Objeckt zeigt dessen Kinder."}
+	'Click on an object to see its children.'	: {'de':"Klick auf ein Objekt zeigt dessen Kinder."}
 		
 }
 
