@@ -45,40 +45,32 @@ class ObjectHistorySaveController extends SaveController
 						
 							if ($name !== 'id') {
 								
-								if($name == 'GoalType'){
-									$tmp = array ();
-										//get GoalType of (fieldvalue is GoalTypeId)
-									$this->ObjCurVal = $this->persistenceFacade->load('ChiGoalType:'.$affectedObj->getValue($name));
-									$tmp['oldValue'] = $affectedObj->getValue($name);
-									$tmp['oldValueDisp'] = $this->ObjCurVal->getValue('Name');
-										//get GoalType of (fieldvalue is GoalTypeId)
-									$this->ObjCurVal = $this->persistenceFacade->load('ChiGoalType:'.$this->node->getValue($name, $dataType));
-									$tmp['newValue'] = $this->node->getValue($name, $dataType);
-									$tmp['newValueDisp'] = $this->ObjCurVal->getValue('Name');
-									array_push($this->data, array ($name=>$tmp));
-								}else{
-									
 									$tmp = array ();
 									
 									$tmp['oldValue'] = $affectedObj->getValue($name);  //value of fieldname GoalType from Object
 									$tmp['newValue'] = $this->node->getValue($name);  // value changed of fieldname GoalType from Request
-									//$name //fieldname GoalType
+									//$name //Fieldname like GoalType
+																		
+									//mapping from Fieldname like 'GoalType' to secondTableName like 'ChiGoalType' in this direction
+									$secTabNamesRDB = $affectedObj->getValueProperties($name);
+									$secTabNamesIT = $secTabNamesRDB['input_type'];
+									if ((strpos($secTabNamesIT, 'select') !== false) and ((strpos($secTabNamesIT, 'async') !== false) or (strpos($secTabNamesIT, 'asyncmult') !== false))) {
+										list (, $secTabNames) = explode(':', $secTabNamesIT);
+										$arrSecTabNames = explode('|', $secTabNames);
+									}
+									foreach($arrSecTabNames as $k=>$arrSecTabName){
+										$this->ObjOldVal = $this->persistenceFacade->load($arrSecTabName.':'.$affectedObj->getValue($name));
+										if($this->ObjOldVal){
+											$tmp['oldValueDisp'] = $this->ObjOldVal->getValue('Name');
+										}
+										$this->ObjNewVal = $this->persistenceFacade->load($arrSecTabName.':'.$this->node->getValue($name));
+										if($this->ObjNewVal){
+											$tmp['newValueDisp'] = $this->ObjNewVal->getValue('Name');
+										}
+									}
 									
-									$tmp['oldValueDisp'] = $affectedObj->getValue($name);
-									$tmp['newValueDisp'] = $this->node->getValue($name);
-									
-									//tmp: need mapping from 'GoalType' to 'ChiGoalType' in this direction
-									//$this->node->getValue('input_type',$name);
-									//$tmp['oldValueDisp'] = $affectedObj->getValueDisplayName($name);
-									//$tmp['newValueDisp'] = $this->node->getValueDisplayName($name, $dataType);
-									//$this->ObjCurValOld = $this->persistenceFacade->load($affectedObj->getValueName($name).':'.$affectedObj->getValue($name));
-									//$this->ObjCurValNew = $this->persistenceFacade->load($this->node->getValueDisplayName($name, $dataType).':'.$this->node->getValue($name, $dataType));
-									
-													
 									array_push($this->data, array ($name=>$tmp));
-									
-								}
-								
+			
 							}
 						
 						}
