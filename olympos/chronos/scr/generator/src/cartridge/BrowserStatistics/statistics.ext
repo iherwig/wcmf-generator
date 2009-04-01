@@ -7,6 +7,8 @@ cached E():
 	1.11111 - 1.1111
 ;
 
+//ChiGoal
+
 cached List[Chronos::ChiGoal] getAllGoals(uml::Model this):
 	this.allOwnedElements().typeSelect(Chronos::ChiGoal)
 ;
@@ -25,6 +27,46 @@ cached List[Chronos::ChiGoal] getNonAchievedGoalsWithoutRequirement(uml::Model t
 
 cached List[Chronos::ChiGoal] getNonAchievedGoalsWithoutValidPriority(uml::Model this):
 	this.getNonAchievedGoals().select(e|e.Priority <= 0)
+;
+
+//ChiRequirement
+
+cached List[Chronos::ChiRequirement] getAllRequirements(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiRequirement)
+;
+
+cached List[Chronos::ChiRequirement] getRequirementsWithoutParent(uml::Model this):
+	this.getAllRequirements().select(e|e.getParents().size == 0)
+;
+
+//ChiFeature
+
+cached List[Chronos::ChiFeature] getAllFeatures(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiFeature)
+;
+
+cached List[Chronos::ChiFeature] getFeaturesWithoutParent(uml::Model this):
+	this.getAllFeatures().select(e|e.getParents().size == 0)
+;
+
+//ChiIssue
+
+cached List[Chronos::ChiIssue] getAllIssues(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiIssue)
+;
+
+cached List[Chronos::ChiIssue] getIssuesWithoutParent(uml::Model this):
+	this.getAllIssues().select(e|e.getParents().size == 0)
+;
+
+//ChiBusinessUseCase
+
+cached List[Chronos::ChiBusinessUseCase] getAllBusinessUseCases(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiBusinessUseCase)
+;
+
+cached List[Chronos::ChiBusinessUseCase] getBusinessUseCasesWithoutActor(uml::Model this):
+	this.getAllBusinessUseCases().select(e|e.getActors().size == 0)
 ;
 
 int calculateTrafficLight(Real this):
@@ -54,6 +96,23 @@ List[Chronos::ChiFeature] getFeatures(Chronos::ChiRequirement this):
 	this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiFeature)
 ;
 
+List[Chronos::ChiBase] getParents(Chronos::ChiRequirement this):
+	this.getAssociations().memberEnd.select(e|e.type != this).type
+		.select(f|f.getAppliedStereotypes().first().name == "ChiRequirement" || f.getAppliedStereotypes().first().name == "ChiGoal")
+;
+
 List[Chronos::ChiBusinessUseCase] getBusinessUseCases(Chronos::ChiFeature this):
 	this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiBusinessUseCase)
+;
+
+List[Chronos::ChiRequirement] getParents(Chronos::ChiFeature this):
+	this.getRelationships().typeSelect(uml::Realization).supplier.typeSelect(Chronos::ChiRequirement)
+;
+
+List[Chronos::ChiRequirement] getParents(Chronos::ChiIssue this):
+	this.getRelationships().typeSelect(uml::Dependency).supplier.typeSelect(Chronos::ChiRequirement)
+;
+
+List[uml::Actor] getActors(Chronos::ChiBusinessUseCase this):
+	this.getAssociations().memberEnd.select(e|e.type != this).type.typeSelect(uml::Actor)
 ;

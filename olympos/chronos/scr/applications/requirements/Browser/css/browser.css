@@ -5,3 +5,11 @@ navPanel {
 html, body {
 	background-color:#DFE8F6;
 }
+
+.spacetreeNode {
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: 6 6;
+	width: 100%;
+	height: 100%;
+}

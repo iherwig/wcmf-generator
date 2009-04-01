@@ -6,7 +6,7 @@
 	<property file="${propertyFile}" />
 
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
-
+<!--
 	<component class="org.openarchitectureware.xsd.XMLReader">
 		<modelSlot value="uwmmodel" />
 		<uri value="${workingDir}/cwm-source.xml" />
@@ -17,7 +17,7 @@
 	</component>
 
 	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
-		<modelUrl value='http://cwm.nikostotz.de/chronos.profile.uml'/>
+		<modelUrl value='file:///c:/chronos.profile.uml'/>
 		<outputSlot value="chronosProfile"/>
 	</component>
 
@@ -26,33 +26,32 @@
 		<metaModel id="uml"
 			class="oaw.uml2.UML2MetaModel" />
 		<metaModel id="Chronos" class="oaw.uml2.profile.ProfileMetaModel">
-			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
+			<profile value="file:///c:/chronos.profile.uml"/>
 		</metaModel>
 		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfile)" />
 		<outputSlot value="uml2model" />
 		<globalVarDef name="basePath" value="'${basePath}'" />
 	</component>
+-->
 
-<!--
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="example-data/uml-generated.uml"/>
 		<outputSlot value="uml2model"/>
 	</component>
--->
 
 	<component class="oaw.xpand2.Generator" skipOnErrors="true">
 		<fileEncoding value="utf-8"/>
 		
-<!--
 		<metaModel id="uml"
 			class="oaw.uml2.UML2MetaModel" />
 		<metaModel id="Chronos" class="oaw.uml2.profile.ProfileMetaModel">
 			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
 		</metaModel>
--->
 
+<!--
 		<metaModel idRef="uml" />
 		<metaModel idRef="Chronos" />
+-->
 		
 		<expand value="cartridge::BrowserStatistics::json::file FOR uml2model"/>
 		
