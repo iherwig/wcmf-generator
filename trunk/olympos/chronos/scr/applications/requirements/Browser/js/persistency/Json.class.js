@@ -34,6 +34,7 @@ uwm.persistency.Json.prototype.jsonRequest = function(params, successHandler, er
 		url: this.jsonUrl,
 		method: "post",
 		params: params,
+		timeout: 180000,
 		callback: function(options, success, response) {
 			if (success) {
 				var data = Ext.util.JSON.decode(response.responseText);
@@ -358,4 +359,18 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	}, function(request, data, errorMessage) {
 		request.params.actionSet.errorHandler(request, data, errorMessage);
 	});
+}
+
+uwm.persistency.Json.prototype.loadStatisticsOverview = function(modelOid, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "loadStatisticsOverview",
+		modelOid: modelOid
+	}, successHandler, errorHandler);
+}
+
+uwm.persistency.Persistency.prototype.displayByAlias = function(aliasList, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "displayByAlias",
+		aliasList: this.array2CommaList(aliasList),
+	}, successHandler, errorHandler);
 }

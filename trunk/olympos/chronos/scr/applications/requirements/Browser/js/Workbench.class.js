@@ -125,10 +125,10 @@ Workbench = function(){
     });
     
     this.structureTabPanel.on("tabchange", function(tabPanel, tab){
-        self.handleTabChange(tabPanel, tab)
+        self.handleTabChange(tabPanel, tab);
     });
     
-    this.objectDataTable = new ObjectDataTable(this)
+    this.objectDataTable = new cwb.StatisticsOverview(this);
     
     Workbench.superclass.constructor.call(this, Ext.apply(this, {
         layout: "border",
