@@ -1,14 +1,16 @@
 /**
  * Hand tool for scrolling
- * @param {Event} e
+ * 
+ * @param {Event}
+ *            e
  */
-startDragScroll=function(e){
-	this.scrolling=true;
-	this.oldPosition=e.screenY;
-	document.body.style.cursor="pointer";
+startDragScroll = function(e) {
+	this.scrolling = true;
+	this.oldPosition = e.screenY;
+	document.body.style.cursor = "pointer";
 }
 
-dragScroll=function(e){
+dragScroll = function(e) {
 	if (this.scrolling) {
 		if (this.oldPosition) {
 			window.scrollBy(0, this.oldPosition - e.screenY);
@@ -17,104 +19,155 @@ dragScroll=function(e){
 	}
 }
 
-stopDragScroll=function(e){
-	this.scrolling=false;
-	this.oldPosition=null;
-	document.body.style.cursor="default";
+stopDragScroll = function(e) {
+	this.scrolling = false;
+	this.oldPosition = null;
+	document.body.style.cursor = "default";
 }
 
-init= function(){
-	if (parent.ObjectContainer.getInstance().modelLoaded) {	
-	start();
-	
-
-	}else{
-		document.write(parent.uwm.Dict.translate('Please select a model.'))
+init = function() {
+	if (ObjectContainer.getInstance().modelLoaded) {
+		start();
+	} else {
+		Ext.get("infovis").innerHTML = uwm.Dict.translate('Please select a model.');
 	}
 }
 
-function start() {
-	var json = parent.ObjectContainer.getInstance().objectsForSpacetree;
-	//var json = ObjectContainer.getInstance().objectsForSpacetree;
-	
-	
-    //Containers for fillStyle, strokeStyle and lineWith canvas properties.
-    var fStyle, sStyle, lineWidth;
-     //Create a new canvas instance.
-      var canvas = new Canvas('mycanvas', {
-         //Where to inject canvas. Any HTML container will do.
-         'injectInto':'infovis',
-         //Set width and height, default's to 200.
-         'width': 700,
-         'height': 2000,
-		 
-         //Set a background color in case the browser
-         //does not support clearing a specific area.
-        'backgroundColor': '#fff',
-        //Set canvas styles.
-        'styles': {
-            'fillStyle': '#eee',
-            'strokeStyle': '#111'
-        },
-		setColor: function(color){
-			this.styles.fillStyle=color;
-		}
-      });
-    //Create a new ST instance
-    var st= new ST(canvas, {
-    //Add an event handler to the node when creating it.
-        onCreateLabel: function(label, node) {
-            var d = $(label);
-            label.id = node.id;
-            d.setStyle('cursor', 'pointer')
-              .set('html', node.name)
-			  //if (node.data[2]){
-			  //canvas.setColor(node.data[2].value);
-			  //}
-                d.addEvent('click', function() {
-                st.onClick(d.id);
-            });
-        },
-        //Set color as selected if the node is selected.
-        onBeforePlotNode: function(node) {
-            var ctx = canvas.getCtx();
-            fStyle = ctx.fillStyle;
-            sStyle = ctx.strokeStyle;
-            if(node.selected) {
-                ctx.fillStyle = "#eee";
-                ctx.strokeStyle = "#000";
-            }
-        },
-        //Restore color.
-        onAfterPlotNode: function(node) {
-            var ctx = canvas.getCtx();
-            ctx.fillStyle = fStyle;
-            ctx.stroleStyle = sStyle;
-        },
-        //Set color as selected if the edge belongs to the path.
-        onBeforePlotLine: function(adj) {
-            var ctx = canvas.getCtx();
-            lineWidth = ctx.lineWidth;
-            sStyle = ctx.strokeStyle;
-            if(adj.nodeFrom.selected && adj.nodeTo.selected) {
-                ctx.strokeStyle = "#000";
-                ctx.lineWidth = 3;
-            }
-        },
-        //Restore color and line width
-        onAfterPlotLine: function(adj) {
-            var ctx = canvas.getCtx();
-            ctx.lineWidth = lineWidth;
-            ctx.stroleStyle = sStyle;
-        }
+var spacetreeCounter = 0;
 
-    });
-    //load json data
-    st.loadFromJSON(json);
-    //compute node positions and layout
-    st.compute();
-    //optional: make a translation of the tree
-    Tree.Geometry.translate(st.tree, new Complex(-200, 0), "startPos");
-    //Emulate a click on the root node.
-    st.onClick(st.tree.id);
+function start() {
+	var json = ObjectContainer.getInstance().objectsForSpacetree;
+	// var json = ObjectContainer.getInstance().objectsForSpacetree;
+	
+	// Containers for fillStyle, strokeStyle and lineWith canvas properties.
+	var fStyle, sStyle, lineWidth;
+	// Create a new canvas instance.
+	var canvas = new Canvas('mycanvas', {
+	    //Where to inject canvas. Any HTML container will do.
+	    'injectInto' : 'infovis',
+	    //Set width and height, default's to 200.
+	    'width' : 700,
+	    'height' : 2000,
+	    
+	    //Set a background color in case the browser
+	    // does not support clearing a specific area.
+	    'backgroundColor' : '#fff',
+	    //Set canvas styles.
+	    'styles' : {
+	        'fillStyle' : '#eee',
+	        'strokeStyle' : '#111'
+	    },
+	    setColor : function(color) {
+		    this.styles.fillStyle = color;
+	    }
+	});
+	// Create a new ST instance
+	var st = new ST(canvas, {
+	    //Add an event handler to the node when creating it.
+	    onCreateLabel : function(label, node) {
+		    label.id = node.id;
+		    label.innerHTML = "<div class='spacetreeNode' style='background-image: url(\"img/icons/" + node.uwmClassName + ".png\");'>" + node.name + "</div>";
+		    // if (node.data[2]){
+		    // canvas.setColor(node.data[2].value);
+		    // }
+		    label.onclick = function() {
+			    st.onClick(label.id);
+		    };
+	    },
+	    //Set color as selected if the node is selected.
+	    onBeforePlotNode : function(node) {
+		    var ctx = canvas.getCtx();
+		    fStyle = ctx.fillStyle;
+		    sStyle = ctx.strokeStyle;
+		    if (node.selected) {
+			    ctx.fillStyle = "#eee";
+			    ctx.strokeStyle = "#000";
+		    }
+	    },
+	    //Restore color.
+	    onAfterPlotNode : function(node) {
+		    var ctx = canvas.getCtx();
+		    ctx.fillStyle = fStyle;
+		    ctx.stroleStyle = sStyle;
+	    },
+	    //Set color as selected if the edge belongs to the path.
+	    onBeforePlotLine : function(adj) {
+		    var ctx = canvas.getCtx();
+		    lineWidth = ctx.lineWidth;
+		    sStyle = ctx.strokeStyle;
+		    if (adj.nodeFrom.selected && adj.nodeTo.selected) {
+			    ctx.strokeStyle = "#000";
+			    ctx.lineWidth = 3;
+		    }
+	    },
+	    //Restore color and line width
+	    onAfterPlotLine : function(adj) {
+		    var ctx = canvas.getCtx();
+		    ctx.lineWidth = lineWidth;
+		    ctx.stroleStyle = sStyle;
+	    },
+	    request : function(nodeId, level, onComplete) {
+		    var self = this;
+		    
+		    uwm.persistency.Persistency.getInstance().display(nodeId.indexOf("_") > 0 ? nodeId.substring(0, nodeId.indexOf("_")) : nodeId, 2, function(options, data) {
+			    var result = self.loadFromDisplay(data.node);
+			    
+			    onComplete.onComplete(nodeId, result);
+		    });
+	    },
+	    
+	    loadFromDisplay : function(currNode) {
+		    var result = {
+		        id : currNode.oid + "_" + spacetreeCounter,
+		        name : currNode.values[1].Name,
+		        data : [ {
+		            key : 'content',
+		            value : 0
+		        }, {
+		            key : 'color',
+		            value : 1
+		        } ],
+		        children : [],
+		        uwmClassName : currNode.type
+		    };
+		    
+		    spacetreeCounter++;
+		    
+		    for ( var currType in currNode) {
+			    var currTypeData = currNode[currType];
+			    
+			    if (!(currTypeData instanceof Function)) {
+				    switch (currType) {
+					    case "values":
+					    case "oid":
+					    case "type":
+					    case "properties":
+						    //do nothing
+							break;
+						
+						default:
+							for ( var currNodeKey in currTypeData) {
+								var currChild = currTypeData[currNodeKey];
+								
+								if (!(currChild instanceof Function)) {
+									if (currChild.values && currChild.values[1] && currChild.values[1].Name) {
+										result.children.push(this.loadFromDisplay(currChild));
+									}
+								}
+							}
+				    }
+			    }
+		    }
+
+		    return result;
+	    }
+	});
+	// load json data
+	st.loadFromJSON(json);
+	// compute node positions and layout
+	st.compute();
+	// optional: make a translation of the tree
+	Tree.Geometry.translate(st.tree, new Complex(-200, 0), "startPos");
+	// Emulate a click on the root node.
+	st.onClick(st.tree.id);
 }
