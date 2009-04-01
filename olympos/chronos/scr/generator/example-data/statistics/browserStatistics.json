@@ -1,0 +1,8 @@
+
+{
+	allGoals: 15,
+	achievedGoals: 1
+	nonAchievedGoals: 14
+	nonAchievedGoalsWithoutRequirement: 7
+	nonAchievedGoalsWithoutValidPriority: 14
+}

@@ -1,0 +1,59 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+cached E():
+	1.11111 - 1.1111
+;
+
+cached List[Chronos::ChiGoal] getAllGoals(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiGoal)
+;
+
+cached List[Chronos::ChiGoal] getAchievedGoals(uml::Model this):
+	this.getAllGoals().select(e|e.getRequirements().getFeatures().getBusinessUseCases().size > 0)
+;
+
+cached List[Chronos::ChiGoal] getNonAchievedGoals(uml::Model this):
+	this.getAllGoals().select(e|e.getRequirements().getFeatures().getBusinessUseCases().size == 0)
+;
+
+cached List[Chronos::ChiGoal] getNonAchievedGoalsWithoutRequirement(uml::Model this):
+	this.getNonAchievedGoals().select(e|e.getRequirements().size == 0)
+;
+
+cached List[Chronos::ChiGoal] getNonAchievedGoalsWithoutValidPriority(uml::Model this):
+	this.getNonAchievedGoals().select(e|e.Priority <= 0)
+;
+
+int calculateTrafficLight(Real this):
+	(this < 0.2) ?
+		1
+	: (
+		(this < 0.4) ?
+			2
+		: (
+			(this < 0.6) ?
+				3
+			: (
+				(this < 0.8) ?
+					4
+				:
+					5
+			)
+		)
+	)
+;
+
+List[Chronos::ChiRequirement] getRequirements(Chronos::ChiGoal this):
+	this.getAssociations().memberEnd.select(e|e.type != this).type.typeSelect(Chronos::ChiRequirement)
+;
+
+List[Chronos::ChiFeature] getFeatures(Chronos::ChiRequirement this):
+	this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiFeature)
+;
+
+List[Chronos::ChiBusinessUseCase] getBusinessUseCases(Chronos::ChiFeature this):
+	this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiBusinessUseCase)
+;

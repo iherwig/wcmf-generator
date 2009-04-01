@@ -66,9 +66,9 @@ ObjectContainer.prototype.handleLoadedModelList = function(options, data){
 
 ObjectContainer.prototype.loadModel=function(oid){
 	this.modelLoaded=true;
-	this.loadStructurePanel(oid);
-	this.loadReport();
 	this.loadDiagram();
+	this.loadStructurePanel(oid, oid);
+//	this.loadReport(oid);
 }
 
 ObjectContainer.prototype.loadDiagram=function(){
@@ -87,7 +87,7 @@ ObjectContainer.prototype.loadDiagram=function(){
  *
  * @param {String} oid The oid of the model which is to be loaded.
  */
-ObjectContainer.prototype.loadStructurePanel = function(oid){
+ObjectContainer.prototype.loadStructurePanel = function(oid, modelOid){
     var uwmClass = 'Model';
     this.objectsForTreemap = null;
     this.objectsForTreemap = [];
@@ -119,7 +119,7 @@ ObjectContainer.prototype.loadStructurePanel = function(oid){
         'key': 'color',
         'value': 1
     }];
-    this.loadObject(oid);
+    this.loadObject(oid, modelOid);
 }
 
 /**
@@ -130,14 +130,13 @@ ObjectContainer.prototype.loadStructurePanel = function(oid){
  *
  * @param {String} oid The oid of the object which is to be loaded.
  */
-ObjectContainer.prototype.loadObject = function(oid){
+ObjectContainer.prototype.loadObject = function(oid, modelOid){
     var self = this;
     
     this.objectsToLoad++;
     
-    var oid = oid;
     uwm.persistency.Persistency.getInstance().loadChildren(oid, function(options, data){
-        self.handleLoadedObject(options, data, oid)
+        self.handleLoadedObject(options, data, oid, modelOid)
     });
 }
 
@@ -156,8 +155,7 @@ ObjectContainer.prototype.loadOBJECT=function(oid){
     });
 }
 
-ObjectContainer.prototype.handleLoadedObject = function(options, data, oid){
-    var oid = oid;
+ObjectContainer.prototype.handleLoadedObject = function(options, data, oid, modelOid){
     for (var i = 0; i < data.objects.length; i++) {
         if (!(data.objects[i] instanceof Function)) {
             var childOid = data.objects[i].oid;
@@ -191,7 +189,7 @@ ObjectContainer.prototype.handleLoadedObject = function(options, data, oid){
                 'value': 1
             }];
             if (uwmClass == "Package") {
-                this.loadObject(childOid);
+                this.loadObject(childOid, modelOid);
             }
         }
     }
@@ -219,6 +217,8 @@ ObjectContainer.prototype.handleLoadedObject = function(options, data, oid){
         }
         
 		Ext.Msg.hide();
+
+		this.loadReport(modelOid);
     }
 }
 
@@ -424,8 +424,8 @@ ObjectContainer.prototype.setModelOid = function(){
  * Should load the ObjectDataTable when backend generator for that is finished. 
  * Currently only shows dummy data.
  */
-ObjectContainer.prototype.loadReport = function(){
-	Workbench.getInstance().objectDataTable.reload();
+ObjectContainer.prototype.loadReport = function(modelOid){
+	Workbench.getInstance().objectDataTable.reload(modelOid);
 	Workbench.getInstance().objectDataTable.getEl().unmask();
 	Workbench.getInstance().diagramPanel.getEl().unmask();
 }

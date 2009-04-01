@@ -1,38 +1,40 @@
 /*
  * Copyright (c) 2008 The Olympos Development Team.
- *
+ * 
  * http://sourceforge.net/projects/olympos/
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
- * this entire header must remain intact.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
+
+Ext.namespace("cwb");
 
 /**
  * @class Displays the model information which is generated in backend.
- * @param {Object} workbench The workbench this zable belongs to.
+ * @param {Object}
+ *            workbench The workbench this table belongs to.
  * @extends Ext.grid.GridPanel
  */
-ObjectDataTable = function(workbench){
+cwb.StatisticsOverview = function(workbench){
 	var self = this;
 	var workbench=workbench;
 	    
     this.fields = ['id','objectList','object', 'quantity', 'status'];
     
-    this.store = new Ext.data.SimpleStore({
-        fields: this.fields
+    this.store = new Ext.data.Store({
+    	autoLoad: false,
+    	proxy: new cwb.StatisticsOverviewProxy({})
     });
-	
-	
 	
 	this.selectionModel=new Ext.grid.RowSelectionModel({
             singleSelect: true
         });
 	
-    this.store.loadData(ObjectContainer.getInstance().getTableData());
-    ObjectDataTable.superclass.constructor.call(this, Ext.apply(this, {
+
+	cwb.StatisticsOverview.superclass.constructor.call(this, Ext.apply(this, {
         store: this.store,
         columns: [{
             id: 'object',
@@ -49,7 +51,8 @@ ObjectDataTable = function(workbench){
             header: "",
             width: 21,
             sortable: false,
-            dataIndex: 'status'
+            dataIndex: 'status',
+            renderer: self.statusRenderer
         }],
         viewConfig: {
             forceFit: true,
@@ -65,9 +68,13 @@ ObjectDataTable = function(workbench){
 		}
 	});
 }
-Ext.extend(ObjectDataTable, Ext.grid.GridPanel);
 
-ObjectDataTable.prototype.reload=function(){
-	this.store.reloaded=true;
-	this.store.loadData(ObjectContainer.getInstance().getTableData());
+Ext.extend(cwb.StatisticsOverview, Ext.grid.GridPanel);
+
+cwb.StatisticsOverview.prototype.statusRenderer = function(value) {
+	return "<img src='img/signal" + value + ".png' />";
+}
+
+cwb.StatisticsOverview.prototype.reload=function(modelOid){
+	this.store.load({modelOid: modelOid});
 }

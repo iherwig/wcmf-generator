@@ -1,0 +1,32 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION org::openarchitectureware::uml2::profile::profiling»
+
+«EXTENSION cartridge::BrowserStatistics::statistics»
+
+«DEFINE file FOR uml::Model»
+«FILE "browserStatistics.json"»
+[
+	«EXPAND rowTemplate("allGoals", "Goals", 5) FOR this.getAllGoals()», 
+	«EXPAND rowTemplate("achievedGoals", "&nbsp;&nbsp;Achieved Goals", (E() + this.getAchievedGoals().size) / this.getAllGoals().size) FOR this.getAchievedGoals()»,
+	«EXPAND rowTemplate("nonAchievedGoals", "&nbsp;&nbsp;Non Achieved Goals", (E() + this.getAchievedGoals().size) / this.getAllGoals().size) FOR this.getNonAchievedGoals()»,
+	«EXPAND rowTemplate("nonAchievedGoalsWithoutRequirement", "&nbsp;&nbsp;&nbsp;&nbsp;Without Requirement", 1 - ((E() + this.getNonAchievedGoalsWithoutRequirement().size) / this.getNonAchievedGoals().size)) FOR this.getNonAchievedGoalsWithoutRequirement()»,
+	«EXPAND rowTemplate("nonAchievedGoalsWithoutValidPriority", "&nbsp;&nbsp;&nbsp;&nbsp;Without valid Priority", 1 - ((E() + this.getNonAchievedGoalsWithoutValidPriority().size) / this.getNonAchievedGoals().size)) FOR this.getNonAchievedGoalsWithoutValidPriority()»
+]
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE rowTemplate(String id, String text, Real status) FOR List[Chronos::ChiBase]»
+	{
+		"id": "«id»",
+		"objectList": [
+			«FOREACH this AS currElem SEPARATOR ","»
+				"«currElem.getAppliedStereotypes().first().name»::«currElem.Alias»"
+			«ENDFOREACH»
+		],
+		"object": "«text»",
+		"quantity": «this.size»,
+		"status": «calculateTrafficLight(status)»
+	}
+«ENDDEFINE»
