@@ -224,7 +224,7 @@ class UWMImporterController extends Controller
 			$attrName = $this->dom->name;
 		
 			if ($attrName != 'id' && in_array($attrName, $displayValues)) {
-				$value = trim($this->dom->value);
+				$value = utf8_decode(trim($this->dom->value));
 			
 				if ($value != '') {
 					$newObj->setValue($attrName, $value);
@@ -327,7 +327,7 @@ class UWMImporterController extends Controller
 			$attrName = $this->dom->name;
 		
 			if ($attrName != 'id' && !in_array($attrName, $newObjDisplayValues)) {
-				$value = trim($this->dom->value);
+				$value = utf8_decode(trim($this->dom->value));
 			
 				if ($value != '') {
 					$value = $this->resolveValue($newObj, $attrName, $value);
