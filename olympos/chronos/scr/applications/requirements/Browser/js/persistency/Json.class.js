@@ -372,5 +372,6 @@ uwm.persistency.Persistency.prototype.displayByAlias = function(aliasList, succe
 	this.jsonRequest({
 		usr_action: "displayByAlias",
 		aliasList: this.array2CommaList(aliasList),
+		translateValues: true
 	}, successHandler, errorHandler);
 }

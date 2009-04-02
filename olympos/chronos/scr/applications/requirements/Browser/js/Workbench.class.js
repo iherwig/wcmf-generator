@@ -71,7 +71,7 @@ Workbench = function() {
 	 * Panel containing either the pie chart or an empty panel.
 	 */
 	this.piechartContainer = new Ext.Panel( {
-		columnWidth: 0.5,
+	    columnWidth : 0.5,
 	    layout : 'fit',
 	    items : this.piechartPanelEmpty
 	});
@@ -80,7 +80,7 @@ Workbench = function() {
 	 * Panel containing either the bar chart or an empty panel.
 	 */
 	this.barchartContainer = new Ext.Panel( {
-		columnWidth: 0.5,
+	    columnWidth : 0.5,
 	    layout : 'fit',
 	    items : this.barchartPanelEmpty
 	});
@@ -161,7 +161,7 @@ Workbench = function() {
 	        items : [ this.diagramPanel, this.structureTabPanel ]
 	    } ]
 	}));
-		
+	
 	this.on("render", this.adjustPanelSize());
 	this.on("resize", this.adjustPanelSize());
 	
@@ -203,9 +203,10 @@ Workbench.prototype.createInformationTab = function(id, objectList) {
  * @param {Array} columnList Array containing all columns which are shown in the grid.
  */
 Workbench.prototype.addInformationTab = function(id, store, columnList) {
-	var newTab = new Ext.Panel( {
+	var newTab = new InfoGrid( {
 	    title : id,
-	    items : [ new InfoGrid(store, columnList) ],
+	    store : store,
+	    columns : columnList,
 	    closable : true
 	});
 	this.structureTabPanel.add(newTab);
