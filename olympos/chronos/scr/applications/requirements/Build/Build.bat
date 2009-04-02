@@ -15,7 +15,7 @@ echo Folder wcmf does not exist.
 exit
 )
 
-del cwm.zip
+if exist cwm.zip del cwm.zip
 call folders.bat
 
 REM Generate Batch for merging uwm and cwm files
@@ -25,13 +25,18 @@ REM Update Revision number
 %TORTOISE%\bin\subWCRev ..\gui\ ..\gui\js\uwm\Constants.tpl ..\gui\js\uwm\Constants.js
 
 REM Create directory if neccessary
-if not exist c:\temp\cwm md c:\temp\cwm
+if exist c:\temp\cwm rd /s /q c:\temp\cwm
+md c:\temp\cwm
 
 REM Export Workspace files
 %SUBVERSION%\svn.exe export ..\gui c:\temp\cwm\gui
 %SUBVERSION%\svn.exe export ..\application c:\temp\cwm\application
 %SUBVERSION%\svn.exe export ..\wcmf c:\temp\cwm\wcmf
-%SUBVERSION%\svn.exe export ..\generator c:\temp\cwm\generator
+
+REM Build Generator
+call "%ANT_HOME%\bin\ant" -f ..\generator\build.xml
+md c:\temp\cwm\generator
+xcopy /e ..\dist\*.* c:\temp\cwm\generator
 
 REM delete listed files
 call delete.jar
@@ -44,8 +49,8 @@ ren c:\temp\cwm\gui\js\uwm\ConfigNew.js Config.js
 )
 
 REM server.ini must be stored separately
-copy c:\temp\cwm\application\include\server.ini c:\temp\cwm\server.ini
 del c:\temp\cwm\application\include\server.ini
+copy server.ini c:\temp\cwm\application\include\server.ini
 
 REM Merge uwm and cwm files
 copy cwm.js c:\temp\cwm\gui\js\cwm.js
