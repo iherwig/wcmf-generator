@@ -72,7 +72,12 @@ cwb.StatisticsOverview = function(workbench){
 Ext.extend(cwb.StatisticsOverview, Ext.grid.GridPanel);
 
 cwb.StatisticsOverview.prototype.statusRenderer = function(value) {
-	return "<img src='img/signal" + value + ".png' />";
+	var result = "";
+	if (value !== null) {
+		result = "<img src='img/signal" + value + ".png' />";
+	}
+	
+	return result;
 }
 
 cwb.StatisticsOverview.prototype.reload=function(modelOid){
