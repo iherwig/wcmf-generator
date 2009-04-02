@@ -22,7 +22,10 @@ class PackageDiagramController extends Controller
 		if ($this->_request->getAction() == 'packdiagr') {
 		
 			//init values
-			$packageid = $this->_request->getValue('pid');
+			$packageoid = $this->_request->getValue('oid');
+			$packagetype = substr($packageoid,0,strpos($packageoid,':'));
+			$packageid = substr($packageoid,strpos($packageoid,':')+1);
+			
 			//echo '<br/> packageid: '; print_r($packageid);
 			$this->currentUser = self::getCurrentUser();
 			$this->currentTimestamp = self::getTimeStamp();
@@ -30,7 +33,7 @@ class PackageDiagramController extends Controller
 			$persistenceFacade = & PersistenceFacade::getInstance(); // get the persistence information (database)
 		
 			// search all elems with fk_package_id = $packageid
-			$ObjPackage = $persistenceFacade->load('Package:'.$packageid);
+			$ObjPackage = $persistenceFacade->load($packageoid);
 			//echo '<br/>ObjPackage: '; print_r($ObjPackage);
 			foreach($ObjPackage as $k=>$v){
 				if($k == '_properties'){
@@ -58,6 +61,7 @@ class PackageDiagramController extends Controller
 			$posx = 5050;
 			$posy = 5050;
 			$posct = 0;
+			
 			foreach($packagechildoids as $k=>$v){
 				
 				$oid = strval($v);
@@ -93,7 +97,7 @@ class PackageDiagramController extends Controller
 			//	Set the next action
 			$this->_response->setAction('ok');
 			//	Response
-			$this->_response->setValue('ok', 'ok');
+			$this->_response->setValue('oid', 'Diagram:'.$diagramid );
 		
 		};
 	
