@@ -215,6 +215,13 @@ uwm.persistency.Json.prototype.unlock = function(oid, successHandler, errorHandl
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.createDiagramFromPackage = function(oid, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "packdiagr",
+		oid: oid
+	}, successHandler, errorHandler);
+}	
+
 uwm.persistency.Json.prototype.log = function(logtype, msg, successHandler, errorHandler) {
 	var self = this;
 	
@@ -338,6 +345,11 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 			case "log":
 				jsonRequest.logtype = currRequest.logtype;
 				jsonRequest.msg = currRequest.msg;
+				break;
+				
+			case "packdiagr":
+				jsonRequest.controller = "PackageDiagramController";
+				jsonRequest.oid = currRequest.oid;
 				break;
 				
 			default:

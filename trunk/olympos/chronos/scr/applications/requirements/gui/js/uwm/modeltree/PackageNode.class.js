@@ -48,6 +48,11 @@ uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
 				self.addDiagram(item, e);
 			}
 		}, {
+			text: uwm.Dict.translate('New diagram from package'),
+			handler: function(item, e) {
+				self.addDiagramFromPackage(item, e);
+			}
+		}, {
 			text: uwm.Dict.translate('Delete from model'),
 			handler: function(item, e) {
 				self.deleteFromModel(item, e);
@@ -71,27 +76,27 @@ uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
 				}).show();
 			}
 		}, {
-		    text :uwm.Dict.translate('Export as Word Document'),
-		    menu : {
-			    items : [ {
-			        text :'Standard',
-			        handler : function(item, e) {
-				        new uwm.ui.Download( {
-				            title :uwm.Dict.translate('Exporting Word Document ...'),
-				            downloadURL :"../application/main.php?response_format=JSON&usr_action=exportDoc&templateName=standard&startPackage=" + self.getModelNode().getOid()
-				        }).show();
-			        }
-			    }, {
-			        text :'Steckbriefe Funktionen',
-					disabled : true , 
-			        handler : function(item, e) {
-				        new uwm.ui.Download( {
-				            title :uwm.Dict.translate('Exporting Word Document ...'),
-				            downloadURL :"../application/main.php?response_format=JSON&usr_action=exportDoc&templateName=SteckbriefeFunktionenMoma&startPackage=" + self.getModelNode().getOid()
-				        }).show();
-			        }
-			    } ]
-		    }
+			text: uwm.Dict.translate('Export as Word Document'),
+			menu: {
+				items: [{
+					text: 'Standard',
+					handler: function(item, e) {
+						new uwm.ui.Download({
+							title: uwm.Dict.translate('Exporting Word Document ...'),
+							downloadURL: "../application/main.php?response_format=JSON&usr_action=exportDoc&templateName=standard&startPackage=" + self.getModelNode().getOid()
+						}).show();
+					}
+				}, {
+					text: 'Steckbriefe Funktionen',
+					disabled: true,
+					handler: function(item, e) {
+						new uwm.ui.Download({
+							title: uwm.Dict.translate('Exporting Word Document ...'),
+							downloadURL: "../application/main.php?response_format=JSON&usr_action=exportDoc&templateName=SteckbriefeFunktionenMoma&startPackage=" + self.getModelNode().getOid()
+						}).show();
+					}
+				}]
+			}
 		}]
 	});
 	
@@ -104,6 +109,18 @@ uwm.modeltree.PackageNode.prototype.addPackage = function(self, e) {
 
 uwm.modeltree.PackageNode.prototype.addDiagram = function(self, e) {
 	uwm.model.ModelContainer.getInstance().createDiagram(this.getModelNode());
-}, uwm.modeltree.PackageNode.prototype.selectAsScope = function(self, e) {
+}
+
+uwm.modeltree.PackageNode.prototype.selectAsScope = function(self, e) {
 	uwm.objectgrid.ObjectGridContainer.getInstance().loadScope(this.modelNode);
+}
+
+uwm.modeltree.PackageNode.prototype.addDiagramFromPackage = function(self, e) {
+	//start controller packdiagr and get back diagram oid
+	uwm.persistency.Persistency.getInstance().createDiagramFromPackage(this.oid, function(options, data) {
+		uwm.model.ModelContainer.getInstance().loadByOid(data['oid'], function(modelNodeDiagr) {
+			//open diagram from diagram id
+			uwm.diagram.DiagramContainer.getInstance().loadDiagram(modelNodeDiagr);
+		});
+	});
 }
