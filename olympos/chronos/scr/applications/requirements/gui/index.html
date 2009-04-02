@@ -1,3940 +1,719 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML>
-<HEAD>
-	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
-	<TITLE></TITLE>
-	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Win32)">
-	<META NAME="AUTHOR" CONTENT="giuseppe platania">
-	<META NAME="CREATED" CONTENT="20090302;19131300">
-	<META NAME="CHANGEDBY" CONTENT="giuseppe platania">
-	<META NAME="CHANGED" CONTENT="20090402;11424000">
-	<META NAME="Info 1" CONTENT="">
-	<META NAME="Info 2" CONTENT="">
-	<META NAME="Info 3" CONTENT="">
-	<META NAME="Info 4" CONTENT="">
-	<STYLE TYPE="text/css">
-	<!--
-		@page { margin: 2cm }
-		P { margin-bottom: 0.21cm; direction: ltr; color: #000000; widows: 0; orphans: 0 }
-		P.western { font-family: "Times New Roman", serif; font-size: 12pt; so-language: en-US }
-		P.cjk { font-family: "Arial Unicode MS", sans-serif; font-size: 12pt; so-language: zxx }
-		P.ctl { font-family: "Tahoma"; font-size: 12pt; so-language: zxx }
-		H1 { margin-bottom: 0.21cm; background: transparent; direction: ltr; color: #000000; widows: 0; orphans: 0 }
-		H1.western { font-family: "Arial", sans-serif; font-size: 16pt; so-language: en-US }
-		H1.cjk { font-family: "MS Mincho"; font-size: 16pt; so-language: zxx }
-		H1.ctl { font-family: "Tahoma"; font-size: 16pt; so-language: zxx }
-		H2 { margin-bottom: 0.21cm; background: transparent; direction: ltr; color: #000000; widows: 0; orphans: 0 }
-		H2.western { font-family: "Arial", sans-serif; font-size: 14pt; so-language: en-US; font-style: italic }
-		H2.cjk { font-family: "MS Mincho"; font-size: 14pt; so-language: zxx; font-style: italic }
-		H2.ctl { font-family: "Tahoma"; font-size: 14pt; so-language: zxx; font-style: italic }
-		H3 { margin-bottom: 0.21cm; background: transparent; direction: ltr; color: #000000; widows: 0; orphans: 0 }
-		H3.western { font-family: "Arial", sans-serif; so-language: en-US }
-		H3.cjk { font-family: "MS Mincho"; so-language: zxx }
-		H3.ctl { font-family: "Tahoma"; so-language: zxx }
-		H4 { margin-bottom: 0.21cm; background: transparent; direction: ltr; color: #000000; widows: 0; orphans: 0 }
-		H4.western { font-family: "Arial", sans-serif; so-language: en-US; font-style: italic }
-		H4.cjk { font-family: "MS Mincho"; so-language: zxx; font-style: italic }
-		H4.ctl { font-family: "Tahoma"; so-language: zxx; font-style: italic }
-		TD P { margin-bottom: 0cm; direction: ltr; color: #000000; widows: 0; orphans: 0 }
-		TD P.western { font-family: "Times New Roman", serif; font-size: 12pt; so-language: en-US }
-		TD P.cjk { font-family: "Arial Unicode MS", sans-serif; font-size: 12pt; so-language: zxx }
-		TD P.ctl { font-family: "Tahoma"; font-size: 12pt; so-language: zxx }
-		TH P { margin-bottom: 0cm; direction: ltr; color: #000000; widows: 0; orphans: 0 }
-		TH P.western { font-family: "Times New Roman", serif; font-size: 12pt; so-language: en-US }
-		TH P.cjk { font-family: "Arial Unicode MS", sans-serif; font-size: 12pt; so-language: zxx }
-		TH P.ctl { font-family: "Tahoma"; font-size: 12pt; so-language: zxx }
-		P.sdfootnote-western { margin-left: 0.5cm; text-indent: -0.5cm; margin-bottom: 0cm; font-family: "Times New Roman", serif; font-size: 10pt; so-language: en-US }
-		P.sdfootnote-cjk { margin-left: 0.5cm; text-indent: -0.5cm; margin-bottom: 0cm; font-family: "Arial Unicode MS", sans-serif; font-size: 10pt; so-language: zxx }
-		P.sdfootnote-ctl { margin-left: 0.5cm; text-indent: -0.5cm; margin-bottom: 0cm; font-family: "Tahoma"; font-size: 10pt; so-language: zxx }
-		A:link { so-language: zxx }
-		A.sdfootnoteanc { font-size: 57% }
-	-->
-	</STYLE>
-</HEAD>
-<BODY LANG="de-DE" TEXT="#000000" BGCOLOR="#ffffff" DIR="LTR">
-<DIV ID="divTranscript" DIR="LTR" STYLE="position: absolute; top: 0cm; left: 0cm; width: 22.15cm; height: 3.76cm; border: none; padding: 0cm; background: #ffffff">
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Tahoma"><FONT SIZE=1 STYLE="font-size: 8pt">Each
-	object class contains information defining how many connections may
-	be drawn to other objects of certain class. When a new connection is
-	created, the existing connections the objects have to other objects
-	of the same kind are counted. The connection may only be created if
-	the resulting number is lower than the number of allowed
-	connections.</FONT></FONT></P>
-</DIV>
-<DIV ID="divTranscript1" DIR="LTR" STYLE="position: absolute; top: 0cm; left: 0cm; width: 22.15cm; height: 3.76cm; border: none; padding: 0cm; background: #ffffff">
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-</DIV>
-<P LANG="en-US" ALIGN=CENTER STYLE="margin-top: 0.42cm; background: transparent; page-break-after: avoid">
-<FONT FACE="Arial, sans-serif"><FONT SIZE=6><B>Chronos Web Modeler</B></FONT></FONT></P>
-<P LANG="en-US" CLASS="western"><BR><BR>
-</P>
-<P LANG="en-US" CLASS="western"><IMG SRC="index_html_487efd2e.png" NAME="Grafik1" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=291 HEIGHT=291 BORDER=0><BR CLEAR=LEFT><BR><BR>
-</P>
-<P LANG="en-US" CLASS="western">Welcome to Chronos Web Modeler! This
-document describes the usage of the application.</P>
-<DIV ID="Bereich1" DIR="LTR">
-	<P LANG="en-US" STYLE="margin-top: 0.42cm; background: transparent; page-break-after: avoid">
-	<FONT FACE="Arial, sans-serif"><FONT SIZE=4 STYLE="font-size: 16pt"><B>Table
-	of Contents</B></FONT></FONT></P>
-</DIV>
-<DIV ID="Inhaltsverzeichnis1" DIR="LTR">
-	<P LANG="en-US" STYLE="margin-bottom: 0.1cm"><A HREF="#1.Introduction|outline">1
-	 Introduction</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#1.1.About the Chronos Web Modeler|outline">1.1
-	   About the Chronos Web Modeler</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#1.2.License	|outline">1.2
-	   License </A>
-	</P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#1.3.Compatible Browsers|outline">1.3
-	   Compatible Browsers</A></P>
-	<P LANG="en-US" STYLE="margin-bottom: 0.1cm"><A HREF="#2.Terminology|outline">2
-	 Terminology</A></P>
-	<P LANG="en-US" STYLE="margin-bottom: 0.1cm"><A HREF="#3.User Interface|outline">3
-	 User Interface</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#3.1.About the user interface paradigm|outline">3.1
-	   About the user interface paradigm</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#3.2.Login|outline">3.2
-	   Login</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.Workbench|outline">3.3
-	   Workbench</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.1.New Objects|outline">3.3.1
-	   New Objects</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.2.Model Tree|outline">3.3.2
-	   Model Tree</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.2.1.Models|outline">3.3.2.1
-	  Models</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.2.2.Packages|outline">3.3.2.2
-	  Packages</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.2.3.Diagrams|outline">3.3.2.3
-	  Diagrams</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.2.4.Model Objects|outline">3.3.2.4
-	  Model Objects</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.2.5.Object history|outline">3.3.2.5
-	  Object history</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.3.Hierarchy Tree|outline">3.3.3
-	   Hierarchy Tree</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.4.Object Grids|outline">3.3.4
-	   Object Grids</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.5.Diagram|outline">3.3.5
-	   Diagram</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.Properties|outline">3.3.6
-	   Properties</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.1.Text Input Fields|outline">3.3.6.1
-	  Text Input Fields</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.2.Dropdown Lists|outline">3.3.6.2
-	  Dropdown Lists</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.3.Rich Text Edit Boxes|outline">3.3.6.3
-	  Rich Text Edit Boxes</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.4.Read-Only Fields|outline">3.3.6.4
-	  Read-Only Fields</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#3.4.Administration perspective|outline">3.4
-	   Administration perspective</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#3.5.Model upload|outline">3.5
-	   Model upload</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#3.6.Enumerations tabs|outline">3.6
-	   Enumerations tabs</A></P>
-	<P LANG="en-US" STYLE="margin-bottom: 0.1cm"><A HREF="#4.Model Description|outline">4
-	 Model Description</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.1.ChiGoal|outline">4.1
-	   ChiGoal</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.2.ChiRequirement|outline">4.2
-	   ChiRequirement</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.3.ChiFeature|outline">4.3
-	   ChiFeature</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.4.ChiIssue|outline">4.4
-	   ChiIssue</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.5.ChiBusinessProcess|outline">4.5
-	   ChiBusinessProcess</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.6.ChiBusinessUseCase|outline">4.6
-	   ChiBusinessUseCase</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#4.7.ChiWorkerExternal|outline">4.7
-	   ChiWorkerExternal</A></P>
-	<P LANG="en-US" STYLE="margin-bottom: 0.1cm"><A HREF="#5.Howto|outline">5
-	 Howto</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#5.1.Get started|outline">5.1
-	   Get started</A></P>
-	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#5.2.How to create an activity|outline">5.2
-	   How to create an activity</A></P>
-</DIV>
-<DIV ID="Bereich3" DIR="LTR">
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="1.Introduction|outline"></A>
-	1 Introduction</H1>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="1.1.About the Chronos Web Modeler|outline"></A>
-	1.1 About the Chronos Web Modeler</H2>
-	<P LANG="en-US" CLASS="western">The Chronos Web Modeler (CWM) aims
-	to provide an collaborative environment to create and manage models.
-	The resulting models can be exported to be used in other editors or
-	directly transformed in code and/or a documentation.</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">We are developing the CWM with
-	simplicity in mind.<BR>Especially for the gathering of requirements
-	and use cases a complete modeling tool can be an over kill. A web
-	client, featuring zero installation, allows multiple users to works
-	on the same model contemporaneously. 
-	</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="1.2.License	|outline"></A>
-	1.2 License	</H2>
-	<P LANG="en-US" CLASS="western">The CWM  and the accompanying
-	materials are made available under the terms of the Eclipse Public
-	License v1.0  which accompanies this distribution, and is available
-	at  <FONT COLOR="#000080"><SPAN LANG="zxx"><U><A HREF="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</A></U></SPAN></FONT>.</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">The concept of Chronos is made
-	available under the Creative Common license.</P>
-	<P LANG="en-US" CLASS="western">You are free:</P>
-	<P LANG="en-US" CLASS="western">    * to Share &mdash; to copy,
-	distribute and transmit the work</P>
-	<P LANG="en-US" CLASS="western">    * to Remix &mdash; to adapt the
-	work</P>
-	<P LANG="en-US" CLASS="western">Under the following conditions:</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">    *  Attribution. You must
-	attribute the work in the manner specified by the author or licensor
-	(but not in any way that suggests that they endorse you or your use
-	of the work).</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">    * For any reuse or distribution,
-	you must make clear to others the license terms of this work. The
-	best way to do this is with a link to this web page.</P>
-	<P LANG="en-US" CLASS="western">    * Any of the above conditions
-	can be waived if you get permission from the copyright holder.</P>
-	<P LANG="en-US" CLASS="western">    * Nothing in this license
-	impairs or restricts the author's moral rights.</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">You can download the most recent CWM
-	version from:  <FONT COLOR="#000080"><SPAN LANG="zxx"><U><A HREF="http://sourceforge.net/projects/olympos/">http://sourceforge.net/projects/olympos/</A></U></SPAN></FONT>
-		</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="1.3.Compatible Browsers|outline"></A>
-	1.3 Compatible Browsers</H2>
-	<P LANG="en-US" CLASS="western">At the moment (Beta version), the
-	only browser with extensive test coverage is Firefox 3. Occasional
-	tests with other modern browsers show no principal
-	incompatibilities. If you decide to use others browser you can face
-	errors or erratically behavior.</P>
-	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="2.Terminology|outline"></A>
-	2 Terminology</H1>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=150>
-		<COL WIDTH=475>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=150>
-					<P LANG="en-US" CLASS="western">Term</P>
-				</TH>
-				<TH WIDTH=475>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=150>
-					<P LANG="en-US" CLASS="western">Model</P>
-				</TD>
-				<TD WIDTH=475>
-					<P LANG="en-US" CLASS="western">A model is a an abstraction of a
-					domain of interest.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=150>
-					<P LANG="en-US" CLASS="western">Package</P>
-				</TD>
-				<TD WIDTH=475>
-					<P LANG="en-US" CLASS="western">A package is a container of
-					objects. 
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=150>
-					<P LANG="en-US" CLASS="western">Diagram</P>
-				</TD>
-				<TD WIDTH=475>
-					<P LANG="en-US" CLASS="western">A diagram is a  visual
-					representation of a model part. Object that are in diagrams are
-					also contained in the model. Not all the object in a model are
-					necessarily contained in a diagram.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=150>
-					<P LANG="en-US" CLASS="western">Model Object</P>
-				</TD>
-				<TD WIDTH=475>
-					<P LANG="en-US" CLASS="western">Object which is part of the
-					model. Figurative: Everything you can put on a diagram.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=150>
-					<P LANG="en-US" CLASS="western">Model Object Type</P>
-				</TD>
-				<TD WIDTH=475>
-					<P LANG="en-US" CLASS="western">Each model object has a type,
-					depicted by its icon. Each model object type has a different set
-					of properties, to be reviewed in properties view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=150>
-					<P LANG="en-US" CLASS="western">Metamodel</P>
-				</TD>
-				<TD WIDTH=475>
-					<P LANG="en-US" CLASS="western">A metamodel describes the
-					concepts necessary to describes a model.</P>
-					<P LANG="en-US" CLASS="western">While a  <FONT COLOR="#000080"><SPAN LANG="zxx"><U><A HREF="http://en.wikipedia.org/wiki/Model_(abstract)">model</A></U></SPAN></FONT>
-					is an abstraction of phenomena in the real world; a metamodel is
-					yet another abstraction, highlighting properties of the model
-					itself. 
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="3.User Interface|outline"></A>
-	3 User Interface</H1>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="3.1.About the user interface paradigm|outline"></A>
-	3.1 About the user interface paradigm</H2>
-	<P LANG="en-US" CLASS="western">Although this application runs in a
-	web browser, it behaves much like a desktop application. For
-	example, the paradigms of drag&amp;drop and context menus are used
-	throughout the application.</P>
-	<P LANG="en-US" CLASS="western">A very large monitor is suggested to
-	be able to display the workplace and the diagrams. To maximize the
-	available urface you can switch your browser to &ldquo;full screen&rdquo;
-	(press &ldquo;F11&rdquo;).</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="3.2.Login|outline"></A>
-	3.2 Login</H2>
-	<P LANG="en-US" CLASS="western">A<IMG SRC="index_html_m6a9bbcb2.png" NAME="Grafik2" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=642 HEIGHT=370 BORDER=0><BR CLEAR=LEFT>t
-	the login screen, the login and password credentials are entered.
-	They are checked against the system database. If successful, The
-	user is automatically forwarded to the workbench. Otherwise, an
-	error message is displayed.</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="3.3.Workbench|outline"></A>
-	3.3 Workbench</H2>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m39ff553f.jpg" NAME="Grafik3" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=642 HEIGHT=308 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">The workbench consists of several
-	areas, called views. All views except the main model view can be
-	collapsed by the &raquo; buttons in the title bar.</P>
-	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.1.New Objects|outline"></A>
-	3.3.1 New Objects</H3>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_5f1bba9b.jpg" NAME="Grafik4" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=253 HEIGHT=278 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">The new objects view is located in
-	the upper left part of the workbench. It lists all model objects the
-	user may add to a diagram. For each object, an icon, the title and a
-	description is listed.</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Visualize a toolbox</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Click on the + Button.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">This display a toolbox with the
-					related objects.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add new model object to diagram</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Drag new object from new objects
-					view, drop on diagram view</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Adds a new model object of the
-					selected type to the model at the dropped location. The model
-					object is automatically added to the package containing the
-					model the user dropped the new object on.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Get help</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Move the mouse over the ? Icon</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Return a tooltip with
-					information about the object (if available)</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.2.Model Tree|outline"></A>
-	3.3.2 Model Tree</H3>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_d7922ab.jpg" NAME="Grafik5" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=246 HEIGHT=237 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">The model tree view is the first tab
-	in the lower left part of the workbench. It contains all models of
-	this application. It shows the logical position of each object in
-	the application.</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<TR VALIGN=TOP>
-			<TH WIDTH=205>
-				<P LANG="en-US" CLASS="western">Task</P>
-			</TH>
-			<TH WIDTH=206>
-				<P LANG="en-US" CLASS="western">Action</P>
-			</TH>
-			<TH WIDTH=205>
-				<P LANG="en-US" CLASS="western">Description</P>
-			</TH>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Create new model in application</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Right-click on empty space in
-				model tree, select &ldquo;Create model&rdquo; in context menu 
-				</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Creates a new model in the
-				application. The default name is assigned to the new model.</P>
-			</TD>
-		</TR>
-	</TABLE>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.2.1.Models|outline"></A>
-	3.3.2.1 Models</H4>
-	<P LANG="en-US" CLASS="western">Models are the root elements in the
-	model tree.</P>
-	<P LANG="en-US" CLASS="western"><BR><IMG SRC="index_html_m38b20db9.jpg" NAME="Grafik6" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=238 HEIGHT=168 BORDER=0><BR CLEAR=LEFT><BR>
-	</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">View model properties</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the model</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">All properties of a model can be
-					reviewed in the properties view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Change label of a model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the model,
-					change name in properties view, leave name field</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">If you change the model name in
-					properties view, the model tree is automatically updated.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add package to model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model, select
-					&ldquo;Add package&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Adds a package below the
-					selected model. The default name is assigned to the new package.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Delete model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model, select
-					&ldquo;Delete from application&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Deletes the model and all
-					contained packages, diagrams and model objects from the
-					application.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">List all model objects of
-					specific types contained in this model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model, select
-					&ldquo;Select as grid scope&rdquo; from the context menu 
-					</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">For some model object types,
-					lists of all model objects of this type are available. This
-					action selects a model (and all directly and indirectly
-					contained packages) as scope for the lists.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Download a model.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model, select
-					&ldquo;Download as UML&rdquo; from the context menu 
-					</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Export the model and all the
-					contained objects as a UML file with reference to the Chronos
-					metamodel stereotypes.</P>
-					<P LANG="en-US" CLASS="western">This can be imported in any UML
-					tool (e.g. IBM Rational Software modeler, TopCased, Sparx
-					EnterpriseArchtect, etc.).</P>
-					<P LANG="en-US" CLASS="western">Diagrams are not exported.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Reload the model from the
-					server.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model, select
-					&ldquo;reload&rdquo; from the context menu 
-					</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">If you are collaborating on a
-					model it is useful to reload the contains from the server to
-					have the same view as your co workers.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Export  documentation</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the Model, select
-					&ldquo;Export as Word Document&rdquo; from the context menu 
-					</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Export the complete   and all
-					the contained objects as a Word file using a certain document
-					template.</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.2.2.Packages|outline"></A>
-	3.3.2.2 Packages</H4>
-	<P LANG="en-US" CLASS="western">Packages allow structuring complex
-	models, like folders in the file system.</P>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_7760e492.jpg" NAME="Grafik7" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=272 HEIGHT=191 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">View package properties</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the package</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">All properties of a package can
-					be reviewed in the properties view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Change label of a package</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the package,
-					change name in properties view, leave name field</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">If you change the package name
-					in properties view, the model tree is automatically updated.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add sub-package to package</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the package,
-					select &ldquo;Add package&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Adds a package below the
-					selected package. The default name is assigned to the new
-					package.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Delete package from model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the package,
-					select &ldquo;Delete from model&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Deletes the package and all
-					contained packages, diagrams and model objects from the model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add diagram to package</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the package,
-					select &ldquo;Add diagram&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Adds a new diagram below the
-					selected package. The default name is assigned to the new
-					diagram. The new diagram is automatically opened in diagram
-					view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">List all model objects of
-					specific types contained in this package</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the package,
-					select &ldquo;Select as grid scope&rdquo; from the context menu 
-					</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">For some model object types,
-					lists of all model objects of this type are available. This
-					action selects a package (and all directly and indirectly
-					contained packages) as scope for the lists.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Move package to different parent
-					package or model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Drag the package, drop it on the
-					target package or model</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Moves the package to a different
-					parent package or model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Download a Package.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the Packge,
-					select &ldquo;Download as UML&rdquo; from the context menu 
-					</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Export the Package and all the
-					contained objects as a UML file with reference to the Chronos
-					metamodel stereotypes.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Export  documentation</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the Package,
-					select &ldquo;Export as Word Document&rdquo; from the context
-					menu 
-					</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Export the package  and all the
-					contained objects as a Word file using a document template.</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.2.3.Diagrams|outline"></A>
-	3.3.2.3 Diagrams</H4>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_28473454.jpg" NAME="Grafik8" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=232 HEIGHT=102 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">Diagrams show graphical depictions
-	of a part of a model.</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<TR VALIGN=TOP>
-			<TH WIDTH=205>
-				<P LANG="en-US" CLASS="western">Task</P>
-			</TH>
-			<TH WIDTH=206>
-				<P LANG="en-US" CLASS="western">Action</P>
-			</TH>
-			<TH WIDTH=205>
-				<P LANG="en-US" CLASS="western">Description</P>
-			</TH>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">View diagram properties</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Single-click on the diagram</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">All properties of a diagram can
-				be reviewed in the properties view.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Change label of a diagram</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Single-click on the diagram,
-				change name in properties view, leave name field</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">If you change the diagram name in
-				properties view, the model tree is automatically updated.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Delete diagram from model</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Right-click on the diagram,
-				select &ldquo;Delete from model&rdquo; from context menu</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Deletes the diagram from the
-				model.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Move diagram to different package</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Drag the diagram, drop it on the
-				target package</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Moves the diagram to a different
-				package.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Open diagram</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Double-click the diagram</P>
-				<P LANG="en-US" CLASS="western">OR</P>
-				<P LANG="en-US" CLASS="western">Right-click on the diagram,
-				select &ldquo;Open&rdquo; from context menu</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Opens the diagram in diagram view
-				or selects the diagram's tab in diagram view if already opened.</P>
-			</TD>
-		</TR>
-	</TABLE>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.2.4.Model Objects|outline"></A>
-	3.3.2.4 Model Objects</H4>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m4b5f35f2.jpg" NAME="Grafik9" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=244 HEIGHT=180 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">Model Objects are the building
-	blocks of the modeled system.</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">View model object properties</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the model object</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">All properties of a model object
-					can be reviewed in the properties view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Change label of a model object</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the model
-					object, change name in properties view, leave name field</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">If you change the model object
-					name in properties view, the model tree is automatically
-					updated.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Delete model object from model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Delete from model&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Deletes the model object from
-					the model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Move model object to different
-					package</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Drag the model object, drop it
-					on the target package</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Moves the model object to a
-					different package.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add existing model object to a
-					diagram</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Drag the model object, drop it
-					on the diagram in diagram view</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Adds the dragged model object at
-					the dropped position to the diagram. If the model object is
-					already contained in the diagram, it cannot be added again.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in current
-					diagram</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in diagram&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Scrolls the current diagram to
-					the position of the selected model object. Only available if the
-					model object is contained in the current model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in grid</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in grid&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Shows the appropriate grid and
-					selects the selected model object. Only available if a grid of
-					the selected model object type is available and the model object
-					is within currently selected grid scope.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in hierarchy
-					view</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in hierarchy&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Shows the selected model object
-					as root element of the hierarchy tree view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Get help about this object</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Help&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Shows the Help file.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Get previous Object Properties</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;show object History&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Shows the object history windows
-					(see below).</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H4 LANG="en-US" CLASS="western"><A NAME="3.3.2.5.Object history|outline"></A>
-	3.3.2.5 Object history</H4>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m37d48ada.jpg" NAME="Grafik34" ALIGN=LEFT WIDTH=240 HEIGHT=154 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">The object history offer a complete
-	history of all changes made on an object.</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western"><B>Action</B></P>
-				</TD>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Check the change made in a date</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Click on the button +</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Visualize the property name, the
-					old and the new value.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Select a point on the history to
-					be restored.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Mark all the checkbox you intend
-					to restore. Click on the &ldquo;undo all changes since&rdquo;
-					button.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Restored all the properties
-					values to the previous state.</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.3.Hierarchy Tree|outline"></A>
-	3.3.3 Hierarchy Tree</H3>
-	<P LANG="en-US" CLASS="western">The hierarchy tree view is the
-	second tab in the lower left part of the workbench. It shows all
-	dependencies of a selected model object. In deeper dependency
-	levels, the dependencies directly above are omitted for clarity.</P>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_5f93c270.jpg" NAME="Grafik10" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=251 HEIGHT=162 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in hierarchy
-					tree</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object
-					in model tree, grid, or diagram, select &ldquo;Show in
-					hierarchy&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Shows the selected model object
-					as root element of the hierarchy tree view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">View model object properties</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the model object</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">All properties of a model object
-					can be reviewed in the properties view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Change label of a model object</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the model
-					object, change name in properties view, leave name field</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">If you change the model object
-					name in properties view, the model tree is automatically
-					updated.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Delete model object from model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Delete from model&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Deletes the model object from
-					the model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add existing model object to a
-					diagram</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Drag the model object, drop it
-					on the diagram in diagram view</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Adds the dragged model object at
-					the dropped position to the diagram. If the model object is
-					already contained in the diagram, it cannot be added again.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in current
-					Diagram</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in diagram&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Scrolls the current diagram to
-					the position of the selected model object. Only available if the
-					model object is contained in the current model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in grid</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in grid&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Shows the appropriate grid and
-					selects the selected model object. Only available if a grid of
-					the selected model object type is available and the model object
-					is within currently selected grid scope.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in model tree</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in model tree&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Selects the model object in
-					context menu. If any of the containing packages are currently
-					not opened, they are automatically extended.</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.4.Object Grids|outline"></A>
-	3.3.4 Object Grids</H3>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_10056be2.jpg" NAME="Grafik11" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=250 HEIGHT=112 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">Object grid views are one tab per
-	model object type in the lower left part of the workbench. Not all
-	model object types have an object grid. The object grids list all
-	objects of the appropriate model object type within the selected
-	scope.</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Select object grid scope</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on a model or a 
-					package in model tree, select &ldquo;Select as grid scope&rdquo;
-					from the context menu 
-					</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Selects a model or a package
-					(and all directly and indirectly contained packages) as scope
-					for the grids.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">View model object properties</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the model object</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">All properties of a model object
-					can be reviewed in the properties view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Change label of a model object</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on the model
-					object, change name in properties view, leave name field</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">If you change the model object
-					name in properties view, the model tree is automatically
-					updated.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Delete model object from model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Delete from model&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Deletes the model object from
-					the model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add existing model object to a
-					diagram</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Drag the model object, drop it
-					on the diagram in diagram view</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Adds the dragged model object at
-					the dropped position to the diagram. If the model object is
-					already contained in the diagram, it cannot be added again.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in current
-					diagram</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in diagram&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Scrolls the current diagram to
-					the position of the selected model object. Only available if the
-					model object is contained in the current model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in model tree</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in model tree&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Selects the model object in
-					context menu. If any of the containing packages are currently
-					not opened, they are automatically extended.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in hierarchy
-					view</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in hierarchy&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Shows the selected model object
-					as root element of the hierarchy tree view.</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.5.Diagram|outline"></A>
-	3.3.5 Diagram</H3>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m54e49fc9.jpg" NAME="Grafik12" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=160 HEIGHT=88 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">The diagram view takes the center
-	space of the workbench. It shows the diagrams, containing of model
-	objects and their connections.</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show diagram in model tree.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on empty space in
-					diagram, select &ldquo;Show in model tree&rdquo; from context
-					menu.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Selects the diagram in the tree.
-					If any of the containing packages are currently not opened, they
-					are automatically extended.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Toggle snap to objects.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on empty space in
-					diagram, select &ldquo;Snap to objects&rdquo; from context menu.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">If enabled, model objects &ldquo;snap
-					in&rdquo; to other model objects at a nearby horizontal or
-					vertical axis when moving them.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Auto-layout diagram.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on empty space in
-					diagram, select &ldquo;Auto-layout&rdquo; from context menu.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Automatically relocates the
-					model objects contained in the diagram so connected model
-					objects are close to each other and connections do not overlap.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add existing model object to a
-					diagram.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Drag the model object from model
-					tree, hierarchy tree, or object grid, drop it on the diagram in
-					diagram view.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Adds the dragged model object at
-					the dropped position to the diagram. If the model object is
-					already contained in the diagram, it cannot be added again.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add new model object to diagram.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Drag new object from new objects
-					view, drop on diagram view.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Adds a new model object of the
-					selected type to the model at the dropped location. The model
-					object is automatically added to the package containing the
-					model the user dropped the new object on.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Add connection.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Drag the connection arrow of the
-					source model object, drop it on the connection arrow of the
-					target model object.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Connects the two model objects.
-					Only available if the two model object types are connected by
-					the metamodel. Connection direction is automatically reversed if
-					required. 
-					</P>
-					<P LANG="en-US" CLASS="western">Each object  contains
-					information defining how many connections may be drawn to other
-					objects of certain type. When a new connection is created, the
-					existing connections that the objects has to other objects of
-					the same kind are counted. The connection may only be created if
-					the resulting number is lower than the number of allowed
-					connections.</P>
-					<P LANG="en-US" CLASS="western"><BR>
-					</P>
-					<P LANG="en-US" CLASS="western"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Delete model object from diagram</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Delete from diagram&rdquo; from context menu</P>
-					<P LANG="en-US" CLASS="western">OR</P>
-					<P LANG="en-US" CLASS="western">single-click on the model
-					object, press DEL key</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Deletes the model object from
-					the diagram. It is still part of the model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Delete model object from model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Delete from model&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Deletes the model object from
-					the model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Delete connection from model</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the connection,
-					selelct &ldquo;Delete from model&rdquo; from context menu</P>
-					<P LANG="en-US" CLASS="western">OR</P>
-					<P LANG="en-US" CLASS="western">single-click on the connection,
-					press DEL key</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Deletes the connection from the
-					model.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in model tree</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in model tree&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Selects the model object in
-					context menu. If any of the containing packages are currently
-					not opened, they are automatically extended.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in hierarchy
-					view</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in hierarchy&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Shows the selected model object
-					as root element of the hierarchy tree view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Show model object in grid</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Right-click on the model object,
-					select &ldquo;Show in grid&rdquo; from context menu</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Shows the appropriate grid and
-					selects the selected model object. Only available if a grid of
-					the selected model object type is available and the model object
-					is within currently selected grid scope.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western"><BR>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.6.Properties|outline"></A>
-	3.3.6 Properties</H3>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m5452a1d4.png" NAME="Grafik13" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=251 HEIGHT=478 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">The properties view is located at
-	the right part of the workbench. It shows the properties of a
-	selected object. Each object has different properties. When
-	properties are displayed the object is automatically locked for
-	editing by other users.</P>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.6.1.Text Input Fields|outline"></A>
-	3.3.6.1 Text Input Fields</H4>
-	<P LANG="en-US" CLASS="western">Text input fields allow a single
-	line of text. Changes are saved to the model when leaving the input
-	field.</P>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.6.2.Dropdown Lists|outline"></A>
-	3.3.6.2 Dropdown Lists</H4>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_137959e0.jpg" NAME="Grafik14" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=233 HEIGHT=135 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">Dropdown lists allow selection of a
-	list of pre-defined values. Changes are saved to the model when
-	leaving the input field.</P>
-	<P LANG="en-US" CLASS="western">Some Drop down are dynamic an can be
-	configured in the administration perspective.</P>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.6.3.Rich Text Edit Boxes|outline"></A>
-	3.3.6.3 Rich Text Edit Boxes</H4>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_3e02c0f9.jpg" NAME="Grafik15" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=223 HEIGHT=239 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western">Rich text edit boxes allow multiple
-	lines or paragraphs of formatted text. The formats bold, italic,
-	underline, ordered list and unordered list are available. Changes
-	are saved to the model when a different object's properties are
-	displayed.</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Auto complete</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Write some keys, press SHIFT +
-					SPACE. Scroll the list with arrow keys. Pick one entry with
-					ENTER.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">A list of existing Types with
-					those letters appears. Supported are following types: 
-					</P>
-					<UL>
-						<LI><P LANG="en-US" CLASS="western">domain objects (chi Node)</P>
-						<LI><P LANG="en-US" CLASS="western">Actors</P>
-						<LI><P LANG="en-US" CLASS="western">Use Cases
-						(ChiBusinessUsecase)</P>
-					</UL>
-					<P LANG="en-US" CLASS="western">the objects become a standard
-					format as following:</P>
-					<P LANG="en-US" CLASS="western">Domain Objects: <B>Bold</B></P>
-					<P LANG="en-US" CLASS="western">actors: <I>underline</I></P>
-					<P LANG="en-US" CLASS="western">Use Cases: <I>italic</I></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.6.4.Read-Only Fields|outline"></A>
-	3.3.6.4 Read-Only Fields</H4>
-	<P LANG="en-US" CLASS="western">R<IMG SRC="index_html_70accf35.jpg" NAME="Grafik16" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=222 HEIGHT=165 BORDER=0><BR CLEAR=LEFT>ead-only
-	fields are displayed with a grey background. They cannot be edited.</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="3.4.Administration perspective|outline"></A>
-	3.4 Administration perspective</H2>
-	<P LANG="en-US" CLASS="western">The administration perspective
-	allows to the project configuration. To  switch to the
-	administration perspective use the &ldquo;Admin&rdquo; button
-	located on the top right of your screen.</P>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_5faef263.jpg" NAME="Grafik17" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=248 HEIGHT=57 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Display the admin perspective.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Click on the button &ldquo;Admin&rdquo;</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">The standard perspective
-					disappear. The administration perspective is displayed.</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="3.5.Model upload|outline"></A>
-	3.5 Model upload</H2>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_40d37cea.jpg" NAME="Grafik18" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=597 HEIGHT=91 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Import a model</P>
-				</TD>
-				<TD WIDTH=206>
-					<UL>
-						<LI><P LANG="en-US" CLASS="western">Click on the button
-						&ldquo;browse&rdquo;</P>
-						<LI><P LANG="en-US" CLASS="western">select a valid UML file</P>
-						<LI><P LANG="en-US" CLASS="western">click on the &ldquo;send
-						model&rdquo; button</P>
-					</UL>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">This task import a valid Model
-					into the CWM. Valid models are UML2 EMF with a reference to the
-					Chronos profile. Generic UML model are not supported.</P>
-					<P LANG="en-US" CLASS="western"><BR>
-					</P>
-					<P LANG="en-US" CLASS="western">See the documentation of other
-					Chronos tools to understand how to create a model for importing.
-										</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="3.6.Enumerations tabs|outline"></A>
-	3.6 Enumerations tabs</H2>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m30c0d9c7.jpg" NAME="Grafik19" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=278 HEIGHT=244 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Display the default perspective.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Click on the button &ldquo;default&rdquo;</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">The Administration perspective
-					disappear. The default perspective is displayed.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Display an enumeration</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Click on the Tab with the
-					enumeration name you intend to edit. If necessary use the arrows
-					left and right to display more tabs.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">An enumeration type is
-					displayed.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">View enumeration  properties</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Single-click on one item on the
-					list.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">All properties of the
-					enumeration can be reviewed in the properties view.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Delete enumeration from model.</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Select the item on the list.
-					Click on the button &ldquo;remove entry&rdquo;.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Deletes the enumeration from the
-					list.</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm; page-break-before: always">
-	<BR>
-	</P>
-	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="4.Model Description|outline"></A>
-	4 Model Description</H1>
-	<P LANG="en-US" CLASS="western">This part of the help describes in
-	details the Chronos model, their objects (e.g ChiGoal,
-	ChiRequirements, etc) and properties (e.g. Name, text, etc.).
-	Because this structure is generated from a UML model the final
-	information you can find  can varies depending from the situation.</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="4.1.ChiGoal|outline"></A>
-	4.1 ChiGoal</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m55254e5d.png" NAME="Grafik20" ALIGN=BOTTOM WIDTH=62 HEIGHT=56 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN>a Measurable scope that the enterprise (or the project) wants
-	to achieve.<SPAN LANG="en-GB"> </SPAN>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">A ChiGoal
-	represent a certain status or valour that a variable in the
-	considered model MUST achieve.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">The root
-	Goal of a Chronos Model is called a Vision. 
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Difference
-	between ChiGoal and ChiRequirement</B></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">While
-	a goal represent</SPAN><SPAN LANG="en-GB">s a wide (but concrete!)
-	scope, a requirement is a specific milestone within this scope that
-	needs to be addressed. </SPAN>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m14113f68.png" NAME="Grafik21" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=258 HEIGHT=263 BORDER=0><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">A
-	ChiRequirement underline question &ldquo;</SPAN><SPAN LANG="en-GB"><I>is
-	achieved?</I></SPAN><SPAN LANG="en-GB">&rdquo; and the answer is
-	&ldquo;Yes&rdquo; if a ChiFeature is attached to the requirement. A
-	Goal is considered to be achieved if al the attached requirements
-	are true.</SPAN></P>
-	<P STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<UL>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">A
-		ChiGoal should be measurable the </SPAN><SPAN LANG="en-GB"><I>Value_Goal</I></SPAN>
-		SHOULD be an integer. If this is &ldquo;0&rdquo; (default) <SPAN LANG="en-GB">the
-		goal is not valid and the generator produces a WARNING.</SPAN></P>
-		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">A
-		ChiGoal contains one or more ChiGoals or ChiRequirements. A
-		ChiGoals that contains a child ChiGoals SHOULD NOT contain a
-		ChiRequirement.</P>
-	</UL>
-	<UL>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">All
-		the ChiGoals</SPAN><SPAN LANG="en-GB"> &ldquo;</SPAN><SPAN LANG="en-GB"><I>is
-		specified by</I></SPAN><SPAN LANG="en-GB">&rdquo; (and MUST be
-		linked with) one or more ChiRequirements with a shared or
-		composition link. </SPAN>
-		</P>
-		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">A
-		ChiGoals that contains a child ChiGoals SHOULD NOT contain a
-		ChiRequirement.</P>
-		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">A
-		ChiGoal is considered achieved when all the attached
-		ChiRequirements are realized by a ChiFeature.</P>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">If
-		a Goal hierarchy is present ALL the element of the hierarchy are
-		supposed to be checkef for their values. The fact that a child Goal
-		ha</SPAN><SPAN LANG="en-GB">s achieved his proposed Value_Name
-		DON&rsquo;T automatically set the parents values.</SPAN></P>
-	</UL>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -0.64cm; margin-bottom: 0cm">
-	<BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
-	<BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm; margin-bottom: 0cm">
-	<BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=246>
-		<COL WIDTH=202>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=246 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
-				</TD>
-				<TD WIDTH=202 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
-				</TD>
-				<TD WIDTH=246>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					unique ID of this object. CHI + 3 numbers + object name. MUST.</FONT></P>
-				</TD>
-				<TD WIDTH=202>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
-					001GOA</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name</FONT></P>
-				</TD>
-				<TD WIDTH=246>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					short sentence that give an idea of the sense of this object.
-					MUST</FONT></P>
-				</TD>
-				<TD WIDTH=202>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Description</FONT></P>
-				</TD>
-				<TD WIDTH=246>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					complete text description of the object. OPTIONAL</FONT></P>
-				</TD>
-				<TD WIDTH=202>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Type</FONT></P>
-				</TD>
-				<TD WIDTH=246>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Type
-					of goal. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=202>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Strategic
-					| Operational | Vision | Mission</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Priority</FONT></P>
-				</TD>
-				<TD WIDTH=246>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					priority in %. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=202>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">1-100</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Value_Name</FONT></P>
-				</TD>
-				<TD WIDTH=246>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					name of the value this goal intends to alter. OPTIONAL</FONT></P>
-				</TD>
-				<TD WIDTH=202>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Value_ammount</FONT></P>
-				</TD>
-				<TD WIDTH=246>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					actual amount of the value this goal intends to alter. OPTIONAL</FONT></P>
-				</TD>
-				<TD WIDTH=202>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">0</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Value_Goal</FONT></P>
-				</TD>
-				<TD WIDTH=246>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					amount by which the value is to be altered. OPTIONAL</FONT></P>
-				</TD>
-				<TD WIDTH=202>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">0</FONT></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="4.2.ChiRequirement|outline"></A>
-	4.2 ChiRequirement</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_10a7e864.png" NAME="Grafik22" ALIGN=BOTTOM WIDTH=62 HEIGHT=56 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN>A Business guide line about the Enterprise or the project.</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
-	ChiRequirement represents a condition that needs to be <SPAN LANG="en-GB">Satisfied</SPAN>
-	by certain achievement (a ChiFeature ).</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m22211df3.png" NAME="Grafik23" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=491 HEIGHT=372 BORDER=0><BR CLEAR=LEFT><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<UL>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">All
-		the ChiRequirements MUST be linked with a parent ChiGoal either
-		directly or in a hierarchy of further requirements. The sum of all
-		requirements being true () will set the </SPAN><SPAN LANG="en-GB"><I>Value_Name</I></SPAN><SPAN LANG="en-GB">
-		of the first Parent ChiGoal in the hierarchy to the expected
-		</SPAN><SPAN LANG="en-GB"><I>Value_Goal</I></SPAN><SPAN LANG="en-GB">.</SPAN></P>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">When
-		is created a ChiRequirement has the status of </SPAN>Proposed until
-		he is checked by a proofreader. 
-		</P>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">When
-		the field of the proof reader is filled (with a name) the
-		ChiRequirement take the status 
-		</P>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">To
-		achieve the status of &ldquo;Satisfied&rdquo; a ChiRequirement </SPAN><SPAN LANG="en-GB">MUST
-		be linked with a ChiFeature with the realizazion &ldquo;</SPAN><SPAN LANG="en-GB"><I>is
-		realized by</I></SPAN><SPAN LANG="en-GB">&rdquo;. </SPAN>
-		</P>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">CAN
-		be linked</SPAN><SPAN LANG="en-GB"> a ChiIssue wit the stereotype
-		&ldquo;is negated by&rdquo;. </SPAN>
-		</P>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">Each
-		requirement needs to be confirmed by a </SPAN><I>proofreader</I><SPAN LANG="en-GB">.
-		If </SPAN>proofreader<SPAN LANG="en-GB"> is &ldquo;none&rdquo;
-		(default) the requirement is not valid and the generator produces a
-		WARNING.</SPAN></P>
-		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">A
-		ChiRequirement becomes &ldquo;Satisfied&rdquo; when a ChiFeature is
-		attached to him. Until a requirement has not the status &ldquo;Validated&rdquo;
-		the generator produces a warning.</P>
-		<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"></P>
-	</UL>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=76>
-		<COL WIDTH=241>
-		<COL WIDTH=283>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=76 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=241 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
-				</TD>
-				<TD WIDTH=283 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=76>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
-				</TD>
-				<TD WIDTH=241>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					ID of this object. CHI + 3 numbers + object name. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=283>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
-					001REQ</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=76>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name</FONT></P>
-				</TD>
-				<TD WIDTH=241>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					short sentence that give an idea of the sense of this object.
-					MUST</FONT></P>
-				</TD>
-				<TD WIDTH=283>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=76>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Description</FONT></P>
-				</TD>
-				<TD WIDTH=241>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					complete text description of the object. OPTIONAL</FONT></P>
-				</TD>
-				<TD WIDTH=283>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=76>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Type</FONT></P>
-				</TD>
-				<TD WIDTH=241>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Type
-					of requirement MUST</FONT></P>
-				</TD>
-				<TD WIDTH=283>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Business
-					Rule| Security |Performance |Persistence |Scalability |Transport</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=76>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Priority</FONT></P>
-				</TD>
-				<TD WIDTH=241>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					priority in %. Requirements are ordered by priority. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=283>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">1-100</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=76>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Author</FONT></P>
-				</TD>
-				<TD WIDTH=241>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					requirement&rsquo;s author&rsquo;s name and role in the project
-					MUST</FONT></P>
-				</TD>
-				<TD WIDTH=283>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name,
-					Role</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=76>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Proofreader</FONT></P>
-				</TD>
-				<TD WIDTH=241>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
-					<FONT SIZE=2 STYLE="font-size: 9pt">This requirement&rsquo;s
-					proofreader&rsquo;s name and role in the project.</FONT></P>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Each
-					requirement needs to be confirmed by a proofreader to become the
-					status Validated or mandatory. OPTIONAL</FONT></P>
-				</TD>
-				<TD WIDTH=283>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name,
-					Role</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=76>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Status</FONT></P>
-				</TD>
-				<TD WIDTH=241>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					requirement&rsquo;s status. Stati are tipically defined within
-					the project. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=283>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Proposed|Mandatory|Validated|<SPAN LANG="en-GB">Satisfied</SPAN></FONT></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="4.3.ChiFeature|outline"></A>
-	4.3 ChiFeature</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m426bc76f.png" NAME="Grafik24" ALIGN=BOTTOM WIDTH=62 HEIGHT=56 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	A characteristic of a (proposed) system that </SPAN><SPAN LANG="en-GB"><I>realizes</I></SPAN><SPAN LANG="en-GB">
-	a ChiRequirement</SPAN>. 
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
-	ChiFeature is a small, high level, granular function or
-	characteristic expressed in client-valued terms as a satisfaction of
-	a ChiRequirement; 
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">This
-	means that the ChiFeature is an event or condition that set the
-	requirement condition to be <I>true</I>.</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
-	ChiFeature CANNOT exist without a ChiRequirement (&ldquo;No solution
-	without request&rdquo;). 
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">ChiFeature
-	have a relationship (of type Realization) with ChiRequirement.</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A 
-	ChiFeature might realize one or more ChiRequirements.</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">ChiFeature
-	also have relationships (of type Realization, stereotype
-	&lt;&lt;Refines&gt;&gt;) with one or more ChiUseCases or
-	<SPAN LANG="en-GB">ChiBusinessProcess</SPAN>. 
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
-	ChiUseCases defines the interaction that a user has with the system
-	in order to satisfy one or more Requirements. The ChiFeature
-	identifies the facility that provides the means for that
-	interaction.<BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">E</SPAN><SPAN LANG="en-GB">ach
-	feature that has the Status &ldquo;Implemented&rdquo; MUST specified
-	by a further </SPAN>ChiUseCases or <SPAN LANG="en-GB">ChiBusinessProcess
-	objekt. In other case the generator produces a WARNING.</SPAN></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=637 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=146>
-		<COL WIDTH=220>
-		<COL WIDTH=228>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
-				</TD>
-				<TD WIDTH=228 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					ID of this object. CHI + 3 numbers + object name. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
-					001FEA</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					short sentence that give an idea of the sense of this object.
-					MUST</FONT></P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Description</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					complete text description of the object. OPTIONAL</FONT></P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Author</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					feature's author's name and role in the project. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name,
-					Role</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Proofreader</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					feature's reviser&rsquo;s name and role in the project. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name,
-					Role</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Status</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					feature's status. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Proposed
-					| Validated | Rejected | Implemented</FONT></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="4.4.ChiIssue|outline"></A>
-	4.4 ChiIssue</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_6f2cdcd.png" NAME="Grafik25" ALIGN=BOTTOM WIDTH=62 HEIGHT=56 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	A characteristic of a system that could slow down or even completely
-	stop the realization of a ChiRequirement. </SPAN>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">From
-	</SPAN><SPAN LANG="en-GB">a logical point of view a ChiIssue is a
-	condition that disallows a linked ChiRequirement to become </SPAN><SPAN LANG="en-GB"><I>true</I></SPAN><SPAN LANG="en-GB">.
-	</SPAN>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">A
-	ChiIssue is linked with a ChiRequirement with a &ldquo;trace&rdquo;
-	and the stereotype &ldquo;brakes&rdquo;.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">An Issue
-	MUST be linked to a ChiRequirement element (&ldquo;no problem
-	without request&rdquo;). The generator spawns an ERROR if this
-	connection doesn&rsquo;t exist.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=638 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=146>
-		<COL WIDTH=220>
-		<COL WIDTH=228>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
-				</TD>
-				<TD WIDTH=228 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					ID of this object. CHI + 3 numbers + object name. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
-					001ISS</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">Author</SPAN></EM></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">This
-					issue&rsquo;s author&rsquo;s name and role in the project. </SPAN></EM>MUST</FONT></P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">Name,
-					Role</SPAN></EM></FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=146>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">Responsible</SPAN></EM></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">The
-					responsible to close the present issue. OPTIONAL</SPAN></EM></FONT></P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt"><EM><SPAN STYLE="font-style: normal">Name,
-					Role</SPAN></EM></FONT></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="4.5.ChiBusinessProcess|outline"></A>
-	4.5 ChiBusinessProcess</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m74221ad2.gif" NAME="Grafik26" ALIGN=BOTTOM WIDTH=107 HEIGHT=44 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><A NAME="OLE_LINK1"></A>
-	<SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">: </SPAN>A
-	Business Process is a sum of actions that produces a business
-	advantage to the enterprise. It is <I>composed by</I> one or many
-	ChiBusinessUseCases</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">At
-	lease one </SPAN>ChiBusinessUseCases or ChiBusinessUseCasesCore must
-	linked.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=637 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=145>
-		<COL WIDTH=220>
-		<COL WIDTH=228>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Key</P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Notice</P>
-				</TD>
-				<TD WIDTH=228 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Value</P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=228>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="4.6.ChiBusinessUseCase|outline"></A>
-	4.6 ChiBusinessUseCase</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_63d7858d.gif" NAME="Grafik27" ALIGN=BOTTOM WIDTH=110 HEIGHT=74 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN>A Business Use Case is part of a business process that
-	produces an advantage to the enterprise.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Condition</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">It SHOULD
-	have a name composed by a Verb and an Object. 
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m7f3b2bed.jpg" NAME="Grafik28" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=378 HEIGHT=322 BORDER=0><BR CLEAR=LEFT><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Tagged
-	Values</B></SPAN><SPAN LANG="en-GB">: </SPAN>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<TABLE WIDTH=641 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=145>
-		<COL WIDTH=220>
-		<COL WIDTH=233>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
-				</TD>
-				<TD WIDTH=233 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145 HEIGHT=38>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					ID of this object. CHI + 3 numbers + object name. MUST</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">CHI
-					001UC</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145 HEIGHT=52>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					name of a use case MUST be composed by a Verb and a object. CAN
-					have also the name of the primary actor but this is not a good
-					praxis.  MUST</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Creates
-					Contract </FONT>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145 HEIGHT=29>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Description</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					complete text description of the Use case. OPTIONAL</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145 HEIGHT=10>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Primary
-					Actor</FONT></P>
-				</TD>
-				<TD ROWSPAN=2 WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					list of actors associated with the use case. Although this
-					information is contained in the use case itself, it helps to
-					increase the understandability of the use case when the diagram
-					is unavailable.</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Other
-					Actors</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Goal
-					in Context</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					goal should implicitly express the actor's intent or purpose of
-					the use case, such as &quot;Enrol Student in Seminar.&quot;</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Scope</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Boundaries
-					in which the use case is operated when invoked (E.g. CMS)</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">systemA</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Level</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
-					<FONT SIZE=2 STYLE="font-size: 9pt">Authorizations for
-					operations/actions to be performed against the Chi business
-					objects in scope. Against every object/process 4 CRUD basic
-					operations are possible:</FONT></P>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
-					<FONT SIZE=2 STYLE="font-size: 9pt">Create (Write)</FONT></P>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
-					<FONT SIZE=2 STYLE="font-size: 9pt">Read (Open)</FONT></P>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
-					<FONT SIZE=2 STYLE="font-size: 9pt">Update (Change)</FONT></P>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Delete
-					 (Destroy)</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ObjectNameA(CRUD)|
-					ObjectNameB(CRUD);</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Stakeholders
-					and Interests</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">List
-					of actors that have a special interest (i.e. to be informed
-					every time) in completion of the use case</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ActorA|ActorB</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Precondition</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">A
-					list of the conditions, if any, that must be met before a use
-					case may be invoked. Can be a previous Use case or self the
-					presence of the system in Scope.</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">(ConditionA|ConditionB)</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Trigger</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Event
-					that is responsible for invocation of the use case</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145 HEIGHT=23>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Main
-					Success Scenario</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					main path of logic an actor follows through a use case. Often
-					referred to as the &ldquo;happy path&rdquo; or the &ldquo;main
-					path&rdquo; because it describes how the use case works when
-					everything works as it normally should.</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Extensions</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					use case that this use case extends (if any). An extend
-					association is a generalization relationship where an extending
-					use case continues the behaviour of a base use case. The
-					extending use case accomplishes this by inserting additional
-					action sequences into the base use-case sequence.</FONT></P>
-				</TD>
-				<TD WIDTH=233>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">ID</FONT></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="4.7.ChiWorkerExternal|outline"></A>
-	4.7 ChiWorkerExternal</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m43e56a0e.gif" NAME="Grafik29" ALIGN=BOTTOM WIDTH=74 HEIGHT=71 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN>A Chi External Worker is an employee that interacts directly
-	with ChiBusinesPartner outside the enterprise.</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Condition:
-	</B></SPAN><SPAN LANG="en-GB"><SPAN STYLE="font-weight: normal">none</SPAN></SPAN></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=637 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=145>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Key</P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Notice</P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Value</P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=145>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB"><SPAN STYLE="font-style: normal">OfflineUser</SPAN></SPAN></EM></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB"><SPAN STYLE="font-style: normal">Define
-					if the user require to </SPAN></SPAN></EM><EM><SPAN LANG="en-GB"><SPAN STYLE="font-style: normal">have
-					a offline access to the  system.</SPAN></SPAN></EM></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB">true|false</SPAN></EM></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western">4.8 Chi Business Partner</H2>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m5b713bd1.gif" NAME="Grafik35" ALIGN=BOTTOM WIDTH=29 HEIGHT=56 BORDER=0><SPAN LANG="en-GB"><BR></SPAN><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
-	ChiBusinesPartner is an external person that has a Business relation
-	with the enterprise.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">A
-	business partner must be linked to or more business cases.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Key</P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Notice</P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Value</P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Example</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>MDA
-	Realization:</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">HTML
-	documentation is generated. Model is validated against above rule.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western">4.9 Chi Business partner Active</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_b3db2f4.gif" NAME="Grafik36" ALIGN=BOTTOM WIDTH=30 HEIGHT=56 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
-	ChiBusinesPartnerActive is a direct customer of the enterprise.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<UL>
-		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Can
-		initiate a Use case</P>
-		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Can
-		have direct access to the system.</P>
-	</UL>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Key</P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Notice</P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Value</P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western">4.10 Chi Passive Business Partner</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_1d15e926.gif" NAME="Grafik37" ALIGN=BOTTOM WIDTH=26 HEIGHT=56 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A
-	ChiBusinesPartnerPassive is an indirect customer (typically a
-	supplier) of the enterprise.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<UL>
-		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Cannot
-		initiate a Use case.</P>
-		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Has
-		never direct access to the system.</P>
-	</UL>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western">4.11 ChiWorker</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_4c8aaa33.gif" NAME="Grafik38" ALIGN=BOTTOM WIDTH=71 HEIGHT=71 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN><FONT COLOR="#0000ff"><FONT FACE="Courier New, monospace"><SPAN LANG="en-GB">A
-	ChiWorker is a special actor that works within the enterprise.</SPAN></FONT></FONT><SPAN LANG="en-GB">
-	</SPAN>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Key</P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Notice</P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Value</P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Example</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>MDA
-	Realization:</B></P>
-	<H2 LANG="en-US" CLASS="western">4.12 ChiWorkerExternal</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m43e56a0e.gif" NAME="Grafik39" ALIGN=BOTTOM WIDTH=74 HEIGHT=71 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN>A Chi External Worker is an employee that interacts directly
-	with ChiBusinessPartner outside the enterprise.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Key</P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Notice</P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Value</P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB"><SPAN STYLE="font-style: normal">OfflineUser</SPAN></SPAN></EM></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB"><SPAN STYLE="font-style: normal">Define
-					if the user require to have a offline access to the  system.</SPAN></SPAN></EM></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB">True|false</SPAN></EM></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western">4.13 ChiWorkerInternal</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_54dc705e.gif" NAME="Grafik40" ALIGN=BOTTOM WIDTH=71 HEIGHT=76 BORDER=0></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A Chi 
-	Worker Internal is an employee of the enterprise that has no contact
-	with Business partners.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Key</P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Notice</P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-GB" CLASS="western">Value</P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-GB" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><BR>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western">4.14 ChiNode</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_26027cb1.gif" NAME="Grafik41" ALIGN=BOTTOM WIDTH=52 HEIGHT=71 BORDER=0></P>
-	<P STYLE="margin-top: 0.49cm; margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	The ChiNode represents a domain or Business Object type. ChiNodes
-	and ChiValues define the application data model. They describe the
-	identity and properties of the BO. Operations, apart common object
-	manipulation (CRUD), are included only if they govern exclusively
-	the access and modification of the considered ChiNode . </SPAN>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">table_name</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					name of the database table. If not given the name will be taken.</FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">pk_name</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					name of the primary key column. The Chronos generator will add
-					this.</FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">id</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">is_ordered</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Is
-					this type to be ordered in a list? Chi generates a sort key
-					ChiValue for this type if it is ordered.</FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">true|false</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">initparams</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					configuration section that is used on initialization of the
-					corresponding mapper.</FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">database</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">child_order</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">The
-					order of the associated children e.g. for Enterprise:
-					Worker,Customer,Location</FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">display_value</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm; margin-bottom: 0.11cm">
-					<FONT SIZE=2 STYLE="font-size: 9pt">The display value(s) of a
-					node separates by a pipe &ldquo;|</FONT></P>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm">&rdquo;
-					<FONT SIZE=2 STYLE="font-size: 9pt">e.g. for Enterprise:
-					name|AdminInfo/status|Info/status</FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">is_soap</FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Indicates
-					weather or not a SOAP interface should be generated for this
-					type.</FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">true|false</FONT></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Example</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
-	<TABLE WIDTH=644 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=458>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=458 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">table_name</FONT></P>
-				</TD>
-				<TD WIDTH=458>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">pk_name</FONT></P>
-				</TD>
-				<TD WIDTH=458>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">is_ordered</FONT></P>
-				</TD>
-				<TD WIDTH=458>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">initparams</FONT></P>
-				</TD>
-				<TD WIDTH=458>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">database</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">child_order</FONT></P>
-				</TD>
-				<TD WIDTH=458>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Worker,Customer,Location</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">display_value</FONT></P>
-				</TD>
-				<TD WIDTH=458>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Name|AdminInfo/status|Info/status</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">is_soap</FONT></P>
-				</TD>
-				<TD WIDTH=458>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Indicates
-					weather or not a SOAP interface should be generated for this
-					type.</FONT></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>MDA
-	Realization:</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Interpretation
-	 of Abstract</B></P>
-	<TABLE WIDTH=644 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=458>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Abstract
-					&ldquo;Value&rdquo;</B></FONT></P>
-				</TD>
-				<TD WIDTH=458 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Meaning</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Public</FONT></P>
-				</TD>
-				<TD WIDTH=458>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class reppresent a domain object.</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Private</FONT></P>
-				</TD>
-				<TD WIDTH=458>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class reppresent an object that is present only to transmit
-					properties trough ineritation. </FONT>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Interpretation
-	 of Scope</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">The
-	standard property scope (Visibility) is interpreted by the generator
-	as following:</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<TABLE WIDTH=644 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=85>
-		<COL WIDTH=258>
-		<COL WIDTH=258>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=85 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-				<TD WIDTH=258 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Meaning</B></FONT></P>
-				</TD>
-				<TD WIDTH=258 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>example</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=85>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Public</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class reppresent a domain object. Is always visible.</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=85>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Private</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class reppresent a helper . Is destinated to be invisible. </FONT>
-					</P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm">
-					<FONT SIZE=2 STYLE="font-size: 9pt">object like &ldquo;figure&rdquo;
-					that is never visible in a tree</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=85>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Protected</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class reppresent a domain Object . Is destinated to be visible
-					in certain situation only. </FONT>
-					</P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm">
-					<FONT SIZE=2 STYLE="font-size: 9pt">A ChiNode that reppresent an
-					enumeration like ChiRequiementStatus that is visible in a
-					separate User interface.</FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=85>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Package</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class reppresent a container .</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm">
-					<FONT SIZE=2 STYLE="font-size: 9pt">a ChiNode like &ldquo;Model&rdquo;
-					or  &ldquo;Package&rdquo; or diagramm </FONT>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H3 LANG="en-GB" CLASS="western" STYLE="font-weight: normal"></H3>
-	<H2 LANG="en-US" CLASS="western">4.15 ChiValue</H2>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">A
-	ChiValue represent a property of a ChiNode. </FONT></FONT></FONT>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">initparams</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US" STYLE="margin-bottom: 0cm"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">The
-					attribute's application datatype</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote1anc" HREF="#sdfootnote1sym"><SUP>1</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.
-					This can be used in the application to group attributes and
-					execute special logic on them.</FONT></FONT></FONT></P>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">DATATYPE_DONTCARE,DATATYPE_ATTRIBUTE,DATATYPE_ELEMENT,DATATYPE_IGNORE</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">DATATYPE_ATTRIBUTE</FONT></FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">db_data_type</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US" STYLE="margin-bottom: 0cm"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">The
-					attribute's database type. This will be used  in the table
-					definition according to the database.</FONT></FONT></P>
-					<P LANG="en-US"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">e.g.
-					INT, VARCHAR, TEXT, ...</FONT></FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">is_editable</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">Declares,
-					if the attribute is editable in the UI. The backend can always
-					edit attributes.</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">true|false</FONT></FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">input_type</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">Definition
-					of the attribute's input control in the HTML form</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote2anc" HREF="#sdfootnote2sym"><SUP>2</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.</FONT></FONT></FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US" STYLE="margin-bottom: 0cm"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">text,
-					password, textarea, select, radio, checkbox, file, fileex,
-					fckeditor, filebrowser, linkbrowser, date</FONT></FONT></P>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">+
-					additional definitions (see Wiki)</FONT></FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">display_type</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">The
-					HTML display type for the attribute e.g. image</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote3anc" HREF="#sdfootnote3sym"><SUP>3</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.</FONT></FONT></FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">image,
-					text, links</FONT></FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">restrictions_match</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">Regular
-					expression, which must be matched by the attribute value</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote4anc" HREF="#sdfootnote4sym"><SUP>4</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.</FONT></FONT></FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">e.g.
-					'[0-3][0-9]\.[0-1][0-9]\.[0-9][0-9][0-9][0-9]' for date values</FONT></FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">restrictions_not_match</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US"><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">Regular
-					expression, which must not be matched by the attribute value</FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt"><A CLASS="sdfootnoteanc" NAME="sdfootnote5anc" HREF="#sdfootnote5sym"><SUP>5</SUP></A></FONT></FONT></FONT><FONT COLOR="#000000"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">.</FONT></FONT></FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">See
-					above</FONT></FONT></P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">restrictions_description</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">A
-					text describing the restrictions (both the negative and the
-					positives), which will be shown in case of an error.</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">column_name</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">The
-					name of the database column. If not given the attribute name
-					will be used.</FONT></FONT></P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-US"><FONT FACE="MetaNormal-Roman, Times New Roman"><FONT SIZE=1 STYLE="font-size: 8pt">attribute
-					name</FONT></FONT></P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Example</B></SPAN><SPAN LANG="en-GB">:</SPAN></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>MDA
-	Realization:</B></P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT COLOR="#000000">
-	</FONT><SPAN LANG="en-GB">Those values are persistent.</SPAN></P>
-	<H2 LANG="en-US" CLASS="western">4.16 ChiController</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m2c81d9af.gif" NAME="Grafik42" ALIGN=BOTTOM WIDTH=51 HEIGHT=67 BORDER=0></P>
-	<P STYLE="margin-top: 0.49cm; margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="en-GB">The
-	ChiController defines application behaviour and the Business Logic
-	involving more that one ChiNode. It dispatches requests and selects
-	views for presentation. It interprets user inputs and maps them into
-	actions.</SPAN></FONT></FONT></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">ChiController,
-	with Views and Associations define the application flow. A
-	controller represents the Business logic where a certain flow is
-	physical implemented.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">In a
-	Service Oriented Architecture a ChiController describes a service.
-	The availability in the system is described below. 
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Interpretation
-	of Scope</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">The
-	standard UML property scope (Visibility) is interpreted by the
-	generator as following:</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<TABLE WIDTH=622 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=70>
-		<COL WIDTH=258>
-		<COL WIDTH=250>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=70 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-				<TD WIDTH=258 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Meaning</B></FONT></P>
-				</TD>
-				<TD WIDTH=250 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>example</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=70>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Public</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class represents a Service that is available outside the
-					system's border. Is always visible.</FONT></P>
-				</TD>
-				<TD WIDTH=250>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=70>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Private</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class represents a Service that is available for a certain
-					amount of Domain Object only  .</FONT></P>
-				</TD>
-				<TD WIDTH=250>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=70>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Protected</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class represents a Service that is available only within the
-					system border.</FONT></P>
-				</TD>
-				<TD WIDTH=250>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=70>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">Package</FONT></P>
-				</TD>
-				<TD WIDTH=258>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><FONT SIZE=2 STYLE="font-size: 9pt">This
-					class represents a Service that is available only within his
-					parent Package.</FONT></P>
-				</TD>
-				<TD WIDTH=250>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<H3 LANG="en-GB" CLASS="western"></H3>
-	<H2 LANG="en-US" CLASS="western">4.17 ChiView</H2>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_m7055b48a.gif" NAME="Grafik43" ALIGN=BOTTOM WIDTH=68 HEIGHT=67 BORDER=0></P>
-	<P STYLE="margin-top: 0.49cm; margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN><FONT FACE="Arial, sans-serif"><FONT SIZE=2><SPAN LANG="en-GB">The
-	ChiView (view) display the contents of a Model. Any kind of
-	visualization can be modelled in a view.<BR>It gets data from the
-	model and specifies how that data should be presented. It updates
-	data presentation when the model changes. A view also forwards user
-	input to a controller. A view cannot execute business logic, apart
-	syntactical validation.</SPAN></FONT></FONT></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">Views and
-	Node are connected trough a ChiActionKey.</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
-	Values:</B></P>
-	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
-		<COL WIDTH=157>
-		<COL WIDTH=220>
-		<COL WIDTH=229>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Key</B></FONT></P>
-				</TD>
-				<TD WIDTH=220 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Notice</B></FONT></P>
-				</TD>
-				<TD WIDTH=229 BGCOLOR="#d9d9d9">
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.21cm"><FONT SIZE=2 STYLE="font-size: 9pt"><B>Value</B></FONT></P>
-				</TD>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=157>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=220>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-				<TD WIDTH=229>
-					<P LANG="en-CA" STYLE="margin-left: 0.1cm; margin-top: 0.14cm"><BR>
-					</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="5.Howto|outline"></A>
-	5 Howto</H1>
-	<H2 LANG="en-US" CLASS="western" STYLE="margin-left: 1.02cm; text-indent: -1.02cm"><A NAME="5.1.Get started|outline"></A>
-	5.1 Get started</H2>
-	<P LANG="en-US" CLASS="western">Import the provided &ldquo;Chronos
-	default model&rdquo; using the model upload functionality in the
-	administration interface. After a restart you will find to have thew
-	following package structure.</P>
-	<P LANG="en-US" CLASS="western">T<IMG SRC="index_html_m4ffd0013.jpg" NAME="Grafik30" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=226 HEIGHT=321 BORDER=0><BR CLEAR=LEFT>his
-	has demonstrated to be valid for most project.</P>
-	<P LANG="en-US" CLASS="western">Under a package you should organize
-	object a that type only. 
-	</P>
-	<P LANG="en-US" CLASS="western"><I>E.g. under the package Issue all
-	the object of type ChiIssue.</I></P>
-	<P LANG="en-US" CLASS="western">Additional project structure need to
-	be created as sub package.  
-	</P>
-	<P LANG="en-US" CLASS="western"><I>E.g. Replicate the structure
-	&ldquo;Release 1&rdquo; in both packages Issues and Features. </I>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="font-style: normal">S<IMG SRC="index_html_m700087da.jpg" NAME="Grafik31" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=152 HEIGHT=107 BORDER=0><BR CLEAR=LEFT>tart
-	now to follow the activity described below.  
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m1a6010c3.gif" NAME="Grafik32" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=642 HEIGHT=791 BORDER=0><BR CLEAR=LEFT><BR><BR>
-	</P>
-	<OL>
-		<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">Define
-		goals for your project.</FONT></FONT></P>
-		<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">create
-		supporting requirements</FONT></FONT></P>
-		<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">add
-		a new requirement</FONT></FONT></P>
-		<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">requirement
-		is validated by proofreader</FONT></FONT></P>
-		<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">manage
-		Features</FONT></FONT></P>
-		<OL>
-			<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">propose
-			feature satisfing requirement</FONT></FONT></P>
-			<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">Feature
-			validated by proofreader</FONT></FONT></P>
-			<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">Confirm
-			feature</FONT></FONT></P>
-		</OL>
-		<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">Manage
-		Issues</FONT></FONT></P>
-		<OL>
-			<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">Discover
-			issues provoked by requirements</FONT></FONT></P>
-			<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">assign
-			responsible to this Issue</FONT></FONT></P>
-			<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">Responsible
-			evalution:  </FONT></FONT>
-			</P>
-			<OL>
-				<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">delete
-				the requirement from model</FONT></FONT></P>
-				<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">change
-				the requirement</FONT></FONT></P>
-			</OL>
-		</OL>
-		<LI><P CLASS="western" STYLE="font-style: normal"><FONT FACE="Arial, sans-serif"><FONT SIZE=2 STYLE="font-size: 11pt">create
-		use case</FONT></FONT></P>
-	</OL>
-	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western"><A NAME="5.2.How to create an activity|outline"></A>
-	5.2 How to create an activity</H2>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m354ecc46.jpg" NAME="Grafik33" ALIGN=LEFT WIDTH=195 HEIGHT=271 BORDER=0><BR CLEAR=LEFT>Activities
-	can be only created within an use case. In fact an activity is an
-	enhancement of the Use Case description. 
-	</P>
-	<H1 LANG="en-US" CLASS="western">6 Administration</H1>
-	<H2 LANG="en-US" CLASS="western">6.1 The backend interface</H2>
-	<P LANG="en-US" CLASS="western">The CWM communicate with a backend
-	that is completely separate from the front end. 
-	</P>
-	<P LANG="en-US" CLASS="western">From the backend you can
-	administrate the application, creating users, groups and performing
-	backups.</P>
-	<H2 LANG="en-US" CLASS="western">6.2 Manage users and groups</H2>
-	<H2 LANG="en-US" CLASS="western">6.3 Edit configuration files</H2>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<H2 LANG="en-US" CLASS="western">6.4 Backup functionalities</H2>
-	<P LANG="en-US" CLASS="western"><BR><BR>
-	</P>
-	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
-		<COL WIDTH=205>
-		<COL WIDTH=206>
-		<COL WIDTH=205>
-		<THEAD>
-			<TR VALIGN=TOP>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Task</P>
-				</TH>
-				<TH WIDTH=206>
-					<P LANG="en-US" CLASS="western">Action</P>
-				</TH>
-				<TH WIDTH=205>
-					<P LANG="en-US" CLASS="western">Description</P>
-				</TH>
-			</TR>
-		</THEAD>
-		<TBODY>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Create a backup</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Login to the backend,</P>
-					<P LANG="en-US" CLASS="western">click on the link &ldquo;admin&rdquo;,</P>
-					<P LANG="en-US" CLASS="western">give a meanful name to your
-					backup and click on save.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Create a complete backup of your
-					actual database.</P>
-				</TD>
-			</TR>
-			<TR VALIGN=TOP>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Restore a backup</P>
-				</TD>
-				<TD WIDTH=206>
-					<P LANG="en-US" CLASS="western">Login to the backend,</P>
-					<P LANG="en-US" CLASS="western">select an existing backup from
-					the list, click on &ldquo;restore backup&rdquo;.</P>
-				</TD>
-				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Restore a previous database
-					backup.</P>
-				</TD>
-			</TR>
-		</TBODY>
-	</TABLE>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
-	</P>
-</DIV>
-<DIV ID="sdfootnote1">
-	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote1sym" HREF="#sdfootnote1anc">1</A><FONT SIZE=1 STYLE="font-size: 8pt">The
-	application's data types are globally defined e.g. In
-	</FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">PersistentObject</FONT></FONT>.</P>
-</DIV>
-<DIV ID="sdfootnote2">
-	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote2sym" HREF="#sdfootnote2anc">2</A><FONT SIZE=1 STYLE="font-size: 8pt">The
-	interpretation of the input_type is done by </FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">DefaultControlRenderer</FONT></FONT><FONT SIZE=1 STYLE="font-size: 8pt">
-	or its subclasses.</FONT></P>
-</DIV>
-<DIV ID="sdfootnote3">
-	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote3sym" HREF="#sdfootnote3anc">3</A><FONT SIZE=1 STYLE="font-size: 8pt">The
-	interpretation of the display_type is done by </FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">DefaultValueRenderer</FONT></FONT><FONT SIZE=1 STYLE="font-size: 8pt">
-	or its subclasses.</FONT></P>
-</DIV>
-<DIV ID="sdfootnote4">
-	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote4sym" HREF="#sdfootnote4anc">4</A><FONT SIZE=1 STYLE="font-size: 8pt">The
-	PHP function </FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">preg_match</FONT></FONT><FONT SIZE=1 STYLE="font-size: 8pt">
-	is used for comparison.</FONT></P>
-</DIV>
-<DIV ID="sdfootnote5">
-	<P LANG="en-US" CLASS="sdfootnote-western"><A CLASS="sdfootnotesym" NAME="sdfootnote5sym" HREF="#sdfootnote5anc">5</A><FONT SIZE=1 STYLE="font-size: 8pt">The
-	PHP function </FONT><FONT FACE="Courier New, monospace"><FONT SIZE=1 STYLE="font-size: 8pt">preg_match</FONT></FONT><FONT SIZE=1 STYLE="font-size: 8pt">
-	is used for comparison.</FONT></P>
-</DIV>
-</BODY>
-</HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title id="title">UML Web Modeler</title>
+		<link rel="shortcut icon" href="favicon.ico" /> 
+		<link rel="stylesheet" type="text/css" href="lib/ext/resources/css/ext-all.css" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/figures.css" />
+		<link rel="stylesheet" type="text/css" href="lib/ext/ux/css/Ext.ux.grid.CellActions.css" />
+		<link rel="stylesheet" type="text/css" href="lib/ext/resources/css/file-upload.css"/>
+
+		<!--[if IE]>
+			<script type="text/javascript">
+				window.onload = function() {
+					document.body.innerHTML += "<div class='uwm-ieWarning'>" +
+						"<div class='uwm-browserWarning'>" +
+							"<p class='nonLast'><b>Attention:</b> You're using Internet Explorer, a browser not supported by this application.</p>" +
+							"<p>Currently, the supported browser is Firefox 3.</p>" +
+						"</div>" +
+					"</div>";
+				}
+			</script>
+		<![endif]-->
+
+
+		<script type="text/javascript" src="lib/draw2d/wz_jsgraphics.js">
+		</script>
+		<script type="text/javascript" src="lib/draw2d/draw2d.js">
+		</script>
+
+<!--  
+		<SCRIPT src="lib/draw2d/normal/String.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/wz_jsgraphics.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/events.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/debug.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/dragdrop.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/UUID.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PositionConstants.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Graphics.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Color.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ArrayList.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Point.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Dimension.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Border.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineBorder.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Figure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Node.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/VectorFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SVGFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Label.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Oval.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Circle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Rectangle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ImageFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Port.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/InputPort.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/OutputPort.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Line.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/NullConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ManhattanConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/BezierConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/FanConnectionRouter.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionAnchor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ChopboxConnectionAnchor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionDecorator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ArrowConnectionDecorator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CompartmentFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CanvasDocument.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Annotation.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ResizeHandle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineStartResizeHandle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineEndResizeHandle.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Canvas.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Workflow.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/WindowFigure.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Button.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToggleButton.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToHelper.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToGeometry.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToGeometryEntry.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/SnapToGrid.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToggleButton.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToolGeneric.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ToolPalette.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Dialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/InputDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PropertyDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/AnnotationDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PropertyWindow.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ColorDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/LineColorDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/BackgroundColorDialog.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/EditPartFactory.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/AbstractObjectModel.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/PropertyChangeEvent.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/GraphicalViewer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/GraphicalEditor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/xmlsax.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/xmlw3cdom.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/XMLSerializer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/XMLDeserializer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/EditPolicy.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Command.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandStack.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandStackEvent.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandStackEventListener.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandAdd.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandDelete.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandMove.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandMoveLine.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandMovePort.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandResize.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandSetText.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandSetColor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandSetBackgroundColor.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandConnect.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/CommandReconnect.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Locator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/ConnectionLocator.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/XMLSerializer.js">
+		</SCRIPT>
+		<SCRIPT src="lib/draw2d/normal/Connection.js">
+		</SCRIPT>
+-->
+
+
+		<script type="text/javascript" src="lib/ext/adapter/ext/ext-base.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/ext-all-debug.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/ux/js/Ext.ux.grid.CellActions.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/FileUploadField.js">
+		</script>
+		<script type="text/javascript" src="lib/ext/ux/RowExpander.js">
+		</script>
+
+		
+		<!--Start include UWM-->
+		<script type="text/javascript" src="js/uwm/Uwm.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/Constants.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/Util.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/Session.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/Config.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/Dict.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/persistency/Persistency.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/persistency/Json.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/persistency/ActionSet.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/event/EventBroker.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/ui/Login.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/Perspective.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/EastPanel.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/AbstractWorkbench.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/Workbench.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/InfoMask.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/HelpViewer.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/Download.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/DropDown.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/ExistingContentContainer.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/History.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/ui/HistoryProxy.class.js">
+		</script>
+		
+
+		<script type="text/javascript" src="js/uwm/tabadmin/GridProxy.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/tabadmin/EnumTab.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/tabadmin/ImportPanel.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/tabadmin/Workbench.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/property/PropertyContainer.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/TextField.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/NumberField.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/PasswordField.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/TextArea.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/InlineComboBox.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/HtmlEditor.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/ComboBoxProxy.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/ComboBox.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/StaticComboBox.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/Checkbox.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/Radio.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/DateField.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/PropertyForm.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/property/InlineComboBoxProxy.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/model/ModelNodeClassContainer.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/ModelContainer.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/ModelNodeClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/ModelClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/RelationClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/ModelNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/ModelObject.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/Relation.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/RelationEndClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/TechnicalObject.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/TechnicalObjectClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/ClassObjectClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/ClassObject.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/AttributeObject.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/OperationObject.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/model/builtin/ModelClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/builtin/Model.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/builtin/PackageClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/model/builtin/Package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/graphics/figure/BaseFigure.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/RectangleFigure.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/ComplexFigure.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/LabelBelowFigure.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/ImageFigure.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/LabelCenterFigure.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/ImageLabelCenterFigure.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/ClassFigure.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/AbstractClassPart.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/Attribute.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/figure/Operation.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/connection/UwmPortGraphics.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/connection/UwmPort.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/connection/MidpointLocator.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/connection/ArrowDecorator.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/connection/ClosedArrowDecorator.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/connection/OpenDiamondDecorator.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/connection/FilledDiamondDecorator.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/graphics/connection/BaseConnection.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/diagram/DiagramTabPanel.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/DiagramContainer.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/DiagramTab.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/DropZone.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/SelectionListener.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/WorkflowEventListener.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/autolayout/autolayout.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/UwmWorkflow.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/DiagramBase.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/AbstractDiagramClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/AbstractDiagram.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/DiagramClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/Diagram.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/FigureClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/Figure.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/diagram/ActivitySet.class.js">
+		</script>
+		
+		<script type="text/javascript" src="js/uwm/diagram/ActivitySetClass.class.js">
+		</script>
+		
+
+		<script type="text/javascript" src="js/uwm/objecttree/DragZone.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/objecttree/ObjectTree.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/objecttree/Node.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/objecttree/ObjectNode.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/modeltree/Loader.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/ModelTree.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/ModelNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/PackageNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/AbstractDiagramNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/DiagramNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/Node.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/ActivitySetNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/UseCaseNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/UseCaseCoreNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/modeltree/ProcessNode.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/hierarchytree/Loader.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/hierarchytree/HierarchyTree.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/hierarchytree/Node.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/hierarchytree/ConnectionNode.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/objectgrid/ObjectGridContainer.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/objectgrid/ObjectGrid.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/uwm/newobjects/DragZone.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/newobjects/NewObjectsGrid.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/newobjects/Accordion.class.js">
+		</script>
+		
+		<!--End include UWM-->
+		
+		<!--  
+		<script type="text/javascript" src="js/uwm/treeadmin/NewModelObjectNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/ModelClassNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/ModelObjectNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/ModelObjectTreeLoader.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/ModelObjectTree.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/NewRelationNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/RelationNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/RelationTreeLoader.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/ModelObjectPanel.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/ModelObjectContainer.class.js">
+		</script>
+		<script type="text/javascript" src="js/uwm/treeadmin/Workbench.class.js">
+		</script>
+-->
+
+		
+		<!--Start include CWM-->
+		<script type="text/javascript" src="js/cwm/relations/NMFeatureRequirementsClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMFeatureRequirements.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMUCActorClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMUCActor.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMActivityActivityDecisionClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMActivityActivityDecision.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMActivityChiNodeClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMActivityChiNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMChiNodeChiNodeClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMChiNodeChiNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMChiControllerChiControllerClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NMChiControllerChiController.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/SourceEndClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/TargetEndClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NodeSourceEndClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/NodeTargetEndClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/ChiControllerSourceClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/relations/ChiControllerTargetClass.class.js">
+		</script>
+		
+		<script type="text/javascript" src="js/cwm/ChiFeatureClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiFeature.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiGoalClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiGoal.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiIssueClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiIssue.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiRequirementClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiRequirement.class.js">		
+		</script>
+		
+		<script type="text/javascript" src="js/cwm/ChiBusinessUseCaseClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessUseCase.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessUseCaseCoreClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessUseCaseCore.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessProcessClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessProcess.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessPartnerClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessPartner.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessPartnerActiveClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessPartnerActive.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessPartnerPassiveClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiBusinessPartnerPassive.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiWorkerExternalClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiWorkerExternal.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiWorkerInternalClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiWorkerInternal.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiWorkerClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiWorker.class.js">		
+		</script>
+
+		<script type="text/javascript" src="js/cwm/ActivityClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/Activity.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivityDecisionClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivityDecision.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivityFinalClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivityFinal.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivityInitialClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivityInitial.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivityReceiveClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivityReceive.class.js">		
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivitySendClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ActivitySend.class.js">		
+		</script>
+
+		<script type="text/javascript" src="js/cwm/ChiFeatureStatusClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiFeatureStatus.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiRequirementTypeClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiRequirementType.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiRequirementStatusClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiRequirementStatus.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiAuthorsClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiAuthors.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiGoalTypeClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiGoalType.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/RelationMultiplicityClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/RelationMultiplicity.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/InputTypeClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/InputType.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/RelationTypeClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/RelationType.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/DisplayTypeClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/DisplayType.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/cwm/ChiControllerClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiController.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiNodeClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiNode.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiValueClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiValue.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiViewClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/ChiView.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/OperationClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/Operation.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/cwm/RoleRDBClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/RoleRDB.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/UserRDBClass.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwm/UserRDB.class.js">
+		</script>
+		<!--End include CWM-->
+		
+		
+
+		<script type="text/javascript">
+			Ext.onReady(function(){
+				Ext.BLANK_IMAGE_URL = "img/s.gif";
+				Ext.QuickTips.init();
+				uwm.Uwm.getInstance().startApplication();
+			});
+		</script>
+	</head>
+	<body>
+<!-- 
+		<img src="../application/images/Chronos_webModeller3.jpg" width="1229" height="976" border="0" alt="" usemap="#Chronos_webModeller3_Map" style="position: absolute; top: 0px; left: 0px;, z-index: -10000;" />
+		<map name="Chronos_webModeller3_Map">
+			<area shape="rect" alt="olympos project" coords="734,933,1188,947" href="http://sourceforge.net/projects/olympos/" target="_blank">
+		</map>
+ -->
+	</body>
+</html>
