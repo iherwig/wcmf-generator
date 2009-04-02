@@ -83,6 +83,7 @@ uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
 			        }
 			    }, {
 			        text :'Steckbriefe Funktionen',
+					disabled : true , 
 			        handler : function(item, e) {
 				        new uwm.ui.Download( {
 				            title :uwm.Dict.translate('Exporting Word Document ...'),
