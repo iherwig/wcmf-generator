@@ -4,9 +4,9 @@
 	<property name="templateName" value="standard" />
 	<property name="exportFormat" value="doc" />
 
-	<property file="${basePath}/workflow/cwm2word.default.properties" />
+	<property file="${basePath}/cartridge/DocumentGeneration/workflow/cwm2word.default.properties" />
 
-	<property name="propertyFile" value="${basePath}/workflow/cwm2word.properties" />
+	<property name="propertyFile" value="${basePath}/cartridge/DocumentGeneration/workflow/cwm2word.properties" />
 	<property file="${propertyFile}" />
 
 	<property file="${basePath}/cartridge/DocumentGeneration/template/${templateName}/static.properties" />

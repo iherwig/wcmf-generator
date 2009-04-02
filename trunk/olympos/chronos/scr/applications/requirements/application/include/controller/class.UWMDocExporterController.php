@@ -87,7 +87,7 @@ class UWMDocExporterController extends Controller
 	
 		$this->check("start generator");
 	
-		$runCfg = OawUtil::runOaw($propertyPath, 'workflow/cwm2word.oaw');
+		$runCfg = OawUtil::runOaw($propertyPath, 'cartridge/DocumentGeneration/workflow/cwm2word.oaw');
 	
 		$this->check('Generator finished');
 	

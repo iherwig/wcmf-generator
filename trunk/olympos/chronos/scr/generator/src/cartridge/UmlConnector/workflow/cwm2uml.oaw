@@ -1,7 +1,7 @@
 <workflow>
 	<property name="basePath" value="src" />
 
-	<property name="propertyFile" value="${basePath}/workflow/cwm2uml.properties" />
+	<property name="propertyFile" value="${basePath}/cartridge/UmlConnector/workflow/cwm2uml.properties" />
 	<property file="${propertyFile}" />
 
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
