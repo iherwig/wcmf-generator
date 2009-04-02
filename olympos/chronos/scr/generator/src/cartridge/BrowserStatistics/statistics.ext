@@ -69,20 +69,24 @@ cached List[Chronos::ChiBusinessUseCase] getBusinessUseCasesWithoutActor(uml::Mo
 	this.getAllBusinessUseCases().select(e|e.getActors().size == 0)
 ;
 
-int calculateTrafficLight(Real this):
-	(this < 0.2) ?
-		1
+String calculateTrafficLight(Real this):
+	(this == -1) ?
+		"null"
 	: (
-		(this < 0.4) ?
-			2
+		(this < 0.2) ?
+			1
 		: (
-			(this < 0.6) ?
-				3
+			(this < 0.4) ?
+				2
 			: (
-				(this < 0.8) ?
-					4
-				:
-					5
+				(this < 0.6) ?
+					3
+				: (
+					(this < 0.8) ?
+						4
+					:
+						5
+				)
 			)
 		)
 	)
