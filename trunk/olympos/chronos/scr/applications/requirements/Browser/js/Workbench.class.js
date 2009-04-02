@@ -55,7 +55,7 @@ Workbench = function() {
 	this.piechartPanel = new Ext.Panel( {
 	    
 	    layout : 'fit',
-	    html : '<iframe style="height: 100%;width:100%;" src="lib/ofc/piechart.php"/>'
+	    html : '<iframe class="flashDoc" src="lib/ofc/piechart.php"/>'
 	});
 	
 	/**
@@ -64,14 +64,14 @@ Workbench = function() {
 	this.barchartPanel = new Ext.Panel( {
 	    
 	    layout : 'fit',
-	    html : '<iframe style="height: 100%;width:100%;" src="lib/ofc/barchart.php"/>'
+	    html : '<iframe class="flashDoc" src="lib/ofc/barchart.php"/>'
 	});
 	
 	/**
 	 * Panel containing either the pie chart or an empty panel.
 	 */
 	this.piechartContainer = new Ext.Panel( {
-	    region : 'center',
+		columnWidth: 0.5,
 	    layout : 'fit',
 	    items : this.piechartPanelEmpty
 	});
@@ -80,8 +80,7 @@ Workbench = function() {
 	 * Panel containing either the bar chart or an empty panel.
 	 */
 	this.barchartContainer = new Ext.Panel( {
-	    region : 'east',
-	    width : 550,
+		columnWidth: 0.5,
 	    layout : 'fit',
 	    items : this.barchartPanelEmpty
 	});
@@ -92,7 +91,7 @@ Workbench = function() {
 	this.diagramPanel = new Ext.Panel( {
 	    region : 'north',
 	    height : 250,
-	    layout : 'border',
+	    layout : 'column',
 	    items : [ this.piechartContainer, this.barchartContainer ]
 	});
 	
@@ -162,6 +161,9 @@ Workbench = function() {
 	        items : [ this.diagramPanel, this.structureTabPanel ]
 	    } ]
 	}));
+		
+	this.on("render", this.adjustPanelSize());
+	this.on("resize", this.adjustPanelSize());
 	
 	this.initWorkbench();
 }
@@ -169,6 +171,13 @@ Ext.extend(Workbench, Ext.Viewport);
 
 Workbench.prototype.initWorkbench = function() {
 	Ext.QuickTips.init();
+}
+
+Workbench.prototype.adjustPanelSize = function() {
+	var height = this.diagramPanel.getSize().height;
+	
+	this.piechartContainer.setHeight(height);
+	this.barchartContainer.setHeight(height);
 }
 
 /**
