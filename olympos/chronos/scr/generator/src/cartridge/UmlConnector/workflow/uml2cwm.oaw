@@ -1,7 +1,7 @@
 <workflow>
 	<property name="basePath" value="src" />
 
-	<property name="propertyFile" value="${basePath}/workflow/uml2cwm.properties" />
+	<property name="propertyFile" value="${basePath}/cartridge/UmlConnector/workflow/uml2cwm.properties" />
 	<property file="${propertyFile}" />
 
 	<bean id="cwm" class="org.openarchitectureware.xsd.XSDMetaModel">

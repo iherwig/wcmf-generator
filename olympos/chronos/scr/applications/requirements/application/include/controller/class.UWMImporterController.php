@@ -116,7 +116,7 @@ class UWMImporterController extends Controller
 	
 		$this->check("start generator");
 	
-		$runCfg = OawUtil::runOaw($this->propertyFilePath, 'workflow/uml2cwm.oaw');
+		$runCfg = OawUtil::runOaw($this->propertyFilePath, 'cartridge/UmlConnector/workflow/uml2cwm.oaw');
 	
 		$this->check('Generator finished');
 	

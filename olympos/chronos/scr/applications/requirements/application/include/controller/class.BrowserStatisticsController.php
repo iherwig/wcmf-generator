@@ -59,7 +59,7 @@ class BrowserStatisticsController extends Controller
 	
 		$this->check("start generator");
 	
-		$runCfg = OawUtil::runOaw($propertyPath, 'workflow/browserStatistics.oaw');
+		$runCfg = OawUtil::runOaw($propertyPath, 'cartridge/BrowserStatistics/workflow/browserStatistics.oaw');
 	
 		$this->check('Generator finished');
 	
