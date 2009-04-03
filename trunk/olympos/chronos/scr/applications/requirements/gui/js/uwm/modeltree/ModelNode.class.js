@@ -86,7 +86,11 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 					
 			        }
 			    } ]
-		    }
+		    },
+			handler : function(item, e) {
+					new uwm.ui.ExportAssistent(self);
+			}
+			
 		} ]
 	});
 	
