@@ -27,7 +27,7 @@ cwb.StatisticsOverviewProxy.prototype.load = function(params, reader, callback, 
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
-		uwm.persistency.Persistency.getInstance().loadStatisticsOverview(arg.modelOid, function(options, data) {
+		uwm.persistency.Persistency.getInstance().loadStatisticsOverview(arg.modelOid, 'statistics', function(options, data) {
 			self.loadResponse(options, data, callback, scope, arg);
 		}, function(options, data, errorMsg) {
 			self.loadFailed(options, data, errorMsg, callback, scope, arg)

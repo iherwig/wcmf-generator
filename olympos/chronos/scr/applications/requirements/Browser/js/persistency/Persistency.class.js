@@ -103,8 +103,11 @@ uwm.persistency.Persistency.prototype.log = function(logtype, msg, successHandle
 uwm.persistency.Persistency.prototype.executeActionSet = function(actionSet) {
 }
 
-uwm.persistency.Persistency.prototype.loadStatisticsOverview = function(modelOid, successHandler, errorHandler) {
+uwm.persistency.Persistency.prototype.loadStatisticsOverview = function(modelOid, template, successHandler, errorHandler) {
 }
 
 uwm.persistency.Persistency.prototype.displayByAlias = function(aliasList, successHandler, errorHandler) {
+}
+
+uwm.persistency.Persistency.prototype.generateUml = function(modelOid, successHandler, errorHandler) {
 }

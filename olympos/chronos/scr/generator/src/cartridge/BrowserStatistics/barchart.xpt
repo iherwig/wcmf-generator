@@ -1,0 +1,27 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION org::openarchitectureware::uml2::profile::profiling»
+
+«EXTENSION cartridge::BrowserStatistics::statistics»
+
+«DEFINE file FOR uml::Model»
+«FILE "browser.dat"»
+<?php
+$generatedData = array(
+	«EXPAND rowTemplate("Goal", this.getAchievedGoals(), this.getNonAchievedGoals())»,
+	«EXPAND rowTemplate("Requirement", this.getAllRequirements(), this.getRequirementsWithoutParent())»,
+	«EXPAND rowTemplate("Feature", this.getAllFeatures(), this.getFeaturesWithoutParent())»,
+	«EXPAND rowTemplate("Issue", this.getAllIssues(), this.getIssuesWithoutParent())»,
+	«EXPAND rowTemplate("BusinessUseCase", this.getAllBusinessUseCases(), this.getBusinessUseCasesWithoutActor())» 
+);
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE rowTemplate(String label, List conform, List nonConform) FOR uml::Model»
+	array (
+		'label' => '«label»',
+		'conform' => «conform.size»,
+		'nonConform' => «nonConform.size»
+	)
+«ENDDEFINE»

@@ -18,6 +18,9 @@ class UwmUtil {
 	const ENCODING = "UTF-8";
 	const STANDALONE = "yes";
 
+	const INI_SECTION = 'generator';
+	const INI_UML_FILE_STORAGE = 'umlFileStorage'; 
+
 	private static $dom;
 	private static $persistenceFacade;
 
@@ -354,6 +357,24 @@ class UwmUtil {
 		return $className;
 	}
 
+	public static function prepareUmlFile($oid) {
+		$result = null;
+		
+	    $parser = InifileParser::getInstance();
+	    if (($params = $parser->getSection(self::INI_SECTION)) === false) {
+			$logger = LoggerManager::getLogger('GenerateUmlController');
+
+			$logger->error($parser->getErrorMsg(), __FILE__, __LINE__);
+		} else {
+			$dirName = $params[self::INI_UML_FILE_STORAGE];
+			$fileName = str_replace(':', '-', $oid) . '.uml';
+			$fullPath = "$dirName/$fileName";
+			
+			$result = $fullPath;
+		}
+		
+		return $result;
+	}	
 }
 
 ?>

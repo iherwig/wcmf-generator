@@ -6,7 +6,7 @@
 «EXTENSION cartridge::BrowserStatistics::statistics»
 
 «DEFINE file FOR uml::Model»
-«FILE "browserStatistics.json"»
+«FILE "browser.dat"»
 [
 	«EXPAND rowTemplate("allGoals", "Goals", -1) FOR this.getAllGoals()», 
 	«EXPAND rowTemplate("achievedGoals", "&nbsp;&nbsp;Achieved Goals", (E() + this.getAchievedGoals().size) / this.getAllGoals().size) FOR this.getAchievedGoals()»,

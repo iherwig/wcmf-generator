@@ -1,11 +1,15 @@
 <workflow>
 	<property name="basePath" value="src" />
 	<property name="workingDir" value="${basePath}/../example-data/statistics" />
+	<property name="umlFile" value="${basePath}/../example-data/uml-generated.uml" />
+	<property name="template" value="json" />
 
 	<property name="propertyFile" value="${basePath}/cartridge/BrowserStatistics/workflow/browserStatistics.properties" />
 	<property file="${propertyFile}" />
 
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+<!--
 	<component class="org.openarchitectureware.xsd.XMLReader">
 		<modelSlot value="uwmmodel" />
 		<uri value="${workingDir}/cwm-source.xml" />
@@ -31,29 +35,28 @@
 		<outputSlot value="uml2model" />
 		<globalVarDef name="basePath" value="'${basePath}'" />
 	</component>
+-->
 
-<!--
 	<component class="oaw.emf.XmiReader">
-		<modelFile value="example-data/uml-generated.uml"/>
+		<modelFile value="${umlFile}"/>
 		<outputSlot value="uml2model"/>
 	</component>
--->
 
 	<component class="oaw.xpand2.Generator" skipOnErrors="true">
 		<fileEncoding value="utf-8"/>
 		
-<!--
 		<metaModel id="uml"
 			class="oaw.uml2.UML2MetaModel" />
 		<metaModel id="Chronos" class="oaw.uml2.profile.ProfileMetaModel">
 			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
 		</metaModel>
--->
 
+<!--
 		<metaModel idRef="uml" />
 		<metaModel idRef="Chronos" />
+-->
 		
-		<expand value="cartridge::BrowserStatistics::json::file FOR uml2model"/>
+		<expand value="cartridge::BrowserStatistics::${template}::file FOR uml2model"/>
 		
 		<outlet path="${workingDir}">
 		</outlet>

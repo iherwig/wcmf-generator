@@ -125,5 +125,11 @@ class OawUtil {
 		
 		return $result;
 	}
+
+	public static function createTempFile($path) {
+		touch($path);
+		chmod($path, 0777);
+	
+		return $path;
+	}
 }
-?>
