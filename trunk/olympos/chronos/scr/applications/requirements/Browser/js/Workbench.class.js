@@ -17,8 +17,14 @@ Workbench = function() {
 	var self = this;
 	
 	this.selectModelBox = new Ext.form.ComboBox( {
-	    store : ObjectContainer.getInstance().getModels()['name'],
+	    store : new Ext.data.SimpleStore( {
+	        fields : [ "oid", "name" ],
+	        data : ObjectContainer.getInstance().getModels()
+	    }),
+	    displayField : "name",
+	    valueField : "oid",
 	    editable : false,
+	    mode : "local",
 	    forceSelection : true,
 	    triggerAction : 'all',
 	    emptyText : uwm.Dict.translate('Select a model...'),
@@ -64,7 +70,7 @@ Workbench = function() {
 	this.barchartPanel = new Ext.Panel( {
 	    
 	    layout : 'fit',
-	    html : '<iframe class="flashDoc" src="lib/ofc/barchart.php"/>'
+	    html : '<iframe class="flashDoc" src="chart/barchart.php"/>'
 	});
 	
 	/**
@@ -218,17 +224,20 @@ Workbench.prototype.addInformationTab = function(id, store, columnList) {
  * Starts loading actions.
  */
 Workbench.prototype.loadModel = function() {
-	var container = ObjectContainer.getInstance();
-	container.selectedModelName = this.selectModelBox.getValue();
+	var modelOid = this.selectModelBox.getValue();
 	
-	if (container.setModelOid()) {
+	var container = ObjectContainer.getInstance();
+
+	if (container.setModelOid(modelOid)) {
 		this.showMask();
 		this.structureTabPanel.activate(0);
-		container.loadModel(container.selectedModel);
+
+		uwm.persistency.Persistency.getInstance().generateUml(modelOid, function() {
+			container.loadModel(modelOid);
+		});
 	} else {
 		Ext.Msg.alert(uwm.Dict.translate("Error"), uwm.Dict.translate("Please select a model."));
 	}
-	
 }
 
 Workbench.prototype.showMask = function() {

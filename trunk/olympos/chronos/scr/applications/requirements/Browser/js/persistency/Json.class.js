@@ -361,17 +361,25 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	});
 }
 
-uwm.persistency.Json.prototype.loadStatisticsOverview = function(modelOid, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.loadStatisticsOverview = function(modelOid, template, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "loadStatisticsOverview",
-		modelOid: modelOid
+		modelOid: modelOid,
+		template: template
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Persistency.prototype.displayByAlias = function(aliasList, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.displayByAlias = function(aliasList, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "displayByAlias",
 		aliasList: this.array2CommaList(aliasList),
 		translateValues: true
+	}, successHandler, errorHandler);
+}
+
+uwm.persistency.Json.prototype.generateUml = function(modelOid, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "generateUml",
+		modelOid: modelOid,
 	}, successHandler, errorHandler);
 }
