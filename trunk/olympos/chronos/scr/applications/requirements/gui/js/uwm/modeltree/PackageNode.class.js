@@ -96,6 +96,9 @@ uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
 						}).show();
 					}
 				}]
+			},
+			handler : function(item, e) {
+					new uwm.ui.ExportAssistent(self);
 			}
 		}]
 	});

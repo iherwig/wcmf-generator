@@ -20,13 +20,49 @@ Ext.namespace("uwm.ui");
  */
 uwm.ui.ExportAssistent = function() {
 
-	uwm.ui.ExportAssistent.superclass.constructor.call(this, Ext.apply(this, this.getWindowLayout(this.setSelMode(this.getGrid(this.getStore()), this.getTemplate()), this.getDetailPanelItem())));
+	var radioFormItem = this.getRadioFormItem();
+
+	uwm.ui.ExportAssistent.superclass.constructor.call(this, Ext.apply(this, this.getWindowLayout(this.setSelMode(this.getGrid(this.getStore()), this.getTemplate()), this.getDetailPanelItem(), radioFormItem )));
 	
-	this.addButtons();
+	this.addButtons(radioFormItem);
 	this.setVisible(true);
 	
 }
 Ext.extend(uwm.ui.ExportAssistent, Ext.Window);
+
+uwm.ui.ExportAssistent.prototype.getRadioFormItem = function(){
+	
+
+//return  new Ext.form.RadioGroup({
+        
+	return {
+                    xtype:'fieldset',
+                    title: ' Export as : ',
+//					id: 'radioGroup',
+					autoHeight: true,
+//					width: 280,
+					width: 300,
+                    defaultType: 'radio',  // each item will be a radio button
+                    value:'leer',
+                    items: [{
+						labelSeparator: '', checked: true,
+                        boxLabel: 'Microsoft Word',
+                        inputValue: 'MicrosoftWord',
+						name: 'docformat'
+                    },{
+						labelSeparator: '',
+                        boxLabel: 'Open Office Writer',
+                        inputValue: 'OpenOfficeWriter',
+						name: 'docformat'
+                    },{
+						labelSeparator: '',
+                        boxLabel: 'PDF',
+                        inputValue: 'PDF',
+						name: 'docformat'
+                    }]
+                }
+//				)
+}
 
 uwm.ui.ExportAssistent.prototype.getTemplate = function() {
 
@@ -43,7 +79,7 @@ uwm.ui.ExportAssistent.prototype.setSelMode = function(grid, Tpl) {
 	return grid;
 }
 
-uwm.ui.ExportAssistent.prototype.getWindowLayout = function(grid, detailPanelItem) {
+uwm.ui.ExportAssistent.prototype.getWindowLayout = function(grid, detailPanelItem, radioFormItem) {
 
 	return {
 		title: uwm.Dict.translate('Export Assistant'),
@@ -51,7 +87,7 @@ uwm.ui.ExportAssistent.prototype.getWindowLayout = function(grid, detailPanelIte
 		region: 'center',
 		height: 330,
 		width: 550,
-		items: [grid, detailPanelItem]
+		items: [grid, detailPanelItem, radioFormItem ]
 	}
 	
 }
@@ -78,15 +114,15 @@ uwm.ui.ExportAssistent.prototype.getStore = function() {
 
 	return new Ext.data.SimpleStore({
 		data: [{
-			technName: 'test',
+			technName: 'test1',
 			templateName: 'testest1',
 			description: 'testestest1'
 		}, {
-			technName: 'test',
+			technName: 'test2',
 			templateName: 'testest2',
 			description: 'testestest2'
 		}, {
-			technName: 'test',
+			technName: 'test3',
 			templateName: 'testest3',
 			description: 'testestest3'
 		}],
@@ -131,13 +167,18 @@ uwm.ui.ExportAssistent.prototype.getGrid = function(store) {
 	
 }
 
-uwm.ui.ExportAssistent.prototype.addButtons = function() {
+uwm.ui.ExportAssistent.prototype.addButtons = function(radioFormItem) {
 
 	this.addButton(new Ext.Button({
 		window: this,
 		text: uwm.Dict.translate('Export'),
-		handler: function() {
-			alert('function under construction');
+		handler: function(radioFormItem) {
+			alert('function under construction \n ' 		
+			//+ radioFormItem.getValue()
+			
+			+ radioFormItem.items
+			
+			);
 		}
 	}));
 	this.addButton(new Ext.Button({
