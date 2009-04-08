@@ -8,7 +8,7 @@
 «DEFINE file FOR uml::Model»
 «FILE "browser.dat"»
 <?php
-$generatedData = array(
+$barchartData = array(
 	«EXPAND rowTemplate("Goal", this.getAchievedGoals(), this.getNonAchievedGoals())»,
 	«EXPAND rowTemplate("Requirement", this.getAllRequirements(), this.getRequirementsWithoutParent())»,
 	«EXPAND rowTemplate("Feature", this.getAllFeatures(), this.getFeaturesWithoutParent())»,

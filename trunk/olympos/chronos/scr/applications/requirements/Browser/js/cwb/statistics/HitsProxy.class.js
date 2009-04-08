@@ -9,6 +9,7 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
+Ext.namespace("cwb.statistics");
 
 /**
  * @class Routes the InfoGrid requests through persistency layer.
@@ -18,8 +19,8 @@
  *            objectList List of objects for which the data must be loaded.
  */
 
-InfoGridProxy = function(id, objectList) {
-	InfoGridProxy.superclass.constructor.call(this, Ext.apply(this, {
+cwb.statistics.HitsProxy = function(id, objectList) {
+	cwb.statistics.HitsProxy.superclass.constructor.call(this, Ext.apply(this, {
 	    record : [],
 	    columns : [],
 	    id : id,
@@ -28,9 +29,9 @@ InfoGridProxy = function(id, objectList) {
 	}));
 }
 
-Ext.extend(InfoGridProxy, Ext.data.DataProxy);
+Ext.extend(cwb.statistics.HitsProxy, Ext.data.DataProxy);
 
-InfoGridProxy.prototype.load = function(params, reader, callback, scope, arg) {
+cwb.statistics.HitsProxy.prototype.load = function(params, reader, callback, scope, arg) {
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		uwm.persistency.Persistency.getInstance().displayByAlias(this.objectList, function(options, data) {
@@ -43,7 +44,7 @@ InfoGridProxy.prototype.load = function(params, reader, callback, scope, arg) {
 	}
 }
 
-InfoGridProxy.prototype.loadResponse = function(options, data, callback, scope, arg) {
+cwb.statistics.HitsProxy.prototype.loadResponse = function(options, data, callback, scope, arg) {
 	
 	for ( var currIndex in data.list) {
 		var currNode = data.list[currIndex];
@@ -85,7 +86,7 @@ InfoGridProxy.prototype.loadResponse = function(options, data, callback, scope, 
 	Workbench.getInstance().addInformationTab(this.id, this.store, this.getColumns());
 }
 
-InfoGridProxy.prototype.loadFailed = function(options, data, errorMsg, callback, scope, arg) {
+cwb.statistics.HitsProxy.prototype.loadFailed = function(options, data, errorMsg, callback, scope, arg) {
 	this.fireEvent("loadexception", this, options, data);
 	callback.call(scope, null, arg, false);
 }
@@ -93,7 +94,7 @@ InfoGridProxy.prototype.loadFailed = function(options, data, errorMsg, callback,
 /**
  * Creates a column list from the incoming property data.
  */
-InfoGridProxy.prototype.getColumns = function() {
+cwb.statistics.HitsProxy.prototype.getColumns = function() {
 	var result = [ {
 	    header : 'Name',
 	    width : 31,

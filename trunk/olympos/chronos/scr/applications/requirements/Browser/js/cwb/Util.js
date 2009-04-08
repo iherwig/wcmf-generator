@@ -9,7 +9,7 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("uwm.Util");
+Ext.namespace("cwb.Util");
 
 /**
  * Extracts the UWM Class Name out of an OID.
@@ -18,7 +18,7 @@ Ext.namespace("uwm.Util");
  *            oid The OID to extract UWM Class Name from.
  * @return {String} The UWM Class Name of the OID.
  */
-uwm.Util.getUwmClassNameFromOid = function(oid) {
+cwb.Util.getUwmClassNameFromOid = function(oid) {
 	var result = oid.match(/^[^:]+/)[0];
 		
 	if (oid.charAt(0) == "{") {
@@ -35,7 +35,7 @@ uwm.Util.getUwmClassNameFromOid = function(oid) {
  *            oid The OID to extract numeric part from.
  * @return {int} The numeric part of the OID
  */
-uwm.Util.getNumericFromOid = function(oid) {
+cwb.Util.getNumericFromOid = function(oid) {
 	return oid.match(/:([0-9]+)/)[1];
 }
 
@@ -46,10 +46,10 @@ uwm.Util.getNumericFromOid = function(oid) {
  *            title Title of the message.
  * @param {String}
  *            message The message body. May contain HTML tags.
- * @param {uwm.Util.messageType}
+ * @param {cwb.Util.messageType}
  *            messageType The type of the message.
  */
-uwm.Util.showMessage = function(title, message, messageType) {
+cwb.Util.showMessage = function(title, message, messageType) {
 	var messageContainer = Ext.get("messageContainer");
 	if (!messageContainer) {
 		messageContainer = Ext.DomHelper.insertFirst(document.body, {
@@ -80,7 +80,7 @@ uwm.Util.showMessage = function(title, message, messageType) {
 /**
  * List of message types.
  */
-uwm.Util.messageType = {
+cwb.Util.messageType = {
 	INFO :1,
 	WARNING :2,
 	ERROR :3
@@ -92,7 +92,7 @@ uwm.Util.messageType = {
  * @param {DOMElement}
  *            elem The DOM element to disable selection on.
  */
-uwm.Util.setElementUnselectable = function(elem) {
+cwb.Util.setElementUnselectable = function(elem) {
 	if (elem) {
 		elem.style.MozUserSelect = "none";
 		elem.style.KhtmlUserSelect = "none";

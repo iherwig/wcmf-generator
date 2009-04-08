@@ -9,22 +9,22 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("uwm.persistency");
+Ext.namespace("cwb.persistency");
 
 /**
  * @class Implements persistency against a wCMF backend via JSON calls.
  * 
- * @extends uwm.persistency.Persistency.
+ * @extends cwb.persistency.Persistency.
  * @constructor
  */
-uwm.persistency.Json = function() {
-	this.sid = uwm.Session.getInstance().getSid();
-	this.jsonUrl = uwm.Session.getInstance().getJsonUrl();
+cwb.persistency.Json = function() {
+	this.sid = cwb.Session.getInstance().getSid();
+	this.jsonUrl = cwb.Session.getInstance().getJsonUrl();
 }
 
-uwm.persistency.Json.prototype = new uwm.persistency.Persistency;
+cwb.persistency.Json.prototype = new cwb.persistency.Persistency;
 
-uwm.persistency.Json.prototype.jsonRequest = function(params, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.jsonRequest = function(params, successHandler, errorHandler) {
 	params.sid = this.sid;
 	params.response_format = "JSON";
 	
@@ -51,7 +51,7 @@ uwm.persistency.Json.prototype.jsonRequest = function(params, successHandler, er
 	});
 }
 
-uwm.persistency.Json.prototype.array2CommaList = function(array) {
+cwb.persistency.Json.prototype.array2CommaList = function(array) {
 	var result = array;
 	
 	if (array instanceof Array) {
@@ -71,7 +71,7 @@ uwm.persistency.Json.prototype.array2CommaList = function(array) {
 	return result;
 }
 
-uwm.persistency.Json.prototype.doLogin = function(login, password, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.doLogin = function(login, password, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "dologin",
 		login: login,
@@ -79,27 +79,27 @@ uwm.persistency.Json.prototype.doLogin = function(login, password, successHandle
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.logout = function(successHandler, errorHandler) {
+cwb.persistency.Json.prototype.logout = function(successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "logout"
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.newObject = function(uwmClassName, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.newObject = function(uwmClassName, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "new",
 		newtype: uwmClassName
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.deleteObject = function(oid, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.deleteObject = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "delete",
 		deleteoids: this.array2CommaList(oid)
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.associate = function(parentOid, childOid, invert, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.associate = function(parentOid, childOid, invert, successHandler, errorHandler) {
 	var direction = "child";
 	
 	if (invert) {
@@ -114,7 +114,7 @@ uwm.persistency.Json.prototype.associate = function(parentOid, childOid, invert,
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.disassociate = function(parentOid, childOid, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.disassociate = function(parentOid, childOid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "disassociate",
 		oid: parentOid,
@@ -122,7 +122,7 @@ uwm.persistency.Json.prototype.disassociate = function(parentOid, childOid, succ
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.save = function(oid, values, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.save = function(oid, values, successHandler, errorHandler) {
 	var data = {
 		usr_action: "save"
 	};
@@ -136,7 +136,7 @@ uwm.persistency.Json.prototype.save = function(oid, values, successHandler, erro
 	this.jsonRequest(data, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.display = function(oid, depth, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.display = function(oid, depth, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "display",
 		oid: oid,
@@ -146,21 +146,21 @@ uwm.persistency.Json.prototype.display = function(oid, depth, successHandler, er
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.list = function(uwmClassName, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.list = function(uwmClassName, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "list",
 		type: uwmClassName
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.listbox = function(type, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.listbox = function(type, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "listbox",
 		type: type
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.autocomplete = function(query, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.autocomplete = function(query, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'autocomplete',
 		query: query
@@ -168,7 +168,7 @@ uwm.persistency.Json.prototype.autocomplete = function(query, successHandler, er
 	
 }
 
-uwm.persistency.Json.prototype.histlist = function(oid,start,limit, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.histlist = function(oid,start,limit, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'histlist',
 		oid:oid,
@@ -178,7 +178,7 @@ uwm.persistency.Json.prototype.histlist = function(oid,start,limit, successHandl
 	
 }
 
-uwm.persistency.Json.prototype.restorehistliststate = function(id, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.restorehistliststate = function(id, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'restorehistliststate',
 		ids:id
@@ -186,7 +186,7 @@ uwm.persistency.Json.prototype.restorehistliststate = function(id, successHandle
 	
 }
 
-uwm.persistency.Json.prototype.restorehistlistfields = function(ids, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.restorehistlistfields = function(ids, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'restorehistlistfields',
 		ids:ids
@@ -194,7 +194,7 @@ uwm.persistency.Json.prototype.restorehistlistfields = function(ids, successHand
 	
 }
 
-uwm.persistency.Json.prototype.loadChildren = function(oid, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.loadChildren = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		controller: "TreeViewController",
 		usr_action: "loadChildren",
@@ -202,21 +202,21 @@ uwm.persistency.Json.prototype.loadChildren = function(oid, successHandler, erro
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.lock = function(oid, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.lock = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "lock",
 		oid: oid
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.unlock = function(oid, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.unlock = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "unlock",
 		oid: oid
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.log = function(logtype, msg, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.log = function(logtype, msg, successHandler, errorHandler) {
 	var self = this;
 	
 	this.jsonRequest({
@@ -232,7 +232,7 @@ uwm.persistency.Json.prototype.log = function(logtype, msg, successHandler, erro
 	});
 }
 
-uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
+cwb.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	var data = {};
 	
 	var requests = actionSet.getRequests();
@@ -291,7 +291,7 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				var changeNode = {};
 				
 				changeNode.oid = currRequest.oid;
-				changeNode.type = uwm.Util.getUwmClassNameFromOid(currRequest.oid);
+				changeNode.type = cwb.Util.getUwmClassNameFromOid(currRequest.oid);
 				changeNode.values = {};
 				changeNode.values[1] = {};
 				
@@ -342,7 +342,7 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				break;
 				
 			default:
-				uwm.Util.showMessage("Programming Error", "Unknown action in ActionSet: " + currRequest.action, uwm.Util.messageType.ERROR);
+				cwb.Util.showMessage("Programming Error", "Unknown action in ActionSet: " + currRequest.action, cwb.Util.messageType.ERROR);
 			}
 			data[currActionName] = 	jsonRequest;
 		}
@@ -361,7 +361,7 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	});
 }
 
-uwm.persistency.Json.prototype.loadStatisticsOverview = function(modelOid, template, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.loadStatisticsOverview = function(modelOid, template, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "loadStatisticsOverview",
 		modelOid: modelOid,
@@ -369,7 +369,7 @@ uwm.persistency.Json.prototype.loadStatisticsOverview = function(modelOid, templ
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.displayByAlias = function(aliasList, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.displayByAlias = function(aliasList, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "displayByAlias",
 		aliasList: this.array2CommaList(aliasList),
@@ -377,9 +377,16 @@ uwm.persistency.Json.prototype.displayByAlias = function(aliasList, successHandl
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.generateUml = function(modelOid, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.generateUml = function(modelOid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "generateUml",
+		modelOid: modelOid,
+	}, successHandler, errorHandler);
+}
+
+cwb.persistency.Json.prototype.loadAllStatisticsOverview = function(modelOid, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "loadAllStatisticsOverview",
 		modelOid: modelOid,
 	}, successHandler, errorHandler);
 }

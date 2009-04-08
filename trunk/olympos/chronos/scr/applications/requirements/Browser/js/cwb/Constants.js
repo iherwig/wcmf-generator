@@ -6,14 +6,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
- */Ext.namespace("uwm.Constants");
+ */Ext.namespace("cwb.Constants");
 
 /**
  * Name of the ExtJS Drag&amp;Drop group for Model Objects.
  * 
  * @type String
  */
-uwm.Constants.DD_GROUP = "uwmDDGroup";
+cwb.Constants.DD_GROUP = "cwbDDGroup";
 
 /**
  * Most recent SVN revision.
@@ -22,4 +22,4 @@ uwm.Constants.DD_GROUP = "uwmDDGroup";
  *
  * @type String
  */
-uwm.Constants.SVN_REVISION ="513";
+cwb.Constants.SVN_REVISION ="513";

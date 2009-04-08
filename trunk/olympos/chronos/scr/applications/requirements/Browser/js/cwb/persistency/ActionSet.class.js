@@ -10,19 +10,19 @@
  * this entire header must remain intact.
  */
 
-Ext.namespace("uwm.persistency");
+Ext.namespace("cwb.persistency");
 
 /**
  * @class Combines several persistency calls to one backend request.
  * 
  * @constructor
  */
-uwm.persistency.ActionSet = function() {
+cwb.persistency.ActionSet = function() {
 	this.requests = {};
 	this.currentId = 0;
 }
 
-uwm.persistency.ActionSet.prototype.addLogin = function(login, password,
+cwb.persistency.ActionSet.prototype.addLogin = function(login, password,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"dologin",
@@ -34,7 +34,7 @@ uwm.persistency.ActionSet.prototype.addLogin = function(login, password,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addLogout = function(successHandler,
+cwb.persistency.ActionSet.prototype.addLogout = function(successHandler,
 		errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"dologout",
@@ -44,7 +44,7 @@ uwm.persistency.ActionSet.prototype.addLogout = function(successHandler,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addNewObject = function(uwmClassName,
+cwb.persistency.ActionSet.prototype.addNewObject = function(uwmClassName,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"new",
@@ -55,7 +55,7 @@ uwm.persistency.ActionSet.prototype.addNewObject = function(uwmClassName,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addDeleteObject = function(oid,
+cwb.persistency.ActionSet.prototype.addDeleteObject = function(oid,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"delete",
@@ -66,7 +66,7 @@ uwm.persistency.ActionSet.prototype.addDeleteObject = function(oid,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addAssociate = function(parentOid,
+cwb.persistency.ActionSet.prototype.addAssociate = function(parentOid,
 		childOid, invert, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"associate",
@@ -79,7 +79,7 @@ uwm.persistency.ActionSet.prototype.addAssociate = function(parentOid,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addDisassociate = function(parentOid,
+cwb.persistency.ActionSet.prototype.addDisassociate = function(parentOid,
 		childOid, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"disassociate",
@@ -91,7 +91,7 @@ uwm.persistency.ActionSet.prototype.addDisassociate = function(parentOid,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addSave = function(oid, values,
+cwb.persistency.ActionSet.prototype.addSave = function(oid, values,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"save",
@@ -103,7 +103,7 @@ uwm.persistency.ActionSet.prototype.addSave = function(oid, values,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
+cwb.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"display",
@@ -115,7 +115,7 @@ uwm.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addList = function(uwmClassName,
+cwb.persistency.ActionSet.prototype.addList = function(uwmClassName,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"list",
@@ -126,7 +126,7 @@ uwm.persistency.ActionSet.prototype.addList = function(uwmClassName,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addListbox = function(type, successHandler,
+cwb.persistency.ActionSet.prototype.addListbox = function(type, successHandler,
 		errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"listbox",
@@ -137,7 +137,7 @@ uwm.persistency.ActionSet.prototype.addListbox = function(type, successHandler,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addAutocomplete = function(query,
+cwb.persistency.ActionSet.prototype.addAutocomplete = function(query,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"autocomplete",
@@ -148,7 +148,7 @@ uwm.persistency.ActionSet.prototype.addAutocomplete = function(query,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addLoadChildren = function(oid,
+cwb.persistency.ActionSet.prototype.addLoadChildren = function(oid,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"loadChildren",
@@ -159,7 +159,7 @@ uwm.persistency.ActionSet.prototype.addLoadChildren = function(oid,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addLock = function(oid, successHandler,
+cwb.persistency.ActionSet.prototype.addLock = function(oid, successHandler,
 		errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"lock",
@@ -170,7 +170,7 @@ uwm.persistency.ActionSet.prototype.addLock = function(oid, successHandler,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addUnlock = function(oid, successHandler,
+cwb.persistency.ActionSet.prototype.addUnlock = function(oid, successHandler,
 		errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"unlock",
@@ -181,7 +181,7 @@ uwm.persistency.ActionSet.prototype.addUnlock = function(oid, successHandler,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addLog = function(logtype, msg,
+cwb.persistency.ActionSet.prototype.addLog = function(logtype, msg,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"log",
@@ -193,14 +193,14 @@ uwm.persistency.ActionSet.prototype.addLog = function(logtype, msg,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.commit = function(successHandler,
+cwb.persistency.ActionSet.prototype.commit = function(successHandler,
 		errorHandler) {
 	for ( var i in this.requests) {
 		var val = this.requests[i];
 
 		if (!(val instanceof Function)) {
 			if (val.errorLevel) {
-				val.errorLevel = uwm.persistency.ActionSet.DEFAULT_ERROR_LEVEL;
+				val.errorLevel = cwb.persistency.ActionSet.DEFAULT_ERROR_LEVEL;
 			}
 		}
 	}
@@ -208,25 +208,25 @@ uwm.persistency.ActionSet.prototype.commit = function(successHandler,
 	this.savedSuccessHandler = successHandler;
 	this.savedErrorHandler = errorHandler;
 
-	uwm.persistency.Persistency.getInstance().executeActionSet(this);
+	cwb.persistency.Persistency.getInstance().executeActionSet(this);
 }
 
-uwm.persistency.ActionSet.prototype.getNextId = function() {
-	var result = uwm.persistency.ActionSet.ACTION_PREFIX + this.currentId;
+cwb.persistency.ActionSet.prototype.getNextId = function() {
+	var result = cwb.persistency.ActionSet.ACTION_PREFIX + this.currentId;
 
 	this.currentId++;
 
 	return result;
 }
 
-uwm.persistency.ActionSet.prototype.getRequests = function() {
+cwb.persistency.ActionSet.prototype.getRequests = function() {
 	return this.requests;
 }
 
-uwm.persistency.ActionSet.prototype.successHandler = function(request, data) {
+cwb.persistency.ActionSet.prototype.successHandler = function(request, data) {
 	var errorLevel = null;
 
-	var persistency = uwm.persistency.Persistency.getInstance();
+	var persistency = cwb.persistency.Persistency.getInstance();
 
 	for ( var currActionName in this.requests) {
 		var currRequest = this.requests[currActionName];
@@ -245,8 +245,8 @@ uwm.persistency.ActionSet.prototype.successHandler = function(request, data) {
 				persistency.processErrorHandler(currRequest.errorHandler,
 						currRequest, currResponse, currResponse.errorMsg);
 
-				if (currRequest.errorLevel == uwm.persistency.ActionSet.errorLevels.ERROR) {
-					throw new Error(uwm.Dict
+				if (currRequest.errorLevel == cwb.persistency.ActionSet.errorLevels.ERROR) {
+					throw new Error(cwb.Dict
 							.translate("Critical Persistency Error")
 							+ ": " + currResponse.errorMsg);
 				}
@@ -259,18 +259,18 @@ uwm.persistency.ActionSet.prototype.successHandler = function(request, data) {
 	persistency.processSuccessHandler(this.savedSuccessHandler, request, data);
 }
 
-uwm.persistency.ActionSet.prototype.errorHandler = function(request, data,
+cwb.persistency.ActionSet.prototype.errorHandler = function(request, data,
 		errorMessage) {
-	uwm.persistency.Persistency.getInstance().processErrorHandler(
+	cwb.persistency.Persistency.getInstance().processErrorHandler(
 			this.savedErrorHandler, request, data, errorMessage);
 }
 
-uwm.persistency.ActionSet.errorLevels = {
+cwb.persistency.ActionSet.errorLevels = {
 	IGNORE :1,
 	WARN :2,
 	ERROR :3
 }
 
-uwm.persistency.ActionSet.DEFAULT_ERROR_LEVEL = uwm.persistency.ActionSet.errorLevels.WARN;
+cwb.persistency.ActionSet.DEFAULT_ERROR_LEVEL = cwb.persistency.ActionSet.errorLevels.WARN;
 
-uwm.persistency.ActionSet.ACTION_PREFIX = "action";
+cwb.persistency.ActionSet.ACTION_PREFIX = "action";

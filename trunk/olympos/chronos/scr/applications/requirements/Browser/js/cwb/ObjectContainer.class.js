@@ -9,13 +9,16 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
+
+Ext.namespace("cwb");
+
 /**
  * @class Loads and handles all data which comes from backend & converts it in
- *		JSON for the Jit.
+ *        JSON for the Jit.
  * 
  * @constructor
  */
-ObjectContainer = function(){
+cwb.ObjectContainer = function(){
 	/**
 	 * List of models which can be loaded.
 	 */
@@ -43,18 +46,17 @@ ObjectContainer = function(){
 
 /**
  * Loads models from persistency into this.models. Used for navigation.
- * Creates the workbench when finished.
  */
-ObjectContainer.prototype.loadModelList = function(){
+cwb.ObjectContainer.prototype.loadModelList = function(dropdown){
 	var self = this;
 	
-	uwm.persistency.Persistency.getInstance().loadChildren('root', function(options, data){
-		self.handleLoadedModelList(options, data);
+	cwb.persistency.Persistency.getInstance().loadChildren('root', function(options, data){
+		self.handleLoadedModelList(options, data, dropdown);
 	}, function(){
 	});
 }
 
-ObjectContainer.prototype.handleLoadedModelList = function(options, data){
+cwb.ObjectContainer.prototype.handleLoadedModelList = function(options, data, dropdown){
 	for (i in data.objects) {
 		if (!(data.objects[i] instanceof Function)) {
 			var recordTemplate = [
@@ -65,28 +67,26 @@ ObjectContainer.prototype.handleLoadedModelList = function(options, data){
 			this.models.push(recordTemplate);
 		}
 	}
-	Workbench.getInstance();
+
+	dropdown.store.loadData(this.models);
 }
 
-ObjectContainer.prototype.loadModel=function(oid){
-	this.modelLoaded=true;
-	this.loadDiagram(oid);
-	this.loadStructurePanel(oid, oid);
-// this.loadReport(oid);
-}
-
-ObjectContainer.prototype.loadDiagram=function(modelOid){
-	var workbench=Workbench.getInstance();
+cwb.ObjectContainer.prototype.loadModel = function(modelOid, callback){
+	this.currModelOid = modelOid;
 	
-	workbench.piechartContainer.remove(workbench.piechartPanelEmpty);
-	workbench.piechartContainer.add(workbench.piechartPanel);
-	workbench.barchartContainer.remove(workbench.barchartPanelEmpty);
-	workbench.barchartContainer.add(new Ext.Panel( {
-	    
-	    layout : 'fit',
-	    html : '<iframe class="flashDoc" src="chart/barchart.php?modelOid=' + modelOid + '"/>'
-	}));
-	workbench.diagramPanel.doLayout();
+	var self = this;
+	
+	cwb.persistency.Persistency.getInstance().loadAllStatisticsOverview(modelOid, function() {
+		self.modelUmlGenerated(callback);
+	});
+}
+
+cwb.ObjectContainer.prototype.modelUmlGenerated = function(callback) {
+	this.modelLoaded = true;
+
+	callback('generated');
+	
+	this.loadJitData(this.currModelOid, callback);
 }
 
 /**
@@ -95,7 +95,7 @@ ObjectContainer.prototype.loadDiagram=function(modelOid){
  *
  * @param {String} oid The oid of the model which is to be loaded.
  */
-ObjectContainer.prototype.loadStructurePanel = function(oid, modelOid){
+cwb.ObjectContainer.prototype.loadJitData = function(oid, callback){
 	var uwmClass = 'Model';
 	this.objectsForTreemap = null;
 	this.objectsForTreemap = [];
@@ -127,7 +127,7 @@ ObjectContainer.prototype.loadStructurePanel = function(oid, modelOid){
 		'key': 'color',
 		'value': 1
 	}];
-	this.loadObject(oid, modelOid);
+	this.loadJitObject(oid, callback);
 }
 
 /**
@@ -138,13 +138,13 @@ ObjectContainer.prototype.loadStructurePanel = function(oid, modelOid){
  *
  * @param {String} oid The oid of the object which is to be loaded.
  */
-ObjectContainer.prototype.loadObject = function(oid, modelOid){
+cwb.ObjectContainer.prototype.loadJitObject = function(oid, callback){
 	var self = this;
 	
 	this.objectsToLoad++;
 	
-	uwm.persistency.Persistency.getInstance().loadChildren(oid, function(options, data){
-		self.handleLoadedObject(options, data, oid, modelOid)
+	cwb.persistency.Persistency.getInstance().loadChildren(oid, function(options, data){
+		self.handleLoadedJitObject(options, data, oid, callback)
 	});
 }
 
@@ -154,22 +154,22 @@ ObjectContainer.prototype.loadObject = function(oid, modelOid){
  * 
  * @param {String} oid The oid of the object which is to be loaded.
  */
-ObjectContainer.prototype.loadOBJECT=function(oid){
+cwb.ObjectContainer.prototype.loadOBJECT=function(oid){
 	var self = this;
 	
 	var oid = oid;
-	uwm.persistency.Persistency.getInstance().display(oid,-1,function(options, data){
+	cwb.persistency.Persistency.getInstance().display(oid,-1,function(options, data){
 		self.handleLoadedObject(options, data, oid)
 	});
 }
 
-ObjectContainer.prototype.handleLoadedObject = function(options, data, oid, modelOid){
+cwb.ObjectContainer.prototype.handleLoadedJitObject = function(options, data, oid, callback){
 	for (var i = 0; i < data.objects.length; i++) {
 		if (!(data.objects[i] instanceof Function)) {
 			var childOid = data.objects[i].oid;
 			var arrayPosition = this.objectsForTreemap.length;
 			
-			var uwmClass = uwm.Util.getUwmClassNameFromOid(childOid);
+			var uwmClass = cwb.Util.getUwmClassNameFromOid(childOid);
 			this.objectsForTreemap[arrayPosition] = [];
 			this.objectsForTreemap[arrayPosition]['uwmClassName'] = uwmClass;
 			this.objectsForTreemap[arrayPosition]['children'] = [];
@@ -197,36 +197,18 @@ ObjectContainer.prototype.handleLoadedObject = function(options, data, oid, mode
 				'value': 1
 			}];
 			if (uwmClass == "Package") {
-				this.loadObject(childOid, modelOid);
+				this.loadJitObject(childOid, callback);
 			}
 		}
 	}
+	
 	this.objectsToLoad--;
-	if (this.objectsForSpacetree.length>8){
-		Ext.Msg.updateProgress(0.25,uwm.Dict.translate("Package weight"));
-	}
+	
 	if (this.objectsToLoad == 0) {
-		this.arrangeTreeList(this.selectedModel);
-		this.arrangeWeightList(this.selectedModel);
+		this.arrangeTreeList(this.currModelOid);
+		this.arrangeWeightList(this.currModelOid);
 		
-		Workbench.getInstance().unmaskTabPanel();
-		Ext.Msg.updateProgress(0.5,uwm.Dict.translate("Object information"))
-		
-		
-		/**
-		 * Reloads treemap window.
-		 */
-		frames[0].window.location.reload();
-		/**
-		 * Reloads frametree window if it has already been rendered.
-		 */
-		if (frames[3]) {
-			frames[3].window.location.reload();
-		}
-		
-		Ext.Msg.hide();
-
-		this.loadReport(modelOid);
+		callback('jit');
 	}
 }
 
@@ -235,7 +217,7 @@ ObjectContainer.prototype.handleLoadedObject = function(options, data, oid, mode
  *
  * @param {String} rootOid The oid of the object which is to be the root of the tree.
  */
-ObjectContainer.prototype.arrangeTreeList = function(rootOid){
+cwb.ObjectContainer.prototype.arrangeTreeList = function(rootOid){
 	var objects = this.objectsForSpacetree;
 	var arrayPosition;
 	for (var i = 0; i < objects.length; i++) {
@@ -261,7 +243,7 @@ ObjectContainer.prototype.arrangeTreeList = function(rootOid){
  *
  * @param {Object} rootOid The oid of the object which is to be the root of the tree.
  */
-ObjectContainer.prototype.arrangeWeightList = function(rootOid){
+cwb.ObjectContainer.prototype.arrangeWeightList = function(rootOid){
 	var objects = this.objectsForTreemap;
 	var arrayPosition;
 	for (var i = 0; i < objects.length; i++) {
@@ -287,7 +269,7 @@ ObjectContainer.prototype.arrangeWeightList = function(rootOid){
  * Recursively inserts content information in treemap data.
  * @param {Array} objectList A sublist of this.objectsForTreemap.
  */
-ObjectContainer.prototype.setContentData = function(objectList){
+cwb.ObjectContainer.prototype.setContentData = function(objectList){
 	var result = 0;
 	
 	if (objectList['children'].length == 0) {
@@ -308,7 +290,7 @@ ObjectContainer.prototype.setContentData = function(objectList){
 /**
  * Inserts color information in data for treemap.
  */
-ObjectContainer.prototype.setWeightColors = function(){
+cwb.ObjectContainer.prototype.setWeightColors = function(){
 	this.maxTreeContent = 0;
 	this.getMaxContent(this.objectsForTreemap);
 	
@@ -319,7 +301,7 @@ ObjectContainer.prototype.setWeightColors = function(){
  * Recursively calculates the size of the biggest package which contains only leaves.
  * @param {Array} objectList A sublist of this.objectsForTreemap.
  */
-ObjectContainer.prototype.getMaxContent = function(objectList){
+cwb.ObjectContainer.prototype.getMaxContent = function(objectList){
 	if (objectList.data[0].value == objectList.children.length) {
 		if (objectList.children.length > this.maxTreeContent && this.containsLeaves(objectList.children)) {
 			this.maxTreeContent = objectList.children.length
@@ -340,7 +322,7 @@ ObjectContainer.prototype.getMaxContent = function(objectList){
  * @return <code>true</code> if the sublist contains only leaves, <code>false</code> otherwise.
  * @type boolean
  */
-ObjectContainer.prototype.containsLeaves = function(objectList){
+cwb.ObjectContainer.prototype.containsLeaves = function(objectList){
 	var result = true;
 	for (var i = 0; i < objectList.length; i++) {
 		if (!(objectList[i] instanceof Function)) {
@@ -356,7 +338,7 @@ ObjectContainer.prototype.containsLeaves = function(objectList){
  * Recursively determines which color an object and its children have by comparing their size to the size of the biggest package.
  * @param {Array} objectList A sublist of this.objectsForTreemap.
  */
-ObjectContainer.prototype.setColor = function(objectList, parentLength){
+cwb.ObjectContainer.prototype.setColor = function(objectList, parentLength){
 	var contentLength;
 	if (objectList.children.length == 0) {
 		contentLength = parentLength / this.maxTreeContent;
@@ -398,7 +380,7 @@ ObjectContainer.prototype.setColor = function(objectList, parentLength){
  * @return The position in the array.
  * @type int
  */
-ObjectContainer.prototype.getObjectPosition = function(oid, objectList){
+cwb.ObjectContainer.prototype.getObjectPosition = function(oid, objectList){
 	for (var i = 0; i < objectList.length; i++) {
 		if (!(objectList[i] instanceof Function)) {
 			if (objectList[i].id == oid) {
@@ -408,7 +390,7 @@ ObjectContainer.prototype.getObjectPosition = function(oid, objectList){
 	}
 }
 
-ObjectContainer.prototype.getModels = function(){
+cwb.ObjectContainer.prototype.getModels = function(){
 	return this.models;
 }
 
@@ -417,7 +399,7 @@ ObjectContainer.prototype.getModels = function(){
  * @return The oid of the selected object.
  * @type String
  */
-ObjectContainer.prototype.setModelOid = function(modelOid){
+cwb.ObjectContainer.prototype.setModelOid = function(modelOid){
 	this.selectedModel = modelOid;
 
 	return true;
@@ -427,7 +409,7 @@ ObjectContainer.prototype.setModelOid = function(modelOid){
  * Should load the ObjectDataTable when backend generator for that is finished. 
  * Currently only shows dummy data.
  */
-ObjectContainer.prototype.loadReport = function(modelOid){
+cwb.ObjectContainer.prototype.loadReport = function(modelOid){
 	Workbench.getInstance().objectDataTable.reload(modelOid);
 	Workbench.getInstance().objectDataTable.getEl().unmask();
 	Workbench.getInstance().diagramPanel.getEl().unmask();
@@ -436,7 +418,7 @@ ObjectContainer.prototype.loadReport = function(modelOid){
 /**
  * Supposed to load the report data for the ObjectDataTable. Currently only shows the dummy data.
  */
-ObjectContainer.prototype.getTableData = function(){
+cwb.ObjectContainer.prototype.getTableData = function(){
 	var result;
 	if (this.modelLoaded){
 		result=[
@@ -469,10 +451,13 @@ ObjectContainer.prototype.getTableData = function(){
 	return result;
 }
 
-ObjectContainer.getInstance = function(){
-	if (!ObjectContainer.instance) {
-		ObjectContainer.instance = new ObjectContainer();
-	}
-	return ObjectContainer.instance;
+cwb.ObjectContainer.prototype.getCurrModelOid = function() {
+	return this.currModelOid;
 }
-
+ 
+cwb.ObjectContainer.getInstance = function(){
+	if (!cwb.ObjectContainer.instance) {
+		cwb.ObjectContainer.instance = new cwb.ObjectContainer();
+	}
+	return cwb.ObjectContainer.instance;
+}

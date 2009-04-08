@@ -10,32 +10,34 @@
  * entire header must remain intact.
  */
 
+Ext.namespace("cwb.statistics");
+
 /**
  * @class Displays the information belonging to a certain group of objects
  *        selected in the ObjectDataTable.
  * @extends Ext.grid.GridPanel
  */
 
-InfoGrid = function(config) {
+cwb.statistics.HitsGrid = function(config) {
 	var self = this;
 	
-	InfoGrid.superclass.constructor.call(this, Ext.apply(this, {
-	    layout : "fit",
-	    viewConfig : {
-		    forceFit : true
-	    },
-	    sm : new Ext.grid.RowSelectionModel( {
-			singleSelect : true
-		}),
-	    stripeRows : true
-	}, config));
+	cwb.statistics.HitsGrid.superclass.constructor.call(this, Ext.apply(this, {
+		layout : "fit",
+			viewConfig : {
+				forceFit : true
+			},
+			sm : new Ext.grid.RowSelectionModel( {
+				singleSelect : true
+			}),
+			stripeRows : true
+		}, config));
 	
 	Workbench.getInstance().unmaskTabPanel();
 }
 
-Ext.extend(InfoGrid, Ext.grid.GridPanel);
+Ext.extend(cwb.statistics.HitsGrid, Ext.grid.GridPanel);
 
-InfoGrid.prototype.setColumns = function(columns) {
+cwb.statistics.HitsGrid.prototype.setColumns = function(columns) {
 	for ( var i = 0; i < columns.length; i++) {
 		this.columnList.push( {
 		    header : columns[i],
