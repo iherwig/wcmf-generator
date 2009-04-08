@@ -13,8 +13,9 @@
 
 require_once (BASE.'wcmf/lib/presentation/class.Controller.php');
 require_once (BASE.'wcmf/lib/persistence/class.PersistenceFacade.php');
+require_once (BASE.'wcmf/lib/util/class.SessionData.php');
 
-require_once ('class.BrowserUtil.php');
+//require_once ('class.BrowserUtil.php');
 
 require_once ('open-flash-chart.php');
 
@@ -23,9 +24,11 @@ class BarDataController extends Controller
 	public function execute() {
 		$modelOid = $this->_request->getValue('modelOid');
 	
-		$exportFile = BrowserUtil::runGenerator($modelOid, 'barchart');
+		//$exportFile = BrowserUtil::runGenerator($modelOid, 'barchart');
 
-		include($exportFile);
+		//include($exportFile);
+		$session = &SessionData::getInstance();
+		$barchartData = $session->get('barchart'); 
 	
 		$bar_red = new bar_3d(75, 'e42217');
 		$bar_red->key('non-conform', 7);
@@ -56,7 +59,7 @@ class BarDataController extends Controller
 		$conform = array();
 		$labels = array();
 
-		foreach($generatedData as $currItem) {
+		foreach($barchartData as $currItem) {
 			$nonConform[] = $currItem['nonConform'];
 			$conform[] = $currItem['conform'];
 			$labels[] = $currItem['label'];

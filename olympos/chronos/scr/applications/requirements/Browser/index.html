@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title id="title">UML Web Browser</title>
+        <title id="title">Chronos Web Browser</title>
 		
         <link rel="shortcut icon" href="favicon.ico" />
 		
@@ -19,46 +19,54 @@
 
 		<script type="text/javascript" src="../ChronosLib/JIT/Spacetree.js" ></script>
 
-        <script type="text/javascript" src="js/Uwm.class.js">
+        <script type="text/javascript" src="js/cwb/Cwb.class.js">
         </script>
-        <script type="text/javascript" src="js/Constants.js">
+        <script type="text/javascript" src="js/cwb/Constants.js">
         </script>
-        <script type="text/javascript" src="js/Util.js">
+        <script type="text/javascript" src="js/cwb/Util.js">
         </script>
-        <script type="text/javascript" src="js/Session.class.js">
+        <script type="text/javascript" src="js/cwb/Session.class.js">
         </script>
-        <script type="text/javascript" src="js/Config.js">
+        <script type="text/javascript" src="js/cwb/Config.js">
         </script>
-        <script type="text/javascript" src="js/Dict.js">
+        <script type="text/javascript" src="js/cwb/Dict.js">
         </script>
-        <script type="text/javascript" src="js/persistency/Persistency.class.js">
+        <script type="text/javascript" src="js/cwb/persistency/Persistency.class.js">
         </script>
-        <script type="text/javascript" src="js/persistency/Json.class.js">
+        <script type="text/javascript" src="js/cwb/persistency/Json.class.js">
         </script>
-        <script type="text/javascript" src="js/persistency/ActionSet.class.js">
+        <script type="text/javascript" src="js/cwb/persistency/ActionSet.class.js">
         </script>
         
-		<script type="text/javascript" src="js/Spacetree.js" ></script>
-		
-        <script type="text/javascript" src="js/Workbench.class.js">
+		<script type="text/javascript" src="js/cwb/ui/Spacetree.js" >
+		</script>
+        <script type="text/javascript" src="js/cwb/ui/ModelChooser.class.js">
         </script>
-        <script type="text/javascript" src="js/StatisticsOverviewProxy.class.js">
+        <script type="text/javascript" src="js/cwb/ui/DiagramPanel.class.js">
         </script>
-        <script type="text/javascript" src="js/StatisticsOverview.class.js">
+        <script type="text/javascript" src="js/cwb/ui/StructureTabPanel.class.js">
         </script>
-        <script type="text/javascript" src="js/Login.class.js">
+        <script type="text/javascript" src="js/cwb/ui/Workbench.class.js">
         </script>
-        <script type="text/javascript" src="js/InfoGrid.class.js">
+        <script type="text/javascript" src="js/cwb/statistics/OverviewProxy.class.js">
         </script>
-		<script type="text/javascript" src="js/ObjectContainer.class.js">
+        <script type="text/javascript" src="js/cwb/statistics/Overview.class.js">
         </script>
-		<script type="text/javascript" src="js/InfoGridProxy.class.js">
+        <script type="text/javascript" src="js/cwb/ui/Login.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwb/statistics/HitsGrid.class.js">
+        </script>
+		<script type="text/javascript" src="js/cwb/statistics/HitsProxy.class.js">
+        </script>
+		<script type="text/javascript" src="js/cwb/ObjectContainer.class.js">
         </script>
 		
 		
         <script type="text/javascript">
             Ext.onReady(function(){
-                new uwm.ui.Login();
+				Ext.BLANK_IMAGE_URL = "img/s.gif";
+				Ext.QuickTips.init();
+				cwb.Cwb.getInstance().startApplication();
             });
         </script>
     </head>

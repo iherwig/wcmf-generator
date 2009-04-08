@@ -10,24 +10,24 @@
  * entire header must remain intact.
  */
 
-Ext.namespace("cwb");
+Ext.namespace("cwb.statistics");
 
 /**
  * @class Routes the statistics overview requests through persistency layer.
  * @extends Ext.data.DataProxy
  */
 
-cwb.StatisticsOverviewProxy = function(config) {
-	cwb.StatisticsOverviewProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
+cwb.statistics.OverviewProxy = function(config) {
+	cwb.statistics.OverviewProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 }
 
-Ext.extend(cwb.StatisticsOverviewProxy, Ext.data.DataProxy);
+Ext.extend(cwb.statistics.OverviewProxy, Ext.data.DataProxy);
 
-cwb.StatisticsOverviewProxy.prototype.load = function(params, reader, callback, scope, arg) {
+cwb.statistics.OverviewProxy.prototype.load = function(params, reader, callback, scope, arg) {
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
-		uwm.persistency.Persistency.getInstance().loadStatisticsOverview(arg.modelOid, 'statistics', function(options, data) {
+		cwb.persistency.Persistency.getInstance().loadStatisticsOverview(arg.modelOid, 'statistics', function(options, data) {
 			self.loadResponse(options, data, callback, scope, arg);
 		}, function(options, data, errorMsg) {
 			self.loadFailed(options, data, errorMsg, callback, scope, arg)
@@ -37,11 +37,11 @@ cwb.StatisticsOverviewProxy.prototype.load = function(params, reader, callback, 
 	}
 }
 
-cwb.StatisticsOverviewProxy.prototype.loadResponse = function(options, data, callback, scope, arg) {
+cwb.statistics.OverviewProxy.prototype.loadResponse = function(options, data, callback, scope, arg) {
 	var records = [];
 	
-	for(var i in data) {
-		var val = data[i];
+	for ( var i in data.statistics) {
+		var val = data.statistics[i];
 		
 		if (!(val instanceof Function)) {
 			records.push(new Ext.data.Record(val));
@@ -57,7 +57,7 @@ cwb.StatisticsOverviewProxy.prototype.loadResponse = function(options, data, cal
 	callback.call(scope, result, arg, true);
 }
 
-cwb.StatisticsOverviewProxy.prototype.loadFailed = function(options, data, errorMsg, callback, scope, arg) {
+cwb.statistics.OverviewProxy.prototype.loadFailed = function(options, data, errorMsg, callback, scope, arg) {
 	this.fireEvent("loadexception", this, options, data);
 	callback.call(scope, null, arg, false);
 }

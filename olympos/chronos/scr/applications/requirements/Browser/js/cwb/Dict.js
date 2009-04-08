@@ -9,14 +9,14 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("uwm.Dict");
+Ext.namespace("cwb.Dict");
  
 /**
  * List of all strings and translations.
  * 
  * @type Array
  */
-uwm.Dict.voc = {
+cwb.Dict.voc = {
 	'Select a model...'	: {'de':"Modell auswählen..."},
 	'Package weight'	: {'de':"Paketgewicht"},
 	'Package tree'		: {'de':"Paketbaum"},
@@ -38,11 +38,11 @@ uwm.Dict.voc = {
  * @param {String} englishText The english text to translate.
  * @return {String} The translated text, if a translation exists. English text otherwise.
  */
-uwm.Dict.translate = function(){
+cwb.Dict.translate = function(){
 	strword=arguments[0];
 
 	try {
-		strresult = uwm.Dict.voc[strword][uwm.Session.getInstance().getLang()];
+		strresult = cwb.Dict.voc[strword][cwb.Session.getInstance().getLang()];
 		if(!strresult){strresult = strword;}
 	}catch(e){
 		strresult = strword;

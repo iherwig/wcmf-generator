@@ -6,51 +6,51 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
- */Ext.namespace("uwm");
+ */Ext.namespace("cwb");
 
 /**
  * @class A <i>Singleton</i> representing the current session.
  * 
  * @constructor
  */
-uwm.Session = function() {
+cwb.Session = function() {
 	this.sid = null;
-	this.jsonUrl = uwm.Config.jsonUrl;
+	this.jsonUrl = cwb.Config.jsonUrl;
 	this.helpUrl = "welcome/welcome.html";
-	this.persistencyClass = "uwm.persistency.Json";
+	this.persistencyClass = "cwb.persistency.Json";
 	this.lang = "en";
 }
 
-uwm.Session.prototype.init = function(sid, lang) {
+cwb.Session.prototype.init = function(sid, lang) {
 	this.sid = sid;
 	this.lang = lang;
 }
 
-uwm.Session.prototype.getSid = function() {
+cwb.Session.prototype.getSid = function() {
 	return this.sid;
 }
 
-uwm.Session.prototype.getJsonUrl = function() {
+cwb.Session.prototype.getJsonUrl = function() {
 	return this.jsonUrl;
 }
 
-uwm.Session.prototype.getHelpUrl = function() {
+cwb.Session.prototype.getHelpUrl = function() {
 	return this.helpUrl;
 }
 
-uwm.Session.prototype.getPersistencyClass = function() {
+cwb.Session.prototype.getPersistencyClass = function() {
 	return this.persistencyClass;
 }
 
-uwm.Session.prototype.getLang = function() {
+cwb.Session.prototype.getLang = function() {
 	return this.lang;	
 }
 
 
-uwm.Session.getInstance = function() {
-	if (!uwm.Session.instance) {
-		uwm.Session.instance = new uwm.Session();
+cwb.Session.getInstance = function() {
+	if (!cwb.Session.instance) {
+		cwb.Session.instance = new cwb.Session();
 	}
 	
-	return uwm.Session.instance;
+	return cwb.Session.instance;
 }

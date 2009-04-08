@@ -9,21 +9,21 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("uwm");
+Ext.namespace("cwb");
 
 /**
  * @class The main class of the application.
  *
  * @constructor
  */
-uwm.Uwm = function() {
+cwb.Cwb = function() {
 }
 
-uwm.Uwm.prototype.processConfig = function() {
-	document.title = uwm.Config.appTitle;
+cwb.Cwb.prototype.processConfig = function() {
+	document.title = cwb.Config.appTitle;
 }
 
-uwm.Uwm.prototype.startApplication = function() {
+cwb.Cwb.prototype.startApplication = function() {
 	this.installErrorHandler();
 	this.installOverrides();
 	
@@ -41,59 +41,32 @@ uwm.Uwm.prototype.startApplication = function() {
 	}
 	
 	if (sid) {
-		uwm.Session.getInstance().init(sid);
-		this.workbench = new uwm.ui.Workbench();
+		cwb.Session.getInstance().init(sid);
+		this.workbench = new cwb.ui.Workbench();
 	} else {
-		this.login = new uwm.ui.Login();
+		this.login = new cwb.ui.Login();
 	}
 }
 
-uwm.Uwm.prototype.startSession = function(sid, lang) {
-	uwm.Session.getInstance().init(sid, lang);
+cwb.Cwb.prototype.startSession = function(sid, lang) {
+	cwb.Session.getInstance().init(sid, lang);
 	
 	this.login.destroy();
 	
-	this.defaultWorkbench = new uwm.ui.Workbench();
-	this.adminWorkbench = new uwm.tabadmin.Workbench();
+	this.defaultWorkbench = cwb.ui.Workbench.getInstance();
 	
-	this.viewport = new Ext.Viewport({
-		layout: "card",
-		activeItem: 0,
-		items: [this.defaultWorkbench, this.adminWorkbench]
-	})
+	this.viewport = this.defaultWorkbench;
 }
 
-uwm.Uwm.prototype.switchWorkbench = function(newWorkbench) {
-	switch (newWorkbench) {
-		case "admin":
-			if (!(uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().isHelpViewer)) {
-				uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().saveScrollPosition();
-			}
-			this.viewport.getLayout().setActiveItem(1);
-			break;
-			
-		case "default":
-		default:
-			this.viewport.getLayout().setActiveItem(0);
-			if (!(uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().isHelpViewer)) {
-				uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().restoreScrollPosition();
-			}
-			break;
-	}
-}
-
-uwm.Uwm.prototype.getActiveWorkbench = function() {
-	return this.viewport.getLayout().activeItem;
-}
-
-uwm.Uwm.prototype.reload = function() {
+cwb.Cwb.prototype.reload = function() {
 	this.viewport.destroy();
-	uwm.persistency.Persistency.getInstance().logout(function() {
+	cwb.persistency.Persistency.getInstance().logout(function() {
 		window.location.reload();
 	});
 }
 
-uwm.Uwm.prototype.installErrorHandler = function() {
+cwb.Cwb.prototype.installErrorHandler = function() {
+return;
 	var self = this;
 	
 	var originalAddListener = Ext.EventManager.addListener;
@@ -117,7 +90,7 @@ uwm.Uwm.prototype.installErrorHandler = function() {
 	}
 }
 
-uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
+cwb.Cwb.prototype.handleError = function(e, message, uri, line) {
 	var data = new Object();
 	
 	data["file"] = uri ? uri : e && e.fileName ? e.fileName : "unknown";
@@ -134,7 +107,7 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 		}
 	}
 	
-	uwm.persistency.Persistency.getInstance().log("error", plainText);
+	cwb.persistency.Persistency.getInstance().log("error", plainText);
 	
 	var html = "";
 	for (var i in data) {
@@ -146,29 +119,29 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 		}
 	}
 	
-	if (uwm.Config.debug) {
-		uwm.Util.showMessage(uwm.Dict.translate("Error occured"), html, uwm.Util.messageType.ERROR);
+	if (cwb.Config.debug) {
+		cwb.Util.showMessage(cwb.Dict.translate("Error occured"), html, cwb.Util.messageType.ERROR);
 		
 		throw e;
 	} else {
 		var self = this;
 		
 		var window = new Ext.Window({
-			id: uwm.Uwm.ERROR_WINDOW_ID,
-			title: uwm.Dict.translate("Error occured"),
+			id: cwb.Cwb.ERROR_WINDOW_ID,
+			title: cwb.Dict.translate("Error occured"),
 			layout: "fit",
 			items: [new Ext.Panel({
-				html: "<p class='uwm-errorDialogMessage'>" +
-				uwm.Dict.translate("An application error occured. Your data will be saved and the application will be restarted.") +
+				html: "<p class='cwb-errorDialogMessage'>" +
+				cwb.Dict.translate("An application error occured. Your data will be saved and the application will be restarted.") +
 				"</p>"
 			}), new Ext.Panel({
-				id: uwm.Uwm.ERROR_DETAILS_ID,
-				title: uwm.Dict.translate("Error details"),
+				id: cwb.Cwb.ERROR_DETAILS_ID,
+				title: cwb.Dict.translate("Error details"),
 				collapsed: true,
 				collapsible: true,
 				animCollapse: false,
 				collapseFirst: true,
-				html: "<div class='uwm-errorDialogDetails'>" +
+				html: "<div class='cwb-errorDialogDetails'>" +
 				html +
 				"</div>",
 				listeners: {
@@ -181,12 +154,12 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 				}
 			})],
 			buttons: [{
-				text: uwm.Dict.translate("OK"),
+				text: cwb.Dict.translate("OK"),
 				handler: function() {
 					self.reload();
 				}
 			}, {
-				text: uwm.Dict.translate("Continue on your own risk"),
+				text: cwb.Dict.translate("Continue on your own risk"),
 				handler: function() {
 					window.destroy();
 				}
@@ -197,7 +170,7 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 	}
 }
 
-uwm.Uwm.prototype.installOverrides = function() {
+cwb.Cwb.prototype.installOverrides = function() {
 	Ext.override(Ext.form.Field, {
 		loadValue: function(value) {
 			this.setValue(value);
@@ -206,13 +179,13 @@ uwm.Uwm.prototype.installOverrides = function() {
 	});
 }
 
-uwm.Uwm.getInstance = function() {
-	if (!uwm.Uwm.instance) {
-		uwm.Uwm.instance = new uwm.Uwm();
+cwb.Cwb.getInstance = function() {
+	if (!cwb.Cwb.instance) {
+		cwb.Cwb.instance = new cwb.Cwb();
 	}
 	
-	return uwm.Uwm.instance;
+	return cwb.Cwb.instance;
 }
 
-uwm.Uwm.ERROR_WINDOW_ID = "errorWindowId";
-uwm.Uwm.ERROR_DETAILS_ID = "errorDetailsId";
+cwb.Cwb.ERROR_WINDOW_ID = "errorWindowId";
+cwb.Cwb.ERROR_DETAILS_ID = "errorDetailsId";

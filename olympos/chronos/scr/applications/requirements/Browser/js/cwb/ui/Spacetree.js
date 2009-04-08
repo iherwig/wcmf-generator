@@ -26,17 +26,17 @@ stopDragScroll = function(e) {
 }
 
 init = function() {
-	if (ObjectContainer.getInstance().modelLoaded) {
+	if (cwb.ObjectContainer.getInstance().modelLoaded) {
 		start();
 	} else {
-		Ext.get("infovis").innerHTML = uwm.Dict.translate('Please select a model.');
+		Ext.get(cwb.ui.StructureTabPanel.PACKAGE_ID).innerHTML = cwb.Dict.translate('Please select a model.');
 	}
 }
 
 var spacetreeCounter = 0;
 
 function start() {
-	var json = ObjectContainer.getInstance().objectsForSpacetree;
+	var json = cwb.ObjectContainer.getInstance().objectsForSpacetree;
 	// var json = ObjectContainer.getInstance().objectsForSpacetree;
 	
 	// Containers for fillStyle, strokeStyle and lineWith canvas properties.
@@ -44,9 +44,9 @@ function start() {
 	// Create a new canvas instance.
 	var canvas = new Canvas('mycanvas', {
 	    //Where to inject canvas. Any HTML container will do.
-	    'injectInto' : 'infovis',
+	    'injectInto' : cwb.ui.StructureTabPanel.PACKAGE_ID,
 	    //Set width and height, default's to 200.
-	    'width' : 700,
+	    'width' : 2000,
 	    'height' : 2000,
 	    
 	    //Set a background color in case the browser
@@ -109,7 +109,7 @@ function start() {
 	    request : function(nodeId, level, onComplete) {
 		    var self = this;
 		    
-		    uwm.persistency.Persistency.getInstance().display(nodeId.indexOf("_") > 0 ? nodeId.substring(0, nodeId.indexOf("_")) : nodeId, 2, function(options, data) {
+		    cwb.persistency.Persistency.getInstance().display(nodeId.indexOf("_") > 0 ? nodeId.substring(0, nodeId.indexOf("_")) : nodeId, 2, function(options, data) {
 			    var result = self.loadFromDisplay(data.node);
 			    
 			    onComplete.onComplete(nodeId, result);

@@ -9,21 +9,21 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("uwm.Config");
+Ext.namespace("cwb.Config");
 
 /**
  * The URL all JSON calls should be routed to.
  * 
  * @type String
  */
-uwm.Config.jsonUrl = "../application/main.php";
+cwb.Config.jsonUrl = "../application/main.php";
 
 /**
  * Title of this application.
  * 
  * @type String
  */
-uwm.Config.appTitle = "Chronos Web Browser";
+cwb.Config.appTitle = "Chronos Web Browser";
 
 /**
  * Debug mode switch.
@@ -33,20 +33,20 @@ uwm.Config.appTitle = "Chronos Web Browser";
  * 
  * @type boolean
  */
-uwm.Config.debug = true;
+cwb.Config.debug = true;
 
 /**
  * Default value of login.
  * 
  * @type String
  */
-uwm.Config.defaultLogin = "admin";
+cwb.Config.defaultLogin = "admin";
 
 /**
  * Default value of password.
  * 
  * @type String
  */
-uwm.Config.defaultPassword = "admin";
+cwb.Config.defaultPassword = "admin";
 
-uwm.Uwm.getInstance().processConfig();
+cwb.Cwb.getInstance().processConfig();

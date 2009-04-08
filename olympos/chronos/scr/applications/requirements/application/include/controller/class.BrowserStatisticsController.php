@@ -12,8 +12,9 @@
  */
 
 require_once (BASE.'wcmf/lib/presentation/class.Controller.php');
+require_once (BASE.'wcmf/lib/util/class.SessionData.php');
 
-require_once ('class.BrowserUtil.php');
+//require_once ('class.BrowserUtil.php');
 
 class BrowserStatisticsController extends Controller
 {
@@ -28,8 +29,9 @@ class BrowserStatisticsController extends Controller
 		$this->lastTime = $newTime;
 	}
 
-	public function execute()
+	public function executeKernel()
 	{
+/*
 		$this->check("start");
 	
 		$modelOid = $this->_request->getValue('modelOid');
@@ -47,7 +49,16 @@ class BrowserStatisticsController extends Controller
 		$this->check('File written to output');
 	
 		BrowserUtil::cleanup();
+*/
+
+		$session = &SessionData::getInstance();
+		$statisticsData = $session->get('statistics');
+		
+		$this->_response->setValue('statistics', $statisticsData); 
 	
+		// success
+		$this->_response->setAction('ok');
+
 		return false;
 	}
 
