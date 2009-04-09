@@ -77,23 +77,23 @@ function _ofc( $width, $height, $url, $use_swfobject, $base )
     
     if( $use_swfobject )
     {
-	// Using library for auto-enabling Flash object on IE, disabled-Javascript proof  
-    $out[] = '<div id="'. $div_name .'"></div>';
-	$out[] = '<script type="text/javascript">';
-	$out[] = 'var so = new SWFObject("'. $base .'open-flash-chart.swf", "'. $obj_id .'", "'. $width . '", "' . $height . '", "9", "#FFFFFF");';
-	//$out[] = 'so.addVariable("width", "' . $width . '");';
-	//$out[] = 'so.addVariable("height", "' . $height . '");';
-	$out[] = 'so.addVariable("data", "'. $url . '");';
-	$out[] = 'so.addParam("allowScriptAccess", "sameDomain");';
-	$out[] = 'so.write("'. $div_name .'");';
-	$out[] = '</script>';
-	$out[] = '<noscript>';
+		// Using library for auto-enabling Flash object on IE, disabled-Javascript proof  
+		$out[] = '<div id="'. $div_name .'"></div>';
+		$out[] = '<script type="text/javascript">';
+		$out[] = 'var so = new SWFObject("'. $base .'open-flash-chart.swf", "'. $obj_id .'", "'. $width . '", "' . $height . '", "9", "#FFFFFF");';
+		
+		$out[] = 'so.addVariable("data-file", "'. $url . '");';
+	
+		$out[] = 'so.addParam("allowScriptAccess", "always" );//"sameDomain");';
+		$out[] = 'so.write("'. $div_name .'");';
+		$out[] = '</script>';
+		$out[] = '<noscript>';
     }
 
     $out[] = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="' . $protocol . '://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" ';
     $out[] = 'width="' . $width . '" height="' . $height . '" id="ie_'. $obj_id .'" align="middle">';
     $out[] = '<param name="allowScriptAccess" value="sameDomain" />';
-    $out[] = '<param name="movie" value="'. $base .'open-flash-chart.swf?width='. $width .'&height='. $height . '&data='. $url .'" />';
+    $out[] = '<param name="movie" value="'. $base .'open-flash-chart.swf?data='. $url .'" />';
     $out[] = '<param name="quality" value="high" />';
     $out[] = '<param name="bgcolor" value="#FFFFFF" />';
     $out[] = '<embed src="'. $base .'open-flash-chart.swf?data=' . $url .'" quality="high" bgcolor="#FFFFFF" width="'. $width .'" height="'. $height .'" name="'. $obj_id .'" align="middle" allowScriptAccess="sameDomain" ';
@@ -101,7 +101,7 @@ function _ofc( $width, $height, $url, $use_swfobject, $base )
     $out[] = '</object>';
 
     if ( $use_swfobject ) {
-	$out[] = '</noscript>';
+		$out[] = '</noscript>';
     }
     
     return implode("\n",$out);

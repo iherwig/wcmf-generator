@@ -1,13 +1,13 @@
 /*
  * Copyright (c) 2008 The Olympos Development Team.
- *
+ * 
  * http://sourceforge.net/projects/olympos/
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
- * this entire header must remain intact.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
 Ext.namespace("cwb.Util");
 
@@ -20,7 +20,7 @@ Ext.namespace("cwb.Util");
  */
 cwb.Util.getUwmClassNameFromOid = function(oid) {
 	var result = oid.match(/^[^:]+/)[0];
-		
+	
 	if (oid.charAt(0) == "{") {
 		result = oid.match(/:([^}]+)/)[1];
 	}
@@ -53,27 +53,17 @@ cwb.Util.showMessage = function(title, message, messageType) {
 	var messageContainer = Ext.get("messageContainer");
 	if (!messageContainer) {
 		messageContainer = Ext.DomHelper.insertFirst(document.body, {
-			id :"messageContainer",
-			style :"position: absolute"
+		    id : "messageContainer",
+		    style : "position: absolute"
 		}, true);
 	}
 	messageContainer.alignTo(document, 't-t');
-	var messageBox = Ext.DomHelper
-			.append(
-					messageContainer,
-					{
-						html :'<div>'
-								+ '<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>'
-								+ '<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>'
-								+ title
-								+ '</h3>'
-								+ message
-								+ '</div></div></div>'
-								+ '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>'
-								+ '</div>'
-					}, true);
+	var messageBox = Ext.DomHelper.append(messageContainer, {
+		html : '<div>' + '<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>' + '<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>' + title
+		        + '</h3>' + message + '</div></div></div>' + '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>' + '</div>'
+	}, true);
 	messageBox.slideIn('t').pause(3).ghost("t", {
-		remove :true
+		remove : true
 	});
 }
 
@@ -81,9 +71,9 @@ cwb.Util.showMessage = function(title, message, messageType) {
  * List of message types.
  */
 cwb.Util.messageType = {
-	INFO :1,
-	WARNING :2,
-	ERROR :3
+    INFO : 1,
+    WARNING : 2,
+    ERROR : 3
 }
 
 /**
@@ -97,5 +87,22 @@ cwb.Util.setElementUnselectable = function(elem) {
 		elem.style.MozUserSelect = "none";
 		elem.style.KhtmlUserSelect = "none";
 		elem.unselectable = "on";
+	}
+}
+
+cwb.Util.emptyDiv = function(divId) {
+	var div = Ext.get(divId);
+	if (div) {
+		div.dom.innerHTML = "";
+		div.dom.style.display = "none";
+		div.dom.setAttribute("data", null);
+		div.dom.setAttribute("src", null);
+	}
+}
+
+cwb.Util.showDiv = function(divId) {
+	var div = Ext.get(divId);
+	if (div) {
+		div.dom.style.display = "block";
 	}
 }

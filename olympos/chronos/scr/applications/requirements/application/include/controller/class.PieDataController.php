@@ -19,7 +19,7 @@ require_once (BASE.'wcmf/lib/util/class.SessionData.php');
 
 require_once('php-ofc-library/open-flash-chart.php');
 
-class BarDataController extends Controller
+class PieDataController extends Controller
 {
 	public function execute() {
 		//$modelOid = $this->_request->getValue('modelOid');
@@ -28,42 +28,29 @@ class BarDataController extends Controller
 
 		//include($exportFile);
 		$session = &SessionData::getInstance();
-		$barchartData = $session->get('barchart'); 
+		$piechartData = $session->get('piechart'); 
 	
-		$bars = new bar_stack();
-		$bars->set_colours(array('#00ff00', '#ff0000'));
-		$bars->set_keys(array(
-			new bar_stack_key('#00ff00', 'Conform', 12),
-			new bar_stack_key('#ff0000', 'Non-Conform', 12)
-		));
+		$pie = new pie();
 		
-		
-		$labels = array();
-		$max = 0;
+		$values = array();
 
-		foreach($barchartData as $currItem) {
-			$bars->append_stack(array($currItem['conform'], $currItem['nonConform']));
-			$labels[] = $currItem['label'];
-			$max = max($max, $currItem['conform'] + $currItem['nonConform']);
+		foreach($piechartData as $currItem) {
+			if ($currItem['count'] > 0) {
+				$values[] = new pie_value($currItem['count'], $currItem['label']);
+			}
 		}
 		
-		$xAxis = new x_axis();
-		$xAxis->set_labels_from_array($labels);
-		
-		$yAxis = new y_axis();
-		$yAxis->set_range(0, round($max * 1.05 + 0,5), round($max / 7));
+		$pie->set_values($values);
 
 		$tooltip = new tooltip();
 		$tooltip->set_hover();
 		
 		$chart = new open_flash_chart();
-		$chart->set_title(new title('Rule-conformity of objects'));
+		$chart->set_title(new title('Object count'));
 
-		$chart->add_element($bars);
+		$chart->add_element($pie);
 
 		$chart->set_bg_colour('#ffffff');
-		$chart->set_x_axis($xAxis);
-		$chart->set_y_axis($yAxis);
 		$chart->set_tooltip($tooltip);
 
 		echo $chart->toPrettyString();

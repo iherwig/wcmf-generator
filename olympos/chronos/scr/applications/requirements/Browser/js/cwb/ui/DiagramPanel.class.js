@@ -41,18 +41,16 @@ cwb.ui.DiagramPanel = Ext.extend(Ext.Panel, {
 		 */
 		this.piechartPanel = new Ext.Panel( {
 		    layout : 'fit',
-		    html : '<iframe class="flashDoc" src="lib/ofc/piechart.php"/>'
+		    html : '<div id="' + cwb.ui.DiagramPanel.PIECHART_ID + '" class="cwb-flashDiv"></div>'
 		});
 		
 		/**
 		 * Panel containing the bar chart in iframe.
 		 */
-/*
 		this.barchartPanel = new Ext.Panel( {
 		    layout : 'fit',
-		    html : '<iframe class="flashDoc" src="chart/barchart.php"/>'
+		    html : '<div id="' + cwb.ui.DiagramPanel.BARCHART_ID + '" class="cwb-flashDiv"></div>'
 		});
-*/
 		
 		/**
 		 * Panel containing either the pie chart or an empty panel.
@@ -101,13 +99,27 @@ cwb.ui.DiagramPanel.prototype.showDiagrams = function() {
 	this.piechartContainer.add(this.piechartPanel);
 	this.barchartContainer.remove(this.barchartPanelEmpty);
 	this.barchartContainer.remove(this.barchartPanel);
-	this.barchartPanel = new Ext.Panel( {
-	    layout : 'fit',
-	    html : '<iframe class="flashDoc" src="chart/barchart.php?modelOid=' + modelOid + '"/>'
-	});
 	this.barchartContainer.add(this.barchartPanel);
 	
+	this.doLayout();
+	
+	this.showFlash(cwb.ui.DiagramPanel.PIECHART_ID, "pieData", modelOid);
+	this.showFlash(cwb.ui.DiagramPanel.BARCHART_ID, "barData", modelOid);
+	
 	this.adjustPanelSize();
+}
+
+cwb.ui.DiagramPanel.prototype.clear = function() {
+	cwb.Util.emptyDiv(cwb.ui.DiagramPanel.PIECHART_ID);
+	cwb.Util.emptyDiv(cwb.ui.DiagramPanel.BARCHART_ID);
+}
+
+cwb.ui.DiagramPanel.prototype.showFlash = function(divId, action, modelId) {
+	swfobject.embedSWF("lib/ofc/open-flash-chart.swf", divId, "100%", "100%", "9.0.0", "expressInstall.swf", {
+		"data-file" : "../application/main.php?usr_action=" + action + "&response_format=JSON&modelOid=" + encodeURI(modelId)
+	}, {
+		"wmode" : "transparent"
+	});
 }
 
 cwb.ui.DiagramPanel.getInstance = function() {
@@ -116,3 +128,6 @@ cwb.ui.DiagramPanel.getInstance = function() {
 	}
 	return cwb.ui.DiagramPanel.instance;
 }
+
+cwb.ui.DiagramPanel.PIECHART_ID = "cwb-piechart-id";
+cwb.ui.DiagramPanel.BARCHART_ID = "cwb-barchart-id";

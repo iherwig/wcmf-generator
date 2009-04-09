@@ -34,6 +34,7 @@ init = function() {
 }
 
 var spacetreeCounter = 0;
+var spacetreeCanvas = null;
 
 function start() {
 	var json = cwb.ObjectContainer.getInstance().objectsForSpacetree;
@@ -42,7 +43,7 @@ function start() {
 	// Containers for fillStyle, strokeStyle and lineWith canvas properties.
 	var fStyle, sStyle, lineWidth;
 	// Create a new canvas instance.
-	var canvas = new Canvas('mycanvas', {
+	spacetreeCanvas = spacetreeCanvas || new Canvas('mycanvas', {
 	    //Where to inject canvas. Any HTML container will do.
 	    'injectInto' : cwb.ui.StructureTabPanel.PACKAGE_ID,
 	    //Set width and height, default's to 200.
@@ -61,8 +62,13 @@ function start() {
 		    this.styles.fillStyle = color;
 	    }
 	});
+	
+	Tree.Label.nodeHash = {};
+	cwb.Util.emptyDiv("mycanvas-label");
+	cwb.Util.showDiv("mycanvas-label");
+	
 	// Create a new ST instance
-	var st = new ST(canvas, {
+	var st = new ST(spacetreeCanvas, {
 	    //Add an event handler to the node when creating it.
 	    onCreateLabel : function(label, node) {
 		    label.id = node.id;
@@ -76,7 +82,7 @@ function start() {
 	    },
 	    //Set color as selected if the node is selected.
 	    onBeforePlotNode : function(node) {
-		    var ctx = canvas.getCtx();
+		    var ctx = spacetreeCanvas.getCtx();
 		    fStyle = ctx.fillStyle;
 		    sStyle = ctx.strokeStyle;
 		    if (node.selected) {
@@ -86,13 +92,13 @@ function start() {
 	    },
 	    //Restore color.
 	    onAfterPlotNode : function(node) {
-		    var ctx = canvas.getCtx();
+		    var ctx = spacetreeCanvas.getCtx();
 		    ctx.fillStyle = fStyle;
 		    ctx.stroleStyle = sStyle;
 	    },
 	    //Set color as selected if the edge belongs to the path.
 	    onBeforePlotLine : function(adj) {
-		    var ctx = canvas.getCtx();
+		    var ctx = spacetreeCanvas.getCtx();
 		    lineWidth = ctx.lineWidth;
 		    sStyle = ctx.strokeStyle;
 		    if (adj.nodeFrom.selected && adj.nodeTo.selected) {
@@ -102,7 +108,7 @@ function start() {
 	    },
 	    //Restore color and line width
 	    onAfterPlotLine : function(adj) {
-		    var ctx = canvas.getCtx();
+		    var ctx = spacetreeCanvas.getCtx();
 		    ctx.lineWidth = lineWidth;
 		    ctx.stroleStyle = sStyle;
 	    },

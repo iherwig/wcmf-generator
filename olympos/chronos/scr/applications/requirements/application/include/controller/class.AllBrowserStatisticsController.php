@@ -45,6 +45,9 @@ class AllBrowserStatisticsController extends Controller
 	
 		include ($exportFiles['barchart']);
 		$session->set('barchart', $barchartData);
+		
+		include($exportFiles['piechart']);
+		$session->set('piechart', $piechartData);
 	
 		$this->cleanup();
 	
@@ -64,11 +67,13 @@ class AllBrowserStatisticsController extends Controller
 		$this->workingDir = OawUtil::tempName();
 		$this->statisticsDir = $this->workingDir.'/statistics';
 		$this->barchartDir = $this->workingDir.'/barchart';
+		$this->piechartDir = $this->workingDir.'/piechart';
 	
 		
 		mkdir($this->workingDir);
 		mkdir($this->statisticsDir);
 		mkdir($this->barchartDir);
+		mkdir($this->piechartDir);
 	
 		$umlPath = OawUtil::tempName();
 		$tmpUwmExportPath = $this->workingDir.'/cwm-source.xml';
@@ -83,6 +88,7 @@ class AllBrowserStatisticsController extends Controller
 	
 		$this->statisticsFile = OawUtil::createTempFile($this->statisticsDir.'/browser.dat');
 		$this->barchartFile = OawUtil::createTempFile($this->barchartDir.'/browser.dat');
+		$this->piechartFile = OawUtil::createTempFile($this->piechartDir.'/browser.dat');
 	
 		UwmUtil::exportXml($tmpUwmExportPath, $modelOid, null);
 	
@@ -93,12 +99,14 @@ class AllBrowserStatisticsController extends Controller
 	
 		ExportShutdownHandler::success();
 	
-		return array ('statistics'=>$this->statisticsFile, 'barchart'=>$this->barchartFile);
+		return array ('statistics'=>$this->statisticsFile, 'barchart'=>$this->barchartFile, 'piechart'=>$this->piechartFile);
 	}
 
 	private function cleanup() {
+		unlink($this->piechartFile);
 		unlink($this->barchartFile);
 		unlink($this->statisticsFile);
+		rmdir($this->piechartDir);
 		rmdir($this->barchartDir);
 		rmdir($this->statisticsDir);
 		rmdir($this->workingDir);
