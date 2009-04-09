@@ -76,7 +76,7 @@ cwb.statistics.Overview = Ext.extend(Ext.grid.GridPanel, {
 
 cwb.statistics.Overview.prototype.statusRenderer = function(value) {
 	var result = "";
-	if (value !== null) {
+	if (value !== null && value !== '') {
 		result = "<img src='img/signal" + value + ".png' />";
 	}
 	
@@ -85,6 +85,10 @@ cwb.statistics.Overview.prototype.statusRenderer = function(value) {
 
 cwb.statistics.Overview.prototype.loadData = function() {
 	this.reload(cwb.ObjectContainer.getInstance().getCurrModelOid());
+}
+
+cwb.statistics.Overview.prototype.clear = function() {
+	this.store.removeAll();
 }
 
 cwb.statistics.Overview.prototype.reload = function(modelOid) {

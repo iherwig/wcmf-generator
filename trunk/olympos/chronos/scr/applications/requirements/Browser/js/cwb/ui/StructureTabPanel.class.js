@@ -29,7 +29,7 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		this.weightPanel = new Ext.Panel( {
 		    title : cwb.Dict.translate('Package weight'),
 		    tabTip : cwb.Dict.translate('Left-click to enter a package or object, right-click to leave it.'),
-		    html : '<iframe id="' + cwb.ui.StructureTabPanel.WEIGHT_ID + '" style="height: 100%;width:100%;" src="html/Treemap.html"/>'
+		    html : '<iframe id="' + cwb.ui.StructureTabPanel.WEIGHT_ID + '" style="height: 100%;width:100%;"/>'
 		});
 		
 		/**
@@ -78,27 +78,26 @@ cwb.ui.StructureTabPanel.prototype.handleTabChange = function(tabPanel, tab) {
 	}
 }
 
-cwb.ui.StructureTabPanel.prototype.resetTabs = function() {
+cwb.ui.StructureTabPanel.prototype.clear = function() {
 	var tabCount = this.items.getCount();
 	
 	for (var i = 2; i < tabCount; i++) {
 		this.items.getAt(i).remove();
 	}
+	
+	cwb.Util.emptyDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
+	
+	this.setActiveTab(0);
 }
 
 cwb.ui.StructureTabPanel.prototype.showDiagrams = function() {
 	/**
 	 * Reloads treemap window.
 	 */
-	Ext.get(cwb.ui.StructureTabPanel.WEIGHT_ID).dom.contentWindow.location.reload();
+	cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
+	Ext.get(cwb.ui.StructureTabPanel.WEIGHT_ID).dom.contentWindow.location = "html/Treemap.html";
 
-	/**
-	 * Reloads frametree window if it has already been rendered.
-	 */
-	var div = Ext.get(cwb.ui.StructureTabPanel.PACKAGE_ID);
-	if (div) {
-		div.dom.innerHTML = "";
-	}
+	cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
 	
 	start();
 }

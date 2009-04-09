@@ -56,4 +56,15 @@
 		
 		<outlet path="${workingDir}/barchart" />
 	</component>
+
+	<component class="oaw.xpand2.Generator" skipOnErrors="true">
+		<fileEncoding value="utf-8"/>
+		
+		<metaModel idRef="uml" />
+		<metaModel idRef="Chronos" />
+		
+		<expand value="cartridge::BrowserStatistics::piechart::file FOR uml2model"/>
+		
+		<outlet path="${workingDir}/piechart" />
+	</component>
 </workflow>

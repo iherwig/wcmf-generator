@@ -73,7 +73,9 @@ cwb.ui.ModelChooser.prototype.loadModel = function() {
 	
 	if (modelOid) {
 		cwb.ui.Workbench.getInstance().showMask();
-		cwb.ui.StructureTabPanel.getInstance().resetTabs();
+		cwb.statistics.Overview.getInstance().clear();
+		cwb.ui.DiagramPanel.getInstance().clear();
+		cwb.ui.StructureTabPanel.getInstance().clear();
 		
 		var self = this;
 		
