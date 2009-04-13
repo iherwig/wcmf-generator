@@ -66,7 +66,10 @@ uwm.ui.ExportAssistent.prototype.getRadioFormItem = function(){
 
 uwm.ui.ExportAssistent.prototype.getTemplate = function() {
 
-	return new Ext.Template(['<b><u>Template Name: </b></u><BR/><BR/><center>{templateName}</center><BR/>', '<b><u>Description: </b></u><BR/><BR/><center>{description}</center><BR/>'])
+	return new Ext.Template([
+	'<b><u>Technical Name: </b></u><BR/><BR/><center>{technName}</center><BR/>', 
+	//'<b><u>Template Name: </b></u><BR/><BR/><center>{templateName}</center><BR/>', 
+	'<b><u>Description: </b></u><BR/><BR/><center>{description}</center><BR/>'])
 	
 }
 
@@ -145,11 +148,12 @@ uwm.ui.ExportAssistent.prototype.getGrid = function(store) {
 	return new Ext.grid.GridPanel({
 		store: store,
 		columns: [{
-			header: uwm.Dict.translate('Technical Name'),
+			header: uwm.Dict.translate('Template Name'),
 			width: 233,
-			dataIndex: 'technName',
+			dataIndex: 'templateName',
 			sortable: true
 		}//, 
+		//{ header: uwm.Dict.translate('Technical Name')},
 		//{ header: uwm.Dict.translate('Template Name'), width: 233, dataIndex: 'templateName', sortable: true }, 
 		//{ header: uwm.Dict.translate('Description'), width: 233, dataIndex: 'description', sortable: true }
 		],
