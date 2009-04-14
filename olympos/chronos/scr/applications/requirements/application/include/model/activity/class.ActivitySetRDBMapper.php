@@ -72,6 +72,7 @@ class ActivitySetRDBMapper extends NodeUnifiedRDBMapper
     (
       array('name' => 'is_searchable', 'value' => true),
 // PROTECTED REGION ID(application/include/model/activity/class.ActivitySetRDBMapper.php/Properties) ENABLED START
+	  array('name' => 'display_value', 'value' => 'Name'),
 // PROTECTED REGION END
     );
     $nodeDef['_datadef'] = array
@@ -88,6 +89,10 @@ class ActivitySetRDBMapper extends NodeUnifiedRDBMapper
       * Value description: 
       */
       array('name' => 'fk_chibusinessusecase_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_chibusinessusecase_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
+      * Value description: the creation date of this object
+      */
+      array('name' => 'Name', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'name', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: the creation date of this object
       */

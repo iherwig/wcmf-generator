@@ -44,6 +44,7 @@ class ActivitySetBase extends EntityBase
       if ($name == 'id') $displayName = Message::get("id");
       if ($name == 'fk_chibusinessusecasecore_id') $displayName = Message::get("fk_chibusinessusecasecore_id");
       if ($name == 'fk_chibusinessusecase_id') $displayName = Message::get("fk_chibusinessusecase_id");
+	  if ($name == 'name') $displayName = Message::get("name");
       if ($name == 'created') $displayName = Message::get("created");
       if ($name == 'creator') $displayName = Message::get("creator");
       if ($name == 'last_editor') $displayName = Message::get("last_editor");
@@ -59,6 +60,7 @@ class ActivitySetBase extends EntityBase
       if ($name == 'id') $description = Message::get("");
       if ($name == 'fk_chibusinessusecasecore_id') $description = Message::get("");
       if ($name == 'fk_chibusinessusecase_id') $description = Message::get("");
+	  if ($name == 'name') $description = Message::get("the name of this object");
       if ($name == 'created') $description = Message::get("the creation date of this object");
       if ($name == 'creator') $description = Message::get("the user that created this object");
       if ($name == 'last_editor') $description = Message::get("the last user that edited this object");
