@@ -20,102 +20,42 @@ Ext.namespace("uwm.ui");
  */
 uwm.ui.ExportAssistent = function() {
 
-	var radioFormItem = this.getRadioFormItem();
-
-	uwm.ui.ExportAssistent.superclass.constructor.call(this, Ext.apply(this, this.getWindowLayout(this.setSelMode(this.getGrid(this.getStore()), this.getTemplate()), this.getDetailPanelItem(), radioFormItem )));
-	
-	this.addButtons(radioFormItem);
-	this.setVisible(true);
-	
-}
-Ext.extend(uwm.ui.ExportAssistent, Ext.Window);
-
-uwm.ui.ExportAssistent.prototype.getRadioFormItem = function(){
-	
-
-//return  new Ext.form.RadioGroup({
-        
-	return {
-                    xtype:'fieldset',
-                    title: ' Export as : ',
-//					id: 'radioGroup',
-					autoHeight: true,
-//					width: 280,
-					width: 300,
-                    defaultType: 'radio',  // each item will be a radio button
-                    value:'leer',
-                    items: [{
-						labelSeparator: '', checked: true,
-                        boxLabel: 'Microsoft Word',
-                        inputValue: 'MicrosoftWord',
-						name: 'docformat'
-                    },{
-						labelSeparator: '',
-                        boxLabel: 'Open Office Writer',
-                        inputValue: 'OpenOfficeWriter',
-						name: 'docformat'
-                    },{
-						labelSeparator: '',
-                        boxLabel: 'PDF',
-                        inputValue: 'PDF',
-						name: 'docformat'
-                    }]
-                }
-//				)
-}
-
-uwm.ui.ExportAssistent.prototype.getTemplate = function() {
-
-	return new Ext.Template([
-	'<b><u>Technical Name: </b></u><BR/><BR/><center>{technName}</center><BR/>', 
-	//'<b><u>Template Name: </b></u><BR/><BR/><center>{templateName}</center><BR/>', 
-	'<b><u>Description: </b></u><BR/><BR/><center>{description}</center><BR/>'])
-	
-}
-
-uwm.ui.ExportAssistent.prototype.setSelMode = function(grid, Tpl) {
-
-	grid.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
-		var detailPanel = Ext.getCmp('detailPanel');
-		Tpl.overwrite(detailPanel.body, r.data);
-	});
-	return grid;
-}
-
-uwm.ui.ExportAssistent.prototype.getWindowLayout = function(grid, detailPanelItem, radioFormItem) {
-
-	return {
-		title: uwm.Dict.translate('Export Assistant'),
-		layout: 'column',
-		region: 'center',
-		height: 330,
-		width: 550,
-		items: [grid, detailPanelItem, radioFormItem ]
-	}
-	
-}
-
-uwm.ui.ExportAssistent.prototype.getDetailPanelItem = function() {
-
-	return {
-		id: 'detailPanel',
-		title: uwm.Dict.translate('detailed description'),
-		html: '<i>' + uwm.Dict.translate('< detailed description >') + '</i>',
-		split: true,
-		region: 'east',
-		height: 170,
+	var radioFormItem = new Ext.FormPanel({
+		name: 'formPanel',
+		title: uwm.Dict.translate('document format'),
+		labelWidth: 70,
 		width: 280,
 		frame: true,
-		bodyStyle: {
-			padding: '7px'
+//		renderTo:'form-ct',
+		items: {
+			xtype: 'fieldset',
+			name: 'fieldset',
+			title: ' Export as : ',
+			autoHeight: true,
+			width: 280,
+			defaultType: 'radio', // each item will be a radio button
+			items: [{
+				labelSeparator: '',
+				checked: true,
+				boxLabel: 'Microsoft Word',
+				inputValue: 'MicrosoftWord',
+				name: 'docformat'
+			}, {
+				labelSeparator: '',
+				boxLabel: 'Open Office Writer',
+				inputValue: 'OpenOfficeWriter',
+				name: 'docformat'
+			}, {
+				labelSeparator: '',
+				boxLabel: 'PDF',
+				inputValue: 'PDF',
+				name: 'docformat'
+			}]
 		}
-	}
 	
-}
-
-uwm.ui.ExportAssistent.prototype.getStore = function() {
-
-	return new Ext.data.SimpleStore({
+	});
+	
+	var store = new Ext.data.SimpleStore({
 		data: [{
 			technName: 'test1',
 			templateName: 'testest1',
@@ -141,21 +81,14 @@ uwm.ui.ExportAssistent.prototype.getStore = function() {
 		}]
 	});
 	
-}
-
-uwm.ui.ExportAssistent.prototype.getGrid = function(store) {
-
-	return new Ext.grid.GridPanel({
+	var grid = new Ext.grid.GridPanel({
 		store: store,
 		columns: [{
 			header: uwm.Dict.translate('Template Name'),
 			width: 233,
 			dataIndex: 'templateName',
 			sortable: true
-		}//, 
-		//{ header: uwm.Dict.translate('Technical Name')},
-		//{ header: uwm.Dict.translate('Template Name'), width: 233, dataIndex: 'templateName', sortable: true }, 
-		//{ header: uwm.Dict.translate('Description'), width: 233, dataIndex: 'description', sortable: true }
+		}		//'Technical Name'//'Template Name'//'Description'
 		],
 		sm: new Ext.grid.RowSelectionModel({
 			singleSelect: true
@@ -163,28 +96,50 @@ uwm.ui.ExportAssistent.prototype.getGrid = function(store) {
 		title: uwm.Dict.translate('Please select to show Details.'),
 		split: true,
 		region: 'west',
-		height: 250,
+		height: 300,
 		width: 250,
 		frame: true
 	
 	});
-	
-}
 
-uwm.ui.ExportAssistent.prototype.addButtons = function(radioFormItem) {
-
-	this.addButton(new Ext.Button({
-		window: this,
-		text: uwm.Dict.translate('Export'),
-		handler: function(radioFormItem) {
-			alert('function under construction \n ' 		
-			//+ radioFormItem.getValue()
-			
-			+ radioFormItem.items
-			
-			);
+	var detailPanel = {
+		id: 'detailPanel',
+		title: uwm.Dict.translate('detailed description'),
+		html: '<i>' + uwm.Dict.translate('< detailed description >') + '</i>',
+		split: true,
+		region: 'east',
+		height: 170,
+		width: 280,
+		frame: true,
+		bodyStyle: {
+			padding: '7px'
 		}
-	}));
+	}
+	var template = new Ext.Template(['<b><u>Technical Name: </b></u><BR/><BR/><center>{technName}</center><BR/>', '<b><u>Description: </b></u><BR/><BR/><center>{description}</center><BR/>'])
+	grid.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
+		var detailPanel = Ext.getCmp('detailPanel');
+		template.overwrite(detailPanel.body, r.data);
+	});
+	
+	var winLayout = {
+		title: uwm.Dict.translate('Export Assistant'),
+		layout: 'column',
+		region: 'center',
+		height: 400,
+		width: 550,
+		items: [grid, detailPanel, radioFormItem]
+	};
+	
+	uwm.ui.ExportAssistent.superclass.constructor.call(this, Ext.apply(this, winLayout));
+
+	this.addButton( 
+		uwm.Dict.translate('Export'),
+		function() {
+			var doctypeSelected = radioFormItem.getForm().getValues(true).split('docformat=')[1];
+			alert('function under construction \n '	+ doctypeSelected );
+			}, 
+		radioFormItem
+	);
 	this.addButton(new Ext.Button({
 		window: this,
 		text: uwm.Dict.translate('Cancel'),
@@ -193,7 +148,10 @@ uwm.ui.ExportAssistent.prototype.addButtons = function(radioFormItem) {
 		}
 	}));
 	
+	this.setVisible(true);
+	
 }
+Ext.extend(uwm.ui.ExportAssistent, Ext.Window);
 
 uwm.ui.ExportAssistent.prototype.restoreError = function(options, data, errorMsg, callback, scope, arg) {
 	this.fireEvent("loadexception", this, options, data);
