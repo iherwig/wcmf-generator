@@ -489,8 +489,6 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 						connectionInfo = connectionInfo[0];
 					}
 					
-					// TODO: prevent re-establish existing connections in
-					// WorkflowEventListener
 					this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true);
 				}
 			}
