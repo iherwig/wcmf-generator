@@ -125,7 +125,7 @@ cwm.ChiViewClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 }
 
 cwm.ChiViewClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiView.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
+	return new uwm.graphics.figure.ImageLabelCenterFigure(label, figure, "../application/images/ChiView.png", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiViewClass());
