@@ -132,13 +132,15 @@ uwm.ui.ExportAssistent = function() {
 	
 	uwm.ui.ExportAssistent.superclass.constructor.call(this, Ext.apply(this, winLayout));
 
+//	var detailPanel = Ext.getCmp('detailPanel');
 	this.addButton( 
 		uwm.Dict.translate('Export'),
 		function() {
 			var doctypeSelected = radioFormItem.getForm().getValues(true).split('docformat=')[1];
-			alert('function under construction \n '	+ doctypeSelected );
+			var gridValueSelected = grid.selModel.lastActive ; //.last
+			alert('function under construction \n '	+ doctypeSelected + '\n' + gridValueSelected);
 			}, 
-		radioFormItem
+		[grid, radioFormItem]
 	);
 	this.addButton(new Ext.Button({
 		window: this,
