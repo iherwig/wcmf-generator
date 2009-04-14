@@ -65,10 +65,11 @@ cwb.statistics.Overview = Ext.extend(Ext.grid.GridPanel, {
 		
 		cwb.statistics.Overview.superclass.initComponent.apply(this, arguments);
 		
-		this.on('click', function(event) {
-			if (ObjectContainer.getInstance().modelLoaded) {
-				workbench.maskTabPanel();
-				workbench.createInformationTab(this.selectionModel.selections.items[0].data.id, this.selectionModel.selections.items[0].data.objectList);
+		this.on('rowclick', function(grid, rowIndex, e) {
+			var selectedItem = self.getStore().getAt(rowIndex);
+			
+			if (selectedItem.data.objectList.length > 0) {
+				cwb.ui.StructureTabPanel.getInstance().createHitsGrid(selectedItem.data.id, selectedItem.data.object, selectedItem.data.objectList);
 			}
 		});
 	}

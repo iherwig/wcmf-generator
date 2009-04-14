@@ -10,15 +10,15 @@
 <?php
 $barchartData = array(
 	«EXPAND rowTemplate("Goal", this.getAchievedGoals(), this.getNonAchievedGoals())»,
-	«EXPAND rowTemplate("Requirement", this.getAllRequirements(), this.getRequirementsWithoutParent())»,
-	«EXPAND rowTemplate("Feature", this.getAllFeatures(), this.getFeaturesWithoutParent())»,
-	«EXPAND rowTemplate("Issue", this.getAllIssues(), this.getIssuesWithoutParent())»,
-	«EXPAND rowTemplate("BusinessUseCase", this.getAllBusinessUseCases(), this.getBusinessUseCasesWithoutActor())» 
+	«EXPAND rowTemplate("Requirement", this.getAllRequirements().removeAll(this.getRequirementsWithoutParent()), this.getRequirementsWithoutParent())»,
+	«EXPAND rowTemplate("Feature", this.getAllFeatures().removeAll(this.getFeaturesWithoutParent()), this.getFeaturesWithoutParent())»,
+	«EXPAND rowTemplate("Issue", this.getAllIssues().removeAll(this.getIssuesWithoutParent()), this.getIssuesWithoutParent())»,
+	«EXPAND rowTemplate("BusinessUseCase", this.getAllBusinessUseCases().removeAll(this.getBusinessUseCasesWithoutActor()), this.getBusinessUseCasesWithoutActor())» 
 );
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE rowTemplate(String label, List conform, List nonConform) FOR uml::Model»
+«DEFINE rowTemplate(String label, Collection conform, Collection nonConform) FOR uml::Model»
 	array (
 		'label' => '«label»',
 		'conform' => «conform.size»,

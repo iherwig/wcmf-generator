@@ -1,9 +1,6 @@
-
-#infovis {
+#cwb-package-id {
 	background-color:white;
 	position:relative;
-	width:1000px;
-	height:400px;
 	text-align:center;
 	overflow:hidden;
 	font-size:9px;
@@ -11,11 +8,11 @@
 	margin:0;padding:0;
 }
 
-a, a:link, a:visited {
+#cwb-package-id a, #cwb-package-id a:link, #cwb-package-id a:visited {
 	color:#343439;
 }
 
-.node {
+#cwb-package-id .node {
 	background-color:transparent;
 	font-weight:bold;
 	overflow:hidden;
@@ -23,12 +20,30 @@ a, a:link, a:visited {
 	position:absolute;
 	text-align:center;
 	padding:4px 1px 1px 1px;
+	display: block;
 }
 
-.node:hover {
+#cwb-package-id .node:hover {
 	color:#393434;
 }
 
-.hidden{
+#cwb-package-id .outer {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+#cwb-package-id .inner {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#cwb-package-id img {
+	vertical-align: middle;
+	margin: 2px;
+	margin-right: 5px;
+}	
+	
+#cwb-package-id .hidden {
 	display:none;
 }

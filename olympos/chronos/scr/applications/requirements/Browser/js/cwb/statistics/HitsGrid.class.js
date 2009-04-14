@@ -20,30 +20,33 @@ Ext.namespace("cwb.statistics");
 
 cwb.statistics.HitsGrid = function(config) {
 	var self = this;
-	
+
+	this.store = new Ext.data.Store( {
+	    autoLoad : true,
+	    proxy : new cwb.statistics.HitsProxy(this, config.objectList)
+	});
+
 	cwb.statistics.HitsGrid.superclass.constructor.call(this, Ext.apply(this, {
-		layout : "fit",
-			viewConfig : {
-				forceFit : true
-			},
-			sm : new Ext.grid.RowSelectionModel( {
-				singleSelect : true
-			}),
-			stripeRows : true
-		}, config));
-	
-	Workbench.getInstance().unmaskTabPanel();
+	    layout : "fit",
+	    viewConfig : {
+		    forceFit : true
+	    },
+	    sm : new Ext.grid.RowSelectionModel( {
+		    singleSelect : true
+	    }),
+	    stripeRows : true,
+	    store : this.store,
+	    columns : [ {
+	        header : "loading",
+	        width : 9999,
+	        sortable : false
+	    } ],
+	    closable: true
+	}, config));
 }
 
 Ext.extend(cwb.statistics.HitsGrid, Ext.grid.GridPanel);
 
 cwb.statistics.HitsGrid.prototype.setColumns = function(columns) {
-	for ( var i = 0; i < columns.length; i++) {
-		this.columnList.push( {
-		    header : columns[i],
-		    width : 31,
-		    sortable : true,
-		    dataIndex : columns[i]
-		});
-	}
+	this.getColumnModel().setConfig(columns);
 }
