@@ -72,7 +72,7 @@ function start() {
 	    //Add an event handler to the node when creating it.
 	    onCreateLabel : function(label, node) {
 		    label.id = node.id;
-		    label.innerHTML = "<div class='spacetreeNode' style='background-image: url(\"img/icons/" + node.uwmClassName + ".png\");'>" + node.name + "</div>";
+		    label.innerHTML = "<div class='outer'><div class='inner'><img src=\"img/icons/" + node.uwmClassName + ".png\" />" + node.name + "</div></div>";
 		    // if (node.data[2]){
 		    // canvas.setColor(node.data[2].value);
 		    // }

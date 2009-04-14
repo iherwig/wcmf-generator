@@ -38,7 +38,7 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		this.treePanel = new Ext.Panel( {
 		    title : cwb.Dict.translate('Package tree'),
 		    tabTip : cwb.Dict.translate('Click on an object to see its children.'),
-		    cls: "cwb-treePanel",
+		    cls : "cwb-treePanel",
 		    listeners : {
 			    render : function(self) {
 				    self.getEl().dom.innerHTML = "<div id='" + cwb.ui.StructureTabPanel.PACKAGE_ID + "' style='overflow: auto; width: 100%; height: 100%;'></div>";
@@ -50,7 +50,7 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		Ext.apply(this, {
 		    region : 'center',
 		    activeTab : 0,
-		    deferredRender: false,
+		    deferredRender : false,
 		    items : [ this.weightPanel, this.treePanel ]
 		});
 		
@@ -59,7 +59,13 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		this.on("tabchange", function(tabPanel, tab) {
 			self.handleTabChange(tabPanel, tab);
 		});
+		this.on("remove", function(tabPanel, tab) {
+			self.removeHitsGrid(tab);
+		});
+		
+		this.hitsGrids = new Ext.util.MixedCollection();
 	}
+
 })
 
 /**
@@ -71,23 +77,30 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
  *            tab The Tab which is being activated.
  */
 cwb.ui.StructureTabPanel.prototype.handleTabChange = function(tabPanel, tab) {
-	if (tab == tabPanel.getActiveTab()) {
-		if (frames[3]) {
-			frames[3].window.scroll(0, 1000 - (frames[3].window.innerHeight / 2));
-		}
+	var scrollArea = Ext.get(cwb.ui.StructureTabPanel.PACKAGE_ID);
+	var scroll = scrollArea.getScroll();
+	if (scroll.left == 0 && scroll.top == 0) {
+		scrollArea.scrollTo("left", scrollArea.dom.scrollWidth / 2 - scrollArea.getWidth() / 2);
+		scrollArea.scrollTo("top", scrollArea.dom.scrollHeight / 2 - scrollArea.getHeight() / 2);
 	}
 }
 
 cwb.ui.StructureTabPanel.prototype.clear = function() {
 	var tabCount = this.items.getCount();
 	
-	for (var i = 2; i < tabCount; i++) {
-		this.items.getAt(i).remove();
+	for ( var i = 2; i < tabCount; i++) {
+		this.remove(this.items.itemAt(2));
 	}
+	
+	this.hitsGrids.clear();
 	
 	cwb.Util.emptyDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
 	
 	this.setActiveTab(0);
+}
+
+cwb.ui.StructureTabPanel.prototype.removeHitsGrid = function(hitsGrid) {
+	this.hitsGrids.remove(hitsGrid);
 }
 
 cwb.ui.StructureTabPanel.prototype.showDiagrams = function() {
@@ -96,10 +109,25 @@ cwb.ui.StructureTabPanel.prototype.showDiagrams = function() {
 	 */
 	cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
 	Ext.get(cwb.ui.StructureTabPanel.WEIGHT_ID).dom.contentWindow.location = "html/Treemap.html";
-
+	
 	cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
 	
 	start();
+}
+
+cwb.ui.StructureTabPanel.prototype.createHitsGrid = function(id, tabTitle, tabContentOids) {
+	var tab = this.hitsGrids.get(id);
+	
+	if (!tab) {
+		var tab = new cwb.statistics.HitsGrid( {
+		    title : tabTitle,
+		    objectList : tabContentOids
+		});
+		this.hitsGrids.add(id, tab);
+		this.add(tab);
+	}
+	
+	tab.show();
 }
 
 cwb.ui.StructureTabPanel.getInstance = function() {

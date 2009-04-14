@@ -13,20 +13,18 @@ Ext.namespace("cwb.statistics");
 
 /**
  * @class Routes the InfoGrid requests through persistency layer.
- * @param {String}
- *            id Header of the tab which is to be created
  * @param {Array}
  *            objectList List of objects for which the data must be loaded.
  */
 
-cwb.statistics.HitsProxy = function(id, objectList) {
+cwb.statistics.HitsProxy = function(grid, objectList) {
 	cwb.statistics.HitsProxy.superclass.constructor.call(this, Ext.apply(this, {
 	    record : [],
-	    columns : [],
-	    id : id,
-	    objectList : objectList,
-	    actionset : new uwm.persistency.ActionSet()
+	    columns : []
 	}));
+	
+	this.grid = grid;
+	this.objectList = objectList;
 }
 
 Ext.extend(cwb.statistics.HitsProxy, Ext.data.DataProxy);
@@ -34,7 +32,7 @@ Ext.extend(cwb.statistics.HitsProxy, Ext.data.DataProxy);
 cwb.statistics.HitsProxy.prototype.load = function(params, reader, callback, scope, arg) {
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
-		uwm.persistency.Persistency.getInstance().displayByAlias(this.objectList, function(options, data) {
+		cwb.persistency.Persistency.getInstance().displayByAlias(this.objectList, function(options, data) {
 			self.loadResponse(options, data, callback, scope, arg);
 		}, function(options, data) {
 			self.loadFailed(options, data, callback, scope, arg);
@@ -45,7 +43,6 @@ cwb.statistics.HitsProxy.prototype.load = function(params, reader, callback, sco
 }
 
 cwb.statistics.HitsProxy.prototype.loadResponse = function(options, data, callback, scope, arg) {
-	
 	for ( var currIndex in data.list) {
 		var currNode = data.list[currIndex];
 		
@@ -54,10 +51,10 @@ cwb.statistics.HitsProxy.prototype.loadResponse = function(options, data, callba
 			
 			for ( var currValueIndex in currNode.values[1]) {
 				var currValue = currNode.values[1][currValueIndex];
-
+				
 				if (!(currValue instanceof Function)) {
 					tempData[currValueIndex] = currValue;
-
+					
 					var columnExists = false;
 					for ( var j = 0; j < this.columns.length; j++) {
 						if (this.columns[j] == currValueIndex) {
@@ -80,15 +77,19 @@ cwb.statistics.HitsProxy.prototype.loadResponse = function(options, data, callba
 	    records : this.record
 	};
 	
-	this.fireEvent("load", this, options, arg);
-	callback.call(scope, result, arg, true);
+	this.grid.setColumns(this.getColumns());
 	
-	Workbench.getInstance().addInformationTab(this.id, this.store, this.getColumns());
+	this.fireEvent("load", this, options, arg);
+	if (callback instanceof Function) {
+		callback.call(scope, result, arg, true);
+	}
 }
 
 cwb.statistics.HitsProxy.prototype.loadFailed = function(options, data, errorMsg, callback, scope, arg) {
 	this.fireEvent("loadexception", this, options, data);
-	callback.call(scope, null, arg, false);
+	if (callback instanceof Function) {
+		callback.call(scope, null, arg, false);
+	}
 }
 
 /**
