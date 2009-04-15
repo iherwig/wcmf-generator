@@ -1,6 +1,13 @@
-#Mon Mar 30 13:43:02 CEST 2009
+#Wed Apr 15 15:45:03 CEST 2009
 eclipse.preferences.version=1
-encoding//src/cartridge/BrowserStatistics/json.xpt=UTF-8
+encoding//src/cartridge/BrowserStatistics/barchart.xpt=UTF-8
+encoding//src/cartridge/BrowserStatistics/piechart.xpt=UTF-8
+encoding//src/cartridge/BrowserStatistics/statistics.xpt=UTF-8
+encoding//src/cartridge/BrowserStatistics/statisticsPhp.xpt=UTF-8
+encoding//src/cartridge/DocumentGeneration/template/MomaTemplate/content.xpt=UTF-8
+encoding//src/cartridge/DocumentGeneration/template/MomaTemplate/empty-shell.odt=UTF-8
+encoding//src/cartridge/DocumentGeneration/template/MomaTemplate/static.properties=UTF-8
+encoding//src/cartridge/DocumentGeneration/template/MomaTemplate/styles.xpt=UTF-8
 encoding//src/cartridge/DocumentGeneration/template/SteckbriefeFunktionenMoma/content.xpt=UTF-8
 encoding//src/cartridge/DocumentGeneration/template/SteckbriefeFunktionenMoma/styles.xpt=UTF-8
 encoding//src/cartridge/DocumentGeneration/template/standard/content.xpt=UTF-8
