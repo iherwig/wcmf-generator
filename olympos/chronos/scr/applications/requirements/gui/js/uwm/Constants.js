@@ -22,4 +22,4 @@ uwm.Constants.DD_GROUP = "uwmDDGroup";
  *
  * @type String
  */
-uwm.Constants.SVN_REVISION ="555";
+uwm.Constants.SVN_REVISION ="565";
