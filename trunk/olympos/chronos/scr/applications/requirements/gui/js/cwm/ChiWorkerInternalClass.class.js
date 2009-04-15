@@ -52,7 +52,7 @@ cwm.ChiWorkerInternalClass = function() {
 			label: "",
 			invert: true,
 			connectionType: 'generalization',
-			cardinality: -1
+			cardinality: 1
 		},
 		"ChiWorker": {
 			label: "",
