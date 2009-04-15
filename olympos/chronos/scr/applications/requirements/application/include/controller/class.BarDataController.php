@@ -19,6 +19,19 @@ require_once (BASE.'wcmf/lib/util/class.SessionData.php');
 
 require_once('php-ofc-library/open-flash-chart.php');
 
+/**
+ * @class BarDataController
+ * @ingroup Controller
+ * @brief Feeds data taken from the current session to the CWB bar chart. 
+ * 
+ * <b>Input actions:</b>
+ * - @em barData Feeds the CWB bar chart.
+ *
+ * <b>Output actions:</b>
+ * - none
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class BarDataController extends Controller
 {
 	public function execute() {

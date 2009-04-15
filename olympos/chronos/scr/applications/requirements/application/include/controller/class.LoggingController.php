@@ -13,6 +13,23 @@
 
 require_once (BASE."wcmf/lib/presentation/class.Controller.php");
 
+/**
+ * @class LoggingController
+ * @ingroup Controller
+ * @brief Logs a message from the front-end to application log. 
+ * 
+ * <b>Input actions:</b>
+ * - @em log Logs a message to application log.
+ *
+ * <b>Output actions:</b>
+ * - @em failure If a fatal error occurs
+ * - @em ok In any other case
+ * 
+ * @param[in] logtype The log level (one of <tt>trace</tt>, <tt>log</tt>, <tt>error</tt>).
+ * @param[in] msg The log message.
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class LoggingController extends Controller
 {
 	function hasView()

@@ -15,6 +15,12 @@ require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
 require_once ('class.ExportShutdownHandler.php');
 
+/**
+ * @class BrowserUtil
+ * @brief Provides methods common to CWB functionality. 
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class BrowserUtil {
 	const DEFAULT_TEMPLATE = 'statistics';
 	private static $AVAILABLE_TEMPLATES = array (

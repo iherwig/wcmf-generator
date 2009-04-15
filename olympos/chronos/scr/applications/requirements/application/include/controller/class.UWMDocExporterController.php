@@ -18,6 +18,25 @@ require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
 require_once('class.ExportShutdownHandler.php');
 
+/**
+ * @class UWMDocExporterController
+ * @ingroup Controller
+ * @brief Generates documentation out of the passed model, and returns the documentation file. 
+ * 
+ * <b>Input actions:</b>
+ * - @em exportDoc Generates a documentation file.
+ *
+ * <b>Output actions:</b>
+ * - @em failure If a fatal error occurs
+ * 
+ * @param[in] startModel The OID of the model to generate UML for.
+ * @param[in] startPackage The OID of the package to generate UML for.
+ * @param[in] exportFormat The format to export documentation in, 
+ * must be one of $this->availableFormats.
+ * @param[in] templateName The template to export.
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class UWMDocExporterController extends Controller
 {
 	private $lastTime = 0;

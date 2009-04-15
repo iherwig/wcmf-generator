@@ -11,6 +11,12 @@
  * this entire header must remain intact.
  */
 
+/**
+ * @class BrowserUtil
+ * @brief Provides methods common to OpenArchitectureWare functionality. 
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class OawUtil {
 	const INI_SECTION = 'generator';
 	const INI_EXECUTABLE = 'executable';

@@ -16,6 +16,22 @@ require_once (BASE.'wcmf/lib/util/class.SessionData.php');
 
 //require_once ('class.BrowserUtil.php');
 
+/**
+ * @class BrowserStatisticsController
+ * @ingroup Controller
+ * @brief Returns CWB statistics data from the current session. 
+ * 
+ * <b>Input actions:</b>
+ * - @em loadStatisticsOverview Returns CWB statistics data.
+ *
+ * <b>Output actions:</b>
+ * - @em failure If a fatal error occurs
+ * - @em ok In any other case
+ * 
+ * @param[out] statistics The statistics data from the current session.
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class BrowserStatisticsController extends Controller
 {
 	private $lastTime = 0;

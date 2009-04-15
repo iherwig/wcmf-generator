@@ -19,6 +19,19 @@ require_once (BASE.'wcmf/lib/util/class.SessionData.php');
 
 require_once('php-ofc-library/open-flash-chart.php');
 
+/**
+ * @class PieDataController
+ * @ingroup Controller
+ * @brief Feeds data taken from the current session to the CWB pie chart. 
+ * 
+ * <b>Input actions:</b>
+ * - @em pieData Feeds the CWB pie chart.
+ *
+ * <b>Output actions:</b>
+ * - none
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class PieDataController extends Controller
 {
 	public function execute() {

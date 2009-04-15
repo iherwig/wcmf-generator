@@ -11,7 +11,12 @@
  * this entire header must remain intact.
  */
 
-
+/**
+ * @class ExportShutdownHandler
+ * @brief Returns an error on premature shutdown (e. g. timeout). 
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class ExportShutdownHandler {
 	private static $error = true;
 
