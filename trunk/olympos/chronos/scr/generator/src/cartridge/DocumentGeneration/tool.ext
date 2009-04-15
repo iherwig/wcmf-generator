@@ -52,3 +52,23 @@ String sanitizeHtml(String source) :
 String datePublished() : 
 	JAVA net.sourceforge.olympos.oaw.extend.DateFormatter.now()
 ;
+
+String getGermanName(Chronos::ChiGoal this) :
+	"Ziel"
+;
+
+String getGermanName(Chronos::ChiRequirement this) :
+	"Anforderung"
+;
+
+String getGermanName(Chronos::ChiFeature this) :
+	"Maßnahme"
+;
+
+String getGermanName(Chronos::ChiIssue this) :
+	"Problem"
+;
+
+int getOutlineLevel(int this) :
+	this > 9 ? 9 : this
+;
