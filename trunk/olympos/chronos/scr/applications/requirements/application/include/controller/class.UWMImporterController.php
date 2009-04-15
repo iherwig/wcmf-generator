@@ -16,9 +16,26 @@ require_once (BASE.'wcmf/lib/persistence/class.PersistenceFacade.php');
 
 require_once ('class.OawUtil.php');
 
+/**
+ * @class UWMImporterController
+ * @ingroup Controller
+ * @brief Imports a UML file.
+ *
+ * <b>Input actions:</b>
+ * - @em importUWM Imports a UML file.
+ *
+ * <b>Output actions:</b>
+ * - @em failure If a fatal error occurs
+ * - @em ok In any other case
+ *
+ * @param[in] modelFile The UML file to import.
+ *
+ * @author Niko <enikao@users.sourceforge.net>
+ */
 class UWMImporterController extends Controller
 {
 	const UPLOAD_NAME = 'modelFile';
+
 	private static $uploadErrors = array (
 	UPLOAD_ERR_INI_SIZE=>'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
 	UPLOAD_ERR_FORM_SIZE=>'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
@@ -48,7 +65,7 @@ class UWMImporterController extends Controller
 		$newTime = microtime(true);
 	
 		//echo $newTime-$this->lastTime, ": $msg<br/ >\n";
-	
+		
 		$this->lastTime = $newTime;
 	}
 
@@ -346,7 +363,7 @@ class UWMImporterController extends Controller
 		$properties = $newObj->getValueProperties($attrName);
 	
 		$inputType = $properties['input_type'];
-
+	
 		if (strpos($inputType, 'async') !== false) {
 			list (, $displayTypesString) = explode(':', $inputType);
 			$displayTypes = explode('|', $displayTypesString);
@@ -492,4 +509,3 @@ class UWMImporterController extends Controller
 
 }
 
-?>

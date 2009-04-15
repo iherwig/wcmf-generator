@@ -17,6 +17,23 @@ require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
 require_once ('class.ExportShutdownHandler.php');
 
+/**
+ * @class AllBrowserStatisticsController
+ * @ingroup Controller
+ * @brief Generates UML out of the passed model, runs all CWB statistics,
+ * and saves the results in the current session. 
+ * 
+ * <b>Input actions:</b>
+ * - @em loadAllStatisticsOverview Loads all statistics data into the current session.
+ *
+ * <b>Output actions:</b>
+ * - @em failure If a fatal error occurs
+ * - @em ok In any other case
+ * 
+ * @param[in] modelOid The OID of the model to generate statistical Data for.
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class AllBrowserStatisticsController extends Controller
 {
 	private $lastTime = 0;

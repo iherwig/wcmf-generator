@@ -1,26 +1,38 @@
 <?php
-/**
- * wCMF - wemove Content Management Framework
- * Copyright (C) 2005-2009 wemove digital solutions GmbH
+/*
+ * Copyright (c) 2008 The Olympos Development Team.
  *
- * Licensed under the terms of any of the following licenses
- * at your choice:
+ * http://sourceforge.net/projects/olympos/
  *
- * - GNU Lesser General Public License (LGPL)
- *   http://www.gnu.org/licenses/lgpl.html
- * - Eclipse Public License (EPL)
- *   http://www.eclipse.org/org/documents/epl-v10.php
- *
- * See the license.txt file distributed with this work for
- * additional information.
- *
- * $Id: class.DisplayController.php 929 2009-02-22 23:20:49Z iherwig $
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
  */
+
 require_once (BASE."wcmf/lib/presentation/class.Controller.php");
 require_once (BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
 require_once (BASE."wcmf/lib/model/class.Node.php");
 require_once (BASE."wcmf/lib/model/class.NodeUtil.php");
 
+/**
+ * @class DisplayByAliasController
+ * @ingroup Controller
+ * @brief Returns all data of a given list of aliases. 
+ * 
+ * <b>Input actions:</b>
+ * - @em displayByAlias Returns all data of passed aliases.
+ *
+ * <b>Output actions:</b>
+ * - @em failure If a fatal error occurs
+ * - @em ok In any other case
+ * 
+ * @param[in] aliasList Comma-separated list of aliases to display.
+ * @param[out] list The data of each object referenced by an alias.
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class DisplayByAliasController extends Controller
 {
 	/**

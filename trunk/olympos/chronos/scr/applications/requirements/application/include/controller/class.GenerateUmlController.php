@@ -18,6 +18,22 @@ require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
 require_once('class.ExportShutdownHandler.php');
 
+/**
+ * @class GenerateUmlController
+ * @ingroup Controller
+ * @brief Generates UML out of the passed model, and saves the UML file. 
+ * 
+ * <b>Input actions:</b>
+ * - @em generateUml Generates and saves a UML file.
+ *
+ * <b>Output actions:</b>
+ * - @em failure If a fatal error occurs
+ * - @em ok In any other case
+ * 
+ * @param[in] modelOid The OID of the model to generate UML for.
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class GenerateUmlController extends Controller
 {
 	private $lastTime = 0;

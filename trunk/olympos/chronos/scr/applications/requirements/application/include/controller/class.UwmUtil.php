@@ -13,6 +13,12 @@
 
 require_once (BASE."wcmf/lib/model/class.NodeUtil.php");
 
+/**
+ * @class UwmUtil
+ * @brief Provides methods common to UML Web Modeler functionality. 
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class UwmUtil {
 	const XML_VERSION = "1.0";
 	const ENCODING = "UTF-8";
@@ -376,5 +382,3 @@ class UwmUtil {
 		return $result;
 	}	
 }
-
-?>
