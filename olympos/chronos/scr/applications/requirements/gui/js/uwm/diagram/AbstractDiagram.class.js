@@ -582,23 +582,23 @@ uwm.diagram.AbstractDiagram.prototype.getConnectionTypeDecorators = function(con
 			break;
 			
 		case "realization":
-			result.source = new uwm.graphics.connection.ClosedArrowDecorator();
+			result.target = new uwm.graphics.connection.ClosedArrowDecorator();
 			break;
 			
 		case "generalization":
-			result.source = new uwm.graphics.connection.ClosedArrowDecorator();
+			result.target = new uwm.graphics.connection.ClosedArrowDecorator();
 			break;
 			
 		case "association":
-			result.source = new uwm.graphics.connection.ArrowDecorator();
+			result.target = new uwm.graphics.connection.ArrowDecorator();
 			break;
 			
 		case "associationType":
-			result.source = new uwm.graphics.connection.ArrowDecorator();
+			result.target = new uwm.graphics.connection.ArrowDecorator();
 			break;
 			
 		default:
-			result.source = new uwm.graphics.connection.ArrowDecorator();
+			result.target = new uwm.graphics.connection.ArrowDecorator();
 	}
 	
 	return result;
