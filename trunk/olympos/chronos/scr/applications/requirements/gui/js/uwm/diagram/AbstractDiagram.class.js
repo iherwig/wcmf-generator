@@ -455,11 +455,13 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 			var relationObject = null;
 			
 			if (!connectedObject) {
+				var nmtype = false;
 				var childObject = uwm.model.ModelContainer.getInstance().getByOid(list[i]);
 				if (childObject instanceof uwm.model.Relation) {
 					relationObject = childObject;
 					
 					var parentOids = childObject.getParentOids();
+					nmtype = true;
 					
 					for (var j = 0; j < parentOids.length; j++) {
 						var currParentOid = parentOids[j];
@@ -471,8 +473,9 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					}
 				}
 			}
-			//TODO: prevent double connections for non-equal objects
+			
 			if (connectedObject) {
+			
 				var forbiddenListtype;
 				var connectionInfo = newObject.getModelNodeClass().getConnectionInfo(connectedObject.getModelNodeClass());
 				var createConnection = true;
@@ -497,18 +500,28 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				}
 				
 				if (createConnection) {
-					if (connectionInfo.invert) {
-						forbiddenListtype = "child";
+				
+					if ((connectedObject.getUwmClassName() == newObject.getUwmClassName()) || (nmtype == true)) {
+						//same type as connected object	or nmrelation (listtype the same in both cases)
+						if (connectionInfo.invert) {
+							forbiddenListtype = "child";
+						} else {
+							forbiddenListtype = "parent";
+						}
 					} else {
+						//other type as connected object and no nmrelation
 						forbiddenListtype = "parent";
 					}
 					
-					if (!(connectedObject.getUwmClassName() == newObject.getUwmClassName() && listtype == forbiddenListtype)) {
+					if (!(listtype == forbiddenListtype)) {
+						// everytime draw connection line only in one direction 
+						
 						var newFigure = this.figures.get(newObject.getOid());
 						var connectedFigure = this.figures.get(connectedObject.getOid());
 						
 						var newPort = newFigure.getGraphics().getPorts().get(0);
 						var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
+						
 						
 						this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true);
 					}
@@ -521,9 +534,9 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, targetObject, sourcePort, targetPort, x, y) {
 	if (sourceObject.connectableWith(targetObject)) {
 		var child;
-							
-		if (sourceObject.getUwmClassName() == targetObject.getUwmClassName() && targetObject.hasParent() && !(sourceObject.getUwmClassName()=='ChiNode')) {
-			Ext.Msg.alert(uwm.Dict.translate('Forbidden connection'),uwm.Dict.translate('This object already has a parent. Please disconnect it from its parent and redraw this connection to change its parent.'))
+		
+		if (sourceObject.getUwmClassName() == targetObject.getUwmClassName() && targetObject.hasParent() && !(sourceObject.getUwmClassName() == 'ChiNode')) {
+			Ext.Msg.alert(uwm.Dict.translate('Forbidden connection'), uwm.Dict.translate('This object already has a parent. Please disconnect it from its parent and redraw this connection to change its parent.'))
 		} else {
 			var connectionInfo = sourceObject.getModelNodeClass().getConnectionInfo(targetObject.getModelNodeClass());
 			
@@ -869,7 +882,7 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNod
 		if (figure) {
 			if (!newLabel) {
 				figure.getGraphics().setLabel(modelNode.getLabel());
-			}else{
+			} else {
 				figure.getGraphics().setLabel(newLabel);
 			}
 		}
