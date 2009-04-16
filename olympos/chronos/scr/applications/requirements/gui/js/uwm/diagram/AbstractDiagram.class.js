@@ -452,14 +452,20 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 		for (var i = 0; i < list.length; i++) {
 			var connectedObject = this.getConnectedObject(list[i]);
 			
+			var relationObject = null;
+			
 			if (!connectedObject) {
 				var childObject = uwm.model.ModelContainer.getInstance().getByOid(list[i]);
 				if (childObject instanceof uwm.model.Relation) {
+					relationObject = childObject;
+					
 					var parentOids = childObject.getParentOids();
 					
 					for (var j = 0; j < parentOids.length; j++) {
-						if (parentOids[j] != newObject.getOid()) {
-							connectedObject = this.getConnectedObject(parentOids[j]);
+						var currParentOid = parentOids[j];
+						
+						if (currParentOid != newObject.getOid()) {
+							connectedObject = this.getConnectedObject(currParentOid);
 							break;
 						}
 					}
@@ -469,27 +475,43 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 			if (connectedObject) {
 				var forbiddenListtype;
 				var connectionInfo = newObject.getModelNodeClass().getConnectionInfo(connectedObject.getModelNodeClass());
-				if (connectionInfo.invert) {
-					forbiddenListtype = "child";
-				} else {
-					forbiddenListtype = "parent";
+				var createConnection = true;
+				
+				if (connectionInfo.nmUwmClassName) {
+					var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
+					var maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
+					if (maskedClass.getConnnectionEndRole() == "target") {
+						var relationType = relationObject.getProperty("relationType");
+						
+						for (var j = 0; j < connectionInfo.connections.length; j++) {
+							var currConnectionInfo = connectionInfo.connections[j];
+							
+							if (currConnectionInfo.connectionType == relationType) {
+								connectionInfo = currConnectionInfo;
+								break;
+							}
+						}
+					} else {
+						createConnection = false;
+					}
 				}
 				
-				if (!(connectedObject.getUwmClassName() == newObject.getUwmClassName() && listtype == forbiddenListtype)) {
-					var newFigure = this.figures.get(newObject.getOid());
-					var connectedFigure = this.figures.get(connectedObject.getOid());
-					
-					var newPort = newFigure.getGraphics().getPorts().get(0);
-					var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
-					
-					var connectionInfo = newObject.getModelNodeClass().getConnectionInfo(connectedObject.getModelNodeClass());
-					
-					if (Ext.isArray(connectionInfo)) {
-						// TODO: Select appropriate connection type
-						connectionInfo = connectionInfo[0];
+				if (createConnection) {
+					if (connectionInfo.invert) {
+						forbiddenListtype = "child";
+					} else {
+						forbiddenListtype = "parent";
 					}
 					
-					this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true);
+					if (!(connectedObject.getUwmClassName() == newObject.getUwmClassName() && listtype == forbiddenListtype)) {
+						var newFigure = this.figures.get(newObject.getOid());
+						var connectedFigure = this.figures.get(connectedObject.getOid());
+						
+						var newPort = newFigure.getGraphics().getPorts().get(0);
+						var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
+						
+						this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true);
+					}
 				}
 			}
 		}
@@ -505,21 +527,22 @@ uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, 
 		} else {
 			var connectionInfo = sourceObject.getModelNodeClass().getConnectionInfo(targetObject.getModelNodeClass());
 			
-			if (!Ext.isArray(connectionInfo)) {
+			if (!connectionInfo.nmUwmClassName) {
 				this.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, connectionInfo);
 			} else {
 				var menu = new Ext.menu.Menu();
 				
 				var self = this;
 				
-				for (var i = 0; i < connectionInfo.length; i++) {
+				for (var i = 0; i < connectionInfo.connections.length; i++) {
 				
-					var currConnectionInfo = connectionInfo[i];
+					var currConnectionInfo = connectionInfo.connections[i];
 					menu.add(new Ext.menu.Item({
 						text: currConnectionInfo.label,
 						connectionInfo: currConnectionInfo,
+						nmUwmClassName: connectionInfo.nmUwmClassName,
 						handler: function() {
-							self.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, this.connectionInfo);
+							self.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, this.connectionInfo, undefined, this.nmUwmClassName);
 						}
 					}));
 				}
@@ -530,7 +553,7 @@ uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, 
 	}
 }
 
-uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo, noCommand) {
+uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo, noCommand, nmUwmClassName) {
 	var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
 	
 	var startPort;
@@ -549,6 +572,7 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 	if (!noCommand) {
 		var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
 		command.connectionInfo = connectionInfo;
+		command.nmUwmClassName = nmUwmClassName;
 		command.setConnection(connection);
 		this.workflow.getCommandStack().execute(command);
 	} else {

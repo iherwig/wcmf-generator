@@ -25,3 +25,7 @@ uwm.model.Relation = function(modelNodeClass) {
 }
 
 Ext.extend(uwm.model.Relation, uwm.model.ModelNode);
+
+uwm.model.Relation.prototype.getMaskedModelNodeClass = function() {
+	return uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(this.oid));
+}

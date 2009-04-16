@@ -11,18 +11,17 @@
  */
 Ext.namespace("cwm.relations");
 
-cwm.relations.TargetEndClass = function(){
-    cwm.relations.TargetEndClass.superclass.constructor.call(this);
+cwm.relations.ChiNodeSourceClass = function(){
+    cwm.relations.ChiNodeSourceClass.superclass.constructor.call(this);
     
-    this.uwmClassName = "TargetEnd";
-    this.instanceClassName = "cwm.relations.NMChiControllerChiController";
+    this.uwmClassName = "ChiNodeSource";
+    this.instanceClassName = "cwm.relations.NMChiNodeChiNode";
     this.treeIcon = "Figure";
     this.labelProperties = {};
     
-    this.realUwmClassName = "NMChiControllerChiController";
-    this.connectionEndRole = "target";
+    this.realUwmClassName = "ChiNode";
 }
 
-Ext.extend(cwm.relations.TargetEndClass, uwm.model.RelationEndClass);
+Ext.extend(cwm.relations.ChiNodeSourceClass, uwm.model.RelationEndClass);
 
-uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.TargetEndClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.ChiNodeSourceClass());

@@ -20,6 +20,7 @@ cwm.relations.SourceEndClass = function(){
     this.labelProperties = {};
     
     this.realUwmClassName = "NMChiControllerChiController";
+    this.connectionEndRole = "source";
 }
 
 Ext.extend(cwm.relations.SourceEndClass, uwm.model.RelationEndClass);

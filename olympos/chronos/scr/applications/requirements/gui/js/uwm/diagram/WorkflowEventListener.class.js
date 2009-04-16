@@ -48,6 +48,7 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 				var target = command.target.getParent().getFigure().getModelObject();
 				
 				var connectionInfo = command.connectionInfo;
+				var nmUwmClassName = command.nmUwmClassName;
 				
 				var newSource = source;
 				var newTarget = target;
@@ -57,7 +58,7 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 					newTarget = source;
 				}
 				
-				newTarget.associate(newSource, connectionInfo.nmSelf);
+				newTarget.associate(newSource, connectionInfo, nmUwmClassName);
 					
 			} else if (command instanceof draw2d.CommandMove) {
 				var modelObject = command.figure.getFigure();

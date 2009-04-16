@@ -1,13 +1,13 @@
 /*
  * Copyright (c) 2008 The Olympos Development Team.
- *
+ * 
  * http://sourceforge.net/projects/olympos/
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
- * this entire header must remain intact.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
 Ext.namespace("uwm.model");
 
@@ -15,7 +15,8 @@ Ext.namespace("uwm.model");
  * @class A persisted Object.
  * 
  * @constructor
- * @param {uwm.model.ModelNodeClass} modelNodeClass The ModelNodeClass of this ModelNode.
+ * @param {uwm.model.ModelNodeClass}
+ *            modelNodeClass The ModelNodeClass of this ModelNode.
  */
 uwm.model.ModelNode = function(modelNodeClass) {
 	if (modelNodeClass) {
@@ -36,9 +37,9 @@ uwm.model.ModelNode.prototype.initByDisplayResult = function(node) {
 	this.parentOids = this.deMaskOids(node.properties.parentoids);
 	this.childOids = this.deMaskOids(node.properties.childoids);
 	
-	for (var i in node.values) {
+	for ( var i in node.values) {
 		if (!(node.values[i] instanceof Function)) {
-			for (var j in node.values[i]) {
+			for ( var j in node.values[i]) {
 				if (!(node.values[i][j] instanceof Function)) {
 					this.data[j] = node.values[i][j];
 				}
@@ -53,7 +54,7 @@ uwm.model.ModelNode.prototype.deMaskOids = function(oidList) {
 	var result = [];
 	
 	if (oidList) {
-		for (var i = 0; i < oidList.length; i++) {
+		for ( var i = 0; i < oidList.length; i++) {
 			var currOid = oidList[i];
 			
 			var demaskedOid = modelNodeClass.demaskOid(currOid);
@@ -167,7 +168,7 @@ uwm.model.ModelNode.prototype.changeProperties = function(values) {
 	
 	var changedLabel = false;
 	
-	for (var i in values) {
+	for ( var i in values) {
 		if (!(values[i] instanceof Function)) {
 			oldValues[i] = this.data[i];
 			this.data[i] = values[i];
@@ -191,8 +192,8 @@ uwm.model.ModelNode.prototype.changeProperties = function(values) {
 }
 
 uwm.model.ModelNode.prototype.setDefaultLabel = function() {
-	this.changeProperties({
-		"Name": this.getModelNodeClass().getDefaultLabel()
+	this.changeProperties( {
+		"Name" : this.getModelNodeClass().getDefaultLabel()
 	});
 }
 
@@ -204,29 +205,44 @@ uwm.model.ModelNode.prototype.isDeleted = function() {
 	return this.alreadyDeleted;
 }
 
-uwm.model.ModelNode.prototype.associate = function(parentModelObject, nmSelf) {
+uwm.model.ModelNode.prototype.getMaskedRelatedOid = function(relatedOid) {
+	return this.maskedOids[relatedOid];
+}
+
+uwm.model.ModelNode.prototype.associate = function(parentModelObject, connectionInfo, nmUwmClassName) {
 	var self = this;
 	
 	var childOid = this.getOid();
 	var parentOid = parentModelObject.getOid();
 	
-	if (nmSelf) {
+	if (connectionInfo.nmSelf) {
 		childOid = this.insertDirectionInOid(childOid, "Source");
 		parentOid = this.insertDirectionInOid(parentOid, "Target");
 	}
 	
-	uwm.persistency.Persistency.getInstance().associate(parentOid, childOid, false, function(request, data) {
-		uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
-	});
+	if (!nmUwmClassName) {
+		uwm.persistency.Persistency.getInstance().associate(parentOid, childOid, false, function(request, data) {
+			uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
+		});
+	} else {
+		var actionSet = new uwm.persistency.ActionSet();
+		actionSet.addAssociate(parentOid, childOid, false, function(request, data) {
+			uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
+		});
+		actionSet.addSave("{last_created_oid:" + nmUwmClassName + "}", {
+			relationType : connectionInfo.connectionType,
+			Name: connectionInfo.label
+		});
+		actionSet.commit();
+	}
 	if (this.parentOids) {
 		this.parentOids.push(parentModelObject.getOid());
 	}
 }
 
 uwm.model.ModelNode.prototype.insertDirectionInOid = function(oldOid, direction) {
-
-	var result = uwm.Util.getUwmClassNameFromOid(oldOid) + direction + ":" +
-	uwm.Util.getNumericFromOid(oldOid);
+	
+	var result = uwm.Util.getUwmClassNameFromOid(oldOid) + direction + ":" + uwm.Util.getNumericFromOid(oldOid);
 	
 	return result;
 }
@@ -245,7 +261,7 @@ uwm.model.ModelNode.prototype.updateOidLists = function(parentModelObject) {
 	var param;
 	
 	if (this.childOids) {
-		for (var i = 0; i < this.childOids.length; i++) {
+		for ( var i = 0; i < this.childOids.length; i++) {
 			if (this.childOids[i] == parentModelObject.getOid()) {
 				param = i;
 			}
@@ -256,8 +272,8 @@ uwm.model.ModelNode.prototype.updateOidLists = function(parentModelObject) {
 	
 	var param;
 	if (parentModelObject.parentOids) {
-		for (var i = 0; i < parentModelObject.parentOids.length; i++) {
-		
+		for ( var i = 0; i < parentModelObject.parentOids.length; i++) {
+			
 			if (parentModelObject.parentOids[i] == this.getOid()) {
 				param = i;
 			}

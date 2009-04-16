@@ -27,3 +27,7 @@ uwm.model.RelationEndClass = function() {
 }
 
 Ext.extend(uwm.model.RelationEndClass, uwm.model.ModelNodeClass);
+
+uwm.model.RelationEndClass.prototype.getConnnectionEndRole = function() {
+	return this.connectionEndRole;
+}
