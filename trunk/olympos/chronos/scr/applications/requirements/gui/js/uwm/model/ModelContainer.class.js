@@ -44,12 +44,13 @@ uwm.model.ModelContainer.prototype.createByDisplayResult = function(displayResul
 	
 	while (furtherElements) {
 		var uwmClassName = node.type;
-		var oid = node.oid;
+		var origOid = node.oid;
 		
-		var newModelNode = this.getNode(uwmClassName, oid);
-		oid = newModelNode.oid;
+		var newModelNode = this.getNode(uwmClassName, origOid);
+		var oid = newModelNode.oid;
 		
 		newModelNode.initByDisplayResult(node);
+		newModelNode.oid = oid;
 		
 		this.items.add(oid, newModelNode);
 		
@@ -68,7 +69,7 @@ uwm.model.ModelContainer.prototype.createByDisplayResult = function(displayResul
 			}
 		}
 		
-		outstandingNodes.removeKey(oid);
+		outstandingNodes.removeKey(origOid);
 		
 		furtherElements = outstandingNodes.getCount() > 0;
 		
@@ -318,8 +319,9 @@ uwm.model.ModelContainer.prototype.getNode = function(uwmClassName, oid) {
 		var realModelClass = modelClass.getRealModelClass();
 		var newModelNode = eval("new " + modelClass.getInstanceClassName() +
 		"(realModelClass)");
-		newModelNode.oid = oid;
 	}
+
+	newModelNode.oid = oid;
 	
 	return newModelNode;
 }

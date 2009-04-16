@@ -20,6 +20,7 @@ cwm.relations.NodeTargetEndClass = function(){
     this.labelProperties = {};
     
     this.realUwmClassName = "NMChiNodeChiNode";
+    this.connectionEndRole = "target";
 }
 
 Ext.extend(cwm.relations.NodeTargetEndClass, uwm.model.RelationEndClass);
