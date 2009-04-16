@@ -52,7 +52,7 @@ cwm.ChiRequirementClass = function() {
 			label: "contains",
 			invert: false,
 			connectionType: 'aggregation',
-			cardinality: -1
+			cardinality: 1
 		},
 		"ChiFeature": {
 			label: "Realizes",
