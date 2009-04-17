@@ -47,26 +47,6 @@ cwm.ChiWorkerClass = function() {
 	}];
 	
 	this.connectionInfo = {
-
-		"ChiWorker": {
-			label: "",
-			invert: false,
-			invertBackendRelation: false,
-			connectionType: 'generalization',
-			cardinality: 1
-		},
-		"ChiWorkerInternal": {
-			label: "",
-			invert: false,
-			connectionType: 'generalization',
-			cardinality: -1
-		},
-		"ChiWorkerExternal": {
-			label: "",
-			invert: false,
-			connectionType: 'generalization',
-			cardinality: -1
-		},
 		"ChiBusinessUseCase": {
 			label: "participates in",
 			invert: false,
