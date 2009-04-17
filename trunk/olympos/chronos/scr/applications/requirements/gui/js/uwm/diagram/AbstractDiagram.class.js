@@ -875,7 +875,9 @@ uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 
 uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel, newLabel) {
 	if (modelNode == this) {
-		this.tab.setTitle(this.getLabel());
+		if (this.tab) {
+			this.tab.setTitle(this.getLabel());
+		}
 	} else if (this.containsObject(modelNode)) {
 		var figure = this.figures.get(modelNode.getOid());
 		
