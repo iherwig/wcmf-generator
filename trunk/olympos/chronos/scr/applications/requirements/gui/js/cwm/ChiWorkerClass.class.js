@@ -50,31 +50,32 @@ cwm.ChiWorkerClass = function() {
 
 		"ChiWorker": {
 			label: "",
-			invert: true,
+			invert: false,
+			invertBackendRelation: false,
 			connectionType: 'generalization',
-			cardinality: -1
+			cardinality: 1
 		},
 		"ChiWorkerInternal": {
 			label: "",
-			invert: true,
+			invert: false,
 			connectionType: 'generalization',
 			cardinality: -1
 		},
 		"ChiWorkerExternal": {
 			label: "",
-			invert: true,
+			invert: false,
 			connectionType: 'generalization',
 			cardinality: -1
 		},
 		"ChiBusinessUseCase": {
 			label: "participates in",
-			invert: true,
+			invert: false,
 			connectionType: 'association',
 			cardinality: -1
 		},
 		"ChiBusinessUseCaseCore": {
 			label: "participates in",
-			invert: true,
+			invert: false,
 			connectionType: 'association',
 			cardinality: -1
 		}
