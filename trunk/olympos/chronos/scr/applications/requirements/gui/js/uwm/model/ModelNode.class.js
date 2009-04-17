@@ -28,6 +28,9 @@ uwm.model.ModelNode = function(modelNodeClass) {
 	this.data = new Object();
 	
 	this.alreadyDeleted = false;
+	this.maskedOids = {};
+	this.parentOids = [];
+	this.childOids = [];
 }
 
 uwm.model.ModelNode.prototype.initByDisplayResult = function(node) {
@@ -215,7 +218,7 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, connection
 	var childOid = this.getOid();
 	var parentOid = parentModelObject.getOid();
 	
-	if (connectionInfo.nmSelf) {
+	if (connectionInfo && connectionInfo.nmSelf) {
 		childOid = this.insertDirectionInOid(childOid, "Source");
 		parentOid = this.insertDirectionInOid(parentOid, "Target");
 	}
@@ -230,13 +233,17 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, connection
 			uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
 		});
 		actionSet.addSave("{last_created_oid:" + nmUwmClassName + "}", {
-			relationType : connectionInfo.connectionType,
-			Name: connectionInfo.label
+		    relationType : connectionInfo.connectionType,
+		    Name : connectionInfo.label
 		});
 		actionSet.commit();
 	}
+	
 	if (this.parentOids) {
 		this.parentOids.push(parentModelObject.getOid());
+	}
+	if (parentModelObject.childOids) {
+		parentModelObject.childOids.push(this.getOid());
 	}
 }
 

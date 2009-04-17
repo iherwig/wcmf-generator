@@ -38,6 +38,20 @@ uwm.diagram.AbstractDiagram = function(modelNodeClass) {
 	this.objects = new Ext.util.MixedCollection();
 	
 	this.dropWindow = null;
+
+	var self = this;
+	
+	uwm.event.EventBroker.getInstance().addListener({
+		"delete": function(modelObject) {
+			self.handleDeleteEvent(modelObject);
+		},
+		"changeLabel": function(modelObject, oldLabel, newLabel) {
+			self.handleChangeLabelEvent(modelObject, oldLabel, newLabel);
+		},
+		"associate": function(parentModelObject, childModelObject) {
+			self.handleAssociateEvent(parentModelObject, childModelObject);
+		}
+	});
 }
 
 Ext.extend(uwm.diagram.AbstractDiagram, uwm.diagram.DiagramBase);
@@ -48,7 +62,7 @@ uwm.diagram.AbstractDiagram.prototype.initByDisplayResult = function(node) {
 
 uwm.diagram.AbstractDiagram.prototype.getOwnContainer = function() {
 	var self = this;
-	
+
 	uwm.model.ModelContainer.getInstance().loadByOid(this.parentOids[0], self.actionSet, 0, function(packageModel) {
 		self.setContainedPackage(packageModel);
 	});
@@ -108,20 +122,6 @@ uwm.diagram.AbstractDiagram.prototype.init = function() {
 	this.createdObjects = new Array();
 	
 	this.actionSet = new uwm.persistency.ActionSet();
-	
-	var self = this;
-	
-	uwm.event.EventBroker.getInstance().addListener({
-		"delete": function(modelObject) {
-			self.handleDeleteEvent(modelObject);
-		},
-		"changeLabel": function(modelObject, oldLabel, newLabel) {
-			self.handleChangeLabelEvent(modelObject, oldLabel, newLabel);
-		},
-		"associate": function(parentModelObject, childModelObject) {
-			self.handleAssociateEvent(parentModelObject, childModelObject);
-		}
-	});
 }
 
 /**
@@ -306,7 +306,7 @@ uwm.diagram.AbstractDiagram.prototype.loadFigures = function(forceReload) {
 	
 	if (forceReload) {
 		var self = this;
-		
+
 		uwm.model.ModelContainer.getInstance().loadByOid(this.getOid(), function(modelNode) {
 			self.handleLoaded();
 		}, 1);
@@ -901,8 +901,9 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNod
 }
 
 uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentModelNode, childModelNode) {
-
-	if (childModelNode instanceof uwm.model.AttributeObject) {
+	if (parentModelNode instanceof uwm.model.builtin.Package && childModelNode == this) {
+		uwm.diagram.DiagramContainer.getInstance().loadDiagram(this);
+	} else if (childModelNode instanceof uwm.model.AttributeObject) {
 		var figure = this.figures.get(parentModelNode.getOid());
 		
 		var graphics = figure.getGraphics();
