@@ -51,14 +51,14 @@ cwm.ChiGoalClass = function() {
 			label: "contains",
 			invert: false,
 			connectionType: 'composition',
-			number: 1
+			cardinality: 1
 		},
 		
 		"ChiRequirement": {
 			label: "is specified by",
 			invert: false,
 			connectionType: 'composition',
-			number: -1
+			cardinality: -1
 		}
 	
 	};
