@@ -47,26 +47,6 @@ cwm.ChiBusinessPartnerClass = function() {
 	}];
 	
 	this.connectionInfo = {			
-		
-		"ChiBusinessPartner": {
-			label: "",
-			invert: false,
-			invertBackendRelation: false,
-			connectionType: 'generalization',
-			cardinality: 1
-		},
-		"ChiBusinessPartnerActive": {
-			label: "",
-			invert: false,
-			connectionType: 'generalization',
-			cardinality: -1
-		},
-		"ChiBusinessPartnerPassive": {
-			label: "",
-			invert: false,
-			connectionType: 'generalization',
-			cardinality: -1
-		},
 		"ChiBusinessUseCase": {
 			label: "participates in",
 			invert: false,
