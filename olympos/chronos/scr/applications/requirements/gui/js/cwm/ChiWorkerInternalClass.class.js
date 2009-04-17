@@ -50,7 +50,7 @@ cwm.ChiWorkerInternalClass = function() {
 		
 		"ChiWorkerInternal": {
 			label: "",
-			invert: true,
+			invert: false,
 			connectionType: 'generalization',
 			cardinality: 1
 		},
@@ -62,13 +62,13 @@ cwm.ChiWorkerInternalClass = function() {
 		},
 		"ChiBusinessUseCase": {
 			label: "participates in",
-			invert: true,
+			invert: false,
 			connectionType: 'association',
 			cardinality: -1
 		},
 		"ChiBusinessUseCaseCore": {
 			label: "participates in",
-			invert: true,
+			invert: false,
 			connectionType: 'association',
 			cardinality: -1
 		}

@@ -50,31 +50,32 @@ cwm.ChiBusinessPartnerClass = function() {
 		
 		"ChiBusinessPartner": {
 			label: "",
-			invert: true,
+			invert: false,
+			invertBackendRelation: false,
 			connectionType: 'generalization',
-			cardinality: -1
+			cardinality: 1
 		},
 		"ChiBusinessPartnerActive": {
 			label: "",
-			invert: true,
+			invert: false,
 			connectionType: 'generalization',
 			cardinality: -1
 		},
 		"ChiBusinessPartnerPassive": {
 			label: "",
-			invert: true,
+			invert: false,
 			connectionType: 'generalization',
 			cardinality: -1
 		},
 		"ChiBusinessUseCase": {
 			label: "participates in",
-			invert: true,
+			invert: false,
 			connectionType: 'association',
 			cardinality: -1
 		},
 		"ChiBusinessUseCaseCore": {
 			label: "participates in",
-			invert: true,
+			invert: false,
 			connectionType: 'association',
 			cardinality: -1
 		}
