@@ -180,8 +180,6 @@ uwm.model.ModelContainer.prototype.handleCreatedDiagram = function(oid, parentMo
 	newModelNode.setDefaultLabel();
 	
 	newModelNode.associate(parentModelNode);
-	
-	uwm.diagram.DiagramContainer.getInstance().loadDiagram(newModelNode);
 }
 
 uwm.model.ModelContainer.prototype.createFigure = function(diagramModelNode, modelObject, actionSet, callback) {
