@@ -259,7 +259,15 @@ uwm.model.ModelNode.prototype.disassociate = function(parentModelObject) {
 	
 	this.updateOidLists(parentModelObject);
 	
-	uwm.persistency.Persistency.getInstance().disassociate(parentModelObject.getOid(), self.getOid(), function(request, data) {
+	var childOid = this.getOid();
+	var parentOid = parentModelObject.getOid();
+	
+	if (this.getModelNodeClass() == parentModelObject.getModelNodeClass()) {
+		childOid = parentModelObject.getOid();
+		parentOid = this.getOid();
+	}
+	
+	uwm.persistency.Persistency.getInstance().disassociate(parentOid, childOid, function(request, data) {
 		uwm.event.EventBroker.getInstance().fireEvent("disassociate", parentModelObject, self);
 	});
 }
