@@ -48,54 +48,49 @@ cwm.ActivityClass = function() {
 
 	this.connectionInfo = {
 
-		"ActivityReceive" : {
-			label :"Associates",
-			invert :true,
-			connectionType :"association",
-			cardinality: -1
-		},
 		"ActivityInitial" : {
 			label :"Associates",
-			invert :false,
-			invertBackendRelation: true,
+			invert :true,
+			invertBackendRelation: false,
 			connectionType :"association",
 			cardinality: 1
-		}
-		,
-
+		},
 		"ActivityDecision" : {
 			label :"Associates",
 			invert :true,
+			invertBackendRelation: false,
 			connectionType :"association",
-			cardinality: -1
-		}
-		,
-
+			cardinality: 1
+		},
+		
 		"Activity" : {
 			label :"Associates",
 			invert :false,
 			invertBackendRelation: false,
 			connectionType :"association",
-			cardinality: 1
-		}
-
-		,
-
+			cardinality: -1
+		},
+		
 		"ActivitySend" : {
 			label :"Associates",
 			invert :false,
+			invertBackendRelation: false,
 			connectionType :"association",
 			cardinality: -1
-		}
-
-		,
-
+		},
 		"ActivityFinal" : {
 			label :"Associates",
-			invert :true,
-			invertBackendRelation: true,
+			invert :false,
+			invertBackendRelation: false,
 			connectionType :"association",
-			cardinality: 1
+			cardinality: -1
+		},
+		"ActivityReceive" : {
+			label :"Associates",
+			invert :false,
+			invertBackendRelation: false,
+			connectionType :"association",
+			cardinality: -1
 		}
 
 	};

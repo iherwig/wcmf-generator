@@ -45,6 +45,7 @@ cwm.ActivitySetClass = function() {
 	}];
 	
 	this.connectionInfo = {
+		/*
 		"ChiBusinessUseCase": {
 			label: "Contains",
 			invert: true,
@@ -55,44 +56,37 @@ cwm.ActivitySetClass = function() {
 			invert: true,
 			connectionType: ""
 		},
-		
-		
 		"Activity": {
 			label: "Contains",
 			invert: false,
 			connectionType: "Aggregation"
 		},
-		
 		"ActivityDecision": {
 			label: "Contains",
 			invert: false,
 			connectionType: "Aggregation"
 		},
-		
 		"ActivityReceive": {
 			label: "Contains",
 			invert: false,
 			connectionType: "Aggregation"
 		},
-		
 		"ActivitySend": {
 			label: "Contains",
 			invert: false,
 			connectionType: "Aggregation"
 		},
-		
 		"ActivityInitial": {
 			label: "Contains",
 			invert: false,
 			connectionType: "Aggregation"
 		},
-		
 		"ActivityFinal": {
 			label: "Contains",
 			invert: false,
 			connectionType: "Aggregation"
 		}
-	
+	*/
 	
 	};
 }
