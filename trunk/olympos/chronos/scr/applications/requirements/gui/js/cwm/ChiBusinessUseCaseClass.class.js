@@ -91,7 +91,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 			cardinality: 1
 		},
 		"ChiFeature": {
-			label: "refines",
+			label: "is refined by",
 			invert: true,
 			connectionType: 'realization',
 			cardinality: 1

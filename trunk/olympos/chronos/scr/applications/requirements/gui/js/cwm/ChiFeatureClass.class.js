@@ -49,19 +49,19 @@ cwm.ChiFeatureClass = function() {
 	this.connectionInfo = {
 	
 		"ChiRequirement": {
-			label: "Realizes",
+			label: "is realized by",
 			invert: true,
 			connectionType: 'realization',
 			cardinality: -1
 		},
 		"ChiBusinessUseCase": {
-			label: "refines",
+			label: "is refined by",
 			invert: false,
 			connectionType: 'realization',
 			cardinality: -1
 		},
 		"ChiBusinessUseCaseCore": {
-			label: "refines",
+			label: "is refined by",
 			invert: false,
 			connectionType: 'realization',
 			cardinality: -1
