@@ -47,19 +47,20 @@ cwm.ActivityReceiveClass = function() {
 	} ];
 
 	this.connectionInfo = {
+		
 		"ActivitySend" : {
 			label :"Associates",
 			invert :true,
-			connectionType :"Association",
+			invertBackendRelation: false,
+			connectionType :"association",
 			cardinality: 1
-		}
-
-		,
+		},
 
 		"Activity" : {
 			label :"Associates",
-			invert :false,
-			connectionType :"Association",
+			invert :true,
+			invertBackendRelation: false,
+			connectionType :"association",
 			cardinality: 1
 		}
 
