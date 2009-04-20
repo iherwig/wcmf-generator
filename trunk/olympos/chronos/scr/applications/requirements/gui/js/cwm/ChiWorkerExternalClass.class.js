@@ -54,6 +54,13 @@ cwm.ChiWorkerExternalClass = function() {
 			connectionType: 'generalization',
 			cardinality: 1
 		},
+		"ChiWorker": {
+			label: "",
+			invert: true,
+			connectionType: 'generalization',
+			cardinality: -1
+		},
+
 		"ChiBusinessUseCase": {
 			label: "participates in",
 			invert: false,
