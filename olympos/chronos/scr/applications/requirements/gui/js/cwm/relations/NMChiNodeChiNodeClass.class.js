@@ -25,6 +25,6 @@ cwm.relations.NMChiNodeChiNodeClass = function() {
 	}
 }
 
-Ext.extend(cwm.relations.NMChiNodeChiNodeClass, uwm.model.RelationClass);
+Ext.extend(cwm.relations.NMChiNodeChiNodeClass, uwm.model.EditableRelationClass);
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.NMChiNodeChiNodeClass());

@@ -25,6 +25,6 @@ cwm.relations.NMChiControllerChiControllerClass = function() {
 	};
 }
 
-Ext.extend(cwm.relations.NMChiControllerChiControllerClass, uwm.model.RelationClass);
+Ext.extend(cwm.relations.NMChiControllerChiControllerClass, uwm.model.EditableRelationClass);
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.NMChiControllerChiControllerClass());

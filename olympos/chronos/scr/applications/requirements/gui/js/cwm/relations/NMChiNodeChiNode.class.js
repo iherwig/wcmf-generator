@@ -15,4 +15,4 @@ cwm.relations.NMChiNodeChiNode = function(modelNodeClass) {
 	cwm.relations.NMChiNodeChiNode.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.relations.NMChiNodeChiNode, uwm.model.Relation);
+Ext.extend(cwm.relations.NMChiNodeChiNode, uwm.model.EditableRelation);

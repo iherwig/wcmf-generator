@@ -43,6 +43,12 @@ uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
 			if (this.diagram.isPropertyDisplay()) {
 				uwm.property.PropertyContainer.getInstance().showProperty(figure.getModelObject());
 			}
+		} else if (figure instanceof uwm.graphics.connection.BaseConnection) {
+			var relationObject = figure.getRelationObject();
+			
+			if (relationObject instanceof uwm.model.EditableRelation) {
+				uwm.property.PropertyContainer.getInstance().showProperty(relationObject);
+			}
 		}
 	}
 }
