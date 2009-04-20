@@ -523,7 +523,7 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 						var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
 						
 						
-						this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true);
+						this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true, undefined, relationObject);
 					}
 				}
 			}
@@ -566,7 +566,7 @@ uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, 
 	}
 }
 
-uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo, noCommand, nmUwmClassName) {
+uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo, noCommand, nmUwmClassName, relationObject) {
 	var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
 	
 	var startPort;
@@ -586,11 +586,13 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
 		command.connectionInfo = connectionInfo;
 		command.nmUwmClassName = nmUwmClassName;
+		command.relationObject = relationObject;
 		command.setConnection(connection);
 		this.workflow.getCommandStack().execute(command);
 	} else {
 		connection.setSource(startPort);
 		connection.setTarget(endPort);
+		connection.setRelationObject(relationObject);
 		this.workflow.addFigure(connection);
 	}
 }

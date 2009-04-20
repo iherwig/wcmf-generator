@@ -212,7 +212,7 @@ uwm.model.ModelNode.prototype.getMaskedRelatedOid = function(relatedOid) {
 	return this.maskedOids[relatedOid];
 }
 
-uwm.model.ModelNode.prototype.associate = function(parentModelObject, connectionInfo, nmUwmClassName) {
+uwm.model.ModelNode.prototype.associate = function(parentModelObject, connectionInfo, nmUwmClassName, connection) {
 	var self = this;
 	
 	var childOid = this.getOid();
@@ -225,17 +225,21 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, connection
 	
 	if (!nmUwmClassName) {
 		uwm.persistency.Persistency.getInstance().associate(parentOid, childOid, false, function(request, data) {
+			self.fillInRelationObject(connection, data);
 			uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
 		});
 	} else {
 		var actionSet = new uwm.persistency.ActionSet();
 		actionSet.addAssociate(parentOid, childOid, false, function(request, data) {
+			self.fillInRelationObject(connection, data);
 			uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
 		});
+/*
 		actionSet.addSave("{last_created_oid:" + nmUwmClassName + "}", {
 		    relationType : connectionInfo.connectionType,
 		    Name : connectionInfo.label
 		});
+*/
 		actionSet.commit();
 	}
 	
@@ -244,6 +248,19 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, connection
 	}
 	if (parentModelObject.childOids) {
 		parentModelObject.childOids.push(this.getOid());
+	}
+}
+
+uwm.model.ModelNode.prototype.fillInRelationObject = function(connection, data) {
+	if (data.manyToMany) {
+		var temp = {};
+		for (var i in data.manyToMany) {
+			temp.node = data.manyToMany[i][0];
+			break;
+		}
+		
+		var relationObject = uwm.model.ModelContainer.getInstance().createByDisplayResult(temp);
+		connection.setRelationObject(relationObject);
 	}
 }
 

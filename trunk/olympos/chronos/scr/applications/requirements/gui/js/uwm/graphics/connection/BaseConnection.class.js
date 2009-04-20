@@ -22,6 +22,8 @@ Ext.namespace("uwm.graphics.connection");
 uwm.graphics.connection.BaseConnection = function(label, decorators) {
 	draw2d.Connection.call(this);
 	
+	this.relationObject = null;
+	
 	if (decorators.source) {
 		this.setSourceDecorator(decorators.source);
 	}
@@ -159,4 +161,12 @@ uwm.graphics.connection.BaseConnection.prototype.deleteFromDiagram = function(it
  */
 uwm.graphics.connection.BaseConnection.prototype.deleteFromModel = function(item, e) {
 	this.getWorkflow().getCommandStack().execute(new draw2d.CommandDelete(this));
+}
+
+uwm.graphics.connection.BaseConnection.prototype.setRelationObject = function(relationObject) {
+	this.relationObject = relationObject;
+}
+
+uwm.graphics.connection.BaseConnection.prototype.getRelationObject = function() {
+	return this.relationObject;
 }
