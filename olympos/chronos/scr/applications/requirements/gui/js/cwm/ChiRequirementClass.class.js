@@ -51,11 +51,11 @@ cwm.ChiRequirementClass = function() {
 		"ChiRequirement": {
 			label: "contains",
 			invert: false,
-			connectionType: 'aggregation',
+			connectionType: 'composition',
 			cardinality: -1
 		},
 		"ChiFeature": {
-			label: "Realizes",
+			label: "is realized by",
 			invert: false,
 			connectionType: 'realization',
 			cardinality: -1
