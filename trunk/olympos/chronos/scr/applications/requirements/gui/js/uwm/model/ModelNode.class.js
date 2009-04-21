@@ -232,14 +232,22 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, connection
 		var actionSet = new uwm.persistency.ActionSet();
 		actionSet.addAssociate(parentOid, childOid, false, function(request, data) {
 			self.fillInRelationObject(connection, data);
+
+			//Workaround until last_created_oid is working in wCMF with relations
+			connection.getRelationObject().changeProperties( {
+			    relationType : connectionInfo.connectionType,
+			    Name : connectionInfo.label
+			});
+			
 			uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
 		});
-/*
+		
+		/*
 		actionSet.addSave("{last_created_oid:" + nmUwmClassName + "}", {
 		    relationType : connectionInfo.connectionType,
 		    Name : connectionInfo.label
 		});
-*/
+		*/
 		actionSet.commit();
 	}
 	
@@ -254,7 +262,7 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, connection
 uwm.model.ModelNode.prototype.fillInRelationObject = function(connection, data) {
 	if (data.manyToMany) {
 		var temp = {};
-		for (var i in data.manyToMany) {
+		for ( var i in data.manyToMany) {
 			temp.node = data.manyToMany[i][0];
 			break;
 		}
@@ -271,7 +279,7 @@ uwm.model.ModelNode.prototype.insertDirectionInOid = function(oldOid, direction)
 	return result;
 }
 
-uwm.model.ModelNode.prototype.disassociate = function(parentModelObject) {
+uwm.model.ModelNode.prototype.disassociate = function(parentModelObject, connectionInfo, relationObject) {
 	var self = this;
 	
 	this.updateOidLists(parentModelObject);
@@ -284,7 +292,16 @@ uwm.model.ModelNode.prototype.disassociate = function(parentModelObject) {
 		parentOid = this.getOid();
 	}
 	
+	if (connectionInfo && connectionInfo.nmSelf) {
+		childOid = this.insertDirectionInOid(childOid, "Source");
+		parentOid = this.insertDirectionInOid(parentOid, "Target");
+	}
+	
 	uwm.persistency.Persistency.getInstance().disassociate(parentOid, childOid, function(request, data) {
+		if (connectionInfo && connectionInfo.nmSelf && relationObject) {
+			uwm.model.ModelContainer.getInstance().deleteObject(relationObject);
+		}
+		
 		uwm.event.EventBroker.getInstance().fireEvent("disassociate", parentModelObject, self);
 	});
 }
