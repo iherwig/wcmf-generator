@@ -1,9 +1,37 @@
 <?php
-
+/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+ 
 require_once (BASE."wcmf/lib/presentation/class.Controller.php");
 require_once (BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
 require_once (BASE."wcmf/lib/persistence/class.ObjectQuery.php");
 
+/**
+ * @class 
+ * @ingroup Controller
+ * @brief restores from history list which is based on only one object one or more entries selected
+ * 
+ * <b>Input actions:</b>
+ * - @em restorehistliststate restores one state based on selected entry from history list
+ * - @em restorehistlistfields restores all the selected entries from history list independent from state
+ * 
+ * <b>Output actions:</b>
+ * - @em ok in any case
+ * 
+ * @param[in] ids of selected entries in histroy list
+ * @param[out] NewName new name of changed object (maybe name was changed)
+ * 
+ * @author 	Sabine
+ */
 class ObjectHistoryRestoreController extends Controller
 {
 	var $ids;

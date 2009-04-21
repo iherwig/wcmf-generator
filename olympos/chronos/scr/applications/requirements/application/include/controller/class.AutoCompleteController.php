@@ -1,10 +1,42 @@
 <?php
+/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+ 
 require_once (BASE."wcmf/lib/presentation/class.Controller.php");
 require_once (BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
 require_once (BASE."wcmf/lib/persistence/class.ObjectQuery.php");
 require_once (BASE."wcmf/lib/model/class.Node.php");
 require_once (BASE."wcmf/lib/security/class.RightsManager.php");
 
+/**
+ * @class AutoCompleteController
+ * @ingroup Controller
+ * @brief 
+ * 
+ * <b>Input actions:</b>
+ * - @em autocomplete List founded Objects with searchstring inherited in name, limit to limit_end entries
+ *
+ * <b>Output actions:</b>
+ * - @em ok in any case
+ * 
+ * @param[in] query searchstring typed in to find Objects inheriting searchstring as substring in name
+ * @param[in] limit_end limit for paging info (wcmf)
+ * @param[in] limit_start index for paging info (wcmf)
+ * @param[out] totalcount counts elements of returned datastore
+ * @param[out] data returned datastore
+ * @param[out] fields defines format of returned datastore
+ * 
+ * @author 	Sabine 
+ */
 class AutoCompleteController extends Controller
 {
 	function hasView()
