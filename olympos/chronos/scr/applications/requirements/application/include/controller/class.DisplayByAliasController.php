@@ -86,7 +86,7 @@ class DisplayByAliasController extends Controller
 			foreach ($currAliasList as $currAlias) {
 				$currTemplate = $query->getObjectTemplate($currType, QUERYOP_OR);
 
-				$currTemplate->setValue('Alias', '\'' . mysql_escape_string($currAlias) . '\'', DATATYPE_ATTRIBUTE);
+				$currTemplate->setValue('Alias', $currAlias, DATATYPE_ATTRIBUTE);
 			}
 
 			$currFoundObjects = $query->execute(BUILDDEPTH_SINGLE);
