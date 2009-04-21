@@ -18,21 +18,21 @@ Ext.namespace("cwb.statistics");
  * @extends Ext.grid.GridPanel
  */
 
-cwb.statistics.HitsGrid = function(config) {
+cwb.ui.LastEditedGrid = function(config) {
 	var self = this;
 	
 	this.store = new Ext.data.Store( {
 	    autoLoad : true,
-	    proxy : new cwb.statistics.HitsProxy( {
-	        grid : self,
+	    proxy : new cwb.ui.LastEditedProxy( {
+	        grid : this,
 	        objectList : config.objectList,
 	        iconRenderer: this.iconRenderer
 	    })
 	});
 	
-	cwb.statistics.HitsGrid.superclass.constructor.call(this, Ext.apply(this, {
-		closable : true
+	cwb.ui.LastEditedGrid.superclass.constructor.call(this, Ext.apply(this, {
+		title : cwb.Dict.translate('Most recently edited Objects')
 	}, config));
 }
 
-Ext.extend(cwb.statistics.HitsGrid, cwb.ObjectsListGrid);
+Ext.extend(cwb.ui.LastEditedGrid, cwb.ObjectsListGrid);

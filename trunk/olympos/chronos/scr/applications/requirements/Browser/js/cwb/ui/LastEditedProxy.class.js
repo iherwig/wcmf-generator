@@ -17,16 +17,16 @@ Ext.namespace("cwb.statistics");
  *            objectList List of objects for which the data must be loaded.
  */
 
-cwb.statistics.HitsProxy = function(config) {
-	cwb.statistics.HitsProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
+cwb.ui.LastEditedProxy = function(config) {
+	cwb.ui.LastEditedProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 }
 
-Ext.extend(cwb.statistics.HitsProxy, cwb.ObjectsListProxy);
+Ext.extend(cwb.ui.LastEditedProxy, cwb.ObjectsListProxy);
 
-cwb.statistics.HitsProxy.prototype.load = function(params, reader, callback, scope, arg) {
+cwb.ui.LastEditedProxy.prototype.load = function(params, reader, callback, scope, arg) {
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
-		cwb.persistency.Persistency.getInstance().displayByAlias(this.objectList, function(options, data) {
+		cwb.persistency.Persistency.getInstance().lastEdited( function(options, data) {
 			self.loadResponse(options, data, callback, scope, arg);
 		}, function(options, data) {
 			self.loadFailed(options, data, callback, scope, arg);

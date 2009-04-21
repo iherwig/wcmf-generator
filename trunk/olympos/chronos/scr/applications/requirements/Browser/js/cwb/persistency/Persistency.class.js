@@ -114,3 +114,6 @@ cwb.persistency.Persistency.prototype.generateUml = function(modelOid, successHa
 
 cwb.persistency.Persistency.prototype.loadAllStatisticsOverview = function(modelOid, successHandler, errorHandler) {
 }
+
+cwb.persistency.Persistency.prototype.lastEdited = function(successHandler, errorHandler) {
+}
