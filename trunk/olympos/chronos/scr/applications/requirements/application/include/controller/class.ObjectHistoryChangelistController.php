@@ -1,9 +1,39 @@
 <?php
-
+/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+ 
 require_once (BASE."wcmf/lib/presentation/class.Controller.php");
 require_once (BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
 require_once (BASE."wcmf/lib/persistence/class.ObjectQuery.php");
 
+/**
+ * @class 
+ * @ingroup Controller
+ * @brief returns list of requested object changes from start to limit entries (used for paging) and whole list count
+ * 
+ * <b>Input actions:</b>
+ * - @em histlist returns list of requested object changes from start to limit entries (used for paging) and whole list count
+ *
+ * <b>Output actions:</b>
+ * - @em ok in any case 
+ * 
+ * @param[in] oid string oid of requested object in format type:id
+ * @param[in] start position of first partial list entry in whole list
+ * @param[in] limit count of partial list entries 
+ * @param[out] changelist returns partial list from start to limit
+ * @param[out] gescount counts entries from whole list ignoring start and limit
+ * 
+ * @author 	Sabine
+ */
 class ObjectHistoryChangelistController extends Controller
 {
 

@@ -1,7 +1,35 @@
 <?php
-
+/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+ 
 require_once (BASE."wcmf/application/controller/class.SaveController.php");
 
+
+/**
+ * @class 
+ * @ingroup Controller
+ * @brief saves history list entries bevore saving the changes itsself
+ * 
+ * <b>Input actions:</b>
+ * - @em save 
+ *
+ * <b>Output actions:</b>
+ * - @em classical save controller
+ * 
+ * @param[in] $this->_request->getData(), key value, changed property and changed value
+ * @param[out] changelist array of id,data,duplicate,eventtype,affectedoid,otheroid,timestamp,user to write to history list as new entry
+ * 
+ * @author 	Sabine
+ */
 class ObjectHistorySaveController extends SaveController
 {
 

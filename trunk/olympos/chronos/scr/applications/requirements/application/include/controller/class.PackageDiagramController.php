@@ -1,10 +1,38 @@
 <?php
+/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+ 
 require_once (BASE."wcmf/lib/presentation/class.Controller.php");
 require_once (BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
 require_once (BASE."wcmf/lib/persistence/class.ObjectQuery.php");
 //require_once (BASE."wcmf/lib/model/class.Node.php");
 //require_once (BASE."wcmf/lib/security/class.RightsManager.php");
 
+/**
+ * @class 
+ * @ingroup Controller
+ * @brief given oid of package creates a new diagram named like package and elements of package added to this diagram
+ * 
+ * <b>Input actions:</b>
+ * - @em packdiagr
+ *
+ * <b>Output actions:</b>
+ * - @em ok in any case
+ * 
+ * @param[in] oid of selected package
+ * @param[out] oid of the new diagram
+ * 
+ * @author 	Sabine
+ */
 class PackageDiagramController extends Controller
 {
 	var $currentUser ; 
