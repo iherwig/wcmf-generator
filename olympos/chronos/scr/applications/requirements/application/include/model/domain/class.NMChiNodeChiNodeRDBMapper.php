@@ -109,7 +109,7 @@ class NMChiNodeChiNodeRDBMapper extends NodeUnifiedRDBMapper
      /* 
       * Value description: the type of relation
       */
-      array('name' => 'relationType', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'relationtype', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'select#async:RelationType', 'display_type' => 'text'),
+      array('name' => 'relationType', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'relationtype', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'select#fix:generalization|association|aggregation|composition', 'display_type' => 'text'),
      /* 
       * Value description: the name of this object.
       */

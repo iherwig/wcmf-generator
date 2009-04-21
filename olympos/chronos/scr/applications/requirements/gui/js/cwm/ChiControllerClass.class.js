@@ -57,15 +57,21 @@ cwm.ChiControllerClass = function() {
 	    "ChiController" : {
 	        nmUwmClassName : "SourceEnd",
 	        connections : [ {
-	            label : "inherits from",
+	            label : "Generalization",
 	            invert : false,
 	            connectionType : "generalization",
 	            nmSelf : true,
 	            cardinality : -1
 	        }, {
-	            label : "calls",
+	            label : "Association",
 	            invert : false,
 	            connectionType : "association",
+	            nmSelf : true,
+	            cardinality : -1
+	        }, {
+	            label : "Composition",
+	            invert : false,
+	            connectionType : "composition",
 	            nmSelf : true,
 	            cardinality : -1
 	        } ]

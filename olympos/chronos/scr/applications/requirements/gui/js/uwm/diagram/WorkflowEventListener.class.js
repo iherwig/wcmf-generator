@@ -91,7 +91,29 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 					var source = figure.getSource().getParent().getFigure().getModelObject();
 					var target = figure.getTarget().getParent().getFigure().getModelObject();
 					
-					source.disassociate(target);
+					var connectionInfo = source.getModelNodeClass().getConnectionInfo(target.getModelNodeClass());
+					var relationObject = null;
+					
+					if (connectionInfo.nmUwmClassName) {
+						relationObject = figure.getRelationObject();
+						
+						if (relationObject) {
+							var connectionType = relationObject.getProperty("relationType");
+							
+							for (var i in connectionInfo.connections) {
+								var currConnection = connectionInfo.connections[i];
+								
+								if (!(currConnection instanceof Function)) {
+									if (currConnection.connectionType == connectionType) {
+										connectionInfo = currConnection;
+										break;
+									}
+								}
+							}
+						}
+					}
+					
+					source.disassociate(target, connectionInfo, relationObject);
 				} else if (figure instanceof uwm.graphics.figure.AbstractClassPart) {
 					var modelObject = figure.getModelObject();
 					
