@@ -66,7 +66,7 @@ uwm.property.StaticComboBox.prototype.render = function(container, position) {
 }
 
 uwm.property.StaticComboBox.prototype.fieldChanged = function(field, newValue, oldValue) {
-	self.persistValue(newValue);
+	this.persistValue(newValue);
 }
 
 uwm.property.StaticComboBox.prototype.handleDestroy = function(field) {
