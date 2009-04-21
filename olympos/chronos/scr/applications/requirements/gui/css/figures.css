@@ -204,8 +204,18 @@
 	background-image: url("../img/16x16/ChiNode.png") !important;
 }
 
-.FigureChiValue {
-	background-image: url("../img/ChiValue.png") !important;
+.FigureChiValue, .FigureAttribute {
+	background-image: url("../img/16x16/ChiValue.png") !important;
+}
+
+.FigureOperation {
+	background-image: url("../img/16x16/Operation.png") !important;
+}
+
+.FigureAttribute, .FigureOperation {
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	margin-top: 2px;
 }
 
 .FigureChiController {
@@ -215,3 +225,4 @@
 .FigureChiView {
 	background-image: url("../img/16x16/ChiView.png") !important;
 }
+
