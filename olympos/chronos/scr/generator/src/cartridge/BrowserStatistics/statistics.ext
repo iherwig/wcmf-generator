@@ -66,8 +66,21 @@ cached List[Chronos::ChiBusinessUseCase] getAllBusinessUseCases(uml::Model this)
 ;
 
 cached List[Chronos::ChiBusinessUseCase] getBusinessUseCasesWithoutActor(uml::Model this):
-	this.getAllBusinessUseCases().select(e|e.getActors().size == 0)
+	this.getAllBusinessUseCases().select(e|e.getActors().size == 0 && (e.PrimaryActor == null || e.PrimaryActor.trim().length == 0))
 ;
+
+//Package
+
+cached List[uml::Package] getAllPackages(uml::Model this):
+	this.allOwnedElements().typeSelect(uml::Package)
+;
+
+cached List[uml::Package] getPackagesWithBothSubpackagesAndElements(uml::Model this):
+	this.getAllPackages().select(e|e.nestedPackage.size > 0 && e.ownedType.size > 0)
+;
+
+
+
 
 String calculateTrafficLight(Real this):
 	(this == -1) ?

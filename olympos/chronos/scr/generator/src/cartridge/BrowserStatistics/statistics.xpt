@@ -24,7 +24,7 @@
 	«EXPAND rowTemplate("issuesWithoutParent", "&nbsp;&nbsp;Without Parent", 1 - ((E() + this.getIssuesWithoutParent().size) / this.getAllIssues().size)) FOR this.getIssuesWithoutParent()»,
 
 	«EXPAND rowTemplate("allBusinessUseCases", "Business Use Cases", -1) FOR this.getAllBusinessUseCases()»,
-	«EXPAND rowTemplate("businessUseCasesWithoutActor", "&nbsp;&nbsp;Without Actor", 1 - ((E() + this.getBusinessUseCasesWithoutActor().size) / this.getAllBusinessUseCases().size)) FOR this.getBusinessUseCasesWithoutActor()»
+	«EXPAND rowTemplate("businessUseCasesWithoutActor", "&nbsp;&nbsp;Without Actor", 1 - ((E() + this.getBusinessUseCasesWithoutActor().size) / this.getAllBusinessUseCases().size)) FOR this.getBusinessUseCasesWithoutActor()»,
 ]
 «ENDFILE»
 «ENDDEFINE»

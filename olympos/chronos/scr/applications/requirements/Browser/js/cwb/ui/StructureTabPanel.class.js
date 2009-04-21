@@ -47,11 +47,13 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		    }
 		});
 		
+		this.lastEditedPanel = new cwb.ui.LastEditedGrid( {});
+		
 		Ext.apply(this, {
 		    region : 'center',
 		    activeTab : 0,
 		    deferredRender : false,
-		    items : [ this.weightPanel, this.treePanel ]
+		    items : [ this.weightPanel, this.treePanel, this.lastEditedPanel ]
 		});
 		
 		cwb.ui.StructureTabPanel.superclass.initComponent.apply(this, arguments);
@@ -88,8 +90,8 @@ cwb.ui.StructureTabPanel.prototype.handleTabChange = function(tabPanel, tab) {
 cwb.ui.StructureTabPanel.prototype.clear = function() {
 	var tabCount = this.items.getCount();
 	
-	for ( var i = 2; i < tabCount; i++) {
-		this.remove(this.items.itemAt(2));
+	for ( var i = cwb.ui.StructureTabPanel.STATIC_TAB_COUNT; i < tabCount; i++) {
+		this.remove(this.items.itemAt(cwb.ui.StructureTabPanel.STATIC_TAB_COUNT));
 	}
 	
 	this.hitsGrids.clear();
@@ -139,3 +141,4 @@ cwb.ui.StructureTabPanel.getInstance = function() {
 
 cwb.ui.StructureTabPanel.WEIGHT_ID = "cwb-weight-id";
 cwb.ui.StructureTabPanel.PACKAGE_ID = "cwb-package-id";
+cwb.ui.StructureTabPanel.STATIC_TAB_COUNT = 3;
