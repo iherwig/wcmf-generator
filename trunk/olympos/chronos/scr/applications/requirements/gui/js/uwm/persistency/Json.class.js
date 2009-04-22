@@ -33,6 +33,7 @@ uwm.persistency.Json.prototype.jsonRequest = function(params, successHandler, er
 	Ext.Ajax.request({
 		url: this.jsonUrl,
 		method: "post",
+		timeout: uwm.Constants.AJAX_TIMEOUT,
 		params: params,
 		callback: function(options, success, response) {
 			if (success) {

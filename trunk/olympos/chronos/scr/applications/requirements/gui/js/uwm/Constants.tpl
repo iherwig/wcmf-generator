@@ -23,3 +23,10 @@ uwm.Constants.DD_GROUP = "uwmDDGroup";
  * @type String
  */
 uwm.Constants.SVN_REVISION ="$WCREV$";
+
+/**
+ * Timeout of AJAX requests, in milliseconds.
+ * 
+ * @type int
+ */
+uwm.Constants.AJAX_TIMEOUT = 180000;
