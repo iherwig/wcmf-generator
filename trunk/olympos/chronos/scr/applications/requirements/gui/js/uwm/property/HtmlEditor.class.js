@@ -1,43 +1,47 @@
 /*
  * Copyright (c) 2008 The Olympos Development Team.
- *
+ * 
  * http://sourceforge.net/projects/olympos/
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
- * this entire header must remain intact.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
 Ext.namespace("uwm.property");
 
 /**
  * @class An HTML Editor for use in Property View.
  * 
- * <p>Additional feature: On pressing Shift-Space, an inline autocomplete helper is invoked.</p>
+ * <p>
+ * Additional feature: On pressing Shift-Space, an inline autocomplete helper is
+ * invoked.
+ * </p>
  * 
  * @extends Ext.form.HtmlEditor
  * @constructor
- * @param {Object} config The configuration object.
+ * @param {Object}
+ *            config The configuration object.
  */
 uwm.property.HtmlEditor = function(config) {
 	var self = this;
 	
 	uwm.property.HtmlEditor.superclass.constructor.call(this, Ext.apply(this, {
-		enableAlignments: false,
-		enableColors: false,
-		enableFont: false,
-		enableFontSize: false,
-		enableLinks: false,
-		enableSourceEdit: false,
-		listeners: {
-			"initialize": function() {
-				self.handleInitialize();
-			},
-			"beforedestroy": function(field) {
-				self.handleDestroy(field);
-			}
-		}
+	    enableAlignments : false,
+	    enableColors : false,
+	    enableFont : false,
+	    enableFontSize : false,
+	    enableLinks : false,
+	    enableSourceEdit : false,
+	    listeners : {
+	        "initialize" : function() {
+		        self.handleInitialize();
+	        },
+	        "beforedestroy" : function(field) {
+		        self.handleDestroy(field);
+	        }
+	    }
 	}, config));
 	
 	this.toolTipText = config.toolTip
@@ -52,7 +56,7 @@ uwm.property.HtmlEditor = function(config) {
 Ext.extend(uwm.property.HtmlEditor, Ext.form.HtmlEditor);
 
 uwm.property.HtmlEditor.prototype.handleInitialize = function() {
-
+	
 	var link = this.doc.createElement("link");
 	link.setAttribute("rel", "stylesheet");
 	link.setAttribute("type", "text/css");
@@ -67,7 +71,7 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 			Ext.EventManager.removeAll(this.doc);
 		} catch (e) {
 		}
-
+		
 		this.doc.designMode = "off";
 	} else {
 		this.doc.body.setAttribute("class", 'editable');
@@ -91,11 +95,11 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 				//this.wrap = Ext.DomHelper.append(Ext.getBody(), "<div />", true);
 				this.wrap = new Ext.Layer();
 				
-				this.comboBox = new uwm.property.InlineComboBox({
-					htmledit: this,
-					doc: this.doc,
-					renderTo: this.wrap.dom,
-					value: this.preText.trim()
+				this.comboBox = new uwm.property.InlineComboBox( {
+				    htmledit : this,
+				    doc : this.doc,
+				    renderTo : this.wrap.dom,
+				    value : this.preText.trim()
 				});
 				
 				var htmlpos = this.getPosition(true);
@@ -103,7 +107,8 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 				var combobox = this.comboBox.getBox();
 				var spanbox = this.span.getBoundingClientRect();
 				
-				// the fixed offsets are determined by trial & error, no deeper meaning (just looks better this way)
+				// the fixed offsets are determined by trial & error, no deeper
+				// meaning (just looks better this way)
 				this.wrap.setBounds(htmlbox.x - htmlpos[0] + spanbox.left, htmlbox.y - htmlpos[1] + spanbox.top + combobox.height * 1.1, combobox.width + 20, combobox.height);
 				this.wrap.show();
 				
@@ -122,7 +127,7 @@ uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue, new
 }
 
 uwm.property.HtmlEditor.prototype.revertInlineComboBox = function() {
-	if (this.store){
+	if (this.store) {
 		this.comboBox.destroy();
 	}
 	this.wrap.remove();
@@ -135,9 +140,9 @@ uwm.property.HtmlEditor.prototype.render = function(container, position) {
 	uwm.property.HtmlEditor.superclass.render.apply(this, arguments);
 	
 	if (this.toolTipText) {
-		this.toolTip = new Ext.ToolTip({
-			target: container,
-			html: this.toolTipText
+		this.toolTip = new Ext.ToolTip( {
+		    target : container,
+		    html : this.toolTipText
 		});
 	}
 }
@@ -148,6 +153,70 @@ uwm.property.HtmlEditor.prototype.handleDestroy = function(field) {
 		tmp[this.getName()] = this.getValue();
 		
 		this.modelNode.changeProperties(tmp);
+	}
+}
+
+/**
+ * This method is a copy out of ext-all-debug.js, with some additional checks
+ * preventing failure if the HtmlEditor is destroyed before it is fully initialized.
+ * 
+ * TODO: Update for newer ExtJS-Versions (copied from 2.2.0)
+ */
+uwm.property.HtmlEditor.prototype.getEditorBody = function(){
+	if (this.doc) {
+		return this.doc.body || this.doc.documentElement;
+	}
+}
+
+/**
+* This method is a copy out of ext-all-debug.js, with some additional checks
+* preventing failure if the HtmlEditor is destroyed before it is fully initialized.
+* 
+* TODO: Update for newer ExtJS-Versions (copied from 2.2.0)
+*/
+uwm.property.HtmlEditor.prototype.initEditor = function() {
+	var dbody = this.getEditorBody();
+
+	if (dbody) {
+		var ss = this.el.getStyles('font-size', 'font-family', 'background-image', 'background-repeat');
+		ss['background-attachment'] = 'fixed';
+		dbody.bgProperties = 'fixed';
+		
+		Ext.DomHelper.applyStyles(dbody, ss);
+		
+		if (this.doc) {
+			try {
+				Ext.EventManager.removeAll(this.doc);
+			} catch (e) {
+			}
+		}
+		
+		this.doc = this.getDoc();
+		
+		if (this.doc) {
+			Ext.EventManager.on(this.doc, {
+			    'mousedown' : this.onEditorEvent,
+			    'dblclick' : this.onEditorEvent,
+			    'click' : this.onEditorEvent,
+			    'keyup' : this.onEditorEvent,
+			    buffer : 100,
+			    scope : this
+			});
+			
+			if (Ext.isGecko) {
+				Ext.EventManager.on(this.doc, 'keypress', this.applyCommand, this);
+			}
+			if (Ext.isIE || Ext.isSafari || Ext.isOpera) {
+				Ext.EventManager.on(this.doc, 'keydown', this.fixKeys, this);
+			}
+			this.initialized = true;
+			
+			this.fireEvent('initialize', this);
+			
+			this.doc.editorInitialized = true;
+			
+			this.pushValue();
+		}
 	}
 }
 
