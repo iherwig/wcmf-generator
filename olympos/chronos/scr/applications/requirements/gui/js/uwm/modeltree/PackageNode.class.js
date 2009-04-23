@@ -50,7 +50,7 @@ uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
 		}, {
 			text: uwm.Dict.translate('New diagram from package'),
 			handler: function(item, e) {
-				self.addDiagramFromPackage(item, e);
+				self.addDiagramFromPackageAndReload(item, e, self, self.addDiagramFromPackage(item, e ) );
 			}
 		}, {
 			text: uwm.Dict.translate('Delete from model'),
@@ -116,6 +116,10 @@ uwm.modeltree.PackageNode.prototype.addDiagram = function(self, e) {
 
 uwm.modeltree.PackageNode.prototype.selectAsScope = function(self, e) {
 	uwm.objectgrid.ObjectGridContainer.getInstance().loadScope(this.modelNode);
+}
+
+uwm.modeltree.PackageNode.prototype.addDiagramFromPackageAndReload = function(self, e, menuEntry, addDiagramFromPackage) {
+	menuEntry.reload();
 }
 
 uwm.modeltree.PackageNode.prototype.addDiagramFromPackage = function(self, e) {
