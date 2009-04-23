@@ -57,8 +57,11 @@ class BrowserLastEditedController extends Controller
 		foreach ($objlist as $objKey=>$currObj) {
 			$currOid = $currObj->getAffectedOid();
 			if ($this->isValidType($currOid) && array_search($currOid, $resultOids) === false) {
-				$resultList[] = $persistenceFacade->load($currOid);
-				$resultOids[] = $currOid;
+				$node = $persistenceFacade->load($currOid);
+				if ($node) {
+					$resultList[] = $node;
+					$resultOids[] = $currOid;
+				}
 			}
 		
 			if (count($resultOids) >= self::LIMIT) {
