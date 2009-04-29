@@ -11,15 +11,15 @@
  */
 Ext.namespace("cwm.relations");
 
-cwm.relations.NMActivityChiNodeClass = function(){
-    cwm.relations.NMActivityChiNodeClass.superclass.constructor.call(this);
+cwm.relations.NMActivityChiObjectClass = function(){
+    cwm.relations.NMActivityChiObjectClass.superclass.constructor.call(this);
     
-    this.uwmClassName = "NMActivityChiNode";
-    this.instanceClassName = "cwm.relations.NMActivityChiNode";
+    this.uwmClassName = "NMActivityChiObject";
+    this.instanceClassName = "cwm.relations.NMActivityChiObject";
     this.treeIcon = "Figure";
     this.labelProperties = {};
 }
 
-Ext.extend(cwm.relations.NMActivityChiNodeClass, uwm.model.RelationClass);
+Ext.extend(cwm.relations.NMActivityChiObjectClass, uwm.model.RelationClass);
 
-uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.NMActivityChiNodeClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.NMActivityChiObjectClass());

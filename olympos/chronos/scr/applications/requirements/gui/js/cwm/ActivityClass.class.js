@@ -91,7 +91,15 @@ cwm.ActivityClass = function() {
 			invertBackendRelation: false,
 			connectionType :"association",
 			cardinality: -1
+		},
+		
+		"ChiObject": {
+			label: "Modify",
+			invert: false,
+			connectionType: "",
+			cardinality: -1
 		}
+
 
 	};
 }

@@ -42,6 +42,10 @@ class EntityBaseExtended extends EntityBaseExtendedBase
       $this->setValue('Notes', HtmlSanitizer::sanitize($this->getValue('Notes')), DATATYPE_ATTRIBUTE);
 
   }
+  
+  public function draw($image, $xPos, $yPos, $width, $height) {
+  	imagerectangle($image, $xPos, $yPos, $xPos + $width, $yPos + $height, imagecolorallocate($image, 0, 0, 0));
+  }
 // PROTECTED REGION END
 }
 ?>

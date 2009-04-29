@@ -80,3 +80,7 @@ uwm.model.ModelClass.prototype.getInitialWidth = function() {
 uwm.model.ModelClass.prototype.getInitialHeight = function() {
 	return this.initialHeight;
 }
+
+uwm.model.ModelClass.prototype.canCreateNewInDiagram = function(diagram) {
+	return true;
+}

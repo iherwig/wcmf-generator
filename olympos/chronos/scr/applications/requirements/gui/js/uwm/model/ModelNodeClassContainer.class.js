@@ -30,13 +30,23 @@ uwm.model.ModelNodeClassContainer.prototype.registerClass = function(
 	if (modelNodeClass instanceof uwm.model.ModelClass) {
 		var semanticGroup = modelNodeClass.getSemanticGroup();
 
-		var entries = this.semanticGroups[semanticGroup];
-		if (!entries) {
-			this.semanticGroups[semanticGroup] = new Array();
-			entries = this.semanticGroups[semanticGroup];
+		if (!Ext.isArray(semanticGroup)) {
+			this.addSemanticGroup(semanticGroup, modelNodeClass);
+		} else {
+			for(var i = 0; i < semanticGroup.length; i++) {
+				this.addSemanticGroup(semanticGroup[i], modelNodeClass);
+			}
 		}
-		entries.push(modelNodeClass);
 	}
+}
+
+uwm.model.ModelNodeClassContainer.prototype.addSemanticGroup = function(semanticGroup, modelNodeClass) {
+	var entries = this.semanticGroups[semanticGroup];
+	if (!entries) {
+		this.semanticGroups[semanticGroup] = new Array();
+		entries = this.semanticGroups[semanticGroup];
+	}
+	entries.push(modelNodeClass);
 }
 
 uwm.model.ModelNodeClassContainer.prototype.getClass = function(uwmClassName) {
