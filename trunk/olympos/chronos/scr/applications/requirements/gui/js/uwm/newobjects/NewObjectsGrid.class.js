@@ -1,22 +1,23 @@
 /*
  * Copyright (c) 2008 The Olympos Development Team.
- *
+ * 
  * http://sourceforge.net/projects/olympos/
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
- * this entire header must remain intact.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
 Ext.namespace("uwm.newobjects");
 
 /**
  * @class Shows a list of new Model Objects to be dragged on a Diagram.
- *
+ * 
  * @extends Ext.grid.GridPanel
  * @constructor
- * @param {Object} config The configuration object.
+ * @param {Object}
+ *            config The configuration object.
  */
 uwm.newobjects.NewObjectsGrid = function() {
 }
@@ -96,14 +97,16 @@ uwm.newobjects.NewObjectsGrid.prototype.getStore = function() {
 	for (var i = 0; i < classes.getCount(); i++) {
 		var currClass = classes.itemAt(i);
 		
-		if (currClass instanceof uwm.model.ModelClass && currClass.semanticGroup == this.semanticGroup) {
-			data.push({
-				iconClass: currClass.getTreeIcon(),
-				title: currClass.getUwmClassName(),
-				description: currClass.getDescription(),
-				helpUrl: currClass.getHelpUrl(),
-				modelClass: currClass
-			});
+		if (currClass instanceof uwm.model.ModelClass) {
+			var semanticGroup = currClass.semanticGroup;
+			
+			if (!Ext.isArray(semanticGroup)) {
+				data = this.addSemanticGroup(data, currClass, semanticGroup);
+			} else {
+				for (var j = 0; j < semanticGroup.length; j++) {
+					data = this.addSemanticGroup(data, currClass, semanticGroup[j]);
+				}
+			}
 		}
 	}
 	
@@ -126,6 +129,20 @@ uwm.newobjects.NewObjectsGrid.prototype.getStore = function() {
 			mapping: "helpUrl"
 		}]
 	});
+}
+
+uwm.newobjects.NewObjectsGrid.prototype.addSemanticGroup = function(data, currClass, semanticGroup) {
+	if (semanticGroup == this.semanticGroup) {
+		data.push({
+			iconClass: currClass.getTreeIcon(),
+			title: currClass.getUwmClassName(),
+			description: currClass.getDescription(),
+			helpUrl: currClass.getHelpUrl(),
+			modelClass: currClass
+		});
+	}
+	
+	return data;
 }
 
 uwm.newobjects.NewObjectsGrid.prototype.render = function(container, position) {

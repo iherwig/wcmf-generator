@@ -45,14 +45,14 @@ uwm.newobjects.Accordion = Ext.extend(Ext.Panel, {
 			var currClass = classes.itemAt(i);
 			
 			if (currClass instanceof uwm.model.ModelClass) {
-				var newGroup = true;
-				for (var j = 0; j < this.data.length; j++) {
-					if (currClass.getSemanticGroup() == this.data[j]) {
-						newGroup = false;
+				var semanticGroup = currClass.getSemanticGroup();
+				
+				if (!Ext.isArray(semanticGroup)) {
+					this.addSemanticGroup(semanticGroup);
+				} else {
+					for (var j = 0; j < semanticGroup.length; j++) {
+						this.addSemanticGroup(semanticGroup[j]);
 					}
-				}
-				if (newGroup) {
-					this.data[this.data.length] = currClass.getSemanticGroup();
 				}
 			}
 		}
@@ -64,6 +64,19 @@ uwm.newobjects.Accordion = Ext.extend(Ext.Panel, {
 		}
 	}
 });
+
+uwm.newobjects.Accordion.prototype.addSemanticGroup = function(semanticGroup) {
+	var newGroup = true;
+	for (var j = 0; j < this.data.length; j++) {
+		
+		if (semanticGroup == this.data[j]) {
+			newGroup = false;
+		}
+	}
+	if (newGroup) {
+		this.data.push(semanticGroup);
+	}
+}
 
 uwm.newobjects.Accordion.prototype.getGroupArray = function() {
 	return this.data;
