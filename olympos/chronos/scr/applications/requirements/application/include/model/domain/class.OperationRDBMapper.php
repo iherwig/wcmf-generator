@@ -93,6 +93,10 @@ class OperationRDBMapper extends NodeUnifiedRDBMapper
      /* 
       * Value description: 
       */
+      array('name' => 'fk_chicontroller_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_chicontroller_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
+      * Value description: 
+      */
       array('name' => 'ReturnType', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'returntype', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: 
