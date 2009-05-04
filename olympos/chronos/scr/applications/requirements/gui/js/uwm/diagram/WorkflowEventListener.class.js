@@ -61,12 +61,16 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 				newTarget.associate(newSource, connectionInfo, nmUwmClassName, command.connection);
 					
 			} else if (command instanceof draw2d.CommandMove) {
-				var modelObject = command.figure.getFigure();
+				var figure = command.figure;
 				
-				modelObject.changeProperties({
-					PositionX: command.newX,
-					PositionY: command.newY
-				});
+				if (figure instanceof uwm.graphics.figure.BaseFigure) {
+					var modelObject = command.figure.getFigure();
+					
+					modelObject.changeProperties({
+						PositionX: command.newX,
+						PositionY: command.newY
+					});
+				}
 			} else if (command instanceof draw2d.CommandResize) {
 				var modelObject = command.figure.getFigure();
 				

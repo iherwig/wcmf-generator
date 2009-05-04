@@ -92,7 +92,6 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 					}
 				}
 				
-				//this.wrap = Ext.DomHelper.append(Ext.getBody(), "<div />", true);
 				this.wrap = new Ext.Layer();
 				
 				this.comboBox = new uwm.property.InlineComboBox( {
@@ -115,6 +114,15 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 				this.comboBox.focus(undefined, true);
 			}
 		}, this);
+		
+		var value = this.getValue();
+		
+		if (value == "&nbsp;" || value.trim() == "") {
+			this.execCmd('delete');
+			if (Ext.isIE) {
+				e.updateToolbar();
+			}
+		}
 	}
 }
 

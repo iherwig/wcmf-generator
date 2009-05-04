@@ -75,6 +75,18 @@ cwm.ChiControllerClass = function() {
 	            nmSelf : true,
 	            cardinality : -1
 	        } ]
+		},
+		"ChiBusinessUseCase": {
+			label: "implemented by",
+			invert: true,
+			connectionType: 'composition',
+			cardinality: 1
+		},
+		"ChiBusinessUseCaseCore": {
+			label: "implemented by",
+			invert: true,
+			connectionType: 'composition',
+			cardinality: 1
 	    }
 	};
 	

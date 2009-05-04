@@ -43,7 +43,7 @@ cwm.UserRDB.prototype.populatePropertyForm = function(form) {
 	realForm.findField("password").loadValue(this.data.password);
 	realForm.findField("name").loadValue(this.data.name);
 	realForm.findField("firstname").loadValue(this.data.firstname);
-	//realForm.findField("config").loadValue(this.data.config);
+	realForm.findField("config").loadValue(this.data.config);
 }
 
 cwm.UserRDB.prototype.getGridData = function() {

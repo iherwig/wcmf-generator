@@ -46,10 +46,10 @@ uwm.tabadmin.EnumTab = function(config) {
 			singleSelect: true
 		}),
 		title: this.modelClass.getUwmClassName(),
-		iconCls: this.modelClass.getGridTabIconClass(),
+		//iconCls: this.modelClass.getGridTabIconClass(),
 		columns: [{
-			header: uwm.Dict.translate('Name'),
-			dataIndex: "Name",
+			header: uwm.Dict.translate('Label'),
+			dataIndex: "label",
 			width: 255,
 			sortable: true
 		}],

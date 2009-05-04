@@ -24,7 +24,7 @@ uwm.modeltree.PackageNode = function(config) {
 	
 	uwm.modeltree.PackageNode.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,
-		iconCls: this.modelNode.getModelNodeClass().getTreeIcon(),
+		iconCls: this.modelNode.getModelNodeClass().getTreeIcon()
 	}, config));
 }
 
