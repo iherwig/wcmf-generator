@@ -280,3 +280,18 @@ Void establishGeneralizationToClass(cwm::ManyToMany ch, uml::Class parentClass, 
 		)
 	)
 ;
+
+Void establishGeneralizationFromUseCase(cwm::Child ch, uml::UseCase parentUseCase, uml::Model um) :
+	//(new uml::Generalization).set
+	let childClass = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
+		childClass != null
+		? (
+			let rel = new uml::Generalization : (
+				rel.setSpecific(childClass) ->
+				rel.setGeneral(parentUseCase)
+			)
+		) : (
+			Void
+		)
+	)
+;

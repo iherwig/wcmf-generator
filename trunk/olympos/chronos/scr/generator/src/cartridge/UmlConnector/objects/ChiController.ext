@@ -9,9 +9,12 @@ extension common::umlutils;
 extension cartridge::UmlConnector::connections;
 extension cartridge::UmlConnector::connectionsToCwm;
 
+extension cartridge::UmlConnector::objects::Operation;
+
 uml::Class convert(cwm::ChiController c):
 	let uc = new uml::Class : {
-		uc.setName("ChiController:" + c.id)
+		uc.setName("ChiController:" + c.id) ->
+		uc.ownedOperation.addAll(c.operation.convert())
 	} ->
 	uc
 ;
@@ -42,6 +45,8 @@ Void transferValues(cwm::ChiController c, uml::Model um):
 
 cwm::ChiController convertToCwm(Chronos::ChiController c) :
 	let un = new cwm::ChiController : (
+		un.operation.addAll(c.ownedOperation.convertToCwm()) ->
+
 		un.setId(c.getId()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiController", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiController", "Version").toString()) ->

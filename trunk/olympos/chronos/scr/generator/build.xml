@@ -69,9 +69,6 @@
 				<include name="metamodel/**/*.*"/>
 				<include name="workflow/**/*.*"/>
 			</fileset>
-			<fileset dir=".">
-				<include name="example-data/**/*.*"/>
-			</fileset>
 		</copy>
 		<copy file="${res.dir}/run.bat" todir="${redist.dir}"/>
 		<copy file="${build.info}" todir="${redist.dir}"/>
