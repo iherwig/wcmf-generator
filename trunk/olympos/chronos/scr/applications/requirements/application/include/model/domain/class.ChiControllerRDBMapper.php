@@ -83,7 +83,15 @@ class ChiControllerRDBMapper extends NodeUnifiedRDBMapper
      /* 
       * Value description: 
       */
+      array('name' => 'fk_chibusinessusecasecore_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_chibusinessusecasecore_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
+      * Value description: 
+      */
       array('name' => 'fk_package_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_package_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
+      * Value description: 
+      */
+      array('name' => 'fk_chibusinessusecase_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_chibusinessusecase_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: the Project Id of this object.
       */
@@ -124,7 +132,9 @@ class ChiControllerRDBMapper extends NodeUnifiedRDBMapper
     );
     $nodeDef['_parents'] = array
     (
-      array('type' => 'Package', 'is_navigable' => true, 'table_name' => 'Package', 'pk_columns' => array('id'), 'fk_columns' => 'fk_package_id')
+      array('type' => 'ChiBusinessUseCase', 'is_navigable' => true, 'table_name' => 'ChiBusinessUseCase', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chibusinessusecase_id'),
+      array('type' => 'Package', 'is_navigable' => true, 'table_name' => 'Package', 'pk_columns' => array('id'), 'fk_columns' => 'fk_package_id'),
+      array('type' => 'ChiBusinessUseCaseCore', 'is_navigable' => true, 'table_name' => 'ChiBusinessUseCaseCore', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chibusinessusecasecore_id')
     );
     $nodeDef['_children'] = array
     (

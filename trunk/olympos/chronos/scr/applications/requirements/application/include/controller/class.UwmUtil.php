@@ -214,6 +214,8 @@ class UwmUtil {
 				self::processActivitySet($currChild);
 			} else if (self::processManyToMany($currChild, $currNode->getId())) {
 				//do nothing
+			} else if ($childType == 'ChiController') {
+				self::processChild($currChild);
 			} else if ($childType != 'Figure') {
 				$logger = LoggerManager::getLogger('OawUtil');
 	

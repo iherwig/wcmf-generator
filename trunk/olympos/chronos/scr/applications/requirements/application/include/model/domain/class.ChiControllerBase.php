@@ -42,7 +42,9 @@ class ChiControllerBase extends ChiBase
     {
       $displayName = $name;
       if ($name == 'id') $displayName = Message::get("id");
+      if ($name == 'fk_chibusinessusecasecore_id') $displayName = Message::get("fk_chibusinessusecasecore_id");
       if ($name == 'fk_package_id') $displayName = Message::get("fk_package_id");
+      if ($name == 'fk_chibusinessusecase_id') $displayName = Message::get("fk_chibusinessusecase_id");
       if ($name == 'Alias') $displayName = Message::get("Alias");
       if ($name == 'Version') $displayName = Message::get("Version");
       if ($name == 'Name') $displayName = Message::get("Name");
@@ -60,7 +62,9 @@ class ChiControllerBase extends ChiBase
     {
       $description = $name;
       if ($name == 'id') $description = Message::get("");
+      if ($name == 'fk_chibusinessusecasecore_id') $description = Message::get("");
       if ($name == 'fk_package_id') $description = Message::get("");
+      if ($name == 'fk_chibusinessusecase_id') $description = Message::get("");
       if ($name == 'Alias') $description = Message::get("the Project Id of this object.");
       if ($name == 'Version') $description = Message::get("the model version of this object");
       if ($name == 'Name') $description = Message::get("the name of this object.");
@@ -92,6 +96,17 @@ class ChiControllerBase extends ChiBase
     {
       return $this->setValue('id', $id, DATATYPE_IGNORE);
     }
+    function getFkChibusinessusecasecoreId($unconverted=false)
+    {
+      if ($unconverted)
+        return $this->getUnconvertedValue('fk_chibusinessusecasecore_id', DATATYPE_IGNORE);
+      else
+        return $this->getValue('fk_chibusinessusecasecore_id', DATATYPE_IGNORE);
+    }
+    function setFkChibusinessusecasecoreId($fk_chibusinessusecasecore_id)
+    {
+      return $this->setValue('fk_chibusinessusecasecore_id', $fk_chibusinessusecasecore_id, DATATYPE_IGNORE);
+    }
     function getFkPackageId($unconverted=false)
     {
       if ($unconverted)
@@ -122,11 +137,32 @@ class ChiControllerBase extends ChiBase
     function setPackage(&$node)
     {
       if ($node != null)
-        $node->addChild($this);
+        $this->setValue('fk_package_id', $node->getDBID(), DATATYPE_IGNORE);
+    }
+    function getChiBusinessUseCaseCoreOID()
+    {
+      $fkValue = $this->getValue('fk_chibusinessusecasecore_id', DATATYPE_IGNORE);
+      if ($fkValue != null)
+        return PersistenceFacade::composeOID(array('type' => 'ChiBusinessUseCaseCore', 'id' => array($fkValue)));
+      else
+        return null;
+    }
+    function setChiBusinessUseCaseCore(&$node)
+    {
+      if ($node != null)
+        $this->setValue('fk_chibusinessusecasecore_id', $node->getDBID(), DATATYPE_IGNORE);
+    }
+    function getChiBusinessUseCaseParents()
+    {
+      return $this->getParentsEx(null, 'ChiBusinessUseCase', null, null);
     }
     function getPackageParents()
     {
       return $this->getParentsEx(null, 'Package', null, null);
+    }
+    function getChiBusinessUseCaseCoreParents()
+    {
+      return $this->getParentsEx(null, 'ChiBusinessUseCaseCore', null, null);
     }
     /**
      * @deprecated use getPropertyChildren() instead
