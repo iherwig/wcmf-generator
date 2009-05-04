@@ -43,14 +43,16 @@ Void transferValues(cwm::ActivitySet a, uml::Model um):
 		a.activityInitial.transferValues(um) ->
 		a.activityFinal.transferValues(um) ->
 		a.activitySend.transferValues(um) ->
-		a.activityReceive.transferValues(um)
+		a.activityReceive.transferValues(um) ->
 
-/*	
+		uc.setTaggedValue("Chronos::ActivitySet", "Alias", a.alias) ->
+		uc.setTaggedValue("Chronos::ActivitySet", "Version", a.version) ->
+		uc.setName(a.name) ->
+		a.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(a.notes))) : Void ->
 		uc.setTaggedValue("Chronos::ActivitySet", "created", a.created) ->
 		uc.setTaggedValue("Chronos::ActivitySet", "creator", a.creator) ->
 		uc.setTaggedValue("Chronos::ActivitySet", "last_editor", a.lastEditor) ->
 		uc.setTaggedValue("Chronos::ActivitySet", "modified", a.modified)
-*/
 	)
 ;
 
@@ -63,13 +65,15 @@ cwm::ActivitySet convertToCwm(uml::Activity c) :
 		un.activitySend.addAll(c.node.typeSelect(uml::SendSignalAction).convertToCwm()) ->
 		un.activityReceive.addAll(c.node.typeSelect(uml::AcceptEventAction).convertToCwm()) ->
 	
-		un.setId(c.getId())
-/*
+		un.setId(c.getId()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ActivitySet", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ActivitySet", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
 		un.setCreated(c.getTaggedValue("Chronos::ActivitySet", "created").toString()) ->
 		un.setCreator(c.getTaggedValue("Chronos::ActivitySet", "creator").toString()) ->
 		un.setLastEditor(c.getTaggedValue("Chronos::ActivitySet", "last_editor").toString()) ->
-		un.setModified(c.getTaggedValue("Chronos::ActivitySet", "modified").toString()) ->
-*/
+		un.setModified(c.getTaggedValue("Chronos::ActivitySet", "modified").toString())
 	) ->
 	un
 ;

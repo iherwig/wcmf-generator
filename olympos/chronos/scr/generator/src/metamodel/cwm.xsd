@@ -109,6 +109,7 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chiworkerexternal_id" type="xsd:string"/>
 		<xsd:attribute name="is_OfflineUser" type="xsd:boolean"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
@@ -328,6 +329,10 @@
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_chibusinessusecasecore_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chibusinessusecase_id" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
 		<xsd:attribute name="created" type="xsd:string"/>
 		<xsd:attribute name="creator" type="xsd:string"/>
 		<xsd:attribute name="last_editor" type="xsd:string"/>
@@ -507,6 +512,7 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chibusinesspartneractive_id" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
@@ -524,6 +530,7 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chibusinesspartnerpassive_id" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
@@ -558,6 +565,7 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chiworkerinternal_id" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
@@ -643,6 +651,7 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_chinode_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chicontroller_id" type="xsd:string"/>
 		<xsd:attribute name="ReturnType" type="xsd:string"/>
 		<xsd:attribute name="Parameters" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
@@ -677,9 +686,12 @@
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ManyToMany" type="ManyToMany"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Operation" type="Operation"/>
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chibusinessusecase_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chibusinessusecasecore_id" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>

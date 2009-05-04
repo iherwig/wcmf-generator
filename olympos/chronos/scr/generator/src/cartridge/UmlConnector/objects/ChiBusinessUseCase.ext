@@ -6,6 +6,7 @@ extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::umlutils;
 
+extension cartridge::UmlConnector::connections;
 extension cartridge::UmlConnector::connectionsToCwm;
 
 extension cartridge::UmlConnector::objects::ActivitySet;
@@ -21,9 +22,10 @@ uml::UseCase convert(cwm::ChiBusinessUseCase b):
 
 Void establishConnections(cwm::ChiBusinessUseCase b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::UseCase).select(e|e.name == "ChiBusinessUseCase:" + b.id).first(): {
-		b.activitySet.establishConnections(um)
+		b.activitySet.establishConnections(um) ->
 
 		//b.child.select(e|e.targetType == "ChiWorkerExternal").establishConnectionsToActor(uc, um, uml::AggregationKind::none, uml::AggregationKind::none, true, false)
+		b.child.select(e|e.targetType == "ChiController").establishGeneralizationFromUseCase(uc, um) 
 	}
 ;
 
@@ -78,7 +80,10 @@ cwm::ChiBusinessUseCase convertToCwm(Chronos::ChiBusinessUseCase c) :
 		un.setLastEditor(c.getTaggedValue("Chronos::ChiBusinessUseCase", "last_editor").toString()) ->
 		un.setModified(c.getTaggedValue("Chronos::ChiBusinessUseCase", "modified").toString()) ->
 
-		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiWorkerExternal).convertToChild())
+//		un.setName(c.getModel().allOwnedElements().typeSelect(Chronos::ChiController).select(e|e.generalization.general.contains(c)).size.toString()) ->
+
+		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiWorkerExternal).convertToChild()) ->
+		un.child.addAll(c.getModel().allOwnedElements().typeSelect(Chronos::ChiController).select(e|e.generalization.general.contains(c)).convertToChild())
 	) ->
 	un
 ;
