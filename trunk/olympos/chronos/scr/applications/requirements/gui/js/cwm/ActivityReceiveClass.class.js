@@ -58,10 +58,10 @@ cwm.ActivityReceiveClass = function() {
 
 		"Activity" : {
 			label :"Associates",
-			invert :true,
+			invert :false,
 			invertBackendRelation: false,
 			connectionType :"association",
-			cardinality: 1
+			cardinality: -1
 		}
 
 	};

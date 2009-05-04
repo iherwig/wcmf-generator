@@ -1775,7 +1775,16 @@ uwm.diagram.autolayout.Layouter.prototype.setupGraph = function() {
 	
 	this.graph.setSize([this.workflow.getWidth(), this.workflow.getHeight()]);
 	
-	this.figures = this.workflow.getFigures();
+	var workflowFigures = this.workflow.getFigures();
+	
+	this.figures = new draw2d.ArrayList();
+	for (var i = 0; i < workflowFigures.getSize(); i++) {
+		var currFigure = workflowFigures.get(i);
+		if (currFigure instanceof uwm.graphics.figure.BaseFigure) {
+			this.figures.add(currFigure);
+		}
+	}
+
 	this.vertexes = new draw2d.ArrayList();
 	for (var i = 0; i < this.figures.getSize(); i++) {
 		var figure = this.figures.get(i);

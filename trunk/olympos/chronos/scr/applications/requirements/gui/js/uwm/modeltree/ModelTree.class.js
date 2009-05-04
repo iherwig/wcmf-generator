@@ -156,6 +156,8 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(dragOverEvent) {
 		} else {
 			dragOverEvent.cancel = true;
 		}
+	} else if (dropModelNode instanceof uwm.diagram.ActivitySet) {
+		dragOverEvent.cancel = true;
 	}
 	
 	return !dragOverEvent.cancel;
@@ -178,7 +180,7 @@ uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function(parentModel
 	
 	if ((childNode instanceof uwm.modeltree.UseCaseNode || childNode instanceof uwm.modeltree.UseCaseCoreNode) 
 		&& (parentNode instanceof uwm.modeltree.PackageNode)) {
-		if (childNode.parentNode instanceof uwm.modeltree.PackageNode) {
+		if (childNode.parentNode.id == parentNode.id) {
 			parentNode.ensureVisible();
 			childNode.remove();
 		}
@@ -348,6 +350,7 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 						if (tempParentNode instanceof uwm.modeltree.PackageNode || tempParentNode instanceof uwm.modeltree.ProcessNode) {
 							parentNode = tempParentNode;
 							parentModelObject = uwm.model.ModelContainer.getInstance().getByOid(parentNode.oid);
+							break;
 						}
 					}
 				}

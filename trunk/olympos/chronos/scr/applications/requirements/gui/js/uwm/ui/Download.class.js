@@ -20,14 +20,25 @@ Ext.namespace("uwm.ui");
  * @config downloadURL The URL to download from.
  */
 uwm.ui.Download = function(config) {
+	var self = this;
+	
+	this.okButton = new Ext.Button({
+		text: uwm.Dict.translate("Close"),
+		disabled: true,
+		handler: function() {
+			self.destroy();
+		}
+	});
+	
 	uwm.ui.Download.superclass.constructor.call(this, Ext.apply(this, {
 		layout: "fit",
 		items: [new Ext.Panel({
 			html: "<div class='x-mask-loading'><div>" + uwm.Dict.translate('Please wait while your export is prepared ...') + "</div><iframe class='uwm-download-frame' id='" + uwm.ui.Download.IFRAME_ID + "' src='" + config.downloadURL + "'/></div>"
-		})]
+		})],
+		buttons: [this.okButton],
+		closable: false,
+		resizable: false
 	}, config));
-	
-	var self = this;
 	
 	this.on("render", function() {
 		window.setTimeout(function() {
@@ -44,7 +55,7 @@ uwm.ui.Download = function(config) {
 						//do nothing, successful download of a file
 					}
 					
-					self.destroy();
+					self.okButton.enable();
 				}, 250);
 			});
 		}, 250);

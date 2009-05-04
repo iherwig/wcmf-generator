@@ -61,7 +61,7 @@ uwm.tabadmin.GridProxy.prototype.loadResponse = function(options, data, callback
 					var currElem = currValue[k];
 					
 					if (!(currElem instanceof Function)) {
-						currRecord[k] = currElem;
+						currRecord.label = currElem;
 					}
 				}
 			}

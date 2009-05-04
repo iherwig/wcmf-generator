@@ -57,10 +57,10 @@ cwm.ActivityClass = function() {
 		},
 		"ActivityDecision" : {
 			label :"Associates",
-			invert :true,
+			invert :false,
 			invertBackendRelation: false,
 			connectionType :"association",
-			cardinality: 1
+			cardinality: -1
 		},
 		
 		"Activity" : {
@@ -87,10 +87,10 @@ cwm.ActivityClass = function() {
 		},
 		"ActivityReceive" : {
 			label :"Associates",
-			invert :false,
+			invert :true,
 			invertBackendRelation: false,
 			connectionType :"association",
-			cardinality: -1
+			cardinality: 1
 		},
 		
 		"ChiObject": {

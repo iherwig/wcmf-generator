@@ -95,6 +95,12 @@ cwm.ChiBusinessUseCaseClass = function() {
 			invert: true,
 			connectionType: 'realization',
 			cardinality: 1
+		},
+		"ChiController": {
+			label: "implemented by",
+			invert: false,
+			connectionType: 'composition',
+			cardinality: -1
 		}
 	};
 }
