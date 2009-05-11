@@ -25,20 +25,26 @@ Void establishConnections(cwm::ChiFeature f, uml::Model um):
 
 Void transferValues(cwm::ChiFeature f, uml::Model um):
 	//(new uml::Comment).
-	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiFeature:" + f.id).first(): {
-		uc.applyStereotype("Chronos::ChiFeature") ->
-		uc.setTaggedValue("Chronos::ChiFeature", "Author", f.author) ->
-		uc.setTaggedValue("Chronos::ChiFeature", "Proofreader", f.proofreader) ->
-		f.status.translateChiFeatureStatus() != null ? uc.setTaggedValue("Chronos::ChiFeature", "Status", f.status.translateChiFeatureStatus()) : Void ->
-		uc.setTaggedValue("Chronos::ChiFeature", "Alias", f.alias) ->
-		uc.setTaggedValue("Chronos::ChiFeature", "Version", f.version) ->
-		uc.setName(f.name) ->
-		f.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(f.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiFeature", "created", f.created) ->
-		uc.setTaggedValue("Chronos::ChiFeature", "creator", f.creator) ->
-		uc.setTaggedValue("Chronos::ChiFeature", "last_editor", f.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiFeature", "modified", f.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiFeature:" + f.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiFeature") ->
+			uc.setTaggedValue("Chronos::ChiFeature", "Author", f.author) ->
+			uc.setTaggedValue("Chronos::ChiFeature", "Proofreader", f.proofreader) ->
+			f.status.translateChiFeatureStatus() != null ? uc.setTaggedValue("Chronos::ChiFeature", "Status", f.status.translateChiFeatureStatus()) : Void ->
+			uc.setTaggedValue("Chronos::ChiFeature", "Alias", f.alias) ->
+			uc.setTaggedValue("Chronos::ChiFeature", "Version", f.version) ->
+			uc.setName(f.name) ->
+			f.notes != null ? (
+				comment.setBody(f.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiFeature", "created", f.created) ->
+			uc.setTaggedValue("Chronos::ChiFeature", "creator", f.creator) ->
+			uc.setTaggedValue("Chronos::ChiFeature", "last_editor", f.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiFeature", "modified", f.modified)
+		)
+	)
 ;
 
 Chronos::ChiFeatureStatus translateChiFeatureStatus(String source):

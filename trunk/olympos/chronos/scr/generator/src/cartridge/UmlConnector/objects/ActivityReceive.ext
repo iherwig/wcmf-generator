@@ -15,20 +15,26 @@ uml::AcceptEventAction convert(cwm::ActivityReceive a):
 
 Void transferValues(cwm::ActivityReceive c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::AcceptEventAction).select(e|e.name == "ActivityReceive:" + c.id).first(): {
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void
-/*
-		uc.applyStereotype("Chronos::ActivityReceive") ->
-		uc.setTaggedValue("Chronos::ActivityReceive", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ActivityReceive", "Version", c.version) ->
-
-		uc.setTaggedValue("Chronos::ActivityReceive", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ActivityReceive", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ActivityReceive", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ActivityReceive", "modified", c.modified)
-*/
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::AcceptEventAction).select(e|e.name == "ActivityReceive:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void
+	/*
+			uc.applyStereotype("Chronos::ActivityReceive") ->
+			uc.setTaggedValue("Chronos::ActivityReceive", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ActivityReceive", "Version", c.version) ->
+	
+			uc.setTaggedValue("Chronos::ActivityReceive", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ActivityReceive", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ActivityReceive", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ActivityReceive", "modified", c.modified)
+	*/
+		)
+	)
 ;
 
 cwm::ActivityReceive convertToCwm(uml::AcceptEventAction c) :

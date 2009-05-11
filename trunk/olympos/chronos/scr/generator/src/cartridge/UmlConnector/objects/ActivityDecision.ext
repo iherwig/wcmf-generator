@@ -24,20 +24,26 @@ Void establishConnections(cwm::ActivityDecision b, uml::Model um):
 
 Void transferValues(cwm::ActivityDecision c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::DecisionNode).select(e|e.name == "ActivityDecision:" + c.id).first(): {
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void
-/*
-		uc.applyStereotype("Chronos::ActivityDecision") ->
-		uc.setTaggedValue("Chronos::ActivityDecision", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ActivityDecision", "Version", c.version) ->
-
-		uc.setTaggedValue("Chronos::ActivityDecision", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ActivityDecision", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ActivityDecision", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ActivityDecision", "modified", c.modified)
-*/
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::DecisionNode).select(e|e.name == "ActivityDecision:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void
+	/*
+			uc.applyStereotype("Chronos::ActivityDecision") ->
+			uc.setTaggedValue("Chronos::ActivityDecision", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ActivityDecision", "Version", c.version) ->
+	
+			uc.setTaggedValue("Chronos::ActivityDecision", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ActivityDecision", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ActivityDecision", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ActivityDecision", "modified", c.modified)
+	*/
+		)
+	)
 ;
 
 cwm::ActivityDecision convertToCwm(uml::DecisionNode c) :

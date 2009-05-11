@@ -38,21 +38,27 @@ Void establishConnections(cwm::ActivitySet b, uml::Model um):
 
 Void transferValues(cwm::ActivitySet a, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Activity).select(e|e.name == "ActivitySet:" + a.id).first(): (
-		a.activity.transferValues(um) ->
-		a.activityDecision.transferValues(um) ->
-		a.activityInitial.transferValues(um) ->
-		a.activityFinal.transferValues(um) ->
-		a.activitySend.transferValues(um) ->
-		a.activityReceive.transferValues(um) ->
-
-		uc.setTaggedValue("Chronos::ActivitySet", "Alias", a.alias) ->
-		uc.setTaggedValue("Chronos::ActivitySet", "Version", a.version) ->
-		uc.setName(a.name) ->
-		a.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(a.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ActivitySet", "created", a.created) ->
-		uc.setTaggedValue("Chronos::ActivitySet", "creator", a.creator) ->
-		uc.setTaggedValue("Chronos::ActivitySet", "last_editor", a.lastEditor) ->
-		uc.setTaggedValue("Chronos::ActivitySet", "modified", a.modified)
+		let comment = new uml::Comment : (
+			a.activity.transferValues(um) ->
+			a.activityDecision.transferValues(um) ->
+			a.activityInitial.transferValues(um) ->
+			a.activityFinal.transferValues(um) ->
+			a.activitySend.transferValues(um) ->
+			a.activityReceive.transferValues(um) ->
+	
+			uc.setTaggedValue("Chronos::ActivitySet", "Alias", a.alias) ->
+			uc.setTaggedValue("Chronos::ActivitySet", "Version", a.version) ->
+			uc.setName(a.name) ->
+			a.notes != null ? (
+				comment.setBody(a.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ActivitySet", "created", a.created) ->
+			uc.setTaggedValue("Chronos::ActivitySet", "creator", a.creator) ->
+			uc.setTaggedValue("Chronos::ActivitySet", "last_editor", a.lastEditor) ->
+			uc.setTaggedValue("Chronos::ActivitySet", "modified", a.modified)
+		)
 	)
 ;
 

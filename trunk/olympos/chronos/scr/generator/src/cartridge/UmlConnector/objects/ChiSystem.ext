@@ -15,19 +15,25 @@ uml::Class convert(cwm::ChiSystem s):
 
 Void transferValues(cwm::ChiSystem c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiSystem:" + c.id).first(): {
-		uc.applyStereotype("Chronos::ChiSystem") ->
-		uc.setTaggedValue("Chronos::ChiSystem", "platform", c.platform) ->
-		uc.setTaggedValue("Chronos::ChiSystem", "config", c.config) ->
-		uc.setTaggedValue("Chronos::ChiSystem", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ChiSystem", "Version", c.version) ->
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiSystem", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ChiSystem", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ChiSystem", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiSystem", "modified", c.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiSystem:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiSystem") ->
+			uc.setTaggedValue("Chronos::ChiSystem", "platform", c.platform) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "config", c.config) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiSystem", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "modified", c.modified)
+		)
+	)
 ;
 
 cwm::ChiSystem convertToCwm(Chronos::ChiSystem c) :

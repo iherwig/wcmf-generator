@@ -15,21 +15,27 @@ uml::Actor convert(cwm::ChiStakeHolder s):
 
 Void transferValues(cwm::ChiStakeHolder c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiStakeHolder:" + c.id).first(): {
-		uc.applyStereotype("Chronos::ChiStakeHolder") ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "Power", c.power) ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "Legitimacy", c.legitimacy) ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "Role", c.role) ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "Urgency", c.urgency) ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "Version", c.version) ->
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiStakeHolder", "modified", c.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiStakeHolder:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiStakeHolder") ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "Power", c.power) ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "Legitimacy", c.legitimacy) ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "Role", c.role) ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "Urgency", c.urgency) ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiStakeHolder", "modified", c.modified)
+		)
+	)
 ;
 
 cwm::ChiStakeHolder convertToCwm(Chronos::ChiStakeHolder c) :

@@ -15,26 +15,32 @@ uml::Property convert(cwm::ChiValue o):
 
 Void transferValues(cwm::ChiValue c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:" + c.id).first(): {
-		uc.applyStereotype("Chronos::ChiValue") ->
-		uc.setTaggedValue("Chronos::ChiValue", "app_data_type", c.appDataType) ->
-		uc.setTaggedValue("Chronos::ChiValue", "db_data_type", c.dbDataType) ->
-		//uc.setTaggedValue("Chronos::ChiValue", "is_editable", c.isEditable) ->
-		uc.setTaggedValue("Chronos::ChiValue", "input_type", c.inputType) ->
-		uc.setTaggedValue("Chronos::ChiValue", "display_type", c.displayType) ->
-		uc.setTaggedValue("Chronos::ChiValue", "restrictions_match", c.restrictionsMatch) ->
-		uc.setTaggedValue("Chronos::ChiValue", "restrictions_not_match", c.restrictionsNotMatch) ->
-		uc.setTaggedValue("Chronos::ChiValue", "restrictions_description", c.restrictionsDescription) ->
-		uc.setTaggedValue("Chronos::ChiValue", "column_name", c.columnName) ->
-		uc.setTaggedValue("Chronos::ChiValue", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ChiValue", "Version", c.version) ->
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiValue", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ChiValue", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ChiValue", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiValue", "modified", c.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiValue") ->
+			uc.setTaggedValue("Chronos::ChiValue", "app_data_type", c.appDataType) ->
+			uc.setTaggedValue("Chronos::ChiValue", "db_data_type", c.dbDataType) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "is_editable", c.isEditable) ->
+			uc.setTaggedValue("Chronos::ChiValue", "input_type", c.inputType) ->
+			uc.setTaggedValue("Chronos::ChiValue", "display_type", c.displayType) ->
+			uc.setTaggedValue("Chronos::ChiValue", "restrictions_match", c.restrictionsMatch) ->
+			uc.setTaggedValue("Chronos::ChiValue", "restrictions_not_match", c.restrictionsNotMatch) ->
+			uc.setTaggedValue("Chronos::ChiValue", "restrictions_description", c.restrictionsDescription) ->
+			uc.setTaggedValue("Chronos::ChiValue", "column_name", c.columnName) ->
+			uc.setTaggedValue("Chronos::ChiValue", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiValue", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiValue", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiValue", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiValue", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiValue", "modified", c.modified)
+		)
+	)
 ;
 
 cwm::ChiValue convertToCwm(Chronos::ChiValue c) :

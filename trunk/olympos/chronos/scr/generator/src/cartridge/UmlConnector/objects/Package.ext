@@ -83,31 +83,37 @@ Void establishConnections(cwm::Package p, uml::Model um):
 
 Void transferValues(cwm::Package p, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Package).select(e|e.name == "Package:" + p.id).first(): (
-		p.chiBusinessProcess.transferValues(um) ->
-		p.chiBusinessUseCase.transferValues(um) ->
-		p.chiBusinessUseCaseCore.transferValues(um) ->
-		p.chiFeature.transferValues(um) ->
-		p.chiGoal.transferValues(um) ->
-		p.chiIssue.transferValues(um) ->
-		p.chiRequirement.transferValues(um) ->
-		p.chiWorkerExternal.transferValues(um) ->
-		p.chiStakeHolder.transferValues(um) ->
-		p.chiOpinionInner.transferValues(um) ->
-		p.chiOpinion.transferValues(um) ->
-		p.chiManyToMany.transferValues(um) ->
-		p.chiBusinessPartner.transferValues(um) ->
-		p.chiBusinessPartnerActive.transferValues(um) ->
-		p.chiBusinessPartnerPassive.transferValues(um) ->
-		p.chiWorker.transferValues(um) ->
-		p.chiWorkerInternal.transferValues(um) ->
-		p.chiNode.transferValues(um) ->
-		p.chiSystem.transferValues(um) ->
-		p.chiController.transferValues(um) ->
-		p.chiView.transferValues(um) ->
-		p.package.transferValues(um) ->
-	
-		uc.setName(p.name != "" ? p.name : "Unnamed Package") ->
-		p.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(p.notes))) : Void
+		let comment = new uml::Comment : (
+			p.chiBusinessProcess.transferValues(um) ->
+			p.chiBusinessUseCase.transferValues(um) ->
+			p.chiBusinessUseCaseCore.transferValues(um) ->
+			p.chiFeature.transferValues(um) ->
+			p.chiGoal.transferValues(um) ->
+			p.chiIssue.transferValues(um) ->
+			p.chiRequirement.transferValues(um) ->
+			p.chiWorkerExternal.transferValues(um) ->
+			p.chiStakeHolder.transferValues(um) ->
+			p.chiOpinionInner.transferValues(um) ->
+			p.chiOpinion.transferValues(um) ->
+			p.chiManyToMany.transferValues(um) ->
+			p.chiBusinessPartner.transferValues(um) ->
+			p.chiBusinessPartnerActive.transferValues(um) ->
+			p.chiBusinessPartnerPassive.transferValues(um) ->
+			p.chiWorker.transferValues(um) ->
+			p.chiWorkerInternal.transferValues(um) ->
+			p.chiNode.transferValues(um) ->
+			p.chiSystem.transferValues(um) ->
+			p.chiController.transferValues(um) ->
+			p.chiView.transferValues(um) ->
+			p.package.transferValues(um) ->
+		
+			uc.setName(p.name != "" ? p.name : "Unnamed Package") ->
+			p.notes != null ? (
+				comment.setBody(p.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void
+		)
 	)
 ;
 

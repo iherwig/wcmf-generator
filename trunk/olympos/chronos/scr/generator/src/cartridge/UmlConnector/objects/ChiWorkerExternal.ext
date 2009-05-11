@@ -26,18 +26,24 @@ Void establishConnections(cwm::ChiWorkerExternal b, uml::Model um):
 
 Void transferValues(cwm::ChiWorkerExternal w, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiWorkerExternal:" + w.id).first(): {
-		uc.applyStereotype("Chronos::ChiWorkerExternal") ->
-		uc.setTaggedValue("Chronos::ChiWorkerExternal", "is_OfflineUser", w.isOfflineUser) ->
-		uc.setTaggedValue("Chronos::ChiWorkerExternal", "Alias", w.alias) ->
-		uc.setTaggedValue("Chronos::ChiWorkerExternal", "Version", w.version) ->
-		uc.setName(w.name) ->
-		w.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(w.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiWorkerExternal", "created", w.created) ->
-		uc.setTaggedValue("Chronos::ChiWorkerExternal", "creator", w.creator) ->
-		uc.setTaggedValue("Chronos::ChiWorkerExternal", "last_editor", w.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiWorkerExternal", "modified", w.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiWorkerExternal:" + w.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiWorkerExternal") ->
+			uc.setTaggedValue("Chronos::ChiWorkerExternal", "is_OfflineUser", w.isOfflineUser) ->
+			uc.setTaggedValue("Chronos::ChiWorkerExternal", "Alias", w.alias) ->
+			uc.setTaggedValue("Chronos::ChiWorkerExternal", "Version", w.version) ->
+			uc.setName(w.name) ->
+			w.notes != null ? (
+				comment.setBody(w.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiWorkerExternal", "created", w.created) ->
+			uc.setTaggedValue("Chronos::ChiWorkerExternal", "creator", w.creator) ->
+			uc.setTaggedValue("Chronos::ChiWorkerExternal", "last_editor", w.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiWorkerExternal", "modified", w.modified)
+		)
+	)
 ;
 
 cwm::ChiWorkerExternal convertToCwm(Chronos::ChiWorkerExternal c) :

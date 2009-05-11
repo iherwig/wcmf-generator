@@ -30,17 +30,23 @@ Void establishConnections(cwm::ChiController b, uml::Model um):
 
 Void transferValues(cwm::ChiController c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiController:" + c.id).first(): {
-		uc.applyStereotype("Chronos::ChiController") ->
-		uc.setTaggedValue("Chronos::ChiController", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ChiController", "Version", c.version) ->
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiController", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ChiController", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ChiController", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiController", "modified", c.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiController:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiController") ->
+			uc.setTaggedValue("Chronos::ChiController", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiController", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiController", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiController", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiController", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiController", "modified", c.modified)
+		)
+	)
 ;
 
 cwm::ChiController convertToCwm(Chronos::ChiController c) :

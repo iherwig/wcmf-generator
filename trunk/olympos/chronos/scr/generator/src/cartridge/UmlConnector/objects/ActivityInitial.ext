@@ -25,20 +25,26 @@ Void establishConnections(cwm::ActivityInitial b, uml::Model um):
 
 Void transferValues(cwm::ActivityInitial c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::InitialNode).select(e|e.name == "ActivityInitial:" + c.id).first(): {
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void
-/*
-		uc.applyStereotype("Chronos::ActivityInitial") ->
-		uc.setTaggedValue("Chronos::ActivityInitial", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ActivityInitial", "Version", c.version) ->
-
-		uc.setTaggedValue("Chronos::ActivityInitial", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ActivityInitial", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ActivityInitial", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ActivityInitial", "modified", c.modified)
-*/
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::InitialNode).select(e|e.name == "ActivityInitial:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void
+	/*
+			uc.applyStereotype("Chronos::ActivityInitial") ->
+			uc.setTaggedValue("Chronos::ActivityInitial", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ActivityInitial", "Version", c.version) ->
+	
+			uc.setTaggedValue("Chronos::ActivityInitial", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ActivityInitial", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ActivityInitial", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ActivityInitial", "modified", c.modified)
+	*/
+		)
+	)
 ;
 
 cwm::ActivityInitial convertToCwm(uml::InitialNode c) :

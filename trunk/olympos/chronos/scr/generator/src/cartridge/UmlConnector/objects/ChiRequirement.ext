@@ -26,22 +26,28 @@ Void establishConnections(cwm::ChiRequirement r, uml::Model um):
 
 Void transferValues(cwm::ChiRequirement r, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiRequirement:" + r.id).first(): {
-		uc.applyStereotype("Chronos::ChiRequirement") ->
-		r.reqType.translateChiRequirementType() != null ? uc.setTaggedValue("Chronos::ChiRequirement", "Type", r.reqType.translateChiRequirementType()) : Void ->
-		uc.setTaggedValue("Chronos::ChiRequirement", "Priority", r.priority) ->
-		uc.setTaggedValue("Chronos::ChiRequirement", "Author", r.author) ->
-		uc.setTaggedValue("Chronos::ChiRequirement", "Proofreader", r.proofreader) ->
-		r.status.translateChiRequirementStatus() != null ? uc.setTaggedValue("Chronos::ChiRequirement", "Status", r.status.translateChiRequirementStatus()) : Void ->
-		uc.setTaggedValue("Chronos::ChiRequirement", "Alias", r.alias) ->
-		uc.setTaggedValue("Chronos::ChiRequirement", "Version", r.version) ->
-		uc.setName(r.name) ->
-		r.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(r.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiRequirement", "created", r.created) ->
-		uc.setTaggedValue("Chronos::ChiRequirement", "creator", r.creator) ->
-		uc.setTaggedValue("Chronos::ChiRequirement", "last_editor", r.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiRequirement", "modified", r.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiRequirement:" + r.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiRequirement") ->
+			r.reqType.translateChiRequirementType() != null ? uc.setTaggedValue("Chronos::ChiRequirement", "Type", r.reqType.translateChiRequirementType()) : Void ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "Priority", r.priority) ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "Author", r.author) ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "Proofreader", r.proofreader) ->
+			r.status.translateChiRequirementStatus() != null ? uc.setTaggedValue("Chronos::ChiRequirement", "Status", r.status.translateChiRequirementStatus()) : Void ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "Alias", r.alias) ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "Version", r.version) ->
+			uc.setName(r.name) ->
+			r.notes != null ? (
+				comment.setBody(r.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "created", r.created) ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "creator", r.creator) ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "last_editor", r.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "modified", r.modified)
+		)
+	)
 ;
 
 Chronos::ChiRequirementType translateChiRequirementType(String source):
