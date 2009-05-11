@@ -44,7 +44,6 @@ class OperationBase extends EntityBaseExtended
       if ($name == 'id') $displayName = Message::get("id");
       if ($name == 'fk_chicontroller_id') $displayName = Message::get("fk_chicontroller_id");
       if ($name == 'fk_chinode_id') $displayName = Message::get("fk_chinode_id");
-      if ($name == 'fk_chicontroller_id') $displayName = Message::get("fk_chicontroller_id");
       if ($name == 'ReturnType') $displayName = Message::get("ReturnType");
       if ($name == 'Parameters') $displayName = Message::get("Parameters");
       if ($name == 'Name') $displayName = Message::get("Name");
@@ -64,7 +63,6 @@ class OperationBase extends EntityBaseExtended
       if ($name == 'id') $description = Message::get("");
       if ($name == 'fk_chicontroller_id') $description = Message::get("");
       if ($name == 'fk_chinode_id') $description = Message::get("");
-      if ($name == 'fk_chicontroller_id') $description = Message::get("");
       if ($name == 'ReturnType') $description = Message::get("");
       if ($name == 'Parameters') $description = Message::get("");
       if ($name == 'Name') $description = Message::get("the name of this object.");
@@ -118,17 +116,6 @@ class OperationBase extends EntityBaseExtended
     {
       return $this->setValue('fk_chinode_id', $fk_chinode_id, DATATYPE_IGNORE);
     }
-    function getFkChicontrollerId($unconverted=false)
-    {
-      if ($unconverted)
-        return $this->getUnconvertedValue('fk_chicontroller_id', DATATYPE_IGNORE);
-      else
-        return $this->getValue('fk_chicontroller_id', DATATYPE_IGNORE);
-    }
-    function setFkChicontrollerId($fk_chicontroller_id)
-    {
-      return $this->setValue('fk_chicontroller_id', $fk_chicontroller_id, DATATYPE_IGNORE);
-    }
     function getReturnType($unconverted=false)
     {
       if ($unconverted)
@@ -176,19 +163,6 @@ class OperationBase extends EntityBaseExtended
     {
       if ($node != null)
         $this->setValue('fk_chinode_id', $node->getDBID(), DATATYPE_IGNORE);
-    }
-    function getChiControllerOID()
-    {
-      $fkValue = $this->getValue('fk_chicontroller_id', DATATYPE_IGNORE);
-      if ($fkValue != null)
-        return PersistenceFacade::composeOID(array('type' => 'ChiController', 'id' => array($fkValue)));
-      else
-        return null;
-    }
-    function setChiController(&$node)
-    {
-      if ($node != null)
-        $this->setValue('fk_chicontroller_id', $node->getDBID(), DATATYPE_IGNORE);
     }
     function getChiNodeParents()
     {
