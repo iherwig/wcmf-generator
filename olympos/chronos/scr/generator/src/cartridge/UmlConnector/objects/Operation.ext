@@ -15,22 +15,28 @@ uml::Operation convert(cwm::Operation o):
 
 Void transferValues(cwm::Operation c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Operation).select(e|e.name == "Operation:" + c.id).first(): {
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void
-/*
-		uc.applyStereotype("Chronos::Operation") ->
-		uc.setTaggedValue("Chronos::Operation", "ReturnType", c.returnType) ->
-		uc.setTaggedValue("Chronos::Operation", "Parameters", c.parameters) ->
-		uc.setTaggedValue("Chronos::Operation", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::Operation", "Version", c.version) ->
-
-		uc.setTaggedValue("Chronos::Operation", "created", c.created) ->
-		uc.setTaggedValue("Chronos::Operation", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::Operation", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::Operation", "modified", c.modified)
-*/
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Operation).select(e|e.name == "Operation:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void
+	/*
+			uc.applyStereotype("Chronos::Operation") ->
+			uc.setTaggedValue("Chronos::Operation", "ReturnType", c.returnType) ->
+			uc.setTaggedValue("Chronos::Operation", "Parameters", c.parameters) ->
+			uc.setTaggedValue("Chronos::Operation", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::Operation", "Version", c.version) ->
+	
+			uc.setTaggedValue("Chronos::Operation", "created", c.created) ->
+			uc.setTaggedValue("Chronos::Operation", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::Operation", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::Operation", "modified", c.modified)
+	*/
+		)
+	)
 ;
 
 cwm::Operation convertToCwm(uml::Operation c) :

@@ -24,20 +24,26 @@ Void establishConnections(cwm::ActivitySend b, uml::Model um):
 
 Void transferValues(cwm::ActivitySend c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::SendSignalAction).select(e|e.name == "ActivitySend:" + c.id).first(): {
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void
-/*
-		uc.applyStereotype("Chronos::ActivitySend") ->
-		uc.setTaggedValue("Chronos::ActivitySend", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ActivitySend", "Version", c.version) ->
-
-		uc.setTaggedValue("Chronos::ActivitySend", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ActivitySend", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ActivitySend", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ActivitySend", "modified", c.modified)
-*/
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::SendSignalAction).select(e|e.name == "ActivitySend:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void
+	/*
+			uc.applyStereotype("Chronos::ActivitySend") ->
+			uc.setTaggedValue("Chronos::ActivitySend", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ActivitySend", "Version", c.version) ->
+	
+			uc.setTaggedValue("Chronos::ActivitySend", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ActivitySend", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ActivitySend", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ActivitySend", "modified", c.modified)
+	*/
+		)
+	)
 ;
 
 cwm::ActivitySend convertToCwm(uml::SendSignalAction c) :

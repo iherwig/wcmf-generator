@@ -34,29 +34,35 @@ Void establishConnections(cwm::ChiNode b, uml::Model um):
 
 Void transferValues(cwm::ChiNode c, uml::Model um):
 	//(new uml::LiteralBoolean).setVa
-	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNode:" + c.id).first(): {
-		c.chiValue.transferValues(um) ->
-		c.operation.transferValues(um) ->
-
-		uc.applyStereotype("Chronos::ChiNode") ->
-		uc.setTaggedValue("Chronos::ChiNode", "table_name", c.tableName) ->
-		uc.setTaggedValue("Chronos::ChiNode", "pk_name", c.pkName) ->
-		uc.setTaggedValue("Chronos::ChiNode", "orderby", c.orderby) ->
-		uc.setTaggedValue("Chronos::ChiNode", "parent_order", c.parentOrder) ->
-		uc.setTaggedValue("Chronos::ChiNode", "child_order", c.childOrder) ->
-		uc.setTaggedValue("Chronos::ChiNode", "display_value", c.displayValue) ->
-		//uc.setTaggedValue("Chronos::ChiNode", "is_soap", c.isSoap == "true") ->
-		//uc.setTaggedValue("Chronos::ChiNode", "is_searchable", c.isSearchable == "true") ->
-		uc.setTaggedValue("Chronos::ChiNode", "initparams", c.initparams) ->
-		uc.setTaggedValue("Chronos::ChiNode", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ChiNode", "Version", c.version) ->
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiNode", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ChiNode", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ChiNode", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiNode", "modified", c.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNode:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			c.chiValue.transferValues(um) ->
+			c.operation.transferValues(um) ->
+	
+			uc.applyStereotype("Chronos::ChiNode") ->
+			uc.setTaggedValue("Chronos::ChiNode", "table_name", c.tableName) ->
+			uc.setTaggedValue("Chronos::ChiNode", "pk_name", c.pkName) ->
+			uc.setTaggedValue("Chronos::ChiNode", "orderby", c.orderby) ->
+			uc.setTaggedValue("Chronos::ChiNode", "parent_order", c.parentOrder) ->
+			uc.setTaggedValue("Chronos::ChiNode", "child_order", c.childOrder) ->
+			uc.setTaggedValue("Chronos::ChiNode", "display_value", c.displayValue) ->
+			//uc.setTaggedValue("Chronos::ChiNode", "is_soap", c.isSoap == "true") ->
+			//uc.setTaggedValue("Chronos::ChiNode", "is_searchable", c.isSearchable == "true") ->
+			uc.setTaggedValue("Chronos::ChiNode", "initparams", c.initparams) ->
+			uc.setTaggedValue("Chronos::ChiNode", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiNode", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiNode", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiNode", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiNode", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiNode", "modified", c.modified)
+		)
+	)
 ;
 
 cwm::ChiNode convertToCwm(Chronos::ChiNode c) :

@@ -15,15 +15,21 @@ uml::Class convert(cwm::ChiManyToMany m):
 
 Void transferValues(cwm::ChiManyToMany c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiManyToMany:" + c.id).first(): {
-		uc.applyStereotype("Chronos::ChiManyToMany") ->
-		uc.setTaggedValue("Chronos::ChiManyToMany", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ChiManyToMany", "Version", c.version) ->
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiManyToMany", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ChiManyToMany", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ChiManyToMany", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiManyToMany", "modified", c.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiManyToMany:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiManyToMany") ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "modified", c.modified)
+		)
+	)
 ;

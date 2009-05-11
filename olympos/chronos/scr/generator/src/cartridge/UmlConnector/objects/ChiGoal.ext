@@ -25,22 +25,28 @@ Void establishConnections(cwm::ChiGoal g, uml::Model um):
 ;
 
 Void transferValues(cwm::ChiGoal g, uml::Model um):
-	//(new uml::Comment).setBownedComment.add()
-	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiGoal:" + g.id).first(): {
-		uc.applyStereotype("Chronos::ChiGoal") ->
-		uc.setTaggedValue("Chronos::ChiGoal", "Priority", g.priority) ->
-		uc.setTaggedValue("Chronos::ChiGoal", "Value_Name", g.valueName) ->
-		uc.setTaggedValue("Chronos::ChiGoal", "Value_ammount", g.valueAmmount) ->
-		uc.setTaggedValue("Chronos::ChiGoal", "Value_Goal", g.valueGoal) ->
-		uc.setTaggedValue("Chronos::ChiGoal", "Alias", g.alias) ->
-		uc.setTaggedValue("Chronos::ChiGoal", "Version", g.version) ->
-		uc.setName(g.name) ->
-		g.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(g.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiGoal", "created", g.created) ->
-		uc.setTaggedValue("Chronos::ChiGoal", "creator", g.creator) ->
-		uc.setTaggedValue("Chronos::ChiGoal", "last_editor", g.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiGoal", "modified", g.modified)
-	}
+	//(new uml::Comment).annotatedElement.add(uc)
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiGoal:" + g.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiGoal") ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Priority", g.priority) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Value_Name", g.valueName) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Value_ammount", g.valueAmmount) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Value_Goal", g.valueGoal) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Alias", g.alias) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Version", g.version) ->
+			uc.setName(g.name) ->
+			g.notes != null ? (
+				comment.setBody(g.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiGoal", "created", g.created) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "creator", g.creator) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "last_editor", g.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "modified", g.modified)
+		)
+	)
 ;
 
 cwm::ChiGoal convertToCwm(Chronos::ChiGoal c) :

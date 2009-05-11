@@ -26,17 +26,23 @@ Void establishConnections(cwm::ChiBusinessPartnerActive b, uml::Model um):
 
 Void transferValues(cwm::ChiBusinessPartnerActive c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiBusinessPartnerActive:" + c.id).first(): {
-		uc.applyStereotype("Chronos::ChiBusinessPartnerActive") ->
-		uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "Version", c.version) ->
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "modified", c.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiBusinessPartnerActive:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiBusinessPartnerActive") ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "modified", c.modified)
+		)
+	)
 ;
 
 cwm::ChiBusinessPartnerActive convertToCwm(Chronos::ChiBusinessPartnerActive c) :

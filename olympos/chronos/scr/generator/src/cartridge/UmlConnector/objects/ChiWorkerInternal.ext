@@ -26,17 +26,23 @@ Void establishConnections(cwm::ChiWorkerInternal b, uml::Model um):
 
 Void transferValues(cwm::ChiWorkerInternal c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiWorkerInternal:" + c.id).first(): {
-		uc.applyStereotype("Chronos::ChiWorkerInternal") ->
-		uc.setTaggedValue("Chronos::ChiWorkerInternal", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ChiWorkerInternal", "Version", c.version) ->
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiWorkerInternal", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ChiWorkerInternal", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ChiWorkerInternal", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiWorkerInternal", "modified", c.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiWorkerInternal:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiWorkerInternal") ->
+			uc.setTaggedValue("Chronos::ChiWorkerInternal", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiWorkerInternal", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiWorkerInternal", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiWorkerInternal", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiWorkerInternal", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiWorkerInternal", "modified", c.modified)
+		)
+	)
 ;
 
 cwm::ChiWorkerInternal convertToCwm(Chronos::ChiWorkerInternal c) :

@@ -15,17 +15,23 @@ uml::Activity convert(cwm::ChiOpinion o):
 
 Void transferValues(cwm::ChiOpinion c, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Activity).select(e|e.name == "ChiOpinion:" + c.id).first(): {
-		uc.applyStereotype("Chronos::ChiOpinion") ->
-		uc.setTaggedValue("Chronos::ChiOpinion", "Alias", c.alias) ->
-		uc.setTaggedValue("Chronos::ChiOpinion", "Version", c.version) ->
-		uc.setName(c.name) ->
-		c.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(c.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiOpinion", "created", c.created) ->
-		uc.setTaggedValue("Chronos::ChiOpinion", "creator", c.creator) ->
-		uc.setTaggedValue("Chronos::ChiOpinion", "last_editor", c.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiOpinion", "modified", c.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Activity).select(e|e.name == "ChiOpinion:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiOpinion") ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "modified", c.modified)
+		)
+	)
 ;
 
 cwm::ChiOpinion convertToCwm(Chronos::ChiOpinion c) :

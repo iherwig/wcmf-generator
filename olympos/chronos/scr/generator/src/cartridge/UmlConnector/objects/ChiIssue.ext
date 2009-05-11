@@ -24,19 +24,25 @@ Void establishConnections(cwm::ChiIssue i, uml::Model um):
 
 Void transferValues(cwm::ChiIssue i, uml::Model um):
 	//(new uml::Class).setT
-	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiIssue:" + i.id).first(): {
-		uc.applyStereotype("Chronos::ChiIssue") ->
-		uc.setTaggedValue("Chronos::ChiIssue", "Author", i.author) ->
-		uc.setTaggedValue("Chronos::ChiIssue", "Responsible", i.responsible) ->
-		uc.setTaggedValue("Chronos::ChiIssue", "Alias", i.alias) ->
-		uc.setTaggedValue("Chronos::ChiIssue", "Version", i.version) ->
-		uc.setName(i.name) ->
-		i.notes != null ? uc.ownedComment.add(((new uml::Comment).setBody(i.notes))) : Void ->
-		uc.setTaggedValue("Chronos::ChiIssue", "created", i.created) ->
-		uc.setTaggedValue("Chronos::ChiIssue", "creator", i.creator) ->
-		uc.setTaggedValue("Chronos::ChiIssue", "last_editor", i.lastEditor) ->
-		uc.setTaggedValue("Chronos::ChiIssue", "modified", i.modified)
-	}
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiIssue:" + i.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiIssue") ->
+			uc.setTaggedValue("Chronos::ChiIssue", "Author", i.author) ->
+			uc.setTaggedValue("Chronos::ChiIssue", "Responsible", i.responsible) ->
+			uc.setTaggedValue("Chronos::ChiIssue", "Alias", i.alias) ->
+			uc.setTaggedValue("Chronos::ChiIssue", "Version", i.version) ->
+			uc.setName(i.name) ->
+			i.notes != null ? (
+				comment.setBody(i.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiIssue", "created", i.created) ->
+			uc.setTaggedValue("Chronos::ChiIssue", "creator", i.creator) ->
+			uc.setTaggedValue("Chronos::ChiIssue", "last_editor", i.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiIssue", "modified", i.modified)
+		)
+	)
 ;
 
 cwm::ChiIssue convertToCwm(Chronos::ChiIssue c) :
