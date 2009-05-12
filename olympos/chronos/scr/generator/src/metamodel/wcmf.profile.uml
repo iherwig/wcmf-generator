@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="946c8490-d468-11dd-9ccf-f36fd30f7148" name="wcmf" metaclassReference="_lMcnsNRoEd2LOvE1lUIASw _lMvioNRoEd2LOvE1lUIASw _lM4skNRoEd2LOvE1lUIASw _lNfJgNRoEd2LOvE1lUIASw">
+  <eAnnotations xmi:id="_lbV_UdRoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_lbV_UtRoEd2LOvE1lUIASw" name="wcmf" nsURI="http:///schemas/wcmf/_lbV_UNRoEd2LOvE1lUIASw/0" nsPrefix="wcmf">
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_lbV_U9RoEd2LOvE1lUIASw" name="boolean">
+        <eAnnotations xmi:id="_lbV_VNRoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="94d30e99-d468-11dd-9ccf-f36fd30f7148"/>
+        <eLiterals xmi:id="_lbV_VdRoEd2LOvE1lUIASw" name="false"/>
+        <eLiterals xmi:id="_lbV_VtRoEd2LOvE1lUIASw" name="true" value="1"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_lbV_V9RoEd2LOvE1lUIASw" name="WCMFActionKey">
+        <eAnnotations xmi:id="_lbV_WNRoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="94dc847b-d468-11dd-9ccf-f36fd30f7148"/>
+        <eAnnotations xmi:id="_lbV_WdRoEd2LOvE1lUIASw" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_lbV_WtRoEd2LOvE1lUIASw" name="_" ordered="false" lowerBound="1" eType="_lbV_Z9RoEd2LOvE1lUIASw">
+            <eAnnotations xmi:id="_lbV_W9RoEd2LOvE1lUIASw" source="redefines" references="_lbV_ZdRoEd2LOvE1lUIASw"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_XdRoEd2LOvE1lUIASw" name="action" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_X9RoEd2LOvE1lUIASw" name="context" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_YdRoEd2LOvE1lUIASw" name="config" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="config.ini">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_Y9RoEd2LOvE1lUIASw" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_ZdRoEd2LOvE1lUIASw" name="_" ordered="false" lowerBound="1" eType="_lbV_Z9RoEd2LOvE1lUIASw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_lbV_Z9RoEd2LOvE1lUIASw" name="WCMFController">
+        <eAnnotations xmi:id="_lbV_aNRoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="95006035-d468-11dd-9ccf-f36fd30f7148"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_adRoEd2LOvE1lUIASw" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_lbV_a9RoEd2LOvE1lUIASw" name="WCMFAssociation">
+        <eAnnotations xmi:id="_lbV_bNRoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="94f6c342-d468-11dd-9ccf-f36fd30f7148"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_bdRoEd2LOvE1lUIASw" name="fk_name" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_b9RoEd2LOvE1lUIASw" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_lbV_cdRoEd2LOvE1lUIASw" name="WCMFManyToMany" eSuperTypes="_lbV_etRoEd2LOvE1lUIASw">
+        <eAnnotations xmi:id="_lbV_ctRoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="9515bcfa-d468-11dd-9ccf-f36fd30f7148"/>
+        <eAnnotations xmi:id="_lbV_c9RoEd2LOvE1lUIASw" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_lbV_dNRoEd2LOvE1lUIASw" name="_" ordered="false" lowerBound="1" eType="_lbV_etRoEd2LOvE1lUIASw">
+            <eAnnotations xmi:id="_lbV_ddRoEd2LOvE1lUIASw" source="redefines" references="_lbV_d9RoEd2LOvE1lUIASw"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_d9RoEd2LOvE1lUIASw" name="_" ordered="false" lowerBound="1" eType="_lbV_etRoEd2LOvE1lUIASw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_lbV_etRoEd2LOvE1lUIASw" name="WCMFNode">
+        <eAnnotations xmi:id="_lbV_e9RoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="952b40d1-d468-11dd-9ccf-f36fd30f7148"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_fNRoEd2LOvE1lUIASw" name="table_name" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_ftRoEd2LOvE1lUIASw" name="pk_name" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="id">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_gNRoEd2LOvE1lUIASw" name="orderby" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="none">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_gtRoEd2LOvE1lUIASw" name="parent_order" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_hNRoEd2LOvE1lUIASw" name="child_order" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_htRoEd2LOvE1lUIASw" name="display_value" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_iNRoEd2LOvE1lUIASw" name="is_soap" ordered="false" unique="false" lowerBound="1" eType="_lbV_U9RoEd2LOvE1lUIASw"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_itRoEd2LOvE1lUIASw" name="is_searchable" ordered="false" unique="false" lowerBound="1" eType="_lbV_U9RoEd2LOvE1lUIASw"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_jNRoEd2LOvE1lUIASw" name="initparams" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_jtRoEd2LOvE1lUIASw" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_lbV_kNRoEd2LOvE1lUIASw" name="WCMFSystem">
+        <eAnnotations xmi:id="_lbV_kdRoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="955d4d5a-d468-11dd-9ccf-f36fd30f7148"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_ktRoEd2LOvE1lUIASw" name="plattform" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_lNRoEd2LOvE1lUIASw" name="config" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="config.ini">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_ltRoEd2LOvE1lUIASw" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_lbV_mNRoEd2LOvE1lUIASw" name="WCMFValue">
+        <eAnnotations xmi:id="_lbV_mdRoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="9566c33d-d468-11dd-9ccf-f36fd30f7148"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_mtRoEd2LOvE1lUIASw" name="app_data_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="DATATYPE_ATTRIBUTE">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_nNRoEd2LOvE1lUIASw" name="db_data_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="VARCHAR(255)">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_ntRoEd2LOvE1lUIASw" name="is_editable" ordered="false" unique="false" lowerBound="1" eType="_lbV_U9RoEd2LOvE1lUIASw"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_oNRoEd2LOvE1lUIASw" name="input_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="text">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_otRoEd2LOvE1lUIASw" name="display_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="text">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_pNRoEd2LOvE1lUIASw" name="restrictions_match" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_ptRoEd2LOvE1lUIASw" name="restrictions_not_match" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_qNRoEd2LOvE1lUIASw" name="restrictions_description" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_qtRoEd2LOvE1lUIASw" name="column_name" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_rNRoEd2LOvE1lUIASw" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Property"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_lbV_rtRoEd2LOvE1lUIASw" name="WCMFValueRef">
+        <eAnnotations xmi:id="_lbV_r9RoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="9579d610-d468-11dd-9ccf-f36fd30f7148"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_sNRoEd2LOvE1lUIASw" name="reference_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_lbV_stRoEd2LOvE1lUIASw" name="reference_value" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_tNRoEd2LOvE1lUIASw" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Property"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_lbV_ttRoEd2LOvE1lUIASw" name="WCMFView">
+        <eAnnotations xmi:id="_lbV_t9RoEd2LOvE1lUIASw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="9585e403-d468-11dd-9ccf-f36fd30f7148"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_lbV_uNRoEd2LOvE1lUIASw" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:id="_lMcnsNRoEd2LOvE1lUIASw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+  </elementImport>
+  <elementImport xmi:id="_lMvioNRoEd2LOvE1lUIASw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+  </elementImport>
+  <elementImport xmi:id="_lM4skNRoEd2LOvE1lUIASw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+  </elementImport>
+  <elementImport xmi:id="_lNfJgNRoEd2LOvE1lUIASw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_lGyEkNRoEd2LOvE1lUIASw" name="PrimitiveTypes">
+    <elementImport xmi:id="_lI3vQNRoEd2LOvE1lUIASw">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </elementImport>
+    <elementImport xmi:id="_lI3vQdRoEd2LOvE1lUIASw">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </elementImport>
+    <elementImport xmi:id="_lJA5MNRoEd2LOvE1lUIASw">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </elementImport>
+    <elementImport xmi:id="_lJA5MdRoEd2LOvE1lUIASw">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="95b0c4b6-d468-11dd-9ccf-f36fd30f7148" name="void"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="94d30e99-d468-11dd-9ccf-f36fd30f7148" name="boolean">
+    <ownedLiteral xmi:id="_lNVYgNRoEd2LOvE1lUIASw" name="false"/>
+    <ownedLiteral xmi:id="_lNVYgdRoEd2LOvE1lUIASw" name="true"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="94dc847b-d468-11dd-9ccf-f36fd30f7148" name="WCMFActionKey">
+    <ownedComment xmi:id="_lNyEcdRoEd2LOvE1lUIASw">
+      <body>An action key used in WCMF. An action key assoziates two controllers (to define a control flow) or a view with a controller (to define a view attachment). Controller, Views and Associations define the application flow</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_lZj2oNRoEd2LOvE1lUIASw" name="action" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZj2pNRoEd2LOvE1lUIASw">
+        <body>The Action which triggeres this association</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZj2otRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZj2odRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZj2o9RoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZj2pdRoEd2LOvE1lUIASw" name="context" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZj2qdRoEd2LOvE1lUIASw">
+        <body>The Context in which this association is valid</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZj2p9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZj2ptRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZj2qNRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZtAkNRoEd2LOvE1lUIASw" name="config" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZtAlNRoEd2LOvE1lUIASw">
+        <body>The configuration file in which this association will be placed</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZtAktRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZtAkdRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZtAk9RoEd2LOvE1lUIASw" value="config.ini"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lamYe9RoEd2LOvE1lUIASw" name="base_Association" association="95a998aa-d468-11dd-9ccf-f36fd30f7148">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="95ac09b1-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="95006035-d468-11dd-9ccf-f36fd30f7148" association="95ac09af-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lawJgNRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lawJf9RoEd2LOvE1lUIASw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="95ae53a8-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="95006035-d468-11dd-9ccf-f36fd30f7148" association="95ae53a6-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_la5TZtRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_la5TZdRoEd2LOvE1lUIASw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="94f6c342-d468-11dd-9ccf-f36fd30f7148" name="WCMFAssociation">
+    <ownedComment xmi:id="_lPk0MNRoEd2LOvE1lUIASw">
+      <body>An association end used in WCMF</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_lZtAldRoEd2LOvE1lUIASw" name="fk_name" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZtAmdRoEd2LOvE1lUIASw">
+        <body>The name of the foreign key column. The generator will add this if there is no appropriate attribute. If not given the generator will add 'fk_[parent]_id'</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZtAl9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZtAltRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZtAmNRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lbDEadRoEd2LOvE1lUIASw" name="base_Association" association="95b0c4b2-d468-11dd-9ccf-f36fd30f7148">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="95006035-d468-11dd-9ccf-f36fd30f7148" name="WCMFController">
+    <ownedComment xmi:id="_lQBgIdRoEd2LOvE1lUIASw">
+      <body>A Controller type used in WCMF. Controller, Views and Associations define the application flow</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_lawJedRoEd2LOvE1lUIASw" name="base_Class" association="95ac09ae-d468-11dd-9ccf-f36fd30f7148">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="9515bcfa-d468-11dd-9ccf-f36fd30f7148" name="WCMFManyToMany">
+    <ownedComment xmi:id="_lRW84dRoEd2LOvE1lUIASw">
+      <body>A many to many node used in WCMF. It is used to realize a many to many relation between wo WCMFNodes</body>
+    </ownedComment>
+    <generalization xmi:id="_lZtAmtRoEd2LOvE1lUIASw" general="952b40d1-d468-11dd-9ccf-f36fd30f7148"/>
+    <ownedAttribute xmi:id="95ac09ad-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="952b40d1-d468-11dd-9ccf-f36fd30f7148" association="95ac09ab-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lawJdtRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lawJddRoEd2LOvE1lUIASw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="95b0c4b5-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="952b40d1-d468-11dd-9ccf-f36fd30f7148" association="95b0c4b3-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lbDEcNRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lbDEb9RoEd2LOvE1lUIASw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="952b40d1-d468-11dd-9ccf-f36fd30f7148" name="WCMFNode">
+    <ownedComment xmi:id="_lStAsdRoEd2LOvE1lUIASw">
+      <body>A Node type used in WCMF. Nodes and Values define the application data model</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_lZtAm9RoEd2LOvE1lUIASw" name="table_name" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZtAn9RoEd2LOvE1lUIASw">
+        <body>The name of the database table. If not given the name will be taken.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZtAndRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZtAnNRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZtAntRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZtAoNRoEd2LOvE1lUIASw" name="pk_name" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZtApNRoEd2LOvE1lUIASw">
+        <body>The name of the primary key column. The generator will add this if there is no appropriate attribute.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZtAotRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZtAodRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZtAo9RoEd2LOvE1lUIASw" value="id"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZtApdRoEd2LOvE1lUIASw" name="orderby" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZ2xkdRoEd2LOvE1lUIASw">
+        <body>Definition of default sorting. Possible values: 'none' (no order), 'sortkey' (generates a 'sortkey' column, that is used for explicit sorting) or any the name of any WCMFValue defined in the node optionally followed by [ASC|DESC] e.g. 'name ASC'</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZtAp9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZtAptRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZ2xkNRoEd2LOvE1lUIASw" value="none"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZ2xktRoEd2LOvE1lUIASw" name="parent_order" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZ2xltRoEd2LOvE1lUIASw">
+        <body>The order of the associated parents.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ2xlNRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ2xk9RoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZ2xldRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZ2xl9RoEd2LOvE1lUIASw" name="child_order" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZ2xm9RoEd2LOvE1lUIASw">
+        <body>The order of the associated children e.g. for Recipe: Image|Info|AdminInfo</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ2xmdRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ2xmNRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZ2xmtRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZ2xnNRoEd2LOvE1lUIASw" name="display_value" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZ2xoNRoEd2LOvE1lUIASw">
+        <body>The display value of a node e.g. for Recipe: name|AdminInfo/status|Info/status</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ2xntRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ2xndRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZ2xn9RoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZ2xodRoEd2LOvE1lUIASw" name="is_soap" visibility="public" type="94d30e99-d468-11dd-9ccf-f36fd30f7148" isUnique="false">
+      <ownedComment xmi:id="_lZ2xpNRoEd2LOvE1lUIASw">
+        <body>Indicates wether a SOAP interface should be generated for this type.</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ2xo9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ2xotRoEd2LOvE1lUIASw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZ2xpdRoEd2LOvE1lUIASw" name="is_searchable" visibility="public" type="94d30e99-d468-11dd-9ccf-f36fd30f7148" isUnique="false">
+      <ownedComment xmi:id="_lZ2xqNRoEd2LOvE1lUIASw">
+        <body>Indicates wether this type should be included in the default search.</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ2xp9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ2xptRoEd2LOvE1lUIASw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZ_7gNRoEd2LOvE1lUIASw" name="initparams" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZ_7hNRoEd2LOvE1lUIASw">
+        <body>The configuration section that is used on initialization of the corresponding mapper.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ_7gtRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ_7gdRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZ_7g9RoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_la5Tc9RoEd2LOvE1lUIASw" name="base_Class" association="95ae53ad-d468-11dd-9ccf-f36fd30f7148">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="955d4d5a-d468-11dd-9ccf-f36fd30f7148" name="WCMFSystem">
+    <ownedComment xmi:id="_lV1NMdRoEd2LOvE1lUIASw">
+      <body>A system configuration. Settings are modelled as attributes with default values</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_lZ_7hdRoEd2LOvE1lUIASw" name="plattform" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZ_7idRoEd2LOvE1lUIASw">
+        <body>The plattform to which the configuration settings apply.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ_7h9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ_7htRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZ_7iNRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZ_7itRoEd2LOvE1lUIASw" name="config" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZ_7jtRoEd2LOvE1lUIASw">
+        <body>The configuration file where the settings will be placed.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ_7jNRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ_7i9RoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZ_7jdRoEd2LOvE1lUIASw" value="config.ini"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lawJg9RoEd2LOvE1lUIASw" name="base_Class" association="95ac09b2-d468-11dd-9ccf-f36fd30f7148">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="9566c33d-d468-11dd-9ccf-f36fd30f7148" name="WCMFValue">
+    <ownedComment xmi:id="_lWbDEdRoEd2LOvE1lUIASw">
+      <body>A Node value type used in WCMF. These values are persistent</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_lZ_7j9RoEd2LOvE1lUIASw" name="app_data_type" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_lZ_7k9RoEd2LOvE1lUIASw">
+        <body>The datatype used in the application e.g. DATATYPE_DONTCARE, DATATYPE_ATTRIBUTE, DATATYPE_ELEMENT or DATATYPE_IGNORE</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ_7kdRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ_7kNRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZ_7ktRoEd2LOvE1lUIASw" value="DATATYPE_ATTRIBUTE"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lZ_7lNRoEd2LOvE1lUIASw" name="db_data_type" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_laJsgNRoEd2LOvE1lUIASw">
+        <body>The datatype used in the database</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lZ_7ltRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lZ_7ldRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_lZ_7l9RoEd2LOvE1lUIASw" value="VARCHAR(255)"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_laJsgdRoEd2LOvE1lUIASw" name="is_editable" visibility="public" type="94d30e99-d468-11dd-9ccf-f36fd30f7148" isUnique="false">
+      <ownedComment xmi:id="_laJshNRoEd2LOvE1lUIASw">
+        <body>Whether the attribute is editable or not</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_laJsg9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_laJsgtRoEd2LOvE1lUIASw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_laJshdRoEd2LOvE1lUIASw" name="input_type" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_laJsidRoEd2LOvE1lUIASw">
+        <body>The HTML input type for the attribute e.g. select#fix:key1[val1]|key2[val2]</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_laJsh9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_laJshtRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_laJsiNRoEd2LOvE1lUIASw" value="text"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_laJsitRoEd2LOvE1lUIASw" name="display_type" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_laJsjtRoEd2LOvE1lUIASw">
+        <body>The HTML display type for the attribute e.g. image</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_laJsjNRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_laJsi9RoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_laJsjdRoEd2LOvE1lUIASw" value="text"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_laJsj9RoEd2LOvE1lUIASw" name="restrictions_match" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_laJsk9RoEd2LOvE1lUIASw">
+        <body>A regular expression that the value must match (e.g. '[0-3][0-9]\.[0-1][0-9]\.[0-9][0-9][0-9][0-9]' for date values)</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_laJskdRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_laJskNRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_laJsktRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_laJslNRoEd2LOvE1lUIASw" name="restrictions_not_match" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_laJsmNRoEd2LOvE1lUIASw">
+        <body>A regular expression that the value must NOT match</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_laJsltRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_laJsldRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_laJsl9RoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_laTdgNRoEd2LOvE1lUIASw" name="restrictions_description" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_laTdhNRoEd2LOvE1lUIASw">
+        <body>A text describing the restrictions</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_laTdgtRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_laTdgdRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_laTdg9RoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_laTdhdRoEd2LOvE1lUIASw" name="column_name" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_laTdidRoEd2LOvE1lUIASw">
+        <body>The name of the database column. If not given the name will be taken</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_laTdh9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_laTdhtRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_laTdiNRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_la5TdtRoEd2LOvE1lUIASw" name="base_Property" association="95ae53ae-d468-11dd-9ccf-f36fd30f7148">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="9579d610-d468-11dd-9ccf-f36fd30f7148" name="WCMFValueRef">
+    <ownedComment xmi:id="_lXnV4dRoEd2LOvE1lUIASw">
+      <body>A Node value type used in WCMF. These values reference values of other Node types and are not persistent</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_laTditRoEd2LOvE1lUIASw" name="reference_type" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_laTdjtRoEd2LOvE1lUIASw">
+        <body>The type where the value is taken from. NOTE: The type MUST be connected (at a destination end)</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_laTdjNRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_laTdi9RoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_laTdjdRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_laTdj9RoEd2LOvE1lUIASw" name="reference_value" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_laTdk9RoEd2LOvE1lUIASw">
+        <body>The referenced attribute</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_laTdkdRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_laTdkNRoEd2LOvE1lUIASw" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_laTdktRoEd2LOvE1lUIASw" value=""/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lamYeNRoEd2LOvE1lUIASw" name="base_Property" association="95a998a9-d468-11dd-9ccf-f36fd30f7148">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="9585e403-d468-11dd-9ccf-f36fd30f7148" name="WCMFView">
+    <ownedComment xmi:id="_lYXj0dRoEd2LOvE1lUIASw">
+      <body>A View used in WCMF. Controller, Views and Associations define the application flow</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_la5TcNRoEd2LOvE1lUIASw" name="base_Class" association="95ae53ac-d468-11dd-9ccf-f36fd30f7148">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="95a998a6-d468-11dd-9ccf-f36fd30f7148" name="referenced attributes" memberEnd="95a998a7-d468-11dd-9ccf-f36fd30f7148 95a998a8-d468-11dd-9ccf-f36fd30f7148">
+    <ownedEnd xmi:id="95a998a7-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="952b40d1-d468-11dd-9ccf-f36fd30f7148" association="95a998a6-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lamYctRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lamYcdRoEd2LOvE1lUIASw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="95a998a8-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="9579d610-d468-11dd-9ccf-f36fd30f7148" association="95a998a6-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lamYddRoEd2LOvE1lUIASw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lamYdNRoEd2LOvE1lUIASw"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="95a998a9-d468-11dd-9ccf-f36fd30f7148" name="Property_WCMFValueRef" memberEnd="_lamYd9RoEd2LOvE1lUIASw _lamYeNRoEd2LOvE1lUIASw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_lamYd9RoEd2LOvE1lUIASw" name="extension_WCMFValueRef" type="9579d610-d468-11dd-9ccf-f36fd30f7148" aggregation="composite" association="95a998a9-d468-11dd-9ccf-f36fd30f7148"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="95a998aa-d468-11dd-9ccf-f36fd30f7148" name="Association_WCMFActionKey" memberEnd="_lamYetRoEd2LOvE1lUIASw _lamYe9RoEd2LOvE1lUIASw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_lamYetRoEd2LOvE1lUIASw" name="extension_WCMFActionKey" type="94dc847b-d468-11dd-9ccf-f36fd30f7148" aggregation="composite" association="95a998aa-d468-11dd-9ccf-f36fd30f7148"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="95ac09ab-d468-11dd-9ccf-f36fd30f7148" name="nodeA" memberEnd="95ac09ac-d468-11dd-9ccf-f36fd30f7148 95ac09ad-d468-11dd-9ccf-f36fd30f7148">
+    <ownedEnd xmi:id="95ac09ac-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="9515bcfa-d468-11dd-9ccf-f36fd30f7148" association="95ac09ab-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lawJc9RoEd2LOvE1lUIASw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lawJctRoEd2LOvE1lUIASw"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="95ac09ae-d468-11dd-9ccf-f36fd30f7148" name="Class_WCMFController" memberEnd="_lawJeNRoEd2LOvE1lUIASw _lawJedRoEd2LOvE1lUIASw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_lawJeNRoEd2LOvE1lUIASw" name="extension_WCMFController" type="95006035-d468-11dd-9ccf-f36fd30f7148" aggregation="composite" association="95ac09ae-d468-11dd-9ccf-f36fd30f7148"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="95ac09af-d468-11dd-9ccf-f36fd30f7148" name="to" memberEnd="95ac09b0-d468-11dd-9ccf-f36fd30f7148 95ac09b1-d468-11dd-9ccf-f36fd30f7148">
+    <ownedEnd xmi:id="95ac09b0-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="94dc847b-d468-11dd-9ccf-f36fd30f7148" association="95ac09af-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lawJfdRoEd2LOvE1lUIASw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lawJfNRoEd2LOvE1lUIASw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="95ac09b2-d468-11dd-9ccf-f36fd30f7148" name="Class_WCMFSystem" memberEnd="_lawJgtRoEd2LOvE1lUIASw _lawJg9RoEd2LOvE1lUIASw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_lawJgtRoEd2LOvE1lUIASw" name="extension_WCMFSystem" type="955d4d5a-d468-11dd-9ccf-f36fd30f7148" aggregation="composite" association="95ac09b2-d468-11dd-9ccf-f36fd30f7148"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="95ac09b3-d468-11dd-9ccf-f36fd30f7148" name="hierarchy" memberEnd="95ac09b4-d468-11dd-9ccf-f36fd30f7148 95ae53a5-d468-11dd-9ccf-f36fd30f7148">
+    <ownedEnd xmi:id="95ac09b4-d468-11dd-9ccf-f36fd30f7148" name="parents" visibility="public" type="952b40d1-d468-11dd-9ccf-f36fd30f7148" association="95ac09b3-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lawJh9RoEd2LOvE1lUIASw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lawJhtRoEd2LOvE1lUIASw"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="95ae53a5-d468-11dd-9ccf-f36fd30f7148" name="children" visibility="public" type="952b40d1-d468-11dd-9ccf-f36fd30f7148" association="95ac09b3-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lawJitRoEd2LOvE1lUIASw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lawJidRoEd2LOvE1lUIASw"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="95ae53a6-d468-11dd-9ccf-f36fd30f7148" name="from" memberEnd="95ae53a7-d468-11dd-9ccf-f36fd30f7148 95ae53a8-d468-11dd-9ccf-f36fd30f7148">
+    <ownedEnd xmi:id="95ae53a7-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="94dc847b-d468-11dd-9ccf-f36fd30f7148" association="95ae53a6-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_la5TY9RoEd2LOvE1lUIASw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_la5TYtRoEd2LOvE1lUIASw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="95ae53a9-d468-11dd-9ccf-f36fd30f7148" name="view" memberEnd="95ae53aa-d468-11dd-9ccf-f36fd30f7148 95ae53ab-d468-11dd-9ccf-f36fd30f7148">
+    <ownedEnd xmi:id="95ae53aa-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="9585e403-d468-11dd-9ccf-f36fd30f7148" association="95ae53a9-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_la5TatRoEd2LOvE1lUIASw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_la5TadRoEd2LOvE1lUIASw"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="95ae53ab-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="95006035-d468-11dd-9ccf-f36fd30f7148" association="95ae53a9-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_la5TbdRoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_la5TbNRoEd2LOvE1lUIASw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="95ae53ac-d468-11dd-9ccf-f36fd30f7148" name="Class_WCMFView" memberEnd="_la5Tb9RoEd2LOvE1lUIASw _la5TcNRoEd2LOvE1lUIASw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_la5Tb9RoEd2LOvE1lUIASw" name="extension_WCMFView" type="9585e403-d468-11dd-9ccf-f36fd30f7148" aggregation="composite" association="95ae53ac-d468-11dd-9ccf-f36fd30f7148"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="95ae53ad-d468-11dd-9ccf-f36fd30f7148" name="Class_WCMFNode" memberEnd="_la5TctRoEd2LOvE1lUIASw _la5Tc9RoEd2LOvE1lUIASw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_la5TctRoEd2LOvE1lUIASw" name="extension_WCMFNode" type="952b40d1-d468-11dd-9ccf-f36fd30f7148" aggregation="composite" association="95ae53ad-d468-11dd-9ccf-f36fd30f7148"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="95ae53ae-d468-11dd-9ccf-f36fd30f7148" name="Property_WCMFValue" memberEnd="_la5TddRoEd2LOvE1lUIASw _la5TdtRoEd2LOvE1lUIASw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_la5TddRoEd2LOvE1lUIASw" name="extension_WCMFValue" type="9566c33d-d468-11dd-9ccf-f36fd30f7148" aggregation="composite" association="95ae53ae-d468-11dd-9ccf-f36fd30f7148"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="95b0c4af-d468-11dd-9ccf-f36fd30f7148" name="attributes" memberEnd="95b0c4b0-d468-11dd-9ccf-f36fd30f7148 95b0c4b1-d468-11dd-9ccf-f36fd30f7148">
+    <ownedEnd xmi:id="95b0c4b0-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="952b40d1-d468-11dd-9ccf-f36fd30f7148" association="95b0c4af-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lbDEY9RoEd2LOvE1lUIASw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lbDEYtRoEd2LOvE1lUIASw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="95b0c4b1-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="9566c33d-d468-11dd-9ccf-f36fd30f7148" association="95b0c4af-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lbDEZtRoEd2LOvE1lUIASw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lbDEZdRoEd2LOvE1lUIASw"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="95b0c4b2-d468-11dd-9ccf-f36fd30f7148" name="Association_WCMFAssociation" memberEnd="_lbDEaNRoEd2LOvE1lUIASw _lbDEadRoEd2LOvE1lUIASw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_lbDEaNRoEd2LOvE1lUIASw" name="extension_WCMFAssociation" type="94f6c342-d468-11dd-9ccf-f36fd30f7148" aggregation="composite" association="95b0c4b2-d468-11dd-9ccf-f36fd30f7148"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="95b0c4b3-d468-11dd-9ccf-f36fd30f7148" name="nodeB" memberEnd="95b0c4b4-d468-11dd-9ccf-f36fd30f7148 95b0c4b5-d468-11dd-9ccf-f36fd30f7148">
+    <ownedEnd xmi:id="95b0c4b4-d468-11dd-9ccf-f36fd30f7148" name="" visibility="public" type="9515bcfa-d468-11dd-9ccf-f36fd30f7148" association="95b0c4b3-d468-11dd-9ccf-f36fd30f7148">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lbDEbdRoEd2LOvE1lUIASw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lbDEbNRoEd2LOvE1lUIASw"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Profile>

@@ -1,0 +1,36 @@
+import uml;
+
+Void normalizeName(uml::Model this):
+	this.allOwnedElements().typeSelect(uml::Class).normalizeName() ->
+	this.allOwnedElements().typeSelect(uml::Class).attribute.normalizeName() ->
+	this.allOwnedElements().typeSelect(uml::Operation).normalizeName() ->
+	this.allOwnedElements().typeSelect(uml::Package).normalizeName()
+;
+
+Void normalizeName(uml::Class this):
+	this.setName(normalizeClassName(this.name))
+;
+
+Void normalizeName(uml::Property this):
+	this.setName(normalizeMemberName(this.name))
+;
+
+Void normalizeName(uml::Operation this):
+	this.setName(normalizeMemberName(this.name))
+;
+
+Void normalizeName(uml::Package this):
+	this.setName(normalizePackageName(this.name))
+;
+
+String normalizeClassName(String this):
+	JAVA net.sourceforge.olympos.oaw.extend.NameNormalizer.normalizeClassName(java.lang.String)
+;
+
+String normalizeMemberName(String this):
+	JAVA net.sourceforge.olympos.oaw.extend.NameNormalizer.normalizeClassName(java.lang.String)
+;
+
+String normalizePackageName(String this):
+	JAVA net.sourceforge.olympos.oaw.extend.NameNormalizer.normalizePackageName(java.lang.String)
+;

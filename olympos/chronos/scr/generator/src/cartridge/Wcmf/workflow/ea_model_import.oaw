@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+
+	<!-- Export the Enterprise Architect model to UML format -->
+	<component class="oaw.uml2.toolsupport.ea.EA_Xmi2Exporter">
+		<EapFile value="${modelEaFile}"/>
+		<ModelFile value="${modelUmlFile}"/>
+		<PackageName value="${modelPkg}"/>
+		<profile value="${profileUmlFile}"/>
+		<PackageProfile name="${applyPkg}" value="${profilename}"/>
+		<Cleanup value="true"/>
+	</component>
+
+</workflow>

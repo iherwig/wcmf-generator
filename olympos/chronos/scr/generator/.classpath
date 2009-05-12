@@ -44,6 +44,8 @@
 	<classpathentry kind="lib" path="lib/openoffice/slf4j-jdk14-1.4.3.jar"/>
 	<classpathentry kind="lib" path="lib/openoffice/unoil-2.3.0.jar"/>
 	<classpathentry kind="lib" path="lib/openoffice/xstream-1.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/ea_toolsupport-1.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/ea_com_interface-1.6.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

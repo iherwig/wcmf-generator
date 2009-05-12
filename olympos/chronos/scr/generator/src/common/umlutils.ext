@@ -51,6 +51,18 @@ String getRoleName(uml::Property this) :
 List[uml::Class] getSubClasses(uml::Class this) : 
 	this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|e.getGenerals().contains(this));
 
+
+/**
+ * Get all superclasses of a class
+ */
+List[uml::Class] getSuperClassesRecursive(uml::Class this) :
+	let l = (List[uml::Class]) {} : 
+		this.superClass.size > 0 ?
+			this.superClass.getSuperClassesRecursive().addAll(this.superClass)
+		:
+			l
+;
+
 /**
  * Check if the given class has a super class
  */
@@ -68,15 +80,6 @@ Boolean isInheritingFrom(uml::Class this, uml::Class other) :
 	this.superClass.contains(other) ? true : 
 		this.superClass.exists(e|this.isInheritingFrom(e))
 ;
-
-/**
- * Get the package name of the class
- */
-/*
-//Commented out because of dependency to RootPackage()
-String getFullPackageName(uml::Class cls) :  
-	cls.package!=null ? getPackageName(cls.package).replaceFirst(RootPackage()+".", "") : "";
-*/
 
 /**
  * Check if an association is bidirectional
@@ -120,6 +123,6 @@ uml::Class getOwningClass(uml::Property this) :
 /**
  * Get the fully qualified name of the package
  */
-private cached String getPackageName(uml::Package pck) :
+cached String getPackageName(uml::Package pck) :
 	(pck.nestingPackage!=null && !uml::Model.isInstance(pck.nestingPackage)) ? getPackageName(pck.nestingPackage)+"."+pck.name : pck.name
 ;

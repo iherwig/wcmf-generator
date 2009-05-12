@@ -215,7 +215,7 @@ public class PostProcessor {
 
 		// use extend facade for wcmf helper methods
 		Profile wcmfProfile = clazz.getModel().getAppliedProfile(Constants.PROFILE_WCMF);
-		XtendFacade wcmfExt = Generator.createXtendFacade("templates::extensions::wcmf", new Profile[] { wcmfProfile });
+		XtendFacade wcmfExt = Generator.createXtendFacade("cartridge::Wcmf::extensions::wcmf", new Profile[] { wcmfProfile });
 
 		// 1. values from base classes (the persistence mappers
 		// use the "Concrete Table Inheritance" pattern)
