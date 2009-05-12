@@ -1,0 +1,12 @@
+import uml;
+import wcmf;
+
+extension common::umlutils;
+
+extension cartridge::Wcmf::extensions::globals;
+
+/**
+ * Get the package name of the class
+ */
+String getFullPackageName(uml::Class cls) :  
+	cls.package!=null ? getPackageName(cls.package).replaceFirst(RootPackage()+".", "") : "";
