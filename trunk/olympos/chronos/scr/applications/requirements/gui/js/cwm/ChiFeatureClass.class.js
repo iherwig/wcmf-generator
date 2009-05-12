@@ -50,15 +50,15 @@ cwm.ChiFeatureClass = function() {
 	
 		"ChiRequirement": {
 			label: "is realized by",
-			invert: true,
+			invert: false,
 			connectionType: 'realization',
 			cardinality: -1
 		},
 		"ChiBusinessUseCase": {
 			label: "is refined by",
-			invert: false,
+			invert: true,
 			connectionType: 'realization',
-			cardinality: -1
+			cardinality: 1
 		},
 		"ChiBusinessUseCaseCore": {
 			label: "is refined by",
