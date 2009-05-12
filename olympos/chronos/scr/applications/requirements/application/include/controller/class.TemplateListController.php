@@ -16,18 +16,18 @@ require_once (BASE."wcmf/lib/presentation/class.Controller.php");
 /**
  * @class TemplateListController
  * @ingroup Controller
- * @brief 
+ * @brief reads out server.ini generator section to get path and reads out path to get templateinfo.xml files 
  * 
  * <b>Input actions:</b>
- * - @em 
+ * - @em templatelist to list templatenames, titles and descriptions
  *
  * <b>Output actions:</b>
- * - @em 
- * 
+ * - @em ok in every case
+ *  
  * @param[in] 
- * @param[in] 
- * @param[out] 
- * @param[out] 
+ * @param[out] technicalNames
+ * @param[out] titles
+ * @param[out] descriptions
  * 
  * @author 	Sabine 
  */
