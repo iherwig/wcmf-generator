@@ -12,6 +12,22 @@ require_once ('class.UwmUtil.php');
 require_once ('class.ExportShutdownHandler.php');
 // PROTECTED REGION END
 
+/**
+ * @class UWMExporterController
+ * @ingroup Controller
+ * @brief Generates UML out of the passed model, and returns the UML file. 
+ * 
+ * <b>Input actions:</b>
+ * - @em exportUWM Generates and returns a UML file.
+ *
+ * <b>Output actions:</b>
+ * - @em failure If a fatal error occurs
+ * 
+ * @param[in] startModel The OID of the model to generate UML for.
+ * @param[in] startPackage The OID of the package to generate UML for.
+ * 
+ * @author 	Niko <enikao@users.sourceforge.net>
+ */
 class UWMExporterController extends Controller
 {
 	// PROTECTED REGION ID(application/include/controller/class.UWMExporterController.php/Body) ENABLED START
