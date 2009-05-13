@@ -30,3 +30,42 @@ uwm.modeltree.ActivitySetNode = function(config) {
 	}
 
 Ext.extend(uwm.modeltree.ActivitySetNode, uwm.modeltree.AbstractDiagramNode);
+
+/**
+ * @member uwm.modeltree.PackageNode
+ */
+uwm.modeltree.ActivitySetNode.prototype.buildContextMenu = function() {
+	var self = this;
+	
+	this.contextMenu = new Ext.menu.Menu({
+		items: [{
+			text: uwm.Dict.translate('Open'),
+			handler: function(item, e) {
+				self.open(item, e);
+			}
+		}, {
+			text: uwm.Dict.translate('Delete from model'),
+			handler: function(item, e) {
+				self.deleteFromModel(item.e);
+			}
+		},	{
+			text: uwm.Dict.translate('Put ActivitySet childnodes on ActivitySet diagram'),
+			handler: function(item, e) {
+				self.putChildnodesToActivitySetDiagramAndOpen(item, e);
+			}
+		}]
+	});
+	
+	return this.contextMenu;
+}
+
+
+uwm.modeltree.ActivitySetNode.prototype.putChildnodesToActivitySetDiagramAndOpen = function(self, e) {
+	//start controller actsdiagr and get back acts oid
+	uwm.persistency.Persistency.getInstance().putChildnodesToActivitySetDiagram(this.oid, function(options, data) {
+		uwm.model.ModelContainer.getInstance().loadByOid(data['oid'], function(modelNodeDiagr) {
+			//open acts diagram from acts id
+			uwm.diagram.DiagramContainer.getInstance().loadDiagram(modelNodeDiagr);
+		});
+	});
+}

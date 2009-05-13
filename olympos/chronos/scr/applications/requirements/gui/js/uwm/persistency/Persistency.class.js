@@ -103,5 +103,11 @@ uwm.persistency.Persistency.prototype.log = function(logtype, msg, successHandle
 uwm.persistency.Persistency.prototype.executeActionSet = function(actionSet) {
 }
 
-uwm.persistency.Persistency.prototype.createDiagramFromPackage = function(pid, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.createDiagramFromPackage = function(oid, successHandler, errorHandler ) {
+}
+
+uwm.persistency.Persistency.prototype.putChildnodesToActivitySetDiagram = function(oid, successHandler, errorHandler ) {
+}
+
+uwm.persistency.Persistency.prototype.templatelist = function( successHandler, errorHandler ) {
 }

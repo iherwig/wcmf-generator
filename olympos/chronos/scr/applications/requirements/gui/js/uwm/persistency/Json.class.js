@@ -221,6 +221,13 @@ uwm.persistency.Json.prototype.createDiagramFromPackage = function(oid, successH
 		usr_action: "packdiagr",
 		oid: oid
 	}, successHandler, errorHandler);
+}
+
+uwm.persistency.Json.prototype.putChildnodesToActivitySetDiagram = function(oid, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "actsdiagr",
+		oid: oid
+	}, successHandler, errorHandler);
 }	
 
 uwm.persistency.Json.prototype.log = function(logtype, msg, successHandler, errorHandler) {
@@ -237,6 +244,13 @@ uwm.persistency.Json.prototype.log = function(logtype, msg, successHandler, erro
 			self.processErrorHandler(errorHandler, request, data);
 		}
 	});
+}
+
+uwm.persistency.Json.prototype.templatelist = function( successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'templatelist',
+	}, successHandler, errorHandler);
+	
 }
 
 uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
@@ -351,6 +365,15 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 			case "packdiagr":
 				jsonRequest.controller = "PackageDiagramController";
 				jsonRequest.oid = currRequest.oid;
+				break;
+				
+			case "actsdiagr":
+				jsonRequest.controller = "ActivitySetDiagramController";
+				jsonRequest.oid = currRequest.oid;
+				break;
+				
+			case "templatelist":
+				jsonRequest.controller = "TemplateListController";
 				break;
 				
 			default:
