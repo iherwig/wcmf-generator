@@ -17,6 +17,7 @@ String TargetDirectory() : GLOBALVAR TargetDirectory;
 String ProjectName() : GLOBALVAR ProjectName;
 String RequiredControllerSuperClass() : GLOBALVAR RequiredControllerSuperClass;
 String RequiredNodeSuperClass() : GLOBALVAR RequiredNodeSuperClass;
+String HeaderText() : GLOBALVAR HeaderText;
 
 /**
  * Calculated properties
