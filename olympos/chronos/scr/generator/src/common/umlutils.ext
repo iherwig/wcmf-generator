@@ -105,9 +105,16 @@ boolean isAggregation(uml::Property p) :
 /**
  * Get a tagged value
  */
-Object getTaggedValue(uml::Element this, String st, String name) :
-	JAVA net.sourceforge.olympos.oaw.extend.UMLHelper.getTaggedValue(org.eclipse.uml2.uml.Element, java.lang.String, java.lang.String)
+Object getTaggedValue(uml::Element this, String stereotypeName, String tagName) :
+//	JAVA net.sourceforge.olympos.oaw.extend.UMLHelper.getTaggedValue(org.eclipse.uml2.uml.Element, java.lang.String, java.lang.String)
+
+	let stereotype = this.getAppliedStereotype(stereotypeName):
+	stereotype != null ?
+		this.getValue(stereotype, tagName)
+	:
+		null
 ;
+
 
 /**
  * Get the class that owns the given property

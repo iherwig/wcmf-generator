@@ -117,6 +117,7 @@
 		<globalVarDef name="DefaultConfigFile" value="'${configFileDefault}'"/>
 		<globalVarDef name="ProjectName" value="'${projectname}'"/>
 		<globalVarDef name="TargetDirectory" value="'${targetDir}'"/>
+		<globalVarDef name="HeaderText" value="${headerText}"/>
 
 		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
