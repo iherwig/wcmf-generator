@@ -20,13 +20,24 @@ Ext.namespace("uwm.ui");
  */
 uwm.ui.ExportAssistent = function() {
 
+	uwm.persistency.Persistency.getInstance().templatelist(function(options, data) {
+		uwm.ui.ExportAssistent.prototype.JsonSuccess(options, data);
+	}, function(options, data, errorMessage) {
+		Ext.MessageBox.alert('Error',errorMessage);
+	});
+	
+}
+Ext.extend(uwm.ui.ExportAssistent, Ext.Window);
+
+uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
+
 	var radioFormItem = new Ext.FormPanel({
 		name: 'formPanel',
 		title: uwm.Dict.translate('document format'),
 		labelWidth: 70,
 		width: 280,
 		frame: true,
-//		renderTo:'form-ct',
+		//		renderTo:'form-ct',
 		items: {
 			xtype: 'fieldset',
 			name: 'fieldset',
@@ -55,41 +66,46 @@ uwm.ui.ExportAssistent = function() {
 	
 	});
 	
-	var store = new Ext.data.SimpleStore({
-		data: [{
-			technName: 'test1',
-			templateName: 'testest1',
-			description: 'testestest1'
-		}, {
-			technName: 'test2',
-			templateName: 'testest2',
-			description: 'testestest2'
-		}, {
-			technName: 'test3',
-			templateName: 'testest3',
-			description: 'testestest3'
-		}],
-		fields: [{
-			name: 'technName',
-			mapping: 'technName'
-		}, {
-			name: 'templateName',
-			mapping: 'templateName'
-		}, {
-			name: 'description',
-			mapping: 'description'
-		}]
+	var datapart = [];
+	var fieldspart = [];
+	
+	var technicalNames = data.technicalNames;
+	var titles = data.titles;
+	var descriptions = data.descriptions;
+	
+	for (var i = 0; i < technicalNames.length; i++) {
+		datapart.push({
+			'technName': technicalNames[i],
+			'templateName': titles[i],
+			'description': descriptions[i]
+		});
+	}
+	
+	fieldspart.push({
+		name: 'technName',
+		mapping: 'technName'
+	}, {
+		name: 'templateName',
+		mapping: 'templateName'
+	}, {
+		name: 'description',
+		mapping: 'description'
+	});
+	
+	var eastore = new Ext.data.SimpleStore({
+		data: datapart,
+		fields: fieldspart
 	});
 	
 	var grid = new Ext.grid.GridPanel({
-		store: store,
+		store: eastore,
 		columns: [{
 			header: uwm.Dict.translate('Template Name'),
 			width: 233,
 			dataIndex: 'templateName',
 			sortable: true
-		}		//'Technical Name'//'Template Name'//'Description'
-		],
+		} //'Technical Name'//'Template Name'//'Description'
+		]		,
 		sm: new Ext.grid.RowSelectionModel({
 			singleSelect: true
 		}),
@@ -101,7 +117,7 @@ uwm.ui.ExportAssistent = function() {
 		frame: true
 	
 	});
-
+	
 	var detailPanel = {
 		id: 'detailPanel',
 		title: uwm.Dict.translate('detailed description'),
@@ -131,17 +147,13 @@ uwm.ui.ExportAssistent = function() {
 	};
 	
 	uwm.ui.ExportAssistent.superclass.constructor.call(this, Ext.apply(this, winLayout));
-
-//	var detailPanel = Ext.getCmp('detailPanel');
-	this.addButton( 
-		uwm.Dict.translate('Export'),
-		function() {
-			var doctypeSelected = radioFormItem.getForm().getValues(true).split('docformat=')[1];
-			var gridValueSelected = grid.selModel.lastActive ; //.last
-			alert('function under construction \n '	+ doctypeSelected + '\n' + gridValueSelected);
-			}, 
-		[grid, radioFormItem]
-	);
+	
+	//	var detailPanel = Ext.getCmp('detailPanel');
+	this.addButton(uwm.Dict.translate('Export'), function() {
+		var doctypeSelected = radioFormItem.getForm().getValues(true).split('docformat=')[1];
+		var gridValueSelected = grid.selModel.lastActive; //.last
+		alert('function under construction \n ' + doctypeSelected + '\n' + gridValueSelected);
+	}, [grid, radioFormItem]);
 	this.addButton(new Ext.Button({
 		window: this,
 		text: uwm.Dict.translate('Cancel'),
@@ -153,7 +165,6 @@ uwm.ui.ExportAssistent = function() {
 	this.setVisible(true);
 	
 }
-Ext.extend(uwm.ui.ExportAssistent, Ext.Window);
 
 uwm.ui.ExportAssistent.prototype.restoreError = function(options, data, errorMsg, callback, scope, arg) {
 	this.fireEvent("loadexception", this, options, data);
