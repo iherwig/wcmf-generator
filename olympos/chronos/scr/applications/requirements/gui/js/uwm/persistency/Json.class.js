@@ -248,7 +248,7 @@ uwm.persistency.Json.prototype.log = function(logtype, msg, successHandler, erro
 
 uwm.persistency.Json.prototype.templatelist = function( successHandler, errorHandler) {
 	this.jsonRequest({
-		usr_action: 'templatelist',
+		usr_action: 'templatelist'
 	}, successHandler, errorHandler);
 	
 }
