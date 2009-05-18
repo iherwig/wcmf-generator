@@ -3,6 +3,7 @@
 	<name>application</name>
 	<comment></comment>
 	<projects>
+		<project>wcmf</project>
 	</projects>
 	<buildSpec>
 	</buildSpec>
