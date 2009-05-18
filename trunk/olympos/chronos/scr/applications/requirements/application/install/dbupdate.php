@@ -1,23 +1,20 @@
 <?php
-/** 
+/**
  * wCMF - wemove Content Management Framework
- * Copyright (C) 2005 wemove digital solutions GmbH
+ * Copyright (C) 2005-2009 wemove digital solutions GmbH
  *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- * 
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- * 
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * Licensed under the terms of any of the following licenses 
+ * at your choice:
  *
- * $Id: main.php,v 1.3 2005/10/24 13:31:56 iherwig Exp $
+ * - GNU Lesser General Public License (LGPL)
+ *   http://www.gnu.org/licenses/lgpl.html
+ * - Eclipse Public License (EPL)
+ *   http://www.eclipse.org/org/documents/epl-v10.php
+ *
+ * See the license.txt file distributed with this work for 
+ * additional information.
+ *
+ * $Id: dbupdate.php 929 2009-02-22 23:20:49Z iherwig $
  */
 define("BASE", realpath ("../../")."/");
 error_reporting(E_ERROR | E_PARSE);
@@ -26,21 +23,22 @@ require_once(BASE."wcmf/lib/util/class.Message.php");
 require_once(BASE."wcmf/lib/output/class.LogOutputStrategy.php");
 require_once(BASE."wcmf/lib/util/class.InifileParser.php");
 require_once(BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
+require_once(BASE."wcmf/lib/util/class.Log.php");
 
-Message::hint("updating wCMF database tables...");
+Log::info("updating wCMF database tables...", "dbupdate");
 
 // get configuration from file
 $CONFIG_PATH = BASE.'application/include/';
 $configFile = $CONFIG_PATH.'config.ini';
-Message::hint("configuration file: ".$configFile);
+Log::info("configuration file: ".$configFile, "dbupdate");
 $parser = &InifileParser::getInstance();
 if (!$parser->parseIniFile($configFile, true))
-  Message::error($parser->getErrorMsg(), __FILE__, __LINE__);
+{
+  Log::error($parser->getErrorMsg(), "dbupdate");
+  exit();
+}
     
 // message globals
-$GLOBALS['MESSAGE_LOG_FILE'] = '../log/'.date($parser->getValue('logFile', 'cms'));
-$GLOBALS['MESSAGE_LOG_FLUSH'] = $parser->getValue('flushLogFile', 'cms');
-$GLOBALS['MESSAGE_DEBUG'] = $parser->getValue('debug', 'cms');
 $GLOBALS['MESSAGE_LOCALE_DIR'] = $parser->getValue('localeDir', 'cms');
 $GLOBALS['MESSAGE_LANGUAGE'] = $parser->getValue('language', 'cms');
     
@@ -79,13 +77,12 @@ foreach($lines as $line)
     }
   }
 }
-//Message::dump($tables);
 
 // process table definitions
 $persistenceFacade = &PersistenceFacade::getInstance();
 foreach ($tables as $tableDef)
 {
-  Message::hint(nl2br("\nprocessing table ".$tableDef['name']."..."));
+  Log::info(("processing table ".$tableDef['name']."..."), "dbupdate");
   $mapper = &$persistenceFacade->getMapper($tableDef['entityType']);
   $connection = &$mapper->getConnection();
   $connection->StartTrans();
@@ -119,7 +116,7 @@ foreach ($tables as $tableDef)
   if (true) $connection->FailTrans();
   $connection->CompleteTrans();
 }
-Message::hint("done.");
+Log::info("done.", "dbupdate");
 
 
 /*
@@ -137,7 +134,7 @@ function ensureUpdateTable(&$connection)
     $rs = $connection->Execute($sql);
   	if ($rs === false)
   	{
-  	  Message::error('Error creating update table '.$connection->ErrorMsg(), __FILE__, __LINE__);
+  	  Log::error('Error creating update table '.$connection->ErrorMsg(), "dbupdate");
   	  return false;
   	}
   }
@@ -200,7 +197,7 @@ function updateValue(&$connection, $tableId, $columnId, $type, $table, $column)
     $rs = $connection->Execute($sql, array($table, $column, date("Y-m-d H:i:s"), $tableId, $columnId, $type));
   }
 	if ($rs === false)
-    Message::error('Error inserting/updating entry '.$connection->ErrorMsg(), __FILE__, __LINE__);
+    Log::error('Error inserting/updating entry '.$connection->ErrorMsg(), "dbupdate");
 }
 
 /*
@@ -223,11 +220,11 @@ function updateEntry($connection, $tableDef)
  */ 
 function createTable(&$connection, $tableDef)
 {
-  Message::hint("> create table '".$tableDef['name']."'");
+  Log::info("> create table '".$tableDef['name']."'", "dbupdate");
   $sql = $tableDef['create'];
   $rs = $connection->Execute($sql);
 	if ($rs === false)
-	  Message::error('Error creating table '.$connection->ErrorMsg(), __FILE__, __LINE__);
+	  Log::error('Error creating table '.$connection->ErrorMsg(), "dbupdate");
 }
 
 /*
@@ -238,11 +235,11 @@ function createTable(&$connection, $tableDef)
  */ 
 function alterTable(&$connection, $oldName, $name)
 {
-  Message::hint("> alter table '".$name."'");
+  Log::info("> alter table '".$name."'", "dbupdate");
   $sql = $connection->Prepare('ALTER TABLE `'.$oldName.'` RENAME `'.$name.'`');
   $rs = $connection->Execute($sql);
 	if ($rs === false)
-	  Message::error('Error altering table '.$connection->ErrorMsg()."\n".$sql, __FILE__, __LINE__);
+	  Log::error('Error altering table '.$connection->ErrorMsg()."\n".$sql, "dbupdate");
 }
 
 /*
@@ -253,11 +250,11 @@ function alterTable(&$connection, $oldName, $name)
  */ 
 function createColumn(&$connection, $table, $columnDef)
 {
-  Message::hint("> create column '".$table.".".$columnDef['name']);
+  Log::info("> create column '".$table.".".$columnDef['name'], "dbupdate");
   $sql = $connection->Prepare('ALTER TABLE `'.$table.'` ADD `'.$columnDef['name'].'` '.$columnDef['type']);
   $rs = $connection->Execute($sql);
 	if ($rs === false)
-	  Message::error('Error creating column '.$connection->ErrorMsg(), __FILE__, __LINE__);
+	  Log::error('Error creating column '.$connection->ErrorMsg(), "dbupdate");
 }
 
 /*
@@ -269,11 +266,11 @@ function createColumn(&$connection, $table, $columnDef)
  */ 
 function alterColumn(&$connection, $table, $oldColumnDef, $columnDef)
 {
-  Message::hint("> alter column '".$table.".".$columnDef['name']);
+  Log::info("> alter column '".$table.".".$columnDef['name'], "dbupdate");
   $sql = $connection->Prepare('ALTER TABLE `'.$table.'` CHANGE `'.$oldColumnDef['name'].'` `'.$columnDef['name'].'` '.$columnDef['type']);
   $rs = $connection->Execute($sql);
 	if ($rs === false)
-	  Message::error('Error altering column '.$connection->ErrorMsg()."\n".$sql, __FILE__, __LINE__);
+	  Log::error('Error altering column '.$connection->ErrorMsg()."\n".$sql, "dbupdate");
 }
 
 /*

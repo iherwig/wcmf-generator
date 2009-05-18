@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Root>
-  <Model id="Model:8" Name="ccc" created="2008-11-13 19:36:26" creator="admin" last_editor="admin" modified="2008-11-13 20:40:34">
-    <Package id="Package:13" Name="goals" Notes="&Acirc;&nbsp;" created="2008-11-13 20:06:07" creator="admin" last_editor="admin" modified="2008-11-14 16:59:39">
-      <Package id="Package:15" Name="a" created="2008-11-13 20:37:55" creator="admin" last_editor="admin" modified="2008-11-13 20:38:58"></Package>
-    </Package>
-  </Model>
-</Root>
