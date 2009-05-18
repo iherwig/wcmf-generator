@@ -39,7 +39,7 @@ class ObjectHistorySaveController extends Controller
 
 	function hasView()
 	{
-		return true;
+		return false;
 	}
 
 	function executeKernel()
@@ -113,9 +113,7 @@ class ObjectHistorySaveController extends Controller
 			$this->_response->setValue('changelist', $this->changelist);
 		
 			//call SaveController
-			parent::executeKernel();
-		
-			return false;
+			return parent::executeKernel();
 		}
 	}
 
