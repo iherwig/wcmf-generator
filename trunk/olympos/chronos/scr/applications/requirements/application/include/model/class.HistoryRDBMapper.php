@@ -69,7 +69,7 @@ class HistoryRDBMapper extends NodeUnifiedRDBMapper
     $nodeDef['_properties'] = array
     (
       array('name' => 'is_searchable', 'value' => true),
-// PROTECTED REGION ID(application/include/model/class.CounterRDBMapper.php/Properties) ENABLED START
+// PROTECTED REGION ID(application/include/model/class.HistoryRDBMapper.php/Properties) ENABLED START
 // PROTECTED REGION END
     );
     $nodeDef['_datadef'] = array

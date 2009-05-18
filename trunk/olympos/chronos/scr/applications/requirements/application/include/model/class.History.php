@@ -17,7 +17,7 @@ require_once(BASE."application/include/model/class.HistoryBase.php");
  */
 class History extends HistoryBase
 {
-// PROTECTED REGION ID(application/include/model/class.Counter.php/Body) ENABLED START
+// PROTECTED REGION ID(application/include/model/class.History.php/Body) ENABLED START
 // PROTECTED REGION END
 }
 ?>
