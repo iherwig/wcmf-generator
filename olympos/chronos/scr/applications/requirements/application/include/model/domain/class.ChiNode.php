@@ -29,6 +29,14 @@ require_once(BASE."application/include/model/domain/class.ChiNodeBase.php");
 class ChiNode extends ChiNodeBase
 {
 // PROTECTED REGION ID(application/include/model/domain/class.ChiNode.php/Body) ENABLED START
+public function draw($image, $xPos, $yPos, $width, $height) {
+		$this->loadChildren();
+		
+		$attributes = $this->getChiValueChildren();
+		$operations = $this->getOperationChildren();
+		
+		ExportDiagramImageController::drawClassFigure($image, $xPos, $yPos, $width, $height, $this->getDisplayValue(), 'ChiNode', $attributes, $operations);
+	}
 // PROTECTED REGION END
 }
 ?>

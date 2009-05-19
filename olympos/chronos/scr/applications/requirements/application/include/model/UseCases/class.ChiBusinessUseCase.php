@@ -29,6 +29,9 @@ require_once(BASE."application/include/model/UseCases/class.ChiBusinessUseCaseBa
 class ChiBusinessUseCase extends ChiBusinessUseCaseBase
 {
 // PROTECTED REGION ID(application/include/model/UseCases/class.ChiBusinessUseCase.php/Body) ENABLED START
+public function draw($image, $xPos, $yPos, $width, $height) {
+		ExportDiagramImageController::drawImageLabelCenterFigure($image, $xPos, $yPos, $width, $height, $this->getDisplayValue(), 'ChiBusinessUseCase');
+	}
 // PROTECTED REGION END
 }
 ?>
