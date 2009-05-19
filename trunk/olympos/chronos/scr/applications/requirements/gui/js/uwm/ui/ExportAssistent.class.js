@@ -154,13 +154,9 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 		var gridValueSelected = grid.selModel.lastActive; //.last
 		alert('function under construction \n ' + doctypeSelected + '\n' + gridValueSelected);
 	}, [grid, radioFormItem]);
-	this.addButton(new Ext.Button({
-		window: this,
-		text: uwm.Dict.translate('Cancel'),
-		handler: function() {
-			this.window.close();
-		}
-	}));
+	this.addButton(uwm.Dict.translate('Cancel'),function() {
+			this.close();
+	},this);
 	
 	this.setVisible(true);
 	
