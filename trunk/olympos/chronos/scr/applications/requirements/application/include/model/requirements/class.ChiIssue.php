@@ -29,6 +29,9 @@ require_once(BASE."application/include/model/requirements/class.ChiIssueBase.php
 class ChiIssue extends ChiIssueBase
 {
 // PROTECTED REGION ID(application/include/model/requirements/class.ChiIssue.php/Body) ENABLED START
+public function draw($image, $xPos, $yPos, $width, $height) {
+		ExportDiagramImageController::drawRectangleFigure($image, $xPos, $yPos, $width, $height, $this->getDisplayValue(), 'ChiIssue');
+	}
 // PROTECTED REGION END
 }
 ?>

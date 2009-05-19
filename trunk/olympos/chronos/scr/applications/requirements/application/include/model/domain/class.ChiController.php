@@ -29,6 +29,14 @@ require_once(BASE."application/include/model/domain/class.ChiControllerBase.php"
 class ChiController extends ChiControllerBase
 {
 // PROTECTED REGION ID(application/include/model/domain/class.ChiController.php/Body) ENABLED START
+public function draw($image, $xPos, $yPos, $width, $height) {
+		$this->loadChildren();
+		
+		$attributes = array();
+		$operations = array(); //$this->getOperationChildren();
+		
+		ExportDiagramImageController::drawClassFigure($image, $xPos, $yPos, $width, $height, $this->getDisplayValue(), 'ChiController', $attributes, $operations);
+	}
 // PROTECTED REGION END
 }
 ?>

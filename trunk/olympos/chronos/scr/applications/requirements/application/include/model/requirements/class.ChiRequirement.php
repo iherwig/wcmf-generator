@@ -29,6 +29,9 @@ require_once(BASE."application/include/model/requirements/class.ChiRequirementBa
 class ChiRequirement extends ChiRequirementBase
 {
 // PROTECTED REGION ID(application/include/model/requirements/class.ChiRequirement.php/Body) ENABLED START
+public function draw($image, $xPos, $yPos, $width, $height) {
+		ExportDiagramImageController::drawRectangleFigure($image, $xPos, $yPos, $width, $height, $this->getDisplayValue(), 'ChiRequirement');
+	}
 // PROTECTED REGION END
 }
 ?>
