@@ -1,0 +1,53 @@
+<workflow>
+	<property name="basePath" value="src" />
+
+	<property name="propertyFile" value="${basePath}/cartridge/Grails/workflow/grails.properties" />
+	<property file="${propertyFile}" />
+
+	<!-- metamodel setup -->
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<bean id="mmChronos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
+		<profile value="${chronosProfileUri}"/>
+	</bean>
+	
+	<bean id="mmUml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
+
+	<!-- read source model -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${sourceModelFile}"/>
+		<outputSlot value="sourceModel"/>
+	 </component>
+
+	<!-- check source model -->
+	<component class="org.openarchitectureware.check.CheckComponent">
+		<metaModel idRef="mmUml2"/>
+		<checkFile value="cartridge::Grails::domain"/>
+		<emfAllChildrenSlot value="sourceModel"/>		
+	</component>
+
+	<!-- normalize names -->
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="mmUml2" />
+		<invoke value="common/nameNormalizer::normalizeName(sourceModel)" />
+	</component>
+
+	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
+		<inputSlot value="sourceModel" />
+		<outPath value="${normalizedModelPath}" />
+	</component>
+	
+	<!-- generate domain classes -->
+	<component class="org.openarchitectureware.xpand2.Generator">
+		<metaModel idRef="mmChronos"/>
+		<metaModel idRef="mmUml2"/>
+		<fileEncoding value="utf-8"/>
+
+		<expand value="${expandDomainClassesExpression}"/>
+
+		<outlet path="${domainTargetPath}">
+		</outlet>
+	   
+		<prSrcPaths value="${domainTargetPath}"/>
+	</component>
+</workflow>

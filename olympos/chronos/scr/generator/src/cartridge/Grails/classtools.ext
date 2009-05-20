@@ -1,0 +1,70 @@
+import uml;
+
+extension common::util;
+extension common::umlutils;
+
+String getNameOfAssociationClass(Association assoc):
+	assoc.getFirstOfManyToMany().type.name.toFirstUpper() + "To" + assoc.getFirstOfManyToMany().getOtherEnd().type.name.toFirstUpper();
+	
+boolean isManyToManyAssociation(Association assoc):
+	(assoc.memberEnd.select(e|e.isMultivalued() && e.getOtherEnd().isMultivalued())).size > 0;
+	
+Property getFirstOfManyToMany(Association assoc):
+	assoc.memberEnd.sortBy(e|e.name).first();
+
+Property getNameOfAssociationClassReference(Association assoc):
+	assoc.getNameOfAssociationClass().toFirstLower()+ ":" + assoc.getNameOfAssociationClass();
+
+boolean isReferenceOptional(Property p, Class clazz):
+	p.type == clazz && p.getOtherEnd().lowerBound() == 0;
+
+boolean isReferenceMultivalued(Property p, Class clazz):
+	p.type == clazz && p.getOtherEnd().isMultivalued();
+
+boolean hasAppliedStereotypes(Property p):
+	p.getAppliedStereotypes().size > 0;
+
+boolean isInitialCRUDDOMAIN(Class clazz) :
+	(clazz.getAppliedStereotypes().select(e|e.name.matches("CRUD"))).size > 0;
+
+boolean isRequired (Property p) :
+	p.lower>0;
+
+boolean isBidirectional (Association assoc) :
+	assoc.memberEnd.size==2 && assoc.memberEnd.forAll(e|e.isNavigable());
+
+Property getNavigableOtherEnd(Association assoc, Class c) :
+	assoc.memberEnd.select(a|a.type == c && a.getOtherEnd().upperBound() == 1 && a.getOtherEnd().isNavigable());
+	
+Property getBelongsTo(Association assoc, Class c) :
+	assoc.memberEnd.select(a|a.type == c && a.getOtherEnd().isComposition() && !a.getOtherEnd().isMultivalued());
+	
+boolean isEmbeddedClass(Property p) :
+	p.association.getAppliedStereotypes().select(e|e.name.matches("embedded")).size  >0 && p.isNavigable();
+	
+boolean isMyEmbeddedValue(Property p, Class clazz):
+	p.isEmbeddedClass()&& p.type != clazz;
+
+boolean isEmbeddedAssociation(Association a) :
+	a.getAppliedStereotypes().select(e|e.name.matches("embedded")).size  >0;
+	
+String getAssociationPropertyName(Property this):
+	!this.name.isNullOrEmpty() ? this.name : this.type.name.toFirstLower()
+;
+
+String sanitizeType(String orgTypeName):
+	switch(orgTypeName.toLowerCase()) {
+		case "string": "String"
+		case "float": "float"
+		case "double": "double"
+		case "int": "int"
+		case "integer": "int"
+		case "long": "long"
+		case "boolean": "boolean"
+		case "": "def"
+		case null: "def"
+		case "<undefined>": "def"
+		case "void": "def"
+		default: orgTypeName
+	}
+;	

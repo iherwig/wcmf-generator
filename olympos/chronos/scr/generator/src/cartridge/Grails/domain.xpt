@@ -1,0 +1,125 @@
+«IMPORT uml»
+
+«EXTENSION org::openarchitectureware::uml2::profile::profiling»
+
+«EXTENSION common::umlutils»
+«EXTENSION common::util»
+
+«EXTENSION cartridge::Grails::classtools»
+
+«DEFINE root FOR uml::Model»
+	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(uml::Class)»
+«ENDDEFINE»
+
+«REM» Main domain root «ENDREM»
+«DEFINE domainClass FOR uml::Class»
+	«FILE name +".groovy"»
+	«IF this.isAbstract»abstract«ENDIF»
+	class «name» 
+	«IF !this.superClass.isEmpty» extends «this.superClass.first().name»«ENDIF»
+	{
+	«REM» Attributes «ENDREM»
+	«EXPAND Attribute FOREACH this.ownedAttribute.select(e|e.association == null)»
+
+	«REM» Methods «ENDREM»
+	«EXPAND Method(this) FOREACH ownedOperation»
+			
+	«REM» Constraints «ENDREM»
+	«EXPAND Constraints FOR this »
+			
+	«REM» Associations with multivalued ends«ENDREM»
+	«EXPAND MultivaluedAssociations FOR this»
+					
+	«REM» fill belongsTo with all owner associationsends but not m:n - this is resolve in a extra class«ENDREM»
+	«EXPAND BelongsTo FOR this»
+					
+	«REM» Every property where e reference for navigation is stored «ENDREM»
+	«EXPAND ReferenceProperties FOREACH this.getAssociations().getNavigableOtherEnd(this).removeAll(this.getAssociations().getBelongsTo(this))»
+	
+	«REM» Embeeded values «ENDREM»
+	«EXPAND EmbeddesValues FOR this»
+	}
+	«ENDFILE»
+«ENDDEFINE»	
+
+«REM» Specify a embedded value «ENDREM»
+«DEFINE EmbeddesValues FOR Class»
+«LET getAssociations().memberEnd.select(e|e.isMyEmbeddedValue(this)) AS embeddesMemberEnds»
+«IF embeddesMemberEnds.size > 0 »
+«REM» embedded values «ENDREM»
+static embedded = [
+	«FOREACH embeddesMemberEnds AS embeddesMemberEnd SEPARATOR ","»
+			'«embeddesMemberEnd.name»'
+	«ENDFOREACH»
+			]
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+«REM» Specify depencies «ENDREM»
+«DEFINE BelongsTo FOR Class»
+«LET this.getAssociations().getBelongsTo(this) AS multiStartAssociation»
+«IF multiStartAssociation.size > 0»
+static belongsTo = [
+	«FOREACH multiStartAssociation AS a SEPARATOR ","»
+		«a.getOtherEnd().getAssociationPropertyName()»: «a.getOtherEnd().type.name.sanitizeType()»
+	«ENDFOREACH»
+		]
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+«REM» Reference in multivalued association «ENDREM»
+«DEFINE MultivaluedAssociations FOR Class»
+«IF getAssociations().memberEnd.select(a|a.isReferenceMultivalued(this)).size > 0»
+static hasMany = [
+«FOREACH getAssociations().select(e|e.memberEnd.select(s|s.isReferenceMultivalued(this)).size > 0) AS assoc SEPARATOR ","»
+		
+	«FOREACH assoc.memberEnd.select(a|a.isReferenceMultivalued(this)) AS a»
+	«REM» m:n splitted in two 1:n with a class in the middle«ENDREM»
+	«IF a.isMultivalued()»
+		«assoc.getNameOfAssociationClassReference()»
+	«ELSE»
+	«REM» 1:n «ENDREM»
+		«a.getOtherEnd().getAssociationPropertyName()»: «a.getOtherEnd().type.name.sanitizeType()»
+	«ENDIF»
+				
+	«ENDFOREACH»
+«ENDFOREACH»
+]
+«ENDIF»
+«ENDDEFINE»
+
+«REM» fill constraints for attributes  «ENDREM»
+«DEFINE Constraints FOR Class»
+«LET ownedAttribute.select(a|!((String) a.getTaggedValue("Chronos::ChiValue", "restrictions_match")).isNullOrEmpty()) AS constraintedAttributes»
+«IF constraintedAttributes.size > 0»
+static constraints = {
+	«FOREACH constraintedAttributes AS c»
+		«c.name»(
+			matches:"«c.getTaggedValue("Chronos::ChiValue", "restrictions_match")»"
+		)
+	«ENDFOREACH»
+	}
+«ENDIF»
+«ENDLET»
+«ENDDEFINE»
+
+«REM» simply attribute «ENDREM»
+«DEFINE Attribute FOR Property»
+		«this.type.name.sanitizeType()» «name»
+«ENDDEFINE»
+«REM» simple method with protected region «ENDREM»
+«DEFINE Method(Class clazz) FOR Operation»
+		«this.returnResult().first().type.name.sanitizeType()» «name»() {
+		// Here you are able to implement your own code
+		«PROTECT CSTART '/*' CEND '*/' ID this.getId()»
+					
+		«ENDPROTECT»
+		} 
+«ENDDEFINE»
+
+«REM» simple reference «ENDREM»
+«DEFINE ReferenceProperties FOR Property»
+		«this.getOtherEnd().type.name.sanitizeType()» «this.getOtherEnd().getAssociationPropertyName()» 
+«ENDDEFINE»
