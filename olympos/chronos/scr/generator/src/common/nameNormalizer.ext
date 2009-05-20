@@ -2,7 +2,7 @@ import uml;
 
 Void normalizeName(uml::Model this):
 	this.allOwnedElements().typeSelect(uml::Class).normalizeName() ->
-	this.allOwnedElements().typeSelect(uml::Class).attribute.normalizeName() ->
+	this.allOwnedElements().typeSelect(uml::Property).normalizeName() ->
 	this.allOwnedElements().typeSelect(uml::Operation).normalizeName() ->
 	this.allOwnedElements().typeSelect(uml::Package).normalizeName()
 ;
@@ -28,7 +28,7 @@ String normalizeClassName(String this):
 ;
 
 String normalizeMemberName(String this):
-	JAVA net.sourceforge.olympos.oaw.extend.NameNormalizer.normalizeClassName(java.lang.String)
+	JAVA net.sourceforge.olympos.oaw.extend.NameNormalizer.normalizeMemberName(java.lang.String)
 ;
 
 String normalizePackageName(String this):
