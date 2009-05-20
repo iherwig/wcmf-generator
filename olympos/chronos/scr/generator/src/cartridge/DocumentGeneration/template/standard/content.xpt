@@ -671,7 +671,7 @@
 
 «DEFINE analysisPackage(int outlineLevel) FOR uml::Package»
 	«IF hasAnalysisContent(this)»
-		<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.name»</text:h>
+		<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.name.replaceXmlChars()»</text:h>
 		«this.getComment().sanitizeHtml()»
 		<text:p text:style-name="P7">&lt;&lt;package.diagramm&gt;&gt;</text:p>
 	
@@ -687,7 +687,7 @@
 «ENDDEFINE»
 
 «DEFINE analysisClass(int outlineLevel) FOR uml::Element»
-	<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.getAppliedStereotypes().first().name»: «this.name»</text:h>
+	<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.getAppliedStereotypes().first().name»: «this.name.replaceXmlChars()»</text:h>
 	<text:p text:style-name="P7">Description:</text:p>
 	«this.getComment().sanitizeHtml()»
 	<text:p text:style-name="P7">Information:</text:p>
@@ -762,7 +762,7 @@
 
 «DEFINE processPackage(int outlineLevel) FOR uml::Package»
 	«IF this.hasProcessContent()»
-		<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.name»</text:h>
+		<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.name.replaceXmlChars()»</text:h>
 		«this.getComment().sanitizeHtml()»
 		<text:p text:style-name="P7">&lt;&lt;package.diagramm&gt;&gt;</text:p>
 			
@@ -794,7 +794,7 @@
 «ENDDEFINE»
 
 «DEFINE processUseCase(int outlineLevel) FOR uml::UseCase»
-	<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.getAppliedStereotypes().first().name»: «this.name»</text:h>
+	<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.getAppliedStereotypes().first().name»: «this.name.replaceXmlChars()»</text:h>
 	<text:p text:style-name="P7">Description:</text:p>
 	«this.getComment().sanitizeHtml()»
 	<text:p text:style-name="P7">Information:</text:p>
@@ -874,7 +874,7 @@
 «ENDDEFINE»
 
 «DEFINE processActor(int outlineLevel) FOR uml::Actor»
-	<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.getAppliedStereotypes().first().name»: «this.name»</text:h>
+	<text:h text:style-name="Heading_20_«outlineLevel»" text:outline-level="«outlineLevel»">«this.getAppliedStereotypes().first().name»: «this.name.replaceXmlChars()»</text:h>
 	«this.getComment().sanitizeHtml()»
 	
 	<table:table table:name="Table6" table:style-name="Table6">
@@ -978,7 +978,7 @@
 			<text:p text:style-name="P16">«key»</text:p>
 		</table:table-cell>
 		<table:table-cell table:style-name="Table6.B2" office:value-type="string">
-			<text:p text:style-name="P16">«value»</text:p>
+			<text:p text:style-name="P16">«value.replaceXmlChars()»</text:p>
 		</table:table-cell>
 	</table:table-row>
 «ENDDEFINE»

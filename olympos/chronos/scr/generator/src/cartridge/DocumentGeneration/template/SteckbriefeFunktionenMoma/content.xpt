@@ -308,14 +308,14 @@
 «ENDDEFINE»
 
 «DEFINE businessProcess FOR Chronos::ChiBusinessProcess»
-	<text:h text:style-name="Heading_20_1" text:outline-level="1">Funktionsblock: «this.name»</text:h>
+	<text:h text:style-name="Heading_20_1" text:outline-level="1">Funktionsblock: «this.name.replaceXmlChars()»</text:h>
 	«this.getComment().sanitizeHtml()»
 
 	«EXPAND businessUseCase FOREACH this.ownedElement.typeSelect(Chronos::ChiBusinessUseCase)»
 «ENDDEFINE»
 
 «DEFINE businessUseCase FOR Chronos::ChiBusinessUseCase»
-	<text:h text:style-name="P1" text:outline-level="2">Funktion: «this.name»</text:h>
+	<text:h text:style-name="P1" text:outline-level="2">Funktion: «this.name.replaceXmlChars()»</text:h>
 
 	<text:p text:style-name="P2">Anforderung</text:p>
 	<text:list xml:id="list38217659" text:style-name="WW8Num10">
@@ -351,7 +351,7 @@
 	</text:list>
 	<text:list xml:id="list38243415" text:continue-list="list38218557" text:style-name="WW8Num4">
 		<text:list-item>
-			<text:p text:style-name="List_20_1">«this.MainSuccessScenario»</text:p>
+			<text:p text:style-name="List_20_1">«this.MainSuccessScenario.replaceXmlChars()»</text:p>
 		</text:list-item>
 	</text:list>
 
@@ -362,7 +362,7 @@
 	</text:list>
 	<text:list xml:id="list38224435" text:continue-list="list38243415" text:style-name="WW8Num4">
 		<text:list-item>
-			<text:p text:style-name="List_20_1">«this.Precondition»</text:p>
+			<text:p text:style-name="List_20_1">«this.Precondition.replaceXmlChars()»</text:p>
 		</text:list-item>
 	</text:list>
 
@@ -401,24 +401,24 @@
 
 «DEFINE positiveRequirement FOR Chronos::ChiRequirement»
 	<text:list-item>
-		<text:p text:style-name="List_20_3">«this.name»</text:p>
+		<text:p text:style-name="List_20_3">«this.name.replaceXmlChars()»</text:p>
 	</text:list-item>
 «ENDDEFINE»
 
 «DEFINE relatedBusinessUseCases FOR Chronos::ChiBusinessUseCase»
 	<text:list-item>
-		<text:p text:style-name="List_20_1">«this.name»</text:p>
+		<text:p text:style-name="List_20_1">«this.name.replaceXmlChars()»</text:p>
 	</text:list-item>
 «ENDDEFINE»
 
 «DEFINE negativeRequirement FOR Chronos::ChiRequirement»
 	<text:list-item>
-		<text:p text:style-name="List_20_3">«this.name»</text:p>
+		<text:p text:style-name="List_20_3">«this.name.replaceXmlChars()»</text:p>
 	</text:list-item>
 «ENDDEFINE»
 
 «DEFINE features FOR Chronos::ChiFeature»
 	<text:list-item>
-		<text:p text:style-name="List_20_3">«this.name»</text:p>
+		<text:p text:style-name="List_20_3">«this.name.replaceXmlChars()»</text:p>
 	</text:list-item>
 «ENDDEFINE»

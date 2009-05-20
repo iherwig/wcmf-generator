@@ -53,6 +53,10 @@ String datePublished() :
 	JAVA net.sourceforge.olympos.oaw.extend.DateFormatter.now()
 ;
 
+String replaceXmlChars(String org) :
+	org.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+;
+
 String getGermanName(Chronos::ChiGoal this) :
 	"Ziel"
 ;
