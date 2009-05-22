@@ -19,6 +19,8 @@
 // PROTECTED REGION ID(application/include/controller/class.UWMDocExporterController.php/Import) ENABLED START
 require_once (BASE.'wcmf/lib/persistence/class.PersistenceFacade.php');
 
+require_once('class.TemplateListController.php');
+
 require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
 require_once('class.ExportShutdownHandler.php');
@@ -56,7 +58,7 @@ class UWMDocExporterController extends Controller
 	private $availableFormats = array('doc', 'odt', 'pdf');
 	const DEFAULT_EXPORT_FORMAT = 'doc';
 	
-	private $availableTemplates = array('standard', 'SteckbriefeFunktionenMoma');
+	private $availableTemplates = null;
 	const DEFAULT_TEMPLATE_NAME = 'standard';
 
 	private function check($msg)
@@ -80,70 +82,74 @@ class UWMDocExporterController extends Controller
 	
 		$startModel = $this->_request->getValue('startModel');
 		$startPackage = $this->_request->getValue('startPackage');
-	
-		UwmUtil::exportXml($tmpUwmExportPath, $startModel, $startPackage);
-	
-		OawUtil::setupExecutable();
+
+		if ($startModel || $startPackage) {
+			UwmUtil::exportXml($tmpUwmExportPath, $startModel, $startPackage);
 		
-		$exportFormatParam = $this->_request->getValue('exportFormat');
-		if (array_search($exportFormatParam, $this->availableFormats)) {
-			$exportFormat = $exportFormatParam;
-		} else {
-			$exportFormat = self::DEFAULT_EXPORT_FORMAT;
-		}
-		
-		$templateNameParam = $this->_request->getValue('templateName');
-		if (array_search($templateNameParam, $this->availableTemplates)) {
-			$templateName = $templateNameParam;
-		} else {
-			$templateName = self::DEFAULT_TEMPLATE_NAME;
-		}		
-	
-		$propertyPath = "$workingDir/doc-export.properties";
-		$propertyFile = fopen($propertyPath, 'w');
-		fwrite($propertyFile, "workingDir = $workingDir\n");
-		fwrite($propertyFile, "templateName = $templateName\n");
-		fwrite($propertyFile, "exportFormat = $exportFormat\n");
-		fclose($propertyFile);
-	
-		$contentPath = $this->createTempFile("$workingDir/content.xml");
-		$stylesPath = $this->createTempFile("$workingDir/styles.xml");
-		$openofficeTmp0Path = $this->createTempFile("$workingDir/document-tmp0.odt");
-		$openofficePath = $this->createTempFile("$workingDir/document-tmp1.odt");
-		$exportFile = $this->createTempFile("$workingDir/document-export.$exportFormat");
-	
-		//header('Content-type: text/plain');
-		header('Content-type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="cwm-export.doc"');
-	
-		$this->check("start generator");
-	
-		$runCfg = OawUtil::runOaw($propertyPath, 'cartridge/DocumentGeneration/workflow/cwm2word.oaw');
-	
-		$this->check('Generator finished');
-	
-		if (filesize($exportFile) == 0) {
-			$this->check('Zero return file size');
+			OawUtil::setupExecutable();
 			
-			return false;
-		}
-		
-		readfile($exportFile);
+			$exportFormatParam = $this->_request->getValue('exportFormat');
+			if (array_search($exportFormatParam, $this->availableFormats)) {
+				$exportFormat = $exportFormatParam;
+			} else {
+				$exportFormat = self::DEFAULT_EXPORT_FORMAT;
+			}
+			
+			$this->getAvailableTemplates();
 	
-		$this->check('File written to output');
-
-		unlink($exportFile);
-		unlink($openofficePath);
-		unlink($openofficeTmp0Path);
-		unlink($stylesPath);
-		unlink($contentPath);
-		unlink($propertyPath);
-		unlink($tmpUwmExportPath);
-		rmdir($workingDir);
-
-		ExportShutdownHandler::success();
-
-		$this->check("finished");
+			$templateNameParam = $this->_request->getValue('templateName');
+			if (array_search($templateNameParam, $this->availableTemplates)) {
+				$templateName = $templateNameParam;
+			} else {
+				$templateName = self::DEFAULT_TEMPLATE_NAME;
+			}		
+		
+			$propertyPath = "$workingDir/doc-export.properties";
+			$propertyFile = fopen($propertyPath, 'w');
+			fwrite($propertyFile, "workingDir = $workingDir\n");
+			fwrite($propertyFile, "templateName = $templateName\n");
+			fwrite($propertyFile, "exportFormat = $exportFormat\n");
+			fclose($propertyFile);
+		
+			$contentPath = $this->createTempFile("$workingDir/content.xml");
+			$stylesPath = $this->createTempFile("$workingDir/styles.xml");
+			$openofficeTmp0Path = $this->createTempFile("$workingDir/document-tmp0.odt");
+			$openofficePath = $this->createTempFile("$workingDir/document-tmp1.odt");
+			$exportFile = $this->createTempFile("$workingDir/document-export.$exportFormat");
+		
+			//header('Content-type: text/plain');
+			header('Content-type: application/octet-stream');
+			header('Content-Disposition: attachment; filename="cwm-documentation-export.' . $exportFormat . '"');
+		
+			$this->check("start generator");
+		
+			$runCfg = OawUtil::runOaw($propertyPath, 'cartridge/DocumentGeneration/workflow/cwm2word.oaw');
+		
+			$this->check('Generator finished');
+		
+			if (filesize($exportFile) == 0) {
+				$this->check('Zero return file size');
+				
+				return false;
+			}
+			
+			readfile($exportFile);
+		
+			$this->check('File written to output');
+	
+			unlink($exportFile);
+			unlink($openofficePath);
+			unlink($openofficeTmp0Path);
+			unlink($stylesPath);
+			unlink($contentPath);
+			unlink($propertyPath);
+			unlink($tmpUwmExportPath);
+			rmdir($workingDir);
+	
+			ExportShutdownHandler::success();
+	
+			$this->check("finished");
+		}
 	
 		return false;
 	}
@@ -158,6 +164,11 @@ class UWMDocExporterController extends Controller
 		chmod($path, 0777);
 	
 		return $path;
+	}
+	
+	private function getAvailableTemplates() {
+		$templatespath = TemplateListController::getTemplatesPath();
+		$this->availableTemplates = TemplateListController::getTemplates($templatespath);
 	}
 
   /**
