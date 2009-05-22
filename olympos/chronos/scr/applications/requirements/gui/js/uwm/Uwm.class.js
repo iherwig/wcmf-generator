@@ -159,7 +159,7 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 			layout: "fit",
 			items: [new Ext.Panel({
 				html: "<p class='uwm-errorDialogMessage'>" +
-				uwm.Dict.translate("An application error occured. Your data will be saved and the application will be restarted.") +
+				uwm.Dict.translate("An application error occured. You may continue your work, but this might lead to further errors. If you choose to restart, your data will be saved.") +
 				"</p>"
 			}), new Ext.Panel({
 				id: uwm.Uwm.ERROR_DETAILS_ID,
@@ -168,6 +168,7 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 				collapsible: true,
 				animCollapse: false,
 				collapseFirst: true,
+				titleCollapse : true,
 				html: "<div class='uwm-errorDialogDetails'>" +
 				html +
 				"</div>",
@@ -181,14 +182,14 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 				}
 			})],
 			buttons: [{
-				text: uwm.Dict.translate("OK"),
-				handler: function() {
-					self.reload();
-				}
-			}, {
-				text: uwm.Dict.translate("Continue on your own risk"),
+				text: uwm.Dict.translate("Continue"),
 				handler: function() {
 					window.destroy();
+				}
+			},{
+				text: uwm.Dict.translate("Restart"),
+				handler: function() {
+					self.reload();
 				}
 			}]
 		});
