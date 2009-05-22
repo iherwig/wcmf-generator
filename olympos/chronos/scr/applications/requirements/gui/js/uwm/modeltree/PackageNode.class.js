@@ -76,29 +76,9 @@ uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
 				}).show();
 			}
 		}, {
-			text: uwm.Dict.translate('Export as Word Document'),
-			menu: {
-				items: [{
-					text: 'Standard',
-					handler: function(item, e) {
-						new uwm.ui.Download({
-							title: uwm.Dict.translate('Exporting Word Document ...'),
-							downloadURL: "../application/main.php?response_format=JSON&usr_action=exportDoc&templateName=standard&startPackage=" + self.getModelNode().getOid()
-						}).show();
-					}
-				}, {
-					text: 'Steckbriefe Funktionen',
-					disabled: true,
-					handler: function(item, e) {
-						new uwm.ui.Download({
-							title: uwm.Dict.translate('Exporting Word Document ...'),
-							downloadURL: "../application/main.php?response_format=JSON&usr_action=exportDoc&templateName=SteckbriefeFunktionenMoma&startPackage=" + self.getModelNode().getOid()
-						}).show();
-					}
-				}]
-			},
+			text: uwm.Dict.translate('Export Documentation'),
 			handler : function(item, e) {
-					new uwm.ui.ExportAssistent(self);
+					new uwm.ui.ExportAssistent("Package", self.getModelNode().getOid());
 			}
 		}]
 	});

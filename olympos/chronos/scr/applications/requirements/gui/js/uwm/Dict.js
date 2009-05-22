@@ -130,7 +130,9 @@ uwm.Dict.voc = {
 		"Forbidden connection"	: {'de':"Verbotene Verbindung"},
 		"This object already has a parent. Please disconnect it from its parent and redraw this connection to change its parent."	: {'de':"Dieses Objekt hat bereits ein übergeordnetes Objekt. Um es einem anderen Objekt unterzuordnen, löschen Sie bitte die bestehende Verbindung."},
 		"expand all"            : {'de': "alles erweitern" },
-		"collapse all"          : {'de': "alles verkleinern" }
+		"collapse all"          : {'de': "alles verkleinern" },
+		"Export Documentation"  : {'de': "Dokumentation exportieren" },
+		"Exporting Documentation ..." : {'de' : "Exportiere Dokumentation ..." }
 		
 }
 
