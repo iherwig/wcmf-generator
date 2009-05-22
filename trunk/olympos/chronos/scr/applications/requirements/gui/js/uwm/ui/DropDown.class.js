@@ -38,7 +38,8 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.MenuButton, {
 			    menu : []
 			};
 		}
-		;
+		
+		var self = this;
 		
 		for ( var i = 0; i < this.existingContent.length; i++) {
 			var belongsToGroup = false;
@@ -63,6 +64,15 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.MenuButton, {
 				    connectedPanel : currContent,
 				    handler : function(item) {
 					    item.connectedPanel.show();
+						
+						if (item.connectedPanel == uwm.modeltree.ModelTree.getInstance()) {
+							self.expandAllButton.enable();
+							self.collapseAllButton.enable();
+						}
+						else{
+							self.expandAllButton.disable();
+							self.collapseAllButton.disable();
+						}
 				    }
 				})
 			}

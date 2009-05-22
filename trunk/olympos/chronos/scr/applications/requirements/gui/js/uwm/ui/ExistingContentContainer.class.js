@@ -9,6 +9,7 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
+
 Ext.namespace("uwm.ui");
 
 /**
@@ -18,16 +19,33 @@ Ext.namespace("uwm.ui");
  * @constructor
  * @param {Object} config The configuration object.
  */
+
 uwm.ui.ExistingContentContainer = function() {
 }
 
 uwm.ui.ExistingContentContainer = Ext.extend(Ext.Panel, {
-	initComponent: function() {
+
+		initComponent: function() {
 	
 		var self = this;
+				
+		this.existingContent = [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()];
+		this.getObjectGrids();
+			this.expandAllButton = new Ext.Toolbar.Button({
+				text: uwm.Dict.translate("expand all"),
+				handler: function() {
+					uwm.modeltree.ModelTree.getInstance().expandAll();
+				}
+			})
 		
 		this.existingContent = [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()];
 		this.getObjectGrids();
+			this.collapseAllButton = new Ext.Toolbar.Button({
+				text: uwm.Dict.translate("collapse all"),
+				handler: function() {
+					uwm.modeltree.ModelTree.getInstance().collapseAll();
+				}
+			})
 		
 		Ext.apply(this, {
 			region: "center",
@@ -38,8 +56,10 @@ uwm.ui.ExistingContentContainer = Ext.extend(Ext.Panel, {
 			id: "existingFiguresContainer",
 			tbar: [new uwm.ui.DropDown({
 				Accordion: this.Accordion,
-				existingContent: this.existingContent
-			})]
+				existingContent: this.existingContent,
+				expandAllButton: this.expandAllButton,
+				collapseAllButton: this.collapseAllButton
+			}),this.expandAllButton,this.collapseAllButton]
 		});
 		
 		uwm.ui.ExistingContentContainer.superclass.initComponent.apply(this, arguments);
@@ -47,7 +67,7 @@ uwm.ui.ExistingContentContainer = Ext.extend(Ext.Panel, {
 		uwm.ui.ExistingContentContainer.instance = this;
 	}
 });
-
+	 
 uwm.ui.ExistingContentContainer.prototype.getObjectGrids = function() {
 
 	var classes = uwm.model.ModelNodeClassContainer.getInstance().getAllClasses();
@@ -70,4 +90,3 @@ uwm.ui.ExistingContentContainer.prototype.showPanel = function(panel) {
 uwm.ui.ExistingContentContainer.getInstance = function() {
 	return uwm.ui.ExistingContentContainer.instance;
 }
-
