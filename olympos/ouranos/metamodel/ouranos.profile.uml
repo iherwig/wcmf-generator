@@ -1,774 +1,848 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="7264214e-456d-11de-8fc4-c5b21859bec0" name="Ouranos" metaclassReference="_dF0xsEVtEd6-jpZrUPhpCg _dF6RQEVtEd6-jpZrUPhpCg _dF_JwEVtEd6-jpZrUPhpCg _dGEpUEVtEd6-jpZrUPhpCg _dGKI4EVtEd6-jpZrUPhpCg _dGPocEVtEd6-jpZrUPhpCg">
-  <eAnnotations xmi:id="_dOT_UEVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML">
-    <contents xmi:type="ecore:EPackage" xmi:id="_dOT_UUVtEd6-jpZrUPhpCg" name="Ouranos" nsURI="http:///schemas/Ouranos/_dOSKIEVtEd6-jpZrUPhpCg/0" nsPrefix="Ouranos">
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_UkVtEd6-jpZrUPhpCg" name="RuleVariable">
-        <eAnnotations xmi:id="_dOT_U0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_VEVtEd6-jpZrUPhpCg" name="base_Classifier" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
-        </eStructuralFeatures>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="b9c54e01-4920-11de-ac34-db7179a8f63b" name="Ouranos" metaclassReference="_ufZvUEkgEd61gcAb3RwQTw _uiuwIEkgEd61gcAb3RwQTw _ui4hIEkgEd61gcAb3RwQTw _ujBrEEkgEd61gcAb3RwQTw _uj2KcEkgEd61gcAb3RwQTw _uzZpYEkgEd61gcAb3RwQTw _u0X5wEkgEd61gcAb3RwQTw">
+  <eAnnotations xmi:id="_vCaVwEkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_vCaVwUkgEd61gcAb3RwQTw" name="Ouranos" nsURI="http:///schemas/Ouranos/_vCX5gEkgEd61gcAb3RwQTw/0" nsPrefix="Ouranos">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaVwkkgEd61gcAb3RwQTw" name="AbstractDerivationRule" eSuperTypes="_vCaVxUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaVw0kgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{C086833F-B9A5-4358-97DB-93344B6A5A38}"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_VkVtEd6-jpZrUPhpCg" name="OpaqueExpression">
-        <eAnnotations xmi:id="_dOT_V0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}"/>
-        <eAnnotations xmi:id="_dOT_WEVtEd6-jpZrUPhpCg" source="duplicates">
-          <contents xmi:type="ecore:EReference" xmi:id="_dOT_WUVtEd6-jpZrUPhpCg" name="_" ordered="false" upperBound="-1" eType="_dOT_bUVtEd6-jpZrUPhpCg" containment="true">
-            <eAnnotations xmi:id="_dOT_WkVtEd6-jpZrUPhpCg" source="redefines" references="_dOT_Y0VtEd6-jpZrUPhpCg"/>
-          </contents>
-          <contents xmi:type="ecore:EReference" xmi:id="_dOT_XEVtEd6-jpZrUPhpCg" name="_" ordered="false" upperBound="-1" eType="_dOT_UkVtEd6-jpZrUPhpCg" containment="true">
-            <eAnnotations xmi:id="_dOT_XUVtEd6-jpZrUPhpCg" source="redefines" references="_dOT_Y0VtEd6-jpZrUPhpCg _dOT_WUVtEd6-jpZrUPhpCg"/>
-          </contents>
-        </eAnnotations>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_X0VtEd6-jpZrUPhpCg" name="Body" ordered="false" unique="false" lowerBound="1" eType="_dOT_Z0VtEd6-jpZrUPhpCg"/>
-        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_dOT_YUVtEd6-jpZrUPhpCg" name="language" ordered="false" unique="false" lowerBound="1">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaVxUkgEd61gcAb3RwQTw" name="Rule" abstract="true">
+        <eAnnotations xmi:id="_vCaVxkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vCaVx0kgEd61gcAb3RwQTw" name="ruleID" ordered="false" unique="false" lowerBound="1" changeable="false">
           <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         </eStructuralFeatures>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_Y0VtEd6-jpZrUPhpCg" name="_" ordered="false" upperBound="-1" eType="_dOT_aUVtEd6-jpZrUPhpCg" containment="true"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_ZUVtEd6-jpZrUPhpCg" name="base_Classifier" ordered="false" lowerBound="1">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaVyUkgEd61gcAb3RwQTw" name="base_Classifier" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
         </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_Z0VtEd6-jpZrUPhpCg" name="string">
-        <eAnnotations xmi:id="_dOT_aEVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{ECF4E6B7-F339-4ec3-AFA2-98A2C35DBBFD}"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_aUVtEd6-jpZrUPhpCg" name="RuleCondition">
-        <eAnnotations xmi:id="_dOT_akVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{25BAAF47-BC6F-485e-A23B-F50E832F961D}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_a0VtEd6-jpZrUPhpCg" name="base_Classifier" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaVy0kgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" volatile="true" containment="true">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_bUVtEd6-jpZrUPhpCg" name="RuleAction">
-        <eAnnotations xmi:id="_dOT_bkVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_b0VtEd6-jpZrUPhpCg" name="base_Classifier" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_cUVtEd6-jpZrUPhpCg" name="ProductionRule" eSuperTypes="_dOT_f0VtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_ckVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{3FA621BB-C107-49b0-B61D-B98E83259F7B}"/>
-        <eAnnotations xmi:id="_dOT_c0VtEd6-jpZrUPhpCg" source="duplicates">
-          <contents xmi:type="ecore:EReference" xmi:id="_dOT_dEVtEd6-jpZrUPhpCg" name="_" ordered="false" lowerBound="1" upperBound="-1" eType="_dOT_UkVtEd6-jpZrUPhpCg">
-            <eAnnotations xmi:id="_dOT_dUVtEd6-jpZrUPhpCg" source="redefines" references="_dOT_fEVtEd6-jpZrUPhpCg"/>
-          </contents>
-          <contents xmi:type="ecore:EReference" xmi:id="_dOT_d0VtEd6-jpZrUPhpCg" name="_" ordered="false" upperBound="-1" eType="_dOT_aUVtEd6-jpZrUPhpCg">
-            <eAnnotations xmi:id="_dOT_eEVtEd6-jpZrUPhpCg" source="redefines" references="_dOT_fEVtEd6-jpZrUPhpCg _dOT_dEVtEd6-jpZrUPhpCg"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaVzUkgEd61gcAb3RwQTw" name="Ruleset">
+        <eAnnotations xmi:id="_vCaVzkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{66F8706E-E139-4523-998A-2B6076D1B76A}"/>
+        <eAnnotations xmi:id="_vCaVz0kgEd61gcAb3RwQTw" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaV0EkgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaVxUkgEd61gcAb3RwQTw" eOpposite="_vCaVy0kgEd61gcAb3RwQTw">
+            <eAnnotations xmi:id="_vCaV0UkgEd61gcAb3RwQTw" source="redefines" references="_vCaV00kgEd61gcAb3RwQTw"/>
           </contents>
         </eAnnotations>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_ekVtEd6-jpZrUPhpCg" name="priority" ordered="false" unique="false" lowerBound="1" eType="_dOT_ikVtEd6-jpZrUPhpCg"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_fEVtEd6-jpZrUPhpCg" name="_" ordered="false" upperBound="-1" eType="_dOT_bUVtEd6-jpZrUPhpCg"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_f0VtEd6-jpZrUPhpCg" name="AbstractProductionRule" eSuperTypes="_dOT_gkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_gEVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{C4754617-4012-4a3b-90E5-2BE53BC68C26}"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_gkVtEd6-jpZrUPhpCg" name="Rule" abstract="true">
-        <eAnnotations xmi:id="_dOT_g0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
-        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_dOT_hEVtEd6-jpZrUPhpCg" name="ruleID" ordered="false" unique="false" lowerBound="1" eType="_dOT_iEVtEd6-jpZrUPhpCg" changeable="false"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_hkVtEd6-jpZrUPhpCg" name="base_Classifier" ordered="false" lowerBound="1">
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV00kgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaV10kgEd61gcAb3RwQTw" changeable="false" volatile="true" transient="true"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV1UkgEd61gcAb3RwQTw" name="base_Classifier" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_dOT_iEVtEd6-jpZrUPhpCg" name="Ouranos_PrimitiveTypes_void" instanceClassName="Ouranos_PrimitiveTypes_void">
-        <eAnnotations xmi:id="_dOT_iUVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="749028c0-456d-11de-8fc4-c5b21859bec0"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_ikVtEd6-jpZrUPhpCg" name="integer">
-        <eAnnotations xmi:id="_dOT_i0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{A5555E3E-BF3C-4cb8-808F-4585C79A1446}"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_jEVtEd6-jpZrUPhpCg" name="ProductionRuleset">
-        <eAnnotations xmi:id="_dOT_jUVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{47D7D02A-B6D0-4fa7-817B-7B59B63687EB}"/>
-        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_dOT_jkVtEd6-jpZrUPhpCg" name="operationalMode" ordered="false" unique="false" lowerBound="1" eType="_dOT_kkVtEd6-jpZrUPhpCg"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_kEVtEd6-jpZrUPhpCg" name="base_Classifier" ordered="false" lowerBound="1">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaV10kgEd61gcAb3RwQTw" name="RuleVariable">
+        <eAnnotations xmi:id="_vCaV2EkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}"/>
+        <eAnnotations xmi:id="_vCaV2UkgEd61gcAb3RwQTw" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaV2kkgEd61gcAb3RwQTw" name="_" ordered="false" lowerBound="1" containment="true" eOpposite="_vCaV00kgEd61gcAb3RwQTw">
+            <eAnnotations xmi:id="_vCaV20kgEd61gcAb3RwQTw" source="redefines" references="_vCaV3UkgEd61gcAb3RwQTw"/>
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV3UkgEd61gcAb3RwQTw" name="_" ordered="false" lowerBound="1" changeable="false" volatile="true" transient="true">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV30kgEd61gcAb3RwQTw" name="base_Classifier" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_dOT_kkVtEd6-jpZrUPhpCg" name="operationalModeEnumeration">
-        <eAnnotations xmi:id="_dOT_k0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{F6AA7565-B919-4429-B956-E11E4E5D1A3D}"/>
-        <eLiterals xmi:id="_dOT_lEVtEd6-jpZrUPhpCg" name="ForwardChaining"/>
-        <eLiterals xmi:id="_dOT_lUVtEd6-jpZrUPhpCg" name="Sequential" value="1"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_lkVtEd6-jpZrUPhpCg" name="ArithmeticalExpression">
-        <eAnnotations xmi:id="_dOT_l0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_mEVtEd6-jpZrUPhpCg" name="base_Constraint" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Constraint"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaV4UkgEd61gcAb3RwQTw" name="OpaqueExpression">
+        <eAnnotations xmi:id="_vCaV4kkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}"/>
+        <eAnnotations xmi:id="_vCaV40kgEd61gcAb3RwQTw" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaV5EkgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaV-UkgEd61gcAb3RwQTw">
+            <eAnnotations xmi:id="_vCaV5UkgEd61gcAb3RwQTw" source="redefines" references="_vCaV70kgEd61gcAb3RwQTw"/>
+          </contents>
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaV50kgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaV_UkgEd61gcAb3RwQTw">
+            <eAnnotations xmi:id="_vCaV6EkgEd61gcAb3RwQTw" source="redefines" references="_vCaV70kgEd61gcAb3RwQTw _vCaV5EkgEd61gcAb3RwQTw"/>
+          </contents>
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaV6kkgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaV10kgEd61gcAb3RwQTw" containment="true" eOpposite="_vCaV3UkgEd61gcAb3RwQTw">
+            <eAnnotations xmi:id="_vCaV60kgEd61gcAb3RwQTw" source="redefines" references="_vCaV70kgEd61gcAb3RwQTw _vCaV5EkgEd61gcAb3RwQTw _vCaV50kgEd61gcAb3RwQTw"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vCaV7UkgEd61gcAb3RwQTw" name="language" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         </eStructuralFeatures>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_mkVtEd6-jpZrUPhpCg" name="_" ordered="false" lowerBound="1" eType="_dOT_VkVtEd6-jpZrUPhpCg" containment="true"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_nEVtEd6-jpZrUPhpCg" name="AbstractDerivationRule" eSuperTypes="_dOT_gkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_nUVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{C086833F-B9A5-4358-97DB-93344B6A5A38}"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_n0VtEd6-jpZrUPhpCg" name="Conjuction" eSuperTypes="_dOT_pEVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_oEVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{35F8D712-DE97-4c7a-9B81-E140BAE168E9}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_oUVtEd6-jpZrUPhpCg" name="formulas" ordered="false" upperBound="-1" eType="_dOT_pEVtEd6-jpZrUPhpCg"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_pEVtEd6-jpZrUPhpCg" name="LogicalFormula" abstract="true">
-        <eAnnotations xmi:id="_dOT_pUVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_pkVtEd6-jpZrUPhpCg" name="_" ordered="false" lowerBound="1" eType="_dOT_VkVtEd6-jpZrUPhpCg" containment="true"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_qEVtEd6-jpZrUPhpCg" name="base_Constraint" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Constraint"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV70kgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaV80kgEd61gcAb3RwQTw" containment="true" eOpposite="_vCaV90kgEd61gcAb3RwQTw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV8UkgEd61gcAb3RwQTw" name="base_Classifier" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_qkVtEd6-jpZrUPhpCg" name="AbstractIntegrityRule" abstract="true" eSuperTypes="_dOT_gkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_q0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{7601163F-BF0C-44ae-8CB4-CA2098FE5CB5}"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaV80kgEd61gcAb3RwQTw" name="RuleAction">
+        <eAnnotations xmi:id="_vCaV9EkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV9UkgEd61gcAb3RwQTw" name="base_Classifier" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV90kgEd61gcAb3RwQTw" name="_" ordered="false" lowerBound="1" eType="_vCaV4UkgEd61gcAb3RwQTw" eOpposite="_vCaV70kgEd61gcAb3RwQTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_rUVtEd6-jpZrUPhpCg" name="AbstractReactionRule" eSuperTypes="_dOT_gkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_rkVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{9817904D-C6CA-47ea-A13E-CE4C9C42AD8E}"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaV-UkgEd61gcAb3RwQTw" name="ArithmeticalExpression">
+        <eAnnotations xmi:id="_vCaV-kkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV-0kgEd61gcAb3RwQTw" name="base_Constraint" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Constraint"/>
+        </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_sEVtEd6-jpZrUPhpCg" name="Disjunction" eSuperTypes="_dOT_pEVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_sUVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{C7C31611-5874-41cb-8C5F-2CE67A2AE7E4}"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaV_UkgEd61gcAb3RwQTw" name="LogicalFormula" abstract="true">
+        <eAnnotations xmi:id="_vCaV_kkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaV_0kgEd61gcAb3RwQTw" name="base_Constraint" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Constraint"/>
+        </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_s0VtEd6-jpZrUPhpCg" name="AbstractTransformationRule" abstract="true" eSuperTypes="_dOT_gkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_tEVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{32CD5928-5307-4059-9162-3FFF7F9BB811}"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWAUkgEd61gcAb3RwQTw" name="AbstractIntegrityRule" abstract="true" eSuperTypes="_vCaVxUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWAkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{7601163F-BF0C-44ae-8CB4-CA2098FE5CB5}"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_tkVtEd6-jpZrUPhpCg" name="Division" eSuperTypes="_dOT_lkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_t0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{34261421-9E00-4540-A9EE-B453B752842F}"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWBEkgEd61gcAb3RwQTw" name="AbstractProductionRule" eSuperTypes="_vCaVxUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWBUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{C4754617-4012-4a3b-90E5-2BE53BC68C26}"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_uUVtEd6-jpZrUPhpCg" name="InvokeActionExpression" eSuperTypes="_dOT_vEVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_ukVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{76B7A5E1-1CA3-47db-AD06-D55ED39C8CF6}"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWB0kgEd61gcAb3RwQTw" name="AbstractReactionRule" eSuperTypes="_vCaVxUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWCEkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{9817904D-C6CA-47ea-A13E-CE4C9C42AD8E}"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_vEVtEd6-jpZrUPhpCg" name="ActionExpression" abstract="true">
-        <eAnnotations xmi:id="_dOT_vUVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWCkkgEd61gcAb3RwQTw" name="AbstractTransformationRule" abstract="true" eSuperTypes="_vCaVxUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWC0kgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{32CD5928-5307-4059-9162-3FFF7F9BB811}"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_vkVtEd6-jpZrUPhpCg" name="Negation" eSuperTypes="_dOT_pEVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_v0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{13B82616-A100-45c5-B586-095D1A2E0C3A}"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWDUkgEd61gcAb3RwQTw" name="addition" eSuperTypes="_vCaV-UkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWDkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{30DA0660-82BD-4cfc-88E6-995B7523DEF6}"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_wUVtEd6-jpZrUPhpCg" name="StrongNegation" eSuperTypes="_dOT_pEVtEd6-jpZrUPhpCg _dOT_vkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_wkVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{96801424-832B-4280-A067-7E2E4F889E72}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_w0VtEd6-jpZrUPhpCg" name="formula" ordered="false" upperBound="-1" eType="_dOT_pEVtEd6-jpZrUPhpCg"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_x0VtEd6-jpZrUPhpCg" name="ODatatype" eSuperTypes="_dOT_ykVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_yEVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{1DBF21AB-4712-4479-9741-686028606ED8}"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_ykVtEd6-jpZrUPhpCg" name="OType" abstract="true">
-        <eAnnotations xmi:id="_dOT_y0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}"/>
-        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_dOT_zEVtEd6-jpZrUPhpCg" name="name" unique="false">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWEEkgEd61gcAb3RwQTw" name="AtLeastQuantifiedFormula" eSuperTypes="_vCaWFUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWEUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{49F7E3DB-619B-4938-8638-631A3ABFD23F}"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vCaWEkkgEd61gcAb3RwQTw" name="minCardinality" ordered="false" unique="false" lowerBound="1" changeable="false">
           <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
         </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_zkVtEd6-jpZrUPhpCg" name="OEntity" eSuperTypes="_dOT_ykVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_z0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{5BED6262-2886-44f0-809B-A62951FBCB20}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_0EVtEd6-jpZrUPhpCg" name="base_Classifier" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_00VtEd6-jpZrUPhpCg" name="OFeature">
-        <eAnnotations xmi:id="_dOT_1EVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{D315A408-8495-4437-BC7F-576C0850BC6A}"/>
-        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_dOT_1UVtEd6-jpZrUPhpCg" name="name" unique="false">
-          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-        </eStructuralFeatures>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_10VtEd6-jpZrUPhpCg" name="base_Property" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Property"/>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_2UVtEd6-jpZrUPhpCg" name="OModel">
-        <eAnnotations xmi:id="_dOT_2kVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{C04EE18F-80C6-40fd-85C9-D4D5C000FB7E}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_20VtEd6-jpZrUPhpCg" name="base_Package" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Package"/>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_3UVtEd6-jpZrUPhpCg" name="OOperation">
-        <eAnnotations xmi:id="_dOT_3kVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{A83ACA96-2DCF-40ea-9520-32297E5FAA59}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_30VtEd6-jpZrUPhpCg" name="base_Operation" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Operation"/>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_4UVtEd6-jpZrUPhpCg" name="OPackage" eSuperTypes="_dOT_ykVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_4kVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{CBF9FCEC-66EB-4f32-A6BC-B164A3A212D2}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT_40VtEd6-jpZrUPhpCg" name="base_Package" ordered="false" lowerBound="1">
-          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Package"/>
-        </eStructuralFeatures>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_5kVtEd6-jpZrUPhpCg" name="OParameter">
-        <eAnnotations xmi:id="_dOT_50VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{5C4885DD-A08B-4d88-8CF8-25270819D997}"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_6EVtEd6-jpZrUPhpCg" name="addition" eSuperTypes="_dOT_lkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_6UVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{30DA0660-82BD-4cfc-88E6-995B7523DEF6}"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_60VtEd6-jpZrUPhpCg" name="multiplication" eSuperTypes="_dOT_lkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_7EVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{6789BA15-40A2-440c-AD78-779828835C37}"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_7kVtEd6-jpZrUPhpCg" name="subtraction" eSuperTypes="_dOT_lkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_70VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{EF8C2814-3246-44a2-BA8F-535218ECE2F7}"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_8UVtEd6-jpZrUPhpCg" name="AtLeastQuantifiedFormula" eSuperTypes="_dOT_9kVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_8kVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{49F7E3DB-619B-4938-8638-631A3ABFD23F}"/>
-        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_dOT_80VtEd6-jpZrUPhpCg" name="minCardinality" ordered="false" unique="false" lowerBound="1" eType="_dOT_iEVtEd6-jpZrUPhpCg" changeable="false"/>
-      </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT_9kVtEd6-jpZrUPhpCg" name="QuantifiedFormula" abstract="true" eSuperTypes="_dOT_pEVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOT_90VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{91118240-92AD-445b-B843-4B927201D209}"/>
-        <eAnnotations xmi:id="_dOT_-EVtEd6-jpZrUPhpCg" source="duplicates">
-          <contents xmi:type="ecore:EReference" xmi:id="_dOT_-UVtEd6-jpZrUPhpCg" name="base_Constraint" ordered="false" lowerBound="1">
-            <eAnnotations xmi:id="_dOT_-kVtEd6-jpZrUPhpCg" source="redefines" references="_dOT_qEVtEd6-jpZrUPhpCg"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWFUkgEd61gcAb3RwQTw" name="QuantifiedFormula" abstract="true" eSuperTypes="_vCaV_UkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWFkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{91118240-92AD-445b-B843-4B927201D209}"/>
+        <eAnnotations xmi:id="_vCaWF0kgEd61gcAb3RwQTw" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaWGEkgEd61gcAb3RwQTw" name="base_Constraint" ordered="false" lowerBound="1">
+            <eAnnotations xmi:id="_vCaWGUkgEd61gcAb3RwQTw" source="redefines" references="_vCaV_0kgEd61gcAb3RwQTw"/>
             <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Constraint"/>
           </contents>
         </eAnnotations>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOT__EVtEd6-jpZrUPhpCg" name="formula" ordered="false" upperBound="-1" eType="_dOT_pEVtEd6-jpZrUPhpCg"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWG0kgEd61gcAb3RwQTw" name="formula" ordered="false" upperBound="-1" eType="_vCaV_UkgEd61gcAb3RwQTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOT__0VtEd6-jpZrUPhpCg" name="AtMostQuantifiedFormula" eSuperTypes="_dOT_9kVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOUAAEVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{6522A2FB-51F2-429b-8E7B-7303A53300A0}"/>
-        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_dOUAAUVtEd6-jpZrUPhpCg" name="maxCardinality" ordered="false" unique="false" lowerBound="1" eType="_dOT_iEVtEd6-jpZrUPhpCg" changeable="false"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWHkkgEd61gcAb3RwQTw" name="AtMostQuantifiedFormula" eSuperTypes="_vCaWFUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWH0kgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{6522A2FB-51F2-429b-8E7B-7303A53300A0}"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vCaWIEkgEd61gcAb3RwQTw" name="maxCardinality" ordered="false" unique="false" lowerBound="1" changeable="false">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOUABEVtEd6-jpZrUPhpCg" name="ExistentiallyQuantifiedFormula" eSuperTypes="_dOT_9kVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOUABUVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{260EDBDA-058A-4c3e-8777-B2AF02093FAA}"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWI0kgEd61gcAb3RwQTw" name="Conjuction" eSuperTypes="_vCaV_UkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWJEkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{35F8D712-DE97-4c7a-9B81-E140BAE168E9}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWJUkgEd61gcAb3RwQTw" name="formulas" ordered="false" upperBound="-1" eType="_vCaV_UkgEd61gcAb3RwQTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOUAB0VtEd6-jpZrUPhpCg" name="ProductionRuleSet" eSuperTypes="_dOUADEVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOUACEVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{69DB25B6-C6B6-4f23-BA15-F9751E237C12}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOUACUVtEd6-jpZrUPhpCg" name="rules" ordered="false" upperBound="-1" eType="_dOT_cUVtEd6-jpZrUPhpCg"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWKEkgEd61gcAb3RwQTw" name="Disjunction" eSuperTypes="_vCaV_UkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWKUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{C7C31611-5874-41cb-8C5F-2CE67A2AE7E4}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWKkkgEd61gcAb3RwQTw" name="formulas" ordered="false" upperBound="-1" eType="_vCaV_UkgEd61gcAb3RwQTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOUADEVtEd6-jpZrUPhpCg" name="RuleSet" abstract="true">
-        <eAnnotations xmi:id="_dOUADUVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{76096AA4-9631-4ce7-B080-EBC2CD05695C}"/>
-        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_dOUADkVtEd6-jpZrUPhpCg" name="ruleSetID" ordered="false" unique="false" eType="_dOT_iEVtEd6-jpZrUPhpCg" changeable="false"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWLUkgEd61gcAb3RwQTw" name="Division" eSuperTypes="_vCaV-UkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWLkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{34261421-9E00-4540-A9EE-B453B752842F}"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOUAEEVtEd6-jpZrUPhpCg" name="IntegrityRule" abstract="true" eSuperTypes="_dOT_qkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOUAEUVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{95ED29D3-C8BC-40e9-ACDA-B76A32EC80AD}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOUAEkVtEd6-jpZrUPhpCg" name="constraint" ordered="false" upperBound="-1" eType="_dOT_9kVtEd6-jpZrUPhpCg"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWMEkgEd61gcAb3RwQTw" name="ExistentiallyQuantifiedFormula" eSuperTypes="_vCaWFUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWMUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{260EDBDA-058A-4c3e-8777-B2AF02093FAA}"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOUAFUVtEd6-jpZrUPhpCg" name="Disjunction" eSuperTypes="_dOT_pEVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOUAFkVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{576221DC-BAB3-4c6d-83D8-266443C91C98}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOUAF0VtEd6-jpZrUPhpCg" name="formulas" ordered="false" upperBound="-1" eType="_dOT_pEVtEd6-jpZrUPhpCg"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWM0kgEd61gcAb3RwQTw" name="Implication" eSuperTypes="_vCaV_UkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWNEkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{D3D77020-FD51-4d29-9C73-36A84D8D12DB}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWNUkgEd61gcAb3RwQTw" name="consequent" ordered="false" upperBound="-1" eType="_vCaV_UkgEd61gcAb3RwQTw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWN0kgEd61gcAb3RwQTw" name="antecedent" ordered="false" eType="_vCaV_UkgEd61gcAb3RwQTw"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOUAGkVtEd6-jpZrUPhpCg" name="Implication" eSuperTypes="_dOT_pEVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOUAG0VtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{D3D77020-FD51-4d29-9C73-36A84D8D12DB}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOUAHEVtEd6-jpZrUPhpCg" name="consequent" ordered="false" upperBound="-1" eType="_dOT_pEVtEd6-jpZrUPhpCg"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOUAHkVtEd6-jpZrUPhpCg" name="antecedent" ordered="false" upperBound="-1" eType="_dOT_pEVtEd6-jpZrUPhpCg"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWOkkgEd61gcAb3RwQTw" name="InvokeActionExpression" eSuperTypes="_vCaWPUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWO0kgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{76B7A5E1-1CA3-47db-AD06-D55ED39C8CF6}"/>
       </eClassifiers>
-      <eClassifiers xmi:type="ecore:EClass" xmi:id="_dOUAIUVtEd6-jpZrUPhpCg" name="NegationAsFailure" eSuperTypes="_dOT_vkVtEd6-jpZrUPhpCg">
-        <eAnnotations xmi:id="_dOUAIkVtEd6-jpZrUPhpCg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{22521815-C2D9-4ca3-B746-7539E5F7C9D1}"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_dOUAI0VtEd6-jpZrUPhpCg" name="formula" ordered="false" upperBound="-1" eType="_dOT_pEVtEd6-jpZrUPhpCg"/>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWPUkgEd61gcAb3RwQTw" name="ActionExpression" abstract="true">
+        <eAnnotations xmi:id="_vCaWPkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWP0kgEd61gcAb3RwQTw" name="base_Action" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Action"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWQUkgEd61gcAb3RwQTw" name="multiplication" eSuperTypes="_vCaV-UkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWQkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{6789BA15-40A2-440c-AD78-779828835C37}"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWREkgEd61gcAb3RwQTw" name="Negation" eSuperTypes="_vCaV_UkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWRUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{13B82616-A100-45c5-B586-095D1A2E0C3A}"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWR0kgEd61gcAb3RwQTw" name="NegationAsFailure" eSuperTypes="_vCaWREkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWSEkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{22521815-C2D9-4ca3-B746-7539E5F7C9D1}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWSUkgEd61gcAb3RwQTw" name="formula" ordered="false" upperBound="-1" eType="_vCaV_UkgEd61gcAb3RwQTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWTEkgEd61gcAb3RwQTw" name="ODatatype" eSuperTypes="_vCaWT0kgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWTUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{1DBF21AB-4712-4479-9741-686028606ED8}"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWT0kgEd61gcAb3RwQTw" name="OType" abstract="true">
+        <eAnnotations xmi:id="_vCaWUEkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vCaWUUkgEd61gcAb3RwQTw" name="name" unique="false">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWU0kgEd61gcAb3RwQTw" name="base_Classifier" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWVUkgEd61gcAb3RwQTw" name="OEntity" eSuperTypes="_vCaWT0kgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWVkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{5BED6262-2886-44f0-809B-A62951FBCB20}"/>
+        <eAnnotations xmi:id="_vCaWV0kgEd61gcAb3RwQTw" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaWWEkgEd61gcAb3RwQTw" name="base_Classifier" ordered="false" lowerBound="1">
+            <eAnnotations xmi:id="_vCaWWUkgEd61gcAb3RwQTw" source="redefines" references="_vCaWU0kgEd61gcAb3RwQTw"/>
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWW0kgEd61gcAb3RwQTw" name="features" ordered="false" upperBound="-1" eType="_vCaWYEkgEd61gcAb3RwQTw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWXUkgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaWZkkgEd61gcAb3RwQTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWYEkgEd61gcAb3RwQTw" name="OFeature">
+        <eAnnotations xmi:id="_vCaWYUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{D315A408-8495-4437-BC7F-576C0850BC6A}"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vCaWYkkgEd61gcAb3RwQTw" name="name" unique="false">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWZEkgEd61gcAb3RwQTw" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Property"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWZkkgEd61gcAb3RwQTw" name="OOperation">
+        <eAnnotations xmi:id="_vCaWZ0kgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{A83ACA96-2DCF-40ea-9520-32297E5FAA59}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWaEkgEd61gcAb3RwQTw" name="base_Operation" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Operation"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWakkgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaWbEkgEd61gcAb3RwQTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWbEkgEd61gcAb3RwQTw" name="OParameter">
+        <eAnnotations xmi:id="_vCaWbUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{5C4885DD-A08B-4d88-8CF8-25270819D997}"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWbkkgEd61gcAb3RwQTw" name="OModel">
+        <eAnnotations xmi:id="_vCaWb0kgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{C04EE18F-80C6-40fd-85C9-D4D5C000FB7E}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWcEkgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaWdkkgEd61gcAb3RwQTw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWckkgEd61gcAb3RwQTw" name="types" ordered="false" upperBound="-1" eType="_vCaWT0kgEd61gcAb3RwQTw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWdEkgEd61gcAb3RwQTw" name="base_Package" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Package"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWdkkgEd61gcAb3RwQTw" name="OPackage" eSuperTypes="_vCaWT0kgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWd0kgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{CBF9FCEC-66EB-4f32-A6BC-B164A3A212D2}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWeEkgEd61gcAb3RwQTw" name="base_Package" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Package"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWekkgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaWVUkgEd61gcAb3RwQTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_vCaWfUkgEd61gcAb3RwQTw" name="operationalModeEnumeration">
+        <eAnnotations xmi:id="_vCaWfkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{F6AA7565-B919-4429-B956-E11E4E5D1A3D}"/>
+        <eLiterals xmi:id="_vCaWf0kgEd61gcAb3RwQTw" name="ForwardChaining"/>
+        <eLiterals xmi:id="_vCaWgEkgEd61gcAb3RwQTw" name="Sequential" value="1"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWgUkgEd61gcAb3RwQTw" name="ProductionRule" eSuperTypes="_vCaWBEkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWgkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{3FA621BB-C107-49b0-B61D-B98E83259F7B}"/>
+        <eAnnotations xmi:id="_vCaWg0kgEd61gcAb3RwQTw" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaWhEkgEd61gcAb3RwQTw" name="_" ordered="false">
+            <eAnnotations xmi:id="_vCaWhUkgEd61gcAb3RwQTw" source="redefines" references="_vCaVy0kgEd61gcAb3RwQTw"/>
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+          </contents>
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaWh0kgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaV10kgEd61gcAb3RwQTw">
+            <eAnnotations xmi:id="_vCaWiEkgEd61gcAb3RwQTw" source="redefines" references="_vCaVy0kgEd61gcAb3RwQTw _vCaWhEkgEd61gcAb3RwQTw"/>
+          </contents>
+          <contents xmi:type="ecore:EReference" xmi:id="_vCaWikkgEd61gcAb3RwQTw" name="_" ordered="false" upperBound="-1" eType="_vCaV80kgEd61gcAb3RwQTw">
+            <eAnnotations xmi:id="_vCaWi0kgEd61gcAb3RwQTw" source="redefines" references="_vCaVy0kgEd61gcAb3RwQTw _vCaWhEkgEd61gcAb3RwQTw _vCaWh0kgEd61gcAb3RwQTw"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vCaWjUkgEd61gcAb3RwQTw" name="priority" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWj0kgEd61gcAb3RwQTw" name="producedAction" ordered="false" upperBound="-1" eType="_vCaWPUkgEd61gcAb3RwQTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWkkkgEd61gcAb3RwQTw" name="RuleCondition">
+        <eAnnotations xmi:id="_vCaWk0kgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{25BAAF47-BC6F-485e-A23B-F50E832F961D}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWlEkgEd61gcAb3RwQTw" name="base_Classifier" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Classifier"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWlkkgEd61gcAb3RwQTw" name="_" ordered="false" lowerBound="1" eType="_vCaV4UkgEd61gcAb3RwQTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWmEkgEd61gcAb3RwQTw" name="ProductionRuleset" eSuperTypes="_vCaVzUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWmUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{47D7D02A-B6D0-4fa7-817B-7B59B63687EB}"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_vCaWmkkgEd61gcAb3RwQTw" name="operationalMode" ordered="false" unique="false" lowerBound="1" eType="_vCaWfUkgEd61gcAb3RwQTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWnUkgEd61gcAb3RwQTw" name="StrongNegation" eSuperTypes="_vCaWREkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWnkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{96801424-832B-4280-A067-7E2E4F889E72}"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_vCaWn0kgEd61gcAb3RwQTw" name="formula" ordered="false" upperBound="-1" eType="_vCaV_UkgEd61gcAb3RwQTw"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWokkgEd61gcAb3RwQTw" name="subtraction" eSuperTypes="_vCaV-UkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWo0kgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{EF8C2814-3246-44a2-BA8F-535218ECE2F7}"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWpUkgEd61gcAb3RwQTw" name="AssignActionExpression" eSuperTypes="_vCaWPUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWpkkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{45F70288-502E-40b3-B351-DA1A4AE48E30}"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWqEkgEd61gcAb3RwQTw" name="CreateActionExpression" eSuperTypes="_vCaWPUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWqUkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{8FCD2217-DC33-4a63-82E7-3AD99C7C2AE7}"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWq0kgEd61gcAb3RwQTw" name="DeleteActionExpression" eSuperTypes="_vCaWPUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCaWrEkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{AF8CC5CD-CA9B-4725-98D6-E1BE951E6772}"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_vCaWrkkgEd61gcAb3RwQTw" name="MessageAction" eSuperTypes="_vCaWPUkgEd61gcAb3RwQTw">
+        <eAnnotations xmi:id="_vCa80EkgEd61gcAb3RwQTw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{475E8505-1843-4565-95FD-3F411E6E84B2}"/>
       </eClassifiers>
     </contents>
   </eAnnotations>
-  <elementImport xmi:id="_dF0xsEVtEd6-jpZrUPhpCg">
+  <elementImport xmi:id="_ufZvUEkgEd61gcAb3RwQTw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Action"/>
+  </elementImport>
+  <elementImport xmi:id="_uiuwIEkgEd61gcAb3RwQTw">
     <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
   </elementImport>
-  <elementImport xmi:id="_dF6RQEVtEd6-jpZrUPhpCg">
-    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
+  <elementImport xmi:id="_ui4hIEkgEd61gcAb3RwQTw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
   </elementImport>
-  <elementImport xmi:id="_dF_JwEVtEd6-jpZrUPhpCg">
+  <elementImport xmi:id="_ujBrEEkgEd61gcAb3RwQTw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
+  </elementImport>
+  <elementImport xmi:id="_uj2KcEkgEd61gcAb3RwQTw">
     <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Constraint"/>
   </elementImport>
-  <elementImport xmi:id="_dGEpUEVtEd6-jpZrUPhpCg">
+  <elementImport xmi:id="_uzZpYEkgEd61gcAb3RwQTw">
     <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
   </elementImport>
-  <elementImport xmi:id="_dGKI4EVtEd6-jpZrUPhpCg">
-    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
+  <elementImport xmi:id="_u0X5wEkgEd61gcAb3RwQTw">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
   </elementImport>
-  <elementImport xmi:id="_dGPocEVtEd6-jpZrUPhpCg">
-    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
-  </elementImport>
-  <packagedElement xmi:type="uml:Package" xmi:id="_cmQg0UVtEd6-jpZrUPhpCg" name="PrimitiveTypes">
-    <elementImport xmi:id="_cmRH4EVtEd6-jpZrUPhpCg">
+  <packagedElement xmi:type="uml:Package" xmi:id="_ucVNMUkgEd61gcAb3RwQTw" name="PrimitiveTypes">
+    <elementImport xmi:id="_ucVNMkkgEd61gcAb3RwQTw">
       <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
     </elementImport>
-    <elementImport xmi:id="_cmRH4UVtEd6-jpZrUPhpCg">
+    <elementImport xmi:id="_ucVNM0kgEd61gcAb3RwQTw">
       <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </elementImport>
-    <elementImport xmi:id="_cmRH4kVtEd6-jpZrUPhpCg">
+    <elementImport xmi:id="_ucVNNEkgEd61gcAb3RwQTw">
       <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
     </elementImport>
-    <elementImport xmi:id="_cmRH40VtEd6-jpZrUPhpCg">
+    <elementImport xmi:id="_ucVNNUkgEd61gcAb3RwQTw">
       <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
     </elementImport>
-    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="749028c0-456d-11de-8fc4-c5b21859bec0" name="void"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}" name="RuleVariable">
-    <ownedComment xmi:id="_cmbf8UVtEd6-jpZrUPhpCg">
-      <body>The variable represents a programming construct to hold values for use in executing a ruleset. The values must conform to the variable's type. </body>
-    </ownedComment>
-    <ownedAttribute xmi:id="_dL4WZEVtEd6-jpZrUPhpCg" name="base_Classifier" association="74be16d4-456d-11de-8fc4-c5b21859bec0">
-      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" name="OpaqueExpression">
-    <ownedAttribute xmi:id="{9D987177-C267-42cd-96BD-07D6CB626017}" name="Body" visibility="public" type="{ECF4E6B7-F339-4ec3-AFA2-98A2C35DBBFD}" isUnique="false">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dHMqskVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dHMqsUVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="{2F49305D-F041-4549-A4CB-BF7513AF84F8}" name="language" visibility="public" isUnique="false">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dHNRwkVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dHNRwUVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="74997798-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{25BAAF47-BC6F-485e-A23B-F50E832F961D}" aggregation="composite" association="{95ECA135-76CA-4347-A0D7-280C13B9171A}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJlQVkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJlQVUVtEd6-jpZrUPhpCg"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="74b256e7-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}" aggregation="composite" association="{8B2AFFA0-DDFC-4a49-B7F4-1CF278F67070}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLIvhkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLIvhUVtEd6-jpZrUPhpCg"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_dLsJIkVtEd6-jpZrUPhpCg" name="base_Classifier" association="74bb0988-456d-11de-8fc4-c5b21859bec0">
-      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="74bb7eba-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}" aggregation="composite" association="{71C2C239-5481-4464-BE24-E0376FA2D5E2}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLtXRkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLtXRUVtEd6-jpZrUPhpCg"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" name="ProductionRule">
-    <ownedComment xmi:id="_cppzEEVtEd6-jpZrUPhpCg">
-      <body>A ProductionRule is a statement of programming logic that specifies the execution of one or more actions in the case that its conditions are satisfied. The production rule is represented as: for [rule variables] if [condition] then [action-list]</body>
-    </ownedComment>
-    <generalization xmi:id="_dHOf4EVtEd6-jpZrUPhpCg" general="{C4754617-4012-4a3b-90E5-2BE53BC68C26}"/>
-    <ownedAttribute xmi:id="{0356FD67-825A-43f5-8005-B1524228D888}" name="priority" visibility="private" type="{A5555E3E-BF3C-4cb8-808F-4585C79A1446}" isUnique="false">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dHPG8kVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dHPG8UVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="74ae864c-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}" association="{7F3D83AB-A29A-4212-ACD4-CA978B03BE5F}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dK5e8EVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dK435UVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="74bb0986-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}" association="{820AD09A-0B56-4d5a-89E0-145AFFF8F390}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLriE0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLriEkVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="74bd7a8f-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{25BAAF47-BC6F-485e-A23B-F50E832F961D}" association="{5F1DC3C9-D8D7-4719-8C60-284203939E08}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dL16IEVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dL1TEkVtEd6-jpZrUPhpCg"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{47D7D02A-B6D0-4fa7-817B-7B59B63687EB}" name="ProductionRuleset">
-    <ownedAttribute xmi:id="{5DEA0BD0-C33C-4fd6-BE0B-F240844CE789}" name="operationalMode" visibility="private" type="{F6AA7565-B919-4429-B956-E11E4E5D1A3D}" isUnique="false">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dHPuAkVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dHPuAUVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_dK77MkVtEd6-jpZrUPhpCg" name="base_Classifier" association="74aefb7f-456d-11de-8fc4-c5b21859bec0">
-      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}" name="RuleAction">
-    <ownedComment xmi:id="_cs9lwEVtEd6-jpZrUPhpCg">
-      <body>The action association defines an ordered list of actions </body>
-    </ownedComment>
-    <ownedAttribute xmi:id="_dL0sAkVtEd6-jpZrUPhpCg" name="base_Classifier" association="74bd2c6e-456d-11de-8fc4-c5b21859bec0">
-      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{25BAAF47-BC6F-485e-A23B-F50E832F961D}" name="RuleCondition">
-    <ownedComment xmi:id="_ctct8EVtEd6-jpZrUPhpCg">
-      <body>The condition represents a Boolean expression that is matched against available data to determine whether a ProductionRule can be instantiated </body>
-    </ownedComment>
-    <ownedAttribute xmi:id="_dLXZAkVtEd6-jpZrUPhpCg" name="base_Classifier" association="74b5d95a-456d-11de-8fc4-c5b21859bec0">
-      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Enumeration" xmi:id="{F6AA7565-B919-4429-B956-E11E4E5D1A3D}" name="operationalModeEnumeration">
-    <ownedLiteral xmi:id="_ct_ggEVtEd6-jpZrUPhpCg" name="ForwardChaining"/>
-    <ownedLiteral xmi:id="_cuAHkEVtEd6-jpZrUPhpCg" name="Sequential"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="{C4754617-4012-4a3b-90E5-2BE53BC68C26}" name="AbstractProductionRule">
-    <generalization xmi:id="_dHQ8IEVtEd6-jpZrUPhpCg" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{244A1FC8-316A-44c4-8674-991DB06C70FB}" name="ArithmeticalExpression">
-    <ownedAttribute xmi:id="_dK77NUVtEd6-jpZrUPhpCg" name="base_Constraint" association="74aefb80-456d-11de-8fc4-c5b21859bec0">
-      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Constraint"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="74ba9454-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" aggregation="composite" association="{6EC9F862-BF23-42d8-8A69-320606E7D75F}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLps5kVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLps5UVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedAttribute>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="bc24e8d8-4920-11de-ac34-db7179a8f63b" name="void"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{C086833F-B9A5-4358-97DB-93344B6A5A38}" name="AbstractDerivationRule">
-    <generalization xmi:id="_dHQ8IUVtEd6-jpZrUPhpCg" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{35F8D712-DE97-4c7a-9B81-E140BAE168E9}" name="Conjuction">
-    <ownedComment xmi:id="_cxPo0UVtEd6-jpZrUPhpCg">
-      <body>Quantifier free Conjunction &amp;amp;&amp;amp; boolean  AND</body>
+    <ownedComment xmi:id="_uc-GYEkgEd61gcAb3RwQTw">
+      <body>Not yet implemented</body>
     </ownedComment>
-    <generalization xmi:id="_dHQ8IkVtEd6-jpZrUPhpCg" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
-    <ownedAttribute xmi:id="749a890b-456d-11de-8fc4-c5b21859bec0" name="formulas" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{EDE88D4A-4C22-4011-91BD-09BAD0DC1337}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJphw0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJphwkVtEd6-jpZrUPhpCg"/>
-    </ownedAttribute>
+    <generalization xmi:id="_vBZCEEkgEd61gcAb3RwQTw" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{7601163F-BF0C-44ae-8CB4-CA2098FE5CB5}" name="AbstractIntegrityRule" isAbstract="true">
-    <generalization xmi:id="_dHQ8I0VtEd6-jpZrUPhpCg" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
+    <ownedComment xmi:id="_udcngEkgEd61gcAb3RwQTw">
+      <body>Not yet implemented</body>
+    </ownedComment>
+    <generalization xmi:id="_vBZCEUkgEd61gcAb3RwQTw" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{C4754617-4012-4a3b-90E5-2BE53BC68C26}" name="AbstractProductionRule">
+    <generalization xmi:id="_vBZpIEkgEd61gcAb3RwQTw" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{9817904D-C6CA-47ea-A13E-CE4C9C42AD8E}" name="AbstractReactionRule">
-    <generalization xmi:id="_dHQ8JEVtEd6-jpZrUPhpCg" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{C7C31611-5874-41cb-8C5F-2CE67A2AE7E4}" name="Disjunction">
-    <ownedComment xmi:id="_czcoQEVtEd6-jpZrUPhpCg">
-      <body>Quantifier free alternative .|| or boolean  OR</body>
+    <ownedComment xmi:id="_uelP8UkgEd61gcAb3RwQTw">
+      <body>Not yet implemented</body>
     </ownedComment>
-    <generalization xmi:id="_dHRjMEVtEd6-jpZrUPhpCg" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
+    <generalization xmi:id="_vBZpIUkgEd61gcAb3RwQTw" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{32CD5928-5307-4059-9162-3FFF7F9BB811}" name="AbstractTransformationRule" isAbstract="true">
-    <generalization xmi:id="_dHRjMUVtEd6-jpZrUPhpCg" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
+    <ownedComment xmi:id="_ue_foEkgEd61gcAb3RwQTw">
+      <body>Not yet implemented</body>
+    </ownedComment>
+    <generalization xmi:id="_vBZpIkkgEd61gcAb3RwQTw" general="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{34261421-9E00-4540-A9EE-B453B752842F}" name="Division">
-    <generalization xmi:id="_dHRjMkVtEd6-jpZrUPhpCg" general="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{30DA0660-82BD-4cfc-88E6-995B7523DEF6}" name="addition">
+    <generalization xmi:id="_vBZpI0kgEd61gcAb3RwQTw" general="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{76B7A5E1-1CA3-47db-AD06-D55ED39C8CF6}" name="InvokeActionExpression">
-    <generalization xmi:id="_dJAokEVtEd6-jpZrUPhpCg" general="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}" name="Rule" isAbstract="true">
-    <ownedAttribute xmi:id="{C6D665DC-F044-4da9-9C72-FA0CA2D2A387}" name="ruleID" visibility="public" isLeaf="true" type="749028c0-456d-11de-8fc4-c5b21859bec0" isUnique="false" isReadOnly="true">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJAolEVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJAok0VtEd6-jpZrUPhpCg" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_dLqT8kVtEd6-jpZrUPhpCg" name="base_Classifier" association="74ba9455-456d-11de-8fc4-c5b21859bec0">
-      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{3721D7D2-1278-423b-BAA2-7C13103D3861}" name="LogicalFormula" isAbstract="true">
-    <ownedAttribute xmi:id="74adea08-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" aggregation="composite" association="{84FA47F6-6F4C-48f9-8B48-A7D4DD1530FA}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dK3CtkVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dK3CtUVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_dLulYkVtEd6-jpZrUPhpCg" name="base_Constraint" association="74bba5cb-456d-11de-8fc4-c5b21859bec0">
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{244A1FC8-316A-44c4-8674-991DB06C70FB}" name="ArithmeticalExpression">
+    <ownedAttribute xmi:id="_vB7NkkkgEd61gcAb3RwQTw" name="base_Constraint" association="bc1ef544-4920-11de-ac34-db7179a8f63b">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Constraint"/>
     </ownedAttribute>
   </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{49F7E3DB-619B-4938-8638-631A3ABFD23F}" name="AtLeastQuantifiedFormula">
+    <ownedComment xmi:id="_uhy8AEkgEd61gcAb3RwQTw">
+      <body>reppresents Less than &amp;lt;</body>
+    </ownedComment>
+    <generalization xmi:id="_vBZpJEkgEd61gcAb3RwQTw" general="{91118240-92AD-445b-B843-4B927201D209}"/>
+    <ownedAttribute xmi:id="{2C0C6274-484F-4144-94FA-683CE1BE17A1}" name="minCardinality" visibility="public" isLeaf="true" isUnique="false" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBa3QEkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBaQMUkgEd61gcAb3RwQTw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{6522A2FB-51F2-429b-8E7B-7303A53300A0}" name="AtMostQuantifiedFormula">
+    <ownedComment xmi:id="_uiSrQUkgEd61gcAb3RwQTw">
+      <body>reppresents greaterthan or &amp;gt;</body>
+    </ownedComment>
+    <generalization xmi:id="_vBcFYEkgEd61gcAb3RwQTw" general="{91118240-92AD-445b-B843-4B927201D209}"/>
+    <ownedAttribute xmi:id="{DEE9E534-F205-4466-AA7B-257900B6FF63}" name="maxCardinality" visibility="public" isLeaf="true" isUnique="false" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBcFY0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBcFYkkgEd61gcAb3RwQTw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{35F8D712-DE97-4c7a-9B81-E140BAE168E9}" name="Conjuction">
+    <ownedComment xmi:id="_ujLcEUkgEd61gcAb3RwQTw">
+      <body>Quantifier free Conjunction &amp;amp;&amp;amp; boolean  AND</body>
+    </ownedComment>
+    <generalization xmi:id="_vBdTgEkgEd61gcAb3RwQTw" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
+    <ownedAttribute xmi:id="bc20a2fc-4920-11de-ac34-db7179a8f63b" name="formulas" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{EDE88D4A-4C22-4011-91BD-09BAD0DC1337}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCB7QUkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCB7QEkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{C7C31611-5874-41cb-8C5F-2CE67A2AE7E4}" name="Disjunction">
+    <ownedComment xmi:id="_uj_UYUkgEd61gcAb3RwQTw">
+      <body>Quantifier free alternative .|| or boolean  OR</body>
+    </ownedComment>
+    <generalization xmi:id="_vBdTgUkgEd61gcAb3RwQTw" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
+    <ownedAttribute xmi:id="bc1f4366-4920-11de-ac34-db7179a8f63b" name="formulas" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{FB64BD9D-7ADD-461f-98DB-AE0080E164D4}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB8bs0kgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB8bskkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{34261421-9E00-4540-A9EE-B453B752842F}" name="Division">
+    <generalization xmi:id="_vBdTgkkgEd61gcAb3RwQTw" general="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{260EDBDA-058A-4c3e-8777-B2AF02093FAA}" name="ExistentiallyQuantifiedFormula">
+    <ownedComment xmi:id="_uk0a0UkgEd61gcAb3RwQTw">
+      <body>reppresents equals to or ==</body>
+    </ownedComment>
+    <generalization xmi:id="_vBdTg0kgEd61gcAb3RwQTw" general="{91118240-92AD-445b-B843-4B927201D209}"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{D3D77020-FD51-4d29-9C73-36A84D8D12DB}" name="Implication">
+    <generalization xmi:id="_vBd6kEkgEd61gcAb3RwQTw" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
+    <ownedAttribute xmi:id="bc19c508-4920-11de-ac34-db7179a8f63b" name="consequent" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{1089CD31-93E9-4677-8FD8-BDC94FB73FB3}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBmdc0kgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBmdckkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc1afd8e-4920-11de-ac34-db7179a8f63b" name="antecedent" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{79AF852E-C2C0-40ca-B1AB-6D2AB8BDF628}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBrV80kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBrV8kkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{76B7A5E1-1CA3-47db-AD06-D55ED39C8CF6}" name="InvokeActionExpression">
+    <generalization xmi:id="_vBd6kUkgEd61gcAb3RwQTw" general="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{3721D7D2-1278-423b-BAA2-7C13103D3861}" name="LogicalFormula" isAbstract="true">
+    <ownedComment xmi:id="_unkz4EkgEd61gcAb3RwQTw">
+      <body>aq logical formula contains elements like Conjunction, Disjunction,  at least, etc.</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_vCPWokkgEd61gcAb3RwQTw" name="base_Constraint" association="bc23fe71-4920-11de-ac34-db7179a8f63b">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Constraint"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{6789BA15-40A2-440c-AD78-779828835C37}" name="multiplication">
+    <generalization xmi:id="_vBd6kkkgEd61gcAb3RwQTw" general="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
+  </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{13B82616-A100-45c5-B586-095D1A2E0C3A}" name="Negation">
-    <ownedComment xmi:id="_c7Ao0EVtEd6-jpZrUPhpCg">
+    <ownedComment xmi:id="_uqryQEkgEd61gcAb3RwQTw">
       <body>Quantifier free negation. != or boolean  NOT</body>
     </ownedComment>
-    <generalization xmi:id="_dJB2sEVtEd6-jpZrUPhpCg" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
+    <generalization xmi:id="_vBd6k0kgEd61gcAb3RwQTw" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{96801424-832B-4280-A067-7E2E4F889E72}" name="StrongNegation">
-    <generalization xmi:id="_dJB2sUVtEd6-jpZrUPhpCg" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
-    <generalization xmi:id="_dJB2skVtEd6-jpZrUPhpCg" general="{13B82616-A100-45c5-B586-095D1A2E0C3A}"/>
-    <ownedAttribute xmi:id="74b69cae-456d-11de-8fc4-c5b21859bec0" name="formula" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{05BEB972-12DE-49ec-9F37-7B1D5FD38C4D}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLZ1Q0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLZ1QkVtEd6-jpZrUPhpCg"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{22521815-C2D9-4ca3-B746-7539E5F7C9D1}" name="NegationAsFailure">
+    <generalization xmi:id="_vBd6lEkgEd61gcAb3RwQTw" general="{13B82616-A100-45c5-B586-095D1A2E0C3A}"/>
+    <ownedAttribute xmi:id="bc23893d-4920-11de-ac34-db7179a8f63b" name="formula" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{4FEB610C-1811-4ec7-97E0-D2F001FF5865}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCNhc0kgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCNhckkgEd61gcAb3RwQTw"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{1DBF21AB-4712-4479-9741-686028606ED8}" name="ODatatype">
-    <generalization xmi:id="_dJB2s0VtEd6-jpZrUPhpCg" general="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}"/>
+    <generalization xmi:id="_vBehoEkgEd61gcAb3RwQTw" general="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{5BED6262-2886-44f0-809B-A62951FBCB20}" name="OEntity">
-    <generalization xmi:id="_dJB2tEVtEd6-jpZrUPhpCg" general="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}"/>
-    <ownedAttribute xmi:id="_dL4WYUVtEd6-jpZrUPhpCg" name="base_Classifier" association="74be16d3-456d-11de-8fc4-c5b21859bec0">
+    <generalization xmi:id="_vBehoUkgEd61gcAb3RwQTw" general="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}"/>
+    <ownedAttribute xmi:id="bc1fb899-4920-11de-ac34-db7179a8f63b" name="features" visibility="public" type="{D315A408-8495-4437-BC7F-576C0850BC6A}" association="{35C83890-64F8-45ba-82AD-A7B06C75AEB3}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB-Q5kkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB-Q5UkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vCJQBUkgEd61gcAb3RwQTw" name="base_Classifier" association="bc2250b7-4920-11de-ac34-db7179a8f63b">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc229ed9-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{A83ACA96-2DCF-40ea-9520-32297E5FAA59}" association="{93F9291F-BC52-44fe-B79B-6C0755D0A35D}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCJ3FkkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCJ3FUkgEd61gcAb3RwQTw"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{D315A408-8495-4437-BC7F-576C0850BC6A}" name="OFeature">
     <ownedAttribute xmi:id="{665C41E5-CD2E-437b-B11D-DFCDB22B73C5}" name="name" visibility="public" isOrdered="true" isUnique="false">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJCdwkVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJCdwUVtEd6-jpZrUPhpCg"/>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBehpEkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBeho0kgEd61gcAb3RwQTw"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_dK4Q0kVtEd6-jpZrUPhpCg" name="base_Property" association="74ae1119-456d-11de-8fc4-c5b21859bec0">
+    <ownedAttribute xmi:id="_vCMTUkkgEd61gcAb3RwQTw" name="base_Property" association="bc23140c-4920-11de-ac34-db7179a8f63b">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{C04EE18F-80C6-40fd-85C9-D4D5C000FB7E}" name="OModel">
-    <ownedAttribute xmi:id="_dK4Q1UVtEd6-jpZrUPhpCg" name="base_Package" association="74ae111a-456d-11de-8fc4-c5b21859bec0">
+    <ownedAttribute xmi:id="bc1e58ff-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{CBF9FCEC-66EB-4f32-A6BC-B164A3A212D2}" association="{8F4416A2-F3A2-4c42-807A-1567DECF3056}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB4xVkkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB4xVUkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc1ece33-4920-11de-ac34-db7179a8f63b" name="types" visibility="public" type="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}" association="{8C6EEBD8-4372-44c6-B5F0-9ADEB5889964}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB6mhkkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB6mhUkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vCJQAkkgEd61gcAb3RwQTw" name="base_Package" association="bc2250b6-4920-11de-ac34-db7179a8f63b">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{A83ACA96-2DCF-40ea-9520-32297E5FAA59}" name="OOperation">
-    <ownedAttribute xmi:id="_dLZOMkVtEd6-jpZrUPhpCg" name="base_Operation" association="74b64e8d-456d-11de-8fc4-c5b21859bec0">
+    <ownedAttribute xmi:id="_vB5_c0kgEd61gcAb3RwQTw" name="base_Operation" association="bc1e8011-4920-11de-ac34-db7179a8f63b">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Operation"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc211830-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{5C4885DD-A08B-4d88-8CF8-25270819D997}" association="{E8E04C5B-300A-4d1b-911F-36AA72B99A99}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCDwdkkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCDwdUkgEd61gcAb3RwQTw"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{CBF9FCEC-66EB-4f32-A6BC-B164A3A212D2}" name="OPackage">
-    <generalization xmi:id="_dJDE0EVtEd6-jpZrUPhpCg" general="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}"/>
-    <ownedAttribute xmi:id="_dLoewkVtEd6-jpZrUPhpCg" name="base_Package" association="74ba4632-456d-11de-8fc4-c5b21859bec0">
+    <generalization xmi:id="_vBfvwEkgEd61gcAb3RwQTw" general="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}"/>
+    <ownedAttribute xmi:id="_vCOvkEkgEd61gcAb3RwQTw" name="base_Package" association="bc23b04f-4920-11de-ac34-db7179a8f63b">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc24c1c6-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{5BED6262-2886-44f0-809B-A62951FBCB20}" association="{354A72E0-4700-4725-AFBD-E20C9D6D335F}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCSZ9kkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCSZ9UkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" name="OpaqueExpression">
+    <ownedAttribute xmi:id="{2F49305D-F041-4549-A4CB-BF7513AF84F8}" name="language" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBfvw0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBfvwkkgEd61gcAb3RwQTw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc1aaf6d-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}" aggregation="composite" association="{8B2AFFA0-DDFC-4a49-B7F4-1CF278F67070}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBqH0UkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBqH0EkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc1bc0e2-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}" aggregation="composite" association="{71C2C239-5481-4464-BE24-E0376FA2D5E2}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBuZRkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBuZRUkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc1d6e9a-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{244A1FC8-316A-44c4-8674-991DB06C70FB}" association="{6EC9F862-BF23-42d8-8A69-320606E7D75F}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB1uAEkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB1G8kkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc2229a4-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{84FA47F6-6F4C-48f9-8B48-A7D4DD1530FA}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCIB40kgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCIB4kkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vCOvk0kgEd61gcAb3RwQTw" name="base_Classifier" association="bc23b050-4920-11de-ac34-db7179a8f63b">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{5C4885DD-A08B-4d88-8CF8-25270819D997}" name="OParameter"/>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="{F6AA7565-B919-4429-B956-E11E4E5D1A3D}" name="operationalModeEnumeration">
+    <ownedLiteral xmi:id="_uzmdsEkgEd61gcAb3RwQTw" name="ForwardChaining"/>
+    <ownedLiteral xmi:id="_uzmdsUkgEd61gcAb3RwQTw" name="Sequential"/>
+  </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}" name="OType" isAbstract="true">
     <ownedAttribute xmi:id="{B4605354-9A8D-4003-9D4D-BF4824DC011D}" name="name" visibility="public" isOrdered="true" isUnique="false">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJDE00VtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJDE0kVtEd6-jpZrUPhpCg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBg94kkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBg94UkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vBtLIkkgEd61gcAb3RwQTw" name="base_Classifier" association="bc1b4bb0-4920-11de-ac34-db7179a8f63b">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{30DA0660-82BD-4cfc-88E6-995B7523DEF6}" name="addition">
-    <generalization xmi:id="_dJES8EVtEd6-jpZrUPhpCg" general="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{6789BA15-40A2-440c-AD78-779828835C37}" name="multiplication">
-    <generalization xmi:id="_dJES8UVtEd6-jpZrUPhpCg" general="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{EF8C2814-3246-44a2-BA8F-535218ECE2F7}" name="subtraction">
-    <generalization xmi:id="_dJES8kVtEd6-jpZrUPhpCg" general="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{49F7E3DB-619B-4938-8638-631A3ABFD23F}" name="AtLeastQuantifiedFormula">
-    <ownedComment xmi:id="_dCr-IEVtEd6-jpZrUPhpCg">
-      <body>reppresents Less than &amp;lt;</body>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" name="ProductionRule">
+    <ownedComment xmi:id="_u0dZUUkgEd61gcAb3RwQTw">
+      <body>A ProductionRule is a statement of programming logic that specifies the execution of one or more actions in the case that its conditions are satisfied. The production rule is represented as: for [rule variables] if [condition] then [action-list]. The production Rule is contained in an UML:Action that has Input and output pins.</body>
     </ownedComment>
-    <generalization xmi:id="_dJES80VtEd6-jpZrUPhpCg" general="{91118240-92AD-445b-B843-4B927201D209}"/>
-    <ownedAttribute xmi:id="{2C0C6274-484F-4144-94FA-683CE1BE17A1}" name="minCardinality" visibility="public" isLeaf="true" type="749028c0-456d-11de-8fc4-c5b21859bec0" isUnique="false" isReadOnly="true">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJE6AkVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJE6AUVtEd6-jpZrUPhpCg" value="1"/>
+    <generalization xmi:id="_vBhk8EkgEd61gcAb3RwQTw" general="{C4754617-4012-4a3b-90E5-2BE53BC68C26}"/>
+    <ownedAttribute xmi:id="{0356FD67-825A-43f5-8005-B1524228D888}" name="priority" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBiMAkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBiMAUkgEd61gcAb3RwQTw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc1c0f03-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{25BAAF47-BC6F-485e-A23B-F50E832F961D}" association="{5F1DC3C9-D8D7-4719-8C60-284203939E08}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBwOcEkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBvnYkkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc1d2078-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}" association="{820AD09A-0B56-4d5a-89E0-145AFFF8F390}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBz400kgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBz40kkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc202dcb-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}" association="{7F3D83AB-A29A-4212-ACD4-CA978B03BE5F}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCAGFkkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCAGFUkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc21b471-4920-11de-ac34-db7179a8f63b" name="producedAction" visibility="public" type="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}" association="{300ECD50-F8E7-49ea-8FF0-574119FAB2EA}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCGMsEkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCFlokkgEd61gcAb3RwQTw"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{6522A2FB-51F2-429b-8E7B-7303A53300A0}" name="AtMostQuantifiedFormula">
-    <ownedComment xmi:id="_dDIqEEVtEd6-jpZrUPhpCg">
-      <body>reppresents greaterthan or &amp;gt;</body>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{47D7D02A-B6D0-4fa7-817B-7B59B63687EB}" name="ProductionRuleset">
+    <ownedComment xmi:id="_u2Yr8EkgEd61gcAb3RwQTw">
+      <body>The ProductionRuleset represents a ruleset for production rules . it is a Behavior in UML terms (or a service implementation in SOA terminology).  &lt;b>Constraints &lt;/b>A ProductionRuleset may only contain ProductionRules </body>
     </ownedComment>
-    <generalization xmi:id="_dJFhEEVtEd6-jpZrUPhpCg" general="{91118240-92AD-445b-B843-4B927201D209}"/>
-    <ownedAttribute xmi:id="{DEE9E534-F205-4466-AA7B-257900B6FF63}" name="maxCardinality" visibility="public" isLeaf="true" type="749028c0-456d-11de-8fc4-c5b21859bec0" isUnique="false" isReadOnly="true">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJFhE0VtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJFhEkVtEd6-jpZrUPhpCg" value="1"/>
+    <generalization xmi:id="_vBizEEkgEd61gcAb3RwQTw" general="{66F8706E-E139-4523-998A-2B6076D1B76A}"/>
+    <ownedAttribute xmi:id="{5DEA0BD0-C33C-4fd6-BE0B-F240844CE789}" name="operationalMode" visibility="public" type="{F6AA7565-B919-4429-B956-E11E4E5D1A3D}" isUnique="false">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBizE0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBizEkkgEd61gcAb3RwQTw" value="1"/>
     </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Stereotype" xmi:id="{260EDBDA-058A-4c3e-8777-B2AF02093FAA}" name="ExistentiallyQuantifiedFormula">
-    <ownedComment xmi:id="_dDlWAEVtEd6-jpZrUPhpCg">
-      <body>reppresents equals to or ==</body>
-    </ownedComment>
-    <generalization xmi:id="_dJGvMEVtEd6-jpZrUPhpCg" general="{91118240-92AD-445b-B843-4B927201D209}"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{91118240-92AD-445b-B843-4B927201D209}" name="QuantifiedFormula" isAbstract="true">
-    <generalization xmi:id="_dJGvMUVtEd6-jpZrUPhpCg" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
-    <ownedAttribute xmi:id="74aed46d-456d-11de-8fc4-c5b21859bec0" name="formula" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{76919B8E-6CB0-4e4f-8E02-506626B665C4}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dK6tE0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dK6tEkVtEd6-jpZrUPhpCg"/>
+    <generalization xmi:id="_vBjaIEkgEd61gcAb3RwQTw" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
+    <ownedAttribute xmi:id="bc1a132a-4920-11de-ac34-db7179a8f63b" name="formula" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{76919B8E-6CB0-4e4f-8E02-506626B665C4}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBoSoUkgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBoSoEkgEd61gcAb3RwQTw"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_dLHhYkVtEd6-jpZrUPhpCg" name="base_Constraint" association="74b1e1b5-456d-11de-8fc4-c5b21859bec0">
+    <ownedAttribute xmi:id="_vB70okkgEd61gcAb3RwQTw" name="base_Constraint" association="bc1ef545-4920-11de-ac34-db7179a8f63b">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Constraint"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="{ECF4E6B7-F339-4ec3-AFA2-98A2C35DBBFD}" name="string"/>
-  <packagedElement xmi:type="uml:Class" xmi:id="{A5555E3E-BF3C-4cb8-808F-4585C79A1446}" name="integer"/>
-  <packagedElement xmi:type="uml:Class" xmi:id="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}" name="ActionExpression" isAbstract="true"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="{93F9291F-BC52-44fe-B79B-6C0755D0A35D}" name="" memberEnd="7491fd81-456d-11de-8fc4-c5b21859bec0 74922492-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="7491fd81-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{5BED6262-2886-44f0-809B-A62951FBCB20}" aggregation="composite" association="{93F9291F-BC52-44fe-B79B-6C0755D0A35D}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJHWQ0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJHWQkVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-    <ownedEnd xmi:id="74922492-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{A83ACA96-2DCF-40ea-9520-32297E5FAA59}" association="{93F9291F-BC52-44fe-B79B-6C0755D0A35D}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJHWRkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJHWRUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="{69DB25B6-C6B6-4f23-BA15-F9751E237C12}" name="ProductionRuleSet">
-    <generalization xmi:id="_dOLccEVtEd6-jpZrUPhpCg" general="{76096AA4-9631-4ce7-B080-EBC2CD05695C}"/>
-    <ownedAttribute xmi:id="74990265-456d-11de-8fc4-c5b21859bec0" name="rules" visibility="public" type="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" association="{0347B6F0-5FA7-4596-BF5F-03F37DF4EA32}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJjbI0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJjbIkVtEd6-jpZrUPhpCg"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}" name="Rule" isAbstract="true">
+    <ownedAttribute xmi:id="{C6D665DC-F044-4da9-9C72-FA0CA2D2A387}" name="ruleID" visibility="public" isLeaf="true" isUnique="false" isReadOnly="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBkBMkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBkBMUkgEd61gcAb3RwQTw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vByqskkgEd61gcAb3RwQTw" name="base_Classifier" association="bc1cab47-4920-11de-ac34-db7179a8f63b">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc1e0add-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{66F8706E-E139-4523-998A-2B6076D1B76A}" aggregation="composite" association="{008DFBBC-DADA-4059-880D-91EFDF8D2070}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB28JkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB28JUkgEd61gcAb3RwQTw" value="1"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{0347B6F0-5FA7-4596-BF5F-03F37DF4EA32}" name="A_ProductionRuleSet_rules" memberEnd="74990265-456d-11de-8fc4-c5b21859bec0 74990266-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74990266-456d-11de-8fc4-c5b21859bec0" name="oppositeOf_rules" visibility="public" type="{69DB25B6-C6B6-4f23-BA15-F9751E237C12}" aggregation="composite" association="{0347B6F0-5FA7-4596-BF5F-03F37DF4EA32}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJjbJkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJjbJUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{95ECA135-76CA-4347-A0D7-280C13B9171A}" name="" memberEnd="74997797-456d-11de-8fc4-c5b21859bec0 74997798-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74997797-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" association="{95ECA135-76CA-4347-A0D7-280C13B9171A}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJlQU0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJlQUkVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{354A72E0-4700-4725-AFBD-E20C9D6D335F}" name="" memberEnd="749a13d9-456d-11de-8fc4-c5b21859bec0 749a3aea-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="749a13d9-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{CBF9FCEC-66EB-4f32-A6BC-B164A3A212D2}" aggregation="composite" association="{354A72E0-4700-4725-AFBD-E20C9D6D335F}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJmec0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJmeckVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-    <ownedEnd xmi:id="749a3aea-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{5BED6262-2886-44f0-809B-A62951FBCB20}" association="{354A72E0-4700-4725-AFBD-E20C9D6D335F}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJmedkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJmedUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{EDE88D4A-4C22-4011-91BD-09BAD0DC1337}" name="A_Conjuction_formulas" memberEnd="749a890b-456d-11de-8fc4-c5b21859bec0 749a890c-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="749a890c-456d-11de-8fc4-c5b21859bec0" name="oppositeOf_formulas" visibility="public" type="{35F8D712-DE97-4c7a-9B81-E140BAE168E9}" aggregation="composite" association="{EDE88D4A-4C22-4011-91BD-09BAD0DC1337}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJphxkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJphxUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{E8E04C5B-300A-4d1b-911F-36AA72B99A99}" name="" memberEnd="749afe3d-456d-11de-8fc4-c5b21859bec0 749afe3e-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="749afe3d-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{A83ACA96-2DCF-40ea-9520-32297E5FAA59}" aggregation="composite" association="{E8E04C5B-300A-4d1b-911F-36AA72B99A99}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJrW80VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJrW8kVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-    <ownedEnd xmi:id="749afe3e-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{5C4885DD-A08B-4d88-8CF8-25270819D997}" association="{E8E04C5B-300A-4d1b-911F-36AA72B99A99}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dJrW9kVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dJrW9UVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="{95ED29D3-C8BC-40e9-ACDA-B76A32EC80AD}" name="IntegrityRule" isAbstract="true">
-    <generalization xmi:id="_dOLccUVtEd6-jpZrUPhpCg" general="{7601163F-BF0C-44ae-8CB4-CA2098FE5CB5}"/>
-    <ownedAttribute xmi:id="74ad74d5-456d-11de-8fc4-c5b21859bec0" name="constraint" visibility="public" type="{91118240-92AD-445b-B843-4B927201D209}" association="{71D48937-CFB3-4786-8FE4-5C51981D4D07}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dK1Ng0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dK1NgkVtEd6-jpZrUPhpCg"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}" name="RuleAction">
+    <ownedComment xmi:id="_u5g4cUkgEd61gcAb3RwQTw">
+      <body>The action association defines an ordered list of actions </body>
+    </ownedComment>
+    <ownedAttribute xmi:id="bc1a885c-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" association="{8B2AFFA0-DDFC-4a49-B7F4-1CF278F67070}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBpgw0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBpgwkkgEd61gcAb3RwQTw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vCToEkkgEd61gcAb3RwQTw" name="base_Classifier" association="bc24e8d7-4920-11de-ac34-db7179a8f63b">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{71D48937-CFB3-4786-8FE4-5C51981D4D07}" name="A_IntegrityRule_constraint" memberEnd="74ad74d5-456d-11de-8fc4-c5b21859bec0 74ad9be6-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74ad9be6-456d-11de-8fc4-c5b21859bec0" name="oppositeOf_constraint" visibility="public" type="{95ED29D3-C8BC-40e9-ACDA-B76A32EC80AD}" association="{71D48937-CFB3-4786-8FE4-5C51981D4D07}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dK1NhkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dK1NhUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{84FA47F6-6F4C-48f9-8B48-A7D4DD1530FA}" name="" memberEnd="74adea07-456d-11de-8fc4-c5b21859bec0 74adea08-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74adea07-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{84FA47F6-6F4C-48f9-8B48-A7D4DD1530FA}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dK3Cs0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dK3CskVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74ae1119-456d-11de-8fc4-c5b21859bec0" name="Property_OFeature" memberEnd="_dK4Q0UVtEd6-jpZrUPhpCg _dK4Q0kVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dK4Q0UVtEd6-jpZrUPhpCg" name="extension_OFeature" type="{D315A408-8495-4437-BC7F-576C0850BC6A}" aggregation="composite" association="74ae1119-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74ae111a-456d-11de-8fc4-c5b21859bec0" name="Package_OModel" memberEnd="_dK4Q1EVtEd6-jpZrUPhpCg _dK4Q1UVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dK4Q1EVtEd6-jpZrUPhpCg" name="extension_OModel" type="{C04EE18F-80C6-40fd-85C9-D4D5C000FB7E}" aggregation="composite" association="74ae111a-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{7F3D83AB-A29A-4212-ACD4-CA978B03BE5F}" name="Action" memberEnd="74ae5f3b-456d-11de-8fc4-c5b21859bec0 74ae864c-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74ae5f3b-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" aggregation="composite" association="{7F3D83AB-A29A-4212-ACD4-CA978B03BE5F}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dK4340VtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dK434kVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{76919B8E-6CB0-4e4f-8E02-506626B665C4}" name="A_QuantifiedFormula_formula" memberEnd="74aed46d-456d-11de-8fc4-c5b21859bec0 74aed46e-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74aed46e-456d-11de-8fc4-c5b21859bec0" name="oppositeOf_formula" visibility="public" type="{91118240-92AD-445b-B843-4B927201D209}" aggregation="composite" association="{76919B8E-6CB0-4e4f-8E02-506626B665C4}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dK6tFkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dK6tFUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74aefb7f-456d-11de-8fc4-c5b21859bec0" name="Classifier_ProductionRuleset" memberEnd="_dK77MUVtEd6-jpZrUPhpCg _dK77MkVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dK77MUVtEd6-jpZrUPhpCg" name="extension_ProductionRuleset" type="{47D7D02A-B6D0-4fa7-817B-7B59B63687EB}" aggregation="composite" association="74aefb7f-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74aefb80-456d-11de-8fc4-c5b21859bec0" name="Constraint_ArithmeticalExpression" memberEnd="_dK77NEVtEd6-jpZrUPhpCg _dK77NUVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dK77NEVtEd6-jpZrUPhpCg" name="extension_ArithmeticalExpression" type="{244A1FC8-316A-44c4-8674-991DB06C70FB}" aggregation="composite" association="74aefb80-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="{576221DC-BAB3-4c6d-83D8-266443C91C98}" name="Disjunction">
-    <generalization xmi:id="_dOLcckVtEd6-jpZrUPhpCg" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
-    <ownedAttribute xmi:id="74b16c81-456d-11de-8fc4-c5b21859bec0" name="formulas" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{FB64BD9D-7ADD-461f-98DB-AE0080E164D4}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLFFI0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLFFIkVtEd6-jpZrUPhpCg"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{25BAAF47-BC6F-485e-A23B-F50E832F961D}" name="RuleCondition">
+    <ownedComment xmi:id="_u6AAoEkgEd61gcAb3RwQTw">
+      <body>The condition represents a Boolean expression that is matched against available data to determine whether a ProductionRule can be instantiated </body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_vCCiUkkgEd61gcAb3RwQTw" name="base_Classifier" association="bc20a2fe-4920-11de-ac34-db7179a8f63b">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc23140a-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" association="{95ECA135-76CA-4347-A0D7-280C13B9171A}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCLsQ0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCLsQkkgEd61gcAb3RwQTw" value="1"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{FB64BD9D-7ADD-461f-98DB-AE0080E164D4}" name="A_Disjunction_formulas" memberEnd="74b16c81-456d-11de-8fc4-c5b21859bec0 74b16c82-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74b16c82-456d-11de-8fc4-c5b21859bec0" name="oppositeOf_formulas" visibility="public" type="{576221DC-BAB3-4c6d-83D8-266443C91C98}" aggregation="composite" association="{FB64BD9D-7ADD-461f-98DB-AE0080E164D4}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLFFJkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLFFJUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{35C83890-64F8-45ba-82AD-A7B06C75AEB3}" name="" memberEnd="74b1baa3-456d-11de-8fc4-c5b21859bec0 74b1e1b4-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74b1baa3-456d-11de-8fc4-c5b21859bec0" name="" type="{5BED6262-2886-44f0-809B-A62951FBCB20}" aggregation="composite" association="{35C83890-64F8-45ba-82AD-A7B06C75AEB3}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLG6U0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLG6UkVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-    <ownedEnd xmi:id="74b1e1b4-456d-11de-8fc4-c5b21859bec0" name="features" visibility="public" type="{D315A408-8495-4437-BC7F-576C0850BC6A}" association="{35C83890-64F8-45ba-82AD-A7B06C75AEB3}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLG6VkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLG6VUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74b1e1b5-456d-11de-8fc4-c5b21859bec0" name="Constraint_QuantifiedFormula" memberEnd="_dLHhYUVtEd6-jpZrUPhpCg _dLHhYkVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dLHhYUVtEd6-jpZrUPhpCg" name="extension_QuantifiedFormula" type="{91118240-92AD-445b-B843-4B927201D209}" aggregation="composite" association="74b1e1b5-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{8B2AFFA0-DDFC-4a49-B7F4-1CF278F67070}" name="" memberEnd="74b256e6-456d-11de-8fc4-c5b21859bec0 74b256e7-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74b256e6-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" association="{8B2AFFA0-DDFC-4a49-B7F4-1CF278F67070}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLIvg0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLIvgkVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="{D3D77020-FD51-4d29-9C73-36A84D8D12DB}" name="Implication">
-    <generalization xmi:id="_dOMDgEVtEd6-jpZrUPhpCg" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
-    <ownedAttribute xmi:id="74b5b248-456d-11de-8fc4-c5b21859bec0" name="consequent" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{1089CD31-93E9-4677-8FD8-BDC94FB73FB3}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLWx8EVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLWK4kVtEd6-jpZrUPhpCg"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{66F8706E-E139-4523-998A-2B6076D1B76A}" name="Ruleset">
+    <ownedAttribute xmi:id="bc1c8435-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}" association="{E151AF2D-2EC5-42ee-82B5-F294F50C84B0}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBxck0kgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBxckkkgEd61gcAb3RwQTw"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="74bd055c-456d-11de-8fc4-c5b21859bec0" name="antecedent" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{79AF852E-C2C0-40ca-B1AB-6D2AB8BDF628}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLvzg0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLvzgkVtEd6-jpZrUPhpCg"/>
+    <ownedAttribute xmi:id="bc1de3cc-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}" association="{008DFBBC-DADA-4059-880D-91EFDF8D2070}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB28I0kgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB28IkkgEd61gcAb3RwQTw"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vB5_cEkgEd61gcAb3RwQTw" name="base_Classifier" association="bc1e8010-4920-11de-ac34-db7179a8f63b">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{1089CD31-93E9-4677-8FD8-BDC94FB73FB3}" name="A_Implication_consequent" memberEnd="74b5b248-456d-11de-8fc4-c5b21859bec0 74b5d959-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74b5d959-456d-11de-8fc4-c5b21859bec0" name="oppositeOf_consequent" visibility="public" type="{D3D77020-FD51-4d29-9C73-36A84D8D12DB}" aggregation="composite" association="{1089CD31-93E9-4677-8FD8-BDC94FB73FB3}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLWx80VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLWx8kVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74b5d95a-456d-11de-8fc4-c5b21859bec0" name="Classifier_RuleCondition" memberEnd="_dLXZAUVtEd6-jpZrUPhpCg _dLXZAkVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dLXZAUVtEd6-jpZrUPhpCg" name="extension_RuleCondition" type="{25BAAF47-BC6F-485e-A23B-F50E832F961D}" aggregation="composite" association="74b5d95a-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{8C6EEBD8-4372-44c6-B5F0-9ADEB5889964}" name="" memberEnd="74b6277b-456d-11de-8fc4-c5b21859bec0 74b64e8c-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74b6277b-456d-11de-8fc4-c5b21859bec0" name="" type="{C04EE18F-80C6-40fd-85C9-D4D5C000FB7E}" aggregation="composite" association="{8C6EEBD8-4372-44c6-B5F0-9ADEB5889964}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLYnI0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLYnIkVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-    <ownedEnd xmi:id="74b64e8c-456d-11de-8fc4-c5b21859bec0" name="types" visibility="public" type="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}" association="{8C6EEBD8-4372-44c6-B5F0-9ADEB5889964}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLYnJkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLYnJUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74b64e8d-456d-11de-8fc4-c5b21859bec0" name="Operation_OOperation" memberEnd="_dLZOMUVtEd6-jpZrUPhpCg _dLZOMkVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dLZOMUVtEd6-jpZrUPhpCg" name="extension_OOperation" type="{A83ACA96-2DCF-40ea-9520-32297E5FAA59}" aggregation="composite" association="74b64e8d-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{05BEB972-12DE-49ec-9F37-7B1D5FD38C4D}" name="A_StrongNegation_formula" memberEnd="74b69cae-456d-11de-8fc4-c5b21859bec0 74b6c3bf-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74b6c3bf-456d-11de-8fc4-c5b21859bec0" name="oppositeOf_formula" visibility="public" type="{96801424-832B-4280-A067-7E2E4F889E72}" aggregation="composite" association="{05BEB972-12DE-49ec-9F37-7B1D5FD38C4D}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLacUUVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLacUEVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="{22521815-C2D9-4ca3-B746-7539E5F7C9D1}" name="NegationAsFailure">
-    <generalization xmi:id="_dOMDgUVtEd6-jpZrUPhpCg" general="{13B82616-A100-45c5-B586-095D1A2E0C3A}"/>
-    <generalization xmi:id="_dOMDgkVtEd6-jpZrUPhpCg" general="{3721D7D2-1278-423b-BAA2-7C13103D3861}"/>
-    <ownedAttribute xmi:id="74ba1f20-456d-11de-8fc4-c5b21859bec0" name="formula" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{4FEB610C-1811-4ec7-97E0-D2F001FF5865}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLn3skVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLn3sUVtEd6-jpZrUPhpCg"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}" name="RuleVariable">
+    <ownedComment xmi:id="_u7OvsEkgEd61gcAb3RwQTw">
+      <body>The variable represents a programming construct to hold values for use in executing a ruleset. The values must conform to the variable's type. </body>
+    </ownedComment>
+    <ownedAttribute xmi:id="bc1bc0e1-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" association="{71C2C239-5481-4464-BE24-E0376FA2D5E2}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBuZQ0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBuZQkkgEd61gcAb3RwQTw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="bc1c8436-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{66F8706E-E139-4523-998A-2B6076D1B76A}" aggregation="composite" association="{E151AF2D-2EC5-42ee-82B5-F294F50C84B0}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBxclkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBxclUkgEd61gcAb3RwQTw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vCHa0UkgEd61gcAb3RwQTw" name="base_Classifier" association="bc21db83-4920-11de-ac34-db7179a8f63b">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Classifier"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{4FEB610C-1811-4ec7-97E0-D2F001FF5865}" name="A_NegationAsFailure_formula" memberEnd="74ba1f20-456d-11de-8fc4-c5b21859bec0 74ba1f21-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74ba1f21-456d-11de-8fc4-c5b21859bec0" name="oppositeOf_formula" visibility="public" type="{22521815-C2D9-4ca3-B746-7539E5F7C9D1}" aggregation="composite" association="{4FEB610C-1811-4ec7-97E0-D2F001FF5865}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLn3tUVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLn3tEVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74ba4632-456d-11de-8fc4-c5b21859bec0" name="Package_OPackage" memberEnd="_dLoewUVtEd6-jpZrUPhpCg _dLoewkVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dLoewUVtEd6-jpZrUPhpCg" name="extension_OPackage" type="{CBF9FCEC-66EB-4f32-A6BC-B164A3A212D2}" aggregation="composite" association="74ba4632-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{6EC9F862-BF23-42d8-8A69-320606E7D75F}" name="" memberEnd="74ba9453-456d-11de-8fc4-c5b21859bec0 74ba9454-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74ba9453-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{244A1FC8-316A-44c4-8674-991DB06C70FB}" association="{6EC9F862-BF23-42d8-8A69-320606E7D75F}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLps40VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLps4kVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74ba9455-456d-11de-8fc4-c5b21859bec0" name="Classifier_Rule" memberEnd="_dLqT8UVtEd6-jpZrUPhpCg _dLqT8kVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dLqT8UVtEd6-jpZrUPhpCg" name="extension_Rule" type="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}" aggregation="composite" association="74ba9455-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{820AD09A-0B56-4d5a-89E0-145AFFF8F390}" name="Binding" memberEnd="74bb0986-456d-11de-8fc4-c5b21859bec0 74bb0987-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74bb0987-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" aggregation="composite" association="{820AD09A-0B56-4d5a-89E0-145AFFF8F390}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLriFkVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLriFUVtEd6-jpZrUPhpCg" value="1"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74bb0988-456d-11de-8fc4-c5b21859bec0" name="Classifier_OpaqueExpression" memberEnd="_dLsJIUVtEd6-jpZrUPhpCg _dLsJIkVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dLsJIUVtEd6-jpZrUPhpCg" name="extension_OpaqueExpression" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" aggregation="composite" association="74bb0988-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{71C2C239-5481-4464-BE24-E0376FA2D5E2}" name="" memberEnd="74bb7eb9-456d-11de-8fc4-c5b21859bec0 74bb7eba-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74bb7eb9-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" association="{71C2C239-5481-4464-BE24-E0376FA2D5E2}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLtXQ0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLtXQkVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74bba5cb-456d-11de-8fc4-c5b21859bec0" name="Constraint_LogicalFormula" memberEnd="_dLulYUVtEd6-jpZrUPhpCg _dLulYkVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dLulYUVtEd6-jpZrUPhpCg" name="extension_LogicalFormula" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" aggregation="composite" association="74bba5cb-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{79AF852E-C2C0-40ca-B1AB-6D2AB8BDF628}" name="A_Implication_antecedent" memberEnd="74bd055c-456d-11de-8fc4-c5b21859bec0 74bd2c6d-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74bd2c6d-456d-11de-8fc4-c5b21859bec0" name="oppositeOf_antecedent" visibility="public" type="{D3D77020-FD51-4d29-9C73-36A84D8D12DB}" aggregation="composite" association="{79AF852E-C2C0-40ca-B1AB-6D2AB8BDF628}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dLvzhkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dLvzhUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74bd2c6e-456d-11de-8fc4-c5b21859bec0" name="Classifier_RuleAction" memberEnd="_dL0sAUVtEd6-jpZrUPhpCg _dL0sAkVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dL0sAUVtEd6-jpZrUPhpCg" name="extension_RuleAction" type="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}" aggregation="composite" association="74bd2c6e-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{5F1DC3C9-D8D7-4719-8C60-284203939E08}" name="Condition" memberEnd="74bd7a8f-456d-11de-8fc4-c5b21859bec0 74bda1a0-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74bda1a0-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" aggregation="composite" association="{5F1DC3C9-D8D7-4719-8C60-284203939E08}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dL16I0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dL16IkVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="{8F4416A2-F3A2-4c42-807A-1567DECF3056}" name="" memberEnd="74bdefc1-456d-11de-8fc4-c5b21859bec0 74bdefc2-456d-11de-8fc4-c5b21859bec0">
-    <ownedEnd xmi:id="74bdefc1-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{C04EE18F-80C6-40fd-85C9-D4D5C000FB7E}" aggregation="composite" association="{8F4416A2-F3A2-4c42-807A-1567DECF3056}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dL3IQ0VtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dL3IQkVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-    <ownedEnd xmi:id="74bdefc2-456d-11de-8fc4-c5b21859bec0" name="" visibility="public" type="{CBF9FCEC-66EB-4f32-A6BC-B164A3A212D2}" association="{8F4416A2-F3A2-4c42-807A-1567DECF3056}">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dL3IRkVtEd6-jpZrUPhpCg" value="*"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dL3IRUVtEd6-jpZrUPhpCg"/>
-    </ownedEnd>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74be16d3-456d-11de-8fc4-c5b21859bec0" name="Classifier_OEntity" memberEnd="_dL4WYEVtEd6-jpZrUPhpCg _dL4WYUVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dL4WYEVtEd6-jpZrUPhpCg" name="extension_OEntity" type="{5BED6262-2886-44f0-809B-A62951FBCB20}" aggregation="composite" association="74be16d3-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Extension" xmi:id="74be16d4-456d-11de-8fc4-c5b21859bec0" name="Classifier_RuleVariable" memberEnd="_dL4WY0VtEd6-jpZrUPhpCg _dL4WZEVtEd6-jpZrUPhpCg">
-    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_dL4WY0VtEd6-jpZrUPhpCg" name="extension_RuleVariable" type="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}" aggregation="composite" association="74be16d4-456d-11de-8fc4-c5b21859bec0"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="{76096AA4-9631-4ce7-B080-EBC2CD05695C}" name="RuleSet" isAbstract="true">
-    <ownedAttribute xmi:id="{B88D6031-C676-41c6-A8FF-0E5747FE2F1B}" name="ruleSetID" visibility="public" isLeaf="true" type="749028c0-456d-11de-8fc4-c5b21859bec0" isUnique="false" isReadOnly="true">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_dOMDhUVtEd6-jpZrUPhpCg" value="1"/>
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_dOMDhEVtEd6-jpZrUPhpCg"/>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{96801424-832B-4280-A067-7E2E4F889E72}" name="StrongNegation">
+    <generalization xmi:id="_vBkoQEkgEd61gcAb3RwQTw" general="{13B82616-A100-45c5-B586-095D1A2E0C3A}"/>
+    <ownedAttribute xmi:id="bc244c93-4920-11de-ac34-db7179a8f63b" name="formula" visibility="public" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" association="{05BEB972-12DE-49ec-9F37-7B1D5FD38C4D}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCQkw0kgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCQkwkkgEd61gcAb3RwQTw"/>
     </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{EF8C2814-3246-44a2-BA8F-535218ECE2F7}" name="subtraction">
+    <generalization xmi:id="_vBkoQUkgEd61gcAb3RwQTw" general="{244A1FC8-316A-44c4-8674-991DB06C70FB}"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}" name="ActionExpression" isAbstract="true">
+    <ownedAttribute xmi:id="_vCP9skkgEd61gcAb3RwQTw" name="base_Action" association="bc23fe72-4920-11de-ac34-db7179a8f63b">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Action"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{45F70288-502E-40b3-B351-DA1A4AE48E30}" name="AssignActionExpression">
+    <generalization xmi:id="_vBlPUEkgEd61gcAb3RwQTw" general="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{8FCD2217-DC33-4a63-82E7-3AD99C7C2AE7}" name="CreateActionExpression">
+    <generalization xmi:id="_vBlPUUkgEd61gcAb3RwQTw" general="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{AF8CC5CD-CA9B-4725-98D6-E1BE951E6772}" name="DeleteActionExpression">
+    <generalization xmi:id="_vBlPUkkgEd61gcAb3RwQTw" general="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="{475E8505-1843-4565-95FD-3F411E6E84B2}" name="MessageAction">
+    <generalization xmi:id="_vBlPU0kgEd61gcAb3RwQTw" general="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{1089CD31-93E9-4677-8FD8-BDC94FB73FB3}" name="A_Implication_consequent" memberEnd="bc19c508-4920-11de-ac34-db7179a8f63b bc19c509-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc19c509-4920-11de-ac34-db7179a8f63b" name="oppositeOf_consequent" visibility="public" type="{D3D77020-FD51-4d29-9C73-36A84D8D12DB}" aggregation="composite" association="{1089CD31-93E9-4677-8FD8-BDC94FB73FB3}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBmddkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBmddUkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{76919B8E-6CB0-4e4f-8E02-506626B665C4}" name="A_QuantifiedFormula_formula" memberEnd="bc1a132a-4920-11de-ac34-db7179a8f63b bc1a3a3b-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc1a3a3b-4920-11de-ac34-db7179a8f63b" name="oppositeOf_formula" visibility="public" type="{91118240-92AD-445b-B843-4B927201D209}" aggregation="composite" association="{76919B8E-6CB0-4e4f-8E02-506626B665C4}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBoSpEkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBoSo0kgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{8B2AFFA0-DDFC-4a49-B7F4-1CF278F67070}" name="A_RuleAction_OpaqueExpression" memberEnd="bc1a885c-4920-11de-ac34-db7179a8f63b bc1aaf6d-4920-11de-ac34-db7179a8f63b"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="{79AF852E-C2C0-40ca-B1AB-6D2AB8BDF628}" name="A_Implication_antecedent" memberEnd="bc1afd8e-4920-11de-ac34-db7179a8f63b bc1b4baf-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc1b4baf-4920-11de-ac34-db7179a8f63b" name="oppositeOf_antecedent" visibility="public" type="{D3D77020-FD51-4d29-9C73-36A84D8D12DB}" aggregation="composite" association="{79AF852E-C2C0-40ca-B1AB-6D2AB8BDF628}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBrV9kkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBrV9UkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc1b4bb0-4920-11de-ac34-db7179a8f63b" name="Classifier_OType" memberEnd="_vBtLIUkgEd61gcAb3RwQTw _vBtLIkkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vBtLIUkgEd61gcAb3RwQTw" name="extension_OType" type="{A2E49C4C-07F6-4ffa-A1F7-275DF2987484}" aggregation="composite" association="bc1b4bb0-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{71C2C239-5481-4464-BE24-E0376FA2D5E2}" name="A_RuleVariable_OpaqueExpression" memberEnd="bc1bc0e1-4920-11de-ac34-db7179a8f63b bc1bc0e2-4920-11de-ac34-db7179a8f63b"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="{5F1DC3C9-D8D7-4719-8C60-284203939E08}" name="Condition" memberEnd="bc1c0f03-4920-11de-ac34-db7179a8f63b bc1c3614-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc1c3614-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" aggregation="composite" association="{5F1DC3C9-D8D7-4719-8C60-284203939E08}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBwOc0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBwOckkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{E151AF2D-2EC5-42ee-82B5-F294F50C84B0}" name="A_Ruleset_RuleVariable" memberEnd="bc1c8435-4920-11de-ac34-db7179a8f63b bc1c8436-4920-11de-ac34-db7179a8f63b"/>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc1cab47-4920-11de-ac34-db7179a8f63b" name="Classifier_Rule" memberEnd="_vByqsUkgEd61gcAb3RwQTw _vByqskkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vByqsUkgEd61gcAb3RwQTw" name="extension_Rule" type="{62B90AF1-F5FE-48c3-8D5A-85691C9533AF}" aggregation="composite" association="bc1cab47-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{820AD09A-0B56-4d5a-89E0-145AFFF8F390}" name="Binding" memberEnd="bc1d2078-4920-11de-ac34-db7179a8f63b bc1d2079-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc1d2079-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" aggregation="composite" association="{820AD09A-0B56-4d5a-89E0-145AFFF8F390}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vBz41kkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vBz41UkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{6EC9F862-BF23-42d8-8A69-320606E7D75F}" name="A_OpaqueExpression_OpaqueExpression" memberEnd="bc1d6e9a-4920-11de-ac34-db7179a8f63b bc1d95ab-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc1d95ab-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" aggregation="composite" association="{6EC9F862-BF23-42d8-8A69-320606E7D75F}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB1uA0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB1uAkkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{008DFBBC-DADA-4059-880D-91EFDF8D2070}" name="A_Ruleset_Rule" memberEnd="bc1de3cc-4920-11de-ac34-db7179a8f63b bc1e0add-4920-11de-ac34-db7179a8f63b"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="{8F4416A2-F3A2-4c42-807A-1567DECF3056}" name="A_OModel_OPackage" memberEnd="bc1e58fe-4920-11de-ac34-db7179a8f63b bc1e58ff-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc1e58fe-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{C04EE18F-80C6-40fd-85C9-D4D5C000FB7E}" aggregation="composite" association="{8F4416A2-F3A2-4c42-807A-1567DECF3056}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB4xU0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB4xUkkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc1e8010-4920-11de-ac34-db7179a8f63b" name="Classifier_Ruleset" memberEnd="_vB5YYUkgEd61gcAb3RwQTw _vB5_cEkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vB5YYUkgEd61gcAb3RwQTw" name="extension_Ruleset" type="{66F8706E-E139-4523-998A-2B6076D1B76A}" aggregation="composite" association="bc1e8010-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc1e8011-4920-11de-ac34-db7179a8f63b" name="Operation_OOperation" memberEnd="_vB5_ckkgEd61gcAb3RwQTw _vB5_c0kgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vB5_ckkgEd61gcAb3RwQTw" name="extension_OOperation" type="{A83ACA96-2DCF-40ea-9520-32297E5FAA59}" aggregation="composite" association="bc1e8011-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{8C6EEBD8-4372-44c6-B5F0-9ADEB5889964}" name="A_OModel_OType" memberEnd="bc1ece32-4920-11de-ac34-db7179a8f63b bc1ece33-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc1ece32-4920-11de-ac34-db7179a8f63b" name="" type="{C04EE18F-80C6-40fd-85C9-D4D5C000FB7E}" aggregation="composite" association="{8C6EEBD8-4372-44c6-B5F0-9ADEB5889964}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB6mg0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB6mgkkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc1ef544-4920-11de-ac34-db7179a8f63b" name="Constraint_ArithmeticalExpression" memberEnd="_vB7NkUkgEd61gcAb3RwQTw _vB7NkkkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vB7NkUkgEd61gcAb3RwQTw" name="extension_ArithmeticalExpression" type="{244A1FC8-316A-44c4-8674-991DB06C70FB}" aggregation="composite" association="bc1ef544-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc1ef545-4920-11de-ac34-db7179a8f63b" name="Constraint_QuantifiedFormula" memberEnd="_vB70oUkgEd61gcAb3RwQTw _vB70okkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vB70oUkgEd61gcAb3RwQTw" name="extension_QuantifiedFormula" type="{91118240-92AD-445b-B843-4B927201D209}" aggregation="composite" association="bc1ef545-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{FB64BD9D-7ADD-461f-98DB-AE0080E164D4}" name="A_Disjunction_formulas" memberEnd="bc1f4366-4920-11de-ac34-db7179a8f63b bc1f6a77-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc1f6a77-4920-11de-ac34-db7179a8f63b" name="oppositeOf_formulas" visibility="public" type="{C7C31611-5874-41cb-8C5F-2CE67A2AE7E4}" aggregation="composite" association="{FB64BD9D-7ADD-461f-98DB-AE0080E164D4}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB8btkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB8btUkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{35C83890-64F8-45ba-82AD-A7B06C75AEB3}" name="A_OEntity_OFeature" memberEnd="bc1fb898-4920-11de-ac34-db7179a8f63b bc1fb899-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc1fb898-4920-11de-ac34-db7179a8f63b" name="" type="{5BED6262-2886-44f0-809B-A62951FBCB20}" aggregation="composite" association="{35C83890-64F8-45ba-82AD-A7B06C75AEB3}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vB-Q40kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vB-Q4kkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{7F3D83AB-A29A-4212-ACD4-CA978B03BE5F}" name="Action" memberEnd="bc202dca-4920-11de-ac34-db7179a8f63b bc202dcb-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc202dca-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" aggregation="composite" association="{7F3D83AB-A29A-4212-ACD4-CA978B03BE5F}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCAGE0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCAGEkkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{EDE88D4A-4C22-4011-91BD-09BAD0DC1337}" name="A_Conjuction_formulas" memberEnd="bc20a2fc-4920-11de-ac34-db7179a8f63b bc20a2fd-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc20a2fd-4920-11de-ac34-db7179a8f63b" name="oppositeOf_formulas" visibility="public" type="{35F8D712-DE97-4c7a-9B81-E140BAE168E9}" aggregation="composite" association="{EDE88D4A-4C22-4011-91BD-09BAD0DC1337}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCB7REkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCB7Q0kgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc20a2fe-4920-11de-ac34-db7179a8f63b" name="Classifier_RuleCondition" memberEnd="_vCCiUUkgEd61gcAb3RwQTw _vCCiUkkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCCiUUkgEd61gcAb3RwQTw" name="extension_RuleCondition" type="{25BAAF47-BC6F-485e-A23B-F50E832F961D}" aggregation="composite" association="bc20a2fe-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{E8E04C5B-300A-4d1b-911F-36AA72B99A99}" name="A_OOperation_OParameter" memberEnd="bc21182f-4920-11de-ac34-db7179a8f63b bc211830-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc21182f-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{A83ACA96-2DCF-40ea-9520-32297E5FAA59}" aggregation="composite" association="{E8E04C5B-300A-4d1b-911F-36AA72B99A99}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCDwc0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCDwckkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{300ECD50-F8E7-49ea-8FF0-574119FAB2EA}" name="A_ProductionRule_producedAction" memberEnd="bc21b471-4920-11de-ac34-db7179a8f63b bc21b472-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc21b472-4920-11de-ac34-db7179a8f63b" name="oppositeOf_producedAction" visibility="public" type="{3FA621BB-C107-49b0-B61D-B98E83259F7B}" association="{300ECD50-F8E7-49ea-8FF0-574119FAB2EA}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCGMs0kgEd61gcAb3RwQTw" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCGMskkgEd61gcAb3RwQTw"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc21db83-4920-11de-ac34-db7179a8f63b" name="Classifier_RuleVariable" memberEnd="_vCHa0EkgEd61gcAb3RwQTw _vCHa0UkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCHa0EkgEd61gcAb3RwQTw" name="extension_RuleVariable" type="{944DDB85-AB0A-46b5-94C4-64F3E65DCF6B}" aggregation="composite" association="bc21db83-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{84FA47F6-6F4C-48f9-8B48-A7D4DD1530FA}" name="A_OpaqueExpression_LogicalFormula" memberEnd="bc2229a4-4920-11de-ac34-db7179a8f63b bc2229a5-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc2229a5-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" aggregation="composite" association="{84FA47F6-6F4C-48f9-8B48-A7D4DD1530FA}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCIB5kkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCIB5UkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc2250b6-4920-11de-ac34-db7179a8f63b" name="Package_OModel" memberEnd="_vCJQAUkgEd61gcAb3RwQTw _vCJQAkkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCJQAUkgEd61gcAb3RwQTw" name="extension_OModel" type="{C04EE18F-80C6-40fd-85C9-D4D5C000FB7E}" aggregation="composite" association="bc2250b6-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc2250b7-4920-11de-ac34-db7179a8f63b" name="Classifier_OEntity" memberEnd="_vCJQBEkgEd61gcAb3RwQTw _vCJQBUkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCJQBEkgEd61gcAb3RwQTw" name="extension_OEntity" type="{5BED6262-2886-44f0-809B-A62951FBCB20}" aggregation="composite" association="bc2250b7-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{93F9291F-BC52-44fe-B79B-6C0755D0A35D}" name="A_OEntity_OOperation" memberEnd="bc229ed8-4920-11de-ac34-db7179a8f63b bc229ed9-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc229ed8-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{5BED6262-2886-44f0-809B-A62951FBCB20}" aggregation="composite" association="{93F9291F-BC52-44fe-B79B-6C0755D0A35D}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCJ3E0kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCJ3EkkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{95ECA135-76CA-4347-A0D7-280C13B9171A}" name="A_RuleCondition_OpaqueExpression" memberEnd="bc23140a-4920-11de-ac34-db7179a8f63b bc23140b-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc23140b-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{25BAAF47-BC6F-485e-A23B-F50E832F961D}" aggregation="composite" association="{95ECA135-76CA-4347-A0D7-280C13B9171A}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCLsRkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCLsRUkgEd61gcAb3RwQTw"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc23140c-4920-11de-ac34-db7179a8f63b" name="Property_OFeature" memberEnd="_vCMTUUkgEd61gcAb3RwQTw _vCMTUkkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCMTUUkgEd61gcAb3RwQTw" name="extension_OFeature" type="{D315A408-8495-4437-BC7F-576C0850BC6A}" aggregation="composite" association="bc23140c-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{4FEB610C-1811-4ec7-97E0-D2F001FF5865}" name="A_NegationAsFailure_formula" memberEnd="bc23893d-4920-11de-ac34-db7179a8f63b bc23893e-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc23893e-4920-11de-ac34-db7179a8f63b" name="oppositeOf_formula" visibility="public" type="{22521815-C2D9-4ca3-B746-7539E5F7C9D1}" aggregation="composite" association="{4FEB610C-1811-4ec7-97E0-D2F001FF5865}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCNhdkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCNhdUkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc23b04f-4920-11de-ac34-db7179a8f63b" name="Package_OPackage" memberEnd="_vCOIgUkgEd61gcAb3RwQTw _vCOvkEkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCOIgUkgEd61gcAb3RwQTw" name="extension_OPackage" type="{CBF9FCEC-66EB-4f32-A6BC-B164A3A212D2}" aggregation="composite" association="bc23b04f-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc23b050-4920-11de-ac34-db7179a8f63b" name="Classifier_OpaqueExpression" memberEnd="_vCOvkkkgEd61gcAb3RwQTw _vCOvk0kgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCOvkkkgEd61gcAb3RwQTw" name="extension_OpaqueExpression" type="{7E3D31E4-F07B-4d71-81AD-B19100F2E649}" aggregation="composite" association="bc23b050-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc23fe71-4920-11de-ac34-db7179a8f63b" name="Constraint_LogicalFormula" memberEnd="_vCPWoUkgEd61gcAb3RwQTw _vCPWokkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCPWoUkgEd61gcAb3RwQTw" name="extension_LogicalFormula" type="{3721D7D2-1278-423b-BAA2-7C13103D3861}" aggregation="composite" association="bc23fe71-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc23fe72-4920-11de-ac34-db7179a8f63b" name="Action_ActionExpression" memberEnd="_vCP9sUkgEd61gcAb3RwQTw _vCP9skkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCP9sUkgEd61gcAb3RwQTw" name="extension_ActionExpression" type="{8AFFB3AD-9F76-45fa-AAB4-FFC9430AA23B}" aggregation="composite" association="bc23fe72-4920-11de-ac34-db7179a8f63b"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{05BEB972-12DE-49ec-9F37-7B1D5FD38C4D}" name="A_StrongNegation_formula" memberEnd="bc244c93-4920-11de-ac34-db7179a8f63b bc2473a4-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc2473a4-4920-11de-ac34-db7179a8f63b" name="oppositeOf_formula" visibility="public" type="{96801424-832B-4280-A067-7E2E4F889E72}" aggregation="composite" association="{05BEB972-12DE-49ec-9F37-7B1D5FD38C4D}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCQkxkkgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCQkxUkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="{354A72E0-4700-4725-AFBD-E20C9D6D335F}" name="A_OPackage_OEntity" memberEnd="bc24c1c5-4920-11de-ac34-db7179a8f63b bc24c1c6-4920-11de-ac34-db7179a8f63b">
+    <ownedEnd xmi:id="bc24c1c5-4920-11de-ac34-db7179a8f63b" name="" visibility="public" type="{CBF9FCEC-66EB-4f32-A6BC-B164A3A212D2}" aggregation="composite" association="{354A72E0-4700-4725-AFBD-E20C9D6D335F}">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vCSZ80kgEd61gcAb3RwQTw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vCSZ8kkgEd61gcAb3RwQTw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="bc24e8d7-4920-11de-ac34-db7179a8f63b" name="Classifier_RuleAction" memberEnd="_vCToEUkgEd61gcAb3RwQTw _vCToEkkgEd61gcAb3RwQTw">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_vCToEUkgEd61gcAb3RwQTw" name="extension_RuleAction" type="{BC325891-C7AC-4e3d-85EE-5BC6679DFC59}" aggregation="composite" association="bc24e8d7-4920-11de-ac34-db7179a8f63b"/>
   </packagedElement>
 </uml:Profile>
