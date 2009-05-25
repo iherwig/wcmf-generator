@@ -90,33 +90,17 @@ class TemplateListController extends Controller
 
 	public static function getTemplatesPath() {
 		$result = null;
-	
+
 		//read server.ini to get generator path
 		$generatorjarname = 'ChronosGenerator.jar';
-		$serverinipath = 'application/include/server.ini';
-	
-		$filecontent = fopen(BASE.$serverinipath, "r");
-		$read = false;
-		$text = '';
-		if ($filecontent) {
-			while (!feof($filecontent)) {
-				if (strpos($text, '[generator]') !== false)$read = true;
-				if (strpos($text, '[') !== false and strpos($text, ']') !== false and strpos($text, '[generator]') === false)$read = false;
-				$text = fgets($filecontent);
-				if ($read == true) {
-					if (strpos($text, $generatorjarname) !== false and strpos($text, 'executable') !== false and stripos($text, '=') !== false) {
-						$generatorjarpath = trim(str_replace( array ('executable', '=', $generatorjarname), array ('', '', ''), $text));
-						$read = false;
-					}
-				}
-			}
-			fclose($filecontent);
-		}
-	
+		$serveriniinst = &InifileParser::getInstance();
+		$serveriniinst->parseIniFile('include/server.ini');
+		$text = $serveriniinst->getValue('executable','generator', false);
+		$generatorjarpath = trim(str_replace( $generatorjarname, '', $text));
+		
 		//templates path
 		$templatessubpath = 'cartridge/DocumentGeneration/template';
 		$result = $generatorjarpath.$templatessubpath;
-	
 		return $result;
 	}
 
