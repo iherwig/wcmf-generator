@@ -195,6 +195,19 @@ class PackageBase extends EntityBaseExtended
       return $this->getChildrenEx(null, 'Diagram', array('fk_package_id' => $this->getDBID()), null);
     }
     /**
+     * @deprecated use getChiSystemChildren() instead
+     */
+    function getChiSystemList()
+    {
+      Log::warn("use of deprecated method getChiSystemList. use getChiSystemChildren() instead.\n".WCMFException::getStackTrace(), __CLASS__);
+      return $this->getChiSystemChildren();
+    }
+    function getChiSystemChildren()
+    {
+      return $this->getChildrenEx(null, 'ChiSystem', array('fk_package_id' => $this->getDBID()), null);
+    }
+
+    /**
      * @deprecated use getChiViewChildren() instead
      */
     function getChiViewList()

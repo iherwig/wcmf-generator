@@ -72,6 +72,7 @@ class CounterBase extends EntityBase
       if ($name == 'ChiNode') $displayName = Message::get("ChiNode");
       if ($name == 'ChiValue') $displayName = Message::get("ChiValue");
       if ($name == 'ChiView') $displayName = Message::get("ChiView");
+	  if ($name == 'ChiSystem') $displayName = Message::get("ChiSystem");
       if ($name == 'Operation') $displayName = Message::get("Operation");
       if ($name == 'Activity') $displayName = Message::get("Activity");
       if ($name == 'ActivityDecision') $displayName = Message::get("ActivityDecision");
@@ -109,6 +110,7 @@ class CounterBase extends EntityBase
       if ($name == 'ChiNode') $description = Message::get("");
       if ($name == 'ChiValue') $description = Message::get("");
       if ($name == 'ChiView') $description = Message::get("");
+	  if ($name == 'ChiSystem') $description = Message::get("");
       if ($name == 'Operation') $description = Message::get("");
       if ($name == 'Activity') $description = Message::get("");
       if ($name == 'ActivityDecision') $description = Message::get("");
@@ -318,6 +320,17 @@ class CounterBase extends EntityBase
     function setChiValue($ChiValue)
     {
       return $this->setValue('ChiValue', $ChiValue, DATATYPE_ATTRIBUTE);
+    }
+    function getChiSystem($unconverted=false)
+    {
+      if ($unconverted)
+        return $this->getUnconvertedValue('ChiSystem', DATATYPE_ATTRIBUTE);
+      else
+        return $this->getValue('ChiSystem', DATATYPE_ATTRIBUTE);
+    }
+    function setChiSystem($ChiSystem)
+    {
+      return $this->setValue('ChiSystem', $ChiSystem, DATATYPE_ATTRIBUTE);
     }
     function getChiView($unconverted=false)
     {

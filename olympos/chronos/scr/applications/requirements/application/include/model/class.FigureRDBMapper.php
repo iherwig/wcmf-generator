@@ -66,6 +66,7 @@ class FigureRDBMapper extends NodeUnifiedRDBMapper
     if ($this->getType() == 'Figure' && $parentType == 'ChiBase') return 'fk_chibase_id';
     if ($this->getType() == 'Figure' && $parentType == 'Diagram') return 'fk_diagram_id';
     if ($this->getType() == 'Figure' && $parentType == 'ChiView') return 'fk_chiview_id';
+	if ($this->getType() == 'Figure' && $parentType == 'ChiSystem') return 'fk_chisystem_id';
     if ($this->getType() == 'Figure' && $parentType == 'ChiController') return 'fk_chicontroller_id';
     if ($this->getType() == 'Figure' && $parentType == 'ChiNode') return 'fk_chinode_id';
     if ($this->getType() == 'Figure' && $parentType == 'ChiIssue') return 'fk_chiissue_id';
@@ -93,6 +94,7 @@ class FigureRDBMapper extends NodeUnifiedRDBMapper
     if ($parentType == 'ChiBase') return 'fk_chibase_id';
     if ($parentType == 'Diagram') return 'fk_diagram_id';
     if ($parentType == 'ChiView') return 'fk_chiview_id';
+	if ($parentType == 'ChiSystem') return 'fk_chisystem_id';
     if ($parentType == 'ChiController') return 'fk_chicontroller_id';
     if ($parentType == 'ChiNode') return 'fk_chinode_id';
     if ($parentType == 'ChiIssue') return 'fk_chiissue_id';
@@ -239,6 +241,10 @@ class FigureRDBMapper extends NodeUnifiedRDBMapper
      /* 
       * Value description: 
       */
+      array('name' => 'fk_chisystem_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_chisystem_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
+      * Value description: 
+      */
       array('name' => 'fk_chiview_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_chiview_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: 
@@ -306,6 +312,7 @@ class FigureRDBMapper extends NodeUnifiedRDBMapper
 
       array('type' => 'Diagram', 'is_navigable' => true, 'table_name' => 'Diagram', 'pk_columns' => array('id'), 'fk_columns' => 'fk_diagram_id'),
       array('type' => 'ChiView', 'is_navigable' => true, 'table_name' => 'ChiView', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chiview_id'),
+      array('type' => 'ChiSystem', 'is_navigable' => true, 'table_name' => 'ChiSystem', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chisystem_id'),
       array('type' => 'ChiController', 'is_navigable' => true, 'table_name' => 'ChiController', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chicontroller_id'),
       array('type' => 'ChiNode', 'is_navigable' => true, 'table_name' => 'ChiNode', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chinode_id'),
       array('type' => 'ChiIssue', 'is_navigable' => true, 'table_name' => 'ChiIssue', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chiissue_id'),

@@ -62,6 +62,8 @@ class ChiSystemRDBMapper extends NodeUnifiedRDBMapper
   function getMyFKColumnNameImpl($parentType)
   {
   	// start from the most specific
+    if ($this->getType() == 'ChiSystem' && $parentType == 'Package') return 'fk_package_id';
+    if ($parentType == 'Package') return 'fk_package_id';
     return '';
   }
   /**
@@ -91,9 +93,13 @@ class ChiSystemRDBMapper extends NodeUnifiedRDBMapper
       */
       array('name' => 'id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'id', 'db_data_type' => 'INT(11) NOT NULL', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
+      * Value description: 
+      */
+      array('name' => 'fk_package_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_package_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
       * Value description: this is the name of the file where the pairs value name &amp; initial value will be generated 
       */
-      array('name' => 'config', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'config', 'db_data_type' => 'VARCHAR(255)', 'default' => 'config.ini', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
+	  array('name' => 'config', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'config', 'db_data_type' => 'VARCHAR(255)', 'default' => 'config.ini', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: this is the target platform for this configuration item
       */
@@ -102,6 +108,10 @@ class ChiSystemRDBMapper extends NodeUnifiedRDBMapper
       * Value description: the name of this object.
       */
       array('name' => 'Name', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'name', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
+      * Value description: the alias of this object.
+      */
+      array('name' => 'Alias', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'alias', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: the actual description of the object.
       */
@@ -128,11 +138,13 @@ class ChiSystemRDBMapper extends NodeUnifiedRDBMapper
     );
     $nodeDef['_parents'] = array
     (
+	  array('type' => 'Package', 'is_navigable' => true, 'table_name' => 'Package', 'pk_columns' => array('id'), 'fk_columns' => 'fk_package_id')
     );
     $nodeDef['_children'] = array
     (
       array('type' => 'Property', 'minOccurs' => 0, 'maxOccurs' => 'unbounded', 'aggregation' => false, 'composition' => true, 'is_navigable' => true, 'table_name' => 'Property', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chisystem_id', 'order_by' => array()),
-      array('type' => 'ChiValue', 'minOccurs' => 0, 'maxOccurs' => 'unbounded', 'aggregation' => false, 'composition' => true, 'is_navigable' => true, 'table_name' => 'ChiValue', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chisystem_id', 'order_by' => array())
+      array('type' => 'ChiValue', 'minOccurs' => 0, 'maxOccurs' => 'unbounded', 'aggregation' => false, 'composition' => true, 'is_navigable' => true, 'table_name' => 'ChiValue', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chisystem_id', 'order_by' => array()),
+      array('type' => 'Figure', 'minOccurs' => 0, 'maxOccurs' => 'unbounded', 'aggregation' => false, 'composition' => true, 'is_navigable' => true, 'table_name' => 'Figure', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chisystem_id', 'order_by' => array())
     );
     return $nodeDef;
   }
