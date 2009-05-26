@@ -1,0 +1,25 @@
+<workflow>
+	<property name="basePath" value="src" />
+
+	<property name="propertyFile" value="${basePath}/cartridge/GenerateUmlConnector/workflow/generateUmlConnector.properties" />
+	<property file="${propertyFile}" />
+
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${profileFile}"/>
+		<outputSlot value="umlProfile"/>
+	 </component>
+
+	<component class="oaw.xpand2.Generator" skipOnErrors="true">
+		<fileEncoding value="utf-8"/>
+		
+		<metaModel id="uml"	class="oaw.uml2.UML2MetaModel" />
+		
+		<expand value="cartridge::GenerateUmlConnector::Object::root FOR umlProfile"/>
+		
+		<outlet path="${outletPath}">
+		</outlet>
+		<prSrcPaths value="${outletPath}"/>
+	</component>
+</workflow>
