@@ -1,0 +1,167 @@
+«IMPORT uml»
+
+«EXTENSION org::openarchitectureware::util::IO»
+
+«EXTENSION cartridge::GenerateUmlConnector::util»
+
+«DEFINE root FOR uml::Profile»
+	«EXPAND object FOREACH this.allOwnedElements().typeSelect(uml::Stereotype)»
+«ENDDEFINE»
+
+«DEFINE object FOR uml::Stereotype»
+«info("Generating " + this.name)»
+«FILE this.getCwmName() + ".ext"»
+	«EXPAND header FOR this»
+	
+	«EXPAND convert FOR this»
+	
+	«EXPAND establishConnections FOR this»
+	
+	«EXPAND transferValues FOR this»
+	
+	«EXPAND insertEnums FOR this»
+	
+	«EXPAND convertToCwm FOR this»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE header FOR uml::Stereotype»
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+«ENDDEFINE»
+
+«DEFINE convert FOR uml::Stereotype»
+uml::«this.getMetaClass().name» convert(cwm::«this.getCwmName()» c):
+	let uc = new uml::«this.getMetaClass().name» : (
+		uc.setName("«this.getCwmName()»:" + c.id)
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convert.misc"»
+			//Additional code goes here
+		«ENDPROTECT»
+	) ->
+	uc
+;
+«ENDDEFINE»
+
+«DEFINE establishConnections FOR uml::Stereotype»
+Void establishConnections(cwm::«this.getCwmName()» c, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::«this.getMetaClass().name»).select(e|e.name == "«this.getCwmName()»:" + c.id).first(): (
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".establishConnections.connections"»
+			//Insert connections here
+			// e. g. c.child.select(e|e.targetType == "ChiBusinessUseCase").establishRealizationToUseCase(uc, um, "refines") ->
+			Void
+		«ENDPROTECT»
+	)
+;
+«ENDDEFINE»
+
+«DEFINE transferValues FOR uml::Stereotype»
+Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::«this.getMetaClass().name»).select(e|e.name == "«this.getCwmName()»:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::«this.name»") ->
+
+			«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".transferValues.comment"»
+				//Delete this content if object has no notes
+				c.notes != null ? (
+					comment.setBody(c.notes) ->
+					comment.annotatedElement.add(uc) ->
+					uc.ownedComment.add(comment)
+				) : Void
+			«ENDPROTECT»
+			
+			«IF this.allTaggedValueNames().size > 0»
+				->
+			«ENDIF»
+
+			«EXPAND transferValuesTaggedValues(this) FOREACH this.allTaggedValueNames() SEPARATOR "->"»
+			
+			«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".transferValues.misc"»
+				//Additional code goes here
+			«ENDPROTECT»
+		)
+	)
+;
+«ENDDEFINE»
+
+«DEFINE transferValuesTaggedValues(uml::Stereotype st) FOR String»
+	«LET st.getTaggedValueType(this) AS type»
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".transferValues.taggedValue." + this»
+			«IF !uml::Enumeration.isInstance(type)»
+				uc.setTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»", c.«this.getCwmPropertyName()»)
+			«ELSE»
+				c.«this.getCwmPropertyName()».translate«type.name»() != null ? uc.setTaggedValue("Chronos::«st.name»", "«this»", c.«this.getCwmPropertyName()».translate«type.name»()) : Void
+			«ENDIF»
+		«ENDPROTECT»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE insertEnums FOR uml::Stereotype»
+	«EXPAND convertEnum(this) FOREACH this.allOwnedElements().typeSelect(uml::Property).type.typeSelect(uml::Enumeration).toSet()»
+«ENDDEFINE»
+
+«DEFINE convertEnum(uml::Stereotype st) FOR uml::Enumeration»
+«this.name» translate«this.name»(String source):
+	switch(source.toLowerCase()) {
+		«FOREACH this.ownedElement.typeSelect(uml::EnumerationLiteral) AS l»
+			case "«l.name.toLowerCase()»":
+				«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".enumeration." + this.name + ".convertEnum.literal." + l.name»
+					«this.name»::«l.name»
+				«ENDPROTECT»
+		«ENDFOREACH»
+		
+		default:
+			null
+	}
+;
+«ENDDEFINE»
+
+«DEFINE convertToCwm FOR uml::Stereotype»
+cwm::«this.getCwmName()» convertToCwm(Chronos::«this.name» uc):
+	let c = new cwm::«this.getCwmName()»: (
+		c.setId(uc.getId()) ->
+
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.name"»
+			//Empty this region if name should not be transferred
+			c.setName(uc.name) ->
+		«ENDPROTECT»
+
+
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.notes"»
+			//Empty this region if notes should not be transferred
+			c.setNotes(uc.getComment())
+		«ENDPROTECT»
+		
+		«IF this.allTaggedValueNames().size > 0»
+			->
+		«ENDIF»
+
+		«EXPAND convertToCwmTaggedValues(this) FOREACH this.allTaggedValueNames() SEPARATOR "->"»
+		
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.relations"»
+			//put relationships here
+			//e. g. c.child.addAll(uc.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiBusinessUseCase).convertToChild()) 
+		«ENDPROTECT»
+	) ->
+	c
+;
+«ENDDEFINE»
+
+«DEFINE convertToCwmTaggedValues(uml::Stereotype st) FOR String»
+	«LET st.getTaggedValueType(this) AS type»
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".convertToCwm.taggedValue." + this»
+			«IF !uml::Enumeration.isInstance(type)»
+				c.set«this.getCwmPropertyName().toFirstUpper()»((«type.name») uc.getTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»"))
+			«ELSE»
+				uc.getTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»") != "" ? c.set«this.getCwmPropertyName().toFirstUpper()»(((Chronos::«type.name») uc.getTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»")).name) : Void
+			«ENDIF»
+		«ENDPROTECT»
+	«ENDLET»
+«ENDDEFINE»

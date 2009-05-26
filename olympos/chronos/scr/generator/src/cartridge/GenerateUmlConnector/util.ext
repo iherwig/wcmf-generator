@@ -1,0 +1,52 @@
+import uml;
+
+extension common::nameNormalizer;
+
+List[uml::Property] allTaggedValues(uml::Stereotype this):
+	let result = (List[uml::Property]) {} : (
+		result.addAll(this.ownedElement.typeSelect(uml::Property).select(e|e.isValidTaggedValue())) ->
+		result.addAll(this.allParents().ownedElement.typeSelect(uml::Property).select(e|e.isValidTaggedValue()))
+	) ->
+	
+	result	
+;
+
+List[String] allTaggedValueNames(uml::Stereotype this):
+	this.allTaggedValues().name
+;
+
+boolean isValidTaggedValue(uml::Property this):
+	this != null &&
+	this.name != "" &&
+	this.association.metaType != uml::Extension
+;
+
+uml::Class getMetaClass(uml::Stereotype this):
+	this.getAllExtendedMetaclasses().first()
+;
+
+String getCwmName(uml::Stereotype this):
+	switch(this.name) {
+		case "ChiActivity":
+			"Activity"
+		
+		default:
+			this.name
+	}
+;
+
+uml::Type getTaggedValueType(uml::Stereotype this, String taggedValueName):
+	this.allTaggedValues().select(e|e.name == taggedValueName).type.first()
+;
+
+String getTaggedValueName(String this):
+	this
+;
+
+String getCwmPropertyName(String this):
+	let result = this.normalizeMemberName():
+	switch (result) {
+		default:
+			result
+	}
+;
