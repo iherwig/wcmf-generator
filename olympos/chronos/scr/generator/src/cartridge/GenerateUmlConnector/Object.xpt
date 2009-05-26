@@ -36,6 +36,10 @@ extension common::umlutils;
 
 extension cartridge::UmlConnector::connections;
 extension cartridge::UmlConnector::connectionsToCwm;
+
+«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".header.extensions"»
+	//Additional extensions go here
+«ENDPROTECT»
 «ENDDEFINE»
 
 «DEFINE convert FOR uml::Stereotype»
