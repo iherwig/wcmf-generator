@@ -1,0 +1,31 @@
+<workflow>
+	<property name="basePath" value="src" />
+
+	<property name="propertyFile" value="${basePath}/cartridge/GenerateUmlConnector/workflow/generateUmlConnector.properties" />
+	<property file="${propertyFile}" />
+
+	<bean id="xmlSchema" class="org.openarchitectureware.xsd.XSDMetaModel">
+		<schemaFile value="${basePath}/metamodel/XMLSchema.xsd" />
+	</bean>
+	
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${profileFile}"/>
+		<outputSlot value="umlProfile"/>
+	 </component>
+
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel id="uml2" class="oaw.uml2.UML2MetaModel" />
+		<metaModel idRef="xmlSchema" /> 
+
+		<invoke value="${basePath}/cartridge/GenerateUmlConnector/Schema::root(umlProfile, 'cwm')" />
+		<outputSlot value="schema" />
+	</component>
+
+	<component class="org.openarchitectureware.xsd.XMLWriter">
+		<metaModel idRef="xmlSchema" />
+		<modelSlot value="schema" />
+		<uri value="${schemaPath}" />
+	</component>
+</workflow>
