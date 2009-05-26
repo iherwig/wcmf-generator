@@ -1322,6 +1322,7 @@ CREATE TABLE `Figure` # entityType=Figure tableId={7A186367-446B-4fab-9CA9-20ADC
   ,KEY `fk_chinode_id` (`fk_chinode_id`)
   ,KEY `fk_chicontroller_id` (`fk_chicontroller_id`)
   ,KEY `fk_chiview_id` (`fk_chiview_id`)
+  ,KEY `fk_chisystem_id` (`fk_chisystem_id`)
   ,KEY `fk_diagram_id` (`fk_diagram_id`)
   ,KEY `fk_chibase_id` (`fk_chibase_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)

@@ -157,6 +157,10 @@ class CounterRDBMapper extends NodeUnifiedRDBMapper
      /* 
       * Value description: 
       */
+      array('name' => 'ChiSystem', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'chisystem', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
+      * Value description: 
+      */
       array('name' => 'ChiView', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'chiview', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: 

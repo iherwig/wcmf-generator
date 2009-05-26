@@ -114,6 +114,10 @@ function beforeInsert()
 		$suffix = 'View';
 		}break;
 		
+		case 'ChiSystem' :{
+		$suffix = 'Syst';
+		}break;
+		
 		case 'ChiValue' :{
 		$suffix = 'Val';
 		}break;

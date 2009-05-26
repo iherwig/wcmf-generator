@@ -78,6 +78,7 @@ class FigureBase extends EntityBase
       if ($name == 'fk_chinode_id') $displayName = Message::get("fk_chinode_id");
       if ($name == 'fk_chicontroller_id') $displayName = Message::get("fk_chicontroller_id");
       if ($name == 'fk_chiview_id') $displayName = Message::get("fk_chiview_id");
+	  if ($name == 'fk_chisystem_id') $displayName = Message::get("fk_chisystem_id");
       if ($name == 'fk_diagram_id') $displayName = Message::get("fk_diagram_id");
       if ($name == 'fk_chibase_id') $displayName = Message::get("fk_chibase_id");
       if ($name == 'fk_activityset_id') $displayName = Message::get("fk_activityset_id");
@@ -125,6 +126,7 @@ class FigureBase extends EntityBase
       if ($name == 'fk_chinode_id') $description = Message::get("");
       if ($name == 'fk_chicontroller_id') $description = Message::get("");
       if ($name == 'fk_chiview_id') $description = Message::get("");
+	  if ($name == 'fk_chisystem_id') $description = Message::get("");
       if ($name == 'fk_diagram_id') $description = Message::get("");
       if ($name == 'fk_chibase_id') $description = Message::get("");
       if ($name == 'fk_activityset_id') $description = Message::get("");
@@ -426,6 +428,17 @@ class FigureBase extends EntityBase
     {
       return $this->setValue('fk_chiview_id', $fk_chiview_id, DATATYPE_IGNORE);
     }
+    function getFkChisystemId($unconverted=false)
+    {
+      if ($unconverted)
+        return $this->getUnconvertedValue('fk_chisystem_id', DATATYPE_IGNORE);
+      else
+        return $this->getValue('fk_chisystem_id', DATATYPE_IGNORE);
+    }
+    function setFkChisystemId($fk_chisystem_id)
+    {
+      return $this->setValue('fk_chisystem_id', $fk_chisystem_id, DATATYPE_IGNORE);
+    }
     function getFkDiagramId($unconverted=false)
     {
       if ($unconverted)
@@ -574,6 +587,19 @@ class FigureBase extends EntityBase
     {
       if ($node != null)
         $this->setValue('fk_diagram_id', $node->getDBID(), DATATYPE_IGNORE);
+    }
+	function getChiSystemOID()
+    {
+      $fkValue = $this->getValue('fk_chisystem_id', DATATYPE_IGNORE);
+      if ($fkValue != null)
+        return PersistenceFacade::composeOID(array('type' => 'ChiSystem', 'id' => array($fkValue)));
+      else
+        return null;
+    }
+    function setChiSystem(&$node)
+    {
+      if ($node != null)
+        $this->setValue('fk_chisystem_id', $node->getDBID(), DATATYPE_IGNORE);
     }
     function getChiViewOID()
     {
@@ -902,6 +928,10 @@ class FigureBase extends EntityBase
     function getChiViewParents()
     {
       return $this->getParentsEx(null, 'ChiView', null, null);
+    }
+	function getChiSystemParents()
+    {
+      return $this->getParentsEx(null, 'ChiSystem', null, null);
     }
     function getChiControllerParents()
     {

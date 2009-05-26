@@ -29,6 +29,9 @@ require_once(BASE."application/include/model/configuration/class.ChiSystemBase.p
 class ChiSystem extends ChiSystemBase
 {
 // PROTECTED REGION ID(application/include/model/configuration/class.ChiSystem.php/Body) ENABLED START
+//	public function draw($image, $xPos, $yPos, $width, $height) {
+//		ExportDiagramImageController::drawImageLabelCenterFigure($image, $xPos, $yPos, $width, $height, $this->getDisplayValue(), 'ChiSystem');
+//	}
 // PROTECTED REGION END
 }
 ?>
