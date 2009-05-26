@@ -32,7 +32,7 @@ uwm.diagram.AbstractDiagram = function(modelNodeClass) {
 	this.containedPackage = null;
 	this.propertyDisplayEnabled = true;
 	this.eventHandlerEnabled = true;
-	this.semanticGroups = [ 'Use Cases', 'requirements', 'domain', "activity" ];
+	this.semanticGroups = [ 'Use Cases', 'requirements', 'domain', "activity", "configuration" ];
 	
 	this.figures = new Ext.util.MixedCollection();
 	this.objects = new Ext.util.MixedCollection();
