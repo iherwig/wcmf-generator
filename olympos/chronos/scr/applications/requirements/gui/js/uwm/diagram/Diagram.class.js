@@ -20,7 +20,7 @@ Ext.namespace("uwm.diagram");
  *            modelNodeClass
  */
 uwm.diagram.Diagram = function(modelNodeClass) {
-	this.supportedGroups = [ 'UseCases', 'requirements', 'domain' ];
+	this.supportedGroups = [ 'UseCases', 'requirements', 'domain', 'configuration' ];
 	uwm.diagram.Diagram.superclass.constructor.call(this, modelNodeClass);
 }
 
