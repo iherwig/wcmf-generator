@@ -85,7 +85,14 @@ uwm.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
 					self.reloadDiagram();
 				}
 			}
-		}) ]
+		}),	new Ext.menu.Item( {
+			text: uwm.Dict.translate('Show Glossary'),
+			handler: function(item, e) {
+				new uwm.ui.GlossaryBox("Diagram", self.getModelNode().getOid());
+			}
+		})	
+		
+		 ]
 	});
 }
 
