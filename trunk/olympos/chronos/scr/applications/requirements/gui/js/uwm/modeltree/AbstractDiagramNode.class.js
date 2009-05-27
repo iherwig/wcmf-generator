@@ -47,7 +47,13 @@ uwm.modeltree.AbstractDiagramNode.prototype.buildContextMenu = function() {
 			handler: function(item, e) {
 				self.deleteFromModel(item.e);
 			}
-		}]
+		},{
+			text: uwm.Dict.translate('Show Glossary'),
+			handler: function(item, e) {
+				new uwm.ui.GlossaryBox("Diagram", self.getModelNode().getOid());
+			}
+		}			
+		]
 	});
 	
 	return this.contextMenu;
