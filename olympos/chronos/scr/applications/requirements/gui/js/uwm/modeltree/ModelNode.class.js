@@ -70,7 +70,13 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 				new uwm.ui.ExportAssistent("Model", self.getModelNode().getOid());
 			}
 			
-		} ]
+		} , {
+			text: uwm.Dict.translate('Show Glossary'),
+			handler: function(item, e) {
+				new uwm.ui.GlossaryBox("Model", self.getModelNode().getOid());
+			}
+		}		
+		]
 	});
 	
 	return this.contextMenu;

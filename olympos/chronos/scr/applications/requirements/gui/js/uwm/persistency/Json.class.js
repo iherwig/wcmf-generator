@@ -253,6 +253,12 @@ uwm.persistency.Json.prototype.templatelist = function( successHandler, errorHan
 	
 }
 
+uwm.persistency.Json.prototype.glossary = function( successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'glossary'
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	var data = {};
 	
@@ -374,6 +380,10 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				
 			case "templatelist":
 				jsonRequest.controller = "TemplateListController";
+				break;
+				
+			case "glossary":
+				jsonRequest.controller = "GlossaryController";
 				break;
 				
 			default:

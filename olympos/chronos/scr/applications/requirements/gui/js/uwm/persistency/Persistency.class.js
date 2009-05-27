@@ -111,3 +111,6 @@ uwm.persistency.Persistency.prototype.putChildnodesToActivitySetDiagram = functi
 
 uwm.persistency.Persistency.prototype.templatelist = function( successHandler, errorHandler ) {
 }
+
+uwm.persistency.Persistency.prototype.glossary = function( successHandler, errorHandler ) {
+}
