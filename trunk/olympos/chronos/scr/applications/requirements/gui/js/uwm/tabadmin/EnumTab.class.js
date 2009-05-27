@@ -94,7 +94,7 @@ uwm.tabadmin.EnumTab.prototype.handleRowClick = function(grid, rowIndex, e) {
 uwm.tabadmin.EnumTab.prototype.handleChangeLabelEvent = function(modelObject, oldLabel) {
 	var record = this.getRecordByModelObject(modelObject);
 	if (record) {
-		record.set("Name", modelObject.getProperty("Name"));
+		record.set("label", modelObject.getLabel());
 		record.commit();
 	}
 }
@@ -104,7 +104,7 @@ uwm.tabadmin.EnumTab.prototype.handleCreateEvent = function(modelObject) {
 		this.getStore().add([new Ext.data.Record({
 			oid: modelObject.getOid(),
 			uwmClassName: modelObject.getUwmClassName(),
-			Name: modelObject.getProperty("Name")
+			Name: modelObject.getLabel()
 		})]);
 	}
 }
@@ -135,5 +135,5 @@ uwm.tabadmin.EnumTab.prototype.getModelObjectByRecord = function(record) {
 }
 
 uwm.tabadmin.EnumTab.prototype.getRecordByModelObject = function(modelObject) {
-	return this.getStore().getAt(this.getStore().find("oid", modelObject.getOid()));
+	return this.getStore().getAt(this.getStore().find('oid', modelObject.getOid()));
 }
