@@ -100,7 +100,7 @@ class HistoryRDBMapper extends NodeUnifiedRDBMapper
      /* 
       * Value description: 
       */
-      array('name' => 'eventtype', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'eventtype', 'db_data_type' => 'ENUM('create','delete','changeProperty','associate','disassociate')', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
+      array('name' => 'eventtype', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'eventtype', 'db_data_type' => "ENUM('create','delete','changeProperty','associate','disassociate')", 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: 
       */

@@ -237,19 +237,6 @@ class ChiControllerBase extends ChiBase
       return $this->getChildrenEx(null, 'NMChiControllerChiController', array('fk_chicontrollertarget_id' => $this->getDBID()), null);
     }
     /**
-     * @deprecated use getPackageChildren() instead
-     */
-    function getPackageList()
-    {
-      Log::warn("use of deprecated method getPackageList. use getPackageChildren() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->getPackageChildren();
-    }
-    function getPackageChildren()
-    {
-      // the foreign key column does not exist
-      return $this->getChildrenEx(null, 'Package', null, null);
-    }
-    /**
      * @deprecated use getSourceEndChildren() instead
      */
     function getSourceEndList()
