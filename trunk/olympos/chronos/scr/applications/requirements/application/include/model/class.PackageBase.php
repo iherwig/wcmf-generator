@@ -219,32 +219,6 @@ class PackageBase extends EntityBaseExtended
       return $this->getChildrenEx(null, 'NMChiNodeChiNode', array('fk_package_id' => $this->getDBID()), null);
     }
     /**
-     * @deprecated use getChiNodeChildren() instead
-     */
-    function getChiNodeList()
-    {
-      Log::warn("use of deprecated method getChiNodeList. use getChiNodeChildren() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->getChiNodeChildren();
-    }
-    function getChiNodeChildren()
-    {
-      // the foreign key column does not exist
-      return $this->getChildrenEx(null, 'ChiNode', null, null);
-    }
-    /**
-     * @deprecated use getChiNodeChildren() instead
-     */
-    function getChiNodeList()
-    {
-      Log::warn("use of deprecated method getChiNodeList. use getChiNodeChildren() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->getChiNodeChildren();
-    }
-    function getChiNodeChildren()
-    {
-      // the foreign key column does not exist
-      return $this->getChildrenEx(null, 'ChiNode', null, null);
-    }
-    /**
      * @deprecated use getNMChiControllerChiControllerChildren() instead
      */
     function getNMChiControllerChiControllerList()
@@ -255,32 +229,6 @@ class PackageBase extends EntityBaseExtended
     function getNMChiControllerChiControllerChildren()
     {
       return $this->getChildrenEx(null, 'NMChiControllerChiController', array('fk_package_id' => $this->getDBID()), null);
-    }
-    /**
-     * @deprecated use getChiControllerChildren() instead
-     */
-    function getChiControllerList()
-    {
-      Log::warn("use of deprecated method getChiControllerList. use getChiControllerChildren() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->getChiControllerChildren();
-    }
-    function getChiControllerChildren()
-    {
-      // the foreign key column does not exist
-      return $this->getChildrenEx(null, 'ChiController', null, null);
-    }
-    /**
-     * @deprecated use getChiControllerChildren() instead
-     */
-    function getChiControllerList()
-    {
-      Log::warn("use of deprecated method getChiControllerList. use getChiControllerChildren() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->getChiControllerChildren();
-    }
-    function getChiControllerChildren()
-    {
-      // the foreign key column does not exist
-      return $this->getChildrenEx(null, 'ChiController', null, null);
     }
     /**
      * @deprecated use getChiViewChildren() instead
