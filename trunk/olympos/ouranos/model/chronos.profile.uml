@@ -1,0 +1,1688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_v3q760tyEd6pX-SEpCPETA" name="Chronos" metaclassReference="_v3rjhEtyEd6pX-SEpCPETA _v3rjhUtyEd6pX-SEpCPETA _v3rjhktyEd6pX-SEpCPETA _v3rjh0tyEd6pX-SEpCPETA _v3rjiEtyEd6pX-SEpCPETA _v3rjiUtyEd6pX-SEpCPETA _v3rjiktyEd6pX-SEpCPETA _v3rji0tyEd6pX-SEpCPETA _v3rjjEtyEd6pX-SEpCPETA _v3rjjUtyEd6pX-SEpCPETA _v3rjjktyEd6pX-SEpCPETA _v3rjj0tyEd6pX-SEpCPETA _v3rjkEtyEd6pX-SEpCPETA _v3rjkUtyEd6pX-SEpCPETA _v3rjkktyEd6pX-SEpCPETA">
+  <eAnnotations xmi:id="_v3q77EtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_v3q77UtyEd6pX-SEpCPETA" name="Chronos" nsURI="http:///schemas/Chronos/_r1NtEEk4Ed6FQtgA9yUTyA/1" nsPrefix="Chronos">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q77ktyEd6pX-SEpCPETA" name="ChiDecision">
+        <eAnnotations xmi:id="_v3q770tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjmktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q78EtyEd6pX-SEpCPETA" name="base_DecisionNode" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//DecisionNode"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q78ktyEd6pX-SEpCPETA" name="ChiObject">
+        <eAnnotations xmi:id="_v3q780tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjnEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q79EtyEd6pX-SEpCPETA" name="base_InstanceSpecification" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//InstanceSpecification"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q79ktyEd6pX-SEpCPETA" name="ChiStakeHolder" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3q790tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjn0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q7-EtyEd6pX-SEpCPETA" name="Power" ordered="false" unique="false" lowerBound="1" eType="_v3q8E0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q7-ktyEd6pX-SEpCPETA" name="Legitimacy" ordered="false" unique="false" lowerBound="1" eType="_v3q8E0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q7_EtyEd6pX-SEpCPETA" name="Role" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q7_ktyEd6pX-SEpCPETA" name="Urgency" ordered="false" unique="false" lowerBound="1" eType="_v3q8E0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8AEtyEd6pX-SEpCPETA" name="base_Actor" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Actor"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8A0tyEd6pX-SEpCPETA" name="ChiBase" abstract="true">
+        <eAnnotations xmi:id="_v3q8BEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rju0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8BUtyEd6pX-SEpCPETA" name="Alias" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8B0tyEd6pX-SEpCPETA" name="Version" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="1.0">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8CUtyEd6pX-SEpCPETA" name="created" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8C0tyEd6pX-SEpCPETA" name="creator" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8DUtyEd6pX-SEpCPETA" name="last_editor" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8D0tyEd6pX-SEpCPETA" name="modified" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8EUtyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3q8E0tyEd6pX-SEpCPETA" name="ChiScala">
+        <eAnnotations xmi:id="_v3q8FEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ4UtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3q8FUtyEd6pX-SEpCPETA" name="High"/>
+        <eLiterals xmi:id="_v3q8FktyEd6pX-SEpCPETA" name="Low" value="1"/>
+        <eLiterals xmi:id="_v3q8F0tyEd6pX-SEpCPETA" name="Medium" value="2"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8GEtyEd6pX-SEpCPETA" name="ChiOpinionInner" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3q8GUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjsUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8GktyEd6pX-SEpCPETA" name="base_Activity" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Activity"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8HUtyEd6pX-SEpCPETA" name="ChiOpinion" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3q8HktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjtEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8H0tyEd6pX-SEpCPETA" name="base_Activity" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Activity"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8IktyEd6pX-SEpCPETA" name="ChiAccord">
+        <eAnnotations xmi:id="_v3q8I0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjt0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8JEtyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8JktyEd6pX-SEpCPETA" name="ChiDiscord">
+        <eAnnotations xmi:id="_v3q8J0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjuUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8KEtyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8KktyEd6pX-SEpCPETA" name="ChiGoal" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3q8K0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rj1ktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8LEtyEd6pX-SEpCPETA" name="Priority" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="50">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8LktyEd6pX-SEpCPETA" name="Value_ammount" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8MEtyEd6pX-SEpCPETA" name="Value_Goal" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8MktyEd6pX-SEpCPETA" name="Value_Name" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8NUtyEd6pX-SEpCPETA" name="ChiRequirement" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3q8NktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rj6ktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8N0tyEd6pX-SEpCPETA" name="Priority" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="50">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8OUtyEd6pX-SEpCPETA" name="Author" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="myName, Analyst">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8O0tyEd6pX-SEpCPETA" name="Proofreader" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="aName, Client">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8PUtyEd6pX-SEpCPETA" name="Status" ordered="false" unique="false" lowerBound="1" eType="_v3q8QktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8P0tyEd6pX-SEpCPETA" name="Type" ordered="false" unique="false" lowerBound="1" eType="_v3q8R0tyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3q8QktyEd6pX-SEpCPETA" name="ChiRequirementStatus">
+        <eAnnotations xmi:id="_v3q8Q0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ5UtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3q8REtyEd6pX-SEpCPETA" name="Validated"/>
+        <eLiterals xmi:id="_v3q8RUtyEd6pX-SEpCPETA" name="Mandatory" value="1"/>
+        <eLiterals xmi:id="_v3q8RktyEd6pX-SEpCPETA" name="Proposed" value="2"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3q8R0tyEd6pX-SEpCPETA" name="ChiRequirementType">
+        <eAnnotations xmi:id="_v3q8SEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ6UtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3q8SUtyEd6pX-SEpCPETA" name="Transport"/>
+        <eLiterals xmi:id="_v3q8SktyEd6pX-SEpCPETA" name="Scalability" value="1"/>
+        <eLiterals xmi:id="_v3q8S0tyEd6pX-SEpCPETA" name="Persistence" value="2"/>
+        <eLiterals xmi:id="_v3q8TEtyEd6pX-SEpCPETA" name="Performance" value="3"/>
+        <eLiterals xmi:id="_v3q8TUtyEd6pX-SEpCPETA" name="Security" value="4"/>
+        <eLiterals xmi:id="_v3q8TktyEd6pX-SEpCPETA" name="Business Rule" value="5"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8T0tyEd6pX-SEpCPETA" name="ChiFeature" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3q8UEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rkAktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8UUtyEd6pX-SEpCPETA" name="Author" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="myName, Analyst">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8U0tyEd6pX-SEpCPETA" name="Proofreader" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="aName, Client">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8VUtyEd6pX-SEpCPETA" name="Status" ordered="false" unique="false" lowerBound="1" eType="_v3q8WEtyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3q8WEtyEd6pX-SEpCPETA" name="ChiFeatureStatus">
+        <eAnnotations xmi:id="_v3q8WUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ3EtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3q8WktyEd6pX-SEpCPETA" name="Implemented"/>
+        <eLiterals xmi:id="_v3q8W0tyEd6pX-SEpCPETA" name="Proposed" value="1"/>
+        <eLiterals xmi:id="_v3q8XEtyEd6pX-SEpCPETA" name="Rejected" value="2"/>
+        <eLiterals xmi:id="_v3q8XUtyEd6pX-SEpCPETA" name="Validated" value="3"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8XktyEd6pX-SEpCPETA" name="ChiIssue" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3q8X0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rkEktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8YEtyEd6pX-SEpCPETA" name="Author" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8YktyEd6pX-SEpCPETA" name="Responsible" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="none">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8ZUtyEd6pX-SEpCPETA" name="ChiAction">
+        <eAnnotations xmi:id="_v3q8ZktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rkHUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8Z0tyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8aUtyEd6pX-SEpCPETA" name="ChiActionKey">
+        <eAnnotations xmi:id="_v3q8aktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rkH0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8a0tyEd6pX-SEpCPETA" name="action" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8bUtyEd6pX-SEpCPETA" name="context" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8b0tyEd6pX-SEpCPETA" name="config" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="config.ini">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8cUtyEd6pX-SEpCPETA" name="ChiController" ordered="false" lowerBound="1" eType="_v3q8d0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8c0tyEd6pX-SEpCPETA" name="ChiControllerTarget" ordered="false" lowerBound="1" eType="_v3q8d0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8dUtyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8d0tyEd6pX-SEpCPETA" name="ChiController">
+        <eAnnotations xmi:id="_v3q8eEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ1ktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8eUtyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8e0tyEd6pX-SEpCPETA" name="ChiActivity">
+        <eAnnotations xmi:id="_v3q8fEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJC0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8fUtyEd6pX-SEpCPETA" name="base_Activity" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Activity"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8f0tyEd6pX-SEpCPETA" name="ChiBusinessProcess" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3q8gEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJDUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8gUtyEd6pX-SEpCPETA" name="base_Package" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Package"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3q8hEtyEd6pX-SEpCPETA" name="ChiBusinessUseCase" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3q8hUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJEUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8hktyEd6pX-SEpCPETA" name="GoalInContext" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8iEtyEd6pX-SEpCPETA" name="Precondition" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8iktyEd6pX-SEpCPETA" name="Trigger" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8jEtyEd6pX-SEpCPETA" name="Scope" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8jktyEd6pX-SEpCPETA" name="Level" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8kEtyEd6pX-SEpCPETA" name="PrimaryActor" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8kktyEd6pX-SEpCPETA" name="OtherActors" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8lEtyEd6pX-SEpCPETA" name="Stakeholders" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8lktyEd6pX-SEpCPETA" name="MainSuccessScenario" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3q8mEtyEd6pX-SEpCPETA" name="Extensions" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8mktyEd6pX-SEpCPETA" name="base_UseCase" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//UseCase"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3q8nEtyEd6pX-SEpCPETA" name="ChiBusPartner" ordered="false" upperBound="-1" eType="_v3rh8EtyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rh8EtyEd6pX-SEpCPETA" name="ChiBusinessPartner" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rh8UtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJUktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rh8ktyEd6pX-SEpCPETA" name="base_Actor" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Actor"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rh9UtyEd6pX-SEpCPETA" name="ChiBusinessUseCaseCore" eSuperTypes="_v3q8hEtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rh9ktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJP0tyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rh-EtyEd6pX-SEpCPETA" name="ChiManyToMany" eSuperTypes="_v3rh_0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rh-UtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJQktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rh-ktyEd6pX-SEpCPETA" name="ChiNodeSource" ordered="false" lowerBound="1" eType="_v3rh_0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rh_EtyEd6pX-SEpCPETA" name="ChiNodeTarget" ordered="false" lowerBound="1" eType="_v3rh_0tyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rh_0tyEd6pX-SEpCPETA" name="ChiNode" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3riAEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJaktyEd6pX-SEpCPETA"/>
+        <eAnnotations xmi:id="_v3riAUtyEd6pX-SEpCPETA" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_v3riAktyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+            <eAnnotations xmi:id="_v3riA0tyEd6pX-SEpCPETA" source="redefines" references="_v3q8EUtyEd6pX-SEpCPETA"/>
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riBUtyEd6pX-SEpCPETA" name="child_order" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riB0tyEd6pX-SEpCPETA" name="display_value" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riCUtyEd6pX-SEpCPETA" name="initparams" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="database">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riC0tyEd6pX-SEpCPETA" name="is_searchable" ordered="false" unique="false" lowerBound="1" eType="_v3riGEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riDUtyEd6pX-SEpCPETA" name="is_soap" ordered="false" unique="false" lowerBound="1" eType="_v3riGEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riD0tyEd6pX-SEpCPETA" name="orderby" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="none">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riEUtyEd6pX-SEpCPETA" name="parent_order" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riE0tyEd6pX-SEpCPETA" name="pk_name" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="id">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riFUtyEd6pX-SEpCPETA" name="table_name" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3riGEtyEd6pX-SEpCPETA" name="boolean">
+        <eAnnotations xmi:id="_v3riGUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ8UtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3riGktyEd6pX-SEpCPETA" name="false"/>
+        <eLiterals xmi:id="_v3riG0tyEd6pX-SEpCPETA" name="true" value="1"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riHEtyEd6pX-SEpCPETA" name="ChiRelationEnd">
+        <eAnnotations xmi:id="_v3riHUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJS0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riHktyEd6pX-SEpCPETA" name="fk_name" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riIEtyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riIktyEd6pX-SEpCPETA" name="ChiBusinessPartnerActive" eSuperTypes="_v3rh8EtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3riI0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJVktyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riJUtyEd6pX-SEpCPETA" name="ChiBusinessPartnerPassive" eSuperTypes="_v3rh8EtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3riJktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJWUtyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riKEtyEd6pX-SEpCPETA" name="ChiWorker" eSuperTypes="_v3q8A0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3riKUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJXEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riKktyEd6pX-SEpCPETA" name="base_Actor" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Actor"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riLUtyEd6pX-SEpCPETA" name="ChiWorkerExternal" eSuperTypes="_v3riKEtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3riLktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJYEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riL0tyEd6pX-SEpCPETA" name="is_OfflineUser" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="true">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riMktyEd6pX-SEpCPETA" name="ChiWorkerInternal" eSuperTypes="_v3riKEtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3riM0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJZ0tyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riNUtyEd6pX-SEpCPETA" name="ChiValueRef">
+        <eAnnotations xmi:id="_v3riNktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJlUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riN0tyEd6pX-SEpCPETA" name="reference_value" ordered="false" unique="false" lowerBound="1" eType="_v3riPUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riOUtyEd6pX-SEpCPETA" name="ChiNode" ordered="false" upperBound="-1" eType="_v3rh_0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riO0tyEd6pX-SEpCPETA" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Property"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riPUtyEd6pX-SEpCPETA" name="ChiValue">
+        <eAnnotations xmi:id="_v3riPktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJn0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riP0tyEd6pX-SEpCPETA" name="app_data_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="DATATYPE_ATTRIBUTE">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riQUtyEd6pX-SEpCPETA" name="db_data_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="VARCHAR(255)">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riQ0tyEd6pX-SEpCPETA" name="is_editable" ordered="false" unique="false" lowerBound="1" eType="_v3riGEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riRUtyEd6pX-SEpCPETA" name="input_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="text">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riR0tyEd6pX-SEpCPETA" name="display_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="text">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riSUtyEd6pX-SEpCPETA" name="restrictions_match" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riS0tyEd6pX-SEpCPETA" name="restrictions_not_match" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riTUtyEd6pX-SEpCPETA" name="restrictions_description" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riT0tyEd6pX-SEpCPETA" name="column_name" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riUUtyEd6pX-SEpCPETA" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Property"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riU0tyEd6pX-SEpCPETA" name="ChiSystem">
+        <eAnnotations xmi:id="_v3riVEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJyktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riVUtyEd6pX-SEpCPETA" name="plattform" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riV0tyEd6pX-SEpCPETA" name="config" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="config.ini">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riWUtyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riW0tyEd6pX-SEpCPETA" name="ChiView">
+        <eAnnotations xmi:id="_v3riXEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ2UtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riXUtyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_v3riX0tyEd6pX-SEpCPETA" name="Chronos" nsURI="http:///schemas/Chronos/_2wfagCBJEd6cKbK80xj7NA/0" nsPrefix="Chronos">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riYEtyEd6pX-SEpCPETA" name="ChiDecision">
+        <eAnnotations xmi:id="_v3riYUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjmktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riYktyEd6pX-SEpCPETA" name="base_DecisionNode" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//DecisionNode"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riZEtyEd6pX-SEpCPETA" name="ChiObject">
+        <eAnnotations xmi:id="_v3riZUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjnEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3riZktyEd6pX-SEpCPETA" name="base_InstanceSpecification" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//InstanceSpecification"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riaEtyEd6pX-SEpCPETA" name="ChiStakeHolder" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3riaUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjn0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riaktyEd6pX-SEpCPETA" name="Power" ordered="false" unique="false" lowerBound="1" eType="_v3rihUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ribEtyEd6pX-SEpCPETA" name="Legitimacy" ordered="false" unique="false" lowerBound="1" eType="_v3rihUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ribktyEd6pX-SEpCPETA" name="Role" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ricEtyEd6pX-SEpCPETA" name="Urgency" ordered="false" unique="false" lowerBound="1" eType="_v3rihUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3ricktyEd6pX-SEpCPETA" name="base_Actor" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Actor"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3ridUtyEd6pX-SEpCPETA" name="ChiBase" abstract="true">
+        <eAnnotations xmi:id="_v3ridktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rju0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rid0tyEd6pX-SEpCPETA" name="Alias" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rieUtyEd6pX-SEpCPETA" name="Version" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="1.0">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rie0tyEd6pX-SEpCPETA" name="created" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rifUtyEd6pX-SEpCPETA" name="creator" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rif0tyEd6pX-SEpCPETA" name="last_editor" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rigUtyEd6pX-SEpCPETA" name="modified" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rig0tyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3rihUtyEd6pX-SEpCPETA" name="ChiScala">
+        <eAnnotations xmi:id="_v3rihktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ4UtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3rih0tyEd6pX-SEpCPETA" name="High"/>
+        <eLiterals xmi:id="_v3riiEtyEd6pX-SEpCPETA" name="Low" value="1"/>
+        <eLiterals xmi:id="_v3riiUtyEd6pX-SEpCPETA" name="Medium" value="2"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riiktyEd6pX-SEpCPETA" name="ChiOpinionInner" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rii0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjsUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rijEtyEd6pX-SEpCPETA" name="base_Activity" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Activity"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rij0tyEd6pX-SEpCPETA" name="ChiOpinion" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rikEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjtEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rikUtyEd6pX-SEpCPETA" name="base_Activity" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Activity"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rilEtyEd6pX-SEpCPETA" name="ChiAccord">
+        <eAnnotations xmi:id="_v3rilUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjt0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rilktyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rimEtyEd6pX-SEpCPETA" name="ChiDiscord">
+        <eAnnotations xmi:id="_v3rimUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rjuUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rimktyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rinEtyEd6pX-SEpCPETA" name="ChiGoal" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rinUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rj1ktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rinktyEd6pX-SEpCPETA" name="Priority" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="50">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rioEtyEd6pX-SEpCPETA" name="Value_ammount" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rioktyEd6pX-SEpCPETA" name="Value_Goal" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ripEtyEd6pX-SEpCPETA" name="Value_Name" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rip0tyEd6pX-SEpCPETA" name="ChiRequirement" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3riqEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rj6ktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riqUtyEd6pX-SEpCPETA" name="Priority" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="50">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riq0tyEd6pX-SEpCPETA" name="Author" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="myName, Analyst">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rirUtyEd6pX-SEpCPETA" name="Proofreader" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="aName, Client">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rir0tyEd6pX-SEpCPETA" name="Status" ordered="false" unique="false" lowerBound="1" eType="_v3ritEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3risUtyEd6pX-SEpCPETA" name="Type" ordered="false" unique="false" lowerBound="1" eType="_v3riuUtyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3ritEtyEd6pX-SEpCPETA" name="ChiRequirementStatus">
+        <eAnnotations xmi:id="_v3ritUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ5UtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3ritktyEd6pX-SEpCPETA" name="Validated"/>
+        <eLiterals xmi:id="_v3rit0tyEd6pX-SEpCPETA" name="Mandatory" value="1"/>
+        <eLiterals xmi:id="_v3riuEtyEd6pX-SEpCPETA" name="Proposed" value="2"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3riuUtyEd6pX-SEpCPETA" name="ChiRequirementType">
+        <eAnnotations xmi:id="_v3riuktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ6UtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3riu0tyEd6pX-SEpCPETA" name="Transport"/>
+        <eLiterals xmi:id="_v3rivEtyEd6pX-SEpCPETA" name="Scalability" value="1"/>
+        <eLiterals xmi:id="_v3rivUtyEd6pX-SEpCPETA" name="Persistence" value="2"/>
+        <eLiterals xmi:id="_v3rivktyEd6pX-SEpCPETA" name="Performance" value="3"/>
+        <eLiterals xmi:id="_v3riv0tyEd6pX-SEpCPETA" name="Security" value="4"/>
+        <eLiterals xmi:id="_v3riwEtyEd6pX-SEpCPETA" name="Business Rule" value="5"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3riwUtyEd6pX-SEpCPETA" name="ChiFeature" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3riwktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rkAktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3riw0tyEd6pX-SEpCPETA" name="Author" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="myName, Analyst">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rixUtyEd6pX-SEpCPETA" name="Proofreader" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="aName, Client">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rix0tyEd6pX-SEpCPETA" name="Status" ordered="false" unique="false" lowerBound="1" eType="_v3riyktyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3riyktyEd6pX-SEpCPETA" name="ChiFeatureStatus">
+        <eAnnotations xmi:id="_v3riy0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ3EtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3rizEtyEd6pX-SEpCPETA" name="Implemented"/>
+        <eLiterals xmi:id="_v3rizUtyEd6pX-SEpCPETA" name="Proposed" value="1"/>
+        <eLiterals xmi:id="_v3rizktyEd6pX-SEpCPETA" name="Rejected" value="2"/>
+        <eLiterals xmi:id="_v3riz0tyEd6pX-SEpCPETA" name="Validated" value="3"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3ri0EtyEd6pX-SEpCPETA" name="ChiIssue" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3ri0UtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rkEktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ri0ktyEd6pX-SEpCPETA" name="Author" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ri1EtyEd6pX-SEpCPETA" name="Responsible" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="none">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3ri10tyEd6pX-SEpCPETA" name="ChiAction">
+        <eAnnotations xmi:id="_v3ri2EtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rkHUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3ri2UtyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3ri20tyEd6pX-SEpCPETA" name="ChiActionKey">
+        <eAnnotations xmi:id="_v3ri3EtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3rkH0tyEd6pX-SEpCPETA"/>
+        <eAnnotations xmi:id="_v3ri3UtyEd6pX-SEpCPETA" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_v3ri3ktyEd6pX-SEpCPETA" name="_" ordered="false" lowerBound="1" eType="_v3ri60tyEd6pX-SEpCPETA">
+            <eAnnotations xmi:id="_v3ri30tyEd6pX-SEpCPETA" source="redefines" references="_v3ri50tyEd6pX-SEpCPETA"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ri4UtyEd6pX-SEpCPETA" name="action" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ri40tyEd6pX-SEpCPETA" name="context" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ri5UtyEd6pX-SEpCPETA" name="config" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="config.ini">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3ri50tyEd6pX-SEpCPETA" name="_" ordered="false" lowerBound="1" eType="_v3ri60tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3ri6UtyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3ri60tyEd6pX-SEpCPETA" name="ChiController">
+        <eAnnotations xmi:id="_v3ri7EtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ1ktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3ri7UtyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3ri70tyEd6pX-SEpCPETA" name="ChiActivity">
+        <eAnnotations xmi:id="_v3ri8EtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJC0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3ri8UtyEd6pX-SEpCPETA" name="base_Activity" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Activity"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3ri80tyEd6pX-SEpCPETA" name="ChiBusinessProcess" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3ri9EtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJDUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3ri9UtyEd6pX-SEpCPETA" name="base_Package" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Package"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3ri-EtyEd6pX-SEpCPETA" name="ChiBusinessUseCase" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3ri-UtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJEUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ri-ktyEd6pX-SEpCPETA" name="GoalInContext" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ri_EtyEd6pX-SEpCPETA" name="Precondition" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3ri_ktyEd6pX-SEpCPETA" name="Trigger" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjAEtyEd6pX-SEpCPETA" name="Scope" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjAktyEd6pX-SEpCPETA" name="Level" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjBEtyEd6pX-SEpCPETA" name="PrimaryActor" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjBktyEd6pX-SEpCPETA" name="OtherActors" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjCEtyEd6pX-SEpCPETA" name="Stakeholders" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjCktyEd6pX-SEpCPETA" name="MainSuccessScenario" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjDEtyEd6pX-SEpCPETA" name="Extensions" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjDktyEd6pX-SEpCPETA" name="base_UseCase" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//UseCase"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjEEtyEd6pX-SEpCPETA" name="_" ordered="false" upperBound="-1" eType="_v3rjE0tyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjE0tyEd6pX-SEpCPETA" name="ChiBusinessPartner" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rjFEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJUktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjFUtyEd6pX-SEpCPETA" name="base_Actor" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Actor"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjGEtyEd6pX-SEpCPETA" name="ChiBusinessUseCaseCore" eSuperTypes="_v3ri-EtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rjGUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJP0tyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjG0tyEd6pX-SEpCPETA" name="ChiManyToMany" eSuperTypes="_v3rjJEtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rjHEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJQktyEd6pX-SEpCPETA"/>
+        <eAnnotations xmi:id="_v3rjHUtyEd6pX-SEpCPETA" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_v3rjHktyEd6pX-SEpCPETA" name="_" ordered="false" lowerBound="1" eType="_v3rjJEtyEd6pX-SEpCPETA">
+            <eAnnotations xmi:id="_v3rjH0tyEd6pX-SEpCPETA" source="redefines" references="_v3rjIUtyEd6pX-SEpCPETA"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjIUtyEd6pX-SEpCPETA" name="_" ordered="false" lowerBound="1" eType="_v3rjJEtyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjJEtyEd6pX-SEpCPETA" name="ChiNode" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rjJUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJaktyEd6pX-SEpCPETA"/>
+        <eAnnotations xmi:id="_v3rjJktyEd6pX-SEpCPETA" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_v3rjJ0tyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+            <eAnnotations xmi:id="_v3rjKEtyEd6pX-SEpCPETA" source="redefines" references="_v3rig0tyEd6pX-SEpCPETA"/>
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+          </contents>
+        </eAnnotations>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjKktyEd6pX-SEpCPETA" name="child_order" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjLEtyEd6pX-SEpCPETA" name="display_value" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjLktyEd6pX-SEpCPETA" name="initparams" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="database">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjMEtyEd6pX-SEpCPETA" name="is_searchable" ordered="false" unique="false" lowerBound="1" eType="_v3rjPUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjMktyEd6pX-SEpCPETA" name="is_soap" ordered="false" unique="false" lowerBound="1" eType="_v3rjPUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjNEtyEd6pX-SEpCPETA" name="orderby" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="none">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjNktyEd6pX-SEpCPETA" name="parent_order" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjOEtyEd6pX-SEpCPETA" name="pk_name" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="id">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjOktyEd6pX-SEpCPETA" name="table_name" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v3rjPUtyEd6pX-SEpCPETA" name="boolean">
+        <eAnnotations xmi:id="_v3rjPktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ8UtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v3rjP0tyEd6pX-SEpCPETA" name="false"/>
+        <eLiterals xmi:id="_v3rjQEtyEd6pX-SEpCPETA" name="true" value="1"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjQUtyEd6pX-SEpCPETA" name="ChiRelationEnd">
+        <eAnnotations xmi:id="_v3rjQktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJS0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjQ0tyEd6pX-SEpCPETA" name="fk_name" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjRUtyEd6pX-SEpCPETA" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjR0tyEd6pX-SEpCPETA" name="ChiBusinessPartnerActive" eSuperTypes="_v3rjE0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rjSEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJVktyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjSktyEd6pX-SEpCPETA" name="ChiBusinessPartnerPassive" eSuperTypes="_v3rjE0tyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rjS0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJWUtyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjTUtyEd6pX-SEpCPETA" name="ChiWorker" eSuperTypes="_v3ridUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rjTktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJXEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjT0tyEd6pX-SEpCPETA" name="base_Actor" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Actor"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjUktyEd6pX-SEpCPETA" name="ChiWorkerExternal" eSuperTypes="_v3rjTUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rjU0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJYEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjVEtyEd6pX-SEpCPETA" name="is_OfflineUser" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="true">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjV0tyEd6pX-SEpCPETA" name="ChiWorkerInternal" eSuperTypes="_v3rjTUtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v3rjWEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJZ0tyEd6pX-SEpCPETA"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjWktyEd6pX-SEpCPETA" name="ChiValueRef">
+        <eAnnotations xmi:id="_v3rjW0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJlUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjXEtyEd6pX-SEpCPETA" name="reference_value" ordered="false" unique="false" lowerBound="1" eType="_v3rjYktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjXktyEd6pX-SEpCPETA" name="_" ordered="false" upperBound="-1" eType="_v3rjJEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjYEtyEd6pX-SEpCPETA" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Property"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjYktyEd6pX-SEpCPETA" name="ChiValue">
+        <eAnnotations xmi:id="_v3rjY0tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJn0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjZEtyEd6pX-SEpCPETA" name="app_data_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="DATATYPE_ATTRIBUTE">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjZktyEd6pX-SEpCPETA" name="db_data_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="VARCHAR(255)">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjaEtyEd6pX-SEpCPETA" name="is_editable" ordered="false" unique="false" lowerBound="1" eType="_v3rjPUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjaktyEd6pX-SEpCPETA" name="input_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="text">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjbEtyEd6pX-SEpCPETA" name="display_type" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="text">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjbktyEd6pX-SEpCPETA" name="restrictions_match" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjcEtyEd6pX-SEpCPETA" name="restrictions_not_match" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjcktyEd6pX-SEpCPETA" name="restrictions_description" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjdEtyEd6pX-SEpCPETA" name="column_name" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjdktyEd6pX-SEpCPETA" name="base_Property" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Property"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjeEtyEd6pX-SEpCPETA" name="ChiSystem">
+        <eAnnotations xmi:id="_v3rjeUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJyktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjektyEd6pX-SEpCPETA" name="plattform" ordered="false" unique="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v3rjfEtyEd6pX-SEpCPETA" name="config" ordered="false" unique="false" lowerBound="1" defaultValueLiteral="config.ini">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjfktyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v3rjgEtyEd6pX-SEpCPETA" name="ChiView">
+        <eAnnotations xmi:id="_v3rjgUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v3sJ2UtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v3rjgktyEd6pX-SEpCPETA" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:id="_v3rjhEtyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#DecisionNode"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjhUtyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Connector"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjhktyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjh0tyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Actor"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjiEtyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Activity"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjiUtyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjiktyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#InstanceSpecification"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rji0tyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjjEtyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Actor"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjjUtyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjjktyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjj0tyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjkEtyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjkUtyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Activity"/>
+  </elementImport>
+  <elementImport xmi:id="_v3rjkktyEd6pX-SEpCPETA">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#UseCase"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_v3rjk0tyEd6pX-SEpCPETA" name="PrimitiveTypes">
+    <elementImport xmi:id="_v3rjlEtyEd6pX-SEpCPETA">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </elementImport>
+    <elementImport xmi:id="_v3rjlUtyEd6pX-SEpCPETA">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </elementImport>
+    <elementImport xmi:id="_v3rjlktyEd6pX-SEpCPETA">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </elementImport>
+    <elementImport xmi:id="_v3rjl0tyEd6pX-SEpCPETA">
+      <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+    </elementImport>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_v3rjmEtyEd6pX-SEpCPETA" name="string"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_v3rjmUtyEd6pX-SEpCPETA" name="void"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rjmktyEd6pX-SEpCPETA" name="ChiDecision">
+    <ownedAttribute xmi:id="_v3rjm0tyEd6pX-SEpCPETA" name="base_DecisionNode" association="_v3sKBEtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#DecisionNode"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rjnEtyEd6pX-SEpCPETA" name="ChiObject">
+    <ownedComment xmi:id="_v3rjnUtyEd6pX-SEpCPETA">
+      <body>a ChiObject is a candidate for a ChiNode repppresented in an activity diagr</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_v3rjnktyEd6pX-SEpCPETA" name="base_InstanceSpecification" association="_v3sKIEtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#InstanceSpecification"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rjn0tyEd6pX-SEpCPETA" name="ChiStakeHolder">
+    <ownedComment xmi:id="_v3rjoEtyEd6pX-SEpCPETA">
+      <body>Any person or force that have an interest in the considered domain.</body>
+    </ownedComment>
+    <generalization xmi:id="_v3rjoUtyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3rjoktyEd6pX-SEpCPETA" name="Power" visibility="public" type="_v3sJ4UtyEd6pX-SEpCPETA" isUnique="false">
+      <ownedComment xmi:id="_v3rjo0tyEd6pX-SEpCPETA">
+        <body>the measure of the possibilities in context that this person has to realiza his objectives.</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rjpEtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rjpUtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rjpktyEd6pX-SEpCPETA" name="Legitimacy" visibility="public" type="_v3sJ4UtyEd6pX-SEpCPETA" isUnique="false">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rjp0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rjqEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rjqUtyEd6pX-SEpCPETA" name="Role" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rjqktyEd6pX-SEpCPETA">
+        <body>The official role that this stakeholder play in context.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rjq0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rjrEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rjrUtyEd6pX-SEpCPETA" name="Urgency" visibility="public" type="_v3sJ4UtyEd6pX-SEpCPETA" isUnique="false">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rjrktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rjr0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rjsEtyEd6pX-SEpCPETA" name="base_Actor" association="_v3sKKktyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Actor"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rjsUtyEd6pX-SEpCPETA" name="ChiOpinionInner">
+    <generalization xmi:id="_v3rjsktyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3rjs0tyEd6pX-SEpCPETA" name="base_Activity" association="_v3sKE0tyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Activity"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rjtEtyEd6pX-SEpCPETA" name="ChiOpinion">
+    <generalization xmi:id="_v3rjtUtyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3rjtktyEd6pX-SEpCPETA" name="base_Activity" association="_v3sKAEtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Activity"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rjt0tyEd6pX-SEpCPETA" name="ChiAccord">
+    <ownedAttribute xmi:id="_v3rjuEtyEd6pX-SEpCPETA" name="base_Association" association="_v3sKQ0tyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rjuUtyEd6pX-SEpCPETA" name="ChiDiscord">
+    <ownedAttribute xmi:id="_v3rjuktyEd6pX-SEpCPETA" name="base_Association" association="_v3sKD0tyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rju0tyEd6pX-SEpCPETA" name="ChiBase" isAbstract="true">
+    <ownedAttribute xmi:id="_v3rjvEtyEd6pX-SEpCPETA" name="Alias" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rjvUtyEd6pX-SEpCPETA">
+        <body>the Project Id of this object.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rjvktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rjv0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rjwEtyEd6pX-SEpCPETA" name="Version" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rjwUtyEd6pX-SEpCPETA">
+        <body>the model version of this object</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rjwktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rjw0tyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3rjxEtyEd6pX-SEpCPETA" value="1.0"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rjxUtyEd6pX-SEpCPETA" name="created" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rjxktyEd6pX-SEpCPETA">
+        <body>the creation date of this object</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rjx0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rjyEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rjyUtyEd6pX-SEpCPETA" name="creator" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rjyktyEd6pX-SEpCPETA">
+        <body>the user that created this object</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rjy0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rjzEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rjzUtyEd6pX-SEpCPETA" name="last_editor" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rjzktyEd6pX-SEpCPETA">
+        <body>the last user that edited this object</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rjz0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj0EtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rj0UtyEd6pX-SEpCPETA" name="modified" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rj0ktyEd6pX-SEpCPETA">
+        <body>the date when this object was modified</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rj00tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj1EtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rj1UtyEd6pX-SEpCPETA" name="base_Class" association="_v3sKJEtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rj1ktyEd6pX-SEpCPETA" name="ChiGoal">
+    <ownedComment xmi:id="_v3rj10tyEd6pX-SEpCPETA">
+      <body>a Measurable scope that the enterprise wants to achieve. </body>
+    </ownedComment>
+    <generalization xmi:id="_v3rj2EtyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3rj2UtyEd6pX-SEpCPETA" name="Priority" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rj2ktyEd6pX-SEpCPETA">
+        <body>A priority in %</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rj20tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj3EtyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj3UtyEd6pX-SEpCPETA" value="50"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rj3ktyEd6pX-SEpCPETA" name="Value_ammount" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rj30tyEd6pX-SEpCPETA">
+        <body>The actual amount of the value this goal intends to alter</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rj4EtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj4UtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rj4ktyEd6pX-SEpCPETA" name="Value_Goal" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rj40tyEd6pX-SEpCPETA">
+        <body>The amount by which the value is to be altered</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rj5EtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj5UtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rj5ktyEd6pX-SEpCPETA" name="Value_Name" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rj50tyEd6pX-SEpCPETA">
+        <body>The name of the value this goal intends to alter</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rj6EtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj6UtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rj6ktyEd6pX-SEpCPETA" name="ChiRequirement">
+    <ownedComment xmi:id="_v3rj60tyEd6pX-SEpCPETA">
+      <body>A Business guide line about the Enterprise or the project.</body>
+    </ownedComment>
+    <generalization xmi:id="_v3rj7EtyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3rj7UtyEd6pX-SEpCPETA" name="Priority" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rj7ktyEd6pX-SEpCPETA">
+        <body>A priority in %. Requirements are ordered by priority.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rj70tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj8EtyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj8UtyEd6pX-SEpCPETA" value="50"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rj8ktyEd6pX-SEpCPETA" name="Author" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rj80tyEd6pX-SEpCPETA">
+        <body>This requirement's author's name and role in the project</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rj9EtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj9UtyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3rj9ktyEd6pX-SEpCPETA" value="myName, Analyst"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rj90tyEd6pX-SEpCPETA" name="Proofreader" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rj-EtyEd6pX-SEpCPETA">
+        <body>Each requirement needs to be confirmed.&#xD;
+This requirement's proofreader	's name and role in the project</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rj-UtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj-ktyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3rj-0tyEd6pX-SEpCPETA" value="aName, Client"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rj_EtyEd6pX-SEpCPETA" name="Status" visibility="public" type="_v3sJ5UtyEd6pX-SEpCPETA" isUnique="false">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rj_UtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rj_ktyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rj_0tyEd6pX-SEpCPETA" name="Type" visibility="public" type="_v3sJ6UtyEd6pX-SEpCPETA" isUnique="false">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rkAEtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rkAUtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rkAktyEd6pX-SEpCPETA" name="ChiFeature">
+    <generalization xmi:id="_v3rkA0tyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3rkBEtyEd6pX-SEpCPETA" name="Author" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rkBUtyEd6pX-SEpCPETA">
+        <body>This feature's author's name and role in the project</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rkBktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rkB0tyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3rkCEtyEd6pX-SEpCPETA" value="myName, Analyst"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rkCUtyEd6pX-SEpCPETA" name="Proofreader" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rkCktyEd6pX-SEpCPETA">
+        <body>This feature's revisor's name and role in the project</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rkC0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rkDEtyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3rkDUtyEd6pX-SEpCPETA" value="aName, Client"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rkDktyEd6pX-SEpCPETA" name="Status" visibility="public" type="_v3sJ3EtyEd6pX-SEpCPETA" isUnique="false">
+      <ownedComment xmi:id="_v3rkD0tyEd6pX-SEpCPETA">
+        <body>This feature's status</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rkEEtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rkEUtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rkEktyEd6pX-SEpCPETA" name="ChiIssue">
+    <generalization xmi:id="_v3rkE0tyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3rkFEtyEd6pX-SEpCPETA" name="Author" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rkFUtyEd6pX-SEpCPETA">
+        <body>This issue's author's name and role in the project</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rkFktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rkF0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rkGEtyEd6pX-SEpCPETA" name="Responsible" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rkGUtyEd6pX-SEpCPETA">
+        <body>The responsible to close the present issue</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rkGktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rkG0tyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3rkHEtyEd6pX-SEpCPETA" value="none"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rkHUtyEd6pX-SEpCPETA" name="ChiAction">
+    <ownedAttribute xmi:id="_v3rkHktyEd6pX-SEpCPETA" name="base_Association" association="_v3sKEUtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3rkH0tyEd6pX-SEpCPETA" name="ChiActionKey">
+    <ownedComment xmi:id="_v3rkIEtyEd6pX-SEpCPETA">
+      <body>An action key used in Chronos. An action key associates two controllers (to define a control flow) or a view with a controller (to define a view attachment). Controller, Views and Associations define the application flow</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_v3rkIUtyEd6pX-SEpCPETA" name="action" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rkIktyEd6pX-SEpCPETA">
+        <body>The Action which triggeres this association</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rkI0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rkJEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rkJUtyEd6pX-SEpCPETA" name="context" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3rkJktyEd6pX-SEpCPETA">
+        <body>The Context in which this association is valid</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3rkJ0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3rkKEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3rkKUtyEd6pX-SEpCPETA" name="config" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJAEtyEd6pX-SEpCPETA">
+        <body>The configuration file in which this association will be placed</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJAUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJAktyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3sJA0tyEd6pX-SEpCPETA" value="config.ini"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJBEtyEd6pX-SEpCPETA" name="ChiController" visibility="public" type="_v3sJ1ktyEd6pX-SEpCPETA" association="_v3sJ9EtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJBUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJBktyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJB0tyEd6pX-SEpCPETA" name="ChiControllerTarget" visibility="public" type="_v3sJ1ktyEd6pX-SEpCPETA" association="_v3sJ-EtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJCEtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJCUtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJCktyEd6pX-SEpCPETA" name="base_Association" association="_v3sKR0tyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJC0tyEd6pX-SEpCPETA" name="ChiActivity">
+    <ownedAttribute xmi:id="_v3sJDEtyEd6pX-SEpCPETA" name="base_Activity" association="_v3sKFUtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Activity"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJDUtyEd6pX-SEpCPETA" name="ChiBusinessProcess">
+    <ownedComment xmi:id="_v3sJDktyEd6pX-SEpCPETA">
+      <body>A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases.</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJD0tyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3sJEEtyEd6pX-SEpCPETA" name="base_Package" association="_v3sKRUtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJEUtyEd6pX-SEpCPETA" name="ChiBusinessUseCase">
+    <ownedComment xmi:id="_v3sJEktyEd6pX-SEpCPETA">
+      <body>A Business Use Case is part of a business process that produces an advantage to the enterprise.</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJE0tyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3sJFEtyEd6pX-SEpCPETA" name="GoalInContext" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJFUtyEd6pX-SEpCPETA">
+        <body>The goal should implicitly express the actor's intent or purpose of the use case, such as &quot;Enrol Student in Seminar.&quot;</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJFktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJF0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJGEtyEd6pX-SEpCPETA" name="Precondition" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJGUtyEd6pX-SEpCPETA">
+        <body>A list of the conditions, if any, that must be met before a use case may be invoked. Can be a previous Use case or self the presence of the system in Scope.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJGktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJG0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJHEtyEd6pX-SEpCPETA" name="Trigger" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJHUtyEd6pX-SEpCPETA">
+        <body>Event that is responsible for invocation of the use case.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJHktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJH0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJIEtyEd6pX-SEpCPETA" name="Scope" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJIUtyEd6pX-SEpCPETA">
+        <body>Boundaries in which the use case is operated when invoked (E.g. CMS)</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJIktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJI0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJJEtyEd6pX-SEpCPETA" name="Level" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJJUtyEd6pX-SEpCPETA">
+        <body>Authorizations for operations/actions to be performed against the Chi business objects in scope. Against every object/process 4 CRUD basic operations are possible:&#xD;
+Create (Write)&#xD;
+Read (Open)&#xD;
+Update (Change)&#xD;
+Delete  (Destroy)</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJJktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJJ0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJKEtyEd6pX-SEpCPETA" name="PrimaryActor" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJKUtyEd6pX-SEpCPETA">
+        <body>the main actor of this use case</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJKktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJK0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJLEtyEd6pX-SEpCPETA" name="OtherActors" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJLUtyEd6pX-SEpCPETA">
+        <body>The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJLktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJL0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJMEtyEd6pX-SEpCPETA" name="Stakeholders" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJMUtyEd6pX-SEpCPETA">
+        <body>List of actors that have a special interest (i.e. to be informed every time) in completion of the use case</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJMktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJM0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJNEtyEd6pX-SEpCPETA" name="MainSuccessScenario" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJNUtyEd6pX-SEpCPETA">
+        <body>The main path of logic an actor follows through a use case. Often referred to as the &quot;happy path&quot; or the &quot;main path&quot; because it describes how the use case works when everything works as it normally should.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJNktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJN0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJOEtyEd6pX-SEpCPETA" name="Extensions" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJOUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJOktyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJO0tyEd6pX-SEpCPETA" name="base_UseCase" association="_v3sKKEtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#UseCase"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJPEtyEd6pX-SEpCPETA" name="ChiBusPartner" visibility="public" type="_v3sJUktyEd6pX-SEpCPETA" association="_v3sKLktyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJPUtyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJPktyEd6pX-SEpCPETA"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJP0tyEd6pX-SEpCPETA" name="ChiBusinessUseCaseCore">
+    <ownedComment xmi:id="_v3sJQEtyEd6pX-SEpCPETA">
+      <body>A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money).</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJQUtyEd6pX-SEpCPETA" general="_v3sJEUtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJQktyEd6pX-SEpCPETA" name="ChiManyToMany">
+    <ownedComment xmi:id="_v3sJQ0tyEd6pX-SEpCPETA">
+      <body>A many to many node used in WCMF. It is used to realize a many to many relation between wo WCMFNodes</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJREtyEd6pX-SEpCPETA" general="_v3sJaktyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3sJRUtyEd6pX-SEpCPETA" name="ChiNodeSource" visibility="public" type="_v3sJaktyEd6pX-SEpCPETA" association="_v3sKPUtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJRktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJR0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJSEtyEd6pX-SEpCPETA" name="ChiNodeTarget" visibility="public" type="_v3sJaktyEd6pX-SEpCPETA" association="_v3sKSUtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJSUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJSktyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJS0tyEd6pX-SEpCPETA" name="ChiRelationEnd">
+    <ownedComment xmi:id="_v3sJTEtyEd6pX-SEpCPETA">
+      <body>An association end used in WCMF</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_v3sJTUtyEd6pX-SEpCPETA" name="fk_name" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJTktyEd6pX-SEpCPETA">
+        <body>The name of the foreign key column. The generator will add this if there is no appropriate attribute. If not given the generator will add 'fk_[parent]_id'</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJT0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJUEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJUUtyEd6pX-SEpCPETA" name="base_Association" association="_v3sKJktyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJUktyEd6pX-SEpCPETA" name="ChiBusinessPartner">
+    <ownedComment xmi:id="_v3sJU0tyEd6pX-SEpCPETA">
+      <body>A ChiBusinesPartner is an external person that has a Business relation with the enterprise.</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJVEtyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3sJVUtyEd6pX-SEpCPETA" name="base_Actor" association="_v3sKOUtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Actor"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJVktyEd6pX-SEpCPETA" name="ChiBusinessPartnerActive">
+    <ownedComment xmi:id="_v3sJV0tyEd6pX-SEpCPETA">
+      <body>A ChiBusinesPartnerActive is a direct customer of the enterprise.</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJWEtyEd6pX-SEpCPETA" general="_v3sJUktyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJWUtyEd6pX-SEpCPETA" name="ChiBusinessPartnerPassive">
+    <ownedComment xmi:id="_v3sJWktyEd6pX-SEpCPETA">
+      <body>A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise.</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJW0tyEd6pX-SEpCPETA" general="_v3sJUktyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJXEtyEd6pX-SEpCPETA" name="ChiWorker">
+    <ownedComment xmi:id="_v3sJXUtyEd6pX-SEpCPETA">
+      <body>A ChiWorker is a special actor that works within the enterprise. </body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJXktyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3sJX0tyEd6pX-SEpCPETA" name="base_Actor" association="_v3sKAktyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Actor"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJYEtyEd6pX-SEpCPETA" name="ChiWorkerExternal">
+    <ownedComment xmi:id="_v3sJYUtyEd6pX-SEpCPETA">
+      <body>A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise.</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJYktyEd6pX-SEpCPETA" general="_v3sJXEtyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3sJY0tyEd6pX-SEpCPETA" name="is_OfflineUser" visibility="public" isUnique="false">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJZEtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJZUtyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_v3sJZktyEd6pX-SEpCPETA" value="true"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJZ0tyEd6pX-SEpCPETA" name="ChiWorkerInternal">
+    <ownedComment xmi:id="_v3sJaEtyEd6pX-SEpCPETA">
+      <body>A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners.</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJaUtyEd6pX-SEpCPETA" general="_v3sJXEtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJaktyEd6pX-SEpCPETA" name="ChiNode">
+    <ownedComment xmi:id="_v3sJa0tyEd6pX-SEpCPETA">
+      <body>A Node type used in WCMF. Nodes and Values define the application data model</body>
+    </ownedComment>
+    <generalization xmi:id="_v3sJbEtyEd6pX-SEpCPETA" general="_v3rju0tyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v3sJbUtyEd6pX-SEpCPETA" name="child_order" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJbktyEd6pX-SEpCPETA">
+        <body>The order of the associated children e.g. for Recipe: Image|Info|AdminInfo</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJb0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJcEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJcUtyEd6pX-SEpCPETA" name="display_value" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJcktyEd6pX-SEpCPETA">
+        <body>The display value of a node e.g. for Recipe: name|AdminInfo/status|Info/status</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJc0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJdEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJdUtyEd6pX-SEpCPETA" name="initparams" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJdktyEd6pX-SEpCPETA">
+        <body>The configuration section that is used on initialization of the corresponding mapper.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJd0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJeEtyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3sJeUtyEd6pX-SEpCPETA" value="database"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJektyEd6pX-SEpCPETA" name="is_searchable" visibility="public" type="_v3sJ8UtyEd6pX-SEpCPETA" isUnique="false">
+      <ownedComment xmi:id="_v3sJe0tyEd6pX-SEpCPETA">
+        <body>Indicates wether this type should be included in the default search.</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJfEtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJfUtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJfktyEd6pX-SEpCPETA" name="is_soap" visibility="public" type="_v3sJ8UtyEd6pX-SEpCPETA" isUnique="false">
+      <ownedComment xmi:id="_v3sJf0tyEd6pX-SEpCPETA">
+        <body>Indicates wether a SOAP interface should be generated for this type.</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJgEtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJgUtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJgktyEd6pX-SEpCPETA" name="orderby" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJg0tyEd6pX-SEpCPETA">
+        <body>Definition of default sorting. Possible values: 'none' (no order), 'sortkey' (generates a 'sortkey' column, that is used for explicit sorting) or any the name of any WCMFValue defined in the node optionally followed by [ASC|DESC] e.g. 'name ASC'</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJhEtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJhUtyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3sJhktyEd6pX-SEpCPETA" value="none"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJh0tyEd6pX-SEpCPETA" name="parent_order" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJiEtyEd6pX-SEpCPETA">
+        <body>The order of the associated parents.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJiUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJiktyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJi0tyEd6pX-SEpCPETA" name="pk_name" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJjEtyEd6pX-SEpCPETA">
+        <body>The name of the primary key column. The generator will add this if there is no appropriate attribute.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJjUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJjktyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3sJj0tyEd6pX-SEpCPETA" value="id"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJkEtyEd6pX-SEpCPETA" name="table_name" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJkUtyEd6pX-SEpCPETA">
+        <body>The name of the database table. If not given the name will be taken.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJkktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJk0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJlEtyEd6pX-SEpCPETA" name="base_Class" association="_v3sKHktyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJlUtyEd6pX-SEpCPETA" name="ChiValueRef">
+    <ownedComment xmi:id="_v3sJlktyEd6pX-SEpCPETA">
+      <body>A Node value type used in WCMF. These values reference values of other Node types and are not persistent</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_v3sJl0tyEd6pX-SEpCPETA" name="reference_value" visibility="public" type="_v3sJn0tyEd6pX-SEpCPETA" isUnique="false">
+      <ownedComment xmi:id="_v3sJmEtyEd6pX-SEpCPETA">
+        <body>The referenced attribute</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJmUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJmktyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJm0tyEd6pX-SEpCPETA" name="ChiNode" visibility="public" type="_v3sJaktyEd6pX-SEpCPETA" association="_v3sJ_EtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJnEtyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJnUtyEd6pX-SEpCPETA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJnktyEd6pX-SEpCPETA" name="base_Property" association="_v3sKDUtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJn0tyEd6pX-SEpCPETA" name="ChiValue">
+    <ownedComment xmi:id="_v3sJoEtyEd6pX-SEpCPETA">
+      <body>A Node value type used in WCMF. These values are persistent</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_v3sJoUtyEd6pX-SEpCPETA" name="app_data_type" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJoktyEd6pX-SEpCPETA">
+        <body>The datatype used in the application e.g. DATATYPE_DONTCARE, DATATYPE_ATTRIBUTE, DATATYPE_ELEMENT or DATATYPE_IGNORE</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJo0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJpEtyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3sJpUtyEd6pX-SEpCPETA" value="DATATYPE_ATTRIBUTE"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJpktyEd6pX-SEpCPETA" name="db_data_type" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJp0tyEd6pX-SEpCPETA">
+        <body>The datatype used in the database</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJqEtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJqUtyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3sJqktyEd6pX-SEpCPETA" value="VARCHAR(255)"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJq0tyEd6pX-SEpCPETA" name="is_editable" visibility="public" type="_v3sJ8UtyEd6pX-SEpCPETA" isUnique="false">
+      <ownedComment xmi:id="_v3sJrEtyEd6pX-SEpCPETA">
+        <body>Whether the attribute is editable or not</body>
+      </ownedComment>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJrUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJrktyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJr0tyEd6pX-SEpCPETA" name="input_type" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJsEtyEd6pX-SEpCPETA">
+        <body>The HTML input type for the attribute e.g. select#fix:key1[val1]|key2[val2]</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJsUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJsktyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3sJs0tyEd6pX-SEpCPETA" value="text"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJtEtyEd6pX-SEpCPETA" name="display_type" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJtUtyEd6pX-SEpCPETA">
+        <body>The HTML display type for the attribute e.g. image</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJtktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJt0tyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3sJuEtyEd6pX-SEpCPETA" value="text"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJuUtyEd6pX-SEpCPETA" name="restrictions_match" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJuktyEd6pX-SEpCPETA">
+        <body>A regular expression that the value must match (e.g. '[0-3][0-9]\.[0-1][0-9]\.[0-9][0-9][0-9][0-9]' for date values)</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJu0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJvEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJvUtyEd6pX-SEpCPETA" name="restrictions_not_match" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJvktyEd6pX-SEpCPETA">
+        <body>A regular expression that the value must NOT match</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJv0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJwEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJwUtyEd6pX-SEpCPETA" name="restrictions_description" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJwktyEd6pX-SEpCPETA">
+        <body>A text describing the restrictions</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJw0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJxEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJxUtyEd6pX-SEpCPETA" name="column_name" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJxktyEd6pX-SEpCPETA">
+        <body>The name of the database column. If not given the name will be taken</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJx0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJyEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJyUtyEd6pX-SEpCPETA" name="base_Property" association="_v3sKQUtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJyktyEd6pX-SEpCPETA" name="ChiSystem">
+    <ownedComment xmi:id="_v3sJy0tyEd6pX-SEpCPETA">
+      <body>A system configuration. Settings are modelled as attributes with default values</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_v3sJzEtyEd6pX-SEpCPETA" name="plattform" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJzUtyEd6pX-SEpCPETA">
+        <body>The plattform to which the configuration settings apply.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJzktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJz0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJ0EtyEd6pX-SEpCPETA" name="config" visibility="public" isUnique="false">
+      <ownedComment xmi:id="_v3sJ0UtyEd6pX-SEpCPETA">
+        <body>The configuration file where the settings will be placed.</body>
+      </ownedComment>
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJ0ktyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJ00tyEd6pX-SEpCPETA" value="1"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_v3sJ1EtyEd6pX-SEpCPETA" value="config.ini"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v3sJ1UtyEd6pX-SEpCPETA" name="base_Class" association="_v3sKLEtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJ1ktyEd6pX-SEpCPETA" name="ChiController">
+    <ownedComment xmi:id="_v3sJ10tyEd6pX-SEpCPETA">
+      <body>A Controller type used in Chronos. Controller, Views and Associations define the application flow</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_v3sJ2EtyEd6pX-SEpCPETA" name="base_Class" association="_v3sKO0tyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v3sJ2UtyEd6pX-SEpCPETA" name="ChiView">
+    <ownedComment xmi:id="_v3sJ2ktyEd6pX-SEpCPETA">
+      <body>A View used in WCMF. Controller, Views and Associations define the application flow</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_v3sJ20tyEd6pX-SEpCPETA" name="base_Class" association="_v3sKIktyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_v3sJ3EtyEd6pX-SEpCPETA" name="ChiFeatureStatus">
+    <ownedLiteral xmi:id="_v3sJ3UtyEd6pX-SEpCPETA" name="Implemented"/>
+    <ownedLiteral xmi:id="_v3sJ3ktyEd6pX-SEpCPETA" name="Proposed"/>
+    <ownedLiteral xmi:id="_v3sJ30tyEd6pX-SEpCPETA" name="Rejected"/>
+    <ownedLiteral xmi:id="_v3sJ4EtyEd6pX-SEpCPETA" name="Validated"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_v3sJ4UtyEd6pX-SEpCPETA" name="ChiScala">
+    <ownedLiteral xmi:id="_v3sJ4ktyEd6pX-SEpCPETA" name="High"/>
+    <ownedLiteral xmi:id="_v3sJ40tyEd6pX-SEpCPETA" name="Low"/>
+    <ownedLiteral xmi:id="_v3sJ5EtyEd6pX-SEpCPETA" name="Medium"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_v3sJ5UtyEd6pX-SEpCPETA" name="ChiRequirementStatus">
+    <ownedLiteral xmi:id="_v3sJ5ktyEd6pX-SEpCPETA" name="Validated"/>
+    <ownedLiteral xmi:id="_v3sJ50tyEd6pX-SEpCPETA" name="Mandatory"/>
+    <ownedLiteral xmi:id="_v3sJ6EtyEd6pX-SEpCPETA" name="Proposed"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_v3sJ6UtyEd6pX-SEpCPETA" name="ChiRequirementType">
+    <ownedComment xmi:id="_v3sJ6ktyEd6pX-SEpCPETA">
+      <body>Type of requirement</body>
+    </ownedComment>
+    <ownedLiteral xmi:id="_v3sJ60tyEd6pX-SEpCPETA" name="Transport"/>
+    <ownedLiteral xmi:id="_v3sJ7EtyEd6pX-SEpCPETA" name="Scalability"/>
+    <ownedLiteral xmi:id="_v3sJ7UtyEd6pX-SEpCPETA" name="Persistence"/>
+    <ownedLiteral xmi:id="_v3sJ7ktyEd6pX-SEpCPETA" name="Performance"/>
+    <ownedLiteral xmi:id="_v3sJ70tyEd6pX-SEpCPETA" name="Security"/>
+    <ownedLiteral xmi:id="_v3sJ8EtyEd6pX-SEpCPETA" name="Business Rule"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_v3sJ8UtyEd6pX-SEpCPETA" name="boolean">
+    <ownedLiteral xmi:id="_v3sJ8ktyEd6pX-SEpCPETA" name="false"/>
+    <ownedLiteral xmi:id="_v3sJ80tyEd6pX-SEpCPETA" name="true"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v3sJ9EtyEd6pX-SEpCPETA" name="from" memberEnd="_v3sJ9UtyEd6pX-SEpCPETA _v3sJBEtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:id="_v3sJ9UtyEd6pX-SEpCPETA" name="" visibility="public" type="_v3rkH0tyEd6pX-SEpCPETA" association="_v3sJ9EtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJ9ktyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJ90tyEd6pX-SEpCPETA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v3sJ-EtyEd6pX-SEpCPETA" name="to" memberEnd="_v3sJ-UtyEd6pX-SEpCPETA _v3sJB0tyEd6pX-SEpCPETA">
+    <ownedEnd xmi:id="_v3sJ-UtyEd6pX-SEpCPETA" name="" visibility="public" type="_v3rkH0tyEd6pX-SEpCPETA" association="_v3sJ-EtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJ-ktyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJ-0tyEd6pX-SEpCPETA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v3sJ_EtyEd6pX-SEpCPETA" name="reference_type" memberEnd="_v3sJm0tyEd6pX-SEpCPETA _v3sJ_UtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:id="_v3sJ_UtyEd6pX-SEpCPETA" name="" visibility="public" type="_v3sJlUtyEd6pX-SEpCPETA" association="_v3sJ_EtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sJ_ktyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sJ_0tyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKAEtyEd6pX-SEpCPETA" name="Activity_ChiOpinion" memberEnd="_v3sKAUtyEd6pX-SEpCPETA _v3rjtktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKAUtyEd6pX-SEpCPETA" name="extension_ChiOpinion" type="_v3rjtEtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKAEtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKAktyEd6pX-SEpCPETA" name="Actor_ChiWorker" memberEnd="_v3sKA0tyEd6pX-SEpCPETA _v3sJX0tyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKA0tyEd6pX-SEpCPETA" name="extension_ChiWorker" type="_v3sJXEtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKAktyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKBEtyEd6pX-SEpCPETA" name="DecisionNode_ChiDecision" memberEnd="_v3sKBUtyEd6pX-SEpCPETA _v3rjm0tyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKBUtyEd6pX-SEpCPETA" name="extension_ChiDecision" type="_v3rjmktyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKBEtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v3sKBktyEd6pX-SEpCPETA" name="hierarchy" memberEnd="_v3sKB0tyEd6pX-SEpCPETA _v3sKCktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:id="_v3sKB0tyEd6pX-SEpCPETA" name="parents" visibility="public" type="_v3sJaktyEd6pX-SEpCPETA" association="_v3sKBktyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sKCEtyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sKCUtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_v3sKCktyEd6pX-SEpCPETA" name="children" visibility="public" type="_v3sJaktyEd6pX-SEpCPETA" association="_v3sKBktyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sKC0tyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sKDEtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKDUtyEd6pX-SEpCPETA" name="Property_ChiValueRef" memberEnd="_v3sKDktyEd6pX-SEpCPETA _v3sJnktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKDktyEd6pX-SEpCPETA" name="extension_ChiValueRef" type="_v3sJlUtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKDUtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKD0tyEd6pX-SEpCPETA" name="Association_ChiDiscord" memberEnd="_v3sKEEtyEd6pX-SEpCPETA _v3rjuktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKEEtyEd6pX-SEpCPETA" name="extension_ChiDiscord" type="_v3rjuUtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKD0tyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKEUtyEd6pX-SEpCPETA" name="Association_ChiAction" memberEnd="_v3sKEktyEd6pX-SEpCPETA _v3rkHktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKEktyEd6pX-SEpCPETA" name="extension_ChiAction" type="_v3rkHUtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKEUtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKE0tyEd6pX-SEpCPETA" name="Activity_ChiOpinionInner" memberEnd="_v3sKFEtyEd6pX-SEpCPETA _v3rjs0tyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKFEtyEd6pX-SEpCPETA" name="extension_ChiOpinionInner" type="_v3rjsUtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKE0tyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKFUtyEd6pX-SEpCPETA" name="Activity_ChiActivity" memberEnd="_v3sKFktyEd6pX-SEpCPETA _v3sJDEtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKFktyEd6pX-SEpCPETA" name="extension_ChiActivity" type="_v3sJC0tyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKFUtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v3sKF0tyEd6pX-SEpCPETA" name="attributes" memberEnd="_v3sKGEtyEd6pX-SEpCPETA _v3sKG0tyEd6pX-SEpCPETA">
+    <ownedEnd xmi:id="_v3sKGEtyEd6pX-SEpCPETA" name="" visibility="public" type="_v3sJaktyEd6pX-SEpCPETA" association="_v3sKF0tyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sKGUtyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sKGktyEd6pX-SEpCPETA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_v3sKG0tyEd6pX-SEpCPETA" name="" visibility="public" type="_v3sJn0tyEd6pX-SEpCPETA" association="_v3sKF0tyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sKHEtyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sKHUtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKHktyEd6pX-SEpCPETA" name="Class_ChiNode" memberEnd="_v3sKH0tyEd6pX-SEpCPETA _v3sJlEtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKH0tyEd6pX-SEpCPETA" name="extension_ChiNode" type="_v3sJaktyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKHktyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKIEtyEd6pX-SEpCPETA" name="InstanceSpecification_ChiObject" memberEnd="_v3sKIUtyEd6pX-SEpCPETA _v3rjnktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKIUtyEd6pX-SEpCPETA" name="extension_ChiObject" type="_v3rjnEtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKIEtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKIktyEd6pX-SEpCPETA" name="Class_ChiView" memberEnd="_v3sKI0tyEd6pX-SEpCPETA _v3sJ20tyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKI0tyEd6pX-SEpCPETA" name="extension_ChiView" type="_v3sJ2UtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKIktyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKJEtyEd6pX-SEpCPETA" name="Class_ChiBase" memberEnd="_v3sKJUtyEd6pX-SEpCPETA _v3rj1UtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKJUtyEd6pX-SEpCPETA" name="extension_ChiBase" type="_v3rju0tyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKJEtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKJktyEd6pX-SEpCPETA" name="Association_ChiRelationEnd" memberEnd="_v3sKJ0tyEd6pX-SEpCPETA _v3sJUUtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKJ0tyEd6pX-SEpCPETA" name="extension_ChiRelationEnd" type="_v3sJS0tyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKJktyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKKEtyEd6pX-SEpCPETA" name="UseCase_ChiBusinessUseCase" memberEnd="_v3sKKUtyEd6pX-SEpCPETA _v3sJO0tyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKKUtyEd6pX-SEpCPETA" name="extension_ChiBusinessUseCase" type="_v3sJEUtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKKEtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKKktyEd6pX-SEpCPETA" name="Actor_ChiStakeHolder" memberEnd="_v3sKK0tyEd6pX-SEpCPETA _v3rjsEtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKK0tyEd6pX-SEpCPETA" name="extension_ChiStakeHolder" type="_v3rjn0tyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKKktyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKLEtyEd6pX-SEpCPETA" name="Class_ChiSystem" memberEnd="_v3sKLUtyEd6pX-SEpCPETA _v3sJ1UtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKLUtyEd6pX-SEpCPETA" name="extension_ChiSystem" type="_v3sJyktyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKLEtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v3sKLktyEd6pX-SEpCPETA" name="" memberEnd="_v3sKL0tyEd6pX-SEpCPETA _v3sJPEtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:id="_v3sKL0tyEd6pX-SEpCPETA" name="" visibility="public" type="_v3sJEUtyEd6pX-SEpCPETA" association="_v3sKLktyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sKMEtyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sKMUtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v3sKMktyEd6pX-SEpCPETA" name="view" memberEnd="_v3sKM0tyEd6pX-SEpCPETA _v3sKNktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:id="_v3sKM0tyEd6pX-SEpCPETA" name="" visibility="public" type="_v3sJ2UtyEd6pX-SEpCPETA" association="_v3sKMktyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sKNEtyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sKNUtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_v3sKNktyEd6pX-SEpCPETA" name="" visibility="public" type="_v3sJ1ktyEd6pX-SEpCPETA" association="_v3sKMktyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sKN0tyEd6pX-SEpCPETA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sKOEtyEd6pX-SEpCPETA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKOUtyEd6pX-SEpCPETA" name="Actor_ChiBusinessPartner" memberEnd="_v3sKOktyEd6pX-SEpCPETA _v3sJVUtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKOktyEd6pX-SEpCPETA" name="extension_ChiBusinessPartner" type="_v3sJUktyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKOUtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKO0tyEd6pX-SEpCPETA" name="Class_ChiController" memberEnd="_v3sKPEtyEd6pX-SEpCPETA _v3sJ2EtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKPEtyEd6pX-SEpCPETA" name="extension_ChiController" type="_v3sJ1ktyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKO0tyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v3sKPUtyEd6pX-SEpCPETA" name="nodeB" memberEnd="_v3sKPktyEd6pX-SEpCPETA _v3sJRUtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:id="_v3sKPktyEd6pX-SEpCPETA" name="" visibility="public" type="_v3sJQktyEd6pX-SEpCPETA" association="_v3sKPUtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sKP0tyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sKQEtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKQUtyEd6pX-SEpCPETA" name="Property_ChiValue" memberEnd="_v3sKQktyEd6pX-SEpCPETA _v3sJyUtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKQktyEd6pX-SEpCPETA" name="extension_ChiValue" type="_v3sJn0tyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKQUtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKQ0tyEd6pX-SEpCPETA" name="Association_ChiAccord" memberEnd="_v3sKREtyEd6pX-SEpCPETA _v3rjuEtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKREtyEd6pX-SEpCPETA" name="extension_ChiAccord" type="_v3rjt0tyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKQ0tyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKRUtyEd6pX-SEpCPETA" name="Package_ChiBusinessProcess" memberEnd="_v3sKRktyEd6pX-SEpCPETA _v3sJEEtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKRktyEd6pX-SEpCPETA" name="extension_ChiBusinessProcess" type="_v3sJDUtyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKRUtyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v3sKR0tyEd6pX-SEpCPETA" name="Association_ChiActionKey" memberEnd="_v3sKSEtyEd6pX-SEpCPETA _v3sJCktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v3sKSEtyEd6pX-SEpCPETA" name="extension_ChiActionKey" type="_v3rkH0tyEd6pX-SEpCPETA" aggregation="composite" association="_v3sKR0tyEd6pX-SEpCPETA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_v3sKSUtyEd6pX-SEpCPETA" name="nodeA" memberEnd="_v3sKSktyEd6pX-SEpCPETA _v3sJSEtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:id="_v3sKSktyEd6pX-SEpCPETA" name="" visibility="public" type="_v3sJQktyEd6pX-SEpCPETA" association="_v3sKSUtyEd6pX-SEpCPETA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_v3sKS0tyEd6pX-SEpCPETA" value="*"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v3sKTEtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <profileApplication xmi:id="_v3sKTUtyEd6pX-SEpCPETA">
+    <eAnnotations xmi:id="_v3sKTktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="ProfileBase.profile.uml#_v2czPEtyEd6pX-SEpCPETA"/>
+    </eAnnotations>
+    <appliedProfile href="ProfileBase.profile.uml#_v2czOktyEd6pX-SEpCPETA"/>
+  </profileApplication>
+</uml:Profile>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_v2eouEtyEd6pX-SEpCPETA" name="Default" metamodelReference="_v2epCEtyEd6pX-SEpCPETA">
+  <eAnnotations xmi:id="_v2eouUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_v2eouktyEd6pX-SEpCPETA" name="Default" nsURI="http:///schemas/Default/1" nsPrefix="Default">
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v2eou0tyEd6pX-SEpCPETA" name="ConstraintEvaluationMode">
+        <eAnnotations xmi:id="_v2eovEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epCktyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v2eovUtyEd6pX-SEpCPETA" name="batch"/>
+        <eLiterals xmi:id="_v2eovktyEd6pX-SEpCPETA" name="live" value="1"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v2eov0tyEd6pX-SEpCPETA" name="ConstraintSeverity">
+        <eAnnotations xmi:id="_v2eowEtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epDUtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v2eowUtyEd6pX-SEpCPETA" name="error"/>
+        <eLiterals xmi:id="_v2eowktyEd6pX-SEpCPETA" name="warning" value="1"/>
+        <eLiterals xmi:id="_v2eow0tyEd6pX-SEpCPETA" name="info" value="2"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eoxEtyEd6pX-SEpCPETA" name="URL">
+        <eAnnotations xmi:id="_v2eoxUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epEUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2eoxktyEd6pX-SEpCPETA" name="base_Comment" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Comment"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eoyEtyEd6pX-SEpCPETA" name="Documentation">
+        <eAnnotations xmi:id="_v2eoyUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epFktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2eoyktyEd6pX-SEpCPETA" name="base_Comment" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Comment"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eozEtyEd6pX-SEpCPETA" name="Shortcut">
+        <eAnnotations xmi:id="_v2eozUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epG0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2eozktyEd6pX-SEpCPETA" name="base_Comment" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Comment"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eo0EtyEd6pX-SEpCPETA" name="Perspective">
+        <eAnnotations xmi:id="_v2eo0UtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epIEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2eo0ktyEd6pX-SEpCPETA" name="base_Package" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Package"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eo1EtyEd6pX-SEpCPETA" name="AbstractMetaConstraint" abstract="true">
+        <eAnnotations xmi:id="_v2eo1UtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epJUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v2eo1ktyEd6pX-SEpCPETA" name="evaluationMode" ordered="false" lowerBound="1" eType="_v2eou0tyEd6pX-SEpCPETA" defaultValueLiteral="batch"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v2eo2EtyEd6pX-SEpCPETA" name="severity" ordered="false" lowerBound="1" eType="_v2eov0tyEd6pX-SEpCPETA" defaultValueLiteral="error"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eo2ktyEd6pX-SEpCPETA" name="MetaConstraint" eSuperTypes="_v2eo1EtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v2eo20tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epKktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v2eo3EtyEd6pX-SEpCPETA" name="message" ordered="false">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2eo3ktyEd6pX-SEpCPETA" name="base_Constraint" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Constraint"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_v2eo4UtyEd6pX-SEpCPETA" name="Default_0" nsURI="http:///Default_0.profile.uml2" nsPrefix="Default_0">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eo4ktyEd6pX-SEpCPETA" name="Default__Documentation">
+        <eAnnotations xmi:id="_v2eo40tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epFktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2eo5EtyEd6pX-SEpCPETA" name="base_Comment">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Comment"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eo5ktyEd6pX-SEpCPETA" name="Default__MetaConstraint" eSuperTypes="_v2eo7UtyEd6pX-SEpCPETA">
+        <eAnnotations xmi:id="_v2eo50tyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epKktyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2eo6EtyEd6pX-SEpCPETA" name="base_Constraint">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Constraint"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v2eo6ktyEd6pX-SEpCPETA" name="message" defaultValueLiteral="">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eo7UtyEd6pX-SEpCPETA" name="Default__AbstractMetaConstraint" abstract="true">
+        <eAnnotations xmi:id="_v2eo7ktyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epJUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v2eo70tyEd6pX-SEpCPETA" name="evaluationMode" lowerBound="1" eType="_v2eo80tyEd6pX-SEpCPETA" defaultValueLiteral="batch"/>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_v2eo8UtyEd6pX-SEpCPETA" name="severity" lowerBound="1" eType="_v2eo90tyEd6pX-SEpCPETA" defaultValueLiteral="error"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v2eo80tyEd6pX-SEpCPETA" name="Default__ConstraintEvaluationMode">
+        <eAnnotations xmi:id="_v2eo9EtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epCktyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v2eo9UtyEd6pX-SEpCPETA" name="batch"/>
+        <eLiterals xmi:id="_v2eo9ktyEd6pX-SEpCPETA" name="live" value="1"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_v2eo90tyEd6pX-SEpCPETA" name="Default__ConstraintSeverity">
+        <eAnnotations xmi:id="_v2eo-EtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epDUtyEd6pX-SEpCPETA"/>
+        <eLiterals xmi:id="_v2eo-UtyEd6pX-SEpCPETA" name="error"/>
+        <eLiterals xmi:id="_v2eo-ktyEd6pX-SEpCPETA" name="warning" value="1"/>
+        <eLiterals xmi:id="_v2eo-0tyEd6pX-SEpCPETA" name="info" value="2"/>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2eo_EtyEd6pX-SEpCPETA" name="Default__Shortcut">
+        <eAnnotations xmi:id="_v2eo_UtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epG0tyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2eo_ktyEd6pX-SEpCPETA" name="base_Comment">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Comment"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2epAEtyEd6pX-SEpCPETA" name="Default__Perspective">
+        <eAnnotations xmi:id="_v2epAUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epIEtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2epAktyEd6pX-SEpCPETA" name="base_Package">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Package"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_v2epBEtyEd6pX-SEpCPETA" name="Default__URL">
+        <eAnnotations xmi:id="_v2epBUtyEd6pX-SEpCPETA" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_v2epEUtyEd6pX-SEpCPETA"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_v2epBktyEd6pX-SEpCPETA" name="base_Comment">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Comment"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <packageImport xmi:id="_v2epCEtyEd6pX-SEpCPETA" visibility="private">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+  </packageImport>
+  <packageImport xmi:id="_v2epCUtyEd6pX-SEpCPETA" visibility="private">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_v2epCktyEd6pX-SEpCPETA" name="ConstraintEvaluationMode">
+    <ownedLiteral xmi:id="_v2epC0tyEd6pX-SEpCPETA" name="batch"/>
+    <ownedLiteral xmi:id="_v2epDEtyEd6pX-SEpCPETA" name="live"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_v2epDUtyEd6pX-SEpCPETA" name="ConstraintSeverity">
+    <ownedLiteral xmi:id="_v2epDktyEd6pX-SEpCPETA" name="error"/>
+    <ownedLiteral xmi:id="_v2epD0tyEd6pX-SEpCPETA" name="warning"/>
+    <ownedLiteral xmi:id="_v2epEEtyEd6pX-SEpCPETA" name="info"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v2epEUtyEd6pX-SEpCPETA" name="URL">
+    <ownedAttribute xmi:id="_v2epEktyEd6pX-SEpCPETA" name="base_Comment" association="_v2epE0tyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Comment"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v2epE0tyEd6pX-SEpCPETA" name="Comment_URL" memberEnd="_v2epFEtyEd6pX-SEpCPETA _v2epEktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v2epFEtyEd6pX-SEpCPETA" name="extension_URL" type="_v2epEUtyEd6pX-SEpCPETA" aggregation="composite" association="_v2epE0tyEd6pX-SEpCPETA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v2epFUtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v2epFktyEd6pX-SEpCPETA" name="Documentation">
+    <ownedAttribute xmi:id="_v2epF0tyEd6pX-SEpCPETA" name="base_Comment" association="_v2epGEtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Comment"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v2epGEtyEd6pX-SEpCPETA" name="Comment_Documentation" memberEnd="_v2epGUtyEd6pX-SEpCPETA _v2epF0tyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v2epGUtyEd6pX-SEpCPETA" name="extension_Documentation" type="_v2epFktyEd6pX-SEpCPETA" aggregation="composite" association="_v2epGEtyEd6pX-SEpCPETA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v2epGktyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v2epG0tyEd6pX-SEpCPETA" name="Shortcut">
+    <ownedAttribute xmi:id="_v2epHEtyEd6pX-SEpCPETA" name="base_Comment" association="_v2epHUtyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Comment"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v2epHUtyEd6pX-SEpCPETA" name="Comment_Shortcut" memberEnd="_v2epHktyEd6pX-SEpCPETA _v2epHEtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v2epHktyEd6pX-SEpCPETA" name="extension_Shortcut" type="_v2epG0tyEd6pX-SEpCPETA" aggregation="composite" association="_v2epHUtyEd6pX-SEpCPETA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v2epH0tyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v2epIEtyEd6pX-SEpCPETA" name="Perspective">
+    <ownedAttribute xmi:id="_v2epIUtyEd6pX-SEpCPETA" name="base_Package" association="_v2epIktyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Package"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v2epIktyEd6pX-SEpCPETA" name="Package_Perspective" memberEnd="_v2epI0tyEd6pX-SEpCPETA _v2epIUtyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v2epI0tyEd6pX-SEpCPETA" name="extension_Perspective" type="_v2epIEtyEd6pX-SEpCPETA" aggregation="composite" association="_v2epIktyEd6pX-SEpCPETA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v2epJEtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v2epJUtyEd6pX-SEpCPETA" name="AbstractMetaConstraint" isAbstract="true">
+    <ownedAttribute xmi:id="_v2epJktyEd6pX-SEpCPETA" name="evaluationMode" type="_v2epCktyEd6pX-SEpCPETA">
+      <defaultValue xmi:type="uml:InstanceValue" xmi:id="_v2epJ0tyEd6pX-SEpCPETA" instance="_v2epC0tyEd6pX-SEpCPETA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v2epKEtyEd6pX-SEpCPETA" name="severity" type="_v2epDUtyEd6pX-SEpCPETA">
+      <defaultValue xmi:type="uml:InstanceValue" xmi:id="_v2epKUtyEd6pX-SEpCPETA" instance="_v2epDktyEd6pX-SEpCPETA"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_v2epKktyEd6pX-SEpCPETA" name="MetaConstraint">
+    <generalization xmi:id="_v2epK0tyEd6pX-SEpCPETA" general="_v2epJUtyEd6pX-SEpCPETA"/>
+    <ownedAttribute xmi:id="_v2epLEtyEd6pX-SEpCPETA" name="message">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v2epLUtyEd6pX-SEpCPETA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_v2epLktyEd6pX-SEpCPETA" name="base_Constraint" association="_v2epL0tyEd6pX-SEpCPETA">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Constraint"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_v2epL0tyEd6pX-SEpCPETA" name="Constraint_MetaConstraint" memberEnd="_v2epMEtyEd6pX-SEpCPETA _v2epLktyEd6pX-SEpCPETA">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_v2epMEtyEd6pX-SEpCPETA" name="extension_MetaConstraint" type="_v2epKktyEd6pX-SEpCPETA" aggregation="composite" association="_v2epL0tyEd6pX-SEpCPETA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_v2epMUtyEd6pX-SEpCPETA"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Profile>
