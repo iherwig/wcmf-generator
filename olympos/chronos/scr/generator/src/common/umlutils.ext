@@ -1,3 +1,4 @@
+import ecore;
 import uml;
 
 extension org::openarchitectureware::uml2::utils;
@@ -133,3 +134,12 @@ uml::Class getOwningClass(uml::Property this) :
 cached String getPackageName(uml::Package pck) :
 	(pck.nestingPackage!=null && !uml::Model.isInstance(pck.nestingPackage)) ? getPackageName(pck.nestingPackage)+"."+pck.name : pck.name
 ;
+
+Collection stereotypedContents(Collection this):
+	JAVA net.sourceforge.olympos.oaw.extend.Stereotype.getListContents(java.util.Collection)
+;
+
+Object getTaggedValueAssociation(uml::Element this, String stereotypeName, String taggedValueName):
+	JAVA net.sourceforge.olympos.oaw.extend.Stereotype.getPropertyContents(org.eclipse.uml2.uml.Element, java.lang.String, java.lang.String)
+;
+	
