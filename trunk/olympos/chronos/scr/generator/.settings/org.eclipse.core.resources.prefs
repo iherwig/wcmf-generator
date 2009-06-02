@@ -1,4 +1,4 @@
-#Tue May 12 10:57:15 CEST 2009
+#Thu May 28 16:27:12 CEST 2009
 eclipse.preferences.version=1
 encoding//src/cartridge/BrowserStatistics/barchart.xpt=UTF-8
 encoding//src/cartridge/BrowserStatistics/piechart.xpt=UTF-8
@@ -12,5 +12,7 @@ encoding//src/cartridge/DocumentGeneration/template/SteckbriefeFunktionenMoma/co
 encoding//src/cartridge/DocumentGeneration/template/SteckbriefeFunktionenMoma/styles.xpt=UTF-8
 encoding//src/cartridge/DocumentGeneration/template/standard/content.xpt=UTF-8
 encoding//src/cartridge/DocumentGeneration/template/standard/styles.xpt=UTF-8
+encoding//src/cartridge/GenerateUmlConnector/Object.xpt=UTF-8
 encoding//src/cartridge/Grails/domain.xpt=UTF-8
+encoding//src/cartridge/JRules/JRules.xpt=UTF-8
 encoding/<project>=UTF-8
