@@ -1,13 +1,13 @@
 /*
  * Copyright (c) 2008 The Olympos Development Team.
- *
+ * 
  * http://sourceforge.net/projects/olympos/
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
- * this entire header must remain intact.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
 /**
  * @class A draw2d Workflow specified for usage in UWM.
@@ -21,7 +21,7 @@
  */
 uwm.diagram.UwmWorkflow = function(id, diagram) {
 	draw2d.Workflow.call(this, id);
-
+	
 	/**
 	 * The diagram containing this workflow.
 	 * 
@@ -29,7 +29,7 @@ uwm.diagram.UwmWorkflow = function(id, diagram) {
 	 * @type uwm.diagram.Diagram
 	 */
 	this.diagram = diagram;
-
+	
 	this.buildContextMenu();
 	
 }
@@ -48,7 +48,7 @@ uwm.diagram.UwmWorkflow.prototype.type = "uwm.diagram.UwmWorkflow";
  */
 uwm.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
 	var self = this;
-
+	
 	/**
 	 * The context menu of a diagram.
 	 * 
@@ -57,42 +57,37 @@ uwm.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
 	 */
 	this.uwmContextMenu = new Ext.menu.Menu( {
 		items : [ new Ext.menu.Item( {
-			text :uwm.Dict.translate("Show in model tree"),
-			listeners : {
-				click : function() {
-					self.showInModelTree();
-				}
-			}
+		    text : uwm.Dict.translate("Show in model tree"),
+		    listeners : {
+			    click : function() {
+				    self.showInModelTree();
+			    }
+		    }
 		}), new Ext.menu.CheckItem( {
-			id :uwm.diagram.UwmWorkflow.CONTEXT_MENU_SNAP_TO_OBJECTS,
-			text :uwm.Dict.translate("Snap to objects"),
-			listeners : {
-				checkchange : function(item, checked) {
-					self.toggleSnapToObjects(item, checked);
-				}
-			}
+		    id : uwm.diagram.UwmWorkflow.CONTEXT_MENU_SNAP_TO_OBJECTS,
+		    text : uwm.Dict.translate("Snap to objects"),
+		    listeners : {
+			    checkchange : function(item, checked) {
+				    self.toggleSnapToObjects(item, checked);
+			    }
+		    }
 		}), new Ext.menu.Item( {
-			text :uwm.Dict.translate("Auto-layout"),
-			listeners : {
-				click : function() {
-					self.doLayout();
-				}
-			}
+		    text : uwm.Dict.translate("Auto-layout"),
+		    listeners : {
+			    click : function() {
+				    self.doLayout();
+			    }
+		    }
 		}), new Ext.menu.Item( {
-			text :uwm.Dict.translate("Reload"),
-			listeners : {
-				click : function() {
-					self.reloadDiagram();
-				}
-			}
-		}),	new Ext.menu.Item( {
-			text: uwm.Dict.translate('Show Glossary'),
-			handler: function(item, e) {
-				new uwm.ui.GlossaryBox("Diagram", self.getModelNode().getOid());
-			}
-		})	
-		
-		 ]
+		    text : uwm.Dict.translate("Reload"),
+		    listeners : {
+			    click : function() {
+				    self.reloadDiagram();
+			    }
+		    }
+		})
+
+		]
 	});
 }
 
@@ -106,15 +101,14 @@ uwm.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
  *            y Y position to show the context menu at.
  */
 uwm.diagram.UwmWorkflow.prototype.onContextMenu = function(x, y) {
-	var snapToObjects = this.uwmContextMenu.items
-			.get(uwm.diagram.UwmWorkflow.CONTEXT_MENU_SNAP_TO_OBJECTS);
-
+	var snapToObjects = this.uwmContextMenu.items.get(uwm.diagram.UwmWorkflow.CONTEXT_MENU_SNAP_TO_OBJECTS);
+	
 	snapToObjects.checked = this.diagram.isSnapToObjects();
-
+	
 	this.uwmContextMenu.showAt(this.diagram.getContextMenuPosition(x, y));
 	
-	this.oldX=null;
-	this.html.style.cursor="default";
+	this.oldX = null;
+	this.html.style.cursor = "default";
 }
 
 /**
@@ -169,7 +163,7 @@ uwm.diagram.UwmWorkflow.prototype.reloadDiagram = function() {
  *            yPos
  */
 uwm.diagram.UwmWorkflow.prototype.showMenu = function(menu, xPos, yPos) {
-
+	
 }
 
 /**
@@ -182,13 +176,13 @@ uwm.diagram.UwmWorkflow.prototype.getDiagram = function() {
 	return this.diagram;
 }
 
-uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x,y){
-	this.oldX=x;
-	this.oldY=y;
+uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x, y) {
+	this.oldX = x;
+	this.oldY = y;
 	this.html.style.cursor = "pointer";
 }
 
-uwm.diagram.UwmWorkflow.prototype.onMouseUp = function (x,y){
+uwm.diagram.UwmWorkflow.prototype.onMouseUp = function(x, y) {
 	if (this.oldX) {
 		var deltaX = x - this.oldX;
 		var deltaY = y - this.oldY;
@@ -196,14 +190,14 @@ uwm.diagram.UwmWorkflow.prototype.onMouseUp = function (x,y){
 		this.oldX = null;
 		this.oldY = null;
 	}
-	this.html.style.cursor="default";
+	this.html.style.cursor = "default";
 }
 
-uwm.diagram.UwmWorkflow.prototype.onMouseMove = function (x,y){
-	if (this.oldX){
-		var deltaX=x-this.oldX;
-		var deltaY=y-this.oldY;
-		this.scrollTo(this.getScrollLeft()-deltaX, this.getScrollTop()-deltaY, true);
+uwm.diagram.UwmWorkflow.prototype.onMouseMove = function(x, y) {
+	if (this.oldX) {
+		var deltaX = x - this.oldX;
+		var deltaY = y - this.oldY;
+		this.scrollTo(this.getScrollLeft() - deltaX, this.getScrollTop() - deltaY, true);
 	}
 }
 /**

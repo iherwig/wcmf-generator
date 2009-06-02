@@ -21,7 +21,7 @@ cwm.Glossary = function(modelNodeClass) {
 	cwm.Glossary.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.Glossary, uwm.model.ModelObject);
+Ext.extend(cwm.Glossary, uwm.model.TechnicalObject);
 
 cwm.Glossary.prototype.initByDisplayResult = function(node) {
 	cwm.Glossary.superclass.initByDisplayResult.call(this, node);

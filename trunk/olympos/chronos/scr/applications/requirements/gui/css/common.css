@@ -233,3 +233,14 @@ body {
 .uwm-revisioninfo p {
 	padding-right: 16px;
 }
+
+.glossary {
+	margin-bottom: 1em;
+	white-space: normal;
+}
+
+.glossary dt {
+	font-weight: bold;
+	padding-bottom: 0.5ex;
+}
+
