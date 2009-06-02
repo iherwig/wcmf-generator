@@ -69,7 +69,7 @@ cwm.ChiSystemClass = function() {
 	};
 }
 
-Ext.extend(cwm.ChiSystemClass, uwm.model.ModelClass);
+Ext.extend(cwm.ChiSystemClass, uwm.model.ClassObjectClass);
 
 cwm.ChiSystemClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm({
@@ -151,7 +151,11 @@ cwm.ChiSystemClass.prototype.getPropertyForm = function(modelNode, isLockedByOth
 }
 
 cwm.ChiSystemClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiSystem.PNG", this.initialWidth, this.initialHeight, this.initialWidth, this.initialHeight);
+	return new uwm.graphics.figure.ClassFigure(label, figure);
+}
+
+cwm.ChiSystemClass.prototype.isOperationEnabled = function() {
+	return false;
 }
 
 uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiSystemClass());
