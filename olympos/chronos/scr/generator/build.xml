@@ -19,7 +19,7 @@
 	<target name="compile" depends="clean">
 		<tstamp/>
 		<mkdir dir="${build.dir}"/>
-		<javac srcdir="${source.dir}" destdir="${build.dir}" debug="${debug}" excludesfile="compile-excludes">
+		<javac encoding="utf-8" srcdir="${source.dir}" destdir="${build.dir}" debug="${debug}" excludesfile="compile-excludes">
 			<classpath refid="lib"/>
 		</javac>
 	</target>
