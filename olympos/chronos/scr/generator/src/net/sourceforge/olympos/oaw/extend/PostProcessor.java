@@ -230,6 +230,7 @@ public class PostProcessor {
 					Property p = clazz.createOwnedAttribute(attrib.getName(), attrib.getType());
 					UMLHelper.copyTaggedValues(p, Constants.FQName(Constants.STEREOTYPE_WCMF_VALUE), attrib, new String[] { "base_Property" });
 					UMLHelper.copyComments(p, attrib);
+					p.setDefault(attrib.getDefault());
 					Generator.setGeneratorAdded(p);
 					Generator.setGeneratorInherited(p);
 				}
