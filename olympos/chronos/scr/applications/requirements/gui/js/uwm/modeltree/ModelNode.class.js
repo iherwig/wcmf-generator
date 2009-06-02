@@ -24,9 +24,9 @@ uwm.modeltree.ModelNode = function(config) {
 	this.modelNode = uwm.model.ModelContainer.getInstance().createByClassAndNameAndOid("Model", config.text, config.oid);
 	
 	uwm.modeltree.ModelNode.superclass.constructor.call(this, Ext.apply(this, {
-	    id :config.oid,
-	    iconCls :this.modelNode.getModelNodeClass().getTreeIcon(),
-	    allowDrag :false
+	    id : config.oid,
+	    iconCls : this.modelNode.getModelNodeClass().getTreeIcon(),
+	    allowDrag : false
 	}, config));
 }
 
@@ -37,46 +37,39 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 	
 	this.contextMenu = new Ext.menu.Menu( {
 		items : [ {
-		    text :uwm.Dict.translate('Add package'),
+		    text : uwm.Dict.translate('Add package'),
 		    handler : function(item, e) {
 			    self.addPackage(item, e);
 		    }
 		}, {
-		    text :uwm.Dict.translate('Delete from model'),
+		    text : uwm.Dict.translate('Delete from model'),
 		    handler : function(item, e) {
 			    self.deleteFromModel(item, e);
 		    }
 		}, {
-		    text :uwm.Dict.translate('Select as grid scope'),
+		    text : uwm.Dict.translate('Select as grid scope'),
 		    handler : function(item, e) {
 			    self.selectAsScope(item, e);
 		    }
 		}, {
-		    text :uwm.Dict.translate("Reload"),
+		    text : uwm.Dict.translate("Reload"),
 		    handler : function(item, e) {
 			    self.reload();
 		    }
 		}, {
-		    text :uwm.Dict.translate('Export as UML'),
+		    text : uwm.Dict.translate('Export as UML'),
 		    handler : function(item, e) {
 			    new uwm.ui.Download( {
-			        title :uwm.Dict.translate('Exporting UML ...'),
-			        downloadURL :"../application/main.php?response_format=JSON&usr_action=exportUWM&startModel=" + self.getModelNode().getOid()
+			        title : uwm.Dict.translate('Exporting UML ...'),
+			        downloadURL : "../application/main.php?response_format=JSON&usr_action=exportUWM&startModel=" + self.getModelNode().getOid()
 			    }).show();
 		    }
 		}, {
-			text: uwm.Dict.translate('Export Documentation'),
-			handler : function(item, e) {
-				new uwm.ui.ExportAssistent("Model", self.getModelNode().getOid());
-			}
-			
-		} , {
-			text: uwm.Dict.translate('Show Glossary'),
-			handler: function(item, e) {
-				new uwm.ui.GlossaryBox("Model", self.getModelNode().getOid());
-			}
-		}		
-		]
+		    text : uwm.Dict.translate('Export Documentation'),
+		    handler : function(item, e) {
+			    new uwm.ui.ExportAssistent("Model", self.getModelNode().getOid());
+		    }
+		} ]
 	});
 	
 	return this.contextMenu;

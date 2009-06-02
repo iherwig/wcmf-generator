@@ -29,23 +29,22 @@ uwm.ui.ExistingContentContainer = Ext.extend(Ext.Panel, {
 	
 		var self = this;
 				
-		this.existingContent = [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()];
+		this.existingContent = [new uwm.modeltree.ModelTree(), new uwm.ui.Glossary(), new uwm.hierarchytree.HierarchyTree()];
 		this.getObjectGrids();
-			this.expandAllButton = new Ext.Toolbar.Button({
-				text: uwm.Dict.translate("expand all"),
-				handler: function() {
-					uwm.modeltree.ModelTree.getInstance().expandAll();
-				}
-			})
-		
-		this.existingContent = [new uwm.modeltree.ModelTree(), new uwm.hierarchytree.HierarchyTree()];
-		this.getObjectGrids();
-			this.collapseAllButton = new Ext.Toolbar.Button({
-				text: uwm.Dict.translate("collapse all"),
-				handler: function() {
-					uwm.modeltree.ModelTree.getInstance().collapseAll();
-				}
-			})
+
+		this.expandAllButton = new Ext.Toolbar.Button({
+			text: uwm.Dict.translate("expand all"),
+			handler: function() {
+				uwm.modeltree.ModelTree.getInstance().expandAll();
+			}
+		})
+	
+		this.collapseAllButton = new Ext.Toolbar.Button({
+			text: uwm.Dict.translate("collapse all"),
+			handler: function() {
+				uwm.modeltree.ModelTree.getInstance().collapseAll();
+			}
+		})
 		
 		Ext.apply(this, {
 			region: "center",
