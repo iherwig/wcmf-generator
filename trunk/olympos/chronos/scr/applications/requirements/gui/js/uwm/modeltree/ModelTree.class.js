@@ -325,8 +325,7 @@ uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject,
 		
 		var node = new uwm.modeltree.ModelNode({
 			oid: oid,
-			text: modelObject.getLabel(),
-			leaf: true
+			text: modelObject.getLabel()
 		});
 		
 		this.getRootNode().appendChild(node);
@@ -389,7 +388,7 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 			
 			childNode = new uwm.modeltree.PackageNode({
 				oid: childModelObject.getOid(),
-				text: childModelObject.getLabel(),
+				text: childModelObject.getLabel()
 			});
 		} else if (childModelObject instanceof uwm.diagram.ActivitySet && this.createdDiagrams.get(childModelObject.getOid())) {
 			this.createdPackages.remove(childModelObject.getOid());
