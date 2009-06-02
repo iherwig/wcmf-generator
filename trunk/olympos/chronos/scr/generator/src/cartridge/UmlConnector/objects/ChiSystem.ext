@@ -18,7 +18,7 @@ Void transferValues(cwm::ChiSystem c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiSystem:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiSystem") ->
-			uc.setTaggedValue("Chronos::ChiSystem", "platform", c.platform) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "plattform", c.plattform) ->
 			uc.setTaggedValue("Chronos::ChiSystem", "config", c.config) ->
 			uc.setTaggedValue("Chronos::ChiSystem", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ChiSystem", "Version", c.version) ->
@@ -39,7 +39,7 @@ Void transferValues(cwm::ChiSystem c, uml::Model um):
 cwm::ChiSystem convertToCwm(Chronos::ChiSystem c) :
 	let un = new cwm::ChiSystem : (
 		un.setId(c.getId()) ->
-		un.setPlatform(c.getTaggedValue("Chronos::ChiSystem", "platform").toString()) ->
+		un.setPlattform(c.getTaggedValue("Chronos::ChiSystem", "plattform").toString()) ->
 		un.setConfig(c.getTaggedValue("Chronos::ChiSystem", "config").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiSystem", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiSystem", "Version").toString()) ->
