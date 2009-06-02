@@ -200,6 +200,16 @@
 	min-width:4px;
 }
 
+.FigureChiObject {
+	background-image: url("../img/16x16/ChiObject.png") !important;
+}
+
+.ChiObjectTab {
+	background-image: url("../img/24x24/ChiObject.png") !important;
+	min-height:24px;
+	min-width:4px;
+}
+
 .FigureChiNode {
 	background-image: url("../img/16x16/ChiNode.png") !important;
 }
