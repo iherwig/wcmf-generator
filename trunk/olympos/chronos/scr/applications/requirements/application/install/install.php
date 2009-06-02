@@ -82,4 +82,7 @@ if ($admin && !$admin->hasRole('administrators'))
   $userManager->addUserToRole("administrators", "admin");
 }
 $userManager->commitTransaction();
+
+include('install-cwm.php');
+
 Log::info("done.", "install");
