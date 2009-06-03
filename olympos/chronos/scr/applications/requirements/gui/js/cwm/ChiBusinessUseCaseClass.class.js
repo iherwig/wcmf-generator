@@ -92,7 +92,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 		},
 		"ChiFeature": {
 			label: "is refined by",
-			invert: false,
+			invert: true,
 			connectionType: 'realization',
 			cardinality: -1
 		},
