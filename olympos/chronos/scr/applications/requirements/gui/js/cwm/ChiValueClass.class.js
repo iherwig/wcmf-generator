@@ -128,14 +128,17 @@ cwm.ChiValueClass.prototype.getPropertyForm = function(modelNode, isLockedByOthe
 		    modelNode : modelNode,
 		    
 		    readOnly : isLockedByOtherUser
-		}), new uwm.property.ComboBox( {
-		    fieldLabel : 'is_editable',
-		    toolTip : "Declares, if the attribute is editable in the UI. The backend can always edit atributes",
-		    name : 'is_editable',
-		    listType : "true[true]|false[false]",
-		    modelNode : modelNode,
+		}), 
+		
+		new uwm.property.Checkbox( {
+			fieldLabel : 'is_editable',
+			toolTip : "Declares, if the attribute is editable in the UI. The backend can always edit atributes",
+			name : 'is_editable',	
+			modelNode : modelNode,
+			stateful : true,
 		    disabled : isLockedByOtherUser
-		}), new uwm.property.TextField( {
+		}), 
+		new uwm.property.TextField( {
 		    fieldLabel : 'column_name',
 		    toolTip : "The name of the database column. If not given the attribute name will be used.",
 		    name : 'column_name',

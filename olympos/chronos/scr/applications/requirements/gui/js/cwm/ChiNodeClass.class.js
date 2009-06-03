@@ -155,54 +155,56 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 		                    fieldLabel : 'parent_order',
 		                    toolTip : "The order of the associated parents. a single value or '|' -separated list of values",
 		                    name : 'parent_order',
-		                    
-		                    modelNode : modelNode,
-		                    
+									                    
+		                    modelNode : modelNode,	
+								                    
 		                    readOnly : isLockedByOtherUser
 		                }),
 		                new uwm.property.TextField( {
 		                    fieldLabel : 'child_order',
 		                    toolTip : "The order of the associated children. a single value or '|' -separated list of values",
-		                    name : 'child_order',
-		                    
-		                    modelNode : modelNode,
-		                    
+		                    name : 'child_order',		                    
+		                    modelNode : modelNode,		
+		
 		                    readOnly : isLockedByOtherUser
+							
 		                }),
 		                new uwm.property.TextField( {
 		                    fieldLabel : 'pk_name',
 		                    toolTip : "The name of the primary key column on the database (optional). The generator will add this automatically if there is no appropriate attribute.",
-		                    name : 'pk_name',
-		                    
-		                    modelNode : modelNode,
-		                    
+		                    name : 'pk_name',	
+								                    
+		                    modelNode : modelNode,	
+								                    
 		                    readOnly : isLockedByOtherUser
 		                }),
-		                new uwm.property.ComboBox( {
-		                    fieldLabel : 'is_searchable',
-		                    toolTip : "Indicates wether this type should be included in the default search.",
-		                    name : 'is_searchable',
-		                    listType : "true[true]|false[false]",
-		                    modelNode : modelNode,
+						
+						new uwm.property.Checkbox( {
+							fieldLabel : 'is_searchable',							
+							name : 'is_searchable',	
+							modelNode : modelNode,
+							stateful : true,
+		                    disabled : isLockedByOtherUser	
+								                    
+						}),
+						
+		                new uwm.property.TextField( {
+		                   	fieldLabel : 'orderby',
+		                    toolTip : "Definition of default sorting. Possible values: 'none' (no order), 'sortkey' (generates a 'sortkey' column, that is used for explicit sorting) or any the name of any WCMFValue defined in the node optionally.",
+		                    name : 'orderby',		                            
+		                    modelNode : modelNode,		                            
+		                    readOnly : isLockedByOtherUser
+		                }), 
+								
+						new uwm.property.Checkbox( {
+							fieldLabel : 'is_soap',
+							name : 'is_soap',	
+							modelNode : modelNode,
+							stateful : true,
 		                    disabled : isLockedByOtherUser
 		                }),
-		                new uwm.property.TextField(
-		                        {
-		                            fieldLabel : 'orderby',
-		                            toolTip : "Definition of default sorting. Possible values: 'none' (no order), 'sortkey' (generates a 'sortkey' column, that is used for explicit sorting) or any the name of any WCMFValue defined in the node optionally.",
-		                            name : 'orderby',
-		                            
-		                            modelNode : modelNode,
-		                            
-		                            readOnly : isLockedByOtherUser
-		                        }), new uwm.property.ComboBox( {
-		                    fieldLabel : 'is_soap',
-		                    toolTip : "Define if the type should be exposed to the SOAP interface.",
-		                    name : 'is_soap',
-		                    listType : "true[true]|false[false]",
-		                    modelNode : modelNode,
-		                    disabled : isLockedByOtherUser
-		                }), new uwm.property.TextField( {
+						
+						new uwm.property.TextField( {
 		                    fieldLabel : 'initparams',
 		                    toolTip : "Name of the configuration file's (config.ini) section, in which the initial parameters for the corresponding mapper are defined",
 		                    name : 'initparams',
@@ -210,6 +212,7 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 		                    modelNode : modelNode,
 		                    
 		                    readOnly : isLockedByOtherUser
+							
 		                }), new uwm.property.TextField( {
 		                    fieldLabel : 'table_name',
 		                    toolTip : "",
@@ -218,14 +221,17 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 		                    modelNode : modelNode,
 		                    
 		                    readOnly : isLockedByOtherUser
-		                }), new uwm.property.ComboBox( {
-		                    fieldLabel : 'is_ordered',
-		                    toolTip : "",
-		                    name : 'is_ordered',
-		                    listType : "true[true]|false[false]",
-		                    modelNode : modelNode,
+		                }), 
+						
+						new uwm.property.Checkbox( {
+							fieldLabel : 'is_ordered',
+							name : 'is_ordered',	
+							modelNode : modelNode,
+							stateful : true,
 		                    disabled : isLockedByOtherUser
-		                }), new uwm.property.TextField( {
+		                }), 
+						
+						new uwm.property.TextField( {
 		                    fieldLabel : 'Alias',
 		                    toolTip : "the Project Id of this object.",
 		                    name : 'Alias',
