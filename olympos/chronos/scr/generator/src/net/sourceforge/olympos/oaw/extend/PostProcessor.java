@@ -37,12 +37,16 @@ public class PostProcessor {
 			org.eclipse.uml2.uml.Class clazz = iter.next();
 			if (clazz.getPackage().getQualifiedName().startsWith(packageName))
 			{
-				Logger.info("Post process " + clazz.getName());
-				// create the associations first, because they may influence
-				// the creation of values (fk columns)
-				PostProcessor.completeAssociations(clazz);
-				PostProcessor.completeAttributes(clazz);
+				if (UMLHelper.hasStereotype(clazz, Constants.FQName(Constants.STEREOTYPE_WCMF_NODE)) ||
+						UMLHelper.hasStereotype(clazz, Constants.FQName(Constants.STEREOTYPE_WCMF_MANY_TO_MANY)))
+				{
+					Logger.info("Post process " + clazz.getName());
+					// create the associations first, because they may influence
+					// the creation of values (fk columns)
+					PostProcessor.completeAssociations(clazz);
+					PostProcessor.completeAttributes(clazz);
 			}
+		}
 		}
 		return rootClazz;
 	}

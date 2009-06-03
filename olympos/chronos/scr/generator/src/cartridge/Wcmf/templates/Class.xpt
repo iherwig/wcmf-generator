@@ -15,7 +15,7 @@
 «REM» This template expands the class files ----------------------«ENDREM»
 
 «DEFINE file FOR Class»
-	«FILE ApplicationPath()+"/"+this.name.asClassFile()-»
+	«FILE this.getFullPackageName().asPath()+"/"+this.name.asClassFile()-»
 <?php
 «HeaderText()»
 /**
@@ -49,11 +49,13 @@ class «this.name»«IF hasSuperClass()» extends «this.getSuperClass().name»«ENDIF»
    * Method «this.name» 
    * description: «this.getComment("\n   * ")»
 	«FOREACH this.ownedParameter AS p-»  
+		«IF p.direction.toString() != "return"-»
    * @param «p.name»
+		«ENDIF-»
 	«ENDFOREACH-»
   * @return 
   */  
-  function «name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»$«p.name»«ENDFOREACH») 
+  function «name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»«IF p.direction.toString() != "return"»$«p.name»«ENDIF»«ENDFOREACH») 
   {
 «PROTECT CSTART "// " CEND "" ID class.getFullPackageName().asPath()+"/"+ class.name.asClassFile()+"/Methods/"+this.name»
 «ENDPROTECT»

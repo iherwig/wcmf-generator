@@ -54,7 +54,7 @@
 			<metaModel idRef="UmlMM"/>
 			<metaModel idRef="${profilename}MM"/>
 			<checkFile value="${preCheckFile}"/>
-			<expression value="model"/>
+			<emfAllChildrenSlot value="model"/>
 			<abortOnError value="true"/>
 		</component>
 	</if>
@@ -92,7 +92,7 @@
 			<metaModel idRef="UmlMM"/>
 			<metaModel idRef="${profilename}MM"/>
 			<checkFile value="${postCheckFile}"/>
-			<expression value="model"/>
+			<emfAllChildrenSlot value="model"/>
 			<abortOnError value="true"/>
 		</component>
 	</if>
