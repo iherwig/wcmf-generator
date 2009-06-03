@@ -61,10 +61,8 @@ uwm.property.Checkbox.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.Checkbox.prototype.persistValue = function(checked) {
-	this.originalValue = checked;
-	
-	var tmp = new Object();
-	tmp[this.getName()] = checked ? 1 : 0;
-
+	this.originalValue = checked;	
+	var tmp = new Object();	
+	tmp[this.getName()] = checked ? "true" : "false";
 	this.modelNode.changeProperties(tmp);
 }
