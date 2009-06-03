@@ -7,7 +7,7 @@
 	<META NAME="AUTHOR" CONTENT="giuseppe platania">
 	<META NAME="CREATED" CONTENT="20090302;19131300">
 	<META NAME="CHANGEDBY" CONTENT="giuseppe platania">
-	<META NAME="CHANGED" CONTENT="20090306;17162800">
+	<META NAME="CHANGED" CONTENT="20090603;18384600">
 	<META NAME="Info 1" CONTENT="">
 	<META NAME="Info 2" CONTENT="">
 	<META NAME="Info 3" CONTENT="">
@@ -62,13 +62,8 @@
 	connections.</FONT></FONT></P>
 </DIV>
 <DIV ID="divTranscript1" DIR="LTR" STYLE="position: absolute; top: 0cm; left: 0cm; width: 22.15cm; height: 3.76cm; border: none; padding: 0cm; background: #ffffff">
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><FONT FACE="Tahoma"><FONT SIZE=1 STYLE="font-size: 8pt">Each
-	object class contains information defining how many connections may
-	be drawn to other objects of certain class. When a new connection is
-	created, the existing connections the objects have to other objects
-	of the same kind are counted. The connection may only be created if
-	the resulting number is lower than the number of allowed
-	connections.</FONT></FONT></P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
 </DIV>
 <P LANG="en-US" ALIGN=CENTER STYLE="margin-top: 0.42cm; background: transparent; page-break-after: avoid">
 <FONT FACE="Arial, sans-serif"><FONT SIZE=6><B>Chronos Web Modeler</B></FONT></FONT></P>
@@ -121,17 +116,19 @@ document describes the usage of the application.</P>
 	   Hierarchy Tree</A></P>
 	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.4.Object Grids|outline">3.3.4
 	   Object Grids</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.5.Diagram|outline">3.3.5
+	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.5.Glossary|outline">3.3.5
+	   Glossary</A></P>
+	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.Diagram|outline">3.3.6
 	   Diagram</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.Properties|outline">3.3.6
+	<P LANG="en-US" STYLE="margin-left: 1cm; margin-bottom: 0.1cm"><A HREF="#3.3.7.Properties|outline">3.3.7
 	   Properties</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.1.Text Input Fields|outline">3.3.6.1
+	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.7.1.Text Input Fields|outline">3.3.7.1
 	  Text Input Fields</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.2.Dropdown Lists|outline">3.3.6.2
+	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.7.2.Dropdown Lists|outline">3.3.7.2
 	  Dropdown Lists</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.3.Rich Text Edit Boxes|outline">3.3.6.3
+	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.7.3.Rich Text Edit Boxes|outline">3.3.7.3
 	  Rich Text Edit Boxes</A></P>
-	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.6.4.Read-Only Fields|outline">3.3.6.4
+	<P LANG="en-US" STYLE="margin-left: 1.5cm; margin-bottom: 0.1cm"><A HREF="#3.3.7.4.Read-Only Fields|outline">3.3.7.4
 	  Read-Only Fields</A></P>
 	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#3.4.Administration perspective|outline">3.4
 	   Administration perspective</A></P>
@@ -181,6 +178,16 @@ document describes the usage of the application.</P>
 	   Get started</A></P>
 	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#5.2.How to create an activity|outline">5.2
 	   How to create an activity</A></P>
+	<P LANG="en-US" STYLE="margin-bottom: 0.1cm"><A HREF="#6.Administration|outline">6
+	 Administration</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#6.1.The backend interface|outline">6.1
+	   The backend interface</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#6.2.Manage users and groups|outline">6.2
+	   Manage users and groups</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#6.3.Edit configuration files|outline">6.3
+	   Edit configuration files</A></P>
+	<P LANG="en-US" STYLE="margin-left: 0.5cm; margin-bottom: 0.1cm"><A HREF="#6.4.Backup functionalities|outline">6.4
+	   Backup functionalities</A></P>
 </DIV>
 <DIV ID="Bereich3" DIR="LTR">
 	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
@@ -245,7 +252,7 @@ document describes the usage of the application.</P>
 	only browser with extensive test coverage is Firefox 3. Occasional
 	tests with other modern browsers show no principal
 	incompatibilities. If you decide to use others browser you can face
-	errors or erratical behavior.</P>
+	errors or erratically behavior.</P>
 	<H1 LANG="en-US" CLASS="western" STYLE="margin-left: 0.76cm; text-indent: -0.76cm"><A NAME="2.Terminology|outline"></A>
 	2 Terminology</H1>
 	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
@@ -592,13 +599,13 @@ document describes the usage of the application.</P>
 				</TD>
 				<TD WIDTH=206>
 					<P LANG="en-US" CLASS="western">Right-click on the Model, select
-					&ldquo;Export as Word Document&rdquo; from the context menu 
+					&ldquo;Export  Documentation&rdquo; from the context menu 
 					</P>
 				</TD>
 				<TD WIDTH=205>
-					<P LANG="en-US" CLASS="western">Export the complete   and all
-					the contained objects as a Word file using a certain document
-					template.</P>
+					<P LANG="en-US" CLASS="western">Export the model (or a part of
+					it)   and all the contained objects as a OpenOffice, Word or Pdf
+					file using a certain document template.</P>
 				</TD>
 			</TR>
 		</TBODY>
@@ -607,7 +614,7 @@ document describes the usage of the application.</P>
 	3.3.2.2 Packages</H4>
 	<P LANG="en-US" CLASS="western">Packages allow structuring complex
 	models, like folders in the file system.</P>
-	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_7760e492.jpg" NAME="Grafik7" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=272 HEIGHT=191 BORDER=0><BR CLEAR=LEFT><BR><BR>
+	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_7f3fc4c3.jpg" NAME="Grafik44" ALIGN=LEFT WIDTH=293 HEIGHT=231 BORDER=0><BR CLEAR=LEFT><BR><BR>
 	</P>
 	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
 		<COL WIDTH=205>
@@ -755,6 +762,22 @@ document describes the usage of the application.</P>
 					contained objects as a Word file using a document template.</P>
 				</TD>
 			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Automatically create a diagram
+					with all package elements</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Right-click on the Package,
+					select &ldquo;new diaram from package&rdquo; from the context
+					menu 
+					</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Create a new 
+					</P>
+				</TD>
+			</TR>
 		</TBODY>
 	</TABLE>
 	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.2.3.Diagrams|outline"></A>
@@ -767,83 +790,89 @@ document describes the usage of the application.</P>
 		<COL WIDTH=205>
 		<COL WIDTH=206>
 		<COL WIDTH=205>
-		<TR VALIGN=TOP>
-			<TH WIDTH=205>
-				<P LANG="en-US" CLASS="western">Task</P>
-			</TH>
-			<TH WIDTH=206>
-				<P LANG="en-US" CLASS="western">Action</P>
-			</TH>
-			<TH WIDTH=205>
-				<P LANG="en-US" CLASS="western">Description</P>
-			</TH>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">View diagram properties</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Single-click on the diagram</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">All properties of a diagram can
-				be reviewed in the properties view.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Change label of a diagram</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Single-click on the diagram,
-				change name in properties view, leave name field</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">If you change the diagram name in
-				properties view, the model tree is automatically updated.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Delete diagram from model</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Right-click on the diagram,
-				select &ldquo;Delete from model&rdquo; from context menu</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Deletes the diagram from the
-				model.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Move diagram to different package</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Drag the diagram, drop it on the
-				target package</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Moves the diagram to a different
-				package.</P>
-			</TD>
-		</TR>
-		<TR VALIGN=TOP>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Open diagram</P>
-			</TD>
-			<TD WIDTH=206>
-				<P LANG="en-US" CLASS="western">Double-click the diagram</P>
-				<P LANG="en-US" CLASS="western">OR</P>
-				<P LANG="en-US" CLASS="western">Right-click on the diagram,
-				select &ldquo;Open&rdquo; from context menu</P>
-			</TD>
-			<TD WIDTH=205>
-				<P LANG="en-US" CLASS="western">Opens the diagram in diagram view
-				or selects the diagram's tab in diagram view if already opened.</P>
-			</TD>
-		</TR>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Task</P>
+				</TH>
+				<TH WIDTH=206>
+					<P LANG="en-US" CLASS="western">Action</P>
+				</TH>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Description</P>
+				</TH>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">View diagram properties</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Single-click on the diagram</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">All properties of a diagram can
+					be reviewed in the properties view.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Change label of a diagram</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Single-click on the diagram,
+					change name in properties view, leave name field</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">If you change the diagram name
+					in properties view, the model tree is automatically updated.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Delete diagram from model</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Right-click on the diagram,
+					select &ldquo;Delete from model&rdquo; from context menu</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Deletes the diagram from the
+					model.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Move diagram to different
+					package</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Drag the diagram, drop it on the
+					target package</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Moves the diagram to a different
+					package.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Open diagram</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Double-click the diagram</P>
+					<P LANG="en-US" CLASS="western">OR</P>
+					<P LANG="en-US" CLASS="western">Right-click on the diagram,
+					select &ldquo;Open&rdquo; from context menu</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Opens the diagram in diagram
+					view or selects the diagram's tab in diagram view if already
+					opened.</P>
+				</TD>
+			</TR>
+		</TBODY>
 	</TABLE>
 	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.2.4.Model Objects|outline"></A>
 	3.3.2.4 Model Objects</H4>
@@ -1346,8 +1375,46 @@ document describes the usage of the application.</P>
 			</TR>
 		</TBODY>
 	</TABLE>
-	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.5.Diagram|outline"></A>
-	3.3.5 Diagram</H3>
+	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.5.Glossary|outline"></A>
+	3.3.5 Glossary</H3>
+	<IMG SRC="index_html_m3b1075f5.jpg" NAME="Grafik7" ALIGN=LEFT WIDTH=151 HEIGHT=141 BORDER=0><BR CLEAR=LEFT>
+	<P LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm">
+	<BR><BR>
+	</P>
+	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+		<COL WIDTH=205>
+		<COL WIDTH=206>
+		<COL WIDTH=205>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Task</P>
+				</TH>
+				<TH WIDTH=206>
+					<P LANG="en-US" CLASS="western">Action</P>
+				</TH>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Description</P>
+				</TH>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Display glossary</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Click on view, click on glossary</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Display a list of terms
+					definition relevant for the Model.</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.6.Diagram|outline"></A>
+	3.3.6 Diagram</H3>
 	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m54e49fc9.jpg" NAME="Grafik12" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=160 HEIGHT=88 BORDER=0><BR CLEAR=LEFT><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western">The diagram view takes the center
@@ -1577,8 +1644,8 @@ document describes the usage of the application.</P>
 			</TR>
 		</TBODY>
 	</TABLE>
-	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.6.Properties|outline"></A>
-	3.3.6 Properties</H3>
+	<H3 LANG="en-US" CLASS="western" STYLE="margin-left: 1.27cm; text-indent: -1.27cm"><A NAME="3.3.7.Properties|outline"></A>
+	3.3.7 Properties</H3>
 	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_m5452a1d4.png" NAME="Grafik13" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=251 HEIGHT=478 BORDER=0><BR CLEAR=LEFT><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western">The properties view is located at
@@ -1586,13 +1653,13 @@ document describes the usage of the application.</P>
 	selected object. Each object has different properties. When
 	properties are displayed the object is automatically locked for
 	editing by other users.</P>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.6.1.Text Input Fields|outline"></A>
-	3.3.6.1 Text Input Fields</H4>
+	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.7.1.Text Input Fields|outline"></A>
+	3.3.7.1 Text Input Fields</H4>
 	<P LANG="en-US" CLASS="western">Text input fields allow a single
 	line of text. Changes are saved to the model when leaving the input
 	field.</P>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.6.2.Dropdown Lists|outline"></A>
-	3.3.6.2 Dropdown Lists</H4>
+	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.7.2.Dropdown Lists|outline"></A>
+	3.3.7.2 Dropdown Lists</H4>
 	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_137959e0.jpg" NAME="Grafik14" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=233 HEIGHT=135 BORDER=0><BR CLEAR=LEFT><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western">Dropdown lists allow selection of a
@@ -1600,8 +1667,8 @@ document describes the usage of the application.</P>
 	leaving the input field.</P>
 	<P LANG="en-US" CLASS="western">Some Drop down are dynamic an can be
 	configured in the administration perspective.</P>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.6.3.Rich Text Edit Boxes|outline"></A>
-	3.3.6.3 Rich Text Edit Boxes</H4>
+	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.7.3.Rich Text Edit Boxes|outline"></A>
+	3.3.7.3 Rich Text Edit Boxes</H4>
 	<P LANG="en-US" CLASS="western"><IMG SRC="index_html_3e02c0f9.jpg" NAME="Grafik15" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=223 HEIGHT=239 BORDER=0><BR CLEAR=LEFT><BR><BR>
 	</P>
 	<P LANG="en-US" CLASS="western">Rich text edit boxes allow multiple
@@ -1657,8 +1724,8 @@ document describes the usage of the application.</P>
 			</TR>
 		</TBODY>
 	</TABLE>
-	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.6.4.Read-Only Fields|outline"></A>
-	3.3.6.4 Read-Only Fields</H4>
+	<H4 LANG="en-US" CLASS="western" STYLE="margin-left: 1.52cm; text-indent: -1.52cm"><A NAME="3.3.7.4.Read-Only Fields|outline"></A>
+	3.3.7.4 Read-Only Fields</H4>
 	<P LANG="en-US" CLASS="western">R<IMG SRC="index_html_70accf35.jpg" NAME="Grafik16" ALIGN=LEFT HSPACE=4 VSPACE=8 WIDTH=222 HEIGHT=165 BORDER=0><BR CLEAR=LEFT>ead-only
 	fields are displayed with a grey background. They cannot be edited.</P>
 	<P LANG="en-US" CLASS="western"><BR><BR>
@@ -1743,7 +1810,7 @@ document describes the usage of the application.</P>
 				<TD WIDTH=205>
 					<P LANG="en-US" CLASS="western">This task import a valid Model
 					into the CWM. Valid models are UML2 EMF with a reference to the
-					Chronos profile. Generic UML model are not supported.</P>
+					Chronos profile. <U>Generic UML model are not supported.</U></P>
 					<P LANG="en-US" CLASS="western"><BR>
 					</P>
 					<P LANG="en-US" CLASS="western">See the documentation of other
@@ -2088,11 +2155,11 @@ document describes the usage of the application.</P>
 		If </SPAN>proofreader<SPAN LANG="en-GB"> is &ldquo;none&rdquo;
 		(default) the requirement is not valid and the generator produces a
 		WARNING.</SPAN></P>
-		<LI><P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB">A
-		ChiRequirement</SPAN><SPAN LANG="en-GB"> becomes &ldquo;Satisfied&rdquo;
-		when a ChiFeature is attached to him. Until a requirement has not
-		the status &ldquo;Validated&rdquo; the generator produces a
-		warning.</SPAN></P>
+		<LI><P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm">A
+		ChiRequirement becomes &ldquo;Satisfied&rdquo; when a ChiFeature is
+		attached to him. Until a requirement has not the status &ldquo;Validated&rdquo;
+		the generator produces a warning.</P>
+		<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"></P>
 	</UL>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
 	Values:</B></P>
@@ -2247,10 +2314,9 @@ document describes the usage of the application.</P>
 	without request&rdquo;). 
 	</P>
 	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">ChiFeature
-	have a relationship (of type Implementation) with ChiRequirement.</P>
+	have a relationship (of type Realization) with ChiRequirement.</P>
 	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">A 
-	ChiFeature might realize one or more ChiRequirements, and one
-	ChiRequirement might be realized by more than one ChiFeature.</P>
+	ChiFeature might realize one or more ChiRequirements.</P>
 	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm">ChiFeature
 	also have relationships (of type Realization, stereotype
 	&lt;&lt;Refines&gt;&gt;) with one or more ChiUseCases or
@@ -2779,7 +2845,8 @@ document describes the usage of the application.</P>
 				</TD>
 				<TD WIDTH=220>
 					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB"><SPAN STYLE="font-style: normal">Define
-					if the user require to have a offline access to the  system.</SPAN></SPAN></EM></P>
+					if the user require to </SPAN></SPAN></EM><EM><SPAN LANG="en-GB"><SPAN STYLE="font-style: normal">have
+					a offline access to the  system.</SPAN></SPAN></EM></P>
 				</TD>
 				<TD WIDTH=229>
 					<P LANG="en-US" CLASS="western" STYLE="margin-left: 0.64cm"><EM><SPAN LANG="en-GB">true|false</SPAN></EM></P>
@@ -2932,9 +2999,8 @@ document describes the usage of the application.</P>
 	4.11 ChiWorker</H2>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><IMG SRC="index_html_4c8aaa33.gif" NAME="Grafik38" ALIGN=BOTTOM WIDTH=71 HEIGHT=71 BORDER=0></P>
 	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
-	</SPAN><FONT COLOR="#0000ff"><FONT FACE="Courier New, monospace"><SPAN LANG="en-GB">A
-	ChiWorker is a special actor that works within the enterprise.</SPAN></FONT></FONT><SPAN LANG="en-GB">
-	</SPAN>
+	</SPAN><SPAN LANG="en-GB">A ChiWorker is a special actor that works
+	within the enterprise.</SPAN><SPAN LANG="en-GB"> </SPAN>
 	</P>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
@@ -2986,7 +3052,11 @@ document describes the usage of the application.</P>
 	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><SPAN LANG="en-GB"><B>Definition</B></SPAN><SPAN LANG="en-GB">:
 	</SPAN>A Chi External Worker is an employee that interacts directly
 	with ChiBusinessPartner outside the enterprise.</P>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
 	Values:</B></P>
 	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
@@ -3035,6 +3105,8 @@ document describes the usage of the application.</P>
 	Worker Internal is an employee of the enterprise that has no contact
 	with Business partners.</P>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Constrains:</B></P>
+	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
+	</P>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><B>Tagged
 	Values:</B></P>
 	<TABLE WIDTH=650 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=7 CELLSPACING=0>
@@ -3081,8 +3153,6 @@ document describes the usage of the application.</P>
 	identity and properties of the BO. Operations, apart common object
 	manipulation (CRUD), are included only if they govern exclusively
 	the access and modification of the considered ChiNode . </SPAN>
-	</P>
-	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 	</P>
 	<P LANG="en-GB" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 	</P>
@@ -3869,7 +3939,78 @@ document describes the usage of the application.</P>
 	can be only created within an use case. In fact an activity is an
 	enhancement of the Use Case description. 
 	</P>
-	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
+	<H1 LANG="en-US" CLASS="western"><A NAME="6.Administration|outline"></A>
+	6 Administration</H1>
+	<H2 LANG="en-US" CLASS="western"><A NAME="6.1.The backend interface|outline"></A>
+	6.1 The backend interface</H2>
+	<P LANG="en-US" CLASS="western">The CWM communicate with a backend
+	that is completely separate from the front end. 
+	</P>
+	<P LANG="en-US" CLASS="western">From the backend you can
+	administrate the application, creating users, groups and performing
+	backups.</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="6.2.Manage users and groups|outline"></A>
+	6.2 Manage users and groups</H2>
+	<P LANG="en-US" CLASS="western">TBD</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="6.3.Edit configuration files|outline"></A>
+	6.3 Edit configuration files</H2>
+	<P LANG="en-US" CLASS="western">TBD</P>
+	<P LANG="en-US" CLASS="western"><BR><BR>
+	</P>
+	<H2 LANG="en-US" CLASS="western"><A NAME="6.4.Backup functionalities|outline"></A>
+	6.4 Backup functionalities</H2>
+	<P LANG="en-US" CLASS="western"><BR><BR>
+	</P>
+	<TABLE WIDTH=643 BORDER=1 BORDERCOLOR="#000000" CELLPADDING=4 CELLSPACING=0>
+		<COL WIDTH=205>
+		<COL WIDTH=206>
+		<COL WIDTH=205>
+		<THEAD>
+			<TR VALIGN=TOP>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Task</P>
+				</TH>
+				<TH WIDTH=206>
+					<P LANG="en-US" CLASS="western">Action</P>
+				</TH>
+				<TH WIDTH=205>
+					<P LANG="en-US" CLASS="western">Description</P>
+				</TH>
+			</TR>
+		</THEAD>
+		<TBODY>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Create a backup</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Login to the backend,</P>
+					<P LANG="en-US" CLASS="western">click on the link &ldquo;admin&rdquo;,</P>
+					<P LANG="en-US" CLASS="western">give a meanful name to your
+					backup and click on save.</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Create a complete backup of your
+					actual database.</P>
+				</TD>
+			</TR>
+			<TR VALIGN=TOP>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Restore a backup</P>
+				</TD>
+				<TD WIDTH=206>
+					<P LANG="en-US" CLASS="western">Login to the backend,</P>
+					<P LANG="en-US" CLASS="western">select an existing backup from
+					the list, click on &ldquo;restore backup&rdquo;.</P>
+				</TD>
+				<TD WIDTH=205>
+					<P LANG="en-US" CLASS="western">Restore a previous database
+					backup.</P>
+				</TD>
+			</TR>
+		</TBODY>
+	</TABLE>
+	<P LANG="en-US" CLASS="western" STYLE="margin-bottom: 0cm"><BR>
 	</P>
 	<P LANG="en-US" CLASS="western" STYLE="font-style: normal"><BR><BR>
 	</P>
