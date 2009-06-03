@@ -54,7 +54,8 @@ History
 0.5 Beta RC1	
 •	Activities support
 
-0.6	Beta RC2	•	CWM supports classes diagrams
+0.6	Beta RC2	
+•	CWM supports classes diagrams
 •	Consolidation above
 •	productive Live 
 
@@ -63,3 +64,13 @@ History
 
 0.8	Beta Final
 	•	Consolidation 
+	
+0.9
+	•	bug fixing
+	•	first CWB release. 
+	•	class diagram support
+
+0.9.1
+•	CWM supports glossary
+•	CWM supports system object
+•	CWM supports export of object notes
