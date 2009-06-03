@@ -164,17 +164,15 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(dragOverEvent) {
 }
 
 uwm.modeltree.ModelTree.prototype.associateDroppedNode = function(tree, node, oldParent, newParent, index) {
-	this.disassociatedNodes.add(node.getModelNode().getOid(), newParent);
-	node.getModelNode().disassociate(oldParent.getModelNode())
+	var actionSet = new uwm.persistency.ActionSet();
+	
+	actionSet.addDisassociate(oldParent.getModelNode().getOid(), node.getModelNode().getOid());
+	actionSet.addAssociate(newParent.getModelNode().getOid(), node.getModelNode().getOid(), false);
+	
+	actionSet.commit();
 }
 
 uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function(parentModelNode, childModelNode) {
-	var newParent = this.disassociatedNodes.get(childModelNode.getOid());
-	if (newParent) {
-		this.disassociatedNodes.remove(newParent);
-		
-		childModelNode.associate(newParent.getModelNode());
-	}
 	var parentNode = this.getNodeById(parentModelNode.getOid());
 	var childNode = this.getNodeById(childModelNode.getOid());
 	
@@ -368,6 +366,9 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 					}
 				}
 			} else {
+				//I think this is obsolete, but I'm not entirely sure about it
+				//TODO: Check if obsolete
+				/*
 				if (childModelObject.parentOids) {
 					for (var i = 0; i < childModelObject.parentOids.length; i++) {
 						var parentToDelete = uwm.model.ModelContainer.getInstance().getByOid(childModelObject.parentOids[i]);
@@ -377,6 +378,7 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 						}
 					}
 				}
+				*/
 			}
 			
 		}
