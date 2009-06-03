@@ -24,6 +24,8 @@ Ext.extend(cwm.ChiValue, uwm.model.AttributeObject);
 
 cwm.ChiValue.prototype.initByDisplayResult = function(node) {
 	cwm.ChiValue.superclass.initByDisplayResult.call(this, node);
+	  this.data['default'] = node.values[1]['default'];
+      this.data.PropertyType = node.values[1].PropertyType;
       this.data.display_type = node.values[1].display_type;
       this.data.restrictions_description = node.values[1].restrictions_description;
       this.data.restrictions_match = node.values[1].restrictions_match;
@@ -43,7 +45,8 @@ cwm.ChiValue.prototype.initByDisplayResult = function(node) {
 
 cwm.ChiValue.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("display_type").loadValue(this.data.display_type);
+      realForm.findField("default").loadValue(this.data['default']);
+      realForm.findField("PropertyType").loadValue(this.data.PropertyType);
       realForm.findField("restrictions_description").loadValue(this.data.restrictions_description);
       realForm.findField("restrictions_match").loadValue(this.data.restrictions_match);
       realForm.findField("restrictions_not_match").loadValue(this.data.restrictions_not_match);
