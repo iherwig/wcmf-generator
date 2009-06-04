@@ -13,7 +13,14 @@
 
 «REM» Main domain root «ENDREM»
 «DEFINE domainClass FOR uml::Class»
-	«FILE name +".groovy"»
+	«LET this.getNearestPackage().getPackageName() AS fullQualifiedPackage»
+	«FILE (!fullQualifiedPackage.isNullOrEmpty() ? fullQualifiedPackage.asPath() + "/" : "") + name +".groovy"»
+	«IF !fullQualifiedPackage.isNullOrEmpty()»
+		package «fullQualifiedPackage»;
+	«ENDIF»
+
+	«EXPAND Import FOR this»
+
 	«IF this.isAbstract»abstract«ENDIF»
 	class «name» 
 	«IF !this.superClass.isEmpty» extends «this.superClass.first().name»«ENDIF»
@@ -40,7 +47,20 @@
 	«EXPAND EmbeddesValues FOR this»
 	}
 	«ENDFILE»
+	«ENDLET»
 «ENDDEFINE»	
+
+«DEFINE Import FOR uml::Class»
+	«FOREACH this.getImportedClasses() AS import»
+		import
+		«IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»
+			«import.getNearestPackage().getPackageName()».
+		«ENDIF»
+		«import.name»
+		;
+	«ENDFOREACH»
+«ENDDEFINE»
+	
 
 «REM» Specify a embedded value «ENDREM»
 «DEFINE EmbeddesValues FOR Class»
@@ -92,13 +112,19 @@ static hasMany = [
 
 «REM» fill constraints for attributes  «ENDREM»
 «DEFINE Constraints FOR Class»
-«LET ownedAttribute.select(a|!((String) a.getTaggedValue("Chronos::ChiValue", "restrictions_match")).isNullOrEmpty()) AS constraintedAttributes»
+«LET this.ownedAttribute.select(a|a.hasRestrictionsMatch() || a.isNullable()) AS constraintedAttributes»
 «IF constraintedAttributes.size > 0»
 static constraints = {
 	«FOREACH constraintedAttributes AS c»
-		«c.name»(
-			matches:"«c.getTaggedValue("Chronos::ChiValue", "restrictions_match")»"
-		)
+		«LET {
+			c.hasRestrictionsMatch() ? "matches: \"" + c.getTaggedValue("Chronos::ChiValue", "restrictions_match") + "\"" : null,
+			c.isNullable() ? "nullable: true" : null
+		}.select(e|e != null)
+		AS constraints»
+			«c.getPropertyName().sanitizeType()»(
+				«FOREACH constraints AS constraint SEPARATOR ", "»«constraint»«ENDFOREACH»
+			)
+		«ENDLET»
 	«ENDFOREACH»
 	}
 «ENDIF»

@@ -52,6 +52,25 @@ String getAssociationPropertyName(Property this):
 	!this.name.isNullOrEmpty() ? this.name : this.type.name.toFirstLower()
 ;
 
+boolean hasRestrictionsMatch(Property this):
+	!((String) this.getTaggedValue("Chronos::ChiValue", "restrictions_match")).isNullOrEmpty()
+;
+
+boolean isNullable(Property this):
+	this.lower == 0
+;
+
+String getPropertyName(Property this):
+	!this.name.isNullOrEmpty() ?
+		this.name
+	: (
+		this.association != null ?
+			this.getAssociationPropertyName()
+		:
+			null
+	)
+;
+
 String sanitizeType(String orgTypeName):
 	switch(orgTypeName.toLowerCase()) {
 		case "string": "String"
@@ -67,4 +86,23 @@ String sanitizeType(String orgTypeName):
 		case "void": "def"
 		default: orgTypeName
 	}
-;	
+;
+
+/**
+ * Convert a package name into a path
+ */
+String asPath(String package):
+	package.replaceAll("\\.", "/")
+;
+	
+List[uml::Class] getImportedClasses(uml::Class this):
+	let fullQualifiedName = this.getNearestPackage().getPackageName():
+	let result = {}:
+	result.addAll(this.superClass) ->
+	result.addAll(this.ownedAttribute.type) ->
+	result.addAll(this.getAssociations().getBelongsTo(this).getOtherEnd().type) ->
+	result.addAll(this.getAssociations().select(e|e.memberEnd.select(s|s.isReferenceMultivalued(this)).size > 0).memberEnd.type) ->
+	result.addAll(this.getAssociations().getNavigableOtherEnd(this).getOtherEnd().type) ->
+	
+	result.toSet().typeSelect(uml::Class).select(e|e.getNearestPackage().getPackageName() != fullQualifiedName)
+;

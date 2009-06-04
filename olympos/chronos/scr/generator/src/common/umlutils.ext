@@ -132,7 +132,14 @@ uml::Class getOwningClass(uml::Property this) :
  * Get the fully qualified name of the package
  */
 cached String getPackageName(uml::Package pck) :
-	(pck.nestingPackage!=null && !uml::Model.isInstance(pck.nestingPackage)) ? getPackageName(pck.nestingPackage)+"."+pck.name : pck.name
+	(pck.nestingPackage != null && !uml::Model.isInstance(pck.nestingPackage)) ?
+		getPackageName(pck.nestingPackage) + "." + pck.name
+	: (
+		!uml::Model.isInstance(pck) ?
+			pck.name
+		:
+			null
+	)
 ;
 
 Collection stereotypedContents(Collection this):
