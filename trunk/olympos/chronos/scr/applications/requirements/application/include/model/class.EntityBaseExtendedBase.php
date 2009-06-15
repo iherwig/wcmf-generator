@@ -57,6 +57,8 @@ class EntityBaseExtendedBase extends EntityBase
       if ($name == 'Name') $displayName = Message::get("Name");
       if ($name == 'Notes') $displayName = Message::get("Notes");
       if ($name == 'created') $displayName = Message::get("created");
+      if ($name == 'Author') $displayName = Message::get("Author");
+      if ($name == 'Status') $displayName = Message::get("Status");
       if ($name == 'creator') $displayName = Message::get("creator");
       if ($name == 'last_editor') $displayName = Message::get("last_editor");
       if ($name == 'modified') $displayName = Message::get("modified");
@@ -71,6 +73,8 @@ class EntityBaseExtendedBase extends EntityBase
       if ($name == 'id') $description = Message::get("");
       if ($name == 'Name') $description = Message::get("the name of this object.");
       if ($name == 'Notes') $description = Message::get("the actual description of the object.");
+      if ($name == 'Author') $description = Message::get("the author of this object");
+      if ($name == 'Status') $description = Message::get("the state of this object");
       if ($name == 'created') $description = Message::get("the creation date of this object");
       if ($name == 'creator') $description = Message::get("the user that created this object");
       if ($name == 'last_editor') $description = Message::get("the last user that edited this object");
@@ -119,6 +123,28 @@ class EntityBaseExtendedBase extends EntityBase
     function setNotes($Notes)
     {
       return $this->setValue('Notes', $Notes, DATATYPE_ATTRIBUTE);
+    }
+    function getAuthor($unconverted=false)
+    {
+      if ($unconverted)
+        return $this->getUnconvertedValue('Author', DATATYPE_ATTRIBUTE);
+      else
+        return $this->getValue('Author', DATATYPE_ATTRIBUTE);
+    }
+    function setAuthor($Author)
+    {
+      return $this->setValue('Author', $Author, DATATYPE_ATTRIBUTE);
+    }
+    function getStatus($unconverted=false)
+    {
+      if ($unconverted)
+        return $this->getUnconvertedValue('Status', DATATYPE_ATTRIBUTE);
+      else
+        return $this->getValue('Status', DATATYPE_ATTRIBUTE);
+    }
+    function setStatus($Status)
+    {
+      return $this->setValue('Status', $Status, DATATYPE_ATTRIBUTE);
     }
 
     /**

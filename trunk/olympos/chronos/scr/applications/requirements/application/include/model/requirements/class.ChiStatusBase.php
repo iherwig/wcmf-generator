@@ -18,18 +18,18 @@
 require_once(BASE."application/include/model/class.EntityBaseExtended.php");
 
 /**
- * @class Diagram
- * Diagram description: 
+ * @class ChiStatus
+ * ChiStatus description: 
  *
  * @author 
  * @version 1.0
  */
-class DiagramBase extends EntityBaseExtended
+class ChiStatusBase extends EntityBaseExtended
 {
-    function DiagramBase($oid=null, $type=null)
+    function ChiStatusBase($oid=null, $type=null)
     {
       if ($type == null)
-        parent::EntityBaseExtended($oid, 'Diagram');
+        parent::EntityBaseExtended($oid, 'ChiStatus');
       else
         parent::EntityBaseExtended($oid, $type);
     }
@@ -38,7 +38,7 @@ class DiagramBase extends EntityBaseExtended
      */
     function getObjectDisplayName()
     {
-      return Message::get("Diagram");
+      return Message::get("ChiStatus");
     }
     /**
      * @see PersistentObject::getObjectDescription()
@@ -54,13 +54,8 @@ class DiagramBase extends EntityBaseExtended
     {
       $displayName = $name;
       if ($name == 'id') $displayName = Message::get("id");
-      if ($name == 'fk_package_id') $displayName = Message::get("fk_package_id");
-      if ($name == 'Width') $displayName = Message::get("Width");
-      if ($name == 'Height') $displayName = Message::get("Height");
       if ($name == 'Name') $displayName = Message::get("Name");
       if ($name == 'Notes') $displayName = Message::get("Notes");
-	  if ($name == 'Author') $displayName = Message::get("Author");
-      if ($name == 'Status') $displayName = Message::get("Status");
       if ($name == 'created') $displayName = Message::get("created");
       if ($name == 'creator') $displayName = Message::get("creator");
       if ($name == 'last_editor') $displayName = Message::get("last_editor");
@@ -74,13 +69,8 @@ class DiagramBase extends EntityBaseExtended
     {
       $description = $name;
       if ($name == 'id') $description = Message::get("");
-      if ($name == 'fk_package_id') $description = Message::get("");
-      if ($name == 'Width') $description = Message::get("The weight of the diagram in pixel");
-      if ($name == 'Height') $description = Message::get("The height of the diagram");
       if ($name == 'Name') $description = Message::get("the name of this object.");
       if ($name == 'Notes') $description = Message::get("the actual description of the object.");
-	  if ($name == 'Author') $description = Message::get("the author of this object");
-      if ($name == 'Status') $description = Message::get("the state of this object");
       if ($name == 'created') $description = Message::get("the creation date of this object");
       if ($name == 'creator') $description = Message::get("the user that created this object");
       if ($name == 'last_editor') $description = Message::get("the last user that edited this object");
@@ -108,94 +98,6 @@ class DiagramBase extends EntityBaseExtended
     {
       return $this->setValue('id', $id, DATATYPE_IGNORE);
     }
-    function getFkPackageId($unconverted=false)
-    {
-      if ($unconverted)
-        return $this->getUnconvertedValue('fk_package_id', DATATYPE_IGNORE);
-      else
-        return $this->getValue('fk_package_id', DATATYPE_IGNORE);
-    }
-    function setFkPackageId($fk_package_id)
-    {
-      return $this->setValue('fk_package_id', $fk_package_id, DATATYPE_IGNORE);
-    }
-    function getWidth($unconverted=false)
-    {
-      if ($unconverted)
-        return $this->getUnconvertedValue('Width', DATATYPE_ATTRIBUTE);
-      else
-        return $this->getValue('Width', DATATYPE_ATTRIBUTE);
-    }
-    function setWidth($Width)
-    {
-      return $this->setValue('Width', $Width, DATATYPE_ATTRIBUTE);
-    }
-    function getHeight($unconverted=false)
-    {
-      if ($unconverted)
-        return $this->getUnconvertedValue('Height', DATATYPE_ATTRIBUTE);
-      else
-        return $this->getValue('Height', DATATYPE_ATTRIBUTE);
-    }
-    function setHeight($Height)
-    {
-      return $this->setValue('Height', $Height, DATATYPE_ATTRIBUTE);
-    }
-    function getSortkey()
-    {
-      return $this->getValue('sortkey', DATATYPE_IGNORE);
-    }
-    function setSortkey($sortkey)
-    {
-      return $this->setValue('sortkey', $sortkey, DATATYPE_IGNORE);
-    }
-	function getAuthor()
-    {
-      return $this->getValue('author', DATATYPE_ATTRIBUTE);
-    }
-    function setAuthor($author)
-    {
-      return $this->setValue('author', $author, DATATYPE_ATTRIBUTE);
-    }
-	function getStatus()
-    {
-      return $this->getValue('status', DATATYPE_ATTRIBUTE);
-    }
-    function setStatus($status)
-    {
-      return $this->setValue('status', $author, DATATYPE_ATTRIBUTE);
-    }
-    function getPackageOID()
-    {
-      $fkValue = $this->getValue('fk_package_id', DATATYPE_IGNORE);
-      if ($fkValue != null)
-        return PersistenceFacade::composeOID(array('type' => 'Package', 'id' => array($fkValue)));
-      else
-        return null;
-    }
-    function setPackage(&$node)
-    {
-      if ($node != null)
-        $node->addChild($this);
-    }
-    function getPackageParents()
-    {
-      return $this->getParentsEx(null, 'Package', null, null);
-    }
-    /**
-     * @deprecated use getFigureChildren() instead
-     */
-    function getFigureList()
-    {
-      Log::warn("use of deprecated method getFigureList. use getFigureChildren() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->getFigureChildren();
-    }
-    function getFigureChildren()
-    {
-      return $this->getChildrenEx(null, 'Figure', array('fk_diagram_id' => $this->getDBID()), null);
-    }
-
-
 
     /**
      * Node class overrides
