@@ -104,6 +104,9 @@ function beforeInsert()
 		$suffix = 'ActF';
 		}break;
 		
+		case 'ChiObject' :{
+		$suffix = 'Obj';
+		}break;
 		case 'ChiController' :{
 		$suffix = 'Contr';
 		}break;

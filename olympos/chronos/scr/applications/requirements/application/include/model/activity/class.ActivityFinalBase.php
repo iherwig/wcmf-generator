@@ -61,6 +61,8 @@ class ActivityFinalBase extends ChiBase
       if ($name == 'Version') $displayName = Message::get("Version");
       if ($name == 'Name') $displayName = Message::get("Name");
       if ($name == 'Notes') $displayName = Message::get("Notes");
+if ($name == 'Status') $description = Message::get("the state of this object");
+	  if ($name == 'Author') $description = Message::get("the author of this object");
       if ($name == 'created') $displayName = Message::get("created");
       if ($name == 'creator') $displayName = Message::get("creator");
       if ($name == 'last_editor') $displayName = Message::get("last_editor");
@@ -81,6 +83,8 @@ class ActivityFinalBase extends ChiBase
       if ($name == 'Version') $description = Message::get("the model version of this object");
       if ($name == 'Name') $description = Message::get("the name of this object.");
       if ($name == 'Notes') $description = Message::get("the actual description of the object.");
+if ($name == 'Status') $displayName = Message::get("Status");
+		  if ($name == 'Author') $displayName = Message::get("Author");
       if ($name == 'created') $description = Message::get("the creation date of this object");
       if ($name == 'creator') $description = Message::get("the user that created this object");
       if ($name == 'last_editor') $description = Message::get("the last user that edited this object");

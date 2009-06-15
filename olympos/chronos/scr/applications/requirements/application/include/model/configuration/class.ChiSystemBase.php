@@ -61,6 +61,8 @@ class ChiSystemBase extends ChiBase
       if ($name == 'Version') $displayName = Message::get("Version");
       if ($name == 'Name') $displayName = Message::get("Name");
       if ($name == 'Notes') $displayName = Message::get("Notes");
+	  if ($name == 'Status') $displayName = Message::get("Status");
+	  if ($name == 'Author') $displayName = Message::get("Author");
       if ($name == 'created') $displayName = Message::get("created");
       if ($name == 'creator') $displayName = Message::get("creator");
       if ($name == 'last_editor') $displayName = Message::get("last_editor");
@@ -81,6 +83,8 @@ class ChiSystemBase extends ChiBase
       if ($name == 'Version') $description = Message::get("the model version of this object");
       if ($name == 'Name') $description = Message::get("the name of this object.");
       if ($name == 'Notes') $description = Message::get("the actual description of the object.");
+	  if ($name == 'Status') $description = Message::get("the state of this object");
+	  if ($name == 'Author') $description = Message::get("the author of this object");
       if ($name == 'created') $description = Message::get("the creation date of this object");
       if ($name == 'creator') $description = Message::get("the user that created this object");
       if ($name == 'last_editor') $description = Message::get("the last user that edited this object");
@@ -141,6 +145,31 @@ class ChiSystemBase extends ChiBase
     {
       return $this->setValue('plattform', $plattform, DATATYPE_ATTRIBUTE);
     }
+	
+	function getAuthor($unconverted=false)
+    {
+      if ($unconverted)
+        return $this->getUnconvertedValue('Author', DATATYPE_ATTRIBUTE);
+      else
+        return $this->getValue('Author', DATATYPE_ATTRIBUTE);
+    }
+    function setAuthor($author)
+    {
+      return $this->setValue('Author', $author, DATATYPE_ATTRIBUTE);
+    }
+	
+	function getStatus($unconverted=false)
+    {
+      if ($unconverted)
+        return $this->getUnconvertedValue('Status', DATATYPE_ATTRIBUTE);
+      else
+        return $this->getValue('Status', DATATYPE_ATTRIBUTE);
+    }
+    function setStatus($status)
+    {
+      return $this->setValue('Status', $status, DATATYPE_ATTRIBUTE);
+    }
+	
     function getPackageOID()
     {
       $fkValue = $this->getValue('fk_package_id', DATATYPE_IGNORE);

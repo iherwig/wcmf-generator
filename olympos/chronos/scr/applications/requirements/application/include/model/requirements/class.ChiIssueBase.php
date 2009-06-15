@@ -56,12 +56,13 @@ class ChiIssueBase extends ChiBase
       if ($name == 'id') $displayName = Message::get("id");
       if ($name == 'fk_package_id') $displayName = Message::get("fk_package_id");
       if ($name == 'fk_chirequirement_id') $displayName = Message::get("fk_chirequirement_id");
-      if ($name == 'Author') $displayName = Message::get("Author");
       if ($name == 'Responsible') $displayName = Message::get("Responsible");
       if ($name == 'Alias') $displayName = Message::get("Alias");
       if ($name == 'Version') $displayName = Message::get("Version");
       if ($name == 'Name') $displayName = Message::get("Name");
       if ($name == 'Notes') $displayName = Message::get("Notes");
+	  if ($name == 'Author') $displayName = Message::get("Author");
+      if ($name == 'Status') $displayName = Message::get("Status");
       if ($name == 'created') $displayName = Message::get("created");
       if ($name == 'creator') $displayName = Message::get("creator");
       if ($name == 'last_editor') $displayName = Message::get("last_editor");
@@ -83,6 +84,7 @@ class ChiIssueBase extends ChiBase
       if ($name == 'Version') $description = Message::get("the model version of this object");
       if ($name == 'Name') $description = Message::get("the name of this object.");
       if ($name == 'Notes') $description = Message::get("the actual description of the object.");
+	  if ($name == 'Status') $description = Message::get("the state of this object");
       if ($name == 'created') $description = Message::get("the creation date of this object");
       if ($name == 'creator') $description = Message::get("the user that created this object");
       if ($name == 'last_editor') $description = Message::get("the last user that edited this object");
@@ -143,6 +145,19 @@ class ChiIssueBase extends ChiBase
     {
       return $this->setValue('Author', $Author, DATATYPE_ATTRIBUTE);
     }
+	
+	function getStatus($unconverted=false)
+    {
+      if ($unconverted)
+        return $this->getUnconvertedValue('Status', DATATYPE_ATTRIBUTE);
+      else
+        return $this->getValue('Status', DATATYPE_ATTRIBUTE);
+    }
+    function setStatus($Status)
+    {
+      return $this->setValue('Status', $Status, DATATYPE_ATTRIBUTE);
+    }
+	
     function getResponsible($unconverted=false)
     {
       if ($unconverted)
