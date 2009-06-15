@@ -24,6 +24,8 @@ Ext.extend(cwm.EntityBase, uwm.model.ModelObject);
 
 cwm.EntityBase.prototype.initByDisplayResult = function(node) {
 	cwm.EntityBase.superclass.initByDisplayResult.call(this, node);
+	this.data.Status = node.values[1].Status;
+	this.data.Author = node.values[1].Author;
       this.data.created = node.values[1].created;
       this.data.creator = node.values[1].creator;
       this.data.last_editor = node.values[1].last_editor;
@@ -32,6 +34,8 @@ cwm.EntityBase.prototype.initByDisplayResult = function(node) {
 
 cwm.EntityBase.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
+	realForm.findField("Status").loadValue(this.data.Status);
+	realForm.findField("Author").loadValue(this.data.Author);
       realForm.findField("created").loadValue(this.data.created);
       realForm.findField("creator").loadValue(this.data.creator);
       realForm.findField("last_editor").loadValue(this.data.last_editor);

@@ -23,6 +23,8 @@ Ext.extend(cwm.ChiGoal, uwm.model.ModelObject);
 
 cwm.ChiGoal.prototype.initByDisplayResult = function(node) {
 	cwm.ChiGoal.superclass.initByDisplayResult.call(this, node);
+	this.data.Author = node.values[1].Author;
+	this.data.Status = node.values[1].Status;
 	this.data.Priority = node.values[1].Priority;
 	this.data.Value_ammount = node.values[1].Value_ammount;
 	this.data.Value_Goal = node.values[1].Value_Goal;
@@ -40,6 +42,8 @@ cwm.ChiGoal.prototype.initByDisplayResult = function(node) {
 
 cwm.ChiGoal.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
+	realForm.findField("Author").loadValue(this.data.Author);
+	realForm.findField("Status").loadValue(this.data.Status);
 	realForm.findField("Priority").loadValue(this.data.Priority);
 	realForm.findField("Value_ammount").loadValue(this.data.Value_ammount);
 	realForm.findField("Value_Goal").loadValue(this.data.Value_Goal);

@@ -58,6 +58,18 @@ cwm.PackageClass.prototype.getPropertyForm = function(modelNode) {
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			modelNode: modelNode
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Author',
+			name: 'Author',
+			listType: "ChiAuthors",
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Status',
+			name: 'Status',
+			listType: "ChiStatus",
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',

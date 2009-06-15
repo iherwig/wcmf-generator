@@ -91,7 +91,21 @@ cwm.ChiBusinessProcessClass.prototype.getPropertyForm = function(modelNode, isLo
 			name: 'Version',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
-		}) ,	new uwm.property.TextField({
+		}) , new uwm.property.ComboBox({
+			fieldLabel: 'Author',
+			toolTip: "This ChiBusinessProcess's author's name and role in the project",
+			name: 'Author',
+			listType: "ChiAuthors",
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Status',
+			toolTip: "state",
+			name: 'Status',
+			listType: "ChiStatus",
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
+		}),	new uwm.property.TextField({
 			fieldLabel: 'created',
 			toolTip: "the creation date of this object",
 			name: 'created',
