@@ -78,6 +78,16 @@ cwm.FigureClass.prototype.getPropertyForm = function(modelNode) {
 			fieldLabel: 'Width',
 			name: 'Width',
 			modelNode: modelNode
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Author',
+			name: 'Author',
+			listType: "ChiAuthors",
+			modelNode: modelNode,
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Status',
+			name: 'Status',
+			listType: "ChiStatus",
+			modelNode: modelNode,
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',

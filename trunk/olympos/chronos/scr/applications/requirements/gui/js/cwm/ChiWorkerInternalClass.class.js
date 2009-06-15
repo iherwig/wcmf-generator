@@ -99,6 +99,20 @@ cwm.ChiWorkerInternalClass.prototype.getPropertyForm = function(modelNode, isLoc
 			name: 'Version',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Author',
+			toolTip: "This ChiWorkerInternal's author's name and role in the project",
+			name: 'Author',
+			listType: "ChiAuthors",
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Status',
+			toolTip: "state",
+			name: 'Status',
+			listType: "ChiStatus",
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',

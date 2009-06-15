@@ -99,6 +99,13 @@ cwm.ChiIssueClass.prototype.getPropertyForm = function(modelNode, isLockedByOthe
 			name: 'Version',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Status',
+			toolTip: "state",
+			name: 'Status',
+			listType: "ChiStatus",
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
 		}),	new uwm.property.TextField({
 			fieldLabel: 'created',
 			toolTip: "the creation date of this object",

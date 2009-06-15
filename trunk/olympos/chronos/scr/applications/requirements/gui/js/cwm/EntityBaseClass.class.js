@@ -50,7 +50,17 @@ Ext.extend(cwm.EntityBaseClass, uwm.model.ModelClass);
 
 cwm.EntityBaseClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({
-		items: [new uwm.property.TextField({
+		items: [new uwm.property.ComboBox({
+			fieldLabel: 'Author',
+			name: 'Author',
+			listType: "ChiAuthors",
+			modelNode: modelNode,
+		}), new uwm.property.ComboBox({
+			fieldLabel: 'Status',
+			name: 'Status',
+			listType: "ChiStatus",
+			modelNode: modelNode,
+		}),	new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,

@@ -25,6 +25,7 @@ Ext.extend(cwm.ChiIssue, uwm.model.ModelObject);
 cwm.ChiIssue.prototype.initByDisplayResult = function(node) {
 	cwm.ChiIssue.superclass.initByDisplayResult.call(this, node);
       this.data.Author = node.values[1].Author;
+	  this.data.Status = node.values[1].Status;
       this.data.Responsible = node.values[1].Responsible;
       this.data.Alias = node.values[1].Alias;
       this.data.Version = node.values[1].Version;
@@ -39,6 +40,7 @@ cwm.ChiIssue.prototype.initByDisplayResult = function(node) {
 cwm.ChiIssue.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
       realForm.findField("Author").loadValue(this.data.Author);
+	  realForm.findField("Status").loadValue(this.data.Status);
       realForm.findField("Responsible").loadValue(this.data.Responsible);
       realForm.findField("Alias").loadValue(this.data.Alias);
       realForm.findField("Version").loadValue(this.data.Version);
