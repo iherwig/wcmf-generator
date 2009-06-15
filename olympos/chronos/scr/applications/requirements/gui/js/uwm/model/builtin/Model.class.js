@@ -29,6 +29,8 @@ uwm.model.builtin.Model.prototype.initByDisplayResult = function(node) {
 	
 	this.data.Name = node.values[1].Name;
 	this.data.Notes = node.values[1].Notes;
+	this.data.Author = node.values[1].Author;
+	this.data.Status = node.values[1].Status;
 	this.data.created = node.values[1].created;
 	this.data.creator = node.values[1].creator;
 	this.data.last_editor = node.values[1].last_editor;
@@ -40,6 +42,8 @@ uwm.model.builtin.Model.prototype.populatePropertyForm = function(form) {
 	
 	realForm.findField("Name").loadValue(this.data.Name);
 	realForm.findField("Notes").loadValue(this.data.Notes);
+	realForm.findField("Author").loadValue(this.data.Author);
+	realForm.findField("Status").loadValue(this.data.Status);
 	realForm.findField("created").loadValue(this.data.created);
 	realForm.findField("creator").loadValue(this.data.creator);
 	realForm.findField("last_editor").loadValue(this.data.last_editor);
