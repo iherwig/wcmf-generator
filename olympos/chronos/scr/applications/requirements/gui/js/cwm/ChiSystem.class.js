@@ -35,7 +35,8 @@ cwm.ChiSystem.prototype.initByDisplayResult = function(node) {
 	cwm.ChiSystem.superclass.initByDisplayResult.call(this, node);
       this.data.config = node.values[1].config;
       this.data.plattform = node.values[1].plattform;
-      this.data.Name = node.values[1].Name;
+      this.data.Alias = node.values[1].Alias;
+	  this.data.Name = node.values[1].Name;
       this.data.Notes = node.values[1].Notes;
 	  this.data.Author = node.values[1].Author;
 	  this.data.Status = node.values[1].Status;
@@ -49,6 +50,7 @@ cwm.ChiSystem.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
       realForm.findField("config").loadValue(this.data.config);
       realForm.findField("plattform").loadValue(this.data.plattform);
+	  realForm.findField("Alias").loadValue(this.data.Alias);
       realForm.findField("Name").loadValue(this.data.Name);
       realForm.findField("Notes").loadValue(this.data.Notes);
 	  realForm.findField("Author").loadValue(this.data.Author);
