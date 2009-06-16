@@ -111,11 +111,11 @@ class ChiBusinessUseCaseRDBMapper extends NodeUnifiedRDBMapper
      /* 
       * Value description: the main actor of this use case
       */
-      array('name' => 'PrimaryActor', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'primaryactor', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'select#async:ChiWorkerExternal', 'display_type' => 'text'),
+      array('name' => 'PrimaryActor', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'primaryactor', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'select#asyncmult:ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartnerPassive|ChiBusinessPartnerActive|ChiBusinessPartner', 'display_type' => 'text'),
      /* 
       * Value description: The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.
       */
-      array('name' => 'OtherActors', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'otheractors', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'select#async:ChiWorkerExternal', 'display_type' => 'text'),
+      array('name' => 'OtherActors', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'otheractors', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'select#asyncmult:ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartnerPassive|ChiBusinessPartnerActive|ChiBusinessPartner', 'display_type' => 'text'),
      /* 
       * Value description: The goal should implicitly express the actor's intent or purpose of the use case, such as *Enrol Student in Seminar.*
       */
