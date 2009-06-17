@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Chronos="http:///schemas/Chronos/_EGSh8FppEd6p76rQXv446w/11" xmlns:Ouranos="http:///schemas/Ouranos/_i_bZIFpEEd6p76rQXv446w/45" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/Chronos/_EGSh8FppEd6p76rQXv446w/11 chronos.profile.uml#_nUp62VptEd6MUO2EchBIEQ http:///schemas/Ouranos/_i_bZIFpEEd6p76rQXv446w/45 ouranos.profile.uml#_nUWYQlptEd6MUO2EchBIEQ">
+  <uml:Package xmi:id="_nUzC-VptEd6MUO2EchBIEQ" name="OMG example">
+    <packageImport xmi:id="_nUzC-lptEd6MUO2EchBIEQ">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Package" xmi:id="_nUzC-1ptEd6MUO2EchBIEQ" name="Structure">
+      <packagedElement xmi:type="uml:Class" xmi:id="_nUzC_FptEd6MUO2EchBIEQ" name="Customer">
+        <ownedAttribute xmi:id="_nUzC_VptEd6MUO2EchBIEQ" name="voucher" visibility="private" type="_nUzDDFptEd6MUO2EchBIEQ" aggregation="composite" association="_nUzDDlptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzC_lptEd6MUO2EchBIEQ" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzC_1ptEd6MUO2EchBIEQ"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_nUzDAFptEd6MUO2EchBIEQ" name="hyperlinkToBestSeller" visibility="public">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_nUzDAVptEd6MUO2EchBIEQ" name="HyperlinkToCD" visibility="public">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_nUzDAlptEd6MUO2EchBIEQ" name="category" visibility="public">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_nUzDA1ptEd6MUO2EchBIEQ" name="ShoppingChart">
+        <ownedAttribute xmi:id="_nUzDBFptEd6MUO2EchBIEQ" name="customer" visibility="private" type="_nUzC_FptEd6MUO2EchBIEQ" association="_nUzDElptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzDBVptEd6MUO2EchBIEQ" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzDBlptEd6MUO2EchBIEQ" value="1"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_nUzDB1ptEd6MUO2EchBIEQ" name="ShoppingChart" visibility="private" type="_nUzDFlptEd6MUO2EchBIEQ" aggregation="composite" association="_nUzDIFptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzDCFptEd6MUO2EchBIEQ" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzDCVptEd6MUO2EchBIEQ"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_nUzDClptEd6MUO2EchBIEQ" name="discountValue" visibility="public">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+        <ownedOperation xmi:id="_nUzDC1ptEd6MUO2EchBIEQ" name="constrainItemInRange"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_nUzDDFptEd6MUO2EchBIEQ" name="Voucher">
+        <ownedAttribute xmi:id="_nUzDDVptEd6MUO2EchBIEQ" name="Value" visibility="public">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_nUzDDlptEd6MUO2EchBIEQ" name="has" memberEnd="_nUzC_VptEd6MUO2EchBIEQ _nUzDD1ptEd6MUO2EchBIEQ">
+        <ownedEnd xmi:id="_nUzDD1ptEd6MUO2EchBIEQ" name="" visibility="private" type="_nUzC_FptEd6MUO2EchBIEQ" association="_nUzDDlptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzDEFptEd6MUO2EchBIEQ" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzDEVptEd6MUO2EchBIEQ" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_nUzDElptEd6MUO2EchBIEQ" name="isrelatedto" memberEnd="_nUzDBFptEd6MUO2EchBIEQ _nUzDE1ptEd6MUO2EchBIEQ">
+        <ownedEnd xmi:id="_nUzDE1ptEd6MUO2EchBIEQ" name="" visibility="private" type="_nUzDA1ptEd6MUO2EchBIEQ" association="_nUzDElptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzDFFptEd6MUO2EchBIEQ" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzDFVptEd6MUO2EchBIEQ" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_nUzDFlptEd6MUO2EchBIEQ" name="item">
+        <ownedAttribute xmi:id="_nUzDF1ptEd6MUO2EchBIEQ" name="Itemtype" visibility="private" type="_nUzDJFptEd6MUO2EchBIEQ" association="_nUzDJlptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzDGFptEd6MUO2EchBIEQ" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzDGVptEd6MUO2EchBIEQ" value="1"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_nUzDGlptEd6MUO2EchBIEQ" name="value" visibility="public">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_nUzDG1ptEd6MUO2EchBIEQ" name="RelatedItem" visibility="private" type="_nUzDFlptEd6MUO2EchBIEQ" association="_nUzDKlptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzDHFptEd6MUO2EchBIEQ" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzDHVptEd6MUO2EchBIEQ"/>
+        </ownedAttribute>
+        <ownedOperation xmi:id="_nUzDHlptEd6MUO2EchBIEQ" name="isBestSeller">
+          <ownedParameter xmi:id="_nUzDH1ptEd6MUO2EchBIEQ" name="Parameter1" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+          </ownedParameter>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_nUzDIFptEd6MUO2EchBIEQ" memberEnd="_nUzDB1ptEd6MUO2EchBIEQ _nUzDIVptEd6MUO2EchBIEQ">
+        <ownedEnd xmi:id="_nUzDIVptEd6MUO2EchBIEQ" name="" visibility="private" type="_nUzDA1ptEd6MUO2EchBIEQ" association="_nUzDIFptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzDIlptEd6MUO2EchBIEQ" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzDI1ptEd6MUO2EchBIEQ" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_nUzDJFptEd6MUO2EchBIEQ" name="ItemType">
+        <ownedAttribute xmi:id="_nUzDJVptEd6MUO2EchBIEQ" name="name" visibility="public">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_nUzDJlptEd6MUO2EchBIEQ" memberEnd="_nUzDF1ptEd6MUO2EchBIEQ _nUzDJ1ptEd6MUO2EchBIEQ">
+        <ownedEnd xmi:id="_nUzDJ1ptEd6MUO2EchBIEQ" name="" visibility="private" type="_nUzDFlptEd6MUO2EchBIEQ" association="_nUzDJlptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzDKFptEd6MUO2EchBIEQ" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzDKVptEd6MUO2EchBIEQ"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_nUzDKlptEd6MUO2EchBIEQ" name="RelatesTo" memberEnd="_nUzDG1ptEd6MUO2EchBIEQ _nUzDK1ptEd6MUO2EchBIEQ">
+        <ownedEnd xmi:id="_nUzDK1ptEd6MUO2EchBIEQ" name="Item" visibility="private" type="_nUzDFlptEd6MUO2EchBIEQ" association="_nUzDKlptEd6MUO2EchBIEQ">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nUzDLFptEd6MUO2EchBIEQ" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nUzDLVptEd6MUO2EchBIEQ"/>
+        </ownedEnd>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_nUzDLlptEd6MUO2EchBIEQ" name="behaviour">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_nUzDL1ptEd6MUO2EchBIEQ" name="Give discount">
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_nUzDdlptEd6MUO2EchBIEQ" name="give discount activity 2">
+          <ownedParameter xmi:id="_nUzDd1ptEd6MUO2EchBIEQ" name="Parameter1"/>
+          <ownedParameter xmi:id="_nUzDeFptEd6MUO2EchBIEQ" name="Parameter2" direction="inout"/>
+          <node xmi:type="uml:StructuredActivityNode" xmi:id="_nUzDeVptEd6MUO2EchBIEQ" name="A" outgoing="_nUzD2lptEd6MUO2EchBIEQ" incoming="_nUzD0VptEd6MUO2EchBIEQ">
+            <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDelptEd6MUO2EchBIEQ" name="consequence" source="_nUzDhlptEd6MUO2EchBIEQ" target="_nUzDh1ptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDe1ptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDfFptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDfVptEd6MUO2EchBIEQ" source="_nUzDjlptEd6MUO2EchBIEQ" target="_nUzDhlptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDflptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDf1ptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDgFptEd6MUO2EchBIEQ" source="_nUzDh1ptEd6MUO2EchBIEQ" target="_nUzDj1ptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDgVptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDglptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <edge xmi:type="uml:ObjectFlow" xmi:id="_nUzDg1ptEd6MUO2EchBIEQ" source="_nUzDkFptEd6MUO2EchBIEQ" target="_nUzDiFptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDhFptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDhVptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <node xmi:type="uml:DecisionNode" xmi:id="_nUzDhlptEd6MUO2EchBIEQ" name="My order &lt; 100" outgoing="_nUzDelptEd6MUO2EchBIEQ" incoming="_nUzDfVptEd6MUO2EchBIEQ"/>
+            <node xmi:type="uml:AddStructuralFeatureValueAction" xmi:id="_nUzDh1ptEd6MUO2EchBIEQ" name="Write Discount 3%" outgoing="_nUzDgFptEd6MUO2EchBIEQ" incoming="_nUzDelptEd6MUO2EchBIEQ" structuralFeature="_nUzDClptEd6MUO2EchBIEQ">
+              <object xmi:id="_nUzDiFptEd6MUO2EchBIEQ" incoming="_nUzDg1ptEd6MUO2EchBIEQ" type="_nUzDA1ptEd6MUO2EchBIEQ">
+                <eAnnotations xmi:id="_nUzDiVptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                  <details xmi:id="_nUzDilptEd6MUO2EchBIEQ" key="object"/>
+                </eAnnotations>
+              </object>
+              <value xmi:id="_nUzDi1ptEd6MUO2EchBIEQ" name="3">
+                <eAnnotations xmi:id="_nUzDjFptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                  <details xmi:id="_nUzDjVptEd6MUO2EchBIEQ" key="value"/>
+                </eAnnotations>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+              </value>
+            </node>
+            <node xmi:type="uml:InitialNode" xmi:id="_nUzDjlptEd6MUO2EchBIEQ" outgoing="_nUzDfVptEd6MUO2EchBIEQ"/>
+            <node xmi:type="uml:ActivityFinalNode" xmi:id="_nUzDj1ptEd6MUO2EchBIEQ" incoming="_nUzDgFptEd6MUO2EchBIEQ"/>
+            <node xmi:type="uml:InputPin" xmi:id="_nUzDkFptEd6MUO2EchBIEQ" outgoing="_nUzDg1ptEd6MUO2EchBIEQ" incoming="_nUzD7FptEd6MUO2EchBIEQ" type="_nUzDA1ptEd6MUO2EchBIEQ">
+              <upperBound xmi:type="uml:LiteralInteger" xmi:id="_nUzDkVptEd6MUO2EchBIEQ" value="1"/>
+            </node>
+          </node>
+          <node xmi:type="uml:StructuredActivityNode" xmi:id="_nUzDklptEd6MUO2EchBIEQ" name="B" outgoing="_nUzD3VptEd6MUO2EchBIEQ" incoming="_nUzD1FptEd6MUO2EchBIEQ">
+            <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDk1ptEd6MUO2EchBIEQ" name="consequence 2" source="_nUzDn1ptEd6MUO2EchBIEQ" target="_nUzDoFptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDlFptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDlVptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDllptEd6MUO2EchBIEQ" source="_nUzDp1ptEd6MUO2EchBIEQ" target="_nUzDn1ptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDl1ptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDmFptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDmVptEd6MUO2EchBIEQ" source="_nUzDoFptEd6MUO2EchBIEQ" target="_nUzDqFptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDmlptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDm1ptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <edge xmi:type="uml:ObjectFlow" xmi:id="_nUzDnFptEd6MUO2EchBIEQ" source="_nUzDqVptEd6MUO2EchBIEQ" target="_nUzDoVptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDnVptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDnlptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <node xmi:type="uml:DecisionNode" xmi:id="_nUzDn1ptEd6MUO2EchBIEQ" name="My order >= 100 and order &lt; 1000" outgoing="_nUzDk1ptEd6MUO2EchBIEQ" incoming="_nUzDllptEd6MUO2EchBIEQ"/>
+            <node xmi:type="uml:AddStructuralFeatureValueAction" xmi:id="_nUzDoFptEd6MUO2EchBIEQ" name="Write discount 6%" outgoing="_nUzDmVptEd6MUO2EchBIEQ" incoming="_nUzDk1ptEd6MUO2EchBIEQ" structuralFeature="_nUzDClptEd6MUO2EchBIEQ">
+              <object xmi:id="_nUzDoVptEd6MUO2EchBIEQ" incoming="_nUzDnFptEd6MUO2EchBIEQ" type="_nUzDA1ptEd6MUO2EchBIEQ">
+                <eAnnotations xmi:id="_nUzDolptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                  <details xmi:id="_nUzDo1ptEd6MUO2EchBIEQ" key="object"/>
+                </eAnnotations>
+              </object>
+              <value xmi:id="_nUzDpFptEd6MUO2EchBIEQ" name="6">
+                <eAnnotations xmi:id="_nUzDpVptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                  <details xmi:id="_nUzDplptEd6MUO2EchBIEQ" key="value"/>
+                </eAnnotations>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+              </value>
+            </node>
+            <node xmi:type="uml:InitialNode" xmi:id="_nUzDp1ptEd6MUO2EchBIEQ" outgoing="_nUzDllptEd6MUO2EchBIEQ"/>
+            <node xmi:type="uml:ActivityFinalNode" xmi:id="_nUzDqFptEd6MUO2EchBIEQ" incoming="_nUzDmVptEd6MUO2EchBIEQ"/>
+            <node xmi:type="uml:InputPin" xmi:id="_nUzDqVptEd6MUO2EchBIEQ" outgoing="_nUzDnFptEd6MUO2EchBIEQ" incoming="_nUzD6VptEd6MUO2EchBIEQ" type="_nUzDA1ptEd6MUO2EchBIEQ">
+              <upperBound xmi:type="uml:LiteralInteger" xmi:id="_nUzDqlptEd6MUO2EchBIEQ" value="1"/>
+            </node>
+          </node>
+          <node xmi:type="uml:StructuredActivityNode" xmi:id="_nUzDq1ptEd6MUO2EchBIEQ" name="C" outgoing="_nUzD4FptEd6MUO2EchBIEQ" incoming="_nUzD11ptEd6MUO2EchBIEQ">
+            <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDrFptEd6MUO2EchBIEQ" name="Consequence 3" source="_nUzDuFptEd6MUO2EchBIEQ" target="_nUzDuVptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDrVptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDrlptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDr1ptEd6MUO2EchBIEQ" source="_nUzDwFptEd6MUO2EchBIEQ" target="_nUzDuFptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDsFptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDsVptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDslptEd6MUO2EchBIEQ" source="_nUzDuVptEd6MUO2EchBIEQ" target="_nUzDwVptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDs1ptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDtFptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <edge xmi:type="uml:ObjectFlow" xmi:id="_nUzDtVptEd6MUO2EchBIEQ" source="_nUzDwlptEd6MUO2EchBIEQ" target="_nUzDulptEd6MUO2EchBIEQ">
+              <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDtlptEd6MUO2EchBIEQ">
+                <language></language>
+                <body></body>
+              </guard>
+              <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzDt1ptEd6MUO2EchBIEQ" value="1"/>
+            </edge>
+            <node xmi:type="uml:DecisionNode" xmi:id="_nUzDuFptEd6MUO2EchBIEQ" name="My order >= 1000" outgoing="_nUzDrFptEd6MUO2EchBIEQ" incoming="_nUzDr1ptEd6MUO2EchBIEQ"/>
+            <node xmi:type="uml:AddStructuralFeatureValueAction" xmi:id="_nUzDuVptEd6MUO2EchBIEQ" name="Write discount 10%" outgoing="_nUzDslptEd6MUO2EchBIEQ" incoming="_nUzDrFptEd6MUO2EchBIEQ" structuralFeature="_nUzDClptEd6MUO2EchBIEQ">
+              <object xmi:id="_nUzDulptEd6MUO2EchBIEQ" name="customerShoppingCart" incoming="_nUzDtVptEd6MUO2EchBIEQ" type="_nUzDA1ptEd6MUO2EchBIEQ">
+                <eAnnotations xmi:id="_nUzDu1ptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                  <details xmi:id="_nUzDvFptEd6MUO2EchBIEQ" key="object"/>
+                </eAnnotations>
+              </object>
+              <value xmi:id="_nUzDvVptEd6MUO2EchBIEQ" name="10">
+                <eAnnotations xmi:id="_nUzDvlptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+                  <details xmi:id="_nUzDv1ptEd6MUO2EchBIEQ" key="value"/>
+                </eAnnotations>
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+              </value>
+            </node>
+            <node xmi:type="uml:InitialNode" xmi:id="_nUzDwFptEd6MUO2EchBIEQ" outgoing="_nUzDr1ptEd6MUO2EchBIEQ"/>
+            <node xmi:type="uml:ActivityFinalNode" xmi:id="_nUzDwVptEd6MUO2EchBIEQ" incoming="_nUzDslptEd6MUO2EchBIEQ"/>
+            <node xmi:type="uml:InputPin" xmi:id="_nUzDwlptEd6MUO2EchBIEQ" name="customerShoppingCart" outgoing="_nUzDtVptEd6MUO2EchBIEQ" incoming="_nUzD5lptEd6MUO2EchBIEQ" type="_nUzDA1ptEd6MUO2EchBIEQ">
+              <upperBound xmi:type="uml:LiteralInteger" xmi:id="_nUzDw1ptEd6MUO2EchBIEQ" value="1"/>
+            </node>
+          </node>
+          <node xmi:type="uml:ActivityParameterNode" xmi:id="_nUzDxFptEd6MUO2EchBIEQ" name="OrderValue" parameter="_nUzDd1ptEd6MUO2EchBIEQ">
+            <eAnnotations xmi:id="_nUzDxVptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
+            <upperBound xmi:type="uml:LiteralInteger" xmi:id="_nUzDxlptEd6MUO2EchBIEQ" value="1"/>
+          </node>
+          <node xmi:type="uml:InitialNode" xmi:id="_nUzDx1ptEd6MUO2EchBIEQ" name="evaluate discount" outgoing="_nUzDzlptEd6MUO2EchBIEQ"/>
+          <node xmi:type="uml:ForkNode" xmi:id="_nUzDyFptEd6MUO2EchBIEQ" name="evaluate" outgoing="_nUzD0VptEd6MUO2EchBIEQ _nUzD1FptEd6MUO2EchBIEQ _nUzD11ptEd6MUO2EchBIEQ" incoming="_nUzDzlptEd6MUO2EchBIEQ"/>
+          <node xmi:type="uml:ActivityFinalNode" xmi:id="_nUzDyVptEd6MUO2EchBIEQ" name="exit" incoming="_nUzD41ptEd6MUO2EchBIEQ"/>
+          <node xmi:type="uml:JoinNode" xmi:id="_nUzDylptEd6MUO2EchBIEQ" name="evaluation end" outgoing="_nUzD41ptEd6MUO2EchBIEQ" incoming="_nUzD2lptEd6MUO2EchBIEQ _nUzD3VptEd6MUO2EchBIEQ _nUzD4FptEd6MUO2EchBIEQ">
+            <joinSpec xmi:type="uml:OpaqueExpression" xmi:id="_nUzDy1ptEd6MUO2EchBIEQ"/>
+          </node>
+          <node xmi:type="uml:ActivityParameterNode" xmi:id="_nUzDzFptEd6MUO2EchBIEQ" name="customerShoppingCart" outgoing="_nUzD5lptEd6MUO2EchBIEQ _nUzD6VptEd6MUO2EchBIEQ _nUzD7FptEd6MUO2EchBIEQ" type="_nUzDA1ptEd6MUO2EchBIEQ" parameter="_nUzDeFptEd6MUO2EchBIEQ">
+            <upperBound xmi:type="uml:LiteralInteger" xmi:id="_nUzDzVptEd6MUO2EchBIEQ" value="1"/>
+          </node>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_nUzDzlptEd6MUO2EchBIEQ" source="_nUzDx1ptEd6MUO2EchBIEQ" target="_nUzDyFptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzDz1ptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD0FptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD0VptEd6MUO2EchBIEQ" name="evaluation start 2 PR A " source="_nUzDyFptEd6MUO2EchBIEQ" target="_nUzDeVptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD0lptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD01ptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD1FptEd6MUO2EchBIEQ" name="evaluation start 2 PR B" source="_nUzDyFptEd6MUO2EchBIEQ" target="_nUzDklptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD1VptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD1lptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD11ptEd6MUO2EchBIEQ" name="evaluation start 2 PR C" source="_nUzDyFptEd6MUO2EchBIEQ" target="_nUzDq1ptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD2FptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD2VptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD2lptEd6MUO2EchBIEQ" name="Production rule A to evaluation end" source="_nUzDeVptEd6MUO2EchBIEQ" target="_nUzDylptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD21ptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD3FptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD3VptEd6MUO2EchBIEQ" name="Production rule B to evaluation end" source="_nUzDklptEd6MUO2EchBIEQ" target="_nUzDylptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD3lptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD31ptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD4FptEd6MUO2EchBIEQ" name="Production rule C to evaluation end" source="_nUzDq1ptEd6MUO2EchBIEQ" target="_nUzDylptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD4VptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD4lptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD41ptEd6MUO2EchBIEQ" source="_nUzDylptEd6MUO2EchBIEQ" target="_nUzDyVptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD5FptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD5VptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ObjectFlow" xmi:id="_nUzD5lptEd6MUO2EchBIEQ" name="Shopping cart to rule C" source="_nUzDzFptEd6MUO2EchBIEQ" target="_nUzDwlptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD51ptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD6FptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ObjectFlow" xmi:id="_nUzD6VptEd6MUO2EchBIEQ" name="Shopping cart to rule B" source="_nUzDzFptEd6MUO2EchBIEQ" target="_nUzDqVptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD6lptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD61ptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+          <edge xmi:type="uml:ObjectFlow" xmi:id="_nUzD7FptEd6MUO2EchBIEQ" name="Shopping cart to rule A" source="_nUzDzFptEd6MUO2EchBIEQ" target="_nUzDkFptEd6MUO2EchBIEQ">
+            <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD7VptEd6MUO2EchBIEQ">
+              <language></language>
+              <body></body>
+            </guard>
+            <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD7lptEd6MUO2EchBIEQ" value="1"/>
+          </edge>
+        </ownedBehavior>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_nUzD71ptEd6MUO2EchBIEQ" name="Rule Variables and Patterns"/>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_nUzD8FptEd6MUO2EchBIEQ" name="Rule Definitions">
+        <node xmi:type="uml:InitialNode" xmi:id="_nUzD8VptEd6MUO2EchBIEQ" name="trigger" outgoing="_nUzD9lptEd6MUO2EchBIEQ"/>
+        <node xmi:type="uml:ActivityFinalNode" xmi:id="_nUzD8lptEd6MUO2EchBIEQ" name="Main success scenario" incoming="_nUzD_1ptEd6MUO2EchBIEQ"/>
+        <node xmi:type="uml:DecisionNode" xmi:id="_nUzD81ptEd6MUO2EchBIEQ" name="cheapPurchases" outgoing="_nUzD_FptEd6MUO2EchBIEQ" incoming="_nUzD-VptEd6MUO2EchBIEQ"/>
+        <node xmi:type="uml:OpaqueAction" xmi:id="_nUzD9FptEd6MUO2EchBIEQ" name="IF" outgoing="_nUzD-VptEd6MUO2EchBIEQ" incoming="_nUzD9lptEd6MUO2EchBIEQ"/>
+        <node xmi:type="uml:OpaqueAction" xmi:id="_nUzD9VptEd6MUO2EchBIEQ" name="Then" outgoing="_nUzD_1ptEd6MUO2EchBIEQ" incoming="_nUzD_FptEd6MUO2EchBIEQ"/>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD9lptEd6MUO2EchBIEQ" source="_nUzD8VptEd6MUO2EchBIEQ" target="_nUzD9FptEd6MUO2EchBIEQ">
+          <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD91ptEd6MUO2EchBIEQ">
+            <language></language>
+            <body></body>
+          </guard>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD-FptEd6MUO2EchBIEQ" value="1"/>
+        </edge>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD-VptEd6MUO2EchBIEQ" source="_nUzD9FptEd6MUO2EchBIEQ" target="_nUzD81ptEd6MUO2EchBIEQ">
+          <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD-lptEd6MUO2EchBIEQ">
+            <language></language>
+            <body></body>
+          </guard>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD-1ptEd6MUO2EchBIEQ" value="1"/>
+        </edge>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD_FptEd6MUO2EchBIEQ" source="_nUzD81ptEd6MUO2EchBIEQ" target="_nUzD9VptEd6MUO2EchBIEQ">
+          <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzD_VptEd6MUO2EchBIEQ">
+            <language></language>
+            <body></body>
+          </guard>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzD_lptEd6MUO2EchBIEQ" value="1"/>
+        </edge>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_nUzD_1ptEd6MUO2EchBIEQ" source="_nUzD9VptEd6MUO2EchBIEQ" target="_nUzD8lptEd6MUO2EchBIEQ">
+          <guard xmi:type="uml:OpaqueExpression" xmi:id="_nUzEAFptEd6MUO2EchBIEQ">
+            <language></language>
+            <body></body>
+          </guard>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_nUzEAVptEd6MUO2EchBIEQ" value="1"/>
+        </edge>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Activity" xmi:id="_nUzEAlptEd6MUO2EchBIEQ" name="Rule Action"/>
+    </packagedElement>
+    <profileApplication xmi:id="_nUzEA1ptEd6MUO2EchBIEQ">
+      <eAnnotations xmi:id="_nUzEBFptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Standard.profile.uml#_yzU58YinEdqtvbnfB2L_5w"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
+    </profileApplication>
+    <profileApplication xmi:id="_nUzEBVptEd6MUO2EchBIEQ">
+      <eAnnotations xmi:id="_nUzEBlptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="Default.profile.uml#_nUzFaFptEd6MUO2EchBIEQ"/>
+      </eAnnotations>
+      <appliedProfile href="Default.profile.uml#_nUzFZlptEd6MUO2EchBIEQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_nUzEB1ptEd6MUO2EchBIEQ">
+      <eAnnotations xmi:id="_nUzECFptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="Deployment.profile.uml#_nUgLbVptEd6MUO2EchBIEQ"/>
+      </eAnnotations>
+      <appliedProfile href="Deployment.profile.uml#_nUgLa1ptEd6MUO2EchBIEQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_nUzECVptEd6MUO2EchBIEQ">
+      <eAnnotations xmi:id="_nUzEClptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="ouranos.profile.uml#_nUWYQlptEd6MUO2EchBIEQ"/>
+      </eAnnotations>
+      <appliedProfile href="ouranos.profile.uml#_nUWYQFptEd6MUO2EchBIEQ"/>
+    </profileApplication>
+    <profileApplication xmi:id="_nUzEC1ptEd6MUO2EchBIEQ">
+      <eAnnotations xmi:id="_nUzEDFptEd6MUO2EchBIEQ" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="chronos.profile.uml#_nUp62VptEd6MUO2EchBIEQ"/>
+      </eAnnotations>
+      <appliedProfile href="chronos.profile.uml#_nUp611ptEd6MUO2EchBIEQ"/>
+    </profileApplication>
+  </uml:Package>
+  <Chronos:ChiNode xmi:id="_nUzEDVptEd6MUO2EchBIEQ" base_Class="_nUzC_FptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiNode xmi:id="_nUzEDlptEd6MUO2EchBIEQ" base_Class="_nUzDJFptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiNode xmi:id="_nUzED1ptEd6MUO2EchBIEQ" base_Class="_nUzDA1ptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiNode xmi:id="_nUzEEFptEd6MUO2EchBIEQ" base_Class="_nUzDDFptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiNode xmi:id="_nUzEEVptEd6MUO2EchBIEQ" base_Class="_nUzDFlptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiValue xmi:id="_nUzEElptEd6MUO2EchBIEQ" base_Property="_nUzDAlptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiValue xmi:id="_nUzEE1ptEd6MUO2EchBIEQ" base_Property="_nUzDAFptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiValue xmi:id="_nUzEFFptEd6MUO2EchBIEQ" base_Property="_nUzDAVptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiValue xmi:id="_nUzEFVptEd6MUO2EchBIEQ" base_Property="_nUzDGlptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiValue xmi:id="_nUzEFlptEd6MUO2EchBIEQ" base_Property="_nUzDJVptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiValue xmi:id="_nUzEF1ptEd6MUO2EchBIEQ" base_Property="_nUzDClptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiValue xmi:id="_nUzEGFptEd6MUO2EchBIEQ" base_Property="_nUzDDVptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleCondition xmi:id="_nUzEGVptEd6MUO2EchBIEQ" ProdRulehasCondition="_nUzEHFptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleCondition xmi:id="_nUzEGlptEd6MUO2EchBIEQ" ProdRulehasCondition="_nUzEHVptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleCondition xmi:id="_nUzEG1ptEd6MUO2EchBIEQ"/>
+  <Ouranos:ProductionRule xmi:id="_nUzEHFptEd6MUO2EchBIEQ" classisModifieadByRules="_nUzDA1ptEd6MUO2EchBIEQ" classReferencedByRule="_nUzDA1ptEd6MUO2EchBIEQ" priority="1" producedAction="_nUzEH1ptEd6MUO2EchBIEQ" ruleActionList="_nUzEH1ptEd6MUO2EchBIEQ" rulecondition="_nUzEGVptEd6MUO2EchBIEQ"/>
+  <Ouranos:ProductionRule xmi:id="_nUzEHVptEd6MUO2EchBIEQ" priority="2" ruleActionList="_nUzEIFptEd6MUO2EchBIEQ" rulecondition="_nUzEGlptEd6MUO2EchBIEQ" ruleVariable="_nUzEIlptEd6MUO2EchBIEQ"/>
+  <Ouranos:ProductionRule xmi:id="_nUzEHlptEd6MUO2EchBIEQ" priority="3"/>
+  <Ouranos:RuleAction xmi:id="_nUzEH1ptEd6MUO2EchBIEQ" referencedProdRule="_nUzEHFptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleAction xmi:id="_nUzEIFptEd6MUO2EchBIEQ" referencedProdRule="_nUzEHVptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleAction xmi:id="_nUzEIVptEd6MUO2EchBIEQ"/>
+  <Ouranos:ORuleVariable xmi:id="_nUzEIlptEd6MUO2EchBIEQ" prodRule="_nUzEHVptEd6MUO2EchBIEQ"/>
+  <Ouranos:OExpression xmi:id="_nUzEI1ptEd6MUO2EchBIEQ"/>
+  <Ouranos:OExpression xmi:id="_nUzEJFptEd6MUO2EchBIEQ"/>
+  <Ouranos:OExpression xmi:id="_nUzEJVptEd6MUO2EchBIEQ"/>
+  <Ouranos:OExpression xmi:id="_nUzEJlptEd6MUO2EchBIEQ"/>
+  <Ouranos:OExpression xmi:id="_nUzEJ1ptEd6MUO2EchBIEQ"/>
+  <Ouranos:ProductionRuleset xmi:id="_nUzEKFptEd6MUO2EchBIEQ"/>
+  <Chronos:ChiBusinessUseCase xmi:id="_nUzEKVptEd6MUO2EchBIEQ" base_UseCase="_nUzDL1ptEd6MUO2EchBIEQ"/>
+  <Ouranos:ProductionRuleset xmi:id="_nUzEKlptEd6MUO2EchBIEQ" RuleVariable="_nUzEMVptEd6MUO2EchBIEQ _nUzENVptEd6MUO2EchBIEQ" base_Behavior="_nUzDdlptEd6MUO2EchBIEQ" base_NamedElement="_nUzDdlptEd6MUO2EchBIEQ" rule="_nUzEK1ptEd6MUO2EchBIEQ _nUzELFptEd6MUO2EchBIEQ _nUzELVptEd6MUO2EchBIEQ"/>
+  <Ouranos:ProductionRule xmi:id="_nUzEK1ptEd6MUO2EchBIEQ" ruleset="_nUzEKlptEd6MUO2EchBIEQ" base_NamedElement="_nUzDeVptEd6MUO2EchBIEQ" classisModifieadByRules="_nUzDA1ptEd6MUO2EchBIEQ" classReferencedByRule="_nUzDA1ptEd6MUO2EchBIEQ" priority="1" ruleActionList="_nUzEMlptEd6MUO2EchBIEQ" rulecondition="_nUzELlptEd6MUO2EchBIEQ"/>
+  <Ouranos:ProductionRule xmi:id="_nUzELFptEd6MUO2EchBIEQ" ruleset="_nUzEKlptEd6MUO2EchBIEQ" base_NamedElement="_nUzDklptEd6MUO2EchBIEQ" classisModifieadByRules="_nUzDA1ptEd6MUO2EchBIEQ" classReferencedByRule="_nUzDA1ptEd6MUO2EchBIEQ" priority="2" ruleActionList="_nUzEM1ptEd6MUO2EchBIEQ" rulecondition="_nUzEL1ptEd6MUO2EchBIEQ"/>
+  <Ouranos:ProductionRule xmi:id="_nUzELVptEd6MUO2EchBIEQ" ruleset="_nUzEKlptEd6MUO2EchBIEQ" base_NamedElement="_nUzDq1ptEd6MUO2EchBIEQ" classisModifieadByRules="_nUzDA1ptEd6MUO2EchBIEQ" classReferencedByRule="_nUzDA1ptEd6MUO2EchBIEQ" priority="3" ruleActionList="_nUzENFptEd6MUO2EchBIEQ" rulecondition="_nUzEMFptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleCondition xmi:id="_nUzELlptEd6MUO2EchBIEQ" ProdRulehasCondition="_nUzEK1ptEd6MUO2EchBIEQ" base_NamedElement="_nUzDhlptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleCondition xmi:id="_nUzEL1ptEd6MUO2EchBIEQ" ProdRulehasCondition="_nUzELFptEd6MUO2EchBIEQ" base_NamedElement="_nUzDn1ptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleCondition xmi:id="_nUzEMFptEd6MUO2EchBIEQ" ProdRulehasCondition="_nUzELVptEd6MUO2EchBIEQ" base_NamedElement="_nUzDuFptEd6MUO2EchBIEQ"/>
+  <Ouranos:ORuleVariable xmi:id="_nUzEMVptEd6MUO2EchBIEQ" base_TypedElement="_nUzDxFptEd6MUO2EchBIEQ" Value="50" VariableType="String" ruleset="_nUzEKlptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleAction xmi:id="_nUzEMlptEd6MUO2EchBIEQ" base_NamedElement="_nUzDh1ptEd6MUO2EchBIEQ" referencedProdRule="_nUzEK1ptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleAction xmi:id="_nUzEM1ptEd6MUO2EchBIEQ" base_NamedElement="_nUzDoFptEd6MUO2EchBIEQ" referencedProdRule="_nUzELFptEd6MUO2EchBIEQ"/>
+  <Ouranos:RuleAction xmi:id="_nUzENFptEd6MUO2EchBIEQ" base_NamedElement="_nUzDuVptEd6MUO2EchBIEQ" referencedProdRule="_nUzELVptEd6MUO2EchBIEQ"/>
+  <Ouranos:ORuleVariable xmi:id="_nUzENVptEd6MUO2EchBIEQ" base_TypedElement="_nUzDzFptEd6MUO2EchBIEQ" VariableType="ShoppingCart" ruleset="_nUzEKlptEd6MUO2EchBIEQ"/>
+</xmi:XMI>
