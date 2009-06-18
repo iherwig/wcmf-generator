@@ -1,7 +1,7 @@
 import uml;
 import Chronos;
 
-extension common::chronos::util;
+extension cartridge::ChiCmf::extensions::util;
 
 /**
  * Action key related methods

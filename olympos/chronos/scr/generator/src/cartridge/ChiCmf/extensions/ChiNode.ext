@@ -4,10 +4,11 @@ import Chronos;
 extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::util;
+extension common::umlutils;
 
-extension common::chronos::util;
-extension common::chronos::naming;
-extension common::chronos::ChiValue;
+extension cartridge::ChiCmf::extensions::util;
+extension cartridge::ChiCmf::extensions::naming;
+extension cartridge::ChiCmf::extensions::ChiValue;
 
 /**
  * ChiNode extensions
@@ -166,6 +167,17 @@ Void setPKName(ChiNode this, String name) :
 ;
 
 /**
+ * Get the foreign key
+ */
+String getFKName(Property parent) :
+	let association = parent.association :
+	association != null ? 
+		(let fk_name = association.getTaggedValue(STEREOTYPE_CHI_ASSOCIATION(), "fk_name") :
+			fk_name == null || fk_name.toString().length == 0 ? defaultFKName(parent.type) : fk_name) : 
+		defaultFKName(parent.type) 
+;
+
+/**
  * Get the primary keys (from the tagged value)
  */
 List[ChiValue] getPKValues(ChiNode this) : 
@@ -189,3 +201,45 @@ Class getFKClass(ChiValue this) :
 	JAVA net.sourceforge.olympos.oaw.extend.Generator.getFKClass(org.eclipse.uml2.uml.Property)
 ;
 
+/**
+ * Checks whether a WCMFNode is at the other end of an N:M relation.
+ */
+ Boolean isAtOtherNmEnd(ChiNode this, ChiNode otherNode, ChiManyToMany nm) :
+/*
+Algorithm remarks:
+1) This Node may not be other Node
+2) The common superclasses of this Node and the other Node (if any) may not
+   have a relation to NM
+
+Test Scenario:
+
+Class hierarchy:
+ChiBase
+	ChiBusinessUseCase
+		ChiBusinessUseCaseCore
+	Actor
+		ChiWorker
+			ChiWorkerInternal
+			ChiWorkerExternal
+		ChiBusinessPartner
+			ChiBusinessPartnerActive
+			
+Relations:
+ChiBusinessUseCase ---NMUCActor--- Actor
+
+Test Case:
+this = ChiWorkerInternal
+nm = NMUCActor
+
+TRUE for otherNode = ChiBusinessUseCase, ChiBusinessUseCaseCore
+FALSE for all other
+*/
+ 	otherNode.name != this.name
+	&& this.getSuperClassesRecursive().add(this).select(
+		e|otherNode.getSuperClassesRecursive().add(otherNode).contains(e)
+	).select(
+		e|e.getChildNodes().select(
+			f|f.type == nm
+		).size > 0
+	).size == 0
+ ;

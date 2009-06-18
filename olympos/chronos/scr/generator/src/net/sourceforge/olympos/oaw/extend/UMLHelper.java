@@ -55,7 +55,7 @@ public class UMLHelper {
 	}
 
 	/**
-	 * Check if an element has the given stereotype. e.g. UMLUtil.hasStereotype(clazz, "wcmf::WCMFNode")
+	 * Check if an element has the given stereotype. e.g. UMLUtil.hasStereotype(clazz, "Chrnos::ChiNode")
 	 * @param e The element to check the stereotype for.
 	 * @param stereotypeName The qualified stereotype name. <code>[ProfileName]::[StereotypeName]
 	 * @return boolean
@@ -80,7 +80,7 @@ public class UMLHelper {
 	}
 
 	/**
-	 * Get the value of a tagged value. e.g. UMLUtil.getTaggedValue(clazz, "wcmf::WCMFNode", "pk_name")
+	 * Get the value of a tagged value. e.g. UMLUtil.getTaggedValue(clazz, "Chronos::ChiNode", "pk_name")
 	 * @param e The element to get the tagged value from.
 	 * @param stereotypeName The qualified stereotype name. <code>[ProfileName]::[StereotypeName]
 	 * @param name The name of the tagged value.
@@ -109,7 +109,7 @@ public class UMLHelper {
 	}
 
 	/**
-	 * Set the value of a tagged value. e.g. UMLUtil.setTaggedValue(clazz, "wcmf::WCMFNode", "pk_name", "id")
+	 * Set the value of a tagged value. e.g. UMLUtil.setTaggedValue(clazz, "Chronos::ChiNode", "pk_name", "id")
 	 * @param e The element to set the tagged value on.
 	 * @param stereotypeName The qualified stereotype name. <code>[ProfileName]::[StereotypeName]
 	 * @param name The name of the tagged value.

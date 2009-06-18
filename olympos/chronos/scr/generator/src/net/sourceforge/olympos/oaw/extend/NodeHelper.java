@@ -30,7 +30,7 @@ public class NodeHelper {
 
 	/**
 	 * Get the parent nodes of a given class. The nodes will be cached if doCache is true.
-	 * @note Only classes with WCMFNode or WCMFManyToMany stereotype will be listed
+	 * @note Only classes with ChiNode or ChiManyToMany stereotype will be listed
 	 * @param clazz The class to get the parents for.
 	 * @param recursive If true, include parents that were added by the generator.
 	 * @return A list of Property instances (use getType() method to get the type)
@@ -59,8 +59,8 @@ public class NodeHelper {
 									(aggregationKind.ordinal() == AggregationKind.NONE && prop.getOtherEnd().getAggregation().ordinal() == AggregationKind.NONE &&
 											prop.isNavigable() && !prop.getOtherEnd().isNavigable())
 									) {
-									if (UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_WCMF_NODE)) ||
-											UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_WCMF_MANY_TO_MANY))) {
+									if (UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_CHI_NODE)) ||
+											UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_CHI_MANY_TO_MANY))) {
 										Logger.debug("   -> Found parent: "+prop.getType().getName()+" ["+counter+"]");
 										parents.add(prop);
 									}
@@ -73,7 +73,7 @@ public class NodeHelper {
 			}
 
 			// sort parents if desired (depends on parent_order tagged value)
-			String parentOrder = UMLHelper.getTaggedValue(clazz, Constants.FQName(Constants.STEREOTYPE_WCMF_NODE), "parent_order").toString();
+			String parentOrder = UMLHelper.getTaggedValue(clazz, Constants.FQName(Constants.STEREOTYPE_CHI_NODE), "parent_order").toString();
 			if (parentOrder.length() > 0) {
 				Property[] parentsOrdered = parents.toArray(new Property[0]);
 				Comparator<Property> comp = new PropertyRoleComparator(parentOrder.split("\\|"));
@@ -137,7 +137,7 @@ public class NodeHelper {
 
 	/**
 	 * Get the child nodes of a given class. The nodes will be cached if doCache is true.
-	 * @note Only classes with WCMFNode or WCMFManyToMany stereotype will be listed
+	 * @note Only classes with ChiNode or ChiManyToMany stereotype will be listed
 	 * @param clazz The class to get the children for.
 	 * @param recursive If true, include parents that were added by the generator.
 	 * @return A list of Property instances (use getType() method to get the type)
@@ -166,8 +166,8 @@ public class NodeHelper {
 									(aggregationKind.ordinal() == AggregationKind.NONE && prop.getOtherEnd().getAggregation().ordinal() == AggregationKind.NONE &&
 											prop.isNavigable() && !prop.getOtherEnd().isNavigable())
 									) {
-									if (UMLHelper.hasStereotype(prop.getOtherEnd().getType(), Constants.FQName(Constants.STEREOTYPE_WCMF_NODE)) ||
-											UMLHelper.hasStereotype(prop.getOtherEnd().getType(), Constants.FQName(Constants.STEREOTYPE_WCMF_MANY_TO_MANY))) {
+									if (UMLHelper.hasStereotype(prop.getOtherEnd().getType(), Constants.FQName(Constants.STEREOTYPE_CHI_NODE)) ||
+											UMLHelper.hasStereotype(prop.getOtherEnd().getType(), Constants.FQName(Constants.STEREOTYPE_CHI_MANY_TO_MANY))) {
 										Logger.debug("   -> Found child: "+prop.getOtherEnd().getType().getName()+" ["+counter+"]");
 										children.add(prop.getOtherEnd());
 									}
@@ -180,7 +180,7 @@ public class NodeHelper {
 			}
 
 			// sort children if desired (depends on child_order tagged value)
-			String childOrder = UMLHelper.getTaggedValue(clazz, Constants.FQName(Constants.STEREOTYPE_WCMF_NODE), "child_order").toString();
+			String childOrder = UMLHelper.getTaggedValue(clazz, Constants.FQName(Constants.STEREOTYPE_CHI_NODE), "child_order").toString();
 			if (childOrder.length() > 0) {
 				Property[] childrenOrdered = children.toArray(new Property[0]);
 				Comparator<Property> comp = new PropertyRoleComparator(childOrder.split("\\|"));
@@ -252,7 +252,7 @@ public class NodeHelper {
     public static Property createDefaultPKAttribute(String name, org.eclipse.uml2.uml.Class clazz) {
     	Property p = UMLFactory.eINSTANCE.createProperty();
     	UMLHelper.addAttributeInFront(clazz, p);
-    	Stereotype st = UMLHelper.getStereotype(clazz.getModel(), Constants.PROFILE_WCMF, Constants.STEREOTYPE_WCMF_VALUE);
+    	Stereotype st = UMLHelper.getStereotype(clazz.getModel(), Constants.PROFILE_CHRONOS, Constants.STEREOTYPE_CHI_VALUE);
 		p.applyStereotype(st);
 		p.setName(name);
 		p.setValue(st, "app_data_type", "DATATYPE_IGNORE");
@@ -273,7 +273,7 @@ public class NodeHelper {
     public static Property createDefaultFKAttribute(String name, org.eclipse.uml2.uml.Class clazz, org.eclipse.uml2.uml.Class referencedClass) {
     	Property p = UMLFactory.eINSTANCE.createProperty();
     	UMLHelper.addAttributeInFront(clazz, p);
-    	Stereotype st = UMLHelper.getStereotype(clazz.getModel(), Constants.PROFILE_WCMF, Constants.STEREOTYPE_WCMF_VALUE);
+    	Stereotype st = UMLHelper.getStereotype(clazz.getModel(), Constants.PROFILE_CHRONOS, Constants.STEREOTYPE_CHI_VALUE);
 		p.applyStereotype(st);
 		p.setName(name);
 		p.setValue(st, "app_data_type", "DATATYPE_IGNORE");

@@ -1,8 +1,8 @@
 import uml;
 import Chronos;
 
-extension common::chronos::util;
-extension common::chronos::ChiNode;
+extension cartridge::ChiCmf::extensions::util;
+extension cartridge::ChiCmf::extensions::ChiNode;
 
 /**
  * Get the referenced parent/child for a reference (or null if it is not connected to the values class')

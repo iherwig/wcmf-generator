@@ -5,7 +5,7 @@ extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::util;
 
-extension common::chronos::globals;
+extension cartridge::ChiCmf::extensions::globals;
 
 /**
  * Add inherited values and associations to all nodes

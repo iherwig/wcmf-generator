@@ -2,7 +2,7 @@ import uml;
 
 extension common::nameNormalizer;
 
-List[uml::Property] allTaggedValues(uml::Stereotype this):
+List[uml::Property] allTaggedValues(uml::Class this):
 	let result = (List[uml::Property]) {} : (
 		result.addAll(this.ownedElement.typeSelect(uml::Property).select(e|e.isValidTaggedValue())) ->
 		result.addAll(this.allParents().ownedElement.typeSelect(uml::Property).select(e|e.isValidTaggedValue()))
@@ -11,7 +11,7 @@ List[uml::Property] allTaggedValues(uml::Stereotype this):
 	result	
 ;
 
-List[String] allTaggedValueNames(uml::Stereotype this):
+List[String] allTaggedValueNames(uml::Class this):
 	this.allTaggedValues().name
 ;
 
@@ -21,11 +21,12 @@ boolean isValidTaggedValue(uml::Property this):
 	this.association.metaType != uml::Extension
 ;
 
-uml::Class getMetaClass(uml::Stereotype this):
-	this.getAllExtendedMetaclasses().first()
+uml::Class getMetaClass(uml::Class this):
+	this.getAssociations().typeSelect(uml::Extension).memberEnd.select(e|e.type != this).first().type
+	//this.getAllExtendedMetaclasses().first()
 ;
 
-String getCwmName(uml::Stereotype this):
+String getCwmName(uml::Class this):
 	switch(this.name) {
 		case "ChiActivity":
 			"Activity"
@@ -35,7 +36,7 @@ String getCwmName(uml::Stereotype this):
 	}
 ;
 
-uml::Type getTaggedValueType(uml::Stereotype this, String taggedValueName):
+uml::Type getTaggedValueType(uml::Class this, String taggedValueName):
 	this.allTaggedValues().select(e|e.name == taggedValueName).type.first()
 ;
 

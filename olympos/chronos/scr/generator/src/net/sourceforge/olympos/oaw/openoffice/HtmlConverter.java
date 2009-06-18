@@ -82,6 +82,7 @@ public class HtmlConverter extends DefaultHandler {
 						"");
 	}
 
+	@SuppressWarnings("unused")
 	private StringBuffer replaceAll(StringBuffer input, String replace,
 			String replaceWith) {
 		int next = 0;

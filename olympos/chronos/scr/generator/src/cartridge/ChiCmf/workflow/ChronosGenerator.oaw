@@ -4,7 +4,7 @@
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='3'/>
 	<property name='basePath' value='src'/>
-	<property name='propertyFile' value='${basePath}/cartridge/Wcmf/workflow/wcmf.properties'/>
+	<property name='propertyFile' value='${basePath}/cartridge/ChiCmf/workflow/chiCmf.properties'/>
 	<property file="${propertyFile}"/>
 	
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
@@ -18,26 +18,30 @@
 		<profile value="${profileUmlFile}"/>
 	</bean>
 
-	<!-- Backup -->
-	<if cond="${doBackup}">
-		<component class="com.wemove.wcmf.generator.workflow.BackupComponent">
-			<sourcePath value="${targetDir}/${applicationPackage}"/>
-			<targetPath value="${backupDir}"/>
-		</component>
-	</if>
+	<!-- read model XML -->
+	<component class="org.openarchitectureware.xsd.XMLReader">
+		<modelSlot value="uwmmodel" />
+		<uri value="${modelXmlFile}" />
+		<metaModel id="cwmMM"
+			class="org.openarchitectureware.xsd.XSDMetaModel">
+			<schemaFile value="metamodel/cwm.xsd" />
+		</metaModel>
+	</component>
 
-	<!-- Import from Enterprise Architect -->
-	<if cond="${doProfileEaExport}">
-		<component file="${basePath}/cartridge/Wcmf/workflow/ea_profile_import.oaw" inheritAll="true"/>
-	</if>
-	<if cond="${doModelEaExport}">
-		<component file="${basePath}/cartridge/Wcmf/workflow/ea_model_import.oaw" inheritAll="true"/>
-	</if>
-
-	<!-- Read the UML model and store it into a slot named 'model' -->
+	<!-- read profile as model -->
 	<component class="oaw.emf.XmiReader">
-		<modelFile value="${modelUmlFile}"/>
-		<outputSlot value="model"/>
+		<modelFile value="${profileUmlFile}"/>
+		<outputSlot value="chronosProfileModel"/>
+	</component>
+
+	<!-- transform XML to UML -->
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="cwmMM" />
+		<metaModel idRef="UmlMM" />
+		<metaModel idRef="${profilename}MM" />
+		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfileModel)" />
+		<outputSlot value="model" />
+		<globalVarDef name="basePath" value="'${basePath}'" />
 	</component>
 
 	<!-- Check constraints before model 2 model transformation -->
@@ -59,7 +63,7 @@
 		</component>
 	</if>
 
-	<!-- Prepare the model for wCMF and store it into a slot named 'transformedModel' -->
+	<!-- Prepare the model for Chronos and store it into a slot named 'transformedModel' -->
 	<component id="m2m" class="oaw.xtend.XtendComponent">
 
 		<!-- Global variables used by the transformation -->
@@ -73,7 +77,7 @@
 		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
- 	    <invoke value="cartridge::Wcmf::extensions::wcmf_m2m::addDefaults(model)"/>
+ 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model)"/>
 
 		<outputSlot value="transformedModel"/>
 	</component>

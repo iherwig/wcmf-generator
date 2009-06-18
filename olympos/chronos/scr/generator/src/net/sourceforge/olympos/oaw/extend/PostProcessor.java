@@ -15,7 +15,7 @@ import org.eclipse.uml2.uml.Property;
 import org.openarchitectureware.xtend.XtendFacade;
 
 /**
- * This class does wCMF relevant post processing (model-to-model transformation)
+ * This class does Chronos relevant post processing (model-to-model transformation)
  * @author ingo herwig <ingo@wemove.com>
  */
 public class PostProcessor {
@@ -37,8 +37,8 @@ public class PostProcessor {
 			org.eclipse.uml2.uml.Class clazz = iter.next();
 			if (clazz.getPackage().getQualifiedName().startsWith(packageName))
 			{
-				if (UMLHelper.hasStereotype(clazz, Constants.FQName(Constants.STEREOTYPE_WCMF_NODE)) ||
-						UMLHelper.hasStereotype(clazz, Constants.FQName(Constants.STEREOTYPE_WCMF_MANY_TO_MANY)))
+				if (UMLHelper.hasStereotype(clazz, Constants.FQName(Constants.STEREOTYPE_CHI_NODE)) ||
+						UMLHelper.hasStereotype(clazz, Constants.FQName(Constants.STEREOTYPE_CHI_MANY_TO_MANY)))
 				{
 					Logger.info("Post process " + clazz.getName());
 					// create the associations first, because they may influence
@@ -91,7 +91,7 @@ public class PostProcessor {
 					Association a = clazz.createAssociation(parent.isNavigable(), parent.getAggregation(), parentName, parent.getLower(), parent.getUpper(), 
 							subClass, thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
                     // copy tagged values from the original association 
-					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_WCMF_ASSOCIATION), parent.getAssociation(), 
+					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), parent.getAssociation(), 
 							new String[] { "base_Association", "fk_name" });
 					Generator.setGeneratorAdded(a);
 					clonedAssociationsToOriginalPropertyMap.put(a, parent);
@@ -124,7 +124,7 @@ public class PostProcessor {
                     Association a = clazz.createAssociation(superParent.isNavigable(), superParent.getAggregation(), parentName, superParent.getLower(), superParent.getUpper(), 
                     		superParent.getType(), thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
                     // copy tagged values from the original association 
-					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_WCMF_ASSOCIATION), superParent.getAssociation(), 
+					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), superParent.getAssociation(), 
 							new String[] { "base_Association" });
 					Generator.setGeneratorAdded(a);
 					clonedAssociationsToOriginalPropertyMap.put(a, superParent);
@@ -159,7 +159,7 @@ public class PostProcessor {
 					Association a = clazz.createAssociation(child.isNavigable(), child.getAggregation(), childName, child.getLower(), child.getUpper(), 
 							subClass, thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
                     // copy tagged values from the original association 
-					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_WCMF_ASSOCIATION), child.getAssociation(), 
+					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), child.getAssociation(), 
 							new String[] { "base_Association" });
 					Generator.setGeneratorAdded(a);
 					clonedAssociationsToOriginalPropertyMap.put(a, child);
@@ -195,7 +195,7 @@ public class PostProcessor {
                     Association a = clazz.createAssociation(superChild.isNavigable(), superChild.getAggregation(), childName, superChild.getLower(), superChild.getUpper(), 
                     		superChild.getType(), thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
                     // copy tagged values from the original association 
-					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_WCMF_ASSOCIATION), superChild.getAssociation(), 
+					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), superChild.getAssociation(), 
 							new String[] { "base_Association", "fk_name" });
 					Generator.setGeneratorAdded(a);
 					clonedAssociationsToOriginalPropertyMap.put(a, superChild);
@@ -209,7 +209,7 @@ public class PostProcessor {
 	}
 
 	/**
-	 * This method is used to add WCMFValues from base classes to the class. All
+	 * This method is used to add ChiValues from base classes to the class. All
 	 * these values have the property isGeneratorAdded set to true
 	 * @param clazz
 	 * @return clazz
@@ -217,9 +217,9 @@ public class PostProcessor {
 	public static org.eclipse.uml2.uml.Class completeAttributes(org.eclipse.uml2.uml.Class clazz) {
 		Logger.info("Add implicit values for "	+ clazz.getName());
 
-		// use extend facade for wcmf helper methods
-		Profile wcmfProfile = clazz.getModel().getAppliedProfile(Constants.PROFILE_WCMF);
-		XtendFacade wcmfExt = Generator.createXtendFacade("cartridge::Wcmf::extensions::wcmf", new Profile[] { wcmfProfile });
+		// use extend facade for Chronos helper methods
+		Profile chronosProfile = clazz.getModel().getAppliedProfile(Constants.PROFILE_CHRONOS);
+		XtendFacade chiExt = Generator.createXtendFacade("cartridge::ChiCmf::extensions::ChiNode", new Profile[] { chronosProfile });
 
 		// 1. values from base classes (the persistence mappers
 		// use the "Concrete Table Inheritance" pattern)
@@ -227,12 +227,12 @@ public class PostProcessor {
 		while (attribIter.hasNext()) {
 			
 			Property attrib = attribIter.next();
-			if (UMLHelper.hasStereotype(attrib, Constants.FQName(Constants.STEREOTYPE_WCMF_VALUE)) && !Generator.isGeneratorAdded(attrib)
+			if (UMLHelper.hasStereotype(attrib, Constants.FQName(Constants.STEREOTYPE_CHI_VALUE)) && !Generator.isGeneratorAdded(attrib)
 					&& attrib.getOwner() != clazz) {
 				if (!clazz.getOwnedMembers().contains(attrib)) {
 					Logger.info("-> (1) Add inherited value " + attrib.getName());
 					Property p = clazz.createOwnedAttribute(attrib.getName(), attrib.getType());
-					UMLHelper.copyTaggedValues(p, Constants.FQName(Constants.STEREOTYPE_WCMF_VALUE), attrib, new String[] { "base_Property" });
+					UMLHelper.copyTaggedValues(p, Constants.FQName(Constants.STEREOTYPE_CHI_VALUE), attrib, new String[] { "base_Property" });
 					UMLHelper.copyComments(p, attrib);
 					p.setDefault(attrib.getDefault());
 					Generator.setGeneratorAdded(p);
@@ -252,7 +252,7 @@ public class PostProcessor {
 		while (parentIter.hasNext()) {
 			
 			Property parent = parentIter.next();
-			String fkName = wcmfExt.call("getFKName", new Object[] { parent }).toString();
+			String fkName = chiExt.call("getFKName", new Object[] { parent }).toString();
 			
 			if (!UMLHelper.hasAttribute(clazz, fkName)) {
 				Logger.info("-> (2) Add foreign key value " + fkName + " for " + parent.getType().getName());
@@ -267,10 +267,10 @@ public class PostProcessor {
 				Association parentAssociation = parent.getAssociation();
 				if (Generator.isGeneratorAdded(parentAssociation)) {
 					Property originalAP = clonedAssociationsToOriginalPropertyMap.get(parentAssociation);
-					String originalFkName = wcmfExt.call("getFKName", new Object[] { originalAP }).toString();
-					String pkNameStr = wcmfExt.call("getPKName", new Object[] { clazz }).toString();
+					String originalFkName = chiExt.call("getFKName", new Object[] { originalAP }).toString();
+					String pkNameStr = chiExt.call("getPKName", new Object[] { clazz }).toString();
 					if (Arrays.asList(pkNameStr.split("\\|")).contains(originalFkName)) {
-						wcmfExt.call("setPKName", new Object[] { clazz, pkNameStr+"|"+fkName });
+						chiExt.call("setPKName", new Object[] { clazz, pkNameStr+"|"+fkName });
 					}
 				}
 			}
@@ -290,7 +290,7 @@ public class PostProcessor {
 		}
 		
 		// 3. values for not explicitly defined pk columns
-		String pkNameStr = wcmfExt.call("getPKName", new Object[] { clazz }).toString();
+		String pkNameStr = chiExt.call("getPKName", new Object[] { clazz }).toString();
 		String[] pkNames = pkNameStr.split("\\|");
 		for (int i = 0; i < pkNames.length; i++) {
 			String pkName = pkNames[i];

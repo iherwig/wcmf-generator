@@ -1,14 +1,15 @@
 «IMPORT uml»
+«IMPORT Olympos4Profiles»
 
 «EXTENSION org::openarchitectureware::util::IO»
 
 «EXTENSION cartridge::GenerateUmlConnector::util»
 
 «DEFINE root FOR uml::Profile»
-	«EXPAND object FOREACH this.allOwnedElements().typeSelect(uml::Stereotype)»
+	«EXPAND object FOREACH this.allOwnedElements().typeSelect(uml::Class)»
 «ENDDEFINE»
 
-«DEFINE object FOR uml::Stereotype»
+«DEFINE object FOR uml::Class»
 «info("Generating " + this.name)»
 «FILE this.getCwmName() + ".ext"»
 	«EXPAND header FOR this»
@@ -25,7 +26,7 @@
 «ENDFILE»
 «ENDDEFINE»
 
-«DEFINE header FOR uml::Stereotype»
+«DEFINE header FOR uml::Class»
 import cwm;
 import Chronos;
 import uml;
@@ -42,19 +43,22 @@ extension cartridge::UmlConnector::connectionsToCwm;
 «ENDPROTECT»
 «ENDDEFINE»
 
-«DEFINE convert FOR uml::Stereotype»
+«DEFINE convert FOR uml::Class»
 uml::«this.getMetaClass().name» convert(cwm::«this.getCwmName()» c):
 	let uc = new uml::«this.getMetaClass().name» : (
 		uc.setName("«this.getCwmName()»:" + c.id)
 		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convert.misc"»
 			//Additional code goes here
 		«ENDPROTECT»
+		«FOREACH this.getAssociations().typeSelect(Olympos4Profiles::OmegaAssociation) AS currAssociation»
+			OmegaAssociation.type: «currAssociation.associationType»
+		«ENDFOREACH»
 	) ->
 	uc
 ;
 «ENDDEFINE»
 
-«DEFINE establishConnections FOR uml::Stereotype»
+«DEFINE establishConnections FOR uml::Class»
 Void establishConnections(cwm::«this.getCwmName()» c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::«this.getMetaClass().name»).select(e|e.name == "«this.getCwmName()»:" + c.id).first(): (
 		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".establishConnections.connections"»
@@ -66,7 +70,7 @@ Void establishConnections(cwm::«this.getCwmName()» c, uml::Model um):
 ;
 «ENDDEFINE»
 
-«DEFINE transferValues FOR uml::Stereotype»
+«DEFINE transferValues FOR uml::Class»
 Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::«this.getMetaClass().name»).select(e|e.name == "«this.getCwmName()»:" + c.id).first(): (
 		let comment = new uml::Comment : (
@@ -95,7 +99,7 @@ Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
 ;
 «ENDDEFINE»
 
-«DEFINE transferValuesTaggedValues(uml::Stereotype st) FOR String»
+«DEFINE transferValuesTaggedValues(uml::Class st) FOR String»
 	«LET st.getTaggedValueType(this) AS type»
 		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".transferValues.taggedValue." + this»
 			«IF !uml::Enumeration.isInstance(type)»
@@ -107,11 +111,11 @@ Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
 	«ENDLET»
 «ENDDEFINE»
 
-«DEFINE insertEnums FOR uml::Stereotype»
+«DEFINE insertEnums FOR uml::Class»
 	«EXPAND convertEnum(this) FOREACH this.allOwnedElements().typeSelect(uml::Property).type.typeSelect(uml::Enumeration).toSet()»
 «ENDDEFINE»
 
-«DEFINE convertEnum(uml::Stereotype st) FOR uml::Enumeration»
+«DEFINE convertEnum(uml::Class st) FOR uml::Enumeration»
 «this.name» translate«this.name»(String source):
 	switch(source.toLowerCase()) {
 		«FOREACH this.ownedElement.typeSelect(uml::EnumerationLiteral) AS l»
@@ -127,7 +131,7 @@ Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
 ;
 «ENDDEFINE»
 
-«DEFINE convertToCwm FOR uml::Stereotype»
+«DEFINE convertToCwm FOR uml::Class»
 cwm::«this.getCwmName()» convertToCwm(Chronos::«this.name» uc):
 	let c = new cwm::«this.getCwmName()»: (
 		c.setId(uc.getId()) ->
@@ -158,7 +162,7 @@ cwm::«this.getCwmName()» convertToCwm(Chronos::«this.name» uc):
 ;
 «ENDDEFINE»
 
-«DEFINE convertToCwmTaggedValues(uml::Stereotype st) FOR String»
+«DEFINE convertToCwmTaggedValues(uml::Class st) FOR String»
 	«LET st.getTaggedValueType(this) AS type»
 		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".convertToCwm.taggedValue." + this»
 			«IF !uml::Enumeration.isInstance(type)»

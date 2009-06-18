@@ -594,6 +594,7 @@
 		<xsd:attribute name="is_soap" type="xsd:boolean"/>
 		<xsd:attribute name="is_searchable" type="xsd:boolean"/>
 		<xsd:attribute name="initparams" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chicontroller_id" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>

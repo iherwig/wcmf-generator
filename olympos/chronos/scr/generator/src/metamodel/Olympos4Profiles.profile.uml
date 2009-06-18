@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xmi:id="_PZXAslpjEd6p76rQXv446w" name="Olympos4Profiles" metamodelReference="_PZXA-lpjEd6p76rQXv446w">
+  <eAnnotations xmi:id="_PZXAs1pjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_PZXAtFpjEd6p76rQXv446w" name="Olympos4Profiles" nsURI="http:///schemas/Olympos4Profiles/_4xX_wFnGEd6p76rQXv446w/4" nsPrefix="Olympos4Profiles">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXAtVpjEd6p76rQXv446w" name="OmegaClass">
+        <eAnnotations xmi:id="_PZXAtlpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXA-1pjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXAt1pjEd6p76rQXv446w" name="base_Stereotype" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Stereotype"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_PZXAuVpjEd6p76rQXv446w" name="oMetaClass" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXAu1pjEd6p76rQXv446w" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXAvVpjEd6p76rQXv446w" name="OmegaAssociation">
+        <eAnnotations xmi:id="_PZXAvlpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXA_1pjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXAv1pjEd6p76rQXv446w" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_PZXAwVpjEd6p76rQXv446w" name="associationType" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXAw1pjEd6p76rQXv446w" name="OmegaStereotype">
+        <eAnnotations xmi:id="_PZXAxFpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXBCFpjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXAxVpjEd6p76rQXv446w" name="base_Stereotype" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Stereotype"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EEnum" xmi:id="_PZXAx1pjEd6p76rQXv446w" name="AssociationType">
+        <eAnnotations xmi:id="_PZXAyFpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXBDFpjEd6p76rQXv446w"/>
+        <eLiterals xmi:id="_PZXAyVpjEd6p76rQXv446w" name="Association"/>
+        <eLiterals xmi:id="_PZXAylpjEd6p76rQXv446w" name="Generalizzation" value="1"/>
+        <eLiterals xmi:id="_PZXAy1pjEd6p76rQXv446w" name="Composition" value="2"/>
+        <eLiterals xmi:id="_PZXAzFpjEd6p76rQXv446w" name="Aggregation" value="3"/>
+        <eLiterals xmi:id="_PZXAzVpjEd6p76rQXv446w" name="Realization" value="4"/>
+        <eLiterals xmi:id="_PZXAzlpjEd6p76rQXv446w" name="Dependency" value="5"/>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_PZXAz1pjEd6p76rQXv446w" name="Olympos4Profiles" nsURI="http:///schemas/Olympos4Profiles/_JGXDcFnCEd6p76rQXv446w/3" nsPrefix="Olympos4Profiles">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXA0FpjEd6p76rQXv446w" name="OmegaClass">
+        <eAnnotations xmi:id="_PZXA0VpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXA-1pjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXA0lpjEd6p76rQXv446w" name="base_Stereotype" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Stereotype"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_PZXA1FpjEd6p76rQXv446w" name="oMetaClass" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXA1lpjEd6p76rQXv446w" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXA2FpjEd6p76rQXv446w" name="OmegaAssociation">
+        <eAnnotations xmi:id="_PZXA2VpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXA_1pjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXA2lpjEd6p76rQXv446w" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_PZXA3FpjEd6p76rQXv446w" name="associationType" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXA3lpjEd6p76rQXv446w" name="OmegaStereotype">
+        <eAnnotations xmi:id="_PZXA31pjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXBCFpjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXA4FpjEd6p76rQXv446w" name="base_Stereotype" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Stereotype"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_PZXA4lpjEd6p76rQXv446w" name="Olympos4Profiles" nsURI="http:///schemas/Olympos4Profiles/_grYCYFnBEd6p76rQXv446w/2" nsPrefix="Olympos4Profiles">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXA41pjEd6p76rQXv446w" name="OmegaStereotype">
+        <eAnnotations xmi:id="_PZXA5FpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXA-1pjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXA5VpjEd6p76rQXv446w" name="base_Stereotype" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Stereotype"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_PZXA51pjEd6p76rQXv446w" name="oMetaClass" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXA6VpjEd6p76rQXv446w" name="OmegaAssociation">
+        <eAnnotations xmi:id="_PZXA6lpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXA_1pjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXA61pjEd6p76rQXv446w" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_PZXA7VpjEd6p76rQXv446w" name="associationType" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_PZXA71pjEd6p76rQXv446w" name="Olympos4Profiles" nsURI="http:///schemas/Olympos4Profiles/_qncfYFnAEd6p76rQXv446w/1" nsPrefix="Olympos4Profiles">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXA8FpjEd6p76rQXv446w" name="OmegaStereotype">
+        <eAnnotations xmi:id="_PZXA8VpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXA-1pjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXA8lpjEd6p76rQXv446w" name="base_Stereotype" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Stereotype"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_PZXA9FpjEd6p76rQXv446w" name="OmegaAssociation">
+        <eAnnotations xmi:id="_PZXA9VpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_PZXA_1pjEd6p76rQXv446w"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_PZXA9lpjEd6p76rQXv446w" name="base_Association" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Association"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+    <contents xmi:type="ecore:EPackage" xmi:id="_PZXA-FpjEd6p76rQXv446w" name="Olympos4Profiles" nsURI="http:///schemas/Olympos4Profiles/_OFwAgVnAEd6p76rQXv446w/0" nsPrefix="Olympos4Profiles"/>
+  </eAnnotations>
+  <packageImport xmi:id="_PZXA-VpjEd6p76rQXv446w">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packageImport xmi:id="_PZXA-lpjEd6p76rQXv446w">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_PZXA-1pjEd6p76rQXv446w" name="OmegaClass">
+    <ownedAttribute xmi:id="_PZXA_FpjEd6p76rQXv446w" name="base_Stereotype" association="_PZXBBFpjEd6p76rQXv446w">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Stereotype"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_PZXA_VpjEd6p76rQXv446w" name="oMetaClass" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_PZXA_lpjEd6p76rQXv446w" name="base_Class" association="_PZXBBlpjEd6p76rQXv446w">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_PZXA_1pjEd6p76rQXv446w" name="OmegaAssociation">
+    <ownedAttribute xmi:id="_PZXBAFpjEd6p76rQXv446w" name="base_Association" association="_PZXBAlpjEd6p76rQXv446w">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Association"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_PZXBAVpjEd6p76rQXv446w" name="associationType" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_PZXBAlpjEd6p76rQXv446w" name="Association_OmegaAssociation" memberEnd="_PZXBA1pjEd6p76rQXv446w _PZXBAFpjEd6p76rQXv446w">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_PZXBA1pjEd6p76rQXv446w" name="extension_OmegaAssociation" type="_PZXA_1pjEd6p76rQXv446w" aggregation="composite" association="_PZXBAlpjEd6p76rQXv446w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_PZXBBFpjEd6p76rQXv446w" name="Stereotype_OmegaStereotype" memberEnd="_PZXBBVpjEd6p76rQXv446w _PZXA_FpjEd6p76rQXv446w">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_PZXBBVpjEd6p76rQXv446w" name="extension_OmegaStereotype" type="_PZXA-1pjEd6p76rQXv446w" aggregation="composite" association="_PZXBBFpjEd6p76rQXv446w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_PZXBBlpjEd6p76rQXv446w" name="Class_OmegaStereotype" memberEnd="_PZXBB1pjEd6p76rQXv446w _PZXA_lpjEd6p76rQXv446w">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_PZXBB1pjEd6p76rQXv446w" name="extension_OmegaStereotype" type="_PZXA-1pjEd6p76rQXv446w" aggregation="composite" association="_PZXBBlpjEd6p76rQXv446w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_PZXBCFpjEd6p76rQXv446w" name="OmegaStereotype">
+    <ownedAttribute xmi:id="_PZXBCVpjEd6p76rQXv446w" name="base_Stereotype" association="_PZXBClpjEd6p76rQXv446w">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Stereotype"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_PZXBClpjEd6p76rQXv446w" name="Stereotype_OmegaStereotype" memberEnd="_PZXBC1pjEd6p76rQXv446w _PZXBCVpjEd6p76rQXv446w">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_PZXBC1pjEd6p76rQXv446w" name="extension_OmegaStereotype" type="_PZXBCFpjEd6p76rQXv446w" aggregation="composite" association="_PZXBClpjEd6p76rQXv446w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_PZXBDFpjEd6p76rQXv446w" name="AssociationType">
+    <ownedLiteral xmi:id="_PZXBDVpjEd6p76rQXv446w" name="Association" classifier="_PZXBDFpjEd6p76rQXv446w"/>
+    <ownedLiteral xmi:id="_PZXBDlpjEd6p76rQXv446w" name="Generalizzation" classifier="_PZXBDFpjEd6p76rQXv446w"/>
+    <ownedLiteral xmi:id="_PZXBD1pjEd6p76rQXv446w" name="Composition" classifier="_PZXBDFpjEd6p76rQXv446w"/>
+    <ownedLiteral xmi:id="_PZXBEFpjEd6p76rQXv446w" name="Aggregation" classifier="_PZXBDFpjEd6p76rQXv446w"/>
+    <ownedLiteral xmi:id="_PZXBEVpjEd6p76rQXv446w" name="Realization" classifier="_PZXBDFpjEd6p76rQXv446w"/>
+    <ownedLiteral xmi:id="_PZXBElpjEd6p76rQXv446w" name="Dependency" classifier="_PZXBDFpjEd6p76rQXv446w"/>
+  </packagedElement>
+  <profileApplication xmi:id="_PZXBE1pjEd6p76rQXv446w">
+    <eAnnotations xmi:id="_PZXBFFpjEd6p76rQXv446w" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="ProfileBase.profile.uml#_PZWa1FpjEd6p76rQXv446w"/>
+    </eAnnotations>
+    <appliedProfile href="ProfileBase.profile.uml#_PZWa0lpjEd6p76rQXv446w"/>
+  </profileApplication>
+</uml:Profile>
