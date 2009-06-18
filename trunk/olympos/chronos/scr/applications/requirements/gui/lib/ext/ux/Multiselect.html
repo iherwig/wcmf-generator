@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>Ext.ux.Multiselect</title>
+<link rel='stylesheet' type='text/css' href='../../ext/resources/css/ext-all.css'>
+<link rel='stylesheet' type='text/css' href='../../../css/Multiselect.css'>
+<script type="text/javascript" src="../../ext/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="../../ext/ext-all-debug.js"></script>
+<script type="text/javascript" src="../../../../gui/js/uwm/property/multiselect/Multiselect.js"></script>
+<script type="text/javascript" src="../../../../gui/js/uwm/property/multiselect/View.js"></script>
+<script type="text/javascript" src="../../../../gui/js/uwm/property/multiselect/Form.js"></script>
+<script type="text/javascript" src="../../../../gui/js/uwm/property/multiselect/Layout.js"></script>
+<script type="text/javascript" src="../../../../gui/js/uwm/property/multiselect/DDView.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+
+    Ext.QuickTips.init();
+	Ext.form.Field.prototype.msgTarget = 'side';
+
+	var formMultiselect = new Ext.form.FormPanel({ 
+		hideLabel : true ,
+		autoWidth : true 
+	});
+	
+	var multiselect = new Ext.ux.Multiselect({
+			
+		enableToolbar	  :  true,
+		name              :  'multiselect',
+		fieldLabel        :  'Multiselect',
+		dataFields        :  ['code', 'desc'], 
+		data              :  [['1', 'One'], ['2', 'Two'], ['3', 'Three'], ['4', 'Four'], ['5', 'Five']],
+		valueField        :  'code',
+		displayField      :  'desc',
+		width			  :  520 ,
+		height            :  150,
+		allowBlank        :  true
+
+	});
+	
+	formMultiselect.add(multiselect);
+	formMultiselect.addButton('Get Value', function() { alert(formMultiselect.getForm().getValues(true)); })
+	formMultiselect.addButton('Set Value (2,3)', function() { multiselect.setValue('2,3'); })
+	formMultiselect.addButton('Mark Invalid', function() { multiselect.markInvalid('Invalid'); })
+	formMultiselect.addButton('Toggle Enabled', function() { if(!multiselect.disabled) {multiselect.disable();} else {multiselect.enable();} });
+	formMultiselect.addButton('Reset', function() { multiselect.reset();});
+
+//	alert('before render form-ct-multiselect');
+	formMultiselect.render('form-ct-multiselect');
+
+});
+
+</script>
+
+</head>
+<body style="margin:20px;">
+
+<b>Ext.ux.Multiselect</b>
+
+<div style="width:550px;">
+    <div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>
+    <div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc">
+        <div id="form-ct-multiselect"></div>
+    </div></div></div>
+    <div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>
+</div>
+
+</body>
+
+</html>
