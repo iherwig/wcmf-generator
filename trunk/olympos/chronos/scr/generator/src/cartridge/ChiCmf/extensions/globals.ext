@@ -1,6 +1,6 @@
 import uml;
 
-extension common::chronos::naming;
+extension cartridge::ChiCmf::extensions::naming;
 
 /**
  * Properties from the workflow definition
@@ -16,6 +16,7 @@ String TargetDirectory() : GLOBALVAR TargetDirectory;
 String ProjectName() : GLOBALVAR ProjectName;
 String RequiredControllerSuperClass() : GLOBALVAR RequiredControllerSuperClass;
 String RequiredNodeSuperClass() : GLOBALVAR RequiredNodeSuperClass;
+String HeaderText() : GLOBALVAR HeaderText;
 
 /**
  * Calculated properties

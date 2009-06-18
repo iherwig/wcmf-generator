@@ -142,8 +142,27 @@ cached String getPackageName(uml::Package pck) :
 	)
 ;
 
+String fullQualifiedName(uml::NamedElement this):
+	this.owner != null ?
+		this.name + "<-" + this.owner.fullQualifiedName()
+	:
+		this.name
+;
+
+String fullQualifiedName(uml::Element this):
+	this.toString()
+;
+
 Collection stereotypedContents(Collection this):
 	JAVA net.sourceforge.olympos.oaw.extend.Stereotype.getListContents(java.util.Collection)
+;
+
+Collection stereotypedContents(uml::Element this, String stereotypeName, String taggedValueName):
+	let taggedValue = this.getTaggedValue(stereotypeName, taggedValueName):
+	Collection.isInstance(taggedValue) ?
+		((Collection) taggedValue).stereotypedContents()
+	:
+		taggedValue
 ;
 
 Object getTaggedValueAssociation(uml::Element this, String stereotypeName, String taggedValueName):

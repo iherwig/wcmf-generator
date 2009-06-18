@@ -7,8 +7,8 @@ extension org::openarchitectureware::util::stdlib::io;
 extension common::util;
 extension common::umlutils;
 
-extension common::chronos::naming;
-extension common::chronos::globals;
+extension cartridge::ChiCmf::extensions::naming;
+extension cartridge::ChiCmf::extensions::globals;
 
 /**
  * Chronos Stereotypes
@@ -53,17 +53,6 @@ boolean isGeneratorInherited(uml::Element this) :
  */
 boolean isNode(uml::Element this) : 
 	this.getAppliedStereotype(STEREOTYPE_CHI_NODE()) != null || this.getAppliedStereotype(STEREOTYPE_CHI_MANY_TO_MANY()) != null
-;
-
-/**
- * Get the foreign key
- */
-String getFKName(Property parent) :
-	let association = parent.association :
-	association != null ? 
-		(let fk_name = association.getTaggedValue(STEREOTYPE_CHI_ASSOCIATION(), "fk_name") :
-			fk_name == null || fk_name.toString().length == 0 ? defaultFKName(parent.type) : fk_name) : 
-		defaultFKName(parent.type) 
 ;
 
 /**

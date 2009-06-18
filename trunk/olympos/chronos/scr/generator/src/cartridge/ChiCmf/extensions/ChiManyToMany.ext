@@ -3,8 +3,8 @@ import Chronos;
 
 extension org::openarchitectureware::uml2::profile::profiling;
 
-extension common::chronos::util;
-extension common::chronos::naming;
+extension cartrdige::ChiCmf::util;
+extension cartrdige::ChiCmf::naming;
 
 /**
  * Get the primary key tagged value or default pk name if not set

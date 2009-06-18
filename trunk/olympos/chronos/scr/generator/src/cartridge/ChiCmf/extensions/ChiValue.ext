@@ -1,8 +1,8 @@
 import uml;
 import Chronos;
 
-extension common::chronos::util;
-extension common::chronos::naming;
+extension cartridge::ChiCmf::extensions::util;
+extension cartridge::ChiCmf::extensions::naming;
 
 /**
  * Get the column name

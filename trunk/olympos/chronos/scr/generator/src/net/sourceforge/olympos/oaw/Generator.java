@@ -86,7 +86,7 @@ public class Generator {
         	            }
         	
         	            properties.put("generatorVersion", version);
-        	            Logger.info("Running wCMFGenerator "+version+" ...");
+        	            Logger.info("Running ChronosGenerator "+version+" ...");
         	        }
                 }
                 catch (Exception e) {}

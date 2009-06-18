@@ -6,6 +6,10 @@
 
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
 
+	<bean id="olymposMM" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="example-data/generateUmlConnector/Olympos4Profiles.profile.uml"/>
+	</bean>
+
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="${profileFile}"/>
 		<outputSlot value="umlProfile"/>
@@ -15,6 +19,7 @@
 		<fileEncoding value="utf-8"/>
 		
 		<metaModel id="uml"	class="oaw.uml2.UML2MetaModel" />
+		<metaModel idRef="olymposMM" />
 		
 		<expand value="cartridge::GenerateUmlConnector::Object::root FOR umlProfile"/>
 		
