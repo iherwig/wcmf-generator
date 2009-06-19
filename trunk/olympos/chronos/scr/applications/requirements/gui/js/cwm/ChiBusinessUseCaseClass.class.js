@@ -108,7 +108,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 Ext.extend(cwm.ChiBusinessUseCaseClass, uwm.model.ModelClass);
 
 cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
-	return new uwm.property.PropertyForm({
+	x= new uwm.property.PropertyForm({		
 			items: [new uwm.property.TextField({
 			fieldLabel: 'Name',
 			toolTip: "the name of this object.",
@@ -235,6 +235,31 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLo
 			readOnly: true
 		})]
 	});
+	
+	var multiselect = new Ext.ux.Multiselect({
+			
+		enableToolbar	  :  true,
+		name              :  'multiselect',
+		fieldLabel        :  'Multiselect',
+		dataFields        :  ['code', 'desc'], 
+		data              :  [['1', 'One'], ['2', 'Two'], ['3', 'Three'], ['4', 'Four'], ['5', 'Five']],
+		valueField        :  'code',
+		displayField      :  'desc',
+		width			  :  520 ,
+		height            :  150,
+		allowBlank        :  true
+
+	});
+	
+	x.add(multiselect)	;
+	x.addButton('Val', function() { alert(x.getForm().getValues(true)); })
+	x.addButton('2,3', function() { multiselect.setValue('2,3'); })
+	x.addButton('Inv', function() { multiselect.markInvalid('Invalid'); })
+	x.addButton('Enbl', function() { if(!multiselect.disabled) {multiselect.disable();} else {multiselect.enable();} });
+	x.addButton('Res', function() { multiselect.reset();});
+	
+	return x;
+	
 }
 
 cwm.ChiBusinessUseCaseClass.prototype.getGraphics = function(label, figure) {
