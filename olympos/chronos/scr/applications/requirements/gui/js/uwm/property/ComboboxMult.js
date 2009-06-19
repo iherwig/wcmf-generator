@@ -40,7 +40,6 @@ uwm.property.ComboboxMult = function(config){
 Ext.extend(uwm.property.ComboboxMult, Ext.form.FormPanel);
 
 
-/*
 uwm.property.ComboboxMult.prototype.render = function(container, position) {
 	uwm.property.ComboboxMult.superclass.render.apply(this, arguments);
 	
@@ -50,5 +49,25 @@ uwm.property.ComboboxMult.prototype.render = function(container, position) {
 		    html : this.toolTipText
 		});
 	}
+}
+/*
+uwm.property.ComboboxMult.prototype.fieldChanged = function(field, newValue,
+		oldValue) {
+	this.persistValue(newValue);
+}
+
+uwm.property.ComboboxMult.prototype.handleDestroy = function(field) {
+	if (this.isDirty()) {
+		this.persistValue(this.getValue());
+	}
+}
+
+uwm.property.ComboboxMult.prototype.persistValue = function(newValue) {
+	this.originalValue = newValue;
+	
+	var tmp = new Object();
+	tmp[this.getName()] = newValue;
+
+	this.modelNode.changeProperties(tmp);
 }
 */

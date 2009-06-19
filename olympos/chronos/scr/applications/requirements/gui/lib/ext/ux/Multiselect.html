@@ -42,8 +42,6 @@ Ext.onReady(function(){
 	formMultiselect.addButton('Mark Invalid', function() { multiselect.markInvalid('Invalid'); })
 	formMultiselect.addButton('Toggle Enabled', function() { if(!multiselect.disabled) {multiselect.disable();} else {multiselect.enable();} });
 	formMultiselect.addButton('Reset', function() { multiselect.reset();});
-
-//	alert('before render form-ct-multiselect');
 	formMultiselect.render('form-ct-multiselect');
 
 });
