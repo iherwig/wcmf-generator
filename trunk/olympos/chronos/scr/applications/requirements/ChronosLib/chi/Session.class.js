@@ -15,23 +15,18 @@
  */
 chi.Session = function() {
 	this.sid = null;
-	this.persistencyClass = "chi.persistency.Json";
+	this.persistencyClass = "chi.persistency.WcmfJson";
 	this.lang = "en";
 }
 
 chi.Session.prototype.init = function(sid, lang, jsonUrl, helpUrl) {
 	this.sid = sid;
 	this.lang = lang;
-	this.jsonUrl = jsonUrl;
 	this.helpUrl = helpUrl;
 }
 
 chi.Session.prototype.getSid = function() {
 	return this.sid;
-}
-
-chi.Session.prototype.getJsonUrl = function() {
-	return this.jsonUrl;
 }
 
 chi.Session.prototype.getHelpUrl = function() {

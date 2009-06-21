@@ -37,17 +37,11 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 			region: "center",
 			xtype: "tabpanel",
 			enableTabScroll: true,
-			activeTab: 0,
-			items: [new cwe.editor.Editor({
-				modelNodeClass: this.modelNodeClass
-			}), new cwe.editor.Editor({
-				modelNodeClass: this.modelNodeClass
-			}), new cwe.editor.Editor({
-				modelNodeClass: this.modelNodeClass
-			})]
 		});
 		
 		cwe.editor.EditorContainer.superclass.initComponent.apply(this, arguments);
+		
+		var self = this;
 		
 		this.on("remove", function(tabPanel, tab) {
 			self.tabClose(tabPanel, tab);
@@ -62,7 +56,22 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
  * @private
  */
 cwe.editor.EditorContainer.prototype.tabClose = function(tabPanel, tab) {
-	if (tab instanceof cwe.editor.ModelGrid) {
+	if (tab instanceof cwe.editor.Editor) {
 		this.editors.remove(tab);
 	}
+}
+
+cwe.editor.EditorContainer.prototype.loadOrShow = function(record) {
+	var editor = this.editors.get(record.getOid());
+	
+	if (!editor) {
+		editor = new cwe.editor.Editor({
+			record : record
+		});
+		this.editors.add(record.getOid(), editor);
+		this.add(editor);
+	}
+	
+	editor.show();
+	editor.doLayout();
 }

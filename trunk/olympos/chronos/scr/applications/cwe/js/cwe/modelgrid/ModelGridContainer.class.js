@@ -1,30 +1,30 @@
 /*
  * Copyright (c) 2009 The Olympos Development Team.
- *
+ * 
  * http://sourceforge.net/projects/olympos/
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
- * this entire header must remain intact.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
 Ext.namespace("cwe.modelgrid");
 
 /**
  * @class The Model Grid Container contains all model girds.
- *
+ * 
  * <p>
  * The model grid container is a <i>Singleton</i>.
  * </p>
- *
+ * 
  * @constructor
  */
 cwe.modelgrid.ModelGridContainer = function() {
 }
 
 cwe.modelgrid.ModelGridContainer = Ext.extend(Ext.TabPanel, {
-	initComponent: function() {
+	initComponent : function() {
 		/**
 		 * List of model grids with ModelNodeClass name as key.
 		 *
@@ -34,22 +34,25 @@ cwe.modelgrid.ModelGridContainer = Ext.extend(Ext.TabPanel, {
 		this.modelgrids = new Ext.util.MixedCollection();
 		
 		Ext.apply(this, {
-			region: "center",
-			xtype: "tabpanel",
-			enableTabScroll: true,
-			activeTab: 0,
-			items: [new cwe.modelgrid.ModelGridPanel({
-				modelNodeClass: "ChiGoal"
-			}), new cwe.modelgrid.ModelGridPanel({
-				modelNodeClass: "ChiRequirement"
-			}), new cwe.modelgrid.ModelGridPanel({
-				modelNodeClass: "ChiFeature"
-			}), new cwe.modelgrid.ModelGridPanel({
-				modelNodeClass: "ChiIssue"
-			})]
+		    region : "center",
+		    xtype : "tabpanel",
+		    enableTabScroll : true
+		/*,
+					activeTab: 0,
+					items: [new cwe.modelgrid.ModelGridPanel({
+						modelNodeClass: "ChiGoal"
+					}), new cwe.modelgrid.ModelGridPanel({
+						modelNodeClass: "ChiRequirement"
+					}), new cwe.modelgrid.ModelGridPanel({
+						modelNodeClass: "ChiFeature"
+					}), new cwe.modelgrid.ModelGridPanel({
+						modelNodeClass: "ChiIssue"
+					})]*/
 		});
 		
 		cwe.modelgrid.ModelGridContainer.superclass.initComponent.apply(this, arguments);
+		
+		var self = this;
 		
 		this.on("remove", function(tabPanel, tab) {
 			self.tabClose(tabPanel, tab);
@@ -60,15 +63,34 @@ cwe.modelgrid.ModelGridContainer = Ext.extend(Ext.TabPanel, {
 
 /**
  * Handler when tab is closed.
- *
+ * 
  * @private
  */
 cwe.modelgrid.ModelGridContainer.prototype.tabClose = function(tabPanel, tab) {
-	if (tab instanceof cwe.modelgrid.ModelGrid) {
+	if (tab instanceof cwe.modelgrid.ModelGridPanel) {
 		this.modelgrids.remove(tab);
 	}
 }
 
+cwe.modelgrid.ModelGridContainer.prototype.loadOrShow = function(modelClass) {
+	var modelGrid = this.modelgrids.get(modelClass.getId());
+	
+	var explicitLayout = this.modelgrids.getCount() == 0;
+	
+	if (!modelGrid) {
+		modelGrid = new cwe.modelgrid.ModelGridPanel( {
+			modelClass : modelClass
+		});
+		this.modelgrids.add(modelClass.getId(), modelGrid);
+		this.add(modelGrid);
+	}
+	
+	modelGrid.show();
+	
+	if (explicitLayout) {
+		modelGrid.doLayout();
+	}
+}
 
 /**
  * Returns the instance of ModelGridContainer.
