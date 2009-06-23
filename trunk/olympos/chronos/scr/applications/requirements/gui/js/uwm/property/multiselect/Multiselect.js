@@ -1,6 +1,4 @@
-
 Ext.namespace("Ext.ux");
-
 
 /**
  * @class Ext.ux.Multiselect
@@ -13,6 +11,7 @@ Ext.namespace("Ext.ux");
 Ext.ux.Multiselect = function(config){
 
 	Ext.ux.Multiselect.superclass.constructor.call(this, config);
+	
 	this.addEvents({
 		'dblclick' : true,
 		'click' : true,
@@ -22,20 +21,16 @@ Ext.ux.Multiselect = function(config){
 	this.on('valid', this.onValid);
 	this.on('invalid', this.onInvalid);
 
-};
-
+}
 Ext.extend(Ext.ux.Multiselect, Ext.form.Field,  {
 		
 	store             :  null,
-	dataFields:["code", "desc"],  
-	data:[[123,"One Hundred Twenty Three"], 
-                 ["1", "One"], ["2", "Two"], ["3", "Three"], ["4", "Four"], ["5", "Five"], 
-                 ["6", "Six"], ["7", "Seven"], ["8", "Eight"], ["9", "Nine"]], 
-	width             :  100,
-	height            :  100,
-	displayField      :  0,
-	valueField        :  1,
-	allowBlank        :  true,
+	dataFields		  :  ["key", "val"],  
+	data			  :	 null, 
+	width             :  0,
+	height            :  0,
+ 	valueField        :  0,
+ 	displayField      :  1,
 	minLength         :  0,
 	maxLength         :  Number.MAX_VALUE,
 	blankText         :  Ext.form.TextField.prototype.blankText,
@@ -51,9 +46,6 @@ Ext.extend(Ext.ux.Multiselect, Ext.form.Field,  {
 	view              :  null,
 	draggable         :  false,
 	defaultAutoCreate :  {tag: "input", type: "hidden", value: ""},
-    blankText		  : 'hallo',
-	hideLabel		  : true ,
-    
     
     // private
     afterRender : function(){

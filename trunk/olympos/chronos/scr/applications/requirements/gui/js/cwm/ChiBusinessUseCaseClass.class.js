@@ -128,14 +128,20 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLo
 			listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
-		}), new uwm.property.ComboBox({
+		})
+		/*
+		, new uwm.property.ComboBox({
 			fieldLabel: 'OtherActors',
 			toolTip: "The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.",
 			name: 'OtherActors',
 			listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
 			modelNode: modelNode,
 			disabled: isLockedByOtherUser
-		}), new uwm.property.TextField({
+		})
+		*/
+		
+		
+		, new uwm.property.TextField({
 			fieldLabel: 'GoalInContext',
 			toolTip: "The goal should implicitly express the actor's intent or purpose of the use case, such as *Enrol Student in Seminar.*",
 			name: 'GoalInContext',
@@ -236,27 +242,21 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLo
 		})]
 	});
 	
-	var multiselect = new Ext.ux.Multiselect({
-			
-		enableToolbar	  :  true,
-		name              :  'multiselect',
-		fieldLabel        :  'Multiselect',
-		dataFields        :  ['code', 'desc'], 
-		data              :  [['1', 'One'], ['2', 'Two'], ['3', 'Three'], ['4', 'Four'], ['5', 'Five']],
-		valueField        :  'code',
-		displayField      :  'desc',
-		width			  :  520 ,
-		height            :  150,
-		allowBlank        :  true
-
+	var OtherActors = new uwm.property.ComboboxMult({
+		fieldLabel: 'OtherActors',
+		toolTip: "The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.",
+		name: 'OtherActors',
+		listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
+		modelNode: modelNode,
+		disabled: isLockedByOtherUser,
 	});
 	
-	x.add(multiselect)	;
+	x.add(OtherActors)	;
 	x.addButton('Val', function() { alert(x.getForm().getValues(true)); })
-	x.addButton('2,3', function() { multiselect.setValue('2,3'); })
-	x.addButton('Inv', function() { multiselect.markInvalid('Invalid'); })
-	x.addButton('Enbl', function() { if(!multiselect.disabled) {multiselect.disable();} else {multiselect.enable();} });
-	x.addButton('Res', function() { multiselect.reset();});
+//	x.addButton('2,3', function() { OtherActors.setValue('2,3'); })
+//	x.addButton('Inv', function() { OtherActors.markInvalid('Invalid'); })
+//	x.addButton('Enbl', function() { if(!OtherActors.disabled) {OtherActors.disable();} else {OtherActors.enable();} });
+	x.addButton('Res', function() { OtherActors.reset();});
 	
 	return x;
 	
