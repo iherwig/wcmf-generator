@@ -53,7 +53,7 @@ cwm.ActivityDecisionClass = function() {
 			invert :true,
 			invertBackendRelation: false,
 			connectionType :"association",
-			cardinality: 1
+			cardinality: -1
 		}
 
 	};
