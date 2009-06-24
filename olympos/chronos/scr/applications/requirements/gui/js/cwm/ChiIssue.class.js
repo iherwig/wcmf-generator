@@ -55,7 +55,7 @@ cwm.ChiIssue.prototype.populatePropertyForm = function(form) {
 cwm.ChiIssue.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 	

@@ -53,7 +53,7 @@ cwm.ChiWorkerInternal.prototype.populatePropertyForm = function(form) {
 cwm.ChiWorkerInternal.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 	

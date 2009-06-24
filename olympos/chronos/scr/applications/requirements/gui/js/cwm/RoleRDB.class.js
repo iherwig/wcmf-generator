@@ -41,7 +41,7 @@ cwm.RoleRDB.prototype.populatePropertyForm = function(form) {
 cwm.RoleRDB.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 // PROTECTED REGION END

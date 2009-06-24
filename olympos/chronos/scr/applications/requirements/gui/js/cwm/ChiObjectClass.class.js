@@ -38,15 +38,15 @@ cwm.ChiObjectClass = function() {
 		name: "oid",
 		mapping: "oid"
 	}, {
-		name: "Label",
-		mapping: "Label"
+		name: "label",
+		mapping: "label"
 	}, {
 		name: "object_status",
 		mapping: "object_status"
 	}];
 	this.gridColumns = [{
 		header: "Label",
-		dataIndex: "Label",
+		dataIndex: "label",
 		sortable: true
 	}, {
 		header: "object_status",

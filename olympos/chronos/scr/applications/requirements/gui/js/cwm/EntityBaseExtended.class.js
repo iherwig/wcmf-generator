@@ -49,7 +49,7 @@ cwm.EntityBaseExtended.prototype.populatePropertyForm = function(form) {
 cwm.EntityBaseExtended.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 	

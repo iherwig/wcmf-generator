@@ -53,7 +53,7 @@ cwm.Actor.prototype.populatePropertyForm = function(form) {
 cwm.Actor.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 	

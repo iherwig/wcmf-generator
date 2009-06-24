@@ -73,7 +73,7 @@ cwm.ChiBusinessUseCase.prototype.populatePropertyForm = function(form) {
 cwm.ChiBusinessUseCase.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 	
