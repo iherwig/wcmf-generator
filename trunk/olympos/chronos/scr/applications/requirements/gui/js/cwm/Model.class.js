@@ -49,7 +49,7 @@ cwm.Model.prototype.populatePropertyForm = function(form) {
 cwm.Model.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 	

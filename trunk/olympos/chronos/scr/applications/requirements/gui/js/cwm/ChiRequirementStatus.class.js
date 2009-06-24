@@ -45,7 +45,7 @@ cwm.ChiRequirementStatus.prototype.populatePropertyForm = function(form) {
 cwm.ChiRequirementStatus.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 	

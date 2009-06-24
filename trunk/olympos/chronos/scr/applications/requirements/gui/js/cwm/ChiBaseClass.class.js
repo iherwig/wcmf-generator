@@ -34,12 +34,12 @@ cwm.ChiBaseClass = function() {
 		name: "oid",
 		mapping: "oid"
 	}, {
-		name: "Label",
-		mapping: "Label"
+		name: "label",
+		mapping: "label"
 	}];
 	this.gridColumns = [{
 		header: "Label",
-		dataIndex: "Label",
+		dataIndex: "label",
 		sortable: true
 	}];
 	

@@ -47,7 +47,7 @@ cwm.ChiAuthors.prototype.populatePropertyForm = function(form) {
 cwm.ChiAuthors.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 	

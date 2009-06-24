@@ -53,7 +53,7 @@ cwm.Diagram.prototype.populatePropertyForm = function(form) {
 cwm.Diagram.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
-		Label: this.getLabel()
+		label: this.getLabel()
 	}
 }
 	
