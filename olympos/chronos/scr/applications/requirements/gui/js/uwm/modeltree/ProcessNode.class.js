@@ -44,6 +44,11 @@ uwm.modeltree.ProcessNode.prototype.buildContextMenu = function() {
 				self.showInDiagram(item, e);
 			}
 		}, {
+			text: uwm.Dict.translate('Show in hierarchy'),
+			handler: function(item, e) {
+				self.showInHierarchy(item, e);
+			}
+		}, {
 			id: uwm.modeltree.ProcessNode.CONTEXTMENU_SHOW_IN_GRID_ID,
 			text: uwm.Dict.translate('Show in grid'),
 			handler: function(item, e) {
@@ -92,6 +97,10 @@ uwm.modeltree.ProcessNode.prototype.showContextMenu = function(self, e) {
 
 uwm.modeltree.ProcessNode.prototype.containedInCurrentDiagram = function() {
 	return uwm.diagram.DiagramContainer.getInstance().isModelObjectContainedInCurrentDiagram(this.modelNode);
+}
+
+uwm.modeltree.ProcessNode.prototype.showInHierarchy = function(self, e) {
+	uwm.hierarchytree.HierarchyTree.getInstance().loadNode(this.getModelNode().getOid());
 }
 
 uwm.modeltree.ProcessNode.prototype.gridAvailable = function() {
