@@ -124,18 +124,35 @@ uwm.objectgrid.ObjectGridContainer.prototype.walkAndCollectData = function(model
 		var currChildModelNode = uwm.model.ModelContainer.getInstance().getByOid(currChildOid);
 		
 		if (currChildModelNode) {
-			if (currChildModelNode instanceof uwm.model.builtin.Package) {
+			if (currChildModelNode instanceof uwm.model.builtin.Package || 
+				currChildModelNode instanceof uwm.diagram.ActivitySet) {
+				
+				// only collect child node data (current node data will not be collected)
+				this.walkAndCollectData(currChildModelNode);
+			}
+			else if (currChildModelNode instanceof cwm.ChiBusinessProcess ||
+				currChildModelNode instanceof cwm.ChiBusinessUseCaseCore ||
+				currChildModelNode instanceof cwm.ChiBusinessUseCase) {
+
+				// collect current node data and child data
+				this.collectData(currChildModelNode);
 				this.walkAndCollectData(currChildModelNode);
 			}
 			else {
-				var currChildUwmClassName = currChildModelNode.getUwmClassName();
-				
-				var container = this.dataContainers[currChildUwmClassName];
-				if (container) {
-					container.push(currChildModelNode.getGridData());
-				}
+
+				// default: collect current node data only
+				this.collectData(currChildModelNode);
 			}
 		}
+	}
+}
+
+uwm.objectgrid.ObjectGridContainer.prototype.collectData = function(modelNode) {
+	var modelNodeUwmClassName = modelNode.getUwmClassName();
+	
+	var container = this.dataContainers[modelNodeUwmClassName];
+	if (container) {
+		container.push(modelNode.getGridData());
 	}
 }
 
