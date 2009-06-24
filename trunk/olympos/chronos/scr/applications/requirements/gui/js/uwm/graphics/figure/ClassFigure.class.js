@@ -114,7 +114,7 @@ uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 	    }
 	}));
 	items.push(new Ext.menu.Item( {
-	    text : uwm.Dict.translate('Show in Hierarchy'),
+	    text : uwm.Dict.translate('Show in hierarchy'),
 	    handler : function(item, e) {
 		    figure.showInHierarchy();
 	    }

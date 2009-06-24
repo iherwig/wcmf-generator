@@ -69,7 +69,6 @@ uwm.Dict.voc = {
 		
 		'Show in tree' 			: {'de': 'Im Baum anzeigen'},
 		'Show in grid' 			: {'de': 'Im Gitter anzeigen'},
-		'Show in Hierarchy' 	: {'de': 'In Hierarchie anzeigen'},
 		'Show in hierarchy' 	: {'de': 'In Hierarchie anzeigen'},
 		'Show in diagram' 		: {'de': 'Im Diagramm anzeigen'},
 		'Show in model tree' 	: {'de': 'Im Modellbaum anzeigen'},		
