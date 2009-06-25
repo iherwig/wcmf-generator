@@ -109,7 +109,7 @@ class RoleRDBBase extends Role
     }
     function getNMUserRoleChildren()
     {
-      return $this->getChildrenEx(null, 'NMUserRole', array('fk_rolerdb_id' => $this->getDBID()), null);
+      return $this->getChildrenEx(null, 'NMUserRole', array('fk_rolerdb_id' => $this->getDBID()), null, false);
     }
 
 
@@ -142,7 +142,7 @@ class RoleRDBBase extends Role
       {
         // for every NMUserRole we have to load the UserRDB 
         $this->loadChildren('NMUserRole');
-        $children = parent::getChildrenEx(null, 'NMUserRole', array('fk_rolerdb_id' => $this->getDBID()), null);
+        $children = parent::getChildrenEx(null, 'NMUserRole', array('fk_rolerdb_id' => $this->getDBID()), null, false);
         $persistenceFacade = &PersistenceFacade::getInstance();
         $grandChildren = array();
         for($i=0; $i<sizeof($children); $i++)
@@ -168,13 +168,13 @@ class RoleRDBBase extends Role
      * @see Node::getChildrenEx()
      * Override this to also get the children of many-to-many relations
      */
-    function getChildrenEx($oid, $type, $values, $properties)
+    function getChildrenEx($oid, $type, $values, $properties, $useRegExp=true)
     {
       // handle NMUserRole as many-to-many type
       if ($type == 'UserRDB' || PersistenceFacade::getOIDParameter($oid, 'type') == 'UserRDB')
       {
         // for every NMUserRole we have to get the UserRDB parents 
-        $children = parent::getChildrenEx(null, 'NMUserRole', array('fk_rolerdb_id' => $this->getDBID()), null);
+        $children = parent::getChildrenEx(null, 'NMUserRole', array('fk_rolerdb_id' => $this->getDBID()), null, false);
         $grandChildren = array();
         $persistenceFacade = &PersistenceFacade::getInstance();
         for($i=0; $i<sizeof($children); $i++)
@@ -197,10 +197,10 @@ class RoleRDBBase extends Role
           for($j=0; $j<sizeof($grandChildrenParents); $j++)
             $grandChildren[sizeof($grandChildren)] = &$grandChildrenParents[$j];
         }
-        return Node::filter($grandChildren, $oid, $type, $values, $properties);
+        return Node::filter($grandChildren, $oid, $type, $values, $properties, $useRegExp);
       }
       // do default
-      return parent::getChildrenEx($oid, $type, $values, $properties);
+      return parent::getChildrenEx($oid, $type, $values, $properties, $useRegExp);
     }
     /**
      * @see Node::addChild()
@@ -220,6 +220,8 @@ class RoleRDBBase extends Role
           $associationNode = &$persistenceFacade->create('NMUserRole', BUILDTYPE_SINGLE);
           $associationNode->setRoleRDB($this);
           $associationNode->setUserRDB($child);
+          // physically add the child to allow tree iteration for CommitVisior
+          $this->addChild($associationNode);
           $child->addChild($associationNode);
         }
         else
@@ -240,9 +242,20 @@ class RoleRDBBase extends Role
       {
         // for every UserRDB we have to delete the NMUserRole
         // set childOID parameter to the NMUserRole's object id and prodeed with default behaviour
+        // check if the connection child is loaded already
         $ids = PersistenceFacade::getOIDParameter($childOID, 'id');
-        array_unshift($ids, $this->getDBID());
-        $childOID = PersistenceFacade::composeOID(array('type' => 'NMUserRole', 'id' => $ids));
+        $associationNodeConstraint = array('fk_rolerdb_id' => $this->getDBID(), 'fk_userrdb_id' => $ids[0]);
+        $associationNode = &$this->getFirstChild('NMUserRole', $associationNodeConstraint, null, false);
+        if ($associationNode != null)
+          $childOID = $associationNode->getOID();
+        else
+        {
+          // try to get it from the database
+          $persistenceFacade = &PersistenceFacade::getInstance();
+          $relOID = $persistenceFacade->getFirstOID('NMUserRole', $associationNodeConstraint);
+          if ($relOID != null)
+            $childOID = $relOID;
+        }
       }
       // do default
       parent::deleteChild($childOID, $reallyDelete);
