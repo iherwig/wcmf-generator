@@ -7,9 +7,6 @@
     {/if}
 		<li><a href="javascript:submitAction('edituser');" id="navuserdata">{translate text="User data"}</a></li>
 		<li><a href="javascript:submitAction('logout');" target="_top" id="navlogout">{translate text="Logout"}</a></li>
-		<li><a href="javascript:setContext('admin'); submitAction('administration');" target="_top" id="navadministration">{translate text="Administration"}</a></li>
-		
-		
 	{/if}
 {/if}
 </ul>
