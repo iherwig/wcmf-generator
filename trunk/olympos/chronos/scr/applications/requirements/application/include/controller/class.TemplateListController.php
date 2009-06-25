@@ -71,8 +71,8 @@ class TemplateListController extends Controller
 				$decr = $xml->description;
 			
 				array_push($technicalNames, $Verz);
-				array_push($titles, $title);
-				array_push($descriptions, $decr);
+				array_push($titles, utf8_decode($title));
+				array_push($descriptions, utf8_decode($decr));
 			}
 		}
 	
