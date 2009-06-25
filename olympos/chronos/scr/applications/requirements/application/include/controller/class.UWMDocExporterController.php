@@ -89,7 +89,8 @@ class UWMDocExporterController extends Controller
 			OawUtil::setupExecutable();
 			
 			$exportFormatParam = $this->_request->getValue('exportFormat');
-			if (array_search($exportFormatParam, $this->availableFormats)) {
+			
+			if (array_search($exportFormatParam, $this->availableFormats) !== false) {
 				$exportFormat = $exportFormatParam;
 			} else {
 				$exportFormat = self::DEFAULT_EXPORT_FORMAT;
@@ -98,7 +99,8 @@ class UWMDocExporterController extends Controller
 			$this->getAvailableTemplates();
 	
 			$templateNameParam = $this->_request->getValue('templateName');
-			if (array_search($templateNameParam, $this->availableTemplates)) {
+
+			if (array_search($templateNameParam, $this->availableTemplates) !== false) {
 				$templateName = $templateNameParam;
 			} else {
 				$templateName = self::DEFAULT_TEMPLATE_NAME;
