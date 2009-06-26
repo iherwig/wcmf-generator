@@ -38,6 +38,7 @@ uwm.diagram.AbstractDiagram = function(modelNodeClass) {
 	this.objects = new Ext.util.MixedCollection();
 	
 	this.dropWindow = null;
+	this.canvas = null;
 	
 	var self = this;
 	
@@ -143,10 +144,10 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 	    position : "fixed"
 	});
 	
-	var canvas = Ext.DomHelper.append(this.viewPort, {
-		tag : "div"
+	this.canvas = Ext.DomHelper.append(this.viewPort, {
+		tag : "div", id : "workspace"
 	}, true);
-	canvas.applyStyles( {
+	this.canvas.applyStyles( {
 	    width : this.workspaceWidth + "px",
 	    height : this.workspaceHeight + "px"
 	})
@@ -159,7 +160,7 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 	 * @private
 	 * @type uwm.diagram.UwmWorkflow
 	 */
-	this.workflow = new uwm.diagram.UwmWorkflow(canvas.id, this);
+	this.workflow = new uwm.diagram.UwmWorkflow(this.canvas.id, this);
 	
 	this.workflow.diagram = this;
 	
@@ -651,6 +652,16 @@ uwm.diagram.AbstractDiagram.prototype.getWorkflow = function() {
 }
 
 /**
+ * Returns the {Ext.Element} representing the canvas layer.
+ *
+ * @return The {Ext.Element} representing the canvas layer.
+ * @type String
+ */
+uwm.diagram.AbstractDiagram.prototype.getCanvas = function() {
+	return this.canvas;
+}
+
+/**
  * Returns whether snap to objects is activated for this diagram.
  *
  * @return <code>true</code> if snap to objects is activated for this diagram,
@@ -693,6 +704,18 @@ uwm.diagram.AbstractDiagram.prototype.reloadDiagram = function() {
 	container.getTabPanel().remove(this.tab);
 	
 	uwm.diagram.DiagramContainer.getInstance().loadDiagram(this);
+}
+
+/**
+ * Prints the diagram.
+ */
+uwm.diagram.AbstractDiagram.prototype.printDiagram = function() {
+	var mask = new Ext.LoadMask(Ext.getBody(), {msg:uwm.Dict.translate("Loading...")});
+	var printer = new uwm.diagram.print.Printer();
+	mask.show();
+	printer.print.defer(300, printer, [this, function() {
+		mask.hide();
+	}]);
 }
 
 /**
