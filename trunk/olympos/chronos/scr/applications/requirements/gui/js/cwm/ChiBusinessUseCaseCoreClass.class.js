@@ -37,12 +37,12 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 		name: "oid",
 		mapping: "oid"
 	}, {
-		name: "label",
-		mapping: "label"
+		name: "Label",
+		mapping: "Label"
 	}];
 	this.gridColumns = [{
 		header: "Label",
-		dataIndex: "label",
+		dataIndex: "Label",
 		sortable: true
 	}];
 	
@@ -128,7 +128,7 @@ cwm.ChiBusinessUseCaseCoreClass.prototype.getPropertyForm = function(modelNode, 
 			listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
-		}) ,	new uwm.property.ComboBox({
+		}) ,	new uwm.property.ComboboxMult({
 			fieldLabel: 'OtherActors',
 			toolTip: "The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.",
 			name: 'OtherActors',
