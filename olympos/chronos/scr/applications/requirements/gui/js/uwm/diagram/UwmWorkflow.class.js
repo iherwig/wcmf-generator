@@ -85,8 +85,14 @@ uwm.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
 				    self.reloadDiagram();
 			    }
 		    }
+		}), new Ext.menu.Item( {
+		    text : uwm.Dict.translate("Print"),
+		    listeners : {
+			    click : function() {
+				    self.printDiagram();
+			    }
+		    }
 		})
-
 		]
 	});
 }
@@ -149,6 +155,13 @@ uwm.diagram.UwmWorkflow.prototype.showInModelTree = function() {
  */
 uwm.diagram.UwmWorkflow.prototype.reloadDiagram = function() {
 	this.diagram.reloadDiagram();
+}
+
+/**
+ * Prints the diagram.
+ */
+uwm.diagram.UwmWorkflow.prototype.printDiagram = function() {
+	this.diagram.printDiagram();
 }
 
 /**
