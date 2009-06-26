@@ -37,12 +37,12 @@ cwm.ChiBusinessUseCaseClass = function() {
 		name: "oid",
 		mapping: "oid"
 	}, {
-		name: "label",
-		mapping: "label"
+		name: "Label",
+		mapping: "Label"
 	}];
 	this.gridColumns = [{
 		header: "Label",
-		dataIndex: "label",
+		dataIndex: "Label",
 		sortable: true
 	}];
 	
@@ -108,7 +108,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 Ext.extend(cwm.ChiBusinessUseCaseClass, uwm.model.ModelClass);
 
 cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
-	x= new uwm.property.PropertyForm({		
+	return new uwm.property.PropertyForm({		
 			items: [new uwm.property.TextField({
 			fieldLabel: 'Name',
 			toolTip: "the name of this object.",
@@ -128,20 +128,14 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLo
 			listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
-		})
-		/*
-		, new uwm.property.ComboBox({
+		}), new uwm.property.ComboboxMult({
 			fieldLabel: 'OtherActors',
 			toolTip: "The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.",
 			name: 'OtherActors',
 			listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
 			modelNode: modelNode,
-			disabled: isLockedByOtherUser
-		})
-		*/
-		
-		
-		, new uwm.property.TextField({
+			disabled: isLockedByOtherUser,
+	    }), new uwm.property.TextField({
 			fieldLabel: 'GoalInContext',
 			toolTip: "The goal should implicitly express the actor's intent or purpose of the use case, such as *Enrol Student in Seminar.*",
 			name: 'GoalInContext',
@@ -241,25 +235,6 @@ cwm.ChiBusinessUseCaseClass.prototype.getPropertyForm = function(modelNode, isLo
 			readOnly: true
 		})]
 	});
-	
-	var OtherActors = new uwm.property.ComboboxMult({
-		fieldLabel: 'OtherActors',
-		toolTip: "The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.",
-		name: 'OtherActors',
-		listType: "ChiWorkerExternal,ChiWorkerInternal,ChiWorker,ChiBusinessPartner,ChiBusinessPartnerActive,ChiBusinessPartnerPassive",
-		modelNode: modelNode,
-		disabled: isLockedByOtherUser,
-	});
-	
-	x.add(OtherActors)	;
-	x.addButton('Val', function() { alert(x.getForm().getValues(true)); })
-//	x.addButton('2,3', function() { OtherActors.setValue('2,3'); })
-//	x.addButton('Inv', function() { OtherActors.markInvalid('Invalid'); })
-//	x.addButton('Enbl', function() { if(!OtherActors.disabled) {OtherActors.disable();} else {OtherActors.enable();} });
-	x.addButton('Res', function() { OtherActors.reset();});
-	
-	return x;
-	
 }
 
 cwm.ChiBusinessUseCaseClass.prototype.getGraphics = function(label, figure) {
