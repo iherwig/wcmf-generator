@@ -63,7 +63,7 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 			} else if (command instanceof draw2d.CommandMove) {
 				var figure = command.figure;
 				
-				if (figure instanceof uwm.graphics.figure.BaseFigure) {
+				if (figure instanceof uwm.graphics.figure.BaseFigure || figure instanceof uwm.graphics.figure.ClassFigure) {
 					var modelObject = command.figure.getFigure();
 					
 					modelObject.changeProperties({
