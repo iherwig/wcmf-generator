@@ -23,6 +23,7 @@ uwm.property.ComboBoxProxyMult = function(config){
 	
 	this.listType = config.listType;
 }
+
 Ext.extend(uwm.property.ComboBoxProxyMult, Ext.data.DataProxy);
 
 uwm.property.ComboBoxProxyMult.prototype.load = function(params, reader, callback, scope, arg){
