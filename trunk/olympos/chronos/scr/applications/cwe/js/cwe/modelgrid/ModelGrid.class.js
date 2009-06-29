@@ -25,86 +25,70 @@ cwe.modelgrid.ModelGrid = function(config) {
 cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 	initComponent : function() {
 		
-		this.store = new Ext.data.SimpleStore( {
-			fields : [ "Name", "Notes", "ValueAmount" ]
+		/*
+		 * this.store = new Ext.data.SimpleStore( { fields : [ "Name", "Notes",
+		 * "ValueAmount" ] });
+		 * 
+		 * this.store.add( [ new cwe.model.ModelRecord(this.modelClass, { oid:
+		 * "Record:1", Name : "Name1", Notes : "Notes1", ValueAmount :
+		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
+		 * "Record:2", Name : "Name2", Notes : "Notes1", ValueAmount :
+		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
+		 * "Record:3", Name : "Name3", Notes : "Notes1", ValueAmount :
+		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
+		 * "Record:4", Name : "Name4", Notes : "Notes1", ValueAmount :
+		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
+		 * "Record:5", Name : "Name5", Notes : "Notes1", ValueAmount :
+		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
+		 * "Record:6", Name : "Name6", Notes : "Notes1", ValueAmount :
+		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
+		 * "Record:7", Name : "Name7", Notes : "Notes1", ValueAmount :
+		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
+		 * "Record:8", Name : "Name8", Notes : "Notes1", ValueAmount :
+		 * "ValueAmount1" }) ]);
+		 */
+
+		this.store = new cwe.model.ModelStore( {
+			modelClass : this.modelClass
 		});
 		
-		this.store.add( [ new cwe.model.ModelRecord(this.modelClass, {
-		    oid: "Record:1",
-			Name : "Name1",
-		    Notes : "Notes1",
-		    ValueAmount : "ValueAmount1"
-		}), new cwe.model.ModelRecord(this.modelClass, {
-		    oid: "Record:2",
-		    Name : "Name2",
-		    Notes : "Notes1",
-		    ValueAmount : "ValueAmount1"
-		}), new cwe.model.ModelRecord(this.modelClass, {
-		    oid: "Record:3",
-		    Name : "Name3",
-		    Notes : "Notes1",
-		    ValueAmount : "ValueAmount1"
-		}), new cwe.model.ModelRecord(this.modelClass, {
-		    oid: "Record:4",
-		    Name : "Name4",
-		    Notes : "Notes1",
-		    ValueAmount : "ValueAmount1"
-		}), new cwe.model.ModelRecord(this.modelClass, {
-		    oid: "Record:5",
-		    Name : "Name5",
-		    Notes : "Notes1",
-		    ValueAmount : "ValueAmount1"
-		}), new cwe.model.ModelRecord(this.modelClass, {
-		    oid: "Record:6",
-		    Name : "Name6",
-		    Notes : "Notes1",
-		    ValueAmount : "ValueAmount1"
-		}), new cwe.model.ModelRecord(this.modelClass, {
-		    oid: "Record:7",
-		    Name : "Name7",
-		    Notes : "Notes1",
-		    ValueAmount : "ValueAmount1"
-		}), new cwe.model.ModelRecord(this.modelClass, {
-		    oid: "Record:8",
-		    Name : "Name8",
-		    Notes : "Notes1",
-		    ValueAmount : "ValueAmount1"
-		}) ]);
-		
 		Ext.apply(this, {
-		    region : "north",
-		    height : 250,
-		    split : true,
-		    tbar : [ new Ext.Toolbar.Button( {
-		        text : chi.Dict.translate("Create"),
-		        iconCls : "createButton"
-		    }), new Ext.Toolbar.Button( {
-		        text : chi.Dict.translate("Edit"),
-		        iconCls : "editButton"
-		    }), new Ext.Toolbar.Button( {
-		        text : chi.Dict.translate("Delete"),
-		        iconCls : "deleteButton"
-		    }) ],
-		    selModel : new Ext.grid.RowSelectionModel( {
-			    singleSelect : true
-		    }),
-		    columns : [ {
-		        header : "Name",
-		        width : 100,
-		        sortable : true
-		    }, {
-		        header : "Notes",
-		        width : 100,
-		        sortable : true
-		    }, {
-		        header : "ValueAmount",
-		        width : 100,
-		        sortable : true
-		    } ],
-		    store : this.store,
-		    viewConfig : {
-			    forceFit : true
-		    }
+			region : "north",
+			height : 250,
+			split : true,
+			tbar : [ new Ext.Toolbar.Button( {
+				text : chi.Dict.translate("Create"),
+				iconCls : "createButton"
+			}), new Ext.Toolbar.Button( {
+				text : chi.Dict.translate("Edit"),
+				iconCls : "editButton"
+			}), new Ext.Toolbar.Button( {
+				text : chi.Dict.translate("Delete"),
+				iconCls : "deleteButton"
+			}) ],
+			selModel : new Ext.grid.RowSelectionModel( {
+				singleSelect : true
+			}),
+			columns : [ {
+				header : "Name",
+				dataIndex: "Name",
+				width : 100,
+				sortable : true
+			}, {
+				header : "Notes",
+				dataIndex: "Notes",
+				width : 100,
+				sortable : true
+			}, {
+				header : "ValueAmount",
+				dataIndex: "value_ammount",
+				width : 100,
+				sortable : true
+			} ],
+			store : this.store,
+			viewConfig : {
+				forceFit : true
+			}
 		});
 		
 		cwe.modelgrid.ModelGrid.superclass.initComponent.apply(this, arguments);
@@ -114,6 +98,8 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		this.on("rowclick", function(grid, rowIndex, e) {
 			self.openEditor(grid, rowIndex, e);
 		});
+		
+		this.store.load();
 	}
 });
 

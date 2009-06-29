@@ -11,21 +11,16 @@
  */
 Ext.namespace("cwe.model");
 
-cwe.model.ModelStore = function(config) {
-	this.modelClass = config.modelClass;
+cwe.model.ModelReferenceList = function(modelClass) {
+	cwe.model.ModelReferenceList.superclass.constructor.call(this, false, function(modelReference) {
+		return modelReference.getOid();
+	});
 	
-	var exampleRecord = new cwe.model.ModelRecord(this.modelClass);
-	
-	cwe.model.ModelStore.superclass.constructor.call(this, Ext.apply( {
-		proxy : new cwe.model.ModelProxy( {
-			modelClass : this.modelClass
-		}),
-		fields : exampleRecord.fields
-	}, config));
+	this.modelClass = modelClass;
 }
 
-Ext.extend(cwe.model.ModelStore, Ext.data.Store);
+Ext.extend(cwe.model.ModelReferenceList, Ext.util.MixedCollection);
 
-cwe.model.ModelStore.prototype.getModelClass = function() {
+cwe.model.ModelReferenceList.prototype.getModelClass = function() {
 	return this.modelClass;
 }

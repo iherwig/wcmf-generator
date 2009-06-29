@@ -13,7 +13,7 @@ Ext.namespace("cwe");
 
 /**
  * @class The main class of the application.
- *
+ * 
  * @constructor
  */
 cwe.Cwe = function() {
@@ -31,7 +31,7 @@ cwe.Cwe.prototype.startApplication = function() {
 	
 	var sid = null;
 	
-	for (var i = 0; i < params.length; i++) {
+	for ( var i = 0; i < params.length; i++) {
 		var parts = params[i].split(/=/);
 		
 		if (parts[0] = "sid") {
@@ -40,17 +40,17 @@ cwe.Cwe.prototype.startApplication = function() {
 		}
 	}
 	
-	if (true || sid) {
+	if (sid) {
 		this.startSession(sid, cwe.Config.defaultLang);
 	} else {
-		this.login = new cwe.ui.Login();
+		this.login = new chi.Login();
 	}
 }
 
 cwe.Cwe.prototype.startSession = function(sid, lang) {
 	chi.Session.getInstance().init(sid, lang, cwe.Config.jsonUrl);
 	
-	//this.login.destroy();
+	this.login.destroy();
 	
 	this.defaultWorkbench = new cwe.ui.Workbench();
 	
@@ -59,16 +59,11 @@ cwe.Cwe.prototype.startSession = function(sid, lang) {
 
 cwe.Cwe.prototype.reload = function() {
 	this.viewport.destroy();
-	/*
-	
-	 chronos.persistency.Persistency.getInstance().logout(function() {
-	
-	 window.location.reload();
-	
-	 });
-	
-	 */
-	
+	chi.persistency.Persistency.getInstance().logout(function() {
+		
+		window.location.reload();
+		
+	});
 }
 
 cwe.Cwe.prototype.installErrorHandler = function() {
@@ -82,13 +77,13 @@ cwe.Cwe.prototype.installErrorHandler = function() {
 		return originalAddListener(element, eventName, function() {
 			try {
 				fn.apply(scope || this, arguments);
-			} 
+			}
 			catch (e) {
 				self.handleError(e);
 			}
 		}, scope, options);
 	}
-	
+
 	Ext.EventManager.on = Ext.EventManager.addListener;
 	
 	window.onerror = function(message, uri, line) {
@@ -106,22 +101,20 @@ cwe.Cwe.prototype.handleError = function(e, message, uri, line) {
 	data["stack"] = e && e.stack ? e.stack : "unknown";
 	
 	var plainText = "";
-	for (var i in data) {
+	for ( var i in data) {
 		var val = data[i];
 		if (!(val instanceof Function)) {
 			plainText += i + ": " + val + "\n";
 		}
 	}
 	
-	cwe.persistency.Persistency.getInstance().log("error", plainText);
+	chi.persistency.Persistency.getInstance().log("error", plainText);
 	
 	var html = "";
-	for (var i in data) {
+	for ( var i in data) {
 		var val = data[i];
 		if (!(val instanceof Function)) {
-			html += "<p><b>" + i + ":</b> " +
-			("" + val).replace(/\n/g, "<br />") +
-			"</p>";
+			html += "<p><b>" + i + ":</b> " + ("" + val).replace(/\n/g, "<br />") + "</p>";
 		}
 	}
 	
@@ -132,44 +125,40 @@ cwe.Cwe.prototype.handleError = function(e, message, uri, line) {
 	} else {
 		var self = this;
 		
-		var window = new Ext.Window({
-			id: cwe.Cwe.ERROR_WINDOW_ID,
-			title: chi.Dict.translate("Error occured"),
-			layout: "fit",
-			items: [new Ext.Panel({
-				html: "<p class='cwe-errorDialogMessage'>" +
-				chi.Dict.translate("An application error occured. You may continue your work, but this might lead to further errors. If you choose to restart, your data will be saved.") +
-				"</p>"
-			}), new Ext.Panel({
-				id: cwe.Cwe.ERROR_DETAILS_ID,
-				title: chi.Dict.translate("Error details"),
-				collapsed: true,
-				collapsible: true,
-				animCollapse: false,
-				collapseFirst: true,
-				html: "<div class='cwe-errorDialogDetails'>" +
-				html +
-				"</div>",
-				listeners: {
-					"collapse": function() {
+		var window = new Ext.Window( {
+			id : cwe.Cwe.ERROR_WINDOW_ID,
+			title : chi.Dict.translate("Error occured"),
+			layout : "fit",
+			items : [ new Ext.Panel( {
+				html : "<p class='cwe-errorDialogMessage'>" + chi.Dict.translate("An application error occured. You may continue your work, but this might lead to further errors. If you choose to restart, your data will be saved.") + "</p>"
+			}), new Ext.Panel( {
+				id : cwe.Cwe.ERROR_DETAILS_ID,
+				title : chi.Dict.translate("Error details"),
+				collapsed : true,
+				collapsible : true,
+				animCollapse : false,
+				collapseFirst : true,
+				html : "<div class='cwe-errorDialogDetails'>" + html + "</div>",
+				listeners : {
+					"collapse" : function() {
 						window.center();
 					},
-					"expand": function() {
+					"expand" : function() {
 						window.center();
 					}
 				}
-			})],
-			buttons: [{
-				text: chi.Dict.translate("Continue"),
-				handler: function() {
+			}) ],
+			buttons : [ {
+				text : chi.Dict.translate("Continue"),
+				handler : function() {
 					window.destroy();
 				}
 			}, {
-				text: chi.Dict.translate("Restart"),
-				handler: function() {
+				text : chi.Dict.translate("Restart"),
+				handler : function() {
 					self.reload();
 				}
-			}]
+			} ]
 		});
 		
 		window.show();
@@ -178,7 +167,7 @@ cwe.Cwe.prototype.handleError = function(e, message, uri, line) {
 
 cwe.Cwe.prototype.installOverrides = function() {
 	Ext.override(Ext.form.Field, {
-		loadValue: function(value) {
+		loadValue : function(value) {
 			this.setValue(value);
 			this.originalValue = this.getValue();
 		}

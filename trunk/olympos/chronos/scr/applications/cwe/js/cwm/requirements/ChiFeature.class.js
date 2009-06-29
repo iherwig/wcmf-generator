@@ -14,7 +14,7 @@ Ext.namespace("cwm.requirements");
 cwm.requirements.ChiFeature = function() {
 	cwm.requirements.ChiFeature.superclass.constructor.call(this, arguments);
 	
-	this.cweModelElementId = "cwm.requirements.ChiFeature";
+	this.cweModelElementId = "ChiFeature";
 	this.name = "ChiFeature";
 	this.treeIconClass = "ChiFeatureTreeIcon16x16";
 	this.owningPackageId = "cwm.requirements.Requirements";

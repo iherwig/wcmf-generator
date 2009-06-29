@@ -18,7 +18,7 @@ Ext.namespace("chi.Util");
  *            oid The OID to extract UWM Class Name from.
  * @return {String} The UWM Class Name of the OID.
  */
-chi.Util.getUwmClassNameFromOid = function(oid) {
+chi.Util.getCweModelElementIdFromOid = function(oid) {
 	var result = oid.match(/^[^:]+/)[0];
 	
 	if (oid.charAt(0) == "{") {

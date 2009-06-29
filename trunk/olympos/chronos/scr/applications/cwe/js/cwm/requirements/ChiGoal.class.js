@@ -14,7 +14,7 @@ Ext.namespace("cwm.requirements");
 cwm.requirements.ChiGoal = function() {
 	cwm.requirements.ChiGoal.superclass.constructor.call(this, arguments);
 	
-	this.cweModelElementId = "cwm.requirements.ChiGoal";
+	this.cweModelElementId = "ChiGoal";
 	this.name = "ChiGoal";
 	this.treeIconClass = "ChiGoalTreeIcon16x16";
 	this.owningPackageId = "cwm.requirements.Requirements";
