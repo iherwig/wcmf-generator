@@ -22,15 +22,15 @@ chi.persistency.Persistency.getInstance = function() {
 	return chi.persistency.Persistency.instance;
 }
 
-chi.persistency.Persistency.prototype.processSuccessHandler = function(successHandler, request, data) {
+chi.persistency.Persistency.prototype.processSuccessHandler = function(successHandler, data) {
 	if (successHandler instanceof Function) {
-		successHandler(request, data);
+		successHandler(data);
 	}
 }
 
-chi.persistency.Persistency.prototype.processErrorHandler = function(errorHandler, request, data, errorMessage) {
+chi.persistency.Persistency.prototype.processErrorHandler = function(errorHandler, data, errorMessage) {
 	if (errorHandler instanceof Function) {
-		errorHandler(request, data, errorMessage);
+		errorHandler(data, errorMessage);
 	} else if (errorHandler instanceof String) {
 		chi.Util.showMessage(chi.Dict.translate('Persistency layer error'), errorHandler + errorMessage, chi.Util.messageType.ERROR);
 	} else if (errorMessage) {
@@ -56,7 +56,7 @@ chi.persistency.Persistency.prototype.load = function(oid, depth, successHandler
 	throw "Method chi.persistency.Persistency.load not implemented by current persistency adapter.";
 }
 
-chi.persistency.Persistency.prototype.save = function(oid, values, offset, successHandler, errorHandler) {
+chi.persistency.Persistency.prototype.save = function(oid, values, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.save not implemented by current persistency adapter.";
 }
 
@@ -64,7 +64,7 @@ chi.persistency.Persistency.prototype.create = function(cweModelElementId, value
 	throw "Method chi.persistency.Persistency.create not implemented by current persistency adapter.";
 }
 
-chi.persistency.Persistency.prototype.destroy = function(oid, offset, successHandler, errorHandler) {
+chi.persistency.Persistency.prototype.destroy = function(oid, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.destroy not implemented by current persistency adapter.";
 }
 
@@ -91,8 +91,3 @@ chi.persistency.Persistency.prototype.log = function(logtype, message, successHa
 chi.persistency.Persistency.prototype.executeActionSet = function(actionSet) {
 	throw "Method chi.persistency.Persistency.executeActionSet not implemented by current persistency adapter.";
 }
-
-chi.persistency.Persistency.prototype.translateCweModelElementId(cweModelElementId) {
-	throw "Method chi.persistency.Persistency.translateCweModelElementId not implemented by current persistency adapter.";
-}
-

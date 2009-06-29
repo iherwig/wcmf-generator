@@ -14,7 +14,7 @@ Ext.namespace("cwm.requirements");
 cwm.requirements.ChiRequirement = function() {
 	cwm.requirements.ChiRequirement.superclass.constructor.call(this, arguments);
 	
-	this.cweModelElementId = "cwm.requirements.ChiRequirement";
+	this.cweModelElementId = "ChiRequirement";
 	this.name = "ChiRequirement";
 	this.treeIconClass = "ChiRequirementTreeIcon16x16";
 	this.owningPackageId = "cwm.requirements.Requirements";

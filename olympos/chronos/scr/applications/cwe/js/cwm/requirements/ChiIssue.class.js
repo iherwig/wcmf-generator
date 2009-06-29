@@ -14,7 +14,7 @@ Ext.namespace("cwm.requirements");
 cwm.requirements.ChiIssue = function() {
 	cwm.requirements.ChiIssue.superclass.constructor.call(this, arguments);
 	
-	this.cweModelElementId = "cwm.requirements.ChiIssue";
+	this.cweModelElementId = "ChiIssue";
 	this.name = "ChiIssue";
 	this.treeIconClass = "ChiIssueTreeIcon16x16";
 	this.owningPackageId = "cwm.requirements.Requirements";
