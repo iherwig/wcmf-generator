@@ -164,12 +164,23 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 		
 		assistant.close();
 		
-		var url = "../application/main.php?response_format=JSON&usr_action=exportDoc&templateName=" + templateSelected + "&start" + assistant.uwmClassName + "=" + assistant.oid + "&exportFormat="
-		        + doctypeSelected;
-		
-		new uwm.ui.Download( {
-		    title : uwm.Dict.translate('Exporting Documentation ...'),
-		    downloadURL : url
+		var startModel = '';
+		var startPackage = '';
+		if (assistant.uwmClassName == 'Model')
+			startModel = assistant.oid;
+		else if (assistant.uwmClassName == 'Package')
+			startPackage = assistant.oid;
+
+			new uwm.ui.LongTaskRunner( {
+				title : uwm.Dict.translate('Exporting Documentation ...'),
+				call : function(successHandler, errorHandler) {
+					uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startModel, startPackage, doctypeSelected, successHandler, errorHandler);
+				},
+				successHandler : function() {},
+				errorHandler : function() {
+					uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+				},
+				isReturningDocument : true
 		}).show();
 	}, [ grid, radioFormItem ]);
 	

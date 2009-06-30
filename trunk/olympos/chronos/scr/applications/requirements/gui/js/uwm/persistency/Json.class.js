@@ -259,11 +259,12 @@ uwm.persistency.Json.prototype.glossary = function( successHandler, errorHandler
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.exportDoc = function(templateName, start, exportFormat, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'exportDoc',
 		templateName: templateName,
-		start: start,
+		startModel: startModel,
+		startPackage: startPackage,
 		exportFormat: exportFormat,
 	}, successHandler, errorHandler);
 }
