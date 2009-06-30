@@ -112,5 +112,11 @@ uwm.persistency.Persistency.prototype.putChildnodesToActivitySetDiagram = functi
 uwm.persistency.Persistency.prototype.templatelist = function( successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.glossary = function( successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.exportDoc = function(templateName, start, exportFormat, successHandler, errorHandler ) {
+}
+
+uwm.persistency.Persistency.prototype.exportUwm = function(startModel, successHandler, errorHandler ) {
+}
+
+uwm.persistency.Persistency.prototype.continue = function(controller, successHandler, errorHandler ) {
 }

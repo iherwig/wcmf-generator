@@ -259,6 +259,30 @@ uwm.persistency.Json.prototype.glossary = function( successHandler, errorHandler
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.exportDoc = function(templateName, start, exportFormat, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'exportDoc',
+		templateName: templateName,
+		start: start,
+		exportFormat: exportFormat,
+	}, successHandler, errorHandler);
+}
+
+uwm.persistency.Json.prototype.exportUwm = function(startModel, startPackage, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'exportUWM',
+		startModel: startModel,
+		startPackage: startPackage,
+	}, successHandler, errorHandler);
+}
+
+uwm.persistency.Json.prototype.continue = function(controller, successHandler, errorHandler) {
+	this.jsonRequest({
+		controller: controller,
+		usr_action: 'continue'
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	var data = {};
 	

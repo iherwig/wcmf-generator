@@ -1,0 +1,99 @@
+/*
+ * Copyright (c) 2008 The Olympos Development Team.
+ *
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+Ext.namespace("uwm.ui");
+
+/**
+ * @class A window that runs a {uwm.persistency.LongTask}.
+ * 
+ * @extends Ext.Window
+ * @constructor
+ * @param {Object} config The configuration object.
+ * @config title The window title
+ * @config call A function with parameters successHandler and errorHandler (these will be used by LongTask)
+ *              Typically a call to a Persistency method. See also {LongTask}.
+ * @config successHandler The function to call after the LongTask finished
+ * @config errorHandler The function to call when an error occurs
+ * @config isReturningDocument Boolean, true if the last call returns a document to be downloaded
+ */
+uwm.ui.LongTaskRunner = function(config) {
+	var self = this;
+	this.iFrameId = Ext.id();
+	this.pbar = new Ext.ProgressBar({
+		text:uwm.Dict.translate('Initializing ...'),
+		id:'pbar',
+		cls:'left-align',
+    width:300
+	});
+	
+	this.okButton = new Ext.Button({
+		text: uwm.Dict.translate("Close"),
+		disabled: true,
+		handler: function() {
+			self.destroy();
+		}
+	});
+	
+	this.iFrame = new Ext.Panel({
+		html: '<iframe id="'+this.iFrameId+'" src=""></iframe>', 
+	});
+	this.iFrame.setVisible(false);
+	
+	uwm.ui.LongTaskRunner.superclass.constructor.call(this, Ext.apply(this, {
+		layout: "fit",
+		items: [this.pbar, 
+			this.iFrame
+    ],
+		buttons: [this.okButton],
+    bodyBorder: false,
+    border: false,
+		closable: false,
+		resizable: true,
+    modal: true
+	}, config));
+	
+	// setup the LongTask when the window shows
+	this.on("render", function() {
+		window.setTimeout(function() {
+			self.pbar.reset();
+			
+			// create the LongTask instance that runs the action defined in the
+			// call paremeter and run it
+			var iFrameId = null;
+			if (self.isReturningDocument)
+				iFrameId = self.iFrameId;
+			var task = new uwm.persistency.LongTask(self.call, iFrameId);
+			task.run.defer(10, task, [
+				// process handler (updates the progress bar)
+				function(text, i, total) {
+					self.pbar.updateProgress(i/total, text);
+				}, 
+				// success handler (calls the success handler defined in the successHandler parameter)
+				function() {
+					self.pbar.updateText(uwm.Dict.translate("Finished"));
+					self.okButton.enable();
+					if (self.successHandler instanceof Function) {
+						self.successHandler();
+					}
+				}, 
+				// error handler (calls the error handler defined in the errorHandler parameter)
+				function() {
+					self.okButton.enable();
+					if (self.errorHandler instanceof Function) {
+						self.errorHandler();
+					}
+				}
+      ]);
+		}, 250);
+	});
+}
+
+Ext.extend(uwm.ui.LongTaskRunner, Ext.Window);
