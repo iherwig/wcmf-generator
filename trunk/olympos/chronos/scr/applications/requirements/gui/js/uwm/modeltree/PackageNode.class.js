@@ -70,9 +70,16 @@ uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
 		}, {
 			text: uwm.Dict.translate('Export as UML'),
 			handler: function(item, e) {
-				new uwm.ui.Download({
-					title: uwm.Dict.translate('Exporting UML ...'),
-					downloadURL: "../application/main.php?response_format=JSON&usr_action=exportUWM&startPackage=" + self.getModelNode().getOid()
+				new uwm.ui.LongTaskRunner( {
+						title : uwm.Dict.translate('Exporting UML ...'),
+						call : function(successHandler, errorHandler) {
+							uwm.persistency.Persistency.getInstance().exportUwm(self.getModelNode().getOid(), '', successHandler, errorHandler);
+						},
+						successHandler : function() {},
+						errorHandler : function() {
+							uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+						},
+						isReturningDocument : true
 				}).show();
 			}
 		}, {
