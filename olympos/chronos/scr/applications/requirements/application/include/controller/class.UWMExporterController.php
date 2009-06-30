@@ -55,6 +55,7 @@ class UWMExporterController extends BatchController
 	// session name constants
 	private $PARAM_START_MODEL = 'UWMExporterController.startModel';
 	private $PARAM_START_PACKAGE = 'UWMExporterController.startPackage';
+
 	private $TEMP_UWM_EXPORT_PATH = 'UWMExporterController.tmpUwmExportPath';
 	private $TEMP_PROPERTIES_PATH = 'UWMExporterController.tmpPropertiesPath';
 	private $TEMP_UML_EXPORT_PATH = 'UWMExporterController.tmpUmlPath';
