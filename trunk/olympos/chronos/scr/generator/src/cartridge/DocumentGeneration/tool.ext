@@ -61,16 +61,87 @@ String getGermanName(Chronos::ChiGoal this) :
 	"Ziel"
 ;
 
+String getKey1(Chronos::ChiGoal this):
+	"Ziele"
+;
+
 String getGermanName(Chronos::ChiRequirement this) :
 	"Anforderung"
 ;
 
+String getKey1(Chronos::ChiRequirement this):
+	"Anforderungen"
+;
 String getGermanName(Chronos::ChiFeature this) :
 	"Maßnahme"
 ;
 
+String getKey1(Chronos::ChiFeature this):
+	"Maßnahmen"
+;
+
 String getGermanName(Chronos::ChiIssue this) :
 	"Problem"
+;
+
+String getKey1(Chronos::ChiIssue this):
+	"Probleme"
+;
+
+String getGermanName(Chronos::ChiBusinessProcess this) :
+	"Prozess"
+;
+
+String getKey1(Chronos::ChiBusinessProcess this):
+	"Prozesse"
+;
+
+String getGermanName(Chronos::ChiBusinessUseCase this) :
+	"Anwendungsfall"
+;
+
+String getKey1(Chronos::ChiBusinessUseCase this):
+	"Anwendungsfälle"
+;
+
+String getGermanName(Chronos::ChiBusinessPartner this) :
+	"Akteur"
+;
+
+String getKey1(Chronos::ChiBusinessPartner this):
+	"Akteure"
+;
+
+String getGermanName(Chronos::ChiWorker this) :
+	"Akteur"
+;
+
+String getKey1(Chronos::ChiWorker this):
+	"Akteure"
+;
+
+String getGermanName(uml::Activity this) :
+	"Aktivitäten-Gruppe"
+;
+
+String getKey1(uml::Activity this):
+	"Aktivitäten-Gruppen"
+;
+
+String getGermanName(Chronos::ChiNode this) :
+	"Geschäftsobjekt"
+;
+
+String getKey1(Chronos::ChiNode this):
+	"Geschäftsobjekte"
+;
+
+String getGermanName(uml::Element this):
+	"UNDEFINED GermanName: " + this.metaType.name
+;
+
+String getKey1(uml::Element this):
+	"UNDEFINED key1: " + this.metaType.name
 ;
 
 int getOutlineLevel(int this) :

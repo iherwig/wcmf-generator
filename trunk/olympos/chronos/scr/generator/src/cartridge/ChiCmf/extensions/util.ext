@@ -55,6 +55,10 @@ boolean isNode(uml::Element this) :
 	this.getAppliedStereotype(STEREOTYPE_CHI_NODE()) != null || this.getAppliedStereotype(STEREOTYPE_CHI_MANY_TO_MANY()) != null
 ;
 
+Boolean isManyToMany(uml::Class this):
+	this.getAppliedStereotype(STEREOTYPE_CHI_MANY_TO_MANY()) != null
+;
+
 /**
  * Configuration related methods
  */

@@ -85,7 +85,10 @@ Boolean hasChildNodes(ChiNode this):
  * Get all child nodes
  */
 cached List[uml::Property] getChildNodes(ChiNode this) : 
-	this.getChildNodes(false).select(e|e.type.isNode())
+	this != null ?
+		this.getChildNodes(false).select(e|e.type.isNode())
+	:
+		null
 ;
 /**
  * Check if a node is a child node

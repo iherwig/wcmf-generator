@@ -168,4 +168,14 @@ Collection stereotypedContents(uml::Element this, String stereotypeName, String 
 Object getTaggedValueAssociation(uml::Element this, String stereotypeName, String taggedValueName):
 	JAVA net.sourceforge.olympos.oaw.extend.Stereotype.getPropertyContents(org.eclipse.uml2.uml.Element, java.lang.String, java.lang.String)
 ;
-	
+
+String getHash(uml::Element this):
+	!this.fullQualifiedName().isNullOrEmpty() ?
+		this.fullQualifiedName().md5()
+	:
+		null
+;
+
+List[uml::Property] getOwnEnds(uml::Type this):
+	this.getAssociations().memberEnd.select(e|e.type == this)
+;

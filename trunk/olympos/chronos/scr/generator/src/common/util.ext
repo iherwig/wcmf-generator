@@ -49,3 +49,7 @@ String boolString(Boolean b) :
 String boolString(uml::EnumerationLiteral b) :
 	b == null || b.name.toString().matches("false") ? "false" : "true"
 ;
+
+String md5(String this):
+	JAVA net.sourceforge.olympos.oaw.extend.Util.md5(java.lang.String)
+;
