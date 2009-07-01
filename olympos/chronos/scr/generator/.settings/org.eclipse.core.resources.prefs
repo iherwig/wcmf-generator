@@ -1,9 +1,13 @@
-#Thu May 28 16:27:12 CEST 2009
+#Thu Jun 25 15:27:51 CEST 2009
 eclipse.preferences.version=1
 encoding//src/cartridge/BrowserStatistics/barchart.xpt=UTF-8
 encoding//src/cartridge/BrowserStatistics/piechart.xpt=UTF-8
 encoding//src/cartridge/BrowserStatistics/statistics.xpt=UTF-8
 encoding//src/cartridge/BrowserStatistics/statisticsPhp.xpt=UTF-8
+encoding//src/cartridge/DocumentGeneration/template/MeRegio_01_ger/content.xpt=UTF-8
+encoding//src/cartridge/DocumentGeneration/template/MeRegio_01_ger/styles.xpt=UTF-8
+encoding//src/cartridge/DocumentGeneration/template/MoMaAS1_2/content.xpt=UTF-8
+encoding//src/cartridge/DocumentGeneration/template/MoMaAS1_2/styles.xpt=UTF-8
 encoding//src/cartridge/DocumentGeneration/template/MomaTemplate/content.xpt=UTF-8
 encoding//src/cartridge/DocumentGeneration/template/MomaTemplate/empty-shell.odt=UTF-8
 encoding//src/cartridge/DocumentGeneration/template/MomaTemplate/static.properties=UTF-8

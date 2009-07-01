@@ -57,6 +57,7 @@
 		<xsd:attribute name="Value_Name" type="xsd:string"/>
 		<xsd:attribute name="Value_ammount" type="xsd:string"/>
 		<xsd:attribute name="Value_Goal" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
@@ -75,6 +76,7 @@
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="Width" type="xsd:string"/>
 		<xsd:attribute name="Height" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
 		<xsd:attribute name="created" type="xsd:string"/>
@@ -822,6 +824,7 @@
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_model_id" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
 		<xsd:attribute name="created" type="xsd:string"/>
