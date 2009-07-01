@@ -229,7 +229,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
     }
     function «curChild.getRoleName().asGetter()»Children()
     {
-      return $this->getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null);
+      return $this->getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null, false);
     }
 «IF curChild.type.metaType.toString().contains("WCMFManyToMany")-»
 	«FOREACH ((WCMFNode)curChild.type).getParentNodes() AS curChildParent-»
@@ -245,7 +245,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
     function «curChildParent.type.name.asGetter()»Children()
     {
       // the foreign key column does not exist
-      return $this->getChildrenEx(null, '«curChildParent.type.name»', null, null);
+      return $this->getChildrenEx(null, '«curChildParent.type.name»', null, null, false);
     }
 		«ENDIF-»
 	«ENDFOREACH-»
@@ -270,7 +270,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
       {
         // for every «curChild.type.name» we have to load the «curChildParent.type.name» 
         $this->loadChildren('«curChild.type.name»');
-        $children = parent::getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null);
+        $children = parent::getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null, false);
         $persistenceFacade = &PersistenceFacade::getInstance();
         $grandChildren = array();
         for($i=0; $i<sizeof($children); $i++)
@@ -304,7 +304,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
      * @see Node::getChildrenEx()
      * Override this to also get the children of many-to-many relations
      */
-    function getChildrenEx($oid, $type, $values, $properties)
+    function getChildrenEx($oid, $type, $values, $properties, $useRegExp=true)
     {
 	«FOREACH getChildNodesRecursive() AS curChild-»
 «IF curChild.type.metaType.toString().contains("WCMFManyToMany")-»
@@ -314,7 +314,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
       if ($type == '«curChildParent.type.name»' || PersistenceFacade::getOIDParameter($oid, 'type') == '«curChildParent.type.name»')
       {
         // for every «curChild.type.name» we have to get the «curChildParent.type.name» parents 
-        $children = parent::getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null);
+        $children = parent::getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null, false);
         $grandChildren = array();
         $persistenceFacade = &PersistenceFacade::getInstance();
         for($i=0; $i<sizeof($children); $i++)
@@ -337,14 +337,14 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
           for($j=0; $j<sizeof($grandChildrenParents); $j++)
             $grandChildren[sizeof($grandChildren)] = &$grandChildrenParents[$j];
         }
-        return Node::filter($grandChildren, $oid, $type, $values, $properties);
+        return Node::filter($grandChildren, $oid, $type, $values, $properties, $useRegExp);
       }
 		«ENDIF-»
 	«ENDFOREACH-»
 «ENDIF-»
 «ENDFOREACH-»
       // do default
-      return parent::getChildrenEx($oid, $type, $values, $properties);
+      return parent::getChildrenEx($oid, $type, $values, $properties, $useRegExp);
     }
 «ENDDEFINE»
 
@@ -372,6 +372,8 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
           $associationNode = &$persistenceFacade->create('«curChild.type.name»', BUILDTYPE_SINGLE);
           $associationNode->«this.name.asSetter()»($this);
           $associationNode->«curChildParent.type.name.asSetter()»($child);
+          // physically add the child to allow tree iteration for CommitVisior
+          $this->addChild($associationNode);
           $child->addChild($associationNode);
         }
         else
@@ -404,9 +406,20 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
       {
         // for every «curChildParent.type.name» we have to delete the «curChild.type.name»
         // set childOID parameter to the «curChild.type.name»'s object id and prodeed with default behaviour
+        // check if the connection child is loaded already
         $ids = PersistenceFacade::getOIDParameter($childOID, 'id');
-        array_unshift($ids, $this->getDBID());
-        $childOID = PersistenceFacade::composeOID(array('type' => '«curChild.type.name»', 'id' => $ids));
+        $associationNodeConstraint = array('«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID(), '«curChildParent.getFKName()»' => $ids[0]));
+        $associationNode = &$this->getFirstChild('«curChild.type.name»', $associationNodeConstraint, null);
+        if ($associationNode != null)
+          $childOID = $associationNode->getOID();
+        else
+        {
+          // try to get it from the database
+          $persistenceFacade = &PersistenceFacade::getInstance();
+          $relOID = $persistenceFacade->getFirstOID('«curChild.type.name»', $associationNodeConstraint);
+          if ($relOID != null)
+            $childOID = $relOID;
+        }
       }
 		«ENDIF-»
 	«ENDFOREACH-»
