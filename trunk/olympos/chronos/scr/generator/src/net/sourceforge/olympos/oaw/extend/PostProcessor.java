@@ -45,8 +45,8 @@ public class PostProcessor {
 					// the creation of values (fk columns)
 					PostProcessor.completeAssociations(clazz);
 					PostProcessor.completeAttributes(clazz);
+				}
 			}
-		}
 		}
 		return rootClazz;
 	}
@@ -59,7 +59,7 @@ public class PostProcessor {
 	 * @return clazz
 	 */
 	public static org.eclipse.uml2.uml.Class completeAssociations(org.eclipse.uml2.uml.Class clazz) {
-		Logger.info("Add implicit associations for "	+ clazz.getName());
+		Logger.info("Add implicit associations for "+clazz.getName());
 		Logger.debug("parents before: "+NodeHelper.parentsToString(clazz, true));
 		Logger.debug("children before: "+NodeHelper.childrenToString(clazz, true));
 
@@ -229,7 +229,7 @@ public class PostProcessor {
 			Property attrib = attribIter.next();
 			if (UMLHelper.hasStereotype(attrib, Constants.FQName(Constants.STEREOTYPE_CHI_VALUE)) && !Generator.isGeneratorAdded(attrib)
 					&& attrib.getOwner() != clazz) {
-				if (!clazz.getOwnedMembers().contains(attrib)) {
+				if (!UMLHelper.hasAttribute(clazz, attrib.getName())) {
 					Logger.info("-> (1) Add inherited value " + attrib.getName());
 					Property p = clazz.createOwnedAttribute(attrib.getName(), attrib.getType());
 					UMLHelper.copyTaggedValues(p, Constants.FQName(Constants.STEREOTYPE_CHI_VALUE), attrib, new String[] { "base_Property" });
