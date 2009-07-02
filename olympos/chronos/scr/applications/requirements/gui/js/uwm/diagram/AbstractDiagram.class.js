@@ -145,7 +145,7 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 	});
 	
 	this.canvas = Ext.DomHelper.append(this.viewPort, {
-		tag : "div", id : "workspace"
+		tag : "div"
 	}, true);
 	this.canvas.applyStyles( {
 	    width : this.workspaceWidth + "px",
@@ -461,7 +461,8 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					var parentOids = childObject.getParentOids();
 					nmtype = true;
 					
-					for ( var j = 0; j < parentOids.length; j++) {
+					//FIXME: workaround from parentOids.length to 2 parent oids, due to wCMF error (Bug id )
+					for ( var j = 0; j < 2; j++) {
 						var currParentOid = parentOids[j];
 						
 						if (currParentOid != newObject.getOid()) {
