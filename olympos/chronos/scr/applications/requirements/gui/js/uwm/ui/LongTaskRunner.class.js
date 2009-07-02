@@ -35,8 +35,8 @@ uwm.ui.LongTaskRunner = function(config) {
 	});
 	
 	this.okButton = new Ext.Button({
-		text: uwm.Dict.translate("Close"),
-		disabled: true,
+		text: uwm.Dict.translate("Cancel & Close"),
+		//disabled: true,
 		handler: function() {
 			self.destroy();
 		}
@@ -79,14 +79,14 @@ uwm.ui.LongTaskRunner = function(config) {
 				// success handler (calls the success handler defined in the successHandler parameter)
 				function() {
 					self.pbar.updateText(uwm.Dict.translate("Finished"));
-					self.okButton.enable();
+					//self.okButton.enable();
 					if (self.successHandler instanceof Function) {
 						self.successHandler();
 					}
 				}, 
 				// error handler (calls the error handler defined in the errorHandler parameter)
 				function() {
-					self.okButton.enable();
+					//self.okButton.enable();
 					if (self.errorHandler instanceof Function) {
 						self.errorHandler();
 					}
