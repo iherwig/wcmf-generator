@@ -13,23 +13,23 @@
  */
 Ext.namespace("cwm");
 
-cwm.ChiBaseClass = function() {
-	cwm.ChiBaseClass.superclass.constructor.call(this);
+cwm.ChiBaseStatusClass = function() {
+	cwm.ChiBaseStatusClass.superclass.constructor.call(this);
 	
-	this.uwmClassName = "ChiBase";
-	this.instanceClassName = "cwm.ChiBase";
-	this.treeIcon = "FigureChiBase";
-	this.figureIcon = "FigureChiBase";
+	this.uwmClassName = "ChiBaseStatus";
+	this.instanceClassName = "cwm.ChiBaseStatus";
+	this.treeIcon = "FigureChiBaseStatus";
+	this.figureIcon = "FigureChiBaseStatus";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
-	this.description = " ";
-	this.helpUrl = "help/index.html#ChiBase|outline";
-	this.defaultLabel = "New ChiBase";
+	this.description = " This class host all status.";
+	this.helpUrl = "help/index.html#ChiBaseStatus|outline";
+	this.defaultLabel = "New ChiBaseStatus";
 	this.labelProperties = {
 		Name: true
 	};
 
-	this.gridTabIconClass = "ChiBaseTab";
-	this.gridTabTip = "Shows all <b>ChiBase</b> within selected scope";
+	this.gridTabIconClass = "ChiBaseStatusTab";
+	this.gridTabTip = "Shows all <b>ChiBaseStatus</b> within selected scope";
 	this.gridFields = [{
 		name: "oid",
 		mapping: "oid"
@@ -46,19 +46,11 @@ cwm.ChiBaseClass = function() {
 	this.connectionInfo = {};
 }
 
-Ext.extend(cwm.ChiBaseClass, uwm.model.ModelClass);
+Ext.extend( cwm.ChiBaseStatusClass, uwm.model.TechnicalObjectClass );
 
-cwm.ChiBaseClass.prototype.getPropertyForm = function(modelNode) {
+cwm.ChiBaseStatusClass.prototype.getPropertyForm = function(modelNode) {
 	return new uwm.property.PropertyForm({
 		items: [new uwm.property.TextField({
-			fieldLabel: 'Alias',
-			name: 'Alias',
-			modelNode: modelNode
-		}) ,	new uwm.property.TextField({
-			fieldLabel: 'Version',
-			name: 'Version',
-			modelNode: modelNode
-		}) ,	new uwm.property.TextField({
 			fieldLabel: 'Name',
 			name: 'Name',
 			modelNode: modelNode
@@ -66,17 +58,7 @@ cwm.ChiBaseClass.prototype.getPropertyForm = function(modelNode) {
 			fieldLabel: 'Notes',
 			name: 'Notes',
 			modelNode: modelNode
-		}) , 	new uwm.property.ComboBox({
-			fieldLabel: 'Author',
-			name: 'Author',
-			listType: "ChiAuthors",
-			modelNode: modelNode,
-		}), 	new uwm.property.ComboBox({
-			fieldLabel: 'Status',
-			name: 'Status',
-			listType: "ChiBaseStatus",
-			modelNode: modelNode,
-		}),		new uwm.property.TextField({
+		}) ,	new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',
 			modelNode: modelNode,
@@ -95,15 +77,14 @@ cwm.ChiBaseClass.prototype.getPropertyForm = function(modelNode) {
 			fieldLabel: 'modified',
 			name: 'modified',
 			modelNode: modelNode,
-			readOnly: true		}) 
-		]
+			readOnly: true		
+		}) 
+			]
 	});
 }
 
-cwm.ChiBaseClass.prototype.getGraphics = function(label, figure) {
-	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBase.PNG", 96, 95, 96, 95);
+cwm.ChiBaseStatusClass.prototype.getGraphics = function(label, figure) {
+	return new uwm.graphics.figure.ImageFigure(label, figure, "../application/images/ChiBaseStatus.png", 96, 95, 96, 95);
 }
 
-uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBaseClass());
-
-	
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiBaseStatusClass());

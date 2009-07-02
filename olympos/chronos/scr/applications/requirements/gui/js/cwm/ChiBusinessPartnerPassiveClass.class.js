@@ -112,7 +112,7 @@ cwm.ChiBusinessPartnerPassiveClass.prototype.getPropertyForm = function(modelNod
 			fieldLabel: 'Status',
 			toolTip: "state",
 			name: 'Status',
-			listType: "ChiStatus",
+			listType: "ChiBaseStatus",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
 		}),	new uwm.property.TextField({

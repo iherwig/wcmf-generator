@@ -49,7 +49,7 @@ uwm.model.builtin.PackageClass.prototype.getPropertyForm = function(modelNode) {
 		}), new uwm.property.ComboBox({
 			fieldLabel: 'Status',
 			name: 'Status',
-			listType: "ChiStatus",
+			listType: "ChiBaseStatus",
 			modelNode: modelNode,
 		}), new uwm.property.TextField({
 			fieldLabel: uwm.Dict.translate('created'),
