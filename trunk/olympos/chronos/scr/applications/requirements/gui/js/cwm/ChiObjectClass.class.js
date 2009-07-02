@@ -134,7 +134,7 @@ cwm.ChiObjectClass.prototype.getPropertyForm = function(modelNode, isLockedByOth
 			fieldLabel: 'Status',
 			toolTip: "state",
 			name: 'Status',
-			listType: "ChiStatus",
+			listType: "ChiBaseStatus",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
 		})

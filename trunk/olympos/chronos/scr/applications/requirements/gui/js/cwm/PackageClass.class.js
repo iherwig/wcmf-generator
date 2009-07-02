@@ -67,7 +67,7 @@ cwm.PackageClass.prototype.getPropertyForm = function(modelNode) {
 		}), new uwm.property.ComboBox({
 			fieldLabel: 'Status',
 			name: 'Status',
-			listType: "ChiStatus",
+			listType: "ChiBaseStatus",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({

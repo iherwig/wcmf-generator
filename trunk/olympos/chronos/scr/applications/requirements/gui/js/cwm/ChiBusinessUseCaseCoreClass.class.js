@@ -206,7 +206,7 @@ cwm.ChiBusinessUseCaseCoreClass.prototype.getPropertyForm = function(modelNode, 
 			fieldLabel: 'Status',
 			toolTip: "state",
 			name: 'Status',
-			listType: "ChiStatus",
+			listType: "ChiBaseStatus",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
 		}),	new uwm.property.TextField({

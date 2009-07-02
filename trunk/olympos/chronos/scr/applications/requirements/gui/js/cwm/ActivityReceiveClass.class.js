@@ -115,7 +115,7 @@ cwm.ActivityReceiveClass.prototype.getPropertyForm = function(modelNode,
 			fieldLabel: 'Status',
 			toolTip: "",
 			name: 'Status',
-			listType: "ChiStatus",
+			listType: "ChiBaseStatus",
 			modelNode: modelNode,
 			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField( {
