@@ -33,6 +33,8 @@ public class HtmlConverter extends DefaultHandler {
 
 	private boolean paragraphOpen = false;
 	private boolean spanOpen = false;
+	
+	private boolean firstOlLi = false;
 
 	private Stack<String> paragraphClassStack = new Stack<String>();
 	private String paragraphClass;
@@ -226,16 +228,23 @@ public class HtmlConverter extends DefaultHandler {
 			closeParagraph();
 			output
 					.append("<text:list xml:id=\"id001\" text:style-name=\"uwmUl\">");
+			this.firstOlLi = false;
 			paragraphClassStack.push(paragraphClass);
 			paragraphClass = "uwmUlP";
 		} else if (nameLower.equals("ol")) {
 			closeParagraph();
 			output
 					.append("<text:list xml:id=\"id001\" text:style-name=\"uwmOl\">");
+			this.firstOlLi = true;
 			paragraphClassStack.push(paragraphClass);
 			paragraphClass = "uwmOlP";
 		} else if (nameLower.equals("li")) {
-			output.append("<text:list-item>");
+			if (!this.firstOlLi) {
+				output.append("<text:list-item>");
+			} else {
+				output.append("<text:list-item text:start-value=\"1\">");
+				this.firstOlLi = false;
+			}
 		} else if (nameLower.equals("br")) {
 			openSpan();
 			output.append("<text:line-break/>");

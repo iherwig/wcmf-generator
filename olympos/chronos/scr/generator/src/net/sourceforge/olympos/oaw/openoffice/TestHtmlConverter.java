@@ -168,9 +168,16 @@ public class TestHtmlConverter {
 	public void testOrderedListDefault() throws Exception {
 		String result = HtmlConverter.html2openoffice("<ol><li>text1</li><li>text2</li></ol>");
 		
-		assertEquals("<text:list xml:id=\"id001\" text:style-name=\"uwmOl\"><text:list-item><text:p text:style-name=\"uwmOlP\"><text:span text:style-name=\"uwmDefault\">text1</text:span></text:p></text:list-item><text:list-item><text:p text:style-name=\"uwmOlP\"><text:span text:style-name=\"uwmDefault\">text2</text:span></text:p></text:list-item></text:list>", result);
+		assertEquals("<text:list xml:id=\"id001\" text:style-name=\"uwmOl\"><text:list-item text:start-value=\"1\"><text:p text:style-name=\"uwmOlP\"><text:span text:style-name=\"uwmDefault\">text1</text:span></text:p></text:list-item><text:list-item><text:p text:style-name=\"uwmOlP\"><text:span text:style-name=\"uwmDefault\">text2</text:span></text:p></text:list-item></text:list>", result);
 	}
 	
+	@Test
+	public void testOrderedListMultiple() throws Exception {
+		String result = HtmlConverter.html2openoffice("<ol><li>text1</li><li>text2</li></ol><ol><li>text3</li><li>text4</li></ol>");
+		
+		assertEquals("<text:list xml:id=\"id001\" text:style-name=\"uwmOl\"><text:list-item text:start-value=\"1\"><text:p text:style-name=\"uwmOlP\"><text:span text:style-name=\"uwmDefault\">text1</text:span></text:p></text:list-item><text:list-item><text:p text:style-name=\"uwmOlP\"><text:span text:style-name=\"uwmDefault\">text2</text:span></text:p></text:list-item></text:list><text:list xml:id=\"id001\" text:style-name=\"uwmOl\"><text:list-item text:start-value=\"1\"><text:p text:style-name=\"uwmOlP\"><text:span text:style-name=\"uwmDefault\">text3</text:span></text:p></text:list-item><text:list-item><text:p text:style-name=\"uwmOlP\"><text:span text:style-name=\"uwmDefault\">text4</text:span></text:p></text:list-item></text:list>", result);
+	}
+
 	@Test
 	public void testEmpty() throws Exception {
 		String result = HtmlConverter.html2openoffice("");
