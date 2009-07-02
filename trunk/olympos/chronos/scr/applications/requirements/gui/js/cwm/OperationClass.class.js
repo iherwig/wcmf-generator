@@ -90,20 +90,6 @@ cwm.OperationClass.prototype.getPropertyForm = function(modelNode, isLockedByOth
 		    modelNode : modelNode,
 		    
 		    readOnly : isLockedByOtherUser
-		}), new uwm.property.ComboBox({
-			fieldLabel: 'Author',
-			toolTip: "This operation's author's name and role in the project",
-			name: 'Author',
-			listType: "ChiAuthors",
-			modelNode: modelNode,
-			disabled : isLockedByOtherUser
-		}), new uwm.property.ComboBox({
-			fieldLabel: 'Status',
-			toolTip: "state",
-			name: 'Status',
-			listType: "ChiBaseStatus",
-			modelNode: modelNode,
-			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField( {
 		    fieldLabel : 'created',
 		    toolTip : "the creation date of this object",
