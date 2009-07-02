@@ -237,7 +237,7 @@ class UWMDocExporterController extends BatchController
 
 		//header('Content-type: text/plain');
 		header('Content-type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="cwm-documentation-export.' . $exportFormat . '"');
+		header('Content-Disposition: attachment; filename="cwm-documentation-export.'.$session->get($this->PARAM_EXPORT_FORMAT).'"');
 	
 		readfile($exportFile);
 		$this->check('File written to output');
