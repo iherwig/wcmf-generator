@@ -92,12 +92,13 @@ cwm.ChiWorkerExternalClass.prototype.getPropertyForm = function(modelNode, isLoc
 			name: 'Notes',
 			modelNode: modelNode,
 			readOnly: isLockedByOtherUser
-		}), new uwm.property.TextField({
+		}), new uwm.property.Checkbox({
 			fieldLabel: 'is_OfflineUser',
 			toolTip: "",
 			name: 'is_OfflineUser',
 			modelNode: modelNode,
-			readOnly: isLockedByOtherUser
+			stateful : true,
+			disabled : isLockedByOtherUser
 		}), new uwm.property.TextField({
 			fieldLabel: 'Alias',
 			toolTip: "the Project Id of this object.",
