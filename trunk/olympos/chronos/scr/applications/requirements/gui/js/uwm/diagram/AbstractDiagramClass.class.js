@@ -49,16 +49,6 @@ uwm.diagram.AbstractDiagramClass.prototype.getPropertyForm = function(modelNode)
 			fieldLabel: 'Height',
 			name: 'Height',
 			modelNode: modelNode
-		}), new uwm.property.ComboBox({
-			fieldLabel: 'Author',
-			name: 'Author',
-			listType: "ChiAuthors",
-			modelNode: modelNode,
-		}), new uwm.property.ComboBox({
-			fieldLabel: 'Status',
-			name: 'Status',
-			listType: "ChiBaseStatus",
-			modelNode: modelNode,
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',
 			name: 'created',

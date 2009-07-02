@@ -41,16 +41,6 @@ uwm.model.builtin.PackageClass.prototype.getPropertyForm = function(modelNode) {
 			fieldLabel: uwm.Dict.translate('Notes'),
 			name: 'Notes',
 			modelNode: modelNode
-		}), new uwm.property.ComboBox({
-			fieldLabel: 'Author',
-			name: 'Author',
-			listType: "ChiAuthors",
-			modelNode: modelNode,
-		}), new uwm.property.ComboBox({
-			fieldLabel: 'Status',
-			name: 'Status',
-			listType: "ChiBaseStatus",
-			modelNode: modelNode,
 		}), new uwm.property.TextField({
 			fieldLabel: uwm.Dict.translate('created'),
 			name: 'created',
