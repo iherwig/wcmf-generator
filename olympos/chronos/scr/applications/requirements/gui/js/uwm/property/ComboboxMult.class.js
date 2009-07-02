@@ -19,7 +19,8 @@ Ext.namespace("uwm.property");
  * @param {Object} config The configuration object.
  */
 uwm.property.ComboboxMult = function(config) {
-
+	var self = this;
+	
 	sts = new Ext.data.SimpleStore({
 		fields: ['key', 'val'],
 		data : [[0,""], ["1", "One"], ["2", "Two"], ["3", "Three"], ["4", "Four"], ["5", "Five"],
