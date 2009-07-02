@@ -405,11 +405,11 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
       if (PersistenceFacade::isValidOID($childOID) && PersistenceFacade::getOIDParameter($childOID, 'type') == '«curChildParent.type.name»')
       {
         // for every «curChildParent.type.name» we have to delete the «curChild.type.name»
-        // set childOID parameter to the «curChild.type.name»'s object id and prodeed with default behaviour
+        // set childOID parameter to the «curChild.type.name»'s object id and proceed with default behaviour
         // check if the connection child is loaded already
         $ids = PersistenceFacade::getOIDParameter($childOID, 'id');
-        $associationNodeConstraint = array('«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID(), '«curChildParent.getFKName()»' => $ids[0]));
-        $associationNode = &$this->getFirstChild('«curChild.type.name»', $associationNodeConstraint, null);
+        $associationNodeConstraint = array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID(), '«curChildParent.getFKName()»' => $ids[0]);
+        $associationNode = &$this->getFirstChild('«curChild.type.name»', $associationNodeConstraint, null, false);
         if ($associationNode != null)
           $childOID = $associationNode->getOID();
         else
