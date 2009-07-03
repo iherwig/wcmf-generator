@@ -48,7 +48,7 @@ chi.persistency.Persistency.prototype.logout = function(successHandler, errorHan
 	throw "Method chi.persistency.Persistency.logout not implemented by current persistency adapter.";
 }
 
-chi.persistency.Persistency.prototype.list = function(cweModelElementId, limit, offset, successHandler, errorHandler) {
+chi.persistency.Persistency.prototype.list = function(cweModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.list not implemented by current persistency adapter.";
 }
 

@@ -27,43 +27,45 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 	initComponent : function() {
 		var self = this;
 		
+		this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(chi.Util.getCweModelElementIdFromOid(this.oid));
+		
 		this.saveButton = new Ext.Toolbar.Button( {
-		    text : chi.Dict.translate("Save"),
-		    iconCls : "saveButton",
-		    handler : function() {
-			    self.save();
-		    }
+			text : chi.Dict.translate("Save"),
+			iconCls : "saveButton",
+			handler : function() {
+				self.save();
+			}
 		});
 		
 		this.cancelButton = new Ext.Toolbar.Button( {
-		    text : chi.Dict.translate("Cancel"),
-		    iconCls : "cancelButton",
-		    handler : function() {
-			    self.cancel();
-		    }
+			text : chi.Dict.translate("Cancel"),
+			iconCls : "cancelButton",
+			handler : function() {
+				self.cancel();
+			}
 		});
 		
 		Ext.apply(this, {
-		    iconCls : this.record.getModelClass().getTreeIconClass(),
-		    closable : true,
-		    title : this.record.getLabel(),
-		    frame : true,
-		    autoScroll : true,
-		    labelAlign : "left",
-		    labelWidth : 90,
-		    tbar : [ this.saveButton, this.cancelButton ],
-		    items : this.record.getModelClass().getEditorItems(),
-		    msgTarget : "side"
+			iconCls : this.modelClass.getTreeIconClass(),
+			closable : true,
+			frame : true,
+			autoScroll : true,
+			labelAlign : "left",
+			labelWidth : 90,
+			tbar : [ this.saveButton, this.cancelButton ],
+			items : this.modelClass.getEditorItems(),
+			msgTarget : "side"
 		});
 		
 		cwe.editor.Editor.superclass.initComponent.apply(this, arguments);
 		
 		this.on("afterlayout", function(editor, layout) {
-			self.getForm().loadRecord(this.record);
 			self.doLayout();
 		}, undefined, {
 			single : true
 		});
+		
+		this.loadFromOid(this.oid);
 	}
 })
 
@@ -75,4 +77,13 @@ cwe.editor.Editor.prototype.save = function() {
 cwe.editor.Editor.prototype.cancel = function() {
 	this.record.reject();
 	this.getForm().loadRecord(this.record);
+}
+
+cwe.editor.Editor.prototype.loadFromOid = function(oid) {
+	var self = this;
+	
+	chi.persistency.Persistency.getInstance().load(oid, 1, function(data) {
+		self.rawRecords = data.records;
+		self.getForm().loadRecord(data.records[data.oid]);
+	});
 }

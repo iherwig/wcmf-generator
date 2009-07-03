@@ -12,12 +12,17 @@
 Ext.namespace("cwe.model");
 
 cwe.model.ModelRecord = function(modelClass, data) {
+	// FIXME: Temporary workaround as long as not all model elements exist
+	if (!modelClass) {
+		modelClass = cwe.model.ModelClassContainer.getInstance().getClass("ChiGoal");
+	}
+	
 	var template = Ext.data.Record.create(modelClass.getRecordDefinition());
 	
 	var result = new template(data);
 	result.modelClass = modelClass;
 	
-	for(var currElem in this) {
+	for ( var currElem in this) {
 		result[currElem] = this[currElem];
 	}
 	

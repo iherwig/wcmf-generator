@@ -61,14 +61,15 @@ cwe.editor.EditorContainer.prototype.tabClose = function(tabPanel, tab) {
 	}
 }
 
-cwe.editor.EditorContainer.prototype.loadOrShow = function(record) {
-	var editor = this.editors.get(record.getOid());
+cwe.editor.EditorContainer.prototype.loadOrShow = function(oid, label) {
+	var editor = this.editors.get(oid);
 	
 	if (!editor) {
 		editor = new cwe.editor.Editor({
-			record : record
+			oid : oid,
+			title: label
 		});
-		this.editors.add(record.getOid(), editor);
+		this.editors.add(oid, editor);
 		this.add(editor);
 	}
 	
