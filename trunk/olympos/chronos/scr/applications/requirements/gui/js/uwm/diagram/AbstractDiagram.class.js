@@ -462,7 +462,7 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					nmtype = true;
 					
 					//FIXME: workaround from parentOids.length to 2 parent oids, due to wCMF error (Bug id )
-					for ( var j = 0; j < 2; j++) {
+					for ( var j = 0; j < Math.min(2, parentOids.length); j++) {
 						var currParentOid = parentOids[j];
 						
 						if (currParentOid != newObject.getOid()) {
