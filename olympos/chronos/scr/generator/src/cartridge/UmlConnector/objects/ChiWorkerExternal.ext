@@ -30,6 +30,8 @@ Void transferValues(cwm::ChiWorkerExternal w, uml::Model um):
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiWorkerExternal") ->
 			uc.setTaggedValue("Chronos::ChiWorkerExternal", "is_OfflineUser", w.isOfflineUser) ->
+			uc.setTaggedValue("Chronos::ChiWorkerExternal", "Author", w.author) ->
+			uc.setTaggedValue("Chronos::ChiWorkerExternal", "Status", w.status) ->
 			uc.setTaggedValue("Chronos::ChiWorkerExternal", "Alias", w.alias) ->
 			uc.setTaggedValue("Chronos::ChiWorkerExternal", "Version", w.version) ->
 			uc.setName(w.name) ->
@@ -50,6 +52,8 @@ cwm::ChiWorkerExternal convertToCwm(Chronos::ChiWorkerExternal c) :
 	let un = new cwm::ChiWorkerExternal : (
 		un.setId(c.getId()) ->
 		un.setIsOfflineUser(c.getValue(c.getAppliedStereotype("Chronos::ChiWorkerExternal"), "is_OfflineUser")) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiWorkerExternal", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiWorkerExternal", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiWorkerExternal", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiWorkerExternal", "Version").toString()) ->
 		un.setName(c.name) ->

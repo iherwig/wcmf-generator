@@ -35,6 +35,8 @@ Void transferValues(cwm::ActivityInitial c, uml::Model um):
 			) : Void
 	/*
 			uc.applyStereotype("Chronos::ActivityInitial") ->
+			uc.setTaggedValue("Chronos::ActivityInitial", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ActivityInitial", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ActivityInitial", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ActivityInitial", "Version", c.version) ->
 	
@@ -53,6 +55,8 @@ cwm::ActivityInitial convertToCwm(uml::InitialNode c) :
 		un.setName(c.name) ->
 		un.setNotes(c.getComment()) ->
 /*
+		un.setAuthor(c.getTaggedValue("Chronos::ActivityInitial", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ActivityInitial", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ActivityInitial", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ActivityInitial", "Version").toString()) ->
 

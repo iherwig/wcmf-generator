@@ -28,6 +28,7 @@ Void transferValues(cwm::ChiIssue i, uml::Model um):
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiIssue") ->
 			uc.setTaggedValue("Chronos::ChiIssue", "Author", i.author) ->
+			uc.setTaggedValue("Chronos::ChiIssue", "Status", i.status) ->
 			uc.setTaggedValue("Chronos::ChiIssue", "Responsible", i.responsible) ->
 			uc.setTaggedValue("Chronos::ChiIssue", "Alias", i.alias) ->
 			uc.setTaggedValue("Chronos::ChiIssue", "Version", i.version) ->
@@ -49,6 +50,7 @@ cwm::ChiIssue convertToCwm(Chronos::ChiIssue c) :
 	let un = new cwm::ChiIssue : (
 		un.setId(c.getId()) ->
 		un.setAuthor(c.getTaggedValue("Chronos::ChiIssue", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiIssue", "Status").toString()) ->
 		un.setResponsible(c.getTaggedValue("Chronos::ChiIssue", "Responsible").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiIssue", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiIssue", "Version").toString()) ->

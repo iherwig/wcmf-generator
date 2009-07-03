@@ -46,9 +46,12 @@ Void transferValues(cwm::ChiNode c, uml::Model um):
 			uc.setTaggedValue("Chronos::ChiNode", "parent_order", c.parentOrder) ->
 			uc.setTaggedValue("Chronos::ChiNode", "child_order", c.childOrder) ->
 			uc.setTaggedValue("Chronos::ChiNode", "display_value", c.displayValue) ->
+			//uc.setTaggedValue("Chronos::ChiNode", "is_ordered", c.isOrdered == "true") ->
 			//uc.setTaggedValue("Chronos::ChiNode", "is_soap", c.isSoap == "true") ->
 			//uc.setTaggedValue("Chronos::ChiNode", "is_searchable", c.isSearchable == "true") ->
 			uc.setTaggedValue("Chronos::ChiNode", "initparams", c.initparams) ->
+			uc.setTaggedValue("Chronos::ChiNode", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ChiNode", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ChiNode", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ChiNode", "Version", c.version) ->
 			uc.setName(c.name) ->
@@ -77,9 +80,12 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 		un.setParentOrder(c.getTaggedValue("Chronos::ChiNode", "parent_order").toString()) ->
 		un.setChildOrder(c.getTaggedValue("Chronos::ChiNode", "Child_order").toString()) ->
 		un.setDisplayValue(c.getTaggedValue("Chronos::ChiNode", "display_value").toString()) ->
+		//un.setIsOrdered(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_ordered")) ->
 		//un.setIsSoap(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_soap")) ->
 		//un.setIsSearchable(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_searchable")) ->
 		un.setInitparams(c.getTaggedValue("Chronos::ChiNode", "initparams").toString()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiNode", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiNode", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiNode", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiNode", "Version").toString()) ->
 		un.setName(c.name) ->

@@ -31,6 +31,8 @@ Void transferValues(cwm::ChiBusinessPartner c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiBusinessPartner:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiBusinessPartner") ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartner", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartner", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ChiBusinessPartner", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ChiBusinessPartner", "Version", c.version) ->
 			uc.setName(c.name) ->
@@ -50,6 +52,8 @@ Void transferValues(cwm::ChiBusinessPartner c, uml::Model um):
 cwm::ChiBusinessPartner convertToCwm(Chronos::ChiBusinessPartner c) :
 	let un = new cwm::ChiBusinessPartner : (
 		un.setId(c.getId()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiBusinessPartner", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiBusinessPartner", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiBusinessPartner", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiBusinessPartner", "Version").toString()) ->
 		un.setName(c.name) ->

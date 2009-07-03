@@ -20,6 +20,8 @@ Void transferValues(cwm::ChiSystem c, uml::Model um):
 			uc.applyStereotype("Chronos::ChiSystem") ->
 			uc.setTaggedValue("Chronos::ChiSystem", "plattform", c.plattform) ->
 			uc.setTaggedValue("Chronos::ChiSystem", "config", c.config) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ChiSystem", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ChiSystem", "Version", c.version) ->
 			uc.setName(c.name) ->
@@ -41,6 +43,8 @@ cwm::ChiSystem convertToCwm(Chronos::ChiSystem c) :
 		un.setId(c.getId()) ->
 		un.setPlattform(c.getTaggedValue("Chronos::ChiSystem", "plattform").toString()) ->
 		un.setConfig(c.getTaggedValue("Chronos::ChiSystem", "config").toString()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiSystem", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiSystem", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiSystem", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiSystem", "Version").toString()) ->
 		un.setName(c.name) ->

@@ -34,6 +34,8 @@ Void transferValues(cwm::ActivitySend c, uml::Model um):
 			) : Void
 	/*
 			uc.applyStereotype("Chronos::ActivitySend") ->
+			uc.setTaggedValue("Chronos::ActivitySend", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ActivitySend", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ActivitySend", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ActivitySend", "Version", c.version) ->
 	
@@ -52,6 +54,8 @@ cwm::ActivitySend convertToCwm(uml::SendSignalAction c) :
 		un.setName(c.name) ->
 		un.setNotes(c.getComment()) ->
 /*
+		un.setAuthor(c.getTaggedValue("Chronos::ActivitySend", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ActivitySend", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ActivitySend", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ActivitySend", "Version").toString()) ->
 

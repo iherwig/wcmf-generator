@@ -41,6 +41,8 @@ Void transferValues(cwm::Activity c, uml::Model um):
 			) : Void
 	/*
 			uc.applyStereotype("Chronos::Activity") ->
+			uc.setTaggedValue("Chronos::Activity", "Status", c.status) ->
+			uc.setTaggedValue("Chronos::Activity", "Author", c.author) ->
 			uc.setTaggedValue("Chronos::Activity", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::Activity", "Version", c.version) ->
 	
@@ -60,6 +62,8 @@ cwm::Activity convertToCwm(uml::OpaqueAction c) :
 		un.setName(c.name) ->
 		un.setNotes(c.getComment()) ->
 /*
+		un.setAuthor(c.getTaggedValue("Chronos::Activity", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::Activity", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::Activity", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::Activity", "Version").toString()) ->
 

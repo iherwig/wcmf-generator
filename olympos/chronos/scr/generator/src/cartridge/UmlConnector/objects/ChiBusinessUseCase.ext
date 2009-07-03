@@ -46,6 +46,8 @@ Void transferValues(cwm::ChiBusinessUseCase b, uml::Model um):
 			uc.setTaggedValue("Chronos::ChiBusinessUseCase", "Stakeholders", b.stakeholders) ->
 			uc.setTaggedValue("Chronos::ChiBusinessUseCase", "MainSuccessScenario", b.mainSuccessScenario) ->
 			uc.setTaggedValue("Chronos::ChiBusinessUseCase", "Extensions", b.extensions) ->
+			uc.setTaggedValue("Chronos::ChiBusinessUseCase", "Author", b.author) ->
+			uc.setTaggedValue("Chronos::ChiBusinessUseCase", "Status", b.status) ->
 			uc.setTaggedValue("Chronos::ChiBusinessUseCase", "Alias", b.alias) ->
 			uc.setTaggedValue("Chronos::ChiBusinessUseCase", "Version", b.version) ->
 			uc.setName(b.name) ->
@@ -77,6 +79,8 @@ cwm::ChiBusinessUseCase convertToCwm(Chronos::ChiBusinessUseCase c) :
 		un.setStakeholders(c.getTaggedValue("Chronos::ChiBusinessUseCase", "Stakeholders").toString()) ->
 		un.setMainSuccessScenario(c.getTaggedValue("Chronos::ChiBusinessUseCase", "MainSuccessScenario").toString()) ->
 		un.setExtensions(c.getTaggedValue("Chronos::ChiBusinessUseCase", "Extensions").toString()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiBusinessUseCase", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiBusinessUseCase", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiBusinessUseCase", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiBusinessUseCase", "Version").toString()) ->
 		un.setName(c.name) ->

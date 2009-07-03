@@ -29,6 +29,8 @@ Void transferValues(cwm::ChiBusinessPartnerPassive c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiBusinessPartnerPassive:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiBusinessPartnerPassive") ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerPassive", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerPassive", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ChiBusinessPartnerPassive", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ChiBusinessPartnerPassive", "Version", c.version) ->
 			uc.setName(c.name) ->
@@ -48,6 +50,8 @@ Void transferValues(cwm::ChiBusinessPartnerPassive c, uml::Model um):
 cwm::ChiBusinessPartnerPassive convertToCwm(Chronos::ChiBusinessPartnerPassive c) :
 	let un = new cwm::ChiBusinessPartnerPassive : (
 		un.setId(c.getId()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiBusinessPartnerPassive", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiBusinessPartnerPassive", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiBusinessPartnerPassive", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiBusinessPartnerPassive", "Version").toString()) ->
 		un.setName(c.name) ->
