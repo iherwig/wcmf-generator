@@ -20,7 +20,8 @@ cwe.model.ModelStore = function(config) {
 		proxy : new cwe.model.ModelProxy( {
 			modelClass : this.modelClass
 		}),
-		fields : exampleRecord.fields
+		fields : exampleRecord.fields,
+		remoteSort: true
 	}, config));
 }
 

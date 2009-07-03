@@ -33,7 +33,7 @@ cwe.model.ModelProxy.prototype.load = function(params, reader, callback, scope, 
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
-		chi.persistency.Persistency.getInstance().list(this.modelClass.getId(), undefined, undefined, function(data) {
+		chi.persistency.Persistency.getInstance().list(this.modelClass.getId(), params.limit, params.start, params.sort, params.dir, function(data) {
 			self.loadResponse(params, data, callback, scope, arg);
 		}, function(data, errorMsg) {
 			self.loadFailed(params, data, errorMsg, callback, scope, arg)
@@ -47,7 +47,7 @@ cwe.model.ModelProxy.prototype.loadResponse = function(params, data, callback, s
 	var result = {
 		success : true,
 		records : data.records,
-		totalRecords : data.records.length
+		totalRecords : data.totalCount
 	};
 	
 	this.fireEvent("load", this, params, arg);

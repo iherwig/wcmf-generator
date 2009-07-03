@@ -52,6 +52,14 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 			modelClass : this.modelClass
 		});
 		
+		this.pagingBar = new Ext.PagingToolbar( {
+			pageSize : 25,
+			store : this.store,
+			displayInfo : true,
+			displayMsg : chi.Dict.translate("Displaying objects {0} &ndash; {1} of {2}"),
+			emptyMsg : chi.Dict.translate("No objects to display")
+		});
+		
 		Ext.apply(this, {
 			region : "north",
 			height : 250,
@@ -66,29 +74,31 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 				text : chi.Dict.translate("Delete"),
 				iconCls : "deleteButton"
 			}) ],
+			loadMask : true,
 			selModel : new Ext.grid.RowSelectionModel( {
 				singleSelect : true
 			}),
 			columns : [ {
 				header : "Name",
-				dataIndex: "Name",
+				dataIndex : "Name",
 				width : 100,
 				sortable : true
 			}, {
 				header : "Notes",
-				dataIndex: "Notes",
+				dataIndex : "Notes",
 				width : 100,
 				sortable : true
 			}, {
 				header : "ValueAmount",
-				dataIndex: "value_ammount",
+				dataIndex : "value_ammount",
 				width : 100,
 				sortable : true
 			} ],
 			store : this.store,
 			viewConfig : {
 				forceFit : true
-			}
+			},
+			bbar : this.pagingBar
 		});
 		
 		cwe.modelgrid.ModelGrid.superclass.initComponent.apply(this, arguments);
@@ -99,7 +109,12 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 			self.openEditor(grid, rowIndex, e);
 		});
 		
-		this.store.load();
+		this.store.load( {
+			params : {
+				start : 0,
+				limit : 25
+			}
+		});
 	}
 });
 
@@ -107,5 +122,5 @@ cwe.modelgrid.ModelGrid.prototype.openEditor = function(grid, rowIndex, e) {
 	var store = this.getStore();
 	var record = store.getAt(rowIndex);
 	
-	this.editors.loadOrShow(record);
+	this.editors.loadOrShow(record.getOid(), record.getLabel());
 }

@@ -172,6 +172,27 @@ cwe.Cwe.prototype.installOverrides = function() {
 			this.originalValue = this.getValue();
 		}
 	});
+	
+	Ext.apply(Ext.EventObject, {
+		within : navigator.userAgent.match(/firefox\/((\d+\.)+\d+)/i)[1] >= 3.5 ? function(el, related, allowEl) {
+			try {
+				if (el) {
+					var t = this[related ? "getRelatedTarget" : "getTarget"]();
+					return t && ((allowEl ? (t == Ext.getDom(el)) : false) || Ext.fly(el).contains(t));
+				}
+			}
+			catch (e) {
+			}
+			return false;
+		} : function(el, related, allowEl) {
+			if (el) {
+				var t = this[related ? "getRelatedTarget" : "getTarget"]();
+				return t && ((allowEl ? (t == Ext.getDom(el)) : false) || Ext.fly(el).contains(t));
+			}
+			return false;
+		}
+	});
+	
 }
 
 cwe.Cwe.getInstance = function() {

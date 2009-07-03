@@ -110,15 +110,17 @@ chi.persistency.WcmfJson.prototype.readObject = function(data) {
 chi.persistency.WcmfJson.prototype.groupOidList = function(list) {
 	var result = {};
 	
-	for ( var i = 0; i < list.length; i++) {
-		var currOid = list[i];
-		var currCweModelElementId = chi.Util.getCweModelElementIdFromOid(currOid);
-		
-		if (!result[currCweModelElementId]) {
-			result[currCweModelElementId] = [];
+	if (list) {
+		for ( var i = 0; i < list.length; i++) {
+			var currOid = list[i];
+			var currCweModelElementId = chi.Util.getCweModelElementIdFromOid(currOid);
+			
+			if (!result[currCweModelElementId]) {
+				result[currCweModelElementId] = [];
+			}
+			
+			result[currCweModelElementId].push(currOid);
 		}
-		
-		result[currCweModelElementId].push(currOid);
 	}
 	
 	return result;
@@ -155,8 +157,8 @@ chi.persistency.WcmfJson.prototype.login = function(user, password, successHandl
 
 chi.persistency.WcmfJson.prototype.loginRecordHandler = function(handler, options, data) {
 	return {
-		user : options.login,
-		password : options.password,
+		user : options.params.login,
+		password : options.params.password,
 		sid : data.sid
 	};
 }
@@ -171,12 +173,14 @@ chi.persistency.WcmfJson.prototype.logoutRecordHandler = function(handler, optio
 	return {};
 }
 
-chi.persistency.WcmfJson.prototype.list = function(cweModelElementId, limit, offset, successHandler, errorHandler) {
+chi.persistency.WcmfJson.prototype.list = function(cweModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
 	this.jsonRequest( {
 		usr_action : "list",
 		type : cweModelElementId,
 		limit : limit,
-		start : offset
+		start : offset,
+		sort : sortAttributeName,
+		dir : sortDirection
 	}, successHandler, errorHandler, this.listRecordHandler);
 }
 
@@ -188,10 +192,13 @@ chi.persistency.WcmfJson.prototype.listRecordHandler = function(handler, options
 	}
 	
 	return {
-		cweModelElementId : options.type,
-		limit : options.limit,
-		offset : options.start,
-		records : records
+		cweModelElementId : options.params.type,
+		limit : options.params.limit,
+		offset : options.params.start,
+		sortAttributeName : options.params.sort,
+		sortDirection : options.params.dir,
+		records : records,
+		totalCount : data.totalCount
 	};
 }
 
@@ -238,8 +245,8 @@ chi.persistency.WcmfJson.prototype.loadRecordHandler = function(handler, options
 	}
 	
 	return {
-		oid : options.oid,
-		depth : options.depth,
+		oid : options.params.oid,
+		depth : options.params.depth,
 		records : records
 	};
 }
@@ -264,8 +271,8 @@ chi.persistency.WcmfJson.prototype.save = function(oid, values, successHandler, 
 
 chi.persistency.WcmfJson.prototype.saveRecordHandler = function(handler, options, data) {
 	return {
-		oid : options.oid,
-		values : options.values[1]
+		oid : options.params.oid,
+		values : options.params.values[1]
 	};
 }
 
@@ -283,8 +290,8 @@ chi.persistency.WcmfJson.prototype.create = function(cweModelElementId, values, 
 
 chi.persistency.WcmfJson.prototype.createRecordHandler = function(handler, options, data) {
 	return {
-		cweModelElementId : options.newtype,
-		values : options.values[1],
+		cweModelElementId : options.params.newtype,
+		values : options.params.values[1],
 		newOid : data.oid
 	};
 }
@@ -298,7 +305,7 @@ chi.persistency.WcmfJson.prototype.destroy = function(oid, successHandler, error
 
 chi.persistency.WcmfJson.prototype.destroyRecordHandler = function(handler, options, data) {
 	return {
-		oid : options.deleteoids
+		oid : options.params.deleteoids
 	};
 }
 
@@ -314,9 +321,9 @@ chi.persistency.WcmfJson.prototype.associate = function(parentOid, childOid, rol
 
 chi.persistency.WcmfJson.prototype.associateRecordHandler = function(handler, options, data) {
 	return {
-		parentOid : options.oid,
-		childOid : options.associateoids,
-		role : options.role
+		parentOid : options.params.oid,
+		childOid : options.params.associateoids,
+		role : options.params.role
 	};
 }
 
@@ -331,9 +338,9 @@ chi.persistency.WcmfJson.prototype.disassociate = function(parentOid, childOid, 
 
 chi.persistency.WcmfJson.prototype.disassociateRecordHandler = function(handler, options, data) {
 	return {
-		parentOid : options.oid,
-		childOid : options.associateoids,
-		role : options.role
+		parentOid : options.params.oid,
+		childOid : options.params.associateoids,
+		role : options.params.role
 	};
 }
 
@@ -346,7 +353,7 @@ chi.persistency.WcmfJson.prototype.lock = function(oid, successHandler, errorHan
 
 chi.persistency.WcmfJson.prototype.lockRecordHandler = function(handler, options, data) {
 	return {
-		oid : options.oid
+		oid : options.params.oid
 	};
 }
 
@@ -359,7 +366,7 @@ chi.persistency.WcmfJson.prototype.unlock = function(oid, successHandler, errorH
 
 chi.persistency.WcmfJson.prototype.unlockRecordHandler = function(handler, options, data) {
 	return {
-		oid : options.oid
+		oid : options.params.oid
 	};
 }
 
@@ -381,8 +388,8 @@ chi.persistency.WcmfJson.prototype.log = function(logtype, message, successHandl
 
 chi.persistency.WcmfJson.prototype.logRecordHandler = function(handler, options, data) {
 	return {
-		logtype : options.logtype,
-		message : options.msg
+		logtype : options.params.logtype,
+		message : options.params.msg
 	};
 }
 
