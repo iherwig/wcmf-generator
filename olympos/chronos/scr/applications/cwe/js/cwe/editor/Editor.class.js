@@ -70,13 +70,18 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 })
 
 cwe.editor.Editor.prototype.save = function() {
-	this.getForm().updateRecord(this.record);
-	this.record.commit();
+	var record = this.getRecord(); 
+	
+	this.getForm().updateRecord(record);
+	record.commit();
 }
 
 cwe.editor.Editor.prototype.cancel = function() {
-	this.record.reject();
-	this.getForm().loadRecord(this.record);
+	this.getForm().loadRecord(this.getRecord());
+}
+
+cwe.editor.Editor.prototype.getRecord = function() {
+	return this.rawRecords[this.oid];
 }
 
 cwe.editor.Editor.prototype.loadFromOid = function(oid) {

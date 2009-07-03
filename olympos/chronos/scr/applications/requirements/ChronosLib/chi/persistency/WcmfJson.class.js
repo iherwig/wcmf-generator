@@ -26,7 +26,7 @@ Ext.extend(chi.persistency.WcmfJson, chi.persistency.Persistency);
 
 chi.persistency.WcmfJson.prototype.jsonRequest = function(params, successHandler, errorHandler, getRecordHandler) {
 	params.sid = this.getSid();
-	params.request_format = "JSON";
+	//params.request_format = "JSON";
 	params.response_format = "JSON";
 	
 	var self = this;
@@ -252,27 +252,44 @@ chi.persistency.WcmfJson.prototype.loadRecordHandler = function(handler, options
 }
 
 chi.persistency.WcmfJson.prototype.save = function(oid, values, successHandler, errorHandler) {
-	var changeNode = {};
+
+	/*
+	var request = {};
 	
-	changeNode.usr_action = "save";
-	changeNode.oid = oid;
-	changeNode.type = chi.Util.getCweModelElementIdFromOid(oid);
-	changeNode.values = {};
-	changeNode.values[1] = {};
+	request.usr_action = "save";
+
+	var node = {};
+	
+	node.oid = oid;
+	node.type = chi.Util.getCweModelElementIdFromOid(oid);
+	node.values = {};
+	node.values[1] = {};
 	
 	for ( var i in values) {
 		if (!(values[i] instanceof Function)) {
-			changeNode.values[1][i] = values[i];
+			node.values[1][i] = values[i];
 		}
 	}
 	
-	this.jsonRequest(changeNode, successHandler, errorHandler, this.saveRecordHandler);
+	request[oid] = Ext.util.JSON.encode(node);
+	*/
+	var data = {
+			usr_action: "save"
+		};
+		
+		for (var i in values) {
+			if (!(values[i] instanceof Function)) {
+				data["value--" + i + "-" + oid] = values[i];
+			}
+		}
+	
+	this.jsonRequest(data, successHandler, errorHandler, this.saveRecordHandler);
 }
 
 chi.persistency.WcmfJson.prototype.saveRecordHandler = function(handler, options, data) {
 	return {
-		oid : options.params.oid,
-		values : options.params.values[1]
+		//oid : options.params.oid,
+		//values : options.params.values[1]
 	};
 }
 
