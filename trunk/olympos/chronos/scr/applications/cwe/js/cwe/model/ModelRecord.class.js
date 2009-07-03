@@ -42,3 +42,13 @@ cwe.model.ModelRecord.prototype.getOid = function() {
 cwe.model.ModelRecord.prototype.getLabel = function() {
 	return this.get("Name");
 }
+
+cwe.model.ModelRecord.prototype.commit = function(silent, activitySet) {
+	if (this.dirty) {
+		var changedFields = this.getChanges();
+		
+		chi.persistency.Persistency.getInstance().save(this.getOid(), changedFields);
+	}
+	
+	this.dirty = false;
+}
