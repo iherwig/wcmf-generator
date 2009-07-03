@@ -25,6 +25,8 @@ Void transferValues(cwm::ActivityReceive c, uml::Model um):
 			) : Void
 	/*
 			uc.applyStereotype("Chronos::ActivityReceive") ->
+			uc.setTaggedValue("Chronos::ActivityReceive", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ActivityReceive", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ActivityReceive", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ActivityReceive", "Version", c.version) ->
 	
@@ -43,6 +45,8 @@ cwm::ActivityReceive convertToCwm(uml::AcceptEventAction c) :
 		un.setName(c.name) ->
 		un.setNotes(c.getComment())
 /*
+		un.setAuthor(c.getTaggedValue("Chronos::ActivityReceive", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ActivityReceive", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ActivityReceive", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ActivityReceive", "Version").toString()) ->
 

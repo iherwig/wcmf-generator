@@ -34,6 +34,8 @@ Void transferValues(cwm::ChiBusinessProcess b, uml::Model um):
 			b.chiBusinessUseCaseCore.transferValues(um) ->
 	
 			uc.applyStereotype("Chronos::ChiBusinessProcess") ->
+			uc.setTaggedValue("Chronos::ChiBusinessProcess", "Author", b.author) ->
+			uc.setTaggedValue("Chronos::ChiBusinessProcess", "Status", b.status) ->
 			uc.setTaggedValue("Chronos::ChiBusinessProcess", "Alias", b.alias) ->
 			uc.setTaggedValue("Chronos::ChiBusinessProcess", "Version", b.version) ->
 			uc.setName(b.name) ->
@@ -53,6 +55,8 @@ Void transferValues(cwm::ChiBusinessProcess b, uml::Model um):
 cwm::ChiBusinessProcess convertToCwm(Chronos::ChiBusinessProcess c) :
 	let un = new cwm::ChiBusinessProcess : (
 		un.setId(c.getId()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiBusinessProcess", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiBusinessProcess", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiBusinessProcess", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiBusinessProcess", "Version").toString()) ->
 		un.setName(c.name) ->

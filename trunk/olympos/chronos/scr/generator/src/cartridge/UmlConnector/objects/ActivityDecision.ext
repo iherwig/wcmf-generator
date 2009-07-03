@@ -34,6 +34,8 @@ Void transferValues(cwm::ActivityDecision c, uml::Model um):
 			) : Void
 	/*
 			uc.applyStereotype("Chronos::ActivityDecision") ->
+			uc.setTaggedValue("Chronos::ActivityDecision", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ActivityDecision", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ActivityDecision", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ActivityDecision", "Version", c.version) ->
 	
@@ -52,6 +54,8 @@ cwm::ActivityDecision convertToCwm(uml::DecisionNode c) :
 		un.setName(c.name) ->
 		un.setNotes(c.getComment()) ->
 /*
+		un.setAuthor(c.getTaggedValue("Chronos::ActivityDecision", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ActivityDecision", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ActivityDecision", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ActivityDecision", "Version").toString()) ->
 

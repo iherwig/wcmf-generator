@@ -18,6 +18,8 @@ Void transferValues(cwm::ChiView c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiView:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiView") ->
+			uc.setTaggedValue("Chronos::ChiView", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ChiView", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ChiView", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ChiView", "Version", c.version) ->
 			uc.setName(c.name) ->
@@ -37,6 +39,8 @@ Void transferValues(cwm::ChiView c, uml::Model um):
 cwm::ChiView convertToCwm(Chronos::ChiView c) :
 	let un = new cwm::ChiView : (
 		un.setId(c.getId()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiView", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiView", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiView", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiView", "Version").toString()) ->
 		un.setName(c.name) ->

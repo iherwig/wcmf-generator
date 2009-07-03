@@ -29,6 +29,8 @@ Void transferValues(cwm::ChiWorkerInternal c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiWorkerInternal:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiWorkerInternal") ->
+			uc.setTaggedValue("Chronos::ChiWorkerInternal", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ChiWorkerInternal", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ChiWorkerInternal", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ChiWorkerInternal", "Version", c.version) ->
 			uc.setName(c.name) ->
@@ -48,6 +50,8 @@ Void transferValues(cwm::ChiWorkerInternal c, uml::Model um):
 cwm::ChiWorkerInternal convertToCwm(Chronos::ChiWorkerInternal c) :
 	let un = new cwm::ChiWorkerInternal : (
 		un.setId(c.getId()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiWorkerInternal", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiWorkerInternal", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiWorkerInternal", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiWorkerInternal", "Version").toString()) ->
 		un.setName(c.name) ->

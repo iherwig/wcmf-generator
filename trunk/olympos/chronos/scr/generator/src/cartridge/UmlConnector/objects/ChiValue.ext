@@ -18,6 +18,7 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiValue") ->
+			uc.setTaggedValue("Chronos::ChiValue", "PropertyType", c.propertyType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "app_data_type", c.appDataType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "db_data_type", c.dbDataType) ->
 			//uc.setTaggedValue("Chronos::ChiValue", "is_editable", c.isEditable) ->
@@ -47,6 +48,7 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	//(new cwm::ChiValue).set
 	let un = new cwm::ChiValue : (
 		un.setId(c.getId()) ->
+		un.setPropertyType(c.getTaggedValue("Chronos::ChiValue", "PropertyType").toString()) ->
 		un.setAppDataType(c.getTaggedValue("Chronos::ChiValue", "app_data_type").toString()) ->
 		un.setDbDataType(c.getTaggedValue("Chronos::ChiValue", "db_data_type").toString()) ->
 		//un.setIsEditable(c.getTaggedValue("Chronos::ChiValue", "is_editable")) ->
