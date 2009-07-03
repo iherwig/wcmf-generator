@@ -47,7 +47,7 @@ cwm.ChiBusinessPartnerClass = function() {
 	}];
 	
 	this.connectionInfo = {			
-		
+		/*
 		"ChiBusinessPartner": {
 			label: "",
 			invert: false,
@@ -67,7 +67,7 @@ cwm.ChiBusinessPartnerClass = function() {
 			connectionType: 'generalization',
 			cardinality: -1
 		},
-
+		*/
 		"ChiBusinessUseCase": {
 			label: "participates in",
 			invert: false,

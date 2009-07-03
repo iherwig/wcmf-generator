@@ -47,7 +47,7 @@ cwm.ChiWorkerClass = function() {
 	}];
 	
 	this.connectionInfo = {
-
+		/*
 		"ChiWorker": {
 			label: "",
 			invert: false,
@@ -67,7 +67,7 @@ cwm.ChiWorkerClass = function() {
 			connectionType: 'generalization',
 			cardinality: -1
 		},
-
+		*/
 		"ChiBusinessUseCase": {
 			label: "participates in",
 			invert: false,
