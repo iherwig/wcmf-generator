@@ -71,7 +71,7 @@ uwm.persistency.LongTask.prototype.jsonSuccess = function(options, data) {
 			iFrame.on("load", function() {
 				self.onDownload.defer(10, self, [iFrame]);
 			});
-			iFrame.set({src:'../application/main.php?response_format=JSON&usr_action=continue&controller='+controller+'&sid='+uwm.Session.getInstance().getSid()});
+			iFrame.set({src:'../application/main.php?response_format=HTML&usr_action=continue&controller='+controller+'&sid='+uwm.Session.getInstance().getSid()});
 			if (this.successHandler instanceof Function) {
 				this.successHandler();
 			}
