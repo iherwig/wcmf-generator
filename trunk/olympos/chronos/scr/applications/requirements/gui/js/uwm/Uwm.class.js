@@ -146,7 +146,7 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 		}
 	}
 	
-	if (uwm.Config.debug) {
+	if (!uwm.Config.debug) {
 		uwm.Util.showMessage(uwm.Dict.translate("Error occured"), html, uwm.Util.messageType.ERROR);
 		
 		throw e;
@@ -159,7 +159,9 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 			layout: "fit",
 			items: [new Ext.Panel({
 				html: "<p class='uwm-errorDialogMessage'>" +
-				uwm.Dict.translate("An application error occured. You may continue your work, but this might lead to further errors. If you choose to restart, your data will be saved.") +
+				uwm.Dict.translate("An application error occured. You may continue your work, but this might lead to further errors.<br/>If you choose to restart, your data will be saved.") + "<br/><br/>" + 
+				uwm.Dict.translate("To report the error click the following link to get to the ") + "<a href='http://sourceforge.net/tracker/?group_id=198381&atid=965248' target='_blank'>" +
+				uwm.Dict.translate("bug tracking system") + "</a>." +
 				"</p>"
 			}), new Ext.Panel({
 				id: uwm.Uwm.ERROR_DETAILS_ID,
@@ -203,6 +205,24 @@ uwm.Uwm.prototype.installOverrides = function() {
 		loadValue: function(value) {
 			this.setValue(value);
 			this.originalValue = this.getValue();
+		}
+	});
+
+	Ext.apply(Ext.EventObject, {
+		within : navigator.userAgent.match(/firefox\/((\d+\.)+\d+)/i)[1] >= 3.5 ? function(el, related, allowEl) {
+			try {
+				if(el) {
+					var t = this[related ? "getRelatedTarget" : "getTarget"]();
+						return t && ((allowEl ? (t == Ext.getDom(el)) : false) || Ext.fly(el).contains(t));
+					}
+				} catch(e) {}
+				return false;
+			} : function(el, related, allowEl) {
+			if (el) {
+				var t = this[related ? "getRelatedTarget" : "getTarget"]();
+				return t && ((allowEl ? (t == Ext.getDom(el)) : false) || Ext.fly(el).contains(t));
+			}
+			return false;
 		}
 	});
 }
