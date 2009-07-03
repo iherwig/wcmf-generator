@@ -54,13 +54,13 @@ cwm.ChiBusinessPartnerPassiveClass = function() {
 			invertBackendRelation: false,
 			connectionType: 'generalization',
 			cardinality: -1
-		},
+		}/*,
 		"ChiBusinessPartner": {
 			label: "",
 			invert: true,
 			connectionType: 'generalization',
 			cardinality: -1
-		},
+		}*/,
 
 		"ChiBusinessUseCase": {
 			label: "participates in",
