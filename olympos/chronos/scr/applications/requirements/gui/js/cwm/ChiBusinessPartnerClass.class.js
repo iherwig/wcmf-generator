@@ -53,7 +53,7 @@ cwm.ChiBusinessPartnerClass = function() {
 			invert: false,
 			invertBackendRelation: false,
 			connectionType: 'generalization',
-			cardinality: 1
+			cardinality: -1
 		},
 		"ChiBusinessPartnerActive": {
 			label: "",
