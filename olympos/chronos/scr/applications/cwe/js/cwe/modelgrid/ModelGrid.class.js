@@ -25,29 +25,6 @@ cwe.modelgrid.ModelGrid = function(config) {
 cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 	initComponent : function() {
 		
-		/*
-		 * this.store = new Ext.data.SimpleStore( { fields : [ "Name", "Notes",
-		 * "ValueAmount" ] });
-		 * 
-		 * this.store.add( [ new cwe.model.ModelRecord(this.modelClass, { oid:
-		 * "Record:1", Name : "Name1", Notes : "Notes1", ValueAmount :
-		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
-		 * "Record:2", Name : "Name2", Notes : "Notes1", ValueAmount :
-		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
-		 * "Record:3", Name : "Name3", Notes : "Notes1", ValueAmount :
-		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
-		 * "Record:4", Name : "Name4", Notes : "Notes1", ValueAmount :
-		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
-		 * "Record:5", Name : "Name5", Notes : "Notes1", ValueAmount :
-		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
-		 * "Record:6", Name : "Name6", Notes : "Notes1", ValueAmount :
-		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
-		 * "Record:7", Name : "Name7", Notes : "Notes1", ValueAmount :
-		 * "ValueAmount1" }), new cwe.model.ModelRecord(this.modelClass, { oid:
-		 * "Record:8", Name : "Name8", Notes : "Notes1", ValueAmount :
-		 * "ValueAmount1" }) ]);
-		 */
-
 		this.store = new cwe.model.ModelStore( {
 			modelClass : this.modelClass
 		});
@@ -60,20 +37,39 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 			emptyMsg : chi.Dict.translate("No objects to display")
 		});
 		
+		this.createButton = new Ext.Toolbar.Button( {
+			text : chi.Dict.translate("Create"),
+			iconCls : "createButton",
+			handler : function() {
+				self.createNew();
+			}
+		});
+		
+		this.editButton = new Ext.Toolbar.Button( {
+			text : chi.Dict.translate("Edit"),
+			iconCls : "editButton",
+			handler : function() {
+				var records = self.getSelectionModel().getSelections();
+				
+				for ( var i = 0; i < records.length; i++) {
+					self.editors.loadOrShow(records[i].getOid(), records[i].getLabel());
+				}
+			}
+		});
+		
+		this.deleteButton = new Ext.Toolbar.Button( {
+			text : chi.Dict.translate("Delete"),
+			iconCls : "deleteButton",
+			handler : function() {
+				self.deleteSelected();
+			}
+		});
+		
 		Ext.apply(this, {
 			region : "north",
 			height : 250,
 			split : true,
-			tbar : [ new Ext.Toolbar.Button( {
-				text : chi.Dict.translate("Create"),
-				iconCls : "createButton"
-			}), new Ext.Toolbar.Button( {
-				text : chi.Dict.translate("Edit"),
-				iconCls : "editButton"
-			}), new Ext.Toolbar.Button( {
-				text : chi.Dict.translate("Delete"),
-				iconCls : "deleteButton"
-			}) ],
+			tbar : [ this.createButton, this.editButton, this.deleteButton ],
 			loadMask : true,
 			selModel : new Ext.grid.RowSelectionModel( {
 				singleSelect : true
@@ -117,6 +113,52 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		});
 	}
 });
+
+cwe.modelgrid.ModelGrid.prototype.createNew = function() {
+	var self = this;
+	
+	self.editors.loadOrShow(null, "<i>" + chi.Dict.translate("New ") + self.modelClass.getName() + "</i>", true);
+}
+
+cwe.modelgrid.ModelGrid.prototype.deleteSelected = function() {
+	var records = this.getSelectionModel().getSelections();
+	
+	var self = this;
+	
+	if (records.length > 0) {
+		
+		var msgText = "<p>" + chi.Dict.translate("Are you sure you want to delete the following instances of ") + this.modelClass.getName() + ":</p><ul class='deleteMsgBox'>";
+		for ( var i = 0; i < records.length; i++) {
+			msgText += "<li>" + records[i].getLabel() + "</li>";
+		}
+		msgText += "</ul>";
+		
+		Ext.MessageBox.show( {
+			title : chi.Dict.translate("Delete Objects"),
+			msg : msgText,
+			buttons : Ext.MessageBox.YESNO,
+			fn : function(buttonId) {
+				if (buttonId == "yes") {
+					var actionSet = new chi.persistency.ActionSet();
+					
+					for ( var i = 0; i < records.length; i++) {
+						actionSet.addDestroy(records[i].getOid());
+					}
+					
+					actionSet.commit(function(data) {
+						var store = self.getStore();
+						
+						for ( var i = 0; i < records.length; i++) {
+							store.remove(records[i]);
+							
+							self.editors.removeEditor(records[i].getOid());
+						}
+					});
+				}
+			}
+		});
+	}
+}
 
 cwe.modelgrid.ModelGrid.prototype.openEditor = function(grid, rowIndex, e) {
 	var store = this.getStore();

@@ -24,7 +24,7 @@ cwe.Cwe.prototype.processConfig = function() {
 }
 
 cwe.Cwe.prototype.startApplication = function() {
-	this.installErrorHandler();
+	//this.installErrorHandler();
 	this.installOverrides();
 	
 	var params = location.search.split(/&/);

@@ -26,7 +26,7 @@ Ext.extend(chi.persistency.WcmfJson, chi.persistency.Persistency);
 
 chi.persistency.WcmfJson.prototype.jsonRequest = function(params, successHandler, errorHandler, getRecordHandler) {
 	params.sid = this.getSid();
-	//params.request_format = "JSON";
+	// params.request_format = "JSON";
 	params.response_format = "JSON";
 	
 	var self = this;
@@ -185,21 +185,25 @@ chi.persistency.WcmfJson.prototype.list = function(cweModelElementId, limit, off
 }
 
 chi.persistency.WcmfJson.prototype.listRecordHandler = function(handler, options, data) {
-	var records = [];
-	
-	for ( var i = 0; i < data.objects.length; i++) {
-		records.push(this.readObject(data.objects[i]));
-	}
-	
 	return {
 		cweModelElementId : options.params.type,
 		limit : options.params.limit,
 		offset : options.params.start,
 		sortAttributeName : options.params.sort,
 		sortDirection : options.params.dir,
-		records : records,
+		records : this.createListRecords(data),
 		totalCount : data.totalCount
 	};
+}
+
+chi.persistency.WcmfJson.prototype.createListRecords = function(data) {
+	var records = [];
+	
+	for ( var i = 0; i < data.objects.length; i++) {
+		records.push(this.readObject(data.objects[i]));
+	}
+	
+	return records;
 }
 
 chi.persistency.WcmfJson.prototype.load = function(oid, depth, successHandler, errorHandler) {
@@ -213,6 +217,14 @@ chi.persistency.WcmfJson.prototype.load = function(oid, depth, successHandler, e
 }
 
 chi.persistency.WcmfJson.prototype.loadRecordHandler = function(handler, options, data) {
+	return {
+		oid : options.params.oid,
+		depth : options.params.depth,
+		records : this.createLoadRecords(data)
+	};
+}
+
+chi.persistency.WcmfJson.prototype.createLoadRecords = function(data) {
 	var records = {};
 	
 	var node = data.node;
@@ -244,71 +256,65 @@ chi.persistency.WcmfJson.prototype.loadRecordHandler = function(handler, options
 		node = outstandingNodes.first();
 	}
 	
-	return {
-		oid : options.params.oid,
-		depth : options.params.depth,
-		records : records
-	};
+	return records;
 }
 
 chi.persistency.WcmfJson.prototype.save = function(oid, values, successHandler, errorHandler) {
-
+	
 	/*
-	var request = {};
-	
-	request.usr_action = "save";
-
-	var node = {};
-	
-	node.oid = oid;
-	node.type = chi.Util.getCweModelElementIdFromOid(oid);
-	node.values = {};
-	node.values[1] = {};
+	 * var request = {};
+	 * 
+	 * request.usr_action = "save";
+	 * 
+	 * var node = {};
+	 * 
+	 * node.oid = oid; node.type = chi.Util.getCweModelElementIdFromOid(oid);
+	 * node.values = {}; node.values[1] = {};
+	 * 
+	 * for ( var i in values) { if (!(values[i] instanceof Function)) {
+	 * node.values[1][i] = values[i]; } }
+	 * 
+	 * request[oid] = Ext.util.JSON.encode(node);
+	 */
+	var data = {
+		usr_action : "save"
+	};
 	
 	for ( var i in values) {
 		if (!(values[i] instanceof Function)) {
-			node.values[1][i] = values[i];
+			data["value--" + i + "-" + oid] = values[i];
 		}
 	}
-	
-	request[oid] = Ext.util.JSON.encode(node);
-	*/
-	var data = {
-			usr_action: "save"
-		};
-		
-		for (var i in values) {
-			if (!(values[i] instanceof Function)) {
-				data["value--" + i + "-" + oid] = values[i];
-			}
-		}
 	
 	this.jsonRequest(data, successHandler, errorHandler, this.saveRecordHandler);
 }
 
 chi.persistency.WcmfJson.prototype.saveRecordHandler = function(handler, options, data) {
 	return {
-		//oid : options.params.oid,
-		//values : options.params.values[1]
+	// oid : options.params.oid,
+	// values : options.params.values[1]
 	};
 }
 
 chi.persistency.WcmfJson.prototype.create = function(cweModelElementId, values, successHandler, errorHandler) {
 	var data = {
 		usr_action : "new",
-		newtype : cweModelElementId,
-		values : {}
+		newtype : cweModelElementId
 	};
 	
-	data.values[1] = values;
+	// FIXME: Workaround for immediately saving values
+	var self = this;
 	
-	this.jsonRequest(data, successHandler, errorHandler, this.createRecordHandler);
+	this.jsonRequest(data, function(innerData) {
+		self.save(innerData.newOid, values, function() {
+			self.processSuccessHandler(successHandler, innerData);
+		}, errorHandler);
+	}, errorHandler, this.createRecordHandler);
 }
 
 chi.persistency.WcmfJson.prototype.createRecordHandler = function(handler, options, data) {
 	return {
 		cweModelElementId : options.params.newtype,
-		values : options.params.values[1],
 		newOid : data.oid
 	};
 }
@@ -416,6 +422,8 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 	
 	var requests = actionSet.getRequests();
 	
+	var self = this;
+	
 	for ( var currActionName in requests) {
 		var currRequest = requests[currActionName];
 		
@@ -428,12 +436,20 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.usr_action = "dologin";
 					jsonRequest.login = currRequest.user;
 					jsonRequest.password = currRequest.password;
-					recordHandler = this.loginRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+							user : request.user,
+							password : request.password,
+							sid : data.sid
+						};
+					};
 					break;
 				
 				case "logout":
 					jsonRequest.usr_action = "logout";
-					recordHandler = this.logoutRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {};
+					};
 					break;
 				
 				case "list":
@@ -441,7 +457,19 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.type = currRequest.cweModelElementId;
 					jsonRequest.limit = currRequest.limit;
 					jsonRequest.start = currRequest.offset;
-					recordHandler = this.listRecordHandler;
+					jsonRequest.sort = currRequest.sortAttributeName;
+					jsonRequest.dir = currRequest.sortDirection;
+					recordHandler = function(handler, request, data) {
+						return {
+							cweModelElementId : request.cweModelElementId,
+							limit : request.limit,
+							offset : request.offset,
+							sortAttributeName : request.sortAttributeName,
+							sortDirection : request.sortDirection,
+							records : self.createListRecords(data),
+							totalCount : data.totalCount
+						};
+					};
 					break;
 				
 				case "load":
@@ -450,7 +478,13 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.depth = currRequest.depth;
 					jsonRequest.omitMetaData = true;
 					jsonRequest.translateValues = true;
-					recordHandler = this.loadRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+							oid : request.oid,
+							depth : request.depth,
+							records : self.createLoadRecords(data)
+						};
+					};
 					break;
 				
 				case "save":
@@ -469,7 +503,11 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					
 					jsonRequest.usr_action = "save";
 					jsonRequest[currRequest.oid] = changeNode;
-					recordHandler = this.saveRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+
+						};
+					};
 					break;
 				
 				case "create":
@@ -477,13 +515,22 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.newtype = currRequest.cweModelElementId;
 					jsonRequest.values = {};
 					jsonRequest.values[1] = currRequest.values;
-					recordHandler = this.createRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+							cweModelElementId : request.cweModelElementId,
+							newOid : data.oid
+						};
+					};
 					break;
 				
-				case "remove":
+				case "destroy":
 					jsonRequest.usr_action = "delete";
 					jsonRequest.deleteoids = currRequest.oid;
-					recordHandler = this.removeRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+							oid : request.oid
+						};
+					};
 					break;
 				
 				case "associate":
@@ -491,33 +538,58 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.oid = currRequest.parentOid;
 					jsonRequest.associateoids = this.array2CommaList(currRequest.childOid);
 					jsonRequest.associateAs = "child";
-					recordHandler = this.associateRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+							parentOid : request.parentOid,
+							childOid : request.childOid,
+							role : request.role
+						};
+					};
 					break;
 				
 				case "disassociate":
 					jsonRequest.usr_action = "disassociate";
 					jsonRequest.oid = currRequest.parentOid;
 					jsonRequest.associateoids = currRequest.childOid;
-					recordHandler = this.disassociateRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+							parentOid : request.parentOid,
+							childOid : request.childOid,
+							role : request.role
+						};
+					};
 					break;
 				
 				case "lock":
 					jsonRequest.usr_action = "lock";
 					jsonRequest.oid = currRequest.oid;
-					recordHandler = this.lockRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+							oid : request.oid
+						};
+					};
 					break;
 				
 				case "unlock":
 					jsonRequest.usr_action = "unlock";
 					jsonRequest.oid = currRequest.oid;
-					recordHandler = this.unlockRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+							oid : request.oid
+						};
+					};
 					break;
 				
 				case "log":
 					jsonRequest.usr_action = "log";
 					jsonRequest.logtype = currRequest.logtype;
 					jsonRequest.msg = currRequest.message;
-					recordHandler = this.logRecordHandler;
+					recordHandler = function(handler, request, data) {
+						return {
+							logtype : request.logtype,
+							message : request.message
+						};
+					};
 					break;
 				
 				default:
@@ -528,16 +600,27 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 		}
 	}
 	
+	var responseHandler = function(data, actionName) {
+		return data.data[actionName];
+	}
+
 	this.jsonRequest( {
 		controller : "TerminateController",
 		usr_action : "multipleAction",
+		request_format : "JSON",
 		data : Ext.encode(data),
 		actionSet : actionSet,
 		recordHandlers : recordHandlers
-	}, function(request, data) {
-		request.params.actionSet.successHandler(request, data);
-	}, function(request, data, errorMessage) {
-		request.params.actionSet.errorHandler(request, data, errorMessage);
+	}, function(data) {
+		data.request.recordHandlers = data.request.params.recordHandlers;
+		data.request.params.actionSet.successHandler(data.request, data.data, responseHandler);
+	}, function(data, errorMessage) {
+		data.request.params.actionSet.errorHandler(data, errorMessage);
+	}, function(handler, options, data) {
+		return {
+			request : options,
+			data : data
+		}
 	});
 }
 
