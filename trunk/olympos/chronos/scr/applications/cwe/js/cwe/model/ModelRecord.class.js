@@ -17,6 +17,10 @@ cwe.model.ModelRecord = function(modelClass, data) {
 		modelClass = cwe.model.ModelClassContainer.getInstance().getClass("ChiGoal");
 	}
 	
+	if (!data) {
+		data = {};
+	}
+	
 	var template = Ext.data.Record.create(modelClass.getRecordDefinition());
 	
 	var result = new template(data);
@@ -37,6 +41,10 @@ cwe.model.ModelRecord.prototype.getModelClass = function() {
 
 cwe.model.ModelRecord.prototype.getOid = function() {
 	return this.get("oid");
+}
+
+cwe.model.ModelRecord.prototype.setOid = function(oid) {
+	this.set("oid", oid);
 }
 
 cwe.model.ModelRecord.prototype.getLabel = function() {

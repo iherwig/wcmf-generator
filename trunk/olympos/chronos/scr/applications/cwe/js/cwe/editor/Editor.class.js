@@ -27,8 +27,6 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 	initComponent : function() {
 		var self = this;
 		
-		this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(chi.Util.getCweModelElementIdFromOid(this.oid));
-		
 		this.saveButton = new Ext.Toolbar.Button( {
 			text : chi.Dict.translate("Save"),
 			iconCls : "saveButton",
@@ -65,19 +63,50 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 			single : true
 		});
 		
-		this.loadFromOid(this.oid);
+		if (!this.newObject) {
+			this.loadFromOid(this.oid);
+		}
 	}
 })
 
 cwe.editor.Editor.prototype.save = function() {
-	var record = this.getRecord(); 
+	if (!this.newObject) {
+		var record = this.getRecord();
+		
+		this.getForm().updateRecord(record);
+		record.commit();
+	} else {
+		var record = new cwe.model.ModelRecord(this.modelClass);
+		
+		this.getForm().updateRecord(record);
+		
+		var changedFields = record.getChanges();
+		
+		var self = this;
+		
+		chi.persistency.Persistency.getInstance().create(this.modelClass.getId(), changedFields, function(data) {
+			record.setOid(data.newOid);
+			
+			self.rawRecords = {};
+			self.oid = data.newOid;
+			self.rawRecords[data.newOid] = record;
+			self.editorContainer.addEditor(data.newOid, self);
+		});
+		
+		this.setTitle(record.getLabel());
+		this.newObject = false;
+	}
 	
-	this.getForm().updateRecord(record);
-	record.commit();
 }
 
 cwe.editor.Editor.prototype.cancel = function() {
-	this.getForm().loadRecord(this.getRecord());
+	if (!this.newObject) {
+		this.getForm().loadRecord(this.getRecord());
+	} else {
+		this.findParentBy(function() {
+			return true;
+		}).remove(this);
+	}
 }
 
 cwe.editor.Editor.prototype.getRecord = function() {

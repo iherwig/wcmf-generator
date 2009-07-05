@@ -13,11 +13,11 @@ Ext.namespace("cwe.editor");
 
 /**
  * @class The Model Grid Container contains all model girds.
- *
+ * 
  * <p>
  * The model grid container is a <i>Singleton</i>.
  * </p>
- *
+ * 
  * @constructor
  */
 cwe.editor.EditorContainer = function() {
@@ -27,7 +27,7 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
 		/**
 		 * List of model grids with oid as key.
-		 *
+		 * 
 		 * @private
 		 * @type list of cwe.editor.Editor
 		 */
@@ -52,7 +52,7 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 
 /**
  * Handler when tab is closed.
- *
+ * 
  * @private
  */
 cwe.editor.EditorContainer.prototype.tabClose = function(tabPanel, tab) {
@@ -61,18 +61,30 @@ cwe.editor.EditorContainer.prototype.tabClose = function(tabPanel, tab) {
 	}
 }
 
-cwe.editor.EditorContainer.prototype.loadOrShow = function(oid, label) {
+cwe.editor.EditorContainer.prototype.loadOrShow = function(oid, label, newObject) {
 	var editor = this.editors.get(oid);
 	
 	if (!editor) {
 		editor = new cwe.editor.Editor({
 			oid : oid,
-			title: label
+			title: label,
+			newObject: newObject,
+			modelClass: this.modelClass,
+			editorContainer: this
 		});
-		this.editors.add(oid, editor);
+		this.addEditor(oid, editor);
 		this.add(editor);
 	}
 	
 	editor.show();
 	editor.doLayout();
+}
+
+cwe.editor.EditorContainer.prototype.addEditor = function(oid, editor) {
+	this.editors.add(oid, editor);
+}
+
+cwe.editor.EditorContainer.prototype.removeEditor = function(oid) {
+	var editor = this.editors.removeKey(oid);
+	this.remove(editor);
 }

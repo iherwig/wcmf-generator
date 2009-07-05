@@ -41,12 +41,14 @@ chi.persistency.ActionSet.prototype.addLogout = function(successHandler, errorHa
 	};
 }
 
-chi.persistency.ActionSet.prototype.addList = function(cweModelElementId, limit, offset, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addList = function(cweModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action : "list",
 		cweModelElementId : cweModelElementId,
 		limit : limit,
 		offset : offset,
+		sortAttributeName : sortAttributeName,
+		sortDirection : sortDirection,
 		successHandler : successHandler,
 		errorHandler : errorHandler,
 		errorLevel : errorLevel
@@ -75,7 +77,7 @@ chi.persistency.ActionSet.prototype.addSave = function(oid, values, successHandl
 	};
 }
 
-chi.persistency.ActionSet.prototype.create = function(cweModelElementId, values, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addCreate = function(cweModelElementId, values, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action : "create",
 		cweModelElementId : cweModelElementId,
@@ -86,7 +88,7 @@ chi.persistency.ActionSet.prototype.create = function(cweModelElementId, values,
 	};
 }
 
-chi.persistency.ActionSet.prototype.destroy = function(oid, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addDestroy = function(oid, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action : "destroy",
 		oid : oid,
