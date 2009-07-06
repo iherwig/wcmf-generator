@@ -20,17 +20,17 @@ cwm.requirements.ChiGoal = function() {
 	this.owningPackageId = "cwm.requirements.Requirements";
 	
 	this.recordDefinition = [ {
-	    name : "oid",
-	    mapping : "oid"
+		name : "oid",
+		mapping : "oid"
 	}, {
-	    name : "Name",
-	    mapping : "Name"
+		name : "Name",
+		mapping : "Name"
 	}, {
-	    name : "Notes",
-	    mapping : "Notes"
+		name : "Notes",
+		mapping : "Notes"
 	}, {
-	    name : "ValueAmount",
-	    mapping : "ValueAmount"
+		name : "ValueAmount",
+		mapping : "ValueAmount"
 	} ];
 }
 
@@ -38,17 +38,23 @@ Ext.extend(cwm.requirements.ChiGoal, cwe.model.ModelClass);
 
 cwm.requirements.ChiGoal.prototype.getEditorItems = function() {
 	return [ new Ext.form.TextField( {
-	    fieldLabel : "Name",
-	    name : "Name",
-	    dataIndex : "Name"
+		fieldLabel : "Name",
+		name : "Name",
+		dataIndex : "Name"
 	}), new Ext.form.TextField( {
-	    fieldLabel : "Notes",
-	    name : "Notes",
-	    dataIndex : "Notes"
+		fieldLabel : "Notes",
+		name : "Notes",
+		dataIndex : "Notes"
 	}), new Ext.form.TextField( {
-	    fieldLabel : "ValueAmount",
-	    name : "ValueAmount",
-	    dataIndex : "ValueAmount"
+		fieldLabel : "ValueAmount",
+		name : "ValueAmount",
+		dataIndex : "ValueAmount"
+	}), new cwe.editor.control.SingleAssociate( {
+		fieldLabel : "parentChiGoal",
+		name : "parentChiGoal",
+		dataIndex : "parentChiGoal",
+		targetCweModelElementId: "ChiGoal",
+		isParent: true
 	}) ];
 }
 

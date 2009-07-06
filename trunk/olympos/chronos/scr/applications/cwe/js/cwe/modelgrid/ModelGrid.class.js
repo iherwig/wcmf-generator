@@ -101,7 +101,7 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		
 		var self = this;
 		
-		this.on("rowclick", function(grid, rowIndex, e) {
+		this.on("rowdblclick", function(grid, rowIndex, e) {
 			self.openEditor(grid, rowIndex, e);
 		});
 		
@@ -165,4 +165,30 @@ cwe.modelgrid.ModelGrid.prototype.openEditor = function(grid, rowIndex, e) {
 	var record = store.getAt(rowIndex);
 	
 	this.editors.loadOrShow(record.getOid(), record.getLabel());
+}
+
+cwe.modelgrid.ModelGrid.prototype.addAssociateButton = function(button) {
+	if (this.associateButton) {
+		this.removeToolbarButton(this.associateButton);
+	}
+	
+	button.grid = this;
+	
+	this.associateButton = button;
+	
+	this.getTopToolbar().add(button);
+}
+
+cwe.modelgrid.ModelGrid.prototype.removeAssociateButton = function(button) {
+	if (this.associateButton) {
+		this.removeToolbarButton(this.associateButton);
+	}
+}
+
+cwe.modelgrid.ModelGrid.prototype.removeToolbarButton = function(button) {
+	var toolbar = this.getTopToolbar();
+	if (toolbar.items.contains(button)) {
+		Ext.fly(button.getEl().dom.parentNode).remove();
+		toolbar.items.remove(button);
+	}
 }

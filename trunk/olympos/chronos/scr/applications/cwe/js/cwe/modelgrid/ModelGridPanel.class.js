@@ -43,3 +43,7 @@ cwe.modelgrid.ModelGridPanel = Ext.extend(Ext.Panel, {
 		cwe.modelgrid.ModelGridPanel.superclass.initComponent.apply(this, arguments);
 	}
 });
+
+cwe.modelgrid.ModelGridPanel.prototype.getGrid = function() {
+	return this.grid;
+}

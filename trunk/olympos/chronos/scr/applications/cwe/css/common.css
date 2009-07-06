@@ -24,23 +24,31 @@
 }
 
 .createButton {
-	background: no-repeat url("../img/add.png") !important;
+	background-image: url("../img/add.png") !important;
 }
 
 .editButton {
-	background: no-repeat url("../img/pencil.png") !important;
+	background-image: url("../img/pencil.png") !important;
 }
 
 .deleteButton {
-	background: no-repeat url("../img/delete.png") !important;
+	background-image: url("../img/delete.png") !important;
 }
 
 .saveButton {
-	background: no-repeat url("../img/disk.png") !important;
+	background-image: url("../img/disk.png") !important;
 }
 
 .cancelButton {
-	background: no-repeat url("../img/cancel.png") !important;
+	background-image: url("../img/cancel.png") !important;
+}
+
+.associateButton {
+	background-image: url("../img/link.png") !important;
+}
+
+.disassociateButton {
+	background-image: url("../img/link_break.png") !important;
 }
 
 ul.deleteMsgBox {
