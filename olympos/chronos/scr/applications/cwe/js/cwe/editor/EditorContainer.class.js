@@ -57,6 +57,7 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
  */
 cwe.editor.EditorContainer.prototype.tabClose = function(tabPanel, tab) {
 	if (tab instanceof cwe.editor.Editor) {
+		tab.removeAllAssociateButtons();
 		this.editors.remove(tab);
 	}
 }

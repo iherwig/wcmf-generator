@@ -90,6 +90,8 @@ cwe.modelgrid.ModelGridContainer.prototype.loadOrShow = function(modelClass) {
 	if (explicitLayout) {
 		modelGrid.doLayout();
 	}
+	
+	return modelGrid;
 }
 
 /**
