@@ -24,6 +24,7 @@ cwe.modelgrid.ModelGrid = function(config) {
 
 cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 	initComponent : function() {
+		var self = this;
 		
 		this.store = new cwe.model.ModelStore( {
 			modelClass : this.modelClass
@@ -72,7 +73,12 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 			tbar : [ this.createButton, this.editButton, this.deleteButton ],
 			loadMask : true,
 			selModel : new Ext.grid.RowSelectionModel( {
-				singleSelect : true
+				singleSelect : false,
+				listeners : {
+					"selectionchange" : function(selModel) {
+						self.updateAssociateButton();
+					}
+				}
 			}),
 			columns : [ {
 				header : "Name",
@@ -98,8 +104,6 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		});
 		
 		cwe.modelgrid.ModelGrid.superclass.initComponent.apply(this, arguments);
-		
-		var self = this;
 		
 		this.on("rowdblclick", function(grid, rowIndex, e) {
 			self.openEditor(grid, rowIndex, e);
@@ -177,11 +181,25 @@ cwe.modelgrid.ModelGrid.prototype.addAssociateButton = function(button) {
 	this.associateButton = button;
 	
 	this.getTopToolbar().add(button);
+	
+	this.getSelectionModel().clearSelections();
 }
 
 cwe.modelgrid.ModelGrid.prototype.removeAssociateButton = function(button) {
 	if (this.associateButton) {
 		this.removeToolbarButton(this.associateButton);
+	}
+}
+
+cwe.modelgrid.ModelGrid.prototype.updateAssociateButton = function() {
+	if (this.associateButton) {
+		var count = this.getSelectionModel().getCount();
+		
+		if (count == 0 || this.associateButton.isSingleSelect() && count > 1) {
+			this.associateButton.disable();
+		} else {
+			this.associateButton.enable();
+		}
 	}
 }
 

@@ -43,24 +43,9 @@ cwe.modelgrid.AssociateButton.prototype.associate = function() {
 	
 	var records = this.grid.getSelectionModel().getSelections();
 	
-	var actionSet = new chi.persistency.ActionSet();
-	
-	for ( var i = 0; i < records.length; i++) {
-		var parentOid;
-		var childOid;
-		
-		if (this.isParent) {
-			parentOid = records[i].getOid();
-			childOid = this.sourceOid;
-		} else {
-			parentOid = this.sourceOid;
-			childOid = records[i].getOid();
-		}
-		
-		actionSet.addAssociate(parentOid, childOid, undefined);
-	}
-	
-	actionSet.commit(function() {
-		self.sourceHandler(records);
-	});
+	self.sourceHandler(records);
+}
+
+cwe.modelgrid.AssociateButton.prototype.isSingleSelect = function() {
+	return this.singleSelect;
 }

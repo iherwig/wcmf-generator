@@ -24,3 +24,15 @@ Ext.extend(cwe.model.ModelReferenceList, Ext.util.MixedCollection);
 cwe.model.ModelReferenceList.prototype.getModelClass = function() {
 	return this.modelClass;
 }
+
+cwe.model.ModelReferenceList.prototype.except = function(otherList) {
+	var result = new cwe.model.ModelReferenceList(this.getModelClass());
+	
+	this.each(function(elem) {
+		if (!otherList.get(elem.getOid())) {
+			result.add(elem.getOid(), elem);
+		}
+	});
+	
+	return result;
+}

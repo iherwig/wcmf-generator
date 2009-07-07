@@ -51,11 +51,101 @@ cwe.model.ModelRecord.prototype.getLabel = function() {
 	return this.get("Name");
 }
 
+cwe.model.ModelRecord.prototype.set = function(name, value) {
+	if (String(value) !== "[object Object]" && String(this.data[name]) == String(value)) {
+		return;
+	}
+	if (this.data[name] === value) {
+		return;
+	}
+	this.dirty = true;
+	if (!this.modified) {
+		this.modified = {};
+	}
+	if (typeof this.modified[name] == 'undefined') {
+		this.modified[name] = this.data[name];
+	}
+	this.data[name] = value;
+	if (!this.editing && this.store) {
+		this.store.afterEdit(this);
+	}
+}
+
 cwe.model.ModelRecord.prototype.commit = function(silent, activitySet) {
 	if (this.dirty) {
 		var changedFields = this.getChanges();
 		
-		chi.persistency.Persistency.getInstance().save(this.getOid(), changedFields);
+		var simpleFields = {};
+		var foundSimpleField = false;
+		var foundField = false;
+		
+		var actionSet = new chi.persistency.ActionSet();
+		
+		var self = this;
+		
+		for ( var currField in changedFields) {
+			var currValue = changedFields[currField];
+			
+			if (!(currValue instanceof Function)) {
+				if (!(currValue instanceof cwe.model.ModelReferenceList)) {
+					foundField = true;
+					foundSimpleField = true;
+					
+					simpleFields[currField] = currValue;
+				} else {
+					var oldAssociates = this.modified[currField];
+
+					if (!oldAssociates) {
+						oldAssociates = new cwe.model.ModelReferenceList(this.getModelClass().getTargetModelClass(currField));
+					}
+					
+					var toDisassociate = oldAssociates.except(currValue);
+					var toAssociate = currValue.except(oldAssociates);
+					
+					toDisassociate.each(function(elem) {
+						foundField = true;
+						
+						var parentOid;
+						var childOid;
+						
+						if (self.getModelClass().isParent(currField)) {
+							parentOid = elem.getOid();
+							childOid = self.getOid();
+						} else {
+							parentOid = self.getOid();
+							childOid = elem.getOid();
+						}
+						
+						actionSet.addDisassociate(parentOid, childOid);
+					});
+					
+					toAssociate.each(function(elem) {
+						foundField = true;
+						
+						var parentOid;
+						var childOid;
+						
+						if (self.getModelClass().isParent(currField)) {
+							parentOid = elem.getOid();
+							childOid = self.getOid();
+						} else {
+							parentOid = self.getOid();
+							childOid = elem.getOid();
+						}
+						
+						actionSet.addAssociate(parentOid, childOid);
+					});
+				}
+			}
+		}
+		
+		if (foundSimpleField) {
+			actionSet.addSave(this.getOid(), simpleFields);
+		}
+		
+		if (foundField) {
+			actionSet.commit();
+		}
 	}
 	
 	this.dirty = false;
