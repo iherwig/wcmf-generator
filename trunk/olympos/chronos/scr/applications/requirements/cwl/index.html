@@ -1,37 +1,87 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Chronos Web Logic</title>
-<link type="text/css" href="base.css" rel="stylesheet">
-<link type="text/css" href="Spacetree.css" rel="stylesheet">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title id="title">Chronos Web Logic</title>
+		<link rel="shortcut icon" href="favicon.ico" /> 
+		<link rel="stylesheet" type="text/css" href="../ChronosLib/ext/resources/css/ext-all.css" />
+    <link rel="stylesheet" type="text/css" href="../ChronosLib/ext/ux/css/Ext.ux.grid.CellActions.css" />
+    <link rel="stylesheet" type="text/css" href="css/common.css" />
+    <link rel="stylesheet" type="text/css" href="css/figures.css" />
 
-<script language="javascript" type="text/javascript" src="jit-yc.js"></script>
-<script language="javascript" type="text/javascript" src="data.js"></script>
-<script language="javascript" type="text/javascript" src="include.js"></script>
+		<script type="text/javascript" src="../ChronosLib/ext/adapter/ext/ext-base.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/ext/ext-all-debug.js">
+		</script>
+    <script type="text/javascript" src="../ChronosLib/ext/ux/js/Ext.ux.grid.CellActions.js">
+    </script>
+		
+		<!--Start include CWL-->
+		<script type="text/javascript" src="js/cwl/Data.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/Cwl.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/Constants.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/ui/Workbench.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/Util.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/Session.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/Login.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/Dict.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/Dict.js">
+		</script>
 
-</head><div FirebugVersion="1.3.3" style="display: none;" id="_firebugConsole"></div><body onload="init();">
-<div id="container">
-  <div id="left-container">
-    <h4>
-      Chronos Web Logic
-    </h4>
-    This tool allows you to construct rules.<br /><br />
-    Click on the condition boxes to edit the condition.
-    Click the operator buttons below to add a conditions to the rule.
-    <h4>
-      Logic Operators
-    </h4>
-    <input id="addAnd" value="And" type="button">
-    <input id="addOr" value="Or" type="button">
-    <!--input id="addNot" value="Not" type="button"-->
-  </div>
+		<script type="text/javascript" src="js/cwl/diagram/RuleDiagram.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/diagram/DropZone.class.js">
+		</script>
+        
+		<script type="text/javascript" src="../ChronosLib/JIT/jit-yc.js">
+		</script>
 
-  <div id="center-container">
-      <div id="infovis"></div>    
-  </div>
+		<script type="text/javascript" src="js/cwl/newobjects/Accordion.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/newobjects/NewObjectsGrid.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/newobjects/DragZone.class.js">
+		</script>
 
-  <!--div style="left: 482px;" id="log">done</div-->
-  
-  <div id="measure"></div>
-</div>
-</body></html>
+		<script type="text/javascript" src="js/cwl/model/ModelElementContainer.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/model/ModelElement.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/model/ModelPackage.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/model/RootPackage.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/cwl/modeltree/ModelTree.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/modeltree/Node.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/cwl/rule/RuleElement.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwl/rule/RuleElementContainer.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/cwl/Config.js">
+		</script>
+		<!--End include CWL-->
+
+		<script type="text/javascript">
+			Ext.onReady(function(){
+				Ext.BLANK_IMAGE_URL = "img/s.gif";
+				Ext.QuickTips.init();
+				cwl.Cwl.getInstance().startApplication();
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
