@@ -48,7 +48,7 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		Ext.apply(this, {
 			iconCls : this.modelClass.getTreeIconClass(),
 			closable : true,
-			frame : true,
+			frame : false,
 			autoScroll : true,
 			labelAlign : "left",
 			labelWidth : 90,
@@ -56,8 +56,8 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 			items : this.modelClass.getEditorItems(),
 			msgTarget : "side"
 		});
-
-		for (var i = 0; i < this.items.length; i++) {
+		
+		for ( var i = 0; i < this.items.length; i++) {
 			var currItem = this.items[i];
 			currItem.editor = this;
 		}
@@ -68,6 +68,11 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 			self.doLayout();
 		}, undefined, {
 			single : true
+		});
+		
+		this.on("show", function() {
+			self.editorContainer.setActiveTab(self);
+			self.editorContainer.show();
 		});
 		
 		if (!this.newObject) {
@@ -150,7 +155,10 @@ cwe.editor.Editor.prototype.loadFromOid = function(oid) {
 }
 
 cwe.editor.Editor.prototype.addAssociateButton = function(grid, button) {
-	this.associateButtons.add(button, {grid: grid, button: button});
+	this.associateButtons.add(button, {
+		grid : grid,
+		button : button
+	});
 }
 
 cwe.editor.Editor.prototype.removeAssociateButton = function(button) {

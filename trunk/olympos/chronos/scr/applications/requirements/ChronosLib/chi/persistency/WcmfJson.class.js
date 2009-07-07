@@ -488,16 +488,17 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					break;
 				
 				case "save":
+
 					var changeNode = {};
 					
 					changeNode.oid = currRequest.oid;
 					changeNode.type = chi.Util.getCweModelElementIdFromOid(currRequest.oid);
 					changeNode.values = {};
-					changeNode.values[1] = {};
+					changeNode.values["1"] = {};
 					
 					for ( var i in currRequest.values) {
 						if (!(currRequest.values[i] instanceof Function)) {
-							changeNode.values[1][i] = currRequest.values[i];
+							changeNode.values["1"][i] = currRequest.values[i];
 						}
 					}
 					

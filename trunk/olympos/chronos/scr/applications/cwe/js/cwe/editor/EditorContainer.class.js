@@ -46,6 +46,9 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 		this.on("remove", function(tabPanel, tab) {
 			self.tabClose(tabPanel, tab);
 		});
+		this.on("show", function(container) {
+			container.ownerCt.ownerCt.setActiveTab(container.ownerCt);
+		});
 		
 	}
 })

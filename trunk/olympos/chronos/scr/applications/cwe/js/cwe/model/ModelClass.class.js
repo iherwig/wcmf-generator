@@ -30,3 +30,31 @@ cwe.model.ModelClass.prototype.getRecordDefinition = function() {
 cwe.model.ModelClass.prototype.getEditorItems = function() {
 	throw "cwe.model.ModelClass.getEditorItems not overwritten";
 }
+
+cwe.model.ModelClass.prototype.isParent = function(fieldName) {
+	var result = false;
+	
+	if (this.relations) {
+		var relation = this.relations[fieldName];
+		
+		if (relation) {
+			result = relation.isParent;
+		}
+	}
+	
+	return result;
+}
+
+cwe.model.ModelClass.prototype.getTargetModelClass = function(fieldName) {
+	var result = false;
+	
+	if (this.relations) {
+		var relation = this.relations[fieldName];
+		
+		if (relation) {
+			result = cwe.model.ModelClassContainer.getInstance().getClass(relation.targetModelClassId);
+		}
+	}
+	
+	return result;
+}

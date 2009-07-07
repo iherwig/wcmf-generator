@@ -29,9 +29,30 @@ cwm.requirements.ChiGoal = function() {
 		name : "Notes",
 		mapping : "Notes"
 	}, {
-		name : "ValueAmount",
-		mapping : "ValueAmount"
+		name : "parentChiGoal",
+		mapping : "parentChiGoal"
+	}, {
+		name : "childChiGoal",
+		mapping : "childChiGoal"
+	}, {
+		name : "childChiRequirement",
+		mapping : "childChiRequirement"
 	} ];
+	
+	this.relations = {
+		"parentChiGoal" : {
+			isParent : true,
+			targetModelClassId : "ChiGoal"
+		},
+		"childChiGoal" : {
+			isParent : false,
+			targetModelClassId : "ChiGoal"
+		},
+		"childChiRequirement" : {
+			isParent : false,
+			targetModelClassId : "ChiRequirement"
+		}
+	}
 }
 
 Ext.extend(cwm.requirements.ChiGoal, cwe.model.ModelClass);
@@ -45,16 +66,24 @@ cwm.requirements.ChiGoal.prototype.getEditorItems = function() {
 		fieldLabel : "Notes",
 		name : "Notes",
 		dataIndex : "Notes"
-	}), new Ext.form.TextField( {
-		fieldLabel : "ValueAmount",
-		name : "ValueAmount",
-		dataIndex : "ValueAmount"
 	}), new cwe.editor.control.SingleAssociate( {
 		fieldLabel : "parentChiGoal",
 		name : "parentChiGoal",
 		dataIndex : "parentChiGoal",
-		targetCweModelElementId: "ChiGoal",
-		isParent: true
+		targetCweModelElementId : "ChiGoal",
+		isParent : true
+	}), new cwe.editor.control.MultipleAssociate( {
+		fieldLabel : "childChiGoal",
+		name : "childChiGoal",
+		dataIndex : "childChiGoal",
+		targetCweModelElementId : "ChiGoal",
+		isParent : false
+	}), new cwe.editor.control.MultipleAssociate( {
+		fieldLabel : "childChiRequirement",
+		name : "childChiRequirement",
+		dataIndex : "childChiRequirement",
+		targetCweModelElementId : "ChiRequirement",
+		isParent : false
 	}) ];
 }
 
