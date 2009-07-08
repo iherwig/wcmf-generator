@@ -75,7 +75,7 @@ class UWMImporterController extends Controller
 	{
 		$newTime = microtime(true);
 	
-		//echo $newTime-$this->lastTime, ": $msg<br/ >\n";
+		echo $newTime-$this->lastTime, ": $msg<br/ >\n";
 		
 		$this->lastTime = $newTime;
 	}
@@ -148,7 +148,7 @@ class UWMImporterController extends Controller
 	
 		$this->check('Generator finished');
 	
-		if ($runCfg && strpos($runCfg['stdout'], 'ERROR') === false) {
+		if ($runCfg /*&& strpos($runCfg['stdout'], 'ERROR') === false*/) {
 			$result = $tmpUwmPath;
 		} else {
 			$this->addErrorMsg('Generator failed!<br />Output: '.nl2br($runCfg['stdout']).'<br />'.nl2br($runCfg['stderr']).'<br />Returncode: '.$runCfg['returncode']);
@@ -518,13 +518,6 @@ class UWMImporterController extends Controller
 		return $arr[count($arr)-1];
 	}
 
-  /**
-   * @see Controller::executeKernel()
-   */
-  function executeKernel()
-  {
-    return true;
-  }
 // PROTECTED REGION END
 
 }

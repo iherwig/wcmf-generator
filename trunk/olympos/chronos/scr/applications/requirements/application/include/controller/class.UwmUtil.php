@@ -29,6 +29,8 @@ class UwmUtil {
 
 	private static $dom;
 	private static $persistenceFacade;
+	
+	private static $processedManyToMany = array();
 
 	private static $lastTime = 0;
 
@@ -318,6 +320,17 @@ class UwmUtil {
 		{
 			$result = true;
 			
+			$processThisManyToMany = true;
+			
+			if ($currChild->getType() != $currChild->getBaseType()) {
+				if (array_key_exists($currChild->getId(), self::$processedManyToMany)) {
+					$processThisManyToMany = false;
+				} else {
+					self::$processedManyToMany[$currChild->getId()] = true;
+				}
+			}
+			
+			if ($processThisManyToMany) {
 			$currChild->loadParents();
 			$parents = $currChild->getParents();
 			foreach ($parents as $currParent)
@@ -345,24 +358,13 @@ class UwmUtil {
 					self::$dom->endElement();
 				}
 			}
-		}
+}		}
 		
 		return $result;
 	}
 
 	private static function getRealType($node) {
-		$superClass = get_class($node);
-		do {
-			$className = $superClass;
-			$superClass = get_parent_class($className);
-			$superSuperClass = get_parent_class($superClass);
-		} while ($superSuperClass != 'ChiBase' && $superSuperClass != '');
-		
-		if ($superSuperClass == '') {
-			$className = get_class($node);
-		}
-	
-		return $className;
+		return $node->getBaseType();
 	}
 
 	public static function prepareUmlFile($oid) {

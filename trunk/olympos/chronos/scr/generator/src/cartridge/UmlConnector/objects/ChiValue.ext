@@ -18,7 +18,7 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiValue") ->
-			uc.setTaggedValue("Chronos::ChiValue", "PropertyType", c.propertyType) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "PropertyType", c.propertyType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "app_data_type", c.appDataType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "db_data_type", c.dbDataType) ->
 			//uc.setTaggedValue("Chronos::ChiValue", "is_editable", c.isEditable) ->
@@ -28,18 +28,18 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 			uc.setTaggedValue("Chronos::ChiValue", "restrictions_not_match", c.restrictionsNotMatch) ->
 			uc.setTaggedValue("Chronos::ChiValue", "restrictions_description", c.restrictionsDescription) ->
 			uc.setTaggedValue("Chronos::ChiValue", "column_name", c.columnName) ->
-			uc.setTaggedValue("Chronos::ChiValue", "Alias", c.alias) ->
-			uc.setTaggedValue("Chronos::ChiValue", "Version", c.version) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "Alias", c.alias) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "Version", c.version) ->
 			uc.setName(c.name) ->
 			c.notes != null ? (
 				comment.setBody(c.notes) ->
 				comment.annotatedElement.add(uc) ->
 				uc.ownedComment.add(comment)
-			) : Void ->
-			uc.setTaggedValue("Chronos::ChiValue", "created", c.created) ->
-			uc.setTaggedValue("Chronos::ChiValue", "creator", c.creator) ->
-			uc.setTaggedValue("Chronos::ChiValue", "last_editor", c.lastEditor) ->
-			uc.setTaggedValue("Chronos::ChiValue", "modified", c.modified)
+			) : Void //->
+			//uc.setTaggedValue("Chronos::ChiValue", "created", c.created) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "creator", c.creator) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "last_editor", c.lastEditor) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "modified", c.modified)
 		)
 	)
 ;
@@ -48,7 +48,7 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	//(new cwm::ChiValue).set
 	let un = new cwm::ChiValue : (
 		un.setId(c.getId()) ->
-		un.setPropertyType(c.getTaggedValue("Chronos::ChiValue", "PropertyType").toString()) ->
+		//un.setPropertyType(c.getTaggedValue("Chronos::ChiValue", "PropertyType").toString()) ->
 		un.setAppDataType(c.getTaggedValue("Chronos::ChiValue", "app_data_type").toString()) ->
 		un.setDbDataType(c.getTaggedValue("Chronos::ChiValue", "db_data_type").toString()) ->
 		//un.setIsEditable(c.getTaggedValue("Chronos::ChiValue", "is_editable")) ->
@@ -58,14 +58,14 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 		un.setRestrictionsNotMatch(c.getTaggedValue("Chronos::ChiValue", "restrictions_not_match").toString()) ->
 		un.setRestrictionsDescription(c.getTaggedValue("Chronos::ChiValue", "restrictions_description").toString()) ->
 		un.setColumnName(c.getTaggedValue("Chronos::ChiValue", "column_name").toString()) ->
-		un.setAlias(c.getTaggedValue("Chronos::ChiValue", "Alias").toString()) ->
-		un.setVersion(c.getTaggedValue("Chronos::ChiValue", "Version").toString()) ->
+		//un.setAlias(c.getTaggedValue("Chronos::ChiValue", "Alias").toString()) ->
+		//un.setVersion(c.getTaggedValue("Chronos::ChiValue", "Version").toString()) ->
 		un.setName(c.name) ->
-		un.setNotes(c.getComment()) ->
-		un.setCreated(c.getTaggedValue("Chronos::ChiValue", "created").toString()) ->
-		un.setCreator(c.getTaggedValue("Chronos::ChiValue", "creator").toString()) ->
-		un.setLastEditor(c.getTaggedValue("Chronos::ChiValue", "last_editor").toString()) ->
-		un.setModified(c.getTaggedValue("Chronos::ChiValue", "modified").toString())
+		un.setNotes(c.getComment()) // ->
+		//un.setCreated(c.getTaggedValue("Chronos::ChiValue", "created").toString()) ->
+		//un.setCreator(c.getTaggedValue("Chronos::ChiValue", "creator").toString()) ->
+		//un.setLastEditor(c.getTaggedValue("Chronos::ChiValue", "last_editor").toString()) ->
+		//un.setModified(c.getTaggedValue("Chronos::ChiValue", "modified").toString())
 	) ->
 	un
 ;
