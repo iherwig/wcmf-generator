@@ -25,10 +25,10 @@ uml::Class convert(cwm::ChiNode n):
 Void establishConnections(cwm::ChiNode b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNode:" + b.id).first(): (
 		b.child.select(e|e.targetType == "ChiView").establishConnectionsToClass(uc, um, "contains", uml::AggregationKind::composite, uml::AggregationKind::none, false, false) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "Generalization").establishGeneralizationToClass(uc, um) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "Aggregation").establishConnectionsToClass(uc, um, null, uml::AggregationKind::shared, uml::AggregationKind::none, false, false) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "Composition").establishConnectionsToClass(uc, um, null, uml::AggregationKind::composite, uml::AggregationKind::none, false, false) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "Association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, false)
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "generalization").establishGeneralizationToClass(uc, um) ->
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "aggregation").establishConnectionsToClass(uc, um, null, uml::AggregationKind::shared, uml::AggregationKind::none, false, false) ->
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "composition").establishConnectionsToClass(uc, um, null, uml::AggregationKind::composite, uml::AggregationKind::none, false, false) ->
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, false)
 	)
 ;
 
@@ -70,7 +70,7 @@ Void transferValues(cwm::ChiNode c, uml::Model um):
 
 cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 	let un = new cwm::ChiNode : (
-		un.chiValue.addAll(c.ownedAttribute.convertToCwm()) ->
+		un.chiValue.addAll(c.ownedAttribute.typeSelect(Chronos::ChiValue).convertToCwm()) ->
 		un.operation.addAll(c.ownedOperation.convertToCwm()) ->
 	
 		un.setId(c.getId()) ->
@@ -78,14 +78,14 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 		un.setPkName(c.getTaggedValue("Chronos::ChiNode", "pk_name").toString()) ->
 		un.setOrderby(c.getTaggedValue("Chronos::ChiNode", "orderby").toString()) ->
 		un.setParentOrder(c.getTaggedValue("Chronos::ChiNode", "parent_order").toString()) ->
-		un.setChildOrder(c.getTaggedValue("Chronos::ChiNode", "Child_order").toString()) ->
+		un.setChildOrder(c.getTaggedValue("Chronos::ChiNode", "child_order").toString()) ->
 		un.setDisplayValue(c.getTaggedValue("Chronos::ChiNode", "display_value").toString()) ->
 		//un.setIsOrdered(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_ordered")) ->
 		//un.setIsSoap(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_soap")) ->
 		//un.setIsSearchable(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_searchable")) ->
 		un.setInitparams(c.getTaggedValue("Chronos::ChiNode", "initparams").toString()) ->
-		un.setAuthor(c.getTaggedValue("Chronos::ChiNode", "Author").toString()) ->
-		un.setStatus(c.getTaggedValue("Chronos::ChiNode", "Status").toString()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiNode", "author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiNode", "status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiNode", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiNode", "Version").toString()) ->
 		un.setName(c.name) ->

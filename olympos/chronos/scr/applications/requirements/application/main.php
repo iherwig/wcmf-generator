@@ -16,7 +16,7 @@
  *
  * $Id$
  */
-error_reporting(E_ERROR | E_PARSE);
+error_reporting(E_ALL | E_NOTICE);
 
 require_once("base_dir.php");  
 require_once(BASE."wcmf/lib/util/class.Log.php");

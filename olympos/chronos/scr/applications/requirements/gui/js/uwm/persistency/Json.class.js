@@ -277,6 +277,13 @@ uwm.persistency.Json.prototype.exportUwm = function(startModel, startPackage, su
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.generateExpeditor = function(startModel, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'generateExpeditor',
+		startModel: startModel,
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.doContinue = function(controller, successHandler, errorHandler) {
 	this.jsonRequest({
 		controller: controller,
