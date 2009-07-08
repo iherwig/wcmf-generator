@@ -277,7 +277,7 @@ uwm.persistency.Json.prototype.exportUwm = function(startModel, startPackage, su
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.continue = function(controller, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.doContinue = function(controller, successHandler, errorHandler) {
 	this.jsonRequest({
 		controller: controller,
 		usr_action: 'continue'

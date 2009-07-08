@@ -118,5 +118,5 @@ uwm.persistency.Persistency.prototype.exportDoc = function(templateName, startMo
 uwm.persistency.Persistency.prototype.exportUwm = function(startModel, startPackage, successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.continue = function(controller, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.doContinue = function(controller, successHandler, errorHandler ) {
 }

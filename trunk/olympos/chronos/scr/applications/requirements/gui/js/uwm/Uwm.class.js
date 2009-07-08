@@ -209,7 +209,7 @@ uwm.Uwm.prototype.installOverrides = function() {
 	});
 
 	Ext.apply(Ext.EventObject, {
-		within : navigator.userAgent.match(/firefox\/((\d+\.)+\d+)/i)[1] >= 3.5 ? function(el, related, allowEl) {
+		within : navigator.userAgent.match(/firefox\/((\d+\.)+\d+)/i) && navigator.userAgent.match(/firefox\/((\d+\.)+\d+)/i)[1] >= 3.5 ? function(el, related, allowEl) {
 			try {
 				if(el) {
 					var t = this[related ? "getRelatedTarget" : "getTarget"]();

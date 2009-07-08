@@ -82,7 +82,7 @@ uwm.persistency.LongTask.prototype.jsonSuccess = function(options, data) {
 		if (this.processHandler instanceof Function) {
 			this.processHandler(stepName, stepNumber, numberOfSteps);
 		}
-		uwm.persistency.Persistency.getInstance().continue(controller, this.jsonSuccess.createDelegate(this), this.jsonError.createDelegate(this));
+		uwm.persistency.Persistency.getInstance().doContinue(controller, this.jsonSuccess.createDelegate(this), this.jsonError.createDelegate(this));
 	}
 }
 
