@@ -10,12 +10,12 @@ extension cartridge::ChiCmf::extensions::globals;
 /**
  * Add inherited values and associations to all nodes
  */
-Void addDefaults(uml::Model this) :
+Void addDefaults(uml::Model this, uml::Profile profile) :
 	info("--------------------------") ->
 	info("M2M Start") ->
 	info("--------------------------") ->
 	info("Apply Chronos profile") ->
-	this.applyProfile(ProfileFile()) ->
+	this.applyProfile(profile) ->
 	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
 		postProcessNodes("Model::"+RootPackage()+"::"+ApplicationPackage()) ->
 	info("--------------------------") ->

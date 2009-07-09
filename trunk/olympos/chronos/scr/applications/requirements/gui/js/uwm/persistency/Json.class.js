@@ -284,6 +284,13 @@ uwm.persistency.Json.prototype.generateExpeditor = function(startModel, successH
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.generateWcmf = function(startModel, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'generateWcmf',
+		startModel: startModel,
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.doContinue = function(controller, successHandler, errorHandler) {
 	this.jsonRequest({
 		controller: controller,

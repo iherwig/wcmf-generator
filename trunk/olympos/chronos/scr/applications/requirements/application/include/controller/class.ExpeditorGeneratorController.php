@@ -172,8 +172,8 @@ class ExpeditorGeneratorController extends BatchController
 		$session = &SessionData::getInstance();
 	
 		// cleanup
-		//unlink($session->get($this->TEMP_UWM_EXPORT_PATH));
-		//unlink($session->get($this->TEMP_PROPERTIES_PATH));
+		unlink($session->get($this->TEMP_UWM_EXPORT_PATH));
+		unlink($session->get($this->TEMP_PROPERTIES_PATH));
 
 	}
 	// PROTECTED REGION END

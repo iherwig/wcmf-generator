@@ -88,6 +88,23 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 		            text : uwm.Dict.translate("Generate"),
 		            menu : {
 			            items : [ {
+			                text : uwm.Dict.translate("wCMF"),
+			                handler : function(item, e) {
+				                new uwm.ui.LongTaskRunner( {
+				                    title : uwm.Dict.translate('Generating wCMF ...'),
+				                    call : function(successHandler, errorHandler) {
+					                    uwm.persistency.Persistency.getInstance().generateWcmf(self.getModelNode().getOid(), successHandler, errorHandler);
+				                    },
+				                    successHandler : function() {
+				                    },
+				                    errorHandler : function() {
+					                    uwm.Util.showMessage(uwm.Dict.translate("Error while generating"), uwm.Dict.translate("The generation was unsuccessful. Please try again."),
+					                            uwm.Util.messageType.ERROR);
+				                    },
+				                    isReturningDocument : false
+				                }).show();
+			                }
+			            },{
 			                text : uwm.Dict.translate("Expeditor"),
 			                handler : function(item, e) {
 				                new uwm.ui.LongTaskRunner( {
@@ -98,7 +115,7 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 				                    successHandler : function() {
 				                    },
 				                    errorHandler : function() {
-					                    uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The generation was unsuccessful. Please try again."),
+					                    uwm.Util.showMessage(uwm.Dict.translate("Error while generating"), uwm.Dict.translate("The generation was unsuccessful. Please try again."),
 					                            uwm.Util.messageType.ERROR);
 				                    },
 				                    isReturningDocument : false
