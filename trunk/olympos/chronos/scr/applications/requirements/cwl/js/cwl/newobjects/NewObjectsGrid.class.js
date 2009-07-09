@@ -36,14 +36,12 @@ cwl.newobjects.NewObjectsGrid = Ext.extend(Ext.grid.GridPanel, {
 		});
 		
 		Ext.apply(this, {
-			region: "north",
 			collapsible: true,
-			split: true,
 			autoScroll: true,
 			height: 250,
 			title: chi.Dict.translate("New") + " " + this.semanticGroup,
 			layout: "fit",
-			enableDragDrop: true,
+			enableDrag: true,
 			ddGroup: cwl.Constants.DD_GROUP,
 			selModel: new Ext.grid.RowSelectionModel({
 				singleSelect: true
@@ -93,7 +91,6 @@ cwl.newobjects.NewObjectsGrid.prototype.getStore = function() {
 	var data = new Array();
 	
   data = this.addElements(data, cwl.rule.RuleElementContainer.getInstance().getAllElements());
-  data = this.addElements(data, cwl.model.ModelElementContainer.getInstance().getAllElements());
 	
 	return new Ext.data.SimpleStore({
 		data: data,

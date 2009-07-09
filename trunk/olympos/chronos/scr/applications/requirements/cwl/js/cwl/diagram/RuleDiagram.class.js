@@ -52,7 +52,7 @@ cwl.diagram.RuleDiagram.prototype.render = function() {
 	cwl.diagram.RuleDiagram.superclass.render.apply(this, arguments);
 	
   this.initCanvas();
-  this.initDropZone();
+  //this.initDropZone();
 }
 
 /**
@@ -80,6 +80,8 @@ cwl.diagram.RuleDiagram.prototype.initCanvas = function() {
 	canvasEl.applyStyles( {
 	    width: this.workspaceWidth + "px",
 	    height: this.workspaceHeight + "px"
+	    //width: 100 + "px",
+	    //height: 100 + "px"
 	});
 
 	/**
