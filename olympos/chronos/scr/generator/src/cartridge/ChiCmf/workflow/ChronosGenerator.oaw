@@ -4,18 +4,17 @@
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='3'/>
 	<property name='basePath' value='src'/>
+	<property file="${basePath}/cartridge/ChiCmf/workflow/ChronosGenerator.properties"/>
+
 	<property name='propertyFile' value='${basePath}/cartridge/ChiCmf/workflow/chiCmf.properties'/>
 	<property file="${propertyFile}"/>
 	
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
 	
 	<!-- Metamodel-Definition -->
-	<bean id="EmfMM" class="oaw.type.emf.EmfMetaModel">
-		<metaModelPackage value="org.eclipse.emf.ecore.EcorePackage"/>
-	</bean>
 	<bean id="UmlMM" class="oaw.uml2.UML2MetaModel"/>
 	<bean id="${profilename}MM" class="oaw.uml2.profile.ProfileMetaModel">
-		<profile value="${profileUmlFile}"/>
+		<profile value="${profileUri}"/>
 	</bean>
 
 	<!-- read model XML -->
@@ -29,8 +28,8 @@
 	</component>
 
 	<!-- read profile as model -->
-	<component class="oaw.emf.XmiReader">
-		<modelFile value="${profileUmlFile}"/>
+	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
+		<modelUrl value='${profileUri}'/>
 		<outputSlot value="chronosProfileModel"/>
 	</component>
 
@@ -54,7 +53,6 @@
 			<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
 			<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
 
-			<metaModel idRef="EmfMM"/>
 			<metaModel idRef="UmlMM"/>
 			<metaModel idRef="${profilename}MM"/>
 			<checkFile value="${preCheckFile}"/>
@@ -67,17 +65,16 @@
 	<component id="m2m" class="oaw.xtend.XtendComponent">
 
 		<!-- Global variables used by the transformation -->
-		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
-		<globalVarDef name="ProfileFile" value="'${profileUmlFile}'"/>
+		<globalVarDef name="ModelFile" value="'temporary'"/>
+		<globalVarDef name="ProfileFile" value="'${profileUri}'"/>
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
 		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
 		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
 
-		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
- 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model)"/>
+ 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model, chronosProfileModel)"/>
 
 		<outputSlot value="transformedModel"/>
 	</component>
@@ -92,7 +89,6 @@
 			<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
 			<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
 
-			<metaModel idRef="EmfMM"/>
 			<metaModel idRef="UmlMM"/>
 			<metaModel idRef="${profilename}MM"/>
 			<checkFile value="${postCheckFile}"/>
@@ -101,18 +97,12 @@
 		</component>
 	</if>
 
-	<!-- Write out transformed model for manual cross-check -->
-	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
-		<inputSlot value="transformedModel" />
-		<outPath value="${transformedModelUmlFile}" />
-	</component>
-
 	<!-- Install the framework -->
-	<component class="com.wemove.wcmf.generator.workflow.InstallComponent">
+	<!--component class="com.wemove.wcmf.generator.workflow.InstallComponent">
 		<frameworkFile value="${frameworkFile}"/>
 		<libraryPath value="${targetDir}/${libraryPackage}"/>
 		<applicationPath value="${targetDir}/${applicationPackage}"/>
-	</component>
+	</component-->
 
 	<!-- Expand the model into the templates -->
 	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="true">
@@ -120,7 +110,7 @@
 		
 		<!-- Global variables used by the generator -->
 		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
-		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
+		<globalVarDef name="ModelFile" value="'temporary'"/>
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
 		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
@@ -129,15 +119,12 @@
 		<globalVarDef name="TargetDirectory" value="'${targetDir}'"/>
 		<globalVarDef name="HeaderText" value="${headerText}"/>
 
-		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
 		
 		<expand value="${expand} FOR transformedModel"/>
 		
 		<outlet path="${targetDir}">
-			<postprocessor class="oaw.xpand2.output.JavaBeautifier"/>
-			<postprocessor class="oaw.xpand2.output.XmlBeautifier"/>
 		</outlet>
 		
 		<!-- Protected regions configuration -->

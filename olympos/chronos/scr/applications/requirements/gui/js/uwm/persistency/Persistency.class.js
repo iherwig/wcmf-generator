@@ -121,5 +121,8 @@ uwm.persistency.Persistency.prototype.exportUwm = function(startModel, startPack
 uwm.persistency.Persistency.prototype.generateExpeditor = function(startModel, successHandler, errorHandler ) {
 }
 
+uwm.persistency.Persistency.prototype.generateWcmf = function(startModel, successHandler, errorHandler ) {
+}
+
 uwm.persistency.Persistency.prototype.doContinue = function(controller, successHandler, errorHandler ) {
 }
