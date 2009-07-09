@@ -16,7 +16,6 @@ cwl.model.RootPackage = function() {
 	
 	this.cwlModelElementId = cwl.model.RootPackage.ROOT_PACKAGE_ID;
 	this.name = "RootPackage";
-	this.owningPackageId = null;
 }
 
 Ext.extend(cwl.model.RootPackage, cwl.model.ModelPackage);

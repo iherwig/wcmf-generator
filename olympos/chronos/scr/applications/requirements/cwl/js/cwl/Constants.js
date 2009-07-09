@@ -19,3 +19,8 @@ Ext.namespace("cwl.Constants");
  * @type String
  */
 cwl.Constants.SVN_REVISION = "";
+
+/**
+ * Name of the drag/drop group used by cwl ui elements
+ */
+cwl.Constants.DD_GROUP = "cwl.DDGroup";

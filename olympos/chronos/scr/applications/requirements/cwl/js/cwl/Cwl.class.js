@@ -225,7 +225,7 @@ cwl.Cwl.prototype.bootstrap = function() {
 }
 
 cwl.Cwl.prototype.processElement = function(element, container) {
-  if (["Model", "Package", "ChiBusinessUseCase"].indexOf(element.type) != -1) {
+  if (["Model", "Package", "ActivitySet", "ChiBusinessUseCase"].indexOf(element.type) != -1) {
     var e = new cwl.model.ModelPackage();
   }
   else {

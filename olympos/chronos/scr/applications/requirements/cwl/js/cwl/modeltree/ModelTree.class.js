@@ -33,12 +33,16 @@ cwl.modeltree.ModelTree = function() {
 cwl.modeltree.ModelTree = Ext.extend(Ext.tree.TreePanel, {
 	initComponent : function() {
 		Ext.apply(this, {
-		    width : 250,
-		    autoScroll : true,
-		    animate : true,
-		    containerScroll : true,
-		    rootVisible : false,
-		    title : chi.Dict.translate("Model Tree")
+		    width: 250,
+		    autoScroll: true,
+		    animate: true,
+		    containerScroll: true,
+		    rootVisible: false,
+        enableDrag: true,
+        dragConfig: {
+          ddGroup: cwl.Constants.DD_GROUP
+        },
+		    title: chi.Dict.translate("Model Tree")
 		});
 		
 		cwl.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);

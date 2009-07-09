@@ -37,7 +37,7 @@ cwl.newobjects.Accordion = Ext.extend(Ext.Panel, {
     this.data = new Array(0);
     
     this.addElements(cwl.rule.RuleElementContainer.getInstance().getAllElements());
-    this.addElements(cwl.model.ModelElementContainer.getInstance().getAllElements());
+    //this.addElements(cwl.model.ModelElementContainer.getInstance().getAllElements());
 
     for (var i = 0; i < this.data.length; i++) {
       this.add(new cwl.newobjects.NewObjectsGrid({
