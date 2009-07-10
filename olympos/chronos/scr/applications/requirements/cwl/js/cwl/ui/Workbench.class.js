@@ -25,7 +25,6 @@ cwl.ui.Workbench = function(config) {
 			title: chi.Dict.translate('Available Content'),
 			collapsible: true,
 			split: true,
-      border: false,
 			width: 260,
 			layout: 'fit',
 			id: 'availableContentContainer',
@@ -34,50 +33,49 @@ cwl.ui.Workbench = function(config) {
         items: [{
           region: 'north',
           layout: 'fit',
-          border: false,
           height: 300,
           split: true,
           items: new cwl.newobjects.Accordion()
         },{
           region: 'center',
           layout: 'fit',
-          border: false,
           split: true,
           items: new cwl.modeltree.ModelTree()
         }]
       })
     },{
 			region: 'center',
+			collapsible: false,
+			width: 260,
 			id: 'ruleContainer',
+			layout: 'fit',
 			items: new Ext.Panel({
-        layout: 'fit',
-        border: false,
-        items: new Ext.Panel({
-          height: 900,
-          layout: 'border',
-          items: [{
-            region: 'center',
-            layout: 'fit',
-            border: false,
-            items: new Ext.TabPanel({
-              enableTabScroll: true,
-              activeTab: 0,
-              items: [new cwl.diagram.RuleDiagram({
-                closable: true,
-                title: "Rule",
-                autoScroll: true,
-                workspaceWidth: 100,
-                workspaceHeight: 100
-              })]
-            })
-          },{
-            region: 'south',
-            title: 'Rule Definition',
-            layout: 'fit',
-            border: false,
-            height: 100
-          }]
-        })
+        height: 800,
+        id: 'centerPanel',
+        layout: 'border',
+        items: [{
+          region: 'center',
+          layout: 'fit',
+          split: true,
+          items: new cwl.diagram.DiagramTabPanel({
+            enableTabScroll: true,
+            activeTab: 0,
+            items: [new cwl.diagram.RuleDiagram({
+              closable: true,
+              title: "Rule",
+              autoScroll: true,
+              workspaceWidth: 100,
+              workspaceHeight: 100
+            })]
+          })
+        },{
+          region: 'south',
+          layout: 'fit',
+          title: chi.Dict.translate('Rule Expression'),
+          split: true,
+          height: 100,
+          items: new Ext.Panel()
+        }]
       })
     },{
 			region: 'east',
@@ -86,11 +84,17 @@ cwl.ui.Workbench = function(config) {
 			split: true,
 			width: 260,
 			layout: 'fit',
-      border: false,
 			id: 'usedContentContainer',
 			items: new cwl.objecttree.ObjectTree()
-    }]
+    }],
+    listeners: {
+      resize: function(component, adjWidth, adjHeight, rawWidth, rawHeight ) {
+        if (Ext.get('centerPanel'))
+          Ext.get('centerPanel').setHeight(Ext.get('availableContentContainer').dom.clientHeight);
+      }
+    }    
 	}, config));
 }
 
 Ext.extend(cwl.ui.Workbench, Ext.Viewport);
+
