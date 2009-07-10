@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<UMLProfile profiletype="uml2">
+	<Documentation id="E232EAF0-2" name="Chronos" version="1.0" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
+	<Content>
+		<Stereotypes>
+			<Stereotype name="ChiAssociation" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="fk_name" type="String" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiObject" notes="a ChiObject is a candidate for a ChiNode repppresented in an activity diagr" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Activity">
+						<Property name="isReadOnly" value="false"/>
+						<Property name="isSingleExecution" value=""/>
+						<Property name="parameterName" value=""/>
+						<Property name="postcondition" value=""/>
+						<Property name="precondition" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiStakeHolder" notes="Any person or force that have an interest in the considered domain." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<AppliesTo>
+					<Apply type="Actor"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Legitimacy" type="enumeration" description="" unit="" values="Low,Medium,High" default="medium"/>
+					<Tag name="Power" type="enumeration" description="the measure of the possibilities in context that this person has to realiza his objectives." unit="" values="Low,Medium,High" default="medium"/>
+					<Tag name="Role" type="String" description="The official role that this stakeholder play in context." unit="" values="" default=""/>
+					<Tag name="Urgency" type="enumeration" description="" unit="" values="Low,Medium,High" default="medium"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiOpinionInner" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<AppliesTo>
+					<Apply type="Activity">
+						<Property name="isReadOnly" value="false"/>
+						<Property name="isSingleExecution" value=""/>
+						<Property name="parameterName" value=""/>
+						<Property name="postcondition" value=""/>
+						<Property name="precondition" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiOpinion" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<AppliesTo>
+					<Apply type="Activity">
+						<Property name="isReadOnly" value="false"/>
+						<Property name="isSingleExecution" value=""/>
+						<Property name="parameterName" value=""/>
+						<Property name="postcondition" value=""/>
+						<Property name="precondition" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiAccord" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiDiscord" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiBase" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" isAbstract="true">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="Alias" type="String" description="the Project Id of this object." unit="" values="" default=""/>
+					<Tag name="Author" type="String" description="this is the original author, in sense of idea, of the object, distingued from this technical creator in sense of phisical creation." unit="" values="" default=""/>
+					<Tag name="created" type="String" description="the creation date of this object" unit="" values="" default=""/>
+					<Tag name="creator" type="String" description="the user that created this object" unit="" values="" default=""/>
+					<Tag name="last_editor" type="String" description="the last user that edited this object" unit="" values="" default=""/>
+					<Tag name="modified" type="String" description="the date when this object was modified" unit="" values="" default=""/>
+					<Tag name="Status" type="String" description="this describes the actal status in the Chronos workflow" unit="" values="" default=""/>
+					<Tag name="Version" type="String" description="the model version of this object" unit="" values="" default="1.0"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiGoal" notes="a Measurable scope that the enterprise wants to achieve. " cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<TaggedValues>
+					<Tag name="Priority" type="Integer" description="A priority in %" unit="" values="" default="50"/>
+					<Tag name="Value_ammount" type="String" description="The actual amount of the value this goal intends to alter" unit="" values="" default=""/>
+					<Tag name="Value_Goal" type="String" description="The amount by which the value is to be altered" unit="" values="" default=""/>
+					<Tag name="Value_Name" type="String" description="The name of the value this goal intends to alter" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiRequirement" notes="A Business guide line about the Enterprise or the project." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<TaggedValues>
+					<Tag name="Author" type="String" description="This requirement's author's name and role in the project" unit="" values="" default="myName, Analyst"/>
+					<Tag name="Priority" type="Integer" description="A priority in %. Requirements are ordered by priority." unit="" values="" default="50"/>
+					<Tag name="Proofreader" type="String" description="Each requirement needs to be confirmed.&#xA;This requirement's proofreader	's name and role in the project" unit="" values="" default="aName, Client"/>
+					<Tag name="Status" type="enumeration" description="" unit="" values="Proposed,Mandatory,Validated" default=""/>
+					<Tag name="Type" type="enumeration" description="" unit="" values="Business Rule,Security,Performance,Persistence,Scalability,Transport" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiFeature" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<TaggedValues>
+					<Tag name="Author" type="String" description="This feature's author's name and role in the project" unit="" values="" default="myName, Analyst"/>
+					<Tag name="Proofreader" type="String" description="This feature's revisor's name and role in the project" unit="" values="" default="aName, Client"/>
+					<Tag name="Status" type="enumeration" description="This feature's status" unit="" values="Proposed,Validated,Rejected,Implemented" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiIssue" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<TaggedValues>
+					<Tag name="Author" type="String" description="This issue's author's name and role in the project" unit="" values="" default=""/>
+					<Tag name="Responsible" type="String" description="The responsible to close the present issue" unit="" values="" default="none"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiAction" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiActionKey" notes="An action key used in Chronos. An action key associates two controllers (to define a control flow) or a view with a controller (to define a view attachment). Controller, Views and Associations define the application flow" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="action" type="String" description="The Action which triggeres this association" unit="" values="" default=""/>
+					<Tag name="context" type="String" description="The Context in which this association is valid" unit="" values="" default=""/>
+					<Tag name="config" type="String" description="The configuration file in which this association will be placed" unit="" values="" default="config.ini"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiActivity" notes="" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Activity">
+						<Property name="isReadOnly" value="false"/>
+						<Property name="isSingleExecution" value=""/>
+						<Property name="parameterName" value=""/>
+						<Property name="postcondition" value=""/>
+						<Property name="precondition" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiBusinessProcess" notes="A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<AppliesTo>
+					<Apply type="Package"/>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiBusinessUseCase" notes="A Business Use Case is part of a business process that produces an advantage to the enterprise." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<AppliesTo>
+					<Apply type="UseCase"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="GoalInContext" type="String" description="The goal should implicitly express the actor's intent or purpose of the use case, such as &quot;Enrol Student in Seminar.&quot;" unit="" values="" default=""/>
+					<Tag name="Precondition" type="String" description="A list of the conditions, if any, that must be met before a use case may be invoked. Can be a previous Use case or self the presence of the system in Scope." unit="" values="" default=""/>
+					<Tag name="Trigger" type="String" description="Event that is responsible for invocation of the use case." unit="" values="" default=""/>
+					<Tag name="Scope" type="String" description="Boundaries in which the use case is operated when invoked (E.g. CMS)" unit="" values="" default=""/>
+					<Tag name="Level" type="String" description="Authorizations for operations/actions to be performed against the Chi business objects in scope. Against every object/process 4 CRUD basic operations are possible:&#xA;Create (Write)&#xA;Read (Open)&#xA;Update (Change)&#xA;Delete  (Destroy)" unit="" values="" default=""/>
+					<Tag name="PrimaryActor" type="String" description="the main actor of this use case" unit="" values="" default=""/>
+					<Tag name="OtherActors" type="String" description="The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable." unit="" values="" default=""/>
+					<Tag name="Stakeholders" type="String" description="List of actors that have a special interest (i.e. to be informed every time) in completion of the use case" unit="" values="" default=""/>
+					<Tag name="MainSuccessScenario" type="String" description="The main path of logic an actor follows through a use case. Often referred to as the &quot;happy path&quot; or the &quot;main path&quot; because it describes how the use case works when everything works as it normally should." unit="" values="" default=""/>
+					<Tag name="Extensions" type="String" description="" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiBusinessUseCaseCore" notes="A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money)." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessUseCase"/>
+			<Stereotype name="ChiManyToMany" notes="A many to many node used in WCMF. It is used to realize a many to many relation between wo WCMFNodes" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiNode"/>
+			<Stereotype name="ChiRelationEnd" notes="An association end used in Chronos" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Association">
+						<Property name="direction" value="Source -&gt; Destination"/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="fk_name" type="String" description="The name of the foreign key column. The generator will add this if there is no appropriate attribute. If not given the generator will add 'fk_[parent]_id'" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiBusinessPartner" notes="A ChiBusinesPartner is an external person that has a Business relation with the enterprise." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<AppliesTo>
+					<Apply type="Actor"/>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiBusinessPartnerActive" notes="A ChiBusinesPartnerActive is a direct customer of the enterprise." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner"/>
+			<Stereotype name="ChiBusinessPartnerPassive" notes="A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner"/>
+			<Stereotype name="ChiWorker" notes="A ChiWorker is a special actor that works within the enterprise. " cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<AppliesTo>
+					<Apply type="Actor"/>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiWorkerExternal" notes="A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker">
+				<TaggedValues>
+					<Tag name="is_OfflineUser" type="bool" description="" unit="" values="true,false" default="true"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiWorkerInternal" notes="A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners." cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker"/>
+			<Stereotype name="ChiNode" notes="A Node type used in Chronos. Nodes and Values define the application data model" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="child_order" type="String" description="The order of the associated children e.g. for Recipe: Image|Info|AdminInfo" unit="" values="" default=""/>
+					<Tag name="display_value" type="String" description="The display value of a node e.g. for Recipe: name|AdminInfo/status|Info/status" unit="" values="" default=""/>
+					<Tag name="initparams" type="String" description="The configuration section that is used on initialization of the corresponding mapper." unit="" values="" default="database"/>
+					<Tag name="is_searchable" type="enumeration" description="Indicates wether this type should be included in the default search." unit="" values="true,false" default="true"/>
+					<Tag name="is_soap" type="enumeration" description="Indicates wether a SOAP interface should be generated for this type." unit="" values="true,false" default=""/>
+					<Tag name="orderby" type="String" description="Definition of default sorting. Possible values: 'none' (no order), 'sortkey' (generates a 'sortkey' column, that is used for explicit sorting) or any the name of any ChiValue defined in the node optionally followed by [ASC|DESC] e.g. 'name ASC'" unit="" values="" default="none"/>
+					<Tag name="parent_order" type="String" description="The order of the associated parents." unit="" values="" default=""/>
+					<Tag name="pk_name" type="String" description="The name of the primary key column. The generator will add this if there is no appropriate attribute." unit="" values="" default="id"/>
+					<Tag name="table_name" type="String" description="The name of the database table. If not given the name will be taken." unit="" values="" default=""/>
+					<Tag name="reference_type"/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiValueRef" notes="A Node value type used in Chronos. These values reference values of other Node types and are not persistent" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Attribute"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="reference_value" type="Classifier:reference_value" description="The referenced attribute" unit="ChiValue" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiValue" notes="A Node value type used in Chronos. These values are persistent" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Attribute"/>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="app_data_type" type="String" description="The datatype used in the application e.g. DATATYPE_DONTCARE, DATATYPE_ATTRIBUTE, DATATYPE_ELEMENT or DATATYPE_IGNORE" unit="" values="" default="DATATYPE_ATTRIBUTE"/>
+					<Tag name="db_data_type" type="String" description="The datatype used in the database" unit="" values="" default="VARCHAR(255)"/>
+					<Tag name="is_editable" type="enumeration" description="Whether the attribute is editable or not" unit="" values="true,false" default="true"/>
+					<Tag name="input_type" type="String" description="The HTML input type for the attribute e.g. select#fix:key1[val1]|key2[val2]" unit="" values="" default="text"/>
+					<Tag name="display_type" type="String" description="The HTML display type for the attribute e.g. image" unit="" values="" default="text"/>
+					<Tag name="restrictions_match" type="String" description="A regular expression that the value must match (e.g. '[0-3][0-9]\.[0-1][0-9]\.[0-9][0-9][0-9][0-9]' for date values)" unit="" values="" default=""/>
+					<Tag name="restrictions_not_match" type="String" description="A regular expression that the value must NOT match" unit="" values="" default=""/>
+					<Tag name="restrictions_description" type="String" description="A text describing the restrictions" unit="" values="" default=""/>
+					<Tag name="column_name" type="String" description="The name of the database column. If not given the name will be taken" unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiSystem" notes="A system configuration. Settings are modelled as attributes with default values" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+				<TaggedValues>
+					<Tag name="config" type="String" description="The configuration file where the settings will be placed." unit="" values="" default="config.ini"/>
+					<Tag name="plattform" type="String" description="The plattform to which the configuration settings apply." unit="" values="" default=""/>
+				</TaggedValues>
+			</Stereotype>
+			<Stereotype name="ChiController" notes="A Controller type used in Chronos. Controller, Views and Associations define the application flow" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+			<Stereotype name="ChiView" notes="A View used in Chronos. Controller, Views and Associations define the application flow" cx="100" cy="80" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Class">
+						<Property name="isActive" value=""/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
+		</Stereotypes>
+		<TaggedValueTypes>
+			<TaggedValueType property="reference_type" description="" notes="Type=Classifier;Stereotypes=ChiValueRef;"/>
+		</TaggedValueTypes>
+	</Content>
+</UMLProfile>
