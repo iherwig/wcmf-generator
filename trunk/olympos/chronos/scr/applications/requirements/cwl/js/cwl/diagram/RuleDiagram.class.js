@@ -30,18 +30,45 @@ cwl.diagram.RuleDiagram = function(config) {
 	
 	this.dropWindow = null;
 	this.canvas = null;
-  /*
-  this.graph = new Graph();
-  
-  this.graph.addNode({
-    id:'n0',
-    name:'test',
-    data:{}
-  });*/
-	
 }
 
-Ext.extend(cwl.diagram.RuleDiagram, Ext.Panel);
+Ext.extend(cwl.diagram.RuleDiagram, cwl.diagram.DiagramTab);
+
+/**
+ * Initiates a new diagram.
+ *
+ * <p>
+ * Creates a new panel for the tab, initiates internal state to default values.
+ * </p>
+ */
+cwl.diagram.RuleDiagram.prototype.init = function() {
+	
+	/**
+	 * Whether Objects should snap to other objects when moving.
+	 * 
+	 * @private
+	 * @type boolean
+	 */
+	this.snapToObjects = false;
+	
+	/**
+	 * The width of this diagram.
+	 * 
+	 * @private
+	 * @type int
+	 */
+	this.workspaceWidth = 10000;
+	
+	/**
+	 * The height of this diagram.
+	 * 
+	 * @private
+	 * @type int
+	 */
+	this.workspaceHeight = 10000;
+	
+	this.createdObjects = new Array();
+}
 
 /**
  * Initiates the contained diagram.
@@ -51,16 +78,17 @@ Ext.extend(cwl.diagram.RuleDiagram, Ext.Panel);
 cwl.diagram.RuleDiagram.prototype.render = function() {
 	cwl.diagram.RuleDiagram.superclass.render.apply(this, arguments);
 	
-  this.initCanvas();
+  this.init();
+  this.initWorkflow();
   //this.initDropZone();
 }
 
 /**
- * Installs the canvas
+ * Initiates the draw2d elements of this diagram.
  *
  * @private
  */
-cwl.diagram.RuleDiagram.prototype.initCanvas = function() {
+cwl.diagram.RuleDiagram.prototype.initWorkflow = function() {
 	/**
 	 * The viewport of this diagram.
 	 *
@@ -69,36 +97,63 @@ cwl.diagram.RuleDiagram.prototype.initCanvas = function() {
 	 */
 	this.viewPort = this.body;
 	this.viewPort.applyStyles( {
-	    overflow: "auto",
-	    display: "block",
-	    position: "fixed"
+	    overflow : "auto",
+	    display : "block",
+	    position : "fixed"
 	});
 	
-	var canvasEl = Ext.DomHelper.append(this.viewPort, {
-		tag: "div"
+	this.canvas = Ext.DomHelper.append(this.viewPort, {
+		tag : "div"
 	}, true);
-	canvasEl.applyStyles( {
-	    width: this.workspaceWidth + "px",
-	    height: this.workspaceHeight + "px"
-	    //width: 100 + "px",
-	    //height: 100 + "px"
-	});
+	this.canvas.applyStyles( {
+	    width : this.workspaceWidth + "px",
+	    height : this.workspaceHeight + "px"
+	})
 
+	//uwm.Util.setElementUnselectable(this.viewPort.dom);
+	
 	/**
-	 * The canvas of this diagram.
+	 * The draw2d workflow of this diagram.
 	 * 
 	 * @private
-	 * @type Canvas (JIT)
+	 * @type cwl.diagram.UwmWorkflow
 	 */
-  this.canvas = new Canvas('mycanvas', {  
-    'injectInto': canvasEl.id,
-    'width': this.workspaceWidth,
-    'height': this.workspaceHeight,
-    'styles': {  
-      'fillStyle': '#ccddee',  
-      'strokeStyle': '#772277'  
-    }
-  });
+	this.workflow = new cwl.diagram.UwmWorkflow(this.canvas.id, this);
+	
+	this.workflow.diagram = this;
+	
+	this.workflow.setViewPort(this.viewPort.id);
+	
+	// this.workflow.scrollTo(this.workspaceHeight / 2, this.workspaceWidth /
+	// 2);
+	
+	//this.scrollToCenter();
+	
+	/**
+	 * The Selection Lister of this diagram.
+	 * 
+	 * @private
+	 * @type uwm.diagram.SelectionListener
+	 */
+	//this.selectionListener = new uwm.diagram.SelectionListener(this);
+	//this.workflow.addSelectionListener(this.selectionListener);
+	
+	/**
+	 * The Workflow Event Listener of this diagram.
+	 * 
+	 * @private
+	 * @type uwm.diagram.WorkflowEventListener
+	 */
+	//this.workflowEventListener = new uwm.diagram.WorkflowEventListener(this);
+	//this.workflow.getCommandStack().addCommandStackEventListener(this.workflowEventListener);
+	
+	/**
+	 * The auto-layouter of this diagram.
+	 * 
+	 * @private
+	 * @type uwm.diagram.autolayout.Layouter
+	 */
+	//this.layouter = new uwm.diagram.autolayout.Layouter(this.workflow);
 }
 
 /**
