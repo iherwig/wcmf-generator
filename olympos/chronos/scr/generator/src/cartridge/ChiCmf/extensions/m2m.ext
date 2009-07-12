@@ -17,7 +17,21 @@ Void addDefaults(uml::Model this, uml::Profile profile) :
 	info("Apply Chronos profile") ->
 	this.applyProfile(profile) ->
 	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
-		postProcessNodes("Model::"+RootPackage()+"::"+ApplicationPackage()) ->
+		postProcessNodes("uml-generated::"+RootPackage()+"::"+ApplicationPackage()) ->
+	info("--------------------------") ->
+	info("M2M End") ->
+	info("--------------------------") ->
+	this
+;
+
+Void addDefaults(uml::Model this) :
+	info("--------------------------") ->
+	info("M2M Start") ->
+	info("--------------------------") ->
+	info("Apply Chronos profile") ->
+	this.applyProfile(ProfileFile()) ->
+	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
+		postProcessNodes("uml-generated::"+RootPackage()+"::"+ApplicationPackage()) ->
 	info("--------------------------") ->
 	info("M2M End") ->
 	info("--------------------------") ->
