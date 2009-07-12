@@ -98,7 +98,7 @@
 	<!-- Install the framework -->
 	<component class="com.wemove.wcmf.generator.workflow.InstallComponent">
 		<frameworkFile value="${frameworkFile}"/>
-		<libraryPath value="${targetDir}/${libraryPackage}"/>
+		<libraryPath value="${targetDir}/wcmf"/>
 		<applicationPath value="${targetDir}/${applicationPackage}"/>
 	</component>
 
