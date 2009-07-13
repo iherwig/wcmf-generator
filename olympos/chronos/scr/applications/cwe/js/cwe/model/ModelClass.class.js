@@ -27,6 +27,38 @@ cwe.model.ModelClass.prototype.getRecordDefinition = function() {
 	return this.recordDefinition;
 }
 
+cwe.model.ModelClass.prototype.getGridColumns = function() {
+	var result = this.gridColumns;
+	
+	if (!result) {
+		var recordDefinition = this.getRecordDefinition();
+		
+		result = [];
+		
+		for (var i = 0; i < recordDefinition.length; i++) {
+			var isRelation = false;
+			if (this.relations) {
+				var relation = this.relations[recordDefinition[i].mapping];
+				
+				if (relation) {
+					isRelation = true;
+				}
+			}
+		
+			if (recordDefinition[i].mapping != "oid" && !isRelation) {
+				result.push({
+					header : recordDefinition[i].name,
+					dataIndex : recordDefinition[i].mapping,
+					width : 100,
+					sortable : true
+				});
+			}
+		}
+	}
+	
+	return result;
+}
+
 cwe.model.ModelClass.prototype.getEditorItems = function() {
 	throw "cwe.model.ModelClass.getEditorItems not overwritten";
 }

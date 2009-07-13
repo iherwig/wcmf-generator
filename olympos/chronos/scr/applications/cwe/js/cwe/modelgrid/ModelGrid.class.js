@@ -80,22 +80,7 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 					}
 				}
 			}),
-			columns : [ {
-				header : "Name",
-				dataIndex : "Name",
-				width : 100,
-				sortable : true
-			}, {
-				header : "Notes",
-				dataIndex : "Notes",
-				width : 100,
-				sortable : true
-			}, {
-				header : "ValueAmount",
-				dataIndex : "value_ammount",
-				width : 100,
-				sortable : true
-			} ],
+			columns : this.modelClass.getGridColumns(),
 			store : this.store,
 			viewConfig : {
 				forceFit : true
