@@ -24,7 +24,6 @@ cwl.graphics.figure.BaseFigure = function(label) {
 Ext.extend(cwl.graphics.figure.BaseFigure, draw2d.VectorFigure);
 
 cwl.graphics.figure.BaseFigure.prototype.onElementDrop = function(modelElement) {
-  console.info(modelElement.getName()+" dropped on "+this.label);
   return false;
 }
 
