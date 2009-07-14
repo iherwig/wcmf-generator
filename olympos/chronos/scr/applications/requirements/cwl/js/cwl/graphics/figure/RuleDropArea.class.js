@@ -11,11 +11,19 @@
  */
 Ext.namespace("cwl.graphics.figure");
 
-cwl.graphics.figure.RuleDropArea = function(label, container) {
-  this.container = container;
+/**
+ * Represents a DropArea inside a RuleFigure. All coordinates are relative to
+ * the RuleFigure.
+ */
+cwl.graphics.figure.RuleDropArea = function(label, acceptableTypes) {
+  this.acceptableTypes = acceptableTypes;
   this.label = label;
   this.div = null;
   this.textNode = null;
+  this.x = 0;
+  this.y = 0;
+  this.width = 0;
+  this.height = 0;
 }
 
 /**
@@ -43,10 +51,37 @@ cwl.graphics.figure.RuleDropArea.prototype.createHTMLElement = function() {
  * Set the position and dimension of the DropArea
  */
 cwl.graphics.figure.RuleDropArea.prototype.setDimension = function(x, y, w, h) {
+  this.x = x;
+  this.y = y;
+  this.width = w;
+  this.height = h;
+
   if (this.div) {
-    this.div.style.left = x+"px";
-    this.div.style.top = y+"px";
-    this.div.style.width = w+"px";
-    this.div.style.height = h+"px";
+    this.div.style.left = this.x+"px";
+    this.div.style.top = this.y+"px";
+    this.div.style.width = this.width+"px";
+    this.div.style.height = this.height+"px";
   }
+}
+
+/**
+ * Check if the DropArea accepts the given ModelElement
+ */
+cwl.graphics.figure.RuleDropArea.prototype.acceptsElement = function(modelElement) {
+  if (this.acceptableTypes.indexOf(modelElement.getType()) >= 0) {
+    return true;
+  }
+  return false;
+}
+
+/**
+ * Check if the DropArea covers a given point
+ */
+cwl.graphics.figure.RuleDropArea.prototype.isOver = function (x, y) {
+    var x1 = this.x;
+    var y1 = this.y;
+    var x2 = x1 + this.width;
+    var y2 = y1 + this.height;
+    var result = (x >= x1 && x <= x2 && y >= y1 && y <= y2);
+    return result;
 }

@@ -47,6 +47,16 @@ var ruleElements = [{
     treeIconClass: null,
     semanticGroup: "Rule Action"
   },{
+    name: "Update",
+    type: "RuleAction",
+    treeIconClass: null,
+    semanticGroup: "Rule Action"
+  },{
+    name: "Delete",
+    type: "RuleAction",
+    treeIconClass: null,
+    semanticGroup: "Rule Action"
+  },{
     name: "Input",
     type: "RuleVariable",
     treeIconClass: null,
