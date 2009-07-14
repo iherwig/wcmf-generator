@@ -30,7 +30,8 @@ cwe.editor.control.SingleAssociate = Ext.extend(Ext.form.TwinTriggerField, {
 		Ext.apply(this, {
 			trigger1Class : 'associateButton',
 			trigger2Class : 'disassociateButton',
-			readOnly : true
+			readOnly : true,
+			width: 805
 		});
 		
 		cwe.editor.control.SingleAssociate.superclass.initComponent.apply(this, arguments);

@@ -51,16 +51,13 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 			frame : false,
 			autoScroll : true,
 			labelAlign : "left",
-			labelWidth : 90,
+			labelWidth : 200,
 			tbar : [ this.saveButton, this.cancelButton ],
 			items : this.modelClass.getEditorItems(),
 			msgTarget : "side"
 		});
 		
-		for ( var i = 0; i < this.items.length; i++) {
-			var currItem = this.items[i];
-			currItem.editor = this;
-		}
+		this.propagateEditor(this.items);
 		
 		cwe.editor.Editor.superclass.initComponent.apply(this, arguments);
 		
@@ -80,6 +77,27 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		}
 	}
 })
+
+cwe.editor.Editor.prototype.propagateEditor = function(items) {
+	var self = this;
+
+	if (items) {
+		if (Ext.isArray(items)) {
+			for ( var i = 0; i < items.length; i++) {
+				var currItem = items[i];
+				if (currItem) {
+					currItem.editor = self;
+					self.propagateEditor(currItem.items);
+				}
+			}
+		} else if (items instanceof Ext.util.MixedCollection) {
+			items.each(function(elem) {
+				elem.editor = self;
+				self.propagateEditor(elem.items);
+			});
+		}
+	}
+}
 
 cwe.editor.Editor.prototype.save = function() {
 	if (!this.newObject) {

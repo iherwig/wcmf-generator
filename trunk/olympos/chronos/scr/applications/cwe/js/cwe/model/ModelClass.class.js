@@ -63,6 +63,10 @@ cwe.model.ModelClass.prototype.getEditorItems = function() {
 	throw "cwe.model.ModelClass.getEditorItems not overwritten";
 }
 
+cwe.model.ModelClass.prototype.getLabel = function(record) {
+	return record.get("Name");
+}
+
 cwe.model.ModelClass.prototype.isParent = function(fieldName) {
 	var result = false;
 	
