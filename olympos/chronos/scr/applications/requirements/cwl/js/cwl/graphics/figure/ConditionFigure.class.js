@@ -39,8 +39,7 @@ cwl.graphics.figure.ConditionFigure.prototype.onMouseEnter = function() {
       this.form = new Ext.form.FormPanel({
         renderTo: Ext.Element.get(this.formNode).id,
         frame: true,
-        width: 250,
-        //z-index: this.getZOrder()+1,
+        width: 280,
         items: [{
           layout:'column',
           items: [
@@ -72,6 +71,9 @@ cwl.graphics.figure.ConditionFigure.prototype.onMouseEnter = function() {
           handler: function() {
             self.closeForm();
           }
+        },{
+          text: 'Add Condition',
+          handler: function() {}
         }]
       });
     }
