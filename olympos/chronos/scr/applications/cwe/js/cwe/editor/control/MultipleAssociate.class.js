@@ -62,7 +62,7 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 		
 		Ext.apply(this, {
 			height : 200,
-			width : 200,
+			width : 805,
 			tbar : [ this.associateButton, this.disassociateButton ],
 			selModel : new Ext.grid.RowSelectionModel( {
 				singleSelect : false

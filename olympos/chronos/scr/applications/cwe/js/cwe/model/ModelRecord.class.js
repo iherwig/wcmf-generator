@@ -48,7 +48,7 @@ cwe.model.ModelRecord.prototype.setOid = function(oid) {
 }
 
 cwe.model.ModelRecord.prototype.getLabel = function() {
-	return this.get("Name");
+	return this.getModelClass().getLabel(this);
 }
 
 cwe.model.ModelRecord.prototype.set = function(name, value) {
