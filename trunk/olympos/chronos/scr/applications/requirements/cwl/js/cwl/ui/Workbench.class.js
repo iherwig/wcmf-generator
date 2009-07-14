@@ -62,10 +62,7 @@ cwl.ui.Workbench = function(config) {
             activeTab: 0,
             items: [new cwl.diagram.RuleDiagram({
               closable: true,
-              title: "Rule",
-              autoScroll: true,
-              workspaceWidth: 100,
-              workspaceHeight: 100
+              title: "Rule Set"
             })]
           })
         },{

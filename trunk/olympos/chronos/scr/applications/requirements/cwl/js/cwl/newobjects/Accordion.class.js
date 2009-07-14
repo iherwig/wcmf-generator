@@ -83,5 +83,5 @@ cwl.newobjects.Accordion.prototype.getGroupArray = function() {
 	return this.data;
 }
 
-cwl.newobjects.Accordion.CONTAINED_TYPES = ['RuleComponent', 'ChiNode'];
+cwl.newobjects.Accordion.CONTAINED_TYPES = ['RuleCondition', 'RuleOperator', 'RuleAction', 'RuleVariable'];
 

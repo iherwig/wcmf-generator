@@ -23,6 +23,7 @@ cwl.diagram.RuleDiagram = function(config) {
 	cwl.diagram.RuleDiagram.superclass.constructor.call(this, Ext.apply(this, {
 		elements: "body",
     border: false,
+    autoscroll: true
 	}, config));
 	
 	this.figures = new Ext.util.MixedCollection();
@@ -80,7 +81,7 @@ cwl.diagram.RuleDiagram.prototype.render = function() {
 	
   this.init();
   this.initWorkflow();
-  //this.initDropZone();
+  this.initDropZone();
 }
 
 /**
@@ -110,7 +111,7 @@ cwl.diagram.RuleDiagram.prototype.initWorkflow = function() {
 	    height : this.workspaceHeight + "px"
 	})
 
-	//uwm.Util.setElementUnselectable(this.viewPort.dom);
+	chi.Util.setElementUnselectable(this.viewPort.dom);
 	
 	/**
 	 * The draw2d workflow of this diagram.
@@ -157,6 +158,51 @@ cwl.diagram.RuleDiagram.prototype.initWorkflow = function() {
 }
 
 /**
+ * Returns whether snap to objects is activated for this diagram.
+ *
+ * @return <code>true</code> if snap to objects is activated for this diagram,
+ *         <code>false</code> otherwise.
+ * @type boolean
+ */
+cwl.diagram.RuleDiagram.prototype.isSnapToObjects = function() {
+	return this.snapToObjects;
+}
+
+/**
+ * Sets snap to objects for this diagram.
+ *
+ * @param {boolean}
+ *            snapToObjects <code>true</code> if object should snap to other
+ *            objects, <code>false</code> if objects should not snap to other
+ *            objects when moving.
+ */
+cwl.diagram.RuleDiagram.prototype.setSnapToObjects = function(snapToObjects) {
+	this.snapToObjects = snapToObjects;
+	this.workflow.setSnapToGeometry(snapToObjects);
+}
+
+/**
+ * Returns the position a context menu should be shown at.
+ *
+ * @param {int}
+ *            x The draw2d event x position.
+ * @param {int}
+ *            y The draw2d event y position.
+ * @return The position of the context menu in Ext format.
+ * @type Object
+ */
+cwl.diagram.RuleDiagram.prototype.getContextMenuPosition = function(x, y) {
+	var scroll = this.viewPort.getScroll();
+	var xy = this.viewPort.getXY();
+	
+	return [ x - scroll.left + xy[0] + 2, y - scroll.top + xy[1] + 2 ];
+}
+
+cwl.diagram.RuleDiagram.prototype.getWorkflow = function() {
+  return this.workflow;
+}
+
+/**
  * Initiates the drop zone of this diagram.
  *
  * @private
@@ -175,9 +221,51 @@ cwl.diagram.RuleDiagram.prototype.initDropZone = function() {
 	});
 }
 
-cwl.diagram.RuleDiagram.prototype.addCondition = function(modelElement) {
-  
+cwl.diagram.RuleDiagram.prototype.addNewObject = function(modelElement, x, y) {
+
+  // check if there is an object under the new object that can handle the drop
+  // event
+  var bestFigure = this.getBestFigure(x, y);
+  var isHandled = false;
+  if (bestFigure && bestFigure instanceof cwl.graphics.figure.BaseFigure)
+    isHandled = bestFigure.onElementDrop(modelElement);
+
+  if (!isHandled) {
+    // if not, we create a new figure
+    var figure = null;  
+    if (modelElement.getType() == "Rule") {
+      figure = new cwl.graphics.figure.RuleFigure("New Rule");
+      figure.setDimension(300, 500);
+    }
+    if (modelElement.getType() == "RuleCondition") {
+      figure = new cwl.graphics.figure.ConditionFigure("New Condition");
+      figure.setDimension(80, 40);
+    }
+    if (modelElement.getType() == "RuleAction") {
+      figure = new cwl.graphics.figure.ActionFigure("New "+modelElement.getName()+"Action");
+      figure.setDimension(95, 60);
+    }
+    if (figure) {
+      this.workflow.addFigure(figure, x, y);
+      var compFigure = this.workflow.getBestCompartmentFigure(x, y);
+      if (compFigure && compFigure != figure)
+        compFigure.addChild(figure);
+        
+      this.figures.add(figure.getId(), figure);
+    }
+  }
 }
 
-cwl.diagram.RuleDiagram.prototype.addOperator = function(modelElement) {
+cwl.diagram.RuleDiagram.prototype.getBestFigure = function(x, y)
+{
+  var result = null;
+  this.figures.each(function(figure, index, length) {
+    if (figure.isOver(x,y)) {
+      if (result == null)
+        result = figure;
+      else if (result.getZOrder() < figure.getZOrder())
+        result = figure;
+    }
+  });
+  return result;
 }

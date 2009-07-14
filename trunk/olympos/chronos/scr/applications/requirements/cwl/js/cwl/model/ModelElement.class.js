@@ -19,6 +19,7 @@ cwl.model.ModelElement = function() {
   this.semanticGroup = null;
   this.description = null;
   this.helpUrl = null;
+  this.attributes = [];
 }
 
 cwl.model.ModelElement.prototype.getId = function() {
@@ -55,4 +56,8 @@ cwl.model.ModelElement.prototype.getOwningPackage = function() {
 
 cwl.model.ModelElement.prototype.getSemanticGroup = function() {
 	return this.semanticGroup;
+}
+
+cwl.model.ModelElement.prototype.getAttributes = function() {
+	return this.attributes;
 }

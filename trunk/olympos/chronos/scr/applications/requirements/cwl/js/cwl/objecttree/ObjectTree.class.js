@@ -54,6 +54,9 @@ cwl.objecttree.ObjectTree = Ext.extend(Ext.tree.TreePanel, {
             return self.checkDropable(data.node) ? this.dropAllowed : this.dropNotAllowed;
           },
         },
+        dragConfig: {
+          ddGroup: cwl.Constants.DD_GROUP
+        },        
 		    title: chi.Dict.translate("Object In Use"),
         header: false
 		});
@@ -100,7 +103,7 @@ cwl.objecttree.ObjectTree.prototype.loadTree = function(currPackage) {
  * Check if a node can be dropped
  */
 cwl.objecttree.ObjectTree.prototype.checkDropable = function(modelData) {
-  if (modelData.getModelElement().getType() == "ChiNode")
+  if (modelData.getModelElement().getType() == "ChiNode" || modelData.getModelElement().getType() == "ChiObject")
     return true;
   return false;
 }
@@ -111,13 +114,24 @@ cwl.objecttree.ObjectTree.prototype.checkDropable = function(modelData) {
 cwl.objecttree.ObjectTree.prototype.receiveModelNode = function(modelData) {
   if (this.checkDropable(modelData)) {
     var modelElement = modelData.getModelElement();
-    var objectNode = new cwl.objecttree.ObjectNode(Ext.apply({}, modelData.attributes));
+    //var objectNode = new cwl.objecttree.ObjectNode(Ext.apply({}, modelData.attributes));
+    var objectNode = new cwl.objecttree.ObjectNode({modelElement: modelElement});
     
     // append attributes
-    objectNode.appendChild(new Ext.tree.TreeNode({
-      text: "name",
-      iconCls : "FigureChiValue"
-    }));
+    var attributes = modelElement.getAttributes();
+    for (var i=0; i<attributes.length; i++) {
+      var e = new cwl.model.ChiValue(modelElement);
+      e.cwlModelElementId = Ext.id();
+      e.name = attributes[i];
+      e.type = "ChiValue";
+      e.treeIconClass = "FigureChiValue";
+      
+      objectNode.appendChild(new cwl.modeltree.Node({
+        text: attributes[i],
+        iconCls : "FigureChiValue",
+        modelElement: e
+      }));
+    }
     
     // create instance name
     objectNode.text = "My" + modelElement.getName() + ": " + modelElement.getName();

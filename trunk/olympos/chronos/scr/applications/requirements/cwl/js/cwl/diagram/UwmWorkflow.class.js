@@ -29,6 +29,8 @@ cwl.diagram.UwmWorkflow = function(id, diagram) {
 	 * @type cwl.diagram.Diagram
 	 */
 	this.diagram = diagram;
+  
+  this.menuPos = [];
 	
 	this.buildContextMenu();
 	
@@ -56,7 +58,7 @@ cwl.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
 	 * @type Ext.menu.Menu
 	 */
 	this.uwmContextMenu = new Ext.menu.Menu( {
-		items : [ new Ext.menu.Item( {
+		items : [ /*new Ext.menu.Item( {
 		    text : chi.Dict.translate("Show in model tree"),
 		    listeners : {
 			    click : function() {
@@ -92,7 +94,17 @@ cwl.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
 				    self.printDiagram();
 			    }
 		    }
-		})
+		})*/
+      new Ext.menu.Item({
+        text : chi.Dict.translate("New Rule"),
+        listeners : {
+          click : function(item, e) {
+            var element = new cwl.model.ModelElement();
+            element.type = "Rule";
+            self.diagram.addNewObject(element, self.menuPos[0], self.menuPos[1]);
+          }
+        }
+      })
 		]
 	});
 }
@@ -107,14 +119,16 @@ cwl.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
  *            y Y position to show the context menu at.
  */
 cwl.diagram.UwmWorkflow.prototype.onContextMenu = function(x, y) {
+  /*
 	var snapToObjects = this.uwmContextMenu.items.get(cwl.diagram.UwmWorkflow.CONTEXT_MENU_SNAP_TO_OBJECTS);
 	
 	snapToObjects.checked = this.diagram.isSnapToObjects();
-	
+	*/
 	this.uwmContextMenu.showAt(this.diagram.getContextMenuPosition(x, y));
 	
 	this.oldX = null;
 	this.html.style.cursor = "default";
+  this.menuPos = [x, y];
 }
 
 /**

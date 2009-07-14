@@ -112,7 +112,7 @@ cwl.Cwl.prototype.handleError = function(e, message, uri, line) {
 		}
 	}
 	
-	chi.persistency.Persistency.getInstance().log("error", plainText);
+	//chi.persistency.Persistency.getInstance().log("error", plainText);
 	
 	var html = "";
 	for ( var i in data) {
@@ -225,20 +225,17 @@ cwl.Cwl.prototype.bootstrap = function() {
 }
 
 cwl.Cwl.prototype.processElement = function(element, container) {
-  if (["Model", "Package", "ActivitySet", "ChiBusinessUseCase"].indexOf(element.type) != -1) {
+  if (["Model", "Package", "ChiBusinessProcess", "ActivitySet", "ChiBusinessUseCase"].indexOf(element.type) != -1) {
     var e = new cwl.model.ModelPackage();
   }
   else {
     var e = new cwl.model.ModelElement();
   }
 
+	for (var property in element) {
+		e[property] = element[property];
+	}
   e.cwlModelElementId = element.id || Ext.id();
-  e.name = element.name;
-  e.type = element.type;
-  e.description = element.description;
-  e.helpUrl = element.helpUrl;
-  e.treeIconClass = element.treeIconClass;
-  e.semanticGroup = element.semanticGroup;
     
   var parent = null;
   if (element.parentId) {
