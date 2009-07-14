@@ -89,7 +89,6 @@ cwl.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 	var result = this.checkDropable(modelElement, position[0], position[1]);
 	
 	if (result == this.dropAllowed) {
-    console.info("dropped: "+modelElement.type+" ["+modelElement.name+"]");
 /*
     Ext.Msg.show({
        title: modelData.name + ' instance name',
