@@ -62,7 +62,8 @@ cwl.diagram.DropZone.prototype.getTargetFromEvent = function(e) {
 cwl.diagram.DropZone.prototype.onNodeOver = function(nodeData, source, e, data) {
 
   var modelElement = this.getModelDataFromDragSource(data);
-	return this.checkDropable(modelElement);
+  var position = this.getDiagramPositionFromEvent(e);
+	return this.checkDropable(modelElement, position[0], position[1]);
 }
 
 /**
@@ -83,12 +84,11 @@ cwl.diagram.DropZone.prototype.onNodeOver = function(nodeData, source, e, data) 
  * @type boolean
  */
 cwl.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) {
-	oid = null;
+	var modelElement = this.getModelDataFromDragSource(data);
+  var position = this.getDiagramPositionFromEvent(e);
+	var result = this.checkDropable(modelElement, position[0], position[1]);
 	
-  var modelElement = this.getModelDataFromDragSource(data);
-	var result = this.checkDropable(modelElement);
-	
-	if (result) {
+	if (result == this.dropAllowed) {
     console.info("dropped: "+modelElement.type+" ["+modelElement.name+"]");
 /*
     Ext.Msg.show({
@@ -102,16 +102,8 @@ cwl.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
         }
        },
     });
-*/
-		var xOffset = this.diagram.getWorkflow().getAbsoluteX();
-		var yOffset = this.diagram.getWorkflow().getAbsoluteY();
-		var scrollLeft = this.diagram.getWorkflow().getScrollLeft();
-		var scrollTop = this.diagram.getWorkflow().getScrollTop();
-		
-		var x = e.xy[0] - xOffset + scrollLeft;
-		var y = e.xy[1] - yOffset + scrollTop;
-    
-    this.diagram.addNewObject(modelElement, x, y);
+*/    
+    this.diagram.addNewObject(modelElement, position[0], position[1]);
 	}
 	return result;
 }
@@ -121,14 +113,21 @@ cwl.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
  *
  * @private
  * @param {Object} modelData Data of the dragged object.
+ * @param {integer} x The x position in diagram space.
+ * @param {integer} y The y position in diagram space.
  * @return <code>Ext.dd.DropZone.prototype.dropAllowed</code> If the dragged object can be dropped here, <code>false</code> othewise.
  * @type boolean
  */
-cwl.diagram.DropZone.prototype.checkDropable = function(modelElement) {
+cwl.diagram.DropZone.prototype.checkDropable = function(modelElement, x, y) {
 	var result = this.dropNotAllowed;
+  
+  // check for allowed content
 	if (modelElement != null && ((modelElement.getSemanticGroup() && modelElement.getSemanticGroup().indexOf("Rule") == 0) || 
     modelElement.getType() == "ChiValue" || modelElement.getType() == "Operation")) {
-    result = this.dropAllowed;
+    
+    // check diagram content
+    if (this.diagram.checkDropable(modelElement, x, y))
+      result = this.dropAllowed;
 	}
 	
 	return result;
@@ -152,4 +151,23 @@ cwl.diagram.DropZone.prototype.getModelDataFromDragSource = function(data) {
     return data.node.modelElement;
 	
 	return null;
+}
+
+/**
+ * Get the coordinates of a mouse event translated to diagram space
+ *
+ * @private
+ * @param {Event} e The mouse event.
+ * @return An array of coordinates (x, y)
+ * @type Array
+ */
+cwl.diagram.DropZone.prototype.getDiagramPositionFromEvent = function(e) {
+  var xOffset = this.diagram.getWorkflow().getAbsoluteX();
+  var yOffset = this.diagram.getWorkflow().getAbsoluteY();
+  var scrollLeft = this.diagram.getWorkflow().getScrollLeft();
+  var scrollTop = this.diagram.getWorkflow().getScrollTop();
+  
+  var x = e.xy[0] - xOffset + scrollLeft;
+  var y = e.xy[1] - yOffset + scrollTop;
+  return [x, y];
 }

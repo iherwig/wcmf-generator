@@ -14,13 +14,13 @@ Ext.namespace("cwl.graphics.figure");
 cwl.graphics.figure.RuleFigure = function(title) {
   this.title = title;
   this.titlebar = null;
-  this.inputDropArea = new cwl.graphics.figure.RuleDropArea("Inputs", this);
-  this.conditionDropArea = new cwl.graphics.figure.RuleDropArea("Condition", this);
-  this.actionDropArea = new cwl.graphics.figure.RuleDropArea("Actions", this);
-  this.outputDropArea = new cwl.graphics.figure.RuleDropArea("Outputs", this);
+  this.inputDropArea = new cwl.graphics.figure.RuleDropArea("Inputs", ["RuleVariable"]);
+  this.conditionDropArea = new cwl.graphics.figure.RuleDropArea("Condition", ["RuleCondition"]);
+  this.actionDropArea = new cwl.graphics.figure.RuleDropArea("Actions", ["RuleAction"]);
+  this.outputDropArea = new cwl.graphics.figure.RuleDropArea("Outputs", ["RuleVariable"]);
   
   this.defaultBackgroundColor = new draw2d.Color(255, 255, 255);
-  this.highlightBackgroundColor = new draw2d.Color(250, 250, 250);
+  this.highlightBackgroundColor = new draw2d.Color(150, 150, 150);
   draw2d.CompartmentFigure.call(this);
   
   this.setBackgroundColor(this.defaultBackgroundColor);
@@ -62,6 +62,21 @@ cwl.graphics.figure.RuleFigure.prototype.createHTMLElement = function() {
   return item;
 };
 
+cwl.graphics.figure.RuleFigure.prototype.checkDropable = function(modelElement, x, y) {
+  var xRel = x-this.getAbsoluteX();
+  var yRel = y-this.getAbsoluteY();
+
+  if (this.inputDropArea.isOver(xRel, yRel) && this.inputDropArea.acceptsElement(modelElement))
+    return true;
+  if (this.conditionDropArea.isOver(xRel, yRel) && this.conditionDropArea.acceptsElement(modelElement))
+    return true;
+  if (this.actionDropArea.isOver(xRel, yRel) && this.actionDropArea.acceptsElement(modelElement))
+    return true;
+  if (this.outputDropArea.isOver(xRel, yRel) && this.outputDropArea.acceptsElement(modelElement))
+    return true;
+  return false;
+}
+/*
 cwl.graphics.figure.RuleFigure.prototype.onFigureEnter = function(figure) {
   if (this.children[figure.id] == null) {
     this.setBackgroundColor(this.highlightBackgroundColor);
@@ -78,7 +93,7 @@ cwl.graphics.figure.RuleFigure.prototype.onFigureDrop = function(figure) {
   draw2d.CompartmentFigure.prototype.onFigureDrop.call(this, figure);
   this.setBackgroundColor(this.defaultBackgroundColor);
 };
-
+*/
 cwl.graphics.figure.RuleFigure.prototype.setDimension = function(w,h) {
   draw2d.CompartmentFigure.prototype.setDimension.call(this,w,h);
   
