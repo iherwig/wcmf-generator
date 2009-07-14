@@ -14,7 +14,9 @@ Ext.namespace("cwl.graphics.figure");
 cwl.graphics.figure.ConditionFigure = function(label) {
   cwl.graphics.figure.BaseFigure.prototype.constructor.call(this, label);
   
-  this.lineColor = new draw2d.Color(0, 0, 0);  
+  this.form = null;
+  this.formOpened = false;
+  this.lineColor = new draw2d.Color(0, 0, 0); 
 }
 
 Ext.extend(cwl.graphics.figure.ConditionFigure, cwl.graphics.figure.BaseFigure);
@@ -25,6 +27,75 @@ cwl.graphics.figure.ConditionFigure.prototype.onElementDrop = function(modelElem
     return true;
   }
   return false;
+}
+
+cwl.graphics.figure.ConditionFigure.prototype.onMouseEnter = function() {
+  var self = this;
+
+  if (!this.formOpened) {
+  
+    if (!this.form) {
+      // create the input form
+      this.form = new Ext.form.FormPanel({
+        renderTo: Ext.Element.get(this.formNode).id,
+        frame: true,
+        width: 250,
+        //z-index: this.getZOrder()+1,
+        items: [{
+          layout:'column',
+          items: [
+            new Ext.form.ComboBox({
+              store: ['left'],
+              columnWidth:.4,
+              hideLabel: true
+            }),
+            new Ext.form.ComboBox({
+              store: ['+', '-', '*', '/', '>', '>=', '<', '<=', '=='],
+              columnWidth:.2,
+              editable: false,
+              hideLabel: true
+            }),
+            new Ext.form.ComboBox({
+              store: ['right'],
+              columnWidth:.4,
+              hideLabel: true
+            })
+          ]
+        }],
+        buttons: [{
+          text: 'Save',
+          handler: function() {
+            self.closeForm();
+          }
+        },{
+          text: 'Cancel',
+          handler: function() {
+            self.closeForm();
+          }
+        }]
+      });
+    }
+    else {
+      this.form.show();
+    }
+    this.formOpened = true;
+    
+    this.setCanDrag(false);
+    this.setDeleteable(false);
+    this.setResizeable(false);
+    this.setSelectable(false);
+  }
+}
+
+cwl.graphics.figure.ConditionFigure.prototype.closeForm = function() {
+  if (this.formOpened) {
+    this.form.hide();
+    this.setCanDrag(true);
+    this.setDeleteable(true);
+    this.setResizeable(true);
+    this.setSelectable(true);
+    this.formOpened = false;
+  }
 }
 
 /**
