@@ -15,7 +15,7 @@ cwl.model.ModelPackage = function() {
 	cwl.model.ModelPackage.superclass.constructor.call(this, arguments);
 	
 	this.treeIconClass = "folder";
-	this.startExpanded = true;
+	this.startExpanded = false;
 	
 	this.children = new Ext.util.MixedCollection();
 }

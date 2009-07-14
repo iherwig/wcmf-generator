@@ -61,7 +61,8 @@ cwl.diagram.DropZone.prototype.getTargetFromEvent = function(e) {
  */
 cwl.diagram.DropZone.prototype.onNodeOver = function(nodeData, source, e, data) {
 
-	return this.checkDropable(data.data);
+  var modelElement = this.getModelDataFromDragSource(data);
+	return this.checkDropable(modelElement);
 }
 
 /**
@@ -84,11 +85,12 @@ cwl.diagram.DropZone.prototype.onNodeOver = function(nodeData, source, e, data) 
 cwl.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) {
 	oid = null;
 	
-	var modelData = data.data;
+  var modelElement = this.getModelDataFromDragSource(data);
+	var result = this.checkDropable(modelElement);
 	
-	var result = this.checkDropable(modelData);
-	
-	if (result && modelData.type == "ChiNode") {
+	if (result) {
+    console.info("dropped: "+modelElement.type+" ["+modelElement.name+"]");
+/*
     Ext.Msg.show({
        title: modelData.name + ' instance name',
        msg: 'Please enter a name for the domain object',
@@ -100,7 +102,7 @@ cwl.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
         }
        },
     });
-/*		
+*/
 		var xOffset = this.diagram.getWorkflow().getAbsoluteX();
 		var yOffset = this.diagram.getWorkflow().getAbsoluteY();
 		var scrollLeft = this.diagram.getWorkflow().getScrollLeft();
@@ -108,13 +110,8 @@ cwl.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 		
 		var x = e.xy[0] - xOffset + scrollLeft;
 		var y = e.xy[1] - yOffset + scrollTop;
-		
-		if (modelData instanceof cwl.model.ModelObject) {
-			this.diagram.addExistingObject(modelData, x, y);
-		} else {
-			this.diagram.createNewObject(modelData, x, y);
-		}
-*/	
+    
+    this.diagram.addNewObject(modelElement, x, y);
 	}
 	return result;
 }
@@ -122,18 +119,36 @@ cwl.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 /**
  * Checks if a dragged object may be dropped here.
  *
- * <p><code>modelObject</code> may be dropped here if it is an instance of {@link cwl.model.ModelObject} or {@link cwl.model.ModelClass} and its semantic group is supported by the diagram type.</p>
- *
  * @private
  * @param {Object} modelData Data of the dragged object.
  * @return <code>Ext.dd.DropZone.prototype.dropAllowed</code> If the dragged object can be dropped here, <code>false</code> othewise.
  * @type boolean
  */
-cwl.diagram.DropZone.prototype.checkDropable = function(modelData) {
-	var result = false;
-	if (modelData instanceof cwl.model.ModelElement) {
-    result = true;
+cwl.diagram.DropZone.prototype.checkDropable = function(modelElement) {
+	var result = this.dropNotAllowed;
+	if (modelElement != null && ((modelElement.getSemanticGroup() && modelElement.getSemanticGroup().indexOf("Rule") == 0) || modelElement.getType() == "ChiValue")) {
+    result = this.dropAllowed;
 	}
 	
 	return result;
+}
+
+/**
+ * Get the data from the DragSource
+ *
+ * @private
+ * @param {Object} data Data of the dragged object.
+ * @return The model element or null
+ * @type cwl.model.ModelElement
+ */
+cwl.diagram.DropZone.prototype.getModelDataFromDragSource = function(data) {
+
+  // dragged from Grid
+  if (data.grid)
+    return data.data;
+  // dragged from Tree
+  if (data.node)
+    return data.node.modelElement;
+	
+	return null;
 }
