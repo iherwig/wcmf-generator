@@ -13,7 +13,9 @@ Ext.namespace("cwl.graphics.figure");
 
 cwl.graphics.figure.RuleFigure = function(title) {
   this.title = title;
-  this.titlebar = null;
+  
+  this.titleNode = null;
+  
   this.inputDropArea = new cwl.graphics.figure.RuleDropArea("Inputs", ["RuleVariable"]);
   this.conditionDropArea = new cwl.graphics.figure.RuleDropArea("Condition", ["RuleCondition"]);
   this.actionDropArea = new cwl.graphics.figure.RuleDropArea("Actions", ["RuleAction"]);
@@ -36,17 +38,17 @@ cwl.graphics.figure.RuleFigure.prototype.createHTMLElement = function() {
   item.style.cursor = null;
   
   // create the title bar
-  this.titlebar = document.createElement("div");
-  this.titlebar.style.position = "absolute";
-  this.titlebar.style.margin = "-1px";
-  this.titlebar.style.padding = "2px";
-  this.titlebar.style.font = "normal 10px verdana";
-  this.titlebar.style.backgroundColor = "#eeeeee";
-  this.titlebar.style.border = "1px solid gray";
-  this.titlebar.style.whiteSpace = "nowrap";
-  this.titlebar.style.textAlign = "center";
+  this.titleNode = document.createElement("div");
+  this.titleNode.style.position = "absolute";
+  this.titleNode.style.margin = "-1px";
+  this.titleNode.style.padding = "2px";
+  this.titleNode.style.font = "normal 10px verdana";
+  this.titleNode.style.backgroundColor = "#eeeeee";
+  this.titleNode.style.border = "1px solid gray";
+  this.titleNode.style.whiteSpace = "nowrap";
+  this.titleNode.style.textAlign = "center";
   var titleTextNode = document.createTextNode(this.title);
-  this.titlebar.appendChild(titleTextNode);
+  this.titleNode.appendChild(titleTextNode);
 
   // create the drop areas
   var inputDropAreaElement = this.inputDropArea.createHTMLElement();
@@ -54,7 +56,7 @@ cwl.graphics.figure.RuleFigure.prototype.createHTMLElement = function() {
   var actionDropAreaElement = this.actionDropArea.createHTMLElement();
   var outputDropAreaElement = this.outputDropArea.createHTMLElement();
   
-  item.appendChild(this.titlebar);
+  item.appendChild(this.titleNode);
   item.appendChild(inputDropAreaElement);
   item.appendChild(conditionDropAreaElement);
   item.appendChild(actionDropAreaElement);
@@ -76,31 +78,14 @@ cwl.graphics.figure.RuleFigure.prototype.checkDropable = function(modelElement, 
     return true;
   return false;
 }
-/*
-cwl.graphics.figure.RuleFigure.prototype.onFigureEnter = function(figure) {
-  if (this.children[figure.id] == null) {
-    this.setBackgroundColor(this.highlightBackgroundColor);
-  }
-  draw2d.CompartmentFigure.prototype.onFigureEnter.call(this, figure);
-};
 
-cwl.graphics.figure.RuleFigure.prototype.onFigureLeave = function(figure) {
-  draw2d.CompartmentFigure.prototype.onFigureLeave.call(this, figure);
-  this.setBackgroundColor(this.defaultBackgroundColor);
-};
-
-cwl.graphics.figure.RuleFigure.prototype.onFigureDrop = function(figure) {
-  draw2d.CompartmentFigure.prototype.onFigureDrop.call(this, figure);
-  this.setBackgroundColor(this.defaultBackgroundColor);
-};
-*/
 cwl.graphics.figure.RuleFigure.prototype.setDimension = function(w,h) {
   draw2d.CompartmentFigure.prototype.setDimension.call(this,w,h);
   
   var elementWidth = (this.getWidth()-4);
-  if(this.titlebar != null) {
-    this.titlebar.style.height = "15px";
-    this.titlebar.style.width = elementWidth+"px";
+  if(this.titleNode != null) {
+    this.titleNode.style.height = "15px";
+    this.titleNode.style.width = elementWidth+"px";
   }
   this.inputDropArea.setDimension(0, 15, elementWidth, 20);
   this.conditionDropArea.setDimension(0, 35, elementWidth, 100);
