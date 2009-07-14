@@ -20,6 +20,7 @@ cwl.model.ModelElement = function() {
   this.description = null;
   this.helpUrl = null;
   this.attributes = [];
+  this.operations = [];
 }
 
 cwl.model.ModelElement.prototype.getId = function() {
@@ -60,4 +61,8 @@ cwl.model.ModelElement.prototype.getSemanticGroup = function() {
 
 cwl.model.ModelElement.prototype.getAttributes = function() {
 	return this.attributes;
+}
+
+cwl.model.ModelElement.prototype.getOperations = function() {
+	return this.operations;
 }
