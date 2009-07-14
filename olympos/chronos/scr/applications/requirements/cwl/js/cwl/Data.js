@@ -539,7 +539,13 @@ var modelTree = [{
     type: "ChiWorkerExternal",
     treeIconClass: "FigureChiWorkerExternal",
     parentId: "id002"
-  },{
+  },
+/***********************************************************************************  
+ ***********************************************************************************  
+ * AMI Domain
+ ***********************************************************************************
+ ***********************************************************************************/  
+  {
     id: "id01",
     name: "Domain",
     type: "Package",
@@ -565,5 +571,48 @@ var modelTree = [{
     semanticGroup: "Domain Object",
     parentId: "id010",
     attributes: ["Data"]
+  },{
+    id: "id011",
+    name: "Services",
+    type: "Package",
+    treeIconClass: "FigurePackage",
+    parentId: "id01"
+  },{
+    name: "DesignProductController",
+    type: "ChiController",
+    treeIconClass: "FigureChiController",
+    semanticGroup: "Domain Object",
+    parentId: "id011",
+    operations: ["createProduct", "setProductCharacteristics"]
+  },{
+    name: "PerformRegistrationController",
+    type: "ChiController",
+    treeIconClass: "FigureChiController",
+    semanticGroup: "Domain Object",
+    parentId: "id011",
+    operations: ["fillInInformation", "modifyInformation", "confirmInformation", "createRegistration", "confirmRegistration"]
+  },{
+    name: "PlaceProductController",
+    type: "ChiController",
+    treeIconClass: "FigureChiController",
+    semanticGroup: "Domain Object",
+    parentId: "id011",
+    operations: ["updateProductCatalogue", "markProducts", "startAdvertising"]
+  },{
+    name: "MaintainProfileController",
+    type: "ChiController",
+    treeIconClass: "FigureChiController",
+    semanticGroup: "Domain Object",
+    parentId: "id011",
+    operations: ["identifyProfileOwner", "decideProfileExistance", "createProfile", "accessProfile", "reviewProfile", 
+      "findItem", "addItem", "modifyItem", "decideProfileCompletion", "activateProfile", "confirmActivation"]
+  },{
+    name: "BuyProductController",
+    type: "ChiController",
+    treeIconClass: "FigureChiController",
+    semanticGroup: "Domain Object",
+    parentId: "id011",
+    operations: ["browseProducts", "selectProduct", "evaluateProducts", "createOrder", "reviewOrder", 
+      "confirmOrder", "sendOrder"]
   }
 ];

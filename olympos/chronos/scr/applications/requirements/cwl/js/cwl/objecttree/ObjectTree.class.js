@@ -103,7 +103,8 @@ cwl.objecttree.ObjectTree.prototype.loadTree = function(currPackage) {
  * Check if a node can be dropped
  */
 cwl.objecttree.ObjectTree.prototype.checkDropable = function(modelData) {
-  if (modelData.getModelElement().getType() == "ChiNode" || modelData.getModelElement().getType() == "ChiObject")
+  if (modelData.getModelElement().getType() == "ChiNode" || modelData.getModelElement().getType() == "ChiObject" || 
+    modelData.getModelElement().getType() == "ChiController")
     return true;
   return false;
 }
@@ -130,6 +131,21 @@ cwl.objecttree.ObjectTree.prototype.receiveModelNode = function(modelData) {
         text: attributes[i],
         iconCls : "FigureChiValue",
         modelElement: e
+      }));
+    }
+    // append operations
+    var operations = modelElement.getOperations();
+    for (var i=0; i<operations.length; i++) {
+      var o = new cwl.model.Operation(modelElement);
+      o.cwlModelElementId = Ext.id();
+      o.name = operations[i];
+      o.type = "Operation";
+      o.treeIconClass = "FigureOperation";
+      
+      objectNode.appendChild(new cwl.modeltree.Node({
+        text: operations[i],
+        iconCls : "FigureOperation",
+        modelElement: o
       }));
     }
     

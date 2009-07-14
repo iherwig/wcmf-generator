@@ -126,7 +126,8 @@ cwl.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
  */
 cwl.diagram.DropZone.prototype.checkDropable = function(modelElement) {
 	var result = this.dropNotAllowed;
-	if (modelElement != null && ((modelElement.getSemanticGroup() && modelElement.getSemanticGroup().indexOf("Rule") == 0) || modelElement.getType() == "ChiValue")) {
+	if (modelElement != null && ((modelElement.getSemanticGroup() && modelElement.getSemanticGroup().indexOf("Rule") == 0) || 
+    modelElement.getType() == "ChiValue" || modelElement.getType() == "Operation")) {
     result = this.dropAllowed;
 	}
 	
