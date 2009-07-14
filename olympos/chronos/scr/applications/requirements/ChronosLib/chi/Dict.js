@@ -21,7 +21,7 @@ chi.Dict.translate = function() {
 	strword = arguments[0];
 	
 	try {
-		strresult = chi.Dict.voc[strword][uwm.Session.getInstance().getLang()];
+		strresult = chi.Dict.voc[strword][chi.Session.getInstance().getLang()];
 		if (!strresult) {
 			strresult = strword;
 		}
