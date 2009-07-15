@@ -34,6 +34,9 @@ cwl.graphics.figure.BaseFigure.prototype.onElementDrop = function(modelElement) 
 cwl.graphics.figure.BaseFigure.prototype.setLabel = function(label) {
   this.label = label;
   this.textNode.textContent = label;
+  
+  // reposition label (centered)
+  this.labelNode.style.marginLeft = parseInt((this.getWidth()-this.labelNode.offsetWidth)/2)+"px";
 }
 
 /**
@@ -52,7 +55,6 @@ cwl.graphics.figure.BaseFigure.prototype.createHTMLElement = function(){
    */
   this.labelNode = document.createElement("div");
   this.labelNode.style.position = "absolute";
-  this.labelNode.style.width = "100%";
   this.labelNode.style.paddingTop = "15%";
   this.labelNode.style.textAlign = "center";
   this.labelNode.style.overflow = "visible";
