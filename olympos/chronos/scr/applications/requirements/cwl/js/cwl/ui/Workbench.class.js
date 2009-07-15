@@ -24,6 +24,7 @@ cwl.ui.Workbench = function(config) {
 			region: 'west',
 			title: chi.Dict.translate('Available Content'),
 			collapsible: true,
+      border: false,
 			split: true,
 			width: 260,
 			layout: 'fit',
@@ -46,11 +47,9 @@ cwl.ui.Workbench = function(config) {
     },{
 			region: 'center',
 			collapsible: false,
-			width: 260,
 			id: 'ruleContainer',
 			layout: 'fit',
 			items: new Ext.Panel({
-        height: 800,
         id: 'centerPanel',
         layout: 'border',
         items: [{
