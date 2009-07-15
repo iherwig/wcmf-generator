@@ -67,7 +67,7 @@ cwl.objecttree.ObjectTree = Ext.extend(Ext.tree.TreePanel, {
       self.receiveModelNode(e.dropNode);
     });
 		
-		this.setRootNode(new cwl.objecttree.UsedObjectsPackage());
+		this.setRootNode(cwl.model.ModelElementContainer.getInstance().getElement(cwl.objecttree.UsedObjectsPackage.PACKAGE_ID));
 	}
 });
 
@@ -154,6 +154,10 @@ cwl.objecttree.ObjectTree.prototype.receiveModelNode = function(modelData) {
     objectNode.iconCls = "FigureChiObject";
     
     this.root.appendChild(objectNode);
+
+    // add the element to the used objects package
+    var usedObjectsPackage = cwl.model.ModelElementContainer.getInstance().getElement(cwl.objecttree.UsedObjectsPackage.PACKAGE_ID)
+    usedObjectsPackage.add(modelElement);
   }
 }
 
