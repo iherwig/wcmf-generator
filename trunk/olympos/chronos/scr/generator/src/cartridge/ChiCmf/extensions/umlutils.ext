@@ -1,5 +1,4 @@
 import uml;
-import wcmf;
 
 extension common::umlutils;
 
@@ -8,5 +7,5 @@ extension cartridge::ChiCmf::extensions::globals;
 /**
  * Get the package name of the class
  */
-String getFullPackageName(uml::Class cls) :  
-	cls.package!=null ? getPackageName(cls.package).replaceFirst(RootPackage()+".", "") : "";
+String getFullPackageName(uml::PackageableElement cls) :
+	cls.getNearestPackage()!=null ? getPackageName(cls.getNearestPackage()).replaceFirst(RootPackage()+".", "") : "";

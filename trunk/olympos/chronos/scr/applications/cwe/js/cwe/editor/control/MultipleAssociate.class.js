@@ -27,6 +27,8 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 		var self = this;
 		
 		this.isFormField = true;
+		this.markInvalid = function() {};
+		this.clearInvalid = function() {};
 		
 		this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(this.targetCweModelElementId);
 		

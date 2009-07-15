@@ -1,0 +1,157 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+«EXTENSION common::umlutils»
+
+«EXTENSION cartridge::ChiCmf::extensions::umlutils»
+«EXTENSION cartridge::ChiCmf::extensions::naming»
+«EXTENSION cartridge::ChiCmf::extensions::util»
+
+«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
+«EXTENSION cartridge::ChiCmf::extensions::ChiValue»
+«EXTENSION cartridge::ChiCmf::extensions::globals»
+
+«EXTENSION cartridge::Cwe::util»
+
+«DEFINE root FOR uml::Model»
+	«EXPAND modelClass FOREACH this.getModelClasses()»
+«ENDDEFINE»
+
+«DEFINE modelClass FOR Chronos::ChiNode»
+	«info("Creating class " + this.name)»
+	«FILE "application/" + this.getFullPackageName().asPath() + "/" + this.name + ".class.js"»
+/*
+ * Copyright (c) 2009 The Olympos Development Team.
+ * 
+ * http://sourceforge.net/projects/olympos/
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
+ */
+Ext.namespace("application.«this.getFullPackageName()»");
+
+application.«this.getFullPackageName()».«this.name» = function() {
+	application.«this.getFullPackageName()».«this.name».superclass.constructor.call(this, arguments);
+	
+	this.cweModelElementId = "«this.name»";
+	this.name = "«this.name»";
+	this.treeIconClass = "«this.name»TreeIcon16x16";
+	this.owningPackageId = "«this.owner.getCwePackageName()»";
+	
+	«EXPAND recordDefinition FOR this»
+	
+	«EXPAND relations FOR this»
+}
+
+Ext.extend(application.«this.getFullPackageName()».«this.name», cwe.model.ModelClass);
+
+«EXPAND getEditorItems FOR this»
+
+cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this.getFullPackageName()».«this.name»());
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE recordDefinition FOR Chronos::ChiNode»
+	this.recordDefinition = [
+	«FOREACH this.getChiValuesRecursive() AS currValue SEPARATOR ", "»
+		{
+			name : "«currValue.name»",
+			mapping : "«currValue.name»"
+		}
+	«ENDFOREACH»
+	
+	«IF this.getChiValuesRecursive().size > 0»
+		,
+	«ENDIF»
+	
+	«FOREACH this.getParentNodesRecursive() AS currParent SEPARATOR ", "»
+		{
+			name : "parent«currParent.getRoleName()»",
+			mapping: "parent«currParent.getRoleName()»"
+		}
+	«ENDFOREACH»
+	
+	«IF this.getParentNodesRecursive().size > 0»
+		,
+	«ENDIF»
+	
+	«FOREACH this.getChildNodesRecursive() AS currChild SEPARATOR ", "»
+		{
+			name : "child«currChild.getRoleName()»",
+			mapping : "child«currChild.getRoleName()»"
+		}
+	«ENDFOREACH»
+	];
+«ENDDEFINE»
+
+«DEFINE relations FOR Chronos::ChiNode»
+	this.relations = {
+	«FOREACH this.getParentNodesRecursive() AS currParent SEPARATOR ", "»
+		"parent«currParent.getRoleName()»" : {
+			isParent : true,
+			targetModelClassId : "«currParent.type.name»"
+		}
+	«ENDFOREACH»
+
+	«IF this.getParentNodesRecursive().size > 0»
+		,
+	«ENDIF»
+	
+	«FOREACH this.getChildNodesRecursive() AS currChild SEPARATOR ", "»
+		"child«currChild.getRoleName()»" : {
+			isParent : false,
+			targetModelClassId : "«currChild.type.name»"
+		}
+	«ENDFOREACH»
+	}
+«ENDDEFINE»
+
+«DEFINE getEditorItems FOR Chronos::ChiNode»
+application.«this.getFullPackageName()».«this.name».prototype.getEditorItems = function() {
+	return [
+	«FOREACH this.getChiValuesRecursive() AS currValue SEPARATOR ", "»
+		 new Ext.form.TextField( {
+			fieldLabel : "«currValue.name»",
+			name : "«currValue.name»",
+			dataIndex : "«currValue.name»"
+		})
+	«ENDFOREACH»
+	
+	«IF this.getChiValuesRecursive().size > 0»
+		,
+	«ENDIF»
+	
+	«FOREACH this.getParentNodesRecursive() AS currParent SEPARATOR ", "»
+		«EXPAND association(true) FOR currParent»
+	«ENDFOREACH»
+	
+	«IF this.getParentNodesRecursive().size > 0»
+		,
+	«ENDIF»
+	
+	«FOREACH this.getChildNodesRecursive() AS currChild SEPARATOR ", "»
+		«EXPAND association(false) FOR currChild»
+	«ENDFOREACH»
+ ];
+}
+«ENDDEFINE»
+
+«DEFINE association(Boolean isParent) FOR uml::Property»
+	«IF this.getUpper() == 1»
+		new cwe.editor.control.SingleAssociate( {
+	«ELSE»
+		new cwe.editor.control.MultipleAssociate( {
+	«ENDIF»
+		«LET isParent ? "parent" : "child" AS relationString»
+			fieldLabel : "«relationString»«this.getRoleName()»",
+			name : "«relationString»«this.getRoleName()»",
+			dataIndex : "«relationString»«this.getRoleName()»",
+			targetCweModelElementId : "«this.type.name»",
+			isParent : «isParent ? "true" : "false"»
+		«ENDLET»
+	})
+«ENDDEFINE»

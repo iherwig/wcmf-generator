@@ -18,3 +18,9 @@ boolean isPKValue(ChiValue this) :
 	JAVA net.sourceforge.olympos.oaw.extend.Generator.isPKValue(org.eclipse.uml2.uml.Property)
 ;
 
+/**
+ * Get the role name of a property
+ */
+String getRoleName(uml::Property this) :
+	this.name.isNullOrEmpty() ? this.type.name : this.name
+;
