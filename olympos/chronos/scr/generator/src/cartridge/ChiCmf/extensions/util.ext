@@ -32,7 +32,7 @@ boolean isLibraryClass(uml::NamedElement this) :
  * Check if a given class belongs to the application
  */
 boolean isApplicationClass(uml::NamedElement this) : 
-	this.getQualifiedName().startsWith(MODEL_NAME()+"::"+RootPackage()+"::"+ApplicationPackage()) && this.metaType == "uml::Class"
+	this.getQualifiedName().startsWith(MODEL_NAME()+"::"+RootPackage()+"::"+ApplicationPackage()) && uml::Class.isInstance(this)
 ;
 
 /**

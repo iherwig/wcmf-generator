@@ -1,0 +1,30 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+
+«EXTENSION cartridge::ChiCmf::extensions::globals»
+«EXTENSION cartridge::ChiCmf::extensions::umlutils»
+«EXTENSION cartridge::ChiCmf::extensions::naming»
+
+«EXTENSION cartridge::Cwe::util»
+
+«DEFINE root FOR uml::Model»
+	«info("Creating index.part.html")»
+	«FILE "index.part.html"»
+		<!--Start include application-->
+		«EXPAND scriptPackage FOREACH this.getModelPackages()»
+		«EXPAND scriptClass FOREACH this.getModelClasses()»
+		<!--End include application-->
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE scriptPackage FOR uml::Package»
+		<script type="text/javascript" src="js/«this.getFileName()»">
+		</script>
+«ENDDEFINE»
+
+«DEFINE scriptClass FOR Chronos::ChiNode»
+		<script type="text/javascript" src="js/application/«this.getFullPackageName().asPath()»/«this.name».class.js">
+		</script>
+«ENDDEFINE»
