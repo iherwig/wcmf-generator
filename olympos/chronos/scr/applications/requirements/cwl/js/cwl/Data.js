@@ -57,6 +57,11 @@ var ruleElements = [{
     treeIconClass: null,
     semanticGroup: "Rule Action"
   },{
+    name: "Invoke",
+    type: "RuleAction",
+    treeIconClass: null,
+    semanticGroup: "Rule Action"
+  },{
     name: "Input",
     type: "RuleVariable",
     treeIconClass: null,
