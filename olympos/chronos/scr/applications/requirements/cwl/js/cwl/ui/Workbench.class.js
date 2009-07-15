@@ -67,10 +67,9 @@ cwl.ui.Workbench = function(config) {
         },{
           region: 'south',
           layout: 'fit',
-          title: chi.Dict.translate('Rule Expression'),
           split: true,
           height: 100,
-          items: new Ext.Panel()
+          items: cwl.rule.ExpressionPanel.getInstance()
         }]
       })
     },{

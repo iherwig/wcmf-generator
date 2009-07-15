@@ -573,7 +573,7 @@ var modelTree = [{
     treeIconClass: "FigureChiNode",
     semanticGroup: "Domain Object",
     parentId: "id010",
-    attributes: ["Name"]
+    attributes: ["Name", "Age"]
   },{
     name: "Meter",
     type: "ChiNode",

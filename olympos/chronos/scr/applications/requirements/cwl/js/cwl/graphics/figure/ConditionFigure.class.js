@@ -16,7 +16,8 @@ cwl.graphics.figure.ConditionFigure = function(label) {
   
   this.conditionLeft = null;
   this.conditionRight = null;
-  this.lineColor = new draw2d.Color(0, 0, 0); 
+  this.operator = null;
+  this.lineColor = new draw2d.Color(200, 200, 200); 
 }
 
 Ext.extend(cwl.graphics.figure.ConditionFigure, cwl.graphics.figure.EditableFigure);
@@ -111,6 +112,14 @@ cwl.graphics.figure.ConditionFigure.prototype.createForm = function() {
     hideLabel: true
   });
 
+  this.operator = new Ext.form.ComboBox({
+    store: ['+', '-', '*', '/', '>', '>=', '<', '<=', '=='],
+    columnWidth:.2,
+    editable: true,
+    forceSelection: true,
+    hideLabel: true
+  });
+
   var form = new Ext.form.FormPanel({
     renderTo: Ext.Element.get(this.formNode).id,
     frame: true,
@@ -119,13 +128,7 @@ cwl.graphics.figure.ConditionFigure.prototype.createForm = function() {
       layout:'column',
       items: [
         this.conditionLeft,
-        new Ext.form.ComboBox({
-          store: ['+', '-', '*', '/', '>', '>=', '<', '<=', '=='],
-          columnWidth:.2,
-          editable: true,
-          forceSelection: true,
-          hideLabel: true
-        }),
+        this.operator,
         this.conditionRight
       ]
     }],
@@ -133,6 +136,7 @@ cwl.graphics.figure.ConditionFigure.prototype.createForm = function() {
       text: 'Save',
       type: 'submit',
       handler: function() {
+        self.save();
         self.closeForm();
       }
     },{
@@ -145,8 +149,13 @@ cwl.graphics.figure.ConditionFigure.prototype.createForm = function() {
       handler: function() {}
     }],
     keys: [{
-      key: [13, 27], // escape
-      handler: function(){
+      key: [27], // escape
+      handler: function() {
+        self.closeForm();
+      },
+      key: [13], // return
+      handler: function() {
+        self.save();
         self.closeForm();
       }
     }],
@@ -188,4 +197,11 @@ cwl.graphics.figure.ConditionFigure.prototype.updateForm = function() {
   }
   leftStore.sort("displayText");
   rightStore.sort("displayText");
+}
+
+cwl.graphics.figure.ConditionFigure.prototype.save = function() {
+  var conditionText = this.conditionLeft.getRawValue()+" "+this.operator.getValue()+" "+this.conditionRight.getRawValue();
+
+  this.setLabel(conditionText);
+  cwl.rule.ExpressionPanel.getInstance().setConditionText(conditionText);
 }
