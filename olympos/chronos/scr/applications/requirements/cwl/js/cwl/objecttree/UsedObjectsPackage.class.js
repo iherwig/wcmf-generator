@@ -14,10 +14,12 @@ Ext.namespace("cwl.objecttree");
 cwl.objecttree.UsedObjectsPackage = function() {
 	cwl.objecttree.UsedObjectsPackage.superclass.constructor.call(this, arguments);
 	
-	this.cwlModelElementId = cwl.objecttree.UsedObjectsPackage.ROOT_PACKAGE_ID;
+	this.cwlModelElementId = cwl.objecttree.UsedObjectsPackage.PACKAGE_ID;
 	this.name = "UsedObjectsPackage";
 }
 
 Ext.extend(cwl.objecttree.UsedObjectsPackage, cwl.model.ModelPackage);
 
-cwl.objecttree.UsedObjectsPackage.ROOT_PACKAGE_ID = "cwl.objecttree.UsedObjectPackageId";
+cwl.objecttree.UsedObjectsPackage.PACKAGE_ID = "cwl.objecttree.UsedObjectPackageId";
+
+cwl.model.ModelElementContainer.getInstance().registerElement(new cwl.objecttree.UsedObjectsPackage());

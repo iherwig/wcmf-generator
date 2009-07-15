@@ -11,10 +11,13 @@
  */
 Ext.namespace("cwl.graphics.figure");
 
+/**
+ * BaseFigure is the base class for all diagram figures. It adds support
+ * for a label to draw2d.VectorFigure.
+ */
 cwl.graphics.figure.BaseFigure = function(label) {
   this.label = label;
   this.lableNode = null;
-  this.formNode = null;
   draw2d.VectorFigure.call(this);
 }
 
@@ -52,20 +55,8 @@ cwl.graphics.figure.BaseFigure.prototype.createHTMLElement = function(){
   this.labelNode.style.zIndex = 1111;
   this.textNode = document.createTextNode(this.label);
   this.labelNode.appendChild(this.textNode);
-  
-  this.formNode = document.createElement("div");
-  this.formNode.style.position = "absolute";
 
 	item.appendChild(this.labelNode);
-	item.appendChild(this.formNode);
 
 	return item;
 }
-
-cwl.graphics.figure.BaseFigure.prototype.setDimension = function(w,h) {
-  draw2d.VectorFigure.prototype.setDimension.call(this,w,h);
-  
-  if (this.formNode)
-  this.formNode.style.left = (this.getWidth()+5) + "px";
-};
-

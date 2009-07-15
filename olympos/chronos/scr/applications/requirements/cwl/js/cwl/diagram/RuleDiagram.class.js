@@ -82,6 +82,11 @@ cwl.diagram.RuleDiagram.prototype.render = function() {
   this.init();
   this.initWorkflow();
   this.initDropZone();
+
+  // create the initial rule
+  var rule = new cwl.model.ModelElement();
+  rule.type = "Rule";
+  this.addNewObject(rule, 20, 20);
 }
 
 /**

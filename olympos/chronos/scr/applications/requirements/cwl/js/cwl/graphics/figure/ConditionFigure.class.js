@@ -12,14 +12,14 @@
 Ext.namespace("cwl.graphics.figure");
 
 cwl.graphics.figure.ConditionFigure = function(label) {
-  cwl.graphics.figure.BaseFigure.prototype.constructor.call(this, label);
+  cwl.graphics.figure.EditableFigure.prototype.constructor.call(this, label);
   
-  this.form = null;
-  this.formOpened = false;
+  this.conditionLeft = null;
+  this.conditionRight = null;
   this.lineColor = new draw2d.Color(0, 0, 0); 
 }
 
-Ext.extend(cwl.graphics.figure.ConditionFigure, cwl.graphics.figure.BaseFigure);
+Ext.extend(cwl.graphics.figure.ConditionFigure, cwl.graphics.figure.EditableFigure);
 
 cwl.graphics.figure.ConditionFigure.prototype.onElementDrop = function(modelElement) {
   if (modelElement.getType() == "ChiValue") {
@@ -29,77 +29,6 @@ cwl.graphics.figure.ConditionFigure.prototype.onElementDrop = function(modelElem
   return false;
 }
 
-cwl.graphics.figure.ConditionFigure.prototype.onMouseEnter = function() {
-  var self = this;
-
-  if (!this.formOpened) {
-  
-    if (!this.form) {
-      // create the input form
-      this.form = new Ext.form.FormPanel({
-        renderTo: Ext.Element.get(this.formNode).id,
-        frame: true,
-        width: 280,
-        items: [{
-          layout:'column',
-          items: [
-            new Ext.form.ComboBox({
-              store: ['left'],
-              columnWidth:.4,
-              hideLabel: true
-            }),
-            new Ext.form.ComboBox({
-              store: ['+', '-', '*', '/', '>', '>=', '<', '<=', '=='],
-              columnWidth:.2,
-              editable: false,
-              hideLabel: true
-            }),
-            new Ext.form.ComboBox({
-              store: ['right'],
-              columnWidth:.4,
-              hideLabel: true
-            })
-          ]
-        }],
-        buttons: [{
-          text: 'Save',
-          handler: function() {
-            self.closeForm();
-          }
-        },{
-          text: 'Cancel',
-          handler: function() {
-            self.closeForm();
-          }
-        },{
-          text: 'Add Condition',
-          handler: function() {}
-        }]
-      });
-    }
-    else {
-      this.form.show();
-    }
-    this.formOpened = true;
-    
-    this.setCanDrag(false);
-    this.setDeleteable(false);
-    this.setResizeable(false);
-    this.setSelectable(false);
-  }
-}
-
-cwl.graphics.figure.ConditionFigure.prototype.closeForm = function() {
-  if (this.formOpened) {
-    this.form.hide();
-    this.setCanDrag(true);
-    this.setDeleteable(true);
-    this.setResizeable(true);
-    this.setSelectable(true);
-    this.formOpened = false;
-  }
-}
-
 /**
  * The paint method is the place to put your own draw calls.
  * This method will be called from the framework. Don't call them manually.
@@ -107,7 +36,7 @@ cwl.graphics.figure.ConditionFigure.prototype.closeForm = function() {
  **/
 cwl.graphics.figure.ConditionFigure.prototype.paint = function() {
   // you must call the super-method to initialize the device context.
-  cwl.graphics.figure.BaseFigure.prototype.paint.call(this);
+  cwl.graphics.figure.EditableFigure.prototype.paint.call(this);
 
   // the coords for the shape
   //
@@ -143,4 +72,120 @@ cwl.graphics.figure.ConditionFigure.prototype.paint = function() {
 
   // flush the paint instructions to the device context
   this.graphics.paint();
+}
+
+cwl.graphics.figure.ConditionFigure.prototype.createForm = function() {
+  var self = this;
+  
+  this.conditionLeft = new Ext.form.ComboBox({
+    id: 'leftCombo',
+    store: new Ext.data.ArrayStore({
+      autoDestroy: true,
+      fields: [
+         {name: 'id'},
+         {name: 'displayText'}
+      ]
+    }),
+    valueField: 'id',
+    displayField: 'displayText',
+    mode: 'local',
+    resizable: true,
+    columnWidth:.4,
+    hideLabel: true
+  });
+
+  this.conditionRight = new Ext.form.ComboBox({
+    id: 'rightCombo',
+    store: new Ext.data.ArrayStore({
+      autoDestroy: true,
+      fields: [
+         {name: 'id'},
+         {name: 'displayText'}
+      ]
+    }),
+    valueField: 'id',
+    displayField: 'displayText',
+    mode: 'local',
+    resizable: true,
+    columnWidth:.4,
+    hideLabel: true
+  });
+
+  var form = new Ext.form.FormPanel({
+    renderTo: Ext.Element.get(this.formNode).id,
+    frame: true,
+    width: 280,
+    items: [{
+      layout:'column',
+      items: [
+        this.conditionLeft,
+        new Ext.form.ComboBox({
+          store: ['+', '-', '*', '/', '>', '>=', '<', '<=', '=='],
+          columnWidth:.2,
+          editable: true,
+          forceSelection: true,
+          hideLabel: true
+        }),
+        this.conditionRight
+      ]
+    }],
+    buttons: [{
+      text: 'Save',
+      type: 'submit',
+      handler: function() {
+        self.closeForm();
+      }
+    },{
+      text: 'Cancel',
+      handler: function() {
+        self.closeForm();
+      }
+    },{
+      text: 'Add Condition',
+      handler: function() {}
+    }],
+    keys: [{
+      key: [13, 27], // escape
+      handler: function(){
+        self.closeForm();
+      }
+    }],
+		listeners: {
+			'afterrender' : function() {
+        setTimeout(function() {self.conditionLeft.focus();}, 10);
+      }
+    }
+  });
+  return form;
+}
+
+cwl.graphics.figure.ConditionFigure.prototype.updateForm = function() {
+  // get all possible values for the left/right part of the expression
+  var attributes = [];
+  var operations = [];
+  var usedObjectsPackage = cwl.model.ModelElementContainer.getInstance().getElement(cwl.objecttree.UsedObjectsPackage.PACKAGE_ID);
+  usedObjectsPackage.getChildren().each(function(item, index, length) {
+    var ops = item.getOperations();
+    for (var i=0; i<ops.length; i++)
+      operations.push(item.name+"."+ops[i]+"()")
+    var attrs = item.getAttributes();
+    for (var i=0; i<attrs.length; i++)
+      attributes.push(item.name+"."+attrs[i])
+  });
+  // add all values to the comboboxes
+  var leftStore = this.conditionLeft.getStore();
+  var rightStore = this.conditionRight.getStore();
+  leftStore.removeAll();
+  rightStore.removeAll();
+
+  for (var i=0; i<attributes.length; i++) {
+    leftStore.insert(0, new rightStore.recordType({id: attributes[i], displayText: attributes[i]}));
+    rightStore.insert(0, new rightStore.recordType({id: attributes[i], displayText: attributes[i]}));
+  }
+  for (var i=0; i<operations.length; i++) {
+    leftStore.insert(0, new rightStore.recordType({id: operations[i], displayText: operations[i]}));
+    rightStore.insert(0, new rightStore.recordType({id: operations[i], displayText: operations[i]}));
+  }
+  leftStore.sort("displayText");
+  rightStore.sort("displayText");
 }
