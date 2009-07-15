@@ -253,12 +253,16 @@ cwl.diagram.RuleDiagram.prototype.addNewObject = function(modelElement, x, y) {
       figure.setDimension(300, 500);
     }
     if (modelElement.getType() == "RuleCondition") {
-      figure = new cwl.graphics.figure.ConditionFigure("New Condition");
+      var conditionText = "NewCondition";
+      figure = new cwl.graphics.figure.ConditionFigure(conditionText);
       figure.setDimension(80, 40);
+      cwl.rule.ExpressionPanel.getInstance().setConditionText(conditionText);
     }
     if (modelElement.getType() == "RuleAction") {
-      figure = new cwl.graphics.figure.ActionFigure("New "+modelElement.getName()+"Action");
+      var actionText = "New"+modelElement.getName()+"Action";
+      figure = new cwl.graphics.figure.ActionFigure(actionText);
       figure.setDimension(95, 60);
+      cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);
     }
     if (figure) {
       this.workflow.addFigure(figure, x, y);

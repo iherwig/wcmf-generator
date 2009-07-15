@@ -79,8 +79,10 @@ cwl.graphics.figure.EditableFigure.prototype.openForm = function() {
     this.setDeleteable(false);
     this.setResizeable(false);
     this.setSelectable(false);
-    if (this.form)
+    if (this.form) {
       this.form.show();
+      Ext.get(this.form.getId()).findParentNode('div', 1, true).dom.style.zIndex = this.getZOrder()+1;
+    }
     this.formOpened = true;
   }
 }

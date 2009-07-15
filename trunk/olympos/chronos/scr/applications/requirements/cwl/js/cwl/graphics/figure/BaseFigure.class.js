@@ -51,7 +51,7 @@ cwl.graphics.figure.BaseFigure.prototype.createHTMLElement = function(){
   this.labelNode.style.width = "100%";
   this.labelNode.style.paddingTop = "15%";
   this.labelNode.style.textAlign = "center";
-  this.labelNode.style.overflow = "hidden";
+  this.labelNode.style.overflow = "visible";
   this.labelNode.style.zIndex = 1111;
   this.textNode = document.createTextNode(this.label);
   this.labelNode.appendChild(this.textNode);
