@@ -68,6 +68,7 @@ cwl.graphics.figure.RuleFigure.prototype.checkDropable = function(modelElement, 
   var xRel = x-this.getAbsoluteX();
   var yRel = y-this.getAbsoluteY();
 
+  // check drop areas
   if (this.inputDropArea.isOver(xRel, yRel) && this.inputDropArea.acceptsElement(modelElement))
     return true;
   if (this.conditionDropArea.isOver(xRel, yRel) && this.conditionDropArea.acceptsElement(modelElement))
@@ -76,6 +77,7 @@ cwl.graphics.figure.RuleFigure.prototype.checkDropable = function(modelElement, 
     return true;
   if (this.outputDropArea.isOver(xRel, yRel) && this.outputDropArea.acceptsElement(modelElement))
     return true;
+
   return false;
 }
 

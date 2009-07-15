@@ -228,7 +228,7 @@ cwl.diagram.RuleDiagram.prototype.initDropZone = function() {
 
 cwl.diagram.RuleDiagram.prototype.checkDropable = function(modelElement, x, y) {
   var bestFigure = this.getBestFigure(x, y);
-  if (bestFigure && bestFigure instanceof cwl.graphics.figure.RuleFigure) {
+  if (bestFigure) {
     if (bestFigure.checkDropable(modelElement, x, y)) {
       return true;
     }
@@ -278,7 +278,7 @@ cwl.diagram.RuleDiagram.prototype.addNewObject = function(modelElement, x, y) {
 cwl.diagram.RuleDiagram.prototype.getBestFigure = function(x, y) {
   var result = null;
   this.figures.each(function(figure, index, length) {
-    if (figure.isOver(x, y)) {
+    if (figure.isOver(x, y) && figure) {
       if (result == null)
         result = figure;
       else if (result.getZOrder() < figure.getZOrder())

@@ -24,7 +24,8 @@ Ext.extend(cwl.graphics.figure.ConditionFigure, cwl.graphics.figure.EditableFigu
 
 cwl.graphics.figure.ConditionFigure.prototype.onElementDrop = function(modelElement) {
   if (modelElement.getType() == "ChiValue") {
-    this.setLabel(this.label+"\n"+modelElement.getOwner().getName()+"."+modelElement.getName());
+    this.conditionLeft.setValue(modelElement.getOwner().getName()+"."+modelElement.getName());
+    this.save();
     return true;
   }
   return false;

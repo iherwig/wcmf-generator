@@ -17,6 +17,23 @@ cwl.graphics.figure.ActionFigure = function(label) {
 
 Ext.extend(cwl.graphics.figure.ActionFigure, cwl.graphics.figure.BaseFigure);
 
+cwl.graphics.figure.ActionFigure.prototype.checkDropable = function(modelElement, x, y) {
+  if (modelElement.getType() == "Operation")
+    return true;
+  return false;
+}
+
+cwl.graphics.figure.ActionFigure.prototype.onElementDrop = function(modelElement) {
+  if (modelElement.getType() == "Operation") {
+    var actionText = modelElement.getOwner().getName()+"."+modelElement.getName()+"()";
+    
+    this.setLabel(actionText);
+    cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);
+    return true;
+  }
+  return false;
+}
+
 /**
  * The paint method is the place to put your own draw calls.
  * This method will be called from the framework. Don't call them manually.
