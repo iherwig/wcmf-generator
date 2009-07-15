@@ -16,10 +16,10 @@ cwl.graphics.figure.RuleFigure = function(title) {
   
   this.titleNode = null;
   
-  this.inputDropArea = new cwl.graphics.figure.RuleDropArea("Inputs", ["RuleVariable"]);
+  this.inputDropArea = new cwl.graphics.figure.RuleDropArea("Inputs", ["ChiValue"]);
   this.conditionDropArea = new cwl.graphics.figure.RuleDropArea("Condition", ["RuleCondition"]);
   this.actionDropArea = new cwl.graphics.figure.RuleDropArea("Actions", ["RuleAction"]);
-  this.outputDropArea = new cwl.graphics.figure.RuleDropArea("Outputs", ["RuleVariable"]);
+  this.outputDropArea = new cwl.graphics.figure.RuleDropArea("Outputs", ["ChiValue"]);
   
   this.defaultBackgroundColor = new draw2d.Color(255, 255, 255);
   this.highlightBackgroundColor = new draw2d.Color(150, 150, 150);

@@ -61,7 +61,7 @@ var ruleElements = [{
     type: "RuleAction",
     treeIconClass: null,
     semanticGroup: "Rule Action"
-  },{
+  }/*,{
     name: "Input",
     type: "RuleVariable",
     treeIconClass: null,
@@ -71,7 +71,7 @@ var ruleElements = [{
     type: "RuleVariable",
     treeIconClass: null,
     semanticGroup: "Rule Variable"
-  }
+  }*/
 ];
 
 var modelTree = [{
