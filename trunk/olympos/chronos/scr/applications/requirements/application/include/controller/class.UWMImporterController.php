@@ -75,7 +75,7 @@ class UWMImporterController extends Controller
 	{
 		$newTime = microtime(true);
 	
-		echo $newTime-$this->lastTime, ": $msg<br/ >\n";
+		//echo $newTime-$this->lastTime, ": $msg<br/ >\n";
 		
 		$this->lastTime = $newTime;
 	}
