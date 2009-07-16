@@ -72,14 +72,16 @@ cwl.graphics.figure.EditableFigure.prototype.updateForm = function() {
 
 cwl.graphics.figure.EditableFigure.prototype.openForm = function() {
   if (!this.formOpened) {    
+    // create the form on first time
     if (!this.form)
       this.form = this.createForm();
-    this.updateForm();
-    this.setCanDrag(false);
-    this.setDeleteable(false);
-    this.setResizeable(false);
-    this.setSelectable(false);
+
     if (this.form) {
+      this.updateForm();
+      this.setCanDrag(false);
+      this.setDeleteable(false);
+      this.setResizeable(false);
+      this.setSelectable(false);
       this.form.show();
       Ext.get(this.form.getId()).findParentNode('div', 1, true).dom.style.zIndex = this.getZOrder()+1;
     }
@@ -89,12 +91,13 @@ cwl.graphics.figure.EditableFigure.prototype.openForm = function() {
 
 cwl.graphics.figure.EditableFigure.prototype.closeForm = function() {
   if (this.formOpened) {
-    if (this.form)
+    if (this.form) {
       this.form.hide();
-    this.setCanDrag(true);
-    this.setDeleteable(true);
-    this.setResizeable(true);
-    this.setSelectable(true);
+      this.setCanDrag(true);
+      this.setDeleteable(true);
+      this.setResizeable(true);
+      this.setSelectable(true);
+    }
     this.formOpened = false;
   }
 }

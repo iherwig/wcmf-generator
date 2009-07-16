@@ -19,7 +19,7 @@ cwl.graphics.figure.RuleFigure = function(diagram, label) {
   
   this.inputDropArea = new cwl.graphics.figure.RuleDropArea("Inputs", ["ChiValue"]);
   this.conditionDropArea = new cwl.graphics.figure.RuleDropArea("Condition", ["RuleCondition"]);
-  this.actionDropArea = new cwl.graphics.figure.RuleDropArea("Actions", ["RuleAction"]);
+  this.actionDropArea = new cwl.graphics.figure.RuleDropArea("Actions", ["RuleAction", "Operation"]);
   this.outputDropArea = new cwl.graphics.figure.RuleDropArea("Outputs", ["ChiValue"]);
   
   this.createSequenceRuleNode = null;
@@ -38,7 +38,7 @@ cwl.graphics.figure.RuleFigure = function(diagram, label) {
   this.setSelectable(false);
   this.setCanDrag(false);
 
-  draw2d.CompartmentFigure.call(this);
+  //draw2d.CompartmentFigure.call(this);
 };
 
 cwl.graphics.figure.RuleFigure.prototype = new draw2d.CompartmentFigure;
@@ -129,7 +129,7 @@ cwl.graphics.figure.RuleFigure.prototype.setWorkflow = function(workflow) {
 		this.sequenceRuleInPort = new draw2d.Port();
 		this.sequenceRuleInPort.setWorkflow(workflow);
     this.sequenceRuleInPort.setAlpha(0);
-		this.addPort(this.sequenceRuleInPort, 0, this.getHeight()/2);
+		this.addPort(this.sequenceRuleInPort, -1, this.getHeight()/2);
 
 		/**
 		 * The parallel rule in port of this figure.
@@ -140,7 +140,7 @@ cwl.graphics.figure.RuleFigure.prototype.setWorkflow = function(workflow) {
 		this.parallelRuleInPort = new draw2d.Port();
     this.parallelRuleInPort.setAlpha(0);
 		this.parallelRuleInPort.setWorkflow(workflow);
-		this.addPort(this.parallelRuleInPort, this.getWidth()/2, 0);
+		this.addPort(this.parallelRuleInPort, this.getWidth()/2, -2);
 
 		/**
 		 * The sequence rule out port of this figure.
@@ -193,6 +193,8 @@ cwl.graphics.figure.RuleFigure.prototype.onCreateSequenceRule = function(e, el, 
   var c = new draw2d.Connection();
   c.setSource(this.sequenceRuleOutPort);
   c.setTarget(ruleFigure.sequenceRuleInPort);
+  c.setColor(new draw2d.Color(0, 255, 0));
+  c.setLineWidth(4);
   this.getWorkflow().addFigure(c);
 
   // hide button
@@ -209,6 +211,8 @@ cwl.graphics.figure.RuleFigure.prototype.onCreateParallelRule = function(e, el, 
   var c = new draw2d.Connection();
   c.setSource(this.parallelRuleOutPort);
   c.setTarget(ruleFigure.parallelRuleInPort);
+  c.setColor(new draw2d.Color(0, 255, 0));
+  c.setLineWidth(4);
   this.getWorkflow().addFigure(c);
   
   // hide button

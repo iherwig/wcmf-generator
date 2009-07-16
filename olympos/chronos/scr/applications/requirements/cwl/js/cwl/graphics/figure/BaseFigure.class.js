@@ -19,6 +19,7 @@ cwl.graphics.figure.BaseFigure = function(diagram, label) {
   this.diagram = diagram;
   this.label = label;
   this.labelNode = null;
+  this.textNode = null;
 
   draw2d.VectorFigure.call(this);
 }
@@ -35,10 +36,14 @@ cwl.graphics.figure.BaseFigure.prototype.onElementDrop = function(modelElement) 
 
 cwl.graphics.figure.BaseFigure.prototype.setLabel = function(label) {
   this.label = label;
-  this.textNode.textContent = label;
   
-  // reposition label (centered)
-  this.labelNode.style.marginLeft = parseInt((this.getWidth()-this.labelNode.offsetWidth)/2)+"px";
+  if (this.textNode != null) {
+    this.textNode.textContent = label;
+    // reposition label (centered)
+    var nodeWidth = this.getWidth();
+    var textWidth = this.labelNode.offsetWidth;
+    this.labelNode.style.marginLeft = parseInt((nodeWidth-textWidth)/2)+"px";
+  }
 }
 
 cwl.graphics.figure.BaseFigure.prototype.getLabel = function() {
@@ -76,3 +81,10 @@ cwl.graphics.figure.BaseFigure.prototype.createHTMLElement = function(){
 
 	return item;
 }
+
+cwl.graphics.figure.BaseFigure.prototype.setDimension = function(w,h) {
+  draw2d.VectorFigure.prototype.setDimension.call(this,w,h);
+  
+  this.setLabel.defer(10, this, [this.label]);
+}
+

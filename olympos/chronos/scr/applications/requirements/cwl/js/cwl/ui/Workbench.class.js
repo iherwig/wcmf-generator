@@ -74,7 +74,7 @@ cwl.ui.Workbench = function(config) {
       })
     },{
 			region: 'east',
-			title: chi.Dict.translate('Objects In Use'),
+			title: chi.Dict.translate('Objects In Rule Set'),
 			collapsible: true,
 			split: true,
 			width: 260,

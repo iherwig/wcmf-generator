@@ -12,10 +12,10 @@
 Ext.namespace("cwl.graphics.figure");
 
 cwl.graphics.figure.ActionFigure = function(diagram, label) {
-  cwl.graphics.figure.BaseFigure.prototype.constructor.call(this, diagram, label);
+  cwl.graphics.figure.EditableFigure.prototype.constructor.call(this, diagram, label);
 }
 
-Ext.extend(cwl.graphics.figure.ActionFigure, cwl.graphics.figure.BaseFigure);
+Ext.extend(cwl.graphics.figure.ActionFigure, cwl.graphics.figure.EditableFigure);
 
 cwl.graphics.figure.ActionFigure.prototype.checkDropable = function(modelElement, x, y) {
   if (modelElement.getType() == "Operation")
@@ -41,7 +41,7 @@ cwl.graphics.figure.ActionFigure.prototype.onElementDrop = function(modelElement
  **/
 cwl.graphics.figure.ActionFigure.prototype.paint = function() {
   // you must call the super-method to initialize the device context.
-  cwl.graphics.figure.BaseFigure.prototype.paint.call(this);
+  cwl.graphics.figure.EditableFigure.prototype.paint.call(this);
 
   this.graphics.drawImage('js/cwl/graphics/figure/images/Activity.png', 
     0, 0, this.getWidth(), this.getHeight(), 1);
