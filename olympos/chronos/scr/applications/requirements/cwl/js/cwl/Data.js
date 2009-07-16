@@ -507,7 +507,7 @@ var modelTree = [{
     type: "ChiController",
     treeIconClass: "FigureChiController",
     semanticGroup: "Domain Object",
-    parentId: "id001140",
+    parentId: "id00114",
     operations: ["browseProducts", "selectProduct", "evaluateProducts", "createOrder", "reviewOrder", 
       "confirmOrder", "sendOrder"]
   },

@@ -221,5 +221,5 @@ cwl.graphics.figure.ConditionFigure.prototype.save = function() {
   var conditionText = this.conditionLeft.getRawValue()+" "+this.operator.getValue()+" "+this.conditionRight.getRawValue();
 
   this.setLabel(conditionText);
-  cwl.rule.ExpressionPanel.getInstance().setConditionText(conditionText);
+  cwl.rule.ExpressionPanel.getInstance().setConditionText(this.getId(), conditionText);
 }

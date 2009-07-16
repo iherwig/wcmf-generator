@@ -256,7 +256,7 @@ cwl.diagram.RuleDiagram.prototype.addNewObject = function(modelElement, x, y) {
       var conditionText = "NewCondition";
       figure = new cwl.graphics.figure.ConditionFigure(this, conditionText);
       figure.setDimension(80, 40);
-      cwl.rule.ExpressionPanel.getInstance().setConditionText(conditionText);
+      cwl.rule.ExpressionPanel.getInstance().setConditionText(figure.getId(), conditionText);
     }
     if (modelElement.getType() == "RuleAction") {
       var actionText = "New"+modelElement.getName()+"Action";
@@ -265,13 +265,13 @@ cwl.diagram.RuleDiagram.prototype.addNewObject = function(modelElement, x, y) {
       else
         figure = new cwl.graphics.figure.ActionFigure(this, actionText);
       figure.setDimension(95, 60);
-      cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);
+      cwl.rule.ExpressionPanel.getInstance().setActionText(figure.getId(), actionText);
     }
     if (modelElement.getType() == "Operation") {
       var actionText = modelElement.getOwner().getName()+"."+modelElement.getName()+"()";
       figure = new cwl.graphics.figure.ActionFigure(this, actionText);
       figure.setDimension(95, 60);
-      cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);
+      cwl.rule.ExpressionPanel.getInstance().setActionText(figure.getId(), "<strong>INVOKE</strong> "+actionText);
     }
     if (figure) {
       this.workflow.addFigure(figure, x, y);
