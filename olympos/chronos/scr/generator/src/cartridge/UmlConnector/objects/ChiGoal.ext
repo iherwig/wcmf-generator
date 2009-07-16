@@ -30,7 +30,7 @@ Void transferValues(cwm::ChiGoal g, uml::Model um):
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiGoal") ->
 			uc.setTaggedValue("Chronos::ChiGoal", "Priority", g.priority) ->
-			uc.setTaggedValue("Chronos::ChiGoal", "GoalType", g.goalType) ->
+			//uc.setTaggedValue("Chronos::ChiGoal", "GoalType", g.goalType) ->
 			uc.setTaggedValue("Chronos::ChiGoal", "Value_Name", g.valueName) ->
 			uc.setTaggedValue("Chronos::ChiGoal", "Value_ammount", g.valueAmmount) ->
 			uc.setTaggedValue("Chronos::ChiGoal", "Value_Goal", g.valueGoal) ->
@@ -57,7 +57,7 @@ cwm::ChiGoal convertToCwm(Chronos::ChiGoal c) :
 	let un = new cwm::ChiGoal : (
 		un.setId(c.getId()) ->
 		un.setPriority(c.getValue(c.getAppliedStereotype("Chronos::ChiGoal"), "Priority")) ->
-		un.setGoalType(c.getTaggedValue("Chronos::ChiGoal", "GoalType").toString()) ->
+		//un.setGoalType(c.getTaggedValue("Chronos::ChiGoal", "GoalType").toString()) ->
 		un.setValueName(c.getTaggedValue("Chronos::ChiGoal", "Value_Name").toString()) ->
 		un.setValueAmmount(c.getTaggedValue("Chronos::ChiGoal", "Value_ammount").toString()) ->
 		un.setValueGoal(c.getTaggedValue("Chronos::ChiGoal", "Value_Goal").toString()) ->
