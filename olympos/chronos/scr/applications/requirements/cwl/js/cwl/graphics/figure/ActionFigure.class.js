@@ -11,8 +11,8 @@
  */
 Ext.namespace("cwl.graphics.figure");
 
-cwl.graphics.figure.ActionFigure = function(label) {
-  cwl.graphics.figure.BaseFigure.prototype.constructor.call(this, label);
+cwl.graphics.figure.ActionFigure = function(diagram, label) {
+  cwl.graphics.figure.BaseFigure.prototype.constructor.call(this, diagram, label);
 }
 
 Ext.extend(cwl.graphics.figure.ActionFigure, cwl.graphics.figure.BaseFigure);

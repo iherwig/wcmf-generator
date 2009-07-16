@@ -15,12 +15,12 @@ Ext.namespace("cwl.graphics.figure");
  * EditableFigure adds an input form to the figure that is shown,
  * on mouse rollover.
  */
-cwl.graphics.figure.EditableFigure = function(label) {
+cwl.graphics.figure.EditableFigure = function(diagram, label) {
   this.formNode = null;
   this.form = null;
   this.formOpened = false;
-
-  cwl.graphics.figure.BaseFigure.call(this, label);
+  
+  cwl.graphics.figure.BaseFigure.call(this, diagram, label);
 }
 
 Ext.extend(cwl.graphics.figure.EditableFigure, cwl.graphics.figure.BaseFigure);

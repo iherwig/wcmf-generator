@@ -11,13 +11,12 @@
  */
 Ext.namespace("cwl.graphics.figure");
 
-cwl.graphics.figure.ConditionFigure = function(label) {
-  cwl.graphics.figure.EditableFigure.prototype.constructor.call(this, label);
-  
+cwl.graphics.figure.ConditionFigure = function(diagram, label) {  
   this.conditionLeft = null;
   this.conditionRight = null;
   this.operator = null;
-  this.lineColor = new draw2d.Color(200, 200, 200); 
+  
+  cwl.graphics.figure.EditableFigure.prototype.constructor.call(this, diagram, label);  
 }
 
 Ext.extend(cwl.graphics.figure.ConditionFigure, cwl.graphics.figure.EditableFigure);
@@ -37,6 +36,8 @@ cwl.graphics.figure.ConditionFigure.prototype.onElementDrop = function(modelElem
  * @private
  **/
 cwl.graphics.figure.ConditionFigure.prototype.paint = function() {
+  this.lineColor = new draw2d.Color(200, 200, 200);
+
   // you must call the super-method to initialize the device context.
   cwl.graphics.figure.EditableFigure.prototype.paint.call(this);
 
