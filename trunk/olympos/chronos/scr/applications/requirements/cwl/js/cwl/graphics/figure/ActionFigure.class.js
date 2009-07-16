@@ -28,7 +28,7 @@ cwl.graphics.figure.ActionFigure.prototype.onElementDrop = function(modelElement
     var actionText = modelElement.getOwner().getName()+"."+modelElement.getName()+"()";
     
     this.setLabel(actionText);
-    cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);
+    cwl.rule.ExpressionPanel.getInstance().setActionText(this.getId(), actionText);
     return true;
   }
   return false;

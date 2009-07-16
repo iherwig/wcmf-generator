@@ -24,8 +24,8 @@ Ext.namespace("cwl.rule");
  *            config The configuration object.
  */
 cwl.rule.ExpressionPanel = function() {
-  this.conditionStr = "";
-  this.actionStr = "";
+  this.conditions = null;
+  this.actions = null;
   this.expressionField = null;
 }
 
@@ -41,6 +41,8 @@ cwl.rule.ExpressionPanel = Ext.extend(Ext.Panel, {
       enableLists: false,
       enableSourceEdit: false
     });
+    this.conditions = {};
+    this.actions = {};
 		Ext.apply(this, {
       layout: 'fit',
 		  title: chi.Dict.translate('Rule Expression'),
@@ -57,16 +59,16 @@ cwl.rule.ExpressionPanel = Ext.extend(Ext.Panel, {
 /**
  * Set the condition text.
  */
-cwl.rule.ExpressionPanel.prototype.setConditionText = function(conditionStr) {
-  this.conditionStr = conditionStr;
+cwl.rule.ExpressionPanel.prototype.setConditionText = function(id, conditionStr) {
+  this.conditions[""+id] = conditionStr;
   this.updateDisplay();
 }
 
 /**
  * Set the action text.
  */
-cwl.rule.ExpressionPanel.prototype.setActionText = function(actionStr) {
-  this.actionStr = actionStr;
+cwl.rule.ExpressionPanel.prototype.setActionText = function(id, actionStr) {
+  this.actions[""+id] = actionStr;
   this.updateDisplay();
 }
 
@@ -75,12 +77,16 @@ cwl.rule.ExpressionPanel.prototype.setActionText = function(actionStr) {
  */
 cwl.rule.ExpressionPanel.prototype.updateDisplay = function() {
 
-  if (!this.conditionStr)
-    this.conditionStr = "";
-  if (!this.actionStr)
-    this.actionStr = "";
+  var conditionStr = "";
+  for(var i in this.conditions)
+    conditionStr += this.conditions[i]+" ";
+  conditionStr = conditionStr.substr(0, conditionStr.length-1);
+  var actionStr = "";
+  for(var i in this.actions)
+    actionStr += this.actions[i]+"<br />&nbsp;&nbsp;&nbsp;&nbsp;";
+  actionStr = actionStr.substr(0, actionStr.length-"<br />&nbsp;&nbsp;&nbsp;&nbsp;".length);
     
-  this.expressionField.setValue("<strong>IF</strong> ("+this.conditionStr+") <strong>THEN</strong> ("+this.actionStr+")");
+  this.expressionField.setValue("<strong>IF</strong> ("+conditionStr+") <strong>THEN</strong> ("+actionStr+"<br />)");
 }
 
 /**

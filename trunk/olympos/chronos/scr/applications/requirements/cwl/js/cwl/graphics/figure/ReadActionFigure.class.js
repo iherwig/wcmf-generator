@@ -166,5 +166,5 @@ cwl.graphics.figure.ReadActionFigure.prototype.save = function() {
   
   this.setLabel(actionText);
 
-  cwl.rule.ExpressionPanel.getInstance().setActionText(actionText.replace(/^READ/, '<strong>READ</strong>'));
+  cwl.rule.ExpressionPanel.getInstance().setActionText(this.getId(), actionText.replace(/^READ/, '<strong>READ</strong>'));
 }
