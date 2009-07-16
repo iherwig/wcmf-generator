@@ -268,7 +268,7 @@ cwl.diagram.RuleDiagram.prototype.addNewObject = function(modelElement, x, y) {
       cwl.rule.ExpressionPanel.getInstance().setActionText(figure.getId(), actionText);
     }
     if (modelElement.getType() == "Operation") {
-      var actionText = modelElement.getOwner().getName()+"."+modelElement.getName()+"()";
+      var actionText = "My"+modelElement.getOwner().getName()+"."+modelElement.getName()+"()";
       figure = new cwl.graphics.figure.ActionFigure(this, actionText);
       figure.setDimension(95, 60);
       cwl.rule.ExpressionPanel.getInstance().setActionText(figure.getId(), "<strong>INVOKE</strong> "+actionText);

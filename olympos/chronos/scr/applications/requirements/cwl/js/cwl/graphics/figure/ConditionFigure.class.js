@@ -180,12 +180,12 @@ cwl.graphics.figure.ConditionFigure.prototype.updateForm = function() {
   usedObjectsPackage.getChildren().each(function(item, index, length) {
     var ops = item.getOperations();
     for (var i=0; i<ops.length; i++) {
-      var text = item.name+"."+ops[i]+"()";
+      var text = "My"+item.name+"."+ops[i]+"()";
       operations.push({id: text, displayText: text, className: item.name, operationName: ops[i]});
     }
     var attrs = item.getAttributes();
     for (var i=0; i<attrs.length; i++) {
-      var text = item.name+"."+attrs[i];
+      var text = "My"+item.name+"."+attrs[i];
       attributes.push({id: text, displayText: text, className: item.name, operationName: attrs[i]});
     }
   });
