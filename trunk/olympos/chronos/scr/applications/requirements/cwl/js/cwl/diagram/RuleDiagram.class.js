@@ -249,18 +249,18 @@ cwl.diagram.RuleDiagram.prototype.addNewObject = function(modelElement, x, y) {
     // if not, we create a new figure
     var figure = null;  
     if (modelElement.getType() == "Rule") {
-      figure = new cwl.graphics.figure.RuleFigure("New Rule");
+      figure = new cwl.graphics.figure.RuleFigure(this, "New Rule");
       figure.setDimension(300, 500);
     }
     if (modelElement.getType() == "RuleCondition") {
       var conditionText = "NewCondition";
-      figure = new cwl.graphics.figure.ConditionFigure(conditionText);
+      figure = new cwl.graphics.figure.ConditionFigure(this, conditionText);
       figure.setDimension(80, 40);
       cwl.rule.ExpressionPanel.getInstance().setConditionText(conditionText);
     }
     if (modelElement.getType() == "RuleAction") {
       var actionText = "New"+modelElement.getName()+"Action";
-      figure = new cwl.graphics.figure.ActionFigure(actionText);
+      figure = new cwl.graphics.figure.ActionFigure(this, actionText);
       figure.setDimension(95, 60);
       cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);
     }
@@ -271,8 +271,11 @@ cwl.diagram.RuleDiagram.prototype.addNewObject = function(modelElement, x, y) {
         compFigure.addChild(figure);
         
       this.figures.add(figure.getId(), figure);
+      
+      return figure;
     }
   }
+  return null;
 }
 
 cwl.diagram.RuleDiagram.prototype.getBestFigure = function(x, y) {
