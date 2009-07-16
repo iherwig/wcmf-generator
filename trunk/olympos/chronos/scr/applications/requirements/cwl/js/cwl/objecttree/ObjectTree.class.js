@@ -57,7 +57,7 @@ cwl.objecttree.ObjectTree = Ext.extend(Ext.tree.TreePanel, {
         dragConfig: {
           ddGroup: cwl.Constants.DD_GROUP
         },        
-		    title: chi.Dict.translate("Object In Use"),
+		    title: chi.Dict.translate("Objects In Rule Set"),
         header: false
 		});
     
