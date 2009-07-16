@@ -578,7 +578,7 @@ var modelTree = [{
     treeIconClass: "FigureChiNode",
     semanticGroup: "Domain Object",
     parentId: "id010",
-    attributes: ["Name", "Age"]
+    attributes: ["Id"]
   },{
     name: "Meter",
     type: "ChiNode",
@@ -586,6 +586,20 @@ var modelTree = [{
     semanticGroup: "Domain Object",
     parentId: "id010",
     attributes: ["Data"]
+  },{
+    name: "Profile",
+    type: "ChiNode",
+    treeIconClass: "FigureChiNode",
+    semanticGroup: "Domain Object",
+    parentId: "id010",
+    attributes: ["hasRemoteControl"]
+  },{
+    name: "Product",
+    type: "ChiNode",
+    treeIconClass: "FigureChiNode",
+    semanticGroup: "Domain Object",
+    parentId: "id010",
+    attributes: ["requiresRemoteControl"]
   },{
     id: "id011",
     name: "Services",

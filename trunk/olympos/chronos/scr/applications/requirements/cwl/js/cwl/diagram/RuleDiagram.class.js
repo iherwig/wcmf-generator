@@ -260,6 +260,15 @@ cwl.diagram.RuleDiagram.prototype.addNewObject = function(modelElement, x, y) {
     }
     if (modelElement.getType() == "RuleAction") {
       var actionText = "New"+modelElement.getName()+"Action";
+      if (modelElement.getName() == "Read")
+        figure = new cwl.graphics.figure.ReadActionFigure(this, actionText);
+      else
+        figure = new cwl.graphics.figure.ActionFigure(this, actionText);
+      figure.setDimension(95, 60);
+      cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);
+    }
+    if (modelElement.getType() == "Operation") {
+      var actionText = modelElement.getOwner().getName()+"."+modelElement.getName()+"()";
       figure = new cwl.graphics.figure.ActionFigure(this, actionText);
       figure.setDimension(95, 60);
       cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);

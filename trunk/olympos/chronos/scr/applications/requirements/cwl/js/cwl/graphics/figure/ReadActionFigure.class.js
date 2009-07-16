@@ -11,73 +11,13 @@
  */
 Ext.namespace("cwl.graphics.figure");
 
-cwl.graphics.figure.ConditionFigure = function(diagram, label) {  
-  this.conditionLeft = null;
-  this.conditionRight = null;
-  this.operator = null;
-  
-  cwl.graphics.figure.EditableFigure.prototype.constructor.call(this, diagram, label);  
+cwl.graphics.figure.ReadActionFigure = function(diagram, label) {
+  cwl.graphics.figure.ActionFigure.prototype.constructor.call(this, diagram, label);
 }
 
-Ext.extend(cwl.graphics.figure.ConditionFigure, cwl.graphics.figure.EditableFigure);
+Ext.extend(cwl.graphics.figure.ReadActionFigure, cwl.graphics.figure.ActionFigure);
 
-cwl.graphics.figure.ConditionFigure.prototype.onElementDrop = function(modelElement) {
-  if (modelElement.getType() == "ChiValue") {
-    this.conditionLeft.setValue(modelElement.getOwner().getName()+"."+modelElement.getName()+"()");
-    this.save();
-    return true;
-  }
-  return false;
-}
-
-/**
- * The paint method is the place to put your own draw calls.
- * This method will be called from the framework. Don't call them manually.
- * @private
- **/
-cwl.graphics.figure.ConditionFigure.prototype.paint = function() {
-  this.lineColor = new draw2d.Color(200, 200, 200);
-
-  // you must call the super-method to initialize the device context.
-  cwl.graphics.figure.EditableFigure.prototype.paint.call(this);
-
-  // the coords for the shape
-  //
-  var x = new Array(
-    0, 
-    this.getWidth()/2, 
-    this.getWidth(), 
-    this.getWidth()/2
-  );
-  var y = new Array(
-    this.getHeight()/2, 
-    0, 
-    this.getHeight()/2, 
-    this.getHeight()
-  ); 
-
-  // set the line width
-  this.graphics.setStroke(this.stroke);
-
-  // fill the area if the user has set a background color
-  //
-  if (this.bgColor != null) {
-    this.graphics.setColor(this.bgColor.getHTMLStyle());
-    this.graphics.fillPolygon(x,y);
-  }
-
-  // paint the outline if the user has set the line color (default:black)
-  //
-  if (this.lineColor != null) {
-    this.graphics.setColor(this.lineColor.getHTMLStyle());
-    this.graphics.drawPolygon(x,y);
-  }
-
-  // flush the paint instructions to the device context
-  this.graphics.paint();
-}
-
-cwl.graphics.figure.ConditionFigure.prototype.createForm = function() {
+cwl.graphics.figure.ReadActionFigure.prototype.createForm = function() {
   var self = this;
   
   this.conditionLeft = new Ext.form.ComboBox({
@@ -172,7 +112,7 @@ cwl.graphics.figure.ConditionFigure.prototype.createForm = function() {
   return form;
 }
 
-cwl.graphics.figure.ConditionFigure.prototype.updateForm = function() {
+cwl.graphics.figure.ReadActionFigure.prototype.updateForm = function() {
   // get all possible values for the left/right part of the expression
   var attributes = [];
   var operations = [];
@@ -213,9 +153,13 @@ cwl.graphics.figure.ConditionFigure.prototype.updateForm = function() {
   rightStore.sort("displayText");
 }
 
-cwl.graphics.figure.ConditionFigure.prototype.save = function() {
+cwl.graphics.figure.ReadActionFigure.prototype.save = function() {
   var conditionText = this.conditionLeft.getRawValue()+" "+this.operator.getValue()+" "+this.conditionRight.getRawValue();
-
-  this.setLabel(conditionText);
-  cwl.rule.ExpressionPanel.getInstance().setConditionText(conditionText);
+  var selectedRecord = this.conditionLeft.getStore().getById(this.conditionLeft.getRawValue());
+  var actionText = "Read | "+conditionText;
+  if (selectedRecord)
+    actionText = "Read "+selectedRecord.data.className+" | "+conditionText;
+  
+  this.setLabel(actionText);
+  cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);
 }

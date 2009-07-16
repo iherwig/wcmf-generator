@@ -71,7 +71,7 @@ cwl.rule.ExpressionPanel.prototype.updateDisplay = function() {
   if (!this.actionStr)
     this.actionStr = "";
     
-  this.expressionField.setValue("IF "+this.conditionStr+" THEN "+this.actionStr);
+  this.expressionField.setValue("IF ("+this.conditionStr+") THEN ("+this.actionStr+")");
 }
 
 /**
