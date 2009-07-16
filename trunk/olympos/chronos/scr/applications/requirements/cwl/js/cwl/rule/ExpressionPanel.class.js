@@ -31,7 +31,16 @@ cwl.rule.ExpressionPanel = function() {
 
 cwl.rule.ExpressionPanel = Ext.extend(Ext.Panel, {
 	initComponent : function() {
-    this.expressionField = new Ext.form.TextArea();
+    this.expressionField = new Ext.form.HtmlEditor({
+      enableAlignments: false,
+      enableColors: false,
+      enableFont: false,
+      enableFontSize: false,
+      enableFormat: false,
+      enableLinks: false,
+      enableLists: false,
+      enableSourceEdit: false
+    });
 		Ext.apply(this, {
       layout: 'fit',
 		  title: chi.Dict.translate('Rule Expression'),
@@ -71,7 +80,7 @@ cwl.rule.ExpressionPanel.prototype.updateDisplay = function() {
   if (!this.actionStr)
     this.actionStr = "";
     
-  this.expressionField.setValue("IF ("+this.conditionStr+") THEN ("+this.actionStr+")");
+  this.expressionField.setValue("<strong>IF</strong> ("+this.conditionStr+") <strong>THEN</strong> ("+this.actionStr+")");
 }
 
 /**

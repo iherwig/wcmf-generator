@@ -502,6 +502,14 @@ var modelTree = [{
     type: "ActivityFinal",
     treeIconClass: "FigureActivityFinal",
     parentId: "id001140"
+  },{
+    name: "BuyProductController",
+    type: "ChiController",
+    treeIconClass: "FigureChiController",
+    semanticGroup: "Domain Object",
+    parentId: "id001140",
+    operations: ["browseProducts", "selectProduct", "evaluateProducts", "createOrder", "reviewOrder", 
+      "confirmOrder", "sendOrder"]
   },
 /***********************************************************************************  
  ***********************************************************************************  

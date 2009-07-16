@@ -209,6 +209,10 @@ cwl.graphics.figure.ConditionFigure.prototype.updateForm = function() {
     leftStore.insert(0, new rightStore.recordType(recordData, recordData.id));
     rightStore.insert(0, new rightStore.recordType(recordData, recordData.id));
   }
+  
+  rightStore.insert(0, new rightStore.recordType({id: 'false', displayText: 'false'}, 'false'));
+  rightStore.insert(0, new rightStore.recordType({id: 'true', displayText: 'true'}, 'true'));
+  
   leftStore.sort("displayText");
   rightStore.sort("displayText");
 }
