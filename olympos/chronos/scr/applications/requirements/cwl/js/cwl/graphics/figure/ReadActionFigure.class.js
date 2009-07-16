@@ -149,6 +149,10 @@ cwl.graphics.figure.ReadActionFigure.prototype.updateForm = function() {
     leftStore.insert(0, new rightStore.recordType(recordData, recordData.id));
     rightStore.insert(0, new rightStore.recordType(recordData, recordData.id));
   }
+  
+  rightStore.insert(0, new rightStore.recordType({id: 'false', displayText: 'false'}, 'false'));
+  rightStore.insert(0, new rightStore.recordType({id: 'true', displayText: 'true'}, 'true'));
+
   leftStore.sort("displayText");
   rightStore.sort("displayText");
 }
@@ -156,10 +160,11 @@ cwl.graphics.figure.ReadActionFigure.prototype.updateForm = function() {
 cwl.graphics.figure.ReadActionFigure.prototype.save = function() {
   var conditionText = this.conditionLeft.getRawValue()+" "+this.operator.getValue()+" "+this.conditionRight.getRawValue();
   var selectedRecord = this.conditionLeft.getStore().getById(this.conditionLeft.getRawValue());
-  var actionText = "Read | "+conditionText;
+  var actionText = "READ("+conditionText+")";
   if (selectedRecord)
-    actionText = "Read "+selectedRecord.data.className+" | "+conditionText;
+    actionText = "READ("+selectedRecord.data.className+" | "+conditionText+")";
   
   this.setLabel(actionText);
-  cwl.rule.ExpressionPanel.getInstance().setActionText(actionText);
+
+  cwl.rule.ExpressionPanel.getInstance().setActionText(actionText.replace(/^READ/, '<strong>READ</strong>'));
 }
