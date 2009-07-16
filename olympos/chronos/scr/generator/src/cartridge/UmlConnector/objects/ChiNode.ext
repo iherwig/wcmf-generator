@@ -84,8 +84,8 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 		//un.setIsSoap(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_soap")) ->
 		//un.setIsSearchable(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_searchable")) ->
 		un.setInitparams(c.getTaggedValue("Chronos::ChiNode", "initparams").toString()) ->
-		un.setAuthor(c.getTaggedValue("Chronos::ChiNode", "author").toString()) ->
-		un.setStatus(c.getTaggedValue("Chronos::ChiNode", "status").toString()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiNode", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiNode", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiNode", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiNode", "Version").toString()) ->
 		un.setName(c.name) ->
