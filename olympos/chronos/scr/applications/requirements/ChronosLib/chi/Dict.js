@@ -13,11 +13,13 @@ Ext.namespace("chi.Dict");
 
 /**
  * Translates a string to the currently set language.
- *
- * @param {String} englishText The english text to translate.
- * @return {String} The translated text, if a translation exists. English text otherwise.
+ * 
+ * @param {String}
+ *            englishText The English text to translate.
+ * @return {String} The translated text, if a translation exists. English text
+ *         otherwise.
  */
-chi.Dict.translate = function() {
+chi.Dict.translate = function(englishText) {
 	strword = arguments[0];
 	
 	try {
@@ -25,7 +27,7 @@ chi.Dict.translate = function() {
 		if (!strresult) {
 			strresult = strword;
 		}
-	} 
+	}
 	catch (e) {
 		strresult = strword;
 	}
