@@ -22,6 +22,11 @@ Ext.namespace("chi");
 chi.Login = function(config) {
 	var self = this;
 	
+	/**
+	 * The form showing user, password, language selection and revision.
+	 * 
+	 * @type Ext.FormPanel
+	 */
 	this.form = new Ext.FormPanel( {
 		labelWidth : 100,
 		frame : true,
@@ -38,15 +43,7 @@ chi.Login = function(config) {
 			}
 		} ],
 		
-		items : [ /*
-					 * new Ext.BoxComponent({ autoEl: { tag: "div", cls:
-					 * "cwm-logo-container", children: [{ tag: "h1", html:
-					 * "Chronos Web Modeler" }, { tag: "div" }, { tag: "a",
-					 * target: "_blank", href:
-					 * "http://sourceforge.net/projects/olympos/", html:
-					 * "http://sourceforge.net/projects/olympos/" }] } }),
-					 */
-		new Ext.form.TextField( {
+		items : [ new Ext.form.TextField( {
 			fieldLabel : chi.Dict.translate('Login'),
 			name : 'login',
 			allowBlank : false,
@@ -113,6 +110,11 @@ chi.Login = function(config) {
 
 Ext.extend(chi.Login, Ext.Viewport);
 
+/**
+ * Positions the window at the center of the screen.
+ * 
+ * This is done only once, so no refresh on viewport resize.
+ */
 chi.Login.prototype.render = function() {
 	chi.Login.superclass.render.apply(this, arguments);
 	
@@ -126,6 +128,9 @@ chi.Login.prototype.render = function() {
 	this.form.getForm().findField("login").focus();
 }
 
+/**
+ * Checks the form for validity and sends login command to backend.
+ */
 chi.Login.prototype.initSession = function() {
 	if (this.form.getForm().isValid()) {
 		var self = this;
@@ -138,10 +143,16 @@ chi.Login.prototype.initSession = function() {
 	}
 }
 
+/**
+ * Starts session after successful login at backend.
+ */
 chi.Login.prototype.handleLogin = function(data) {
 	cwe.Cwe.getInstance().startSession(data.sid, this.form.getForm().findField("Language").getValue());
 }
 
+/**
+ * On login failure, displays error message and resets password field.
+ */
 chi.Login.prototype.handleLoginFailure = function(data, errorMsg) {
 	chi.Util.showMessage("Login Failed", errorMsg, chi.Util.messageType.ERROR);
 	

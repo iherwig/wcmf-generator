@@ -13,10 +13,11 @@ Ext.namespace("chi.Util");
 
 /**
  * Extracts the UWM Class Name out of an OID.
- *
+ * 
  * @param {String}
  *            oid The OID to extract UWM Class Name from.
- * @return {String} The UWM Class Name of the OID.
+ * @return The CweModelElementId of the OID.
+ * @type String
  */
 chi.Util.getCweModelElementIdFromOid = function(oid) {
 	var result = oid.match(/^[^:]+/)[0];
@@ -30,7 +31,7 @@ chi.Util.getCweModelElementIdFromOid = function(oid) {
 
 /**
  * Extracts the numeric part out of an OID.
- *
+ * 
  * @param {String}
  *            oid The OID to extract numeric part from.
  * @return {int} The numeric part of the OID
@@ -41,7 +42,7 @@ chi.Util.getNumericFromOid = function(oid) {
 
 /**
  * Displays a message to the user.
- *
+ * 
  * @param {String}
  *            title Title of the message.
  * @param {String}
@@ -53,24 +54,17 @@ chi.Util.showMessage = function(title, message, messageType) {
 	var messageContainer = Ext.get("messageContainer");
 	if (!messageContainer) {
 		messageContainer = Ext.DomHelper.insertFirst(document.body, {
-			id: "messageContainer",
-			style: "position: absolute"
+			id : "messageContainer",
+			style : "position: absolute"
 		}, true);
 	}
 	messageContainer.alignTo(document, 't-t');
 	var messageBox = Ext.DomHelper.append(messageContainer, {
-		html: '<div>' +
-		'<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>' +
-		'<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>' +
-		title +
-		'</h3>' +
-		message +
-		'</div></div></div>' +
-		'<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>' +
-		'</div>'
+		html : '<div>' + '<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>' + '<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>' + title + '</h3>' + message + '</div></div></div>'
+				+ '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>' + '</div>'
 	}, true);
 	messageBox.slideIn('t').pause(3).ghost("t", {
-		remove: true
+		remove : true
 	});
 }
 
@@ -78,14 +72,14 @@ chi.Util.showMessage = function(title, message, messageType) {
  * List of message types.
  */
 chi.Util.messageType = {
-	INFO: 1,
-	WARNING: 2,
-	ERROR: 3
+	INFO : 1,
+	WARNING : 2,
+	ERROR : 3
 }
 
 /**
  * Disables text selection on a DOM element.
- *
+ * 
  * @param {DOMElement}
  *            elem The DOM element to disable selection on.
  */
