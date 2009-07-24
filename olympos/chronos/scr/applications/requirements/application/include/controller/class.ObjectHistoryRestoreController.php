@@ -171,8 +171,7 @@ private function writeHistTableDiffOldNewArray() {
 	
 	$dataHistEntrySer = serialize($dataHistEntry);
 	
-	$objQueryHistWrite = & $this->persistenceFacade->createObjectQuery($this->histtable);
-	$objTplHistWrite = & $objQueryHistWrite->getObjectTemplate($this->histtable); //new row
+	$objTplHistWrite = &$this->persistenceFacade->create($this->histtable, BUILDDEPTH_SINGLE);
 	
 	$objTplHistWrite->setValue('id', null, DATATYPE_ATTRIBUTE);
 	$objTplHistWrite->setValue('data', $dataHistEntrySer, DATATYPE_ATTRIBUTE);
@@ -182,7 +181,7 @@ private function writeHistTableDiffOldNewArray() {
 	$objTplHistWrite->setValue('otheroid', 'tbd', DATATYPE_ATTRIBUTE);
 	$objTplHistWrite->setValue('timestamp', $this->currentTimestamp, DATATYPE_ATTRIBUTE);
 	$objTplHistWrite->setValue('user', $this->currentUser, DATATYPE_ATTRIBUTE);
-	$this->persistenceFacade->save($objTplHistWrite);
+	$objTplHistWrite->save();
 	
 }
 
@@ -217,7 +216,7 @@ private function restoreObjCurValListfields() {
 			}
 		}
 	}
-	$this->persistenceFacade->save($this->ObjCurVal);
+	$this->ObjCurVal->save();
 }
 
 private function restoreObjCurVal() {
@@ -248,8 +247,7 @@ private function restoreObjCurVal() {
 			}
 		}
 	}
-	$this->persistenceFacade->save($this->ObjCurVal);
-
+	$this->ObjCurVal->save();
 }
 
 private function curValOfObjToValArray() {
@@ -279,7 +277,7 @@ private function getObjHistListSince() {
 	// get history entries with affectedoid and since timstamp from History Table
 	$this->objQueryHistList = & $this->persistenceFacade->createObjectQuery($this->histtable);
 	$this->objTplHistList = & $this->objQueryHistList->getObjectTemplate($this->histtable);
-	$this->objTplHistList->setValue("affectedoid", $this->affectedoid, DATATYPE_ATTRIBUTE);
+	$this->objTplHistList->setValue("affectedoid", "= '".$this->affectedoid."'", DATATYPE_ATTRIBUTE);
 	$this->objTplHistList->setValue("timestamp", '> '.$this->timestamp, DATATYPE_ATTRIBUTE);
 	$this->objlistHistList = $this->objQueryHistList->execute(BUILDDEPTH_SINGLE, array ('timestamp DESC'));
 	array_push($this->objlistHistList, $this->objlistHistEntry[0]);
@@ -292,7 +290,7 @@ private function getHistoryFromTable($tmpid) {
 	// get history entry from History Table
 	$this->objQueryHistEntry = & $this->persistenceFacade->createObjectQuery($this->histtable);
 	$this->objTplHistEntry = & $this->objQueryHistEntry->getObjectTemplate($this->histtable);
-	$this->objTplHistEntry->setValue("id", $tmpid, DATATYPE_IGNORE);
+	$this->objTplHistEntry->setValue("id", "= ".$tmpid, DATATYPE_IGNORE);
 	$this->objlistHistEntry = $this->objQueryHistEntry->execute(BUILDDEPTH_SINGLE, null);
 	$this->objlistHistEntryUnserialized = self::getDataValue($this->objlistHistEntry);
 	$this->timestamp = $this->objlistHistEntryUnserialized[0]['timestamp'];

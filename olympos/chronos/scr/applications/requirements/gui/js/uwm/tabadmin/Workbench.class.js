@@ -52,7 +52,7 @@ uwm.tabadmin.Workbench = function(config) {
 
 	var self = this;
 
-	this.on("afterlayout", function() {
+	this.on("show", function() {
 		self.actionSet.commit();
 	}, undefined, {
 		single :true

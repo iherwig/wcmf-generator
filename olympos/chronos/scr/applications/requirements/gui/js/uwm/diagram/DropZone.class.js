@@ -88,7 +88,7 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 	
 	var result = this.checkDropable(modelData);
 	
-	if (result) {
+	if (result == this.dropAllowed) {
 		this.diagram.dropWindow = new Ext.Window({
 			x: e.xy[0],
 			y: e.xy[1],
@@ -127,21 +127,21 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
  *
  * @private
  * @param {Object} modelData Data of the dragged object.
- * @return <code>Ext.dd.DropZone.prototype.dropAllowed</code> If the dragged object can be dropped here, <code>false</code> othewise.
+ * @return <code>Ext.dd.DropZone.prototype.dropAllowed</code> If the dragged object can be dropped here, <code>Ext.dd.DropZone.prototype.dropNotAllowed</code> othewise.
  * @type boolean
  */
 uwm.diagram.DropZone.prototype.checkDropable = function(modelData) {
-	var result = false;
+	var result = this.dropNotAllowed;
 	if (modelData instanceof uwm.model.ModelObject) {
 		if (!this.diagram.containsObject(modelData)) {
-			result = Ext.dd.DropZone.prototype.dropAllowed;
+			result = this.dropAllowed;
 		}
 	} else if (modelData instanceof uwm.model.ModelClass) {
-		result = modelData.canCreateNewInDiagram(this.diagram);
+		result = modelData.canCreateNewInDiagram(this.diagram) ? this.dropAllowed : this.dropNotAllowed;
 	}
 	
 	if (!this.checkSemanticGroup(modelData)) {
-		result = false;
+		result = this.dropNotAllowed;
 	}
 	
 	return result;

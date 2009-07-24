@@ -164,6 +164,13 @@ uwm.property.HtmlEditor.prototype.handleDestroy = function(field) {
 	}
 }
 
+uwm.property.HtmlEditor.prototype.isDirtyIgnoreEmptyValue = function() {
+	if (this.disabled || !this.rendered) {
+		return false;
+	}
+	return String(this.getValue()) !== "<br>" && String(this.getValue()) !== String(this.originalValue);
+}
+
 /**
  * This method is a copy out of ext-all-debug.js, with some additional checks
  * preventing failure if the HtmlEditor is destroyed before it is fully initialized.

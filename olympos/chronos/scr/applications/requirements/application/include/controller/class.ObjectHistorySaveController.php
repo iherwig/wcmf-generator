@@ -78,19 +78,21 @@ class ObjectHistorySaveController extends SaveController
 					$this->data = array ();
 					$prt = array();
 
-					$affectedObj  = $this->persistenceFacade->load($key);
+					$affectedObj = $this->persistenceFacade->load($key);
+          
+          // make sure that the affected object still exists in the database
+					if ($affectedObj != null) {
 		
-					foreach ($this->node->getDataTypes() as $dataType) {
-						foreach ($this->node->getValueNames($dataType) as $name) {
-						
-							if ($name !== 'id') {
-								
+						foreach ($this->node->getDataTypes() as $dataType) {
+							foreach ($this->node->getValueNames($dataType) as $name) {
+
+								if ($name !== 'id') {
+
 									$tmp = array ();
-									
 									$tmp['oldValue'] = $affectedObj->getValue($name);  //value of fieldname GoalType from Object
 									$tmp['newValue'] = $this->node->getValue($name);  // value changed of fieldname GoalType from Request
 									//$name //Fieldname like GoalType
-																		
+
 									//mapping from Fieldname like 'GoalType' to secondTableName like 'ChiGoalType' in this direction
 									$secTabNamesRDB = $affectedObj->getValueProperties($name);
 									$secTabNamesIT = $secTabNamesRDB['input_type'];
@@ -98,7 +100,7 @@ class ObjectHistorySaveController extends SaveController
 										list (, $secTabNames) = explode(':', $secTabNamesIT);
 										$arrSecTabNames = explode('|', $secTabNames);
 									}
-									foreach($arrSecTabNames as $k=>$arrSecTabName){
+									foreach($arrSecTabNames as $k=>$arrSecTabName) {
 										$this->ObjOldVal = $this->persistenceFacade->load($arrSecTabName.':'.$affectedObj->getValue($name));
 										if($this->ObjOldVal){
 											$tmp['oldValueDisp'] = $this->ObjOldVal->getValue('Name');
@@ -110,15 +112,14 @@ class ObjectHistorySaveController extends SaveController
 									}
 									
 									array_push($this->data, array ($name=>$tmp));
-			
+								}
 							}
-						
 						}
 					}
-				
+          
 					self::setChangeList($key); // set changeList
 					self::writeToTable(); //write to table
-				
+
 					array_push($this->changelistarray, $this->changelist);
 				}
 			}
