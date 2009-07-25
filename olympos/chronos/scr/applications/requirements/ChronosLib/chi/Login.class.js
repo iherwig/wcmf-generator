@@ -113,7 +113,9 @@ Ext.extend(chi.Login, Ext.Viewport);
 /**
  * Positions the window at the center of the screen.
  * 
+ * <p>
  * This is done only once, so no refresh on viewport resize.
+ * </p>
  */
 chi.Login.prototype.render = function() {
 	chi.Login.superclass.render.apply(this, arguments);

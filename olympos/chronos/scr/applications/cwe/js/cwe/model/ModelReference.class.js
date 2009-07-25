@@ -11,19 +11,43 @@
  */
 Ext.namespace("cwe.model");
 
+/**
+ * @class A reference to an object.
+ * 
+ * <p>
+ * A reference saves no other data than the oid of the target object.
+ * </p>
+ * 
+ * @constructor
+ * @param {String}
+ *            oid The oid of the target object
+ */
 cwe.model.ModelReference = function(oid) {
+	/**
+	 * The oid of the target object.
+	 * 
+	 * @private
+	 * @type String
+	 */
 	this.oid = oid;
 }
 
+/**
+ * Returns the Model Class of the target object.
+ * 
+ * @return The Model Class of the target object.
+ * @type cwe.model.ModelClass
+ */
 cwe.model.ModelReference.prototype.getModelClass = function() {
 	return chi.Util.getCweModelElementIdFromOid(this.oid);
 }
 
+/**
+ * Returns the oid of the target object.
+ * 
+ * @return The oid of the target object.
+ * @type String
+ */
 cwe.model.ModelReference.prototype.getOid = function() {
 	return this.oid;
 }
-
-/*
- * cwe.model.ModelReference.prototype.getLabel = function() { return
- * this.get("Name"); }
- */

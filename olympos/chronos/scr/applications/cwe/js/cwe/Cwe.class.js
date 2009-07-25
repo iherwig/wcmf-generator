@@ -28,18 +28,23 @@ Ext.extend(cwe.Cwe, chi.Main);
 /**
  * Returns the config object.
  * 
+ * <p>
  * Abstract function to be implemented by subclass.
+ * </p>
  * 
  * @return {Object} The config object.
  */
-chi.Main.prototype.getConfig = function() {
+cwe.Cwe.prototype.getConfig = function() {
 	return cwe.Config;
 }
 
 /**
  * Starts the workbench.
  * 
- * Abstract function to be implemented by subclass. Has to assign the viewport to this.viewport.
+ * <p>
+ * Abstract function to be implemented by subclass. Has to assign the viewport
+ * to this.viewport.
+ * </p>
  */
 cwe.Cwe.prototype.startWorkbench = function() {
 	this.viewport = new cwe.ui.Workbench();

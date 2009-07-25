@@ -1,0 +1,495 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Chronos Web Editor Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="Editor.class.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Chronos Web Editor</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>Editor.class.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'Editor.class.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="cwe/editor/Editor.html">cwe.editor.Editor</a></b></td>
+    <td>An Editor form allowing to edit all properties of an object.</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/*
+ * Copyright (c) 2009 The Olympos Development Team.
+ * 
+ * http://sourceforge.net/projects/olympos/
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
+ */</span>
+Ext.namespace(<span class="literal">"cwe.editor"</span>);
+
+<span class="comment">/**
+ * <span class="attrib">@class</span> An Editor form allowing to edit all properties of an object.
+ * 
+ * &lt;p&gt;
+ * The object to edit is loaded from the back-end.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * Changes are only saved when the user clicks the save button.
+ * &lt;/p&gt;
+ * &lt;p&gt;
+ * The cancel button resets the form to the last saved values on existing
+ * objects or closes the editor on new objects.
+ * &lt;/p&gt;
+ * 
+ * <span class="attrib">@extends</span> Ext.form.FormPanel
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> {Object}
+ *            config The configuration object.
+ * <span class="attrib">@config</span> modelClass The Model Class of the object to edit.
+ * <span class="attrib">@config</span> oid The oid of the object to edit. &lt;code&gt;null&lt;/code&gt; for new
+ *         objects.
+ * <span class="attrib">@config</span> newObject Whether the edited object is a new object.
+ * <span class="attrib">@config</span> editorContainer The container this editor belongs to.
+ * 
+ */</span>
+cwe.editor.Editor = <span class="reserved">function</span>() {
+}
+
+cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
+	initComponent : <span class="reserved">function</span>() {
+		var self = <span class="reserved">this</span>;
+		
+		<span class="comment">/**
+		 * All records loaded by this object, with oid as key.
+		 * 
+		 * <span class="attrib">@private</span>
+		 * <span class="attrib">@type</span> Object
+		 */</span>
+		<span class="reserved">this</span>.rawRecords = {};
+		
+		<span class="comment">/**
+		 * The button for saving the object.
+		 * 
+		 * <span class="attrib">@private</span>
+		 * <span class="attrib">@type</span> Ext.Toolbar.Button
+		 */</span>
+		<span class="reserved">this</span>.saveButton = new Ext.Toolbar.Button( {
+			text : chi.Dict.translate(<span class="literal">"Save"</span>),
+			iconCls : <span class="literal">"saveButton"</span>,
+			handler : <span class="reserved">function</span>() {
+				self.save();
+			}
+		});
+		
+		<span class="comment">/**
+		 * The button for canceling recent changes.
+		 * 
+		 * <span class="attrib">@private</span>
+		 * <span class="attrib">@type</span> Ext.Toolbar.Button
+		 */</span>
+		<span class="reserved">this</span>.cancelButton = new Ext.Toolbar.Button( {
+			text : chi.Dict.translate(<span class="literal">"Cancel"</span>),
+			iconCls : <span class="literal">"cancelButton"</span>,
+			handler : <span class="reserved">function</span>() {
+				self.cancel();
+			}
+		});
+		
+		<span class="comment">/**
+		 * A list of associate buttons this editor created in model grids.
+		 * 
+		 * &lt;p&gt;
+		 * Required for removing the buttons when this editor is closed.
+		 * &lt;/p&gt;
+		 * 
+		 * <span class="attrib">@private</span>
+		 * <span class="attrib">@type</span> Ext.util.MixedCollection
+		 */</span>
+		<span class="reserved">this</span>.associateButtons = new Ext.util.MixedCollection();
+		
+		Ext.apply(<span class="reserved">this</span>, {
+			iconCls : <span class="reserved">this</span>.modelClass.getTreeIconClass(),
+			closable : true,
+			frame : false,
+			autoScroll : true,
+			labelAlign : <span class="literal">"left"</span>,
+			labelWidth : 200,
+			tbar : [ <span class="reserved">this</span>.saveButton, <span class="reserved">this</span>.cancelButton ],
+			items : <span class="reserved">this</span>.modelClass.getEditorItems(),
+			msgTarget : <span class="literal">"side"</span>
+		});
+		
+		<span class="reserved">this</span>.propagateEditor(<span class="reserved">this</span>.items);
+		
+		cwe.editor.Editor.superclass.initComponent.apply(<span class="reserved">this</span>, arguments);
+		
+		<span class="reserved">this</span>.on(<span class="literal">"afterlayout"</span>, <span class="reserved">function</span>(editor, layout) {
+			self.doLayout();
+		}, undefined, {
+			single : true
+		});
+		
+		<span class="reserved">this</span>.on(<span class="literal">"show"</span>, <span class="reserved">function</span>() {
+			self.editorContainer.setActiveTab(self);
+			self.editorContainer.show();
+		});
+		
+		<span class="reserved">if</span> (!<span class="reserved">this</span>.newObject) {
+			<span class="reserved">this</span>.loadFromOid(<span class="reserved">this</span>.oid);
+		}
+	}
+})
+
+<span class="comment">/**
+ * inserts this editor as property to all items in the form as
+ * &lt;code&gt;editor&lt;/code&gt;.
+ * 
+ * &lt;p&gt;
+ * Recursively calls itself on nested items.
+ * &lt;/p&gt;
+ * 
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {Array}
+ *            items The items to insert the editor into.
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.propagateEditor = <span class="reserved">function</span>(items) {
+	var self = <span class="reserved">this</span>;
+	
+	<span class="reserved">if</span> (items) {
+		<span class="reserved">if</span> (Ext.isArray(items)) {
+			<span class="reserved">for</span> ( var i = 0; i &lt; items.length; i++) {
+				var currItem = items[i];
+				<span class="reserved">if</span> (currItem) {
+					currItem.editor = self;
+					self.propagateEditor(currItem.items);
+				}
+			}
+		} <span class="reserved">else</span> <span class="reserved">if</span> (items instanceof Ext.util.MixedCollection) {
+			items.each(<span class="reserved">function</span>(elem) {
+				elem.editor = self;
+				self.propagateEditor(elem.items);
+			});
+		}
+	}
+}
+
+<span class="comment">/**
+ * Saves the current state of the object.
+ * 
+ * &lt;p&gt;
+ * Handles if the object is new and needs to be created first.
+ * &lt;/p&gt;
+ * 
+ * <span class="attrib">@private</span>
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.save = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.newObject) {
+		var record = <span class="reserved">this</span>.getRecord();
+		
+		<span class="reserved">this</span>.getForm().updateRecord(record);
+		record.commit();
+	} <span class="reserved">else</span> {
+		var record = new cwe.model.ModelRecord(<span class="reserved">this</span>.modelClass);
+		
+		<span class="reserved">this</span>.getForm().updateRecord(record);
+		
+		var changedFields = record.getChanges();
+		
+		var self = <span class="reserved">this</span>;
+		
+		chi.persistency.Persistency.getInstance().create(<span class="reserved">this</span>.modelClass.getId(), changedFields, <span class="reserved">function</span>(data) {
+			record.setOid(data.newOid);
+			
+			self.rawRecords = {};
+			self.oid = data.newOid;
+			self.rawRecords[data.newOid] = record;
+			self.editorContainer.addEditor(data.newOid, self);
+		});
+		
+		<span class="reserved">this</span>.setTitle(record.getLabel());
+		<span class="reserved">this</span>.newObject = false;
+	}
+}
+
+<span class="comment">/**
+ * Reverts the values to last saved state (existing object) or closes the editor
+ * (new object).
+ * 
+ * <span class="attrib">@private</span>
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.cancel = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.newObject) {
+		<span class="reserved">this</span>.getForm().loadRecord(<span class="reserved">this</span>.getRecord());
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.findParentBy(<span class="reserved">function</span>() {
+			<span class="reserved">return</span> true;
+		}).remove(<span class="reserved">this</span>);
+	}
+}
+
+<span class="comment">/**
+ * Returns the record of this editor.
+ * 
+ * <span class="attrib">@return</span> The record of this editor.
+ * <span class="attrib">@type</span> cwe.model.ModelRecord
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.getRecord = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.rawRecords[<span class="reserved">this</span>.oid];
+}
+
+<span class="comment">/**
+ * Returns the oid of the edited object.
+ * 
+ * <span class="attrib">@return</span> The oid of the edited object.
+ * <span class="attrib">@type</span> String
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.getOid = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.oid;
+}
+
+<span class="comment">/**
+ * Returns the label of the edited object.
+ * 
+ * <span class="attrib">@return</span> The label of the edited object.
+ * <span class="attrib">@type</span> String
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.getLabel = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getRecord().getLabel();
+}
+
+<span class="comment">/**
+ * Returns the Model Class of the edited object.
+ * 
+ * <span class="attrib">@return</span> The Model Class of the edited object.
+ * <span class="attrib">@type</span> cwe.model.ModelClass
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.getModelClass = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.modelClass;
+}
+
+<span class="comment">/**
+ * Returns all records loaded with this object with oid as key.
+ * 
+ * <span class="attrib">@return</span> All Records loaded with this object with oid as key.
+ * <span class="attrib">@return</span> Object
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.getRawRecords = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.rawRecords;
+}
+
+<span class="comment">/**
+ * Adds a record to the list of all loaded records.
+ * 
+ * <span class="attrib">@param</span> {cwe.model.ModelRecord}
+ *            record The record to add.
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.addRawRecord = <span class="reserved">function</span>(record) {
+	<span class="reserved">this</span>.rawRecords[record.getOid()] = record;
+}
+
+<span class="comment">/**
+ * Loads the object to edit from persistency.
+ * 
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {String}
+ *            oid The oid of the object to load.
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.loadFromOid = <span class="reserved">function</span>(oid) {
+	var self = <span class="reserved">this</span>;
+	
+	chi.persistency.Persistency.getInstance().load(oid, 1, <span class="reserved">function</span>(data) {
+		self.rawRecords = data.records;
+		self.getForm().loadRecord(data.records[data.oid]);
+	});
+}
+
+<span class="comment">/**
+ * Registers an associate button for this editor.
+ * 
+ * <span class="attrib">@param</span> {cwe.modelgrid.ModelGrid}
+ *            grid The model grid the button is added to.
+ * <span class="attrib">@param</span> {cwe.modelgrid.AssociateButton}
+ *            button The added button.
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.addAssociateButton = <span class="reserved">function</span>(grid, button) {
+	<span class="reserved">this</span>.associateButtons.add(button, {
+		grid : grid,
+		button : button
+	});
+}
+
+<span class="comment">/**
+ * Unregisters an associate button for this editor.
+ * 
+ * <span class="attrib">@param</span> {cwe.modelgrid.AssociateButton}
+ *            button The button to unregister.
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.removeAssociateButton = <span class="reserved">function</span>(button) {
+	<span class="reserved">this</span>.associateButtons.removeKey(button);
+}
+
+<span class="comment">/**
+ * Removes all remaining associate buttons from their model grids.
+ * 
+ * <span class="attrib">@private</span>
+ */</span>
+cwe.editor.Editor.<span class="reserved">prototype</span>.removeAllAssociateButtons = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.associateButtons.each(<span class="reserved">function</span>(data) {
+		data.grid.removeAssociateButton(data.button);
+	});
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Chronos Web Editor</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Sat Jul 25 14:43:11 2009</div>
+</body>
+</html>

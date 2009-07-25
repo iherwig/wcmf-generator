@@ -12,38 +12,59 @@
 Ext.namespace("cwe.modelgrid");
 
 /**
- * @class .
+ * @class A panel combining a model grid and the associated editors.
  * 
  * @extends Ext.Panel
  * @constructor
+ * @see cwe.modelgrid.ModelGrid
  * @param {Object}
  *            config The configuration object.
+ * @config modelClass The Model Class of the grid and editors.
  */
 cwe.modelgrid.ModelGridPanel = function() {
 }
 
 cwe.modelgrid.ModelGridPanel = Ext.extend(Ext.Panel, {
 	initComponent : function() {
+		/**
+		 * The editors.
+		 * 
+		 * @private
+		 * @type cwe.editor.EditorContainer
+		 */
 		this.editors = new cwe.editor.EditorContainer( {
 			modelClass : this.modelClass
 		});
+		
+		/**
+		 * The grid.
+		 * 
+		 * @private
+		 * @type cwe.modelgrid.ModelGrid
+		 */
 		this.grid = new cwe.modelgrid.ModelGrid( {
-		    modelClass : this.modelClass,
-		    editors : this.editors
+			modelClass : this.modelClass,
+			editors : this.editors
 		});
 		
 		Ext.apply(this, {
-		    layout : "border",
-		    title : chi.Dict.translate(this.modelClass.getName()),
-		    iconCls : this.modelClass.getTreeIconClass(),
-		    items : [ this.grid, this.editors ],
-		    closable : true
+			layout : "border",
+			title : chi.Dict.translate(this.modelClass.getName()),
+			iconCls : this.modelClass.getTreeIconClass(),
+			items : [ this.grid, this.editors ],
+			closable : true
 		});
 		
 		cwe.modelgrid.ModelGridPanel.superclass.initComponent.apply(this, arguments);
 	}
 });
 
+/**
+ * Returns the Model Grid.
+ * 
+ * @return The model grid.
+ * @type cwe.modelgrid.ModelGrid.
+ */
 cwe.modelgrid.ModelGridPanel.prototype.getGrid = function() {
 	return this.grid;
 }

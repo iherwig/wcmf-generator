@@ -14,9 +14,13 @@ Ext.namespace("chi");
 /**
  * @class The main class of the application.
  * 
+ * <p>
  * To be extended by the main class of each application.
+ * </p>
  * 
+ * <p>
  * This class is a <i>Singleton</i>.
+ * </p>
  * 
  * @constructor
  */
@@ -42,7 +46,9 @@ chi.Main = function() {
 /**
  * Processes the config file.
  * 
+ * <p>
  * To be called as last command in the config file.
+ * </p>
  */
 chi.Main.prototype.processConfig = function() {
 	document.title = this.getConfig().appTitle;
@@ -51,7 +57,9 @@ chi.Main.prototype.processConfig = function() {
 /**
  * Returns the config object.
  * 
+ * <p>
  * Abstract function to be implemented by subclass.
+ * </p>
  * 
  * @return The config object.
  * @type Object
@@ -63,9 +71,11 @@ chi.Main.prototype.getConfig = function() {
 /**
  * Initializes application and shows login.
  * 
+ * <p>
  * To be called from index.html. Installs error handlers and overrides. If a
  * parameter <code>sid</code> is given at the URL, it is taken as session id,
  * and login is skipped.
+ * </p>
  */
 chi.Main.prototype.startApplication = function() {
 	if (this.isInstallErrorHandler) {
@@ -102,7 +112,9 @@ chi.Main.prototype.startApplication = function() {
 /**
  * Starts the session.
  * 
+ * <p>
  * To be called by the login.
+ * </p>
  * 
  * @param {String}
  *            sid The session id.
@@ -120,10 +132,13 @@ chi.Main.prototype.startSession = function(sid, lang) {
 /**
  * Starts the workbench.
  * 
- * Abstract function to be implemented by subclass. Has to assign the viewport to this.viewport.
+ * <p>
+ * Abstract function to be implemented by subclass. Has to assign the viewport
+ * to this.viewport.
+ * </p>
  */
 chi.Main.prototype.startWorbench = function() {
-
+	
 }
 
 /**
@@ -171,11 +186,14 @@ chi.Main.prototype.installErrorHandler = function() {
 /**
  * Handler called on error.
  * 
- * Logs the error in the backend.
+ * <p>
+ * Logs the error in the back-end.
+ * </p>
  * 
- * If Config.debug is true, the error is shown as a message. Otherwise, a
- * Box is displayed to the user, allowing to continue or restart the
- * application.
+ * <p>
+ * If Config.debug is true, the error is shown as a message. Otherwise, a box is
+ * displayed to the user, allowing to continue or restart the application.
+ * </p>
  * 
  * @protected
  * 

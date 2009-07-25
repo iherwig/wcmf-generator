@@ -12,13 +12,14 @@
 Ext.namespace("cwe.editor");
 
 /**
- * @class The Model Grid Container contains all model girds.
- * 
- * <p>
- * The model grid container is a <i>Singleton</i>.
- * </p>
+ * @class The Model Editor Container contains all editors of one Model Class.
  * 
  * @constructor
+ * @extends Ext.TabPanel
+ * @see cwe.editor.Editor
+ * @param {Object}
+ *            config The configuration object.
+ * @config modelClass The Model Class of the editors.
  */
 cwe.editor.EditorContainer = function() {
 }
@@ -26,10 +27,10 @@ cwe.editor.EditorContainer = function() {
 cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
 		/**
-		 * List of model grids with oid as key.
+		 * List of editors oid as key.
 		 * 
 		 * @private
-		 * @type list of cwe.editor.Editor
+		 * @type Ext.util.MixedCollection
 		 */
 		this.editors = new Ext.util.MixedCollection();
 		
@@ -65,6 +66,18 @@ cwe.editor.EditorContainer.prototype.tabClose = function(tabPanel, tab) {
 	}
 }
 
+/**
+ * Load or shows (if already loaded) an editor for the object with the selected
+ * oid.
+ * 
+ * @param {String}
+ *            oid The oid of the object to show. <code>null</code> for new
+ *            objects.
+ * @param {String}
+ *            label The label to use as title for the editor tab.
+ * @param {boolean}
+ *            newObject whether to edit a new object.
+ */
 cwe.editor.EditorContainer.prototype.loadOrShow = function(oid, label, newObject) {
 	var editor = this.editors.get(oid);
 	
@@ -84,10 +97,25 @@ cwe.editor.EditorContainer.prototype.loadOrShow = function(oid, label, newObject
 	editor.doLayout();
 }
 
+/**
+ * Adds an editor to the container.
+ * 
+ * @private
+ * @param {String}
+ *            oid The oid of the edited object.
+ * @param {cwe.editor.Editor}
+ *            editor The editor to ad..
+ */
 cwe.editor.EditorContainer.prototype.addEditor = function(oid, editor) {
 	this.editors.add(oid, editor);
 }
 
+/**
+ * Removes an editor by oid.
+ * 
+ * @param {String}
+ *            oid The oid of the edited object to remove the editor.
+ */
 cwe.editor.EditorContainer.prototype.removeEditor = function(oid) {
 	var editor = this.editors.removeKey(oid);
 	this.remove(editor);

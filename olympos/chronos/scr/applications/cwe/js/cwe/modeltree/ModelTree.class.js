@@ -12,10 +12,10 @@
 Ext.namespace("cwe.modeltree");
 
 /**
- * @class The Model Tree (lower left view).
+ * @class The Model Tree (left view).
  * 
  * <p>
- * This tree displays models, packages and contained diagrams and model objects.
+ * This tree displays all model classes, ordered by their packages.
  * </p>
  * 
  * <p>
@@ -33,15 +33,15 @@ cwe.modeltree.ModelTree = function() {
 cwe.modeltree.ModelTree = Ext.extend(Ext.tree.TreePanel, {
 	initComponent : function() {
 		Ext.apply(this, {
-		    region : "west",
-		    width : 250,
-		    collapsible : true,
-		    split : true,
-		    autoScroll : true,
-		    animate : true,
-		    containerScroll : true,
-		    rootVisible : false,
-		    title : chi.Dict.translate("Model Tree")
+			region : "west",
+			width : 250,
+			collapsible : true,
+			split : true,
+			autoScroll : true,
+			animate : true,
+			containerScroll : true,
+			rootVisible : false,
+			title : chi.Dict.translate("Model Tree")
 		});
 		
 		cwe.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);
@@ -50,6 +50,18 @@ cwe.modeltree.ModelTree = Ext.extend(Ext.tree.TreePanel, {
 	}
 });
 
+/**
+ * Constructs the Model Tree out of ModelPackage and ModelClass information.
+ * 
+ * <p>
+ * Recursively calls itself for each package.
+ * </p>
+ * 
+ * @param {cwe.model.ModelPackage}
+ *            currPackage The package to process.
+ * @return The tree node constructed for <code>currPackage</code>.
+ * @type cwe.modeltree.Node
+ */
 cwe.modeltree.ModelTree.prototype.loadTree = function(currPackage) {
 	var currNode = new cwe.modeltree.Node( {
 		modelElement : currPackage
@@ -58,7 +70,7 @@ cwe.modeltree.ModelTree.prototype.loadTree = function(currPackage) {
 	
 	var self = this;
 	
-	children.each( function(currChild) {
+	children.each(function(currChild) {
 		if (currChild instanceof cwe.model.ModelPackage) {
 			currNode.appendChild(self.loadTree(currChild));
 		} else {
@@ -73,7 +85,7 @@ cwe.modeltree.ModelTree.prototype.loadTree = function(currPackage) {
 
 /**
  * Returns the instance of ModelTree.
- *
+ * 
  * @return The instance of ModelTree.
  * @type cwe.modeltree.ModelTree
  */
