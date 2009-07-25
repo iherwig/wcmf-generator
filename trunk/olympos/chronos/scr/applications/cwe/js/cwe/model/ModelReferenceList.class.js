@@ -11,6 +11,15 @@
  */
 Ext.namespace("cwe.model");
 
+/**
+ * @class A list of Model References of one Model Class.
+ * 
+ * @extends Ext.util.MixedCollection
+ * @constructor
+ * @see cwe.model.ModelReference
+ * @param {cwe.model.ModelClass}
+ *            modelClass The Model Class of the contained Model References.
+ */
 cwe.model.ModelReferenceList = function(modelClass) {
 	cwe.model.ModelReferenceList.superclass.constructor.call(this, false, function(modelReference) {
 		return modelReference.getOid();
@@ -21,10 +30,27 @@ cwe.model.ModelReferenceList = function(modelClass) {
 
 Ext.extend(cwe.model.ModelReferenceList, Ext.util.MixedCollection);
 
+/**
+ * Returns the Model Class of the contained Model References.
+ * 
+ * @return The Model Class of the contained Model References.
+ * @type cwe.model.ModelClass
+ */
 cwe.model.ModelReferenceList.prototype.getModelClass = function() {
 	return this.modelClass;
 }
 
+/**
+ * Returns a copy of this list, excluding the elements contained in
+ * <code>otherList</code>.
+ * 
+ * @param {cwe.model.ModelreferenceList}
+ *            otherList The list of the References to exclude.
+ * 
+ * @return A copy of this list, excluding the elements contained in
+ *         <code>otherList</code>.
+ * @type cwe.model.ModelReferenceList
+ */
 cwe.model.ModelReferenceList.prototype.except = function(otherList) {
 	var result = new cwe.model.ModelReferenceList(this.getModelClass());
 	

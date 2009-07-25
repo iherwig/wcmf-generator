@@ -11,6 +11,23 @@
  */
 Ext.namespace("cwe.model");
 
+/**
+ * @class A record of a specific Model Class.
+ * 
+ * <p>
+ * Reads the record information of the passed Model Class and creates a record
+ * with the specific attributes.
+ * </p>
+ * 
+ * @extends Ext.data.Record
+ * @constructor
+ * 
+ * @param {cwe.model.ModelClass}
+ *            modelClass The Model Class to create a record for.
+ * @param {Object}
+ *            data A map containing attribute names as keys and initial values
+ *            as map values.
+ */
 cwe.model.ModelRecord = function(modelClass, data) {
 	// FIXME: Temporary workaround as long as not all model elements exist
 	if (!modelClass) {
@@ -35,22 +52,62 @@ cwe.model.ModelRecord = function(modelClass, data) {
 
 Ext.extend(cwe.model.ModelRecord, Ext.data.Record);
 
+/**
+ * Returns the Model Class of this record.
+ * 
+ * @return The Model Class of this record.
+ * @type cwe.model.ModelClass
+ */
 cwe.model.ModelRecord.prototype.getModelClass = function() {
 	return this.modelClass;
 }
 
+/**
+ * Returns the oid of this record.
+ * 
+ * @return The oid of this record.
+ * @type String
+ */
 cwe.model.ModelRecord.prototype.getOid = function() {
 	return this.get("oid");
 }
 
+/**
+ * Sets the oid of this record.
+ * 
+ * <p>
+ * Only required in special circumstances, as creating new objects.
+ * </p>
+ * 
+ * @param {String}
+ *            oid The oid to set.
+ */
 cwe.model.ModelRecord.prototype.setOid = function(oid) {
 	this.set("oid", oid);
 }
 
+/**
+ * Returns the label of this record.
+ * 
+ * <p>
+ * Refers to the Model Class for extracting the label of this record.
+ * </p>
+ * 
+ * @return The label of this record.
+ * @type String
+ */
 cwe.model.ModelRecord.prototype.getLabel = function() {
 	return this.getModelClass().getLabel(this);
 }
 
+/**
+ * Sets the value of an attribute.
+ * 
+ * @param {String}
+ *            name The name of the attribute to set.
+ * @param {Mixed}
+ *            value The new value of the attribute.
+ */
 cwe.model.ModelRecord.prototype.set = function(name, value) {
 	if (String(value) !== "[object Object]" && String(this.data[name]) == String(value)) {
 		return;
@@ -71,6 +128,9 @@ cwe.model.ModelRecord.prototype.set = function(name, value) {
 	}
 }
 
+/**
+ * Persists this record.
+ */
 cwe.model.ModelRecord.prototype.commit = function(silent, activitySet) {
 	if (this.dirty) {
 		var changedFields = this.getChanges();
@@ -94,7 +154,7 @@ cwe.model.ModelRecord.prototype.commit = function(silent, activitySet) {
 					simpleFields[currField] = currValue;
 				} else {
 					var oldAssociates = this.modified[currField];
-
+					
 					if (!oldAssociates) {
 						oldAssociates = new cwe.model.ModelReferenceList(this.getModelClass().getTargetModelClass(currField));
 					}

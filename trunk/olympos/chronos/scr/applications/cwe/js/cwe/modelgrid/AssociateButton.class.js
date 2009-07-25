@@ -12,12 +12,25 @@
 Ext.namespace("cwe.modelgrid");
 
 /**
- * @class A list of all objects of one type in a selected scope.
+ * @class A button for associating objects as target.
  * 
- * @extends Ext.grid.GridPanel
+ * @extends Ext.Toolbar.Button
  * @constructor
  * @param {Object}
  *            config The configuration object.
+ * @config modelClass The Model Class of the source object.
+ * @config roleName The name of the role the target object has in the source
+ *         object.
+ * @config role The name of the field the target object is associated to in the
+ *         source object.
+ * @config isParent Whether the target object should be the parent in the
+ *         association.
+ * @config sourceOid The oid of the source object.
+ * @config sourceHandler The handler function to be called when the button is
+ *         pressed. Passing the selected records as only parameter.
+ * @config sourceLabel The label of the source object.
+ * @config singleSelect Whether this is a single select or multi select target.
+ * 
  */
 cwe.modelgrid.AssociateButton = function(config) {
 }
@@ -38,6 +51,12 @@ cwe.modelgrid.AssociateButton = Ext.extend(Ext.Toolbar.Button, {
 	}
 });
 
+/**
+ * Handler when the button is clicked.
+ * 
+ * <p>
+ * Calls the passed <code>sourceHandler</code>.
+ */
 cwe.modelgrid.AssociateButton.prototype.associate = function() {
 	var self = this;
 	
@@ -46,6 +65,12 @@ cwe.modelgrid.AssociateButton.prototype.associate = function() {
 	self.sourceHandler(records);
 }
 
+/**
+ * Returns whether the target object should be the parent in the association.
+ * 
+ * @return Whether the target object should be the parent in the association.
+ * @type boolean
+ */
 cwe.modelgrid.AssociateButton.prototype.isSingleSelect = function() {
 	return this.singleSelect;
 }

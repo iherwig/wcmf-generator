@@ -9,24 +9,34 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
-Ext.namespace("cwe.model");
+Ext.namespace("cwe.modelgrid");
 
-cwe.model.ModelStore = function(config) {
+/**
+ * @class Loads the data for a model grid.
+ * 
+ * @extends Ext.data.Store
+ * @constructor
+ * @see cwe.modelgrid.ModelGrid
+ * @param {Object}
+ *            config The configuration object.
+ * @config modelClass The Model Class to load object of.
+ */
+cwe.modelgrid.GridStore = function(config) {
 	this.modelClass = config.modelClass;
 	
 	var exampleRecord = new cwe.model.ModelRecord(this.modelClass);
 	
-	cwe.model.ModelStore.superclass.constructor.call(this, Ext.apply( {
-		proxy : new cwe.model.ModelProxy( {
+	cwe.modelgrid.GridStore.superclass.constructor.call(this, Ext.apply( {
+		proxy : new cwe.modelgrid.GridProxy( {
 			modelClass : this.modelClass
 		}),
 		fields : exampleRecord.fields,
-		remoteSort: true
+		remoteSort : true
 	}, config));
 }
 
-Ext.extend(cwe.model.ModelStore, Ext.data.Store);
+Ext.extend(cwe.modelgrid.GridStore, Ext.data.Store);
 
-cwe.model.ModelStore.prototype.getModelClass = function() {
+cwe.modelgrid.GridStore.prototype.getModelClass = function() {
 	return this.modelClass;
 }

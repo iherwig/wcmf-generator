@@ -12,12 +12,33 @@
 Ext.namespace("cwe.editor.control");
 
 /**
- * @class A list of all objects of one type in a selected scope.
+ * @class A form field for associating multiple targets.
+ * 
+ * <p>
+ * Displays a grid as form field. The grid contains the label of each associated
+ * object. Provides buttons for associating and disassociating objects. If the
+ * associate button is clicked, the model grid of the target Model Class is
+ * opened, including a button to add selected elements to this form field. If
+ * the disassociate button is clicked, all selected elements of this form field
+ * are removed.
+ * </p>
+ * 
+ * <p>
+ * it is expected that initially set target objects are contained in this form
+ * field's editor's rawRecord attribute.
+ * </p>
  * 
  * @extends Ext.grid.GridPanel
  * @constructor
  * @param {Object}
  *            config The configuration object.
+ * @config fieldLabel The label of this form field.
+ * @config name The name of this form field.
+ * @config dataIndex The name of the record field containing this form field's
+ *         value. Must be of type {@link cwe.model.ModelReferenceList}.
+ * @config targetCweModelElementId The CweModelElementId of the target Model
+ *         Class,
+ * @config isParent Whether the target should be associated as parent.
  */
 cwe.editor.control.MultipleAssociate = function(config) {
 }
@@ -26,12 +47,27 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 	initComponent : function() {
 		var self = this;
 		
+		// Required to be recognized as form field
 		this.isFormField = true;
-		this.markInvalid = function() {};
-		this.clearInvalid = function() {};
+		this.markInvalid = function() {
+		};
+		this.clearInvalid = function() {
+		};
 		
+		/**
+		 * The model class of the target objects.
+		 * 
+		 * @private
+		 * @type cwe.model.ModelClass
+		 */
 		this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(this.targetCweModelElementId);
 		
+		/**
+		 * The configuration for the fields to show in the control.
+		 * 
+		 * @private
+		 * @type Array
+		 */
 		this.fieldConfig = [ {
 			name : "oid",
 			mapping : "oid"
@@ -40,12 +76,27 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 			mapping : "label"
 		} ];
 		
+		/**
+		 * The Record object specific to the control display.
+		 * 
+		 * @private
+		 * @type Ext.dta.Record
+		 */
 		this.recordTemplate = Ext.data.Record.create(this.fieldConfig);
 		
+		/**
+		 * The store providing the control contents.
+		 */
 		this.store = new Ext.data.SimpleStore( {
 			fields : this.fieldConfig
 		});
 		
+		/**
+		 * The button for associating target objects.
+		 * 
+		 * @private
+		 * @type Ext.Toolbar.Button
+		 */
 		this.associateButton = new Ext.Toolbar.Button( {
 			text : chi.Dict.translate("Associate"),
 			iconCls : "associateButton",
@@ -54,6 +105,12 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 			}
 		});
 		
+		/**
+		 * The button for disassociating target objects.
+		 * 
+		 * @private
+		 * @type Ext.Toolbar.Button
+		 */
 		this.disassociateButton = new Ext.Toolbar.Button( {
 			text : chi.Dict.translate("Disassociate"),
 			iconCls : "disassociateButton",
@@ -85,10 +142,22 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 	}
 });
 
+/**
+ * Returns the name of this form field.
+ * 
+ * @return The name of this form field.
+ * @type String
+ */
 cwe.editor.control.MultipleAssociate.prototype.getName = function() {
 	return this.name;
 }
 
+/**
+ * Sets the value of this form field.
+ * 
+ * @param {cwe.model.ModelReferenceList}
+ *            value The new value of this form field.
+ */
 cwe.editor.control.MultipleAssociate.prototype.setValue = function(value) {
 	var self = this;
 	var store = this.getStore();
@@ -114,10 +183,21 @@ cwe.editor.control.MultipleAssociate.prototype.setValue = function(value) {
 	}
 }
 
+/**
+ * Returns the value of this form field.
+ * 
+ * @return The value of this form field.
+ * @type cwe.model.ModelReferenceList
+ */
 cwe.editor.control.MultipleAssociate.prototype.getValue = function() {
 	return this.origValue;
 }
 
+/**
+ * Shows the target Model Class model grid and adds an associate button to it.
+ * 
+ * @private
+ */
 cwe.editor.control.MultipleAssociate.prototype.associate = function() {
 	var grid = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getGrid();
 	
@@ -163,6 +243,11 @@ cwe.editor.control.MultipleAssociate.prototype.associate = function() {
 	this.editor.addAssociateButton(grid, button);
 }
 
+/**
+ * Removes the selected entries from this form field.
+ * 
+ * @private
+ */
 cwe.editor.control.MultipleAssociate.prototype.disassociate = function() {
 	var store = this.getStore();
 	var records = this.getSelectionModel().getSelections();

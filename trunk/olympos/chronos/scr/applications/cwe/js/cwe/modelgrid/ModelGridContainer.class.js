@@ -12,13 +12,19 @@
 Ext.namespace("cwe.modelgrid");
 
 /**
- * @class The Model Grid Container contains all model girds.
+ * @class The Model Grid Container contains all model grids.
+ * 
+ * <p>
+ * The model grid container is responsible for loading and showing model grids.
+ * </p>
  * 
  * <p>
  * The model grid container is a <i>Singleton</i>.
  * </p>
  * 
  * @constructor
+ * @extends Ext.TabPanel
+ * @see cwe.modelgrid.ModelGrid
  */
 cwe.modelgrid.ModelGridContainer = function() {
 }
@@ -26,28 +32,17 @@ cwe.modelgrid.ModelGridContainer = function() {
 cwe.modelgrid.ModelGridContainer = Ext.extend(Ext.TabPanel, {
 	initComponent : function() {
 		/**
-		 * List of model grids with ModelNodeClass name as key.
-		 *
+		 * List of model grids with CweModelElementId as key.
+		 * 
 		 * @private
 		 * @type list of cwe.modelgrid.ModelGrid
 		 */
 		this.modelgrids = new Ext.util.MixedCollection();
 		
 		Ext.apply(this, {
-		    region : "center",
-		    xtype : "tabpanel",
-		    enableTabScroll : true
-		/*,
-					activeTab: 0,
-					items: [new cwe.modelgrid.ModelGridPanel({
-						modelNodeClass: "ChiGoal"
-					}), new cwe.modelgrid.ModelGridPanel({
-						modelNodeClass: "ChiRequirement"
-					}), new cwe.modelgrid.ModelGridPanel({
-						modelNodeClass: "ChiFeature"
-					}), new cwe.modelgrid.ModelGridPanel({
-						modelNodeClass: "ChiIssue"
-					})]*/
+			region : "center",
+			xtype : "tabpanel",
+			enableTabScroll : true
 		});
 		
 		cwe.modelgrid.ModelGridContainer.superclass.initComponent.apply(this, arguments);
@@ -72,6 +67,12 @@ cwe.modelgrid.ModelGridContainer.prototype.tabClose = function(tabPanel, tab) {
 	}
 }
 
+/**
+ * Loads or shows (if already loaded) a model grid for the given Model Class.
+ * 
+ * @param {cwe.model.ModelClass}
+ *            modelClass The Model class to show the grid for.
+ */
 cwe.modelgrid.ModelGridContainer.prototype.loadOrShow = function(modelClass) {
 	var modelGrid = this.modelgrids.get(modelClass.getId());
 	
@@ -96,7 +97,7 @@ cwe.modelgrid.ModelGridContainer.prototype.loadOrShow = function(modelClass) {
 
 /**
  * Returns the instance of ModelGridContainer.
- *
+ * 
  * @return The instance of ModelGridContainer.
  * @type cwe.modelgrid.ModelGridContainer
  */
@@ -104,7 +105,7 @@ cwe.modelgrid.ModelGridContainer.getInstance = function() {
 	if (!cwe.modelgrid.ModelGridContainer.instance) {
 		/**
 		 * The instance of ModelGridContainer.
-		 *
+		 * 
 		 * @private
 		 */
 		cwe.modelgrid.ModelGridContainer.instance = new cwe.modelgrid.ModelGridContainer();

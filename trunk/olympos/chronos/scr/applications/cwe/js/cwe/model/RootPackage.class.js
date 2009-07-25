@@ -11,6 +11,13 @@
  */
 Ext.namespace("cwe.model");
 
+/**
+ * @class The root package of the Model Tree.
+ * 
+ * @extends cwe.model.ModelPackage
+ * @constructor
+ * @see cwe.modeltree.ModelTree
+ */
 cwe.model.RootPackage = function() {
 	cwe.model.RootPackage.superclass.constructor.call(this, arguments);
 	
@@ -21,7 +28,15 @@ cwe.model.RootPackage = function() {
 
 Ext.extend(cwe.model.RootPackage, cwe.model.ModelPackage);
 
+/**
+ * The unique id of the root package.
+ * 
+ * <p>
+ * Refer to this id for all Model Elements at root level.
+ * </p>
+ * 
+ * @type String
+ */
 cwe.model.RootPackage.ROOT_PACKAGE_ID = "cwe.model.RootPackageId";
 
 cwe.model.ModelPackageContainer.getInstance().registerPackage(new cwe.model.RootPackage());
-

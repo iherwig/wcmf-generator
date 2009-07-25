@@ -14,7 +14,7 @@ Ext.namespace("cwe.Constants");
 /**
  * Most recent SVN revision.
  *
- * <p>Run updaterevision.bat in gui root dir to update.</p>
+ * <p>Run updaterevision.bat in root dir to update.</p>
  *
  * @type String
  */

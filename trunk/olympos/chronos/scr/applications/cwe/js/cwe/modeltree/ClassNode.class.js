@@ -11,6 +11,15 @@
  */
 Ext.namespace("cwe.modeltree");
 
+/**
+ * @class A Model Tree node for model classes.
+ * 
+ * @constructor
+ * @extends cwe.modeltree.Node
+ * @see cwe.modeltree.ModelTree
+ * @param {Object}
+ *            config The configuration object.
+ */
 cwe.modeltree.ClassNode = function(config) {
 	cwe.modeltree.ClassNode.superclass.constructor.call(this, Ext.apply(this, {}, config));
 	
@@ -23,6 +32,9 @@ cwe.modeltree.ClassNode = function(config) {
 
 Ext.extend(cwe.modeltree.ClassNode, cwe.modeltree.Node);
 
+/**
+ * Shows the Model Grid for this class.
+ */
 cwe.modeltree.ClassNode.prototype.openModelGrid = function() {
 	cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.getModelElement());
 }

@@ -9,27 +9,33 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
  */
-Ext.namespace("cwe.model");
+Ext.namespace("cwe.modelgrid");
 
 /**
- * @class Routes requests of a class of TechnicalObjects through persistency
- *        layer.
+ * @class Routes requests of a grid store through persistency layer.
  * 
- * @extends Ext.data.DataProxy
- * @see cwe.model.EnumTab
+ * @extends Ext.data.DataGridProxy
  * @constructor
  * @param {Object}
  *            config The configuration object.
+ * @config modelClass The Model Class to load object of.
  */
-cwe.model.ModelProxy = function(config) {
+cwe.modelgrid.GridProxy = function(config) {
 	this.modelClass = config.modelClass;
 	
-	cwe.model.ModelProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
+	cwe.modelgrid.GridProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 }
 
-Ext.extend(cwe.model.ModelProxy, Ext.data.DataProxy);
+Ext.extend(cwe.modelgrid.GridProxy, Ext.data.DataProxy);
 
-cwe.model.ModelProxy.prototype.load = function(params, reader, callback, scope, arg) {
+/**
+ * Loads the data.
+ * 
+ * <p>
+ * Refer to Ext.data.DataProxy for details.
+ * </p>
+ */
+cwe.modelgrid.GridProxy.prototype.load = function(params, reader, callback, scope, arg) {
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
@@ -43,7 +49,14 @@ cwe.model.ModelProxy.prototype.load = function(params, reader, callback, scope, 
 	}
 }
 
-cwe.model.ModelProxy.prototype.loadResponse = function(params, data, callback, scope, arg) {
+/**
+ * Handles the response of the JSON call to load the data.
+ * 
+ * <p>
+ * Refer to Ext.data.DataProxy for details.
+ * </p>
+ */
+cwe.modelgrid.GridProxy.prototype.loadResponse = function(params, data, callback, scope, arg) {
 	var result = {
 		success : true,
 		records : data.records,
@@ -54,7 +67,14 @@ cwe.model.ModelProxy.prototype.loadResponse = function(params, data, callback, s
 	callback.call(scope, result, arg, true);
 }
 
-cwe.model.ModelProxy.prototype.loadFailed = function(params, data, errorMsg, callback, scope, arg) {
+/**
+ * Handles an error of the JSON call to load the data.
+ * 
+ * <p>
+ * Refer to Ext.data.DataProxy for details.
+ * </p>
+ */
+cwe.modelgrid.GridProxy.prototype.loadFailed = function(params, data, errorMsg, callback, scope, arg) {
 	this.fireEvent("loadexception", this, params, data);
 	callback.call(scope, null, arg, false);
 }

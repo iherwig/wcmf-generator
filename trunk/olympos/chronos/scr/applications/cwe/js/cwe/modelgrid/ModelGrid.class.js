@@ -12,12 +12,21 @@
 Ext.namespace("cwe.modelgrid");
 
 /**
- * @class A list of all objects of one type in a selected scope.
+ * @class A list of all objects of one class.
+ * 
+ * <p>
+ * Shows a grid with all objects of the selected class. Supports paging.
+ * Provides buttons for creating a new object, editing the selected object(s)
+ * and deleting the selected object(s). Additionally, it supports linking an
+ * object of this class as target to another object.
+ * </p>
  * 
  * @extends Ext.grid.GridPanel
  * @constructor
  * @param {Object}
  *            config The configuration object.
+ * @config modelClass The Model Class of this grid.
+ * @config editors The Editor Container as target of object of this grid.
  */
 cwe.modelgrid.ModelGrid = function(config) {
 }
@@ -26,18 +35,52 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 	initComponent : function() {
 		var self = this;
 		
-		this.store = new cwe.model.ModelStore( {
+		/**
+		 * Number of objects per page.
+		 * 
+		 * @private
+		 * @type int
+		 */
+		this.objectPerPage = 25;
+		
+		/**
+		 * The currently displayed associate button, if any.
+		 * 
+		 * @private
+		 * @type cwe.modelgrid.AssociateButton
+		 */
+		this.associateButton = null;
+		
+		/**
+		 * The store holding the objects.
+		 * 
+		 * @private
+		 * @type cwe.model.ModelStore
+		 */
+		this.store = new cwe.modelgrid.GridStore( {
 			modelClass : this.modelClass
 		});
 		
+		/**
+		 * The paging toolbar.
+		 * 
+		 * @private
+		 * @type Ext.PagingToolbar
+		 */
 		this.pagingBar = new Ext.PagingToolbar( {
-			pageSize : 25,
+			pageSize : this.objectPerPage,
 			store : this.store,
 			displayInfo : true,
 			displayMsg : chi.Dict.translate("Displaying objects {0} &ndash; {1} of {2}"),
 			emptyMsg : chi.Dict.translate("No objects to display")
 		});
 		
+		/**
+		 * The button for creating a new object of this class.
+		 * 
+		 * @private
+		 * @type Ext.Toolbar.Button
+		 */
 		this.createButton = new Ext.Toolbar.Button( {
 			text : chi.Dict.translate("Create"),
 			iconCls : "createButton",
@@ -46,6 +89,12 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 			}
 		});
 		
+		/**
+		 * The button for editing the selected object(s).
+		 * 
+		 * @private
+		 * @type Ext.Toolbar.Button
+		 */
 		this.editButton = new Ext.Toolbar.Button( {
 			text : chi.Dict.translate("Edit"),
 			iconCls : "editButton",
@@ -58,6 +107,12 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 			}
 		});
 		
+		/**
+		 * The button for deleting the selected object(s).
+		 * 
+		 * @private
+		 * @type Ext.Toolbar.Button
+		 */
 		this.deleteButton = new Ext.Toolbar.Button( {
 			text : chi.Dict.translate("Delete"),
 			iconCls : "deleteButton",
@@ -97,18 +152,33 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		this.store.load( {
 			params : {
 				start : 0,
-				limit : 25
+				limit : this.objectPerPage
 			}
 		});
 	}
 });
 
+/**
+ * Creates the form for entering a new object of this class.
+ * 
+ * <p>
+ * The object is actually created only when the user clicks the save button.
+ * </p>
+ */
 cwe.modelgrid.ModelGrid.prototype.createNew = function() {
 	var self = this;
 	
 	self.editors.loadOrShow(null, "<i>" + chi.Dict.translate("New ") + self.modelClass.getName() + "</i>", true);
 }
 
+/**
+ * Deletes the selected objects.
+ * 
+ * <p>
+ * The user has to confirm the deletion in a pop-up box prior to actual
+ * deletion.
+ * </p>
+ */
 cwe.modelgrid.ModelGrid.prototype.deleteSelected = function() {
 	var records = this.getSelectionModel().getSelections();
 	
@@ -149,6 +219,20 @@ cwe.modelgrid.ModelGrid.prototype.deleteSelected = function() {
 	}
 }
 
+/**
+ * Opens an editor of the selected object.
+ * 
+ * <p>
+ * Handler to doubleclick on a row.
+ * </p>
+ * 
+ * @param {cwe.modelgrid.ModelGrid}
+ *            grid The grid which was doubleclicked, i. e. <code>this</code>.
+ * @param rowIndex
+ *            {int} Index of the doubleclicked row.
+ * @param e
+ *            {Ext.Event} Event object.
+ */
 cwe.modelgrid.ModelGrid.prototype.openEditor = function(grid, rowIndex, e) {
 	var store = this.getStore();
 	var record = store.getAt(rowIndex);
@@ -156,9 +240,23 @@ cwe.modelgrid.ModelGrid.prototype.openEditor = function(grid, rowIndex, e) {
 	this.editors.loadOrShow(record.getOid(), record.getLabel());
 }
 
+/**
+ * Adds a button for associating objects of this grid as target.
+ * 
+ * <p>
+ * Only one associate button is allowed per grid, thus all previous buttons are
+ * removed.
+ * </p>
+ * <p>
+ * The grid selection is cleared.
+ * </p>
+ * 
+ * @param {cwe.modelgrid.AssociateButton}
+ *            button The button to add.
+ */
 cwe.modelgrid.ModelGrid.prototype.addAssociateButton = function(button) {
 	if (this.associateButton) {
-		this.removeToolbarButton(this.associateButton);
+		this.getTopToolbar().remove(this.associateButton);
 	}
 	
 	button.grid = this;
@@ -170,12 +268,27 @@ cwe.modelgrid.ModelGrid.prototype.addAssociateButton = function(button) {
 	this.getSelectionModel().clearSelections();
 }
 
-cwe.modelgrid.ModelGrid.prototype.removeAssociateButton = function(button) {
+/**
+ * Removes the associate button.
+ */
+cwe.modelgrid.ModelGrid.prototype.removeAssociateButton = function() {
 	if (this.associateButton) {
-		this.removeToolbarButton(this.associateButton);
+		this.getTopToolbar().remove(this.associateButton);
 	}
 }
 
+/**
+ * Enables or disables the associate button according to grid selection status.
+ * 
+ * <p>
+ * If nothing is selected, the button is disabled. If the button is a single
+ * select button, the button is only enabled if only one row is selected. If the
+ * button is a multi select button it is enabled as long as at least one row is
+ * selected.
+ * </p>
+ * 
+ * @private
+ */
 cwe.modelgrid.ModelGrid.prototype.updateAssociateButton = function() {
 	if (this.associateButton) {
 		var count = this.getSelectionModel().getCount();
@@ -185,13 +298,5 @@ cwe.modelgrid.ModelGrid.prototype.updateAssociateButton = function() {
 		} else {
 			this.associateButton.enable();
 		}
-	}
-}
-
-cwe.modelgrid.ModelGrid.prototype.removeToolbarButton = function(button) {
-	var toolbar = this.getTopToolbar();
-	if (toolbar.items.contains(button)) {
-		Ext.fly(button.getEl().dom.parentNode).remove();
-		toolbar.items.remove(button);
 	}
 }

@@ -13,14 +13,16 @@ Ext.namespace("cwe.ui");
 
 /**
  * @class The main Workbench (perspective).
- *
+ * 
  * @constructor
- * @param {Object} config The configuration object.
+ * @extends Ext.Viewport
+ * @param {Object}
+ *            config The configuration object.
  */
 cwe.ui.Workbench = function(config) {
 	cwe.ui.Workbench.superclass.constructor.call(this, Ext.apply(this, {
-		layout: "border",
-		items: [cwe.modeltree.ModelTree.getInstance(), cwe.modelgrid.ModelGridContainer.getInstance()]
+		layout : "border",
+		items : [ cwe.modeltree.ModelTree.getInstance(), cwe.modelgrid.ModelGridContainer.getInstance() ]
 	}, config));
 }
 
