@@ -56,7 +56,12 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 
 uwm.property.PropertyContainer.prototype.showInfoMask = function() {
 	while (this.items && this.items.getCount() > 0) {
-		this.remove(this.items.get(0), true);
+    // ignore any errors happening while removing the panel items
+    // (e.g. HTMLEditor can't save its value because the object is deleted already)
+		try {
+			this.remove(this.items.get(0), true);
+		}
+		catch (e) {}
 	}
 	
 	this.mask = new uwm.ui.InfoMask(this.body, {
