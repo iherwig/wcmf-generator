@@ -101,23 +101,22 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 				    value : this.preText.trim()
 				});
 				
-				var htmlpos = this.getPosition(true);
-				var htmlbox = this.getBox();
+				var localpos = this.getPosition(true);
+        var abspos = this.el.getXY();
 				var combobox = this.comboBox.getBox();
 				var spanbox = this.span.getBoundingClientRect();
 				
 				// the fixed offsets are determined by trial & error, no deeper
 				// meaning (just looks better this way)
-				this.wrap.setBounds(htmlbox.x - htmlpos[0] + spanbox.left, htmlbox.y - htmlpos[1] + spanbox.top + combobox.height * 1.1, combobox.width + 20, combobox.height);
+        this.wrap.setBounds(abspos[0] - localpos[0] + spanbox.left, abspos[1] - localpos[1] + spanbox.top + combobox.height, combobox.width + 20, combobox.height);
 				this.wrap.show();
 				
 				this.comboBox.focus(undefined, true);
 			}
 		}, this);
-		
-		var value = this.getValue();
-		
-		if (value == "&nbsp;" || value.trim() == "") {
+
+		var value = this.originalValue;
+		if (value == "&nbsp;" || value.trim() == uwm.property.HtmlEditor.EMPTY_VALUE || value.trim() == "") {
 			this.execCmd('delete');
 			if (Ext.isIE) {
 				e.updateToolbar();
@@ -161,77 +160,6 @@ uwm.property.HtmlEditor.prototype.handleDestroy = function(field) {
 		tmp[this.getName()] = this.getValue();
 		
 		this.modelNode.changeProperties(tmp);
-	}
-}
-
-uwm.property.HtmlEditor.prototype.isDirtyIgnoreEmptyValue = function() {
-	if (this.disabled || !this.rendered) {
-		return false;
-	}
-	return String(this.getValue()) !== "<br>" && String(this.getValue()) !== String(this.originalValue);
-}
-
-/**
- * This method is a copy out of ext-all-debug.js, with some additional checks
- * preventing failure if the HtmlEditor is destroyed before it is fully initialized.
- * 
- * TODO: Update for newer ExtJS-Versions (copied from 2.2.0)
- */
-uwm.property.HtmlEditor.prototype.getEditorBody = function(){
-	if (this.doc) {
-		return this.doc.body || this.doc.documentElement;
-	}
-}
-
-/**
-* This method is a copy out of ext-all-debug.js, with some additional checks
-* preventing failure if the HtmlEditor is destroyed before it is fully initialized.
-* 
-* TODO: Update for newer ExtJS-Versions (copied from 2.2.0)
-*/
-uwm.property.HtmlEditor.prototype.initEditor = function() {
-	var dbody = this.getEditorBody();
-
-	if (dbody) {
-		var ss = this.el.getStyles('font-size', 'font-family', 'background-image', 'background-repeat');
-		ss['background-attachment'] = 'fixed';
-		dbody.bgProperties = 'fixed';
-		
-		Ext.DomHelper.applyStyles(dbody, ss);
-		
-		if (this.doc) {
-			try {
-				Ext.EventManager.removeAll(this.doc);
-			} catch (e) {
-			}
-		}
-		
-		this.doc = this.getDoc();
-		
-		if (this.doc) {
-			Ext.EventManager.on(this.doc, {
-			    'mousedown' : this.onEditorEvent,
-			    'dblclick' : this.onEditorEvent,
-			    'click' : this.onEditorEvent,
-			    'keyup' : this.onEditorEvent,
-			    buffer : 100,
-			    scope : this
-			});
-			
-			if (Ext.isGecko) {
-				Ext.EventManager.on(this.doc, 'keypress', this.applyCommand, this);
-			}
-			if (Ext.isIE || Ext.isSafari || Ext.isOpera) {
-				Ext.EventManager.on(this.doc, 'keydown', this.fixKeys, this);
-			}
-			this.initialized = true;
-			
-			this.fireEvent('initialize', this);
-			
-			this.doc.editorInitialized = true;
-			
-			this.pushValue();
-		}
 	}
 }
 
