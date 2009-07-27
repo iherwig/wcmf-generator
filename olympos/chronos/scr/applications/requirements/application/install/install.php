@@ -22,6 +22,8 @@ error_reporting(E_ERROR | E_PARSE);
 require_once(BASE."wcmf/lib/util/class.Message.php");
 require_once(BASE."wcmf/lib/output/class.LogOutputStrategy.php");
 require_once(BASE."wcmf/lib/util/class.InifileParser.php");
+require_once(BASE."wcmf/lib/util/class.FileUtil.php");
+require_once(BASE."wcmf/lib/util/class.DBUtil.php");
 require_once(BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
 require_once(BASE."wcmf/lib/security/class.RightsManager.php");
 require_once(BASE."wcmf/lib/security/class.UserManager.php");
@@ -83,6 +85,13 @@ if ($admin && !$admin->hasRole('administrators'))
 }
 $userManager->commitTransaction();
 
-include('install-cwm.php');
+// execute custom scripts from the directory 'custom-install'
+$sqlScripts = FileUtil::getFiles('custom-install', '/\.sql$/', true);
+foreach ($sqlScripts as $script)
+{
+  // extract the initSection from the filename
+  $initSection = basename($script, ".sql");
+  DBUtil::executeScript($script, $initSection);
+}
 
 Log::info("done.", "install");
