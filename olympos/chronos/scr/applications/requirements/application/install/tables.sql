@@ -280,13 +280,13 @@ CREATE TABLE `ChiSystem` # entityType=ChiSystem tableId={4C688225-1C73-42b8-80FF
   ,KEY `fk_package_id` (`fk_package_id`)
 ) TYPE=MyISAM;
 #
-# Structure of Table `Adodbseq`
+# Structure of Table `adodbseq`
 # 
 # version 1.0
 # init params database
 #
-DROP TABLE IF EXISTS `Adodbseq`;
-CREATE TABLE `Adodbseq` # entityType=Adodbseq tableId={3C3FC8F0-DD8A-4ad9-BB10-403825A48C9C}
+DROP TABLE IF EXISTS `adodbseq`;
+CREATE TABLE `adodbseq` # entityType=Adodbseq tableId={3C3FC8F0-DD8A-4ad9-BB10-403825A48C9C}
 (
   `id` INT(11) NOT NULL, # columnId=_zjPR0GcKEd6RFd6p058pJQ 
   PRIMARY KEY (`id`)

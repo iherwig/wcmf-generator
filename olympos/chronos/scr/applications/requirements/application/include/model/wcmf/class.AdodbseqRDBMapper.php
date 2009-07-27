@@ -35,7 +35,7 @@ class AdodbseqRDBMapper extends NodeUnifiedRDBMapper
    */
   function getTableName()
   {
-    return 'Adodbseq';
+    return 'adodbseq';
   }
   /**
    * @see PersistenceMapper::getPkNames()
