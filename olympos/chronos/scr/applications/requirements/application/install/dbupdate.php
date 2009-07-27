@@ -116,6 +116,9 @@ foreach ($tables as $tableDef)
   if (true) $connection->FailTrans();
   $connection->CompleteTrans();
 }
+
+include('upgrade-cwm.php');
+
 Log::info("done.", "dbupdate");
 
 
