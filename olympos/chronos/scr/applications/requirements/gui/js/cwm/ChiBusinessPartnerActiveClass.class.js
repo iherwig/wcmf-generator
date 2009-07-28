@@ -49,15 +49,16 @@ cwm.ChiBusinessPartnerActiveClass = function() {
 	this.connectionInfo = {			
 		
 		"ChiBusinessPartnerActive": {
-			label: "inherites from",
-			invert: false,
+			label: "Generalization",
+			invert: true,
 			invertBackendRelation: true,
 			connectionType: 'generalization',
 			cardinality: -1
 		}/*,
 		"ChiBusinessPartner": {
-			label: "",
+			label: "Generalization",
 			invert: true,
+			invertBackendRelation: true,
 			connectionType: 'generalization',
 			cardinality: -1
 		}*/,
