@@ -49,8 +49,9 @@ cwm.ChiWorkerExternalClass = function() {
 	this.connectionInfo = {
 	
 		"ChiWorkerExternal": {
-			label: "",
+			label: "inherites from",
 			invert: false,
+			invertBackendRelation: true,
 			connectionType: 'generalization',
 			cardinality: -1
 		}/*,
