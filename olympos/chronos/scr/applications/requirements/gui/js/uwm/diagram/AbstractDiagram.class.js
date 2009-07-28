@@ -578,6 +578,12 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		startPort = sourcePort;
 		endPort = targetPort;
 	}
+	// swap if invertBackendRelation is set true
+	if (connectionInfo.invertBackendRelation) {
+		var tmpPort = startPort;
+		startPort = endPort;
+		endPort = tmpPort;
+	}
 	
 	var connection = new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators);
 	
