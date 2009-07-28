@@ -117,7 +117,15 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 						}
 					}
 					
-					source.disassociate(target, connectionInfo, relationObject);
+					var newSource = source;
+					var newTarget = target;
+				
+					if (connectionInfo.invertBackendRelation) {
+						newSource = target;
+						newTarget = source;
+					}
+					
+					newSource.disassociate(newTarget, connectionInfo, relationObject);
 				} else if (figure instanceof uwm.graphics.figure.AbstractClassPart) {
 					var modelObject = figure.getModelObject();
 					

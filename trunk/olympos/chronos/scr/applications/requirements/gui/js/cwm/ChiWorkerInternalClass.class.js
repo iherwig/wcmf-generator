@@ -49,15 +49,16 @@ cwm.ChiWorkerInternalClass = function() {
 	this.connectionInfo = {
 		
 		"ChiWorkerInternal": {
-			label: "inherites from",
-			invert: false,
+			label: "Generalization",
+			invert: true,
 			invertBackendRelation: true,
 			connectionType: 'generalization',
 			cardinality: -1
 		}/*,
 		"ChiWorker": {
-			label: "",
+			label: "Generalization",
 			invert: true,
+			invertBackendRelation: true,
 			connectionType: 'generalization',
 			cardinality: -1
 		}*/,
