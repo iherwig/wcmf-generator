@@ -57,6 +57,14 @@ String replaceXmlChars(String org) :
 	org.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
 ;
 
+String getGermanName(uml::Package this) :
+	"Paket"
+;
+
+String getKey1(uml::Package this):
+	"Pakete"
+;
+
 String getGermanName(Chronos::ChiGoal this) :
 	"Ziel"
 ;
@@ -89,43 +97,131 @@ String getKey1(Chronos::ChiIssue this):
 ;
 
 String getGermanName(Chronos::ChiBusinessProcess this) :
-	"Prozess"
+	"Geschäftsprozess"
 ;
 
 String getKey1(Chronos::ChiBusinessProcess this):
-	"Prozesse"
+	"Geschäftsprozesse"
 ;
 
 String getGermanName(Chronos::ChiBusinessUseCase this) :
-	"Anwendungsfall"
+	"Geschäftsvorfall"
 ;
 
 String getKey1(Chronos::ChiBusinessUseCase this):
-	"Anwendungsfälle"
+	"Geschäftsvorfälle"
+;
+
+String getGermanName(Chronos::ChiBusinessUseCaseCore this) :
+	"Haupt-Geschäftsvorfall"
+;
+
+String getKey1(Chronos::ChiBusinessUseCaseCore this):
+	"Haupt-Geschäftsvorfälle"
 ;
 
 String getGermanName(Chronos::ChiBusinessPartner this) :
-	"Akteur"
+	"Geschäftspartner"
 ;
 
 String getKey1(Chronos::ChiBusinessPartner this):
-	"Akteure"
+	"Geschäftspartner"
+;
+
+String getGermanName(Chronos::ChiBusinessPartnerActive this) :
+	"GeschäftspartnerAktiv"
+;
+
+String getKey1(Chronos::ChiBusinessPartnerActive this):
+	"GeschäftspartnerAktiv"
+;
+
+String getGermanName(Chronos::ChiBusinessPartnerPassive this) :
+	"GeschäftspartnerPassiv"
+;
+
+String getKey1(Chronos::ChiBusinessPartnerPassive this):
+	"GeschäftspartnerPassiv"
 ;
 
 String getGermanName(Chronos::ChiWorker this) :
-	"Akteur"
+	"Mitarbeiter"
 ;
 
 String getKey1(Chronos::ChiWorker this):
-	"Akteure"
+	"Mitarbeiter"
+;
+
+String getGermanName(Chronos::ChiWorkerExternal this) :
+	"MitarbeiterImGeschäftspartnerKontakt"
+;
+
+String getKey1(Chronos::ChiWorkerExternal this):
+	"MitarbeiterImGeschäftspartnerKontakt"
+;
+
+String getGermanName(Chronos::ChiWorkerInternal this) :
+	"MitarbeiterOhneGeschäftspartnerKontakt"
+;
+
+String getKey1(Chronos::ChiWorkerInternal this):
+	"MitarbeiterOhneGeschäftspartnerKontakt"
 ;
 
 String getGermanName(uml::Activity this) :
-	"Aktivitäten-Gruppe"
+	"Aktivitäten-Reihe"
 ;
 
 String getKey1(uml::Activity this):
-	"Aktivitäten-Gruppen"
+	"Aktivitäten-Reihen"
+;
+
+String getGermanName(uml::InitialNode this) :
+	"starten"
+;
+
+String getKey1(uml::InitialNode this):
+	"starten"
+;
+
+String getGermanName(uml::ActivityFinalNode this) :
+	"beenden"
+;
+
+String getKey1(uml::ActivityFinalNode this):
+	"beenden"
+;
+
+String getGermanName(uml::OpaqueAction this) :
+	"Aktivität"
+;
+
+String getKey1(uml::OpaqueAction this):
+	"Aktivitäten"
+;
+
+String getGermanName(uml::DecisionNode this) :
+	"entscheiden"
+;
+
+String getKey1(uml::DecisionNode this):
+	"entscheiden"
+;
+
+String getGermanName(uml::SendSignalAction this) :
+	"senden"
+;
+
+String getKey1(uml::SendSignalAction this):
+	"senden"
+;
+
+String getGermanName(uml::AcceptEventAction this) :
+	"empfangen"
+;
+
+String getKey1(uml::AcceptEventAction this):
+	"empfangen"
 ;
 
 String getGermanName(Chronos::ChiNode this) :
@@ -135,6 +231,15 @@ String getGermanName(Chronos::ChiNode this) :
 String getKey1(Chronos::ChiNode this):
 	"Geschäftsobjekte"
 ;
+
+String getGermanName(Chronos::ChiController this) :
+	"Steuerung"
+;
+
+String getKey1(Chronos::ChiController this):
+	"Steuerungen"
+;
+
 
 String getGermanName(uml::Element this):
 	"UNDEFINED GermanName: " + this.metaType.name

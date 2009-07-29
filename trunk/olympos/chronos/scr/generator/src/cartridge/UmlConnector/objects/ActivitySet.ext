@@ -12,6 +12,7 @@ extension cartridge::UmlConnector::objects::ActivityInitial;
 extension cartridge::UmlConnector::objects::ActivityFinal;
 extension cartridge::UmlConnector::objects::ActivitySend;
 extension cartridge::UmlConnector::objects::ActivityReceive;
+extension cartridge::UmlConnector::objects::ChiObject;
 
 uml::Activity convert(cwm::ActivitySet a):
 	//(new uml::Activity).structuredNode
@@ -22,7 +23,8 @@ uml::Activity convert(cwm::ActivitySet a):
 		uc.node.addAll(a.activityInitial.convert()) ->
 		uc.node.addAll(a.activityFinal.convert()) ->
 		uc.node.addAll(a.activitySend.convert()) ->
-		uc.node.addAll(a.activityReceive.convert())
+		uc.node.addAll(a.activityReceive.convert()) ->
+		uc.node.addAll(a.chiObject.convert())
 	) ->
 	uc
 ;
@@ -34,6 +36,7 @@ Void establishConnections(cwm::ActivitySet b, uml::Model um):
 	//b.activityFinal.establishConnections(um) ->
 	b.activitySend.establishConnections(um)
 	//b.activityReceive.establishConnections(um)
+	//b.chiObject.establishConnections(um)
 ;
 
 Void transferValues(cwm::ActivitySet a, uml::Model um):
@@ -45,6 +48,7 @@ Void transferValues(cwm::ActivitySet a, uml::Model um):
 			a.activityFinal.transferValues(um) ->
 			a.activitySend.transferValues(um) ->
 			a.activityReceive.transferValues(um) ->
+			a.chiObject.transferValues(um) ->
 	
 			uc.setTaggedValue("Chronos::ActivitySet", "Alias", a.alias) ->
 			uc.setTaggedValue("Chronos::ActivitySet", "Version", a.version) ->
@@ -70,6 +74,7 @@ cwm::ActivitySet convertToCwm(uml::Activity c) :
 		un.activityFinal.addAll(c.node.typeSelect(uml::ActivityFinalNode).convertToCwm()) ->
 		un.activitySend.addAll(c.node.typeSelect(uml::SendSignalAction).convertToCwm()) ->
 		un.activityReceive.addAll(c.node.typeSelect(uml::AcceptEventAction).convertToCwm()) ->
+		un.chiObject.addAll(c.node.typeSelect(uml::DataStoreNode).convertToCwm()) ->
 	
 		un.setId(c.getId()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ActivitySet", "Alias").toString()) ->

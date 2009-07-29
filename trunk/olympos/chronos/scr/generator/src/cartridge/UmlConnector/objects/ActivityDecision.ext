@@ -17,7 +17,7 @@ uml::DecisionNode convert(cwm::ActivityDecision a):
 ;
 
 Void establishConnections(cwm::ActivityDecision b, uml::Model um):
-	let uc = um.allOwnedElements().typeSelect(uml::DecisionNode).select(e|e.name == "Activity:" + b.id).first(): (
+	let uc = um.allOwnedElements().typeSelect(uml::DecisionNode).select(e|e.name == "ActivityDecision:" + b.id).first(): (
 		b.manyToMany.select(e|e.targetType == "Activity").establishConnectionsToOpaqueAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true)
 	)
 ;
