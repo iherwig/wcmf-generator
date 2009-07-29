@@ -42,6 +42,18 @@ Void establishConnectionsToClass(cwm::Child ch, uml::Class parentClass, uml::Mod
 	)
 ;
 
+Void establishConnectionsToClass(cwm::Child ch, uml::Class parentClass, uml::Model um):
+	//(new uml::DataStoreNode).settt
+	let childClass = um.allOwnedElements().typeSelect(uml::DataStoreNode).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
+		childClass != null
+		? (
+			childClass.setType(parentClass)
+		) : (
+			Void
+		)
+	)
+;
+
 Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	let childClass = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
 		childClass != null
@@ -107,6 +119,7 @@ Void establishConnectionsToOpaqueAction(cwm::Child ch, uml::InitialNode parent, 
 	let child = um.allOwnedElements().typeSelect(uml::OpaqueAction).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
 		child != null
 		? (
+
 			let conn = new uml::ControlFlow: (
 				conn.setSource(parent) ->
 				conn.setTarget(child) ->

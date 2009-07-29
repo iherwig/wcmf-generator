@@ -1,9 +1,14 @@
 «IMPORT uml»
 «IMPORT Olympos4Profiles»
+«IMPORT Chronos»
 
-«EXTENSION org::openarchitectureware::util::IO»
+«EXTENSION common::util»
+«EXTENSION common::umlutils»
 
 «EXTENSION cartridge::GenerateUmlConnector::util»
+
+«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
+«EXTENSION cartridge::ChiCmf::extensions::util»
 
 «DEFINE root FOR uml::Profile»
 	«EXPAND object FOREACH this.allOwnedElements().typeSelect(uml::Class)»
@@ -50,9 +55,6 @@ uml::«this.getMetaClass().name» convert(cwm::«this.getCwmName()» c):
 		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convert.misc"»
 			//Additional code goes here
 		«ENDPROTECT»
-		«FOREACH this.getAssociations().typeSelect(Olympos4Profiles::OmegaAssociation) AS currAssociation»
-			OmegaAssociation.type: «currAssociation.associationType»
-		«ENDFOREACH»
 	) ->
 	uc
 ;
@@ -61,6 +63,45 @@ uml::«this.getMetaClass().name» convert(cwm::«this.getCwmName()» c):
 «DEFINE establishConnections FOR uml::Class»
 Void establishConnections(cwm::«this.getCwmName()» c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::«this.getMetaClass().name»).select(e|e.name == "«this.getCwmName()»:" + c.id).first(): (
+
+		«FOREACH this.getParallelClass().getChildNodes() AS currChild»
+			«IF !currChild.type.isManyToMany()»
+				«LET this.getAssociations().selectFirst(e|e.memberEnd.selectFirst(f|f.type == this).getOtherEnd().type.name == currChild.type.name) AS currAssociation»
+					«LET currAssociation.memberEnd.select(e|e.type == this).first() AS thisEndProperty»
+						«LET thisEndProperty.getOtherEnd().type AS otherEnd»
+							«EXPAND connectionCommand("child", otherEnd, currAssociation)»
+						«ENDLET»
+					«ENDLET»
+				«ENDLET»
+			«ELSE»
+				«REM» Assumption: ChiManyToMany has only two relations«ENDREM»
+				«IF currChild.type.getAssociations().first() == currChild.association»
+					«LET currChild.type.getAssociations().last().memberEnd.selectFirst(e|e.type == currChild.type).getOtherEnd().type AS otherEndType»
+						«LET this.getAssociations().selectFirst(e|e.memberEnd.selectFirst(f|f.type == this).getOtherEnd().type.name == otherEndType.name) AS currAssociation»
+							«LET currAssociation.memberEnd.selectFirst(e|e.type == this) AS thisEndProperty»
+								«LET thisEndProperty.getOtherEnd().type AS otherEnd»
+							«EXPAND connectionCommand("manyToMany", otherEnd, currAssociation)»
+									c.manyToMany.select(e|e.targetType == "«otherEnd.getCwmName()»").establishConnectionsTo«otherEnd.getMetaClass().name»(uc, um, "«currAssociation.name»", «currAssociation.associationType.getAggregationKind()», uml::AggregationKind::none, false, false) ->
+								«ENDLET»
+							«ENDLET»
+						«ENDLET»
+					«ENDLET»
+				«ENDIF»
+			«ENDIF»
+		«ENDFOREACH»
+
+«REM»
+		«FOREACH this.getAssociations().typeSelect(Olympos4Profiles::OmegaAssociation).select(e|e.isRealization()) AS currAssociation»
+			«LET currAssociation.memberEnd.select(e|e.type == this).first() AS thisEndProperty»
+				«IF thisEndProperty.isNavigable()»
+					«LET thisEndProperty.getOtherEnd().type AS otherEnd»
+						r.«thisEndProperty.getChildOrMany()».select(e|e.targetType == "«otherEnd.name»").establishRealizationTo«otherEnd.getMetaClass().name»(uc, um, "«currAssociation.name»") ->
+					«ENDLET»
+				«ENDIF»
+			«ENDLET»
+		«ENDFOREACH»
+«ENDREM»
+
 		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".establishConnections.connections"»
 			//Insert connections here
 			// e. g. c.child.select(e|e.targetType == "ChiBusinessUseCase").establishRealizationToUseCase(uc, um, "refines") ->
@@ -68,6 +109,13 @@ Void establishConnections(cwm::«this.getCwmName()» c, uml::Model um):
 		«ENDPROTECT»
 	)
 ;
+«ENDDEFINE»
+
+«DEFINE connectionCommand(String childOrMany, uml::Class otherEnd, Olympos4Profiles::OmegaAssociation assoc)»
+	«IF assoc.isAssocation()»
+		c.«childOrMany».select(e|e.targetType == "«otherEnd.getCwmName()»").establishConnectionsTo«otherEnd.getMetaClass().name»(uc, um, "«assoc.name»", «assoc.associationType.getAggregationKind()», uml::AggregationKind::none, false, false) ->
+	«ELSEIF assoc.isRealization()»
+				
 «ENDDEFINE»
 
 «DEFINE transferValues FOR uml::Class»
@@ -153,9 +201,14 @@ cwm::«this.getCwmName()» convertToCwm(Chronos::«this.name» uc):
 
 		«EXPAND convertToCwmTaggedValues(this) FOREACH this.allTaggedValueNames() SEPARATOR "->"»
 		
+		«FOREACH this.getAssociations().typeSelect(Olympos4Profiles::OmegaAssociation) AS currAssociation»
+			«LET currAssociation.memberEnd.select(e|e.type == this).first().getOtherEnd().type AS otherEnd»
+				c.child.addAll(uc.getAssociations().memberEnd.select(e|e.type == uc).getOtherEnd().type.typeSelect(Chronos::«otherEnd.getCwmName()»).convertToChild()) ->
+			«ENDLET»
+		«ENDFOREACH»
+
 		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.relations"»
-			//put relationships here
-			//e. g. c.child.addAll(uc.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiBusinessUseCase).convertToChild()) 
+			Void
 		«ENDPROTECT»
 	) ->
 	c
