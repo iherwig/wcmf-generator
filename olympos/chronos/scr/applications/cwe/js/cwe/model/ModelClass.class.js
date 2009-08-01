@@ -125,7 +125,8 @@ cwe.model.ModelClass.prototype.getGridColumns = function() {
 					header : recordDefinition[i].name,
 					dataIndex : recordDefinition[i].mapping,
 					width : 100,
-					sortable : true
+					sortable : true,
+					editor: new Ext.form.TextField()
 				});
 			}
 		}

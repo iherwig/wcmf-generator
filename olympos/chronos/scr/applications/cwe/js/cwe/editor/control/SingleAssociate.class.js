@@ -51,13 +51,22 @@ cwe.editor.control.SingleAssociate = Ext.extend(Ext.form.TwinTriggerField, {
 		this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(this.targetCweModelElementId);
 		
 		Ext.apply(this, {
-			trigger1Class : 'associateButton',
-			trigger2Class : 'disassociateButton',
+			trigger1Class : "associateButton",
+			trigger2Class : "disassociateButton",
+			trigger3Class: "editButton",
 			readOnly : true,
 			width : 805
 		});
 		
 		cwe.editor.control.SingleAssociate.superclass.initComponent.apply(this, arguments);
+		
+        this.triggerConfig = {
+                tag:'span', cls:'x-form-twin-triggers', cn:[
+                {tag: "img", src: Ext.BLANK_IMAGE_URL, cls: "x-form-trigger " + this.trigger1Class},
+                {tag: "img", src: Ext.BLANK_IMAGE_URL, cls: "x-form-trigger " + this.trigger2Class},
+                {tag: "img", src: Ext.BLANK_IMAGE_URL, cls: "x-form-trigger " + this.trigger3Class}
+            ]};
+
 	}
 });
 
@@ -73,9 +82,7 @@ cwe.editor.control.SingleAssociate.prototype.setValue = function(value) {
 		
 		this.associatedOid = value.first().getOid();
 		
-		var associateRecord = this.editor.getRawRecords()[this.associatedOid];
-		
-		cwe.editor.control.SingleAssociate.superclass.setValue.call(this, associateRecord.getLabel());
+		cwe.editor.control.SingleAssociate.superclass.setValue.call(this, this.getValueLabel());
 	} else {
 		this.origValue = new cwe.model.ModelReferenceList(this.modelClass);
 		this.associatedOid = null;
@@ -91,6 +98,24 @@ cwe.editor.control.SingleAssociate.prototype.setValue = function(value) {
  */
 cwe.editor.control.SingleAssociate.prototype.getValue = function() {
 	return this.origValue;
+}
+
+/**
+ * Returns the label of the associated object.
+ * 
+ * @return The label of the associated object.
+ * @type String
+ */
+cwe.editor.control.SingleAssociate.prototype.getValueLabel = function() {
+	var result = null;
+	
+	if (this.associatedOid) {
+		var associateRecord = this.editor.getRawRecords()[this.associatedOid];
+
+		result = associateRecord.getLabel();
+	}
+	
+	return result;
 }
 
 /**
@@ -143,3 +168,16 @@ cwe.editor.control.SingleAssociate.prototype.onTrigger2Click = function() {
 		this.setValue(null);
 	}
 }
+
+/**
+ * Opens the associated element in its editor.
+ * 
+ * @private
+ */
+cwe.editor.control.SingleAssociate.prototype.onTrigger3Click = function() {
+	if (this.associatedOid) {
+		var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getEditors();
+		editors.loadOrShow(this.associatedOid, this.getValueLabel());
+	}
+}
+

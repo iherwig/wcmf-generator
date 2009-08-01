@@ -137,17 +137,24 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 			}),
 			columns : this.modelClass.getGridColumns(),
 			store : this.store,
+			plugins : [ new Ext.ux.grid.RowEditor( {
+				saveText : chi.Dict.translate("Save"),
+				cancelText : chi.Dict.translate("Cancel"),
+				clicksToEdit : 2,
+				listeners : {
+					"afteredit" : function() {
+						self.store.commitChanges();
+					}
+				}
+			}) ],
 			viewConfig : {
-				forceFit : true
+				forceFit : true,
+				markDirty: false
 			},
 			bbar : this.pagingBar
 		});
 		
 		cwe.modelgrid.ModelGrid.superclass.initComponent.apply(this, arguments);
-		
-		this.on("rowdblclick", function(grid, rowIndex, e) {
-			self.openEditor(grid, rowIndex, e);
-		});
 		
 		this.store.load( {
 			params : {
@@ -168,7 +175,7 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 cwe.modelgrid.ModelGrid.prototype.createNew = function() {
 	var self = this;
 	
-	self.editors.loadOrShow(null, "<i>" + chi.Dict.translate("New ") + self.modelClass.getName() + "</i>", true);
+	self.editors.loadOrShow(null, "<i>" + chi.Dict.translate("New ${1}", self.modelClass.getName()) + "</i>", true);
 }
 
 /**
@@ -186,7 +193,7 @@ cwe.modelgrid.ModelGrid.prototype.deleteSelected = function() {
 	
 	if (records.length > 0) {
 		
-		var msgText = "<p>" + chi.Dict.translate("Are you sure you want to delete the following instances of ") + this.modelClass.getName() + ":</p><ul class='deleteMsgBox'>";
+		var msgText = "<p>" + chi.Dict.translate("Are you sure you want to delete the following instances of ${1}:", this.modelClass.getName()) + "</p><ul class='deleteMsgBox'>";
 		for ( var i = 0; i < records.length; i++) {
 			msgText += "<li>" + records[i].getLabel() + "</li>";
 		}
@@ -266,6 +273,8 @@ cwe.modelgrid.ModelGrid.prototype.addAssociateButton = function(button) {
 	this.getTopToolbar().add(button);
 	
 	this.getSelectionModel().clearSelections();
+	
+	this.doLayout();
 }
 
 /**

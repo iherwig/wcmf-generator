@@ -20,17 +20,29 @@ Ext.namespace("chi.Dict");
  *         otherwise.
  */
 chi.Dict.translate = function(englishText) {
-	strword = arguments[0];
+	var selectedLang = chi.Session.getInstance().getLang();
 	
-	try {
-		strresult = chi.Dict.voc[strword][chi.Session.getInstance().getLang()];
-		if (!strresult) {
-			strresult = strword;
+	var params = chi.Dict.translate.arguments;
+	
+	var result = chi.Dict.insertParams(englishText, params);
+	
+	var entry = chi.Dict.voc[englishText];
+	if (entry) {
+		var translation = entry[selectedLang];
+		if (translation) {
+			result = chi.Dict.insertParams(translation, params);
 		}
 	}
-	catch (e) {
-		strresult = strword;
+	
+	return result;
+}
+
+chi.Dict.insertParams = function(text, params) {
+	for(var i = 1; i < params.length; i++) {
+		var regExpStr = "\\$\\{" + i + "}";
+		var regExp = new RegExp(regExpStr, "g");
+		text = text.replace(regExp, params[i]);
 	}
 	
-	return strresult;
+	return text;
 }
