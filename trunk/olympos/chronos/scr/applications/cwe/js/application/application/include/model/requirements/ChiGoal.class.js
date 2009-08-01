@@ -24,21 +24,6 @@ application.application.include.model.requirements.ChiGoal = function() {
 	this.recordDefinition = [
 	
 		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
-			name : "fk_package_id",
-			mapping : "fk_package_id"
-		}
-	, 
-		{
-			name : "Composition",
-			mapping : "Composition"
-		}
-	, 
-		{
 			name : "Priority",
 			mapping : "Priority"
 		}

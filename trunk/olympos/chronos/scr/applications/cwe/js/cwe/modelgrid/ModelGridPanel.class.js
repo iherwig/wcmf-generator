@@ -68,3 +68,13 @@ cwe.modelgrid.ModelGridPanel = Ext.extend(Ext.Panel, {
 cwe.modelgrid.ModelGridPanel.prototype.getGrid = function() {
 	return this.grid;
 }
+
+/**
+ * Returns the Editor Container.
+ * 
+ * @return The Editor Container.
+ * @type cwe.editor.EditorContaine
+ */
+cwe.modelgrid.ModelGridPanel.prototype.getEditors = function() {
+	return this.editors;
+}

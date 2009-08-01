@@ -119,10 +119,24 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 			}
 		});
 		
+		/**
+		 * The button for editing the target object in its editor.
+		 * 
+		 * @private
+		 * @type Ext.Toolbar.Button
+		 */
+		this.editButton = new Ext.Toolbar.Button( {
+			text : chi.Dict.translate("Edit"),
+			iconCls : "editButton",
+			handler : function() {
+				self.edit();
+			}
+		});
+		
 		Ext.apply(this, {
 			height : 200,
 			width : 805,
-			tbar : [ this.associateButton, this.disassociateButton ],
+			tbar : [ this.associateButton, this.disassociateButton, this.editButton ],
 			selModel : new Ext.grid.RowSelectionModel( {
 				singleSelect : false
 			}),
@@ -131,7 +145,7 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 				dataIndex : "label",
 				width : 100,
 				sortable : true
-			}, ],
+			} ],
 			store : this.store,
 			viewConfig : {
 				forceFit : true
@@ -273,5 +287,25 @@ cwe.editor.control.MultipleAssociate.prototype.disassociate = function() {
 		});
 		
 		this.setValue(referenceList);
+	}
+}
+
+/**
+ * Opens the associated element in its editor.
+ * 
+ * @private
+ */
+cwe.editor.control.MultipleAssociate.prototype.edit = function() {
+	var store = this.getStore();
+	var records = this.getSelectionModel().getSelections();
+	
+	if (records && records.length > 0) {
+		var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getEditors();
+		
+		for ( var i = 0; i < records.length; i++) {
+			var currRecord = records[i];
+			
+			editors.loadOrShow(currRecord.get("oid"), currRecord.get("label"));
+		}
 	}
 }

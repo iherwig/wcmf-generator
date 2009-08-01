@@ -84,7 +84,7 @@ cwe.editor.EditorContainer.prototype.loadOrShow = function(oid, label, newObject
 	if (!editor) {
 		editor = new cwe.editor.Editor({
 			oid : oid,
-			title: label,
+			title: label || chi.Dict.translate("(no label)"),
 			newObject: newObject,
 			modelClass: this.modelClass,
 			editorContainer: this

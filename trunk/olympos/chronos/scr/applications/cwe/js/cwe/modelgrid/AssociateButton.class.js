@@ -41,7 +41,7 @@ cwe.modelgrid.AssociateButton = Ext.extend(Ext.Toolbar.Button, {
 		
 		Ext.apply(this, {
 			iconCls : this.modelClass.getTreeIconClass(),
-			text : chi.Dict.translate("Associate as") + " " + this.roleName + " " + chi.Dict.translate("with") + " " + this.modelClass.getName() + " \"" + this.sourceLabel + "\"",
+			text : chi.Dict.translate("Associate as ${1} with ${2} \"${3}\"", this.roleName, this.modelClass.getName(), this.sourceLabel),
 			handler : function() {
 				self.associate();
 			}
