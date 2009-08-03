@@ -49,4 +49,21 @@ uwm.Config.defaultLogin = "admin";
  */
 uwm.Config.defaultPassword = "admin";
 
+/**
+ * The default modelling.
+ * 
+ * @type String
+ */
+uwm.Config.defaultLanguage = 'en';
+    
+/**
+ * All supported languages.
+ * 
+ * @type Array
+ */
+uwm.Config.languages = [
+	['en', 'English'], 
+	['de', 'Deutsch']
+];
+
 uwm.Uwm.getInstance().processConfig();

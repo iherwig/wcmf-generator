@@ -56,37 +56,9 @@ uwm.ui.Login = function(config){
             inputType: "password",
             allowBlank: false,
             value: uwm.Config.defaultPassword
-        }), new Ext.form.ComboBox({
-            fieldLabel: uwm.Dict.translate('Language'),
-            forceSelection: 'true',
-            value: 'en',
-            name: 'Language',
-            store: new Ext.data.SimpleStore({
-                fields: [{
-                    name: "key",
-                    mapping: "key"
-                }, {
-                    name: "val",
-                    mapping: "val"
-                }],
-                data: [
-					{
-						key: "en",
-						val: "English"
-					},
-					{
-						key: "de",
-						val: "Deutsch"
-					}
-				]
-            }),
-            displayField: 'val',
-            valueField: 'key',
-            mode: "local",
-            triggerAction: 'all',
-            editable: false,
-        
-        }), new Ext.Panel({
+        }), 
+		new uwm.ui.LanguageListBox(), 
+		new Ext.Panel({
         	cls: "uwm-revisioninfo",
         	html: "<p>" + uwm.Dict.translate("Revision") + ": " + uwm.Constants.SVN_REVISION + "</p>"
         })],
