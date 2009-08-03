@@ -11,11 +11,11 @@
  */
 Ext.namespace("cwm.relations");
 
-cwm.relations.NMChiNodeChiNodeClass = function() {
-	cwm.relations.NMChiNodeChiNodeClass.superclass.constructor.call(this);
+cwm.relations.ChiAssociationClass = function() {
+	cwm.relations.ChiAssociationClass.superclass.constructor.call(this);
 	
-	this.uwmClassName = "NMChiNodeChiNode";
-	this.instanceClassName = "cwm.relations.NMChiNodeChiNode";
+	this.uwmClassName = "ChiAssociation";
+	this.instanceClassName = "cwm.relations.ChiAssociation";
 	this.treeIcon = "Figure";
 	this.labelProperties = {};
 	
@@ -25,6 +25,6 @@ cwm.relations.NMChiNodeChiNodeClass = function() {
 	}
 }
 
-Ext.extend(cwm.relations.NMChiNodeChiNodeClass, uwm.model.EditableRelationClass);
+Ext.extend(cwm.relations.ChiAssociationClass, uwm.model.EditableRelationClass);
 
-uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.NMChiNodeChiNodeClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.ChiAssociationClass());

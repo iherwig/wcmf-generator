@@ -108,13 +108,18 @@ cwm.ChiNodeClass = function() {
 	            nmSelf : true,
 	            cardinality : -1
 	        } ]
+	    }, 
+	    "ChiView": {
+	    	label: "ActionKey",
+	    	invert: false,
+	    	connectionType: "association",
+	    	cardinality: 1
 	    }
-	
 	};
 	
 	this.maskInfo = {
-	    "NodeTargetEnd" : "NMChiNodeChiNode",
-	    "NodeSourceEnd" : "NMChiNodeChiNode"
+	    "NodeTargetEnd" : "ChiAssociation",
+	    "NodeSourceEnd" : "ChiAssociation"
 	};
 }
 

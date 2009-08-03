@@ -212,15 +212,20 @@ uwm.model.ModelNode.prototype.getMaskedRelatedOid = function(relatedOid) {
 	return this.maskedOids[relatedOid];
 }
 
-uwm.model.ModelNode.prototype.associate = function(parentModelObject, connectionInfo, nmUwmClassName, connection) {
+uwm.model.ModelNode.prototype.associate = function(parentModelObject, connectionInfo, nmUwmClassName, connection, ownUwmClassName, otherUwmClassName) {
 	var self = this;
 	
 	var childOid = this.getOid();
 	var parentOid = parentModelObject.getOid();
 	
 	if (connectionInfo && connectionInfo.nmSelf) {
-		childOid = this.insertDirectionInOid(childOid, "Source");
-		parentOid = this.insertDirectionInOid(parentOid, "Target");
+		if (ownUwmClassName) {
+			childOid = ownUwmClassName + ":" + uwm.Util.getNumericFromOid(childOid);
+			parentOid = otherUwmClassName + ":" + uwm.Util.getNumericFromOid(parentOid);
+		} else {
+			childOid = this.insertDirectionInOid(childOid, "Source");
+			parentOid = this.insertDirectionInOid(parentOid, "Target");
+		}
 	}
 	
 	if (!nmUwmClassName) {
@@ -307,26 +312,32 @@ uwm.model.ModelNode.prototype.disassociate = function(parentModelObject, connect
 }
 
 uwm.model.ModelNode.prototype.updateOidLists = function(parentModelObject) {
-	var param;
+	var param1;
 	
 	if (this.childOids) {
 		for ( var i = 0; i < this.childOids.length; i++) {
 			if (this.childOids[i] == parentModelObject.getOid()) {
-				param = i;
+				param1 = i;
 			}
 		}
 		
-		this.childOids[param] = 'deleted';
+		if (param1) {
+			this.childOids[param1] = 'deleted';
+		}
 	}
 	
-	var param;
+	param2;
+
 	if (parentModelObject.parentOids) {
 		for ( var i = 0; i < parentModelObject.parentOids.length; i++) {
 			
 			if (parentModelObject.parentOids[i] == this.getOid()) {
-				param = i;
+				param2 = i;
 			}
 		}
-		parentModelObject.parentOids[param] = 'deleted';
+		
+		if (param2) {
+			parentModelObject.parentOids[param2] = 'deleted';
+		}
 	}
 }

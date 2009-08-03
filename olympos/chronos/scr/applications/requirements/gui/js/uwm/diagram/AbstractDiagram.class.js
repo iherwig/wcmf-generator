@@ -75,7 +75,7 @@ uwm.diagram.AbstractDiagram.prototype.setContainedPackage = function(packageMode
 
 /**
  * Initiates a new diagram.
- *
+ * 
  * <p>
  * Creates a new panel for the tab, initiates internal state to default values.
  * </p>
@@ -127,13 +127,13 @@ uwm.diagram.AbstractDiagram.prototype.init = function() {
 
 /**
  * Initiates the draw2d elements of this diagram.
- *
+ * 
  * @private
  */
 uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 	/**
 	 * The viewport of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type Ext.Element
 	 */
@@ -200,9 +200,9 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 
 /**
  * Checks whether a
- *
+ * 
  * @link{uwm.model.ModelObject} with the given oid is contained in this diagram.
- *
+ * 
  * @param {modelObject}
  *            modelObject The ModelObject to check.
  * @return <code>true</code> if a Model Object with <code>oid</code> is
@@ -236,14 +236,14 @@ uwm.diagram.AbstractDiagram.prototype.scrollToCenter = function() {
 	
 	var self = this;
 	
-	setTimeout( function() {
+	setTimeout(function() {
 		workflow.scrollTo(height, width, true);
 	}, 500);
 }
 
 /**
  * Return the tab of this diagram.
- *
+ * 
  * @return The tab of this diagram.
  * @type uwm.diagram.DiagramTab
  */
@@ -253,7 +253,7 @@ uwm.diagram.AbstractDiagram.prototype.getTab = function() {
 
 /**
  * Initiates the drop zone of this diagram.
- *
+ * 
  * @private
  */
 uwm.diagram.AbstractDiagram.prototype.initDropZone = function() {
@@ -272,7 +272,7 @@ uwm.diagram.AbstractDiagram.prototype.initDropZone = function() {
 
 /**
  * Loads saved figures.
- *
+ * 
  * @private
  */
 uwm.diagram.AbstractDiagram.prototype.loadFigures = function(forceReload) {
@@ -342,7 +342,7 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 		}
 	}
 	
-	this.actionSet.commit( function() {
+	this.actionSet.commit(function() {
 		self.handleLoadedObjects();
 	});
 	
@@ -357,7 +357,7 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObjects = function() {
 	var self = this;
 	var modelContainer = uwm.model.ModelContainer.getInstance();
 	
-	this.figures.eachKey( function(key, val) {
+	this.figures.eachKey(function(key, val) {
 		self.handleLoadedObject(modelContainer.getByOid(key));
 	});
 }
@@ -461,7 +461,8 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					var parentOids = childObject.getParentOids();
 					nmtype = true;
 					
-					//FIXME: workaround from parentOids.length to 2 parent oids, due to wCMF error (Bug id )
+					// FIXME: workaround from parentOids.length to 2 parent
+					// oids, due to wCMF error (Bug id )
 					for ( var j = 0; j < Math.min(2, parentOids.length); j++) {
 						var currParentOid = parentOids[j];
 						
@@ -482,7 +483,7 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				if (connectionInfo.nmUwmClassName) {
 					var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
 					var maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
-					if (maskedClass.getConnnectionEndRole() == "target") {
+					if ((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "target") {
 						var relationType = relationObject.getProperty("relationType");
 						
 						for ( var j = 0; j < connectionInfo.connections.length; j++) {
@@ -493,6 +494,8 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 								break;
 							}
 						}
+					} else if (maskedClass instanceof uwm.model.RelationClass) {
+						connectionInfo = connectionInfo.connection;
 					} else {
 						createConnection = false;
 					}
@@ -501,19 +504,20 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				if (createConnection) {
 					
 					if ((connectedObject.getUwmClassName() == newObject.getUwmClassName()) || (nmtype == true)) {
-						//same type as connected object	or nmrelation (listtype the same in both cases)
+						// same type as connected object or nmrelation (listtype
+						// the same in both cases)
 						if (connectionInfo.invert) {
 							forbiddenListtype = "child";
 						} else {
 							forbiddenListtype = "parent";
 						}
 					} else {
-						//other type as connected object and no nmrelation
+						// other type as connected object and no nmrelation
 						forbiddenListtype = "parent";
 					}
 					
 					if (!(listtype == forbiddenListtype)) {
-						// everytime draw connection line only in one direction 
+						// everytime draw connection line only in one direction
 						
 						var newFigure = this.figures.get(newObject.getOid());
 						var connectedFigure = this.figures.get(connectedObject.getOid());
@@ -541,7 +545,7 @@ uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, 
 			
 			if (!connectionInfo.nmUwmClassName) {
 				this.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, connectionInfo);
-			} else {
+			} else if (connectionInfo.connections) {
 				var menu = new Ext.menu.Menu();
 				
 				var self = this;
@@ -552,20 +556,26 @@ uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, 
 					menu.add(new Ext.menu.Item( {
 					    text : currConnectionInfo.label,
 					    connectionInfo : currConnectionInfo,
-					    nmUwmClassName : connectionInfo.nmUwmClassName,
+					    nmUwmClassName : currConnectionInfo.nmUwmClassName || connectionInfo.nmUwmClassName,
+					    ownUwmClassName : currConnectionInfo.ownUwmClassName,
+					    otherUwmClassName : currConnectionInfo.otherUwmClassName,
 					    handler : function() {
-						    self.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, this.connectionInfo, undefined, this.nmUwmClassName);
+						    self.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, this.connectionInfo, undefined, this.nmUwmClassName, undefined, this.ownUwmClassName,
+						            this.otherUwmClassName);
 					    }
 					}));
 				}
 				
 				menu.showAt(this.getContextMenuPosition(x, y));
+			} else {
+				this.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, connectionInfo.connection, undefined, connectionInfo.nmUwmClassName);
 			}
 		}
 	}
 }
 
-uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo, noCommand, nmUwmClassName, relationObject) {
+uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo, noCommand, nmUwmClassName, relationObject,
+        ownUwmClassName, otherUwmClassName) {
 	var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
 	
 	var startPort;
@@ -591,6 +601,8 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
 		command.connectionInfo = connectionInfo;
 		command.nmUwmClassName = nmUwmClassName;
+		command.ownUwmClassName = ownUwmClassName;
+		command.otherUwmClassName = otherUwmClassName;
 		command.relationObject = relationObject;
 		command.setConnection(connection);
 		this.workflow.getCommandStack().execute(command);
@@ -604,7 +616,7 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 
 /**
  * Assigns proper graphical representations according to connection type.
- *
+ * 
  * @param {String}
  *            connectionType The type of connection. Currently supported are
  *            <code>aggregation</code> and <code>composition</code>.
@@ -650,7 +662,7 @@ uwm.diagram.AbstractDiagram.prototype.getConnectionTypeDecorators = function(con
 
 /**
  * Returns the draw2d workflow of this diagram.
- *
+ * 
  * @return The draw2d workflow of this diagram.
  * @type uwm.diagram.UwmWorkflow
  */
@@ -660,7 +672,7 @@ uwm.diagram.AbstractDiagram.prototype.getWorkflow = function() {
 
 /**
  * Returns the {Ext.Element} representing the canvas layer.
- *
+ * 
  * @return The {Ext.Element} representing the canvas layer.
  * @type String
  */
@@ -670,7 +682,7 @@ uwm.diagram.AbstractDiagram.prototype.getCanvas = function() {
 
 /**
  * Returns whether snap to objects is activated for this diagram.
- *
+ * 
  * @return <code>true</code> if snap to objects is activated for this diagram,
  *         <code>false</code> otherwise.
  * @type boolean
@@ -681,7 +693,7 @@ uwm.diagram.AbstractDiagram.prototype.isSnapToObjects = function() {
 
 /**
  * Sets snap to objects for this diagram.
- *
+ * 
  * @param {boolean}
  *            snapToObjects <code>true</code> if object should snap to other
  *            objects, <code>false</code> if objects should not snap to other
@@ -694,7 +706,7 @@ uwm.diagram.AbstractDiagram.prototype.setSnapToObjects = function(snapToObjects)
 
 /**
  * Shows the Diagram in Model Tree.
- *
+ * 
  * @see uwm.modeltree.ModelTree
  */
 uwm.diagram.AbstractDiagram.prototype.showInModelTree = function() {
@@ -703,7 +715,7 @@ uwm.diagram.AbstractDiagram.prototype.showInModelTree = function() {
 
 /**
  * Reloads the diagram.
- *
+ * 
  * @see uwm.modeltree.ModelTree
  */
 uwm.diagram.AbstractDiagram.prototype.reloadDiagram = function() {
@@ -717,12 +729,14 @@ uwm.diagram.AbstractDiagram.prototype.reloadDiagram = function() {
  * Prints the diagram.
  */
 uwm.diagram.AbstractDiagram.prototype.printDiagram = function() {
-	var mask = new Ext.LoadMask(Ext.getBody(), {msg:uwm.Dict.translate("Loading...")});
+	var mask = new Ext.LoadMask(Ext.getBody(), {
+		msg : uwm.Dict.translate("Loading...")
+	});
 	var printer = new uwm.diagram.print.Printer();
 	mask.show();
-	printer.print.defer(300, printer, [this, function() {
+	printer.print.defer(300, printer, [ this, function() {
 		mask.hide();
-	}]);
+	} ]);
 }
 
 /**
@@ -734,7 +748,7 @@ uwm.diagram.AbstractDiagram.prototype.doLayout = function() {
 
 /**
  * Returns the position a context menu should be shown at.
- *
+ * 
  * @param {int}
  *            x The draw2d event x position.
  * @param {int}
@@ -751,7 +765,7 @@ uwm.diagram.AbstractDiagram.prototype.getContextMenuPosition = function(x, y) {
 
 /**
  * Adds an existing object to this diagram.
- *
+ * 
  * @param {uwm.model.ModelObject}
  *            modelObject The ModelObject to add to the diagram.
  * @param {int}
@@ -788,9 +802,9 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 		
 		self.reestablishConnections(modelObject);
 		// self.establishExistingConnections(modelObject,
-		// modelObject.getParentOids(), 'parent');
+		    // modelObject.getParentOids(), 'parent');
 		    // self.establishExistingConnections(modelObject,
-			// modelObject.getChildOids(), 'child');
+		    // modelObject.getChildOids(), 'child');
 		    
 		    self.dropWindow.destroy();
 	    });
@@ -805,11 +819,11 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 
 /**
  * Creates a new object on this diagram.
- *
+ * 
  * <p>
  * The new ModelObject is added to the package this diagram is contained in.
  * </p>
- *
+ * 
  * @param {uwm.model.ModelClass}
  *            modelClass The ModelClass of which a new ModelObject should be
  *            created.
@@ -872,7 +886,7 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, 
 
 /**
  * Creates a new Figure.
- *
+ * 
  * @private
  * @return the new Figure.
  * @type uwm.diagram.Figure

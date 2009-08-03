@@ -15,7 +15,7 @@ cwm.relations.ChiNodeTargetClass = function(){
     cwm.relations.ChiNodeTargetClass.superclass.constructor.call(this);
     
     this.uwmClassName = "ChiNodeTarget";
-    this.instanceClassName = "cwm.relations.NMChiNodeChiNode";
+    this.instanceClassName = "cwm.relations.ChiAssociation";
     this.treeIcon = "Figure";
     this.labelProperties = {};
     

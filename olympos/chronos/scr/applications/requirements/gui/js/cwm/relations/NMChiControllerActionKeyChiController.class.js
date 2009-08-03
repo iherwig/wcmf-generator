@@ -11,8 +11,8 @@
  */
 Ext.namespace("cwm.relations");
 
-cwm.relations.NMChiNodeChiNode = function(modelNodeClass) {
-	cwm.relations.NMChiNodeChiNode.superclass.constructor.call(this, modelNodeClass);
+cwm.relations.NMChiControllerActionKeyChiController = function(modelNodeClass) {
+	cwm.relations.NMChiControllerActionKeyChiController.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.relations.NMChiNodeChiNode, uwm.model.EditableRelation);
+Ext.extend(cwm.relations.NMChiControllerActionKeyChiController, uwm.model.EditableRelation);
