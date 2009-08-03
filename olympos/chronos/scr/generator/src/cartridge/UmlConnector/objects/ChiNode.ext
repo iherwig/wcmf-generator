@@ -26,9 +26,9 @@ Void establishConnections(cwm::ChiNode b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNode:" + b.id).first(): (
 		b.child.select(e|e.targetType == "ChiView").establishConnectionsToClass(uc, um, "contains", uml::AggregationKind::composite, uml::AggregationKind::none, false, false) ->
 		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "generalization").establishGeneralizationToClass(uc, um) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "aggregation").establishConnectionsToClass(uc, um, null, uml::AggregationKind::shared, uml::AggregationKind::none, false, false) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "composition").establishConnectionsToClass(uc, um, null, uml::AggregationKind::composite, uml::AggregationKind::none, false, false) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, false) ->
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "aggregation").establishConnectionsToClass(uc, um, null, uml::AggregationKind::shared, uml::AggregationKind::none) ->
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "composition").establishConnectionsToClass(uc, um, null, uml::AggregationKind::composite, uml::AggregationKind::none) ->
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none) ->
 		b.child.select(e|e.targetType == "ChiObject").establishConnectionsToClass(uc, um)
 	)
 ;

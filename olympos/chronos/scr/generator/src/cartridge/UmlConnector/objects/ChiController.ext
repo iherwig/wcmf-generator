@@ -10,6 +10,7 @@ extension cartridge::UmlConnector::connections;
 extension cartridge::UmlConnector::connectionsToCwm;
 
 extension cartridge::UmlConnector::objects::Operation;
+extension cartridge::UmlConnector::objects::ChiActionKey;
 
 uml::Class convert(cwm::ChiController c):
 	let uc = new uml::Class : {
@@ -22,7 +23,9 @@ uml::Class convert(cwm::ChiController c):
 Void establishConnections(cwm::ChiController b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiController:" + b.id).first(): (
 		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "Generalization").establishGeneralizationToClass(uc, um) ->
-		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "Association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, false)
+		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "Association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, false) ->
+		b.nmChiControllerActionKeyChiController.addAllActionKeys(uc) ->
+		b.nmChiControllerActionKeyChiView.addAllActionKeys(uc)
 		//Duplicate in connection list
 		//r.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "Association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, false)
 	)
@@ -32,6 +35,8 @@ Void transferValues(cwm::ChiController c, uml::Model um):
 	//(new uml::Class).setT
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiController:" + c.id).first(): (
 		let comment = new uml::Comment : (
+			c.operation.transferValues(um) ->
+
 			uc.applyStereotype("Chronos::ChiController") ->
 			uc.setTaggedValue("Chronos::ChiController", "Author", c.author) ->
 			uc.setTaggedValue("Chronos::ChiController", "Status", c.status) ->
