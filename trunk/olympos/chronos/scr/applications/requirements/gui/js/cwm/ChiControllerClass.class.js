@@ -63,36 +63,46 @@ cwm.ChiControllerClass = function() {
 	            nmSelf : true,
 	            cardinality : -1
 	        }, {
-	            label : "Association",
+	            label : "ActionKey",
 	            invert : false,
 	            connectionType : "association",
 	            nmSelf : true,
-	            cardinality : -1
-	        }, {
-	            label : "Composition",
-	            invert : false,
-	            connectionType : "composition",
-	            nmSelf : true,
-	            cardinality : -1
+	            cardinality : -1,
+	            nmUwmClassName : "SourceActionKeyEnd",
+	            ownUwmClassName : "ChiControllerActionKeySource",
+	            otherUwmClassName : "ChiControllerActionKeyTarget"
 	        } ]
-		},
-		"ChiBusinessUseCase": {
-			label: "implemented by",
-			invert: true,
-			connectionType: 'composition',
-			cardinality: 1
-		},
-		"ChiBusinessUseCaseCore": {
-			label: "implemented by",
-			invert: true,
-			connectionType: 'composition',
-			cardinality: 1
+	    },
+	    "ChiView" : {
+	        nmUwmClassName : "NMChiControllerActionKeyChiView",
+	        connection : {
+	            label : "ActionKey",
+	            invert : false,
+	            connectionType : "association",
+	            nmSelf : false,
+	            cardinality : -1
+	        }
+	    },
+	    "ChiBusinessUseCase" : {
+	        label : "implemented by",
+	        invert : true,
+	        connectionType : 'composition',
+	        cardinality : 1
+	    },
+	    "ChiBusinessUseCaseCore" : {
+	        label : "implemented by",
+	        invert : true,
+	        connectionType : 'composition',
+	        cardinality : 1
 	    }
 	};
 	
 	this.maskInfo = {
 	    "TargetEnd" : "NMChiControllerChiController",
-	    "SourceEnd" : "NMChiControllerChiController"
+	    "SourceEnd" : "NMChiControllerChiController",
+	    "TargetActionKeyEnd" : "NMChiControllerActionKeyChiController",
+	    "SourceActionKeyEnd" : "NMChiControllerActionKeyChiController",
+	    "NMChiControllerActionKeyChiView" : "NMChiControllerActionKeyChiView"
 	};
 }
 
@@ -132,20 +142,20 @@ cwm.ChiControllerClass.prototype.getPropertyForm = function(modelNode, isLockedB
 		    modelNode : modelNode,
 		    
 		    readOnly : isLockedByOtherUser
-		}), new uwm.property.ComboBox({
-			fieldLabel: 'Author',
-			toolTip: "This ChiController's author's name and role in the project",
-			name: 'Author',
-			listType: "ChiAuthors",
-			modelNode: modelNode,
-			disabled : isLockedByOtherUser
-		}), new uwm.property.ComboBox({
-			fieldLabel: 'Status',
-			toolTip: "state",
-			name: 'Status',
-			listType: "ChiBaseStatus",
-			modelNode: modelNode,
-			disabled : isLockedByOtherUser
+		}), new uwm.property.ComboBox( {
+		    fieldLabel : 'Author',
+		    toolTip : "This ChiController's author's name and role in the project",
+		    name : 'Author',
+		    listType : "ChiAuthors",
+		    modelNode : modelNode,
+		    disabled : isLockedByOtherUser
+		}), new uwm.property.ComboBox( {
+		    fieldLabel : 'Status',
+		    toolTip : "state",
+		    name : 'Status',
+		    listType : "ChiBaseStatus",
+		    modelNode : modelNode,
+		    disabled : isLockedByOtherUser
 		}), new uwm.property.TextField( {
 		    fieldLabel : 'created',
 		    toolTip : "the creation date of this object",

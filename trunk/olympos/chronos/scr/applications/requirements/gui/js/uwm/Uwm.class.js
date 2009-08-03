@@ -146,7 +146,7 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 		}
 	}
 	
-	if (!uwm.Config.debug) {
+	if (uwm.Config.debug) {
 		uwm.Util.showMessage(uwm.Dict.translate("Error occured"), html, uwm.Util.messageType.ERROR);
 		
 		throw e;

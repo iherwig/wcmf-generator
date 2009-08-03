@@ -11,18 +11,18 @@
  */
 Ext.namespace("cwm.relations");
 
-cwm.relations.NodeSourceEndClass = function(){
-    cwm.relations.NodeSourceEndClass.superclass.constructor.call(this);
+cwm.relations.SourceActionKeyEndClass = function(){
+    cwm.relations.SourceActionKeyEndClass.superclass.constructor.call(this);
     
-    this.uwmClassName = "NodeSourceEnd";
-    this.instanceClassName = "cwm.relations.ChiAssociation";
+    this.uwmClassName = "SourceActionKeyEnd";
+    this.instanceClassName = "cwm.relations.NMChiControllerActionKeyChiController";
     this.treeIcon = "Figure";
     this.labelProperties = {};
     
-    this.realUwmClassName = "ChiAssociation";
+    this.realUwmClassName = "NMChiControllerActionKeyChiController";
     this.connectionEndRole = "source";
 }
 
-Ext.extend(cwm.relations.NodeSourceEndClass, uwm.model.RelationEndClass);
+Ext.extend(cwm.relations.SourceActionKeyEndClass, uwm.model.RelationEndClass);
 
-uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.NodeSourceEndClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.SourceActionKeyEndClass());
