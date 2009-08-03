@@ -195,10 +195,10 @@ class UWMExporterController extends BatchController
 		$this->check('File written to output');
 	
 		// cleanup
-		unlink($session->get($this->TEMP_UWM_EXPORT_PATH));
-		unlink($session->get($this->TEMP_PROPERTIES_PATH));
-		unlink($exportFile);
-		rmdir($session->get($this->TEMP_UML_EXPORT_PATH));
+//		unlink($session->get($this->TEMP_UWM_EXPORT_PATH));
+//		unlink($session->get($this->TEMP_PROPERTIES_PATH));
+//		unlink($exportFile);
+//		rmdir($session->get($this->TEMP_UML_EXPORT_PATH));
 
 		ExportShutdownHandler::success();
 	}

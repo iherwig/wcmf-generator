@@ -42,6 +42,41 @@ Void establishConnectionsToClass(cwm::Child ch, uml::Class parentClass, uml::Mod
 	)
 ;
 
+Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK) :
+	//(new cwm::ManyToMany).sou
+	//(new uml::Association).navigableOwnedEnd
+	//(new uml::Property).n
+	//(new uml::Class).createA
+	let childClass = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
+		childClass != null
+		? (
+			let parentLower = getLowerMultiplicity(ch.targetMultiplicity):
+			let parentUpper = getUpperMultiplicity(ch.targetMultiplicity):
+			let parentNav = getNavigability(ch.targetNavigability):
+			let childLower = getLowerMultiplicity(ch.sourceMultiplicity):
+			let childUpper = getUpperMultiplicity(ch.sourceMultiplicity):
+			let childNav = getNavigability(ch.sourceNavigability):
+			let conn = parentClass.createAssociation(parentNav, parentAK, "", parentLower, parentUpper, childClass, childNav, childAK, "", childLower, childUpper):
+				conn.setName(label) ->
+				conn.applyStereotype("Chronos::ChiAssociation")
+		) : (
+			Void
+		)
+	)
+;
+
+Integer getLowerMultiplicity(String multiplicity):
+	JAVA net.sourceforge.olympos.oaw.extend.Multiplicity.getLower(java.lang.String)
+;
+
+Integer getUpperMultiplicity(String multiplicity):
+	JAVA net.sourceforge.olympos.oaw.extend.Multiplicity.getUpper(java.lang.String)
+;
+
+Boolean getNavigability(String navigability):
+	navigability.trim().toLowerCase() == "true" || navigability.trim().toLowerCase() == "navigable" ? true : false
+;
+
 Void establishConnectionsToClass(cwm::Child ch, uml::Class parentClass, uml::Model um):
 	//(new uml::DataStoreNode).settt
 	let childClass = um.allOwnedElements().typeSelect(uml::DataStoreNode).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (

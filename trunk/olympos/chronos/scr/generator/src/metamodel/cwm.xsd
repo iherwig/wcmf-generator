@@ -733,6 +733,9 @@
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Operation" type="Operation"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiActionKey" type="ChiActionKey"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="NMChiControllerActionKeyChiView" type="NMChiControllerActionKeyChiView"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="NMChiControllerActionKeyChiController" type="NMChiControllerActionKeyChiController"/>
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
@@ -757,6 +760,7 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chinode_id" type="xsd:string"/>
 		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
@@ -899,6 +903,56 @@
 	<xsd:element name="CwmExport" type="CwmExport">
 	</xsd:element>
 
+	<xsd:complexType name="NMChiControllerActionKeyChiController">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_chicontrolleractionkeytarget_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chicontrolleractionkeysource_id" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+		<xsd:attribute name="targetType" type="xsd:string"/>
+		<xsd:attribute name="targetOid" type="xsd:string"/>
+		<xsd:attribute name="targetRole" type="xsd:string"/>
+		<xsd:attribute name="relationType" type="xsd:string"/>
+		<xsd:attribute name="sourceMultiplicity" type="xsd:string"/>
+		<xsd:attribute name="sourceNavigability" type="xsd:string"/>
+		<xsd:attribute name="targetMultiplicity" type="xsd:string"/>
+		<xsd:attribute name="targetNavigability" type="xsd:string"/>
+		<xsd:attribute name="action" type="xsd:string"/>
+		<xsd:attribute name="config" type="xsd:string"/>
+		<xsd:attribute name="context" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="NMChiControllerActionKeyChiView">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_chiview_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chicontroller_id" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+		<xsd:attribute name="targetType" type="xsd:string"/>
+		<xsd:attribute name="targetOid" type="xsd:string"/>
+		<xsd:attribute name="targetRole" type="xsd:string"/>
+		<xsd:attribute name="relationType" type="xsd:string"/>
+		<xsd:attribute name="sourceMultiplicity" type="xsd:string"/>
+		<xsd:attribute name="sourceNavigability" type="xsd:string"/>
+		<xsd:attribute name="targetMultiplicity" type="xsd:string"/>
+		<xsd:attribute name="targetNavigability" type="xsd:string"/>
+		<xsd:attribute name="action" type="xsd:string"/>
+		<xsd:attribute name="config" type="xsd:string"/>
+		<xsd:attribute name="context" type="xsd:string"/>
+	</xsd:complexType>
 	<xsd:complexType name="ManyToMany">
 		<xsd:attribute name="targetType" type="xsd:string"/>
 		<xsd:attribute name="targetOid" type="xsd:string"/>
