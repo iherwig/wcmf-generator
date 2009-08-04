@@ -105,7 +105,10 @@ uwm.Uwm.prototype.installErrorHandler = function() {
 			try {
 				fn.apply(scope || this, arguments);
 			} catch (e) {
-				self.handleError(e);
+				// TODO: Check if this will be obsolete in a future version of ExtJs/Firefox
+				if (e.message != "Permission denied to access property 'dom' from a non-chrome context") {
+					self.handleError(e);
+				}
 			}
 		}, scope, options);
 	}
@@ -205,16 +208,6 @@ uwm.Uwm.prototype.installOverrides = function() {
 		loadValue : function(value) {
 			this.setValue(value);
 			this.originalValue = this.getValue();
-		}
-	});
-	
-	Ext.apply(Ext.EventObject, {
-		within : function(el, related, allowEl) {
-			if (el) {
-				var t = this[related ? "getRelatedTarget" : "getTarget"]();
-				return t && ((allowEl ? (t == Ext.getDom(el)) : false) || Ext.fly(el).contains(t));
-			}
-			return false;
 		}
 	});
 }

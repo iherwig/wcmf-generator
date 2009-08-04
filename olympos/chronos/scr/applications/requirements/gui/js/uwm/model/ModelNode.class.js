@@ -326,7 +326,7 @@ uwm.model.ModelNode.prototype.updateOidLists = function(parentModelObject) {
 		}
 	}
 	
-	param2;
+	var param2;
 
 	if (parentModelObject.parentOids) {
 		for ( var i = 0; i < parentModelObject.parentOids.length; i++) {
