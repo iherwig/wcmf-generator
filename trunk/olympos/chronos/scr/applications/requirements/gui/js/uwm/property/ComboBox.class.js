@@ -60,6 +60,31 @@ uwm.property.ComboBox.prototype.render = function(container, position){
     }
 }
 
+/**
+ * Override findRecord method from Ext.form.ComboBox, to avoid NPEs.
+ * Sometimes the store is null, when you try to open a uwm.property.ComboBox 
+ * by clicking the pulldown button and a (different) uwm.property.ComboBox instance 
+ * was opened before.
+ * In this case the call stack is the following (all in ext-all-debug.js):
+ * mimicBlur() -> triggerBlur() -> onBlur() -> beforeBlur() -> findRecord()
+ */
+uwm.property.ComboBox.prototype.findRecord = function(prop, value) {
+	// return immediatly if store is null (doesn't change visible functionality)
+	if (this.store == null)
+		return null;
+		
+	var record;
+	if(this.store.getCount() > 0) {
+		this.store.each(function(r) {
+			if(r.data[prop] == value) {
+				record = r;
+				return false;
+			}
+		});
+	}
+	return record;
+}
+
 uwm.property.ComboBox.prototype.fieldChanged = function(field, newValue, oldValue){
 	this.persistValue(newValue);
 }
