@@ -238,7 +238,7 @@ uwm.diagram.AbstractDiagram.prototype.scrollToCenter = function() {
 	
 	setTimeout(function() {
 		workflow.scrollTo(height, width, true);
-	}, 500);
+	}, 1000);
 }
 
 /**
