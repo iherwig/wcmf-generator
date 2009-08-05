@@ -110,10 +110,15 @@ Object getTaggedValue(uml::Element this, String stereotypeName, String tagName) 
 //	JAVA net.sourceforge.olympos.oaw.extend.UMLHelper.getTaggedValue(org.eclipse.uml2.uml.Element, java.lang.String, java.lang.String)
 
 	let stereotype = this.getAppliedStereotype(stereotypeName):
-	stereotype != null ?
-		this.getValue(stereotype, tagName)
-	:
+	stereotype != null ? (
+		this.hasValue(stereotype, tagName) ? (
+			this.getValue(stereotype, tagName)
+		) : (
+			null
+		)
+	) : (
 		null
+	)
 ;
 
 

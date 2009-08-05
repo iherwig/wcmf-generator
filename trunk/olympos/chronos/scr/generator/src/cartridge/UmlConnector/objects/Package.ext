@@ -123,25 +123,25 @@ cwm::Package convertToCwm(uml::Package p) :
 		up.setName(p.name) ->
 		up.setNotes(p.getComment()) ->
 		up.chiBusinessProcess.addAll(p.nestedPackage.select(e|e.getAppliedStereotype("Chronos::ChiBusinessProcess") != null).convertToCwm()) ->
-		up.chiBusinessUseCase.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCase") != null).convertToCwm()) ->
-		up.chiBusinessUseCaseCore.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCaseCore") != null).convertToCwm()) ->
-		up.chiFeature.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiFeature") != null).convertToCwm()) ->
-		up.chiGoal.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiGoal") != null).convertToCwm()) ->
-		up.chiIssue.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiIssue") != null).convertToCwm()) ->
-		up.chiRequirement.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiRequirement") != null).convertToCwm()) ->
-		up.chiWorkerExternal.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiWorkerExternal") != null).convertToCwm()) ->
-		up.chiBusinessPartner.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessPartner") != null).convertToCwm()) ->
-		up.chiBusinessPartnerActive.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessPartnerActive") != null).convertToCwm()) ->
-		up.chiBusinessPartnerPassive.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessPartnerPassive") != null).convertToCwm()) ->
-		up.chiController.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiController") != null).convertToCwm()) ->
-		up.chiNode.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiNode") != null).convertToCwm()) ->
-		up.chiOpinion.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiOpinion") != null).convertToCwm()) ->
-		up.chiOpinionInner.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiOpinionInner") != null).convertToCwm()) ->
-		up.chiStakeHolder.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiStakeHolder") != null).convertToCwm()) ->
-		up.chiSystem.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiSystem") != null).convertToCwm()) ->
-		up.chiView.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiView") != null).convertToCwm()) ->
-		up.chiWorker.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiWorker") != null).convertToCwm()) ->
-		up.chiWorkerInternal.addAll(p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiWorkerInternal") != null).convertToCwm()) ->
+		up.chiBusinessUseCase.addAll(((List[Chronos::ChiBusinessUseCase]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCase") != null)).convertToCwm()) ->
+		up.chiBusinessUseCaseCore.addAll(((List[Chronos::ChiBusinessUseCaseCore]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCaseCore") != null)).convertToCwm()) ->
+		up.chiFeature.addAll(((List[Chronos::ChiFeature]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiFeature") != null)).convertToCwm()) ->
+		up.chiGoal.addAll(((List[Chronos::ChiGoal]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiGoal") != null)).convertToCwm()) ->
+		up.chiIssue.addAll(((List[Chronos::ChiIssue]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiIssue") != null)).convertToCwm()) ->
+		up.chiRequirement.addAll(((List[Chronos::ChiRequirement]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiRequirement") != null)).convertToCwm()) ->
+		up.chiWorkerExternal.addAll(((List[Chronos::ChiWorkerExternal]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiWorkerExternal") != null)).convertToCwm()) ->
+		up.chiBusinessPartner.addAll(((List[Chronos::ChiBusinessPartner]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessPartner") != null)).convertToCwm()) ->
+		up.chiBusinessPartnerActive.addAll(((List[Chronos::ChiBusinessPartnerActive]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessPartnerActive") != null)).convertToCwm()) ->
+		up.chiBusinessPartnerPassive.addAll(((List[Chronos::ChiBusinessPartnerPassive]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessPartnerPassive") != null)).convertToCwm()) ->
+		up.chiController.addAll(((List[Chronos::ChiController]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiController") != null)).convertToCwm()) ->
+		up.chiNode.addAll(((List[Chronos::ChiNode]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiNode") != null)).convertToCwm()) ->
+		up.chiOpinion.addAll(((List[Chronos::ChiOpinion]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiOpinion") != null)).convertToCwm()) ->
+		up.chiOpinionInner.addAll(((List[Chronos::ChiOpinionInner]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiOpinionInner") != null)).convertToCwm()) ->
+		up.chiStakeHolder.addAll(((List[Chronos::ChiStakeHolder]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiStakeHolder") != null)).convertToCwm()) ->
+		up.chiSystem.addAll(((List[Chronos::ChiSystem]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiSystem") != null)).convertToCwm()) ->
+		up.chiView.addAll(((List[Chronos::ChiView]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiView") != null)).convertToCwm()) ->
+		up.chiWorker.addAll(((List[Chronos::ChiWorker]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiWorker") != null)).convertToCwm()) ->
+		up.chiWorkerInternal.addAll(((List[Chronos::ChiWorkerInternal]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiWorkerInternal") != null)).convertToCwm()) ->
 
 		up.package.addAll(p.nestedPackage.typeSelect(uml::Package).select(e|e.getAppliedStereotypes().size == 0).convertToCwm())
 	) ->

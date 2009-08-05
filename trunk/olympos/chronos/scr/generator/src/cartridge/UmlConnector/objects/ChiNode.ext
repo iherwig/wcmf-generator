@@ -96,11 +96,11 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 		un.setLastEditor(c.getTaggedValue("Chronos::ChiNode", "last_editor").toString()) ->
 		un.setModified(c.getTaggedValue("Chronos::ChiNode", "modified").toString()) ->
 
-		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild()) ->
-		un.manyToMany.addAll(c.getGenerals().convertToMany("Generalization")) ->
-		un.manyToMany.addAll(c.getAssociations().select(e|e.memberEnd.selectFirst(f|f.type == c).associationEnd.contains(uml::AggregationKind::shared)).memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiNode).convertToMany("Aggregation")) ->
-		un.manyToMany.addAll(c.getAssociations().select(e|e.memberEnd.selectFirst(f|f.type == c).associationEnd.contains(uml::AggregationKind::composite)).memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiNode).convertToMany("Composition")) ->
-		un.manyToMany.addAll(c.getAssociations().select(e|e.memberEnd.selectFirst(f|f.type == c).associationEnd.contains(uml::AggregationKind::none)).memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiNode).convertToMany("Association"))
+		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild())
+		//Commented out until wCMF remodeling of relations
+		//Prevents import from finishing
+		//un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization")) ->
+		//un.manyToMany.addAll(c.getAssociations().select(e|e.ownedEnd.get(0).type == c).convertToMany(c))
 	) ->
 	un
 ;
