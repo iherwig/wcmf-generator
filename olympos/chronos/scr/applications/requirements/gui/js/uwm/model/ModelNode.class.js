@@ -108,18 +108,22 @@ uwm.model.ModelNode.prototype.getModelNodeClass = function() {
 }
 
 uwm.model.ModelNode.prototype.getParentOids = function(preventReload) {
+	// TODO: Removed. Check if necessary
+	/*
 	if (!preventReload && !this.parentOids) {
 		this.reload();
 	}
-	
+	*/
 	return this.parentOids;
 }
 
 uwm.model.ModelNode.prototype.getChildOids = function(preventReload) {
+	// TODO: Removed. Check if necessary
+	/*
 	if (!preventReload && !this.childOids) {
 		this.reload();
 	}
-	
+	*/	
 	return this.childOids;
 }
 
@@ -212,11 +216,11 @@ uwm.model.ModelNode.prototype.getMaskedRelatedOid = function(relatedOid) {
 	return this.maskedOids[relatedOid];
 }
 
-uwm.model.ModelNode.prototype.associate = function(parentModelObject, connectionInfo, nmUwmClassName, connection, ownUwmClassName, otherUwmClassName) {
+uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionInfo, nmUwmClassName, connection, ownUwmClassName, otherUwmClassName) {
 	var self = this;
 	
 	var childOid = this.getOid();
-	var parentOid = parentModelObject.getOid();
+	var parentOid = otherModelObject.getOid();
 	
 	if (connectionInfo && connectionInfo.nmSelf) {
 		if (ownUwmClassName) {
@@ -231,7 +235,7 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, connection
 	if (!nmUwmClassName) {
 		uwm.persistency.Persistency.getInstance().associate(parentOid, childOid, false, function(request, data) {
 			self.fillInRelationObject(connection, data);
-			uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
+			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self);
 		});
 	} else {
 		var actionSet = new uwm.persistency.ActionSet();
@@ -244,7 +248,7 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, connection
 			    Name : connectionInfo.label
 			});
 			
-			uwm.event.EventBroker.getInstance().fireEvent("associate", parentModelObject, self);
+			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self);
 		});
 		
 		/*
@@ -257,10 +261,10 @@ uwm.model.ModelNode.prototype.associate = function(parentModelObject, connection
 	}
 	
 	if (this.parentOids) {
-		this.parentOids.push(parentModelObject.getOid());
+		this.parentOids.push(otherModelObject.getOid());
 	}
-	if (parentModelObject.childOids) {
-		parentModelObject.childOids.push(this.getOid());
+	if (otherModelObject.childOids) {
+		otherModelObject.childOids.push(this.getOid());
 	}
 }
 
@@ -284,16 +288,17 @@ uwm.model.ModelNode.prototype.insertDirectionInOid = function(oldOid, direction)
 	return result;
 }
 
-uwm.model.ModelNode.prototype.disassociate = function(parentModelObject, connectionInfo, relationObject) {
+uwm.model.ModelNode.prototype.disassociate = function(otherModelObject, connectionInfo, relationObject) {
 	var self = this;
 	
-	this.updateOidLists(parentModelObject);
+	this.updateOidLists(otherModelObject);
+	otherModelObject.updateOidLists(this);
 	
 	var childOid = this.getOid();
-	var parentOid = parentModelObject.getOid();
+	var parentOid = otherModelObject.getOid();
 	
-	if (this.getModelNodeClass() == parentModelObject.getModelNodeClass()) {
-		childOid = parentModelObject.getOid();
+	if (this.getModelNodeClass() == otherModelObject.getModelNodeClass()) {
+		childOid = otherModelObject.getOid();
 		parentOid = this.getOid();
 	}
 	
@@ -307,37 +312,31 @@ uwm.model.ModelNode.prototype.disassociate = function(parentModelObject, connect
 			uwm.model.ModelContainer.getInstance().deleteObject(relationObject);
 		}
 		
-		uwm.event.EventBroker.getInstance().fireEvent("disassociate", parentModelObject, self);
+		uwm.event.EventBroker.getInstance().fireEvent("disassociate", otherModelObject, self);
 	});
 }
 
-uwm.model.ModelNode.prototype.updateOidLists = function(parentModelObject) {
-	var param1;
-	
+/**
+ * Remove otherModelObject from the object's oid lists and vice versa
+ */
+uwm.model.ModelNode.prototype.updateOidLists = function(otherModelObject) {
 	if (this.childOids) {
+		var newList = [];
 		for ( var i = 0; i < this.childOids.length; i++) {
-			if (this.childOids[i] == parentModelObject.getOid()) {
-				param1 = i;
+			if (this.childOids[i] != otherModelObject.getOid()) {
+				newList.push(this.childOids[i]);
 			}
 		}
-		
-		if (param1) {
-			this.childOids[param1] = 'deleted';
-		}
+		this.childOids = newList;
 	}
 	
-	var param2;
-
-	if (parentModelObject.parentOids) {
-		for ( var i = 0; i < parentModelObject.parentOids.length; i++) {
-			
-			if (parentModelObject.parentOids[i] == this.getOid()) {
-				param2 = i;
+	if (otherModelObject.parentOids) {
+		var newList = [];
+		for ( var i = 0; i < otherModelObject.parentOids.length; i++) {
+			if (otherModelObject.parentOids[i] != this.getOid()) {
+				newList.push(otherModelObject.parentOids[i]);
 			}
 		}
-		
-		if (param2) {
-			parentModelObject.parentOids[param2] = 'deleted';
-		}
+		otherModelObject.parentOids = newList;
 	}
 }

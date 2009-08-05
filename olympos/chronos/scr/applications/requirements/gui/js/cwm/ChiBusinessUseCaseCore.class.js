@@ -76,4 +76,27 @@ cwm.ChiBusinessUseCaseCore.prototype.getGridData = function() {
 		label: this.getLabel()
 	}
 }
-	
+
+/**
+ * uwm.model.ModelNode overrides
+ */
+cwm.ChiBusinessUseCaseCore.prototype.associate = function(otherModelObject, connectionInfo, nmUwmClassName, connection) {
+
+	// if a UseCase is associated to a BusinessProcess, it has to be removed from the Package to avoid duplicates
+	if (otherModelObject instanceof cwm.ChiBusinessProcess) {
+		var processParentOids = otherModelObject.getParentOids();
+		if (processParentOids) {
+			for (var i=0; i<processParentOids.length; i++) {
+				if (uwm.Util.getUwmClassNameFromOid(processParentOids[i]) == 'Package') {
+					// make sure that these two actions are both executed
+					cwm.ChiBusinessUseCaseCore.superclass.associate.call(this, otherModelObject, connectionInfo, nmUwmClassName, connection);
+					uwm.model.ModelContainer.getInstance().getByOid(processParentOids[i]).disassociate(this);
+				}
+			}
+		}
+	}
+	else {
+		// default behaviour
+		cwm.ChiBusinessUseCaseCore.superclass.associate.call(this, otherModelObject, connectionInfo, nmUwmClassName, connection);
+	}
+}
