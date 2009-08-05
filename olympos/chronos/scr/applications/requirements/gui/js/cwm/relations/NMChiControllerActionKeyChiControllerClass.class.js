@@ -11,8 +11,8 @@
  */
 Ext.namespace("cwm.relations");
 
-cwm.relations.NMChiControllerActionKeyChiController = function() {
-	cwm.relations.NMChiControllerActionKeyChiController.superclass.constructor.call(this);
+cwm.relations.NMChiControllerActionKeyChiControllerClass = function() {
+	cwm.relations.NMChiControllerActionKeyChiControllerClass.superclass.constructor.call(this);
 	
 	this.uwmClassName = "NMChiControllerActionKeyChiController";
 	this.instanceClassName = "cwm.relations.NMChiControllerActionKeyChiController";
@@ -25,6 +25,84 @@ cwm.relations.NMChiControllerActionKeyChiController = function() {
 	};
 }
 
-Ext.extend(cwm.relations.NMChiControllerActionKeyChiController, uwm.model.EditableRelationClass);
+Ext.extend(cwm.relations.NMChiControllerActionKeyChiControllerClass, uwm.model.EditableRelationClass);
 
-uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.NMChiControllerActionKeyChiController());
+cwm.relations.NMChiControllerActionKeyChiControllerClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
+	return new uwm.property.PropertyForm( {
+		items : [ new uwm.property.TextField( {
+		    fieldLabel : 'Name',
+		    toolTip : "the name of this object",
+		    name : 'Name',
+		    
+		    modelNode : modelNode,
+		    
+		    readOnly : isLockedByOtherUser
+		}), new uwm.property.HtmlEditor( {
+		    fieldLabel : 'Notes',
+		    toolTip : "the actual description of the object.",
+		    name : 'Notes',
+		    
+		    modelNode : modelNode,
+		    
+		    readOnly : isLockedByOtherUser
+		}), new uwm.property.TextField( {
+		    fieldLabel : 'action',
+		    toolTip : "The Action which triggeres this association",
+		    name : 'action',
+		    
+		    modelNode : modelNode,
+		    
+		    readOnly : isLockedByOtherUser
+		}), new uwm.property.TextField( {
+		    fieldLabel : 'config',
+		    toolTip : "The configuration file in which this association will be placed",
+		    name : 'config',
+		    
+		    modelNode : modelNode,
+		    
+		    readOnly : isLockedByOtherUser
+		}), new uwm.property.TextField( {
+		    fieldLabel : 'context',
+		    toolTip : "The Context in which this association is valid",
+		    name : 'context',
+		    
+		    modelNode : modelNode,
+		    
+		    readOnly : isLockedByOtherUser
+		}), new uwm.property.TextField( {
+		    fieldLabel : 'created',
+		    toolTip : "the creation date of this object",
+		    name : 'created',
+		    
+		    modelNode : modelNode,
+		    
+		    readOnly : true
+		}), new uwm.property.TextField( {
+		    fieldLabel : 'creator',
+		    toolTip : "the user that created this object",
+		    name : 'creator',
+		    
+		    modelNode : modelNode,
+		    
+		    readOnly : true
+		}), new uwm.property.TextField( {
+		    fieldLabel : 'last_editor',
+		    toolTip : "the last user that edited this object",
+		    name : 'last_editor',
+		    
+		    modelNode : modelNode,
+		    
+		    readOnly : true
+		}), new uwm.property.TextField( {
+		    fieldLabel : 'modified',
+		    toolTip : "the date when this object was modified",
+		    name : 'modified',
+		    
+		    modelNode : modelNode,
+		    
+		    readOnly : true
+		}) ]
+	});
+}
+
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.NMChiControllerActionKeyChiControllerClass());
