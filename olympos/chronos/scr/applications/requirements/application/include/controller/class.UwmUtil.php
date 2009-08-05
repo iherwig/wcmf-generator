@@ -12,11 +12,12 @@
  */
 
 require_once (BASE."wcmf/lib/model/class.NodeUtil.php");
+require_once (BASE.'wcmf/lib/util/class.EncodingUtil.php');
 
 /**
  * @class UwmUtil
- * @brief Provides methods common to UML Web Modeler functionality. 
- * 
+ * @brief Provides methods common to UML Web Modeler functionality.
+ *
  * @author 	Niko <enikao@users.sourceforge.net>
  */
 class UwmUtil {
@@ -25,11 +26,12 @@ class UwmUtil {
 	const STANDALONE = "yes";
 
 	const INI_SECTION = 'generator';
-	const INI_UML_FILE_STORAGE = 'umlFileStorage'; 
+	const INI_UML_FILE_STORAGE = 'umlFileStorage';
 
 	private static $dom;
 	private static $persistenceFacade;
-	
+	private static $encodingUtil;
+
 	private static $processedManyToMany = array();
 
 	private static $lastTime = 0;
@@ -37,9 +39,9 @@ class UwmUtil {
 	private static function check($msg)
 	{
 		$newTime = microtime(true);
-	
+
 		//echo $newTime - self::$lastTime, ": $msg<br/ >";
-		
+
 		self::$lastTime = $newTime;
 	}
 
@@ -49,11 +51,12 @@ class UwmUtil {
 		//self::$dom->setIndentString("\t");
 		self::$dom->openURI($tmpUwmExportPath);
 		self::$dom->startDocument(self::XML_VERSION, self::ENCODING, self::STANDALONE);
-	
+
 		self::$dom->startElement("CwmExport");
-	
+
 		self::$persistenceFacade = PersistenceFacade::getInstance();
-	
+		self::$encodingUtil = new EncodingUtil();
+
 		if ($startModel) {
 			$currModel = self::$persistenceFacade->load($startModel);
 			if ($currModel) {
@@ -73,13 +76,13 @@ class UwmUtil {
 		} else {
 			self::processModels();
 		}
-	
+
 		self::$dom->endElement();
-	
-		
+
+
 		self::$dom->endDocument();
 		self::$dom->flush();
-	
+
 		self::$dom = null;
 	}
 
@@ -87,12 +90,12 @@ class UwmUtil {
 	{
 		$nodes = array ($node);
 		NodeUtil::translateValues($nodes);
-	
+
 		$valueNames = $node->getValueNames();
-	
+
 		foreach ($valueNames as $currValueName)
 		{
-			$value = utf8_encode($node->getValue($currValueName));
+			$value = self::$encodingUtil->convertIsoToCp1252Utf8($node->getValue($currValueName));
 			if ($value !== null && $value !== '') {
 				self::$dom->writeAttribute($currValueName, $value);
 			}
@@ -106,7 +109,7 @@ class UwmUtil {
 		{
 			self::check($currModelId);
 			$currModel = self::$persistenceFacade->load($currModelId);
-		
+
 			self::processModel($currModel);
 		}
 	}
@@ -114,21 +117,21 @@ class UwmUtil {
 	private static function processModel($currModel) {
 		self::check($currModel->getId());
 		self::$dom->startElement('Model');
-	
+
 		self::appendAttributes($currModel);
 
 		self::$dom->startElement('Package');
 		self::$dom->writeAttribute('Name', $currModel->getName());
-	
+
 		$currModel->loadChildren();
 		$packages = $currModel->getPackageChildren();
 		foreach ($packages as $currPackage)
 		{
 			self::processPackage($currPackage);
-		
+
 			$currPackage = $currPackage->getNextSibling();
 		}
-	
+
 		unset ($currModel);
 		self::$dom->endElement();
 		self::$dom->endElement();
@@ -138,48 +141,48 @@ class UwmUtil {
 	{
 		self::check($currPackage->getId());
 		self::$dom->startElement('Package');
-	
+
 		self::appendAttributes($currPackage);
-	
+
 		$currPackage->loadChildren();
 		$children = $currPackage->getChildren();
 		foreach ($children as $currChild)
 		{
 			$childType = $currChild->getType();
-		
+
 			switch($childType) {
 				case 'Package':
 					self::processPackage($currChild);
 					break;
-			
+						
 				case 'ChiBusinessProcess':
 					self::processBusinessProcess($currChild);
 					break;
-			
+						
 				case 'ChiBusinessUseCase':
 				case 'ChiBusinessUseCaseCore':
 					self::processUseCase($currChild);
 					break;
-			
+						
 				case 'ChiNode':
 				case 'ChiController':
 					self::processClass($currChild);
 					break;
-			
+						
 				default:
 					self::processNode($currChild);
 			}
 		}
-	
+
 		self::$dom->endElement();
 	}
 
 	private static function processBusinessProcess($currNode) {
 		self::check($currNode->getId());
 		self::$dom->startElement($currNode->getType());
-	
+
 		self::appendAttributes($currNode);
-	
+
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild)
@@ -192,7 +195,7 @@ class UwmUtil {
 				//do nothing
 			} else if ($childType != 'Figure') {
 				$logger = LoggerManager::getLogger('OawUtil');
-	
+
 				$logger->error('Invalid child of BusinessProcess: ' . $currChild->getId(), __FILE__, __LINE__);
 			}
 		}
@@ -203,15 +206,15 @@ class UwmUtil {
 	private static function processUseCase($currNode) {
 		self::check($currNode->getId());
 		self::$dom->startElement($currNode->getType());
-	
+
 		self::appendAttributes($currNode);
-	
+
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild)
 		{
 			$childType = self::getRealType($currChild);
-			
+				
 			if ($childType == 'ActivitySet') {
 				self::processActivitySet($currChild);
 			} else if (self::processManyToMany($currChild, $currNode->getId())) {
@@ -220,7 +223,7 @@ class UwmUtil {
 				self::processChild($currChild);
 			} else if ($childType != 'Figure') {
 				$logger = LoggerManager::getLogger('OawUtil');
-	
+
 				$logger->error('Invalid child of UseCase: ' . $currChild->getId(), __FILE__, __LINE__);
 			}
 		}
@@ -231,17 +234,19 @@ class UwmUtil {
 	private static function processClass($currNode) {
 		self::check($currNode->getId());
 		self::$dom->startElement($currNode->getType());
-	
+
 		self::appendAttributes($currNode);
-	
+
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild)
 		{
 			$childType = self::getRealType($currChild);
-			
+				
 			if ($childType != 'Figure') {
-				if (self::processManyToMany($currChild, $currNode->getId())) {
+				if ($childType == 'NMChiControllerActionKeyChiController' || $childType == 'NMChiControllerActionKeyChiView') {
+					self::processNode($currChild);
+				} else if (self::processManyToMany($currChild, $currNode->getId())) {
 					//do nothing
 				} else if ($childType == 'ChiValue' || $childType == 'Operation') {
 					self::processNode($currChild);
@@ -257,9 +262,9 @@ class UwmUtil {
 	private static function processActivitySet($currNode) {
 		self::check($currNode->getId());
 		self::$dom->startElement('ActivitySet');
-	
+
 		self::appendAttributes($currNode);
-	
+
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild)
@@ -275,10 +280,10 @@ class UwmUtil {
 	private static function processNode($currNode)
 	{
 		self::check($currNode->getId());
-		self::$dom->startElement($currNode->getType());
-	
+		self::$dom->startElement($currNode->getBaseType());
+
 		self::appendAttributes($currNode);
-	
+
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild)
@@ -286,7 +291,7 @@ class UwmUtil {
 			if (self::processManyToMany($currChild, $currNode->getId())) {
 				//do nothing
 			}
-			 /*else if ($currNode->getType() != 'Diagram' && $currChild->getType() == 'Figure')
+			/*else if ($currNode->getType() != 'Diagram' && $currChild->getType() == 'Figure')
 			 {
 			 self::processNode($currChild);
 			 }*/
@@ -294,7 +299,7 @@ class UwmUtil {
 				self::processChild($currChild);
 			}
 		}
-	
+
 		$parents = $currNode->getParents();
 		foreach ($parents as $currParent) {
 			self::$dom->startElement('Parent');
@@ -302,26 +307,26 @@ class UwmUtil {
 			self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
 			self::$dom->endElement();
 		}
-	
+
 		self::$dom->endElement();
 	}
-	
+
 	private static function processChild($currChild) {
 		self::$dom->startElement('Child');
 		self::$dom->writeAttribute('targetType', $currChild->getType());
 		self::$dom->writeAttribute('targetOid', $currChild->getValue('id'));
 		self::$dom->endElement();
 	}
-	
+
 	private static function processManyToMany($currChild, $parentId) {
 		$result = false;
 
 		if ($currChild->isManyToManyObject())
 		{
 			$result = true;
-			
+				
 			$processThisManyToMany = true;
-			
+				
 			if ($currChild->getType() != $currChild->getBaseType()) {
 				if (array_key_exists($currChild->getId(), self::$processedManyToMany)) {
 					$processThisManyToMany = false;
@@ -329,38 +334,42 @@ class UwmUtil {
 					self::$processedManyToMany[$currChild->getId()] = true;
 				}
 			}
-			
+				
 			if ($processThisManyToMany) {
-			$currChild->loadParents();
-			$parents = $currChild->getParents();
-			foreach ($parents as $currParent)
-			{
-				if ($currParent->getId() != $parentId)
+				$currChild->loadParents();
+				$parents = $currChild->getParents();
+				foreach ($parents as $currParent)
 				{
-					$className = self::getRealType($currParent);
-				
-					self::$dom->startElement('ManyToMany');
-					self::$dom->writeAttribute('targetType', $className);
-					self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
-					self::$dom->writeAttribute('targetRole', $currParent->getType());
-
-					$valueNames = array('relationType', 'sourceMultiplicity', 'sourceNavigability', 'targetMultiplicity', 'targetNavigability');
-				
-					foreach ($valueNames as $currValueName)
+					if ($currParent->getId() != $parentId)
 					{
-						$value = utf8_encode($currChild->getValue($currValueName));
-						if ($value !== null && $value !== '') {
-							self::$dom->writeAttribute($currValueName, $value);
+						$className = self::getRealType($currParent);
+
+						self::$dom->startElement('ManyToMany');
+						self::$dom->writeAttribute('targetType', $className);
+						self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
+						self::$dom->writeAttribute('targetRole', $currParent->getType());
+
+						$currChildArray = array($currChild);
+							
+						NodeUtil::translateValues($currChildArray);
+							
+						$valueNames = array('relationType', 'sourceMultiplicity', 'sourceNavigability', 'targetMultiplicity', 'targetNavigability');
+
+						foreach ($valueNames as $currValueName)
+						{
+							$value = self::$encodingUtil->convertIsoToCp1252Utf8($currChild->getValue($currValueName));
+							if ($value !== null && $value !== '') {
+								self::$dom->writeAttribute($currValueName, $value);
+							}
 						}
+
+
+						self::$dom->endElement();
 					}
-
-
-					self::$dom->endElement();
 				}
-			}
-}		}
-		
-		return $result;
+			}		}
+
+			return $result;
 	}
 
 	private static function getRealType($node) {
@@ -369,9 +378,9 @@ class UwmUtil {
 
 	public static function prepareUmlFile($oid) {
 		$result = null;
-		
-	    $parser = InifileParser::getInstance();
-	    if (($params = $parser->getSection(self::INI_SECTION)) === false) {
+
+		$parser = InifileParser::getInstance();
+		if (($params = $parser->getSection(self::INI_SECTION)) === false) {
 			$logger = LoggerManager::getLogger('GenerateUmlController');
 
 			$logger->error($parser->getErrorMsg(), __FILE__, __LINE__);
@@ -379,10 +388,10 @@ class UwmUtil {
 			$dirName = $params[self::INI_UML_FILE_STORAGE];
 			$fileName = str_replace(':', '-', $oid) . '.uml';
 			$fullPath = "$dirName/$fileName";
-			
+				
 			$result = $fullPath;
 		}
-		
+
 		return $result;
-	}	
+	}
 }

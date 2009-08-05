@@ -34,8 +34,14 @@ class HtmlSanitizer {
 	const SEARCHWHOLEELSE = "/(<)(b|u|i|p|ul|ol|li|br)(([ .]*[\w-]*[=]['\"]*[\w: -;.]*['\"]*[ .]*)*)(>|\/>)/i";
 	const SEARCHHTMLPARTS = "/(&)([\w]*)(;)/";
 	
+	private static $transTable;
+	
 	public static function sanitize($source) {
 	
+		$transTable = get_html_translation_table(HTML_ENTITIES);
+		$transTable = self::get_html_translation_table_WordCodes($transTable); // add for translations of copy paste from word
+		$transTable = self::get_html_translation_table_SomeMoreCodes($transTable); // add for some more codes
+
 		$strippedtext = strip_tags($source, self::ALLOWED);
 		$spanattribedtext = preg_replace_callback(self::SEARCHWHOLESPAN, array('HtmlSanitizer','cbspan'), $strippedtext);
 		$elseattribedtext = preg_replace_callback(self::SEARCHWHOLEELSE, array('HtmlSanitizer','cbelse'), $spanattribedtext);
@@ -69,9 +75,7 @@ class HtmlSanitizer {
 		$searchthmlparts = "/(&)([\w]*)(;)/";
 		$stringmtch = $nematches[1].$nematches[2].$nematches[3];
 		$mapping = array ();
-		$table = get_html_translation_table(HTML_ENTITIES);
-		// $table = get_html_translation_table_WordCodes($table); // add for translations of copy paste from word
-		// $table = get_html_translation_table_SomeMoreCodes($table); // add for some more codes
+		$table = self::$transTable;
 		foreach ($table as $char=>$entity) {
 			$mapping[$entity] = '&#'.ord($char).';';
 		}
@@ -110,6 +114,7 @@ class HtmlSanitizer {
 	
 		//	 "\x82", "\x84", "\x85", "\x91", "\x92", "\x93", "\x94", "\x95", "\x96",  "\x97",
 		//	 "&#8218;", "&#8222;", "&#8230;", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8226;", "&#8211;", "&#8212;"
+		
 		
 		ksort($trans);
 		return $trans;
