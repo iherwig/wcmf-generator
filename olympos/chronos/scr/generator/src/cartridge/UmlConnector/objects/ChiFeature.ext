@@ -71,7 +71,7 @@ cwm::ChiFeature convertToCwm(Chronos::ChiFeature c) :
 		un.setId(c.getId()) ->
 		un.setAuthor(c.getTaggedValue("Chronos::ChiFeature", "Author").toString()) ->
 		un.setProofreader(c.getTaggedValue("Chronos::ChiFeature", "Proofreader").toString()) ->
-		c.getTaggedValue("Chronos::ChiFeature", "Status") != "" ? un.setStatus(c.getTaggedValue("Chronos::ChiFeature", "Status").name.toString()) : Void ->
+		c.getTaggedValue("Chronos::ChiFeature", "Status") != "" ? un.setStatus(((Chronos::ChiFeatureStatus) c.getTaggedValue("Chronos::ChiFeature", "Status")).name.toString()) : Void ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiFeature", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiFeature", "Version").toString()) ->
 		un.setName(c.name) ->

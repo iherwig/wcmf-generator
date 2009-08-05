@@ -64,7 +64,7 @@ cwm::ChiBusinessPartner convertToCwm(Chronos::ChiBusinessPartner c) :
 		un.setModified(c.getTaggedValue("Chronos::ChiBusinessPartner", "modified").toString()) ->
 
 		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiBusinessUseCase).convertToMany()) ->
-		un.child.addAll(c.getGenerals().convertToChild())
+		un.child.addAll(((List[uml::Class]) c.getGenerals()).convertToChild())
 	) ->
 	un
 ;

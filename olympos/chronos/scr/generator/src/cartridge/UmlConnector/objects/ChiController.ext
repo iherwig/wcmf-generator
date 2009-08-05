@@ -22,8 +22,7 @@ uml::Class convert(cwm::ChiController c):
 
 Void establishConnections(cwm::ChiController b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiController:" + b.id).first(): (
-		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "Generalization").establishGeneralizationToClass(uc, um) ->
-		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "Association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, false) ->
+		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "generalization").establishGeneralizationToClass(uc, um) ->
 		b.nmChiControllerActionKeyChiController.addAllActionKeys(uc) ->
 		b.nmChiControllerActionKeyChiView.addAllActionKeys(uc)
 		//Duplicate in connection list
@@ -72,8 +71,7 @@ cwm::ChiController convertToCwm(Chronos::ChiController c) :
 		un.setLastEditor(c.getTaggedValue("Chronos::ChiController", "last_editor").toString()) ->
 		un.setModified(c.getTaggedValue("Chronos::ChiController", "modified").toString()) ->
 
-		un.manyToMany.addAll(c.getGenerals().convertToMany("Generalization")) ->
-		un.manyToMany.addAll(c.getAssociations().select(e|e.memberEnd.selectFirst(f|f.type == c).associationEnd.contains(uml::AggregationKind::none)).memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiNode).convertToMany("Association"))
+		un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("Generalization"))
 	) ->
 	un
 ;

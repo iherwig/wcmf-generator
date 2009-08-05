@@ -66,8 +66,8 @@ cwm::ChiBusinessProcess convertToCwm(Chronos::ChiBusinessProcess c) :
 		un.setLastEditor(c.getTaggedValue("Chronos::ChiBusinessProcess", "last_editor").toString()) ->
 		un.setModified(c.getTaggedValue("Chronos::ChiBusinessProcess", "modified").toString()) ->
 
-		un.chiBusinessUseCase.addAll(c.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCase") != null).convertToCwm()) ->
-		un.chiBusinessUseCaseCore.addAll(c.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCaseCore") != null).convertToCwm())
+		un.chiBusinessUseCase.addAll(((List[Chronos::ChiBusinessUseCase]) c.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCase") != null)).convertToCwm()) ->
+		un.chiBusinessUseCaseCore.addAll(((List[Chronos::ChiBusinessUseCaseCore]) c.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessUseCaseCore") != null)).convertToCwm())
 	) ->
 	un
 ;

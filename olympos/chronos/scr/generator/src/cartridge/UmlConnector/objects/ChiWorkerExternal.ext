@@ -51,7 +51,7 @@ Void transferValues(cwm::ChiWorkerExternal w, uml::Model um):
 cwm::ChiWorkerExternal convertToCwm(Chronos::ChiWorkerExternal c) :
 	let un = new cwm::ChiWorkerExternal : (
 		un.setId(c.getId()) ->
-		un.setIsOfflineUser(c.getValue(c.getAppliedStereotype("Chronos::ChiWorkerExternal"), "is_OfflineUser")) ->
+		un.setIsOfflineUser((boolean) c.getValue(c.getAppliedStereotype("Chronos::ChiWorkerExternal"), "is_OfflineUser")) ->
 		un.setAuthor(c.getTaggedValue("Chronos::ChiWorkerExternal", "Author").toString()) ->
 		un.setStatus(c.getTaggedValue("Chronos::ChiWorkerExternal", "Status").toString()) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiWorkerExternal", "Alias").toString()) ->
@@ -64,7 +64,7 @@ cwm::ChiWorkerExternal convertToCwm(Chronos::ChiWorkerExternal c) :
 		un.setModified(c.getTaggedValue("Chronos::ChiWorkerExternal", "modified").toString()) ->
 
 		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiBusinessUseCase).convertToMany()) ->
-		un.child.addAll(c.getGenerals().convertToChild())
+		un.child.addAll(((List[uml::Class]) c.getGenerals()).convertToChild())
 	) ->
 	un
 ;

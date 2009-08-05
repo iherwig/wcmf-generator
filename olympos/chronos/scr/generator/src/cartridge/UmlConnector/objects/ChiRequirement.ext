@@ -96,11 +96,11 @@ Chronos::ChiRequirementStatus translateChiRequirementStatus(String source):
 cwm::ChiRequirement convertToCwm(Chronos::ChiRequirement c) :
 	let un = new cwm::ChiRequirement : (
 		un.setId(c.getId()) ->
-		c.getTaggedValue("Chronos::ChiRequirement", "Type") != "" ? un.setReqType(c.getTaggedValue("Chronos::ChiRequirement", "Type").name.toString()) : Void ->
-		un.setPriority(c.getValue(c.getAppliedStereotype("Chronos::ChiRequirement"), "Priority")) ->
+		c.getTaggedValue("Chronos::ChiRequirement", "Type") != "" ? un.setReqType(((Chronos::ChiRequirementType) c.getTaggedValue("Chronos::ChiRequirement", "Type")).name.toString()) : Void ->
+		un.setPriority((int) c.getValue(c.getAppliedStereotype("Chronos::ChiRequirement"), "Priority")) ->
 		un.setAuthor(c.getTaggedValue("Chronos::ChiRequirement", "Author").toString()) ->
 		un.setProofreader(c.getTaggedValue("Chronos::ChiRequirement", "Proofreader").toString()) ->
-		c.getTaggedValue("Chronos::ChiRequirement", "Status") != "" ? un.setStatus(c.getTaggedValue("Chronos::ChiRequirement", "Status").name.toString()) : Void ->
+		c.getTaggedValue("Chronos::ChiRequirement", "Status") != "" ? un.setStatus(((Chronos::ChiRequirementStatus) c.getTaggedValue("Chronos::ChiRequirement", "Status")).name.toString()) : Void ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiRequirement", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiRequirement", "Version").toString()) ->
 		un.setName(c.name) ->

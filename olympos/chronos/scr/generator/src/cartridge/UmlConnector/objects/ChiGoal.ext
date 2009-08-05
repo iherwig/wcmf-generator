@@ -56,7 +56,7 @@ cwm::ChiGoal convertToCwm(Chronos::ChiGoal c) :
 	//(new cwm::ChiGoal).setP
 	let un = new cwm::ChiGoal : (
 		un.setId(c.getId()) ->
-		un.setPriority(c.getValue(c.getAppliedStereotype("Chronos::ChiGoal"), "Priority")) ->
+		un.setPriority((int) c.getValue(c.getAppliedStereotype("Chronos::ChiGoal"), "Priority")) ->
 		//un.setGoalType(c.getTaggedValue("Chronos::ChiGoal", "GoalType").toString()) ->
 		un.setValueName(c.getTaggedValue("Chronos::ChiGoal", "Value_Name").toString()) ->
 		un.setValueAmmount(c.getTaggedValue("Chronos::ChiGoal", "Value_ammount").toString()) ->

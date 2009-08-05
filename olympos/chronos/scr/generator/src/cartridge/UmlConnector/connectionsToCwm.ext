@@ -76,3 +76,61 @@ cwm::ManyToMany convertToMany(uml::Class other, String relationType) :
 	) ->
 	result
 ;
+
+cwm::ManyToMany convertToMany(uml::Association this, uml::Class source) :
+	let result = new cwm::ManyToMany:
+	let ownEnd = this.ownedEnd.selectFirst(e|e.type == source):
+	let otherEnd = this.ownedEnd.selectFirst(e|e.type == source).getOtherEnd():
+	
+	result.setRelationType(ownEnd.aggregation.getUwmRelationType()) ->
+
+	result.setTargetType(otherEnd.type.metaType.name.split("::").last()) ->
+	result.setTargetOid(otherEnd.type.getId()) ->
+
+	result.setSourceMultiplicity(ownEnd.getUwmMultiplicity()) ->
+	result.setSourceNavigability(ownEnd.getUwmNavigability()) ->
+
+	result.setTargetMultiplicity(otherEnd.getUwmMultiplicity()) ->
+	result.setTargetNavigability(otherEnd.getUwmNavigability()) ->
+	
+	result
+;
+
+String getUwmRelationType(uml::AggregationKind this):
+	switch(this) {
+		case uml::AggregationKind::composite:
+			"composition"
+		
+		case uml::AggregationKind::shared:
+			"aggregation"
+			
+		case uml::AggregationKind::none:
+			"association"
+		
+		default:
+			null
+	}
+;
+
+String getUwmMultiplicity(uml::Property this):
+	this.lowerBound() == 0 && this.upperBound() == -1 ? (
+		"*"
+	) : (
+		this.lowerBound() == this.upperBound() ? (
+			this.lowerBound().toString()
+		) : (
+			this.upperBound() == -1 ? (
+				this.lowerBound().toString() + "..*"
+			) : (
+				this.lowerBound().toString() + ".." + this.upperBound()
+			)
+		)
+	)
+;
+
+String getUwmNavigability(uml::Property this):
+	this.isNavigable() ?
+		"Navigable"
+	:
+		"Non-Navigable"
+;

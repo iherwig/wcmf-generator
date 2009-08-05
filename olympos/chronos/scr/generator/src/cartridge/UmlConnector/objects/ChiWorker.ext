@@ -64,7 +64,7 @@ cwm::ChiWorker convertToCwm(Chronos::ChiWorker c) :
 		un.setModified(c.getTaggedValue("Chronos::ChiWorker", "modified").toString()) ->
 
 		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiBusinessUseCase).convertToMany()) ->
-		un.child.addAll(c.getGenerals().convertToChild())
+		un.child.addAll(((List[uml::Class]) c.getGenerals()).convertToChild())
 	) ->
 	un
 ;
