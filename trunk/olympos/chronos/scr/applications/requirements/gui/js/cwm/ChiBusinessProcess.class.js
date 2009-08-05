@@ -57,3 +57,26 @@ cwm.ChiBusinessProcess.prototype.getGridData = function() {
 	}
 }
 	
+/**
+ * uwm.model.ModelNode overrides
+ */
+cwm.ChiBusinessProcess.prototype.disassociate = function(otherModelObject, connectionInfo, relationObject) {
+
+	// if a UseCase is disassociated from a BusinessProcess, move its node to the parent package of the BusinessProcess
+	if (otherModelObject instanceof cwm.ChiBusinessUseCase || otherModelObject instanceof cwm.ChiBusinessUseCaseCore) {
+		var processParentOids = this.getParentOids();
+		if (processParentOids) {
+			for (var i=0; i<processParentOids.length; i++) {
+				if (uwm.Util.getUwmClassNameFromOid(processParentOids[i]) == 'Package') {
+					// make sure that these two actions are both executed
+					cwm.ChiBusinessProcess.superclass.disassociate.call(this, otherModelObject, connectionInfo, relationObject);
+					otherModelObject.associate(uwm.model.ModelContainer.getInstance().getByOid(processParentOids[i]));
+				}
+			}
+		}
+	}
+	else {
+		// default behaviour
+		cwm.ChiBusinessProcess.superclass.disassociate.call(this, otherModelObject, connectionInfo, relationObject);
+	}
+}  

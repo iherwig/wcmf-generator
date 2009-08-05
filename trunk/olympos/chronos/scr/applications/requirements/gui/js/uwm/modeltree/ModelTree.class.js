@@ -173,15 +173,46 @@ uwm.modeltree.ModelTree.prototype.associateDroppedNode = function(tree, node, ol
 }
 
 uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function(parentModelNode, childModelNode) {
+	// NOTE: parent and child maybe opposite than defined in the relation
+	if (uwm.Log.isEnabled(uwm.Log.DEBUG)) {
+		uwm.Log.log("handleDisassociate: "+childModelNode.getOid()+" from "+parentModelNode.getOid(), uwm.Log.DEBUG);
+	}
+	
 	var parentNode = this.getNodeById(parentModelNode.getOid());
 	var childNode = this.getNodeById(childModelNode.getOid());
-	
-	if ((childNode instanceof uwm.modeltree.UseCaseNode || childNode instanceof uwm.modeltree.UseCaseCoreNode) 
-		&& (parentNode instanceof uwm.modeltree.PackageNode)) {
-		if (childNode.parentNode.id == parentNode.id) {
-			parentNode.ensureVisible();
-			childNode.remove();
-		}
+
+	// A UseCase node is disassociated from a Package node:
+	// Only remove the UseCase from the Package, the UseCase is associated to the Process
+	// in handleAssociate
+	if ((parentNode instanceof uwm.modeltree.UseCaseNode || parentNode instanceof uwm.modeltree.UseCaseCoreNode) 
+		&& (childNode instanceof  uwm.modeltree.PackageNode)) {
+		// Iterate over all childnodes of the Package node to make sure
+		// that no node representing the UseCase is left
+		childNode.eachChild(function(node) {
+			if (node && node.id == parentNode.id) {
+				if (uwm.Log.isEnabled(uwm.Log.DEBUG)) {
+					uwm.Log.log("remove node in disassociate: "+node.id+" from "+childNode.id, uwm.Log.DEBUG);
+				}
+				node.remove();
+			}
+		});
+	}
+
+	// A UseCase node is disassociated from a Process node:
+	// Only remove the UseCase from the Process, the UseCase is associated to the Package
+	// in handleAssociate
+	if ((parentNode instanceof uwm.modeltree.UseCaseNode || parentNode instanceof uwm.modeltree.UseCaseCoreNode) 
+		&& (childNode instanceof uwm.modeltree.ProcessNode)) {
+		// Iterate over all childnodes of the Package node to make sure
+		// that no node representing the UseCase is left
+		childNode.eachChild(function(node) {
+			if (node && node.id == parentNode.id) {
+				if (uwm.Log.isEnabled(uwm.Log.DEBUG)) {
+					uwm.Log.log("remove node in disassociate: "+node.id+" from "+childNode.id, uwm.Log.DEBUG);
+				}
+				node.remove();
+			}
+		});
 	}
 }
 
@@ -331,14 +362,15 @@ uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject,
 }
 
 uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObject, childModelObject) {
+	// NOTE: parent and child maybe opposite than defined in the relation
+	if (uwm.Log.isEnabled(uwm.Log.DEBUG)) {
+		uwm.Log.log("handleAssociate: "+childModelObject.getOid()+" to "+parentModelObject.getOid(), uwm.Log.DEBUG);
+	}
 
 	var parentOid = parentModelObject.getOid();
-	
 	var parentNode = this.getNodeById(parentOid);
-	
-	
+	  
 	if (parentNode) {
-	
 		if (parentNode instanceof uwm.modeltree.UseCaseNode || parentNode instanceof uwm.modeltree.UseCaseCoreNode) {
 			if (!(childModelObject instanceof uwm.diagram.ActivitySet)) {
 				if (parentModelObject.parentOids) {
@@ -352,35 +384,6 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 					}
 				}
 			}
-			
-		}
-		
-		if (parentNode instanceof uwm.modeltree.ProcessNode) {
-			if (!(childModelObject instanceof cwm.ChiBusinessUseCase || childModelObject instanceof cwm.ChiBusinessUseCaseCore)) {
-				if (parentModelObject.parentOids) {
-					for (var i = 0; i < parentModelObject.parentOids.length; i++) {
-						var tempParentNode = this.getNodeById(parentModelObject.parentOids[i]);
-						if (tempParentNode instanceof uwm.modeltree.PackageNode) {
-							parentNode = tempParentNode;
-						}
-					}
-				}
-			} else {
-				//I think this is obsolete, but I'm not entirely sure about it
-				//TODO: Check if obsolete
-				/*
-				if (childModelObject.parentOids) {
-					for (var i = 0; i < childModelObject.parentOids.length; i++) {
-						var parentToDelete = uwm.model.ModelContainer.getInstance().getByOid(childModelObject.parentOids[i]);
-						if (parentToDelete instanceof uwm.model.builtin.Package) {
-							childModelObject.disassociate(uwm.model.ModelContainer.getInstance().getByOid(childModelObject.parentOids[i]));
-							return;
-						}
-					}
-				}
-				*/
-			}
-			
 		}
 		
 		var childNode = null;
@@ -432,10 +435,13 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 				
 				})
 			};
-					}
+		}
 		
 		if (childNode) {
 			if (!parentNode.findChild("id", childNode.id)) {
+				if (uwm.Log.isEnabled(uwm.Log.DEBUG)) {
+					uwm.Log.log("append node in associate: "+childNode.id+" to "+parentNode.id, uwm.Log.DEBUG);
+				}
 				if (parentNode.isExpanded()) {
 					parentNode.appendChild(childNode);
 					childNode.ensureVisible();
