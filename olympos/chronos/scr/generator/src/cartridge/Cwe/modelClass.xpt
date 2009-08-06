@@ -45,9 +45,11 @@ application.«this.getFullPackageName()».«this.name» = function() {
 	«EXPAND recordDefinition FOR this»
 	
 	«EXPAND relations FOR this»
-}
+};
 
 Ext.extend(application.«this.getFullPackageName()».«this.name», cwe.model.ModelClass);
+
+«EXPAND getGridColumns FOR this»
 
 «EXPAND getEditorItems FOR this»
 
@@ -57,14 +59,14 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 
 «DEFINE recordDefinition FOR Chronos::ChiNode»
 	this.recordDefinition = [
-	«FOREACH this.getChiValuesRecursive() AS currValue SEPARATOR ", "»
+	«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
 		{
 			name : "«currValue.name»",
 			mapping : "«currValue.name»"
 		}
 	«ENDFOREACH»
 	
-	«IF this.getChiValuesRecursive().size > 0»
+	«IF this.getChiAttributes().size > 0 && (this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0)»
 		,
 	«ENDIF»
 	
@@ -75,7 +77,7 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 		}
 	«ENDFOREACH»
 	
-	«IF this.getParentNodesRecursive().size > 0»
+	«IF this.getParentNodesRecursive().size > 0 && this.getChildNodesRecursive().size > 0»
 		,
 	«ENDIF»
 	
@@ -97,7 +99,7 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 		}
 	«ENDFOREACH»
 
-	«IF this.getParentNodesRecursive().size > 0»
+	«IF (this.getParentNodesRecursive().size > 0) && (this.getChildNodesRecursive().size > 0)»
 		,
 	«ENDIF»
 	
@@ -107,37 +109,91 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 			targetModelClassId : "«currChild.type.name»"
 		}
 	«ENDFOREACH»
-	}
+	};
+«ENDDEFINE»
+
+«DEFINE getGridColumns FOR Chronos::ChiNode»
+application.«this.getFullPackageName()».«this.name».prototype.getGridColumns = function() {
+	return [
+	«IF this.getChiAttributes().size > 0»
+		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
+			{
+			    header : "«currValue.name»",
+			    dataIndex : "«currValue.name»",
+			    width : 100,
+			    sortable : «this.is_searchable.boolString() == "true" ? "true" : "false"»,
+			    editor: «EXPAND getGridEditor FOR currValue»
+			}
+		«ENDFOREACH»
+	«ENDIF»
+	];
+};
+«ENDDEFINE»
+
+«DEFINE getGridEditor FOR Chronos::ChiValue»
+	«LET this.input_type.split("#").first().getExtJsInputType() AS inputType»
+		«IF this.is_editable.boolString() == "false" || inputType == "HtmlEditor"»
+			new cwe.modelgrid.DummyField()
+		«ELSE»
+			new cwe.editor.control.«inputType»({
+				«IF inputType == "ComboBox"»targetCweModelElementId: "«this.input_type.split(':').last()»"«ENDIF»
+			})
+		«ENDIF»			
+	«ENDLET»
 «ENDDEFINE»
 
 «DEFINE getEditorItems FOR Chronos::ChiNode»
 application.«this.getFullPackageName()».«this.name».prototype.getEditorItems = function() {
 	return [
-	«FOREACH this.getChiValuesRecursive() AS currValue SEPARATOR ", "»
-		 new Ext.form.TextField( {
-			fieldLabel : "«currValue.name»",
-			name : "«currValue.name»",
-			dataIndex : "«currValue.name»"
-		})
-	«ENDFOREACH»
-	
-	«IF this.getChiValuesRecursive().size > 0»
-		,
+	«IF this.getChiAttributes().size > 0»
+		new cwe.editor.control.PropertiesFieldSet({
+			items: [
+		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
+			«EXPAND getEditor FOR currValue»
+		«ENDFOREACH»
+		]})
+		
+		«IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0»
+			,
+		«ENDIF»
 	«ENDIF»
 	
-	«FOREACH this.getParentNodesRecursive() AS currParent SEPARATOR ", "»
-		«EXPAND association(true) FOR currParent»
-	«ENDFOREACH»
-	
-	«IF this.getParentNodesRecursive().size > 0»
-		,
+	«IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0»
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
+		«FOREACH this.getParentNodesRecursive() AS currParent SEPARATOR ", "»
+			«EXPAND association(true) FOR currParent»
+		«ENDFOREACH»
+		
+		«IF this.getParentNodesRecursive().size > 0 && this.getChildNodesRecursive().size > 0»
+			,
+		«ENDIF»
+		
+		«FOREACH this.getChildNodesRecursive() AS currChild SEPARATOR ", "»
+			«EXPAND association(false) FOR currChild»
+		«ENDFOREACH»
+		
+		]})
 	«ENDIF»
-	
-	«FOREACH this.getChildNodesRecursive() AS currChild SEPARATOR ", "»
-		«EXPAND association(false) FOR currChild»
-	«ENDFOREACH»
  ];
-}
+};
+«ENDDEFINE»
+
+«DEFINE getEditor FOR Chronos::ChiValue»
+	new cwe.editor.control.«this.input_type.split('#').first().getExtJsInputType()»({
+		fieldLabel: "«this.name»",
+		name: "«this.name»",
+		dataIndex: "«this.name»",
+		«IF this.input_type.split('#').first().getExtJsInputType() == "ComboBox"»targetCweModelElementId: "«this.input_type.split(':').last()»",«ENDIF»
+		«IF this.is_editable.boolString() == "false"»
+			«IF this.input_type.split('#').first().getExtJsInputType() == "ComboBox"»
+				disabled: true,
+			«ELSE»
+				readOnly: true,
+			«ENDIF»
+		«ENDIF»
+		toolTip: "«this.getComment().sanitizeJsString()»"
+	}) 
 «ENDDEFINE»
 
 «DEFINE association(Boolean isParent) FOR uml::Property»
