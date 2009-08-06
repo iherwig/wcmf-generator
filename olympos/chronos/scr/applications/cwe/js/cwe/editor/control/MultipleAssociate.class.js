@@ -41,7 +41,7 @@ Ext.namespace("cwe.editor.control");
  * @config isParent Whether the target should be associated as parent.
  */
 cwe.editor.control.MultipleAssociate = function(config) {
-}
+};
 
 cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 	initComponent : function() {
@@ -69,11 +69,11 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 		 * @type Array
 		 */
 		this.fieldConfig = [ {
-			name : "oid",
-			mapping : "oid"
+		    name : "oid",
+		    mapping : "oid"
 		}, {
-			name : "label",
-			mapping : "label"
+		    name : "label",
+		    mapping : "label"
 		} ];
 		
 		/**
@@ -98,11 +98,11 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 		 * @type Ext.Toolbar.Button
 		 */
 		this.associateButton = new Ext.Toolbar.Button( {
-			text : chi.Dict.translate("Associate"),
-			iconCls : "associateButton",
-			handler : function() {
-				self.associate();
-			}
+		    text : chi.Dict.translate("Associate"),
+		    iconCls : "associateButton",
+		    handler : function() {
+			    self.associate();
+		    }
 		});
 		
 		/**
@@ -112,11 +112,11 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 		 * @type Ext.Toolbar.Button
 		 */
 		this.disassociateButton = new Ext.Toolbar.Button( {
-			text : chi.Dict.translate("Disassociate"),
-			iconCls : "disassociateButton",
-			handler : function() {
-				self.disassociate();
-			}
+		    text : chi.Dict.translate("Disassociate"),
+		    iconCls : "disassociateButton",
+		    handler : function() {
+			    self.disassociate();
+		    }
 		});
 		
 		/**
@@ -126,30 +126,30 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 		 * @type Ext.Toolbar.Button
 		 */
 		this.editButton = new Ext.Toolbar.Button( {
-			text : chi.Dict.translate("Edit"),
-			iconCls : "editButton",
-			handler : function() {
-				self.edit();
-			}
+		    text : chi.Dict.translate("Edit"),
+		    iconCls : "editButton",
+		    handler : function() {
+			    self.edit();
+		    }
 		});
 		
 		Ext.apply(this, {
-			height : 200,
-			width : 805,
-			tbar : [ this.associateButton, this.disassociateButton, this.editButton ],
-			selModel : new Ext.grid.RowSelectionModel( {
-				singleSelect : false
-			}),
-			columns : [ {
-				header : chi.Dict.translate("Label"),
-				dataIndex : "label",
-				width : 100,
-				sortable : true
-			} ],
-			store : this.store,
-			viewConfig : {
-				forceFit : true
-			}
+		    height : 200,
+		    width : 805,
+		    tbar : [ this.associateButton, this.disassociateButton, this.editButton ],
+		    selModel : new Ext.grid.RowSelectionModel( {
+			    singleSelect : false
+		    }),
+		    columns : [ {
+		        header : chi.Dict.translate("Label"),
+		        dataIndex : "label",
+		        width : 100,
+		        sortable : true
+		    } ],
+		    store : this.store,
+		    viewConfig : {
+			    forceFit : true
+		    }
 		});
 		
 		cwe.editor.control.MultipleAssociate.superclass.initComponent.apply(this, arguments);
@@ -164,7 +164,7 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
  */
 cwe.editor.control.MultipleAssociate.prototype.getName = function() {
 	return this.name;
-}
+};
 
 /**
  * Sets the value of this form field.
@@ -184,8 +184,8 @@ cwe.editor.control.MultipleAssociate.prototype.setValue = function(value) {
 		
 		value.each(function(elem) {
 			var record = new self.recordTemplate( {
-				oid : elem.getOid(),
-				label : rawRecords[elem.getOid()].getLabel()
+			    oid : elem.getOid(),
+			    label : rawRecords[elem.getOid()].getLabel()
 			});
 			
 			store.add(record);
@@ -195,7 +195,7 @@ cwe.editor.control.MultipleAssociate.prototype.setValue = function(value) {
 		
 		store.removeAll();
 	}
-}
+};
 
 /**
  * Returns the value of this form field.
@@ -205,7 +205,7 @@ cwe.editor.control.MultipleAssociate.prototype.setValue = function(value) {
  */
 cwe.editor.control.MultipleAssociate.prototype.getValue = function() {
 	return this.origValue;
-}
+};
 
 /**
  * Shows the target Model Class model grid and adds an associate button to it.
@@ -218,44 +218,44 @@ cwe.editor.control.MultipleAssociate.prototype.associate = function() {
 	var self = this;
 	
 	var button = new cwe.modelgrid.AssociateButton( {
-		modelClass : this.editor.getModelClass(),
-		sourceLabel : this.editor.getLabel(),
-		roleName : this.getName(),
-		role : this.dataIndex,
-		isParent : this.isParent,
-		singleSelect : false,
-		sourceOid : this.editor.getOid(),
-		sourceHandler : function(records) {
-			var referenceList = new cwe.model.ModelReferenceList(this.modelClass);
-			
-			self.getValue().each(function(item) {
-				referenceList.add(item.getOid(), item);
-			});
-			
-			for ( var currOid in records) {
-				var currRecord = records[currOid];
-				
-				if (!(currRecord instanceof Function)) {
-					if (!referenceList.containsKey(currRecord.getOid())) {
-						var reference = new cwe.model.ModelReference(currRecord.getOid());
-						referenceList.add(currRecord.getOid(), reference);
-						self.editor.addRawRecord(currRecord);
-					}
-				}
-			}
-			
-			self.setValue(referenceList);
-			
-			grid.removeAssociateButton(button);
-			self.editor.removeAssociateButton(button);
-			self.editor.show();
-		}
+	    modelClass : this.editor.getModelClass(),
+	    sourceLabel : this.editor.getLabel(),
+	    roleName : this.getName(),
+	    role : this.dataIndex,
+	    isParent : this.isParent,
+	    singleSelect : false,
+	    sourceOid : this.editor.getOid(),
+	    sourceHandler : function(records) {
+		    var referenceList = new cwe.model.ModelReferenceList(this.modelClass);
+		    
+		    self.getValue().each(function(item) {
+			    referenceList.add(item.getOid(), item);
+		    });
+		    
+		    for ( var currOid in records) {
+			    var currRecord = records[currOid];
+			    
+			    if (!(currRecord instanceof Function)) {
+				    if (!referenceList.containsKey(currRecord.getOid())) {
+					    var reference = new cwe.model.ModelReference(currRecord.getOid());
+					    referenceList.add(currRecord.getOid(), reference);
+					    self.editor.addRawRecord(currRecord);
+				    }
+			    }
+		    }
+		    
+		    self.setValue(referenceList);
+		    
+		    grid.removeAssociateButton(button);
+		    self.editor.removeAssociateButton(button);
+		    self.editor.show();
+	    }
 	});
 	
 	grid.addAssociateButton(button);
 	
 	this.editor.addAssociateButton(grid, button);
-}
+};
 
 /**
  * Removes the selected entries from this form field.
@@ -288,7 +288,7 @@ cwe.editor.control.MultipleAssociate.prototype.disassociate = function() {
 		
 		this.setValue(referenceList);
 	}
-}
+};
 
 /**
  * Opens the associated element in its editor.
@@ -308,4 +308,4 @@ cwe.editor.control.MultipleAssociate.prototype.edit = function() {
 			editors.loadOrShow(currRecord.get("oid"), currRecord.get("label"));
 		}
 	}
-}
+};

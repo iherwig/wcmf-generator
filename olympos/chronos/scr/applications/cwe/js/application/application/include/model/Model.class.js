@@ -24,11 +24,6 @@ application.application.include.model.Model = function() {
 	this.recordDefinition = [
 	
 		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
 			name : "Name",
 			mapping : "Name"
 		}
@@ -88,69 +83,213 @@ application.application.include.model.Model = function() {
 			targetModelClassId : "Package"
 		}
 	
-	}
+	};
 
-}
+};
 
 Ext.extend(application.application.include.model.Model, cwe.model.ModelClass);
+
+
+application.application.include.model.Model.prototype.getGridColumns = function() {
+	return [
+	
+		
+			{
+			    header : "Name",
+			    dataIndex : "Name",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Notes",
+			    dataIndex : "Notes",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "created",
+			    dataIndex : "created",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "creator",
+			    dataIndex : "creator",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "last_editor",
+			    dataIndex : "last_editor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "modified",
+			    dataIndex : "modified",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		
+	
+	];
+};
+
 
 
 application.application.include.model.Model.prototype.getEditorItems = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Name",
-			name : "Name",
-			dataIndex : "Name"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Notes",
-			name : "Notes",
-			dataIndex : "Notes"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "created",
-			name : "created",
-			dataIndex : "created"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "creator",
-			name : "creator",
-			dataIndex : "creator"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "last_editor",
-			name : "last_editor",
-			dataIndex : "last_editor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "modified",
-			name : "modified",
-			dataIndex : "modified"
-		})
-	
-	
-	
-		,
-	
-	
-	
-	
-	
-	
-	
+		new cwe.editor.control.PropertiesFieldSet({
+			items: [
 		
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Name",
+		name: "Name",
+		dataIndex: "Name",
+		
+		
+		toolTip: "the name of this object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.HtmlEditor({
+		fieldLabel: "Notes",
+		name: "Notes",
+		dataIndex: "Notes",
+		
+		
+		toolTip: "the actual description of the object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "created",
+		name: "created",
+		dataIndex: "created",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the creation date of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "creator",
+		name: "creator",
+		dataIndex: "creator",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the user that created this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "last_editor",
+		name: "last_editor",
+		dataIndex: "last_editor",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the last user that edited this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "modified",
+		name: "modified",
+		dataIndex: "modified",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the date when this object was modified"
+	}) 
+
+		
+		]})
+		
+		
+			,
+		
+	
+	
+	
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
+		
+		
+		
+		
+		
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -163,9 +302,12 @@ application.application.include.model.Model.prototype.getEditorItems = function(
 		
 	})
 
+		
+		
+		]})
 	
  ];
-}
+};
 
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.Model());

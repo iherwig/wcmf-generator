@@ -35,8 +35,36 @@
 	background-image: url("../img/link_break.png") !important;
 }
 
+.startButton {
+	background-image: url("../img/control_play_blue.png") !important;
+}
+
+.stopButton {
+	background-image: url("../img/control_stop_blue.png") !important;
+}
+
+.loadButton {
+	background-image: url("../img/script.png") !important;
+}
+
+.cweLogoIcon {
+	background-image: url("../img/logoIcon.png") !important;
+}
+
+.dashboardIcon {
+	background-image: url("../img/house.png") !important;
+}
+
 ul.deleteMsgBox {
 	margin-top: 0.5em;
 	list-style-type: disc;
 	list-style-position: inside;
+}
+
+.AssociateLabel {
+	font-weight: bold;
+}
+
+.cwe-field-readOnly {
+	opacity: 0.6;
 }

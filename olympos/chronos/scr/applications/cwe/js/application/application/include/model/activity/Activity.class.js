@@ -24,28 +24,18 @@ application.application.include.model.activity.Activity = function() {
 	this.recordDefinition = [
 	
 		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
-			name : "fk_package_id",
-			mapping : "fk_package_id"
-		}
-	, 
-		{
-			name : "Association",
-			mapping : "Association"
-		}
-	, 
-		{
-			name : "Aggregation",
-			mapping : "Aggregation"
-		}
-	, 
-		{
 			name : "Alias",
 			mapping : "Alias"
+		}
+	, 
+		{
+			name : "Status",
+			mapping : "Status"
+		}
+	, 
+		{
+			name : "Author",
+			mapping : "Author"
 		}
 	, 
 		{
@@ -126,8 +116,8 @@ application.application.include.model.activity.Activity = function() {
 		}
 	, 
 		{
-			name : "childNMActivityChiNode",
-			mapping : "childNMActivityChiNode"
+			name : "childNMActivityChiObject",
+			mapping : "childNMActivityChiObject"
 		}
 	, 
 		{
@@ -192,9 +182,9 @@ application.application.include.model.activity.Activity = function() {
 			targetModelClassId : "NMActivityActivityDecision"
 		}
 	, 
-		"childNMActivityChiNode" : {
+		"childNMActivityChiObject" : {
 			isParent : false,
-			targetModelClassId : "NMActivityChiNode"
+			targetModelClassId : "NMActivityChiObject"
 		}
 	, 
 		"childActivity" : {
@@ -217,95 +207,317 @@ application.application.include.model.activity.Activity = function() {
 			targetModelClassId : "Figure"
 		}
 	
-	}
+	};
 
-}
+};
 
 Ext.extend(application.application.include.model.activity.Activity, cwe.model.ModelClass);
+
+
+application.application.include.model.activity.Activity.prototype.getGridColumns = function() {
+	return [
+	
+		
+			{
+			    header : "Alias",
+			    dataIndex : "Alias",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Status",
+			    dataIndex : "Status",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiBaseStatus"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Author",
+			    dataIndex : "Author",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiAuthors"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Version",
+			    dataIndex : "Version",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Name",
+			    dataIndex : "Name",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Notes",
+			    dataIndex : "Notes",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "created",
+			    dataIndex : "created",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "creator",
+			    dataIndex : "creator",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "last_editor",
+			    dataIndex : "last_editor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "modified",
+			    dataIndex : "modified",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		
+	
+	];
+};
+
 
 
 application.application.include.model.activity.Activity.prototype.getEditorItems = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_package_id",
-			name : "fk_package_id",
-			dataIndex : "fk_package_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Association",
-			name : "Association",
-			dataIndex : "Association"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Aggregation",
-			name : "Aggregation",
-			dataIndex : "Aggregation"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Alias",
-			name : "Alias",
-			dataIndex : "Alias"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Version",
-			name : "Version",
-			dataIndex : "Version"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Name",
-			name : "Name",
-			dataIndex : "Name"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Notes",
-			name : "Notes",
-			dataIndex : "Notes"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "created",
-			name : "created",
-			dataIndex : "created"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "creator",
-			name : "creator",
-			dataIndex : "creator"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "last_editor",
-			name : "last_editor",
-			dataIndex : "last_editor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "modified",
-			name : "modified",
-			dataIndex : "modified"
-		})
-	
-	
-	
-		,
-	
-	
-	
+		new cwe.editor.control.PropertiesFieldSet({
+			items: [
 		
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Alias",
+		name: "Alias",
+		dataIndex: "Alias",
+		
+		
+		toolTip: "the Project Id of this object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "Status",
+		name: "Status",
+		dataIndex: "Status",
+		targetCweModelElementId: "ChiBaseStatus",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "Author",
+		name: "Author",
+		dataIndex: "Author",
+		targetCweModelElementId: "ChiAuthors",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Version",
+		name: "Version",
+		dataIndex: "Version",
+		
+		
+		toolTip: "the model version of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Name",
+		name: "Name",
+		dataIndex: "Name",
+		
+		
+		toolTip: "the name of this object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.HtmlEditor({
+		fieldLabel: "Notes",
+		name: "Notes",
+		dataIndex: "Notes",
+		
+		
+		toolTip: "the actual description of the object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "created",
+		name: "created",
+		dataIndex: "created",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the creation date of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "creator",
+		name: "creator",
+		dataIndex: "creator",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the user that created this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "last_editor",
+		name: "last_editor",
+		dataIndex: "last_editor",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the last user that edited this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "modified",
+		name: "modified",
+		dataIndex: "modified",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the date when this object was modified"
+	}) 
+
+		
+		]})
+		
+		
+			,
+		
+	
+	
+	
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
+		
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -318,8 +530,8 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -332,8 +544,8 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -346,8 +558,8 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -360,8 +572,8 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -374,14 +586,14 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
-	
-	
-	
-		,
-	
-	
-	
 		
+		
+		
+			,
+		
+		
+		
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -394,22 +606,22 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
 		
-			fieldLabel : "childNMActivityChiNode",
-			name : "childNMActivityChiNode",
-			dataIndex : "childNMActivityChiNode",
-			targetCweModelElementId : "NMActivityChiNode",
+			fieldLabel : "childNMActivityChiObject",
+			name : "childNMActivityChiObject",
+			dataIndex : "childNMActivityChiObject",
+			targetCweModelElementId : "NMActivityChiObject",
 			isParent : false
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -422,8 +634,8 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -436,8 +648,8 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -450,8 +662,8 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -464,9 +676,12 @@ application.application.include.model.activity.Activity.prototype.getEditorItems
 		
 	})
 
+		
+		
+		]})
 	
  ];
-}
+};
 
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.activity.Activity());

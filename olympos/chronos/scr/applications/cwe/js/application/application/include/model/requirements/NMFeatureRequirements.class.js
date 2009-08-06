@@ -23,19 +23,7 @@ application.application.include.model.requirements.NMFeatureRequirements = funct
 	
 	this.recordDefinition = [
 	
-		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
-			name : "Realization",
-			mapping : "Realization"
-		}
 	
-	
-	
-		,
 	
 	
 	
@@ -50,8 +38,6 @@ application.application.include.model.requirements.NMFeatureRequirements = funct
 		}
 	
 	
-	
-		,
 	
 	
 	
@@ -73,39 +59,32 @@ application.application.include.model.requirements.NMFeatureRequirements = funct
 	
 
 	
-		,
 	
 	
-	
-	}
+	};
 
-}
+};
 
 Ext.extend(application.application.include.model.requirements.NMFeatureRequirements, cwe.model.ModelClass);
+
+
+application.application.include.model.requirements.NMFeatureRequirements.prototype.getGridColumns = function() {
+	return [
+	
+	];
+};
+
 
 
 application.application.include.model.requirements.NMFeatureRequirements.prototype.getEditorItems = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Realization",
-			name : "Realization",
-			dataIndex : "Realization"
-		})
 	
 	
-	
-		,
-	
-	
-	
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
 		
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -118,8 +97,8 @@ application.application.include.model.requirements.NMFeatureRequirements.prototy
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -132,15 +111,16 @@ application.application.include.model.requirements.NMFeatureRequirements.prototy
 		
 	})
 
-	
-	
-	
-		,
-	
-	
+		
+		
+		
+		
+		
+		
+		]})
 	
  ];
-}
+};
 
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.requirements.NMFeatureRequirements());

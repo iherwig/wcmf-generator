@@ -19,7 +19,7 @@ application.application.include.model.activity.Activity_package = function() {
 	this.name = "activity";
 	this.owningPackageId = "application.application.include.model.Model_package";
 	this.startExpanded = true;
-}
+};
 
 Ext.extend(application.application.include.model.activity.Activity_package, cwe.model.ModelPackage);
 

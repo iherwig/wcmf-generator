@@ -16,12 +16,16 @@
 	background-image: url("../img/16x16/ActivitySet.png") !important;
 }
 
+.ChiObjectTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiObject.png") !important;
+}
+
 .NMActivityActivityDecisionTreeIcon16x16 {
 	background-image: url("../img/16x16/NMActivityActivityDecision.png") !important;
 }
 
-.NMActivityChiNodeTreeIcon16x16 {
-	background-image: url("../img/16x16/NMActivityChiNode.png") !important;
+.NMActivityChiObjectTreeIcon16x16 {
+	background-image: url("../img/16x16/NMActivityChiObject.png") !important;
 }
 
 .ActivityTreeIcon16x16 {
@@ -48,12 +52,8 @@
 	background-image: url("../img/16x16/ActivityFinal.png") !important;
 }
 
-.ChiBusinessUseCaseTreeIcon16x16 {
-	background-image: url("../img/16x16/ChiBusinessUseCase.png") !important;
-}
-
-.FigureTreeIcon16x16 {
-	background-image: url("../img/16x16/Figure.png") !important;
+.ChiSystemTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiSystem.png") !important;
 }
 
 .AdodbseqTreeIcon16x16 {
@@ -88,12 +88,12 @@
 	background-image: url("../img/16x16/ChiBusinessPartner.png") !important;
 }
 
-.NMUCActorTreeIcon16x16 {
-	background-image: url("../img/16x16/NMUCActor.png") !important;
-}
-
 .ChiBusinessProcessTreeIcon16x16 {
 	background-image: url("../img/16x16/ChiBusinessProcess.png") !important;
+}
+
+.ChiBusinessUseCaseTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiBusinessUseCase.png") !important;
 }
 
 .ChiBusinessUseCaseCoreTreeIcon16x16 {
@@ -114,6 +114,10 @@
 
 .ChiWorkerInternalTreeIcon16x16 {
 	background-image: url("../img/16x16/ChiWorkerInternal.png") !important;
+}
+
+.NMUCActorTreeIcon16x16 {
+	background-image: url("../img/16x16/NMUCActor.png") !important;
 }
 
 .ChiGoalTreeIcon16x16 {
@@ -152,20 +156,48 @@
 	background-image: url("../img/16x16/NMFeatureRequirements.png") !important;
 }
 
-.ChiControllerTreeIcon16x16 {
-	background-image: url("../img/16x16/ChiController.png") !important;
+.ChiActionKeyTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiActionKey.png") !important;
+}
+
+.ChiClassTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiClass.png") !important;
+}
+
+.ChiValueRefTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiValueRef.png") !important;
+}
+
+.NMChiControllerActionKeyChiControllerTreeIcon16x16 {
+	background-image: url("../img/16x16/NMChiControllerActionKeyChiController.png") !important;
+}
+
+.NMChiControllerActionKeyChiViewTreeIcon16x16 {
+	background-image: url("../img/16x16/NMChiControllerActionKeyChiView.png") !important;
+}
+
+.PropertyTreeIcon16x16 {
+	background-image: url("../img/16x16/Property.png") !important;
 }
 
 .ChiNodeTreeIcon16x16 {
 	background-image: url("../img/16x16/ChiNode.png") !important;
 }
 
-.ChiValueTreeIcon16x16 {
-	background-image: url("../img/16x16/ChiValue.png") !important;
+.ChiControllerTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiController.png") !important;
 }
 
 .ChiViewTreeIcon16x16 {
 	background-image: url("../img/16x16/ChiView.png") !important;
+}
+
+.ChiAuthorsTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiAuthors.png") !important;
+}
+
+.ChiValueTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiValue.png") !important;
 }
 
 .DisplayTypeTreeIcon16x16 {
@@ -180,8 +212,8 @@
 	background-image: url("../img/16x16/NMChiControllerChiController.png") !important;
 }
 
-.NMChiNodeChiNodeTreeIcon16x16 {
-	background-image: url("../img/16x16/NMChiNodeChiNode.png") !important;
+.ChiAssociationTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiAssociation.png") !important;
 }
 
 .OperationTreeIcon16x16 {
@@ -200,8 +232,8 @@
 	background-image: url("../img/16x16/RelationType.png") !important;
 }
 
-.ChiAuthorsTreeIcon16x16 {
-	background-image: url("../img/16x16/ChiAuthors.png") !important;
+.ChiBaseStatusTreeIcon16x16 {
+	background-image: url("../img/16x16/ChiBaseStatus.png") !important;
 }
 
 .CounterTreeIcon16x16 {
@@ -212,12 +244,20 @@
 	background-image: url("../img/16x16/History.png") !important;
 }
 
+.TranslationTreeIcon16x16 {
+	background-image: url("../img/16x16/Translation.png") !important;
+}
+
 .EntityBaseTreeIcon16x16 {
 	background-image: url("../img/16x16/EntityBase.png") !important;
 }
 
 .EntityBaseExtendedTreeIcon16x16 {
 	background-image: url("../img/16x16/EntityBaseExtended.png") !important;
+}
+
+.FigureTreeIcon16x16 {
+	background-image: url("../img/16x16/Figure.png") !important;
 }
 
 .ChiBaseTreeIcon16x16 {
@@ -236,8 +276,8 @@
 	background-image: url("../img/16x16/Diagram.png") !important;
 }
 
-.GlossarTreeIcon16x16 {
-	background-image: url("../img/16x16/Glossar.png") !important;
+.GlossaryTreeIcon16x16 {
+	background-image: url("../img/16x16/Glossary.png") !important;
 }
 
 .NMFiguresDiagramTreeIcon16x16 {

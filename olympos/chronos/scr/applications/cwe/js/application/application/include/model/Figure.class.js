@@ -10,154 +10,19 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
-Ext.namespace("application.application.include.model.activity");
+Ext.namespace("application.application.include.model");
 
-application.application.include.model.activity.Figure = function() {
-	application.application.include.model.activity.Figure.superclass.constructor.call(this, arguments);
+application.application.include.model.Figure = function() {
+	application.application.include.model.Figure.superclass.constructor.call(this, arguments);
 	
 	this.cweModelElementId = "Figure";
 	this.name = "Figure";
 	this.treeIconClass = "FigureTreeIcon16x16";
-	this.owningPackageId = "application.application.include.model.activity.Activity_package";
+	this.owningPackageId = "application.application.include.model.Model_package";
 	
 	
 	this.recordDefinition = [
 	
-		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
-			name : "fk_activity_id",
-			mapping : "fk_activity_id"
-		}
-	, 
-		{
-			name : "fk_activitydecision_id",
-			mapping : "fk_activitydecision_id"
-		}
-	, 
-		{
-			name : "fk_activityreceive_id",
-			mapping : "fk_activityreceive_id"
-		}
-	, 
-		{
-			name : "fk_activitysend_id",
-			mapping : "fk_activitysend_id"
-		}
-	, 
-		{
-			name : "fk_activityinitial_id",
-			mapping : "fk_activityinitial_id"
-		}
-	, 
-		{
-			name : "fk_activityfinal_id",
-			mapping : "fk_activityfinal_id"
-		}
-	, 
-		{
-			name : "fk_chibusinessusecasecore_id",
-			mapping : "fk_chibusinessusecasecore_id"
-		}
-	, 
-		{
-			name : "fk_chibusinessusecase_id",
-			mapping : "fk_chibusinessusecase_id"
-		}
-	, 
-		{
-			name : "fk_chiworkerexternal_id",
-			mapping : "fk_chiworkerexternal_id"
-		}
-	, 
-		{
-			name : "fk_chiworkerinternal_id",
-			mapping : "fk_chiworkerinternal_id"
-		}
-	, 
-		{
-			name : "fk_chiworker_id",
-			mapping : "fk_chiworker_id"
-		}
-	, 
-		{
-			name : "fk_chibusinesspartneractive_id",
-			mapping : "fk_chibusinesspartneractive_id"
-		}
-	, 
-		{
-			name : "fk_chibusinesspartnerpassive_id",
-			mapping : "fk_chibusinesspartnerpassive_id"
-		}
-	, 
-		{
-			name : "fk_chibusinesspartner_id",
-			mapping : "fk_chibusinesspartner_id"
-		}
-	, 
-		{
-			name : "fk_actor_id",
-			mapping : "fk_actor_id"
-		}
-	, 
-		{
-			name : "fk_chibusinessprocess_id",
-			mapping : "fk_chibusinessprocess_id"
-		}
-	, 
-		{
-			name : "fk_chigoal_id",
-			mapping : "fk_chigoal_id"
-		}
-	, 
-		{
-			name : "fk_chirequirement_id",
-			mapping : "fk_chirequirement_id"
-		}
-	, 
-		{
-			name : "fk_chifeature_id",
-			mapping : "fk_chifeature_id"
-		}
-	, 
-		{
-			name : "fk_chiissue_id",
-			mapping : "fk_chiissue_id"
-		}
-	, 
-		{
-			name : "fk_chicontroller_id",
-			mapping : "fk_chicontroller_id"
-		}
-	, 
-		{
-			name : "fk_chinode_id",
-			mapping : "fk_chinode_id"
-		}
-	, 
-		{
-			name : "fk_chiview_id",
-			mapping : "fk_chiview_id"
-		}
-	, 
-		{
-			name : "fk_diagram_id",
-			mapping : "fk_diagram_id"
-		}
-	, 
-		{
-			name : "fk_chibase_id",
-			mapping : "fk_chibase_id"
-		}
-	, 
-		{
-			name : "fk_activityset_id",
-			mapping : "fk_activityset_id"
-		}
-	, 
 		{
 			name : "BackgroundColor",
 			mapping : "BackgroundColor"
@@ -235,18 +100,23 @@ application.application.include.model.activity.Figure = function() {
 		}
 	, 
 		{
+			name : "parentChiClass",
+			mapping: "parentChiClass"
+		}
+	, 
+		{
 			name : "parentChiView",
 			mapping: "parentChiView"
 		}
 	, 
 		{
-			name : "parentChiNode",
-			mapping: "parentChiNode"
+			name : "parentChiController",
+			mapping: "parentChiController"
 		}
 	, 
 		{
-			name : "parentChiController",
-			mapping: "parentChiController"
+			name : "parentChiNode",
+			mapping: "parentChiNode"
 		}
 	, 
 		{
@@ -267,6 +137,16 @@ application.application.include.model.activity.Figure = function() {
 		{
 			name : "parentChiGoal",
 			mapping: "parentChiGoal"
+		}
+	, 
+		{
+			name : "parentChiBusinessUseCase",
+			mapping: "parentChiBusinessUseCase"
+		}
+	, 
+		{
+			name : "parentChiBusinessUseCaseCore",
+			mapping: "parentChiBusinessUseCaseCore"
 		}
 	, 
 		{
@@ -310,13 +190,8 @@ application.application.include.model.activity.Figure = function() {
 		}
 	, 
 		{
-			name : "parentChiBusinessUseCase",
-			mapping: "parentChiBusinessUseCase"
-		}
-	, 
-		{
-			name : "parentChiBusinessUseCaseCore",
-			mapping: "parentChiBusinessUseCaseCore"
+			name : "parentChiSystem",
+			mapping: "parentChiSystem"
 		}
 	, 
 		{
@@ -348,10 +223,13 @@ application.application.include.model.activity.Figure = function() {
 			name : "parentActivity",
 			mapping: "parentActivity"
 		}
+	, 
+		{
+			name : "parentChiObject",
+			mapping: "parentChiObject"
+		}
 	
 	
-	
-		,
 	
 	
 	
@@ -376,19 +254,24 @@ application.application.include.model.activity.Figure = function() {
 			targetModelClassId : "Diagram"
 		}
 	, 
+		"parentChiClass" : {
+			isParent : true,
+			targetModelClassId : "ChiClass"
+		}
+	, 
 		"parentChiView" : {
 			isParent : true,
 			targetModelClassId : "ChiView"
 		}
 	, 
-		"parentChiNode" : {
-			isParent : true,
-			targetModelClassId : "ChiNode"
-		}
-	, 
 		"parentChiController" : {
 			isParent : true,
 			targetModelClassId : "ChiController"
+		}
+	, 
+		"parentChiNode" : {
+			isParent : true,
+			targetModelClassId : "ChiNode"
 		}
 	, 
 		"parentChiIssue" : {
@@ -409,6 +292,16 @@ application.application.include.model.activity.Figure = function() {
 		"parentChiGoal" : {
 			isParent : true,
 			targetModelClassId : "ChiGoal"
+		}
+	, 
+		"parentChiBusinessUseCase" : {
+			isParent : true,
+			targetModelClassId : "ChiBusinessUseCase"
+		}
+	, 
+		"parentChiBusinessUseCaseCore" : {
+			isParent : true,
+			targetModelClassId : "ChiBusinessUseCaseCore"
 		}
 	, 
 		"parentChiBusinessProcess" : {
@@ -451,14 +344,9 @@ application.application.include.model.activity.Figure = function() {
 			targetModelClassId : "ChiWorkerExternal"
 		}
 	, 
-		"parentChiBusinessUseCase" : {
+		"parentChiSystem" : {
 			isParent : true,
-			targetModelClassId : "ChiBusinessUseCase"
-		}
-	, 
-		"parentChiBusinessUseCaseCore" : {
-			isParent : true,
-			targetModelClassId : "ChiBusinessUseCaseCore"
+			targetModelClassId : "ChiSystem"
 		}
 	, 
 		"parentActivityFinal" : {
@@ -490,258 +378,356 @@ application.application.include.model.activity.Figure = function() {
 			isParent : true,
 			targetModelClassId : "Activity"
 		}
+	, 
+		"parentChiObject" : {
+			isParent : true,
+			targetModelClassId : "ChiObject"
+		}
 	
 
 	
-		,
 	
 	
-	
-	}
+	};
 
-}
+};
 
-Ext.extend(application.application.include.model.activity.Figure, cwe.model.ModelClass);
+Ext.extend(application.application.include.model.Figure, cwe.model.ModelClass);
 
 
-application.application.include.model.activity.Figure.prototype.getEditorItems = function() {
+application.application.include.model.Figure.prototype.getGridColumns = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_activity_id",
-			name : "fk_activity_id",
-			dataIndex : "fk_activity_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_activitydecision_id",
-			name : "fk_activitydecision_id",
-			dataIndex : "fk_activitydecision_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_activityreceive_id",
-			name : "fk_activityreceive_id",
-			dataIndex : "fk_activityreceive_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_activitysend_id",
-			name : "fk_activitysend_id",
-			dataIndex : "fk_activitysend_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_activityinitial_id",
-			name : "fk_activityinitial_id",
-			dataIndex : "fk_activityinitial_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_activityfinal_id",
-			name : "fk_activityfinal_id",
-			dataIndex : "fk_activityfinal_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinessusecasecore_id",
-			name : "fk_chibusinessusecasecore_id",
-			dataIndex : "fk_chibusinessusecasecore_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinessusecase_id",
-			name : "fk_chibusinessusecase_id",
-			dataIndex : "fk_chibusinessusecase_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chiworkerexternal_id",
-			name : "fk_chiworkerexternal_id",
-			dataIndex : "fk_chiworkerexternal_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chiworkerinternal_id",
-			name : "fk_chiworkerinternal_id",
-			dataIndex : "fk_chiworkerinternal_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chiworker_id",
-			name : "fk_chiworker_id",
-			dataIndex : "fk_chiworker_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinesspartneractive_id",
-			name : "fk_chibusinesspartneractive_id",
-			dataIndex : "fk_chibusinesspartneractive_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinesspartnerpassive_id",
-			name : "fk_chibusinesspartnerpassive_id",
-			dataIndex : "fk_chibusinesspartnerpassive_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinesspartner_id",
-			name : "fk_chibusinesspartner_id",
-			dataIndex : "fk_chibusinesspartner_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_actor_id",
-			name : "fk_actor_id",
-			dataIndex : "fk_actor_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinessprocess_id",
-			name : "fk_chibusinessprocess_id",
-			dataIndex : "fk_chibusinessprocess_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chigoal_id",
-			name : "fk_chigoal_id",
-			dataIndex : "fk_chigoal_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chirequirement_id",
-			name : "fk_chirequirement_id",
-			dataIndex : "fk_chirequirement_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chifeature_id",
-			name : "fk_chifeature_id",
-			dataIndex : "fk_chifeature_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chiissue_id",
-			name : "fk_chiissue_id",
-			dataIndex : "fk_chiissue_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chicontroller_id",
-			name : "fk_chicontroller_id",
-			dataIndex : "fk_chicontroller_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chinode_id",
-			name : "fk_chinode_id",
-			dataIndex : "fk_chinode_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chiview_id",
-			name : "fk_chiview_id",
-			dataIndex : "fk_chiview_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_diagram_id",
-			name : "fk_diagram_id",
-			dataIndex : "fk_diagram_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibase_id",
-			name : "fk_chibase_id",
-			dataIndex : "fk_chibase_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_activityset_id",
-			name : "fk_activityset_id",
-			dataIndex : "fk_activityset_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "BackgroundColor",
-			name : "BackgroundColor",
-			dataIndex : "BackgroundColor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ForegroundColor",
-			name : "ForegroundColor",
-			dataIndex : "ForegroundColor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "GID",
-			name : "GID",
-			dataIndex : "GID"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Height",
-			name : "Height",
-			dataIndex : "Height"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "PositionY",
-			name : "PositionY",
-			dataIndex : "PositionY"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "PositionX",
-			name : "PositionX",
-			dataIndex : "PositionX"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Width",
-			name : "Width",
-			dataIndex : "Width"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "created",
-			name : "created",
-			dataIndex : "created"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "creator",
-			name : "creator",
-			dataIndex : "creator"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "last_editor",
-			name : "last_editor",
-			dataIndex : "last_editor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "modified",
-			name : "modified",
-			dataIndex : "modified"
-		})
-	
-	
-	
-		,
-	
-	
+		
+			{
+			    header : "BackgroundColor",
+			    dataIndex : "BackgroundColor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
 	
 		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ForegroundColor",
+			    dataIndex : "ForegroundColor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "GID",
+			    dataIndex : "GID",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Height",
+			    dataIndex : "Height",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "PositionY",
+			    dataIndex : "PositionY",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "PositionX",
+			    dataIndex : "PositionX",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Width",
+			    dataIndex : "Width",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "created",
+			    dataIndex : "created",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "creator",
+			    dataIndex : "creator",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "last_editor",
+			    dataIndex : "last_editor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "modified",
+			    dataIndex : "modified",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		
+	
+	];
+};
+
+
+
+application.application.include.model.Figure.prototype.getEditorItems = function() {
+	return [
+	
+		new cwe.editor.control.PropertiesFieldSet({
+			items: [
+		
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "BackgroundColor",
+		name: "BackgroundColor",
+		dataIndex: "BackgroundColor",
+		
+		
+		toolTip: "the background color in RBG"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ForegroundColor",
+		name: "ForegroundColor",
+		dataIndex: "ForegroundColor",
+		
+		
+		toolTip: "the foreground color in RBG"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "GID",
+		name: "GID",
+		dataIndex: "GID",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Height",
+		name: "Height",
+		dataIndex: "Height",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "PositionY",
+		name: "PositionY",
+		dataIndex: "PositionY",
+		
+		
+		toolTip: "the orizontal position of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "PositionX",
+		name: "PositionX",
+		dataIndex: "PositionX",
+		
+		
+		toolTip: "the vertical position of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Width",
+		name: "Width",
+		dataIndex: "Width",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "created",
+		name: "created",
+		dataIndex: "created",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the creation date of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "creator",
+		name: "creator",
+		dataIndex: "creator",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the user that created this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "last_editor",
+		name: "last_editor",
+		dataIndex: "last_editor",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the last user that edited this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "modified",
+		name: "modified",
+		dataIndex: "modified",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the date when this object was modified"
+	}) 
+
+		
+		]})
+		
+		
+			,
+		
+	
+	
+	
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
+		
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -754,8 +740,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -768,8 +754,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -782,8 +768,22 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
 		
+			fieldLabel : "parentChiClass",
+			name : "parentChiClass",
+			dataIndex : "parentChiClass",
+			targetCweModelElementId : "ChiClass",
+			isParent : true
+		
+	})
+
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -796,22 +796,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiNode",
-			name : "parentChiNode",
-			dataIndex : "parentChiNode",
-			targetCweModelElementId : "ChiNode",
-			isParent : true
-		
-	})
-
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -824,8 +810,22 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
 		
+			fieldLabel : "parentChiNode",
+			name : "parentChiNode",
+			dataIndex : "parentChiNode",
+			targetCweModelElementId : "ChiNode",
+			isParent : true
+		
+	})
+
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -838,8 +838,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -852,8 +852,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -866,8 +866,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -880,120 +880,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiBusinessProcess",
-			name : "parentChiBusinessProcess",
-			dataIndex : "parentChiBusinessProcess",
-			targetCweModelElementId : "ChiBusinessProcess",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentActor",
-			name : "parentActor",
-			dataIndex : "parentActor",
-			targetCweModelElementId : "Actor",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiBusinessPartner",
-			name : "parentChiBusinessPartner",
-			dataIndex : "parentChiBusinessPartner",
-			targetCweModelElementId : "ChiBusinessPartner",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiBusinessPartnerPassive",
-			name : "parentChiBusinessPartnerPassive",
-			dataIndex : "parentChiBusinessPartnerPassive",
-			targetCweModelElementId : "ChiBusinessPartnerPassive",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiBusinessPartnerActive",
-			name : "parentChiBusinessPartnerActive",
-			dataIndex : "parentChiBusinessPartnerActive",
-			targetCweModelElementId : "ChiBusinessPartnerActive",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiWorker",
-			name : "parentChiWorker",
-			dataIndex : "parentChiWorker",
-			targetCweModelElementId : "ChiWorker",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiWorkerInternal",
-			name : "parentChiWorkerInternal",
-			dataIndex : "parentChiWorkerInternal",
-			targetCweModelElementId : "ChiWorkerInternal",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiWorkerExternal",
-			name : "parentChiWorkerExternal",
-			dataIndex : "parentChiWorkerExternal",
-			targetCweModelElementId : "ChiWorkerExternal",
-			isParent : true
-		
-	})
-
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -1006,8 +894,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -1020,8 +908,134 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
 		
+			fieldLabel : "parentChiBusinessProcess",
+			name : "parentChiBusinessProcess",
+			dataIndex : "parentChiBusinessProcess",
+			targetCweModelElementId : "ChiBusinessProcess",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentActor",
+			name : "parentActor",
+			dataIndex : "parentActor",
+			targetCweModelElementId : "Actor",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiBusinessPartner",
+			name : "parentChiBusinessPartner",
+			dataIndex : "parentChiBusinessPartner",
+			targetCweModelElementId : "ChiBusinessPartner",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiBusinessPartnerPassive",
+			name : "parentChiBusinessPartnerPassive",
+			dataIndex : "parentChiBusinessPartnerPassive",
+			targetCweModelElementId : "ChiBusinessPartnerPassive",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiBusinessPartnerActive",
+			name : "parentChiBusinessPartnerActive",
+			dataIndex : "parentChiBusinessPartnerActive",
+			targetCweModelElementId : "ChiBusinessPartnerActive",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiWorker",
+			name : "parentChiWorker",
+			dataIndex : "parentChiWorker",
+			targetCweModelElementId : "ChiWorker",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiWorkerInternal",
+			name : "parentChiWorkerInternal",
+			dataIndex : "parentChiWorkerInternal",
+			targetCweModelElementId : "ChiWorkerInternal",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiWorkerExternal",
+			name : "parentChiWorkerExternal",
+			dataIndex : "parentChiWorkerExternal",
+			targetCweModelElementId : "ChiWorkerExternal",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiSystem",
+			name : "parentChiSystem",
+			dataIndex : "parentChiSystem",
+			targetCweModelElementId : "ChiSystem",
+			isParent : true
+		
+	})
+
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -1034,8 +1048,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -1048,8 +1062,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -1062,8 +1076,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -1076,8 +1090,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -1090,8 +1104,8 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -1104,16 +1118,31 @@ application.application.include.model.activity.Figure.prototype.getEditorItems =
 		
 	})
 
+		, 
+			
 	
+		new cwe.editor.control.SingleAssociate( {
 	
-	
-		,
-	
-	
+		
+			fieldLabel : "parentChiObject",
+			name : "parentChiObject",
+			dataIndex : "parentChiObject",
+			targetCweModelElementId : "ChiObject",
+			isParent : true
+		
+	})
+
+		
+		
+		
+		
+		
+		
+		]})
 	
  ];
-}
+};
 
 
-cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.activity.Figure());
+cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.Figure());
 	

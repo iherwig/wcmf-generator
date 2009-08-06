@@ -24,26 +24,6 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore = function
 	this.recordDefinition = [
 	
 		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
-			name : "Composition",
-			mapping : "Composition"
-		}
-	, 
-		{
-			name : "Realization",
-			mapping : "Realization"
-		}
-	, 
-		{
-			name : "fk_package_id",
-			mapping : "fk_package_id"
-		}
-	, 
-		{
 			name : "PrimaryActor",
 			mapping : "PrimaryActor"
 		}
@@ -96,6 +76,16 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore = function
 		{
 			name : "Alias",
 			mapping : "Alias"
+		}
+	, 
+		{
+			name : "Status",
+			mapping : "Status"
+		}
+	, 
+		{
+			name : "Author",
+			mapping : "Author"
 		}
 	, 
 		{
@@ -161,6 +151,16 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore = function
 	
 	
 		{
+			name : "childFigure",
+			mapping : "childFigure"
+		}
+	, 
+		{
+			name : "childChiController",
+			mapping : "childChiController"
+		}
+	, 
+		{
 			name : "childActivitySet",
 			mapping : "childActivitySet"
 		}
@@ -168,11 +168,6 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore = function
 		{
 			name : "childNMUCActor",
 			mapping : "childNMUCActor"
-		}
-	, 
-		{
-			name : "childFigure",
-			mapping : "childFigure"
 		}
 	
 	];
@@ -202,6 +197,16 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore = function
 	
 	
 	
+		"childFigure" : {
+			isParent : false,
+			targetModelClassId : "Figure"
+		}
+	, 
+		"childChiController" : {
+			isParent : false,
+			targetModelClassId : "ChiController"
+		}
+	, 
 		"childActivitySet" : {
 			isParent : false,
 			targetModelClassId : "ActivitySet"
@@ -211,161 +216,588 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore = function
 			isParent : false,
 			targetModelClassId : "NMUCActor"
 		}
-	, 
-		"childFigure" : {
-			isParent : false,
-			targetModelClassId : "Figure"
-		}
 	
-	}
+	};
 
-}
+};
 
 Ext.extend(application.application.include.model.UseCases.ChiBusinessUseCaseCore, cwe.model.ModelClass);
+
+
+application.application.include.model.UseCases.ChiBusinessUseCaseCore.prototype.getGridColumns = function() {
+	return [
+	
+		
+			{
+			    header : "PrimaryActor",
+			    dataIndex : "PrimaryActor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "OtherActors",
+			    dataIndex : "OtherActors",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "GoalInContext",
+			    dataIndex : "GoalInContext",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Scope",
+			    dataIndex : "Scope",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Level",
+			    dataIndex : "Level",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Stakeholders",
+			    dataIndex : "Stakeholders",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Precondition",
+			    dataIndex : "Precondition",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Trigger",
+			    dataIndex : "Trigger",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "MainSuccessScenario",
+			    dataIndex : "MainSuccessScenario",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Extensions",
+			    dataIndex : "Extensions",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Alias",
+			    dataIndex : "Alias",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Status",
+			    dataIndex : "Status",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiBaseStatus"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Author",
+			    dataIndex : "Author",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiAuthors"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Version",
+			    dataIndex : "Version",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Name",
+			    dataIndex : "Name",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Notes",
+			    dataIndex : "Notes",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "created",
+			    dataIndex : "created",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "creator",
+			    dataIndex : "creator",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "last_editor",
+			    dataIndex : "last_editor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "modified",
+			    dataIndex : "modified",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		
+	
+	];
+};
+
 
 
 application.application.include.model.UseCases.ChiBusinessUseCaseCore.prototype.getEditorItems = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Composition",
-			name : "Composition",
-			dataIndex : "Composition"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Realization",
-			name : "Realization",
-			dataIndex : "Realization"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_package_id",
-			name : "fk_package_id",
-			dataIndex : "fk_package_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "PrimaryActor",
-			name : "PrimaryActor",
-			dataIndex : "PrimaryActor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "OtherActors",
-			name : "OtherActors",
-			dataIndex : "OtherActors"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "GoalInContext",
-			name : "GoalInContext",
-			dataIndex : "GoalInContext"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Scope",
-			name : "Scope",
-			dataIndex : "Scope"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Level",
-			name : "Level",
-			dataIndex : "Level"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Stakeholders",
-			name : "Stakeholders",
-			dataIndex : "Stakeholders"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Precondition",
-			name : "Precondition",
-			dataIndex : "Precondition"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Trigger",
-			name : "Trigger",
-			dataIndex : "Trigger"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "MainSuccessScenario",
-			name : "MainSuccessScenario",
-			dataIndex : "MainSuccessScenario"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Extensions",
-			name : "Extensions",
-			dataIndex : "Extensions"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Alias",
-			name : "Alias",
-			dataIndex : "Alias"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Version",
-			name : "Version",
-			dataIndex : "Version"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Name",
-			name : "Name",
-			dataIndex : "Name"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Notes",
-			name : "Notes",
-			dataIndex : "Notes"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "created",
-			name : "created",
-			dataIndex : "created"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "creator",
-			name : "creator",
-			dataIndex : "creator"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "last_editor",
-			name : "last_editor",
-			dataIndex : "last_editor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "modified",
-			name : "modified",
-			dataIndex : "modified"
-		})
-	
-	
-	
-		,
-	
-	
-	
+		new cwe.editor.control.PropertiesFieldSet({
+			items: [
 		
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "PrimaryActor",
+		name: "PrimaryActor",
+		dataIndex: "PrimaryActor",
+		targetCweModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive",
+		
+		toolTip: "the main actor of this use case"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "OtherActors",
+		name: "OtherActors",
+		dataIndex: "OtherActors",
+		targetCweModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive",
+		
+		toolTip: "The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "GoalInContext",
+		name: "GoalInContext",
+		dataIndex: "GoalInContext",
+		
+		
+		toolTip: "The goal should implicitly express the actor's intent or purpose of the use case, such as *Enrol Student in Seminar.*"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Scope",
+		name: "Scope",
+		dataIndex: "Scope",
+		
+		
+		toolTip: "Boundaries in which the use case is operated when invoked (E.g. CMS)"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Level",
+		name: "Level",
+		dataIndex: "Level",
+		
+		
+		toolTip: "Authorizations for operations/actions to be performed against the Chi business objects in scope. Against every object/process 4 CRUD basic operations are possible:\nCreate (Write)\nRead (Open)\nUpdate (Change)\nDelete  (Destroy)"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Stakeholders",
+		name: "Stakeholders",
+		dataIndex: "Stakeholders",
+		
+		
+		toolTip: "List of actors that have a special interest (i.e. to be informed every time) in completion of the use case"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Precondition",
+		name: "Precondition",
+		dataIndex: "Precondition",
+		
+		
+		toolTip: "A list of the conditions, if any, that must be met before a use case may be invoked. Can be a previous Use case or self the presence of the system in Scope."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Trigger",
+		name: "Trigger",
+		dataIndex: "Trigger",
+		
+		
+		toolTip: "Event that is responsible for invocation of the use case."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "MainSuccessScenario",
+		name: "MainSuccessScenario",
+		dataIndex: "MainSuccessScenario",
+		
+		
+		toolTip: "The main path of logic an actor follows through a use case. Often referred to as the *happy path* or the *main path* because it describes how the use case works when everything works as it normally should."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Extensions",
+		name: "Extensions",
+		dataIndex: "Extensions",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Alias",
+		name: "Alias",
+		dataIndex: "Alias",
+		
+		
+		toolTip: "the Project Id of this object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "Status",
+		name: "Status",
+		dataIndex: "Status",
+		targetCweModelElementId: "ChiBaseStatus",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "Author",
+		name: "Author",
+		dataIndex: "Author",
+		targetCweModelElementId: "ChiAuthors",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Version",
+		name: "Version",
+		dataIndex: "Version",
+		
+		
+		toolTip: "the model version of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Name",
+		name: "Name",
+		dataIndex: "Name",
+		
+		
+		toolTip: "the name of this object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.HtmlEditor({
+		fieldLabel: "Notes",
+		name: "Notes",
+		dataIndex: "Notes",
+		
+		
+		toolTip: "the actual description of the object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "created",
+		name: "created",
+		dataIndex: "created",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the creation date of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "creator",
+		name: "creator",
+		dataIndex: "creator",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the user that created this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "last_editor",
+		name: "last_editor",
+		dataIndex: "last_editor",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the last user that edited this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "modified",
+		name: "modified",
+		dataIndex: "modified",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the date when this object was modified"
+	}) 
+
+		
+		]})
+		
+		
+			,
+		
+	
+	
+	
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
+		
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -378,8 +810,8 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore.prototype.
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -392,8 +824,8 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore.prototype.
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -406,42 +838,14 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore.prototype.
 		
 	})
 
-	
-	
-	
-		,
-	
-	
-	
 		
-	
-		new cwe.editor.control.MultipleAssociate( {
-	
 		
-			fieldLabel : "childActivitySet",
-			name : "childActivitySet",
-			dataIndex : "childActivitySet",
-			targetCweModelElementId : "ActivitySet",
-			isParent : false
 		
-	})
-
-	, 
+			,
 		
-	
-		new cwe.editor.control.MultipleAssociate( {
-	
 		
-			fieldLabel : "childNMUCActor",
-			name : "childNMUCActor",
-			dataIndex : "childNMUCActor",
-			targetCweModelElementId : "NMUCActor",
-			isParent : false
 		
-	})
-
-	, 
-		
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -454,9 +858,54 @@ application.application.include.model.UseCases.ChiBusinessUseCaseCore.prototype.
 		
 	})
 
+		, 
+			
+	
+		new cwe.editor.control.MultipleAssociate( {
+	
+		
+			fieldLabel : "childChiController",
+			name : "childChiController",
+			dataIndex : "childChiController",
+			targetCweModelElementId : "ChiController",
+			isParent : false
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.MultipleAssociate( {
+	
+		
+			fieldLabel : "childActivitySet",
+			name : "childActivitySet",
+			dataIndex : "childActivitySet",
+			targetCweModelElementId : "ActivitySet",
+			isParent : false
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.MultipleAssociate( {
+	
+		
+			fieldLabel : "childNMUCActor",
+			name : "childNMUCActor",
+			dataIndex : "childNMUCActor",
+			targetCweModelElementId : "NMUCActor",
+			isParent : false
+		
+	})
+
+		
+		
+		]})
 	
  ];
-}
+};
 
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.UseCases.ChiBusinessUseCaseCore());

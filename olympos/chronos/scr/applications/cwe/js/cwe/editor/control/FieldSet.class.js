@@ -12,23 +12,23 @@
 Ext.namespace("cwe.editor.control");
 
 /**
- * @class A list of all objects of one type in a selected scope.
+ * @class A FieldSet customized for this application.
  * 
- * @extends Ext.grid.GridPanel
+ * @extends Ext.form.FieldSet
  * @constructor
  * @param {Object}
  *            config The configuration object.
  */
 cwe.editor.control.FieldSet = function(config) {
-}
+};
 
 cwe.editor.control.FieldSet = Ext.extend(Ext.form.FieldSet, {
 	initComponent : function() {
 		var self = this;
 		
 		Ext.apply(this, {
-			autoHeight: true,
-			width: 830
+		    autoHeight : true,
+		    width : 830
 		});
 		
 		cwe.editor.control.FieldSet.superclass.initComponent.apply(this, arguments);

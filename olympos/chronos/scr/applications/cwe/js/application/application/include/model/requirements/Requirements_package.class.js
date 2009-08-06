@@ -19,7 +19,7 @@ application.application.include.model.requirements.Requirements_package = functi
 	this.name = "requirements";
 	this.owningPackageId = "application.application.include.model.Model_package";
 	this.startExpanded = true;
-}
+};
 
 Ext.extend(application.application.include.model.requirements.Requirements_package, cwe.model.ModelPackage);
 

@@ -23,19 +23,7 @@ application.application.include.model.activity.NMActivityActivityDecision = func
 	
 	this.recordDefinition = [
 	
-		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
-			name : "Association",
-			mapping : "Association"
-		}
 	
-	
-	
-		,
 	
 	
 	
@@ -50,8 +38,6 @@ application.application.include.model.activity.NMActivityActivityDecision = func
 		}
 	
 	
-	
-		,
 	
 	
 	
@@ -73,39 +59,32 @@ application.application.include.model.activity.NMActivityActivityDecision = func
 	
 
 	
-		,
 	
 	
-	
-	}
+	};
 
-}
+};
 
 Ext.extend(application.application.include.model.activity.NMActivityActivityDecision, cwe.model.ModelClass);
+
+
+application.application.include.model.activity.NMActivityActivityDecision.prototype.getGridColumns = function() {
+	return [
+	
+	];
+};
+
 
 
 application.application.include.model.activity.NMActivityActivityDecision.prototype.getEditorItems = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Association",
-			name : "Association",
-			dataIndex : "Association"
-		})
 	
 	
-	
-		,
-	
-	
-	
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
 		
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -118,8 +97,8 @@ application.application.include.model.activity.NMActivityActivityDecision.protot
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -132,15 +111,16 @@ application.application.include.model.activity.NMActivityActivityDecision.protot
 		
 	})
 
-	
-	
-	
-		,
-	
-	
+		
+		
+		
+		
+		
+		
+		]})
 	
  ];
-}
+};
 
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.activity.NMActivityActivityDecision());

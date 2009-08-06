@@ -19,7 +19,7 @@ application.application.include.Include_package = function() {
 	this.name = "include";
 	this.owningPackageId = cwe.model.RootPackage.ROOT_PACKAGE_ID;
 	this.startExpanded = true;
-}
+};
 
 Ext.extend(application.application.include.Include_package, cwe.model.ModelPackage);
 

@@ -12,25 +12,25 @@
 Ext.namespace("cwe.editor.control");
 
 /**
- * @class A list of all objects of one type in a selected scope.
+ * @class A field set containing all simple property fields.
  * 
- * @extends Ext.grid.GridPanel
+ * @extends cwe.editor.control.FieldSet
  * @constructor
  * @param {Object}
  *            config The configuration object.
  */
 cwe.editor.control.PropertiesFieldSet = function(config) {
-}
+};
 
 cwe.editor.control.PropertiesFieldSet = Ext.extend(cwe.editor.control.FieldSet, {
 	initComponent : function() {
 		var self = this;
 		
 		Ext.apply(this, {
-			title: chi.Dict.translate("Properties"),
-			defaults: {
-				width: 600
-			}
+		    title : chi.Dict.translate("Properties"),
+		    defaults : {
+			    width : 600
+		    }
 		});
 		
 		cwe.editor.control.PropertiesFieldSet.superclass.initComponent.apply(this, arguments);

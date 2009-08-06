@@ -54,6 +54,16 @@ application.application.include.model.requirements.ChiGoal = function() {
 		}
 	, 
 		{
+			name : "Status",
+			mapping : "Status"
+		}
+	, 
+		{
+			name : "Author",
+			mapping : "Author"
+		}
+	, 
+		{
 			name : "Version",
 			mapping : "Version"
 		}
@@ -162,119 +172,452 @@ application.application.include.model.requirements.ChiGoal = function() {
 			targetModelClassId : "Figure"
 		}
 	
-	}
+	};
 
-}
+};
 
 Ext.extend(application.application.include.model.requirements.ChiGoal, cwe.model.ModelClass);
+
+
+application.application.include.model.requirements.ChiGoal.prototype.getGridColumns = function() {
+	return [
+	
+		
+			{
+			    header : "Priority",
+			    dataIndex : "Priority",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Value_ammount",
+			    dataIndex : "Value_ammount",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Value_Goal",
+			    dataIndex : "Value_Goal",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Value_Name",
+			    dataIndex : "Value_Name",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "GoalType",
+			    dataIndex : "GoalType",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiGoalType"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Alias",
+			    dataIndex : "Alias",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Status",
+			    dataIndex : "Status",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiBaseStatus"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Author",
+			    dataIndex : "Author",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiAuthors"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Version",
+			    dataIndex : "Version",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Name",
+			    dataIndex : "Name",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Notes",
+			    dataIndex : "Notes",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "created",
+			    dataIndex : "created",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "creator",
+			    dataIndex : "creator",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "last_editor",
+			    dataIndex : "last_editor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "modified",
+			    dataIndex : "modified",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		
+	
+	];
+};
+
 
 
 application.application.include.model.requirements.ChiGoal.prototype.getEditorItems = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_package_id",
-			name : "fk_package_id",
-			dataIndex : "fk_package_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Composition",
-			name : "Composition",
-			dataIndex : "Composition"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Priority",
-			name : "Priority",
-			dataIndex : "Priority"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Value_ammount",
-			name : "Value_ammount",
-			dataIndex : "Value_ammount"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Value_Goal",
-			name : "Value_Goal",
-			dataIndex : "Value_Goal"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Value_Name",
-			name : "Value_Name",
-			dataIndex : "Value_Name"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "GoalType",
-			name : "GoalType",
-			dataIndex : "GoalType"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Alias",
-			name : "Alias",
-			dataIndex : "Alias"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Version",
-			name : "Version",
-			dataIndex : "Version"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Name",
-			name : "Name",
-			dataIndex : "Name"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Notes",
-			name : "Notes",
-			dataIndex : "Notes"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "created",
-			name : "created",
-			dataIndex : "created"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "creator",
-			name : "creator",
-			dataIndex : "creator"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "last_editor",
-			name : "last_editor",
-			dataIndex : "last_editor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "modified",
-			name : "modified",
-			dataIndex : "modified"
-		})
-	
-	
-	
-		,
-	
-	
-	
+		new cwe.editor.control.PropertiesFieldSet({
+			items: [
 		
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Priority",
+		name: "Priority",
+		dataIndex: "Priority",
+		
+		
+		toolTip: "A priority in %"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Value_ammount",
+		name: "Value_ammount",
+		dataIndex: "Value_ammount",
+		
+		
+		toolTip: "The actual amount of the value this goal intends to alter."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Value_Goal",
+		name: "Value_Goal",
+		dataIndex: "Value_Goal",
+		
+		
+		toolTip: "The amount by which the value is to be altered."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Value_Name",
+		name: "Value_Name",
+		dataIndex: "Value_Name",
+		
+		
+		toolTip: "The name of the value this goal intends to alter."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "GoalType",
+		name: "GoalType",
+		dataIndex: "GoalType",
+		targetCweModelElementId: "ChiGoalType",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Alias",
+		name: "Alias",
+		dataIndex: "Alias",
+		
+		
+		toolTip: "the Project Id of this object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "Status",
+		name: "Status",
+		dataIndex: "Status",
+		targetCweModelElementId: "ChiBaseStatus",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "Author",
+		name: "Author",
+		dataIndex: "Author",
+		targetCweModelElementId: "ChiAuthors",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Version",
+		name: "Version",
+		dataIndex: "Version",
+		
+		
+		toolTip: "the model version of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Name",
+		name: "Name",
+		dataIndex: "Name",
+		
+		
+		toolTip: "the name of this object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.HtmlEditor({
+		fieldLabel: "Notes",
+		name: "Notes",
+		dataIndex: "Notes",
+		
+		
+		toolTip: "the actual description of the object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "created",
+		name: "created",
+		dataIndex: "created",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the creation date of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "creator",
+		name: "creator",
+		dataIndex: "creator",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the user that created this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "last_editor",
+		name: "last_editor",
+		dataIndex: "last_editor",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the last user that edited this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "modified",
+		name: "modified",
+		dataIndex: "modified",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the date when this object was modified"
+	}) 
+
+		
+		]})
+		
+		
+			,
+		
+	
+	
+	
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
+		
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -287,8 +630,8 @@ application.application.include.model.requirements.ChiGoal.prototype.getEditorIt
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -301,14 +644,14 @@ application.application.include.model.requirements.ChiGoal.prototype.getEditorIt
 		
 	})
 
-	
-	
-	
-		,
-	
-	
-	
 		
+		
+		
+			,
+		
+		
+		
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -321,8 +664,8 @@ application.application.include.model.requirements.ChiGoal.prototype.getEditorIt
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -335,8 +678,8 @@ application.application.include.model.requirements.ChiGoal.prototype.getEditorIt
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -349,9 +692,12 @@ application.application.include.model.requirements.ChiGoal.prototype.getEditorIt
 		
 	})
 
+		
+		
+		]})
 	
  ];
-}
+};
 
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.requirements.ChiGoal());

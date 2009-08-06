@@ -1,13 +1,13 @@
 /*
  * Copyright (c) 2009 The Olympos Development Team.
- *
+ * 
  * http://sourceforge.net/projects/olympos/
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
- * this entire header must remain intact.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
 Ext.namespace("cwe");
 
@@ -21,7 +21,7 @@ cwe.Cwe = function() {
 	cwe.Cwe.superclass.constructor.call(this);
 	
 	this.isInstallErrorHandler = false;
-}
+};
 
 Ext.extend(cwe.Cwe, chi.Main);
 
@@ -36,7 +36,7 @@ Ext.extend(cwe.Cwe, chi.Main);
  */
 cwe.Cwe.prototype.getConfig = function() {
 	return cwe.Config;
-}
+};
 
 /**
  * Starts the workbench.
@@ -48,7 +48,23 @@ cwe.Cwe.prototype.getConfig = function() {
  */
 cwe.Cwe.prototype.startWorkbench = function() {
 	this.viewport = new cwe.ui.Workbench();
-}
+};
+
+cwe.Cwe.prototype.installOverrides = function() {
+	cwe.Cwe.superclass.installOverrides.call(this);
+	
+	Ext.override(Ext.ux.grid.RowEditor, {
+		onKey : function(f, e) {
+			if (e.getKey() === e.ENTER) {
+				this.stopEditing(true);
+				e.stopPropagation();
+			} else if (e.getKey() === e.ESC) {
+				this.stopEditing(false);
+				e.stopPropagation();
+			}
+		}
+	});
+};
 
 /**
  * Returns the instance of the application class.
@@ -61,4 +77,4 @@ cwe.Cwe.getInstance = function() {
 	}
 	
 	return cwe.Cwe.instance;
-}
+};

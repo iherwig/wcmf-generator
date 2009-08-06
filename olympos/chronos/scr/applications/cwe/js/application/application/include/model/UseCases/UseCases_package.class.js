@@ -19,7 +19,7 @@ application.application.include.model.UseCases.UseCases_package = function() {
 	this.name = "UseCases";
 	this.owningPackageId = "application.application.include.model.Model_package";
 	this.startExpanded = true;
-}
+};
 
 Ext.extend(application.application.include.model.UseCases.UseCases_package, cwe.model.ModelPackage);
 

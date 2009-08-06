@@ -23,65 +23,23 @@ application.application.include.model.UseCases.NMUCActor = function() {
 	
 	this.recordDefinition = [
 	
-		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
-			name : "fk_chibusinessusecasecore_id",
-			mapping : "fk_chibusinessusecasecore_id"
-		}
-	, 
-		{
-			name : "fk_chiworkerexternal_id",
-			mapping : "fk_chiworkerexternal_id"
-		}
-	, 
-		{
-			name : "fk_chiworkerinternal_id",
-			mapping : "fk_chiworkerinternal_id"
-		}
-	, 
-		{
-			name : "fk_chiworker_id",
-			mapping : "fk_chiworker_id"
-		}
-	, 
-		{
-			name : "fk_chibusinesspartneractive_id",
-			mapping : "fk_chibusinesspartneractive_id"
-		}
-	, 
-		{
-			name : "fk_chibusinesspartnerpassive_id",
-			mapping : "fk_chibusinesspartnerpassive_id"
-		}
-	, 
-		{
-			name : "fk_chibusinesspartner_id",
-			mapping : "fk_chibusinesspartner_id"
-		}
-	, 
-		{
-			name : "Association",
-			mapping : "Association"
-		}
 	
 	
 	
-		,
 	
-	
-	
+		{
+			name : "parentActor",
+			mapping: "parentActor"
+		}
+	, 
 		{
 			name : "parentChiBusinessUseCase",
 			mapping: "parentChiBusinessUseCase"
 		}
 	, 
 		{
-			name : "parentActor",
-			mapping: "parentActor"
+			name : "parentChiBusinessUseCaseCore",
+			mapping: "parentChiBusinessUseCaseCore"
 		}
 	, 
 		{
@@ -113,15 +71,8 @@ application.application.include.model.UseCases.NMUCActor = function() {
 			name : "parentChiWorkerExternal",
 			mapping: "parentChiWorkerExternal"
 		}
-	, 
-		{
-			name : "parentChiBusinessUseCaseCore",
-			mapping: "parentChiBusinessUseCaseCore"
-		}
 	
 	
-	
-		,
 	
 	
 	
@@ -131,14 +82,19 @@ application.application.include.model.UseCases.NMUCActor = function() {
 	
 	this.relations = {
 	
+		"parentActor" : {
+			isParent : true,
+			targetModelClassId : "Actor"
+		}
+	, 
 		"parentChiBusinessUseCase" : {
 			isParent : true,
 			targetModelClassId : "ChiBusinessUseCase"
 		}
 	, 
-		"parentActor" : {
+		"parentChiBusinessUseCaseCore" : {
 			isParent : true,
-			targetModelClassId : "Actor"
+			targetModelClassId : "ChiBusinessUseCaseCore"
 		}
 	, 
 		"parentChiBusinessPartner" : {
@@ -170,103 +126,35 @@ application.application.include.model.UseCases.NMUCActor = function() {
 			isParent : true,
 			targetModelClassId : "ChiWorkerExternal"
 		}
-	, 
-		"parentChiBusinessUseCaseCore" : {
-			isParent : true,
-			targetModelClassId : "ChiBusinessUseCaseCore"
-		}
 	
 
 	
-		,
 	
 	
-	
-	}
+	};
 
-}
+};
 
 Ext.extend(application.application.include.model.UseCases.NMUCActor, cwe.model.ModelClass);
+
+
+application.application.include.model.UseCases.NMUCActor.prototype.getGridColumns = function() {
+	return [
+	
+	];
+};
+
 
 
 application.application.include.model.UseCases.NMUCActor.prototype.getEditorItems = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinessusecasecore_id",
-			name : "fk_chibusinessusecasecore_id",
-			dataIndex : "fk_chibusinessusecasecore_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chiworkerexternal_id",
-			name : "fk_chiworkerexternal_id",
-			dataIndex : "fk_chiworkerexternal_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chiworkerinternal_id",
-			name : "fk_chiworkerinternal_id",
-			dataIndex : "fk_chiworkerinternal_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chiworker_id",
-			name : "fk_chiworker_id",
-			dataIndex : "fk_chiworker_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinesspartneractive_id",
-			name : "fk_chibusinesspartneractive_id",
-			dataIndex : "fk_chibusinesspartneractive_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinesspartnerpassive_id",
-			name : "fk_chibusinesspartnerpassive_id",
-			dataIndex : "fk_chibusinesspartnerpassive_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_chibusinesspartner_id",
-			name : "fk_chibusinesspartner_id",
-			dataIndex : "fk_chibusinesspartner_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Association",
-			name : "Association",
-			dataIndex : "Association"
-		})
 	
 	
-	
-		,
-	
-	
-	
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
 		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiBusinessUseCase",
-			name : "parentChiBusinessUseCase",
-			dataIndex : "parentChiBusinessUseCase",
-			targetCweModelElementId : "ChiBusinessUseCase",
-			isParent : true
-		
-	})
-
-	, 
-		
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -279,92 +167,22 @@ application.application.include.model.UseCases.NMUCActor.prototype.getEditorItem
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
 		
-			fieldLabel : "parentChiBusinessPartner",
-			name : "parentChiBusinessPartner",
-			dataIndex : "parentChiBusinessPartner",
-			targetCweModelElementId : "ChiBusinessPartner",
+			fieldLabel : "parentChiBusinessUseCase",
+			name : "parentChiBusinessUseCase",
+			dataIndex : "parentChiBusinessUseCase",
+			targetCweModelElementId : "ChiBusinessUseCase",
 			isParent : true
 		
 	})
 
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiBusinessPartnerPassive",
-			name : "parentChiBusinessPartnerPassive",
-			dataIndex : "parentChiBusinessPartnerPassive",
-			targetCweModelElementId : "ChiBusinessPartnerPassive",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiBusinessPartnerActive",
-			name : "parentChiBusinessPartnerActive",
-			dataIndex : "parentChiBusinessPartnerActive",
-			targetCweModelElementId : "ChiBusinessPartnerActive",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiWorker",
-			name : "parentChiWorker",
-			dataIndex : "parentChiWorker",
-			targetCweModelElementId : "ChiWorker",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiWorkerInternal",
-			name : "parentChiWorkerInternal",
-			dataIndex : "parentChiWorkerInternal",
-			targetCweModelElementId : "ChiWorkerInternal",
-			isParent : true
-		
-	})
-
-	, 
-		
-	
-		new cwe.editor.control.SingleAssociate( {
-	
-		
-			fieldLabel : "parentChiWorkerExternal",
-			name : "parentChiWorkerExternal",
-			dataIndex : "parentChiWorkerExternal",
-			targetCweModelElementId : "ChiWorkerExternal",
-			isParent : true
-		
-	})
-
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -377,15 +195,100 @@ application.application.include.model.UseCases.NMUCActor.prototype.getEditorItem
 		
 	})
 
+		, 
+			
 	
+		new cwe.editor.control.SingleAssociate( {
 	
+		
+			fieldLabel : "parentChiBusinessPartner",
+			name : "parentChiBusinessPartner",
+			dataIndex : "parentChiBusinessPartner",
+			targetCweModelElementId : "ChiBusinessPartner",
+			isParent : true
+		
+	})
+
+		, 
+			
 	
-		,
+		new cwe.editor.control.SingleAssociate( {
 	
+		
+			fieldLabel : "parentChiBusinessPartnerPassive",
+			name : "parentChiBusinessPartnerPassive",
+			dataIndex : "parentChiBusinessPartnerPassive",
+			targetCweModelElementId : "ChiBusinessPartnerPassive",
+			isParent : true
+		
+	})
+
+		, 
+			
 	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiBusinessPartnerActive",
+			name : "parentChiBusinessPartnerActive",
+			dataIndex : "parentChiBusinessPartnerActive",
+			targetCweModelElementId : "ChiBusinessPartnerActive",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiWorker",
+			name : "parentChiWorker",
+			dataIndex : "parentChiWorker",
+			targetCweModelElementId : "ChiWorker",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiWorkerInternal",
+			name : "parentChiWorkerInternal",
+			dataIndex : "parentChiWorkerInternal",
+			targetCweModelElementId : "ChiWorkerInternal",
+			isParent : true
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "parentChiWorkerExternal",
+			name : "parentChiWorkerExternal",
+			dataIndex : "parentChiWorkerExternal",
+			targetCweModelElementId : "ChiWorkerExternal",
+			isParent : true
+		
+	})
+
+		
+		
+		
+		
+		
+		
+		]})
 	
  ];
-}
+};
 
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.UseCases.NMUCActor());

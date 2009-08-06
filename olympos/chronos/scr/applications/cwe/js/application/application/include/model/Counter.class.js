@@ -24,11 +24,6 @@ application.application.include.model.Counter = function() {
 	this.recordDefinition = [
 	
 		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
 			name : "ChiGoal",
 			mapping : "ChiGoal"
 		}
@@ -149,6 +144,11 @@ application.application.include.model.Counter = function() {
 		}
 	, 
 		{
+			name : "ChiSystem",
+			mapping : "ChiSystem"
+		}
+	, 
+		{
 			name : "created",
 			mapping : "created"
 		}
@@ -170,8 +170,6 @@ application.application.include.model.Counter = function() {
 	
 	
 	
-		,
-	
 	
 	
 	
@@ -188,202 +186,828 @@ application.application.include.model.Counter = function() {
 	
 	
 	
-	}
+	};
 
-}
+};
 
 Ext.extend(application.application.include.model.Counter, cwe.model.ModelClass);
+
+
+application.application.include.model.Counter.prototype.getGridColumns = function() {
+	return [
+	
+		
+			{
+			    header : "ChiGoal",
+			    dataIndex : "ChiGoal",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiRequirement",
+			    dataIndex : "ChiRequirement",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiFeature",
+			    dataIndex : "ChiFeature",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiIssue",
+			    dataIndex : "ChiIssue",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiBusinessUseCase",
+			    dataIndex : "ChiBusinessUseCase",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiBusinessProcess",
+			    dataIndex : "ChiBusinessProcess",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiBusinessUseCaseCore",
+			    dataIndex : "ChiBusinessUseCaseCore",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiBusinessPartnerActive",
+			    dataIndex : "ChiBusinessPartnerActive",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiBusinessPartnerPassive",
+			    dataIndex : "ChiBusinessPartnerPassive",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiWorkerExternal",
+			    dataIndex : "ChiWorkerExternal",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiWorkerInternal",
+			    dataIndex : "ChiWorkerInternal",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiWorker",
+			    dataIndex : "ChiWorker",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiBusinessPartner",
+			    dataIndex : "ChiBusinessPartner",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiController",
+			    dataIndex : "ChiController",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiNode",
+			    dataIndex : "ChiNode",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiValue",
+			    dataIndex : "ChiValue",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiView",
+			    dataIndex : "ChiView",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Operation",
+			    dataIndex : "Operation",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Activity",
+			    dataIndex : "Activity",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ActivityDecision",
+			    dataIndex : "ActivityDecision",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ActivityReceive",
+			    dataIndex : "ActivityReceive",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ActivitySend",
+			    dataIndex : "ActivitySend",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ActivityInitial",
+			    dataIndex : "ActivityInitial",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ActivityFinal",
+			    dataIndex : "ActivityFinal",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "ChiSystem",
+			    dataIndex : "ChiSystem",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "created",
+			    dataIndex : "created",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "creator",
+			    dataIndex : "creator",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "last_editor",
+			    dataIndex : "last_editor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "modified",
+			    dataIndex : "modified",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		
+	
+	];
+};
+
 
 
 application.application.include.model.Counter.prototype.getEditorItems = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiGoal",
-			name : "ChiGoal",
-			dataIndex : "ChiGoal"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiRequirement",
-			name : "ChiRequirement",
-			dataIndex : "ChiRequirement"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiFeature",
-			name : "ChiFeature",
-			dataIndex : "ChiFeature"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiIssue",
-			name : "ChiIssue",
-			dataIndex : "ChiIssue"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiBusinessUseCase",
-			name : "ChiBusinessUseCase",
-			dataIndex : "ChiBusinessUseCase"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiBusinessProcess",
-			name : "ChiBusinessProcess",
-			dataIndex : "ChiBusinessProcess"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiBusinessUseCaseCore",
-			name : "ChiBusinessUseCaseCore",
-			dataIndex : "ChiBusinessUseCaseCore"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiBusinessPartnerActive",
-			name : "ChiBusinessPartnerActive",
-			dataIndex : "ChiBusinessPartnerActive"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiBusinessPartnerPassive",
-			name : "ChiBusinessPartnerPassive",
-			dataIndex : "ChiBusinessPartnerPassive"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiWorkerExternal",
-			name : "ChiWorkerExternal",
-			dataIndex : "ChiWorkerExternal"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiWorkerInternal",
-			name : "ChiWorkerInternal",
-			dataIndex : "ChiWorkerInternal"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiWorker",
-			name : "ChiWorker",
-			dataIndex : "ChiWorker"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiBusinessPartner",
-			name : "ChiBusinessPartner",
-			dataIndex : "ChiBusinessPartner"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiController",
-			name : "ChiController",
-			dataIndex : "ChiController"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiNode",
-			name : "ChiNode",
-			dataIndex : "ChiNode"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiValue",
-			name : "ChiValue",
-			dataIndex : "ChiValue"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ChiView",
-			name : "ChiView",
-			dataIndex : "ChiView"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Operation",
-			name : "Operation",
-			dataIndex : "Operation"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Activity",
-			name : "Activity",
-			dataIndex : "Activity"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ActivityDecision",
-			name : "ActivityDecision",
-			dataIndex : "ActivityDecision"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ActivityReceive",
-			name : "ActivityReceive",
-			dataIndex : "ActivityReceive"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ActivitySend",
-			name : "ActivitySend",
-			dataIndex : "ActivitySend"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ActivityInitial",
-			name : "ActivityInitial",
-			dataIndex : "ActivityInitial"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "ActivityFinal",
-			name : "ActivityFinal",
-			dataIndex : "ActivityFinal"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "created",
-			name : "created",
-			dataIndex : "created"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "creator",
-			name : "creator",
-			dataIndex : "creator"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "last_editor",
-			name : "last_editor",
-			dataIndex : "last_editor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "modified",
-			name : "modified",
-			dataIndex : "modified"
-		})
-	
-	
-	
-		,
-	
-	
-	
-	
+		new cwe.editor.control.PropertiesFieldSet({
+			items: [
+		
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiGoal",
+		name: "ChiGoal",
+		dataIndex: "ChiGoal",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiRequirement",
+		name: "ChiRequirement",
+		dataIndex: "ChiRequirement",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiFeature",
+		name: "ChiFeature",
+		dataIndex: "ChiFeature",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiIssue",
+		name: "ChiIssue",
+		dataIndex: "ChiIssue",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiBusinessUseCase",
+		name: "ChiBusinessUseCase",
+		dataIndex: "ChiBusinessUseCase",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiBusinessProcess",
+		name: "ChiBusinessProcess",
+		dataIndex: "ChiBusinessProcess",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiBusinessUseCaseCore",
+		name: "ChiBusinessUseCaseCore",
+		dataIndex: "ChiBusinessUseCaseCore",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiBusinessPartnerActive",
+		name: "ChiBusinessPartnerActive",
+		dataIndex: "ChiBusinessPartnerActive",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiBusinessPartnerPassive",
+		name: "ChiBusinessPartnerPassive",
+		dataIndex: "ChiBusinessPartnerPassive",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiWorkerExternal",
+		name: "ChiWorkerExternal",
+		dataIndex: "ChiWorkerExternal",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiWorkerInternal",
+		name: "ChiWorkerInternal",
+		dataIndex: "ChiWorkerInternal",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiWorker",
+		name: "ChiWorker",
+		dataIndex: "ChiWorker",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiBusinessPartner",
+		name: "ChiBusinessPartner",
+		dataIndex: "ChiBusinessPartner",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiController",
+		name: "ChiController",
+		dataIndex: "ChiController",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiNode",
+		name: "ChiNode",
+		dataIndex: "ChiNode",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiValue",
+		name: "ChiValue",
+		dataIndex: "ChiValue",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiView",
+		name: "ChiView",
+		dataIndex: "ChiView",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Operation",
+		name: "Operation",
+		dataIndex: "Operation",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Activity",
+		name: "Activity",
+		dataIndex: "Activity",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ActivityDecision",
+		name: "ActivityDecision",
+		dataIndex: "ActivityDecision",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ActivityReceive",
+		name: "ActivityReceive",
+		dataIndex: "ActivityReceive",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ActivitySend",
+		name: "ActivitySend",
+		dataIndex: "ActivitySend",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ActivityInitial",
+		name: "ActivityInitial",
+		dataIndex: "ActivityInitial",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ActivityFinal",
+		name: "ActivityFinal",
+		dataIndex: "ActivityFinal",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "ChiSystem",
+		name: "ChiSystem",
+		dataIndex: "ChiSystem",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "created",
+		name: "created",
+		dataIndex: "created",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the creation date of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "creator",
+		name: "creator",
+		dataIndex: "creator",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the user that created this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "last_editor",
+		name: "last_editor",
+		dataIndex: "last_editor",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the last user that edited this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "modified",
+		name: "modified",
+		dataIndex: "modified",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the date when this object was modified"
+	}) 
+
+		
+		]})
+		
+		
 	
 	
 	
  ];
-}
+};
 
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.Counter());
