@@ -12,26 +12,26 @@
 Ext.namespace("cwe.editor.control");
 
 /**
- * @class A list of all objects of one type in a selected scope.
+ * @class A FieldSet containing all associations.
  * 
- * @extends Ext.grid.GridPanel
+ * @extends cwe.editor.control.FieldSet
  * @constructor
  * @param {Object}
  *            config The configuration object.
  */
 cwe.editor.control.AssociationsFieldSet = function(config) {
-}
+};
 
 cwe.editor.control.AssociationsFieldSet = Ext.extend(cwe.editor.control.FieldSet, {
 	initComponent : function() {
 		var self = this;
 		
 		Ext.apply(this, {
-			title: chi.Dict.translate("Associations"),
-			labelAlign: "top",
-			defaults: {
-				labelStyle: "font-weight: bold"
-			}
+		    title : chi.Dict.translate("Associations"),
+		    labelAlign : "top",
+		    defaults : {
+			    labelStyle : "font-weight: bold"
+		    }
 		});
 		
 		cwe.editor.control.AssociationsFieldSet.superclass.initComponent.apply(this, arguments);

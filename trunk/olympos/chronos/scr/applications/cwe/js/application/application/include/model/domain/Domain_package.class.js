@@ -19,7 +19,7 @@ application.application.include.model.domain.Domain_package = function() {
 	this.name = "domain";
 	this.owningPackageId = "application.application.include.model.Model_package";
 	this.startExpanded = true;
-}
+};
 
 Ext.extend(application.application.include.model.domain.Domain_package, cwe.model.ModelPackage);
 

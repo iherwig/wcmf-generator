@@ -24,21 +24,6 @@ application.application.include.model.domain.ChiNode = function() {
 	this.recordDefinition = [
 	
 		{
-			name : "id",
-			mapping : "id"
-		}
-	, 
-		{
-			name : "fk_package_id",
-			mapping : "fk_package_id"
-		}
-	, 
-		{
-			name : "Association",
-			mapping : "Association"
-		}
-	, 
-		{
 			name : "display_value",
 			mapping : "display_value"
 		}
@@ -91,6 +76,16 @@ application.application.include.model.domain.ChiNode = function() {
 		{
 			name : "Alias",
 			mapping : "Alias"
+		}
+	, 
+		{
+			name : "Status",
+			mapping : "Status"
+		}
+	, 
+		{
+			name : "Author",
+			mapping : "Author"
 		}
 	, 
 		{
@@ -151,8 +146,18 @@ application.application.include.model.domain.ChiNode = function() {
 	
 	
 		{
-			name : "childNMActivityChiNode",
-			mapping : "childNMActivityChiNode"
+			name : "childChiObject",
+			mapping : "childChiObject"
+		}
+	, 
+		{
+			name : "childChiValueRef",
+			mapping : "childChiValueRef"
+		}
+	, 
+		{
+			name : "childChiView",
+			mapping : "childChiView"
 		}
 	, 
 		{
@@ -202,9 +207,19 @@ application.application.include.model.domain.ChiNode = function() {
 	
 	
 	
-		"childNMActivityChiNode" : {
+		"childChiObject" : {
 			isParent : false,
-			targetModelClassId : "NMActivityChiNode"
+			targetModelClassId : "ChiObject"
+		}
+	, 
+		"childChiValueRef" : {
+			isParent : false,
+			targetModelClassId : "ChiValueRef"
+		}
+	, 
+		"childChiView" : {
+			isParent : false,
+			targetModelClassId : "ChiView"
 		}
 	, 
 		"childChiValue" : {
@@ -214,12 +229,12 @@ application.application.include.model.domain.ChiNode = function() {
 	, 
 		"childNodeTargetEnd" : {
 			isParent : false,
-			targetModelClassId : "NMChiNodeChiNode"
+			targetModelClassId : "ChiAssociation"
 		}
 	, 
 		"childNodeSourceEnd" : {
 			isParent : false,
-			targetModelClassId : "NMChiNodeChiNode"
+			targetModelClassId : "ChiAssociation"
 		}
 	, 
 		"childOperation" : {
@@ -232,149 +247,587 @@ application.application.include.model.domain.ChiNode = function() {
 			targetModelClassId : "Figure"
 		}
 	
-	}
+	};
 
-}
+};
 
 Ext.extend(application.application.include.model.domain.ChiNode, cwe.model.ModelClass);
+
+
+application.application.include.model.domain.ChiNode.prototype.getGridColumns = function() {
+	return [
+	
+		
+			{
+			    header : "display_value",
+			    dataIndex : "display_value",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "parent_order",
+			    dataIndex : "parent_order",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "child_order",
+			    dataIndex : "child_order",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "pk_name",
+			    dataIndex : "pk_name",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "is_searchable",
+			    dataIndex : "is_searchable",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "true[true]|false[false]"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "orderby",
+			    dataIndex : "orderby",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "is_soap",
+			    dataIndex : "is_soap",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "true[true]|false[false]"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "initparams",
+			    dataIndex : "initparams",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "table_name",
+			    dataIndex : "table_name",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "is_ordered",
+			    dataIndex : "is_ordered",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "true[true]|false[false]"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Alias",
+			    dataIndex : "Alias",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Status",
+			    dataIndex : "Status",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiBaseStatus"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Author",
+			    dataIndex : "Author",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.ComboBox({
+				targetCweModelElementId: "ChiAuthors"
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Version",
+			    dataIndex : "Version",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Name",
+			    dataIndex : "Name",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.editor.control.TextField({
+				
+			})
+					
+	
+
+			}
+		, 
+			{
+			    header : "Notes",
+			    dataIndex : "Notes",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "created",
+			    dataIndex : "created",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "creator",
+			    dataIndex : "creator",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "last_editor",
+			    dataIndex : "last_editor",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		, 
+			{
+			    header : "modified",
+			    dataIndex : "modified",
+			    width : 100,
+			    sortable : true,
+			    editor: 
+	
+		
+			new cwe.modelgrid.DummyField()
+					
+	
+
+			}
+		
+	
+	];
+};
+
 
 
 application.application.include.model.domain.ChiNode.prototype.getEditorItems = function() {
 	return [
 	
-		 new Ext.form.TextField( {
-			fieldLabel : "id",
-			name : "id",
-			dataIndex : "id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "fk_package_id",
-			name : "fk_package_id",
-			dataIndex : "fk_package_id"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Association",
-			name : "Association",
-			dataIndex : "Association"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "display_value",
-			name : "display_value",
-			dataIndex : "display_value"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "parent_order",
-			name : "parent_order",
-			dataIndex : "parent_order"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "child_order",
-			name : "child_order",
-			dataIndex : "child_order"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "pk_name",
-			name : "pk_name",
-			dataIndex : "pk_name"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "is_searchable",
-			name : "is_searchable",
-			dataIndex : "is_searchable"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "orderby",
-			name : "orderby",
-			dataIndex : "orderby"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "is_soap",
-			name : "is_soap",
-			dataIndex : "is_soap"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "initparams",
-			name : "initparams",
-			dataIndex : "initparams"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "table_name",
-			name : "table_name",
-			dataIndex : "table_name"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "is_ordered",
-			name : "is_ordered",
-			dataIndex : "is_ordered"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Alias",
-			name : "Alias",
-			dataIndex : "Alias"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Version",
-			name : "Version",
-			dataIndex : "Version"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Name",
-			name : "Name",
-			dataIndex : "Name"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "Notes",
-			name : "Notes",
-			dataIndex : "Notes"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "created",
-			name : "created",
-			dataIndex : "created"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "creator",
-			name : "creator",
-			dataIndex : "creator"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "last_editor",
-			name : "last_editor",
-			dataIndex : "last_editor"
-		})
-	, 
-		 new Ext.form.TextField( {
-			fieldLabel : "modified",
-			name : "modified",
-			dataIndex : "modified"
-		})
-	
-	
-	
-		,
-	
-	
-	
+		new cwe.editor.control.PropertiesFieldSet({
+			items: [
 		
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "display_value",
+		name: "display_value",
+		dataIndex: "display_value",
+		
+		
+		toolTip: "The value that is displayed in a list view. a single value or '|' -separated list of values"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "parent_order",
+		name: "parent_order",
+		dataIndex: "parent_order",
+		
+		
+		toolTip: "The order of the associated parents. a single value or '|' -separated list of values"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "child_order",
+		name: "child_order",
+		dataIndex: "child_order",
+		
+		
+		toolTip: "The order of the associated children. a single value or '|' -separated list of values"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "pk_name",
+		name: "pk_name",
+		dataIndex: "pk_name",
+		
+		
+		toolTip: "The name of the primary key column on the database (optional). The generator will add this automatically if there is no appropriate attribute."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "is_searchable",
+		name: "is_searchable",
+		dataIndex: "is_searchable",
+		targetCweModelElementId: "true[true]|false[false]",
+		
+		toolTip: "Indicates wether this type should be included in the default search."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "orderby",
+		name: "orderby",
+		dataIndex: "orderby",
+		
+		
+		toolTip: "Definition of default sorting. Possible values: 'none' (no order), 'sortkey' (generates a 'sortkey' column, that is used for explicit sorting) or any the name of any WCMFValue defined in the node optionally."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "is_soap",
+		name: "is_soap",
+		dataIndex: "is_soap",
+		targetCweModelElementId: "true[true]|false[false]",
+		
+		toolTip: "Define if the type should be exposed to the SOAP interface."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "initparams",
+		name: "initparams",
+		dataIndex: "initparams",
+		
+		
+		toolTip: "Name of the configuration file's (config.ini) section, in which the initial parameters for the corresponding mapper are defined"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "table_name",
+		name: "table_name",
+		dataIndex: "table_name",
+		
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "is_ordered",
+		name: "is_ordered",
+		dataIndex: "is_ordered",
+		targetCweModelElementId: "true[true]|false[false]",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Alias",
+		name: "Alias",
+		dataIndex: "Alias",
+		
+		
+		toolTip: "the Project Id of this object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "Status",
+		name: "Status",
+		dataIndex: "Status",
+		targetCweModelElementId: "ChiBaseStatus",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.ComboBox({
+		fieldLabel: "Author",
+		name: "Author",
+		dataIndex: "Author",
+		targetCweModelElementId: "ChiAuthors",
+		
+		toolTip: ""
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Version",
+		name: "Version",
+		dataIndex: "Version",
+		
+		
+		toolTip: "the model version of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "Name",
+		name: "Name",
+		dataIndex: "Name",
+		
+		
+		toolTip: "the name of this object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.HtmlEditor({
+		fieldLabel: "Notes",
+		name: "Notes",
+		dataIndex: "Notes",
+		
+		
+		toolTip: "the actual description of the object."
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "created",
+		name: "created",
+		dataIndex: "created",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the creation date of this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "creator",
+		name: "creator",
+		dataIndex: "creator",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the user that created this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "last_editor",
+		name: "last_editor",
+		dataIndex: "last_editor",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the last user that edited this object"
+	}) 
+
+		, 
+			
+	new cwe.editor.control.TextField({
+		fieldLabel: "modified",
+		name: "modified",
+		dataIndex: "modified",
+		
+		
+			
+				readOnly: true,
+			
+		
+		toolTip: "the date when this object was modified"
+	}) 
+
+		
+		]})
+		
+		
+			,
+		
+	
+	
+	
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
+		
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -387,8 +840,8 @@ application.application.include.model.domain.ChiNode.prototype.getEditorItems = 
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.SingleAssociate( {
 	
@@ -401,28 +854,56 @@ application.application.include.model.domain.ChiNode.prototype.getEditorItems = 
 		
 	})
 
-	
-	
-	
-		,
-	
-	
-	
 		
+		
+		
+			,
+		
+		
+		
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
 		
-			fieldLabel : "childNMActivityChiNode",
-			name : "childNMActivityChiNode",
-			dataIndex : "childNMActivityChiNode",
-			targetCweModelElementId : "NMActivityChiNode",
+			fieldLabel : "childChiObject",
+			name : "childChiObject",
+			dataIndex : "childChiObject",
+			targetCweModelElementId : "ChiObject",
 			isParent : false
 		
 	})
 
-	, 
+		, 
+			
+	
+		new cwe.editor.control.MultipleAssociate( {
+	
 		
+			fieldLabel : "childChiValueRef",
+			name : "childChiValueRef",
+			dataIndex : "childChiValueRef",
+			targetCweModelElementId : "ChiValueRef",
+			isParent : false
+		
+	})
+
+		, 
+			
+	
+		new cwe.editor.control.SingleAssociate( {
+	
+		
+			fieldLabel : "childChiView",
+			name : "childChiView",
+			dataIndex : "childChiView",
+			targetCweModelElementId : "ChiView",
+			isParent : false
+		
+	})
+
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -435,8 +916,8 @@ application.application.include.model.domain.ChiNode.prototype.getEditorItems = 
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -444,13 +925,13 @@ application.application.include.model.domain.ChiNode.prototype.getEditorItems = 
 			fieldLabel : "childNodeTargetEnd",
 			name : "childNodeTargetEnd",
 			dataIndex : "childNodeTargetEnd",
-			targetCweModelElementId : "NMChiNodeChiNode",
+			targetCweModelElementId : "ChiAssociation",
 			isParent : false
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -458,13 +939,13 @@ application.application.include.model.domain.ChiNode.prototype.getEditorItems = 
 			fieldLabel : "childNodeSourceEnd",
 			name : "childNodeSourceEnd",
 			dataIndex : "childNodeSourceEnd",
-			targetCweModelElementId : "NMChiNodeChiNode",
+			targetCweModelElementId : "ChiAssociation",
 			isParent : false
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -477,8 +958,8 @@ application.application.include.model.domain.ChiNode.prototype.getEditorItems = 
 		
 	})
 
-	, 
-		
+		, 
+			
 	
 		new cwe.editor.control.MultipleAssociate( {
 	
@@ -491,9 +972,12 @@ application.application.include.model.domain.ChiNode.prototype.getEditorItems = 
 		
 	})
 
+		
+		
+		]})
 	
  ];
-}
+};
 
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.domain.ChiNode());

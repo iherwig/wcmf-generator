@@ -22,7 +22,7 @@ Ext.namespace("cwe.editor");
  * @config modelClass The Model Class of the editors.
  */
 cwe.editor.EditorContainer = function() {
-}
+};
 
 cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
@@ -37,7 +37,7 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 		Ext.apply(this, {
 			region: "center",
 			xtype: "tabpanel",
-			enableTabScroll: true,
+			enableTabScroll: true
 		});
 		
 		cwe.editor.EditorContainer.superclass.initComponent.apply(this, arguments);
@@ -52,7 +52,7 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 		});
 		
 	}
-})
+});
 
 /**
  * Handler when tab is closed.
@@ -64,7 +64,7 @@ cwe.editor.EditorContainer.prototype.tabClose = function(tabPanel, tab) {
 		tab.removeAllAssociateButtons();
 		this.editors.remove(tab);
 	}
-}
+};
 
 /**
  * Load or shows (if already loaded) an editor for the object with the selected
@@ -95,7 +95,7 @@ cwe.editor.EditorContainer.prototype.loadOrShow = function(oid, label, newObject
 	
 	editor.show();
 	editor.doLayout();
-}
+};
 
 /**
  * Adds an editor to the container.
@@ -108,7 +108,7 @@ cwe.editor.EditorContainer.prototype.loadOrShow = function(oid, label, newObject
  */
 cwe.editor.EditorContainer.prototype.addEditor = function(oid, editor) {
 	this.editors.add(oid, editor);
-}
+};
 
 /**
  * Removes an editor by oid.
@@ -119,4 +119,4 @@ cwe.editor.EditorContainer.prototype.addEditor = function(oid, editor) {
 cwe.editor.EditorContainer.prototype.removeEditor = function(oid) {
 	var editor = this.editors.removeKey(oid);
 	this.remove(editor);
-}
+};

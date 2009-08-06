@@ -37,7 +37,7 @@ Ext.namespace("cwe.editor");
  * 
  */
 cwe.editor.Editor = function() {
-}
+};
 
 cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 	initComponent : function() {
@@ -93,6 +93,7 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		
 		Ext.apply(this, {
 			iconCls : this.modelClass.getTreeIconClass(),
+			bodyStyle: "padding: 5px;",
 			closable : true,
 			frame : false,
 			autoScroll : true,
@@ -122,7 +123,7 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 			this.loadFromOid(this.oid);
 		}
 	}
-})
+});
 
 /**
  * inserts this editor as property to all items in the form as
@@ -155,7 +156,7 @@ cwe.editor.Editor.prototype.propagateEditor = function(items) {
 			});
 		}
 	}
-}
+};
 
 /**
  * Saves the current state of the object.
@@ -193,7 +194,7 @@ cwe.editor.Editor.prototype.save = function() {
 		this.setTitle(record.getLabel());
 		this.newObject = false;
 	}
-}
+};
 
 /**
  * Reverts the values to last saved state (existing object) or closes the editor
@@ -209,7 +210,7 @@ cwe.editor.Editor.prototype.cancel = function() {
 			return true;
 		}).remove(this);
 	}
-}
+};
 
 /**
  * Returns the record of this editor.
@@ -219,7 +220,7 @@ cwe.editor.Editor.prototype.cancel = function() {
  */
 cwe.editor.Editor.prototype.getRecord = function() {
 	return this.rawRecords[this.oid];
-}
+};
 
 /**
  * Returns the oid of the edited object.
@@ -229,7 +230,7 @@ cwe.editor.Editor.prototype.getRecord = function() {
  */
 cwe.editor.Editor.prototype.getOid = function() {
 	return this.oid;
-}
+};
 
 /**
  * Returns the label of the edited object.
@@ -239,7 +240,7 @@ cwe.editor.Editor.prototype.getOid = function() {
  */
 cwe.editor.Editor.prototype.getLabel = function() {
 	return this.getRecord().getLabel();
-}
+};
 
 /**
  * Returns the Model Class of the edited object.
@@ -249,7 +250,7 @@ cwe.editor.Editor.prototype.getLabel = function() {
  */
 cwe.editor.Editor.prototype.getModelClass = function() {
 	return this.modelClass;
-}
+};
 
 /**
  * Returns all records loaded with this object with oid as key.
@@ -259,7 +260,7 @@ cwe.editor.Editor.prototype.getModelClass = function() {
  */
 cwe.editor.Editor.prototype.getRawRecords = function() {
 	return this.rawRecords;
-}
+};
 
 /**
  * Adds a record to the list of all loaded records.
@@ -269,7 +270,7 @@ cwe.editor.Editor.prototype.getRawRecords = function() {
  */
 cwe.editor.Editor.prototype.addRawRecord = function(record) {
 	this.rawRecords[record.getOid()] = record;
-}
+};
 
 /**
  * Loads the object to edit from persistency.
@@ -285,7 +286,7 @@ cwe.editor.Editor.prototype.loadFromOid = function(oid) {
 		self.rawRecords = data.records;
 		self.getForm().loadRecord(data.records[data.oid]);
 	});
-}
+};
 
 /**
  * Registers an associate button for this editor.
@@ -300,7 +301,7 @@ cwe.editor.Editor.prototype.addAssociateButton = function(grid, button) {
 		grid : grid,
 		button : button
 	});
-}
+};
 
 /**
  * Unregisters an associate button for this editor.
@@ -310,7 +311,7 @@ cwe.editor.Editor.prototype.addAssociateButton = function(grid, button) {
  */
 cwe.editor.Editor.prototype.removeAssociateButton = function(button) {
 	this.associateButtons.removeKey(button);
-}
+};
 
 /**
  * Removes all remaining associate buttons from their model grids.
@@ -321,4 +322,4 @@ cwe.editor.Editor.prototype.removeAllAssociateButtons = function() {
 	this.associateButtons.each(function(data) {
 		data.grid.removeAssociateButton(data.button);
 	});
-}
+};

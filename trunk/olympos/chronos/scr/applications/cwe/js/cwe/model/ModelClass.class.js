@@ -43,18 +43,6 @@ cwe.model.ModelClass = function() {
 	this.recordDefinition = null;
 	
 	/**
-	 * The definition of the grid columns of the model grid of this Model Class.
-	 * 
-	 * <p>
-	 * Refer to Ext.grid.ColumnModel for the detailed specification.
-	 * </p>
-	 * 
-	 * @private
-	 * @type Array
-	 */
-	this.gridColumns = null;
-	
-	/**
 	 * The definition of relations of this Model Class to other Model Classes.
 	 * 
 	 * <p>
@@ -103,32 +91,28 @@ cwe.model.ModelClass.prototype.getRecordDefinition = function() {
  * @type Array
  */
 cwe.model.ModelClass.prototype.getGridColumns = function() {
-	var result = this.gridColumns;
+	var recordDefinition = this.getRecordDefinition();
 	
-	if (!result) {
-		var recordDefinition = this.getRecordDefinition();
-		
-		result = [];
-		
-		for ( var i = 0; i < recordDefinition.length; i++) {
-			var isRelation = false;
-			if (this.relations) {
-				var relation = this.relations[recordDefinition[i].mapping];
-				
-				if (relation) {
-					isRelation = true;
-				}
-			}
+	var result = [];
+	
+	for ( var i = 0; i < recordDefinition.length; i++) {
+		var isRelation = false;
+		if (this.relations) {
+			var relation = this.relations[recordDefinition[i].mapping];
 			
-			if (recordDefinition[i].mapping != "oid" && !isRelation) {
-				result.push( {
-					header : recordDefinition[i].name,
-					dataIndex : recordDefinition[i].mapping,
-					width : 100,
-					sortable : true,
-					editor: new Ext.form.TextField()
-				});
+			if (relation) {
+				isRelation = true;
 			}
+		}
+		
+		if (recordDefinition[i].mapping != "oid" && !isRelation) {
+			result.push( {
+			    header : recordDefinition[i].name,
+			    dataIndex : recordDefinition[i].mapping,
+			    width : 100,
+			    sortable : true,
+			    editor : new Ext.form.TextField()
+			});
 		}
 	}
 	

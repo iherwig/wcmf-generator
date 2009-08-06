@@ -6,6 +6,7 @@
 		<link rel="shortcut icon" href="favicon.ico" /> 
 		<link rel="stylesheet" type="text/css" href="../ChronosLib/ext/resources/css/ext-all.css" />
 		<link rel="stylesheet" type="text/css" href="../ChronosLib/ext/ux/css/RowEditor.css" />
+		<link rel="stylesheet" type="text/css" href="../ChronosLib/ext/ux/css/Portal.css" />
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
 		<link rel="stylesheet" type="text/css" href="css/modelClass.css" />
 
@@ -14,6 +15,12 @@
 		<script type="text/javascript" src="../ChronosLib/ext/ext-all-debug.js">
 		</script>
 		<script type="text/javascript" src="../ChronosLib/ext/ux/RowEditor.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/ext/ux/Portal.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/ext/ux/PortalColumn.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/ext/ux/Portlet.js">
 		</script>
 		
 		<!--Start include CWE-->
@@ -61,12 +68,18 @@
 		
 		<script type="text/javascript" src="js/cwe/ui/Workbench.class.js">
 		</script>
+		<script type="text/javascript" src="js/cwe/ui/Dashboard.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/ui/WelcomePortlet.class.js">
+		</script>
+		
 		<script type="text/javascript" src="js/cwe/modeltree/ModelTree.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwe/modeltree/Node.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwe/modeltree/ClassNode.class.js">
 		</script>
+		
 		<script type="text/javascript" src="js/cwe/modelgrid/ModelGridContainer.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwe/modelgrid/ModelGridPanel.class.js">
@@ -79,13 +92,44 @@
 		</script>
 		<script type="text/javascript" src="js/cwe/modelgrid/AssociateButton.class.js">
 		</script>
+		<script type="text/javascript" src="js/cwe/modelgrid/DummyField.class.js">
+		</script>
+		
 		<script type="text/javascript" src="js/cwe/editor/EditorContainer.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwe/editor/Editor.class.js">
 		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/FieldSet.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/AssociationsFieldSet.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/PropertiesFieldSet.class.js">
+		</script>
 		<script type="text/javascript" src="js/cwe/editor/control/SingleAssociate.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwe/editor/control/MultipleAssociate.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/Checkbox.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/ComboBox.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/ComboBoxProxy.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/DateField.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/HtmlEditor.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/NumberField.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/PasswordField.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/Radio.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/StaticComboBox.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/TextArea.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/TextField.class.js">
 		</script>
 
 		<!--End include CWE-->
@@ -111,7 +155,10 @@
 		<script type="text/javascript" src="js/application/application/include/model/activity/Activity_package.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/Chronos/Chronos_package.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/configuration/Configuration_package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/Wcmf_package.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/UseCases/UseCases_package.class.js">
@@ -127,10 +174,13 @@
 		<script type="text/javascript" src="js/application/application/include/model/activity/ActivitySet.class.js">
 		</script>
 
+		<script type="text/javascript" src="js/application/application/include/model/activity/ChiObject.class.js">
+		</script>
+
 		<script type="text/javascript" src="js/application/application/include/model/activity/NMActivityActivityDecision.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/activity/NMActivityChiNode.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/activity/NMActivityChiObject.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/activity/Activity.class.js">
@@ -151,25 +201,22 @@
 		<script type="text/javascript" src="js/application/application/include/model/activity/ActivityFinal.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/activity/ChiBusinessUseCase.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/configuration/ChiSystem.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/activity/Figure.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/Adodbseq.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/Chronos/Adodbseq.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/Locktable.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/Chronos/Locktable.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/NMUserRole.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/Chronos/NMUserRole.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/RoleRDB.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/Chronos/RoleRDB.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/Chronos/UserRDB.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/UserRDB.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/UseCases/Actor.class.js">
@@ -181,10 +228,10 @@
 		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessPartner.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/NMUCActor.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessProcess.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessProcess.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessUseCase.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessUseCaseCore.class.js">
@@ -200,6 +247,9 @@
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiWorkerInternal.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/NMUCActor.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiGoal.class.js">
@@ -229,16 +279,37 @@
 		<script type="text/javascript" src="js/application/application/include/model/requirements/NMFeatureRequirements.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiController.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiActionKey.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiClass.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiValueRef.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/NMChiControllerActionKeyChiController.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/NMChiControllerActionKeyChiView.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/Property.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/domain/ChiNode.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiValue.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiController.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/domain/ChiView.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiAuthors.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiValue.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/domain/DisplayType.class.js">
@@ -250,7 +321,7 @@
 		<script type="text/javascript" src="js/application/application/include/model/domain/NMChiControllerChiController.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/domain/NMChiNodeChiNode.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiAssociation.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/domain/Operation.class.js">
@@ -265,7 +336,7 @@
 		<script type="text/javascript" src="js/application/application/include/model/domain/RelationType.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiAuthors.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/ChiBaseStatus.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/Counter.class.js">
@@ -274,10 +345,16 @@
 		<script type="text/javascript" src="js/application/application/include/model/History.class.js">
 		</script>
 
+		<script type="text/javascript" src="js/application/application/include/model/Translation.class.js">
+		</script>
+
 		<script type="text/javascript" src="js/application/application/include/model/EntityBase.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/EntityBaseExtended.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Figure.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/ChiBase.class.js">
@@ -292,7 +369,7 @@
 		<script type="text/javascript" src="js/application/application/include/model/Diagram.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/application/application/include/model/Glossar.class.js">
+		<script type="text/javascript" src="js/application/application/include/model/Glossary.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/application/application/include/model/NMFiguresDiagram.class.js">

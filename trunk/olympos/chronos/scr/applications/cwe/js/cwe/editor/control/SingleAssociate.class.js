@@ -37,7 +37,7 @@ Ext.namespace("cwe.editor.control");
  * @config isParent Whether the target should be associated as parent.
  */
 cwe.editor.control.SingleAssociate = function(config) {
-}
+};
 
 cwe.editor.control.SingleAssociate = Ext.extend(Ext.form.TwinTriggerField, {
 	initComponent : function() {
@@ -51,22 +51,33 @@ cwe.editor.control.SingleAssociate = Ext.extend(Ext.form.TwinTriggerField, {
 		this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(this.targetCweModelElementId);
 		
 		Ext.apply(this, {
-			trigger1Class : "associateButton",
-			trigger2Class : "disassociateButton",
-			trigger3Class: "editButton",
-			readOnly : true,
-			width : 805
+		    trigger1Class : "associateButton",
+		    trigger2Class : "disassociateButton",
+		    trigger3Class : "editButton",
+		    readOnly : true,
+		    width : 805
 		});
 		
 		cwe.editor.control.SingleAssociate.superclass.initComponent.apply(this, arguments);
 		
-        this.triggerConfig = {
-                tag:'span', cls:'x-form-twin-triggers', cn:[
-                {tag: "img", src: Ext.BLANK_IMAGE_URL, cls: "x-form-trigger " + this.trigger1Class},
-                {tag: "img", src: Ext.BLANK_IMAGE_URL, cls: "x-form-trigger " + this.trigger2Class},
-                {tag: "img", src: Ext.BLANK_IMAGE_URL, cls: "x-form-trigger " + this.trigger3Class}
-            ]};
-
+		this.triggerConfig = {
+		    tag : 'span',
+		    cls : 'x-form-twin-triggers',
+		    cn : [ {
+		        tag : "img",
+		        src : Ext.BLANK_IMAGE_URL,
+		        cls : "x-form-trigger " + this.trigger1Class
+		    }, {
+		        tag : "img",
+		        src : Ext.BLANK_IMAGE_URL,
+		        cls : "x-form-trigger " + this.trigger2Class
+		    }, {
+		        tag : "img",
+		        src : Ext.BLANK_IMAGE_URL,
+		        cls : "x-form-trigger " + this.trigger3Class
+		    } ]
+		};
+		
 	}
 });
 
@@ -88,7 +99,7 @@ cwe.editor.control.SingleAssociate.prototype.setValue = function(value) {
 		this.associatedOid = null;
 		cwe.editor.control.SingleAssociate.superclass.setValue.call(this, "");
 	}
-}
+};
 
 /**
  * Returns the value of this form field.
@@ -98,7 +109,7 @@ cwe.editor.control.SingleAssociate.prototype.setValue = function(value) {
  */
 cwe.editor.control.SingleAssociate.prototype.getValue = function() {
 	return this.origValue;
-}
+};
 
 /**
  * Returns the label of the associated object.
@@ -111,12 +122,12 @@ cwe.editor.control.SingleAssociate.prototype.getValueLabel = function() {
 	
 	if (this.associatedOid) {
 		var associateRecord = this.editor.getRawRecords()[this.associatedOid];
-
+		
 		result = associateRecord.getLabel();
 	}
 	
 	return result;
-}
+};
 
 /**
  * Shows the target Model Class model grid and adds an associate button to it.
@@ -129,34 +140,34 @@ cwe.editor.control.SingleAssociate.prototype.onTrigger1Click = function() {
 	var self = this;
 	
 	var button = new cwe.modelgrid.AssociateButton( {
-		modelClass : this.editor.getModelClass(),
-		sourceLabel : this.editor.getLabel(),
-		roleName : this.getName(),
-		role : this.dataIndex,
-		isParent : this.isParent,
-		singleSelect : true,
-		sourceOid : this.editor.getOid(),
-		sourceHandler : function(records) {
-			var record = records[0];
-			
-			var referenceList = new cwe.model.ModelReferenceList(this.modelClass);
-			var reference = new cwe.model.ModelReference(record.getOid());
-			
-			referenceList.add(record.getOid(), reference);
-			self.editor.addRawRecord(record);
-			
-			self.setValue(referenceList);
-			
-			grid.removeAssociateButton(button);
-			self.editor.removeAssociateButton(button);
-			self.editor.show();
-		}
+	    modelClass : this.editor.getModelClass(),
+	    sourceLabel : this.editor.getLabel(),
+	    roleName : this.getName(),
+	    role : this.dataIndex,
+	    isParent : this.isParent,
+	    singleSelect : true,
+	    sourceOid : this.editor.getOid(),
+	    sourceHandler : function(records) {
+		    var record = records[0];
+		    
+		    var referenceList = new cwe.model.ModelReferenceList(this.modelClass);
+		    var reference = new cwe.model.ModelReference(record.getOid());
+		    
+		    referenceList.add(record.getOid(), reference);
+		    self.editor.addRawRecord(record);
+		    
+		    self.setValue(referenceList);
+		    
+		    grid.removeAssociateButton(button);
+		    self.editor.removeAssociateButton(button);
+		    self.editor.show();
+	    }
 	});
 	
 	grid.addAssociateButton(button);
 	
 	this.editor.addAssociateButton(grid, button);
-}
+};
 
 /**
  * Clears this form field.
@@ -167,7 +178,7 @@ cwe.editor.control.SingleAssociate.prototype.onTrigger2Click = function() {
 	if (this.associatedOid) {
 		this.setValue(null);
 	}
-}
+};
 
 /**
  * Opens the associated element in its editor.
@@ -179,5 +190,4 @@ cwe.editor.control.SingleAssociate.prototype.onTrigger3Click = function() {
 		var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getEditors();
 		editors.loadOrShow(this.associatedOid, this.getValueLabel());
 	}
-}
-
+};
