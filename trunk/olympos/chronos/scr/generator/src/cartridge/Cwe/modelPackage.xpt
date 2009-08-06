@@ -38,7 +38,7 @@ Ext.namespace("application.«this.getFullPackageName()»");
 	this.name = "«this.name»";
 	this.owningPackageId = «IF this.owner.getQualifiedName() != (MODEL_NAME()+"::"+RootPackage()+"::"+ApplicationPackage())»"«this.owner.getCwePackageName()»"«ELSE»cwe.model.RootPackage.ROOT_PACKAGE_ID«ENDIF»;
 	this.startExpanded = true;
-}
+};
 
 Ext.extend(«this.getCwePackageName()», cwe.model.ModelPackage);
 
