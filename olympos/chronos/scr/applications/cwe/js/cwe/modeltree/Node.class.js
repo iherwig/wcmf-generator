@@ -39,7 +39,7 @@ cwe.modeltree.Node = function(config) {
 		expanded : this.getModelElement().getStartExpanded ? this.getModelElement().getStartExpanded() : false
 	}, config));
 	
-}
+};
 
 Ext.extend(cwe.modeltree.Node, Ext.tree.TreeNode);
 
@@ -51,4 +51,4 @@ Ext.extend(cwe.modeltree.Node, Ext.tree.TreeNode);
  */
 cwe.modeltree.Node.prototype.getModelElement = function() {
 	return this.modelElement;
-}
+};

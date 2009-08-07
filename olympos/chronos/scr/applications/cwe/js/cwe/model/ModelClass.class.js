@@ -57,7 +57,7 @@ cwe.model.ModelClass = function() {
 	 * </p>
 	 */
 	this.relations = null;
-}
+};
 
 Ext.extend(cwe.model.ModelClass, cwe.model.ModelElement);
 
@@ -75,7 +75,7 @@ cwe.model.ModelClass.prototype.getRecordDefinition = function() {
 	}
 	
 	return this.recordDefinition;
-}
+};
 
 /**
  * Returns the definition of the grid columns of the model grid of this Model
@@ -117,7 +117,7 @@ cwe.model.ModelClass.prototype.getGridColumns = function() {
 	}
 	
 	return result;
-}
+};
 
 /**
  * Returns the items of the editor of this Model Class.
@@ -132,7 +132,7 @@ cwe.model.ModelClass.prototype.getGridColumns = function() {
  */
 cwe.model.ModelClass.prototype.getEditorItems = function() {
 	throw "cwe.model.ModelClass.getEditorItems not overwritten";
-}
+};
 
 /**
  * Returns the label of an object of this Model Class.
@@ -144,7 +144,7 @@ cwe.model.ModelClass.prototype.getEditorItems = function() {
  */
 cwe.model.ModelClass.prototype.getLabel = function(record) {
 	return record.get("Name");
-}
+};
 
 /**
  * Returns whether the target Model Class of the given field is a parent.
@@ -166,7 +166,7 @@ cwe.model.ModelClass.prototype.isParent = function(fieldName) {
 	}
 	
 	return result;
-}
+};
 
 /**
  * Returns the target Model Class of the given field.
@@ -189,4 +189,4 @@ cwe.model.ModelClass.prototype.getTargetModelClass = function(fieldName) {
 	}
 	
 	return result;
-}
+};

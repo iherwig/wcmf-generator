@@ -47,7 +47,7 @@ cwe.model.ModelPackage = function() {
 	 * @type Ext.util.MixedCollection
 	 */
 	this.children = new Ext.util.MixedCollection();
-}
+};
 
 Ext.extend(cwe.model.ModelPackage, cwe.model.ModelElement);
 
@@ -59,7 +59,7 @@ Ext.extend(cwe.model.ModelPackage, cwe.model.ModelElement);
  */
 cwe.model.ModelPackage.prototype.getStartExpanded = function() {
 	return this.startExpanded;
-}
+};
 
 /**
  * Adds a new ModelElement to this package.
@@ -69,7 +69,7 @@ cwe.model.ModelPackage.prototype.getStartExpanded = function() {
  */
 cwe.model.ModelPackage.prototype.add = function(newChild) {
 	this.children.add(newChild.getId(), newChild);
-}
+};
 
 /**
  * Returns the list of children of this package.
@@ -79,4 +79,4 @@ cwe.model.ModelPackage.prototype.add = function(newChild) {
  */
 cwe.model.ModelPackage.prototype.getChildren = function() {
 	return this.children;
-}
+};

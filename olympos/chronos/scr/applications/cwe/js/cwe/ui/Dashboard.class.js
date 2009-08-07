@@ -25,6 +25,6 @@ cwe.ui.Dashboard = function(config) {
 	    iconCls : "dashboardIcon",
 	    items : [ cwe.Config.getPortlets() ]
 	}, config));
-}
+};
 
 Ext.extend(cwe.ui.Dashboard, Ext.ux.Portal);

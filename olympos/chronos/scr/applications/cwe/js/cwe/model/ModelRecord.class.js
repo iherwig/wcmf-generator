@@ -48,7 +48,7 @@ cwe.model.ModelRecord = function(modelClass, data) {
 	}
 	
 	return result;
-}
+};
 
 Ext.extend(cwe.model.ModelRecord, Ext.data.Record);
 
@@ -60,7 +60,7 @@ Ext.extend(cwe.model.ModelRecord, Ext.data.Record);
  */
 cwe.model.ModelRecord.prototype.getModelClass = function() {
 	return this.modelClass;
-}
+};
 
 /**
  * Returns the oid of this record.
@@ -70,7 +70,7 @@ cwe.model.ModelRecord.prototype.getModelClass = function() {
  */
 cwe.model.ModelRecord.prototype.getOid = function() {
 	return this.get("oid");
-}
+};
 
 /**
  * Sets the oid of this record.
@@ -84,7 +84,7 @@ cwe.model.ModelRecord.prototype.getOid = function() {
  */
 cwe.model.ModelRecord.prototype.setOid = function(oid) {
 	this.set("oid", oid);
-}
+};
 
 /**
  * Returns the label of this record.
@@ -98,7 +98,7 @@ cwe.model.ModelRecord.prototype.setOid = function(oid) {
  */
 cwe.model.ModelRecord.prototype.getLabel = function() {
 	return this.getModelClass().getLabel(this);
-}
+};
 
 /**
  * Sets the value of an attribute.
@@ -126,7 +126,7 @@ cwe.model.ModelRecord.prototype.set = function(name, value) {
 	if (!this.editing && this.store) {
 		this.store.afterEdit(this);
 	}
-}
+};
 
 /**
  * Persists this record.
@@ -209,4 +209,4 @@ cwe.model.ModelRecord.prototype.commit = function(silent, activitySet) {
 	}
 	
 	this.dirty = false;
-}
+};

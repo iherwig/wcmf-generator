@@ -33,18 +33,18 @@ Ext.namespace("cwe.modelgrid");
  * 
  */
 cwe.modelgrid.AssociateButton = function(config) {
-}
+};
 
 cwe.modelgrid.AssociateButton = Ext.extend(Ext.Toolbar.Button, {
 	initComponent : function() {
 		var self = this;
 		
 		Ext.apply(this, {
-			iconCls : this.modelClass.getTreeIconClass(),
-			text : chi.Dict.translate("Associate as ${1} with ${2} \"${3}\"", this.roleName, this.modelClass.getName(), this.sourceLabel),
-			handler : function() {
-				self.associate();
-			}
+		    iconCls : this.modelClass.getTreeIconClass(),
+		    text : chi.Dict.translate("Associate as ${1} with ${2} \"${3}\"", this.roleName, this.modelClass.getName(), this.sourceLabel),
+		    handler : function() {
+			    self.associate();
+		    }
 		});
 		
 		cwe.modelgrid.AssociateButton.superclass.initComponent.apply(this, arguments);
@@ -63,7 +63,7 @@ cwe.modelgrid.AssociateButton.prototype.associate = function() {
 	var records = this.grid.getSelectionModel().getSelections();
 	
 	self.sourceHandler(records);
-}
+};
 
 /**
  * Returns whether the target object should be the parent in the association.
@@ -73,4 +73,4 @@ cwe.modelgrid.AssociateButton.prototype.associate = function() {
  */
 cwe.modelgrid.AssociateButton.prototype.isSingleSelect = function() {
 	return this.singleSelect;
-}
+};

@@ -30,7 +30,7 @@ cwe.model.ModelPackageContainer = function() {
 	 * @type Ext.util.MixedCollection
 	 */
 	this.packages = new Ext.util.MixedCollection();
-}
+};
 
 /**
  * Registers a Model Package and adds it to its parent package.
@@ -48,7 +48,7 @@ cwe.model.ModelPackageContainer.prototype.registerPackage = function(modelPackag
 	this.packages.add(modelPackage.getId(), modelPackage);
 	
 	this.addToPackage(modelPackage);
-}
+};
 
 /**
  * Adds a child to its parent package.
@@ -73,7 +73,7 @@ cwe.model.ModelPackageContainer.prototype.addToPackage = function(newChild) {
 			throw ("No owning package defined for ModelElement " + newChild.getId());
 		}
 	}
-}
+};
 
 /**
  * Returns a registered Model Package.
@@ -85,7 +85,7 @@ cwe.model.ModelPackageContainer.prototype.addToPackage = function(newChild) {
  */
 cwe.model.ModelPackageContainer.prototype.getPackage = function(cweModelElementId) {
 	return this.packages.get(cweModelElementId);
-}
+};
 
 /**
  * Returns the root package.
@@ -95,7 +95,7 @@ cwe.model.ModelPackageContainer.prototype.getPackage = function(cweModelElementI
  */
 cwe.model.ModelPackageContainer.prototype.getRootPackage = function() {
 	return this.getPackage(cwe.model.RootPackage.ROOT_PACKAGE_ID);
-}
+};
 
 /**
  * Returns all registered Model Packages.
@@ -105,7 +105,7 @@ cwe.model.ModelPackageContainer.prototype.getRootPackage = function() {
  */
 cwe.model.ModelPackageContainer.prototype.getAllPackages = function() {
 	return this.packages;
-}
+};
 
 /**
  * Returns the instance of this class.
@@ -119,4 +119,4 @@ cwe.model.ModelPackageContainer.getInstance = function() {
 	}
 	
 	return cwe.model.ModelPackageContainer.instance;
-}
+};

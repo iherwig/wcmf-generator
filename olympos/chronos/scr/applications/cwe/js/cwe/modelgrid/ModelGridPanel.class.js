@@ -22,7 +22,7 @@ Ext.namespace("cwe.modelgrid");
  * @config modelClass The Model Class of the grid and editors.
  */
 cwe.modelgrid.ModelGridPanel = function() {
-}
+};
 
 cwe.modelgrid.ModelGridPanel = Ext.extend(Ext.Panel, {
 	initComponent : function() {
@@ -67,7 +67,7 @@ cwe.modelgrid.ModelGridPanel = Ext.extend(Ext.Panel, {
  */
 cwe.modelgrid.ModelGridPanel.prototype.getGrid = function() {
 	return this.grid;
-}
+};
 
 /**
  * Returns the Editor Container.
@@ -77,4 +77,4 @@ cwe.modelgrid.ModelGridPanel.prototype.getGrid = function() {
  */
 cwe.modelgrid.ModelGridPanel.prototype.getEditors = function() {
 	return this.editors;
-}
+};

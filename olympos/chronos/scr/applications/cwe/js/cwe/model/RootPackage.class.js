@@ -24,7 +24,7 @@ cwe.model.RootPackage = function() {
 	this.cweModelElementId = cwe.model.RootPackage.ROOT_PACKAGE_ID;
 	this.name = "RootPackage";
 	this.owningPackageId = null;
-}
+};
 
 Ext.extend(cwe.model.RootPackage, cwe.model.ModelPackage);
 

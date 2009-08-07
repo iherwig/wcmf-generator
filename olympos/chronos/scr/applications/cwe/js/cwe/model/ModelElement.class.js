@@ -57,7 +57,7 @@ cwe.model.ModelElement = function() {
 	 * @type String
 	 */
 	this.owningPackageId = null;
-}
+};
 
 /**
  * Returns the unique identifier of this Model Element.
@@ -67,7 +67,7 @@ cwe.model.ModelElement = function() {
  */
 cwe.model.ModelElement.prototype.getId = function() {
 	return this.cweModelElementId;
-}
+};
 
 /**
  * Returns the display name (label) of this Model Element.
@@ -77,7 +77,7 @@ cwe.model.ModelElement.prototype.getId = function() {
  */
 cwe.model.ModelElement.prototype.getName = function() {
 	return this.name;
-}
+};
 
 /**
  * Returns the CSS class defining this modelElement's tree icon (16x16 px).
@@ -87,7 +87,7 @@ cwe.model.ModelElement.prototype.getName = function() {
  */
 cwe.model.ModelElement.prototype.getTreeIconClass = function() {
 	return this.treeIconClass;
-}
+};
 
 /**
  * Returns the unique identifier of the Model Package containing this Model
@@ -99,7 +99,7 @@ cwe.model.ModelElement.prototype.getTreeIconClass = function() {
  */
 cwe.model.ModelElement.prototype.getOwningPackageId = function() {
 	return this.owningPackageId;
-}
+};
 
 /**
  * Returns the Model Package containing this Model Element.
@@ -109,4 +109,4 @@ cwe.model.ModelElement.prototype.getOwningPackageId = function() {
  */
 cwe.model.ModelElement.prototype.getOwningPackage = function() {
 	return cwe.model.ModelPackageContainer.getInstance().getPackage(this.getOwningPackageId());
-}
+};

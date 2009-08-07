@@ -27,7 +27,7 @@ Ext.namespace("cwe.modelgrid");
  * @see cwe.modelgrid.ModelGrid
  */
 cwe.modelgrid.ModelGridContainer = function() {
-}
+};
 
 cwe.modelgrid.ModelGridContainer = Ext.extend(Ext.TabPanel, {
 	initComponent : function() {
@@ -56,7 +56,7 @@ cwe.modelgrid.ModelGridContainer = Ext.extend(Ext.TabPanel, {
 		});
 		
 	}
-})
+});
 
 /**
  * Handler when tab is closed.
@@ -67,7 +67,7 @@ cwe.modelgrid.ModelGridContainer.prototype.tabClose = function(tabPanel, tab) {
 	if (tab instanceof cwe.modelgrid.ModelGridPanel) {
 		this.modelgrids.remove(tab);
 	}
-}
+};
 
 /**
  * Loads or shows (if already loaded) a model grid for the given Model Class.
@@ -95,7 +95,7 @@ cwe.modelgrid.ModelGridContainer.prototype.loadOrShow = function(modelClass) {
 	}
 	
 	return modelGrid;
-}
+};
 
 /**
  * Returns the instance of ModelGridContainer.
@@ -114,4 +114,4 @@ cwe.modelgrid.ModelGridContainer.getInstance = function() {
 	}
 	
 	return cwe.modelgrid.ModelGridContainer.instance;
-}
+};
