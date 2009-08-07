@@ -28,20 +28,20 @@ Ext.namespace("cwe.modeltree");
  *            config The configuration object.
  */
 cwe.modeltree.ModelTree = function() {
-}
+};
 
 cwe.modeltree.ModelTree = Ext.extend(Ext.tree.TreePanel, {
 	initComponent : function() {
 		Ext.apply(this, {
-			region : "west",
-			width : 250,
-			collapsible : true,
-			split : true,
-			autoScroll : true,
-			animate : true,
-			containerScroll : true,
-			rootVisible : false,
-			title : chi.Dict.translate("Model Tree")
+		    region : "west",
+		    width : 250,
+		    collapsible : true,
+		    split : true,
+		    autoScroll : true,
+		    animate : true,
+		    containerScroll : true,
+		    rootVisible : false,
+		    title : chi.Dict.translate("Model Tree")
 		});
 		
 		cwe.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);
@@ -81,7 +81,7 @@ cwe.modeltree.ModelTree.prototype.loadTree = function(currPackage) {
 	});
 	
 	return currNode;
-}
+};
 
 /**
  * Returns the instance of ModelTree.
@@ -95,4 +95,4 @@ cwe.modeltree.ModelTree.getInstance = function() {
 	}
 	
 	return cwe.modeltree.ModelTree.instance;
-}
+};

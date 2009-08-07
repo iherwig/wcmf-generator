@@ -26,7 +26,7 @@ cwe.model.ModelReferenceList = function(modelClass) {
 	});
 	
 	this.modelClass = modelClass;
-}
+};
 
 Ext.extend(cwe.model.ModelReferenceList, Ext.util.MixedCollection);
 
@@ -38,7 +38,7 @@ Ext.extend(cwe.model.ModelReferenceList, Ext.util.MixedCollection);
  */
 cwe.model.ModelReferenceList.prototype.getModelClass = function() {
 	return this.modelClass;
-}
+};
 
 /**
  * Returns a copy of this list, excluding the elements contained in
@@ -61,4 +61,4 @@ cwe.model.ModelReferenceList.prototype.except = function(otherList) {
 	});
 	
 	return result;
-}
+};

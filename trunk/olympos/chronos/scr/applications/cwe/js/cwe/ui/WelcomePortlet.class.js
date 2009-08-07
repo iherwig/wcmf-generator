@@ -26,6 +26,6 @@ cwe.ui.WelcomePortlet = function(config) {
 	    bodyStyle : "padding: 5px;",
 	    html : "<h1>" + chi.Dict.translate("Welcome to Chronos Web Editor!") + "</h1><p style='text-align: center;'><img src='img/logo.png' alt='Logo' /></p>"
 	}, config));
-}
+};
 
 Ext.extend(cwe.ui.WelcomePortlet, Ext.ux.Portlet);

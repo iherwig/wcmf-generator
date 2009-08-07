@@ -33,10 +33,10 @@ cwe.modelgrid.GridStore = function(config) {
 		fields : exampleRecord.fields,
 		remoteSort : true
 	}, config));
-}
+};
 
 Ext.extend(cwe.modelgrid.GridStore, Ext.data.Store);
 
 cwe.modelgrid.GridStore.prototype.getModelClass = function() {
 	return this.modelClass;
-}
+};

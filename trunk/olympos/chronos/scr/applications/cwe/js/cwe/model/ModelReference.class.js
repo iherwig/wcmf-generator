@@ -30,7 +30,7 @@ cwe.model.ModelReference = function(oid) {
 	 * @type String
 	 */
 	this.oid = oid;
-}
+};
 
 /**
  * Returns the Model Class of the target object.
@@ -40,7 +40,7 @@ cwe.model.ModelReference = function(oid) {
  */
 cwe.model.ModelReference.prototype.getModelClass = function() {
 	return chi.Util.getCweModelElementIdFromOid(this.oid);
-}
+};
 
 /**
  * Returns the oid of the target object.
@@ -50,4 +50,4 @@ cwe.model.ModelReference.prototype.getModelClass = function() {
  */
 cwe.model.ModelReference.prototype.getOid = function() {
 	return this.oid;
-}
+};

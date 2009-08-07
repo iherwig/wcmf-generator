@@ -29,7 +29,7 @@ Ext.namespace("cwe.modelgrid");
  * @config editors The Editor Container as target of object of this grid.
  */
 cwe.modelgrid.ModelGrid = function(config) {
-}
+};
 
 cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 	initComponent : function() {
@@ -68,11 +68,11 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		 * @type Ext.PagingToolbar
 		 */
 		this.pagingBar = new Ext.PagingToolbar( {
-			pageSize : this.objectPerPage,
-			store : this.store,
-			displayInfo : true,
-			displayMsg : chi.Dict.translate("Displaying objects {0} &ndash; {1} of {2}"),
-			emptyMsg : chi.Dict.translate("No objects to display")
+		    pageSize : this.objectPerPage,
+		    store : this.store,
+		    displayInfo : true,
+		    displayMsg : chi.Dict.translate("Displaying objects {0} &ndash; {1} of {2}"),
+		    emptyMsg : chi.Dict.translate("No objects to display")
 		});
 		
 		/**
@@ -82,11 +82,11 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		 * @type Ext.Toolbar.Button
 		 */
 		this.createButton = new Ext.Toolbar.Button( {
-			text : chi.Dict.translate("Create"),
-			iconCls : "createButton",
-			handler : function() {
-				self.createNew();
-			}
+		    text : chi.Dict.translate("Create"),
+		    iconCls : "createButton",
+		    handler : function() {
+			    self.createNew();
+		    }
 		});
 		
 		/**
@@ -96,15 +96,15 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		 * @type Ext.Toolbar.Button
 		 */
 		this.editButton = new Ext.Toolbar.Button( {
-			text : chi.Dict.translate("Edit"),
-			iconCls : "editButton",
-			handler : function() {
-				var records = self.getSelectionModel().getSelections();
-				
-				for ( var i = 0; i < records.length; i++) {
-					self.editors.loadOrShow(records[i].getOid(), records[i].getLabel());
-				}
-			}
+		    text : chi.Dict.translate("Edit"),
+		    iconCls : "editButton",
+		    handler : function() {
+			    var records = self.getSelectionModel().getSelections();
+			    
+			    for ( var i = 0; i < records.length; i++) {
+				    self.editors.loadOrShow(records[i].getOid(), records[i].getLabel());
+			    }
+		    }
 		});
 		
 		/**
@@ -114,52 +114,52 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		 * @type Ext.Toolbar.Button
 		 */
 		this.deleteButton = new Ext.Toolbar.Button( {
-			text : chi.Dict.translate("Delete"),
-			iconCls : "deleteButton",
-			handler : function() {
-				self.deleteSelected();
-			}
+		    text : chi.Dict.translate("Delete"),
+		    iconCls : "deleteButton",
+		    handler : function() {
+			    self.deleteSelected();
+		    }
 		});
 		
 		Ext.apply(this, {
-			region : "north",
-			height : 250,
-			split : true,
-			tbar : [ this.createButton, this.editButton, this.deleteButton ],
-			loadMask : true,
-			selModel : new Ext.grid.RowSelectionModel( {
-				singleSelect : false,
-				listeners : {
-					"selectionchange" : function(selModel) {
-						self.updateAssociateButton();
-					}
-				}
-			}),
-			columns : this.modelClass.getGridColumns(),
-			store : this.store,
-			plugins : [ new Ext.ux.grid.RowEditor( {
-				saveText : chi.Dict.translate("Save"),
-				cancelText : chi.Dict.translate("Cancel"),
-				clicksToEdit : 2,
-				listeners : {
-					"afteredit" : function() {
-						self.store.commitChanges();
-					}
-				}
-			}) ],
-			viewConfig : {
-				forceFit : true,
-				markDirty: false
-			},
-			bbar : this.pagingBar
+		    region : "north",
+		    height : 250,
+		    split : true,
+		    tbar : [ this.createButton, this.editButton, this.deleteButton ],
+		    loadMask : true,
+		    selModel : new Ext.grid.RowSelectionModel( {
+		        singleSelect : false,
+		        listeners : {
+			        "selectionchange" : function(selModel) {
+				        self.updateAssociateButton();
+			        }
+		        }
+		    }),
+		    columns : this.modelClass.getGridColumns(),
+		    store : this.store,
+		    plugins : [ new Ext.ux.grid.RowEditor( {
+		        saveText : chi.Dict.translate("Save"),
+		        cancelText : chi.Dict.translate("Cancel"),
+		        clicksToEdit : 2,
+		        listeners : {
+			        "afteredit" : function() {
+				        self.store.commitChanges();
+			        }
+		        }
+		    }) ],
+		    viewConfig : {
+		        forceFit : true,
+		        markDirty : false
+		    },
+		    bbar : this.pagingBar
 		});
 		
 		cwe.modelgrid.ModelGrid.superclass.initComponent.apply(this, arguments);
 		
 		this.store.load( {
 			params : {
-				start : 0,
-				limit : this.objectPerPage
+			    start : 0,
+			    limit : this.objectPerPage
 			}
 		});
 	}
@@ -176,7 +176,7 @@ cwe.modelgrid.ModelGrid.prototype.createNew = function() {
 	var self = this;
 	
 	self.editors.loadOrShow(null, "<i>" + chi.Dict.translate("New ${1}", self.modelClass.getName()) + "</i>", true);
-}
+};
 
 /**
  * Deletes the selected objects.
@@ -200,31 +200,31 @@ cwe.modelgrid.ModelGrid.prototype.deleteSelected = function() {
 		msgText += "</ul>";
 		
 		Ext.MessageBox.show( {
-			title : chi.Dict.translate("Delete Objects"),
-			msg : msgText,
-			buttons : Ext.MessageBox.YESNO,
-			fn : function(buttonId) {
-				if (buttonId == "yes") {
-					var actionSet = new chi.persistency.ActionSet();
-					
-					for ( var i = 0; i < records.length; i++) {
-						actionSet.addDestroy(records[i].getOid());
-					}
-					
-					actionSet.commit(function(data) {
-						var store = self.getStore();
-						
-						for ( var i = 0; i < records.length; i++) {
-							store.remove(records[i]);
-							
-							self.editors.removeEditor(records[i].getOid());
-						}
-					});
-				}
-			}
+		    title : chi.Dict.translate("Delete Objects"),
+		    msg : msgText,
+		    buttons : Ext.MessageBox.YESNO,
+		    fn : function(buttonId) {
+			    if (buttonId == "yes") {
+				    var actionSet = new chi.persistency.ActionSet();
+				    
+				    for ( var i = 0; i < records.length; i++) {
+					    actionSet.addDestroy(records[i].getOid());
+				    }
+				    
+				    actionSet.commit(function(data) {
+					    var store = self.getStore();
+					    
+					    for ( var i = 0; i < records.length; i++) {
+						    store.remove(records[i]);
+						    
+						    self.editors.removeEditor(records[i].getOid());
+					    }
+				    });
+			    }
+		    }
 		});
 	}
-}
+};
 
 /**
  * Opens an editor of the selected object.
@@ -245,7 +245,7 @@ cwe.modelgrid.ModelGrid.prototype.openEditor = function(grid, rowIndex, e) {
 	var record = store.getAt(rowIndex);
 	
 	this.editors.loadOrShow(record.getOid(), record.getLabel());
-}
+};
 
 /**
  * Adds a button for associating objects of this grid as target.
@@ -275,7 +275,7 @@ cwe.modelgrid.ModelGrid.prototype.addAssociateButton = function(button) {
 	this.getSelectionModel().clearSelections();
 	
 	this.doLayout();
-}
+};
 
 /**
  * Removes the associate button.
@@ -284,7 +284,7 @@ cwe.modelgrid.ModelGrid.prototype.removeAssociateButton = function() {
 	if (this.associateButton) {
 		this.getTopToolbar().remove(this.associateButton);
 	}
-}
+};
 
 /**
  * Enables or disables the associate button according to grid selection status.
@@ -308,4 +308,4 @@ cwe.modelgrid.ModelGrid.prototype.updateAssociateButton = function() {
 			this.associateButton.enable();
 		}
 	}
-}
+};

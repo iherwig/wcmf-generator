@@ -30,7 +30,7 @@ cwe.model.ModelClassContainer = function() {
 	 * @type Ext.util.MixedCollection
 	 */
 	this.classes = new Ext.util.MixedCollection();
-}
+};
 
 /**
  * Registers a Model Class and adds it to its parent package.
@@ -46,7 +46,7 @@ cwe.model.ModelClassContainer.prototype.registerClass = function(modelClass) {
 	this.classes.add(modelClass.getId(), modelClass);
 	
 	cwe.model.ModelPackageContainer.getInstance().addToPackage(modelClass);
-}
+};
 
 /**
  * Returns a registered Model Class.
@@ -58,7 +58,7 @@ cwe.model.ModelClassContainer.prototype.registerClass = function(modelClass) {
  */
 cwe.model.ModelClassContainer.prototype.getClass = function(cweModelClassId) {
 	return this.classes.get(cweModelClassId);
-}
+};
 
 /**
  * Returns all registered Model Classes.
@@ -68,7 +68,7 @@ cwe.model.ModelClassContainer.prototype.getClass = function(cweModelClassId) {
  */
 cwe.model.ModelClassContainer.prototype.getAllClasses = function() {
 	return this.classes;
-}
+};
 
 /**
  * Returns the instance of this class.
@@ -82,4 +82,4 @@ cwe.model.ModelClassContainer.getInstance = function() {
 	}
 	
 	return cwe.model.ModelClassContainer.instance;
-}
+};

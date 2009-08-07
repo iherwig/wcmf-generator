@@ -28,7 +28,7 @@ cwe.modeltree.ClassNode = function(config) {
 	this.on("click", function(node, e) {
 		self.openModelGrid();
 	});
-}
+};
 
 Ext.extend(cwe.modeltree.ClassNode, cwe.modeltree.Node);
 
@@ -37,4 +37,4 @@ Ext.extend(cwe.modeltree.ClassNode, cwe.modeltree.Node);
  */
 cwe.modeltree.ClassNode.prototype.openModelGrid = function() {
 	cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.getModelElement());
-}
+};
