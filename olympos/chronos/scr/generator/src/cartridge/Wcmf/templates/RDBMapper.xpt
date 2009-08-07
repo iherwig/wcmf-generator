@@ -180,7 +180,7 @@ class «curRoleName.asMapper()» extends «IF curRoleName == this.name»NodeUnifiedR
       * Value description: «curValue.getComment(" ")»
       */
       array('name' => '«curValue.name»', 'app_data_type' => «curValue.app_data_type», 'column_name' => '«curValue.getColumnName()»', «REM»NOBR«ENDREM-»
-'db_data_type' => '«curValue.db_data_type»', 'default' => '«curValue.defaultValue.stringValue()»', 'restrictions_match' => '«curValue.restrictions_match»', «REM»NOBR«ENDREM-»
+'db_data_type' => '«curValue.db_data_type.replaceAll("\\'", "\\\\'")»', 'default' => '«curValue.defaultValue.stringValue()»', 'restrictions_match' => '«curValue.restrictions_match»', «REM»NOBR«ENDREM-»
 'restrictions_not_match' => '«curValue.restrictions_not_match»', 'restrictions_description' => '«curValue.restrictions_description»', «REM»NOBR«ENDREM-»
 'is_editable' => «curValue.is_editable.boolString()», 'input_type' => '«curValue.input_type»', 'display_type' => '«curValue.display_type»')«REM»NOBR«ENDREM-»
 «IF Index1.counter1 < this.getWCMFValuesRecursive().size || this.getOrderByColumn() == "sortkey"»,«ENDIF»
