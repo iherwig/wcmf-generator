@@ -104,7 +104,8 @@ uwm.i18n.TranslationPanel.prototype.displayForm = function(modelNode, isLocked, 
 }
 
 uwm.i18n.TranslationPanel.prototype.getTitleText = function() {
-	return uwm.Dict.translate('Translation')+" ["+this.language+"]";
+	var languageName = uwm.i18n.Localization.getInstance().getLanguageName(this.language);
+	return uwm.Dict.translate('Translation')+" ["+languageName+"]";
 }
 
 /**

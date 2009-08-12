@@ -30,7 +30,7 @@ uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
 				data[i][0] = languages[i][0];
 				data[i][1] = languages[i][1];
 				if (data[i][0] == uwm.i18n.Localization.getInstance().getModelLanguage()) {
-					data[i][1] += '*';
+					data[i][1] += ' [Default]';
 				}
 			}
 			

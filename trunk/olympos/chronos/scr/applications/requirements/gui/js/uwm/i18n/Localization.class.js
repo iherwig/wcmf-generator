@@ -37,6 +37,21 @@ uwm.i18n.Localization.prototype.getUserLanguage = function() {
 }
 
 /**
+ * Get the name of a given language.
+ * @param {String} The language code
+ * @return {String} The language name
+ */
+uwm.i18n.Localization.prototype.getLanguageName = function(language) {
+	var languages = this.getAllLanguages();
+	for (var i=0; i<languages.length; i++) {
+		if (languages[i][0] == language) {
+			return languages[i][1];
+		}
+	}
+	return '';
+}
+
+/**
  * Get all languages that this application supports.
  * @return {Array} An array of arrays where the first item is the language
  * code and the second item is the language name
