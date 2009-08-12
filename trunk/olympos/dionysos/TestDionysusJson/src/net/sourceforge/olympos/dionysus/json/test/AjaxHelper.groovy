@@ -1,8 +1,6 @@
 package net.sourceforge.olympos.dionysus.json.test;
 
-import static org.junit.Assert.*;
-
-import java.net.URI;
+import static org.junit.Assert.*
 
 import groovyx.net.http.HTTPBuilder
 import static groovyx.net.http.Method.GET
@@ -43,13 +41,17 @@ import static groovyx.net.http.ContentType.JSON
 				body = params
 			}
 			
-			
 			response.success = { resp, json ->
+				if (Cfg.debug) {
+					System.out << json
+				}
+				assertNotNull(json)
+
 				handler(resp, json)
 			}
 			
-			response.failure = { resp ->
-				fail("Server error with status code " + resp.statusLine.statusCode);
+			response.failure = { resp, stream ->
+				fail("Server error with status code " + resp.statusLine.statusCode)
 			}
 		}
 	}
