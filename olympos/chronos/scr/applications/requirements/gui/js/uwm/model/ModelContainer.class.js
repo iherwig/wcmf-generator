@@ -268,20 +268,21 @@ uwm.model.ModelContainer.prototype.loadByOid = function(oid, callback, depth, se
 	}
 	
 	if (callback instanceof uwm.persistency.ActionSet) {
-		callback.addDisplay(oid, depth, function(request, data) {
-			var node = self.createByDisplayResult(data);
-			
-			if (secondCallback) {
-				secondCallback(node);
-			}
+		callback.addDisplay(oid, depth, uwm.i18n.Localization.getInstance().getUserLanguage(), 
+      function(request, data) {
+        var node = self.createByDisplayResult(data);
+        if (secondCallback) {
+          secondCallback(node);
+        }
 		});
 	} else {
-		uwm.persistency.Persistency.getInstance().display(oid, depth, function(request, data) {
-			var node = self.createByDisplayResult(data);
-			
-			if (callback) {
-				callback(node);
-			}
+		uwm.persistency.Persistency.getInstance().display(oid, depth, 
+			uwm.i18n.Localization.getInstance().getUserLanguage(), function(request, data) {
+				var node = self.createByDisplayResult(data);
+				
+				if (callback) {
+					callback(node);
+				}
 		});
 	}
 }
@@ -314,13 +315,18 @@ uwm.model.ModelContainer.prototype.getNode = function(uwmClassName, oid) {
 	var newModelNode = this.items.get(oid);
 	
 	if (!newModelNode) {
-		var realModelClass = modelClass.getRealModelClass();
-		var newModelNode = eval("new " + modelClass.getInstanceClassName() +
-		"(realModelClass)");
+		var newModelNode = this.createNodeInstance(uwmClassName);
 	}
 
 	newModelNode.oid = oid;
 	
+	return newModelNode;
+}
+
+uwm.model.ModelContainer.prototype.createNodeInstance = function(uwmClassName) {
+	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwmClassName);
+	var realModelClass = modelClass.getRealModelClass();
+	var newModelNode = eval("new " + modelClass.getInstanceClassName() + "(realModelClass)");
 	return newModelNode;
 }
 

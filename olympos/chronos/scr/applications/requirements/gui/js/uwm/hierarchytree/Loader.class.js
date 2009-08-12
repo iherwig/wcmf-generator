@@ -43,8 +43,9 @@ uwm.hierarchytree.Loader.prototype.load = function(node, callback) {
 	
 	var self = this;
 	
-	uwm.persistency.Persistency.getInstance().display(oid, uwm.hierarchytree.Loader.DEFAULT_LOAD_DEPTH, function(request, data) {
-		self.reformatData(self, node, callback, data);
+	uwm.persistency.Persistency.getInstance().display(oid, uwm.hierarchytree.Loader.DEFAULT_LOAD_DEPTH, 
+		uwm.i18n.Localization.getInstance().getUserLanguage(), function(request, data) {
+			self.reformatData(self, node, callback, data);
 	});
 }
 

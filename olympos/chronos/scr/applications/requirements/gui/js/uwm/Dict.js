@@ -149,7 +149,7 @@ uwm.Dict.translate = function(){
 	strword=arguments[0];
 
 	try {
-		strresult = uwm.Dict.voc[strword][uwm.Session.getInstance().getLang()];
+		strresult = uwm.Dict.voc[strword][uwm.i18n.Localization.getInstance().getUserLanguage()];
 		if(!strresult){strresult = strword;}
 	}catch(e){
 		strresult = strword;

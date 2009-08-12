@@ -92,11 +92,12 @@ uwm.persistency.ActionSet.prototype.addDisassociate = function(parentOid,
 }
 
 uwm.persistency.ActionSet.prototype.addSave = function(oid, values,
-		successHandler, errorHandler, errorLevel) {
+		language, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"save",
 		oid :oid,
 		values :values,
+		language :language,
 		successHandler :successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
@@ -104,11 +105,12 @@ uwm.persistency.ActionSet.prototype.addSave = function(oid, values,
 }
 
 uwm.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
-		successHandler, errorHandler, errorLevel) {
+		language, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"display",
 		oid :oid,
 		depth :depth,
+		language :language,
 		successHandler :successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
@@ -126,22 +128,24 @@ uwm.persistency.ActionSet.prototype.addList = function(uwmClassName,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addListbox = function(type, successHandler,
-		errorHandler, errorLevel) {
+uwm.persistency.ActionSet.prototype.addListbox = function(type, language, 
+		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"listbox",
 		type :type,
+		language :language,
 		successHandler :successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addAutocomplete = function(query,
+uwm.persistency.ActionSet.prototype.addAutocomplete = function(query, language,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"autocomplete",
 		query :query,
+		language :language,
 		successHandler :successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
