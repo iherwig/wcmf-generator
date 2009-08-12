@@ -64,22 +64,22 @@ uwm.persistency.Persistency.prototype.associate = function(parentOid, childOid, 
 uwm.persistency.Persistency.prototype.disassociate = function(parentOid, childOid, successHandler, errorHandler) {
 }
 
-uwm.persistency.Persistency.prototype.save = function(oid, values, successHandler, errorHandler) {
+uwm.persistency.Persistency.prototype.save = function(oid, values, language, successHandler, errorHandler) {
 }
 
-uwm.persistency.Persistency.prototype.display = function(oid, depth, successHandler, errorHandler) {
+uwm.persistency.Persistency.prototype.display = function(oid, depth, language, successHandler, errorHandler) {
 }
 
 uwm.persistency.Persistency.prototype.list = function(uwmClassName, successHandler, errorHandler) {
 }
 
-uwm.persistency.Persistency.prototype.listbox = function(type, successHandler, errorHandler) {
+uwm.persistency.Persistency.prototype.listbox = function(type, language, successHandler, errorHandler) {
 }
 
-uwm.persistency.Persistency.prototype.autocomplete = function(query, successHandler, errorHandler){
+uwm.persistency.Persistency.prototype.autocomplete = function(query, language, successHandler, errorHandler){
 }
 
-uwm.persistency.Persistency.prototype.histlist = function(oid,start,limit, successHandler, errorHandler){
+uwm.persistency.Persistency.prototype.histlist = function(oid, start, limit, successHandler, errorHandler){
 }
 
 uwm.persistency.Persistency.prototype.restorehistliststate = function(id, successHandler, errorHandler){

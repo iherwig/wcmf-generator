@@ -25,8 +25,12 @@ uwm.persistency.Json = function() {
 uwm.persistency.Json.prototype = new uwm.persistency.Persistency;
 
 uwm.persistency.Json.prototype.jsonRequest = function(params, successHandler, errorHandler) {
+	// the default parameters
 	params.sid = this.sid;
 	params.response_format = "JSON";
+	if (params.language == undefined) {
+		params.language = uwm.i18n.Localization.getInstance().getUserLanguage();
+	}
 	
 	var self = this;
 	
@@ -122,9 +126,10 @@ uwm.persistency.Json.prototype.disassociate = function(parentOid, childOid, succ
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.save = function(oid, values, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.save = function(oid, values, language, successHandler, errorHandler) {
 	var data = {
-		usr_action: "save"
+		usr_action: "save",
+		language: language
 	};
 	
 	for (var i in values) {
@@ -136,11 +141,12 @@ uwm.persistency.Json.prototype.save = function(oid, values, successHandler, erro
 	this.jsonRequest(data, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.display = function(oid, depth, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.display = function(oid, depth, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "display",
 		oid: oid,
 		depth: depth,
+		language: language,
 		omitMetaData: true,
 		translateValues: true
 	}, successHandler, errorHandler);
@@ -153,22 +159,24 @@ uwm.persistency.Json.prototype.list = function(uwmClassName, successHandler, err
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.listbox = function(type, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.listbox = function(type, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "listbox",
-		type: type
+		type: type,
+		language: language
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.autocomplete = function(query, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.autocomplete = function(query, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'autocomplete',
-		query: query
+		query: query,
+		language: language
 	}, successHandler, errorHandler);
 	
 }
 
-uwm.persistency.Json.prototype.histlist = function(oid,start,limit, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.histlist = function(oid, start, limit, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'histlist',
 		oid:oid,
@@ -373,6 +381,7 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 			case "display":
 				jsonRequest.oid = currRequest.oid;
 				jsonRequest.depth = currRequest.depth;
+				jsonRequest.language = currRequest.language;
 				jsonRequest.omitMetaData = true;
 				jsonRequest.translateValues = true;
 				break;
@@ -383,10 +392,12 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				
 			case "listbox":
 				jsonRequest.type = currRequest.type;
+				jsonRequest.language = currRequest.language;
 				break;
 				
 			case "autocomplete":
 				jsonRequest.query = currRequest.query;
+				jsonRequest.language = currRequest.language;
 				break;
 				
 			case "loadChildren":

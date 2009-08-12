@@ -9,7 +9,7 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
-Ext.namespace("uwm.ui");
+Ext.namespace("uwm.i18n");
 
 /**
  * @class The language selection listbox.
@@ -19,25 +19,18 @@ Ext.namespace("uwm.ui");
  * @param {Object}
  *            config The configuration object.
  */
-uwm.ui.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
-		/**
-		 * @cfg {Boolean} includeDefault
-		 * 
-		 * Indicates if the default language should be included or not.
-		 * Defaults to true.
-		 */
-		includeDefault: true,
-		
+uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
 		initComponent:function() {
 		
-			var data = uwm.Config.languages;
-			
-			// remove the default language if requested
-			if (!this.includeDefault) {
-				for (var i=0; i<data.length; i++) {
-					if (data[i][0] == uwm.Config.defaultLanguage) {
-						data.splice(i, 1);
-					}
+			// copy languages into listbox data
+			var languages = uwm.i18n.Localization.getInstance().getAllLanguages();
+			var data = new Array();
+			for (var i=0; i<languages.length; i++) {
+				data[i] = new Array();
+				data[i][0] = languages[i][0];
+				data[i][1] = languages[i][1];
+				if (data[i][0] == uwm.i18n.Localization.getInstance().getModelLanguage()) {
+					data[i][1] += '*';
 				}
 			}
 			
@@ -61,8 +54,12 @@ uwm.ui.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
 				triggerAction: 'all'
 			});
 		
-			uwm.ui.LanguageListBox.superclass.initComponent.call(this);
+			uwm.i18n.LanguageListBox.superclass.initComponent.call(this);
 			this.setValue(data[0][0]);
 		}
 	}
 );
+
+uwm.i18n.LanguageListBox.prototype.getLanguageFromRecord = function(record) {
+	return record.get('key');
+}

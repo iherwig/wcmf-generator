@@ -31,6 +31,7 @@ uwm.model.ModelNode = function(modelNodeClass) {
 	this.maskedOids = {};
 	this.parentOids = [];
 	this.childOids = [];
+	this.language = null;
 }
 
 uwm.model.ModelNode.prototype.initByDisplayResult = function(node) {
@@ -151,14 +152,24 @@ uwm.model.ModelNode.prototype.getLabel = function() {
 	return result;
 }
 
+uwm.model.ModelNode.prototype.getLanguage = function() {
+	// set the default value lazily, because the default language 
+	// may not be defined in the beginning
+	if (this.language == null) {
+		this.language = uwm.i18n.Localization.getInstance().getUserLanguage();
+	}
+	return this.language;
+}
+
 uwm.model.ModelNode.prototype.reload = function(callback) {
 	var self = this;
 	
-	uwm.persistency.Persistency.getInstance().display(this.oid, 0, function(request, data) {
-		self.initByDisplayResult(data.node);
-		if (callback instanceof Function) {
-			callback(self);
-		}
+	uwm.persistency.Persistency.getInstance().display(this.oid, 0, this.getLanguage(), 
+		function(request, data) {
+			self.initByDisplayResult(data.node);
+			if (callback instanceof Function) {
+				callback(self);
+			}
 	});
 }
 
@@ -189,12 +200,13 @@ uwm.model.ModelNode.prototype.changeProperties = function(values) {
 	
 	var self = this;
 	
-	uwm.persistency.Persistency.getInstance().save(this.getOid(), values, function(request, data) {
-		uwm.event.EventBroker.getInstance().fireEvent("changeProperty", self, oldValues);
-		
-		if (changedLabel) {
-			uwm.event.EventBroker.getInstance().fireEvent("changeLabel", self, oldLabels);
-		}
+	uwm.persistency.Persistency.getInstance().save(this.getOid(), values, this.getLanguage(), 
+		function(request, data) {
+			uwm.event.EventBroker.getInstance().fireEvent("changeProperty", self, oldValues);
+			
+			if (changedLabel) {
+				uwm.event.EventBroker.getInstance().fireEvent("changeLabel", self, oldLabels);
+			}
 	});
 }
 

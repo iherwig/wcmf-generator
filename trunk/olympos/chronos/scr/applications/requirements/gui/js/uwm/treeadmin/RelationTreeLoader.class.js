@@ -21,8 +21,9 @@ uwm.treeadmin.RelationTreeLoader.prototype.load = function(node, callback) {
 	var self = this;
 	
 	if (node instanceof uwm.treeadmin.RelationNode) {
-		uwm.persistency.Persistency.getInstance().display(node.modelObject.getOid(), 1, function(options, data) {
-			self.reformatDisplayData(self, node, callback, data);
+		uwm.persistency.Persistency.getInstance().display(node.modelObject.getOid(), 1, 
+			uwm.i18n.Localization.getInstance().getUserLanguage(), function(options, data) {
+				self.reformatDisplayData(self, node, callback, data);
 		});
 	} else if (node instanceof uwm.treeadmin.NewRelationNode) {
 		uwm.persistency.Persistency.getInstance().list(node.connectionTarget, function(options, data) {

@@ -57,7 +57,7 @@ uwm.ui.Login = function(config){
             allowBlank: false,
             value: uwm.Config.defaultPassword
         }), 
-		new uwm.ui.LanguageListBox(), 
+		new uwm.i18n.LanguageListBox(), 
 		new Ext.Panel({
         	cls: "uwm-revisioninfo",
         	html: "<p>" + uwm.Dict.translate("Revision") + ": " + uwm.Constants.SVN_REVISION + "</p>"
