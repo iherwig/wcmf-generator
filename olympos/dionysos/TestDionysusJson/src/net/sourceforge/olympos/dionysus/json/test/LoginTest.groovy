@@ -1,138 +1,66 @@
 package net.sourceforge.olympos.dionysus.json.test;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
-import groovyx.net.http.HTTPBuilder
-import static groovyx.net.http.Method.GET
-import static groovyx.net.http.ContentType.TEXT
-public class LoginTest {
-	def loginSuccessTester = {req, json ->
-		if (Cfg.debug) {
-			System.out << json
-		}
-		assertNotNull(json)
+import static org.junit.Assert.*
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;import org.junit.runners.Parameterized.Parameters;
+public class LoginTest extends DionysusTest {
+	public LoginTest(String method) {
+		super(method)
+	}
 	
+	def loginSuccessTester = {req, json ->
 		assertTrue(json.success)
+		assertEquals('login', json.action)
+		assertEquals(Cfg.user, json.user)
+		assertEquals(Cfg.password, json.password)
+		assertNotNull(json.sid)
 		assertNotNull(json.roles)
 		assertNotNull(json.implementedPackages)
 		assertTrue(json.implementedPackages.contains('base'))
 	} 
 
 	@Test
-	public void successGet() {
+	public void success() {
 		AjaxHelper.request(
 			[
+			 	action: 'login',
 				user: Cfg.user,
 				password: Cfg.password
 			],
 			loginSuccessTester,
-			'get'
-		)
-	}
-
-	@Test
-	public void successPost() {
-		AjaxHelper.request(
-			[
-				user: Cfg.user,
-				password: Cfg.password
-			],
-			loginSuccessTester,
-			'post'
-		)
-	}
-
-	@Test
-	public void successJson() {
-		AjaxHelper.request(
-			[
-				user: Cfg.user,
-				password: Cfg.password
-			],
-			loginSuccessTester,
-			'json'
+			this.method
 		)
 	}
 
 	def authenticationFailedTester = {req, json ->
-		if (Cfg.debug) {
-			System.out << json
-		}
-		assertNotNull(json)
-	
 		assertFalse(json.success)
 		assertEquals('AUTHENTICATION_FAILED', json.errorCode)
 	}
 
 	@Test
-	public void wrongPasswordGet() {
+	public void wrongPassword() {
 		AjaxHelper.request(
 			[
+			 	action: 'login',
 				user: Cfg.user,
 				password: Cfg.password + 'Wrong'
 			],
 			authenticationFailedTester,
-			'get'
+			this.method
 		)
 	}
 
 	@Test
-	public void wrongPasswordPost() {
+	public void unknownUser() {
 		AjaxHelper.request(
 			[
-				user: Cfg.user,
-				password: Cfg.password + 'Wrong'
-			],
-			authenticationFailedTester,
-			'post'
-		)
-	}
-
-	@Test
-	public void wrongPasswordJson() {
-		AjaxHelper.request(
-			[
-				user: Cfg.user,
-				password: Cfg.password + 'Wrong'
-			],
-			authenticationFailedTester,
-			'json'
-		)
-	}
-
-	@Test
-	public void unknownUserGet() {
-		AjaxHelper.request(
-			[
+			 	action: 'login',
 				user: Cfg.user + 'Unknown',
 				password: Cfg.password
 			],
 			authenticationFailedTester,
-			'get'
-		)
-	}
-
-	@Test
-	public void unknownUserPost() {
-		AjaxHelper.request(
-			[
-				user: Cfg.user + 'Unknown',
-				password: Cfg.password
-			],
-			authenticationFailedTester,
-			'post'
-		)
-	}
-
-	@Test
-	public void unknownUserJson() {
-		AjaxHelper.request(
-			[
-				user: Cfg.user + 'Unknown',
-				password: Cfg.password
-			],
-			authenticationFailedTester,
-			'json'
+			this.method
 		)
 	}
 }
