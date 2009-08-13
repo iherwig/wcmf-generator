@@ -334,6 +334,11 @@ uwm.modeltree.ModelTree.prototype.handleDeleteEvent = function(modelObject) {
 }
 
 uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject, oldLabel, newLabel) {
+	// don't update nodes, it the are translated into a different language
+	if (modelObject.getLanguage() != uwm.i18n.Localization.getInstance().getUserLanguage()) {
+		return;
+	}
+
 	var oid = modelObject.getOid();
 	
 	var createdModel = this.createdModels.get(oid);
