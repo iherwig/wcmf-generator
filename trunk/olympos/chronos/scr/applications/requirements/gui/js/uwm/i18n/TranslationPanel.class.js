@@ -39,6 +39,7 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 		this.isLocked = null;
 		
 		this.languageListBox = new uwm.i18n.LanguageListBox({
+			includeUserLanguage: false,
 			hideLabel: true,
 			width: 200,
 			listeners: {

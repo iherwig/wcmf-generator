@@ -20,10 +20,19 @@ Ext.namespace("uwm.i18n");
  *            config The configuration object.
  */
 uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
-		initComponent:function() {
+		/**
+		 * @cfg {Boolean} includeDefault
+		 * 
+		 * Indicates if the user language should be included or not.
+		 * Defaults to true.
+		 */
+		includeUserLanguage: true,
+
+		initComponent: function() {
 		
 			// copy languages into listbox data
-			var languages = uwm.i18n.Localization.getInstance().getAllLanguages();
+			var loc = uwm.i18n.Localization.getInstance();
+			var languages = loc.getAllLanguages();
 			var data = new Array();
 			for (var i=0; i<languages.length; i++) {
 				data[i] = new Array();
@@ -31,6 +40,15 @@ uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
 				data[i][1] = languages[i][1];
 				if (data[i][0] == uwm.i18n.Localization.getInstance().getModelLanguage()) {
 					data[i][1] += ' [Default]';
+				}
+			}
+
+			// remove the user language if requested
+			if (!this.includeUserLanguage) {
+				for (var i=0; i<data.length; i++) {
+					if (data[i][0] == loc.getUserLanguage()) {
+						data.splice(i, 1);
+					}
 				}
 			}
 			
