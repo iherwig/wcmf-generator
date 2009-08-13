@@ -36,6 +36,9 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 			layout: "fit",
 			region: "center",
 			width: 250,
+			autoScroll: false,
+			autoHeight: true,
+			border: false,
 			title: uwm.Dict.translate('Properties')+" ["+languageName+"]",
 			tools:[{
 				id: 'gear',
@@ -57,28 +60,24 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 			layout: "fit",
 			region: "west",
 			width: 250,
+			autoScroll: false,
+			autoHeight: true,
+			border: false,
+			/* add a separation to the next panel */
+			style: "border-right:1px solid #99BBE8;",
 			hidden: true
 		});
-		
-		this.propertyPanel = new Ext.Panel({
-			region: "center",
-			layout: "border",
-			width: 250,
-			border: false,
-			items: [this.mainPanel, this.translationPanel]
-		});
-	
+
 		Ext.apply(this, {
 			region: "center",
 			layout: "border",
 			border: false,
 			collapsible: false,
-			split: false,
+			split: true,
 			width: 250,
 			autoScroll: true,
-			title: uwm.Dict.translate('Properties'),
-			headerAsText: false,
-			items: [this.propertyPanel]
+			header: false,
+			items: [this.mainPanel, this.translationPanel]
 		})
 		
 		uwm.property.PropertyContainer.instance = this;
@@ -127,6 +126,9 @@ uwm.property.PropertyContainer.prototype.doResize = function() {
 	if (this.isTranslationPanelOpen() && width > 0) {
 		this.mainPanel.setWidth(width/2);
 		this.translationPanel.setWidth(width/2);
+	}
+	else {
+		this.mainPanel.setWidth(width);
 	}
 }
 
@@ -196,7 +198,7 @@ uwm.property.PropertyContainer.prototype.displayForm = function() {
 	this.doLayout();
 	
 	modelNode.populatePropertyForm(form);
-	
+
 	this.hideMask();
 }
 
@@ -229,8 +231,6 @@ uwm.property.PropertyContainer.prototype.handleDeleteEvent = function(modelObjec
 uwm.property.PropertyContainer.prototype.openTranslationPanel = function() {
 	var targetWidth = 500;
 
-	this.propertyPanel.setWidth(targetWidth);
-
 	// move splitbar
 	var eastPanel = uwm.Uwm.getInstance().getActiveWorkbench().getEastPanel();
 	eastPanel.setWidth(targetWidth);
@@ -254,8 +254,6 @@ uwm.property.PropertyContainer.prototype.openTranslationPanel = function() {
 uwm.property.PropertyContainer.prototype.closeTranslationPanel = function() {
 	var targetWidth = 250;
 
-	this.propertyPanel.setWidth(targetWidth);
-	
 	// hide translation panel and form
 	this.translationPanel.setVisible(false);
 	this.hideForm(this.translationPanel);

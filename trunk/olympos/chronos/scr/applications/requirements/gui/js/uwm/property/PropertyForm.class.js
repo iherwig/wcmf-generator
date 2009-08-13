@@ -26,17 +26,20 @@ uwm.property.PropertyForm = function() {
 uwm.property.PropertyForm = Ext.extend(Ext.form.FormPanel, {
 	initComponent : function() {
 		Ext.apply(this, {
-		    labelWidth : 90,
-		    frame : true,
-		    labelAlign : "top",
-		    autoScroll : true,
-		    defaults : {
-			    width : "auto"
-		    },
-		    msgTarget : "side",
-		    plugins : [ new Ext.ux.form.FieldAutoExpand( {
-			    labelOffsetFix : 90
-		    }) ]
+			labelWidth: 90,
+			bodyStyle: "padding:5px;",
+			bodyCssClass: "x-panel-mc",
+			labelAlign: "top",
+			autoScroll: false,
+			autoHeight: true,
+			border: false,
+			defaults: {
+				width: "auto"
+			},
+			msgTarget: "side",
+			plugins: [ new Ext.ux.form.FieldAutoExpand( {
+				labelOffsetFix : 90
+			}) ]
 		})
 
 		uwm.property.PropertyForm.superclass.initComponent.apply(this, arguments);
