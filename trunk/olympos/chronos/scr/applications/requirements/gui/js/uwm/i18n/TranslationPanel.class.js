@@ -24,7 +24,17 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 		var self = this;
 
-		this.language = uwm.i18n.Localization.getInstance().getUserLanguage();
+		// select the first language that is not the user language per default
+		var loc = uwm.i18n.Localization.getInstance();
+		this.language = loc.getUserLanguage();
+		var languages = loc.getAllLanguages();
+		for (var i=0; i<languages.length; i++) {
+			if (languages[i][0] != this.language) {
+				this.language = languages[i][0];
+				break;
+			}
+		}
+		
 		this.currentOid = null;
 		this.isLocked = null;
 		
