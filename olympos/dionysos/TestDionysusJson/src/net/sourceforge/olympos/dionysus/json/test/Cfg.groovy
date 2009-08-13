@@ -27,4 +27,29 @@ package net.sourceforge.olympos.dionysus.json.test;
 	 * A valid field name of the listClass 
 	 */
 	static listClassFieldName = 'title'
+
+	/**
+	 * The oid of the base object to test read with.
+	 */
+	static readBaseOid = 'Movie:123'
+	/**
+	 * Attribute name of the attribute of the base object which contains the first level object
+	 */
+	static readBaseAttributeName = 'director'
+	/**
+	 * Oid of the object contained directly in the base object
+	 */
+	static readFirstLevelOid = 'Person:234'
+	/**
+	 * Attribute name of the attribute of the first level object which contains the second level object
+	 */
+	static readFirstLevelAttributeName = 'shirt'
+	/**
+	 * Attribute name of the attribute of the first level object containing the base object
+	 */
+	static readFirstLevelParentAttributeName = 'mainMovie'
+	/**
+	 * Oid of the object contained by the first level object
+	 */
+	static readSecondLevelOid = 'Clothes:345'
 }

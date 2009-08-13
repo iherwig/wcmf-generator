@@ -10,25 +10,6 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 		super(method)
 	}
 	
-	private void assertElementClasses(json) {
-		json.list.each {
-			assertEquals(Cfg.listClassName, it.className.substring(0, Cfg.listClassName.length()))
-		}
-	}
-
-	private void assertSorting(json, boolean reverse = false) {
-		def sortedList = json.list.clone()
-		sortedList.sort{it[Cfg.listClassFieldName]}
-
-		if (reverse) {
-			sortedList = sortedListe.reverse()
-		}
-
-		sortedList.eachWithIndex { obj, i ->
-			assertEquals(obj, json.list[i])
-		}
-	}
-
 	@Test
 	public void simple() {
 		ensureLogin()
@@ -329,5 +310,24 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 			},
 			this.method
 		)
+	}
+
+	private void assertElementClasses(json) {
+		json.list.each {
+			assertEquals(Cfg.listClassName, it.className.substring(0, Cfg.listClassName.length()))
+		}
+	}
+
+	private void assertSorting(json, boolean reverse = false) {
+		def sortedList = json.list.clone()
+		sortedList.sort{it[Cfg.listClassFieldName]}
+
+		if (reverse) {
+			sortedList = sortedListe.reverse()
+		}
+
+		sortedList.eachWithIndex { obj, i ->
+			assertEquals(obj, json.list[i])
+		}
 	}
 }
