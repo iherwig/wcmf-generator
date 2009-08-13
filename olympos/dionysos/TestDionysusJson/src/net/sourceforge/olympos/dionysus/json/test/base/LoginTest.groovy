@@ -1,9 +1,10 @@
-package net.sourceforge.olympos.dionysus.json.test;
+package net.sourceforge.olympos.dionysus.json.test.base;
 
 import static org.junit.Assert.*
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;import org.junit.runners.Parameterized.Parameters;
+import net.sourceforge.olympos.dionysus.json.test.DionysusTest;
+import net.sourceforge.olympos.dionysus.json.test.Cfg;
+
+import org.junit.Test;
 public class LoginTest extends DionysusTest {
 	public LoginTest(String method) {
 		super(method)
@@ -22,7 +23,7 @@ import org.junit.runners.Parameterized;import org.junit.runners.Parameterized.P
 
 	@Test
 	public void success() {
-		AjaxHelper.request(
+		request(
 			[
 			 	action: 'login',
 				user: Cfg.user,
@@ -40,7 +41,7 @@ import org.junit.runners.Parameterized;import org.junit.runners.Parameterized.P
 
 	@Test
 	public void wrongPassword() {
-		AjaxHelper.request(
+		request(
 			[
 			 	action: 'login',
 				user: Cfg.user,
@@ -53,7 +54,7 @@ import org.junit.runners.Parameterized;import org.junit.runners.Parameterized.P
 
 	@Test
 	public void unknownUser() {
-		AjaxHelper.request(
+		request(
 			[
 			 	action: 'login',
 				user: Cfg.user + 'Unknown',
