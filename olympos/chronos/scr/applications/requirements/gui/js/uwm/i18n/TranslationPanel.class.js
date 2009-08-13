@@ -20,12 +20,24 @@ Ext.namespace("uwm.i18n");
  *            config The configuration object.
  */
 uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
+
 	initComponent: function() {
 		var self = this;
 
 		this.language = uwm.i18n.Localization.getInstance().getUserLanguage();
 		this.currentOid = null;
 		this.isLocked = null;
+		
+		this.languageListBox = new uwm.i18n.LanguageListBox({
+			hideLabel: true,
+			width: 200,
+			listeners: {
+				"select": function(field, record, index) {
+					self.setLanguage(self.languageListBox.getLanguageFromRecord(record));
+				}
+			}
+		});
+		this.languageListBox.setValue(this.language);
 		
 		Ext.apply(this, {
 			title: self.getTitleText(),
@@ -35,7 +47,15 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 				handler: function(event, toolEl, panel) {
 					uwm.property.PropertyContainer.getInstance().closeTranslationPanel();
 				}
-			}]
+			}],
+			plugins: [new Ext.ux.GhostBar({
+				threshold: 5,
+				position: 'top',
+				style: {
+					overflow: 'visible'
+				},
+				items: this.languageListBox
+			})]
 		})
 		
 		uwm.i18n.TranslationPanel.superclass.initComponent.apply(this, arguments);
@@ -72,28 +92,7 @@ uwm.i18n.TranslationPanel.prototype.showTranslation = function(oid, language, is
 uwm.i18n.TranslationPanel.prototype.displayForm = function(modelNode, isLocked, callback) {
 	var form = modelNode.getModelNodeClass().getPropertyForm(modelNode, isLocked);
 	this.add(form);
-	
-	// add the translation tools
-	var self = this;
-	this.languageListBox = new uwm.i18n.LanguageListBox({
-		hideLabel: true,
-		width: 200,
-		listeners: {
-			"select": function(field, record, index) {
-				self.setLanguage(self.languageListBox.getLanguageFromRecord(record));
-			}
-		}
-	});
-	this.languageListBox.setValue(this.language);
-		
-	form.add({
-		xtype: 'fieldset',
-		title: uwm.Dict.translate('Language'),
-		autoHeight: true,
-		autoWidth: true,
-		items: this.languageListBox
-	});
-	
+
 	this.doLayout();
 	
 	modelNode.populatePropertyForm(form);
