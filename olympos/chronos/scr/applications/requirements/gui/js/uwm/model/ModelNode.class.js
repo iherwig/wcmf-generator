@@ -180,6 +180,11 @@ uwm.model.ModelNode.prototype.getProperty = function(propertyName) {
 	return this.data[propertyName];
 }
 
+/**
+ * Change one or more properties of the node.
+ * @param values An associative array with the property names as keys and the new values
+ * as values. Fires the changePropery and changeLabel event.
+ */
 uwm.model.ModelNode.prototype.changeProperties = function(values) {
 	var oldValues = new Object();
 	var oldLabels = new Object();

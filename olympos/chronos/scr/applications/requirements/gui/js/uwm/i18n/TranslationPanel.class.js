@@ -139,7 +139,12 @@ uwm.i18n.TranslationPanel.prototype.lockUntranslatableControls = function() {
 	if (this.form != null) {
 		for (var i=0; i<this.form.items.getCount(); i++) {
 			var curItem = this.form.items.get(i);
-			if (curItem instanceof uwm.property.ComboBox) {
+			if (curItem instanceof uwm.property.ComboBox ||
+				curItem instanceof uwm.property.NumberField || 
+				curItem instanceof uwm.property.StaticComboBox ||
+				curItem instanceof uwm.property.Radio ||
+				curItem instanceof uwm.property.PasswordField ||
+				curItem instanceof uwm.property.DateField) {
 				curItem.setDisabled(true);
 			}
 		}
@@ -149,14 +154,28 @@ uwm.i18n.TranslationPanel.prototype.lockUntranslatableControls = function() {
 /**
  * Handle a property change of the original object whose translation is shown
  */
-uwm.i18n.TranslationPanel.prototype.handleChangePropertyEvent = function(modelObject, values) {
+uwm.i18n.TranslationPanel.prototype.handleChangePropertyEvent = function(modelObject, oldValues) {
 	if (this.form != null) {
-		for (var attr in values) {
-			// find the control for the current attribute
+		for (var curProp in oldValues) {
+			var newValue = modelObject.getProperty(curProp);
+			// find the control for the current curPropibute
 			for (var i=0; i<this.form.items.getCount(); i++) {
 				var curItem = this.form.items.get(i);
-				if (curItem.getName() == attr && curItem.disabled) {
-					curItem.setValue(values[attr]);
+				if (curItem.getName() == curProp && curItem.disabled && curItem.getValue() != newValue) {
+					if (curItem instanceof uwm.property.ComboBox && curItem.getStore().getCount() == 0) {
+						// load the data, in order to allow proper synchronization
+						curItem.getStore().load({
+							callback: function(r, options, success) {
+								if (success && curItem.findRecord(curItem.valueField, newValue)) {
+									curItem.setValue(newValue);
+								}
+							}
+						});
+					}
+					else {
+						curItem.setValue(newValue);
+					}
+					break;
 				}
 			}
 		}
