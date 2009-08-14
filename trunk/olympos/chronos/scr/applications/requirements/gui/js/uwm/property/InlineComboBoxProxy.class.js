@@ -30,8 +30,8 @@ uwm.property.InlineComboBoxProxy.prototype.load = function(params, reader, callb
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		 
-		uwm.persistency.Persistency.getInstance().autocomplete(this.comboBox.getValue(), 
-		uwm.i18n.Localization.getInstance().getUserLanguage(), function(options, data) {
+		uwm.persistency.Persistency.getInstance().autocomplete(this.comboBox.getValue(), params.language,
+		function(options, data) {
 				self.loadResponse(options, data, callback, scope, arg);
 			}, function(options, data, errorMsg){
 					self.loadFailed(options, data, errorMsg, callback, scope, arg)

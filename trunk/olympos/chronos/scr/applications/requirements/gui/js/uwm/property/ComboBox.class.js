@@ -19,45 +19,60 @@ Ext.namespace("uwm.property");
  * @param {Object} config The configuration object.
  */
 uwm.property.ComboBox = function(config){
-    var self = this;
-    
-    uwm.property.ComboBox.superclass.constructor.call(this, Ext.apply(this, {
-        listeners: {
-            "change": function(field, newValue, oldValue){
-                self.fieldChanged(field, newValue, oldValue);
-            },
-            "beforedestroy": function(field) {
-            	self.handleDestroy(field);
-            }
-        },
-        store: new Ext.data.Store({
+	var self = this;
+	
+	uwm.property.ComboBox.superclass.constructor.call(this, Ext.apply(this, {
+		listeners: {
+				"change": function(field, newValue, oldValue){
+						self.fieldChanged(field, newValue, oldValue);
+				},
+				"beforedestroy": function(field) {
+					self.handleDestroy(field);
+				}
+		},
+		store: new Ext.data.Store({
 			proxy: new uwm.property.ComboBoxProxy({
-				listType: config.listType
+				listType: config.listType,
+				listeners: {
+					"beforeload": function(proxy, params) {
+						// set the language for the load request
+						params.language = self.language;
+					}
+				}
 			})
 		}),
-        displayField: 'val',
-        valueField: 'key',
-        mode: "remote",
-        triggerAction: 'all',
-        editable: false,
-    }, config));
-    
-    this.toolTipText = config.toolTip;
-    
-    this.modelNode = config.modelNode;
+		displayField: 'val',
+		valueField: 'key',
+		mode: "remote",
+		triggerAction: 'all',
+		editable: false,
+	}, config));
+	
+	this.toolTipText = config.toolTip;
+	
+	this.modelNode = config.modelNode;
+	this.language = null;
 }
 
 Ext.extend(uwm.property.ComboBox, Ext.form.ComboBox);
 
+/**
+ * Set the language if items should be localized.
+ * @param language The language code
+ */
+uwm.property.ComboBox.prototype.setLanguage = function(language) {
+	this.language = language;
+}
+
 uwm.property.ComboBox.prototype.render = function(container, position){
-    uwm.property.ComboBox.superclass.render.apply(this, arguments);
-    
-    if (this.toolTipText) {
-        this.toolTip = new Ext.ToolTip({
-            target: container,
-            html: this.toolTipText
-        });
-    }
+	uwm.property.ComboBox.superclass.render.apply(this, arguments);
+	
+	if (this.toolTipText) {
+		this.toolTip = new Ext.ToolTip({
+			target: container,
+			html: this.toolTipText
+		});
+	}
 }
 
 /**
@@ -98,8 +113,8 @@ uwm.property.ComboBox.prototype.handleDestroy = function(field) {
 uwm.property.ComboBox.prototype.persistValue = function(newValue) {
 	this.originalValue = newValue;
 	
-    var tmp = new Object();
-    tmp[this.getName()] = newValue;
-    
-    this.modelNode.changeProperties(tmp);
+	var tmp = new Object();
+	tmp[this.getName()] = newValue;
+	
+	this.modelNode.changeProperties(tmp);
 }

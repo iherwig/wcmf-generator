@@ -43,5 +43,21 @@ uwm.property.PropertyForm = Ext.extend(Ext.form.FormPanel, {
 		})
 
 		uwm.property.PropertyForm.superclass.initComponent.apply(this, arguments);
+		
+		this.localizeControls(uwm.i18n.Localization.getInstance().getUserLanguage());
 	}
 })
+
+/**
+ * Localize any controls that are included in this form.
+ * Controls are tested for implementation of a setLanguage method.
+ * @param language The language code for localization
+ */
+uwm.property.PropertyForm.prototype.localizeControls = function(language) {
+	for (var i=0; i<this.items.getCount(); i++) {
+		var curItem = this.items.get(i);
+		if (curItem.setLanguage instanceof Function) {
+			curItem.setLanguage(language);
+		}
+	}
+}

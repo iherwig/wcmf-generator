@@ -180,7 +180,7 @@ uwm.property.PropertyContainer.prototype.setLocked = function(isLocked) {
 uwm.property.PropertyContainer.prototype.handleLoadFinished = function() {
 	if (this.isTranslationPanelOpen()) {
 		this.translationPanel.showTranslation(this.currentOid, 
-			this.translationPanel.getSelectedLanguage(),
+			this.translationPanel.getLanguage(),
 			this.isLockedByOtherUser,
 			this.displayForm.createDelegate(this)
 		);
@@ -194,6 +194,7 @@ uwm.property.PropertyContainer.prototype.displayForm = function() {
 
 	var modelNode = uwm.model.ModelContainer.getInstance().getByOid(this.currentOid);
 	var form = modelNode.getModelNodeClass().getPropertyForm(modelNode, this.isLockedByOtherUser);
+	form.localizeControls(uwm.i18n.Localization.getInstance().getUserLanguage());
 	this.mainPanel.add(form);
 	this.doLayout();
 	
@@ -242,7 +243,7 @@ uwm.property.PropertyContainer.prototype.openTranslationPanel = function() {
 	// load the translation
 	this.showLoadMask();
 	this.translationPanel.showTranslation(this.currentOid, 
-		this.translationPanel.getSelectedLanguage(),
+		this.translationPanel.getLanguage(),
 		this.isLockedByOtherUser,
 		this.hideMask.createDelegate(this)
 	);
