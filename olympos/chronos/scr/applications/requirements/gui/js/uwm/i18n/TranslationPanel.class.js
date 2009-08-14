@@ -102,6 +102,7 @@ uwm.i18n.TranslationPanel.prototype.showTranslation = function(oid, language, is
  */
 uwm.i18n.TranslationPanel.prototype.displayForm = function(modelNode, isLocked, callback) {
 	var form = modelNode.getModelNodeClass().getPropertyForm(modelNode, isLocked);
+	form.localizeControls(this.getLanguage());
 	this.add(form);
 
 	this.doLayout();
@@ -138,7 +139,7 @@ uwm.i18n.TranslationPanel.prototype.setLanguage = function(language) {
  * Get the selected translation language.
  * @return {String} The language code
  */
-uwm.i18n.TranslationPanel.prototype.getSelectedLanguage = function() {
+uwm.i18n.TranslationPanel.prototype.getLanguage = function() {
 	return this.language;
 }
 

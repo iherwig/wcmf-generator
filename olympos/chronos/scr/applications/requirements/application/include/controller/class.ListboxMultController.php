@@ -71,7 +71,13 @@ class ListboxMultController extends Controller
 		$counts = 0;
 		$responseObjects = array ();
 		foreach ($this->types as $key=>$val) {
-			$tradlistbox = g_getOIDs(&$val, $this->filter);
+			if ($this->isLocalizedRequest()) {
+				$tradlistbox = g_getOIDs($val, $this->filter, null, false, $this->_request->getValue('language'));
+			}
+			else {
+				$tradlistbox = g_getOIDs($val, $this->filter);
+			}
+		
 			$counts = $counts + sizeof($tradlistbox);
 			foreach ($tradlistbox as $k=>$v){
 			array_push($responseObjects,array('key'=>$k, 'val'=>$v));
@@ -96,10 +102,7 @@ class ListboxMultController extends Controller
 		$this->types = array ();
 		$strtypes = $this->_request->getValue('type');
 		$this->types = spliti(',', $strtypes);
-	
 	}
-
 // PROTECTED REGION END
-
 }
 ?>

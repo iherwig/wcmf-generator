@@ -26,7 +26,13 @@ uwm.property.InlineComboBox = function(config) {
 		store: new Ext.data.Store({
 			proxy: new uwm.property.InlineComboBoxProxy({
 				comboBox: this,
-				value: this.getValue()
+				value: this.getValue(),
+				listeners: {
+					"beforeload": function(proxy, params) {
+						// set the language for the load request
+						params.language = self.language;
+					}
+				}
 			})
 		}),
 		displayField: 'val',
@@ -48,9 +54,18 @@ uwm.property.InlineComboBox = function(config) {
 	
 	this.doc = config.doc;
 	this.htmledit = config.htmledit;
+	this.language = null;
 }
 
 Ext.extend(uwm.property.InlineComboBox, Ext.form.ComboBox);
+
+/**
+ * Set the language if items should be localized.
+ * @param language The language code
+ */
+uwm.property.InlineComboBox.prototype.setLanguage = function(language) {
+	this.language = language;
+}
 
 uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 	var keycode = e.getKey();
