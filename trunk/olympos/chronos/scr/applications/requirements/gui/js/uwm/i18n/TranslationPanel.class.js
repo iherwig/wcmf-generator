@@ -37,6 +37,7 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 		
 		this.currentOid = null;
 		this.isLocked = null;
+		this.form = null;
 		
 		this.languageListBox = new uwm.i18n.LanguageListBox({
 			includeUserLanguage: false,
@@ -70,6 +71,14 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 		})
 		
 		uwm.i18n.TranslationPanel.superclass.initComponent.apply(this, arguments);
+
+		// add listener for property changes of the original object, whose
+		// translation is displayed
+		uwm.event.EventBroker.getInstance().addListener({
+			"changeProperty": function(modelObject, values) {
+				self.handleChangePropertyEvent.call(self, modelObject, values);
+			}
+		});
 	}
 })
 
@@ -82,6 +91,7 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
  * @param {Function} callback The function to call after completion [optional]
  */
 uwm.i18n.TranslationPanel.prototype.showTranslation = function(oid, language, isLocked, callback) {
+
 	this.currentOid = oid;
 	this.isLocked = isLocked;
 	
@@ -101,13 +111,14 @@ uwm.i18n.TranslationPanel.prototype.showTranslation = function(oid, language, is
  * @param {Function} callback The function to call after completion [optional]
  */
 uwm.i18n.TranslationPanel.prototype.displayForm = function(modelNode, isLocked, callback) {
-	var form = modelNode.getModelNodeClass().getPropertyForm(modelNode, isLocked);
-	form.localizeControls(this.getLanguage());
-	this.add(form);
+	this.form = modelNode.getModelNodeClass().getPropertyForm(modelNode, isLocked);
+	this.form.localizeControls(this.getLanguage());
+	this.add(this.form);
+	this.lockUntranslatableControls();
 
 	this.doLayout();
 	
-	modelNode.populatePropertyForm(form);
+	modelNode.populatePropertyForm(this.form);
   
 	if (callback instanceof Function) {
 		callback();
@@ -117,6 +128,39 @@ uwm.i18n.TranslationPanel.prototype.displayForm = function(modelNode, isLocked, 
 uwm.i18n.TranslationPanel.prototype.getTitleText = function() {
 	var languageName = uwm.i18n.Localization.getInstance().getLanguageName(this.language);
 	return uwm.Dict.translate('Translation')+" ["+languageName+"]";
+}
+
+/**
+ * Make all controls that have a non-translatable input type read-only.
+ * Set listeners for property changes on these controls to make sure that
+ * they always display the correct values.
+ */
+uwm.i18n.TranslationPanel.prototype.lockUntranslatableControls = function() {
+	if (this.form != null) {
+		for (var i=0; i<this.form.items.getCount(); i++) {
+			var curItem = this.form.items.get(i);
+			if (curItem instanceof uwm.property.ComboBox) {
+				curItem.setDisabled(true);
+			}
+		}
+	}
+}
+
+/**
+ * Handle a property change of the original object whose translation is shown
+ */
+uwm.i18n.TranslationPanel.prototype.handleChangePropertyEvent = function(modelObject, values) {
+	if (this.form != null) {
+		for (var attr in values) {
+			// find the control for the current attribute
+			for (var i=0; i<this.form.items.getCount(); i++) {
+				var curItem = this.form.items.get(i);
+				if (curItem.getName() == attr && curItem.disabled) {
+					curItem.setValue(values[attr]);
+				}
+			}
+		}
+	}
 }
 
 /**
