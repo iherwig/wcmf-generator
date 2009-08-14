@@ -31,7 +31,7 @@ public class DionysusTest {
 	}
 
 	protected void ensureLogin() {
-		if (!sid) {
+		if (!sid && !Cfg.debugLogin) {
 			request(
 				[
 					action: 'login',
@@ -41,7 +41,8 @@ public class DionysusTest {
 				{ req, json ->
 					sid = json.sid
 				},
-				'get'
+				'get',
+				true
 			)
 		}
 	}
@@ -50,7 +51,7 @@ public class DionysusTest {
 		sid = null
 	}
 
-	protected void request(params, handler, method = 'json') {
+	protected void request(params, handler, method = 'json', boolean login = false) {
 		def internalMethod
 		def internalContentType
 
@@ -77,7 +78,12 @@ public class DionysusTest {
 				internalContentType = JSON
 		}
 
-		new HTTPBuilder(Cfg.baseUrl).request(internalMethod, JSON) { req ->
+		def responseContentType = JSON
+		if (Cfg.debugJson) {
+			responseContentType = TEXT
+		}
+
+		new HTTPBuilder(Cfg.baseUrl).request(internalMethod, responseContentType) { req ->
 			requestContentType = internalContentType
 		
 			if (method == 'get') {
@@ -87,12 +93,19 @@ public class DionysusTest {
 			}
 			
 			response.success = { resp, json ->
-				if (Cfg.debug) {
+				if (Cfg.debug || Cfg.debugJson) {
 					System.out << json
+					print '\n\n'
 				}
 				assertNotNull(json)
 
-				handler(resp, json)
+				if (!Cfg.debugJson)	{
+					handler(resp, json)
+				} else {
+					if (!login) {
+						fail('Cfg.debugJson is set')
+					}
+				}
 			}
 			
 			response.failure = { resp, stream ->
