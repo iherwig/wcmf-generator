@@ -273,7 +273,7 @@ uwm.persistency.Json.prototype.exportDoc = function(templateName, startModel, st
 		templateName: templateName,
 		startModel: startModel,
 		startPackage: startPackage,
-		exportFormat: exportFormat,
+		exportFormat: exportFormat
 	}, successHandler, errorHandler);
 }
 
@@ -281,21 +281,21 @@ uwm.persistency.Json.prototype.exportUwm = function(startModel, startPackage, su
 	this.jsonRequest({
 		usr_action: 'exportUWM',
 		startModel: startModel,
-		startPackage: startPackage,
+		startPackage: startPackage
+	}, successHandler, errorHandler);
+}
+ 
+uwm.persistency.Json.prototype.getCodeGeneratorList = function(successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'generatorlist'
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.generateExpeditor = function(startModel, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.generateCode = function(codeId, modelOid, successHandler, errorHandler) {
 	this.jsonRequest({
-		usr_action: 'generateExpeditor',
-		startModel: startModel,
-	}, successHandler, errorHandler);
-}
-
-uwm.persistency.Json.prototype.generateWcmf = function(startModel, successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: 'generateWcmf',
-		startModel: startModel,
+		usr_action: 'generateCode',
+		codeId: codeId,
+		modelOid: modelOid
 	}, successHandler, errorHandler);
 }
 

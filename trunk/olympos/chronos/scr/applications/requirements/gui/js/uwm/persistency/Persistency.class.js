@@ -118,10 +118,10 @@ uwm.persistency.Persistency.prototype.exportDoc = function(templateName, startMo
 uwm.persistency.Persistency.prototype.exportUwm = function(startModel, startPackage, successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.generateExpeditor = function(startModel, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.getCodeGeneratorList = function(successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.generateWcmf = function(startModel, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.generateCode = function(codeId, modelOid, successHandler, errorHandler ) {
 }
 
 uwm.persistency.Persistency.prototype.doContinue = function(controller, successHandler, errorHandler ) {
