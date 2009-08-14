@@ -4,6 +4,17 @@ package net.sourceforge.olympos.dionysus.json.test;
 	 * If true, the parsed JSON will be written to the console.
 	 */
 	static debug = false
+	/**
+	 * If true, the result will not be parsed as JSON but will be output as String.
+	 * 
+	 * This option prevents the testcases from succeeding, but it still sends the 
+	 * correct request. Set this option if the returned result is no valid JSON.
+	 */
+	static debugJson = false
+	/**
+	 * If true, the login before each test request will be omitted.
+	 */
+	static debugLogin = false
 	
 	/**
 	 * The base URL according to spec.
@@ -52,4 +63,25 @@ package net.sourceforge.olympos.dionysus.json.test;
 	 * Oid of the object contained by the first level object
 	 */
 	static readSecondLevelOid = 'Clothes:345'
+
+	/**
+	 * The oid of the object for update test
+	 */
+	static updateOid = 'Movie:123'
+	/**
+	 * The value for lastChange to succeed in all cases
+	 */
+	static updateLastChange = 0
+	/**
+	 * Name of a string attribute
+	 */
+	static updateStringAttributeName = 'title'
+	/**
+	 * Name of an integer attribute
+	 */
+	static updateIntAttributeName = 'yearOfPublishing'
+	/**
+	 * Name of a boolean attribute
+	 */
+	static updateBooleanAttributeName = 'groundbreaking'
 }

@@ -8,7 +8,8 @@ import org.junit.runners.Suite;
 	LoginTest.class,
 	LogoutTest.class,
 	ListTest.class,
-	ReadTest.class
+	ReadTest.class,
+	UpdateTest.class
 })
 public class BasePackageSuite {
 
