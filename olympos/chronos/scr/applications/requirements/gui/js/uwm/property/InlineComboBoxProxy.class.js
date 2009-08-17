@@ -49,6 +49,7 @@ uwm.property.InlineComboBoxProxy.prototype.loadResponse = function(options, data
 	for (var i in data.data) {
 		if (data.data[i].val) {
 			records.push(new Ext.data.Record({
+				type: data.data[i].type,
 				val: data.data[i].val
 			}))
 		};

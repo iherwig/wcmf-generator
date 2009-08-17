@@ -28,20 +28,20 @@ uwm.property.HtmlEditor = function(config) {
 	var self = this;
 	
 	uwm.property.HtmlEditor.superclass.constructor.call(this, Ext.apply(this, {
-	    enableAlignments : false,
-	    enableColors : false,
-	    enableFont : false,
-	    enableFontSize : false,
-	    enableLinks : false,
-	    enableSourceEdit : false,
-	    listeners : {
-	        "initialize" : function() {
-		        self.handleInitialize();
-	        },
-	        "beforedestroy" : function(field) {
-		        self.handleDestroy(field);
-	        }
-	    }
+			enableAlignments : false,
+			enableColors : false,
+			enableFont : false,
+			enableFontSize : false,
+			enableLinks : false,
+			enableSourceEdit : false,
+			listeners : {
+					"initialize" : function() {
+						self.handleInitialize();
+					},
+					"beforedestroy" : function(field) {
+						self.handleDestroy(field);
+					}
+			}
 	}, config));
 	
 	this.toolTipText = config.toolTip
@@ -81,34 +81,40 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 				this.insertAtCursor("<span id='" + uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID + "' />");
 				
 				this.span = this.doc.getElementById(uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID);
-				var fullPreText = this.span.previousSibling.nodeValue;
+				var fullPreText = "";
+				if (this.span.previousSibling) {
+					fullPreText = this.span.previousSibling.textContent;
+				}
+				else {
+					fullPreText = this.span.textContent;
+				}
 				this.preText = "";
 				
 				if (fullPreText) {
 					var matchArray = fullPreText.match(/[^\t\n ]+$/);
 					if (matchArray) {
 						this.preText = matchArray[0];
-						this.span.previousSibling.nodeValue = fullPreText.substr(0, fullPreText.length - this.preText.length);
+						this.span.previousSibling.textContent = fullPreText.substr(0, fullPreText.length - this.preText.length);
 					}
 				}
 				
 				this.wrap = new Ext.Layer();
 				
 				this.comboBox = new uwm.property.InlineComboBox( {
-				    htmledit : this,
-				    doc : this.doc,
-				    renderTo : this.wrap.dom,
-				    value : this.preText.trim()
+						htmledit : this,
+						doc : this.doc,
+						renderTo : this.wrap.dom,
+						value : this.preText.trim()
 				});
 				
 				var localpos = this.getPosition(true);
-        var abspos = this.el.getXY();
+				var abspos = this.el.getXY();
 				var combobox = this.comboBox.getBox();
 				var spanbox = this.span.getBoundingClientRect();
 				
 				// the fixed offsets are determined by trial & error, no deeper
 				// meaning (just looks better this way)
-        this.wrap.setBounds(abspos[0] - localpos[0] + spanbox.left, abspos[1] - localpos[1] + spanbox.top + combobox.height, combobox.width + 20, combobox.height);
+				this.wrap.setBounds(abspos[0] - localpos[0] + spanbox.left, abspos[1] - localpos[1] + spanbox.top + combobox.height, combobox.width + 20, combobox.height);
 				this.wrap.show();
 				
 				this.comboBox.focus(undefined, true);
@@ -129,17 +135,19 @@ uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue, new
 	this.comboBox.destroy();
 	this.wrap.remove();
 	this.span.parentNode.removeChild(this.span);
-	this.insertAtCursor(" <span class='autocomplete-" + newValueType + "'>" + newValue + "</span>&ensp;");
+	if (newValue && newValueType) {
+		this.insertAtCursor(" <span class='autocomplete-" + newValueType + "'>" + newValue + "</span> ");
+	}
 	this.focus(undefined, 100);
 }
 
 uwm.property.HtmlEditor.prototype.revertInlineComboBox = function() {
-	if (this.store) {
-		this.comboBox.destroy();
-	}
+	this.comboBox.destroy();
 	this.wrap.remove();
 	this.span.parentNode.removeChild(this.span);
-	this.insertAtCursor(this.preText);
+	if (this.preText) {
+		this.insertAtCursor(this.preText);
+	}
 	this.focus(undefined, 100);
 }
 
@@ -148,8 +156,8 @@ uwm.property.HtmlEditor.prototype.render = function(container, position) {
 	
 	if (this.toolTipText) {
 		this.toolTip = new Ext.ToolTip( {
-		    target : container,
-		    html : this.toolTipText
+				target : container,
+				html : this.toolTipText
 		});
 	}
 }
