@@ -38,7 +38,8 @@ uwm.modeltree.UseCaseNode.prototype.buildContextMenu = function() {
 	
 	this.contextMenu = new Ext.menu.Menu({
 		items: [{
-			id: uwm.modeltree.UseCaseNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
+			// use itemId instead of id, because this has to be only locally unique
+			itemId: uwm.modeltree.UseCaseNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
 			text: uwm.Dict.translate('Show in diagram'),
 			handler: function(item, e) {
 				self.showInDiagram(item, e);
@@ -49,7 +50,8 @@ uwm.modeltree.UseCaseNode.prototype.buildContextMenu = function() {
 				self.showInHierarchy(item, e);
 			}
 		}, {
-			id: uwm.modeltree.UseCaseNode.CONTEXTMENU_SHOW_IN_GRID_ID,
+			// use itemId instead of id, because this has to be only locally unique
+			itemId: uwm.modeltree.UseCaseNode.CONTEXTMENU_SHOW_IN_GRID_ID,
 			text: uwm.Dict.translate('Show in grid'),
 			handler: function(item, e) {
 				self.showInGrid(item.e);
