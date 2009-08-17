@@ -3,7 +3,6 @@
 {if $_controller != "LoginController"}
 	{if $_controller != "TreeViewController"}
 	  {if $authUser->getConfig() == 'admin.ini'}
-		<li><a href="javascript:newWindowEx('', '', 'indexAll', 'indexWindow', 'width=360,height=120,scrollbars=no,resizable=yes,locationbar=no', '&sid={sessionid}')" id="navinadexall">{translate text="Create Search Index"}</a></li>
 		<li><a href="javascript:setContext('admin'); submitAction('administration');" target="_top" id="navadministration">{translate text="Administration"}</a></li>
     {/if}
 		<li><a href="javascript:submitAction('edituser');" id="navuserdata">{translate text="User data"}</a></li>
