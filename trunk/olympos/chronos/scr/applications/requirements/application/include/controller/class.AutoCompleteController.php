@@ -16,7 +16,7 @@
  * Manual modifications should be placed inside the protected regions.
  */
  require_once(BASE."wcmf/lib/presentation/class.Controller.php");
-// PROTECTED REGION ID(application/include/controller/class.AutocompleteController.php/Import) ENABLED START
+// PROTECTED REGION ID(application/include/controller/class.AutoCompleteController.php/Import) ENABLED START
 require_once (BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
 require_once (BASE."wcmf/lib/persistence/class.ObjectQuery.php");
 require_once (BASE."wcmf/lib/model/class.Node.php");
@@ -24,7 +24,7 @@ require_once (BASE."wcmf/lib/security/class.RightsManager.php");
 // PROTECTED REGION END
 
 /**
- * @class AutocompleteController
+ * @class AutoCompleteController
  * @ingroup Controller
  * @brief @class AutoCompleteController
  * @ingroup Controller
@@ -41,16 +41,16 @@ require_once (BASE."wcmf/lib/security/class.RightsManager.php");
  * The following configuration settings are defined for this controller:
  *
  * [actionmapping]
- * ??autocomplete = AutocompleteController
+ * ??autocomplete = AutoCompleteController
  *
  * [views]
  * 
  * @author 
  * @version 1.0
  */
-class AutocompleteController extends Controller
+class AutoCompleteController extends Controller
 {
-// PROTECTED REGION ID(application/include/controller/class.AutocompleteController.php/Body) ENABLED START
+// PROTECTED REGION ID(application/include/controller/class.AutoCompleteController.php/Body) ENABLED START
  	function hasView()
 	{
 		return true;
