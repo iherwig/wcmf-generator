@@ -267,21 +267,23 @@ uwm.persistency.Json.prototype.glossary = function( successHandler, errorHandler
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'exportDoc',
 		templateName: templateName,
 		startModel: startModel,
 		startPackage: startPackage,
-		exportFormat: exportFormat
+		exportFormat: exportFormat,
+		language: language
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.exportUwm = function(startModel, startPackage, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.exportUwm = function(startModel, startPackage, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'exportUWM',
 		startModel: startModel,
-		startPackage: startPackage
+		startPackage: startPackage,
+		language: language
 	}, successHandler, errorHandler);
 }
  

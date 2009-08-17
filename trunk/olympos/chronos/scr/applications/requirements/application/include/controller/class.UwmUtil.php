@@ -34,6 +34,8 @@ class UwmUtil {
 
 	private static $processedManyToMany = array();
 
+	private static $language = null;
+
 	private static $lastTime = 0;
 
 	private static function check($msg)
@@ -45,7 +47,9 @@ class UwmUtil {
 		self::$lastTime = $newTime;
 	}
 
-	public static function exportXml($tmpUwmExportPath, $startModel, $startPackage) {
+	public static function exportXml($tmpUwmExportPath, $startModel, $startPackage, $language = null) {
+		self::$language = $language;
+
 		self::$dom = new XMLWriter();
 		//self::$dom->setIndent(true);
 		//self::$dom->setIndentString("\t");
@@ -88,8 +92,7 @@ class UwmUtil {
 
 	private static function appendAttributes($node)
 	{
-		$nodes = array ($node);
-		NodeUtil::translateValues($nodes);
+		self::translateNode($node);
 
 		$valueNames = $node->getValueNames();
 
@@ -121,7 +124,11 @@ class UwmUtil {
 		self::appendAttributes($currModel);
 
 		self::$dom->startElement('Package');
-		self::$dom->writeAttribute('Name', $currModel->getName());
+
+		self::translateNode($currModel);
+
+		$value = self::$encodingUtil->convertIsoToCp1252Utf8($currModel->getName());
+		self::$dom->writeAttribute('Name', $value);
 
 		$currModel->loadChildren();
 		$packages = $currModel->getPackageChildren();
@@ -154,21 +161,21 @@ class UwmUtil {
 				case 'Package':
 					self::processPackage($currChild);
 					break;
-						
+
 				case 'ChiBusinessProcess':
 					self::processBusinessProcess($currChild);
 					break;
-						
+
 				case 'ChiBusinessUseCase':
 				case 'ChiBusinessUseCaseCore':
 					self::processUseCase($currChild);
 					break;
-						
+
 				case 'ChiNode':
 				case 'ChiController':
 					self::processClass($currChild);
 					break;
-						
+
 				default:
 					self::processNode($currChild);
 			}
@@ -214,7 +221,7 @@ class UwmUtil {
 		foreach ($children as $currChild)
 		{
 			$childType = self::getRealType($currChild);
-				
+
 			if ($childType == 'ActivitySet') {
 				self::processActivitySet($currChild);
 			} else if (self::processManyToMany($currChild, $currNode->getId())) {
@@ -242,7 +249,7 @@ class UwmUtil {
 		foreach ($children as $currChild)
 		{
 			$childType = self::getRealType($currChild);
-				
+
 			if ($childType != 'Figure') {
 				if ($childType == 'NMChiControllerActionKeyChiController' || $childType == 'NMChiControllerActionKeyChiView') {
 					self::processNode($currChild);
@@ -324,9 +331,9 @@ class UwmUtil {
 		if ($currChild->isManyToManyObject())
 		{
 			$result = true;
-				
+
 			$processThisManyToMany = true;
-				
+
 			if ($currChild->getType() != $currChild->getBaseType()) {
 				if (array_key_exists($currChild->getId(), self::$processedManyToMany)) {
 					$processThisManyToMany = false;
@@ -334,7 +341,7 @@ class UwmUtil {
 					self::$processedManyToMany[$currChild->getId()] = true;
 				}
 			}
-				
+
 			if ($processThisManyToMany) {
 				$currChild->loadParents();
 				$parents = $currChild->getParents();
@@ -351,9 +358,9 @@ class UwmUtil {
 
 						$currChildArray = array($currChild);
 							
-						NodeUtil::translateValues($currChildArray);
-							
 						$valueNames = array('relationType', 'sourceMultiplicity', 'sourceNavigability', 'targetMultiplicity', 'targetNavigability');
+
+						self::translateNode($currChild);
 
 						foreach ($valueNames as $currValueName)
 						{
@@ -376,6 +383,17 @@ class UwmUtil {
 		return $node->getBaseType();
 	}
 
+	private static function translateNode(&$node) {
+		$nodes = array ($node);
+		if (self::$language) {
+			Localization::loadTranslation($node, self::$language, true, false);
+			NodeUtil::translateValues($nodes, self::$language);
+		}
+		else {
+			NodeUtil::translateValues($nodes);
+		}
+	}
+
 	public static function prepareUmlFile($oid) {
 		$result = null;
 
@@ -388,7 +406,7 @@ class UwmUtil {
 			$dirName = $params[self::INI_UML_FILE_STORAGE];
 			$fileName = str_replace(':', '-', $oid) . '.uml';
 			$fullPath = "$dirName/$fileName";
-				
+
 			$result = $fullPath;
 		}
 

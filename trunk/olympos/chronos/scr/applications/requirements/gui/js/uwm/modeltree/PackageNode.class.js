@@ -70,10 +70,13 @@ uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
 		}, {
 			text: uwm.Dict.translate('Export as UML'),
 			handler: function(item, e) {
+			var localization = uwm.i18n.Localization.getInstance();
+			var userLanguage = localization.getUserLanguage();
+		
 				new uwm.ui.LongTaskRunner( {
 						title : uwm.Dict.translate('Exporting UML ...'),
 						call : function(successHandler, errorHandler) {
-							uwm.persistency.Persistency.getInstance().exportUwm('', self.getModelNode().getOid(), successHandler, errorHandler);
+							uwm.persistency.Persistency.getInstance().exportUwm('', self.getModelNode().getOid(), userLanguage, successHandler, errorHandler);
 						},
 						successHandler : function() {},
 						errorHandler : function() {

@@ -58,6 +58,7 @@ class UWMDocExporterController extends BatchController
 	private $PARAM_START_PACKAGE = 'UWMDocExporterController.startPackage';
 	private $PARAM_EXPORT_FORMAT = 'UWMDocExporterController.exportFormat';
 	private $PARAM_TEMPLATE_NAME = 'UWMDocExporterController.templateName';
+	private $PARAM_LANGUAGE = 'UWMDocExporterController.language';
 	
 	private $TEMP_WORKING_DIR = 'UWMDocExporterController.workingDiw';
 	private $TEMP_UWM_EXPORT_PATH = 'UWMDocExporterController.tmpUwmExportPath';
@@ -97,6 +98,9 @@ class UWMDocExporterController extends BatchController
 			$session->set($this->PARAM_START_PACKAGE, $request->getValue('startPackage'));
 			$session->set($this->PARAM_EXPORT_FORMAT, $request->getValue('exportFormat'));
 			$session->set($this->PARAM_TEMPLATE_NAME, $request->getValue('templateName'));
+			if ($this->isLocalizedRequest()) {
+				$session->set($this->PARAM_LANGUAGE, $request->getValue('language'));
+			}
 		}
 	}
 
@@ -151,8 +155,9 @@ class UWMDocExporterController extends BatchController
 		// do the export
 		$startModel = $session->get($this->PARAM_START_MODEL);
 		$startPackage = $session->get($this->PARAM_START_PACKAGE);
+		$language = $session->get($this->PARAM_LANGUAGE);
 		$this->check("start exportXML: model:".$startModel." package:".$startPackage);
-		UwmUtil::exportXml($tmpUwmExportPath, $startModel, $startPackage);
+		UwmUtil::exportXml($tmpUwmExportPath, $startModel, $startPackage, $language);
 		$this->check("finished exportXML");
 
 		ExportShutdownHandler::success();
