@@ -80,7 +80,6 @@ uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 				this.htmledit.resolveInlineComboBox(record.data.val, record.data.type);
 			} else {
 				this.htmledit.revertInlineComboBox();
-				//this.htmledit.insertAtCursor(this.getValue());
 			}
 			break;
 			
