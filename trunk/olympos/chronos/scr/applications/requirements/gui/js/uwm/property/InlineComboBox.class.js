@@ -36,6 +36,7 @@ uwm.property.InlineComboBox = function(config) {
 			})
 		}),
 		displayField: 'val',
+		valueField: 'val',
 		mode: "remote",
 		triggerAction: 'all',
 		enableKeyEvents: true,
@@ -57,7 +58,7 @@ uwm.property.InlineComboBox = function(config) {
 	this.language = null;
 }
 
-Ext.extend(uwm.property.InlineComboBox, Ext.form.ComboBox);
+Ext.extend(uwm.property.InlineComboBox, uwm.property.ComboBoxBase);
 
 /**
  * Set the language if items should be localized.
@@ -74,11 +75,12 @@ uwm.property.InlineComboBox.prototype.handleKeyPress = function(field, e) {
 	
 		case e.ENTER:
 		case e.TAB:
-			if (this.store) {
-				this.htmledit.resolveInlineComboBox(this.getValue());
+			var record = this.findRecord(this.valueField, this.getValue());
+			if (this.store && record) {
+				this.htmledit.resolveInlineComboBox(record.data.val, record.data.type);
 			} else {
 				this.htmledit.revertInlineComboBox();
-				this.htmledit.insertAtCursor(this.getValue());
+				//this.htmledit.insertAtCursor(this.getValue());
 			}
 			break;
 			

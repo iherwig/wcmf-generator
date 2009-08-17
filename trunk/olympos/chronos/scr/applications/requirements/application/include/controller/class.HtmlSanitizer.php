@@ -61,14 +61,10 @@ class HtmlSanitizer {
 	}
 
 	private static function cbspan($cpspanmatches) {
-		$searchclassattribs = "/(CLASS=['\"]*[\w]*['\"]*)/i";
+		$searchclassattribs = "/(CLASS=['\"][^'\"]+['\"])/i";
 	
 		preg_match_all($searchclassattribs, $cpspanmatches[2], $attribs);
-		return
-		$cpspanmatches[1].
-		' '.
-		$attribs[0][0].
-		$cpspanmatches[4].$cpspanmatches[5].$cpspanmatches[6];
+		return $cpspanmatches[1].' '.$attribs[0][0].$cpspanmatches[4].$cpspanmatches[5].$cpspanmatches[6];
 	}
 
 	private static function numeric_entities($nematches) {

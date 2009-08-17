@@ -52,7 +52,7 @@ uwm.property.StaticComboBox = function(config) {
 	this.modelNode = config.modelNode;
 }
 
-Ext.extend(uwm.property.StaticComboBox, Ext.form.ComboBox);
+Ext.extend(uwm.property.StaticComboBox, uwm.property.ComboBoxBase);
 
 uwm.property.StaticComboBox.prototype.render = function(container, position) {
 	uwm.property.StaticComboBox.superclass.render.apply(this, arguments);
