@@ -112,10 +112,10 @@ uwm.persistency.Persistency.prototype.putChildnodesToActivitySetDiagram = functi
 uwm.persistency.Persistency.prototype.templatelist = function( successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, language, successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.exportUwm = function(startModel, startPackage, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.exportUwm = function(startModel, startPackage, language, successHandler, errorHandler ) {
 }
 
 uwm.persistency.Persistency.prototype.getCodeGeneratorList = function(successHandler, errorHandler ) {

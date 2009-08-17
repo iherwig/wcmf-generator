@@ -26,7 +26,7 @@ uwm.ui.ExportAssistent = function(uwmClassName, oid) {
 	this.uwmClassName = uwmClassName;
 	this.oid = oid;
 	
-	uwm.persistency.Persistency.getInstance().templatelist( function(options, data) {
+	uwm.persistency.Persistency.getInstance().templatelist(function(options, data) {
 		self.JsonSuccess(options, data);
 	}, function(options, data, errorMessage) {
 		Ext.MessageBox.alert('Error', errorMessage);
@@ -45,7 +45,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	    labelWidth : 70,
 	    width : 280,
 	    frame : true,
-	    //		renderTo:'form-ct',
+	    // renderTo:'form-ct',
 	    items : {
 	        xtype : 'fieldset',
 	        name : 'fieldset',
@@ -112,7 +112,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	        width : 233,
 	        dataIndex : 'templateName',
 	        sortable : true
-	    } //'Technical Name'// 'Template Name'//'Description'
+	    } // 'Technical Name'// 'Template Name'//'Description'
 	    ],
 	    sm : new Ext.grid.RowSelectionModel( {
 		    singleSelect : true
@@ -170,17 +170,21 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 			startModel = assistant.oid;
 		else if (assistant.uwmClassName == 'Package')
 			startPackage = assistant.oid;
-
-			new uwm.ui.LongTaskRunner( {
-				title : uwm.Dict.translate('Exporting Documentation ...'),
-				call : function(successHandler, errorHandler) {
-					uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startModel, startPackage, doctypeSelected, successHandler, errorHandler);
-				},
-				successHandler : function() {},
-				errorHandler : function() {
-					uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
-				},
-				isReturningDocument : true
+		
+		var localization = uwm.i18n.Localization.getInstance();
+		var userLanguage = localization.getUserLanguage();
+		
+		new uwm.ui.LongTaskRunner( {
+		    title : uwm.Dict.translate('Exporting Documentation ...'),
+		    call : function(successHandler, errorHandler) {
+			    uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startModel, startPackage, doctypeSelected, userLanguage, successHandler, errorHandler);
+		    },
+		    successHandler : function() {
+		    },
+		    errorHandler : function() {
+			    uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+		    },
+		    isReturningDocument : true
 		}).show();
 	}, [ grid, radioFormItem ]);
 	
