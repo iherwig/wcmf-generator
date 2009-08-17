@@ -31,13 +31,15 @@ uwm.objecttree.ObjectNode.prototype.buildContextMenu = function() {
 	
 	this.contextMenu = new Ext.menu.Menu({
 		items: [{
-			id: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
+			// use itemId instead of id, because this has to be only locally unique
+			itemId: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
 			text: uwm.Dict.translate('Show in diagram'),
 			handler: function(item, e) {
 				self.showInDiagram(item, e);
 			}
 		}, {
-			id: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID,
+			// use itemId instead of id, because this has to be only locally unique
+			itemId: uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID,
 			text: uwm.Dict.translate('Show in grid'),
 			handler: function(item, e) {
 				self.showInGrid(item.e);
