@@ -4,16 +4,22 @@ import uml;
 
 extension org::openarchitectureware::uml2::profile::profiling;
 
+extension common::umlutils;
+extension common::util;
+
 extension cartridge::UmlConnector::objects::Package;
 
+//for propagateNames
+extension cartridge::UmlConnector::objects::ChiNode;
+
 uml::Model createUmlModel(String modelName, cwm::CwmExport export, uml::Profile chronosProfile):
-	//(new uml::Model).app
-	let um = new uml::Model : (
-		um.setName(modelName) ->
-		um.applyProfile(chronosProfile) ->
-		um.nestedPackage.addAll(export.model.package.convert())
-	) ->
+	//(new uml::Class).getApplicableStereotype()isStereotypeApplied()
+	let um = new uml::Model :
+	um.setName(modelName) ->
+	um.applyProfile(chronosProfile) ->
+	um.nestedPackage.addAll(export.model.package.convert()) ->
 	export.model.package.establishConnections(um) ->
 	export.model.package.transferValues(um) ->
+	((List[Chronos::ChiNode]) um.allOwnedElements().typeSelect(uml::Class).select(e|e.isStereotypeApplied(e.getApplicableStereotype("Chronos::ChiNode")))).propagateNames() ->
 	um
 ;

@@ -5,6 +5,7 @@ import uml;
 extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::umlutils;
+extension common::util;
 
 extension cartridge::UmlConnector::connections;
 extension cartridge::UmlConnector::connectionsToCwm;
@@ -67,6 +68,17 @@ Void transferValues(cwm::ChiNode c, uml::Model um):
 			uc.setTaggedValue("Chronos::ChiNode", "modified", c.modified)
 		)
 	)
+;
+
+Void propagateNames(uml::Class this):
+	this.getOwnEnds().correctName()
+;
+
+Void correctName(uml::Property this):
+	this.name.isNullOrEmpty() ? (
+		this.setName(this.type.name.toFirstLower())
+	) :
+		Void
 ;
 
 cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
