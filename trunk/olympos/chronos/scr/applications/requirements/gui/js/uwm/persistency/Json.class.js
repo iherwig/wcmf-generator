@@ -141,6 +141,14 @@ uwm.persistency.Json.prototype.save = function(oid, values, language, successHan
 	this.jsonRequest(data, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.copy = function(oid, targetOid, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "copy",
+		oid: oid,
+		targetoid: targetOid
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.display = function(oid, depth, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "display",
