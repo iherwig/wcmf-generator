@@ -104,6 +104,18 @@ uwm.persistency.ActionSet.prototype.addSave = function(oid, values,
 	};
 }
 
+uwm.persistency.ActionSet.prototype.addCopy = function(oid, targetOid,
+		successHandler, errorHandler, errorLevel) {
+	this.requests[this.getNextId()] = {
+		action :"copy",
+		oid :oid,
+		targetoid :targetOid,
+		successHandler :successHandler,
+		errorHandler :errorHandler,
+		errorLevel :errorLevel
+	};
+}
+
 uwm.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
 		language, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
@@ -117,11 +129,13 @@ uwm.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addList = function(uwmClassName,
+uwm.persistency.ActionSet.prototype.addList = function(uwmClassName, language, completeObjects,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"list",
 		uwmClassName :uwmClassName,
+		language :language,
+		completeObjects :completeObjects,
 		successHandler :successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel

@@ -160,10 +160,12 @@ uwm.persistency.Json.prototype.display = function(oid, depth, language, successH
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.list = function(uwmClassName, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.list = function(uwmClassName, completeObjects, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "list",
-		type: uwmClassName
+		type: uwmClassName,
+		language: language,
+		completeObjects: completeObjects
 	}, successHandler, errorHandler);
 }
 
@@ -267,12 +269,6 @@ uwm.persistency.Json.prototype.templatelist = function( successHandler, errorHan
 		usr_action: 'templatelist'
 	}, successHandler, errorHandler);
 	
-}
-
-uwm.persistency.Json.prototype.glossary = function( successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: 'glossary'
-	}, successHandler, errorHandler);
 }
 
 uwm.persistency.Json.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, language, successHandler, errorHandler) {
@@ -388,6 +384,11 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				jsonRequest[currRequest.oid] = changeNode;
 				break;
 				
+			case "copy":
+				jsonRequest.oid = currRequest.oid;
+				jsonRequest.targetoid = currRequest.targetOid;
+				break;
+				
 			case "display":
 				jsonRequest.oid = currRequest.oid;
 				jsonRequest.depth = currRequest.depth;
@@ -398,6 +399,8 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				
 			case "list":
 				jsonRequest.type = currRequest.uwmClassName;
+				jsonRequest.language = currRequest.language;
+				jsonRequest.completeObjects = currRequest.completeObjects;
 				break;
 				
 			case "listbox":
@@ -440,10 +443,6 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				
 			case "templatelist":
 				jsonRequest.controller = "TemplateListController";
-				break;
-				
-			case "glossary":
-				jsonRequest.controller = "GlossaryController";
 				break;
 				
 			default:

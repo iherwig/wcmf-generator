@@ -27,11 +27,12 @@ uwm.ui.GlossaryProxy.prototype.load = function(params, reader, callback, scope, 
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
-		uwm.persistency.Persistency.getInstance().glossary(function(options, data) {
-			self.loadResponse(options, data, callback, scope, arg);
-		}, function(options, data, errorMsg) {
-			self.loadFailed(options, data, errorMsg, callback, scope, arg)
-		});
+		uwm.persistency.Persistency.getInstance().list("Glossary", true,
+			uwm.i18n.Localization.getInstance().getUserLanguage(), function(options, data) {
+				self.loadResponse(options, data, callback, scope, arg);
+			}, function(options, data, errorMsg) {
+				self.loadFailed(options, data, errorMsg, callback, scope, arg)
+			});
 	} else {
 		callback.call(scope || this, null, arg, false);
 	}
@@ -40,15 +41,19 @@ uwm.ui.GlossaryProxy.prototype.load = function(params, reader, callback, scope, 
 uwm.ui.GlossaryProxy.prototype.loadResponse = function(options, data, callback, scope, arg) {
 	var records = new Array();
 	
-	for (var i = 0; i < data.glossary.length; i++) {
-		var currObj = data.glossary[i];
+	for (var i = 0; i < data.objects.length; i++) {
+		var currObj = data.objects[i];
 		
 		var currRecord = {
-			oid: "Glossary:" + currObj.id,
-			entrytype: currObj.entrytype,
-			name: currObj.name,
-			notes: currObj.notes
+			oid: currObj.oid,
+			uwmClassName: currObj.type
 		};
+		var values = currObj.values[1];
+		if (values) {
+			currRecord.entrytype = values.entryType,
+			currRecord.name = values.Name,
+			currRecord.notes = values.Notes
+		}
 		
 		records.push(new Ext.data.Record(currRecord));
 	}

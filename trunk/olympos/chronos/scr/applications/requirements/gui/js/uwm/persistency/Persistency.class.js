@@ -73,7 +73,7 @@ uwm.persistency.Persistency.prototype.copy = function(oid, targetOid, successHan
 uwm.persistency.Persistency.prototype.display = function(oid, depth, language, successHandler, errorHandler) {
 }
 
-uwm.persistency.Persistency.prototype.list = function(uwmClassName, successHandler, errorHandler) {
+uwm.persistency.Persistency.prototype.list = function(uwmClassName, language, completeObjects, successHandler, errorHandler) {
 }
 
 uwm.persistency.Persistency.prototype.listbox = function(type, language, successHandler, errorHandler) {
