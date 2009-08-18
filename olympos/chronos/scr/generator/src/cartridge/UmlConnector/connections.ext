@@ -4,6 +4,8 @@ import uml;
 
 extension org::openarchitectureware::uml2::profile::profiling;
 
+extension common::util;
+
 Void establishConnectionsToUseCase(cwm::ManyToMany ch, uml::Actor parentActor, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	//(new uml::Association).setN
 	let childUseCase = um.allOwnedElements().typeSelect(uml::UseCase).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
@@ -57,7 +59,6 @@ Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml
 			let childUpper = getUpperMultiplicity(ch.sourceMultiplicity):
 			let childNav = getNavigability(ch.sourceNavigability):
 			let conn = parentClass.createAssociation(parentNav, parentAK, "", parentLower, parentUpper, childClass, childNav, childAK, "", childLower, childUpper):
-				conn.setName(label) ->
 				conn.applyStereotype("Chronos::ChiAssociation")
 		) : (
 			Void

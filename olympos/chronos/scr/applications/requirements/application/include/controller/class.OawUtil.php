@@ -102,7 +102,7 @@ class OawUtil {
 	
 		$cmd = 'java -Djava.library.path=./lib/ -jar ' . self::$executable . " $relativeWorkflowPath -basePath=. \"-propertyFile=$propertyFilePath\"";
 
-		$process = proc_open($cmd, $descriptorspec, $pipes, self::$cwd, $env);
+		$process = proc_open($cmd, $descriptorspec, $pipes, self::$cwd, $_ENV);
 	
 
 		if (is_resource($process)) {

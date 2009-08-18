@@ -154,7 +154,7 @@ class GenerateCodeController extends BatchController
 		$workflow = null;
 
 		$parser = InifileParser::getInstance();
-		$logger = LoggerManager::getLogger('CodeGeneratorListController');
+		$logger = LoggerManager::getLogger('CodeGeneratorController');
 
 		if (($generatorIds = $parser->getSection(self::INI_SECTION)) !== false) {
 			$codeId = $session->get(self::PARAM_CODE_ID);
