@@ -47,6 +47,11 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 			    self.deleteFromModel(item, e);
 		    }
 		}, {
+		    text : uwm.Dict.translate('New project from this'),
+		    handler : function(item, e) {
+			    self.duplicate(item, e);
+		    }
+		}, {
 		    text : uwm.Dict.translate('Select as grid scope'),
 		    handler : function(item, e) {
 			    self.selectAsScope(item, e);
@@ -95,6 +100,10 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 
 uwm.modeltree.ModelNode.prototype.addPackage = function(self, e) {
 	uwm.model.ModelContainer.getInstance().createPackage(this.getModelNode());
+}
+
+uwm.modeltree.ModelNode.prototype.duplicate = function(self, e) {
+	uwm.model.ModelContainer.getInstance().duplicateModel(this.modelNode);
 }
 
 uwm.modeltree.ModelNode.prototype.selectAsScope = function(self, e) {

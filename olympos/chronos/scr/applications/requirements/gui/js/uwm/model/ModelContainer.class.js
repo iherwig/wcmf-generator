@@ -307,6 +307,25 @@ uwm.model.ModelContainer.prototype.deleteObject = function(modelNode) {
 	});
 }
 
+uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentNode) {
+	var uwmClassName = modelNode.getModelNodeClass().getUwmClassName();
+	var packageNode = this.getNode("Package", parentNode.getOid());
+	var self = this;
+	
+	uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), parentNode.getOid(), function(request, data) {
+		self.handleCreatedModelObject(data.oid, uwmClassName, packageNode);
+	});
+}
+
+uwm.model.ModelContainer.prototype.duplicateModel = function(modelNode) {
+	var uwmClassName = modelNode.getModelNodeClass().getUwmClassName();
+	var self = this;
+	
+	uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), null, function(request, data) {
+		self.handleCreatedModel(data.oid);
+	});
+}
+
 uwm.model.ModelContainer.prototype.getNode = function(uwmClassName, oid) {
 	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwmClassName);
 	

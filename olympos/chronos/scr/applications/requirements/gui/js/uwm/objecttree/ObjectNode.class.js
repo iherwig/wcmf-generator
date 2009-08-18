@@ -50,6 +50,11 @@ uwm.objecttree.ObjectNode.prototype.buildContextMenu = function() {
 				self.deleteFromModel(item, e);
 			}
 		}, {
+			text: uwm.Dict.translate('Duplicate'),
+			handler: function(item, e) {
+				self.duplicate(item, e);
+			}
+		}, {
 			text: uwm.Dict.translate('Show object history'),
 			handler: function(item, e) {
 				self.showObjectHistory(item, e);
@@ -104,6 +109,9 @@ uwm.objecttree.ObjectNode.prototype.showObjectHistory = function(self, e) {
 	new uwm.ui.History(this.modelNode);
 }
 
+uwm.objecttree.Node.prototype.duplicate = function(self, e) {
+	uwm.model.ModelContainer.getInstance().duplicateObject(this.modelNode, this.parentNode.modelNode);
+}
 
 uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID = "showInDiagram";
 uwm.objecttree.ObjectNode.CONTEXTMENU_SHOW_IN_GRID_ID = "showInGrid";
