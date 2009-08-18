@@ -27,32 +27,32 @@ uwm.ui.Glossary = Ext.extend(Ext.grid.GridPanel, {
 		var self = this;
 		
 		Ext.apply(this, {
-		    layout : "fit",
-		    enableDragDrop : false,
-		    selModel : new Ext.grid.RowSelectionModel( {
-			    singleSelect : true
-		    }),
-		    iconCls : self.getTreeIcon(),
-		    tabTip : uwm.Dict.translate("Lists all glossary terms."),
-		    columns : [ {
-		        header : "Term",
-		        dataIndex : "name",
-		        width : 100,
-		        sortable : false,
-		        hideable : false,
-		        renderer : function(value, p, record) {
-			        return self.renderer(value, p, record);
-		        }
-		    } ],
-		    hideHeaders : true,
-		    store : new Ext.data.Store( {
-			    //autoLoad : true,
-			        proxy : new uwm.ui.GlossaryProxy()
-		        }),
-		    viewConfig : {
-			    forceFit : true
-		    },
-		    loadMask: true
+			layout : "fit",
+			enableDragDrop : false,
+			selModel : new Ext.grid.RowSelectionModel( {
+				singleSelect : true
+			}),
+			iconCls : self.getTreeIcon(),
+			tabTip : uwm.Dict.translate("Lists all glossary terms."),
+			columns : [ {
+					header : "Term",
+					dataIndex : "name",
+					width : 100,
+					sortable : false,
+					hideable : false,
+					renderer : function(value, p, record) {
+						return self.renderer(value, p, record);
+					}
+			} ],
+			hideHeaders : true,
+			store : new Ext.data.Store( {
+				//autoLoad : true,
+						proxy : new uwm.ui.GlossaryProxy()
+					}),
+			viewConfig : {
+				forceFit : true
+			},
+			loadMask: true
 		});
 		
 		uwm.ui.Glossary.superclass.initComponent.apply(this, arguments);
@@ -82,15 +82,15 @@ uwm.ui.Glossary = Ext.extend(Ext.grid.GridPanel, {
 		});
 		
 		uwm.event.EventBroker.getInstance().addListener( {
-		    "changeProperty" : function(modelObject, oldLabel) {
-			    self.handleChangePropertyEvent(modelObject, oldLabel);
-		    },
-		    "create" : function(modelObject) {
-			    self.handleCreateEvent(modelObject);
-		    },
-		    "delete" : function(modelObject) {
-			    self.handleDeleteEvent(modelObject);
-		    }
+			"changeProperty" : function(modelObject, oldLabel) {
+				self.handleChangePropertyEvent(modelObject, oldLabel);
+			},
+			"create" : function(modelObject) {
+				self.handleCreateEvent(modelObject);
+			},
+			"delete" : function(modelObject) {
+				self.handleDeleteEvent(modelObject);
+			}
 		});
 	}
 })
@@ -100,16 +100,16 @@ uwm.ui.Glossary.prototype.buildContextMenu = function() {
 	
 	this.contextMenu = new Ext.menu.Menu( {
 		items : [ new Ext.menu.Item( {
-		    text : uwm.Dict.translate('Add entry'),
-		    handler : function(item, e) {
-			    self.addEntry(item, e);
-		    }
+			text : uwm.Dict.translate('Add entry'),
+			handler : function(item, e) {
+				self.addEntry(item, e);
+			}
 		}), new Ext.menu.Item( {
-		    id : uwm.ui.Glossary.CONTEXTMENU_DELETE_ID,
-		    text : uwm.Dict.translate('Delete entry'),
-		    handler : function(item, e) {
-			    self.deleteEntry(item, e);
-		    }
+			id : uwm.ui.Glossary.CONTEXTMENU_DELETE_ID,
+			text : uwm.Dict.translate('Delete entry'),
+			handler : function(item, e) {
+				self.deleteEntry(item, e);
+			}
 		}) ]
 	});
 }
@@ -163,6 +163,11 @@ uwm.ui.Glossary.prototype.renderer = function(value, p, record) {
 }
 
 uwm.ui.Glossary.prototype.handleChangePropertyEvent = function(modelObject, oldLabel) {
+	// don't update nodes, it the are translated into a different language
+	if (modelObject.getLanguage() != uwm.i18n.Localization.getInstance().getUserLanguage()) {
+		return;
+	}
+
 	var record = this.getRecordByModelObject(modelObject);
 	if (record) {
 		record.set("name", modelObject.getProperty("Name"));
@@ -175,10 +180,10 @@ uwm.ui.Glossary.prototype.handleChangePropertyEvent = function(modelObject, oldL
 uwm.ui.Glossary.prototype.handleCreateEvent = function(modelObject) {
 	if (modelObject.getUwmClassName() == "Glossary") {
 		this.getStore().add( [ new Ext.data.Record( {
-		    oid : modelObject.getOid(),
-		    name : modelObject.getProperty("Name"),
-		    entrytype : modelObject.getProperty("entryType"),
-		    notes : modelObject.getProperty("Notes")
+			oid : modelObject.getOid(),
+			name : modelObject.getProperty("Name"),
+			entrytype : modelObject.getProperty("entryType"),
+			notes : modelObject.getProperty("Notes")
 		}) ]);
 	}
 }
