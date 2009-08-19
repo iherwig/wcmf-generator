@@ -26,13 +26,7 @@ uwm.objecttree.ObjectTree = function(config) {
 		containerScroll: true,
 		layout: "fit",
 		enableDD: true,
-		dragConfig: {
-			ddGroup: uwm.Constants.DD_GROUP
-		},
-		dropConfig: {
-			ddGroup: uwm.Constants.DD_GROUP,
-			appendOnly: true
-		}
+		ddGroup: uwm.Constants.DD_GROUP
 	}, config));
 	
 	var self = this;
