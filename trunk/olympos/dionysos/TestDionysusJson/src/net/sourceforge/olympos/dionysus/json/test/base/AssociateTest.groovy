@@ -7,8 +7,8 @@ import org.junit.Test;
 import net.sourceforge.olympos.dionysus.json.test.DionysusTest;
 import net.sourceforge.olympos.dionysus.json.test.Cfg;
 
-public class UpdateTest extends DionysusTest {
-	public UpdateTest(String method) {
+public class AssociateTest extends DionysusTest {
+	public AssociateTest(String method) {
 		super(method)
 	}
 	
@@ -18,14 +18,14 @@ public class UpdateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'update',
-			 	oid: Cfg.readBaseOid,
-			 	lastChange: '1234567890',
-			 	attributes: "{title: 'Matrix The Original',groundbreaking: true}"
+			 	action: 'associate',
+			 	sourceOid: Cfg.readBaseOid,
+			 	targetOid: Cfg.readFirstLevelOid,
+			 	role: Cfg.readBaseAttributeName
 			],
 			{req, json ->
 				assertTrue(json.success)
-				assertEquals('update', json.action)
+				assertEquals('associate', json.action)
 				assertEquals(Cfg.readBaseOid, json.oid)
 				
 				assertObject(json.object, Cfg.readBaseOid, false)
@@ -49,13 +49,13 @@ public class UpdateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'update',
+			 	action: 'associate',
 			 	oid: Cfg.readBaseOid,
 			 	depth: 0
 			],
 			{req, json ->
 				assertTrue(json.success)
-				assertEquals('update', json.action)
+				assertEquals('associate', json.action)
 				assertEquals(Cfg.readBaseOid, json.oid)
 				assertEquals(0, json.depth)
 				
@@ -74,13 +74,13 @@ public class UpdateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'update',
+			 	action: 'associate',
 			 	oid: Cfg.readBaseOid,
 			 	depth: 2
 			],
 			{req, json ->
 				assertTrue(json.success)
-				assertEquals('update', json.action)
+				assertEquals('associate', json.action)
 				assertEquals(Cfg.readBaseOid, json.oid)
 				assertEquals(2, json.depth)
 				
@@ -105,13 +105,13 @@ public class UpdateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'update',
+			 	action: 'associate',
 			 	oid: Cfg.readBaseOid,
 			 	depth: -1
 			],
 			{req, json ->
 				assertTrue(json.success)
-				assertEquals('update', json.action)
+				assertEquals('associate', json.action)
 				assertEquals(Cfg.readBaseOid, json.oid)
 				assertEquals(-1, json.depth)
 				
@@ -136,13 +136,13 @@ public class UpdateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'update',
+			 	action: 'associate',
 			 	oid: Cfg.readBaseOid,
 			 	depth: -2
 			],
 			{req, json ->
 				assertFalse(json.success)
-				assertEquals('update', json.action)
+				assertEquals('associate', json.action)
 				assertEquals(Cfg.readBaseOid, json.oid)
 				assertEquals(-2, json.depth)
 				
