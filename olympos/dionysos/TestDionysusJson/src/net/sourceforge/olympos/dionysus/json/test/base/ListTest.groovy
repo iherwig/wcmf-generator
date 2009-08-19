@@ -12,8 +12,9 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 	
 	@Test
 	public void simple() {
-		ensureLogin()
-
+		//ensureLogin()
+		clearSid()
+		
 		request(
 			[
 			 	action: 'list',
