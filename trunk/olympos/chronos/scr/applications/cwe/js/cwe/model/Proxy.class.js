@@ -9,24 +9,24 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
-Ext.namespace("cwe.modelgrid");
+Ext.namespace("cwe.model");
 
 /**
  * @class Routes requests of a grid store through persistency layer.
  * 
- * @extends Ext.data.DataGridProxy
+ * @extends Ext.data.DataProxy
  * @constructor
  * @param {Object}
  *            config The configuration object.
  * @config modelClass The Model Class to load object of.
  */
-cwe.modelgrid.GridProxy = function(config) {
+cwe.model.Proxy = function(config) {
 	this.modelClass = config.modelClass;
 	
-	cwe.modelgrid.GridProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
+	cwe.model.Proxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 };
 
-Ext.extend(cwe.modelgrid.GridProxy, Ext.data.DataProxy);
+Ext.extend(cwe.model.Proxy, Ext.data.DataProxy);
 
 /**
  * Loads the data.
@@ -35,7 +35,7 @@ Ext.extend(cwe.modelgrid.GridProxy, Ext.data.DataProxy);
  * Refer to Ext.data.DataProxy for details.
  * </p>
  */
-cwe.modelgrid.GridProxy.prototype.load = function(params, reader, callback, scope, arg) {
+cwe.model.Proxy.prototype.load = function(params, reader, callback, scope, arg) {
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
@@ -56,7 +56,7 @@ cwe.modelgrid.GridProxy.prototype.load = function(params, reader, callback, scop
  * Refer to Ext.data.DataProxy for details.
  * </p>
  */
-cwe.modelgrid.GridProxy.prototype.loadResponse = function(params, data, callback, scope, arg) {
+cwe.model.Proxy.prototype.loadResponse = function(params, data, callback, scope, arg) {
 	var result = {
 	    success : true,
 	    records : data.records,
@@ -74,7 +74,7 @@ cwe.modelgrid.GridProxy.prototype.loadResponse = function(params, data, callback
  * Refer to Ext.data.DataProxy for details.
  * </p>
  */
-cwe.modelgrid.GridProxy.prototype.loadFailed = function(params, data, errorMsg, callback, scope, arg) {
+cwe.model.Proxy.prototype.loadFailed = function(params, data, errorMsg, callback, scope, arg) {
 	this.fireEvent("loadexception", this, params, data);
 	callback.call(scope, null, arg, false);
 };

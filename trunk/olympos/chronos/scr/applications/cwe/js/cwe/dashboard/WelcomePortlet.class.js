@@ -9,7 +9,7 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
-Ext.namespace("cwe.ui");
+Ext.namespace("cwe.dashboard");
 
 /**
  * @class The main Workbench (perspective).
@@ -19,8 +19,8 @@ Ext.namespace("cwe.ui");
  * @param {Object}
  *            config The configuration object.
  */
-cwe.ui.WelcomePortlet = function(config) {
-	cwe.ui.WelcomePortlet.superclass.constructor.call(this, Ext.apply(this, {
+cwe.dashboard.WelcomePortlet = function(config) {
+	cwe.dashboard.WelcomePortlet.superclass.constructor.call(this, Ext.apply(this, {
 	    title : chi.Dict.translate("Greeting Message"),
 	    iconCls : "cweLogoIcon",
 	    bodyStyle : "padding: 5px;",
@@ -28,4 +28,4 @@ cwe.ui.WelcomePortlet = function(config) {
 	}, config));
 };
 
-Ext.extend(cwe.ui.WelcomePortlet, Ext.ux.Portlet);
+Ext.extend(cwe.dashboard.WelcomePortlet, Ext.ux.Portlet);

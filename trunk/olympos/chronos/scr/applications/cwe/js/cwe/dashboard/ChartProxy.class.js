@@ -9,21 +9,23 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
-Ext.namespace("cwe.editor.control");
+Ext.namespace("cwe.dashboard");
 
 /**
- * @class Routes the ComboBox request through persistency layer.
+ * @class Routes the Chart request through persistency layer.
  * 
  * @extends cwe.modelgrid.GridProxy
  * @constructor
  * @param {Object}
  *            config The configuration object.
  */
-cwe.editor.control.ComboBoxProxy = function(config) {
-	cwe.editor.control.ComboBoxProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
+cwe.dashboard.ChartProxy = function(config) {
+	this.valueAttribute = config.valueAttribute;
+	
+	cwe.dashboard.ChartProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 };
 
-Ext.extend(cwe.editor.control.ComboBoxProxy, cwe.model.Proxy);
+Ext.extend(cwe.dashboard.ChartProxy, cwe.model.Proxy);
 
 /**
  * Reformats the result to only display numeric part of oid and label.
@@ -32,23 +34,27 @@ Ext.extend(cwe.editor.control.ComboBoxProxy, cwe.model.Proxy);
  * Refer to Ext.data.DataProxy for details.
  * </p>
  */
-cwe.editor.control.ComboBoxProxy.prototype.loadResponse = function(params, data, callback, scope, arg) {
+cwe.dashboard.ChartProxy.prototype.loadResponse = function(params, data, callback, scope, arg) {
 	var records = [];
 	
 	var template = Ext.data.Record.create( [ {
-	    name : "key",
-	    mapping : "key"
+	    name : "oid",
+	    mapping : "oid"
 	}, {
-	    name : "val",
-	    mapping : "val"
+	    name : "label",
+	    mapping : "label"
+	}, {
+	    name : "value",
+	    mapping : "value"
 	} ]);
 	
 	for ( var i = 0; i < data.records.length; i++) {
 		var currRecord = data.records[i];
 		
 		records.push(new template( {
-		    "key" : chi.Util.getNumericFromOid(currRecord.getOid()),
-		    "val" : currRecord.getLabel()
+		    "oid" : currRecord.getOid(),
+		    "label" : currRecord.getLabel(),
+		    "value" : Number(currRecord.get(this.valueAttribute))
 		}));
 	}
 	

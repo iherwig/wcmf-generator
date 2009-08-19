@@ -9,7 +9,7 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
-Ext.namespace("cwe.ui");
+Ext.namespace("cwe.dashboard");
 
 /**
  * @class The main Workbench (perspective).
@@ -19,12 +19,12 @@ Ext.namespace("cwe.ui");
  * @param {Object}
  *            config The configuration object.
  */
-cwe.ui.Dashboard = function(config) {
-	cwe.ui.Dashboard.superclass.constructor.call(this, Ext.apply(this, {
+cwe.dashboard.Dashboard = function(config) {
+	cwe.dashboard.Dashboard.superclass.constructor.call(this, Ext.apply(this, {
 	    title : chi.Dict.translate("User Dashboard"),
 	    iconCls : "dashboardIcon",
 	    items : [ cwe.Config.getPortlets() ]
 	}, config));
 };
 
-Ext.extend(cwe.ui.Dashboard, Ext.ux.Portal);
+Ext.extend(cwe.dashboard.Dashboard, Ext.ux.Portal);

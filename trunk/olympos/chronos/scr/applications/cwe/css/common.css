@@ -51,6 +51,10 @@
 	background-image: url("../img/logoIcon.png") !important;
 }
 
+.chartIcon {
+	background-image: url("../img/chart_bar.png") !important;
+}
+
 .dashboardIcon {
 	background-image: url("../img/house.png") !important;
 }
