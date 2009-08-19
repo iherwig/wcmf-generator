@@ -44,7 +44,7 @@ cwe.modelgrid.ModelGridContainer = Ext.extend(Ext.TabPanel, {
 		    xtype : "tabpanel",
 		    enableTabScroll : true,
 		    activeTab : 0,
-		    items : [ new cwe.ui.Dashboard() ]
+		    items : [ new cwe.dashboard.Dashboard() ]
 		});
 		
 		cwe.modelgrid.ModelGridContainer.superclass.initComponent.apply(this, arguments);

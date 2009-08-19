@@ -61,10 +61,17 @@ cwe.Config.getPortlets = function() {
 	return [ new Ext.ux.PortalColumn( {
 	    columnWidth : .5,
 	    style : "margin: 5px",
-	    items : [ new cwe.ui.WelcomePortlet() ]
+	    items : [ new cwe.dashboard.WelcomePortlet() ]
 	}), new Ext.ux.PortalColumn( {
 	    columnWidth : .5,
-	    style : "margin: 5px"
+	    style : "margin: 5px",
+	    items : [ new cwe.dashboard.ChartPortlet( {
+	        cweModelElementId : "ChiRequirement",
+	        limit : 50,
+	        valueAttribute: "Priority",
+	        sortAttributeName: "Priority",
+	        sortDirection: "desc"
+	    }) ]
 	}) ];
 };
 

@@ -57,7 +57,7 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		 * @private
 		 * @type cwe.model.ModelStore
 		 */
-		this.store = new cwe.modelgrid.GridStore( {
+		this.store = new cwe.model.Store( {
 			modelClass : this.modelClass
 		});
 		

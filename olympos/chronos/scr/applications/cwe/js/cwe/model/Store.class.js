@@ -9,7 +9,7 @@
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
  * entire header must remain intact.
  */
-Ext.namespace("cwe.modelgrid");
+Ext.namespace("cwe.model");
 
 /**
  * @class Loads the data for a model grid.
@@ -21,13 +21,13 @@ Ext.namespace("cwe.modelgrid");
  *            config The configuration object.
  * @config modelClass The Model Class to load object of.
  */
-cwe.modelgrid.GridStore = function(config) {
+cwe.model.Store = function(config) {
 	this.modelClass = config.modelClass;
 	
 	var exampleRecord = new cwe.model.ModelRecord(this.modelClass);
 	
-	cwe.modelgrid.GridStore.superclass.constructor.call(this, Ext.apply( {
-		proxy : new cwe.modelgrid.GridProxy( {
+	cwe.model.Store.superclass.constructor.call(this, Ext.apply( {
+		proxy : new cwe.model.Proxy( {
 			modelClass : this.modelClass
 		}),
 		fields : exampleRecord.fields,
@@ -35,8 +35,8 @@ cwe.modelgrid.GridStore = function(config) {
 	}, config));
 };
 
-Ext.extend(cwe.modelgrid.GridStore, Ext.data.Store);
+Ext.extend(cwe.model.Store, Ext.data.Store);
 
-cwe.modelgrid.GridStore.prototype.getModelClass = function() {
+cwe.model.Store.prototype.getModelClass = function() {
 	return this.modelClass;
 };
