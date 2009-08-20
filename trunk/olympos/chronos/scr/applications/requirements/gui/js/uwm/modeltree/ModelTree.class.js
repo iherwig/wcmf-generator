@@ -36,8 +36,6 @@ uwm.modeltree.ModelTree = function(config) {
 		iconCls: "TreeTab",
 		rootVisible: false,
 		name: 'Model Tree',
-		enableDD: true,
-		ddGroup: uwm.Constants.DD_GROUP,
 		tabTip: "<b>" + uwm.Dict.translate('Model Tree') + "</b><p>" + uwm.Dict.translate('Shows all models, packages, and contained objects.') + "</p>"
 	}, config));
 	
@@ -56,22 +54,6 @@ uwm.modeltree.ModelTree = function(config) {
 	});
 	this.on("movenode", function(tree, node, oldParent, newParent, index) {
 		self.associateDroppedNode(tree, node, oldParent, newParent, index);
-	});
-	this.on("nodedrop", function(dropEvent) {
-		self.handleDrop(dropEvent);
-	});
-	this.on("beforenodedrop", function(dropEvent) {
-		self.checkDroppable(dropEvent);
-		// convert drop data into tree nodes, if the drag source
-		// is not a tree
-		if (!dropEvent.cancel && !dropEvent.dropNode) {
-			var modelNode = dropEvent.source.dragData.data;
-			dropEvent.dropNode = new uwm.modeltree.Node({
-					oid: modelNode.getUwmClassName()+":",
-					text: "New "+modelNode.getUwmClassName(),
-					uwmClassName: modelNode.getUwmClassName()
-			});
-		}
 	});
 	
 	this.createdModels = new Ext.util.MixedCollection();
@@ -151,93 +133,81 @@ uwm.modeltree.ModelTree.prototype.showContextMenu = function(self, e, el) {
 }
 
 uwm.modeltree.ModelTree.prototype.checkDroppable = function(dragOverEvent) {
-TODO: rename to boolean checkModelConstraint(childNode, parentNode);
-			new method modeNode getDropModeNode(event), modeNode getDragModeNode(event)
-			
-	// make sure that we have the correct defaults
-	dragOverEvent.cancel = false;
+	var dropModelNode = dragOverEvent.dropNode.getModelNode();
+	var targetModelNode = dragOverEvent.target.getModelNode();
 	
-	// the drop node content may vary according to source (grid or tree)
-	// so we use the contained modelNode
-	var dropModelNode = null;
-	var dropParentNode = null;
-	if (dragOverEvent.dropNode) {
-		dropModelNode = dragOverEvent.dropNode.getModelNode();
-		dropParentNode = dragOverEvent.dropNode.parentNode;
-	}
-	else {
-		dropModelNode = dragOverEvent.source.dragData.data;
-	}
-
-	// check against model contraints
-	if (dropParentNode == dragOverEvent.target) {
-		// do not drop into same package
+	
+	if (dragOverEvent.dropNode.parentNode == dragOverEvent.target) {
 		dragOverEvent.cancel = true;
-	}
-	else if (dropModelNode instanceof uwm.model.builtin.Package) {
-		// everything can be dropped into a package
+	} else if (dropModelNode instanceof uwm.model.builtin.Package) {
 		dragOverEvent.cancel = false;
+	} else if (targetModelNode instanceof uwm.model.builtin.Model) {
+		//Only allowed for packages, but they are handled above
+		dragOverEvent.cancel = true;
+	} else if (dragOverEvent.target instanceof uwm.modeltree.UseCaseNode || dragOverEvent.target instanceof uwm.modeltree.UseCaseCoreNode) {
+		if (dragOverEvent.dropNode instanceof uwm.modeltree.ActivitySetNode) {
+			dragOverEvent.cancel = false;
+		} else {
+			dragOverEvent.cancel = true;
+		}
+	} else if (dragOverEvent.target instanceof uwm.modeltree.ProcessNode) {
+		if (dragOverEvent.dropNode instanceof uwm.modeltree.UseCaseNode || dragOverEvent.dropNode instanceof uwm.modeltree.UseCaseCoreNode) {
+			dragOverEvent.cancel = false;
+		} else {
+			dragOverEvent.cancel = true;
+		}
+	} else if (dropModelNode instanceof uwm.diagram.ActivitySet) {
+		dragOverEvent.cancel = true;
 	}
-	else if (dragOverEvent.target instanceof uwm.modeltree.ModelNode) {
+	
+	return !dragOverEvent.cancel;
+}
+
+uwm.modeltree.ModelTree.prototype.checkModelConstraints = function(parentModelNode, childModelNode) {
+	
+	var result = true;
+	
+	if (childModelNode instanceof uwm.model.builtin.Package) {
+		// a package can be dropped everywhere
+		result = true;
+	}
+	else if (parentModelNode instanceof uwm.model.builtin.Model) {
 		// only allowed for packages, but they are handled above
-		dragOverEvent.cancel = true;
+		result = false;
 	}
-	else if (dragOverEvent.target instanceof uwm.modeltree.UseCaseNode || dragOverEvent.target instanceof uwm.modeltree.UseCaseCoreNode) {
+	else if (parentModelNode instanceof cwm.ChiBusinessUseCase || parentModelNode instanceof cwm.ChiBusinessUseCaseCore) {
 		// only activity sets can be dropped on a use case
-		if (dropModelNode instanceof uwm.diagram.ActivitySet) {
-			dragOverEvent.cancel = false;
+		if (childModelNode instanceof uwm.diagram.ActivitySet) {
+			result = true;
 		}
 		else {
-			dragOverEvent.cancel = true;
+			result = false;
 		}
 	}
-	else if (dragOverEvent.target instanceof uwm.modeltree.ProcessNode) {
+	else if (parentModelNode instanceof uwm.ChiBusinessProcess) {
 		// only use cases can be dropped on a process
-		if (dropModelNode instanceof cwm.ChiBusinessUseCase || dropModelNode instanceof cwm.ChiBusinessUseCaseCore) {
-			dragOverEvent.cancel = false;
+		if (childModelNode instanceof cwm.ChiBusinessUseCase || childModelNode instanceof cwm.ChiBusinessUseCaseCore) {
+			result = true;
 		}
 		else {
-			dragOverEvent.cancel = true;
+			result = false;
 		}
 	}
-	else if (dropModelNode instanceof uwm.diagram.ActivitySet) {
+	else if (childModelNode instanceof uwm.diagram.ActivitySet) {
 		// activity sets cannot be dropped (except on a use case, but this is handled above)
-		dragOverEvent.cancel = true;
+		result = false;
 	}
+	
+	return result;
 }
 
 uwm.modeltree.ModelTree.prototype.associateDroppedNode = function(tree, node, oldParent, newParent, index) {
 	var actionSet = new uwm.persistency.ActionSet();
-	console.info("move node: "+node.getModelNode().getOid()+" from "+oldParent.getModelNode().getOid()+" to "+
-		newParent.getModelNode().getOid()+" index:"+index);
 	
-	// move to another parent
-	if (oldParent.getModelNode().getOid() != newParent.getModelNode().getOid()) {
-		actionSet.addDisassociate(oldParent.getModelNode().getOid(), node.getModelNode().getOid());
-		actionSet.addAssociate(newParent.getModelNode().getOid(), node.getModelNode().getOid(), false);
-	}
-	// change order
-	else {
-	}
+	actionSet.addDisassociate(oldParent.getModelNode().getOid(), node.getModelNode().getOid());
+	actionSet.addAssociate(newParent.getModelNode().getOid(), node.getModelNode().getOid(), false);
 	
 	actionSet.commit();
-	console.info("dropped: "+node.getModelNode().getOid());
-}
-
-uwm.modeltree.ModelTree.prototype.handleDrop = function(dropEvent) {
-/*
-	// the drop node content may vary according to source (grid or tree)
-	// so we use the contained modelNode
-	var dropModelNode = null;
-	if (dropEvent.dropNode) {
-		dropModelNode = dropEvent.dropNode.getModelNode();
-		dropParentNode = dropEvent.dropNode.parentNode;
-	}
-	else {
-		dropModelNode = dropEvent.source.dragData.data;
-	}
-	*/
-	//console.info("dropped: "+node);
 }
 
 uwm.modeltree.ModelTree.prototype.handleDisassociateEvent = function(parentModelNode, childModelNode) {
@@ -505,6 +475,7 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 					oid: childModelObject.getOid(),
 					text: childModelObject.getLabel(),
 					uwmClassName: childModelObject.getModelNodeClass().getUwmClassName()
+				
 				})
 			};
 		}
