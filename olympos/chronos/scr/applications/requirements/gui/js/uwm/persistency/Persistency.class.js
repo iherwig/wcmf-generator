@@ -70,6 +70,9 @@ uwm.persistency.Persistency.prototype.save = function(oid, values, language, suc
 uwm.persistency.Persistency.prototype.copy = function(oid, targetOid, successHandler, errorHandler) {
 }
 
+uwm.persistency.Persistency.prototype.sort = function(oid, direction, distance, poid, successHandler, errorHandler) {
+}
+
 uwm.persistency.Persistency.prototype.display = function(oid, depth, language, successHandler, errorHandler) {
 }
 

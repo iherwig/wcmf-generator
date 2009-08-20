@@ -68,6 +68,20 @@ class EntityBase extends EntityBaseBase
       $this->setValue('last_editor', $authUser->getLogin(), DATATYPE_ATTRIBUTE);
     }
   }
+  /**
+   * Set the sortkey initially if existing.
+   */
+  function afterInsert()
+  {
+    parent::afterInsert();
+
+    // set the sortkey to the id value
+    if (in_array('sortkey', $this->getValueNames(DATATYPE_IGNORE)))
+    {
+      $this->setSortkey($this->getDBID());
+      $this->save();
+    }
+  }
 // PROTECTED REGION END
 }
 ?>

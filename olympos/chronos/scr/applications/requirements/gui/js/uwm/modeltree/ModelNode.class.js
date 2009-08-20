@@ -26,7 +26,7 @@ uwm.modeltree.ModelNode = function(config) {
 	uwm.modeltree.ModelNode.superclass.constructor.call(this, Ext.apply(this, {
 	    id : config.oid,
 	    iconCls : this.modelNode.getModelNodeClass().getTreeIcon(),
-	    allowDrag : false
+	    allowDrag : true
 	}, config));
 }
 

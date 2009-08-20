@@ -237,7 +237,7 @@ uwm.model.ModelContainer.prototype.createModelObject = function(uwmClassName, pa
 		});
 	} else {
 		uwm.persistency.Persistency.getInstance().newObject(uwmClassName, function(request, data) {
-			self.handleCreatedModelObject(data.oid, uwmClassName, packageNode);
+			self.handleCreatedModelObject(data.oid, uwmClassName, packageNode, callback);
 		});
 	}
 }

@@ -36,6 +36,7 @@ uwm.newobjects.DragZone.prototype.getDragData = function(e) {
 	var sourceElement = e.getTarget();
 	
 	result.repairXY = Ext.fly(sourceElement).getXY();
+	// set uwm.model.ModelNodeClass as data
 	result.data = this.grid.getSelectionModel().getSelected().get("modelClass");
 	
 	this.el.dragData = result;
