@@ -116,6 +116,23 @@ uwm.persistency.ActionSet.prototype.addCopy = function(oid, targetOid,
 	};
 }
 
+uwm.persistency.ActionSet.prototype.addSort = function(oid, direction, distance, poid, 
+		successHandler, errorHandler, errorLevel) {
+	var action = "sortdown";
+	if (direction == "up") {
+		action = "sortup";
+	}
+	this.requests[this.getNextId()] = {
+		action :action,
+		sortoid :oid,
+		dist :distance,
+		poid :poid,
+		successHandler :successHandler,
+		errorHandler :errorHandler,
+		errorLevel :errorLevel
+	};
+}
+
 uwm.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
 		language, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {

@@ -149,6 +149,19 @@ uwm.persistency.Json.prototype.copy = function(oid, targetOid, successHandler, e
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.sort = function(oid, direction, distance, poid, successHandler, errorHandler) {
+	var action = "sortdown";
+	if (direction == "up") {
+		action = "sortup";
+	}
+	this.jsonRequest({
+		usr_action: action,
+		sortoid: oid,
+		dist: distance,
+		poid: poid
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.display = function(oid, depth, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "display",
@@ -387,6 +400,13 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 			case "copy":
 				jsonRequest.oid = currRequest.oid;
 				jsonRequest.targetoid = currRequest.targetOid;
+				break;
+				
+			case "sortup":
+			case "sortdown":
+				jsonRequest.sortoid = currRequest.sortoid;
+				jsonRequest.dist = currRequest.dist;
+				jsonRequest.poid = currRequest.poid;
 				break;
 				
 			case "display":
