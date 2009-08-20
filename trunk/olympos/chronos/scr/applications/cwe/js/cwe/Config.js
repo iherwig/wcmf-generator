@@ -68,9 +68,11 @@ cwe.Config.getPortlets = function() {
 	    items : [ new cwe.dashboard.ChartPortlet( {
 	        cweModelElementId : "ChiRequirement",
 	        limit : 50,
-	        valueAttribute: "Priority",
-	        sortAttributeName: "Priority",
-	        sortDirection: "desc"
+	        valueAttribute : "Priority",
+	        sortAttributeName : "Priority",
+	        sortDirection : "desc"
+	    }), new cwe.dashboard.MapPortlet( {
+		    cweModelElementId : "ChiGoal"
 	    }) ]
 	}) ];
 };

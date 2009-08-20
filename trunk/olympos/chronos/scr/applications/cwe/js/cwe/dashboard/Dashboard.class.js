@@ -25,6 +25,14 @@ cwe.dashboard.Dashboard = function(config) {
 	    iconCls : "dashboardIcon",
 	    items : [ cwe.Config.getPortlets() ]
 	}, config));
+	
+	this.on("drop", function(e) {
+		var pos = e.panel.getPosition();
+		
+		setTimeout(function() {
+			e.panel.fireEvent("move", pos[0], pos[1]);
+		}, 100);
+	});
 };
 
 Ext.extend(cwe.dashboard.Dashboard, Ext.ux.Portal);
