@@ -25,6 +25,8 @@ require_once(BASE."wcmf/lib/presentation/class.Request.php");
 require_once(BASE."wcmf/lib/presentation/class.Application.php");
 require_once(BASE."wcmf/lib/presentation/class.ActionMapper.php");
 
+require_once BASE . 'wcmf/lib/util/class.SearchUtil.php';
+
 // initialize the application
 $application = &Application::getInstance();
 $callParams = &$application->initialize();
@@ -42,6 +44,10 @@ $request = new Request(
 $request->setFormat($callParams['requestFormat']);
 $request->setResponseFormat($callParams['responseFormat']);
 $result = ActionMapper::processAction($request);
+$index = SearchUtil::getIndex(false);
+if ($index) {
+	$index->commit();
+}
 exit;
 
 /**
@@ -94,7 +100,7 @@ function onError($message, $file='', $line='')
     $request = new Request($controller, $context, $action, $data);
     $request->setResponseFormat($responseFormat);
     ActionMapper::processAction($request);
+	exit;    
   }
-  exit;
 }
 ?>
