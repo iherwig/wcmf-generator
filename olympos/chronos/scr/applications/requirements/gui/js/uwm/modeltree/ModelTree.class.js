@@ -198,7 +198,7 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(ddEvent) {
  * @return {Boolean} True if the relation is possible, False else
  */
 uwm.modeltree.ModelTree.prototype.checkModelConstraints = function(parentModelNode, childModelNode) {
-	
+	console.info(parentModelNode.getUwmClassName()+" <- "+childModelNode.getUwmClassName());
 	// default: allow all drops
 	var result = true;
 	
@@ -208,7 +208,7 @@ uwm.modeltree.ModelTree.prototype.checkModelConstraints = function(parentModelNo
 		result = false;
 	}
 	else if (parentModelNode instanceof uwm.model.builtin.Model) {
-		// only activity sets can be dropped on a use case
+		// only packages can be dropped on a model
 		if (!(childModelNode instanceof uwm.model.builtin.Package)) {
 			result = false;
 		}
@@ -232,6 +232,12 @@ uwm.modeltree.ModelTree.prototype.checkModelConstraints = function(parentModelNo
 	else if (childModelNode instanceof uwm.diagram.ActivitySet) {
 		// activity sets cannot be dropped (except on a use case, but this is handled above)
 		result = false;
+	}
+	else if (childModelNode.getSemanticGroup() == "activity") {
+		// activity nodes can only be dropped on a activity set
+		if (!(parentModelNode instanceof uwm.diagram.ActivitySet)) {
+			result = false;
+		}
 	}
 	
 	return result;
@@ -598,7 +604,6 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 uwm.modeltree.ModelTree.prototype.showCreateProgressNode = function(parent, text) {
 	this.removeCreateProgressNode();
 	this.createProgressNode = new Ext.tree.AsyncTreeNode({
-		id: uwm.modeltree.ModelTree.CREATE_PROGRESS_NODE_ID,
 		disabled: true,
 		leaf: true,
 		text: text,
@@ -632,9 +637,3 @@ uwm.modeltree.ModelTree.getInstance = function() {
  * @type String
  */
 uwm.modeltree.ModelTree.COMPONENT_ID = "uwm.modeltree.ModelTree.ID";
-
-/**
- * ID of the create progress node.
- * @type String
- */
-uwm.modeltree.ModelTree.CREATE_PROGRESS_NODE_ID = "uwm.modeltree.ModelTree.CREATE_PROGRESS_NODE_ID";

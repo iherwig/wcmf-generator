@@ -24,7 +24,7 @@ uwm.modeltree.ActivitySetNode = function(config) {
 	uwm.modeltree.ActivitySetNode.superclass.constructor.call(this, Ext.apply(this, {
 		id: config.oid,
 		iconCls: this.modelNode.getModelNodeClass().getTreeIcon(),
-		allowDrop: false
+		allowDrop: true
 	}, config));
 	
 	}
