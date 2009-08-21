@@ -198,7 +198,7 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(ddEvent) {
  * @return {Boolean} True if the relation is possible, False else
  */
 uwm.modeltree.ModelTree.prototype.checkModelConstraints = function(parentModelNode, childModelNode) {
-	console.info(parentModelNode.getUwmClassName()+" <- "+childModelNode.getUwmClassName());
+
 	// default: allow all drops
 	var result = true;
 	
