@@ -96,6 +96,10 @@ uwm.model.ModelNode.prototype.getUwmClassName = function() {
 	return this.uwmClassName;
 }
 
+uwm.model.ModelNode.prototype.getSemanticGroup = function() {
+	return this.semanticGroup;
+}
+
 uwm.model.ModelNode.prototype.getModelNodeClass = function() {
 	var result = this.modelNodeClass;
 	
