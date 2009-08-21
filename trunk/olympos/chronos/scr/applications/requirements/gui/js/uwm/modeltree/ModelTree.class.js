@@ -257,7 +257,7 @@ uwm.modeltree.ModelTree.prototype.handleBeforeNodeDrop = function(dropEvent) {
 			var parentNode = dropEvent.target.getModelNode();
 			
 			// show the create node
-			this.showCreateProgressNode(dropEvent.target, uwm.Dict.translate('Creating '+newType+'...'));
+			this.showCreateProgressNode(dropEvent.target, uwm.Dict.translate('Creating')+' '+newType+'...');
 			uwm.model.ModelContainer.getInstance().createModelObject(newType, parentNode);
 		}
 		// move an existing tree node
@@ -471,7 +471,7 @@ uwm.modeltree.ModelTree.prototype.handleDeleteEvent = function(modelObject) {
 }
 
 uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject, oldLabel, newLabel) {
-	// don't update nodes, it the are translated into a different language
+	// don't update nodes, if they are translated into a different language
 	if (modelObject.getLanguage() != uwm.i18n.Localization.getInstance().getUserLanguage()) {
 		return;
 	}
@@ -500,6 +500,7 @@ uwm.modeltree.ModelTree.prototype.handleChangeLabelEvent = function(modelObject,
 		});
 		
 		this.getRootNode().appendChild(node);
+		this.removeCreateProgressNode();
 	}
 }
 
