@@ -32,7 +32,7 @@ uwm.ui.GeneratorWizard = function(config) {
 	
 	this.generateButton = new Ext.Button( {
 	    text : uwm.Dict.translate("Generate"),
-	    disabled: true,
+	    disabled : true,
 	    handler : function() {
 		    var record = self.grid.getSelectionModel().getSelected();
 		    
@@ -98,9 +98,9 @@ uwm.ui.GeneratorWizard = function(config) {
 	    }), new Ext.form.FieldSet( {
 	        title : uwm.Dict.translate("Information"),
 	        labelAlign : "top",
-	        labelStyle : "font-weight: bold;",
 	        defaults : {
-		        minHeight : 50
+	            labelStyle : "font-weight: bold;",
+	            minHeight : 50
 	        },
 	        items : [ new Ext.form.DisplayField( {
 	            fieldLabel : uwm.Dict.translate("Target Platform"),
