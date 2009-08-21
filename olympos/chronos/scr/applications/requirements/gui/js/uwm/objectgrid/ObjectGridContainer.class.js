@@ -64,7 +64,9 @@ uwm.objectgrid.ObjectGridContainer.prototype.handleChangeLabelEvent = function(m
 		var record = objectGrid.getStore().query("oid", modelObject.getOid());
 		
 		if (record.getCount() > 0) {
-			record.get(0).set("Label", modelObject.getLabel());
+			record.get(0).set("label", modelObject.getLabel());
+			// avoid showing a dirty mark in grid
+			objectGrid.getStore().commitChanges();
 		}
 	}
 }
