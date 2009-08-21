@@ -53,7 +53,7 @@ uwm.objectgrid.ObjectGridContainer.prototype.handleDeleteEvent = function(modelO
 }
 
 uwm.objectgrid.ObjectGridContainer.prototype.handleChangeLabelEvent = function(modelObject, oldLabel) {
-	// don't update nodes, it the are translated into a different language
+	// don't update nodes, if they are translated into a different language
 	if (modelObject.getLanguage() != uwm.i18n.Localization.getInstance().getUserLanguage()) {
 		return;
 	}
