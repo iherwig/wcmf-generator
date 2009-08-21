@@ -188,6 +188,7 @@ uwm.persistency.ActionSet.prototype.addLoadChildren = function(oid,
 	this.requests[this.getNextId()] = {
 		action :"loadChildren",
 		oid :oid,
+		sort :"sortkey",
 		successHandler :successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel

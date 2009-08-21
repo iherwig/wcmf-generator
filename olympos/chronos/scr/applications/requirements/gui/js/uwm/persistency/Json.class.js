@@ -229,7 +229,8 @@ uwm.persistency.Json.prototype.loadChildren = function(oid, successHandler, erro
 	this.jsonRequest({
 		controller: "TreeViewController",
 		usr_action: "loadChildren",
-		node: oid
+		node: oid,
+		sort: "sortkey"
 	}, successHandler, errorHandler);
 }
 
@@ -436,6 +437,7 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 			case "loadChildren":
 				jsonRequest.controller = "TreeViewController";
 				jsonRequest.node = currRequest.oid;
+				jsonRequest.sort = currRequest.sort;
 				break;
 				
 			case "lock":

@@ -82,14 +82,6 @@ uwm.modeltree.ModelTree = function(config) {
 			self.handleDisassociateEvent(parentModelObject, childModelObject);
 		}
 	});
-	
-	// the node shown while creating a new node
-	this.createProgressNode = new Ext.tree.AsyncTreeNode({
-		id: uwm.modeltree.ModelTree.CREATE_PROGRESS_NODE_ID,
-		disabled: true,
-		leaf: true,
-		cls: "x-tree-node-loading"
-	});
 }
 
 Ext.extend(uwm.modeltree.ModelTree, uwm.objecttree.ObjectTree);
@@ -259,9 +251,7 @@ uwm.modeltree.ModelTree.prototype.handleBeforeNodeDrop = function(dropEvent) {
 			var parentNode = dropEvent.target.getModelNode();
 			
 			// show the create node
-			dropEvent.target.appendChild(this.createProgressNode);
-			this.createProgressNode.setText(uwm.Dict.translate('Creating '+newType+'...'));
-			this.createProgressNode.getUI().show();
+			this.showCreateProgressNode(dropEvent.target, uwm.Dict.translate('Creating '+newType+'...'));
 			uwm.model.ModelContainer.getInstance().createModelObject(newType, parentNode);
 		}
 		// move an existing tree node
@@ -588,9 +578,7 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 					uwm.Log.log("append node in associate: "+childNode.id+" to "+parentNode.id, uwm.Log.DEBUG);
 				}
 				if (parentNode.isExpanded()) {
-					if (this.createProgressNode.parentNode) {
-						this.createProgressNode.getUI().hide();
-					}
+					this.removeCreateProgressNode();
 					parentNode.appendChild(childNode);
 					childNode.ensureVisible();
 				} else {
@@ -598,6 +586,34 @@ uwm.modeltree.ModelTree.prototype.handleAssociateEvent = function(parentModelObj
 				}
 			}
 		}
+	}
+}
+
+/**
+ * Show a progress node while creating a node. There can only 
+ * be one node at a time, so another instance will be removed.
+ * @param parent The node to attach the progress node to.
+ * @param text The node's text.
+ */
+uwm.modeltree.ModelTree.prototype.showCreateProgressNode = function(parent, text) {
+	this.removeCreateProgressNode();
+	this.createProgressNode = new Ext.tree.AsyncTreeNode({
+		id: uwm.modeltree.ModelTree.CREATE_PROGRESS_NODE_ID,
+		disabled: true,
+		leaf: true,
+		text: text,
+		cls: "x-tree-node-loading"
+	});
+	parent.appendChild(this.createProgressNode);
+	this.createProgressNode.ensureVisible();
+}
+
+/**
+ * Remove the progress node safely (no need to be created before).
+ */
+uwm.modeltree.ModelTree.prototype.removeCreateProgressNode = function() {
+	if (this.createProgressNode && this.createProgressNode.parentNode) {
+		this.createProgressNode.remove();
 	}
 }
 
