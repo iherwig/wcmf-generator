@@ -43,6 +43,12 @@ uwm.objectgrid.ObjectGrid = function(config) {
 	
 	this.buildContextMenu();
 	
+	// make sure that records are sorted by the label instead of
+	// the sortkey
+	if (this.getStore().fields.containsKey("label")) {
+		this.getStore().setDefaultSort("label");
+	}
+	
 	var self = this;
 	
 	this.on("cellclick", function(grid, rowIndex, columnIndex, e) {
