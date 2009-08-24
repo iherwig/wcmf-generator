@@ -32,6 +32,12 @@
 		<outputSlot value="model"/>
 	</component>
 
+	<!-- read profile as model -->
+	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
+		<modelUrl value='${profileUmlFile}'/>
+		<outputSlot value="chronosProfileModel"/>
+	</component>
+
 	<!-- Check constraints before model 2 model transformation -->
 	<if cond="${doCheck}">
 		<component class="oaw.check.CheckComponent">
@@ -65,7 +71,7 @@
 		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
- 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model)"/>
+ 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model, chronosProfileModel)"/>
 
 		<outputSlot value="transformedModel"/>
 	</component>
