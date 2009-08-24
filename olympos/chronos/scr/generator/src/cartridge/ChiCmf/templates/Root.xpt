@@ -15,7 +15,7 @@
 	«EXPAND manyToMany FOREACH this.allOwnedElements().typeSelect(ChiManyToMany)»
 	«EXPAND controller FOREACH this.allOwnedElements().typeSelect(ChiController)»
 	«EXPAND view FOREACH this.allOwnedElements().typeSelect(ChiView)»
-	«EXPAND class FOREACH this.allOwnedElements().typeSelect(uml::Class)»
+	«REM»«EXPAND class FOREACH this.allOwnedElements().typeSelect(uml::Class)»«ENDREM»
 «ENDDEFINE»
 
 «REM» mapper/node ------------------------------------------------«ENDREM»
