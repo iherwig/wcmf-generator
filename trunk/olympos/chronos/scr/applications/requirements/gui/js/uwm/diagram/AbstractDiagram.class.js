@@ -370,20 +370,7 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject)
 	this.objects.add(modelObject.getOid(), modelObject);
 	
 	if (modelObject instanceof uwm.model.ClassObject) {
-		var childOids = modelObject.getChildOids();
-		var modelContainer = uwm.model.ModelContainer.getInstance();
-		
-		for ( var i = 0; i < childOids.length; i++) {
-			var currChild = modelContainer.getByOid(childOids[i]);
-			
-			if (currChild instanceof uwm.model.AttributeObject) {
-				var propertyGraphics = new uwm.graphics.figure.Attribute(currChild.getLabel(), currChild);
-				figure.getGraphics().addChildElement(propertyGraphics, false);
-			} else if (currChild instanceof uwm.model.OperationObject) {
-				var operationGraphics = new uwm.graphics.figure.Operation(currChild.getLabel(), currChild);
-				figure.getGraphics().addChildElement(operationGraphics, false);
-			}
-		}
+		this.reestablishExistingClass(modelObject);
 	}
 	
 	this.figuresToLoad--;
@@ -529,6 +516,24 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					}
 				}
 			}
+		}
+	}
+}
+
+uwm.diagram.AbstractDiagram.prototype.reestablishExistingClass = function(newObject) {
+	var childOids = newObject.getChildOids();
+	var modelContainer = uwm.model.ModelContainer.getInstance();
+	var figure = this.figures.get(newObject.getOid());
+	
+	for ( var i = 0; i < childOids.length; i++) {
+		var currChild = modelContainer.getByOid(childOids[i]);
+		
+		if (currChild instanceof uwm.model.AttributeObject) {
+			var propertyGraphics = new uwm.graphics.figure.Attribute(currChild.getLabel(), currChild);
+			figure.getGraphics().addChildElement(propertyGraphics, true);
+		} else if (currChild instanceof uwm.model.OperationObject) {
+			var operationGraphics = new uwm.graphics.figure.Operation(currChild.getLabel(), currChild);
+			figure.getGraphics().addChildElement(operationGraphics, true);
 		}
 	}
 }
@@ -802,12 +807,16 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 		
 		self.reestablishConnections(modelObject);
 		// self.establishExistingConnections(modelObject,
-		    // modelObject.getParentOids(), 'parent');
-		    // self.establishExistingConnections(modelObject,
-		    // modelObject.getChildOids(), 'child');
-		    
-		    self.dropWindow.destroy();
-	    });
+		// modelObject.getParentOids(), 'parent');
+		// self.establishExistingConnections(modelObject,
+		// modelObject.getChildOids(), 'child');
+		
+		if (modelObject instanceof uwm.model.ClassObject) {
+			self.reestablishExistingClass(modelObject);
+		}
+		
+		self.dropWindow.destroy();
+	});
 	
 	/*
 	 * actionSet.addSave("{last_created_oid:Figure}", { PositionX :x, PositionY

@@ -116,7 +116,15 @@ uwm.model.ModelContainer.prototype.handleCreatedModel = function(oid) {
 	
 	uwm.event.EventBroker.getInstance().fireEvent("create", newModelNode);
 	
-	newModelNode.setDefaultLabel();
+	var nodeLabel = newModelNode.getLabel();
+	if (nodeLabel == oid) {
+		// no label was set before
+		newModelNode.setDefaultLabel();
+	}
+	else {
+		// the label is already set, notify listeners
+		uwm.event.EventBroker.getInstance().fireEvent("changeLabel", newModelNode, nodeLabel, nodeLabel);
+	}
 }
 
 uwm.model.ModelContainer.prototype.createPackage = function(parentModelNode) {
@@ -249,7 +257,15 @@ uwm.model.ModelContainer.prototype.handleCreatedModelObject = function(oid, uwmC
 	
 	uwm.event.EventBroker.getInstance().fireEvent("create", newObject);
 	
-	newObject.setDefaultLabel();
+	var nodeLabel = newObject.getLabel();
+	if (nodeLabel == oid) {
+		// no label was set before
+		newObject.setDefaultLabel();
+	}
+	else {
+		// the label is already set, notify listeners
+		uwm.event.EventBroker.getInstance().fireEvent("changeLabel", newObject, nodeLabel, nodeLabel);
+	}
 	
 	if (packageNode) {
 		newObject.associate(packageNode);
@@ -269,11 +285,11 @@ uwm.model.ModelContainer.prototype.loadByOid = function(oid, callback, depth, se
 	
 	if (callback instanceof uwm.persistency.ActionSet) {
 		callback.addDisplay(oid, depth, uwm.i18n.Localization.getInstance().getUserLanguage(), 
-      function(request, data) {
-        var node = self.createByDisplayResult(data);
-        if (secondCallback) {
-          secondCallback(node);
-        }
+			function(request, data) {
+				var node = self.createByDisplayResult(data);
+				if (secondCallback) {
+					secondCallback(node);
+				}
 		});
 	} else {
 		uwm.persistency.Persistency.getInstance().display(oid, depth, 
@@ -312,8 +328,12 @@ uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentN
 	var packageNode = this.getNode("Package", parentNode.getOid());
 	var self = this;
 	
-	uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), parentNode.getOid(), function(request, data) {
-		self.handleCreatedModelObject(data.oid, uwmClassName, packageNode);
+	var actionSet = new uwm.persistency.ActionSet();
+	actionSet.addCopy(modelNode.getOid(), parentNode.getOid());
+	actionSet.addDisplay("{last_created_oid:" + uwmClassName + "}", 0);
+	actionSet.commit(function(request, data) {
+		var node = self.createByDisplayResult(data);
+		self.handleCreatedModelObject(node.oid, uwmClassName, packageNode);
 	});
 }
 
@@ -321,8 +341,12 @@ uwm.model.ModelContainer.prototype.duplicateModel = function(modelNode) {
 	var uwmClassName = modelNode.getModelNodeClass().getUwmClassName();
 	var self = this;
 	
-	uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), null, function(request, data) {
-		self.handleCreatedModel(data.oid);
+	var actionSet = new uwm.persistency.ActionSet();
+	actionSet.addCopy(modelNode.getOid(), null);
+	actionSet.addDisplay("{last_created_oid:" + uwmClassName + "}", 0);
+	actionSet.commit(function(request, data) {
+		var node = self.createByDisplayResult(data);
+		self.handleCreatedModel(node.oid);
 	});
 }
 
