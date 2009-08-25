@@ -258,7 +258,13 @@ uwm.modeltree.ModelTree.prototype.handleBeforeNodeDrop = function(dropEvent) {
 			
 			// show the create node
 			this.showCreateProgressNode(dropEvent.target, uwm.Dict.translate('Creating')+' '+newType+'...');
-			uwm.model.ModelContainer.getInstance().createModelObject(newType, parentNode);
+			if (uwm.Log.isEnabled(uwm.Log.DEBUG)) {
+				uwm.Log.log("insert: "+newType+" in "+parentNode.oid, uwm.Log.DEBUG);
+			}
+			
+			var actionSet = new uwm.persistency.ActionSet();
+			uwm.model.ModelContainer.getInstance().createModelObject(newType, parentNode, actionSet);
+			actionSet.commit();
 		}
 		// move an existing tree node
 		else {
