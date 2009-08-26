@@ -199,7 +199,7 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 }
 
 /**
- * Checks whether a
+ * Checks whether an object is contained in the diagram
  * 
  * @link{uwm.model.ModelObject} with the given oid is contained in this diagram.
  * 
@@ -211,6 +211,10 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
  */
 uwm.diagram.AbstractDiagram.prototype.containsObject = function(modelObject) {
 	return this.objects.containsKey(modelObject.getOid());
+}
+
+uwm.diagram.AbstractDiagram.prototype.getContainedFigure = function(oid) {
+	return this.figures.get(oid);
 }
 
 uwm.diagram.AbstractDiagram.prototype.scrollToObject = function(modelObject) {
@@ -238,7 +242,7 @@ uwm.diagram.AbstractDiagram.prototype.scrollToCenter = function() {
 	
 	setTimeout(function() {
 		workflow.scrollTo(height, width, true);
-	}, 1000);
+	}, 500);
 }
 
 /**
@@ -350,6 +354,7 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 		this.loadMask.hide();
 		this.propertyDisplayEnabled = true;
 		this.eventHandlerEnabled = true;
+		this.scrollToCenter();
 	}
 }
 
