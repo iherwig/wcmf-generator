@@ -28,6 +28,7 @@ uwm.property.HtmlEditor = function(config) {
 	var self = this;
 	
 	uwm.property.HtmlEditor.superclass.constructor.call(this, Ext.apply(this, {
+			emptyText : uwm.property.HtmlEditor.EMPTY_VALUE,
 			enableAlignments : false,
 			enableColors : false,
 			enableFont : false,
@@ -172,3 +173,4 @@ uwm.property.HtmlEditor.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID = "inlineComboBoxSpanId";
+uwm.property.HtmlEditor.EMPTY_VALUE = "<br>";
