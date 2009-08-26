@@ -129,9 +129,10 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 					
 					newSource.disassociate(newTarget, connectionInfo, relationObject);
 				} else if (figure instanceof uwm.graphics.figure.AbstractClassPart) {
-					var modelObject = figure.getModelObject();
-					
-					uwm.model.ModelContainer.getInstance().deleteByModelNode(modelObject);
+					// when deleting a class figure, the classpart figure is deleted
+					// automatically as part of the container. when deleting a classpart 
+					// only, deletion code inside AbstractClassPart handles the deletion
+					// of the figure
 				}
 			}
 		}

@@ -46,6 +46,7 @@ Ext.extend(uwm.graphics.figure.AbstractClassPart, draw2d.Node);
  */
 uwm.graphics.figure.AbstractClassPart.prototype.buildContextMenu = function() {
 	var modelObject = this.getModelObject();
+	var self = this;
 
 	/**
 	 * The context menu of this figure.
@@ -57,6 +58,16 @@ uwm.graphics.figure.AbstractClassPart.prototype.buildContextMenu = function() {
 		items : [ new Ext.menu.Item( {
 			text :uwm.Dict.translate('Delete from model'),
 			handler : function(item, e) {
+				// add an delete event listener to delete the graphic,
+				// when the object is deleted. we don't remove it afterwards,
+				// but don't expect this to become a problem
+				uwm.event.EventBroker.getInstance().addListener({
+					"delete": function(modelObject) {
+						if (self.getParent()) {
+							self.getParent().removeChildElement(self, true);
+						}
+					}
+				});
 				uwm.model.ModelContainer.getInstance().deleteByModelNode(modelObject);
 			}
 		}) ]
