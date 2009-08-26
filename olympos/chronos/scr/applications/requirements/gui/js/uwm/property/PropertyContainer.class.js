@@ -207,12 +207,7 @@ uwm.property.PropertyContainer.prototype.hideForm = function(panel) {
 
 	var items = panel.items;
 	while (items && items.getCount() > 0) {
-    // ignore any errors happening while removing the panel items
-    // (e.g. HTMLEditor can't save its value because the object is deleted already)
-		try {
-			panel.remove(items.get(0), true);
-		}
-		catch (e) {}
+		panel.remove(items.get(0), true);
 	}
 }
 
