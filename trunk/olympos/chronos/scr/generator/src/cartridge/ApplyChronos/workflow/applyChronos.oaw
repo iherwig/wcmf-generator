@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+	<!-- the following properties property maybe overriden from the command line -->
+	<property name='basePath' value='src'/>
+	<property name='propertyFile' value='${basePath}/cartridge/ApplyChronos/workflow/applyChronos.properties'/>
+	<property file="${propertyFile}"/>
+	
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+	
+	<!-- Metamodel-Definition -->
+	<bean id="UmlMM" class="oaw.uml2.UML2MetaModel"/>
+	<bean id="${profilename}MM" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${profileUmlUri}"/>
+	</bean>
+
+	<if cond="${doModelEaExport}">
+		<property name="profileUmlFile" value="${profileUmlUri}" />
+		<component file="${basePath}/cartridge/Wcmf/workflow/ea_model_import.oaw" inheritAll="true"/>
+	</if>
+
+	<!-- Read the UML model and store it into a slot named 'model' -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${modelUmlFile}"/>
+		<outputSlot value="model"/>
+	</component>
+
+	<!-- read profile as model -->
+	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
+		<modelUrl value='${profileUmlUri}'/>
+		<outputSlot value="profileModel"/>
+	</component>
+
+
+	<!-- Apply Chronos Stereotypes -->
+	<component id="m2m" class="oaw.xtend.XtendComponent">
+		<metaModel idRef="UmlMM"/>
+		<metaModel idRef="${profilename}MM"/>
+ 	    <invoke value="${extend}"/>
+	</component>
+		
+	<!-- Write out transformed model for manual cross-check -->
+	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
+		<inputSlot value="model" />
+		<outPath value="${targetDir}" />
+	</component>
+</workflow>
