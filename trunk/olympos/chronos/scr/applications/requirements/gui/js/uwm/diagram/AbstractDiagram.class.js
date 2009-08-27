@@ -788,8 +788,7 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 	var self = this;
 	
 	if (!this.objects.get(modelObject.getOid())) {
-		this.objects.items.push(modelObject);
-		this.objects.keys.push(modelObject.getOid());
+		this.objects.add(modelObject.getOid(), modelObject);
 	}
 	
 	var actionSet = new uwm.persistency.ActionSet();
@@ -909,6 +908,21 @@ uwm.diagram.AbstractDiagram.prototype.getFigure = function() {
 	return new uwm.diagram.Figure(uwm.model.ModelNodeClassContainer.getInstance().getClass("Figure"));
 }
 
+/**
+ * Remove a figure from internal registries
+ */ 
+uwm.diagram.AbstractDiagram.prototype.removeFromCache = function(figure) {
+	var persistencyFigure = figure.getFigure();
+	if (persistencyFigure) {
+		var oid = persistencyFigure.getModelObject().getOid();
+		this.figures.removeKey(oid);
+		this.objects.removeKey(oid);
+		if (this.childOids) {
+			this.childOids.remove(persistencyFigure.getOid());
+		}
+	}
+}
+
 uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 	if (modelNode == this) {
 		uwm.diagram.DiagramContainer.getInstance().getTabPanel().remove(this.tab);
@@ -922,8 +936,7 @@ uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 		var figure = this.figures.get(modelNode.getOid());
 		
 		if (figure) {
-			this.figures.removeKey(modelNode.getOid());
-			this.objects.removeKey(modelNode.getOid());
+			this.removeFromCache(figure);
 			figure.remove();
 		}
 	}
