@@ -26,12 +26,9 @@ uwm.tabadmin.Workbench = function(config) {
 		enableTabScroll :true,
 		items : [ new uwm.tabadmin.ImportPanel() ]
 	});
-	this.eastPanel = new uwm.ui.EastPanel( {
-		highlight :"admin"
-	})
 
 	uwm.tabadmin.Workbench.superclass.constructor.call(this, Ext.apply(this, {
-		items : [ this.tabPanel, this.eastPanel ]
+		items : [ this.tabPanel, this.getEastPanel() ]
 	}, config));
 
 	var classes = uwm.model.ModelNodeClassContainer.getInstance()
@@ -60,3 +57,10 @@ uwm.tabadmin.Workbench = function(config) {
 }
 
 Ext.extend(uwm.tabadmin.Workbench, uwm.ui.AbstractWorkbench);
+
+/*
+ * @see uwm.ui.AbstractWorkbench.getHightLight()
+ */
+uwm.tabadmin.Workbench.prototype.getHightLight = function() {
+	return "admin";
+}

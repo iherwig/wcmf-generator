@@ -19,10 +19,7 @@ Ext.namespace("uwm.ui");
  * @param {Object} config The configuration object.
  */
 uwm.ui.Workbench = function(config) {
-	this.eastPanel = new uwm.ui.EastPanel({
-		highlight: "default"
-	});
-	
+
 	uwm.ui.Workbench.superclass.constructor.call(this, Ext.apply(this, {
 		items: [{
 			region: "west",
@@ -38,9 +35,15 @@ uwm.ui.Workbench = function(config) {
 					Accordion: this.accordion
 				})]
 			})
-		}, this.eastPanel, uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
+		}, this.getEastPanel(), uwm.diagram.DiagramContainer.getInstance().getTabPanel()]
 	}, config));
 }
 
 Ext.extend(uwm.ui.Workbench, uwm.ui.AbstractWorkbench);
 
+/*
+ * @see uwm.ui.AbstractWorkbench.getHightLight()
+ */
+uwm.ui.Workbench.prototype.getHightLight = function() {
+	return "default";
+}
