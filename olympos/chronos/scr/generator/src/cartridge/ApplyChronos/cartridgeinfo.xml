@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridgeinfo system="false">
+	<name>Apply Chronos Stereotypes</name>
+	<description>
+		Applies the following Chronos Stereotypes:
+		
+		* ChiBusinessUseCase to all uml::UseCase
+		* ChiNode to all uml::Class
+		* ChiBusinessPartner to all uml::Actor
+		
+		Additionally, all Comments are linked correctly to their containers (fixing errors of EAexporter).
+		
+		Adds a ChiRequirement and ChiFeature for each UseCase.
+	</description>
+	<dependencies>
+	</dependencies>
+	<properties>
+	</properties>
+</cartridgeinfo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridgeinfo system="true">
+	<name>Document Generator</name>
+	<description>
+		Generates OpenOffice Writer, Microsoft Office Word or PDF documents 
+		of a model or a package and all its contents. Several templates are available.
+		
+		New templates can be inserted by just creating a new template below template
+		directory. They are auto-discovered from the file system. 
+	</description>
+	<dependencies>
+		<dependency>UmlConnector</dependency>
+	</dependencies>
+	<properties>
+	</properties>
+</cartridgeinfo>
