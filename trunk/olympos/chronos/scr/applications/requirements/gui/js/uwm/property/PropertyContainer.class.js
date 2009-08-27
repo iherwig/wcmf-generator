@@ -136,7 +136,7 @@ uwm.property.PropertyContainer.prototype.showProperty = function(modelNode) {
 	if (modelNode != null) {
 		var eastPanel = this.findParentByType(uwm.property.EastPanel);
 		
-		if (!eastPanel.isCollapsed()) {
+		if (!eastPanel.collapsed) {
 			var oid = modelNode.getOid();
 			
 			if (oid != null && this.currentOid != oid) {
@@ -265,5 +265,5 @@ uwm.property.PropertyContainer.prototype.isTranslationPanelOpen = function() {
 }
 
 uwm.property.PropertyContainer.getInstance = function() {
-	return uwm.Uwm.getInstance().getActiveWorkbench().getEastPanel().getPropertyContainer();
+	return uwm.Uwm.getInstance().getActiveWorkbench().getPropertyContainer();
 }
