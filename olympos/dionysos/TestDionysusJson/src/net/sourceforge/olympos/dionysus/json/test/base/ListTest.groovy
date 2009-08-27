@@ -321,10 +321,10 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 
 	private void assertSorting(json, boolean reverse = false) {
 		def sortedList = json.list.clone()
-		sortedList.sort{it[Cfg.listClassFieldName]}
+		sortedList.sort{it.attributes[Cfg.listClassFieldName]}
 
 		if (reverse) {
-			sortedList = sortedListe.reverse()
+			sortedList = sortedList.reverse()
 		}
 
 		sortedList.eachWithIndex { obj, i ->
