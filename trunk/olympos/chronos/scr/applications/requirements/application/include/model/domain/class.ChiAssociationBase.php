@@ -160,19 +160,6 @@ class ChiAssociationBase extends Relation
     {
       return $this->setValue('fk_name', $fk_name, DATATYPE_ATTRIBUTE);
     }
-    function getChiNodeTargetOID()
-    {
-      $fkValue = $this->getValue('fk_chinodetarget_id', DATATYPE_IGNORE);
-      if ($fkValue != null)
-        return PersistenceFacade::composeOID(array('type' => 'ChiNode', 'id' => array($fkValue)));
-      else
-        return null;
-    }
-    function setChiNodeTarget(&$node)
-    {
-      if ($node != null)
-        $this->setValue('fk_chinodetarget_id', $node->getDBID(), DATATYPE_IGNORE);
-    }
     function getChiNodeSourceOID()
     {
       $fkValue = $this->getValue('fk_chinodesource_id', DATATYPE_IGNORE);
@@ -198,10 +185,6 @@ class ChiAssociationBase extends Relation
     {
       if ($node != null)
         $this->setValue('fk_chinodemanytomany_id', $node->getDBID(), DATATYPE_IGNORE);
-    }
-    function getChiNodeTargetParents()
-    {
-      return $this->getParentsEx(null, 'ChiNode', null, null);
     }
     function getChiNodeSourceParents()
     {
