@@ -103,10 +103,6 @@ uwm.modeltree.ModelNode.prototype.addPackage = function(self, e) {
 }
 
 uwm.modeltree.ModelNode.prototype.duplicate = function(self, e) {
-	var self = this;
-	var tree = this.getOwnerTree();
-	tree.showCreateProgressNode(this.parentNode, 
-		uwm.Dict.translate('Copying')+' '+this.modelNode.getName()+'...');
 	uwm.model.ModelContainer.getInstance().duplicateModel(this.modelNode);
 }
 

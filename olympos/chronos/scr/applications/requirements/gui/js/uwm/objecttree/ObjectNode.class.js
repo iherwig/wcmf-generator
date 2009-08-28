@@ -110,10 +110,6 @@ uwm.objecttree.ObjectNode.prototype.showObjectHistory = function(self, e) {
 }
 
 uwm.objecttree.Node.prototype.duplicate = function(self, e) {
-	var self = this;
-	var tree = this.getOwnerTree();
-	tree.showCreateProgressNode(this.parentNode, 
-		uwm.Dict.translate('Copying')+' '+this.modelNode.getName()+'...');
 	uwm.model.ModelContainer.getInstance().duplicateObject(this.modelNode, this.parentNode.modelNode);
 }
 

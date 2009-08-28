@@ -327,7 +327,7 @@ uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentN
 	var uwmClassName = modelNode.getModelNodeClass().getUwmClassName();
 	var packageNode = this.getNode("Package", parentNode.getOid());
 	var self = this;
-	
+/*
 	var actionSet = new uwm.persistency.ActionSet();
 	actionSet.addCopy(modelNode.getOid(), parentNode.getOid());
 	actionSet.addDisplay("{last_created_oid:" + uwmClassName + "}", 0);
@@ -335,12 +335,25 @@ uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentN
 		var node = self.createByDisplayResult(data);
 		self.handleCreatedModelObject(node.oid, uwmClassName, packageNode);
 	});
+*/
+	new uwm.ui.LongTaskRunner( {
+			title : uwm.Dict.translate('Copying Object ...'),
+			call : function(successHandler, errorHandler) {
+				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), parentNode.getOid(), successHandler, errorHandler);
+			},
+			successHandler : function() {
+			},
+			errorHandler : function() {
+				uwm.Util.showMessage(uwm.Dict.translate("Error while copying"), uwm.Dict.translate("The process was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+			},
+			isReturningDocument : false
+	}).show();
 }
 
 uwm.model.ModelContainer.prototype.duplicateModel = function(modelNode) {
 	var uwmClassName = modelNode.getModelNodeClass().getUwmClassName();
 	var self = this;
-	
+/*	
 	var actionSet = new uwm.persistency.ActionSet();
 	actionSet.addCopy(modelNode.getOid(), null);
 	actionSet.addDisplay("{last_created_oid:" + uwmClassName + "}", 0);
@@ -348,6 +361,19 @@ uwm.model.ModelContainer.prototype.duplicateModel = function(modelNode) {
 		var node = self.createByDisplayResult(data);
 		self.handleCreatedModel(node.oid);
 	});
+*/
+	new uwm.ui.LongTaskRunner( {
+			title : uwm.Dict.translate('Copying Project ...'),
+			call : function(successHandler, errorHandler) {
+				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), null, successHandler, errorHandler);
+			},
+			successHandler : function() {
+			},
+			errorHandler : function() {
+				uwm.Util.showMessage(uwm.Dict.translate("Error while copying"), uwm.Dict.translate("The process was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+			},
+			isReturningDocument : false
+	}).show();
 }
 
 uwm.model.ModelContainer.prototype.getNode = function(uwmClassName, oid) {
