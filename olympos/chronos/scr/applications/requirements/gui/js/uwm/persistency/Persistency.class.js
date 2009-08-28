@@ -67,7 +67,7 @@ uwm.persistency.Persistency.prototype.disassociate = function(parentOid, childOi
 uwm.persistency.Persistency.prototype.save = function(oid, values, language, successHandler, errorHandler) {
 }
 
-uwm.persistency.Persistency.prototype.copy = function(oid, targetOid, successHandler, errorHandler) {
+uwm.persistency.Persistency.prototype.copy = function(oid, targetOid, recursive, successHandler, errorHandler) {
 }
 
 uwm.persistency.Persistency.prototype.sort = function(oid, direction, distance, poid, successHandler, errorHandler) {

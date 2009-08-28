@@ -141,11 +141,12 @@ uwm.persistency.Json.prototype.save = function(oid, values, language, successHan
 	this.jsonRequest(data, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.copy = function(oid, targetOid, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.copy = function(oid, targetOid, recursive, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "copy",
 		oid: oid,
-		targetoid: targetOid
+		targetoid: targetOid,
+    recursive: recursive,
 	}, successHandler, errorHandler);
 }
 
@@ -401,6 +402,7 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 			case "copy":
 				jsonRequest.oid = currRequest.oid;
 				jsonRequest.targetoid = currRequest.targetOid;
+				jsonRequest.recursive = currRequest.recursive;
 				break;
 				
 			case "sortup":

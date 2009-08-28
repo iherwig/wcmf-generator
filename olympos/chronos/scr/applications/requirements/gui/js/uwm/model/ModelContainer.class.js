@@ -108,7 +108,7 @@ uwm.model.ModelContainer.prototype.createModel = function() {
 	});
 }
 
-uwm.model.ModelContainer.prototype.handleCreatedModel = function(oid) {
+uwm.model.ModelContainer.prototype.handleCreatedModel = function(oid, callback) {
 	var newModelNode = this.getNode("Model", oid);
 	oid = newModelNode.oid;
 	
@@ -124,6 +124,10 @@ uwm.model.ModelContainer.prototype.handleCreatedModel = function(oid) {
 	else {
 		// the label is already set, notify listeners
 		uwm.event.EventBroker.getInstance().fireEvent("changeLabel", newModelNode, nodeLabel, nodeLabel);
+	}
+
+	if (callback instanceof Function) {
+		callback(newModelNode);
 	}
 }
 
@@ -327,23 +331,23 @@ uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentN
 	var uwmClassName = modelNode.getModelNodeClass().getUwmClassName();
 	var packageNode = this.getNode("Package", parentNode.getOid());
 	var self = this;
-/*
-	var actionSet = new uwm.persistency.ActionSet();
-	actionSet.addCopy(modelNode.getOid(), parentNode.getOid());
-	actionSet.addDisplay("{last_created_oid:" + uwmClassName + "}", 0);
-	actionSet.commit(function(request, data) {
-		var node = self.createByDisplayResult(data);
-		self.handleCreatedModelObject(node.oid, uwmClassName, packageNode);
-	});
-*/
-	new uwm.ui.LongTaskRunner( {
+
+	var longTaskRunner = new uwm.ui.LongTaskRunner( {
 			title : uwm.Dict.translate('Copying Object ...'),
 			call : function(successHandler, errorHandler) {
-				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), parentNode.getOid(), successHandler, errorHandler);
+				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), parentNode.getOid(), false, successHandler, errorHandler);
 			},
-			successHandler : function() {
+			successHandler : function(data) {
+				uwm.persistency.Persistency.getInstance().display(data.oid, 0, 
+					uwm.i18n.Localization.getInstance().getUserLanguage(), function(request, data) {
+						var node = self.createByDisplayResult(data);
+						self.handleCreatedModelObject(node.oid, uwmClassName, packageNode, function(newObject){
+							longTaskRunner.close();
+						});
+					}
+				)
 			},
-			errorHandler : function() {
+			errorHandler : function(data) {
 				uwm.Util.showMessage(uwm.Dict.translate("Error while copying"), uwm.Dict.translate("The process was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
 			},
 			isReturningDocument : false
@@ -353,23 +357,23 @@ uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentN
 uwm.model.ModelContainer.prototype.duplicateModel = function(modelNode) {
 	var uwmClassName = modelNode.getModelNodeClass().getUwmClassName();
 	var self = this;
-/*	
-	var actionSet = new uwm.persistency.ActionSet();
-	actionSet.addCopy(modelNode.getOid(), null);
-	actionSet.addDisplay("{last_created_oid:" + uwmClassName + "}", 0);
-	actionSet.commit(function(request, data) {
-		var node = self.createByDisplayResult(data);
-		self.handleCreatedModel(node.oid);
-	});
-*/
-	new uwm.ui.LongTaskRunner( {
+
+	var longTaskRunner = new uwm.ui.LongTaskRunner( {
 			title : uwm.Dict.translate('Copying Project ...'),
 			call : function(successHandler, errorHandler) {
-				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), null, successHandler, errorHandler);
+				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), null, true, successHandler, errorHandler);
 			},
-			successHandler : function() {
+			successHandler : function(data) {
+				uwm.persistency.Persistency.getInstance().display(data.oid, 0, 
+					uwm.i18n.Localization.getInstance().getUserLanguage(), function(request, data) {
+						var node = self.createByDisplayResult(data);
+						self.handleCreatedModel(node.oid, function(newObject){
+							longTaskRunner.close();
+						});
+					}
+				)
 			},
-			errorHandler : function() {
+			errorHandler : function(data) {
 				uwm.Util.showMessage(uwm.Dict.translate("Error while copying"), uwm.Dict.translate("The process was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
 			},
 			isReturningDocument : false

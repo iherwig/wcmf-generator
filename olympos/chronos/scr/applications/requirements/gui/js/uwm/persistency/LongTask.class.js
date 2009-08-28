@@ -34,6 +34,12 @@ uwm.persistency.LongTask = function(call, iFrameId) {
 
 /**
  * Run the task. The task will do the required server calls and call the given handlers.
+ * @param processHandler The function to call on each processing step. 
+ *          Parameters: stepName, stepNumber, numberOfSteps
+ * @param successHandler The function to call after the LongTask finished. 
+ *          Parameters: data The data returned from the last server call
+ * @param errorHandler The function to call when an error occurs
+ *          Parameters: data The data returned from the last server call
  */
 uwm.persistency.LongTask.prototype.run = function(processHandler, successHandler, errorHandler) {
 	
@@ -55,9 +61,9 @@ uwm.persistency.LongTask.prototype.jsonSuccess = function(options, data) {
 	var controller = data['controller'];
 
 	if (stepNumber > numberOfSteps) {
-		// call the success handler if the task finished
+		// call the success handler if the task is finished
 		if (this.successHandler instanceof Function) {
-			this.successHandler();
+			this.successHandler(data);
 		}
 	}
 	else if (stepNumber == numberOfSteps && this.iFrameId != null) {
@@ -73,7 +79,7 @@ uwm.persistency.LongTask.prototype.jsonSuccess = function(options, data) {
 			});
 			iFrame.set({src:'../application/main.php?response_format=HTML&usr_action=continue&controller='+controller+'&sid='+uwm.Session.getInstance().getSid()});
 			if (this.successHandler instanceof Function) {
-				this.successHandler();
+				this.successHandler(data);
 			}
 		}
 	}
@@ -90,7 +96,7 @@ uwm.persistency.LongTask.prototype.jsonError = function(options, data) {
 
 	// delegate to configured error handler
 	if (this.errorHandler instanceof Function) {
-		this.errorHandler();
+		this.errorHandler(data);
 	}
 }
 
@@ -100,7 +106,7 @@ uwm.persistency.LongTask.prototype.onDownload = function(iFrame) {
 		var result = Ext.util.JSON.decode(iFrame.dom.contentDocument.body.innerHTML);
 		if (!result.success) {
 			if (this.errorHandler instanceof Function) {
-				this.errorHandler();
+				this.errorHandler(data);
 			}
 		}
 	} catch (e) {
