@@ -104,12 +104,13 @@ uwm.persistency.ActionSet.prototype.addSave = function(oid, values,
 	};
 }
 
-uwm.persistency.ActionSet.prototype.addCopy = function(oid, targetOid,
+uwm.persistency.ActionSet.prototype.addCopy = function(oid, targetOid, recursive,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action :"copy",
 		oid :oid,
 		targetoid :targetOid,
+		recursive :recursive,
 		successHandler :successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel

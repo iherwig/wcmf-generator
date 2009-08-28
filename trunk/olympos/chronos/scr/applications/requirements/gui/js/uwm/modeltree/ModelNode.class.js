@@ -72,9 +72,8 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 			        call : function(successHandler, errorHandler) {
 				        uwm.persistency.Persistency.getInstance().exportUwm(self.getModelNode().getOid(), '', userLanguage, successHandler, errorHandler);
 			        },
-			        successHandler : function() {
-			        },
-			        errorHandler : function() {
+			        successHandler : function(data) {},
+			        errorHandler : function(data) {
 				        uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
 			        },
 			        isReturningDocument : true

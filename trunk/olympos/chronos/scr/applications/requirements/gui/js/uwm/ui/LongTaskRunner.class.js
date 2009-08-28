@@ -21,7 +21,9 @@ Ext.namespace("uwm.ui");
  * @config call A function with parameters successHandler and errorHandler (these will be used by LongTask)
  *              Typically a call to a Persistency method. See also {LongTask}.
  * @config successHandler The function to call after the LongTask finished
+ *          Parameters: data The data returned from the last server call
  * @config errorHandler The function to call when an error occurs
+ *          Parameters: data The data returned from the last server call
  * @config isReturningDocument Boolean, true if the last call returns a document to be downloaded
  */
 uwm.ui.LongTaskRunner = function(config) {
@@ -77,25 +79,32 @@ uwm.ui.LongTaskRunner = function(config) {
 					self.pbar.updateProgress(i/total, text);
 				}, 
 				// success handler (calls the success handler defined in the successHandler parameter)
-				function() {
+				function(data) {
 					self.pbar.updateText(uwm.Dict.translate("Finished"));
 					self.okButton.setText(uwm.Dict.translate("Close"));
 					//self.okButton.enable();
 					if (self.successHandler instanceof Function) {
-						self.successHandler();
+						self.successHandler(data);
 					}
 				}, 
 				// error handler (calls the error handler defined in the errorHandler parameter)
-				function() {
+				function(data) {
 					self.okButton.setText(uwm.Dict.translate("Close"));
 					//self.okButton.enable();
 					if (self.errorHandler instanceof Function) {
-						self.errorHandler();
+						self.errorHandler(data);
 					}
 				}
       ]);
 		}, 250);
 	});
+}
+
+/**
+ * Close the popup window
+ */
+uwm.ui.LongTaskRunner.prototype.close = function() {
+	this.destroy();
 }
 
 Ext.extend(uwm.ui.LongTaskRunner, Ext.Window);

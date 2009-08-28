@@ -179,9 +179,8 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 		    call : function(successHandler, errorHandler) {
 			    uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startModel, startPackage, doctypeSelected, userLanguage, successHandler, errorHandler);
 		    },
-		    successHandler : function() {
-		    },
-		    errorHandler : function() {
+		    successHandler : function(data) {},
+		    errorHandler : function(data) {
 			    uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
 		    },
 		    isReturningDocument : true

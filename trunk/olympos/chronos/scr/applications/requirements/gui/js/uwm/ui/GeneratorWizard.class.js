@@ -47,9 +47,8 @@ uwm.ui.GeneratorWizard = function(config) {
 		        call : function(successHandler, errorHandler) {
 			        uwm.persistency.Persistency.getInstance().generateCode(codeId, oid, successHandler, errorHandler);
 		        },
-		        successHandler : function() {
-		        },
-		        errorHandler : function() {
+		        successHandler : function(data) {},
+		        errorHandler : function(data) {
 			        uwm.Util.showMessage(uwm.Dict.translate("Error while generating"), uwm.Dict.translate("The generation was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
 		        },
 		        isReturningDocument : false
