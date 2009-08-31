@@ -41,6 +41,16 @@ uwm.property.HtmlEditor = function(config) {
 					},
 					"beforedestroy" : function(field) {
 						self.handleDestroy(field);
+					},
+					"enable" : function(field) {
+						if (this.rendered) {
+							this.wrap.unmask();
+						}
+					},
+					"disable" : function(field) {
+						if (this.rendered) {
+							this.wrap.mask();
+						}
 					}
 			}
 	}, config));

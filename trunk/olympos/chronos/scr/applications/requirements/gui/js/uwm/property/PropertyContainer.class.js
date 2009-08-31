@@ -86,6 +86,7 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 		
 		this.currentOid = null;
 		this.isLockedByOtherUser = null;
+		this.form = null;
 		
 		this.on("afterlayout", this.showInfoMask);
 		this.on("resize", this.doResize);
@@ -150,7 +151,7 @@ uwm.property.PropertyContainer.prototype.showProperty = function(modelNode) {
 				this.showLoadMask();
 				
 				var self = this;
-								
+				
 				var actionSet = new uwm.persistency.ActionSet();
 				
 				if (oldOid) {
@@ -193,12 +194,16 @@ uwm.property.PropertyContainer.prototype.handleLoadFinished = function() {
 uwm.property.PropertyContainer.prototype.displayForm = function() {
 
 	var modelNode = uwm.model.ModelContainer.getInstance().getByOid(this.currentOid);
-	var form = modelNode.getModelNodeClass().getPropertyForm(modelNode, this.isLockedByOtherUser);
-	form.localizeControls(uwm.i18n.Localization.getInstance().getUserLanguage());
-	this.mainPanel.add(form);
+	this.form = modelNode.getModelNodeClass().getPropertyForm(modelNode, this.isLockedByOtherUser);
+	this.form.localizeControls(uwm.i18n.Localization.getInstance().getUserLanguage());
+	this.mainPanel.add(this.form);
 	this.doLayout();
 	
-	modelNode.populatePropertyForm(form);
+	modelNode.populatePropertyForm(this.form);
+	
+	if (this.isTranslationPanelOpen()) {
+		this.lockControls();
+	}
 
 	this.hideMask();
 }
@@ -221,11 +226,29 @@ uwm.property.PropertyContainer.prototype.handleDeleteEvent = function(modelObjec
 	}
 }
 
+uwm.property.PropertyContainer.prototype.lockControls = function() {
+	if (this.form) {
+		for (var i=0; i<this.form.items.getCount(); i++) {
+			this.form.items.get(i).setDisabled(true);
+		}
+	}
+}
+
+uwm.property.PropertyContainer.prototype.unlockControls = function() {
+	if (this.form) {
+		for (var i=0; i<this.form.items.getCount(); i++) {
+			this.form.items.get(i).setDisabled(false);
+		}
+	}
+}
+
 /**
  * Open the translation panel
  */
 uwm.property.PropertyContainer.prototype.openTranslationPanel = function() {
 	var targetWidth = 500;
+	
+	this.lockControls();
 
 	// move splitbar
 	var eastPanel = uwm.Uwm.getInstance().getActiveWorkbench().getEastPanel();
@@ -249,6 +272,8 @@ uwm.property.PropertyContainer.prototype.openTranslationPanel = function() {
  */
 uwm.property.PropertyContainer.prototype.closeTranslationPanel = function() {
 	var targetWidth = 250;
+
+	this.unlockControls();
 
 	// hide translation panel and form
 	this.translationPanel.setVisible(false);
