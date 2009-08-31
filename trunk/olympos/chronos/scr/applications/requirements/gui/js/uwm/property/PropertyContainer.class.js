@@ -92,6 +92,12 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 		this.on("resize", this.doResize);
 		
 		uwm.event.EventBroker.getInstance().addListener({
+			"changeLabel": function(modelObject, oldLabel) {
+				self.handleChangeLabelEvent(modelObject, oldLabel);
+			},
+			"create": function(modelObject) {
+				self.handleCreateEvent(modelObject);
+			},
 			"delete": function(modelObject) {
 				self.handleDeleteEvent(modelObject);
 			}
@@ -220,14 +226,25 @@ uwm.property.PropertyContainer.prototype.getCurrentOid = function() {
 	return this.currentOid;
 }
 
+uwm.property.PropertyContainer.prototype.handleChangeLabelEvent = function(modelObject, oldLabel) {
+	this.purgeStore(modelObject);
+}
+
+uwm.property.PropertyContainer.prototype.handleCreateEvent = function(modelObject) {
+	this.purgeStore(modelObject);
+}
+
 uwm.property.PropertyContainer.prototype.handleDeleteEvent = function(modelObject) {
-	if (this.currentOid == modelObject.getOid()) {
-		this.showInfoMask();
+	if (modelObject) {
+		if (this.currentOid == modelObject.getOid()) {
+			this.showInfoMask();
+		}
+		this.purgeStore(modelObject);
 	}
 }
 
 uwm.property.PropertyContainer.prototype.lockControls = function() {
-	if (this.form) {
+	if (this.form != null) {
 		for (var i=0; i<this.form.items.getCount(); i++) {
 			this.form.items.get(i).setDisabled(true);
 		}
@@ -235,9 +252,30 @@ uwm.property.PropertyContainer.prototype.lockControls = function() {
 }
 
 uwm.property.PropertyContainer.prototype.unlockControls = function() {
-	if (this.form) {
+	if (this.form != null) {
 		for (var i=0; i<this.form.items.getCount(); i++) {
 			this.form.items.get(i).setDisabled(false);
+		}
+	}
+}
+
+uwm.property.PropertyContainer.prototype.findControlByListType = function(name) {
+	if (this.form != null) {
+		for (var i=0; i<this.form.items.getCount(); i++) {
+			var curItem = this.form.items.get(i);
+			if (curItem.listType == name) {
+				return curItem;
+			}
+		}
+	}
+  return null;
+}
+
+uwm.property.PropertyContainer.prototype.purgeStore = function(modelObject) {
+	if (modelObject) {
+		var control = this.findControlByListType(modelObject.getUwmClassName());
+		if (control && control instanceof uwm.property.ComboBox && control.getStore()) {
+			control.getStore().reload();
 		}
 	}
 }

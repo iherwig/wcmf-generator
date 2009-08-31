@@ -159,11 +159,11 @@ uwm.i18n.TranslationPanel.prototype.handleChangePropertyEvent = function(modelOb
 	if (this.form != null) {
 		for (var curProp in oldValues) {
 			var newValue = modelObject.getProperty(curProp);
-			// find the control for the current curPropibute
+			// find the control for the current attribute
 			for (var i=0; i<this.form.items.getCount(); i++) {
 				var curItem = this.form.items.get(i);
 				if (curItem.getName() == curProp && curItem.disabled && curItem.getValue() != newValue) {
-					if (curItem instanceof uwm.property.ComboBox && curItem.getStore().getCount() == 0) {
+					if (curItem instanceof uwm.property.ComboBox && curItem.getStore() && curItem.getStore().getCount() == 0) {
 						// load the data, in order to allow proper synchronization
 						curItem.getStore().load({
 							callback: function(r, options, success) {
