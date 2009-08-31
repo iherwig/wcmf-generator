@@ -214,6 +214,10 @@
 	background-image: url("../img/16x16/ChiNode.png") !important;
 }
 
+.FigureChiNodeManyToMany {
+	background-image: url("../img/16x16/ChiManyToMany.png") !important;
+}
+
 .FigureChiValue, .FigureAttribute {
 	background-image: url("../img/16x16/ChiValue.png") !important;
 }

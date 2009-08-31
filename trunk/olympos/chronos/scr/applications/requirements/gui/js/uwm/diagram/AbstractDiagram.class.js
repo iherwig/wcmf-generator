@@ -471,10 +471,11 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				var forbiddenListtype;
 				var connectionInfo = newObject.getModelNodeClass().getConnectionInfo(connectedObject.getModelNodeClass());
 				var createConnection = true;
+				var maskedClass;
 				
 				if (connectionInfo.nmUwmClassName) {
 					var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
-					var maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
+					maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
 					if ((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "target") {
 						var relationType = relationObject.getProperty("relationType");
 						
@@ -487,7 +488,20 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 							}
 						}
 					} else if (maskedClass instanceof uwm.model.RelationClass) {
-						connectionInfo = connectionInfo.connection;
+						if (connectionInfo.connection) {
+							connectionInfo = connectionInfo.connection;
+						} else {
+							var relationType = relationObject.getProperty("relationType");
+							
+							for ( var j = 0; j < connectionInfo.connections.length; j++) {
+								var currConnectionInfo = connectionInfo.connections[j];
+								
+								if (currConnectionInfo.connectionType == relationType) {
+									connectionInfo = currConnectionInfo;
+									break;
+								}
+							}
+						}
 					} else {
 						createConnection = false;
 					}
@@ -495,7 +509,10 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				
 				if (createConnection) {
 					
-					if ((connectedObject.getUwmClassName() == newObject.getUwmClassName()) || (nmtype == true)) {
+					if (!(maskedClass instanceof uwm.model.RelationClass) && (
+							(connectedObject.getUwmClassName() == newObject.getUwmClassName()) ||
+							(nmtype == true)
+						)) {
 						// same type as connected object or nmrelation (listtype
 						// the same in both cases)
 						if (connectionInfo.invert) {

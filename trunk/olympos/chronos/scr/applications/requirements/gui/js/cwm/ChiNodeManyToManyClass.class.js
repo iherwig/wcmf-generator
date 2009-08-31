@@ -13,26 +13,26 @@
  */
 Ext.namespace("cwm");
 
-cwm.ChiNodeClass = function() {
-	cwm.ChiNodeClass.superclass.constructor.call(this);
+cwm.ChiNodeManyToManyClass = function() {
+	cwm.ChiNodeManyToManyClass.superclass.constructor.call(this);
 	
-	this.uwmClassName = "ChiNode";
-	this.instanceClassName = "cwm.ChiNode";
-	this.treeIcon = "FigureChiNode";
-	this.figureIcon = "FigureChiNode";
+	this.uwmClassName = "ChiNodeManyToMany";
+	this.instanceClassName = "cwm.ChiNodeManyToMany";
+	this.treeIcon = "FigureChiNodeManyToMany";
+	this.figureIcon = "FigureChiNodeManyToMany";
 	this.figureClass = "uwm.graphics.figure.RectangleFigure";
 	this.initialWidth = 96;
 	this.initialHeight = 95;
-	this.description = " A Domain Object type used in Chronos. ChiNodes and ChiValues define the application data model.";
-	this.helpUrl = "help/index.html#ChiNode|outline";
-	this.defaultLabel = "New ChiNode";
+	this.description = "A many to many node used in Chronos. It is used to realize a many to many relation between two ChiNodes.";
+	this.helpUrl = "help/index.html#ChiNodeManyToMany|outline";
+	this.defaultLabel = "New ChiNodeManyToMany";
 	this.semanticGroup = "domain";
 	this.labelProperties = {
 		Name : true
 	};
 	
-	this.gridTabIconClass = "ChiNodeTab";
-	this.gridTabTip = "Shows all <b>ChiNode</b> within selected scope";
+	this.gridTabIconClass = "ChiNodeManyToManyTab";
+	this.gridTabTip = "Shows all <b>ChiNodeManyToMany</b> within selected scope";
 	this.gridFields = [ {
 	    name : "oid",
 	    mapping : "oid"
@@ -47,73 +47,17 @@ cwm.ChiNodeClass = function() {
 	} ];
 	
 	this.connectionInfo = {
-	    "ChiController" : {
-	        label : "instantiates",
-	        invert : true,
-	        connectionType : "Association",
-	        cardinality : 1
-	    }
-
-	    ,
-	    
-		"ChiObject": {
-			label: "is instance of",
-			invert: true,
-			invertBackendRelation: true,
-			connectionType: "is instance of",
-			cardinality: -1
-		}
-
-	    ,
-	    
 	    "ChiValue" : {
 	        label : "has properties",
 	        invert : false,
 	        connectionType : "Composition",
 	        cardinality : -1
-	    }
-
-	    ,
-	    
-	    "Operation" : {
-	        label : "Contains",
-	        invert : false,
-	        connectionType : "Composition",
-	        cardinality : -1
 	    },
 	    "ChiNode" : {
-	        nmUwmClassName : "NodeSourceEnd",
-	        connections : [ {
-	            label : "Generalization",
-	            invert : false,
-	            connectionType : "generalization",
-	            nmSelf : true,
-	            cardinality : -1
-	        }, {
-	            label : "Association",
-	            invert : false,
-	            connectionType : "association",
-	            nmSelf : true,
-	            cardinality : -1
-	        }, {
-	            label : "Aggregation",
-	            invert : false,
-	            connectionType : "aggregation",
-	            nmSelf : true,
-	            cardinality : -1
-	        }, {
-	            label : "Composition",
-	            invert : false,
-	            connectionType : "composition",
-	            nmSelf : true,
-	            cardinality : -1
-	        } ]
-	    }, 
-	    "ChiNodeManyToMany" : {
 	        nmUwmClassName : "NMChiNodeChiMany2Many",
 	        connections : [ {
 	            label : "Generalization",
-	            invert : true,
+	            invert : false,
 	            connectionType : "generalization",
 	            nmSelf : false,
 	            cardinality : -1
@@ -136,12 +80,6 @@ cwm.ChiNodeClass = function() {
 	            nmSelf : false,
 	            cardinality : -1
 	        } ]
-	    },
-	    "ChiView": {
-	    	label: "ActionKey",
-	    	invert: false,
-	    	connectionType: "association",
-	    	cardinality: 1
 	    }
 	};
 	
@@ -151,9 +89,9 @@ cwm.ChiNodeClass = function() {
 	};
 }
 
-Ext.extend(cwm.ChiNodeClass, uwm.model.ClassObjectClass);
+Ext.extend(cwm.ChiNodeManyToManyClass, uwm.model.ClassObjectClass);
 
-cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
+cwm.ChiNodeManyToManyClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm(
 	        {
 		        items : [
@@ -188,56 +126,57 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 		                    fieldLabel : 'parent_order',
 		                    toolTip : "The order of the associated parents. a single value or '|' -separated list of values",
 		                    name : 'parent_order',
-									                    
-		                    modelNode : modelNode,	
-								                    
+		                    
+		                    modelNode : modelNode,
+		                    
 		                    readOnly : isLockedByOtherUser
 		                }),
 		                new uwm.property.TextField( {
 		                    fieldLabel : 'child_order',
 		                    toolTip : "The order of the associated children. a single value or '|' -separated list of values",
-		                    name : 'child_order',		                    
-		                    modelNode : modelNode,		
-		
+		                    name : 'child_order',
+		                    modelNode : modelNode,
+		                    
 		                    readOnly : isLockedByOtherUser
-							
+		                
 		                }),
 		                new uwm.property.TextField( {
 		                    fieldLabel : 'pk_name',
 		                    toolTip : "The name of the primary key column on the database (optional). The generator will add this automatically if there is no appropriate attribute.",
-		                    name : 'pk_name',	
-								                    
-		                    modelNode : modelNode,	
-								                    
+		                    name : 'pk_name',
+		                    
+		                    modelNode : modelNode,
+		                    
 		                    readOnly : isLockedByOtherUser
 		                }),
-						
-						new uwm.property.Checkbox( {
-							fieldLabel : 'is_searchable',							
-							name : 'is_searchable',	
-							modelNode : modelNode,
-							stateful : true,
-		                    disabled : isLockedByOtherUser	
-								                    
-						}),
-						
-		                new uwm.property.TextField( {
-		                   	fieldLabel : 'orderby',
-		                    toolTip : "Definition of default sorting. Possible values: 'none' (no order), 'sortkey' (generates a 'sortkey' column, that is used for explicit sorting) or any the name of any WCMFValue defined in the node optionally.",
-		                    name : 'orderby',		                            
-		                    modelNode : modelNode,		                            
-		                    readOnly : isLockedByOtherUser
-		                }), 
-								
-						new uwm.property.Checkbox( {
-							fieldLabel : 'is_soap',
-							name : 'is_soap',	
-							modelNode : modelNode,
-							stateful : true,
+		                
+		                new uwm.property.Checkbox( {
+		                    fieldLabel : 'is_searchable',
+		                    name : 'is_searchable',
+		                    modelNode : modelNode,
+		                    stateful : true,
+		                    disabled : isLockedByOtherUser
+		                
+		                }),
+		                
+		                new uwm.property.TextField(
+		                        {
+		                            fieldLabel : 'orderby',
+		                            toolTip : "Definition of default sorting. Possible values: 'none' (no order), 'sortkey' (generates a 'sortkey' column, that is used for explicit sorting) or any the name of any WCMFValue defined in the node optionally.",
+		                            name : 'orderby',
+		                            modelNode : modelNode,
+		                            readOnly : isLockedByOtherUser
+		                        }),
+
+		                new uwm.property.Checkbox( {
+		                    fieldLabel : 'is_soap',
+		                    name : 'is_soap',
+		                    modelNode : modelNode,
+		                    stateful : true,
 		                    disabled : isLockedByOtherUser
 		                }),
-						
-						new uwm.property.TextField( {
+
+		                new uwm.property.TextField( {
 		                    fieldLabel : 'initparams',
 		                    toolTip : "Name of the configuration file's (config.ini) section, in which the initial parameters for the corresponding mapper are defined",
 		                    name : 'initparams',
@@ -245,7 +184,7 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 		                    modelNode : modelNode,
 		                    
 		                    readOnly : isLockedByOtherUser
-							
+		                
 		                }), new uwm.property.TextField( {
 		                    fieldLabel : 'table_name',
 		                    toolTip : "",
@@ -254,17 +193,17 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 		                    modelNode : modelNode,
 		                    
 		                    readOnly : isLockedByOtherUser
-		                }), 
-						
-						new uwm.property.Checkbox( {
-							fieldLabel : 'is_ordered',
-							name : 'is_ordered',	
-							modelNode : modelNode,
-							stateful : true,
+		                }),
+
+		                new uwm.property.Checkbox( {
+		                    fieldLabel : 'is_ordered',
+		                    name : 'is_ordered',
+		                    modelNode : modelNode,
+		                    stateful : true,
 		                    disabled : isLockedByOtherUser
-		                }), 
-						
-						new uwm.property.TextField( {
+		                }),
+
+		                new uwm.property.TextField( {
 		                    fieldLabel : 'Alias',
 		                    toolTip : "the Project Id of this object.",
 		                    name : 'Alias',
@@ -280,21 +219,21 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 		                    modelNode : modelNode,
 		                    
 		                    readOnly : isLockedByOtherUser
-		                }), new uwm.property.ComboBox({
-			fieldLabel: 'Author',
-			toolTip: "This ChiNode's author's name and role in the project",
-			name: 'Author',
-			listType: "ChiAuthors",
-			modelNode: modelNode,
-			disabled : isLockedByOtherUser
-		}), new uwm.property.ComboBox({
-			fieldLabel: 'Status',
-			toolTip: "state",
-			name: 'Status',
-			listType: "ChiBaseStatus",
-			modelNode: modelNode,
-			disabled : isLockedByOtherUser
-		}), new uwm.property.TextField( {
+		                }), new uwm.property.ComboBox( {
+		                    fieldLabel : 'Author',
+		                    toolTip : "This ChiNodeManyToMany's author's name and role in the project",
+		                    name : 'Author',
+		                    listType : "ChiAuthors",
+		                    modelNode : modelNode,
+		                    disabled : isLockedByOtherUser
+		                }), new uwm.property.ComboBox( {
+		                    fieldLabel : 'Status',
+		                    toolTip : "state",
+		                    name : 'Status',
+		                    listType : "ChiBaseStatus",
+		                    modelNode : modelNode,
+		                    disabled : isLockedByOtherUser
+		                }), new uwm.property.TextField( {
 		                    fieldLabel : 'created',
 		                    toolTip : "the creation date of this object",
 		                    name : 'created',
@@ -330,8 +269,8 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 	        });
 }
 
-cwm.ChiNodeClass.prototype.getGraphics = function(label, figure) {
+cwm.ChiNodeManyToManyClass.prototype.getGraphics = function(label, figure) {
 	return new uwm.graphics.figure.ClassFigure(label, figure);
 }
 
-uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiNodeClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.ChiNodeManyToManyClass());

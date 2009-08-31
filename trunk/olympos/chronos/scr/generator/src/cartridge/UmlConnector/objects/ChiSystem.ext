@@ -6,9 +6,12 @@ extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::umlutils;
 
+extension cartridge::UmlConnector::objects::ChiValue;
+
 uml::Class convert(cwm::ChiSystem s):
 	let uc = new uml::Class : {
-		uc.setName("ChiSystem:" + s.id)
+		uc.setName("ChiSystem:" + s.id) ->
+		uc.ownedAttribute.addAll(s.chiValue.convert())
 	} ->
 	uc
 ;
@@ -17,6 +20,8 @@ Void transferValues(cwm::ChiSystem c, uml::Model um):
 	//(new uml::Class).setT
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiSystem:" + c.id).first(): (
 		let comment = new uml::Comment : (
+			c.chiValue.transferValues(um) ->
+
 			uc.applyStereotype("Chronos::ChiSystem") ->
 			uc.setTaggedValue("Chronos::ChiSystem", "plattform", c.plattform) ->
 			uc.setTaggedValue("Chronos::ChiSystem", "config", c.config) ->
@@ -40,6 +45,8 @@ Void transferValues(cwm::ChiSystem c, uml::Model um):
 
 cwm::ChiSystem convertToCwm(Chronos::ChiSystem c) :
 	let un = new cwm::ChiSystem : (
+		un.chiValue.addAll(c.ownedAttribute.typeSelect(Chronos::ChiValue).convertToCwm()) ->
+
 		un.setId(c.getId()) ->
 		un.setPlattform(c.getTaggedValue("Chronos::ChiSystem", "plattform").toString()) ->
 		un.setConfig(c.getTaggedValue("Chronos::ChiSystem", "config").toString()) ->

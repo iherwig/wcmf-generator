@@ -62,7 +62,7 @@ context ChiNode ERROR
 /**
  * Check for invalid names
  */
-context ChiValue ERROR
+context ChiValue if ChiNode.isInstance(this.owner) ERROR
 	"Found not allowed value name '"+this.name+"' in class "+this.getOwningClass().name :
 	this.name.toLowerCase() != "type" && this.name.toLowerCase() != "state" &&  this.name.toLowerCase() != "oid" &&
 	this.name.toLowerCase() != "value" && this.name.toLowerCase() != "none" &&  this.name.toLowerCase() != "sortkey"

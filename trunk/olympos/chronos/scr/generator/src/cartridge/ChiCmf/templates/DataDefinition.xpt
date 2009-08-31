@@ -44,10 +44,10 @@
 # init params «this.getInitparams()»
 #
 DROP TABLE IF EXISTS `«this.getTableName()»`;
-CREATE TABLE `«this.getTableName()»` # entityType=«name» tableId=«this.getId()»
+CREATE TABLE `«this.getTableName()»` # entityType=«name» tableId=«this.Alias»
 (
 		«FOREACH this.getChiValuesRecursive() AS curValue-»
-  `«curValue.getColumnName()»` «curValue.db_data_type», # columnId=«curValue.getId()» «IF curValue.isFKValue()»referencedTable=«curValue.getFKClass().name»«ENDIF»
+  `«curValue.getColumnName()»` «curValue.db_data_type», # columnId=«this.Alias + "." + curValue.name» «IF curValue.isFKValue()»referencedTable=«curValue.getFKClass().name»«ENDIF»
   		«ENDFOREACH-»
   	«IF this.getOrderByColumn() == "sortkey"-»
   `sortkey` INT(11),

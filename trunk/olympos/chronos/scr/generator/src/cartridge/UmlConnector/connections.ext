@@ -5,6 +5,7 @@ import uml;
 extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::util;
+extension common::umlutils;
 
 Void establishConnectionsToUseCase(cwm::ManyToMany ch, uml::Actor parentActor, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	//(new uml::Association).setN
@@ -345,4 +346,15 @@ Void establishGeneralizationFromUseCase(cwm::Child ch, uml::UseCase parentUseCas
 			Void
 		)
 	)
+;
+
+Void propagateNames(uml::Class this):
+	this.getOwnEnds().correctName()
+;
+
+Void correctName(uml::Property this):
+//	this.name.isNullOrEmpty() ? (
+//		this.setName(this.type.name.toFirstLower())
+//	) :
+		Void
 ;

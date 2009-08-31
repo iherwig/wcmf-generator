@@ -14,14 +14,15 @@ uml::Property convert(cwm::ChiValue o):
 ;
 
 Void transferValues(cwm::ChiValue c, uml::Model um):
-	//(new uml::Class).setT
+	//(new Chronos::boolean::true).setT
 	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiValue") ->
+			uc.setDefault(c.^default) ->
 			//uc.setTaggedValue("Chronos::ChiValue", "PropertyType", c.propertyType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "app_data_type", c.appDataType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "db_data_type", c.dbDataType) ->
-			//uc.setTaggedValue("Chronos::ChiValue", "is_editable", c.isEditable) ->
+			uc.setTaggedValue("Chronos::ChiValue", "is_editable", c.isEditable ? Chronos::boolean::^true : Chronos::boolean::^false) ->
 			uc.setTaggedValue("Chronos::ChiValue", "input_type", c.inputType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "display_type", c.displayType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "restrictions_match", c.restrictionsMatch) ->
@@ -48,6 +49,8 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	//(new cwm::ChiValue).set
 	let un = new cwm::ChiValue : (
 		un.setId(c.getId()) ->
+		
+		un.setDefault(c.^default.toString()) ->
 		//un.setPropertyType(c.getTaggedValue("Chronos::ChiValue", "PropertyType").toString()) ->
 		un.setAppDataType(c.getTaggedValue("Chronos::ChiValue", "app_data_type").toString()) ->
 		un.setDbDataType(c.getTaggedValue("Chronos::ChiValue", "db_data_type").toString()) ->

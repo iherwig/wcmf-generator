@@ -21,6 +21,7 @@ extension cartridge::UmlConnector::objects::ChiBusinessPartnerPassive;
 extension cartridge::UmlConnector::objects::ChiController;
 extension cartridge::UmlConnector::objects::ChiManyToMany;
 extension cartridge::UmlConnector::objects::ChiNode;
+extension cartridge::UmlConnector::objects::ChiNodeManyToMany;
 extension cartridge::UmlConnector::objects::ChiOpinion;
 extension cartridge::UmlConnector::objects::ChiOpinionInner;
 extension cartridge::UmlConnector::objects::ChiStakeHolder;
@@ -49,6 +50,7 @@ uml::Package convert(cwm::Package p):
 		up.ownedType.addAll(p.chiController.convert()) ->
 		up.ownedType.addAll(p.chiManyToMany.convert()) ->
 		up.ownedType.addAll(p.chiNode.convert()) ->
+		up.ownedType.addAll(p.chiNodeManyToMany.convert()) ->
 		up.ownedType.addAll(p.chiOpinion.convert()) ->
 		up.ownedType.addAll(p.chiOpinionInner.convert()) ->
 		up.ownedType.addAll(p.chiStakeHolder.convert()) ->
@@ -76,6 +78,7 @@ Void establishConnections(cwm::Package p, uml::Model um):
 	p.chiWorkerExternal.establishConnections(um) ->
 	p.chiWorkerInternal.establishConnections(um) ->
 	p.chiNode.establishConnections(um) ->
+	p.chiNodeManyToMany.establishConnections(um) ->
 	p.chiController.establishConnections(um) ->
 
 	p.package.establishConnections(um)
@@ -102,6 +105,7 @@ Void transferValues(cwm::Package p, uml::Model um):
 			p.chiWorker.transferValues(um) ->
 			p.chiWorkerInternal.transferValues(um) ->
 			p.chiNode.transferValues(um) ->
+			p.chiNodeManyToMany.transferValues(um) ->
 			p.chiSystem.transferValues(um) ->
 			p.chiController.transferValues(um) ->
 			p.chiView.transferValues(um) ->
@@ -135,6 +139,7 @@ cwm::Package convertToCwm(uml::Package p) :
 		up.chiBusinessPartnerPassive.addAll(((List[Chronos::ChiBusinessPartnerPassive]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiBusinessPartnerPassive") != null)).convertToCwm()) ->
 		up.chiController.addAll(((List[Chronos::ChiController]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiController") != null)).convertToCwm()) ->
 		up.chiNode.addAll(((List[Chronos::ChiNode]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiNode") != null)).convertToCwm()) ->
+		up.chiNodeManyToMany.addAll(((List[Chronos::ChiManyToMany]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiManyToMany") != null)).convertToCwm()) ->
 		up.chiOpinion.addAll(((List[Chronos::ChiOpinion]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiOpinion") != null)).convertToCwm()) ->
 		up.chiOpinionInner.addAll(((List[Chronos::ChiOpinionInner]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiOpinionInner") != null)).convertToCwm()) ->
 		up.chiStakeHolder.addAll(((List[Chronos::ChiStakeHolder]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiStakeHolder") != null)).convertToCwm()) ->
