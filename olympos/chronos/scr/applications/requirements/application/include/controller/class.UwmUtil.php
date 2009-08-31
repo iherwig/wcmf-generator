@@ -32,8 +32,6 @@ class UwmUtil {
 	private static $persistenceFacade;
 	private static $encodingUtil;
 
-	private static $processedManyToMany = array();
-
 	private static $language = null;
 
 	private static $lastTime = 0;
@@ -173,6 +171,7 @@ class UwmUtil {
 
 				case 'ChiNode':
 				case 'ChiController':
+				case 'ChiSystem':
 					self::processClass($currChild);
 					break;
 
@@ -198,7 +197,7 @@ class UwmUtil {
 
 			if ($childType == 'ChiBusinessUseCase' || $childType == 'ChiBusinessUseCaseCore') {
 				self::processUseCase($currChild);
-			} else if (self::processManyToMany($currChild, $currNode->getId())) {
+			} else if (self::processManyToMany($currChild, $currNode)) {
 				//do nothing
 			} else if ($childType != 'Figure') {
 				$logger = LoggerManager::getLogger('OawUtil');
@@ -224,7 +223,7 @@ class UwmUtil {
 
 			if ($childType == 'ActivitySet') {
 				self::processActivitySet($currChild);
-			} else if (self::processManyToMany($currChild, $currNode->getId())) {
+			} else if (self::processManyToMany($currChild, $currNode)) {
 				//do nothing
 			} else if ($childType == 'ChiController') {
 				self::processChild($currChild);
@@ -251,9 +250,10 @@ class UwmUtil {
 			$childType = self::getRealType($currChild);
 
 			if ($childType != 'Figure') {
-				if ($childType == 'NMChiControllerActionKeyChiController' || $childType == 'NMChiControllerActionKeyChiView') {
-					self::processNode($currChild);
-				} else if (self::processManyToMany($currChild, $currNode->getId())) {
+//				if ($childType == 'NMChiControllerActionKeyChiController' || $childType == 'NMChiControllerActionKeyChiView') {
+//					self::processNode($currChild);
+//				} else if (self::processManyToMany($currChild, $currNode)) {
+				if (self::processManyToMany($currChild, $currNode)) {
 					//do nothing
 				} else if ($childType == 'ChiValue' || $childType == 'Operation') {
 					self::processNode($currChild);
@@ -295,7 +295,7 @@ class UwmUtil {
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild)
 		{
-			if (self::processManyToMany($currChild, $currNode->getId())) {
+			if (self::processManyToMany($currChild, $currNode)) {
 				//do nothing
 			}
 			/*else if ($currNode->getType() != 'Diagram' && $currChild->getType() == 'Figure')
@@ -325,7 +325,9 @@ class UwmUtil {
 		self::$dom->endElement();
 	}
 
-	private static function processManyToMany($currChild, $parentId) {
+	private static $specialChildren = array('ChiNode' => array('NodeSourceEnd'), 'ChiController' => array('SourceEnd', 'SourceActionKeyEnd', 'NMChiControllerActionKeyChiView'), 'ChiNodeManyToMany' => array('NMChiNodeChiMany2ManyChiNodeEnd'));
+
+	private static function processManyToMany($currChild, $parent) {
 		$result = false;
 
 		if ($currChild->isManyToManyObject())
@@ -335,10 +337,10 @@ class UwmUtil {
 			$processThisManyToMany = true;
 
 			if ($currChild->getType() != $currChild->getBaseType()) {
-				if (array_key_exists($currChild->getId(), self::$processedManyToMany)) {
-					$processThisManyToMany = false;
-				} else {
-					self::$processedManyToMany[$currChild->getId()] = true;
+				if (array_key_exists( $parent->getBaseType(), self::$specialChildren)) {
+					if (array_search($currChild->getType(), self::$specialChildren[$parent->getBaseType()], true) === false) {
+						$processThisManyToMany = false;
+					}
 				}
 			}
 
@@ -347,7 +349,7 @@ class UwmUtil {
 				$parents = $currChild->getParents();
 				foreach ($parents as $currParent)
 				{
-					if ($currParent->getId() != $parentId)
+					if ($currParent->getId() != $parent->getId())
 					{
 						$className = self::getRealType($currParent);
 
@@ -357,8 +359,8 @@ class UwmUtil {
 						self::$dom->writeAttribute('targetRole', $currParent->getType());
 
 						$currChildArray = array($currChild);
-							
-						$valueNames = array('relationType', 'sourceMultiplicity', 'sourceNavigability', 'targetMultiplicity', 'targetNavigability');
+
+						$valueNames = array('relationType', 'sourceMultiplicity', 'sourceNavigability', 'targetMultiplicity', 'targetNavigability', 'action', 'config', 'context');
 
 						self::translateNode($currChild);
 

@@ -26,10 +26,10 @@ uml::Class convert(cwm::ChiNode n):
 Void establishConnections(cwm::ChiNode b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNode:" + b.id).first(): (
 		b.child.select(e|e.targetType == "ChiView").establishConnectionsToClass(uc, um, "contains", uml::AggregationKind::composite, uml::AggregationKind::none, false, false) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "generalization").establishGeneralizationToClass(uc, um) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "aggregation").establishConnectionsToClass(uc, um, null, uml::AggregationKind::shared, uml::AggregationKind::none) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "composition").establishConnectionsToClass(uc, um, null, uml::AggregationKind::composite, uml::AggregationKind::none) ->
-		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none) ->
+		b.manyToMany.select(e|(e.targetType == "ChiNode" || e.targetType == "ChiNodeManyToMany") && e.relationType == "generalization").establishGeneralizationToClass(uc, um) ->
+		b.manyToMany.select(e|(e.targetType == "ChiNode" || e.targetType == "ChiNodeManyToMany") && e.relationType == "aggregation").establishConnectionsToClass(uc, um, null, uml::AggregationKind::shared, uml::AggregationKind::none) ->
+		b.manyToMany.select(e|(e.targetType == "ChiNode" || e.targetType == "ChiNodeManyToMany") && e.relationType == "composition").establishConnectionsToClass(uc, um, null, uml::AggregationKind::composite, uml::AggregationKind::none) ->
+		b.manyToMany.select(e|(e.targetType == "ChiNode" || e.targetType == "ChiNodeManyToMany") && e.relationType == "association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none) ->
 		b.child.select(e|e.targetType == "ChiObject").establishConnectionsToClass(uc, um)
 	)
 ;
@@ -70,17 +70,6 @@ Void transferValues(cwm::ChiNode c, uml::Model um):
 	)
 ;
 
-Void propagateNames(uml::Class this):
-	this.getOwnEnds().correctName()
-;
-
-Void correctName(uml::Property this):
-	this.name.isNullOrEmpty() ? (
-		this.setName(this.type.name.toFirstLower())
-	) :
-		Void
-;
-
 cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 	let un = new cwm::ChiNode : (
 		un.chiValue.addAll(c.ownedAttribute.typeSelect(Chronos::ChiValue).convertToCwm()) ->
@@ -111,8 +100,9 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild())
 		//Commented out until wCMF remodeling of relations
 		//Prevents import from finishing
-		//un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization")) ->
-		//un.manyToMany.addAll(c.getAssociations().select(e|e.ownedEnd.get(0).type == c).convertToMany(c))
+		// ->
+		//un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization", "ChiNodeTarget")) ->
+		//un.manyToMany.addAll(c.getAssociations().select(e|e.ownedEnd.size >= 2 && e.ownedEnd.get(0).type == c).convertToMany(c))
 	) ->
 	un
 ;

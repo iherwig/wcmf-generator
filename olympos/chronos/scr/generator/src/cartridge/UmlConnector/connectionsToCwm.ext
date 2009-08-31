@@ -77,6 +77,15 @@ cwm::ManyToMany convertToMany(uml::Class other, String relationType) :
 	result
 ;
 
+cwm::ManyToMany convertToMany(uml::Class other, String relationType, String targetType) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType(targetType) ->
+		result.setRelationType(relationType) ->
+		result.setTargetOid(other.getId())
+	) ->
+	result
+;
+
 cwm::ManyToMany convertToMany(uml::Association this, uml::Class source) :
 	let result = new cwm::ManyToMany:
 	let ownEnd = this.ownedEnd.selectFirst(e|e.type == source):

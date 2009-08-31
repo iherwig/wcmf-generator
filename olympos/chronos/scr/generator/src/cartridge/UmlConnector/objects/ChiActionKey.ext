@@ -7,6 +7,23 @@ extension org::openarchitectureware::uml2::profile::profiling;
 extension common::util;
 extension common::umlutils;
 
+establishActionKey(cwm::ManyToMany this, uml::Class parentClass, uml::Model um, boolean forwardRelation):
+	let childClass = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == this.targetType + ":" + this.targetOid).first(): (
+		childClass != null
+		? (
+			let conn = parentClass.createAssociation(forwardRelation, uml::AggregationKind::none, "", 1, 1, childClass, !forwardRelation, uml::AggregationKind::none, "", 1, 1):
+				conn.applyStereotype("Chronos::ChiActionKey") ->
+				conn.setTaggedValue("Chronos::ChiActionKey", "action", this.action) ->
+				conn.setTaggedValue("Chronos::ChiActionKey", "config", this.config) ->
+				conn.setTaggedValue("Chronos::ChiActionKey", "context", this.^context)
+		) : (
+			Void
+		)
+	)
+;
+
+//Not in use
+
 Void addAllActionKeys(cwm::NmChiControllerActionKeyChiController this, uml::Class clazz):
 	clazz.addActionKey("ChiController", this.fkChicontrolleractionkeytargetId, this.name, this.notes, this.action, this.config, this.^context)
 ;
@@ -19,7 +36,7 @@ Void addActionKey(uml::Class this, String targetType, String targetId, String na
 	!this.name.endsWith(targetId) ? (
 		let targetClass = this.getModel().allOwnedElements().typeSelect(uml::Class).selectFirst(e|e.name == targetType + ":" + targetId):
 			targetClass != null ? (
-				let conn = this.createAssociation(false, uml::AggregationKind::none, "", 1, 1, targetClass, true, uml::AggregationKind::none, "", 1, 1):
+				let conn = this.createAssociation(true, uml::AggregationKind::none, "", 1, 1, targetClass, true, uml::AggregationKind::none, "", 1, 1):
 					let comment = new uml::Comment : 
 						conn.setName(name) ->
 						notes != null ? (
@@ -34,6 +51,3 @@ Void addActionKey(uml::Class this, String targetType, String targetId, String na
 			) : Void
 	) : Void
 ;
-	
-					
-					

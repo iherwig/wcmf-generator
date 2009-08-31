@@ -98,11 +98,11 @@
 	</if>
 
 	<!-- Install the framework -->
-	<!--component class="com.wemove.wcmf.generator.workflow.InstallComponent">
+	<component class="com.wemove.wcmf.generator.workflow.InstallComponent">
 		<frameworkFile value="${frameworkFile}"/>
 		<libraryPath value="${targetDir}/${libraryPackage}"/>
 		<applicationPath value="${targetDir}/${applicationPackage}"/>
-	</component-->
+	</component>
 
 	<!-- Expand the model into the templates -->
 	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="true">
