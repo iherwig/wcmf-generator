@@ -144,7 +144,8 @@ uwm.i18n.TranslationPanel.prototype.lockUntranslatableControls = function() {
 				curItem instanceof uwm.property.StaticComboBox ||
 				curItem instanceof uwm.property.Radio ||
 				curItem instanceof uwm.property.PasswordField ||
-				curItem instanceof uwm.property.DateField) {
+				curItem instanceof uwm.property.DateField ||
+				curItem.getName() == 'Alias') {
 				curItem.setDisabled(true);
 			}
 		}
