@@ -14,7 +14,7 @@
  * See the license.txt file distributed with this work for 
  * additional information.
  *
- * $Id: dbupdate.php 929 2009-02-22 23:20:49Z iherwig $
+ * $Id: dbupdate.php 1016 2009-07-27 21:22:41Z iherwig $
  */
 define("BASE", realpath ("../../")."/");
 error_reporting(E_ERROR | E_PARSE);
@@ -351,7 +351,7 @@ function processTableDef($tableDef, &$tables)
       $comments = $matches[3];
       for($i=0; $i<sizeof($columnNames); $i++)
       {
-        preg_match('/columnId=([a-zA-Z0-9\-\_\{\}]+)/', $comments[$i], $matches1);
+        preg_match('/columnId=([^\s]+)/', $comments[$i], $matches1);
         if ($matches1[1] == 'UNDEFINED')
           $matches1[1] = '';
         array_push($columns, array('name' => $columnNames[$i], 'type' => $columnTypes[$i], 'id' => $matches1[1]));
