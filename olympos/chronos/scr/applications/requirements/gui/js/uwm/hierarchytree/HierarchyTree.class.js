@@ -116,7 +116,7 @@ uwm.hierarchytree.HierarchyTree.prototype.handleDeleteEvent = function(modelObje
 
 uwm.hierarchytree.HierarchyTree.prototype.handleChangeLabelEvent = function(modelObject, oldLabel, newLabel) {
 	// don't update nodes, if they are translated into a different language
-	if (modelObject.getLanguage() != uwm.i18n.Localization.getInstance().getUserLanguage()) {
+	if (modelObject.getLanguage() != uwm.i18n.Localization.getInstance().getModelLanguage()) {
 		return;
 	}
 

@@ -22,7 +22,7 @@ uwm.treeadmin.ModelObjectTreeLoader.prototype.load = function(node, callback) {
 	
 	if (node instanceof uwm.treeadmin.ModelClassNode) {
 		uwm.persistency.Persistency.getInstance().list(node.modelClass.getUwmClassName(), false,
-			uwm.i18n.Localization.getInstance().getUserLanguage(), function(options, data) {
+			uwm.i18n.Localization.getInstance().getModelLanguage(), function(options, data) {
 				self.reformatData(self, node, callback, data);
 		});
 	}

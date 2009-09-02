@@ -93,7 +93,7 @@ uwm.tabadmin.EnumTab.prototype.handleRowClick = function(grid, rowIndex, e) {
 
 uwm.tabadmin.EnumTab.prototype.handleChangeLabelEvent = function(modelObject, oldLabel) {
 	// don't update nodes, if they are translated into a different language
-	if (modelObject.getLanguage() != uwm.i18n.Localization.getInstance().getUserLanguage()) {
+	if (modelObject.getLanguage() != uwm.i18n.Localization.getInstance().getModelLanguage()) {
 		return;
 	}
 	var record = this.getRecordByModelObject(modelObject);

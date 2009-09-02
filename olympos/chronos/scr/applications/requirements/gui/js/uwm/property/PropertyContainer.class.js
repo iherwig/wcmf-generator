@@ -28,7 +28,7 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 	
 		var self = this;
 		var loc = uwm.i18n.Localization.getInstance();
-		var languageName = loc.getLanguageName(loc.getUserLanguage(), loc.getAllModelLanguages());
+		this.language = loc.getModelLanguage();
 		
 		// this is the default property panel that is used for the
 		// translation into the primary language
@@ -39,7 +39,7 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 			autoScroll: false,
 			autoHeight: true,
 			border: false,
-			title: uwm.Dict.translate('Properties')+" ["+languageName+"]",
+			title: self.getTitleText(),
 			tools:[{
 				id: 'gear',
 				enableToggle: true,
@@ -201,7 +201,7 @@ uwm.property.PropertyContainer.prototype.displayForm = function() {
 
 	var modelNode = uwm.model.ModelContainer.getInstance().getByOid(this.currentOid);
 	this.form = modelNode.getModelNodeClass().getPropertyForm(modelNode, this.isLockedByOtherUser);
-	this.form.localizeControls(uwm.i18n.Localization.getInstance().getUserLanguage());
+	this.form.localizeControls(uwm.i18n.Localization.getInstance().getModelLanguage());
 	this.mainPanel.add(this.form);
 	this.doLayout();
 	
@@ -278,6 +278,12 @@ uwm.property.PropertyContainer.prototype.purgeStore = function(modelObject) {
 			control.getStore().reload();
 		}
 	}
+}
+
+uwm.property.PropertyContainer.prototype.getTitleText = function() {
+	var loc = uwm.i18n.Localization.getInstance();
+	var languageName = loc.getLanguageName(this.language, loc.getAllModelLanguages());
+	return uwm.Dict.translate('Properties')+" ["+languageName+"]";
 }
 
 /**

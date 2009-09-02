@@ -44,7 +44,7 @@ uwm.property.PropertyForm = Ext.extend(Ext.form.FormPanel, {
 
 		uwm.property.PropertyForm.superclass.initComponent.apply(this, arguments);
 		
-		this.localizeControls(uwm.i18n.Localization.getInstance().getUserLanguage());
+		this.localizeControls(uwm.i18n.Localization.getInstance().getModelLanguage());
 	}
 })
 

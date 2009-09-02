@@ -27,6 +27,16 @@ uwm.Uwm.prototype.startApplication = function() {
 	this.installErrorHandler();
 	this.installOverrides();
 	
+	var self = this;
+	uwm.event.EventBroker.getInstance().addListener({
+		"changeModelLanguage": function(language) {
+			self.viewport.destroy();
+			uwm.diagram.DiagramContainer.getInstance().destroy();
+			self.createViewport();
+			self.switchWorkbench("default");
+		}
+	});
+	
 	var params = location.search.split(/&/);
 	
 	var sid = null;
@@ -52,10 +62,13 @@ uwm.Uwm.prototype.startSession = function(sid, lang) {
 	uwm.Session.getInstance().init(sid, lang);
 	
 	this.login.destroy();
-	
+		
+	this.createViewport();
+}
+
+uwm.Uwm.prototype.createViewport = function() {
 	this.defaultWorkbench = new uwm.ui.Workbench();
 	this.adminWorkbench = new uwm.tabadmin.Workbench();
-	
 	this.viewport = new Ext.Viewport({
 		layout: "card",
 		activeItem: 0,

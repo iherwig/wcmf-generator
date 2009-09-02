@@ -961,7 +961,7 @@ uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 
 uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNode, oldLabel, newLabel) {
 	// don't update nodes, if they are translated into a different language
-	if (modelNode.getLanguage() != uwm.i18n.Localization.getInstance().getUserLanguage()) {
+	if (modelNode.getLanguage() != uwm.i18n.Localization.getInstance().getModelLanguage()) {
 		return;
 	}
 

@@ -28,7 +28,7 @@ uwm.ui.GlossaryProxy.prototype.load = function(params, reader, callback, scope, 
 		var self = this;
 		
 		uwm.persistency.Persistency.getInstance().list("Glossary", true,
-			uwm.i18n.Localization.getInstance().getUserLanguage(), function(options, data) {
+			uwm.i18n.Localization.getInstance().getModelLanguage(), function(options, data) {
 				self.loadResponse(options, data, callback, scope, arg);
 			}, function(options, data, errorMsg) {
 				self.loadFailed(options, data, errorMsg, callback, scope, arg)

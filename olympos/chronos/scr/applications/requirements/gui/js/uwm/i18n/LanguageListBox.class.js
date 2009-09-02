@@ -54,7 +54,7 @@ uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
 			var loc = uwm.i18n.Localization.getInstance();
 			if (!this.includeUserLanguage) {
 				for (var i=0; i<data.length; i++) {
-					if (data[i][0] == loc.getUserLanguage()) {
+					if (data[i][0] == loc.getModelLanguage()) {
 						data.splice(i, 1);
 					}
 				}
