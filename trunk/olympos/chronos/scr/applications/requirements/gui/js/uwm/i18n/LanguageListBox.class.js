@@ -21,6 +21,14 @@ Ext.namespace("uwm.i18n");
  */
 uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
 		/**
+		 * @cfg {Array} languages
+		 * 
+		 * An array of arrays where the first item is the language
+		 * code and the second item is the language name
+		 */
+		languages: [],
+
+		/**
 		 * @cfg {Boolean} includeDefault
 		 * 
 		 * Indicates if the user language should be included or not.
@@ -31,19 +39,19 @@ uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
 		initComponent: function() {
 		
 			// copy languages into listbox data
-			var loc = uwm.i18n.Localization.getInstance();
-			var languages = loc.getAllLanguages();
+			var languages = this.languages;
 			var data = new Array();
 			for (var i=0; i<languages.length; i++) {
 				data[i] = new Array();
 				data[i][0] = languages[i][0];
 				data[i][1] = languages[i][1];
-				if (data[i][0] == uwm.i18n.Localization.getInstance().getModelLanguage()) {
+				if (data[i][0] == uwm.i18n.Localization.getInstance().getDefaultModelLanguage()) {
 					data[i][1] += ' [Default]';
 				}
 			}
 
 			// remove the user language if requested
+			var loc = uwm.i18n.Localization.getInstance();
 			if (!this.includeUserLanguage) {
 				for (var i=0; i<data.length; i++) {
 					if (data[i][0] == loc.getUserLanguage()) {
@@ -73,7 +81,9 @@ uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
 			});
 		
 			uwm.i18n.LanguageListBox.superclass.initComponent.call(this);
-			this.setValue(data[0][0]);
+			if (data[0]) {
+				this.setValue(data[0][0]);
+			}
 		}
 	}
 );

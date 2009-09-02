@@ -76,7 +76,7 @@ uwm.persistency.Persistency.prototype.sort = function(oid, direction, distance, 
 uwm.persistency.Persistency.prototype.display = function(oid, depth, language, successHandler, errorHandler) {
 }
 
-uwm.persistency.Persistency.prototype.list = function(uwmClassName, language, completeObjects, successHandler, errorHandler) {
+uwm.persistency.Persistency.prototype.list = function(uwmClassName, completeObjects, language, successHandler, errorHandler) {
 }
 
 uwm.persistency.Persistency.prototype.listbox = function(type, language, successHandler, errorHandler) {
