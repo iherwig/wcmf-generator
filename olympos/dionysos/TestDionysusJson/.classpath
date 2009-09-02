@@ -20,11 +20,11 @@
 	<classpathentry kind="lib" path="lib/groovy-1.6.3.jar"/>
 	<classpathentry kind="lib" path="lib/httpclient-4.0-beta2.jar"/>
 	<classpathentry kind="lib" path="lib/httpcore-4.0-beta3.jar"/>
-	<classpathentry kind="lib" path="lib/json-lib-2.2.2-jdk15.jar"/>
 	<classpathentry kind="lib" path="lib/junit-3.8.2.jar"/>
 	<classpathentry kind="lib" path="lib/nekohtml-1.9.9.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl-2.8.1.jar"/>
 	<classpathentry kind="lib" path="lib/xml-apis-1.3.03.jar"/>
 	<classpathentry kind="lib" path="lib/xml-resolver-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/json-lib-2.3-jdk15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

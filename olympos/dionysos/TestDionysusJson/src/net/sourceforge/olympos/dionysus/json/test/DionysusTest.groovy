@@ -79,6 +79,7 @@ public class DionysusTest {
 		}
 
 		def responseContentType = JSON
+		
 		if (Cfg.debugJson) {
 			responseContentType = TEXT
 		}

@@ -10,7 +10,7 @@ package net.sourceforge.olympos.dionysus.json.test;
 	 * This option prevents the testcases from succeeding, but it still sends the 
 	 * correct request. Set this option if the returned result is no valid JSON.
 	 */
-	static debugJson = true
+	static debugJson = false
 	/**
 	 * If true, the login before each test request will be omitted.
 	 */
@@ -43,7 +43,7 @@ package net.sourceforge.olympos.dionysus.json.test;
 	/**
 	 * The oid of the base object to test read with.
 	 */
-	static readBaseOid = 'Movie:123'
+	static readBaseOid = 'Movie:1'
 	/**
 	 * Attribute name of the attribute of the base object which contains the first level object
 	 */
@@ -51,7 +51,7 @@ package net.sourceforge.olympos.dionysus.json.test;
 	/**
 	 * Oid of the object contained directly in the base object
 	 */
-	static readFirstLevelOid = 'Person:234'
+	static readFirstLevelOid = 'Person:1'
 	/**
 	 * Attribute name of the attribute of the first level object which contains the second level object
 	 */
@@ -68,7 +68,7 @@ package net.sourceforge.olympos.dionysus.json.test;
 	/**
 	 * The oid of the object for update test
 	 */
-	static updateOid = 'Movie:123'
+	static updateOid = 'Movie:1'
 	/**
 	 * The value for lastChange to succeed in all cases
 	 */
