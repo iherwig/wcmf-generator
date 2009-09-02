@@ -72,7 +72,7 @@ uwm.Util.showMessage = function(title, message, messageType) {
 								+ '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>'
 								+ '</div>'
 					}, true);
-	messageBox.slideIn('t').pause(3).ghost("t", {
+	messageBox.slideIn('t').pause(6).ghost("t", {
 		remove :true
 	});
 }

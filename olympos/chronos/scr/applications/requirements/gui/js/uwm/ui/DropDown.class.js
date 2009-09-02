@@ -26,7 +26,7 @@ uwm.ui.DropDown = function() {
 uwm.ui.DropDown = Ext.extend(Ext.Toolbar.SplitButton, {
 	
 	initComponent : function() {
-		var menue = new Ext.menu.Menu( {});
+		var menue = new Ext.menu.Menu({});
 		
 		var groupArray = this.Accordion.getGroupArray();
 		
@@ -59,11 +59,11 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.SplitButton, {
 				}
 			} else {
 				menue.add( {
-				    text : uwm.Dict.translate(currContent.getName()),
-				    iconCls : currContent.getTreeIcon(),
-				    connectedPanel : currContent,
-				    handler : function(item) {
-					    item.connectedPanel.show();
+						text : uwm.Dict.translate(currContent.getName()),
+						iconCls : currContent.getTreeIcon(),
+						connectedPanel : currContent,
+						handler : function(item) {
+							item.connectedPanel.show();
 						
 						if (item.connectedPanel == uwm.modeltree.ModelTree.getInstance()) {
 							self.expandAllButton.enable();
@@ -73,20 +73,24 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.SplitButton, {
 							self.expandAllButton.disable();
 							self.collapseAllButton.disable();
 						}
-				    }
+					}
 				})
 			}
 		}
 		
-		for ( var i in subMenus) {
+		var gridMenu = menue.add({
+			text : uwm.Dict.translate("Grid Scope"),
+			menu : []
+		});
+		for (var i in subMenus) {
 			if (!(subMenus[i] instanceof Function)) {
-				menue.add(subMenus[i]);
+				gridMenu.menu.add(subMenus[i]);
 			}
 		}
 		
 		Ext.apply(this, {
-		    text : uwm.Dict.translate("View"),
-		    menu : menue
+			text : uwm.Dict.translate("View"),
+			menu : menue
 		});
 		
 		uwm.ui.DropDown.superclass.initComponent.apply(this, arguments);
@@ -96,12 +100,12 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.SplitButton, {
 uwm.ui.DropDown.prototype.addSemanticGroup = function(subMenus, currContent, semanticGroup, referenceSemanticGroup) {
 	if (semanticGroup == referenceSemanticGroup) {
 		subMenus[semanticGroup].menu.push( {
-		    text : currContent.getName(),
-		    iconCls : currContent.getTreeIcon(),
-		    connectedPanel : currContent,
-		    handler : function(item) {
-			    item.connectedPanel.show();
-		    }
+			text : currContent.getName(),
+			iconCls : currContent.getTreeIcon(),
+			connectedPanel : currContent,
+			handler : function(item) {
+				item.connectedPanel.show();
+			}
 		});
 	}
 	

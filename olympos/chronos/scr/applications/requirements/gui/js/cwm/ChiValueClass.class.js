@@ -162,7 +162,42 @@ cwm.ChiValueClass.prototype.getPropertyForm = function(modelNode, isLockedByOthe
 		    modelNode : modelNode,
 		    
 		    readOnly : isLockedByOtherUser
-		}), new uwm.property.TextField( {
+		}),
+		new uwm.property.TextField( {
+				fieldLabel : 'Alias',
+				toolTip : "the Project Id of this object.",
+				name : 'Alias',
+				
+				modelNode : modelNode,
+				
+				readOnly : isLockedByOtherUser
+		}),
+		new uwm.property.TextField( {
+				fieldLabel : 'Version',
+				toolTip : "the model version of this object",
+				name : 'Version',
+				
+				modelNode : modelNode,
+				
+				readOnly : isLockedByOtherUser
+		}),
+		new uwm.property.ComboBox({
+			fieldLabel: 'Author',
+			toolTip: "This ChiNode's author's name and role in the project",
+			name: 'Author',
+			listType: "ChiAuthors",
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
+		}),
+		new uwm.property.ComboBox({
+			fieldLabel: 'Status',
+			toolTip: "state",
+			name: 'Status',
+			listType: "ChiBaseStatus",
+			modelNode: modelNode,
+			disabled : isLockedByOtherUser
+		}),
+		new uwm.property.TextField( {
 		    fieldLabel : 'created',
 		    toolTip : "the creation date of this object",
 		    name : 'created',

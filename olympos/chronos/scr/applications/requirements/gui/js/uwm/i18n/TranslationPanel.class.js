@@ -24,16 +24,8 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 		var self = this;
 
-		// select the first language that is not the user language per default
 		var loc = uwm.i18n.Localization.getInstance();
-		this.language = loc.getUserLanguage();
-		var languages = loc.getAllLanguages();
-		for (var i=0; i<languages.length; i++) {
-			if (languages[i][0] != this.language) {
-				this.language = languages[i][0];
-				break;
-			}
-		}
+		this.language = loc.getTranslationLanguage();
 		
 		this.currentOid = null;
 		this.isLocked = null;
@@ -41,6 +33,7 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 		
 		this.languageListBox = new uwm.i18n.LanguageListBox({
 			includeUserLanguage: false,
+			languages: loc.getAllModelLanguages(),
 			hideLabel: true,
 			width: 200,
 			listeners: {
@@ -77,6 +70,9 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 		uwm.event.EventBroker.getInstance().addListener({
 			"changeProperty": function(modelObject, values) {
 				self.handleChangePropertyEvent.call(self, modelObject, values);
+			},
+			"changeTranslationLanguage": function(language) {
+				self.setLanguage(language);
 			}
 		});
 	}
@@ -126,7 +122,8 @@ uwm.i18n.TranslationPanel.prototype.displayForm = function(modelNode, isLocked, 
 }
 
 uwm.i18n.TranslationPanel.prototype.getTitleText = function() {
-	var languageName = uwm.i18n.Localization.getInstance().getLanguageName(this.language);
+	var loc = uwm.i18n.Localization.getInstance();
+	var languageName = loc.getLanguageName(this.language, loc.getAllModelLanguages());
 	return uwm.Dict.translate('Translation')+" ["+languageName+"]";
 }
 
@@ -187,15 +184,22 @@ uwm.i18n.TranslationPanel.prototype.handleChangePropertyEvent = function(modelOb
  * Store the selected language.
  */
 uwm.i18n.TranslationPanel.prototype.setLanguage = function(language) {
+	var loc = uwm.i18n.Localization.getInstance();
 	if (language != this.language) {
 		this.language = language;
+
 		this.setTitle(this.getTitleText());
+		this.languageListBox.setValue(this.language);
 		
-		var container = uwm.property.PropertyContainer.getInstance();
-		container.hideForm(this);
-		container.showLoadMask();
-		this.showTranslation(this.currentOid, this.language, this.isLocked, 
-			container.hideMask.createDelegate(container));
+		// update the currently displayed translation
+		if (this.currentOid && this.isVisible()) {
+			var container = uwm.property.PropertyContainer.getInstance();
+			container.hideForm(this);
+			container.showLoadMask();
+			this.showTranslation(this.currentOid, language, this.isLocked, 
+				container.hideMask.createDelegate(container));
+		}
+		loc.setTranslationLanguage(language);
 	}
 }
 
@@ -205,5 +209,6 @@ uwm.i18n.TranslationPanel.prototype.setLanguage = function(language) {
  */
 uwm.i18n.TranslationPanel.prototype.getLanguage = function() {
 	return this.language;
+;
 }
 

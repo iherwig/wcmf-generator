@@ -28,7 +28,7 @@ uwm.property.PropertyContainer = Ext.extend(Ext.Panel, {
 	
 		var self = this;
 		var loc = uwm.i18n.Localization.getInstance();
-		var languageName = loc.getLanguageName(loc.getUserLanguage());
+		var languageName = loc.getLanguageName(loc.getUserLanguage(), loc.getAllModelLanguages());
 		
 		// this is the default property panel that is used for the
 		// translation into the primary language

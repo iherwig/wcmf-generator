@@ -35,8 +35,12 @@ cwm.ChiValue.prototype.initByDisplayResult = function(node) {
       this.data.db_data_type = node.values[1].db_data_type;
       this.data.is_editable = node.values[1].is_editable;
       this.data.column_name = node.values[1].column_name;
+      this.data.Alias = node.values[1].Alias;
+      this.data.Version = node.values[1].Version;
       this.data.Name = node.values[1].Name;
       this.data.Notes = node.values[1].Notes;
+	  this.data.Author = node.values[1].Author;
+	this.data.Status = node.values[1].Status;
       this.data.created = node.values[1].created;
       this.data.creator = node.values[1].creator;
       this.data.last_editor = node.values[1].last_editor;
@@ -55,8 +59,12 @@ cwm.ChiValue.prototype.populatePropertyForm = function(form) {
       realForm.findField("db_data_type").loadValue(this.data.db_data_type);
       realForm.findField("is_editable").loadValue(this.data.is_editable);
       realForm.findField("column_name").loadValue(this.data.column_name);
+      realForm.findField("Alias").loadValue(this.data.Alias);
+      realForm.findField("Version").loadValue(this.data.Version);
       realForm.findField("Name").loadValue(this.data.Name);
       realForm.findField("Notes").loadValue(this.data.Notes);
+	  realForm.findField("Author").loadValue(this.data.Author);
+	  realForm.findField("Status").loadValue(this.data.Status);
       realForm.findField("created").loadValue(this.data.created);
       realForm.findField("creator").loadValue(this.data.creator);
       realForm.findField("last_editor").loadValue(this.data.last_editor);
