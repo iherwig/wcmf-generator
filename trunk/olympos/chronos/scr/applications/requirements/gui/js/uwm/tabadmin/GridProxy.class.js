@@ -32,7 +32,7 @@ uwm.tabadmin.GridProxy.prototype.load = function(params, reader, callback, scope
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
-		this.actionSet.addList(this.listType, uwm.i18n.Localization.getInstance().getUserLanguage(), false,
+		this.actionSet.addList(this.listType, uwm.i18n.Localization.getInstance().getModelLanguage(), false,
 		function(options, data) {
 			self.loadResponse(options, data, callback, scope, arg);
 		}, function(options, data, errorMsg) {

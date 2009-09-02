@@ -38,7 +38,9 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 			width: 200,
 			listeners: {
 				"select": function(field, record, index) {
-					self.setLanguage(self.languageListBox.getLanguageFromRecord(record));
+					var language = self.languageListBox.getLanguageFromRecord(record);
+					loc.setTranslationLanguage(language);
+					self.setLanguage(language);
 				}
 			}
 		});
@@ -181,10 +183,9 @@ uwm.i18n.TranslationPanel.prototype.handleChangePropertyEvent = function(modelOb
 }
 
 /**
- * Store the selected language.
+ * Set the selected language.
  */
 uwm.i18n.TranslationPanel.prototype.setLanguage = function(language) {
-	var loc = uwm.i18n.Localization.getInstance();
 	if (language != this.language) {
 		this.language = language;
 
@@ -199,7 +200,6 @@ uwm.i18n.TranslationPanel.prototype.setLanguage = function(language) {
 			this.showTranslation(this.currentOid, language, this.isLocked, 
 				container.hideMask.createDelegate(container));
 		}
-		loc.setTranslationLanguage(language);
 	}
 }
 

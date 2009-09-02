@@ -31,7 +31,7 @@ uwm.property.ComboBoxProxyMult.prototype.load = function(params, reader, callbac
 		var self = this;
 	
 		uwm.persistency.Persistency.getInstance().listbox(this.listType, 
-			uwm.i18n.Localization.getInstance().getUserLanguage(), function(options, data) {
+			uwm.i18n.Localization.getInstance().getModelLanguage(), function(options, data) {
 				self.loadResponse(options, data, callback, scope, arg);
 			}, function(options, data, errorMsg){
 					self.loadFailed(options, data, errorMsg, callback, scope, arg)

@@ -78,6 +78,7 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.SplitButton, {
 			}
 		}
 		
+		// add Grid Scope menu
 		var gridMenu = menue.add({
 			text : uwm.Dict.translate("Grid Scope"),
 			menu : []
@@ -86,6 +87,24 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.SplitButton, {
 			if (!(subMenus[i] instanceof Function)) {
 				gridMenu.menu.add(subMenus[i]);
 			}
+		}
+		
+		// add Language menu
+		var languageMenu = menue.add({
+			text : uwm.Dict.translate("Language"),
+			menu : []
+		});
+		var loc = uwm.i18n.Localization.getInstance();
+		var languages = loc.getAllModelLanguages();
+		for (var i=languages.length-1; i>=0; i--) {
+			languageMenu.menu.add({
+				text : languages[i][1],
+				itemId : languages[i][0],
+				checked : (languages[i][0] == loc.getModelLanguage()),
+				handler : function(item) {
+					uwm.i18n.Localization.getInstance().setModelLanguage(item.itemId);
+				}
+			});
 		}
 		
 		Ext.apply(this, {

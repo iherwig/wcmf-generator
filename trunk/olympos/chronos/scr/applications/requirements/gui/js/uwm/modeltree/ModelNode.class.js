@@ -65,7 +65,7 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 		    text : uwm.Dict.translate('Export as UML'),
 		    handler : function(item, e) {
 				var localization = uwm.i18n.Localization.getInstance();
-				var userLanguage = localization.getUserLanguage();
+				var userLanguage = localization.getModelLanguage();
 			
 			    new uwm.ui.LongTaskRunner( {
 			        title : uwm.Dict.translate('Exporting UML ...'),

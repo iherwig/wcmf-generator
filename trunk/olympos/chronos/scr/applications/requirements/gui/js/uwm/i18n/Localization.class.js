@@ -39,8 +39,7 @@ uwm.i18n.Localization = function() {
 }
 
 /**
- * Get the model language. This is the default language of
- * all model data.
+ * Get the model language. This is the default language of all model data.
  * @return {String} The language code
  */
 uwm.i18n.Localization.prototype.getDefaultModelLanguage = function() {
@@ -48,11 +47,22 @@ uwm.i18n.Localization.prototype.getDefaultModelLanguage = function() {
 }
 
 /**
+ * Set the language that the user is currently using for translating model elements.
+ * @param {String} The language code
+ */
+uwm.i18n.Localization.prototype.setModelLanguage = function(language) {
+	if (language != this.curModelLanguage) {
+		this.curModelLanguage = language;
+		uwm.event.EventBroker.getInstance().fireEvent("changeModelLanguage", language);
+	}
+}
+
+/**
  * Get the language that the user selected on login. All model data that 
  * is not explicitly translated should be localized in this language. 
  * @return {String} The language code
  */
-uwm.i18n.Localization.prototype.getUserLanguage = function() {
+uwm.i18n.Localization.prototype.getModelLanguage = function() {
 	if (this.curModelLanguage == null) {
 		this.curModelLanguage = this.getDefaultModelLanguage();
 	}
@@ -87,7 +97,7 @@ uwm.i18n.Localization.prototype.getAllUserInterfaceLanguages = function() {
 }
 
 /**
- * Get the language that the user is currently using for translating model elements.
+ * Set the language that the user is currently using for translating model elements.
  * @param {String} The language code
  */
 uwm.i18n.Localization.prototype.setTranslationLanguage = function(language) {
@@ -114,7 +124,7 @@ uwm.i18n.Localization.prototype.getTranslationLanguage = function() {
  * @return {String} The language code
  */
 uwm.i18n.Localization.prototype.getDefaultTranslationLanguage = function() {
-	var curModelLanguage = this.getUserLanguage();
+	var curModelLanguage = this.getModelLanguage();
 	var languages = this.getAllModelLanguages();
 	for (var i=0; i<languages.length; i++) {
 		if (languages[i][0] != curModelLanguage) {
@@ -149,7 +159,7 @@ uwm.i18n.Localization.prototype.getLanguageName = function(language, languages) 
 uwm.i18n.Localization.prototype.loadModelLanguages = function(callback) {
 	var self = this;
 		
-	uwm.persistency.Persistency.getInstance().list('Language', false, this.getUserLanguage(),
+	uwm.persistency.Persistency.getInstance().list('Language', false, this.getModelLanguage(),
 		function(options, data) {
 			for (var i = 0; i < data.objects.length; i++) {
 				var currObj = data.objects[i];

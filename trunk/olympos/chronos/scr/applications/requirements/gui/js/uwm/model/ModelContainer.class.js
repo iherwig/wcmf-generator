@@ -288,7 +288,7 @@ uwm.model.ModelContainer.prototype.loadByOid = function(oid, callback, depth, se
 	}
 	
 	if (callback instanceof uwm.persistency.ActionSet) {
-		callback.addDisplay(oid, depth, uwm.i18n.Localization.getInstance().getUserLanguage(), 
+		callback.addDisplay(oid, depth, uwm.i18n.Localization.getInstance().getModelLanguage(), 
 			function(request, data) {
 				var node = self.createByDisplayResult(data);
 				if (secondCallback) {
@@ -297,7 +297,7 @@ uwm.model.ModelContainer.prototype.loadByOid = function(oid, callback, depth, se
 		});
 	} else {
 		uwm.persistency.Persistency.getInstance().display(oid, depth, 
-			uwm.i18n.Localization.getInstance().getUserLanguage(), function(request, data) {
+			uwm.i18n.Localization.getInstance().getModelLanguage(), function(request, data) {
 				var node = self.createByDisplayResult(data);
 				
 				if (callback) {
@@ -339,7 +339,7 @@ uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentN
 			},
 			successHandler : function(data) {
 				uwm.persistency.Persistency.getInstance().display(data.oid, 0, 
-					uwm.i18n.Localization.getInstance().getUserLanguage(), function(request, data) {
+					uwm.i18n.Localization.getInstance().getModelLanguage(), function(request, data) {
 						var node = self.createByDisplayResult(data);
 						self.handleCreatedModelObject(node.oid, uwmClassName, packageNode, function(newObject){
 							longTaskRunner.close();
@@ -365,7 +365,7 @@ uwm.model.ModelContainer.prototype.duplicateModel = function(modelNode) {
 			},
 			successHandler : function(data) {
 				uwm.persistency.Persistency.getInstance().display(data.oid, 0, 
-					uwm.i18n.Localization.getInstance().getUserLanguage(), function(request, data) {
+					uwm.i18n.Localization.getInstance().getModelLanguage(), function(request, data) {
 						var node = self.createByDisplayResult(data);
 						self.handleCreatedModel(node.oid, function(newObject){
 							longTaskRunner.close();

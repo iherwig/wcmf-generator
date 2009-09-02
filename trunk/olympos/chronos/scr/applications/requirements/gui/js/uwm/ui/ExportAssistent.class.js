@@ -172,7 +172,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 			startPackage = assistant.oid;
 		
 		var localization = uwm.i18n.Localization.getInstance();
-		var userLanguage = localization.getUserLanguage();
+		var userLanguage = localization.getModelLanguage();
 		
 		new uwm.ui.LongTaskRunner( {
 		    title : uwm.Dict.translate('Exporting Documentation ...'),

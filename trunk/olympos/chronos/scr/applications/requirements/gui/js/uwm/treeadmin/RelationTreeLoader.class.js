@@ -22,12 +22,12 @@ uwm.treeadmin.RelationTreeLoader.prototype.load = function(node, callback) {
 	
 	if (node instanceof uwm.treeadmin.RelationNode) {
 		uwm.persistency.Persistency.getInstance().display(node.modelObject.getOid(), 1, 
-			uwm.i18n.Localization.getInstance().getUserLanguage(), function(options, data) {
+			uwm.i18n.Localization.getInstance().getModelLanguage(), function(options, data) {
 				self.reformatDisplayData(self, node, callback, data);
 		});
 	} else if (node instanceof uwm.treeadmin.NewRelationNode) {
 		uwm.persistency.Persistency.getInstance().list(node.connectionTarget, false,
-			uwm.i18n.Localization.getInstance().getUserLanguage(), function(options, data) {
+			uwm.i18n.Localization.getInstance().getModelLanguage(), function(options, data) {
 				self.reformatListData(self, node, callback, data);
 		});
 	}

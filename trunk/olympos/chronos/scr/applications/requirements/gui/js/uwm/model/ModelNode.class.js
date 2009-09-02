@@ -156,13 +156,28 @@ uwm.model.ModelNode.prototype.getLabel = function() {
 	return result;
 }
 
+/**
+ * Get the language of the node.
+ * @return language A language code
+ */
 uwm.model.ModelNode.prototype.getLanguage = function() {
 	// set the default value lazily, because the default language 
 	// may not be defined in the beginning
 	if (this.language == null) {
-		this.language = uwm.i18n.Localization.getInstance().getUserLanguage();
+		this.language = uwm.i18n.Localization.getInstance().getModelLanguage();
 	}
 	return this.language;
+}
+
+/**
+ * Set the language of the node.
+ * @param language A language code
+ * @note Calling this method will not translate the node. To actually
+ * translate it to the given language, call the uwm.model.ModelNode.reload()
+ * afterwards.
+ */
+uwm.model.ModelNode.prototype.setLanguage = function(language) {
+	this.language = language;
 }
 
 uwm.model.ModelNode.prototype.reload = function(callback) {

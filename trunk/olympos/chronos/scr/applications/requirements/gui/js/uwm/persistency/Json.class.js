@@ -29,7 +29,7 @@ uwm.persistency.Json.prototype.jsonRequest = function(params, successHandler, er
 	params.sid = this.sid;
 	params.response_format = "JSON";
 	if (params.language == undefined) {
-		params.language = uwm.i18n.Localization.getInstance().getUserLanguage();
+		params.language = uwm.i18n.Localization.getInstance().getModelLanguage();
 	}
 	
 	var self = this;
