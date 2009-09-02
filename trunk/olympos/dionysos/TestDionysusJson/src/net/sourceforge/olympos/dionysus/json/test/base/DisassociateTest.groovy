@@ -18,6 +18,23 @@ public class DisassociateTest extends DionysusTest {
 
 		request(
 			[
+			 	action: 'associate',
+			 	sourceOid: Cfg.readBaseOid,
+			 	targetOid: Cfg.readFirstLevelOid,
+			 	role: Cfg.readBaseAttributeName
+			],
+			{req, json ->
+				assertTrue(json.success)
+				assertEquals('associate', json.action)
+				assertEquals(Cfg.readBaseOid, json.sourceOid)
+				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
+				
+			},
+			this.method
+		)
+		
+		request(
+			[
 			 	action: 'disassociate',
 			 	sourceOid: Cfg.readBaseOid,
 			 	targetOid: Cfg.readFirstLevelOid,
@@ -27,126 +44,7 @@ public class DisassociateTest extends DionysusTest {
 				assertTrue(json.success)
 				assertEquals('disassociate', json.action)
 				assertEquals(Cfg.readBaseOid, json.oid)
-				
-				assertObject(json.object, Cfg.readBaseOid, false)
-				
-				def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
-				assertObject(firstLevel, Cfg.readFirstLevelOid, false)
-
-				def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
-                assertObject(firstLevelParent, Cfg.readBaseOid, true)
-
-				def secondLevel = firstLevel.attributes[Cfg.readFirstLevelAttributeName]
-                assertObject(secondLevel, Cfg.readSecondLevelOid, true)
-			},
-			this.method
-		)
-	}
-
-	@Test
-	public void depth0() {
-		ensureLogin()
-
-		request(
-			[
-			 	action: 'disassociate',
-			 	oid: Cfg.readBaseOid,
-			 	depth: 0
-			],
-			{req, json ->
-				assertTrue(json.success)
-				assertEquals('disassociate', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(0, json.depth)
-				
-				assertObject(json.object, Cfg.readBaseOid, false)
-				
-				def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
-				assertObject(firstLevel, Cfg.readFirstLevelOid, true)
-			},
-			this.method
-		)
-	}
-
-	@Test
-	public void depth2() {
-		ensureLogin()
-
-		request(
-			[
-			 	action: 'disassociate',
-			 	oid: Cfg.readBaseOid,
-			 	depth: 2
-			],
-			{req, json ->
-				assertTrue(json.success)
-				assertEquals('disassociate', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(2, json.depth)
-				
-				assertObject(json.object, Cfg.readBaseOid, false)
-				
-				def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
-				assertObject(firstLevel, Cfg.readFirstLevelOid, false)
-			
-				def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
-			    assertObject(firstLevelParent, Cfg.readBaseOid, true)
-			
-				def secondLevel = firstLevel.attributes[Cfg.readFirstLevelAttributeName]
-			    assertObject(secondLevel, Cfg.readSecondLevelOid, false)
-			},
-			this.method
-		)
-	}
-
-	@Test
-	public void depthUnlimited() {
-		ensureLogin()
-
-		request(
-			[
-			 	action: 'disassociate',
-			 	oid: Cfg.readBaseOid,
-			 	depth: -1
-			],
-			{req, json ->
-				assertTrue(json.success)
-				assertEquals('disassociate', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(-1, json.depth)
-				
-				assertObject(json.object, Cfg.readBaseOid, false)
-				
-				def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
-				assertObject(firstLevel, Cfg.readFirstLevelOid, false)
-			
-				def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
-			    assertObject(firstLevelParent, Cfg.readBaseOid, true)
-			
-				def secondLevel = firstLevel.attributes[Cfg.readFirstLevelAttributeName]
-			    assertObject(secondLevel, Cfg.readSecondLevelOid, false)
-			},
-			this.method
-		)
-	}
-	
-	@Test
-	public void depthInvalid() {
-		ensureLogin()
-
-		request(
-			[
-			 	action: 'disassociate',
-			 	oid: Cfg.readBaseOid,
-			 	depth: -2
-			],
-			{req, json ->
-				assertFalse(json.success)
-				assertEquals('disassociate', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(-2, json.depth)
-				
-				assertEquals('DEPTH_INVALID', json.errorCode)
+				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
 			},
 			this.method
 		)
