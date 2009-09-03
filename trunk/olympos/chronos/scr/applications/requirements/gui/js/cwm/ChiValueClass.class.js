@@ -121,7 +121,7 @@ cwm.ChiValueClass.prototype.getPropertyForm = function(modelNode, isLockedByOthe
 		    modelNode : modelNode,
 		    
 		    readOnly : isLockedByOtherUser
-		}), new uwm.property.ComboBox( {
+		}), new uwm.property.EditableComboBox( {
 		    fieldLabel : 'input_type',
 		    toolTip : "Definition of the attribute's input control in the HTML form<sup>11</sup>The interpretation of the input_type is done by DefaultControlRenderer or its subclasses..",
 		    name : 'input_type',

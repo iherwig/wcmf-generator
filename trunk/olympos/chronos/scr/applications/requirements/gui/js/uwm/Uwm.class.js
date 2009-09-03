@@ -124,6 +124,14 @@ uwm.Uwm.prototype.restart = function() {
 	uwm.model.ModelContainer.instance = null;
 	uwm.property.PropertyContainer.instance = null;
 
+	// reinstall event listeners
+	var self = this;
+	uwm.event.EventBroker.getInstance().addListener({
+		"changeModelLanguage": function(language) {
+			self.restart();
+		}
+	});
+	
 	// restart the application
 	this.createViewport();
 	this.switchWorkbench("default");

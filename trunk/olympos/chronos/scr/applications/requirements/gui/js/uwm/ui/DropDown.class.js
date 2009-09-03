@@ -101,7 +101,8 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.SplitButton, {
 				text : languages[i][1],
 				itemId : languages[i][0],
 				checked : (languages[i][0] == loc.getModelLanguage()),
-				handler : function(item) {
+				group: 'modelLanguage',
+				checkHandler : function(item) {
 					uwm.i18n.Localization.getInstance().setModelLanguage(item.itemId);
 				}
 			});
