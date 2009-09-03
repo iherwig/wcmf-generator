@@ -45,7 +45,7 @@ uwm.property.ComboBox = function(config){
 		valueField: 'key',
 		mode: "remote",
 		triggerAction: 'all',
-		editable: false,
+		editable: false
 	}, config));
 	
 	this.toolTipText = config.toolTip;

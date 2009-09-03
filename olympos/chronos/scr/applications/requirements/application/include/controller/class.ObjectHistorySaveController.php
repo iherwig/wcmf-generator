@@ -101,13 +101,15 @@ class ObjectHistorySaveController extends SaveController
 										$arrSecTabNames = explode('|', $secTabNames);
 									}
 									foreach($arrSecTabNames as $k=>$arrSecTabName) {
-										$this->ObjOldVal = $this->persistenceFacade->load($arrSecTabName.':'.$affectedObj->getValue($name));
-										if($this->ObjOldVal){
-											$tmp['oldValueDisp'] = $this->ObjOldVal->getValue('Name');
-										}
-										$this->ObjNewVal = $this->persistenceFacade->load($arrSecTabName.':'.$this->node->getValue($name));
-										if($this->ObjNewVal){
-											$tmp['newValueDisp'] = $this->ObjNewVal->getValue('Name');
+										if (is_int($this->node->getValue($name))) {
+											$this->ObjOldVal = $this->persistenceFacade->load($arrSecTabName.':'.$affectedObj->getValue($name));
+											if($this->ObjOldVal){
+												$tmp['oldValueDisp'] = $this->ObjOldVal->getValue('Name');
+											}
+											$this->ObjNewVal = $this->persistenceFacade->load($arrSecTabName.':'.$this->node->getValue($name));
+											if($this->ObjNewVal){
+												$tmp['newValueDisp'] = $this->ObjNewVal->getValue('Name');
+											}
 										}
 									}
 									
