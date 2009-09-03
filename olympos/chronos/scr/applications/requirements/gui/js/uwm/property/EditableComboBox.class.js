@@ -25,10 +25,12 @@ uwm.property.EditableComboBox = function(config){
 	var self = this;
 	
 	uwm.property.EditableComboBox.superclass.constructor.call(this, Ext.apply(this, {
-		editable: true,
-		forceSelection: false,
-		typeAhead: false
 	}, config));
+	
+	// enable editing (does not work, when just merging the config)
+	this.editable = true;
+	this.forceSelection = false,
+	this.typeAhead = false
 }
 
 Ext.extend(uwm.property.EditableComboBox, uwm.property.ComboBox);
