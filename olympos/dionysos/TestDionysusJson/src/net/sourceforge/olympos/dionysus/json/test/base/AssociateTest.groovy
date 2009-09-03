@@ -107,7 +107,7 @@ public class AssociateTest extends DionysusTest {
 		)
 	}
 
-	@Test
+	//@Test
 	/*public void invalidAssociation() {
 		ensureLogin()
 
