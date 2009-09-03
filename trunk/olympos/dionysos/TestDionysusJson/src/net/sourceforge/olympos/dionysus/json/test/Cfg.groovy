@@ -36,6 +36,15 @@ package net.sourceforge.olympos.dionysus.json.test;
 	 */
 	static listClassName = 'Movie'
 	/**
+	 * The name of a class to test the create command.  
+	 */
+	static createClassName = 'Movie'
+
+	/**
+	 * The name of a class to test the delete command.  
+	 */
+	static deleteOid = 'Person:1'		
+	/**
 	 * A valid field name of the listClass 
 	 */
 	static listClassFieldName = 'title'
@@ -85,4 +94,18 @@ package net.sourceforge.olympos.dionysus.json.test;
 	 * Name of a boolean attribute
 	 */
 	static updateBooleanAttributeName = 'groundbreaking'
+
+	/**
+	 * last change value for update operation
+	 */
+	static lastChange = '1234567890'
+	/**
+	 * attributes for Update operation
+	 */
+	static attributes = "{title: 'Matrix The Original',groundbreaking: true}"
+
+	static wrongAttributeValue = "{title: 'Matrix The Original',groundbreaking: 'true'}"
+
+	static wrongAttributeName = "{title1: 'Matrix The Original',groundbreaking: true}"
+
 }
