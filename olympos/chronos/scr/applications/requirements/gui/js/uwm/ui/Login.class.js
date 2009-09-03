@@ -112,12 +112,7 @@ uwm.ui.Login = function(config){
 				
 				uwm.persistency.Persistency.getInstance().doLogin(this.form.getForm().findField("login").getValue(), 
 					this.form.getForm().findField("password").getValue(), function(options, data) {
-						uwm.i18n.Localization.getInstance().loadModelLanguages(function() {
-							// handle login after the model languages are loaded
-							// in order to make sure that all ui components get
-							// a valid list of languages
-							self.handleLogin(options, data);
-						});
+						self.handleLogin(options, data);
 				}, function(options, data, errorMsg){
 						self.handleLoginFailure(options, data, errorMsg);
 				});

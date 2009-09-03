@@ -139,10 +139,6 @@ uwm.diagram.DiagramContainer.prototype.isModelObjectContainedInCurrentDiagram = 
 	return result;
 }
 
-uwm.diagram.DiagramContainer.prototype.destroy = function() {
-	uwm.diagram.DiagramContainer.instance = null;
-}
-
 /**
  * Returns the instance of DiagramContainer.
  * 
