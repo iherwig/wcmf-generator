@@ -50,6 +50,129 @@ public class DisassociateTest extends DionysusTest {
 		)
 	}
 
+	@Test
+	public void invalidSourceOid() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'diassociate',
+			 	sourceOid: 'Myclas:MyOid',
+			 	targetOid: Cfg.readFirstLevelOid,
+			 	role: Cfg.readBaseAttributeName
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('diassociate', json.action)
+				assertEquals(Cfg.readBaseOid, json.sourceOid)
+				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
+				assertEquals('OID_INVALID', json.errorCode)
+				assertEquals(Cfg.readBaseAttributeName, json.role)
+				
+			},
+			this.method
+		)
+	}
+
+	@Test
+	public void invalidTargetOid() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'diassociate',
+			 	sourceOid: Cfg.readBaseOid,
+			 	targetOid: 'Myclas:MyOid',
+			 	role: Cfg.readBaseAttributeName
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('diassociate', json.action)
+				assertEquals(Cfg.readBaseOid, json.sourceOid)
+				assertEquals('Myclas:MyOid', json.targetOid)
+				assertEquals('OID_INVALID', json.errorCode)
+				assertEquals(Cfg.readBaseAttributeName, json.role)
+				
+			},
+			this.method
+		)
+	}
+
+	@Test
+	public void invalidRole() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'diassociate',
+			 	sourceOid: Cfg.readBaseOid,
+			 	targetOid: Cfg.readFirstLevelOid,
+			 	role: 'WrongRole'
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('diassociate', json.action)
+				assertEquals(Cfg.readBaseOid, json.sourceOid)
+				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
+				assertEquals('ROLE_INVALID', json.errorCode)
+				assertEquals('WrongRole', json.role)
+				
+			},
+			this.method
+		)
+	}
+
+	 
+
+	/*@Test
+	public void invalidAssociation() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'diassociate',
+			 	sourceOid: Cfg.readBaseOid,
+			 	targetOid: '', //Please enter the correct object Id for testing
+			 	role: Cfg.readBaseAttributeName
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('diassociate', json.action)
+				assertEquals(Cfg.readBaseOid, json.sourceOid)
+				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
+				assertEquals('ASSOCIATION_INVALID', json.errorCode)
+				assertEquals( Cfg.readBaseAttributeName, json.role)
+				
+			},
+			this.method
+		)
+	}*/
+
+	@Test
+	public void associationNotFound() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'diassociate',
+			 	sourceOid: Cfg.readBaseOid,
+			 	targetOid: Cfg.readFirstLevelOid,
+			 	role: Cfg.readBaseAttributeName
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('diassociate', json.action)
+				assertEquals(Cfg.readBaseOid, json.sourceOid)
+				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
+				assertEquals('ASSOCIATION_NOT_FOUND', json.errorCode)
+				
+			},
+			this.method
+		)
+		
+		
+	}
+	
 	private void assertObject(json, oid, boolean isReference) {
 		assertNotNull(json)
 		assertEquals(oid, json.oid)
