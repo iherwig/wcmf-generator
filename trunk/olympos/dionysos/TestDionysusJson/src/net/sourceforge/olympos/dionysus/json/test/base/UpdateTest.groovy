@@ -30,127 +30,12 @@ public class UpdateTest extends DionysusTest {
 				
 				assertObject(json.object, Cfg.readBaseOid, false)
 				
-				//def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
-				//assertObject(firstLevel, Cfg.readFirstLevelOid, false)
-
-				//def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
-                //assertObject(firstLevelParent, Cfg.readBaseOid, true)
-
-				//def secondLevel = firstLevel.attributes[Cfg.readFirstLevelAttributeName]
-                //assertObject(secondLevel, Cfg.readSecondLevelOid, true)
 			},
 			this.method
 		)
 	}
 
-	@Test
-	public void depth0() {
-		ensureLogin()
-
-		request(
-			[
-			 	action: 'update',
-			 	oid: Cfg.readBaseOid,
-			 	depth: 0
-			],
-			{req, json ->
-				assertTrue(json.success)
-				assertEquals('update', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(0, json.depth)
-				
-				assertObject(json.object, Cfg.readBaseOid, false)
-				
-				def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
-				assertObject(firstLevel, Cfg.readFirstLevelOid, true)
-			},
-			this.method
-		)
-	}
-
-	@Test
-	public void depth2() {
-		ensureLogin()
-
-		request(
-			[
-			 	action: 'update',
-			 	oid: Cfg.readBaseOid,
-			 	depth: 2
-			],
-			{req, json ->
-				assertTrue(json.success)
-				assertEquals('update', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(2, json.depth)
-				
-				assertObject(json.object, Cfg.readBaseOid, false)
-				
-				def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
-				assertObject(firstLevel, Cfg.readFirstLevelOid, false)
-			
-				def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
-			    assertObject(firstLevelParent, Cfg.readBaseOid, true)
-			
-				def secondLevel = firstLevel.attributes[Cfg.readFirstLevelAttributeName]
-			    assertObject(secondLevel, Cfg.readSecondLevelOid, false)
-			},
-			this.method
-		)
-	}
-
-	@Test
-	public void depthUnlimited() {
-		ensureLogin()
-
-		request(
-			[
-			 	action: 'update',
-			 	oid: Cfg.readBaseOid,
-			 	depth: -1
-			],
-			{req, json ->
-				assertTrue(json.success)
-				assertEquals('update', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(-1, json.depth)
-				
-				assertObject(json.object, Cfg.readBaseOid, false)
-				
-				def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
-				assertObject(firstLevel, Cfg.readFirstLevelOid, false)
-			
-				def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
-			    assertObject(firstLevelParent, Cfg.readBaseOid, true)
-			
-				def secondLevel = firstLevel.attributes[Cfg.readFirstLevelAttributeName]
-			    assertObject(secondLevel, Cfg.readSecondLevelOid, false)
-			},
-			this.method
-		)
-	}
 	
-	@Test
-	public void depthInvalid() {
-		ensureLogin()
-
-		request(
-			[
-			 	action: 'update',
-			 	oid: Cfg.readBaseOid,
-			 	depth: -2
-			],
-			{req, json ->
-				assertFalse(json.success)
-				assertEquals('update', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(-2, json.depth)
-				
-				assertEquals('DEPTH_INVALID', json.errorCode)
-			},
-			this.method
-		)
-	}
 
 	private void assertObject(json, oid, boolean isReference) {
 		assertNotNull(json)
