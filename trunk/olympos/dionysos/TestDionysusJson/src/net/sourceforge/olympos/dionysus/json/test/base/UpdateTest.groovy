@@ -19,8 +19,7 @@ public class UpdateTest extends DionysusTest {
 		request(
 			[
 			 	action: 'update',
-			 	oid: Cfg.readBaseOid,
-			 	lastChange: Cfg.lastChange,
+			 	oid: Cfg.readBaseOid,			 	 
 			 	attributes: Cfg.attributes
 			],
 			{req, json ->
@@ -44,7 +43,6 @@ public class UpdateTest extends DionysusTest {
 			[
 			 	action: 'update',
 			 	oid: 'MyClass:MyId',
-			 	lastChange: Cfg.lastChange,
 			 	attributes: Cfg.attributes
 			],
 			{req, json ->
@@ -68,7 +66,6 @@ public class UpdateTest extends DionysusTest {
 			[
 			 	action: 'update',
 			 	oid: Cfg.readBaseOid,
-			 	lastChange: Cfg.lastChange,
 			 	attributes: Cfg.wrongAttributeName
 			],
 			{req, json ->
@@ -92,7 +89,6 @@ public class UpdateTest extends DionysusTest {
 			[
 			 	action: 'update',
 			 	oid: Cfg.readBaseOid,
-			 	lastChange: Cfg.lastChange,
 			 	attributes: Cfg.wrongAttributeValue
 			],
 			{req, json ->
