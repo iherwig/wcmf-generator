@@ -21,7 +21,7 @@ public class UpdateTest extends DionysusTest {
 			 	action: 'update',
 			 	oid: Cfg.readBaseOid,
 			 	lastChange: '1234567890',
-			 	attributes: "{title: 'Matrix The Original',groundbreaking: true}"
+			 	attributes: "{title: 'Matrix 3',groundbreaking: true}"
 			],
 			{req, json ->
 				assertTrue(json.success)
@@ -30,14 +30,14 @@ public class UpdateTest extends DionysusTest {
 				
 				assertObject(json.object, Cfg.readBaseOid, false)
 				
-				def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
-				assertObject(firstLevel, Cfg.readFirstLevelOid, false)
+				//def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
+				//assertObject(firstLevel, Cfg.readFirstLevelOid, false)
 
-				def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
-                assertObject(firstLevelParent, Cfg.readBaseOid, true)
+				//def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
+                //assertObject(firstLevelParent, Cfg.readBaseOid, true)
 
-				def secondLevel = firstLevel.attributes[Cfg.readFirstLevelAttributeName]
-                assertObject(secondLevel, Cfg.readSecondLevelOid, true)
+				//def secondLevel = firstLevel.attributes[Cfg.readFirstLevelAttributeName]
+                //assertObject(secondLevel, Cfg.readSecondLevelOid, true)
 			},
 			this.method
 		)
@@ -157,7 +157,6 @@ public class UpdateTest extends DionysusTest {
 		assertEquals(oid, json.oid)
 		assertEquals(getClassNameFromOid(oid), json.className)
 		assertNotNull(json.lastChange)
-		assertEquals(isReference, json.isReference)
 	}
 	
 	private String getClassNameFromOid(String oid) {

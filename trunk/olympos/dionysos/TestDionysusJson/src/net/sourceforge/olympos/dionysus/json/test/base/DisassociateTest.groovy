@@ -43,7 +43,7 @@ public class DisassociateTest extends DionysusTest {
 			{req, json ->
 				assertTrue(json.success)
 				assertEquals('disassociate', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
+				assertEquals(Cfg.readBaseOid, json.sourceOid)
 				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
 			},
 			this.method
