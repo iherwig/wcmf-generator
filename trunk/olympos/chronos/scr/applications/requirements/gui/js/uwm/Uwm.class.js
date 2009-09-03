@@ -30,10 +30,7 @@ uwm.Uwm.prototype.startApplication = function() {
 	var self = this;
 	uwm.event.EventBroker.getInstance().addListener({
 		"changeModelLanguage": function(language) {
-			self.viewport.destroy();
-			uwm.diagram.DiagramContainer.getInstance().destroy();
-			self.createViewport();
-			self.switchWorkbench("default");
+			self.restart();
 		}
 	});
 	
@@ -51,8 +48,7 @@ uwm.Uwm.prototype.startApplication = function() {
 	}
 	
 	if (sid) {
-		uwm.Session.getInstance().init(sid);
-		this.workbench = new uwm.ui.Workbench();
+		this.startSession(sid, uwm.i18n.Localization.getInstance().getDefaultModelLanguage());
 	} else {
 		this.login = new uwm.ui.Login();
 	}
@@ -61,9 +57,18 @@ uwm.Uwm.prototype.startApplication = function() {
 uwm.Uwm.prototype.startSession = function(sid, lang) {
 	uwm.Session.getInstance().init(sid, lang);
 	
-	this.login.destroy();
-		
-	this.createViewport();
+	if (this.login) {
+		this.login.destroy();
+	}
+
+	var self = this;
+	uwm.i18n.Localization.getInstance().loadModelLanguages(function() {
+		// create viewport after the model languages are loaded
+		// in order to make sure that all ui components get
+		// a valid list of languages
+		self.createViewport();
+	});
+
 }
 
 uwm.Uwm.prototype.createViewport = function() {
@@ -104,6 +109,24 @@ uwm.Uwm.prototype.reload = function() {
 	uwm.persistency.Persistency.getInstance().logout(function() {
 		window.location.reload();
 	});
+}
+
+uwm.Uwm.prototype.restart = function() {
+	// destroy the viewport
+	this.viewport.destroy();
+
+	// reset singletons
+	uwm.event.EventBroker.instance = null;
+	uwm.hierarchytree.HierarchyTree.instance = null;
+	uwm.modeltree.ModelTree.getInstance().destroy();
+	uwm.objectgrid.ObjectGridContainer.instance = null;
+	uwm.diagram.DiagramContainer.instance = null;
+	uwm.model.ModelContainer.instance = null;
+	uwm.property.PropertyContainer.instance = null;
+
+	// restart the application
+	this.createViewport();
+	this.switchWorkbench("default");
 }
 
 uwm.Uwm.prototype.installErrorHandler = function() {
@@ -207,7 +230,7 @@ uwm.Uwm.prototype.handleError = function(e, message, uri, line) {
 			},{
 				text: uwm.Dict.translate("Restart"),
 				handler: function() {
-					self.reload();
+					self.reload(true);
 				}
 			}]
 		});

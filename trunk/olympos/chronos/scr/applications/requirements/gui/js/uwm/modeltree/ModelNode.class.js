@@ -47,7 +47,7 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 			    self.deleteFromModel(item, e);
 		    }
 		}, {
-		    text : uwm.Dict.translate('New project from this'),
+		    text : uwm.Dict.translate('New model from this'),
 		    handler : function(item, e) {
 			    self.duplicate(item, e);
 		    }
