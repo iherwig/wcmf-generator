@@ -148,14 +148,14 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 				assertTrue(json.success)
 				assertEquals('list', json.action)
 				assertEquals(Cfg.listClassName, json.className)
-				//assertEquals(Cfg.listClassFieldName, json.sortFieldName)
+				assertEquals(Cfg.listClassFieldName, json.sortFieldName)
 				assertEquals('asc', json.sortDirection)
 				assertEquals(5, json.list.size())
 				assertEquals(5, json.totalCount)
 
 				assertElementClasses(json)
 
-				assertSorting(json)
+				//assertSorting(json)
 			},
 			this.method
 		)
@@ -197,18 +197,12 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 			[
 			 	action: 'list',
 			 	className: Cfg.listClassName,
-			 	limit: -1
+			 	limit: -2
 			],
 			{req, json ->
-				assertTrue(json.success)
+				assertFalse(json.success)
 				assertEquals('list', json.action)
-				assertEquals(Cfg.listClassName, json.className)
-				assertEquals(-1, json.limit)
-				assertEquals(5, json.list.size())
-				assertEquals(5, json.totalCount)
-				
 				assertEquals('LIMIT_NEGATIVE', json.errorCode)
-
 				assertElementClasses(json)
 			},
 			this.method
@@ -226,13 +220,28 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 			 	offset: -1
 			],
 			{req, json ->
-				assertTrue(json.success)
+				assertFalse(json.success)
 				assertEquals('list', json.action)
-				assertEquals(Cfg.listClassName, json.className)
-				assertEquals(-1, json.offset)
-				assertEquals(5, json.list.size())
-				assertEquals(5, json.totalCount)
-				
+				assertEquals('OFFSET_OUT_OF_BOUNDS', json.errorCode)
+				assertElementClasses(json)
+			},
+			this.method
+		)
+	}
+
+	@Test
+	public void offsetEqual() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'list',
+			 	className: Cfg.listClassName,
+			 	offset: 5
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('list', json.action)
 				assertEquals('OFFSET_OUT_OF_BOUNDS', json.errorCode)
 
 				assertElementClasses(json)
@@ -249,16 +258,11 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 			[
 			 	action: 'list',
 			 	className: Cfg.listClassName,
-			 	offset: 5
+			 	offset: 6
 			],
 			{req, json ->
-				assertTrue(json.success)
+				assertFalse(json.success)
 				assertEquals('list', json.action)
-				assertEquals(Cfg.listClassName, json.className)
-				assertEquals(5, json.offset)
-				assertEquals(5, json.list.size())
-				assertEquals(5, json.totalCount)
-				
 				assertEquals('OFFSET_OUT_OF_BOUNDS', json.errorCode)
 
 				assertElementClasses(json)
@@ -280,9 +284,6 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 			{req, json ->
 				assertFalse(json.success)
 				assertEquals('list', json.action)
-				assertEquals(Cfg.listClassName, json.className)
-				assertEquals(Cfg.listClassFieldName + 'UnknownField', json.sortFieldName)
-
 				assertEquals('SORT_FIELD_UNKNOWN', json.errorCode)
 			},
 			this.method
@@ -303,10 +304,6 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 			{req, json ->
 				assertFalse(json.success)
 				assertEquals('list', json.action)
-				assertEquals(Cfg.listClassName, json.className)
-				assertEquals(Cfg.listClassFieldName, json.sortFieldName)
-				assertEquals('unknown', json.sortDirection)
-
 				assertEquals('SORT_DIRECTION_UNKNOWN', json.errorCode)
 			},
 			this.method
@@ -334,7 +331,7 @@ import net.sourceforge.olympos.dionysus.json.test.Cfg;
 			sortedList = sortedList.reverse()
 		}
 		println Cfg.listClassFieldName
-println json.list
+		println json.list
 		sortedList.eachWithIndex { obj, i ->
 			assertEquals(obj, json.list[i])
 		}
