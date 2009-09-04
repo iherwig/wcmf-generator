@@ -41,6 +41,10 @@ call "%ANT_HOME%\bin\ant" -f ..\generator\build.xml
 md c:\temp\cwm\generator
 xcopy /e ..\dist\*.* c:\temp\cwm\generator
 
+REM Create generator build folder
+md c:\temp\cwm\generated\wcmf
+copy ignore c:\temp\cwm\generated\wcmf\ignore
+
 REM delete listed files
 call delete.jar
 

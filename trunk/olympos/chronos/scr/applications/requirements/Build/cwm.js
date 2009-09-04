@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008 The Olympos Development Team.
+ * Copyright (c) 2009 The Olympos Development Team.
  *
  * http://sourceforge.net/projects/olympos/
  *
