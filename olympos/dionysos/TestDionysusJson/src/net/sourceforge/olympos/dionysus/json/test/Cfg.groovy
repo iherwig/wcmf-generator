@@ -43,7 +43,11 @@ package net.sourceforge.olympos.dionysus.json.test;
 	/**
 	 * The name of a class to test the delete command.  
 	 */
-	static deleteOid = 'Person:1'		
+	static deleteOid = 'Person:1'
+
+	static deleteInvalidOid = 'Director:MyOid'
+
+	static deleteInvalidClass = 'MyPerson:1'
 	/**
 	 * A valid field name of the listClass 
 	 */
@@ -115,4 +119,17 @@ package net.sourceforge.olympos.dionysus.json.test;
 	static executeActionSetcreateClassName = 'Movie'	
 	static executeActionSetUpdateOid = '{Movie:?}'
 	static executeActionSetAttributes = '{"title": "Matrix The Original","groundbreaking": true}'
+
+	/**
+	 * attributes for associate and diassociate operation
+	 */
+
+	static associateSourceOid='Movie:1'
+	static associateTargerOid='Director:1'
+	static associateRealation='director'
+	static associateWrongSourceOid='Movie:mine'
+	static associateWrongTargerOid='Director:mine'
+	static associateWrongSourceClass='Myclass:123'
+	static associateWrongTargerClass='Myclass:123'
+	static associateWrongRelation='MyRelation'
 }
