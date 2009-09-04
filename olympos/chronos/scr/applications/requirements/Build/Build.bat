@@ -32,6 +32,9 @@ REM Export Workspace files
 %SUBVERSION%\svn.exe export ..\gui c:\temp\cwm\gui
 %SUBVERSION%\svn.exe export ..\application c:\temp\cwm\application
 %SUBVERSION%\svn.exe export ..\wcmf c:\temp\cwm\wcmf
+REM %SUBVERSION%\svn.exe export ..\ChronosLib c:\temp\cwm\ChronosLib
+REM %SUBVERSION%\svn.exe export ..\cwe c:\temp\cwm\cwe
+REM %SUBVERSION%\svn.exe export ..\browser c:\temp\cwm\browser
 
 REM Build Generator
 call "%ANT_HOME%\bin\ant" -f ..\generator\build.xml
