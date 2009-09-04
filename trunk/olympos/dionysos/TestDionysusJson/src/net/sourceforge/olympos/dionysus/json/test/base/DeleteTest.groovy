@@ -40,6 +40,27 @@ public class DeleteTest extends DionysusTest {
 		request(
 			[
 			 	action: 'delete',
+			 	oid: 'Director:MyOid',
+			 	 
+			],
+			{req, json ->
+				assertTrue(json.success)
+				assertEquals('delete', json.action)
+				assertEquals('Director:MyOid', json.oid)
+				assertEquals('OID_INVALID', json.errorCode)
+				 
+			},
+			this.method
+		)
+	}
+
+	@Test
+	public void invalidClassName() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'delete',
 			 	oid: 'MyClass:MyOid',
 			 	 
 			],
@@ -47,7 +68,7 @@ public class DeleteTest extends DionysusTest {
 				assertTrue(json.success)
 				assertEquals('delete', json.action)
 				assertEquals('MyClass:MyOid', json.oid)
-				assertEquals('OID_INVALID', json.errorCode)
+				assertEquals('CLASS_NAME_INVALID', json.errorCode)
 				 
 			},
 			this.method
