@@ -75,7 +75,13 @@ Ext.override(Ext.form.ComboBox, {
 					},
 
 					"enter" : function(e){
-							this.onViewClick();
+							// Fix for tab key selecting a value from the dropdown even,
+							// if forceSelection == false
+							if(this.forceSelection) {
+								this.onViewClick();
+							} else {
+								this.collapse();
+							}
 							this.delayedCheck = true;
 							this.unsetDelayCheck.defer(10, this);
 					},
