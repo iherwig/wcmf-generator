@@ -743,6 +743,7 @@
 		<xsd:attribute name="restrictions_not_match" type="xsd:string"/>
 		<xsd:attribute name="restrictions_description" type="xsd:string"/>
 		<xsd:attribute name="column_name" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
