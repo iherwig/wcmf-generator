@@ -927,15 +927,15 @@ uwm.diagram.AbstractDiagram.prototype.getFigure = function() {
 
 /**
  * Remove a figure from internal registries
+ * @param figure A {uwm.diagram.Figure} instance
  */ 
 uwm.diagram.AbstractDiagram.prototype.removeFromCache = function(figure) {
-	var persistencyFigure = figure.getFigure();
-	if (persistencyFigure) {
-		var oid = persistencyFigure.getModelObject().getOid();
+	if (figure) {
+		var oid = figure.getModelObject().getOid();
 		this.figures.removeKey(oid);
 		this.objects.removeKey(oid);
 		if (this.childOids) {
-			this.childOids.remove(persistencyFigure.getOid());
+			this.childOids.remove(figure.getOid());
 		}
 	}
 }
