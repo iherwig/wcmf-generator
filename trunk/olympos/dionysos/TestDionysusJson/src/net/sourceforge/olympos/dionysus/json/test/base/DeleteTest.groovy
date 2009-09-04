@@ -40,13 +40,13 @@ public class DeleteTest extends DionysusTest {
 		request(
 			[
 			 	action: 'delete',
-			 	oid: 'Director:MyOid',
+			 	oid: Cfg.deleteInvalidOid,
 			 	 
 			],
 			{req, json ->
 				assertTrue(json.success)
 				assertEquals('delete', json.action)
-				assertEquals('Director:MyOid', json.oid)
+				assertEquals(Cfg.deleteInvalidOid, json.oid)
 				assertEquals('OID_INVALID', json.errorCode)
 				 
 			},
@@ -61,13 +61,13 @@ public class DeleteTest extends DionysusTest {
 		request(
 			[
 			 	action: 'delete',
-			 	oid: 'MyClass:MyOid',
+			 	oid: Cfg.deleteInvalidClass,
 			 	 
 			],
 			{req, json ->
 				assertTrue(json.success)
 				assertEquals('delete', json.action)
-				assertEquals('MyClass:MyOid', json.oid)
+				assertEquals(Cfg.deleteInvalidClass, json.oid)
 				assertEquals('CLASS_NAME_INVALID', json.errorCode)
 				 
 			},
