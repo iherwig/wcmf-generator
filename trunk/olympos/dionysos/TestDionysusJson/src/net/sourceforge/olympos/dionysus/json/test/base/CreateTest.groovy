@@ -25,7 +25,7 @@ public class CreateTest extends DionysusTest {
 			{req, json ->
 				assertTrue(json.success)
 				assertEquals('create', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
+				assertNotNull(json.oid)
 				
 				 
 			},
@@ -46,7 +46,7 @@ public class CreateTest extends DionysusTest {
 			{req, json ->
 				assertTrue(json.success)
 				assertEquals('create', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
+				assertNull(json.oid)
 				assertEquals('CLASS_NAME_INVALID', json.errorCode)
 				 
 			},
