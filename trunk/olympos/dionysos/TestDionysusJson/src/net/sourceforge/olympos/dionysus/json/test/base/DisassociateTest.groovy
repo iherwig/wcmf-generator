@@ -56,17 +56,41 @@ public class DisassociateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'diassociate',
-			 	sourceOid: 'Myclas:MyOid',
+			 	action: 'disassociate',
+			 	sourceOid: 'Movie:999',
 			 	targetOid: Cfg.readFirstLevelOid,
 			 	role: Cfg.readBaseAttributeName
 			],
 			{req, json ->
 				assertFalse(json.success)
-				assertEquals('diassociate', json.action)
-				assertEquals(Cfg.readBaseOid, json.sourceOid)
+				assertEquals('disassociate', json.action)
+				assertEquals('Movie:999', json.sourceOid)
 				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
 				assertEquals('OID_INVALID', json.errorCode)
+				assertEquals(Cfg.readBaseAttributeName, json.role)
+				
+			},
+			this.method
+		)
+	}
+
+	@Test
+	public void invalidSourceClass() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'disassociate',
+			 	sourceOid: 'Foo:1',
+			 	targetOid: Cfg.readFirstLevelOid,
+			 	role: Cfg.readBaseAttributeName
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('disassociate', json.action)
+				assertEquals('Foo:1', json.sourceOid)
+				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
+				assertEquals('CLASS_NAME_INVALID', json.errorCode)
 				assertEquals(Cfg.readBaseAttributeName, json.role)
 				
 			},
@@ -80,16 +104,16 @@ public class DisassociateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'diassociate',
+			 	action: 'disassociate',
 			 	sourceOid: Cfg.readBaseOid,
-			 	targetOid: 'Myclas:MyOid',
+			 	targetOid: 'Director:999',
 			 	role: Cfg.readBaseAttributeName
 			],
 			{req, json ->
 				assertFalse(json.success)
-				assertEquals('diassociate', json.action)
+				assertEquals('disassociate', json.action)
 				assertEquals(Cfg.readBaseOid, json.sourceOid)
-				assertEquals('Myclas:MyOid', json.targetOid)
+				assertEquals('Director:999', json.targetOid)
 				assertEquals('OID_INVALID', json.errorCode)
 				assertEquals(Cfg.readBaseAttributeName, json.role)
 				
