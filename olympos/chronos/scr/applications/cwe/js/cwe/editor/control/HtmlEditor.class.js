@@ -22,6 +22,8 @@ Ext.namespace("cwe.editor.control");
 cwe.editor.control.HtmlEditor = function(config) {
 	var self = this;
 	
+	config = config || {};
+	
 	cwe.editor.control.HtmlEditor.superclass.constructor.call(this, Ext.apply(this, {
 	    enableAlignments : false,
 	    enableColors : false,

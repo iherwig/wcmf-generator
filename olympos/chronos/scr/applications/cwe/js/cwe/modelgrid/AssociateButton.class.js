@@ -23,8 +23,6 @@ Ext.namespace("cwe.modelgrid");
  *         object.
  * @config role The name of the field the target object is associated to in the
  *         source object.
- * @config isParent Whether the target object should be the parent in the
- *         association.
  * @config sourceOid The oid of the source object.
  * @config sourceHandler The handler function to be called when the button is
  *         pressed. Passing the selected records as only parameter.

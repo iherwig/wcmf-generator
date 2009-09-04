@@ -23,6 +23,8 @@ Ext.namespace("cwe.editor.control");
 cwe.editor.control.ComboBox = function(config) {
 	var self = this;
 	
+	config = config || {};
+	
 	cwe.editor.control.ComboBox.superclass.constructor.call(this, Ext.apply(this, {
 	    store : new Ext.data.Store( {
 		    proxy : new cwe.editor.control.ComboBoxProxy( {

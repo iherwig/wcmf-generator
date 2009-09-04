@@ -38,7 +38,6 @@ Ext.namespace("cwe.editor.control");
  *         value. Must be of type {@link cwe.model.ModelReferenceList}.
  * @config targetCweModelElementId The CweModelElementId of the target Model
  *         Class,
- * @config isParent Whether the target should be associated as parent.
  */
 cwe.editor.control.MultipleAssociate = function(config) {
 };
@@ -53,6 +52,8 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 		};
 		this.clearInvalid = function() {
 		};
+		
+		this.dirty = false;
 		
 		/**
 		 * The model class of the target objects.
@@ -74,6 +75,9 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 		}, {
 		    name : "label",
 		    mapping : "label"
+		}, {
+		    name : "record",
+		    mapping : "record"
 		} ];
 		
 		/**
@@ -166,6 +170,10 @@ cwe.editor.control.MultipleAssociate.prototype.getName = function() {
 	return this.name;
 };
 
+cwe.editor.control.MultipleAssociate.prototype.isDirty = function() {
+	return this.dirty;
+};
+
 /**
  * Sets the value of this form field.
  * 
@@ -175,23 +183,27 @@ cwe.editor.control.MultipleAssociate.prototype.getName = function() {
 cwe.editor.control.MultipleAssociate.prototype.setValue = function(value) {
 	var self = this;
 	var store = this.getStore();
-	var rawRecords = this.editor.getRawRecords();
+	
+	this.dirty = true;
 	
 	if (value) {
 		this.origValue = value;
 		
 		store.removeAll();
 		
-		value.each(function(elem) {
-			var record = new self.recordTemplate( {
-			    oid : elem.getOid(),
-			    label : rawRecords[elem.getOid()].getLabel()
-			});
+		for ( var i = 0; i < value.length; i++) {
+			var currRecord = value[i];
 			
-			store.add(record);
-		});
+			if (currRecord.isModelRecord) {
+				store.add(new this.recordTemplate( {
+				    oid : currRecord.getOid(),
+				    label : currRecord.getLabel(),
+				    record : currRecord
+				}));
+			}
+		}
 	} else {
-		this.origValue = new cwe.model.ModelReferenceList(this.modelClass);
+		this.origValue = [];
 		
 		store.removeAll();
 	}
@@ -222,29 +234,36 @@ cwe.editor.control.MultipleAssociate.prototype.associate = function() {
 	    sourceLabel : this.editor.getLabel(),
 	    roleName : this.getName(),
 	    role : this.dataIndex,
-	    isParent : this.isParent,
 	    singleSelect : false,
 	    sourceOid : this.editor.getOid(),
 	    sourceHandler : function(records) {
-		    var referenceList = new cwe.model.ModelReferenceList(this.modelClass);
+		    var oldValue = self.getValue();
 		    
-		    self.getValue().each(function(item) {
-			    referenceList.add(item.getOid(), item);
-		    });
+		    var newValue = [];
+		    for ( var i = 0; i < oldValue.length; i++) {
+			    newValue.push(oldValue[i]);
+		    }
 		    
-		    for ( var currOid in records) {
-			    var currRecord = records[currOid];
+		    for ( var i = 0; i < records.length; i++) {
+			    var currRecord = records[i];
 			    
-			    if (!(currRecord instanceof Function)) {
-				    if (!referenceList.containsKey(currRecord.getOid())) {
-					    var reference = new cwe.model.ModelReference(currRecord.getOid());
-					    referenceList.add(currRecord.getOid(), reference);
-					    self.editor.addRawRecord(currRecord);
+			    if (currRecord.isModelRecord) {
+				    var alreadyInList = false;
+				    for ( var j = 0; j < oldValue.length; j++) {
+					    var currOldRecord = oldValue[j];
+					    if (currOldRecord.isModelRecord && currRecord.getOid() == currOldRecord.getOid()) {
+						    alreadyInList = true;
+						    break;
+					    }
+				    }
+				    
+				    if (!alreadyInList) {
+					    newValue.push(currRecord);
 				    }
 			    }
 		    }
 		    
-		    self.setValue(referenceList);
+		    self.setValue(newValue);
 		    
 		    grid.removeAssociateButton(button);
 		    self.editor.removeAssociateButton(button);
@@ -267,26 +286,31 @@ cwe.editor.control.MultipleAssociate.prototype.disassociate = function() {
 	var records = this.getSelectionModel().getSelections();
 	
 	if (records && records.length > 0) {
-		var referenceList = new cwe.model.ModelReferenceList(this.modelClass);
+		var newValue = [];
 		
-		store.each(function(item) {
-			var found = false;
-			for ( var i = 0; i < records.length; i++) {
-				var currRecord = records[i];
+		var oldValue = this.getValue();
+		
+		for ( var i = 0; i < oldValue.length; i++) {
+			var currOldRecord = oldValue[i];
+			
+			if (currOldRecord.isModelRecord) {
+				var found = false;
+				for ( var j = 0; j < records.length; j++) {
+					var currRecord = records[j];
+					
+					if (currOldRecord.getOid() == currRecord.get("oid")) {
+						found = true;
+						break;
+					}
+				}
 				
-				if (item.get("oid") == currRecord.get("oid")) {
-					found = true;
-					break;
+				if (!found) {
+					newValue.push(currOldRecord);
 				}
 			}
-			
-			if (!found) {
-				var reference = new cwe.model.ModelReference(item.get("oid"));
-				referenceList.add(reference.getOid(), reference);
-			}
-		});
+		}
 		
-		this.setValue(referenceList);
+		this.setValue(newValue);
 	}
 };
 

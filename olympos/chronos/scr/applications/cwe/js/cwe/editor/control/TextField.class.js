@@ -21,6 +21,8 @@ Ext.namespace("cwe.editor.control");
  */
 cwe.editor.control.TextField = function(config) {
 	var self = this;
+
+	config = config || {};
 	
 	var cls = config.readOnly ? "cwe-field-readOnly" : config.cls;
 	

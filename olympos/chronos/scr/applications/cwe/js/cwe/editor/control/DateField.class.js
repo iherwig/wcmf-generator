@@ -22,8 +22,10 @@ Ext.namespace("cwe.editor.control");
 cwe.editor.control.DateField = function(config) {
 	var self = this;
 	
+	config = config || {};
+	
 	cwe.editor.control.DateField.superclass.constructor.call(this, Ext.apply(this, {
-		format : "d.m.Y"
+		format: "D M d H:i:s T Y"
 	}, config));
 	
 	this.toolTipText = config.toolTip;

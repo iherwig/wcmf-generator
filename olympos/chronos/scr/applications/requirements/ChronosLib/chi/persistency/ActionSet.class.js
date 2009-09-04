@@ -55,9 +55,9 @@ chi.persistency.ActionSet.prototype.addList = function(cweModelElementId, limit,
 	};
 }
 
-chi.persistency.ActionSet.prototype.addLoad = function(oid, depth, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addRead = function(oid, depth, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "load",
+		action : "read",
 		oid : oid,
 		depth : depth,
 		successHandler : successHandler,
@@ -66,22 +66,21 @@ chi.persistency.ActionSet.prototype.addLoad = function(oid, depth, successHandle
 	};
 }
 
-chi.persistency.ActionSet.prototype.addSave = function(oid, values, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addUpdate = function(oid, attributes, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "save",
+		action : "update",
 		oid : oid,
-		values : values,
+		attributes : attributes,
 		successHandler : successHandler,
 		errorHandler : errorHandler,
 		errorLevel : errorLevel
 	};
 }
 
-chi.persistency.ActionSet.prototype.addCreate = function(cweModelElementId, values, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addCreate = function(cweModelElementId, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action : "create",
 		cweModelElementId : cweModelElementId,
-		values : values,
 		successHandler : successHandler,
 		errorHandler : errorHandler,
 		errorLevel : errorLevel
@@ -98,11 +97,11 @@ chi.persistency.ActionSet.prototype.addDestroy = function(oid, successHandler, e
 	};
 }
 
-chi.persistency.ActionSet.prototype.addAssociate = function(parentOid, childOid, role, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addAssociate = function(sourceOid, targetOid, role, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action : "associate",
-		parentOid : parentOid,
-		childOid : childOid,
+		sourceOid : sourceOid,
+		targetOid : targetOid,
 		role : role,
 		successHandler : successHandler,
 		errorHandler : errorHandler,
@@ -110,11 +109,11 @@ chi.persistency.ActionSet.prototype.addAssociate = function(parentOid, childOid,
 	};
 }
 
-chi.persistency.ActionSet.prototype.addDisassociate = function(parentOid, childOid, role, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addDisassociate = function(sourceOid, targetOid, role, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action : "disassociate",
-		parentOid : parentOid,
-		childOid : childOid,
+		sourceOid : sourceOid,
+		targetOid : targetOid,
 		role : role,
 		successHandler : successHandler,
 		errorHandler : errorHandler,
@@ -122,31 +121,11 @@ chi.persistency.ActionSet.prototype.addDisassociate = function(parentOid, childO
 	};
 }
 
-chi.persistency.ActionSet.prototype.addLock = function(oid, successHandler, errorHandler, errorLevel) {
-	this.requests[this.getNextId()] = {
-		action : "lock",
-		oid : oid,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
-	};
-}
-
-chi.persistency.ActionSet.prototype.addUnlock = function(oid, successHandler, errorHandler, errorLevel) {
-	this.requests[this.getNextId()] = {
-		action : "unlock",
-		oid : oid,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
-	};
-}
-
-chi.persistency.ActionSet.prototype.addLog = function(logtype, msg, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addLog = function(type, message, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 		action : "log",
-		logtype : logtype,
-		msg : msg,
+		type : type,
+		message : message,
 		successHandler : successHandler,
 		errorHandler : errorHandler,
 		errorLevel : errorLevel
@@ -189,18 +168,19 @@ chi.persistency.ActionSet.prototype.successHandler = function(request, data, get
 	
 	for ( var currActionName in this.requests) {
 		var currRequest = this.requests[currActionName];
+		currRequest.localParams = currRequest;
 		
 		if (!(currRequest instanceof Function)) {
 			var currResponse = getResponseHandler(data, currActionName);
 			
 			if (currResponse) {
-				persistency.processSuccessHandler(currRequest.successHandler, request.recordHandlers[currActionName]("SUCCESS", currRequest, currResponse.data));
+				persistency.processSuccessHandler(currRequest.successHandler, request.recordHandlers[currActionName]("SUCCESS", currRequest, currResponse));
 			} else {
 				if (currRequest.errorLevel > errorLevel) {
 					errorLevel = currRequest.errorLevel;
 				}
 				
-				persistency.processErrorHandler(currRequest.errorHandler, request.recordHandlers[currActionName]("ERROR", currRequest, currResponse.data), currResponse.errorMsg);
+				persistency.processErrorHandler(currRequest.errorHandler, request.recordHandlers[currActionName]("ERROR", currRequest, currResponse), currResponse.errorMsg);
 				
 				if (currRequest.errorLevel == chi.persistency.ActionSet.errorLevels.ERROR) {
 					throw new Error(chi.Dict.translate("Critical Persistency Error") + ": " + currResponse.errorMsg);

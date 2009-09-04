@@ -22,6 +22,8 @@ Ext.namespace("cwe.editor.control");
 cwe.editor.control.PasswordField = function(config) {
 	var self = this;
 	
+	config = config || {};
+	
 	cwe.editor.control.PasswordField.superclass.constructor.call(this, Ext.apply(this, {
 		inputType : "password"
 	}, config));

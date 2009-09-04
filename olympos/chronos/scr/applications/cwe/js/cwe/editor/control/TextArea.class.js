@@ -22,6 +22,8 @@ Ext.namespace("cwe.editor.control");
 cwe.editor.control.TextArea = function(config) {
 	var self = this;
 	
+	config = config || {};
+	
 	var cls = config.readOnly ? "uwm-field-readOnly" : config.cls;
 	
 	cwe.editor.control.TextArea.superclass.constructor.call(this, Ext.apply(this, {

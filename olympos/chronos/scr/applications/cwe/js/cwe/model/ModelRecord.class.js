@@ -28,10 +28,9 @@ Ext.namespace("cwe.model");
  *            data A map containing attribute names as keys and initial values
  *            as map values.
  */
-cwe.model.ModelRecord = function(modelClass, data) {
-	// FIXME: Temporary workaround as long as not all model elements exist
+cwe.model.ModelRecord = function(modelClass, oid, data) {
 	if (!modelClass) {
-		modelClass = cwe.model.ModelClassContainer.getInstance().getClass("ChiGoal");
+		throw ("No modelClass passed to ModelRecord constructor.");
 	}
 	
 	if (!data) {
@@ -42,6 +41,14 @@ cwe.model.ModelRecord = function(modelClass, data) {
 	
 	var result = new template(data);
 	result.modelClass = modelClass;
+	
+	result.isModelRecord = true;
+	
+	if (oid) {
+		result.oid = oid;
+	} else {
+		result.oid = "{" + modelClass.getId() + ":?}";
+	}
 	
 	for ( var currElem in this) {
 		result[currElem] = this[currElem];
@@ -69,7 +76,7 @@ cwe.model.ModelRecord.prototype.getModelClass = function() {
  * @type String
  */
 cwe.model.ModelRecord.prototype.getOid = function() {
-	return this.get("oid");
+	return this.oid;
 };
 
 /**
@@ -83,7 +90,7 @@ cwe.model.ModelRecord.prototype.getOid = function() {
  *            oid The oid to set.
  */
 cwe.model.ModelRecord.prototype.setOid = function(oid) {
-	this.set("oid", oid);
+	this.oid = oid;
 };
 
 /**
@@ -131,7 +138,7 @@ cwe.model.ModelRecord.prototype.set = function(name, value) {
 /**
  * Persists this record.
  */
-cwe.model.ModelRecord.prototype.commit = function(silent, activitySet) {
+cwe.model.ModelRecord.prototype.commit = function(actionSet) {
 	if (this.dirty) {
 		var changedFields = this.getChanges();
 		
@@ -139,74 +146,118 @@ cwe.model.ModelRecord.prototype.commit = function(silent, activitySet) {
 		var foundSimpleField = false;
 		var foundField = false;
 		
-		var actionSet = new chi.persistency.ActionSet();
+		var isActionSetPassed = true && actionSet;
+		
+		if (!actionSet) {
+			actionSet = new chi.persistency.ActionSet();
+		}
 		
 		var self = this;
 		
 		for ( var currField in changedFields) {
 			var currValue = changedFields[currField];
+			var currType = this.fields.get(currField).type;
 			
 			if (!(currValue instanceof Function)) {
-				if (!(currValue instanceof cwe.model.ModelReferenceList)) {
+				if (!Ext.isArray(currValue) && currValue != null && !(currValue.isModelRecord)) {
 					foundField = true;
 					foundSimpleField = true;
 					
-					simpleFields[currField] = currValue;
+					if (currType == "auto" || currType == "text") {
+						simpleFields[currField] = currValue;
+					} else if (currValue && (!currValue.trim || currValue.trim() != "")) {
+						switch (currType) {
+							case "date":
+								simpleFields[currField] = currValue.format("D M d H:i:s T Y");
+								break;
+							
+							case "float":
+								simpleFields[currField] = parseFloat(currValue);
+								break;
+							
+							case "int":
+								simpleFields[currField] = parseInt(currValue);
+								break;
+							
+							case "number":
+								simpleFields[currField] = Number(currValue);
+								break;
+							
+							case "bool":
+							case "boolean":
+								simpleFields[currField] = true || currValue;
+								break;
+							
+							default:
+								throw "Unkonwn record attribute type: " + currType;
+						}
+					}
 				} else {
-					var oldAssociates = this.modified[currField];
-					
-					if (!oldAssociates) {
-						oldAssociates = new cwe.model.ModelReferenceList(this.getModelClass().getTargetModelClass(currField));
+					var oldAssociates = this.modified[currField] || [];
+					if (!Ext.isArray(oldAssociates)) {
+						oldAssociates = [ oldAssociates ];
 					}
 					
-					var toDisassociate = oldAssociates.except(currValue);
-					var toAssociate = currValue.except(oldAssociates);
+					currValue = currValue || [];					
+					if (!Ext.isArray(currValue)) {
+						currValue = [currValue];
+					}
 					
-					toDisassociate.each(function(elem) {
+					var toDisassociate = this.except(oldAssociates, currValue);
+					var toAssociate = this.except(currValue, oldAssociates);
+					
+					for ( var i = 0; i < toDisassociate.length; i++) {
+						var currElem = toDisassociate[i];
+						
 						foundField = true;
 						
-						var parentOid;
-						var childOid;
-						
-						if (self.getModelClass().isParent(currField)) {
-							parentOid = elem.getOid();
-							childOid = self.getOid();
-						} else {
-							parentOid = self.getOid();
-							childOid = elem.getOid();
-						}
-						
-						actionSet.addDisassociate(parentOid, childOid);
-					});
+						actionSet.addDisassociate(self.getOid(), currElem.getOid(), currField);
+					}
 					
-					toAssociate.each(function(elem) {
+					for ( var i = 0; i < toAssociate.length; i++) {
+						var currElem = toAssociate[i];
+						
 						foundField = true;
 						
-						var parentOid;
-						var childOid;
-						
-						if (self.getModelClass().isParent(currField)) {
-							parentOid = elem.getOid();
-							childOid = self.getOid();
-						} else {
-							parentOid = self.getOid();
-							childOid = elem.getOid();
-						}
-						
-						actionSet.addAssociate(parentOid, childOid);
-					});
+						actionSet.addAssociate(self.getOid(), currElem.getOid(), currField);
+					}
 				}
 			}
 		}
 		
 		if (foundSimpleField) {
-			actionSet.addSave(this.getOid(), simpleFields);
+			actionSet.addUpdate(this.getOid(), simpleFields, function(data) {
+				self.setOid(data.oid);
+			});
 		}
 		
-		if (foundField) {
+		if (foundField && !isActionSetPassed) {
 			actionSet.commit();
 		}
 	}
 	
 	this.dirty = false;
+};
+
+cwe.model.ModelRecord.prototype.except = function(completeArray, arrayToRemove) {
+	var result = [];
+	
+	for ( var i = 0; i < completeArray.length; i++) {
+		var completeOid = completeArray[i].getOid();
+		
+		var found = false;
+		
+		for ( var j = 0; j < arrayToRemove.length; j++) {
+			if (completeOid == arrayToRemove[j].getOid()) {
+				found = true;
+				break;
+			}
+		}
+		
+		if (!found) {
+			result.push(completeArray[i]);
+		}
+	}
+	
+	return result;
 };
