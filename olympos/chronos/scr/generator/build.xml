@@ -9,6 +9,9 @@
         <fileset dir="${lib.dir}/openoffice">
             <include name="*.jar"/>
         </fileset>
+    	<fileset dir="${lib.dir}/ant">
+    		<include name="*.jar"/>
+    	</fileset>
     </path>
 
 	<target name="clean">
@@ -69,9 +72,12 @@
 				<include name="metamodel/**/*.*"/>
 				<include name="workflow/**/*.*"/>
 			</fileset>
+			<fileset dir=".">
+				<include name="${build.info}"/>
+				<include name="wcmf/**/*.*"/>
+			</fileset>
+			<fileset file="${res.dir}/run.bat" />
 		</copy>
-		<copy file="${res.dir}/run.bat" todir="${redist.dir}"/>
-		<copy file="${build.info}" todir="${redist.dir}"/>
 
 		<zip destfile="${zip.dir}/ChronosGenerator-${version}.zip" basedir="${redist.dir}"/>
 	</target>
