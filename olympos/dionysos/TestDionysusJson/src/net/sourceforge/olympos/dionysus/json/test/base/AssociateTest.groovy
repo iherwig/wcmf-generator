@@ -42,16 +42,40 @@ public class AssociateTest extends DionysusTest {
 		request(
 			[
 			 	action: 'associate',
-			 	sourceOid: 'Myclas:MyOid',
+			 	sourceOid: 'Movie:999',
 			 	targetOid: Cfg.readFirstLevelOid,
 			 	role: Cfg.readBaseAttributeName
 			],
 			{req, json ->
 				assertFalse(json.success)
 				assertEquals('associate', json.action)
-				assertEquals(Cfg.readBaseOid, json.sourceOid)
+				assertEquals('Movie:999', json.sourceOid)
 				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
 				assertEquals('OID_INVALID', json.errorCode)
+				assertEquals(Cfg.readBaseAttributeName, json.role)
+				
+			},
+			this.method
+		)
+	}
+
+	@Test
+	public void invalidSourceClass() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'associate',
+			 	sourceOid: 'Foo:1',
+			 	targetOid: Cfg.readFirstLevelOid,
+			 	role: Cfg.readBaseAttributeName
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('associate', json.action)
+				assertEquals('Foo:1', json.sourceOid)
+				assertEquals(Cfg.readFirstLevelOid, json.targetOid)
+				assertEquals('CLASS_NAME_INVALID', json.errorCode)
 				assertEquals(Cfg.readBaseAttributeName, json.role)
 				
 			},
@@ -67,15 +91,39 @@ public class AssociateTest extends DionysusTest {
 			[
 			 	action: 'associate',
 			 	sourceOid: Cfg.readBaseOid,
-			 	targetOid: 'Myclas:MyOid',
+			 	targetOid: 'Director:999',
 			 	role: Cfg.readBaseAttributeName
 			],
 			{req, json ->
 				assertFalse(json.success)
 				assertEquals('associate', json.action)
 				assertEquals(Cfg.readBaseOid, json.sourceOid)
-				assertEquals('Myclas:MyOid', json.targetOid)
+				assertEquals('Director:999', json.targetOid)
 				assertEquals('OID_INVALID', json.errorCode)
+				assertEquals(Cfg.readBaseAttributeName, json.role)
+				
+			},
+			this.method
+		)
+	}
+
+	@Test
+	public void invalidTargetClass() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'associate',
+			 	sourceOid: Cfg.readBaseOid,
+			 	targetOid: 'Foo:1',
+			 	role: Cfg.readBaseAttributeName
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('associate', json.action)
+				assertEquals(Cfg.readBaseOid, json.sourceOid)
+				assertEquals('Foo:1', json.targetOid)
+				assertEquals('CLASS_NAME_INVALID', json.errorCode)
 				assertEquals(Cfg.readBaseAttributeName, json.role)
 				
 			},
