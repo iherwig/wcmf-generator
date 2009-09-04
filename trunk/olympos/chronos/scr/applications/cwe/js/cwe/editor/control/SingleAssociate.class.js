@@ -34,7 +34,6 @@ Ext.namespace("cwe.editor.control");
  *            config The configuration object.
  * @config targetCweModelElementId The CweModelElementId of the target Model
  *         Class,
- * @config isParent Whether the target should be associated as parent.
  */
 cwe.editor.control.SingleAssociate = function(config) {
 };
@@ -91,11 +90,11 @@ cwe.editor.control.SingleAssociate.prototype.setValue = function(value) {
 	if (value) {
 		this.origValue = value;
 		
-		this.associatedOid = value.first().getOid();
+		this.associatedOid = value.getOid();
 		
 		cwe.editor.control.SingleAssociate.superclass.setValue.call(this, this.getValueLabel());
 	} else {
-		this.origValue = new cwe.model.ModelReferenceList(this.modelClass);
+		this.origValue = null;
 		this.associatedOid = null;
 		cwe.editor.control.SingleAssociate.superclass.setValue.call(this, "");
 	}
@@ -120,10 +119,8 @@ cwe.editor.control.SingleAssociate.prototype.getValue = function() {
 cwe.editor.control.SingleAssociate.prototype.getValueLabel = function() {
 	var result = null;
 	
-	if (this.associatedOid) {
-		var associateRecord = this.editor.getRawRecords()[this.associatedOid];
-		
-		result = associateRecord.getLabel();
+	if (this.origValue) {
+		result = this.origValue.getLabel();
 	}
 	
 	return result;
@@ -144,19 +141,12 @@ cwe.editor.control.SingleAssociate.prototype.onTrigger1Click = function() {
 	    sourceLabel : this.editor.getLabel(),
 	    roleName : this.getName(),
 	    role : this.dataIndex,
-	    isParent : this.isParent,
 	    singleSelect : true,
 	    sourceOid : this.editor.getOid(),
 	    sourceHandler : function(records) {
 		    var record = records[0];
 		    
-		    var referenceList = new cwe.model.ModelReferenceList(this.modelClass);
-		    var reference = new cwe.model.ModelReference(record.getOid());
-		    
-		    referenceList.add(record.getOid(), reference);
-		    self.editor.addRawRecord(record);
-		    
-		    self.setValue(referenceList);
+		    self.setValue(record);
 		    
 		    grid.removeAssociateButton(button);
 		    self.editor.removeAssociateButton(button);
@@ -175,7 +165,7 @@ cwe.editor.control.SingleAssociate.prototype.onTrigger1Click = function() {
  * @private
  */
 cwe.editor.control.SingleAssociate.prototype.onTrigger2Click = function() {
-	if (this.associatedOid) {
+	if (this.origValue) {
 		this.setValue(null);
 	}
 };
@@ -186,7 +176,7 @@ cwe.editor.control.SingleAssociate.prototype.onTrigger2Click = function() {
  * @private
  */
 cwe.editor.control.SingleAssociate.prototype.onTrigger3Click = function() {
-	if (this.associatedOid) {
+	if (this.origValue) {
 		var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getEditors();
 		editors.loadOrShow(this.associatedOid, this.getValueLabel());
 	}

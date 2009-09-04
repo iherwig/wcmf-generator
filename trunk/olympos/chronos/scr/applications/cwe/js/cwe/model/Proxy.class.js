@@ -39,7 +39,7 @@ cwe.model.Proxy.prototype.load = function(params, reader, callback, scope, arg) 
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
-		chi.persistency.Persistency.getInstance().list(this.modelClass.getId(), params.limit, params.start, params.sort, params.dir, function(data) {
+		chi.persistency.Persistency.getInstance().list(this.modelClass.getId(), params.limit, params.start, params.sort, params.dir ? params.dir.toLowerCase() : undefined, function(data) {
 			self.loadResponse(params, data, callback, scope, arg);
 		}, function(data, errorMsg) {
 			self.loadFailed(params, data, errorMsg, callback, scope, arg);

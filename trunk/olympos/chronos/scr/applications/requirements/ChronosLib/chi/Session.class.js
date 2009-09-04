@@ -30,7 +30,7 @@ chi.Session = function() {
 	 * 
 	 * @type String
 	 */
-	this.persistencyClass = "chi.persistency.WcmfJson";
+	this.persistencyClass = "chi.persistency.DionysosJson";
 	
 	/**
 	 * The language selected for application UI.

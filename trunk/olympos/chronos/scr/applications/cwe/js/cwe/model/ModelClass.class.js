@@ -47,10 +47,8 @@ cwe.model.ModelClass = function() {
 	 * 
 	 * <p>
 	 * Contains a map with attribute name as key and another map as value. The
-	 * inner map contains two fields:
+	 * inner map contains (at the moment) one field:
 	 * <ul>
-	 * <li><code>isParent</code> of type <code>boolean</code> determines
-	 * whether the target object is the parent object.</li>
 	 * <li><code>targetModelClassid</code> of type <code>String</code>
 	 * contains the unique id of the target Model Class.</li>
 	 * </ul>
@@ -144,28 +142,6 @@ cwe.model.ModelClass.prototype.getEditorItems = function() {
  */
 cwe.model.ModelClass.prototype.getLabel = function(record) {
 	return record.get("Name");
-};
-
-/**
- * Returns whether the target Model Class of the given field is a parent.
- * 
- * @param {String}
- *            fieldName The name of the field of the target Model Class.
- * @return Whether the target Model Class of the given field is a parent.
- * @type boolean
- */
-cwe.model.ModelClass.prototype.isParent = function(fieldName) {
-	var result = false;
-	
-	if (this.relations) {
-		var relation = this.relations[fieldName];
-		
-		if (relation) {
-			result = relation.isParent;
-		}
-	}
-	
-	return result;
 };
 
 /**

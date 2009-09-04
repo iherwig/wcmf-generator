@@ -16,7 +16,7 @@ Ext.namespace("cwe.Config");
  * 
  * @type String
  */
-cwe.Config.jsonUrl = "../application/main.php";
+cwe.Config.jsonUrl = "../gui";
 
 /**
  * Title of this application.
@@ -65,7 +65,7 @@ cwe.Config.getPortlets = function() {
 	}), new Ext.ux.PortalColumn( {
 	    columnWidth : .5,
 	    style : "margin: 5px",
-	    items : [ new cwe.dashboard.ChartPortlet( {
+	    items : [/* new cwe.dashboard.ChartPortlet( {
 	        cweModelElementId : "ChiRequirement",
 	        limit : 50,
 	        valueAttribute : "Priority",
@@ -73,7 +73,7 @@ cwe.Config.getPortlets = function() {
 	        sortDirection : "desc"
 	    }), new cwe.dashboard.MapPortlet( {
 		    cweModelElementId : "ChiGoal"
-	    }) ]
+	    }) */]
 	}) ];
 };
 

@@ -52,15 +52,15 @@ chi.persistency.Persistency.prototype.list = function(cweModelElementId, limit, 
 	throw "Method chi.persistency.Persistency.list not implemented by current persistency adapter.";
 }
 
-chi.persistency.Persistency.prototype.load = function(oid, depth, successHandler, errorHandler) {
-	throw "Method chi.persistency.Persistency.load not implemented by current persistency adapter.";
+chi.persistency.Persistency.prototype.read = function(oid, depth, successHandler, errorHandler) {
+	throw "Method chi.persistency.Persistency.read not implemented by current persistency adapter.";
 }
 
-chi.persistency.Persistency.prototype.save = function(oid, values, successHandler, errorHandler) {
-	throw "Method chi.persistency.Persistency.save not implemented by current persistency adapter.";
+chi.persistency.Persistency.prototype.update = function(oid, values, successHandler, errorHandler) {
+	throw "Method chi.persistency.Persistency.update not implemented by current persistency adapter.";
 }
 
-chi.persistency.Persistency.prototype.create = function(cweModelElementId, values, successHandler, errorHandler) {
+chi.persistency.Persistency.prototype.create = function(cweModelElementId, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.create not implemented by current persistency adapter.";
 }
 
@@ -74,14 +74,6 @@ chi.persistency.Persistency.prototype.associate = function(parentOid, childOid, 
 
 chi.persistency.Persistency.prototype.disassociate = function(parentOid, childOid, role, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.disassociate not implemented by current persistency adapter.";
-}
-
-chi.persistency.Persistency.prototype.lock = function(oid, successHandler, errorHandler) {
-	throw "Method chi.persistency.Persistency.lock not implemented by current persistency adapter.";
-}
-
-chi.persistency.Persistency.prototype.unlock = function(oid, successHandler, errorHandler) {
-	throw "Method chi.persistency.Persistency.unlock not implemented by current persistency adapter.";
 }
 
 chi.persistency.Persistency.prototype.log = function(logtype, message, successHandler, errorHandler) {

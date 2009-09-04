@@ -21,6 +21,8 @@ Ext.namespace("cwe.editor.control");
  */
 cwe.editor.control.Checkbox = function(config) {
 	var self = this;
+
+	config = config || {};
 	
 	cwe.editor.control.Checkbox.superclass.constructor.call(this, Ext.apply(this, {}, config));
 	

@@ -10,7 +10,7 @@
 		<link rel="stylesheet" type="text/css" href="css/common.css" />
 		<link rel="stylesheet" type="text/css" href="css/modelClass.css" />
 
-		<script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAA2CKu_qQN-JHtlfQ5L7BLlRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQl3I3p2yrGARYK4f4bkjp9NHpm5w" type="text/javascript"></script>
+		<!script src="http://maps.google.com/maps?file=api&amp;v=2.x&amp;key=ABQIAAAA2CKu_qQN-JHtlfQ5L7BLlRT2yXp_ZAY8_ufC3CFXhHIE1NvwkxQl3I3p2yrGARYK4f4bkjp9NHpm5w" type="text/javascript"></script>
 
 		<script type="text/javascript" src="../ChronosLib/ext/adapter/ext/ext-base.js">
 		</script>
@@ -48,7 +48,7 @@
 		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/persistency/Persistency.class.js">
 		</script>
-		<script type="text/javascript" src="../ChronosLib/chi/persistency/WcmfJson.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/persistency/DionysosJson.class.js">
 		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/persistency/ActionSet.class.js">
 		</script>
@@ -159,235 +159,15 @@
 
 		<!--Start include application-->
 		
-		<script type="text/javascript" src="js/application/application/include/Include_package.class.js">
+		<script type="text/javascript" src="js/application/JsonTest/JsonTest_package.class.js">
 		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/Model_package.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/Activity_package.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/configuration/Configuration_package.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/wcmf/Wcmf_package.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/UseCases_package.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/Requirements_package.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/Domain_package.class.js">
-		</script>
-
 		
-		<script type="text/javascript" src="js/application/application/include/model/activity/ActivitySet.class.js">
+		<script type="text/javascript" src="js/application/JsonTest/MoMarktplatz.class.js">
 		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/ChiObject.class.js">
+		<script type="text/javascript" src="js/application/JsonTest/StromProdukt.class.js">
 		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/NMActivityActivityDecision.class.js">
+		<script type="text/javascript" src="js/application/JsonTest/Preis.class.js">
 		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/NMActivityChiObject.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/Activity.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/ActivityDecision.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/ActivityReceive.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/ActivitySend.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/ActivityInitial.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/activity/ActivityFinal.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/configuration/ChiSystem.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/wcmf/Adodbseq.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/wcmf/Locktable.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/wcmf/NMUserRole.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/wcmf/RoleRDB.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/wcmf/UserRDB.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/Actor.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiWorker.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessPartner.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessProcess.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessUseCase.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessUseCaseCore.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessPartnerActive.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessPartnerPassive.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiWorkerExternal.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiWorkerInternal.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/UseCases/NMUCActor.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiGoal.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiRequirement.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiFeature.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiIssue.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiFeatureStatus.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiGoalType.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiRequirementStatus.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiRequirementType.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/requirements/NMFeatureRequirements.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiActionKey.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiClass.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiValueRef.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/NMChiControllerActionKeyChiController.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/NMChiControllerActionKeyChiView.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/Property.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiNode.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiController.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiView.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiAuthors.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiValue.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/DisplayType.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/InputType.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/NMChiControllerChiController.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/ChiAssociation.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/Operation.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/Relation.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/RelationMultiplicity.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/domain/RelationType.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/ChiBaseStatus.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/Counter.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/History.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/Translation.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/EntityBase.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/EntityBaseExtended.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/Figure.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/ChiBase.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/Model.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/Package.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/Diagram.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/Glossary.class.js">
-		</script>
-
-		<script type="text/javascript" src="js/application/application/include/model/NMFiguresDiagram.class.js">
-		</script>
-
 		<!--End include application-->
 								
 

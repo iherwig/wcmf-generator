@@ -22,6 +22,8 @@ Ext.namespace("cwe.editor.control");
 cwe.editor.control.Radio = function(config) {
 	var self = this;
 	
+	config = config || {};
+	
 	cwe.editor.control.Radio.superclass.constructor.call(this, Ext.apply(this, {}, config));
 	
 	this.toolTipText = config.toolTip;

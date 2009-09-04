@@ -44,12 +44,12 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		var self = this;
 		
 		/**
-		 * All records loaded by this object, with oid as key.
+		 * The record of this editor.
 		 * 
 		 * @private
 		 * @type Object
 		 */
-		this.rawRecords = {};
+		this.record = null;
 		
 		/**
 		 * The button for saving the object.
@@ -58,11 +58,11 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		 * @type Ext.Toolbar.Button
 		 */
 		this.saveButton = new Ext.Toolbar.Button( {
-			text : chi.Dict.translate("Save"),
-			iconCls : "saveButton",
-			handler : function() {
-				self.save();
-			}
+		    text : chi.Dict.translate("Save"),
+		    iconCls : "saveButton",
+		    handler : function() {
+			    self.save();
+		    }
 		});
 		
 		/**
@@ -72,11 +72,11 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		 * @type Ext.Toolbar.Button
 		 */
 		this.cancelButton = new Ext.Toolbar.Button( {
-			text : chi.Dict.translate("Cancel"),
-			iconCls : "cancelButton",
-			handler : function() {
-				self.cancel();
-			}
+		    text : chi.Dict.translate("Cancel"),
+		    iconCls : "cancelButton",
+		    handler : function() {
+			    self.cancel();
+		    }
 		});
 		
 		/**
@@ -92,16 +92,16 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		this.associateButtons = new Ext.util.MixedCollection();
 		
 		Ext.apply(this, {
-			iconCls : this.modelClass.getTreeIconClass(),
-			bodyStyle: "padding: 5px;",
-			closable : true,
-			frame : false,
-			autoScroll : true,
-			labelAlign : "left",
-			labelWidth : 200,
-			tbar : [ this.saveButton, this.cancelButton ],
-			items : this.modelClass.getEditorItems(),
-			msgTarget : "side"
+		    iconCls : this.modelClass.getTreeIconClass(),
+		    bodyStyle : "padding: 5px;",
+		    closable : true,
+		    frame : false,
+		    autoScroll : true,
+		    labelAlign : "left",
+		    labelWidth : 200,
+		    tbar : [ this.saveButton, this.cancelButton ],
+		    items : this.modelClass.getEditorItems(),
+		    msgTarget : "side"
 		});
 		
 		this.propagateEditor(this.items);
@@ -172,27 +172,25 @@ cwe.editor.Editor.prototype.save = function() {
 		var record = this.getRecord();
 		
 		this.getForm().updateRecord(record);
+		this.setTitle(record.getLabel());
 		record.commit();
 	} else {
 		var record = new cwe.model.ModelRecord(this.modelClass);
 		
 		this.getForm().updateRecord(record);
 		
-		var changedFields = record.getChanges();
-		
 		var self = this;
 		
-		chi.persistency.Persistency.getInstance().create(this.modelClass.getId(), changedFields, function(data) {
-			record.setOid(data.newOid);
-			
-			self.rawRecords = {};
-			self.oid = data.newOid;
-			self.rawRecords[data.newOid] = record;
-			self.editorContainer.addEditor(data.newOid, self);
-		});
+		var actionSet = new chi.persistency.ActionSet();
 		
-		this.setTitle(record.getLabel());
-		this.newObject = false;
+		actionSet.addCreate(this.modelClass.getId());
+		
+		record.commit(actionSet);
+		
+		actionSet.commit(function(data) {
+			self.loadRecord(record);
+			self.newObject = false;
+		});
 	}
 };
 
@@ -219,7 +217,7 @@ cwe.editor.Editor.prototype.cancel = function() {
  * @type cwe.model.ModelRecord
  */
 cwe.editor.Editor.prototype.getRecord = function() {
-	return this.rawRecords[this.oid];
+	return this.record;
 };
 
 /**
@@ -253,26 +251,6 @@ cwe.editor.Editor.prototype.getModelClass = function() {
 };
 
 /**
- * Returns all records loaded with this object with oid as key.
- * 
- * @return All Records loaded with this object with oid as key.
- * @return Object
- */
-cwe.editor.Editor.prototype.getRawRecords = function() {
-	return this.rawRecords;
-};
-
-/**
- * Adds a record to the list of all loaded records.
- * 
- * @param {cwe.model.ModelRecord}
- *            record The record to add.
- */
-cwe.editor.Editor.prototype.addRawRecord = function(record) {
-	this.rawRecords[record.getOid()] = record;
-};
-
-/**
  * Loads the object to edit from persistency.
  * 
  * @private
@@ -282,10 +260,16 @@ cwe.editor.Editor.prototype.addRawRecord = function(record) {
 cwe.editor.Editor.prototype.loadFromOid = function(oid) {
 	var self = this;
 	
-	chi.persistency.Persistency.getInstance().load(oid, 1, function(data) {
-		self.rawRecords = data.records;
-		self.getForm().loadRecord(data.records[data.oid]);
+	chi.persistency.Persistency.getInstance().read(oid, 1, function(data) {
+		self.loadRecord(data.record);
 	});
+};
+
+cwe.editor.Editor.prototype.loadRecord = function(record) {
+	this.record = record;
+	this.oid = record.getOid();
+	this.getForm().loadRecord(record);
+	this.setTitle(record.getLabel());
 };
 
 /**
@@ -298,8 +282,8 @@ cwe.editor.Editor.prototype.loadFromOid = function(oid) {
  */
 cwe.editor.Editor.prototype.addAssociateButton = function(grid, button) {
 	this.associateButtons.add(button, {
-		grid : grid,
-		button : button
+	    grid : grid,
+	    button : button
 	});
 };
 
