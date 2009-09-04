@@ -19,16 +19,37 @@ public class UpdateTest extends DionysusTest {
 		request(
 			[
 			 	action: 'update',
-			 	oid: Cfg.readBaseOid,			 	 
+			 	oid: Cfg.updateOid,			 	 
 			 	attributes: Cfg.attributes
 			],
 			{req, json ->
 				assertTrue(json.success)
 				assertEquals('update', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(Cfg.lastChange, json.lastChange)
-				assertEquals(Cfg.attributes, json.attributes)
+				assertEquals(Cfg.updateOid, json.oid)
+				assertNotNull(json.attributes)
 				
+				
+			},
+			this.method
+		)
+	}
+
+	@Test
+	public void invalidClassName() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'update',
+			 	oid: 'MyClass:MyId',
+			 	attributes: Cfg.attributes
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('update', json.action)
+				assertEquals('MyClass:MyId', json.oid)				 
+				assertNotNull(json.attributes)
+				assertEquals('CLASS_NAME_INVALID', json.errorCode)
 				
 			},
 			this.method
@@ -42,15 +63,14 @@ public class UpdateTest extends DionysusTest {
 		request(
 			[
 			 	action: 'update',
-			 	oid: 'MyClass:MyId',
+			 	oid: 'com.ibm.eenergy.core.moma.objects.Preis:MyId',
 			 	attributes: Cfg.attributes
 			],
 			{req, json ->
 				assertFalse(json.success)
 				assertEquals('update', json.action)
-				assertEquals('MyClass:MyId', json.oid)
-				assertEquals(Cfg.lastChange, json.lastChange)
-				assertEquals(Cfg.attributes, json.attributes)
+				assertEquals('com.ibm.eenergy.core.moma.objects.Preis:MyId', json.oid)				 
+				assertNotNull(json.attributes)
 				assertEquals('OID_INVALID', json.errorCode)
 				
 			},
@@ -65,15 +85,14 @@ public class UpdateTest extends DionysusTest {
 		request(
 			[
 			 	action: 'update',
-			 	oid: Cfg.readBaseOid,
+			 	oid: Cfg.updateOid,
 			 	attributes: Cfg.wrongAttributeName
 			],
 			{req, json ->
 				assertFalse(json.success)
 				assertEquals('update', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(Cfg.lastChange, json.lastChange)
-				assertEquals(Cfg.wrongAttributeName, json.attributes)
+				assertEquals(Cfg.updateOid, json.oid)
+				assertNotNull(json.attributes)
 				assertEquals('ATTRIBUTE_NAME_INVALID', json.errorCode)
 				
 			},
@@ -88,15 +107,14 @@ public class UpdateTest extends DionysusTest {
 		request(
 			[
 			 	action: 'update',
-			 	oid: Cfg.readBaseOid,
+			 	oid: Cfg.updateOid,
 			 	attributes: Cfg.wrongAttributeValue
 			],
 			{req, json ->
-				assertTrue(json.success)
+				assertFalse(json.success)
 				assertEquals('update', json.action)
-				assertEquals(Cfg.readBaseOid, json.oid)
-				assertEquals(Cfg.lastChange, json.lastChange)
-				assertEquals(Cfg.wrongAttributeValue, json.attributes)
+				assertEquals(Cfg.updateOid, json.oid)
+				assertNotNull(json.attributes)
 				assertEquals('ATTRIBUTE_VALUE_INVALID', json.errorCode)
 				
 			},
