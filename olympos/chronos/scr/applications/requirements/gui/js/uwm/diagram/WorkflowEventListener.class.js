@@ -90,7 +90,7 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 						uwm.model.ModelContainer.getInstance().deleteByModelNode(persistencyFigure);
 					}
 
-					this.diagram.removeFromCache(figure);
+					this.diagram.removeFromCache(figure.getFigure());
 				} else if (figure instanceof uwm.graphics.connection.BaseConnection){
 					var source = figure.getSource().getParent().getFigure().getModelObject();
 					var target = figure.getTarget().getParent().getFigure().getModelObject();
