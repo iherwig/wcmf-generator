@@ -108,4 +108,11 @@ package net.sourceforge.olympos.dionysus.json.test;
 
 	static wrongAttributeName = "{title1: 'Matrix The Original',groundbreaking: true}"
 
+	/**
+	 * attributes for executeActionSet operation
+	 */
+
+	static executeActionSetcreateClassName = 'Movie'	
+	static executeActionSetUpdateOid = '{Movie:?}'
+	static executeActionSetAttributes = "{title: 'Matrix The Original',groundbreaking: true}"
 }
