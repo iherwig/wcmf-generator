@@ -25,11 +25,28 @@ The CWM is:
     * Extensible
     * Free
 
+HARDWARE REQUIREMENTS 
+CPU: 1x2,5 GHz
+RAM: 1 GB
+HD: 1 x 500 GB
+
+
+SOFTWARE REQUIREMENTS 
+any OS with support Apache Mysql and PHP (LAMP, WAMP, etc.)
+Apache (2.2.11) [Linux]
+Apache (2.2.10) [Windows]
+MySQL (5.0.00)
+PHP (5.2.8) (with JSON library active)
+Java 1.6
+phpMyAdmin (3.1.1) [Linux]
+phpMyAdmin (3.1.0) [Windows]
+unzip
+	
 INSTALLATION
-- read the provided pdf File
+- read the provided Chronos_Web_Modeller_Installation.pdf File
 
 MANUAL
-- read the provided PDF or the online help.
+- read the provided the online help after the installation of the application.
 	
 History
 0.1	Alpha Black	
@@ -74,3 +91,37 @@ History
 •	CWM supports glossary
 •	CWM supports system object
 •	CWM supports export of object notes
+
+0.9.5
+	•	bug fixing
+	
+0.9.7
+	ADDITIONS
+	•	Code generator for wCMF included
+	•	Model translation included
+	•	upgraded to extjs 3.0
+	•	added tree sorting 
+	•	drag and drop object creation
+	•	Added GeneratorWizard incl. backend
+	•	Adjusted ChiCmf and CWE cartridge to actually produce working applications
+
+		FIX	
+	•	fixed backend navigation template (selects Administration link by config now, not by group name)
+	•	Added ChronosGenerator and ExpeditorGenerator
+	* Fixed bug  2837749 (relationships not draw)
+	•	Added ChronosGenerator to frontend
+	•	Fixed CWM importer
+	* Fixed bug  2837749 (relationships not draw)
+	•	upgraded to extjs 3.0 -> not fully tested, fixed history issue (restore didn't work), minor changes
+	•	fixed table names case
+	•	added custom upgrade script (next step: provide general mechanism for custom install/upgrade scripts)
+	•	use common mechanism for custom database scripts for installation and upgrade
+	•	added SearchIndexController to config and button to navigation.tpl
+	•	Added ChiActionKey, ChiAssociation export
+	•	Added special char handling to UML Export
+	•	fixed AutoCompleteController case
+	•	fixed HtmlEditor issues 
+
+
+
+
