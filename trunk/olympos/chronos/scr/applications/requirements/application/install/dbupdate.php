@@ -120,11 +120,11 @@ foreach ($tables as $tableDef)
 }
 
 // execute custom scripts from the directory 'custom-dbupdate'
-$sqlScripts = FileUtil::getFiles('custom-dbupdate', '/\.sql$/', true);
+$sqlScripts = FileUtil::getFiles('custom-dbupdate', '/[^_]+_.*\.sql$/', true);
 foreach ($sqlScripts as $script)
 {
   // extract the initSection from the filename
-  $initSection = basename($script, ".sql");
+  $initSection = array_shift(split('_', basename($script)));
   DBUtil::executeScript($script, $initSection);
 }
 

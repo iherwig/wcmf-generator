@@ -86,11 +86,11 @@ if ($admin && !$admin->hasRole('administrators'))
 $userManager->commitTransaction();
 
 // execute custom scripts from the directory 'custom-install'
-$sqlScripts = FileUtil::getFiles('custom-install', '/\.sql$/', true);
+$sqlScripts = FileUtil::getFiles('custom-install', '/[^_]+_.*\.sql$/', true);
 foreach ($sqlScripts as $script)
 {
   // extract the initSection from the filename
-  $initSection = basename($script, ".sql");
+  $initSection = array_shift(split('_', basename($script)));
   DBUtil::executeScript($script, $initSection);
 }
 
