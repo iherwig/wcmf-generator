@@ -45,7 +45,7 @@ package net.sourceforge.olympos.dionysus.json.test;
 	 */
 	static deleteOid = 'Person:1'
 
-	static deleteInvalidOid = 'Director:MyOid'
+	static deleteInvalidOid = 'Person:MyOid'
 
 	static deleteInvalidClass = 'MyPerson:1'
 	/**
@@ -125,11 +125,11 @@ package net.sourceforge.olympos.dionysus.json.test;
 	 */
 
 	static associateSourceOid='Movie:1'
-	static associateTargerOid='Director:1'
-	static associateRealation='director'
+	static associateTargetOid='Person:1'
+	static associateRelation='director'
 	static associateWrongSourceOid='Movie:mine'
-	static associateWrongTargerOid='Director:mine'
+	static associateWrongTargetOid='Director:mine'
 	static associateWrongSourceClass='Myclass:123'
-	static associateWrongTargerClass='Myclass:123'
+	static associateWrongTargetClass='Myclass:123'
 	static associateWrongRelation='MyRelation'
 }

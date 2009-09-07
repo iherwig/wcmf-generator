@@ -9,9 +9,11 @@ import org.junit.runners.Suite;
 	LogoutTest.class,
 	ListTest.class,
 	ReadTest.class,
+	CreateTest.class,
 	UpdateTest.class,
 	AssociateTest.class,
-	DisassociateTest.class
+	DisassociateTest.class,
+	ExecuteActionSetTest.class
 })
 public class BasePackageSuite {
 
