@@ -1,5 +1,5 @@
 SQL scripts in this directory will be executed after
-execution of install.php. Each line of a script is supposed to
+execution of dbupdate.php. Each line of a script is supposed to
 be one SQL command.
 
 The script name must comply with the following naming convention:

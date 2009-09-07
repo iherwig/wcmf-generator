@@ -141,7 +141,7 @@ function ensureUpdateTable(&$connection)
   $tables = $connection->MetaTables();
   if (!in_array('dbupdate', $tables))
   {
-    $sql = $connection->Prepare('CREATE TABLE `dbupdate` (`table_id` VARCHAR(150) NOT NULL, `column_id` VARCHAR(150) NOT NULL, `type` VARCHAR(150) NOT NULL, '.
+    $sql = $connection->Prepare('CREATE TABLE `dbupdate` (`table_id` VARCHAR(100) NOT NULL, `column_id` VARCHAR(100) NOT NULL, `type` VARCHAR(100) NOT NULL, '.
                                 '`table` VARCHAR(255), `column` VARCHAR(255), `updated` DATETIME, PRIMARY KEY (`table_id`, `column_id`, `type`)) TYPE=MyISAM');
     $rs = $connection->Execute($sql);
   	if ($rs === false)
