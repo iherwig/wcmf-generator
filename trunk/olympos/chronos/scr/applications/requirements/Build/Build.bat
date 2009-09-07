@@ -53,6 +53,8 @@ call setDebug.jar
 if exist c:\temp\cwm\gui\js\uwm\ConfigNew.js (
 del c:\temp\cwm\gui\js\uwm\Config.js
 ren c:\temp\cwm\gui\js\uwm\ConfigNew.js Config.js
+REM copy to a save place to move it to the final place later
+copy c:\temp\cwm\gui\js\uwm\Config.js c:\temp\cwm\gui\Config.js
 )
 
 REM server.ini must be stored separately
@@ -85,6 +87,10 @@ copy indexbuild.html c:\temp\cwm\gui\index.html
 REM Delete merged files
 rd /s /q c:\temp\cwm\gui\js\uwm
 rd /s /q c:\temp\cwm\gui\js\cwm
+
+REM insert Config.js
+md c:\temp\cwm\gui\js\uwm
+move c:\temp\cwm\gui\Config.js c:\temp\cwm\gui\js\uwm\Config.js
 
 REM zip
 7z a cwm.zip c:\temp\cwm
