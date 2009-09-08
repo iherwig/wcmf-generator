@@ -57,12 +57,14 @@ cwm.ChiFeatureClass = function() {
 		"ChiBusinessUseCase": {
 			label: "is refined by",
 			invert: false,
+			invertBackendRelation: true,
 			connectionType: 'realization',
 			cardinality: -1
 		},
 		"ChiBusinessUseCaseCore": {
 			label: "is refined by",
 			invert: false,
+			invertBackendRelation: true,
 			connectionType: 'realization',
 			cardinality: -1
 		}
