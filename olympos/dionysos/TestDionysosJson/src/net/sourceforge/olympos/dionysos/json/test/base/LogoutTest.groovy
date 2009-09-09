@@ -12,17 +12,33 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 	
 	@Test
 	public void success() {
-		ensureLogin()
+		//ensureLogin()
+
+		def sid
 
 		request(
-			[
-			 	action: 'logout'
-			],
-			{req, json ->
-				assertTrue(json.success)
-				assertNull(json.sid)
-			},
-			this.method
+				[
+					action: 'login',
+					user: Cfg.user,
+					password: Cfg.password
+				],
+				{ req, json ->
+					sid = json.sid
+				},
+				'get',
+				true
+			)
+		
+		request(
+				[
+			 		action: 'logout',
+			 		sid:sid1
+			 		],
+			 		{req, json ->
+			 		assertTrue(json.success)
+			 		assertNull(json.sid)
+			 		},
+			 	this.method
 		)
 	}
 }
