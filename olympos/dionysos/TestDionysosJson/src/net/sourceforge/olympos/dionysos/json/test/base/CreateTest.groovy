@@ -5,9 +5,9 @@ import static org.junit.Assert.*
 import org.junit.Test;
 
 import net.sourceforge.olympos.dionysos.json.test.Cfg;
-import net.sourceforge.olympos.dionysos.json.test.DionysusTest;
+import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 
-public class CreateTest extends DionysusTest {
+public class CreateTest extends DionysosTest {
 	public CreateTest(String method) {
 		super(method)
 	}
