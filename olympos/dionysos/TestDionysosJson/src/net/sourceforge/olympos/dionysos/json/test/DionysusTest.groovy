@@ -1,4 +1,4 @@
-package net.sourceforge.olympos.dionysos.json.test;
+package net.sourceforge.olympos.dionysus.json.test;
 
 import java.util.Collection;
 
@@ -18,7 +18,7 @@ import static groovyx.net.http.ContentType.JSON
 public class DionysusTest {
 	protected String method;
 
-	private static String sid = null;
+	static String sid = null;
 	
 	public DionysusTest(method) {
 		this.method = method
