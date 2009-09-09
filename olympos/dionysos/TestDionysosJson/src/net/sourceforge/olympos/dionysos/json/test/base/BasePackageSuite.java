@@ -1,4 +1,4 @@
-package net.sourceforge.olympos.dionysus.json.test.base;
+package net.sourceforge.olympos.dionysos.json.test.base;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

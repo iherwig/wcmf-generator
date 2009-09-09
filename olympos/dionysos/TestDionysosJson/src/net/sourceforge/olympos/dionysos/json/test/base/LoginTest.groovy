@@ -1,8 +1,8 @@
-package net.sourceforge.olympos.dionysus.json.test.base;
+package net.sourceforge.olympos.dionysos.json.test.base;
 
 import static org.junit.Assert.*
-import net.sourceforge.olympos.dionysus.json.test.DionysusTest;
-import net.sourceforge.olympos.dionysus.json.test.Cfg;
+import net.sourceforge.olympos.dionysos.json.test.Cfg;
+import net.sourceforge.olympos.dionysos.json.test.DionysusTest;
 
 import org.junit.Test;
 public class LoginTest extends DionysusTest {

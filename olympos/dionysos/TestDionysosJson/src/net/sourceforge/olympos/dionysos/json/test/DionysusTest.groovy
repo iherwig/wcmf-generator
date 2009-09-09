@@ -1,4 +1,4 @@
-package net.sourceforge.olympos.dionysus.json.test;
+package net.sourceforge.olympos.dionysos.json.test;
 
 import java.util.Collection;
 
