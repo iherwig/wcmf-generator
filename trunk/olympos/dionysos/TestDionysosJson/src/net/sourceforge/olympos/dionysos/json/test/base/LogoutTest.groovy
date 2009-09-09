@@ -4,8 +4,8 @@ import static org.junit.Assert.*
 
 import org.junit.Test;
 import net.sourceforge.olympos.dionysos.json.test.Cfg;
-import net.sourceforge.olympos.dionysos.json.test.DionysusTest;
-public class LogoutTest extends DionysusTest {
+import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
+public class LogoutTest extends DionysosTest {
 	public LogoutTest(String method) {
 		super(method)
 	}

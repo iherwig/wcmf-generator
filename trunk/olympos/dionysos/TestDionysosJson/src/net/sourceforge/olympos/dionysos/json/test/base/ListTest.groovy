@@ -4,8 +4,8 @@ import static org.junit.Assert.*
 
 import org.junit.Test;
 import net.sourceforge.olympos.dionysos.json.test.Cfg;
-import net.sourceforge.olympos.dionysos.json.test.DionysusTest;
-public class ListTest extends DionysusTest {
+import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
+public class ListTest extends DionysosTest {
 	public ListTest(String method) {
 		super(method)
 	}

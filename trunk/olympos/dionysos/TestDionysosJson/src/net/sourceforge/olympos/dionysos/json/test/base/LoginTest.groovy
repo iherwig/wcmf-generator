@@ -2,10 +2,10 @@ package net.sourceforge.olympos.dionysos.json.test.base;
 
 import static org.junit.Assert.*
 import net.sourceforge.olympos.dionysos.json.test.Cfg;
-import net.sourceforge.olympos.dionysos.json.test.DionysusTest;
+import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 
 import org.junit.Test;
-public class LoginTest extends DionysusTest {
+public class LoginTest extends DionysosTest {
 	public LoginTest(String method) {
 		super(method)
 	}
