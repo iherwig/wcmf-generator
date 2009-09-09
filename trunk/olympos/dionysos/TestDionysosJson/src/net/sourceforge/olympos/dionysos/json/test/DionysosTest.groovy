@@ -20,7 +20,7 @@ public class DionysosTest {
 
 	static String sid = null;
 	
-	public DionysusTest(method) {
+	public DionysosTest(method) {
 		this.method = method
 	}
 
