@@ -1,4 +1,4 @@
-package net.sourceforge.olympos.dionysus.json.test;
+package net.sourceforge.olympos.dionysos.json.test;
 public class Cfg {
 	/**
 	 * If true, the parsed JSON will be written to the console.

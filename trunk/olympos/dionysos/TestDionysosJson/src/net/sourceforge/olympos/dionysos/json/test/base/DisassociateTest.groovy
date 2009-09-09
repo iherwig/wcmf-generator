@@ -1,14 +1,14 @@
-package net.sourceforge.olympos.dionysus.json.test.base;
+package net.sourceforge.olympos.dionysos.json.test.base;
 
 import static org.junit.Assert.*
 
 import org.junit.Test;
 
-import net.sourceforge.olympos.dionysus.json.test.DionysusTest;
-import net.sourceforge.olympos.dionysus.json.test.Cfg;
+import net.sourceforge.olympos.dionysos.json.test.Cfg;
+import net.sourceforge.olympos.dionysos.json.test.DionysusTest;
 
-public class AssociateTest extends DionysusTest {
-	public AssociateTest(String method) {
+public class DisassociateTest extends DionysusTest {
+	public DisassociateTest(String method) {
 		super(method)
 	}
 	
@@ -28,8 +28,23 @@ public class AssociateTest extends DionysusTest {
 				assertEquals('associate', json.action)
 				assertEquals(Cfg.associateSourceOid, json.sourceOid)
 				assertEquals(Cfg.associateTargetOid, json.targetOid)
-				assertEquals(Cfg.associateRelation, json.role)
 				
+			},
+			this.method
+		)
+		
+		request(
+			[
+			 	action: 'disassociate',
+			 	sourceOid: Cfg.associateSourceOid,
+			 	targetOid: Cfg.associateTargetOid,
+			 	role: Cfg.associateRelation
+			],
+			{req, json ->
+				assertTrue(json.success)
+				assertEquals('disassociate', json.action)
+				assertEquals(Cfg.associateSourceOid, json.sourceOid)
+				assertEquals(Cfg.associateTargetOid, json.targetOid)
 			},
 			this.method
 		)
@@ -41,14 +56,14 @@ public class AssociateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'associate',
+			 	action: 'disassociate',
 			 	sourceOid: Cfg.associateWrongSourceOid,
 			 	targetOid: Cfg.associateTargetOid,
 			 	role: Cfg.associateRelation
 			],
 			{req, json ->
 				assertFalse(json.success)
-				assertEquals('associate', json.action)
+				assertEquals('disassociate', json.action)
 				assertEquals(Cfg.associateWrongSourceOid, json.sourceOid)
 				assertEquals(Cfg.associateTargetOid, json.targetOid)
 				assertEquals('OID_INVALID', json.errorCode)
@@ -65,14 +80,14 @@ public class AssociateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'associate',
+			 	action: 'disassociate',
 			 	sourceOid: Cfg.associateWrongSourceClass,
 			 	targetOid: Cfg.associateTargetOid,
 			 	role: Cfg.associateRelation
 			],
 			{req, json ->
 				assertFalse(json.success)
-				assertEquals('associate', json.action)
+				assertEquals('disassociate', json.action)
 				assertEquals(Cfg.associateWrongSourceClass, json.sourceOid)
 				assertEquals(Cfg.associateTargetOid, json.targetOid)
 				assertEquals('CLASS_NAME_INVALID', json.errorCode)
@@ -89,16 +104,16 @@ public class AssociateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'associate',
+			 	action: 'disassociate',
 			 	sourceOid: Cfg.associateSourceOid,
-			 	targetOid: Cfg.associateWrongTargetOid,
+			 	targetOid: Cfg.associateWrongTargerOid,
 			 	role: Cfg.associateRelation
 			],
 			{req, json ->
 				assertFalse(json.success)
-				assertEquals('associate', json.action)
+				assertEquals('disassociate', json.action)
 				assertEquals(Cfg.associateSourceOid, json.sourceOid)
-				assertEquals(Cfg.associateWrongTargetOid, json.targetOid)
+				assertEquals(Cfg.associateWrongTargerOid, json.targetOid)
 				assertEquals('OID_INVALID', json.errorCode)
 				assertEquals(Cfg.associateRelation, json.role)
 				
@@ -113,16 +128,16 @@ public class AssociateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'associate',
+			 	action: 'disassociate',
 			 	sourceOid: Cfg.associateSourceOid,
-			 	targetOid: Cfg.associateWrongTargetClass,
+			 	targetOid: Cfg.associateWrongSourceClass,
 			 	role: Cfg.associateRelation
 			],
 			{req, json ->
 				assertFalse(json.success)
-				assertEquals('associate', json.action)
+				assertEquals('disassociate', json.action)
 				assertEquals(Cfg.associateSourceOid, json.sourceOid)
-				assertEquals(Cfg.associateWrongTargetClass, json.targetOid)
+				assertEquals(Cfg.associateWrongSourceClass, json.targetOid)
 				assertEquals('CLASS_NAME_INVALID', json.errorCode)
 				assertEquals(Cfg.associateRelation, json.role)
 				
@@ -137,14 +152,14 @@ public class AssociateTest extends DionysusTest {
 
 		request(
 			[
-			 	action: 'associate',
+			 	action: 'disassociate',
 			 	sourceOid: Cfg.associateSourceOid,
 			 	targetOid: Cfg.associateTargetOid,
 			 	role: Cfg.associateWrongRelation
 			],
 			{req, json ->
 				assertFalse(json.success)
-				assertEquals('associate', json.action)
+				assertEquals('disassociate', json.action)
 				assertEquals(Cfg.associateSourceOid, json.sourceOid)
 				assertEquals(Cfg.associateTargetOid, json.targetOid)
 				assertEquals('ROLE_INVALID', json.errorCode)
@@ -155,30 +170,57 @@ public class AssociateTest extends DionysusTest {
 		)
 	}
 
-	/*//@Test
-	 public void invalidAssociation() {
+	 
+
+	/*@Test
+	public void invalidAssociation() {
 		ensureLogin()
 
 		request(
 			[
-			 	action: 'associate',
+			 	action: 'disassociate',
 			 	sourceOid: Cfg.associateSourceOid,
-			 	targetOid: 'com.ibm.eenergy.core.moma.objects.Preis:12520543019684',  
-			 	role: Cfg.Cfg.associateRealation
+			 	targetOid: '', //Please enter the correct object Id for testing
+			 	role: Cfg.associateRelation
 			],
 			{req, json ->
 				assertFalse(json.success)
-				assertEquals('associate', json.action)
+				assertEquals('disassociate', json.action)
 				assertEquals(Cfg.associateSourceOid, json.sourceOid)
-				assertEquals(Cfg.associateTargerOid, json.targetOid)
+				assertEquals(Cfg.associateTargetOid, json.targetOid)
 				assertEquals('ASSOCIATION_INVALID', json.errorCode)
-				assertEquals( Cfg.Cfg.associateRealation, json.role)
+				assertEquals( Cfg.associateRelation, json.role)
 				
 			},
 			this.method
 		)
 	}*/
 
+	@Test
+	public void associationNotFound() {
+		ensureLogin()
+
+		request(
+			[
+			 	action: 'disassociate',
+			 	sourceOid: Cfg.associateSourceOid,
+			 	targetOid: Cfg.associateTargetOid,
+			 	role: Cfg.associateRelation
+			],
+			{req, json ->
+				assertFalse(json.success)
+				assertEquals('disassociate', json.action)
+				assertEquals(Cfg.associateSourceOid, json.sourceOid)
+				assertEquals(Cfg.associateTargetOid, json.targetOid)
+				assertEquals('ASSOCIATION_NOT_FOUND', json.errorCode)
+				
+			},
+			this.method
+		)
+		
+		
+	}
+	
 	private void assertObject(json, oid, boolean isReference) {
 		assertNotNull(json)
 		assertEquals(oid, json.oid)

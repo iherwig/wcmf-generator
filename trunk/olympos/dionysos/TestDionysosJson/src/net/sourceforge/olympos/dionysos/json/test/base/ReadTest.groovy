@@ -1,10 +1,10 @@
-package net.sourceforge.olympos.dionysus.json.test.base;
+package net.sourceforge.olympos.dionysos.json.test.base;
 
 import static org.junit.Assert.*
 
 import org.junit.Test;
-import net.sourceforge.olympos.dionysus.json.test.DionysusTest;
-import net.sourceforge.olympos.dionysus.json.test.Cfg;
+import net.sourceforge.olympos.dionysos.json.test.Cfg;
+import net.sourceforge.olympos.dionysos.json.test.DionysusTest;
 public class ReadTest extends DionysusTest {
 	public ReadTest(String method) {
 		super(method)
