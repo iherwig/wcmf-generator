@@ -24,27 +24,21 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 	initComponent: function() {
 		var self = this;
 
-		var loc = uwm.i18n.Localization.getInstance();
-		this.language = loc.getTranslationLanguage();
+		this.language = uwm.i18n.Localization.getInstance().getTranslationLanguage();
 		
 		this.currentOid = null;
 		this.isLocked = null;
 		this.form = null;
+		this.languageListBox = null;
 		
-		this.languageListBox = new uwm.i18n.LanguageListBox({
-			includeUserLanguage: false,
-			languages: loc.getAllModelLanguages(),
-			hideLabel: true,
-			width: 200,
-			listeners: {
-				"select": function(field, record, index) {
-					var language = self.languageListBox.getLanguageFromRecord(record);
-					loc.setTranslationLanguage(language);
-					self.setLanguage(language);
-				}
+		this.toolBar = new Ext.ux.GhostBar({
+			threshold: 5,
+			position: 'top',
+			style: {
+				overflow: 'visible'
 			}
 		});
-		this.languageListBox.setValue(this.language);
+		this.createLanguageListbox();
 		
 		Ext.apply(this, {
 			title: self.getTitleText(),
@@ -55,14 +49,7 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 					uwm.property.PropertyContainer.getInstance().closeTranslationPanel();
 				}
 			}],
-			plugins: [new Ext.ux.GhostBar({
-				threshold: 5,
-				position: 'top',
-				style: {
-					overflow: 'visible'
-				},
-				items: this.languageListBox
-			})]
+			plugins: [this.toolBar]
 		})
 		
 		uwm.i18n.TranslationPanel.superclass.initComponent.apply(this, arguments);
@@ -79,6 +66,35 @@ uwm.i18n.TranslationPanel = Ext.extend(Ext.Panel, {
 		});
 	}
 })
+
+/**
+ * Create the language listbox. We have to recreate it after each language
+ * change to avoid listener errors in ExtJs. The listbox will be added
+ * to the toolbar of the panel.
+ */
+uwm.i18n.TranslationPanel.prototype.createLanguageListbox = function() {
+	if (this.languageListBox == null) {
+		var self = this;
+		this.languageListBox = new uwm.i18n.LanguageListBox({
+			includeUserLanguage: false,
+			languages: uwm.i18n.Localization.getInstance().getAllModelLanguages(),
+			hideLabel: true,
+			width: 200,
+			listeners: {
+				"select": function(field, record, index) {
+					var language = self.languageListBox.getLanguageFromRecord(record);
+					uwm.i18n.Localization.getInstance().setTranslationLanguage(language);
+					self.languageListBox.destroy();
+					self.languageListBox = null;
+				}
+			}
+		});
+		this.languageListBox.setValue(this.language);
+		this.toolBar.items.clear();
+		this.toolBar.items.add(this.languageListBox);
+		this.toolBar.doLayout();
+	}
+}
 
 /**
  * Load the translation of a uwm.model.ModelNode and show it's uwm.property.PropertyForm.
@@ -113,6 +129,7 @@ uwm.i18n.TranslationPanel.prototype.displayForm = function(modelNode, isLocked, 
 	this.form.localizeControls(this.getLanguage());
 	this.add(this.form);
 	this.lockUntranslatableControls();
+	this.createLanguageListbox();
 
 	this.doLayout();
 	
@@ -190,7 +207,9 @@ uwm.i18n.TranslationPanel.prototype.setLanguage = function(language) {
 		this.language = language;
 
 		this.setTitle(this.getTitleText());
-		this.languageListBox.setValue(this.language);
+		if (this.languageListBox != null) {
+			this.languageListBox.setValue(this.language);
+		}
 		
 		// update the currently displayed translation
 		if (this.currentOid && this.isVisible()) {
