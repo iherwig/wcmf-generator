@@ -15,23 +15,7 @@ public class DisassociateTest extends DionysosTest {
 	@Test
 	public void simple() {
 		ensureLogin()
-
-		request(
-			[
-			 	action: 'associate',
-			 	sourceOid: Cfg.associateSourceOid,
-			 	targetOid: Cfg.associateTargetOid,
-			 	role: Cfg.associateRelation
-			],
-			{req, json ->
-				assertTrue(json.success)
-				assertEquals('associate', json.action)
-				assertEquals(Cfg.associateSourceOid, json.sourceOid)
-				assertEquals(Cfg.associateTargetOid, json.targetOid)
-				
-			},
-			this.method
-		)
+		associate()
 		
 		request(
 			[
@@ -53,7 +37,8 @@ public class DisassociateTest extends DionysosTest {
 	@Test
 	public void invalidSourceOid() {
 		ensureLogin()
-
+		associate()
+		
 		request(
 			[
 			 	action: 'disassociate',
@@ -77,6 +62,7 @@ public class DisassociateTest extends DionysosTest {
 	@Test
 	public void invalidSourceClass() {
 		ensureLogin()
+		associate()
 
 		request(
 			[
@@ -101,19 +87,20 @@ public class DisassociateTest extends DionysosTest {
 	@Test
 	public void invalidTargetOid() {
 		ensureLogin()
+		associate()
 
 		request(
 			[
 			 	action: 'disassociate',
 			 	sourceOid: Cfg.associateSourceOid,
-			 	targetOid: Cfg.associateWrongTargerOid,
+			 	targetOid: Cfg.associateWrongTargetOid,
 			 	role: Cfg.associateRelation
 			],
 			{req, json ->
 				assertFalse(json.success)
 				assertEquals('disassociate', json.action)
 				assertEquals(Cfg.associateSourceOid, json.sourceOid)
-				assertEquals(Cfg.associateWrongTargerOid, json.targetOid)
+				assertEquals(Cfg.associateWrongTargetOid, json.targetOid)
 				assertEquals('OID_INVALID', json.errorCode)
 				assertEquals(Cfg.associateRelation, json.role)
 				
@@ -125,6 +112,7 @@ public class DisassociateTest extends DionysosTest {
 	@Test
 	public void invalidTargetClass() {
 		ensureLogin()
+		associate()
 
 		request(
 			[
@@ -149,6 +137,7 @@ public class DisassociateTest extends DionysosTest {
 	@Test
 	public void invalidRole() {
 		ensureLogin()
+		associate()
 
 		request(
 			[
@@ -170,36 +159,11 @@ public class DisassociateTest extends DionysosTest {
 		)
 	}
 
-	 
-
-	/*@Test
-	public void invalidAssociation() {
-		ensureLogin()
-
-		request(
-			[
-			 	action: 'disassociate',
-			 	sourceOid: Cfg.associateSourceOid,
-			 	targetOid: '', //Please enter the correct object Id for testing
-			 	role: Cfg.associateRelation
-			],
-			{req, json ->
-				assertFalse(json.success)
-				assertEquals('disassociate', json.action)
-				assertEquals(Cfg.associateSourceOid, json.sourceOid)
-				assertEquals(Cfg.associateTargetOid, json.targetOid)
-				assertEquals('ASSOCIATION_INVALID', json.errorCode)
-				assertEquals( Cfg.associateRelation, json.role)
-				
-			},
-			this.method
-		)
-	}*/
-
 	@Test
 	public void associationNotFound() {
 		ensureLogin()
-
+		simple()
+		
 		request(
 			[
 			 	action: 'disassociate',
@@ -218,6 +182,24 @@ public class DisassociateTest extends DionysosTest {
 			this.method
 		)
 		
+		
+	}
+
+
+	private void associate() {
+
+		request(
+			[
+			 	action: 'associate',
+			 	sourceOid: Cfg.associateSourceOid,
+			 	targetOid: Cfg.associateTargetOid,
+			 	role: Cfg.associateRelation
+			],
+			{req, json ->
+					
+			},
+			this.method
+		)
 		
 	}
 	
