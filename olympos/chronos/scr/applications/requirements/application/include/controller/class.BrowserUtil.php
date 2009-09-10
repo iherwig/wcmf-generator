@@ -37,9 +37,7 @@ class BrowserUtil {
 	private static function check($msg)
 	{
 		$newTime = microtime(true);
-	
-		//echo $newTime - self::$lastTime, ": $msg<br/ >";
-		
+		Log::debug(($newTime-$this->lastTime).": $msg", __CLASS__);
 		self::$lastTime = $newTime;
 	}
 
