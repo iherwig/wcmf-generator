@@ -14,7 +14,7 @@ package net.sourceforge.olympos.dionysos.json.test;
 	/**
 	 * If true, the login before each test request will be omitted.
 	 */
-	static debugLogin = true
+	static debugLogin = false
 	
 	/**
 	 * The base URL according to spec.
