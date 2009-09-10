@@ -74,9 +74,7 @@ class UWMImporterController extends Controller
 	private function check($msg)
 	{
 		$newTime = microtime(true);
-	
-		//echo $newTime-$this->lastTime, ": $msg<br/ >\n";
-		
+		Log::debug(($newTime-$this->lastTime).": $msg", __CLASS__);
 		$this->lastTime = $newTime;
 	}
 
