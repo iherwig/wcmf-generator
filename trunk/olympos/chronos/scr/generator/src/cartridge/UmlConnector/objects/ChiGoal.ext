@@ -72,7 +72,7 @@ cwm::ChiGoal convertToCwm(Chronos::ChiGoal c) :
 		un.setLastEditor(c.getTaggedValue("Chronos::ChiGoal", "last_editor").toString()) ->
 		un.setModified(c.getTaggedValue("Chronos::ChiGoal", "modified").toString()) ->
 		
-		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiGoal).convertToChild()) ->
+		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c && e.aggregation == uml::AggregationKind::composite).type.typeSelect(Chronos::ChiGoal).convertToChild()) ->
 		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiRequirement).convertToChild())
 	) ->
 	un
