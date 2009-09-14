@@ -93,6 +93,8 @@ public class DionysosTest {
 				body = params
 			}
 			
+			setHeaders(["session_id":sid])
+            
 			response.success = { resp, json ->
 				if (Cfg.debug || Cfg.debugJson) {
 					System.out << json
