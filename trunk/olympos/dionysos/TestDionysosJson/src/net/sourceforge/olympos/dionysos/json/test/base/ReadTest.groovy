@@ -29,8 +29,8 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 				def firstLevel = json.object.attributes[Cfg.readBaseAttributeName]
 				assertObject(firstLevel, Cfg.readFirstLevelOid, false)
 
-				//def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
-                //assertObject(firstLevelParent, Cfg.readBaseOid, true)
+				def firstLevelParent = firstLevel.attributes[Cfg.readFirstLevelParentAttributeName]
+                assertObject(firstLevelParent, Cfg.readBaseOid, true)
 
 				//def secondLevel = firstLevel.attributes[Cfg.readFirstLevelAttributeName]
                 //assertObject(secondLevel, Cfg.readSecondLevelOid, true)

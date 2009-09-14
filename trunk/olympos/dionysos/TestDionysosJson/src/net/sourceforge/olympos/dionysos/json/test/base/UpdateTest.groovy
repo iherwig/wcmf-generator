@@ -27,8 +27,7 @@ public class UpdateTest extends DionysosTest {
 				assertEquals('update', json.action)
 				assertEquals(Cfg.updateOid, json.oid)
 				assertNotNull(json.attributes)
-				
-				
+					
 			},
 			this.method
 		)
@@ -63,14 +62,12 @@ public class UpdateTest extends DionysosTest {
 		request(
 			[
 			 	action: 'update',
-			 	oid: 'com.ibm.eenergy.core.moma.objects.Preis:MyId',
+			 	oid: Cfg.updateClassName + ':MyId',
 			 	attributes: Cfg.attributes
 			],
 			{req, json ->
 				assertFalse(json.success)
 				assertEquals('update', json.action)
-				assertEquals('com.ibm.eenergy.core.moma.objects.Preis:MyId', json.oid)				 
-				assertNotNull(json.attributes)
 				assertEquals('OID_INVALID', json.errorCode)
 				
 			},
@@ -116,13 +113,12 @@ public class UpdateTest extends DionysosTest {
 				assertEquals(Cfg.updateOid, json.oid)
 				assertNotNull(json.attributes)
 				assertEquals('ATTRIBUTE_VALUE_INVALID', json.errorCode)
+				assertEquals(Cfg.wrongAttributeValueErrorData, json.errorData.toString())
 				
 			},
 			this.method
 		)
 	}
-
-	
 
 	private void assertObject(json, oid, boolean isReference) {
 		assertNotNull(json)

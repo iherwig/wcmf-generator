@@ -83,6 +83,10 @@ package net.sourceforge.olympos.dionysos.json.test;
 	 */
 	static updateOid = 'Movie:1'
 	/**
+	* The name of a class to test the update command with invalid id
+	*/
+	static updateClassName = 'Movie'
+	/**
 	 * The value for lastChange to succeed in all cases
 	 */
 	static updateLastChange = 0
@@ -108,8 +112,9 @@ package net.sourceforge.olympos.dionysos.json.test;
 	 */
 	static attributes = '{"title": "Matrix The Original","groundbreaking": true}'
 
-	static wrongAttributeValue = '{"title": "Matrix The Original","groundbreaking": "true"}'
-
+	static wrongAttributeValue = '{"title": "Matrix The Original","groundbreaking": "foo"}'
+	static wrongAttributeValueErrorData = '{"groundbreaking":"foo"}'
+		
 	static wrongAttributeName = '{"title1": "Matrix The Original","groundbreaking": true}'
 
 	/**
