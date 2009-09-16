@@ -33,7 +33,8 @@ uwm.ui.LongTaskRunner = function(config) {
 		text:uwm.Dict.translate('Initializing ...'),
 		id:'pbar',
 		cls:'left-align',
-    width:300
+		height:20,
+		anchor:'100%'
 	});
 	
 	this.okButton = new Ext.Button({
@@ -50,7 +51,9 @@ uwm.ui.LongTaskRunner = function(config) {
 	this.iFrame.setVisible(false);
 	
 	uwm.ui.LongTaskRunner.superclass.constructor.call(this, Ext.apply(this, {
-		layout: "fit",
+		layout: 'anchor',
+		width:320,
+		height:87,
 		items: [this.pbar, 
 			this.iFrame
     ],
@@ -58,7 +61,7 @@ uwm.ui.LongTaskRunner = function(config) {
     bodyBorder: false,
     border: false,
 		closable: false,
-		resizable: true,
+		resizable: false,
     modal: true
 	}, config));
 	
@@ -82,6 +85,16 @@ uwm.ui.LongTaskRunner = function(config) {
 				function(data) {
 					self.pbar.updateText(uwm.Dict.translate("Finished"));
 					self.okButton.setText(uwm.Dict.translate("Close"));
+					if (data.summaryText != "") {
+						self.add(new Ext.Panel({
+							html: "<div class='uwm-errorDialogDetails'>" + data.summaryText + "</div>",
+							autoScroll: true,
+							height:100,
+							anchor:'100%'
+						}));
+						self.setHeight(100+self.height);
+						self.doLayout();
+					}
 					//self.okButton.enable();
 					if (self.successHandler instanceof Function) {
 						self.successHandler(data);

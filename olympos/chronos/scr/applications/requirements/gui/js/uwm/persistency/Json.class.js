@@ -286,13 +286,14 @@ uwm.persistency.Json.prototype.templatelist = function( successHandler, errorHan
 	
 }
 
-uwm.persistency.Json.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, language, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, diagramFormat, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'exportDoc',
 		templateName: templateName,
 		startModel: startModel,
 		startPackage: startPackage,
 		exportFormat: exportFormat,
+		diagramFormat: diagramFormat,
 		language: language
 	}, successHandler, errorHandler);
 }

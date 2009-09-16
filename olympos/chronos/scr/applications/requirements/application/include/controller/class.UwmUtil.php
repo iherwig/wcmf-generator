@@ -31,20 +31,38 @@ class UwmUtil {
 	private static $dom;
 	private static $persistenceFacade;
 	private static $encodingUtil;
+	private static $exportedNodes = null;
+	private static $oidNameMap = null;
 
 	private static $language = null;
 
 	private static $lastTime = 0;
 
+	private static $processVirtualPackages = true;
+
 	private static function check($msg)
 	{
 		$newTime = microtime(true);
-		Log::debug(($newTime-$this->lastTime).": $msg", __CLASS__);
+		Log::debug(($newTime - self::$lastTime).": $msg", __CLASS__);
 		self::$lastTime = $newTime;
 	}
 
-	public static function exportXml($tmpUwmExportPath, $startModel, $startPackage, $language = null) {
+	/**
+	 * Export a model/package to the intern xml format
+	 * @param tmpUwmExportPath The name of the xml file
+	 * @param startModel A Model instance to start with (maybe null, if startPackage is given)
+	 * @param startPackage A Package instance to start with (maybe null, if startModel is given)
+	 * @param language The language to translate to. Optional [default: null]
+	 * @param virtualPackages True/False wether to export diagrams as packages or not. If yes,
+	 * all other package content will be ignored. Optional [default: false].
+	 * @return A problem report (should be empty if no problems occured).
+	 */
+	public static function exportXml($tmpUwmExportPath, $startModel, $startPackage, $language = null,
+			$virtualPackages = false) {
 		self::$language = $language;
+		self::$processVirtualPackages = $virtualPackages;
+		self::$exportedNodes = array();
+		self::$oidNameMap = array();
 
 		self::$dom = new XMLWriter();
 		//self::$dom->setIndent(true);
@@ -84,8 +102,29 @@ class UwmUtil {
 		self::$dom->flush();
 
 		self::$dom = null;
+		
+		// create the problem report
+		$report = "";
+		// find duplicates
+		$duplicates = array();
+		$counts = array_count_values(self::$exportedNodes);
+		foreach ($counts as $oid => $count)
+		{
+			if ($count > 1) {
+				$duplicates[] = self::$oidNameMap[$oid];
+			}
+		}
+		if (sizeof($duplicates) > 0) {
+			$report = "There are duplicate objects in the export:\n";
+			$report .= join("\n", $duplicates);
+		}
+		return $report;
 	}
 
+	/**
+	 * Write all node attributes to the xml file.
+	 * @param node The node whose attributes to write
+	 */
 	private static function appendAttributes($node)
 	{
 		self::translateNode($node);
@@ -98,6 +137,20 @@ class UwmUtil {
 			if ($value !== null && $value !== '') {
 				self::$dom->writeAttribute($currValueName, $value);
 			}
+		}
+	}
+
+	/**
+	 * Register an exported node.
+	 * @param node The node to register
+	 */
+	private static function registerExportedNode($node)
+	{
+		if ($node)
+		{
+			$oid = $node->getOID();
+			self::$exportedNodes[] = $oid;
+			self::$oidNameMap[$oid] = $node->getDisplayValue();
 		}
 	}
 
@@ -118,6 +171,7 @@ class UwmUtil {
 		self::$dom->startElement('Model');
 
 		self::appendAttributes($currModel);
+		self::registerExportedNode($currModel);
 
 		self::$dom->startElement('Package');
 
@@ -146,39 +200,115 @@ class UwmUtil {
 		self::$dom->startElement('Package');
 
 		self::appendAttributes($currPackage);
+		self::registerExportedNode($currPackage);
 
-		$currPackage->loadChildren();
-		$children = $currPackage->getChildren();
+		$children = self::getChildren($currPackage);
 		foreach ($children as $currChild)
 		{
 			$childType = $currChild->getType();
 
 			switch($childType) {
 				case 'Package':
+					// always process packages
 					self::processPackage($currChild);
 					break;
 
+				case 'Diagram':
+					if (self::$processVirtualPackages) {
+						self::processPackage($currChild);
+					}
+					break;
+
 				case 'ChiBusinessProcess':
-					self::processBusinessProcess($currChild);
+					if (self::shouldProcessChild($currPackage, $currChild)) {
+						self::processBusinessProcess($currChild);
+					}
 					break;
 
 				case 'ChiBusinessUseCase':
 				case 'ChiBusinessUseCaseCore':
-					self::processUseCase($currChild);
+					if (self::shouldProcessChild($currPackage, $currChild)) {
+						self::processUseCase($currChild);
+					}
 					break;
 
 				case 'ChiNode':
 				case 'ChiController':
 				case 'ChiSystem':
-					self::processClass($currChild);
+					if (self::shouldProcessChild($currPackage, $currChild)) {
+						self::processClass($currChild);
+					}
 					break;
 
 				default:
-					self::processNode($currChild);
+					if (self::shouldProcessChild($currPackage, $currChild)) {
+						self::processNode($currChild);
+					}
 			}
 		}
 
 		self::$dom->endElement();
+	}
+	
+	/**
+	 * Check if a child object should be processed according to the
+	 * current setting of processVirtualPackages.
+	 * @param parent The parent object
+	 * @param child The child object
+	 * @return True/False
+	 */
+	private static function shouldProcessChild($parent, $child)
+	{
+		if (self::$processVirtualPackages) {
+			if ($parent->getType() == 'Package') {
+				return false;
+			}
+		}
+		else {
+			if ($parent->getType() == 'Diagram') {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Get the children to write into the xml format.
+	 * If currPackage is a Package, it's children will be returned,
+	 * if currPackage is a virtual Package (= Diagramm), the objects depicted
+	 * by the Figure children will be returned
+	 * @param currPackage A Package or Diagram object
+	 * @return An array of Nodes
+	 */
+	private static function getChildren($currPackage)
+	{
+		$currPackage->loadChildren();
+		
+		if ($currPackage->getType() == 'Package') 
+		{
+			return $currPackage->getChildren();
+		}
+		else if ($currPackage->getType() == 'Diagram')
+		{
+			// load the figures
+			$children = $currPackage->getChildren();
+			$persistenceFacade = &PersistenceFacade::getInstance();
+			for ($i=0; $i<sizeof($children); $i++)
+			{
+				$currFigure = &$children[$i];
+				// load the model element that is represented by the figure
+				foreach ($currFigure->getProperty('parentoids') as $parentOID) {
+					if (PersistenceFacade::getOIDParameter($parentOID, 'type') != 'Diagram') {
+						$currChild = &$persistenceFacade->load($parentOID, BUILDDEPTH_SINGLE);
+						// exchange the figure with the object
+						$currPackage->deleteChild($currFigure->getOID(), true);
+						$currPackage->addChild($currChild);
+						break;
+					}
+				}
+			}
+			return $currPackage->getChildren();
+		}
 	}
 
 	private static function processBusinessProcess($currNode) {
@@ -186,6 +316,7 @@ class UwmUtil {
 		self::$dom->startElement($currNode->getType());
 
 		self::appendAttributes($currNode);
+		self::registerExportedNode($currNode);
 
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
@@ -212,6 +343,7 @@ class UwmUtil {
 		self::$dom->startElement($currNode->getType());
 
 		self::appendAttributes($currNode);
+		self::registerExportedNode($currNode);
 
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
@@ -240,6 +372,7 @@ class UwmUtil {
 		self::$dom->startElement($currNode->getType());
 
 		self::appendAttributes($currNode);
+		self::registerExportedNode($currNode);
 
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
@@ -269,6 +402,7 @@ class UwmUtil {
 		self::$dom->startElement('ActivitySet');
 
 		self::appendAttributes($currNode);
+		self::registerExportedNode($currNode);
 
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
@@ -288,6 +422,7 @@ class UwmUtil {
 		self::$dom->startElement($currNode->getBaseType());
 
 		self::appendAttributes($currNode);
+		self::registerExportedNode($currNode);
 
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
@@ -386,7 +521,8 @@ class UwmUtil {
 	private static function translateNode(&$node) {
 		$nodes = array ($node);
 		if (self::$language) {
-			Localization::loadTranslation($node, self::$language, true, false);
+			$localization = &Localization::getInstance();
+			$localization->loadTranslation($node, self::$language, true, false);
 			NodeUtil::translateValues($nodes, self::$language);
 		}
 		else {
