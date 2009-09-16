@@ -39,14 +39,14 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	
 	var assistant = this;
 	
-	var radioFormItem = new Ext.FormPanel( {
+	var docTypeFormItem = new Ext.FormPanel( {
 	    name : 'formPanel',
 	    title : uwm.Dict.translate('document format'),
 	    labelWidth : 70,
 	    width : 280,
 	    frame : true,
 	    // renderTo:'form-ct',
-	    items : {
+	    items : [{
 	        xtype : 'fieldset',
 	        name : 'fieldset',
 	        title : ' Export as : ',
@@ -70,8 +70,27 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	            inputValue : 'pdf',
 	            name : 'docformat'
 	        } ]
+	    }, {
+	        xtype : 'fieldset',
+	        name : 'fieldset',
+	        title : ' Diagrams : ',
+	        autoHeight : true,
+	        width : 280,
+	        defaultType : 'radio', // each item will be a radio button
+	        items : [ {
+	            labelSeparator : '',
+	            checked : true,
+	            boxLabel : 'Ignore Diagrams',
+	            inputValue : 'ignore',
+	            name : 'diagrams'
+	        }, {
+	            labelSeparator : '',
+	            boxLabel : 'Diagrams as virtual Packages',
+	            inputValue : 'virtual',
+	            name : 'diagrams'
+	        } ]
 	    }
-	
+			]
 	});
 	
 	var datapart = [];
@@ -149,16 +168,17 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	    title : uwm.Dict.translate('Export Assistant'),
 	    layout : 'column',
 	    region : 'center',
-	    height : 400,
+	    height : 500,
 	    width : 550,
-	    items : [ grid, detailPanel, radioFormItem ]
+	    items : [ grid, detailPanel, docTypeFormItem ]
 	};
 	
 	uwm.ui.ExportAssistent.superclass.constructor.call(this, Ext.apply(this, winLayout));
 	
 	// var detailPanel = Ext.getCmp('detailPanel');
 	this.addButton(uwm.Dict.translate('Export'), function() {
-		var doctypeSelected = radioFormItem.getForm().getValues(true).split('docformat=')[1];
+		var doctypeSelected = docTypeFormItem.getForm().getValues(true).split('docformat=')[1];
+		var diagramSelected = docTypeFormItem.getForm().getValues(true).split('diagrams=')[1];
 		var gridSelectedIndex = grid.selModel.lastActive;
 		var templateSelected = grid.getStore().getAt(gridSelectedIndex).get("technName");
 		
@@ -177,7 +197,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 		new uwm.ui.LongTaskRunner( {
 		    title : uwm.Dict.translate('Exporting Documentation ...'),
 		    call : function(successHandler, errorHandler) {
-			    uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startModel, startPackage, doctypeSelected, userLanguage, successHandler, errorHandler);
+			    uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startModel, startPackage, doctypeSelected, diagramSelected, userLanguage, successHandler, errorHandler);
 		    },
 		    successHandler : function(data) {},
 		    errorHandler : function(data) {
@@ -185,7 +205,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 		    },
 		    isReturningDocument : true
 		}).show();
-	}, [ grid, radioFormItem ]);
+	}, [ grid, docTypeFormItem ]);
 	
 	this.addButton(uwm.Dict.translate('Cancel'), function() {
 		this.close();

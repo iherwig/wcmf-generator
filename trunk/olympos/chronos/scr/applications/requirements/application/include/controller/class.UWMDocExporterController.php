@@ -57,6 +57,7 @@ class UWMDocExporterController extends BatchController
 	private $PARAM_START_MODEL = 'UWMDocExporterController.startModel';
 	private $PARAM_START_PACKAGE = 'UWMDocExporterController.startPackage';
 	private $PARAM_EXPORT_FORMAT = 'UWMDocExporterController.exportFormat';
+	private $PARAM_DIAGRAM_FORMAT = 'UWMDocExporterController.diagramFormat';
 	private $PARAM_TEMPLATE_NAME = 'UWMDocExporterController.templateName';
 	private $PARAM_LANGUAGE = 'UWMDocExporterController.language';
 	
@@ -68,6 +69,8 @@ class UWMDocExporterController extends BatchController
 	private $TEMP_OOFFICE0_PATH = 'UWMDocExporterController.openofficeTmp0Path';
 	private $TEMP_OOFFICE_PATH = 'UWMDocExporterController.openofficePath';
 	private $TEMP_EXPORT_FILE = 'UWMDocExporterController.exportFile';
+
+	private $PROBLEM_REPORT = 'UWMDocExporterController.problemReport';
 	
 	private $availableFormats = array('doc', 'odt', 'pdf');
 	const DEFAULT_EXPORT_FORMAT = 'doc';
@@ -97,10 +100,14 @@ class UWMDocExporterController extends BatchController
 			$session->set($this->PARAM_START_MODEL, $request->getValue('startModel'));
 			$session->set($this->PARAM_START_PACKAGE, $request->getValue('startPackage'));
 			$session->set($this->PARAM_EXPORT_FORMAT, $request->getValue('exportFormat'));
+			$session->set($this->PARAM_DIAGRAM_FORMAT, $request->getValue('diagramFormat'));
 			$session->set($this->PARAM_TEMPLATE_NAME, $request->getValue('templateName'));
 			if ($this->isLocalizedRequest()) {
 				$session->set($this->PARAM_LANGUAGE, $request->getValue('language'));
 			}
+			// clear the problem report
+			$report = '';
+			$session->set($this->PROBLEM_REPORT, $report);
 		}
 	}
 
@@ -134,6 +141,14 @@ class UWMDocExporterController extends BatchController
 			return null;
 	}
 	/**
+	 * @see LongTaskController::getSummaryText()
+	 */
+	function getSummaryText()
+	{
+		$session = &SessionData::getInstance();
+		return $session->get($this->PROBLEM_REPORT);
+	}
+	/**
 	 * Export the given model to XML
 	 * @param oids The oids to process
 	 * @note This is a callback method called on a matching work package @see BatchController::addWorkPackage()
@@ -156,10 +171,17 @@ class UWMDocExporterController extends BatchController
 		$startModel = $session->get($this->PARAM_START_MODEL);
 		$startPackage = $session->get($this->PARAM_START_PACKAGE);
 		$language = $session->get($this->PARAM_LANGUAGE);
+		$diagramFormat = $session->get($this->PARAM_DIAGRAM_FORMAT);
+		$virtualPackages = ($diagramFormat == 'virtual');
 		$this->check("start exportXML: model:".$startModel." package:".$startPackage);
-		UwmUtil::exportXml($tmpUwmExportPath, $startModel, $startPackage, $language);
+		$problemReport = UwmUtil::exportXml($tmpUwmExportPath, $startModel, $startPackage, $language, $virtualPackages);
 		$this->check("finished exportXML");
 
+		// update the problem report
+		if (strlen($problemReport) > 0) {
+			$report = $session->get($this->PROBLEM_REPORT)."".$problemReport."\n";
+			$session->set($this->PROBLEM_REPORT, $report);
+		}
 		ExportShutdownHandler::success();
 	}
 	/**

@@ -272,6 +272,7 @@ class UWMImporterController extends Controller
 			$parentObj = array_pop($this->parentObjs);
 		
 			if ($parentObj) {
+				$this->check("parent: ".$parentObj->getOID());
 				$parentObj->addChild($childObj);
 				$parentObj->save();
 				$parentObj = $this->persistenceFacade->load($parentObj->getOID(), BUILDTYPE_SINGLE);
@@ -293,6 +294,7 @@ class UWMImporterController extends Controller
 			$parentObj = array_pop($this->parentObjs);
 		
 			if ($parentObj) {
+				$this->check("parent: ".$parentObj->getOID());
 				$parentTemplate = $this->persistenceFacade->create($parentObj->getType(), 1);
 				$childTemplate = $this->persistenceFacade->create($this->dom->getAttribute('targetType'), 1);
 			
@@ -329,6 +331,7 @@ class UWMImporterController extends Controller
 	
 		$parentObj = array_pop($this->parentObjs);
 		if ($parentObj) {
+			$this->check("parent: ".$parentObj->getOID());
 			$parentObj->addChild($newChild);
 			$parentObj->save();
 			$parentObj = $this->persistenceFacade->load($parentObj->getOID(), BUILDTYPE_SINGLE);

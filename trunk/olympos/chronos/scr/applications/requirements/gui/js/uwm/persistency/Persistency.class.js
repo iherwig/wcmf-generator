@@ -1,12 +1,16 @@
 /*
- * Copyright (c) 2008 The Olympos Development Team. *  * http://sourceforge.net/projects/olympos/
+ * Copyright (c) 2008 The Olympos Development Team.
+ * 
+ * http://sourceforge.net/projects/olympos/
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
- */Ext.namespace("uwm.persistency");
+ */
+
+Ext.namespace("uwm.persistency");
 
 /**
  * @class Abstract base class defining the persistency layer.
@@ -118,7 +122,7 @@ uwm.persistency.Persistency.prototype.putChildnodesToActivitySetDiagram = functi
 uwm.persistency.Persistency.prototype.templatelist = function( successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, language, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, diagramFormat, language, successHandler, errorHandler ) {
 }
 
 uwm.persistency.Persistency.prototype.exportUwm = function(startModel, startPackage, language, successHandler, errorHandler ) {
