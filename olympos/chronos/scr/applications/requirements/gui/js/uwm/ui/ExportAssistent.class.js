@@ -48,7 +48,8 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	    // renderTo:'form-ct',
 	    items : [{
 	        xtype : 'fieldset',
-	        name : 'fieldset',
+	        name : 'fieldsetDocFormat',
+	        id : 'fieldsetDocFormat',
 	        title : ' Export as : ',
 	        autoHeight : true,
 	        width : 280,
@@ -72,7 +73,8 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	        } ]
 	    }, {
 	        xtype : 'fieldset',
-	        name : 'fieldset',
+	        name : 'fieldsetDiagrams',
+	        id : 'fieldsetDiagrams',
 	        title : ' Diagrams : ',
 	        autoHeight : true,
 	        width : 280,
@@ -80,18 +82,28 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	        items : [ {
 	            labelSeparator : '',
 	            checked : true,
-	            boxLabel : 'Ignore Diagrams',
+	            boxLabel : 'no diagrams',
 	            inputValue : 'ignore',
 	            name : 'diagrams'
 	        }, {
 	            labelSeparator : '',
-	            boxLabel : 'Diagrams as virtual Packages',
+	            boxLabel : 'virtual packages',
 	            inputValue : 'virtual',
 	            name : 'diagrams'
 	        } ]
 	    }
 			]
 	});
+	
+	// prepare fieldsetDiagrams for diagram-only export
+	if (this.uwmClassName == 'Diagram') {
+		var diagramField = docTypeFormItem.findById('fieldsetDiagrams');
+		diagramField.items.each(function(i) {
+				if (i.inputValue == 'virtual') {
+					i.setValue(true);
+				}
+		}, this);
+	}
 	
 	var datapart = [];
 	var fieldspart = [];
@@ -177,8 +189,8 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	
 	// var detailPanel = Ext.getCmp('detailPanel');
 	this.addButton(uwm.Dict.translate('Export'), function() {
-		var doctypeSelected = docTypeFormItem.getForm().getValues(true).split('docformat=')[1];
-		var diagramSelected = docTypeFormItem.getForm().getValues(true).split('diagrams=')[1];
+		var doctypeSelected = docTypeFormItem.getForm().getValues().docformat;
+		var diagramSelected = docTypeFormItem.getForm().getValues().diagrams;
 		var gridSelectedIndex = grid.selModel.lastActive;
 		var templateSelected = grid.getStore().getAt(gridSelectedIndex).get("technName");
 		
@@ -189,6 +201,8 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 		if (assistant.uwmClassName == 'Model')
 			startModel = assistant.oid;
 		else if (assistant.uwmClassName == 'Package')
+			startPackage = assistant.oid;
+		else if (assistant.uwmClassName == 'Diagram')
 			startPackage = assistant.oid;
 		
 		var localization = uwm.i18n.Localization.getInstance();
