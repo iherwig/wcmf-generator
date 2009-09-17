@@ -83,7 +83,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 							labelSeparator : '',
 							checked : true,
 							id : 'diagramsNone',
-							boxLabel : 'packages',
+							boxLabel : 'Packages',
 							inputValue : 'none',
 							name : 'diagrams',
 							listeners: {
@@ -94,7 +94,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 					}, {
 							labelSeparator : '',
 							id : 'diagramsVirtual',
-							boxLabel : 'diagrams',
+							boxLabel : 'Diagrams',
 							inputValue : 'virtual',
 							name : 'diagrams',
 							listeners: {
