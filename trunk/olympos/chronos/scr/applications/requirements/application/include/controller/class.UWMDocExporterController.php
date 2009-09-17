@@ -36,6 +36,7 @@ require_once ('class.UwmUtil.php');
  * @param[in] startModel The OID of the model to generate UML for.
  * @param[in] startPackage The OID of the package to generate UML for.
  * @param[in] exportFormat The format to export documentation in, must be one of $this-&gt;availableFormats.
+ * @param[in] diagramFormat The format for exporting diagram content (none, virtual)
  * @param[in] templateName The template to export. 
  * 
  * The following configuration settings are defined for this controller:
