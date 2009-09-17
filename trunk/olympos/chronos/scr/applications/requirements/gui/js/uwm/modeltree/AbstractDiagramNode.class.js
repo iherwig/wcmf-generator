@@ -40,15 +40,20 @@ uwm.modeltree.AbstractDiagramNode.prototype.buildContextMenu = function() {
 	
 	this.contextMenu = new Ext.menu.Menu( {
 		items : [ {
-		    text : uwm.Dict.translate('Open'),
-		    handler : function(item, e) {
-			    self.open(item, e);
-		    }
+			text : uwm.Dict.translate('Open'),
+			handler : function(item, e) {
+				self.open(item, e);
+			}
 		}, {
-		    text : uwm.Dict.translate('Delete from model'),
-		    handler : function(item, e) {
-			    self.deleteFromModel(item.e);
-		    }
+			text: uwm.Dict.translate('Export Documentation'),
+			handler : function(item, e) {
+					new uwm.ui.ExportAssistent("Diagram", self.getModelNode().getOid());
+			}
+		}, {
+			text : uwm.Dict.translate('Delete from model'),
+			handler : function(item, e) {
+				self.deleteFromModel(item.e);
+			}
 		} ]
 	});
 	

@@ -87,7 +87,9 @@ uwm.ui.LongTaskRunner = function(config) {
 					self.okButton.setText(uwm.Dict.translate("Close"));
 					if (data.summaryText != "") {
 						self.add(new Ext.Panel({
-							html: "<div class='uwm-errorDialogDetails'>" + data.summaryText + "</div>",
+							html: "<div class='uwm-errorDialogDetails'>" + 
+								data.summaryText.replace(/\n/g, "<br>") + 
+								"</div>",
 							autoScroll: true,
 							height:100,
 							anchor:'100%'
