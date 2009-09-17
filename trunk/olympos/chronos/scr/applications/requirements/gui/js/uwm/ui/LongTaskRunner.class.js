@@ -85,7 +85,7 @@ uwm.ui.LongTaskRunner = function(config) {
 				function(data) {
 					self.pbar.updateText(uwm.Dict.translate("Finished"));
 					self.okButton.setText(uwm.Dict.translate("Close"));
-					if (data.summaryText != "") {
+					if (data.summaryText && data.summaryText != "") {
 						self.add(new Ext.Panel({
 							html: "<div class='uwm-errorDialogDetails'>" + 
 								data.summaryText.replace(/\n/g, "<br>") + 
