@@ -43,7 +43,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 			name : 'formPanel',
 			title : uwm.Dict.translate('document format'),
 			labelWidth : 70,
-			width : 280,
+			width : 250,
 			frame : true,
 			// renderTo:'form-ct',
 			items : [{
@@ -52,7 +52,6 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 					id : 'fieldsetDocFormat',
 					title : ' Export as : ',
 					autoHeight : true,
-					width : 280,
 					defaultType : 'radio', // each item will be a radio button
 					items : [ {
 							labelSeparator : '',
@@ -77,7 +76,6 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 					id : 'fieldsetDiagrams',
 					title : ' Content : ',
 					autoHeight : true,
-					width : 280,
 					defaultType : 'radio', // each item will be a radio button
 					items : [ {
 							labelSeparator : '',
@@ -125,61 +123,59 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	
 	for ( var i = 0; i < technicalNames.length; i++) {
 		datapart.push( {
-		    'technName' : technicalNames[i],
-		    'templateName' : titles[i],
-		    'description' : descriptions[i]
+			'technName' : technicalNames[i],
+			'templateName' : titles[i],
+			'description' : descriptions[i]
 		});
 	}
 	
 	fieldspart.push( {
-	    name : 'technName',
-	    mapping : 'technName'
+			name : 'technName',
+			mapping : 'technName'
 	}, {
-	    name : 'templateName',
-	    mapping : 'templateName'
+			name : 'templateName',
+			mapping : 'templateName'
 	}, {
-	    name : 'description',
-	    mapping : 'description'
+			name : 'description',
+			mapping : 'description'
 	});
 	
 	var eastore = new Ext.data.SimpleStore( {
-	    data : datapart,
-	    fields : fieldspart
+		data : datapart,
+		fields : fieldspart
 	});
 	
 	var grid = new Ext.grid.GridPanel( {
-	    store : eastore,
-	    columns : [ {
-	        header : uwm.Dict.translate('Template Name'),
-	        width : 233,
-	        dataIndex : 'templateName',
-	        sortable : true
-	    } // 'Technical Name'// 'Template Name'//'Description'
-	    ],
-	    sm : new Ext.grid.RowSelectionModel( {
-		    singleSelect : true
-	    }),
-	    title : uwm.Dict.translate('Please select to show Details.'),
-	    split : true,
-	    region : 'west',
-	    height : 300,
-	    width : 250,
-	    frame : true
-	
+		store : eastore,
+		columns : [ {
+				header : uwm.Dict.translate('Template Name'),
+				width : 233,
+				dataIndex : 'templateName',
+				sortable : true
+		} // 'Technical Name'// 'Template Name'//'Description'
+		],
+		sm : new Ext.grid.RowSelectionModel( {
+			singleSelect : true
+		}),
+		title : uwm.Dict.translate('Please select to show Details.'),
+		split : true,
+		rowspan: 2,
+		height : 426,
+		width : 250,
+		frame : true
 	});
 	
 	var detailPanel = {
-	    id : 'detailPanel',
-	    title : uwm.Dict.translate('detailed description'),
-	    html : '<i>' + uwm.Dict.translate('< detailed description >') + '</i>',
-	    split : true,
-	    region : 'east',
-	    height : 170,
-	    width : 280,
-	    frame : true,
-	    bodyStyle : {
-		    padding : '7px'
-	    }
+		id : 'detailPanel',
+		title : uwm.Dict.translate('detailed description'),
+		html : '<i>' + uwm.Dict.translate('< detailed description >') + '</i>',
+		split : true,
+		height : 170,
+		width : 250,
+		frame : true,
+		bodyStyle : {
+			padding : '7px'
+		}
 	}
 	var template = new Ext.Template( [ '<b><u>Technical Name: </b></u><BR/><BR/><center>{technName}</center><BR/>', '<b><u>Description: </b></u><BR/><BR/><center>{description}</center><BR/>' ])
 	grid.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
@@ -188,12 +184,16 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	});
 	
 	var winLayout = {
-	    title : uwm.Dict.translate('Export Assistant'),
-	    layout : 'column',
-	    region : 'center',
-	    height : 500,
-	    width : 550,
-	    items : [ grid, detailPanel, docTypeFormItem ]
+		title : uwm.Dict.translate('Export Assistant'),
+		layout : 'table',
+		layoutConfig: {
+			columns: 2
+		},
+		region : 'center',
+		height : 496,
+		width : 514,
+		resizable: false,
+		items : [ grid, detailPanel, docTypeFormItem ]
 	};
 	
 	uwm.ui.ExportAssistent.superclass.constructor.call(this, Ext.apply(this, winLayout));

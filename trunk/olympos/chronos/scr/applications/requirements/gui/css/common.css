@@ -105,6 +105,10 @@
 	z-index: 12001;
 }
 
+.x-table-layout td  {
+	vertical-align:top;
+}
+
 body {
 	background-color: white;
 	background-image: url("../../application/images/Chronos_webModeller3.jpg");
