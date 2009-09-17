@@ -12,7 +12,7 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 	
 	@Test
 	public void simple() {
-		//ensureLogin()
+		ensureLogin()
 		//clearSid()
 		
 		request(
