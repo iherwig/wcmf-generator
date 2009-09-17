@@ -30,7 +30,10 @@ package net.sourceforge.olympos.dionysos.json.test;
 	 * The corresponding password.
 	 */
 	static password = 'password'
-
+	/**
+	* The name of a class to test
+	*/
+	static baseClassName = 'Movie'
 	/**
 	 * The name of a class to test the list command. Must exist in exactly 5 instances.
 	 */
@@ -137,4 +140,5 @@ package net.sourceforge.olympos.dionysos.json.test;
 	static associateWrongSourceClass='Myclass:123'
 	static associateWrongTargetClass='Myclass:123'
 	static associateWrongRelation='MyRelation'
+
 }
