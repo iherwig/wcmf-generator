@@ -40,59 +40,70 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	var assistant = this;
 	
 	var docTypeFormItem = new Ext.FormPanel( {
-	    name : 'formPanel',
-	    title : uwm.Dict.translate('document format'),
-	    labelWidth : 70,
-	    width : 280,
-	    frame : true,
-	    // renderTo:'form-ct',
-	    items : [{
-	        xtype : 'fieldset',
-	        name : 'fieldsetDocFormat',
-	        id : 'fieldsetDocFormat',
-	        title : ' Export as : ',
-	        autoHeight : true,
-	        width : 280,
-	        defaultType : 'radio', // each item will be a radio button
-	        items : [ {
-	            labelSeparator : '',
-	            checked : true,
-	            boxLabel : 'Microsoft Word',
-	            inputValue : 'doc',
-	            name : 'docformat'
-	        }, {
-	            labelSeparator : '',
-	            boxLabel : 'Open Office Writer',
-	            inputValue : 'odt',
-	            name : 'docformat'
-	        }, {
-	            labelSeparator : '',
-	            boxLabel : 'PDF',
-	            inputValue : 'pdf',
-	            name : 'docformat'
-	        } ]
-	    }, {
-	        xtype : 'fieldset',
-	        name : 'fieldsetDiagrams',
-	        id : 'fieldsetDiagrams',
-	        title : ' Diagrams : ',
-	        autoHeight : true,
-	        width : 280,
-	        defaultType : 'radio', // each item will be a radio button
-	        items : [ {
-	            labelSeparator : '',
-	            checked : true,
-	            boxLabel : 'no diagrams',
-	            inputValue : 'ignore',
-	            name : 'diagrams'
-	        }, {
-	            labelSeparator : '',
-	            boxLabel : 'virtual packages',
-	            inputValue : 'virtual',
-	            name : 'diagrams'
-	        } ]
-	    }
-			]
+			name : 'formPanel',
+			title : uwm.Dict.translate('document format'),
+			labelWidth : 70,
+			width : 280,
+			frame : true,
+			// renderTo:'form-ct',
+			items : [{
+					xtype : 'fieldset',
+					name : 'fieldsetDocFormat',
+					id : 'fieldsetDocFormat',
+					title : ' Export as : ',
+					autoHeight : true,
+					width : 280,
+					defaultType : 'radio', // each item will be a radio button
+					items : [ {
+							labelSeparator : '',
+							checked : true,
+							boxLabel : 'Microsoft Word',
+							inputValue : 'doc',
+							name : 'docformat'
+					}, {
+							labelSeparator : '',
+							boxLabel : 'Open Office Writer',
+							inputValue : 'odt',
+							name : 'docformat'
+					}, {
+							labelSeparator : '',
+							boxLabel : 'PDF',
+							inputValue : 'pdf',
+							name : 'docformat'
+					} ]
+			}, {
+					xtype : 'fieldset',
+					name : 'fieldsetDiagrams',
+					id : 'fieldsetDiagrams',
+					title : ' Content : ',
+					autoHeight : true,
+					width : 280,
+					defaultType : 'radio', // each item will be a radio button
+					items : [ {
+							labelSeparator : '',
+							checked : true,
+							id : 'diagramsNone',
+							boxLabel : 'packages',
+							inputValue : 'none',
+							name : 'diagrams',
+							listeners: {
+								render: function() {
+									new Ext.ToolTip({target: docTypeFormItem.findById('diagramsNone').container, html :'Export packages'});
+								}
+							}
+					}, {
+							labelSeparator : '',
+							id : 'diagramsVirtual',
+							boxLabel : 'diagrams',
+							inputValue : 'virtual',
+							name : 'diagrams',
+							listeners: {
+								render: function() {
+									new Ext.ToolTip({target: docTypeFormItem.findById('diagramsVirtual').container, html :'Export diagrams as packages. Other package content will be ignored.'});
+								}
+							}
+					} ]
+			}	],
 	});
 	
 	// prepare fieldsetDiagrams for diagram-only export
