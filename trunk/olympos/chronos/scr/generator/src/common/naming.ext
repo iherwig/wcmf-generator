@@ -1,0 +1,7 @@
+
+/**
+ * Replace :: and / by .
+ */
+String asPackageName(String name) : 
+	name.replaceAll("::", ".").replaceAll("/", ".")
+;

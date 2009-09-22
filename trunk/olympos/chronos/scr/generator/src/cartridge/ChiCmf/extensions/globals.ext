@@ -23,3 +23,6 @@ String HeaderText() : GLOBALVAR HeaderText;
  */
 String ApplicationPath() : asPath(ApplicationPackage());
 String Date() : JAVA net.sourceforge.olympos.oaw.extend.Util.CurrentDate();
+
+String LibraryPackageAbsolute(uml::Model this) : this.name+"::"+RootPackage()+"::"+LibraryPackage();
+String ApplicationPackageAbsolute(uml::Model this) : this.name+"::"+RootPackage()+"::"+ApplicationPackage();
