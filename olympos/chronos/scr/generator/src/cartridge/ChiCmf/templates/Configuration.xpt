@@ -34,6 +34,9 @@
 	«IF this.plattform == "wcmf"-»
 		«IF this.config == curConfig || this.name.toLowerCase() == "actionmapping" || this.name.toLowerCase() == "views"-»
 [«this.name.toLowerCase()»]
+«PROTECT CSTART "; " CEND "" ID ApplicationPath()+"/include/"+curConfig+"/"+this.name+"SectionBegin"»
+; put additional config keys here
+«ENDPROTECT»
 		«IF curConfig.isDefaultConfig()-»
 			«IF this.name.toLowerCase() == "classmapping"-»
 				«EXPAND classMapping(curConfig) FOREACH this.getModel().allOwnedElements().typeSelect(uml::Class)-»
