@@ -11,5 +11,5 @@ extension cartridge::ChiCmf::extensions::util;
  * Get all nodes that are connected to the view
  */
 cached List[ChiNode] getChiNodes(ChiView this) :
-	this.getAssociations().memberEnd.class.typeSelect(ChiNode)
+	this.getAssociations().memberEnd.type.typeSelect(ChiNode)
 ;
