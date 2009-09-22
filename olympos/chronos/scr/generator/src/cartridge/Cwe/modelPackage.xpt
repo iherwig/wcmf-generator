@@ -36,7 +36,7 @@ Ext.namespace("application.«this.getFullPackageName()»");
 	
 	this.cweModelElementId = "«this.getCwePackageName()»";
 	this.name = "«this.name»";
-	this.owningPackageId = «IF this.owner.getQualifiedName() != (MODEL_NAME()+"::"+RootPackage()+"::"+ApplicationPackage())»"«this.owner.getCwePackageName()»"«ELSE»cwe.model.RootPackage.ROOT_PACKAGE_ID«ENDIF»;
+	this.owningPackageId = «IF this.owner.getQualifiedName() != ApplicationPackageAbsolute(this.getModel())»"«this.owner.getCwePackageName()»"«ELSE»cwe.model.RootPackage.ROOT_PACKAGE_ID«ENDIF»;
 	this.startExpanded = true;
 };
 

@@ -1,6 +1,8 @@
 import uml;
 import Chronos;
 
+extension common::util;
+
 extension cartridge::ChiCmf::extensions::globals;
 extension cartridge::ChiCmf::extensions::util;
 extension cartridge::ChiCmf::extensions::umlutils;
@@ -12,11 +14,11 @@ List[Chronos::ChiNode] getModelClasses(uml::Package this):
 ;
 
 List[uml::Package] getModelPackages(uml::Model this):
-	this.allOwnedElements().typeSelect(uml::Package).selectFirst(e|e.getQualifiedName().startsWith(MODEL_NAME()+"::"+RootPackage()+"::"+ApplicationPackage())).getModelPackages({})
+	this.allOwnedElements().typeSelect(uml::Package).selectFirst(e|e.getQualifiedName().startsWith(ApplicationPackageAbsolute(this))).getModelPackages({})
 ;
 
 List[uml::Package] getModelPackages(uml::Package this, List[uml::Package] list):
-	this.getQualifiedName() != (MODEL_NAME()+"::"+RootPackage()+"::"+ApplicationPackage()) 
+	this.getQualifiedName() != ApplicationPackageAbsolute(this.getModel())
 	&& this.getModelClasses().size > 0
 	?
 		list.add(this)

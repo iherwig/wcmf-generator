@@ -24,14 +24,14 @@ String STEREOTYPE_WCMF_ASSOCIATION() : "wcmf::WCMFAssociation";
  * Check if a given class belongs to the wcmf library
  */
 boolean isLibraryClass(uml::NamedElement this) : 
-	this.getQualifiedName().startsWith("Model::"+RootPackage()+"::"+LibraryPackage())
+	this.getQualifiedName().startsWith(LibraryPackageAbsolute(this.getModel()))
 ;
 
 /**
  * Check if a given class belongs to the application
  */
 boolean isApplicationClass(uml::NamedElement this) : 
-	this.getQualifiedName().startsWith("Model::"+RootPackage()+"::"+ApplicationPackage()) && this.metaType == uml::Class
+	this.getQualifiedName().startsWith(ApplicationPackageAbsolute(this.getModel())) && uml::Class.isInstance(this)
 ;
 
 /**

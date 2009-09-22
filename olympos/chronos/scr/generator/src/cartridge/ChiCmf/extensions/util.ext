@@ -20,19 +20,18 @@ String STEREOTYPE_CHI_MANY_TO_MANY() : "Chronos::ChiManyToMany";
 //TODO: Which Type?
 String STEREOTYPE_CHI_ASSOCIATION() : "Chronos::ChiAssociation";
 
-String MODEL_NAME(): "uml-generated";
 /**
  * Check if a given class belongs to the chronos library
  */
 boolean isLibraryClass(uml::NamedElement this) : 
-	this.getQualifiedName().startsWith(MODEL_NAME()+"::"+RootPackage()+"::"+LibraryPackage())
+	this.getQualifiedName().startsWith(LibraryPackageAbsolute(this.getModel()))
 ;
 
 /**
  * Check if a given class belongs to the application
  */
 boolean isApplicationClass(uml::NamedElement this) : 
-	this.getQualifiedName().startsWith(MODEL_NAME()+"::"+RootPackage()+"::"+ApplicationPackage()) && uml::Class.isInstance(this)
+	this.getQualifiedName().startsWith(ApplicationPackageAbsolute(this.getModel())) && uml::Class.isInstance(this)
 ;
 
 /**
