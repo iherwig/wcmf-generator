@@ -7,8 +7,12 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.AbstractCollection;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This class provides some utility functions to be used in XTend files
@@ -70,6 +74,13 @@ public class Util {
 			return string;
 	}
 
+	/**
+	 * Create the md5 hash of a string
+	 * @param input
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
+	 */
 	public static String md5(String input) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 		StringBuffer result = new StringBuffer();
 
@@ -82,5 +93,23 @@ public class Util {
 		}
 
 		return result.toString();
+	}
+
+	/**
+	 * Get the substrings of a string matching a regular expression
+	 * 
+	 * @param s
+	 * @param regExp
+	 * @return List<String>
+	 */
+	public static List<String> extract(String s, String regExp) {
+		Pattern p = Pattern.compile(regExp);
+		Matcher m = p.matcher(s);
+
+		List<String> result = new ArrayList<String>();
+		while ( m.find() ) {
+			result.add(s.substring(m.start(1), m.end(1)));
+		}
+		return result;
 	}
 }
