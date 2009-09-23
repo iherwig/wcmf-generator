@@ -62,6 +62,8 @@ class GenerateCodeController extends BatchController
 	const TEMP_UWM_EXPORT_PATH = 'GenerateCodeController.tmpUwmExportPath';
 	const TEMP_PROPERTIES_PATH = 'GenerateCodeController.tmpPropertiesPath';
 
+	const PROBLEM_REPORT = 'GenerateCodeController.problemReport';
+	
 	private $lastTime = 0;
 	private function check($msg)
 	{
@@ -83,6 +85,9 @@ class GenerateCodeController extends BatchController
 			$session = &SessionData::getInstance();
 			$session->set(self::PARAM_START_MODEL, $request->getValue('modelOid'));
 			$session->set(self::PARAM_CODE_ID, $request->getValue('codeId'));
+			// clear the problem report
+			$report = '';
+			$session->set(self::PROBLEM_REPORT, $report);
 		}
 	}
 
@@ -114,6 +119,14 @@ class GenerateCodeController extends BatchController
 		}
 		else
 		return null;
+	}
+	/**
+	 * @see LongTaskController::getSummaryText()
+	 */
+	function getSummaryText()
+	{
+		$session = &SessionData::getInstance();
+		return $session->get(self::PROBLEM_REPORT);
 	}
 	/**
 	 * Export the given model to XML
@@ -166,9 +179,13 @@ class GenerateCodeController extends BatchController
 
 		// run the generator
 		$this->check("start generator");
-		$runCfg = OawUtil::runOaw($tmpPropertiesPath, $workflow);
+		$result = OawUtil::runOaw($tmpPropertiesPath, $workflow);
 		$this->check('finished generator');
 
+		if ($result['returncode'] > 0) {
+			$report = "There were problems during generation:\n".$result['stderr']."\n";
+			$session->set(self::PROBLEM_REPORT, $report);
+		}
 		ExportShutdownHandler::success();
 	}
 	/**

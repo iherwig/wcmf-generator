@@ -91,6 +91,13 @@ class OawUtil {
 		return $propertiesPath;
 	}
 	
+	/**
+	 * Run the generator
+	 * @param propertyFilePath The property file
+	 * @param relativeWorkflowPath The workflow file
+	 * @return An associative array with keys 'stdout', 'stderr', 'returncode'
+	 * When returncode is not 0, the error message is contained in stderr.
+	 */
 	public static function runOaw($propertyFilePath, $relativeWorkflowPath) {
 		$result = null;
 
@@ -113,10 +120,10 @@ class OawUtil {
 			
 			fclose($pipes[0]);
 		
-			$result['stdout'] = stream_get_contents($pipes[1]);
+			$result['stdout'] = trim(stream_get_contents($pipes[1]));
 			fclose($pipes[1]);
 		
-			$result['stderr'] = stream_get_contents($pipes[2]);
+			$result['stderr'] = trim(stream_get_contents($pipes[2]));
 			fclose($pipes[2]);
 		
 			// It is important that you close any pipes before calling
@@ -124,9 +131,17 @@ class OawUtil {
 			$returnCode = proc_close($process);
 			$result['returncode'] = $returnCode;
 
-			$logger = LoggerManager::getLogger('OawUtil');
-
-			$logger->error("oAW run\nstdout: " . $result['stdout'] . "\nstderr: " . $result['stderr'] . "\nreturncode: " . $result['returncode'], __FILE__, __LINE__);
+			if ($returnCode > 0) {
+				Log::error("oAW run\nstdout: ".$result['stdout'], __CLASS__);
+				Log::error("stderr: ".$result['stderr'], __CLASS__);
+				Log::error("returncode: ".$result['returncode'], __CLASS__);
+				if (strlen($result['stderr']) == 0) {
+					$result['stderr'] = "See logfile for details.";
+				}
+			}
+			else {
+				Log::info("oAW run\nstdout: ".$result['stdout'], __CLASS__);
+			}
 		}
 		
 		return $result;

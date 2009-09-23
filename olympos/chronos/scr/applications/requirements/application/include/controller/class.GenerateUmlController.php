@@ -81,7 +81,7 @@ class GenerateUmlController extends Controller
 	
 		$this->check("start generator");
 	
-		$runCfg = OawUtil::runOaw($tmpPropertiesPath, 'cartridge/UmlConnector/workflow/cwm2uml.oaw');
+		$result = OawUtil::runOaw($tmpPropertiesPath, 'cartridge/UmlConnector/workflow/cwm2uml.oaw');
 		
 		$this->check('Generator finished');
 		

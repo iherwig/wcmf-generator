@@ -181,6 +181,7 @@ class UWMDocExporterController extends BatchController
 		// update the problem report
 		if (strlen($problemReport) > 0) {
 			$report = $session->get($this->PROBLEM_REPORT)."".$problemReport."\n";
+			Log::error($report, __CLASS__);
 			$session->set($this->PROBLEM_REPORT, $report);
 		}
 		ExportShutdownHandler::success();
@@ -239,8 +240,23 @@ class UWMDocExporterController extends BatchController
 	
 		// run the generator
 		$this->check("start generator");
-		$runCfg = OawUtil::runOaw($propertyPath, 'cartridge/DocumentGeneration/workflow/cwm2word.oaw');
+		$result = OawUtil::runOaw($propertyPath, 'cartridge/DocumentGeneration/workflow/cwm2word.oaw');
 		$this->check('finished generator');
+
+		if ($result['returncode'] > 0) {
+			$report = "There were problems during generation:\n".$result['stderr']."\n";
+			$session->set($this->PROBLEM_REPORT, $report);
+		}
+
+		// check if the generated file exists
+		$exportFile = $session->get($this->TEMP_EXPORT_FILE);
+		if (filesize($exportFile) == 0) {
+			$this->check('Zero return file size');
+			$report = "The generated file does not exist: ".$exportFile;
+			Log::error($report, __CLASS__);
+			$report = "There were problems during generation:\n".$report.".\nSee logfile for details.";
+			$session->set($this->PROBLEM_REPORT, $report);
+		}
 
 		ExportShutdownHandler::success();
 	}
@@ -254,13 +270,11 @@ class UWMDocExporterController extends BatchController
 		require_once ('class.ExportShutdownHandler.php');
 		$session = &SessionData::getInstance();
 
-		// check if the generated file exists
+		// get the generated file
 		$exportFile = $session->get($this->TEMP_EXPORT_FILE);
 		if (filesize($exportFile) == 0) {
-			$this->check('Zero return file size');
 			ExportShutdownHandler::success();
-			WCMFException::throwEx("The generated file does not exist", __FILE__, __LINE__);
-			return false;
+			return;
 		}
 
 		//header('Content-type: text/plain');
