@@ -63,6 +63,8 @@ class UWMExporterController extends BatchController
 	private $TEMP_PROPERTIES_PATH = 'UWMExporterController.tmpPropertiesPath';
 	private $TEMP_UML_EXPORT_PATH = 'UWMExporterController.tmpUmlPath';
 
+	private $PROBLEM_REPORT = 'UWMDocExporterController.problemReport';
+	
 	private $lastTime = 0;
 	private function check($msg)
 	{
@@ -87,6 +89,9 @@ class UWMExporterController extends BatchController
 			if ($this->isLocalizedRequest()) {
 				$session->set($this->PARAM_LANGUAGE, $request->getValue('language'));
 			}
+			// clear the problem report
+			$report = '';
+			$session->set($this->PROBLEM_REPORT, $report);
 		}
 	}
 
@@ -119,6 +124,14 @@ class UWMExporterController extends BatchController
 		else {
 		  return null;
         }
+	}
+	/**
+	 * @see LongTaskController::getSummaryText()
+	 */
+	function getSummaryText()
+	{
+		$session = &SessionData::getInstance();
+		return $session->get($this->PROBLEM_REPORT);
 	}
 	/**
 	 * Export the given model to XML
@@ -169,8 +182,23 @@ class UWMExporterController extends BatchController
 
 		// run the generator
 		$this->check("start generator");
-		$runCfg = OawUtil::runOaw($tmpPropertiesPath, 'cartridge/UmlConnector/workflow/cwm2uml.oaw');
+		$result = OawUtil::runOaw($tmpPropertiesPath, 'cartridge/UmlConnector/workflow/cwm2uml.oaw');
 		$this->check('finished generator');
+
+		if ($result['returncode'] > 0) {
+			$report = "There were problems during generation:\n".$result['stderr']."\n";
+			$session->set($this->PROBLEM_REPORT, $report);
+		}
+
+		// check if the generated file exists
+		$exportFile = "$tmpUmlPath/uml-generated.uml";
+		if (filesize($exportFile) == 0) {
+			$this->check('Zero return file size');
+			$report = "The generated file does not exist: ".$exportFile;
+			Log::error($report, __CLASS__);
+			$report = "There were problems during generation:\n".$report.".\nSee logfile for details.";
+			$session->set($this->PROBLEM_REPORT, $report);
+		}
 
 		ExportShutdownHandler::success();
 	}
@@ -184,16 +212,14 @@ class UWMExporterController extends BatchController
 		require_once ('class.ExportShutdownHandler.php');
 		$session = &SessionData::getInstance();
 
-		// check if the generated file exists
-		$tmpUmlPath = $session->get($this->TEMP_UML_EXPORT_PATH);
-		$exportFile = "$tmpUmlPath/uml-generated.uml";
+		// get the generated file
+		$tmpUmlExportPath = $session->get($this->TEMP_UML_EXPORT_PATH);
+		$exportFile = "$tmpUmlExportPath/uml-generated.uml";
 		if (filesize($exportFile) == 0) {
-			$this->check('Zero return file size');
 			ExportShutdownHandler::success();
-			WCMFException::throwEx("The generated file does not exist", __FILE__, __LINE__);
-			return false;
+			return;
 		}
-
+		
 		//header('Content-type: text/plain');
 		header('Content-type: application/octet-stream');
 		header('Content-Disposition: attachment; filename="cwm-export.uml"');
