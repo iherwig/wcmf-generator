@@ -22,6 +22,8 @@ import org.openarchitectureware.type.MetaModel;
 import org.openarchitectureware.uml2.UML2MetaModel;
 import org.openarchitectureware.uml2.profile.ProfileMetaModel;
 import org.openarchitectureware.workflow.WorkflowRunner;
+import org.openarchitectureware.workflow.issues.Issue;
+import org.openarchitectureware.workflow.issues.IssuesImpl;
 import org.openarchitectureware.workflow.monitor.NullProgressMonitor;
 import org.openarchitectureware.xtend.XtendFacade;
 
@@ -56,7 +58,6 @@ public class Generator {
             try
             {
             	Map properties = new HashMap();
-            	Map slotContents = new HashMap();
 
                 // add version information from jars manifest file
                 try
@@ -100,20 +101,47 @@ public class Generator {
             			properties.put(property, value);
             		}
             	}
-            	new WorkflowRunner().run(wfFile , new NullProgressMonitor(), properties, slotContents);
+            	
+            	boolean success = true;
+            	
+            	// prepare the workflow
+            	WorkflowRunner wfRunner = new WorkflowRunner();
+            	success = wfRunner.prepare(wfFile, new NullProgressMonitor(), properties);
+            	if (!success) {
+            		// in case of an error in workflow preparation, we can't obtain the issues
+            		// and give a general error description
+            		handleError("Workflow interrupted because of configuration errors. See logfile for details.");
+            	}
+            	
+            	// execute the workflow
+            	IssuesImpl issues = new IssuesImpl();
+            	success = wfRunner.executeWorkflow(new HashMap<String, String>(), issues);
+            	if (!success) {
+            		// use the issues to give an error description
+            		StringBuffer errorStr = new StringBuffer();
+            		for (Issue i : issues.getErrors()) {
+            			errorStr.append(i.getMessage()).append("\\n");
+                    }            		
+            		handleError(errorStr.toString());
+            	}
             } 
             catch (Throwable e) 
             {
                 e.printStackTrace();
-                System.exit(5);
+            	handleError(e.getMessage());
             }
         }
     }
 
-    /**
+    protected static void handleError(String error) {
+    	System.err.println(error);
+        System.exit(5);
+	}
+
+	/**
      * Print the usage message
      */
-    public static void printUsage() 
+    protected static void printUsage() 
     {
         System.out.println("Generator Usage: ");
         System.out.println("java -jar ChronosGenerator.jar workflow.oaw");
