@@ -1,4 +1,5 @@
 «IMPORT uml»
+«IMPORT Chronos»
 
 «EXTENSION org::openarchitectureware::uml2::profile::profiling»
 
@@ -8,21 +9,21 @@
 «EXTENSION cartridge::Grails::classtools»
 
 «DEFINE root FOR uml::Model»
-	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(uml::Class)»
+	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(ChiNode)»
 «ENDDEFINE»
 
 «REM» Main domain root «ENDREM»
-«DEFINE domainClass FOR uml::Class»
+«DEFINE domainClass FOR ChiNode»
 	«LET this.getNearestPackage().getPackageName() AS fullQualifiedPackage»
 	«FILE (!fullQualifiedPackage.isNullOrEmpty() ? fullQualifiedPackage.asPath() + "/" : "") + name +".groovy"»
 	«IF !fullQualifiedPackage.isNullOrEmpty()»
-		package «fullQualifiedPackage»;
+		package «fullQualifiedPackage»
 	«ENDIF»
 
 	«EXPAND Import FOR this»
 
 	«IF this.isAbstract»abstract«ENDIF»
-	class «name» 
+	class «name-» 
 	«IF !this.superClass.isEmpty» extends «this.superClass.first().name»«ENDIF»
 	{
 	«REM» Attributes «ENDREM»
@@ -51,20 +52,15 @@
 «ENDDEFINE»	
 
 «DEFINE Import FOR uml::Class»
-	«FOREACH this.getImportedClasses() AS import»
-		import
-		«IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»
-			«import.getNearestPackage().getPackageName()».
-		«ENDIF»
-		«import.name»
-		;
+	«FOREACH this.getImportedClasses().typeSelect(ChiNode) AS import»
+		«IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»import «import.getNearestPackage().getPackageName()».«ENDIF»«import.name»
 	«ENDFOREACH»
 «ENDDEFINE»
 	
 
 «REM» Specify a embedded value «ENDREM»
 «DEFINE EmbeddesValues FOR Class»
-«LET getAssociations().memberEnd.select(e|e.isMyEmbeddedValue(this)) AS embeddesMemberEnds»
+«LET getAssociations().memberEnd.typeSelect(ChiNode).select(e|e.isMyEmbeddedValue(this)) AS embeddesMemberEnds»
 «IF embeddesMemberEnds.size > 0 »
 «REM» embedded values «ENDREM»
 static embedded = [
@@ -91,7 +87,7 @@ static belongsTo = [
 
 «REM» Reference in multivalued association «ENDREM»
 «DEFINE MultivaluedAssociations FOR Class»
-«IF getAssociations().memberEnd.select(a|a.isReferenceMultivalued(this)).size > 0»
+«IF getAssociations().memberEnd.typeSelect(ChiNode).select(a|a.isReferenceMultivalued(this)).size > 0»
 static hasMany = [
 «FOREACH getAssociations().select(e|e.memberEnd.select(s|s.isReferenceMultivalued(this)).size > 0) AS assoc SEPARATOR ","»
 		
