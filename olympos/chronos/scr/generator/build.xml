@@ -1,18 +1,21 @@
 <project name="wCMF Generator" default="redist" basedir=".">
 
-    <property file="build.properties"/>
+	<property file="build.properties"/>
 
-    <path id="lib">
-        <fileset dir="${lib.dir}">
-            <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${lib.dir}/openoffice">
-            <include name="*.jar"/>
-        </fileset>
-    	<fileset dir="${lib.dir}/ant">
-    		<include name="*.jar"/>
-    	</fileset>
-    </path>
+	<path id="lib">
+		<fileset dir="${lib.dir}">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${lib.dir}/openoffice">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${lib.dir}/ant">
+			<include name="*.jar"/>
+		</fileset>
+		<fileset dir="${lib.dir}/beautifier">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
 
 	<target name="clean">
 		<delete dir="${build.dir}" verbose="false" failonerror="false"/>
