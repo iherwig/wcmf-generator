@@ -29,7 +29,7 @@ package net.sourceforge.olympos.dionysos.json.test;
 	/**
 	 * The corresponding password.
 	 */
-	static password = 'password'
+	static password = 'admin'
 	/**
 	* The name of a class to test
 	*/

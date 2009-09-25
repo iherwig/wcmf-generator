@@ -26,8 +26,7 @@ public class CloneTest extends DionysosTest {
 				assertTrue(json.success)
 				assertEquals('clone', json.action)
 				assertNotNull(json.oid)
-				assertNotEqual(Cfg.readBaseOid, json.oid)
-				
+				assertNotEqual(Cfg.readBaseOid, json.oid)	
 				 
 			},
 			this.method
