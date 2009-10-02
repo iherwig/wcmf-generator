@@ -68,22 +68,22 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 		}
 	«ENDFOREACH»
 	
-	«IF this.getChiAttributes().size > 0 && (this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0)»
+	«IF this.getChiAttributes().size > 0 && (this.getNotAbstractParentNodes().size > 0 || this.getNotAbstractChildNodes().size > 0)»
 		,
 	«ENDIF»
 	
-	«FOREACH this.getParentNodesRecursive() AS currParent SEPARATOR ", "»
+	«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
 		{
 			name : "parent«currParent.getRoleName()»",
 			mapping: "parent«currParent.getRoleName()»"
 		}
 	«ENDFOREACH»
 	
-	«IF this.getParentNodesRecursive().size > 0 && this.getChildNodesRecursive().size > 0»
+	«IF this.getNotAbstractParentNodes().size > 0 && this.getNotAbstractChildNodes().size > 0»
 		,
 	«ENDIF»
 	
-	«FOREACH this.getChildNodesRecursive() AS currChild SEPARATOR ", "»
+	«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
 		{
 			name : "child«currChild.getRoleName()»",
 			mapping : "child«currChild.getRoleName()»"
@@ -94,18 +94,18 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 
 «DEFINE relations FOR Chronos::ChiNode»
 	this.relations = {
-	«FOREACH this.getParentNodesRecursive() AS currParent SEPARATOR ", "»
+	«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
 		"parent«currParent.getRoleName()»" : {
 			isParent : true,
 			targetModelClassId : "«currParent.type.name»"
 		}
 	«ENDFOREACH»
 
-	«IF (this.getParentNodesRecursive().size > 0) && (this.getChildNodesRecursive().size > 0)»
+	«IF (this.getNotAbstractParentNodes().size > 0) && (this.getNotAbstractChildNodes().size > 0)»
 		,
 	«ENDIF»
 	
-	«FOREACH this.getChildNodesRecursive() AS currChild SEPARATOR ", "»
+	«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
 		"child«currChild.getRoleName()»" : {
 			isParent : false,
 			targetModelClassId : "«currChild.type.name»"
@@ -155,23 +155,23 @@ application.«this.getFullPackageName()».«this.name».prototype.getEditorItems
 		«ENDFOREACH»
 		]})
 		
-		«IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0»
+		«IF this.getNotAbstractParentNodes().size > 0 || this.getNotAbstractChildNodes().size > 0»
 			,
 		«ENDIF»
 	«ENDIF»
 	
-	«IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0»
+	«IF this.getNotAbstractParentNodes().size > 0 || this.getNotAbstractChildNodes().size > 0»
 		new cwe.editor.control.AssociationsFieldSet({
 			items: [
-		«FOREACH this.getParentNodesRecursive() AS currParent SEPARATOR ", "»
+		«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
 			«EXPAND association(true) FOR currParent»
 		«ENDFOREACH»
 		
-		«IF this.getParentNodesRecursive().size > 0 && this.getChildNodesRecursive().size > 0»
+		«IF this.getNotAbstractParentNodes().size > 0 && this.getNotAbstractChildNodes().size > 0»
 			,
 		«ENDIF»
 		
-		«FOREACH this.getChildNodesRecursive() AS currChild SEPARATOR ", "»
+		«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
 			«EXPAND association(false) FOR currChild»
 		«ENDFOREACH»
 		
