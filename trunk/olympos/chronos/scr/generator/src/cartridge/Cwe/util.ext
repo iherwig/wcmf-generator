@@ -10,7 +10,16 @@ extension cartridge::ChiCmf::extensions::naming;
 extension cartridge::ChiCmf::extensions::ChiNode;
 
 List[Chronos::ChiNode] getModelClasses(uml::Package this):
-	this.allOwnedElements().typeSelect(Chronos::ChiNode).select(e|e.isApplicationClass() && e.getQualifiedName() != RequiredNodeSuperClass())
+	this.allOwnedElements().typeSelect(Chronos::ChiNode).
+		select(e|e.isApplicationClass() && e.getQualifiedName() != RequiredNodeSuperClass() && !e.isAbstract)
+;
+
+List[Chronos::ChiNode] getNotAbstractParentNodes(ChiNode this):
+	this.getParentNodesRecursive().select(e|!e.type.isAbstract)
+;
+
+List[Chronos::ChiNode] getNotAbstractChildNodes(ChiNode this):
+	this.getChildNodesRecursive().select(e|!e.type.isAbstract)
 ;
 
 List[uml::Package] getModelPackages(uml::Model this):
