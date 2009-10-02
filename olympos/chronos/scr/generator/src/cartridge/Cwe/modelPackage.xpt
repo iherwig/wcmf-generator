@@ -17,7 +17,7 @@
 
 «DEFINE modelPackage FOR uml::Package»
 	«info("Creating package " + this.name)»
-	«FILE this.getFileName()»
+	«FILE "js/" + this.getFileName()»
 /*
  * Copyright (c) 2009 The Olympos Development Team.
  * 

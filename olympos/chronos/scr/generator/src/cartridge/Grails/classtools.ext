@@ -1,13 +1,19 @@
 import uml;
+import Chronos;
 
 extension common::util;
 extension common::umlutils;
+
+extension cartridge::ChiCmf::extensions::ChiNode;
 
 String getNameOfAssociationClass(Association assoc):
 	assoc.getFirstOfManyToMany().type.name.toFirstUpper() + "To" + assoc.getFirstOfManyToMany().getOtherEnd().type.name.toFirstUpper();
 	
 boolean isManyToManyAssociation(Association assoc):
 	(assoc.memberEnd.select(e|e.isMultivalued() && e.getOtherEnd().isMultivalued())).size > 0;
+	
+boolean isOneToOneAssociation(Association assoc):
+	(assoc.memberEnd.select(e|!e.isMultivalued() && !e.getOtherEnd().isMultivalued())).size > 0;
 	
 Property getFirstOfManyToMany(Association assoc):
 	assoc.memberEnd.sortBy(e|e.name).first();
@@ -80,12 +86,26 @@ String sanitizeType(String orgTypeName):
 		case "integer": "int"
 		case "long": "long"
 		case "boolean": "boolean"
+		case "timedate": "Date"
 		case "": "def"
 		case null: "def"
 		case "<undefined>": "def"
 		case "void": "def"
 		default: orgTypeName
 	}
+;
+
+/**
+ * Get the hierarchy role name (Parent, Child) of the ChiNode
+ * represented by the association Property p in relation to
+ * the ChiNode this
+ */
+String getHierarchyRole(Chronos::ChiNode this, Property p):
+	!(this.isParentNode(p.type) || this.isChildNode(p.type)) ? 
+		""
+	: (
+		this.isParentNode(p.type) ? "Parent" : "Child"
+	)
 ;
 
 /**
@@ -100,9 +120,12 @@ List[uml::Class] getImportedClasses(uml::Class this):
 	let result = {}:
 	result.addAll(this.superClass) ->
 	result.addAll(this.ownedAttribute.type) ->
-	result.addAll(this.getAssociations().getBelongsTo(this).getOtherEnd().type) ->
-	result.addAll(this.getAssociations().select(e|e.memberEnd.select(s|s.isReferenceMultivalued(this)).size > 0).memberEnd.type) ->
-	result.addAll(this.getAssociations().getNavigableOtherEnd(this).getOtherEnd().type) ->
+	result.addAll(this.getParentNodesRecursive().type) ->
+	result.addAll(this.getChildNodesRecursive().type) ->
 	
 	result.toSet().typeSelect(uml::Class).select(e|e.getNearestPackage().getPackageName() != fullQualifiedName)
+;
+
+List[uml::Property] getManyProperties(uml::Association this, uml::Class parentClass):
+	this.memberEnd.select(s|s.isReferenceMultivalued(parentClass) && s.getOtherEnd().isNavigable())
 ;

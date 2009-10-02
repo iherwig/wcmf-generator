@@ -20,7 +20,7 @@
 
 «DEFINE modelClass FOR Chronos::ChiNode»
 	«info("Creating class " + this.name)»
-	«FILE "application/" + this.getFullPackageName().asPath() + "/" + this.name + ".class.js"»
+	«FILE "js/application/" + this.getFullPackageName().asPath() + "/" + this.name + ".class.js"»
 /*
  * Copyright (c) 2009 The Olympos Development Team.
  * 
@@ -52,6 +52,8 @@ Ext.extend(application.«this.getFullPackageName()».«this.name», cwe.model.Mo
 «EXPAND getGridColumns FOR this»
 
 «EXPAND getEditorItems FOR this»
+
+«EXPAND getLabel FOR this»
 
 cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this.getFullPackageName()».«this.name»());
 	«ENDFILE»
@@ -210,4 +212,18 @@ application.«this.getFullPackageName()».«this.name».prototype.getEditorItems
 			isParent : «isParent ? "true" : "false"»
 		«ENDLET»
 	})
+«ENDDEFINE»
+
+«DEFINE getLabel FOR Chronos::ChiNode»
+/**
+ * Returns the label of an object of this Model Class.
+ * 
+ * @param {cwe.model.ModelRecord}
+ *            record The record of this Model Class to extract the label from.
+ * @return The label of an object of this Model Class.
+ * @type String
+ */
+application.«this.getFullPackageName()».«this.name».prototype.getLabel = function(record) {
+	return record.get("«this.display_value»");
+};
 «ENDDEFINE»
