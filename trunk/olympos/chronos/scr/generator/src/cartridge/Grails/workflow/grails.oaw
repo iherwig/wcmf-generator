@@ -49,5 +49,11 @@
 		</outlet>
 	   
 		<prSrcPaths value="${domainTargetPath}"/>
+		<!--
+		<beautifier class="org.hybridlabs.source.formatter.JavaImportBeautifier"
+			conventionFilePath="-filename-"
+			organizeImports="true"
+			format="true"/>
+		-->
 	</component>
 </workflow>

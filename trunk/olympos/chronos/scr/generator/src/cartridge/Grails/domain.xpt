@@ -1,11 +1,10 @@
 «IMPORT uml»
 «IMPORT Chronos»
 
-«EXTENSION org::openarchitectureware::uml2::profile::profiling»
-
-«EXTENSION common::umlutils»
 «EXTENSION common::util»
+«EXTENSION common::umlutils»
 
+«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
 «EXTENSION cartridge::Grails::classtools»
 
 «DEFINE root FOR uml::Model»
@@ -14,134 +13,164 @@
 
 «REM» Main domain root «ENDREM»
 «DEFINE domainClass FOR ChiNode»
+	«info("Generating " + this.name)»
 	«LET this.getNearestPackage().getPackageName() AS fullQualifiedPackage»
-	«FILE (!fullQualifiedPackage.isNullOrEmpty() ? fullQualifiedPackage.asPath() + "/" : "") + name +".groovy"»
-	«IF !fullQualifiedPackage.isNullOrEmpty()»
-		package «fullQualifiedPackage»
-	«ENDIF»
+	«FILE (!fullQualifiedPackage.isNullOrEmpty() ? fullQualifiedPackage.asPath() + "/" : "") + this.name +".groovy"-»
+«IF !fullQualifiedPackage.isNullOrEmpty()-»
+package «fullQualifiedPackage»
+«ENDIF-»
 
-	«EXPAND Import FOR this»
+	«EXPAND Import FOR this-»
 
-	«IF this.isAbstract»abstract«ENDIF»
-	class «name-» 
-	«IF !this.superClass.isEmpty» extends «this.superClass.first().name»«ENDIF»
-	{
-	«REM» Attributes «ENDREM»
-	«EXPAND Attribute FOREACH this.ownedAttribute.select(e|e.association == null)»
+/**
+ * «this.getComment("\n * ")»
+ */
+«IF this.isAbstract»abstract «ENDIF-»
+class «name-» 
+«IF !this.superClass.isEmpty» extends «this.superClass.first().name»«ENDIF»
+{
+	«REM» Attributes «ENDREM-»
+«EXPAND Attribute FOREACH this.getChiValues()-»
 
-	«REM» Methods «ENDREM»
-	«EXPAND Method(this) FOREACH ownedOperation»
-			
-	«REM» Constraints «ENDREM»
-	«EXPAND Constraints FOR this »
-			
-	«REM» Associations with multivalued ends«ENDREM»
-	«EXPAND MultivaluedAssociations FOR this»
+	«REM» Every property where e reference for navigation is stored «ENDREM-»
+«EXPAND ReferenceProperties FOR this-»
+
+	«REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM-»
+«EXPAND OneToManyChildren FOR this-»					
+
+	«REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM-»
+«EXPAND ManyToOneParents FOR this-»
+
+	«REM» MappedBy for handling multiple relations between the same Classes «ENDREM-»
+«EXPAND MappedBy FOR this-»
 					
-	«REM» fill belongsTo with all owner associationsends but not m:n - this is resolve in a extra class«ENDREM»
-	«EXPAND BelongsTo FOR this»
-					
-	«REM» Every property where e reference for navigation is stored «ENDREM»
-	«EXPAND ReferenceProperties FOREACH this.getAssociations().getNavigableOtherEnd(this).removeAll(this.getAssociations().getBelongsTo(this))»
-	
-	«REM» Embeeded values «ENDREM»
-	«EXPAND EmbeddesValues FOR this»
-	}
+	«REM» Mapping «ENDREM-»
+«EXPAND Mapping FOR this-»
+
+	«REM» Constraints «ENDREM-»
+«EXPAND Constraints FOR this-»
+
+	«REM» Methods «ENDREM-»
+«EXPAND Method(this) FOREACH ownedOperation-»
+}
 	«ENDFILE»
 	«ENDLET»
 «ENDDEFINE»	
 
-«DEFINE Import FOR uml::Class»
-	«FOREACH this.getImportedClasses().typeSelect(ChiNode) AS import»
-		«IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»import «import.getNearestPackage().getPackageName()».«ENDIF»«import.name»
-	«ENDFOREACH»
-«ENDDEFINE»
-	
-
-«REM» Specify a embedded value «ENDREM»
-«DEFINE EmbeddesValues FOR Class»
-«LET getAssociations().memberEnd.typeSelect(ChiNode).select(e|e.isMyEmbeddedValue(this)) AS embeddesMemberEnds»
-«IF embeddesMemberEnds.size > 0 »
-«REM» embedded values «ENDREM»
-static embedded = [
-	«FOREACH embeddesMemberEnds AS embeddesMemberEnd SEPARATOR ","»
-			'«embeddesMemberEnd.name»'
-	«ENDFOREACH»
-			]
-«ENDIF»
-«ENDLET»
+«DEFINE Import FOR uml::Class-»
+	«FOREACH this.getImportedClasses() AS import-»
+import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«import.getNearestPackage().getPackageName()».«ENDIF-»
+«import.name»;
+	«ENDFOREACH-»
 «ENDDEFINE»
 
-«REM» Specify depencies «ENDREM»
-«DEFINE BelongsTo FOR Class»
-«LET this.getAssociations().getBelongsTo(this) AS multiStartAssociation»
-«IF multiStartAssociation.size > 0»
-static belongsTo = [
-	«FOREACH multiStartAssociation AS a SEPARATOR ","»
-		«a.getOtherEnd().getAssociationPropertyName()»: «a.getOtherEnd().type.name.sanitizeType()»
-	«ENDFOREACH»
-		]
-«ENDIF»
-«ENDLET»
+«DEFINE MappedBy FOR ChiNode-»
+«LET {}.addAll(this.getParentNodesRecursive()).addAll(this.getChildNodesRecursive()) AS relatives-»
+«IF relatives.size > 0-»
+	static mappedBy = [
+«FOREACH relatives AS relative SEPARATOR ","-»
+		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»«relative.type.getHierarchyRole(relative.getOtherEnd())»"
+«ENDFOREACH-»
+	]
+«ENDIF-»
+«ENDLET-»
 «ENDDEFINE»
 
-«REM» Reference in multivalued association «ENDREM»
-«DEFINE MultivaluedAssociations FOR Class»
-«IF getAssociations().memberEnd.typeSelect(ChiNode).select(a|a.isReferenceMultivalued(this)).size > 0»
-static hasMany = [
-«FOREACH getAssociations().select(e|e.memberEnd.select(s|s.isReferenceMultivalued(this)).size > 0) AS assoc SEPARATOR ","»
-		
-	«FOREACH assoc.memberEnd.select(a|a.isReferenceMultivalued(this)) AS a»
-	«REM» m:n splitted in two 1:n with a class in the middle«ENDREM»
-	«IF a.isMultivalued()»
-		«assoc.getNameOfAssociationClassReference()»
-	«ELSE»
-	«REM» 1:n «ENDREM»
-		«a.getOtherEnd().getAssociationPropertyName()»: «a.getOtherEnd().type.name.sanitizeType()»
-	«ENDIF»
-				
-	«ENDFOREACH»
-«ENDFOREACH»
-]
-«ENDIF»
+«DEFINE Mapping FOR ChiNode-»
+	static mapping = {
+			tablePerHierarchy false
+«FOREACH this.getChildNodesRecursive() AS child-»
+«LET child.getRoleName().toFirstLower().sanitizeType()+this.getHierarchyRole(child) AS name-»
+«IF child.getOtherEnd().aggregation == AggregationKind::composite-»
+			«name»: "create,save-update"
+«ELSEIF child.getOtherEnd().aggregation == AggregationKind::shared-»
+			«name»: "save-update"
+«ELSE-»
+			«name»: "none"
+«ENDIF-»
+«ENDLET-»
+«ENDFOREACH-»
+	}
+«ENDDEFINE»	
+
+«REM» simple reference «ENDREM»
+«DEFINE ReferenceProperties FOR ChiNode-»
+«LET {}.addAll(this.getParentNodesRecursive()).addAll(this.getChildNodesRecursive()).select(e|e.association.isOneToOneAssociation()) AS others-»
+«IF others.size > 0»
+«FOREACH others AS other-»
+	«other.type.name.sanitizeType()» «other.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(other)»
+«ENDFOREACH-»
+«ENDIF-»
+«ENDLET-»
+«ENDDEFINE»
+
+«REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM»
+«DEFINE ManyToOneParents FOR ChiNode-»
+«LET this.getParentNodesRecursive().select(e|!e.association.isOneToOneAssociation()) AS parents-»
+«IF parents.size > 0-»
+	static belongsTo = [
+	«FOREACH parents AS parent SEPARATOR ","-»
+		«parent.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(parent)»: «parent.type.name»
+	«ENDFOREACH-»
+	]
+«ENDIF-»
+«ENDLET-»
+«ENDDEFINE»
+
+«REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM»
+«DEFINE OneToManyChildren FOR ChiNode-»
+«LET this.getChildNodesRecursive().select(e|!e.association.isOneToOneAssociation()) AS children-»
+«IF children.size > 0»
+	static hasMany = [
+«FOREACH children AS child SEPARATOR ","-»
+		«child.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(child)»: «child.type.name»
+«ENDFOREACH-»
+	]
+«ENDIF-»
+«ENDLET-»
 «ENDDEFINE»
 
 «REM» fill constraints for attributes  «ENDREM»
-«DEFINE Constraints FOR Class»
-«LET this.ownedAttribute.select(a|a.hasRestrictionsMatch() || a.isNullable()) AS constraintedAttributes»
-«IF constraintedAttributes.size > 0»
-static constraints = {
-	«FOREACH constraintedAttributes AS c»
+«DEFINE Constraints FOR ChiNode-»
+«LET {}.addAll(this.getParentNodesRecursive()).addAll(this.getChildNodesRecursive()) AS constraintAttributes-»
+«IF constraintAttributes.size > 0-»
+	static constraints = {
+	«FOREACH constraintAttributes AS c-»
 		«LET {
 			c.hasRestrictionsMatch() ? "matches: \"" + c.getTaggedValue("Chronos::ChiValue", "restrictions_match") + "\"" : null,
-			c.isNullable() ? "nullable: true" : null
+			c.isNullable() ? "nullable: true" : "nullable: false",
+			c.association != null && c.lowerBound() >= 0 ? "minSize: " + c.lowerBound() : null,
+			c.association != null && c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
 		}.select(e|e != null)
 		AS constraints»
-			«c.getPropertyName().sanitizeType()»(
+			«c.getPropertyName().sanitizeType()»«this.getHierarchyRole(c)»(
 				«FOREACH constraints AS constraint SEPARATOR ", "»«constraint»«ENDFOREACH»
 			)
-		«ENDLET»
-	«ENDFOREACH»
+		«ENDLET-»
+	«ENDFOREACH-»
 	}
-«ENDIF»
-«ENDLET»
+«ENDIF-»
+«ENDLET-»
 «ENDDEFINE»
 
 «REM» simply attribute «ENDREM»
-«DEFINE Attribute FOR Property»
-		«this.type.name.sanitizeType()» «name»
+«DEFINE Attribute FOR ChiValue-»
+	/**
+	 * «this.getComment("\n	 * ")»
+	 */
+	«this.type.name.sanitizeType()»«IF this.isMultivalued()»[]«ENDIF» «name»«IF !this.^default.isNullOrEmpty()» = «this.^default»«ENDIF»
+	
 «ENDDEFINE»
+
 «REM» simple method with protected region «ENDREM»
-«DEFINE Method(Class clazz) FOR Operation»
-		«this.returnResult().first().type.name.sanitizeType()» «name»() {
+«DEFINE Method(Class clazz) FOR Operation-»
+	/**
+	 * «this.getComment("\n	 * ")»
+	 */
+	«this.returnResult().first().type.name.sanitizeType()» «name»() {
 		// Here you are able to implement your own code
 		«PROTECT CSTART '/*' CEND '*/' ID this.getId()»
 					
 		«ENDPROTECT»
-		} 
-«ENDDEFINE»
-
-«REM» simple reference «ENDREM»
-«DEFINE ReferenceProperties FOR Property»
-		«this.getOtherEnd().type.name.sanitizeType()» «this.getOtherEnd().getAssociationPropertyName()» 
+	} 
 «ENDDEFINE»

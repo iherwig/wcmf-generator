@@ -18,11 +18,6 @@
 		<profile value="${profileUmlFile}"/>
 	</bean>
 
-	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
-		<modelUrl value='${profileUmlFile}'/>
-		<outputSlot value="chronosProfile"/>
-	</component>
-
 	<!-- Backup -->
 	<if cond="${doBackup}">
 		<component class="com.wemove.wcmf.generator.workflow.BackupComponent">
@@ -31,10 +26,21 @@
 		</component>
 	</if>
 
+	<!-- Import from Enterprise Architect -->
+	<if cond="${doModelEaExport}">
+		<component file="${basePath}/cartridge/Wcmf/workflow/ea_model_import.oaw" inheritAll="true"/>
+	</if>
+
 	<!-- Read the UML model and store it into a slot named 'model' -->
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="${modelUmlFile}"/>
 		<outputSlot value="model"/>
+	</component>
+
+	<!-- read profile as model -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${profileUmlFile}" />
+		<outputSlot value="chronosProfileModel" />
 	</component>
 
 	<!-- Check constraints before model 2 model transformation -->
@@ -70,7 +76,7 @@
 		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
- 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model, chronosProfile)"/>
+ 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model, chronosProfileModel)"/>
 
 		<outputSlot value="transformedModel"/>
 	</component>
@@ -95,9 +101,17 @@
 	</if>
 
 	<!-- Write out transformed model for manual cross-check -->
+	<!--
 	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
 		<inputSlot value="transformedModel" />
 		<outPath value="${transformedModelUmlFile}" />
+	</component>
+	-->
+
+	<!-- Install the Cwe framework -->
+	<component class="net.sourceforge.olympos.oaw.workflow.Unzip">
+		<zipFile value="${frameworkFileCwe}"/>
+		<targetPath value="${targetDirCwe}/.."/>
 	</component>
 
 	<!-- Expand the model into the templates -->
@@ -120,13 +134,13 @@
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
 		
-		<expand value="${expand} FOR transformedModel"/>
+		<expand value="${expandCwe} FOR transformedModel"/>
 		
-		<outlet path="${targetDir}">
+		<outlet path="${targetDirCwe}">
 		</outlet>
 		
 		<!-- Protected regions configuration -->
-		<prSrcPaths value="${targetDir}/${applicationPackage}"/>	
+		<prSrcPaths value="${targetDirCwe}"/>	
 		<prDefaultExcludes value="false"/>
 		<prExcludes value=""/>
 	</component>
