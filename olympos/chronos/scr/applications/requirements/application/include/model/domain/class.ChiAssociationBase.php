@@ -200,26 +200,6 @@ class ChiAssociationBase extends Relation
         }
       }
     }
-    function getChiNodeSourceOID()
-    {
-      $fkValue = $this->getValue('fk_chinodemanytomany_id', DATATYPE_IGNORE);
-      if ($fkValue != null)
-        return PersistenceFacade::composeOID(array('type' => 'ChiNodeManyToMany', 'id' => array($fkValue)));
-      else
-        return null;
-    }
-    function setChiNodeSource($node)
-    {
-      if ($node != null) {
-        if (!is_a($node, 'node') && !is_a($node, 'Node')) {
-          $args = func_get_args();
-          call_user_func_array(array(parent, 'setChiNodeSource'), $args);
-        }
-        else {
-          $this->setValue('fk_chinodemanytomany_id', $node->getDBID(), DATATYPE_IGNORE);
-        }
-      }
-    }
     function getChiNodeSourceParents()
     {
       return $this->getParentsEx(null, 'ChiNode', null, null);
@@ -227,10 +207,6 @@ class ChiAssociationBase extends Relation
     function getChiNodeTargetParents()
     {
       return $this->getParentsEx(null, 'ChiNode', null, null);
-    }
-    function getChiNodeSourceParents()
-    {
-      return $this->getParentsEx(null, 'ChiNodeManyToMany', null, null);
     }
 
     /**
