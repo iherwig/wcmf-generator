@@ -14,7 +14,7 @@
  * See the license.txt file distributed with this work for 
  * additional information.
  *
- * $Id$
+ * $Id: main.php 1054 2009-08-21 17:26:09Z iherwig $
  */
 error_reporting(E_ALL | E_NOTICE);
 
@@ -24,8 +24,7 @@ require_once(BASE."wcmf/lib/util/class.Message.php");
 require_once(BASE."wcmf/lib/presentation/class.Request.php");
 require_once(BASE."wcmf/lib/presentation/class.Application.php");
 require_once(BASE."wcmf/lib/presentation/class.ActionMapper.php");
-
-require_once BASE . 'wcmf/lib/util/class.SearchUtil.php';
+require_once(BASE."wcmf/lib/util/class.SearchUtil.php");
 
 // initialize the application
 $application = &Application::getInstance();
@@ -44,10 +43,8 @@ $request = new Request(
 $request->setFormat($callParams['requestFormat']);
 $request->setResponseFormat($callParams['responseFormat']);
 $result = ActionMapper::processAction($request);
-$index = SearchUtil::getIndex(false);
-if ($index) {
-	$index->commit();
-}
+
+exitSearchUtil();
 exit;
 
 /**
@@ -86,7 +83,6 @@ function onError($message, $file='', $line='')
       print JSONUtil::encode(array('success' => false, 'errorMsg' => $msg));
     else
       Log::fatal($msg, 'main');
-    exit;
   }
   else
   {    
@@ -100,7 +96,16 @@ function onError($message, $file='', $line='')
     $request = new Request($controller, $context, $action, $data);
     $request->setResponseFormat($responseFormat);
     ActionMapper::processAction($request);
-	exit;    
+  }
+  exitSearchUtil();
+  exit;
+}
+
+function exitSearchUtil() 
+{
+  $index = SearchUtil::getIndex(false);
+  if ($index) {
+    $index->commit();
   }
 }
 ?>
