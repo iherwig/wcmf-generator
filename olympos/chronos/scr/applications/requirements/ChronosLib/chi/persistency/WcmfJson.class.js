@@ -35,6 +35,9 @@ chi.persistency.WcmfJson.prototype.jsonRequest = function(params, successHandler
 		url : this.jsonUrl,
 		method : "post",
 		timeout : this.timeout,
+		headers: {
+			'session_id': params.sid
+		},
 		params : params,
 		callback : function(options, success, response) {
 			if (success) {
