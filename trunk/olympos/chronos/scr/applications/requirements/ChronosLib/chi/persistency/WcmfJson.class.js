@@ -183,7 +183,8 @@ chi.persistency.WcmfJson.prototype.list = function(cweModelElementId, limit, off
 		limit : limit,
 		start : offset,
 		sort : sortAttributeName,
-		dir : sortDirection
+		dir : sortDirection,
+		completeObjects: true
 	}, successHandler, errorHandler, this.listRecordHandler);
 }
 
@@ -462,6 +463,7 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.start = currRequest.offset;
 					jsonRequest.sort = currRequest.sortAttributeName;
 					jsonRequest.dir = currRequest.sortDirection;
+					jsonRequest.completeObjects = true;
 					recordHandler = function(handler, request, data) {
 						return {
 							cweModelElementId : request.cweModelElementId,
