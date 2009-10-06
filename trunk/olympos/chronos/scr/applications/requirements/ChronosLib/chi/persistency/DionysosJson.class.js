@@ -36,6 +36,7 @@ chi.persistency.DionysosJson.prototype.jsonRequest = function(params, successHan
 	request.method = "post";
 	request.localParams = params;
 	request.timeout = this.timeout;
+	request.headers = {'session_id': params.sid};
 	request.jsonData = Ext.util.JSON.encode(params);
 	request.callback = function(options, success, response) {
 		if (success) {
