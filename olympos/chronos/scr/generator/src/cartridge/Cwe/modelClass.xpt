@@ -134,13 +134,15 @@ application.«this.getFullPackageName()».«this.name».prototype.getGridColumns
 
 «DEFINE getGridEditor FOR Chronos::ChiValue»
 	«LET this.input_type.split("#").first().getExtJsInputType() AS inputType»
-		«IF this.is_editable.boolString() == "false" || inputType == "HtmlEditor"»
+		«IF this.is_editable.boolString() == "false" || inputType == "HtmlEditor"-»
 			new cwe.modelgrid.DummyField()
-		«ELSE»
-			new cwe.editor.control.«inputType»({
-				«IF inputType == "ComboBox"»targetCweModelElementId: "«this.input_type.split(':').last()»"«ENDIF»
+		«ELSEIF inputType == "ComboBox"-»
+			new cwe.editor.control.«getComboBoxClass(this.input_type)»({
+				«getComboBoxConfig(this.input_type)»
 			})
-		«ENDIF»			
+		«ELSE-»
+			new cwe.editor.control.«inputType»({})
+		«ENDIF-»
 	«ENDLET»
 «ENDDEFINE»
 
@@ -182,13 +184,18 @@ application.«this.getFullPackageName()».«this.name».prototype.getEditorItems
 «ENDDEFINE»
 
 «DEFINE getEditor FOR Chronos::ChiValue»
-	new cwe.editor.control.«this.input_type.split('#').first().getExtJsInputType()»({
+	«LET this.input_type.split("#").first().getExtJsInputType() AS inputType»
+		«IF inputType == "ComboBox"-»
+	new cwe.editor.control.«getComboBoxClass(this.input_type)»({
+		«ELSE-»
+	new cwe.editor.control.«inputType»({
+ 		«ENDIF-»
 		fieldLabel: "«this.name»",
 		name: "«this.name»",
 		dataIndex: "«this.name»",
-		«IF this.input_type.split('#').first().getExtJsInputType() == "ComboBox"»targetCweModelElementId: "«this.input_type.split(':').last()»",«ENDIF»
+		«IF inputType == "ComboBox"»«getComboBoxConfig(this.input_type)»,«ENDIF»
 		«IF this.is_editable.boolString() == "false"»
-			«IF this.input_type.split('#').first().getExtJsInputType() == "ComboBox"»
+			«IF inputType == "ComboBox"»
 				disabled: true,
 			«ELSE»
 				readOnly: true,
@@ -196,6 +203,7 @@ application.«this.getFullPackageName()».«this.name».prototype.getEditorItems
 		«ENDIF»
 		toolTip: "«this.getComment().sanitizeJsString()»"
 	}) 
+	«ENDLET»
 «ENDDEFINE»
 
 «DEFINE association(Boolean isParent) FOR uml::Property»
