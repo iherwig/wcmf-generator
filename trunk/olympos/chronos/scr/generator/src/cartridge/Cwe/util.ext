@@ -53,3 +53,19 @@ List[Chronos::ChiValue] getChiAttributes(Chronos::ChiNode this):
 String sanitizeJsString(String input):
 	input.replaceAll("\\\"", "\\\\\"").replaceAll("\\n", "\\\\n")
 ;
+
+/**
+ * Control specific functions
+ */
+String getComboBoxConfig(String inputType):
+	let listType = inputType.split(':').first().split('#').last():
+		let listDef = inputType.split(':').last():
+			listType == "fix" ?
+				"data: [[\"" + listDef.replaceAll('\\[', '","').replaceAll('\\]', '"').replaceAll('\\|', '],["') + "]]"
+			:
+				"targetCweModelElementId: \"" + listDef + "\""
+;
+String getComboBoxClass(String inputType):
+	let listType = inputType.split(':').first().split('#').last():
+	listType == "fix" ? "StaticComboBox" : "ComboBox"
+;
