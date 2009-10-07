@@ -24,13 +24,11 @@ cwe.editor.control.StaticComboBox = function(config) {
 	
 	cwe.editor.control.StaticComboBox.superclass.constructor.call(this, Ext.apply(this, {
 	    store : new Ext.data.SimpleStore( {
-	        fields : [ {
-	            name : "key",
-	            mapping : "key"
-	        }, {
-	            name : "val",
-	            mapping : "val"
-	        } ],
+          id: 0,
+	        fields : [ 
+              'key',
+	            'val'
+	        ],
 	        data : config.data
 	    }),
 	    displayField : 'val',
