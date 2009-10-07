@@ -216,7 +216,7 @@ chi.persistency.WcmfJson.prototype.load = function(oid, depth, successHandler, e
 		oid : oid,
 		depth : depth,
 		omitMetaData : true,
-		translateValues : true
+		translateValues : false
 	}, successHandler, errorHandler, this.loadRecordHandler);
 }
 
@@ -482,7 +482,7 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.oid = currRequest.oid;
 					jsonRequest.depth = currRequest.depth;
 					jsonRequest.omitMetaData = true;
-					jsonRequest.translateValues = true;
+					jsonRequest.translateValues = false;
 					recordHandler = function(handler, request, data) {
 						return {
 							oid : request.oid,
