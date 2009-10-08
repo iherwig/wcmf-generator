@@ -95,7 +95,7 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 «DEFINE relations FOR Chronos::ChiNode»
 	this.relations = {
 	«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
-		"parent«currParent.getRoleName().toFirstLower()»" : {
+		"«currParent.getRoleName().toFirstLower()»" : {
 			isParent : true,
 			targetModelClassId : "«currParent.type.name»"
 		}
@@ -106,7 +106,7 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 	«ENDIF»
 	
 	«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
-		"child«currChild.getRoleName().toFirstLower()»" : {
+		"«currChild.getRoleName().toFirstLower()»" : {
 			isParent : false,
 			targetModelClassId : "«currChild.type.name»"
 		}
