@@ -127,7 +127,7 @@ package net.sourceforge.olympos.dionysos.json.test;
 	static executeActionSetcreateClassName = 'Movie'	
 	static executeActionSetUpdateOid = '{Movie:?}'
 	static executeActionSetAttributes = '{"title": "Matrix The Original","groundbreaking": true}'
-
+	
 	/**
 	 * attributes for associate and diassociate operation
 	 */
