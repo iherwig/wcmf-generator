@@ -74,8 +74,8 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 	
 	«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
 		{
-			name : "«currParent.getRoleName()»",
-			mapping: "«currParent.getRoleName()»"
+			name : "«currParent.getRoleName().toFirstLower()»",
+			mapping: "«currParent.getRoleName().toFirstLower()»"
 		}
 	«ENDFOREACH»
 	
@@ -85,8 +85,8 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 	
 	«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
 		{
-			name : "«currChild.getRoleName()»",
-			mapping : "«currChild.getRoleName()»"
+			name : "«currChild.getRoleName().toFirstLower()»",
+			mapping : "«currChild.getRoleName().toFirstLower()»"
 		}
 	«ENDFOREACH»
 	];
@@ -95,7 +95,7 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 «DEFINE relations FOR Chronos::ChiNode»
 	this.relations = {
 	«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
-		"parent«currParent.getRoleName()»" : {
+		"parent«currParent.getRoleName().toFirstLower()»" : {
 			isParent : true,
 			targetModelClassId : "«currParent.type.name»"
 		}
@@ -106,7 +106,7 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 	«ENDIF»
 	
 	«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
-		"child«currChild.getRoleName()»" : {
+		"child«currChild.getRoleName().toFirstLower()»" : {
 			isParent : false,
 			targetModelClassId : "«currChild.type.name»"
 		}
@@ -212,13 +212,13 @@ application.«this.getFullPackageName()».«this.name».prototype.getEditorItems
 	«ELSE»
 		new cwe.editor.control.MultipleAssociate( {
 	«ENDIF»
-		«LET isParent ? "parent" : "child" AS relationString»
-			fieldLabel : "«relationString»«this.getRoleName()»",
-			name : "«relationString»«this.getRoleName()»",
-			dataIndex : "«relationString»«this.getRoleName()»",
+		«REM»«LET isParent ? "parent" : "child" AS relationString»«ENDREM»
+			fieldLabel : "«this.getRoleName().toFirstLower()»",
+			name : "«this.getRoleName().toFirstLower()»",
+			dataIndex : "«this.getRoleName().toFirstLower()»",
 			targetCweModelElementId : "«this.type.name»",
 			isParent : «isParent ? "true" : "false"»
-		«ENDLET»
+		«REM»«ENDLET»«ENDREM»
 	})
 «ENDDEFINE»
 
@@ -232,6 +232,10 @@ application.«this.getFullPackageName()».«this.name».prototype.getEditorItems
  * @type String
  */
 application.«this.getFullPackageName()».«this.name».prototype.getLabel = function(record) {
-	return record.get("«this.display_value»");
+	var label = record.get("«this.display_value.replaceAll('\\|', '") + " - " + record.get("')»");
+	if (label == undefined || label.length == 0) {
+		label = record.getOid(); 
+	}
+	return label;
 };
 «ENDDEFINE»
