@@ -86,7 +86,7 @@ String sanitizeType(String orgTypeName):
 		case "integer": "int"
 		case "long": "long"
 		case "boolean": "boolean"
-		case "timedate": "Date"
+		case "datetime": "Date"
 		case "": "def"
 		case null: "def"
 		case "<undefined>": "def"
