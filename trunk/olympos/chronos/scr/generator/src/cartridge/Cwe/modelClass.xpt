@@ -74,8 +74,8 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 	
 	«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
 		{
-			name : "parent«currParent.getRoleName()»",
-			mapping: "parent«currParent.getRoleName()»"
+			name : "«currParent.getRoleName()»",
+			mapping: "«currParent.getRoleName()»"
 		}
 	«ENDFOREACH»
 	
@@ -85,8 +85,8 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 	
 	«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
 		{
-			name : "child«currChild.getRoleName()»",
-			mapping : "child«currChild.getRoleName()»"
+			name : "«currChild.getRoleName()»",
+			mapping : "«currChild.getRoleName()»"
 		}
 	«ENDFOREACH»
 	];

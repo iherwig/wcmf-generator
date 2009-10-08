@@ -43,6 +43,13 @@
 		<outputSlot value="chronosProfileModel" />
 	</component>
 
+	<!-- normalize names -->
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="${profilename}MM"/>
+		<metaModel idRef="UmlMM" />
+		<invoke value="common/nameNormalizer::normalizeNameWithoutPackage(model)" />
+	</component>
+
 	<!-- Check constraints before model 2 model transformation -->
 	<if cond="${doCheck}">
 		<component class="oaw.check.CheckComponent">
