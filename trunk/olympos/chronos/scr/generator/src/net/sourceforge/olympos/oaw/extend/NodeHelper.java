@@ -29,18 +29,18 @@ public class NodeHelper {
 	protected static boolean doCache = true;
 
 	/**
-	 * Get the child nodes of a given class. The nodes will be cached if doCache is true.
+	 * Get the parent nodes of a given class. The nodes will be cached if doCache is true.
 	 * @note Only classes with ChiNode or ChiManyToMany stereotype will be listed
-	 * @param clazz The class to get the children for.
-	 * @param recursive If true, include children that were added by the generator.
+	 * @param clazz The class to get the parents for.
+	 * @param recursive If true, include parents that were added by the generator.
 	 * @return A list of Property instances (use getType() method to get the type)
 	 */
-	public static EList<Property> getChildren(org.eclipse.uml2.uml.Class clazz, Boolean recursive) {
-		EList<Property> children = null;
+	public static EList<Property> getParents(org.eclipse.uml2.uml.Class clazz, Boolean recursive) {
+		EList<Property> parents = null;
 		
-		if (!childRegistry.containsKey(clazz)) {	
-			Logger.debug("Get children for "+clazz.getName());
-			children = new UniqueEList<Property>();
+		if (!parentRegistry.containsKey(clazz)) {	
+			Logger.debug("Get parents for "+clazz.getName());
+			parents = new UniqueEList<Property>();
 			Iterator<Association> aIter = clazz.getAssociations().iterator();
 			while (aIter.hasNext()) {
 				Association a = aIter.next();
@@ -51,124 +51,17 @@ public class NodeHelper {
 					while (meIter.hasNext()) {				
 						Property prop = meIter.next();
 						Logger.debug("   End: type="+prop.getType().getName()+" kind="+prop.getAggregation().getLiteral()+" ["+prop.getLower()+","+prop.getUpper()+"] navigable="+prop.isNavigable()+" owner="+prop.getOwner().getClass().getSimpleName());
-						if (prop.getType() != clazz || UMLHelper.isSelfReferencing(a)) {				
+						if (prop.getType() == clazz || UMLHelper.isSelfReferencing(a)) {				
 							AggregationKind aggregationKind = prop.getAggregation();
 							if (aggregationKind != null) {
 								if (aggregationKind.ordinal() == AggregationKind.COMPOSITE ||
 									aggregationKind.ordinal() == AggregationKind.SHARED ||
 									(aggregationKind.ordinal() == AggregationKind.NONE && prop.getOtherEnd().getAggregation().ordinal() == AggregationKind.NONE &&
-											prop.isNavigable() && !prop.getOtherEnd().isNavigable())
-									) {
-									if (UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_CHI_NODE)) ||
-											UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_CHI_MANY_TO_MANY))) {
-										Logger.debug("   -> Found child: "+prop.getType().getName()+" ["+counter+"]");
-										children.add(prop);
-									}
-								}
-							}
-						}
-						counter++;
-					}
-				}
-			}
-
-			// sort children if desired (depends on child_order tagged value)
-			String childOrder = UMLHelper.getTaggedValue(clazz, Constants.FQName(Constants.STEREOTYPE_CHI_NODE), "child_order").toString();
-			if (childOrder.length() > 0) {
-				Property[] childrenOrdered = children.toArray(new Property[0]);
-				Comparator<Property> comp = new PropertyRoleComparator(childOrder.split("\\|"));
-				Arrays.sort(childrenOrdered, comp);
-
-				children = new UniqueEList<Property>();
-				for (int i=0; i<childrenOrdered.length; i++)
-					children.add(childrenOrdered[i]);
-			}
-
-			if (doCache)
-				childRegistry.put(clazz, children);
-		}
-		else {
-			children = childRegistry.get(clazz);
-		}
-		return children;
-	}
-
-	/**
-	 * Check if a class is a child of another.
-	 * @param clazz The class to check the child for.
-	 * @param child The child.
-	 * @param recursive If true, include children that were added by the generator.
-	 * @return boolean
-	 */
-	public static boolean isChild(org.eclipse.uml2.uml.Class clazz, org.eclipse.uml2.uml.Class child, Boolean recursive) {
-		Iterator<Property> childIter = getChildren(clazz, recursive).iterator();
-		while (childIter.hasNext()) {
-			if (childIter.next().getType().getQualifiedName().equals(child.getQualifiedName()))
-				return true;
-		}
-		return false;
-	}
-
-	/**
-	 * Clear the child cache of a given class.
-	 * @param clazz The class to clear the cache for.
-	 */
-	public static void clearChildCache(org.eclipse.uml2.uml.Class clazz) {
-		if (childRegistry.containsKey(clazz))
-			childRegistry.remove(clazz);
-	}
-
-	/**
-	 * Get all children as string.
-	 * @param clazz The class to get the children for.
-	 * @param recursive If true, include children that were added by the generator.
-	 * @return The string.
-	 */
-	public static String childrenToString(org.eclipse.uml2.uml.Class clazz, Boolean recursive) {
-		String childStr = "";
-		Iterator<Property> pIter = getChildren(clazz, recursive).iterator();
-		while (pIter.hasNext()) {
-			Property p = pIter.next();
-			childStr += p.getType().getName();
-			childStr += "["+UMLHelper.getNonEmptyRoleName(p)+"], ";
-		}
-		return childStr;
-	}
-
-	/**
-	 * Get the parent nodes of a given class. The nodes will be cached if doCache is true.
-	 * @note Only classes with ChiNode or ChiManyToMany stereotype will be listed
-	 * @param clazz The class to get the parents for.
-	 * @param recursive If true, include parents that were added by the generator.
-	 * @return A list of Property instances (use getType() method to get the type)
-	 */
-	public static EList<Property> getParents(org.eclipse.uml2.uml.Class clazz, Boolean recursive) {
-		EList<Property> parents = null;
-		
-		if (!parentRegistry.containsKey(clazz)) {
-			Logger.debug("Get parents for "+clazz.getName());
-			parents = new UniqueEList<Property>();
-			Iterator<Association> aIter = clazz.getAssociations().iterator();
-			while (aIter.hasNext()) {
-				Association a = aIter.next();
-				if (recursive || !Generator.isGeneratorAdded(a)) {
-					Logger.debug("-> Association: "+a.getName());
-					Iterator<Property> meIter = a.getMemberEnds().iterator();
-					int counter = 1;
-					while (meIter.hasNext()) {
-						Property prop = meIter.next();
-						Logger.debug("   End: type="+prop.getType().getName()+" kind="+prop.getAggregation().getLiteral()+" ["+prop.getLower()+","+prop.getUpper()+"] navigable="+prop.isNavigable()+" owner="+prop.getOwner().getClass().getSimpleName());
-						if (prop.getType() == clazz) {
-							AggregationKind aggregationKind = prop.getAggregation();
-							if (aggregationKind != null) {
-								if (aggregationKind.ordinal() == AggregationKind.COMPOSITE ||
-									aggregationKind.ordinal() == AggregationKind.SHARED ||
-									(aggregationKind.ordinal() == AggregationKind.NONE && prop.getOtherEnd().getAggregation().ordinal() == AggregationKind.NONE &&
-											prop.isNavigable() && !prop.getOtherEnd().isNavigable())
+											!prop.isNavigable() && prop.getOtherEnd().isNavigable())
 									) {
 									if (UMLHelper.hasStereotype(prop.getOtherEnd().getType(), Constants.FQName(Constants.STEREOTYPE_CHI_NODE)) ||
 											UMLHelper.hasStereotype(prop.getOtherEnd().getType(), Constants.FQName(Constants.STEREOTYPE_CHI_MANY_TO_MANY))) {
-										Logger.debug("   -> Found parent: "+prop.getOtherEnd().getType().getName()+" ["+counter+"]");
+										Logger.debug("   -> Found parent: "+prop.getOtherEnd().getType().getName()+" ["+counter+"], "+prop.getOtherEnd().getAggregation());
 										parents.add(prop.getOtherEnd());
 									}
 								}
@@ -187,9 +80,8 @@ public class NodeHelper {
 				Arrays.sort(parentsOrdered, comp);
 
 				parents = new UniqueEList<Property>();
-				for (int i=0; i<parentsOrdered.length; i++) {
+				for (int i=0; i<parentsOrdered.length; i++)
 					parents.add(parentsOrdered[i]);
-				}
 			}
 
 			if (doCache)
@@ -243,6 +135,114 @@ public class NodeHelper {
 		return parentStr;
 	}
 	
+	/**
+	 * Get the child nodes of a given class. The nodes will be cached if doCache is true.
+	 * @note Only classes with ChiNode or ChiManyToMany stereotype will be listed
+	 * @param clazz The class to get the children for.
+	 * @param recursive If true, include children that were added by the generator.
+	 * @return A list of Property instances (use getType() method to get the type)
+	 */
+	public static EList<Property> getChildren(org.eclipse.uml2.uml.Class clazz, Boolean recursive) {
+		EList<Property> children = null;
+		
+		if (!childRegistry.containsKey(clazz)) {
+			Logger.debug("Get children for "+clazz.getName());
+			children = new UniqueEList<Property>();
+			Iterator<Association> aIter = clazz.getAssociations().iterator();
+			while (aIter.hasNext()) {
+				Association a = aIter.next();
+				if (recursive || !Generator.isGeneratorAdded(a)) {
+					Logger.debug("-> Association: "+a.getName());
+					Iterator<Property> meIter = a.getMemberEnds().iterator();
+					int counter = 1;
+					while (meIter.hasNext()) {
+						Property prop = meIter.next();
+						Logger.debug("   End: type="+prop.getType().getName()+" kind="+prop.getAggregation().getLiteral()+" ["+prop.getLower()+","+prop.getUpper()+"] navigable="+prop.isNavigable()+" owner="+prop.getOwner().getClass().getSimpleName());
+						if (prop.getType() != clazz) {
+							AggregationKind aggregationKind = prop.getAggregation();
+							if (aggregationKind != null) {
+								if (aggregationKind.ordinal() == AggregationKind.COMPOSITE ||
+									aggregationKind.ordinal() == AggregationKind.SHARED ||
+									(aggregationKind.ordinal() == AggregationKind.NONE && prop.getOtherEnd().getAggregation().ordinal() == AggregationKind.NONE &&
+											!prop.isNavigable() && prop.getOtherEnd().isNavigable())
+									) {
+									if (UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_CHI_NODE)) ||
+											UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_CHI_MANY_TO_MANY))) {
+										Logger.debug("   -> Found child: "+prop.getType().getName()+" ["+counter+"], "+prop.getAggregation());
+										children.add(prop);
+									}
+								}
+							}
+						}
+						counter++;
+					}
+				}
+			}
+
+			// sort children if desired (depends on child_order tagged value)
+			String childOrder = UMLHelper.getTaggedValue(clazz, Constants.FQName(Constants.STEREOTYPE_CHI_NODE), "child_order").toString();
+			if (childOrder.length() > 0) {
+				Property[] childrenOrdered = children.toArray(new Property[0]);
+				Comparator<Property> comp = new PropertyRoleComparator(childOrder.split("\\|"));
+				Arrays.sort(childrenOrdered, comp);
+
+				children = new UniqueEList<Property>();
+				for (int i=0; i<childrenOrdered.length; i++) {
+					children.add(childrenOrdered[i]);
+				}
+			}
+
+			if (doCache)
+				childRegistry.put(clazz, children);
+		}
+		else {
+			children = childRegistry.get(clazz);
+		}
+		return children;
+	}
+
+	/**
+	 * Check if a class is a child of another.
+	 * @param clazz The class to check the child for.
+	 * @param child The child.
+	 * @param recursive If true, include children that were added by the generator.
+	 * @return boolean
+	 */
+	public static boolean isChild(org.eclipse.uml2.uml.Class clazz, org.eclipse.uml2.uml.Class child, Boolean recursive) {
+		Iterator<Property> childIter = getChildren(clazz, recursive).iterator();
+		while (childIter.hasNext()) {
+			if (childIter.next().getType().getQualifiedName().equals(child.getQualifiedName()))
+				return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Clear the child cache of a given class.
+	 * @param clazz The class to clear the cache for.
+	 */
+	public static void clearChildCache(org.eclipse.uml2.uml.Class clazz) {
+		if (childRegistry.containsKey(clazz))
+			childRegistry.remove(clazz);
+	}
+
+	/**
+	 * Get all children as string.
+	 * @param clazz The class to get the children for.
+	 * @param recursive If true, include children that were added by the generator.
+	 * @return The string.
+	 */
+	public static String childrenToString(org.eclipse.uml2.uml.Class clazz, Boolean recursive) {
+		String childStr = "";
+		Iterator<Property> pIter = getChildren(clazz, recursive).iterator();
+		while (pIter.hasNext()) {
+			Property p = pIter.next();
+			childStr += p.getType().getName();
+			childStr += "["+UMLHelper.getNonEmptyRoleName(p)+"], ";
+		}
+		return childStr;
+	}
+
 	/**
 	 * Create a default primary key attribute in a class
 	 * @param name The name of the primary key

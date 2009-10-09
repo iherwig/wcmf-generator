@@ -93,14 +93,14 @@ boolean isBidirectional(uml::Association assoc) :
  * Check if an association is a composition
  */	
 boolean isComposition(uml::Property p) :
-	p.opposite.aggregation.compareTo(uml::AggregationKind::composite) == 0
+	p.aggregation.compareTo(uml::AggregationKind::composite) == 0
 ;
 
 /**
  * Check if an association is an aggregation
  */	
 boolean isAggregation(uml::Property p) :
-	p.opposite.aggregation.compareTo(uml::AggregationKind::shared) == 0
+	p.aggregation.compareTo(uml::AggregationKind::shared) == 0
 ;
 
 /**

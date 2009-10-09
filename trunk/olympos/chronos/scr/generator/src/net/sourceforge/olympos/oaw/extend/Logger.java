@@ -10,7 +10,7 @@ package net.sourceforge.olympos.oaw.extend;
  */
 public class Logger {
 	private final static org.apache.log4j.Logger log = org.apache.log4j.Logger
-			.getLogger("WCMFGenerator");
+			.getLogger("ChronosGenerator");
 
 	public final static void debug(final Object s) {
 		log.debug(s);
