@@ -73,7 +73,7 @@
 		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
- 	    <invoke value="cartridge::Wcmf::extensions::wcmf_m2m::addDefaults(model)"/>
+		<invoke value="cartridge::Wcmf::extensions::wcmf_m2m::addDefaults(model)"/>
 
 		<outputSlot value="transformedModel"/>
 	</component>
