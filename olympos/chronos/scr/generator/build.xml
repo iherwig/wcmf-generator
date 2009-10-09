@@ -74,6 +74,7 @@
 				<include name="common/**/*.*"/>
 				<include name="metamodel/**/*.*"/>
 				<include name="workflow/**/*.*"/>
+				<include name="**/*.properties"/>
 			</fileset>
 			<fileset dir=".">
 				<include name="${build.info}"/>
