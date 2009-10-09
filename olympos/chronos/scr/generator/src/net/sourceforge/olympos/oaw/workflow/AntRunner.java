@@ -4,6 +4,7 @@
 package net.sourceforge.olympos.oaw.workflow;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.tools.ant.BuildException;
