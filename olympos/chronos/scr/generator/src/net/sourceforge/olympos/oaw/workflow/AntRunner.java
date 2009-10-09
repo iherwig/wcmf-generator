@@ -4,6 +4,7 @@
 package net.sourceforge.olympos.oaw.workflow;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
@@ -20,6 +21,7 @@ import org.openarchitectureware.workflow.monitor.ProgressMonitor;
  */
 public class AntRunner extends AbstractWorkflowComponent {
 	private String antFile = null;
+	private List<Param> params = new ArrayList<Param>();
 
 	/*
 	 * (non-Javadoc)
@@ -35,6 +37,35 @@ public class AntRunner extends AbstractWorkflowComponent {
 
 	public void setAntFile(String antFile) {
 		this.antFile = antFile;
+	}
+
+	/**
+	 * A parameter defined in the workflow component definition
+	 * e.g. <Param name="version" value="1.0.0"/>
+	 */
+	public static class Param {
+		private String name;
+		private String value;
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
+		}
+	}
+
+	public void addParam(Param param) {
+		params.add(param);
 	}
 
 	private boolean check(Issues issues) {
@@ -85,6 +116,11 @@ public class AntRunner extends AbstractWorkflowComponent {
 			ProjectHelper helper = ProjectHelper.getProjectHelper();
 			project.addReference("ant.projectHelper", helper);
 			helper.parse(project, file);
+			
+			// add workflow parameters to the project
+			for (Param param : params) {
+				project.setProperty(param.getName(), param.getValue());
+			}
 			project.executeTarget(project.getDefaultTarget());
 			project.fireBuildFinished(null);
 		} catch (BuildException e) {
