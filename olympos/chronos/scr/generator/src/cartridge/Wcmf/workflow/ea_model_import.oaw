@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workflow>
 
+	<!-- Metamodel-Definition -->
+	<bean id="EmfMM" class="oaw.type.emf.EmfMetaModel">
+		<metaModelPackage value="org.eclipse.emf.ecore.EcorePackage"/>
+	</bean>
+	<bean id="UmlMM" class="oaw.uml2.UML2MetaModel"/>
+	<bean id="${profilename}MM" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${profileUmlFile}"/>
+	</bean>
+
 	<!-- Export the Enterprise Architect model to UML format -->
 	<component class="oaw.uml2.toolsupport.ea.EA_Xmi2Exporter">
 		<EapFile value="${modelEaFile}"/>
@@ -9,6 +18,35 @@
 		<profile value="${profileUmlFile}"/>
 		<PackageProfile name="${applyPkg}" value="${profilename}"/>
 		<Cleanup value="true"/>
+		<!--DEBUG value="true"/-->
+	</component>
+
+	<!-- Read the UML model and store it into a slot named 'model' -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${modelUmlFile}"/>
+		<outputSlot value="model"/>
+	</component>
+
+	<!-- Swap Composition/Aggregation ends -->
+	<component id="m2m" class="oaw.xtend.XtendComponent">
+		<metaModel idRef="EmfMM"/>
+		<metaModel idRef="UmlMM"/>
+		<metaModel idRef="${profilename}MM"/>
+    
+		<invoke value="cartridge::Wcmf::extensions::ea_m2m::swapDiamonds(model)"/>
+		<outputSlot value="transformedModel"/>
+	</component>
+
+	<!-- Write out transformed model -->
+	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
+		<inputSlot value="transformedModel"/>
+		<outPath value="./"/>
+	</component>
+
+	<component class="net.sourceforge.olympos.oaw.workflow.AntRunner">
+		<Param name="srcFile" value="./Model.uml"/>
+		<Param name="destFile" value="${modelUmlFile}"/>
+		<antFile value="${basePath}/cartridge/Wcmf/workflow/build_ea_post.xml"/>
 	</component>
 
 </workflow>
