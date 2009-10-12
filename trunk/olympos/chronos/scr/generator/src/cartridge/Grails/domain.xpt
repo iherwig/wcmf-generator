@@ -77,13 +77,14 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «ENDDEFINE»
 
 «DEFINE Mapping FOR ChiNode-»
+	/*
 	static mapping = {
 			tablePerHierarchy false
 «FOREACH this.getChildNodesRecursive() AS child-»
 «LET child.getRoleName().toFirstLower().sanitizeType()+this.getHierarchyRole(child) AS name-»
-«IF child.getOtherEnd().aggregation == AggregationKind::composite-»
+«IF child.aggregation == AggregationKind::composite-»
 			«name»: "create,save-update"
-«ELSEIF child.getOtherEnd().aggregation == AggregationKind::shared-»
+«ELSEIF child.aggregation == AggregationKind::shared-»
 			«name»: "save-update"
 «ELSE-»
 			«name»: "none"
@@ -91,6 +92,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «ENDLET-»
 «ENDFOREACH-»
 	}
+	*/
 «ENDDEFINE»	
 
 «REM» simple reference «ENDREM»
