@@ -5,3 +5,10 @@
 String asPackageName(String name) : 
 	name.replaceAll("::", ".").replaceAll("/", ".")
 ;
+
+/**
+ * Replace . by /
+ */
+String asPath(String name) : 
+	name.replaceAll("\\.", "/")
+;
