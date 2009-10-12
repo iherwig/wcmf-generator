@@ -7,6 +7,12 @@ Void normalizeName(uml::Model this):
 	this.allOwnedElements().typeSelect(uml::Package).normalizeName()
 ;
 
+Void normalizeNameWithoutPackage(uml::Model this):
+	this.allOwnedElements().typeSelect(uml::Class).normalizeName() ->
+	this.allOwnedElements().typeSelect(uml::Property).normalizeName() ->
+	this.allOwnedElements().typeSelect(uml::Operation).normalizeName()
+;
+
 Void normalizeName(uml::Class this):
 	this.setName(normalizeClassName(this.name))
 ;
