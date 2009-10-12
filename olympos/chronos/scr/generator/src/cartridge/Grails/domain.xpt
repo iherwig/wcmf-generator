@@ -36,14 +36,14 @@ class «name-»
 «EXPAND ReferenceProperties FOR this-»
 
 	«REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM-»
-«EXPAND OneToManyChildren FOR this-»					
+«EXPAND OneToManyChildren FOR this-»
 
 	«REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM-»
 «EXPAND ManyToOneParents FOR this-»
 
 	«REM» MappedBy for handling multiple relations between the same Classes «ENDREM-»
 «EXPAND MappedBy FOR this-»
-					
+
 	«REM» Mapping «ENDREM-»
 «EXPAND Mapping FOR this-»
 
@@ -67,17 +67,18 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «DEFINE MappedBy FOR ChiNode-»
 «LET {}.addAll(this.getParentNodesRecursive()).addAll(this.getChildNodesRecursive()) AS relatives-»
 «IF relatives.size > 0-»
+	/*
 	static mappedBy = [
 «FOREACH relatives AS relative SEPARATOR ","-»
 		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»«relative.type.getHierarchyRole(relative.getOtherEnd())»"
 «ENDFOREACH-»
 	]
+	*/
 «ENDIF-»
 «ENDLET-»
 «ENDDEFINE»
 
 «DEFINE Mapping FOR ChiNode-»
-	/*
 	static mapping = {
 			tablePerHierarchy false
 «FOREACH this.getChildNodesRecursive() AS child-»
@@ -92,7 +93,6 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «ENDLET-»
 «ENDFOREACH-»
 	}
-	*/
 «ENDDEFINE»	
 
 «REM» simple reference «ENDREM»
