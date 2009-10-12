@@ -53,12 +53,12 @@ Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml
 	let childClass = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
 		childClass != null
 		? (
-			let parentLower = getLowerMultiplicity(ch.targetMultiplicity):
-			let parentUpper = getUpperMultiplicity(ch.targetMultiplicity):
-			let parentNav = getNavigability(ch.targetNavigability):
-			let childLower = getLowerMultiplicity(ch.sourceMultiplicity):
-			let childUpper = getUpperMultiplicity(ch.sourceMultiplicity):
-			let childNav = getNavigability(ch.sourceNavigability):
+			let parentLower = getLowerMultiplicity(ch.sourceMultiplicity):
+			let parentUpper = getUpperMultiplicity(ch.sourceMultiplicity):
+			let parentNav = getNavigability(ch.sourceNavigability):
+			let childLower = getLowerMultiplicity(ch.targetMultiplicity):
+			let childUpper = getUpperMultiplicity(ch.targetMultiplicity):
+			let childNav = getNavigability(ch.targetNavigability):
 			let conn = parentClass.createAssociation(parentNav, parentAK, "", parentLower, parentUpper, childClass, childNav, childAK, "", childLower, childUpper):
 				conn.applyStereotype("Chronos::ChiAssociation")
 		) : (
