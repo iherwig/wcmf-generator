@@ -114,14 +114,14 @@ public class AntRunner extends AbstractWorkflowComponent {
 			project.fireBuildStarted();
 			project.init();
 			project.setBasedir(".");
-			ProjectHelper helper = ProjectHelper.getProjectHelper();
-			project.addReference("ant.projectHelper", helper);
-			helper.parse(project, file);
-			
 			// add workflow parameters to the project
 			for (Param param : params) {
 				project.setProperty(param.getName(), param.getValue());
 			}
+
+			ProjectHelper helper = ProjectHelper.getProjectHelper();
+			project.addReference("ant.projectHelper", helper);
+			helper.parse(project, file);			
 			project.executeTarget(project.getDefaultTarget());
 			project.fireBuildFinished(null);
 		} catch (BuildException e) {
