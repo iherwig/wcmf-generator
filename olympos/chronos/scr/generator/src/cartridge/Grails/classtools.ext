@@ -96,6 +96,26 @@ String sanitizeType(String orgTypeName):
 	}
 ;
 
+String getValuePrefix(uml::Type this):
+	switch(this.name) {
+		case "string": "\""
+		case "String": "\""
+		case "Date": "new Date(\""
+		case "date": "new Date(\""
+		default: ""
+	}
+;
+
+String getValuePostfix(uml::Type this):
+	switch(this.name) {
+		case "string": "\""
+		case "String": "\""
+		case "Date": "\")"
+		case "date": "\")"
+		default: ""
+	}
+;
+
 /**
  * Get the hierarchy role name (Parent, Child) of the ChiNode
  * represented by the association Property p in relation to

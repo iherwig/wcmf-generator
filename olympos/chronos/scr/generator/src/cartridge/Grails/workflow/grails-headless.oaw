@@ -1,0 +1,70 @@
+<workflow>
+	<property name="basePath" value="src" />
+
+	<property file="${basePath}/cartridge/Grails/workflow/grails-headless.properties"/>
+
+	<property name="propertyFile" value="${basePath}/cartridge/Grails/workflow/grails.properties" />
+	<property file="${propertyFile}" />
+
+	<!-- metamodel setup -->
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<bean id="mmChronos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
+		<profile value="${chronosProfileUri}"/>
+	</bean>
+	
+	<bean id="mmUml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
+
+	<!-- read model XML -->
+	<component class="org.openarchitectureware.xsd.XMLReader">
+		<modelSlot value="uwmmodel" />
+		<uri value="${modelXmlFile}" />
+		<metaModel id="cwmMM"
+			class="org.openarchitectureware.xsd.XSDMetaModel">
+			<schemaFile value="metamodel/cwm.xsd" />
+		</metaModel>
+	</component>
+
+	<!-- read profile as model -->
+	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
+		<modelUrl value='${chronosProfileUri}'/>
+		<outputSlot value="chronosProfileModel"/>
+	</component>
+
+	<!-- transform XML to UML -->
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="cwmMM" />
+		<metaModel idRef="mmUml2" />
+		<metaModel idRef="mmChronos" />
+		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfileModel)" />
+		<outputSlot value="sourceModel" />
+		<globalVarDef name="basePath" value="'${basePath}'" />
+	</component>
+
+	<!-- check source model -->
+	<component class="org.openarchitectureware.check.CheckComponent">
+		<metaModel idRef="mmUml2"/>
+		<checkFile value="cartridge::Grails::domain"/>
+		<emfAllChildrenSlot value="sourceModel"/>		
+	</component>
+
+	<!-- normalize names -->
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="mmUml2" />
+		<invoke value="common/nameNormalizer::normalizeName(sourceModel)" />
+	</component>
+
+	<!-- generate domain classes -->
+	<component class="org.openarchitectureware.xpand2.Generator">
+		<metaModel idRef="mmChronos"/>
+		<metaModel idRef="mmUml2"/>
+		<fileEncoding value="utf-8"/>
+
+		<expand value="${expandDomainClassesExpression}"/>
+
+		<outlet path="${domainTargetPath}">
+		</outlet>
+	   
+		<prSrcPaths value="${domainTargetPath}"/>
+	</component>
+</workflow>
