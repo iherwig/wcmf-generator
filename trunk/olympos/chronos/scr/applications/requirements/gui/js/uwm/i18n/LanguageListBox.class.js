@@ -14,12 +14,12 @@ Ext.namespace("uwm.i18n");
 /**
  * @class The language selection listbox.
  * 
- * @extends Ext.form.ComboBox
+ * @extends uwm.property.ComboBoxBase
  * @constructor
  * @param {Object}
  *            config The configuration object.
  */
-uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
+uwm.i18n.LanguageListBox = Ext.extend(uwm.property.ComboBoxBase, {
 		/**
 		 * @cfg {Array} languages
 		 * 
