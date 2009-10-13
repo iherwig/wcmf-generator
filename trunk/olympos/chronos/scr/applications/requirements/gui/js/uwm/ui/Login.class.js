@@ -57,21 +57,22 @@ uwm.ui.Login = function(config){
 						inputType: "password",
 						allowBlank: false,
 						value: uwm.Config.defaultPassword
+				}),
+				new uwm.i18n.LanguageListBox({
+					languages: uwm.i18n.Localization.getInstance().getAllUserInterfaceLanguages(),
 				}), 
-		new uwm.i18n.LanguageListBox({
-			languages: uwm.i18n.Localization.getInstance().getAllUserInterfaceLanguages(),
-		}), 
-		new Ext.Panel({
-					cls: "uwm-revisioninfo",
-					html: "<p>" + uwm.Dict.translate("Revision") + ": " + uwm.Constants.SVN_REVISION + "</p>"
-				})],
-				 buttons: [{
-						text: uwm.Dict.translate('Login'),
-						type: 'submit',
-						handler: function(){
-								self.initSession();
-						}
-				}]
+				new Ext.Panel({
+							cls: "uwm-revisioninfo",
+							html: "<p>" + uwm.Dict.translate("Revision") + ": " + uwm.Constants.SVN_REVISION + "</p>"
+						})
+			],
+			buttons: [{
+				text: uwm.Dict.translate('Login'),
+				type: 'submit',
+				handler: function(){
+						self.initSession();
+				}
+			}]
 		});
 		
 		if (!Ext.isGecko3) {

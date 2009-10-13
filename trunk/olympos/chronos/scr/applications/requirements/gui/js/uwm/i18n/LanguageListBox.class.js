@@ -62,7 +62,9 @@ uwm.i18n.LanguageListBox = Ext.extend(Ext.form.ComboBox, {
 			
 			Ext.apply(this, {
 				fieldLabel: uwm.Dict.translate('Language'),
-				forceSelection: 'true',
+				// removed because it caused an exception, when calling 
+				// an undefined listener function in extjs: p.fireFn is undefined
+				/*forceSelection: 'true',*/
 				editable: 'false',
 				name: 'Language',
 				store: new Ext.data.ArrayStore({
