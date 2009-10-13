@@ -35,9 +35,6 @@ public class ExecuteActionSetTest extends DionysosTest {
 				{req, json ->
 					assertTrue(json.success)
 					assertEquals('executeActionSet', json.action)
-					assertEquals('create',json.actionSet.action0.action)
-					assertEquals(Cfg.executeActionSetcreateClassName,json.actionSet.action0.className)
-					assertEquals('create',json.actionSet.action1.action)
 					
 					assertTrue(json.resultSet.action0.success)
 					assertEquals('create',json.resultSet.action0.action)
@@ -45,9 +42,9 @@ public class ExecuteActionSetTest extends DionysosTest {
 					assertNotNull(json.resultSet.action0.oid)
 					
 					assertTrue(json.resultSet.action1.success)
-					//assertEquals(json.resultSet.action0.oid,json.resultSet.action1.oid)
-					//assertEquals(Cfg.executeActionSetAttributes,json.resultSet.action1.attributes)
 					assertEquals('create',json.resultSet.action1.action)
+					assertEquals(Cfg.executeActionSetcreateClassName,json.resultSet.action1.className)
+					assertNotNull(json.resultSet.action1.oid)
 						
 				},
 				this.method
@@ -78,9 +75,6 @@ public class ExecuteActionSetTest extends DionysosTest {
 				{req, json ->
 					assertTrue(json.success)
 					assertEquals('executeActionSet', json.action)
-					assertEquals('create',json.actionSet.action0.action)
-					assertEquals(Cfg.executeActionSetcreateClassName,json.actionSet.action0.className)
-					assertEquals('create',json.actionSet.action1.action)
 					
 					assertTrue(json.resultSet.action0.success)
 					assertEquals('create',json.resultSet.action0.action)
@@ -89,7 +83,7 @@ public class ExecuteActionSetTest extends DionysosTest {
 					
 					assertTrue(json.resultSet.action1.success)
 					assertEquals(json.resultSet.action0.oid,json.resultSet.action1.oid)
-					assertEquals(Cfg.executeActionSetAttributes,json.resultSet.action1.attributes)
+					assertEquals(Cfg.executeActionSetAttributes.groundBreaking,json.resultSet.action1.attributes.groundBreaking)
 					assertEquals('update',json.resultSet.action1.action)
 						
 				},
@@ -98,4 +92,59 @@ public class ExecuteActionSetTest extends DionysosTest {
 	}
 	
 
+	//Simple two actions, not related
+	@Test
+	public void createParentAndChild() {
+		ensureLogin()
+		
+		request(
+				[
+				action: 'executeActionSet',
+				actionSet: [
+				            action0: [
+				                      action: 'create',
+				                      className: Cfg.executeActionSetcreateClassName
+				                      ],
+				            action1: [
+				                      action: 'update',
+				                      oid: Cfg.executeActionSetUpdateOid,
+				                      attributes: Cfg.executeActionSetAttributes
+				                      ],
+				            action2: [
+				                      action: 'create',
+				                      className: Cfg.executeActionSetcreateClassName
+				                      ],
+				            action3: [
+				                      action: 'update',
+				                      oid: Cfg.executeActionSetUpdateOid,
+				                      attributes: Cfg.executeActionSetAttributes
+				                      ],
+				            action4: [
+				                      action: 'update',
+				                      oid: Cfg.executeActionSetUpdateOid,
+				                      attributes: Cfg.executeActionSetAttributes
+	                      ]
+				                     
+				]	
+				
+				],
+				{req, json ->
+					assertTrue(json.success)
+					assertEquals('executeActionSet', json.action)
+					
+					assertTrue(json.resultSet.action0.success)
+					assertEquals('create',json.resultSet.action0.action)
+					assertEquals(Cfg.executeActionSetcreateClassName,json.resultSet.action0.className)
+					assertNotNull(json.resultSet.action0.oid)
+					
+					assertTrue(json.resultSet.action1.success)
+					assertEquals(json.resultSet.action0.oid,json.resultSet.action1.oid)
+					assertEquals(Cfg.executeActionSetAttributes.groundBreaking,json.resultSet.action1.attributes.groundBreaking)
+					assertEquals('update',json.resultSet.action1.action)
+						
+				},
+				this.method
+				)
+	}
+	
 }
