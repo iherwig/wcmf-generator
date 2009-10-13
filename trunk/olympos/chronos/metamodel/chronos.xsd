@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:annotation>
+		<xs:documentation>The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. 
+It is created to use a Model Driven Architecture approach.
+It is divided in 3 parts:
+- Requirements
+- Analysis
+- Implementation
+</xs:documentation>
+	</xs:annotation>
+	<xs:element name="ChiRequirement" type="ChiRequirement"/>
+	<xs:complexType name="ChiRequirement">
+		<xs:annotation>
+			<xs:documentation>A Business guide line about the Enterprise or the project.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Type" type="ChiRequirementType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Priority" type="UMLPrimitiveTypes::Integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A priority in %. Requirements are ordered by priority.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Author" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>This requirement's author's name and role in the project</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Proofreader" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Each requirement needs to be confirmed.
+This requirement's proofreader	's name and role in the project</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="ChiRequirementStatus" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="_image" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Requirement" type="Requirement" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiIssue" type="ChiIssue" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiFeature" type="ChiFeature"/>
+	<xs:complexType name="ChiFeature">
+		<xs:sequence>
+			<xs:element name="Author" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>This feature's author's name and role in the project</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Proofreader" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>This feature's revisor's name and role in the project</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Status" type="ChiFeatureStatus" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>This feature's status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="_image" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Feature" type="Feature" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiIssue" type="ChiIssue"/>
+	<xs:complexType name="ChiIssue">
+		<xs:sequence>
+			<xs:element name="Author" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>This issue's author's name and role in the project</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Responsible" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The responsible to close the present issue</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="_image" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Issue" type="Issue" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiGoal" type="ChiGoal"/>
+	<xs:complexType name="ChiGoal">
+		<xs:annotation>
+			<xs:documentation>a Measurable scope that the enterprise wants to achieve. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Priority" type="UMLPrimitiveTypes::Integer" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A priority in %</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value_Name" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The name of the value this goal intends to alter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value_ammount" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The actual amount of the value this goal intends to alter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Value_Goal" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The amount by which the value is to be altered</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="_image" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="_metatype" type="UMLPrimitiveTypes::String" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Requirement" type="Requirement" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiRequirement" type="ChiRequirement" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Feature" type="Feature"/>
+	<xs:complexType name="Feature">
+		<xs:complexContent>
+			<xs:extension base="Class">
+				<xs:sequence>
+					<xs:element name="isStatic" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="UseCase" type="UseCase"/>
+	<xs:complexType name="UseCase">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="ChiBusinessUseCase" type="ChiBusinessUseCase"/>
+	<xs:complexType name="ChiBusinessUseCase">
+		<xs:annotation>
+			<xs:documentation>A Business Use Case is part of a business process that produces an advantage to the enterprise.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PrimaryActor" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>the main actor of this use case</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OtherActors" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="GoalInContext" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The goal should implicitly express the actor's intent or purpose of the use case, such as "Enrol Student in Seminar."</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Scope" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Boundaries in which the use case is operated when invoked (E.g. CMS)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Level" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Authorizations for operations/actions to be performed against the Chi business objects in scope. Against every object/process 4 CRUD basic operations are possible:
+Create (Write)
+Read (Open)
+Update (Change)
+Delete  (Destroy)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Stakeholders" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>List of actors that have a special interest (i.e. to be informed every time) in completion of the use case</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Precondition" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A list of the conditions, if any, that must be met before a use case may be invoked. Can be a previous Use case or self the presence of the system in Scope.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Trigger" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Event that is responsible for invocation of the use case.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="MainSuccessScenario" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The main path of logic an actor follows through a use case. Often referred to as the &#8220;happy path&#8221; or the &#8220;main path&#8221; because it describes how the use case works when everything works as it normally should.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Extensions" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="_image" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="UseCase" type="UseCase" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiBusinessPartner" type="ChiBusinessPartner" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Actor" type="Actor"/>
+	<xs:complexType name="Actor">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="ChiBusinessPartner" type="ChiBusinessPartner"/>
+	<xs:complexType name="ChiBusinessPartner">
+		<xs:annotation>
+			<xs:documentation>A ChiBusinesPartner is an external person that has a Business relation with the enterprise.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Actor" type="Actor" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ChiRequirementType">
+		<xs:annotation>
+			<xs:documentation>Type of requirement</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Business Rule"/>
+			<xs:enumeration value="Security"/>
+			<xs:enumeration value="Performance"/>
+			<xs:enumeration value="Persistence"/>
+			<xs:enumeration value="Scalability"/>
+			<xs:enumeration value="Transport"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ChiRequirementStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Proposed"/>
+			<xs:enumeration value="Mandatory"/>
+			<xs:enumeration value="Validated"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ChiFeatureStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Proposed"/>
+			<xs:enumeration value="Validated"/>
+			<xs:enumeration value="Rejected"/>
+			<xs:enumeration value="Implemented"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="Activity" type="Activity"/>
+	<xs:complexType name="Activity">
+		<xs:sequence>
+			<xs:element name="isReadOnly" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="isSingleExecution" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="parameterName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="postcondition" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="precondition" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiActivity" type="ChiActivity"/>
+	<xs:complexType name="ChiActivity">
+		<xs:sequence>
+			<xs:element name="Activity" type="Activity" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiBusinessUseCaseCore" type="ChiBusinessUseCaseCore"/>
+	<xs:complexType name="ChiBusinessUseCaseCore">
+		<xs:annotation>
+			<xs:documentation>A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money).</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ChiBusinessUseCase">
+				<xs:sequence>
+					<xs:element name="_image" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Package" type="Package"/>
+	<xs:complexType name="Package">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="ChiBusinessProcess" type="ChiBusinessProcess"/>
+	<xs:complexType name="ChiBusinessProcess">
+		<xs:annotation>
+			<xs:documentation>A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Package" type="Package" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Connector" type="Connector"/>
+	<xs:complexType name="Connector">
+		<xs:sequence>
+			<xs:element name="direction" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="kind" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiStakeHolder" type="ChiStakeHolder"/>
+	<xs:complexType name="ChiStakeHolder">
+		<xs:annotation>
+			<xs:documentation>Any person or force that have an interest in the considered domain.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Role" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The official role that this stakeholder play in context.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Power" type="ChiScala" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>the measure of the possibilities in context that this person has to realiza his objectives.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Urgency" type="ChiScala" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Legitimacy" type="ChiScala" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Actor" type="Actor" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiOpinion" type="ChiOpinion" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiOpinionInner" type="ChiOpinionInner" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiOpinion" type="ChiOpinion"/>
+	<xs:complexType name="ChiOpinion">
+		<xs:sequence>
+			<xs:element name="Activity" type="Activity" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiBusinessPartnerActive" type="ChiBusinessPartnerActive"/>
+	<xs:complexType name="ChiBusinessPartnerActive">
+		<xs:annotation>
+			<xs:documentation>A ChiBusinesPartnerActive is a direct customer of the enterprise.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ChiBusinessPartner">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ChiBusinessPartnerPassive" type="ChiBusinessPartnerPassive"/>
+	<xs:complexType name="ChiBusinessPartnerPassive">
+		<xs:annotation>
+			<xs:documentation>A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ChiBusinessPartner">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ChiWorker" type="ChiWorker"/>
+	<xs:complexType name="ChiWorker">
+		<xs:annotation>
+			<xs:documentation>A ChiWorker is a special actor that works within the enterprise. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Actor" type="Actor" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiWorkerExternal" type="ChiWorkerExternal"/>
+	<xs:complexType name="ChiWorkerExternal">
+		<xs:annotation>
+			<xs:documentation>A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ChiWorker">
+				<xs:sequence>
+					<xs:element name="is_OfflineUser" type="xs:string" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ChiWorkerInternal" type="ChiWorkerInternal"/>
+	<xs:complexType name="ChiWorkerInternal">
+		<xs:annotation>
+			<xs:documentation>A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ChiWorker">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Actor" type="Actor"/>
+	<xs:complexType name="Actor">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="Activity" type="Activity"/>
+	<xs:complexType name="Activity">
+		<xs:sequence>
+			<xs:element name="isReadOnly" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="isSingleExecution" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="parameterName" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="postcondition" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="precondition" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Association" type="Association"/>
+	<xs:complexType name="Association">
+		<xs:sequence>
+			<xs:element name="direction" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiAction" type="ChiAction"/>
+	<xs:complexType name="ChiAction">
+		<xs:sequence>
+			<xs:element name="_image" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Association" type="Association" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiAccord" type="ChiAccord"/>
+	<xs:complexType name="ChiAccord">
+		<xs:sequence>
+			<xs:element name="Association" type="Association" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ChiScala">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Low"/>
+			<xs:enumeration value="Medium"/>
+			<xs:enumeration value="High"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ChiDiscord" type="ChiDiscord"/>
+	<xs:complexType name="ChiDiscord">
+		<xs:sequence>
+			<xs:element name="Association" type="Association" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Requirement" type="Requirement"/>
+	<xs:complexType name="Requirement">
+		<xs:complexContent>
+			<xs:extension base="Class">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Issue" type="Issue"/>
+	<xs:complexType name="Issue">
+		<xs:complexContent>
+			<xs:extension base="Class">
+				<xs:sequence/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ChiOpinionInner" type="ChiOpinionInner"/>
+	<xs:complexType name="ChiOpinionInner">
+		<xs:sequence>
+			<xs:element name="_image" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Activity" type="Activity" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ToolboxPage" type="ToolboxPage"/>
+	<xs:complexType name="ToolboxPage">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="Attribute" type="Attribute"/>
+	<xs:complexType name="Attribute">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="Class" type="Class"/>
+	<xs:complexType name="Class">
+		<xs:sequence>
+			<xs:element name="isActive" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiNode" type="ChiNode"/>
+	<xs:complexType name="ChiNode">
+		<xs:annotation>
+			<xs:documentation>A Node type used in WCMF. Nodes and Values define the application data model</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="table_name" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The name of the database table. If not given the name will be taken.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pk_name" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The name of the primary key column. The generator will add this if there is no appropriate attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderby" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Definition of default sorting. Possible values: 'none' (no order), 'sortkey' (generates a 'sortkey' column, that is used for explicit sorting) or any the name of any WCMFValue defined in the node optionally followed by [ASC|DESC] e.g. 'name ASC'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parent_order" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The order of the associated parents.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="child_order" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The order of the associated children e.g. for Recipe: Image|Info|AdminInfo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="display_value" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The display value of a node e.g. for Recipe: name|AdminInfo/status|Info/status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="is_soap" type="boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indicates wether a SOAP interface should be generated for this type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="is_searchable" type="boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Indicates wether this type should be included in the default search.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="initparams" type="ChiSystem" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The configuration section that is used on initialization of the corresponding mapper.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Version" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Author" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="_image" type="xs:string" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="Class" type="Class" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiValue" type="ChiValue" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="children" type="ChiNode" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="boolean">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="true"/>
+			<xs:enumeration value="false"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="ChiActionKey" type="ChiActionKey"/>
+	<xs:complexType name="ChiActionKey">
+		<xs:annotation>
+			<xs:documentation>An action key used in Chronos. An action key associates two controllers (to define a control flow) or a view with a controller (to define a view attachment). Controller, Views and Associations define the application flow</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="action" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The Action which triggeres this association</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="context" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The Context in which this association is valid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="config" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The configuration file in which this association will be placed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Association" type="Association" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiController" type="ChiController" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiController" type="ChiController" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiController" type="ChiController"/>
+	<xs:complexType name="ChiController">
+		<xs:annotation>
+			<xs:documentation>A Controller type used in Chronos. Controller, Views and Associations define the application flow</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Class" type="Class" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiView" type="ChiView"/>
+	<xs:complexType name="ChiView">
+		<xs:annotation>
+			<xs:documentation>A View used in WCMF. Controller, Views and Associations define the application flow</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Class" type="Class" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiController" type="ChiController" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiSystem" type="ChiSystem"/>
+	<xs:complexType name="ChiSystem">
+		<xs:annotation>
+			<xs:documentation>A system configuration. Settings are modelled as attributes with default values</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="plattform" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The plattform to which the configuration settings apply.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="config" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The configuration file where the settings will be placed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Class" type="Class" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiManyToMany" type="ChiManyToMany"/>
+	<xs:complexType name="ChiManyToMany">
+		<xs:annotation>
+			<xs:documentation>A many to many node used in WCMF. It is used to realize a many to many relation between wo WCMFNodes</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="ChiNode">
+				<xs:sequence>
+					<xs:element name="ChiNode" type="ChiNode" minOccurs="1" maxOccurs="1"/>
+					<xs:element name="ChiNode" type="ChiNode" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="ChiValue" type="ChiValue"/>
+	<xs:complexType name="ChiValue">
+		<xs:annotation>
+			<xs:documentation>A Node value type used in WCMF. These values are persistent</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="app_data_type" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The datatype used in the application e.g. DATATYPE_DONTCARE, DATATYPE_ATTRIBUTE, DATATYPE_ELEMENT or DATATYPE_IGNORE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="db_data_type" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The datatype used in the database</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="is_editable" type="boolean" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Whether the attribute is editable or not</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="input_type" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The HTML input type for the attribute e.g. select#fix:key1[val1]|key2[val2]</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="display_type" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The HTML display type for the attribute e.g. image</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="restrictions_match" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A regular expression that the value must match (e.g. '[0-3][0-9]\.[0-1][0-9]\.[0-9][0-9][0-9][0-9]' for date values)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="restrictions_not_match" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A regular expression that the value must NOT match</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="restrictions_description" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>A text describing the restrictions</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="column_name" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The name of the database column. If not given the name will be taken</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Attribute" type="Attribute" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiValueRef" type="ChiValueRef"/>
+	<xs:complexType name="ChiValueRef">
+		<xs:annotation>
+			<xs:documentation>A Node value type used in WCMF. These values reference values of other Node types and are not persistent</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reference_value" type="ChiValue" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The referenced attribute</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Attribute" type="Attribute" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="ChiNode" type="ChiNode" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="ChiRelationEnd" type="ChiRelationEnd"/>
+	<xs:complexType name="ChiRelationEnd">
+		<xs:annotation>
+			<xs:documentation>An association end used in WCMF</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="fk_name" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>The name of the foreign key column. The generator will add this if there is no appropriate attribute. If not given the generator will add 'fk_[parent]_id'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Association" type="Association" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Association" type="Association"/>
+	<xs:complexType name="Association">
+		<xs:sequence>
+			<xs:element name="direction" type="xs:string" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="Class" type="Class"/>
+	<xs:complexType name="Class">
+		<xs:complexContent>
+			<xs:extension base="Requirement">
+				<xs:sequence>
+					<xs:element name="isActive" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:element name="Class" type="Class"/>
+	<xs:complexType name="Class">
+		<xs:sequence>
+			<xs:element name="isActive" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
