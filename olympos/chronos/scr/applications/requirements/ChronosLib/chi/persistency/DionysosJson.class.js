@@ -182,11 +182,25 @@ chi.persistency.DionysosJson.prototype.readRecordHandler = function(handler, opt
 }
 
 chi.persistency.DionysosJson.prototype.update = function(oid, attributes, successHandler, errorHandler) {
+	attributes = this.convertUpdateFormats(attributes);
+	
 	this.jsonRequest( {
 	    action : "update",
 	    oid : oid,
 	    attributes : attributes
 	}, successHandler, errorHandler, this.updateRecordHandler);
+}
+
+chi.persistency.DionysosJson.prototype.convertUpdateFormats = function(attributes) {
+	for (var key in attributes) {
+		var val = attributes[key];
+		
+		if (val instanceof Date) {
+			attributes[key] = val.format("Y-m-d H:i:s");
+		}
+	}
+
+	return attributes;
 }
 
 chi.persistency.DionysosJson.prototype.updateRecordHandler = function(handler, options, data) {
@@ -326,7 +340,7 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 				case "update":
 					jsonRequest.action = "update";
 					jsonRequest.oid = currRequest.oid;
-					jsonRequest.attributes = currRequest.attributes;
+					jsonRequest.attributes = this.convertUpdateFormats(currRequest.attributes);
 					recordHandler = this.updateRecordHandler;
 					break;
 				
