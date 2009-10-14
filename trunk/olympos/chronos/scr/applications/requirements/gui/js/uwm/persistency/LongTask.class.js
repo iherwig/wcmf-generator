@@ -36,6 +36,7 @@ uwm.persistency.LongTask = function(call, iFrameId) {
  * Run the task. The task will do the required server calls and call the given handlers.
  * @param processHandler The function to call on each processing step. 
  *          Parameters: stepName, stepNumber, numberOfSteps
+ *                      data The data returned from the last server call
  * @param successHandler The function to call after the LongTask finished. 
  *          Parameters: data The data returned from the last server call
  * @param errorHandler The function to call when an error occurs
@@ -69,7 +70,7 @@ uwm.persistency.LongTask.prototype.jsonSuccess = function(options, data) {
 	else if (stepNumber == numberOfSteps && this.iFrameId != null) {
 		// if an iFrameId is given, the last request is loaded directly into the iFrame
 		if (this.processHandler instanceof Function) {
-			this.processHandler(stepName, stepNumber, numberOfSteps);
+			this.processHandler(stepName, stepNumber, numberOfSteps, data);
 		}
 		var self = this;
 		var iFrame = Ext.get(this.iFrameId);
@@ -86,7 +87,7 @@ uwm.persistency.LongTask.prototype.jsonSuccess = function(options, data) {
 	else {
 		// do the proceeding calls
 		if (this.processHandler instanceof Function) {
-			this.processHandler(stepName, stepNumber, numberOfSteps);
+			this.processHandler(stepName, stepNumber, numberOfSteps, data);
 		}
 		uwm.persistency.Persistency.getInstance().doContinue(controller, this.jsonSuccess.createDelegate(this), this.jsonError.createDelegate(this));
 	}

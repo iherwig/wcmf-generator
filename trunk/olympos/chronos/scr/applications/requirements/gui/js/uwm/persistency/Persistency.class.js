@@ -80,6 +80,9 @@ uwm.persistency.Persistency.prototype.sort = function(oid, direction, distance, 
 uwm.persistency.Persistency.prototype.display = function(oid, depth, language, successHandler, errorHandler) {
 }
 
+uwm.persistency.Persistency.prototype.batchdisplay = function(oid, language, successHandler, errorHandler) {
+}
+
 uwm.persistency.Persistency.prototype.list = function(uwmClassName, completeObjects, language, successHandler, errorHandler) {
 }
 

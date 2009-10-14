@@ -174,6 +174,16 @@ uwm.persistency.Json.prototype.display = function(oid, depth, language, successH
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.batchdisplay = function(oid, language, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "batchdisplay",
+		oid: oid,
+		language: language,
+		omitMetaData: true,
+		translateValues: true
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.list = function(uwmClassName, completeObjects, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "list",
@@ -416,6 +426,13 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 			case "display":
 				jsonRequest.oid = currRequest.oid;
 				jsonRequest.depth = currRequest.depth;
+				jsonRequest.language = currRequest.language;
+				jsonRequest.omitMetaData = true;
+				jsonRequest.translateValues = true;
+				break;
+				
+			case "batchdisplay":
+				jsonRequest.oid = currRequest.oid;
 				jsonRequest.language = currRequest.language;
 				jsonRequest.omitMetaData = true;
 				jsonRequest.translateValues = true;

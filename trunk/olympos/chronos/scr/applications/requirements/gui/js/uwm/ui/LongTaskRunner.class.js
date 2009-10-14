@@ -20,6 +20,8 @@ Ext.namespace("uwm.ui");
  * @config title The window title
  * @config call A function with parameters successHandler and errorHandler (these will be used by LongTask)
  *              Typically a call to a Persistency method. See also {LongTask}.
+ * @config progressHandler The function to call on each processing step.
+ *          Parameters: data The data returned from the last server call
  * @config successHandler The function to call after the LongTask finished
  *          Parameters: data The data returned from the last server call
  * @config errorHandler The function to call when an error occurs
@@ -56,13 +58,13 @@ uwm.ui.LongTaskRunner = function(config) {
 		height:87,
 		items: [this.pbar, 
 			this.iFrame
-    ],
+		],
 		buttons: [this.okButton],
-    bodyBorder: false,
-    border: false,
+		bodyBorder: false,
+		border: false,
 		closable: false,
 		resizable: false,
-    modal: true
+		modal: true
 	}, config));
 	
 	// setup the LongTask when the window shows
@@ -78,8 +80,11 @@ uwm.ui.LongTaskRunner = function(config) {
 			var task = new uwm.persistency.LongTask(self.call, iFrameId);
 			task.run.defer(10, task, [
 				// process handler (updates the progress bar)
-				function(text, i, total) {
+				function(text, i, total, data) {
 					self.pbar.updateProgress(i/total, text);
+					if (self.progressHandler instanceof Function) {
+						self.progressHandler(data);
+					}
 				}, 
 				// success handler (calls the success handler defined in the successHandler parameter)
 				function(data) {

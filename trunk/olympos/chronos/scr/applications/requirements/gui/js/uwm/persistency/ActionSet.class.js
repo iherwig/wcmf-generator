@@ -147,6 +147,18 @@ uwm.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
 	};
 }
 
+uwm.persistency.ActionSet.prototype.addBatchDisplay = function(oid,
+		language, successHandler, errorHandler, errorLevel) {
+	this.requests[this.getNextId()] = {
+		action :"batchdisplay",
+		oid :oid,
+		language :language,
+		successHandler :successHandler,
+		errorHandler :errorHandler,
+		errorLevel :errorLevel
+	};
+}
+
 uwm.persistency.ActionSet.prototype.addList = function(uwmClassName, language, completeObjects,
 		successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
