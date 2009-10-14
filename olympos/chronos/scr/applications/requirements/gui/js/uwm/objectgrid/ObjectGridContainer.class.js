@@ -38,6 +38,9 @@ uwm.objectgrid.ObjectGridContainer = function() {
 
 uwm.objectgrid.ObjectGridContainer.prototype.registerGrid = function(objectGrid) {
 	this.items[objectGrid.getUwmClassName()] = objectGrid;
+	if (objectGrid instanceof uwm.objectgrid.ObjectGrid) {
+		this.dataContainers[objectGrid.getUwmClassName()] = new Array();
+	}
 }
 
 uwm.objectgrid.ObjectGridContainer.prototype.handleDeleteEvent = function(modelObject) {
@@ -91,15 +94,9 @@ uwm.objectgrid.ObjectGridContainer.prototype.loadScope = function(modelNode) {
 	
 	var self = this;
 	
-	uwm.model.ModelContainer.getInstance().loadByOid(modelNode.getOid(), function() {
-		self.handleLoadedScope();
-	}, 99);
-}
-
-uwm.objectgrid.ObjectGridContainer.prototype.handleLoadedScope = function() {
+	// initialize containers
 	this.dataContainers = new Object();
 	this.containersInScope = new Array();
-	
 	for (var i in this.items) {
 		var currGrid = this.items[i];
 		
@@ -108,8 +105,40 @@ uwm.objectgrid.ObjectGridContainer.prototype.handleLoadedScope = function() {
 		}
 	}
 	
-	this.walkAndCollectData(this.rootModelNode);
-	
+	var longTaskRunner = new uwm.ui.LongTaskRunner( {
+			title : uwm.Dict.translate('Loading Scope ...'),
+			call : function(successHandler, errorHandler) {
+				uwm.persistency.Persistency.getInstance().batchdisplay(modelNode.getOid(), 
+					uwm.i18n.Localization.getInstance().getModelLanguage(), successHandler, errorHandler);
+			},
+			progressHandler : function(data) {
+				if (data.objects) {
+					self.handleLoadedScopePart(data.objects);
+				}
+			},
+			successHandler : function(data) {
+				if (data.objects) {
+					self.handleLoadedScopePart(data.objects);
+				}
+				self.handleLoadedScope();
+				longTaskRunner.close();
+			},
+			errorHandler : function(data) {
+				uwm.Util.showMessage(uwm.Dict.translate("Error while loading scope"), uwm.Dict.translate("The process was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+			},
+			isReturningDocument : false
+	}).show();
+}
+
+uwm.objectgrid.ObjectGridContainer.prototype.handleLoadedScopePart = function(objects) {
+	var modelContainer = uwm.model.ModelContainer.getInstance();
+	for (var i=0; i<objects.length; i++) {
+		var modelNode = modelContainer.createByDisplayResult({node: objects[i]});
+		this.collectData(modelNode);
+	}
+}
+
+uwm.objectgrid.ObjectGridContainer.prototype.handleLoadedScope = function() {
 	for (var i in this.items) {
 		var currGrid = this.items[i];
 		
@@ -120,43 +149,10 @@ uwm.objectgrid.ObjectGridContainer.prototype.handleLoadedScope = function() {
 	}
 }
 
-uwm.objectgrid.ObjectGridContainer.prototype.walkAndCollectData = function(modelNode) {
-	this.containersInScope[modelNode.getOid()] = modelNode;
-	
-	var childOids = modelNode.getChildOids();
-	
-	for (var i = 0; i < childOids.length; i++) {
-		var currChildOid = childOids[i];
-		
-		var currChildModelNode = uwm.model.ModelContainer.getInstance().getByOid(currChildOid);
-		
-		if (currChildModelNode) {
-			if (currChildModelNode instanceof uwm.model.builtin.Package || 
-				currChildModelNode instanceof uwm.diagram.ActivitySet) {
-				
-				// only collect child node data (current node data will not be collected)
-				this.walkAndCollectData(currChildModelNode);
-			}
-			else if (currChildModelNode instanceof cwm.ChiBusinessProcess ||
-				currChildModelNode instanceof cwm.ChiBusinessUseCaseCore ||
-				currChildModelNode instanceof cwm.ChiBusinessUseCase) {
-
-				// collect current node data and child data
-				this.collectData(currChildModelNode);
-				this.walkAndCollectData(currChildModelNode);
-			}
-			else {
-
-				// default: collect current node data only
-				this.collectData(currChildModelNode);
-			}
-		}
-	}
-}
-
 uwm.objectgrid.ObjectGridContainer.prototype.collectData = function(modelNode) {
-	var modelNodeUwmClassName = modelNode.getUwmClassName();
-	
+	this.containersInScope[modelNode.getOid()] = modelNode;
+
+	var modelNodeUwmClassName = modelNode.getUwmClassName();	
 	var container = this.dataContainers[modelNodeUwmClassName];
 	if (container) {
 		container.push(modelNode.getGridData());
