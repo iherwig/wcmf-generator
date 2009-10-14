@@ -32,3 +32,34 @@ uwm.graphics.figure.Operation.prototype.createHTMLElement = function() {
 
 	return item;
 }
+
+/**
+ * Overidden in order to add "()" to the displayed label
+ */
+uwm.graphics.figure.Operation.prototype.setLabel = function(newText) {
+	var result = uwm.graphics.figure.AbstractClassPart.prototype.setLabel.call(this, newText);
+
+	this.addBracketsToDisplay();
+	return result;
+}
+
+/**
+ * Overidden in order to add "()" to the displayed label
+ */
+uwm.graphics.figure.Operation.prototype.paint = function() {
+	uwm.graphics.figure.AbstractClassPart.prototype.paint.call(this);
+
+	this.addBracketsToDisplay();
+}
+
+/**
+ * Add "()" to the displayed label
+ */
+uwm.graphics.figure.Operation.prototype.addBracketsToDisplay = function() {
+	var ops = Ext.query('.FigureOperation', this.html);
+	if (ops) {
+		for (var i=0; i<ops.length; i++) {
+			ops[i].innerHTML += "()";
+		}
+	}
+}
