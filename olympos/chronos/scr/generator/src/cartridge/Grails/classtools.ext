@@ -100,8 +100,8 @@ String getValuePrefix(uml::Type this):
 	switch(this.name) {
 		case "string": "\""
 		case "String": "\""
-		case "Date": "new Date(\""
-		case "date": "new Date(\""
+		case "Date": "Date.parse(\"yyyy-MM-dd z\", \""
+		case "date": "Date.parse(\"yyyy-MM-dd z\", \""
 		default: ""
 	}
 ;
@@ -110,8 +110,8 @@ String getValuePostfix(uml::Type this):
 	switch(this.name) {
 		case "string": "\""
 		case "String": "\""
-		case "Date": "\")"
-		case "date": "\")"
+		case "Date": " GMT\")"
+		case "date": " GMT\")"
 		default: ""
 	}
 ;
