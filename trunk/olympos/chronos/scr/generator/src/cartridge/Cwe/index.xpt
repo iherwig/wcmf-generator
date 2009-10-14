@@ -131,6 +131,8 @@
 		</script>
 		<script type="text/javascript" src="js/cwe/editor/control/PropertiesFieldSet.class.js">
 		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/AssociateWindow.class.js">
+		</script>
 		<script type="text/javascript" src="js/cwe/editor/control/SingleAssociate.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwe/editor/control/MultipleAssociate.class.js">

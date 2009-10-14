@@ -51,6 +51,8 @@ Ext.extend(application.«this.getFullPackageName()».«this.name», cwe.model.Mo
 
 «EXPAND getGridColumns FOR this»
 
+«EXPAND getLabelColumns FOR this»
+
 «EXPAND getEditorItems FOR this»
 
 «EXPAND getLabel FOR this»
@@ -123,8 +125,26 @@ application.«this.getFullPackageName()».«this.name».prototype.getGridColumns
 			    header : "«currValue.name»",
 			    dataIndex : "«currValue.name»",
 			    width : 100,
-			    sortable : «this.is_searchable.boolString() == "true" ? "true" : "false"»,
+			    sortable : true,
+			    «IF !this.display_value.contains(currValue.name)»hidden: true,«ENDIF»
 			    editor: «EXPAND getGridEditor FOR currValue»
+			}
+		«ENDFOREACH»
+	«ENDIF»
+	];
+};
+«ENDDEFINE»
+
+«DEFINE getLabelColumns FOR Chronos::ChiNode»
+application.«this.getFullPackageName()».«this.name».prototype.getLabelColumns = function() {
+	return [
+	«IF this.getChiAttributes().size > 0»
+		«FOREACH this.getChiAttributes().select(e|this.display_value.contains(e.name)) AS currValue SEPARATOR ", "»
+			{
+			    header : "«currValue.name»",
+			    dataIndex : "«currValue.name»",
+			    width : 100,
+			    sortable : true
 			}
 		«ENDFOREACH»
 	«ENDIF»
