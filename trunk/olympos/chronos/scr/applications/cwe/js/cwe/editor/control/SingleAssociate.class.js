@@ -132,31 +132,21 @@ cwe.editor.control.SingleAssociate.prototype.getValueLabel = function() {
  * @private
  */
 cwe.editor.control.SingleAssociate.prototype.onTrigger1Click = function() {
-	var grid = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getGrid();
-	
 	var self = this;
 	
-	var button = new cwe.modelgrid.AssociateButton( {
-	    modelClass : this.editor.getModelClass(),
-	    sourceLabel : this.editor.getLabel(),
-	    roleName : this.getName(),
-	    role : this.dataIndex,
+	var associateWindow = new cwe.editor.control.AssociateWindow( {
+	    modelClass : this.modelClass,
 	    singleSelect : true,
-	    sourceOid : this.editor.getOid(),
 	    sourceHandler : function(records) {
 		    var record = records[0];
 		    
 		    self.setValue(record);
-		    
-		    grid.removeAssociateButton(button);
-		    self.editor.removeAssociateButton(button);
-		    self.editor.show();
-	    }
+	    },
+	    roleName : this.getName(),
+	    editor : this.editor
 	});
 	
-	grid.addAssociateButton(button);
-	
-	this.editor.addAssociateButton(grid, button);
+	associateWindow.show();
 };
 
 /**

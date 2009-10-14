@@ -117,6 +117,10 @@ cwe.model.ModelClass.prototype.getGridColumns = function() {
 	return result;
 };
 
+cwe.model.ModelClass.prototype.getLabelColumns = function() {
+	return this.getGridColumns();
+};
+
 /**
  * Returns the items of the editor of this Model Class.
  * 

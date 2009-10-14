@@ -25,7 +25,8 @@ cwe.editor.control.DateField = function(config) {
 	config = config || {};
 	
 	cwe.editor.control.DateField.superclass.constructor.call(this, Ext.apply(this, {
-		format: "D M d H:i:s T Y"
+		altFormats: "Y-m-d H:i:s",
+		format: "Y-m-d"
 	}, config));
 	
 	this.toolTipText = config.toolTip;

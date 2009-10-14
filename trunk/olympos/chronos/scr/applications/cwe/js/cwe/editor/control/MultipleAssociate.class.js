@@ -225,59 +225,49 @@ cwe.editor.control.MultipleAssociate.prototype.getValue = function() {
  * @private
  */
 cwe.editor.control.MultipleAssociate.prototype.associate = function() {
-	var grid = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getGrid();
-	
 	var self = this;
 	
-	var button = new cwe.modelgrid.AssociateButton( {
-			modelClass : this.editor.getModelClass(),
-			sourceLabel : this.editor.getLabel(),
-			roleName : this.getName(),
-			role : this.dataIndex,
-			singleSelect : false,
-			sourceOid : this.editor.getOid(),
-			sourceHandler : function(records) {
-				var oldValue = self.getValue();
-				
-				var newValue = [];
-				if (oldValue != undefined) {
-					for ( var i = 0; i < oldValue.length; i++) {
-						newValue.push(oldValue[i]);
-					}
-				}
-				
-				for ( var i = 0; i < records.length; i++) {
-					var currRecord = records[i];
-					
-					if (currRecord.isModelRecord) {
-						var alreadyInList = false;
-						if (oldValue != undefined) {
-							for ( var j = 0; j < oldValue.length; j++) {
-								var currOldRecord = oldValue[j];
-								if (currOldRecord.isModelRecord && currRecord.getOid() == currOldRecord.getOid()) {
-									alreadyInList = true;
-									break;
-								}
-							}
-						}
-						
-						if (!alreadyInList) {
-							newValue.push(currRecord);
-						}
-					}
-				}
-				
-				self.setValue(newValue);
-				
-				grid.removeAssociateButton(button);
-				self.editor.removeAssociateButton(button);
-				self.editor.show();
-			}
+	var associateWindow = new cwe.editor.control.AssociateWindow( {
+	    modelClass : this.modelClass,
+	    singleSelect : false,
+	    sourceHandler : function(records) {
+		    var oldValue = self.getValue();
+		    
+		    var newValue = [];
+		    if (oldValue != undefined) {
+			    for ( var i = 0; i < oldValue.length; i++) {
+				    newValue.push(oldValue[i]);
+			    }
+		    }
+		    
+		    for ( var i = 0; i < records.length; i++) {
+			    var currRecord = records[i];
+			    
+			    if (currRecord.isModelRecord) {
+				    var alreadyInList = false;
+				    if (oldValue != undefined) {
+					    for ( var j = 0; j < oldValue.length; j++) {
+						    var currOldRecord = oldValue[j];
+						    if (currOldRecord.isModelRecord && currRecord.getOid() == currOldRecord.getOid()) {
+							    alreadyInList = true;
+							    break;
+						    }
+					    }
+				    }
+				    
+				    if (!alreadyInList) {
+					    newValue.push(currRecord);
+				    }
+			    }
+		    }
+		    
+		    self.setValue(newValue);
+	    },
+	    roleName : this.getName(),
+	    editor : this.editor
 	});
-
-	grid.addAssociateButton(button);
-
-	this.editor.addAssociateButton(grid, button);
+	
+	associateWindow.show();
 };
 
 /**
