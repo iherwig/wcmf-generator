@@ -9,7 +9,7 @@ public class InfoCoordinateSize {
 		return x;
 	}
 	
-	public InfoCoordinateSize(float x, float y, float hight, float width){
+	public InfoCoordinateSize(float x, float y, float width, float hight ){
 		setAll(x, y, width, hight);
 	}
 	

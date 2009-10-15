@@ -20,65 +20,14 @@ public class ElementDiagram {
 	private final static String REFINES = "is refined by";
 	private final static String PARTICIPATES = "is participates by";
 	private final static String GENERALISATION = "is generalisation by";
-	
-//	URL image = this.getClass().getClassLoader().getResource("/Images/");
-//	ImageIcon image = (new ImageIcon(getClass().getResource("yourpackage/mypackage/image.gif")));
-//  InputStream is =  this.getClass().getClassLoader().getResourceAsStream("org/myproject/foo/bar/MyProp.properties");
 
-//	URL chiRequirementIssu = this.getClass().getClassLoader().getResource("net/sourceforge/olympos/diagramimageexporter/");
-//	new URL(imagePath2).toString()
 	private static String path = "D:/Images/";
-	
-	
-//	static ImageIcon chiRequirementIssuImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiRequirementIssue.svg")));
-//	static ImageIcon chiRequirementFeatureImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiRequirementFeature.svg")));
-//	static ImageIcon chiRequirementGoalImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiRequirementGoal.svg")));
-//	static ImageIcon chiRequirementChiRequirementImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiRequirement.svg")));
-//	static ImageIcon chiWorkerInternalImage = (new ImageIcon(ElementDiagram.class.getResource("Images/chiWorkerInternal.svg")));
-//	static ImageIcon chiWorkerExternalImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiWorkerExternal.svg")));
-//	static ImageIcon chiWorkerImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiWorker.svg")));
-//	static ImageIcon chiViewImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiView.svg")));
-//	static ImageIcon chiSystemImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiSystem.svg")));
-//	static ImageIcon chiBusinessUseCaseCoreImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiBusinessUseCaseCore.svg")));
-//	static ImageIcon chiBusinessUseCaseImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiBusinessUseCase.svg")));
-//	static ImageIcon chiBusinessPartnerPassiveImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiBusinessPartnerPassive.svg")));
-//	static ImageIcon chiBusinessPartnerActiveImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiBusinessPartnerActive.svg")));
-//	static ImageIcon chiBusinessPartnerImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiBusinessPartner.svg")));
-//	static ImageIcon activitySendImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ActivitySend.svg")));
-//	static ImageIcon activityReseiveImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ActivityReceive.svg")));
-//	static ImageIcon activityInitialImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ActivityInitial.svg")));
-//	static ImageIcon activityDecisionImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ActivityDecision.svg")));
-//	static ImageIcon activityFinalImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ActivityFinal.svg")));
-//	static ImageIcon activityImage = (new ImageIcon(ElementDiagram.class.getResource("Images/Activity.svg")));
-//	static ImageIcon chiNodeImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiNode.svg")));
-//	static ImageIcon chiControllerImage = (new ImageIcon(ElementDiagram.class.getResource("Images/ChiController.svg")));
-//	static ImageIcon chiBusinessProcessImage = (new ImageIcon(ElementDiagram.class.getResource("Images/BusinessProcess.svg")));
 	
 	private final static String chiRequirementFeature = "ChiRequirementFeature.PNG";
 	private final static String chiRequirementIssu = "ChiRequirementIssue.PNG";
 	private final static String chiRequirementGoal = "ChiRequirementGoal.PNG";
 	private final static String chiRequirementChiRequirement = "ChiRequirement.PNG";
 	private final static String chi = "Chi.PNG";
-	
-//	private final static String chiWorkerInternal = "chiWorkerInternal.svg";
-//	private final static String chiWorkerExternal = "ChiWorkerExternal.svg";
-//	private final static String chiWorker = "ChiWorker.svg";
-//	private final static String chiView = "ChiView.svg";
-//	private final static String chiSystem = "ChiSystem.svg";
-//	private final static String chiBusinessUseCaseCore = "ChiBusinessUseCaseCore.svg";
-//	private final static String chiBusinessUseCase = "ChiBusinessUseCase.svg";
-//	private final static String chiBusinessPartnerPassive = "ChiBusinessPartnerPassive.svg";
-//	private final static String chiBusinessPartnerActive = "ChiBusinessPartnerActive.svg";
-//	private final static String chiBusinessPartner = "ChiBusinessPartner.svg";
-//	private final static String activitySend = "ActivitySend.svg";
-//	private final static String activityReseive = "ActivityReseive.svg";
-//	private final static String activityInitial = "ActivityInitial.svg";
-//	private final static String activityDecision = "ActivityDecision.svg";
-//	private final static String activityFinal = "ActivityFinal.svg";
-//	private final static String activity = "Activity.svg";
-//	private final static String chiNode = "ChiNode.svg";
-//	private final static String chiController = "ChiController.svg";
-//	private final static String chiBusinessProcess = "BusinessProcess.svg";
 
 	private HashMap<EnumFigureType, InfoAllowedConnection> allowedConnection;
 	private HashMap<String, InfoAllowedConnection> allowedConnectionByName;
@@ -104,24 +53,8 @@ public class ElementDiagram {
 		this.allowedConnectionByName = connections;
 	}
 
-	ElementDiagram() {
+	public ElementDiagram() {
 	}
-
-//	ElementDiagram(EnumFigureType type, String name, String drawType,EnumFontPosition fontPosition, ImageIcon imagePath,  HashMap<EnumFigureType, AllowedConnection> connections) {
-//		this.type = type;
-//		this.name = name;
-//		this.fontPosition = fontPosition;
-//		this.imagepath = imagePath;
-//		this.allowedConnection = connections;
-//	}
-//
-//	ElementDiagram(String type, String name, String drawType, EnumFontPosition fontPos, ImageIcon imagePath, HashMap<String, AllowedConnection> connections) {
-//		this.typ = type;
-//		this.name = name;
-//		this.fontPosition = fontPos;
-//		this.imagepath = imagePath;
-//		this.allowedConnectionByName = connections;
-//	}
 
 
 	public static void initCatalog() {
@@ -129,12 +62,13 @@ public class ElementDiagram {
 		addToCatalog(initRequirement());
 		addToCatalog(initFeature());
 		addToCatalog(initIssue());
-//		addToCatalog(initActivity());
-//		addToCatalog(initActiviDec());
-//		addToCatalog(initActiviIni());
-//		addToCatalog(initActiviRec());
-//		addToCatalog(initActiviSet());
-//		addToCatalog(initActiviFinal());
+		addToCatalog(initActivity());
+		addToCatalog(initActivityDecision());
+		addToCatalog(initActivityInitial());
+		addToCatalog(initActiviReceive());
+		addToCatalog(initActivity());
+		addToCatalog(initActivityFinal());
+		addToCatalog(initChiObject());
 		addToCatalog(initChiBusiPartner());
 		addToCatalog(initChiBusiPartnerActive());
 		addToCatalog(initChiBusiPartnerPassive());
@@ -338,48 +272,48 @@ public class ElementDiagram {
 	
 	////////////////////////////////////////////////////////////
 	//Activity
-//	private static ElementDiagram initActiviSet() {
-//		HashMap<EnumFigureType, AllowedConnection> connections = new HashMap<EnumFigureType, AllowedConnection>();
-//
-//		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_SEND, "ActivitySet", activitySendImage , connections);
-//		return result;
-//	}
-//
-//	private static ElementDiagram initActiviRec() {
-//		HashMap<EnumFigureType, AllowedConnection> connections = new HashMap<EnumFigureType, AllowedConnection>();
-//
-//		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_RECEIVE, "ActiviRec", activityReseiveImage , connections);
-//		return result;// ??
-//	}
-//
-//	private static ElementDiagram initActiviIni() {
-//		HashMap<EnumFigureType, AllowedConnection> connections = new HashMap<EnumFigureType, AllowedConnection>();
-//
-//		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_INITIAL, "ActivityInitial", activityInitialImage , connections);
-//		return result;
-//	}
-//
-//	private static ElementDiagram initActiviDec() {
-//		HashMap<EnumFigureType, AllowedConnection> connections = new HashMap<EnumFigureType, AllowedConnection>();
-//
-//		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_DECISION, "ActiviDec", activityDecisionImage , connections);
-//		return result;// ??
-//	}
-//
-//	private static ElementDiagram initActiviFinal() {
-//		HashMap<EnumFigureType, AllowedConnection> connections = new HashMap<EnumFigureType, AllowedConnection>();
-//
-//		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_FINAL, "ActivityFinal", activityFinalImage , connections);
-//		return result;
-//	}
-//
-//	private static ElementDiagram initActivity() {
-//		HashMap<EnumFigureType, AllowedConnection> connections = new HashMap<EnumFigureType, AllowedConnection>();
-//
-//		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY, "Activity", activityImage , connections);
-//		return result;
-//	}
+	private static ElementDiagram initActivity() {
+		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
+		connections.put(EnumFigureType.CHI_WORKER_INTERN, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
+		
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_SET, "ActivitySet", null, EnumFontPosition.UNDER, null , connections);
+		return result;
+	}
+	private static ElementDiagram initActiviReceive() {
+		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_RECEIVE, "ActiviRec", null, EnumFontPosition.UNDER, null , connections);
+		return result;
+	}
+	
+	private static ElementDiagram initActivityInitial() {
+		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_INITIAL, "ActivityInitial", null, EnumFontPosition.UNDER, null , connections);
+		return result;
+	}
+	
+	private static ElementDiagram initActivityDecision() {
+		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_DECISION, "ActiviDec", null, EnumFontPosition.UNDER, null , connections);
+		return result;
+	}
+	
+	private static ElementDiagram initActivityFinal() {
+		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_FINAL, "ActivityFinal", null, EnumFontPosition.UNDER, null , connections);
+		return result;
+	}
+	
+	private static ElementDiagram initChiObject() {
+		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+
+		ElementDiagram result = new ElementDiagram(EnumFigureType.Chi_OBJECT, "ChiObject", null, EnumFontPosition.IN_CENTER, null , connections);
+		return result;
+	}
 	
 	public EnumFigureType getType() {
 		return type;
