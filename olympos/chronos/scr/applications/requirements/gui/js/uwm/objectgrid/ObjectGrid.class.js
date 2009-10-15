@@ -95,7 +95,8 @@ uwm.objectgrid.ObjectGrid.prototype.buildContextMenu = function() {
 	
 	this.contextMenu = new Ext.menu.Menu({
 		items: [new Ext.menu.Item({
-			id: uwm.objectgrid.ObjectGrid.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
+			// use itemId instead of id, because this has to be only locally unique
+			itemId: uwm.objectgrid.ObjectGrid.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
 			text: uwm.Dict.translate('Show in diagram'),
 			handler: function(item, e) {
 				self.showInDiagram(item, e);

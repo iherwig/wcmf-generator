@@ -84,66 +84,67 @@ uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 	
 	if (figure.getModelObject().getModelNodeClass().isAttributeEnabled()) {
 		items.push(new Ext.menu.Item( {
-		    text : uwm.Dict.translate("Add Attribute"),
-		    handler : function(item, e) {
-			    figure.getModelObject().addAttribute();
-		    }
+				text : uwm.Dict.translate("Add Attribute"),
+				handler : function(item, e) {
+					figure.getModelObject().addAttribute();
+				}
 		}));
 	}
 	
 	if (figure.getModelObject().getModelNodeClass().isOperationEnabled()) {
 		items.push(new Ext.menu.Item( {
-		    text : uwm.Dict.translate("Add Operation"),
-		    handler : function(item, e) {
-			    figure.getModelObject().addOperation();
-		    }
+				text : uwm.Dict.translate("Add Operation"),
+				handler : function(item, e) {
+					figure.getModelObject().addOperation();
+				}
 		}));
 	}
 	
 	items.push(new Ext.menu.Item( {
-	    text : uwm.Dict.translate('Show in tree'),
-	    handler : function(item, e) {
-		    figure.showInModelTree();
-	    }
+			text : uwm.Dict.translate('Show in tree'),
+			handler : function(item, e) {
+				figure.showInModelTree();
+			}
 	}));
 	items.push(new Ext.menu.Item( {
-	    id : uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID,
-	    text : uwm.Dict.translate('Show in grid'),
-	    handler : function(item, e) {
-		    figure.showInGrid();
-	    }
+			// use itemId instead of id, because this has to be only locally unique
+			itemId : uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID,
+			text : uwm.Dict.translate('Show in grid'),
+			handler : function(item, e) {
+				figure.showInGrid();
+			}
 	}));
 	items.push(new Ext.menu.Item( {
-	    text : uwm.Dict.translate('Show in hierarchy'),
-	    handler : function(item, e) {
-		    figure.showInHierarchy();
-	    }
+			text : uwm.Dict.translate('Show in hierarchy'),
+			handler : function(item, e) {
+				figure.showInHierarchy();
+			}
 	}));
 	items.push("-");
 	items.push(new Ext.menu.Item( {
-	    text : uwm.Dict.translate('Delete from diagram'),
-	    handler : function(item, e) {
-		    figure.deleteFromDiagram();
-	    }
+			text : uwm.Dict.translate('Delete from diagram'),
+			handler : function(item, e) {
+				figure.deleteFromDiagram();
+			}
 	}));
 	items.push(new Ext.menu.Item( {
-	    text : uwm.Dict.translate('Delete from model'),
-	    handler : function(tiem, e) {
-		    figure.deleteFromModel();
-	    }
+			text : uwm.Dict.translate('Delete from model'),
+			handler : function(tiem, e) {
+				figure.deleteFromModel();
+			}
 	}));
 	items.push(new Ext.menu.Item( {
-	    text : uwm.Dict.translate('Show object history'),
-	    handler : function(item, e) {
-		    figure.showObjectHistory(item, e);
-	    }
+			text : uwm.Dict.translate('Show object history'),
+			handler : function(item, e) {
+				figure.showObjectHistory(item, e);
+			}
 	}));
 	items.push(new Ext.menu.Item( {
-	    text : "Help",
-	    // iconCls: "uwm-help-icon",
-	    handler : function(item, e) {
-		    figure.showHelp(item, e);
-	    }
+			text : "Help",
+			// iconCls: "uwm-help-icon",
+			handler : function(item, e) {
+				figure.showHelp(item, e);
+			}
 	}));
 	
 	/**

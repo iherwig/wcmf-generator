@@ -57,41 +57,42 @@ uwm.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
 	 */
 	this.uwmContextMenu = new Ext.menu.Menu( {
 		items : [ new Ext.menu.Item( {
-		    text : uwm.Dict.translate("Show in model tree"),
-		    listeners : {
-			    click : function() {
-				    self.showInModelTree();
-			    }
-		    }
+				text : uwm.Dict.translate("Show in model tree"),
+				listeners : {
+					click : function() {
+						self.showInModelTree();
+					}
+				}
 		}), new Ext.menu.CheckItem( {
-		    id : uwm.diagram.UwmWorkflow.CONTEXT_MENU_SNAP_TO_OBJECTS,
-		    text : uwm.Dict.translate("Snap to objects"),
-		    listeners : {
-			    checkchange : function(item, checked) {
-				    self.toggleSnapToObjects(item, checked);
-			    }
-		    }
+				// use itemId instead of id, because this has to be only locally unique
+				itemId : uwm.diagram.UwmWorkflow.CONTEXT_MENU_SNAP_TO_OBJECTS,
+				text : uwm.Dict.translate("Snap to objects"),
+				listeners : {
+					checkchange : function(item, checked) {
+						self.toggleSnapToObjects(item, checked);
+					}
+				}
 		}), new Ext.menu.Item( {
-		    text : uwm.Dict.translate("Auto-layout"),
-		    listeners : {
-			    click : function() {
-				    self.doLayout();
-			    }
-		    }
+				text : uwm.Dict.translate("Auto-layout"),
+				listeners : {
+					click : function() {
+						self.doLayout();
+					}
+				}
 		}), new Ext.menu.Item( {
-		    text : uwm.Dict.translate("Reload"),
-		    listeners : {
-			    click : function() {
-				    self.reloadDiagram();
-			    }
-		    }
+				text : uwm.Dict.translate("Reload"),
+				listeners : {
+					click : function() {
+						self.reloadDiagram();
+					}
+				}
 		}), new Ext.menu.Item( {
-		    text : uwm.Dict.translate("Print"),
-		    listeners : {
-			    click : function() {
-				    self.printDiagram();
-			    }
-		    }
+				text : uwm.Dict.translate("Print"),
+				listeners : {
+					click : function() {
+						self.printDiagram();
+					}
+				}
 		})
 		]
 	});
