@@ -1,26 +1,20 @@
 package net.sourceforge.olympos.diagramimageexporter.shapes;
 
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
 
-import javax.imageio.ImageIO;
-
-import net.sourceforge.olympos.diagramimageexporter.ElementDiagram;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 import net.sourceforge.olympos.diagramimageexporter.RequirementFigure;
 
-
-public class ChiRequirement extends RequirementFigure{
+public class ChiGoal extends RequirementFigure{
 	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 50 , 150);
 	InfoLine infLine1 = new InfoLine(10, 0, 10, 50);
 	InfoLine infLine2 = new InfoLine(15, 0, 15, 50);
 	
 	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 50 , 150);
 	
-	public ChiRequirement(){
+	public ChiGoal(){
 	}
 	
 	public InfoCoordinateSize getRect1() {

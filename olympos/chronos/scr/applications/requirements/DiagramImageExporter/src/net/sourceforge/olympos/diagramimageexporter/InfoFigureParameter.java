@@ -18,7 +18,7 @@ public class InfoFigureParameter {
 	private int typeId;
 	String alias;
 
-	InfoFigureParameter(float xi, float yi, float w, float h, EnumFigureType i, String label, int diagramid, String alias){
+	public InfoFigureParameter(float xi, float yi, float w, float h, EnumFigureType i, String label, int diagramid, String alias){
 		setAll(xi, yi, w, h, i, label, diagramid, alias);
 	}
 

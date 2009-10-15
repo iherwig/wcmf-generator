@@ -2,17 +2,12 @@ package net.sourceforge.olympos.diagramimageexporter;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
@@ -55,31 +50,39 @@ public class FigureDraw {
 		return font;
 	}
 
-	public void draw(InfoFigureParameter figure, Graphics2D g2d) {
+	public void draw(InfoFigureParameter figureInfo, Graphics2D g2d) {
+		
+		ElementDiagram elem = new ElementDiagram();
+		elem = ElementDiagram.getCatalogEntry(figureInfo.getType());
+		String typ =elem.getName();
 
 		FactoryWorker workerFactory = new FactoryWorker();
 		FactoryPartner partnerFactory = new FactoryPartner();
 		FactoryUseCase useCaseFactory = new FactoryUseCase();
 		FactoryRequ requFactory = new FactoryRequ();
+		
+		Factory factory = new Factory();
+		Figure fig = factory.createFigure(typ);
+		fig.draw(g2d, figureInfo);
 
-		FigureDraw workerParameter = workerFactory.getWorker(figure,g2d);
+		FigureDraw workerParameter = workerFactory.getWorker(figureInfo,g2d);
 		if (workerParameter != null) {
-			workerFactory.getWorker(figure,g2d);
-			draw(workerParameter, figure, g2d);
+			workerFactory.getWorker(figureInfo,g2d);
+			draw(workerParameter, figureInfo, g2d);
 		}
-		FigureDraw partnerParameter = partnerFactory.getPartner(figure,g2d);
+		FigureDraw partnerParameter = partnerFactory.getPartner(figureInfo,g2d);
 		if (partnerParameter != null) {
-			partnerFactory.getPartner(figure,g2d);
-			draw(partnerParameter, figure, g2d);
+			partnerFactory.getPartner(figureInfo,g2d);
+			draw(partnerParameter, figureInfo, g2d);
 		}
-		FigureDraw requParameter = requFactory.getRequ(figure);
+		FigureDraw requParameter = requFactory.getRequ(figureInfo);
 		if (requParameter != null) {
-			requFactory.getRequ(figure);
-			draw(requParameter, figure, g2d);
+			requFactory.getRequ(figureInfo);
+			draw(requParameter, figureInfo, g2d);
 		}
-		FigureDraw useCaseParameter = useCaseFactory.getUseCase(figure);
+		FigureDraw useCaseParameter = useCaseFactory.getUseCase(figureInfo);
 		if (useCaseParameter != null) {
-			useCaseFactory.getUseCase(figure);
+			useCaseFactory.getUseCase(figureInfo);
 			ArrayList<InfoCoordinateSize> ellipses = useCaseParameter.getEllipse();
 			InfoCoordinateSize backkgroundEllipse = ellipses.get(0);
 			Shape backgEllipse = new Ellipse2D.Double(backkgroundEllipse.getX(), backkgroundEllipse.getY(), backkgroundEllipse.getHeight(), backkgroundEllipse.getWidth());
@@ -126,7 +129,7 @@ public class FigureDraw {
 		ArrayList<InfoLine> lines = figureParameter.getLine();
 		ArrayList<InfoCoordinateSize> recs = figureParameter.getRec();
 		ArrayList<InfoCoordinateSize> ellipses = figureParameter.getEllipse();
-		ArrayList<InfoFont> fonts = figureParameter.getFont();
+//		ArrayList<InfoFont> fonts = figureParameter.getFont();
 
 		g2d.setStroke(new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
 		g2d.setPaint(Color.black);

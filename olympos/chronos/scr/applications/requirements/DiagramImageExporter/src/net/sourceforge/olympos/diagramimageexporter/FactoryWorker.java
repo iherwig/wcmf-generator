@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import net.sourceforge.olympos.diagramimageexporter.shapes.ChiWorker;
-import net.sourceforge.olympos.diagramimageexporter.shapes.ChiWorkerExtern;
+import net.sourceforge.olympos.diagramimageexporter.shapes.ChiWorkerExternal;
 import net.sourceforge.olympos.diagramimageexporter.shapes.ChiWorkerInternal;
 
 

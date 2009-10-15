@@ -13,19 +13,19 @@ public class FactoryPartner {
 		
 //		ClassLoader partner = Thread.currentThread().getContextClassLoader();
 //		Object newInstance = partner.loadClass("whateverStr", true).newInstance();
-
-		if (fig.getType().equals(EnumFigureType.CHI_BUSINESS_PARTNER)){
-			figure = new ChiBusinessPartner(fig);
-			figDraw.drawChi(fig, g2d);		
-		}
-		else if ( fig.getType().equals(EnumFigureType.CHI_BUSINESS_PARTNER_ACTIVE)){
-			figure = new ChiBusinessPartnerActive(fig);
-			figDraw.drawChi(fig, g2d);
-		}
-		else if( fig.getType().equals(EnumFigureType.CHI_BUSINESS_PARTNER_PASSIVE)){
-			figure = new ChiBusinessPartnerPassive(fig);
-			figDraw.drawChi(fig, g2d);
-		}
+//
+//		if (fig.getType().equals(EnumFigureType.CHI_BUSINESS_PARTNER)){
+//			figure = new ChiBusinessPartner(fig);
+//			figDraw.drawChi(fig, g2d);		
+//		}
+//		else if ( fig.getType().equals(EnumFigureType.CHI_BUSINESS_PARTNER_ACTIVE)){
+//			figure = new ChiBusinessPartnerActive(fig);
+//			figDraw.drawChi(fig, g2d);
+//		}
+//		else if( fig.getType().equals(EnumFigureType.CHI_BUSINESS_PARTNER_PASSIVE)){
+//			figure = new ChiBusinessPartnerPassive(fig);
+//			figDraw.drawChi(fig, g2d);
+//		}
 		return figure;		
 	}
 }
