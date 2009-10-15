@@ -90,15 +90,17 @@ String asBaseJSClassFile(String name): name+".class.js";
 String asJSClassFile(String name): name+"Class.class.js";
 
 String getExtJsInputType(String str):
-	switch (str) {
-		case 'checkbox' : 'ComboBox'
-		case 'fckeditor' : 'HtmlEditor'
-		case 'text' : 'TextField'
-		case 'date' : 'DateField'
-		case 'radio' : 'Radio'
-		case 'checkbox' : 'Checkbox'
-		case 'select' : 'ComboBox'
-		case 'password' : 'Password'
-		default : 'TextField'
-	}
+	str.contains("fckeditor") ?
+		"HtmlEditor"
+	:
+		switch (str) {
+			case 'checkbox' : 'ComboBox'
+			case 'text' : 'TextField'
+			case 'date' : 'DateField'
+			case 'radio' : 'Radio'
+			case 'checkbox' : 'Checkbox'
+			case 'select' : 'ComboBox'
+			case 'password' : 'Password'
+			default : 'TextField'
+		}
 ;
