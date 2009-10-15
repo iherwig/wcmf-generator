@@ -107,7 +107,8 @@ uwm.graphics.figure.BaseFigure.prototype.buildContextMenu = function() {
 				figure.showInModelTree();
 			}
 		}), new Ext.menu.Item({
-			id: uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID,
+			// use itemId instead of id, because this has to be only locally unique
+			itemId: uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID,
 			text: uwm.Dict.translate('Show in grid'),
 			handler: function(item, e) {
 				figure.showInGrid();

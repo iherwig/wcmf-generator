@@ -105,7 +105,8 @@ uwm.ui.Glossary.prototype.buildContextMenu = function() {
 				self.addEntry(item, e);
 			}
 		}), new Ext.menu.Item( {
-			id : uwm.ui.Glossary.CONTEXTMENU_DELETE_ID,
+			// use itemId instead of id, because this has to be only locally unique
+			itemId : uwm.ui.Glossary.CONTEXTMENU_DELETE_ID,
 			text : uwm.Dict.translate('Delete entry'),
 			handler : function(item, e) {
 				self.deleteEntry(item, e);
