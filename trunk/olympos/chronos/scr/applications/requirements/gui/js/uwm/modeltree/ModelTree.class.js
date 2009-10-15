@@ -158,22 +158,6 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(ddEvent) {
 		dropModelNode = uwm.model.ModelContainer.getInstance().createNodeInstance(uwmClassName);
 	}
 
-	// determine the parent node
-	var parentModelNode = null;
-	if (ddEvent.point != "append") {
-		// drop besides target node
-		var parentNode = ddEvent.target.parentNode;
-		if (parentNode.id == 'root') {
-			parentModelNode = null;
-		}
-		else {
-			parentModelNode = parentNode.getModelNode();
-		}
-	} else {
-		// append to target node
-		parentModelNode = ddEvent.target.getModelNode()
-	}
-
 	// avoid dropping a node onto it's parent
 	if (ddEvent.dropNode && ddEvent.dropNode.parentNode == ddEvent.target) {
 		ddEvent.cancel = true;
@@ -186,8 +170,30 @@ uwm.modeltree.ModelTree.prototype.checkDroppable = function(ddEvent) {
 	}
 
 	// check model constraints
+	var parentModelNode = this.getDropParentNode(ddEvent);
 	var constraintsFulfilled = this.checkModelConstraints(parentModelNode, dropModelNode);
 	ddEvent.cancel = !constraintsFulfilled;
+}
+
+/**
+ * Get the parent uwm.model.ModelNode of a drop event.
+ */
+uwm.modeltree.ModelTree.prototype.getDropParentNode = function(dropEvent) {
+	var parentModelNode = null;
+	if (dropEvent.point != "append") {
+		// drop besides target node
+		var parentNode = dropEvent.target.parentNode;
+		if (parentNode.id == 'root') {
+			parentModelNode = null;
+		}
+		else {
+			parentModelNode = parentNode.getModelNode();
+		}
+	} else {
+		// append to target node
+		parentModelNode = dropEvent.target.getModelNode()
+	}
+	return parentModelNode;
 }
 
 /**
@@ -272,19 +278,28 @@ uwm.modeltree.ModelTree.prototype.handleBeforeNodeDrop = function(dropEvent) {
 			
 			var node = dropEvent.dropNode;
 			var oldParent = node.parentNode;
+			var newParentModelNode = this.getDropParentNode(dropEvent);
 			
 			if (oldParent instanceof uwm.objecttree.Node) {
-				if (dropEvent.point == "append") {
+				var oldParentModelNode = oldParent.getModelNode();
+				if (oldParentModelNode.getOid() != newParentModelNode.getOid()) {
 					// move to another parent
-					var newParent = dropEvent.target;
-					actionSet.addDisassociate(oldParent.getModelNode().getOid(), node.getModelNode().getOid());
-					actionSet.addAssociate(newParent.getModelNode().getOid(), node.getModelNode().getOid(), false);
+					actionSet.addDisassociate(oldParentModelNode.getOid(), node.getModelNode().getOid());
+					actionSet.addAssociate(newParentModelNode.getOid(), node.getModelNode().getOid(), false);
 				}
-				else {
+				if (dropEvent.point != "append") {
 					// change order
-					var params = this.calculateSortParams(dropEvent);
+					var params = null;
+					if (oldParentModelNode.getOid() == newParentModelNode.getOid()) {
+						var params = this.calculateSortParams(dropEvent);
+					}
+					else {
+						// workaround: make sure that the node is the first child of the parent
+						actionSet.addSort(node.getModelNode().getOid(), "up", 9999, newParentModelNode.getOid());
+						var params = this.calculateSortParams(dropEvent, 0);
+					}
 					actionSet.addSort(node.getModelNode().getOid(), params.direction, params.distance, 
-						oldParent.getModelNode().getOid());
+						newParentModelNode.getOid());
 				}
 			}
 			else {
@@ -301,11 +316,15 @@ uwm.modeltree.ModelTree.prototype.handleBeforeNodeDrop = function(dropEvent) {
 /**
  * Calculate distance and direction for a sort action
  * @param {Object} dropEvent The drop event
+ * @param {Integer} oldIndex The old index of the node, if it is not determined from the event 
+ *                 (drag from a different parent)
  * @return {Object} with properties 'distance' and 'direction'
  */
-uwm.modeltree.ModelTree.prototype.calculateSortParams = function(dropEvent) {
-	var parent = dropEvent.dropNode.parentNode;
-	var oldIndex = parent.indexOf(dropEvent.dropNode);
+uwm.modeltree.ModelTree.prototype.calculateSortParams = function(dropEvent, oldIndex) {
+	var parent = dropEvent.target.parentNode;
+	if (oldIndex == undefined) {
+		oldIndex = parent.indexOf(dropEvent.dropNode);
+	}
 	var newIndex = parent.indexOf(dropEvent.target);
 	if (dropEvent.point == "below") {
 		newIndex++;
