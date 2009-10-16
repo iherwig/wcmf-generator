@@ -62,10 +62,13 @@ uwm.property.DateField.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.DateField.prototype.persistValue = function(newValue) {
-	this.originalValue = newValue;
-	
-	var tmp = new Object();
-	tmp[this.getName()] = newValue.format("Y-m-d");
+	// persist only valid values
+	if (this.validateValue(newValue)) {
+		this.originalValue = newValue;
+		
+		var tmp = new Object();
+		tmp[this.getName()] = newValue.format("Y-m-d");
 
-	this.modelNode.changeProperties(tmp);
+		this.modelNode.changeProperties(tmp);
+	}
 }
