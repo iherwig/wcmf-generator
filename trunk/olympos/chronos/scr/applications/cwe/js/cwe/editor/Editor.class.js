@@ -110,6 +110,10 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		
 		this.on("afterlayout", function(editor, layout) {
 			self.doLayout();
+			
+			if (!self.newObject) {
+				self.loadFromOid(self.oid);
+			}
 		}, undefined, {
 			single : true
 		});
@@ -118,10 +122,6 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 			self.editorContainer.setActiveTab(self);
 			self.editorContainer.show();
 		});
-		
-		if (!this.newObject) {
-			this.loadFromOid(this.oid);
-		}
 	}
 });
 
