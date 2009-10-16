@@ -95,33 +95,50 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 			fields : this.fieldConfig
 		});
 		
-		/**
-		 * The button for associating target objects.
-		 * 
-		 * @private
-		 * @type Ext.Toolbar.Button
-		 */
-		this.associateButton = new Ext.Toolbar.Button( {
-		    text : chi.Dict.translate("Associate"),
-		    iconCls : "associateButton",
-		    handler : function() {
-			    self.associate();
-		    }
-		});
+		var buttonList = [];
 		
-		/**
-		 * The button for disassociating target objects.
-		 * 
-		 * @private
-		 * @type Ext.Toolbar.Button
-		 */
-		this.disassociateButton = new Ext.Toolbar.Button( {
-		    text : chi.Dict.translate("Disassociate"),
-		    iconCls : "disassociateButton",
-		    handler : function() {
-			    self.disassociate();
-		    }
-		});
+		if (this.aggregationKind == cwe.Constants.AggregationKind.COMPOSITE || this.aggregationKind == cwe.Constants.AggregationKind.SHARED) {
+			this.createChildButton = new Ext.Toolbar.Button( {
+			    text : chi.Dict.translate("Create child"),
+			    iconCls : "createButton",
+			    handler : function() {
+				    self.createChild();
+			    }
+			});
+			buttonList.push(this.createChildButton);
+		}
+		
+		if (this.aggregationKind == cwe.Constants.AggregationKind.NONE || this.aggregationKind == cwe.Constants.AggregationKind.SHARED) {
+			/**
+			 * The button for associating target objects.
+			 * 
+			 * @private
+			 * @type Ext.Toolbar.Button
+			 */
+			this.associateButton = new Ext.Toolbar.Button( {
+			    text : chi.Dict.translate("Associate"),
+			    iconCls : "associateButton",
+			    handler : function() {
+				    self.associate();
+			    }
+			});
+			buttonList.push(this.associateButton);
+			
+			/**
+			 * The button for disassociating target objects.
+			 * 
+			 * @private
+			 * @type Ext.Toolbar.Button
+			 */
+			this.disassociateButton = new Ext.Toolbar.Button( {
+			    text : chi.Dict.translate("Disassociate"),
+			    iconCls : "disassociateButton",
+			    handler : function() {
+				    self.disassociate();
+			    }
+			});
+			buttonList.push(this.disassociateButton);
+		}
 		
 		/**
 		 * The button for editing the target object in its editor.
@@ -136,11 +153,12 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 			    self.edit();
 		    }
 		});
+		buttonList.push(this.editButton);
 		
 		Ext.apply(this, {
 		    height : 200,
 		    width : 805,
-		    tbar : [ this.associateButton, this.disassociateButton, this.editButton ],
+		    tbar : buttonList,
 		    selModel : new Ext.grid.RowSelectionModel( {
 			    singleSelect : false
 		    }),
@@ -231,43 +249,47 @@ cwe.editor.control.MultipleAssociate.prototype.associate = function() {
 	    modelClass : this.modelClass,
 	    singleSelect : false,
 	    sourceHandler : function(records) {
-		    var oldValue = self.getValue();
-		    
-		    var newValue = [];
-		    if (oldValue != undefined) {
-			    for ( var i = 0; i < oldValue.length; i++) {
-				    newValue.push(oldValue[i]);
-			    }
-		    }
-		    
-		    for ( var i = 0; i < records.length; i++) {
-			    var currRecord = records[i];
-			    
-			    if (currRecord.isModelRecord) {
-				    var alreadyInList = false;
-				    if (oldValue != undefined) {
-					    for ( var j = 0; j < oldValue.length; j++) {
-						    var currOldRecord = oldValue[j];
-						    if (currOldRecord.isModelRecord && currRecord.getOid() == currOldRecord.getOid()) {
-							    alreadyInList = true;
-							    break;
-						    }
-					    }
-				    }
-				    
-				    if (!alreadyInList) {
-					    newValue.push(currRecord);
-				    }
-			    }
-		    }
-		    
-		    self.setValue(newValue);
+		    self.mergeRecords(records);
 	    },
 	    roleName : this.getName(),
 	    editor : this.editor
 	});
 	
 	associateWindow.show();
+};
+
+cwe.editor.control.MultipleAssociate.prototype.mergeRecords = function(records) {
+	var oldValue = self.getValue();
+	
+	var newValue = [];
+	if (oldValue != undefined) {
+		for ( var i = 0; i < oldValue.length; i++) {
+			newValue.push(oldValue[i]);
+		}
+	}
+	
+	for ( var i = 0; i < records.length; i++) {
+		var currRecord = records[i];
+		
+		if (currRecord.isModelRecord) {
+			var alreadyInList = false;
+			if (oldValue != undefined) {
+				for ( var j = 0; j < oldValue.length; j++) {
+					var currOldRecord = oldValue[j];
+					if (currOldRecord.isModelRecord && currRecord.getOid() == currOldRecord.getOid()) {
+						alreadyInList = true;
+						break;
+					}
+				}
+			}
+			
+			if (!alreadyInList) {
+				newValue.push(currRecord);
+			}
+		}
+	}
+	
+	self.setValue(newValue);
 };
 
 /**
@@ -326,4 +348,12 @@ cwe.editor.control.MultipleAssociate.prototype.edit = function() {
 			editors.loadOrShow(currRecord.get("oid"), currRecord.get("label"));
 		}
 	}
+};
+
+cwe.editor.control.MultipleAssociate.prototype.createChild = function() {
+	var self = this;
+	
+	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelClass, function(record) {
+		self.mergeRecords( [ record ]);
+	});
 };

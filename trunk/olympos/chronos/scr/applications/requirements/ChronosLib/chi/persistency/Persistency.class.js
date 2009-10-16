@@ -83,3 +83,7 @@ chi.persistency.Persistency.prototype.log = function(logtype, message, successHa
 chi.persistency.Persistency.prototype.executeActionSet = function(actionSet) {
 	throw "Method chi.persistency.Persistency.executeActionSet not implemented by current persistency adapter.";
 }
+
+chi.persistency.Persistency.prototype.createChild = function(parentOid, childRole, successHandler, errorHandler) {
+	throw "Method chi.persistency.Persistency.createChild not implemented by current persistency adapter.";
+}

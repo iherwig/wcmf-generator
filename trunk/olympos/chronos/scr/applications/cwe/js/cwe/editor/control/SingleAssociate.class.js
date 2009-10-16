@@ -40,6 +40,45 @@ cwe.editor.control.SingleAssociate = function(config) {
 
 cwe.editor.control.SingleAssociate = Ext.extend(Ext.form.TwinTriggerField, {
 	initComponent : function() {
+		var self = this;
+		
+		this.buttonList = [];
+		
+		if (this.aggregationKind == cwe.Constants.AggregationKind.COMPOSITE || this.aggregationKind == cwe.Constants.AggregationKind.SHARED) {
+			this.buttonList.push( {
+			    className : "createButton",
+			    title : chi.Dict.translate("Create child"),
+			    handler : function() {
+				    self.createChild();
+			    }
+			});
+		}
+		
+		if (this.aggregationKind == cwe.Constants.AggregationKind.NONE || this.aggregationKind == cwe.Constants.AggregationKind.SHARED) {
+			this.buttonList.push( {
+			    className : "associateButton",
+			    title : chi.Dict.translate("Associate"),
+			    handler : function() {
+				    self.associate();
+			    }
+			});
+			
+			this.buttonList.push( {
+			    className : "disassociateButton",
+			    title : chi.Dict.translate("Disassociate"),
+			    handler : function() {
+				    self.disassociate();
+			    }
+			});
+		}
+		
+		this.buttonList.push( {
+		    className : "editButton",
+		    title : chi.Dict.translate("Edit"),
+		    handler : function() {
+			    self.edit();
+		    }
+		});
 		
 		/**
 		 * The model class of the target objects.
@@ -50,31 +89,28 @@ cwe.editor.control.SingleAssociate = Ext.extend(Ext.form.TwinTriggerField, {
 		this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(this.targetCweModelElementId);
 		
 		Ext.apply(this, {
-		    trigger1Class : "associateButton",
-		    trigger2Class : "disassociateButton",
-		    trigger3Class : "editButton",
 		    readOnly : true,
 		    width : 805
 		});
 		
 		cwe.editor.control.SingleAssociate.superclass.initComponent.apply(this, arguments);
 		
+		var triggerConfigCn = [];
+		
+		for ( var i = 0; i < this.buttonList.length; i++) {
+			var currButton = this.buttonList[i];
+			triggerConfigCn.push( {
+			    tag : "img",
+			    src : Ext.BLANK_IMAGE_URL,
+			    cls : "x-form-trigger " + currButton.className,
+			    title : currButton.title
+			});
+		}
+		
 		this.triggerConfig = {
 		    tag : 'span',
 		    cls : 'x-form-twin-triggers',
-		    cn : [ {
-		        tag : "img",
-		        src : Ext.BLANK_IMAGE_URL,
-		        cls : "x-form-trigger " + this.trigger1Class
-		    }, {
-		        tag : "img",
-		        src : Ext.BLANK_IMAGE_URL,
-		        cls : "x-form-trigger " + this.trigger2Class
-		    }, {
-		        tag : "img",
-		        src : Ext.BLANK_IMAGE_URL,
-		        cls : "x-form-trigger " + this.trigger3Class
-		    } ]
+		    cn : triggerConfigCn
 		};
 		
 	}
@@ -131,7 +167,7 @@ cwe.editor.control.SingleAssociate.prototype.getValueLabel = function() {
  * 
  * @private
  */
-cwe.editor.control.SingleAssociate.prototype.onTrigger1Click = function() {
+cwe.editor.control.SingleAssociate.prototype.associate = function() {
 	var self = this;
 	
 	var associateWindow = new cwe.editor.control.AssociateWindow( {
@@ -154,7 +190,7 @@ cwe.editor.control.SingleAssociate.prototype.onTrigger1Click = function() {
  * 
  * @private
  */
-cwe.editor.control.SingleAssociate.prototype.onTrigger2Click = function() {
+cwe.editor.control.SingleAssociate.prototype.disassociate = function() {
 	if (this.origValue) {
 		this.setValue(null);
 	}
@@ -165,9 +201,30 @@ cwe.editor.control.SingleAssociate.prototype.onTrigger2Click = function() {
  * 
  * @private
  */
-cwe.editor.control.SingleAssociate.prototype.onTrigger3Click = function() {
+cwe.editor.control.SingleAssociate.prototype.edit = function() {
 	if (this.origValue) {
 		var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getEditors();
 		editors.loadOrShow(this.associatedOid, this.getValueLabel());
 	}
+};
+
+cwe.editor.control.SingleAssociate.prototype.createChild = function() {
+	var self = this;
+	
+	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelClass, function(record) {
+		self.setValue(record);
+	});
+};
+
+cwe.editor.control.SingleAssociate.prototype.onTrigger1Click = function() {
+	this.buttonList[0].handler();
+};
+cwe.editor.control.SingleAssociate.prototype.onTrigger2Click = function() {
+	this.buttonList[1].handler();
+};
+cwe.editor.control.SingleAssociate.prototype.onTrigger3Click = function() {
+	this.buttonList[2].handler();
+};
+cwe.editor.control.SingleAssociate.prototype.onTrigger4Click = function() {
+	this.buttonList[3].handler();
 };
