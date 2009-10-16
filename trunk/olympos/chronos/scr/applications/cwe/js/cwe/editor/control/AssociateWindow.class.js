@@ -63,6 +63,16 @@ cwe.editor.control.AssociateWindow = Ext.extend(Ext.Window, {
 		});
 		
 		/**
+		 * The store holding the objects.
+		 * 
+		 * @private
+		 * @type cwe.model.ModelStore
+		 */
+		this.store = new cwe.model.Store( {
+			modelClass : this.modelClass
+		});
+		
+		/**
 		 * The paging toolbar.
 		 * 
 		 * @private
@@ -74,16 +84,6 @@ cwe.editor.control.AssociateWindow = Ext.extend(Ext.Window, {
 		    displayInfo : true,
 		    displayMsg : chi.Dict.translate("Displaying objects {0} &ndash; {1} of {2}"),
 		    emptyMsg : chi.Dict.translate("No objects to display")
-		});
-		
-		/**
-		 * The store holding the objects.
-		 * 
-		 * @private
-		 * @type cwe.model.ModelStore
-		 */
-		this.store = new cwe.model.Store( {
-			modelClass : this.modelClass
 		});
 		
 		this.grid = new Ext.grid.GridPanel( {
