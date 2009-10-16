@@ -11,7 +11,7 @@ public class InfoXmlFigure {
 	
 	private ArrayList<InfoXmlConnection> child = new ArrayList<InfoXmlConnection>();
 	private ArrayList<InfoXmlFigure> childFig = new ArrayList<InfoXmlFigure>();
-	private ArrayList<InfoFigureParameter> childFigure = new ArrayList<InfoFigureParameter>();
+//	private ArrayList<InfoFigureParameter> childFigure = new ArrayList<InfoFigureParameter>();
 	
 	InfoXmlFigure(int id, String name, EnumFigureType type, String alias){
 		setAll(id, name, type, alias);

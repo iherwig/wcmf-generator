@@ -15,7 +15,7 @@ public class ReaderXmlData {
 
 	Draw dr = new Draw();
 	SVGGenerator svg = new SVGGenerator();
-	private ArrayList<FigureParameter> figures;
+//	private ArrayList<FigureParameter> figures;
 
 	ReaderXmlData() {
 	}

@@ -11,7 +11,7 @@ public class XmlFigure {
 	
 	private ArrayList<XmlConnection> child = new ArrayList<XmlConnection>();
 	private ArrayList<XmlFigure> childFig = new ArrayList<XmlFigure>();
-	private ArrayList<FigureParameter> childFigure = new ArrayList<FigureParameter>();
+//	private ArrayList<FigureParameter> childFigure = new ArrayList<FigureParameter>();
 	
 	XmlFigure(int id, String name, EnumFigureType type, String alias){
 		setAll(id, name, type, alias);

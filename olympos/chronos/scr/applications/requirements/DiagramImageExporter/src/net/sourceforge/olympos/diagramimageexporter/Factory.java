@@ -2,7 +2,11 @@ package net.sourceforge.olympos.diagramimageexporter;
 
  class Factory {
 
-	Figure createFigure (String name){
+	Figure createFigure (InfoFigureParameter figureInfo){
+		ElementDiagram elem = new ElementDiagram();
+		elem = ElementDiagram.getCatalogEntry(figureInfo.getType());
+		String name =elem.getName();
+		
 		Class clazz;
 		Object result = null;
 		try {

@@ -5,24 +5,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 
 public class DrawFigure {
-	public void drawLabeledSimpleFigure(Graphics2D g2d, InfoFigureParameter figure) {
-		FigureDraw drawFig = new FigureDraw();
-		drawFig.draw(figure, g2d);
-		//this.drawSimpleFigure(g2d, figure);
-		this.drawLabel(g2d, figure);
-
+	public void drawLabeledSimpleFigure(Graphics2D g2d, InfoFigureParameter figureInfo) {		
+		Factory factory = new Factory();
+		Figure fig = factory.createFigure( figureInfo);
+		fig.draw(g2d, figureInfo);
+		this.drawLabel(g2d, figureInfo);
+		
+//		FigureDraw drawFig = new FigureDraw();
+//		drawFig.draw(figure, g2d);
+//		//this.drawSimpleFigure(g2d, figure);	
 	}
 
 	public void drawSimpleFigure(Graphics2D g2d, InfoFigureParameter figure) {
-		
-		ElementDiagram elem = new ElementDiagram();
-		elem = ElementDiagram.getCatalogEntry(figure.getType());
-		String imagePath = elem.getImage();
-		String typ =elem.getName();
-		
 		
 		g2d.setStroke(new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
 		g2d.setPaint(Color.black);
@@ -51,8 +47,8 @@ public class DrawFigure {
 			String[] words = comment.split(" ");
 			int curX = mX;
 			int curY = mY; // -((fm.getHeight()*words.length)/2)-(fm.getHeight()/2);
-			int boxHeight = fm.getHeight() * words.length + 7;
-			int y = mY;
+//			int boxHeight = fm.getHeight() * words.length + 7;
+//			int y = mY;
 
 			for (String word : words) {
 				int wordWidth = fm.stringWidth(word + " ");
