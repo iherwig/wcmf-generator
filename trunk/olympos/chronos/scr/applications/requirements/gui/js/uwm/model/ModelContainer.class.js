@@ -230,6 +230,29 @@ uwm.model.ModelContainer.prototype.handleCreatedFigure = function(oid, diagramMo
 	}
 }
 
+uwm.model.ModelContainer.prototype.createController = function(useCaseModelNode, parentModelNode) {
+	var self = this;
+	
+	uwm.persistency.Persistency.getInstance().createControllerFromUseCase(useCaseModelNode.getOid(),
+		function(request, data) {
+			self.loadByOid(data.oid, 
+				self.handleCreatedController.createDelegate(self, [data.oid, parentModelNode]), 1
+			);
+		}
+	);
+}
+
+uwm.model.ModelContainer.prototype.handleCreatedController = function(oid, parentModelNode) {
+	var newModelNode = this.getNode("ChiController", oid);
+	newModelNode.containedPackage = parentModelNode;
+	
+	oid = newModelNode.oid;
+	
+	this.items.add(oid, newModelNode);
+	
+	newModelNode.associate(parentModelNode);
+}
+
 uwm.model.ModelContainer.prototype.createModelObject = function(uwmClassName, packageNode, actionSet, callback) {
 	var self = this;
 	

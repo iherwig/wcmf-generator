@@ -61,6 +61,11 @@ uwm.modeltree.UseCaseCoreNode.prototype.buildContextMenu = function() {
 				self.addActivitySet(item, e);
 			}
 		}, {
+			text: uwm.Dict.translate('Generate controller'),
+			handler: function(item, e) {
+				self.createController(item, e);
+			}
+		}, {
 			text: uwm.Dict.translate('Delete from model'),
 			handler: function(item, e) {
 				self.deleteFromModel(item, e);
@@ -115,6 +120,10 @@ uwm.modeltree.UseCaseCoreNode.prototype.gridAvailable = function() {
 
 uwm.modeltree.UseCaseCoreNode.prototype.addActivitySet = function(self, e) {
 	uwm.model.ModelContainer.getInstance().createActivitySet(this.getModelNode());
+}
+
+uwm.modeltree.UseCaseCoreNode.prototype.createController = function(self, e) {
+	uwm.model.ModelContainer.getInstance().createController(this.modelNode, this.parentNode.getModelNode());
 }
 
 uwm.modeltree.UseCaseCoreNode.prototype.showInDiagram = function(self, e) {

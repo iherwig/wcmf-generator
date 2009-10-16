@@ -167,19 +167,20 @@ uwm.objectgrid.ObjectGridContainer.prototype.isGridAvailable = function(modelObj
 	if (objectGrid) {
 		if (!parentOid) {
 			var parentOids = modelObject.getParentOids();
-			
-			for (var i = 0; i < parentOids.length; i++) {
-				var currOid = parentOids[i];
-				
-				if (uwm.Util.getUwmClassNameFromOid(currOid) == "Package") {
-					parentOid = currOid;
+			if (parentOids) {
+				for (var i = 0; i < parentOids.length; i++) {
+					var currOid = parentOids[i];
 					
-					break;
+					if (uwm.Util.getUwmClassNameFromOid(currOid) == "Package") {
+						parentOid = currOid;
+						break;
+					}
 				}
 			}
 		}
-		
-		result = this.containersInScope[parentOid] ? true : false;
+		if (parentOid) {
+			result = this.containersInScope[parentOid] ? true : false;
+		}
 	}
 	
 	return result;
