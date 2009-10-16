@@ -63,9 +63,10 @@ public class ReaderXmlData {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	void findNode(Element element, int level) {
 		Element child = null;
-		List children = element.getChildren();
+		List<Element> children = element.getChildren();
 
 		if (element.getName().equals("Diagram")) {
 			diagram(element, level);
@@ -89,6 +90,7 @@ public class ReaderXmlData {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void diagram(Element element, int level) {
 
 		// create an new Diagram
@@ -112,6 +114,7 @@ public class ReaderXmlData {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void node(Element element, int level) {
 
 		String point = element.getName();
@@ -186,6 +189,7 @@ public class ReaderXmlData {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private InfoFigureParameter figure(Element currFigure) {
 		InfoFigureParameter result = null;
 		int diagramid = Integer.parseInt(((Element) currFigure).getAttributeValue("id"));
@@ -207,7 +211,7 @@ public class ReaderXmlData {
 			XmlConnection con = new XmlConnection(type, targetType, targetOid, targetRole);
 			fig.addChildX(con);
 
-			ElementDiagram elem = ElementDiagram.getCatalogEntryByName(targetType);
+//			ElementDiagram elem = ElementDiagram.getCatalogEntryByName(targetType);
 		}
 		if (fig != null) {
 //			result = fig;

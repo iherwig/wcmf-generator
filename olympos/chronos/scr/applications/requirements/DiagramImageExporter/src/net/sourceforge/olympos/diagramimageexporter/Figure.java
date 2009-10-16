@@ -3,6 +3,10 @@ package net.sourceforge.olympos.diagramimageexporter;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
 
 public abstract class Figure {
 	abstract public void draw(Graphics2D g2d, InfoFigureParameter fig);
@@ -19,19 +23,6 @@ public abstract class Figure {
 		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
 	}
 
-//	protected void drawScaleRec(Graphics2D g2d, InfoFigureParameter fig, InfoCoordinateSize figureInfo, InfoCoordinateSize rec) {
-//
-//	}
-	/*
-		elli1.setAll(figure.getX(), figure.getY(), elli1.getHeight() * scaleY , elli1.getWidth() * scaleX);
-		ellipse.add(elli1);
-		
-		float headX = (body.getX1() - (head.getWidth()+1 ) / 2) * scaleX + figure.getX();
-		float headY = body.getY1() - ((head.getHeight()))+ figure.getY();
-		head.setAll(headX,headY, head.getHeight() * scaleY, head.getWidth() * scaleX);
-		ellipse.add(head);
-		*/
-
 	protected void drawScaleEllipse(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
@@ -41,6 +32,28 @@ public abstract class Figure {
 		
 		Shape ellip = new Ellipse2D.Double( x, y, ellipse.getHeight()*scaleX, ellipse.getWidth()*scaleY);
 		g2d.draw(ellip);
+	}
+	
+	protected void drawScaleChi(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize ellipse,InfoCoordinateSize figureInfo){
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+		String imagePath = null;
+
+		ElementDiagram elem = ElementDiagram.getCatalogEntry(createFig.getType());
+		imagePath = elem.getImage();
+		System.out.println(imagePath);
+		
+		try {		
+			BufferedImage img1 = ImageIO.read(new File(imagePath));
+			int x = (int)((createFig.getX()+(2 / (ellipse.getWidth() - (ellipse.getWidth()- ( 2 * scaleX )* 2)))));
+			int y = (int)((createFig.getY()+(ellipse.getY())+ 2 * scaleY));
+			int width = (int) (ellipse.getWidth()- ( 2 * scaleX )* 2);
+			int height = (int) (ellipse.getHeight()- ( 2 * scaleY )* 2);
+			if (img1 != null)
+				g2d.drawImage(img1, x, y,width ,height, null);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 	}
 
 }
