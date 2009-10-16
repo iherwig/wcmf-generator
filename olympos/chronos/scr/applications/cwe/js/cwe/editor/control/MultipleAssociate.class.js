@@ -259,7 +259,7 @@ cwe.editor.control.MultipleAssociate.prototype.associate = function() {
 };
 
 cwe.editor.control.MultipleAssociate.prototype.mergeRecords = function(records) {
-	var oldValue = self.getValue();
+	var oldValue = this.getValue();
 	
 	var newValue = [];
 	if (oldValue != undefined) {
@@ -289,7 +289,7 @@ cwe.editor.control.MultipleAssociate.prototype.mergeRecords = function(records) 
 		}
 	}
 	
-	self.setValue(newValue);
+	this.setValue(newValue);
 };
 
 /**
