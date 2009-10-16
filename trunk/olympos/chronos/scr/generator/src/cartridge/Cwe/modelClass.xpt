@@ -205,22 +205,19 @@ application.«this.getFullPackageName()».«this.name».prototype.getEditorItems
 
 «DEFINE getEditor FOR Chronos::ChiValue»
 	«LET this.input_type.split("#").first().getExtJsInputType() AS inputType»
-		«IF inputType == "ComboBox"-»
-	new cwe.editor.control.«getComboBoxClass(this.input_type)»({
-		«ELSE-»
-	new cwe.editor.control.«inputType»({
- 		«ENDIF-»
+		«IF this.is_editable.boolString() == "false"»
+			new cwe.editor.control.DisplayField({
+		«ELSE»
+			«IF inputType == "ComboBox"-»
+		new cwe.editor.control.«getComboBoxClass(this.input_type)»({
+			«ELSE-»
+		new cwe.editor.control.«inputType»({
+	 		«ENDIF-»
+	 	«ENDIF-»
 		fieldLabel: "«this.name»",
 		name: "«this.name»",
 		dataIndex: "«this.name»",
 		«IF inputType == "ComboBox"»«getComboBoxConfig(this.input_type)»,«ENDIF»
-		«IF this.is_editable.boolString() == "false"»
-			«IF inputType == "ComboBox"»
-				disabled: true,
-			«ELSE»
-				readOnly: true,
-			«ENDIF»
-		«ENDIF»
 		toolTip: "«this.getComment().sanitizeJsString()»"
 	}) 
 	«ENDLET»
@@ -232,12 +229,12 @@ application.«this.getFullPackageName()».«this.name».prototype.getEditorItems
 	«ELSE»
 		new cwe.editor.control.MultipleAssociate( {
 	«ENDIF»
-		«REM»«LET isParent ? "parent" : "child" AS relationString»«ENDREM»
 			fieldLabel : "«this.getRoleName().toFirstLower()»",
 			name : "«this.getRoleName().toFirstLower()»",
 			dataIndex : "«this.getRoleName().toFirstLower()»",
 			targetCweModelElementId : "«this.type.name»",
-			isParent : «isParent ? "true" : "false"»
+			isParent : «isParent ? "true" : "false"»,
+			aggregationKind : cwe.Constants.AggregationKind.«this.aggregation.toString().toUpperCase()»
 		«REM»«ENDLET»«ENDREM»
 	})
 «ENDDEFINE»
