@@ -53,8 +53,7 @@ uwm.property.TextField.prototype.render = function(container, position) {
 	}
 }
 
-uwm.property.TextField.prototype.fieldChanged = function(field, newValue,
-		oldValue) {
+uwm.property.TextField.prototype.fieldChanged = function(field, newValue, oldValue) {
 	this.persistValue(newValue);
 }
 
@@ -65,10 +64,13 @@ uwm.property.TextField.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.TextField.prototype.persistValue = function(newValue) {
-	this.originalValue = newValue;
-	
-	var tmp = new Object();
-	tmp[this.getName()] = newValue;
+	// persist only valid values
+	if (this.validateValue(newValue)) {
+		this.originalValue = newValue;
+		
+		var tmp = new Object();
+		tmp[this.getName()] = newValue;
 
-	this.modelNode.changeProperties(tmp);
+		this.modelNode.changeProperties(tmp);
+	}
 }

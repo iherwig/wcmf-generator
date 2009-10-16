@@ -76,10 +76,13 @@ uwm.property.StaticComboBox.prototype.handleDestroy = function(field) {
 }
 
 uwm.property.StaticComboBox.prototype.persistValue = function(newValue) {
-	this.originalValue = newValue;
-	
-	var tmp = new Object();
-	tmp[this.getName()] = newValue;
-	
-	this.modelNode.changeProperties(tmp);
+	// persist only valid values
+	if (this.validateValue(newValue)) {
+		this.originalValue = newValue;
+		
+		var tmp = new Object();
+		tmp[this.getName()] = newValue;
+		
+		this.modelNode.changeProperties(tmp);
+	}
 }

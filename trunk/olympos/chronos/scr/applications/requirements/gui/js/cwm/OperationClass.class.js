@@ -65,7 +65,9 @@ cwm.OperationClass.prototype.getPropertyForm = function(modelNode, isLockedByOth
 		    
 		    modelNode : modelNode,
 		    
-		    readOnly : isLockedByOtherUser
+		    readOnly : isLockedByOtherUser,
+		    regex : /^[a-z][a-zA-Z0-9]*$/,
+		    regexText : "the name must only contain letters and numbers"
 		}), new uwm.property.HtmlEditor( {
 		    fieldLabel : 'Notes',
 		    toolTip : "the actual description of the object.",
