@@ -47,6 +47,8 @@
 		</script>
 		<script type="text/javascript" src="js/cwe/Constants.js">
 		</script>
+		<script type="text/javascript" src="js/cwe/Util.js">
+		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/Util.js">
 		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/Session.class.js">
@@ -158,6 +160,8 @@
 		<script type="text/javascript" src="js/cwe/editor/control/TextArea.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwe/editor/control/TextField.class.js">
+		</script>
+		<script type="text/javascript" src="js/cwe/editor/control/DisplayField.class.js">
 		</script>
 
 		<!--End include CWE-->
