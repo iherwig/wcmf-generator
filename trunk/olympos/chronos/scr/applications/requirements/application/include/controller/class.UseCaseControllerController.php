@@ -98,6 +98,7 @@ class UseCaseControllerController extends Controller
 		// create the controller
 		$controller = &$persistenceFacade->create("ChiController", BUILDDEPTH_REQUIRED);
 		$controller->setName($this->getControllerName($useCase));
+		$controller->setNotes($useCase->getNotes());
 		$useCase->addChild($controller);
 		$controller->save();
 		
@@ -115,6 +116,7 @@ class UseCaseControllerController extends Controller
 				{
 					$operation = &$persistenceFacade->create("Operation", BUILDDEPTH_REQUIRED);
 					$operation->setName($this->getOperationName($curElement));
+					$operation->setNotes($curElement->getNotes());
 					$controller->addChild($operation);
 					$operation->save();
 				}
@@ -165,13 +167,27 @@ class UseCaseControllerController extends Controller
 	}
 	
 	/**
-	 * Sanitize a given name for use as a class name
+	 * Sanitize a given name for use as a class/operation name
 	 * @param name The name
 	 * @return The sanitized name
 	 */
 	protected function sanitizeName($name)
 	{
-		return preg_replace('/\s/', '', $name);
+		// remove special chars
+		$name = preg_replace('/[^a-zA-Z0-9\s]/', '', $name);
+		
+		// make camel case
+		$nameParts = preg_split('/\s/', $name);
+		for($i=0; $i<sizeof($nameParts); $i++)
+		{
+			$nameParts[$i] = strtoupper(substr($nameParts[$i], 0, 1)).substr($nameParts[$i], 1);
+		}
+		$name = implode('', $nameParts);
+		
+		// shorten to 255 chars
+		$name = substr($name, 0, 255);
+		
+		return $name;
 	}
 // PROTECTED REGION END
 }
