@@ -80,3 +80,13 @@ cwe.editor.control.HtmlEditor.prototype.render = function(container, position) {
 		});
 	}
 };
+
+cwe.editor.control.HtmlEditor.prototype.getValue = function() {
+	var result = cwe.editor.control.HtmlEditor.superclass.getValue.call(this);
+	
+	if (result == "<br>") {
+		result = undefined;
+	}
+	
+	return result;
+};
