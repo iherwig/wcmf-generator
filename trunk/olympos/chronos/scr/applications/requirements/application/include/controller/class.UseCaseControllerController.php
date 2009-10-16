@@ -108,6 +108,7 @@ class UseCaseControllerController extends Controller
 		for ($i=0; $i<sizeof($activitySets); $i++)
 		{
 			$curActivitySet = &$persistenceFacade->load($activitySets[$i]->getOID(), 1);
+			$curActivitySet->sortChildren('sortkey');
 			$curElements = $curActivitySet->getChildren();
 			for ($j=0; $j<sizeof($curElements); $j++)
 			{
@@ -134,7 +135,7 @@ class UseCaseControllerController extends Controller
 	 */
 	protected function getControllerName($useCase)
 	{
-		return $this->sanitizeName($useCase->getName()."Controller");
+		return $this->sanitizeName($useCase->getName()."Controller", false);
 	}
 
 	/**
@@ -146,7 +147,7 @@ class UseCaseControllerController extends Controller
 	{
 		$nameSuffice = $activityElement->getType();
 		$nameSuffice = preg_replace('/^Activity(.+)/', '$1', $nameSuffice);
-		return $this->sanitizeName($activityElement->getName().$nameSuffice);
+		return $this->sanitizeName($activityElement->getName().$nameSuffice, true);
 	}
 
 	/**
@@ -169,18 +170,19 @@ class UseCaseControllerController extends Controller
 	/**
 	 * Sanitize a given name for use as a class/operation name
 	 * @param name The name
+	 * @param firstLower True if the first letter should be lowercase, False, if it should be uppercase
 	 * @return The sanitized name
 	 */
-	protected function sanitizeName($name)
+	protected function sanitizeName($name, $firstLower)
 	{
 		// remove special chars
 		$name = preg_replace('/[^a-zA-Z0-9\s]/', '', $name);
 		
-		// make camel case
+		// make camel case (first letter lower case)
 		$nameParts = preg_split('/\s/', $name);
-		for($i=0; $i<sizeof($nameParts); $i++)
-		{
-			$nameParts[$i] = strtoupper(substr($nameParts[$i], 0, 1)).substr($nameParts[$i], 1);
+		$nameParts[0] = $this->correctCase($nameParts[0], $firstLower);
+		for($i=1; $i<sizeof($nameParts); $i++) {
+			$nameParts[$i] = $this->correctCase($nameParts[$i], false);
 		}
 		$name = implode('', $nameParts);
 		
@@ -188,6 +190,23 @@ class UseCaseControllerController extends Controller
 		$name = substr($name, 0, 255);
 		
 		return $name;
+	}
+	
+	/**
+	 * Correct the case of the first letter of a sting
+	 * @param str The string
+	 * @param firstLower True if the first letter should be lowercase, False, if it should be uppercase
+	 * @return The string with the correct case
+	 */
+	private function correctCase($str, $firstLower)
+	{
+		if ($firstLower) {
+			$str = strtolower(substr($str, 0, 1)).substr($str, 1);
+		}
+		else {
+			$str = strtoupper(substr($str, 0, 1)).substr($str, 1);
+		}
+		return $str;
 	}
 // PROTECTED REGION END
 }
