@@ -60,5 +60,7 @@ public class ChiWorker extends Figure{
 
 		drawScaleEllipse(g2d, createFig, figureInfo, elli1);
 		drawScaleEllipse(g2d, createFig, figureInfo, head);
+		
+		drawScaleChi(g2d, createFig, head, figureInfo);
 	}
 }

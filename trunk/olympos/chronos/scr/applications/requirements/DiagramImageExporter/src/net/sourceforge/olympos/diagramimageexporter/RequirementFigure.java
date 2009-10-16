@@ -1,6 +1,5 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -9,6 +8,11 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public abstract class RequirementFigure extends Figure{
+	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 150 , 50);
+	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 150 , 50);
+	InfoLine infLine1 = new InfoLine(10, 0, 10, 50);
+	InfoLine infLine2 = new InfoLine(15, 0, 15, 50);
+	
 	protected void drawScaleRec(Graphics2D g2d, InfoFigureParameter createFig , InfoCoordinateSize figureInfo, InfoCoordinateSize rec) {
 		float scaleY = (createFig.getHeight()/figureInfo.getHeight());
 		float scaleX = (createFig.getWidth()/figureInfo.getWidth());
@@ -21,20 +25,7 @@ public abstract class RequirementFigure extends Figure{
 		g2d.draw(new Rectangle(x , y, width, height));
 	}
 	
-	protected void drawScaleLine(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line) {
-		float scaleY = (createFig.getHeight()/figureInfo.getHeight());
-		float scaleX = (createFig.getWidth()/figureInfo.getWidth());
-		
-		int lineX1 = (int) (createFig.getX() + line.getX1() * scaleX);
-		int lineY1 = (int) (createFig.getY() + line.getY1() * scaleY);
-		int lineX2 = (int) (createFig.getX() + line.getX2() * scaleX);
-		int lineY2 = (int) (createFig.getY() + line.getY2() * scaleY);
-		
-//		figure.getX() + infLine1.getX1()*scaleX, figure.getY() + infLine1.getY1()*scaleY, figure.getX() + infLine1.getX2()*scaleX, figure.getY() + infLine1.getY2()*scaleY);
-		g2d.setPaint(Color.black);
-		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
-	}
-	public void drawImg(Graphics2D g2d, InfoFigureParameter figure) {
+	protected void drawImg(Graphics2D g2d, InfoFigureParameter figure) {
 		String imagePath = null;
 
 		ElementDiagram elem = ElementDiagram.getCatalogEntry(figure.getType());
@@ -48,4 +39,15 @@ public abstract class RequirementFigure extends Figure{
 			System.out.println(e);
 		}
 	}
+	@Override
+	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
+
+		drawScaleRec(g2d, fig, figureInfo, rect1);
+
+		drawScaleLine(g2d, fig, figureInfo, infLine1);
+		drawScaleLine(g2d, fig, figureInfo, infLine2);
+		
+		drawImg(g2d, fig);
+	}
+	
 }

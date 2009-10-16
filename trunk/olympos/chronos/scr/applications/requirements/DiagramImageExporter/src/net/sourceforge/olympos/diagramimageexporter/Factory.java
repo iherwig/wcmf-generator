@@ -7,7 +7,7 @@ package net.sourceforge.olympos.diagramimageexporter;
 		elem = ElementDiagram.getCatalogEntry(figureInfo.getType());
 		String name =elem.getName();
 		
-		Class clazz;
+		Class<?> clazz;
 		Object result = null;
 		try {
 			clazz = Class.forName("net.sourceforge.olympos.diagramimageexporter.shapes." + name);

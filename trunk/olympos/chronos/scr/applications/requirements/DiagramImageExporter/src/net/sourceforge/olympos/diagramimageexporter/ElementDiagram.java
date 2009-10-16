@@ -206,7 +206,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_WORKER, "ChiWorker","worker",EnumFontPosition.UNDER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_WORKER, "ChiWorker","worker",EnumFontPosition.UNDER, path + chi , connections);
 		return result;
 	}
 	

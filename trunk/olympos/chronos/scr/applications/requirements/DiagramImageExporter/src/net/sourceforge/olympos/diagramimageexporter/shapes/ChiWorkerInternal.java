@@ -54,17 +54,19 @@ public class ChiWorkerInternal extends Figure{
 	}
 
 	@Override
-	public void draw(Graphics2D g2d, InfoFigureParameter creatFig) {
+	public void draw(Graphics2D g2d, InfoFigureParameter createFig) {
 		
-		drawScaleEllipse(g2d, creatFig, figureInfo, elli1);
-		drawScaleEllipse(g2d, creatFig, figureInfo, head);
+		drawScaleEllipse(g2d, createFig, figureInfo, elli1);
+		drawScaleEllipse(g2d, createFig, figureInfo, head);
 
-		drawScaleLine(g2d, creatFig, figureInfo, body);
-		drawScaleLine(g2d, creatFig, figureInfo, leftleg);
-		drawScaleLine(g2d, creatFig, figureInfo, rightleg);
-		drawScaleLine(g2d, creatFig, figureInfo, arm);
+		drawScaleLine(g2d, createFig, figureInfo, body);
+		drawScaleLine(g2d, createFig, figureInfo, leftleg);
+		drawScaleLine(g2d, createFig, figureInfo, rightleg);
+		drawScaleLine(g2d, createFig, figureInfo, arm);
 		
-		drawScaleLine(g2d, creatFig, figureInfo, arrow1);
-		drawScaleLine(g2d, creatFig, figureInfo, arrow2);
+		drawScaleLine(g2d, createFig, figureInfo, arrow1);
+		drawScaleLine(g2d, createFig, figureInfo, arrow2);
+		
+//		drawScaleChi(g2d, createFig, head);
 	}
 }
