@@ -19,3 +19,9 @@ Ext.namespace("cwe.Constants");
  * @type String
  */
 cwe.Constants.SVN_REVISION = "";
+
+cwe.Constants.AggregationKind = {
+	NONE: "AggregationKind.NONE",
+	SHARED: "AggregationKind.SHARED",
+	COMPOSITE: "AggregationKind.COMPOSITE"
+};

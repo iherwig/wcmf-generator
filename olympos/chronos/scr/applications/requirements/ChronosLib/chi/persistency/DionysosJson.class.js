@@ -379,6 +379,13 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 					recordHandler = this.logRecordHandler;
 					break;
 				
+				case "createChild":
+					jsonRequest.action = "createChild";
+					jsonRequest.parentOid = currRequest.parentOid;
+					jsonRequest.childRole = currRequest.childRole;
+					recordHandler = this.createChildRecordHandler;
+					break;
+
 				default:
 					throw "Unknown action in ActionSet: " + currRequest.action;
 			}
@@ -408,6 +415,22 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 	    recordHandlers : recordHandlers,
 	    actionSet : actionSet
 	});
+}
+
+chi.persistency.DionysosJson.prototype.createChild = function(parentOid, childRole, successHandler, errorHandler) {
+	this.jsonRequest( {
+	    action : "createChild",
+	    parentOid : parentOid,
+	    childRole: childRole,
+	}, successHandler, errorHandler, this.createChildRecordHandler);
+}
+
+chi.persistency.DionysosJson.prototype.createChildRecordHandler = function(handler, options, data) {
+	return {
+	    parentOid : options.localParams.parentOid,
+	    childRole: options.localParams.childRole,
+	    childOid: data.childOid
+	};
 }
 
 chi.persistency.DionysosJson.Handler = {

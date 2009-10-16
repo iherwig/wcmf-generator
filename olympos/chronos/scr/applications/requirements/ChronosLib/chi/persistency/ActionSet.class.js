@@ -1,13 +1,13 @@
 /*
  * Copyright (c) 2008 The Olympos Development Team.
- *
+ * 
  * http://sourceforge.net/projects/olympos/
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
- * this entire header must remain intact.
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
 Ext.namespace("chi.persistency");
 
@@ -23,112 +23,123 @@ chi.persistency.ActionSet = function() {
 
 chi.persistency.ActionSet.prototype.addLogin = function(user, password, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "login",
-		user : user,
-		password : password,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "login",
+	    user : user,
+	    password : password,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
 chi.persistency.ActionSet.prototype.addLogout = function(successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "logout",
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "logout",
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
 chi.persistency.ActionSet.prototype.addList = function(cweModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "list",
-		cweModelElementId : cweModelElementId,
-		limit : limit,
-		offset : offset,
-		sortAttributeName : sortAttributeName,
-		sortDirection : sortDirection,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "list",
+	    cweModelElementId : cweModelElementId,
+	    limit : limit,
+	    offset : offset,
+	    sortAttributeName : sortAttributeName,
+	    sortDirection : sortDirection,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
 chi.persistency.ActionSet.prototype.addRead = function(oid, depth, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "read",
-		oid : oid,
-		depth : depth,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "read",
+	    oid : oid,
+	    depth : depth,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
 chi.persistency.ActionSet.prototype.addUpdate = function(oid, attributes, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "update",
-		oid : oid,
-		attributes : attributes,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "update",
+	    oid : oid,
+	    attributes : attributes,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
 chi.persistency.ActionSet.prototype.addCreate = function(cweModelElementId, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "create",
-		cweModelElementId : cweModelElementId,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "create",
+	    cweModelElementId : cweModelElementId,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
 chi.persistency.ActionSet.prototype.addDestroy = function(oid, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "destroy",
-		oid : oid,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "destroy",
+	    oid : oid,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
 chi.persistency.ActionSet.prototype.addAssociate = function(sourceOid, targetOid, role, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "associate",
-		sourceOid : sourceOid,
-		targetOid : targetOid,
-		role : role,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "associate",
+	    sourceOid : sourceOid,
+	    targetOid : targetOid,
+	    role : role,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
 chi.persistency.ActionSet.prototype.addDisassociate = function(sourceOid, targetOid, role, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "disassociate",
-		sourceOid : sourceOid,
-		targetOid : targetOid,
-		role : role,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "disassociate",
+	    sourceOid : sourceOid,
+	    targetOid : targetOid,
+	    role : role,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
 chi.persistency.ActionSet.prototype.addLog = function(type, message, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
-		action : "log",
-		type : type,
-		message : message,
-		successHandler : successHandler,
-		errorHandler : errorHandler,
-		errorLevel : errorLevel
+	    action : "log",
+	    type : type,
+	    message : message,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
+	};
+}
+
+chi.persistency.ActionSet.prototype.addCreateChild = function(parentOid, childRole, successHandler, errorHandler, errorLevel) {
+	this.requests[this.getNextId()] = {
+	    action : "createChild",
+	    parentOid : parentOid,
+	    childRole : childRole,
+	    successHandler : successHandler,
+	    errorHandler : errorHandler,
+	    errorLevel : errorLevel
 	};
 }
 
@@ -199,9 +210,9 @@ chi.persistency.ActionSet.prototype.errorHandler = function(data, errorMessage) 
 }
 
 chi.persistency.ActionSet.errorLevels = {
-	IGNORE : 1,
-	WARN : 2,
-	ERROR : 3
+    IGNORE : 1,
+    WARN : 2,
+    ERROR : 3
 }
 
 chi.persistency.ActionSet.DEFAULT_ERROR_LEVEL = chi.persistency.ActionSet.errorLevels.WARN;
