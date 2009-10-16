@@ -1,6 +1,8 @@
 import uml;
 import Chronos;
 
+extension org::openarchitectureware::uml2::profile::profiling;
+
 extension common::util;
 
 extension cartridge::ChiCmf::extensions::globals;
@@ -11,16 +13,38 @@ extension cartridge::ChiCmf::extensions::ChiNode;
 
 List[Chronos::ChiNode] getModelClasses(uml::Package this):
 	this.allOwnedElements().typeSelect(Chronos::ChiNode).
-		select(e|e.isApplicationClass() && e.getQualifiedName() != RequiredNodeSuperClass() && !e.isAbstract)
+		select(
+			e|e.isApplicationClass() &&
+			e.getQualifiedName() != RequiredNodeSuperClass() &&
+			!e.isAbstract &&
+			!e.isManyToMany()
+		)
 ;
 
-List[Chronos::ChiNode] getNotAbstractParentNodes(ChiNode this):
-	this.getParentNodesRecursive().select(e|!e.type.isAbstract)
+List[uml::Property] getNotAbstractParentNodes(ChiNode this):
+	this.resolveManyToMany(this.getParentNodesRecursive().select(e|!((Chronos::ChiNode) e.type).isAbstract))
 ;
 
-List[Chronos::ChiNode] getNotAbstractChildNodes(ChiNode this):
-	this.getChildNodesRecursive().select(e|!e.type.isAbstract)
+List[uml::Property] getNotAbstractChildNodes(ChiNode this):
+	this.resolveManyToMany(this.getChildNodesRecursive().select(e|!((Chronos::ChiNode) e.type).isAbstract))
 ;
+
+List[uml::Property] resolveManyToMany(ChiNode this, List[uml::Property] list):
+	let result = (List[Chronos::ChiNode]) {}:
+	
+	result.addAll(list.select(e|!((Chronos::ChiNode) e.type).isManyToMany())) ->
+	result.addAll(((List[Chronos::ChiManyToMany]) list.select(e|((Chronos::ChiNode) e.type).isManyToMany()).type).getOtherEnd(this)) ->
+	
+	result
+;
+
+List[uml::Property] getOtherEnd(Chronos::ChiManyToMany this, Chronos::ChiNode sourceNode):
+	let result = this.getParentNodes().select(e|!((Chronos::ChiNode) e.type).isAbstract && sourceNode.isAtOtherNmEnd((Chronos::ChiNode) e.type, this)):
+	result.setUpper(-1) ->
+	
+	result
+;
+
 
 List[uml::Package] getModelPackages(uml::Model this):
 	this.allOwnedElements().typeSelect(uml::Package).selectFirst(e|e.getQualifiedName().startsWith(ApplicationPackageAbsolute(this))).getModelPackages({})
