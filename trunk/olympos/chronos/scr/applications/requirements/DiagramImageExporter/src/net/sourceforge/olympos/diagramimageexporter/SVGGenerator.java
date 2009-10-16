@@ -1,7 +1,7 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
-import java.net.URL;
 import java.util.ArrayList;
+
 import org.jdom.JDOMException;
 /**
  * This class includes the main Methode
@@ -58,6 +58,7 @@ public class SVGGenerator {
 			ArrayList<InfoFigureParameter> figureArray = dia1.getFigure();
 			imagePath = df.drawAll(imagePath, figureArray, dia1.getId());
 		}
+		
 		System.out.print("Return Path: ");
 		System.out.println(imagePath);
 		System.out.println("FINISH");

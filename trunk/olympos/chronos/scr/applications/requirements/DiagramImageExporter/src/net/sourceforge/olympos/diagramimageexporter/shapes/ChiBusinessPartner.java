@@ -36,7 +36,6 @@ public class ChiBusinessPartner extends Figure{
 
 	public void draw(Graphics2D g2d, InfoFigureParameter createFig) {
 		
-		drawScaleEllipse(g2d, createFig, figureInfo, figureInfo);
 		drawScaleEllipse(g2d, createFig, figureInfo, head);
 
 		drawScaleLine(g2d, createFig, figureInfo, body);

@@ -15,7 +15,7 @@ public class XmlReader {
 
 	Draw dr = new Draw();
 	SVGGenerator svg = new SVGGenerator();
-	private ArrayList<InfoFigureParameter> figures;
+//	private ArrayList<InfoFigureParameter> figures;
 
 	XmlReader() {
 	}

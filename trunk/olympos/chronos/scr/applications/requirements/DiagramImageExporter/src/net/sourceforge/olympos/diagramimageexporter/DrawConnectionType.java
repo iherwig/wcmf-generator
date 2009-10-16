@@ -1,7 +1,10 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
+import java.awt.Stroke;
 import java.util.HashMap;
 
 //The end and the start of the Connection will be drawn here
@@ -44,18 +47,11 @@ public class DrawConnectionType {
 
 	//class for the Diamond
 	private class DiamandCoordinates {
-		
-		String sourceFigId;
-		String tagretFigId; 
-	
 
 		int rightx, righty, middle1x, middle1y, leftx, lefty;// middle2x, middle2y;
 		
-
 		//parameter for the diamond
 		DiamandCoordinates( int x4, int y4, int x1, int y1, int x2, int y2, int x3, int y3) {
-//			middle2x = x4;
-//			middle2y = y4;
 			rightx = x1;
 			righty = y1;
 			middle1x = x2;
@@ -120,7 +116,6 @@ public class DrawConnectionType {
 
 		//select the parameter of the used direction
 		DiamandCoordinates selectedPointDiamand = pointsDiamand.get(toDirection);
-//		InfoCoordinate xy6 = new InfoCoordinate(selectedPointDiamand.middle2x, selectedPointDiamand.middle2y);
 		InfoCoordinate xy3 = new InfoCoordinate(selectedPointDiamand.leftx, selectedPointDiamand.lefty);
 		InfoCoordinate xy4 = new InfoCoordinate(selectedPointDiamand.middle1x, selectedPointDiamand.middle1y);
 		InfoCoordinate xy5 = new InfoCoordinate(selectedPointDiamand.rightx, selectedPointDiamand.righty);
@@ -197,7 +192,6 @@ public class DrawConnectionType {
 
 		//select the parameter of the used direction
 		DiamandCoordinates selectedPointDiamand = pointsDiamand.get(toDirection);
-//		InfoCoordinate xy6 = new InfoCoordinate(selectedPointDiamand.middle2x, selectedPointDiamand.middle2y);
 		InfoCoordinate xy3 = new InfoCoordinate(selectedPointDiamand.leftx, selectedPointDiamand.lefty);
 		InfoCoordinate xy4 = new InfoCoordinate(selectedPointDiamand.middle1x, selectedPointDiamand.middle1y);
 		InfoCoordinate xy5 = new InfoCoordinate(selectedPointDiamand.rightx, selectedPointDiamand.righty);

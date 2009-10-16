@@ -61,7 +61,7 @@ public class Draw {
 
 		// draw all connections between the Figures and Images
 		ArrayList<InfoXmlDiagram> dia = svg.getDiagram();
-		boolean exist = false;
+//		boolean exist = false;
 		for (InfoXmlDiagram currDia : dia) {
 			ArrayList<InfoFigureParameter> figure = currDia.getFigure();
 			for (InfoFigureParameter figure1 : figure) {

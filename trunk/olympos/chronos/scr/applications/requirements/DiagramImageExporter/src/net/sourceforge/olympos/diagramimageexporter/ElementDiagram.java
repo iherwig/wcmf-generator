@@ -1,16 +1,13 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
-import java.net.URL;
 import java.util.HashMap;
-
-import javax.swing.ImageIcon;
 
 public class ElementDiagram {
 	private EnumFigureType type;
 	private EnumFontPosition fontPosition;
 	private String name;
 	private String imagePath;
-	private ImageIcon imagepath;
+//	private ImageIcon imagepath;
 	private String typ;
 	
 	private final static String CONTAINS = "contains";

@@ -1,7 +1,10 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
-import java.awt.*;
-import java.util.ArrayList;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Polygon;
+import java.awt.Stroke;
 import java.util.HashMap;
 
 //The end and the start of the Connection will be drawn here
@@ -45,8 +48,8 @@ public class ConnectionType {
 	//class for the Diamond
 	private class DiamandCoordinates {
 		
-		String sourceFigId;
-		String tagretFigId; 
+//		String sourceFigId;
+//		String tagretFigId; 
 	
 
 		int rightx, righty, middle1x, middle1y, leftx, lefty;// middle2x, middle2y;

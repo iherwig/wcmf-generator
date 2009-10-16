@@ -8,11 +8,11 @@ import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 import net.sourceforge.olympos.diagramimageexporter.RequirementFigure;
 
 public class ChiFeature extends RequirementFigure{
-	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 50 , 150);
+	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 150 , 50);
 	InfoLine infLine1 = new InfoLine(10, 0, 10, 50);
 	InfoLine infLine2 = new InfoLine(15, 0, 15, 50);
 	
-	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 50 , 150);
+	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 150 , 50);
 	
 	public ChiFeature(){
 	}
