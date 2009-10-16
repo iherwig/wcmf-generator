@@ -30,12 +30,7 @@ cwe.editor.control.HtmlEditor = function(config) {
 	    enableFont : false,
 	    enableFontSize : false,
 	    enableLinks : false,
-	    enableSourceEdit : false,
-	    listeners : {
-		    "initialize" : function() {
-			    self.handleInitialize();
-		    }
-	    }
+	    enableSourceEdit : false
 	}, config));
 	
 	this.toolTipText = config.toolTip;
@@ -46,29 +41,6 @@ cwe.editor.control.HtmlEditor = function(config) {
 };
 
 Ext.extend(cwe.editor.control.HtmlEditor, Ext.form.HtmlEditor);
-
-cwe.editor.control.HtmlEditor.prototype.handleInitialize = function() {
-	if (this.readOnly) {
-		
-		this.doc.body.setAttribute("class", 'readOnly');
-		try {
-			Ext.EventManager.removeAll(this.doc);
-		} catch (e) {
-		}
-		
-		this.doc.designMode = "off";
-	} else {
-		this.doc.body.setAttribute("class", 'editable');
-		
-		var value = this.originalValue;
-		if (value == "&nbsp;" || value.trim() == cwe.editor.control.HtmlEditor.EMPTY_VALUE || value.trim() == "") {
-			this.execCmd('delete');
-			if (Ext.isIE) {
-				e.updateToolbar();
-			}
-		}
-	}
-};
 
 cwe.editor.control.HtmlEditor.prototype.render = function(container, position) {
 	cwe.editor.control.HtmlEditor.superclass.render.apply(this, arguments);
