@@ -266,6 +266,13 @@ uwm.persistency.Json.prototype.createDiagramFromPackage = function(oid, successH
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.createControllerFromUseCase = function(oid, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "usecasectrl",
+		oid: oid
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.putChildnodesToActivitySetDiagram = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "actsdiagr",
@@ -475,6 +482,10 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				
 			case "packdiagr":
 				jsonRequest.controller = "PackageDiagramController";
+				jsonRequest.oid = currRequest.oid;
+				break;
+				
+			case "usecasectrl":
 				jsonRequest.oid = currRequest.oid;
 				break;
 				
