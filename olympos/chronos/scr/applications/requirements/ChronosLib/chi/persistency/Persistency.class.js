@@ -24,7 +24,7 @@ chi.persistency.Persistency.getInstance = function() {
 
 chi.persistency.Persistency.prototype.processSuccessHandler = function(successHandler, data) {
 	if (successHandler instanceof Function) {
-		successHandler(data);
+		successHandler.call(this, data);
 	}
 }
 

@@ -353,7 +353,7 @@ cwe.editor.control.MultipleAssociate.prototype.edit = function() {
 cwe.editor.control.MultipleAssociate.prototype.createChild = function() {
 	var self = this;
 	
-	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelClass, function(record) {
-		self.mergeRecords( [ record ]);
+	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelClass, function(data) {
+		self.mergeRecords( [ data.record ]);
 	});
 };
