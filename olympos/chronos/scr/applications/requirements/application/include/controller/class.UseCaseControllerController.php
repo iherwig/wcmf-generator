@@ -17,10 +17,8 @@
  */
  require_once(BASE."wcmf/lib/presentation/class.Controller.php");
 // PROTECTED REGION ID(application/include/controller/class.UseCaseControllerController.php/Import) ENABLED START
-
-require_once (BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
-require_once (BASE."wcmf/lib/persistence/class.ObjectQuery.php");
-
+ require_once (BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
+ require_once (BASE."wcmf/lib/persistence/class.ObjectQuery.php");
 // PROTECTED REGION END
 
 /**
@@ -101,6 +99,7 @@ class UseCaseControllerController extends Controller
 		$controller = &$persistenceFacade->create("ChiController", BUILDDEPTH_REQUIRED);
 		$controller->setName($this->getControllerName($useCase));
 		$controller->setNotes($useCase->getNotes());
+		$controller->setVisibility($this->getDefaultVisibilityId("ChiController"));
 		$useCase->addChild($controller);
 		$controller->save();
 		
@@ -120,6 +119,7 @@ class UseCaseControllerController extends Controller
 					$operation = &$persistenceFacade->create("Operation", BUILDDEPTH_REQUIRED);
 					$operation->setName($this->getOperationName($curElement));
 					$operation->setNotes($curElement->getNotes());
+					$operation->setVisibility($this->getDefaultVisibilityId("Operation"));
 					$controller->addChild($operation);
 					$operation->save();
 				}
@@ -209,6 +209,26 @@ class UseCaseControllerController extends Controller
 			$str = strtoupper(substr($str, 0, 1)).substr($str, 1);
 		}
 		return $str;
+	}
+
+	/**
+	 * Get the default visibility id for a given type (ChiController, Operation)
+	 * @param type The type
+	 * @return The database id of the default Visibility instance for the type
+	 */
+	private function getDefaultVisibilityId($type)
+	{
+		$DEFAULT_VISIBILTIES = array(
+			'ChiController' => 'Protected',
+			'Operation' => 'Protected',
+		);
+		
+		$oid = PersistenceFacade::getInstance()->getFirstOID('Visibility', 
+			array('Name' => $DEFAULT_VISIBILTIES[$type]));
+		if (PersistenceFacade::isValidOID($oid)) {
+			return join('', PersistenceFacade::getOIDParameter($oid, 'id'));
+		}
+		return null;
 	}
 // PROTECTED REGION END
 
