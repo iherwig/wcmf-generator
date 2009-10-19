@@ -185,13 +185,13 @@ chi.persistency.ActionSet.prototype.successHandler = function(request, data, get
 			var currResponse = getResponseHandler(data, currActionName);
 			
 			if (currResponse) {
-				persistency.processSuccessHandler(currRequest.successHandler, request.recordHandlers[currActionName]("SUCCESS", currRequest, currResponse));
+				persistency.processSuccessHandler.call(persistency, currRequest.successHandler, request.recordHandlers[currActionName].call(persistency, "SUCCESS", currRequest, currResponse));
 			} else {
 				if (currRequest.errorLevel > errorLevel) {
 					errorLevel = currRequest.errorLevel;
 				}
 				
-				persistency.processErrorHandler(currRequest.errorHandler, request.recordHandlers[currActionName]("ERROR", currRequest, currResponse), currResponse.errorMsg);
+				persistency.processErrorHandler.call(persistency, currRequest.errorHandler, request.recordHandlers[currActionName].call(persistency, "ERROR", currRequest, currResponse), currResponse.errorMsg);
 				
 				if (currRequest.errorLevel == chi.persistency.ActionSet.errorLevels.ERROR) {
 					throw new Error(chi.Dict.translate("Critical Persistency Error") + ": " + currResponse.errorMsg);

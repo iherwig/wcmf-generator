@@ -211,8 +211,8 @@ cwe.editor.control.SingleAssociate.prototype.edit = function() {
 cwe.editor.control.SingleAssociate.prototype.createChild = function() {
 	var self = this;
 	
-	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelClass, function(record) {
-		self.setValue(record);
+	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelClass, function(data) {
+		self.setValue(data.record);
 	});
 };
 
