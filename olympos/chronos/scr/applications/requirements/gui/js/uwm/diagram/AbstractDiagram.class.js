@@ -338,24 +338,16 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 				
 				if (!(parentOid instanceof Function) && parentOid != this.getOid() && figure instanceof uwm.diagram.Figure) {
 					this.figures.add(parentOid, figure);
-					this.figuresToLoad++;
-					
 					modelContainer.loadByOid(parentOid, this.actionSet, 2);
 				}
 			}
 		}
 	}
+	this.figuresToLoad = this.figures.getCount();
 	
 	this.actionSet.commit(function() {
 		self.handleLoadedObjects();
 	});
-	
-	if (this.figuresToLoad == 0) {
-		this.loadMask.hide();
-		this.propertyDisplayEnabled = true;
-		this.eventHandlerEnabled = true;
-		this.scrollToCenter();
-	}
 }
 
 uwm.diagram.AbstractDiagram.prototype.handleLoadedObjects = function() {
