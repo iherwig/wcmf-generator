@@ -175,6 +175,21 @@ cwm.ChiNodeClass.prototype.getPropertyForm = function(modelNode, isLockedByOther
 		                    
 		                    readOnly : isLockedByOtherUser
 		                }),
+		                new uwm.property.ComboBox({
+		                  fieldLabel: 'visibility',
+		                  toolTip: "visibility",
+		                  name: 'visibility',
+		                  listType: "Visibility",
+		                  modelNode: modelNode,
+		                  disabled : isLockedByOtherUser
+		                }),
+		                new uwm.property.Checkbox( {
+		                  fieldLabel : 'isAbstract',
+		                  name : 'isAbstract',
+		                  modelNode : modelNode,
+		                  stateful : true,
+		                  disabled : isLockedByOtherUser
+		                }),
 		                new uwm.property.TextField( {
 		                    fieldLabel : 'display_value',
 		                    toolTip : "The value that is displayed in a list view. a single value or '|' -separated list of values",

@@ -126,7 +126,23 @@ cwm.ChiControllerClass.prototype.getPropertyForm = function(modelNode, isLockedB
 		    modelNode : modelNode,
 		    
 		    readOnly : isLockedByOtherUser
-		}), new uwm.property.TextField( {
+		}),
+		new uwm.property.ComboBox({
+		    fieldLabel: 'visibility',
+		    toolTip: "visibility",
+		    name: 'visibility',
+		    listType: "Visibility",
+		    modelNode: modelNode,
+		    disabled : isLockedByOtherUser
+		}),
+		new uwm.property.Checkbox( {
+		    fieldLabel : 'isAbstract',
+		    name : 'isAbstract',
+		    modelNode : modelNode,
+		    stateful : true,
+		    disabled : isLockedByOtherUser
+		}),
+		new uwm.property.TextField( {
 		    fieldLabel : 'Alias',
 		    toolTip : "the Project Id of this object.",
 		    name : 'Alias',

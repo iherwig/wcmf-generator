@@ -31,6 +31,8 @@ cwm.ChiController.prototype.addOperation = function() {
 
 cwm.ChiController.prototype.initByDisplayResult = function(node) {
 	cwm.ChiController.superclass.initByDisplayResult.call(this, node);
+	this.data.visibility = node.values[1].visibility;
+	this.data.isAbstract = node.values[1].isAbstract;
 	this.data.Alias = node.values[1].Alias;
 	this.data.Version = node.values[1].Version;
 	this.data.Name = node.values[1].Name;
@@ -45,6 +47,8 @@ cwm.ChiController.prototype.initByDisplayResult = function(node) {
 
 cwm.ChiController.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
+	realForm.findField("visibility").loadValue(this.data.visibility);
+	realForm.findField("isAbstract").loadValue(this.data.isAbstract);
 	realForm.findField("Alias").loadValue(this.data.Alias);
 	realForm.findField("Version").loadValue(this.data.Version);
 	realForm.findField("Name").loadValue(this.data.Name);

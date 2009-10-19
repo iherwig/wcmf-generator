@@ -16,18 +16,14 @@
  */
 Ext.namespace("cwm");
 
-cwm.Operation = function(modelNodeClass) {
-	cwm.Operation.superclass.constructor.call(this, modelNodeClass);
+cwm.Visibility = function(modelNodeClass) {
+	cwm.Visibility.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.Operation, uwm.model.OperationObject);
+Ext.extend(cwm.Visibility, uwm.model.TechnicalObject);
 
-cwm.Operation.prototype.initByDisplayResult = function(node) {
-	cwm.Operation.superclass.initByDisplayResult.call(this, node);
-      this.data.visibility = node.values[1].visibility;
-      this.data.isAbstract = node.values[1].isAbstract;
-      this.data.ReturnType = node.values[1].ReturnType;
-      this.data.Parameters = node.values[1].Parameters;
+cwm.Visibility.prototype.initByDisplayResult = function(node) {
+	cwm.Visibility.superclass.initByDisplayResult.call(this, node);
       this.data.Name = node.values[1].Name;
       this.data.Notes = node.values[1].Notes;
       this.data.created = node.values[1].created;
@@ -36,12 +32,8 @@ cwm.Operation.prototype.initByDisplayResult = function(node) {
       this.data.modified = node.values[1].modified;
 }
 
-cwm.Operation.prototype.populatePropertyForm = function(form) {
+cwm.Visibility.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
-      realForm.findField("visibility").loadValue(this.data.visibility);
-      realForm.findField("isAbstract").loadValue(this.data.isAbstract);
-      realForm.findField("ReturnType").loadValue(this.data.ReturnType);
-      realForm.findField("Parameters").loadValue(this.data.Parameters);
       realForm.findField("Name").loadValue(this.data.Name);
       realForm.findField("Notes").loadValue(this.data.Notes);
       realForm.findField("created").loadValue(this.data.created);
@@ -50,7 +42,7 @@ cwm.Operation.prototype.populatePropertyForm = function(form) {
       realForm.findField("modified").loadValue(this.data.modified);
 }
 
-cwm.Operation.prototype.getGridData = function() {
+cwm.Visibility.prototype.getGridData = function() {
 	return {
 		oid: this.getOid(),
 		label: this.getLabel()
