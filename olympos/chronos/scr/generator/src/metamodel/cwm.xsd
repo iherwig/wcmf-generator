@@ -668,6 +668,8 @@
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="visibility" type="xsd:string"/>
+		<xsd:attribute name="isAbstract" type="xsd:boolean"/>
 		<xsd:attribute name="created" type="xsd:string"/>
 		<xsd:attribute name="creator" type="xsd:string"/>
 		<xsd:attribute name="last_editor" type="xsd:string"/>
@@ -768,6 +770,8 @@
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="visibility" type="xsd:string"/>
+		<xsd:attribute name="isAbstract" type="xsd:boolean"/>
 		<xsd:attribute name="created" type="xsd:string"/>
 		<xsd:attribute name="creator" type="xsd:string"/>
 		<xsd:attribute name="last_editor" type="xsd:string"/>
@@ -817,6 +821,8 @@
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="visibility" type="xsd:string"/>
+		<xsd:attribute name="isAbstract" type="xsd:boolean"/>
 		<xsd:attribute name="created" type="xsd:string"/>
 		<xsd:attribute name="creator" type="xsd:string"/>
 		<xsd:attribute name="last_editor" type="xsd:string"/>
