@@ -31,6 +31,8 @@ cwm.ChiNode.prototype.addOperation = function() {
 
 cwm.ChiNode.prototype.initByDisplayResult = function(node) {
 	cwm.ChiNode.superclass.initByDisplayResult.call(this, node);
+      this.data.visibility = node.values[1].visibility;
+      this.data.isAbstract = node.values[1].isAbstract;
       this.data.display_value = node.values[1].display_value;
       this.data.parent_order = node.values[1].parent_order;
       this.data.child_order = node.values[1].child_order;
@@ -55,6 +57,8 @@ cwm.ChiNode.prototype.initByDisplayResult = function(node) {
 
 cwm.ChiNode.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
+      realForm.findField("visibility").loadValue(this.data.visibility);
+      realForm.findField("isAbstract").loadValue(this.data.isAbstract);
       realForm.findField("display_value").loadValue(this.data.display_value);
       realForm.findField("parent_order").loadValue(this.data.parent_order);
       realForm.findField("child_order").loadValue(this.data.child_order);
