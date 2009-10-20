@@ -348,6 +348,14 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 	this.actionSet.commit(function() {
 		self.handleLoadedObjects();
 	});
+
+	// remove load mask immediatly in case of an empty diagram
+	if (this.figuresToLoad == 0) {
+		this.propertyDisplayEnabled = true;
+		this.eventHandlerEnabled = true;
+		this.loadMask.hide();
+		this.scrollToCenter();
+	}
 }
 
 uwm.diagram.AbstractDiagram.prototype.handleLoadedObjects = function() {
