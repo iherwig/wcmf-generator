@@ -11,6 +11,11 @@ public class InfoXmlFigure {
 	
 	private ArrayList<InfoXmlConnection> child = new ArrayList<InfoXmlConnection>();
 	private ArrayList<InfoXmlFigure> childFig = new ArrayList<InfoXmlFigure>();
+	private ArrayList<InfoXMLOptionValue> childOpt = new ArrayList<InfoXMLOptionValue>();
+
+	private ArrayList<InfoXMLOptionValue> childVal = new ArrayList<InfoXMLOptionValue>();
+	private ArrayList<InfoXMLOptionValue> childValNo = new ArrayList<InfoXMLOptionValue>();
+	private ArrayList<InfoXMLOptionValue> childOptNo = new ArrayList<InfoXMLOptionValue>();
 //	private ArrayList<InfoFigureParameter> childFigure = new ArrayList<InfoFigureParameter>();
 	
 	InfoXmlFigure(int id, String name, EnumFigureType type, String alias){
@@ -67,5 +72,33 @@ public class InfoXmlFigure {
 
 	public ArrayList<InfoXmlFigure> getChildrenFig() {
 		return childFig;
+	}
+	
+	public void addChildOpt(InfoXMLOptionValue childOpt) {
+		this.childOpt.add(childOpt);
+	}
+
+	public ArrayList<InfoXMLOptionValue> getChildOpt() {
+		return childOpt;
+	}
+	public void addChildVal(InfoXMLOptionValue childVal) {
+		this.childVal.add(childVal);
+	}
+
+	public ArrayList<InfoXMLOptionValue> getChildVal() {
+		return childVal;
+	}
+	
+	public void addChildOptNo(InfoXMLOptionValue childOpt) {
+		this.childOptNo.add(childOpt);
+	}
+	public ArrayList<InfoXMLOptionValue> getChildOptNo() {
+		return childOptNo;
+	}
+	public void addChildValNo(InfoXMLOptionValue childOpt) {
+		this.childValNo.add(childOpt);
+	}
+	public ArrayList<InfoXMLOptionValue> getChildValNo() {
+		return childValNo;
 	}
 }

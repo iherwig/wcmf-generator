@@ -39,7 +39,7 @@ public class SVGGenerator {
 		diagram = new ArrayList<InfoXmlDiagram>();
 		xmlFigure = new ArrayList<InfoXmlFigure>();
 		connectionExist = new ArrayList<InfoConnectionExist>();
-		
+
 		SVGGenerator svg = new SVGGenerator();
 
 		ElementDiagram.initCatalog();
@@ -49,6 +49,7 @@ public class SVGGenerator {
 //		String xmlFile = args[0];
 		
 		XmlReader xml = new XmlReader();
+//		xml.XML(imagePath);
 		xml.XML();
 		
 		Draw df = new Draw();

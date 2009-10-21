@@ -5,6 +5,7 @@ package net.sourceforge.olympos.diagramimageexporter;
 //The Object for the Hashtable in ElementDiagram
 
 public class AllowedConnection{
+
 	String lineLabel;
 	EnumConnectionEnd sourceConnectionArrow;
 	EnumConnectionEnd targetConnectionArrow;	
@@ -14,6 +15,17 @@ public class AllowedConnection{
 		this.sourceConnectionArrow = connectionSource;
 		this.targetConnectionArrow = connectionEnd;
 	}
+	
+	public void setLineLabel(String lineLabel) {
+		this.lineLabel = lineLabel;
+	}
+	public void setSourceConnectionArrow(EnumConnectionEnd sourceConnectionArrow) {
+		this.sourceConnectionArrow = sourceConnectionArrow;
+	}
+	public void setTargetConnectionArrow(EnumConnectionEnd targetConnectionArrow) {
+		this.targetConnectionArrow = targetConnectionArrow;
+	}
+	
 	public String getLineLabel() {
 		return lineLabel;
 	}
@@ -22,8 +34,5 @@ public class AllowedConnection{
 	}
 	public EnumConnectionEnd getTargetConnectionArrow() {
 		return targetConnectionArrow;
-	}
-	public AllowedConnection() {
-		// TODO Auto-generated constructor stub
 	}
 }

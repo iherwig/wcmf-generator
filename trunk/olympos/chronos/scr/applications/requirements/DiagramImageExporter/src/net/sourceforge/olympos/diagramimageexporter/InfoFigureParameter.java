@@ -14,6 +14,9 @@ public class InfoFigureParameter {
 	private String label;
 	private ArrayList<InfoFigureParameter> children = new ArrayList<InfoFigureParameter>();
 	private ArrayList<InfoXmlConnection> child = new ArrayList<InfoXmlConnection>();
+	private ArrayList<InfoXMLOptionValue> value = new ArrayList<InfoXMLOptionValue>();
+	private ArrayList<InfoXMLOptionValue> operation  = new ArrayList<InfoXMLOptionValue>();
+	
 	private int diagramid;
 	private int typeId;
 	String alias;
@@ -121,6 +124,13 @@ public class InfoFigureParameter {
 	public void addChild(InfoFigureParameter child) {
 		children.add(child);
 	}
+	
+	public void addValue(InfoXMLOptionValue values) {
+		value.add(values);
+	}
+	public void addOperation (InfoXMLOptionValue values) {
+		operation.add(values);
+	}
 
 	public ArrayList<InfoXmlConnection> getChildrenX() {
 		return child;
@@ -128,5 +138,12 @@ public class InfoFigureParameter {
 	
 	public ArrayList<InfoFigureParameter> getChildren() {
 		return children;
+	}
+	
+	public ArrayList<InfoXMLOptionValue> getValue() {
+		return value;
+	}
+	public ArrayList<InfoXMLOptionValue> getOperation() {
+		return operation;
 	}
 }

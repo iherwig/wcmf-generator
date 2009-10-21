@@ -7,7 +7,6 @@ public class ElementDiagram {
 	private EnumFontPosition fontPosition;
 	private String name;
 	private String imagePath;
-//	private ImageIcon imagepath;
 	private String typ;
 	
 	private final static String CONTAINS = "contains";
@@ -17,7 +16,11 @@ public class ElementDiagram {
 	private final static String REFINES = "is refined by";
 	private final static String PARTICIPATES = "is participates by";
 	private final static String GENERALISATION = "is generalisation by";
-
+	private final static String INSTANTIATES = "instantiantes";
+	private final static String ASSOCIATION = "Association";
+	
+//	private final static AllowedConnection specified = new AllowedConnection("is specified by", null, null);
+	
 	private static String path = "D:/Images/";
 	
 	private final static String chiRequirementFeature = "ChiRequirementFeature.PNG";
@@ -32,22 +35,20 @@ public class ElementDiagram {
 	private static HashMap<EnumFigureType, ElementDiagram> catalog = new HashMap<EnumFigureType, ElementDiagram>();
 	private static HashMap<String, ElementDiagram> catalogByName = new HashMap<String, ElementDiagram>();
 
-	ElementDiagram(EnumFigureType type, String name,String typ, EnumFontPosition fontPosition, String imagePath,  HashMap<EnumFigureType, InfoAllowedConnection> connections) {
+	ElementDiagram(EnumFigureType type, String name, EnumFontPosition fontPosition, String imagePath,  HashMap<EnumFigureType, InfoAllowedConnection> connections) {
 		this.type = type;
 		this.name = name;
-		this.typ = typ;
 		this.fontPosition = fontPosition;
 		this.imagePath = imagePath;
 		this.allowedConnection = connections;
 	}
-
-	ElementDiagram(String type, String name,String typ, EnumFontPosition fontPos, String imagePath, HashMap<String, InfoAllowedConnection> connections) {
+	
+	ElementDiagram(String type, String name){//, EnumFontPosition fontPos, String imagePath, HashMap<String, InfoAllowedConnection> connections) {
 		this.typ = type;
 		this.name = name;
-		this.typ = typ;
-		this.fontPosition = fontPos;
-		this.imagePath = imagePath;
-		this.allowedConnectionByName = connections;
+//		this.fontPosition = fontPos;
+//		this.imagePath = imagePath;
+//		this.allowedConnectionByName = connections;
 	}
 
 	public ElementDiagram() {
@@ -90,9 +91,8 @@ public class ElementDiagram {
 	//Requirement
 	private static ElementDiagram initIssue() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
-		
-	//	fontPosition = new FontPos(EnumFontPosition.IN_UP, EnumFontPosition.ALIGN_LEFT);		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_ISSUE, "ChiIssue","rectangle",EnumFontPosition.IN_UP , path + chiRequirementIssu, connections);
+			
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_ISSUE, "ChiIssue",EnumFontPosition.IN_UP , path + chiRequirementIssu, connections);
 		return result;
 	}
 
@@ -104,7 +104,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_BUSINESS_PROCESS, new InfoAllowedConnection("???", EnumConnectionEnd.NONE, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_REQUIREMENT, new InfoAllowedConnection(REALIZED, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_FEATURE, "ChiFeature","rectangle", EnumFontPosition.IN_UP , path + chiRequirementFeature, connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_FEATURE, "ChiFeature", EnumFontPosition.IN_UP , path + chiRequirementFeature, connections);
 		return result;
 	}
 
@@ -114,7 +114,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_GOAL, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.CLOSED_DIAMOND, EnumConnectionEnd.ARROW));
 		connections.put(EnumFigureType.CHI_REQUIREMENT, new InfoAllowedConnection(SPECIFIED, EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_GOAL, "ChiGoal","rectangle", EnumFontPosition.IN_UP , path + chiRequirementGoal, connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_GOAL, "ChiGoal", EnumFontPosition.IN_UP , path + chiRequirementGoal, connections);
 		return result;
 	}
 
@@ -125,7 +125,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_FEATURE, new InfoAllowedConnection(REALIZED, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW_TRIANGLE));
 		connections.put(EnumFigureType.CHI_ISSUE, new InfoAllowedConnection(NEGATED, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_REQUIREMENT, "ChiRequirement","rectangle", EnumFontPosition.IN_UP , path + chiRequirementChiRequirement, connections);// ???
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_REQUIREMENT, "ChiRequirement", EnumFontPosition.IN_UP , path + chiRequirementChiRequirement, connections);// ???
 		return result;
 	}
 	
@@ -142,7 +142,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_WORKER_INTERN, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
 		connections.put(EnumFigureType.CHI_WORKER_EXTERN, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_USE_CASE, "ChiBusinessUseCase", "useCase", EnumFontPosition.IN_CENTER , null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_USE_CASE, "ChiBusinessUseCase", EnumFontPosition.IN_CENTER , null , connections);
 		return result;
 	}
 
@@ -157,7 +157,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_WORKER_INTERN, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
 		connections.put(EnumFigureType.CHI_WORKER_EXTERN, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, "ChiBusinessUseCaseCore","useCase", EnumFontPosition.IN_CENTER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, "ChiBusinessUseCaseCore", EnumFontPosition.IN_CENTER, null , connections);
 		return result;
 	}
 	
@@ -168,7 +168,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_PARTNER_PASSIVE, "ChiBusinessPartnerPassive", "partner", EnumFontPosition.UNDER, path + chi , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_PARTNER_PASSIVE, "ChiBusinessPartnerPassive", EnumFontPosition.UNDER, path + chi , connections);
 		return result;
 	}
 
@@ -179,7 +179,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_PARTNER_ACTIVE, "ChiBusinessPartnerActive","partner",EnumFontPosition.UNDER, path + chi , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_PARTNER_ACTIVE, "ChiBusinessPartnerActive",EnumFontPosition.UNDER, path + chi , connections);
 		return result;
 	}
 
@@ -189,14 +189,14 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_PARTNER, "ChiBusinessPartner","partner",EnumFontPosition.UNDER, path + chi , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_PARTNER, "ChiBusinessPartner",EnumFontPosition.UNDER, path + chi , connections);
 		return result;
 	}
 	
 	private static ElementDiagram initChiBusiProcess() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_PROCESS, "ChiBusinessProcess", "ChiBusiProcess", EnumFontPosition.IN_UP, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_BUSINESS_PROCESS, "ChiBusinessProcess", EnumFontPosition.IN_UP, null , connections);
 		return result;
 	}
 	
@@ -206,7 +206,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_WORKER, "ChiWorker","worker",EnumFontPosition.UNDER, path + chi , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_WORKER, "ChiWorker", EnumFontPosition.UNDER, path + chi , connections);
 		return result;
 	}
 	
@@ -217,7 +217,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_WORKER_INTERN, "ChiWorkerInternal","worker",EnumFontPosition.UNDER, path + chi , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_WORKER_INTERN, "ChiWorkerInternal", EnumFontPosition.UNDER, path + chi , connections);
 		return result;// ??
 	}
 
@@ -228,7 +228,7 @@ public class ElementDiagram {
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_WORKER_EXTERN, "ChiWorkerExternal","worker",EnumFontPosition.UNDER, path + chi , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_WORKER_EXTERN, "ChiWorkerExternal", EnumFontPosition.UNDER, path + chi , connections);
 		return result;
 	}
 
@@ -239,22 +239,26 @@ public class ElementDiagram {
 	private static ElementDiagram initChiView() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_VIEW, "ChiView","rectangle", EnumFontPosition.IN_CENTER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_VIEW, "ChiView", EnumFontPosition.IN_CENTER, null , connections);
 		return result;
 	}
 	
 	private static ElementDiagram initChiController() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
-
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_CONTROLLER, "ChiController","rectangle", EnumFontPosition.IN_UP, null , connections);
+		
+		connections.put(EnumFigureType.CHI_NODE, new InfoAllowedConnection(INSTANTIATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_CONTROLLER, new InfoAllowedConnection(ASSOCIATION, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
+		
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_CONTROLLER, "ChiController", EnumFontPosition.IN_UP,  path + chi , connections);
 		return result;
 	}
 	
 	private static ElementDiagram initChiNode() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
+		connections.put(EnumFigureType.CHI_NODE, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_NODE, "ChiNode", "rectangle", EnumFontPosition.IN_UP, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_NODE, "ChiNode", EnumFontPosition.IN_UP,  path + chi , connections);
 		return result;
 	}
 	
@@ -274,41 +278,41 @@ public class ElementDiagram {
 
 		connections.put(EnumFigureType.CHI_WORKER_INTERN, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_SET, "ActivitySet", null, EnumFontPosition.UNDER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_SET, "ActivitySet", EnumFontPosition.UNDER, null , connections);
 		return result;
 	}
 	private static ElementDiagram initActiviReceive() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_RECEIVE, "ActiviRec", null, EnumFontPosition.UNDER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_RECEIVE, "ActiviRec", EnumFontPosition.UNDER, null , connections);
 		return result;
 	}
 	
 	private static ElementDiagram initActivityInitial() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_INITIAL, "ActivityInitial", null, EnumFontPosition.UNDER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_INITIAL, "ActivityInitial", EnumFontPosition.UNDER, null , connections);
 		return result;
 	}
 	
 	private static ElementDiagram initActivityDecision() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_DECISION, "ActiviDec", null, EnumFontPosition.UNDER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_DECISION, "ActiviDec", EnumFontPosition.UNDER, null , connections);
 		return result;
 	}
 	
 	private static ElementDiagram initActivityFinal() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_FINAL, "ActivityFinal", null, EnumFontPosition.UNDER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_FINAL, "ActivityFinal", EnumFontPosition.UNDER, null , connections);
 		return result;
 	}
 	
 	private static ElementDiagram initChiObject() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.Chi_OBJECT, "ChiObject", null, EnumFontPosition.IN_CENTER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.Chi_OBJECT, "ChiObject", EnumFontPosition.IN_CENTER, null , connections);
 		return result;
 	}
 	

@@ -2,21 +2,22 @@ package net.sourceforge.olympos.diagramimageexporter.shapes;
 
 import java.awt.Graphics2D;
 
+import net.sourceforge.olympos.diagramimageexporter.Figure;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
-import net.sourceforge.olympos.diagramimageexporter.RequirementFigure;
 
 
-public class ChiController extends RequirementFigure{
-	private InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 150, 100);
-	private InfoCoordinateSize circle1 = new InfoCoordinateSize(132, 5, 12, 12);
-	private InfoLine infLine1 = new InfoLine(0, 50, 150, 50);
-	private InfoLine infLine2 = new InfoLine(0, 60, 150, 60);
-	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 150, 100);
+public class ChiController extends Figure{
+	private InfoCoordinateSize rect = new InfoCoordinateSize(0, 0, 125, 55);
+	protected InfoCoordinateSize circle = new InfoCoordinateSize(105, 5, 12, 12);
+	private InfoLine infLine1 = new InfoLine(0, 40, 125, 40);
+	private InfoLine infLine2 = new InfoLine(0, 48, 125, 48);
 	
-	public InfoCoordinateSize getRect1() {
-		return rect1;
+	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 125, 55);
+	
+	public InfoCoordinateSize getRect() {
+		return rect;
 	}
 	public InfoLine getInfLine1() {
 		return infLine1;
@@ -24,16 +25,18 @@ public class ChiController extends RequirementFigure{
 	public InfoLine getInfLine2() {
 		return infLine2;
 	}
-	public InfoCoordinateSize getCircle1() {
-		return circle1;
+	public InfoCoordinateSize getCircle() {
+		return circle;
 	}
 	@Override
 	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
+		drawScaleRec(g2d, fig, figureInfo, rect);
+		drawScaleXLine(g2d, fig, figureInfo, infLine1);
+		drawScaleXLine(g2d, fig, figureInfo, infLine2);
+		drawContLabel(g2d, fig, figureInfo, rect, infLine1);
+		drawEllipse(g2d, fig, figureInfo, circle);
+		drawChi(g2d, fig, figureInfo, circle);
 		
-		drawScaleRec(g2d, fig, figureInfo, rect1);
-		drawScaleRec(g2d, fig, figureInfo, circle1);
-
-		drawScaleLine(g2d, fig, figureInfo, infLine1);
-		drawScaleLine(g2d, fig, figureInfo, infLine2);
+		drawScaleChiController(g2d, fig, figureInfo, infLine1, infLine2, rect);
 	}
 }
