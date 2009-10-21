@@ -98,11 +98,9 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 		un.setModified(c.getTaggedValue("Chronos::ChiNode", "modified").toString()) ->
 
 		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild())
-		//Commented out until wCMF remodeling of relations
-		//Prevents import from finishing
-		// ->
-		//un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization", "ChiNodeTarget")) ->
-		//un.manyToMany.addAll(c.getAssociations().select(e|e.ownedEnd.size >= 2 && e.ownedEnd.get(0).type == c).convertToMany(c))
+		 ->
+		un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization", "ChiNodeTarget")) ->
+		un.manyToMany.addAll(c.getAssociations().convertToMany(c))
 	) ->
 	un
 ;

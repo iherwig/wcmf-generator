@@ -21,31 +21,6 @@ List[Chronos::ChiNode] getModelClasses(uml::Package this):
 		)
 ;
 
-List[uml::Property] getNotAbstractParentNodes(ChiNode this):
-	this.resolveManyToMany(this.getParentNodesRecursive().select(e|!((Chronos::ChiNode) e.type).isAbstract))
-;
-
-List[uml::Property] getNotAbstractChildNodes(ChiNode this):
-	this.resolveManyToMany(this.getChildNodesRecursive().select(e|!((Chronos::ChiNode) e.type).isAbstract))
-;
-
-List[uml::Property] resolveManyToMany(ChiNode this, List[uml::Property] list):
-	let result = (List[Chronos::ChiNode]) {}:
-	
-	result.addAll(list.select(e|!((Chronos::ChiNode) e.type).isManyToMany())) ->
-	result.addAll(((List[Chronos::ChiManyToMany]) list.select(e|((Chronos::ChiNode) e.type).isManyToMany()).type).getOtherEnd(this)) ->
-	
-	result
-;
-
-List[uml::Property] getOtherEnd(Chronos::ChiManyToMany this, Chronos::ChiNode sourceNode):
-	let result = this.getParentNodes().select(e|!((Chronos::ChiNode) e.type).isAbstract && sourceNode.isAtOtherNmEnd((Chronos::ChiNode) e.type, this)):
-	result.setUpper(-1) ->
-	
-	result
-;
-
-
 List[uml::Package] getModelPackages(uml::Model this):
 	this.allOwnedElements().typeSelect(uml::Package).selectFirst(e|e.getQualifiedName().startsWith(ApplicationPackageAbsolute(this))).getModelPackages({})
 ;

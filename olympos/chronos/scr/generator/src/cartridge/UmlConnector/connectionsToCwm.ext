@@ -2,6 +2,7 @@ import cwm;
 import Chronos;
 import uml;
 
+extension common::util;
 extension common::umlutils;
 
 cwm::Child convertToChild(uml::Class otherClass) :
@@ -88,12 +89,15 @@ cwm::ManyToMany convertToMany(uml::Class other, String relationType, String targ
 
 cwm::ManyToMany convertToMany(uml::Association this, uml::Class source) :
 	let result = new cwm::ManyToMany:
-	let ownEnd = this.ownedEnd.selectFirst(e|e.type == source):
-	let otherEnd = this.ownedEnd.selectFirst(e|e.type == source).getOtherEnd():
+	let ownEnd = this.memberEnd.selectFirst(e|e.type == source):
+	let otherEnd = ownEnd.getOtherEnd():
+
+	info("Association convert: " + this.name + " class: " + source.name + " ends: " + this.memberEnd.type) ->
 	
 	result.setRelationType(ownEnd.aggregation.getUwmRelationType()) ->
 
-	result.setTargetType(otherEnd.type.metaType.name.split("::").last()) ->
+	result.setTargetType(getTargetType(otherEnd.type.metaType.name.split("::").last())) ->
+	result.setTargetRole(getTargetRole(otherEnd.type.metaType.name.split("::").last())) ->
 	result.setTargetOid(otherEnd.type.getId()) ->
 
 	result.setSourceMultiplicity(ownEnd.getUwmMultiplicity()) ->
@@ -118,6 +122,18 @@ String getUwmRelationType(uml::AggregationKind this):
 		
 		default:
 			null
+	}
+;
+
+String getTargetType(String this):
+	this
+;
+
+String getTargetRole(String this):
+	switch (this) {
+		case "ChiNode": "ChiNodeTarget"
+		case "ChiManyToMany": "NMChiNodeChiMany2ManyChiNodeEnd"
+		default: this
 	}
 ;
 
