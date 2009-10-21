@@ -3,8 +3,10 @@ import Chronos;
 
 extension org::openarchitectureware::uml2::profile::profiling;
 
-extension cartrdige::ChiCmf::util;
-extension cartrdige::ChiCmf::naming;
+extension cartridge::ChiCmf::extensions::util;
+extension cartridge::ChiCmf::extensions::naming;
+
+extension cartridge::ChiCmf::extensions::ChiNode;
 
 /**
  * Get the primary key tagged value or default pk name if not set
@@ -18,4 +20,11 @@ String getPKName(ChiManyToMany this) :
  */
 Void setPKName(ChiManyToMany this, String name) :
 	this.setTaggedValue(STEREOTYPE_CHI_MANY_TO_MANY(), "pk_name", name)
+;
+
+List[uml::Property] getOtherEnd(Chronos::ChiManyToMany this, Chronos::ChiNode sourceNode, boolean includeAbstract):
+	let result = this.getParentNodes().select(e|!((Chronos::ChiNode) e.type).isAbstract || includeAbstract && sourceNode.isAtOtherNmEnd((Chronos::ChiNode) e.type, this)):
+	result.setUpper(-1) ->
+	
+	result
 ;

@@ -9,6 +9,7 @@ extension common::umlutils;
 extension cartridge::ChiCmf::extensions::util;
 extension cartridge::ChiCmf::extensions::naming;
 extension cartridge::ChiCmf::extensions::ChiValue;
+extension cartridge::ChiCmf::extensions::ChiManyToMany;
 
 /**
  * ChiNode extensions
@@ -241,8 +242,34 @@ FALSE for all other
 	&& this.getSuperClassesRecursive().add(this).select(
 		e|otherNode.getSuperClassesRecursive().add(otherNode).contains(e)
 	).select(
-		e|e.getChildNodes().select(
+		e|((Chronos::ChiNode) e).getChildNodes().select(
 			f|f.type == nm
 		).size > 0
 	).size == 0
  ;
+
+ 
+List[uml::Property] getManyToManyResolvedParentNodes(ChiNode this):
+	this.resolveManyToMany(this.getParentNodesRecursive(), true)
+;
+
+List[uml::Property] getManyToManyResolvedChildNodes(ChiNode this):
+	this.resolveManyToMany(this.getChildNodesRecursive(), true)
+;
+
+List[uml::Property] getNotAbstractParentNodes(ChiNode this):
+	this.resolveManyToMany(this.getParentNodesRecursive().select(e|!((Chronos::ChiNode) e.type).isAbstract), false)
+;
+
+List[uml::Property] getNotAbstractChildNodes(ChiNode this):
+	this.resolveManyToMany(this.getChildNodesRecursive().select(e|!((Chronos::ChiNode) e.type).isAbstract), false)
+;
+
+List[uml::Property] resolveManyToMany(ChiNode this, List[uml::Property] list, boolean includeAbstract):
+	let result = (List[Chronos::ChiNode]) {}:
+	
+	result.addAll(list.select(e|!((Chronos::ChiNode) e.type).isManyToMany())) ->
+	result.addAll(((List[Chronos::ChiManyToMany]) list.select(e|((Chronos::ChiNode) e.type).isManyToMany()).type).getOtherEnd(this, includeAbstract)) ->
+	
+	result
+;
