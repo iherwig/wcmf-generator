@@ -13,5 +13,6 @@ public class ChiBusinessUseCaseCore extends ChiBusinessUseCase {
 		super.draw(g2d, fig);
 		
 		drawScaleLine(g2d, fig, figureInfo, line2);
+		drawScaleLabelUseCase(g2d, fig, figureInfo);
 	}
 }

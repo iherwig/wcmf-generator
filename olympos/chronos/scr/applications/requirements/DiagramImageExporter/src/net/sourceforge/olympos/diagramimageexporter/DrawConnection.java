@@ -255,8 +255,8 @@ public class DrawConnection {
 
 		String comment = figAllowedCatal2.getLineLabel();
 		
-		
-		g2d.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		Font b=new Font("Tahoma",Font.PLAIN,10);		
+		g2d.setFont(b);
 		FontMetrics fm = g2d.getFontMetrics();
 
 		int i = 0;
@@ -286,6 +286,7 @@ public class DrawConnection {
 			g2d.setPaint(Color.black);
 			int boxWidth = fm.stringWidth(word + " ") + 10;
 
+			g2d.setFont(b);
 			g2d.drawString(word, curX - (boxWidth / 2), curY);
 			curX += wordWidth + 3;
 		}

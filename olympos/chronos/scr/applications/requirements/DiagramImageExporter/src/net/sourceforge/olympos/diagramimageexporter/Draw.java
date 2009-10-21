@@ -18,22 +18,12 @@ import org.w3c.dom.Document;
 
 public class Draw {
 
-	// private ArrayList<Figure> diagramFigures = new ArrayList<Figure>();
-	//
-	// public ArrayList<Figure> getFigures() {
-	// return diagramFigures;
-	// }
-	// public void addFigure(Figure fChild) {
-	// diagramFigures.add(fChild);
-	// }
-
 	SVGGenerator svg = new SVGGenerator();
 	FigureChildren ch = new FigureChildren();
 
 	public String drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, int id) throws JDOMException, Exception {
 		
 		// create following Objects
-		// Draw dr1 = new Draw();
 		DrawFigure drawF = new DrawFigure();
 		DrawConnection drawC = new DrawConnection();
 		FigureDiagram editDia = new FigureDiagram();
@@ -61,7 +51,6 @@ public class Draw {
 
 		// draw all connections between the Figures and Images
 		ArrayList<InfoXmlDiagram> dia = svg.getDiagram();
-//		boolean exist = false;
 		for (InfoXmlDiagram currDia : dia) {
 			ArrayList<InfoFigureParameter> figure = currDia.getFigure();
 			for (InfoFigureParameter figure1 : figure) {

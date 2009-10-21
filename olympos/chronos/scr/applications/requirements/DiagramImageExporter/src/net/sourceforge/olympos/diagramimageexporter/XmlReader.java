@@ -15,7 +15,8 @@ public class XmlReader {
 
 	Draw dr = new Draw();
 	SVGGenerator svg = new SVGGenerator();
-//	private ArrayList<InfoFigureParameter> figures;
+
+	// private ArrayList<InfoFigureParameter> figures;
 
 	XmlReader() {
 	}
@@ -41,7 +42,7 @@ public class XmlReader {
 
 		return null;
 	}
-	
+
 	public ArrayList<InfoFigureParameter> XML(String Path) {
 		String filename = Path;
 		Document doc = null;
@@ -73,11 +74,9 @@ public class XmlReader {
 		}
 
 		else if (element.getName().equals("Package") || element.getName().equals("Model") || element.getName().equals("Figure")) {
+		}
 
-		} 
-		
 		else if (element.getName().equals("Parent") || element.getName().equals("ManyToMany") || element.getName().equals("Child")) {
-
 		}
 
 		else {
@@ -123,12 +122,12 @@ public class XmlReader {
 		if (elem != null) {
 			int id = Integer.parseInt(element.getAttributeValue("id"));
 			String alias = element.getAttributeValue("Alias");
-			String name = element.getAttributeValue("Name");;
+			String name = element.getAttributeValue("Name");
 			EnumFigureType typ = elem.getType();
 			InfoXmlFigure xmlFig = new InfoXmlFigure(id, name, typ, alias);
 			svg.addXmlFigure(xmlFig);
 
-			if (point.equals("ChiBusinessUseCase")){
+			if (point.equals("ChiBusinessUseCase")) {
 				List<Element> activitySet = element.getChildren();
 				for (Element currActSet : activitySet) {
 					if (currActSet.getName().equals("ActivitySet")) {
@@ -140,36 +139,138 @@ public class XmlReader {
 						EnumFigureType typActSet = elem.getType();
 						InfoXmlFigure xmlFigActSet = new InfoXmlFigure(idActSet, nameActSet, typActSet, aliasActSet);
 						xmlFig.addChildFig(xmlFigActSet);
-						
+
 						List<Element> activity = currActSet.getChildren();
-						 for (Element currAct : activity) {
-							 point = element.getName();
-							 
-							 elem = ElementDiagram.getCatalogEntryByName(point);
-							 if (elem != null) {
-								 int idAct = Integer.parseInt(currActSet.getAttributeValue("id"));
-								 String aliasAct = element.getAttributeValue("Alias");
-								 String nameAct = currActSet.getName();
-								 EnumFigureType typAct = elem.getType();
-								 InfoXmlFigure xmlFigAct = new InfoXmlFigure(idAct, nameAct, typAct, aliasAct);
-								 xmlFigActSet.addChildFig(xmlFigAct);
-								 
-								 List<Element> child =  currAct.getChildren();
-								 for (Element currChild : child){
-									 String type = currChild.getName();
-									 String targetType = currActSet.getAttributeValue("targetType");
-									 String targetOidString = currActSet.getAttributeValue("targetOid");
-									 int targetOid = 0;
-										if (targetOidString != null) {
-											targetOid = Integer.parseInt(targetOidString);
-										}
-									 String targetRole = currActSet.getAttributeValue("targetRole");
-									 InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
-									 xmlFigAct.addChild(xmlCon);
-								 }
-							 }
-						 }
+						for (Element currAct : activity) {
+							point = element.getName();
+
+							elem = ElementDiagram.getCatalogEntryByName(point);
+							if (elem != null) {
+								int idAct = Integer.parseInt(currActSet.getAttributeValue("id"));
+								String aliasAct = element.getAttributeValue("Alias");
+								String nameAct = currActSet.getName();
+								EnumFigureType typAct = elem.getType();
+								InfoXmlFigure xmlFigAct = new InfoXmlFigure(idAct, nameAct, typAct, aliasAct);
+								xmlFigActSet.addChildFig(xmlFigAct);
+
+								List<Element> child = currAct.getChildren();
+								for (Element currChild : child) {
+									String type = currChild.getName();
+									String targetType = currActSet.getAttributeValue("targetType");
+									String targetOidString = currActSet.getAttributeValue("targetOid");
+									int targetOid = 0;
+									if (targetOidString != null) {
+										targetOid = Integer.parseInt(targetOidString);
+									}
+									String targetRole = currActSet.getAttributeValue("targetRole");
+									InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
+									xmlFigAct.addChild(xmlCon);
+								}
+							}
+						}
+					}
+				}
+			}
+			if (point.equals("ChiController")) {
+				List<Element> chiController = element.getChildren();
+				for (Element currChiController : chiController) {
+					if (currChiController.getName().equals("Operation")) {
 						
+						int idOptVal = Integer.parseInt(element.getAttributeValue("id"));
+						String aliasOptVal = currChiController.getAttributeValue("Alias");
+						String nameOptVal = currChiController.getAttributeValue("Name");
+						String typOptVal = currChiController.getName();
+						InfoXMLOptionValue xmlFigOpt = new InfoXMLOptionValue(idOptVal, nameOptVal, typOptVal, aliasOptVal);
+						xmlFig.addChildOpt(xmlFigOpt);
+												
+						List<Element> chiControllerParent = currChiController.getChildren();
+						for (Element currChiControllerParent : chiControllerParent) {
+							String type = currChiControllerParent.getName();
+							String targetType = currChiControllerParent.getAttributeValue("targetType");
+							String a = currChiControllerParent.getAttributeValue("targetOid");
+							int targetOid = 0;
+							if (a != null) {
+								targetOid = Integer.parseInt(a);
+							}
+							String targetRole = currChiControllerParent.getAttributeValue("targetRole");
+							InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
+							xmlFigOpt.addChild(xmlCon);
+							
+							ArrayList<InfoXmlConnection> f = xmlFigOpt.getChildren();
+							for (InfoXmlConnection gh : f){
+								System.out.println(gh.getTargetType());
+							}
+						}
+					} else {
+						String type = currChiController.getName();
+						String targetType = currChiController.getAttributeValue("targetType");
+						String targetOidString = currChiController.getAttributeValue("targetOid");
+						int targetOid = 0;
+						if (targetOidString != null) {
+							targetOid = Integer.parseInt(targetOidString);
+						}
+						String targetRole = currChiController.getAttributeValue("targetRole");
+						InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
+						xmlFig.addChild(xmlCon);
+					}
+				}
+			}
+			if (point.equals("ChiNode")) {
+				List<Element> chiNode = element.getChildren();
+				for (Element currChiNode : chiNode) {
+					if (currChiNode.getName().equals("Operation")) {
+						int idOptVal = Integer.parseInt(element.getAttributeValue("id"));
+						String aliasOptVal = currChiNode.getAttributeValue("Alias");
+						String nameOptVal = currChiNode.getAttributeValue("Name");
+						String typOptVal = currChiNode.getName();
+						InfoXMLOptionValue xmlFigOptVal = new InfoXMLOptionValue(idOptVal, nameOptVal, typOptVal, aliasOptVal);
+						xmlFig.addChildValNo(xmlFigOptVal);
+						List<Element> chiControllerParent = currChiNode.getChildren();
+						for (Element currChiControllerParent : chiControllerParent) {
+							String type = currChiControllerParent.getName();
+							String targetType = currChiControllerParent.getAttributeValue("targetType");
+							String a = currChiControllerParent.getAttributeValue("targetOid");
+							int targetOid = 0;
+							if (a != null) {
+								targetOid = Integer.parseInt(a);
+							}
+							String targetRole = currChiControllerParent.getAttributeValue("targetRole");
+							InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
+							xmlFigOptVal.addChild(xmlCon);
+						}
+					}else if (currChiNode.getName().equals("Operation")) {
+						int idOptVal = Integer.parseInt(element.getAttributeValue("id"));
+						String aliasOptVal = currChiNode.getAttributeValue("Alias");
+						String nameOptVal = currChiNode.getAttributeValue("Name");
+						String typOptVal = currChiNode.getName();
+						InfoXMLOptionValue xmlFigOptVal = new InfoXMLOptionValue(idOptVal, nameOptVal, typOptVal, aliasOptVal);
+						xmlFig.addChildOptNo(xmlFigOptVal);
+						List<Element> chiControllerParent = currChiNode.getChildren();
+						for (Element currChiControllerParent : chiControllerParent) {
+							String type = currChiControllerParent.getName();
+							String targetType = currChiControllerParent.getAttributeValue("targetType");
+							String a = currChiControllerParent.getAttributeValue("targetOid");
+							int targetOid = 0;
+							if (a != null) {
+								targetOid = Integer.parseInt(a);
+							}
+							String targetRole = currChiControllerParent.getAttributeValue("targetRole");
+							InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
+							xmlFigOptVal.addChild(xmlCon);
+						}
+					}
+					
+					else {
+						String type = currChiNode.getName();
+						String targetType = currChiNode.getAttributeValue("targetType");
+						String targetOidString = currChiNode.getAttributeValue("targetOid");
+						int targetOid = 0;
+						if (targetOidString != null) {
+							targetOid = Integer.parseInt(targetOidString);
+						}
+						String targetRole = currChiNode.getAttributeValue("targetRole");
+						InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
+						xmlFig.addChild(xmlCon);
 					}
 				}
 			}
@@ -210,8 +311,6 @@ public class XmlReader {
 			String targetRole = currChild.getAttributeValue("targetRole");
 			InfoXmlConnection con = new InfoXmlConnection(type, targetType, targetOid, targetRole);
 			fig.addChildX(con);
-
-//			ElementDiagram elem = ElementDiagram.getCatalogEntryByName(targetType);
 		}
 		if (fig != null) {
 			result = fig;

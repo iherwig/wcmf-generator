@@ -1,11 +1,16 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+import javax.swing.JTextArea;
+
+import org.apache.batik.svggen.SVGGraphics2D;
 
 public abstract class RequirementFigure extends Figure{
 	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 150 , 50);
@@ -39,6 +44,29 @@ public abstract class RequirementFigure extends Figure{
 			System.out.println(e);
 		}
 	}
+
+	protected void drawRequLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo2, InfoCoordinateSize rect, InfoLine line) {
+		float scaleY = (createFig.getHeight()/figureInfo.getHeight());
+		float scaleX = (createFig.getWidth()/figureInfo.getWidth());
+		
+		int x = (int) (createFig.getX() + line.getX2() * scaleX + 5);
+		int y = (int) (createFig.getY() +5);
+		int width = (int) ((rect.getWidth() * scaleX) - (line.getX2() * scaleX )-6);//-25);
+		int height = (int) (rect.getHeight() * scaleY - 6);
+		
+		String label = createFig.getLabel();	
+		Font font = new Font("tahoma", Font.PLAIN, 12);
+        
+		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
+		JTextArea n = new JTextArea( label );
+		n.setFont(font);
+		n.setWrapStyleWord( true );
+		n.setLineWrap( true );
+		n.setBounds(x, y, width, height);
+		n.setBackground(Color.white);
+		n.paint( textbox );
+		
+	}
 	@Override
 	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
 
@@ -47,7 +75,8 @@ public abstract class RequirementFigure extends Figure{
 		drawScaleLine(g2d, fig, figureInfo, infLine1);
 		drawScaleLine(g2d, fig, figureInfo, infLine2);
 		
+		drawRequLabel(g2d,fig,figureInfo, rect1, infLine2);
+		
 		drawImg(g2d, fig);
 	}
-	
 }

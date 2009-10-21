@@ -127,6 +127,8 @@ public class DrawConnectionType {
 		polygon.addPoint((int) toPoint.getX() + (int) xy3.getX(), (int) toPoint.getY() + (int) xy3.getY());
 		polygon.addPoint((int) toPoint.getX() + (int) xy4.getX(), (int) toPoint.getY() + (int) xy4.getY());
 		polygon.addPoint((int) toPoint.getX() + (int) xy5.getX(), (int) toPoint.getY() + (int) xy5.getY());
+		
+		g2d.setStroke( new BasicStroke( 1, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER ) ); 
 		g2d.fillPolygon(polygon);
 	}
 
@@ -149,6 +151,7 @@ public class DrawConnectionType {
 		g2d.setColor(Color.black);
 		
 		//create the arrow
+		g2d.setStroke( new BasicStroke( 1, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER ) ); 
 		g2d.drawLine((int) yx1.getX(), (int) yx1.getY(), (int) yx0.getX(), (int) yx0.getY());
 		g2d.drawLine((int) yx2.getX(), (int) yx2.getY(), (int) yx0.getX(), (int) yx0.getY());
 	}
@@ -173,6 +176,7 @@ public class DrawConnectionType {
 		polygon.addPoint((int) fromPoint.getX() + (int) xy1.getX(), (int) fromPoint.getY() + (int) xy1.getY());
 		polygon.addPoint((int) fromPoint.getX() + (int) xy2.getX(), (int) fromPoint.getY() + (int) xy2.getY());
 		polygon.addPoint((int) fromPoint.getX(), (int) fromPoint.getY());
+		g2d.setStroke( new BasicStroke( 1, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER ) ); 
 		g2d.drawPolygon(polygon);	
 
 		//fill the ArrowTriangle with with
@@ -180,6 +184,7 @@ public class DrawConnectionType {
 		polygon.addPoint((int) fromPoint.getX() - 1, (int) fromPoint.getY() - 1);
 		polygon.addPoint((int) fromPoint.getX() + (int) xy2.getX() + 2, (int) fromPoint.getY() + (int) xy2.getY() - 2);
 		polygon.addPoint((int) fromPoint.getX() - 1, (int) fromPoint.getY() - 1);
+		g2d.setStroke( new BasicStroke( 1, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER ) ); 
 		g2d.fillPolygon(polygon);
 	}
 	private void drawOpenDiamond(Graphics2D g2d, EnumDirection toDirection, InfoCoordinate toPoint) {
@@ -207,6 +212,7 @@ public class DrawConnectionType {
 
 		//fill the Diamond with with
 		g2d.setColor(Color.white);
+		g2d.setStroke( new BasicStroke( 1, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER ) ); 
 		g2d.fillPolygon(polygon);
 	}
 }

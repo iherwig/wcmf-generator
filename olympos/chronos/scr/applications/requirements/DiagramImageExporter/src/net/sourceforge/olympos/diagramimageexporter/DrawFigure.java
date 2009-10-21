@@ -12,10 +12,6 @@ public class DrawFigure {
 		Figure fig = factory.createFigure( figureInfo);
 		fig.draw(g2d, figureInfo);
 		this.drawLabel(g2d, figureInfo);
-		
-//		FigureDraw drawFig = new FigureDraw();
-//		drawFig.draw(figure, g2d);
-//		//this.drawSimpleFigure(g2d, figure);	
 	}
 
 	public void drawSimpleFigure(Graphics2D g2d, InfoFigureParameter figure) {
@@ -33,7 +29,7 @@ public class DrawFigure {
 
 		if (pos.equals(EnumFontPosition.UNDER)) {
 			
-			Font calledElement = new Font("tahoma", Font.PLAIN, 12);
+			Font calledElement=new Font("tahoma", Font.PLAIN, 12);		
 			g2d.setFont(calledElement);
 
 			int mX = (int) figure.getX() + (int) (figure.getWidth() / 2);
@@ -46,9 +42,7 @@ public class DrawFigure {
 			String comment = figure.getLabel();
 			String[] words = comment.split(" ");
 			int curX = mX;
-			int curY = mY; // -((fm.getHeight()*words.length)/2)-(fm.getHeight()/2);
-//			int boxHeight = fm.getHeight() * words.length + 7;
-//			int y = mY;
+			int curY = mY;
 
 			for (String word : words) {
 				int wordWidth = fm.stringWidth(word + " ");
@@ -65,6 +59,7 @@ public class DrawFigure {
 
 		if (pos.equals(EnumFontPosition.IN_UP)) {
 			
+
 			
 //			Rectangle2D getStringBounds 
 
