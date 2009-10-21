@@ -36,14 +36,14 @@ public class FigureDiagram {
 					for (InfoXmlFigure currXmlFig : xmlFig) {
 						String xmlAlias = currXmlFig.getAlias();
 						if (figAlias.endsWith(xmlAlias)) {
-							ArrayList<InfoXMLOptionValue> value = currXmlFig.getChildOptNo();
+							ArrayList<InfoXMLOptionValue> value = currXmlFig.getChildValNo();
 							for (InfoXMLOptionValue currXMLValue : value) {
-								System.out.println(currXMLValue.getName());
+								if(currXMLValue.getTyp().equals("ChiValue"))
 								currFig.addValue(currXMLValue);
 							}
-							ArrayList<InfoXMLOptionValue> op = currXmlFig.getChildValNo();
+							ArrayList<InfoXMLOptionValue> op = currXmlFig.getChildOptNo();
 							for (InfoXMLOptionValue currXmlOp : op) {
-								System.out.println(currXmlOp.getName());
+								if(currXmlOp.getTyp().equals("Operation"))
 								currFig.addOperation(currXmlOp);
 							}
 						}

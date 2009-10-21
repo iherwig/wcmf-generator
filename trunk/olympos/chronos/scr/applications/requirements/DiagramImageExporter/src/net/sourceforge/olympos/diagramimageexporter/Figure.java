@@ -163,6 +163,8 @@ public abstract class Figure {
 	}
 	
 	protected void drawScaleChiNode(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line1, InfoLine line2, InfoCoordinateSize rect2) {
+		float scaleY = (createFig.getHeight()/figureInfo.getHeight());
+		float scaleX = (createFig.getWidth()/figureInfo.getWidth());
 		
 		ArrayList<InfoXMLOptionValue> values = createFig.getValue();
 
@@ -179,30 +181,63 @@ public abstract class Figure {
 		int curYImage 	= (int)(createFig.getY() + line1.getY1() + 3);
 		
 		for (InfoXMLOptionValue currValue : values) {
-				
-			try {
-				BufferedImage img1 = ImageIO.read(new File("D:/Images/ChiAttribute.png"));
-				int xImage = curXImage;
-				int yImage = curYImage;
-				int widthImage = lineHeight;
-				int hightImage = lineHeight;
+			if(currValue.getTyp().equals("ChiValue")){
+				try {
+					BufferedImage img1 = ImageIO.read(new File("D:/Images/ChiAttribute.png"));
+					int xImage = curXImage;
+					int yImage = curYImage;
+					int widthImage = lineHeight;
+					int hightImage = lineHeight;
 
-				if (img1 != null)
-					g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			curYImage += lineHeight ;
-			curY += lineHeight ;
-			curX = (int) (createFig.getX() + lineHeight + 20 );
-			i++;
-			g2d.setPaint(Color.black);
-			g2d.setFont(b);
-			g2d.drawString(currValue.getName(), curX , curY);
+					if (img1 != null)
+						g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+				curYImage += lineHeight ;
+				curY += lineHeight ;
+				curX = (int) (createFig.getX() + lineHeight + 20 );
+				i++;
+				g2d.setPaint(Color.black);
+				g2d.setFont(b);
+				g2d.drawString(currValue.getName(), curX , curY);
+			}	
 		}
 		ArrayList<InfoXMLOptionValue> operation = createFig.getOperation();
 		
 		if(operation.size() > 0){
+			int lineX1 = (int) (createFig.getX() + line1.getX1());
+			int lineY1 = (int) (curY + 5);
+			int lineX2 = (int) (createFig.getX() + line1.getX2()*scaleX);
+			int lineY2 = (int) (curY + 5);
+
+			curYImage += 4;
+			curY += 4;
+			
+			g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
+			
+			for (InfoXMLOptionValue currOperation : operation) {
+				
+				try {
+					BufferedImage img1 = ImageIO.read(new File("D:/Images/ChiOperation.png"));
+					int xImage = curXImage;
+					int yImage = curYImage;
+					int widthImage = lineHeight;
+					int hightImage = lineHeight;
+
+					if (img1 != null)
+						g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+				curYImage += lineHeight ;
+				curY += lineHeight ;
+				curX = (int) (createFig.getX() + lineHeight + 20 );
+				i++;
+				g2d.setPaint(Color.black);
+				g2d.setFont(b);
+				g2d.drawString(currOperation.getName(), curX , curY);
+			}
 			
 		}
 		else{
