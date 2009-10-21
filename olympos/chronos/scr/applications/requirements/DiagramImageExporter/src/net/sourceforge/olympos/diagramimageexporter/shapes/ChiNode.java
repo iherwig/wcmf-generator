@@ -1,11 +1,13 @@
 package net.sourceforge.olympos.diagramimageexporter.shapes;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import net.sourceforge.olympos.diagramimageexporter.Figure;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
+import net.sourceforge.olympos.diagramimageexporter.InfoXMLOptionValue;
 
 
 public class ChiNode extends Figure{
@@ -46,5 +48,4 @@ public class ChiNode extends Figure{
 
 		drawContLabel(g2d, fig, figureInfo, rect, infLine1);
 	}
-	
 }

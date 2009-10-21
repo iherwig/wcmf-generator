@@ -195,11 +195,6 @@ public class XmlReader {
 							String targetRole = currChiControllerParent.getAttributeValue("targetRole");
 							InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
 							xmlFigOpt.addChild(xmlCon);
-							
-							ArrayList<InfoXmlConnection> f = xmlFigOpt.getChildren();
-							for (InfoXmlConnection gh : f){
-								System.out.println(gh.getTargetType());
-							}
 						}
 					} else {
 						String type = currChiController.getName();
@@ -218,7 +213,7 @@ public class XmlReader {
 			if (point.equals("ChiNode")) {
 				List<Element> chiNode = element.getChildren();
 				for (Element currChiNode : chiNode) {
-					if (currChiNode.getName().equals("Operation")) {
+					if (currChiNode.getName().equals("ChiValue")) {
 						int idOptVal = Integer.parseInt(element.getAttributeValue("id"));
 						String aliasOptVal = currChiNode.getAttributeValue("Alias");
 						String nameOptVal = currChiNode.getAttributeValue("Name");
