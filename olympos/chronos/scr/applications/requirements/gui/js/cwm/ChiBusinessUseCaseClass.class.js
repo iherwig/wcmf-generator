@@ -53,7 +53,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 				connections : [ {
 						label : "Precedes",
 						invert : false,
-						connectionType : "precedes",
+						connectionType : "sequence",
 						nmSelf : true,
 						cardinality : -1,
 						ownUwmClassName : "ChiUseCaseSource",
@@ -61,7 +61,7 @@ cwm.ChiBusinessUseCaseClass = function() {
 				}, {
 						label : "Generalizes",
 						invert : false,
-						connectionType : "generalizes",
+						connectionType : "generalization",
 						nmSelf : true,
 						cardinality : -1,
 						ownUwmClassName : "ChiUseCaseSource",
@@ -69,10 +69,38 @@ cwm.ChiBusinessUseCaseClass = function() {
 				}, {
 						label : "Contains",
 						invert : false,
-						connectionType : "contains",
+						connectionType : "containment",
 						nmSelf : true,
 						cardinality : -1,
 						ownUwmClassName : "ChiUseCaseSource",
+						otherUwmClassName : "ChiUseCaseTarget"
+				} ]
+		}, 
+		"ChiBusinessUseCaseCore" : {
+				nmUwmClassName : "ChiUseCaseCoreSourceEnd",
+				connections : [ {
+						label : "Precedes",
+						invert : false,
+						connectionType : "precedes",
+						nmSelf : true,
+						cardinality : -1,
+						ownUwmClassName : "ChiUseCaseCoreSource",
+						otherUwmClassName : "ChiUseCaseTarget"
+				}, {
+						label : "Generalizes",
+						invert : false,
+						connectionType : "generalizes",
+						nmSelf : true,
+						cardinality : -1,
+						ownUwmClassName : "ChiUseCaseCoreSource",
+						otherUwmClassName : "ChiUseCaseTarget"
+				}, {
+						label : "Contains",
+						invert : false,
+						connectionType : "contains",
+						nmSelf : true,
+						cardinality : -1,
+						ownUwmClassName : "ChiUseCaseCoreSource",
 						otherUwmClassName : "ChiUseCaseTarget"
 				} ]
 		}, 
@@ -135,7 +163,9 @@ cwm.ChiBusinessUseCaseClass = function() {
 
 	this.maskInfo = {
 			"ChiUseCaseTargetEnd" : "NMChiUseCaseChiUseCase",
-			"ChiUseCaseSourceEnd" : "NMChiUseCaseChiUseCase"
+			"ChiUseCaseSourceEnd" : "NMChiUseCaseChiUseCase",
+			"ChiUseCaseCoreTargetEnd" : "NMChiUseCaseChiUseCase",
+			"ChiUseCaseCoreSourceEnd" : "NMChiUseCaseChiUseCase"
 	};
 }
 
