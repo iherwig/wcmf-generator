@@ -584,11 +584,8 @@ uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, 
 					    text : currConnectionInfo.label,
 					    connectionInfo : currConnectionInfo,
 					    nmUwmClassName : currConnectionInfo.nmUwmClassName || connectionInfo.nmUwmClassName,
-					    ownUwmClassName : currConnectionInfo.ownUwmClassName,
-					    otherUwmClassName : currConnectionInfo.otherUwmClassName,
 					    handler : function() {
-						    self.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, this.connectionInfo, undefined, this.nmUwmClassName, undefined, this.ownUwmClassName,
-						            this.otherUwmClassName);
+						    self.createSpecificConnection(sourceObject, targetObject, sourcePort, targetPort, this.connectionInfo, undefined, this.nmUwmClassName, undefined);
 					    }
 					}));
 				}
@@ -601,8 +598,7 @@ uwm.diagram.AbstractDiagram.prototype.createConnection = function(sourceObject, 
 	}
 }
 
-uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo, noCommand, nmUwmClassName, relationObject,
-        ownUwmClassName, otherUwmClassName) {
+uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(sourceObject, targetObject, sourcePort, targetPort, connectionInfo, noCommand, nmUwmClassName, relationObject) {
 	var decorators = this.getConnectionTypeDecorators(connectionInfo.connectionType);
 	
 	var startPort;
@@ -628,8 +624,6 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
 		command.connectionInfo = connectionInfo;
 		command.nmUwmClassName = nmUwmClassName;
-		command.ownUwmClassName = ownUwmClassName;
-		command.otherUwmClassName = otherUwmClassName;
 		command.relationObject = relationObject;
 		command.setConnection(connection);
 		this.workflow.getCommandStack().execute(command);

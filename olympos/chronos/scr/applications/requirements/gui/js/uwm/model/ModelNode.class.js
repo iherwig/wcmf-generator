@@ -252,16 +252,16 @@ uwm.model.ModelNode.prototype.getMaskedRelatedOid = function(relatedOid) {
 	return this.maskedOids[relatedOid];
 }
 
-uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionInfo, nmUwmClassName, connection, ownUwmClassName, otherUwmClassName) {
+uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionInfo, nmUwmClassName, connection) {
 	var self = this;
 	
 	var childOid = this.getOid();
 	var parentOid = otherModelObject.getOid();
 	
 	if (connectionInfo && connectionInfo.nmSelf) {
-		if (ownUwmClassName) {
-			childOid = ownUwmClassName + ":" + uwm.Util.getNumericFromOid(childOid);
-			parentOid = otherUwmClassName + ":" + uwm.Util.getNumericFromOid(parentOid);
+		if (connectionInfo.ownUwmClassName) {
+			childOid = connectionInfo.ownUwmClassName + ":" + uwm.Util.getNumericFromOid(childOid);
+			parentOid = connectionInfo.otherUwmClassName + ":" + uwm.Util.getNumericFromOid(parentOid);
 		} else {
 			childOid = this.insertDirectionInOid(childOid, "Source");
 			parentOid = this.insertDirectionInOid(parentOid, "Target");
@@ -339,8 +339,13 @@ uwm.model.ModelNode.prototype.disassociate = function(otherModelObject, connecti
 	}
 	
 	if (connectionInfo && connectionInfo.nmSelf) {
-		childOid = this.insertDirectionInOid(childOid, "Source");
-		parentOid = this.insertDirectionInOid(parentOid, "Target");
+		if (connectionInfo.ownUwmClassName) {
+			childOid = connectionInfo.ownUwmClassName + ":" + uwm.Util.getNumericFromOid(childOid);
+			parentOid = connectionInfo.otherUwmClassName + ":" + uwm.Util.getNumericFromOid(parentOid);
+		} else {
+			childOid = this.insertDirectionInOid(childOid, "Source");
+			parentOid = this.insertDirectionInOid(parentOid, "Target");
+		}
 	}
 	
 	uwm.persistency.Persistency.getInstance().disassociate(parentOid, childOid, function(request, data) {

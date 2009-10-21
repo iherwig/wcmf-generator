@@ -405,7 +405,9 @@ uwm.model.ModelContainer.prototype.duplicateModel = function(modelNode) {
 
 uwm.model.ModelContainer.prototype.getNode = function(uwmClassName, oid) {
 	var modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwmClassName);
-	
+	if (!modelClass) {
+		uwm.Log.log("Model class: "+uwmClassName+" is not defined", uwm.Log.ERROR);
+	}
 	oid = modelClass.demaskOid(oid);
 	
 	var newModelNode = this.items.get(oid);

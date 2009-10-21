@@ -48,6 +48,34 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 	
 	this.connectionInfo = {
 
+		"ChiBusinessUseCaseCore" : {
+				nmUwmClassName : "ChiUseCaseCoreSourceEnd",
+				connections : [ {
+						label : "Precedes",
+						invert : false,
+						connectionType : "precedes",
+						nmSelf : true,
+						cardinality : -1,
+						ownUwmClassName : "ChiUseCaseCoreSource",
+						otherUwmClassName : "ChiUseCaseCoreTarget"
+				}, {
+						label : "Generalizes",
+						invert : false,
+						connectionType : "generalizes",
+						nmSelf : true,
+						cardinality : -1,
+						ownUwmClassName : "ChiUseCaseCoreSource",
+						otherUwmClassName : "ChiUseCaseCoreTarget"
+				}, {
+						label : "Contains",
+						invert : false,
+						connectionType : "contains",
+						nmSelf : true,
+						cardinality : -1,
+						ownUwmClassName : "ChiUseCaseCoreSource",
+						otherUwmClassName : "ChiUseCaseCoreTarget"
+				} ]
+		}, 
 		"ChiWorkerExternal": {
 			label: "participates in",
 			invert: true,
@@ -103,6 +131,11 @@ cwm.ChiBusinessUseCaseCoreClass = function() {
 			connectionType: 'composition',
 			cardinality: -1
 		}
+	};
+
+	this.maskInfo = {
+			"ChiUseCaseCoreTargetEnd" : "NMChiUseCaseChiUseCase",
+			"ChiUseCaseCoreSourceEnd" : "NMChiUseCaseChiUseCase"
 	};
 }
 
