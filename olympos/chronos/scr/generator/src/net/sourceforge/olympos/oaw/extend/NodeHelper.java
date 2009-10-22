@@ -56,8 +56,7 @@ public class NodeHelper {
 							if (aggregationKind != null) {
 								if (aggregationKind.ordinal() == AggregationKind.COMPOSITE ||
 									aggregationKind.ordinal() == AggregationKind.SHARED ||
-									(aggregationKind.ordinal() == AggregationKind.NONE && prop.getOtherEnd().getAggregation().ordinal() == AggregationKind.NONE &&
-											!prop.isNavigable() && prop.getOtherEnd().isNavigable())
+									(aggregationKind.ordinal() == AggregationKind.NONE && prop.getOtherEnd().getAggregation().ordinal() == AggregationKind.NONE)
 									) {
 									if (UMLHelper.hasStereotype(prop.getOtherEnd().getType(), Constants.FQName(Constants.STEREOTYPE_CHI_NODE)) ||
 											UMLHelper.hasStereotype(prop.getOtherEnd().getType(), Constants.FQName(Constants.STEREOTYPE_CHI_MANY_TO_MANY))) {
@@ -162,10 +161,8 @@ public class NodeHelper {
 							AggregationKind aggregationKind = prop.getAggregation();
 							if (aggregationKind != null) {
 								if (aggregationKind.ordinal() == AggregationKind.COMPOSITE ||
-									aggregationKind.ordinal() == AggregationKind.SHARED ||
-									(aggregationKind.ordinal() == AggregationKind.NONE && prop.getOtherEnd().getAggregation().ordinal() == AggregationKind.NONE &&
-											!prop.isNavigable() && prop.getOtherEnd().isNavigable())
-									) {
+									aggregationKind.ordinal() == AggregationKind.SHARED
+								) {
 									if (UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_CHI_NODE)) ||
 											UMLHelper.hasStereotype(prop.getType(), Constants.FQName(Constants.STEREOTYPE_CHI_MANY_TO_MANY))) {
 										Logger.debug("   -> Found child: "+prop.getType().getName()+" ["+counter+"], "+prop.getAggregation());

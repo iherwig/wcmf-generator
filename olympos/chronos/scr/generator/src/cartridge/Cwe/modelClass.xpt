@@ -70,22 +70,22 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 		}
 	«ENDFOREACH»
 	
-	«IF this.getChiAttributes().size > 0 && (this.getNotAbstractParentNodes().size > 0 || this.getNotAbstractChildNodes().size > 0)»
+	«IF this.getChiAttributes().size > 0 && (this.getNotAbstractNavigableParentNodes().size > 0 || this.getNotAbstractNavigableChildNodes().size > 0)»
 		,
 	«ENDIF»
 	
-	«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
+	«FOREACH this.getNotAbstractNavigableParentNodes() AS currParent SEPARATOR ", "»
 		{
 			name : "«currParent.getRoleName().toFirstLower()»",
 			mapping: "«currParent.getRoleName().toFirstLower()»"
 		}
 	«ENDFOREACH»
 	
-	«IF this.getNotAbstractParentNodes().size > 0 && this.getNotAbstractChildNodes().size > 0»
+	«IF this.getNotAbstractNavigableParentNodes().size > 0 && this.getNotAbstractNavigableChildNodes().size > 0»
 		,
 	«ENDIF»
 	
-	«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
+	«FOREACH this.getNotAbstractNavigableChildNodes() AS currChild SEPARATOR ", "»
 		{
 			name : "«currChild.getRoleName().toFirstLower()»",
 			mapping : "«currChild.getRoleName().toFirstLower()»"
@@ -96,18 +96,18 @@ cwe.model.ModelClassContainer.getInstance().registerClass(new application.«this
 
 «DEFINE relations FOR Chronos::ChiNode»
 	this.relations = {
-	«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
+	«FOREACH this.getNotAbstractNavigableParentNodes() AS currParent SEPARATOR ", "»
 		"«currParent.getRoleName().toFirstLower()»" : {
 			isParent : true,
 			targetModelClassId : "«currParent.type.name»"
 		}
 	«ENDFOREACH»
 
-	«IF (this.getNotAbstractParentNodes().size > 0) && (this.getNotAbstractChildNodes().size > 0)»
+	«IF (this.getNotAbstractNavigableParentNodes().size > 0) && (this.getNotAbstractNavigableChildNodes().size > 0)»
 		,
 	«ENDIF»
 	
-	«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
+	«FOREACH this.getNotAbstractNavigableChildNodes() AS currChild SEPARATOR ", "»
 		"«currChild.getRoleName().toFirstLower()»" : {
 			isParent : false,
 			targetModelClassId : "«currChild.type.name»"
@@ -177,23 +177,23 @@ application.«this.getFullPackageName()».«this.name».prototype.getEditorItems
 		«ENDFOREACH»
 		]})
 		
-		«IF this.getNotAbstractParentNodes().size > 0 || this.getNotAbstractChildNodes().size > 0»
+		«IF this.getNotAbstractNavigableParentNodes().size > 0 || this.getNotAbstractNavigableChildNodes().size > 0»
 			,
 		«ENDIF»
 	«ENDIF»
 	
-	«IF this.getNotAbstractParentNodes().size > 0 || this.getNotAbstractChildNodes().size > 0»
+	«IF this.getNotAbstractNavigableParentNodes().size > 0 || this.getNotAbstractNavigableChildNodes().size > 0»
 		new cwe.editor.control.AssociationsFieldSet({
 			items: [
-		«FOREACH this.getNotAbstractParentNodes() AS currParent SEPARATOR ", "»
+		«FOREACH this.getNotAbstractNavigableParentNodes() AS currParent SEPARATOR ", "»
 			«EXPAND association(true) FOR currParent»
 		«ENDFOREACH»
 		
-		«IF this.getNotAbstractParentNodes().size > 0 && this.getNotAbstractChildNodes().size > 0»
+		«IF this.getNotAbstractNavigableParentNodes().size > 0 && this.getNotAbstractNavigableChildNodes().size > 0»
 			,
 		«ENDIF»
 		
-		«FOREACH this.getNotAbstractChildNodes() AS currChild SEPARATOR ", "»
+		«FOREACH this.getNotAbstractNavigableChildNodes() AS currChild SEPARATOR ", "»
 			«EXPAND association(false) FOR currChild»
 		«ENDFOREACH»
 		
