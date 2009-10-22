@@ -265,6 +265,14 @@ List[uml::Property] getNotAbstractChildNodes(ChiNode this):
 	this.resolveManyToMany(this.getChildNodesRecursive().select(e|!((Chronos::ChiNode) e.type).isAbstract), false)
 ;
 
+List[uml::Property] getNotAbstractNavigableParentNodes(ChiNode this):
+	this.getNotAbstractParentNodes().select(e|e.isNavigable())
+;
+
+List[uml::Property] getNotAbstractNavigableChildNodes(Chronos::ChiNode this):
+	this.getNotAbstractChildNodes().select(e|e.isNavigable())
+;
+
 List[uml::Property] resolveManyToMany(ChiNode this, List[uml::Property] list, boolean includeAbstract):
 	let result = (List[Chronos::ChiNode]) {}:
 	
@@ -272,4 +280,12 @@ List[uml::Property] resolveManyToMany(ChiNode this, List[uml::Property] list, bo
 	result.addAll(((List[Chronos::ChiManyToMany]) list.select(e|((Chronos::ChiNode) e.type).isManyToMany()).type).getOtherEnd(this, includeAbstract)) ->
 	
 	result
+;
+
+List[Chronos::ChiValue] getChiAttributes(Chronos::ChiNode this):
+	this.getChiValuesRecursive().select(e|!e.isGeneratorAdded() || e.isGeneratorInherited())
+;
+
+List[Chronos::ChiValue] getOwnChiAttributes(Chronos::ChiNode this):
+	this.getChiAttributes().select(e|!e.isGeneratorAdded())
 ;

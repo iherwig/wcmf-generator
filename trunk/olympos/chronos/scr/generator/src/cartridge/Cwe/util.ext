@@ -45,10 +45,6 @@ String getCwePackageName(uml::Package this):
 	"application." + this.getFullPackageName() + "." + this.name.toFirstUpper() + "_package"
 ;
 
-List[Chronos::ChiValue] getChiAttributes(Chronos::ChiNode this):
-	this.getChiValuesRecursive().select(e|!e.isGeneratorAdded() || e.isGeneratorInherited())
-;
-
 String sanitizeJsString(String input):
 	input.replaceAll("\\\"", "\\\\\"").replaceAll("\\n", "\\\\n")
 ;

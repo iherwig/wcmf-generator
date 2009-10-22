@@ -23,7 +23,7 @@ Void setPKName(ChiManyToMany this, String name) :
 ;
 
 List[uml::Property] getOtherEnd(Chronos::ChiManyToMany this, Chronos::ChiNode sourceNode, boolean includeAbstract):
-	let result = this.getParentNodes().select(e|!((Chronos::ChiNode) e.type).isAbstract || includeAbstract && sourceNode.isAtOtherNmEnd((Chronos::ChiNode) e.type, this)):
+	let result = this.getParentNodes().select(e|(!((Chronos::ChiNode) e.type).isAbstract || includeAbstract) && sourceNode.isAtOtherNmEnd((Chronos::ChiNode) e.type, this) && e.type != sourceNode):
 	result.setUpper(-1) ->
 	
 	result
