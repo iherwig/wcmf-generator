@@ -89,18 +89,7 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 	var result = this.checkDropable(modelData);
 	
 	if (result == this.dropAllowed) {
-		this.diagram.dropWindow = new Ext.Window({
-			x: e.xy[0],
-			y: e.xy[1],
-			plain: true,
-			closable: false,
-			draggable: false,
-			resizable: false,
-			items: [new Ext.Panel({
-				html: "<div class='x-mask-loading'><div>" + uwm.Dict.translate('Loading ...') + "</div></div>"
-			})]
-		});
-		this.diagram.dropWindow.show();
+		var dropWindowId = this.diagram.showDropWindow(e.xy[0], e.xy[1]);
 		
 		var xOffset = this.diagram.getWorkflow().getAbsoluteX();
 		var yOffset = this.diagram.getWorkflow().getAbsoluteY();
@@ -111,9 +100,9 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 		var y = e.xy[1] - yOffset + scrollTop;
 		
 		if (modelData instanceof uwm.model.ModelObject) {
-			this.diagram.addExistingObject(modelData, x, y);
+			this.diagram.addExistingObject(modelData, x, y, dropWindowId);
 		} else {
-			this.diagram.createNewObject(modelData, x, y);
+			this.diagram.createNewObject(modelData, x, y, dropWindowId);
 		}
 	}
 	
