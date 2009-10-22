@@ -36,8 +36,8 @@ uwm.diagram.AbstractDiagram = function(modelNodeClass) {
 	
 	this.figures = new Ext.util.MixedCollection();
 	this.objects = new Ext.util.MixedCollection();
-	
-	this.dropWindow = null;
+	// progress windows for drop events (stored by id)
+	this.dropWindows = new Ext.util.MixedCollection();
 	this.canvas = null;
 	
 	var self = this;
@@ -793,8 +793,10 @@ uwm.diagram.AbstractDiagram.prototype.getContextMenuPosition = function(x, y) {
  *            x The draw2d x position to add the ModelObject at.
  * @param {int}
  *            y The draw2d x position to add the ModelObject at.
+ * @param {string}
+ *            dropWindowId The id of the drop window to close after the process finished (optional).
  */
-uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, x, y) {
+uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, x, y, dropWindowId) {
 	
 	var self = this;
 	
@@ -830,7 +832,9 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 			self.reestablishExistingClass(modelObject);
 		}
 		
-		self.dropWindow.destroy();
+		if (dropWindowId) {
+			self.hideDropWindow(dropWindowId);
+		}
 	});
 	
 	/*
@@ -855,8 +859,10 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
  *            x The draw2d x position to add the ModelObject at.
  * @param {int}
  *            y The draw2d x position to add the ModelObject at.
+ * @param {string}
+ *            dropWindowId The id of the drop window to close after the process finished (optional).
  */
-uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, y) {
+uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, y, dropWindowId) {
 	var self = this;
 	
 	var actionSet = new uwm.persistency.ActionSet();
@@ -888,7 +894,9 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, 
 		
 		self.figures.add(newObjectOid, newFigureNode);
 		
-		self.dropWindow.destroy();
+		if (dropWindowId) {
+			self.hideDropWindow(dropWindowId);
+		}
 		
 		savedFigureNode = newFigureNode;
 	});
@@ -1007,5 +1015,39 @@ uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentMode
 			
 			graphics.addChildElement(operationGraphics, true);
 		}
+	}
+}
+
+/**
+ * Show a drop progress window and associate it with an id for later reference
+ * The id is optional, if none is given, the function will create one and return it.
+ */
+uwm.diagram.AbstractDiagram.prototype.showDropWindow = function(x, y, id) {
+	var dropWindow = new Ext.Window({
+		x: x,
+		y: y,
+		plain: true,
+		closable: false,
+		draggable: false,
+		resizable: false,
+		items: [new Ext.Panel({
+			html: "<div class='x-mask-loading'><div>" + uwm.Dict.translate('Loading ...') + "</div></div>"
+		})]
+	});
+	dropWindow.show();
+	if (!id) {
+		id = dropWindow.getId();
+	}
+	this.dropWindows.add(id, dropWindow);
+	return id;
+}
+
+/**
+ * Hide the drop progress window with a given id
+ */
+uwm.diagram.AbstractDiagram.prototype.hideDropWindow = function(id) {
+	if (this.dropWindows.containsKey(id)) {
+		this.dropWindows.get(id).destroy();
+		this.dropWindows.removeKey(id);
 	}
 }
