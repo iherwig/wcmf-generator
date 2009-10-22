@@ -74,7 +74,7 @@ class UWMImporterController extends Controller
 	private function check($msg)
 	{
 		$newTime = microtime(true);
-		Log::error(($newTime-$this->lastTime).": $msg", __CLASS__);
+		Log::debug(($newTime-$this->lastTime).": $msg", __CLASS__);
 		$this->lastTime = $newTime;
 	}
 
@@ -295,11 +295,13 @@ class UWMImporterController extends Controller
 		$childObj = $this->load($this->dom->getAttribute('targetOid'));
 
 		if ($childObj) {
+			$this->check("target: ".$childObj->getOID());
 			$parentObj = array_pop($this->parentObjs);
 
 			if ($parentObj) {
-				$this->check("parent: ".$parentObj->getOID());
+				$this->check("source: ".$parentObj->getOID());
 
+				// get the source and target roles for the relation
 				$targetRole = $this->dom->getAttribute('targetRole');
 				if (!$targetRole) {
 					$targetRole = $this->dom->getAttribute('targetType');
@@ -309,20 +311,24 @@ class UWMImporterController extends Controller
 					$sourceRole = self::$roleTargetToSourceMapper[$targetRole];
 				}
 
+				// create templates of the role types and copy the values of
+				// source and target to them (this is necessary in order to
+				// have the correct source and target types)
 				$parentTemplate = $this->persistenceFacade->create($sourceRole, 1);
+				$parentObj->copyValues($parentTemplate);
 				$childTemplate = $this->persistenceFacade->create($targetRole, 1);
+				$childObj->copyValues($childTemplate);
 					
+				// create the nm instance
 				$linkType = $this->findAssociationType($parentTemplate, $childTemplate);
-
 				if (!$linkType) {
 					$this->addErrorMsg("Cannot find linkType: $sourceRole => $targetRole");
 				}
-
 				$this->check('manyToMany linkType: '.$linkType);
 				$link = $this->persistenceFacade->create($linkType, BUILDTYPE_SINGLE);
 
+				// set the attributes to the nm instance
 				$valueNames = array('relationType', 'sourceMultiplicity', 'sourceNavigability', 'targetMultiplicity', 'targetNavigability', 'action', 'config', 'context');
-
 				foreach ($valueNames as $currValueName)	{
 					$attrValue = $this->dom->getAttribute($currValueName);
 
@@ -331,19 +337,16 @@ class UWMImporterController extends Controller
 					}
 				}
 					
+				// establish the source connection
+				$parentTemplate->addChild($link);
+				$link->save();
+
+				// establish the target connection
+				$childTemplate->addChild($link);
+				$link->save();
+					
 				$this->check('link oid: '.$link->getOID());
-					
-				$parentObj->addChild($link);
-				$link->save();
-				$parentObj->save();
-				$parentObj = $this->persistenceFacade->load($parentObj->getOID(), BUILDTYPE_SINGLE);
-					
-				$link = $this->persistenceFacade->load($link->getOID(), BUILDTYPE_SINGLE);
-				$childObj->addChild($link);
-				$link->save();
-					
-				$childObj->save();
-					
+				
 				array_push($this->parentObjs, $parentObj);
 			} else {
 				$this->addErrorMsg('No Parent ManyToMany: '.$this->dom->getAttribute('targetOid'));
