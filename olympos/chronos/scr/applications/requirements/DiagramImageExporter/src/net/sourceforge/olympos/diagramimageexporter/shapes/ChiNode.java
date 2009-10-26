@@ -43,6 +43,7 @@ public class ChiNode extends Figure{
 		drawScaleXLine(g2d, fig, figureInfo, circleLine);
 		drawEllipse(g2d, fig, figureInfo, circle);
 		drawChi(g2d, fig, figureInfo, circle);
+
 		
 		drawScaleChiNode(g2d, fig, figureInfo, infLine1, infLine2, rect);
 

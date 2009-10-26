@@ -61,6 +61,6 @@ public class ChiWorkerExternal extends Figure{
 		drawScaleLine(g2d, createFig, figureInfo, arm);
 		drawScaleLine(g2d, createFig, figureInfo, lineLeft);	
 		
-		drawScaleChi(g2d, createFig, head, figureInfo);
+		drawScaleChi(g2d, createFig, figureInfo, head);
 	}
 }
