@@ -17,18 +17,18 @@ public class ElementDiagram {
 	private final static String PARTICIPATES = "is participates by";
 	private final static String GENERALISATION = "is generalisation by";
 	private final static String INSTANTIATES = "instantiantes";
-	private final static String ASSOCIATION = "Association";
+	private final static String ASSOCIATION = "association";
 	
-//	private final static AllowedConnection specified = new AllowedConnection("is specified by", null, null);
-	
-	private static String path = "D:/Images/";
+	private static String path; // "D:/Images/";
 	
 	private final static String chiRequirementFeature = "ChiRequirementFeature.PNG";
 	private final static String chiRequirementIssu = "ChiRequirementIssue.PNG";
 	private final static String chiRequirementGoal = "ChiRequirementGoal.PNG";
 	private final static String chiRequirementChiRequirement = "ChiRequirement.PNG";
 	private final static String chi = "Chi.PNG";
-
+	private final static String operation = "ChiOperation.png";
+	private final static String attribute = "ChiAttribute.png";
+	
 	private HashMap<EnumFigureType, InfoAllowedConnection> allowedConnection;
 	private HashMap<String, InfoAllowedConnection> allowedConnectionByName;
 
@@ -43,19 +43,22 @@ public class ElementDiagram {
 		this.allowedConnection = connections;
 	}
 	
-	ElementDiagram(String type, String name){//, EnumFontPosition fontPos, String imagePath, HashMap<String, InfoAllowedConnection> connections) {
-		this.typ = type;
+	ElementDiagram(String typ, String name){
+		this.typ = typ;
 		this.name = name;
-//		this.fontPosition = fontPos;
-//		this.imagePath = imagePath;
-//		this.allowedConnectionByName = connections;
 	}
 
 	public ElementDiagram() {
 	}
 
 
-	public static void initCatalog() {
+	public void path(String picturePath){
+		path = picturePath;
+	}
+	
+	public static void initCatalog( String picturePath ) {
+		path = picturePath;
+
 		addToCatalog(initChiGoal());
 		addToCatalog(initRequirement());
 		addToCatalog(initFeature());
@@ -80,6 +83,9 @@ public class ElementDiagram {
 		addToCatalog(initChiWorker());
 		addToCatalog(initChiWorkerExternal());
 		addToCatalog(initChiWorkerInternal());
+		
+		addToCatalog(initOperation());
+		addToCatalog(initAttribute());
 	}
 
 	private static void addToCatalog(ElementDiagram elem) {
@@ -231,6 +237,18 @@ public class ElementDiagram {
 		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_WORKER_EXTERN, "ChiWorkerExternal", EnumFontPosition.UNDER, path + chi , connections);
 		return result;
 	}
+	
+	private static ElementDiagram initOperation(){
+		
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_OPERATION, "ChiOperation", null, path + operation , null);
+		return result;
+	}
+	
+	private static ElementDiagram initAttribute(){
+		
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_ATTRIBUTE, "ChiAttribute", null, path + attribute , null);
+		return result;
+	}
 
 
 	
@@ -239,7 +257,7 @@ public class ElementDiagram {
 	private static ElementDiagram initChiView() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_VIEW, "ChiView", EnumFontPosition.IN_CENTER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_VIEW, "ChiView", EnumFontPosition.IN_CENTER, path + chi , connections);
 		return result;
 	}
 	

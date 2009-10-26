@@ -50,6 +50,6 @@ public class ChiBusinessPartnerPassive extends Figure{
 		drawScaleLine(g2d, createFig, figureInfo, armleft);
 		drawScaleLine(g2d, createFig, figureInfo, armright);
 		
-		drawScaleChi(g2d, createFig, head, figureInfo);
+		drawScaleChi(g2d, createFig, figureInfo, head);
 	}
 }

@@ -27,4 +27,6 @@ public enum EnumFigureType {
 	CHI_CONTROLLER,
 	CHI_NODE,
 	Chi_OBJECT,
+	CHI_OPERATION,
+	CHI_ATTRIBUTE,
 }

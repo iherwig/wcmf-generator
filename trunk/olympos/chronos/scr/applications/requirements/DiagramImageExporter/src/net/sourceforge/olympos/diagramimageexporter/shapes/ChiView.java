@@ -29,7 +29,8 @@ public class ChiView extends RequirementFigure{
 		
 		drawScaleRec(g2d, fig, figureInfo, rect1);
 		drawScaleRec(g2d, fig, figureInfo, rect2);
-
-		drawScaleLine(g2d, fig, figureInfo, infLine1);		
+		drawChiRec(g2d, fig, figureInfo, rect2);
+		drawScaleLine(g2d, fig, figureInfo, infLine1);
+		drawCenterLabel(g2d, fig, figureInfo, rect1, infLine1);
 	}
 }
