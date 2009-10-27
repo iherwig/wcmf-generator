@@ -74,8 +74,11 @@
 	<target name="deploy" depends="redist" description="deploy the exporter to the generator source">
 		<!-- copy libs ... -->
 		<copy todir="${generator.libdir}/" verbose="false">
-			<fileset dir="${redist.dir}/">
+			<fileset dir="${redist.libdir}/">
 				<include name="**/*.jar"/>
+			</fileset>
+			<fileset dir="${redist.dir}/">
+				<include name="${jar.file}"/>
 			</fileset>
 		</copy>
 
