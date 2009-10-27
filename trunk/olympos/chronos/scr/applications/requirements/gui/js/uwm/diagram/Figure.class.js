@@ -59,7 +59,7 @@ uwm.diagram.Figure.prototype.createNewObject = function(diagram, modelClass, x,
 			+ "(modelClass)");
 
 	var workflow = diagram.getWorkflow();
-	var compartment = workflow.getBestCompartmentFigure(x, y);
+	var compartment = null //workflow.getBestCompartmentFigure(x, y);
 
 	/**
 	 * The graphical (draw2d) figure.
@@ -90,7 +90,7 @@ uwm.diagram.Figure.prototype.init = function(modelObject, x, y) {
 
 	var workflow = this.diagram.getWorkflow();
 
-	var compartment = workflow.getBestCompartmentFigure(x, y);
+	var compartment = null //workflow.getBestCompartmentFigure(x, y);
 
 	this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject
 			.getLabel());
@@ -107,7 +107,7 @@ uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
 	var y = this.getPositionY();
 
 	var workflow = diagram.getWorkflow();
-	var compartment = workflow.getBestCompartmentFigure(x, y);
+	var compartment = null //workflow.getBestCompartmentFigure(x, y);
 
 	this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject
 			.getLabel());

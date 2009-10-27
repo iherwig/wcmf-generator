@@ -1780,7 +1780,7 @@ uwm.diagram.autolayout.Layouter.prototype.setupGraph = function() {
 	this.figures = new draw2d.ArrayList();
 	for (var i = 0; i < workflowFigures.getSize(); i++) {
 		var currFigure = workflowFigures.get(i);
-		if (currFigure instanceof uwm.graphics.figure.BaseFigure) {
+		if (currFigure instanceof uwm.graphics.figure.BaseFigure || currFigure instanceof uwm.graphics.figure.ClassFigure) {
 			this.figures.add(currFigure);
 		}
 	}
