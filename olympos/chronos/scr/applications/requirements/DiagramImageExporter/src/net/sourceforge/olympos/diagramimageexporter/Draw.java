@@ -22,7 +22,7 @@ public class Draw {
 	FigureChildren ch = new FigureChildren();
 
 	public String drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, int id) throws JDOMException, Exception {
-		
+
 		// create following Objects
 		DrawFigure drawF = new DrawFigure();
 		DrawConnection drawC = new DrawConnection();
@@ -40,29 +40,41 @@ public class Draw {
 		// edit Diagram
 		editDia.PutFigElementsTogehter();
 
-		// put the Diagram and her Children in an arraylist
-
 		// draw all Figures / Images
 		for (InfoFigureParameter fig : figureArray) {
 			drawF.drawLabeledSimpleFigure(g2d, fig);
 		}
 
-		// ch.addChildren();
+		
+		int [] exist = new int [1000];
+		int i = 0;
 
-		// draw all connections between the Figures and Images
+		//draw all connections between the Figures
 		ArrayList<InfoXmlDiagram> dia = svg.getDiagram();
+		ArrayList<String> existLine = new ArrayList<String>();
+		Boolean ex = false;
 		for (InfoXmlDiagram currDia : dia) {
-			ArrayList<InfoFigureParameter> figure = currDia.getFigure();
-			for (InfoFigureParameter figure1 : figure) {
-				if (figure1.getChildren() != null) {
+			ArrayList<InfoFigureParameter> Parent = currDia.getFigure();
+			for (InfoFigureParameter currParent : Parent) {
+				if (currParent.getChildren() != null) {
 					ArrayList<InfoFigureParameter> children = new ArrayList<InfoFigureParameter>();
-					children = figure1.getChildren();
-					for (InfoFigureParameter figure2 : children) {
-						drawC.drawConnection(g2d, figure1, figure2);
+					String aliasPatrent = currParent.getAlias();
+					EnumFigureType targetPolePatent = currParent.getType();
+					children = currParent.getChildren();
+					for (InfoFigureParameter currChildren : children) {
+						int aliasChild = currParent.getTypeId() ; 
+						EnumFigureType targetPoleClient = currChildren.getType();
+						String key = aliasPatrent + aliasChild + targetPolePatent + targetPoleClient;
+						
+						if(!existLine.contains(key)){
+							drawC.drawConnection(g2d, currParent, currChildren);
+							existLine.add(key);
+						}
 					}
 				}
 			}
 		}
+
 
 		// write the data into a image out
 		boolean useCSS = true;

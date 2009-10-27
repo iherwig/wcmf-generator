@@ -70,7 +70,7 @@ public class DrawConnectionType {
 		Stroke stroke = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0);
 		g2d.setStroke(stroke);
 
-		//get the Type of the source, llok if this is in the  hashtable and save it in elem
+		//get the Type of the source, look if this is in the  hashtable and save it in elem
 		ElementDiagram elem = ElementDiagram.getCatalogEntry(source.getType());
 		HashMap<EnumFigureType, InfoAllowedConnection> alllowedConnection = elem.getAllowedConnection();
 		InfoAllowedConnection connection = alllowedConnection.get(target.getType());

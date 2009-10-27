@@ -2,7 +2,7 @@ package net.sourceforge.olympos.diagramimageexporter;
 
 import java.util.ArrayList;
 
-//in this class are all importen information which has to the read out of the XML-File
+//in this class are all important information which has to the read out of the XML-File
 // parameter + get & set
 public class InfoXmlDiagram {
 	ArrayList<InfoFigureParameter> figure = new ArrayList<InfoFigureParameter>();
