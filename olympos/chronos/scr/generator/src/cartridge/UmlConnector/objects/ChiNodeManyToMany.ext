@@ -69,33 +69,33 @@ cwm::ChiNodeManyToMany convertToCwm(Chronos::ChiManyToMany c) :
 		un.chiValue.addAll(c.ownedAttribute.typeSelect(Chronos::ChiValue).convertToCwm()) ->
 	
 		un.setId(c.getId()) ->
-		un.setTableName(c.getTaggedValue("Chronos::ChiManyToMany", "table_name").toString()) ->
-		un.setPkName(c.getTaggedValue("Chronos::ChiManyToMany", "pk_name").toString()) ->
-		un.setOrderby(c.getTaggedValue("Chronos::ChiManyToMany", "orderby").toString()) ->
-		un.setParentOrder(c.getTaggedValue("Chronos::ChiManyToMany", "parent_order").toString()) ->
-		un.setChildOrder(c.getTaggedValue("Chronos::ChiManyToMany", "child_order").toString()) ->
-		un.setDisplayValue(c.getTaggedValue("Chronos::ChiManyToMany", "display_value").toString()) ->
+		un.setTableName((String) c.getTaggedValue("Chronos::ChiManyToMany", "table_name")) ->
+		un.setPkName((String) c.getTaggedValue("Chronos::ChiManyToMany", "pk_name")) ->
+		un.setOrderby((String) c.getTaggedValue("Chronos::ChiManyToMany", "orderby")) ->
+		un.setParentOrder((String) c.getTaggedValue("Chronos::ChiManyToMany", "parent_order")) ->
+		un.setChildOrder((String) c.getTaggedValue("Chronos::ChiManyToMany", "child_order")) ->
+		un.setDisplayValue((String) c.getTaggedValue("Chronos::ChiManyToMany", "display_value")) ->
+		un.setIsSoap(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_soap") == Chronos::boolean::^true) ->
+		un.setIsSearchable(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_searchable") == Chronos::boolean::^true) ->
 		//un.setIsOrdered(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_ordered")) ->
 		//un.setIsSoap(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_soap")) ->
 		//un.setIsSearchable(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_searchable")) ->
-		un.setInitparams(c.getTaggedValue("Chronos::ChiManyToMany", "initparams").toString()) ->
-		un.setAuthor(c.getTaggedValue("Chronos::ChiManyToMany", "Author").toString()) ->
-		un.setStatus(c.getTaggedValue("Chronos::ChiManyToMany", "Status").toString()) ->
-		un.setAlias(c.getTaggedValue("Chronos::ChiManyToMany", "Alias").toString()) ->
-		un.setVersion(c.getTaggedValue("Chronos::ChiManyToMany", "Version").toString()) ->
+		un.setInitparams((String) c.getTaggedValue("Chronos::ChiManyToMany", "initparams")) ->
+		un.setAuthor((String) c.getTaggedValue("Chronos::ChiManyToMany", "Author")) ->
+		un.setStatus((String) c.getTaggedValue("Chronos::ChiManyToMany", "Status")) ->
+		un.setAlias((String) c.getTaggedValue("Chronos::ChiManyToMany", "Alias")) ->
+		un.setVersion((String) c.getTaggedValue("Chronos::ChiManyToMany", "Version")) ->
 		un.setName(c.name) ->
 		un.setNotes(c.getComment()) ->
-		un.setCreated(c.getTaggedValue("Chronos::ChiManyToMany", "created").toString()) ->
-		un.setCreator(c.getTaggedValue("Chronos::ChiManyToMany", "creator").toString()) ->
-		un.setLastEditor(c.getTaggedValue("Chronos::ChiManyToMany", "last_editor").toString()) ->
-		un.setModified(c.getTaggedValue("Chronos::ChiManyToMany", "modified").toString()) ->
+		un.setCreated((String) c.getTaggedValue("Chronos::ChiManyToMany", "created")) ->
+		un.setCreator((String) c.getTaggedValue("Chronos::ChiManyToMany", "creator")) ->
+		un.setLastEditor((String) c.getTaggedValue("Chronos::ChiManyToMany", "last_editor")) ->
+		un.setModified((String) c.getTaggedValue("Chronos::ChiManyToMany", "modified")) ->
 
 		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild())
-		//Commented out until wCMF remodeling of relations
-		//Prevents import from finishing
-		// ->
-		//un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization", "ChiNodeManyToManyTarget")) ->
-		//un.manyToMany.addAll(c.getAssociations().select(e|e.ownedEnd.size >= 2 && e.ownedEnd.get(0).type == c).convertToMany(c))
+		 ->
+		un.manyToMany.addAll(((List[uml::Class]) c.getSubClasses()).convertToMany("generalization", "NodeManyToManyTarget")) ->
+		un.manyToMany.addAll(c.getAssociations().convertToMany(c).typeSelect(cwm::ManyToMany))
 	) ->
 	un
 ;

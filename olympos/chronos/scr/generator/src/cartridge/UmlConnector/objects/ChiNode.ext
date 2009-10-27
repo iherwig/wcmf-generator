@@ -76,31 +76,33 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 		un.operation.addAll(c.ownedOperation.convertToCwm()) ->
 	
 		un.setId(c.getId()) ->
-		un.setTableName(c.getTaggedValue("Chronos::ChiNode", "table_name").toString()) ->
-		un.setPkName(c.getTaggedValue("Chronos::ChiNode", "pk_name").toString()) ->
-		un.setOrderby(c.getTaggedValue("Chronos::ChiNode", "orderby").toString()) ->
-		un.setParentOrder(c.getTaggedValue("Chronos::ChiNode", "parent_order").toString()) ->
-		un.setChildOrder(c.getTaggedValue("Chronos::ChiNode", "child_order").toString()) ->
-		un.setDisplayValue(c.getTaggedValue("Chronos::ChiNode", "display_value").toString()) ->
+		un.setTableName((String) c.getTaggedValue("Chronos::ChiNode", "table_name")) ->
+		un.setPkName((String) c.getTaggedValue("Chronos::ChiNode", "pk_name")) ->
+		un.setOrderby((String) c.getTaggedValue("Chronos::ChiNode", "orderby")) ->
+		un.setParentOrder((String) c.getTaggedValue("Chronos::ChiNode", "parent_order")) ->
+		un.setChildOrder((String) c.getTaggedValue("Chronos::ChiNode", "child_order")) ->
+		un.setDisplayValue((String) c.getTaggedValue("Chronos::ChiNode", "display_value")) ->
+		un.setIsAbstract(c.isAbstract) ->
+		un.setVisibility(c.visibility.toString()) ->
 		//un.setIsOrdered(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_ordered")) ->
-		//un.setIsSoap(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_soap")) ->
-		//un.setIsSearchable(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_searchable")) ->
-		un.setInitparams(c.getTaggedValue("Chronos::ChiNode", "initparams").toString()) ->
-		un.setAuthor(c.getTaggedValue("Chronos::ChiNode", "Author").toString()) ->
-		un.setStatus(c.getTaggedValue("Chronos::ChiNode", "Status").toString()) ->
-		un.setAlias(c.getTaggedValue("Chronos::ChiNode", "Alias").toString()) ->
-		un.setVersion(c.getTaggedValue("Chronos::ChiNode", "Version").toString()) ->
+		un.setIsSoap(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_soap") == Chronos::boolean::^true) ->
+		un.setIsSearchable(c.getValue(c.getAppliedStereotype("Chronos::ChiNode"), "is_searchable") == Chronos::boolean::^true) ->
+		un.setInitparams((String) c.getTaggedValue("Chronos::ChiNode", "initparams")) ->
+		un.setAuthor((String) c.getTaggedValue("Chronos::ChiNode", "Author")) ->
+		un.setStatus((String) c.getTaggedValue("Chronos::ChiNode", "Status")) ->
+		un.setAlias((String) c.getTaggedValue("Chronos::ChiNode", "Alias")) ->
+		un.setVersion((String) c.getTaggedValue("Chronos::ChiNode", "Version")) ->
 		un.setName(c.name) ->
 		un.setNotes(c.getComment()) ->
-		un.setCreated(c.getTaggedValue("Chronos::ChiNode", "created").toString()) ->
-		un.setCreator(c.getTaggedValue("Chronos::ChiNode", "creator").toString()) ->
-		un.setLastEditor(c.getTaggedValue("Chronos::ChiNode", "last_editor").toString()) ->
-		un.setModified(c.getTaggedValue("Chronos::ChiNode", "modified").toString()) ->
+		un.setCreated((String) c.getTaggedValue("Chronos::ChiNode", "created")) ->
+		un.setCreator((String) c.getTaggedValue("Chronos::ChiNode", "creator")) ->
+		un.setLastEditor((String) c.getTaggedValue("Chronos::ChiNode", "last_editor")) ->
+		un.setModified((String) c.getTaggedValue("Chronos::ChiNode", "modified")) ->
 
 		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild())
 		 ->
-		un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization", "ChiNodeTarget")) ->
-		un.manyToMany.addAll(c.getAssociations().convertToMany(c))
+		un.manyToMany.addAll(((List[uml::Class]) c.getSubClasses()).convertToMany("generalization", "ChiNodeTarget")) ->
+		un.manyToMany.addAll(c.getAssociations().convertToMany(c).typeSelect(cwm::ManyToMany))
 	) ->
 	un
 ;
