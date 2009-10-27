@@ -2,18 +2,9 @@
 
 	<property file="build.properties"/>
 
-	<path id="lib">
+	<path id="lib.path">
 		<fileset dir="${lib.dir}">
-			<include name="*.jar"/>
-		</fileset>
-		<fileset dir="${lib.dir}/openoffice">
-			<include name="*.jar"/>
-		</fileset>
-		<fileset dir="${lib.dir}/ant">
-			<include name="*.jar"/>
-		</fileset>
-		<fileset dir="${lib.dir}/beautifier">
-			<include name="*.jar"/>
+			<include name="**/*.jar"/>
 		</fileset>
 	</path>
 
@@ -26,7 +17,7 @@
 		<tstamp/>
 		<mkdir dir="${build.dir}"/>
 		<javac encoding="utf-8" srcdir="${source.dir}" destdir="${build.dir}" debug="${debug}" excludesfile="compile-excludes">
-			<classpath refid="lib"/>
+			<classpath refid="lib.path"/>
 		</javac>
 	</target>
 
@@ -47,7 +38,7 @@
 	</target>
 	
 	<manifestclasspath property="lib.list" jarfile="${jar.file}">
-		<classpath refid="lib" />
+		<classpath refid="lib.path" />
 	</manifestclasspath>
 	
 	<target name="redist" depends="preparedist">
