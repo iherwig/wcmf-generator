@@ -1107,6 +1107,7 @@
 		<xsd:attribute name="action" type="xsd:string"/>
 		<xsd:attribute name="config" type="xsd:string"/>
 		<xsd:attribute name="context" type="xsd:string"/>
+		<xsd:attribute name="name" type="xsd:string"/>
 	</xsd:complexType>
 	<xsd:complexType name="Child">
 		<xsd:attribute name="targetType" type="xsd:string"/>

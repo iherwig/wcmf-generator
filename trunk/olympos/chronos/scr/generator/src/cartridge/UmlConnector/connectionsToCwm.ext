@@ -91,22 +91,37 @@ cwm::ManyToMany convertToMany(uml::Association this, uml::Class source) :
 	let result = new cwm::ManyToMany:
 	let ownEnd = this.memberEnd.selectFirst(e|e.type == source):
 	let otherEnd = ownEnd.getOtherEnd():
-
-	info("Association convert: " + this.name + " class: " + source.name + " ends: " + this.memberEnd.type) ->
 	
-	result.setRelationType(ownEnd.aggregation.getUwmRelationType()) ->
+	ownEnd == this.memberEnd.get(0) ? (
+		info("Association convert: " + this.name + " class: " + source.name + " ends: " + this.memberEnd.type) ->
+		
+		result.setName(this.name) ->
 
-	result.setTargetType(getTargetType(otherEnd.type.metaType.name.split("::").last())) ->
-	result.setTargetRole(getTargetRole(otherEnd.type.metaType.name.split("::").last())) ->
-	result.setTargetOid(otherEnd.type.getId()) ->
-
-	result.setSourceMultiplicity(ownEnd.getUwmMultiplicity()) ->
-	result.setSourceNavigability(ownEnd.getUwmNavigability()) ->
-
-	result.setTargetMultiplicity(otherEnd.getUwmMultiplicity()) ->
-	result.setTargetNavigability(otherEnd.getUwmNavigability()) ->
+		result.setRelationType(ownEnd.getMoreSpecificAggregationKind(otherEnd).getUwmRelationType()) ->
 	
-	result
+		result.setTargetType(getTargetType(otherEnd.type.metaType.name.split("::").last())) ->
+		result.setTargetRole(getTargetRole(otherEnd.type.metaType.name.split("::").last(), ownEnd.type.metaType.name.split("::").last())) ->
+		result.setTargetOid(otherEnd.type.getId()) ->
+	
+		result.setSourceMultiplicity(ownEnd.getUwmMultiplicity()) ->
+		result.setSourceNavigability(ownEnd.getUwmNavigability()) ->
+	
+		result.setTargetMultiplicity(otherEnd.getUwmMultiplicity()) ->
+		result.setTargetNavigability(otherEnd.getUwmNavigability()) ->
+
+		result
+	) : Void
+;
+
+uml::AggregationKind getMoreSpecificAggregationKind(uml::Property ownEnd, uml::Property otherEnd):
+	ownEnd.aggregation == uml::AggregationKind::composite || otherEnd.aggregation == uml::AggregationKind::composite ?
+		uml::AggregationKind::composite
+	: (
+		ownEnd.aggregation == uml::AggregationKind::shared || otherEnd.aggregation == uml::AggregationKind::shared ?
+			uml::AggregationKind::shared
+		:
+			uml::AggregationKind::none
+	)
 ;
 
 String getUwmRelationType(uml::AggregationKind this):
@@ -129,11 +144,17 @@ String getTargetType(String this):
 	this
 ;
 
-String getTargetRole(String this):
-	switch (this) {
-		case "ChiNode": "ChiNodeTarget"
-		case "ChiManyToMany": "NMChiNodeChiMany2ManyChiNodeEnd"
-		default: this
+String getTargetRole(String otherEnd, String ownEnd):
+	switch (otherEnd) {
+		case "ChiNode": (
+			switch(ownEnd) {
+				case "ChiNode": "ChiNodeTarget"
+				case "ChiManyToMany": "NMChiNodeChiMany2ManyChiNodeEnd"
+				default: "UNKNOWN"
+			}
+		)
+		case "ChiManyToMany": "NodeManyToManySource"
+		default: otherEnd
 	}
 ;
 

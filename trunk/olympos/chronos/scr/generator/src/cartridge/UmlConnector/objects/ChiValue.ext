@@ -50,17 +50,17 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	let un = new cwm::ChiValue : (
 		un.setId(c.getId()) ->
 		
-		un.setDefault(c.^default.toString()) ->
-		//un.setPropertyType(c.getTaggedValue("Chronos::ChiValue", "PropertyType").toString()) ->
-		un.setAppDataType(c.getTaggedValue("Chronos::ChiValue", "app_data_type").toString()) ->
-		un.setDbDataType(c.getTaggedValue("Chronos::ChiValue", "db_data_type").toString()) ->
-		//un.setIsEditable(c.getTaggedValue("Chronos::ChiValue", "is_editable")) ->
-		un.setInputType(c.getTaggedValue("Chronos::ChiValue", "input_type").toString()) ->
-		un.setDisplayType(c.getTaggedValue("Chronos::ChiValue", "display_type").toString()) ->
-		un.setRestrictionsMatch(c.getTaggedValue("Chronos::ChiValue", "restrictions_match").toString()) ->
-		un.setRestrictionsNotMatch(c.getTaggedValue("Chronos::ChiValue", "restrictions_not_match").toString()) ->
-		un.setRestrictionsDescription(c.getTaggedValue("Chronos::ChiValue", "restrictions_description").toString()) ->
-		un.setColumnName(c.getTaggedValue("Chronos::ChiValue", "column_name").toString()) ->
+		un.setDefault((String) c.^default) ->
+		un.setPropertyType(c.type.name) ->
+		un.setAppDataType((String) c.getTaggedValue("Chronos::ChiValue", "app_data_type")) ->
+		un.setDbDataType((String) c.getTaggedValue("Chronos::ChiValue", "db_data_type")) ->
+		un.setIsEditable(c.getTaggedValue("Chronos::ChiValue", "is_editable") == Chronos::boolean::^true) ->
+		un.setInputType((String) c.getTaggedValue("Chronos::ChiValue", "input_type")) ->
+		un.setDisplayType((String) c.getTaggedValue("Chronos::ChiValue", "display_type")) ->
+		un.setRestrictionsMatch((String) c.getTaggedValue("Chronos::ChiValue", "restrictions_match")) ->
+		un.setRestrictionsNotMatch((String) c.getTaggedValue("Chronos::ChiValue", "restrictions_not_match")) ->
+		un.setRestrictionsDescription((String) c.getTaggedValue("Chronos::ChiValue", "restrictions_description")) ->
+		un.setColumnName((String) c.getTaggedValue("Chronos::ChiValue", "column_name")) ->
 		//un.setAlias(c.getTaggedValue("Chronos::ChiValue", "Alias").toString()) ->
 		//un.setVersion(c.getTaggedValue("Chronos::ChiValue", "Version").toString()) ->
 		un.setName(c.name) ->
