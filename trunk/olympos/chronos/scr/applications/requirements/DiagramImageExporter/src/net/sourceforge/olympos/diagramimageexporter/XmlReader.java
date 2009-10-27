@@ -19,28 +19,6 @@ public class XmlReader {
 	XmlReader() {
 	}
 
-	// ////////////////////////////////////////////////////////////////////////////
-//	public ArrayList<InfoFigureParameter> XML() {
-//		String filename = xmlFilePath;
-//		Document doc = null;
-//		try {
-//			doc = new SAXBuilder().build(filename);
-//		} catch (JDOMException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//
-//		// get Root Element
-//		Element CwmExport = doc.getRootElement();
-//		Element Model = CwmExport.getChild("Model");
-//
-//		// ReaderXmlDataDiagram(Model, 0);
-//		findNode(Model, 0);
-//
-//		return null;
-//	}
-
 	public ArrayList<InfoFigureParameter> XML(String Path) {
 		String filename = "file:///" + Path;
 		Document doc = null;

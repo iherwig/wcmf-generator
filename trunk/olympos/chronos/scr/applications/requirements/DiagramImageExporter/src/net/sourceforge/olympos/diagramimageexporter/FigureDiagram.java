@@ -15,7 +15,7 @@ public class FigureDiagram {
 				String figAlias = currFig.getAlias();
 				for (InfoXmlFigure xmlFig1 : xmlFig) {
 					String xmlAlias = xmlFig1.getAlias();
-					if (figAlias.endsWith(xmlAlias)) {
+					if (figAlias.equals(xmlAlias)) {
 						currFig.setType(xmlFig1.getTyp());
 						currFig.setLabel(xmlFig1.getName());
 					}
@@ -58,24 +58,22 @@ public class FigureDiagram {
 
 	private void addChild(ArrayList<InfoXmlFigure> xmlFig) {
 		String typ = null;
+		
 
 		for (InfoXmlFigure currXmlFig1 : xmlFig) {
 			int id1 = currXmlFig1.getId();
-			String alias1 = currXmlFig1.getAlias();
+			String alias1 = currXmlFig1.getAlias();		
 			for (InfoXmlFigure currXmlFig2 : xmlFig) {
 				String alias2 = currXmlFig2.getAlias();
 				ArrayList<InfoXmlConnection> xmlFigCon = currXmlFig2.getChildren();
 				for (InfoXmlConnection currXmlFigCon : xmlFigCon) {
 					if (currXmlFigCon.getTargetOid() == id1) {
 						typ = currXmlFigCon.getType();
-						// ParentChlid ParChi = new ParentChlid(alias1, alias2,
-						// typ);
 						addChildren(alias1, alias2, typ);
 					}
 				}
 			}
 		}
-
 	}
 
 	private void addChildren(String alias1, String alias2, String typ) {
@@ -102,11 +100,6 @@ public class FigureDiagram {
 		}
 
 	}
-
-	// private void elseif(boolean equals) {
-	// // TODO Auto-generated method stub
-	//		
-	// }
 
 	// set the size of the image
 	private void setSize() {
