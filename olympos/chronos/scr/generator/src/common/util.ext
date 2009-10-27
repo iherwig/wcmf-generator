@@ -3,16 +3,16 @@ import uml;
 /**
  * Logging
  */
-Void debug(Object o) : 
+Object debug(Object o) : 
 	JAVA net.sourceforge.olympos.oaw.extend.Logger.debug(java.lang.Object)
 ;	
-Void info(Object o) : 
+Object info(Object o) : 
 	JAVA net.sourceforge.olympos.oaw.extend.Logger.info(java.lang.Object)
 ;	
-Void warn(Object o) : 
+Object warn(Object o) : 
 	JAVA net.sourceforge.olympos.oaw.extend.Logger.warn(java.lang.Object)
 ;	
-Void error(Object o) : 
+Object error(Object o) : 
 	JAVA net.sourceforge.olympos.oaw.extend.Logger.error(java.lang.Object)
 ;
    

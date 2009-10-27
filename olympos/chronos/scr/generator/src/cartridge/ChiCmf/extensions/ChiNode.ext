@@ -274,7 +274,7 @@ List[uml::Property] getNotAbstractNavigableChildNodes(Chronos::ChiNode this):
 ;
 
 List[uml::Property] resolveManyToMany(ChiNode this, List[uml::Property] list, boolean includeAbstract):
-	let result = (List[Chronos::ChiNode]) {}:
+	let result = (List[uml::Property]) {}:
 	
 	result.addAll(list.select(e|!((Chronos::ChiNode) e.type).isManyToMany())) ->
 	result.addAll(((List[Chronos::ChiManyToMany]) list.select(e|((Chronos::ChiNode) e.type).isManyToMany()).type).getOtherEnd(this, includeAbstract)) ->

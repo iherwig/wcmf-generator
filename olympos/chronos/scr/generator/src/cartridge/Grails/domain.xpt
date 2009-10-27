@@ -1,26 +1,35 @@
 «IMPORT uml»
 «IMPORT Chronos»
 
+
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
 
 «EXTENSION cartridge::ChiCmf::extensions::ChiNode»
+«EXTENSION cartridge::ChiCmf::extensions::util»
 «EXTENSION cartridge::Grails::classtools»
 
 «DEFINE root FOR uml::Model»
-	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(ChiNode)»
+	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(ChiNode).select(e|!e.isManyToMany())»
 «ENDDEFINE»
+
+«REM»For the time being, all package references are commented.«ENDREM»
 
 «REM» Main domain root «ENDREM»
 «DEFINE domainClass FOR ChiNode»
 	«info("Generating " + this.name)»
+	«REM»
 	«LET this.getNearestPackage().getPackageName() AS fullQualifiedPackage»
 	«FILE (!fullQualifiedPackage.isNullOrEmpty() ? fullQualifiedPackage.asPath() + "/" : "") + this.name +".groovy"-»
+	«ENDREM»
+	«FILE this.name +".groovy"-»
+«REM»
 «IF !fullQualifiedPackage.isNullOrEmpty()-»
 package «fullQualifiedPackage»
 «ENDIF-»
 
 	«EXPAND Import FOR this-»
+«ENDREM»
 
 /**
  * «this.getComment("\n * ")»
@@ -54,7 +63,7 @@ class «name-»
 «EXPAND Method(this) FOREACH ownedOperation-»
 }
 	«ENDFILE»
-	«ENDLET»
+	«REM»«ENDLET»«ENDREM»
 «ENDDEFINE»	
 
 «DEFINE Import FOR uml::Class-»
@@ -65,7 +74,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «ENDDEFINE»
 
 «DEFINE MappedBy FOR ChiNode-»
-«LET {}.addAll(this.getParentNodesRecursive()).addAll(this.getChildNodesRecursive()) AS relatives-»
+«LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()) AS relatives-»
 «IF relatives.size > 0-»
 	/*
 	static mappedBy = [
@@ -81,7 +90,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «DEFINE Mapping FOR ChiNode-»
 	static mapping = {
 			tablePerHierarchy false
-«FOREACH this.getChildNodesRecursive() AS child-»
+«FOREACH this.getNotAbstractNavigableChildNodes() AS child-»
 «LET child.getRoleName().toFirstLower().sanitizeType()+this.getHierarchyRole(child) AS name-»
 «IF child.aggregation == AggregationKind::composite-»
 			«name»: "create,save-update"
@@ -97,7 +106,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» simple reference «ENDREM»
 «DEFINE ReferenceProperties FOR ChiNode-»
-«LET {}.addAll(this.getParentNodesRecursive()).addAll(this.getChildNodesRecursive()).select(e|e.association.isOneToOneAssociation()) AS others-»
+«LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()).select(e|e.association.isOneToOneAssociation()) AS others-»
 «IF others.size > 0»
 «FOREACH others AS other-»
 	«other.type.name.sanitizeType()» «other.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(other)»
@@ -108,7 +117,12 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM»
 «DEFINE ManyToOneParents FOR ChiNode-»
-«LET this.getParentNodesRecursive().select(e|!e.association.isOneToOneAssociation()) AS parents-»
+«LET {}
+	.addAll(this.getNotAbstractNavigableParentNodes().select(e|!e.association.isOneToOneAssociation()))
+	.addAll(this.getNotAbstractNavigableChildNodes().select(e|
+		{}.addAll(e.type.getSuperClassesRecursive()).add(e.type).contains(this.getFirstManyToManyChild(e.type))
+	))
+ AS parents -»
 «IF parents.size > 0-»
 	static belongsTo = [
 	«FOREACH parents AS parent SEPARATOR ","-»
@@ -121,7 +135,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM»
 «DEFINE OneToManyChildren FOR ChiNode-»
-«LET this.getChildNodesRecursive().select(e|!e.association.isOneToOneAssociation()) AS children-»
+«LET this.getNotAbstractNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
 «IF children.size > 0»
 	static hasMany = [
 «FOREACH children AS child SEPARATOR ","-»
@@ -134,7 +148,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» fill constraints for attributes  «ENDREM»
 «DEFINE Constraints FOR ChiNode-»
-«LET {}.addAll(this.getParentNodesRecursive()).addAll(this.getChildNodesRecursive()) AS constraintAttributes-»
+«LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()) AS constraintAttributes-»
 «IF constraintAttributes.size > 0-»
 	static constraints = {
 	«FOREACH constraintAttributes AS c-»

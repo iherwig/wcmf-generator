@@ -122,10 +122,10 @@ String getValuePostfix(uml::Type this):
  * the ChiNode this
  */
 String getHierarchyRole(Chronos::ChiNode this, Property p):
-	!(this.isParentNode(p.type) || this.isChildNode(p.type)) ? 
+	!(this.isParentNode((Chronos::ChiNode) p.type) || this.isChildNode((Chronos::ChiNode) p.type)) ? 
 		""
 	: (
-		this.isParentNode(p.type) ? "Parent" : "Child"
+		this.isParentNode((Chronos::ChiNode) p.type) ? "Parent" : "Child"
 	)
 ;
 
@@ -136,7 +136,7 @@ String asPath(String package):
 	package.replaceAll("\\.", "/")
 ;
 	
-List[uml::Class] getImportedClasses(uml::Class this):
+List[uml::Class] getImportedClasses(Chronos::ChiNode this):
 	let fullQualifiedName = this.getNearestPackage().getPackageName():
 	let result = {}:
 	result.addAll(this.superClass) ->
@@ -149,4 +149,18 @@ List[uml::Class] getImportedClasses(uml::Class this):
 
 List[uml::Property] getManyProperties(uml::Association this, uml::Class parentClass):
 	this.memberEnd.select(s|s.isReferenceMultivalued(parentClass) && s.getOtherEnd().isNavigable())
+;
+
+Chronos::ChiManyToMany getManyToMany(Chronos::ChiNode this, Chronos::ChiNode otherEnd):
+	this.getModel().allOwnedElements().typeSelect(Chronos::ChiManyToMany)
+	.selectFirst(e|e.getParentNodes().type.containsAll({this, otherEnd}))
+;
+
+uml::Property getFirstManyToManyChild(Chronos::ChiNode this, Chronos::ChiNode otherEnd):
+	let parents = this.getManyToMany(otherEnd).getParentNodes():
+
+	parents.size > 0 ?
+		parents.get(0).type
+	:
+		Void
 ;
