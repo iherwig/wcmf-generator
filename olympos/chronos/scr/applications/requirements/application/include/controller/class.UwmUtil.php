@@ -217,6 +217,9 @@ class UwmUtil {
 					if (self::$processVirtualPackages) {
 						self::processPackage($currChild);
 					}
+					else {
+						self::processDiagram($currChild);
+					}
 					break;
 
 				case 'ChiBusinessProcess':
@@ -416,6 +419,56 @@ class UwmUtil {
 		self::$dom->endElement();
 	}
 
+	private static function processDiagram($currNode) {
+		self::check($currNode->getId());
+		self::$dom->startElement($currNode->getType());
+
+		self::appendAttributes($currNode);
+		self::registerExportedNode($currNode);
+	
+		$currNode->loadChildren('Figure');
+		$children = $currNode->getChildren();
+		foreach ($children as $currChild)
+		{
+			if ($currChild->getType() == 'Figure') {
+				self::processFigure($currChild);
+			}
+		}
+		
+		self::$dom->endElement();
+	}
+
+	private static function processFigure($currNode) {
+		
+		self::check($currNode->getId());
+		self::$dom->startElement($currNode->getType());
+		
+		// get the alias of the object represented by the figure
+		$alias = '';
+		$parentoids = $currNode->getProperty('parentoids') ;
+		foreach ($parentoids as $poid) {
+			// the object represented by the figure is the parent, that is no diagram
+			if (PersistenceFacade::getOIDParameter($poid, 'type') != 'Diagram') {
+				$persistenceFacade = &PersistenceFacade::getInstance();
+				$obj = &$persistenceFacade->load($poid, BUILDDEPTH_SINGLE);
+				$alias = $obj->getValue('Alias', DATATYPE_ATTRIBUTE);
+				break;
+			}
+		}
+		
+		self::appendAttributes($currNode);
+		self::$dom->writeAttribute('Alias', $alias);
+		self::registerExportedNode($currNode);
+		
+		$currNode->loadParents();
+		$parents = $currNode->getParents();
+		foreach ($parents as $currParent) {
+			self::processParent($currParent);
+		}
+		
+		self::$dom->endElement();
+	}
+
 	private static function processNode($currNode)
 	{
 		self::check($currNode->getId());
@@ -431,10 +484,6 @@ class UwmUtil {
 			if (self::processManyToMany($currChild, $currNode)) {
 				//do nothing
 			}
-			/*else if ($currNode->getType() != 'Diagram' && $currChild->getType() == 'Figure')
-			 {
-			 self::processNode($currChild);
-			 }*/
 			else {
 				self::processChild($currChild);
 			}
@@ -442,12 +491,16 @@ class UwmUtil {
 
 		$parents = $currNode->getParents();
 		foreach ($parents as $currParent) {
-			self::$dom->startElement('Parent');
-			self::$dom->writeAttribute('targetType', $currParent->getType());
-			self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
-			self::$dom->endElement();
+			self::processParent($currParent);
 		}
 
+		self::$dom->endElement();
+	}
+
+	private static function processParent($currParent) {
+		self::$dom->startElement('Parent');
+		self::$dom->writeAttribute('targetType', $currParent->getType());
+		self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
 		self::$dom->endElement();
 	}
 
