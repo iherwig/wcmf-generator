@@ -1,0 +1,92 @@
+<project name="DiagramImageExporter" default="redist" basedir=".">
+
+	<property file="build.properties"/>
+
+	<fileset id="lib.jars" dir="${lib.dir}">
+		<include name="**/*.jar"/>
+	</fileset>
+
+	<path id="lib.path">
+		<fileset refid="lib.jars"/>
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}" verbose="false" failonerror="false"/>
+		<delete dir="${redist.dir}" verbose="false" failonerror="false"/>
+	</target>
+
+	<target name="compile" depends="clean">
+		<tstamp/>
+		<mkdir dir="${build.dir}"/>
+		<javac encoding="utf-8" srcdir="${source.dir}" destdir="${build.dir}" debug="${debug}">
+			<classpath refid="lib.path"/>
+		</javac>
+	</target>
+
+	<target name="buildinfo" depends="compile">
+		<propertyfile file="${build.info}"
+		 comment="Build Information File - DO NOT MODIFY">
+		    <entry key="version"
+		     value="${version}"/>
+		    <entry key="build"
+		     type="int" default="0000"
+		     operation="+" pattern="0000"/>
+		</propertyfile>		
+	    <property file="${build.info}"/>
+	</target>
+
+	<target name="preparedist" depends="buildinfo">
+		<mkdir dir="${redist.dir}"/>
+	</target>
+	
+	<manifestclasspath property="lib.list" jarfile="${jar.file}">
+		<classpath refid="lib.path" />
+	</manifestclasspath>
+	
+	<target name="redist" depends="preparedist" description="create a zip file of the exporter build">
+		<jar jarfile="${redist.dir}/${jar.file}">
+		<fileset dir="${build.dir}"/>
+			<manifest>
+				<attribute name="Main-Class" value="net.sourceforge.olympos.diagramimageexporter.SVGGenerator"/>
+				<attribute name="DiagramImageExporter-Version" value="${version}.${build}"/>
+				<attribute name="Class-Path" value=". ${lib.list}"/>
+		   </manifest>
+		</jar>
+
+		<!-- copy all libs ... -->
+		<copy todir="${redist.libdir}/" verbose="false">
+			<fileset refid="lib.jars"/>
+		</copy>
+
+		<!-- copy all files ... -->
+		<copy todir="${redist.dir}/" verbose="false">
+			<fileset dir=".">
+				<include name="Images/**/*.*"/>
+			</fileset>
+			<fileset dir=".">
+				<include name="${build.info}"/>
+			</fileset>
+		</copy>
+
+		<zip destfile="${zip.dir}/DiagramImageExporter-${version}.zip" basedir="${redist.dir}"/>
+	</target>
+
+	<target name="deploy" depends="redist" description="deploy the exporter to the generator source">
+		<!-- copy libs ... -->
+		<copy todir="${generator.libdir}/" verbose="false">
+			<fileset dir="${redist.dir}/">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+
+		<!-- copy resources ... -->
+		<copy todir="${generator.cartridge}/" verbose="false">
+			<fileset dir="${redist.dir}/">
+				<include name="Images/**/*.*"/>
+			</fileset>
+		</copy>
+
+		<zip destfile="${zip.dir}/DiagramImageExporter-${version}.zip" basedir="${redist.dir}"/>
+	</target>
+
+</project>
