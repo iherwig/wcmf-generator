@@ -25,6 +25,7 @@ uwm.ui.ExportAssistent = function(uwmClassName, oid) {
 	
 	this.uwmClassName = uwmClassName;
 	this.oid = oid;
+	this.exportButton = null;
 	
 	uwm.persistency.Persistency.getInstance().templatelist(function(options, data) {
 		self.JsonSuccess(options, data);
@@ -157,6 +158,17 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 		sm : new Ext.grid.RowSelectionModel( {
 			singleSelect : true
 		}),
+		listeners: {
+			'cellclick': function(grid, rowIndex, columnIndex, e) {
+				// enable the export button
+				var record = grid.getStore().getAt(rowIndex);
+				if (record) {
+					if (assistant.exportButton.disabled) {
+						assistant.exportButton.setDisabled(false);
+					}
+				}
+			}
+		},
 		title : uwm.Dict.translate('Please select to show Details.'),
 		split : true,
 		rowspan: 2,
@@ -199,37 +211,44 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	uwm.ui.ExportAssistent.superclass.constructor.call(this, Ext.apply(this, winLayout));
 	
 	// var detailPanel = Ext.getCmp('detailPanel');
-	this.addButton(uwm.Dict.translate('Export'), function() {
-		var doctypeSelected = docTypeFormItem.getForm().getValues().docformat;
-		var diagramSelected = docTypeFormItem.getForm().getValues().diagrams;
-		var gridSelectedIndex = grid.selModel.lastActive;
-		var templateSelected = grid.getStore().getAt(gridSelectedIndex).get("technName");
-		
-		assistant.close();
-		
-		var startModel = '';
-		var startPackage = '';
-		if (assistant.uwmClassName == 'Model')
-			startModel = assistant.oid;
-		else if (assistant.uwmClassName == 'Package')
-			startPackage = assistant.oid;
-		else if (assistant.uwmClassName == 'Diagram')
-			startPackage = assistant.oid;
-		
-		var localization = uwm.i18n.Localization.getInstance();
-		var userLanguage = localization.getModelLanguage();
-		
-		new uwm.ui.LongTaskRunner( {
-		    title : uwm.Dict.translate('Exporting Documentation ...'),
-		    call : function(successHandler, errorHandler) {
-			    uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startModel, startPackage, doctypeSelected, diagramSelected, userLanguage, successHandler, errorHandler);
-		    },
-		    successHandler : function(data) {},
-		    errorHandler : function(data) {
-			    uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
-		    },
-		    isReturningDocument : true
-		}).show();
+	this.exportButton = this.addButton({
+			text: uwm.Dict.translate('Export'),
+			disabled: true
+		}, function() {
+			var doctypeSelected = docTypeFormItem.getForm().getValues().docformat;
+			var diagramSelected = docTypeFormItem.getForm().getValues().diagrams;
+			var gridSelectedIndex = grid.selModel.lastActive;
+			if (!gridSelectedIndex) {
+				// export format unknown
+				return;
+			}
+			var templateSelected = grid.getStore().getAt(gridSelectedIndex).get("technName");
+			
+			assistant.close();
+			
+			var startModel = '';
+			var startPackage = '';
+			if (assistant.uwmClassName == 'Model')
+				startModel = assistant.oid;
+			else if (assistant.uwmClassName == 'Package')
+				startPackage = assistant.oid;
+			else if (assistant.uwmClassName == 'Diagram')
+				startPackage = assistant.oid;
+			
+			var localization = uwm.i18n.Localization.getInstance();
+			var userLanguage = localization.getModelLanguage();
+			
+			new uwm.ui.LongTaskRunner( {
+					title : uwm.Dict.translate('Exporting Documentation ...'),
+					call : function(successHandler, errorHandler) {
+						uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startModel, startPackage, doctypeSelected, diagramSelected, userLanguage, successHandler, errorHandler);
+					},
+					successHandler : function(data) {},
+					errorHandler : function(data) {
+						uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+					},
+					isReturningDocument : true
+			}).show();
 	}, [ grid, docTypeFormItem ]);
 	
 	this.addButton(uwm.Dict.translate('Cancel'), function() {
