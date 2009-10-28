@@ -43,33 +43,36 @@
 	    <property file="${build.info}"/>
 	</target>
 
-	<target name="preparedist" depends="buildinfo">
+	<target name="redist" depends="buildinfo">
 		<mkdir dir="${redist.dir}"/>
-	</target>
-
-	<manifestclasspath property="lib.list" jarfile="${jar.file}">
-		<classpath>
-			<path refid="lib.path"/>
-			<fileset dir="${imageexporter.redist.dir}"/>
-		</classpath>
-	</manifestclasspath>
-	
-	<target name="redist" depends="preparedist">
-		<jar jarfile="${redist.dir}/${jar.file}">
-		<fileset dir="${build.dir}"/>
-			<manifest>
-				<attribute name="Main-Class" value="net.sourceforge.olympos.oaw.Generator"/>
-				<attribute name="wCMFGenerator-Version" value="${version}.${build}"/>
-				<attribute name="Class-Path" value=". ${lib.list}"/>
-		   </manifest>
-		</jar>
 
 		<!-- copy all libs ... -->
 		<copy todir="${redist.libdir}" verbose="false">
 			<fileset dir="${lib.dir}">
 				<include name="**/*.*"/>
 			</fileset>
+			<fileset dir="${imageexporter.redist.dir}/">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${imageexporter.redist.libdir}/">
+				<include name="**/*.jar"/>
+			</fileset>
 		</copy>
+
+		<manifestclasspath property="lib.list" jarfile="${redist.dir}/${jar.file}">
+			<classpath>
+				<fileset dir="${redist.libdir}"/>
+			</classpath>
+		</manifestclasspath>
+		
+		<jar jarfile="${redist.dir}/${jar.file}">
+			<fileset dir="${build.dir}"/>
+			<manifest>
+				<attribute name="Main-Class" value="net.sourceforge.olympos.oaw.Generator"/>
+				<attribute name="wCMFGenerator-Version" value="${version}.${build}"/>
+				<attribute name="Class-Path" value=". ${lib.list}"/>
+		   </manifest>
+		</jar>
 
 		<!-- copy all files ... -->
 		<copy todir="${redist.dir}/" verbose="false">
@@ -85,16 +88,6 @@
 				<include name="wcmf/**/*.*"/>
 			</fileset>
 			<fileset file="${res.dir}/run.bat" />
-		</copy>
-
-		<!-- copy imageexporter libs ... -->
-		<copy todir="${redist.libdir}/" verbose="false">
-			<fileset dir="${imageexporter.redist.dir}/">
-				<include name="*.jar"/>
-			</fileset>
-			<fileset dir="${imageexporter.redist.libdir}/">
-				<include name="**/*.jar"/>
-			</fileset>
 		</copy>
 
 		<!-- copy imageexporter resources ... -->
