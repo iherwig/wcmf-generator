@@ -13,11 +13,21 @@
 		<delete dir="${redist.dir}" verbose="false" failonerror="false"/>
 	</target>
 
-	<target name="compile" depends="clean">
+	<target name="build-diagram-exporter" depends="clean">
+		<ant antfile="${imageexporter.build.file}" target="redist"
+			dir="${imageexporter.dir}" inheritAll="false">
+  			<property file="${imageexporter.build.properties}"/>
+		</ant>
+	</target>
+	
+	<target name="compile" depends="build-diagram-exporter">
 		<tstamp/>
 		<mkdir dir="${build.dir}"/>
 		<javac encoding="utf-8" srcdir="${source.dir}" destdir="${build.dir}" debug="${debug}" excludesfile="compile-excludes">
-			<classpath refid="lib.path"/>
+			<classpath>
+				<path refid="lib.path"/>
+				<fileset dir="${imageexporter.redist.dir}"/>
+			</classpath>
 		</javac>
 	</target>
 
@@ -36,9 +46,12 @@
 	<target name="preparedist" depends="buildinfo">
 		<mkdir dir="${redist.dir}"/>
 	</target>
-	
+
 	<manifestclasspath property="lib.list" jarfile="${jar.file}">
-		<classpath refid="lib.path" />
+		<classpath>
+			<path refid="lib.path"/>
+			<fileset dir="${imageexporter.redist.dir}"/>
+		</classpath>
 	</manifestclasspath>
 	
 	<target name="redist" depends="preparedist">
@@ -72,6 +85,23 @@
 				<include name="wcmf/**/*.*"/>
 			</fileset>
 			<fileset file="${res.dir}/run.bat" />
+		</copy>
+
+		<!-- copy imageexporter libs ... -->
+		<copy todir="${redist.libdir}/" verbose="false">
+			<fileset dir="${imageexporter.redist.dir}/">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${imageexporter.redist.libdir}/">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+
+		<!-- copy imageexporter resources ... -->
+		<copy todir="${imageexporter.cartridge}/" verbose="false">
+			<fileset dir="${imageexporter.redist.dir}/">
+				<include name="Images/**/*.*"/>
+			</fileset>
 		</copy>
 
 		<zip destfile="${zip.dir}/ChronosGenerator-${version}.zip" basedir="${redist.dir}"/>
