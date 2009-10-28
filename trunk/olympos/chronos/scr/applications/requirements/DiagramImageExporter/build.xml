@@ -71,25 +71,4 @@
 		<zip destfile="${zip.dir}/DiagramImageExporter-${version}.zip" basedir="${redist.dir}"/>
 	</target>
 
-	<target name="deploy" depends="redist" description="deploy the exporter to the generator source">
-		<!-- copy libs ... -->
-		<copy todir="${generator.libdir}/" verbose="false">
-			<fileset dir="${redist.libdir}/">
-				<include name="**/*.jar"/>
-			</fileset>
-			<fileset dir="${redist.dir}/">
-				<include name="${jar.file}"/>
-			</fileset>
-		</copy>
-
-		<!-- copy resources ... -->
-		<copy todir="${generator.cartridge}/" verbose="false">
-			<fileset dir="${redist.dir}/">
-				<include name="Images/**/*.*"/>
-			</fileset>
-		</copy>
-
-		<zip destfile="${zip.dir}/DiagramImageExporter-${version}.zip" basedir="${redist.dir}"/>
-	</target>
-
 </project>

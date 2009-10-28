@@ -1,5 +1,6 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class SVGGenerator {
@@ -35,6 +36,18 @@ public class SVGGenerator {
 
 	public static void generateImages(String sourceFile, String targetDir, String iconDir) throws Exception {
 
+		// create the target directory if not existing
+		File target = new File(targetDir);
+		if (!target.isDirectory()) {
+			target.mkdir();
+		}
+		
+		// make files and directories absolute
+		sourceFile = new File(sourceFile).getCanonicalPath();
+		targetDir = new File(targetDir).getCanonicalPath()+File.separator;
+		iconDir = new File(iconDir).getCanonicalPath()+File.separator;
+
+		// initialize and run the generator
 		diagram = new ArrayList<InfoXmlDiagram>();
 		xmlFigure = new ArrayList<InfoXmlFigure>();
 		connectionExist = new ArrayList<InfoConnectionExist>();
