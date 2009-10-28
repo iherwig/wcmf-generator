@@ -116,7 +116,7 @@ class AllBrowserStatisticsController extends Controller
 		$this->barchartFile = OawUtil::createTempFile($this->barchartDir.'/browser.dat');
 		$this->piechartFile = OawUtil::createTempFile($this->piechartDir.'/browser.dat');
 	
-		UwmUtil::exportXml($tmpUwmExportPath, $modelOid, null);
+		UwmUtil::exportXml($tmpUwmExportPath, $modelOid);
 	
 		$runCfg = OawUtil::runOaw($propertyPath, 'cartridge/BrowserStatistics/workflow/allInOne.oaw');
 	

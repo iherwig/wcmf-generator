@@ -226,22 +226,14 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 			
 			assistant.close();
 			
-			var startModel = '';
-			var startPackage = '';
-			if (assistant.uwmClassName == 'Model')
-				startModel = assistant.oid;
-			else if (assistant.uwmClassName == 'Package')
-				startPackage = assistant.oid;
-			else if (assistant.uwmClassName == 'Diagram')
-				startPackage = assistant.oid;
-			
+			var startOid = assistant.oid;
 			var localization = uwm.i18n.Localization.getInstance();
 			var userLanguage = localization.getModelLanguage();
 			
 			new uwm.ui.LongTaskRunner( {
 					title : uwm.Dict.translate('Exporting Documentation ...'),
 					call : function(successHandler, errorHandler) {
-						uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startModel, startPackage, doctypeSelected, diagramSelected, userLanguage, successHandler, errorHandler);
+						uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startOid, doctypeSelected, diagramSelected, userLanguage, successHandler, errorHandler);
 					},
 					successHandler : function(data) {},
 					errorHandler : function(data) {

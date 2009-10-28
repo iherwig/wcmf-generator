@@ -34,8 +34,7 @@ require_once ('class.UwmUtil.php');
  * <b>Output actions:</b>
  * - @em failure If a fatal error occurs
  * 
- * @param[in] startModel The OID of the model to generate UML for.
- * @param[in] startPackage The OID of the package to generate UML for.
+ * @param[in] startOid The OID of the node to generate UML for.
  * 
  * @author Niko &lt;enikao@users.sourceforge.net&gt;
  * 
@@ -55,7 +54,7 @@ class ExpeditorGeneratorController extends BatchController
 {
 // PROTECTED REGION ID(application/include/controller/class.ExpeditorGeneratorController.php/Body) ENABLED START
 	// session name constants
-	private $PARAM_START_MODEL = 'ExpeditorGeneratorController.startModel';
+	private $PARAM_START_OID = 'ExpeditorGeneratorController.startOid';
 
 	private $TEMP_UWM_EXPORT_PATH = 'ExpeditorGeneratorController.tmpUwmExportPath';
 	private $TEMP_PROPERTIES_PATH = 'ExpeditorGeneratorController.tmpPropertiesPath';
@@ -81,7 +80,7 @@ class ExpeditorGeneratorController extends BatchController
 		if ($request->getAction() != 'continue')
 		{
 			$session = &SessionData::getInstance();
-			$session->set($this->PARAM_START_MODEL, $request->getValue('startModel'));
+			$session->set($this->PARAM_START_OID, $request->getValue('startOid'));
 			// clear the problem report
 			$report = '';
 			$session->set($this->PROBLEM_REPORT, $report);
@@ -140,9 +139,9 @@ class ExpeditorGeneratorController extends BatchController
 		$session->set($this->TEMP_UWM_EXPORT_PATH, $tmpUwmExportPath);
 		
 		// do the export
-		$startModel = $session->get($this->PARAM_START_MODEL);
-		$this->check("start exportXML: model:".$startModel);
-		UwmUtil::exportXml($tmpUwmExportPath, $startModel, null);
+		$startOid = $session->get($this->PARAM_START_OID);
+		$this->check("start exportXML: node:".$startOid);
+		UwmUtil::exportXml($tmpUwmExportPath, $startOid);
 		$this->check("finished exportXML");
 
 		ExportShutdownHandler::success();

@@ -26,7 +26,7 @@ require_once ('class.UwmUtil.php');
 /**
  * @class UWMExporterController
  * @ingroup Controller
- * @brief Generates UML out of the passed model, and returns the UML file. 
+ * @brief Generates UML out of the passed node, and returns the UML file. 
  * 
  * <b>Input actions:</b>
  * - @em exportUWM Generates and returns a UML file.
@@ -34,8 +34,7 @@ require_once ('class.UwmUtil.php');
  * <b>Output actions:</b>
  * - @em failure If a fatal error occurs
  * 
- * @param[in] startModel The OID of the model to generate UML for.
- * @param[in] startPackage The OID of the package to generate UML for.
+ * @param[in] startOid The OID of the node to generate UML for.
  * 
  * @author Niko &lt;enikao@users.sourceforge.net&gt;
  * 
@@ -55,8 +54,7 @@ class UWMExporterController extends BatchController
 {
 // PROTECTED REGION ID(application/include/controller/class.UWMExporterController.php/Body) ENABLED START
 	// session name constants
-	private $PARAM_START_MODEL = 'UWMExporterController.startModel';
-	private $PARAM_START_PACKAGE = 'UWMExporterController.startPackage';
+	private $PARAM_START_OID = 'UWMExporterController.startOid';
 	private $PARAM_LANGUAGE = 'UWMExporterController.language';
 
 	private $TEMP_UWM_EXPORT_PATH = 'UWMExporterController.tmpUwmExportPath';
@@ -84,8 +82,7 @@ class UWMExporterController extends BatchController
 		if ($request->getAction() != 'continue')
 		{
 			$session = &SessionData::getInstance();
-			$session->set($this->PARAM_START_MODEL, $request->getValue('startModel'));
-			$session->set($this->PARAM_START_PACKAGE, $request->getValue('startPackage'));
+			$session->set($this->PARAM_START_OID, $request->getValue('startOid'));
 			if ($this->isLocalizedRequest()) {
 				$session->set($this->PARAM_LANGUAGE, $request->getValue('language'));
 			}
@@ -149,13 +146,12 @@ class UWMExporterController extends BatchController
 		//mkdir($tmpUwmExportPath);
 
 		// do the export
-		$startModel = $session->get($this->PARAM_START_MODEL);
-		$startPackage = $session->get($this->PARAM_START_PACKAGE);
+		$startOid = $session->get($this->PARAM_START_OID);
 
 		$language = $session->get($this->PARAM_LANGUAGE);
 
-		$this->check("start exportXML: model:".$startModel." package:".$startPackage);
-		UwmUtil::exportXml($tmpUwmExportPath, $startModel, $startPackage, $language);
+		$this->check("start exportXML: node:".$startOid);
+		UwmUtil::exportXml($tmpUwmExportPath, $startOid, $language);
 		$this->check("finished exportXML");
 
 		ExportShutdownHandler::success();

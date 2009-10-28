@@ -303,23 +303,21 @@ uwm.persistency.Json.prototype.templatelist = function( successHandler, errorHan
 	
 }
 
-uwm.persistency.Json.prototype.exportDoc = function(templateName, startModel, startPackage, exportFormat, diagramFormat, language, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.exportDoc = function(templateName, startOid, exportFormat, diagramFormat, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'exportDoc',
 		templateName: templateName,
-		startModel: startModel,
-		startPackage: startPackage,
+		startOid: startOid,
 		exportFormat: exportFormat,
 		diagramFormat: diagramFormat,
 		language: language
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.exportUwm = function(startModel, startPackage, language, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.exportUwm = function(startOid, language, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'exportUWM',
-		startModel: startModel,
-		startPackage: startPackage,
+		startOid: startOid,
 		language: language
 	}, successHandler, errorHandler);
 }

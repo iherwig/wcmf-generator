@@ -18,6 +18,7 @@
  require_once(BASE."wcmf/application/controller/class.BatchController.php");
 // PROTECTED REGION ID(application/include/controller/class.UWMDocExporterController.php/Import) ENABLED START
 require_once (BASE.'wcmf/lib/persistence/class.PersistenceFacade.php');
+require_once (BASE.'wcmf/lib/util/class.FileUtil.php');
 
 require_once('class.TemplateListController.php');
 
@@ -33,10 +34,9 @@ require_once ('class.UwmUtil.php');
  * @brief Generates documentation out of the passed model, and returns the documentation file. 
  * <b>Input actions:</b> - @em exportDoc Generates a documentation file. 
  * <b>Output actions:</b> - @em failure If a fatal error occurs 
- * @param[in] startModel The OID of the model to generate UML for.
- * @param[in] startPackage The OID of the package to generate UML for.
+ * @param[in] startOid The OID of the node to generate UML for.
  * @param[in] exportFormat The format to export documentation in, must be one of $this-&gt;availableFormats.
- * @param[in] diagramFormat The format for exporting diagram content (none, virtual)
+ * @param[in] diagramFormat The format for exporting diagram content (normal, virtual)
  * @param[in] templateName The template to export. 
  * 
  * The following configuration settings are defined for this controller:
@@ -55,20 +55,13 @@ class UWMDocExporterController extends BatchController
 {
 // PROTECTED REGION ID(application/include/controller/class.UWMDocExporterController.php/Body) ENABLED START
 	// session name constants
-	private $PARAM_START_MODEL = 'UWMDocExporterController.startModel';
-	private $PARAM_START_PACKAGE = 'UWMDocExporterController.startPackage';
+	private $PARAM_START_OID = 'UWMDocExporterController.startOid';
 	private $PARAM_EXPORT_FORMAT = 'UWMDocExporterController.exportFormat';
 	private $PARAM_DIAGRAM_FORMAT = 'UWMDocExporterController.diagramFormat';
 	private $PARAM_TEMPLATE_NAME = 'UWMDocExporterController.templateName';
 	private $PARAM_LANGUAGE = 'UWMDocExporterController.language';
 	
 	private $TEMP_WORKING_DIR = 'UWMDocExporterController.workingDiw';
-	private $TEMP_UWM_EXPORT_PATH = 'UWMDocExporterController.tmpUwmExportPath';
-	private $TEMP_PROPERTIES_PATH = 'UWMDocExporterController.tmpPropertiesPath';
-	private $TEMP_CONTENT_PATH = 'UWMDocExporterController.contentPath';
-	private $TEMP_STYLES_PATH = 'UWMDocExporterController.stylesPath';
-	private $TEMP_OOFFICE0_PATH = 'UWMDocExporterController.openofficeTmp0Path';
-	private $TEMP_OOFFICE_PATH = 'UWMDocExporterController.openofficePath';
 	private $TEMP_EXPORT_FILE = 'UWMDocExporterController.exportFile';
 
 	private $PROBLEM_REPORT = 'UWMDocExporterController.problemReport';
@@ -98,8 +91,7 @@ class UWMDocExporterController extends BatchController
 		if ($request->getAction() != 'continue')
 		{
 			$session = &SessionData::getInstance();
-			$session->set($this->PARAM_START_MODEL, $request->getValue('startModel'));
-			$session->set($this->PARAM_START_PACKAGE, $request->getValue('startPackage'));
+			$session->set($this->PARAM_START_OID, $request->getValue('startOid'));
 			$session->set($this->PARAM_EXPORT_FORMAT, $request->getValue('exportFormat'));
 			$session->set($this->PARAM_DIAGRAM_FORMAT, $request->getValue('diagramFormat'));
 			$session->set($this->PARAM_TEMPLATE_NAME, $request->getValue('templateName'));
@@ -165,17 +157,16 @@ class UWMDocExporterController extends BatchController
 		mkdir($workingDir);
 
 		$tmpUwmExportPath = "$workingDir/cwm-source.xml";
-		$session->set($this->TEMP_UWM_EXPORT_PATH, $tmpUwmExportPath);
 		touch($tmpUwmExportPath);
 
 		// do the export
-		$startModel = $session->get($this->PARAM_START_MODEL);
-		$startPackage = $session->get($this->PARAM_START_PACKAGE);
+		$startOid = $session->get($this->PARAM_START_OID);
 		$language = $session->get($this->PARAM_LANGUAGE);
 		$diagramFormat = $session->get($this->PARAM_DIAGRAM_FORMAT);
 		$virtualPackages = ($diagramFormat == 'virtual');
-		$this->check("start exportXML: model:".$startModel." package:".$startPackage);
-		$problemReport = UwmUtil::exportXml($tmpUwmExportPath, $startModel, $startPackage, $language, $virtualPackages);
+		$this->check("start exportXML: node:".$startOid);
+
+		$problemReport = UwmUtil::exportXml($tmpUwmExportPath, $startOid, $language, $virtualPackages);
 		$this->check("finished exportXML");
 
 		// update the problem report
@@ -225,17 +216,12 @@ class UWMDocExporterController extends BatchController
 		fwrite($propertyFile, "templateName = $templateName\n");
 		fwrite($propertyFile, "exportFormat = $exportFormat\n");
 		fclose($propertyFile);
-		$session->set($this->TEMP_PROPERTIES_PATH, $propertyPath);
 	
-		$contentPath = $this->createTempFile("$workingDir/content.xml");
-		$stylesPath = $this->createTempFile("$workingDir/styles.xml");
-		$openofficeTmp0Path = $this->createTempFile("$workingDir/document-tmp0.odt");
-		$openofficePath = $this->createTempFile("$workingDir/document-tmp1.odt");
+		$this->createTempFile("$workingDir/content.xml");
+		$this->createTempFile("$workingDir/styles.xml");
+		$this->createTempFile("$workingDir/document-tmp0.odt");
+		$this->createTempFile("$workingDir/document-tmp1.odt");
 		$exportFile = $this->createTempFile("$workingDir/document-export.$exportFormat");
-		$session->set($this->TEMP_CONTENT_PATH, $contentPath);
-		$session->set($this->TEMP_STYLES_PATH, $stylesPath);
-		$session->set($this->TEMP_OOFFICE0_PATH, $openofficeTmp0Path);
-		$session->set($this->TEMP_OOFFICE_PATH, $openofficePath);
 		$session->set($this->TEMP_EXPORT_FILE, $exportFile);
 	
 		// run the generator
@@ -286,14 +272,10 @@ class UWMDocExporterController extends BatchController
 	
 		// cleanup
 		unlink($exportFile);
-		unlink($session->get($this->TEMP_OOFFICE_PATH));
-		unlink($session->get($this->TEMP_OOFFICE0_PATH));
-		unlink($session->get($this->TEMP_STYLES_PATH));
-		unlink($session->get($this->TEMP_CONTENT_PATH));
-		unlink($session->get($this->TEMP_PROPERTIES_PATH));
-		unlink($session->get($this->TEMP_UWM_EXPORT_PATH));
-		rmdir($session->get($this->TEMP_WORKING_DIR));
-
+		$workingDir = $session->get($this->TEMP_WORKING_DIR);
+		FileUtil::emptyDir($workingDir);
+		rmdir($workingDir);
+		
 		ExportShutdownHandler::success();
 	}
 

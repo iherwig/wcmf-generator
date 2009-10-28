@@ -50,15 +50,17 @@ class UwmUtil {
 	/**
 	 * Export a model/package to the intern xml format
 	 * @param tmpUwmExportPath The name of the xml file
-	 * @param startModel A Model instance to start with (maybe null, if startPackage is given)
-	 * @param startPackage A Package instance to start with (maybe null, if startModel is given)
+	 * @param startOid The object id of the instance to start with
 	 * @param language The language to translate to. Optional [default: null]
 	 * @param virtualPackages True/False wether to export diagrams as packages or not. If yes,
 	 * all other package content will be ignored. Optional [default: false].
 	 * @return A problem report (should be empty if no problems occured).
 	 */
-	public static function exportXml($tmpUwmExportPath, $startModel, $startPackage, $language = null,
-			$virtualPackages = false) {
+	public static function exportXml($tmpUwmExportPath, $startOid, $language = null, $virtualPackages = false) {
+		if ($startOid == null) {
+			Log::error("No id given\n".WCMFException::getStackTrace(), __CLASS__);
+			return;
+		}
 		self::$language = $language;
 		self::$processVirtualPackages = $virtualPackages;
 		self::$exportedNodes = array();
@@ -75,21 +77,33 @@ class UwmUtil {
 		self::$persistenceFacade = PersistenceFacade::getInstance();
 		self::$encodingUtil = new EncodingUtil();
 
-		if ($startModel) {
-			$currModel = self::$persistenceFacade->load($startModel);
+		$rootType = PersistenceFacade::getOIDParameter($startOid, 'type');
+		if ($rootType == 'Model') {
+			$currModel = self::$persistenceFacade->load($startOid);
 			if ($currModel) {
 				self::processModel($currModel);
 			} else {
-				echo 'Error: Unknown model id ' . $startModel;
+				Log::error('Unknown model id ' . $startOid, __CLASS__);
 			}
-		} else if ($startPackage) {
-			$currPackage = self::$persistenceFacade->load($startPackage);
+		} else if ($rootType == 'Package') {
+			$currPackage = self::$persistenceFacade->load($startOid);
 			if ($currPackage) {
 				self::$dom->startElement('Model');
 				self::processPackage($currPackage);
 				self::$dom->endElement();
 			} else {
-				echo 'Error: Unknown package id ' . $startPackage;
+				Log::error('Unknown package id ' . $startOid, __CLASS__);
+			}
+		} else if ($rootType == 'Diagram') {
+			$currDiagram = self::$persistenceFacade->load($startOid);
+			if ($currDiagram) {
+				self::$dom->startElement('Model');
+				self::$dom->startElement('Package');
+				self::processDiagram($currDiagram);
+				self::$dom->endElement();
+				self::$dom->endElement();
+			} else {
+				Log::error('Unknown diagram id ' . $startOid, __CLASS__);
 			}
 		} else {
 			self::processModels();
@@ -332,9 +346,7 @@ class UwmUtil {
 			} else if (self::processManyToMany($currChild, $currNode)) {
 				//do nothing
 			} else if ($childType != 'Figure') {
-				$logger = LoggerManager::getLogger('OawUtil');
-
-				$logger->error('Invalid child of BusinessProcess: ' . $currChild->getId(), __FILE__, __LINE__);
+				Log::error('Invalid child of BusinessProcess: ' . $currChild->getId(), __CLASS__);
 			}
 		}
 
@@ -361,9 +373,7 @@ class UwmUtil {
 			} else if ($childType == 'ChiController') {
 				self::processChild($currChild);
 			} else if ($childType != 'Figure') {
-				$logger = LoggerManager::getLogger('OawUtil');
-
-				$logger->error('Invalid child of UseCase: ' . $currChild->getId(), __FILE__, __LINE__);
+				Log::error('Invalid child of UseCase: ' . $currChild->getId(), __CLASS__);
 			}
 		}
 
@@ -588,9 +598,7 @@ class UwmUtil {
 
 		$parser = InifileParser::getInstance();
 		if (($params = $parser->getSection(self::INI_SECTION)) === false) {
-			$logger = LoggerManager::getLogger('GenerateUmlController');
-
-			$logger->error($parser->getErrorMsg(), __FILE__, __LINE__);
+			Log::error($parser->getErrorMsg(), __CLASS__);
 		} else {
 			$dirName = $params[self::INI_UML_FILE_STORAGE];
 			$fileName = str_replace(':', '-', $oid) . '.uml';
