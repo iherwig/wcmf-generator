@@ -280,14 +280,6 @@ public class ElementDiagram {
 		return result;
 	}
 	
-	////////////////////////////////////////////////////////////
-	//New Configuration
-//	private static ElementDiagram initChiSys() {
-//		HashMap<EnumFigureType, AllowedConnection> connections = new HashMap<EnumFigureType, AllowedConnection>();
-//
-//		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_SYSTEM, "ChiSys",fontPosition, chiSystemImage , connections);
-//		return result;// ??
-//	}
 	
 	////////////////////////////////////////////////////////////
 	//Activity

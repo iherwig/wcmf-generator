@@ -45,36 +45,22 @@ public class Draw {
 			drawF.drawLabeledSimpleFigure(g2d, fig);
 		}
 
-		
-		int [] exist = new int [1000];
-		int i = 0;
-
 		//draw all connections between the Figures
-		ArrayList<InfoXmlDiagram> dia = svg.getDiagram();
-		ArrayList<String> existLine = new ArrayList<String>();
-		Boolean ex = false;
-		for (InfoXmlDiagram currDia : dia) {
-			ArrayList<InfoFigureParameter> Parent = currDia.getFigure();
+			ArrayList<String> existLine = new ArrayList<String>();
+			ArrayList<InfoFigureParameter> Parent = figureArray;	
 			for (InfoFigureParameter currParent : Parent) {
 				if (currParent.getChildren() != null) {
-					ArrayList<InfoFigureParameter> children = new ArrayList<InfoFigureParameter>();
-					String aliasPatrent = currParent.getAlias();
-					EnumFigureType targetPolePatent = currParent.getType();
-					children = currParent.getChildren();
+					ArrayList<InfoFigureParameter> children = currParent.getChildren();
 					for (InfoFigureParameter currChildren : children) {
-						int aliasChild = currParent.getTypeId() ; 
-						EnumFigureType targetPoleClient = currChildren.getType();
-						String key = aliasPatrent + aliasChild + targetPolePatent + targetPoleClient;
-						
+						String key = currParent.getAlias() + currParent.getAlias() + currParent.getType() + currChildren.getType() + currParent.getTypeId() + currChildren.getTypeId();
+
 						if(!existLine.contains(key)){
 							drawC.drawConnection(g2d, currParent, currChildren);
 							existLine.add(key);
 						}
 					}
 				}
-			}
 		}
-
 
 		// write the data into a image out
 		boolean useCSS = true;
@@ -93,7 +79,6 @@ public class Draw {
 			e.printStackTrace();
 		}
 
-		// return the path of the image
 		return imagePath;
 	}
 }
