@@ -1,6 +1,5 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -12,13 +11,6 @@ public class DrawFigure {
 		Figure fig = factory.createFigure( figureInfo);
 		fig.draw(g2d, figureInfo);
 		this.drawLabel(g2d, figureInfo);
-	}
-
-	public void drawSimpleFigure(Graphics2D g2d, InfoFigureParameter figure) {
-		
-		g2d.setStroke(new BasicStroke(1, BasicStroke.CAP_ROUND, BasicStroke.JOIN_MITER));
-		g2d.setPaint(Color.black);
-		
 	}
 
 	private void drawLabel(Graphics2D g2d, InfoFigureParameter figure) {
@@ -56,32 +48,5 @@ public class DrawFigure {
 				curX += wordWidth;
 			}
 		}
-
-		if (pos.equals(EnumFontPosition.IN_UP)) {
-			
-
-			
-//			Rectangle2D getStringBounds 
-
-//			g2d.drawString(figure.getLabel(), figure.getX(), figure.getY());
-//			FontMetrics fm = g2d.getFontMetrics();
-//			g2d.fillRect(figure.getX(), figure.getY(),fm.stringWidth(figure.getLabel()), figure.getWidth() -20, figure.getHeight());
-			
-			
-//			public void drawUnderlinedString( Graphics g, int x, int y, String s ) 
-//			{ 
-//			  g.drawString( s, x, y ); 			 
-//			  FontMetrics fm = g.getFontMetrics(); 
-//			  LineMetrics lm = fm.getLineMetrics( s, g ); 			 
-//			  g.fillRect( x, y + (int) lm.getUnderlineOffset(), 
-//			              fm.stringWidth(s), (int) lm.getUnderlineThickness() ); 
-//			}
-		}
-
-		else if (pos.equals(EnumFontPosition.IN_UP)) {
-			
-			g2d.drawString(figure.getLabel(), (int) figure.getX() + 20, (int) figure.getY() + 20);
-		}
-
 	}
 }
