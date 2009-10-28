@@ -34,7 +34,7 @@ require_once('class.ExportShutdownHandler.php');
  * @brief Generates UML out of the passed model, and saves the UML file. 
  * <b>Input actions:</b> - @em generateUml Generates and saves a UML file. 
  * <b>Output actions:</b> - @em failure If a fatal error occurs - @em ok In any other case 
- * @param[in] modelOid The OID of the model to generate UML for. 
+ * @param[in] startOid The OID of the model to generate UML for. 
  * 
  * The following configuration settings are defined for this controller:
  *
@@ -62,15 +62,15 @@ class GenerateUmlController extends Controller
 	{
 		$this->check("start");
 
-		$startModel = $this->_request->getValue('modelOid');
+		$startOid = $this->_request->getValue('startOid');
 
-		$umlPath = UwmUtil::prepareUmlFile($startModel);
+		$umlPath = UwmUtil::prepareUmlFile($startOid);
 		unlink($umlPath);
 
 		$tmpUwmExportPath = OawUtil::tempName();
 		
 		$this->check('starting Export');
-		UwmUtil::exportXml($tmpUwmExportPath, $startModel, null);
+		UwmUtil::exportXml($tmpUwmExportPath, $startOid);
 		$this->check('finished export');
 
 		$tmpUmlPath = OawUtil::tempName();

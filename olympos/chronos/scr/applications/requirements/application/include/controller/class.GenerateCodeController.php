@@ -56,7 +56,7 @@ class GenerateCodeController extends BatchController
 {
 // PROTECTED REGION ID(application/include/controller/class.GenerateCodeController.php/Body) ENABLED START
 	// session name constants
-	const PARAM_START_MODEL = 'GenerateCodeController.startModel';
+	const PARAM_START_OID = 'GenerateCodeController.startOid';
 	const PARAM_CODE_ID = 'GenerateCodeController.codeId';
 
 	const TEMP_UWM_EXPORT_PATH = 'GenerateCodeController.tmpUwmExportPath';
@@ -83,7 +83,7 @@ class GenerateCodeController extends BatchController
 		if ($request->getAction() != 'continue')
 		{
 			$session = &SessionData::getInstance();
-			$session->set(self::PARAM_START_MODEL, $request->getValue('modelOid'));
+			$session->set(self::PARAM_START_OID, $request->getValue('modelOid'));
 			$session->set(self::PARAM_CODE_ID, $request->getValue('codeId'));
 			// clear the problem report
 			$report = '';
@@ -143,9 +143,9 @@ class GenerateCodeController extends BatchController
 		$session->set(self::TEMP_UWM_EXPORT_PATH, $tmpUwmExportPath);
 
 		// do the export
-		$startModel = $session->get(self::PARAM_START_MODEL);
-		$this->check("start exportXML: model:".$startModel);
-		UwmUtil::exportXml($tmpUwmExportPath, $startModel, null);
+		$startOid = $session->get(self::PARAM_START_OID);
+		$this->check("start exportXML: model:".$startOid);
+		UwmUtil::exportXml($tmpUwmExportPath, $startOid);
 		$this->check("finished exportXML");
 
 		ExportShutdownHandler::success();
