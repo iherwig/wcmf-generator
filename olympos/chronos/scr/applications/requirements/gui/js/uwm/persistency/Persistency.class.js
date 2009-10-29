@@ -134,6 +134,9 @@ uwm.persistency.Persistency.prototype.exportDoc = function(templateName, startOi
 uwm.persistency.Persistency.prototype.exportUwm = function(startOid, language, successHandler, errorHandler ) {
 }
 
+uwm.persistency.Persistency.prototype.exportImage = function(diagramOid, language, successHandler, errorHandler ) {
+}
+
 uwm.persistency.Persistency.prototype.getCodeGeneratorList = function(successHandler, errorHandler ) {
 }
 

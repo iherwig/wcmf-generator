@@ -322,6 +322,14 @@ uwm.persistency.Json.prototype.exportUwm = function(startOid, language, successH
 	}, successHandler, errorHandler);
 }
  
+uwm.persistency.Json.prototype.exportImage = function(diagramOid, language, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'exportImage',
+		diagramOid: diagramOid,
+		language: language
+	}, successHandler, errorHandler);
+}
+ 
 uwm.persistency.Json.prototype.getCodeGeneratorList = function(successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'generatorlist'

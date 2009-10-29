@@ -47,7 +47,25 @@ uwm.modeltree.AbstractDiagramNode.prototype.buildContextMenu = function() {
 		}, {
 			text: uwm.Dict.translate('Export Documentation'),
 			handler : function(item, e) {
-					new uwm.ui.ExportAssistent("Diagram", self.getModelNode().getOid());
+				new uwm.ui.ExportAssistent("Diagram", self.getModelNode().getOid());
+			}
+		}, {
+			text: uwm.Dict.translate('Export Image'),
+				handler : function(item, e) {
+				var localization = uwm.i18n.Localization.getInstance();
+				var userLanguage = localization.getModelLanguage();
+			
+				new uwm.ui.LongTaskRunner( {
+						title : uwm.Dict.translate('Exporting Image ...'),
+						call : function(successHandler, errorHandler) {
+							uwm.persistency.Persistency.getInstance().exportImage(self.getModelNode().getOid(), userLanguage, successHandler, errorHandler);
+						},
+						successHandler : function(data) {},
+						errorHandler : function(data) {
+							uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+						},
+						isReturningDocument : true
+				}).show();
 			}
 		}, {
 			text : uwm.Dict.translate('Delete from model'),
