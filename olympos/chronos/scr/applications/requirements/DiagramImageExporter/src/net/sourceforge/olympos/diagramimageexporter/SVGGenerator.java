@@ -3,9 +3,7 @@ package net.sourceforge.olympos.diagramimageexporter;
 import java.io.File;
 import java.util.ArrayList;
 
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger ;
-import org.apache.log4j.BasicConfigurator ;
+import org.apache.log4j.Logger;
 
 public class SVGGenerator {
 
@@ -13,6 +11,7 @@ public class SVGGenerator {
 	public static ArrayList<InfoXmlDiagram> diagram;
 	private static ArrayList<InfoXmlFigure> xmlFigure;
 	private static ArrayList<InfoConnectionExist> connectionExist;
+	public static Logger logger = Logger.getLogger(SVGGenerator.class.getName());
 	
 	
 	public ArrayList<InfoConnectionExist> getConnectionExist() {
@@ -73,30 +72,15 @@ public class SVGGenerator {
 		
 		System.out.println("FINISH");
 	}
-	
-//	public static Logger logger;// = Logger.getRootLogger();
 
 	public static void main(String[] args) throws Exception {
 
-//		logger = Logger.getLogger(SVGGenerator.class.getName());
-//		logger.setLevel(Level.ALL);
-//
-////		BasicConfigurator.configure();	
-//		if( logger.isDebugEnabled()) {
-//		    logger.fatal("Fatal");
-//		}
-//		if( logger.isDebugEnabled()) {
-//		    logger.error("Error");
-//		}
-//		if( logger.isDebugEnabled()) {
-//		    logger.warn("Warning");
-//		}
-//		if( logger.isDebugEnabled()) {
-//		    logger.info("Info");
-//		}
-//		if( logger.isDebugEnabled()) {
-//		    logger.debug("Debug");
-//		}
+		if( logger.isInfoEnabled()) {
+		    logger.info("Info");
+		}
+		if( logger.isDebugEnabled()) {
+		    logger.debug("Debug");
+		}
 		    
 		String xmlFile = args[0];
 		String imagePath = args[1];
