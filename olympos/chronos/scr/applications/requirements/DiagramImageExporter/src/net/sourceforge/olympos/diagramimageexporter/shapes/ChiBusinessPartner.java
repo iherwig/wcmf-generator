@@ -42,6 +42,8 @@ public class ChiBusinessPartner extends Figure{
 		drawScaleLine(g2d, createFig, figureInfo, leftleg);
 		drawScaleLine(g2d, createFig, figureInfo, rightleg);
 		drawScaleLine(g2d, createFig, figureInfo, arm);
+
+		drawCenterLabelUnder(g2d, createFig);
 		
 		drawScaleChi(g2d, createFig, figureInfo, head);
 	}

@@ -10,7 +10,7 @@ public class DrawFigure {
 		Factory factory = new Factory();
 		Figure fig = factory.createFigure( figureInfo);
 		fig.draw(g2d, figureInfo);
-		this.drawLabel(g2d, figureInfo);
+//		this.drawLabel(g2d, figureInfo);
 	}
 
 	private void drawLabel(Graphics2D g2d, InfoFigureParameter figure) {

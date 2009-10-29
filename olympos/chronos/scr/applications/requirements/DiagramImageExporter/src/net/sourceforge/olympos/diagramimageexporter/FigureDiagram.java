@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class FigureDiagram {
 	SVGGenerator svg = new SVGGenerator();
 
-	public void PutFigElementsTogehter() {
+	public InfoCoordinate PutFigElementsTogehter(ArrayList<InfoFigureParameter> figureArray) {
 		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
 		ArrayList<InfoXmlFigure> xmlFig = svg.getxmlFigure();
 
@@ -52,8 +52,9 @@ public class FigureDiagram {
 			}
 		}
 		addChild(xmlFig);
-		setSize();
+		InfoCoordinate maxCor = setSize(figureArray);
 		addOptionValue(xmlDia, xmlFig);
+		return maxCor;
 	}
 
 	private void addChild(ArrayList<InfoXmlFigure> xmlFig) {
@@ -102,19 +103,21 @@ public class FigureDiagram {
 	}
 
 	// set the size of the image
-	private void setSize() {
-		// put the Elements of Diagram into an arraylist
-		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
-
-		// do for all diagram
-		for (InfoXmlDiagram dia1 : xmlDia) {
-			// put all elements of Figure of Diagram into figArray
-			ArrayList<InfoFigureParameter> figureArray = dia1.getFigure();
+	private InfoCoordinate setSize(ArrayList<InfoFigureParameter>figureArray) {
+//		// put the Elements of Diagram into an arraylist
+//		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
+//
+//		// do for all diagram
+//		for (InfoXmlDiagram dia1 : xmlDia) {
+//			// put all elements of Figure of Diagram into figArray
+//			ArrayList<InfoFigureParameter> figureArray = dia1.getFigure();
 			InfoCoordinate minCor = new InfoCoordinate(0, 0);
+			InfoCoordinate maxCor = new InfoCoordinate(0, 0);
 
 			// take the parameter of the first element
 			InfoFigureParameter fig0 = figureArray.get(0);
 			minCor.setAll(fig0.getX(), fig0.getX());
+			maxCor.setAll(fig0.getX(), fig0.getY());
 
 			// look for parameter which are smaller than minCor
 			for (InfoFigureParameter fig : figureArray) {
@@ -124,6 +127,12 @@ public class FigureDiagram {
 				if (fig.getY() < minCor.getY()) {
 					minCor.setY(fig.getY());
 				}
+				if(fig.getX()+fig.getWidth() > maxCor.getX()){
+					maxCor.setX(fig.getX()+fig.getWidth());
+				}
+				if(fig.getY()+fig.getHeight() > maxCor.getY()){
+					maxCor.setY(fig.getY()+fig.getHeight());
+				}
 			}
 
 			// subtract minCor to all of the figure
@@ -131,7 +140,9 @@ public class FigureDiagram {
 				fig.setX(fig.getX() - minCor.getX());
 				fig.setY(fig.getY() - minCor.getY());
 			}
-		}
+			maxCor.setAll(maxCor.getX()-minCor.getX()+10 , maxCor.getY()-minCor.getY()+10);
+			return maxCor;
+//		}
 	}
 
 	private void addOptionValue(ArrayList<InfoXmlDiagram> xmlDia, ArrayList<InfoXmlFigure> xmlFig) {

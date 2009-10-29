@@ -35,5 +35,6 @@
 	<classpathentry kind="lib" path="lib/batik/xml-apis-ext.jar"/>
 	<classpathentry kind="lib" path="lib/batik/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/JDOM/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/log4j/log4j-1.2.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
