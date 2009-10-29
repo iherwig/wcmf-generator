@@ -69,19 +69,10 @@ public class SVGGenerator {
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
 			df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat);
 		}
-		
-		System.out.println("FINISH");
 	}
 
 	public static void main(String[] args) throws Exception {
 
-		if( logger.isInfoEnabled()) {
-		    logger.info("Info");
-		}
-		if( logger.isDebugEnabled()) {
-		    logger.debug("Debug");
-		}
-		    
 		String xmlFile = args[0];
 		String imagePath = args[1];
 		String picturePath = args[2];
