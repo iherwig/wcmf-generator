@@ -121,6 +121,36 @@ public abstract class Figure extends JPanel {
 		n.paint(textbox);
 	}
 
+	protected void drawCenterLabelUnder(Graphics2D g2d, InfoFigureParameter figure){
+		
+		Font calledElement=new Font("tahoma", Font.PLAIN, 12);		
+		g2d.setFont(calledElement);
+
+		int mX = (int) (figure.getX() + figure.getWidth() / 2);
+		int mY = (int) (figure.getY() + figure.getHeight());
+
+		FontMetrics fm = g2d.getFontMetrics();
+
+		int i = 0;
+		int lineHeight = fm.getHeight() + 3;
+		String comment = figure.getLabel();
+		String[] words = comment.split(" ");
+		int curX = mX;
+		int curY = mY;
+
+		for (String word : words) {
+			int wordWidth = fm.stringWidth(word + " ");
+
+			curY += lineHeight;
+			curX = (int) mX;
+			i++;
+			g2d.setPaint(Color.black);
+			int boxWidth = fm.stringWidth(word + " ") + 10;
+			g2d.drawString(word, curX - (boxWidth / 2), curY);
+			curX += wordWidth;
+		}
+	}
+	
 	protected void drawCenterLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect, InfoLine line) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());

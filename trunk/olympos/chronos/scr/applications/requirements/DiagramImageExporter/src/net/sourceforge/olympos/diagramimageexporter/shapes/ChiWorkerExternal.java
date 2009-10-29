@@ -55,11 +55,15 @@ public class ChiWorkerExternal extends Figure{
 		drawScaleEllipse(g2d, createFig, figureInfo, elli1);
 		drawScaleEllipse(g2d, createFig, figureInfo, head);
 
+		drawCenterLabelUnder(g2d, createFig);
+		
 		drawScaleLine(g2d, createFig, figureInfo, body);
 		drawScaleLine(g2d, createFig, figureInfo, leftleg);
 		drawScaleLine(g2d, createFig, figureInfo, rightleg);
 		drawScaleLine(g2d, createFig, figureInfo, arm);
 		drawScaleLine(g2d, createFig, figureInfo, lineLeft);	
+
+		drawCenterLabelUnder(g2d, createFig);
 		
 		drawScaleChi(g2d, createFig, figureInfo, head);
 	}

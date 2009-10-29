@@ -58,6 +58,8 @@ public class ChiWorker extends Figure{
 		drawScaleLine(g2d, createFig, figureInfo, rightleg);
 		drawScaleLine(g2d, createFig, figureInfo, arm);
 
+		drawCenterLabelUnder(g2d, createFig);
+		
 		drawScaleEllipse(g2d, createFig, figureInfo, elli1);
 		drawScaleEllipse(g2d, createFig, figureInfo, head);
 		
