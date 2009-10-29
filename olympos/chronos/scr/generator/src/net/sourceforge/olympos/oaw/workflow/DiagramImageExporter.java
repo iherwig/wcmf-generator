@@ -4,10 +4,11 @@
 package net.sourceforge.olympos.oaw.workflow;
 
 import java.io.File;
+import java.io.IOException;
 
 import net.sourceforge.olympos.diagramimageexporter.SVGGenerator;
-import net.sourceforge.olympos.oaw.extend.Logger;
 
+import org.eclipse.mwe.emf.Writer;
 import org.openarchitectureware.workflow.WorkflowContext;
 import org.openarchitectureware.workflow.issues.Issues;
 import org.openarchitectureware.workflow.lib.AbstractWorkflowComponent;
@@ -88,7 +89,16 @@ public class DiagramImageExporter extends AbstractWorkflowComponent {
 		try {
 			SVGGenerator.generateImages(sourceFile, targetDir, iconDir);
 		} catch (Exception e) {
-			issues.addError("Exception occured!\n" + e.getMessage());
+			java.io.StringWriter sw = new java.io.StringWriter();
+			java.io.PrintWriter pw = new java.io.PrintWriter(sw);
+            e.printStackTrace(pw);
+            pw.close();
+            try {
+				sw.close();
+			} catch (IOException e1) {
+				// ignore
+			}
+			issues.addError("Exception occured!\n" + sw.toString());
 		}
 	}
 }
