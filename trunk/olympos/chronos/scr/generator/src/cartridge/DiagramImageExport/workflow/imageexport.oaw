@@ -1,7 +1,8 @@
 <workflow>
 	<property name="sourceFile" value="example-data/cwm-export.uml" />
 	<property name="targetDir" value="${basePath}/../example-data/doc" />
-	<property name="iconDir" value="${basePath}/cartridge/DiagramImageExport/Images" />
+	<property name="iconDir" value="cartridge/DiagramImageExport/Images" />
+	<property name="imageFormat" value="png" />
 	<property name='propertyFile' value='${basePath}/cartridge/DiagramImageExport/workflow/imageexport.properties'/>
 	<property file="${propertyFile}"/>
 
@@ -9,5 +10,6 @@
 		<sourceFile value="${sourceFile}" />
 		<targetDir value="${targetDir}" />
 		<iconDir value="${iconDir}" />
+		<imageFormat value="${imageFormat}" />
 	</component>
 </workflow>

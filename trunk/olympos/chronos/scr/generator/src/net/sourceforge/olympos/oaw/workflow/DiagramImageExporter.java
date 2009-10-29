@@ -21,6 +21,7 @@ public class DiagramImageExporter extends AbstractWorkflowComponent {
 	protected String sourceFile = null;
 	protected String targetDir = null;
 	protected String iconDir = null;
+	protected String imageFormat = null;
 
 	public void setSourceFile(final String sourceFile) {
 		this.sourceFile = sourceFile;
@@ -32,6 +33,10 @@ public class DiagramImageExporter extends AbstractWorkflowComponent {
 
 	public void setIconDir(final String iconDir) {
 		this.iconDir = iconDir;
+	}
+
+	public void setImageFormat(final String imageFormat) {
+		this.imageFormat = imageFormat;
 	}
 
 	@Override
@@ -67,6 +72,11 @@ public class DiagramImageExporter extends AbstractWorkflowComponent {
 			result = false;
 		}
 
+		if (imageFormat == null) {
+			issues.addError("No imageFormat given");
+			result = false;
+		}
+
 		return result;
 	}
 
@@ -87,7 +97,7 @@ public class DiagramImageExporter extends AbstractWorkflowComponent {
 		}
 
 		try {
-			SVGGenerator.generateImages(sourceFile, targetDir, iconDir);
+			SVGGenerator.generateImages(sourceFile, targetDir, iconDir, imageFormat);
 		} catch (Exception e) {
 			java.io.StringWriter sw = new java.io.StringWriter();
 			java.io.PrintWriter pw = new java.io.PrintWriter(sw);
