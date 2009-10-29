@@ -6,10 +6,10 @@ public class InfoXmlConnection {
 	
 	String type;
 	String targetType;
-	int targetOid;
+	String targetOid;
 	String targetRole;
 	
-	InfoXmlConnection( String type, String targetType,int targetOid , String targetRole){
+	InfoXmlConnection( String type, String targetType,String targetOid , String targetRole){
 		setAll(targetType, type, targetOid, targetRole);
 	}
 	
@@ -37,15 +37,15 @@ public class InfoXmlConnection {
 		this.type = type;
 	}
 	
-	public int getTargetOid() {
+	public String getTargetOid() {
 		return targetOid;
 	}
 	
-	public void setTargetOid(int targetOid) {
+	public void setTargetOid(String targetOid) {
 		this.targetOid = targetOid;
 	}
 	
-	public void setAll(String targetType, String type,int targetOid , String targetRole){
+	public void setAll(String targetType, String type,String targetOid , String targetRole){
 		this.targetType = targetType;
 		this.type = type;
 		this.targetOid = targetOid;

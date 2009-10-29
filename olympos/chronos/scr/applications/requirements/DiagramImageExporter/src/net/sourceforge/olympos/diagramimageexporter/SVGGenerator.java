@@ -39,7 +39,7 @@ public class SVGGenerator {
 		xmlFigure.add(fChild);
 	}
 
-	public static void generateImages(String sourceFile, String targetDir, String iconDir) throws Exception {
+	public static void generateImages(String sourceFile, String targetDir, String iconDir, String usedImageFormat) throws Exception {
 
 		// create the target directory if not existing
 		File target = new File(targetDir);
@@ -68,7 +68,7 @@ public class SVGGenerator {
 		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
 		for (InfoXmlDiagram currDia : xmlDia) {
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
-			df.drawAll(targetDir, figureArray, currDia.getId());
+			df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat);
 		}
 		
 		System.out.println("FINISH");
@@ -101,7 +101,8 @@ public class SVGGenerator {
 		String xmlFile = args[0];
 		String imagePath = args[1];
 		String picturePath = args[2];
+		String usedImageFormat = args[3];
 
-		generateImages(xmlFile, imagePath, picturePath);
+		generateImages(xmlFile, imagePath, picturePath, usedImageFormat);
 	}
 }

@@ -7,15 +7,11 @@ public class Children {
 	public InfoXmlDiagram addChildren(){
 		SVGGenerator gen = new SVGGenerator();
 		
-		
 		ArrayList<InfoXmlDiagram> dia = new ArrayList<InfoXmlDiagram>();
 		ArrayList<InfoFigureParameter> fig = new ArrayList<InfoFigureParameter>();
 		ArrayList<InfoXmlConnection> xmlChildren1 = new ArrayList<InfoXmlConnection>();
-//		ArrayList<InfoXmlConnection> con = new ArrayList<InfoXmlConnection>();
 		
-		ArrayList<InfoXmlFigure> xmlFig = new ArrayList<InfoXmlFigure>();
-//		ArrayList<InfoXmlConnection> xmlChildren2 = new ArrayList<InfoXmlConnection>();
-		
+		ArrayList<InfoXmlFigure> xmlFig = new ArrayList<InfoXmlFigure>();		
 		
 		dia = gen.getDiagram();
 		

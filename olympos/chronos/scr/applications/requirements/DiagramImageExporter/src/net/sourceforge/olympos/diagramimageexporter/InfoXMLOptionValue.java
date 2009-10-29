@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class InfoXMLOptionValue {
 	String typ;
-	int id;
+	String id;
 	String name;
 	String alias;
 
@@ -20,7 +20,7 @@ public class InfoXMLOptionValue {
 		return children;
 	}
 	
-	InfoXMLOptionValue(int id, String name, String type, String alias) {
+	InfoXMLOptionValue(String id, String name, String type, String alias) {
 		setAll(id, name, type, alias);
 	}
 
@@ -32,11 +32,11 @@ public class InfoXMLOptionValue {
 		this.typ = typ;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -44,7 +44,7 @@ public class InfoXMLOptionValue {
 		return alias;
 	}
 
-	public void setId(String alias) {
+	public void setAlias(String alias) {
 		this.alias = alias;
 	}
 
@@ -56,7 +56,7 @@ public class InfoXMLOptionValue {
 		this.name = name;
 	}
 
-	public void setAll(int id, String name, String type, String alias) {
+	public void setAll(String id, String name, String type, String alias) {
 		this.id = id;
 		this.name = name;
 		this.typ = type;

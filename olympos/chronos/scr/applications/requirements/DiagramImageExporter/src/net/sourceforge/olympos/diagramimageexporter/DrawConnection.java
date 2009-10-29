@@ -124,7 +124,7 @@ public class DrawConnection {
 
 	private InfoCoordinate chopboxConnectionAnchor(InfoFigureParameter RealSource, InfoCoordinate target) {
 
-		InfoFigureParameter source = new InfoFigureParameter(0, 0, 0, 0, null, null, 0, null);
+		InfoFigureParameter source = new InfoFigureParameter(0, 0, 0, 0, null, null, null, null);
 		double scale = 0;
 
 		source.setXYWeightHeight(RealSource.getX() - 1, RealSource.getY() - 1, RealSource.getWidth() + 1, RealSource.getHeight() + 1);

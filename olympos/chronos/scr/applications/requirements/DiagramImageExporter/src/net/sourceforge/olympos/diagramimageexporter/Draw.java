@@ -28,14 +28,13 @@ public class Draw {
 	SVGGenerator svg = new SVGGenerator();
 	FigureChildren ch = new FigureChildren();
 
-	public String drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, int id) throws JDOMException, Exception {
+	public String drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat) throws JDOMException, Exception {
 
 		// create following Objects
-		Boolean usePNG = true;
 		DrawFigure drawF = new DrawFigure();
 		DrawConnection drawC = new DrawConnection();
 		FigureDiagram editDia = new FigureDiagram();
-		imagePath = imagePath + id + ".svg";
+		String imagePathSvg = imagePath + id + ".svg";
 
 		// Create the document on which the different elements will be put
 		DOMImplementation impl = GenericDOMImplementation.getDOMImplementation();
@@ -75,7 +74,7 @@ public class Draw {
 		// write the data into a image out
 		boolean useCSS = true;
 		try {
-			os = new PrintStream(new FileOutputStream(imagePath));
+			os = new PrintStream(new FileOutputStream(imagePathSvg));
 			Writer out = new OutputStreamWriter(os, "UTF-8");
 			g2d.stream(out, useCSS);
 		} catch (SVGGraphics2DIOException e1) {
@@ -88,12 +87,13 @@ public class Draw {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(usePNG == true){
+//		usedImageFormat = "png";
+		if(usedImageFormat.toLowerCase().equals("png")){
 		    PNGTranscoder t = new PNGTranscoder();
-		    String fileImagePath = "file:/"+imagePath;
+		    String fileImagePath = "file:/"+imagePathSvg;
 			TranscoderInput input = new TranscoderInput(fileImagePath);
 		    try {
-		    	OutputStream ostream = new FileOutputStream("D:/Images/"+id+".png");
+		    	OutputStream ostream = new FileOutputStream(imagePath + id + ".png");
 		    	t.addTranscodingHint(t.KEY_WIDTH, new Float(maxCor.getX()));
 		    	t.addTranscodingHint(t.KEY_HEIGHT,new Float(maxCor.getY()));
 		    	
