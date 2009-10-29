@@ -6,10 +6,10 @@ import java.util.ArrayList;
 // parameter + get & set
 public class InfoXmlDiagram {
 	ArrayList<InfoFigureParameter> figure = new ArrayList<InfoFigureParameter>();
-	int id;
+	String id;
 	String alias;
 	
-	InfoXmlDiagram(int id,String alias){
+	InfoXmlDiagram(String id,String alias){
 		setAlias(alias);
 		setId(id);
 	}
@@ -23,14 +23,14 @@ public class InfoXmlDiagram {
 	public ArrayList<InfoFigureParameter> getFigure() {
 		return figure;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public void addFigure (InfoFigureParameter figureParameter){
 		figure.add(figureParameter);
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 }

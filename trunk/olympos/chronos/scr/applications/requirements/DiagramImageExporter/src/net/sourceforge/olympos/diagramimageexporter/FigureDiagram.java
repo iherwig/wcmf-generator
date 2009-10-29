@@ -62,13 +62,13 @@ public class FigureDiagram {
 		
 
 		for (InfoXmlFigure currXmlFig1 : xmlFig) {
-			int id1 = currXmlFig1.getId();
+			String id1 = currXmlFig1.getId();
 			String alias1 = currXmlFig1.getAlias();		
 			for (InfoXmlFigure currXmlFig2 : xmlFig) {
 				String alias2 = currXmlFig2.getAlias();
 				ArrayList<InfoXmlConnection> xmlFigCon = currXmlFig2.getChildren();
 				for (InfoXmlConnection currXmlFigCon : xmlFigCon) {
-					if (currXmlFigCon.getTargetOid() == id1) {
+					if (id1.equals(currXmlFigCon.getTargetOid())) {
 						typ = currXmlFigCon.getType();
 						addChildren(alias1, alias2, typ);
 					}

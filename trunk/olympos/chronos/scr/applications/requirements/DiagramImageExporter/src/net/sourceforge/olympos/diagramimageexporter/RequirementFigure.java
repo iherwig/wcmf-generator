@@ -63,7 +63,7 @@ public abstract class RequirementFigure extends Figure{
 		n.setWrapStyleWord( true );
 		n.setLineWrap( true );
 		n.setBounds(x, y, width, height);
-		n.setBackground(Color.white);
+		n.setOpaque(false);
 		n.paint( textbox );
 		
 	}

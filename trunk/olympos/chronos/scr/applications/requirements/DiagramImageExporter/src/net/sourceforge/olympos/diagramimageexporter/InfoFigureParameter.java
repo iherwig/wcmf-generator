@@ -17,27 +17,27 @@ public class InfoFigureParameter {
 	private ArrayList<InfoXMLOptionValue> value = new ArrayList<InfoXMLOptionValue>();
 	private ArrayList<InfoXMLOptionValue> operation  = new ArrayList<InfoXMLOptionValue>();
 	
-	private int diagramid;
-	private int typeId;
+	private String diagramid;
+	private String typeId;
 	String alias;
 
-	public InfoFigureParameter(float xi, float yi, float w, float h, EnumFigureType i, String label, int diagramid, String alias){
+	public InfoFigureParameter(float xi, float yi, float w, float h, EnumFigureType i, String label, String diagramid, String alias){
 		setAll(xi, yi, w, h, i, label, diagramid, alias);
 	}
 
-	public int getDiagramid() {
+	public String getDiagramid() {
 		return diagramid;
 	}
 
-	public void setDiagramid(int diagramid) {
+	public void setDiagramid(String diagramid) {
 		this.diagramid = diagramid;
 	}
 
-	public int getTypeId() {
+	public String getTypeId() {
 		return typeId;
 	}
 
-	public void setTypeId(int typeId) {
+	public void setTypeId(String typeId) {
 		this.typeId = typeId;
 	}
 
@@ -110,7 +110,7 @@ public class InfoFigureParameter {
 		this.type = i;
 	}
 	
-	public void setAll(float xi, float yi, float w, float h, EnumFigureType i, String label, int diagramid, String alias) {
+	public void setAll(float xi, float yi, float w, float h, EnumFigureType i, String label, String diagramid, String alias) {
 		setAllType(xi, yi, w, h, i);
 		this.label = label;
 		this.diagramid = diagramid;

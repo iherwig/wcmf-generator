@@ -117,7 +117,6 @@ public abstract class Figure extends JPanel {
 		n.setLineWrap(true);
 		n.setBounds(x, y, width, height);
 		n.setOpaque(false);
-		// n.setBackground(Color.white);
 		n.paint(textbox);
 	}
 

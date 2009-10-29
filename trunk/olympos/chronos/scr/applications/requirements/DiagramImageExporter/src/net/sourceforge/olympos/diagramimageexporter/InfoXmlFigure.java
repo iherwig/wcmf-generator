@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class InfoXmlFigure {
 	EnumFigureType typ;
-	int id;
+	String id;
 	String name;
 	String alias;
 	
@@ -18,7 +18,7 @@ public class InfoXmlFigure {
 	private ArrayList<InfoXMLOptionValue> childOptNo = new ArrayList<InfoXMLOptionValue>();
 //	private ArrayList<InfoFigureParameter> childFigure = new ArrayList<InfoFigureParameter>();
 	
-	InfoXmlFigure(int id, String name, EnumFigureType type, String alias){
+	InfoXmlFigure(String id, String name, EnumFigureType type, String alias){
 		setAll(id, name, type, alias);
 	}
 	
@@ -30,17 +30,17 @@ public class InfoXmlFigure {
 		this.typ = typ;
 	}
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
 	public String getAlias() {
 		return alias;
 	}
-	public void setId(String alias) {
+	public void setAlias(String alias) {
 		this.alias = alias;
 	}
 	
@@ -51,7 +51,7 @@ public class InfoXmlFigure {
 		this.name = name;
 	}
 	
-	public void setAll(int id, String name, EnumFigureType type, String alias){
+	public void setAll(String id, String name, EnumFigureType type, String alias){
 		this.id = id;
 		this.name = name;
 		this.typ = type;

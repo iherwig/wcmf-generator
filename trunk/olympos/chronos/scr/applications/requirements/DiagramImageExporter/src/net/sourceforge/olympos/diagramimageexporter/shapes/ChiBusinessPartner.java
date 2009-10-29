@@ -6,7 +6,7 @@ import java.awt.Graphics2D;
 import net.sourceforge.olympos.diagramimageexporter.Figure;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
-import net.sourceforge.olympos.diagramimageexporter.InfoFont;
+//import net.sourceforge.olympos.diagramimageexporter.InfoFont;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 
 public class ChiBusinessPartner extends Figure{
@@ -16,7 +16,7 @@ public class ChiBusinessPartner extends Figure{
 	InfoLine arm = new InfoLine(0, 20, 22, 20);
 	InfoCoordinateSize head = new InfoCoordinateSize(4, 0, 15, 15);
 	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 20, 48);
-	InfoFont chiFont = new InfoFont(0, 0, new Font("Symbol", Font.PLAIN,8), "c");
+//	InfoFont chiFont = new InfoFont(0, 0, new Font("Symbol", Font.PLAIN,8), "c");
 	
 	public ChiBusinessPartner(){	
 	}
