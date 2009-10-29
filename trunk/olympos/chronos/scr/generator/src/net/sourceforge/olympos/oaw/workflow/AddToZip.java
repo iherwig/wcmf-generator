@@ -3,6 +3,7 @@ package net.sourceforge.olympos.oaw.workflow;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -130,8 +131,18 @@ public class AddToZip extends AbstractWorkflowComponent {
 
 			// Complete the ZIP file
 			out.close();
+			
 		} catch (Exception e) {
-			issues.addError("Exception occured!\n" + e.getMessage());
+			java.io.StringWriter sw = new java.io.StringWriter();
+			java.io.PrintWriter pw = new java.io.PrintWriter(sw);
+            e.printStackTrace(pw);
+            pw.close();
+            try {
+				sw.close();
+			} catch (IOException e1) {
+				// ignore
+			}
+			issues.addError("Exception occured!\n" + sw.toString());
 		}
 	}
 }
