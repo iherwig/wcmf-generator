@@ -31,8 +31,12 @@ class UwmUtil {
 	private static $dom;
 	private static $persistenceFacade;
 	private static $encodingUtil;
+	// list of already exported nodes
 	private static $exportedNodes = null;
 	private static $oidNameMap = null;
+	// list of nodes that are referenced and have to be included in the export
+	// these will be exported in a package appended to the end
+	private static $referencedNodes = null;
 
 	private static $language = null;
 
@@ -65,6 +69,7 @@ class UwmUtil {
 		self::$processVirtualPackages = $virtualPackages;
 		self::$exportedNodes = array();
 		self::$oidNameMap = array();
+		self::$referencedNodes = array();
 
 		self::$dom = new XMLWriter();
 		//self::$dom->setIndent(true);
@@ -100,6 +105,8 @@ class UwmUtil {
 				self::$dom->startElement('Model');
 				self::$dom->startElement('Package');
 				self::processDiagram($currDiagram);
+				// add the referenced nodes
+				self::processReferencedNodes();
 				self::$dom->endElement();
 				self::$dom->endElement();
 			} else {
@@ -166,6 +173,16 @@ class UwmUtil {
 			self::$exportedNodes[] = $oid;
 			self::$oidNameMap[$oid] = $node->getDisplayValue();
 		}
+	}
+
+	/**
+	 * Check if a node is already exported.
+	 * @param oid The oid of the node
+	 * @return True/False
+	 */
+	private static function isExportedNode($oid)
+	{
+		return array_key_exists($oid, self::$oidNameMap);
 	}
 
 	private static function processModels()
@@ -462,6 +479,9 @@ class UwmUtil {
 				$persistenceFacade = &PersistenceFacade::getInstance();
 				$obj = &$persistenceFacade->load($poid, BUILDDEPTH_SINGLE);
 				$alias = $obj->getValue('Alias', DATATYPE_ATTRIBUTE);
+				
+				// store the referenced node in order to make sure that it is included in the export
+				array_push(self::$referencedNodes, $poid);
 				break;
 			}
 		}
@@ -575,6 +595,27 @@ class UwmUtil {
 			}		}
 
 			return $result;
+	}
+	
+	/**
+	 * Add a package including all referenced nodes that were not exported yet.
+	 */
+	private static function processReferencedNodes() {
+		$persistenceFacade = &PersistenceFacade::getInstance();
+		
+		// create the enclosing package
+		$package = &$persistenceFacade->create('Package', BUILDDEPTH_SINGLE);
+		$package->setOID(PersistenceFacade::composeOID(array('type' => 'Package', 'id' => array(0))));
+		$package->setName('Referenced Nodes');
+		
+		// add the referenced nodes to the package
+		foreach (self::$referencedNodes as $oid) {
+			if (!self::isExportedNode($oid)) {
+				$node = &$persistenceFacade->load($oid, BUILDDEPTH_SINGLE);
+				$package->addChild($node);
+			}
+		}
+		self::processPackage($package);
 	}
 
 	private static function getRealType($node) {

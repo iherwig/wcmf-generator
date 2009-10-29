@@ -16,53 +16,46 @@
  * Manual modifications should be placed inside the protected regions.
  */
  require_once(BASE."wcmf/application/controller/class.BatchController.php");
-// PROTECTED REGION ID(application/include/controller/class.GenerateCodeController.php/Import) ENABLED START
+// PROTECTED REGION ID(application/include/controller/class.DiagramImageExporterController.php/Import) ENABLED START
 require_once (BASE.'wcmf/lib/persistence/class.PersistenceFacade.php');
-require_once (BASE.'application/include/controller/class.CodeGeneratorListController.php');
 
 require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
 // PROTECTED REGION END
 
 /**
- * @class GenerateCodeController
+ * @class DiagramImageExporterController
  * @ingroup Controller
- * @brief Generates Code out of the passed model.
- * 
- * <b>Input actions:</b>
- *  - @em generateCode Generates the code.
- *  
- * <b>Output actions:</b>
- *  - @em failure If a fatal error occurs
- * 
- * @param[in] modelOid The OID of the model to generate Code for.
- * @param[in] codeId The id of the code generator to use.
- * 
- * @author Niko &lt;enikao@users.sourceforge.net&gt;
+ * @brief @class DiagramImageExporterController
+ * @ingroup Controller
+ * @brief Generates a SVG image of the given diagram. 
+ * <b>Input actions:</b> - @em exportImage Generates a image file. 
+ * <b>Output actions:</b> - @em failure If a fatal error occurs 
+ * @param[in] diagramOID The OID of the diagram to generate the image for.
  * 
  * The following configuration settings are defined for this controller:
  *
  * [actionmapping]
- * GenerateCodeController??done = TerminateController
- * ??generateCode = GenerateCodeController
- * GenerateCodeController??continue = GenerateCodeController
+ * ??exportImage = DiagramImageExporterController
+ * DiagramImageExporterController??continue = DiagramImageExporterController
  *
  * [views]
  * 
  * @author 
  * @version 1.0
  */
-class GenerateCodeController extends BatchController
+class DiagramImageExporterController extends BatchController
 {
-// PROTECTED REGION ID(application/include/controller/class.GenerateCodeController.php/Body) ENABLED START
+// PROTECTED REGION ID(application/include/controller/class.DiagramImageExporterController.php/Body) ENABLED START
 	// session name constants
-	const PARAM_START_OID = 'GenerateCodeController.startOid';
-	const PARAM_CODE_ID = 'GenerateCodeController.codeId';
+	private $PARAM_START_OID = 'UWMExporterController.startOid';
+	private $PARAM_LANGUAGE = 'UWMExporterController.language';
 
-	const TEMP_UWM_EXPORT_PATH = 'GenerateCodeController.tmpUwmExportPath';
-	const TEMP_PROPERTIES_PATH = 'GenerateCodeController.tmpPropertiesPath';
+	private $TEMP_UWM_EXPORT_PATH = 'UWMExporterController.tmpUwmExportPath';
+	private $TEMP_PROPERTIES_PATH = 'UWMExporterController.tmpPropertiesPath';
+	private $TEMP_IMAGE_PATH = 'UWMExporterController.tmpImagePath';
 
-	const PROBLEM_REPORT = 'GenerateCodeController.problemReport';
+	private $PROBLEM_REPORT = 'UWMDocExporterController.problemReport';
 	
 	private $lastTime = 0;
 	private function check($msg)
@@ -83,11 +76,13 @@ class GenerateCodeController extends BatchController
 		if ($request->getAction() != 'continue')
 		{
 			$session = &SessionData::getInstance();
-			$session->set(self::PARAM_START_OID, $request->getValue('modelOid'));
-			$session->set(self::PARAM_CODE_ID, $request->getValue('codeId'));
+			$session->set($this->PARAM_START_OID, $request->getValue('diagramOid'));
+			if ($this->isLocalizedRequest()) {
+				$session->set($this->PARAM_LANGUAGE, $request->getValue('language'));
+			}
 			// clear the problem report
 			$report = '';
-			$session->set(self::PROBLEM_REPORT, $report);
+			$session->set($this->PROBLEM_REPORT, $report);
 		}
 	}
 
@@ -117,8 +112,9 @@ class GenerateCodeController extends BatchController
 		{
 			return array('name' => 'Clean up', 'size' => 1, 'oids' => array(0), 'callback' => 'finish');
 		}
-		else
-		return null;
+		else {
+		  return null;
+        }
 	}
 	/**
 	 * @see LongTaskController::getSummaryText()
@@ -126,7 +122,7 @@ class GenerateCodeController extends BatchController
 	function getSummaryText()
 	{
 		$session = &SessionData::getInstance();
-		return $session->get(self::PROBLEM_REPORT);
+		return $session->get($this->PROBLEM_REPORT);
 	}
 	/**
 	 * Export the given model to XML
@@ -138,20 +134,22 @@ class GenerateCodeController extends BatchController
 		require_once ('class.ExportShutdownHandler.php');
 		$session = &SessionData::getInstance();
 
-		// set the export path
+		// set the export file name
 		$tmpUwmExportPath = OawUtil::tempName();
-		$session->set(self::TEMP_UWM_EXPORT_PATH, $tmpUwmExportPath);
+		$session->set($this->TEMP_UWM_EXPORT_PATH, $tmpUwmExportPath);
 
 		// do the export
-		$startOid = $session->get(self::PARAM_START_OID);
-		$this->check("start exportXML: model:".$startOid);
-		UwmUtil::exportXml($tmpUwmExportPath, $startOid);
+		$startOid = $session->get($this->PARAM_START_OID);
+		$language = $session->get($this->PARAM_LANGUAGE);
+
+		$this->check("start exportXML: node:".$startOid);
+		UwmUtil::exportXml($tmpUwmExportPath, $startOid, $language);
 		$this->check("finished exportXML");
 
 		ExportShutdownHandler::success();
 	}
 	/**
-	 * Run the gererator
+	 * Run the generator
 	 * @param oids The oids to process
 	 * @note This is a callback method called on a matching work package @see BatchController::addWorkPackage()
 	 */
@@ -160,31 +158,35 @@ class GenerateCodeController extends BatchController
 		require_once ('class.ExportShutdownHandler.php');
 		$session = &SessionData::getInstance();
 
+		$startOid = $session->get($this->PARAM_START_OID);
+
+		// get the name of the uwm xml file
+		$tmpUwmExportPath = $session->get($this->TEMP_UWM_EXPORT_PATH);
+
+		// set the image filename
+		$tmpUwmExportDir = dirname($tmpUwmExportPath);
+		$tmpImagePath = $tmpUwmExportDir.'/'.join('', PersistenceFacade::getOIDParameter($startOid, 'id')).'.svg';
+		$session->set($this->TEMP_IMAGE_PATH, $tmpImagePath);
+		
 		// create the configuration file
-		$tmpUwmExportPath = $session->get(self::TEMP_UWM_EXPORT_PATH);
 		$tmpPropertiesPath = OawUtil::tempName();
 		$propertiesFile = fopen($tmpPropertiesPath, "w");
-		fwrite($propertiesFile, "modelXmlFile = $tmpUwmExportPath\n");
+		fwrite($propertiesFile, "sourceFile = $tmpUwmExportPath\n");
+		fwrite($propertiesFile, "targetDir = $tmpUwmExportDir\n");
 		fclose($propertiesFile);
-
-		$session->set(self::TEMP_PROPERTIES_PATH, $tmpPropertiesPath);
+		
+		$session->set($this->TEMP_PROPERTIES_PATH, $tmpPropertiesPath);
 
 		OawUtil::setupExecutable();
-
-		//get the correct code generator
-		$codeId = $session->get(self::PARAM_CODE_ID);
-		$cartridgePath = CodeGeneratorListController::getCartrdigePath();
-		$cartridgeInfo = CodeGeneratorListController::readCartrdigeInfo($codeId, $cartridgePath);
-		$workflow = $cartridgePath . DIRECTORY_SEPARATOR . $codeId . DIRECTORY_SEPARATOR . $cartridgeInfo['properties']['workflow'];
-
+		
 		// run the generator
 		$this->check("start generator");
-		$result = OawUtil::runOaw($tmpPropertiesPath, $workflow);
+		$result = OawUtil::runOaw($tmpPropertiesPath, 'cartridge/DiagramImageExport/workflow/imageexport.oaw');
 		$this->check('finished generator');
 
 		if ($result['returncode'] > 0) {
 			$report = "There were problems during generation:\n".$result['stderr']."\n";
-			$session->set(self::PROBLEM_REPORT, $report);
+			$session->set($this->PROBLEM_REPORT, $report);
 		}
 		ExportShutdownHandler::success();
 	}
@@ -195,14 +197,31 @@ class GenerateCodeController extends BatchController
 	 */
 	function finish($oids)
 	{
+		require_once ('class.ExportShutdownHandler.php');
 		$session = &SessionData::getInstance();
 
-		// cleanup
-		unlink($session->get(self::TEMP_UWM_EXPORT_PATH));
-		unlink($session->get(self::TEMP_PROPERTIES_PATH));
+		// get the generated file
+		$tmpImagePath = $session->get($this->TEMP_IMAGE_PATH);
+		$exportFile = $tmpImagePath;
+		if (filesize($exportFile) == 0) {
+			ExportShutdownHandler::success();
+			return;
+		}
+		
+		header('Content-type: application/image/svg+xml');
+		header('Content-Disposition: attachment; filename="diagram.svg"');
 
+		readfile($exportFile);
+		$this->check('File written to output');
+
+		// cleanup
+		unlink($session->get($this->TEMP_UWM_EXPORT_PATH));
+		unlink($session->get($this->TEMP_PROPERTIES_PATH));
+		unlink($exportFile);
+
+		ExportShutdownHandler::success();
 	}
-	// PROTECTED REGION END
+// PROTECTED REGION END
 
 }
 ?>

@@ -271,11 +271,12 @@ class UWMDocExporterController extends BatchController
 		$this->check('File written to output');
 	
 		// cleanup
+		/*
 		unlink($exportFile);
 		$workingDir = $session->get($this->TEMP_WORKING_DIR);
 		FileUtil::emptyDir($workingDir);
 		rmdir($workingDir);
-		
+		*/
 		ExportShutdownHandler::success();
 	}
 
