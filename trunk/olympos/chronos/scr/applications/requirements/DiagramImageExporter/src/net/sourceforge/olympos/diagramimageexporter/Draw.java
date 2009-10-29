@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
-import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
@@ -16,12 +15,10 @@ import org.apache.batik.svggen.SVGGraphics2D;
 import org.apache.batik.svggen.SVGGraphics2DIOException;
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
-import org.apache.batik.transcoder.image.JPEGTranscoder;
 import org.apache.batik.transcoder.image.PNGTranscoder;
 import org.jdom.JDOMException;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 public class Draw {
 
@@ -87,7 +84,7 @@ public class Draw {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		usedImageFormat = "png";
+
 		if(usedImageFormat.toLowerCase().equals("png")){
 		    PNGTranscoder t = new PNGTranscoder();
 		    String fileImagePath = "file:/"+imagePathSvg;
@@ -108,43 +105,6 @@ public class Draw {
 		    }
 		}
 
-	    
-//	    PNGTranscoder t = new PNGTranscoder();
-//	    String fileImagePath = "file:/"+imagePath;
-//		TranscoderInput input = new TranscoderInput( new StringReader(fileImagePath) );
-//	    try {
-//	    	String path = "D:/Images/test.png";
-//			TranscoderOutput output = new TranscoderOutput(path);
-//	        t.transcode(input, output);
-//	    }
-//	    catch (Exception e)
-//	    {
-//	        e.printStackTrace();
-//	    }
-	    
-//		JPEGTranscoder t = new JPEGTranscoder();
-//
-//		// Set the transcoding hints.
-//		t.addTranscodingHint(JPEGTranscoder.KEY_QUALITY, new Float(.8));
-//
-//		// Create the transcoder input.
-//		String fileImagePath = "file:/" + imagePath;
-//		String svgURI = fileImagePath;
-//		TranscoderInput input = new TranscoderInput(svgURI);
-//
-//		// Create the transcoder output.
-//		OutputStream ostream = new FileOutputStream("d:/Images/out.jpg");
-//		TranscoderOutput output = new TranscoderOutput(ostream);
-//
-//		// Save the image.
-//		t.transcode(input, output);
-//
-//		// Flush and close the stream.
-//		ostream.flush();
-//		ostream.close();
-//		System.exit(0);
-
-	    
 		return imagePath;
 	}
 }
