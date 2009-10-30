@@ -505,6 +505,8 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					} else {
 						createConnection = false;
 					}
+				} else {
+					createConnection = false;
 				}
 				
 				if (createConnection) {
