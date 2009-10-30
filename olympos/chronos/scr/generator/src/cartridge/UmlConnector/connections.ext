@@ -49,8 +49,8 @@ Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml
 	//(new cwm::ManyToMany).sou
 	//(new uml::Association).navigableOwnedEnd
 	//(new uml::Property).n
-	//(new uml::Class).createA
-	let childClass = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
+	//(new uml::Class).isM
+	let childClass = um.allOwnedElements().typeSelect(uml::Class).selectFirst(e|e.name == ch.targetType + ":" + ch.targetOid): (
 		childClass != null
 		? (
 			let parentLower = getLowerMultiplicity(ch.sourceMultiplicity):
@@ -59,8 +59,20 @@ Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml
 			let childLower = getLowerMultiplicity(ch.targetMultiplicity):
 			let childUpper = getUpperMultiplicity(ch.targetMultiplicity):
 			let childNav = getNavigability(ch.targetNavigability):
-			let conn = parentClass.createAssociation(parentNav, parentAK, "", parentLower, parentUpper, childClass, childNav, childAK, "", childLower, childUpper):
-				conn.applyStereotype("Chronos::ChiAssociation")
+
+			let isManyToMany = childClass.name.split(":").first() == "ChiNodeManyToMany":
+			let realParentLower = isManyToMany ? childLower : parentLower:
+			let realParentUpper = isManyToMany ? childUpper : parentUpper:
+			let realChildLower = isManyToMany ? parentLower : childLower:
+			let realChildUpper = isManyToMany ? parentUpper : childUpper:
+			let realParentAK = isManyToMany ? parentAK : childAK:
+			let realChildAK = isManyToMany ? childAK : parentAK:
+			let realParentNav = isManyToMany ? parentNav : childNav:
+			let realChildNav = isManyToMany ? childNav : parentNav:
+
+			let conn = parentClass.createAssociation(realParentNav, realParentAK, "", realParentLower, realParentUpper, childClass, realChildNav, realChildAK, "", realChildLower, realChildUpper):
+				conn.applyStereotype("Chronos::ChiAssociation") ->
+				conn.setName(label)
 		) : (
 			Void
 		)

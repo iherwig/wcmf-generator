@@ -289,6 +289,7 @@ class UWMImporterController extends Controller
 	}
 
 	private static $roleTargetToSourceMapper = array(
+		'ChiNodeSource' => 'ChiNodeTarget',
 		'ChiNodeTarget' => 'ChiNodeSource',
 		'NMChiNodeChiMany2ManyChiNodeEnd' => 'NodeManyToManySource',
 		'NodeManyToManySource' => 'NMChiNodeChiMany2ManyChiNodeEnd'

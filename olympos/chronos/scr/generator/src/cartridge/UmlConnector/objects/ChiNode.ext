@@ -48,14 +48,16 @@ Void transferValues(cwm::ChiNode c, uml::Model um):
 			uc.setTaggedValue("Chronos::ChiNode", "parent_order", c.parentOrder) ->
 			uc.setTaggedValue("Chronos::ChiNode", "child_order", c.childOrder) ->
 			uc.setTaggedValue("Chronos::ChiNode", "display_value", c.displayValue) ->
-			//uc.setTaggedValue("Chronos::ChiNode", "is_ordered", c.isOrdered == "true") ->
-			//uc.setTaggedValue("Chronos::ChiNode", "is_soap", c.isSoap == "true") ->
-			//uc.setTaggedValue("Chronos::ChiNode", "is_searchable", c.isSearchable == "true") ->
+			uc.setTaggedValue("Chronos::ChiNode", "is_ordered", c.isOrdered == "true" ? Chronos::boolean::^true : Chronos::boolean::^false) ->
+			uc.setTaggedValue("Chronos::ChiNode", "is_soap", c.isSoap == "true" ? Chronos::boolean::^true : Chronos::boolean::^false) ->
+			uc.setTaggedValue("Chronos::ChiNode", "is_searchable", c.isSearchable == "true" ? Chronos::boolean::^true : Chronos::boolean::^false) ->
 			uc.setTaggedValue("Chronos::ChiNode", "initparams", c.initparams) ->
 			uc.setTaggedValue("Chronos::ChiNode", "Author", c.author) ->
 			uc.setTaggedValue("Chronos::ChiNode", "Status", c.status) ->
 			uc.setTaggedValue("Chronos::ChiNode", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ChiNode", "Version", c.version) ->
+			uc.setVisibility(c.visibility.getVisibilityKind()) ->
+			uc.setIsAbstract(c.isAbstract == "true") ->
 			uc.setName(c.name) ->
 			c.notes != null ? (
 				comment.setBody(c.notes) ->
@@ -102,7 +104,20 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild())
 		 ->
 		un.manyToMany.addAll(((List[uml::Class]) c.getSubClasses()).convertToMany("generalization", "ChiNodeTarget")) ->
-		un.manyToMany.addAll(c.getAssociations().convertToMany(c).typeSelect(cwm::ManyToMany))
+		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type == c)
+			.select(e|e.aggregation == uml::AggregationKind::none && 
+				(e.getOtherEnd().aggregation != uml::AggregationKind::none || (e.association.memberEnd.get(0) == e))
+		).association.convertToMany(c).typeSelect(cwm::ManyToMany))
 	) ->
 	un
+;
+
+uml::VisibilityKind getVisibilityKind(String this):
+	switch(this) {
+		case "public": uml::VisibilityKind::public
+		case "protected": uml::VisibilityKind::protected
+		case "package": uml::VisibilityKind::package
+		case "private": uml::VisibilityKind::^private
+		default: uml::VisibilityKind::public
+	}
 ;

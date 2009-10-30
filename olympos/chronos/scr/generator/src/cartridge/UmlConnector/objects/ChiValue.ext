@@ -4,6 +4,7 @@ import uml;
 
 extension org::openarchitectureware::uml2::profile::profiling;
 
+extension common::util;
 extension common::umlutils;
 
 uml::Property convert(cwm::ChiValue o):
@@ -19,7 +20,7 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiValue") ->
 			uc.setDefault(c.^default) ->
-			//uc.setTaggedValue("Chronos::ChiValue", "PropertyType", c.propertyType) ->
+			
 			uc.setTaggedValue("Chronos::ChiValue", "app_data_type", c.appDataType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "db_data_type", c.dbDataType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "is_editable", c.isEditable ? Chronos::boolean::^true : Chronos::boolean::^false) ->
@@ -31,6 +32,7 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 			uc.setTaggedValue("Chronos::ChiValue", "column_name", c.columnName) ->
 			//uc.setTaggedValue("Chronos::ChiValue", "Alias", c.alias) ->
 			//uc.setTaggedValue("Chronos::ChiValue", "Version", c.version) ->
+			uc.setType(getType(c.propertyType, um)) ->
 			uc.setName(c.name) ->
 			c.notes != null ? (
 				comment.setBody(c.notes) ->
@@ -50,7 +52,7 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	let un = new cwm::ChiValue : (
 		un.setId(c.getId()) ->
 		
-		un.setDefault((String) c.^default) ->
+		c.^default != null ? un.setDefault((String) c.^default) : Void ->
 		un.setPropertyType(c.type.name) ->
 		un.setAppDataType((String) c.getTaggedValue("Chronos::ChiValue", "app_data_type")) ->
 		un.setDbDataType((String) c.getTaggedValue("Chronos::ChiValue", "db_data_type")) ->
@@ -72,3 +74,30 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	) ->
 	un
 ;
+
+uml::PrimitiveType getType(String typeName, uml::Model um):
+	let primitiveTypes = um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes") == null ? (
+			let tempPackage = new uml::Package:
+			tempPackage.setName("PrimitiveTypes") ->
+			um.nestedPackage.add(tempPackage) ->
+			info("Added PrimitiveTypes package") ->
+			tempPackage
+		) :
+			um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes")
+	:
+	
+	let result = primitiveTypes.ownedType.selectFirst(e|e.name == typeName) == null ? (
+			let tempType = new uml::PrimitiveType:
+			tempType.setName(typeName) ->
+			((uml::Package) primitiveTypes).ownedType.add(tempType) ->
+			info("Added Primitive Type \"" + typeName + "\"") ->
+			tempType
+		) :
+			primitiveTypes.ownedType.selectFirst(e|e.name == typeName)
+	:
+
+	
+	
+	result
+;
+	
