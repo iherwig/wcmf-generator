@@ -127,6 +127,8 @@ String getHierarchyRole(Chronos::ChiNode this, Property p):
 	: (
 		this.isParentNode((Chronos::ChiNode) p.type) ? "Parent" : "Child"
 	)
+	// these roles should not be used any more
+	-> ""
 ;
 
 /**

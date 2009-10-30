@@ -10,7 +10,7 @@
 «EXTENSION cartridge::Grails::classtools»
 
 «DEFINE root FOR uml::Model»
-	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(ChiNode).select(e|!e.isManyToMany())»
+	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(ChiNode).select(e|!e.isManyToMany() && !e.isLibraryClass())»
 «ENDDEFINE»
 
 «REM»For the time being, all package references are commented.«ENDREM»
@@ -34,21 +34,21 @@ package «fullQualifiedPackage»
 /**
  * «this.getComment("\n * ")»
  */
-«IF this.isAbstract»abstract «ENDIF-»
+«REM avoiding abstract bug in Grails»«IF this.isAbstract»abstract «ENDIF-»«ENDREM-»
 class «name-» 
-«IF !this.superClass.isEmpty» extends «this.superClass.first().name»«ENDIF»
+«IF !this.superClass.select(e|!e.isLibraryClass()).isEmpty» extends «this.superClass.first().name»«ENDIF»
 {
 	«REM» Attributes «ENDREM-»
-«EXPAND Attribute FOREACH this.getChiValues()-»
+«EXPAND Attribute FOREACH this.getOwnChiAttributes()-»
 
 	«REM» Every property where e reference for navigation is stored «ENDREM-»
 «EXPAND ReferenceProperties FOR this-»
 
-	«REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM-»
-«EXPAND OneToManyChildren FOR this-»					
-
 	«REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM-»
 «EXPAND ManyToOneParents FOR this-»
+
+	«REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM-»
+«EXPAND OneToManyChildren FOR this-»					
 
 	«REM» MappedBy for handling multiple relations between the same Classes «ENDREM-»
 «EXPAND MappedBy FOR this-»
