@@ -22,11 +22,14 @@ uml::Class convert(cwm::ChiNodeManyToMany n):
 ;
 
 Void establishConnections(cwm::ChiNodeManyToMany b, uml::Model um):
+/*
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNodeManyToMany:" + b.id).first(): (
 		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "aggregation").establishConnectionsToClass(uc, um, null, uml::AggregationKind::shared, uml::AggregationKind::none) ->
 		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "composition").establishConnectionsToClass(uc, um, null, uml::AggregationKind::composite, uml::AggregationKind::none) ->
 		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none)
 	)
+*/
+Void
 ;
 
 Void transferValues(cwm::ChiNodeManyToMany c, uml::Model um):

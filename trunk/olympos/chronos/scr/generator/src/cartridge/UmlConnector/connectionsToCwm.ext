@@ -91,26 +91,34 @@ cwm::ManyToMany convertToMany(uml::Association this, uml::Class source) :
 	let result = new cwm::ManyToMany:
 	let ownEnd = this.memberEnd.selectFirst(e|e.type == source):
 	let otherEnd = ownEnd.getOtherEnd():
+	let isManyToMany = source.isStereotypeApplied(source.getApplicableStereotype("Chronos::ChiManyToMany")):
 	
-	ownEnd == this.memberEnd.get(0) ? (
-		info("Association convert: " + this.name + " class: " + source.name + " ends: " + this.memberEnd.type) ->
+	info("Association convert: " + this.name + " class: " + source.name + " ends: " + this.memberEnd.type) ->
+			
+	result.setName(this.name) ->
+
+	result.setRelationType(ownEnd.getMoreSpecificAggregationKind(otherEnd).getUwmRelationType()) ->
+	//result.setRelationType(otherEnd.aggregation.getUwmRelationType()) ->
+	
+	result.setTargetType(getTargetType(otherEnd.type.metaType.name.split("::").last())) ->
+	result.setTargetRole(getTargetRole(otherEnd.type.metaType.name.split("::").last(), ownEnd.type.metaType.name.split("::").last())) ->
+	result.setTargetOid(otherEnd.type.getId()) ->
+	
+	(
+		let realSourceMultiplicity = isManyToMany ? otherEnd.getUwmMultiplicity() : ownEnd.getUwmMultiplicity():
+		let realSourceNavigability = isManyToMany ? ownEnd.getUwmNavigability() : otherEnd.getUwmNavigability():
 		
-		result.setName(this.name) ->
+		let realTargetMultiplicity = isManyToMany ? ownEnd.getUwmMultiplicity() : otherEnd.getUwmMultiplicity():
+		let realTargetNavigability = isManyToMany ? otherEnd.getUwmNavigability() : ownEnd.getUwmNavigability():	
 
-		result.setRelationType(ownEnd.getMoreSpecificAggregationKind(otherEnd).getUwmRelationType()) ->
+		result.setSourceMultiplicity(realSourceMultiplicity) ->
+		result.setSourceNavigability(realSourceNavigability) ->
+			
+		result.setTargetMultiplicity(realTargetMultiplicity) ->
+		result.setTargetNavigability(realTargetNavigability)
+	) ->
 	
-		result.setTargetType(getTargetType(otherEnd.type.metaType.name.split("::").last())) ->
-		result.setTargetRole(getTargetRole(otherEnd.type.metaType.name.split("::").last(), ownEnd.type.metaType.name.split("::").last())) ->
-		result.setTargetOid(otherEnd.type.getId()) ->
-	
-		result.setSourceMultiplicity(ownEnd.getUwmMultiplicity()) ->
-		result.setSourceNavigability(ownEnd.getUwmNavigability()) ->
-	
-		result.setTargetMultiplicity(otherEnd.getUwmMultiplicity()) ->
-		result.setTargetNavigability(otherEnd.getUwmNavigability()) ->
-
-		result
-	) : Void
+	result
 ;
 
 uml::AggregationKind getMoreSpecificAggregationKind(uml::Property ownEnd, uml::Property otherEnd):
@@ -148,7 +156,7 @@ String getTargetRole(String otherEnd, String ownEnd):
 	switch (otherEnd) {
 		case "ChiNode": (
 			switch(ownEnd) {
-				case "ChiNode": "ChiNodeTarget"
+				case "ChiNode": "ChiNodeSource"
 				case "ChiManyToMany": "NMChiNodeChiMany2ManyChiNodeEnd"
 				default: "UNKNOWN"
 			}

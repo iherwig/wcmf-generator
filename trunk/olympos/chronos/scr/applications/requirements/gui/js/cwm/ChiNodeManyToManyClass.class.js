@@ -84,8 +84,8 @@ cwm.ChiNodeManyToManyClass = function() {
 	};
 	
 	this.maskInfo = {
-	    "NodeTargetEnd" : "ChiAssociation",
-	    "NodeSourceEnd" : "ChiAssociation"
+	    "NodeManyToManyTargetEnd" : "ChiAssociation",
+	    "NodeManyToManySourceEnd" : "ChiAssociation"
 	};
 }
 
