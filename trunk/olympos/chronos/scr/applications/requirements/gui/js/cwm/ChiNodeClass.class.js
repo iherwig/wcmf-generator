@@ -85,25 +85,29 @@ cwm.ChiNodeClass = function() {
 	        nmUwmClassName : "NodeSourceEnd",
 	        connections : [ {
 	            label : "Generalization",
-	            invert : false,
+	            invert : true,
+	            invertBackendRelation: true,
 	            connectionType : "generalization",
 	            nmSelf : true,
 	            cardinality : -1
 	        }, {
 	            label : "Association",
-	            invert : false,
+	            invert : true,
+	            invertBackendRelation: true,
 	            connectionType : "association",
 	            nmSelf : true,
 	            cardinality : -1
 	        }, {
 	            label : "Aggregation",
-	            invert : false,
+	            invert : true,
+	            invertBackendRelation: true,
 	            connectionType : "aggregation",
 	            nmSelf : true,
 	            cardinality : -1
 	        }, {
 	            label : "Composition",
-	            invert : false,
+	            invert : true,
+	            invertBackendRelation: true,
 	            connectionType : "composition",
 	            nmSelf : true,
 	            cardinality : -1

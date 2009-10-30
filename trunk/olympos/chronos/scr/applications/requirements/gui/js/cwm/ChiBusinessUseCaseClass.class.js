@@ -52,7 +52,8 @@ cwm.ChiBusinessUseCaseClass = function() {
 				nmUwmClassName : "ChiUseCaseSourceEnd",
 				connections : [ {
 						label : "Precedes",
-						invert : false,
+						invert : true,
+						invertBackendRelation: true,
 						connectionType : "sequence",
 						nmSelf : true,
 						cardinality : -1,
@@ -60,7 +61,8 @@ cwm.ChiBusinessUseCaseClass = function() {
 						otherUwmClassName : "ChiUseCaseTarget"
 				}, {
 						label : "Generalizes",
-						invert : false,
+						invert : true,
+						invertBackendRelation: true,
 						connectionType : "generalization",
 						nmSelf : true,
 						cardinality : -1,
@@ -68,7 +70,8 @@ cwm.ChiBusinessUseCaseClass = function() {
 						otherUwmClassName : "ChiUseCaseTarget"
 				}, {
 						label : "Contains",
-						invert : false,
+						invert : true,
+						invertBackendRelation: true,
 						connectionType : "containment",
 						nmSelf : true,
 						cardinality : -1,
@@ -80,28 +83,32 @@ cwm.ChiBusinessUseCaseClass = function() {
 				nmUwmClassName : "ChiUseCaseCoreSourceEnd",
 				connections : [ {
 						label : "Precedes",
-						invert : false,
-						connectionType : "precedes",
+						invert : true,
+						invertBackendRelation: true,
+						connectionType : "sequence",
 						nmSelf : true,
 						cardinality : -1,
-						ownUwmClassName : "ChiUseCaseCoreSource",
-						otherUwmClassName : "ChiUseCaseTarget"
+						ownUwmClassName : "ChiUseCaseSource",
+						otherUwmClassName : "ChiUseCaseCoreTarget"
 				}, {
 						label : "Generalizes",
-						invert : false,
-						connectionType : "generalizes",
+						invert : true,
+						invertBackendRelation: true,
+						connectionType : "generalization",
 						nmSelf : true,
 						cardinality : -1,
-						ownUwmClassName : "ChiUseCaseCoreSource",
-						otherUwmClassName : "ChiUseCaseTarget"
+						ownUwmClassName : "ChiUseCaseSource",
+						otherUwmClassName : "ChiUseCaseCoreTarget"
 				}, {
 						label : "Contains",
-						invert : false,
-						connectionType : "contains",
+						invert : true,
+						invertBackendRelation: true,
+						connectionType : "containment",
 						nmSelf : true,
+						invertBackendRelation: true,
 						cardinality : -1,
-						ownUwmClassName : "ChiUseCaseCoreSource",
-						otherUwmClassName : "ChiUseCaseTarget"
+						ownUwmClassName : "ChiUseCaseSource",
+						otherUwmClassName : "ChiUseCaseCoreTarget"
 				} ]
 		}, 
 		"ChiWorkerExternal": {
