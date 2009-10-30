@@ -473,7 +473,7 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				var createConnection = true;
 				var maskedClass;
 				
-				if (connectionInfo.nmUwmClassName) {
+				if (connectionInfo && connectionInfo.nmUwmClassName) {
 					var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
 					maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
 					if ((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "target") {
