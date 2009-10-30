@@ -173,7 +173,7 @@ class DiagramImageExporterController extends BatchController
 		$propertiesFile = fopen($tmpPropertiesPath, "w");
 		fwrite($propertiesFile, "sourceFile = $tmpUwmExportPath\n");
 		fwrite($propertiesFile, "targetDir = $tmpUwmExportDir\n");
-		fwrite($propertiesFile, "imageFormat = png\n");
+		fwrite($propertiesFile, "imageFormat = svg\n");
 		fclose($propertiesFile);
 		
 		$session->set($this->TEMP_PROPERTIES_PATH, $tmpPropertiesPath);
