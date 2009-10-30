@@ -473,24 +473,11 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				var createConnection = true;
 				var maskedClass;
 				
-				if (connectionInfo && connectionInfo.nmUwmClassName) {
-					var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
-					maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
-					if ((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "target") {
-						var relationType = relationObject.getProperty("relationType");
-						
-						for ( var j = 0; j < connectionInfo.connections.length; j++) {
-							var currConnectionInfo = connectionInfo.connections[j];
-							
-							if (currConnectionInfo.connectionType == relationType) {
-								connectionInfo = currConnectionInfo;
-								break;
-							}
-						}
-					} else if (maskedClass instanceof uwm.model.RelationClass) {
-						if (connectionInfo.connection) {
-							connectionInfo = connectionInfo.connection;
-						} else {
+				if (connectionInfo) {
+					if (connectionInfo.nmUwmClassName) {
+						var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
+						maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
+						if ((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "target") {
 							var relationType = relationObject.getProperty("relationType");
 							
 							for ( var j = 0; j < connectionInfo.connections.length; j++) {
@@ -501,9 +488,24 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 									break;
 								}
 							}
+						} else if (maskedClass instanceof uwm.model.RelationClass) {
+							if (connectionInfo.connection) {
+								connectionInfo = connectionInfo.connection;
+							} else {
+								var relationType = relationObject.getProperty("relationType");
+								
+								for ( var j = 0; j < connectionInfo.connections.length; j++) {
+									var currConnectionInfo = connectionInfo.connections[j];
+									
+									if (currConnectionInfo.connectionType == relationType) {
+										connectionInfo = currConnectionInfo;
+										break;
+									}
+								}
+							}
+						} else {
+							createConnection = false;
 						}
-					} else {
-						createConnection = false;
 					}
 				} else {
 					createConnection = false;
