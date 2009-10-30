@@ -474,7 +474,7 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				var maskedClass;
 				
 				if (connectionInfo) {
-					if (connectionInfo.nmUwmClassName) {
+					if (connectionInfo.nmUwmClassName && relationObject) {
 						var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
 						maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
 						if ((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "target") {
@@ -513,28 +513,35 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				
 				if (createConnection) {
 					
-					if (!(maskedClass instanceof uwm.model.RelationClass) && (
-							(connectedObject.getUwmClassName() == newObject.getUwmClassName()) ||
-							(nmtype == true)
-						)) {
-						// same type as connected object or nmrelation (listtype
-						// the same in both cases)
-						if (connectionInfo.invert) {
-							forbiddenListtype = "child";
+					if (!connectionInfo.nmSelf) {
+						if (!(maskedClass instanceof uwm.model.RelationClass) && (
+								(connectedObject.getUwmClassName() == newObject.getUwmClassName()) ||
+								(nmtype == true)
+							)) {
+							// same type as connected object or nmrelation (listtype
+							// the same in both cases)
+							if (connectionInfo.invert) {
+								forbiddenListtype = "child";
+							} else {
+								forbiddenListtype = "parent";
+							}
 						} else {
+							// other type as connected object and no nmrelation
 							forbiddenListtype = "parent";
 						}
-					} else {
-						// other type as connected object and no nmrelation
-						forbiddenListtype = "parent";
 					}
 					
 					if (!(listtype == forbiddenListtype)) {
 						// everytime draw connection line only in one direction
 						
-						var newFigure = this.figures.get(newObject.getOid());
-						var connectedFigure = this.figures.get(connectedObject.getOid());
-						
+						if (!connectionInfo.nmSelf) {
+							var newFigure = this.figures.get(newObject.getOid());
+							var connectedFigure = this.figures.get(connectedObject.getOid());
+						}
+						else {
+							var newFigure = this.figures.get(connectedObject.getOid());
+							var connectedFigure = this.figures.get(newObject.getOid());
+						}
 						var newPort = newFigure.getGraphics().getPorts().get(0);
 						var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
 						
