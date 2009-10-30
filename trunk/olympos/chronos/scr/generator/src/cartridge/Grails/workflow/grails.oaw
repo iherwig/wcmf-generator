@@ -100,6 +100,9 @@
 	
 	<!-- generate domain classes -->
 	<component class="org.openarchitectureware.xpand2.Generator">
+		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+
 		<metaModel idRef="mmChronos"/>
 		<metaModel idRef="mmUml2"/>
 		<fileEncoding value="utf-8"/>
