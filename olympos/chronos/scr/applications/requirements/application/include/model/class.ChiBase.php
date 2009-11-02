@@ -34,7 +34,7 @@ class ChiBase extends ChiBaseBase
 	function beforeInsert() 
 	{
 		parent::beforeInsert();
-		setAlias();
+		$this->setAlias();
 	}
 	function afterLoad()
 	{
