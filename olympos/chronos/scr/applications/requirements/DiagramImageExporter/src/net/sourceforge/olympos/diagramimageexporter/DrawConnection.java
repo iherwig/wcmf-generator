@@ -255,7 +255,7 @@ public class DrawConnection {
 
 		String comment = figAllowedCatal2.getLineLabel();
 		
-		Font b=new Font("Tahoma",Font.PLAIN,10);		
+		Font b = new Font("Tahoma",Font.PLAIN,10);		
 		g2d.setFont(b);
 		FontMetrics fm = g2d.getFontMetrics();
 

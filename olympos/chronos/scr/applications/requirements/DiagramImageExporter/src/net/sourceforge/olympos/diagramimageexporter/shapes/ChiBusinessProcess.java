@@ -36,7 +36,6 @@ public class ChiBusinessProcess extends RequirementFigure{
 
 	@Override
 	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
-
 		drawScaleRec(g2d, fig, figureInfo, rect1);
 		drawScaleLine(g2d, fig, figureInfo, infLine1);
 		drawScaleLine(g2d, fig, figureInfo, inLeft);
@@ -44,5 +43,6 @@ public class ChiBusinessProcess extends RequirementFigure{
 		drawScaleLine(g2d, fig, figureInfo, inDown);
 		drawScaleLine(g2d, fig, figureInfo, inrightup);
 		drawScaleLine(g2d, fig, figureInfo, inrightdown);
+		drawChiBusinesProcLabel(g2d, fig, figureInfo, rect1, infLine1);
 	}
 }

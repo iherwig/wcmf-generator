@@ -250,7 +250,7 @@ public class XmlReader {
 		
 		List<Element> child = currFigure.getChildren();
 		for (Element currChild : child) {
-			String type = currChild.getAttributeValue("name");
+			String type = currChild.getName();
 			String targetType = currChild.getAttributeValue("targetType");
 			String targetOid = currChild.getAttributeValue("targetOid");
 			String targetRole = currChild.getAttributeValue("targetRole");

@@ -119,6 +119,29 @@ public abstract class Figure extends JPanel {
 		n.setOpaque(false);
 		n.paint(textbox);
 	}
+	
+	protected void drawChiBusinesProcLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect, InfoLine line) {
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int x = (int) (createFig.getX()+ line.getX1() + 5);
+		int y = (int) (createFig.getY() + 7);
+		int width = (int) ((rect.getWidth() * scaleX) - 6);// -25);
+		int height = (int) (rect.getHeight() * scaleY - 6);
+
+		String label = createFig.getLabel();
+		// System.out.println(label);
+		Font font = new Font("tahoma", Font.PLAIN, 12);
+
+		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
+		JTextArea n = new JTextArea(label);
+		n.setFont(font);
+		n.setWrapStyleWord(true);
+		n.setLineWrap(true);
+		n.setBounds(x, y, width, height);
+		n.setOpaque(false);
+		n.paint(textbox);
+	}
 
 	protected void drawCenterLabelUnder(Graphics2D g2d, InfoFigureParameter figure){
 		
@@ -148,6 +171,28 @@ public abstract class Figure extends JPanel {
 			g2d.drawString(word, curX - (boxWidth / 2), curY);
 			curX += wordWidth;
 		}
+	}
+	protected void drawNotImplementesJet(Graphics2D g2d, InfoFigureParameter createFig){
+		
+		int x = (int) (createFig.getX()+ 5);
+		int y = (int) (createFig.getY()+ 7);
+		int width = (int) (60);// -25);
+		int height = (int)(60);
+
+		g2d.draw(new Rectangle(x , y, width, height));
+		
+		String label = "Not implemented jet";
+		// System.out.println(label);
+		Font font = new Font("tahoma", Font.PLAIN, 12);
+
+		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
+		JTextArea n = new JTextArea(label);
+		n.setFont(font);
+		n.setWrapStyleWord(true);
+		n.setLineWrap(true);
+		n.setBounds(x, y, width, height);
+		n.setOpaque(false);
+		n.paint(textbox);
 	}
 	
 	protected void drawCenterLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect, InfoLine line) {
