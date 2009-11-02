@@ -42,12 +42,12 @@ uwm.diagram.AbstractDiagramClass.prototype.getPropertyForm = function(modelNode)
 			name: 'Notes',
 			modelNode: modelNode
 		}), new uwm.property.TextField({
-			fieldLabel: 'Width',
-			name: 'Width',
+			fieldLabel: 'Alias',
+			name: 'Alias',
 			modelNode: modelNode
 		}), new uwm.property.TextField({
-			fieldLabel: 'Height',
-			name: 'Height',
+			fieldLabel: 'Version',
+			name: 'Version',
 			modelNode: modelNode
 		}), new uwm.property.TextField({
 			fieldLabel: 'created',

@@ -27,9 +27,8 @@ Ext.extend(uwm.diagram.DiagramBase, uwm.model.ModelNode);
 
 uwm.diagram.DiagramBase.prototype.initByDisplayResult = function(node) {
 	uwm.diagram.DiagramBase.superclass.initByDisplayResult.call(this, node);
-	
-	this.data.Width = node.values[1].Width;
-	this.data.Height = node.values[1].Height;
+	this.data.Alias = node.values[1].Alias;
+	this.data.Version = node.values[1].Version;
 	this.data.Name = node.values[1].Name;
 	this.data.Notes = node.values[1].Notes;
 	this.data.created = node.values[1].created;
@@ -41,10 +40,10 @@ uwm.diagram.DiagramBase.prototype.initByDisplayResult = function(node) {
 uwm.diagram.DiagramBase.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
 	
+	realForm.findField("Alias").loadValue(this.data.Alias);
+	realForm.findField("Version").loadValue(this.data.Version);
 	realForm.findField("Name").loadValue(this.data.Name);
 	realForm.findField("Notes").loadValue(this.data.Notes);
-	realForm.findField("Width").loadValue(this.data.Width);
-	realForm.findField("Height").loadValue(this.data.Height);
 	realForm.findField("created").loadValue(this.data.created);
 	realForm.findField("creator").loadValue(this.data.creator);
 	realForm.findField("last_editor").loadValue(this.data.last_editor);
