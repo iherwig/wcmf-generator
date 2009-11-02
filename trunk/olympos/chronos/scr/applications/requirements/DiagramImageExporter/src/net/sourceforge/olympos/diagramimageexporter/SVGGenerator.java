@@ -1,9 +1,14 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.apache.log4j.Logger;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 
 public class SVGGenerator {
 
@@ -12,8 +17,7 @@ public class SVGGenerator {
 	private static ArrayList<InfoXmlFigure> xmlFigure;
 	private static ArrayList<InfoConnectionExist> connectionExist;
 	public static Logger logger = Logger.getLogger(SVGGenerator.class.getName());
-	
-	
+
 	public ArrayList<InfoConnectionExist> getConnectionExist() {
 		return connectionExist;
 	}
@@ -45,11 +49,11 @@ public class SVGGenerator {
 		if (!target.isDirectory()) {
 			target.mkdir();
 		}
-		
+
 		// make files and directories absolute
 		sourceFile = new File(sourceFile).getCanonicalPath();
-		targetDir = new File(targetDir).getCanonicalPath()+File.separator;
-		iconDir = new File(iconDir).getCanonicalPath()+File.separator;
+		targetDir = new File(targetDir).getCanonicalPath() + File.separator;
+		iconDir = new File(iconDir).getCanonicalPath() + File.separator;
 
 		// initialize and run the generator
 		diagram = new ArrayList<InfoXmlDiagram>();
@@ -63,12 +67,37 @@ public class SVGGenerator {
 		XmlReader xml = new XmlReader();
 		xml.XML(sourceFile);
 
+		Document doc = new Document();
+		Element root = new Element("diagramExport");
+		doc.setRootElement(root);
+
 		Draw df = new Draw();
 		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
 		for (InfoXmlDiagram currDia : xmlDia) {
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
-			df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat);
+			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat);
+			String img = currDia.getId()+"."+usedImageFormat;
+			
+			Element image = new Element("image");
+			String filename = currDia.getId() + "." + usedImageFormat;
+			image.setAttribute("filename",filename);
+			String width = Float.toString(maxCor.getX());
+			image.setAttribute("width", width);
+			String height = Float.toString(maxCor.getY());
+			image.setAttribute("height", height);
+			String type = usedImageFormat;
+			image.setAttribute("type",type);
+			root.addContent(image);	
 		}
+		try {
+			Format f = Format.getPrettyFormat();
+			XMLOutputter xml_out = new XMLOutputter(f);
+			xml_out.output(doc,
+			new java.io.FileOutputStream(targetDir + "Diagram.xml"));
+			}catch (IOException e) {
+			}
+		
+
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -79,5 +108,7 @@ public class SVGGenerator {
 		String usedImageFormat = args[3];
 
 		generateImages(xmlFile, imagePath, picturePath, usedImageFormat);
+
+		System.out.println("Finish");
 	}
 }

@@ -30,6 +30,10 @@ public class InfoXmlDiagram {
 		figure.add(figureParameter);
 	}
 
+	public void removeFigure (InfoFigureParameter figureParameter){
+		figure.remove(figureParameter);
+	}
+
 	public String getId() {
 		return id;
 	}

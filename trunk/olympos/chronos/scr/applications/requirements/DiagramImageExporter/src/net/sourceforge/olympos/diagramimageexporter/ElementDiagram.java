@@ -36,6 +36,7 @@ public class ElementDiagram {
 	private static HashMap<String, ElementDiagram> catalogByName = new HashMap<String, ElementDiagram>();
 
 	ElementDiagram(EnumFigureType type, String name, EnumFontPosition fontPosition, String imagePath,  HashMap<EnumFigureType, InfoAllowedConnection> connections) {
+	
 		this.type = type;
 		this.name = name;
 		this.fontPosition = fontPosition;
@@ -43,9 +44,13 @@ public class ElementDiagram {
 		this.allowedConnection = connections;
 	}
 	
-	ElementDiagram(String typ, String name){
+	ElementDiagram(String typ, String name, EnumFontPosition fontPosition, String imagePath,  HashMap<EnumFigureType, InfoAllowedConnection> connections) {
+		
 		this.typ = typ;
 		this.name = name;
+		this.fontPosition = fontPosition;
+		this.imagePath = imagePath;
+		this.allowedConnection = connections;
 	}
 
 	public ElementDiagram() {
@@ -117,7 +122,7 @@ public class ElementDiagram {
 	private static ElementDiagram initChiGoal() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		connections.put(EnumFigureType.CHI_GOAL, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.CLOSED_DIAMOND, EnumConnectionEnd.ARROW));
+		connections.put(EnumFigureType.CHI_GOAL, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
 		connections.put(EnumFigureType.CHI_REQUIREMENT, new InfoAllowedConnection(SPECIFIED, EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
 		
 		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_GOAL, "ChiGoal", EnumFontPosition.IN_UP , path + chiRequirementGoal, connections);
@@ -127,7 +132,7 @@ public class ElementDiagram {
 	private static ElementDiagram initRequirement() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		connections.put(EnumFigureType.CHI_REQUIREMENT, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.CLOSED_DIAMOND, EnumConnectionEnd.ARROW));
+		connections.put(EnumFigureType.CHI_REQUIREMENT, new InfoAllowedConnection(CONTAINS,EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND ));
 		connections.put(EnumFigureType.CHI_FEATURE, new InfoAllowedConnection(REALIZED, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW_TRIANGLE));
 		connections.put(EnumFigureType.CHI_ISSUE, new InfoAllowedConnection(NEGATED, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		
@@ -286,7 +291,7 @@ public class ElementDiagram {
 	private static ElementDiagram initActivity() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		connections.put(EnumFigureType.CHI_WORKER_INTERN, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
+//		connections.put(EnumFigureType.CHI_WORKER_INTERN, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 		
 		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_SET, "ActivitySet", EnumFontPosition.UNDER, null , connections);
 		return result;

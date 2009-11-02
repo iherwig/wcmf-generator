@@ -1,10 +1,14 @@
 package net.sourceforge.olympos.diagramimageexporter.shapes;
 
+import java.awt.Graphics2D;
+
+import net.sourceforge.olympos.diagramimageexporter.Figure;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
+import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 
 
-public class ActivityInitial {
+public class ActivityInitial extends Figure{
 	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 0, 0);
 	InfoCoordinateSize rect2 = new InfoCoordinateSize(0, 0, 0, 0);
 	InfoCoordinateSize circle1 = new InfoCoordinateSize(0, 0, 0, 0);
@@ -37,5 +41,9 @@ public class ActivityInitial {
 	}
 	public InfoCoordinateSize getCircle2() {
 		return circle2;
+	}
+	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
+		
+		drawNotImplementesJet(g2d, fig);
 	}
 }

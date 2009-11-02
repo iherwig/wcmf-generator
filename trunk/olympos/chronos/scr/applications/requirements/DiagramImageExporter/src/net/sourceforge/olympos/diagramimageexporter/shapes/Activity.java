@@ -1,9 +1,11 @@
 package net.sourceforge.olympos.diagramimageexporter.shapes;
 
+import java.awt.Graphics2D;
+
 import net.sourceforge.olympos.diagramimageexporter.*;
 
 
-public class Activity {
+public class Activity extends Figure{
 
 	InfoLine infLine1 = new InfoLine( 15, 0, 78, 0); //oben
 	InfoLine infLine2 = new InfoLine( 0, 15, 0, 43); //links
@@ -41,5 +43,9 @@ public class Activity {
 	}
 	public InfoLine getInfLine5() {
 		return infLine5;
+	}
+	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
+		
+		drawNotImplementesJet(g2d, fig);
 	}
 }

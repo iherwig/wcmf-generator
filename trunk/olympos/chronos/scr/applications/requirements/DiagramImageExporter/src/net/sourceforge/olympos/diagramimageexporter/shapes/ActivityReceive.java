@@ -1,10 +1,14 @@
 package net.sourceforge.olympos.diagramimageexporter.shapes;
 
+import java.awt.Graphics2D;
+
+import net.sourceforge.olympos.diagramimageexporter.Figure;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
+import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 
 
-public class ActivityReceive {
+public class ActivityReceive extends Figure{
 	InfoCoordinateSize circle1 = new InfoCoordinateSize(0, 0, 0, 0);
 	InfoCoordinateSize circle2 = new InfoCoordinateSize(0, 0, 0, 0);
 	InfoLine infLine1 = new InfoLine( 0, 0, 62, 0); //oben
@@ -33,5 +37,9 @@ public class ActivityReceive {
 	}
 	public InfoCoordinateSize getCircle2() {
 		return circle2;
+	}
+	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
+		
+		drawNotImplementesJet(g2d, fig);
 	}
 }

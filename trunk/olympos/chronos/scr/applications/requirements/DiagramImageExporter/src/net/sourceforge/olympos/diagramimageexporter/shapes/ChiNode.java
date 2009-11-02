@@ -1,6 +1,7 @@
 package net.sourceforge.olympos.diagramimageexporter.shapes;
 
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import net.sourceforge.olympos.diagramimageexporter.Figure;
@@ -36,17 +37,18 @@ public class ChiNode extends Figure{
 	}
 	@Override
 	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
-
-		drawScaleRec(g2d, fig, figureInfo, rect);
-		drawScaleXLine(g2d, fig, figureInfo, infLine1);
-//		drawScaleXLine(g2d, fig, figureInfo, infLine2);
-		drawScaleXLine(g2d, fig, figureInfo, circleLine);
-		drawEllipse(g2d, fig, figureInfo, circle);
-		drawChi(g2d, fig, figureInfo, circle);
-
 		
-		drawScaleChiNode(g2d, fig, figureInfo, infLine1, infLine2, rect);
-
-		drawContLabel(g2d, fig, figureInfo, rect, infLine1);
+		drawNotImplementesJet(g2d, fig);
+//		drawScaleRec(g2d, fig, figureInfo, rect);
+//		drawScaleXLine(g2d, fig, figureInfo, infLine1);
+////		drawScaleXLine(g2d, fig, figureInfo, infLine2);
+//		drawScaleXLine(g2d, fig, figureInfo, circleLine);
+//		drawEllipse(g2d, fig, figureInfo, circle);
+//		drawChi(g2d, fig, figureInfo, circle);
+//
+//		
+//		drawScaleChiNode(g2d, fig, figureInfo, infLine1, infLine2, rect);
+//
+//		drawContLabel(g2d, fig, figureInfo, rect, infLine1);
 	}
 }
