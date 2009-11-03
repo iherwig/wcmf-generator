@@ -237,7 +237,17 @@ cwe.editor.Editor.prototype.getOid = function() {
  * @type String
  */
 cwe.editor.Editor.prototype.getLabel = function() {
-	return this.getRecord().getLabel();
+	var result = null;
+	
+	var record = this.getRecord();
+	
+	if (record) {
+		result = record.getLabel();
+	} else {
+		result = this.modelClass.getNewLabel();
+	}
+	
+	return result;
 };
 
 /**
