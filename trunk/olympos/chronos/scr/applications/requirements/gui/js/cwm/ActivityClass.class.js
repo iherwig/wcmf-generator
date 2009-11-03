@@ -48,49 +48,79 @@ cwm.ActivityClass = function() {
 
 	this.connectionInfo = {
 
-		"ActivityInitial" : {
-			label :"Associates",
-			invert :true,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: 1
+		"Activity" : {
+			nmUwmClassName : "AControlFlowSourceEnd",
+			connection: {
+				label :"Associates",
+				invert :true,
+				invertBackendRelation: true,
+				connectionType :"association",
+				nmSelf : true,
+				cardinality: -1,
+				ownUwmClassName : "AControlFlowSource",
+				otherUwmClassName : "AControlFlowTarget"
+			}
 		},
 		"ActivityDecision" : {
-			label :"Associates",
-			invert :false,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: -1
+			nmUwmClassName : "ADControlFlowSourceEnd",
+			connection: {
+				label :"Associates",
+				invert :true,
+				invertBackendRelation: true,
+				connectionType :"association",
+				nmSelf : true,
+				cardinality: -1,
+				ownUwmClassName : "AControlFlowSource",
+				otherUwmClassName : "ADControlFlowTarget"
+			}
 		},
-		
-		"Activity" : {
-			label :"Associates",
-			invert :false,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: -1
-		},
-		
-		"ActivitySend" : {
-			label :"Associates",
-			invert :false,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: -1
+		"ActivityInitial" : {
+			nmUwmClassName : "AControlFlowTargetEnd",
+			connection: {
+				label :"Associates",
+				invert :true,
+				connectionType :"association",
+				nmSelf : true,
+				cardinality: 1,
+				ownUwmClassName : "AControlFlowTarget",
+				otherUwmClassName : "ActivityInitial"
+			}
 		},
 		"ActivityFinal" : {
-			label :"Associates",
-			invert :false,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: -1
+			nmUwmClassName : "AControlFlowSourceEnd",
+			connection: {
+				label :"Associates",
+				invert :false,
+				connectionType :"association",
+				nmSelf : true,
+				cardinality: 1,
+				ownUwmClassName : "AControlFlowSource",
+				otherUwmClassName : "ActivityFinal"
+			}
 		},
 		"ActivityReceive" : {
-			label :"Associates",
-			invert :true,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: 1
+			nmUwmClassName : "ARControlFlowSourceEnd",
+			connection: {
+				label :"Associates",
+				invert :true,
+				connectionType :"association",
+				nmSelf : true,
+				cardinality: 1,
+				ownUwmClassName : "AControlFlowTarget",
+				otherUwmClassName : "ARControlFlowSource"
+			}
+		},
+		"ActivitySend" : {
+			nmUwmClassName : "ASControlFlowTargetEnd",
+			connection: {
+				label :"Associates",
+				invert :false,
+				connectionType :"association",
+				nmSelf : true,
+				cardinality: 1,
+				ownUwmClassName : "AControlFlowSource",
+				otherUwmClassName : "ASControlFlowTarget"
+			}
 		},
 		
 		"ChiObject": {
@@ -99,8 +129,17 @@ cwm.ActivityClass = function() {
 			connectionType: "",
 			cardinality: -1
 		}
+	};
 
-
+	this.maskInfo = {
+			"AControlFlowSourceEnd" : "ControlFlow",
+			"AControlFlowTargetEnd" : "ControlFlow",
+			"ADControlFlowSourceEnd" : "ControlFlow",
+			"ADControlFlowTargetEnd" : "ControlFlow",
+			"ASControlFlowSourceEnd" : "ControlFlow",
+			"ASControlFlowTargetEnd" : "ControlFlow",
+			"ARControlFlowSourceEnd" : "ControlFlow",
+			"ARControlFlowTargetEnd" : "ControlFlow"
 	};
 }
 

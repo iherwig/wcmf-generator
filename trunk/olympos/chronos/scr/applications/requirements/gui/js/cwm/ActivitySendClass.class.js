@@ -48,22 +48,39 @@ cwm.ActivitySendClass = function() {
 
 	this.connectionInfo = {
 		
-		"Activity" : {
-			label :"Associates",
-			invert :true,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: 1
-		},
-		
 		"ActivityReceive" : {
-			label :"Associates",
-			invert :false,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: -1
+			nmUwmClassName : "ARControlFlowTargetEnd",
+			connection: {
+				label :"Associates",
+				invert :false,
+				connectionType :"association",
+				nmSelf : true,
+				cardinality: 1,
+				ownUwmClassName : "ASControlFlowSource",
+				otherUwmClassName : "ARControlFlowTarget"
+			}
+		},
+		"Activity" : {
+			nmUwmClassName : "AControlFlowSourceEnd",
+			connection: {
+				label :"Associates",
+				invert :true,
+				connectionType :"association",
+				nmSelf : true,
+				cardinality: -1,
+				ownUwmClassName : "ASControlFlowTarget",
+				otherUwmClassName : "AControlFlowSource"
+			}
 		}
+	};
 
+	this.maskInfo = {
+			"AControlFlowSourceEnd" : "ControlFlow",
+			"AControlFlowTargetEnd" : "ControlFlow",
+			"ARControlFlowSourceEnd" : "ControlFlow",
+			"ARControlFlowTargetEnd" : "ControlFlow",
+			"ASControlFlowSourceEnd" : "ControlFlow",
+			"ASControlFlowTargetEnd" : "ControlFlow"
 	};
 }
 

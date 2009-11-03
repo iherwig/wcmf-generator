@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="css/common.css" />
         <link rel="stylesheet" type="text/css" href="css/figures.css" />
         <link rel="stylesheet" type="text/css" href="lib/ext/ux/css/Ext.ux.grid.CellActions.css" />
+        <link rel="stylesheet" type="text/css" href="lib/ext/ux/css/Ext.ux.form.LovCombo.css" />
         <link rel="stylesheet" type="text/css" href="lib/ext/resources/css/file-upload.css"/>
         <!--[if IE]>
             <script type="text/javascript">
@@ -221,6 +222,8 @@
         </script>
         <script type="text/javascript" src="lib/ext/ux/form/FieldAutoExpander.js">
         </script>
+        <script type="text/javascript" src="lib/ext/ux/form/Ext.ux.form.LovCombo.js">
+        </script>
         <script type="text/javascript" src="lib/ext/ux/GhostBar.js">
         </script>
         <!--Start include UWM-->
@@ -311,6 +314,10 @@
         <script type="text/javascript" src="js/uwm/property/ComboBoxProxy.class.js">
         </script>
         <script type="text/javascript" src="js/uwm/property/ComboBox.class.js">
+        </script>
+        <script type="text/javascript" src="js/uwm/property/MultiSelectComboBoxProxy.class.js">
+        </script>
+        <script type="text/javascript" src="js/uwm/property/MultiSelectComboBox.class.js">
         </script>
         <script type="text/javascript" src="js/uwm/property/EditableComboBox.class.js">
         </script>
@@ -534,9 +541,13 @@
         </script>
         <script type="text/javascript" src="js/cwm/relations/NMActivityActivityDecision.class.js">
         </script>
-        <script type="text/javascript" src="js/cwm/relations/NMActivityChiObjectClass.class.js">
+        <script type="text/javascript" src="js/cwm/relations/ObjectFlowClass.class.js">
         </script>
-        <script type="text/javascript" src="js/cwm/relations/NMActivityChiObject.class.js">
+        <script type="text/javascript" src="js/cwm/relations/ObjectFlow.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/ControlFlowClass.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/ControlFlow.class.js">
         </script>
         <script type="text/javascript" src="js/cwm/relations/ChiAssociationClass.class.js">
         </script>
@@ -599,6 +610,22 @@
         <script type="text/javascript" src="js/cwm/relations/ChiUseCaseCoreSourceEndClass.class.js">
         </script>
         <script type="text/javascript" src="js/cwm/relations/ChiUseCaseCoreTargetEndClass.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/AControlFlowSourceEndClass.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/AControlFlowTargetEndClass.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/ADControlFlowSourceEndClass.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/ADControlFlowTargetEndClass.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/ASControlFlowSourceEndClass.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/ASControlFlowTargetEndClass.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/ARControlFlowSourceEndClass.class.js">
+        </script>
+        <script type="text/javascript" src="js/cwm/relations/ARControlFlowTargetEndClass.class.js">
         </script>
         <script type="text/javascript" src="js/cwm/ChiFeatureClass.class.js">
         </script>
@@ -762,12 +789,7 @@
         </script>
         <script type="text/javascript" src="js/cwm/Language.class.js">
         </script>
-		
-		<script type="text/javascript" src="js/uwm/property/ComboBoxProxyMult.class.js"></script>
-	    <script type="text/javascript" src="js/uwm/property/MultiSelectField.class.js"></script>
-		<script type="text/javascript" src="js/uwm/property/ComboboxMult.class.js"></script>
-		
-		
+
         <!--End include CWM-->
         <script type="text/javascript">
             Ext.onReady(function() {

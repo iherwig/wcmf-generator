@@ -49,13 +49,25 @@ cwm.ActivityDecisionClass = function() {
 	this.connectionInfo = {
 
 		"Activity" : {
-			label :"Associates",
-			invert :true,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: -1
+			nmUwmClassName : "AControlFlowSourceEnd",
+			connection: {
+				label :"Associates",
+				invert :true,
+				invertBackendRelation: true,
+				connectionType :"association",
+				nmSelf : true,
+				cardinality: -1,
+				ownUwmClassName : "ADControlFlowSource",
+				otherUwmClassName : "AControlFlowTarget"
+			}
 		}
+	};
 
+	this.maskInfo = {
+			"AControlFlowSourceEnd" : "ControlFlow",
+			"AControlFlowTargetEnd" : "ControlFlow",
+			"ADControlFlowSourceEnd" : "ControlFlow",
+			"ADControlFlowTargetEnd" : "ControlFlow"
 	};
 }
 

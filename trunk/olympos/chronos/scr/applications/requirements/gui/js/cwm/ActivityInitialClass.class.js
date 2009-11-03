@@ -49,13 +49,17 @@ cwm.ActivityInitialClass = function() {
 	this.connectionInfo = {
 
 		"Activity" : {
-			label :"Associates",
-			invert :false,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: -1
+			nmUwmClassName : "AControlFlowTargetEnd",
+			connection: {
+				label :"Associates",
+				invert :false,
+				connectionType :"association",
+				cardinality: -1,
+				nmSelf : true,
+				ownUwmClassName : "ActivityInitial",
+				otherUwmClassName : "AControlFlowTarget"
+			}
 		}
-
 	};
 }
 
