@@ -105,44 +105,62 @@ public class XmlReader {
 			svg.addXmlFigure(xmlFig);
 
 			if (point.equals("ChiBusinessUseCase")) {
-				List<Element> activitySet = element.getChildren();
-				for (Element currActSet : activitySet) {
-					if (currActSet.getName().equals("ActivitySet")) {
+				List<Element> usecase = element.getChildren();
+				for (Element currusecase : usecase) {
+					if (currusecase.getName().equals("ActivitySet")) {
 						elem = ElementDiagram.getCatalogEntryByName(point);
 						// collect and add the important parameters
-						String idActSet = currActSet.getAttributeValue("id");
-						String aliasActSet = element.getAttributeValue("Alias");
-						String nameActSet = currActSet.getName();
-						EnumFigureType typActSet = elem.getType();
-						InfoXmlFigure xmlFigActSet = new InfoXmlFigure(idActSet, nameActSet, typActSet, aliasActSet);
-						xmlFig.addChildFig(xmlFigActSet);
-
-						List<Element> activity = currActSet.getChildren();
-						for (Element currAct : activity) {
-							point = element.getName();
-
+						String idUseCase = currusecase.getAttributeValue("id");
+						String aliasUseCase = element.getAttributeValue("Alias");
+						String nameUseCase = currusecase.getName();
+						EnumFigureType typUseCase = elem.getType();
+						InfoXmlFigure xmlUseCase = new InfoXmlFigure(idUseCase, nameUseCase, typUseCase, aliasUseCase);
+						xmlFig.addChildFig(xmlUseCase);
+						
+						List<Element> activityset = currusecase.getChildren();
+						for(Element currActSet: activityset){
 							elem = ElementDiagram.getCatalogEntryByName(point);
-							if (elem != null) {
-								String idAct = currActSet.getAttributeValue("id");
-								String aliasAct = element.getAttributeValue("Alias");
-								String nameAct = currActSet.getName();
-								EnumFigureType typAct = elem.getType();
-								InfoXmlFigure xmlFigAct = new InfoXmlFigure(idAct, nameAct, typAct, aliasAct);
-								xmlFigActSet.addChildFig(xmlFigAct);
-
-								List<Element> child = currAct.getChildren();
-								for (Element currChild : child) {
-									String type = currChild.getName();
-									String targetType = currActSet.getAttributeValue("targetType");
-									String targetOid = currActSet.getAttributeValue("targetOid");
-									String targetRole = currActSet.getAttributeValue("targetRole");
-									InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
-									xmlFigAct.addChild(xmlCon);
-								}
-							}
+							// collect and add the important parameters
+							String idActSet = currActSet.getAttributeValue("id");
+							String aliasActSet = element.getAttributeValue("Alias");
+							String nameActSet = currActSet.getName();
+							EnumFigureType typActSet = elem.getType();
+							InfoXmlFigure xmlFigActSet = new InfoXmlFigure(idActSet, nameActSet, typActSet, aliasActSet);
+							xmlFig.addChildFig(xmlFigActSet);
+							System.out.println(xmlFig.getId());
 						}
+						
+						
+						
+
+//						List<Element> activity = currActSet.getChildren();
+//						for (Element currAct : activity) {
+//							point = element.getName();
+//
+//							elem = ElementDiagram.getCatalogEntryByName(point);
+//							if (elem != null) {
+//								String idAct = currAct.getAttributeValue("id");
+//								String aliasAct = element.getAttributeValue("Alias");
+//								String nameAct = currAct.getName();
+//								EnumFigureType typAct = elem.getType();
+//								InfoXmlFigure xmlFigAct = new InfoXmlFigure(idAct, nameAct, typAct, aliasAct);
+//								xmlFigActSet.addChildFig(xmlFigAct);
+//								System.out.println(xmlFigActSet.getName());
+//
+//								List<Element> child = currAct.getChildren();
+//								for (Element currChild : child) {
+//									String type = currChild.getName();
+//									String targetType = currActSet.getAttributeValue("targetType");
+//									String targetOid = currActSet.getAttributeValue("targetOid");
+//									String targetRole = currActSet.getAttributeValue("targetRole");
+//									InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
+//									xmlFigAct.addChild(xmlCon);
+//								}
+//							}
+//						}
 					}
 				}
+				
 			}
 			if (point.equals("ChiController")) {
 				List<Element> chiController = element.getChildren();

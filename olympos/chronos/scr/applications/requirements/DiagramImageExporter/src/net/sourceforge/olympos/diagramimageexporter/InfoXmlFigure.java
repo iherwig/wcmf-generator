@@ -11,6 +11,7 @@ public class InfoXmlFigure {
 	
 	private ArrayList<InfoXmlConnection> child = new ArrayList<InfoXmlConnection>();
 	private ArrayList<InfoXmlFigure> childFig = new ArrayList<InfoXmlFigure>();
+	private ArrayList<InfoXmlFigure> childFigActSet = new ArrayList<InfoXmlFigure>();
 	private ArrayList<InfoXMLOptionValue> childOpt = new ArrayList<InfoXMLOptionValue>();
 
 	private ArrayList<InfoXMLOptionValue> childVal = new ArrayList<InfoXMLOptionValue>();
@@ -72,6 +73,14 @@ public class InfoXmlFigure {
 
 	public ArrayList<InfoXmlFigure> getChildrenFig() {
 		return childFig;
+	}
+	
+	public void addChildFigActSet(InfoXmlFigure childFig) {
+		this.childFigActSet.add(childFig);
+	}
+
+	public ArrayList<InfoXmlFigure> getChildrenFigActSet() {
+		return childFigActSet;
 	}
 	
 	public void addChildOpt(InfoXMLOptionValue childOpt) {

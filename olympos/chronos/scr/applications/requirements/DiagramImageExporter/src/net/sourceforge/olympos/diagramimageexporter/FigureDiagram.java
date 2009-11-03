@@ -16,24 +16,27 @@ public class FigureDiagram {
 			for (InfoFigureParameter currFig : figure) {
 				figChild = currFig.getChildrenX();
 				String figId = null;
-				
+
 				for (InfoXmlConnection currFigChild : figChild) {
 					if (!currFigChild.getTargetType().equals("Diagram")) {
 						figId = currFigChild.getTargetOid();
 					}
 				}
-				if(figId == null) {
+				if (figId == null) {
 					noElement.add(currFig);
 					continue;
 				}
-					
+
 				for (InfoXmlFigure xmlFig1 : xmlFig) {
 					String xmlId = xmlFig1.getId();
+					
 					if (figId.equals(xmlId)) {
 						currFig.setType(xmlFig1.getTyp());
-						currFig.setLabel(xmlFig1.getName());
-					}
+						currFig.setLabel(xmlFig1.getName()); 
+//						if
+					}					
 				}
+				
 				if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER)) {
 					for (InfoXmlFigure currXmlFig : xmlFig) {
 						String xmlId = currXmlFig.getId();
@@ -63,52 +66,62 @@ public class FigureDiagram {
 					}
 				}
 			}
-			for( InfoFigureParameter currNoElement : noElement){
-				dia1.removeFigure(currNoElement); //remove all File has only the Child Element
+			for (InfoFigureParameter currNoElement : noElement) {
+				dia1.removeFigure(currNoElement); // remove all File has only
+				// the Child Element
 			}
 		}
-		
-		
-		addChild( xmlFig, xmlDia);
+
+		addChild(xmlFig, xmlDia);
 		InfoCoordinate maxCor = setSize(figureArray);
-//		addOptionValue(xmlDia, xmlFig);
+		// addOptionValue(xmlDia, xmlFig);
 		return maxCor;
 	}
 
-	private void addChild(ArrayList<InfoXmlFigure> xmlFig,ArrayList<InfoXmlDiagram> xmlDia) {
-		
-		
-		for(InfoXmlDiagram currDia : xmlDia) {
+	private void addChild(ArrayList<InfoXmlFigure> xmlFig, ArrayList<InfoXmlDiagram> xmlDia) {
+
+		for (InfoXmlDiagram currDia : xmlDia) {
 			String idFigure = null;
 
 			ArrayList<InfoFigureParameter> figure = currDia.getFigure();
 			for (InfoFigureParameter currFig : figure) {
 				idFigure = currFig.getDiagramid();
-				
+
 				String typFigure = null;
-				String targetOidFigure = null;
-				
-//				String idXmlFigure = null;
+				String targetOidObject = null;
+
 				String typeXmlFigure = null;
 				String targetOidXmlFigure = null;
-				
+
 				ArrayList<InfoXmlConnection> figChild = currFig.getChildrenX();
 				for (InfoXmlConnection currFigChild : figChild) {
 					if (!currFigChild.getTargetType().equals("Diagram")) {
 						typFigure = currFigChild.getType();
-						targetOidFigure = currFigChild.getTargetOid();
-						
-						for (InfoXmlFigure currXmlFig : xmlFig){
+						targetOidObject = currFigChild.getTargetOid();
+						for (InfoXmlFigure currXmlFig : xmlFig) {
 							ArrayList<InfoXmlConnection> xmlFigChild = currXmlFig.getChildren();
-							for (InfoXmlConnection currXmlFigChild : xmlFigChild){
-								if (currXmlFigChild.getTargetOid().equals(targetOidFigure)) {
-									
-									for (InfoXmlConnection currXmlFigChild2 : xmlFigChild){
-										if (currXmlFigChild2.getTargetType().equals("Figure")){
-											targetOidXmlFigure = currXmlFigChild2.getTargetOid();
-											addChildren(idFigure, targetOidXmlFigure, typFigure);
+							if (currXmlFig.getId().equals(targetOidObject)) {
+								for (InfoXmlConnection currXmlFigChild2 : xmlFigChild) {
+									if(currXmlFigChild2.getType().equals("ActivitySet")){
+										
+									}
+									else{
+										if (!currXmlFigChild2.getTargetType().equals("Figure") && !currXmlFigChild2.getTargetType().equals("Package")) {
+											String targetOid = currXmlFigChild2.getTargetOid();
+											for (InfoXmlFigure currxmlFig2 : xmlFig) {
+												if (currxmlFig2.getId().equals(targetOid)) {
+													ArrayList<InfoXmlConnection> xmlFigChild2 = currxmlFig2.getChildren();
+													for (InfoXmlConnection currxmlFig3 : xmlFigChild2) {
+														if (currxmlFig3.getTargetType().equals("Figure")){
+															targetOidXmlFigure = currxmlFig3.getTargetOid();
+															addChildren(idFigure, targetOidXmlFigure,typFigure);
+														}
+													}
+												}
+											}
 										}
 									}
+
 								}
 							}
 						}
@@ -116,50 +129,6 @@ public class FigureDiagram {
 				}
 			}
 		}
-		
-
-		
-//		for (InfoXmlDiagram dia1 : xmlDia) {
-//			ArrayList<InfoFigureParameter> figure = dia1.getFigure();
-//			for (InfoFigureParameter currFig : figure) {
-//				ArrayList<InfoXmlConnection> figChild = currFig.getChildrenX();
-//				String figId = currFig.getDiagramid();
-//				String figChildId = null;
-//				String typChild = null;
-//				
-//				for (InfoXmlConnection currFigChild : figChild) {
-//					if (!currFigChild.getTargetType().equals("Diagram")) {
-//						figChildId = currFigChild.getTargetOid();
-//						typChild = currFigChild.getTargetType();
-//					}
-//				}
-//				if(figId == null) {
-//					continue;
-//				}
-//				for (InfoXmlFigure currXmlFig : xmlFig){
-//						if (figId.equals(currXmlFig.getId())) {
-//							String XmlId = currXmlFig.getId();
-//							ArrayList<InfoXmlConnection> xmlChild = currXmlFig.getChildren();
-//							for(InfoXmlConnection currXmlChild :xmlChild){
-//								if(!currXmlChild.getTargetType().equals("Figure") &&!currXmlChild.getTargetType().equals("Package")){
-//									 String targetOid = currXmlChild.getTargetOid();
-//									 for (InfoXmlFigure currXmlFig2 : xmlFig){
-//										 if(currXmlFig2.getId().equals(targetOid)){
-//											 for(InfoXmlConnection currXmlChild2 :xmlChild){
-//												 if(currXmlChild2.getTargetType().equals("Figure")){
-//													 String figId2 = currXmlChild2.getTargetOid();
-//													 addChildren(figId, figId2, typChild);
-//												 }
-//											 }
-//										 }
-//									 }
-//								}
-//										
-//						}
-//					}
-//				}
-//			}
-//		}
 	}
 
 	private void addChildren(String figId, String figId2, String typ) {
@@ -171,9 +140,9 @@ public class FigureDiagram {
 					for (InfoFigureParameter currFig2 : figure) {
 						if (currFig2.getDiagramid().equals(figId2)) {
 							if (typ.equals("Child")) {
-								currFig1.addChild(currFig2);
-							} else if (typ.equals("Parent")) {
 								currFig2.addChild(currFig1);
+							} else if (typ.equals("Parent")) {
+								currFig1.addChild(currFig2);
 							} else if (typ.equals("ManyToMany")) {
 								currFig2.addChild(currFig1);
 							} else {

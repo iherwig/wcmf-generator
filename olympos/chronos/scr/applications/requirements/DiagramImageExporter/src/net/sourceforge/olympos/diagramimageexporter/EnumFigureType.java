@@ -29,4 +29,6 @@ public enum EnumFigureType {
 	Chi_OBJECT,
 	CHI_OPERATION,
 	CHI_ATTRIBUTE,
+	
+	DUMMY,
 }

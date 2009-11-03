@@ -71,6 +71,7 @@ public class DrawConnection {
 			}
 			lastPoint = curPoint;
 		}
+		if(!source.getType().equals(EnumFigureType.DUMMY)||!target.getType().equals(EnumFigureType.DUMMY))
 		drawLabel(g2d, source, target, toPoint, toDirection, fromPoint, fromDirection, points);
 	}
 
