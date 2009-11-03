@@ -175,7 +175,7 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 cwe.modelgrid.ModelGrid.prototype.createNew = function() {
 	var self = this;
 	
-	self.editors.loadOrShow(null, "<i>" + chi.Dict.translate("New ${1}", self.modelClass.getName()) + "</i>", true);
+	self.editors.loadOrShow(null, "<i>" + self.modelClass.getNewLabel() + "</i>", true);
 };
 
 /**

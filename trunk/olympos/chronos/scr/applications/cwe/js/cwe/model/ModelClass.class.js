@@ -170,3 +170,7 @@ cwe.model.ModelClass.prototype.getTargetModelClass = function(fieldName) {
 	
 	return result;
 };
+
+cwe.model.ModelClass.prototype.getNewLabel = function() {
+	return chi.Dict.translate("New ${1}", this.getName());
+};

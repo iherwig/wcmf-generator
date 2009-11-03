@@ -15,7 +15,9 @@ cwe.Util.createChild = function(parentRecord, roleName, childClass, handler) {
 	var actionSet = new chi.persistency.ActionSet();
 	
 	actionSet.addCreateChild(parentRecord.getOid(), roleName);
-	actionSet.addRead("{" + childClass.getId() + ":?}", 0, handler);
+	actionSet.addRead("{" + childClass.getId() + ":?}", 0, function(data) {
+		handler(data);
+	});
 	
 	actionSet.commit();
 };
