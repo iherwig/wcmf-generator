@@ -100,15 +100,19 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 						relationObject = figure.getRelationObject();
 						
 						if (relationObject) {
-							var connectionType = relationObject.getProperty("relationType");
-							
-							for (var i in connectionInfo.connections) {
-								var currConnection = connectionInfo.connections[i];
+							if (connectionInfo.connection) {
+								connectionInfo = connectionInfo.connection;
+							} else {
+								var connectionType = relationObject.getProperty("relationType");
 								
-								if (!(currConnection instanceof Function)) {
-									if (currConnection.connectionType == connectionType) {
-										connectionInfo = currConnection;
-										break;
+								for (var i in connectionInfo.connections) {
+									var currConnection = connectionInfo.connections[i];
+									
+									if (!(currConnection instanceof Function)) {
+										if (currConnection.connectionType == connectionType) {
+											connectionInfo = currConnection;
+											break;
+										}
 									}
 								}
 							}

@@ -11,8 +11,8 @@
  */
 Ext.namespace("cwm.relations");
 
-cwm.relations.NMActivityChiObject = function(modelNodeClass) {
-	cwm.relations.NMActivityChiObject.superclass.constructor.call(this, modelNodeClass);
+cwm.relations.ControlFlow = function(modelNodeClass) {
+	cwm.relations.ControlFlow.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(cwm.relations.NMActivityChiObject, uwm.model.Relation);
+Ext.extend(cwm.relations.ControlFlow, uwm.model.EditableRelation);

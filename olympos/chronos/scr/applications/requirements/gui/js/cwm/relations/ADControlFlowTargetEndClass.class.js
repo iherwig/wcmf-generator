@@ -11,15 +11,18 @@
  */
 Ext.namespace("cwm.relations");
 
-cwm.relations.NMActivityChiObjectClass = function(){
-    cwm.relations.NMActivityChiObjectClass.superclass.constructor.call(this);
+cwm.relations.ADControlFlowTargetEndClass = function(){
+    cwm.relations.ADControlFlowTargetEndClass.superclass.constructor.call(this);
     
-    this.uwmClassName = "NMActivityChiObject";
-    this.instanceClassName = "cwm.relations.NMActivityChiObject";
+    this.uwmClassName = "ADControlFlowTargetEnd";
+    this.instanceClassName = "cwm.relations.ControlFlow";
     this.treeIcon = "Figure";
     this.labelProperties = {};
+    
+    this.realUwmClassName = "ControlFlow";
+    this.connectionEndRole = "target";
 }
 
-Ext.extend(cwm.relations.NMActivityChiObjectClass, uwm.model.RelationClass);
+Ext.extend(cwm.relations.ADControlFlowTargetEndClass, uwm.model.RelationEndClass);
 
-uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.NMActivityChiObjectClass());
+uwm.model.ModelNodeClassContainer.getInstance().registerClass(new cwm.relations.ADControlFlowTargetEndClass());

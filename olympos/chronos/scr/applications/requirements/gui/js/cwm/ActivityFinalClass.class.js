@@ -47,14 +47,19 @@ cwm.ActivityFinalClass = function() {
 	} ];
 
 	this.connectionInfo = {
-		"Activity" : {
-			label :"Associates",
-			invert :true,
-			invertBackendRelation: false,
-			connectionType :"association",
-			cardinality: 1
-		}
 
+		"Activity" : {
+			nmUwmClassName : "AControlFlowSourceEnd",
+			connection: {
+				label :"Associates",
+				invert :true,
+				connectionType :"association",
+				cardinality: -1,
+				nmSelf : true,
+				ownUwmClassName : "ActivityFinal",
+				otherUwmClassName : "AControlFlowSource"
+			}
+		}
 	};
 }
 

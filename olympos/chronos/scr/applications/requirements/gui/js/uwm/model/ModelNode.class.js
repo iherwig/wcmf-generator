@@ -258,6 +258,12 @@ uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionI
 	var childOid = this.getOid();
 	var parentOid = otherModelObject.getOid();
 	
+	if (connectionInfo && connectionInfo.nmSelf && !connectionInfo.invert) {
+		childOid = otherModelObject.getOid();
+		parentOid = this.getOid();
+	}
+	
+	
 	if (connectionInfo && connectionInfo.nmSelf) {
 		if (connectionInfo.ownUwmClassName) {
 			childOid = connectionInfo.ownUwmClassName + ":" + uwm.Util.getNumericFromOid(childOid);
@@ -333,7 +339,7 @@ uwm.model.ModelNode.prototype.disassociate = function(otherModelObject, connecti
 	var childOid = this.getOid();
 	var parentOid = otherModelObject.getOid();
 	
-	if (this.getModelNodeClass() == otherModelObject.getModelNodeClass()) {
+	if (this.getModelNodeClass() == otherModelObject.getModelNodeClass() || (connectionInfo.nmSelf && connectionInfo.invertBackendRelation)) {
 		childOid = otherModelObject.getOid();
 		parentOid = this.getOid();
 	}

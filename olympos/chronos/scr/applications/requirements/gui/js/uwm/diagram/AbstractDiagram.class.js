@@ -477,18 +477,8 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					if (connectionInfo.nmUwmClassName && relationObject) {
 						var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
 						maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
-						if ((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "target") {
-							var relationType = relationObject.getProperty("relationType");
-							
-							for ( var j = 0; j < connectionInfo.connections.length; j++) {
-								var currConnectionInfo = connectionInfo.connections[j];
-								
-								if (currConnectionInfo.connectionType == relationType) {
-									connectionInfo = currConnectionInfo;
-									break;
-								}
-							}
-						} else if (maskedClass instanceof uwm.model.RelationClass) {
+						if (((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "target")
+							|| maskedClass instanceof uwm.model.RelationClass) {
 							if (connectionInfo.connection) {
 								connectionInfo = connectionInfo.connection;
 							} else {
@@ -534,13 +524,13 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					if (!(listtype == forbiddenListtype)) {
 						// everytime draw connection line only in one direction
 						
-						if (!connectionInfo.nmSelf) {
-							var newFigure = this.figures.get(newObject.getOid());
-							var connectedFigure = this.figures.get(connectedObject.getOid());
-						}
-						else {
+						if (connectionInfo.nmSelf && connectionInfo.invertBackendRelation) {
 							var newFigure = this.figures.get(connectedObject.getOid());
 							var connectedFigure = this.figures.get(newObject.getOid());
+						}
+						else {
+							var newFigure = this.figures.get(newObject.getOid());
+							var connectedFigure = this.figures.get(connectedObject.getOid());
 						}
 						var newPort = newFigure.getGraphics().getPorts().get(0);
 						var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
