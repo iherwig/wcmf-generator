@@ -34,7 +34,6 @@ public class XmlReader {
 		Element CwmExport = doc.getRootElement();
 		Element Model = CwmExport.getChild("Model");
 
-		// ReaderXmlDataDiagram(Model, 0);
 		findNode(Model, 0);
 
 		return null;
@@ -45,7 +44,7 @@ public class XmlReader {
 		Element child = null;
 		List<Element> children = element.getChildren();
 
-		if (element.getName().equals("Diagram")) {
+		if (element.getName().equals("Diagram") || element.getName().equals("ActivitySet")) {
 			diagram(element, level);
 		}
 
@@ -107,32 +106,27 @@ public class XmlReader {
 			if (point.equals("ChiBusinessUseCase")) {
 				List<Element> usecase = element.getChildren();
 				for (Element currusecase : usecase) {
-					if (currusecase.getName().equals("ActivitySet")) {
-						elem = ElementDiagram.getCatalogEntryByName(point);
-						// collect and add the important parameters
-						String idUseCase = currusecase.getAttributeValue("id");
-						String aliasUseCase = element.getAttributeValue("Alias");
-						String nameUseCase = currusecase.getName();
-						EnumFigureType typUseCase = elem.getType();
-						InfoXmlFigure xmlUseCase = new InfoXmlFigure(idUseCase, nameUseCase, typUseCase, aliasUseCase);
-						xmlFig.addChildFig(xmlUseCase);
-						
-						List<Element> activityset = currusecase.getChildren();
-						for(Element currActSet: activityset){
-							elem = ElementDiagram.getCatalogEntryByName(point);
-							// collect and add the important parameters
-							String idActSet = currActSet.getAttributeValue("id");
-							String aliasActSet = element.getAttributeValue("Alias");
-							String nameActSet = currActSet.getName();
-							EnumFigureType typActSet = elem.getType();
-							InfoXmlFigure xmlFigActSet = new InfoXmlFigure(idActSet, nameActSet, typActSet, aliasActSet);
-							xmlFig.addChildFig(xmlFigActSet);
-							System.out.println(xmlFig.getId());
-						}
-						
-						
-						
-
+					findNode(currusecase, ++level);
+//					if (currusecase.getName().equals("ActivitySet")) {
+//						elem = ElementDiagram.getCatalogEntryByName(point);
+//						// collect and add the important parameters
+//						String idUseCase = currusecase.getAttributeValue("id");
+//						String aliasUseCase = element.getAttributeValue("Alias");
+//						String nameUseCase = currusecase.getName();
+//						EnumFigureType typUseCase = elem.getType();
+//						InfoXmlFigure xmlUseCase = new InfoXmlFigure(idUseCase, nameUseCase, typUseCase, aliasUseCase);
+//						xmlFig.addChildFig(xmlUseCase);						
+//						List<Element> activityset = currusecase.getChildren();
+//						for(Element currActSet: activityset){
+//							elem = ElementDiagram.getCatalogEntryByName(point);
+//							// collect and add the important parameters
+//							String idActSet = currActSet.getAttributeValue("id");
+//							String aliasActSet = element.getAttributeValue("Alias");
+//							String nameActSet = currActSet.getName();
+//							EnumFigureType typActSet = elem.getType();
+//							InfoXmlFigure xmlFigActSet = new InfoXmlFigure(idActSet, nameActSet, typActSet, aliasActSet);
+//							xmlFig.addChildFig(xmlFigActSet);
+//						}
 //						List<Element> activity = currActSet.getChildren();
 //						for (Element currAct : activity) {
 //							point = element.getName();
@@ -158,7 +152,7 @@ public class XmlReader {
 //								}
 //							}
 //						}
-					}
+//					}
 				}
 				
 			}
@@ -255,11 +249,23 @@ public class XmlReader {
 	@SuppressWarnings("unchecked")
 	private InfoFigureParameter figure(Element currFigure) {
 		InfoFigureParameter result = null;
+		float x = 0;
+		float y = 0;
+		float width = 0;
+		float height = 0;
 		String diagramid = ((Element) currFigure).getAttributeValue("id");
-		float x = Float.parseFloat(((Element) currFigure).getAttributeValue("PositionX"));
-		float y = Float.parseFloat(((Element) currFigure).getAttributeValue("PositionY"));
-		float width = Float.parseFloat(((Element) currFigure).getAttributeValue("Width"));
-		float height = Float.parseFloat(((Element) currFigure).getAttributeValue("Height"));
+		String xString = ((Element) currFigure).getAttributeValue("PositionX");
+		if(xString != null)
+			x = Float.parseFloat(xString);
+		String yString = ((Element) currFigure).getAttributeValue("PositionY");
+		if (yString != null)
+			y = Float.parseFloat(yString);
+		String widthString = ((Element) currFigure).getAttributeValue("Width");
+		if (widthString != null)
+			width = Float.parseFloat(widthString);
+		String heightString = ((Element) currFigure).getAttributeValue("Height");
+		if (heightString != null)
+			height = Float.parseFloat(heightString);
 		String alias = currFigure.getAttributeValue("Alias");
 		EnumFigureType figtype = null;
 		String label = null;
