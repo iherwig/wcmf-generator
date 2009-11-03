@@ -76,6 +76,8 @@ public class SVGGenerator {
 		for (InfoXmlDiagram currDia : xmlDia) {
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
 			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat);
+			
+			
 
 			if (maxCor != null) {
 				Element image = new Element("image");
@@ -87,6 +89,9 @@ public class SVGGenerator {
 				image.setAttribute("height", height);
 				String type = usedImageFormat;
 				image.setAttribute("type", type);
+				String alias = currDia.getAlias();
+				if(alias != null)
+				image.setAttribute("alias", alias);
 				root.addContent(image);
 			}
 		}
