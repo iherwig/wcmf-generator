@@ -14,10 +14,12 @@ public class ElementDiagram {
 	private final static String SPECIFIED = "is specified by";
 	private final static String REALIZED = "is realized by";
 	private final static String REFINES = "is refined by";
-	private final static String PARTICIPATES = "is participates by";
+	private final static String PARTICIPATES = "participates in";
 	private final static String GENERALISATION = "is generalisation by";
 	private final static String INSTANTIATES = "instantiantes";
 	private final static String ASSOCIATION = "association";
+	
+	private final static String NOTIMPLEMENTET = "Not implementet jet";
 	
 	private static String path; // "D:/Images/";
 	
@@ -88,6 +90,7 @@ public class ElementDiagram {
 		addToCatalog(initChiWorker());
 		addToCatalog(initChiWorkerExternal());
 		addToCatalog(initChiWorkerInternal());
+		addToCatalog(initDummy());
 		
 		addToCatalog(initOperation());
 		addToCatalog(initAttribute());
@@ -122,7 +125,7 @@ public class ElementDiagram {
 	private static ElementDiagram initChiGoal() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		connections.put(EnumFigureType.CHI_GOAL, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
+		connections.put(EnumFigureType.CHI_GOAL, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.CLOSED_DIAMOND ,EnumConnectionEnd.ARROW));
 		connections.put(EnumFigureType.CHI_REQUIREMENT, new InfoAllowedConnection(SPECIFIED, EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
 		
 		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_GOAL, "ChiGoal", EnumFontPosition.IN_UP , path + chiRequirementGoal, connections);
@@ -132,7 +135,7 @@ public class ElementDiagram {
 	private static ElementDiagram initRequirement() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		connections.put(EnumFigureType.CHI_REQUIREMENT, new InfoAllowedConnection(CONTAINS,EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND ));
+		connections.put(EnumFigureType.CHI_REQUIREMENT, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.CLOSED_DIAMOND ,EnumConnectionEnd.ARROW));
 		connections.put(EnumFigureType.CHI_FEATURE, new InfoAllowedConnection(REALIZED, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW_TRIANGLE));
 		connections.put(EnumFigureType.CHI_ISSUE, new InfoAllowedConnection(NEGATED, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		
@@ -145,6 +148,8 @@ public class ElementDiagram {
 	private static ElementDiagram initChiBusiUseCase() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 		
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(NOTIMPLEMENTET, EnumConnectionEnd.NONE, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(NOTIMPLEMENTET, EnumConnectionEnd.NONE, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_PROCESS, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
 		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
 		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER_ACTIVE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
@@ -160,6 +165,8 @@ public class ElementDiagram {
 	private static ElementDiagram initChiBusiUseCaseCore() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 		
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(NOTIMPLEMENTET, EnumConnectionEnd.NONE, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(NOTIMPLEMENTET, EnumConnectionEnd.NONE, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_PROCESS, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
 		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
 		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER_ACTIVE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
@@ -175,7 +182,7 @@ public class ElementDiagram {
 	private static ElementDiagram initChiBusiPartnerPassive() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER_PASSIVE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER_PASSIVE, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		
@@ -328,6 +335,13 @@ public class ElementDiagram {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
 		ElementDiagram result = new ElementDiagram(EnumFigureType.Chi_OBJECT, "ChiObject", EnumFontPosition.IN_CENTER, null , connections);
+		return result;
+	}
+	
+	private static ElementDiagram initDummy() {
+		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+
+		ElementDiagram result = new ElementDiagram(EnumFigureType.DUMMY, "Dummy", EnumFontPosition.IN_UP , null, connections);
 		return result;
 	}
 	

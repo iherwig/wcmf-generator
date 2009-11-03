@@ -76,27 +76,26 @@ public class SVGGenerator {
 		for (InfoXmlDiagram currDia : xmlDia) {
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
 			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat);
-			String img = currDia.getId()+"."+usedImageFormat;
-			
-			Element image = new Element("image");
-			String filename = currDia.getId() + "." + usedImageFormat;
-			image.setAttribute("filename",filename);
-			String width = Float.toString(maxCor.getX());
-			image.setAttribute("width", width);
-			String height = Float.toString(maxCor.getY());
-			image.setAttribute("height", height);
-			String type = usedImageFormat;
-			image.setAttribute("type",type);
-			root.addContent(image);	
+
+			if (maxCor != null) {
+				Element image = new Element("image");
+				String filename = currDia.getId() + "." + usedImageFormat;
+				image.setAttribute("filename", filename);
+				String width = Float.toString(maxCor.getX());
+				image.setAttribute("width", width);
+				String height = Float.toString(maxCor.getY());
+				image.setAttribute("height", height);
+				String type = usedImageFormat;
+				image.setAttribute("type", type);
+				root.addContent(image);
+			}
 		}
 		try {
 			Format f = Format.getPrettyFormat();
 			XMLOutputter xml_out = new XMLOutputter(f);
-			xml_out.output(doc,
-			new java.io.FileOutputStream(targetDir + "Diagram.xml"));
-			}catch (IOException e) {
-			}
-		
+			xml_out.output(doc, new java.io.FileOutputStream(targetDir + "Diagram.xml"));
+		} catch (IOException e) {
+		}
 
 	}
 
