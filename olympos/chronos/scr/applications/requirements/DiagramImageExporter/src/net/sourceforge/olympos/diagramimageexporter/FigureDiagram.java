@@ -27,48 +27,50 @@ public class FigureDiagram {
 					continue;
 				}
 
-				for (InfoXmlFigure xmlFig1 : xmlFig) {
-					String xmlId = xmlFig1.getId();
+				for (InfoXmlFigure currXmlFig1 : xmlFig) {
+					String xmlId = currXmlFig1.getId();
 					
 					if (figId.equals(xmlId)) {
-						currFig.setType(xmlFig1.getTyp());
-						currFig.setLabel(xmlFig1.getName()); 
-//						if
-					}					
-				}
-				
-				if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER)) {
-					for (InfoXmlFigure currXmlFig : xmlFig) {
-						String xmlId = currXmlFig.getId();
-						if (figId.equals(xmlId)) {
-							ArrayList<InfoXMLOptionValue> values = currXmlFig.getChildVal();
-							for (InfoXMLOptionValue currValue : values) {
-								currFig.addValue(currValue);
-							}
-						}
+						currFig.setType(currXmlFig1.getTyp());
+						currFig.setLabel(currXmlFig1.getName()); 
 					}
 				}
-				if (currFig.getType().equals(EnumFigureType.CHI_NODE)) {
-					for (InfoXmlFigure currXmlFig : xmlFig) {
-						String xmlId = currXmlFig.getId();
-						if (figId.equals(xmlId)) {
-							ArrayList<InfoXMLOptionValue> value = currXmlFig.getChildValNo();
-							for (InfoXMLOptionValue currXMLValue : value) {
-								if (currXMLValue.getTyp().equals("ChiValue"))
-									currFig.addValue(currXMLValue);
-							}
-							ArrayList<InfoXMLOptionValue> op = currXmlFig.getChildOptNo();
-							for (InfoXMLOptionValue currXmlOp : op) {
-								if (currXmlOp.getTyp().equals("Operation"))
-									currFig.addOperation(currXmlOp);
-							}
-						}
-					}
+//				if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER)) {
+//					for (InfoXmlFigure currXmlFig : xmlFig) {
+//						String xmlId = currXmlFig.getId();
+//						if (figId.equals(xmlId)) {
+//							ArrayList<InfoXMLOptionValue> values = currXmlFig.getChildVal();
+//							for (InfoXMLOptionValue currValue : values) {
+//								currFig.addValue(currValue);
+//							}
+//						}
+//					}
+//				}
+//				if (currFig.getType().equals(EnumFigureType.CHI_NODE)) {
+//					for (InfoXmlFigure currXmlFig : xmlFig) {
+//						String xmlId = currXmlFig.getId();
+//						if (figId.equals(xmlId)) {
+//							ArrayList<InfoXMLOptionValue> value = currXmlFig.getChildValNo();
+//							for (InfoXMLOptionValue currXMLValue : value) {
+//								if (currXMLValue.getTyp().equals("ChiValue"))
+//									currFig.addValue(currXMLValue);
+//							}
+//							ArrayList<InfoXMLOptionValue> op = currXmlFig.getChildOptNo();
+//							for (InfoXMLOptionValue currXmlOp : op) {
+//								if (currXmlOp.getTyp().equals("Operation"))
+//									currFig.addOperation(currXmlOp);
+//							}
+//						}
+//					}
+//				}
+				if(currFig.getLabel() == null){
+					currFig.setType(EnumFigureType.DUMMY);
+					currFig.setLabel("Dummy"); 
 				}
-			}
+			}						
 			for (InfoFigureParameter currNoElement : noElement) {
 				dia1.removeFigure(currNoElement); // remove all File has only
-				// the Child Element
+				// the Child Element Diagram
 			}
 		}
 

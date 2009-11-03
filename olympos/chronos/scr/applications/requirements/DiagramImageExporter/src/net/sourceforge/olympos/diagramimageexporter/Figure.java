@@ -107,7 +107,6 @@ public abstract class Figure extends JPanel {
 		int height = (int) (rect.getHeight() * scaleY - 6);
 
 		String label = createFig.getLabel();
-		// System.out.println(label);
 		Font font = new Font("tahoma", Font.PLAIN, 12);
 
 		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
@@ -130,7 +129,6 @@ public abstract class Figure extends JPanel {
 		int height = (int) (rect.getHeight() * scaleY - 6);
 
 		String label = createFig.getLabel();
-		// System.out.println(label);
 		Font font = new Font("tahoma", Font.PLAIN, 12);
 
 		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
@@ -182,7 +180,6 @@ public abstract class Figure extends JPanel {
 		g2d.draw(new Rectangle(x , y, width, height));
 		
 		String label = "Not implemented jet";
-		// System.out.println(label);
 		Font font = new Font("tahoma", Font.PLAIN, 12);
 
 		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
