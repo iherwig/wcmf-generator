@@ -125,7 +125,7 @@ public class InfoFigureParameter {
 		children.add(child);
 	}
 	
-	public void addValue(InfoXMLOptionValue values) {
+	public void addAttribut(InfoXMLOptionValue values) {
 		value.add(values);
 	}
 	public void addOperation (InfoXMLOptionValue values) {
@@ -140,7 +140,7 @@ public class InfoFigureParameter {
 		return children;
 	}
 	
-	public ArrayList<InfoXMLOptionValue> getValue() {
+	public ArrayList<InfoXMLOptionValue> getAttribute() {
 		return value;
 	}
 	public ArrayList<InfoXMLOptionValue> getOperation() {

@@ -74,13 +74,29 @@ public class FigureDiagram {
 				if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER)){
 					for (InfoXmlFigure currXmlFig : xmlFig) {
 						if(currXmlFig.getId().equals(figId)){
-							ArrayList<InfoXMLOptionValue> values = currXmlFig.getChildOpt();
+							ArrayList<InfoXMLOptionValue> values = currXmlFig.getOperation();
 							for (InfoXMLOptionValue currValue : values) {
 								currFig.addOperation(currValue);
 							}
 						}
 					}
-				}			
+				}
+				if (currFig.getType().equals(EnumFigureType.CHI_NODE)){
+					for (InfoXmlFigure currXmlFig : xmlFig) {
+						if(currXmlFig.getId().equals(figId)){
+							ArrayList<InfoXMLOptionValue> opt = currXmlFig.getOperation();
+							for (InfoXMLOptionValue currOpt : opt) {
+//								if(currOpt.getName().equals("Operation"))
+								currFig.addOperation(currOpt);
+							}
+							ArrayList<InfoXMLOptionValue> attrib = currXmlFig.getAttribute();
+							for (InfoXMLOptionValue currAttrib : attrib) {
+//								if(currAttrib.getName().equals("ChiValue"))
+								currFig.addAttribut(currAttrib);
+							}
+						}
+					}
+				}				
 			}
 			for (InfoFigureParameter currNoElement : noElement) {
 				dia1.removeFigure(currNoElement); // remove all File has only
@@ -218,9 +234,9 @@ public class FigureDiagram {
 					String aliasFig = currFig.getAlias();
 					for (InfoXmlFigure currXmlFig : xmlFig) {
 						if (currXmlFig.getTyp().equals(EnumFigureType.CHI_CONTROLLER) && currXmlFig.getAlias().equals(aliasFig)) {
-							ArrayList<InfoXMLOptionValue> values = currXmlFig.getChildOpt();
+							ArrayList<InfoXMLOptionValue> values = currXmlFig.getOperation();
 							for (InfoXMLOptionValue currValue : values) {
-								currFig.addValue(currValue);
+								currFig.addAttribut(currValue);
 							}
 						}
 					}
@@ -229,16 +245,16 @@ public class FigureDiagram {
 					String aliasFig = currFig.getAlias();
 					for (InfoXmlFigure currXmlFig : xmlFig) {
 						if (currXmlFig.getTyp().equals(EnumFigureType.CHI_NODE) && currXmlFig.getAlias().equals(aliasFig)) {
-							ArrayList<InfoXMLOptionValue> valuesOpt = currXmlFig.getChildOptNo();
+							ArrayList<InfoXMLOptionValue> valuesOpt = currXmlFig.getAttribute();
 							if (valuesOpt != null) {
 								for (InfoXMLOptionValue currValueOpt : valuesOpt) {
-									currFig.addValue(currValueOpt);
+									currFig.addAttribut(currValueOpt);
 								}
 							}
 							ArrayList<InfoXMLOptionValue> valuesVal = currXmlFig.getChildVal();
 							if (valuesVal != null) {
 								for (InfoXMLOptionValue currValueVal : valuesVal) {
-									currFig.addValue(currValueVal);
+									currFig.addAttribut(currValueVal);
 								}
 							}
 						}

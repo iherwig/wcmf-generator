@@ -18,6 +18,7 @@ import javax.swing.JTextArea;
 import org.apache.batik.svggen.SVGGraphics2D;
 
 public abstract class Figure extends JPanel {
+	
 	abstract public void draw(Graphics2D g2d, InfoFigureParameter fig);
 
 	protected void drawScaleLine(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line) {
@@ -244,158 +245,240 @@ public abstract class Figure extends JPanel {
 		int curYImage = (int) (createFig.getY() + line2.getY1() + 3);
 		int start = curYImage;
 
-		String typ = "ChiAttribute";
-		ArrayList<InfoXMLOptionValue> attribute = createFig.getValue();
-		if (attribute.size() != 0) {
-			int yPlus = OperationAttribut(g2d, createFig, line2, typ, attribute);
-			line2.setY1(yPlus);
-			line2.setY2(yPlus);
-			drawScaleXLine(g2d, createFig, figureInfo, line2);
-		} else {
-			drawScaleXLine(g2d, createFig, figureInfo, line2);
-		}
-
-		typ = "ChiOperation";
+		String typ = "ChiOperation";
 		ArrayList<InfoXMLOptionValue> operation = createFig.getOperation();
-		System.out.println(operation.size());
 		if (operation.size() != 0) {
-			OperationAttribut(g2d, createFig, line2, typ, operation);
-		}
+			String imagePath = null;
+			ElementDiagram elemOp = ElementDiagram.getCatalogEntryByName(typ);
+			imagePath = elemOp.getImage();
 
-	}
-
-	private int OperationAttribut(Graphics2D g2d, InfoFigureParameter createFig, InfoLine line2, String typ, ArrayList<InfoXMLOptionValue> values) {
-
-
-		String imagePath = null;
-		ElementDiagram elemOp = ElementDiagram.getCatalogEntryByName(typ);
-		imagePath = elemOp.getImage();
-
-		Font b = new Font("Tahoma", Font.PLAIN, 12);
-		g2d.setFont(b);
-		FontMetrics fm = g2d.getFontMetrics();
-		int lineHeight = fm.getHeight();
-
-		int currX = (int) (createFig.getX() + 16);
-		int currY = (int) (createFig.getY() + line2.getY1() + 2);
-		int currXimage = (int) (createFig.getX() + 1 );
-		int currYimage = (int) (createFig.getY() + line2.getY1() + 5);
-		int imageWidth = lineHeight;
-		int imageHeight = lineHeight;
-
-		for (InfoXMLOptionValue currValue : values) {
-
-			try {
-				BufferedImage img1 = ImageIO.read(new File(imagePath));
-				if (img1 != null)
-					g2d.drawImage(img1, currXimage, currYimage, imageWidth, imageHeight, null);
-			} catch (Exception e) {
-				System.out.println(e);
-			}
-			
-			currYimage += lineHeight;
-
-			currX = currX;
-			currY += lineHeight;
-			g2d.setPaint(Color.black);
+			Font b = new Font("Tahoma", Font.PLAIN, 12);
 			g2d.setFont(b);
-			g2d.drawString(currValue.getName(), currX, currY);
+			FontMetrics fm = g2d.getFontMetrics();
+			int lineHeight = fm.getHeight();
 
-		}
-		return currY;
-	}
+			int currX = (int) (createFig.getX() + 16);
+			int currY = (int) (createFig.getY() + line2.getY1() + 1);
+			int currXimage = (int) (createFig.getX() + 1 );
+			int currYimage = (int) (createFig.getY() + line2.getY1() + 4);
+			int imageWidth = lineHeight;
+			int imageHeight = lineHeight;
 
-	protected void drawScaleChiNode(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line1, InfoLine line2, InfoCoordinateSize rect2) {
-		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
-		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+			for (InfoXMLOptionValue currValue : operation) {
 
-		ArrayList<InfoXMLOptionValue> values = createFig.getValue();
-
-		Font b = new Font("Tahoma", Font.PLAIN, 10);
-		g2d.setFont(b);
-		FontMetrics fm = g2d.getFontMetrics();
-
-		int i = 0;
-		int lineHeight = fm.getHeight();
-
-		int curX = (int) (createFig.getX());
-		int curXImage = (int) (createFig.getX() + lineHeight);
-		int curY = (int) (createFig.getY() + line1.getY1());
-		int curYImage = (int) (createFig.getY() + line1.getY1() + 3);
-
-		String typ = "ChiAttribute";
-		String imagePath = null;
-		ElementDiagram elem = ElementDiagram.getCatalogEntryByName(typ);
-		imagePath = elem.getImage();
-
-		for (InfoXMLOptionValue currValue : values) {
-			if (currValue.getTyp().equals("ChiValue")) {
 				try {
 					BufferedImage img1 = ImageIO.read(new File(imagePath));
-					int xImage = curXImage;
-					int yImage = curYImage;
-					int widthImage = lineHeight;
-					int hightImage = lineHeight;
-
 					if (img1 != null)
-						g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
+						g2d.drawImage(img1, currXimage, currYimage, imageWidth, imageHeight, null);
 				} catch (Exception e) {
 					System.out.println(e);
 				}
-				curYImage += lineHeight;
-				curY += lineHeight;
-				curX = (int) (createFig.getX() + lineHeight + 20);
-				i++;
+				
+				currYimage += lineHeight;
+
+				currX = currX;
+				currY += lineHeight;
 				g2d.setPaint(Color.black);
 				g2d.setFont(b);
-				g2d.drawString(currValue.getName(), curX, curY);
+				g2d.drawString(currValue.getName(), currX, currY);
+
 			}
 		}
+
+	}
+	
+	protected void drawScaleChiNode(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line1, InfoLine line2, InfoCoordinateSize rect) {
+
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int x = (int) (rect.getX() * scaleX + createFig.getX());
+		int y = (int) (rect.getY() * scaleY + createFig.getY());
+		int width = (int) (rect.getWidth() * scaleX);
+		int height = (int) (rect.getHeight() * scaleY);
+		g2d.draw(new Rectangle(x, y, width, height));
+		
+		int currX = (int) (createFig.getX() + 16);
+		int currY = (int) (createFig.getY() + line1.getY1() + 1);
+		int currXimage = (int) (createFig.getX() + 1 );
+		int currYimage = (int) (createFig.getY() + line1.getY1() + 4);
+		int imageWidth = 0;
+		int imageHeight = 0;
+		int lineHeight = 0;
+
+		int curYImage = (int) (createFig.getY() + line2.getY1() + 3);
+		int start = curYImage;
+
+		String typ = "ChiAttribute";
+		ArrayList<InfoXMLOptionValue> attribute = createFig.getAttribute();
+		if (attribute.size() != 0) {
+			String imagePath = null;
+			ElementDiagram elemOp = ElementDiagram.getCatalogEntryByName(typ);
+			imagePath = elemOp.getImage();
+
+			Font b = new Font("Tahoma", Font.PLAIN, 12);
+			g2d.setFont(b);
+			FontMetrics fm = g2d.getFontMetrics();
+			lineHeight = fm.getHeight();
+			
+			imageWidth = lineHeight;
+			imageHeight = lineHeight;
+
+			for (InfoXMLOptionValue currAttribute : attribute) {
+
+				try {
+					BufferedImage img1 = ImageIO.read(new File(imagePath));
+					if (img1 != null)
+						g2d.drawImage(img1, currXimage, currYimage, imageWidth, imageHeight, null);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+				
+				currYimage += lineHeight;
+
+				currY += lineHeight;
+				g2d.setPaint(Color.black);
+				g2d.setFont(b);
+				g2d.drawString(currAttribute.getName(), currX, currY);
+
+			}
+			line2.setY1(line2.getY1() + (attribute.size() * lineHeight) - 1);
+			line2.setY2(line2.getY2() + (attribute.size() * lineHeight) - 1);
+			drawScaleXLine(g2d, createFig, figureInfo, line2);
+			
+		} else {
+			drawScaleXLine(g2d, createFig, figureInfo, line2);
+		}
+		
+		typ = "ChiOperation";
 		ArrayList<InfoXMLOptionValue> operation = createFig.getOperation();
+		if (operation.size() != 0) {
+			String imagePath = null;
+			ElementDiagram elemOp = ElementDiagram.getCatalogEntryByName(typ);
+			imagePath = elemOp.getImage();
 
-		if (operation.size() > 0) {
-			int lineX1 = (int) (createFig.getX() + line1.getX1());
-			int lineY1 = (int) (curY + 5);
-			int lineX2 = (int) (createFig.getX() + line1.getX2() * scaleX);
-			int lineY2 = (int) (curY + 5);
+			Font b = new Font("Tahoma", Font.PLAIN, 12);
+			g2d.setFont(b);
+			FontMetrics fm = g2d.getFontMetrics();
+			lineHeight = fm.getHeight();
 
-			curYImage += 4;
-			curY += 4;
 
-			g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
-
-			String typOp = "ChiOperation";
-			String imagePathOp = null;
-			ElementDiagram elemOp = ElementDiagram.getCatalogEntryByName(typOp);
-			imagePathOp = elemOp.getImage();
+			currY +=3;
+			currYimage += 5;
+			imageWidth = lineHeight;
+			imageHeight = lineHeight;
 
 			for (InfoXMLOptionValue currOperation : operation) {
 
 				try {
-					BufferedImage img1 = ImageIO.read(new File(imagePathOp));
-					int xImage = curXImage;
-					int yImage = curYImage;
-					int widthImage = lineHeight;
-					int hightImage = lineHeight;
-
+					BufferedImage img1 = ImageIO.read(new File(imagePath));
 					if (img1 != null)
-						g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
+						g2d.drawImage(img1, currXimage, currYimage, imageWidth, imageHeight, null);
 				} catch (Exception e) {
 					System.out.println(e);
 				}
-				curYImage += lineHeight;
-				curY += lineHeight;
-				curX = (int) (createFig.getX() + lineHeight + 20);
-				i++;
+				
+				currYimage += lineHeight;
+
+				currY += lineHeight;
 				g2d.setPaint(Color.black);
 				g2d.setFont(b);
-				g2d.drawString(currOperation.getName(), curX, curY);
+				g2d.drawString(currOperation.getName(), currX, currY);
 			}
-
-		} else {
-			drawScaleXLine(g2d, createFig, figureInfo, line2);
 		}
 	}
+
+//	protected void drawScaleChiNode(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line1, InfoLine line2, InfoCoordinateSize rect2) {
+//		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+//		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+//
+//		ArrayList<InfoXMLOptionValue> values = createFig.getValue();
+//
+//		Font b = new Font("Tahoma", Font.PLAIN, 10);
+//		g2d.setFont(b);
+//		FontMetrics fm = g2d.getFontMetrics();
+//
+//		int i = 0;
+//		int lineHeight = fm.getHeight();
+//
+//		int curX = (int) (createFig.getX());
+//		int curXImage = (int) (createFig.getX() + lineHeight);
+//		int curY = (int) (createFig.getY() + line1.getY1());
+//		int curYImage = (int) (createFig.getY() + line1.getY1() + 3);
+//
+//		String typ = "ChiAttribute";
+//		String imagePath = null;
+//		ElementDiagram elem = ElementDiagram.getCatalogEntryByName(typ);
+//		imagePath = elem.getImage();
+//
+//		for (InfoXMLOptionValue currValue : values) {
+//			if (currValue.getTyp().equals("ChiValue")) {
+//				try {
+//					BufferedImage img1 = ImageIO.read(new File(imagePath));
+//					int xImage = curXImage;
+//					int yImage = curYImage;
+//					int widthImage = lineHeight;
+//					int hightImage = lineHeight;
+//
+//					if (img1 != null)
+//						g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
+//				} catch (Exception e) {
+//					System.out.println(e);
+//				}
+//				curYImage += lineHeight;
+//				curY += lineHeight;
+//				curX = (int) (createFig.getX() + lineHeight + 20);
+//				i++;
+//				g2d.setPaint(Color.black);
+//				g2d.setFont(b);
+//				g2d.drawString(currValue.getName(), curX, curY);
+//			}
+//		}
+//		ArrayList<InfoXMLOptionValue> operation = createFig.getOperation();
+//
+//		if (operation.size() > 0) {
+//			int lineX1 = (int) (createFig.getX() + line1.getX1());
+//			int lineY1 = (int) (curY + 5);
+//			int lineX2 = (int) (createFig.getX() + line1.getX2() * scaleX);
+//			int lineY2 = (int) (curY + 5);
+//
+//			curYImage += 4;
+//			curY += 4;
+//
+//			g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
+//
+//			String typOp = "ChiOperation";
+//			String imagePathOp = null;
+//			ElementDiagram elemOp = ElementDiagram.getCatalogEntryByName(typOp);
+//			imagePathOp = elemOp.getImage();
+//
+//			for (InfoXMLOptionValue currOperation : operation) {
+//
+//				try {
+//					BufferedImage img1 = ImageIO.read(new File(imagePathOp));
+//					int xImage = curXImage;
+//					int yImage = curYImage;
+//					int widthImage = lineHeight;
+//					int hightImage = lineHeight;
+//
+//					if (img1 != null)
+//						g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
+//				} catch (Exception e) {
+//					System.out.println(e);
+//				}
+//				curYImage += lineHeight;
+//				curY += lineHeight;
+//				curX = (int) (createFig.getX() + lineHeight + 20);
+//				i++;
+//				g2d.setPaint(Color.black);
+//				g2d.setFont(b);
+//				g2d.drawString(currOperation.getName(), curX, curY);
+//			}
+//
+//		} else {
+//			drawScaleXLine(g2d, createFig, figureInfo, line2);
+//		}
+//	}
 
 	protected void drawScaleChi(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize head) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
