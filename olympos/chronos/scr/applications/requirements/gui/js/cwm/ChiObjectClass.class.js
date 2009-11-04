@@ -61,21 +61,27 @@ cwm.ChiObjectClass = function() {
 			invertBackendRelation: true,
 			connectionType: "is instance of",
 			cardinality: 1
+		},
+		"Activity" : {
+			nmUwmClassName : "AObjectFlowSourceEnd",
+			connection: {
+				label :"Modify",
+				invert :true,
+				invertBackendRelation: true,
+				connectionType :"objectflow",
+				nmSelf : true,
+				cardinality: -1,
+				ownUwmClassName : "ChiObjectObjectFlowSource",
+				otherUwmClassName : "AObjectFlowTarget"
+			}
 		}
+	};
 
-			, 			
-	
-		
-			
-		"Activity": {
-			label: "Modify",
-			invert: true,
-			connectionType: "",
-			cardinality: -1
-		}
-
-		
-	
+	this.maskInfo = {
+			"AObjectFlowSourceEnd" : "ObjectFlow",
+			"AObjectFlowTargetEnd" : "ObjectFlow",
+			"ChiObjectObjectFlowSourceEnd" : "ObjectFlow",
+			"ChiObjectObjectFlowTargetEnd" : "ObjectFlow"
 	};
 }
 

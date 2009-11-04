@@ -121,7 +121,12 @@ uwm.ui.Login = function(config){
 	}
 
 	uwm.ui.Login.prototype.handleLogin = function(options, data){
-		uwm.Uwm.getInstance().startSession(data.sid, this.form.getForm().findField("Language").getValue());
+		var lang = uwm.i18n.Localization.getInstance().getDefaultModelLanguage();
+		var languageField = this.form.getForm().findField("Language");
+		if (languageField) {
+			lang = this.form.getForm().findField("Language").getValue();
+		}
+		uwm.Uwm.getInstance().startSession(data.sid, lang);
 	}
 
 	uwm.ui.Login.prototype.handleLoginFailure = function(options, data, errorMsg){

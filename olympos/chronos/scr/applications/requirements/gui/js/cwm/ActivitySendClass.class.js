@@ -53,7 +53,7 @@ cwm.ActivitySendClass = function() {
 			connection: {
 				label :"Associates",
 				invert :false,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: 1,
 				ownUwmClassName : "ASControlFlowSource",
@@ -65,7 +65,7 @@ cwm.ActivitySendClass = function() {
 			connection: {
 				label :"Associates",
 				invert :true,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: -1,
 				ownUwmClassName : "ASControlFlowTarget",

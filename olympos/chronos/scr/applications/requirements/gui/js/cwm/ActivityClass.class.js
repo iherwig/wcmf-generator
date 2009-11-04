@@ -54,7 +54,7 @@ cwm.ActivityClass = function() {
 				label :"Associates",
 				invert :true,
 				invertBackendRelation: true,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: -1,
 				ownUwmClassName : "AControlFlowSource",
@@ -67,7 +67,7 @@ cwm.ActivityClass = function() {
 				label :"Associates",
 				invert :true,
 				invertBackendRelation: true,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: -1,
 				ownUwmClassName : "AControlFlowSource",
@@ -79,7 +79,7 @@ cwm.ActivityClass = function() {
 			connection: {
 				label :"Associates",
 				invert :true,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: 1,
 				ownUwmClassName : "AControlFlowTarget",
@@ -91,7 +91,7 @@ cwm.ActivityClass = function() {
 			connection: {
 				label :"Associates",
 				invert :false,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: 1,
 				ownUwmClassName : "AControlFlowSource",
@@ -103,7 +103,7 @@ cwm.ActivityClass = function() {
 			connection: {
 				label :"Associates",
 				invert :true,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: 1,
 				ownUwmClassName : "AControlFlowTarget",
@@ -115,19 +115,25 @@ cwm.ActivityClass = function() {
 			connection: {
 				label :"Associates",
 				invert :false,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: 1,
 				ownUwmClassName : "AControlFlowSource",
 				otherUwmClassName : "ASControlFlowTarget"
 			}
 		},
-		
-		"ChiObject": {
-			label: "Modify",
-			invert: false,
-			connectionType: "",
-			cardinality: -1
+		"ChiObject" : {
+			nmUwmClassName : "ChiObjectObjectFlowSourceEnd",
+			connection: {
+				label :"Modify",
+				invert :true,
+				invertBackendRelation: true,
+				connectionType :"objectflow",
+				nmSelf : true,
+				cardinality: -1,
+				ownUwmClassName : "AObjectFlowSource",
+				otherUwmClassName : "ChiObjectObjectFlowTarget"
+			}
 		}
 	};
 
@@ -139,7 +145,11 @@ cwm.ActivityClass = function() {
 			"ASControlFlowSourceEnd" : "ControlFlow",
 			"ASControlFlowTargetEnd" : "ControlFlow",
 			"ARControlFlowSourceEnd" : "ControlFlow",
-			"ARControlFlowTargetEnd" : "ControlFlow"
+			"ARControlFlowTargetEnd" : "ControlFlow",
+			"AObjectFlowSourceEnd" : "ObjectFlow",
+			"AObjectFlowTargetEnd" : "ObjectFlow",
+			"ChiObjectObjectFlowSourceEnd" : "ObjectFlow",
+			"ChiObjectObjectFlowTargetEnd" : "ObjectFlow"
 	};
 }
 

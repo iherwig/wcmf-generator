@@ -53,7 +53,7 @@ cwm.ActivityInitialClass = function() {
 			connection: {
 				label :"Associates",
 				invert :false,
-				connectionType :"association",
+				connectionType :"controlflow",
 				cardinality: -1,
 				nmSelf : true,
 				ownUwmClassName : "ActivityInitial",
