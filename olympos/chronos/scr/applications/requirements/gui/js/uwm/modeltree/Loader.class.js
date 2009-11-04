@@ -100,8 +100,14 @@ uwm.modeltree.Loader.prototype.reformatData = function(self, node, callback, dat
 				});
 				break;
 				
+			// FIXME: Better ask the parent node, if several child nodes 
+			// should be displayed or not
 			case "Figure":
 			case "NMUCActor":
+			case "ChiUseCaseSourceEnd":
+			case "ChiUseCaseTargetEnd":
+			case "ChiUseCaseCoreSourceEnd":
+			case "ChiUseCaseCoreTargetEnd":
 				break;
 				
 			default:
