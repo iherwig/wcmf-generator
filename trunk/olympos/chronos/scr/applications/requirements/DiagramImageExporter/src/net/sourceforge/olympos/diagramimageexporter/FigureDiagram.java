@@ -29,45 +29,59 @@ public class FigureDiagram {
 
 				for (InfoXmlFigure currXmlFig1 : xmlFig) {
 					String xmlId = currXmlFig1.getId();
-					
+
 					if (figId.equals(xmlId)) {
 						currFig.setType(currXmlFig1.getTyp());
-						currFig.setLabel(currXmlFig1.getName()); 
+						currFig.setLabel(currXmlFig1.getName());
 					}
 				}
-//				if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER)) {
-//					for (InfoXmlFigure currXmlFig : xmlFig) {
-//						String xmlId = currXmlFig.getId();
-//						if (figId.equals(xmlId)) {
-//							ArrayList<InfoXMLOptionValue> values = currXmlFig.getChildVal();
-//							for (InfoXMLOptionValue currValue : values) {
-//								currFig.addValue(currValue);
-//							}
-//						}
-//					}
-//				}
-//				if (currFig.getType().equals(EnumFigureType.CHI_NODE)) {
-//					for (InfoXmlFigure currXmlFig : xmlFig) {
-//						String xmlId = currXmlFig.getId();
-//						if (figId.equals(xmlId)) {
-//							ArrayList<InfoXMLOptionValue> value = currXmlFig.getChildValNo();
-//							for (InfoXMLOptionValue currXMLValue : value) {
-//								if (currXMLValue.getTyp().equals("ChiValue"))
-//									currFig.addValue(currXMLValue);
-//							}
-//							ArrayList<InfoXMLOptionValue> op = currXmlFig.getChildOptNo();
-//							for (InfoXMLOptionValue currXmlOp : op) {
-//								if (currXmlOp.getTyp().equals("Operation"))
-//									currFig.addOperation(currXmlOp);
-//							}
-//						}
-//					}
-//				}
-				if(currFig.getLabel() == null){
+//				 if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER))
+//				 {
+//				 for (InfoXmlFigure currXmlFig : xmlFig) {
+//				 String xmlId = currXmlFig.getId();
+//				 if (figId.equals(xmlId)) {
+//				 ArrayList<InfoXMLOptionValue> values =
+//				 currXmlFig.getChildVal();
+//				 for (InfoXMLOptionValue currValue : values) {
+//				 currFig.addValue(currValue);
+//				 }
+//				 }
+//				 }
+//				 }
+//				 if (currFig.getType().equals(EnumFigureType.CHI_NODE)) {
+//				 for (InfoXmlFigure currXmlFig : xmlFig) {
+//				 String xmlId = currXmlFig.getId();
+//				 if (figId.equals(xmlId)) {
+//				 ArrayList<InfoXMLOptionValue> value =
+//				 currXmlFig.getChildValNo();
+//				 for (InfoXMLOptionValue currXMLValue : value) {
+//				 if (currXMLValue.getTyp().equals("ChiValue"))
+//				 currFig.addValue(currXMLValue);
+//				 }
+//				 ArrayList<InfoXMLOptionValue> op =
+//				 currXmlFig.getChildOptNo();
+//				 for (InfoXMLOptionValue currXmlOp : op) {
+//				 if (currXmlOp.getTyp().equals("Operation"))
+//				 currFig.addOperation(currXmlOp);
+//				 }
+//				 }
+//				 }
+//				 }
+				if (currFig.getLabel() == null) {
 					currFig.setType(EnumFigureType.DUMMY);
-					currFig.setLabel("Dummy"); 
+					currFig.setLabel("Dummy");
 				}
-			}						
+				if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER)){
+					for (InfoXmlFigure currXmlFig : xmlFig) {
+						if(currXmlFig.getId().equals(figId)){
+							ArrayList<InfoXMLOptionValue> values = currXmlFig.getChildOpt();
+							for (InfoXMLOptionValue currValue : values) {
+								currFig.addOperation(currValue);
+							}
+						}
+					}
+				}			
+			}
 			for (InfoFigureParameter currNoElement : noElement) {
 				dia1.removeFigure(currNoElement); // remove all File has only
 				// the Child Element Diagram
@@ -104,26 +118,26 @@ public class FigureDiagram {
 							ArrayList<InfoXmlConnection> xmlFigChild = currXmlFig.getChildren();
 							if (currXmlFig.getId().equals(targetOidObject)) {
 								for (InfoXmlConnection currXmlFigChild2 : xmlFigChild) {
-									if(currXmlFigChild2.getType().equals("ActivitySet")){
-										
-									}
-									else{
+									if (currXmlFigChild2.getTargetType() != null) { //prüfen ob ein TargetTyp vorhanden ist
 										if (!currXmlFigChild2.getTargetType().equals("Figure") && !currXmlFigChild2.getTargetType().equals("Package")) {
 											String targetOid = currXmlFigChild2.getTargetOid();
-											for (InfoXmlFigure currxmlFig2 : xmlFig) {
-												if (currxmlFig2.getId().equals(targetOid)) {
-													ArrayList<InfoXmlConnection> xmlFigChild2 = currxmlFig2.getChildren();
-													for (InfoXmlConnection currxmlFig3 : xmlFigChild2) {
-														if (currxmlFig3.getTargetType().equals("Figure")){
-															targetOidXmlFigure = currxmlFig3.getTargetOid();
-															addChildren(idFigure, targetOidXmlFigure,typFigure);
+											if (targetOid != null) {
+												for (InfoXmlFigure currxmlFig2 : xmlFig) {
+													if (currxmlFig2.getId().equals(targetOid)) {
+														ArrayList<InfoXmlConnection> xmlFigChild2 = currxmlFig2.getChildren();
+														for (InfoXmlConnection currxmlFig3 : xmlFigChild2) {
+															if (currxmlFig3.getTargetType() != null) {
+															if (currxmlFig3.getTargetType().equals("Figure")) {
+																targetOidXmlFigure = currxmlFig3.getTargetOid();
+																	addChildren(idFigure, targetOidXmlFigure, typFigure);
+																}
+															}
 														}
 													}
 												}
 											}
 										}
 									}
-
 								}
 							}
 						}

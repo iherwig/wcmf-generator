@@ -76,7 +76,7 @@ public class ElementDiagram {
 		addToCatalog(initActiviReceive());
 		addToCatalog(initActivity());
 		addToCatalog(initActivityFinal());
-		addToCatalog(initChiObject());
+//		addToCatalog(initChiObject());
 		addToCatalog(initChiBusiPartner());
 		addToCatalog(initChiBusiPartnerActive());
 		addToCatalog(initChiBusiPartnerPassive());

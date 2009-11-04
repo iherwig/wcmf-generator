@@ -77,15 +77,16 @@ public class SVGGenerator {
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
 			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat);
 			
-			
 
 			if (maxCor != null) {
+				int widthInt = (int) maxCor.getX();
+				int heightInt = (int) maxCor.getY();
 				Element image = new Element("image");
 				String filename = currDia.getId() + "." + usedImageFormat;
 				image.setAttribute("filename", filename);
-				String width = Float.toString(maxCor.getX());
+				String width = Integer.toString(widthInt);
 				image.setAttribute("width", width);
-				String height = Float.toString(maxCor.getY());
+				String height = Integer.toString(heightInt);
 				image.setAttribute("height", height);
 				String type = usedImageFormat;
 				image.setAttribute("type", type);
