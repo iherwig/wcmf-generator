@@ -1,7 +1,10 @@
 import uml;
 import Chronos;
+import diagrams;
 
 extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
 
 Boolean hasAnalysisContent(uml::Package this) :
 	(this.allOwnedElements().select(e|
@@ -240,6 +243,14 @@ String getKey1(Chronos::ChiController this):
 	"Steuerungen"
 ;
 
+String getGermanName(Chronos::ChiDiagram this) :
+	"Diagram"
+;
+
+String getKey1(Chronos::ChiDiagram this):
+	"Diagramme"
+;
+
 
 String getGermanName(uml::Element this):
 	"UNDEFINED GermanName: " + this.metaType.name
@@ -251,4 +262,37 @@ String getKey1(uml::Element this):
 
 int getOutlineLevel(int this) :
 	this > 9 ? 9 : this
+;
+
+diagrams::Image getImage(diagrams::DiagramExport this, String alias):
+	this.image.selectFirst(e|e.alias == alias)
+;
+
+Real getScaledWidth(diagrams::Image this, Real targetWidth, Real targetHeight):
+	this.isScaleWidth(targetWidth, targetHeight) ? (
+		let currentRatio = (this.width + E()) / (this.height + E()):
+		(targetHeight * currentRatio)
+	) :
+		targetWidth
+;
+
+Real getScaledHeight(diagrams::Image this, Real targetWidth, Real targetHeight):
+
+	this.isScaleWidth(targetWidth, targetHeight) ?
+		targetHeight
+	: (
+		let currentRatio = (this.width + E()) / (this.height + E()):
+		(targetWidth / currentRatio)
+	)
+;
+
+Boolean isScaleWidth(diagrams::Image this, Real targetWidth, Real targetHeight):
+	let targetRatio = (targetWidth + E()) / (targetHeight + E()):
+	let currentRatio = (this.width + E()) / (this.height + E()):
+	
+	(targetRatio > currentRatio)
+;
+
+cached Real E():
+	1.11111 - 1.1111
 ;

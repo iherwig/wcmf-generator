@@ -29,6 +29,7 @@ extension cartridge::UmlConnector::objects::ChiSystem;
 extension cartridge::UmlConnector::objects::ChiView;
 extension cartridge::UmlConnector::objects::ChiWorker;
 extension cartridge::UmlConnector::objects::ChiWorkerInternal;
+extension cartridge::UmlConnector::objects::ChiDiagram;
 
 uml::Package convert(cwm::Package p):
 	//(new uml::UseCase).ow
@@ -58,6 +59,8 @@ uml::Package convert(cwm::Package p):
 		up.ownedType.addAll(p.chiView.convert()) ->
 		up.ownedType.addAll(p.chiWorker.convert()) ->
 		up.ownedType.addAll(p.chiWorkerInternal.convert()) ->
+		up.nestedPackage.addAll(p.diagram.convert()) ->
+
 		up.nestedPackage.addAll(p.package.convert())
 	) ->
 	up
@@ -80,6 +83,7 @@ Void establishConnections(cwm::Package p, uml::Model um):
 	p.chiNode.establishConnections(um) ->
 	p.chiNodeManyToMany.establishConnections(um) ->
 	p.chiController.establishConnections(um) ->
+	p.diagram.establishConnections(um) ->
 
 	p.package.establishConnections(um)
 ;
@@ -109,6 +113,7 @@ Void transferValues(cwm::Package p, uml::Model um):
 			p.chiSystem.transferValues(um) ->
 			p.chiController.transferValues(um) ->
 			p.chiView.transferValues(um) ->
+			p.diagram.transferValues(um) ->
 			p.package.transferValues(um) ->
 		
 			uc.setName(p.name != "" ? p.name : "Unnamed Package") ->
@@ -147,6 +152,7 @@ cwm::Package convertToCwm(uml::Package p) :
 		up.chiView.addAll(((List[Chronos::ChiView]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiView") != null)).convertToCwm()) ->
 		up.chiWorker.addAll(((List[Chronos::ChiWorker]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiWorker") != null)).convertToCwm()) ->
 		up.chiWorkerInternal.addAll(((List[Chronos::ChiWorkerInternal]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiWorkerInternal") != null)).convertToCwm()) ->
+		up.diagram.addAll(((List[Chronos::ChiDiagram]) p.ownedType.select(e|e.getAppliedStereotype("Chronos::ChiDiagram") != null)).convertToCwm()) ->
 
 		up.package.addAll(p.nestedPackage.typeSelect(uml::Package).select(e|e.getAppliedStereotypes().size == 0).convertToCwm())
 	) ->

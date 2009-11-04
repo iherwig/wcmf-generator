@@ -219,8 +219,8 @@ class UWMDocExporterController extends BatchController
 	
 		$this->createTempFile("$workingDir/content.xml");
 		$this->createTempFile("$workingDir/styles.xml");
-		$this->createTempFile("$workingDir/document-tmp0.odt");
-		$this->createTempFile("$workingDir/document-tmp1.odt");
+		$this->createTempFile("$workingDir/manifest.xml");
+		$this->createTempFile("$workingDir/document-tmp.odt");
 		$exportFile = $this->createTempFile("$workingDir/document-export.$exportFormat");
 		$session->set($this->TEMP_EXPORT_FILE, $exportFile);
 	
@@ -271,12 +271,10 @@ class UWMDocExporterController extends BatchController
 		$this->check('File written to output');
 	
 		// cleanup
-		/*
 		unlink($exportFile);
 		$workingDir = $session->get($this->TEMP_WORKING_DIR);
 		FileUtil::emptyDir($workingDir);
 		rmdir($workingDir);
-		*/
 		ExportShutdownHandler::success();
 	}
 
