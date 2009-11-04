@@ -16,7 +16,7 @@ public class ChiNode extends Figure{
 	protected InfoCoordinateSize circle = new InfoCoordinateSize(105, 5, 12, 12);
 	private InfoLine infLine1 = new InfoLine(0, 40, 138, 40);
 	private InfoLine infLine2 = new InfoLine(0, 48, 138, 48);
-	private InfoLine circleLine = new InfoLine(105, 17, 116, 17);
+	private InfoLine circleLine = new InfoLine(0, 17, 11, 17);
 	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 138, 60);
 
 	

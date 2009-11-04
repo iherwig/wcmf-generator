@@ -195,6 +195,8 @@ public class XmlReader {
 					}
 				}
 			}
+	
+			
 			List<Element> childr = element.getChildren();
 			for (Element currChild : childr) {
 				String type = currChild.getName();
