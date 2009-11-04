@@ -64,6 +64,16 @@ public abstract class Figure extends JPanel {
 		g2d.draw(ellip);
 	}
 
+	protected void drawEllipseLeft(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse, InfoCoordinateSize rect) {
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int x = (int) (createFig.getX() + rect.getWidth() * scaleX - 20);
+		int y = (int) (createFig.getY() + ellipse.getY());
+
+		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight(), ellipse.getWidth());
+		g2d.draw(ellip);
+	}
+
 	protected void drawEllipse(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse) {
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
@@ -118,12 +128,12 @@ public abstract class Figure extends JPanel {
 		n.setOpaque(false);
 		n.paint(textbox);
 	}
-	
+
 	protected void drawChiBusinesProcLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect, InfoLine line) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
-		int x = (int) (createFig.getX()+ line.getX1() + 5);
+		int x = (int) (createFig.getX() + line.getX1() + 5);
 		int y = (int) (createFig.getY() + 7);
 		int width = (int) ((rect.getWidth() * scaleX) - 6);// -25);
 		int height = (int) (rect.getHeight() * scaleY - 6);
@@ -141,9 +151,9 @@ public abstract class Figure extends JPanel {
 		n.paint(textbox);
 	}
 
-	protected void drawCenterLabelUnder(Graphics2D g2d, InfoFigureParameter figure){
-		
-		Font calledElement=new Font("tahoma", Font.PLAIN, 12);		
+	protected void drawCenterLabelUnder(Graphics2D g2d, InfoFigureParameter figure) {
+
+		Font calledElement = new Font("tahoma", Font.PLAIN, 12);
 		g2d.setFont(calledElement);
 
 		int mX = (int) (figure.getX() + figure.getWidth() / 2);
@@ -170,15 +180,16 @@ public abstract class Figure extends JPanel {
 			curX += wordWidth;
 		}
 	}
-	protected void drawNotImplementesJet(Graphics2D g2d, InfoFigureParameter createFig){
-		
-		int x = (int) (createFig.getX()+ 5);
-		int y = (int) (createFig.getY()+ 7);
-		int width = (int) (60);// -25);
-		int height = (int)(60);
 
-		g2d.draw(new Rectangle(x , y, width, height));
-		
+	protected void drawNotImplementesJet(Graphics2D g2d, InfoFigureParameter createFig) {
+
+		int x = (int) (createFig.getX() + 5);
+		int y = (int) (createFig.getY() + 7);
+		int width = (int) (60);// -25);
+		int height = (int) (60);
+
+		g2d.draw(new Rectangle(x, y, width, height));
+
 		String label = "Not implemented jet";
 		Font font = new Font("tahoma", Font.PLAIN, 12);
 
@@ -191,7 +202,7 @@ public abstract class Figure extends JPanel {
 		n.setOpaque(false);
 		n.paint(textbox);
 	}
-	
+
 	protected void drawCenterLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect, InfoLine line) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
@@ -216,58 +227,86 @@ public abstract class Figure extends JPanel {
 		n1.setBounds(x, y, width, height);
 		n1.setOpaque(false);
 
-
 		n1.paint(textbox);
 	}
 
 	protected void drawScaleChiController(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line1, InfoLine line2, InfoCoordinateSize rect) {
 
-		ArrayList<InfoXMLOptionValue> values = createFig.getValue();
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
-		Font b = new Font("Tahoma", Font.PLAIN, 10);
+		int x = (int) (rect.getX() * scaleX + createFig.getX());
+		int y = (int) (rect.getY() * scaleY + createFig.getY());
+		int width = (int) (rect.getWidth() * scaleX);
+		int height = (int) (rect.getHeight() * scaleY);
+		g2d.draw(new Rectangle(x, y, width, height));
+
+		int curYImage = (int) (createFig.getY() + line2.getY1() + 3);
+		int start = curYImage;
+
+		String typ = "ChiAttribute";
+		ArrayList<InfoXMLOptionValue> attribute = createFig.getValue();
+		if (attribute.size() != 0) {
+			int yPlus = OperationAttribut(g2d, createFig, line2, typ, attribute);
+			line2.setY1(yPlus);
+			line2.setY2(yPlus);
+			drawScaleXLine(g2d, createFig, figureInfo, line2);
+		} else {
+			drawScaleXLine(g2d, createFig, figureInfo, line2);
+		}
+
+		typ = "ChiOperation";
+		ArrayList<InfoXMLOptionValue> operation = createFig.getOperation();
+		System.out.println(operation.size());
+		if (operation.size() != 0) {
+			OperationAttribut(g2d, createFig, line2, typ, operation);
+		}
+
+	}
+
+	private int OperationAttribut(Graphics2D g2d, InfoFigureParameter createFig, InfoLine line2, String typ, ArrayList<InfoXMLOptionValue> values) {
+
+
+		String imagePath = null;
+		ElementDiagram elemOp = ElementDiagram.getCatalogEntryByName(typ);
+		imagePath = elemOp.getImage();
+
+		Font b = new Font("Tahoma", Font.PLAIN, 12);
 		g2d.setFont(b);
 		FontMetrics fm = g2d.getFontMetrics();
-
-		int i = 0;
 		int lineHeight = fm.getHeight();
 
-		int curX = (int) (createFig.getX());
-		int curXImage = (int) (createFig.getX() + lineHeight);
-		int curY = (int) (createFig.getY() + line2.getY1());
-		int curYImage = (int) (createFig.getY() + line2.getY1() + 3);
-		
-		String typ = "ChiOperation";
-		String imagePath = null;
-		ElementDiagram elem = ElementDiagram.getCatalogEntryByName(typ);
-		imagePath = elem.getImage();
+		int currX = (int) (createFig.getX() + 16);
+		int currY = (int) (createFig.getY() + line2.getY1() + 2);
+		int currXimage = (int) (createFig.getX() + 1 );
+		int currYimage = (int) (createFig.getY() + line2.getY1() + 5);
+		int imageWidth = lineHeight;
+		int imageHeight = lineHeight;
 
 		for (InfoXMLOptionValue currValue : values) {
 
 			try {
 				BufferedImage img1 = ImageIO.read(new File(imagePath));
-				int xImage = curXImage;
-				int yImage = curYImage;
-				int widthImage = lineHeight;
-				int hightImage = lineHeight;
-
 				if (img1 != null)
-					g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
+					g2d.drawImage(img1, currXimage, currYimage, imageWidth, imageHeight, null);
 			} catch (Exception e) {
 				System.out.println(e);
 			}
-			curYImage += lineHeight;
-			curY += lineHeight;
-			curX = (int) (createFig.getX() + lineHeight + 15);
-			i++;
+			
+			currYimage += lineHeight;
+
+			currX = currX;
+			currY += lineHeight;
 			g2d.setPaint(Color.black);
 			g2d.setFont(b);
-			g2d.drawString(currValue.getName(), curX, curY);
-		}
+			g2d.drawString(currValue.getName(), currX, currY);
 
+		}
+		return currY;
 	}
 
 	protected void drawScaleChiNode(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line1, InfoLine line2, InfoCoordinateSize rect2) {
-//		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
 		ArrayList<InfoXMLOptionValue> values = createFig.getValue();
@@ -313,7 +352,6 @@ public abstract class Figure extends JPanel {
 			}
 		}
 		ArrayList<InfoXMLOptionValue> operation = createFig.getOperation();
-		
 
 		if (operation.size() > 0) {
 			int lineX1 = (int) (createFig.getX() + line1.getX1());
@@ -325,14 +363,13 @@ public abstract class Figure extends JPanel {
 			curY += 4;
 
 			g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
-			
+
 			String typOp = "ChiOperation";
 			String imagePathOp = null;
 			ElementDiagram elemOp = ElementDiagram.getCatalogEntryByName(typOp);
 			imagePathOp = elemOp.getImage();
 
 			for (InfoXMLOptionValue currOperation : operation) {
-				
 
 				try {
 					BufferedImage img1 = ImageIO.read(new File(imagePathOp));
@@ -382,7 +419,7 @@ public abstract class Figure extends JPanel {
 			int hight = (int) headHight / 2;
 
 			if (img1 != null)
-				g2d.drawImage(img1, x, y,  hight, width,null);
+				g2d.drawImage(img1, x, y, hight, width, null);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -392,6 +429,33 @@ public abstract class Figure extends JPanel {
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
 		int headX = (int) (createFig.getX() + ellipse.getX() * scaleX);
+		int headY = (int) (createFig.getY() + ellipse.getY());
+		int headWidth = (int) (ellipse.getWidth());
+		int headHight = (int) (ellipse.getHeight());
+
+		String imagePath = null;
+
+		ElementDiagram elem = ElementDiagram.getCatalogEntry(createFig.getType());
+		imagePath = elem.getImage();
+
+		try {
+			BufferedImage img1 = ImageIO.read(new File(imagePath));
+			int x = (int) (headX + 2);
+			int y = (int) (headY + 2);
+			int width = (int) (headWidth - 4);
+			int hight = (int) (headHight - 4);
+
+			if (img1 != null)
+				g2d.drawImage(img1, x, y, hight, width, null);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	protected void drawChiLeft(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse, InfoCoordinateSize rect) {
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int headX = (int) (createFig.getX() + rect.getWidth() * scaleX - 20);
 		int headY = (int) (createFig.getY() + ellipse.getY());
 		int headWidth = (int) (ellipse.getWidth());
 		int headHight = (int) (ellipse.getHeight());

@@ -6,6 +6,7 @@ public class DrawFigure {
 	public void drawLabeledSimpleFigure(Graphics2D g2d, InfoFigureParameter figureInfo) {		
 		Factory factory = new Factory();
 		Figure fig = factory.createFigure( figureInfo);
+		if(fig != null)
 		fig.draw(g2d, figureInfo);
 //		this.drawLabel(g2d, figureInfo);
 	}

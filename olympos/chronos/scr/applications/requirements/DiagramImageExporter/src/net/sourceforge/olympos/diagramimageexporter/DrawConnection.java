@@ -254,6 +254,7 @@ public class DrawConnection {
 		HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 		InfoAllowedConnection figAllowedCatal2 = figAllowedCatal1.get(target.getType());
 
+		if(figAllowedCatal2 != null){
 		String comment = figAllowedCatal2.getLineLabel();
 		
 		Font b = new Font("Tahoma",Font.PLAIN,10);		
@@ -294,5 +295,6 @@ public class DrawConnection {
 
 		DrawConnectionType connec = new DrawConnectionType();
 		connec.connection(g2d, source, target, toPoint, toDirection, fromPoint, fromDirection);
+	}
 	}
 }
