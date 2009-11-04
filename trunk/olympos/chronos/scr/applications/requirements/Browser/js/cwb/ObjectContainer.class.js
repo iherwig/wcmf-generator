@@ -76,9 +76,20 @@ cwb.ObjectContainer.prototype.loadModel = function(modelOid, callback){
 	
 	var self = this;
 	
-	cwb.persistency.Persistency.getInstance().loadAllStatisticsOverview(modelOid, function() {
-		self.modelUmlGenerated(callback);
-	});
+	var longTaskRunner = new cwb.ui.LongTaskRunner( {
+			title : cwb.Dict.translate('Generating Data ...'),
+			call : function(successHandler, errorHandler) {
+				cwb.persistency.Persistency.getInstance().loadAllStatisticsOverview(modelOid, successHandler, errorHandler);
+			},
+			successHandler : function(data) {
+				longTaskRunner.close();
+				self.modelUmlGenerated(callback);
+			},
+			errorHandler : function(data) {
+				cwb.Util.showMessage(cwb.Dict.translate("Error while copying"), cwb.Dict.translate("The process was unsuccessful. Please try again."), cwb.Util.messageType.ERROR);
+			},
+			isReturningDocument : false
+	}).show();
 }
 
 cwb.ObjectContainer.prototype.modelUmlGenerated = function(callback) {

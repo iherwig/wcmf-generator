@@ -232,6 +232,13 @@ cwb.persistency.Json.prototype.log = function(logtype, msg, successHandler, erro
 	});
 }
 
+cwb.persistency.Json.prototype.doContinue = function(controller, successHandler, errorHandler) {
+	this.jsonRequest({
+		controller: controller,
+		usr_action: 'continue'
+	}, successHandler, errorHandler);
+}
+
 cwb.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	var data = {};
 	
