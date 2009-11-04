@@ -83,6 +83,9 @@
 		<xsd:attribute name="Width" type="xsd:string"/>
 		<xsd:attribute name="Height" type="xsd:string"/>
 		<xsd:attribute name="Author" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
 		<xsd:attribute name="created" type="xsd:string"/>
@@ -413,6 +416,7 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_chibusinessusecasecore_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chibusinessusecase_id" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
