@@ -291,12 +291,17 @@ public abstract class Figure extends JPanel {
 
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
-
+		
+//		private InfoLine circleLine = new InfoLine(0, 17, 11, 17)
+		
 		int x = (int) (rect.getX() * scaleX + createFig.getX());
 		int y = (int) (rect.getY() * scaleY + createFig.getY());
 		int width = (int) (rect.getWidth() * scaleX);
 		int height = (int) (rect.getHeight() * scaleY);
 		g2d.draw(new Rectangle(x, y, width, height));
+		
+		g2d.drawLine(x + width - 19, y + 18, x + width - 8, y + 18);
+//		drawScaleXLine(g2d, createFig, figureInfo, lineunder);
 		
 		int currX = (int) (createFig.getX() + 16);
 		int currY = (int) (createFig.getY() + line1.getY1() + 1);

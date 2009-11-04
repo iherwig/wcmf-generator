@@ -134,7 +134,7 @@ public class FigureDiagram {
 							ArrayList<InfoXmlConnection> xmlFigChild = currXmlFig.getChildren();
 							if (currXmlFig.getId().equals(targetOidObject)) {
 								for (InfoXmlConnection currXmlFigChild2 : xmlFigChild) {
-									if (currXmlFigChild2.getTargetType() != null) { //prüfen ob ein TargetTyp vorhanden ist
+									if (currXmlFigChild2.getTargetType() != null) { //testing if targettyp is there
 										if (!currXmlFigChild2.getTargetType().equals("Figure") && !currXmlFigChild2.getTargetType().equals("Package")) {
 											String targetOid = currXmlFigChild2.getTargetOid();
 											if (targetOid != null) {

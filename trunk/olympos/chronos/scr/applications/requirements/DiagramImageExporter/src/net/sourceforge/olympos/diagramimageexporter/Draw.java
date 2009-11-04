@@ -70,24 +70,27 @@ public class Draw {
 				}
 			}
 
-			// write the data into a image out
-			boolean useCSS = true;
-			try {
-				os = new PrintStream(new FileOutputStream(imagePathSvg));
-				Writer out = new OutputStreamWriter(os, "UTF-8");
-				g2d.stream(out, useCSS);
-			} catch (SVGGraphics2DIOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			if (usedImageFormat.toLowerCase().equals("svg")) {
+
+				// write the data into a image out
+				boolean useCSS = true;
+				try {
+					os = new PrintStream(new FileOutputStream(imagePathSvg));
+					Writer out = new OutputStreamWriter(os, "UTF-8");
+					g2d.stream(out, useCSS);
+				} catch (SVGGraphics2DIOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
-			if (usedImageFormat.toLowerCase().equals("png")) {
+			else if (usedImageFormat.toLowerCase().equals("png")) {
 				PNGTranscoder t = new PNGTranscoder();
 				String fileImagePath = "file:/" + imagePathSvg;
 				TranscoderInput input = new TranscoderInput(fileImagePath);
@@ -103,7 +106,7 @@ public class Draw {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			}	
+			}
 		}
 		return maxCor;
 	}

@@ -18,6 +18,7 @@ public class ElementDiagram {
 	private final static String GENERALISATION = "is generalisation by";
 	private final static String INSTANTIATES = "instantiantes";
 	private final static String ASSOCIATION = "association";
+	private final static String ACTIONKEY = "ActionKey";
 	
 	private final static String NOTIMPLEMENTET = "Not implementet jet";
 	
@@ -269,6 +270,9 @@ public class ElementDiagram {
 	private static ElementDiagram initChiView() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
+//		connections.put(EnumFigureType.CHI_NODE, new InfoAllowedConnection(ACTIONKEY, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+//		connections.put(EnumFigureType.CHI_CONTROLLER, new InfoAllowedConnection(ACTIONKEY, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		
 		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_VIEW, "ChiView", EnumFontPosition.IN_CENTER, path + chi , connections);
 		return result;
 	}
@@ -278,6 +282,7 @@ public class ElementDiagram {
 		
 		connections.put(EnumFigureType.CHI_NODE, new InfoAllowedConnection(INSTANTIATES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_CONTROLLER, new InfoAllowedConnection(ASSOCIATION, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
+		connections.put(EnumFigureType.CHI_VIEW, new InfoAllowedConnection(ACTIONKEY, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 		
 		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_CONTROLLER, "ChiController", EnumFontPosition.IN_UP,  path + chi , connections);
 		return result;
@@ -287,6 +292,7 @@ public class ElementDiagram {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
 		connections.put(EnumFigureType.CHI_NODE, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_VIEW, new InfoAllowedConnection(ACTIONKEY, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 
 		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_NODE, "ChiNode", EnumFontPosition.IN_UP,  path + chi , connections);
 		return result;
