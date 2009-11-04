@@ -52,6 +52,24 @@ public class InfoXmlFigure {
 		this.name = name;
 	}
 	
+	///
+	public void addOperation(InfoXMLOptionValue childOpt) {
+		this.childOpt.add(childOpt);
+	}
+
+	public ArrayList<InfoXMLOptionValue> getOperation() {
+		return childOpt;
+	}
+	
+	public void addAttribute(InfoXMLOptionValue childOpt) {
+		this.childOptNo.add(childOpt);
+	}
+	public ArrayList<InfoXMLOptionValue> getAttribute() {
+		return childOptNo;
+	}
+	
+	///
+	
 	public void setAll(String id, String name, EnumFigureType type, String alias){
 		this.id = id;
 		this.name = name;
@@ -83,13 +101,7 @@ public class InfoXmlFigure {
 		return childFigActSet;
 	}
 	
-	public void addChildOpt(InfoXMLOptionValue childOpt) {
-		this.childOpt.add(childOpt);
-	}
-
-	public ArrayList<InfoXMLOptionValue> getChildOpt() {
-		return childOpt;
-	}
+	
 	public void addChildVal(InfoXMLOptionValue childVal) {
 		this.childVal.add(childVal);
 	}
@@ -98,12 +110,7 @@ public class InfoXmlFigure {
 		return childVal;
 	}
 	
-	public void addChildOptNo(InfoXMLOptionValue childOpt) {
-		this.childOptNo.add(childOpt);
-	}
-	public ArrayList<InfoXMLOptionValue> getChildOptNo() {
-		return childOptNo;
-	}
+
 	public void addChildValNo(InfoXMLOptionValue childOpt) {
 		this.childValNo.add(childOpt);
 	}

@@ -121,7 +121,7 @@ public class XmlReader {
 						String nameOptVal = currChiController.getAttributeValue("Name");
 						String typOptVal = currChiController.getName();
 						InfoXMLOptionValue xmlFigOpt = new InfoXMLOptionValue(idOptVal, nameOptVal, typOptVal, aliasOptVal);
-						xmlFig.addChildOpt(xmlFigOpt);
+						xmlFig.addOperation(xmlFigOpt);
 												
 						List<Element> chiControllerParent = currChiController.getChildren();
 						for (Element currChiControllerParent : chiControllerParent) {
@@ -132,11 +132,6 @@ public class XmlReader {
 							InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
 							xmlFigOpt.addChild(xmlCon);
 						}
-//						ArrayList<InfoXmlConnection> d = xmlFigOpt.getChildren();
-//						for(InfoXmlConnection currd : d){
-//							System.out.println(currd.getTargetOid());
-//						}
-//						System.out.println(xmlFigOpt.getChildren());
 					} else {
 						String type = currChiController.getName();
 						String targetType = currChiController.getAttributeValue("targetType");
@@ -149,38 +144,44 @@ public class XmlReader {
 			}
 			if (point.equals("ChiNode")) {
 				List<Element> chiNode = element.getChildren();
+				
 				for (Element currChiNode : chiNode) {
-					if (currChiNode.getName().equals("ChiValue")) {
+					if (currChiNode.getName().equals("Operation")) {
+						
 						String idOptVal = element.getAttributeValue("id");
 						String aliasOptVal = currChiNode.getAttributeValue("Alias");
 						String nameOptVal = currChiNode.getAttributeValue("Name");
 						String typOptVal = currChiNode.getName();
-						InfoXMLOptionValue xmlFigOptVal = new InfoXMLOptionValue(idOptVal, nameOptVal, typOptVal, aliasOptVal);
-						xmlFig.addChildValNo(xmlFigOptVal);
-						List<Element> chiControllerParent = currChiNode.getChildren();
-						for (Element currChiControllerParent : chiControllerParent) {
-							String type = currChiControllerParent.getName();
-							String targetType = currChiControllerParent.getAttributeValue("targetType");
-							String targetOid = currChiControllerParent.getAttributeValue("targetOid");
-							String targetRole = currChiControllerParent.getAttributeValue("targetRole");
+						InfoXMLOptionValue xmlFigOpt = new InfoXMLOptionValue(idOptVal, nameOptVal, typOptVal, aliasOptVal);
+						xmlFig.addOperation(xmlFigOpt);
+												
+						List<Element> chichiNodeParent = currChiNode.getChildren();
+						for (Element currChiNodeParent : chichiNodeParent) {
+							String type = currChiNodeParent.getName();
+							String targetType = currChiNodeParent.getAttributeValue("targetType");
+							String targetOid = currChiNodeParent.getAttributeValue("targetOid");
+							String targetRole = currChiNodeParent.getAttributeValue("targetRole");
 							InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
-							xmlFigOptVal.addChild(xmlCon);
+							xmlFigOpt.addChild(xmlCon);
 						}
-					}else if (currChiNode.getName().equals("Operation")) {
+						
+
+					}else if (currChiNode.getName().equals("ChiValue")) {
 						String idOptVal = element.getAttributeValue("id");
 						String aliasOptVal = currChiNode.getAttributeValue("Alias");
 						String nameOptVal = currChiNode.getAttributeValue("Name");
 						String typOptVal = currChiNode.getName();
-						InfoXMLOptionValue xmlFigOptVal = new InfoXMLOptionValue(idOptVal, nameOptVal, typOptVal, aliasOptVal);
-						xmlFig.addChildOptNo(xmlFigOptVal);
-						List<Element> chiControllerParent = currChiNode.getChildren();
-						for (Element currChiControllerParent : chiControllerParent) {
-							String type = currChiControllerParent.getName();
-							String targetType = currChiControllerParent.getAttributeValue("targetType");
-							String targetOid = currChiControllerParent.getAttributeValue("targetOid");
-							String targetRole = currChiControllerParent.getAttributeValue("targetRole");
+						InfoXMLOptionValue xmlFigOpt = new InfoXMLOptionValue(idOptVal, nameOptVal, typOptVal, aliasOptVal);
+						xmlFig.addAttribute(xmlFigOpt);
+												
+						List<Element> chichiNodeParent = currChiNode.getChildren();
+						for (Element currChiNodeParent : chichiNodeParent) {
+							String type = currChiNodeParent.getName();
+							String targetType = currChiNodeParent.getAttributeValue("targetType");
+							String targetOid = currChiNodeParent.getAttributeValue("targetOid");
+							String targetRole = currChiNodeParent.getAttributeValue("targetRole");
 							InfoXmlConnection xmlCon = new InfoXmlConnection(type, targetType, targetOid, targetRole);
-							xmlFigOptVal.addChild(xmlCon);
+							xmlFigOpt.addChildAttribut(xmlCon);
 						}
 					}
 					
