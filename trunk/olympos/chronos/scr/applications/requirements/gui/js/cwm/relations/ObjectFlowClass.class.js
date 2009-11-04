@@ -12,12 +12,19 @@
 Ext.namespace("cwm.relations");
 
 cwm.relations.ObjectFlow = function(){
-    cwm.relations.ObjectFlow.superclass.constructor.call(this);
-    
-    this.uwmClassName = "ObjectFlow";
-    this.instanceClassName = "cwm.relations.ObjectFlow";
-    this.treeIcon = "Figure";
-    this.labelProperties = {};
+	cwm.relations.ObjectFlow.superclass.constructor.call(this);
+	
+	this.uwmClassName = "ObjectFlow";
+	this.instanceClassName = "cwm.relations.ObjectFlow";
+	this.treeIcon = "Figure";
+	this.labelProperties = {};
+
+	this.maskInfo = {
+			"AObjectFlowSource" : "Activity",
+			"AObjectFlowTarget" : "Activity",
+			"ChiObjectObjectFlowSource" : "ChiObject",
+			"ChiObjectObjectFlowTarget" : "ChiObject"
+	};
 }
 
 Ext.extend(cwm.relations.ObjectFlow, uwm.model.RelationClass);

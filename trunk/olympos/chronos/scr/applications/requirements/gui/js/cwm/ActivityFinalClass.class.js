@@ -53,7 +53,7 @@ cwm.ActivityFinalClass = function() {
 			connection: {
 				label :"Associates",
 				invert :true,
-				connectionType :"association",
+				connectionType :"controlflow",
 				cardinality: -1,
 				nmSelf : true,
 				ownUwmClassName : "ActivityFinal",

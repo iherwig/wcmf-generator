@@ -53,7 +53,7 @@ cwm.ActivityReceiveClass = function() {
 			connection: {
 				label :"Associates",
 				invert :true,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: -1,
 				ownUwmClassName : "ARControlFlowTarget",
@@ -66,7 +66,7 @@ cwm.ActivityReceiveClass = function() {
 				label :"Associates",
 				invert :true,
 				invertBackendRelation: true,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: -1,
 				ownUwmClassName : "ARControlFlowSource",

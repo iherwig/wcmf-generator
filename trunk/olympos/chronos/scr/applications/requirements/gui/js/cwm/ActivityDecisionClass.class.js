@@ -54,7 +54,7 @@ cwm.ActivityDecisionClass = function() {
 				label :"Associates",
 				invert :true,
 				invertBackendRelation: true,
-				connectionType :"association",
+				connectionType :"controlflow",
 				nmSelf : true,
 				cardinality: -1,
 				ownUwmClassName : "ADControlFlowSource",
