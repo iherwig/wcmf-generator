@@ -25,7 +25,8 @@ public class Draw {
 	SVGGenerator svg = new SVGGenerator();
 	FigureChildren ch = new FigureChildren();
 
-	public InfoCoordinate drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat) throws JDOMException, Exception {
+	public InfoCoordinate drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat) throws JDOMException, 
+	Exception {
 
 		// create following Objects
 		DrawFigure drawF = new DrawFigure();
@@ -60,7 +61,8 @@ public class Draw {
 				if (currParent.getChildren() != null) {
 					ArrayList<InfoFigureParameter> children = currParent.getChildren();
 					for (InfoFigureParameter currChildren : children) {
-						String key = currParent.getAlias() + currParent.getAlias() + currParent.getType() + currChildren.getType() + currParent.getTypeId() + currChildren.getTypeId();
+						String key = currParent.getAlias() + currParent.getAlias() + currParent.getType() + currChildren.getType() + currParent.getTypeId() 
+						+ currChildren.getTypeId();
 
 						if (!existLine.contains(key)) {
 							drawC.drawConnection(g2d, currParent, currChildren);
@@ -70,7 +72,7 @@ public class Draw {
 				}
 			}
 
-			if (usedImageFormat.toLowerCase().equals("svg")) {
+//			if (usedImageFormat.toLowerCase().equals("svg")) {
 
 				// write the data into a image out
 				boolean useCSS = true;
@@ -88,9 +90,9 @@ public class Draw {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}
+//			}
 
-			else if (usedImageFormat.toLowerCase().equals("png")) {
+//			else if (usedImageFormat.toLowerCase().equals("png")) {
 				PNGTranscoder t = new PNGTranscoder();
 				String fileImagePath = "file:/" + imagePathSvg;
 				TranscoderInput input = new TranscoderInput(fileImagePath);
@@ -107,7 +109,7 @@ public class Draw {
 					e.printStackTrace();
 				}
 			}
-		}
+//		}
 		return maxCor;
 	}
 }

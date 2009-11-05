@@ -21,12 +21,12 @@ public class DrawConnection {
 
 		EnumDirection fromDirection, toDirection;
 
-		InfoFigureParameter sourceBox = new InfoFigureParameter(source.getX(), source.getY(), source.getWidth(), source.getHeight(), source.getType(), source.getLabel(), source.getDiagramid(), source.alias);
+		InfoFigureParameter sourceBox = new InfoFigureParameter(source.getX(), source.getY(), source.getWidth(), source.getHeight(), source.getType(), source.getLabel(), source.getDiagramid(), source.getAlias(), source.getObjectStatus());
 		sourceBox = source;
 		InfoCoordinate sourceCenter;
 		sourceCenter = getCenter(sourceBox);
 
-		InfoFigureParameter targetBox = new InfoFigureParameter(target.getX(), target.getY(), target.getWidth(), target.getHeight(), target.getType(), target.getLabel(), target.getDiagramid(), target.alias);
+		InfoFigureParameter targetBox = new InfoFigureParameter(target.getX(), target.getY(), target.getWidth(), target.getHeight(), target.getType(), target.getLabel(), target.getDiagramid(), target.getAlias(), target.getObjectStatus());
 		InfoCoordinate targetCenter;
 		targetCenter = getCenter(targetBox);
 
@@ -125,7 +125,7 @@ public class DrawConnection {
 
 	private InfoCoordinate chopboxConnectionAnchor(InfoFigureParameter RealSource, InfoCoordinate target) {
 
-		InfoFigureParameter source = new InfoFigureParameter(0, 0, 0, 0, null, null, null, null);
+		InfoFigureParameter source = new InfoFigureParameter(0, 0, 0, 0, null, null, null, null, null);
 		double scale = 0;
 
 		source.setXYWeightHeight(RealSource.getX() - 1, RealSource.getY() - 1, RealSource.getWidth() + 1, RealSource.getHeight() + 1);
@@ -247,6 +247,7 @@ public class DrawConnection {
 
 	private void drawLabel(Graphics2D g2d, InfoFigureParameter source, InfoFigureParameter target, InfoCoordinate toPoint, EnumDirection toDirection, InfoCoordinate fromPoint, EnumDirection fromDirection,
 			ArrayList<InfoCoordinate> points) {
+		g2d.setPaint(Color.white);
 		InfoCoordinate midPoint;
 		midPoint = getManhattanMidpoint(points);
 
@@ -285,11 +286,12 @@ public class DrawConnection {
 			curY += lineHeight;
 			curX = (int) midPoint.getX();
 			i++;
-			g2d.setPaint(Color.black);
 			int boxWidth = fm.stringWidth(word + " ") + 10;
 
 			g2d.setFont(b);
+			g2d.setPaint(Color.black);
 			g2d.drawString(word, curX - (boxWidth / 2), curY);
+			g2d.setPaint(Color.white);
 			curX += wordWidth + 3;
 		}
 

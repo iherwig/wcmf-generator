@@ -16,10 +16,11 @@ public class FigureParameter {
 	private ArrayList<XmlConnection> child = new ArrayList<XmlConnection>();
 	private int diagramid;
 	private int typeId;
+	private String objectStatus;
 	String alias;
 
-	FigureParameter(float xi, float yi, float w, float h, EnumFigureType i, String label, int diagramid, String alias){
-		setAll(xi, yi, w, h, i, label, diagramid, alias);
+	FigureParameter(float xi, float yi, float w, float h, EnumFigureType i, String label, int diagramid, String alias, String objectStatus){
+		setAll(xi, yi, w, h, i, label, diagramid, alias, objectStatus);
 	}
 
 	public int getDiagramid() {
@@ -94,6 +95,13 @@ public class FigureParameter {
 		this.type = type;
 	}
 	
+	public String getObjectStatus() {
+		return objectStatus;
+	}
+
+	public void setObjectStatus(String objectStatus) {
+		this.objectStatus = objectStatus;
+	}
 
 	public void setXYWeightHeight(float xi, float yi, float w, float h) {
 		this.x = xi;
@@ -107,11 +115,12 @@ public class FigureParameter {
 		this.type = i;
 	}
 	
-	public void setAll(float xi, float yi, float w, float h, EnumFigureType i, String label, int diagramid, String alias) {
+	public void setAll(float xi, float yi, float w, float h, EnumFigureType i, String label, int diagramid, String alias, String objectStatus) {
 		setAllType(xi, yi, w, h, i);
 		this.label = label;
 		this.diagramid = diagramid;
 		this.alias = alias;
+		this.objectStatus = objectStatus;
 	}
 	
 	public void addChildX(XmlConnection childe) {

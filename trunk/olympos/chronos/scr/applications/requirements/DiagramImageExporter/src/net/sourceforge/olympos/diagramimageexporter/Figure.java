@@ -20,94 +20,31 @@ import org.apache.batik.svggen.SVGGraphics2D;
 public abstract class Figure extends JPanel {
 	
 	abstract public void draw(Graphics2D g2d, InfoFigureParameter fig);
-
-	protected void drawScaleLine(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line) {
+	
+	//Label
+	//////////////////////////////////////////////////////////
+	protected void drawRecLabelLeft(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
-		int lineX1 = (int) (createFig.getX() + line.getX1() * scaleX);
-		int lineY1 = (int) (createFig.getY() + line.getY1() * scaleY);
-		int lineX2 = (int) (createFig.getX() + line.getX2() * scaleX);
-		int lineY2 = (int) (createFig.getY() + line.getY2() * scaleY);
+		int x = (int) (createFig.getX() + 5);
+		int y = (int) (createFig.getY() + 7);
+		int width = (int) ((rect.getWidth() * scaleX) - 6);// -25);
+		int height = (int) (rect.getHeight() * scaleY - 6);
 
-		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
+		String label = createFig.getLabel();
+		Font font = new Font("tahoma", Font.PLAIN, 12);
+
+		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
+		JTextArea n = new JTextArea(label);
+		n.setFont(font);
+		n.setWrapStyleWord(true);
+		n.setLineWrap(true);
+		n.setBounds(x, y, width, height);
+		n.setOpaque(false);
+		n.paint(textbox);
 	}
-
-	protected void drawScaleXLine(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line) {
-		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
-
-		int lineX1 = (int) (createFig.getX() + line.getX1() * scaleX);
-		int lineY1 = (int) (createFig.getY() + line.getY1());
-		int lineX2 = (int) (createFig.getX() + line.getX2() * scaleX);
-		int lineY2 = (int) (createFig.getY() + line.getY2());
-
-		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
-	}
-
-	protected void drawLine(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line) {
-
-		int lineX1 = (int) (createFig.getX() + line.getX1());
-		int lineY1 = (int) (createFig.getY() + line.getY1());
-		int lineX2 = (int) (createFig.getX() + line.getX2());
-		int lineY2 = (int) (createFig.getY() + line.getY2());
-
-		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
-	}
-
-	protected void drawScaleEllipse(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse) {
-		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
-		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
-
-		int x = (int) (createFig.getX() + ellipse.getX() * scaleX);
-		int y = (int) (createFig.getY() + ellipse.getY() * scaleY);
-
-		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight() * scaleX, ellipse.getWidth() * scaleY);
-		g2d.draw(ellip);
-	}
-
-	protected void drawEllipseLeft(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse, InfoCoordinateSize rect) {
-		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
-
-		int x = (int) (createFig.getX() + rect.getWidth() * scaleX - 20);
-		int y = (int) (createFig.getY() + ellipse.getY());
-
-		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight(), ellipse.getWidth());
-		g2d.draw(ellip);
-	}
-
-	protected void drawEllipse(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse) {
-		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
-
-		int x = (int) (createFig.getX() + ellipse.getX() * scaleX);
-		int y = (int) (createFig.getY() + ellipse.getY());
-
-		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight(), ellipse.getWidth());
-		g2d.draw(ellip);
-	}
-
-	protected void drawScaleEllipseChi(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse) {
-		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
-		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
-
-		int x = (int) (createFig.getX() + ellipse.getX() * scaleX);
-		int y = (int) (createFig.getY() + ellipse.getY() * scaleY);
-
-		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight(), ellipse.getWidth());
-		g2d.draw(ellip);
-	}
-
-	protected void drawScaleRec(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rec) {
-		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
-		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
-
-		int x = (int) (rec.getX() * scaleX + createFig.getX());
-		int y = (int) (rec.getY() * scaleY + createFig.getY());
-		int width = (int) (rec.getWidth() * scaleX);
-		int height = (int) (rec.getHeight() * scaleY);
-
-		g2d.draw(new Rectangle(x, y, width, height));
-	}
-
+	
 	protected void drawContLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect, InfoLine line) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
@@ -130,7 +67,7 @@ public abstract class Figure extends JPanel {
 		n.paint(textbox);
 	}
 
-	protected void drawChiBusinesProcLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect, InfoLine line) {
+	protected void drawRecLineLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect, InfoLine line) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
@@ -182,28 +119,6 @@ public abstract class Figure extends JPanel {
 		}
 	}
 
-	protected void drawNotImplementesJet(Graphics2D g2d, InfoFigureParameter createFig) {
-
-		int x = (int) (createFig.getX() + 5);
-		int y = (int) (createFig.getY() + 7);
-		int width = (int) (60);// -25);
-		int height = (int) (60);
-
-		g2d.draw(new Rectangle(x, y, width, height));
-
-		String label = "Not implemented jet";
-		Font font = new Font("tahoma", Font.PLAIN, 12);
-
-		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
-		JTextArea n = new JTextArea(label);
-		n.setFont(font);
-		n.setWrapStyleWord(true);
-		n.setLineWrap(true);
-		n.setBounds(x, y, width, height);
-		n.setOpaque(false);
-		n.paint(textbox);
-	}
-
 	protected void drawCenterLabel(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect, InfoLine line) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
@@ -230,7 +145,153 @@ public abstract class Figure extends JPanel {
 
 		n1.paint(textbox);
 	}
+	
+	protected void drawObjectStatus(Graphics2D g2d,  InfoFigureParameter createFig, InfoCoordinateSize figureInfo,InfoCoordinateSize rect){
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
+		int x = (int) (createFig.getX() + 2);
+		int y = (int) (createFig.getY() + (rect.getHeight() * scaleY)/2);
+		int width = (int) ((rect.getWidth() * scaleX) -2);// -25);
+		int height = (int) ((rect.getHeight() * scaleY)/2);
+
+		String label = "["+createFig.getObjectStatus()+"]";
+		Font font = new Font("tahoma", Font.PLAIN, 12);
+
+		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
+		JTextArea n = new JTextArea(label);
+		n.setBackground(Color.white);
+		n.setFont(font);
+		n.setWrapStyleWord(true);
+		n.setLineWrap(true);
+		n.setBounds(x, y, width, height);
+//		n.setOpaque(false);
+		n.paint(textbox);
+	}
+	
+	//Chi
+	/////////////////////////////////////////////////////////
+	protected void drawScaleEllipseChi(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse) {
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int x = (int) (createFig.getX() + ellipse.getX() * scaleX);
+		int y = (int) (createFig.getY() + ellipse.getY() * scaleY);
+
+		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight(), ellipse.getWidth());
+		g2d.draw(ellip);
+	}
+	
+	
+	//Line
+	////////////////////////////////////////////////////////
+	protected void drawScaleLine(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line) {
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int lineX1 = (int) (createFig.getX() + line.getX1() * scaleX);
+		int lineY1 = (int) (createFig.getY() + line.getY1() * scaleY);
+		int lineX2 = (int) (createFig.getX() + line.getX2() * scaleX);
+		int lineY2 = (int) (createFig.getY() + line.getY2() * scaleY);
+
+		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
+	}
+
+	protected void drawScaleXLine(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line) {
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int lineX1 = (int) (createFig.getX() + line.getX1() * scaleX);
+		int lineY1 = (int) (createFig.getY() + line.getY1());
+		int lineX2 = (int) (createFig.getX() + line.getX2() * scaleX);
+		int lineY2 = (int) (createFig.getY() + line.getY2());
+
+		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
+	}
+
+	protected void drawLine(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line) {
+
+		int lineX1 = (int) (createFig.getX() + line.getX1());
+		int lineY1 = (int) (createFig.getY() + line.getY1());
+		int lineX2 = (int) (createFig.getX() + line.getX2());
+		int lineY2 = (int) (createFig.getY() + line.getY2());
+
+		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
+	}
+
+	// Ellipse
+	/////////////////////////////////////////////////////////
+	protected void drawScaleEllipse(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse) {
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int x = (int) (createFig.getX() + ellipse.getX() * scaleX);
+		int y = (int) (createFig.getY() + ellipse.getY() * scaleY);
+
+		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight() * scaleX, ellipse.getWidth() * scaleY);
+		g2d.draw(ellip);
+	}
+
+
+	protected void drawEllipse(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse) {
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int x = (int) (createFig.getX() + ellipse.getX() * scaleX);
+		int y = (int) (createFig.getY() + ellipse.getY());
+
+		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight(), ellipse.getWidth());
+		g2d.draw(ellip);
+	}
+	
+	//rec
+	///////////////////////////////////////////////////////////
+	protected void drawEllipseLeft(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse, InfoCoordinateSize rect) {
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int x = (int) (createFig.getX() + rect.getWidth() * scaleX - 20);
+		int y = (int) (createFig.getY() + ellipse.getY());
+
+		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight(), ellipse.getWidth());
+		g2d.draw(ellip);
+	}
+
+	protected void drawScaleRec(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rec) {
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+
+		int x = (int) (rec.getX() * scaleX + createFig.getX());
+		int y = (int) (rec.getY() * scaleY + createFig.getY());
+		int width = (int) (rec.getWidth() * scaleX);
+		int height = (int) (rec.getHeight() * scaleY);
+
+		g2d.draw(new Rectangle(x, y, width, height));
+	}
+	
+
+	protected void drawNotImplementesJet(Graphics2D g2d, InfoFigureParameter createFig) {
+
+		int x = (int) (createFig.getX() + 5);
+		int y = (int) (createFig.getY() + 7);
+		int width = (int) (60);// -25);
+		int height = (int) (60);
+
+		g2d.draw(new Rectangle(x, y, width, height));
+
+		String label = "Not implemented jet";
+		Font font = new Font("tahoma", Font.PLAIN, 12);
+
+		SVGGraphics2D textbox = (SVGGraphics2D) g2d.create(x, y, width, height);
+		JTextArea n = new JTextArea(label);
+		n.setFont(font);
+		n.setWrapStyleWord(true);
+		n.setLineWrap(true);
+		n.setBounds(x, y, width, height);
+		n.setOpaque(false);
+		n.paint(textbox);
+	}
+
+
+	//Elements
+	///////////////////////////////////////////////////////////////
 	protected void drawScaleChiController(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line1, InfoLine line2, InfoCoordinateSize rect) {
 
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
@@ -393,97 +454,6 @@ public abstract class Figure extends JPanel {
 		}
 	}
 
-//	protected void drawScaleChiNode(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line1, InfoLine line2, InfoCoordinateSize rect2) {
-//		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
-//		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
-//
-//		ArrayList<InfoXMLOptionValue> values = createFig.getValue();
-//
-//		Font b = new Font("Tahoma", Font.PLAIN, 10);
-//		g2d.setFont(b);
-//		FontMetrics fm = g2d.getFontMetrics();
-//
-//		int i = 0;
-//		int lineHeight = fm.getHeight();
-//
-//		int curX = (int) (createFig.getX());
-//		int curXImage = (int) (createFig.getX() + lineHeight);
-//		int curY = (int) (createFig.getY() + line1.getY1());
-//		int curYImage = (int) (createFig.getY() + line1.getY1() + 3);
-//
-//		String typ = "ChiAttribute";
-//		String imagePath = null;
-//		ElementDiagram elem = ElementDiagram.getCatalogEntryByName(typ);
-//		imagePath = elem.getImage();
-//
-//		for (InfoXMLOptionValue currValue : values) {
-//			if (currValue.getTyp().equals("ChiValue")) {
-//				try {
-//					BufferedImage img1 = ImageIO.read(new File(imagePath));
-//					int xImage = curXImage;
-//					int yImage = curYImage;
-//					int widthImage = lineHeight;
-//					int hightImage = lineHeight;
-//
-//					if (img1 != null)
-//						g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
-//				} catch (Exception e) {
-//					System.out.println(e);
-//				}
-//				curYImage += lineHeight;
-//				curY += lineHeight;
-//				curX = (int) (createFig.getX() + lineHeight + 20);
-//				i++;
-//				g2d.setPaint(Color.black);
-//				g2d.setFont(b);
-//				g2d.drawString(currValue.getName(), curX, curY);
-//			}
-//		}
-//		ArrayList<InfoXMLOptionValue> operation = createFig.getOperation();
-//
-//		if (operation.size() > 0) {
-//			int lineX1 = (int) (createFig.getX() + line1.getX1());
-//			int lineY1 = (int) (curY + 5);
-//			int lineX2 = (int) (createFig.getX() + line1.getX2() * scaleX);
-//			int lineY2 = (int) (curY + 5);
-//
-//			curYImage += 4;
-//			curY += 4;
-//
-//			g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
-//
-//			String typOp = "ChiOperation";
-//			String imagePathOp = null;
-//			ElementDiagram elemOp = ElementDiagram.getCatalogEntryByName(typOp);
-//			imagePathOp = elemOp.getImage();
-//
-//			for (InfoXMLOptionValue currOperation : operation) {
-//
-//				try {
-//					BufferedImage img1 = ImageIO.read(new File(imagePathOp));
-//					int xImage = curXImage;
-//					int yImage = curYImage;
-//					int widthImage = lineHeight;
-//					int hightImage = lineHeight;
-//
-//					if (img1 != null)
-//						g2d.drawImage(img1, xImage, yImage, widthImage, hightImage, null);
-//				} catch (Exception e) {
-//					System.out.println(e);
-//				}
-//				curYImage += lineHeight;
-//				curY += lineHeight;
-//				curX = (int) (createFig.getX() + lineHeight + 20);
-//				i++;
-//				g2d.setPaint(Color.black);
-//				g2d.setFont(b);
-//				g2d.drawString(currOperation.getName(), curX, curY);
-//			}
-//
-//		} else {
-//			drawScaleXLine(g2d, createFig, figureInfo, line2);
-//		}
-//	}
 
 	protected void drawScaleChi(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize head) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());

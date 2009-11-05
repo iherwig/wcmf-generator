@@ -8,6 +8,7 @@ public class FigureDiagram {
 	public InfoCoordinate PutFigElementsTogehter(ArrayList<InfoFigureParameter> figureArray) {
 		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
 		ArrayList<InfoXmlFigure> xmlFig = svg.getxmlFigure();
+		
 		ArrayList<InfoXmlConnection> figChild = null;
 
 		for (InfoXmlDiagram dia1 : xmlDia) {
@@ -26,13 +27,14 @@ public class FigureDiagram {
 					noElement.add(currFig);
 					continue;
 				}
-
+				
 				for (InfoXmlFigure currXmlFig1 : xmlFig) {
 					String xmlId = currXmlFig1.getId();
 
 					if (figId.equals(xmlId)) {
 						currFig.setType(currXmlFig1.getTyp());
 						currFig.setLabel(currXmlFig1.getName());
+						currFig.setObjectStatus(currXmlFig1.getObject_status());
 					}
 				}
 //				 if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER))
@@ -189,7 +191,7 @@ public class FigureDiagram {
 
 	// set the size of the image
 	private InfoCoordinate setSize(ArrayList<InfoFigureParameter> figureArray) {
-		// // put the Elements of Diagram into an arraylist
+		// put the Elements of Diagram into an arraylist
 		// ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
 		//
 		InfoCoordinate minCor = new InfoCoordinate(0, 0);

@@ -20,9 +20,18 @@ public class InfoFigureParameter {
 	private String diagramid;
 	private String typeId;
 	String alias;
+	String objectStatus;
 
-	public InfoFigureParameter(float xi, float yi, float w, float h, EnumFigureType i, String label, String diagramid, String alias){
-		setAll(xi, yi, w, h, i, label, diagramid, alias);
+	public InfoFigureParameter(float xi, float yi, float w, float h, EnumFigureType i, String label, String diagramid, String alias, String objectStatus){
+		setAll(xi, yi, w, h, i, label, diagramid, alias, objectStatus);
+	}
+	
+	public String getObjectStatus() {
+		return objectStatus;
+	}
+
+	public void setObjectStatus(String objectStatus) {
+		this.objectStatus = objectStatus;
 	}
 
 	public String getDiagramid() {
@@ -110,11 +119,12 @@ public class InfoFigureParameter {
 		this.type = i;
 	}
 	
-	public void setAll(float xi, float yi, float w, float h, EnumFigureType i, String label, String diagramid, String alias) {
+	public void setAll(float xi, float yi, float w, float h, EnumFigureType i, String label, String diagramid, String alias, String objectStatus) {
 		setAllType(xi, yi, w, h, i);
 		this.label = label;
 		this.diagramid = diagramid;
 		this.alias = alias;
+		this.objectStatus = objectStatus;
 	}
 	
 	public void addChildX(InfoXmlConnection childe) {

@@ -8,6 +8,7 @@ public class InfoXmlFigure {
 	String id;
 	String name;
 	String alias;
+	String objectStatus;
 	
 	private ArrayList<InfoXmlConnection> child = new ArrayList<InfoXmlConnection>();
 	private ArrayList<InfoXmlFigure> childFig = new ArrayList<InfoXmlFigure>();
@@ -19,8 +20,8 @@ public class InfoXmlFigure {
 	private ArrayList<InfoXMLOptionValue> childOptNo = new ArrayList<InfoXMLOptionValue>();
 //	private ArrayList<InfoFigureParameter> childFigure = new ArrayList<InfoFigureParameter>();
 	
-	InfoXmlFigure(String id, String name, EnumFigureType type, String alias){
-		setAll(id, name, type, alias);
+	InfoXmlFigure(String id, String name, EnumFigureType type, String alias, String objectStatus){
+		setAll(id, name, type, alias, objectStatus);
 	}
 	
 	public EnumFigureType getTyp() {
@@ -52,6 +53,14 @@ public class InfoXmlFigure {
 		this.name = name;
 	}
 	
+	public String getObject_status() {
+		return objectStatus;
+	}
+
+	public void setObject_status(String objectStatus) {
+		objectStatus = objectStatus;
+	}
+
 	///
 	public void addOperation(InfoXMLOptionValue childOpt) {
 		this.childOpt.add(childOpt);
@@ -70,11 +79,12 @@ public class InfoXmlFigure {
 	
 	///
 	
-	public void setAll(String id, String name, EnumFigureType type, String alias){
+	public void setAll(String id, String name, EnumFigureType type, String alias, String objectStatus){
 		this.id = id;
 		this.name = name;
 		this.typ = type;
 		this.alias = alias;
+		this.objectStatus = objectStatus;
 	}
 	
 	public void addChild(InfoXmlConnection childe) {

@@ -9,7 +9,6 @@ import net.sourceforge.olympos.diagramimageexporter.RequirementFigure;
 
 public class Dummy extends RequirementFigure{
 	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 150, 50);
-	InfoLine infLine1 = new InfoLine(10, 0, 10, 50);
 	
 	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 150, 50);
 	
@@ -24,6 +23,6 @@ public class Dummy extends RequirementFigure{
 	@Override
 	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
 		drawScaleRec(g2d, fig, figureInfo, rect1);
-		drawChiBusinesProcLabel(g2d, fig, figureInfo, rect1, infLine1);
+		drawRecLabelLeft(g2d, fig, figureInfo, rect1);
 	}
 }

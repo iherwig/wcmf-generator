@@ -43,6 +43,6 @@ public class ChiBusinessProcess extends RequirementFigure{
 		drawScaleLine(g2d, fig, figureInfo, inDown);
 		drawScaleLine(g2d, fig, figureInfo, inrightup);
 		drawScaleLine(g2d, fig, figureInfo, inrightdown);
-		drawChiBusinesProcLabel(g2d, fig, figureInfo, rect1, infLine1);
+		drawRecLineLabel(g2d, fig, figureInfo, rect1, infLine1);
 	}
 }

@@ -99,8 +99,9 @@ public class XmlReader {
 			String id = element.getAttributeValue("id");
 			String alias = element.getAttributeValue("Alias");
 			String name = element.getAttributeValue("Name");
+			String objectStatus = element.getAttributeValue("object_status");
 			EnumFigureType typ = elem.getType();
-			InfoXmlFigure xmlFig = new InfoXmlFigure(id, name, typ, alias);
+			InfoXmlFigure xmlFig = new InfoXmlFigure(id, name, typ, alias, objectStatus);
 			svg.addXmlFigure(xmlFig);
 
 			if (point.equals("ChiBusinessUseCase")) {
@@ -195,8 +196,6 @@ public class XmlReader {
 					}
 				}
 			}
-	
-			
 			List<Element> childr = element.getChildren();
 			for (Element currChild : childr) {
 				String type = currChild.getName();
@@ -232,7 +231,8 @@ public class XmlReader {
 		String alias = currFigure.getAttributeValue("Alias");
 		EnumFigureType figtype = null;
 		String label = null;
-		InfoFigureParameter fig = new InfoFigureParameter(x, y, width, height, figtype, label, diagramid, alias);
+		String objectStatus = null;
+		InfoFigureParameter fig = new InfoFigureParameter(x, y, width, height, figtype, label, diagramid, alias, objectStatus);
 
 		
 		List<Element> child = currFigure.getChildren();
