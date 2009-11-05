@@ -19,6 +19,7 @@ public class ElementDiagram {
 	private final static String INSTANTIATES = "instantiantes";
 	private final static String ASSOCIATION = "association";
 	private final static String ACTIONKEY = "ActionKey";
+	private final static String INSTANCE = "is instance of";
 	
 	private final static String NOTIMPLEMENTET = "Not implementet jet";
 	
@@ -77,7 +78,7 @@ public class ElementDiagram {
 		addToCatalog(initActiviReceive());
 		addToCatalog(initActivity());
 		addToCatalog(initActivityFinal());
-//		addToCatalog(initChiObject());
+		addToCatalog(initChiObject());
 		addToCatalog(initChiBusiPartner());
 		addToCatalog(initChiBusiPartnerActive());
 		addToCatalog(initChiBusiPartnerPassive());
@@ -339,6 +340,8 @@ public class ElementDiagram {
 	
 	private static ElementDiagram initChiObject() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+		
+		connections.put(EnumFigureType.CHI_NODE, new InfoAllowedConnection(INSTANCE, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 
 		ElementDiagram result = new ElementDiagram(EnumFigureType.Chi_OBJECT, "ChiObject", EnumFontPosition.IN_CENTER, null , connections);
 		return result;
