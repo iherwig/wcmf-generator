@@ -53,15 +53,15 @@ public class ChiWorker extends Figure{
 
 	public void draw(Graphics2D g2d, InfoFigureParameter createFig) {
 		
+		drawScaleEllipse(g2d, createFig, figureInfo, elli1);
+		drawScaleEllipse(g2d, createFig, figureInfo, head);
+		
 		drawScaleLine(g2d, createFig, figureInfo, body);
 		drawScaleLine(g2d, createFig, figureInfo, leftleg);
 		drawScaleLine(g2d, createFig, figureInfo, rightleg);
 		drawScaleLine(g2d, createFig, figureInfo, arm);
 
 		drawCenterLabelUnder(g2d, createFig);
-		
-		drawScaleEllipse(g2d, createFig, figureInfo, elli1);
-		drawScaleEllipse(g2d, createFig, figureInfo, head);
 		
 		drawScaleChi(g2d, createFig, figureInfo, head);
 	}

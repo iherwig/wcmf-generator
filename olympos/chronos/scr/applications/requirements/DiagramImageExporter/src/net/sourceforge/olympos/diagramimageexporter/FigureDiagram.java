@@ -12,7 +12,7 @@ public class FigureDiagram {
 		ArrayList<InfoXmlConnection> figChild = null;
 
 		for (InfoXmlDiagram dia1 : xmlDia) {
-			ArrayList<InfoFigureParameter> figure = dia1.getFigure();
+			ArrayList<InfoFigureParameter> figure =figureArray;
 			ArrayList<InfoFigureParameter> noElement = new ArrayList<InfoFigureParameter>();
 			for (InfoFigureParameter currFig : figure) {
 				figChild = currFig.getChildrenX();
@@ -37,38 +37,6 @@ public class FigureDiagram {
 						currFig.setObjectStatus(currXmlFig1.getObject_status());
 					}
 				}
-//				 if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER))
-//				 {
-//				 for (InfoXmlFigure currXmlFig : xmlFig) {
-//				 String xmlId = currXmlFig.getId();
-//				 if (figId.equals(xmlId)) {
-//				 ArrayList<InfoXMLOptionValue> values =
-//				 currXmlFig.getChildVal();
-//				 for (InfoXMLOptionValue currValue : values) {
-//				 currFig.addValue(currValue);
-//				 }
-//				 }
-//				 }
-//				 }
-//				 if (currFig.getType().equals(EnumFigureType.CHI_NODE)) {
-//				 for (InfoXmlFigure currXmlFig : xmlFig) {
-//				 String xmlId = currXmlFig.getId();
-//				 if (figId.equals(xmlId)) {
-//				 ArrayList<InfoXMLOptionValue> value =
-//				 currXmlFig.getChildValNo();
-//				 for (InfoXMLOptionValue currXMLValue : value) {
-//				 if (currXMLValue.getTyp().equals("ChiValue"))
-//				 currFig.addValue(currXMLValue);
-//				 }
-//				 ArrayList<InfoXMLOptionValue> op =
-//				 currXmlFig.getChildOptNo();
-//				 for (InfoXMLOptionValue currXmlOp : op) {
-//				 if (currXmlOp.getTyp().equals("Operation"))
-//				 currFig.addOperation(currXmlOp);
-//				 }
-//				 }
-//				 }
-//				 }
 				if (currFig.getLabel() == null) {
 					currFig.setType(EnumFigureType.DUMMY);
 					currFig.setLabel("Dummy");
@@ -83,17 +51,25 @@ public class FigureDiagram {
 						}
 					}
 				}
+				if (currFig.getType().equals(EnumFigureType.CHI_SYSTEM)){
+					for (InfoXmlFigure currXmlFig : xmlFig) {
+						if(currXmlFig.getId().equals(figId)){
+							ArrayList<InfoXMLOptionValue> attrib = currXmlFig.getAttribute();
+							for (InfoXMLOptionValue currAttrib : attrib) {
+								currFig.addAttribut(currAttrib);
+							}
+						}
+					}
+				}
 				if (currFig.getType().equals(EnumFigureType.CHI_NODE)){
 					for (InfoXmlFigure currXmlFig : xmlFig) {
 						if(currXmlFig.getId().equals(figId)){
 							ArrayList<InfoXMLOptionValue> opt = currXmlFig.getOperation();
 							for (InfoXMLOptionValue currOpt : opt) {
-//								if(currOpt.getName().equals("Operation"))
 								currFig.addOperation(currOpt);
 							}
 							ArrayList<InfoXMLOptionValue> attrib = currXmlFig.getAttribute();
 							for (InfoXMLOptionValue currAttrib : attrib) {
-//								if(currAttrib.getName().equals("ChiValue"))
 								currFig.addAttribut(currAttrib);
 							}
 						}
@@ -163,6 +139,7 @@ public class FigureDiagram {
 				}
 			}
 		}
+		svg.xmlFigNull();
 	}
 
 	private void addChildren(String figId, String figId2, String typ) {
@@ -173,13 +150,16 @@ public class FigureDiagram {
 				if (currFig1.getDiagramid().equals(figId)) {
 					for (InfoFigureParameter currFig2 : figure) {
 						if (currFig2.getDiagramid().equals(figId2)) {
-							if (typ.equals("Child")) {
-								currFig2.addChild(currFig1);
-							} else if (typ.equals("Parent")) {
+							if (typ.equals("Parent")) {
 								currFig1.addChild(currFig2);
-							} else if (typ.equals("ManyToMany")) {
+							}
+//							else if (typ.equals("Child")) {
+//								currFig2.addChild(currFig1);
+//							} 
+							else if (typ.equals("ManyToMany")) {
 								currFig2.addChild(currFig1);
-							} else {
+							} 
+							else {
 
 							}
 						}
@@ -220,10 +200,10 @@ public class FigureDiagram {
 
 		// subtract minCor to all of the figure
 		for (InfoFigureParameter fig : figureArray) {
-			fig.setX(fig.getX() - minCor.getX() + 20);
-			fig.setY(fig.getY() - minCor.getY() + 20);
+			fig.setX(fig.getX() - minCor.getX() + 40);
+			fig.setY(fig.getY() - minCor.getY() + 40);
 		}
-		maxCor.setAll(maxCor.getX() - minCor.getX() + 40, maxCor.getY() - minCor.getY() + 40);
+		maxCor.setAll(maxCor.getX() - minCor.getX() + 130, maxCor.getY() - minCor.getY() + 60);
 		return maxCor;
 		// }
 	}

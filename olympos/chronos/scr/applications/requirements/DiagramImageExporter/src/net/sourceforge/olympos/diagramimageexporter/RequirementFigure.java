@@ -1,5 +1,6 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -25,8 +26,10 @@ public abstract class RequirementFigure extends Figure{
 		int y = (int) (rec.getY() * scaleY + createFig.getY());
 		int width = (int) (rec.getWidth() * scaleX);
 		int height = (int) (rec.getHeight() * scaleY);
-		
+		g2d.setPaint(Color.black);
 		g2d.draw(new Rectangle(x , y, width, height));
+		g2d.setPaint(Color.white);
+		g2d.fill(new Rectangle(x +1, y + 1, width - 1, height - 1));
 	}
 	
 	protected void drawImg(Graphics2D g2d, InfoFigureParameter figure) {

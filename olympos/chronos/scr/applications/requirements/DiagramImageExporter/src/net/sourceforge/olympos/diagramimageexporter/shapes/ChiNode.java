@@ -42,18 +42,15 @@ public class ChiNode extends Figure{
 		drawScaleXLine(g2d, fig, figureInfo, infLine1);
 		drawContLabel(g2d, fig, figureInfo, rect, infLine1);
 		drawEllipseLeft(g2d, fig, figureInfo, circle,rect);
-		drawChiLeft(g2d, fig, figureInfo, circle,rect);
+		drawChiRight(g2d, fig, figureInfo, circle,rect);
 		
 //		drawScaleRec(g2d, fig, figureInfo, rect);
 //		drawScaleXLine(g2d, fig, figureInfo, infLine1);
-////		drawScaleXLine(g2d, fig, figureInfo, infLine2);
+//		drawScaleXLine(g2d, fig, figureInfo, infLine2);
 //		drawScaleXLine(g2d, fig, figureInfo, circleLine);
 //		drawEllipse(g2d, fig, figureInfo, circle);
-//		drawChi(g2d, fig, figureInfo, circle);
-//
-//		
+//		drawChi(g2d, fig, figureInfo, circle);	
 //		drawScaleChiNode(g2d, fig, figureInfo, infLine1, infLine2, rect);
-//
 //		drawContLabel(g2d, fig, figureInfo, rect, infLine1);
 	}
 }

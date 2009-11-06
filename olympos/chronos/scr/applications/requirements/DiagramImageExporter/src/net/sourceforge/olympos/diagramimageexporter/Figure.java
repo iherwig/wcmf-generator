@@ -193,7 +193,7 @@ public abstract class Figure extends JPanel {
 		int lineY1 = (int) (createFig.getY() + line.getY1() * scaleY);
 		int lineX2 = (int) (createFig.getX() + line.getX2() * scaleX);
 		int lineY2 = (int) (createFig.getY() + line.getY2() * scaleY);
-
+		g2d.setPaint(Color.black);
 		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
 	}
 
@@ -204,7 +204,7 @@ public abstract class Figure extends JPanel {
 		int lineY1 = (int) (createFig.getY() + line.getY1());
 		int lineX2 = (int) (createFig.getX() + line.getX2() * scaleX);
 		int lineY2 = (int) (createFig.getY() + line.getY2());
-
+		g2d.setPaint(Color.black);
 		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
 	}
 
@@ -214,7 +214,7 @@ public abstract class Figure extends JPanel {
 		int lineY1 = (int) (createFig.getY() + line.getY1());
 		int lineX2 = (int) (createFig.getX() + line.getX2());
 		int lineY2 = (int) (createFig.getY() + line.getY2());
-
+		g2d.setPaint(Color.black);
 		g2d.drawLine(lineX1, lineY1, lineX2, lineY2);
 	}
 
@@ -226,9 +226,12 @@ public abstract class Figure extends JPanel {
 
 		int x = (int) (createFig.getX() + ellipse.getX() * scaleX);
 		int y = (int) (createFig.getY() + ellipse.getY() * scaleY);
-
+		g2d.setPaint(Color.black);
 		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight() * scaleX, ellipse.getWidth() * scaleY);
 		g2d.draw(ellip);
+		g2d.setPaint(Color.white);
+		Shape ellipFill = new Ellipse2D.Double(x + 1, y + 1, ellipse.getHeight() * scaleX -2, ellipse.getWidth() * scaleY-1);
+		g2d.fill(ellipFill);
 	}
 
 
@@ -262,8 +265,11 @@ public abstract class Figure extends JPanel {
 		int y = (int) (rec.getY() * scaleY + createFig.getY());
 		int width = (int) (rec.getWidth() * scaleX);
 		int height = (int) (rec.getHeight() * scaleY);
-
+		g2d.setPaint(Color.black);
 		g2d.draw(new Rectangle(x, y, width, height));
+		g2d.setPaint(Color.white);
+		g2d.fill(new Rectangle(x +1, y+1, width-1, height-1));
+		g2d.setPaint(Color.black);
 	}
 	
 
@@ -287,6 +293,30 @@ public abstract class Figure extends JPanel {
 		n.setBounds(x, y, width, height);
 		n.setOpaque(false);
 		n.paint(textbox);
+	}
+	
+	//image
+	///////////////////////////////////////////////////////////////
+	protected void drawImageRecReight (Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize rect,InfoCoordinateSize imageInfo ) {
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+		
+		int currXimage = (int) (createFig.getX() + (rect.getWidth() * scaleX) - 20) ;
+		int currYimage = (int) (createFig.getY() + 5);
+		int imageWidth = (int) (imageInfo.getWidth());
+		int imageHeight = (int) (imageInfo.getHeight());
+		
+		String imagePath = null;
+		ElementDiagram elemOp = ElementDiagram.getCatalogEntry(createFig.getType());
+		imagePath = elemOp.getImage();
+		try {
+			BufferedImage img1 = ImageIO.read(new File(imagePath));
+			if (img1 != null)
+				g2d.drawImage(img1, currXimage, currYimage, imageWidth, imageHeight, null);
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		
 	}
 
 
@@ -350,19 +380,29 @@ public abstract class Figure extends JPanel {
 	
 	protected void drawScaleChiNode(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoLine line1, InfoLine line2, InfoCoordinateSize rect) {
 
+		if(createFig.getWidth()<= figureInfo.getWidth()){
+			createFig.setWidth(138);
+			createFig.setHeight(60);			
+		}
+		
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
-		
-//		private InfoLine circleLine = new InfoLine(0, 17, 11, 17)
+
 		
 		int x = (int) (rect.getX() * scaleX + createFig.getX());
 		int y = (int) (rect.getY() * scaleY + createFig.getY());
 		int width = (int) (rect.getWidth() * scaleX);
 		int height = (int) (rect.getHeight() * scaleY);
+		g2d.setPaint(Color.black);
 		g2d.draw(new Rectangle(x, y, width, height));
+		g2d.setPaint(Color.white);
+		g2d.fill(new Rectangle(x+1, y+1, width-1, height-1));
 		
-		g2d.drawLine(x + width - 19, y + 18, x + width - 8, y + 18);
-//		drawScaleXLine(g2d, createFig, figureInfo, lineunder);
+		g2d.setPaint(Color.black);
+		
+		if(createFig.getType().equals(EnumFigureType.CHI_NODE))
+			g2d.drawLine(x + width - 19, y + 18, x + width - 8, y + 18);
+
 		
 		int currX = (int) (createFig.getX() + 16);
 		int currY = (int) (createFig.getY() + line1.getY1() + 1);
@@ -408,6 +448,7 @@ public abstract class Figure extends JPanel {
 				g2d.drawString(currAttribute.getName(), currX, currY);
 
 			}
+			g2d.setPaint(Color.black);
 			line2.setY1(line2.getY1() + (attribute.size() * lineHeight) - 1);
 			line2.setY2(line2.getY2() + (attribute.size() * lineHeight) - 1);
 			drawScaleXLine(g2d, createFig, figureInfo, line2);
@@ -509,8 +550,9 @@ public abstract class Figure extends JPanel {
 			System.out.println(e);
 		}
 	}
+	
 
-	protected void drawChiLeft(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse, InfoCoordinateSize rect) {
+	protected void drawChiRight(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse, InfoCoordinateSize rect) {
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
 		int headX = (int) (createFig.getX() + rect.getWidth() * scaleX - 20);
