@@ -42,6 +42,9 @@ public class SVGGenerator {
 		xmlFigure.add(fChild);
 	}
 
+	public void xmlFigNull(){
+		xmlFigure = null;
+	}
 	public static void generateImages(String sourceFile, String targetDir, String iconDir, String usedImageFormat) throws Exception {
 
 		// create the target directory if not existing
@@ -76,7 +79,6 @@ public class SVGGenerator {
 		for (InfoXmlDiagram currDia : xmlDia) {
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
 			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat);
-			
 
 			if (maxCor != null) {
 				int widthInt = (int) maxCor.getX();

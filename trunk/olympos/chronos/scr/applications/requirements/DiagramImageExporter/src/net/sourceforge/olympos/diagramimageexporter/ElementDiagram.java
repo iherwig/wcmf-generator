@@ -32,6 +32,7 @@ public class ElementDiagram {
 	private final static String chi = "Chi.PNG";
 	private final static String operation = "ChiOperation.png";
 	private final static String attribute = "ChiAttribute.png";
+	private final static String system = "ChiSystem.png";
 	
 	private HashMap<EnumFigureType, InfoAllowedConnection> allowedConnection;
 	private HashMap<String, InfoAllowedConnection> allowedConnectionByName;
@@ -87,7 +88,7 @@ public class ElementDiagram {
 		addToCatalog(initChiBusiUseCaseCore());
 		addToCatalog(initChiController());
 		addToCatalog(initChiNode());	
-//		addToCatalog(initChiSys());
+		addToCatalog(initChiSys());
 		addToCatalog(initChiView());
 		addToCatalog(initChiWorker());
 		addToCatalog(initChiWorkerExternal());
@@ -252,6 +253,12 @@ public class ElementDiagram {
 		return result;
 	}
 	
+	private static ElementDiagram initChiSys(){
+		
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_SYSTEM, "ChiSystem", null, path + system , null);
+		return result;
+	}
+	
 	private static ElementDiagram initOperation(){
 		
 		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_OPERATION, "ChiOperation", null, path + operation , null);
@@ -343,7 +350,7 @@ public class ElementDiagram {
 		
 		connections.put(EnumFigureType.CHI_NODE, new InfoAllowedConnection(INSTANCE, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.Chi_OBJECT, "ChiObject", EnumFontPosition.IN_CENTER, null , connections);
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_OBJECT, "ChiObject", EnumFontPosition.IN_CENTER, null , connections);
 		return result;
 	}
 	

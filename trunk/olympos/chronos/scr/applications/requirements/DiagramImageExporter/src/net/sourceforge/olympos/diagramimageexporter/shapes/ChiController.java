@@ -40,11 +40,11 @@ public class ChiController extends Figure{
 	@Override
 	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
 		
-		drawScaleChiController(g2d, fig, figureInfo, infLine1, infLine2, rect);
+		drawScaleChiNode(g2d, fig, figureInfo, infLine1, infLine2, rect);
 		drawScaleXLine(g2d, fig, figureInfo, infLine1);
 		drawScaleXLine(g2d, fig, figureInfo, infLine2);
 		drawContLabel(g2d, fig, figureInfo, rect, infLine1);
 		drawEllipseLeft(g2d, fig, figureInfo, circle,rect);
-		drawChiLeft(g2d, fig, figureInfo, circle,rect);
+		drawChiRight(g2d, fig, figureInfo, circle,rect);
 	}
 }
