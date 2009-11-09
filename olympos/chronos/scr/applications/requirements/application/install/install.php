@@ -87,6 +87,7 @@ $userManager->commitTransaction();
 
 // execute custom scripts from the directory 'custom-install'
 $sqlScripts = FileUtil::getFiles('custom-install', '/[^_]+_.*\.sql$/', true);
+sort($sqlScripts);
 foreach ($sqlScripts as $script)
 {
   // extract the initSection from the filename

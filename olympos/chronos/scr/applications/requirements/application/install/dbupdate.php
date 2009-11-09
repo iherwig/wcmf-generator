@@ -121,6 +121,7 @@ foreach ($tables as $tableDef)
 
 // execute custom scripts from the directory 'custom-dbupdate'
 $sqlScripts = FileUtil::getFiles('custom-dbupdate', '/[^_]+_.*\.sql$/', true);
+sort($sqlScripts);
 foreach ($sqlScripts as $script)
 {
   // extract the initSection from the filename
@@ -144,11 +145,11 @@ function ensureUpdateTable(&$connection)
     $sql = $connection->Prepare('CREATE TABLE `dbupdate` (`table_id` VARCHAR(100) NOT NULL, `column_id` VARCHAR(100) NOT NULL, `type` VARCHAR(100) NOT NULL, '.
                                 '`table` VARCHAR(255), `column` VARCHAR(255), `updated` DATETIME, PRIMARY KEY (`table_id`, `column_id`, `type`)) TYPE=MyISAM');
     $rs = $connection->Execute($sql);
-  	if ($rs === false)
-  	{
-  	  Log::error('Error creating update table '.$connection->ErrorMsg(), "dbupdate");
-  	  return false;
-  	}
+    if ($rs === false)
+    {
+      Log::error('Error creating update table '.$connection->ErrorMsg(), "dbupdate");
+      return false;
+    }
   }
   return true;
 }
@@ -175,14 +176,14 @@ function getOldValue(&$connection, $tableId, $columnId, $type)
     $sql = $connection->Prepare('SELECT * FROM `dbupdate` WHERE `table_id`=? AND `type`=\'table\'');
     $rs = $connection->Execute($sql, array($tableId));
   }
-	if ($rs !== false && $rs->RecordCount() > 0)
-	{
-	  $data = $rs->FetchRow();
-	  return array('table' => $data['table'], 'column' => $data['column']);
-	}
-	if ($rs !== false)
+  if ($rs !== false && $rs->RecordCount() > 0)
+  {
+    $data = $rs->FetchRow();
+    return array('table' => $data['table'], 'column' => $data['column']);
+  }
+  if ($rs !== false)
     $rs->close();
-	return null;
+  return null;
 }
 
 /*
@@ -208,7 +209,7 @@ function updateValue(&$connection, $tableId, $columnId, $type, $table, $column)
     $sql = $connection->Prepare('UPDATE `dbupdate` SET `table`=?, `column`=?, `updated`=? WHERE `table_id`=? AND `column_id`=? AND `type`=?');
     $rs = $connection->Execute($sql, array($table, $column, date("Y-m-d H:i:s"), $tableId, $columnId, $type));
   }
-	if ($rs === false)
+  if ($rs === false)
     Log::error('Error inserting/updating entry '.$connection->ErrorMsg(), "dbupdate");
 }
 
@@ -235,8 +236,8 @@ function createTable(&$connection, $tableDef)
   Log::info("> create table '".$tableDef['name']."'", "dbupdate");
   $sql = $tableDef['create'];
   $rs = $connection->Execute($sql);
-	if ($rs === false)
-	  Log::error('Error creating table '.$connection->ErrorMsg(), "dbupdate");
+  if ($rs === false)
+    Log::error('Error creating table '.$connection->ErrorMsg(), "dbupdate");
 }
 
 /*
@@ -250,8 +251,8 @@ function alterTable(&$connection, $oldName, $name)
   Log::info("> alter table '".$name."'", "dbupdate");
   $sql = $connection->Prepare('ALTER TABLE `'.$oldName.'` RENAME `'.$name.'`');
   $rs = $connection->Execute($sql);
-	if ($rs === false)
-	  Log::error('Error altering table '.$connection->ErrorMsg()."\n".$sql, "dbupdate");
+  if ($rs === false)
+    Log::error('Error altering table '.$connection->ErrorMsg()."\n".$sql, "dbupdate");
 }
 
 /*
@@ -265,8 +266,8 @@ function createColumn(&$connection, $table, $columnDef)
   Log::info("> create column '".$table.".".$columnDef['name'], "dbupdate");
   $sql = $connection->Prepare('ALTER TABLE `'.$table.'` ADD `'.$columnDef['name'].'` '.$columnDef['type']);
   $rs = $connection->Execute($sql);
-	if ($rs === false)
-	  Log::error('Error creating column '.$connection->ErrorMsg(), "dbupdate");
+  if ($rs === false)
+    Log::error('Error creating column '.$connection->ErrorMsg(), "dbupdate");
 }
 
 /*
@@ -281,8 +282,8 @@ function alterColumn(&$connection, $table, $oldColumnDef, $columnDef)
   Log::info("> alter column '".$table.".".$columnDef['name'], "dbupdate");
   $sql = $connection->Prepare('ALTER TABLE `'.$table.'` CHANGE `'.$oldColumnDef['name'].'` `'.$columnDef['name'].'` '.$columnDef['type']);
   $rs = $connection->Execute($sql);
-	if ($rs === false)
-	  Log::error('Error altering column '.$connection->ErrorMsg()."\n".$sql, "dbupdate");
+  if ($rs === false)
+    Log::error('Error altering column '.$connection->ErrorMsg()."\n".$sql, "dbupdate");
 }
 
 /*
