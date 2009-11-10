@@ -96,7 +96,7 @@ public class Draw {
 
 		// else if (usedImageFormat.toLowerCase().equals("png")) {
 		PNGTranscoder t = new PNGTranscoder();
-		String fileImagePath = "file:/" + imagePathSvg;
+		String fileImagePath = "file://" + imagePathSvg;
 		TranscoderInput input = new TranscoderInput(fileImagePath);
 		try {
 			OutputStream ostream = new FileOutputStream(imagePath + id + ".png");
