@@ -11,8 +11,7 @@ public class InfoXMLOptionValue {
 	
 	
 	private ArrayList<InfoXmlConnection> children = new ArrayList<InfoXmlConnection>();
-	
-	private ArrayList<InfoXmlConnection> childrenAttribut = new ArrayList<InfoXmlConnection>();
+//	private ArrayList<InfoXmlConnection> childrenAttribut = new ArrayList<InfoXmlConnection>();
 	
 	public void addChild(InfoXmlConnection childe) {
 		this.children.add(childe);
@@ -22,13 +21,13 @@ public class InfoXMLOptionValue {
 		return children;
 	}
 	
-	public void addChildAttribut(InfoXmlConnection childe) {
-		this.childrenAttribut.add(childe);
-	}
-
-	public ArrayList<InfoXmlConnection> getChildAttribut() {
-		return childrenAttribut;
-	}
+//	public void addChildAttribut(InfoXmlConnection childe) {
+//		this.childrenAttribut.add(childe);
+//	}
+//
+//	public ArrayList<InfoXmlConnection> getChildAttribut() {
+//		return childrenAttribut;
+//	}
 	
 	InfoXMLOptionValue(String id, String name, String type, String alias) {
 		setAll(id, name, type, alias);

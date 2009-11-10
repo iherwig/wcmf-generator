@@ -17,7 +17,17 @@ public class SVGGenerator {
 	private static ArrayList<InfoXmlFigure> xmlFigure;
 	private static ArrayList<InfoConnectionExist> connectionExist;
 	public static Logger logger = Logger.getLogger(SVGGenerator.class.getName());
-
+	private static ArrayList<String> existLine;
+	
+	
+	public static ArrayList<String> getExistLine() {
+		return existLine;
+	}
+	
+	public static void addExistLine(String Line) {
+		existLine.add(Line);
+	}
+	
 	public ArrayList<InfoConnectionExist> getConnectionExist() {
 		return connectionExist;
 	}
@@ -69,19 +79,23 @@ public class SVGGenerator {
 		SVGGenerator svg = new SVGGenerator();
 
 		ElementDiagram.initCatalog(iconDir);
-
-		XmlReader xml = new XmlReader();
-		xml.XML(sourceFile);
-
+		catalogManyToMany.initConnection();
+		
 		Document doc = new Document();
 		Element root = new Element("diagramExport");
 		doc.setRootElement(root);
 
+		XmlReader xml = new XmlReader();
+		xml.XML(sourceFile);
+		
+		ArrayList<String> existLine = new ArrayList<String>();
+
 		Draw df = new Draw();
 		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
 		for (InfoXmlDiagram currDia : xmlDia) {
+			existLine = null;
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
-			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat);
+			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat, existLine);
 
 			if (maxCor != null) {
 				int widthInt = (int) maxCor.getX();
@@ -92,7 +106,7 @@ public class SVGGenerator {
 				String width = Integer.toString(widthInt);
 				image.setAttribute("width", width);
 				String height = Integer.toString(heightInt);
-				image.setAttribute("height", height);
+				image.setAttribute("height", height);  
 				String type = usedImageFormat;
 				image.setAttribute("type", type);
 				String alias = currDia.getAlias();

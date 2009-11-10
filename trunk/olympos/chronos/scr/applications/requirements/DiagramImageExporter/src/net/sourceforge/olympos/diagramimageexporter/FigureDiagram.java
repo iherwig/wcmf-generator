@@ -35,6 +35,14 @@ public class FigureDiagram {
 						currFig.setType(currXmlFig1.getTyp());
 						currFig.setLabel(currXmlFig1.getName());
 						currFig.setObjectStatus(currXmlFig1.getObject_status());
+						
+						ArrayList<InfoXmlConnection> con = currXmlFig1.getChild();
+						
+						for(InfoXmlConnection currCon : con){
+							if(currCon.getType().equals("ManyToMany"))
+								currFig.setRelationType(currCon.getRelationType());
+						}
+						
 					}
 				}
 				if (currFig.getLabel() == null) {
@@ -74,7 +82,21 @@ public class FigureDiagram {
 							}
 						}
 					}
-				}				
+				}
+				if (currFig.getType().equals(EnumFigureType.CHI_NODE_MANY_TO_MANY)){
+					for (InfoXmlFigure currXmlFig : xmlFig) {
+						if(currXmlFig.getId().equals(figId)){
+							ArrayList<InfoXMLOptionValue> opt = currXmlFig.getOperation();
+							for (InfoXMLOptionValue currOpt : opt) {
+								currFig.addOperation(currOpt);
+							}
+							ArrayList<InfoXMLOptionValue> attrib = currXmlFig.getAttribute();
+							for (InfoXMLOptionValue currAttrib : attrib) {
+								currFig.addAttribut(currAttrib);
+							}
+						}
+					}
+				}
 			}
 			for (InfoFigureParameter currNoElement : noElement) {
 				dia1.removeFigure(currNoElement); // remove all File has only
@@ -84,7 +106,6 @@ public class FigureDiagram {
 
 		addChild(xmlFig, xmlDia);
 		InfoCoordinate maxCor = setSize(figureArray);
-		// addOptionValue(xmlDia, xmlFig);
 		return maxCor;
 	}
 
@@ -100,7 +121,7 @@ public class FigureDiagram {
 				String typFigure = null;
 				String targetOidObject = null;
 
-				String typeXmlFigure = null;
+//				String typeXmlFigure = null;
 				String targetOidXmlFigure = null;
 
 				ArrayList<InfoXmlConnection> figChild = currFig.getChildrenX();
@@ -109,7 +130,7 @@ public class FigureDiagram {
 						typFigure = currFigChild.getType();
 						targetOidObject = currFigChild.getTargetOid();
 						for (InfoXmlFigure currXmlFig : xmlFig) {
-							ArrayList<InfoXmlConnection> xmlFigChild = currXmlFig.getChildren();
+							ArrayList<InfoXmlConnection> xmlFigChild = currXmlFig.getChild();
 							if (currXmlFig.getId().equals(targetOidObject)) {
 								for (InfoXmlConnection currXmlFigChild2 : xmlFigChild) {
 									if (currXmlFigChild2.getTargetType() != null) { //testing if targettyp is there
@@ -118,7 +139,7 @@ public class FigureDiagram {
 											if (targetOid != null) {
 												for (InfoXmlFigure currxmlFig2 : xmlFig) {
 													if (currxmlFig2.getId().equals(targetOid)) {
-														ArrayList<InfoXmlConnection> xmlFigChild2 = currxmlFig2.getChildren();
+														ArrayList<InfoXmlConnection> xmlFigChild2 = currxmlFig2.getChild();
 														for (InfoXmlConnection currxmlFig3 : xmlFigChild2) {
 															if (currxmlFig3.getTargetType() != null) {
 															if (currxmlFig3.getTargetType().equals("Figure")) {
@@ -205,45 +226,5 @@ public class FigureDiagram {
 		}
 		maxCor.setAll(maxCor.getX() - minCor.getX() + 130, maxCor.getY() - minCor.getY() + 60);
 		return maxCor;
-		// }
-	}
-
-	private void addOptionValue(ArrayList<InfoXmlDiagram> xmlDia, ArrayList<InfoXmlFigure> xmlFig) {
-		for (InfoXmlDiagram currDia : xmlDia) {
-			ArrayList<InfoFigureParameter> figures = currDia.getFigure();
-			for (InfoFigureParameter currFig : figures) {
-				if (currFig.getType().equals(EnumFigureType.CHI_CONTROLLER)) {
-					String aliasFig = currFig.getAlias();
-					for (InfoXmlFigure currXmlFig : xmlFig) {
-						if (currXmlFig.getTyp().equals(EnumFigureType.CHI_CONTROLLER) && currXmlFig.getAlias().equals(aliasFig)) {
-							ArrayList<InfoXMLOptionValue> values = currXmlFig.getOperation();
-							for (InfoXMLOptionValue currValue : values) {
-								currFig.addAttribut(currValue);
-							}
-						}
-					}
-				}
-				if (currFig.getType().equals(EnumFigureType.CHI_NODE)) {
-					String aliasFig = currFig.getAlias();
-					for (InfoXmlFigure currXmlFig : xmlFig) {
-						if (currXmlFig.getTyp().equals(EnumFigureType.CHI_NODE) && currXmlFig.getAlias().equals(aliasFig)) {
-							ArrayList<InfoXMLOptionValue> valuesOpt = currXmlFig.getAttribute();
-							if (valuesOpt != null) {
-								for (InfoXMLOptionValue currValueOpt : valuesOpt) {
-									currFig.addAttribut(currValueOpt);
-								}
-							}
-							ArrayList<InfoXMLOptionValue> valuesVal = currXmlFig.getChildVal();
-							if (valuesVal != null) {
-								for (InfoXMLOptionValue currValueVal : valuesVal) {
-									currFig.addAttribut(currValueVal);
-								}
-							}
-						}
-
-					}
-				}
-			}
-		}
 	}
 }

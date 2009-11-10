@@ -12,6 +12,7 @@ public class InfoFigureParameter {
 	private float height;
 	private EnumFigureType type;
 	private String label;
+	private String relationType;
 	private ArrayList<InfoFigureParameter> children = new ArrayList<InfoFigureParameter>();
 	private ArrayList<InfoXmlConnection> child = new ArrayList<InfoXmlConnection>();
 	private ArrayList<InfoXMLOptionValue> value = new ArrayList<InfoXMLOptionValue>();
@@ -105,7 +106,14 @@ public class InfoFigureParameter {
 	public void setType(EnumFigureType type) {
 		this.type = type;
 	}
-	
+
+	public String getRelationType() {
+		return relationType;
+	}
+
+	public void setRelationType(String relationType) {
+		this.relationType = relationType;
+	}
 
 	public void setXYWeightHeight(float xi, float yi, float w, float h) {
 		this.x = xi;

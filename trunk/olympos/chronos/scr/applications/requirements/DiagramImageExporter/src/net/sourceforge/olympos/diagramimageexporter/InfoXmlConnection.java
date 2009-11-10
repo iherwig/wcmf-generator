@@ -8,9 +8,18 @@ public class InfoXmlConnection {
 	String targetType;
 	String targetOid;
 	String targetRole;
+	String relationType;
 	
-	InfoXmlConnection( String type, String targetType,String targetOid , String targetRole){
-		setAll(targetType, type, targetOid, targetRole);
+	public String getRelationType() {
+		return relationType;
+	}
+
+	public void setRelationType(String relationType) {
+		this.relationType = relationType;
+	}
+
+	InfoXmlConnection( String type, String targetType,String targetOid , String targetRole, String relationType){
+		setAll(targetType, type, targetOid, targetRole, relationType);
 	}
 	
 	public String getTargetRole() {
@@ -45,10 +54,11 @@ public class InfoXmlConnection {
 		this.targetOid = targetOid;
 	}
 	
-	public void setAll(String targetType, String type,String targetOid , String targetRole){
+	public void setAll(String targetType, String type,String targetOid , String targetRole, String relationType){
 		this.targetType = targetType;
 		this.type = type;
 		this.targetOid = targetOid;
 		this.targetRole = targetRole;
+		this.relationType = relationType;
 	}
 }

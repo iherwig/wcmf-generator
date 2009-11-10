@@ -1,13 +1,19 @@
 package net.sourceforge.olympos.diagramimageexporter.shapes;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import net.sourceforge.olympos.diagramimageexporter.ElementDiagram;
+import net.sourceforge.olympos.diagramimageexporter.EnumFigureType;
 import net.sourceforge.olympos.diagramimageexporter.Figure;
+import net.sourceforge.olympos.diagramimageexporter.InfoAllowedConnection;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 
 
+@SuppressWarnings("serial")
 public class ChiBusinessPartnerActive extends Figure{
 	InfoLine body = new InfoLine(12, 15, 12, 32);
 	InfoLine leftleg = new InfoLine(12, 32, 2, 47);
@@ -37,7 +43,7 @@ public class ChiBusinessPartnerActive extends Figure{
 		return armright;
 	}
 
-	public void draw(Graphics2D g2d, InfoFigureParameter createFig) {
+	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children) {
 
 		drawScaleEllipse(g2d, createFig, figureInfo, head);
 
@@ -51,5 +57,17 @@ public class ChiBusinessPartnerActive extends Figure{
 		
 		
 		drawScaleChi(g2d, createFig, figureInfo, head);
+		
+		for(InfoFigureParameter currChild : children){
+			ElementDiagram elem = ElementDiagram.getCatalogEntry(createFig.getType());
+			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
+			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
+
+			if (allowedConnection != null) {
+				String comment = allowedConnection.getLineLabel();
+				
+				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+			}
+		}
 	}
 }

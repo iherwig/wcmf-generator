@@ -1,5 +1,7 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
+import java.util.ArrayList;
+
 class Factory {
 
 	Figure createFigure(InfoFigureParameter figureInfo) {
