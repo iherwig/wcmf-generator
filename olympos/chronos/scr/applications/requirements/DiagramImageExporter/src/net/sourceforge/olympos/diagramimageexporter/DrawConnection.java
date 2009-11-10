@@ -16,17 +16,19 @@ public class DrawConnection {
 	double TOLxTOL = 0.01;
 	int MINDIST = 20;
 
-	public void drawConnection(Graphics2D g2d, InfoFigureParameter source, InfoFigureParameter target) {
+	public void drawConnection(Graphics2D g2d, InfoFigureParameter source, InfoFigureParameter target, String comment, EnumConnectionEnd sourceEnd, EnumConnectionEnd targetEnd) {
 		SVGGenerator svg = new SVGGenerator();
 
 		EnumDirection fromDirection, toDirection;
 
-		InfoFigureParameter sourceBox = new InfoFigureParameter(source.getX(), source.getY(), source.getWidth(), source.getHeight(), source.getType(), source.getLabel(), source.getDiagramid(), source.getAlias(), source.getObjectStatus());
+		InfoFigureParameter sourceBox = new InfoFigureParameter(source.getX(), source.getY(), source.getWidth(), source.getHeight(), source.getType(), source.getLabel(), source.getDiagramid(), source
+				.getAlias(), source.getObjectStatus());
 		sourceBox = source;
 		InfoCoordinate sourceCenter;
 		sourceCenter = getCenter(sourceBox);
 
-		InfoFigureParameter targetBox = new InfoFigureParameter(target.getX(), target.getY(), target.getWidth(), target.getHeight(), target.getType(), target.getLabel(), target.getDiagramid(), target.getAlias(), target.getObjectStatus());
+		InfoFigureParameter targetBox = new InfoFigureParameter(target.getX(), target.getY(), target.getWidth(), target.getHeight(), target.getType(), target.getLabel(), target.getDiagramid(), target
+				.getAlias(), target.getObjectStatus());
 		InfoCoordinate targetCenter;
 		targetCenter = getCenter(targetBox);
 
@@ -71,8 +73,11 @@ public class DrawConnection {
 			}
 			lastPoint = curPoint;
 		}
-		if(!source.getType().equals(EnumFigureType.DUMMY)||!target.getType().equals(EnumFigureType.DUMMY))
-		drawLabel(g2d, source, target, toPoint, toDirection, fromPoint, fromDirection, points);
+		// if (!source.getType().equals(EnumFigureType.DUMMY) ||
+		// !target.getType().equals(EnumFigureType.DUMMY))
+		drawLabel(g2d, source, target, toPoint, toDirection, fromPoint, fromDirection, points, comment);
+		DrawConnectionType connec = new DrawConnectionType();
+		connec.connection(g2d, source, target, toPoint, toDirection, fromPoint, fromDirection, sourceEnd, targetEnd);
 	}
 
 	private InfoCoordinate getCenter(InfoFigureParameter figure) {
@@ -109,7 +114,7 @@ public class DrawConnection {
 		return d;
 	}
 
-	private InfoCoordinate getManhattanMidpoint(ArrayList<InfoCoordinate> points) {
+	InfoCoordinate getManhattanMidpoint(ArrayList<InfoCoordinate> points) {
 		int index = 0;
 		InfoCoordinate p1 = new InfoCoordinate(0, 0);
 		InfoCoordinate p2 = new InfoCoordinate(0, 0);
@@ -245,20 +250,13 @@ public class DrawConnection {
 		return points;
 	}
 
-	private void drawLabel(Graphics2D g2d, InfoFigureParameter source, InfoFigureParameter target, InfoCoordinate toPoint, EnumDirection toDirection, InfoCoordinate fromPoint, EnumDirection fromDirection,
-			ArrayList<InfoCoordinate> points) {
+	private void drawLabel(Graphics2D g2d, InfoFigureParameter source, InfoFigureParameter target, InfoCoordinate toPoint, EnumDirection toDirection, InfoCoordinate fromPoint,
+			EnumDirection fromDirection, ArrayList<InfoCoordinate> points, String comment) {
 		g2d.setPaint(Color.white);
 		InfoCoordinate midPoint;
 		midPoint = getManhattanMidpoint(points);
 
-		ElementDiagram elem = ElementDiagram.getCatalogEntry(source.getType());
-		HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
-		InfoAllowedConnection figAllowedCatal2 = figAllowedCatal1.get(target.getType());
-
-		if(figAllowedCatal2 != null){
-		String comment = figAllowedCatal2.getLineLabel();
-		
-		Font b = new Font("Tahoma",Font.PLAIN,10);		
+		Font b = new Font("Tahoma", Font.PLAIN, 10);
 		g2d.setFont(b);
 		FontMetrics fm = g2d.getFontMetrics();
 
@@ -277,7 +275,7 @@ public class DrawConnection {
 			g2d.fill(new Rectangle(boxX, boxY, boxWidth + 7, boxHeight));
 			curX += wordWidth;
 		}
-		
+
 		fm = g2d.getFontMetrics();
 
 		for (String word : words) {
@@ -295,8 +293,5 @@ public class DrawConnection {
 			curX += wordWidth + 3;
 		}
 
-		DrawConnectionType connec = new DrawConnectionType();
-		connec.connection(g2d, source, target, toPoint, toDirection, fromPoint, fromDirection);
-	}
 	}
 }

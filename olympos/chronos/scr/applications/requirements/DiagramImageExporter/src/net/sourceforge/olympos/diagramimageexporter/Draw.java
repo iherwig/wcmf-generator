@@ -25,7 +25,8 @@ public class Draw {
 	SVGGenerator svg = new SVGGenerator();
 	FigureChildren ch = new FigureChildren();
 
-	public InfoCoordinate drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat) throws JDOMException, Exception {
+	@SuppressWarnings("static-access")
+	public InfoCoordinate drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat, ArrayList<String> existLine2) throws JDOMException, Exception {
 
 		// create following Objects
 		DrawFigure drawF = new DrawFigure();
@@ -45,7 +46,7 @@ public class Draw {
 
 		if (figureArray.size() <= 0) {
 
-			g2d.drawString("This image contains no Diagram", 100, 30);
+			g2d.drawString("This diagram contains no image ", 100, 30);
 
 		} else {
 
@@ -53,9 +54,9 @@ public class Draw {
 			maxCor = editDia.PutFigElementsTogehter(figureArray);
 
 			// draw all Figures / Images
-			for (InfoFigureParameter fig : figureArray) {
-				drawF.drawLabeledSimpleFigure(g2d, fig);
-			}
+//			for (InfoFigureParameter fig : figureArray) {
+//				drawF.drawLabeledSimpleFigure(g2d, fig,  currParent, currChildren);
+//			}
 
 			// draw all connections between the Figures
 			ArrayList<String> existLine = new ArrayList<String>();
@@ -63,17 +64,25 @@ public class Draw {
 			for (InfoFigureParameter currParent : Parent) {
 				if (currParent.getChildren() != null) {
 					ArrayList<InfoFigureParameter> children = currParent.getChildren();
-					for (InfoFigureParameter currChildren : children) {
-						String key = currParent.getAlias() + currParent.getAlias() + currParent.getType() + currChildren.getType() + currParent.getTypeId() + currChildren.getTypeId();
+//					for (InfoFigureParameter fig : figureArray) {
+					drawF.drawLabeledSimpleFigure(g2d, currParent, children);
+					
 
-						if (!existLine.contains(key)) {
-							drawC.drawConnection(g2d, currParent, currChildren);
-							existLine.add(key);
-						}
-					}
+//					for (InfoFigureParameter currChildren : children) {
+//					for (InfoFigureParameter fig : figureArray) {
+//					drawF.drawLabeledSimpleFigure(g2d, fig,  currParent, currChildren);
+//				}
+//						String key = currParent.getAlias() + currParent.getAlias() + currParent.getType() + currChildren.getType() + currParent.getTypeId() + currChildren.getTypeId();
+//
+//						if (!existLine.contains(key)) {
+//							drawC.drawConnection(g2d, currParent, currChildren);
+//							existLine.add(key);
+//						}
+//					}
 				}
 			}
 		}
+
 		// if (usedImageFormat.toLowerCase().equals("svg")) {
 
 		// write the data into a image out
@@ -96,7 +105,8 @@ public class Draw {
 
 		// else if (usedImageFormat.toLowerCase().equals("png")) {
 		PNGTranscoder t = new PNGTranscoder();
-		String fileImagePath = "file://" + imagePathSvg;
+		String fileImagePath = "file:///" + imagePathSvg;
+		System.out.println(fileImagePath);
 		TranscoderInput input = new TranscoderInput(fileImagePath);
 		try {
 			OutputStream ostream = new FileOutputStream(imagePath + id + ".png");

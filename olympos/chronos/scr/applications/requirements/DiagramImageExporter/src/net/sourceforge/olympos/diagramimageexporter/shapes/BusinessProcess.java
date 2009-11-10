@@ -1,13 +1,19 @@
 package net.sourceforge.olympos.diagramimageexporter.shapes;
 
 import java.awt.Graphics2D;
+import java.util.ArrayList;
+import java.util.HashMap;
 
+import net.sourceforge.olympos.diagramimageexporter.ElementDiagram;
+import net.sourceforge.olympos.diagramimageexporter.EnumFigureType;
 import net.sourceforge.olympos.diagramimageexporter.Figure;
+import net.sourceforge.olympos.diagramimageexporter.InfoAllowedConnection;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 
 
+@SuppressWarnings("serial")
 public class BusinessProcess extends Figure{
 	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 150, 50);
 	InfoCoordinateSize rect2 = new InfoCoordinateSize(0, 0, 0, 0);
@@ -49,16 +55,27 @@ public class BusinessProcess extends Figure{
 		return infLine2;
 	}
 	@Override
-	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
-//		drawScaleRec(g2d, fig, figureInfo, rect1);
-//		drawScaleRec(g2d, fig, figureInfo, rect2);
+	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children) {
 
-		drawScaleLine(g2d, fig, figureInfo, infLine1);
-		drawScaleLine(g2d, fig, figureInfo, infLine2);
-		drawScaleLine(g2d, fig, figureInfo, inLeft);
-		drawScaleLine(g2d, fig, figureInfo, inUp);
-		drawScaleLine(g2d, fig, figureInfo, inDown);
-		drawScaleLine(g2d, fig, figureInfo, inrightup);
-		drawScaleLine(g2d, fig, figureInfo, inrightdown);
+
+		drawScaleLine(g2d, createFig, figureInfo, infLine1);
+		drawScaleLine(g2d, createFig, figureInfo, infLine2);
+		drawScaleLine(g2d, createFig, figureInfo, inLeft);
+		drawScaleLine(g2d, createFig, figureInfo, inUp);
+		drawScaleLine(g2d, createFig, figureInfo, inDown);
+		drawScaleLine(g2d, createFig, figureInfo, inrightup);
+		drawScaleLine(g2d, createFig, figureInfo, inrightdown);
+		
+		for(InfoFigureParameter currChild : children){
+			ElementDiagram elem = ElementDiagram.getCatalogEntry(createFig.getType());
+			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
+			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
+
+			if (allowedConnection != null) {
+				String comment = allowedConnection.getLineLabel();
+				
+				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+			}
+		}
 	}
 }

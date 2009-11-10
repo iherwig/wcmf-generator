@@ -4,20 +4,23 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Shape;
-import java.awt.TextArea;
 import java.awt.geom.Ellipse2D;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-import javax.swing.JEditorPane;
 import javax.swing.JTextArea;
-import javax.swing.text.BadLocationException;
 
+import net.sourceforge.olympos.diagramimageexporter.ElementDiagram;
+import net.sourceforge.olympos.diagramimageexporter.EnumFigureType;
 import net.sourceforge.olympos.diagramimageexporter.Figure;
+import net.sourceforge.olympos.diagramimageexporter.InfoAllowedConnection;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 
 import org.apache.batik.svggen.SVGGraphics2D;
 
+@SuppressWarnings("serial")
 public class ChiBusinessUseCase extends Figure {
 
 	protected InfoCoordinateSize circle = new InfoCoordinateSize(0, 0, 114, 76);
@@ -42,10 +45,22 @@ public class ChiBusinessUseCase extends Figure {
 	}
 
 	@Override
-	public void draw(Graphics2D g2d, InfoFigureParameter createFig) {
+	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children) {
 		drawUseCase(g2d, createFig, figureInfo, circleBackground, circle);
 		drawScaleLine(g2d, createFig, figureInfo, line1);
 		drawScaleLabelUseCase(g2d, createFig, figureInfo);
+		
+		for(InfoFigureParameter currChild : children){
+			ElementDiagram elem = ElementDiagram.getCatalogEntry(createFig.getType());
+			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
+			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
+
+			if (allowedConnection != null) {
+				String comment = allowedConnection.getLineLabel();
+				
+				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+			}
+		}
 	}
 
 	protected void drawUseCase(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipseBg, InfoCoordinateSize ellipse) {

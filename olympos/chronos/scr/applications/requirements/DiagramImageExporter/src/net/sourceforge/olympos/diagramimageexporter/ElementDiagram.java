@@ -94,6 +94,7 @@ public class ElementDiagram {
 		addToCatalog(initChiWorkerExternal());
 		addToCatalog(initChiWorkerInternal());
 		addToCatalog(initDummy());
+		addToCatalog(initChiManyToMany());
 		
 		addToCatalog(initOperation());
 		addToCatalog(initAttribute());
@@ -275,6 +276,16 @@ public class ElementDiagram {
 	
 	////////////////////////////////////////////////////////////
 	//New Domain
+	private static ElementDiagram initChiManyToMany() {
+		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+
+		connections.put(EnumFigureType.CHI_NODE, new InfoAllowedConnection(ASSOCIATION, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+//		connections.put(EnumFigureType.CHI_CONTROLLER, new InfoAllowedConnection(ACTIONKEY, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		
+		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_NODE_MANY_TO_MANY, "ChiNodeManyToMany", EnumFontPosition.IN_CENTER, path + chi , connections);
+		return result;
+	}
+	
 	private static ElementDiagram initChiView() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 

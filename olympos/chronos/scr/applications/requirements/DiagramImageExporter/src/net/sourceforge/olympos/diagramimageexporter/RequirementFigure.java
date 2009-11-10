@@ -6,12 +6,15 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JTextArea;
 
 import org.apache.batik.svggen.SVGGraphics2D;
 
+@SuppressWarnings("serial")
 public abstract class RequirementFigure extends Figure{
 	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 150 , 50);
 	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 150 , 50);
@@ -70,7 +73,7 @@ public abstract class RequirementFigure extends Figure{
 		
 	}
 	@Override
-	public void draw(Graphics2D g2d, InfoFigureParameter fig) {
+	public void draw(Graphics2D g2d,InfoFigureParameter fig, ArrayList<InfoFigureParameter> Children) {
 
 		drawScaleRec(g2d, fig, figureInfo, rect1);
 
@@ -80,5 +83,17 @@ public abstract class RequirementFigure extends Figure{
 		drawRequLabel(g2d,fig,figureInfo, rect1, infLine2);
 		
 		drawImg(g2d, fig);
+			
+		for(InfoFigureParameter currChild : Children){
+			ElementDiagram elem = ElementDiagram.getCatalogEntry(fig.getType());
+			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
+			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
+
+			if (allowedConnection != null) {
+				String comment = allowedConnection.getLineLabel();
+				
+			drawCon.drawConnection(g2d, fig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+			}
+		}
 	}
 }
