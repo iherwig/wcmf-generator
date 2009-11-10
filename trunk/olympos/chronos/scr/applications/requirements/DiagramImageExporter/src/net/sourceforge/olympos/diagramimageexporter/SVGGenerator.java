@@ -47,6 +47,9 @@ public class SVGGenerator {
 	}
 	public static void generateImages(String sourceFile, String targetDir, String iconDir, String usedImageFormat) throws Exception {
 
+		//we don't require an X11 server on Unix
+		System.setProperty("java.awt.headless", "true");
+		
 		// create the target directory if not existing
 		File target = new File(targetDir);
 		if (!target.isDirectory()) {
