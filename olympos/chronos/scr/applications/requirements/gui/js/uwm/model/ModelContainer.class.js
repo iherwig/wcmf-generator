@@ -358,7 +358,7 @@ uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentN
 	var longTaskRunner = new uwm.ui.LongTaskRunner( {
 			title : uwm.Dict.translate('Copying Object ...'),
 			call : function(successHandler, errorHandler) {
-				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), parentNode.getOid(), true, successHandler, errorHandler);
+				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), parentNode.getOid(), false, successHandler, errorHandler);
 			},
 			successHandler : function(data) {
 				uwm.persistency.Persistency.getInstance().display(data.oid, 0, 
