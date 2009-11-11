@@ -165,6 +165,13 @@ public class TestHtmlConverter {
 	}
 	
 	@Test
+	public void testUnorderedListNested() throws Exception {
+		String result = HtmlConverter.html2openoffice("<ul><li>1</li><li>2</li><li>3<ul><li>3.1</li><li>3.2</li><li><ul><li>3.3.1</li><li>3.3.2</li></ul></li></ul></li><li>4</li></ul>");
+		
+		assertEquals("<text:list xml:id=\"id001\" text:style-name=\"uwmUl\"><text:list-item><text:p text:style-name=\"uwmUlP\"><text:span text:style-name=\"uwmDefault\">1</text:span></text:p></text:list-item><text:list-item><text:p text:style-name=\"uwmUlP\"><text:span text:style-name=\"uwmDefault\">2</text:span></text:p></text:list-item><text:list-item><text:p text:style-name=\"uwmUlP\"><text:span text:style-name=\"uwmDefault\">3</text:span></text:p><text:list xml:id=\"id001\" text:style-name=\"uwmUl\"><text:list-item><text:p text:style-name=\"uwmUlP\"><text:span text:style-name=\"uwmDefault\">3.1</text:span></text:p></text:list-item><text:list-item><text:p text:style-name=\"uwmUlP\"><text:span text:style-name=\"uwmDefault\">3.2</text:span></text:p></text:list-item><text:list-item><text:list xml:id=\"id001\" text:style-name=\"uwmUl\"><text:list-item><text:p text:style-name=\"uwmUlP\"><text:span text:style-name=\"uwmDefault\">3.3.1</text:span></text:p></text:list-item><text:list-item><text:p text:style-name=\"uwmUlP\"><text:span text:style-name=\"uwmDefault\">3.3.2</text:span></text:p></text:list-item></text:list></text:list-item></text:list></text:list-item><text:list-item><text:p text:style-name=\"uwmUlP\"><text:span text:style-name=\"uwmDefault\">4</text:span></text:p></text:list-item></text:list>", result);
+	}
+	
+	@Test
 	public void testOrderedListDefault() throws Exception {
 		String result = HtmlConverter.html2openoffice("<ol><li>text1</li><li>text2</li></ol>");
 		
