@@ -85,7 +85,7 @@ public class SVGGenerator {
 		Element root = new Element("diagramExport");
 		doc.setRootElement(root);
 
-		XmlReader xml = new XmlReader();
+		XmlReader xml = new XmlReader(svg);
 		xml.XML(sourceFile);
 		
 		ArrayList<String> existLine = new ArrayList<String>();
@@ -95,7 +95,7 @@ public class SVGGenerator {
 		for (InfoXmlDiagram currDia : xmlDia) {
 			existLine = null;
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
-			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat, existLine);
+			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat, existLine, svg);
 
 			if (maxCor != null) {
 				int widthInt = (int) maxCor.getX();
