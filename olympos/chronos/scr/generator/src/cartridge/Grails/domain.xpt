@@ -34,7 +34,7 @@ package «fullQualifiedPackage»
 /**
  * «this.getComment("\n * ")»
  */
-«REM avoiding abstract bug in Grails»«IF this.isAbstract»abstract «ENDIF-»«ENDREM-»
+«REM» avoiding abstract bug in Grails«IF this.isAbstract»abstract «ENDIF-»«ENDREM-»
 class «name-» 
 «IF !this.superClass.select(e|!e.isLibraryClass()).isEmpty» extends «this.superClass.first().name»«ENDIF»
 {
@@ -79,7 +79,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	/*
 	static mappedBy = [
 «FOREACH relatives AS relative SEPARATOR ","-»
-		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»«relative.type.getHierarchyRole(relative.getOtherEnd())»"
+		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»"
 «ENDFOREACH-»
 	]
 	*/
@@ -91,7 +91,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	static mapping = {
 			tablePerHierarchy false
 «FOREACH this.getNotAbstractNavigableChildNodes() AS child-»
-«LET child.getRoleName().toFirstLower().sanitizeType()+this.getHierarchyRole(child) AS name-»
+«LET child.getRoleName().toFirstLower().sanitizeType() AS name-»
 «IF child.aggregation == AggregationKind::composite-»
 			«name»: "create,save-update"
 «ELSEIF child.aggregation == AggregationKind::shared-»
@@ -109,7 +109,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()).select(e|e.association.isOneToOneAssociation()) AS others-»
 «IF others.size > 0»
 «FOREACH others AS other-»
-	«other.type.name.sanitizeType()» «other.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(other)»
+	«other.type.name.sanitizeType()» «other.getRoleName().toFirstLower().sanitizeType()»
 «ENDFOREACH-»
 «ENDIF-»
 «ENDLET-»
@@ -126,7 +126,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «IF parents.size > 0-»
 	static belongsTo = [
 	«FOREACH parents AS parent SEPARATOR ","-»
-		«parent.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(parent)»: «parent.type.name»
+		«parent.getRoleName().toFirstLower().sanitizeType()»: «parent.type.name»
 	«ENDFOREACH-»
 	]
 «ENDIF-»
@@ -139,7 +139,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «IF children.size > 0»
 	static hasMany = [
 «FOREACH children AS child SEPARATOR ","-»
-		«child.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(child)»: «child.type.name»
+		«child.getRoleName().toFirstLower().sanitizeType()»: «child.type.name»
 «ENDFOREACH-»
 	]
 «ENDIF-»
@@ -148,18 +148,22 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» fill constraints for attributes  «ENDREM»
 «DEFINE Constraints FOR ChiNode-»
-«LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()) AS constraintAttributes-»
+«LET {}
+	.addAll(this.getNotAbstractNavigableParentNodes())
+	.addAll(this.getNotAbstractNavigableChildNodes())
+	.addAll(this.getOwnChiAttributes())
+ AS constraintAttributes-»
 «IF constraintAttributes.size > 0-»
 	static constraints = {
 	«FOREACH constraintAttributes AS c-»
 		«LET {
 			c.hasRestrictionsMatch() ? "matches: \"" + c.getTaggedValue("Chronos::ChiValue", "restrictions_match") + "\"" : null,
-			c.isNullable() ? "nullable: true" : "nullable: false",
+			c.isNullable() ? "nullable: true" : "nullable: true", /*TODO: temporary reset, second one should be false*/
 			c.association != null && c.lowerBound() > 0 ? "minSize: " + c.lowerBound() : null,
 			c.association != null && c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
 		}.select(e|e != null)
 		AS constraints»
-			«c.getPropertyName().sanitizeType()»«this.getHierarchyRole(c)»(
+			«c.getPropertyName().sanitizeType()»(
 				«FOREACH constraints AS constraint SEPARATOR ", "»«constraint»«ENDFOREACH»
 			)
 		«ENDLET-»
