@@ -34,7 +34,7 @@ cwb.persistency.Json.prototype.jsonRequest = function(params, successHandler, er
 		url: this.jsonUrl,
 		method: "post",
 		params: params,
-		timeout: 180000,
+		timeout: cwb.Constants.AJAX_TIMEOUT,
 		callback: function(options, success, response) {
 			if (success) {
 				var data = Ext.util.JSON.decode(response.responseText);
