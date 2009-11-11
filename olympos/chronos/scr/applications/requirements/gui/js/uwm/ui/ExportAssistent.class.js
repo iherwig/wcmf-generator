@@ -218,7 +218,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 			var doctypeSelected = docTypeFormItem.getForm().getValues().docformat;
 			var diagramSelected = docTypeFormItem.getForm().getValues().diagrams;
 			var gridSelectedIndex = grid.selModel.lastActive;
-			if (!gridSelectedIndex) {
+			if (gridSelectedIndex === null) {
 				// export format unknown
 				return;
 			}
