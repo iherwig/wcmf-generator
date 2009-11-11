@@ -30,7 +30,7 @@ public class Draw {
 
 		// create following Objects
 		DrawFigure drawF = new DrawFigure();
-		DrawConnection drawC = new DrawConnection();
+		// DrawConnection drawC = new DrawConnection();
 		FigureDiagram editDia = new FigureDiagram();
 		String imagePathSvg = imagePath + id + ".svg";
 		InfoCoordinate maxCor = new InfoCoordinate(300, 60);
@@ -43,42 +43,28 @@ public class Draw {
 		PrintStream os;
 		SVGGeneratorContext ctx = SVGGeneratorContext.createDefault(myFactory);
 		SVGGraphics2D g2d = new SVGGraphics2D(ctx, false);
+		SVGGenerator svg = new SVGGenerator();
+		ArrayList<InfoXmlFigure> objekte = svg.getxmlFigure();
 
-		if (figureArray.size() <= 0) {
-
-			g2d.drawString("This diagram contains no image ", 100, 30);
-
+		if(objekte == null){
+			g2d.drawString("This diagram contains no image.", 100, 30);
+		}
+		
+		else if (figureArray == null) {
+			g2d.drawString("This diagram contains no image.", 100, 30);
+			
 		} else {
 
 			// edit Diagram
 			maxCor = editDia.PutFigElementsTogehter(figureArray);
 
-			// draw all Figures / Images
-//			for (InfoFigureParameter fig : figureArray) {
-//				drawF.drawLabeledSimpleFigure(g2d, fig,  currParent, currChildren);
-//			}
-
-			// draw all connections between the Figures
-			ArrayList<String> existLine = new ArrayList<String>();
+			// ArrayList<String> existLine = new ArrayList<String>();
 			ArrayList<InfoFigureParameter> Parent = figureArray;
 			for (InfoFigureParameter currParent : Parent) {
 				if (currParent.getChildren() != null) {
 					ArrayList<InfoFigureParameter> children = currParent.getChildren();
-//					for (InfoFigureParameter fig : figureArray) {
 					drawF.drawLabeledSimpleFigure(g2d, currParent, children);
-					
 
-//					for (InfoFigureParameter currChildren : children) {
-//					for (InfoFigureParameter fig : figureArray) {
-//					drawF.drawLabeledSimpleFigure(g2d, fig,  currParent, currChildren);
-//				}
-//						String key = currParent.getAlias() + currParent.getAlias() + currParent.getType() + currChildren.getType() + currParent.getTypeId() + currChildren.getTypeId();
-//
-//						if (!existLine.contains(key)) {
-//							drawC.drawConnection(g2d, currParent, currChildren);
-//							existLine.add(key);
-//						}
-//					}
 				}
 			}
 		}
@@ -103,22 +89,23 @@ public class Draw {
 		}
 		// }
 
-		// else if (usedImageFormat.toLowerCase().equals("png")) {
-		PNGTranscoder t = new PNGTranscoder();
-		String fileImagePath = "file:///" + imagePathSvg;
-		System.out.println(fileImagePath);
-		TranscoderInput input = new TranscoderInput(fileImagePath);
-		try {
-			OutputStream ostream = new FileOutputStream(imagePath + id + ".png");
-			t.addTranscodingHint(t.KEY_WIDTH, new Float(maxCor.getX()));
-			t.addTranscodingHint(t.KEY_HEIGHT, new Float(maxCor.getY()));
+		if (usedImageFormat.toLowerCase().equals("png")) {
 
-			TranscoderOutput output = new TranscoderOutput(ostream);
-			t.transcode(input, output);
-			ostream.flush();
-			ostream.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+			PNGTranscoder t = new PNGTranscoder();
+			String fileImagePath = "file:///" + imagePathSvg;
+			TranscoderInput input = new TranscoderInput(fileImagePath);
+			try {
+				OutputStream ostream = new FileOutputStream(imagePath + id + ".png");
+				t.addTranscodingHint(t.KEY_WIDTH, new Float(maxCor.getX()));
+				t.addTranscodingHint(t.KEY_HEIGHT, new Float(maxCor.getY()));
+
+				TranscoderOutput output = new TranscoderOutput(ostream);
+				t.transcode(input, output);
+				ostream.flush();
+				ostream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return maxCor;
 	}

@@ -10,7 +10,6 @@ import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
