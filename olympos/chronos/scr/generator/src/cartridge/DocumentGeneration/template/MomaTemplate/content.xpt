@@ -1355,6 +1355,25 @@
 	«ENDIF»
 «ENDDEFINE»
 
+«DEFINE analysisPackage(int outlineLevel) FOR Chronos::ChiDiagram»
+	<text:h text:style-name="Heading_20_«outlineLevel.getOutlineLevel()»" text:outline-level="«outlineLevel.getOutlineLevel()»">«this.name.replaceXmlChars()»</text:h>
+	«this.getComment().sanitizeHtml()»
+	<text:p text:style-name="P50">&lt;&lt;package.diagramm&gt;&gt;</text:p>
+	
+	«LET getDiagramModel().getImage(this.Alias) AS image»
+		«LET image.getScaledWidth(14.5, 20) AS width»
+			«LET image.getScaledHeight(14.5, 20) AS height»
+				<text:p text:style-name="Standard">
+					<draw:frame draw:style-name="fr1" draw:name="Grafik1" text:anchor-type="paragraph" svg:width="«width»cm" svg:height="«height»cm" draw:z-index="0">
+						<draw:image xlink:href="Pictures/«image.filename»" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
+					</draw:frame>
+				</text:p>
+			«ENDLET»
+		«ENDLET»
+	«ENDLET»
+«ENDDEFINE»
+
+
 «DEFINE analysisClass(int outlineLevel) FOR uml::Element»
 	<text:h text:style-name="Heading_20_«outlineLevel.getOutlineLevel()»" text:outline-level="«outlineLevel.getOutlineLevel()»">«this.getGermanName()»: «this.name.replaceXmlChars()»</text:h>
 	<text:p text:style-name="P42">Beschreibung:</text:p>
@@ -1440,6 +1459,24 @@
 		
 		«EXPAND processPackage(outlineLevel + 1) FOREACH this.nestedPackage.typeSelect(uml::Package)»
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE processPackage(int outlineLevel) FOR Chronos::ChiDiagram»
+	<text:h text:style-name="Heading_20_«outlineLevel.getOutlineLevel()»" text:outline-level="«outlineLevel.getOutlineLevel()»">«this.name.replaceXmlChars()»</text:h>
+	«this.getComment().sanitizeHtml()»
+	<text:p text:style-name="P50">&lt;&lt;package.diagramm&gt;&gt;</text:p>
+	
+	«LET getDiagramModel().getImage(this.Alias) AS image»
+		«LET image.getScaledWidth(14.5, 20) AS width»
+			«LET image.getScaledHeight(14.5, 20) AS height»
+				<text:p text:style-name="Standard">
+					<draw:frame draw:style-name="fr1" draw:name="Grafik1" text:anchor-type="paragraph" svg:width="«width»cm" svg:height="«height»cm" draw:z-index="0">
+						<draw:image xlink:href="Pictures/«image.filename»" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
+					</draw:frame>
+				</text:p>
+			«ENDLET»
+		«ENDLET»
+	«ENDLET»
 «ENDDEFINE»
 
 «DEFINE processActor(int outlineLevel) FOR uml::Actor»
