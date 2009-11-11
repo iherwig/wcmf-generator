@@ -107,7 +107,7 @@ class OawUtil {
 			2=> array ('pipe', 'w')
 		);
 	
-		$cmd = 'java -Djava.library.path=./lib/ -jar ' . self::$executable . " $relativeWorkflowPath -basePath=. \"-propertyFile=$propertyFilePath\"";
+		$cmd = 'java -Xmx1G -Djava.library.path=./lib/ -jar ' . self::$executable . " $relativeWorkflowPath -basePath=. \"-propertyFile=$propertyFilePath\"";
 
 		$process = proc_open($cmd, $descriptorspec, $pipes, self::$cwd, $_ENV);
 	

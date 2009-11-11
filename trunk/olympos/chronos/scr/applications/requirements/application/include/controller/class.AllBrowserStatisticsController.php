@@ -51,6 +51,7 @@ class AllBrowserStatisticsController extends BatchController
 
 	private $TEMP_WORKING_DIR = 'AllBrowserStatisticsController.tmpWorkingDir';
 	private $TEMP_UWM_EXPORT_PATH = 'AllBrowserStatisticsController.tmpUwmExportPath';
+	private $TEMP_PROPERTIES_PATH = 'AllBrowserStatisticsController.tmpPropertiesPath';
 
 	private $PROBLEM_REPORT = 'AllBrowserStatisticsController.problemReport';
 	private $lastTime = 0;
@@ -101,9 +102,25 @@ class AllBrowserStatisticsController extends BatchController
 		}
 		elseif ($number == 1)
 		{
-			return array('name' => 'Run the generator', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAW');
+			return array('name' => 'Initialize the generator', 'size' => 1, 'oids' => array(0), 'callback' => 'initOAW');
 		}
 		elseif ($number == 2)
+		{
+			return array('name' => 'Run the generator step 1', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep0');
+		}
+		elseif ($number == 3)
+		{
+			return array('name' => 'Run the generator step 2', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep1');
+		}
+		elseif ($number == 4)
+		{
+			return array('name' => 'Run the generator step 3', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep2');
+		}
+		elseif ($number == 5)
+		{
+			return array('name' => 'Run the generator step 4', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep3');
+		}
+		elseif ($number == 6)
 		{
 			return array('name' => 'Clean up', 'size' => 1, 'oids' => array(0), 'callback' => 'finish');
 		}
@@ -163,11 +180,64 @@ class AllBrowserStatisticsController extends BatchController
 		ExportShutdownHandler::success();
 	}
 	/**
-	 * Run the gererator
+	 * Initialize the gererator
 	 * @param oids The oids to process
 	 * @note This is a callback method called on a matching work package @see BatchController::addWorkPackage()
 	 */
-	function runOAW($oids)
+	function initOAW($oids)
+	{
+		$session = &SessionData::getInstance();
+		$workingDir = $session->get($this->TEMP_WORKING_DIR);
+		$tmpUwmExportPath = $session->get($this->TEMP_UWM_EXPORT_PATH);
+		$tmpPropertiesPath = OawUtil::createPropertyFile('file://'.$tmpUwmExportPath, $workingDir);
+		$session->set($this->TEMP_PROPERTIES_PATH, $tmpPropertiesPath);
+	
+		// create the result files
+		OawUtil::createTempFile($workingDir.'/statistics/browser.dat');
+		OawUtil::createTempFile($workingDir.'/barchart/browser.dat');
+		OawUtil::createTempFile($workingDir.'/piechart/browser.dat');
+	}
+	/**
+	 * Run the gererator step 0
+	 * @param oids The oids to process
+	 * @note This is a callback method called on a matching work package @see BatchController::addWorkPackage()
+	 */
+	function runOAWStep0($oids)
+	{
+		$this->runOAW('cartridge/BrowserStatistics/workflow/step0_cwm2uml.oaw');
+	}
+	/**
+	 * Run the gererator step 1
+	 * @param oids The oids to process
+	 * @note This is a callback method called on a matching work package @see BatchController::addWorkPackage()
+	 */
+	function runOAWStep1($oids)
+	{
+		$this->runOAW('cartridge/BrowserStatistics/workflow/step1_statisticsPhp.oaw');
+	}
+	/**
+	 * Run the gererator step 2
+	 * @param oids The oids to process
+	 * @note This is a callback method called on a matching work package @see BatchController::addWorkPackage()
+	 */
+	function runOAWStep2($oids)
+	{
+		$this->runOAW('cartridge/BrowserStatistics/workflow/step2_barchart.oaw');
+	}
+	/**
+	 * Run the gererator step 3
+	 * @param oids The oids to process
+	 * @note This is a callback method called on a matching work package @see BatchController::addWorkPackage()
+	 */
+	function runOAWStep3($oids)
+	{
+		$this->runOAW('cartridge/BrowserStatistics/workflow/step3_piechart.oaw');
+	}
+	/**
+	 * Run the gererator with the given workflow
+	 * @param workflow The wotkflow file
+	 */
+	function runOAW($workflow)
 	{
 		require_once ('class.ExportShutdownHandler.php');
 		$session = &SessionData::getInstance();
@@ -176,21 +246,11 @@ class AllBrowserStatisticsController extends BatchController
 		
 		// create the configuration file
 		$workingDir = $session->get($this->TEMP_WORKING_DIR);
-		$umlPath = $session->get($this->TEMP_UWM_EXPORT_PATH);
-		$propertyPath = "$workingDir/browserStatistics.properties";
-		$propertyFile = fopen($propertyPath, 'w');
-		fwrite($propertyFile, 'workingDir = '.$workingDir."\n");
-		fwrite($propertyFile, "umlFile = $umlPath\n");
-		fclose($propertyFile);
-	
-		// create the result files
-		$statisticsFile = OawUtil::createTempFile($workingDir.'/statistics/browser.dat');
-		$barchartFile = OawUtil::createTempFile($workingDir.'/barchart/browser.dat');
-		$piechartFile = OawUtil::createTempFile($workingDir.'/piechart/browser.dat');
+		$tmpPropertiesPath = $session->get($this->TEMP_PROPERTIES_PATH);
 	
 		// run the generator
-		$this->check("start generator");
-		$result = OawUtil::runOaw($propertyPath, 'cartridge/BrowserStatistics/workflow/allInOne.oaw');
+		$this->check("start generator workflow: ".$workflow);
+		$result = OawUtil::runOaw($tmpPropertiesPath, $workflow);
 		$this->check('finished generator');
 
 		if ($result['returncode'] > 0) {
@@ -199,9 +259,9 @@ class AllBrowserStatisticsController extends BatchController
 		}
 
 		// set the result in the session
-		include($statisticsFile);
-		include($barchartFile);
-		include($piechartFile);
+		include($workingDir.'/statistics/browser.dat');
+		include($workingDir.'/barchart/browser.dat');
+		include($workingDir.'/piechart/browser.dat');
 
 		$session->set('statistics', $statisticsData);
 		$session->set('barchart', $barchartData);
@@ -218,6 +278,7 @@ class AllBrowserStatisticsController extends BatchController
 	{
 		// cleanup
 		$session = &SessionData::getInstance();
+		unlink($session->get($this->TEMP_PROPERTIES_PATH));
 		$workingDir = $session->get($this->TEMP_WORKING_DIR);
 		FileUtil::emptyDir($workingDir);
 		rmdir($workingDir);

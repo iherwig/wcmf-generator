@@ -47,7 +47,7 @@ class UwmUtil {
 	private static function check($msg)
 	{
 		$newTime = microtime(true);
-		Log::debug(($newTime - self::$lastTime).": $msg", __CLASS__);
+		Log::debug(($newTime - self::$lastTime).": $msg. Bytes used: ".memory_get_usage(true), __CLASS__);
 		self::$lastTime = $newTime;
 	}
 
