@@ -1,0 +1,26 @@
+<workflow>
+	<property name="basePath" value="src" />
+
+	<property name="propertyFile" value="${basePath}/cartridge/BrowserStatistics/workflow/statistics.properties" />
+	<property file="${propertyFile}" />
+
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${outputRelativePath}/uml-generated.uml"/>
+		<outputSlot value="uml2model"/>
+	</component>
+
+	<component class="oaw.xpand2.Generator" skipOnErrors="true">
+		<fileEncoding value="utf-8"/>
+		
+		<metaModel id="uml2"
+			class="oaw.uml2.UML2MetaModel" />
+		<metaModel id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
+			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
+		</metaModel>
+		<expand value="cartridge::BrowserStatistics::statisticsPhp::file FOR uml2model"/>
+		
+		<outlet path="${outputRelativePath}/statistics" />
+	</component>
+</workflow>
