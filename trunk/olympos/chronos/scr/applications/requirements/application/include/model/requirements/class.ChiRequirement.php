@@ -29,8 +29,22 @@ require_once(BASE."application/include/model/requirements/class.ChiRequirementBa
 class ChiRequirement extends ChiRequirementBase
 {
 // PROTECTED REGION ID(application/include/model/requirements/class.ChiRequirement.php/Body) ENABLED START
-public function draw($image, $xPos, $yPos, $width, $height) {
+	public function draw($image, $xPos, $yPos, $width, $height) {
 		ExportDiagramImageController::drawRectangleFigure($image, $xPos, $yPos, $width, $height, $this->getDisplayValue(), 'ChiRequirement');
+	}
+
+	/**
+	 * @see ChiBase::getDefaultStatus()
+	 * This implementation returns the id of the first ChiRequirementStatus object found.
+	 */
+	function getDefaultStatus()
+	{
+		$persistenceFacade = &PersistenceFacade::getInstance(); 
+		$status = &$persistenceFacade->loadFirstObject('ChiRequirementStatus', BUIDLDEPTH_SINGLE);
+		if ($status != null) {
+			return $status->getDBID();
+		}
+		return null;
 	}
 // PROTECTED REGION END
 }
