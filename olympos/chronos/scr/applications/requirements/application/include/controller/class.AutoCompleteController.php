@@ -78,7 +78,7 @@ class AutoCompleteController extends Controller
 			foreach ($domObj as $key=>$val){
 				$objQuery = &$persistenceFacade->createObjectQuery($val);
 				$objTpl = & $objQuery->getObjectTemplate($val);
-				$objTpl->setValue("Name", $searchstring, DATATYPE_ATTRIBUTE);
+				$objTpl->setValue("Name", "LIKE = '%".$searchstring."%'", DATATYPE_ATTRIBUTE);
 				$pagingInfo = new PagingInfo($searchlimitend);
 				$pagingInfo->setIndex($searchlimitstart);
 				$objlistpart = $objQuery->execute(BUILDDEPTH_SINGLE, null, $pagingInfo);
