@@ -34,6 +34,19 @@ class ChiFeature extends ChiFeatureBase
 		ExportDiagramImageController::drawRectangleFigure($image, $xPos, $yPos, $width, $height, $this->getDisplayValue(), 'ChiFeature');
 	}
 	
+	/**
+	 * @see ChiBase::getDefaultStatus()
+	 * This implementation returns the id of the first ChiFeatureStatus object found.
+	 */
+	function getDefaultStatus()
+	{
+		$persistenceFacade = &PersistenceFacade::getInstance(); 
+		$status = &$persistenceFacade->loadFirstObject('ChiFeatureStatus', BUIDLDEPTH_SINGLE);
+		if ($status != null) {
+			return $status->getDBID();
+		}
+		return null;
+	}
 // PROTECTED REGION END
 }
 ?>

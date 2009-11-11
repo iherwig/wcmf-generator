@@ -34,7 +34,8 @@ class ChiBase extends ChiBaseBase
 	function beforeInsert() 
 	{
 		parent::beforeInsert();
-		$this->setAlias();
+		$this->setDefaultAlias();
+		$this->setDefaultStatus();
 	}
 	function afterLoad()
 	{
@@ -44,13 +45,13 @@ class ChiBase extends ChiBaseBase
 		{
 			if (strlen($this->getAlias()) == 0)
 			{
-				$this->setAlias();
+				$this->setDefaultAlias();
 				$this->save();
 			}
 		}
   }
 	
-	function setAlias()
+	function setDefaultAlias()
 	{
 		// set alias on nodes with appropriate attribute
 		if (in_array('Alias', $this->getValueNames(DATATYPE_ATTRIBUTE)))
@@ -188,6 +189,27 @@ class ChiBase extends ChiBaseBase
     
 			$this->setValue('Alias', sprintf('%s%03u%s',$praefix,$count,$suffix), DATATYPE_ATTRIBUTE);
 		}
+	}
+
+	function setDefaultStatus()
+	{
+		$defaultStatus = $this->getDefaultStatus();
+		$this->setValue('Status', $defaultStatus, DATATYPE_ATTRIBUTE);
+	}
+	
+	/**
+	 * Get the default status id value for this instance. The base implementation
+	 * returns the id of the first ChiBaseStatus object found. Subclasses may return another status.
+	 * @return An id of the default status.
+	 */
+	function getDefaultStatus()
+	{
+		$persistenceFacade = &PersistenceFacade::getInstance(); 
+		$status = &$persistenceFacade->loadFirstObject('ChiBaseStatus', BUIDLDEPTH_SINGLE);
+		if ($status != null) {
+			return $status->getDBID();
+		}
+		return null;
 	}
 // PROTECTED REGION END
 }
