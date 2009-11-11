@@ -14,9 +14,10 @@ public class XmlReader {
 	Document doc;
 
 	Draw dr = new Draw();
-	SVGGenerator svg = new SVGGenerator();
+	SVGGenerator svg;
 
-	XmlReader() {
+	XmlReader(SVGGenerator svg) {
+		this.svg = svg;
 	}
 
 	public ArrayList<InfoFigureParameter> XML(String Path) {

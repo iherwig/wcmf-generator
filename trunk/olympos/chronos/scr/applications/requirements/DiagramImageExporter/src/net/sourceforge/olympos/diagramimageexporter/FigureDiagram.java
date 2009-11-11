@@ -3,9 +3,8 @@ package net.sourceforge.olympos.diagramimageexporter;
 import java.util.ArrayList;
 
 public class FigureDiagram {
-	SVGGenerator svg = new SVGGenerator();
 
-	public InfoCoordinate PutFigElementsTogehter(ArrayList<InfoFigureParameter> figureArray) {
+	public InfoCoordinate PutFigElementsTogehter(ArrayList<InfoFigureParameter> figureArray, SVGGenerator svg) {
 		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
 		ArrayList<InfoXmlFigure> xmlFig = svg.getxmlFigure();
 
@@ -104,7 +103,7 @@ public class FigureDiagram {
 			}
 		}
 
-		addChild(xmlFig, xmlDia);
+		addChild(xmlFig, xmlDia, svg);
 		if (figureArray.size() != 0) {
 			InfoCoordinate maxCor = setSize(figureArray);
 			return maxCor;
@@ -112,7 +111,7 @@ public class FigureDiagram {
 		return null;
 	}
 
-	private void addChild(ArrayList<InfoXmlFigure> xmlFig, ArrayList<InfoXmlDiagram> xmlDia) {
+	private void addChild(ArrayList<InfoXmlFigure> xmlFig, ArrayList<InfoXmlDiagram> xmlDia, SVGGenerator svg) {
 
 		for (InfoXmlDiagram currDia : xmlDia) {
 			String idFigure = null;
@@ -152,7 +151,7 @@ public class FigureDiagram {
 																if (currxmlFig3.getTargetType() != null) {
 																	if (currxmlFig3.getTargetType().equals("Figure")) {
 																		targetOidXmlFigure = currxmlFig3.getTargetOid();
-																		addChildren(idFigure, targetOidXmlFigure, typFigure);
+																		addChildren(idFigure, targetOidXmlFigure, typFigure,svg);
 																	}
 																}
 															}
@@ -169,10 +168,10 @@ public class FigureDiagram {
 				}
 			}
 		}
-		svg.xmlFigNull();
+//		svg.xmlFigNull();
 	}
 
-	private void addChildren(String figId, String figId2, String typ) {
+	private void addChildren(String figId, String figId2, String typ, SVGGenerator svg) {
 		ArrayList<InfoXmlDiagram> dia = svg.getDiagram();
 		for (InfoXmlDiagram currDia : dia) {
 			ArrayList<InfoFigureParameter> figure = currDia.getFigure();

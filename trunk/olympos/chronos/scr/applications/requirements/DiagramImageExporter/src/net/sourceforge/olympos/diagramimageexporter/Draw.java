@@ -21,12 +21,10 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
 public class Draw {
-
-	SVGGenerator svg = new SVGGenerator();
-	FigureChildren ch = new FigureChildren();
+//	FigureChildren ch = new FigureChildren();
 
 	@SuppressWarnings("static-access")
-	public InfoCoordinate drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat, ArrayList<String> existLine2) throws JDOMException, Exception {
+	public InfoCoordinate drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat, ArrayList<String> existLine2, SVGGenerator svg) throws JDOMException, Exception {
 
 		// create following Objects
 		DrawFigure drawF = new DrawFigure();
@@ -43,7 +41,6 @@ public class Draw {
 		PrintStream os;
 		SVGGeneratorContext ctx = SVGGeneratorContext.createDefault(myFactory);
 		SVGGraphics2D g2d = new SVGGraphics2D(ctx, false);
-		SVGGenerator svg = new SVGGenerator();
 		ArrayList<InfoXmlFigure> objekte = svg.getxmlFigure();
 
 		if(objekte == null){
@@ -56,7 +53,7 @@ public class Draw {
 		} else {
 
 			// edit Diagram
-			maxCor = editDia.PutFigElementsTogehter(figureArray);
+			maxCor = editDia.PutFigElementsTogehter(figureArray, svg);
 
 			// ArrayList<String> existLine = new ArrayList<String>();
 			ArrayList<InfoFigureParameter> Parent = figureArray;
