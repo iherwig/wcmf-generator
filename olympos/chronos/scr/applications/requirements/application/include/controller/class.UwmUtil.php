@@ -478,8 +478,9 @@ class UwmUtil {
 			if (PersistenceFacade::getOIDParameter($poid, 'type') != 'Diagram') {
 				$persistenceFacade = &PersistenceFacade::getInstance();
 				$obj = &$persistenceFacade->load($poid, BUILDDEPTH_SINGLE);
-				$alias = $obj->getValue('Alias', DATATYPE_ATTRIBUTE);
-				
+				if ($obj) {
+					$alias = $obj->getValue('Alias', DATATYPE_ATTRIBUTE);
+				}
 				// store the referenced node in order to make sure that it is included in the export
 				array_push(self::$referencedNodes, $poid);
 				break;
