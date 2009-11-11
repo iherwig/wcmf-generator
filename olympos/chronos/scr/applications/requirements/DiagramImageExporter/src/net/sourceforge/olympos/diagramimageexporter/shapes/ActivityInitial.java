@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import net.sourceforge.olympos.diagramimageexporter.Figure;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
-import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 
 
 @SuppressWarnings("serial")

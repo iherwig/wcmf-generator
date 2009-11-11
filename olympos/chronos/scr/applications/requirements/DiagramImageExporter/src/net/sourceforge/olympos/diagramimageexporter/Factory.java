@@ -1,16 +1,14 @@
 package net.sourceforge.olympos.diagramimageexporter;
 
-import java.util.ArrayList;
-
 class Factory {
 
 	Figure createFigure(InfoFigureParameter figureInfo) {
 		Object result = null;
 		ElementDiagram elem = new ElementDiagram();
 		elem = ElementDiagram.getCatalogEntry(figureInfo.getType());
-		String name = elem.getName();
-		
-		if (name != null) {
+		if (elem != null) {
+			String name = elem.getName();
+
 			Class<?> clazz;
 			try {
 				clazz = Class.forName("net.sourceforge.olympos.diagramimageexporter.shapes." + name);

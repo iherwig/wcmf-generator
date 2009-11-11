@@ -21,7 +21,6 @@ public class XmlReader {
 
 	public ArrayList<InfoFigureParameter> XML(String Path) {
 		String filename = "file:///" + Path;
-		System.out.println(filename);
 		Document doc = null;
 		try {
 			doc = new SAXBuilder().build(filename);
