@@ -23,3 +23,10 @@ cwb.Constants.DD_GROUP = "cwbDDGroup";
  * @type String
  */
 cwb.Constants.SVN_REVISION ="513";
+
+/**
+ * Timeout of AJAX requests, in milliseconds.
+ * 
+ * @type int
+ */
+cwb.Constants.AJAX_TIMEOUT = 1800000;
