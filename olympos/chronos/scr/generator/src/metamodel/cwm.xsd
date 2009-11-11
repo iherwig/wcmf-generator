@@ -133,9 +133,9 @@
 		<xsd:attribute name="fk_glossary_id" type="xsd:string"/>
 		<xsd:attribute name="fk_operation_id" type="xsd:string"/>
 		<xsd:attribute name="fk_feature_id" type="xsd:string"/>
-		<xsd:attribute name="backgroundcolor" type="xsd:string"/>
-		<xsd:attribute name="foregroundcolor" type="xsd:string"/>
-		<xsd:attribute name="gid" type="xsd:string"/>
+		<xsd:attribute name="BackgroundColor" type="xsd:string"/>
+		<xsd:attribute name="ForegroundColor" type="xsd:string"/>
+		<xsd:attribute name="GID" type="xsd:string"/>
 		<xsd:attribute name="Height" type="xsd:string"/>
 		<xsd:attribute name="PositionY" type="xsd:string"/>
 		<xsd:attribute name="PositionX" type="xsd:string"/>
