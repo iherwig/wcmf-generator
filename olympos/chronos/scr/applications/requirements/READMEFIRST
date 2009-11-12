@@ -121,7 +121,92 @@ History
 	•	Added special char handling to UML Export
 	•	fixed AutoCompleteController case
 	•	fixed HtmlEditor issues 
+	
+0.9.7.1
+	ADDITIONS
+	• Documentation generation from diagrams
 
+	FIX 
+	• fixed bug #2854478 (exception after selection a different language in the translation panel)
+	• fixed import of dependent requirements/goals (relations were build in both directions instead of one)
+	• fixed copy ChiValues and operations when duplicating ChiNode, ChiController
 
+	
+0.9.8
+	ADDITIONS
+	•  changed soap interface
+	• added batchdisplay action to config.ini
+	• controller creation
+	•  Fully working import of Class Models
+	• 	new activity connections
+	• added connections between different use case types
+	
 
+	FIX
+	
+pass generator errors to frontend
 
+fixed another exception without stack trace
+removed duplicated methods
+added latest fixes (StaticComboBox)
+"- implemented controller creation from use cases
+- fixed a bug in ObjectGridContainer.isGridAvailable (parentOids is undefined sometimes)"
+"controller creation:
+- improved class/operation names
+- copy notes"
+"- made operation names lowercase
+- sort operations correctly"
+regenerated application after model modification
+set default visibility of generated ChiController and Operations to Protected
+CWM: Improved import of relations between ChiNodes
+fixed creation of nm instances in CWM import
+regenerated application after fixing ChiAssociation relations
+added diagrams/figures to cwm xml export
+CWM: Fully working import of Class Models
+unified export parameters (startModel, startPackage -> startOid)
+implemented DiagramImageExporterController, regenerated application
+added imageFormat parameter to DiagramImageExporterController
+changed format for single image export to svg
+Generator: Further improvement on CWM import and export
+regenerated application (new activity connections)
+regenerated application (new Alias fields in ActivitySet, Diagram)
+fixed method call
+regenerated after model change (fixed ActivitySend/ControlFlow relation)
+Generator: Added image export (may break export if using not yet updated chronos.profile.uml from server, use local one)
+divided statistic calculation into several server calls (NOTE: there seems to be a problem in the statistic generator workflow which prevents it from finishing)
+added update script for Activity connections, execute updates in correct order
+fixed bug #2859254 (Export assistant UI broken in chrome)
+"- fixed exception that occurred, when the language listbox in the login dialog lost the focus (ID: 2877715)
+- formatting"
+make LanguageListBox inherit from uwm.property.ComboBoxBase in order to apply the 'this.store is null' bug fix
+"- added batchdisplay action
+- made LongTask aware of intermediate results
+- divided grid scope loading into several server calls"
+added brackets to operation figure (feature request #2864375)
+fixed more (hopefully all) duplicated entries in context menus
+fixed bug #2865942 (Error moving nodes in tree, from one parent to another)
+"- implemented controller creation from use cases
+- fixed a bug in ObjectGridContainer.isGridAvailable (parentOids is undefined sometimes)"
+"- added validation to Operation.name (must only consist of letters and numbers + start with a lowercase letter)
+- persist only valid property values"
+fixed bug when an object was referenced more than once in a diagram (the loadmask did not disappear)
+added links to bug/feature tracker in CWM welcome page (section "Beta version limitations")
+"- added Visibility enumeration type to administration view
+- added visibility, isAbstract properties to ChiNode, ChiController, Operation"
+fixed bug introduced in last revision (load mask was not removed any more in case of an empty diagram)
+"- added ""Precedes"", ""Generalizes"", ""Contains"" connections between use cases in CWM (connections between different use case types are tbd)
+- removed ownUwmClassName, otherUwmClassName from several method signatures, because it's deductable from connectionInfo"
+create an own drop window for each figure (fixes bug #2881688)
+ExportAssistant: enable export button only, if an export format is selected in order to avoid errors
+CWM: Improved handling of ClassFigures
+unified export parameters (startModel, startPackage -> startOid)
+added "Export Image" command to diagram nodes
+fixed npe when re-establishing connections
+fixed npe when re-establishing connections pt.2
+fixed npe when re-establishing connections pt.3
+Generator: Further improvement on CWM import and export
+fixed target/source in db for self relations (was swapped)
+added alias and version field to Diagrams, ActivitySets (removed width and height fields from the form)
+control flow relations implemented (object flow tbd)
+object flow implemented, fixed bug (language field not defined when login)
+prevent UseCase relation ends to be shown in tree
