@@ -44,3 +44,13 @@ cwe.editor.control.DateField.prototype.render = function(container, position) {
 		});
 	}
 };
+
+cwe.editor.control.DateField.prototype.getValue = function() {
+	var result = cwe.editor.control.DateField.superclass.getValue.call(this);
+	
+	if ((this.value === undefined || this.value === null) && result === "") {
+		result = this.value;
+	}
+	
+	return result;
+}

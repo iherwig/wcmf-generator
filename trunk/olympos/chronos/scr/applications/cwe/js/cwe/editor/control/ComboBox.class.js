@@ -80,3 +80,13 @@ cwe.editor.control.ComboBox.prototype.findRecord = function(prop, value) {
 	}
 	return record;
 };
+
+cwe.editor.control.ComboBox.prototype.getValue = function() {
+	var result = cwe.editor.control.ComboBox.superclass.getValue.call(this);
+	
+	if ((this.value === undefined || this.value === null) && result === "") {
+		result = this.value;
+	}
+	
+	return result;
+}
