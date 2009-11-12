@@ -53,3 +53,13 @@ cwe.editor.control.StaticComboBox.prototype.render = function(container, positio
 		});
 	}
 };
+
+cwe.editor.control.StaticComboBox.prototype.getValue = function() {
+	var result = cwe.editor.control.StaticComboBox.superclass.getValue.call(this);
+	
+	if ((this.value === undefined || this.value === null) && result === "") {
+		result = this.value;
+	}
+	
+	return result;
+}

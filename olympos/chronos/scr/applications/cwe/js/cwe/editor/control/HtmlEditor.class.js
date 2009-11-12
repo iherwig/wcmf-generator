@@ -56,7 +56,9 @@ cwe.editor.control.HtmlEditor.prototype.render = function(container, position) {
 cwe.editor.control.HtmlEditor.prototype.getValue = function() {
 	var result = cwe.editor.control.HtmlEditor.superclass.getValue.call(this);
 	
-	if (result == "<br>") {
+	if ((this.value === undefined || this.value === null) && (result === "" || (result.length && result.length == 1 && result.charCodeAt(0) == 8203))) {
+		result = this.value;
+	} else if (result == "<br>") {
 		result = undefined;
 	}
 	
