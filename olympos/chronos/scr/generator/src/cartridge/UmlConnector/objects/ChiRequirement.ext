@@ -29,11 +29,15 @@ Void transferValues(cwm::ChiRequirement r, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiRequirement:" + r.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiRequirement") ->
-			r.reqType.translateChiRequirementType() != null ? uc.setTaggedValue("Chronos::ChiRequirement", "Type", r.reqType.translateChiRequirementType()) : Void ->
+			//Removed because of oAW EnumerationLiteral serialization error
+			//r.reqType.translateChiRequirementType() != null ? uc.setTaggedValue("Chronos::ChiRequirement", "Type", r.reqType.translateChiRequirementType()) : Void ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "Type", r.reqType) ->
 			uc.setTaggedValue("Chronos::ChiRequirement", "Priority", r.priority) ->
 			uc.setTaggedValue("Chronos::ChiRequirement", "Author", r.author) ->
 			uc.setTaggedValue("Chronos::ChiRequirement", "Proofreader", r.proofreader) ->
-			r.status.translateChiRequirementStatus() != null ? uc.setTaggedValue("Chronos::ChiRequirement", "Status", r.status.translateChiRequirementStatus()) : Void ->
+			//Removed because of oAW EnumerationLiteral serialization error
+			//r.status.translateChiRequirementStatus() != null ? uc.setTaggedValue("Chronos::ChiRequirement", "Status", r.status.translateChiRequirementStatus()) : Void ->
+			uc.setTaggedValue("Chronos::ChiRequirement", "Status", r.status) ->
 			uc.setTaggedValue("Chronos::ChiRequirement", "Alias", r.alias) ->
 			uc.setTaggedValue("Chronos::ChiRequirement", "Version", r.version) ->
 			uc.setName(r.name) ->
@@ -86,7 +90,7 @@ Chronos::ChiRequirementStatus translateChiRequirementStatus(String source):
 			Chronos::ChiRequirementStatus::Mandatory
 			
 		case "proposed":
-			Chronos::ChiRequirementStatus::Proposed
+			(Chronos::ChiRequirementStatus::Proposed).asEnumerationLiteral()
 			
 		default:
 			null
@@ -96,11 +100,15 @@ Chronos::ChiRequirementStatus translateChiRequirementStatus(String source):
 cwm::ChiRequirement convertToCwm(Chronos::ChiRequirement c) :
 	let un = new cwm::ChiRequirement : (
 		un.setId(c.getId()) ->
-		c.getTaggedValue("Chronos::ChiRequirement", "Type") != "" ? un.setReqType(((Chronos::ChiRequirementType) c.getTaggedValue("Chronos::ChiRequirement", "Type")).name.toString()) : Void ->
+		//Removed because of oAW EnumerationLiteral serialization error
+		//c.getTaggedValue("Chronos::ChiRequirement", "Type") != "" ? un.setReqType(((Chronos::ChiRequirementType) c.getTaggedValue("Chronos::ChiRequirement", "Type")).name.toString()) : Void ->
+		un.setReqType((String) c.getTaggedValue("Chronos::ChiRequirement", "Type")) ->
 		un.setPriority((int) c.getValue(c.getAppliedStereotype("Chronos::ChiRequirement"), "Priority")) ->
 		un.setAuthor(c.getTaggedValue("Chronos::ChiRequirement", "Author").toString()) ->
 		un.setProofreader(c.getTaggedValue("Chronos::ChiRequirement", "Proofreader").toString()) ->
-		c.getTaggedValue("Chronos::ChiRequirement", "Status") != "" ? un.setStatus(((Chronos::ChiRequirementStatus) c.getTaggedValue("Chronos::ChiRequirement", "Status")).name.toString()) : Void ->
+		//Removed because of oAW EnumerationLiteral serialization error
+		//c.getTaggedValue("Chronos::ChiRequirement", "Status") != "" ? un.setStatus(((Chronos::ChiRequirementStatus) c.getTaggedValue("Chronos::ChiRequirement", "Status")).name.toString()) : Void ->
+		un.setStatus((String) c.getTaggedValue("Chronos::ChiRequirement", "Status")) ->
 		un.setAlias(c.getTaggedValue("Chronos::ChiRequirement", "Alias").toString()) ->
 		un.setVersion(c.getTaggedValue("Chronos::ChiRequirement", "Version").toString()) ->
 		un.setName(c.name) ->
