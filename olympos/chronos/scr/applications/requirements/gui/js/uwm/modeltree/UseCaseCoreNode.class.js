@@ -123,7 +123,16 @@ uwm.modeltree.UseCaseCoreNode.prototype.addActivitySet = function(self, e) {
 }
 
 uwm.modeltree.UseCaseCoreNode.prototype.createController = function(self, e) {
-	uwm.model.ModelContainer.getInstance().createController(this.modelNode, this.parentNode.getModelNode());
+	// get the parent node for the controller
+	var controllerParentNode = this.parentNode;
+	if (this.parentNode instanceof uwm.modeltree.ProcessNode) {
+		controllerParentNode = controllerParentNode.parentNode;
+	}
+	// show the progress node (it will be removed automatically)
+	uwm.modeltree.ModelTree.getInstance().showCreateProgressNode(
+		this.parentNode, uwm.Dict.translate('Creating controller...')
+	);
+	uwm.model.ModelContainer.getInstance().createController(this.modelNode, controllerParentNode.getModelNode());
 }
 
 uwm.modeltree.UseCaseCoreNode.prototype.showInDiagram = function(self, e) {
