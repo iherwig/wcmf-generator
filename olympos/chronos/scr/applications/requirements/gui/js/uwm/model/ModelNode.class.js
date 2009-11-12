@@ -299,11 +299,19 @@ uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionI
 			    Name : connectionInfo.label
 			});
 			// update parent/child oids
-			if (this.childOids) {
-				this.childOids.push(relationObject.getOid());
+			if (self.childOids) {
+				self.childOids.push(relationObject.getOid());
+				// FIXME: find a way to get the relation end class name from ownUwmClassName
+				// seems to work in most cases (except: Activity->ActivitySend, Activity->ActvityFinal)
+				var maskedOid = connectionInfo.ownUwmClassName+"End:"+uwm.Util.getNumericFromOid(relationObject.getOid());
+				self.maskedOids[relationObject.getOid()] = maskedOid;
 			}
 			if (otherModelObject.childOids) {
 				otherModelObject.childOids.push(relationObject.getOid());
+				// FIXME: find a way to get the relation end class name from otherUwmClassName
+				// seems to work in most cases (except: Activity->ActivitySend, Activity->ActvityFinal)
+				var maskedOid = connectionInfo.otherUwmClassName+"End:"+uwm.Util.getNumericFromOid(relationObject.getOid());
+				otherModelObject.maskedOids[relationObject.getOid()] = maskedOid;
 			}
 			
 			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self);
