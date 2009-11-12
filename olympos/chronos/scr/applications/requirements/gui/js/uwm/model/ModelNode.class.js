@@ -279,16 +279,32 @@ uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionI
 			self.fillInRelationObject(connection, data);
 			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self);
 		});
+
+		// update parent/child oids
+		if (this.parentOids) {
+			this.parentOids.push(otherModelObject.getOid());
+		}
+		if (otherModelObject.childOids) {
+			otherModelObject.childOids.push(this.getOid());
+		}
 	} else {
 		var actionSet = new uwm.persistency.ActionSet();
 		actionSet.addAssociate(parentOid, childOid, false, function(request, data) {
 			self.fillInRelationObject(connection, data);
 
 			//Workaround until last_created_oid is working in wCMF with relations
-			connection.getRelationObject().changeProperties( {
+			var relationObject = connection.getRelationObject();
+			relationObject.changeProperties( {
 			    relationType : connectionInfo.connectionType,
 			    Name : connectionInfo.label
 			});
+			// update parent/child oids
+			if (this.childOids) {
+				this.childOids.push(relationObject.getOid());
+			}
+			if (otherModelObject.childOids) {
+				otherModelObject.childOids.push(relationObject.getOid());
+			}
 			
 			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self);
 		});
@@ -300,13 +316,6 @@ uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionI
 		});
 		*/
 		actionSet.commit();
-	}
-	
-	if (this.parentOids) {
-		this.parentOids.push(otherModelObject.getOid());
-	}
-	if (otherModelObject.childOids) {
-		otherModelObject.childOids.push(this.getOid());
 	}
 }
 
