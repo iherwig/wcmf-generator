@@ -147,16 +147,18 @@ uwm.diagram.DropZone.prototype.checkDropable = function(modelData) {
 uwm.diagram.DropZone.prototype.checkSemanticGroup = function(modelData) {
 	var result = false;
 	
-	for (var i = 0; i < this.diagram.supportedGroups.length; i++) {
-		if (!Ext.isArray(modelData.semanticGroup)) {
-			if (this.diagram.supportedGroups[i] == modelData.semanticGroup) {
-				result = true;
-				break;
-			}
-		} else {
-			if (modelData.semanticGroup.indexOf(this.diagram.supportedGroups[i]) != -1) {
-				result = true;
-				break;
+	if (modelData) {
+		for (var i = 0; i < this.diagram.supportedGroups.length; i++) {
+			if (!Ext.isArray(modelData.semanticGroup)) {
+				if (this.diagram.supportedGroups[i] == modelData.semanticGroup) {
+					result = true;
+					break;
+				}
+			} else {
+				if (modelData.semanticGroup.indexOf(this.diagram.supportedGroups[i]) != -1) {
+					result = true;
+					break;
+				}
 			}
 		}
 	}
