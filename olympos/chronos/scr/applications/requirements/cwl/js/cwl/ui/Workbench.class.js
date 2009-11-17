@@ -56,12 +56,12 @@ cwl.ui.Workbench = function(config) {
           region: 'center',
           layout: 'fit',
           split: true,
-          items: new cwl.diagram.DiagramTabPanel({
+          items: new cwl.textrule.TextRuleTabPanel({
             enableTabScroll: true,
             activeTab: 0,
-            items: [new cwl.diagram.RuleDiagram({
+            items: [new cwl.textrule.TextRulePanel({
               closable: true,
-              title: "Rule Set"
+              title: "Rule"
             })]
           })
         },{
