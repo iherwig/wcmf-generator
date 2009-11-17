@@ -33,7 +33,7 @@ cwl.diagram.RuleDiagram = function(config) {
 	this.canvas = null;
 }
 
-Ext.extend(cwl.diagram.RuleDiagram, cwl.diagram.DiagramTab);
+Ext.extend(cwl.diagram.RuleDiagram, Ext.Panel);
 
 /**
  * Initiates a new diagram.

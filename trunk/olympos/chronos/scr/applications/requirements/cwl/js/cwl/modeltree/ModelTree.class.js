@@ -33,20 +33,27 @@ cwl.modeltree.ModelTree = function() {
 cwl.modeltree.ModelTree = Ext.extend(Ext.tree.TreePanel, {
 	initComponent : function() {
 		Ext.apply(this, {
-		    width: 250,
-		    autoScroll: true,
-		    animate: true,
-		    containerScroll: true,
-		    rootVisible: false,
-        enableDrag: true,
-        dragConfig: {
-          ddGroup: cwl.Constants.DD_GROUP
-        },
-		    title: chi.Dict.translate("Model Tree")
+			width: 250,
+			autoScroll: true,
+			animate: true,
+			containerScroll: true,
+			root: new Ext.tree.AsyncTreeNode({
+				text: "root",
+				draggable: false,
+				id: 'root'
+			}),
+			loader: new cwl.modeltree.Loader(),
+			rootVisible: false,
+			enableDrag: true,
+			dragConfig: {
+				ddGroup: cwl.Constants.DD_GROUP
+			},
+			title: chi.Dict.translate("Model Tree")
 		});
 		
 		cwl.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);
 		
+		// remove this for async loading
 		this.setRootNode(this.loadTree(cwl.model.ModelElementContainer.getInstance().getElement(cwl.model.RootPackage.ROOT_PACKAGE_ID)));
 	}
 });
