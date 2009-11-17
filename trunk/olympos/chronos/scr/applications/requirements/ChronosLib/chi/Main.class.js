@@ -105,7 +105,12 @@ chi.Main.prototype.startApplication = function() {
 		 * 
 		 * @type chi.Login
 		 */
-		this.login = new chi.Login();
+		this.login = new chi.Login({
+			appInstance: this,
+			defaultLogin: this.getConfig().defaultLogin,
+			defaultPassword: this.getConfig().defaultPassword,
+			svnRevision: this.getConfig().SVN_REVISION
+		});
 	}
 }
 
