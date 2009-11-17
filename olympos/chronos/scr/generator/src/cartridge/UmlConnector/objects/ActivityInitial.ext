@@ -19,7 +19,7 @@ uml::InitialNode convert(cwm::ActivityInitial a):
 
 Void establishConnections(cwm::ActivityInitial b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::InitialNode).select(e|e.name == "ActivityInitial:" + b.id).first(): (
-		b.child.select(e|e.targetType == "Activity").establishConnectionsToOpaqueAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true)
+		b.manyToMany.select(e|e.targetRole == "AControlFlowTarget").establishConnectionsToOpaqueAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true)
 	)
 ;
 

@@ -102,6 +102,17 @@ Void establishConnectionsToClass(cwm::Child ch, uml::Class parentClass, uml::Mod
 		)
 	)
 ;
+Void establishConnectionsToClass(cwm::Child ch, uml::Class parentClass, uml::Model um):
+	//(new uml::DataStoreNode).settt
+	let childClass = um.allOwnedElements().typeSelect(uml::DataStoreNode).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
+		childClass != null
+		? (
+			childClass.setType(parentClass)
+		) : (
+			Void
+		)
+	)
+;
 
 Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	let childClass = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
@@ -163,7 +174,7 @@ Void establishRealizationToUseCase(cwm::Child ch, uml::Class parentClass, uml::M
 	)
 ;
 
-Void establishConnectionsToOpaqueAction(cwm::Child ch, uml::InitialNode parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
+Void establishConnectionsToOpaqueAction(cwm::ManyToMany ch, uml::AcceptEventAction parent, uml::Model um, String label) :
 	//(new uml::Association).setN
 	let child = um.allOwnedElements().typeSelect(uml::OpaqueAction).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
 		child != null
@@ -181,7 +192,25 @@ Void establishConnectionsToOpaqueAction(cwm::Child ch, uml::InitialNode parent, 
 	)
 ;
 
-Void establishConnectionsToActivityFinalNode(cwm::Child ch, uml::OpaqueAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
+Void establishConnectionsToOpaqueAction(cwm::ManyToMany ch, uml::InitialNode parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
+	//(new uml::Association).setN
+	let child = um.allOwnedElements().typeSelect(uml::OpaqueAction).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
+		child != null
+		? (
+
+			let conn = new uml::ControlFlow: (
+				conn.setSource(parent) ->
+				conn.setTarget(child) ->
+				conn.setName(label)
+			) ->
+			parent.activity.edge.add(conn)
+		) : (
+			Void
+		)
+	)
+;
+
+Void establishConnectionsToActivityFinalNode(cwm::ManyToMany ch, uml::OpaqueAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	//(new uml::Association).setN
 	let child = um.allOwnedElements().typeSelect(uml::ActivityFinalNode).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
 		child != null
@@ -198,7 +227,7 @@ Void establishConnectionsToActivityFinalNode(cwm::Child ch, uml::OpaqueAction pa
 	)
 ;
 
-Void establishConnectionsToOpaqueAction(cwm::Child ch, uml::OpaqueAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
+Void establishConnectionsToOpaqueAction(cwm::ManyToMany ch, uml::OpaqueAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	//(new uml::Association).setN
 	let child = um.allOwnedElements().typeSelect(uml::OpaqueAction).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
 		child != null
@@ -212,6 +241,20 @@ Void establishConnectionsToOpaqueAction(cwm::Child ch, uml::OpaqueAction parent,
 		) : (
 			Void
 		)
+	)
+;
+
+Void establishConnectionsToDataStore(cwm::ManyToMany ch, uml::OpaqueAction parent, uml::Model um, String label):
+	let child = um.allOwnedElements().typeSelect(uml::DataStoreNode).selectFirst(e|e.name == ch.targetType + ":" + ch.targetOid):
+	child != null
+	? (
+		let conn = new uml::ObjectFlow:
+		conn.setSource(parent) ->
+		conn.setTarget(child) ->
+		conn.setName(label) ->
+		parent.activity.edge.add(conn)
+	) : (
+		Void
 	)
 ;
 
@@ -232,7 +275,7 @@ Void establishConnectionsToDecisionNode(cwm::ManyToMany ch, uml::OpaqueAction pa
 	)
 ;
 
-Void establishConnectionsToSendSignalAction(cwm::Child ch, uml::OpaqueAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
+Void establishConnectionsToSendSignalAction(cwm::ManyToMany ch, uml::OpaqueAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	//(new uml::Association).setN
 	let child = um.allOwnedElements().typeSelect(uml::SendSignalAction).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
 		child != null
@@ -264,7 +307,7 @@ Void establishConnectionsToClass(cwm::Child ch, uml::OpaqueAction parent, uml::M
 ;
 */
 
-Void establishConnectionsToAcceptEventAction(cwm::Child ch, uml::SendSignalAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
+Void establishConnectionsToAcceptEventAction(cwm::ManyToMany ch, uml::SendSignalAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	//(new uml::Association).setN
 	let child = um.allOwnedElements().typeSelect(uml::AcceptEventAction).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
 		child != null
@@ -281,7 +324,7 @@ Void establishConnectionsToAcceptEventAction(cwm::Child ch, uml::SendSignalActio
 	)
 ;
 
-Void establishConnectionsToAcceptEventAction(cwm::Child ch, uml::OpaqueAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
+Void establishConnectionsToAcceptEventAction(cwm::ManyToMany ch, uml::OpaqueAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	//(new uml::Association).setN
 	let child = um.allOwnedElements().typeSelect(uml::AcceptEventAction).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (
 		child != null
@@ -304,6 +347,22 @@ Void establishConnectionsToOpaqueAction(cwm::ManyToMany ch, uml::DecisionNode pa
 		child != null
 		? (
 			let conn = new uml::ControlFlow: (
+				conn.setSource(parent) ->
+				conn.setTarget(child) ->
+				conn.setName(label)
+			) ->
+			parent.activity.edge.add(conn)
+		) : (
+			Void
+		)
+	)
+;
+
+Void establishConnectionsToOpaqueAction(cwm::ManyToMany ch, uml::DataStoreNode parent, uml::Model um, String label) :
+	let child = um.allOwnedElements().typeSelect(uml::OpaqueAction).selectFirst(e|e.name == ch.targetType + ":" + ch.targetOid): (
+		child != null
+		? (
+			let conn = new uml::ObjectFlow: (
 				conn.setSource(parent) ->
 				conn.setTarget(child) ->
 				conn.setName(label)

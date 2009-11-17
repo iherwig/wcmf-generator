@@ -18,7 +18,7 @@ uml::SendSignalAction convert(cwm::ActivitySend a):
 
 Void establishConnections(cwm::ActivitySend b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::SendSignalAction).select(e|e.name == "ActivitySend:" + b.id).first(): (
-		b.child.select(e|e.targetType == "ActivityReceive").establishConnectionsToAcceptEventAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true)
+		b.manyToMany.select(e|e.targetRole == "ARControlFlowTarget").establishConnectionsToAcceptEventAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true)
 	)
 ;
 

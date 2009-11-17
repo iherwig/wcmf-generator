@@ -6,11 +6,19 @@ extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::umlutils;
 
+extension cartridge::UmlConnector::connections;
+
 uml::AcceptEventAction convert(cwm::ActivityReceive a):
 	let uc = new uml::AcceptEventAction: (
 		uc.setName("ActivityReceive:" + a.id)
 	) ->
 	uc
+;
+
+Void establishConnections(cwm::ActivityReceive b, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::AcceptEventAction).select(e|e.name == "ActivityReceive:" + b.id).first(): (
+		b.manyToMany.select(e|e.targetRole == "AControlFlowTarget").establishConnectionsToOpaqueAction(uc, um, null)
+	)
 ;
 
 Void transferValues(cwm::ActivityReceive c, uml::Model um):
