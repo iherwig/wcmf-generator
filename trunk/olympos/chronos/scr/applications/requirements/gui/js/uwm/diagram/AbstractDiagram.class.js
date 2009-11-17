@@ -675,6 +675,10 @@ uwm.diagram.AbstractDiagram.prototype.getConnectionTypeDecorators = function(con
 			result.target = new uwm.graphics.connection.ArrowDecorator();
 			break;
 		
+		case "instantiation":
+			result.target = new uwm.graphics.connection.ClosedArrowDecorator();
+			break;
+		
 		default:
 			result.target = new uwm.graphics.connection.ArrowDecorator();
 	}
