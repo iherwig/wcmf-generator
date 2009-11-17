@@ -21,6 +21,7 @@ Ext.namespace("chi");
  */
 chi.Login = function(config) {
 	var self = this;
+	this.appInstance = config.appInstance;
 	
 	/**
 	 * The form showing user, password, language selection and revision.
@@ -47,13 +48,13 @@ chi.Login = function(config) {
 			fieldLabel : chi.Dict.translate('Login'),
 			name : 'login',
 			allowBlank : false,
-			value : cwe.Config.defaultLogin
+			value : config.defaultLogin
 		}), new Ext.form.TextField( {
 			fieldLabel : chi.Dict.translate('Password'),
 			name : 'password',
 			inputType : "password",
 			allowBlank : false,
-			value : cwe.Config.defaultPassword
+			value : config.defaultPassword
 		}), new Ext.form.ComboBox( {
 			fieldLabel : chi.Dict.translate('Language'),
 			forceSelection : 'true',
@@ -83,7 +84,7 @@ chi.Login = function(config) {
 		
 		}), new Ext.Panel( {
 			cls : "chi-revisioninfo",
-			html : "<p>" + chi.Dict.translate("Revision") + ": " + cwe.Constants.SVN_REVISION + "</p>"
+			html : "<p>" + chi.Dict.translate("Revision") + ": " + config.svnRevision + "</p>"
 		}) ],
 		buttons : [ {
 			text : chi.Dict.translate('Login'),
@@ -149,7 +150,7 @@ chi.Login.prototype.initSession = function() {
  * Starts session after successful login at backend.
  */
 chi.Login.prototype.handleLogin = function(data) {
-	cwe.Cwe.getInstance().startSession(data.sid, this.form.getForm().findField("Language").getValue());
+	this.appInstance.startSession(data.sid, this.form.getForm().findField("Language").getValue());
 }
 
 /**
