@@ -20,12 +20,12 @@ uml::OpaqueAction convert(cwm::Activity a):
 
 Void establishConnections(cwm::Activity b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::OpaqueAction).select(e|e.name == "Activity:" + b.id).first(): (
-		b.child.select(e|e.targetType == "ActivityFinal").establishConnectionsToActivityFinalNode(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
-		b.child.select(e|e.targetType == "Activity").establishConnectionsToOpaqueAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
-		b.manyToMany.select(e|e.targetType == "ActivityDecision").establishConnectionsToDecisionNode(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
-		b.child.select(e|e.targetType == "ActivitySend").establishConnectionsToSendSignalAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
-		b.child.select(e|e.targetType == "ActivityReceive").establishConnectionsToAcceptEventAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
-		b.child.select(e|e.targetType == "ChiNode").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true)
+		b.manyToMany.select(e|e.targetRole == "ActivityFinal").establishConnectionsToActivityFinalNode(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.manyToMany.select(e|e.targetRole == "AControlFlowTarget").establishConnectionsToOpaqueAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.manyToMany.select(e|e.targetRole == "ADControlFlowTarget").establishConnectionsToDecisionNode(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.manyToMany.select(e|e.targetRole == "ASControlFlowTarget").establishConnectionsToSendSignalAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		//b.manyToMany.select(e|e.targetRole == "ARControlFlowSource").establishConnectionsToAcceptEventAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.manyToMany.select(e|e.targetRole == "ChiObjectObjectFlowTarget").establishConnectionsToDataStore(uc, um, null)
 	)
 ;
 

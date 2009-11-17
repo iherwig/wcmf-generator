@@ -34,9 +34,9 @@ Void establishConnections(cwm::ActivitySet b, uml::Model um):
 	b.activityDecision.establishConnections(um) ->
 	b.activityInitial.establishConnections(um) ->
 	//b.activityFinal.establishConnections(um) ->
-	b.activitySend.establishConnections(um)
-	//b.activityReceive.establishConnections(um)
-	//b.chiObject.establishConnections(um)
+	b.activitySend.establishConnections(um) ->
+	b.activityReceive.establishConnections(um) ->
+	b.chiObject.establishConnections(um)
 ;
 
 Void transferValues(cwm::ActivitySet a, uml::Model um):
