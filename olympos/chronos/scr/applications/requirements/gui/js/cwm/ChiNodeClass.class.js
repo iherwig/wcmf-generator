@@ -57,10 +57,10 @@ cwm.ChiNodeClass = function() {
 	    ,
 	    
 		"ChiObject": {
-			label: "is instance of",
-			invert: true,
-			invertBackendRelation: true,
-			connectionType: "is instance of",
+			label: "is instantiated by",
+			invert: false,
+			invertBackendRelation: false,
+			connectionType: "instantiation",
 			cardinality: -1
 		}
 

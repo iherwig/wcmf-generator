@@ -56,10 +56,10 @@ cwm.ChiObjectClass = function() {
 	
 	this.connectionInfo = {
 			"ChiNode": {
-			label: "is instance of",
-			invert: false,
-			invertBackendRelation: true,
-			connectionType: "is instance of",
+			label: "is instantiated by",
+			invert: true,
+			invertBackendRelation: false,
+			connectionType: "instantiation",
 			cardinality: 1
 		},
 		"Activity" : {
