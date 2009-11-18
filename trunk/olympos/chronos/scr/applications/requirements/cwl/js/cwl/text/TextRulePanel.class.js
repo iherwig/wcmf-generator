@@ -23,34 +23,6 @@ cwl.textrule.TextRulePanel = function(config) {
 	this.rule = config.rule;
 	var self = this;
 
-	var newInputBtn = new Ext.form.TriggerField({
-		id: 'new-input-btn',
-		fieldLabel: 'New Input',
-		value: '',
-		triggerClass: 'x-form-trigger' 
-	});
-	newInputBtn.onTriggerClick = function(e) {
-		if (this.getValue() != '') {
-			//self.form.
-		}
-	};
-
-	var newActionBtn = new Ext.form.TriggerField({
-		id: 'new-action-btn',
-		fieldLabel: 'New Action',
-		value: '',
-		triggerClass: 'x-form-trigger' 
-	});
-	newActionBtn.onTriggerClick = function(e) {};
-
-	var newOutputBtn = new Ext.form.TriggerField({
-		id: 'new-output-btn',
-		fieldLabel: 'New Output',
-		value: '',
-		triggerClass: 'x-form-trigger' 
-	});
-	newOutputBtn.onTriggerClick = function(e) {};
-
 	this.form = new Ext.FormPanel({
 		labelWidth: 75, // label settings here cascade unless overridden
 		frame: false,
@@ -58,62 +30,30 @@ cwl.textrule.TextRulePanel = function(config) {
 		defaults: {width: 650},
 		defaultType: 'textfield',
 
-		items: [{
-			xtype: 'fieldset',
-			checkboxToggle: false,
-			title: 'Input Variables',
-			collapsible: false,
-			autoHeight: true,
-			defaults: {width: 500},
-			defaultType: 'textfield',
-			collapsed: false,
-			items :[{
-							name: 'input1',
-							allowBlank: false
-					},
-					newInputBtn
-			]
-		},{
-			xtype:'fieldset',
-			title: 'Condition',
-			collapsible: false,
-			autoHeight:true,
-			defaults: {width: 500},
-			defaultType: 'textfield',
-			items :[{
-							name: 'condition',
-							allowBlank: false
-					}
-			]
-		},{
-			xtype:'fieldset',
-			title: 'Actions',
-			collapsible: false,
-			autoHeight:true,
-			defaults: {width: 500},
-			defaultType: 'textfield',
-			items :[{
-							name: 'action1',
-							allowBlank: false
-					},
-					newActionBtn
-			]
-		},{
-			xtype: 'fieldset',
-			checkboxToggle: false,
-			title: 'Output Variables',
-			collapsible: false,
-			autoHeight: true,
-			defaults: {width: 500},
-			defaultType: 'textfield',
-			collapsed: false,
-			items :[{
-							name: 'output1',
-							allowBlank: false
-					},
-					newOutputBtn
-			]
-		}]
+		items: [
+			new cwl.form.ExtendableFieldSet({
+				title: 'Input Variables'
+			}),
+			{
+				xtype:'fieldset',
+				title: 'Condition',
+				collapsible: false,
+				autoHeight:true,
+				defaults: {width: 500},
+				defaultType: 'textfield',
+				items :[{
+								name: 'condition',
+								allowBlank: false
+						}
+				]
+			},
+			new cwl.form.ExtendableFieldSet({
+				title: 'Actions'
+			}),
+			new cwl.form.ExtendableFieldSet({
+				title: 'Output Variables'
+			})
+		]
 	});
 	
 	cwl.textrule.TextRulePanel.superclass.constructor.call(this, Ext.apply(this, {
