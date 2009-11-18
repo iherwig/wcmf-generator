@@ -62,6 +62,10 @@ class ChiBase extends ChiBaseBase
 			$objQuery = &$persistenceFacade->createObjectQuery('Counter');
 			$objTpl = & $objQuery->getObjectTemplate('Counter');
 			$objlistpart = $objQuery->execute(BUILDDEPTH_SINGLE, null);
+			if (sizeof($objlistpart) == 0) {
+				WCMFException::throwEx("Alias counter is not initialized", __FILE__, __LINE__);
+			}
+			
 			$countalt = $objlistpart[0]->getValue($countertype);
 			$count = ++$countalt;
 			$objlistpart[0]->setValue($countertype, $count);
