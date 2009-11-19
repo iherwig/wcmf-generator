@@ -19,6 +19,13 @@ Ext.namespace("cwl.Config");
 cwl.Config.jsonUrl = "../application/main.php";
 
 /**
+ * The Persistency implementation.
+ *
+ * @type String
+ */
+cwl.Config.persistencyClass = "chi.persistency.WcmfJson";
+
+/**
  * Title of this application.
  *
  * @type String
@@ -56,4 +63,7 @@ cwl.Config.defaultPassword = "admin";
  */
 cwl.Config.defaultLang = "en";
 
-cwl.Cwl.getInstance().processConfig();
+/**
+ * Initialize the Config singleton
+ */
+chi.Config.getInstance().processConfig(cwl.Config);
