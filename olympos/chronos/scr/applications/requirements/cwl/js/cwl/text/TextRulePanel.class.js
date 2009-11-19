@@ -26,11 +26,25 @@ cwl.textrule.TextRulePanel = function(config) {
 	this.form = new Ext.FormPanel({
 		labelWidth: 75, // label settings here cascade unless overridden
 		frame: false,
+		autoScroll: true,
 		bodyStyle: 'padding:5px 5px 0',
 		defaults: {width: 610},
 		defaultType: 'textfield',
 
 		items: [
+			{
+				xtype:'fieldset',
+				title: 'Rule',
+				collapsible: false,
+				autoHeight:true,
+				defaults: {width: 500},
+				defaultType: 'textarea',
+				items :[{
+						readOnly: true,
+						height: 200
+					}
+				]
+			},
 			new cwl.form.ExtendableFieldSet({
 				title: 'Input Variables'
 			}),
@@ -59,7 +73,6 @@ cwl.textrule.TextRulePanel = function(config) {
 	cwl.textrule.TextRulePanel.superclass.constructor.call(this, Ext.apply(this, {
 		elements: "body",
 		border: false,
-		autoscroll: true,
 		layout: 'fit',
 		items: this.form
 	}, config));
