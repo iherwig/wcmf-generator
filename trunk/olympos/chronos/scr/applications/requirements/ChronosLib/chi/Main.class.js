@@ -44,31 +44,6 @@ chi.Main = function() {
 }
 
 /**
- * Processes the config file.
- * 
- * <p>
- * To be called as last command in the config file.
- * </p>
- */
-chi.Main.prototype.processConfig = function() {
-	document.title = this.getConfig().appTitle;
-}
-
-/**
- * Returns the config object.
- * 
- * <p>
- * Abstract function to be implemented by subclass.
- * </p>
- * 
- * @return The config object.
- * @type Object
- */
-chi.Main.prototype.getConfig = function() {
-	
-}
-
-/**
  * Initializes application and shows login.
  * 
  * <p>
@@ -81,11 +56,13 @@ chi.Main.prototype.startApplication = function() {
 	if (this.isInstallErrorHandler) {
 		this.installErrorHandler();
 	}
-	
 	this.installOverrides();
+
+	var config = chi.Config.getInstance();
+	
+	document.title = config.appTitle;
 	
 	var params = location.search.split(/&/);
-	
 	var sid = null;
 	
 	for ( var i = 0; i < params.length; i++) {
@@ -98,7 +75,7 @@ chi.Main.prototype.startApplication = function() {
 	}
 	
 	if (sid) {
-		this.startSession(sid, this.getConfig().defaultLang);
+		this.startSession(sid, config.defaultLang);
 	} else {
 		/**
 		 * The login window.
@@ -107,9 +84,9 @@ chi.Main.prototype.startApplication = function() {
 		 */
 		this.login = new chi.Login({
 			appInstance: this,
-			defaultLogin: this.getConfig().defaultLogin,
-			defaultPassword: this.getConfig().defaultPassword,
-			svnRevision: this.getConfig().SVN_REVISION
+			defaultLogin: config.defaultLogin,
+			defaultPassword: config.defaultPassword,
+			svnRevision: config.SVN_REVISION
 		});
 	}
 }
@@ -127,7 +104,7 @@ chi.Main.prototype.startApplication = function() {
  *            lang The two-letter language code selected by the user.
  */
 chi.Main.prototype.startSession = function(sid, lang) {
-	chi.Session.getInstance().init(sid, lang, this.getConfig().jsonUrl);
+	chi.Session.getInstance().init(sid, lang);
 	
 	this.login.destroy();
 	

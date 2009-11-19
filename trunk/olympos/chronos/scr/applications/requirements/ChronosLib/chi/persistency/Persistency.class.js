@@ -16,7 +16,7 @@ chi.persistency.Persistency = function() {
 
 chi.persistency.Persistency.getInstance = function() {
 	if (!chi.persistency.Persistency.instance) {
-		chi.persistency.Persistency.instance = eval("new " + chi.Session.getInstance().getPersistencyClass() + "()");
+		chi.persistency.Persistency.instance = eval("new " + chi.Config.getInstance().persistencyClass + "()");
 	}
 	
 	return chi.persistency.Persistency.instance;

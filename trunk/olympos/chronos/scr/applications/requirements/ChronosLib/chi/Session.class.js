@@ -26,13 +26,6 @@ chi.Session = function() {
 	this.sid = null;
 	
 	/**
-	 * The class name implementing persistency.
-	 * 
-	 * @type String
-	 */
-	this.persistencyClass = "chi.persistency.DionysosJson";
-	
-	/**
 	 * The language selected for application UI.
 	 * 
 	 * @type String
@@ -59,7 +52,7 @@ chi.Session = function() {
  * @param {String}
  *            helpUrl The URL of the help file.
  */
-chi.Session.prototype.init = function(sid, lang, jsonUrl, helpUrl) {
+chi.Session.prototype.init = function(sid, lang, helpUrl) {
 	this.sid = sid;
 	this.lang = lang;
 	this.helpUrl = helpUrl;
@@ -76,26 +69,6 @@ chi.Session.prototype.getSid = function() {
 }
 
 /**
- * Returns the URL of the help file.
- * 
- * @return The URL of the help file.
- * @type String
- */
-chi.Session.prototype.getHelpUrl = function() {
-	return this.helpUrl;
-}
-
-/**
- * Returns the class name implementing persistency.
- * 
- * @return The class name implementing persistency.
- * @type String
- */
-chi.Session.prototype.getPersistencyClass = function() {
-	return this.persistencyClass;
-}
-
-/**
  * Returns the language selected for application UI.
  * 
  * @return The language selected for application UI.
@@ -103,6 +76,16 @@ chi.Session.prototype.getPersistencyClass = function() {
  */
 chi.Session.prototype.getLang = function() {
 	return this.lang;
+}
+
+/**
+ * Returns the URL of the help file.
+ * 
+ * @return The URL of the help file.
+ * @type String
+ */
+chi.Session.prototype.getHelpUrl = function() {
+	return this.helpUrl;
 }
 
 /**
