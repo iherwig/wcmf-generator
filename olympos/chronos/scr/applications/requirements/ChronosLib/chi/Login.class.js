@@ -22,6 +22,7 @@ Ext.namespace("chi");
 chi.Login = function(config) {
 	var self = this;
 	this.appInstance = config.appInstance;
+	var appConfig = chi.Config.getInstance();
 	
 	/**
 	 * The form showing user, password, language selection and revision.
@@ -48,13 +49,13 @@ chi.Login = function(config) {
 			fieldLabel : chi.Dict.translate('Login'),
 			name : 'login',
 			allowBlank : false,
-			value : config.defaultLogin
+			value : appConfig.defaultLogin
 		}), new Ext.form.TextField( {
 			fieldLabel : chi.Dict.translate('Password'),
 			name : 'password',
 			inputType : "password",
 			allowBlank : false,
-			value : config.defaultPassword
+			value : appConfig.defaultPassword
 		}), new Ext.form.ComboBox( {
 			fieldLabel : chi.Dict.translate('Language'),
 			forceSelection : 'true',
@@ -84,7 +85,7 @@ chi.Login = function(config) {
 		
 		}), new Ext.Panel( {
 			cls : "chi-revisioninfo",
-			html : "<p>" + chi.Dict.translate("Revision") + ": " + config.svnRevision + "</p>"
+			html : "<p>" + chi.Dict.translate("Revision") + ": " + appConfig.svnRevision + "</p>"
 		}) ],
 		buttons : [ {
 			text : chi.Dict.translate('Login'),
