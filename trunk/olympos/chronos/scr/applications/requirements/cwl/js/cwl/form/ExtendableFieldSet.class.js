@@ -21,10 +21,6 @@ Ext.namespace("cwl.form");
 cwl.form.ExtendableFieldSet = function(config) {
 	var self = this;
 
-	var newBtn = new cwl.form.AddField({
-		fieldSet: this
-	});
-	
 	cwl.form.ExtendableFieldSet.superclass.constructor.call(this, Ext.apply(this, {
 		checkboxToggle: false,
 		collapsible: false,
@@ -33,11 +29,13 @@ cwl.form.ExtendableFieldSet = function(config) {
 		defaultType: 'textfield',
 		collapsed: false,
 		items: [{
-						name: 'field1',
-						allowBlank: false
-				},
-				newBtn
-		]
+			name: 'field1',
+			allowBlank: false
+		}],
+		buttons: [new cwl.form.AddButton({
+			fieldSet: this,
+			text: 'Add'
+		})]
 	}, config));
 }
 

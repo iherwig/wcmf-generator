@@ -27,7 +27,7 @@ cwl.textrule.TextRulePanel = function(config) {
 		labelWidth: 75, // label settings here cascade unless overridden
 		frame: false,
 		bodyStyle: 'padding:5px 5px 0',
-		defaults: {width: 650},
+		defaults: {width: 610},
 		defaultType: 'textfield',
 
 		items: [
