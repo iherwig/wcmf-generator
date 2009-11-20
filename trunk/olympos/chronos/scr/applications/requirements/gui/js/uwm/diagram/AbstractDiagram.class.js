@@ -50,8 +50,8 @@ uwm.diagram.AbstractDiagram = function(modelNodeClass) {
 	    "changeLabel" : function(modelObject, oldLabel, newLabel) {
 		    self.handleChangeLabelEvent(modelObject, oldLabel, newLabel);
 	    },
-	    "associate" : function(parentModelObject, childModelObject) {
-		    self.handleAssociateEvent(parentModelObject, childModelObject);
+	    "associate" : function(parentModelObject, childModelObject, relationObject, connection) {
+		    self.handleAssociateEvent(parentModelObject, childModelObject, relationObject, connection);
 	    }
 	});
 }
@@ -219,8 +219,6 @@ uwm.diagram.AbstractDiagram.prototype.getContainedFigure = function(oid) {
 }
 
 uwm.diagram.AbstractDiagram.prototype.getContainedConnection = function(sourceOid, targetOid, relationOid) {
-	return null;
-	
 	var key1 = sourceOid+"-"+targetOid+"-"+relationOid;
 	if (this.connections.containsKey(key1)) {
 		return this.connections.get(key1);
@@ -233,6 +231,14 @@ uwm.diagram.AbstractDiagram.prototype.getContainedConnection = function(sourceOi
 		}
 	}
 	return null;
+}
+
+uwm.diagram.AbstractDiagram.prototype.registerConnection = function(sourceOid, targetOid, relationOid, connection) {
+	// register the connection (for access in both directions)
+	var key1 = sourceOid+"-"+targetOid+"-"+relationOid;
+	var key2 = targetOid+"-"+sourceOid+"-"+relationOid;
+	this.connections.add(key1, connection);
+	this.connections.add(key2, connection);
 }
 
 uwm.diagram.AbstractDiagram.prototype.scrollToObject = function(modelObject) {
@@ -624,8 +630,13 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		startPort = endPort;
 		endPort = tmpPort;
 	}
+  
+	var label = connectionInfo.label;
+	if (relationObject && relationObject.getOid() != relationObject.getLabel()) {
+		label = relationObject.getLabel();
+	}
 	
-	var connection = new uwm.graphics.connection.BaseConnection(connectionInfo.label, decorators);
+	var connection = new uwm.graphics.connection.BaseConnection(label, decorators);
 	
 	if (!noCommand) {
 		var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
@@ -641,15 +652,12 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		this.workflow.addFigure(connection);
 	}
 	
-	// register the connection (for access in both directions)
-	var key1 = sourceObject.getOid()+"-"+targetObject.getOid()+"-";
-	var key2 = targetObject.getOid()+"-"+sourceObject.getOid()+"-";
+	// register the connection
+	var relationOid = '';
 	if (relationObject) {
-		key1 += relationObject.getOid();
-		key2 += relationObject.getOid();
+		relationOid = relationObject.getOid();
 	}
-	this.connections.add(key1, connection);
-	this.connections.add(key2, connection);
+	this.registerConnection(sourceObject.getOid(), targetObject.getOid(), relationOid, connection);
 }
 
 /**
@@ -931,7 +939,7 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, 
 	 });
 	 */
 	actionSet.addAssociate("{last_created_oid:Figure}", "{last_created_oid:" + modelClass.getUwmClassName() + "}", function(request, data) {
-		uwm.event.EventBroker.getInstance().fireEvent("associate", savedFigureNode, savedObjectNode, false);
+		uwm.event.EventBroker.getInstance().fireEvent("associate", savedFigureNode, savedObjectNode);
 	});
 	
 	actionSet.commit();
@@ -1038,10 +1046,19 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNod
 				parentModelNode.updateChildLabel(modelNode, this.figures.get(parentModelNode.getOid()));
 			}
 		}
+	} else if (modelNode instanceof uwm.model.Relation) {
+		// find the connection figure
+		var parentOids = modelNode.getParentOids();
+		if (parentOids) {
+			var connection = this.getContainedConnection(parentOids[0], parentOids[1], modelNode.getOid());
+			if (connection) {
+				connection.setLabel(modelNode.getLabel());
+			}
+		}
 	}
 }
 
-uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentModelNode, childModelNode) {
+uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentModelNode, childModelNode, relationObject, connection) {
 	if (parentModelNode instanceof uwm.model.builtin.Package && childModelNode == this) {
 		uwm.diagram.DiagramContainer.getInstance().loadDiagram(this);
 	} else if (childModelNode instanceof uwm.model.AttributeObject) {
@@ -1062,6 +1079,15 @@ uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentMode
 			
 			graphics.addChildElement(operationGraphics, true);
 		}
+	}
+
+	// register the connection
+	if (connection) {
+		var relationOid = '';
+		if (relationObject) {
+			relationOid = relationObject.getOid();
+		}
+		this.registerConnection(parentModelNode.getOid(), childModelNode.getOid(), relationOid, connection);
 	}
 }
 

@@ -17,7 +17,9 @@ cwm.relations.ControlFlow = function() {
 	this.uwmClassName = "ControlFlow";
 	this.instanceClassName = "cwm.relations.ControlFlow";
 	this.treeIcon = "Figure";
-	this.labelProperties = {};
+	this.labelProperties = {
+		Name :true
+	};
 	
 	this.maskInfo = {
 			"AControlFlowSource" : "Activity",

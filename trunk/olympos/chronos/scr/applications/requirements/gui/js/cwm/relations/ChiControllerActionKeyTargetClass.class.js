@@ -17,7 +17,9 @@ cwm.relations.ChiControllerActionKeyTargetClass = function(){
     this.uwmClassName = "ChiControllerActionKeyTarget";
     this.instanceClassName = "cwm.relations.NMChiControllerActionKeyChiController";
     this.treeIcon = "Figure";
-    this.labelProperties = {};
+    this.labelProperties = {
+      Name :true
+    };
     
     this.realUwmClassName = "ChiController";
 }

@@ -17,7 +17,9 @@ cwm.relations.ChiUseCaseCoreSourceEndClass = function(){
     this.uwmClassName = "ChiUseCaseCoreSourceEnd";
     this.instanceClassName = "cwm.relations.NMChiUseCaseChiUseCase";
     this.treeIcon = "Figure";
-    this.labelProperties = {};
+    this.labelProperties = {
+      Name :true
+    };
     
     this.realUwmClassName = "NMChiUseCaseChiUseCase";
     this.connectionEndRole = "source";

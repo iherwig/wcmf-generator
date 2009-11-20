@@ -39,7 +39,7 @@ uwm.event.EventBroker = function() {
 		"delete": true,
 		"changeLabel": true,
 		"changeProperty": true,
-		"associate": true,
+		"associate": true, /* parameters: parentObject, childObject, relationObject, connection */
 		"disassociate": true
 	});
 }

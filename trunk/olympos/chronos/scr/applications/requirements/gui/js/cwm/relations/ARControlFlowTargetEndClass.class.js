@@ -17,7 +17,9 @@ cwm.relations.ARControlFlowTargetEndClass = function(){
     this.uwmClassName = "ARControlFlowTargetEnd";
     this.instanceClassName = "cwm.relations.ControlFlow";
     this.treeIcon = "Figure";
-    this.labelProperties = {};
+    this.labelProperties = {
+      Name :true
+    };
     
     this.realUwmClassName = "ControlFlow";
     this.connectionEndRole = "target";

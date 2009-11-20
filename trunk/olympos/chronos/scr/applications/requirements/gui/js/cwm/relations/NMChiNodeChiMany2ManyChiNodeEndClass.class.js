@@ -17,7 +17,9 @@ cwm.relations.NMChiNodeChiMany2ManyChiNodeEndClass = function(){
     this.uwmClassName = "NMChiNodeChiMany2ManyChiNodeEnd";
     this.instanceClassName = "cwm.relations.NMChiNodeChiMany2Many";
     this.treeIcon = "Figure";
-    this.labelProperties = {};
+    this.labelProperties = {
+      Name :true
+    };
     
     this.realUwmClassName = "ChiNode";
 }

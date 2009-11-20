@@ -277,7 +277,7 @@ uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionI
 	if (!nmUwmClassName) {
 		uwm.persistency.Persistency.getInstance().associate(parentOid, childOid, false, function(request, data) {
 			self.fillInRelationObject(connection, data);
-			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self);
+			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self, null, connection);
 		});
 
 		// update parent/child oids
@@ -314,7 +314,7 @@ uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionI
 				otherModelObject.maskedOids[relationObject.getOid()] = maskedOid;
 			}
 			
-			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self);
+			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self, relationObject, connection);
 		});
 		
 		/*

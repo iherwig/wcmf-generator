@@ -17,7 +17,9 @@ cwm.relations.TargetActionKeyEndClass = function(){
     this.uwmClassName = "TargetActionKeyEnd";
     this.instanceClassName = "cwm.relations.NMChiControllerActionKeyChiController";
     this.treeIcon = "Figure";
-    this.labelProperties = {};
+    this.labelProperties = {
+      Name :true
+    };
     
     this.realUwmClassName = "NMChiControllerActionKeyChiController";
     this.connectionEndRole = "target";
