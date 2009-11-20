@@ -36,6 +36,7 @@ uwm.diagram.AbstractDiagram = function(modelNodeClass) {
 	
 	this.figures = new Ext.util.MixedCollection();
 	this.objects = new Ext.util.MixedCollection();
+	this.connections = new Ext.util.MixedCollection();
 	// progress windows for drop events (stored by id)
 	this.dropWindows = new Ext.util.MixedCollection();
 	this.canvas = null;
@@ -217,6 +218,23 @@ uwm.diagram.AbstractDiagram.prototype.getContainedFigure = function(oid) {
 	return this.figures.get(oid);
 }
 
+uwm.diagram.AbstractDiagram.prototype.getContainedConnection = function(sourceOid, targetOid, relationOid) {
+	return null;
+	
+	var key1 = sourceOid+"-"+targetOid+"-"+relationOid;
+	if (this.connections.containsKey(key1)) {
+		return this.connections.get(key1);
+	}
+	else {
+		// check for swapped ends
+		var key2 = targetOid+"-"+sourceOid+"-"+relationOid;
+		if (this.connections.containsKey(key2)) {
+			return this.connections.get(key2);
+		}
+	}
+	return null;
+}
+
 uwm.diagram.AbstractDiagram.prototype.scrollToObject = function(modelObject) {
 	var figure = this.figures.get(modelObject.getOid());
 	var graphics = figure.getGraphics();
@@ -282,6 +300,7 @@ uwm.diagram.AbstractDiagram.prototype.initDropZone = function() {
 uwm.diagram.AbstractDiagram.prototype.loadFigures = function(forceReload) {
 	this.propertyDisplayEnabled = false;
 	this.eventHandlerEnabled = false;
+	this.connections.clear();
 	
 	// workaround: shows over all tabs
 	this.loadMask = new Ext.LoadMask(this.tab.container);
@@ -468,7 +487,6 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 			
 			if (connectedObject) {
 				
-				var forbiddenListtype;
 				var connectionInfo = newObject.getModelNodeClass().getConnectionInfo(connectedObject.getModelNodeClass());
 				var createConnection = true;
 				var maskedClass;
@@ -502,28 +520,13 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 				}
 				
 				if (createConnection) {
-					
-					if (!connectionInfo.nmSelf) {
-						if (!(maskedClass instanceof uwm.model.RelationClass) && (
-								(connectedObject.getUwmClassName() == newObject.getUwmClassName()) ||
-								(nmtype == true)
-							)) {
-							// same type as connected object or nmrelation (listtype
-							// the same in both cases)
-							if (connectionInfo.invert) {
-								forbiddenListtype = "child";
-							} else {
-								forbiddenListtype = "parent";
-							}
-						} else {
-							// other type as connected object and no nmrelation
-							forbiddenListtype = "parent";
-						}
+					var sourceOid = newObject.getOid();
+					var targetOid = connectedObject.getOid();
+					var relationOid = "";
+					if (relationObject) {
+						relationOid = relationObject.getOid();
 					}
-					
-					if (!(listtype == forbiddenListtype)) {
-						// everytime draw connection line only in one direction
-						
+					if (this.getContainedConnection(sourceOid, targetOid, relationOid) == null) {
 						if (connectionInfo.nmSelf && connectionInfo.invertBackendRelation) {
 							var newFigure = this.figures.get(connectedObject.getOid());
 							var connectedFigure = this.figures.get(newObject.getOid());
@@ -532,10 +535,13 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 							var newFigure = this.figures.get(newObject.getOid());
 							var connectedFigure = this.figures.get(connectedObject.getOid());
 						}
-						var newPort = newFigure.getGraphics().getPorts().get(0);
-						var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
 						
-						this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true, undefined, relationObject);
+						if (connectedFigure) {
+							var newPort = newFigure.getGraphics().getPorts().get(0);
+							var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
+
+							this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true, undefined, relationObject);
+						}
 					}
 				}
 			}
@@ -634,6 +640,16 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		connection.setRelationObject(relationObject);
 		this.workflow.addFigure(connection);
 	}
+	
+	// register the connection (for access in both directions)
+	var key1 = sourceObject.getOid()+"-"+targetObject.getOid()+"-";
+	var key2 = targetObject.getOid()+"-"+sourceObject.getOid()+"-";
+	if (relationObject) {
+		key1 += relationObject.getOid();
+		key2 += relationObject.getOid();
+	}
+	this.connections.add(key1, connection);
+	this.connections.add(key2, connection);
 }
 
 /**
@@ -936,7 +952,7 @@ uwm.diagram.AbstractDiagram.prototype.getFigure = function() {
  * Remove a figure from internal registries
  * @param figure A {uwm.diagram.Figure} instance
  */ 
-uwm.diagram.AbstractDiagram.prototype.removeFromCache = function(figure) {
+uwm.diagram.AbstractDiagram.prototype.removeFigureFromCache = function(figure) {
 	if (figure) {
 		var oid = figure.getModelObject().getOid();
 		this.figures.removeKey(oid);
@@ -944,6 +960,32 @@ uwm.diagram.AbstractDiagram.prototype.removeFromCache = function(figure) {
 		if (this.childOids) {
 			this.childOids.remove(figure.getOid());
 		}
+		var doomedKeys = [];
+		this.connections.eachKey(function(key, item) {
+			var keyParts = key.split("-");
+			if (keyParts.indexOf(oid) >= 0) {
+				doomedKeys.push(key);
+			}
+		});
+		for (var i=0; i<doomedKeys.length; i++) {
+			this.connections.removeKey(doomedKeys[i]);
+		}
+	}
+}
+
+/**
+ * Remove a connection from internal registries
+ * @param connection A {uwm.graphics.connection.BaseConnection} instance
+ */ 
+uwm.diagram.AbstractDiagram.prototype.removeConnectionFromCache = function(connection) {
+	var doomedKeys = [];
+	this.connections.eachKey(function(key, item) {
+		if (item == connection) {
+			doomedKeys.push(key);
+		}
+	});
+	for (var i=0; i<doomedKeys.length; i++) {
+		this.connections.removeKey(doomedKeys[i]);
 	}
 }
 
@@ -960,7 +1002,7 @@ uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 		var figure = this.figures.get(modelNode.getOid());
 		
 		if (figure) {
-			this.removeFromCache(figure);
+			this.removeFigureFromCache(figure);
 			figure.remove();
 		}
 	}
