@@ -13,8 +13,10 @@
 		<xsd:attribute name="fk_chigoal_id" type="xsd:string"/>
 		<xsd:attribute name="reqType" type="xsd:string"/>
 		<xsd:attribute name="Priority" type="xsd:int"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Proofreader" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
@@ -38,6 +40,7 @@
 		<xsd:attribute name="Proofreader" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -60,9 +63,9 @@
 		<xsd:attribute name="Value_Name" type="xsd:string"/>
 		<xsd:attribute name="Value_ammount" type="xsd:string"/>
 		<xsd:attribute name="Value_Goal" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -82,9 +85,9 @@
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="Width" type="xsd:string"/>
 		<xsd:attribute name="Height" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -140,7 +143,10 @@
 		<xsd:attribute name="PositionY" type="xsd:string"/>
 		<xsd:attribute name="PositionX" type="xsd:string"/>
 		<xsd:attribute name="Width" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="created" type="xsd:string"/>
 		<xsd:attribute name="creator" type="xsd:string"/>
 		<xsd:attribute name="last_editor" type="xsd:string"/>
@@ -155,10 +161,10 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chirequirement_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
-		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Responsible" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -178,9 +184,9 @@
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chiworkerexternal_id" type="xsd:string"/>
 		<xsd:attribute name="is_OfflineUser" type="xsd:boolean"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -201,9 +207,9 @@
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -233,9 +239,9 @@
 		<xsd:attribute name="Stakeholders" type="xsd:string"/>
 		<xsd:attribute name="MainSuccessScenario" type="xsd:string"/>
 		<xsd:attribute name="Extensions" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -265,9 +271,9 @@
 		<xsd:attribute name="Stakeholders" type="xsd:string"/>
 		<xsd:attribute name="MainSuccessScenario" type="xsd:string"/>
 		<xsd:attribute name="Extensions" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -288,7 +294,9 @@
 		<xsd:attribute name="Legitimacy" type="xsd:string"/>
 		<xsd:attribute name="Role" type="xsd:string"/>
 		<xsd:attribute name="Urgency" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -305,7 +313,9 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -322,7 +332,9 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -339,7 +351,9 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -356,7 +370,9 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -373,7 +389,9 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -393,7 +411,9 @@
 		<xsd:attribute name="action" type="xsd:string"/>
 		<xsd:attribute name="context" type="xsd:string"/>
 		<xsd:attribute name="config" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -418,6 +438,7 @@
 		<xsd:attribute name="fk_chibusinessusecase_id" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -439,9 +460,9 @@
 		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityreceive_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -461,9 +482,9 @@
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -483,9 +504,9 @@
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -504,9 +525,9 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -526,9 +547,9 @@
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -549,9 +570,9 @@
 		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activitysend_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -568,7 +589,9 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -586,7 +609,9 @@
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_name" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -604,9 +629,9 @@
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -625,9 +650,9 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chibusinesspartneractive_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -646,9 +671,9 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chibusinesspartnerpassive_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -666,9 +691,9 @@
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -687,9 +712,9 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chiworkerinternal_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -718,11 +743,11 @@
 		<xsd:attribute name="is_soap" type="xsd:boolean"/>
 		<xsd:attribute name="is_searchable" type="xsd:boolean"/>
 		<xsd:attribute name="initparams" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
-		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chicontroller_id" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -752,11 +777,11 @@
 		<xsd:attribute name="is_soap" type="xsd:boolean"/>
 		<xsd:attribute name="is_searchable" type="xsd:boolean"/>
 		<xsd:attribute name="initparams" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
-		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chicontroller_id" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -776,7 +801,9 @@
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_chivalue_id" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -806,8 +833,8 @@
 		<xsd:attribute name="restrictions_description" type="xsd:string"/>
 		<xsd:attribute name="column_name" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -828,7 +855,9 @@
 		<xsd:attribute name="fk_chicontroller_id" type="xsd:string"/>
 		<xsd:attribute name="ReturnType" type="xsd:string"/>
 		<xsd:attribute name="Parameters" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -851,9 +880,9 @@
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="plattform" type="xsd:string"/>
 		<xsd:attribute name="config" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -877,9 +906,9 @@
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chibusinessusecase_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chibusinessusecasecore_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -900,9 +929,9 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chinode_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -926,9 +955,9 @@
 		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
 		<xsd:attribute name="object_status" type="xsd:string"/>
 		<xsd:attribute name="ChiNodeName" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
@@ -1018,7 +1047,10 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_model_id" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Author" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Name" type="xsd:string"/>
 		<xsd:attribute name="Notes" type="xsd:string"/>
 		<xsd:attribute name="created" type="xsd:string"/>
