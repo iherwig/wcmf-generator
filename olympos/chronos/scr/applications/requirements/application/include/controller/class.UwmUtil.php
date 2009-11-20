@@ -90,7 +90,7 @@ class UwmUtil {
 			} else {
 				Log::error('Unknown model id ' . $startOid, __CLASS__);
 			}
-		} else if ($rootType == 'Package') {
+		} else if ($rootType == 'Package' || ($rootType == 'Diagram' && self::$processVirtualPackages)) {
 			$currPackage = self::$persistenceFacade->load($startOid);
 			if ($currPackage) {
 				self::$dom->startElement('Model');
