@@ -371,13 +371,14 @@ uwm.model.ModelNode.prototype.disassociate = function(otherModelObject, connecti
 		}
 	}
 	
-	uwm.persistency.Persistency.getInstance().disassociate(parentOid, childOid, function(request, data) {
-		if (connectionInfo && connectionInfo.nmSelf && relationObject) {
-			uwm.model.ModelContainer.getInstance().deleteObject(relationObject);
-		}
-		
-		uwm.event.EventBroker.getInstance().fireEvent("disassociate", otherModelObject, self);
-	});
+	if (connectionInfo && connectionInfo.nmSelf && relationObject) {
+		uwm.model.ModelContainer.getInstance().deleteObject(relationObject);
+	}
+	else {
+		uwm.persistency.Persistency.getInstance().disassociate(parentOid, childOid, function(request, data) {
+			uwm.event.EventBroker.getInstance().fireEvent("disassociate", otherModelObject, self);
+		});
+	}
 }
 
 /**
