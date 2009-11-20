@@ -1,0 +1,201 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+«EXTENSION common::umlutils»
+
+«EXTENSION cartridge::Grails::grailsService»
+
+«DEFINE root FOR uml::Model»
+	«EXPAND grailsService FOREACH this.allOwnedElements().typeSelect(uml::Activity)»
+«ENDDEFINE»
+
+«DEFINE grailsService FOR uml::Activity»
+	«EXPAND requestClass FOR this»
+
+	«EXPAND resultClass FOR this»
+	
+	«EXPAND contextClasses FOREACH this.getMethodNodes()»
+
+	«FILE this.asClassName() + ".groovy"»
+class «this.asClassName()» {
+			
+	static expose=['cxf']
+	
+	boolean transactional = true
+	
+	public «this.asResultName()» «this.asMainMethodName()»(«this.asRequestName()» request) {
+		«EXPAND resultVariable FOREACH this.getMethodNodes()»
+		
+		«this.asResultName()» result = new «this.asResultName()»()
+		
+		«EXPAND nodeCall FOR this.getFirstNode()»
+		
+		return result
+	}
+	
+	«EXPAND nodeMethod FOREACH this.getMethodNodes()»
+}
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE requestClass FOR uml::Activity»
+	«FILE this.asRequestName() + ".groovy"»
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+public class «this.asRequestName()» {
+	«FOREACH this.getInputVariables() AS currInput»
+	«currInput.getGrailsTypeName()» «currInput.asVariableName()»
+	«ENDFOREACH»
+}
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE resultClass FOR uml::Activity»
+	«FILE this.asResultName() + ".groovy"»
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+public class «this.asResultName()» {
+	«FOREACH this.getOutputVariables() AS currOutput»
+	«currOutput.getGrailsTypeName()» «currOutput.asVariableName()»
+	«ENDFOREACH»
+}
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE contextClasses FOR uml::ActivityNode»
+	«FILE this.asContextName() + ".groovy"»
+	public class «this.asContextName()» extends Context {
+		/**
+		 * contains constants that define a level of a flow within a ruleset
+		 * e.g. these constants are set as a the Result of the execute of a rule
+		 */
+		enum RulesetState {
+			BEGIN,
+			END
+		}
+		
+		/**
+		 * contains that define the actions for a higher level flow
+		 * between rulesets
+		 * e.g. these constants are set as a the Result of the execute of a rule
+		 */
+		enum FlowState {
+			«EXPAND flowStates FOR this»			
+		}
+		
+		RulesetState rulesetState = RulesetState.BEGIN
+		
+		//Ruleset in variables
+		«FOREACH this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode) AS currSource»
+			«currSource.getGrailsTypeName()» «currSource.asVariableName()»
+		«ENDFOREACH»
+	}
+	«ENDFILE»
+«ENDDEFINE»
+ custom criteria
+«DEFINE flowStates FOR uml::ActivityNode»
+
+«ENDDEFINE»
+
+«DEFINE flowStates FOR uml::DecisionNode»
+	«FOREACH this.getFlowStates() AS currOutFlow SEPARATOR ","»
+		«currOutFlow.asFlowName()-»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE resultVariable FOR uml::ActivityNode»
+		def «this.asResultName()»
+«ENDDEFINE»
+
+«DEFINE nodeCall FOR uml::OpaqueAction»
+	«EXPAND nodeCallDefault FOR this»
+	
+	«EXPAND nodeCallResult FOR this»
+
+	«LET this.getNextNode() AS nextNode» 
+		«IF nextNode != null»
+			«EXPAND nodeCall FOR nextNode»
+		«ENDIF»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE nodeCall FOR uml::DecisionNode»
+	«EXPAND nodeCallDefault FOR this»
+	
+	switch («this.asResultName()».selection) {
+		«EXPAND nodeCallSelection FOREACH this.getFlowStates()»
+	}
+	
+	«EXPAND nodeCallResult FOR this»
+«ENDDEFINE»
+
+«DEFINE nodeCall FOR uml::ActivityNode»«REM»Dummy for unhandled cases«ENDREM»«ENDDEFINE»
+
+«DEFINE nodeCallDefault FOR uml::ActivityNode»
+	«this.asResultName()» = «this.asMethodName()»(«EXPAND nodeCallParameter FOREACH this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode)»)
+«ENDDEFINE»
+
+«DEFINE nodeCallParameter FOR uml::DataStoreNode»
+	«this.asVariableName()»: «this.getSourceVariableName()»
+«ENDDEFINE»
+
+«DEFINE nodeCallResult FOR uml::ActivityNode»
+	«FOREACH this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode) AS currResult»
+		result.«currResult.asVariableName()» = «this.asResultName()».«currResult.asVariableName()»
+	«ENDFOREACH»
+«ENDDEFINE»
+
+«DEFINE nodeCallSelection FOR uml::ActivityEdge»
+			case «this.source.asContextName()».FlowState.«this.asFlowName()»:
+				«EXPAND nodeCall FOR this.target»
+				break
+«ENDDEFINE»
+
+«DEFINE nodeMethod FOR uml::OpaqueAction»
+	«EXPAND nodeMethodHeader FOR this»
+	
+	«EXPAND nodeMethodFooter FOR this»
+«ENDDEFINE»
+
+«DEFINE nodeMethod FOR uml::DecisionNode»
+	«EXPAND nodeMethodHeader FOR this»
+	//TODO: Required selection criteria
+	result.selection = «this.asContextName()».FlowState.«this.getFlowStates().first().asFlowName()»
+	
+	«EXPAND nodeMethodFooter FOR this»
+«ENDDEFINE»
+
+«DEFINE nodeMethod FOR uml::ActivityNode»«REM»Dummy for unhandled cases«ENDREM»«ENDDEFINE»
+
+«DEFINE nodeMethodHeader FOR uml::ActivityNode»
+	protected «this.asMethodName()»(arguments) {
+		«EXPAND nodeMethodInput FOREACH this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode)»
+	
+		def result = [:]
+		
+		/*
+		 TODO: Implement method according to comment below
+		 «this.getComment()»
+		 */
+		
+		«IF this.outgoing.typeSelect(uml::ObjectFlow).size > 0»
+			//TODO: Required return values
+			«FOREACH this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode) AS currResult»
+				result.«currResult.asVariableName()» = null
+			«ENDFOREACH»
+		«ENDIF»
+«ENDDEFINE»
+
+«DEFINE nodeMethodFooter FOR uml::ActivityNode»
+		return result
+	}
+«ENDDEFINE»
+
+«DEFINE nodeMethodInput FOR uml::DataStoreNode»
+	«this.getGrailsTypeName()» «this.asVariableName()» = arguments.«this.asVariableName()»
+«ENDDEFINE»

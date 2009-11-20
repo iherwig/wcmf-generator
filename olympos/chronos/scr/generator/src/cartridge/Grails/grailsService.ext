@@ -1,0 +1,109 @@
+import uml;
+import Chronos;
+
+extension common::util;
+extension common::nameNormalizer;
+
+String asClassName(uml::Activity this):
+	this.name.normalizeClassName() + "Service"
+;
+
+String asResultName(uml::Activity this):
+	this.name.normalizeClassName() + "Result"
+;
+
+String asRequestName(uml::Activity this):
+	this.name.normalizeClassName() + "Request"
+;
+
+String asMainMethodName(uml::Activity this):
+	this.getInitialNode().name.normalizeMemberName()
+;
+	
+uml::InitialNode getInitialNode(uml::Activity this):
+	this.node.typeSelect(uml::InitialNode).first()
+;
+
+List[uml::DataStoreNode] getInputVariables(uml::Activity this):
+	this.node.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).select(e|e.incoming.size == 0)
+;
+
+List[uml::DataStoreNode] getOutputVariables(uml::Activity this):
+	let allOutput = this.node.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).select(e|e.outgoing.size == 0):
+	
+	allOutput.select(e|allOutput.selectFirst(f|e.asVariableName() == e.asVariableName()) == e)
+;
+
+uml::ActivityNode getFirstNode(uml::Activity this):
+	this.getInitialNode().outgoing.typeSelect(uml::ControlFlow).target.first()
+;
+
+List[uml::ActivityNode] getMethodNodes(uml::Activity this):
+	{}
+	.addAll(this.node.typeSelect(uml::OpaqueAction))
+	.addAll(this.node.typeSelect(uml::DecisionNode))
+;
+
+String getGrailsTypeName(uml::DataStoreNode this):
+	let name = this.type.name.normalizeClassName():
+	
+	!name.isNullOrEmpty() ? 
+		name
+	:
+		"def"
+;
+
+String asVariableName(uml::DataStoreNode this):
+	this.name.normalizeMemberName()
+;
+
+String getSourceVariableName(uml::DataStoreNode this):
+	this.incoming.size > 0 ? (
+		this.incoming.first().source.asResultName() + "." + this.asVariableName()
+	) : (
+		this.activity.asRequestName() + "." + this.asVariableName()
+	)
+;
+
+String asClassName(uml::ActivityNode this):
+	this.name.normalizeClassName()
+;
+
+String asResultName(uml::ActivityNode this):
+	this.name.normalizeMemberName() + "Result"
+;
+
+String asMethodName(uml::ActivityNode this):
+	this.name.normalizeMemberName()
+;
+
+String asContextName(uml::ActivityNode this):
+	this.asClassName() + "Context"
+;
+
+uml::ActivityNode getNextNode(uml::ActivityNode this):
+	this.getNextNodes().first()
+;
+
+List[uml::ActivityNode] getNextNodes(uml::ActivityNode this):
+	this.getNextEdges().target
+;
+
+List[uml::ActivityEdge] getNextEdges(uml::ActivityNode this):
+	{}
+		.addAll(this.outgoing.typeSelect(uml::ControlFlow))
+		//Jump over one DataStore for flows like Action --> DataStore --> Action
+		.addAll(this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow))
+;
+
+List[uml::ControlFlow] getFlowStates(uml::DecisionNode this):
+	this.getNextEdges()
+;
+
+String asFlowName(uml::ActivityEdge this):
+	!this.name.isNullOrEmpty() ? (
+		this.name.toUpperCase()
+	) : (
+		"FLOW_STATE_" + this.source.outgoing.indexOf(this)
+	)
+;
