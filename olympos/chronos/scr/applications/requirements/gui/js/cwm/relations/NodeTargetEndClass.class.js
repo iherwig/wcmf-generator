@@ -17,7 +17,9 @@ cwm.relations.NodeTargetEndClass = function(){
     this.uwmClassName = "NodeTargetEnd";
     this.instanceClassName = "cwm.relations.ChiAssociation";
     this.treeIcon = "Figure";
-    this.labelProperties = {};
+    this.labelProperties = {
+      Name :true
+    };
     
     this.realUwmClassName = "ChiAssociation";
     this.connectionEndRole = "target";

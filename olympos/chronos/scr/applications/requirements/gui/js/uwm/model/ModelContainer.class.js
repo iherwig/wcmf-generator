@@ -205,7 +205,7 @@ uwm.model.ModelContainer.prototype.createFigure = function(diagramModelNode, mod
 	});
 	
 	actionSet.addAssociate(diagramModelNode.getOid(), "{last_created_oid:Figure}", false, function(request, data) {
-		uwm.event.EventBroker.getInstance().fireEvent("associate", diagramModelNode, self.getByOid(figureOid), false);
+		uwm.event.EventBroker.getInstance().fireEvent("associate", diagramModelNode, self.getByOid(figureOid));
 	});
 	
 	if (modelObject) {

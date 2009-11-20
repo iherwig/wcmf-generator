@@ -17,7 +17,9 @@ cwm.relations.ChiNodeTargetClass = function(){
     this.uwmClassName = "ChiNodeTarget";
     this.instanceClassName = "cwm.relations.ChiAssociation";
     this.treeIcon = "Figure";
-    this.labelProperties = {};
+    this.labelProperties = {
+      Name :true
+    };
     
     this.realUwmClassName = "ChiNode";
 }

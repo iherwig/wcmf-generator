@@ -17,7 +17,9 @@ cwm.relations.NMChiUseCaseChiUseCase = function() {
 	this.uwmClassName = "NMChiUseCaseChiUseCase";
 	this.instanceClassName = "cwm.relations.NMChiUseCaseChiUseCase";
 	this.treeIcon = "Figure";
-	this.labelProperties = {};
+	this.labelProperties = {
+		Name :true
+	};
 	
 	this.maskInfo = {
 	    "ChiUseCaseSource" : "ChiBusinessUseCase",

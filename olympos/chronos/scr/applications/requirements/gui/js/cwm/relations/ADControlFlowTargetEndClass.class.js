@@ -17,7 +17,9 @@ cwm.relations.ADControlFlowTargetEndClass = function(){
     this.uwmClassName = "ADControlFlowTargetEnd";
     this.instanceClassName = "cwm.relations.ControlFlow";
     this.treeIcon = "Figure";
-    this.labelProperties = {};
+    this.labelProperties = {
+      Name :true
+    };
     
     this.realUwmClassName = "ControlFlow";
     this.connectionEndRole = "target";

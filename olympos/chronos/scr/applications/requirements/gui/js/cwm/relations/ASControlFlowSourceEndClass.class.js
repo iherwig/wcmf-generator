@@ -17,7 +17,9 @@ cwm.relations.ASControlFlowSourceEndClass = function(){
     this.uwmClassName = "ASControlFlowSourceEnd";
     this.instanceClassName = "cwm.relations.ControlFlow";
     this.treeIcon = "Figure";
-    this.labelProperties = {};
+    this.labelProperties = {
+      Name :true
+    };
     
     this.realUwmClassName = "ControlFlow";
     this.connectionEndRole = "source";

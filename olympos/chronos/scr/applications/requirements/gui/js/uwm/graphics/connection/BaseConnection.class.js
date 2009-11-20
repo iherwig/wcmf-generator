@@ -112,6 +112,16 @@ uwm.graphics.connection.BaseConnection.prototype.getLabel = function() {
 }
 
 /**
+ * Set the label object of this connection.
+ * 
+ * @param The label object of this connection.
+ * @type draw2d.Label
+ */
+uwm.graphics.connection.BaseConnection.prototype.setLabel = function(label) {
+  this.label.setText(label);
+}
+
+/**
  * Builds the context menu for this connection.
  * 
  * @private

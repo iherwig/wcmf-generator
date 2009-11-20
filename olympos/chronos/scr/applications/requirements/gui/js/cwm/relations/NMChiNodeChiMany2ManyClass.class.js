@@ -17,7 +17,9 @@ cwm.relations.NMChiNodeChiMany2ManyClass = function() {
 	this.uwmClassName = "NMChiNodeChiMany2Many";
 	this.instanceClassName = "cwm.relations.NMChiNodeChiMany2Many";
 	this.treeIcon = "Figure";
-	this.labelProperties = {};
+	this.labelProperties = {
+		Name :true
+	};
 	
 	this.maskInfo = {
 	    "NMChiNodeChiMany2ManyChiNodeEnd" : "ChiController",
