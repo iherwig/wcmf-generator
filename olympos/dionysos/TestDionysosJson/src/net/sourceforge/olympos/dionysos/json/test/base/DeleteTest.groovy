@@ -44,7 +44,7 @@ public class DeleteTest extends DionysosTest {
 			 	 
 			],
 			{req, json ->
-				assertTrue(json.success)
+				assertFalse(json.success)
 				assertEquals('delete', json.action)
 				assertEquals(Cfg.deleteInvalidOid, json.oid)
 				assertEquals('OID_INVALID', json.errorCode)
@@ -65,7 +65,7 @@ public class DeleteTest extends DionysosTest {
 			 	 
 			],
 			{req, json ->
-				assertTrue(json.success)
+				assertFalse(json.success)
 				assertEquals('delete', json.action)
 				assertEquals(Cfg.deleteInvalidClass, json.oid)
 				assertEquals('CLASS_NAME_INVALID', json.errorCode)
