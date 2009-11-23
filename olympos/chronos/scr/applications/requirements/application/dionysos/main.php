@@ -16,7 +16,7 @@
  *
  * $Id$
  */
-error_reporting(E_ALL | E_NOTICE);
+error_reporting(E_ERROR | E_PARSE);
 
 require_once("base_dir.php");  
 require_once(BASE."wcmf/lib/util/class.Log.php");
@@ -60,9 +60,17 @@ $request->setResponseFormat('Dionysos');
 try {
   $result = ActionMapper::processAction($request);
 }
-catch (DionysosException $ex)
+catch (ApplicationException $ex)
 {
   $response = $ex->getResponse();
+  if ($response == null) {
+    $response = new Response('', '', $action, array());
+    $response->setFormat($request->getResponseFormat());
+    $requestData = $request->getData();
+    foreach ($requestData as $key => $value) {
+      $response->setValue($key, $value);
+    }
+  }
   $response->setValue('success', false);
   $response->setValue('errorCode', $ex->getCodeString());
   Formatter::serialize($response);
