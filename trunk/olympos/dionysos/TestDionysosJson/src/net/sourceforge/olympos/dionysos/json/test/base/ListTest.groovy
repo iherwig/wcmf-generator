@@ -3,9 +3,11 @@ package net.sourceforge.olympos.dionysos.json.test.base;
 import static org.junit.Assert.*
 
 import org.junit.Test;
-import net.sourceforge.olympos.dionysos.json.test.Cfg;
+
+import net.sourceforge.olympos.dionysos.json.test.Cfg;
 import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
-public class ListTest extends DionysosTest {
+
+public class ListTest extends DionysosTest {
 	public ListTest(String method) {
 		super(method)
 	}
@@ -24,8 +26,8 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 				assertTrue(json.success)
 				assertEquals('list', json.action)
 				assertEquals(Cfg.listClassName, json.className)
-				assertEquals(5, json.list.size())
-				assertEquals(5, json.totalCount)
+				assertEquals(Cfg.listSize, json.list.size())
+				assertEquals(Cfg.listSize, json.totalCount)
 
 				assertElementClasses(json)
 			},
@@ -35,7 +37,7 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 
 	@Test
 	public void limit() {
-		//ensureLogin()
+		ensureLogin()
 
 		request(
 			[
@@ -49,7 +51,7 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 				assertEquals(Cfg.listClassName, json.className)
 				assertEquals(3, json.limit)
 				assertEquals(3, json.list.size())
-				assertEquals(5, json.totalCount)
+				assertEquals(Cfg.listSize, json.totalCount)
 
 				assertElementClasses(json)
 			},
@@ -59,7 +61,7 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 
 	@Test
 	public void offset() {
-		//ensureLogin()
+		ensureLogin()
 
 		request(
 			[
@@ -72,8 +74,8 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 				assertEquals('list', json.action)
 				assertEquals(Cfg.listClassName, json.className)
 				assertEquals(3, json.offset)
-				assertEquals(2, json.list.size())
-				assertEquals(5, json.totalCount)
+				assertEquals(Cfg.listSize-3, json.list.size())
+				assertEquals(Cfg.listSize, json.totalCount)
 
 				assertElementClasses(json)
 			},
@@ -99,7 +101,7 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 				assertEquals(2, json.limit)
 				assertEquals(2, json.offset)
 				assertEquals(2, json.list.size())
-				assertEquals(5, json.totalCount)
+				assertEquals(Cfg.listSize, json.totalCount)
 
 				assertElementClasses(json)
 			},
@@ -122,8 +124,8 @@ import net.sourceforge.olympos.dionysos.json.test.DionysosTest;
 				assertEquals('list', json.action)
 				assertEquals(Cfg.listClassName, json.className)
 				assertEquals(Cfg.listClassFieldName, json.sortFieldName)
-				assertEquals(5, json.list.size())
-				assertEquals(5, json.totalCount)
+				assertEquals(Cfg.listSize, json.list.size())
+				assertEquals(Cfg.listSize, json.totalCount)
 
 				assertElementClasses(json)
 

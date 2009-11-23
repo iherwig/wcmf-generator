@@ -1,5 +1,6 @@
 package net.sourceforge.olympos.dionysos.json.test;
-public class Cfg {
+
+public class Cfg {
 	/**
 	 * If true, the parsed JSON will be written to the console.
 	 */
@@ -55,6 +56,10 @@ package net.sourceforge.olympos.dionysos.json.test;
 	 * A valid field name of the listClass 
 	 */
 	static listClassFieldName = 'title'
+	/**
+	 * The number of object of listClassName
+	 */
+	static listSize = 5
 
 	/**
 	 * The oid of the base object to test read with.
