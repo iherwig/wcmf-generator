@@ -47,7 +47,11 @@ class DionysosNodeSerializer
       if ($parent != null) {
         $parent->addChild($node);
       }
+      $template = &$persistenceFacade->create($type, BUILDDEPTH_SINGLE);
       foreach($data['attributes'] as $key => $value) {
+        if (!$template->hasValue($key)) {
+          throw new DionysosException(null, null, 'The attribute id '.$key.' is unknown in '.$type, DionysosException::ATTRIBUTE_NAME_INVALID);
+        }
         DionysosNodeSerializer::deserializeValue($node, $key, $value);
       }
       return $node;
@@ -114,11 +118,10 @@ class DionysosNodeSerializer
         $ref = DionysosNodeSerializer::serializeAsReference($oid);
         if ($ref != null)
         {
+          // references to parents are single valued
           $type = $ref['type'];
-          if (!array_key_exists($type, $curResult['attributes'])) {
-            $curResult['attributes'][$type] = array();
-          }
-          $curResult['attributes'][$type][] = array('className' => $ref['baseType'], 'oid' => $ref['baseOID'], 'isReference' => true);
+          $nodeRef = array('className' => $ref['baseType'], 'oid' => $ref['baseOID'], 'isReference' => true);
+          $curResult['attributes'][$type] = $nodeRef;
         }
       }
       
@@ -142,14 +145,21 @@ class DionysosNodeSerializer
         }
         if (!$isLoaded)
         {
-          $ref = DionysosNodeSerializer::serializeAsReference($oid);
+          $ref = DionysosNodeSerializer::serializeAsReference($oid, $curNode->getType());
           if ($ref != null)
           {
             $type = $ref['type'];
-            if (!array_key_exists($type, $curResult['attributes'])) {
-              $curResult['attributes'][$type] = array();
+            $nodeRef = array('className' => $ref['baseType'], 'oid' => $ref['baseOID'], 'isReference' => true);
+            if ($ref['isMultiValued'])
+            {
+              if (!array_key_exists($type, $curResult['attributes'])) {
+                $curResult['attributes'][$type] = array();
+              }
+              $curResult['attributes'][$type][] = $nodeRef;
             }
-            $curResult['attributes'][$type][] = array('className' => $ref['baseType'], 'oid' => $ref['baseOID'], 'isReference' => true);
+            else {
+              $curResult['attributes'][$type] = $nodeRef;
+            }
           }
         }
       }
@@ -162,9 +172,14 @@ class DionysosNodeSerializer
       }
       else
       {
-        array_shift($path);
-        $array = &DionysosNodeSerializer::getPathArray($result, $path, 0);
-        $array[] = $curResult;
+        $isMultiValued = DionysosNodeSerializer::isMultiValued($path[0], $path[1]);
+        $array = &DionysosNodeSerializer::getPathArray($result, $path, 1);
+        if ($isMultiValued) {
+          $array[] = $curResult;
+        }
+        else {
+          $array = $curResult;
+        }
       }
       $iter->proceed();
     }
@@ -179,12 +194,13 @@ class DionysosNodeSerializer
     $result[$valueName] = $node->getValue($valueName, $dataType);
   }
   /**
-   * Serialize a oid as a reference
+   * Serialize a oid as a reference.
    * @param oid The oid
-   * @return An associative array with keys 'baseType', 'baseOID', 'type' or null, 
+   * @param parentType The parent node type (optional, default: null)
+   * @return An associative array with keys 'baseType', 'baseOID', 'type', 'isMultiValued' or null, 
    * if the oid is a dummy id
    */
-  function serializeAsReference($oid)
+  function serializeAsReference($oid, $parentType=null)
   {
     $oidParts = PersistenceFacade::decomposeOID($oid);
     if (!PersistenceFacade::isDummyId(join('', $oidParts['id'])))
@@ -195,11 +211,32 @@ class DionysosNodeSerializer
       $baseType = $relativeNode->getBaseType();
       $baseOID = PersistenceFacade::composeOID(array('type' => $baseType, 'id' => $oidParts['id']));
       
-      return array('baseType' => $baseType, 'baseOID' => $baseOID, 'type' => $type);
+      $isMultiValued = false;
+      if ($parentType) {
+        $isMultiValued = DionysosNodeSerializer::isMultiValued($parentType, $type);
+      }
+      return array('baseType' => $baseType, 'baseOID' => $baseOID, 'type' => $type, 'isMultiValued' => $isMultiValued);
     }
     else {
       return null;
     }
+  }
+  function isMultiValued($parentType, $childType)
+  {
+    $isMultiValued = false;
+    $persistenceFacade = &PersistenceFacade::getInstance();
+    $parentNode = &$persistenceFacade->create($parentType, BUILDDEPTH_SINGLE);
+    if ($parentNode)
+    {
+      $mapper = $parentNode->getMapper();
+      $objectData = $mapper->getObjectDefinition();
+      foreach ($objectData['_children'] as $childData) {
+        if ($childData['type'] == $childType && ($childData['maxOccurs'] > 1 || $childData['maxOccurs'] == 'unbounded')) {
+          $isMultiValued = true;
+        }
+      }
+    }
+    return $isMultiValued;
   }
   /**
    * Get the array, to which an object with the given path should be added.
@@ -210,12 +247,22 @@ class DionysosNodeSerializer
    */
   function &getPathArray(&$array, $path, $curDepth)
   {
+    $isMultiValued = false;
+    if ($curDepth > 0) {
+      $isMultiValued = DionysosNodeSerializer::isMultiValued($path[$curDepth-1], $path[$curDepth]);
+    }
+    
     // if there is no entry for the current type in the attributes array, create it
     if (!array_key_exists($path[$curDepth], $array['attributes'])) {
       $array['attributes'][$path[$curDepth]] = array();
     }
     if ($curDepth < sizeof($path)-1) {
-      return DionysosNodeSerializer::getPathArray($array['attributes'][$path[$curDepth]][0], $path, ++$curDepth);
+      if ($isMultiValued) {
+        return DionysosNodeSerializer::getPathArray($array['attributes'][$path[$curDepth]][0], $path, ++$curDepth);
+      }
+      else {
+        return DionysosNodeSerializer::getPathArray($array['attributes'][$path[$curDepth]], $path, ++$curDepth);
+      }
     }
     else {
       return $array['attributes'][$path[$curDepth]];

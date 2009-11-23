@@ -35,9 +35,12 @@ function gPrintDionysosResult()
     $data = $GLOBALS['gJSONData'];
     if ($data != null)
     {
-      //Log::error($data, 'DionysosFormat');
       $encoded = JSONUtil::encode($data);
-      //Log::error($encoded, 'DionysosFormat');
+      if (Log::isDebugEnabled(__CLASS__))
+      {
+        Log::debug($data, 'DionysosFormat');
+        Log::debug($encoded, 'DionysosFormat');
+      }
       print($encoded);
     }
   }
@@ -109,12 +112,22 @@ class DionysosFormat extends HierarchicalFormat
     if (is_object($value)) {
       $oid = $value->oid;
     }
+    if (!PersistenceFacade::isValidOID($oid)) {
+      throw new DionysosException(null, null, 'The object id '.$oid.' is unknown', DionysosException::OID_INVALID);
+    }
+
     $type = PersistenceFacade::getOIDParameter($oid, 'type');
+    if (!PersistenceFacade::isKnownType($type)) {
+      throw new DionysosException(null, null, 'Entity type '.$type.' is unknown', DionysosException::CLASS_NAME_INVALID);
+    }
     
     // use DionysosNodeSerializer to deserialize
     $node = &DionysosNodeSerializer::deserializeNode($type, $value, false);
     $node->setOID($oid);
+    if (Log::isDebugEnabled(__CLASS__)) {
+      Log::debug($node->toString(), __CLASS__);
+    }
     return $node;
-  }  
+  }
 }
 ?>

@@ -101,6 +101,25 @@ class DionysosControllerDelegate
 
       case 'save':
         break;
+
+      case 'new':
+        if (!PersistenceFacade::isKnownType($request->getValue('className'))) {
+          throw new DionysosException($request, $response, 'Entity type '.$type.' is unknown', DionysosException::CLASS_NAME_INVALID);
+        }
+        $request->setValue('newtype', $request->getValue('className'));
+        break;
+
+      case 'delete':
+        $oid = $request->getValue('oid');
+        $type = PersistenceFacade::getOIDParameter($oid, 'type');
+        if (!PersistenceFacade::isKnownType($type)) {
+          throw new DionysosException($request, $response, 'Entity type '.$type.' is unknown', DionysosException::CLASS_NAME_INVALID);
+        }
+        if (!PersistenceFacade::getInstance()->load($oid, BUILDDEPHT_SINGLE)) {
+          throw new DionysosException(null, null, 'The object id '.$oid.' is unknown', DionysosException::OID_INVALID);
+        }
+        $request->setValue('deleteoids', $oid);
+        break;
     }
   }
   /**
@@ -150,39 +169,49 @@ class DionysosControllerDelegate
         break;
 
        case 'list':
-        $response->clearValue('type');
-        $response->clearValue('start');
-        $response->clearValue('sort');
-        $response->clearValue('dir');
-        $response->clearValue('completeObjects');
+         $response->clearValue('type');
+         $response->clearValue('start');
+         $response->clearValue('sort');
+         $response->clearValue('dir');
+         $response->clearValue('completeObjects');
 
-        if ($request->getValue('offset') >= $response->getValue('totalCount')) {
-          $response->clearValue('list');
-          throw new DionysosException($request, $response, DionysosException::OFFSET_OUT_OF_BOUNDS, DionysosException::OFFSET_OUT_OF_BOUNDS);
-        }
-        // cast to requested format
-        if ($response->hasValue('offset')) {
-          $response->setValue('offset', intval($response->getValue('offset')));
-        }
-        if ($response->hasValue('limit')) {
-          $response->setValue('limit', intval($response->getValue('limit')));
-        }
-        $response->setValue('list', $response->getValue('objects'));
-        $response->clearValue('objects');
-        break;
+         if ($request->getValue('offset') >= $response->getValue('totalCount')) {
+           $response->clearValue('list');
+           throw new DionysosException($request, $response, DionysosException::OFFSET_OUT_OF_BOUNDS, DionysosException::OFFSET_OUT_OF_BOUNDS);
+         }
+         // cast to requested format
+         if ($response->hasValue('offset')) {
+           $response->setValue('offset', intval($response->getValue('offset')));
+         }
+         if ($response->hasValue('limit')) {
+           $response->setValue('limit', intval($response->getValue('limit')));
+         }
+         $response->setValue('list', $response->getValue('objects'));
+         $response->clearValue('objects');
+         break;
 
        case 'display':
-        $response->clearValue('rootType');
-        $response->clearValue('rootTemplateNode');
-        $response->clearValue('possibleparents');
-        $response->clearValue('possiblechildren');
-        $response->clearValue('lockMsg');
-        $response->clearValue('viewMode');
-        $response->setValue('object', $response->getValue('node'));
-        $response->clearValue('node');
-        break;
+         $response->clearValue('rootType');
+         $response->clearValue('rootTemplateNode');
+         $response->clearValue('possibleparents');
+         $response->clearValue('possiblechildren');
+         $response->clearValue('lockMsg');
+         $response->clearValue('viewMode');
+         $response->setValue('object', $response->getValue('node'));
+         $response->clearValue('node');
+         break;
+
+       case 'save':
+         // TODO: use exceptions here
+         if (preg_match('/^A Node with object id .+? does not exist/', $response->getValue('errorMsg'))) {
+            throw new DionysosException(null, null, 'The object id '.$request->getValue('oid').' is unknown', DionysosException::OID_INVALID);
+         }
+         break;
+
+       case 'delete':
+         $response->setValue('oid', $request->getValue('oid'));
+         break;
     }
-    
     return $result;
   }
   /**
