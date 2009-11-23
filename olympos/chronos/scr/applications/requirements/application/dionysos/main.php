@@ -54,9 +54,19 @@ $request = new Request(
   $callParams['action'], 
   $callParams['data']
 );
-$request->setFormat($callParams['requestFormat']);
-$request->setResponseFormat($callParams['responseFormat']);
-$result = ActionMapper::processAction($request);
+$request->setFormat('Dionysos');
+$request->setResponseFormat('Dionysos');
+
+try {
+  $result = ActionMapper::processAction($request);
+}
+catch (DionysosException $ex)
+{
+  $response = $ex->getResponse();
+  $response->setValue('success', false);
+  $response->setValue('errorCode', $ex->getCodeString());
+  Formatter::serialize($response);
+}
 
 exitSearchUtil();
 exit;
@@ -71,6 +81,7 @@ exit;
  */
 function onError($message, $file='', $line='') 
 { 
+  Log::error($message, 'main erorr handler');
   global $controller, $context, $action, $data, $responseFormat;
   static $numCalled = 0;
   

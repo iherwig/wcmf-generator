@@ -17,8 +17,8 @@
  * $Id$
  */
 require_once(BASE."wcmf/lib/util/class.JSONUtil.php");
-require_once(BASE."wcmf/lib/model/class.NodeSerializer.php");
 require_once(BASE."wcmf/lib/presentation/format/class.HierarchicalFormat.php");
+require_once(BASE."application/dionysos/include/lib/class.DionysosNodeSerializer.php");
 
 /**
  * DionysosFormatter collects the response data from all executed controllers
@@ -35,7 +35,9 @@ function gPrintDionysosResult()
     $data = $GLOBALS['gJSONData'];
     if ($data != null)
     {
+      //Log::error($data, 'DionysosFormat');
       $encoded = JSONUtil::encode($data);
+      //Log::error($encoded, 'DionysosFormat');
       print($encoded);
     }
   }
@@ -48,7 +50,7 @@ register_shutdown_function('gPrintDionysosResult');
  * @brief DionysosFormat realizes the JSON request/response format compliant to the
  * Dionysos specification.
  *
- * @author 	ingo herwig <ingo@wemove.com>
+ * @author ingo herwig <ingo@wemove.com>
  */
 class DionysosFormat extends HierarchicalFormat
 {
@@ -58,8 +60,13 @@ class DionysosFormat extends HierarchicalFormat
   function beforeDeserialize(&$data)
   {
     // decode the json data into an array
-    foreach(array_keys($data) as $key)
+    foreach(array_keys($data) as $key) {
       $data[$key] = &JSONUtil::decode($data[$key], true);
+    }
+    // combine oid, attributes key into one array for node deserialization
+    if (array_key_exists('oid', $data) && array_key_exists('attributes', $data)) {
+      $data[$data['oid']] = array('oid' => $data['oid'], 'attributes' => $data['attributes']);
+    }
   }
 
   /**
@@ -78,7 +85,8 @@ class DionysosFormat extends HierarchicalFormat
    */
   function isSerializedNode($key, &$value)
   {
-    return ((is_object($value) || is_array($value)) && array_key_exists('oid', $value) && array_key_exists('type', $value));
+    $result = ((is_object($value) || is_array($value)) && array_key_exists('oid', $value) && array_key_exists('attributes', $value));
+    return $result;
   }
   
   /**
@@ -86,8 +94,8 @@ class DionysosFormat extends HierarchicalFormat
    */
   function serializeNode($key, &$value)
   {
-    // use NodeSerializer to serialize
-    return NodeSerializer::serializeNode($value, false);
+    // use DionysosNodeSerializer to serialize
+    return DionysosNodeSerializer::serializeNode($value, false);
   }
 
   /**
@@ -95,13 +103,17 @@ class DionysosFormat extends HierarchicalFormat
    */
   function &deserializeNode($key, &$value)
   {
-    if (is_array($value))
-      $type = $value['type'];
-    if (is_object($value))
-      $type = $value->type;
+    if (is_array($value)) {
+      $oid = $value['oid'];
+    }
+    if (is_object($value)) {
+      $oid = $value->oid;
+    }
+    $type = PersistenceFacade::getOIDParameter($oid, 'type');
     
-    // use NodeSerializer to deserialize
-    $node = &NodeSerializer::deserializeNode($type, $value, false);
+    // use DionysosNodeSerializer to deserialize
+    $node = &DionysosNodeSerializer::deserializeNode($type, $value, false);
+    $node->setOID($oid);
     return $node;
   }  
 }
