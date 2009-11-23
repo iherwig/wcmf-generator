@@ -61,14 +61,14 @@ Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml
 			let childNav = getNavigability(ch.targetNavigability):
 
 			let isManyToMany = childClass.name.split(":").first() == "ChiNodeManyToMany":
-			let realParentLower = isManyToMany ? childLower : parentLower:
-			let realParentUpper = isManyToMany ? childUpper : parentUpper:
-			let realChildLower = isManyToMany ? parentLower : childLower:
-			let realChildUpper = isManyToMany ? parentUpper : childUpper:
-			let realParentAK = isManyToMany ? parentAK : childAK:
-			let realChildAK = isManyToMany ? childAK : parentAK:
-			let realParentNav = isManyToMany ? parentNav : childNav:
-			let realChildNav = isManyToMany ? childNav : parentNav:
+			let realParentLower = isManyToMany ? childLower : childLower:
+			let realParentUpper = isManyToMany ? childUpper : childUpper:
+			let realChildLower = isManyToMany ? parentLower : parentLower:
+			let realChildUpper = isManyToMany ? parentUpper : parentUpper:
+			let realParentAK = isManyToMany ? parentAK : parentAK:
+			let realChildAK = isManyToMany ? childAK : childAK:
+			let realParentNav = isManyToMany ? parentNav : parentNav:
+			let realChildNav = isManyToMany ? childNav : childNav:
 
 			let conn = parentClass.createAssociation(realParentNav, realParentAK, "", realParentLower, realParentUpper, childClass, realChildNav, realChildAK, "", realChildLower, realChildUpper):
 				conn.applyStereotype("Chronos::ChiAssociation") ->
@@ -395,8 +395,8 @@ Void establishGeneralizationToClass(cwm::ManyToMany ch, uml::Class parentClass, 
 		childClass != null
 		? (
 			let rel = new uml::Generalization : (
-				rel.setSpecific(childClass) ->
-				rel.setGeneral(parentClass)
+				rel.setSpecific(parentClass) ->
+				rel.setGeneral(childClass)
 			)
 		) : (
 			Void
