@@ -24,14 +24,20 @@ String STEREOTYPE_CHI_ASSOCIATION() : "Chronos::ChiAssociation";
  * Check if a given class belongs to the chronos library
  */
 boolean isLibraryClass(uml::NamedElement this) : 
-	this.getQualifiedName().startsWith(LibraryPackageAbsolute(this.getModel()))
+	LibraryPackageAbsolute(this.getModel()) != this.getModel().name ?
+		this.getQualifiedName().startsWith(LibraryPackageAbsolute(this.getModel()))
+	:
+		false
 ;
 
 /**
  * Check if a given class belongs to the application
  */
 boolean isApplicationClass(uml::NamedElement this) : 
-	this.getQualifiedName().startsWith(ApplicationPackageAbsolute(this.getModel())) && uml::Class.isInstance(this)
+	ApplicationPackageAbsolute(this.getModel()) != this.getModel().name ?
+		this.getQualifiedName().startsWith(ApplicationPackageAbsolute(this.getModel())) && uml::Class.isInstance(this)
+	:
+		uml::Class.isInstance(this)
 ;
 
 /**
