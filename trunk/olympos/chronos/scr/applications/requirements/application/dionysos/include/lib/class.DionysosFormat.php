@@ -36,7 +36,7 @@ function gPrintDionysosResult()
     if ($data != null)
     {
       $encoded = JSONUtil::encode($data);
-      if (Log::isDebugEnabled(__CLASS__))
+      if (Log::isDebugEnabled('DionysosFormat'))
       {
         Log::debug($data, 'DionysosFormat');
         Log::debug($encoded, 'DionysosFormat');

@@ -43,6 +43,8 @@ else {
 // initialize the application
 $application = &Application::getInstance();
 $callParams = &$application->initialize('../include/');
+// allow for overriding default values from config.ini
+$parser->parseIniFile('include/config.ini', true);
 
 // set the error handler
 $GLOBALS['EXCEPTION_HANDLER'] = "onError";
