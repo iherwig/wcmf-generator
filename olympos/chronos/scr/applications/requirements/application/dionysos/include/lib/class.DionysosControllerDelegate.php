@@ -100,11 +100,19 @@ class DionysosControllerDelegate
         break;
 
       case 'save':
+        $oid = $request->getValue('oid');
+        $type = PersistenceFacade::getOIDParameter($oid, 'type');
+        if (!PersistenceFacade::isKnownType($type)) {
+          throw new DionysosException($request, $response, 'Entity type '.$type.' is unknown', DionysosException::CLASS_NAME_INVALID);
+        }
+        if (!PersistenceFacade::getInstance()->load($oid, BUILDDEPHT_SINGLE)) {
+          throw new DionysosException(null, null, 'The object id '.$oid.' is unknown', DionysosException::OID_INVALID);
+        }
         break;
 
       case 'new':
         if (!PersistenceFacade::isKnownType($request->getValue('className'))) {
-          throw new DionysosException($request, $response, 'Entity type '.$type.' is unknown', DionysosException::CLASS_NAME_INVALID);
+          throw new DionysosException($request, $response, 'Entity type '.$request->getValue('className').' is unknown', DionysosException::CLASS_NAME_INVALID);
         }
         $request->setValue('newtype', $request->getValue('className'));
         break;
@@ -119,6 +127,37 @@ class DionysosControllerDelegate
           throw new DionysosException(null, null, 'The object id '.$oid.' is unknown', DionysosException::OID_INVALID);
         }
         $request->setValue('deleteoids', $oid);
+        break;
+
+      case 'associate':
+      case 'disassociate':
+        $role = $request->getValue('role');
+        if (!PersistenceFacade::isKnownType($role)) {
+          throw new DionysosException($request, $response, 'Entity role '.$role.' is unknown', DionysosException::ROLE_INVALID);
+        }
+        $sourceOid = $request->getValue('sourceOid');
+        $sourceType = PersistenceFacade::getOIDParameter($sourceOid, 'type');
+        if (!PersistenceFacade::isKnownType($sourceType)) {
+          throw new DionysosException($request, $response, 'Entity type '.$sourceType.' is unknown', DionysosException::CLASS_NAME_INVALID);
+        }
+        if (!PersistenceFacade::getInstance()->load($sourceOid, BUILDDEPHT_SINGLE)) {
+          throw new DionysosException(null, null, 'The object id '.$sourceOid.' is unknown', DionysosException::OID_INVALID);
+        }
+        $targetOid = $request->getValue('targetOid');
+        $targetType = PersistenceFacade::getOIDParameter($targetOid, 'type');
+        if (!PersistenceFacade::isKnownType($targetType)) {
+          throw new DionysosException($request, $response, 'Entity type '.$targetType.' is unknown', DionysosException::CLASS_NAME_INVALID);
+        }
+        if (!PersistenceFacade::getInstance()->load($targetOid, BUILDDEPHT_SINGLE)) {
+          throw new DionysosException(null, null, 'The object id '.$targetOid.' is unknown', DionysosException::OID_INVALID);
+        }
+        
+        $request->setValue('oid', $sourceOid);
+        // map targetOid to the role class
+        $associateOID = PersistenceFacade::composeOID(array('type' => $role, 
+          'id' => PersistenceFacade::getOIDParameter($request->getValue('targetOid'), 'id')));
+        $request->setValue('associateoids', $associateOID);
+        $request->setValue('associateAs', 'child');
         break;
     }
   }
@@ -202,14 +241,17 @@ class DionysosControllerDelegate
          break;
 
        case 'save':
-         // TODO: use exceptions here
-         if (preg_match('/^A Node with object id .+? does not exist/', $response->getValue('errorMsg'))) {
-            throw new DionysosException(null, null, 'The object id '.$request->getValue('oid').' is unknown', DionysosException::OID_INVALID);
-         }
+         break;
+
+       case 'new':
          break;
 
        case 'delete':
          $response->setValue('oid', $request->getValue('oid'));
+         break;
+
+       case 'associate':
+         $response->clearValue('manyToMany');
          break;
     }
     return $result;
