@@ -274,6 +274,12 @@ class UwmUtil {
 					}
 					break;
 
+				case 'ProductionRuleSet':
+					if (self::shouldProcessChild($currPackage, $currChild)) {
+						self::processProductionRuleSet($currChild);
+					}
+					break;
+					
 				default:
 					if (self::shouldProcessChild($currPackage, $currChild)) {
 						self::processNode($currChild);
@@ -500,6 +506,27 @@ class UwmUtil {
 		self::$dom->endElement();
 	}
 
+	private static function processProductionRule($currNode) {
+		self::check($currNode->getId());
+		self::$dom->startElement($currNode->getType());
+
+		self::appendAttributes($currNode);
+		self::registerExportedNode($currNode);
+
+		$currNode->loadChildren();
+		$children = $currNode->getChildren();
+		foreach ($children as $currChild)
+		{
+			$childType = self::getRealType($currChild);
+
+			if ($childType != 'Figure') {
+				self::processNode($currChild);
+			}
+		}
+
+		self::$dom->endElement();
+	}
+	
 	private static function processNode($currNode)
 	{
 		self::check($currNode->getId());
@@ -577,7 +604,7 @@ class UwmUtil {
 
 						$currChildArray = array($currChild);
 
-						$valueNames = array('relationType', 'sourceMultiplicity', 'sourceNavigability', 'targetMultiplicity', 'targetNavigability', 'action', 'config', 'context');
+						$valueNames = array('Name', 'relationType', 'sourceMultiplicity', 'sourceNavigability', 'targetMultiplicity', 'targetNavigability', 'action', 'config', 'context');
 
 						self::translateNode($currChild);
 
