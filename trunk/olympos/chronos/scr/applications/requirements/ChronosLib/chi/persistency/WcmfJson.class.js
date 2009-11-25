@@ -18,7 +18,7 @@ Ext.namespace("chi.persistency");
  * @constructor
  */
 chi.persistency.WcmfJson = function() {
-	this.jsonUrl = "../application/main.php";
+	this.baseUrl = chi.Config.getInstance().jsonUrl;
 	this.timeout = 180000;
 }
 
