@@ -19,7 +19,7 @@ Ext.namespace("chi.persistency");
  * @constructor
  */
 chi.persistency.DionysosJson = function() {
-	this.baseUrl = "../gui";
+	this.baseUrl = chi.Config.getInstance().jsonUrl;
 	this.timeout = 180000;
 }
 
