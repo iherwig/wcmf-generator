@@ -14,9 +14,7 @@
 		<xsd:attribute name="reqType" type="xsd:string"/>
 		<xsd:attribute name="Priority" type="xsd:int"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
-		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Author" type="xsd:string"/>
-		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="Proofreader" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
@@ -36,7 +34,6 @@
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
-		<xsd:attribute name="Author" type="xsd:string"/>
 		<xsd:attribute name="Proofreader" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>

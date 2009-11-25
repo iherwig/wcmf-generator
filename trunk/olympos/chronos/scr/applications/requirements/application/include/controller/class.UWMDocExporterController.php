@@ -69,8 +69,9 @@ class UWMDocExporterController extends BatchController
 	private $availableFormats = array('doc', 'odt', 'pdf');
 	const DEFAULT_EXPORT_FORMAT = 'doc';
 	
-	private $availableTemplates = null;
 	const DEFAULT_TEMPLATE_NAME = 'standard';
+	
+	const DEFAULT_INPUT_TYPE = 'odt';
 
 	private $lastTime = 0;
 	private function check($msg)
@@ -189,38 +190,61 @@ class UWMDocExporterController extends BatchController
 
 		OawUtil::setupExecutable();
 		
-		// select the export format
-		$exportFormatParam = $session->get($this->PARAM_EXPORT_FORMAT);
-		if (array_search($exportFormatParam, $this->availableFormats) !== false) {
-			$exportFormat = $exportFormatParam;
-		} else {
-			$exportFormat = self::DEFAULT_EXPORT_FORMAT;
-		}
-		$session->set($this->PARAM_EXPORT_FORMAT, $exportFormat);
-		
 		// select the template
-		$this->getAvailableTemplates();
 		$templateNameParam = $session->get($this->PARAM_TEMPLATE_NAME);
-		if (array_search($templateNameParam, $this->availableTemplates) !== false) {
+		
+		$templates = TemplateListController::getContent();
+		$templateInfo = null;
+		
+		if (array_key_exists($templateNameParam, $templates)) {
 			$templateName = $templateNameParam;
+			$templateInfo = $templates[$templateName];
 		} else {
 			$templateName = self::DEFAULT_TEMPLATE_NAME;
 		}
 		$session->set($this->PARAM_TEMPLATE_NAME, $templateName);
-
+		
+		//select the input type
+		if (!$templateInfo['inputType']) {
+			$inputType = self::DEFAULT_INPUT_TYPE;
+		} else {
+			$inputType = $templateInfo['inputType'];
+		}
+		
+		// select the export format
+		if (!$templateInfo['forcedResultType']) {
+			$exportFormatParam = $session->get($this->PARAM_EXPORT_FORMAT);
+			if (array_search($exportFormatParam, $this->availableFormats) !== false) {
+				$exportFormat = $exportFormatParam;
+			} else {
+				$exportFormat = self::DEFAULT_EXPORT_FORMAT;
+			}
+		} else {
+			$exportFormat = $templateInfo['forcedResultType'];
+		}
+		$session->set($this->PARAM_EXPORT_FORMAT, $exportFormat);
+		
 		// create the configuration file
 		$workingDir = $session->get($this->TEMP_WORKING_DIR);
 		$propertyPath = "$workingDir/doc-export.properties";
 		$propertyFile = fopen($propertyPath, 'w');
 		fwrite($propertyFile, "workingDir = $workingDir\n");
 		fwrite($propertyFile, "templateName = $templateName\n");
+		fwrite($propertyFile, "inputType = $inputType\n");
 		fwrite($propertyFile, "exportFormat = $exportFormat\n");
+		fwrite($propertyFile, 'exportImages = ' . ($templateInfo['exportImages'] ? 'true' : 'false') . "\n");
 		fclose($propertyFile);
-	
+
+		//Create empty Diagram.xml in case we don't run DiagramImageExporter
+		$diagramPath = "$workingDir/Diagram.xml";
+		$diagramFile = fopen($diagramPath, 'w');
+		fwrite($diagramFile, '<?xml version="1.0" encoding="UTF-8"?><diagramExport/>');
+		fclose($diagramFile);
+			
 		$this->createTempFile("$workingDir/content.xml");
 		$this->createTempFile("$workingDir/styles.xml");
 		$this->createTempFile("$workingDir/manifest.xml");
-		$this->createTempFile("$workingDir/document-tmp.odt");
+		$this->createTempFile("$workingDir/document-tmp.$inputType");
 		$exportFile = $this->createTempFile("$workingDir/document-export.$exportFormat");
 		$session->set($this->TEMP_EXPORT_FILE, $exportFile);
 	
@@ -285,10 +309,6 @@ class UWMDocExporterController extends BatchController
 		return $path;
 	}
 	
-	private function getAvailableTemplates() {
-		$templatespath = TemplateListController::getTemplatesPath();
-		$this->availableTemplates = TemplateListController::getTemplates($templatespath);
-	}
 // PROTECTED REGION END
 
 }
