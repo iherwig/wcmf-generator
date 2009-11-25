@@ -118,16 +118,17 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	var datapart = [];
 	var fieldspart = [];
 	
-	var technicalNames = data.technicalNames;
-	var titles = data.titles;
-	var descriptions = data.descriptions;
-	
-	for ( var i = 0; i < technicalNames.length; i++) {
-		datapart.push( {
-			'technName' : technicalNames[i],
-			'templateName' : titles[i],
-			'description' : descriptions[i]
+	for (var currTemplateKey in data.templates) {
+		var currTemplate = data.templates[currTemplateKey];
+		
+		if (!(currTemplate instanceof Function)) {
+			datapart.push( {
+			'technName' : currTemplate.technicalName,
+			'templateName' : currTemplate.title,
+			'description' : currTemplate.description,
+			'forcedResultType': currTemplate.forcedResultType
 		});
+		}
 	}
 	
 	fieldspart.push( {
@@ -139,6 +140,9 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	}, {
 			name : 'description',
 			mapping : 'description'
+	}, {
+			name : 'forcedResultType',
+			mapping:'forcedResultType'
 	});
 	
 	var eastore = new Ext.data.SimpleStore( {
@@ -166,6 +170,11 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 					if (assistant.exportButton.disabled) {
 						assistant.exportButton.setDisabled(false);
 					}
+					
+					var forcedResultType = record.get('forcedResultType'); 
+					var typeSelect = Ext.getCmp('fieldsetDocFormat');
+					typeSelect.setDisabled(forcedResultType != "");
+						
 				}
 			}
 		},
@@ -186,13 +195,13 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 		width : 250,
 		frame : true,
 		bodyStyle : {
-			padding : '7px'
+			padding : '7px',
+			overflow: 'auto'
 		}
 	}
-	var template = new Ext.Template( [ '<b><u>Technical Name: </b></u><BR/><BR/><center>{technName}</center><BR/>', '<b><u>Description: </b></u><BR/><BR/><center>{description}</center><BR/>' ])
 	grid.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
 		var detailPanel = Ext.getCmp('detailPanel');
-		template.overwrite(detailPanel.body, r.data);
+		detailPanel.body.update(r.get('description'));
 	});
 	
 	var winLayout = {

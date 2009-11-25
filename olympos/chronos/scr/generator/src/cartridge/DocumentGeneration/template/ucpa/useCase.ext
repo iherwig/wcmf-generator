@@ -1,0 +1,69 @@
+import uml;
+import Chronos;
+
+extension cartridge::DocumentGeneration::counter;
+
+extension cartridge::DocumentGeneration::template::ucpa::globals;
+extension cartridge::DocumentGeneration::template::ucpa::constants;
+
+List[uml::UseCase] getUseCases(uml::Model this):
+	this.allOwnedElements().typeSelect(uml::UseCase)
+;
+
+List[uml::Actor] getActors(uml::Model this):
+	this.allOwnedElements().typeSelect(uml::Actor)
+;
+
+List[Chronos::ChiRequirement] getTechnicals(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiRequirement).select(e|e.Type == TECHNICAL_TYPE())
+;
+
+List[Chronos::ChiRequirement] getEnvironmentals(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiRequirement).select(e|e.Type == ENVIRONMENTAL_TYPE())
+;
+
+String getComplexity(uml::UseCase this):
+	let value = this.getComplexityValue():
+	
+	value == 5 ?
+		"simple"
+	: (
+		value == 10 ?
+			"average"
+		:
+			"complex"
+	)
+;
+
+int getComplexityValue(uml::UseCase this):
+	let count = this.allOwnedElements().typeSelect(uml::Action).size:
+	
+	count <= ACTION_COUNT_SIMPLE() ?
+		5
+	: (
+		count <= ACTION_COUNT_AVERAGE() ?
+			10
+		:
+			15
+	)
+;
+
+private int useCaseStartDelta(): 2;
+int getUseCaseRow(): useCaseStartDelta() + getCounter(COUNTER_USE_CASE());
+int getUseCaseLastRow(uml::Model this): useCaseStartDelta() + this.getUseCases().size;
+int getUseCaseSumRow(uml::Model this): getUseCaseLastRow(this) + 1;
+
+private int actorStartDelta(): 2;
+int getActorRow(): actorStartDelta() + getCounter(COUNTER_ACTOR());
+int getActorLastRow(uml::Model this): actorStartDelta() + this.getActors().size;
+int getActorSumRow(uml::Model this): getActorLastRow(this) + 1;
+
+private int technicalStartDelta(): 2;
+int getTechnicalRow(): technicalStartDelta() + getCounter(COUNTER_TECHNICAL());
+int getTechnicalLastRow(uml::Model this): technicalStartDelta() + this.getTechnicals().size;
+int getTechnicalFactorRow(uml::Model this): getTechnicalLastRow(this) + 2; 
+
+private int environmentalStartDelta(): 2;
+int getEnvironmentalRow(): environmentalStartDelta() + getCounter(COUNTER_ENVIRONMENTAL());
+int getEnvironmentalLastRow(uml::Model this): environmentalStartDelta() + this.getEnvironmentals().size;
+int getEnvironmentalFactorRow(uml::Model this): getEnvironmentalLastRow() + 2;

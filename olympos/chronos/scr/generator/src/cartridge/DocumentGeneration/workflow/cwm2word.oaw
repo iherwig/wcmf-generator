@@ -2,7 +2,9 @@
 	<property name="basePath" value="src" />
 	<property name="workingDir" value="${basePath}/../example-data/doc" />
 	<property name="templateName" value="standard" />
+	<property name="inputType" value="odt" />
 	<property name="exportFormat" value="doc" />
+	<property name="exportImages" value="true" />
 
 	<property file="${basePath}/cartridge/DocumentGeneration/workflow/cwm2word.default.properties" />
 
@@ -54,12 +56,14 @@
 	</component>
 -->
 
-	<component class="net.sourceforge.olympos.oaw.workflow.DiagramImageExporter">
-		<sourceFile value="${workingDir}/cwm-source.xml" />
-		<targetDir value="${workingDir}" />
-		<iconDir value="${iconDir}" />
-		<imageFormat value="png" />
-	</component>
+	<if cond="${exportImages}">
+		<component class="net.sourceforge.olympos.oaw.workflow.DiagramImageExporter">
+			<sourceFile value="${workingDir}/cwm-source.xml" />
+			<targetDir value="${workingDir}" />
+			<iconDir value="${iconDir}" />
+			<imageFormat value="png" />
+		</component>
+	</if>
 
 	<component class="org.openarchitectureware.xsd.XMLReader">
 		<modelSlot value="diagramModel" />
@@ -88,9 +92,14 @@
 		<globalVarDef name="tplTemplateDescription" value="'${tplTemplateDescription}'" />
 		<globalVarDef name="tplContactPerson" value="'${tplContactPerson}'" />
 		<globalVarDef name="tplContactData" value="'${tplContactData}'" />
+
+		<globalVarDef name="technicalType" value="${technicalType}" />
+		<globalVarDef name="environmentalType" value="${environmentalType}" />
+		<globalVarDef name="actionCountSimple" value="${actionCountSimple}" />
+		<globalVarDef name="actionCountAverage" value="${actionCountAverage}" />
 		
 		<globalVarDef name="diagramModel" value="diagramModel" />
-
+		
 		<fileEncoding value="utf-8"/>
 		
 <!--
@@ -129,6 +138,11 @@
 		<globalVarDef name="tplContactPerson" value="'${tplContactPerson}'" />
 		<globalVarDef name="tplContactData" value="'${tplContactData}'" />
 
+		<globalVarDef name="technicalType" value="${technicalType}" />
+		<globalVarDef name="environmentalType" value="${environmentalType}" />
+		<globalVarDef name="actionCountSimple" value="${actionCountSimple}" />
+		<globalVarDef name="actionCountAverage" value="${actionCountAverage}" />
+		
 		<globalVarDef name="diagramModel" value="diagramModel" />
 
 		<fileEncoding value="utf-8"/>
@@ -162,6 +176,11 @@
 		<globalVarDef name="tplContactPerson" value="'${tplContactPerson}'" />
 		<globalVarDef name="tplContactData" value="'${tplContactData}'" />
 
+		<globalVarDef name="technicalType" value="${technicalType}" />
+		<globalVarDef name="environmentalType" value="${environmentalType}" />
+		<globalVarDef name="actionCountSimple" value="${actionCountSimple}" />
+		<globalVarDef name="actionCountAverage" value="${actionCountAverage}" />
+		
 		<globalVarDef name="diagramModel" value="diagramModel" />
 
 		<fileEncoding value="utf-8"/>
@@ -177,17 +196,17 @@
 	</component>
 
 	<component class="net.sourceforge.olympos.oaw.workflow.AntRunner">
-		<Param name="zip.template" value="${basePath}/cartridge/DocumentGeneration/template/${templateName}/empty-shell.odt"/>
+		<Param name="zip.template" value="${basePath}/cartridge/DocumentGeneration/template/${templateName}/empty-shell.${inputType}"/>
 		<Param name="content.file" value="content.xml"/>
 		<Param name="styles.file" value="styles.xml"/>
 		<Param name="manifest.file" value="manifest.xml"/>
-		<Param name="zip.target.file" value="${workingDir}/document-tmp.odt"/>
+		<Param name="zip.target.file" value="${workingDir}/document-tmp.${inputType}"/>
 		<Param name="working.dir" value="${workingDir}"/>
 		<antFile value="${basePath}/cartridge/DocumentGeneration/workflow/build.xml"/>
 	</component>
 	
 	<component class="net.cmp4oaw.openofficeconverter.OpenOfficeConverter">
-		<inputFile value="${workingDir}/document-tmp.odt"/>
+		<inputFile value="${workingDir}/document-tmp.${inputType}"/>
 		<outputFile value="${workingDir}/document-export.${exportFormat}"/>
 	</component>
 </workflow>
