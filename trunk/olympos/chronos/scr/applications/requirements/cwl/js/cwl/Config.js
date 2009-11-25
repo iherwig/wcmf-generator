@@ -16,14 +16,14 @@ Ext.namespace("cwl.Config");
  *
  * @type String
  */
-cwl.Config.jsonUrl = "../application/main.php";
+cwl.Config.jsonUrl = "../application/dionysos/main.php";
 
 /**
  * The Persistency implementation.
  *
  * @type String
  */
-cwl.Config.persistencyClass = "chi.persistency.WcmfJson";
+cwl.Config.persistencyClass = "chi.persistency.DionysosJson";
 
 /**
  * Title of this application.
