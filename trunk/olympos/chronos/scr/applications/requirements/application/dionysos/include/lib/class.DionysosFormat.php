@@ -26,13 +26,13 @@ require_once(BASE."application/dionysos/include/lib/class.DionysosNodeSerializer
  * script execution. This prevents from having multiple junks of json 
  * from each controller response that can't be decoded by clients.
  */
-$GLOBALS['gJSONData'] = array();
-$GLOBALS['gJSONUsed'] = false;
+$GLOBALS['gDionysosData'] = array();
+$GLOBALS['gDionysosUsed'] = false;
 function gPrintDionysosResult()
 {
-  if (array_key_exists('gJSONUsed', $GLOBALS))
+  if (array_key_exists('gDionysosUsed', $GLOBALS))
   {
-    $data = $GLOBALS['gJSONData'];
+    $data = $GLOBALS['gDionysosData'];
     if ($data != null)
     {
       $encoded = JSONUtil::encode($data);
@@ -79,8 +79,8 @@ class DionysosFormat extends HierarchicalFormat
   {
     // merge data into global data array
     // new values override old
-    $GLOBALS['gJSONData'] = array_merge($GLOBALS['gJSONData'], $data);
-    $GLOBALS['gJSONUsed'] = true;
+    $GLOBALS['gDionysosData'] = array_merge($GLOBALS['gDionysosData'], $data);
+    $GLOBALS['gDionysosUsed'] = true;
   }
   
   /**

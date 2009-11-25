@@ -34,10 +34,10 @@ $parser->parseIniFile('include/config.ini', true);
 $action = Application::getCallParameter('action', 'login');
 $mappedAction = $parser->getValue($action, 'actionmap');
 if ($mappedAction !== false) {
-  $_POST['usr_action'] = $mappedAction;
+  $GLOBALS['data']['usr_action'] = $mappedAction;
 }
 else {
-  $_POST['usr_action'] = $action;
+  $GLOBALS['data']['usr_action'] = $action;
 }
 
 // initialize the application
