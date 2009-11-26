@@ -43,15 +43,15 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
 «IF this.hasSuperClass()-»
       if ($type == null)
 	«IF this.getSuperClass().name == "Node"-»
-        parent::«this.getSuperClass().name»('«curRoleName»', $oid);
+        parent::__construct('«curRoleName»', $oid);
 	«ELSE-»
-        parent::«this.getSuperClass().name»($oid, '«curRoleName»');
+        parent::__construct($oid, '«curRoleName»');
 	«ENDIF-»
       else
 	«IF this.getSuperClass().name == "Node"-»
-        parent::«this.getSuperClass().name»($type, $oid);
+        parent::__construct($type, $oid);
 	«ELSE-»
-        parent::«this.getSuperClass().name»($oid, $type);
+        parent::__construct($oid, $type);
 	«ENDIF-»
 «ENDIF-»
     }
