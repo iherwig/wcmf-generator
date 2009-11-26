@@ -1737,6 +1737,7 @@
 					</table:table-cell>
 					<table:table-cell table:style-name="Default"
 						table:content-validation-name="val1" office:value-type="string">
+						<text:p>average</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="Default"
 						table:formula="of:=IF([.C«getActorRow()»]=&quot;simple&quot;;1;IF([.C«getActorRow()»]=&quot;average&quot;;2;IF([.C«getActorRow()»]=&quot;complex&quot;;3)))"
@@ -1762,10 +1763,11 @@
 						<text:p>«this.name.replaceXmlChars()»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22"
-						office:value-type="float" office:value="1">
-						<text:p>1</text:p>
+						office:value-type="float" office:value="3">
+						<text:p>3</text:p>
 					</table:table-cell>
-					<table:table-cell table:style-name="ce22" office:value-type="float">
+					<table:table-cell table:style-name="ce22" office:value-type="float" office:value="1">
+						<text:p>1</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce30"
 						table:formula="of:=([.C«getTechnicalRow()»]*[.D«getTechnicalRow()»])" office:value-type="float">
@@ -1794,11 +1796,12 @@
 						<text:p>«this.name.replaceXmlChars()»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22"
-						office:value-type="float" office:value="1">
-						<text:p>1</text:p>
+						office:value-type="float" office:value="3">
+						<text:p>3</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22"
-						office:value-type="float">
+						office:value-type="float" office:value="1">
+						<text:p>1</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce30"
 						table:formula="of:=([.C«getEnvironmentalRow()»]*[.D«getEnvironmentalRow()»])" office:value-type="float">
