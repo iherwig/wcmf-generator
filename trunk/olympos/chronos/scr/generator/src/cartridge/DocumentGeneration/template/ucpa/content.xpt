@@ -904,7 +904,7 @@
 					table:allow-empty-cell="true" table:display-list="unsorted"
 					table:base-cell-address="Actors.C3" />
 				<table:content-validation table:name="val2"
-					table:base-cell-address="&apos;Environmental Factor&apos;.D3">
+					table:base-cell-address="&apos;Environmental Complexity&apos;.D3">
 					<table:help-message table:title="Weight"
 						table:display="false" />
 					<table:error-message table:message-type="warning"
@@ -989,10 +989,10 @@
 				<table:table-row table:style-name="ro2">
 					<table:table-cell table:style-name="ce3"
 						office:value-type="string">
-						<text:p>Environmental Factor</text:p>
+						<text:p>Environmental Complexity Factor</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce10"
-						table:formula="of:=[&apos;Environmental Factor&apos;.E«getEnvironmentalFactorRow()»]"
+						table:formula="of:=[&apos;Environmental Complexity&apos;.E«getEnvironmentalFactorRow()»]"
 						office:value-type="float">
 					</table:table-cell>
 					<table:table-cell table:number-columns-repeated="1022" />
@@ -1489,9 +1489,10 @@
 					<table:table-cell table:style-name="ce32"
 						table:formula="of:=0.6+(0.01*[.E«getTechnicalLastRow() + 1»])" office:value-type="float">
 					</table:table-cell>
+					<table:table-cell table:style-name="ce26" table:number-columns-repeated="2"/>
 				</table:table-row>
 			</table:table>
-			<table:table table:name="Environmental Factor"
+			<table:table table:name="Environmental Complexity"
 				table:style-name="ta4" table:print="false">
 				<office:forms form:automatic-focus="false"
 					form:apply-design-mode="false">
@@ -1534,7 +1535,7 @@
 					<table:table-cell table:style-name="ce24"
 						office:value-type="string" table:number-columns-spanned="7"
 						table:number-rows-spanned="1">
-						<text:p>Environmental Factor</text:p>
+						<text:p>Environmental Complexity</text:p>
 					</table:table-cell>
 				</table:table-row>
 				<table:table-row table:style-name="ro5">
@@ -1544,7 +1545,7 @@
 					</table:table-cell>
 					<table:table-cell table:style-name="ce25"
 						office:value-type="string">
-						<text:p>Environmental Factor</text:p>
+						<text:p>Environmental Complexity</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce29"
 						office:value-type="string">
@@ -1599,13 +1600,14 @@
 									Factor = 1.4 + (-0.03 * Efactor).</text:span>
 							</text:p>
 						</office:annotation>
-						<text:p>RESULT Environmental Factor</text:p>
+						<text:p>RESULT Environmental Complexity Factor</text:p>
 					</table:table-cell>
 					<table:covered-table-cell
 						table:number-columns-repeated="3" table:style-name="ce26" />
 					<table:table-cell table:style-name="ce32"
 						table:formula="of:=1.4+(-0.03*[.E«getEnvironmentalLastRow() + 1»])" office:value-type="float">
 					</table:table-cell>
+					<table:table-cell table:style-name="ce26" table:number-columns-repeated="2"/>
 				</table:table-row>
 				<table:table-row table:style-name="ro2"
 					table:number-rows-repeated="2">
@@ -1684,7 +1686,7 @@
 			</table:named-expressions>
 			<table:database-ranges>
 				<table:database-range
-					table:target-range-address="&apos;Environmental Factor&apos;.A1:&apos;Environmental Factor&apos;.G5"
+					table:target-range-address="&apos;Environmental Complexity&apos;.A1:&apos;Environmental Complexity&apos;.G5"
 					table:contains-header="false" />
 			</table:database-ranges>
 		</office:spreadsheet>
