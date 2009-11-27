@@ -99,7 +99,7 @@ cwl.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
         text : chi.Dict.translate("New Rule"),
         listeners : {
           click : function(item, e) {
-            var element = new cwl.model.ModelElement();
+            var element = new chi.model.ModelElement();
             element.type = "Rule";
             self.diagram.addNewObject(element, self.menuPos[0], self.menuPos[1]);
           }

@@ -11,14 +11,14 @@
  */
 Ext.namespace("cwl.model");
 
-cwl.model.ChiValue = function(owner) {
-	cwl.model.ChiValue.superclass.constructor.call(this);
+cwl.model.Property = function(owner) {
+	cwl.model.Property.superclass.constructor.call(this);
 
 	this.owner = owner;
 }
 
-Ext.extend(cwl.model.ChiValue, cwl.model.ModelElement);
+Ext.extend(cwl.model.Property, chi.model.ModelElement);
 
-cwl.model.ChiValue.prototype.getOwner = function() {
+cwl.model.Property.prototype.getOwner = function() {
 	return this.owner;
 }

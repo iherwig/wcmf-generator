@@ -14,4 +14,4 @@ Ext.namespace("cwl.rule");
 cwl.rule.RuleElement = function() {
 }
 
-Ext.extend(cwl.rule.RuleElement, cwl.model.ModelElement);
+Ext.extend(cwl.rule.RuleElement, chi.model.ModelElement);

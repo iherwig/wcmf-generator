@@ -30,64 +30,64 @@ cwl.ui.Workbench = function(config) {
 			layout: 'fit',
 			id: 'availableContentContainer',
 			items: new Ext.Panel({
-        layout: 'border',
-        items: [{
-          region: 'north',
-          layout: 'fit',
-          height: 300,
-          split: true,
-          items: new cwl.newobjects.Accordion()
-        },{
-          region: 'center',
-          layout: 'fit',
-          split: true,
-          items: new cwl.modeltree.ModelTree()
-        }]
-      })
-    },{
+				layout: 'border',
+				items: [{
+					region: 'north',
+					layout: 'fit',
+					height: 300,
+					split: true,
+					items: new cwl.newobjects.Accordion()
+				},{
+					region: 'center',
+					layout: 'fit',
+					split: true,
+					items: new cwl.modeltree.ModelTree()
+				}]
+			})
+		},{
 			region: 'center',
 			collapsible: false,
 			id: 'ruleContainer',
 			layout: 'fit',
 			items: new Ext.Panel({
-        id: 'centerPanel',
-        layout: 'border',
-        items: [{
-          region: 'center',
-          layout: 'fit',
-          split: true,
-          items: new cwl.textrule.TextRuleTabPanel({
-            enableTabScroll: true,
-            activeTab: 0,
-            items: [new cwl.textrule.TextRulePanel({
-              closable: true,
-              title: "Rule"
-            })]
-          })
-        },{
-          region: 'south',
-          layout: 'fit',
-          split: true,
-          height: 100,
-          items: cwl.rule.ExpressionPanel.getInstance()
-        }]
-      })
-    },{
+				id: 'centerPanel',
+				layout: 'border',
+				items: [{
+					region: 'center',
+					layout: 'fit',
+					split: true,
+					items: new cwl.textrule.TextRuleTabPanel({
+						enableTabScroll: true,
+						activeTab: 0,
+						items: [new cwl.textrule.TextRulePanel({
+							closable: true,
+							title: "Rule"
+						})]
+					})
+				},{
+					region: 'south',
+					layout: 'fit',
+					split: true,
+					height: 100,
+					items: cwl.rule.ExpressionPanel.getInstance()
+				}]
+			})
+		},{
 			region: 'east',
 			title: chi.Dict.translate('Objects In Rule Set'),
 			collapsible: true,
 			split: true,
 			width: 260,
 			layout: 'fit',
-			id: 'usedContentContainer',
-			items: new cwl.objecttree.ObjectTree()
-    }],
-    listeners: {
-      resize: function(component, adjWidth, adjHeight, rawWidth, rawHeight ) {
-        if (Ext.get('centerPanel'))
-          Ext.get('centerPanel').setHeight(Ext.get('availableContentContainer').dom.clientHeight);
-      }
-    }    
+			id: 'usedContentContainer'/*,
+			items: cwl.objecttree.ObjectTree.getInstance()*/
+		}],
+		listeners: {
+			resize: function(component, adjWidth, adjHeight, rawWidth, rawHeight ) {
+				if (Ext.get('centerPanel'))
+					Ext.get('centerPanel').setHeight(Ext.get('availableContentContainer').dom.clientHeight);
+			}
+		}    
 	}, config));
 }
 

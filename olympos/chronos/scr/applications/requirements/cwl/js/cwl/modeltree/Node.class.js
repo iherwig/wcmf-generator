@@ -15,14 +15,13 @@ cwl.modeltree.Node = function(config) {
 	this.modelElement = config.modelElement;
 	
 	cwl.modeltree.Node.superclass.constructor.call(this, Ext.apply(this, {
-		text : this.getModelElement().getName(),
-		iconCls : this.getModelElement().getTreeIconClass(),
-		expanded: this.getModelElement().getStartExpanded()
+		iconCls : this.getModelElement().getModelClass().getTreeIconClass(),
+		expanded: false
 	}, config));
 	
 }
 
-Ext.extend(cwl.modeltree.Node, Ext.tree.TreeNode);
+Ext.extend(cwl.modeltree.Node, Ext.tree.AsyncTreeNode);
 
 cwl.modeltree.Node.prototype.getModelElement = function() {
 	return this.modelElement;

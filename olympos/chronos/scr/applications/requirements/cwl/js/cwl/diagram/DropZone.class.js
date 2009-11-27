@@ -72,7 +72,7 @@ cwl.diagram.DropZone.prototype.onNodeOver = function(nodeData, source, e, data) 
  * <ul>
  * 	<li>If <code>data.data</code> is an instance of {@link cwl.model.ModelObject}, an existing ModelObject is
  * 		added to the diagram.</li>
- * 	<li>If <code>data.data</code> is an instance of {@link cwl.model.ModelClass}, a new ModelObject is added to
+ * 	<li>If <code>data.data</code> is an instance of {@link chi.model.ModelClass}, a new ModelObject is added to
  * 		the diagram.</li>
  * </ul>
  *
@@ -138,7 +138,7 @@ cwl.diagram.DropZone.prototype.checkDropable = function(modelElement, x, y) {
  * @private
  * @param {Object} data Data of the dragged object.
  * @return The model element or null
- * @type cwl.model.ModelElement
+ * @type chi.model.ModelElement
  */
 cwl.diagram.DropZone.prototype.getModelDataFromDragSource = function(data) {
 

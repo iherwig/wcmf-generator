@@ -54,7 +54,7 @@ cwl.modeltree.ModelTree = Ext.extend(Ext.tree.TreePanel, {
 		cwl.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);
 		
 		// remove this for async loading
-		this.setRootNode(this.loadTree(cwl.model.ModelElementContainer.getInstance().getElement(cwl.model.RootPackage.ROOT_PACKAGE_ID)));
+		//this.setRootNode(this.loadTree(chi.model.ModelPackageContainer.getInstance().getPackage(chi.model.RootPackage.ROOT_PACKAGE_ID)));
 	}
 });
 
@@ -67,7 +67,7 @@ cwl.modeltree.ModelTree.prototype.loadTree = function(currPackage) {
 	var self = this;
 	
 	children.each( function(currChild) {
-		if (currChild instanceof cwl.model.ModelPackage) {
+		if (currChild instanceof chi.model.ModelPackage) {
 			currNode.appendChild(self.loadTree(currChild));
 		} else {
 			currNode.appendChild(new cwl.modeltree.Node( {

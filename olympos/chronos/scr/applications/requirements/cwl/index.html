@@ -21,6 +21,8 @@
 		</script>
 
 		<!--Start include CWL-->
+		<script type="text/javascript" src="../ChronosLib/chi/Log.js">
+		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/Main.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwl/Data.js">
@@ -48,6 +50,28 @@
 		<script type="text/javascript" src="../ChronosLib/chi/persistency/DionysosJson.class.js">
 		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/persistency/ActionSet.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelElement.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelClass.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelClassContainer.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelPackage.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelPackageContainer.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelRecord.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelReference.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelReferenceList.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/Proxy.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/RootPackage.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/model/Store.class.js">
 		</script>
 
 		<script type="text/javascript" src="js/cwl/diagram/DiagramTabPanel.class.js">
@@ -94,20 +118,12 @@
 		</script>
 		<script type="text/javascript" src="js/cwl/newobjects/DragZone.class.js">
 		</script>
-
-		<script type="text/javascript" src="js/cwl/model/ModelElementContainer.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwl/model/ModelElement.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwl/model/ModelPackage.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwl/model/RootPackage.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwl/model/ChiValue.class.js">
+<!--
+		<script type="text/javascript" src="js/cwl/model/Property.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwl/model/Operation.class.js">
 		</script>
-
+-->
 		<script type="text/javascript" src="js/cwl/modeltree/ModelTree.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwl/modeltree/Loader.class.js">
@@ -131,7 +147,226 @@
 
 		<script type="text/javascript" src="js/cwl/Config.js">
 		</script>
+		
 		<!--End include CWL-->
+
+		<!--Start include application-->
+		
+		<script type="text/javascript" src="js/application/application/include/Include_package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Model_package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/activity/Activity_package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/configuration/Configuration_package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/rules/Rules_package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/Wcmf_package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/UseCases_package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/requirements/Requirements_package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/Domain_package.class.js">
+		</script>
+
+		
+		<script type="text/javascript" src="js/application/application/include/model/activity/ActivitySet.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/activity/ChiObject.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/activity/Activity.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/activity/ActivityDecision.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/activity/ActivityReceive.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/activity/ActivitySend.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/activity/ActivityInitial.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/activity/ActivityFinal.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/configuration/ChiSystem.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/rules/ProductionRule.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/rules/ProductionRuleSet.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/rules/RuleAction.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/rules/RuleCondition.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/rules/RuleSetVariable.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/rules/RuleVariable.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/Translation.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/Adodbseq.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/Locktable.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/RoleRDB.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/wcmf/UserRDB.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/Actor.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiWorker.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessPartner.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessProcess.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessUseCase.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessUseCaseCore.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessPartnerActive.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiBusinessPartnerPassive.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiWorkerExternal.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/UseCases/ChiWorkerInternal.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiGoal.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiRequirement.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiFeature.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiIssue.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiFeatureStatus.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiGoalType.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiRequirementStatus.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/requirements/ChiRequirementType.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiNodeManyToMany.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiValueRef.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/Property.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiNode.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiController.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiView.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiAuthors.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiValue.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/DisplayType.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/InputType.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/Operation.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/RelationMultiplicity.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/RelationType.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/domain/ChiClass.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/ChiBaseStatus.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Counter.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/History.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Language.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Visibility.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Figure.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Model.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Package.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Diagram.class.js">
+		</script>
+
+		<script type="text/javascript" src="js/application/application/include/model/Glossary.class.js">
+		</script>
+
+		<!--End include application-->
 
 		<script type="text/javascript">
 			Ext.onReady(function(){

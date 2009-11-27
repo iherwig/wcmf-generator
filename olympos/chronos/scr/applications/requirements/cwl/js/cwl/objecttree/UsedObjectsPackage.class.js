@@ -18,8 +18,8 @@ cwl.objecttree.UsedObjectsPackage = function() {
 	this.name = "UsedObjectsPackage";
 }
 
-Ext.extend(cwl.objecttree.UsedObjectsPackage, cwl.model.ModelPackage);
+Ext.extend(cwl.objecttree.UsedObjectsPackage, chi.model.ModelPackage);
 
 cwl.objecttree.UsedObjectsPackage.PACKAGE_ID = "cwl.objecttree.UsedObjectPackageId";
 
-cwl.model.ModelElementContainer.getInstance().registerElement(new cwl.objecttree.UsedObjectsPackage());
+//chi.model.ModelPackageContainer.getInstance().registerPackage(new cwl.objecttree.UsedObjectsPackage());

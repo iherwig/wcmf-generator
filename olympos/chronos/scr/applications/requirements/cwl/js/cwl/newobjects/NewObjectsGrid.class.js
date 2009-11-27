@@ -117,7 +117,7 @@ cwl.newobjects.NewObjectsGrid.prototype.addElements = function(data, elements) {
 	for (var i = 0; i < elements.getCount(); i++) {
 		var currElement = elements.itemAt(i);
 
-		if (currElement instanceof cwl.model.ModelElement && 
+		if (currElement instanceof chi.model.ModelElement && 
         cwl.newobjects.Accordion.CONTAINED_TYPES.indexOf(currElement.getType()) != -1) {
 			var semanticGroup = currElement.semanticGroup;
 			

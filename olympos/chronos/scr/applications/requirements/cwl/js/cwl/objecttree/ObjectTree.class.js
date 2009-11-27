@@ -32,50 +32,50 @@ cwl.objecttree.ObjectTree = function() {
 
 cwl.objecttree.ObjectTree = Ext.extend(Ext.tree.TreePanel, {
 	initComponent : function() {
-    var self = this;
-    
-		Ext.apply(this, {
-		    width: 250,
-		    autoScroll: true,
-		    animate: true,
-		    containerScroll: true,
-		    rootVisible: false,
-        layout: 'fit',
-        appendOnly: true,
-        enableDD: true,
-        dropConfig: {
-          ddGroup: cwl.Constants.DD_GROUP,
-          allowContainerDrop: true,
-          onContainerDrop: function(source, e, data) {
-            e.dropNode = data.node;
-            return self.fireEvent('nodedrop', e);
-          },
-          onContainerOver: function(source, e, data) {
-            return self.checkDropable(data.node) ? this.dropAllowed : this.dropNotAllowed;
-          },
-        },
-        dragConfig: {
-          ddGroup: cwl.Constants.DD_GROUP
-        },        
-		    title: chi.Dict.translate("Objects In Rule Set"),
-        header: false
-		});
-    
-		cwl.objecttree.ObjectTree.superclass.initComponent.apply(this, arguments);
-    
-    this.on('nodedrop', function(e) {
-      self.receiveModelNode(e.dropNode);
-    });
+		var self = this;
 		
-		this.setRootNode(cwl.model.ModelElementContainer.getInstance().getElement(cwl.objecttree.UsedObjectsPackage.PACKAGE_ID));
+		Ext.apply(this, {
+				width: 250,
+				autoScroll: true,
+				animate: true,
+				containerScroll: true,
+				rootVisible: false,
+				layout: 'fit',
+				appendOnly: true,
+				enableDD: true,
+				dropConfig: {
+					ddGroup: cwl.Constants.DD_GROUP,
+					allowContainerDrop: true,
+					onContainerDrop: function(source, e, data) {
+						e.dropNode = data.node;
+						return self.fireEvent('nodedrop', e);
+					},
+					onContainerOver: function(source, e, data) {
+						return self.checkDropable(data.node) ? this.dropAllowed : this.dropNotAllowed;
+					},
+				},
+				dragConfig: {
+					ddGroup: cwl.Constants.DD_GROUP
+				},        
+				title: chi.Dict.translate("Objects In Rule Set"),
+				header: false
+		});
+		
+		cwl.objecttree.ObjectTree.superclass.initComponent.apply(this, arguments);
+		
+		this.on('nodedrop', function(e) {
+			self.receiveModelNode(e.dropNode);
+		});
+		
+		//this.setRootNode(chi.model.ModelPackageContainer.getInstance().getPackage(cwl.objecttree.UsedObjectsPackage.PACKAGE_ID));
 	}
 });
 
 cwl.objecttree.ObjectTree.prototype.render = function() {
 	cwl.objecttree.ObjectTree.superclass.render.apply(this, arguments);
-  
+
 	// make sure that the container drop zone covers the whole area
-  this.dropZone.setPadding(0, 0, 10000, 0);
+	this.dropZone.setPadding(0, 0, 10000, 0);
 }
 
 cwl.objecttree.ObjectTree.prototype.loadTree = function(currPackage) {
@@ -87,7 +87,7 @@ cwl.objecttree.ObjectTree.prototype.loadTree = function(currPackage) {
 	var self = this;
 	
 	children.each( function(currChild) {
-		if (currChild instanceof cwl.model.ModelPackage) {
+		if (currChild instanceof chi.model.ModelPackage) {
 			currNode.appendChild(self.loadTree(currChild));
 		} else {
 			currNode.appendChild(new cwl.objecttree.Node( {
@@ -103,62 +103,62 @@ cwl.objecttree.ObjectTree.prototype.loadTree = function(currPackage) {
  * Check if a node can be dropped
  */
 cwl.objecttree.ObjectTree.prototype.checkDropable = function(modelData) {
-  if (modelData.getModelElement().getType() == "ChiNode" || modelData.getModelElement().getType() == "ChiObject" || 
-    modelData.getModelElement().getType() == "ChiController")
-    return true;
-  return false;
+	if (modelData.getModelElement().getType() == "ChiNode" || modelData.getModelElement().getType() == "ChiObject" || 
+		modelData.getModelElement().getType() == "ChiController")
+		return true;
+	return false;
 }
 
 /**
  * Convert a Node dragged from the ModelTree to the owned format
  */
 cwl.objecttree.ObjectTree.prototype.receiveModelNode = function(modelData) {
-  if (this.checkDropable(modelData)) {
-    var modelElement = modelData.getModelElement();
-    //var objectNode = new cwl.objecttree.ObjectNode(Ext.apply({}, modelData.attributes));
-    var objectNode = new cwl.objecttree.ObjectNode({modelElement: modelElement});
-    
-    // append attributes
-    var attributes = modelElement.getAttributes();
-    for (var i=0; i<attributes.length; i++) {
-      var e = new cwl.model.ChiValue(modelElement);
-      e.cwlModelElementId = Ext.id();
-      e.name = attributes[i];
-      e.type = "ChiValue";
-      e.treeIconClass = "FigureChiValue";
-      
-      objectNode.appendChild(new cwl.modeltree.Node({
-        text: attributes[i],
-        iconCls : "FigureChiValue",
-        modelElement: e
-      }));
-    }
-    // append operations
-    var operations = modelElement.getOperations();
-    for (var i=0; i<operations.length; i++) {
-      var o = new cwl.model.Operation(modelElement);
-      o.cwlModelElementId = Ext.id();
-      o.name = operations[i];
-      o.type = "Operation";
-      o.treeIconClass = "FigureOperation";
-      
-      objectNode.appendChild(new cwl.modeltree.Node({
-        text: operations[i],
-        iconCls : "FigureOperation",
-        modelElement: o
-      }));
-    }
-    
-    // create instance name
-    objectNode.text = "My" + modelElement.getName() + ": " + modelElement.getName();
-    objectNode.iconCls = "FigureChiObject";
-    
-    this.root.appendChild(objectNode);
+	if (this.checkDropable(modelData)) {
+		var modelElement = modelData.getModelElement();
+		//var objectNode = new cwl.objecttree.ObjectNode(Ext.apply({}, modelData.attributes));
+		var objectNode = new cwl.objecttree.ObjectNode({modelElement: modelElement});
+		
+		// append attributes
+		var attributes = modelElement.getAttributes();
+		for (var i=0; i<attributes.length; i++) {
+			var e = new cwl.model.Property(modelElement);
+			e.cwlModelElementId = Ext.id();
+			e.name = attributes[i];
+			e.type = "ChiValue";
+			e.treeIconClass = "FigureChiValue";
+			
+			objectNode.appendChild(new cwl.modeltree.Node({
+				text: attributes[i],
+				iconCls : "FigureChiValue",
+				modelElement: e
+			}));
+		}
+		// append operations
+		var operations = modelElement.getOperations();
+		for (var i=0; i<operations.length; i++) {
+			var o = new cwl.model.Operation(modelElement);
+			o.cwlModelElementId = Ext.id();
+			o.name = operations[i];
+			o.type = "Operation";
+			o.treeIconClass = "FigureOperation";
+			
+			objectNode.appendChild(new cwl.modeltree.Node({
+				text: operations[i],
+				iconCls : "FigureOperation",
+				modelElement: o
+			}));
+		}
+		
+		// create instance name
+		objectNode.text = "My" + modelElement.getName() + ": " + modelElement.getName();
+		objectNode.iconCls = "FigureChiObject";
+		
+		this.root.appendChild(objectNode);
 
-    // add the element to the used objects package
-    var usedObjectsPackage = cwl.model.ModelElementContainer.getInstance().getElement(cwl.objecttree.UsedObjectsPackage.PACKAGE_ID)
-    usedObjectsPackage.add(modelElement);
-  }
+		// add the element to the used objects package
+		var usedObjectsPackage = chi.model.ModelPackageContainer.getInstance().getPackage(cwl.objecttree.UsedObjectsPackage.PACKAGE_ID)
+		usedObjectsPackage.add(modelElement);
+	}
 }
 
 /**

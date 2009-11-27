@@ -17,7 +17,7 @@ cwl.model.Operation = function(owner) {
 	this.owner = owner;
 }
 
-Ext.extend(cwl.model.Operation, cwl.model.ModelElement);
+Ext.extend(cwl.model.Operation, chi.model.ModelElement);
 
 cwl.model.Operation.prototype.getOwner = function() {
 	return this.owner;

@@ -32,26 +32,25 @@ cwl.newobjects.Accordion = Ext.extend(Ext.Panel, {
 			}
 		});
 		
-    cwl.newobjects.Accordion.superclass.initComponent.apply(this, arguments);
-    
-    this.data = new Array(0);
-    
-    this.addElements(cwl.rule.RuleElementContainer.getInstance().getAllElements());
-    //this.addElements(cwl.model.ModelElementContainer.getInstance().getAllElements());
+		cwl.newobjects.Accordion.superclass.initComponent.apply(this, arguments);
+		
+		this.data = new Array(0);
+		
+		this.addElements(cwl.rule.RuleElementContainer.getInstance().getAllElements());
 
-    for (var i = 0; i < this.data.length; i++) {
-      this.add(new cwl.newobjects.NewObjectsGrid({
-        semanticGroup: this.data[i]
-      }));
-    }
-  }
+		for (var i = 0; i < this.data.length; i++) {
+			this.add(new cwl.newobjects.NewObjectsGrid({
+				semanticGroup: this.data[i]
+			}));
+		}
+	}
 });
 
 cwl.newobjects.Accordion.prototype.addElements = function(elements) {
   for (var i = 0; i < elements.getCount(); i++) {
     var currElement = elements.itemAt(i);
     
-    if (currElement instanceof cwl.model.ModelElement && 
+    if (currElement instanceof chi.model.ModelElement && 
         cwl.newobjects.Accordion.CONTAINED_TYPES.indexOf(currElement.getType()) != -1) {
       var semanticGroup = currElement.getSemanticGroup();
       
