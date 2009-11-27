@@ -80,7 +80,7 @@ var modelTree = [{
     type: "Model",
     treeIconClass: "FigureModel",
     startExpanded: true,
-    parentId: "cwl.model.RootPackageId"
+    parentId: "chi.model.RootPackageId"
   },{
     id: "id00",
     name: "Processes",

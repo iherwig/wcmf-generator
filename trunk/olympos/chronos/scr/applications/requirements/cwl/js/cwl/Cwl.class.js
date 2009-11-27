@@ -47,7 +47,7 @@ cwl.Cwl.prototype.getConfig = function() {
  * </p>
  */
 cwl.Cwl.prototype.startWorkbench = function() {
-	this.bootstrap();
+	//this.bootstrap();
 	this.viewport = new cwl.ui.Workbench();
 };
 
@@ -68,6 +68,7 @@ cwl.Cwl.getInstance = function() {
 	return cwl.Cwl.instance;
 };
 
+/*
 cwl.Cwl.prototype.bootstrap = function() {
   var modelElementContainer = cwl.model.ModelElementContainer.getInstance();
 	for (var i=0; i<modelTree.length; i++) {
@@ -82,10 +83,10 @@ cwl.Cwl.prototype.bootstrap = function() {
 
 cwl.Cwl.prototype.processElement = function(element, container) {
 	if (["Model", "Package", "ChiBusinessProcess", "ActivitySet", "ChiBusinessUseCase"].indexOf(element.type) != -1) {
-		var e = new cwl.model.ModelPackage();
+		var e = new chi.model.ModelPackage();
 	}
 	else {
-		var e = new cwl.model.ModelElement();
+		var e = new chi.model.ModelElement();
 	}
 
 	for (var property in element) {
@@ -103,3 +104,4 @@ cwl.Cwl.prototype.processElement = function(element, container) {
 
 	return e;
 }
+*/

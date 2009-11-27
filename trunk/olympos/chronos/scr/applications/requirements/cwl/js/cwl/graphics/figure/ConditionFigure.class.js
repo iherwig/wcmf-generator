@@ -176,7 +176,7 @@ cwl.graphics.figure.ConditionFigure.prototype.updateForm = function() {
   // get all possible values for the left/right part of the expression
   var attributes = [];
   var operations = [];
-  var usedObjectsPackage = cwl.model.ModelElementContainer.getInstance().getElement(cwl.objecttree.UsedObjectsPackage.PACKAGE_ID);
+  var usedObjectsPackage = chi.model.ModelPackageContainer.getInstance().getPackage(cwl.objecttree.UsedObjectsPackage.PACKAGE_ID);
   usedObjectsPackage.getChildren().each(function(item, index, length) {
     var ops = item.getOperations();
     for (var i=0; i<ops.length; i++) {

@@ -33,93 +33,96 @@ cwl.modeltree.Loader = Ext.extend(Ext.tree.TreeLoader, {
 cwl.modeltree.Loader.prototype.load = function(node, callback) {
 	var self = this;
 	
-	chi.persistency.Persistency.getInstance().loadChildren(node.id, function(request, data) {
-		self.reformatData(self, node, callback, data);
-	});
+	if (node.id == 'root') {
+		chi.persistency.Persistency.getInstance().list('Model', 999, 0, 'Name', 'asc', function(data) {
+			self.reformatData(self, node, callback, data);
+		});
+	}
+	else {
+		var modelNode = node.getModelElement();
+		if (modelNode) {
+			chi.persistency.Persistency.getInstance().read(modelNode.getOid(), 1, function(data) {
+				self.reformatData(self, node, callback, data);
+			});
+		}
+	}
 }
 
+/**
+ * Create cwl.modeltree.Node instances for the loaded data.
+ *
+ * @param {cwl.modeltree.Loader}
+ *            self The loader instance.
+ * @param {cwl.modeltree.Node}
+ *            node The node, whose data (children) were loaded.
+ * @param {Function}
+ *            callback A function to call on finish.
+ * @param {Object}
+ *            data The data returned by the persistence call. The nodes are either
+ *                 contained in the field data.records (after loading the root node) or
+ *                 data.record (after loading any other node)
+ */
 cwl.modeltree.Loader.prototype.reformatData = function(self, node, callback, data) {
-	var changed = false;
+
+	// the model nodes to display
+	var nodes = [];
 	
-	for (var i = 0; i < data.objects.length; i++) {
-		changed = true;
+	if (data.records) {
+		// if the data result from a call to the 'list' action, the model nodes are contained in
+		// the data.records field
+		nodes = data.records;
+	}
+	else if (data.record) {
+		// if the data result from a call to the 'read' action, the model nodes are contained in
+		// the data.record field
 		
-		var responseNode = data['objects'][i];
-		var chiClassName = chi.Util.getClassNameFromOid(responseNode.oid);
+		// get the child classes of the loaded node
+		var chiParentClassName = chi.Util.getClassNameFromOid(data.record.oid);
+		var chiParentClass = chi.model.ModelClassContainer.getInstance().getClass(chiParentClassName);
+		if (chiParentClass) {
+			var childClasses = chiParentClass.getRelatedClasses('children');
+
+			// get the model nodes for each child class from the appropriate parent class field
+			for (var i=0; i<childClasses.length; i++) {
+				var curChildren = data.record.data[childClasses[i].getId()];
+				if (curChildren) {
+					if (curChildren instanceof Array) {	
+						// multi-valued field
+						for (var j=0; j<curChildren.length; j++) {
+							nodes.push(curChildren[j]);
+						}
+					}
+					else {
+						// single-valued field
+						nodes.push(curChildren);
+					}
+				}
+			}
+		}
+	}
+	
+	// contruct the tree nodes for the model nodes
+	for (var i=0; i<nodes.length; i++) {
 		
 		var newNode = null;
 		
-		switch (chiClassName) {
-		/*
-			case "Model":
-				newNode = new cwl.modeltree.ModelNode({
-					text: responseNode.text,
-					//leaf: !responseNode.hasChildren,
-					oid: responseNode.oid
-				});
-				break;
-				
-			case "Package":
-				newNode = new cwl.modeltree.PackageNode({
-					text: responseNode.text,
-					//leaf: !responseNode.hasChildren,
-					oid: responseNode.oid
-				});
-				break;
-				
-			case "Diagram":
-				newNode = new cwl.modeltree.DiagramNode({
-					text: responseNode.text,
-					oid: responseNode.oid
-				});
-				break;
-				
-			case "ActivitySet":
-				newNode = new cwl.modeltree.ActivitySetNode({
-					text: responseNode.text,
-					oid: responseNode.oid
-				});
-				break;
-				
-			case "ChiBusinessUseCase":
-				newNode = new cwl.modeltree.UseCaseNode({
-					text: responseNode.text,
-					oid: responseNode.oid
-				});
-				break;
-				
-			case "ChiBusinessUseCaseCore":
-				newNode = new cwl.modeltree.UseCaseCoreNode({
-					text: responseNode.text,
-					oid: responseNode.oid
-				});
-				break;
-			case "ChiBusinessProcess":
-				newNode = new cwl.modeltree.ProcessNode({
-					text: responseNode.text,
-					oid: responseNode.oid
-				});
-				break;
-				
-			// FIXME: Better ask the parent node, if several child nodes 
-			// should be displayed or not
-			case "Figure":
-			case "NMUCActor":
-			case "ChiUseCaseSourceEnd":
-			case "ChiUseCaseTargetEnd":
-			case "ChiUseCaseCoreSourceEnd":
-			case "ChiUseCaseCoreTargetEnd":
-				break;
-				
-		*/
-			default:
-				newNode = new cwl.modeltree.Node({
-					text: responseNode.text,
-					oid: responseNode.oid,
-					chiClassName: chiClassName
-				});
-				break;
+		var responseNode = nodes[i];
+		if (responseNode && responseNode.isModelRecord) {
+			var chiClassName = chi.Util.getClassNameFromOid(responseNode.oid);
+			switch (chiClassName) {
+
+				default:
+					newNode = new cwl.modeltree.Node({
+						text: responseNode.getLabel(),
+						modelElement: responseNode
+					});
+					break;
+			}
 		}
+		else {
+			// the node is a reference -> ignore it
+		}
+		
 		if (newNode) {
 			node.appendChild(newNode);
 		}

@@ -185,7 +185,7 @@ cwl.graphics.figure.RuleFigure.prototype.checkDropable = function(modelElement, 
 
 cwl.graphics.figure.RuleFigure.prototype.onCreateSequenceRule = function(e, el, op) {
   // create rule
-  var rule = new cwl.model.ModelElement();
+  var rule = new chi.model.ModelElement();
   rule.type = "Rule";
   var ruleFigure = this.getDiagram().addNewObject(rule, (this.getX()+this.getWidth()+20), this.getY());
   
@@ -203,7 +203,7 @@ cwl.graphics.figure.RuleFigure.prototype.onCreateSequenceRule = function(e, el, 
 
 cwl.graphics.figure.RuleFigure.prototype.onCreateParallelRule = function(e, el, op) {
   // create rule
-  var rule = new cwl.model.ModelElement();
+  var rule = new chi.model.ModelElement();
   rule.type = "Rule";
   var ruleFigure = this.getDiagram().addNewObject(rule, this.getX(), this.getY()+this.getHeight()+22);
 
