@@ -116,13 +116,13 @@ chi.persistency.WcmfJson.prototype.groupOidList = function(list) {
 	if (list) {
 		for ( var i = 0; i < list.length; i++) {
 			var currOid = list[i];
-			var currCweModelElementId = chi.Util.getCweModelElementIdFromOid(currOid);
+			var currModelElementId = chi.Util.getClassNameFromOid(currOid);
 			
-			if (!result[currCweModelElementId]) {
-				result[currCweModelElementId] = [];
+			if (!result[currModelElementId]) {
+				result[currModelElementId] = [];
 			}
 			
-			result[currCweModelElementId].push(currOid);
+			result[currModelElementId].push(currOid);
 		}
 	}
 	
@@ -272,7 +272,7 @@ chi.persistency.WcmfJson.prototype.save = function(oid, values, successHandler, 
 	 * 
 	 * var node = {};
 	 * 
-	 * node.oid = oid; node.type = chi.Util.getCweModelElementIdFromOid(oid);
+	 * node.oid = oid; node.type = chi.Util.getClassNameFromOid(oid);
 	 * node.values = {}; node.values[1] = {};
 	 * 
 	 * for ( var i in values) { if (!(values[i] instanceof Function)) {
@@ -497,7 +497,7 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					var changeNode = {};
 					
 					changeNode.oid = currRequest.oid;
-					changeNode.type = chi.Util.getCweModelElementIdFromOid(currRequest.oid);
+					changeNode.type = chi.Util.getClassNameFromOid(currRequest.oid);
 					changeNode.values = {};
 					changeNode.values["1"] = {};
 					
