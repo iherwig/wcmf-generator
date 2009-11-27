@@ -50,6 +50,17 @@ chi.Config = function() {
 	this.debug = true;
 
 	/**
+	 * The log level for frontend logging.
+	 * <p>
+	 * All calls to uwm.Log.log that have a log level greater or equal than this are passed through.
+	 * Possible values are uwm.Log.DEBUG, uwm.Log.INFO, uwm.Log.WARN, uwm.Log.ERROR
+	 * </p>
+	 * 
+	 * @type Integer
+	 */
+	this.logLevel = chi.Log.ERROR;
+
+	/**
 	 * Default value of login.
 	 *
 	 * @type String

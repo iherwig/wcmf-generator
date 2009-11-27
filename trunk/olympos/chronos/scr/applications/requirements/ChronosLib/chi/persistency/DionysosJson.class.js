@@ -66,7 +66,7 @@ chi.persistency.DionysosJson.prototype.getSid = function() {
 chi.persistency.DionysosJson.prototype.readObject = function(data) {
 	var result = null;
 	
-	var cweModelElementId = data["className"];
+	var chiModelElementId = data["className"];
 	var oid = data["oid"];
 	
 	if (!data.isReference) {
@@ -96,9 +96,9 @@ chi.persistency.DionysosJson.prototype.readObject = function(data) {
 			}
 		}
 		
-		result = new cwe.model.ModelRecord(cwe.model.ModelClassContainer.getInstance().getClass(cweModelElementId), oid, values);
+		result = new chi.model.ModelRecord(chi.model.ModelClassContainer.getInstance().getClass(chiModelElementId), oid, values);
 	} else {
-		result = new cwe.model.ModelReference(oid);
+		result = new chi.model.ModelReference(oid);
 	}
 	
 	return result;
@@ -132,10 +132,10 @@ chi.persistency.DionysosJson.prototype.logoutRecordHandler = function(handler, o
 	return {};
 }
 
-chi.persistency.DionysosJson.prototype.list = function(cweModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
+chi.persistency.DionysosJson.prototype.list = function(chiModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
 	this.jsonRequest( {
 	    action : "list",
-	    className : cweModelElementId,
+	    className : chiModelElementId,
 	    limit : limit,
 	    offset : offset,
 	    sortFieldName : sortAttributeName,
@@ -145,7 +145,7 @@ chi.persistency.DionysosJson.prototype.list = function(cweModelElementId, limit,
 
 chi.persistency.DionysosJson.prototype.listRecordHandler = function(handler, options, data) {
 	return {
-	    cweModelElementId : options.localParams.className,
+	    chiModelElementId : options.localParams.className,
 	    limit : options.localParams.limit,
 	    offset : options.localParams.offset,
 	    sortAttributeName : options.localParams.sortFieldName,
@@ -210,16 +210,16 @@ chi.persistency.DionysosJson.prototype.updateRecordHandler = function(handler, o
 	};
 }
 
-chi.persistency.DionysosJson.prototype.create = function(cweModelElementId, successHandler, errorHandler) {
+chi.persistency.DionysosJson.prototype.create = function(chiModelElementId, successHandler, errorHandler) {
 	this.jsonRequest( {
 	    action : "create",
-	    className : cweModelElementId
+	    className : chiModelElementId
 	}, successHandler, errorHandler, this.createRecordHandler);
 }
 
 chi.persistency.DionysosJson.prototype.createRecordHandler = function(handler, options, data) {
 	return {
-	    cweModelElementId : options.localParams.className,
+	    chiModelElementId : options.localParams.className,
 	    oid : data.oid
 	};
 }
@@ -322,7 +322,7 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 				
 				case "list":
 					jsonRequest.action = "list";
-					jsonRequest.className = currRequest.cweModelElementId;
+					jsonRequest.className = currRequest.chiModelElementId;
 					jsonRequest.limit = currRequest.limit;
 					jsonRequest.offset = currRequest.offset;
 					jsonRequest.sortFieldName = currRequest.sortAttributeName;
@@ -346,7 +346,7 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 				
 				case "create":
 					jsonRequest.action = "create";
-					jsonRequest.className = currRequest.cweModelElementId;
+					jsonRequest.className = currRequest.chiModelElementId;
 					recordHandler = this.createRecordHandler;
 					break;
 				
