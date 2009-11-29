@@ -88,8 +88,12 @@ class DionysosFormat extends HierarchicalFormat
    */
   function isSerializedNode($key, &$value)
   {
-    $result = ((is_object($value) || is_array($value)) && array_key_exists('oid', $value) && array_key_exists('attributes', $value));
-    return $result;
+    $syntaxOk = ((is_object($value) || is_array($value)) && array_key_exists('oid', $value) && array_key_exists('attributes', $value));
+    // check for oid variables
+    if ($syntaxOk && preg_match('/^\{.+\}$/', $value['oid'])) {
+      return false;
+    }
+    return $syntaxOk;
   }
   
   /**
