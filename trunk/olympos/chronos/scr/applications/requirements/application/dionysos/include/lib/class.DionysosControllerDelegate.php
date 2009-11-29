@@ -229,7 +229,7 @@ class DionysosControllerDelegate
         $response->clearValue('dir');
         $response->clearValue('completeObjects');
 
-        if ($request->getValue('offset') >= $response->getValue('totalCount')) {
+        if ($response->getValue('totalCount') > 0 && $request->getValue('offset') >= $response->getValue('totalCount')) {
           $response->clearValue('list');
           throw new DionysosException($request, $response, DionysosException::OFFSET_OUT_OF_BOUNDS, DionysosException::OFFSET_OUT_OF_BOUNDS);
         }
