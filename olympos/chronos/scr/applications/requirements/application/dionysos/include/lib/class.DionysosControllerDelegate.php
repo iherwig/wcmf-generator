@@ -17,6 +17,7 @@
  * $Id$
  */
 require_once(BASE."application/dionysos/include/lib/class.DionysosException.php");
+require_once(BASE."wcmf/lib/model/class.NodeIterator.php");
 require_once(BASE."wcmf/lib/security/class.RightsManager.php");
 require_once(BASE."wcmf/lib/util/class.Log.php");
 
@@ -253,6 +254,36 @@ class DionysosControllerDelegate
         $response->clearValue('viewMode');
         $response->setValue('object', $response->getValue('node'));
         $response->clearValue('node');
+        
+        // remove many to many objects from object tree
+        $iter = new NodeIterator($response->getValue('object'));
+        while(!$iter->isEnd())
+        {
+          $curObj = &$iter->getCurrentObject();
+          $children = $curObj->getChildren();
+          for ($i=0, $numChildren=sizeof($children); $i<$numChildren; $i++)
+          {
+            $curChild = &$children[$i];
+            if ($curChild->isManyToManyObject()) 
+            {
+              $curObj->deleteChild($curChild->getOID(), true);
+              // add parents of many to many object instead
+              $curChild->loadParents();
+              $parents = $curChild->getParents();
+              for ($j=0, $numParents=sizeof($parents); $j<$numParents; $j++)
+              {
+                $curParent = &$parents[$j];
+                if ($curParent->getOID() != $curObj->getOID()) {
+                  $curParent->deleteChild($curChild->getOID(), true);
+                  // hack: prevent automatic addition of nm object
+                  $curObj->_children[sizeof($curObj->_children)] = &$curParent;
+                  $curParent->updateParent($curObj);
+                }
+              }
+            }
+          }
+          $iter->proceed();
+        }
         break;
 
       case 'save':
