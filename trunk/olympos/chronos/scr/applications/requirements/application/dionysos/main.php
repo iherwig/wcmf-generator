@@ -39,10 +39,13 @@ if ($mappedAction !== false) {
 else {
   $GLOBALS['data']['usr_action'] = $action;
 }
+if ($action == 'login') {
+  $GLOBALS['data']['controller'] = 'LoginController';
+}
 
 // initialize the application
 $application = &Application::getInstance();
-$callParams = &$application->initialize('../include/');
+$callParams = &$application->initialize('../include/', 'config.ini', 'TerminateController');
 // allow for overriding default values from config.ini
 $parser->parseIniFile('include/config.ini', true);
 
@@ -51,7 +54,7 @@ $GLOBALS['EXCEPTION_HANDLER'] = "onError";
 
 // process the requested action (we don't use the result here)
 $request = new Request(
-  'TerminateController', 
+  $callParams['controller'], 
   $callParams['context'], 
   $callParams['action'], 
   $callParams['data']
