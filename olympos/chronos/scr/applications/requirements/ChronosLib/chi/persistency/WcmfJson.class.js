@@ -84,7 +84,7 @@ chi.persistency.WcmfJson.prototype.getSid = function() {
 }
 
 chi.persistency.WcmfJson.prototype.readObject = function(data) {
-	var cweModelElementId = data.type;
+	var chiModelElementId = data.type;
 	
 	var values = {};
 	
@@ -104,7 +104,7 @@ chi.persistency.WcmfJson.prototype.readObject = function(data) {
 	
 	values.oid = data.oid;
 	
-	var record = new cwe.model.ModelRecord(cwe.model.ModelClassContainer.getInstance().getClass(cweModelElementId), values);
+	var record = new chi.model.ModelRecord(chi.model.ModelClassContainer.getInstance().getClass(chiModelElementId), values);
 	
 	return record;
 	
@@ -131,18 +131,18 @@ chi.persistency.WcmfJson.prototype.groupOidList = function(list) {
 
 chi.persistency.WcmfJson.prototype.createReferences = function(prefix, list, data) {
 	
-	for ( var currCweModelElementId in list) {
-		var currOidList = list[currCweModelElementId];
+	for ( var currChiModelElementId in list) {
+		var currOidList = list[currChiModelElementId];
 		
 		if (!(currOidList instanceof Function)) {
-			var currEntry = new cwe.model.ModelReferenceList(cwe.model.ModelClassContainer.getInstance().getClass(currCweModelElementId));
+			var currEntry = new chi.model.ModelReferenceList(chi.model.ModelClassContainer.getInstance().getClass(currChiModelElementId));
 			
 			for ( var i = 0; i < currOidList.length; i++) {
-				currEntry.add(new cwe.model.ModelReference(currOidList[i]));
+				currEntry.add(new chi.model.ModelReference(currOidList[i]));
 			}
 		}
 		
-		var propertyName = prefix + currCweModelElementId;
+		var propertyName = prefix + currChiModelElementId;
 		
 		data[propertyName] = currEntry;
 	}
@@ -176,10 +176,10 @@ chi.persistency.WcmfJson.prototype.logoutRecordHandler = function(handler, optio
 	return {};
 }
 
-chi.persistency.WcmfJson.prototype.list = function(cweModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
+chi.persistency.WcmfJson.prototype.list = function(chiModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
 	this.jsonRequest( {
 		usr_action : "list",
-		type : cweModelElementId,
+		type : chiModelElementId,
 		limit : limit,
 		start : offset,
 		sort : sortAttributeName,
@@ -190,7 +190,7 @@ chi.persistency.WcmfJson.prototype.list = function(cweModelElementId, limit, off
 
 chi.persistency.WcmfJson.prototype.listRecordHandler = function(handler, options, data) {
 	return {
-		cweModelElementId : options.params.type,
+		chiModelElementId : options.params.type,
 		limit : options.params.limit,
 		offset : options.params.start,
 		sortAttributeName : options.params.sort,
@@ -238,7 +238,7 @@ chi.persistency.WcmfJson.prototype.createLoadRecords = function(data) {
 	var outstandingNodes = new Ext.util.MixedCollection();
 	
 	while (furtherElements) {
-		var cweModelElementId = node.type;
+		var chiModelElementId = node.type;
 		var origOid = node.oid;
 		
 		records[origOid] = this.readObject(node);
@@ -300,10 +300,10 @@ chi.persistency.WcmfJson.prototype.saveRecordHandler = function(handler, options
 	};
 }
 
-chi.persistency.WcmfJson.prototype.create = function(cweModelElementId, values, successHandler, errorHandler) {
+chi.persistency.WcmfJson.prototype.create = function(chiModelElementId, values, successHandler, errorHandler) {
 	var data = {
 		usr_action : "new",
-		newtype : cweModelElementId
+		newtype : chiModelElementId
 	};
 	
 	// FIXME: Workaround for immediately saving values
@@ -318,7 +318,7 @@ chi.persistency.WcmfJson.prototype.create = function(cweModelElementId, values, 
 
 chi.persistency.WcmfJson.prototype.createRecordHandler = function(handler, options, data) {
 	return {
-		cweModelElementId : options.params.newtype,
+		chiModelElementId : options.params.newtype,
 		newOid : data.oid
 	};
 }
@@ -458,7 +458,7 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 				
 				case "list":
 					jsonRequest.usr_action = "list";
-					jsonRequest.type = currRequest.cweModelElementId;
+					jsonRequest.type = currRequest.chiModelElementId;
 					jsonRequest.limit = currRequest.limit;
 					jsonRequest.start = currRequest.offset;
 					jsonRequest.sort = currRequest.sortAttributeName;
@@ -466,7 +466,7 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.completeObjects = true;
 					recordHandler = function(handler, request, data) {
 						return {
-							cweModelElementId : request.cweModelElementId,
+							chiModelElementId : request.chiModelElementId,
 							limit : request.limit,
 							offset : request.offset,
 							sortAttributeName : request.sortAttributeName,
@@ -518,12 +518,12 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 				
 				case "create":
 					jsonRequest.usr_action = "new";
-					jsonRequest.newtype = currRequest.cweModelElementId;
+					jsonRequest.newtype = currRequest.chiModelElementId;
 					jsonRequest.values = {};
 					jsonRequest.values[1] = currRequest.values;
 					recordHandler = function(handler, request, data) {
 						return {
-							cweModelElementId : request.cweModelElementId,
+							chiModelElementId : request.chiModelElementId,
 							newOid : data.oid
 						};
 					};

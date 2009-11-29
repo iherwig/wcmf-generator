@@ -48,7 +48,7 @@ chi.persistency.Persistency.prototype.logout = function(successHandler, errorHan
 	throw "Method chi.persistency.Persistency.logout not implemented by current persistency adapter.";
 }
 
-chi.persistency.Persistency.prototype.list = function(cweModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
+chi.persistency.Persistency.prototype.list = function(chiModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.list not implemented by current persistency adapter.";
 }
 
@@ -60,7 +60,7 @@ chi.persistency.Persistency.prototype.update = function(oid, values, successHand
 	throw "Method chi.persistency.Persistency.update not implemented by current persistency adapter.";
 }
 
-chi.persistency.Persistency.prototype.create = function(cweModelElementId, successHandler, errorHandler) {
+chi.persistency.Persistency.prototype.create = function(chiModelElementId, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.create not implemented by current persistency adapter.";
 }
 
