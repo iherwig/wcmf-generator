@@ -51,7 +51,7 @@ $GLOBALS['EXCEPTION_HANDLER'] = "onError";
 
 // process the requested action (we don't use the result here)
 $request = new Request(
-  $callParams['controller'], 
+  'TerminateController', 
   $callParams['context'], 
   $callParams['action'], 
   $callParams['data']
