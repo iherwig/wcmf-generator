@@ -256,6 +256,8 @@ class DionysosControllerDelegate
         break;
 
       case 'save':
+        $oid = $request->getValue('oid');
+        $response->clearValue($oid);
         break;
 
       case 'new':

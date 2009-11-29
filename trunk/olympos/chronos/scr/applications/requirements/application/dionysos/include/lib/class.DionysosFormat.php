@@ -71,6 +71,29 @@ class DionysosFormat extends HierarchicalFormat
       $data[$data['oid']] = array('oid' => $data['oid'], 'attributes' => $data['attributes']);
     }
   }
+  /**
+   * Callback function for array_walk_recursive. De-/Serializes any Node instances 
+   * using the function given in method parameter.
+   * @param value The array value
+   * @param key The array key
+   * @param method The method to apply to each value
+   */
+  function processValues(&$value, $key, $method)
+  {
+    if (strpos($method, 'deserialize') === 0 && $this->isSerializedNode($key, $value))
+    {
+      $node = &$this->$method($key, $value);
+      if ($key == $node->getOID()) {
+        $value = $node;
+      }
+      else {
+        $value[$node->getOID()] = $node;
+      }
+    }
+    if (strpos($method, 'serialize') === 0 && $this->isDeserializedNode($key, $value)) {
+      $value = $this->$method($key, $value);
+    }
+  }
 
   /**
    * @see HierarchicalFormat::afterSerialize()
