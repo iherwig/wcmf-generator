@@ -161,7 +161,18 @@ class DionysosControllerDelegate
         break;
 
       case 'multipleAction':
-        $request->setValue('data', $request->getValue('actionSet'));
+        
+        // map action names
+        $parser = &WCMFInifileParser::getInstance();
+        $actionMap = $parser->getSection('actionmap');
+        $data = &$request->getValue('actionSet');
+        for($i=0, $actions=array_keys($data), $numActions=sizeof($actions); $i<$numActions; $i++)
+        {
+          $action = $data['action'.$i]['action'];
+          $data['action'.$i]['usr_action'] = $actionMap[$action];
+        }
+
+        $request->setValue('data', $data);
         break;
     }
   }
@@ -259,8 +270,9 @@ class DionysosControllerDelegate
         break;
         
       case 'multipleAction':
-        $response->setValue('resultSet', $response->getValue('actionSet'));
+        $response->setValue('resultSet', $response->getValue('data'));
         $response->clearValue('actionSet');
+        $response->clearValue('data');
         break;
     }
     return $result;
