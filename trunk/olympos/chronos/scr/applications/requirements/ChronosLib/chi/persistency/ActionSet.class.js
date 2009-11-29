@@ -41,10 +41,10 @@ chi.persistency.ActionSet.prototype.addLogout = function(successHandler, errorHa
 	};
 }
 
-chi.persistency.ActionSet.prototype.addList = function(cweModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addList = function(chiModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 	    action : "list",
-	    cweModelElementId : cweModelElementId,
+	    chiModelElementId : chiModelElementId,
 	    limit : limit,
 	    offset : offset,
 	    sortAttributeName : sortAttributeName,
@@ -77,10 +77,10 @@ chi.persistency.ActionSet.prototype.addUpdate = function(oid, attributes, succes
 	};
 }
 
-chi.persistency.ActionSet.prototype.addCreate = function(cweModelElementId, successHandler, errorHandler, errorLevel) {
+chi.persistency.ActionSet.prototype.addCreate = function(chiModelElementId, successHandler, errorHandler, errorLevel) {
 	this.requests[this.getNextId()] = {
 	    action : "create",
-	    cweModelElementId : cweModelElementId,
+	    chiModelElementId : chiModelElementId,
 	    successHandler : successHandler,
 	    errorHandler : errorHandler,
 	    errorLevel : errorLevel
