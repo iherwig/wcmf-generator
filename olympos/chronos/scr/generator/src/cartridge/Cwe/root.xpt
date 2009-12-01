@@ -3,6 +3,7 @@
 
 «DEFINE root FOR uml::Model»
 	«EXPAND cartridge::Cwe::css::root FOR this»
+	«EXPAND cartridge::Cwe::modelDescription::root FOR this»
 	«EXPAND cartridge::Cwe::modelClass::root FOR this»
 	«EXPAND cartridge::Cwe::modelPackage::root FOR this»
 	«EXPAND cartridge::Cwe::index::root FOR this»
