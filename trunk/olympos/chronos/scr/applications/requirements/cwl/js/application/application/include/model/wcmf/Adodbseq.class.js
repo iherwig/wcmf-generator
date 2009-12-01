@@ -12,84 +12,15 @@
  */
 Ext.namespace("application.application.include.model.wcmf");
 
-application.application.include.model.wcmf.Adodbseq = function() {
-	application.application.include.model.wcmf.Adodbseq.superclass.constructor.call(this, arguments);
-	
-	this.chiModelElementId = "Adodbseq";
-	this.name = "Adodbseq";
-	this.treeIconClass = "AdodbseqTreeIcon16x16";
-	this.owningPackageId = "application.application.include.model.wcmf.Wcmf_package";
-	
-	
-	this.recordDefinition = [
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	];
-
-	
-	
-	this.relations = {
-	
-
-	
-	
-	
-	};
-
+application.application.include.model.wcmf.Adodbseq = function(oid, data) {
+	var modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription('Adodbseq');
+	return application.application.include.model.wcmf.Adodbseq.superclass.constructor.call(this, modelDescription, oid, data);
+// PROTECTED REGION ID(application.application.include.model.wcmf.Adodbseq.class.js/Constructor) ENABLED START
+// PROTECTED REGION END
 };
 
-Ext.extend(application.application.include.model.wcmf.Adodbseq, chi.model.ModelClass);
+// PROTECTED REGION ID(application.application.include.model.wcmf.Adodbseq.class.js/Body) ENABLED START
+// PROTECTED REGION END
 
-
-application.application.include.model.wcmf.Adodbseq.prototype.getGridColumns = function() {
-	return [
-	
-	];
-};
-
-
-
-application.application.include.model.wcmf.Adodbseq.prototype.getLabelColumns = function() {
-	return [
-	
-	];
-};
-
-
-
-application.application.include.model.wcmf.Adodbseq.prototype.getEditorItems = function() {
-	return [
-	
-	
-	
- ];
-};
-
-
-
-/**
- * Returns the label of an object of this Model Class.
- * 
- * @param {chi.model.ModelRecord}
- *            record The record of this Model Class to extract the label from.
- * @return The label of an object of this Model Class.
- * @type String
- */
-application.application.include.model.wcmf.Adodbseq.prototype.getLabel = function(record) {
-	var label = record.get("");
-	if (label == undefined || label.length == 0) {
-		label = record.getOid(); 
-	}
-	return label;
-};
-
-
-chi.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.wcmf.Adodbseq());
+Ext.extend(application.application.include.model.wcmf.Adodbseq, chi.model.ModelRecord);
 	

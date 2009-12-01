@@ -15,7 +15,7 @@ cwl.modeltree.Node = function(config) {
 	this.modelElement = config.modelElement;
 	
 	cwl.modeltree.Node.superclass.constructor.call(this, Ext.apply(this, {
-		iconCls : this.getModelElement().getModelClass().getTreeIconClass(),
+		iconCls : this.getModelElement().getModelDescription().getTreeIconClass(),
 		expanded: false
 	}, config));
 	

@@ -48,7 +48,34 @@ cwl.modeltree.ModelTree = Ext.extend(Ext.tree.TreePanel, {
 			dragConfig: {
 				ddGroup: cwl.Constants.DD_GROUP
 			},
-			title: chi.Dict.translate("Model Tree")
+			selModel: new Ext.tree.MultiSelectionModel(),
+			title: chi.Dict.translate("Model Tree"),
+			contextMenu: new Ext.menu.Menu({
+					items: [{
+							id: 'delete-node',
+							text: 'Delete Node'
+					}],
+					listeners: {
+							itemclick: function(item) {
+									switch (item.id) {
+											case 'delete-node':
+													var n = item.parentMenu.contextNode;
+													if (n.parentNode) {
+															n.remove();
+													}
+													break;
+									}
+							}
+					}
+			}),
+			listeners: {
+					contextmenu: function(node, e) {
+							node.select();
+							var c = node.getOwnerTree().contextMenu;
+							c.contextNode = node;
+							c.showAt(e.getXY());
+					}
+			}
 		});
 		
 		cwl.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);

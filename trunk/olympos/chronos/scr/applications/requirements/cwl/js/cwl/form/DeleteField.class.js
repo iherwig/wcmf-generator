@@ -31,6 +31,9 @@ cwl.form.DeleteField = function(config) {
 		this.fieldSet.remove(this);
 		this.fieldSet.doLayout();
 	};
+  
+  this.on('blur', function(field) {
+  });
 }
 
 Ext.extend(cwl.form.DeleteField, Ext.form.TriggerField);

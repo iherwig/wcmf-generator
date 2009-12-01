@@ -26,11 +26,7 @@ cwl.form.AddButton = function(config) {
 		iconCls: 'trigger-create',
 		width: 50,
 		handler: function(btn, e) {
-			var newField = new cwl.form.DeleteField({
-				fieldSet: btn.fieldSet
-			});
-			btn.fieldSet.add(newField);
-			btn.fieldSet.doLayout();
+			btn.fieldSet.addField(null);
 		}
 	}, config));
 }

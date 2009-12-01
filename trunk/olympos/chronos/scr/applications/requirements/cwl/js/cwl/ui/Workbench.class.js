@@ -61,7 +61,8 @@ cwl.ui.Workbench = function(config) {
 						activeTab: 0,
 						items: [new cwl.textrule.TextRulePanel({
 							closable: true,
-							title: "Rule"
+							title: "Rule",
+							rule: null
 						})]
 					})
 				},{

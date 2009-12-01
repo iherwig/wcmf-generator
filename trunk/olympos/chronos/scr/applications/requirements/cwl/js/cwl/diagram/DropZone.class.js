@@ -72,7 +72,7 @@ cwl.diagram.DropZone.prototype.onNodeOver = function(nodeData, source, e, data) 
  * <ul>
  * 	<li>If <code>data.data</code> is an instance of {@link cwl.model.ModelObject}, an existing ModelObject is
  * 		added to the diagram.</li>
- * 	<li>If <code>data.data</code> is an instance of {@link chi.model.ModelClass}, a new ModelObject is added to
+ * 	<li>If <code>data.data</code> is an instance of {@link chi.model.ModelRecord}, a new ModelObject is added to
  * 		the diagram.</li>
  * </ul>
  *
