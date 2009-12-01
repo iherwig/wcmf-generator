@@ -34,14 +34,14 @@ Ext.namespace("application.«this.getFullPackageName()»");
 «this.getCwePackageName()» = function() {
 	«this.getCwePackageName()».superclass.constructor.call(this, arguments);
 	
-	this.cweModelElementId = "«this.getCwePackageName()»";
+	this.chiModelElementId = "«this.getCwePackageName()»";
 	this.name = "«this.name»";
-	this.owningPackageId = «IF this.owner.getQualifiedName() != ApplicationPackageAbsolute(this.getModel())»"«this.owner.getCwePackageName()»"«ELSE»cwe.model.RootPackage.ROOT_PACKAGE_ID«ENDIF»;
+	this.owningPackageId = «IF this.owner.getQualifiedName() != ApplicationPackageAbsolute(this.getModel())»"«this.owner.getCwePackageName()»"«ELSE»chi.model.RootPackage.ROOT_PACKAGE_ID«ENDIF»;
 	this.startExpanded = true;
 };
 
-Ext.extend(«this.getCwePackageName()», cwe.model.ModelPackage);
+Ext.extend(«this.getCwePackageName()», chi.model.ModelPackage);
 
-cwe.model.ModelPackageContainer.getInstance().registerPackage(new «this.getCwePackageName()»());
+chi.model.ModelPackageContainer.getInstance().registerPackage(new «this.getCwePackageName()»());
 	«ENDFILE»
 «ENDDEFINE»

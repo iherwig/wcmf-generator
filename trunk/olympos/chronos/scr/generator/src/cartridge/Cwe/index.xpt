@@ -194,6 +194,8 @@
 «ENDDEFINE»
 
 «DEFINE scriptClass FOR Chronos::ChiNode»
+		<script type="text/javascript" src="js/application/«this.getFullPackageName().asPath()»/«this.name»Description.class.js">
+		</script>
 		<script type="text/javascript" src="js/application/«this.getFullPackageName().asPath()»/«this.name».class.js">
 		</script>
 «ENDDEFINE»
