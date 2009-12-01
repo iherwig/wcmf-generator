@@ -15,39 +15,41 @@ Ext.namespace("chi.model");
  * @class A record of a specific Model Class.
  * 
  * <p>
- * Reads the record information of the passed Model Class and creates a record
+ * Reads the record information of the passed Model Description and creates a record
  * with the specific attributes.
  * </p>
  * 
  * @extends Ext.data.Record
  * @constructor
  * 
- * @param {chi.model.ModelClass}
- *            modelClass The Model Class to create a record for.
+ * @param {chi.model.ModelDescription}
+ *            modelDescription The Model Description to create a record for.
+ * @param {String}
+ *            oid The object id of the instance.
  * @param {Object}
  *            data A map containing attribute names as keys and initial values
  *            as map values.
  */
-chi.model.ModelRecord = function(modelClass, oid, data) {
-	if (!modelClass) {
-		throw ("No modelClass passed to ModelRecord constructor.");
+chi.model.ModelRecord = function(modelDescription, oid, data) {
+	if (!modelDescription) {
+		throw ("No modelDescription passed to ModelRecord constructor.");
 	}
 	
 	if (!data) {
 		data = {};
 	}
 	
-	var template = Ext.data.Record.create(modelClass.getRecordDefinition());
+	var template = Ext.data.Record.create(modelDescription.getRecordDefinition());
 	
 	var result = new template(data);
-	result.modelClass = modelClass;
+	result.modelDescription = modelDescription;
 	
 	result.isModelRecord = true;
 	
 	if (oid) {
 		result.oid = oid;
 	} else {
-		result.oid = "{" + modelClass.getId() + ":?}";
+		result.oid = "{" + modelDescription.getId() + ":?}";
 	}
 	
 	for ( var currElem in this) {
@@ -60,13 +62,13 @@ chi.model.ModelRecord = function(modelClass, oid, data) {
 Ext.extend(chi.model.ModelRecord, Ext.data.Record);
 
 /**
- * Returns the Model Class of this record.
+ * Returns the Model Description of this record.
  * 
- * @return The Model Class of this record.
- * @type chi.model.ModelClass
+ * @return The Model Description of this record.
+ * @type chi.model.ModelDescription
  */
-chi.model.ModelRecord.prototype.getModelClass = function() {
-	return this.modelClass;
+chi.model.ModelRecord.prototype.getModelDescription = function() {
+	return this.modelDescription;
 };
 
 /**
@@ -97,14 +99,14 @@ chi.model.ModelRecord.prototype.setOid = function(oid) {
  * Returns the label of this record.
  * 
  * <p>
- * Refers to the Model Class for extracting the label of this record.
+ * Refers to the Model Description for extracting the label of this record.
  * </p>
  * 
  * @return The label of this record.
  * @type String
  */
 chi.model.ModelRecord.prototype.getLabel = function() {
-	return this.getModelClass().getLabel(this);
+	return this.getModelDescription().getLabel(this);
 };
 
 /**

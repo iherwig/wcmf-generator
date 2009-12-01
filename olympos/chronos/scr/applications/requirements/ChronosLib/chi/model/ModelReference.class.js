@@ -33,12 +33,12 @@ chi.model.ModelReference = function(oid) {
 };
 
 /**
- * Returns the Model Class of the target object.
+ * Returns the Model Description of the target object.
  * 
- * @return The Model Class of the target object.
- * @type chi.model.ModelClass
+ * @return The Model Description of the target object.
+ * @type chi.model.ModelDescription
  */
-chi.model.ModelReference.prototype.getModelClass = function() {
+chi.model.ModelReference.prototype.getModelDescription = function() {
 	return chi.Util.getChiModelElementIdFromOid(this.oid);
 };
 

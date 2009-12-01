@@ -104,7 +104,7 @@ chi.persistency.WcmfJson.prototype.readObject = function(data) {
 	
 	values.oid = data.oid;
 	
-	var record = new chi.model.ModelRecord(chi.model.ModelClassContainer.getInstance().getClass(chiModelElementId), values);
+	var record = new chi.model.ModelRecord(chi.model.ModelDescriptionContainer.getInstance().getDescription(chiModelElementId), values);
 	
 	return record;
 	
@@ -135,7 +135,7 @@ chi.persistency.WcmfJson.prototype.createReferences = function(prefix, list, dat
 		var currOidList = list[currChiModelElementId];
 		
 		if (!(currOidList instanceof Function)) {
-			var currEntry = new chi.model.ModelReferenceList(chi.model.ModelClassContainer.getInstance().getClass(currChiModelElementId));
+			var currEntry = new chi.model.ModelReferenceList(chi.model.ModelDescriptionContainer.getInstance().getDescription(currChiModelElementId));
 			
 			for ( var i = 0; i < currOidList.length; i++) {
 				currEntry.add(new chi.model.ModelReference(currOidList[i]));

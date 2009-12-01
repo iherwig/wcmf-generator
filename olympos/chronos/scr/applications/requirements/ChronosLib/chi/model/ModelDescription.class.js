@@ -20,15 +20,15 @@ Ext.namespace("chi.model");
  * 
  * <p>
  * Only one instance of each concrete subclass must exist. They are registered
- * to {@link chi.model.ModelClassContainer} and can be retrieved from there by
+ * to {@link chi.model.ModelDescriptionContainer} and can be retrieved from there by
  * their unique id.
  * </p>
  * 
  * @extends chi.model.ModelElement
  * @constructor
  */
-chi.model.ModelClass = function() {
-	chi.model.ModelClass.superclass.constructor.call(this, arguments);
+chi.model.ModelDescription = function() {
+	chi.model.ModelDescription.superclass.constructor.call(this, arguments);
 	
 	/**
 	 * The definition of a record of this Model Class.
@@ -57,7 +57,7 @@ chi.model.ModelClass = function() {
 	this.relations = null;
 };
 
-Ext.extend(chi.model.ModelClass, chi.model.ModelElement);
+Ext.extend(chi.model.ModelDescription, chi.model.ModelElement);
 
 /**
  * Returns the definition of a record of this Model Class.
@@ -67,9 +67,9 @@ Ext.extend(chi.model.ModelClass, chi.model.ModelElement);
  * @return The definition of a record of this Model Class.
  * @type Array
  */
-chi.model.ModelClass.prototype.getRecordDefinition = function() {
+chi.model.ModelDescription.prototype.getRecordDefinition = function() {
 	if (!this.recordDefinition) {
-		throw "chi.model.ModelClass.recordDefinition not set in subclass";
+		throw "chi.model.ModelDescription.recordDefinition not set in subclass";
 	}
 	
 	return this.recordDefinition;
@@ -88,7 +88,7 @@ chi.model.ModelClass.prototype.getRecordDefinition = function() {
  *         Class.
  * @type Array
  */
-chi.model.ModelClass.prototype.getGridColumns = function() {
+chi.model.ModelDescription.prototype.getGridColumns = function() {
 	var recordDefinition = this.getRecordDefinition();
 	
 	var result = [];
@@ -117,7 +117,7 @@ chi.model.ModelClass.prototype.getGridColumns = function() {
 	return result;
 };
 
-chi.model.ModelClass.prototype.getLabelColumns = function() {
+chi.model.ModelDescription.prototype.getLabelColumns = function() {
 	return this.getGridColumns();
 };
 
@@ -132,8 +132,8 @@ chi.model.ModelClass.prototype.getLabelColumns = function() {
  * @return The items of the editor of this Model Class.
  * @type Array
  */
-chi.model.ModelClass.prototype.getEditorItems = function() {
-	throw "chi.model.ModelClass.getEditorItems not overwritten";
+chi.model.ModelDescription.prototype.getEditorItems = function() {
+	throw "chi.model.ModelDescription.getEditorItems not overwritten";
 };
 
 /**
@@ -144,7 +144,7 @@ chi.model.ModelClass.prototype.getEditorItems = function() {
  * @return The label of an object of this Model Class.
  * @type String
  */
-chi.model.ModelClass.prototype.getLabel = function(record) {
+chi.model.ModelDescription.prototype.getLabel = function(record) {
 	return record.get("Name");
 };
 
@@ -153,10 +153,10 @@ chi.model.ModelClass.prototype.getLabel = function(record) {
  * 
  * @param {String}
  *            hierarchyType 'children', 'parents', 'all'.
- * @return An array of Model Classes.
+ * @return An array of Model Descriptions.
  * @type Array
  */
-chi.model.ModelClass.prototype.getRelatedClasses = function(hierarchyType) {
+chi.model.ModelDescription.prototype.getRelatedDescriptions = function(hierarchyType) {
 	var result = new Array();
 	
 	if (this.relations) {
@@ -165,7 +165,7 @@ chi.model.ModelClass.prototype.getRelatedClasses = function(hierarchyType) {
 				var relation = this.relations[relationName];
 				if (hierarchyType == 'all' || (hierarchyType == 'children' && relation.isParent) || 
 					(hierarchyType == 'parents' && !relation.isParent))
-				result.push(chi.model.ModelClassContainer.getInstance().getClass(relation.targetModelClassId));
+				result.push(chi.model.ModelDescriptionContainer.getInstance().getDescription(relation.targetModelClassId));
 			}
 		}
 	}
@@ -180,22 +180,22 @@ chi.model.ModelClass.prototype.getRelatedClasses = function(hierarchyType) {
  *            fieldName The name of the field the target Model Class is
  *            requested.
  * @return The target Model Class of the given field.
- * @type chi.model.ModelClass
+ * @type chi.model.ModelDescription
  */
-chi.model.ModelClass.prototype.getTargetModelClass = function(fieldName) {
+chi.model.ModelDescription.prototype.getTargetModelDescription = function(fieldName) {
 	var result = false;
 	
 	if (this.relations) {
 		var relation = this.relations[fieldName];
 		
 		if (relation) {
-			result = chi.model.ModelClassContainer.getInstance().getClass(relation.targetModelClassId);
+			result = chi.model.ModelDescriptionContainer.getInstance().getDescription(relation.targetModelClassId);
 		}
 	}
 	
 	return result;
 };
 
-chi.model.ModelClass.prototype.getNewLabel = function() {
+chi.model.ModelDescription.prototype.getNewLabel = function() {
 	return chi.Dict.translate("New ${1}", this.getName());
 };
