@@ -13,12 +13,13 @@ public class InfoFigureParameter {
 	private EnumFigureType type;
 	private String label;
 	private String relationType;
+//	private String connectionType;
 	private ArrayList<InfoFigureParameter> children = new ArrayList<InfoFigureParameter>();
 	private ArrayList<InfoXmlConnection> child = new ArrayList<InfoXmlConnection>();
 	private ArrayList<InfoXMLOptionValue> value = new ArrayList<InfoXMLOptionValue>();
 	private ArrayList<InfoXMLOptionValue> operation  = new ArrayList<InfoXMLOptionValue>();
 	
-	private String diagramid;
+	private String firureId;
 	private String typeId;
 	String alias;
 	String objectStatus;
@@ -35,12 +36,12 @@ public class InfoFigureParameter {
 		this.objectStatus = objectStatus;
 	}
 
-	public String getDiagramid() {
-		return diagramid;
+	public String getFigureId() {
+		return firureId;
 	}
 
-	public void setDiagramid(String diagramid) {
-		this.diagramid = diagramid;
+	public void setFigureid(String diagramid) {
+		this.firureId = diagramid;
 	}
 
 	public String getTypeId() {
@@ -130,7 +131,7 @@ public class InfoFigureParameter {
 	public void setAll(float xi, float yi, float w, float h, EnumFigureType i, String label, String diagramid, String alias, String objectStatus) {
 		setAllType(xi, yi, w, h, i);
 		this.label = label;
-		this.diagramid = diagramid;
+		this.firureId = diagramid;
 		this.alias = alias;
 		this.objectStatus = objectStatus;
 	}
@@ -164,4 +165,13 @@ public class InfoFigureParameter {
 	public ArrayList<InfoXMLOptionValue> getOperation() {
 		return operation;
 	}
+
+//	public String getConnectionType() {
+//		return connectionType;
+//	}
+//
+//	public void setConnectionType(String connectionType) {
+//		this.connectionType = connectionType;
+//	}
+	
 }

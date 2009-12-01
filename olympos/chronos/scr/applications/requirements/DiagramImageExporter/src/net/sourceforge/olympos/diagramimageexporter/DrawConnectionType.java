@@ -66,8 +66,7 @@ public class DrawConnectionType {
 		// HashMap<EnumFigureType, InfoAllowedConnection> alllowedConnection =
 		// elem.getAllowedConnection();
 		// InfoAllowedConnection connection =
-		// alllowedConnection.get(target.getType());
-
+//		 alllowedConnection.get(target.getType());
 		// if the connection type exist draw the connections
 		// if (connection != null) {
 		drawConnectionEnd(g2d, fromDirection, toPoint, sourceEnd);

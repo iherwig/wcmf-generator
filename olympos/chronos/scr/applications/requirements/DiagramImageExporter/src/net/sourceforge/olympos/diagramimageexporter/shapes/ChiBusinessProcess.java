@@ -11,37 +11,24 @@ import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 import net.sourceforge.olympos.diagramimageexporter.RequirementFigure;
+import net.sourceforge.olympos.diagramimageexporter.SVGGenerator;
 
 @SuppressWarnings("serial")
 public class ChiBusinessProcess extends RequirementFigure{
-	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 150, 50);
-	InfoLine infLine1 = new InfoLine(10, 0, 10, 50);
-	InfoLine infLine2 = new InfoLine(15, 0, 15, 50);
-	InfoLine inLeft = new InfoLine(122, 5, 122,13);
-	InfoLine inUp = new InfoLine(122, 5, 140, 5);
-	InfoLine inDown = new InfoLine(122, 13, 140, 13);
-	InfoLine inrightup = new InfoLine(140, 5, 145, 9);
-	InfoLine inrightdown = new InfoLine(140, 13, 145, 9);
 	
-	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 150, 50);
+	private InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 150, 50);
+	private InfoLine infLine1 = new InfoLine(10, 0, 10, 50);
+	private InfoLine infLine2 = new InfoLine(15, 0, 15, 50);
+	private InfoLine inLeft = new InfoLine(122, 5, 122,13);
+	private InfoLine inUp = new InfoLine(122, 5, 140, 5);
+	private InfoLine inDown = new InfoLine(122, 13, 140, 13);
+	private InfoLine inrightup = new InfoLine(140, 5, 145, 9);
+	private InfoLine inrightdown = new InfoLine(140, 13, 145, 9);
 	
-	
-	public ChiBusinessProcess(){
-
-	}
-	
-	public InfoCoordinateSize getRect1() {
-		return rect1;
-	}
-	public InfoLine getInfLine1() {
-		return infLine1;
-	}
-	public InfoLine getInfLine2() {
-		return infLine2;
-	}
+	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 150, 50);
 
 	@Override
-	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children) {
+	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children, SVGGenerator svg, ArrayList<String> existLine) {
 		drawScaleRec(g2d, createFig, figureInfo, rect1);
 		drawScaleLine(g2d, createFig, figureInfo, infLine1);
 		drawScaleLine(g2d, createFig, figureInfo, inLeft);
@@ -51,15 +38,17 @@ public class ChiBusinessProcess extends RequirementFigure{
 		drawScaleLine(g2d, createFig, figureInfo, inrightdown);
 		drawRecLineLabel(g2d, createFig, figureInfo, rect1, infLine1);
 		
+		
 		for(InfoFigureParameter currChild : children){
 			ElementDiagram elem = ElementDiagram.getCatalogEntry(createFig.getType());
 			HashMap<EnumFigureType, InfoAllowedConnection> hashTabOfAllowedFigures1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = hashTabOfAllowedFigures1.get(currChild.getType());
 
-			if (allowedConnection != null) {
+			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+			if (!existLine.contains(key)&& allowedConnection != null) {
 				String comment = allowedConnection.getLineLabel();
-
-				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
+				existLine.add(key);
 			}
 		}
 	}

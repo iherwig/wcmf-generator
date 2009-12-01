@@ -5,7 +5,9 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.geom.Arc2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -20,7 +22,7 @@ import org.apache.batik.svggen.SVGGraphics2D;
 @SuppressWarnings("serial")
 public abstract class Figure extends JPanel {
 
-	abstract public void draw(Graphics2D g2d, InfoFigureParameter fig, ArrayList<InfoFigureParameter> children);
+	abstract public void draw(Graphics2D g2d, InfoFigureParameter fig, ArrayList<InfoFigureParameter> children, SVGGenerator svg, ArrayList<String> existLine);
 
 	protected DrawConnection drawCon = new DrawConnection();
 
@@ -345,6 +347,16 @@ public abstract class Figure extends JPanel {
 		n.setBounds(x, y, width, height);
 		n.setOpaque(false);
 		n.paint(textbox);
+	}
+	//arc
+	////////////////////////////////////////////////////////////////
+	protected void drawArc (Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoArc arc1){
+		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
+		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
+		
+		g2d.setPaint(Color.black);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.draw(new Arc2D.Double(arc1.getX() * scaleX , arc1.getY() * scaleY, arc1.getW() * scaleX, arc1.getH() * scaleY, arc1.getStart(), arc1.getExtend(), Arc2D.OPEN));
 	}
 
 	// image

@@ -15,18 +15,17 @@ public class DrawConnection {
 	double TOLxTOL = 0.01;
 	int MINDIST = 20;
 
-	public void drawConnection(Graphics2D g2d, InfoFigureParameter source, InfoFigureParameter target, String comment, EnumConnectionEnd sourceEnd, EnumConnectionEnd targetEnd) {
-		SVGGenerator svg = new SVGGenerator();
-
+	public void drawConnection(Graphics2D g2d, InfoFigureParameter source, InfoFigureParameter target, String comment, EnumConnectionEnd sourceEnd, EnumConnectionEnd targetEnd, SVGGenerator svg) {
+		
 		EnumDirection fromDirection, toDirection;
 
-		InfoFigureParameter sourceBox = new InfoFigureParameter(source.getX(), source.getY(), source.getWidth(), source.getHeight(), source.getType(), source.getLabel(), source.getDiagramid(), source
+		InfoFigureParameter sourceBox = new InfoFigureParameter(source.getX(), source.getY(), source.getWidth(), source.getHeight(), source.getType(), source.getLabel(), source.getFigureId(), source
 				.getAlias(), source.getObjectStatus());
 		sourceBox = source;
 		InfoCoordinate sourceCenter;
 		sourceCenter = getCenter(sourceBox);
 
-		InfoFigureParameter targetBox = new InfoFigureParameter(target.getX(), target.getY(), target.getWidth(), target.getHeight(), target.getType(), target.getLabel(), target.getDiagramid(), target
+		InfoFigureParameter targetBox = new InfoFigureParameter(target.getX(), target.getY(), target.getWidth(), target.getHeight(), target.getType(), target.getLabel(), target.getFigureId(), target
 				.getAlias(), target.getObjectStatus());
 		InfoCoordinate targetCenter;
 		targetCenter = getCenter(targetBox);
@@ -45,37 +44,40 @@ public class DrawConnection {
 		points = drawManhattonConnection(points, toPoint, toDirection, fromPoint, fromDirection);
 
 		InfoCoordinate lastPoint = null;
-
-		for (InfoCoordinate curPoint : points) {
-			if (lastPoint != null) {
-				g2d.setColor(Color.black);
-				Stroke stroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[] { 2 }, 0);
-				g2d.setStroke(stroke);
-				ArrayList<InfoConnectionExist> ConExist = new ArrayList<InfoConnectionExist>();
-				boolean exist = false;
-				InfoConnectionExist conEx = new InfoConnectionExist(source, target);
-				svg.addConnectionExist(conEx);
-				ConExist = svg.getConnectionExist();
-				for (InfoConnectionExist currCon : ConExist) {
-					InfoFigureParameter sourceFig = currCon.getFigSource();
-					String sourceAlias = sourceFig.getAlias();
-					for (InfoConnectionExist currCon2 : ConExist) {
-						InfoFigureParameter targetFig = currCon2.getFigTarget();
-						String targetalias = targetFig.getAlias();
-						if (targetalias == source.alias && sourceAlias == target.alias) {
-							exist = true;
-						}
-					}
+		
+		ArrayList<InfoConnectionExist> ConExist = new ArrayList<InfoConnectionExist>();
+		
+		boolean exist = false;			
+		InfoConnectionExist conEx = new InfoConnectionExist(source, target);
+		ConExist = svg.getConnectionExist();
+		for (InfoConnectionExist currCon : ConExist) {
+			InfoFigureParameter sourceFig = currCon.getFigSource();
+			String sourceAlias = sourceFig.getAlias();
+			for (InfoConnectionExist currCon2 : ConExist) {
+				InfoFigureParameter targetFig = currCon2.getFigTarget();
+				String targetalias = targetFig.getAlias();
+				if (targetalias == source.alias) {
+					exist = true;
 				}
-				if (exist == false)
-					g2d.drawLine((int) lastPoint.getX(), (int) lastPoint.getY(), (int) curPoint.getX(), (int) curPoint.getY());
 			}
-			lastPoint = curPoint;
 		}
-		// if (!source.getType().equals(EnumFigureType.DUMMY) ||
-		// !target.getType().equals(EnumFigureType.DUMMY))
-		drawLabel(g2d, source, target, toPoint, toDirection, fromPoint, fromDirection, points, comment);
+		if (exist == false ){
+
+			for (InfoCoordinate curPoint : points) {
+				if (lastPoint != null) {
+					g2d.setColor(Color.black);
+					Stroke stroke = new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 1, new float[] { 2 }, 0);
+					g2d.setStroke(stroke);
+					
+						g2d.drawLine((int) lastPoint.getX(), (int) lastPoint.getY(), (int) curPoint.getX(), (int) curPoint.getY());
+					}
+				lastPoint = curPoint;
+			}
+			svg.addConnectionExist(conEx);
+			drawLabel(g2d, source, target, toPoint, toDirection, fromPoint, fromDirection, points, comment);
+		}
 		DrawConnectionType connec = new DrawConnectionType();
+
 		connec.connection(g2d, source, target, toPoint, toDirection, fromPoint, fromDirection, sourceEnd, targetEnd);
 	}
 
@@ -129,10 +131,9 @@ public class DrawConnection {
 
 	private InfoCoordinate chopboxConnectionAnchor(InfoFigureParameter RealSource, InfoCoordinate target) {
 
-		InfoFigureParameter source = new InfoFigureParameter(0, 0, 0, 0, null, null, null, null, null);
+		InfoCoordinateSize source = new InfoCoordinateSize(RealSource.getX() - 1, RealSource.getY() - 1, RealSource.getWidth() + 1, RealSource.getHeight() + 1);
 		double scale = 0;
 
-		source.setXYWeightHeight(RealSource.getX() - 1, RealSource.getY() - 1, RealSource.getWidth() + 1, RealSource.getHeight() + 1);
 		InfoCoordinate center = new InfoCoordinate(source.getX() + source.getWidth() / 2, source.getY() + (source.getHeight() / 2));
 		InfoCoordinate d = new InfoCoordinate(target.getX() - center.getX(), target.getY() - center.getY());
 		scale = (0.5 / Math.max(Math.abs(d.getX() / source.getWidth()), Math.abs(d.getY() / source.getHeight())));
@@ -265,25 +266,30 @@ public class DrawConnection {
 		int curX = (int) midPoint.getX();
 		int curY = (int) midPoint.getY() - ((fm.getHeight() * words.length) / 2) - (fm.getHeight() / 2);
 		int boxHeight = fm.getHeight() * words.length + 7;
+		int boxWidthmax = 0;
 		for (String word : words) {
-			int wordWidth = fm.stringWidth(word + " ");
+//			int wordWidth = fm.stringWidth(word + " ");
 			g2d.setPaint(Color.white);
-			int boxWidth = fm.stringWidth(word + " ") + 10;
-			int boxX = ((int) midPoint.getX() - 7) - (boxWidth / 2);
-			int boxY = (int) midPoint.getY() - ((fm.getHeight() * words.length) / 2) - (fm.getHeight() / 2);
-			g2d.fill(new Rectangle(boxX, boxY, boxWidth + 7, boxHeight));
-			curX += wordWidth;
+			int boxWidth = fm.stringWidth(word + " ") + 3;
+			if(boxWidth >= boxWidthmax){
+				boxWidthmax = boxWidth;
+			}
+//			curX += wordWidth;
 		}
+		
+		int boxX = ((int) midPoint.getX() - 5) - (boxWidthmax / 2);
+		int boxY = (int) midPoint.getY() - ((fm.getHeight() * words.length) / 2) - (fm.getHeight() / 2);
+		g2d.fill(new Rectangle(boxX, boxY, boxWidthmax + 5, boxHeight));
 
-		fm = g2d.getFontMetrics();
-
+//		fm = g2d.getFontMetrics();
+		
 		for (String word : words) {
 			int wordWidth = fm.stringWidth(word + " ");
 
 			curY += lineHeight;
 			curX = (int) midPoint.getX();
 			i++;
-			int boxWidth = fm.stringWidth(word + " ") + 10;
+			int boxWidth = fm.stringWidth(word + " ") + 3;
 
 			g2d.setFont(b);
 			g2d.setPaint(Color.black);
