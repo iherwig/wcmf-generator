@@ -78,7 +78,7 @@ cwl.modeltree.Loader.prototype.reformatData = function(self, node, callback, dat
 		
 		// get the child classes of the loaded node
 		var chiParentClassName = chi.Util.getClassNameFromOid(data.record.oid);
-		var chiParentClass = chi.model.ModelClassContainer.getInstance().getClass(chiParentClassName);
+		var chiParentClass = chi.model.ModelDescriptionContainer.getInstance().getDescription(chiParentClassName);
 		if (chiParentClass) {
 			var childClasses = chiParentClass.getRelatedClasses('children');
 

@@ -12,133 +12,15 @@
  */
 Ext.namespace("application.application.include.model.wcmf");
 
-application.application.include.model.wcmf.RoleRDB = function() {
-	application.application.include.model.wcmf.RoleRDB.superclass.constructor.call(this, arguments);
-	
-	this.chiModelElementId = "RoleRDB";
-	this.name = "RoleRDB";
-	this.treeIconClass = "RoleRDBTreeIcon16x16";
-	this.owningPackageId = "application.application.include.model.wcmf.Wcmf_package";
-	
-	
-	this.recordDefinition = [
-	
-		{
-			name : "name",
-			mapping : "name"
-		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	];
-
-	
-	
-	this.relations = {
-	
-
-	
-	
-	
-	};
-
+application.application.include.model.wcmf.RoleRDB = function(oid, data) {
+	var modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription('RoleRDB');
+	return application.application.include.model.wcmf.RoleRDB.superclass.constructor.call(this, modelDescription, oid, data);
+// PROTECTED REGION ID(application.application.include.model.wcmf.RoleRDB.class.js/Constructor) ENABLED START
+// PROTECTED REGION END
 };
 
-Ext.extend(application.application.include.model.wcmf.RoleRDB, chi.model.ModelClass);
+// PROTECTED REGION ID(application.application.include.model.wcmf.RoleRDB.class.js/Body) ENABLED START
+// PROTECTED REGION END
 
-
-application.application.include.model.wcmf.RoleRDB.prototype.getGridColumns = function() {
-	return [
-	
-		
-			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true,
-			    
-			    editor: 
-	
-			new chi.editor.control.TextField({})
-	
-
-			}
-		
-	
-	];
-};
-
-
-
-application.application.include.model.wcmf.RoleRDB.prototype.getLabelColumns = function() {
-	return [
-	
-		
-			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true
-			}
-		
-	
-	];
-};
-
-
-
-application.application.include.model.wcmf.RoleRDB.prototype.getEditorItems = function() {
-	return [
-	
-		new chi.editor.control.PropertiesFieldSet({
-			items: [
-		
-			
-	
-		
-		new chi.editor.control.TextField({
-		fieldLabel: "name",
-		name: "name",
-		dataIndex: "name",
-		
-		toolTip: ""
-	}) 
-	
-
-		
-		]})
-		
-		
-	
-	
-	
- ];
-};
-
-
-
-/**
- * Returns the label of an object of this Model Class.
- * 
- * @param {chi.model.ModelRecord}
- *            record The record of this Model Class to extract the label from.
- * @return The label of an object of this Model Class.
- * @type String
- */
-application.application.include.model.wcmf.RoleRDB.prototype.getLabel = function(record) {
-	var label = record.get("name");
-	if (label == undefined || label.length == 0) {
-		label = record.getOid(); 
-	}
-	return label;
-};
-
-
-chi.model.ModelClassContainer.getInstance().registerClass(new application.application.include.model.wcmf.RoleRDB());
+Ext.extend(application.application.include.model.wcmf.RoleRDB, chi.model.ModelRecord);
 	
