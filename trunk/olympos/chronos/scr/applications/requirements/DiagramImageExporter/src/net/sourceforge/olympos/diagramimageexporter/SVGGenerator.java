@@ -13,20 +13,12 @@ import org.jdom.output.XMLOutputter;
 public class SVGGenerator {
 
 	// Array list for the diagram and Figures
-	public static ArrayList<InfoXmlDiagram> diagram;
+	private static ArrayList<InfoXmlDiagram> diagram;
 	private static ArrayList<InfoXmlFigure> xmlFigure;
 	private static ArrayList<InfoConnectionExist> connectionExist;
+	
 	public static Logger logger = Logger.getLogger(SVGGenerator.class.getName());
-	private static ArrayList<String> existLine;
-	
-	
-	public static ArrayList<String> getExistLine() {
-		return existLine;
-	}
-	
-	public static void addExistLine(String Line) {
-		existLine.add(Line);
-	}
+
 	
 	public ArrayList<InfoConnectionExist> getConnectionExist() {
 		return connectionExist;
@@ -67,7 +59,7 @@ public class SVGGenerator {
 		}
 
 		// make files and directories absolute
-		sourceFile = new File(sourceFile).getCanonicalPath();
+		sourceFile = new File(sourceFile).getCanonicalPath() + File.separator;
 		targetDir = new File(targetDir).getCanonicalPath() + File.separator;
 		iconDir = new File(iconDir).getCanonicalPath() + File.separator;
 
@@ -78,24 +70,26 @@ public class SVGGenerator {
 
 		SVGGenerator svg = new SVGGenerator();
 
+		
 		ElementDiagram.initCatalog(iconDir);
 		catalogManyToMany.initConnection();
 		
 		Document doc = new Document();
 		Element root = new Element("diagramExport");
+
 		doc.setRootElement(root);
 
 		XmlReader xml = new XmlReader(svg);
 		xml.XML(sourceFile);
 		
-		ArrayList<String> existLine = new ArrayList<String>();
+//		ArrayList<String> existLine = new ArrayList<String>();
 
 		Draw df = new Draw();
 		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
 		for (InfoXmlDiagram currDia : xmlDia) {
-			existLine = null;
+//			existLine = null;
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
-			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat, existLine, svg);
+			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat, svg);
 
 			if (maxCor != null) {
 				int widthInt = (int) maxCor.getX();

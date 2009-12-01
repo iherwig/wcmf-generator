@@ -10,15 +10,17 @@ import net.sourceforge.olympos.diagramimageexporter.Figure;
 import net.sourceforge.olympos.diagramimageexporter.InfoAllowedConnection;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
+import net.sourceforge.olympos.diagramimageexporter.SVGGenerator;
 
 @SuppressWarnings("serial")
 public class ChiObject extends Figure {
 //	g2d.draw(new Rectangle(0, 0, 100, 50));
 	private InfoCoordinateSize rect = new InfoCoordinateSize(0, 0, 138, 60);
+	
 	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 138, 60);
 	
 	@Override
-	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children) {
+	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children, SVGGenerator svg, ArrayList<String> existLine) {
 		
 		drawScaleRec(g2d, createFig, figureInfo, rect);
 		drawRecLabelLeft(g2d, createFig, figureInfo, rect);
@@ -29,10 +31,11 @@ public class ChiObject extends Figure {
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-			if (allowedConnection != null) {
+			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+			if (!existLine.contains(key)&& allowedConnection != null) {
 				String comment = allowedConnection.getLineLabel();
-				
-				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
+				existLine.add(key);
 			}
 		}
 	}

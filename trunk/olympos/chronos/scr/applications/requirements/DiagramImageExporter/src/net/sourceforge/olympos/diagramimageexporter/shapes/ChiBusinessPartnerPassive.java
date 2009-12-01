@@ -11,42 +11,23 @@ import net.sourceforge.olympos.diagramimageexporter.InfoAllowedConnection;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
+import net.sourceforge.olympos.diagramimageexporter.SVGGenerator;
 
 
 @SuppressWarnings("serial")
 public class ChiBusinessPartnerPassive extends Figure{
-	InfoLine body = new InfoLine(12, 15, 12, 33);
-	InfoLine leftleg = new InfoLine(12, 33, 2, 47);
-	InfoLine rightleg = new InfoLine(12, 33, 21, 47);
-	InfoLine armleft = new InfoLine(0, 28 ,12, 20);
-	InfoLine armright = new InfoLine(12, 20, 22, 28);
-	InfoCoordinateSize head = new InfoCoordinateSize(4, 0, 15, 15);
 	
-	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 20, 45);
+	private InfoLine body = new InfoLine(12, 15, 12, 33);
+	private InfoLine leftleg = new InfoLine(12, 33, 2, 47);
+	private InfoLine rightleg = new InfoLine(12, 33, 21, 47);
+	private InfoLine armleft = new InfoLine(0, 28 ,12, 20);
+	private InfoLine armright = new InfoLine(12, 20, 22, 28);
+	private InfoCoordinateSize head = new InfoCoordinateSize(4, 0, 15, 15);
 	
-	public ChiBusinessPartnerPassive(){
-	}
-	
-	
-	public InfoLine getBody() {
-		return body;
-	}
-	public InfoLine getLeftLeg() {
-		return leftleg;
-	}
-	public InfoLine getRightLeg() {
-		return rightleg;
-	}
-	public InfoLine getArmLeft() {
-		return armleft;
-	}
-	public InfoLine getArmRight() {
-		return armright;
-	}
-
+	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 20, 45);
 
 	@Override
-	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children) {
+	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children, SVGGenerator svg, ArrayList<String> existLine) {
 
 		drawScaleEllipse(g2d, createFig, figureInfo, head);
 
@@ -65,10 +46,11 @@ public class ChiBusinessPartnerPassive extends Figure{
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-			if (allowedConnection != null) {
+			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+			if (!existLine.contains(key) && allowedConnection != null) {
 				String comment = allowedConnection.getLineLabel();
-				
-				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
+				existLine.add(key);
 			}
 		}
 	}

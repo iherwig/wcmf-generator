@@ -11,26 +11,21 @@ import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
 import net.sourceforge.olympos.diagramimageexporter.RequirementFigure;
+import net.sourceforge.olympos.diagramimageexporter.SVGGenerator;
 
 
 @SuppressWarnings("serial")
 public class ChiSystem extends RequirementFigure{
 	
 	private InfoCoordinateSize rect = new InfoCoordinateSize(0, 0, 138, 60);
-//	private InfoCoordinateSize circle = new InfoCoordinateSize(105, 5, 12, 12);
 	private InfoLine infLine1 = new InfoLine(0, 40, 138, 40);
 	private InfoLine infLine2 = new InfoLine(0, 48, 138, 48);
-//	private InfoLine circleLine = new InfoLine(0, 17, 11, 17);
+	
 	private InfoCoordinateSize imageInfo = new InfoCoordinateSize(0, 0, 12, 12);
 	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 138, 60);
-//	InfoCoordinateSize rect1 = new InfoCoordinateSize(0, 0, 90, 90);
-//	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 90, 90);
-	
-	public InfoCoordinateSize getRect() {
-		return rect;
-	}
-	@Override
-	public void draw(Graphics2D g2d,InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children) {
+
+
+	public void draw(Graphics2D g2d,InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children, SVGGenerator svg, ArrayList<String> existLine) {
 		
 		drawScaleChiNode(g2d, createFig, figureInfo, infLine1, infLine2, rect);
 		drawScaleXLine(g2d, createFig, figureInfo, infLine1);
@@ -42,10 +37,11 @@ public class ChiSystem extends RequirementFigure{
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-			if (allowedConnection != null) {
+			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+			if (!existLine.contains(key)&& allowedConnection != null) {
 				String comment = allowedConnection.getLineLabel();
-				
-				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
+				existLine.add(key);
 			}
 		}
 	}

@@ -16,6 +16,6 @@ public class catalogManyToMany {
 	 connections.put(EnumConnection.aggregation, new InfoAllowedConnection("Aggregation", EnumConnectionEnd.OPEN_DIAMAND, EnumConnectionEnd.ARROW));
 	 connections.put(EnumConnection.assoziation, new InfoAllowedConnection("Assoziation", EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
 	 connections.put(EnumConnection.generalization, new InfoAllowedConnection("Generalization", EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW_TRIANGLE));
-	 connections.put(EnumConnection.composition, new InfoAllowedConnection("composition", EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
+	 connections.put(EnumConnection.composition, new InfoAllowedConnection("Composition", EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
 	 }
 }

@@ -11,53 +11,24 @@ import net.sourceforge.olympos.diagramimageexporter.InfoAllowedConnection;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
+import net.sourceforge.olympos.diagramimageexporter.SVGGenerator;
 
 
 
 @SuppressWarnings("serial")
 public class ChiWorker extends Figure{
-	InfoCoordinateSize elli1 = new InfoCoordinateSize(0, 0, 50, 49);
-	InfoCoordinateSize head = new InfoCoordinateSize(18, 6, 12, 12);
-	InfoLine body = new InfoLine(24, 18, 24, 31);
-	InfoLine leftleg = new InfoLine(24, 31, 17, 42);
-	InfoLine rightleg = new InfoLine(24, 31, 31, 42);
-	InfoLine arm = new InfoLine(15, 22, 32, 22);
-	InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 50, 49);
-
 	
-	public ChiWorker() {
-	}
+	private InfoCoordinateSize elli1 = new InfoCoordinateSize(0, 0, 50, 49);
+	private InfoCoordinateSize head = new InfoCoordinateSize(18, 6, 12, 12);
+	private InfoLine body = new InfoLine(24, 18, 24, 31);
+	private InfoLine leftleg = new InfoLine(24, 31, 17, 42);
+	private InfoLine rightleg = new InfoLine(24, 31, 31, 42);
+	private InfoLine arm = new InfoLine(15, 22, 32, 22);
 	
-	public InfoLine getBody() {
-		return body;
-	}
-	public InfoLine getLeftLeg() {
-		return leftleg;
-	}
-	public InfoLine getRightLeg() {
-		return rightleg;
-	}
-	public InfoLine getArmLeft() {
-		return arm;
-	}
-	public InfoCoordinateSize getRound() {
-		return elli1;
-	}
-	public InfoCoordinateSize getHead() {
-		return head;
-	}
-
-	public void setAll(InfoCoordinateSize elli1, InfoCoordinateSize head, InfoLine body, InfoLine leftleg, InfoLine rightleg, InfoLine arm){
-		this.elli1 = elli1;
-		this.head = head;
-		this.body = body;
-		this.leftleg = leftleg;
-		this.rightleg = rightleg;
-		this.arm = arm;
-	}
+	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 50, 49);
 
 
-	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children) {
+	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children, SVGGenerator svg, ArrayList<String> existLine) {
 		
 		drawScaleEllipse(g2d, createFig, figureInfo, elli1);
 		drawScaleEllipse(g2d, createFig, figureInfo, head);
@@ -76,10 +47,11 @@ public class ChiWorker extends Figure{
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-			if (allowedConnection != null) {
+			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+			if (!existLine.contains(key)&& allowedConnection != null) {
 				String comment = allowedConnection.getLineLabel();
-				
-				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
+				existLine.add(key);
 			}
 		}
 	}

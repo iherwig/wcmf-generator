@@ -17,6 +17,7 @@ import net.sourceforge.olympos.diagramimageexporter.InfoAllowedConnection;
 import net.sourceforge.olympos.diagramimageexporter.InfoCoordinateSize;
 import net.sourceforge.olympos.diagramimageexporter.InfoFigureParameter;
 import net.sourceforge.olympos.diagramimageexporter.InfoLine;
+import net.sourceforge.olympos.diagramimageexporter.SVGGenerator;
 
 import org.apache.batik.svggen.SVGGraphics2D;
 
@@ -29,23 +30,8 @@ public class ChiBusinessUseCase extends Figure {
 
 	protected InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 117, 78);
 
-	public ChiBusinessUseCase() {
-	}
-
-	public InfoCoordinateSize getCircle() {
-		return circle;
-	}
-
-	public InfoCoordinateSize getCircleBackground() {
-		return circleBackground;
-	}
-
-	public InfoLine getLine1() {
-		return line1;
-	}
-
 	@Override
-	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children) {
+	public void draw(Graphics2D g2d, InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children, SVGGenerator svg, ArrayList<String> existLine) {
 		drawUseCase(g2d, createFig, figureInfo, circleBackground, circle);
 		drawScaleLine(g2d, createFig, figureInfo, line1);
 		drawScaleLabelUseCase(g2d, createFig, figureInfo);
@@ -55,10 +41,11 @@ public class ChiBusinessUseCase extends Figure {
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-			if (allowedConnection != null) {
+			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+			if (!existLine.contains(key)) {
 				String comment = allowedConnection.getLineLabel();
-				
-				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow());
+				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
+				existLine.add(key);
 			}
 		}
 	}

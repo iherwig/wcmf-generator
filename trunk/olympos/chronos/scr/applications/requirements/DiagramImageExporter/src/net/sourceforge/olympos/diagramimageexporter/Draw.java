@@ -21,11 +21,23 @@ import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
 public class Draw {
-//	FigureChildren ch = new FigureChildren();
+	// FigureChildren ch = new FigureChildren();
+	
+	private static ArrayList <String> existLine;
+	
+	public ArrayList<String> getExistLine (){
+		return existLine;
+	}
+	
+	public void addExistLine(String Line) {
+		existLine.add(Line);
+	}
 
 	@SuppressWarnings("static-access")
-	public InfoCoordinate drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat, ArrayList<String> existLine2, SVGGenerator svg) throws JDOMException, Exception {
+	public InfoCoordinate drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat, SVGGenerator svg)
+			throws JDOMException, Exception {
 
+		existLine = new ArrayList<String>();
 		// create following Objects
 		DrawFigure drawF = new DrawFigure();
 		// DrawConnection drawC = new DrawConnection();
@@ -43,13 +55,13 @@ public class Draw {
 		SVGGraphics2D g2d = new SVGGraphics2D(ctx, false);
 		ArrayList<InfoXmlFigure> objekte = svg.getxmlFigure();
 
-		if(objekte == null){
+		if (objekte == null || objekte.size() == 0) {
 			g2d.drawString("This diagram contains no image.", 100, 30);
 		}
-		
-		else if (figureArray == null) {
+
+		else if (figureArray == null || figureArray.size() == 0) {
 			g2d.drawString("This diagram contains no image.", 100, 30);
-			
+
 		} else {
 
 			// edit Diagram
@@ -60,8 +72,7 @@ public class Draw {
 			for (InfoFigureParameter currParent : Parent) {
 				if (currParent.getChildren() != null) {
 					ArrayList<InfoFigureParameter> children = currParent.getChildren();
-					drawF.drawLabeledSimpleFigure(g2d, currParent, children);
-
+					drawF.drawLabeledSimpleFigure(g2d, currParent, children, svg, existLine);
 				}
 			}
 		}
@@ -84,9 +95,8 @@ public class Draw {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// }
 
-		if (usedImageFormat.toLowerCase().equals("png")) {
+		if (usedImageFormat.toLowerCase().equals("png") && maxCor != null ) {
 
 			PNGTranscoder t = new PNGTranscoder();
 			String fileImagePath = "file:///" + imagePathSvg;
