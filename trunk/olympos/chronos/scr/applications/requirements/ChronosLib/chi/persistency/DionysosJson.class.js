@@ -96,7 +96,7 @@ chi.persistency.DionysosJson.prototype.readObject = function(data) {
 			}
 		}
 		
-		result = new chi.model.ModelRecord(chi.model.ModelClassContainer.getInstance().getClass(chiModelElementId), oid, values);
+		result = chi.model.ModelDescriptionContainer.getInstance().getDescription(chiModelElementId).createInstance(oid, values);
 	} else {
 		result = new chi.model.ModelReference(oid);
 	}

@@ -19,16 +19,16 @@ Ext.namespace("chi.model");
  * @see chi.modelgrid.ModelGrid
  * @param {Object}
  *            config The configuration object.
- * @config modelClass The Model Class to load object of.
+ * @config modelDescription The Model Description to load object of.
  */
 chi.model.Store = function(config) {
-	this.modelClass = config.modelClass;
+	this.modelDescription = config.modelDescription;
 	
-	var exampleRecord = new chi.model.ModelRecord(this.modelClass);
+	var exampleRecord = new chi.model.ModelRecord(this.modelDescription);
 	
 	chi.model.Store.superclass.constructor.call(this, Ext.apply( {
 		proxy : new chi.model.Proxy( {
-			modelClass : this.modelClass
+			modelDescription : this.modelDescription
 		}),
 		fields : exampleRecord.fields,
 		remoteSort : true
@@ -37,6 +37,6 @@ chi.model.Store = function(config) {
 
 Ext.extend(chi.model.Store, Ext.data.Store);
 
-chi.model.Store.prototype.getModelClass = function() {
-	return this.modelClass;
+chi.model.Store.prototype.getModelDescription = function() {
+	return this.modelDescription;
 };

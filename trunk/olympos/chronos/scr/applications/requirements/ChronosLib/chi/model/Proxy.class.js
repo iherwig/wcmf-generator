@@ -18,10 +18,10 @@ Ext.namespace("chi.model");
  * @constructor
  * @param {Object}
  *            config The configuration object.
- * @config modelClass The Model Class to load object of.
+ * @config modelDescription The Model Description to load object of.
  */
 chi.model.Proxy = function(config) {
-	this.modelClass = config.modelClass;
+	this.modelDescription = config.modelDescription;
 	
 	chi.model.Proxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 };
@@ -39,7 +39,7 @@ chi.model.Proxy.prototype.load = function(params, reader, callback, scope, arg) 
 	if (this.fireEvent("beforeload", this, params) !== false) {
 		var self = this;
 		
-		chi.persistency.Persistency.getInstance().list(this.modelClass.getId(), params.limit, params.start, params.sort, params.dir ? params.dir.toLowerCase() : undefined, function(data) {
+		chi.persistency.Persistency.getInstance().list(this.modelDescription.getId(), params.limit, params.start, params.sort, params.dir ? params.dir.toLowerCase() : undefined, function(data) {
 			self.loadResponse(params, data, callback, scope, arg);
 		}, function(data, errorMsg) {
 			self.loadFailed(params, data, errorMsg, callback, scope, arg);

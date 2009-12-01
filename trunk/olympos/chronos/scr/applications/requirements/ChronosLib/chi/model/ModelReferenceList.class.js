@@ -17,27 +17,27 @@ Ext.namespace("chi.model");
  * @extends Ext.util.MixedCollection
  * @constructor
  * @see chi.model.ModelReference
- * @param {chi.model.ModelClass}
- *            modelClass The Model Class of the contained Model References.
+ * @param {chi.model.ModelDescription}
+ *            modelDescription The Model Description of the contained Model References.
  */
-chi.model.ModelReferenceList = function(modelClass) {
+chi.model.ModelReferenceList = function(modelDescription) {
 	chi.model.ModelReferenceList.superclass.constructor.call(this, false, function(modelReference) {
 		return modelReference.getOid();
 	});
 	
-	this.modelClass = modelClass;
+	this.modelDescription = modelDescription;
 };
 
 Ext.extend(chi.model.ModelReferenceList, Ext.util.MixedCollection);
 
 /**
- * Returns the Model Class of the contained Model References.
+ * Returns the Model Description of the contained Model References.
  * 
- * @return The Model Class of the contained Model References.
- * @type chi.model.ModelClass
+ * @return The Model Description of the contained Model References.
+ * @type chi.model.ModelDescription
  */
-chi.model.ModelReferenceList.prototype.getModelClass = function() {
-	return this.modelClass;
+chi.model.ModelReferenceList.prototype.getModelDescription = function() {
+	return this.modelDescription;
 };
 
 /**
@@ -52,7 +52,7 @@ chi.model.ModelReferenceList.prototype.getModelClass = function() {
  * @type chi.model.ModelReferenceList
  */
 chi.model.ModelReferenceList.prototype.except = function(otherList) {
-	var result = new chi.model.ModelReferenceList(this.getModelClass());
+	var result = new chi.model.ModelReferenceList(this.getModelDescription());
 	
 	this.each(function(elem) {
 		if (!otherList.get(elem.getOid())) {
