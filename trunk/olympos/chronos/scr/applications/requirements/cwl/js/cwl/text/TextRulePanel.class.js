@@ -22,33 +22,13 @@ Ext.namespace("cwl.textrule");
 cwl.textrule.TextRulePanel = function(config) {
 	this.productionRule = config.productionRule;
 	
-	// initial data
-	/*
-	this.productionRule = chi.model.ModelDescriptionContainer.getInstance().getDescription('ProductionRule').createInstance('ProductionRule:1', {});
-	var variable1 = chi.model.ModelDescriptionContainer.getInstance().getDescription('RuleVariable').createInstance('RuleVariable:1', {ruleValue:'1234'});
-	var variable2 = chi.model.ModelDescriptionContainer.getInstance().getDescription('RuleVariable').createInstance('RuleVariable:2', {ruleValue:'1234'});
-	this.productionRule.ruleVariable = [variable1, variable2];
-	*/
-	
 	var self = this;
 	
 	// setup the field to oid mapping
 	this.fieldOidMapping = new Ext.util.MixedCollection();
 	
 	// setup ui
-	
-	this.ruleText = new Ext.form.FieldSet({
-		title: 'Rule',
-		collapsible: false,
-		autoHeight:true,
-		defaults: {width: 500},
-		defaultType: 'textarea',
-		items :[{
-				readOnly: true,
-				height: 200
-			}
-		]
-	});
+	this.ruleText = new Ext.Panel();
 	this.inputVariables = new cwl.form.ExtendableFieldSet({
 			title: 'Input Variables'
 	});
@@ -80,7 +60,14 @@ cwl.textrule.TextRulePanel = function(config) {
 		defaultType: 'textfield',
 
 		items: [
-			this.ruleText,
+			new Ext.form.FieldSet({
+				title: 'Rule',
+				collapsible: false,
+				autoHeight:true,
+				defaults: {width: 500},
+				defaultType: 'textarea',
+				items :[this.ruleText]
+			}),
 			this.inputVariables,
 			this.condition,
 			this.actions,
@@ -121,24 +108,17 @@ cwl.textrule.TextRulePanel = function(config) {
 		self.removeOutputVariable(field.id);
 	});
 	
+	this.on('afterlayout', function() {
+		self.updateDisplay();
+	});
 }
 
 Ext.extend(cwl.textrule.TextRulePanel, Ext.Panel);
 
 cwl.textrule.TextRulePanel.prototype.init = function() {
 
-	// fill the rule into the panel
-	var ruleInputVariables = this.productionRule.ruleVariable;
-	if (ruleInputVariables) {
-		var numVars=ruleInputVariables.length
-		for (var i=0; i<numVars; i++) {
-			if (i>this.inputVariables.getNumberOfFields()-1) {
-				this.inputVariables.addField();
-			}
-			var id = this.inputVariables.getFieldId(i);
-			this.inputVariables.setFieldValue(id, ruleInputVariables[i].get('ruleValue'));
-		}
-	}
+	this.fillRuleIntoPanel();
+	this.updateDisplay();
 }
 
 cwl.textrule.TextRulePanel.prototype.render = function() {
@@ -146,8 +126,96 @@ cwl.textrule.TextRulePanel.prototype.render = function() {
 	this.init();
 }
 
-cwl.textrule.TextRulePanel.prototype.updateDisplay = function() {
+cwl.textrule.TextRulePanel.prototype.fillRuleIntoPanel = function() {
+	if (!this.productionRule) {
+		return;
+	}
 
+	// input variables
+	var ruleInputVariables = this.productionRule.getVariablesByContext('in');
+	if (ruleInputVariables) {
+		for (var i=0, max=ruleInputVariables.length; i<max; i++) {
+			if (i>this.inputVariables.getNumberOfFields()-1) {
+				this.inputVariables.addField();
+			}
+			var id = this.inputVariables.getFieldId(i);
+			this.inputVariables.setFieldValue(id, ruleInputVariables[i].get('ruleValue'));
+			this.fieldOidMapping.add(id, ruleInputVariables[i].getOid());
+		}
+	}
+	// condition
+	var ruleCondition = this.productionRule.get('RuleCondition');
+	if (ruleCondition) {
+		this.condition.setValue(ruleCondition.get('name'));
+	}
+	// actions
+	var ruleActions = this.productionRule.get('RuleAction');
+	if (ruleActions) {
+		for (var i=0, max=ruleActions.length; i<max; i++) {
+			if (i>this.actions.getNumberOfFields()-1) {
+				this.actions.addField();
+			}
+			var id = this.actions.getFieldId(i);
+			this.actions.setFieldValue(id, ruleActions[i].get('name'));
+			this.fieldOidMapping.add(id, actions[i].getOid());
+		}
+	}
+	// output variables
+	var ruleOutputVariables = this.productionRule.getVariablesByContext('out');
+	if (ruleOutputVariables) {
+		for (var i=0, max=ruleOutputVariables.length; i<max; i++) {
+			if (i>this.outputVariables.getNumberOfFields()-1) {
+				this.outputVariables.addField();
+			}
+			var id = this.outputVariables.getFieldId(i);
+			this.outputVariables.setFieldValue(id, ruleOutputVariables[i].get('ruleValue'));
+			this.fieldOidMapping.add(id, ruleOutputVariables[i].getOid());
+		}
+	}
+}
+
+cwl.textrule.TextRulePanel.prototype.updateDisplay = function() {
+	if (!this.productionRule) {
+		return;
+	}
+	var text = '<p>';
+	
+	// input variables
+	text += '<b>Input:</b><br/>';
+	var ruleInputVariables = this.productionRule.getVariablesByContext('in');
+	if (ruleInputVariables) {
+		for (var i=0, max=ruleInputVariables.length; i<max; i++) {
+			text += ruleInputVariables[i].get('ruleValue')+'<br/>';
+		}
+	}
+	// condition
+	text += '<br/><b>Condition:</b><br/>';
+	var ruleCondition = this.productionRule.get('RuleCondition');
+	if (ruleCondition) {
+		this.condition.setValue(ruleCondition.get('name'));
+			text += ruleCondition.get('name')+'<br/>';
+	}
+	// actions
+	text += '<br/><b>Actions:</b><br/>';
+	var ruleActions = this.productionRule.get('RuleAction');
+	if (ruleActions) {
+		for (var i=0, max=ruleActions.length; i<max; i++) {
+			text += ruleActions[i].get('name')+'<br/>';
+		}
+	}
+	// output variables
+	text += '<br/><b>Output:</b><br/>';
+	var ruleOutputVariables = this.productionRule.getVariablesByContext('out');
+	if (ruleOutputVariables) {
+		for (var i=0, max=ruleOutputVariables.length; i<max; i++) {
+			text += ruleOutputVariables[i].get('ruleValue')+'<br/>';
+		}
+	}
+	text += '</p>';
+	
+	if (this.ruleText.getEl()) {
+		this.ruleText.getEl().dom.innerHTML = text;
+	}
 }
 
 /**
@@ -155,43 +223,72 @@ cwl.textrule.TextRulePanel.prototype.updateDisplay = function() {
  */
 
 cwl.textrule.TextRulePanel.prototype.addOrUpdateInputVariable = function(fieldId, value) {
-	// TODO: check if a rule variable matching the field id already exists in fieldOidMapping, if not create it
-	this.updateDisplay();
-	chi.Log.log("input variable added/changed "+fieldId+" "+value, chi.Log.ERROR);
+	chi.Log.log("input variable added/changed "+fieldId+" "+value, chi.Log.DEBUG);
+	// TODO: do all server calls inside an ActionSet
+	var self = this;
+	if (this.fieldOidMapping.containsKey(fieldId)) {
+		var variable = this.productionRule.getRulePartByOid(this.fieldOidMapping.get(fieldId));
+		variable.set('ruleValue', value);
+		chi.persistency.Persistency.getInstance().update(variable.getOid(), {ruleValue:value});
+		this.updateDisplay();
+	}
+	else {
+		chi.persistency.Persistency.getInstance().create('RuleVariable', function(createData) {
+			chi.persistency.Persistency.getInstance().associate(self.productionRule.getOid(), createData.oid, 'RuleVariable', function(associateData) {
+				chi.persistency.Persistency.getInstance().read(createData.oid, 1, function(readData) {
+					var variable = readData.record;
+					if (!self.productionRule.get('RuleVariable')) {
+						self.productionRule.set('RuleVariable', []);
+					}
+					self.productionRule.get('RuleVariable').push(variable);
+					variable.set('ruleValue', value);
+					variable.set('context', 'in');
+					chi.persistency.Persistency.getInstance().update(variable.getOid(), {ruleValue:value, context:'in'});
+					self.fieldOidMapping.add(fieldId, variable.getOid());
+					self.updateDisplay();
+				});
+			});
+		});
+	}
 }
 
 cwl.textrule.TextRulePanel.prototype.removeInputVariable = function(fieldId) {
-	// TODO: remove the rule variable matching the field id
-	this.updateDisplay();
-	chi.Log.log("input variable removed "+fieldId, chi.Log.ERROR);
+	chi.Log.log("input variable removed "+fieldId, chi.Log.DEBUG);
+	if (this.fieldOidMapping.containsKey(fieldId)) {
+		var variable = this.productionRule.getRulePartByOid(this.fieldOidMapping.get(fieldId));
+		chi.persistency.Persistency.getInstance().destroy(variable.getOid());
+		this.productionRule.get('RuleVariable').remove(variable);
+		this.fieldOidMapping.removeKey(fieldId);
+		this.updateDisplay();
+	}
 }
 
 cwl.textrule.TextRulePanel.prototype.updateCondition = function(value) {
+	chi.Log.log("condition changed "+value, chi.Log.DEBUG);
 	// TODO: update the condition
 	this.updateDisplay();
-	chi.Log.log("condition changed "+value, chi.Log.ERROR);
 }
 
 cwl.textrule.TextRulePanel.prototype.addOrUpdateAction = function(fieldId, value) {
+	chi.Log.log("action added/changed "+fieldId+" "+value, chi.Log.DEBUG);
 	// TODO: check if a action matching the field id already exists in fieldOidMapping, if not create it
 	this.updateDisplay();
-	chi.Log.log("action added/changed "+fieldId+" "+value, chi.Log.ERROR);
 }
 
 cwl.textrule.TextRulePanel.prototype.removeAction = function(fieldId) {
+	chi.Log.log("action removed "+fieldId, chi.Log.DEBUG);
 	// TODO: remove the action matching the field id
 	this.updateDisplay();
-	chi.Log.log("action removed "+fieldId, chi.Log.ERROR);
 }
 
 cwl.textrule.TextRulePanel.prototype.addOrUpdateOutputVariable = function(fieldId, value) {
+	chi.Log.log("output variable added/changed "+fieldId+" "+value, chi.Log.DEBUG);
 	// TODO: check if a rule variable matching the field id already exists in fieldOidMapping, if not create it
 	this.updateDisplay();
-	chi.Log.log("output variable added/changed "+fieldId+" "+value, chi.Log.ERROR);
 }
 
 cwl.textrule.TextRulePanel.prototype.removeOutputVariable = function(fieldId) {
+	chi.Log.log("output variable removed "+fieldId, chi.Log.DEBUG);
 	// TODO: remove the rule variable matching the field id
 	this.updateDisplay();
-	chi.Log.log("output variable removed "+fieldId, chi.Log.ERROR);
 }

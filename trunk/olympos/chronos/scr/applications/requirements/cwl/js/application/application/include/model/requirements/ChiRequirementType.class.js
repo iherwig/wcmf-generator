@@ -1,26 +1,30 @@
-
 /*
  * Copyright (c) 2009 The Olympos Development Team.
  * 
  * http://sourceforge.net/projects/olympos/
  * 
- * All rights reserved. This program and the accompanying materials are made
- * available under the terms of the Eclipse Public License v1.0 which
- * accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
- * entire header must remain intact.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
  */
 Ext.namespace("application.application.include.model.requirements");
 
+/**
+ * @class ChiRequirementType
+ * ChiRequirementType description: Type of requirement
+ *
+ * @constructor
+ */
 application.application.include.model.requirements.ChiRequirementType = function(oid, data) {
+// PROTECTED REGION ID(application/include/model/requirements/ChiRequirementTypeclass.js/Constructor) ENABLED START
+// PROTECTED REGION END
 	var modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription('ChiRequirementType');
 	return application.application.include.model.requirements.ChiRequirementType.superclass.constructor.call(this, modelDescription, oid, data);
-// PROTECTED REGION ID(application.application.include.model.requirements.ChiRequirementType.class.js/Constructor) ENABLED START
-// PROTECTED REGION END
 };
-
-// PROTECTED REGION ID(application.application.include.model.requirements.ChiRequirementType.class.js/Body) ENABLED START
-// PROTECTED REGION END
-
 Ext.extend(application.application.include.model.requirements.ChiRequirementType, chi.model.ModelRecord);
+
+// PROTECTED REGION ID(application/include/model/requirements/ChiRequirementTypeclass.js/Body) ENABLED START
+// PROTECTED REGION END
 	
