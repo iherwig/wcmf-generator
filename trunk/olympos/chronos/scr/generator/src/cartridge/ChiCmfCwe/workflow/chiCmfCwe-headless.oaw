@@ -130,7 +130,7 @@
 		<!-- Protected regions configuration -->
 		<prSrcPaths value="${targetDir}/${applicationPackage}"/>	
 		<prDefaultExcludes value="false"/>
-		<prExcludes value=""/>
+		<prExcludes value="*.svn-base"/>
 	</component>
 
 	<!-- Install the Cwe framework -->
@@ -166,6 +166,6 @@
 		<!-- Protected regions configuration -->
 		<prSrcPaths value="${targetDirCwe}"/>	
 		<prDefaultExcludes value="false"/>
-		<prExcludes value=""/>
+		<prExcludes value="*.svn-base"/>
 	</component>
 </workflow>
