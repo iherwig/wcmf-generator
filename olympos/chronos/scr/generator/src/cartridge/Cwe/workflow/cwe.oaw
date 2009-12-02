@@ -149,7 +149,7 @@
 		<!-- Protected regions configuration -->
 		<prSrcPaths value="${targetDirCwe}"/>	
 		<prDefaultExcludes value="false"/>
-		<prExcludes value=""/>
+		<prExcludes value="*.svn-base"/>
 	</component>
 
 </workflow>
