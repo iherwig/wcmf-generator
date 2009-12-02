@@ -38,19 +38,23 @@ cwl.textrule.TextRuleTabPanel = Ext.extend(Ext.TabPanel, {
 		
 		cwl.textrule.TextRuleTabPanel.superclass.initComponent.apply(this, arguments);
 
+		/*
 		this.newRuleBtn = new Ext.Panel({
 			title: 'New Rule',
 			closable: false
 		});
 		this.add(this.newRuleBtn).show();
+		*/
 
 		var self = this;
 		this.on("beforetabchange", function(tabPanel, newTab, currentTab) {
+			/*
 			if (newTab == self.newRuleBtn) {
 				var newTab = self.addRule();
 				self.setActiveTab(newTab.getId());
 				return false;
 			}
+			*/
 			return true;
 		});
 	}
@@ -61,10 +65,28 @@ cwl.textrule.TextRuleTabPanel.prototype.addRule = function() {
 		title: 'Rule',
 		closable: true
 	})
-	this.remove(this.newRuleBtn);
+	//this.remove(this.newRuleBtn);
 	this.add(newRuleTab).show();
-	this.add(this.newRuleBtn);
+	//this.add(this.newRuleBtn);
 	return newRuleTab;
+}
+
+/**
+ * Load a production rule and show it on a tab panel
+ * @param {String} oid The object id of the rule
+ */
+cwl.textrule.TextRuleTabPanel.prototype.loadRule = function(oid) {
+	var self = this;
+	chi.persistency.Persistency.getInstance().read(oid, 1, function(data) {
+		var newRuleTab = new cwl.textrule.TextRulePanel({
+			title: 'Rule',
+			closable: true,
+			productionRule: data.record
+		});
+		//self.remove(self.newRuleBtn);
+		self.add(newRuleTab).show();
+		//self.add(self.newRuleBtn);
+	});
 }
 
 /**

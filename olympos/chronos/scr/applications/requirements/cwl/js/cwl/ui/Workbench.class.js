@@ -18,6 +18,12 @@ Ext.namespace("cwl.ui");
  * @param {Object} config The configuration object.
  */
 cwl.ui.Workbench = function(config) {
+
+	this.textRuleTabPanel = new cwl.textrule.TextRuleTabPanel({
+		enableTabScroll: true,
+		activeTab: 0,
+	});
+	
 	cwl.ui.Workbench.superclass.constructor.call(this, Ext.apply(this, {
 		layout: 'border',
 		items: [{
@@ -56,15 +62,7 @@ cwl.ui.Workbench = function(config) {
 					region: 'center',
 					layout: 'fit',
 					split: true,
-					items: new cwl.textrule.TextRuleTabPanel({
-						enableTabScroll: true,
-						activeTab: 0,
-						items: [new cwl.textrule.TextRulePanel({
-							closable: true,
-							title: "Rule",
-							rule: null
-						})]
-					})
+					items: this.textRuleTabPanel
 				},{
 					region: 'south',
 					layout: 'fit',
@@ -90,6 +88,8 @@ cwl.ui.Workbench = function(config) {
 			}
 		}    
 	}, config));
+	
+	this.textRuleTabPanel.loadRule('ProductionRule:1');
 }
 
 Ext.extend(cwl.ui.Workbench, Ext.Viewport);
