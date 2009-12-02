@@ -31,15 +31,14 @@ Ext.namespace("application.«this.getFullPackageName()»");
  * @constructor
  */
 application.«this.getFullPackageName()».«this.name» = function(oid, data) {
-	var modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription('«this.name»');
-	return application.«this.getFullPackageName()».«this.name».superclass.constructor.call(this, modelDescription, oid, data);
 «PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"class.js/Constructor"»
 «ENDPROTECT»
+	var modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription('«this.name»');
+	return application.«this.getFullPackageName()».«this.name».superclass.constructor.call(this, modelDescription, oid, data);
 };
+Ext.extend(application.«this.getFullPackageName()».«this.name», chi.model.ModelRecord);
 
 «PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"class.js/Body"»
 «ENDPROTECT»
-
-Ext.extend(application.«this.getFullPackageName()».«this.name», chi.model.ModelRecord);
 	«ENDFILE»
 «ENDDEFINE»
