@@ -80,6 +80,9 @@ class DionysosFormat extends HierarchicalFormat
    */
   function processValues(&$value, $key, $method)
   {
+    if (EncodingUtil::isUtf8($value)) {
+      $value = EncodingUtil::convertCp1252Utf8ToIso($value);
+    }
     if (strpos($method, 'deserialize') === 0 && $this->isSerializedNode($key, $value))
     {
       $node = &$this->$method($key, $value);
