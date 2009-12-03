@@ -94,6 +94,10 @@ class DionysosControllerDelegate
         if ($request->hasValue('depth') && $request->getValue('depth') < -1) {
           throw new DionysosException($request, $response, DionysosException::DEPTH_INVALID, DionysosException::DEPTH_INVALID);
         }
+        $oid = $request->getValue('oid');
+        if (!PersistenceFacade::getInstance()->load($oid, BUILDDEPHT_SINGLE)) {
+          throw new DionysosException(null, null, 'The object id '.$oid.' is unknown', DionysosException::OID_INVALID);
+        }
 
         if (!$request->hasValue('depth')) {
           $request->setValue('depth', 1);
@@ -256,33 +260,36 @@ class DionysosControllerDelegate
         $response->clearValue('node');
         
         // remove many to many objects from object tree
-        $iter = new NodeIterator($response->getValue('object'));
-        while(!$iter->isEnd())
+        if ($response->getValue('object'))
         {
-          $curObj = &$iter->getCurrentObject();
-          $children = $curObj->getChildren();
-          for ($i=0, $numChildren=sizeof($children); $i<$numChildren; $i++)
+          $iter = new NodeIterator($response->getValue('object'));
+          while(!$iter->isEnd())
           {
-            $curChild = &$children[$i];
-            if ($curChild->isManyToManyObject()) 
+            $curObj = &$iter->getCurrentObject();
+            $children = $curObj->getChildren();
+            for ($i=0, $numChildren=sizeof($children); $i<$numChildren; $i++)
             {
-              $curObj->deleteChild($curChild->getOID(), true);
-              // add parents of many to many object instead
-              $curChild->loadParents();
-              $parents = $curChild->getParents();
-              for ($j=0, $numParents=sizeof($parents); $j<$numParents; $j++)
+              $curChild = &$children[$i];
+              if ($curChild->isManyToManyObject()) 
               {
-                $curParent = &$parents[$j];
-                if ($curParent->getOID() != $curObj->getOID()) {
-                  $curParent->deleteChild($curChild->getOID(), true);
-                  // hack: prevent automatic addition of nm object
-                  $curObj->_children[sizeof($curObj->_children)] = &$curParent;
-                  $curParent->updateParent($curObj);
+                $curObj->deleteChild($curChild->getOID(), true);
+                // add parents of many to many object instead
+                $curChild->loadParents();
+                $parents = $curChild->getParents();
+                for ($j=0, $numParents=sizeof($parents); $j<$numParents; $j++)
+                {
+                  $curParent = &$parents[$j];
+                  if ($curParent->getOID() != $curObj->getOID()) {
+                    $curParent->deleteChild($curChild->getOID(), true);
+                    // hack: prevent automatic addition of nm object
+                    $curObj->_children[sizeof($curObj->_children)] = &$curParent;
+                    $curParent->updateParent($curObj);
+                  }
                 }
               }
             }
+            $iter->proceed();
           }
-          $iter->proceed();
         }
         break;
 
