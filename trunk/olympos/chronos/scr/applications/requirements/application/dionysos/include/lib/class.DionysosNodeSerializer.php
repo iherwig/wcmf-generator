@@ -131,19 +131,22 @@ class DionysosNodeSerializer
       foreach($childOIDs as $oid)
       {
         // add only if no child object with this oid is loaded and will be serialized as full object later
-        $isLoaded = false;
-        if (in_array($oid, $serializedOids)) {
-          $isLoaded = true;
+        $ignoreChild = false;
+        $child = &PersistenceFacade::getInstance()->create(PersistenceFacade::getOIDParameter($oid, 'type'), BUILDDEPTH_SINGLE);
+        if (in_array($oid, $serializedOids) || $child->isManyToManyObject()) {
+          $ignoreChild = true;
         }
-        else {
-          foreach($children as $child) {
+        else
+        {
+          foreach($children as $child)
+          {
             if ($child->getOID() == $oid) {
-              $isLoaded = true;
+              $ignoreChild = true;
               break;
             }
           }
         }
-        if (!$isLoaded)
+        if (!$ignoreChild)
         {
           $ref = DionysosNodeSerializer::serializeAsReference($oid, $curNode->getType());
           if ($ref != null)
@@ -230,10 +233,19 @@ class DionysosNodeSerializer
     {
       $mapper = $parentNode->getMapper();
       $objectData = $mapper->getObjectDefinition();
-      foreach ($objectData['_children'] as $childData) {
-        if ($childData['type'] == $childType && ($childData['maxOccurs'] > 1 || $childData['maxOccurs'] == 'unbounded')) {
-          $isMultiValued = true;
+      $found = false;
+      foreach ($objectData['_children'] as $childData)
+      {
+        if ($childData['type'] == $childType) {
+          $found = true;
+          if ($childData['maxOccurs'] > 1 || $childData['maxOccurs'] == 'unbounded') {
+            $isMultiValued = true;
+          }
         }
+      }
+      if (!$found) {
+        // fallback: assume that the connetion is established by a many to many object
+        $isMultiValued = true;
       }
     }
     return $isMultiValued;
