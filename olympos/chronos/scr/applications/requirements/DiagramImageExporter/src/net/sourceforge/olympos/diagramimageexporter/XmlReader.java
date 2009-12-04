@@ -10,7 +10,7 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 
 public class XmlReader {
-//	private static final String xmlFilePath = "file:///D:/Diagram.xml";
+//	private static final String filename = "file:///D:/Diagram.xml";
 	Document doc;
 
 	Draw dr = new Draw();

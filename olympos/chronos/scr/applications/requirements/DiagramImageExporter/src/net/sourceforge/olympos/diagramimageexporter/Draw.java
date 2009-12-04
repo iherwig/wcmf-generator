@@ -36,6 +36,7 @@ public class Draw {
 	@SuppressWarnings("static-access")
 	public InfoCoordinate drawAll(String imagePath, ArrayList<InfoFigureParameter> figureArray, String id, String usedImageFormat, SVGGenerator svg)
 			throws JDOMException, Exception {
+		
 
 		existLine = new ArrayList<String>();
 		// create following Objects

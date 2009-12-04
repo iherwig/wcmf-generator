@@ -124,7 +124,6 @@ public class FigureDiagram {
 				ArrayList<InfoXmlConnection> figChild = currFig.getChildrenX();
 				for (InfoXmlConnection currFigChild : figChild) {
 					if (!currFigChild.getTargetType().equals("Diagram")) {
-						typFigure = currFigChild.getType();
 						targetOidObject = currFigChild.getTargetOid();
 						if (xmlFig != null) {
 							for (InfoXmlFigure currXmlFig : xmlFig) {
@@ -132,6 +131,7 @@ public class FigureDiagram {
 								if (currXmlFig.getId().equals(targetOidObject)) {
 									for (InfoXmlConnection currXmlFigChild2 : xmlFigChild) {
 										if (currXmlFigChild2.getTargetType() != null) { // testing
+											typFigure = currXmlFigChild2.getType();
 											if (!currXmlFigChild2.getTargetType().equals("Figure") && !currXmlFigChild2.getTargetType().equals("Package")) {
 												String targetOid = currXmlFigChild2.getTargetOid();
 												targetTypFigur = currXmlFigChild2.getType();

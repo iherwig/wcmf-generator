@@ -88,7 +88,8 @@ public abstract class RequirementFigure extends Figure {
 		for (InfoFigureParameter currChild : Children) {
 			ElementDiagram elem = ElementDiagram.getCatalogEntry(createFig.getType());
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
-			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
+			InfoAllowedConnection allowedConnection = null;
+			allowedConnection = figAllowedCatal1.get(currChild.getType());
 
 			String key = currChild.getFigureId() + createFig.getFigureId();
 			if (allowedConnection != null && !existLine.contains(key) ) {
