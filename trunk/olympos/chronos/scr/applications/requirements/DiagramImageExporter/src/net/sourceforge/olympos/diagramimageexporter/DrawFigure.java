@@ -3,6 +3,8 @@ package net.sourceforge.olympos.diagramimageexporter;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
+import org.apache.batik.svggen.SVGGraphics2D;
+
 public class DrawFigure {
 	public void drawLabeledSimpleFigure(Graphics2D g2d, InfoFigureParameter figureInfo, ArrayList<InfoFigureParameter> Children, SVGGenerator svg, ArrayList<String> existLine) {		
 		Factory factory = new Factory();

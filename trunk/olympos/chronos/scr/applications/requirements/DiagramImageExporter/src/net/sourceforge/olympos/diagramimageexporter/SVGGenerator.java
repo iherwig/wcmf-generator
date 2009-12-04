@@ -59,7 +59,7 @@ public class SVGGenerator {
 		}
 
 		// make files and directories absolute
-		sourceFile = new File(sourceFile).getCanonicalPath() + File.separator;
+		sourceFile = new File(sourceFile).getCanonicalPath();
 		targetDir = new File(targetDir).getCanonicalPath() + File.separator;
 		iconDir = new File(iconDir).getCanonicalPath() + File.separator;
 
@@ -82,12 +82,11 @@ public class SVGGenerator {
 		XmlReader xml = new XmlReader(svg);
 		xml.XML(sourceFile);
 		
-//		ArrayList<String> existLine = new ArrayList<String>();
 
 		Draw df = new Draw();
 		ArrayList<InfoXmlDiagram> xmlDia = svg.getDiagram();
 		for (InfoXmlDiagram currDia : xmlDia) {
-//			existLine = null;
+
 			ArrayList<InfoFigureParameter> figureArray = currDia.getFigure();
 			InfoCoordinate maxCor = df.drawAll(targetDir, figureArray, currDia.getId(), usedImageFormat, svg);
 
