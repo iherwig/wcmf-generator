@@ -279,7 +279,7 @@ class DionysosControllerDelegate
                 for ($j=0, $numParents=sizeof($parents); $j<$numParents; $j++)
                 {
                   $curParent = &$parents[$j];
-                  if ($curParent->getOID() != $curObj->getOID()) {
+                  if ($curParent->getBaseOID() != $curObj->getBaseOID()) {
                     $curParent->deleteChild($curChild->getOID(), true);
                     // hack: prevent automatic addition of nm object
                     $curObj->_children[sizeof($curObj->_children)] = &$curParent;
