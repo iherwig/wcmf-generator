@@ -312,7 +312,7 @@ application.application.include.model.domain.ChiValueRefDescription.prototype.ge
 			dataIndex : "chiNode",
 			targetChiModelElementId : "ChiNode",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -326,7 +326,7 @@ application.application.include.model.domain.ChiValueRefDescription.prototype.ge
 			dataIndex : "chiNodeManyToMany",
 			targetChiModelElementId : "ChiNodeManyToMany",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 

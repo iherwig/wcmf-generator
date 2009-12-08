@@ -518,7 +518,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			dataIndex : "productionRuleSet",
 			targetChiModelElementId : "ProductionRuleSet",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -532,7 +532,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -552,7 +552,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			dataIndex : "activitySet",
 			targetChiModelElementId : "ActivitySet",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -566,7 +566,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			dataIndex : "chiNode",
 			targetChiModelElementId : "ChiNode",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -580,7 +580,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 
@@ -594,7 +594,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			dataIndex : "chiNodeManyToMany",
 			targetChiModelElementId : "ChiNodeManyToMany",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 

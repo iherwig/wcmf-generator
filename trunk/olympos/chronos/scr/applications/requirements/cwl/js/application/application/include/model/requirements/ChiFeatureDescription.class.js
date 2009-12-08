@@ -493,7 +493,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 			dataIndex : "chiBusinessUseCase",
 			targetChiModelElementId : "ChiBusinessUseCase",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -507,7 +507,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -521,7 +521,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 			dataIndex : "chiBusinessUseCaseCore",
 			targetChiModelElementId : "ChiBusinessUseCaseCore",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -541,7 +541,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 

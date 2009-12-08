@@ -522,7 +522,7 @@ application.application.include.model.domain.PropertyDescription.prototype.getEd
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -542,7 +542,7 @@ application.application.include.model.domain.PropertyDescription.prototype.getEd
 			dataIndex : "chiSystem",
 			targetChiModelElementId : "ChiSystem",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -556,7 +556,7 @@ application.application.include.model.domain.PropertyDescription.prototype.getEd
 			dataIndex : "chiController",
 			targetChiModelElementId : "ChiController",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -570,7 +570,7 @@ application.application.include.model.domain.PropertyDescription.prototype.getEd
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 

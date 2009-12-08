@@ -298,7 +298,7 @@ application.application.include.model.ModelDescription.prototype.getEditorItems 
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
