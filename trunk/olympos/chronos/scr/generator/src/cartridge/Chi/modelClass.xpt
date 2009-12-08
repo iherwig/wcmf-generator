@@ -12,7 +12,7 @@
 «EXTENSION cartridge::ChiCmf::extensions::ChiValue»
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 
-«EXTENSION cartridge::Cwe::util»
+«EXTENSION cartridge::Chi::util»
 
 «DEFINE root FOR uml::Model»
 	«EXPAND modelClass FOREACH this.getModelClasses()»

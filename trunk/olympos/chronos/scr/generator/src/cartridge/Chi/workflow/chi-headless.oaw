@@ -4,9 +4,9 @@
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='3'/>
 	<property name='basePath' value='src'/>
-	<property file="${basePath}/cartridge/Cwe/workflow/cwe-headless.properties"/>
+	<property file="${basePath}/cartridge/Chi/workflow/chi-headless.properties"/>
 	
-	<property name='propertyFile' value='${basePath}/cartridge/Cwe/workflow/cwe.properties'/>
+	<property name='propertyFile' value='${basePath}/cartridge/Chi/workflow/chi.properties'/>
 	<property file="${propertyFile}"/>
 	
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>

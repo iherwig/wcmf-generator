@@ -289,3 +289,7 @@ List[Chronos::ChiValue] getChiAttributes(Chronos::ChiNode this):
 List[Chronos::ChiValue] getOwnChiAttributes(Chronos::ChiNode this):
 	this.getChiAttributes().select(e|!e.isGeneratorAdded())
 ;
+
+boolean isDisplayValue(Chronos::ChiValue this, Chronos::ChiNode node):
+	node.display_value.toLowerCase().contains(this.name.toLowerCase())
+;
