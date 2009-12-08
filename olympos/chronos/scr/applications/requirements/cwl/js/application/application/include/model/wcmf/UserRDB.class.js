@@ -27,4 +27,18 @@ Ext.extend(application.application.include.model.wcmf.UserRDB, chi.model.ModelRe
 
 // PROTECTED REGION ID(application/include/model/wcmf/UserRDBclass.js/Body) ENABLED START
 // PROTECTED REGION END
+
+/**
+ * Returns the label of this record.
+ * 
+ * @return The label of this record.
+ * @type String
+ */
+application.application.include.model.wcmf.UserRDB.prototype.getLabel = function() {
+	var label = this.get("login");
+	if (label == undefined || label.length == 0) {
+		label = this.getOid(); 
+	}
+	return label;
+};
 	

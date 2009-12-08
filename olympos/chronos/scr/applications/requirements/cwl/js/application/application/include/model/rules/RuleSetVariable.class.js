@@ -27,4 +27,18 @@ Ext.extend(application.application.include.model.rules.RuleSetVariable, chi.mode
 
 // PROTECTED REGION ID(application/include/model/rules/RuleSetVariableclass.js/Body) ENABLED START
 // PROTECTED REGION END
+
+/**
+ * Returns the label of this record.
+ * 
+ * @return The label of this record.
+ * @type String
+ */
+application.application.include.model.rules.RuleSetVariable.prototype.getLabel = function() {
+	var label = this.get("");
+	if (label == undefined || label.length == 0) {
+		label = this.getOid(); 
+	}
+	return label;
+};
 	
