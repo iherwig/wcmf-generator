@@ -28,7 +28,7 @@ chi.editor.control.ComboBox = function(config) {
 	chi.editor.control.ComboBox.superclass.constructor.call(this, Ext.apply(this, {
 	    store : new Ext.data.Store( {
 		    proxy : new chi.editor.control.ComboBoxProxy( {
-			    modelDescription : chi.model.ModelDescriptionContainer.getInstance().getDescription(config.targetCweModelElementId)
+			    modelDescription : chi.model.ModelDescriptionContainer.getInstance().getDescription(config.targetChiModelElementId)
 		    })
 	    }),
 	    displayField : 'val',
