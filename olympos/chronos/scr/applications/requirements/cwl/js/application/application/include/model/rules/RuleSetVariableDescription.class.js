@@ -158,12 +158,12 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 	
 		
 			{
-			    header : "context",
-			    dataIndex : "context",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "context",
+				dataIndex : "context",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.StaticComboBox({
 				data: [["in","in"],["out","out"]]
@@ -173,12 +173,12 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 			}
 		, 
 			{
-			    header : "ruleValue",
-			    dataIndex : "ruleValue",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "ruleValue",
+				dataIndex : "ruleValue",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -186,12 +186,12 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 			}
 		, 
 			{
-			    header : "variableType",
-			    dataIndex : "variableType",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "variableType",
+				dataIndex : "variableType",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -199,12 +199,12 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 			}
 		, 
 			{
-			    header : "isEditable",
-			    dataIndex : "isEditable",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "isEditable",
+				dataIndex : "isEditable",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.StaticComboBox({
 				data: [["yes","no"],["yes","no"]]
@@ -214,27 +214,27 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 			}
 		, 
 			{
-			    header : "status",
-			    dataIndex : "status",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "status",
+				dataIndex : "status",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiBaseStatus"
+				targetChiModelElementId: "ChiBaseStatus"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "alias",
-			    dataIndex : "alias",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "alias",
+				dataIndex : "alias",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -242,27 +242,27 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 			}
 		, 
 			{
-			    header : "author",
-			    dataIndex : "author",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "author",
+				dataIndex : "author",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiAuthors"
+				targetChiModelElementId: "ChiAuthors"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "version",
-			    dataIndex : "version",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "version",
+				dataIndex : "version",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -270,12 +270,12 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 			}
 		, 
 			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -283,66 +283,66 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 			}
 		, 
 			{
-			    header : "notes",
-			    dataIndex : "notes",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "notes",
+				dataIndex : "notes",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "created",
-			    dataIndex : "created",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "creator",
-			    dataIndex : "creator",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "created",
+				dataIndex : "created",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "lastEditor",
-			    dataIndex : "lastEditor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "modified",
-			    dataIndex : "modified",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "creator",
+				dataIndex : "creator",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "lastEditor",
+				dataIndex : "lastEditor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "modified",
+				dataIndex : "modified",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
 	
 
 			}
@@ -366,7 +366,7 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 application.application.include.model.rules.RuleSetVariableDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			
@@ -428,7 +428,7 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 		fieldLabel: "status",
 		name: "status",
 		dataIndex: "status",
-		targetCweModelElementId: "ChiBaseStatus",
+		targetChiModelElementId: "ChiBaseStatus",
 		toolTip: ""
 	}) 
 	
@@ -454,7 +454,7 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 		fieldLabel: "author",
 		name: "author",
 		dataIndex: "author",
-		targetCweModelElementId: "ChiAuthors",
+		targetChiModelElementId: "ChiAuthors",
 		toolTip: ""
 	}) 
 	
@@ -559,12 +559,12 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 	
 	
 	
-		new chi.editor.control.AssociationsFieldSet({
+		new cwe.editor.control.AssociationsFieldSet({
 			items: [
 		
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "figure",
 			name : "figure",
@@ -584,7 +584,7 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 		
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "productionRuleSet",
 			name : "productionRuleSet",
@@ -598,7 +598,7 @@ application.application.include.model.rules.RuleSetVariableDescription.prototype
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "package",
 			name : "package",

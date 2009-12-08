@@ -87,12 +87,12 @@ application.application.include.model.HistoryDescription.prototype.getGridColumn
 	
 		
 			{
-			    header : "data",
-			    dataIndex : "data",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "data",
+				dataIndex : "data",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -100,12 +100,12 @@ application.application.include.model.HistoryDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "duplicate",
-			    dataIndex : "duplicate",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "duplicate",
+				dataIndex : "duplicate",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -113,12 +113,12 @@ application.application.include.model.HistoryDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "eventtype",
-			    dataIndex : "eventtype",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "eventtype",
+				dataIndex : "eventtype",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -126,12 +126,12 @@ application.application.include.model.HistoryDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "affectedoid",
-			    dataIndex : "affectedoid",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "affectedoid",
+				dataIndex : "affectedoid",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -139,12 +139,12 @@ application.application.include.model.HistoryDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "otheroid",
-			    dataIndex : "otheroid",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "otheroid",
+				dataIndex : "otheroid",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -152,12 +152,12 @@ application.application.include.model.HistoryDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "timestamp",
-			    dataIndex : "timestamp",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "timestamp",
+				dataIndex : "timestamp",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -165,12 +165,12 @@ application.application.include.model.HistoryDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "user",
-			    dataIndex : "user",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "user",
+				dataIndex : "user",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -196,7 +196,7 @@ application.application.include.model.HistoryDescription.prototype.getLabelColum
 application.application.include.model.HistoryDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			

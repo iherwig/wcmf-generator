@@ -57,12 +57,12 @@ application.application.include.model.wcmf.RoleRDBDescription.prototype.getGridC
 	
 		
 			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true,
-			    
-			    editor: 
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -80,10 +80,10 @@ application.application.include.model.wcmf.RoleRDBDescription.prototype.getLabel
 	
 		
 			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true
 			}
 		
 	
@@ -95,7 +95,7 @@ application.application.include.model.wcmf.RoleRDBDescription.prototype.getLabel
 application.application.include.model.wcmf.RoleRDBDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			

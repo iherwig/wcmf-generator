@@ -499,12 +499,12 @@ application.application.include.model.FigureDescription.prototype.getGridColumns
 	
 		
 			{
-			    header : "backgroundColor",
-			    dataIndex : "backgroundColor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "backgroundColor",
+				dataIndex : "backgroundColor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -512,12 +512,12 @@ application.application.include.model.FigureDescription.prototype.getGridColumns
 			}
 		, 
 			{
-			    header : "foregroundColor",
-			    dataIndex : "foregroundColor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "foregroundColor",
+				dataIndex : "foregroundColor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -525,12 +525,12 @@ application.application.include.model.FigureDescription.prototype.getGridColumns
 			}
 		, 
 			{
-			    header : "gID",
-			    dataIndex : "gID",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "gID",
+				dataIndex : "gID",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -538,12 +538,12 @@ application.application.include.model.FigureDescription.prototype.getGridColumns
 			}
 		, 
 			{
-			    header : "height",
-			    dataIndex : "height",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "height",
+				dataIndex : "height",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -551,12 +551,12 @@ application.application.include.model.FigureDescription.prototype.getGridColumns
 			}
 		, 
 			{
-			    header : "positionY",
-			    dataIndex : "positionY",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "positionY",
+				dataIndex : "positionY",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -564,12 +564,12 @@ application.application.include.model.FigureDescription.prototype.getGridColumns
 			}
 		, 
 			{
-			    header : "positionX",
-			    dataIndex : "positionX",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "positionX",
+				dataIndex : "positionX",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -577,12 +577,12 @@ application.application.include.model.FigureDescription.prototype.getGridColumns
 			}
 		, 
 			{
-			    header : "width",
-			    dataIndex : "width",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "width",
+				dataIndex : "width",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -590,53 +590,53 @@ application.application.include.model.FigureDescription.prototype.getGridColumns
 			}
 		, 
 			{
-			    header : "created",
-			    dataIndex : "created",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "created",
+				dataIndex : "created",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "creator",
-			    dataIndex : "creator",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "lastEditor",
-			    dataIndex : "lastEditor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "creator",
+				dataIndex : "creator",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "modified",
-			    dataIndex : "modified",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "lastEditor",
+				dataIndex : "lastEditor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "modified",
+				dataIndex : "modified",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
 	
 
 			}
@@ -660,7 +660,7 @@ application.application.include.model.FigureDescription.prototype.getLabelColumn
 application.application.include.model.FigureDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			
@@ -814,7 +814,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 	
 	
 	
-		new chi.editor.control.AssociationsFieldSet({
+		new cwe.editor.control.AssociationsFieldSet({
 			items: [
 		
 		
@@ -823,7 +823,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "activitySet",
 			name : "activitySet",
@@ -837,7 +837,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "diagram",
 			name : "diagram",
@@ -851,7 +851,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "glossary",
 			name : "glossary",
@@ -865,7 +865,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "property",
 			name : "property",
@@ -879,7 +879,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiValue",
 			name : "chiValue",
@@ -893,7 +893,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiClass",
 			name : "chiClass",
@@ -907,7 +907,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiView",
 			name : "chiView",
@@ -921,7 +921,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiController",
 			name : "chiController",
@@ -935,7 +935,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiNode",
 			name : "chiNode",
@@ -949,7 +949,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiNodeManyToMany",
 			name : "chiNodeManyToMany",
@@ -963,7 +963,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "operation",
 			name : "operation",
@@ -977,7 +977,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiIssue",
 			name : "chiIssue",
@@ -991,7 +991,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiFeature",
 			name : "chiFeature",
@@ -1005,7 +1005,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiRequirement",
 			name : "chiRequirement",
@@ -1019,7 +1019,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiGoal",
 			name : "chiGoal",
@@ -1033,7 +1033,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiBusinessUseCase",
 			name : "chiBusinessUseCase",
@@ -1047,7 +1047,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiBusinessUseCaseCore",
 			name : "chiBusinessUseCaseCore",
@@ -1061,7 +1061,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiBusinessProcess",
 			name : "chiBusinessProcess",
@@ -1075,7 +1075,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "actor",
 			name : "actor",
@@ -1089,7 +1089,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiBusinessPartner",
 			name : "chiBusinessPartner",
@@ -1103,7 +1103,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiBusinessPartnerPassive",
 			name : "chiBusinessPartnerPassive",
@@ -1117,7 +1117,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiBusinessPartnerActive",
 			name : "chiBusinessPartnerActive",
@@ -1131,7 +1131,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiWorker",
 			name : "chiWorker",
@@ -1145,7 +1145,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiWorkerInternal",
 			name : "chiWorkerInternal",
@@ -1159,7 +1159,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiWorkerExternal",
 			name : "chiWorkerExternal",
@@ -1173,7 +1173,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "ruleVariable",
 			name : "ruleVariable",
@@ -1187,7 +1187,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "ruleSetVariable",
 			name : "ruleSetVariable",
@@ -1201,7 +1201,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "ruleCondition",
 			name : "ruleCondition",
@@ -1215,7 +1215,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "ruleAction",
 			name : "ruleAction",
@@ -1229,7 +1229,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "productionRuleSet",
 			name : "productionRuleSet",
@@ -1243,7 +1243,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "productionRule",
 			name : "productionRule",
@@ -1257,7 +1257,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiSystem",
 			name : "chiSystem",
@@ -1271,7 +1271,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "activityFinal",
 			name : "activityFinal",
@@ -1285,7 +1285,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "activityInitial",
 			name : "activityInitial",
@@ -1299,7 +1299,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "activitySend",
 			name : "activitySend",
@@ -1313,7 +1313,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "activityReceive",
 			name : "activityReceive",
@@ -1327,7 +1327,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "activityDecision",
 			name : "activityDecision",
@@ -1341,7 +1341,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "activity",
 			name : "activity",
@@ -1355,7 +1355,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiObject",
 			name : "chiObject",

@@ -82,12 +82,12 @@ application.application.include.model.requirements.ChiRequirementTypeDescription
 	
 		
 			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -95,66 +95,66 @@ application.application.include.model.requirements.ChiRequirementTypeDescription
 			}
 		, 
 			{
-			    header : "notes",
-			    dataIndex : "notes",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "notes",
+				dataIndex : "notes",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "created",
-			    dataIndex : "created",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "creator",
-			    dataIndex : "creator",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "created",
+				dataIndex : "created",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "lastEditor",
-			    dataIndex : "lastEditor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "modified",
-			    dataIndex : "modified",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "creator",
+				dataIndex : "creator",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "lastEditor",
+				dataIndex : "lastEditor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "modified",
+				dataIndex : "modified",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
 	
 
 			}
@@ -169,6 +169,13 @@ application.application.include.model.requirements.ChiRequirementTypeDescription
 	return [
 	
 		
+			{
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true
+			}
+		
 	
 	];
 };
@@ -178,7 +185,7 @@ application.application.include.model.requirements.ChiRequirementTypeDescription
 application.application.include.model.requirements.ChiRequirementTypeDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			

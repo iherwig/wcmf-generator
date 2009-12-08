@@ -72,12 +72,12 @@ application.application.include.model.wcmf.TranslationDescription.prototype.getG
 	
 		
 			{
-			    header : "objectid",
-			    dataIndex : "objectid",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "objectid",
+				dataIndex : "objectid",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -85,12 +85,12 @@ application.application.include.model.wcmf.TranslationDescription.prototype.getG
 			}
 		, 
 			{
-			    header : "attribute",
-			    dataIndex : "attribute",
-			    width : 100,
-			    sortable : true,
-			    
-			    editor: 
+				header : "attribute",
+				dataIndex : "attribute",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -98,12 +98,12 @@ application.application.include.model.wcmf.TranslationDescription.prototype.getG
 			}
 		, 
 			{
-			    header : "translation",
-			    dataIndex : "translation",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "translation",
+				dataIndex : "translation",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -111,12 +111,12 @@ application.application.include.model.wcmf.TranslationDescription.prototype.getG
 			}
 		, 
 			{
-			    header : "language",
-			    dataIndex : "language",
-			    width : 100,
-			    sortable : true,
-			    
-			    editor: 
+				header : "language",
+				dataIndex : "language",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -134,17 +134,17 @@ application.application.include.model.wcmf.TranslationDescription.prototype.getL
 	
 		
 			{
-			    header : "attribute",
-			    dataIndex : "attribute",
-			    width : 100,
-			    sortable : true
+				header : "attribute",
+				dataIndex : "attribute",
+				width : 100,
+				sortable : true
 			}
 		, 
 			{
-			    header : "language",
-			    dataIndex : "language",
-			    width : 100,
-			    sortable : true
+				header : "language",
+				dataIndex : "language",
+				width : 100,
+				sortable : true
 			}
 		
 	
@@ -156,7 +156,7 @@ application.application.include.model.wcmf.TranslationDescription.prototype.getL
 application.application.include.model.wcmf.TranslationDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			

@@ -89,12 +89,12 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getGridC
 	
 		
 			{
-			    header : "login",
-			    dataIndex : "login",
-			    width : 100,
-			    sortable : true,
-			    
-			    editor: 
+				header : "login",
+				dataIndex : "login",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -102,25 +102,25 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getGridC
 			}
 		, 
 			{
-			    header : "password",
-			    dataIndex : "password",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "password",
+				dataIndex : "password",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.editor.control.Password({})
+			new chi.editor.control.PasswordField({})
 	
 
 			}
 		, 
 			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -128,12 +128,12 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getGridC
 			}
 		, 
 			{
-			    header : "firstname",
-			    dataIndex : "firstname",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "firstname",
+				dataIndex : "firstname",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -141,15 +141,15 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getGridC
 			}
 		, 
 			{
-			    header : "config",
-			    dataIndex : "config",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "config",
+				dataIndex : "config",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "g_getConfigFiles"
+				targetChiModelElementId: "g_getConfigFiles"
 			})
 	
 
@@ -166,10 +166,10 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getLabel
 	
 		
 			{
-			    header : "login",
-			    dataIndex : "login",
-			    width : 100,
-			    sortable : true
+				header : "login",
+				dataIndex : "login",
+				width : 100,
+				sortable : true
 			}
 		
 	
@@ -181,7 +181,7 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getLabel
 application.application.include.model.wcmf.UserRDBDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			
@@ -200,7 +200,7 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getEdito
 			
 	
 		
-		new chi.editor.control.Password({
+		new chi.editor.control.PasswordField({
 		fieldLabel: "password",
 		name: "password",
 		dataIndex: "password",
@@ -243,7 +243,7 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getEdito
 		fieldLabel: "config",
 		name: "config",
 		dataIndex: "config",
-		targetCweModelElementId: "g_getConfigFiles",
+		targetChiModelElementId: "g_getConfigFiles",
 		toolTip: ""
 	}) 
 	
@@ -257,12 +257,12 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getEdito
 	
 	
 	
-		new chi.editor.control.AssociationsFieldSet({
+		new cwe.editor.control.AssociationsFieldSet({
 			items: [
 		
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "locktable",
 			name : "locktable",
