@@ -23,7 +23,7 @@ Ext.namespace("chi.model");
  * @constructor
  * 
  * @param {chi.model.ModelDescription}
- *            modelDescription The Model Description to create a record for.
+ *            modelDescription The ModelDescription to create a record for.
  * @param {String}
  *            oid The object id of the instance.
  * @param {Object}
