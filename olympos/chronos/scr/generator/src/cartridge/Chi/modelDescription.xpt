@@ -12,7 +12,7 @@
 «EXTENSION cartridge::ChiCmf::extensions::ChiValue»
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 
-«EXTENSION cartridge::Cwe::util»
+«EXTENSION cartridge::Chi::util»
 
 «DEFINE root FOR uml::Model»
 	«EXPAND modelDescription FOREACH this.getModelClasses()»
@@ -30,7 +30,7 @@ application.«this.getFullPackageName()».«this.name»Description = function() 
 	this.chiModelElementId = "«this.name»";
 	this.name = "«this.name»";
 	this.treeIconClass = "«this.name»TreeIcon16x16";
-	this.owningPackageId = "«this.owner.getCwePackageName()»";
+	this.owningPackageId = "«this.owner.getChiPackageName()»";
 	
 	«EXPAND recordDefinition FOR this»
 	
@@ -112,12 +112,12 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 	«IF this.getChiAttributes().size > 0»
 		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
 			{
-			    header : "«currValue.name»",
-			    dataIndex : "«currValue.name»",
-			    width : 100,
-			    sortable : true,
-			    «IF !this.display_value.contains(currValue.name)»hidden: true,«ENDIF»
-			    editor: «EXPAND getGridEditor FOR currValue»
+				header : "«currValue.name»",
+				dataIndex : "«currValue.name»",
+				width : 100,
+				sortable : true,
+				«IF !currValue.isDisplayValue(this)»hidden: true,«ENDIF»
+				editor: «EXPAND getGridEditor FOR currValue»
 			}
 		«ENDFOREACH»
 	«ENDIF»
@@ -129,12 +129,12 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 application.«this.getFullPackageName()».«this.name»Description.prototype.getLabelColumns = function() {
 	return [
 	«IF this.getChiAttributes().size > 0»
-		«FOREACH this.getChiAttributes().select(e|this.display_value.contains(e.name)) AS currValue SEPARATOR ", "»
+		«FOREACH this.getChiAttributes().select(e|e.isDisplayValue(this)) AS currValue SEPARATOR ", "»
 			{
-			    header : "«currValue.name»",
-			    dataIndex : "«currValue.name»",
-			    width : 100,
-			    sortable : true
+				header : "«currValue.name»",
+				dataIndex : "«currValue.name»",
+				width : 100,
+				sortable : true
 			}
 		«ENDFOREACH»
 	«ENDIF»
@@ -145,7 +145,7 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 «DEFINE getGridEditor FOR Chronos::ChiValue»
 	«LET this.input_type.split("#").first().getExtJsInputType() AS inputType»
 		«IF this.is_editable.boolString() == "false" || inputType == "HtmlEditor"-»
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 		«ELSEIF inputType == "ComboBox"-»
 			new chi.editor.control.«getComboBoxClass(this.input_type)»({
 				«getComboBoxConfig(this.input_type)»
@@ -160,7 +160,7 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 application.«this.getFullPackageName()».«this.name»Description.prototype.getEditorItems = function() {
 	return [
 	«IF this.getChiAttributes().size > 0»
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
 			«EXPAND getEditor FOR currValue»
@@ -173,7 +173,7 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 	«ENDIF»
 	
 	«IF this.getNotAbstractNavigableParentNodes().size > 0 || this.getNotAbstractNavigableChildNodes().size > 0»
-		new chi.editor.control.AssociationsFieldSet({
+		new cwe.editor.control.AssociationsFieldSet({
 			items: [
 		«FOREACH this.getNotAbstractNavigableParentNodes() AS currParent SEPARATOR ", "»
 			«EXPAND association(true) FOR currParent»
@@ -215,9 +215,9 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 
 «DEFINE association(Boolean isParent) FOR uml::Property»
 	«IF this.getUpper() == 1»
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	«ELSE»
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	«ENDIF»
 			fieldLabel : "«this.getRoleName().toFirstLower()»",
 			name : "«this.getRoleName().toFirstLower()»",

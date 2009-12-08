@@ -7,7 +7,7 @@
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 «EXTENSION cartridge::ChiCmf::extensions::naming»
 
-«EXTENSION cartridge::Cwe::util»
+«EXTENSION cartridge::Chi::util»
 
 «DEFINE root FOR uml::Model»
 	«info("Creating index.part.html")»

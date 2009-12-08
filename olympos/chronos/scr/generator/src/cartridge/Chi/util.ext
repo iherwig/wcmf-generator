@@ -41,7 +41,7 @@ String getFileName(uml::Package this):
 	"application/" + this.getFullPackageName().asPath() + "/" + this.name.toFirstUpper() + "_package.class.js"
 ;
 
-String getCwePackageName(uml::Package this):
+String getChiPackageName(uml::Package this):
 	"application." + this.getFullPackageName() + "." + this.name.toFirstUpper() + "_package"
 ;
 
@@ -58,7 +58,7 @@ String getComboBoxConfig(String inputType):
 			listType == "fix" ?
 				"data: [[\"" + listDef.replaceAll('\\[', '","').replaceAll('\\]', '"').replaceAll('\\|', '],["') + "]]"
 			:
-				"targetCweModelElementId: \"" + listDef + "\""
+				"targetChiModelElementId: \"" + listDef + "\""
 ;
 String getComboBoxClass(String inputType):
 	let listType = inputType.split(':').first().split('#').last():

@@ -3,7 +3,7 @@
 
 «EXTENSION common::util»
 
-«EXTENSION cartridge::Cwe::util»
+«EXTENSION cartridge::Chi::util»
 
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 
@@ -17,7 +17,9 @@
 «ENDDEFINE»
 
 «DEFINE treeIcon16x16 FOR Chronos::ChiNode»
+  «IF this.name != "Package"-»
 .«this.name»TreeIcon16x16 {
 	background-image: url("../img/16x16/«this.name».png") !important;
 }
+  «ENDIF-»
 «ENDDEFINE»

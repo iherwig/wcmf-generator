@@ -100,7 +100,7 @@ String getExtJsInputType(String str):
 			case 'radio' : 'Radio'
 			case 'checkbox' : 'Checkbox'
 			case 'select' : 'ComboBox'
-			case 'password' : 'Password'
+			case 'password' : 'PasswordField'
 			default : 'TextField'
 		}
 ;
