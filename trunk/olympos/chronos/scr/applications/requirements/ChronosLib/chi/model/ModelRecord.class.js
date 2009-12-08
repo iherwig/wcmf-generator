@@ -99,14 +99,14 @@ chi.model.ModelRecord.prototype.setOid = function(oid) {
  * Returns the label of this record.
  * 
  * <p>
- * Refers to the Model Description for extracting the label of this record.
+ * The default implementation returns the object id. Subclasses will override this.
  * </p>
  * 
  * @return The label of this record.
  * @type String
  */
 chi.model.ModelRecord.prototype.getLabel = function() {
-	return this.getModelDescription().getLabel(this);
+	return this.getOid();
 };
 
 /**
