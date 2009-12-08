@@ -40,5 +40,19 @@ Ext.extend(application.«this.getFullPackageName()».«this.name», chi.model.Mo
 
 «PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"class.js/Body"»
 «ENDPROTECT»
+
+/**
+ * Returns the label of this record.
+ * 
+ * @return The label of this record.
+ * @type String
+ */
+application.«this.getFullPackageName()».«this.name».prototype.getLabel = function() {
+	var label = this.get("«this.display_value.replaceAll('\\|', '") + " - " + this.get("')»");
+	if (label == undefined || label.length == 0) {
+		label = this.getOid(); 
+	}
+	return label;
+};
 	«ENDFILE»
 «ENDDEFINE»

@@ -45,8 +45,6 @@ Ext.extend(application.«this.getFullPackageName()».«this.name»Description, c
 
 «EXPAND getEditorItems FOR this»
 
-«EXPAND getLabel FOR this»
-
 «EXPAND createInstance FOR this»
 
 chi.model.ModelDescriptionContainer.getInstance().registerDescription(new application.«this.getFullPackageName()».«this.name»Description());
@@ -229,24 +227,6 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 			aggregationKind : chi.Constants.AggregationKind.«this.aggregation.toString().toUpperCase()»
 		«REM»«ENDLET»«ENDREM»
 	})
-«ENDDEFINE»
-
-«DEFINE getLabel FOR Chronos::ChiNode»
-/**
- * Returns the label of an object of the Model Class.
- * 
- * @param {chi.model.ModelRecord}
- *            record The record of the Model Class to extract the label from.
- * @return The label of an object of the Model Class.
- * @type String
- */
-application.«this.getFullPackageName()».«this.name»Description.prototype.getLabel = function(record) {
-	var label = record.get("«this.display_value.replaceAll('\\|', '") + " - " + record.get("')»");
-	if (label == undefined || label.length == 0) {
-		label = record.getOid(); 
-	}
-	return label;
-};
 «ENDDEFINE»
 
 «DEFINE createInstance FOR Chronos::ChiNode»
