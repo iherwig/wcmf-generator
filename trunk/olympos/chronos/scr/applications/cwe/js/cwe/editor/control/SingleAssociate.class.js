@@ -32,7 +32,7 @@ Ext.namespace("cwe.editor.control");
  * @constructor
  * @param {Object}
  *            config The configuration object.
- * @config targetCweModelElementId The CweModelElementId of the target Model
+ * @config targetChiModelElementId The CweModelElementId of the target Model
  *         Class,
  */
 cwe.editor.control.SingleAssociate = function(config) {
@@ -84,9 +84,9 @@ cwe.editor.control.SingleAssociate = Ext.extend(Ext.form.TwinTriggerField, {
 		 * The model class of the target objects.
 		 * 
 		 * @private
-		 * @type cwe.model.ModelClass
+		 * @type chi.model.ModelDescription
 		 */
-		this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(this.targetCweModelElementId);
+		this.modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription(this.targetChiModelElementId);
 		
 		Ext.apply(this, {
 		    readOnly : true,
@@ -119,7 +119,7 @@ cwe.editor.control.SingleAssociate = Ext.extend(Ext.form.TwinTriggerField, {
 /**
  * Sets the value of this form field.
  * 
- * @param {cwe.model.ModelReferenceList}
+ * @param {chi.model.ModelReferenceList}
  *            value The new value of this form field.
  */
 cwe.editor.control.SingleAssociate.prototype.setValue = function(value) {
@@ -140,7 +140,7 @@ cwe.editor.control.SingleAssociate.prototype.setValue = function(value) {
  * Returns the value of this form field.
  * 
  * @return The value of this form field.
- * @type cwe.model.ModelReferenceList
+ * @type chi.model.ModelReferenceList
  */
 cwe.editor.control.SingleAssociate.prototype.getValue = function() {
 	return this.origValue;
@@ -171,7 +171,7 @@ cwe.editor.control.SingleAssociate.prototype.associate = function() {
 	var self = this;
 	
 	var associateWindow = new cwe.editor.control.AssociateWindow( {
-	    modelClass : this.modelClass,
+	    modelDescription : this.modelDescription,
 	    singleSelect : true,
 	    sourceHandler : function(records) {
 		    var record = records[0];
@@ -203,7 +203,7 @@ cwe.editor.control.SingleAssociate.prototype.disassociate = function() {
  */
 cwe.editor.control.SingleAssociate.prototype.edit = function() {
 	if (this.origValue) {
-		var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getEditors();
+		var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelDescription).getEditors();
 		editors.loadOrShow(this.associatedOid, this.getValueLabel());
 	}
 };
@@ -211,7 +211,7 @@ cwe.editor.control.SingleAssociate.prototype.edit = function() {
 cwe.editor.control.SingleAssociate.prototype.createChild = function() {
 	var self = this;
 	
-	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelClass, function(data) {
+	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelDescription, function(data) {
 		self.setValue(data.record);
 	});
 };

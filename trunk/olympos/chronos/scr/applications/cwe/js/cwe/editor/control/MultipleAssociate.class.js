@@ -35,8 +35,8 @@ Ext.namespace("cwe.editor.control");
  * @config fieldLabel The label of this form field.
  * @config name The name of this form field.
  * @config dataIndex The name of the record field containing this form field's
- *         value. Must be of type {@link cwe.model.ModelReferenceList}.
- * @config targetCweModelElementId The CweModelElementId of the target Model
+ *         value. Must be of type {@link chi.model.ModelReferenceList}.
+ * @config targetChiModelElementId The CweModelElementId of the target Model
  *         Class,
  */
 cwe.editor.control.MultipleAssociate = function(config) {
@@ -59,9 +59,9 @@ cwe.editor.control.MultipleAssociate = Ext.extend(Ext.grid.GridPanel, {
 		 * The model class of the target objects.
 		 * 
 		 * @private
-		 * @type cwe.model.ModelClass
+		 * @type chi.model.ModelDescription
 		 */
-		this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(this.targetCweModelElementId);
+		this.modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription(this.targetChiModelElementId);
 		
 		/**
 		 * The configuration for the fields to show in the control.
@@ -195,7 +195,7 @@ cwe.editor.control.MultipleAssociate.prototype.isDirty = function() {
 /**
  * Sets the value of this form field.
  * 
- * @param {cwe.model.ModelReferenceList}
+ * @param {chi.model.ModelReferenceList}
  *            value The new value of this form field.
  */
 cwe.editor.control.MultipleAssociate.prototype.setValue = function(value) {
@@ -231,7 +231,7 @@ cwe.editor.control.MultipleAssociate.prototype.setValue = function(value) {
  * Returns the value of this form field.
  * 
  * @return The value of this form field.
- * @type cwe.model.ModelReferenceList
+ * @type chi.model.ModelReferenceList
  */
 cwe.editor.control.MultipleAssociate.prototype.getValue = function() {
 	return this.origValue;
@@ -246,7 +246,7 @@ cwe.editor.control.MultipleAssociate.prototype.associate = function() {
 	var self = this;
 	
 	var associateWindow = new cwe.editor.control.AssociateWindow( {
-	    modelClass : this.modelClass,
+	    modelDescription : this.modelDescription,
 	    singleSelect : false,
 	    sourceHandler : function(records) {
 		    self.mergeRecords(records);
@@ -340,7 +340,7 @@ cwe.editor.control.MultipleAssociate.prototype.edit = function() {
 	var records = this.getSelectionModel().getSelections();
 	
 	if (records && records.length > 0) {
-		var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getEditors();
+		var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelDescription).getEditors();
 		
 		for ( var i = 0; i < records.length; i++) {
 			var currRecord = records[i];
@@ -353,7 +353,7 @@ cwe.editor.control.MultipleAssociate.prototype.edit = function() {
 cwe.editor.control.MultipleAssociate.prototype.createChild = function() {
 	var self = this;
 	
-	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelClass, function(data) {
+	cwe.Util.createChild(this.editor.getRecord(), this.getName(), this.modelDescription, function(data) {
 		self.mergeRecords( [ data.record ]);
 	});
 };

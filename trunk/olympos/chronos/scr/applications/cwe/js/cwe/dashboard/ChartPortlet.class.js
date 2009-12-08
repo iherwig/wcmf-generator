@@ -22,7 +22,7 @@ Ext.namespace("cwe.dashboard");
 cwe.dashboard.ChartPortlet = function(config) {
 	var self = this;
 	
-	this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(config.cweModelElementId);
+	this.modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription(config.cweModelElementId);
 	
 	this.limit = config.limit;
 	this.sortAttributeName = config.sortAttributeName;
@@ -33,12 +33,12 @@ cwe.dashboard.ChartPortlet = function(config) {
 	 * The store holding the objects.
 	 * 
 	 * @private
-	 * @type cwe.model.ModelStore
+	 * @type chi.model.Store
 	 */
-	this.store = new cwe.model.Store( {
-	    modelClass : this.modelClass,
+	this.store = new chi.model.Store( {
+	    modelDescription : this.modelDescription,
 	    proxy : new cwe.dashboard.ChartProxy( {
-	        modelClass : this.modelClass,
+	        modelDescription : this.modelDescription,
 	        valueAttribute : this.valueAttribute
 	    }),
 	    sortInfo : {
@@ -54,15 +54,15 @@ cwe.dashboard.ChartPortlet = function(config) {
 	    listeners : {
 		    itemclick : function(o) {
 			    var record = self.store.getAt(o.index);
-			    var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(self.modelClass).getEditors();
+			    var editors = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(self.modelDescription).getEditors();
 			    editors.loadOrShow(record.get("oid"), record.get("label"));
 		    }
 	    }
 	});
 	
 	cwe.dashboard.ChartPortlet.superclass.constructor.call(this, Ext.apply(this, {
-	    title : this.modelClass.getName() + " " + this.valueAttribute + " " + chi.Dict.translate("Chart"),
-	    iconCls : this.modelClass.getTreeIconClass(),
+	    title : this.modelDescription.getName() + " " + this.valueAttribute + " " + chi.Dict.translate("Chart"),
+	    iconCls : this.modelDescription.getTreeIconClass(),
 	    bodyStyle : "padding: 5px;",
 	    height : 300,
 	    items : [ this.chart ]

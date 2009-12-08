@@ -35,8 +35,8 @@ Ext.namespace("cwe.editor.control");
  * @config fieldLabel The label of this form field.
  * @config name The name of this form field.
  * @config dataIndex The name of the record field containing this form field's
- *         value. Must be of type {@link cwe.model.ModelReferenceList}.
- * @config targetCweModelElementId The CweModelElementId of the target Model
+ *         value. Must be of type {@link chi.model.ModelReferenceList}.
+ * @config targetChiModelElementId The CweModelElementId of the target Model
  *         Class,
  */
 cwe.editor.control.AssociateWindow = function(config) {
@@ -66,10 +66,10 @@ cwe.editor.control.AssociateWindow = Ext.extend(Ext.Window, {
 		 * The store holding the objects.
 		 * 
 		 * @private
-		 * @type cwe.model.ModelStore
+		 * @type chi.model.ModelStore
 		 */
-		this.store = new cwe.model.Store( {
-			modelClass : this.modelClass
+		this.store = new chi.model.Store( {
+			modelDescription : this.modelDescription
 		});
 		
 		/**
@@ -96,7 +96,7 @@ cwe.editor.control.AssociateWindow = Ext.extend(Ext.Window, {
 			}
 		}
 		    }),
-		    columns : this.modelClass.getLabelColumns(),
+		    columns : this.modelDescription.getLabelColumns(),
 		    store : this.store,
 		    viewConfig : {
 		        forceFit : true,
@@ -122,7 +122,7 @@ cwe.editor.control.AssociateWindow = Ext.extend(Ext.Window, {
 		    }
 		});
 		
-		this.label = chi.Dict.translate("Associate as ${1} with ${2} \"${3}\"", this.roleName, this.editor.modelClass.getName(), this.editor.getLabel());
+		this.label = chi.Dict.translate("Associate as ${1} with ${2} \"${3}\"", this.roleName, this.editor.modelDescription.getName(), this.editor.getLabel());
 		
 		Ext.apply(this, {
 		    title : this.label,
@@ -151,10 +151,10 @@ cwe.editor.control.AssociateWindow = Ext.extend(Ext.Window, {
 cwe.editor.control.AssociateWindow.prototype.openFullGrid = function() {
 	var self = this;
 	
-	var grid = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelClass).getGrid();
+	var grid = cwe.modelgrid.ModelGridContainer.getInstance().loadOrShow(this.modelDescription).getGrid();
 	
 	var button = new cwe.modelgrid.AssociateButton( {
-	    modelClass : this.editor.getModelClass(),
+	    modelDescription : this.editor.getModelDescription(),
 	    singleSelect : this.singleSelect,
 	    label : this.label,
 	    sourceHandler : function(records) {

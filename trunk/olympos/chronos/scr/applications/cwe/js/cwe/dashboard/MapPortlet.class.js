@@ -22,7 +22,7 @@ Ext.namespace("cwe.dashboard");
 cwe.dashboard.MapPortlet = function(config) {
 	var self = this;
 	
-	this.modelClass = cwe.model.ModelClassContainer.getInstance().getClass(config.cweModelElementId);
+	this.modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription(config.cweModelElementId);
 	
 	this.limit = config.limit;
 	this.sortAttributeName = config.sortAttributeName;
@@ -32,12 +32,12 @@ cwe.dashboard.MapPortlet = function(config) {
 	 * The store holding the objects.
 	 * 
 	 * @private
-	 * @type cwe.model.Store
+	 * @type chi.model.Store
 	 */
-	this.store = new cwe.model.Store( {
-	    modelClass : this.modelClass,
+	this.store = new chi.model.Store( {
+	    modelDescription : this.modelDescription,
 	    proxy : new cwe.dashboard.ChartProxy( {
-		    modelClass : this.modelClass
+		    modelDescription : this.modelDescription
 	    }),
 	    sortInfo : {
 	        field : this.sortAttributeName,
@@ -76,8 +76,8 @@ cwe.dashboard.MapPortlet = function(config) {
 	});
 	
 	cwe.dashboard.MapPortlet.superclass.constructor.call(this, Ext.apply(this, {
-	    title : chi.Dict.translate("Map of") + " " + this.modelClass.getName(),
-	    iconCls : this.modelClass.getTreeIconClass(),
+	    title : chi.Dict.translate("Map of") + " " + this.modelDescription.getName(),
+	    iconCls : this.modelDescription.getTreeIconClass(),
 	    height : 300,
 	    items : [ this.map ]
 	}, config));

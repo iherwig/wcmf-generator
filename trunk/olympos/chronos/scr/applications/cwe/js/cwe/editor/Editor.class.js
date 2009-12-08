@@ -29,7 +29,7 @@ Ext.namespace("cwe.editor");
  * @constructor
  * @param {Object}
  *            config The configuration object.
- * @config modelClass The Model Class of the object to edit.
+ * @config modelDescription The ModelDescription of the object to edit.
  * @config oid The oid of the object to edit. <code>null</code> for new
  *         objects.
  * @config newObject Whether the edited object is a new object.
@@ -92,7 +92,7 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		this.associateButtons = new Ext.util.MixedCollection();
 		
 		Ext.apply(this, {
-		    iconCls : this.modelClass.getTreeIconClass(),
+		    iconCls : this.modelDescription.getTreeIconClass(),
 		    bodyStyle : "padding: 5px;",
 		    closable : true,
 		    frame : false,
@@ -100,7 +100,7 @@ cwe.editor.Editor = Ext.extend(Ext.form.FormPanel, {
 		    labelAlign : "left",
 		    labelWidth : 200,
 		    tbar : [ this.saveButton, this.cancelButton ],
-		    items : this.modelClass.getEditorItems(),
+		    items : this.modelDescription.getEditorItems(),
 		    msgTarget : "side"
 		});
 		
@@ -175,7 +175,7 @@ cwe.editor.Editor.prototype.save = function() {
 		this.setTitle(record.getLabel());
 		record.commit();
 	} else {
-		var record = new cwe.model.ModelRecord(this.modelClass);
+		var record = new chi.model.ModelRecord(this.modelDescription);
 		
 		this.getForm().updateRecord(record);
 		
@@ -183,7 +183,7 @@ cwe.editor.Editor.prototype.save = function() {
 		
 		var actionSet = new chi.persistency.ActionSet();
 		
-		actionSet.addCreate(this.modelClass.getId());
+		actionSet.addCreate(this.modelDescription.getId());
 		
 		record.commit(actionSet);
 		
@@ -214,7 +214,7 @@ cwe.editor.Editor.prototype.cancel = function() {
  * Returns the record of this editor.
  * 
  * @return The record of this editor.
- * @type cwe.model.ModelRecord
+ * @type chi.model.ModelRecord
  */
 cwe.editor.Editor.prototype.getRecord = function() {
 	return this.record;
@@ -244,20 +244,20 @@ cwe.editor.Editor.prototype.getLabel = function() {
 	if (record) {
 		result = record.getLabel();
 	} else {
-		result = this.modelClass.getNewLabel();
+		result = this.modelDescription.getNewLabel();
 	}
 	
 	return result;
 };
 
 /**
- * Returns the Model Class of the edited object.
+ * Returns the ModelDescription of the edited object.
  * 
- * @return The Model Class of the edited object.
- * @type cwe.model.ModelClass
+ * @return The ModelDescription of the edited object.
+ * @type chi.model.ModelDescription
  */
-cwe.editor.Editor.prototype.getModelClass = function() {
-	return this.modelClass;
+cwe.editor.Editor.prototype.getModelDescription = function() {
+	return this.modelDescription;
 };
 
 /**

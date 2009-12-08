@@ -1,6 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
+<!-- PROTECTED REGION ID(index.html/Includes) ENABLED START -->
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title id="title">Chronos Web Editor</title>
 		<link rel="shortcut icon" href="favicon.ico" /> 
@@ -28,11 +29,15 @@
 		</script>
 		
 		<!--Start include CWE-->
+		<script type="text/javascript" src="../ChronosLib/chi/Log.js">
+		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/Main.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwe/Cwe.class.js">
 		</script>
 		<script type="text/javascript" src="js/cwe/Constants.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/Config.class.js">
 		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/Util.js">
 		</script>
@@ -53,27 +58,51 @@
 		<script type="text/javascript" src="../ChronosLib/chi/persistency/ActionSet.class.js">
 		</script>
 
-		<script type="text/javascript" src="js/cwe/model/ModelClassContainer.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelDescriptionContainer.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/ModelPackageContainer.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelPackageContainer.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/ModelElement.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelElement.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/ModelClass.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelDescription.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/ModelPackage.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelPackage.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/RootPackage.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/RootPackage.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/ModelRecord.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelRecord.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/ModelReference.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelReference.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/ModelReferenceList.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/ModelReferenceList.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/Store.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/Store.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/model/Proxy.class.js">
+		<script type="text/javascript" src="../ChronosLib/chi/model/Proxy.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/Checkbox.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/ComboBox.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/ComboBoxProxy.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/DateField.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/HtmlEditor.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/NumberField.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/PasswordField.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/Radio.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/StaticComboBox.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/TextArea.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/TextField.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/DisplayField.class.js">
 		</script>
 		
 		<script type="text/javascript" src="js/cwe/ui/Workbench.class.js">
@@ -122,55 +151,15 @@
 		</script>
 		<script type="text/javascript" src="js/cwe/editor/control/MultipleAssociate.class.js">
 		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/Checkbox.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/ComboBox.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/ComboBoxProxy.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/DateField.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/HtmlEditor.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/NumberField.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/PasswordField.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/Radio.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/StaticComboBox.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/TextArea.class.js">
-		</script>
-		<script type="text/javascript" src="js/cwe/editor/control/TextField.class.js">
+		<script type="text/javascript" src="js/cwe/editor/control/AssociateWindow.class.js">
 		</script>
 
 		<!--End include CWE-->
 		
 		<script type="text/javascript" src="js/cwe/Config.js">
 		</script>
-
-
-
-
-
-
-
-
-		<!--Start include application-->
-		
-		<script type="text/javascript" src="js/application/JsonTest/JsonTest_package.class.js">
-		</script>
-		
-		<script type="text/javascript" src="js/application/JsonTest/MoMarktplatz.class.js">
-		</script>
-		<script type="text/javascript" src="js/application/JsonTest/StromProdukt.class.js">
-		</script>
-		<script type="text/javascript" src="js/application/JsonTest/Preis.class.js">
-		</script>
-		<!--End include application-->
-								
-
+<!-- PROTECTED REGION END -->
+<!-- PROTECTED REGION ID(index.html/StartApplication) ENABLED START -->
 		<script type="text/javascript">
 			Ext.onReady(function(){
 				Ext.BLANK_IMAGE_URL = "img/s.gif";
@@ -178,6 +167,7 @@
 				cwe.Cwe.getInstance().startApplication();
 			});
 		</script>
+<!-- PROTECTED REGION END -->
 	</head>
 	<body>
 	</body>
