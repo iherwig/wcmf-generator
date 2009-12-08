@@ -830,7 +830,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "activitySet",
 			targetChiModelElementId : "ActivitySet",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 
@@ -844,7 +844,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "diagram",
 			targetChiModelElementId : "Diagram",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 
@@ -858,7 +858,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "glossary",
 			targetChiModelElementId : "Glossary",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -872,7 +872,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "property",
 			targetChiModelElementId : "Property",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -886,7 +886,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiValue",
 			targetChiModelElementId : "ChiValue",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -900,7 +900,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiClass",
 			targetChiModelElementId : "ChiClass",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -914,7 +914,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiView",
 			targetChiModelElementId : "ChiView",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -928,7 +928,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiController",
 			targetChiModelElementId : "ChiController",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -942,7 +942,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiNode",
 			targetChiModelElementId : "ChiNode",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -956,7 +956,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiNodeManyToMany",
 			targetChiModelElementId : "ChiNodeManyToMany",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -970,7 +970,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "operation",
 			targetChiModelElementId : "Operation",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -984,7 +984,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiIssue",
 			targetChiModelElementId : "ChiIssue",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -998,7 +998,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiFeature",
 			targetChiModelElementId : "ChiFeature",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1012,7 +1012,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiRequirement",
 			targetChiModelElementId : "ChiRequirement",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1026,7 +1026,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiGoal",
 			targetChiModelElementId : "ChiGoal",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1040,7 +1040,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiBusinessUseCase",
 			targetChiModelElementId : "ChiBusinessUseCase",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1054,7 +1054,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiBusinessUseCaseCore",
 			targetChiModelElementId : "ChiBusinessUseCaseCore",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1068,7 +1068,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiBusinessProcess",
 			targetChiModelElementId : "ChiBusinessProcess",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1082,7 +1082,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "actor",
 			targetChiModelElementId : "Actor",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1096,7 +1096,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiBusinessPartner",
 			targetChiModelElementId : "ChiBusinessPartner",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1110,7 +1110,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiBusinessPartnerPassive",
 			targetChiModelElementId : "ChiBusinessPartnerPassive",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1124,7 +1124,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiBusinessPartnerActive",
 			targetChiModelElementId : "ChiBusinessPartnerActive",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1138,7 +1138,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiWorker",
 			targetChiModelElementId : "ChiWorker",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1152,7 +1152,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiWorkerInternal",
 			targetChiModelElementId : "ChiWorkerInternal",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1166,7 +1166,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiWorkerExternal",
 			targetChiModelElementId : "ChiWorkerExternal",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1180,7 +1180,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "ruleVariable",
 			targetChiModelElementId : "RuleVariable",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1194,7 +1194,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "ruleSetVariable",
 			targetChiModelElementId : "RuleSetVariable",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1208,7 +1208,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "ruleCondition",
 			targetChiModelElementId : "RuleCondition",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1222,7 +1222,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "ruleAction",
 			targetChiModelElementId : "RuleAction",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1236,7 +1236,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "productionRuleSet",
 			targetChiModelElementId : "ProductionRuleSet",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1250,7 +1250,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "productionRule",
 			targetChiModelElementId : "ProductionRule",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1264,7 +1264,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiSystem",
 			targetChiModelElementId : "ChiSystem",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1278,7 +1278,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "activityFinal",
 			targetChiModelElementId : "ActivityFinal",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1292,7 +1292,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "activityInitial",
 			targetChiModelElementId : "ActivityInitial",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1306,7 +1306,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "activitySend",
 			targetChiModelElementId : "ActivitySend",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1320,7 +1320,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "activityReceive",
 			targetChiModelElementId : "ActivityReceive",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1334,7 +1334,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "activityDecision",
 			targetChiModelElementId : "ActivityDecision",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1348,7 +1348,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "activity",
 			targetChiModelElementId : "Activity",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -1362,7 +1362,7 @@ application.application.include.model.FigureDescription.prototype.getEditorItems
 			dataIndex : "chiObject",
 			targetChiModelElementId : "ChiObject",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 

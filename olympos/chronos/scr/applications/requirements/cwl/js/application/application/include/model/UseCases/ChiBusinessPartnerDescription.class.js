@@ -440,7 +440,7 @@ application.application.include.model.UseCases.ChiBusinessPartnerDescription.pro
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -460,7 +460,7 @@ application.application.include.model.UseCases.ChiBusinessPartnerDescription.pro
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 

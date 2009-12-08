@@ -576,7 +576,7 @@ application.application.include.model.domain.ChiControllerDescription.prototype.
 			dataIndex : "property",
 			targetChiModelElementId : "Property",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -590,7 +590,7 @@ application.application.include.model.domain.ChiControllerDescription.prototype.
 			dataIndex : "chiNode",
 			targetChiModelElementId : "ChiNode",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -604,7 +604,7 @@ application.application.include.model.domain.ChiControllerDescription.prototype.
 			dataIndex : "operation",
 			targetChiModelElementId : "Operation",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -618,7 +618,7 @@ application.application.include.model.domain.ChiControllerDescription.prototype.
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -632,7 +632,7 @@ application.application.include.model.domain.ChiControllerDescription.prototype.
 			dataIndex : "chiValue",
 			targetChiModelElementId : "ChiValue",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -646,7 +646,7 @@ application.application.include.model.domain.ChiControllerDescription.prototype.
 			dataIndex : "chiNodeManyToMany",
 			targetChiModelElementId : "ChiNodeManyToMany",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -666,7 +666,7 @@ application.application.include.model.domain.ChiControllerDescription.prototype.
 			dataIndex : "chiBusinessUseCase",
 			targetChiModelElementId : "ChiBusinessUseCase",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -680,7 +680,7 @@ application.application.include.model.domain.ChiControllerDescription.prototype.
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 
@@ -694,7 +694,7 @@ application.application.include.model.domain.ChiControllerDescription.prototype.
 			dataIndex : "chiBusinessUseCaseCore",
 			targetChiModelElementId : "ChiBusinessUseCaseCore",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 

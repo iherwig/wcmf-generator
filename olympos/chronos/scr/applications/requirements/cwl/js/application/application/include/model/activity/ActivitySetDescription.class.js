@@ -540,7 +540,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "chiObject",
 			targetChiModelElementId : "ChiObject",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -554,7 +554,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "activity",
 			targetChiModelElementId : "Activity",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -568,7 +568,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "activityDecision",
 			targetChiModelElementId : "ActivityDecision",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -582,7 +582,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "activityReceive",
 			targetChiModelElementId : "ActivityReceive",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -596,7 +596,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "activitySend",
 			targetChiModelElementId : "ActivitySend",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -610,7 +610,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "activityInitial",
 			targetChiModelElementId : "ActivityInitial",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -624,7 +624,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "activityFinal",
 			targetChiModelElementId : "ActivityFinal",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -638,7 +638,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "productionRuleSet",
 			targetChiModelElementId : "ProductionRuleSet",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -652,7 +652,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -672,7 +672,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "chiBusinessUseCase",
 			targetChiModelElementId : "ChiBusinessUseCase",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -686,7 +686,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 
@@ -700,7 +700,7 @@ application.application.include.model.activity.ActivitySetDescription.prototype.
 			dataIndex : "chiBusinessUseCaseCore",
 			targetChiModelElementId : "ChiBusinessUseCaseCore",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 

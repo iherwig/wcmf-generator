@@ -872,7 +872,7 @@ application.application.include.model.domain.ChiNodeDescription.prototype.getEdi
 			dataIndex : "chiObject",
 			targetChiModelElementId : "ChiObject",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -886,7 +886,7 @@ application.application.include.model.domain.ChiNodeDescription.prototype.getEdi
 			dataIndex : "chiValueRef",
 			targetChiModelElementId : "ChiValueRef",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -900,7 +900,7 @@ application.application.include.model.domain.ChiNodeDescription.prototype.getEdi
 			dataIndex : "chiValue",
 			targetChiModelElementId : "ChiValue",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -914,7 +914,7 @@ application.application.include.model.domain.ChiNodeDescription.prototype.getEdi
 			dataIndex : "operation",
 			targetChiModelElementId : "Operation",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -928,7 +928,7 @@ application.application.include.model.domain.ChiNodeDescription.prototype.getEdi
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -948,7 +948,7 @@ application.application.include.model.domain.ChiNodeDescription.prototype.getEdi
 			dataIndex : "chiController",
 			targetChiModelElementId : "ChiController",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 
@@ -962,7 +962,7 @@ application.application.include.model.domain.ChiNodeDescription.prototype.getEdi
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 

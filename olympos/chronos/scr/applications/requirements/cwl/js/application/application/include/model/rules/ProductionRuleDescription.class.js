@@ -504,7 +504,7 @@ application.application.include.model.rules.ProductionRuleDescription.prototype.
 			dataIndex : "ruleAction",
 			targetChiModelElementId : "RuleAction",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -518,7 +518,7 @@ application.application.include.model.rules.ProductionRuleDescription.prototype.
 			dataIndex : "ruleCondition",
 			targetChiModelElementId : "RuleCondition",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -532,7 +532,7 @@ application.application.include.model.rules.ProductionRuleDescription.prototype.
 			dataIndex : "ruleVariable",
 			targetChiModelElementId : "RuleVariable",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -546,7 +546,7 @@ application.application.include.model.rules.ProductionRuleDescription.prototype.
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -566,7 +566,7 @@ application.application.include.model.rules.ProductionRuleDescription.prototype.
 			dataIndex : "productionRuleSet",
 			targetChiModelElementId : "ProductionRuleSet",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -580,7 +580,7 @@ application.application.include.model.rules.ProductionRuleDescription.prototype.
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 

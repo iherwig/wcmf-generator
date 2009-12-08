@@ -702,7 +702,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -716,7 +716,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "diagram",
 			targetChiModelElementId : "Diagram",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -730,7 +730,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "glossary",
 			targetChiModelElementId : "Glossary",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -744,7 +744,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "property",
 			targetChiModelElementId : "Property",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -758,7 +758,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiValue",
 			targetChiModelElementId : "ChiValue",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -772,7 +772,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiClass",
 			targetChiModelElementId : "ChiClass",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -786,7 +786,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiView",
 			targetChiModelElementId : "ChiView",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -800,7 +800,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiController",
 			targetChiModelElementId : "ChiController",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -814,7 +814,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiNode",
 			targetChiModelElementId : "ChiNode",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -828,7 +828,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiNodeManyToMany",
 			targetChiModelElementId : "ChiNodeManyToMany",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -842,7 +842,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "operation",
 			targetChiModelElementId : "Operation",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -856,7 +856,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiIssue",
 			targetChiModelElementId : "ChiIssue",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -870,7 +870,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiFeature",
 			targetChiModelElementId : "ChiFeature",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -884,7 +884,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiRequirement",
 			targetChiModelElementId : "ChiRequirement",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -898,7 +898,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiGoal",
 			targetChiModelElementId : "ChiGoal",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -912,7 +912,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiBusinessUseCase",
 			targetChiModelElementId : "ChiBusinessUseCase",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -926,7 +926,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiBusinessUseCaseCore",
 			targetChiModelElementId : "ChiBusinessUseCaseCore",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -940,7 +940,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiBusinessProcess",
 			targetChiModelElementId : "ChiBusinessProcess",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -954,7 +954,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "actor",
 			targetChiModelElementId : "Actor",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -968,7 +968,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiBusinessPartner",
 			targetChiModelElementId : "ChiBusinessPartner",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -982,7 +982,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiBusinessPartnerPassive",
 			targetChiModelElementId : "ChiBusinessPartnerPassive",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -996,7 +996,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiBusinessPartnerActive",
 			targetChiModelElementId : "ChiBusinessPartnerActive",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1010,7 +1010,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiWorker",
 			targetChiModelElementId : "ChiWorker",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1024,7 +1024,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiWorkerInternal",
 			targetChiModelElementId : "ChiWorkerInternal",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1038,7 +1038,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiWorkerExternal",
 			targetChiModelElementId : "ChiWorkerExternal",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1052,7 +1052,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "ruleVariable",
 			targetChiModelElementId : "RuleVariable",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1066,7 +1066,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "ruleSetVariable",
 			targetChiModelElementId : "RuleSetVariable",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1080,7 +1080,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "ruleCondition",
 			targetChiModelElementId : "RuleCondition",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1094,7 +1094,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "ruleAction",
 			targetChiModelElementId : "RuleAction",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1108,7 +1108,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "productionRuleSet",
 			targetChiModelElementId : "ProductionRuleSet",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1122,7 +1122,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "productionRule",
 			targetChiModelElementId : "ProductionRule",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1136,7 +1136,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiSystem",
 			targetChiModelElementId : "ChiSystem",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1150,7 +1150,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "activityFinal",
 			targetChiModelElementId : "ActivityFinal",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1164,7 +1164,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "activityInitial",
 			targetChiModelElementId : "ActivityInitial",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1178,7 +1178,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "activitySend",
 			targetChiModelElementId : "ActivitySend",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1192,7 +1192,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "activityReceive",
 			targetChiModelElementId : "ActivityReceive",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1206,7 +1206,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "activityDecision",
 			targetChiModelElementId : "ActivityDecision",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1220,7 +1220,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "activity",
 			targetChiModelElementId : "Activity",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1234,7 +1234,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "chiObject",
 			targetChiModelElementId : "ChiObject",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1248,7 +1248,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "activitySet",
 			targetChiModelElementId : "ActivitySet",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -1268,7 +1268,7 @@ application.application.include.model.PackageDescription.prototype.getEditorItem
 			dataIndex : "model",
 			targetChiModelElementId : "Model",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 

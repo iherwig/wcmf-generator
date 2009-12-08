@@ -574,7 +574,7 @@ application.application.include.model.requirements.ChiRequirementDescription.pro
 			dataIndex : "chiRequirement",
 			targetChiModelElementId : "ChiRequirement",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -588,7 +588,7 @@ application.application.include.model.requirements.ChiRequirementDescription.pro
 			dataIndex : "chiIssue",
 			targetChiModelElementId : "ChiIssue",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -602,7 +602,7 @@ application.application.include.model.requirements.ChiRequirementDescription.pro
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -622,7 +622,7 @@ application.application.include.model.requirements.ChiRequirementDescription.pro
 			dataIndex : "chiGoal",
 			targetChiModelElementId : "ChiGoal",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 
@@ -636,7 +636,7 @@ application.application.include.model.requirements.ChiRequirementDescription.pro
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 

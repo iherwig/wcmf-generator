@@ -269,7 +269,7 @@ application.application.include.model.wcmf.UserRDBDescription.prototype.getEdito
 			dataIndex : "locktable",
 			targetChiModelElementId : "Locktable",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 

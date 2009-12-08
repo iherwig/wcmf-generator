@@ -202,7 +202,7 @@ application.application.include.model.wcmf.LocktableDescription.prototype.getEdi
 			dataIndex : "userRDB",
 			targetChiModelElementId : "UserRDB",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.COMPOSITE
+			aggregationKind : cwe.Constants.AggregationKind.COMPOSITE
 		
 	})
 

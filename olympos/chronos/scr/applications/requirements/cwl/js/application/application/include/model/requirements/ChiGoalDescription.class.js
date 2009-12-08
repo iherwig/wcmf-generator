@@ -617,7 +617,7 @@ application.application.include.model.requirements.ChiGoalDescription.prototype.
 			dataIndex : "chiGoal",
 			targetChiModelElementId : "ChiGoal",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -631,7 +631,7 @@ application.application.include.model.requirements.ChiGoalDescription.prototype.
 			dataIndex : "chiRequirement",
 			targetChiModelElementId : "ChiRequirement",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -645,7 +645,7 @@ application.application.include.model.requirements.ChiGoalDescription.prototype.
 			dataIndex : "figure",
 			targetChiModelElementId : "Figure",
 			isParent : true,
-			aggregationKind : chi.Constants.AggregationKind.NONE
+			aggregationKind : cwe.Constants.AggregationKind.NONE
 		
 	})
 
@@ -665,7 +665,7 @@ application.application.include.model.requirements.ChiGoalDescription.prototype.
 			dataIndex : "package",
 			targetChiModelElementId : "Package",
 			isParent : false,
-			aggregationKind : chi.Constants.AggregationKind.SHARED
+			aggregationKind : cwe.Constants.AggregationKind.SHARED
 		
 	})
 
