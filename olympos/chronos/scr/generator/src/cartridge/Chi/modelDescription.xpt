@@ -224,7 +224,7 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 			dataIndex : "«this.getRoleName().toFirstLower()»",
 			targetChiModelElementId : "«this.type.name»",
 			isParent : «isParent ? "true" : "false"»,
-			aggregationKind : chi.Constants.AggregationKind.«this.aggregation.toString().toUpperCase()»
+			aggregationKind : cwe.Constants.AggregationKind.«this.aggregation.toString().toUpperCase()»
 		«REM»«ENDLET»«ENDREM»
 	})
 «ENDDEFINE»
