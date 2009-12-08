@@ -46,21 +46,21 @@ cwe.modeltree.ModelTree = Ext.extend(Ext.tree.TreePanel, {
 		
 		cwe.modeltree.ModelTree.superclass.initComponent.apply(this, arguments);
 		
-		this.setRootNode(this.loadTree(cwe.model.ModelPackageContainer.getInstance().getRootPackage()));
+		this.setRootNode(this.loadTree(chi.model.ModelPackageContainer.getInstance().getRootPackage()));
 	}
 });
 
 /**
- * Constructs the Model Tree out of ModelPackage and ModelClass information.
+ * Constructs the Model Tree out of ModelPackage and ModelDescription information.
  * 
  * <p>
  * Recursively calls itself for each package.
  * </p>
  * 
- * @param {cwe.model.ModelPackage}
+ * @param {chi.model.ModelPackage}
  *            currPackage The package to process.
  * @return The tree node constructed for <code>currPackage</code>.
- * @type cwe.modeltree.Node
+ * @type chi.modeltree.Node
  */
 cwe.modeltree.ModelTree.prototype.loadTree = function(currPackage) {
 	var currNode = new cwe.modeltree.Node( {
@@ -71,7 +71,7 @@ cwe.modeltree.ModelTree.prototype.loadTree = function(currPackage) {
 	var self = this;
 	
 	children.each(function(currChild) {
-		if (currChild instanceof cwe.model.ModelPackage) {
+		if (currChild instanceof chi.model.ModelPackage) {
 			currNode.appendChild(self.loadTree(currChild));
 		} else {
 			currNode.appendChild(new cwe.modeltree.ClassNode( {

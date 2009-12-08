@@ -18,7 +18,7 @@ Ext.namespace("cwe.modelgrid");
  * @constructor
  * @param {Object}
  *            config The configuration object.
- * @config modelClass The Model Class of the source object.
+ * @config modelDescription The ModelDescription of the source object.
  * @config roleName The name of the role the target object has in the source
  *         object.
  * @config role The name of the field the target object is associated to in the
@@ -38,7 +38,7 @@ cwe.modelgrid.AssociateButton = Ext.extend(Ext.Toolbar.Button, {
 		var self = this;
 		
 		Ext.apply(this, {
-		    iconCls : this.modelClass.getTreeIconClass(),
+		    iconCls : this.modelDescription.getTreeIconClass(),
 		    text : this.label,
 		    handler : function() {
 			    self.associate();

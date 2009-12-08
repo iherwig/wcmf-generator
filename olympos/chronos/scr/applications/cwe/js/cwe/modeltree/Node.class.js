@@ -29,7 +29,7 @@ cwe.modeltree.Node = function(config) {
 	/**
 	 * The model element corresponding to this node.
 	 * 
-	 * @type cwe.model.ModelElement
+	 * @type chi.model.ModelElement
 	 */
 	this.modelElement = config.modelElement;
 	
@@ -47,7 +47,7 @@ Ext.extend(cwe.modeltree.Node, Ext.tree.TreeNode);
  * Returns the model element corresponding to this node.
  * 
  * @return The model element corresponding to this node.
- * @type cwe.model.ModelElement
+ * @type chi.model.ModelElement
  */
 cwe.modeltree.Node.prototype.getModelElement = function() {
 	return this.modelElement;

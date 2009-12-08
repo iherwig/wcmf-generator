@@ -19,7 +19,7 @@ Ext.namespace("cwe.modelgrid");
  * @see cwe.modelgrid.ModelGrid
  * @param {Object}
  *            config The configuration object.
- * @config modelClass The Model Class of the grid and editors.
+ * @config modelDescription The ModelDescription of the grid and editors.
  */
 cwe.modelgrid.ModelGridPanel = function() {
 };
@@ -33,7 +33,7 @@ cwe.modelgrid.ModelGridPanel = Ext.extend(Ext.Panel, {
 		 * @type cwe.editor.EditorContainer
 		 */
 		this.editors = new cwe.editor.EditorContainer( {
-			modelClass : this.modelClass
+			modelDescription : this.modelDescription
 		});
 		
 		/**
@@ -43,14 +43,14 @@ cwe.modelgrid.ModelGridPanel = Ext.extend(Ext.Panel, {
 		 * @type cwe.modelgrid.ModelGrid
 		 */
 		this.grid = new cwe.modelgrid.ModelGrid( {
-			modelClass : this.modelClass,
+			modelDescription : this.modelDescription,
 			editors : this.editors
 		});
 		
 		Ext.apply(this, {
 			layout : "border",
-			title : chi.Dict.translate(this.modelClass.getName()),
-			iconCls : this.modelClass.getTreeIconClass(),
+			title : chi.Dict.translate(this.modelDescription.getName()),
+			iconCls : this.modelDescription.getTreeIconClass(),
 			items : [ this.grid, this.editors ],
 			closable : true
 		});

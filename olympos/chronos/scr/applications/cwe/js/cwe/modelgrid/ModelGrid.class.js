@@ -25,7 +25,7 @@ Ext.namespace("cwe.modelgrid");
  * @constructor
  * @param {Object}
  *            config The configuration object.
- * @config modelClass The Model Class of this grid.
+ * @config modelDescription The ModelDescription of this grid.
  * @config editors The Editor Container as target of object of this grid.
  */
 cwe.modelgrid.ModelGrid = function(config) {
@@ -55,10 +55,10 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		 * The store holding the objects.
 		 * 
 		 * @private
-		 * @type cwe.model.ModelStore
+		 * @type chi.model.ModelStore
 		 */
-		this.store = new cwe.model.Store( {
-			modelClass : this.modelClass
+		this.store = new chi.model.Store( {
+			modelDescription : this.modelDescription
 		});
 		
 		/**
@@ -135,7 +135,7 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 			        }
 		        }
 		    }),
-		    columns : this.modelClass.getGridColumns(),
+		    columns : this.modelDescription.getGridColumns(),
 		    store : this.store,
 		    plugins : [ new Ext.ux.grid.RowEditor( {
 		        saveText : chi.Dict.translate("Save"),
@@ -175,7 +175,7 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 cwe.modelgrid.ModelGrid.prototype.createNew = function() {
 	var self = this;
 	
-	self.editors.loadOrShow(null, "<i>" + self.modelClass.getNewLabel() + "</i>", true);
+	self.editors.loadOrShow(null, "<i>" + self.modelDescription.getNewLabel() + "</i>", true);
 };
 
 /**
@@ -193,7 +193,7 @@ cwe.modelgrid.ModelGrid.prototype.deleteSelected = function() {
 	
 	if (records.length > 0) {
 		
-		var msgText = "<p>" + chi.Dict.translate("Are you sure you want to delete the following instances of ${1}:", this.modelClass.getName()) + "</p><ul class='deleteMsgBox'>";
+		var msgText = "<p>" + chi.Dict.translate("Are you sure you want to delete the following instances of ${1}:", this.modelDescription.getName()) + "</p><ul class='deleteMsgBox'>";
 		for ( var i = 0; i < records.length; i++) {
 			msgText += "<li>" + records[i].getLabel() + "</li>";
 		}

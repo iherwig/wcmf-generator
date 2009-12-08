@@ -25,7 +25,7 @@ cwe.dashboard.ChartProxy = function(config) {
 	cwe.dashboard.ChartProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
 };
 
-Ext.extend(cwe.dashboard.ChartProxy, cwe.model.Proxy);
+Ext.extend(cwe.dashboard.ChartProxy, chi.model.Proxy);
 
 /**
  * Reformats the result to only display numeric part of oid and label.

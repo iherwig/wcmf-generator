@@ -72,19 +72,19 @@ cwe.modelgrid.ModelGridContainer.prototype.tabClose = function(tabPanel, tab) {
 /**
  * Loads or shows (if already loaded) a model grid for the given Model Class.
  * 
- * @param {cwe.model.ModelClass}
- *            modelClass The Model class to show the grid for.
+ * @param {chi.model.ModelDescription}
+ *            modelDescription The ModelDescription to show the grid for.
  */
-cwe.modelgrid.ModelGridContainer.prototype.loadOrShow = function(modelClass) {
-	var modelGrid = this.modelgrids.get(modelClass.getId());
+cwe.modelgrid.ModelGridContainer.prototype.loadOrShow = function(modelDescription) {
+	var modelGrid = this.modelgrids.get(modelDescription.getId());
 	
 	var explicitLayout = this.modelgrids.getCount() == 0;
 	
 	if (!modelGrid) {
 		modelGrid = new cwe.modelgrid.ModelGridPanel( {
-			modelClass : modelClass
+			modelDescription : modelDescription
 		});
-		this.modelgrids.add(modelClass.getId(), modelGrid);
+		this.modelgrids.add(modelDescription.getId(), modelGrid);
 		this.add(modelGrid);
 	}
 	

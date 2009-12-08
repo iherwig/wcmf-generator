@@ -19,7 +19,7 @@ Ext.namespace("cwe.editor");
  * @see cwe.editor.Editor
  * @param {Object}
  *            config The configuration object.
- * @config modelClass The Model Class of the editors.
+ * @config modelDescription The ModelDescription of the editors.
  */
 cwe.editor.EditorContainer = function() {
 };
@@ -86,7 +86,7 @@ cwe.editor.EditorContainer.prototype.loadOrShow = function(oid, label, newObject
 			oid : oid,
 			title: label || chi.Dict.translate("(no label)"),
 			newObject: newObject,
-			modelClass: this.modelClass,
+			modelDescription: this.modelDescription,
 			editorContainer: this
 		});
 		this.addEditor(oid, editor);
