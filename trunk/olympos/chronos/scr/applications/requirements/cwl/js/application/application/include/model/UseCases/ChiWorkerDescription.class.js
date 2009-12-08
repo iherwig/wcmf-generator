@@ -467,24 +467,6 @@ application.application.include.model.UseCases.ChiWorkerDescription.prototype.ge
 
 
 /**
- * Returns the label of an object of the Model Class.
- * 
- * @param {chi.model.ModelRecord}
- *            record The record of the Model Class to extract the label from.
- * @return The label of an object of the Model Class.
- * @type String
- */
-application.application.include.model.UseCases.ChiWorkerDescription.prototype.getLabel = function(record) {
-	var label = record.get("Name");
-	if (label == undefined || label.length == 0) {
-		label = record.getOid(); 
-	}
-	return label;
-};
-
-
-
-/**
  * Returns a newly created instance of the Model Class, which inherits {chi.model.ModelRecord}.
  * 
  * @param {String}

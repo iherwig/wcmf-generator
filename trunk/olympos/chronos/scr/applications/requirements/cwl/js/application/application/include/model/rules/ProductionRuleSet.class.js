@@ -27,4 +27,18 @@ Ext.extend(application.application.include.model.rules.ProductionRuleSet, chi.mo
 
 // PROTECTED REGION ID(application/include/model/rules/ProductionRuleSetclass.js/Body) ENABLED START
 // PROTECTED REGION END
+
+/**
+ * Returns the label of this record.
+ * 
+ * @return The label of this record.
+ * @type String
+ */
+application.application.include.model.rules.ProductionRuleSet.prototype.getLabel = function() {
+	var label = this.get("");
+	if (label == undefined || label.length == 0) {
+		label = this.getOid(); 
+	}
+	return label;
+};
 	

@@ -27,4 +27,18 @@ Ext.extend(application.application.include.model.UseCases.ChiBusinessPartner, ch
 
 // PROTECTED REGION ID(application/include/model/UseCases/ChiBusinessPartnerclass.js/Body) ENABLED START
 // PROTECTED REGION END
+
+/**
+ * Returns the label of this record.
+ * 
+ * @return The label of this record.
+ * @type String
+ */
+application.application.include.model.UseCases.ChiBusinessPartner.prototype.getLabel = function() {
+	var label = this.get("Name");
+	if (label == undefined || label.length == 0) {
+		label = this.getOid(); 
+	}
+	return label;
+};
 	
