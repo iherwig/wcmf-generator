@@ -223,12 +223,12 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 	
 		
 			{
-			    header : "columnName",
-			    dataIndex : "columnName",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "columnName",
+				dataIndex : "columnName",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -236,27 +236,27 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "displayType",
-			    dataIndex : "displayType",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "displayType",
+				dataIndex : "displayType",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "DisplayType"
+				targetChiModelElementId: "DisplayType"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "restrictionsDescription",
-			    dataIndex : "restrictionsDescription",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "restrictionsDescription",
+				dataIndex : "restrictionsDescription",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -264,12 +264,12 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "restrictionsMatch",
-			    dataIndex : "restrictionsMatch",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "restrictionsMatch",
+				dataIndex : "restrictionsMatch",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -277,12 +277,12 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "restrictionsNotMatch",
-			    dataIndex : "restrictionsNotMatch",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "restrictionsNotMatch",
+				dataIndex : "restrictionsNotMatch",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -290,27 +290,27 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "inputType",
-			    dataIndex : "inputType",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "inputType",
+				dataIndex : "inputType",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "InputType"
+				targetChiModelElementId: "InputType"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "appDataType",
-			    dataIndex : "appDataType",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "appDataType",
+				dataIndex : "appDataType",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -318,12 +318,12 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "dbDataType",
-			    dataIndex : "dbDataType",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "dbDataType",
+				dataIndex : "dbDataType",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -331,12 +331,12 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "isEditable",
-			    dataIndex : "isEditable",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "isEditable",
+				dataIndex : "isEditable",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.StaticComboBox({
 				data: [["true","true"],["false","false"]]
@@ -346,12 +346,12 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "default",
-			    dataIndex : "default",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "default",
+				dataIndex : "default",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -359,12 +359,12 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "propertyType",
-			    dataIndex : "propertyType",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "propertyType",
+				dataIndex : "propertyType",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -372,27 +372,27 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "status",
-			    dataIndex : "status",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "status",
+				dataIndex : "status",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiBaseStatus"
+				targetChiModelElementId: "ChiBaseStatus"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "alias",
-			    dataIndex : "alias",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "alias",
+				dataIndex : "alias",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -400,27 +400,27 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "author",
-			    dataIndex : "author",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "author",
+				dataIndex : "author",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiAuthors"
+				targetChiModelElementId: "ChiAuthors"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "version",
-			    dataIndex : "version",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "version",
+				dataIndex : "version",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -428,12 +428,12 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -441,66 +441,66 @@ application.application.include.model.domain.ChiValueDescription.prototype.getGr
 			}
 		, 
 			{
-			    header : "notes",
-			    dataIndex : "notes",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "notes",
+				dataIndex : "notes",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "created",
-			    dataIndex : "created",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "creator",
-			    dataIndex : "creator",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "created",
+				dataIndex : "created",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "lastEditor",
-			    dataIndex : "lastEditor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "modified",
-			    dataIndex : "modified",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "creator",
+				dataIndex : "creator",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "lastEditor",
+				dataIndex : "lastEditor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "modified",
+				dataIndex : "modified",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
 	
 
 			}
@@ -515,6 +515,13 @@ application.application.include.model.domain.ChiValueDescription.prototype.getLa
 	return [
 	
 		
+			{
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true
+			}
+		
 	
 	];
 };
@@ -524,7 +531,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getLa
 application.application.include.model.domain.ChiValueDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			
@@ -547,7 +554,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 		fieldLabel: "displayType",
 		name: "displayType",
 		dataIndex: "displayType",
-		targetCweModelElementId: "DisplayType",
+		targetChiModelElementId: "DisplayType",
 		toolTip: "The HTML display type for the attribute e.g. image<sup>11</sup>The interpretation of the display_type is done by DefaultValueRenderer or its subclasses.."
 	}) 
 	
@@ -599,7 +606,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 		fieldLabel: "inputType",
 		name: "inputType",
 		dataIndex: "inputType",
-		targetCweModelElementId: "InputType",
+		targetChiModelElementId: "InputType",
 		toolTip: "Definition of the attribute's input control in the HTML form<sup>11</sup>The interpretation of the input_type is done by DefaultControlRenderer or its subclasses.."
 	}) 
 	
@@ -677,7 +684,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 		fieldLabel: "status",
 		name: "status",
 		dataIndex: "status",
-		targetCweModelElementId: "ChiBaseStatus",
+		targetChiModelElementId: "ChiBaseStatus",
 		toolTip: ""
 	}) 
 	
@@ -703,7 +710,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 		fieldLabel: "author",
 		name: "author",
 		dataIndex: "author",
-		targetCweModelElementId: "ChiAuthors",
+		targetChiModelElementId: "ChiAuthors",
 		toolTip: ""
 	}) 
 	
@@ -808,12 +815,12 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 	
 	
 	
-		new chi.editor.control.AssociationsFieldSet({
+		new cwe.editor.control.AssociationsFieldSet({
 			items: [
 		
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "figure",
 			name : "figure",
@@ -833,7 +840,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 		
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiNode",
 			name : "chiNode",
@@ -847,7 +854,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "package",
 			name : "package",
@@ -861,7 +868,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiNodeManyToMany",
 			name : "chiNodeManyToMany",
@@ -875,7 +882,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiSystem",
 			name : "chiSystem",
@@ -889,7 +896,7 @@ application.application.include.model.domain.ChiValueDescription.prototype.getEd
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiController",
 			name : "chiController",

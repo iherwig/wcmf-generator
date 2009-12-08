@@ -153,57 +153,57 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 	
 		
 			{
-			    header : "author",
-			    dataIndex : "author",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "author",
+				dataIndex : "author",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiAuthors"
+				targetChiModelElementId: "ChiAuthors"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "proofreader",
-			    dataIndex : "proofreader",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "proofreader",
+				dataIndex : "proofreader",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiAuthors"
+				targetChiModelElementId: "ChiAuthors"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "status",
-			    dataIndex : "status",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "status",
+				dataIndex : "status",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiFeatureStatus"
+				targetChiModelElementId: "ChiFeatureStatus"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "alias",
-			    dataIndex : "alias",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "alias",
+				dataIndex : "alias",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -211,12 +211,12 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 			}
 		, 
 			{
-			    header : "version",
-			    dataIndex : "version",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "version",
+				dataIndex : "version",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -224,12 +224,12 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 			}
 		, 
 			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -237,66 +237,66 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 			}
 		, 
 			{
-			    header : "notes",
-			    dataIndex : "notes",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "notes",
+				dataIndex : "notes",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "created",
-			    dataIndex : "created",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "creator",
-			    dataIndex : "creator",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "created",
+				dataIndex : "created",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "lastEditor",
-			    dataIndex : "lastEditor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "modified",
-			    dataIndex : "modified",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "creator",
+				dataIndex : "creator",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "lastEditor",
+				dataIndex : "lastEditor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "modified",
+				dataIndex : "modified",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
 	
 
 			}
@@ -311,6 +311,13 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 	return [
 	
 		
+			{
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true
+			}
+		
 	
 	];
 };
@@ -320,7 +327,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 application.application.include.model.requirements.ChiFeatureDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			
@@ -330,7 +337,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 		fieldLabel: "author",
 		name: "author",
 		dataIndex: "author",
-		targetCweModelElementId: "ChiAuthors",
+		targetChiModelElementId: "ChiAuthors",
 		toolTip: "This feature's author's name and role in the project"
 	}) 
 	
@@ -343,7 +350,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 		fieldLabel: "proofreader",
 		name: "proofreader",
 		dataIndex: "proofreader",
-		targetCweModelElementId: "ChiAuthors",
+		targetChiModelElementId: "ChiAuthors",
 		toolTip: "This feature's revisor's name and role in the project"
 	}) 
 	
@@ -356,7 +363,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 		fieldLabel: "status",
 		name: "status",
 		dataIndex: "status",
-		targetCweModelElementId: "ChiFeatureStatus",
+		targetChiModelElementId: "ChiFeatureStatus",
 		toolTip: "This feature's status"
 	}) 
 	
@@ -474,12 +481,12 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 	
 	
 	
-		new chi.editor.control.AssociationsFieldSet({
+		new cwe.editor.control.AssociationsFieldSet({
 			items: [
 		
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "chiBusinessUseCase",
 			name : "chiBusinessUseCase",
@@ -493,7 +500,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 		, 
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "figure",
 			name : "figure",
@@ -507,7 +514,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 		, 
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "chiBusinessUseCaseCore",
 			name : "chiBusinessUseCaseCore",
@@ -527,7 +534,7 @@ application.application.include.model.requirements.ChiFeatureDescription.prototy
 		
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "package",
 			name : "package",

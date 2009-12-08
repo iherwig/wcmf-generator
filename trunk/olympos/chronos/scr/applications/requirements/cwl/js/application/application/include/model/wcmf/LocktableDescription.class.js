@@ -79,40 +79,40 @@ application.application.include.model.wcmf.LocktableDescription.prototype.getGri
 	
 		
 			{
-			    header : "objectid",
-			    dataIndex : "objectid",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "objectid",
+				dataIndex : "objectid",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "sessionid",
-			    dataIndex : "sessionid",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "since",
-			    dataIndex : "since",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "sessionid",
+				dataIndex : "sessionid",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "since",
+				dataIndex : "since",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
 	
 
 			}
@@ -136,7 +136,7 @@ application.application.include.model.wcmf.LocktableDescription.prototype.getLab
 application.application.include.model.wcmf.LocktableDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			
@@ -186,7 +186,7 @@ application.application.include.model.wcmf.LocktableDescription.prototype.getEdi
 	
 	
 	
-		new chi.editor.control.AssociationsFieldSet({
+		new cwe.editor.control.AssociationsFieldSet({
 			items: [
 		
 		
@@ -195,7 +195,7 @@ application.application.include.model.wcmf.LocktableDescription.prototype.getEdi
 		
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "userRDB",
 			name : "userRDB",

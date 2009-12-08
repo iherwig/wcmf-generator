@@ -207,12 +207,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 	
 		
 			{
-			    header : "activity",
-			    dataIndex : "activity",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "activity",
+				dataIndex : "activity",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -220,12 +220,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "activityDecision",
-			    dataIndex : "activityDecision",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "activityDecision",
+				dataIndex : "activityDecision",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -233,12 +233,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "activityFinal",
-			    dataIndex : "activityFinal",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "activityFinal",
+				dataIndex : "activityFinal",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -246,12 +246,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "activityInitial",
-			    dataIndex : "activityInitial",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "activityInitial",
+				dataIndex : "activityInitial",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -259,12 +259,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "activityReceive",
-			    dataIndex : "activityReceive",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "activityReceive",
+				dataIndex : "activityReceive",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -272,12 +272,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "activitySend",
-			    dataIndex : "activitySend",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "activitySend",
+				dataIndex : "activitySend",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -285,12 +285,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiBusinessPartner",
-			    dataIndex : "chiBusinessPartner",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiBusinessPartner",
+				dataIndex : "chiBusinessPartner",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -298,12 +298,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiBusinessPartnerActive",
-			    dataIndex : "chiBusinessPartnerActive",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiBusinessPartnerActive",
+				dataIndex : "chiBusinessPartnerActive",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -311,12 +311,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiBusinessPartnerPassive",
-			    dataIndex : "chiBusinessPartnerPassive",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiBusinessPartnerPassive",
+				dataIndex : "chiBusinessPartnerPassive",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -324,12 +324,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiBusinessProcess",
-			    dataIndex : "chiBusinessProcess",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiBusinessProcess",
+				dataIndex : "chiBusinessProcess",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -337,12 +337,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiBusinessUseCase",
-			    dataIndex : "chiBusinessUseCase",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiBusinessUseCase",
+				dataIndex : "chiBusinessUseCase",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -350,12 +350,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiBusinessUseCaseCore",
-			    dataIndex : "chiBusinessUseCaseCore",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiBusinessUseCaseCore",
+				dataIndex : "chiBusinessUseCaseCore",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -363,12 +363,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiController",
-			    dataIndex : "chiController",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiController",
+				dataIndex : "chiController",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -376,12 +376,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiFeature",
-			    dataIndex : "chiFeature",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiFeature",
+				dataIndex : "chiFeature",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -389,12 +389,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiGoal",
-			    dataIndex : "chiGoal",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiGoal",
+				dataIndex : "chiGoal",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -402,12 +402,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiIssue",
-			    dataIndex : "chiIssue",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiIssue",
+				dataIndex : "chiIssue",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -415,12 +415,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiNode",
-			    dataIndex : "chiNode",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiNode",
+				dataIndex : "chiNode",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -428,12 +428,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiRequirement",
-			    dataIndex : "chiRequirement",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiRequirement",
+				dataIndex : "chiRequirement",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -441,12 +441,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiSystem",
-			    dataIndex : "chiSystem",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiSystem",
+				dataIndex : "chiSystem",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -454,12 +454,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiValue",
-			    dataIndex : "chiValue",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiValue",
+				dataIndex : "chiValue",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -467,12 +467,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiView",
-			    dataIndex : "chiView",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiView",
+				dataIndex : "chiView",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -480,12 +480,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiWorker",
-			    dataIndex : "chiWorker",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiWorker",
+				dataIndex : "chiWorker",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -493,12 +493,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiWorkerExternal",
-			    dataIndex : "chiWorkerExternal",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiWorkerExternal",
+				dataIndex : "chiWorkerExternal",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -506,12 +506,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "chiWorkerInternal",
-			    dataIndex : "chiWorkerInternal",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "chiWorkerInternal",
+				dataIndex : "chiWorkerInternal",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -519,12 +519,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "operation",
-			    dataIndex : "operation",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "operation",
+				dataIndex : "operation",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -532,12 +532,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "diagram",
-			    dataIndex : "diagram",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "diagram",
+				dataIndex : "diagram",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -545,12 +545,12 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "activitySet",
-			    dataIndex : "activitySet",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "activitySet",
+				dataIndex : "activitySet",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -558,53 +558,53 @@ application.application.include.model.CounterDescription.prototype.getGridColumn
 			}
 		, 
 			{
-			    header : "created",
-			    dataIndex : "created",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "created",
+				dataIndex : "created",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "creator",
-			    dataIndex : "creator",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "lastEditor",
-			    dataIndex : "lastEditor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "creator",
+				dataIndex : "creator",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "modified",
-			    dataIndex : "modified",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "lastEditor",
+				dataIndex : "lastEditor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "modified",
+				dataIndex : "modified",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
 	
 
 			}
@@ -628,7 +628,7 @@ application.application.include.model.CounterDescription.prototype.getLabelColum
 application.application.include.model.CounterDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			

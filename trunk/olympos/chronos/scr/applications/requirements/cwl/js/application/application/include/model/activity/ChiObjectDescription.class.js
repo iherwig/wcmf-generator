@@ -173,12 +173,12 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 	
 		
 			{
-			    header : "objectStatus",
-			    dataIndex : "objectStatus",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "objectStatus",
+				dataIndex : "objectStatus",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -186,27 +186,27 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			}
 		, 
 			{
-			    header : "status",
-			    dataIndex : "status",
-			    width : 100,
-			    sortable : true,
-			    
-			    editor: 
+				header : "status",
+				dataIndex : "status",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiBaseStatus"
+				targetChiModelElementId: "ChiBaseStatus"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "alias",
-			    dataIndex : "alias",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "alias",
+				dataIndex : "alias",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -214,27 +214,27 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			}
 		, 
 			{
-			    header : "author",
-			    dataIndex : "author",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "author",
+				dataIndex : "author",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiAuthors"
+				targetChiModelElementId: "ChiAuthors"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "version",
-			    dataIndex : "version",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "version",
+				dataIndex : "version",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -242,12 +242,12 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			}
 		, 
 			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -255,66 +255,66 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 			}
 		, 
 			{
-			    header : "notes",
-			    dataIndex : "notes",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "notes",
+				dataIndex : "notes",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "created",
-			    dataIndex : "created",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "creator",
-			    dataIndex : "creator",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "created",
+				dataIndex : "created",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "lastEditor",
-			    dataIndex : "lastEditor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "modified",
-			    dataIndex : "modified",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "creator",
+				dataIndex : "creator",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "lastEditor",
+				dataIndex : "lastEditor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "modified",
+				dataIndex : "modified",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
 	
 
 			}
@@ -330,10 +330,17 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 	
 		
 			{
-			    header : "status",
-			    dataIndex : "status",
-			    width : 100,
-			    sortable : true
+				header : "status",
+				dataIndex : "status",
+				width : 100,
+				sortable : true
+			}
+		, 
+			{
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true
 			}
 		
 	
@@ -345,7 +352,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 application.application.include.model.activity.ChiObjectDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			
@@ -368,7 +375,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 		fieldLabel: "status",
 		name: "status",
 		dataIndex: "status",
-		targetCweModelElementId: "ChiBaseStatus",
+		targetChiModelElementId: "ChiBaseStatus",
 		toolTip: ""
 	}) 
 	
@@ -394,7 +401,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 		fieldLabel: "author",
 		name: "author",
 		dataIndex: "author",
-		targetCweModelElementId: "ChiAuthors",
+		targetChiModelElementId: "ChiAuthors",
 		toolTip: ""
 	}) 
 	
@@ -499,12 +506,12 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 	
 	
 	
-		new chi.editor.control.AssociationsFieldSet({
+		new cwe.editor.control.AssociationsFieldSet({
 			items: [
 		
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "productionRuleSet",
 			name : "productionRuleSet",
@@ -518,7 +525,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 		, 
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "figure",
 			name : "figure",
@@ -538,7 +545,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 		
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "activitySet",
 			name : "activitySet",
@@ -552,7 +559,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiNode",
 			name : "chiNode",
@@ -566,7 +573,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "package",
 			name : "package",
@@ -580,7 +587,7 @@ application.application.include.model.activity.ChiObjectDescription.prototype.ge
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiNodeManyToMany",
 			name : "chiNodeManyToMany",

@@ -218,42 +218,42 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 	
 		
 			{
-			    header : "primaryActor",
-			    dataIndex : "primaryActor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "primaryActor",
+				dataIndex : "primaryActor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive"
+				targetChiModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "otherActors",
-			    dataIndex : "otherActors",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "otherActors",
+				dataIndex : "otherActors",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive"
+				targetChiModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "goalInContext",
-			    dataIndex : "goalInContext",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "goalInContext",
+				dataIndex : "goalInContext",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -261,12 +261,12 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "scope",
-			    dataIndex : "scope",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "scope",
+				dataIndex : "scope",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -274,12 +274,12 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "level",
-			    dataIndex : "level",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "level",
+				dataIndex : "level",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -287,12 +287,12 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "stakeholders",
-			    dataIndex : "stakeholders",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "stakeholders",
+				dataIndex : "stakeholders",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -300,12 +300,12 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "precondition",
-			    dataIndex : "precondition",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "precondition",
+				dataIndex : "precondition",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -313,12 +313,12 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "trigger",
-			    dataIndex : "trigger",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "trigger",
+				dataIndex : "trigger",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -326,12 +326,12 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "mainSuccessScenario",
-			    dataIndex : "mainSuccessScenario",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "mainSuccessScenario",
+				dataIndex : "mainSuccessScenario",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -339,12 +339,12 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "extensions",
-			    dataIndex : "extensions",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "extensions",
+				dataIndex : "extensions",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -352,27 +352,27 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "status",
-			    dataIndex : "status",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "status",
+				dataIndex : "status",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiBaseStatus"
+				targetChiModelElementId: "ChiBaseStatus"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "alias",
-			    dataIndex : "alias",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "alias",
+				dataIndex : "alias",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -380,27 +380,27 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "author",
-			    dataIndex : "author",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "author",
+				dataIndex : "author",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.ComboBox({
-				targetCweModelElementId: "ChiAuthors"
+				targetChiModelElementId: "ChiAuthors"
 			})
 	
 
 			}
 		, 
 			{
-			    header : "version",
-			    dataIndex : "version",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "version",
+				dataIndex : "version",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -408,12 +408,12 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "name",
-			    dataIndex : "name",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true,
+				
+				editor: 
 	
 			new chi.editor.control.TextField({})
 	
@@ -421,66 +421,66 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 			}
 		, 
 			{
-			    header : "notes",
-			    dataIndex : "notes",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "notes",
+				dataIndex : "notes",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "created",
-			    dataIndex : "created",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "creator",
-			    dataIndex : "creator",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "created",
+				dataIndex : "created",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
-	
-
-			}
-		, 
-			{
-			    header : "lastEditor",
-			    dataIndex : "lastEditor",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
-	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
 	
 
 			}
 		, 
 			{
-			    header : "modified",
-			    dataIndex : "modified",
-			    width : 100,
-			    sortable : true,
-			    hidden: true,
-			    editor: 
+				header : "creator",
+				dataIndex : "creator",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
 	
-			new chi.modelgrid.DummyField()
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "lastEditor",
+				dataIndex : "lastEditor",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
+	
+
+			}
+		, 
+			{
+				header : "modified",
+				dataIndex : "modified",
+				width : 100,
+				sortable : true,
+				hidden: true,
+				editor: 
+	
+			new cwe.modelgrid.DummyField()
 	
 
 			}
@@ -495,6 +495,13 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 	return [
 	
 		
+			{
+				header : "name",
+				dataIndex : "name",
+				width : 100,
+				sortable : true
+			}
+		
 	
 	];
 };
@@ -504,7 +511,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 application.application.include.model.UseCases.ChiBusinessUseCaseDescription.prototype.getEditorItems = function() {
 	return [
 	
-		new chi.editor.control.PropertiesFieldSet({
+		new cwe.editor.control.PropertiesFieldSet({
 			items: [
 		
 			
@@ -514,7 +521,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 		fieldLabel: "primaryActor",
 		name: "primaryActor",
 		dataIndex: "primaryActor",
-		targetCweModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive",
+		targetChiModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive",
 		toolTip: "the main actor of this use case"
 	}) 
 	
@@ -527,7 +534,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 		fieldLabel: "otherActors",
 		name: "otherActors",
 		dataIndex: "otherActors",
-		targetCweModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive",
+		targetChiModelElementId: "ChiWorkerExternal|ChiWorkerInternal|ChiWorker|ChiBusinessPartner|ChiBusinessPartnerActive|ChiBusinessPartnerPassive",
 		toolTip: "The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable."
 	}) 
 	
@@ -644,7 +651,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 		fieldLabel: "status",
 		name: "status",
 		dataIndex: "status",
-		targetCweModelElementId: "ChiBaseStatus",
+		targetChiModelElementId: "ChiBaseStatus",
 		toolTip: ""
 	}) 
 	
@@ -670,7 +677,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 		fieldLabel: "author",
 		name: "author",
 		dataIndex: "author",
-		targetCweModelElementId: "ChiAuthors",
+		targetChiModelElementId: "ChiAuthors",
 		toolTip: ""
 	}) 
 	
@@ -775,12 +782,12 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 	
 	
 	
-		new chi.editor.control.AssociationsFieldSet({
+		new cwe.editor.control.AssociationsFieldSet({
 			items: [
 		
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "activitySet",
 			name : "activitySet",
@@ -794,7 +801,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 		, 
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "chiController",
 			name : "chiController",
@@ -808,7 +815,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 		, 
 			
 	
-		new chi.editor.control.MultipleAssociate( {
+		new cwe.editor.control.MultipleAssociate( {
 	
 			fieldLabel : "figure",
 			name : "figure",
@@ -828,7 +835,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 		
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiBusinessProcess",
 			name : "chiBusinessProcess",
@@ -842,7 +849,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "chiFeature",
 			name : "chiFeature",
@@ -856,7 +863,7 @@ application.application.include.model.UseCases.ChiBusinessUseCaseDescription.pro
 		, 
 			
 	
-		new chi.editor.control.SingleAssociate( {
+		new cwe.editor.control.SingleAssociate( {
 	
 			fieldLabel : "package",
 			name : "package",
