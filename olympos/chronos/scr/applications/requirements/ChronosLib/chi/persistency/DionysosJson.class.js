@@ -52,7 +52,7 @@ chi.persistency.DionysosJson.prototype.jsonRequest = function(params, successHan
 		}
 	};
 	
-	Ext.Ajax.request(request);
+	return Ext.Ajax.request(request);
 }
 
 chi.persistency.DionysosJson.prototype.getSid = function() {
@@ -104,8 +104,12 @@ chi.persistency.DionysosJson.prototype.readObject = function(data) {
 	return result;
 }
 
+chi.persistency.DionysosJson.prototype.cancelRequest = function(transactionId) {
+	Ext.Ajax.abort(transactionId);
+}
+
 chi.persistency.DionysosJson.prototype.login = function(user, password, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "login",
 	    user : user,
 	    password : password
@@ -123,7 +127,7 @@ chi.persistency.DionysosJson.prototype.loginRecordHandler = function(handler, op
 }
 
 chi.persistency.DionysosJson.prototype.logout = function(successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		action : "logout"
 	}, successHandler, errorHandler, this.logoutRecordHandler);
 }
@@ -133,7 +137,7 @@ chi.persistency.DionysosJson.prototype.logoutRecordHandler = function(handler, o
 }
 
 chi.persistency.DionysosJson.prototype.list = function(chiModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "list",
 	    className : chiModelElementId,
 	    limit : limit,
@@ -166,7 +170,7 @@ chi.persistency.DionysosJson.prototype.createListRecords = function(data) {
 }
 
 chi.persistency.DionysosJson.prototype.read = function(oid, depth, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "read",
 	    oid : oid,
 	    depth : depth
@@ -184,7 +188,7 @@ chi.persistency.DionysosJson.prototype.readRecordHandler = function(handler, opt
 chi.persistency.DionysosJson.prototype.update = function(oid, attributes, successHandler, errorHandler) {
 	attributes = this.convertUpdateFormats(attributes);
 	
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "update",
 	    oid : oid,
 	    attributes : attributes
@@ -211,7 +215,7 @@ chi.persistency.DionysosJson.prototype.updateRecordHandler = function(handler, o
 }
 
 chi.persistency.DionysosJson.prototype.create = function(chiModelElementId, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "create",
 	    className : chiModelElementId
 	}, successHandler, errorHandler, this.createRecordHandler);
@@ -225,7 +229,7 @@ chi.persistency.DionysosJson.prototype.createRecordHandler = function(handler, o
 }
 
 chi.persistency.DionysosJson.prototype.destroy = function(oid, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "delete",
 	    oid : oid
 	}, successHandler, errorHandler, this.destroyRecordHandler);
@@ -238,7 +242,7 @@ chi.persistency.DionysosJson.prototype.destroyRecordHandler = function(handler, 
 }
 
 chi.persistency.DionysosJson.prototype.associate = function(sourceOid, targetOid, role, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "associate",
 	    sourceOid : sourceOid,
 	    targetOid : targetOid,
@@ -255,7 +259,7 @@ chi.persistency.DionysosJson.prototype.associateRecordHandler = function(handler
 }
 
 chi.persistency.DionysosJson.prototype.disassociate = function(sourceOid, targetOid, role, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "disassociate",
 	    sourcOid : sourceOid,
 	    targetOid : targetOid,
@@ -272,7 +276,7 @@ chi.persistency.DionysosJson.prototype.disassociateRecordHandler = function(hand
 }
 
 chi.persistency.DionysosJson.prototype.log = function(type, message, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "log",
 	    type : type,
 	    message : message
@@ -398,7 +402,7 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 		return data.resultSet[actionName];
 	}
 
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "executeActionSet",
 	    actionSet : data
 	}, function(data) {
@@ -418,7 +422,7 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 }
 
 chi.persistency.DionysosJson.prototype.createChild = function(parentOid, childRole, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 	    action : "createChild",
 	    parentOid : parentOid,
 	    childRole: childRole,
