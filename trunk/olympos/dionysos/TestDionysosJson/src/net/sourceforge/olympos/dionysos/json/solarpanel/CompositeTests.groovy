@@ -270,7 +270,7 @@ public class CompositeTests extends DionysosTest {
 	
 	
 	@Test
-	public void compositeAssociationTestThroughCreateChildWithMaxMulInfAnotherChild() {
+	public void compositeAssociationTest2ThroughCreateChildWithMaxMulInf() {
 		ensureLogin()
 
 		request(
@@ -309,7 +309,7 @@ public class CompositeTests extends DionysosTest {
 	}
 	
 	@Test
-	public void compositeAssociationTestThroughCreateChildWithMaxMulInfAnotherChildReadVerify() {
+	public void compositeAssociationTest2ThroughCreateChildWithMaxMulInfReadVerify() {
 		ensureLogin()
 
 		request(
