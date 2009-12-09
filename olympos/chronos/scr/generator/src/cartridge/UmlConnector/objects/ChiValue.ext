@@ -50,6 +50,7 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	//(new cwm::ChiValue).set
 	let un = new cwm::ChiValue : (
+		info("Converting ChiValue " + c.name) ->
 		un.setId(c.getId()) ->
 		
 		c.^default != null ? un.setDefault((String) c.^default) : Void ->

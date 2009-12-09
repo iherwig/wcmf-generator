@@ -9,11 +9,11 @@ String asClassName(uml::Activity this):
 ;
 
 String asResultName(uml::Activity this):
-	this.name.normalizeClassName() + "Result"
+	this.getLastNode().outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).first().getGrailsTypeName()
 ;
 
 String asRequestName(uml::Activity this):
-	this.name.normalizeClassName() + "Request"
+	this.getFirstNode().incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).first().getGrailsTypeName()
 ;
 
 String asMainMethodName(uml::Activity this):
@@ -36,6 +36,10 @@ List[uml::DataStoreNode] getOutputVariables(uml::Activity this):
 
 uml::ActivityNode getFirstNode(uml::Activity this):
 	this.getInitialNode().outgoing.typeSelect(uml::ControlFlow).target.first()
+;
+
+uml::ActivityNode getLastNode(uml::Activity this):
+	this.node.typeSelect(uml::FinalNode).first().incoming.typeSelect(uml::ControlFlow).source.first()
 ;
 
 List[uml::ActivityNode] getMethodNodes(uml::Activity this):
@@ -61,7 +65,7 @@ String getSourceVariableName(uml::DataStoreNode this):
 	this.incoming.size > 0 ? (
 		this.incoming.first().source.asResultName() + "." + this.asVariableName()
 	) : (
-		this.activity.asRequestName() + "." + this.asVariableName()
+		"request." + this.asVariableName()
 	)
 ;
 
@@ -96,7 +100,7 @@ List[uml::ActivityEdge] getNextEdges(uml::ActivityNode this):
 		.addAll(this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow))
 ;
 
-List[uml::ControlFlow] getFlowStates(uml::DecisionNode this):
+List[uml::ActivityEdge] getFlowStates(uml::DecisionNode this):
 	this.getNextEdges()
 ;
 

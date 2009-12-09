@@ -4,6 +4,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::nameNormalizer»
 
 «EXTENSION cartridge::ChiCmf::extensions::ChiNode»
 «EXTENSION cartridge::ChiCmf::extensions::util»
@@ -11,6 +12,7 @@
 
 «DEFINE root FOR uml::Model»
 	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(ChiNode).select(e|!e.isManyToMany() && !e.isLibraryClass())»
+	«EXPAND domainEnum FOREACH this.allOwnedElements().typeSelect(uml::Enumeration)»
 «ENDDEFINE»
 
 «REM»For the time being, all package references are commented.«ENDREM»
@@ -30,10 +32,14 @@ package «fullQualifiedPackage»
 
 	«EXPAND Import FOR this-»
 «ENDREM»
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * «this.getComment("\n * ")»
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 «REM» avoiding abstract bug in Grails«IF this.isAbstract»abstract «ENDIF-»«ENDREM-»
 class «name-» 
 «IF !this.superClass.select(e|!e.isLibraryClass()).isEmpty» extends «this.superClass.first().name»«ENDIF»
@@ -74,22 +80,25 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «ENDDEFINE»
 
 «DEFINE MappedBy FOR ChiNode-»
-«LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()) AS relatives-»
+«LET {}
+	.addAll(this.getNotAbstractNavigableParentNodes())
+	.addAll(this.getNotAbstractNavigableChildNodes())
+	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNotAbstractNavigableParentNodes())
+	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNotAbstractNavigableChildNodes())
+	AS relatives-»
 «IF relatives.size > 0-»
-	/*
 	static mappedBy = [
 «FOREACH relatives AS relative SEPARATOR ","-»
 		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»"
 «ENDFOREACH-»
 	]
-	*/
 «ENDIF-»
 «ENDLET-»
 «ENDDEFINE»
 
 «DEFINE Mapping FOR ChiNode-»
 	static mapping = {
-			tablePerHierarchy false
+		tablePerHierarchy false
 «FOREACH this.getNotAbstractNavigableChildNodes() AS child-»
 «LET child.getRoleName().toFirstLower().sanitizeType() AS name-»
 «IF child.aggregation == AggregationKind::composite-»
@@ -109,6 +118,10 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()).select(e|e.association.isOneToOneAssociation()) AS others-»
 «IF others.size > 0»
 «FOREACH others AS other-»
+	/**
+	 * «other.getComment("\n	 * ")»
+	 */
+	@XmlElement
 	«other.type.name.sanitizeType()» «other.getRoleName().toFirstLower().sanitizeType()»
 «ENDFOREACH-»
 «ENDIF-»
@@ -126,7 +139,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «IF parents.size > 0-»
 	static belongsTo = [
 	«FOREACH parents AS parent SEPARATOR ","-»
-		«parent.getRoleName().toFirstLower().sanitizeType()»: «parent.type.name»
+		«parent.getRoleName().toFirstLower()»: «parent.type.name.sanitizeType()»
 	«ENDFOREACH-»
 	]
 «ENDIF-»
@@ -137,9 +150,14 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «DEFINE OneToManyChildren FOR ChiNode-»
 «LET this.getNotAbstractNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
 «IF children.size > 0»
+«FOREACH children AS child-»
+	@XmlElement
+	List<«child.type.name.sanitizeType()»> «child.getRoleName().toFirstLower()»
+«ENDFOREACH-»
+
 	static hasMany = [
 «FOREACH children AS child SEPARATOR ","-»
-		«child.getRoleName().toFirstLower().sanitizeType()»: «child.type.name»
+		«child.getRoleName().toFirstLower()»: «child.type.name.sanitizeType()»
 «ENDFOREACH-»
 	]
 «ENDIF-»
@@ -158,12 +176,12 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	«FOREACH constraintAttributes AS c-»
 		«LET {
 			c.hasRestrictionsMatch() ? "matches: \"" + c.getTaggedValue("Chronos::ChiValue", "restrictions_match") + "\"" : null,
-			c.isNullable() ? "nullable: true" : "nullable: true", /*TODO: temporary reset, second one should be false*/
+			c.type.name.sanitizeType() != "String" ? (c.isNullable()? "nullable: true" : "nullable: true" /*TODO: temporary reset, second one should be false*/) : null,
 			c.association != null && c.lowerBound() > 0 ? "minSize: " + c.lowerBound() : null,
 			c.association != null && c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
 		}.select(e|e != null)
 		AS constraints»
-			«c.getPropertyName().sanitizeType()»(
+			«c.getPropertyName()»(
 				«FOREACH constraints AS constraint SEPARATOR ", "»«constraint»«ENDFOREACH»
 			)
 		«ENDLET-»
@@ -178,6 +196,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	/**
 	 * «this.getComment("\n	 * ")»
 	 */
+	@XmlElement
 	«this.type.name.sanitizeType()»«IF this.isMultivalued()»[]«ENDIF» «name»«IF !this.^default.isNullOrEmpty()» = «this.type.getValuePrefix()»«this.^default»«this.type.getValuePostfix()»«ENDIF»
 	
 «ENDDEFINE»
@@ -193,4 +212,21 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 					
 		«ENDPROTECT»
 	} 
+«ENDDEFINE»
+
+«DEFINE domainEnum FOR uml::Enumeration»
+«info("Generating enumeration " + this.name)»
+	«FILE this.name +".groovy"-»
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlElement;
+
+/**
+ * «this.getComment("\n * ")»
+ */
+@XmlAccessorType(XmlAccessType.FIELD)
+enum «name-» {
+	«FOREACH this.ownedLiteral.select(e|e == this.ownedLiteral.select(f|f.name.normalizeMemberName() == e.name.normalizeMemberName()).first()) AS currLiteral SEPARATOR ",\n"»«currLiteral.name.normalizeMemberName()»«ENDFOREACH»
+}
+	«ENDFILE»
 «ENDDEFINE»

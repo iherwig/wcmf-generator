@@ -16,9 +16,7 @@ Void addDefaults(uml::Model this, uml::Profile profile) :
 	info("--------------------------") ->
 	info("Apply Chronos profile to "+this.name) ->
 	this.applyProfile(profile) ->
-	this.allOwnedElements().typeSelect(ChiNode).select(e|e.superClass.isEmpty).addNodeSuperClass() ->
-	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
-		postProcessNodes(ApplicationPackageAbsolute(this)) ->
+	this.doTransformations() ->
 	info("--------------------------") ->
 	info("M2M End") ->
 	info("--------------------------") ->
@@ -31,13 +29,20 @@ Void addDefaults(uml::Model this) :
 	info("--------------------------") ->
 	info("Apply Chronos profile to "+this.name) ->
 	this.applyProfile(ProfileFile()) ->
-	this.allOwnedElements().typeSelect(ChiNode).select(e|e.superClass.isEmpty).addNodeSuperClass() ->
-	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
-		postProcessNodes(ApplicationPackageAbsolute(this)) ->
+	this.doTransformations() ->
 	info("--------------------------") ->
 	info("M2M End") ->
 	info("--------------------------") ->
 	this
+;
+
+Void doTransformations(uml::Model this):
+	this.allOwnedElements().typeSelect(ChiNode).select(e|e.superClass.isEmpty).addNodeSuperClass() ->
+	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.association == null).addStereotype() ->
+	this.allOwnedElements().typeSelect(uml::Association).select(e|e.memberEnd.forAll(f|f.isNavigable() == false)).addNavigability() ->
+	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
+		postProcessNodes(ApplicationPackageAbsolute(this)) ->
+	this.allOwnedElements().typeSelect(ChiNode).renameProperties()
 ;
 
 /**
@@ -57,4 +62,53 @@ Void addNodeSuperClass(ChiNode this) :
 		generalization.setSpecific(this)
 	) :
 		Void
+;
+
+Void addStereotype(uml::Property this):
+	info("Adding Stereotype ChiValue to " + this.name) ->
+	this.applyStereotype("Chronos::ChiValue")
+;
+
+Void addNavigability(uml::Association this):
+	this.memberEnd.setIsNavigable(true)
+;
+
+Void renameProperties(uml::Model this):
+	let ends = this.allOwnedElements().typeSelect(uml::Association).memberEnd:
+	let doubleEnds = ends.select(e|ends.select(f|e.name == f.name).size >= 2):
+	
+	doubleEnds.renameUnique(doubleEnds, 0)
+//	this.allOwnedElements().typeSelect(Chronos::ChiNode).renameProperties()
+;
+
+Void renameProperties(Chronos::ChiNode this):
+	let ends = this.getAssociations().memberEnd:
+	let doubleEnds = ends.select(e|ends.select(f|e.name == f.name).size >= 2):
+	
+	doubleEnds.renameUnique(doubleEnds, 0)
+;
+
+Void renameUnique(uml::Property this, Collection[uml::Property] otherProperties, int counter):
+	!this.name.isNullOrEmpty() ? (
+		let postfix = otherProperties.sortBy(e|e.name.replaceAll(".*?([0-9]+)$", "$1").asInteger()).last().name.replaceAll(".*?([0-9]+)$", "$1").asInteger():
+		(postfix != null) && (postfix > counter) ? (
+			info("Resetting counter to postfix " + postfix) ->
+			this.renameUnique(otherProperties, postfix)
+		) : (
+			Void
+		)
+		->
+
+		info("Old name: " + this.name) ->
+		otherProperties.select(e|e.name == this.name).size > 1 ? (
+			this.setName(this.name.replaceFirst("[0-9]*$", (counter).toString()))
+			->
+			this.renameUnique(otherProperties, counter + 1)
+		) : (
+			Void
+		) ->
+		info("New name: " + this.name)
+	) : (
+		Void
+	)
 ;

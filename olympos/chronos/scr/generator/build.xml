@@ -9,8 +9,10 @@
 	</path>
 
 	<target name="clean">
-		<delete dir="${build.dir}" verbose="false" failonerror="false"/>
-		<delete dir="${redist.dir}" verbose="false" failonerror="false"/>
+		<delete includeemptydirs="true" verbose="false" failonerror="false">
+			<fileset dir="${build.dir}" includes="**/*" />
+			<fileset dir="${redist.dir}" includes="**/*" />
+		</delete>
 	</target>
 
 	<target name="build-diagram-exporter" depends="clean">

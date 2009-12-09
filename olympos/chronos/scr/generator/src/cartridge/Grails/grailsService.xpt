@@ -29,7 +29,11 @@ class «this.asClassName()» {
 		
 		«this.asResultName()» result = new «this.asResultName()»()
 		
-		«EXPAND nodeCall FOR this.getFirstNode()»
+		«LET this.getFirstNode() AS firstNode»
+			«IF firstNode != null»
+				«EXPAND nodeCall FOR this.getFirstNode()»
+			«ENDIF»
+		«ENDLET»
 		
 		return result
 	}
