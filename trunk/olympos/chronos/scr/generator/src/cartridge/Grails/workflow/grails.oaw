@@ -14,10 +14,14 @@
 	<bean id="mmUml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
 
 	<!-- read profile as model -->
-	<component class="oaw.emf.XmiReader">
+	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
+		<modelUrl value='${chronosProfileUri}'/>
+		<outputSlot value="chronosProfileModel"/>
+	</component>
+	<!--component class="oaw.emf.XmiReader">
 		<modelFile value="${chronosProfileUri}" />
 		<outputSlot value="chronosProfileModel" />
-	</component>
+	</component-->
 
 	<!-- read source model -->
 	<component class="oaw.emf.XmiReader">
@@ -75,6 +79,23 @@
 		<outputSlot value="transformedModel"/>
 	</component>
 		
+	<component id="renameProperties" class="oaw.xtend.XtendComponent">
+
+		<!-- Global variables used by the transformation -->
+		<globalVarDef name="ModelFile" value="'${sourceModelFile}'"/>
+		<globalVarDef name="ProfileFile" value="'${chronosProfileUri}'"/>
+		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
+		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+
+		<metaModel idRef="mmUml2"/>
+		<metaModel idRef="mmChronos"/>
+		<invoke value="cartridge::ChiCmf::extensions::m2m::renameProperties(sourceModel)"/>
+
+		<outputSlot value="transformedModel"/>
+	</component>
+
 	<!-- Check constraints after model 2 model transformation -->
 	<if cond="${doCheck}">
 		<component class="oaw.check.CheckComponent">

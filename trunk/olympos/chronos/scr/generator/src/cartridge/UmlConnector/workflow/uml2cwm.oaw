@@ -21,6 +21,16 @@
 			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
 		</metaModel>
 		<metaModel idRef="cwm" /> 
+		<invoke value="${basePath}/cartridge/UmlConnector/uml2cwm::applyStereotypes(umlModel)" />
+		<globalVarDef name="basePath" value="'${basePath}'" />
+	</component>
+
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel id="uml2" class="oaw.uml2.UML2MetaModel" />
+		<metaModel id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
+			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
+		</metaModel>
+		<metaModel idRef="cwm" /> 
 		<invoke value="${basePath}/cartridge/UmlConnector/uml2cwm::createCwmModel('Imported Model', umlModel)" />
 		<outputSlot value="cwmModel" />
 		<globalVarDef name="basePath" value="'${basePath}'" />

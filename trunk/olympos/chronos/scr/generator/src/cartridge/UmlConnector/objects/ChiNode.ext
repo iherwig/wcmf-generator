@@ -74,8 +74,9 @@ Void transferValues(cwm::ChiNode c, uml::Model um):
 
 cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 	let un = new cwm::ChiNode : (
-		un.chiValue.addAll(c.ownedAttribute.typeSelect(Chronos::ChiValue).convertToCwm()) ->
-		un.operation.addAll(c.ownedOperation.convertToCwm()) ->
+		let attributes = c.attribute.typeSelect(Chronos::ChiValue):
+		un.chiValue.addAll(((List[Chronos::ChiValue]) attributes).convertToCwm()) ->
+		un.operation.addAll(c.getOperations().convertToCwm()) ->
 	
 		un.setId(c.getId()) ->
 		un.setTableName((String) c.getTaggedValue("Chronos::ChiNode", "table_name")) ->
@@ -103,7 +104,8 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 
 		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild())
 		 ->
-		un.manyToMany.addAll(((List[uml::Class]) c.getSubClasses()).convertToMany("generalization", "ChiNodeTarget")) ->
+		
+		un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization", "ChiNodeTarget")) ->
 		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type == c)
 			.select(e|e.aggregation == uml::AggregationKind::none && 
 				(e.getOtherEnd().aggregation != uml::AggregationKind::none || (e.association.memberEnd.get(0) == e))

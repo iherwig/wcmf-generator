@@ -50,7 +50,7 @@ String getRoleName(uml::Property this) :
  * Get the subclasses of a class
  */
 List[uml::Class] getSubClasses(uml::Class this) : 
-	this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|e.getGenerals().contains(this));
+	this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|uml::Class.isInstance(e) && e.getGenerals().contains(this));
 
 
 /**
