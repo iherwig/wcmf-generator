@@ -40,6 +40,10 @@ chi.persistency.Persistency.prototype.processErrorHandler = function(errorHandle
 	}
 }
 
+chi.persistency.Persistency.prototype.cancelRequest = function(transactionId) {
+	throw "Method chi.persistency.Persistency.cancelRequest not implemented by current persistency adapter.";
+}
+
 chi.persistency.Persistency.prototype.login = function(user, password, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.login not implemented by current persistency adapter.";
 }

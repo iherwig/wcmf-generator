@@ -150,8 +150,12 @@ chi.persistency.WcmfJson.prototype.createReferences = function(prefix, list, dat
 	return data;
 }
 
+chi.persistency.WcmfJson.prototype.cancelRequest = function(transactionId) {
+	Ext.Ajax.abort(transactionId);
+}
+
 chi.persistency.WcmfJson.prototype.login = function(user, password, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "dologin",
 		login : user,
 		password : password
@@ -167,7 +171,7 @@ chi.persistency.WcmfJson.prototype.loginRecordHandler = function(handler, option
 }
 
 chi.persistency.WcmfJson.prototype.logout = function(successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "logout"
 	}, successHandler, errorHandler, this.logoutRecordHandler);
 }
@@ -177,7 +181,7 @@ chi.persistency.WcmfJson.prototype.logoutRecordHandler = function(handler, optio
 }
 
 chi.persistency.WcmfJson.prototype.list = function(chiModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "list",
 		type : chiModelElementId,
 		limit : limit,
@@ -211,7 +215,7 @@ chi.persistency.WcmfJson.prototype.createListRecords = function(data) {
 }
 
 chi.persistency.WcmfJson.prototype.load = function(oid, depth, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "display",
 		oid : oid,
 		depth : depth,
@@ -290,7 +294,7 @@ chi.persistency.WcmfJson.prototype.save = function(oid, values, successHandler, 
 		}
 	}
 	
-	this.jsonRequest(data, successHandler, errorHandler, this.saveRecordHandler);
+	return this.jsonRequest(data, successHandler, errorHandler, this.saveRecordHandler);
 }
 
 chi.persistency.WcmfJson.prototype.saveRecordHandler = function(handler, options, data) {
@@ -309,7 +313,7 @@ chi.persistency.WcmfJson.prototype.create = function(chiModelElementId, values, 
 	// FIXME: Workaround for immediately saving values
 	var self = this;
 	
-	this.jsonRequest(data, function(innerData) {
+	return this.jsonRequest(data, function(innerData) {
 		self.save(innerData.newOid, values, function() {
 			self.processSuccessHandler(successHandler, innerData);
 		}, errorHandler);
@@ -324,7 +328,7 @@ chi.persistency.WcmfJson.prototype.createRecordHandler = function(handler, optio
 }
 
 chi.persistency.WcmfJson.prototype.destroy = function(oid, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "delete",
 		deleteoids : oid
 	}, successHandler, errorHandler, this.destroyRecordHandler);
@@ -337,7 +341,7 @@ chi.persistency.WcmfJson.prototype.destroyRecordHandler = function(handler, opti
 }
 
 chi.persistency.WcmfJson.prototype.associate = function(parentOid, childOid, role, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "associate",
 		oid : parentOid,
 		associateoids : childOid,
@@ -355,7 +359,7 @@ chi.persistency.WcmfJson.prototype.associateRecordHandler = function(handler, op
 }
 
 chi.persistency.WcmfJson.prototype.disassociate = function(parentOid, childOid, role, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "disassociate",
 		oid : parentOid,
 		associateoids : childOid,
@@ -372,7 +376,7 @@ chi.persistency.WcmfJson.prototype.disassociateRecordHandler = function(handler,
 }
 
 chi.persistency.WcmfJson.prototype.lock = function(oid, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "lock",
 		oid : oid
 	}, successHandler, errorHandler, this.lockRecordHandler);
@@ -385,7 +389,7 @@ chi.persistency.WcmfJson.prototype.lockRecordHandler = function(handler, options
 }
 
 chi.persistency.WcmfJson.prototype.unlock = function(oid, successHandler, errorHandler) {
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "unlock",
 		oid : oid
 	}, successHandler, errorHandler, this.unlockRecordHandler);
@@ -400,7 +404,7 @@ chi.persistency.WcmfJson.prototype.unlockRecordHandler = function(handler, optio
 chi.persistency.WcmfJson.prototype.log = function(logtype, message, successHandler, errorHandler) {
 	var self = this;
 	
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		usr_action : "log",
 		logtype : logtype,
 		msg : message
@@ -610,7 +614,7 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 		return data.data[actionName];
 	}
 
-	this.jsonRequest( {
+	return this.jsonRequest( {
 		controller : "TerminateController",
 		usr_action : "multipleAction",
 		request_format : "JSON",
