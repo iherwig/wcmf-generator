@@ -44,6 +44,14 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		this.objectPerPage = 25;
 		
 		/**
+		 * Delay for loading the preview, if a row is selected.
+		 * 
+		 * @private
+		 * @type int (milliseconds)
+		 */
+		this.previewDelay = 500;
+		
+		/**
 		 * The currently displayed associate button, if any.
 		 * 
 		 * @private
@@ -132,6 +140,10 @@ cwe.modelgrid.ModelGrid = Ext.extend(Ext.grid.GridPanel, {
 		        listeners : {
 			        "selectionchange" : function(selModel) {
 				        self.updateAssociateButton();
+				        var record = selModel.getSelected();
+				        if (record) {
+					        self.loadPreview.defer(self.previewDelay, self, [record]);
+				        }
 			        }
 		        }
 		    }),
@@ -225,6 +237,26 @@ cwe.modelgrid.ModelGrid.prototype.deleteSelected = function() {
 		});
 	}
 };
+
+/**
+ * Load a preview for the given record.
+ * 
+ * <p>
+ * Handler to selecting a row. Called after previewDelay time.
+ * </p>
+ * 
+ * @param {chi.model.Record}
+ *            record The record to display.
+ */
+cwe.modelgrid.ModelGrid.prototype.loadPreview = function(record) {
+	if (!record) {
+		return;
+	}
+	var selRecord = this.getSelectionModel().getSelected();
+	if (selRecord && selRecord.getOid() == record.getOid()) {
+		this.editors.updatePreview(record.getOid(), record.getLabel());
+	}
+}
 
 /**
  * Opens an editor of the selected object.

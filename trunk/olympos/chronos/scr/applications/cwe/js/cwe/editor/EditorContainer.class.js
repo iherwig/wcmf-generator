@@ -34,16 +34,24 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 		 */
 		this.editors = new Ext.util.MixedCollection();
 		
+		/**
+		 * The preview panel, if defined for this.modelDescription.getId().
+		 * 
+		 * @private
+		 * @type cwe.view.View
+		 */
+		this.preview = null;
+		
 		Ext.apply(this, {
 			region: "center",
 			xtype: "tabpanel",
-			enableTabScroll: true
+			enableTabScroll: true,
+			activeTab: 0
 		});
 		
 		cwe.editor.EditorContainer.superclass.initComponent.apply(this, arguments);
 		
 		var self = this;
-		
 		this.on("remove", function(tabPanel, tab) {
 			self.tabClose(tabPanel, tab);
 		});
@@ -51,6 +59,14 @@ cwe.editor.EditorContainer = Ext.extend(Ext.TabPanel, {
 			container.ownerCt.ownerCt.setActiveTab(container.ownerCt);
 		});
 		
+		// check if we have a view for the ModelDescription id
+		this.preview = cwe.view.ViewContainer.getInstance().createView(this.modelDescription.getId());
+		if (this.preview) {
+			this.add(this.preview.createContentPanel({
+				title: chi.Dict.translate("Preview"),
+				closable: false
+			}));
+		}
 	}
 });
 
@@ -120,3 +136,17 @@ cwe.editor.EditorContainer.prototype.removeEditor = function(oid) {
 	var editor = this.editors.removeKey(oid);
 	this.remove(editor);
 };
+
+/**
+ * Updates the preview with the object in the selected row.
+ * 
+ * @param {cwe.modelgrid.AssociateButton}
+ *            button The button to add.
+ * @private
+ */
+cwe.editor.EditorContainer.prototype.updatePreview = function(oid, label) {
+	if (this.preview) {
+		this.preview.loadFromOid(oid);
+	}
+};
+
