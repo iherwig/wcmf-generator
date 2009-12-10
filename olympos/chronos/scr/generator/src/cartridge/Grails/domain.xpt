@@ -177,8 +177,8 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 		«LET {
 			c.hasRestrictionsMatch() ? "matches: \"" + c.getTaggedValue("Chronos::ChiValue", "restrictions_match") + "\"" : null,
 			c.type.name.sanitizeType() != "String" ? (c.isNullable()? "nullable: true" : "nullable: true" /*TODO: temporary reset, second one should be false*/) : null,
-			c.association != null && c.lowerBound() > 0 ? "minSize: " + c.lowerBound() : null,
-			c.association != null && c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
+			c.lowerBound() > 0 ? "minSize: " + c.lowerBound() : null,
+			c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
 		}.select(e|e != null)
 		AS constraints»
 			«c.getPropertyName()»(
@@ -196,12 +196,13 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	/**
 	 * «this.getComment("\n	 * ")»
 	 */
-	@XmlElement
+	@XmlElement«IF this.lowerBound() > 0»(required = true)«ENDIF»
 	«this.type.name.sanitizeType()»«IF this.isMultivalued()»[]«ENDIF» «name»«IF !this.^default.isNullOrEmpty()» = «this.type.getValuePrefix()»«this.^default»«this.type.getValuePostfix()»«ENDIF»
 	
 «ENDDEFINE»
 
-«REM» simple method with protected region «ENDREM»
+«REM» simple method wiequired=true)
+th protected region «ENDREM»
 «DEFINE Method(Class clazz) FOR Operation-»
 	/**
 	 * «this.getComment("\n	 * ")»
