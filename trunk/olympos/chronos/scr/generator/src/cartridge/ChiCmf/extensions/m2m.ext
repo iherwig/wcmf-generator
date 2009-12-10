@@ -41,8 +41,7 @@ Void doTransformations(uml::Model this):
 	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.association == null).addStereotype() ->
 	this.allOwnedElements().typeSelect(uml::Association).select(e|e.memberEnd.forAll(f|f.isNavigable() == false)).addNavigability() ->
 	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
-		postProcessNodes(ApplicationPackageAbsolute(this)) ->
-	this.allOwnedElements().typeSelect(ChiNode).renameProperties()
+		postProcessNodes(ApplicationPackageAbsolute(this))
 ;
 
 /**
@@ -90,7 +89,7 @@ Void renameProperties(Chronos::ChiNode this):
 
 Void renameUnique(uml::Property this, Collection[uml::Property] otherProperties, int counter):
 	!this.name.isNullOrEmpty() ? (
-		let postfix = otherProperties.sortBy(e|e.name.replaceAll(".*?([0-9]+)$", "$1").asInteger()).last().name.replaceAll(".*?([0-9]+)$", "$1").asInteger():
+		let postfix = otherProperties.sortBy(e|e.name.getTrailingInt()).last().name.getTrailingInt():
 		(postfix != null) && (postfix > counter) ? (
 			info("Resetting counter to postfix " + postfix) ->
 			this.renameUnique(otherProperties, postfix)
@@ -110,5 +109,19 @@ Void renameUnique(uml::Property this, Collection[uml::Property] otherProperties,
 		info("New name: " + this.name)
 	) : (
 		Void
+	)
+;
+
+String getTrailingNumber(String this):
+	this.replaceAll(".*?([0-9]+)$", "$1")
+;
+
+int getTrailingInt(String this):
+	let numberString = this.getTrailingNumber():
+	
+	!numberString.isNullOrEmpty() ? (
+		numberString.asInteger()
+	) : (
+		null
 	)
 ;
