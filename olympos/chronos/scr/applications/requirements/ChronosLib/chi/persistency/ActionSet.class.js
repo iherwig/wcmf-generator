@@ -157,7 +157,7 @@ chi.persistency.ActionSet.prototype.commit = function(successHandler, errorHandl
 	this.savedSuccessHandler = successHandler;
 	this.savedErrorHandler = errorHandler;
 	
-	chi.persistency.Persistency.getInstance().executeActionSet(this);
+	return chi.persistency.Persistency.getInstance().executeActionSet(this);
 }
 
 chi.persistency.ActionSet.prototype.getNextId = function() {
