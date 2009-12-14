@@ -121,6 +121,13 @@
 		<targetPath value="${targetDirCwe}/.."/>
 	</component>
 
+	<component class="net.sourceforge.olympos.oaw.workflow.AntRunner">
+		<Param name="folderName" value="${targetDir}/cwe/js/cwe"/>
+		<Param name="fileName" value="Config.js"/>
+		<Param name="url" value="${dionysosURL}"/>
+		<antFile value="${basePath}/cartridge/Chi/workflow/build.xml"/>
+	</component>
+
 	<!-- Expand the model into the templates -->
 	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="true">
 		<fileEncoding value="utf-8"/>
