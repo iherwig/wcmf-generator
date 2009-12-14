@@ -32,14 +32,18 @@ package «fullQualifiedPackage»
 
 	«EXPAND Import FOR this-»
 «ENDREM»
+package com.eenergy.meregio.domain
+
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * «this.getComment("\n * ")»
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(namespace="http://somthing.different")
 «REM» avoiding abstract bug in Grails«IF this.isAbstract»abstract «ENDIF-»«ENDREM-»
 class «name-» 
 «IF !this.superClass.select(e|!e.isLibraryClass()).isEmpty» extends «this.superClass.first().name»«ENDIF»
@@ -152,7 +156,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «IF children.size > 0»
 «FOREACH children AS child-»
 	@XmlElement
-	List<«child.type.name.sanitizeType()»> «child.getRoleName().toFirstLower()»
+	Set<«child.type.name.sanitizeType()»> «child.getRoleName().toFirstLower()»
 «ENDFOREACH-»
 
 	static hasMany = [
@@ -218,14 +222,18 @@ th protected region «ENDREM»
 «DEFINE domainEnum FOR uml::Enumeration»
 «info("Generating enumeration " + this.name)»
 	«FILE this.name +".groovy"-»
+package com.eenergy.meregio.domain
+
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * «this.getComment("\n * ")»
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(namespace="http://somthing.different")
 enum «name-» {
 	«FOREACH this.ownedLiteral.select(e|e == this.ownedLiteral.select(f|f.name.normalizeMemberName() == e.name.normalizeMemberName()).first()) AS currLiteral SEPARATOR ",\n"»«currLiteral.name.normalizeMemberName()»«ENDFOREACH»
 }
