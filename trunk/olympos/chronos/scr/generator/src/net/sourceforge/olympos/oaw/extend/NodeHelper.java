@@ -240,7 +240,8 @@ public class NodeHelper {
 									+ " owner="
 									+ prop.getOwner().getClass()
 											.getSimpleName());
-							if (prop.getType() != clazz) {
+							if (prop.getType() != clazz
+									|| UMLHelper.isSelfReferencing(a)) {
 								AggregationKind aggregationKind = prop
 										.getAggregation();
 								if (aggregationKind != null) {
