@@ -65,7 +65,8 @@ Void addNodeSuperClass(ChiNode this) :
 
 Void addStereotype(uml::Property this):
 	info("Adding Stereotype ChiValue to " + this.name) ->
-	this.applyStereotype("Chronos::ChiValue")
+	this.applyStereotype("Chronos::ChiValue") ->
+	this.setTaggedValue("Chronos::ChiValue", "is_editable", Chronos::boolean::^true)
 ;
 
 Void addNavigability(uml::Association this):
@@ -98,7 +99,7 @@ Void renameUnique(uml::Property this, Collection[uml::Property] otherProperties,
 		)
 		->
 
-		info("Old name: " + this.name) ->
+		info("Old name: " + this.name + ", owning class: " + this.owner.name) ->
 		otherProperties.select(e|e.name == this.name).size > 1 ? (
 			this.setName(this.name.replaceFirst("[0-9]*$", (counter).toString()))
 			->
@@ -106,7 +107,7 @@ Void renameUnique(uml::Property this, Collection[uml::Property] otherProperties,
 		) : (
 			Void
 		) ->
-		info("New name: " + this.name)
+		info("New name: " + this.name + ", owning class: " + this.owner.name)
 	) : (
 		Void
 	)
