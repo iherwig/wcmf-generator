@@ -79,22 +79,33 @@ public class PostProcessor {
 				
 				org.eclipse.uml2.uml.Class subClass = subClassIter.next();
 				// don't add twice
-				if (!NodeHelper.isParent(clazz, subClass, true)) {
-					Logger.info("-> (1) draw new parent association from " + clazz.getName() + " to "
-							+ subClass.getQualifiedName());
+				if (!NodeHelper.isParent(clazz, subClass, true))
+				{
 					Property thisEnd = parent.getOtherEnd();
+
 					// define unique rolenames for children and copy parent rolenames if defined (a rolename is always attached to the opposite property)
 					String thisEndName = !Util.isEmpty(thisEnd.getName()) ? thisEnd.getName()+subClass.getName() : "";
 					String parentName = !Util.isEmpty(parent.getName()) ? parent.getName() : "";
 					Logger.debug("Rolenames: "+thisEndName+", "+parentName);
+
 					// create association
 					Association a = clazz.createAssociation(parent.isNavigable(), parent.getAggregation(), parentName, parent.getLower(), parent.getUpper(), 
 							subClass, thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
-                    // copy tagged values from the original association 
-					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), parent.getAssociation(), 
-							new String[] { "base_Association", "fk_name" });
-					Generator.setGeneratorAdded(a);
-					clonedAssociationsToOriginalPropertyMap.put(a, parent);
+
+					if (!UMLHelper.isAssociationDuplicated(clazz, a)) {
+						Logger.info("-> (1) draw new parent association from " + clazz.getName() + " to "
+								+ subClass.getQualifiedName());
+
+						// copy tagged values from the original association 
+						UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), parent.getAssociation(), 
+								new String[] { "base_Association", "fk_name" });
+						Generator.setGeneratorAdded(a);
+						clonedAssociationsToOriginalPropertyMap.put(a, parent);
+					}
+					else {
+						// immediatly remove the association if it was duplicated
+						a.destroy();						
+					}
 					NodeHelper.clearParentCache(clazz);
 				}
 			}
@@ -112,22 +123,33 @@ public class PostProcessor {
 				
 				Property superParent = superParentIter.next();
 				// don't add twice
-				if (!NodeHelper.isParent(clazz, (org.eclipse.uml2.uml.Class)superParent.getType(), true)) {
-					Logger.info("-> (2) draw new parent association from " + clazz.getName() + " to "
-							+ superParent.getType().getQualifiedName());
+				if (!NodeHelper.isParent(clazz, (org.eclipse.uml2.uml.Class)superParent.getType(), true))
+				{
 					Property thisEnd = superParent.getOtherEnd();
+
 					// define unique rolenames for children and copy parent rolenames if defined (a rolename is always attached to the opposite property)
 					String thisEndName = !Util.isEmpty(thisEnd.getName()) ? thisEnd.getName()+clazz.getName() : "";
 					String parentName = !Util.isEmpty(superParent.getName()) ? superParent.getName() : "";
 					Logger.debug("Rolenames: "+thisEndName+", "+parentName);
+					
 					// create association
                     Association a = clazz.createAssociation(superParent.isNavigable(), superParent.getAggregation(), parentName, superParent.getLower(), superParent.getUpper(), 
                     		superParent.getType(), thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
-                    // copy tagged values from the original association 
-					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), superParent.getAssociation(), 
-							new String[] { "base_Association" });
-					Generator.setGeneratorAdded(a);
-					clonedAssociationsToOriginalPropertyMap.put(a, superParent);
+
+                    if (!UMLHelper.isAssociationDuplicated(clazz, a)) {
+						Logger.info("-> (2) draw new parent association from " + clazz.getName() + " to "
+								+ superParent.getType().getQualifiedName());
+
+						// copy tagged values from the original association 
+						UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), superParent.getAssociation(), 
+								new String[] { "base_Association" });
+						Generator.setGeneratorAdded(a);
+						clonedAssociationsToOriginalPropertyMap.put(a, superParent);
+					}
+					else {
+						// immediatly remove the association if it was duplicated
+						a.destroy();						
+					}
 					NodeHelper.clearParentCache(clazz);
 				}
 			}
@@ -147,22 +169,33 @@ public class PostProcessor {
 				
 				org.eclipse.uml2.uml.Class subClass = subClassIter.next();
 				// don't add twice
-				if (!NodeHelper.isChild(clazz, subClass, true)) {
-					Logger.info("-> (3) draw new child association from " + clazz.getName() + " to "
-							+ subClass.getQualifiedName());
+				if (!NodeHelper.isChild(clazz, subClass, true))
+				{
 					Property thisEnd = child.getOtherEnd();
+
 					// define unique rolenames for children and copy parent rolenames if defined (a rolename is always attached to the opposite property)
 					String thisEndName = !Util.isEmpty(thisEnd.getName()) ? thisEnd.getName() : "";
 					String childName = !Util.isEmpty(child.getName()) ? child.getName()+subClass.getName() : "";
 					Logger.debug("Rolenames: "+thisEndName+", "+childName);
+
 					// create association
 					Association a = clazz.createAssociation(child.isNavigable(), child.getAggregation(), childName, child.getLower(), child.getUpper(), 
 							subClass, thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
-                    // copy tagged values from the original association 
-					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), child.getAssociation(), 
-							new String[] { "base_Association" });
-					Generator.setGeneratorAdded(a);
-					clonedAssociationsToOriginalPropertyMap.put(a, child);
+					
+					if (UMLHelper.isAssociationDuplicated(clazz, a)) {
+						Logger.info("-> (3) draw new child association from " + clazz.getName() + " to "
+								+ subClass.getQualifiedName());
+
+						// copy tagged values from the original association 
+						UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), child.getAssociation(), 
+								new String[] { "base_Association" });
+						Generator.setGeneratorAdded(a);
+						clonedAssociationsToOriginalPropertyMap.put(a, child);
+					}
+					else {
+						// immediatly remove the association if it was duplicated
+						a.destroy();						
+					}
 					NodeHelper.clearChildCache(clazz);
 				}
 			}
@@ -183,22 +216,33 @@ public class PostProcessor {
 				
 				Property superChild = superChildIter.next();
 				// don't add twice
-				if (!NodeHelper.isChild(clazz, (org.eclipse.uml2.uml.Class)superChild.getType(), true)) {
-					Logger.info("-> (4) draw new child association from " + clazz.getName() + " to "
-							+ superChild.getType().getQualifiedName());
+				if (!NodeHelper.isChild(clazz, (org.eclipse.uml2.uml.Class)superChild.getType(), true))
+				{
 					Property thisEnd = superChild.getOtherEnd();
+
 					// define unique rolenames for children and copy parent rolenames if defined (a rolename is always attached to the opposite property)
 					String thisEndName = !Util.isEmpty(thisEnd.getName()) ? thisEnd.getName() : "";
 					String childName = !Util.isEmpty(superChild.getName()) ? superChild.getName()+superChild.getType().getName() : "";
 					Logger.debug("Rolenames: "+thisEndName+", "+childName);
+
 					// create association					
                     Association a = clazz.createAssociation(superChild.isNavigable(), superChild.getAggregation(), childName, superChild.getLower(), superChild.getUpper(), 
                     		superChild.getType(), thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
-                    // copy tagged values from the original association 
-					UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), superChild.getAssociation(), 
-							new String[] { "base_Association", "fk_name" });
-					Generator.setGeneratorAdded(a);
-					clonedAssociationsToOriginalPropertyMap.put(a, superChild);
+					
+                    if (UMLHelper.isAssociationDuplicated(clazz, a)) {
+						Logger.info("-> (4) draw new child association from " + clazz.getName() + " to "
+								+ superChild.getType().getQualifiedName());
+
+						// copy tagged values from the original association 
+						UMLHelper.copyTaggedValues(a, Constants.FQName(Constants.STEREOTYPE_CHI_ASSOCIATION), superChild.getAssociation(), 
+								new String[] { "base_Association", "fk_name" });
+						Generator.setGeneratorAdded(a);
+						clonedAssociationsToOriginalPropertyMap.put(a, superChild);
+					}
+					else {
+						// immediatly remove the association if it was duplicated
+						a.destroy();						
+					}
 					NodeHelper.clearChildCache(clazz);
 				}
 			}

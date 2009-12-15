@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.UniqueEList;
+import org.eclipse.uml2.uml.AggregationKind;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Comment;
@@ -17,6 +18,7 @@ import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
+import org.eclipse.uml2.uml.Type;
 
 /**
  * This class provides uml helper functions to be used in XTend files
@@ -319,5 +321,53 @@ public class UMLHelper {
 	public static boolean isSelfReferencing(Association association) {
 		EList<Property> ends = association.getMemberEnds();
 		return ends.get(0).getType().equals(ends.get(1).getType());
+	}
+
+	/**
+	 * Check if an association already exists at a class. Two associations are supposed
+	 * to be the same, if the aggregationKinds, role names and end types are the same.
+	 * @param association
+	 * @return boolean
+	 */
+	public static boolean isAssociationDuplicated(org.eclipse.uml2.uml.Class clazz, Association association) {
+		int count = 0;
+		EList<Property> associationEnds = association.getMemberEnds();
+		for (Iterator<Association> aIter = clazz.getAssociations().iterator(); aIter.hasNext();) {
+			Association a = aIter.next();
+			EList<Property> aEnds = a.getMemberEnds();
+			// check properties in both directions
+			if ((isSameProperty(aEnds.get(0), associationEnds.get(0)) && 
+					isSameProperty(aEnds.get(1), associationEnds.get(1))) 
+				|| 
+				(isSameProperty(aEnds.get(0), associationEnds.get(1)) && 
+					isSameProperty(aEnds.get(1), associationEnds.get(0)))) {
+				count++;
+			}
+		}
+		return count == 2;
+	}
+	
+	/**
+	 * Check if two association ends have the same aggregationKind, role name and type.
+	 * @param a
+	 * @param b
+	 * @return boolean
+	 */
+	public static boolean isSameProperty(Property a, Property b) {
+		if (a.getAggregation().equals(b.getAggregation()) &&
+			a.getName().equals(b.getName()) &&
+			a.getType().equals(b.getType())) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static String propertyToString(Property p) {
+		return "[kind:"+p.getAggregation().getName()+", name:"+p.getName()+", type:"+p.getType().getQualifiedName()+"]";
+	}
+	
+	public static String associationToString(Association a) {
+		EList<Property> aEnds = a.getMemberEnds();
+		return "[association:"+propertyToString(aEnds.get(0))+propertyToString(aEnds.get(1))+"]";
 	}
 }
