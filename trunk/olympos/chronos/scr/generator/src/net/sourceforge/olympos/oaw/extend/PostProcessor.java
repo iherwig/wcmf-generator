@@ -182,7 +182,7 @@ public class PostProcessor {
 					Association a = clazz.createAssociation(child.isNavigable(), child.getAggregation(), childName, child.getLower(), child.getUpper(), 
 							subClass, thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
 					
-					if (UMLHelper.isAssociationDuplicated(clazz, a)) {
+					if (!UMLHelper.isAssociationDuplicated(clazz, a)) {
 						Logger.info("-> (3) draw new child association from " + clazz.getName() + " to "
 								+ subClass.getQualifiedName());
 
@@ -229,7 +229,7 @@ public class PostProcessor {
                     Association a = clazz.createAssociation(superChild.isNavigable(), superChild.getAggregation(), childName, superChild.getLower(), superChild.getUpper(), 
                     		superChild.getType(), thisEnd.isNavigable(), thisEnd.getAggregation(), thisEndName, thisEnd.getLower(), thisEnd.getUpper());
 					
-                    if (UMLHelper.isAssociationDuplicated(clazz, a)) {
+                    if (!UMLHelper.isAssociationDuplicated(clazz, a)) {
 						Logger.info("-> (4) draw new child association from " + clazz.getName() + " to "
 								+ superChild.getType().getQualifiedName());
 
