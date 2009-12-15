@@ -1,21 +1,21 @@
 import uml;
 
 context uml::Package ERROR
-	"Package name may not be NULL or empty: Parent Package " + this.owner.name:
+	"Package name may not be NULL or empty: Parent Package " + ((uml::Package) this.owner).name:
 	this.name != null && ((String) this.name).length > 0
 ;
 
 context uml::Class ERROR
-	"Class name may not be NULL or empty: Package " + this.owner.name:
+	"Class name may not be NULL or empty: Package " + ((uml::Package) this.owner).name:
 	this.name != null && ((String) this.name).length > 0
 ;
 
 context uml::Property if this.owner.metaType == uml::Class && this.association == null ERROR
-	"Class attribute name may not be NULL or empty: Class " + this.owner.name:
+	"Class attribute name may not be NULL or empty: Class " + ((uml::Class) this.owner).name:
 	this.name != null && ((String) this.name).length > 0
 ;
 
 context uml::Operation if this.owner.metaType == uml::Class ERROR
-	"Class operation name may not be NULL or empty: Class " + this.owner.name:
+	"Class operation name may not be NULL or empty: Class " + ((uml::Class) this.owner).name:
 	this.name != null && ((String) this.name).length > 0
 ;

@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * «this.getComment("\n * ")»
@@ -76,7 +77,7 @@ class «name-»
 	«REM»«ENDLET»«ENDREM»
 «ENDDEFINE»	
 
-«DEFINE Import FOR uml::Class-»
+«DEFINE Import FOR Chronos::ChiNode-»
 	«FOREACH this.getImportedClasses() AS import-»
 import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«import.getNearestPackage().getPackageName()».«ENDIF-»
 «import.name»;
@@ -84,17 +85,18 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «ENDDEFINE»
 
 «DEFINE MappedBy FOR ChiNode-»
-«LET {}
+«LET ((List[uml::Property]) {}
 	.addAll(this.getNotAbstractNavigableParentNodes())
 	.addAll(this.getNotAbstractNavigableChildNodes())
 	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNotAbstractNavigableParentNodes())
 	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNotAbstractNavigableChildNodes())
+	).select(e|e.isNavigable() && e.getOtherEnd().isNavigable())
 	AS relatives-»
 «IF relatives.size > 0-»
 	static mappedBy = [
-«FOREACH relatives AS relative SEPARATOR ","-»
-		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»"
-«ENDFOREACH-»
+«FOREACH relatives AS relative SEPARATOR ","»
+		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»"«""-»
+«ENDFOREACH»
 	]
 «ENDIF-»
 «ENDLET-»
@@ -102,7 +104,8 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «DEFINE Mapping FOR ChiNode-»
 	static mapping = {
-		tablePerHierarchy false
+		//tablePerHierarchy false
+		tablePerSubclass true
 «FOREACH this.getNotAbstractNavigableChildNodes() AS child-»
 «LET child.getRoleName().toFirstLower().sanitizeType() AS name-»
 «IF child.aggregation == AggregationKind::composite-»
@@ -119,14 +122,14 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» simple reference «ENDREM»
 «DEFINE ReferenceProperties FOR ChiNode-»
-«LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()).select(e|e.association.isOneToOneAssociation()) AS others-»
+«LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()).select(e|((uml::Property) e).association.isOneToOneAssociation()) AS others-»
 «IF others.size > 0»
 «FOREACH others AS other-»
 	/**
-	 * «other.getComment("\n	 * ")»
+	 * «((uml::Property) other).getComment("\n	 * ")»
 	 */
 	@XmlElement
-	«other.type.name.sanitizeType()» «other.getRoleName().toFirstLower().sanitizeType()»
+	«((uml::Property) other).type.name.sanitizeType()» «((uml::Property) other).getRoleName().toFirstLower().sanitizeType()»
 «ENDFOREACH-»
 «ENDIF-»
 «ENDLET-»
@@ -135,16 +138,21 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM»
 «DEFINE ManyToOneParents FOR ChiNode-»
 «LET {}
-	.addAll(this.getNotAbstractNavigableParentNodes().select(e|!e.association.isOneToOneAssociation()))
+	.addAll(this.getNotAbstractNavigableParentNodes()) //.select(e|!e.association.isOneToOneAssociation()))
 	.addAll(this.getNotAbstractNavigableChildNodes().select(e|
-		{}.addAll(e.type.getSuperClassesRecursive()).add(e.type).contains(this.getFirstManyToManyChild(e.type))
+		{}.addAll(((Chronos::ChiNode) e.type).getSuperClassesRecursive()).add(e.type).contains(this.getFirstManyToManyChild((Chronos::ChiNode) e.type))
 	))
  AS parents -»
 «IF parents.size > 0-»
+	«FOREACH parents AS parent»
+	@XmlTransient
+	«((uml::Property) parent).type.name.sanitizeType()» «((uml::Property) parent).getRoleName().toFirstLower()»
+	«ENDFOREACH»
+
 	static belongsTo = [
-	«FOREACH parents AS parent SEPARATOR ","-»
-		«parent.getRoleName().toFirstLower()»: «parent.type.name.sanitizeType()»
-	«ENDFOREACH-»
+	«FOREACH parents AS parent SEPARATOR ","»
+		«((uml::Property) parent).getRoleName().toFirstLower()»: «((uml::Property) parent).type.name.sanitizeType()-»
+	«ENDFOREACH»
 	]
 «ENDIF-»
 «ENDLET-»
@@ -160,9 +168,9 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «ENDFOREACH-»
 
 	static hasMany = [
-«FOREACH children AS child SEPARATOR ","-»
-		«child.getRoleName().toFirstLower()»: «child.type.name.sanitizeType()»
-«ENDFOREACH-»
+«FOREACH children AS child SEPARATOR ","»
+		«child.getRoleName().toFirstLower()»: «child.type.name.sanitizeType()-»
+«ENDFOREACH»
 	]
 «ENDIF-»
 «ENDLET-»
@@ -170,10 +178,10 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» fill constraints for attributes  «ENDREM»
 «DEFINE Constraints FOR ChiNode-»
-«LET {}
+«LET ((List[uml::Property]) {}
 	.addAll(this.getNotAbstractNavigableParentNodes())
 	.addAll(this.getNotAbstractNavigableChildNodes())
-	.addAll(this.getOwnChiAttributes())
+	.addAll(this.getOwnChiAttributes()))
  AS constraintAttributes-»
 «IF constraintAttributes.size > 0-»
 	static constraints = {
@@ -181,8 +189,8 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 		«LET {
 			c.hasRestrictionsMatch() ? "matches: \"" + c.getTaggedValue("Chronos::ChiValue", "restrictions_match") + "\"" : null,
 			c.type.name.sanitizeType() != "String" ? (c.isNullable()? "nullable: true" : "nullable: true" /*TODO: temporary reset, second one should be false*/) : null,
-			c.lowerBound() > 0 ? "minSize: " + c.lowerBound() : null,
-			c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
+			c.association != null && c.lowerBound() > 0 ? "minSize: " + c.lowerBound() : null,
+			c.association != null && c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
 		}.select(e|e != null)
 		AS constraints»
 			«c.getPropertyName()»(
