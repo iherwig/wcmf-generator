@@ -30,7 +30,7 @@ application.«this.getFullPackageName()».«this.name»Description = function() 
 	this.chiModelElementId = "«this.name»";
 	this.name = "«this.name»";
 	this.treeIconClass = "«this.name»TreeIcon16x16";
-	this.owningPackageId = "«this.owner.getChiPackageName()»";
+	this.owningPackageId = "«((uml::Package) this.owner).getChiPackageName()»";
 	
 	«EXPAND recordDefinition FOR this»
 	
