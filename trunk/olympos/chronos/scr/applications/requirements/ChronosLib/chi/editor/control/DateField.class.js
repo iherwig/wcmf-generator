@@ -24,9 +24,14 @@ chi.editor.control.DateField = function(config) {
 	
 	config = config || {};
 	
+	if (!config.altFormats) {
+		config.altFormats = "Y-m-d H:i:s";
+	}
+	if (!config.format) {
+		config.format = "Y-m-d";
+	}
+	
 	chi.editor.control.DateField.superclass.constructor.call(this, Ext.apply(this, {
-		altFormats: "Y-m-d H:i:s",
-		format: "Y-m-d"
 	}, config));
 	
 	this.toolTipText = config.toolTip;
