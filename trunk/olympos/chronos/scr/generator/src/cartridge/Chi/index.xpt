@@ -16,7 +16,7 @@
 	<head>
 «PROTECT CSTART "<!-- " CEND " -->" ID "index.html/Includes"»
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title id="title">Chronos Web Editor</title>
+		<title id="title">«ProjectName()»</title>
 		<link rel="shortcut icon" href="favicon.ico" /> 
 		<link rel="stylesheet" type="text/css" href="../ChronosLib/ext/resources/css/ext-all.css" />
 		<link rel="stylesheet" type="text/css" href="../ChronosLib/ext/ux/css/RowEditor.css" />
