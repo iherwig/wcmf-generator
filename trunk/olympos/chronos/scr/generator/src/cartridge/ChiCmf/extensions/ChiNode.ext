@@ -291,5 +291,9 @@ List[Chronos::ChiValue] getOwnChiAttributes(Chronos::ChiNode this):
 ;
 
 boolean isDisplayValue(Chronos::ChiValue this, Chronos::ChiNode node):
-	node.display_value.toLowerCase().contains(this.name.toLowerCase())
+	!node.display_value.isNullOrEmpty() ? (
+		node.display_value.toLowerCase().contains(this.name.toLowerCase())
+	) : (
+		false
+	)
 ;
