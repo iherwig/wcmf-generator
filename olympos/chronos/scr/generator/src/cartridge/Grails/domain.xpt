@@ -86,10 +86,10 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «DEFINE MappedBy FOR ChiNode-»
 «LET ((List[uml::Property]) {}
-	.addAll(this.getNotAbstractNavigableParentNodes())
-	.addAll(this.getNotAbstractNavigableChildNodes())
-	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNotAbstractNavigableParentNodes())
-	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNotAbstractNavigableChildNodes())
+	.addAll(this.getNavigableParentNodes())
+	.addAll(this.getNavigableChildNodes())
+	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNavigableParentNodes())
+	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNavigableChildNodes())
 	).select(e|e.isNavigable() && e.getOtherEnd().isNavigable())
 	AS relatives-»
 «IF relatives.size > 0-»
@@ -106,7 +106,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	static mapping = {
 		//tablePerHierarchy false
 		tablePerSubclass true
-«FOREACH this.getNotAbstractNavigableChildNodes() AS child-»
+«FOREACH this.getNavigableChildNodes() AS child-»
 «LET child.getRoleName().toFirstLower().sanitizeType() AS name-»
 «IF child.aggregation == AggregationKind::composite-»
 			«name»: "create,save-update"
@@ -122,7 +122,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» simple reference «ENDREM»
 «DEFINE ReferenceProperties FOR ChiNode-»
-«LET {}.addAll(this.getNotAbstractNavigableParentNodes()).addAll(this.getNotAbstractNavigableChildNodes()).select(e|((uml::Property) e).association.isOneToOneAssociation()) AS others-»
+«LET {}.addAll(this.getNavigableParentNodes()).addAll(this.getNavigableChildNodes()).select(e|((uml::Property) e).association.isOneToOneAssociation()) AS others-»
 «IF others.size > 0»
 «FOREACH others AS other-»
 	/**
@@ -138,8 +138,8 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM»
 «DEFINE ManyToOneParents FOR ChiNode-»
 «LET {}
-	.addAll(this.getNotAbstractNavigableParentNodes()) //.select(e|!e.association.isOneToOneAssociation()))
-	.addAll(this.getNotAbstractNavigableChildNodes().select(e|
+	.addAll(this.getNavigableParentNodes()) //.select(e|!e.association.isOneToOneAssociation()))
+	.addAll(this.getNavigableChildNodes().select(e|
 		{}.addAll(((Chronos::ChiNode) e.type).getSuperClassesRecursive()).add(e.type).contains(this.getFirstManyToManyChild((Chronos::ChiNode) e.type))
 	))
  AS parents -»
@@ -160,7 +160,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM»
 «DEFINE OneToManyChildren FOR ChiNode-»
-«LET this.getNotAbstractNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
+«LET this.getNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
 «IF children.size > 0»
 «FOREACH children AS child-»
 	@XmlElement
@@ -179,8 +179,8 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «REM» fill constraints for attributes  «ENDREM»
 «DEFINE Constraints FOR ChiNode-»
 «LET ((List[uml::Property]) {}
-	.addAll(this.getNotAbstractNavigableParentNodes())
-	.addAll(this.getNotAbstractNavigableChildNodes())
+	.addAll(this.getNavigableParentNodes())
+	.addAll(this.getNavigableChildNodes())
 	.addAll(this.getOwnChiAttributes()))
  AS constraintAttributes-»
 «IF constraintAttributes.size > 0-»
@@ -188,7 +188,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	«FOREACH constraintAttributes AS c-»
 		«LET {
 			c.hasRestrictionsMatch() ? "matches: \"" + c.getTaggedValue("Chronos::ChiValue", "restrictions_match") + "\"" : null,
-			c.type.name.sanitizeType() != "String" ? (c.isNullable()? "nullable: true" : "nullable: true" /*TODO: temporary reset, second one should be false*/) : null,
+			c.isNullable()? "nullable: true" : "nullable: true" /*TODO: temporary reset, second one should be false*/,
 			c.association != null && c.lowerBound() > 0 ? "minSize: " + c.lowerBound() : null,
 			c.association != null && c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
 		}.select(e|e != null)
