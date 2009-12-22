@@ -104,10 +104,10 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «DEFINE Mapping FOR ChiNode-»
 	static mapping = {
-		//tablePerHierarchy false
+		tablePerHierarchy false
 		tablePerSubclass true
 «FOREACH this.getNavigableChildNodes() AS child-»
-«LET child.getRoleName().toFirstLower().sanitizeType() AS name-»
+«LET child.getRoleName().toFirstLower() AS name-»
 «IF child.aggregation == AggregationKind::composite-»
 			«name»: "create,save-update"
 «ELSEIF child.aggregation == AggregationKind::shared-»
