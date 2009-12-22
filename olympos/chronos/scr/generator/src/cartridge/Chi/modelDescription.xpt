@@ -3,6 +3,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::nameNormalizer»
 
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 «EXTENSION cartridge::ChiCmf::extensions::naming»
@@ -157,17 +158,25 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 
 «DEFINE comboBox FOR Chronos::ChiValue»
 	«LET this.input_type.split(':').first().split('#').last() AS listType»
-		new chi.editor.control.«listType == "fix" ? "StaticComboBox" : "ComboBox"»({
-			«LET this.input_type.split(':').last() AS listDef»
-				«IF listType == "fix"»
-					data: [
-						«FOREACH listDef.split("\\|") AS currEntry SEPARATOR ", "»
-							[["«currEntry»"], ["«currEntry»"]]
-						«ENDFOREACH»
-					]
-				«ELSE»
-					targetChiModelElementId: "«listDef»"
-				«ENDIF»
+		«LET listType == "fix" || uml::Enumeration.isInstance(this.type) AS isFix»
+			new chi.editor.control.«isFix ? "StaticComboBox" : "ComboBox"»({
+				«LET this.input_type.split(':').last() AS listDef»
+					«IF uml::Enumeration.isInstance(this.type)»
+						data: [
+							«FOREACH ((uml::Enumeration) this.type).ownedLiteral AS currEntry SEPARATOR ", "»
+								["«currEntry.name.normalizeMemberName()»", "«currEntry.name»"]
+							«ENDFOREACH»
+						]
+					«ELSEIF listType == "fix"»
+						data: [
+							«FOREACH listDef.split("\\|") AS currEntry SEPARATOR ", "»
+								["«currEntry»", "«currEntry»"]
+							«ENDFOREACH»
+						]
+					«ELSE»
+						targetChiModelElementId: "«listDef»"
+					«ENDIF»
+				«ENDLET»
 			«ENDLET»
 	«ENDLET»
 «ENDDEFINE»
