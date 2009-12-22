@@ -147,12 +147,28 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 		«IF this.is_editable.boolString() == "false" || inputType == "HtmlEditor"-»
 			new cwe.modelgrid.DummyField()
 		«ELSEIF inputType == "ComboBox"-»
-			new chi.editor.control.«getComboBoxClass(this.input_type)»({
-				«getComboBoxConfig(this.input_type)»
+			«EXPAND comboBox FOR this»
 			})
 		«ELSE-»
 			new chi.editor.control.«inputType»({})
 		«ENDIF-»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE comboBox FOR Chronos::ChiValue»
+	«LET this.input_type.split(':').first().split('#').last() AS listType»
+		new chi.editor.control.«listType == "fix" ? "StaticComboBox" : "ComboBox"»({
+			«LET this.input_type.split(':').last() AS listDef»
+				«IF listType == "fix"»
+					data: [
+						«FOREACH listDef.split("\\|") AS currEntry SEPARATOR ", "»
+							[["«currEntry»"], ["«currEntry»"]]
+						«ENDFOREACH»
+					]
+				«ELSE»
+					targetChiModelElementId: "«listDef»"
+				«ENDIF»
+			«ENDLET»
 	«ENDLET»
 «ENDDEFINE»
 
@@ -197,17 +213,15 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 	«LET this.input_type.split("#").first().getExtJsInputType() AS inputType»
 		«IF this.is_editable.boolString() == "false"»
 			new chi.editor.control.DisplayField({
-		«ELSE»
-			«IF inputType == "ComboBox"-»
-		new chi.editor.control.«getComboBoxClass(this.input_type)»({
-			«ELSE-»
-		new chi.editor.control.«inputType»({
-	 		«ENDIF-»
+		«ELSEIF inputType == "ComboBox"-»
+			«EXPAND comboBox FOR this»
+			,
+		«ELSE-»
+			new chi.editor.control.«inputType»({
 	 	«ENDIF-»
 		fieldLabel: "«this.name»",
 		name: "«this.name»",
 		dataIndex: "«this.name»",
-		«IF inputType == "ComboBox"»«getComboBoxConfig(this.input_type)»,«ENDIF»
 		toolTip: "«this.getComment().sanitizeJsString()»"
 	}) 
 	«ENDLET»
