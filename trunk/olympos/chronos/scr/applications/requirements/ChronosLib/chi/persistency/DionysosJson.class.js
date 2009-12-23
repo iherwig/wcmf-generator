@@ -21,27 +21,29 @@ Ext.namespace("chi.persistency");
 chi.persistency.DionysosJson = function() {
 	this.baseUrl = chi.Config.getInstance().jsonUrl;
 	this.timeout = 180000;
-}
+};
 
 Ext.extend(chi.persistency.DionysosJson, chi.persistency.Persistency);
 
 chi.persistency.DionysosJson.prototype.jsonRequest = function(params, successHandler, errorHandler, getRecordHandler, requestParams) {
 	params.sid = this.getSid();
-	
+
 	var self = this;
-	
+
 	var request = requestParams || {};
-	
+
 	request.url = this.baseUrl;
 	request.method = "post";
 	request.localParams = params;
 	request.timeout = this.timeout;
-	request.headers = {'session_id': params.sid};
+	request.headers = {
+		'session_id' : params.sid
+	};
 	request.jsonData = Ext.util.JSON.encode(params);
 	request.callback = function(options, success, response) {
 		if (success) {
 			var data = Ext.util.JSON.decode(response.responseText);
-			
+
 			if (!data.errorCode) {
 				self.processSuccessHandler(successHandler, getRecordHandler.call(self, chi.persistency.DionysosJson.Handler.SUCCESS, options, data));
 			} else {
@@ -51,37 +53,37 @@ chi.persistency.DionysosJson.prototype.jsonRequest = function(params, successHan
 			self.processErrorHandler(errorHandler, getRecordHandler.call(self, chi.persistency.DionysosJson.Handler.ERROR_STATUS, options, data));
 		}
 	};
-	
+
 	return Ext.Ajax.request(request);
-}
+};
 
 chi.persistency.DionysosJson.prototype.getSid = function() {
 	if (!this.sid) {
 		this.sid = chi.Session.getInstance().getSid();
 	}
-	
+
 	return this.sid;
-}
+};
 
 chi.persistency.DionysosJson.prototype.readObject = function(data) {
 	var result = null;
-	
+
 	var chiModelElementId = data["className"];
 	var oid = data["oid"];
-	
+
 	if (!data.isReference) {
 		var values = {};
-		
+
 		for ( var attributeName in data.attributes) {
 			var attributeValue = data.attributes[attributeName];
-			
+
 			if (!(attributeValue instanceof Function)) {
 				if (Ext.isArray(attributeValue)) {
 					values[attributeName] = [];
-					
+
 					for ( var i = 0; i < attributeValue.length; i++) {
 						var currArrayEntry = attributeValue[i];
-						
+
 						if (Ext.isObject(currArrayEntry)) {
 							values[attributeName].push(this.readObject(currArrayEntry));
 						} else {
@@ -95,18 +97,18 @@ chi.persistency.DionysosJson.prototype.readObject = function(data) {
 				}
 			}
 		}
-		
+
 		result = chi.model.ModelDescriptionContainer.getInstance().getDescription(chiModelElementId).createInstance(oid, values);
 	} else {
 		result = new chi.model.ModelReference(oid);
 	}
-	
+
 	return result;
-}
+};
 
 chi.persistency.DionysosJson.prototype.cancelRequest = function(transactionId) {
 	Ext.Ajax.abort(transactionId);
-}
+};
 
 chi.persistency.DionysosJson.prototype.login = function(user, password, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -114,7 +116,7 @@ chi.persistency.DionysosJson.prototype.login = function(user, password, successH
 	    user : user,
 	    password : password
 	}, successHandler, errorHandler, this.loginRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.loginRecordHandler = function(handler, options, data) {
 	return {
@@ -124,17 +126,17 @@ chi.persistency.DionysosJson.prototype.loginRecordHandler = function(handler, op
 	    roles : data.roles,
 	    implementedPackages : data.implementedPackages
 	};
-}
+};
 
 chi.persistency.DionysosJson.prototype.logout = function(successHandler, errorHandler) {
 	return this.jsonRequest( {
 		action : "logout"
 	}, successHandler, errorHandler, this.logoutRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.logoutRecordHandler = function(handler, options, data) {
 	return {};
-}
+};
 
 chi.persistency.DionysosJson.prototype.list = function(chiModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -145,7 +147,7 @@ chi.persistency.DionysosJson.prototype.list = function(chiModelElementId, limit,
 	    sortFieldName : sortAttributeName,
 	    sortDirection : sortDirection
 	}, successHandler, errorHandler, this.listRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.listRecordHandler = function(handler, options, data) {
 	return {
@@ -157,17 +159,17 @@ chi.persistency.DionysosJson.prototype.listRecordHandler = function(handler, opt
 	    records : this.createListRecords(data.list),
 	    totalCount : data.totalCount
 	};
-}
+};
 
 chi.persistency.DionysosJson.prototype.createListRecords = function(data) {
 	var records = [];
-	
+
 	for ( var i = 0; i < data.length; i++) {
 		records.push(this.readObject(data[i]));
 	}
-	
+
 	return records;
-}
+};
 
 chi.persistency.DionysosJson.prototype.read = function(oid, depth, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -175,7 +177,7 @@ chi.persistency.DionysosJson.prototype.read = function(oid, depth, successHandle
 	    oid : oid,
 	    depth : depth
 	}, successHandler, errorHandler, this.readRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.readRecordHandler = function(handler, options, data) {
 	return {
@@ -183,63 +185,63 @@ chi.persistency.DionysosJson.prototype.readRecordHandler = function(handler, opt
 	    depth : options.localParams.depth,
 	    record : this.readObject(data.object)
 	};
-}
+};
 
 chi.persistency.DionysosJson.prototype.update = function(oid, attributes, successHandler, errorHandler) {
 	attributes = this.convertUpdateFormats(attributes);
-	
+
 	return this.jsonRequest( {
 	    action : "update",
 	    oid : oid,
 	    attributes : attributes
 	}, successHandler, errorHandler, this.updateRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.convertUpdateFormats = function(attributes) {
-	for (var key in attributes) {
+	for ( var key in attributes) {
 		var val = attributes[key];
-		
+
 		if (val instanceof Date) {
 			attributes[key] = val.format("Y-m-d H:i:s");
 		}
 	}
 
 	return attributes;
-}
+};
 
 chi.persistency.DionysosJson.prototype.updateRecordHandler = function(handler, options, data) {
 	return {
 	    oid : data.oid,
 	    attributes : options.localParams.attributes
 	};
-}
+};
 
 chi.persistency.DionysosJson.prototype.create = function(chiModelElementId, successHandler, errorHandler) {
 	return this.jsonRequest( {
 	    action : "create",
 	    className : chiModelElementId
 	}, successHandler, errorHandler, this.createRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.createRecordHandler = function(handler, options, data) {
 	return {
 	    chiModelElementId : options.localParams.className,
 	    oid : data.oid
 	};
-}
+};
 
 chi.persistency.DionysosJson.prototype.destroy = function(oid, successHandler, errorHandler) {
 	return this.jsonRequest( {
 	    action : "delete",
 	    oid : oid
 	}, successHandler, errorHandler, this.destroyRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.destroyRecordHandler = function(handler, options, data) {
 	return {
 		oid : data.oid
 	};
-}
+};
 
 chi.persistency.DionysosJson.prototype.associate = function(sourceOid, targetOid, role, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -248,7 +250,7 @@ chi.persistency.DionysosJson.prototype.associate = function(sourceOid, targetOid
 	    targetOid : targetOid,
 	    role : role
 	}, successHandler, errorHandler, this.associateRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.associateRecordHandler = function(handler, options, data) {
 	return {
@@ -256,7 +258,7 @@ chi.persistency.DionysosJson.prototype.associateRecordHandler = function(handler
 	    targetOid : data.targetOid,
 	    role : options.localParams.role
 	};
-}
+};
 
 chi.persistency.DionysosJson.prototype.disassociate = function(sourceOid, targetOid, role, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -265,7 +267,7 @@ chi.persistency.DionysosJson.prototype.disassociate = function(sourceOid, target
 	    targetOid : targetOid,
 	    role : role
 	}, successHandler, errorHandler, this.disassociateRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.disassociateRecordHandler = function(handler, options, data) {
 	return {
@@ -273,7 +275,7 @@ chi.persistency.DionysosJson.prototype.disassociateRecordHandler = function(hand
 	    targetOid : data.targetOid,
 	    role : options.localParams.role
 	};
-}
+};
 
 chi.persistency.DionysosJson.prototype.log = function(type, message, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -287,30 +289,57 @@ chi.persistency.DionysosJson.prototype.log = function(type, message, successHand
 			self.processErrorHandler(errorHandler, request, data);
 		}
 	}, this.logRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.logRecordHandler = function(handler, options, data) {
 	return {
 	    type : options.localParams.type,
 	    message : options.localParams.message
 	};
-}
+};
+
+chi.persistency.DionysosJson.prototype.search = function(query, chiModelElementId, limit, offset, sortByRelevance, sortAttributeName, sortDirection, successHandler, errorHandler) {
+	return this.jsonRequest( {
+	    action : "search",
+	    query : query,
+	    className : chiModelElementId,
+	    limit : limit,
+	    offset : offset,
+	    sortByRelevance : sortByRelevance,
+	    sortFieldName : sortAttributeName,
+	    sortDirection : sortDirection
+	}, successHandler, errorHandler, this.searchRecordHandler);
+};
+
+chi.persistency.DionysosJson.prototype.searchRecordHandler = function(handler, options, data) {
+	return {
+	    chiModelElementId : options.localParams.className,
+	    limit : options.localParams.limit,
+	    offset : options.localParams.offset,
+	    sortByRelevance : options.localParams.sortByRelevance,
+	    sortAttributeName : options.localParams.sortFieldName,
+	    sortDirection : options.localParams.sortDirection,
+	    records : this.createListRecords(data.list),
+	    totalCount : data.totalCount,
+	    searchData : data.searchData
+	};
+};
 
 chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 	var data = {};
 	var recordHandlers = {};
-	
+
 	var requests = actionSet.getRequests();
-	
+
 	var self = this;
-	
+
 	for ( var currActionName in requests) {
 		var currRequest = requests[currActionName];
-		
+
 		if (!(currRequest instanceof Function)) {
 			var jsonRequest = {};
 			var recordHandler;
-			
+
 			switch (currRequest.action) {
 				case "login":
 					jsonRequest.action = "login";
@@ -318,12 +347,12 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.password = currRequest.password;
 					recordHandler = this.loginRecordHandler;
 					break;
-				
+
 				case "logout":
 					jsonRequest.action = "logout";
 					recordHandler = this.logoutRecordHandler;
 					break;
-				
+
 				case "list":
 					jsonRequest.action = "list";
 					jsonRequest.className = currRequest.chiModelElementId;
@@ -333,41 +362,41 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.sortDirection = currRequest.sortDirection;
 					recordHandler = this.listRecordHandler;
 					break;
-				
+
 				case "read":
 					jsonRequest.action = "read";
 					jsonRequest.oid = currRequest.oid;
 					jsonRequest.depth = currRequest.depth;
 					recordHandler = this.readRecordHandler;
 					break;
-				
+
 				case "update":
 					jsonRequest.action = "update";
 					jsonRequest.oid = currRequest.oid;
 					jsonRequest.attributes = this.convertUpdateFormats(currRequest.attributes);
 					recordHandler = this.updateRecordHandler;
 					break;
-				
+
 				case "create":
 					jsonRequest.action = "create";
 					jsonRequest.className = currRequest.chiModelElementId;
 					recordHandler = this.createRecordHandler;
 					break;
-				
+
 				case "destroy":
 					jsonRequest.action = "delete";
 					jsonRequest.oid = currRequest.oid;
 					recordHandler = this.destroyRecordHandler;
 					break;
-				
+
 				case "associate":
 					jsonRequest.action = "associate";
 					jsonRequest.sourceOid = currRequest.sourceOid;
 					jsonRequest.targetOid = currRequest.targetOid;
 					jsonRequest.role = currRequest.role;
-					recordHandler = this.associateRecordHandler
+					recordHandler = this.associateRecordHandler;
 					break;
-				
+
 				case "disassociate":
 					jsonRequest.action = "disassociate";
 					jsonRequest.sourceOid = currRequest.sourceOid;
@@ -375,19 +404,31 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 					jsonRequest.role = currRequest.role;
 					recordHandler = this.disassociateRecordHandler;
 					break;
-				
+
 				case "log":
 					jsonRequest.action = "log";
 					jsonRequest.type = currRequest.type;
 					jsonRequest.message = currRequest.message;
 					recordHandler = this.logRecordHandler;
 					break;
-				
+
 				case "createChild":
 					jsonRequest.action = "createChild";
 					jsonRequest.parentOid = currRequest.parentOid;
 					jsonRequest.childRole = currRequest.childRole;
 					recordHandler = this.createChildRecordHandler;
+					break;
+
+				case "search":
+					jsonRequest.action = "search";
+					jsonRequest.query = currRequest.query;
+					jsonRequest.className = currRequest.chiModelElementId;
+					jsonRequest.limit = currRequest.limit;
+					jsonRequest.offset = currRequest.offset;
+					jsonRequest.sortByRelevance = currRequest.sortByRelevance;
+					jsonRequest.sortFieldName = currRequest.sortAttributeName;
+					jsonRequest.sortDirection = currRequest.sortDirection;
+					recordHandler = this.searchRecordHandler;
 					break;
 
 				default:
@@ -397,10 +438,10 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 			recordHandlers[currActionName] = recordHandler;
 		}
 	}
-	
+
 	var responseHandler = function(data, actionName) {
 		return data.resultSet[actionName];
-	}
+	};
 
 	return this.jsonRequest( {
 	    action : "executeActionSet",
@@ -414,31 +455,31 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 		return {
 		    request : options,
 		    data : data
-		}
+		};
 	}, {
 	    recordHandlers : recordHandlers,
 	    actionSet : actionSet
 	});
-}
+};
 
 chi.persistency.DionysosJson.prototype.createChild = function(parentOid, childRole, successHandler, errorHandler) {
 	return this.jsonRequest( {
 	    action : "createChild",
 	    parentOid : parentOid,
-	    childRole: childRole,
+	    childRole : childRole
 	}, successHandler, errorHandler, this.createChildRecordHandler);
-}
+};
 
 chi.persistency.DionysosJson.prototype.createChildRecordHandler = function(handler, options, data) {
 	return {
 	    parentOid : options.localParams.parentOid,
-	    childRole: options.localParams.childRole,
-	    childOid: data.childOid
+	    childRole : options.localParams.childRole,
+	    childOid : data.childOid
 	};
-}
+};
 
 chi.persistency.DionysosJson.Handler = {
     SUCCESS : 0,
     ERROR : 1,
     ERROR_STATUS : 2
-}
+};

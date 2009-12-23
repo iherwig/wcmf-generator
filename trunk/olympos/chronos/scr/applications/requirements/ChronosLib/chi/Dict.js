@@ -21,11 +21,11 @@ Ext.namespace("chi.Dict");
  */
 chi.Dict.translate = function(englishText) {
 	var selectedLang = chi.Session.getInstance().getLang();
-	
+
 	var params = chi.Dict.translate.arguments;
-	
+
 	var result = chi.Dict.insertParams(englishText, params);
-	
+
 	var entry = chi.Dict.voc[englishText];
 	if (entry) {
 		var translation = entry[selectedLang];
@@ -33,16 +33,16 @@ chi.Dict.translate = function(englishText) {
 			result = chi.Dict.insertParams(translation, params);
 		}
 	}
-	
+
 	return result;
-}
+};
 
 chi.Dict.insertParams = function(text, params) {
-	for(var i = 1; i < params.length; i++) {
+	for ( var i = 1; i < params.length; i++) {
 		var regExpStr = "\\$\\{" + i + "}";
 		var regExp = new RegExp(regExpStr, "g");
 		text = text.replace(regExp, params[i]);
 	}
-	
+
 	return text;
-}
+};

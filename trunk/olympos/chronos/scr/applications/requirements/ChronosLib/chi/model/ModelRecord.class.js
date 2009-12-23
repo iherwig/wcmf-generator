@@ -160,68 +160,72 @@ chi.model.ModelRecord.prototype.commit = function(actionSet) {
 			var currValue = changedFields[currField];
 			var currType = this.fields.get(currField).type;
 			
-			if (!(currValue instanceof Function)) {
-				if (!Ext.isArray(currValue) && currValue != null && !(currValue.isModelRecord)) {
-					foundField = true;
-					foundSimpleField = true;
-					
-					if (currType == "auto" || currType == "text") {
-						simpleFields[currField] = currValue;
-					} else if (currValue && (!currValue.trim || currValue.trim() != "")) {
-						switch (currType) {
-							case "date":
-								simpleFields[currField] = currValue.format("D M d H:i:s T Y");
-								break;
-							
-							case "float":
-								simpleFields[currField] = parseFloat(currValue);
-								break;
-							
-							case "int":
-								simpleFields[currField] = parseInt(currValue);
-								break;
-							
-							case "number":
-								simpleFields[currField] = Number(currValue);
-								break;
-							
-							case "bool":
-							case "boolean":
-								simpleFields[currField] = true || currValue;
-								break;
-							
-							default:
-								throw "Unkonwn record attribute type: " + currType;
+			if (currValue && currValue.commit instanceof Function) {
+				foundField = currValue.commit(self, actionSet) || foundField;
+			} else {
+				if (!(currValue instanceof Function)) {
+					if (!Ext.isArray(currValue) && currValue != null && !(currValue.isModelRecord)) {
+						foundField = true;
+						foundSimpleField = true;
+						
+						if (currType == "auto" || currType == "text") {
+							simpleFields[currField] = currValue;
+						} else if (currValue && (!currValue.trim || currValue.trim() != "")) {
+							switch (currType) {
+								case "date":
+									simpleFields[currField] = currValue.format("D M d H:i:s T Y");
+									break;
+								
+								case "float":
+									simpleFields[currField] = parseFloat(currValue);
+									break;
+								
+								case "int":
+									simpleFields[currField] = parseInt(currValue);
+									break;
+								
+								case "number":
+									simpleFields[currField] = Number(currValue);
+									break;
+								
+								case "bool":
+								case "boolean":
+									simpleFields[currField] = true || currValue;
+									break;
+								
+								default:
+									throw "Unkonwn record attribute type: " + currType;
+							}
 						}
-					}
-				} else {
-					var oldAssociates = this.modified[currField] || [];
-					if (!Ext.isArray(oldAssociates)) {
-						oldAssociates = [ oldAssociates ];
-					}
-					
-					currValue = currValue || [];					
-					if (!Ext.isArray(currValue)) {
-						currValue = [currValue];
-					}
-					
-					var toDisassociate = this.except(oldAssociates, currValue);
-					var toAssociate = this.except(currValue, oldAssociates);
-					
-					for ( var i = 0; i < toDisassociate.length; i++) {
-						var currElem = toDisassociate[i];
+					} else {
+						var oldAssociates = this.modified[currField] || [];
+						if (!Ext.isArray(oldAssociates)) {
+							oldAssociates = [ oldAssociates ];
+						}
 						
-						foundField = true;
+						currValue = currValue || [];					
+						if (!Ext.isArray(currValue)) {
+							currValue = [currValue];
+						}
 						
-						actionSet.addDisassociate(self.getOid(), currElem.getOid(), currField);
-					}
-					
-					for ( var i = 0; i < toAssociate.length; i++) {
-						var currElem = toAssociate[i];
+						var toDisassociate = this.except(oldAssociates, currValue);
+						var toAssociate = this.except(currValue, oldAssociates);
 						
-						foundField = true;
+						for ( var i = 0; i < toDisassociate.length; i++) {
+							var currElem = toDisassociate[i];
+							
+							foundField = true;
+							
+							actionSet.addDisassociate(self.getOid(), currElem.getOid(), currField);
+						}
 						
-						actionSet.addAssociate(self.getOid(), currElem.getOid(), currField);
+						for ( var i = 0; i < toAssociate.length; i++) {
+							var currElem = toAssociate[i];
+							
+							foundField = true;
+							
+							actionSet.addAssociate(self.getOid(), currElem.getOid(), currField);
+						}
 					}
 				}
 			}

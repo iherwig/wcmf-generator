@@ -21,13 +21,13 @@ Ext.namespace("chi.Util");
  */
 chi.Util.getClassNameFromOid = function(oid) {
 	var result = oid.match(/^[^:]+/)[0];
-	
+
 	if (oid.charAt(0) == "{") {
 		result = oid.match(/:([^}]+)/)[1];
 	}
-	
+
 	return result;
-}
+};
 
 /**
  * Extracts the numeric part out of an OID.
@@ -38,7 +38,7 @@ chi.Util.getClassNameFromOid = function(oid) {
  */
 chi.Util.getNumericFromOid = function(oid) {
 	return oid.match(/:([0-9]+)/)[1];
-}
+};
 
 /**
  * Displays a message to the user.
@@ -54,28 +54,28 @@ chi.Util.showMessage = function(title, message, messageType) {
 	var messageContainer = Ext.get("messageContainer");
 	if (!messageContainer) {
 		messageContainer = Ext.DomHelper.insertFirst(document.body, {
-			id : "messageContainer",
-			style : "position: absolute"
+		    id : "messageContainer",
+		    style : "position: absolute"
 		}, true);
 	}
 	messageContainer.alignTo(document, 't-t');
 	var messageBox = Ext.DomHelper.append(messageContainer, {
-		html : '<div>' + '<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>' + '<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>' + title + '</h3>' + message + '</div></div></div>'
-				+ '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>' + '</div>'
+		html : '<div>' + '<div class="x-box-tl"><div class="x-box-tr"><div class="x-box-tc"></div></div></div>' + '<div class="x-box-ml"><div class="x-box-mr"><div class="x-box-mc"><h3>' + title
+		        + '</h3>' + message + '</div></div></div>' + '<div class="x-box-bl"><div class="x-box-br"><div class="x-box-bc"></div></div></div>' + '</div>'
 	}, true);
 	messageBox.slideIn('t').pause(3).ghost("t", {
 		remove : true
 	});
-}
+};
 
 /**
  * List of message types.
  */
 chi.Util.messageType = {
-	INFO : 1,
-	WARNING : 2,
-	ERROR : 3
-}
+    INFO : 1,
+    WARNING : 2,
+    ERROR : 3
+};
 
 /**
  * Disables text selection on a DOM element.
@@ -89,4 +89,4 @@ chi.Util.setElementUnselectable = function(elem) {
 		elem.style.KhtmlUserSelect = "none";
 		elem.unselectable = "on";
 	}
-}
+};

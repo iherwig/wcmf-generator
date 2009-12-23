@@ -24,17 +24,17 @@ chi.Config = function() {
 	 * @type String
 	 */
 	this.jsonUrl = "../application/main.php";
-	
+
 	/**
 	 * The class name implementing persistency.
 	 * 
 	 * @type String
 	 */
 	this.persistencyClass = "chi.persistency.DionysosJson";
-	
+
 	/**
 	 * Title of this application.
-	 *
+	 * 
 	 * @type String
 	 */
 	this.appTitle = "";
@@ -42,9 +42,10 @@ chi.Config = function() {
 	/**
 	 * Debug mode switch.
 	 * <p>
-	 * 	This triggers whether the application only displays an occuring error (true) or restarts (false).
+	 * This triggers whether the application only displays an occuring error
+	 * (true) or restarts (false).
 	 * </p>
-	 *
+	 * 
 	 * @type boolean
 	 */
 	this.debug = true;
@@ -52,8 +53,9 @@ chi.Config = function() {
 	/**
 	 * The log level for frontend logging.
 	 * <p>
-	 * All calls to uwm.Log.log that have a log level greater or equal than this are passed through.
-	 * Possible values are uwm.Log.DEBUG, uwm.Log.INFO, uwm.Log.WARN, uwm.Log.ERROR
+	 * All calls to uwm.Log.log that have a log level greater or equal than this
+	 * are passed through. Possible values are uwm.Log.DEBUG, uwm.Log.INFO,
+	 * uwm.Log.WARN, uwm.Log.ERROR
 	 * </p>
 	 * 
 	 * @type Integer
@@ -62,36 +64,37 @@ chi.Config = function() {
 
 	/**
 	 * Default value of login.
-	 *
+	 * 
 	 * @type String
 	 */
 	this.defaultLogin = "admin";
 
 	/**
 	 * Default value of password.
-	 *
+	 * 
 	 * @type String
 	 */
 	this.defaultPassword = "admin";
 
 	/**
 	 * Default value of lang (language).
-	 *
+	 * 
 	 * @type String
 	 */
 	this.defaultLang = "en";
-}
+};
 
 /**
  * Initializes the configuration.
  * 
  * @param {Object}
- *            config A configuration object whose properties specify the configuration options.
- *                   If a property is not defined, the default property is used
+ *            config A configuration object whose properties specify the
+ *            configuration options. If a property is not defined, the default
+ *            property is used
  */
 chi.Config.prototype.processConfig = function(config) {
 	Ext.apply(this, config);
-}
+};
 
 /**
  * Returns the instance of this class.
@@ -103,6 +106,6 @@ chi.Config.getInstance = function() {
 	if (!chi.Config.instance) {
 		chi.Config.instance = new chi.Config();
 	}
-	
+
 	return chi.Config.instance;
-}
+};

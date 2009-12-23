@@ -21,14 +21,11 @@ Ext.namespace("chi.editor.control");
  */
 chi.editor.control.StaticComboBox = function(config) {
 	var self = this;
-	
+
 	chi.editor.control.StaticComboBox.superclass.constructor.call(this, Ext.apply(this, {
 	    store : new Ext.data.SimpleStore( {
-          id: 0,
-	        fields : [ 
-              'key',
-	            'val'
-	        ],
+	        id : 0,
+	        fields : [ 'key', 'val' ],
 	        data : config.data
 	    }),
 	    displayField : 'val',
@@ -37,7 +34,7 @@ chi.editor.control.StaticComboBox = function(config) {
 	    triggerAction : 'all',
 	    editable : false
 	}, config));
-	
+
 	this.toolTipText = config.toolTip;
 };
 
@@ -45,7 +42,7 @@ Ext.extend(chi.editor.control.StaticComboBox, Ext.form.ComboBox);
 
 chi.editor.control.StaticComboBox.prototype.render = function(container, position) {
 	chi.editor.control.StaticComboBox.superclass.render.apply(this, arguments);
-	
+
 	if (this.toolTipText) {
 		this.toolTip = new Ext.ToolTip( {
 		    target : container,
@@ -56,10 +53,10 @@ chi.editor.control.StaticComboBox.prototype.render = function(container, positio
 
 chi.editor.control.StaticComboBox.prototype.getValue = function() {
 	var result = chi.editor.control.StaticComboBox.superclass.getValue.call(this);
-	
+
 	if ((this.value === undefined || this.value === null) && result === "") {
 		result = this.value;
 	}
-	
+
 	return result;
-}
+};

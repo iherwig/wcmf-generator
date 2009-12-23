@@ -34,14 +34,14 @@ chi.Main = function() {
 	 * @type boolean
 	 */
 	this.isInstallErrorHandler = true;
-	
+
 	/**
 	 * The viewport of the application.
 	 * 
 	 * @type Ext.Viewport
 	 */
 	this.viewport = null;
-}
+};
 
 /**
  * Initializes application and shows login.
@@ -59,21 +59,21 @@ chi.Main.prototype.startApplication = function() {
 	this.installOverrides();
 
 	var config = chi.Config.getInstance();
-	
+
 	document.title = config.appTitle;
-	
+
 	var params = location.search.split(/&/);
 	var sid = null;
-	
+
 	for ( var i = 0; i < params.length; i++) {
 		var parts = params[i].split(/=/);
-		
+
 		if (parts[0] = "sid") {
 			sid = parts[1];
 			break;
 		}
 	}
-	
+
 	if (sid) {
 		this.startSession(sid, config.defaultLang);
 	} else {
@@ -82,14 +82,14 @@ chi.Main.prototype.startApplication = function() {
 		 * 
 		 * @type chi.Login
 		 */
-		this.login = new chi.Login({
-			appInstance: this,
-			defaultLogin: config.defaultLogin,
-			defaultPassword: config.defaultPassword,
-			svnRevision: config.SVN_REVISION
+		this.login = new chi.Login( {
+		    appInstance : this,
+		    defaultLogin : config.defaultLogin,
+		    defaultPassword : config.defaultPassword,
+		    svnRevision : config.SVN_REVISION
 		});
 	}
-}
+};
 
 /**
  * Starts the session.
@@ -105,11 +105,11 @@ chi.Main.prototype.startApplication = function() {
  */
 chi.Main.prototype.startSession = function(sid, lang) {
 	chi.Session.getInstance().init(sid, lang);
-	
+
 	this.login.destroy();
-	
+
 	this.startWorkbench();
-}
+};
 
 /**
  * Starts the workbench.
@@ -120,8 +120,8 @@ chi.Main.prototype.startSession = function(sid, lang) {
  * </p>
  */
 chi.Main.prototype.startWorbench = function() {
-	
-}
+
+};
 
 /**
  * Logs out the user and reloads the application.
@@ -129,11 +129,11 @@ chi.Main.prototype.startWorbench = function() {
 chi.Main.prototype.reload = function() {
 	this.viewport.destroy();
 	chi.persistency.Persistency.getInstance().logout(function() {
-		
+
 		window.location.reload();
-		
+
 	});
-}
+};
 
 /**
  * Installs error handlers at all appropriate places.
@@ -142,28 +142,27 @@ chi.Main.prototype.reload = function() {
  */
 chi.Main.prototype.installErrorHandler = function() {
 	var self = this;
-	
+
 	var originalAddListener = Ext.EventManager.addListener;
-	
+
 	Ext.EventManager.addListener = function(element, eventName, fn, scope, options) {
 		scope = scope || this;
-		
+
 		return originalAddListener(element, eventName, function() {
 			try {
 				fn.apply(scope || this, arguments);
-			}
-			catch (e) {
+			} catch (e) {
 				self.handleError(e);
 			}
 		}, scope, options);
-	}
+	};
 
 	Ext.EventManager.on = Ext.EventManager.addListener;
-	
+
 	window.onerror = function(message, uri, line) {
 		self.handleError(null, message, uri, line);
-	}
-}
+	};
+};
 
 /**
  * Handler called on error.
@@ -190,13 +189,13 @@ chi.Main.prototype.installErrorHandler = function() {
  */
 chi.Main.prototype.handleError = function(e, message, uri, line) {
 	var data = new Object();
-	
+
 	data["file"] = uri ? uri : e && e.fileName ? e.fileName : "unknown";
 	data["line number"] = line ? line : e && e.lineNumber ? e.lineNumber : "unknown";
 	data["error name"] = e && e.name ? e.name : "unknown";
 	data["error message"] = message ? message : e && e.message ? e.message : "unknown";
 	data["stack"] = e && e.stack ? e.stack : "unknown";
-	
+
 	var plainText = "";
 	for ( var i in data) {
 		var val = data[i];
@@ -204,9 +203,9 @@ chi.Main.prototype.handleError = function(e, message, uri, line) {
 			plainText += i + ": " + val + "\n";
 		}
 	}
-	
+
 	chi.persistency.Persistency.getInstance().log("error", plainText);
-	
+
 	var html = "";
 	for ( var i in data) {
 		var val = data[i];
@@ -214,53 +213,59 @@ chi.Main.prototype.handleError = function(e, message, uri, line) {
 			html += "<p><b>" + i + ":</b> " + ("" + val).replace(/\n/g, "<br />") + "</p>";
 		}
 	}
-	
+
 	if (this.getConfig().debug) {
 		chi.Util.showMessage(chi.Dict.translate("Error occured"), html, chi.Util.messageType.ERROR);
-		
+
 		throw e;
 	} else {
 		var self = this;
-		
-		var window = new Ext.Window( {
-			id : chi.Main.ERROR_WINDOW_ID,
-			title : chi.Dict.translate("Error occured"),
-			layout : "fit",
-			items : [ new Ext.Panel( {
-				html : "<p class='chi-errorDialogMessage'>" + chi.Dict.translate("An application error occured. You may continue your work, but this might lead to further errors. If you choose to restart, your data will be saved.") + "</p>"
-			}), new Ext.Panel( {
-				id : chi.Main.ERROR_DETAILS_ID,
-				title : chi.Dict.translate("Error details"),
-				collapsed : true,
-				collapsible : true,
-				animCollapse : false,
-				collapseFirst : true,
-				html : "<div class='chi-errorDialogDetails'>" + html + "</div>",
-				listeners : {
-					"collapse" : function() {
-						window.center();
-					},
-					"expand" : function() {
-						window.center();
-					}
-				}
-			}) ],
-			buttons : [ {
-				text : chi.Dict.translate("Continue"),
-				handler : function() {
-					window.destroy();
-				}
-			}, {
-				text : chi.Dict.translate("Restart"),
-				handler : function() {
-					self.reload();
-				}
-			} ]
-		});
-		
+
+		var window = new Ext.Window(
+		        {
+		            id : chi.Main.ERROR_WINDOW_ID,
+		            title : chi.Dict.translate("Error occured"),
+		            layout : "fit",
+		            items : [
+		                    new Ext.Panel(
+		                            {
+			                            html : "<p class='chi-errorDialogMessage'>"
+			                                    + chi.Dict
+			                                            .translate("An application error occured. You may continue your work, but this might lead to further errors. If you choose to restart, your data will be saved.")
+			                                    + "</p>"
+		                            }), new Ext.Panel( {
+		                        id : chi.Main.ERROR_DETAILS_ID,
+		                        title : chi.Dict.translate("Error details"),
+		                        collapsed : true,
+		                        collapsible : true,
+		                        animCollapse : false,
+		                        collapseFirst : true,
+		                        html : "<div class='chi-errorDialogDetails'>" + html + "</div>",
+		                        listeners : {
+		                            "collapse" : function() {
+			                            window.center();
+		                            },
+		                            "expand" : function() {
+			                            window.center();
+		                            }
+		                        }
+		                    }) ],
+		            buttons : [ {
+		                text : chi.Dict.translate("Continue"),
+		                handler : function() {
+			                window.destroy();
+		                }
+		            }, {
+		                text : chi.Dict.translate("Restart"),
+		                handler : function() {
+			                self.reload();
+		                }
+		            } ]
+		        });
+
 		window.show();
 	}
-}
+};
 
 /**
  * Installs useful Ext overrides.
@@ -274,7 +279,7 @@ chi.Main.prototype.installOverrides = function() {
 			this.originalValue = this.getValue();
 		}
 	});
-	
+
 	Ext.apply(Ext.EventObject, {
 		within : function(el, related, allowEl) {
 			if (el) {
@@ -284,8 +289,7 @@ chi.Main.prototype.installOverrides = function() {
 			return false;
 		}
 	});
-	
-}
+};
 
 /**
  * Id of the error window.
