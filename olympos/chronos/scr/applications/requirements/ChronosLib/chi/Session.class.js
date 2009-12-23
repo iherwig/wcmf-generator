@@ -24,21 +24,21 @@ chi.Session = function() {
 	 * @type String
 	 */
 	this.sid = null;
-	
+
 	/**
 	 * The language selected for application UI.
 	 * 
 	 * @type String
 	 */
 	this.lang = "en";
-	
+
 	/**
 	 * The URL of the help file.
 	 * 
 	 * @type String
 	 */
 	this.helpUrl = null;
-}
+};
 
 /**
  * Initializes the session.
@@ -56,7 +56,7 @@ chi.Session.prototype.init = function(sid, lang, helpUrl) {
 	this.sid = sid;
 	this.lang = lang;
 	this.helpUrl = helpUrl;
-}
+};
 
 /**
  * Returns the current session id.
@@ -66,7 +66,7 @@ chi.Session.prototype.init = function(sid, lang, helpUrl) {
  */
 chi.Session.prototype.getSid = function() {
 	return this.sid;
-}
+};
 
 /**
  * Returns the language selected for application UI.
@@ -76,7 +76,7 @@ chi.Session.prototype.getSid = function() {
  */
 chi.Session.prototype.getLang = function() {
 	return this.lang;
-}
+};
 
 /**
  * Returns the URL of the help file.
@@ -86,7 +86,7 @@ chi.Session.prototype.getLang = function() {
  */
 chi.Session.prototype.getHelpUrl = function() {
 	return this.helpUrl;
-}
+};
 
 /**
  * Returns the instance of this class.
@@ -98,6 +98,6 @@ chi.Session.getInstance = function() {
 	if (!chi.Session.instance) {
 		chi.Session.instance = new chi.Session();
 	}
-	
+
 	return chi.Session.instance;
-}
+};

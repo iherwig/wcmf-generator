@@ -12,24 +12,25 @@
 Ext.namespace("chi.Log");
 
 /**
- * A simple logging class. It logs messages to the Firebug console
- * if they have a logLevel greater or equal than chi.Config.logLevel.
+ * A simple logging class. It logs messages to the Firebug console if they have
+ * a logLevel greater or equal than chi.Config.logLevel.
  */
 
 chi.Log.DEBUG = 0;
-chi.Log.INFO = 	1;
-chi.Log.WARN = 	2;
+chi.Log.INFO = 1;
+chi.Log.WARN = 2;
 chi.Log.ERROR = 3;
 
 /**
  * Check if logging is enabled for the given log level.
+ * 
  * @param {Integer}
- *				logLevel E.g. chi.Log.DEBUG
+ *            logLevel E.g. chi.Log.DEBUG
  * @return {boolean}
  */
 chi.Log.isEnabled = function(logLevel) {
 	return chi.Config.getInstance().logLevel <= logLevel;
-}
+};
 
 /**
  * Extracts the numeric part out of an OID.
@@ -37,34 +38,39 @@ chi.Log.isEnabled = function(logLevel) {
  * @param {String}
  *            message The message to log
  * @param {Integer}
- *				logLevel E.g. chi.Log.DEBUG
+ *            logLevel E.g. chi.Log.DEBUG
  */
 chi.Log.log = function(message, logLevel) {
 	var consoleExists = false;
 	try {
 		consoleExists = console != null;
+	} catch (e) {
 	}
-	catch (e) {}
-	
+
 	if (consoleExists) {
 		if (chi.Log.isEnabled(logLevel)) {
-		
+
 			switch (logLevel) {
-			
-				case chi.Log.DEBUG: console.debug(message);
+
+				case chi.Log.DEBUG:
+					console.debug(message);
 					break;
- 
-				case chi.Log.INFO: console.info(message);
+
+				case chi.Log.INFO:
+					console.info(message);
 					break;
- 
-				case chi.Log.WARN: console.warn(message);
+
+				case chi.Log.WARN:
+					console.warn(message);
 					break;
- 
-				case chi.Log.ERROR: console.error(message);
+
+				case chi.Log.ERROR:
+					console.error(message);
 					break;
- 
-				default: console.log(message);
+
+				default:
+					console.log(message);
 			}
 		}
 	}
-}
+};

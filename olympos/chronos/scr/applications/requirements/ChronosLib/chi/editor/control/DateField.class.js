@@ -21,19 +21,14 @@ Ext.namespace("chi.editor.control");
  */
 chi.editor.control.DateField = function(config) {
 	var self = this;
-	
+
 	config = config || {};
-	
-	if (!config.altFormats) {
-		config.altFormats = "Y-m-d H:i:s";
-	}
-	if (!config.format) {
-		config.format = "Y-m-d";
-	}
-	
+
 	chi.editor.control.DateField.superclass.constructor.call(this, Ext.apply(this, {
+	    altFormats : "Y-m-d H:i:s",
+	    format : "Y-m-d"
 	}, config));
-	
+
 	this.toolTipText = config.toolTip;
 };
 
@@ -41,7 +36,7 @@ Ext.extend(chi.editor.control.DateField, Ext.form.DateField);
 
 chi.editor.control.DateField.prototype.render = function(container, position) {
 	chi.editor.control.DateField.superclass.render.apply(this, arguments);
-	
+
 	if (this.toolTipText) {
 		this.toolTip = new Ext.ToolTip( {
 		    target : container,
@@ -52,10 +47,10 @@ chi.editor.control.DateField.prototype.render = function(container, position) {
 
 chi.editor.control.DateField.prototype.getValue = function() {
 	var result = chi.editor.control.DateField.superclass.getValue.call(this);
-	
+
 	if ((this.value === undefined || this.value === null) && result === "") {
 		result = this.value;
 	}
-	
+
 	return result;
-}
+};

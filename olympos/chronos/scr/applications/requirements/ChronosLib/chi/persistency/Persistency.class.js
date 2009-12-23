@@ -12,21 +12,21 @@
 Ext.namespace("chi.persistency");
 
 chi.persistency.Persistency = function() {
-}
+};
 
 chi.persistency.Persistency.getInstance = function() {
 	if (!chi.persistency.Persistency.instance) {
 		chi.persistency.Persistency.instance = eval("new " + chi.Config.getInstance().persistencyClass + "()");
 	}
-	
+
 	return chi.persistency.Persistency.instance;
-}
+};
 
 chi.persistency.Persistency.prototype.processSuccessHandler = function(successHandler, data) {
 	if (successHandler instanceof Function) {
 		successHandler.call(this, data);
 	}
-}
+};
 
 chi.persistency.Persistency.prototype.processErrorHandler = function(errorHandler, data, errorMessage) {
 	if (errorHandler instanceof Function) {
@@ -38,56 +38,60 @@ chi.persistency.Persistency.prototype.processErrorHandler = function(errorHandle
 	} else {
 		chi.Util.showMessage(chi.Dict.translate('Persistency layer error'), chi.Dict.translate('An unspecified error has occured in persistency layer.'), chi.Util.messageType.ERROR);
 	}
-}
+};
 
 chi.persistency.Persistency.prototype.cancelRequest = function(transactionId) {
 	throw "Method chi.persistency.Persistency.cancelRequest not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.login = function(user, password, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.login not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.logout = function(successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.logout not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.list = function(chiModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.list not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.read = function(oid, depth, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.read not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.update = function(oid, values, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.update not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.create = function(chiModelElementId, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.create not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.destroy = function(oid, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.destroy not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.associate = function(parentOid, childOid, role, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.associate not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.disassociate = function(parentOid, childOid, role, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.disassociate not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.log = function(logtype, message, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.log not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.executeActionSet = function(actionSet) {
 	throw "Method chi.persistency.Persistency.executeActionSet not implemented by current persistency adapter.";
-}
+};
 
 chi.persistency.Persistency.prototype.createChild = function(parentOid, childRole, successHandler, errorHandler) {
 	throw "Method chi.persistency.Persistency.createChild not implemented by current persistency adapter.";
-}
+};
+
+chi.persistency.Persistency.prototype.search = function(query, chiModelElementId, limit, offset, sortByRelevance, sortAttributeName, sortDirection, successHandler, errorHandler) {
+	throw "Method chi.persistency.Persistency.search not implemented by current persistency adapter.";
+};
