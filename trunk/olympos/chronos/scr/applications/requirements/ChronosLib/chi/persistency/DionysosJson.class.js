@@ -321,7 +321,8 @@ chi.persistency.DionysosJson.prototype.searchRecordHandler = function(handler, o
 	    sortDirection : options.localParams.sortDirection,
 	    records : this.createListRecords(data.list),
 	    totalCount : data.totalCount,
-	    searchData : data.searchData
+	    searchData : data.searchData,
+	    maxRelevance : data.maxRelevance
 	};
 };
 
