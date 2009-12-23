@@ -256,7 +256,7 @@ cwe.modelgrid.ModelGrid.prototype.loadPreview = function(record) {
 	if (selRecord && selRecord.getOid() == record.getOid()) {
 		this.editors.updatePreview(record.getOid(), record.getLabel());
 	}
-}
+};
 
 /**
  * Opens an editor of the selected object.
