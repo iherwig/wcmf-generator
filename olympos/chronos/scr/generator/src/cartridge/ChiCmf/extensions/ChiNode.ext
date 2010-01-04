@@ -152,8 +152,9 @@ String getTableName(ChiNode this) :
  */
 String getOrderByColumn(ChiNode this) : 
 	let col = this.orderby.split(" ").first().trim() : 
-		let orderVal = this.getChiValuesRecursive().select(v|v.name == col).first() :
-			orderVal != null ? orderVal.getColumnName() : (col == defaultOrderByName() ? col : "")
+    let dir = this.orderby.split(" ").last().trim() : 
+      let orderVal = this.getWCMFValuesRecursive().select(v|v.name == col).first() :
+        orderVal != null ? (dir != col ? orderVal.getColumnName()+" "+dir : orderVal.getColumnName()) : (col == defaultOrderByName() ? col : "")
 ;
 
 /**
