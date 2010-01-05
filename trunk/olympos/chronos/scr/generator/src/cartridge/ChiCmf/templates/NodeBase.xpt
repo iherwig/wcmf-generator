@@ -109,7 +109,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
   «ENDIF-»
     }
     /**
-     * Getter/Setter
+     * Getter/Setter for properties
      */
   «EXPAND values FOR this-»
   «IF getOrderByColumn() == "sortkey"-»
@@ -123,11 +123,17 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
     }
   «ENDIF-»
   «EXPAND references FOR this-»
+    /**
+     * Getter/Setter for related objects
+     */
+    function __call($name, $arguments)
+    {
   «IF this.getParentNodesRecursive().size > 0-»
     «EXPAND foreignKeys FOR this-»
   «ENDIF-»
   «EXPAND parents FOR this-»
   «EXPAND children FOR this-»
+    }
 
     /**
      * Node class overrides
@@ -188,74 +194,73 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
 «REM» foreignKeys ------------------------------------------------«ENDREM»
 «DEFINE foreignKeys FOR ChiNode-»
   «FOREACH this.getParentNodesRecursive() AS curParent-»
-    function «curParent.getRoleName().asGetter()»OID()
-    {
-      $fkValue = $this->getValue('«curParent.getFKName()»', DATATYPE_IGNORE);
-      if ($fkValue != null)
-        return PersistenceFacade::composeOID(array('type' => '«curParent.type.name»', 'id' => array($fkValue)));
-      else
-        return null;
-    }
-    function «curParent.getRoleName().asSetter()»(&$node)
-    {
-      if ($node != null) {
-        if (!is_a($node, 'node') && !is_a($node, 'Node')) {
-          $args = func_get_args();
-          call_user_func_array(array(parent, '«curParent.getRoleName().asSetter()»'), $args);
+      // foreign key: «curParent.getRoleName()»
+      if ($name == '«curParent.getRoleName().asGetter()»OID')
+      {
+        $fkValue = $this->getValue('«curParent.getFKName()»', DATATYPE_IGNORE);
+        if ($fkValue != null) {
+          return PersistenceFacade::composeOID(array('type' => '«curParent.type.name»', 'id' => array($fkValue)));
         }
         else {
-    «IF this.getParentNodesRecursive().size == 1-»
-          $node->addChild($this);
-    «ELSE-»
-          $this->setValue('«curParent.getFKName()»', $node->getDBID(), DATATYPE_IGNORE);
-    «ENDIF-»
+          return null;
         }
       }
-    }
+      if ($name == '«curParent.getRoleName().asSetter()»')
+      {
+        $node = &$arguments[0];
+        if ($node != null)
+        {
+          if (!is_a($node, 'node') && !is_a($node, 'Node')) {
+            call_user_func_array(array(parent, '«curParent.getRoleName().asSetter()»'), $arguments);
+          }
+          else {
+      «IF this.getParentNodesRecursive().size == 1-»
+            $node->addChild($this);
+      «ELSE-»
+            $this->setValue('«curParent.getFKName()»', $node->getDBID(), DATATYPE_IGNORE);
+      «ENDIF-»
+          }
+        }
+        return;
+      }
   «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» parents ----------------------------------------------------«ENDREM»
 «DEFINE parents FOR ChiNode-»
   «FOREACH this.getParentNodesRecursive() AS curParent-»
-    function «curParent.getRoleName().asGetter()»Parents()
-    {
-      return $this->getParentsEx(null, '«curParent.type.name»', null, null);
-    }
+      // parent: «curParent.getRoleName()»
+      if ($name == '«curParent.getRoleName().asGetter()»Parents') {
+        return $this->getParentsEx(null, '«curParent.type.name»', null, null);
+      }
   «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» children ---------------------------------------------------«ENDREM»
 «DEFINE children FOR ChiNode-»
   «FOREACH this.getChildNodesRecursive() AS curChild-»
-    /**
-     * @deprecated use «curChild.getRoleName().asGetter()»Children() instead
-     */
-    function «curChild.getRoleName().asGetter()»List()
-    {
-      Log::warn("use of deprecated method «curChild.getRoleName().asGetter()»List. use «curChild.getRoleName().asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->«curChild.getRoleName().asGetter()»Children();
-    }
-    function «curChild.getRoleName().asGetter()»Children()
-    {
-      return $this->getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null, false);
-    }
+      // child: «curChild.getRoleName()»
+      if ($name == '«curChild.getRoleName().asGetter()»List')
+      {
+        Log::warn("use of deprecated method «curChild.getRoleName().asGetter()»List. use «curChild.getRoleName().asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
+        return $this->«curChild.getRoleName().asGetter()»Children();
+      }
+      if ($name == '«curChild.getRoleName().asGetter()»Children') {
+        return $this->getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null, false);
+      }
 «IF curChild.type.metaType.toString().contains("ChiManyToMany")-»
   «FOREACH ((ChiNode)curChild.type).getParentNodes() AS curChildParent-»
     «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
-    /**
-     * @deprecated use «curChildParent.type.name.asGetter()»Children() instead
-     */
-    function «curChildParent.type.name.asGetter()»List()
-    {
-      Log::warn("use of deprecated method «curChildParent.type.name.asGetter()»List. use «curChildParent.type.name.asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->«curChildParent.type.name.asGetter()»Children();
-    }
-    function «curChildParent.type.name.asGetter()»Children()
-    {
-      // the foreign key column does not exist
-      return $this->getChildrenEx(null, '«curChildParent.type.name»', null, null, false);
-    }
+      if ($name == '«curChildParent.type.name.asGetter()»List')
+      {
+        Log::warn("use of deprecated method «curChildParent.type.name.asGetter()»List. use «curChildParent.type.name.asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
+        return $this->«curChildParent.type.name.asGetter()»Children();
+      }
+      if ($name == '«curChildParent.type.name.asGetter()»Children()')
+      {
+        // the foreign key column does not exist
+        return $this->getChildrenEx(null, '«curChildParent.type.name»', null, null, false);
+      }
     «ENDIF-»
   «ENDFOREACH-»
 «ENDIF-»

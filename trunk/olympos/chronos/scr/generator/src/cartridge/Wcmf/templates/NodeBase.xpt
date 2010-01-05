@@ -11,8 +11,8 @@
 
 «REM» template expands the node base class files -----------------«ENDREM»
 «DEFINE file FOR WCMFNode»
-	«FOREACH this.getRoleNames() AS curRoleName»
-		«FILE this.getFullPackageName().asPath()+"/"+curRoleName.asBaseClassFile()-»
+  «FOREACH this.getRoleNames() AS curRoleName»
+    «FILE this.getFullPackageName().asPath()+"/"+curRoleName.asBaseClassFile()-»
 <?php
 «HeaderText()»
 /**
@@ -20,9 +20,9 @@
  * Manual modifications should be placed inside the protected regions.
  */
 «IF curRoleName == this.name-»
-	«IF this.hasSuperClass()-»
+  «IF this.hasSuperClass()-»
 require_once(BASE."«getSuperClass().getFullPackageName().asPath()»/«getSuperClass().name.asClassFile()»");
-	«ENDIF-»
+  «ENDIF-»
 «ELSE-»
 require_once(BASE."«this.getFullPackageName().asPath()»/«this.name.asClassFile()»");
 «ENDIF-»
@@ -40,17 +40,17 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
     {
 «IF this.hasSuperClass()-»
       if ($type == null)
-	«IF this.getSuperClass().name == "Node"-»
-        parent::«this.getSuperClass().name»('«curRoleName»', $oid);
-	«ELSE-»
-        parent::«this.getSuperClass().name»($oid, '«curRoleName»');
-	«ENDIF-»
+  «IF curRoleName == this.name && this.getSuperClass().name == "Node"-»
+        parent::__construct('«curRoleName»', $oid);
+  «ELSE-»
+        parent::__construct($oid, '«curRoleName»');
+  «ENDIF-»
       else
-	«IF this.getSuperClass().name == "Node"-»
-        parent::«this.getSuperClass().name»($type, $oid);
-	«ELSE-»
-        parent::«this.getSuperClass().name»($oid, $type);
-	«ENDIF-»
+  «IF curRoleName == this.name && this.getSuperClass().name == "Node"-»
+        parent::__construct($type, $oid);
+  «ELSE-»
+        parent::__construct($oid, $type);
+  «ENDIF-»
 «ENDIF-»
     }
 «IF curRoleName != this.name-»
@@ -83,7 +83,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
     function getValueDisplayName($name, $type=null)
     {
       $displayName = $name;
-	«EXPAND valueDisplayNames FOR this-»
+  «EXPAND valueDisplayNames FOR this-»
       return Message::get($displayName);
     }
     /**
@@ -92,7 +92,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
     function getValueDescription($name, $type=null)
     {
       $description = $name;
-	«EXPAND valueDescription FOR this-»
+  «EXPAND valueDescription FOR this-»
       return Message::get($description);
     }
     /**
@@ -100,17 +100,17 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
      */
     function isManyToManyObject()
     {
-	«IF this.metaType.toString().contains("WCMFManyToMany")-»
+  «IF this.metaType.toString().contains("WCMFManyToMany")-»
       return true;
-	«ELSE-»
+  «ELSE-»
       return false;
-	«ENDIF-»
+  «ENDIF-»
     }
     /**
-     * Getter/Setter
+     * Getter/Setter for properties
      */
-	«EXPAND values FOR this-»
-	«IF getOrderByColumn() == "sortkey"-»
+  «EXPAND values FOR this-»
+  «IF getOrderByColumn() == "sortkey"-»
     function getSortkey()
     {
       return $this->getValue('sortkey', DATATYPE_IGNORE);
@@ -119,22 +119,28 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
     {
       return $this->setValue('sortkey', $sortkey, DATATYPE_IGNORE);
     }
-	«ENDIF-»
-	«EXPAND references FOR this-»
-	«IF this.getParentNodesRecursive().size > 0-»
-		«EXPAND foreignKeys FOR this-»
-	«ENDIF-»
-	«EXPAND parents FOR this-»
-	«EXPAND children FOR this-»
+  «ENDIF-»
+  «EXPAND references FOR this-»
+    /**
+     * Getter/Setter for related objects
+     */
+    function __call($name, $arguments)
+    {
+  «IF this.getParentNodesRecursive().size > 0-»
+    «EXPAND foreignKeys FOR this-»
+  «ENDIF-»
+  «EXPAND parents FOR this-»
+  «EXPAND children FOR this-»
+    }
 
     /**
      * Node class overrides
      */
      
-	«EXPAND loadChildren FOR this-»
-	«EXPAND getChildrenEx FOR this-»
-	«EXPAND addChild FOR this-»
-	«EXPAND deleteChild FOR this-»
+  «EXPAND loadChildren FOR this-»
+  «EXPAND getChildrenEx FOR this-»
+  «EXPAND addChild FOR this-»
+  «EXPAND deleteChild FOR this-»
 «ENDIF-»
 }
 ?>
@@ -144,7 +150,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
 
 «REM» values -----------------------------------------------------«ENDREM»
 «DEFINE values FOR WCMFNode-»
-	«FOREACH this.getWCMFValues() AS curValue-»
+  «FOREACH this.getWCMFValues() AS curValue-»
     function «curValue.name.asGetter()»($unconverted=false)
     {
       if ($unconverted)
@@ -156,99 +162,105 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
     {
       return $this->setValue('«curValue.name»', $«curValue.name», «curValue.app_data_type»);
     }
-	«ENDFOREACH-»
+  «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» valueDisplayNames ------------------------------------------«ENDREM»
 «DEFINE valueDisplayNames FOR WCMFNode-»
-	«FOREACH this.getWCMFValuesRecursive() AS curValue-»
+  «FOREACH this.getWCMFValuesRecursive() AS curValue-»
       if ($name == '«curValue.name»') $displayName = Message::get("«curValue.name»");
-	«ENDFOREACH-»
+  «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» valueDescription -------------------------------------------«ENDREM»
 «DEFINE valueDescription FOR WCMFNode-»
-	«FOREACH this.getWCMFValuesRecursive() AS curValue-»
+  «FOREACH this.getWCMFValuesRecursive() AS curValue-»
       if ($name == '«curValue.name»') $description = Message::get("«curValue.getComment(" ")»");
-	«ENDFOREACH-»
+  «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» references -------------------------------------------------«ENDREM»
 «DEFINE references FOR WCMFNode-»
-	«FOREACH this.getWCMFValueRefs() AS curReference-»
+  «FOREACH this.getWCMFValueRefs() AS curReference-»
     function «curReference.name.asGetter()»()
     {
       return $this->getValue('«curReference.name»', DATATYPE_ATTRIBUTE);
     }
-	«ENDFOREACH-»
+  «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» foreignKeys ------------------------------------------------«ENDREM»
 «DEFINE foreignKeys FOR WCMFNode-»
-	«FOREACH this.getParentNodesRecursive() AS curParent-»
-    function «curParent.getRoleName().asGetter()»OID()
-    {
-      $fkValue = $this->getValue('«curParent.getFKName()»', DATATYPE_IGNORE);
-      if ($fkValue != null)
-        return PersistenceFacade::composeOID(array('type' => '«curParent.type.name»', 'id' => array($fkValue)));
-      else
-        return null;
-    }
-    function «curParent.getRoleName().asSetter()»(&$node)
-    {
-      if ($node != null)
-		«IF this.getParentNodesRecursive().size == 1-»
-        $node->addChild($this);
-		«ELSE-»
-        $this->setValue('«curParent.getFKName()»', $node->getDBID(), DATATYPE_IGNORE);
-		«ENDIF-»
-    }
-	«ENDFOREACH-»
+  «FOREACH this.getParentNodesRecursive() AS curParent-»
+      // foreign key: «curParent.getRoleName()»
+      if ($name == '«curParent.getRoleName().asGetter()»OID')
+      {
+        $fkValue = $this->getValue('«curParent.getFKName()»', DATATYPE_IGNORE);
+        if ($fkValue != null) {
+          return PersistenceFacade::composeOID(array('type' => '«curParent.type.name»', 'id' => array($fkValue)));
+        }
+        else {
+          return null;
+        }
+      }
+      if ($name == '«curParent.getRoleName().asSetter()»')
+      {
+        $node = &$arguments[0];
+        if ($node != null)
+        {
+          if (!is_a($node, 'node') && !is_a($node, 'Node')) {
+            call_user_func_array(array(parent, '«curParent.getRoleName().asSetter()»'), $arguments);
+          }
+          else {
+      «IF this.getParentNodesRecursive().size == 1-»
+            $node->addChild($this);
+      «ELSE-»
+            $this->setValue('«curParent.getFKName()»', $node->getDBID(), DATATYPE_IGNORE);
+      «ENDIF-»
+          }
+        }
+        return;
+      }
+  «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» parents ----------------------------------------------------«ENDREM»
 «DEFINE parents FOR WCMFNode-»
-	«FOREACH this.getParentNodesRecursive() AS curParent-»
-    function «curParent.getRoleName().asGetter()»Parents()
-    {
-      return $this->getParentsEx(null, '«curParent.type.name»', null, null);
-    }
-	«ENDFOREACH-»
+  «FOREACH this.getParentNodesRecursive() AS curParent-»
+      // parent: «curParent.getRoleName()»
+      if ($name == '«curParent.getRoleName().asGetter()»Parents') {
+        return $this->getParentsEx(null, '«curParent.type.name»', null, null);
+      }
+  «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» children ---------------------------------------------------«ENDREM»
 «DEFINE children FOR WCMFNode-»
-	«FOREACH this.getChildNodesRecursive() AS curChild-»
-    /**
-     * @deprecated use «curChild.getRoleName().asGetter()»Children() instead
-     */
-    function «curChild.getRoleName().asGetter()»List()
-    {
-      Log::warn("use of deprecated method «curChild.getRoleName().asGetter()»List. use «curChild.getRoleName().asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->«curChild.getRoleName().asGetter()»Children();
-    }
-    function «curChild.getRoleName().asGetter()»Children()
-    {
-      return $this->getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null, false);
-    }
+  «FOREACH this.getChildNodesRecursive() AS curChild-»
+      // child: «curChild.getRoleName()»
+      if ($name == '«curChild.getRoleName().asGetter()»List')
+      {
+        Log::warn("use of deprecated method «curChild.getRoleName().asGetter()»List. use «curChild.getRoleName().asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
+        return $this->«curChild.getRoleName().asGetter()»Children();
+      }
+      if ($name == '«curChild.getRoleName().asGetter()»Children') {
+        return $this->getChildrenEx(null, '«curChild.type.name»', array('«curChild.getOtherEnd().getFKName()»' => $this->getDBID()), null, false);
+      }
 «IF curChild.type.metaType.toString().contains("WCMFManyToMany")-»
-	«FOREACH ((WCMFNode)curChild.type).getParentNodes() AS curChildParent-»
-		«IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
-    /**
-     * @deprecated use «curChildParent.type.name.asGetter()»Children() instead
-     */
-    function «curChildParent.type.name.asGetter()»List()
-    {
-      Log::warn("use of deprecated method «curChildParent.type.name.asGetter()»List. use «curChildParent.type.name.asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
-      return $this->«curChildParent.type.name.asGetter()»Children();
-    }
-    function «curChildParent.type.name.asGetter()»Children()
-    {
-      // the foreign key column does not exist
-      return $this->getChildrenEx(null, '«curChildParent.type.name»', null, null, false);
-    }
-		«ENDIF-»
-	«ENDFOREACH-»
+  «FOREACH ((WCMFNode)curChild.type).getParentNodes() AS curChildParent-»
+    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+      if ($name == '«curChildParent.type.name.asGetter()»List')
+      {
+        Log::warn("use of deprecated method «curChildParent.type.name.asGetter()»List. use «curChildParent.type.name.asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
+        return $this->«curChildParent.type.name.asGetter()»Children();
+      }
+      if ($name == '«curChildParent.type.name.asGetter()»Children()')
+      {
+        // the foreign key column does not exist
+        return $this->getChildrenEx(null, '«curChildParent.type.name»', null, null, false);
+      }
+    «ENDIF-»
+  «ENDFOREACH-»
 «ENDIF-»
 «ENDFOREACH-»
 «ENDDEFINE»
@@ -261,10 +273,10 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
      */
     function loadChildren($type, $buildDepth=BUILDDEPTH_SINGLE, $forceUpdate=false)
     {
-	«FOREACH this.getChildNodesRecursive() AS curChild-»
+  «FOREACH this.getChildNodesRecursive() AS curChild-»
 «IF curChild.type.metaType.toString().contains("WCMFManyToMany")-»
-	«FOREACH ((WCMFNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
-		«IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+  «FOREACH ((WCMFNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
+    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
       // handle «curChild.type.name» as many-to-many type
       if ($type == '«curChildParent.type.name»')
       {
@@ -289,8 +301,8 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
         }
         return;
       }
-		«ENDIF-»
-	«ENDFOREACH-»
+    «ENDIF-»
+  «ENDFOREACH-»
 «ENDIF-»
 «ENDFOREACH-»
       // do default
@@ -306,10 +318,10 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
      */
     function getChildrenEx($oid, $type, $values, $properties, $useRegExp=true)
     {
-	«FOREACH getChildNodesRecursive() AS curChild-»
+  «FOREACH getChildNodesRecursive() AS curChild-»
 «IF curChild.type.metaType.toString().contains("WCMFManyToMany")-»
-	«FOREACH ((WCMFNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
-		«IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+  «FOREACH ((WCMFNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
+    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
       // handle «curChild.type.name» as many-to-many type
       if ($type == '«curChildParent.type.name»' || PersistenceFacade::getOIDParameter($oid, 'type') == '«curChildParent.type.name»')
       {
@@ -339,8 +351,8 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
         }
         return Node::filter($grandChildren, $oid, $type, $values, $properties, $useRegExp);
       }
-		«ENDIF-»
-	«ENDFOREACH-»
+    «ENDIF-»
+  «ENDFOREACH-»
 «ENDIF-»
 «ENDFOREACH-»
       // do default
@@ -356,10 +368,10 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
      */
     function addChild(&$child, $addtype=ADDCHILD_BACK)
     {
-	«FOREACH this.getChildNodesRecursive() AS curChild-»
+  «FOREACH this.getChildNodesRecursive() AS curChild-»
 «IF curChild.type.metaType.toString().contains("WCMFManyToMany")-»
-	«FOREACH ((WCMFNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
-		«IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+  «FOREACH ((WCMFNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
+    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
       if ($child != null && $child->getType() == '«curChildParent.type.name»')
       {
         // for every «curChildParent.type.name» we have to insert a «curChild.type.name»
@@ -381,8 +393,8 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
         // set child parameter to associationNode and prodeed with default behaviour
         $child = &$associationNode;
       }
-		«ENDIF-»
-	«ENDFOREACH-»
+    «ENDIF-»
+  «ENDFOREACH-»
 «ENDIF-»
 «ENDFOREACH-»
       // do default
@@ -398,10 +410,10 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
      */
     function deleteChild($childOID, $reallyDelete=false)
     {
-	«FOREACH this.getChildNodesRecursive() AS curChild-»
+  «FOREACH this.getChildNodesRecursive() AS curChild-»
 «IF curChild.type.metaType.toString().contains("WCMFManyToMany")-»
-	«FOREACH ((WCMFNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
-		«IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+  «FOREACH ((WCMFNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
+    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
       if (PersistenceFacade::isValidOID($childOID) && PersistenceFacade::getOIDParameter($childOID, 'type') == '«curChildParent.type.name»')
       {
         // for every «curChildParent.type.name» we have to delete the «curChild.type.name»
@@ -421,8 +433,8 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
             $childOID = $relOID;
         }
       }
-		«ENDIF-»
-	«ENDFOREACH-»
+    «ENDIF-»
+  «ENDFOREACH-»
 «ENDIF-»
 «ENDFOREACH-»
       // do default
