@@ -256,7 +256,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
         Log::warn("use of deprecated method «curChildParent.type.name.asGetter()»List. use «curChildParent.type.name.asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
         return $this->«curChildParent.type.name.asGetter()»Children();
       }
-      if ($name == '«curChildParent.type.name.asGetter()»Children()')
+      if ($name == '«curChildParent.type.name.asGetter()»Children')
       {
         // the foreign key column does not exist
         return $this->getChildrenEx(null, '«curChildParent.type.name»', null, null, false);
