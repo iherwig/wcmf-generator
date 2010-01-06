@@ -84,7 +84,7 @@ uwm.hierarchytree.Loader.prototype.attachFollowers = function(currNode, modelNod
 	oidList = this.filterOidList(oidList, childOids, parentNodeOid, grandParentNodeOid);
 	oidList = this.filterOidList(oidList, parentOids, parentNodeOid, grandParentNodeOid);
 	
-	this.attachFollowersList(currNode, modelNode, oidList.getRange(), parentNodeOid, grandParentNodeOid);
+	this.attachFollowersList(currNode, modelNode, oidList, parentNodeOid, grandParentNodeOid);
 	
 }
 
@@ -93,8 +93,8 @@ uwm.hierarchytree.Loader.prototype.filterOidList = function(oidList, checkOidLis
 		for (var i = 0; i < checkOidList.length; i++) {
 			var currOid = checkOidList[i];
 			
-			if (currOid != parentNodeOid && currOid != grandParentNodeOid && !oidList.contains(currOid)) {
-				oidList.add(currOid);
+			if (currOid != parentNodeOid && currOid != grandParentNodeOid && !oidList.containsKey(currOid)) {
+				oidList.add(currOid, null); // second parameter is the relation object for later reference
 			}
 		}
 	}
@@ -108,11 +108,12 @@ uwm.hierarchytree.Loader.prototype.attachFollowersList = function(currNode, mode
 	
 	var self = this;
 	
-	for (var i = 0; i < oidList.length; i++) {
-		var childModelNode = container.getByOid(oidList[i]);
+	oidList.eachKey(function(currOid, relationObject) {
+  
+		var childModelNode = container.getByOid(currOid);
 		
 		if (!childModelNode) {
-			container.loadByOid(oidList[i], function() {
+			container.loadByOid(currOid, function() {
 				self.attachFollowersList(currNode, modelNode, oidList, parentNodeOid, grandParentNodeOid);
 			});
 			
@@ -122,15 +123,14 @@ uwm.hierarchytree.Loader.prototype.attachFollowersList = function(currNode, mode
 		if (childModelNode instanceof uwm.model.Relation) {
 			var parentOids = childModelNode.getParentOids();
 			for (var j = 0; j < parentOids.length; j++) {
-				var currOid = parentOids[j];
+				var otherNodeOid = parentOids[j];
 				
-				if (currOid != modelNode.getOid()) {
-					oidList.splice(i, 1);
-					i--;
+				if (otherNodeOid != modelNode.getOid()) {
+					oidList.removeKey(currOid);
 					
-					if (currOid != parentNodeOid && currOid != grandParentNodeOid) {
-						oidList.push(currOid);
-						container.loadByOid(currOid, function() {
+					if (otherNodeOid != parentNodeOid && otherNodeOid != grandParentNodeOid) {
+						oidList.add(otherNodeOid, childModelNode);
+						container.loadByOid(otherNodeOid, function() {
 							self.attachFollowersList(currNode, modelNode, oidList, parentNodeOid, grandParentNodeOid);
 						});
 						
@@ -141,7 +141,22 @@ uwm.hierarchytree.Loader.prototype.attachFollowersList = function(currNode, mode
 		}
 		
 		if (childModelNode instanceof uwm.model.ModelObject) {
-			var connectionType = modelNode.getModelNodeClass().getConnectionInfo(childModelNode.getModelNodeClass()).label;
+			var connectionType = 'undefined';
+			// get the ConnectionNode name from the connection info
+			var connectionInfo = modelNode.getModelNodeClass().getConnectionInfo(childModelNode.getModelNodeClass());
+			if (connectionInfo.connections && relationObject) {
+				// if there are several possible connection infos, we need to select the correct one by using the
+				// relation object
+				for (var i in connectionInfo.connections) {
+					var currConnection = connectionInfo.connections[i];
+					if (currConnection.connectionType == relationObject.getProperty('relationType')) {
+						connectionType = currConnection.connectionType;
+					}
+				}
+			}
+			else {
+				connectionType = connectionInfo.label;
+			}
 			var subArray = subClasses[connectionType];
 			if (!subArray) {
 				subArray = new Array();
@@ -149,7 +164,7 @@ uwm.hierarchytree.Loader.prototype.attachFollowersList = function(currNode, mode
 			subArray.push(childModelNode)
 			subClasses[connectionType] = subArray;
 		}
-	}
+	});
 	
 	for (var currClass in subClasses) {
 		if (!(subClasses[currClass] instanceof Function)) {
