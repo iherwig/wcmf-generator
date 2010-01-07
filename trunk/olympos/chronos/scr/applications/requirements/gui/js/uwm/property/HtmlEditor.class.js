@@ -89,7 +89,8 @@ uwm.property.HtmlEditor.prototype.handleInitialize = function() {
 		
 		Ext.EventManager.on(this.doc, 'keypress', function(e) {
 			if (e.shiftKey && e.getKey() == e.SPACE) {
-				this.insertAtCursor("<span id='" + uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID + "' />");
+				// use execCmd instead of relayCmd to have the span available immediatly
+				this.execCmd('inserthtml', "<span id='" + uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID + "' />");
 				
 				this.span = this.doc.getElementById(uwm.property.HtmlEditor.INLINE_COMBO_BOX_SPAN_ID);
 				var fullPreText = "";
@@ -147,7 +148,7 @@ uwm.property.HtmlEditor.prototype.resolveInlineComboBox = function(newValue, new
 	this.wrap.remove();
 	this.span.parentNode.removeChild(this.span);
 	if (newValue && newValueType) {
-		this.insertAtCursor(" <span class='autocomplete-" + newValueType + "'>" + newValue + "</span> ");
+		this.relayCmd('inserthtml', " <span class='autocomplete-" + newValueType + "'>" + newValue + "</span> ");
 	}
 	this.focus(undefined, 100);
 }
@@ -157,7 +158,7 @@ uwm.property.HtmlEditor.prototype.revertInlineComboBox = function() {
 	this.wrap.remove();
 	this.span.parentNode.removeChild(this.span);
 	if (this.preText) {
-		this.insertAtCursor(this.preText);
+		this.relayCmd('inserthtml', this.preText);
 	}
 	this.focus(undefined, 100);
 }
