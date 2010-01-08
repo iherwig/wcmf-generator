@@ -126,6 +126,9 @@ public class AntRunner extends AbstractWorkflowComponent {
 			project.fireBuildFinished(null);
 		} catch (BuildException e) {
 			project.fireBuildFinished(e);
+			issues.addError("antFile " + antFile + " build failed");
+			//throw new WorkflowInterruptedException("antFile " + antFile + " build failed");
+
 		}
 	}
 }
