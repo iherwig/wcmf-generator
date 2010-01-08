@@ -742,11 +742,11 @@
 «ENDDEFINE»
 
 «DEFINE analysisTaggedValues FOR Chronos::ChiRequirement»
-	«EXPAND writeEnum("Chronos::ChiRequirement", "Type") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Type") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Priority") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Author") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Proofreader") FOR this»
-	«EXPAND writeEnum("Chronos::ChiRequirement", "Status") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Status") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Alias") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "Version") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiRequirement", "created") FOR this»
@@ -758,7 +758,7 @@
 «DEFINE analysisTaggedValues FOR Chronos::ChiFeature»
 	«EXPAND writeTaggedValue("Chronos::ChiFeature", "Author") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiFeature", "Proofreader") FOR this»
-	«EXPAND writeEnum("Chronos::ChiFeature", "Status") FOR this»
+	«EXPAND writeTaggedValue("Chronos::ChiFeature", "Status") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiFeature", "Alias") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiFeature", "Version") FOR this»
 	«EXPAND writeTaggedValue("Chronos::ChiFeature", "created") FOR this»
