@@ -301,7 +301,7 @@ class UwmUtil {
 	{
 		if (self::$processVirtualPackages) {
 			if ($parent->getType() == 'Package') {
-				return false;
+				return true;
 			}
 		}
 		else {
