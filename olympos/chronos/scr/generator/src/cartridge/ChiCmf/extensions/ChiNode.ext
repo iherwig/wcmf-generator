@@ -274,6 +274,14 @@ List[uml::Property] getNotAbstractNavigableChildNodes(Chronos::ChiNode this):
 	this.getNotAbstractChildNodes().select(e|e.isNavigable())
 ;
 
+List[uml::Property] getNavigableParentNodes(ChiNode this):
+	this.resolveManyToMany(this.getParentNodesRecursive().select(e|e.isNavigable()), false)
+;
+
+List[uml::Property] getNavigableChildNodes(ChiNode this):
+	this.resolveManyToMany(this.getChildNodesRecursive().select(e|e.isNavigable()), false)
+;
+
 List[uml::Property] resolveManyToMany(ChiNode this, List[uml::Property] list, boolean includeAbstract):
 	let result = (List[uml::Property]) {}:
 	
