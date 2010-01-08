@@ -4,7 +4,7 @@
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='3'/>
 	<property name='basePath' value='src'/>
-	<property name='propertyFile' value='${basePath}/cartridge/Chi/workflow/chi.properties'/>
+	<property name='propertyFile' value='${basePath}/cartridge/ChiCmfCwe/workflow/chiCmfCwe.properties'/>
 	<property file="${propertyFile}"/>
 	
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
@@ -43,13 +43,6 @@
 		<outputSlot value="chronosProfileModel" />
 	</component>
 
-	<!-- normalize names -->
-	<component class="oaw.xtend.XtendComponent">
-		<metaModel idRef="${profilename}MM"/>
-		<metaModel idRef="UmlMM" />
-		<invoke value="common/nameNormalizer::normalizeNameWithoutPackage(model)" />
-	</component>
-
 	<!-- Check constraints before model 2 model transformation -->
 	<if cond="${doCheck}">
 		<component class="oaw.check.CheckComponent">
@@ -83,7 +76,7 @@
 		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
-		<invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model, chronosProfileModel)"/>
+ 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model, chronosProfileModel)"/>
 
 		<outputSlot value="transformedModel"/>
 	</component>
@@ -115,6 +108,45 @@
 	</component>
 	-->
 
+	<!-- Install the wCMF framework -->
+	<component class="com.wemove.wcmf.generator.workflow.InstallComponent">
+		<frameworkFile value="${frameworkFile}"/>
+		<libraryPath value="${targetDir}/wcmf"/>
+		<applicationPath value="${targetDir}/${applicationPackage}"/>
+	</component>
+
+	<!-- Expand the model into the wCMF templates -->
+	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="false">
+		<fileEncoding value="ISO-8859-1"/>
+		
+		<!-- Global variables used by the generator -->
+		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
+		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
+		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
+		<globalVarDef name="DefaultConfigFile" value="'${configFileDefault}'"/>
+		<globalVarDef name="ProjectName" value="'${projectname}'"/>
+		<globalVarDef name="TargetDirectory" value="'${targetDir}'"/>
+		<globalVarDef name="HeaderText" value="${headerText}"/>
+
+		<metaModel idRef="EmfMM"/>
+		<metaModel idRef="UmlMM"/>
+		<metaModel idRef="${profilename}MM"/>
+		
+		<expand value="${expand} FOR transformedModel"/>
+		
+		<outlet path="${targetDir}">
+			<postprocessor class="oaw.xpand2.output.JavaBeautifier"/>
+			<postprocessor class="oaw.xpand2.output.XmlBeautifier"/>
+		</outlet>
+		
+		<!-- Protected regions configuration -->
+		<prSrcPaths value="${targetDir}/${applicationPackage}"/>	
+		<prDefaultExcludes value="false"/>
+		<prExcludes value=""/>
+	</component>
+
 	<!-- Install the Cwe framework -->
 	<component class="net.sourceforge.olympos.oaw.workflow.Unzip">
 		<zipFile value="${frameworkFileCwe}"/>
@@ -129,7 +161,7 @@
 	</component>
 
 	<!-- Expand the model into the Cwe templates -->
-	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="true">
+	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="false">
 		<fileEncoding value="utf-8"/>
 		
 		<!-- Global variables used by the generator -->
@@ -156,7 +188,6 @@
 		<!-- Protected regions configuration -->
 		<prSrcPaths value="${targetDirCwe}"/>	
 		<prDefaultExcludes value="false"/>
-		<prExcludes value="*.svn-base"/>
+		<prExcludes value=""/>
 	</component>
-
 </workflow>
