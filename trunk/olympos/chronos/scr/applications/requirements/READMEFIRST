@@ -1,5 +1,5 @@
 READMEFIRST
-this is the readme for the Chronos Web Modeler (CWM).
+this is the readme for the Chronos Web Tools (CWT).
 
 LICENCE
  * Copyright (c) 2009 The Olympos Development Team.
@@ -48,7 +48,7 @@ INSTALLATION
 MANUAL
 - read the provided the online help after the installation of the application.
 	
-History
+HISTORY
 0.1	Alpha Black	
 •	Initial help screen
 •	Tooltips for tabs
@@ -142,8 +142,7 @@ History
 	• added connections between different use case types
 	
 
-	FIX
-	
+	FIX	
 pass generator errors to frontend
 
 fixed another exception without stack trace
@@ -210,3 +209,8 @@ added alias and version field to Diagrams, ActivitySets (removed width and heigh
 control flow relations implemented (object flow tbd)
 object flow implemented, fixed bug (language field not defined when login)
 prevent UseCase relation ends to be shown in tree
+
+0.9.8.3
+FIXES
+- PHP 5.3 compatibility
+- several bug fixing	
