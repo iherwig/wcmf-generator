@@ -1,5 +1,9 @@
 READMEFIRST
 this is the readme for the Chronos Web Tools (CWT).
+this file is contained in a zip file where you should addional find:
+- cwm.zip: containing the installation package itself
+- Chronos_Web_Modeller_Installation.pdf: containing the installation instructions
+- cwm.sql.gz containing the stanbdard models
 
 LICENCE
  * Copyright (c) 2009 The Olympos Development Team.
@@ -12,6 +16,7 @@ LICENCE
  * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
  * this entire header must remain intact.
 
+ 
  ABOUT CWM
 The CWM is a tool for:
 
@@ -213,4 +218,8 @@ prevent UseCase relation ends to be shown in tree
 0.9.8.3
 FIXES
 - PHP 5.3 compatibility
-- several bug fixing	
+- several bug fixing
+
+0.9.8.4
+FIXES
+- fixed smarty pre filter for php 5.3
