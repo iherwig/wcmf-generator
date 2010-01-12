@@ -108,8 +108,10 @@ uwm.hierarchytree.Loader.prototype.attachFollowersList = function(currNode, mode
 	
 	var self = this;
 	
-	oidList.eachKey(function(currOid, relationObject) {
-  
+	var oids = oidList.keys;
+	for (var i = 0; i < oids.length; i++) {
+		var currOid = oids[i];
+		var relationObject = oidList.get(currOid);
 		var childModelNode = container.getByOid(currOid);
 		
 		if (!childModelNode) {
@@ -147,8 +149,8 @@ uwm.hierarchytree.Loader.prototype.attachFollowersList = function(currNode, mode
 			if (connectionInfo.connections && relationObject) {
 				// if there are several possible connection infos, we need to select the correct one by using the
 				// relation object
-				for (var i in connectionInfo.connections) {
-					var currConnection = connectionInfo.connections[i];
+				for (var j in connectionInfo.connections) {
+					var currConnection = connectionInfo.connections[j];
 					if (currConnection.connectionType == relationObject.getProperty('relationType')) {
 						connectionType = currConnection.connectionType;
 					}
@@ -164,7 +166,7 @@ uwm.hierarchytree.Loader.prototype.attachFollowersList = function(currNode, mode
 			subArray.push(childModelNode)
 			subClasses[connectionType] = subArray;
 		}
-	});
+	};
 	
 	for (var currClass in subClasses) {
 		if (!(subClasses[currClass] instanceof Function)) {
