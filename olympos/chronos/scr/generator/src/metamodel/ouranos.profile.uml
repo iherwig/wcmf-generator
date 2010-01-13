@@ -5926,16 +5926,4 @@ ouranos Rule variable can be used as: Number with type Integer and no name; Cons
   <packagedElement xmi:type="uml:Extension" xmi:id="_fm55PFvpEd6-GfKcCJahig" name="Action_RuleAction" memberEnd="_fm55PVvpEd6-GfKcCJahig _fm54uVvpEd6-GfKcCJahig">
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_fm55PVvpEd6-GfKcCJahig" name="extension_RuleAction" type="_fm54sVvpEd6-GfKcCJahig" aggregation="composite" association="_fm55PFvpEd6-GfKcCJahig"/>
   </packagedElement>
-  <profileApplication xmi:id="_fm55PlvpEd6-GfKcCJahig">
-    <eAnnotations xmi:id="_fm55P1vpEd6-GfKcCJahig" source="http://www.eclipse.org/uml2/2.0.0/UML">
-      <references xmi:type="ecore:EPackage" href="ProfileBase.profile.uml#_fm55n1vpEd6-GfKcCJahig"/>
-    </eAnnotations>
-    <appliedProfile href="ProfileBase.profile.uml#_fm55nVvpEd6-GfKcCJahig"/>
-  </profileApplication>
-  <profileApplication xmi:id="_fm55QFvpEd6-GfKcCJahig">
-    <eAnnotations xmi:id="_fm55QVvpEd6-GfKcCJahig" source="http://www.eclipse.org/uml2/2.0.0/UML">
-      <references xmi:type="ecore:EPackage" href="Default.profile.uml#_fmArpFvpEd6-GfKcCJahig"/>
-    </eAnnotations>
-    <appliedProfile href="Default.profile.uml#_fmArolvpEd6-GfKcCJahig"/>
-  </profileApplication>
 </uml:Profile>

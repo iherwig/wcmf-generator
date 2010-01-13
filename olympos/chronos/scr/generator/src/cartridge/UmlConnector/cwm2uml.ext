@@ -12,11 +12,12 @@ extension cartridge::UmlConnector::objects::Package;
 //for propagateNames
 extension cartridge::UmlConnector::connections;
 
-uml::Model createUmlModel(String modelName, cwm::CwmExport export, uml::Profile chronosProfile):
+uml::Model createUmlModel(String modelName, cwm::CwmExport export, uml::Profile chronosProfile, uml::Profile ouranosProfile):
 	//(new uml::Class).getApplicableStereotype()isStereotypeApplied()
 	let um = new uml::Model :
 	um.setName(modelName) ->
 	um.applyProfile(chronosProfile) ->
+	um.applyProfile(ouranosProfile) ->
 	um.nestedPackage.addAll(export.model.package.convert()) ->
 	export.model.package.establishConnections(um) ->
 	export.model.package.transferValues(um) ->
