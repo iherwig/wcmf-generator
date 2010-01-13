@@ -23,7 +23,7 @@
 		<profile value="${ouranosProfileUri}"/>
 	</bean>
 
-	<!-- load profiles as model (for applying to real model -->
+	<!-- load profiles as model (for applying to real model) -->
 	<component class="org.eclipse.mwe.emf.Reader">
 		<uri value="${chronosProfileUri}" />
 		<modelSlot value="chronosProfile" />

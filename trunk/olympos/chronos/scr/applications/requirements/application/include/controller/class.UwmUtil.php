@@ -123,7 +123,7 @@ class UwmUtil {
 		self::$dom->flush();
 
 		self::$dom = null;
-		
+
 		// create the problem report
 		$report = "";
 		// find duplicates
@@ -274,12 +274,6 @@ class UwmUtil {
 					}
 					break;
 
-				case 'ProductionRuleSet':
-					if (self::shouldProcessChild($currPackage, $currChild)) {
-						self::processProductionRuleSet($currChild);
-					}
-					break;
-					
 				default:
 					if (self::shouldProcessChild($currPackage, $currChild)) {
 						self::processNode($currChild);
@@ -289,7 +283,7 @@ class UwmUtil {
 
 		self::$dom->endElement();
 	}
-	
+
 	/**
 	 * Check if a child object should be processed according to the
 	 * current setting of processVirtualPackages.
@@ -323,8 +317,8 @@ class UwmUtil {
 	private static function getChildren($currPackage)
 	{
 		$currPackage->loadChildren();
-		
-		if ($currPackage->getType() == 'Package') 
+
+		if ($currPackage->getType() == 'Package')
 		{
 			return $currPackage->getChildren();
 		}
@@ -417,9 +411,9 @@ class UwmUtil {
 			$childType = self::getRealType($currChild);
 
 			if ($childType != 'Figure') {
-//				if ($childType == 'NMChiControllerActionKeyChiController' || $childType == 'NMChiControllerActionKeyChiView') {
-//					self::processNode($currChild);
-//				} else if (self::processManyToMany($currChild, $currNode)) {
+				//				if ($childType == 'NMChiControllerActionKeyChiController' || $childType == 'NMChiControllerActionKeyChiView') {
+				//					self::processNode($currChild);
+				//				} else if (self::processManyToMany($currChild, $currNode)) {
 				if (self::processManyToMany($currChild, $currNode)) {
 					//do nothing
 				} else if ($childType == 'ChiValue' || $childType == 'Operation') {
@@ -444,7 +438,9 @@ class UwmUtil {
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild)
 		{
-			if ($currChild->getType() != 'Figure') {
+			if ($currChild->getBaseType() == 'PoductionRuleSet') {
+				self::processProductionRuleSet($currChild);
+			} else if ($currChild->getType() != 'Figure') {
 				self::processNode($currChild);
 			}
 		}
@@ -458,7 +454,7 @@ class UwmUtil {
 
 		self::appendAttributes($currNode);
 		self::registerExportedNode($currNode);
-	
+
 		$currNode->loadChildren('Figure');
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild)
@@ -467,15 +463,15 @@ class UwmUtil {
 				self::processFigure($currChild);
 			}
 		}
-		
+
 		self::$dom->endElement();
 	}
 
 	private static function processFigure($currNode) {
-		
+
 		self::check($currNode->getId());
 		self::$dom->startElement($currNode->getType());
-		
+
 		// get the alias of the object represented by the figure
 		$alias = '';
 		$parentoids = $currNode->getProperty('parentoids') ;
@@ -492,20 +488,36 @@ class UwmUtil {
 				break;
 			}
 		}
-		
+
 		self::appendAttributes($currNode);
 		self::$dom->writeAttribute('Alias', $alias);
 		self::registerExportedNode($currNode);
-		
+
 		$currNode->loadParents();
 		$parents = $currNode->getParents();
 		foreach ($parents as $currParent) {
 			self::processParent($currParent);
 		}
-		
+
 		self::$dom->endElement();
 	}
 
+	private static function processProductionRuleSet($currNode) {
+		self::check($currNode->getId());
+		self::$dom->startEleent($currNode->getBaseType());
+		
+		self::appendAttributes($currNode);
+		self::registerExportedNode($currNode);
+		
+		$currNode->loadChildren();
+		$children = $currNode->getChildren();
+		foreach ($children as $currChild) {
+			self::processChild($currChild);
+		}
+		
+		self::$dom->endElement();
+	}
+	
 	private static function processProductionRule($currNode) {
 		self::check($currNode->getId());
 		self::$dom->startElement($currNode->getType());
@@ -526,7 +538,7 @@ class UwmUtil {
 
 		self::$dom->endElement();
 	}
-	
+
 	private static function processNode($currNode)
 	{
 		self::check($currNode->getId());
@@ -624,18 +636,18 @@ class UwmUtil {
 
 			return $result;
 	}
-	
+
 	/**
 	 * Add a package including all referenced nodes that were not exported yet.
 	 */
 	private static function processReferencedNodes() {
 		$persistenceFacade = &PersistenceFacade::getInstance();
-		
+
 		// create the enclosing package
 		$package = &$persistenceFacade->create('Package', BUILDDEPTH_SINGLE);
 		$package->setOID(PersistenceFacade::composeOID(array('type' => 'Package', 'id' => array(0))));
 		$package->setName('Referenced Nodes');
-		
+
 		// add the referenced nodes to the package
 		foreach (self::$referencedNodes as $oid) {
 			if (!self::isExportedNode($oid)) {
