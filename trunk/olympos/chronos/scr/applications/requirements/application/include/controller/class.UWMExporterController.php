@@ -210,15 +210,15 @@ class UWMExporterController extends BatchController
 
 		// get the generated file
 		$tmpUmlExportPath = $session->get($this->TEMP_UML_EXPORT_PATH);
-		$exportFile = "$tmpUmlExportPath/uml-generated.uml";
+		$exportFile = "$tmpUmlExportPath/cwm-export.zip";
 		if (filesize($exportFile) == 0) {
 			ExportShutdownHandler::success();
 			return;
 		}
 		
 		//header('Content-type: text/plain');
-		header('Content-type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="cwm-export.uml"');
+		header('Content-type: application/zip');
+		header('Content-Disposition: attachment; filename="cwm-export.zip"');
 
 		readfile($exportFile);
 		//readfile($tmpUwmExportPath);
@@ -227,6 +227,7 @@ class UWMExporterController extends BatchController
 		// cleanup
 		unlink($session->get($this->TEMP_UWM_EXPORT_PATH));
 		unlink($session->get($this->TEMP_PROPERTIES_PATH));
+		unlink("$tmpUmlExportPath/uml-generated.uml");
 		unlink($exportFile);
 		rmdir($session->get($this->TEMP_UML_EXPORT_PATH));
 
