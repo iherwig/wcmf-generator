@@ -428,6 +428,7 @@
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivitySend" type="ActivitySend"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ActivityReceive" type="ActivityReceive"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiObject" type="ChiObject"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ProductionRuleSet" type="ProductionRuleSet"/>
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
@@ -457,6 +458,7 @@
 		<xsd:attribute name="fk_activity_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityreceive_id" type="xsd:string"/>
+		<xsd:attribute name="fk_productionruleset_id" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Author" type="xsd:string"/>
@@ -522,6 +524,7 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
+		<xsd:attribute name="fk_productionruleset_id" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Author" type="xsd:string"/>
@@ -709,6 +712,24 @@
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chiworkerinternal_id" type="xsd:string"/>
+		<xsd:attribute name="Status" type="xsd:string"/>
+		<xsd:attribute name="Alias" type="xsd:string"/>
+		<xsd:attribute name="Author" type="xsd:string"/>
+		<xsd:attribute name="Version" type="xsd:string"/>
+		<xsd:attribute name="Name" type="xsd:string"/>
+		<xsd:attribute name="Notes" type="xsd:string"/>
+		<xsd:attribute name="created" type="xsd:string"/>
+		<xsd:attribute name="creator" type="xsd:string"/>
+		<xsd:attribute name="last_editor" type="xsd:string"/>
+		<xsd:attribute name="modified" type="xsd:string"/>
+	</xsd:complexType>
+	<xsd:complexType name="ProductionRuleSet">
+		<xsd:sequence>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_activityset_id" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Author" type="xsd:string"/>

@@ -258,6 +258,20 @@ Void establishConnectionsToDataStore(cwm::ManyToMany ch, uml::OpaqueAction paren
 	)
 ;
 
+Void establishConnectionsFromProductionRuleSet(cwm::Child ch, uml::Activity parent, uml::Model um, String label):
+	let child = um.allOwnedElements().typeSelect(uml::ActivityNode).selectFirst(e|e.name == ch.targetType + ":" + ch.targetOid):
+	child != null ? (
+		let rel = new uml::Realization : (
+			rel.supplier.add(parent) ->
+			rel.client.add(child) ->
+			rel.setName(label)
+		) ->
+		parent.getNearestPackage().packagedElement.add(rel)
+	) : (
+		Void
+	)
+;
+
 Void establishConnectionsToDecisionNode(cwm::ManyToMany ch, uml::OpaqueAction parent, uml::Model um, String label, uml::AggregationKind parentAK, uml::AggregationKind childAK, Boolean parentNav, Boolean childNav) :
 	//(new uml::Association).setN
 	let child = um.allOwnedElements().typeSelect(uml::DecisionNode).select(e|e.name == ch.targetType + ":" + ch.targetOid).first(): (

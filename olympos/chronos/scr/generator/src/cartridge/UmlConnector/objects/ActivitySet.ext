@@ -13,6 +13,7 @@ extension cartridge::UmlConnector::objects::ActivityFinal;
 extension cartridge::UmlConnector::objects::ActivitySend;
 extension cartridge::UmlConnector::objects::ActivityReceive;
 extension cartridge::UmlConnector::objects::ChiObject;
+extension cartridge::UmlConnector::objects::ProductionRuleSet;
 
 uml::Activity convert(cwm::ActivitySet a):
 	//(new uml::Activity).structuredNode
@@ -24,7 +25,8 @@ uml::Activity convert(cwm::ActivitySet a):
 		uc.node.addAll(a.activityFinal.convert()) ->
 		uc.node.addAll(a.activitySend.convert()) ->
 		uc.node.addAll(a.activityReceive.convert()) ->
-		uc.node.addAll(a.chiObject.convert())
+		uc.node.addAll(a.chiObject.convert()) ->
+		uc.ownedBehavior.addAll(a.productionRuleSet.convert())
 	) ->
 	uc
 ;
@@ -36,7 +38,8 @@ Void establishConnections(cwm::ActivitySet b, uml::Model um):
 	//b.activityFinal.establishConnections(um) ->
 	b.activitySend.establishConnections(um) ->
 	b.activityReceive.establishConnections(um) ->
-	b.chiObject.establishConnections(um)
+	b.chiObject.establishConnections(um) ->
+	b.productionRuleSet.establishConnections(um)
 ;
 
 Void transferValues(cwm::ActivitySet a, uml::Model um):
@@ -49,6 +52,7 @@ Void transferValues(cwm::ActivitySet a, uml::Model um):
 			a.activitySend.transferValues(um) ->
 			a.activityReceive.transferValues(um) ->
 			a.chiObject.transferValues(um) ->
+			a.productionRuleSet.transferValues(um) ->
 	
 			uc.setTaggedValue("Chronos::ActivitySet", "Alias", a.alias) ->
 			uc.setTaggedValue("Chronos::ActivitySet", "Version", a.version) ->
