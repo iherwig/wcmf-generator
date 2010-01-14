@@ -57,7 +57,7 @@ Void transferValues(cwm::ChiNode c, uml::Model um):
 			uc.setTaggedValue("Chronos::ChiNode", "Alias", c.alias) ->
 			uc.setTaggedValue("Chronos::ChiNode", "Version", c.version) ->
 			uc.setVisibility(c.visibility.getVisibilityKind()) ->
-			uc.setIsAbstract(c.isAbstract == "true") ->
+			uc.setIsAbstract(c.isAbstract) ->
 			uc.setName(c.name) ->
 			c.notes != null ? (
 				comment.setBody(c.notes) ->
