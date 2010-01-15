@@ -49,6 +49,33 @@ cwl.Cwl.prototype.getConfig = function() {
 cwl.Cwl.prototype.startWorkbench = function() {
 	//this.bootstrap();
 	this.viewport = new cwl.ui.Workbench();
+	
+	// load/create demo rule
+	var self = this;
+	var actionSetLoad = new chi.persistency.ActionSet();
+	actionSetLoad.addList('ProductionRule', 1, 0, 'id', 'asc', function(data) {
+		if (data.records.length > 0) {
+			self.viewport.textRuleTabPanel.loadRule(data.records[0].getOid());
+		}
+		else {
+			var actionSetCreate = new chi.persistency.ActionSet();
+			actionSetCreate.addCreate('ProductionRule', function(data) {
+				self.viewport.textRuleTabPanel.loadRule(data.oid);
+			});
+			actionSetCreate.commit(
+				function(request) {
+				}, function(data, errorMessage) {
+					chi.Log.log(errorMessage, chi.Log.ERROR);
+				}
+			);
+		}
+	});
+	actionSetLoad.commit(
+		function(request) {}, 
+		function(data, errorMessage) {
+			chi.Log.log(errorMessage, chi.Log.ERROR);
+		}
+	);
 };
 
 cwl.Cwl.prototype.installOverrides = function() {
