@@ -318,7 +318,7 @@ cwl.textrule.TextRulePanel.prototype.addOrUpdateAction = function(fieldId, value
 	this.showLoading();
 
 	var actionSet = new chi.persistency.ActionSet();
-  var self = this;
+	var self = this;
 	
 	// check if a field for the action already exists
 	if (this.fieldOidMapping.containsKey(fieldId)) {

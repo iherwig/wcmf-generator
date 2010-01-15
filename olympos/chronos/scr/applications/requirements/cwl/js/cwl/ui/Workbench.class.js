@@ -88,8 +88,6 @@ cwl.ui.Workbench = function(config) {
 			}
 		}    
 	}, config));
-	
-	this.textRuleTabPanel.loadRule('ProductionRule:1');
 }
 
 Ext.extend(cwl.ui.Workbench, Ext.Viewport);
