@@ -189,6 +189,31 @@ class ChiBase extends ChiBaseBase
 					$suffix = 'ActSet';
 					break;
 				}
+
+				case 'ProductionRuleSet' :{
+					$suffix = 'PrSet';
+					break;
+				}
+				case 'ProductionRuleSet' :{
+					$suffix = 'PrSetVar';
+					break;
+				}
+				case 'ProductionRule' :{
+					$suffix = 'Pr';
+					break;
+				}
+				case 'ProductionRule' :{
+					$suffix = 'PrVar';
+					break;
+				}
+				case 'ProductionRule' :{
+					$suffix = 'PrCond';
+					break;
+				}
+				case 'ProductionRule' :{
+					$suffix = 'PrAct';
+					break;
+				}
 			};
     
 			$this->setValue('Alias', sprintf('%s%03u%s',$praefix,$count,$suffix), DATATYPE_ATTRIBUTE);
