@@ -117,25 +117,29 @@ public class «this.asResultName()» {
 «ENDDEFINE»
 
 «DEFINE nodeCall FOR uml::OpaqueAction»
-	«EXPAND nodeCallDefault FOR this»
+	«IF !this.isAlreadyProcessed()»
+		«EXPAND nodeCallDefault FOR this»
+		
+		«EXPAND nodeCallResult FOR this»
 	
-	«EXPAND nodeCallResult FOR this»
-
-	«LET this.getNextNode() AS nextNode» 
-		«IF nextNode != null»
-			«EXPAND nodeCall FOR nextNode»
-		«ENDIF»
-	«ENDLET»
+		«LET this.getNextNode() AS nextNode» 
+			«IF nextNode != null»
+				«EXPAND nodeCall FOR nextNode»
+			«ENDIF»
+		«ENDLET»
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE nodeCall FOR uml::DecisionNode»
-	«EXPAND nodeCallDefault FOR this»
-	
-	switch («this.asResultName()».selection) {
-		«EXPAND nodeCallSelection FOREACH this.getFlowStates()»
-	}
-	
-	«EXPAND nodeCallResult FOR this»
+	«IF !this.isAlreadyProcessed()»
+		«EXPAND nodeCallDefault FOR this»
+		
+		switch («this.asResultName()».selection) {
+			«EXPAND nodeCallSelection FOREACH this.getFlowStates()»
+		}
+		
+		«EXPAND nodeCallResult FOR this»
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE nodeCall FOR uml::ActivityNode»«REM»Dummy for unhandled cases«ENDREM»«ENDDEFINE»

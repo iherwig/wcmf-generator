@@ -1,0 +1,45 @@
+<workflow>
+	<property name="basePath" value="src"/>
+	<property name="chronosProfileUri" value="/home/nist/Desktop/yyy/chronos.profile.uml"/>
+	<property name="ouranosProfileUri" value="/home/nist/Desktop/yyy/ouranos.profile.uml"/>
+
+	<!-- UML2 Setup -->
+	<bean class="org.eclipse.mwe.emf.StandaloneSetup"/>
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<!-- load metamodels -->
+	<bean id="uml2" class="oaw.uml2.UML2MetaModel"/>
+	<bean id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${chronosProfileUri}"/>
+	</bean>
+	<bean id="ouranos" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${ouranosProfileUri}"/>
+	</bean>
+
+	<!-- read source model -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="/home/nist/Desktop/yyy/cwm-export.uml"/>
+		<outputSlot value="sourceModel"/>
+	 </component>
+
+	<!-- check model -->
+	<component class="org.openarchitectureware.check.CheckComponent">
+		<metaModel idRef="uml2"/>
+		<metaModel idRef="chronos"/>
+		<metaModel idRef="ouranos"/>
+		<checkFile value="cartridge::Grails::grailsService"/>
+		<emfAllChildrenSlot value="sourceModel"/>		
+	</component>
+	
+	<!-- generate domain classes -->
+	<component class="org.openarchitectureware.xpand2.Generator">
+		<metaModel idRef="uml2"/>
+		<metaModel idRef="chronos"/>
+		<metaModel idRef="ouranos"/>
+		<fileEncoding value="utf-8"/>
+
+		<expand value="cartridge::Grails::grailsService::root FOR sourceModel"/>
+
+		<outlet path="target/grails/service"/>
+	</component>
+</workflow>

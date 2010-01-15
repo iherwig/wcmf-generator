@@ -25,21 +25,31 @@ uml::InitialNode getInitialNode(uml::Activity this):
 ;
 
 List[uml::DataStoreNode] getInputVariables(uml::Activity this):
-	this.node.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).select(e|e.incoming.size == 0)
+	this.getFirstNode().incoming.typeSelect(uml::ObjectFlow).source
 ;
 
 List[uml::DataStoreNode] getOutputVariables(uml::Activity this):
-	let allOutput = this.node.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).select(e|e.outgoing.size == 0):
-	
-	allOutput.select(e|allOutput.selectFirst(f|e.asVariableName() == e.asVariableName()) == e)
+	this.getLastNodes().outgoing.typeSelect(uml::ObjectFlow).target
+;
+
+uml::DataStoreNode getInputVariable(uml::Activity this):
+	this.getInputVariables().first()
+;
+
+uml::DataStoreNode getOutputVariable(uml::Activity this):
+	this.getOutputVariables().first()
 ;
 
 uml::ActivityNode getFirstNode(uml::Activity this):
 	this.getInitialNode().outgoing.typeSelect(uml::ControlFlow).target.first()
 ;
 
+List[uml::ActivityNode] getLastNodes(uml::Activity this):
+	this.node.typeSelect(uml::FinalNode).first().incoming.typeSelect(uml::ControlFlow).source
+;
+
 uml::ActivityNode getLastNode(uml::Activity this):
-	this.node.typeSelect(uml::FinalNode).first().incoming.typeSelect(uml::ControlFlow).source.first()
+	this.getLastNodes().first()
 ;
 
 List[uml::ActivityNode] getMethodNodes(uml::Activity this):
@@ -110,4 +120,18 @@ String asFlowName(uml::ActivityEdge this):
 	) : (
 		"FLOW_STATE_" + this.source.outgoing.indexOf(this)
 	)
+;
+
+String PROCESSED_KEYWORD(): "GrailsServiceProcessed";
+
+boolean isAlreadyProcessed(uml::ActivityNode this):
+	let result = this.hasKeyword(PROCESSED_KEYWORD()):
+	
+	!result ? (
+		this.addKeyword(PROCESSED_KEYWORD())
+	) : (
+		Void
+	) ->
+	
+	result
 ;
