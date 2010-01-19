@@ -72,5 +72,8 @@ class DionysosException extends ApplicationException
   /* actionSet action */
 
   /* log action */
+  
+  /* search action */
+  const SEARCH_NOT_SUPPORTED = 800;
 }
 ?>
