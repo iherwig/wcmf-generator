@@ -15,19 +15,18 @@
 
 	«EXPAND resultClass FOR this»
 	
-	«EXPAND contextClasses FOREACH this.getMethodNodes()»
+	«EXPAND contextClasses FOREACH this.getProductionRulesets()»
+	«EXPAND contextClasses FOREACH this.getMethodNodes().typeSelect(uml::DecisionNode).select(e|e.getProductionRuleset() == null)»
 
 	«FILE this.asClassName() + ".groovy"»
 class «this.asClassName()» {
 			
-	static expose=['cxf']
-	
 	boolean transactional = true
 	
 	public «this.asResultName()» «this.asMainMethodName()»(«this.asRequestName()» request) {
 		«EXPAND resultVariable FOREACH this.getMethodNodes()»
 		
-		«this.asResultName()» result = new «this.asResultName()»()
+		«this.asResultName()» result = «this.asConstructorCall()»
 		
 		«LET this.getFirstNode() AS firstNode»
 			«IF firstNode != null»
@@ -38,13 +37,16 @@ class «this.asClassName()» {
 		return result
 	}
 	
-	«EXPAND nodeMethod FOREACH this.getMethodNodes()»
+	«EXPAND nodeMethod FOREACH this.getMethodNodes().select(e|e.getProductionRuleset() == null)»
+	
+	«EXPAND nodeMethod FOREACH this.getProductionRulesets()»
 }
 	«ENDFILE»
 «ENDDEFINE»
 
 «DEFINE requestClass FOR uml::Activity»
-	«FILE this.asRequestName() + ".groovy"»
+	«IF this.asRequestName() != "def"»
+		«FILE this.asRequestName() + ".groovy"»
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 
@@ -54,11 +56,13 @@ public class «this.asRequestName()» {
 	«currInput.getGrailsTypeName()» «currInput.asVariableName()»
 	«ENDFOREACH»
 }
-	«ENDFILE»
+		«ENDFILE»
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE resultClass FOR uml::Activity»
-	«FILE this.asResultName() + ".groovy"»
+	«IF this.asResultName() != "def"»
+		«FILE this.asResultName() + ".groovy"»
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAccessType;
 
@@ -68,42 +72,60 @@ public class «this.asResultName()» {
 	«currOutput.getGrailsTypeName()» «currOutput.asVariableName()»
 	«ENDFOREACH»
 }
-	«ENDFILE»
+		«ENDFILE»
+	«ENDIF»
 «ENDDEFINE»
 
-«DEFINE contextClasses FOR uml::ActivityNode»
+«DEFINE contextClasses FOR Ouranos::ProductionRuleset»
 	«FILE this.asContextName() + ".groovy"»
-	public class «this.asContextName()» extends Context {
-		/**
-		 * contains constants that define a level of a flow within a ruleset
-		 * e.g. these constants are set as a the Result of the execute of a rule
-		 */
-		enum RulesetState {
-			BEGIN,
-			END
-		}
-		
-		/**
-		 * contains that define the actions for a higher level flow
-		 * between rulesets
-		 * e.g. these constants are set as a the Result of the execute of a rule
-		 */
-		enum FlowState {
-			«EXPAND flowStates FOR this»			
-		}
-		
-		RulesetState rulesetState = RulesetState.BEGIN
-		
-		//Ruleset in variables
-		«FOREACH this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode) AS currSource»
-			«currSource.getGrailsTypeName()» «currSource.asVariableName()»
-		«ENDFOREACH»
+public class «this.asContextName()» extends Context {
+	/**
+	 * contains constants that define a level of a flow within a ruleset
+	 * e.g. these constants are set as a the Result of the execute of a rule
+	 */
+	enum RulesetState {
+		BEGIN,
+		END
 	}
+	
+	/**
+	 * contains that define the actions for a higher level flow
+	 * between rulesets
+	 * e.g. these constants are set as a the Result of the execute of a rule
+	 */
+	enum FlowState {
+		«EXPAND flowStates FOR this»			
+	}
+	
+	RulesetState rulesetState = RulesetState.BEGIN
+	
+	/* Ruleset in variables */
+	«FOREACH this.getFirstNodes().getInputChiObjects() AS currSource»
+		«currSource.getGrailsTypeName()» «currSource.asVariableName()»
+	«ENDFOREACH»
+}
 	«ENDFILE»
 «ENDDEFINE»
- custom criteria
-«DEFINE flowStates FOR uml::ActivityNode»
 
+«DEFINE contextClasses FOR uml::DecisionNode»
+	«FILE this.asContextName() + ".groovy"»
+public class «this.asContextName()» extends Context {
+	/**
+	 * contains that define the actions for a higher level flow
+	 * between rulesets
+	 * e.g. these constants are set as a the Result of the execute of a rule
+	 */
+	enum FlowState {
+		«EXPAND flowStates FOR this»			
+	}
+}
+	«ENDFILE»
+«ENDDEFINE»	
+
+«DEFINE flowStates FOR Ouranos::ProductionRuleset»
+	«FOREACH this.getFlowStates() AS currOutFlow SEPARATOR ","»
+		«currOutFlow.asFlowName()-»
+	«ENDFOREACH»
 «ENDDEFINE»
 
 «DEFINE flowStates FOR uml::DecisionNode»
@@ -118,34 +140,116 @@ public class «this.asResultName()» {
 
 «DEFINE nodeCall FOR uml::OpaqueAction»
 	«IF !this.isAlreadyProcessed()»
-		«EXPAND nodeCallDefault FOR this»
+		«IF this.getProductionRuleset() == null»
+			«EXPAND nodeCallDefault FOR this»
+			
+			«EXPAND nodeCallResult FOR this»
 		
-		«EXPAND nodeCallResult FOR this»
-	
-		«LET this.getNextNode() AS nextNode» 
-			«IF nextNode != null»
-				«EXPAND nodeCall FOR nextNode»
-			«ENDIF»
-		«ENDLET»
+			«LET this.getNextEdges().first() AS nextEdge» 
+				«IF nextEdge.name != "LoopContinue"»
+					«LET nextEdge.target AS nextNode»
+						«IF nextNode != null»
+							«EXPAND nodeCall FOR nextNode»
+						«ENDIF»
+					«ENDLET»
+				«ELSE»
+					continue
+				«ENDIF»
+			«ENDLET»
+		«ELSE»
+			«EXPAND nodeCall FOR this.getProductionRuleset()»
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE nodeCall FOR uml::DecisionNode»
 	«IF !this.isAlreadyProcessed()»
-		«EXPAND nodeCallDefault FOR this»
-		
-		switch («this.asResultName()».selection) {
-			«EXPAND nodeCallSelection FOREACH this.getFlowStates()»
-		}
-		
-		«EXPAND nodeCallResult FOR this»
+		«IF this.getProductionRuleset() == null»
+			«EXPAND nodeCallDefault FOR this»
+			
+			«IF !this.isLoop()»
+				switch («this.asResultName()».selection) {
+					«EXPAND nodeCallSelection(this.asContextName(), false) FOREACH this.getFlowStates()»
+				}
+			«ELSE»
+				«LET this.getLoopPredecessor().incoming.source.typeSelect(uml::DataStoreNode).first() AS listStore»
+					«listStore.getGrailsTypeName()» «listStore.asVariableName()» = «this.getLoopPredecessor().asMethodName()»(«EXPAND nodeCallParameter FOREACH this.getLoopPredecessor().getInputChiObjects()»)
+					
+					«LET this.getLoopStart().outgoing.target.typeSelect(uml::DataStoreNode).first() AS listElement»
+						«listElement.addKeyword(LIST_ELEMENT_KEYWORD())»
+						for («listElement.getGrailsTypeName()» «listElement.asVariableName()» : «listStore.asVariableName()») {
+							«EXPAND nodeCall FOR this.getLoopStart().getNextNode()»
+						}
+					«ENDLET»
+				«ENDLET»
+			«ENDIF»
+			
+			«EXPAND nodeCallResult FOR this»
+		«ELSE»
+			«EXPAND nodeCall FOR this.getProductionRuleset()»
+		«ENDIF»
 	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE nodeCall FOR uml::ActivityNode»«REM»Dummy for unhandled cases«ENDREM»«ENDDEFINE»
 
+«DEFINE nodeCall FOR Ouranos::ProductionRuleset»
+	«LET this.getRulesetParents().typeSelect(uml::DecisionNode) AS decisions»
+		«IF decisions.size == 0»
+			«EXPAND nodeCallRuleset FOR this»
+		«ELSE»
+			«IF decisions.first().isLoop()»
+				«EXPAND nodeCallRulesetLoop FOR decisions.first()»
+			«ELSE»
+				«EXPAND nodeCallRulesetDecision FOR this»
+			«ENDIF»
+		«ENDIF»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE nodeCallRuleset FOR Ouranos::ProductionRuleset»
+	«LET this.getLastNodes().first() AS lastNode» 
+		«lastNode.asResultName()» = «this.asMethodName()»(«EXPAND nodeCallParameter FOREACH this.getFirstNodes().getInputChiObjects()»)
+	
+		«EXPAND nodeCallResult FOR lastNode»
+	
+		«IF lastNode.getNextNode() != null»
+			«EXPAND nodeCall FOR lastNode.getNextNode()»
+		«ENDIF»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE nodeCallRulesetLoop FOR uml::DecisionNode»
+	«LET this.getLoopPredecessor().incoming.source.typeSelect(uml::DataStoreNode).first() AS listStore»
+		«listStore.getGrailsTypeName()» «listStore.asVariableName()» = «this.getProductionRuleset().asMethodName()»(«EXPAND nodeCallParameter FOREACH this.getLoopPredecessor().getInputChiObjects()»)
+		
+		«LET this.getLoopStart().outgoing.target.typeSelect(uml::DataStoreNode).first() AS listElement»
+			«listElement.addKeyword(LIST_ELEMENT_KEYWORD()) -> ""»
+			for («listElement.getGrailsTypeName()» «listElement.asVariableName()» : «listStore.asVariableName()») {
+				«EXPAND nodeCall FOR this.getLoopStart().getNextNode()»
+			}
+		«ENDLET»
+	«ENDLET»
+	
+	«LET this.outgoing.select(e|e.name != "LoopStart").target.first() AS nextNode»
+		«IF nextNode != null»
+			«EXPAND nodeCall FOR nextNode»
+		«ENDIF»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE nodeCallRulesetDecision FOR Ouranos::ProductionRuleset»
+	«LET this.getFirstNodes().first() AS firstNode»
+		«firstNode.asResultName()» = «this.asMethodName()»(«EXPAND nodeCallParameter FOREACH firstNode.getInputChiObjects()»)
+
+		switch («firstNode.asResultName()».selection) {
+			«EXPAND nodeCallSelection(this.asContextName(), true) FOREACH this.getFlowStates()»
+		}
+	«ENDLET»
+«ENDDEFINE»
+
 «DEFINE nodeCallDefault FOR uml::ActivityNode»
-	«this.asResultName()» = «this.asMethodName()»(«EXPAND nodeCallParameter FOREACH this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode)»)
+	«this.asResultName()» = «this.asMethodName()»(«EXPAND nodeCallParameter FOREACH this.getInputChiObjects()»)
 «ENDDEFINE»
 
 «DEFINE nodeCallParameter FOR uml::DataStoreNode»
@@ -158,10 +262,26 @@ public class «this.asResultName()» {
 	«ENDFOREACH»
 «ENDDEFINE»
 
-«DEFINE nodeCallSelection FOR uml::ActivityEdge»
-			case «this.source.asContextName()».FlowState.«this.asFlowName()»:
-				«EXPAND nodeCall FOR this.target»
-				break
+«DEFINE nodeCallSelection(String contextName, boolean isRuleset) FOR uml::ActivityEdge»
+			case «contextName».FlowState.«this.asFlowName()»:
+				«IF this.name != "LoopContinue"»
+					«IF !isRuleset»
+						«EXPAND nodeCall FOR this.target»
+					«ELSE»
+						«LET ((List[uml::ActivityNode]) {}
+								.add(this.target)
+								.addAll(this.target.getNextWithSameProductionRuleset())
+							)
+							.select(e|e.outgoing.target.first().getProductionRuleset() != this.source.getProductionRuleset()).first().getNextNode() AS target»
+							«IF target != null»
+								«EXPAND nodeCall FOR target»
+							«ENDIF»
+						«ENDLET»
+					«ENDIF»
+					break
+				«ELSE»
+					continue
+				«ENDIF»
 «ENDDEFINE»
 
 «DEFINE nodeMethod FOR uml::OpaqueAction»
@@ -172,9 +292,10 @@ public class «this.asResultName()» {
 
 «DEFINE nodeMethod FOR uml::DecisionNode»
 	«EXPAND nodeMethodHeader FOR this»
-	//TODO: Required selection criteria
-	result.selection = «this.asContextName()».FlowState.«this.getFlowStates().first().asFlowName()»
-	
+	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Decision"» 
+		/* TODO: Required selection criteria */
+		result.selection = «this.asContextName()».FlowState.«this.getFlowStates().first().asFlowName()»
+	«ENDPROTECT»	
 	«EXPAND nodeMethodFooter FOR this»
 «ENDDEFINE»
 
@@ -182,21 +303,22 @@ public class «this.asResultName()» {
 
 «DEFINE nodeMethodHeader FOR uml::ActivityNode»
 	protected «this.asMethodName()»(arguments) {
-		«EXPAND nodeMethodInput FOREACH this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode)»
+		«EXPAND nodeMethodInput FOREACH this.getInputChiObjects()»
 	
 		def result = [:]
-		
-		/*
-		 TODO: Implement method according to comment below
-		 «this.getComment()»
-		 */
-		
-		«IF this.outgoing.typeSelect(uml::ObjectFlow).size > 0»
-			//TODO: Required return values
-			«FOREACH this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode) AS currResult»
-				result.«currResult.asVariableName()» = null
-			«ENDFOREACH»
-		«ENDIF»
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Implementation"» 
+			/*
+			 TODO: Implement method according to comment below
+			 «this.getComment()»
+			 */
+			
+			«IF this.outgoing.typeSelect(uml::ObjectFlow).size > 0»
+				/* TODO: Required return values */
+				«FOREACH this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode) AS currResult»
+					result.«currResult.asVariableName()» = null
+				«ENDFOREACH»
+			«ENDIF»
+		«ENDPROTECT»
 «ENDDEFINE»
 
 «DEFINE nodeMethodFooter FOR uml::ActivityNode»
@@ -206,4 +328,16 @@ public class «this.asResultName()» {
 
 «DEFINE nodeMethodInput FOR uml::DataStoreNode»
 	«this.getGrailsTypeName()» «this.asVariableName()» = arguments.«this.asVariableName()»
+«ENDDEFINE»
+
+
+«DEFINE nodeMethod FOR Ouranos::ProductionRuleset»
+	protected «this.asMethodName()»(arguments) {
+		«EXPAND nodeMethodInput FOREACH this.getFirstNodes().getInputChiObjects()»
+		
+		/*
+		TODO: implement JRules call
+		*/
+		
+	}
 «ENDDEFINE»
