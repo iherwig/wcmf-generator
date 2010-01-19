@@ -116,6 +116,7 @@ textarea { padding:0; }
 
 .imgdefault { border:none; }
 .txtdefault { display:block; height:16px; line-height:16px; padding:0; margin:4px 0 0 0; }
+h2 .txtdefault { display:inline; }
 
 iframe.list { width:700px; height:300px; overflow:auto; margin:0 0 -22px 0; }
 
