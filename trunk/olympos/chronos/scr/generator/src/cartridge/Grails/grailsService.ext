@@ -12,6 +12,14 @@ String asResultName(uml::Activity this):
 	this.getLastNode().outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).first().getGrailsTypeName()
 ;
 
+String asConstructorCall(uml::Activity this):
+	this.asResultName() != "def" ? (
+		"new " + this.asResultName() + "()"
+	) : (
+		"[:]"
+	)
+;
+
 String asRequestName(uml::Activity this):
 	this.getFirstNode().incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).first().getGrailsTypeName()
 ;
@@ -53,9 +61,11 @@ uml::ActivityNode getLastNode(uml::Activity this):
 ;
 
 List[uml::ActivityNode] getMethodNodes(uml::Activity this):
-	{}
-	.addAll(this.node.typeSelect(uml::OpaqueAction))
-	.addAll(this.node.typeSelect(uml::DecisionNode))
+	((List[uml::ActivityNode]) {}
+		.addAll(this.node.typeSelect(uml::OpaqueAction))
+		.addAll(this.node.typeSelect(uml::DecisionNode))
+	)
+	.select(e|e.getProductionRuleset() == null || (e.getProductionRuleset().getLastNodes().contains(e) && !e.getProductionRuleset().getRulesetParents().typeSelect(uml::DecisionNode).first().isLoop()))
 ;
 
 String getGrailsTypeName(uml::DataStoreNode this):
@@ -72,10 +82,14 @@ String asVariableName(uml::DataStoreNode this):
 ;
 
 String getSourceVariableName(uml::DataStoreNode this):
-	this.incoming.size > 0 ? (
-		this.incoming.first().source.asResultName() + "." + this.asVariableName()
+	this.hasKeyword(LIST_ELEMENT_KEYWORD()) ? (
+		this.asVariableName()
 	) : (
-		"request." + this.asVariableName()
+		this.incoming.size > 0 ? (
+			this.incoming.first().source.asResultName() + "." + this.asVariableName()
+		) : (
+			"request." + this.asVariableName()
+		)
 	)
 ;
 
@@ -84,15 +98,35 @@ String asClassName(uml::ActivityNode this):
 ;
 
 String asResultName(uml::ActivityNode this):
-	this.name.normalizeMemberName() + "Result"
+	this.name.asResult()
 ;
 
 String asMethodName(uml::ActivityNode this):
-	this.name.normalizeMemberName()
+	this.name.asMethod()
 ;
 
-String asContextName(uml::ActivityNode this):
+String asContextName(uml::DecisionNode this):
 	this.asClassName() + "Context"
+;
+
+String asContextName(Ouranos::ProductionRuleset this):
+	this.name.normalizeClassName() + "Context"
+;
+
+String asResult(String this):
+	this.normalizeMemberName() + "Result"
+;
+
+String asMethod(String this):
+	this.normalizeMemberName()
+;
+	
+String asResultName(Ouranos::ProductionRuleset this):
+	this.name.asResult()
+;
+
+String asMethodName(Ouranos::ProductionRuleset this):
+	this.name.asMethod()
 ;
 
 uml::ActivityNode getNextNode(uml::ActivityNode this):
@@ -108,6 +142,21 @@ List[uml::ActivityEdge] getNextEdges(uml::ActivityNode this):
 		.addAll(this.outgoing.typeSelect(uml::ControlFlow))
 		//Jump over one DataStore for flows like Action --> DataStore --> Action
 		.addAll(this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow))
+;
+
+uml::ActivityNode getPreviousNode(uml::ActivityNode this):
+	this.getPreviousNodes().first()
+;
+
+List[uml::ActivityNode] getPreviousNodes(uml::ActivityNode this):
+	this.getPreviousEdges().source
+;
+
+List[uml::ActivityEdge] getPreviousEdges(uml::ActivityNode this):
+	{}
+		.addAll(this.incoming.typeSelect(uml::ControlFlow))
+		//Jump over one DataStore for flows like Action --> DataStore --> Action
+		.addAll(this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).incoming.typeSelect(uml::ObjectFlow))
 ;
 
 List[uml::ActivityEdge] getFlowStates(uml::DecisionNode this):
@@ -134,4 +183,72 @@ boolean isAlreadyProcessed(uml::ActivityNode this):
 	) ->
 	
 	result
+;
+
+Ouranos::ProductionRuleset getProductionRuleset(uml::ActivityNode this):
+	this.getRelationships().typeSelect(uml::Realization).target.first()
+;
+
+List[uml::ActivityNode] getRulesetParents(Ouranos::ProductionRuleset this):
+	this.getRelationships().typeSelect(uml::Realization).source
+;
+
+List[uml::DataStoreNode] getInputChiObjects(uml::ActivityNode this):
+	this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode)
+;
+
+boolean isLoop(uml::DecisionNode this):
+	this.outgoing.select(e|e.name == "LoopStart").size > 0
+;
+
+uml::OpaqueAction getLoopPredecessor(uml::DecisionNode this):
+	this.incoming.selectFirst(e|e.name != "LoopContinue").source
+;
+
+uml::OpaqueAction getLoopStart(uml::DecisionNode this):
+	this.outgoing.selectFirst(e|e.name == "LoopStart").target
+;
+
+String LIST_ELEMENT_KEYWORD(): "GrailsListElement";
+
+List[uml::ActivityNode] getLastNodes(Ouranos::ProductionRuleset this):
+	this.getRulesetParents().select(e|e.getNextNode().getProductionRuleset() != this)
+;
+
+List[uml::ActivityNode] getFirstNodes(Ouranos::ProductionRuleset this):
+	this.getRulesetParents().select(e|e.getPreviousNode().getProductionRuleset() != this)
+;
+
+List[Ouranos::ProductionRuleset] getProductionRulesets (uml::Activity this):
+	this.ownedBehavior.typeSelect(Ouranos::ProductionRuleset)
+;
+
+List[uml::ActivityEdge] getFlowStates(Ouranos::ProductionRuleset this):
+	let decision = this.getRulesetParents().typeSelect(uml::DecisionNode).first():
+	
+	decision != null ? (
+		decision.getNextEdges()
+	) : (
+		{}
+	)
+;
+
+List[uml::ActivityNode] getConsecutiveWithSameProductionRuleset(uml::ActivityNode this):
+	{}
+		.add(this)
+		.addAll(this.getPreviousWithSameProductionRuleset())
+		.addAll(this.getNextWithSameProductionRuleset())
+		.toSet()
+;
+
+List[uml::ActivityNode] getPreviousWithSameProductionRuleset(uml::ActivityNode this):
+	{}
+		.add(this)
+		.addAll(this.getPreviousNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getPreviousWithSameProductionRuleset())
+;
+
+List[uml::ActivityNode] getNextWithSameProductionRuleset(uml::ActivityNode this):
+	{}
+		.add(this)
+		.addAll(this.getNextNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getNextWithSameProductionRuleset())
 ;

@@ -24,22 +24,25 @@
 
 	<!-- check model -->
 	<component class="org.openarchitectureware.check.CheckComponent">
-		<metaModel idRef="uml2"/>
 		<metaModel idRef="chronos"/>
 		<metaModel idRef="ouranos"/>
+		<metaModel idRef="uml2"/>
 		<checkFile value="cartridge::Grails::grailsService"/>
 		<emfAllChildrenSlot value="sourceModel"/>		
 	</component>
 	
 	<!-- generate domain classes -->
 	<component class="org.openarchitectureware.xpand2.Generator">
-		<metaModel idRef="uml2"/>
 		<metaModel idRef="chronos"/>
 		<metaModel idRef="ouranos"/>
+		<metaModel idRef="uml2"/>
 		<fileEncoding value="utf-8"/>
 
 		<expand value="cartridge::Grails::grailsService::root FOR sourceModel"/>
 
+		<beautifier class="net.sourceforge.olympos.oaw.workflow.BlankLineRemover"/>
+
+		<prSrcPaths value="target/grails/service"/>	
 		<outlet path="target/grails/service"/>
 	</component>
 </workflow>
