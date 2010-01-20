@@ -109,6 +109,7 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new applic
 
 «DEFINE getGridColumns FOR Chronos::ChiNode»
 application.«this.getFullPackageName()».«this.name»Description.prototype.getGridColumns = function() {
+«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getGridColumns"»
 	return [
 	«IF this.getChiAttributes().size > 0»
 		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
@@ -123,11 +124,13 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 		«ENDFOREACH»
 	«ENDIF»
 	];
+«ENDPROTECT»
 };
 «ENDDEFINE»
 
 «DEFINE getLabelColumns FOR Chronos::ChiNode»
 application.«this.getFullPackageName()».«this.name»Description.prototype.getLabelColumns = function() {
+«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getLabelColumns"»
 	return [
 	«IF this.getChiAttributes().size > 0»
 		«FOREACH this.getChiAttributes().select(e|e.isDisplayValue(this)) AS currValue SEPARATOR ", "»
@@ -140,6 +143,7 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 		«ENDFOREACH»
 	«ENDIF»
 	];
+«ENDPROTECT»
 };
 «ENDDEFINE»
 
@@ -183,6 +187,7 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 
 «DEFINE getEditorItems FOR Chronos::ChiNode»
 application.«this.getFullPackageName()».«this.name»Description.prototype.getEditorItems = function() {
+«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getEditorItems"»
 	return [
 	«IF this.getChiAttributes().size > 0»
 		new cwe.editor.control.PropertiesFieldSet({
@@ -214,7 +219,8 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 		
 		]})
 	«ENDIF»
- ];
+	];
+«ENDPROTECT»
 };
 «ENDDEFINE»
 

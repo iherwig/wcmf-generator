@@ -22,11 +22,27 @@ import org.openarchitectureware.xpand2.output.FileHandle;
 import org.openarchitectureware.xpand2.output.PostProcessor;
 
 /**
- * Removes all blank lines from the processed files.
+ * Removes blank lines from the processed files.
  * 
  * @author Niko <enikao@users.sourceforge.net>
  */
 public class BlankLineRemover implements PostProcessor {
+	/**
+	 * Number of consecutive blank lines passed through untouched
+	 * 
+	 * <p>
+	 * Default value: 0 (all blank lines are removed).
+	 * </p>
+	 */
+	private int acceptedBlankLines = 0;
+
+	public int getAcceptedBlankLines() {
+		return acceptedBlankLines;
+	}
+
+	public void setAcceptedBlankLines(int acceptedBlankLines) {
+		this.acceptedBlankLines = acceptedBlankLines;
+	}
 
 	public BlankLineRemover() {
 
@@ -49,12 +65,21 @@ public class BlankLineRemover implements PostProcessor {
 		Pattern pattern = Pattern.compile("\\s*");
 
 		try {
+			int emptyLines = 0;
+
 			while ((line = reader.readLine()) != null) {
 				Matcher matcher = pattern.matcher(line);
 
-				if (!matcher.matches()) {
+				if (!matcher.matches() || emptyLines < this.acceptedBlankLines) {
 					result.append(line);
 					result.append("\n");
+					if (!matcher.matches()) {
+						emptyLines = 0;
+					} else {
+						emptyLines++;
+					}
+				} else {
+					emptyLines++;
 				}
 			}
 		} catch (IOException e) {

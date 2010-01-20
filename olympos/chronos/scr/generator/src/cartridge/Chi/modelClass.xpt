@@ -48,11 +48,13 @@ Ext.extend(application.«this.getFullPackageName()».«this.name», chi.model.Mo
  * @type String
  */
 application.«this.getFullPackageName()».«this.name».prototype.getLabel = function() {
+«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"class.js/getLabel"»
 	var label = this.get("«this.display_value.replaceAll('\\|', '") + " - " + this.get("')»");
 	if (label == undefined || label.length == 0) {
 		label = this.getOid(); 
 	}
 	return label;
+«ENDPROTECT»
 };
 	«ENDFILE»
 «ENDDEFINE»

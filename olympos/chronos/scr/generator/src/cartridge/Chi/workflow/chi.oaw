@@ -26,11 +26,6 @@
 		</component>
 	</if>
 
-	<!-- Import from Enterprise Architect -->
-	<if cond="${doModelEaExport}">
-		<component file="${basePath}/cartridge/Wcmf/workflow/ea_model_import.oaw" inheritAll="true"/>
-	</if>
-
 	<!-- Read the UML model and store it into a slot named 'model' -->
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="${modelUmlFile}"/>
@@ -38,10 +33,14 @@
 	</component>
 
 	<!-- read profile as model -->
-	<component class="oaw.emf.XmiReader">
+	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
+		<modelUrl value='${profileUmlFile}'/>
+		<outputSlot value="chronosProfileModel"/>
+	</component>
+	<!--component class="oaw.emf.XmiReader">
 		<modelFile value="${profileUmlFile}" />
 		<outputSlot value="chronosProfileModel" />
-	</component>
+	</component-->
 
 	<!-- normalize names -->
 	<component class="oaw.xtend.XtendComponent">
@@ -88,6 +87,22 @@
 		<outputSlot value="transformedModel"/>
 	</component>
 		
+	<component id="renameProperties" class="oaw.xtend.XtendComponent">
+
+		<!-- Global variables used by the transformation -->
+		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
+		<globalVarDef name="ProfileFile" value="'${profileUmlFile}'"/>
+		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
+		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+
+		<metaModel idRef="EmfMM"/>
+		<metaModel idRef="UmlMM"/>
+		<metaModel idRef="${profilename}MM"/>
+		<invoke value="cartridge::ChiCmf::extensions::m2m::renameProperties(transformedModel)"/>
+	</component>
+
 	<!-- Check constraints after model 2 model transformation -->
 	<if cond="${doCheck}">
 		<component class="oaw.check.CheckComponent">
@@ -149,6 +164,10 @@
 		<metaModel idRef="${profilename}MM"/>
 		
 		<expand value="${expandCwe} FOR transformedModel"/>
+
+		<beautifier class="net.sourceforge.olympos.oaw.workflow.BlankLineRemover">
+			<acceptedBlankLines value="1" />
+		</beautifier>
 		
 		<outlet path="${targetDirCwe}">
 		</outlet>
