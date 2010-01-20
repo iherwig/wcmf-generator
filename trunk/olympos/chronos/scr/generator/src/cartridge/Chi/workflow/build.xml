@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project default="propagateURK">
+<project default="propagateURL">
 	 
 	
-	<target name="propagateURK">
+	<target name="propagateURL">
 		<replace file="${folderName}/${fileName}" token="@dionysosURL" value="${url}" />		 
 	</target>
 	
