@@ -1,7 +1,8 @@
 <workflow>
 	<property name="basePath" value="src"/>
-	<property name="chronosProfileUri" value="/home/nist/Desktop/yyy/chronos.profile.uml"/>
-	<property name="ouranosProfileUri" value="/home/nist/Desktop/yyy/ouranos.profile.uml"/>
+
+	<property name="propertyFile" value="${basePath}/cartridge/GrailsService/workflow/grailsService.properties" />
+	<property file="${propertyFile}" />
 
 	<!-- UML2 Setup -->
 	<bean class="org.eclipse.mwe.emf.StandaloneSetup"/>
@@ -18,7 +19,7 @@
 
 	<!-- read source model -->
 	<component class="oaw.emf.XmiReader">
-		<modelFile value="/home/nist/Desktop/yyy/cwm-export.uml"/>
+		<modelFile value="${sourceModelFile}"/>
 		<outputSlot value="sourceModel"/>
 	 </component>
 
@@ -27,22 +28,22 @@
 		<metaModel idRef="chronos"/>
 		<metaModel idRef="ouranos"/>
 		<metaModel idRef="uml2"/>
-		<checkFile value="cartridge::Grails::grailsService"/>
+		<checkFile value="cartridge::GrailsService::grailsService"/>
 		<emfAllChildrenSlot value="sourceModel"/>		
 	</component>
 	
-	<!-- generate domain classes -->
+	<!-- generate service and context classes -->
 	<component class="org.openarchitectureware.xpand2.Generator">
 		<metaModel idRef="chronos"/>
 		<metaModel idRef="ouranos"/>
 		<metaModel idRef="uml2"/>
 		<fileEncoding value="utf-8"/>
 
-		<expand value="cartridge::Grails::grailsService::root FOR sourceModel"/>
+		<expand value="cartridge::GrailsService::grailsService::root FOR sourceModel"/>
 
 		<beautifier class="net.sourceforge.olympos.oaw.workflow.BlankLineRemover"/>
 
-		<prSrcPaths value="target/grails/service"/>	
-		<outlet path="target/grails/service"/>
+		<prSrcPaths value="${generationTarget}"/>	
+		<outlet path="${generationTarget}"/>
 	</component>
 </workflow>

@@ -7,7 +7,7 @@ extension org::openarchitectureware::uml2::profile::profiling;
 extension common::util;
 extension common::umlutils;
 
-extension cartridge::Grails::grailsService;
+extension cartridge::GrailsService::grailsService;
 
 //ActivitySet
 boolean isActivitySet(uml::Activity this):

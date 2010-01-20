@@ -4,7 +4,7 @@
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
 
-«EXTENSION cartridge::Grails::grailsService»
+«EXTENSION cartridge::GrailsService::grailsService»
 
 «DEFINE root FOR uml::Model»
 	«EXPAND grailsService FOREACH this.allOwnedElements().typeSelect(uml::Activity)»
@@ -19,6 +19,9 @@
 	«EXPAND contextClasses FOREACH this.getMethodNodes().typeSelect(uml::DecisionNode).select(e|e.getProductionRuleset() == null)»
 
 	«FILE this.asClassName() + ".groovy"»
+/**
+ * «this.getComment("\n * ")»
+ */
 class «this.asClassName()» {
 			
 	boolean transactional = true
@@ -257,7 +260,7 @@ public class «this.asContextName()» extends Context {
 «ENDDEFINE»
 
 «DEFINE nodeCallResult FOR uml::ActivityNode»
-	«FOREACH this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode) AS currResult»
+	«FOREACH this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).select(e|e.outgoing.typeSelect(uml::ObjectFlow).target.outgoing.size == 0) AS currResult»
 		result.«currResult.asVariableName()» = «this.asResultName()».«currResult.asVariableName()»
 	«ENDFOREACH»
 «ENDDEFINE»
