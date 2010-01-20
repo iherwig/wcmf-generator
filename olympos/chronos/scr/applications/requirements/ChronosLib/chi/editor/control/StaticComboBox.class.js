@@ -14,7 +14,7 @@ Ext.namespace("chi.editor.control");
 /**
  * @class A static (pre-defined values) ComboBox with help tooltip.
  * 
- * @extends Ext.form.ComboBox
+ * @extends chi.editor.control.ComboBoxBase
  * @constructor
  * @param {Object}
  *            config The configuration object.
@@ -26,7 +26,7 @@ chi.editor.control.StaticComboBox = function(config) {
 	    store : new Ext.data.SimpleStore( {
 	        id : 0,
 	        fields : [ 'key', 'val' ],
-	        data : config.data
+	        data : config.data || []
 	    }),
 	    displayField : 'val',
 	    valueField : 'key',
@@ -38,7 +38,7 @@ chi.editor.control.StaticComboBox = function(config) {
 	this.toolTipText = config.toolTip;
 };
 
-Ext.extend(chi.editor.control.StaticComboBox, Ext.form.ComboBox);
+Ext.extend(chi.editor.control.StaticComboBox, chi.editor.control.ComboBoxBase);
 
 chi.editor.control.StaticComboBox.prototype.render = function(container, position) {
 	chi.editor.control.StaticComboBox.superclass.render.apply(this, arguments);
