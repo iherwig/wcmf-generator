@@ -77,7 +77,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
      */
     function getObjectDescription()
     {
-      return Message::get("«this.getComment(" ")»");
+      return Message::get("«this.getComment(" ").replaceAll('\\"', '\\\\"')»");
     }
     /**
      * @see PersistentObject::getValueDisplayName()
@@ -177,7 +177,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
 «REM» valueDescription -------------------------------------------«ENDREM»
 «DEFINE valueDescription FOR ChiNode-»
   «FOREACH this.getChiValuesRecursive() AS curValue-»
-      if ($name == '«curValue.name»') $description = Message::get("«curValue.getComment(" ")»");
+      if ($name == '«curValue.name»') $description = Message::get("«curValue.getComment(" ").replaceAll('\\"', '\\\\"')»");
   «ENDFOREACH-»
 «ENDDEFINE»
 

@@ -182,6 +182,10 @@
 		
 		<expand value="${expandCwe} FOR transformedModel"/>
 		
+		<beautifier class="net.sourceforge.olympos.oaw.workflow.BlankLineRemover">
+			<acceptedBlankLines value="1" />
+		</beautifier>
+
 		<outlet path="${targetDirCwe}">
 		</outlet>
 		
