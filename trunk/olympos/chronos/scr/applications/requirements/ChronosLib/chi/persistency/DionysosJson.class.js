@@ -30,8 +30,7 @@ chi.persistency.DionysosJson.prototype.jsonRequest = function(params, successHan
 
 	var self = this;
 
-	var request = requestParams || {};
-
+	var request = {};
 	request.url = this.baseUrl;
 	request.method = "post";
 	request.localParams = params;
@@ -53,6 +52,9 @@ chi.persistency.DionysosJson.prototype.jsonRequest = function(params, successHan
 			self.processErrorHandler(errorHandler, getRecordHandler.call(self, chi.persistency.DionysosJson.Handler.ERROR_STATUS, options, data));
 		}
 	};
+	
+	// override defaults with custom request parameters
+	request = Ext.apply(request, requestParams);
 
 	return Ext.Ajax.request(request);
 };

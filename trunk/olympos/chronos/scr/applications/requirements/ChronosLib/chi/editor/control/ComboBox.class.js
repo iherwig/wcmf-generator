@@ -35,17 +35,17 @@ chi.editor.control.ComboBox = function(config) {
 				})
 			});
 		} catch (e) {
-
+			chi.Log.log(e, chi.Log.ERROR);
 		}
 	}
 
 	chi.editor.control.ComboBox.superclass.constructor.call(this, Ext.apply(this, {
-	    store : store,
-	    displayField : 'val',
-	    valueField : 'key',
-	    mode : "remote",
-	    triggerAction : 'all',
-	    editable : false
+		store : store,
+		displayField : 'val',
+		valueField : 'key',
+		mode : "remote",
+		triggerAction : 'all',
+		editable : false
 	}, config));
 
 	this.toolTipText = config.toolTip;
@@ -53,15 +53,15 @@ chi.editor.control.ComboBox = function(config) {
 	this.modelNode = config.modelNode;
 };
 
-Ext.extend(chi.editor.control.ComboBox, Ext.form.ComboBox);
+Ext.extend(chi.editor.control.ComboBox, chi.editor.control.ComboBoxBase);
 
 chi.editor.control.ComboBox.prototype.render = function(container, position) {
 	chi.editor.control.ComboBox.superclass.render.apply(this, arguments);
 
 	if (this.toolTipText) {
 		this.toolTip = new Ext.ToolTip( {
-		    target : container,
-		    html : this.toolTipText
+			target : container,
+			html : this.toolTipText
 		});
 	}
 };
