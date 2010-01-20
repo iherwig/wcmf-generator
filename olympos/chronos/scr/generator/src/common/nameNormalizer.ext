@@ -1,4 +1,6 @@
 import uml;
+// FIXME: Investigate why normalizeName(Choronos::ChiValue) is required 
+import Chronos;
 
 Void normalizeName(uml::Model this):
 	this.allOwnedElements().typeSelect(uml::Class).normalizeName() ->
@@ -18,6 +20,10 @@ Void normalizeName(uml::Class this):
 ;
 
 Void normalizeName(uml::Property this):
+	this.setName(normalizeMemberName(this.name))
+;
+
+Void normalizeName(Chronos::ChiValue this):
 	this.setName(normalizeMemberName(this.name))
 ;
 
