@@ -28,8 +28,6 @@
 		«ENDIF»
 		«EXPAND cartridge::ChiCmf::templates::NodeBase::file FOR this»
 		«EXPAND cartridge::ChiCmf::templates::Node::file FOR this»
-		«EXPAND cartridge::ChiCmf::templates::CwmClass::file FOR this»
-		«EXPAND cartridge::ChiCmf::templates::CwmClassClass::file FOR this» 
 	«ENDIF»
 «ENDDEFINE»
 
