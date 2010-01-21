@@ -3,6 +3,7 @@
 	<name>generator.cartridge.DiagramImageExport</name>
 	<comment></comment>
 	<projects>
+		<project>DiagramImageExporter</project>
 		<project>generator</project>
 	</projects>
 	<buildSpec>

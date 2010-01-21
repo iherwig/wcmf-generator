@@ -1,7 +1,0 @@
-int incrementCounter(String counterId):
-	JAVA net.sourceforge.olympos.oaw.extend.Counter.incrementCounter(java.lang.String)
-;
-
-int getCounter(String counterId):
-	JAVA net.sourceforge.olympos.oaw.extend.Counter.getValue(java.lang.String)
-;

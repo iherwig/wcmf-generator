@@ -1,4 +1,0 @@
-String TECHNICAL_TYPE(): GLOBALVAR technicalType;
-String ENVIRONMENTAL_TYPE(): GLOBALVAR environmentalType;
-int ACTION_COUNT_SIMPLE(): GLOBALVAR actionCountSimple;
-int ACTION_COUNT_AVERAGE(): GLOBALVAR actionCountAverage;
