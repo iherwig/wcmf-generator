@@ -1,0 +1,94 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::objects::Activity;
+extension cartridge::UmlConnector::objects::ActivityDecision;
+extension cartridge::UmlConnector::objects::ActivityInitial;
+extension cartridge::UmlConnector::objects::ActivityFinal;
+extension cartridge::UmlConnector::objects::ActivitySend;
+extension cartridge::UmlConnector::objects::ActivityReceive;
+extension cartridge::UmlConnector::objects::ChiObject;
+extension cartridge::UmlConnector::objects::ProductionRuleSet;
+
+uml::Activity convert(cwm::ActivitySet a):
+	//(new uml::Activity).structuredNode
+	let uc = new uml::Activity : (
+		uc.setName("ActivitySet:" + a.id) ->
+		uc.node.addAll(a.activity.convert()) ->
+		uc.node.addAll(a.activityDecision.convert()) ->
+		uc.node.addAll(a.activityInitial.convert()) ->
+		uc.node.addAll(a.activityFinal.convert()) ->
+		uc.node.addAll(a.activitySend.convert()) ->
+		uc.node.addAll(a.activityReceive.convert()) ->
+		uc.node.addAll(a.chiObject.convert()) ->
+		uc.ownedBehavior.addAll(a.productionRuleSet.convert())
+	) ->
+	uc
+;
+
+Void establishConnections(cwm::ActivitySet b, uml::Model um):
+	b.activity.establishConnections(um) ->
+	b.activityDecision.establishConnections(um) ->
+	b.activityInitial.establishConnections(um) ->
+	//b.activityFinal.establishConnections(um) ->
+	b.activitySend.establishConnections(um) ->
+	b.activityReceive.establishConnections(um) ->
+	b.chiObject.establishConnections(um) ->
+	b.productionRuleSet.establishConnections(um)
+;
+
+Void transferValues(cwm::ActivitySet a, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::Activity).select(e|e.name == "ActivitySet:" + a.id).first(): (
+		let comment = new uml::Comment : (
+			a.activity.transferValues(um) ->
+			a.activityDecision.transferValues(um) ->
+			a.activityInitial.transferValues(um) ->
+			a.activityFinal.transferValues(um) ->
+			a.activitySend.transferValues(um) ->
+			a.activityReceive.transferValues(um) ->
+			a.chiObject.transferValues(um) ->
+			a.productionRuleSet.transferValues(um) ->
+	
+			uc.setTaggedValue("Chronos::ActivitySet", "Alias", a.alias) ->
+			uc.setTaggedValue("Chronos::ActivitySet", "Version", a.version) ->
+			uc.setName(a.name) ->
+			a.notes != null ? (
+				comment.setBody(a.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ActivitySet", "created", a.created) ->
+			uc.setTaggedValue("Chronos::ActivitySet", "creator", a.creator) ->
+			uc.setTaggedValue("Chronos::ActivitySet", "last_editor", a.lastEditor) ->
+			uc.setTaggedValue("Chronos::ActivitySet", "modified", a.modified)
+		)
+	)
+;
+
+cwm::ActivitySet convertToCwm(uml::Activity c) :
+	let un = new cwm::ActivitySet : (
+		un.activity.addAll(c.node.typeSelect(uml::OpaqueAction).convertToCwm()) ->
+		un.activityDecision.addAll(c.node.typeSelect(uml::DecisionNode).convertToCwm()) ->
+		un.activityInitial.addAll(c.node.typeSelect(uml::InitialNode).convertToCwm()) ->
+		un.activityFinal.addAll(c.node.typeSelect(uml::ActivityFinalNode).convertToCwm()) ->
+		un.activitySend.addAll(c.node.typeSelect(uml::SendSignalAction).convertToCwm()) ->
+		un.activityReceive.addAll(c.node.typeSelect(uml::AcceptEventAction).convertToCwm()) ->
+		un.chiObject.addAll(c.node.typeSelect(uml::DataStoreNode).convertToCwm()) ->
+	
+		un.setId(c.getId()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ActivitySet", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ActivitySet", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ActivitySet", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ActivitySet", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ActivitySet", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ActivitySet", "modified").toString())
+	) ->
+	un
+;

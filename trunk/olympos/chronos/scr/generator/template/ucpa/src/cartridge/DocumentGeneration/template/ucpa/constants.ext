@@ -1,0 +1,4 @@
+String COUNTER_USE_CASE(): "counter-useCase";
+String COUNTER_ACTOR(): "counter-actor";
+String COUNTER_TECHNICAL(): "counter-technical";
+String COUNTER_ENVIRONMENTAL(): "counter-environmental";

@@ -1,0 +1,58 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+extension common::umlutils;
+
+Void root(uml::Model this, uml::Profile profile):
+	this.applyProfile(profile) ->
+	
+	this.allOwnedElements().typeSelect(uml::UseCase).applyStereotype("Chronos::ChiBusinessUseCase") ->
+	this.allOwnedElements().typeSelect(uml::Class).applyStereotype("Chronos::ChiNode") ->
+	this.allOwnedElements().typeSelect(uml::Actor).applyStereotype("Chronos::ChiBusinessPartner") ->
+	this.allOwnedElements().typeSelect(uml::Comment).assignToOwner() ->
+	
+	this.allOwnedElements().typeSelect(uml::UseCase).addRequirementAndFeature()
+;
+
+Void assignToOwner(uml::Comment this):
+	this.annotatedElement.add(this.owner)
+;
+
+Void addRequirementAndFeature(uml::UseCase this):
+	let req = new uml::Class:
+	let feature = new uml::Class:
+	let realizationReqFeat = new uml::Realization:
+	let realizationFeatUC = new uml::Realization:
+	let package = this.getNearestPackage():
+	
+	req.setName("Should do " + this.name) ->
+	feature.setName("Will do " + this.name) ->
+	
+	this.ownedComment.cloneTo(req) ->
+	
+	realizationReqFeat.supplier.add(req) ->
+	realizationReqFeat.client.add(feature) ->
+	realizationReqFeat.setName("contains") ->
+	
+	realizationFeatUC.supplier.add(feature) ->
+	realizationFeatUC.client.add(this) ->
+	realizationFeatUC.setName("refines") ->
+	
+	package.ownedType.add(req) ->
+	package.ownedType.add(feature) ->
+	package.packagedElement.add(realizationReqFeat) ->
+	package.packagedElement.add(realizationFeatUC) ->
+	
+	req.applyStereotype("Chronos::ChiRequirement") ->
+	feature.applyStereotype("Chronos::ChiFeature")
+;
+
+Void cloneTo(uml::Comment this, uml::Element target):
+	let clone = new uml::Comment:
+	clone.setBody(this.body) ->
+	target.ownedComment.add(clone) ->
+	clone.annotatedElement.add(target)
+;

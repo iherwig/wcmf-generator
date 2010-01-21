@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridgeinfo system="false">
+	<name>Chi CMF + CWE</name>
+	<description>
+		Combined cartridge of Chi Content Management Framework and Chronos Web Editor. 
+	</description>
+	<dependencies>
+		<dependency>ChiCmf</dependency>
+		<dependency>Cwe</dependency>
+	</dependencies>
+	<properties>
+		<property name="codeGenerator">true</property>
+		<property name="workflow">workflow/chiCmfCwe-headless.oaw</property>
+		<property name="targetPlatform">wemove Content Management Framework on PHP, ExtJS on JavaScript in a Browser</property>
+	</properties>
+</cartridgeinfo>

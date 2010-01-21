@@ -1,0 +1,10 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«DEFINE root FOR uml::Model»
+	«EXPAND cartridge::Chi::css::root FOR this»
+	«EXPAND cartridge::Chi::modelDescription::root FOR this»
+	«EXPAND cartridge::Chi::modelClass::root FOR this»
+	«EXPAND cartridge::Chi::modelPackage::root FOR this»
+	«EXPAND cartridge::Chi::index::root FOR this»
+«ENDDEFINE»

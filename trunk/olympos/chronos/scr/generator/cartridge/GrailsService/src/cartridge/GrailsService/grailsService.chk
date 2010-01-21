@@ -1,0 +1,216 @@
+import uml;
+import Chronos;
+import Ouranos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::GrailsService::grailsService;
+
+//ActivitySet
+boolean isActivitySet(uml::Activity this):
+	this.getAppliedStereotypes().size == 0
+;
+
+boolean isActivitySet(Ouranos::ProductionRuleset this):
+	false
+;
+
+context uml::Activity if this.isActivitySet() ERROR
+	"ActivitySet must have globally unique name: " + this.fullQualifiedName():
+	this.getModel().allOwnedElements().typeSelect(uml::Activity).select(e|e.isActivitySet() && e.name == this.name).size == 1
+;
+
+context uml::Activity if this.isActivitySet() ERROR
+	"ActivitySet must have a non-empty name: " + this.fullQualifiedName():
+	!this.name.isNullOrEmpty()
+;
+
+context uml::Activity if this.isActivitySet() ERROR
+	"ActivitySet must have exactly one ActivityInitial: " + this.fullQualifiedName():
+	this.allOwnedElements().typeSelect(uml::InitialNode).size == 1
+;
+
+context uml::Activity if this.isActivitySet() ERROR
+	"ActivitySet must have at least one ActivityFinal: " + this.fullQualifiedName():
+	this.allOwnedElements().typeSelect(uml::FinalNode).size >= 1
+;
+
+context Activity if this.isActivitySet() ERROR
+	"All Output ChiObjects must be of the same type: " + this.fullQualifiedName():
+	//should be == 1, but then this error also appears if Output ChiObject is missing
+	this.allOwnedElements().typeSelect(uml::DataStoreNode).select(e|e.isOutputChiObject()).type.toSet().size <= 1
+;
+
+context Activity if this.isActivitySet() ERROR
+	"AcitivtySet must have exactly one Input ChiObject: " + this.fullQualifiedName():
+	this.getInputVariables().size == 1
+;
+
+context Activity if this.isActivitySet() ERROR
+	"AcitivtySet must have at least one Output ChiObject: " + this.fullQualifiedName():
+	this.getOutputVariables().size >= 1
+;
+
+//Common tests
+boolean isNameNotEmpty(uml::ActivityNode this):
+	!this.name.isNullOrEmpty()
+;
+
+boolean isNameUniqueWithinActivity(uml::ActivityNode this):
+	this.activity.allOwnedElements().typeSelect(uml::ActivityNode).select(e|e.name == this.name).size == 1
+;
+
+boolean isAtMostOneProductionRuleset(uml::ActivityNode this):
+	this.getRelationships().typeSelect(uml::Realization).size <= 1
+;
+
+//Activity
+context uml::OpaqueAction ERROR
+	"Activity must have a non-empty name: " + this.fullQualifiedName():
+	this.isNameNotEmpty()
+;
+
+context uml::OpaqueAction ERROR
+	"Activity must have a unique name within its ActivitySet: " + this.fullQualifiedName():
+	this.isNameUniqueWithinActivity()
+;
+
+context uml::OpaqueAction ERROR
+	"Activity must have at least one incoming and one outgoing arrow: " + this.fullQualifiedName():
+	this.incoming.size >= 1 && this.outgoing.size >= 1
+;
+
+context uml::OpaqueAction ERROR
+	"Activity must have at most one ProductionRuleSet: " + this.fullQualifiedName():
+	this.isAtMostOneProductionRuleset()
+;
+
+context uml::OpaqueAction if this.getProductionRuleset() != null ERROR
+	"All Activites associated with the same ProductionRuleSet must be consecutive: " + this.fullQualifiedName():
+	this.getProductionRuleset().getRelationships().typeSelect(uml::Realization).source.containsAll(this.getConsecutiveWithSameProductionRuleset())	
+;
+
+//ActivityDecision
+context uml::DecisionNode ERROR
+	"ActivityDecision must have a non-empty name: " + this.fullQualifiedName():
+	this.isNameNotEmpty()
+;
+
+context uml::DecisionNode ERROR
+	"ActivityDecision must have a unique name within its ActivitySet: " + this.fullQualifiedName():
+	this.isNameUniqueWithinActivity()
+;
+
+context uml::DecisionNode ERROR
+	"ActivityDecision must have at least one incoming and two outgoing arrows: " + this.fullQualifiedName():
+	this.incoming.size >= 1 && this.outgoing.size >= 2
+;
+
+context uml::DecisionNode ERROR
+	"All arrows exiting from an ActivityDecision must have unique names: " + this.fullQualifiedName():
+	this.getFlowStates().select(e|this.getFlowStates().select(f|e.name == f.name).size != 1).size == 0
+;
+
+context uml::DecisionNode ERROR
+	"ActivityDecision must have at most one ProductionRuleSet:" + this.fullQualifiedName():
+	this.isAtMostOneProductionRuleset()
+;
+
+context uml::DecisionNode if this.getProductionRuleset() != null ERROR
+	"All ActivityDecision associated with the same ProductionRuleSet must be consecutive: " + this.fullQualifiedName():
+	this.getProductionRuleset().getRulesetParents().containsAll(this.getConsecutiveWithSameProductionRuleset())	
+;
+
+context uml::DecisionNode if this.getProductionRuleset() != null ERROR
+	"At most one ActivityDecision may be associated with the same ProductionRuleSet: " + this.fullQualifiedName():
+	this.getProductionRuleset().getRulesetParents().typeSelect(uml::DecisionNode).size == 1
+;
+
+context uml::DecisionNode if this.isLoop() ERROR
+	"Loop type ActivityDecision must have at least one incoming LoopContinue and exactly one outgoing LoopStart arrow: " + this.fullQualifiedName():
+	this.incoming.select(e|e.name == "LoopContinue").size >= 1
+	&& this.outgoing.select(e|e.name == "LoopStart").size == 1
+;
+
+context uml::DecisionNode if this.isLoop() ERROR
+	"Loop type ActivityDecision must have the following predecessors: Activity('get list') -> ChiObject('list') -> Activity('evaluate list') -> ActivityDecision: " + this.fullQualifiedName():
+	uml::OpaqueAction.isInstance(this.getLoopPredecessor())
+	&& uml::DataStoreNode.isInstance(this.getLoopPredecessor().incoming.source.first())
+	&& uml::OpaqueAction.isInstance(this.getLoopPredecessor().incoming.source.incoming.source.first())
+;
+
+context uml::DecisionNode if this.isLoop() ERROR
+	"Loop type ActivityDecision must have the following successors: ActivityDecision -> Activity('get list element') -> ChiObject('list element'): " + this.fullQualifiedName():
+	uml::OpaqueAction.isInstance(this.getLoopStart())
+	&& uml::DataStoreNode.isInstance(this.getLoopStart().outgoing.target.first())
+;
+
+context uml::DecisionNode if this.isLoop() ERROR
+	"Loop type ActivityDecision must be in same ProductionRuleSet as its required predecessors and successors: Activity('get list') -> ChiObject('list') -> Activity('evaluate list') -> ActivityDecision -> Activity('get list element'): " + this.fullQualifiedName():
+	let rulesets = ((List[uml::ActivityNode]) {}
+		.add(this.getLoopPredecessor())
+		.add(this.getLoopPredecessor().getPreviousNode())
+		.add(this.getLoopStart()))
+		
+		.getProductionRuleset().toSet():
+	rulesets.size == 1 && rulesets.toList().first() == this.getProductionRuleset() && rulesets.toList().first() != null
+;
+
+//ChiObject
+boolean isInputChiObject(uml::DataStoreNode this):
+	this.outgoing.target.contains(this.activity.getFirstNode())
+;
+
+boolean isOutputChiObject(uml::DataStoreNode this):
+	this.incoming.source.outgoing.target.typeSelect(uml::FinalNode).size > 0
+;
+
+context uml::DataStoreNode ERROR
+	"ChiObject must have a non-empty name: " + this.fullQualifiedName():
+	this.isNameNotEmpty()
+;
+
+context uml::DataStoreNode if !this.isOutputChiObject() ERROR
+	"ChiObject must have a unique name within its ActivitySet: " + this.fullQualifiedName():
+	this.isNameUniqueWithinActivity()
+;
+
+context uml::DataStoreNode if !this.isOutputChiObject() ERROR
+	"ChiObject must have at least one outgoing arrow: " + this.fullQualifiedName():
+	this.outgoing.size >= 1
+;
+
+context uml::DataStoreNode if !this.isInputChiObject() ERROR
+	"ChiObject must have at least one incoming arrow: " + this.fullQualifiedName():
+	this.incoming.size >= 1
+;
+
+context uml::DataStoreNode if this.isInputChiObject() ERROR
+	"Input ChiObject must have at least one outgoing arrow: " + this.fullQualifiedName():
+	this.outgoing.size >= 1
+;
+
+context uml::DataStoreNode if this.isOutputChiObject() ERROR
+	"Output ChiObject must have at least one incoming arrow: " + this.fullQualifiedName():
+	this.incoming.size >= 1
+;
+
+context uml::DataStoreNode WARNING
+	"ChiObject has no associated type: " + this.fullQualifiedName():
+	this.type != null
+;
+
+//ActivityInitial
+context uml::InitialNode ERROR
+	"ActivityIntial must have at least one outgoing arrow: " + this.fullQualifiedName():
+	this.outgoing.size >= 1
+;
+
+//ActivityFinal
+context uml::FinalNode ERROR
+	"ActivityFinal must have at least one incoming arrow: " + this.fullQualifiedName():
+	this.incoming.size >= 1
+;

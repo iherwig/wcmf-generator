@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridgeinfo system="true">
+	<name>Chronos XML &lt;--&gt; Connector</name>
+	<description>
+		Converts forth and back between Chronos XML export and UML with Chronos profile.
+	</description>
+	<dependencies>
+	</dependencies>
+	<properties>
+	</properties>
+</cartridgeinfo>

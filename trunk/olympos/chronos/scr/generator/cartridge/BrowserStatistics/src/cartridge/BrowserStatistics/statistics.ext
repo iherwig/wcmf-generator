@@ -1,0 +1,135 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+cached E():
+	1.11111 - 1.1111
+;
+
+//ChiGoal
+
+cached List[Chronos::ChiGoal] getAllGoals(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiGoal)
+;
+
+cached List[Chronos::ChiGoal] getAchievedGoals(uml::Model this):
+	this.getAllGoals().select(e|e.getRequirements().getFeatures().getBusinessUseCases().size > 0)
+;
+
+cached List[Chronos::ChiGoal] getNonAchievedGoals(uml::Model this):
+	this.getAllGoals().select(e|e.getRequirements().getFeatures().getBusinessUseCases().size == 0)
+;
+
+cached List[Chronos::ChiGoal] getNonAchievedGoalsWithoutRequirement(uml::Model this):
+	this.getNonAchievedGoals().select(e|e.getRequirements().size == 0)
+;
+
+cached List[Chronos::ChiGoal] getNonAchievedGoalsWithoutValidPriority(uml::Model this):
+	this.getNonAchievedGoals().select(e|e.Priority <= 0)
+;
+
+//ChiRequirement
+
+cached List[Chronos::ChiRequirement] getAllRequirements(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiRequirement)
+;
+
+cached List[Chronos::ChiRequirement] getRequirementsWithoutParent(uml::Model this):
+	this.getAllRequirements().select(e|e.getParents().size == 0)
+;
+
+//ChiFeature
+
+cached List[Chronos::ChiFeature] getAllFeatures(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiFeature)
+;
+
+cached List[Chronos::ChiFeature] getFeaturesWithoutParent(uml::Model this):
+	this.getAllFeatures().select(e|e.getParents().size == 0)
+;
+
+//ChiIssue
+
+cached List[Chronos::ChiIssue] getAllIssues(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiIssue)
+;
+
+cached List[Chronos::ChiIssue] getIssuesWithoutParent(uml::Model this):
+	this.getAllIssues().select(e|e.getParents().size == 0)
+;
+
+//ChiBusinessUseCase
+
+cached List[Chronos::ChiBusinessUseCase] getAllBusinessUseCases(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiBusinessUseCase)
+;
+
+cached List[Chronos::ChiBusinessUseCase] getBusinessUseCasesWithoutActor(uml::Model this):
+	this.getAllBusinessUseCases().select(e|e.getActors().size == 0 && (e.PrimaryActor == null || e.PrimaryActor.trim().length == 0))
+;
+
+//Package
+
+cached List[uml::Package] getAllPackages(uml::Model this):
+	this.allOwnedElements().typeSelect(uml::Package)
+;
+
+cached List[uml::Package] getPackagesWithBothSubpackagesAndElements(uml::Model this):
+	this.getAllPackages().select(e|e.nestedPackage.size > 0 && e.ownedType.size > 0)
+;
+
+
+
+
+String calculateTrafficLight(Real this):
+	(this == -1) ?
+		"null"
+	: (
+		(this < 0.2) ?
+			1
+		: (
+			(this < 0.4) ?
+				2
+			: (
+				(this < 0.6) ?
+					3
+				: (
+					(this < 0.8) ?
+						4
+					:
+						5
+				)
+			)
+		)
+	)
+;
+
+List[Chronos::ChiRequirement] getRequirements(Chronos::ChiGoal this):
+	this.getAssociations().memberEnd.select(e|e.type != this).type.typeSelect(Chronos::ChiRequirement)
+;
+
+List[Chronos::ChiFeature] getFeatures(Chronos::ChiRequirement this):
+	this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiFeature)
+;
+
+List[Chronos::ChiBase] getParents(Chronos::ChiRequirement this):
+	this.getAssociations().memberEnd.select(e|e.type != this).type
+		.select(f|f.getAppliedStereotypes().first().name == "ChiRequirement" || f.getAppliedStereotypes().first().name == "ChiGoal")
+;
+
+List[Chronos::ChiBusinessUseCase] getBusinessUseCases(Chronos::ChiFeature this):
+	this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiBusinessUseCase)
+;
+
+List[Chronos::ChiRequirement] getParents(Chronos::ChiFeature this):
+	this.getRelationships().typeSelect(uml::Realization).supplier.typeSelect(Chronos::ChiRequirement)
+;
+
+List[Chronos::ChiRequirement] getParents(Chronos::ChiIssue this):
+	this.getRelationships().typeSelect(uml::Dependency).supplier.typeSelect(Chronos::ChiRequirement)
+;
+
+List[uml::Actor] getActors(Chronos::ChiBusinessUseCase this):
+	this.getAssociations().memberEnd.select(e|e.type != this).type.typeSelect(uml::Actor)
+;

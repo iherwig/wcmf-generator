@@ -1,0 +1,201 @@
+import uml;
+import xmlSchema;
+
+extension org::openarchitectureware::xsd::lib::qname;
+
+extension cartridge::GenerateUmlConnector::util;
+
+xmlSchema::SchemaType root(uml::Profile p, String schemaId):
+	//(new xmlSchema::SchemaType).el
+	let x = new xmlSchema::SchemaType:
+
+	x.setId(schemaId) ->
+	
+	x.complexType.addAll(p.allOwnedElements().typeSelect(uml::Stereotype).convertToComplexType()) ->
+	
+	x.complexType.addAll(getDefaultTypes(p)) ->
+	
+	x.element.add(getRootElement()) ->
+
+	x
+;
+
+xmlSchema::TopLevelComplexType convertToComplexType(uml::Stereotype this) :
+	//(new xmlSchema::TopLevelComplexType).setS
+	let x = new xmlSchema::TopLevelComplexType:
+	let s = new xmlSchema::ExplicitGroup:
+	
+	x.setName(this.name) ->
+	
+	x.attribute.addAll(this.allTaggedValues().convertToAttribute()) ->
+	x.attribute.add(getStringAttribute("id")) ->
+	
+	x.setSequence(s) ->
+	s.element.addAll(getDefaultElements()) ->
+
+	x
+;
+
+xmlSchema::Attribute convertToAttribute(uml::Property this):
+	//(new xmlSchema::Attribute).sett
+	let x = new xmlSchema::Attribute:
+	
+	x.setName(this.name) ->
+	
+	x.setType(this.type.toSchemaType()) ->
+	
+	x
+;
+
+toSchemaType(uml::Type this):
+	toSchemaType(this.name)
+;
+
+toSchemaType(String this):
+	switch (this) {
+		case "Integer":
+			parseToQName(XML_SCHEMA_NAME() +  ":int")
+		case "Boolean":
+			parseToQName(XML_SCHEMA_NAME() +  ":boolean")
+		default:
+			parseToQName(XML_SCHEMA_NAME() +  ":string")
+	}
+;
+
+List[xmlSchema::Element] getDefaultElements():
+	((List[xmlSchema::Element]) {
+		getDefaultElement("Child"), 
+		getDefaultElement("Parent"), 
+		getDefaultElement("ManyToMany")
+	})
+;
+
+xmlSchema::LocalElement getDefaultElement(String name):
+	//(new xmlSchema::Element).setMaxOccurs()
+	let child = new xmlSchema::LocalElement:
+
+	child.setName(name) ->
+	child.setMaxOccurs(xmlSchema::AllNniMember1::unbounded) ->
+	child.setMinOccurs(0) ->
+	child.setType(parseToQName(name)) ->
+	
+	child
+;
+
+List[xmlSchema::ComplexType] getDefaultTypes(uml::Profile p):
+	let cwmExport = new xmlSchema::TopLevelComplexType:
+	let model = new xmlSchema::TopLevelComplexType:
+	let package = new xmlSchema::TopLevelComplexType:
+	let child = new xmlSchema::TopLevelComplexType:
+	let parent = new xmlSchema::TopLevelComplexType:
+	let manyToMany = new xmlSchema::TopLevelComplexType:
+	
+	cwmExport.setName("CwmExport") ->
+	cwmExport.setSequence(getCwmExportSequence()) ->
+	
+	model.setName("Model") ->
+	model.attribute.addAll(getDefaultAttributes()) ->
+	model.setSequence(getModelSequence()) ->
+	
+	package.setName("Package") ->
+	package.attribute.addAll(getDefaultAttributes()) ->
+	package.setSequence(getPackageSequence(p)) ->
+
+	child.setName("Child") ->
+	child.attribute.addAll(getLinkAttributes()) ->
+	
+	parent.setName("Parent") ->
+	parent.attribute.addAll(getLinkAttributes()) ->
+
+	manyToMany.setName("ManyToMany") ->
+	manyToMany.attribute.addAll(getLinkAttributes()) ->
+	manyToMany.attribute.addAll(getManyToManyAttributes()) ->
+	
+	((List[xmlSchema::ComplexType]) {
+		cwmExport, model, package,
+		child, parent, manyToMany
+	})
+;
+
+xmlSchema::ExplicitGroup getCwmExportSequence():
+	let s = new xmlSchema::ExplicitGroup:
+	let m = new xmlSchema::LocalElement:
+	
+	m.setName("Model") ->
+	m.setMaxOccurs(xmlSchema::AllNniMember1::unbounded) ->
+	m.setMinOccurs(1) ->
+	m.setType(parseToQName("Model")) ->
+	
+	s.element.add(m) ->
+	
+	s
+;
+
+xmlSchema::ExplicitGroup getModelSequence():
+	let s = new xmlSchema::ExplicitGroup:
+
+	s.element.add(getDefaultElement("Package")) ->
+	
+	s
+;
+
+xmlSchema::ExplicitGroup getPackageSequence(uml::Profile p):
+	let s = new xmlSchema::ExplicitGroup:
+
+	s.element.addAll(p.allOwnedElements().typeSelect(uml::Stereotype).toElement()) ->
+	
+	s
+;
+
+xmlSchema::Element toElement(uml::Stereotype this):
+	getDefaultElement(this.name)
+;
+
+List[xmlSchema::Attribute] getDefaultAttributes():
+	((List[xmlSchema::Attribute]) {
+		getStringAttribute("id"),
+		getStringAttribute("Name"),
+		getStringAttribute("created"),
+		getStringAttribute("creator"),
+		getStringAttribute("last_editor"),
+		getStringAttribute("modified")
+	})
+;
+
+xmlSchema::Attribute getStringAttribute(String name):
+	let attr = new xmlSchema::Attribute:
+	
+	attr.setName(name) ->
+	attr.setType("String".toSchemaType()) ->
+	
+	attr
+;
+
+List[xmlSchema::Attribute] getLinkAttributes():
+	((List[xmlSchema::Attribute]) {
+		getStringAttribute("targetType"),
+		getStringAttribute("targetOid")
+	})
+;
+	
+List[xmlSchema::Attribute] getManyToManyAttributes():
+	((List[xmlSchema::Attribute]) {
+		getStringAttribute("targetRole"),
+		getStringAttribute("relationType"),
+		getStringAttribute("sourceMultiplicity"),
+		getStringAttribute("sourceNavigability"),
+		getStringAttribute("targetMultiplicity"),
+		getStringAttribute("targetNavigability")
+	})
+;
+
+xmlSchema::TopLevelElement getRootElement():
+	let e = new xmlSchema::TopLevelElement:
+	
+	e.setName("CwmExport") ->
+	e.setType(parseToQName("CwmExport")) ->
+	
+	e
+;
+
+String XML_SCHEMA_NAME() : "XMLSchema";

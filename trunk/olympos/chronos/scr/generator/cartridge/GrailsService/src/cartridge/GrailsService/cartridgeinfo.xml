@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridgeinfo system="false">
+	<name>GrailsService</name>
+	<description>Grails Service cartridge.</description>
+	<dependencies>
+	</dependencies>
+	<properties>
+		<!-- property name="codeGenerator">true</property>
+		<property name="workflow">workflow/grails-headless.oaw</property>
+		<property name="targetPlatform">Grails on Groovy</property-->
+	</properties>
+</cartridgeinfo>

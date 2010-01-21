@@ -1,0 +1,37 @@
+import Chronos;
+import uml;
+import cwm;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::UmlConnector::objects::Package;
+
+cwm::CwmExport createCwmModel(String modelName, uml::Model model):
+	//(new cwm::Model).set
+	let export = new cwm::CwmExport : (
+		let cwmModel = new cwm::Model : (
+			cwmModel.setId(model.getId()) ->
+			cwmModel.setName(modelName) ->
+			cwmModel.package.addAll(model.nestedPackage.convertToCwm())
+		) ->
+		export.model.add(cwmModel)
+	) ->
+	export
+;
+
+Void applyStereotypes(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiNode).attribute.select(e|e.association == null).addStereotype()
+;
+
+Chronos::ChiValue addStereotype(uml::Property this):
+	this.getAppliedStereotype("Chronos::ChiValue") == null ? (
+		info("Adding Stereotype Chronos::ChiValue to " + this.name) ->
+		this.applyStereotype("Chronos::ChiValue")
+	) :
+		Void
+	->
+	this
+;

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+
+	<!-- the following properties property maybe overriden from the command line -->
+	<property name='generatorVersion' value='3'/>
+	<property name='basePath' value='src'/>
+	<property file="${basePath}/cartridge/Chi/workflow/chi-headless.properties"/>
+	
+	<property name='propertyFile' value='${basePath}/cartridge/Chi/workflow/chi.properties'/>
+	<property file="${propertyFile}"/>
+	
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+	
+	<!-- Metamodel-Definition -->
+	<bean id="EmfMM" class="oaw.type.emf.EmfMetaModel">
+		<metaModelPackage value="org.eclipse.emf.ecore.EcorePackage"/>
+	</bean>
+	<bean id="UmlMM" class="oaw.uml2.UML2MetaModel"/>
+	<bean id="${profilename}MM" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${profileUmlFile}"/>
+	</bean>
+
+	<!-- read model XML -->
+	<component class="org.openarchitectureware.xsd.XMLReader">
+		<modelSlot value="uwmmodel" />
+		<uri value="${modelXmlFile}" />
+		<metaModel id="cwmMM"
+			class="org.openarchitectureware.xsd.XSDMetaModel">
+			<schemaFile value="metamodel/cwm.xsd" />
+		</metaModel>
+	</component>
+
+	<!-- read profile as model -->
+	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
+		<modelUrl value='${profileUmlFile}'/>
+		<outputSlot value="chronosProfileModel"/>
+	</component>
+
+	<!-- transform XML to UML -->
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="cwmMM" />
+		<metaModel idRef="UmlMM" />
+		<metaModel idRef="${profilename}MM" />
+		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfileModel)" />
+		<outputSlot value="model" />
+		<globalVarDef name="basePath" value="'${basePath}'" />
+	</component>
+
+	<!-- Check constraints before model 2 model transformation -->
+	<if cond="${doCheck}">
+		<component class="oaw.check.CheckComponent">
+		
+			<!-- Global variables used by the check -->
+			<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+			<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+			<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
+			<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+
+			<metaModel idRef="EmfMM"/>
+			<metaModel idRef="UmlMM"/>
+			<metaModel idRef="${profilename}MM"/>
+			<checkFile value="${preCheckFile}"/>
+			<emfAllChildrenSlot value="model"/>
+			<abortOnError value="true"/>
+		</component>
+	</if>
+
+	<!-- Prepare the model for Chronos and store it into a slot named 'transformedModel' -->
+	<component id="m2m" class="oaw.xtend.XtendComponent">
+
+		<!-- Global variables used by the transformation -->
+		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
+		<globalVarDef name="ProfileFile" value="'${profileUmlFile}'"/>
+		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
+		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+
+		<metaModel idRef="EmfMM"/>
+		<metaModel idRef="UmlMM"/>
+		<metaModel idRef="${profilename}MM"/>
+ 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model, chronosProfileModel)"/>
+
+		<outputSlot value="transformedModel"/>
+	</component>
+		
+	<!-- Check constraints after model 2 model transformation -->
+	<if cond="${doCheck}">
+		<component class="oaw.check.CheckComponent">
+		
+			<!-- Global variables used by the check -->
+			<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+			<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+			<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
+			<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+
+			<metaModel idRef="EmfMM"/>
+			<metaModel idRef="UmlMM"/>
+			<metaModel idRef="${profilename}MM"/>
+			<checkFile value="${postCheckFile}"/>
+			<emfAllChildrenSlot value="model"/>
+			<abortOnError value="true"/>
+		</component>
+	</if>
+
+	<component class="net.sourceforge.olympos.oaw.workflow.AntRunner">
+		<Param name="folderName" value="${targetDir}/cwe/js/cwe"/>
+		<Param name="fileName" value="Config.js"/>
+		<Param name="url" value="${dionysosURL}"/>
+		<antFile value="${basePath}/cartridge/Chi/workflow/build.xml"/>
+	</component>
+
+	<!-- Expand the model into the templates -->
+	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="true">
+		<fileEncoding value="utf-8"/>
+		
+		<!-- Global variables used by the generator -->
+		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
+		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
+		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
+		<globalVarDef name="DefaultConfigFile" value="'${configFileDefault}'"/>
+		<globalVarDef name="ProjectName" value="'${projectname}'"/>
+		<globalVarDef name="TargetDirectory" value="'${targetDir}'"/>
+		<globalVarDef name="HeaderText" value="${headerText}"/>
+		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+
+		<metaModel idRef="EmfMM"/>
+		<metaModel idRef="UmlMM"/>
+		<metaModel idRef="${profilename}MM"/>
+		
+		<expand value="${expand} FOR transformedModel"/>
+		
+		<outlet path="${targetDir}">
+		</outlet>
+		
+		<!-- Protected regions configuration -->
+		<prSrcPaths value="${targetDir}/${applicationPackage}"/>	
+		<prDefaultExcludes value="false"/>
+		<prExcludes value="*.svn-base"/>
+	</component>
+
+</workflow>

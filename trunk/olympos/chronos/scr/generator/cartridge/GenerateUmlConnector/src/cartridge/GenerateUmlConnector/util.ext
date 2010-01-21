@@ -1,0 +1,121 @@
+import uml;
+import Chronos;
+
+extension common::nameNormalizer;
+extension common::util;
+
+List[uml::Property] allTaggedValues(uml::Class this):
+	let result = (List[uml::Property]) {} : (
+		result.addAll(this.ownedElement.typeSelect(uml::Property).select(e|e.isValidTaggedValue())) ->
+		result.addAll(this.allParents().ownedElement.typeSelect(uml::Property).select(e|e.isValidTaggedValue()))
+	) ->
+	
+	result	
+;
+
+List[String] allTaggedValueNames(uml::Class this):
+	this.allTaggedValues().name
+;
+
+boolean isValidTaggedValue(uml::Property this):
+	this != null &&
+	this.name != "" &&
+	//this.association.metaType != uml::Extension
+	this.association == null
+;
+
+uml::Class getMetaClass(uml::Class this):
+	let parentClass = this.getGenerals().first():
+	let metaClass = this.getAssociations().typeSelect(uml::Extension).memberEnd.select(e|e.type == this).first().getOtherEnd().type:
+	
+	metaClass != null ?
+		metaClass
+	: (
+		parentClass != null ?
+			parentClass.getMetaClass()
+		:
+			null
+	)
+	//this.getAllExtendedMetaclasses().first()
+;
+
+String getCwmName(uml::Class this):
+	switch(this.name) {
+		case "ChiActivity":
+			"Activity"
+		
+		default:
+			this.name
+	}
+;
+
+Chronos::ChiNode getParallelClass(uml::Class this):
+	let result = getGlobalModel().allOwnedElements().typeSelect(uml::Class).selectFirst(e|e.name == this.name):
+	
+	result != null ?
+		result
+	:
+		warn("Cannot find parallel class for " + this.name)
+;
+
+uml::Type getTaggedValueType(uml::Class this, String taggedValueName):
+	this.allTaggedValues().select(e|e.name == taggedValueName).type.first()
+;
+
+String getTaggedValueName(String this):
+	this
+;
+
+String getCwmPropertyName(String this):
+	let result = this.normalizeMemberName():
+	switch (result) {
+		default:
+			result
+	}
+;
+
+String getAggregationKind(uml::EnumerationLiteral this):
+	switch(this.name) {
+		case "Aggregation":
+			"uml::AggregationKind::shared"
+		case "Association":
+			"uml::AggregationKind::none"
+		case "Composition":
+			"uml::AggregationKind::composite"
+		case "Dependency":
+			null
+		case "Generalizzation":
+			null
+		case "Realization":
+			null
+		default:
+			null
+	}
+;
+
+Boolean isAssociation(Olympos4Profiles::OmegaAssociation this):
+	{"Aggregation", "Association", "Composition"}.contains(this.associationType.name)
+;
+
+Boolean isDependency(Olympos4Profiles::OmegaAssociation this):
+	this.associationType.name == "Dependency"
+;
+
+Boolean isGeneralization(Olympos4Profiles::OmegaAssociation this):
+	this.associationType.name == "Generalizzation"
+;
+
+Boolean isRealization(Olympos4Profiles::OmegaAssociation this):
+	this.associationType.name == "Realization"
+;
+
+String getChildOrMany(uml::Property this):
+	this.upperBound() == 1 ?
+		"child"
+	:
+		"manyToMany"
+;
+
+uml::Model getGlobalModel():
+	GLOBALVAR globalModel
+;

@@ -1,0 +1,104 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+extension common::umlutils;
+
+uml::Property convert(cwm::ChiValue o):
+	let uc = new uml::Property : {
+		uc.setName("ChiValue:" + o.id)
+	} ->
+	uc
+;
+
+Void transferValues(cwm::ChiValue c, uml::Model um):
+	//(new Chronos::boolean::true).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiValue") ->
+			uc.setDefault(c.^default) ->
+			
+			uc.setTaggedValue("Chronos::ChiValue", "app_data_type", c.appDataType) ->
+			uc.setTaggedValue("Chronos::ChiValue", "db_data_type", c.dbDataType) ->
+			uc.setTaggedValue("Chronos::ChiValue", "is_editable", c.isEditable ? Chronos::boolean::^true : Chronos::boolean::^false) ->
+			uc.setTaggedValue("Chronos::ChiValue", "input_type", c.inputType) ->
+			uc.setTaggedValue("Chronos::ChiValue", "display_type", c.displayType) ->
+			uc.setTaggedValue("Chronos::ChiValue", "restrictions_match", c.restrictionsMatch) ->
+			uc.setTaggedValue("Chronos::ChiValue", "restrictions_not_match", c.restrictionsNotMatch) ->
+			uc.setTaggedValue("Chronos::ChiValue", "restrictions_description", c.restrictionsDescription) ->
+			uc.setTaggedValue("Chronos::ChiValue", "column_name", c.columnName) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "Alias", c.alias) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "Version", c.version) ->
+			uc.setType(getType(c.propertyType, um)) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void //->
+			//uc.setTaggedValue("Chronos::ChiValue", "created", c.created) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "creator", c.creator) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "last_editor", c.lastEditor) ->
+			//uc.setTaggedValue("Chronos::ChiValue", "modified", c.modified)
+		)
+	)
+;
+
+cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
+	//(new cwm::ChiValue).set
+	let un = new cwm::ChiValue : (
+		info("Converting ChiValue " + c.name) ->
+		un.setId(c.getId()) ->
+		
+		c.^default != null ? un.setDefault((String) c.^default) : Void ->
+		un.setPropertyType(c.type.name) ->
+		un.setAppDataType((String) c.getTaggedValue("Chronos::ChiValue", "app_data_type")) ->
+		un.setDbDataType((String) c.getTaggedValue("Chronos::ChiValue", "db_data_type")) ->
+		un.setIsEditable(c.getTaggedValue("Chronos::ChiValue", "is_editable") == Chronos::boolean::^true) ->
+		un.setInputType((String) c.getTaggedValue("Chronos::ChiValue", "input_type")) ->
+		un.setDisplayType((String) c.getTaggedValue("Chronos::ChiValue", "display_type")) ->
+		un.setRestrictionsMatch((String) c.getTaggedValue("Chronos::ChiValue", "restrictions_match")) ->
+		un.setRestrictionsNotMatch((String) c.getTaggedValue("Chronos::ChiValue", "restrictions_not_match")) ->
+		un.setRestrictionsDescription((String) c.getTaggedValue("Chronos::ChiValue", "restrictions_description")) ->
+		un.setColumnName((String) c.getTaggedValue("Chronos::ChiValue", "column_name")) ->
+		//un.setAlias(c.getTaggedValue("Chronos::ChiValue", "Alias").toString()) ->
+		//un.setVersion(c.getTaggedValue("Chronos::ChiValue", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) // ->
+		//un.setCreated(c.getTaggedValue("Chronos::ChiValue", "created").toString()) ->
+		//un.setCreator(c.getTaggedValue("Chronos::ChiValue", "creator").toString()) ->
+		//un.setLastEditor(c.getTaggedValue("Chronos::ChiValue", "last_editor").toString()) ->
+		//un.setModified(c.getTaggedValue("Chronos::ChiValue", "modified").toString())
+	) ->
+	un
+;
+
+uml::PrimitiveType getType(String typeName, uml::Model um):
+	let primitiveTypes = um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes") == null ? (
+			let tempPackage = new uml::Package:
+			tempPackage.setName("PrimitiveTypes") ->
+			um.nestedPackage.add(tempPackage) ->
+			info("Added PrimitiveTypes package") ->
+			tempPackage
+		) :
+			um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes")
+	:
+	
+	let result = primitiveTypes.ownedType.selectFirst(e|e.name == typeName) == null ? (
+			let tempType = new uml::PrimitiveType:
+			tempType.setName(typeName) ->
+			((uml::Package) primitiveTypes).ownedType.add(tempType) ->
+			info("Added Primitive Type \"" + typeName + "\"") ->
+			tempType
+		) :
+			primitiveTypes.ownedType.selectFirst(e|e.name == typeName)
+	:
+
+	
+	
+	result
+;
+	
