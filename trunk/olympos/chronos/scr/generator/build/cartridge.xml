@@ -1,0 +1,28 @@
+<project name="Chronos Generator Cartridge" default="build">
+	<target name="compile">
+		<tstamp/>
+		<javac encoding="utf-8" srcdir="./src" destdir="${build.absolute.dir}" debug="${debug}" excludesfile="compile-excludes">
+			<classpath>
+				<path refid="lib.path"/>
+				<fileset dir="lib" includes="**/*.jar"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="copy">
+		<copy todir="${cartridge.absolute.build.dir}">
+			<fileset dir="src/cartridge" includes="**/*" excludes="**/*.java">
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="copylibs">
+		<copy todir="${lib.absolute.build.dir}" failonerror="false">
+			<fileset dir="lib" includes="**/*"/>
+		</copy>
+	</target>
+
+	<target name="build" depends="compile,copy,copylibs">
+
+	</target>
+</project>

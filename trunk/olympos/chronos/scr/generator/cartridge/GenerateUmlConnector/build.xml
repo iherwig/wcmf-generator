@@ -1,0 +1,3 @@
+<project default="build">
+	<import file="../../build/cartridge.xml"/>
+</project>

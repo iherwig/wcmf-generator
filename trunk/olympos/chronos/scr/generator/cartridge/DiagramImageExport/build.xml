@@ -1,0 +1,47 @@
+<project default="build">
+	<property file="build.properties"/>
+	
+	<target name="build-diagram-exporter">
+		<ant antfile="${imageexporter.build.file}" target="redist"
+			dir="${imageexporter.dir}" inheritAll="false">
+  			<property file="${imageexporter.build.properties}"/>
+		</ant>
+	</target>
+	
+	<target name="compile" depends="build-diagram-exporter">
+		<javac encoding="utf-8" srcdir="./src" destdir="${build.absolute.dir}" debug="${debug}" excludesfile="compile-excludes">
+			<classpath>
+				<path refid="lib.path"/>
+				<fileset dir="${imageexporter.redist.libdir}" includes="**/*.jar"/>
+				<fileset dir="${imageexporter.redist.dir}/" includes="**/*.jar"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="copy">
+		<copy todir="${cartridge.absolute.build.dir}">
+			<fileset dir="src/cartridge" includes="**/*" excludes="**/*.java">
+			</fileset>
+		</copy>
+		<copy todir="${imageexporter.cartridge}/" verbose="false">
+			<fileset dir="${imageexporter.redist.dir}/">
+				<include name="Images/**/*.*"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="copylibs">
+		<copy todir="${lib.absolute.build.dir}">
+			<fileset dir="${imageexporter.redist.dir}/">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset dir="${imageexporter.redist.libdir}/">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="build" depends="compile,copy,copylibs">
+
+	</target>
+</project>
