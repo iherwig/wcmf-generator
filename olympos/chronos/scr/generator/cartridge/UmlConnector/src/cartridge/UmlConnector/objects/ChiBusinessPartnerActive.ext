@@ -1,0 +1,68 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+
+uml::Actor convert(cwm::ChiBusinessPartnerActive b):
+	let uc = new uml::Actor : {
+		uc.setName("ChiBusinessPartnerActive:" + b.id)
+	} ->
+	uc
+;
+
+Void establishConnections(cwm::ChiBusinessPartnerActive b, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiBusinessPartnerActive:" + b.id).first(): (
+		b.manyToMany.select(e|e.targetType == "ChiBusinessUseCase").establishConnectionsToUseCase(uc, um, "participates in", uml::AggregationKind::none, uml::AggregationKind::none, true, false) ->
+		b.manyToMany.select(e|e.targetType == "ChiBusinessUseCaseCore").establishConnectionsToUseCase(uc, um, "participates in", uml::AggregationKind::none, uml::AggregationKind::none, true, false) ->
+		b.child.select(e|e.targetType == "ChiBusinessPartnerActive").establishGeneralizationToActor(uc, um)
+	)
+;
+
+Void transferValues(cwm::ChiBusinessPartnerActive c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Actor).select(e|e.name == "ChiBusinessPartnerActive:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiBusinessPartnerActive") ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "Status", c.status) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiBusinessPartnerActive", "modified", c.modified)
+		)
+	)
+;
+
+cwm::ChiBusinessPartnerActive convertToCwm(Chronos::ChiBusinessPartnerActive c) :
+	let un = new cwm::ChiBusinessPartnerActive : (
+		un.setId(c.getId()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiBusinessPartnerActive", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiBusinessPartnerActive", "Status").toString()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiBusinessPartnerActive", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiBusinessPartnerActive", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiBusinessPartnerActive", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiBusinessPartnerActive", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiBusinessPartnerActive", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiBusinessPartnerActive", "modified").toString()) ->
+
+		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiBusinessUseCase).convertToMany()) ->
+		un.child.addAll(((List[uml::Class]) c.getGenerals()).convertToChild())
+	) ->
+	un
+;

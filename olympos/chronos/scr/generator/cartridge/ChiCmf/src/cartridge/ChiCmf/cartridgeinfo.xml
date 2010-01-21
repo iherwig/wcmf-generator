@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridgeinfo system="false">
+	<name>Chi Content Managment Framework</name>
+	<description>The wCMF (wemove Content Management Framework) cartridge, adapted to Chronos profile.</description>
+	<dependencies>
+		<dependency>UmlConnector</dependency>
+	</dependencies>
+	<properties>
+		<property name="codeGenerator">true</property>
+		<property name="workflow">workflow/chiCmf-headless.oaw</property>
+		<property name="targetPlatform">wemove Content Management Framework on PHP</property>
+	</properties>
+</cartridgeinfo>

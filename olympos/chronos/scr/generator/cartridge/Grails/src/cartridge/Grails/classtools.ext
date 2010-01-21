@@ -1,0 +1,168 @@
+import uml;
+import Chronos;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::ChiCmf::extensions::ChiNode;
+
+String getNameOfAssociationClass(Association assoc):
+	assoc.getFirstOfManyToMany().type.name.toFirstUpper() + "To" + assoc.getFirstOfManyToMany().getOtherEnd().type.name.toFirstUpper();
+	
+boolean isManyToManyAssociation(Association assoc):
+	(assoc.memberEnd.select(e|e.isMultivalued() && e.getOtherEnd().isMultivalued())).size > 0;
+	
+boolean isOneToOneAssociation(Association assoc):
+	(assoc.memberEnd.select(e|!e.isMultivalued() && !e.getOtherEnd().isMultivalued())).size > 0;
+	
+Property getFirstOfManyToMany(Association assoc):
+	assoc.memberEnd.sortBy(e|e.name).first();
+
+Property getNameOfAssociationClassReference(Association assoc):
+	assoc.getNameOfAssociationClass().toFirstLower()+ ":" + assoc.getNameOfAssociationClass();
+
+boolean isReferenceOptional(Property p, Class clazz):
+	p.type == clazz && p.getOtherEnd().lowerBound() == 0;
+
+boolean isReferenceMultivalued(Property p, Class clazz):
+	p.type == clazz && p.getOtherEnd().isMultivalued();
+
+boolean hasAppliedStereotypes(Property p):
+	p.getAppliedStereotypes().size > 0;
+
+boolean isInitialCRUDDOMAIN(Class clazz) :
+	(clazz.getAppliedStereotypes().select(e|e.name.matches("CRUD"))).size > 0;
+
+boolean isRequired (Property p) :
+	p.lower>0;
+
+boolean isBidirectional (Association assoc) :
+	assoc.memberEnd.size==2 && assoc.memberEnd.forAll(e|e.isNavigable());
+
+Property getNavigableOtherEnd(Association assoc, Class c) :
+	assoc.memberEnd.select(a|a.type == c && a.getOtherEnd().upperBound() == 1 && a.getOtherEnd().isNavigable());
+	
+Property getBelongsTo(Association assoc, Class c) :
+	assoc.memberEnd.select(a|a.type == c && a.getOtherEnd().isComposition() && !a.getOtherEnd().isMultivalued());
+	
+boolean isEmbeddedClass(Property p) :
+	p.association.getAppliedStereotypes().select(e|e.name.matches("embedded")).size  >0 && p.isNavigable();
+	
+boolean isMyEmbeddedValue(Property p, Class clazz):
+	p.isEmbeddedClass()&& p.type != clazz;
+
+boolean isEmbeddedAssociation(Association a) :
+	a.getAppliedStereotypes().select(e|e.name.matches("embedded")).size  >0;
+	
+String getAssociationPropertyName(Property this):
+	!this.name.isNullOrEmpty() ? this.name : this.type.name.toFirstLower()
+;
+
+boolean hasRestrictionsMatch(Property this):
+	!((String) this.getTaggedValue("Chronos::ChiValue", "restrictions_match")).isNullOrEmpty()
+;
+
+boolean isNullable(Property this):
+	this.lower == 0
+;
+
+String getPropertyName(Property this):
+	!this.name.isNullOrEmpty() ?
+		this.name
+	: (
+		this.association != null ?
+			this.getAssociationPropertyName()
+		:
+			null
+	)
+;
+
+String sanitizeType(String orgTypeName):
+	switch(orgTypeName.toLowerCase()) {
+		case "string": "String"
+		case "float": "float"
+		case "double": "double"
+		case "int": "int"
+		case "integer": "int"
+		case "long": "long"
+		case "boolean": "boolean"
+		case "date": "Date"
+		case "datetime": "Date"
+		case "": "def"
+		case null: "def"
+		case "<undefined>": "def"
+		case "void": "def"
+		default: orgTypeName
+	}
+;
+
+String getValuePrefix(uml::Type this):
+	switch(this.name) {
+		case "string": "\""
+		case "String": "\""
+		case "Date": "Date.parse(\"yyyy-MM-dd z\", \""
+		case "date": "Date.parse(\"yyyy-MM-dd z\", \""
+		default: ""
+	}
+;
+
+String getValuePostfix(uml::Type this):
+	switch(this.name) {
+		case "string": "\""
+		case "String": "\""
+		case "Date": " GMT\")"
+		case "date": " GMT\")"
+		default: ""
+	}
+;
+
+/**
+ * Get the hierarchy role name (Parent, Child) of the ChiNode
+ * represented by the association Property p in relation to
+ * the ChiNode this
+ */
+String getHierarchyRole(Chronos::ChiNode this, Property p):
+	!(this.isParentNode((Chronos::ChiNode) p.type) || this.isChildNode((Chronos::ChiNode) p.type)) ? 
+		""
+	: (
+		this.isParentNode((Chronos::ChiNode) p.type) ? "Parent" : "Child"
+	)
+	// these roles should not be used any more
+	-> ""
+;
+
+/**
+ * Convert a package name into a path
+ */
+String asPath(String package):
+	package.replaceAll("\\.", "/")
+;
+	
+List[uml::Class] getImportedClasses(Chronos::ChiNode this):
+	let fullQualifiedName = this.getNearestPackage().getPackageName():
+	let result = {}:
+	result.addAll(this.superClass) ->
+	result.addAll(this.ownedAttribute.type) ->
+	result.addAll(this.getParentNodesRecursive().type) ->
+	result.addAll(this.getChildNodesRecursive().type) ->
+	
+	result.toSet().typeSelect(uml::Class).select(e|e.getNearestPackage().getPackageName() != fullQualifiedName)
+;
+
+List[uml::Property] getManyProperties(uml::Association this, uml::Class parentClass):
+	this.memberEnd.select(s|s.isReferenceMultivalued(parentClass) && s.getOtherEnd().isNavigable())
+;
+
+Chronos::ChiManyToMany getManyToMany(Chronos::ChiNode this, Chronos::ChiNode otherEnd):
+	this.getModel().allOwnedElements().typeSelect(Chronos::ChiManyToMany)
+	.selectFirst(e|e.getParentNodes().type.containsAll({this, otherEnd}))
+;
+
+uml::Property getFirstManyToManyChild(Chronos::ChiNode this, Chronos::ChiNode otherEnd):
+	let parents = this.getManyToMany(otherEnd).getParentNodes():
+
+	parents.size > 0 ?
+		parents.get(0).type
+	:
+		Void
+;

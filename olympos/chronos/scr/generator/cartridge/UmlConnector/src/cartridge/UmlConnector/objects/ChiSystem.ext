@@ -1,0 +1,65 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::objects::ChiValue;
+
+uml::Class convert(cwm::ChiSystem s):
+	let uc = new uml::Class : {
+		uc.setName("ChiSystem:" + s.id) ->
+		uc.ownedAttribute.addAll(s.chiValue.convert())
+	} ->
+	uc
+;
+
+Void transferValues(cwm::ChiSystem c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiSystem:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			c.chiValue.transferValues(um) ->
+
+			uc.applyStereotype("Chronos::ChiSystem") ->
+			uc.setTaggedValue("Chronos::ChiSystem", "plattform", c.plattform) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "config", c.config) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "Status", c.status) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiSystem", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiSystem", "modified", c.modified)
+		)
+	)
+;
+
+cwm::ChiSystem convertToCwm(Chronos::ChiSystem c) :
+	let un = new cwm::ChiSystem : (
+		un.chiValue.addAll(c.ownedAttribute.typeSelect(Chronos::ChiValue).convertToCwm()) ->
+
+		un.setId(c.getId()) ->
+		un.setPlattform(c.getTaggedValue("Chronos::ChiSystem", "plattform").toString()) ->
+		un.setConfig(c.getTaggedValue("Chronos::ChiSystem", "config").toString()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiSystem", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiSystem", "Status").toString()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiSystem", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiSystem", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiSystem", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiSystem", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiSystem", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiSystem", "modified").toString())
+	) ->
+	un
+;

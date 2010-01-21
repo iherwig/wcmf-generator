@@ -1,0 +1,79 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+
+uml::Class convert(cwm::ChiGoal g):
+	let uc = new uml::Class : {
+		uc.setName("ChiGoal:" + g.id)
+	} ->
+	uc
+;
+
+Void establishConnections(cwm::ChiGoal g, uml::Model um):
+	//uml::AggregationKind::
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiGoal:" + g.id).first(): {
+		g.child.select(e|e.targetType == "ChiGoal").establishConnectionsToClass(uc, um, "contains", uml::AggregationKind::composite, uml::AggregationKind::none, false, false) ->
+		g.child.select(e|e.targetType == "ChiRequirement").establishConnectionsToClass(uc, um, "contains", uml::AggregationKind::composite, uml::AggregationKind::none, false, false)
+	}
+;
+
+Void transferValues(cwm::ChiGoal g, uml::Model um):
+	//(new uml::Comment).annotatedElement.add(uc)
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiGoal:" + g.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiGoal") ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Priority", g.priority) ->
+			//uc.setTaggedValue("Chronos::ChiGoal", "GoalType", g.goalType) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Value_Name", g.valueName) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Value_ammount", g.valueAmmount) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Value_Goal", g.valueGoal) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Author", g.author) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Status", g.status) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Alias", g.alias) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "Version", g.version) ->
+			uc.setName(g.name) ->
+			g.notes != null ? (
+				comment.setBody(g.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiGoal", "created", g.created) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "creator", g.creator) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "last_editor", g.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiGoal", "modified", g.modified)
+		)
+	)
+;
+
+cwm::ChiGoal convertToCwm(Chronos::ChiGoal c) :
+	//(new cwm::ChiGoal).setP
+	let un = new cwm::ChiGoal : (
+		un.setId(c.getId()) ->
+		un.setPriority((int) c.getValue(c.getAppliedStereotype("Chronos::ChiGoal"), "Priority")) ->
+		//un.setGoalType(c.getTaggedValue("Chronos::ChiGoal", "GoalType").toString()) ->
+		un.setValueName(c.getTaggedValue("Chronos::ChiGoal", "Value_Name").toString()) ->
+		un.setValueAmmount(c.getTaggedValue("Chronos::ChiGoal", "Value_ammount").toString()) ->
+		un.setValueGoal(c.getTaggedValue("Chronos::ChiGoal", "Value_Goal").toString()) ->
+		un.setAuthor(c.getTaggedValue("Chronos::ChiGoal", "Author").toString()) ->
+		un.setStatus(c.getTaggedValue("Chronos::ChiGoal", "Status").toString()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiGoal", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiGoal", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiGoal", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiGoal", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiGoal", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiGoal", "modified").toString()) ->
+		
+		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c && e.aggregation == uml::AggregationKind::composite).type.typeSelect(Chronos::ChiGoal).convertToChild()) ->
+		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiRequirement).convertToChild())
+	) ->
+	un
+;

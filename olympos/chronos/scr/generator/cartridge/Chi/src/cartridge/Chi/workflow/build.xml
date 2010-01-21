@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project default="propagateURL">
+	 
+	
+	<target name="propagateURL">
+		<replace file="${folderName}/${fileName}" token="@dionysosURL" value="${url}" />		 
+	</target>
+	
+	 
+	
+</project>

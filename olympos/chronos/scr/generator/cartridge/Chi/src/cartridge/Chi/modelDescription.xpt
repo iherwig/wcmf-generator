@@ -1,0 +1,276 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+«EXTENSION common::umlutils»
+«EXTENSION common::nameNormalizer»
+
+«EXTENSION cartridge::ChiCmf::extensions::umlutils»
+«EXTENSION cartridge::ChiCmf::extensions::naming»
+«EXTENSION cartridge::ChiCmf::extensions::util»
+
+«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
+«EXTENSION cartridge::ChiCmf::extensions::ChiValue»
+«EXTENSION cartridge::ChiCmf::extensions::globals»
+
+«EXTENSION cartridge::Chi::util»
+
+«DEFINE root FOR uml::Model»
+	«EXPAND modelDescription FOREACH this.getModelClasses()»
+«ENDDEFINE»
+
+«DEFINE modelDescription FOR Chronos::ChiNode»
+	«info("Creating description " + this.name)-»
+	«FILE "js/application/" + this.getFullPackageName().asPath() + "/" + this.name + "Description.class.js"-»
+«HeaderText()-»
+Ext.namespace("application.«this.getFullPackageName()»");
+
+application.«this.getFullPackageName()».«this.name»Description = function() {
+	application.«this.getFullPackageName()».«this.name»Description.superclass.constructor.call(this, arguments);
+	
+	this.chiModelElementId = "«this.name»";
+	this.name = "«this.name»";
+	this.treeIconClass = "«this.name»TreeIcon16x16";
+	this.owningPackageId = "«((uml::Package) this.owner).getChiPackageName()»";
+	
+	«EXPAND recordDefinition FOR this»
+	
+	«EXPAND relations FOR this»
+};
+
+Ext.extend(application.«this.getFullPackageName()».«this.name»Description, chi.model.ModelDescription);
+
+«EXPAND getGridColumns FOR this»
+
+«EXPAND getLabelColumns FOR this»
+
+«EXPAND getEditorItems FOR this»
+
+«EXPAND createInstance FOR this»
+
+chi.model.ModelDescriptionContainer.getInstance().registerDescription(new application.«this.getFullPackageName()».«this.name»Description());
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE recordDefinition FOR Chronos::ChiNode»
+	this.recordDefinition = [
+	«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
+		{
+			name : "«currValue.name»",
+			mapping : "«currValue.name»"
+		}
+	«ENDFOREACH»
+	
+	«IF this.getChiAttributes().size > 0 && (this.getNotAbstractNavigableParentNodes().size > 0 || this.getNotAbstractNavigableChildNodes().size > 0)»
+		,
+	«ENDIF»
+	
+	«FOREACH this.getNotAbstractNavigableParentNodes() AS currParent SEPARATOR ", "»
+		{
+			name : "«currParent.getRoleName().toFirstLower()»",
+			mapping: "«currParent.getRoleName().toFirstLower()»"
+		}
+	«ENDFOREACH»
+	
+	«IF this.getNotAbstractNavigableParentNodes().size > 0 && this.getNotAbstractNavigableChildNodes().size > 0»
+		,
+	«ENDIF»
+	
+	«FOREACH this.getNotAbstractNavigableChildNodes() AS currChild SEPARATOR ", "»
+		{
+			name : "«currChild.getRoleName().toFirstLower()»",
+			mapping : "«currChild.getRoleName().toFirstLower()»"
+		}
+	«ENDFOREACH»
+	];
+«ENDDEFINE»
+
+«DEFINE relations FOR Chronos::ChiNode»
+	this.relations = {
+	«FOREACH this.getNotAbstractNavigableParentNodes() AS currParent SEPARATOR ", "»
+		"«currParent.getRoleName().toFirstLower()»" : {
+			isParent : true,
+			targetModelClassId : "«currParent.type.name»"
+		}
+	«ENDFOREACH»
+
+	«IF (this.getNotAbstractNavigableParentNodes().size > 0) && (this.getNotAbstractNavigableChildNodes().size > 0)»
+		,
+	«ENDIF»
+	
+	«FOREACH this.getNotAbstractNavigableChildNodes() AS currChild SEPARATOR ", "»
+		"«currChild.getRoleName().toFirstLower()»" : {
+			isParent : false,
+			targetModelClassId : "«currChild.type.name»"
+		}
+	«ENDFOREACH»
+	};
+«ENDDEFINE»
+
+«DEFINE getGridColumns FOR Chronos::ChiNode»
+application.«this.getFullPackageName()».«this.name»Description.prototype.getGridColumns = function() {
+«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getGridColumns"»
+	return [
+	«IF this.getChiAttributes().size > 0»
+		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
+			{
+				header : "«currValue.name»",
+				dataIndex : "«currValue.name»",
+				width : 100,
+				sortable : true,
+				«IF !currValue.isDisplayValue(this)»hidden: true,«ENDIF»
+				editor: «EXPAND getGridEditor FOR currValue»
+			}
+		«ENDFOREACH»
+	«ENDIF»
+	];
+«ENDPROTECT»
+};
+«ENDDEFINE»
+
+«DEFINE getLabelColumns FOR Chronos::ChiNode»
+application.«this.getFullPackageName()».«this.name»Description.prototype.getLabelColumns = function() {
+«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getLabelColumns"»
+	return [
+	«IF this.getChiAttributes().size > 0»
+		«FOREACH this.getChiAttributes().select(e|e.isDisplayValue(this)) AS currValue SEPARATOR ", "»
+			{
+				header : "«currValue.name»",
+				dataIndex : "«currValue.name»",
+				width : 100,
+				sortable : true
+			}
+		«ENDFOREACH»
+	«ENDIF»
+	];
+«ENDPROTECT»
+};
+«ENDDEFINE»
+
+«DEFINE getGridEditor FOR Chronos::ChiValue»
+	«LET this.input_type.split("#").first().getExtJsInputType() AS inputType»
+		«IF this.is_editable.boolString() == "false" || inputType == "HtmlEditor"-»
+			new cwe.modelgrid.DummyField()
+		«ELSEIF inputType == "ComboBox"-»
+			«EXPAND comboBox FOR this»
+			})
+		«ELSE-»
+			new chi.editor.control.«inputType»({})
+		«ENDIF-»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE comboBox FOR Chronos::ChiValue»
+	«LET this.input_type.split(':').first().split('#').last() AS listType»
+		«LET listType == "fix" || uml::Enumeration.isInstance(this.type) AS isFix»
+			new chi.editor.control.«isFix ? "StaticComboBox" : "ComboBox"»({
+				«LET this.input_type.split(':').last() AS listDef»
+					«IF uml::Enumeration.isInstance(this.type)»
+						data: [
+							«FOREACH ((uml::Enumeration) this.type).ownedLiteral AS currEntry SEPARATOR ", "»
+								["«currEntry.name.normalizeMemberName()»", "«currEntry.name»"]
+							«ENDFOREACH»
+						]
+					«ELSEIF listType == "fix"»
+						data: [
+							«FOREACH listDef.split("\\|") AS currEntry SEPARATOR ", "»
+								["«currEntry»", "«currEntry»"]
+							«ENDFOREACH»
+						]
+					«ELSE»
+						targetChiModelElementId: "«listDef»"
+					«ENDIF»
+				«ENDLET»
+			«ENDLET»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE getEditorItems FOR Chronos::ChiNode»
+application.«this.getFullPackageName()».«this.name»Description.prototype.getEditorItems = function() {
+«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getEditorItems"»
+	return [
+	«IF this.getChiAttributes().size > 0»
+		new cwe.editor.control.PropertiesFieldSet({
+			items: [
+		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
+			«EXPAND getEditor FOR currValue»
+		«ENDFOREACH»
+		]})
+		
+		«IF this.getNotAbstractNavigableParentNodes().size > 0 || this.getNotAbstractNavigableChildNodes().size > 0»
+			,
+		«ENDIF»
+	«ENDIF»
+	
+	«IF this.getNotAbstractNavigableParentNodes().size > 0 || this.getNotAbstractNavigableChildNodes().size > 0»
+		new cwe.editor.control.AssociationsFieldSet({
+			items: [
+		«FOREACH this.getNotAbstractNavigableParentNodes() AS currParent SEPARATOR ", "»
+			«EXPAND association(true) FOR currParent»
+		«ENDFOREACH»
+		
+		«IF this.getNotAbstractNavigableParentNodes().size > 0 && this.getNotAbstractNavigableChildNodes().size > 0»
+			,
+		«ENDIF»
+		
+		«FOREACH this.getNotAbstractNavigableChildNodes() AS currChild SEPARATOR ", "»
+			«EXPAND association(false) FOR currChild»
+		«ENDFOREACH»
+		
+		]})
+	«ENDIF»
+	];
+«ENDPROTECT»
+};
+«ENDDEFINE»
+
+«DEFINE getEditor FOR Chronos::ChiValue»
+	«LET this.input_type.split("#").first().getExtJsInputType() AS inputType»
+		«IF this.is_editable.boolString() == "false"»
+			new chi.editor.control.DisplayField({
+		«ELSEIF inputType == "ComboBox"-»
+			«EXPAND comboBox FOR this»
+			,
+		«ELSE-»
+			new chi.editor.control.«inputType»({
+	 	«ENDIF-»
+		fieldLabel: "«this.name»",
+		name: "«this.name»",
+		dataIndex: "«this.name»",
+		toolTip: "«this.getComment().sanitizeJsString()»"
+	}) 
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE association(Boolean isParent) FOR uml::Property»
+	«IF this.getUpper() == 1»
+		new cwe.editor.control.SingleAssociate( {
+	«ELSE»
+		new cwe.editor.control.MultipleAssociate( {
+	«ENDIF»
+			fieldLabel : "«this.getRoleName().toFirstLower()»",
+			name : "«this.getRoleName().toFirstLower()»",
+			dataIndex : "«this.getRoleName().toFirstLower()»",
+			targetChiModelElementId : "«this.type.name»",
+			isParent : «isParent ? "true" : "false"»,
+			aggregationKind : cwe.Constants.AggregationKind.«this.aggregation.toString().toUpperCase()»
+		«REM»«ENDLET»«ENDREM»
+	})
+«ENDDEFINE»
+
+«DEFINE createInstance FOR Chronos::ChiNode»
+/**
+ * Returns a newly created instance of the Model Class, which inherits {chi.model.ModelRecord}.
+ * 
+ * @param {String}
+ *            oid The object id of the instance.
+ * @param {Object}
+ *            data A map containing attribute names as keys and initial values
+ *            as map values.
+ * @return The instance of the Model Class.
+ * @type {chi.model.ModelRecord}
+ */
+application.«this.getFullPackageName()».«this.name»Description.prototype.createInstance = function(oid, data) {
+	return new application.«this.getFullPackageName()».«this.name»(oid, data);
+};
+«ENDDEFINE»

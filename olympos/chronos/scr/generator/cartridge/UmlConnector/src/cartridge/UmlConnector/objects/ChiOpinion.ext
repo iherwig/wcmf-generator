@@ -1,0 +1,50 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+uml::Activity convert(cwm::ChiOpinion o):
+	let uc = new uml::Activity : {
+		uc.setName("ChiOpinion:" + o.id)
+	} ->
+	uc
+;
+
+Void transferValues(cwm::ChiOpinion c, uml::Model um):
+	//(new uml::Class).setT
+	let uc = um.allOwnedElements().typeSelect(uml::Activity).select(e|e.name == "ChiOpinion:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiOpinion") ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiOpinion", "modified", c.modified)
+		)
+	)
+;
+
+cwm::ChiOpinion convertToCwm(Chronos::ChiOpinion c) :
+	let un = new cwm::ChiOpinion : (
+		un.setId(c.getId()) ->
+		un.setAlias(c.getTaggedValue("Chronos::ChiOpinion", "Alias").toString()) ->
+		un.setVersion(c.getTaggedValue("Chronos::ChiOpinion", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated(c.getTaggedValue("Chronos::ChiOpinion", "created").toString()) ->
+		un.setCreator(c.getTaggedValue("Chronos::ChiOpinion", "creator").toString()) ->
+		un.setLastEditor(c.getTaggedValue("Chronos::ChiOpinion", "last_editor").toString()) ->
+		un.setModified(c.getTaggedValue("Chronos::ChiOpinion", "modified").toString())
+	) ->
+	un
+;

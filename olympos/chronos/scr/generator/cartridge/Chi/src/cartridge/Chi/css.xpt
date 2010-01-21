@@ -1,0 +1,25 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+
+«EXTENSION cartridge::Chi::util»
+
+«EXTENSION cartridge::ChiCmf::extensions::globals»
+
+«DEFINE root FOR uml::Model»
+	«info("Creating application CSS file")»
+	«FILE "css/modelClass.css"»
+«HeaderText()»
+
+		«EXPAND treeIcon16x16 FOREACH this.getModelClasses()»
+	«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE treeIcon16x16 FOR Chronos::ChiNode»
+  «IF this.name != "Package"-»
+.«this.name»TreeIcon16x16 {
+	background-image: url("../img/16x16/«this.name».png") !important;
+}
+  «ENDIF-»
+«ENDDEFINE»

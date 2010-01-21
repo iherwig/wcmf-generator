@@ -1,0 +1,228 @@
+«IMPORT uml»
+«IMPORT Olympos4Profiles»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+«EXTENSION common::umlutils»
+
+«EXTENSION cartridge::GenerateUmlConnector::util»
+
+«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
+«EXTENSION cartridge::ChiCmf::extensions::util»
+
+«DEFINE root FOR uml::Profile»
+	«EXPAND object FOREACH this.allOwnedElements().typeSelect(uml::Class)»
+«ENDDEFINE»
+
+«DEFINE object FOR uml::Class»
+«info("Generating " + this.name)»
+«FILE this.getCwmName() + ".ext"»
+	«EXPAND header FOR this»
+	
+	«EXPAND convert FOR this»
+	
+	«EXPAND establishConnections FOR this»
+	
+	«EXPAND transferValues FOR this»
+	
+	«EXPAND insertEnums FOR this»
+	
+	«EXPAND convertToCwm FOR this»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE header FOR uml::Class»
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+
+«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".header.extensions"»
+	//Additional extensions go here
+«ENDPROTECT»
+«ENDDEFINE»
+
+«DEFINE convert FOR uml::Class»
+uml::«this.getMetaClass().name» convert(cwm::«this.getCwmName()» c):
+	let uc = new uml::«this.getMetaClass().name» : (
+		uc.setName("«this.getCwmName()»:" + c.id)
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convert.misc"»
+			//Additional code goes here
+		«ENDPROTECT»
+	) ->
+	uc
+;
+«ENDDEFINE»
+
+«DEFINE establishConnections FOR uml::Class»
+Void establishConnections(cwm::«this.getCwmName()» c, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::«this.getMetaClass().name»).select(e|e.name == "«this.getCwmName()»:" + c.id).first(): (
+
+		«FOREACH this.getParallelClass().getChildNodes() AS currChild»
+			«IF !currChild.type.isManyToMany()»
+				«LET this.getAssociations().selectFirst(e|e.memberEnd.selectFirst(f|f.type == this).getOtherEnd().type.name == currChild.type.name) AS currAssociation»
+					«LET currAssociation.memberEnd.select(e|e.type == this).first() AS thisEndProperty»
+						«LET thisEndProperty.getOtherEnd().type AS otherEnd»
+							«EXPAND connectionCommand("child", otherEnd, currAssociation)»
+						«ENDLET»
+					«ENDLET»
+				«ENDLET»
+			«ELSE»
+				«REM» Assumption: ChiManyToMany has only two relations«ENDREM»
+				«IF currChild.type.getAssociations().first() == currChild.association»
+					«LET currChild.type.getAssociations().last().memberEnd.selectFirst(e|e.type == currChild.type).getOtherEnd().type AS otherEndType»
+						«LET this.getAssociations().selectFirst(e|e.memberEnd.selectFirst(f|f.type == this).getOtherEnd().type.name == otherEndType.name) AS currAssociation»
+							«LET currAssociation.memberEnd.selectFirst(e|e.type == this) AS thisEndProperty»
+								«LET thisEndProperty.getOtherEnd().type AS otherEnd»
+							«EXPAND connectionCommand("manyToMany", otherEnd, currAssociation)»
+									c.manyToMany.select(e|e.targetType == "«otherEnd.getCwmName()»").establishConnectionsTo«otherEnd.getMetaClass().name»(uc, um, "«currAssociation.name»", «currAssociation.associationType.getAggregationKind()», uml::AggregationKind::none, false, false) ->
+								«ENDLET»
+							«ENDLET»
+						«ENDLET»
+					«ENDLET»
+				«ENDIF»
+			«ENDIF»
+		«ENDFOREACH»
+
+«REM»
+		«FOREACH this.getAssociations().typeSelect(Olympos4Profiles::OmegaAssociation).select(e|e.isRealization()) AS currAssociation»
+			«LET currAssociation.memberEnd.select(e|e.type == this).first() AS thisEndProperty»
+				«IF thisEndProperty.isNavigable()»
+					«LET thisEndProperty.getOtherEnd().type AS otherEnd»
+						r.«thisEndProperty.getChildOrMany()».select(e|e.targetType == "«otherEnd.name»").establishRealizationTo«otherEnd.getMetaClass().name»(uc, um, "«currAssociation.name»") ->
+					«ENDLET»
+				«ENDIF»
+			«ENDLET»
+		«ENDFOREACH»
+«ENDREM»
+
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".establishConnections.connections"»
+			//Insert connections here
+			// e. g. c.child.select(e|e.targetType == "ChiBusinessUseCase").establishRealizationToUseCase(uc, um, "refines") ->
+			Void
+		«ENDPROTECT»
+	)
+;
+«ENDDEFINE»
+
+«DEFINE connectionCommand(String childOrMany, uml::Class otherEnd, Olympos4Profiles::OmegaAssociation assoc)»
+	«IF assoc.isAssocation()»
+		c.«childOrMany».select(e|e.targetType == "«otherEnd.getCwmName()»").establishConnectionsTo«otherEnd.getMetaClass().name»(uc, um, "«assoc.name»", «assoc.associationType.getAggregationKind()», uml::AggregationKind::none, false, false) ->
+	«ELSEIF assoc.isRealization()»
+				
+«ENDDEFINE»
+
+«DEFINE transferValues FOR uml::Class»
+Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::«this.getMetaClass().name»).select(e|e.name == "«this.getCwmName()»:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::«this.name»") ->
+
+			«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".transferValues.comment"»
+				//Delete this content if object has no notes
+				c.notes != null ? (
+					comment.setBody(c.notes) ->
+					comment.annotatedElement.add(uc) ->
+					uc.ownedComment.add(comment)
+				) : Void
+			«ENDPROTECT»
+			
+			«IF this.allTaggedValueNames().size > 0»
+				->
+			«ENDIF»
+
+			«EXPAND transferValuesTaggedValues(this) FOREACH this.allTaggedValueNames() SEPARATOR "->"»
+			
+			«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".transferValues.misc"»
+				//Additional code goes here
+			«ENDPROTECT»
+		)
+	)
+;
+«ENDDEFINE»
+
+«DEFINE transferValuesTaggedValues(uml::Class st) FOR String»
+	«LET st.getTaggedValueType(this) AS type»
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".transferValues.taggedValue." + this»
+			«IF !uml::Enumeration.isInstance(type)»
+				uc.setTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»", c.«this.getCwmPropertyName()»)
+			«ELSE»
+				c.«this.getCwmPropertyName()».translate«type.name»() != null ? uc.setTaggedValue("Chronos::«st.name»", "«this»", c.«this.getCwmPropertyName()».translate«type.name»()) : Void
+			«ENDIF»
+		«ENDPROTECT»
+	«ENDLET»
+«ENDDEFINE»
+
+«DEFINE insertEnums FOR uml::Class»
+	«EXPAND convertEnum(this) FOREACH this.allOwnedElements().typeSelect(uml::Property).type.typeSelect(uml::Enumeration).toSet()»
+«ENDDEFINE»
+
+«DEFINE convertEnum(uml::Class st) FOR uml::Enumeration»
+«this.name» translate«this.name»(String source):
+	switch(source.toLowerCase()) {
+		«FOREACH this.ownedElement.typeSelect(uml::EnumerationLiteral) AS l»
+			case "«l.name.toLowerCase()»":
+				«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".enumeration." + this.name + ".convertEnum.literal." + l.name»
+					«this.name»::«l.name»
+				«ENDPROTECT»
+		«ENDFOREACH»
+		
+		default:
+			null
+	}
+;
+«ENDDEFINE»
+
+«DEFINE convertToCwm FOR uml::Class»
+cwm::«this.getCwmName()» convertToCwm(Chronos::«this.name» uc):
+	let c = new cwm::«this.getCwmName()»: (
+		c.setId(uc.getId()) ->
+
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.name"»
+			//Empty this region if name should not be transferred
+			c.setName(uc.name) ->
+		«ENDPROTECT»
+
+
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.notes"»
+			//Empty this region if notes should not be transferred
+			c.setNotes(uc.getComment())
+		«ENDPROTECT»
+		
+		«IF this.allTaggedValueNames().size > 0»
+			->
+		«ENDIF»
+
+		«EXPAND convertToCwmTaggedValues(this) FOREACH this.allTaggedValueNames() SEPARATOR "->"»
+		
+		«FOREACH this.getAssociations().typeSelect(Olympos4Profiles::OmegaAssociation) AS currAssociation»
+			«LET currAssociation.memberEnd.select(e|e.type == this).first().getOtherEnd().type AS otherEnd»
+				c.child.addAll(uc.getAssociations().memberEnd.select(e|e.type == uc).getOtherEnd().type.typeSelect(Chronos::«otherEnd.getCwmName()»).convertToChild()) ->
+			«ENDLET»
+		«ENDFOREACH»
+
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.relations"»
+			Void
+		«ENDPROTECT»
+	) ->
+	c
+;
+«ENDDEFINE»
+
+«DEFINE convertToCwmTaggedValues(uml::Class st) FOR String»
+	«LET st.getTaggedValueType(this) AS type»
+		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".convertToCwm.taggedValue." + this»
+			«IF !uml::Enumeration.isInstance(type)»
+				c.set«this.getCwmPropertyName().toFirstUpper()»((«type.name») uc.getTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»"))
+			«ELSE»
+				uc.getTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»") != "" ? c.set«this.getCwmPropertyName().toFirstUpper()»(((Chronos::«type.name») uc.getTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»")).name) : Void
+			«ENDIF»
+		«ENDPROTECT»
+	«ENDLET»
+«ENDDEFINE»

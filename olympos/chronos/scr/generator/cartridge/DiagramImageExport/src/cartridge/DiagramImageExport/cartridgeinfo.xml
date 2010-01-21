@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cartridgeinfo system="true">
+	<name>Diagram Image Export</name>
+	<description>
+		Generates diagram images in PNG format. 
+	</description>
+	<dependencies>
+	</dependencies>
+	<properties>
+	</properties>
+</cartridgeinfo>

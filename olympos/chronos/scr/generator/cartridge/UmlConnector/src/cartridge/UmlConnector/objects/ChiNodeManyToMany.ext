@@ -1,0 +1,104 @@
+import cwm;
+import Chronos;
+import uml;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::umlutils;
+extension common::util;
+
+extension cartridge::UmlConnector::connections;
+extension cartridge::UmlConnector::connectionsToCwm;
+
+extension cartridge::UmlConnector::objects::ChiValue;
+
+uml::Class convert(cwm::ChiNodeManyToMany n):
+	//(new uml::Class).owned
+	let uc = new uml::Class : {
+		uc.setName("ChiNodeManyToMany:" + n.id) ->
+		uc.ownedAttribute.addAll(n.chiValue.convert())
+	} ->
+	uc
+;
+
+Void establishConnections(cwm::ChiNodeManyToMany b, uml::Model um):
+/*
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNodeManyToMany:" + b.id).first(): (
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "aggregation").establishConnectionsToClass(uc, um, null, uml::AggregationKind::shared, uml::AggregationKind::none) ->
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "composition").establishConnectionsToClass(uc, um, null, uml::AggregationKind::composite, uml::AggregationKind::none) ->
+		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "association").establishConnectionsToClass(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none)
+	)
+*/
+Void
+;
+
+Void transferValues(cwm::ChiNodeManyToMany c, uml::Model um):
+	//(new uml::LiteralBoolean).setVa
+	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNodeManyToMany:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			c.chiValue.transferValues(um) ->
+	
+			uc.applyStereotype("Chronos::ChiManyToMany") ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "table_name", c.tableName) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "pk_name", c.pkName) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "orderby", c.orderby) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "parent_order", c.parentOrder) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "child_order", c.childOrder) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "display_value", c.displayValue) ->
+			//uc.setTaggedValue("Chronos::ChiManyToMany", "is_ordered", c.isOrdered == "true") ->
+			//uc.setTaggedValue("Chronos::ChiManyToMany", "is_soap", c.isSoap == "true") ->
+			//uc.setTaggedValue("Chronos::ChiManyToMany", "is_searchable", c.isSearchable == "true") ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "initparams", c.initparams) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "Author", c.author) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "Status", c.status) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "Alias", c.alias) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "Version", c.version) ->
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "created", c.created) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "creator", c.creator) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "last_editor", c.lastEditor) ->
+			uc.setTaggedValue("Chronos::ChiManyToMany", "modified", c.modified)
+		)
+	)
+;
+
+cwm::ChiNodeManyToMany convertToCwm(Chronos::ChiManyToMany c) :
+	let un = new cwm::ChiNodeManyToMany : (
+		un.chiValue.addAll(c.ownedAttribute.typeSelect(Chronos::ChiValue).convertToCwm()) ->
+	
+		un.setId(c.getId()) ->
+		un.setTableName((String) c.getTaggedValue("Chronos::ChiManyToMany", "table_name")) ->
+		un.setPkName((String) c.getTaggedValue("Chronos::ChiManyToMany", "pk_name")) ->
+		un.setOrderby((String) c.getTaggedValue("Chronos::ChiManyToMany", "orderby")) ->
+		un.setParentOrder((String) c.getTaggedValue("Chronos::ChiManyToMany", "parent_order")) ->
+		un.setChildOrder((String) c.getTaggedValue("Chronos::ChiManyToMany", "child_order")) ->
+		un.setDisplayValue((String) c.getTaggedValue("Chronos::ChiManyToMany", "display_value")) ->
+		un.setIsSoap(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_soap") == Chronos::boolean::^true) ->
+		un.setIsSearchable(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_searchable") == Chronos::boolean::^true) ->
+		//un.setIsOrdered(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_ordered")) ->
+		//un.setIsSoap(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_soap")) ->
+		//un.setIsSearchable(c.getValue(c.getAppliedStereotype("Chronos::ChiManyToMany"), "is_searchable")) ->
+		un.setInitparams((String) c.getTaggedValue("Chronos::ChiManyToMany", "initparams")) ->
+		un.setAuthor((String) c.getTaggedValue("Chronos::ChiManyToMany", "Author")) ->
+		un.setStatus((String) c.getTaggedValue("Chronos::ChiManyToMany", "Status")) ->
+		un.setAlias((String) c.getTaggedValue("Chronos::ChiManyToMany", "Alias")) ->
+		un.setVersion((String) c.getTaggedValue("Chronos::ChiManyToMany", "Version")) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) ->
+		un.setCreated((String) c.getTaggedValue("Chronos::ChiManyToMany", "created")) ->
+		un.setCreator((String) c.getTaggedValue("Chronos::ChiManyToMany", "creator")) ->
+		un.setLastEditor((String) c.getTaggedValue("Chronos::ChiManyToMany", "last_editor")) ->
+		un.setModified((String) c.getTaggedValue("Chronos::ChiManyToMany", "modified")) ->
+
+		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild())
+		 ->
+		un.manyToMany.addAll(((List[uml::Class]) c.getSubClasses()).convertToMany("generalization", "NodeManyToManyTarget")) ->
+		un.manyToMany.addAll(c.getAssociations().convertToMany(c).typeSelect(cwm::ManyToMany))
+	) ->
+	un
+;
