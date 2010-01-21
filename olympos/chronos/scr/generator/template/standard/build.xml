@@ -1,0 +1,3 @@
+<project default="build">
+	<import file="../../build/template.xml"/>
+</project>

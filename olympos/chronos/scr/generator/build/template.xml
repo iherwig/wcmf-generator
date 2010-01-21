@@ -1,0 +1,8 @@
+<project name="Chronos Generator template" default="build" basedir=".">
+	<target name="build">
+		<copy todir="${template.absolute.build.dir}">
+			<fileset dir="src/cartridge/DocumentGeneration/template" includes="**/*">
+			</fileset>
+		</copy>
+	</target>
+</project>
