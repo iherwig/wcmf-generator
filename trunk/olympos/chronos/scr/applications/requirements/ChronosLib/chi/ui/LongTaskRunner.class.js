@@ -20,6 +20,8 @@ Ext.namespace("chi.ui");
  * @config title The window title
  * @config showText True if the text returned from the backend should be displayed on the progress
  *              bar, false, if no text should be displayed
+ * @config autoAnimate True if the text returned from the backend should be displayed on the progress
+ *              bar, false, if no text should be displayed
  * @config canCancel True if the process can be cancelled, false, if not
  * @config call A function with parameters successHandler and errorHandler (these will be used by LongTask)
  *              Typically a call to a Persistency method. See also {LongTask}.
@@ -35,6 +37,7 @@ chi.ui.LongTaskRunner = function(config) {
 	var self = this;
 	this.iFrameId = Ext.id();
 	this.showText = config.showText;
+	this.autoAnimate = config.autoAnimate;
 	this.canCanel = config.canCancel;
 	
 	this.pbar = new Ext.ProgressBar({
@@ -44,6 +47,14 @@ chi.ui.LongTaskRunner = function(config) {
 		height: 20,
 		anchor: '100%'
 	});
+	if (this.autoAnimate) {
+		this.pbar.wait({
+			interval: 100,
+			duration: 5000,
+			increment: 15,
+			scope: this
+		});
+	}
 	
 	this.okButton = new Ext.Button({
 		text: chi.Dict.translate("Cancel"),
@@ -79,7 +90,9 @@ chi.ui.LongTaskRunner = function(config) {
 	// setup the LongTask when the window shows
 	this.on("render", function() {
 		window.setTimeout(function() {
-			self.pbar.reset();
+			if (!self.autoAnimate) {
+				self.pbar.reset();
+			}
 			
 			// create the LongTask instance that runs the action defined in the
 			// call paremeter and run it
@@ -90,8 +103,12 @@ chi.ui.LongTaskRunner = function(config) {
 			task.run.defer(10, task, [
 				// process handler (updates the progress bar)
 				function(text, i, total, data) {
-					var curText = self.showText ? text : '';
-					self.pbar.updateProgress(i/total, curText);
+					if (!self.autoAnimate) {
+						self.pbar.updateProgress(i/total);
+					}
+					if (self.showText) {
+						self.pbar.updateText(text);
+					}
 					if (self.progressHandler instanceof Function) {
 						self.progressHandler(data);
 					}
@@ -101,6 +118,7 @@ chi.ui.LongTaskRunner = function(config) {
 					if (self.showText) {
 						self.pbar.updateText(chi.Dict.translate("Finished"));
 					}
+					self.pbar.updateProgress(1);
 					self.okButton.setText(chi.Dict.translate("Close"));
 					if (data.summaryText && data.summaryText != "") {
 						self.add(new Ext.Panel({
