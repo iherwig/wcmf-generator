@@ -16,7 +16,7 @@ Ext.namespace("cwe.Config");
  *
  * @type String
  */
-cwe.Config.jsonUrl = "../application/dionysos/main.php";
+cwe.Config.jsonUrl = "@dionysosURL";
 
 /**
  * The Persistency implementation.
