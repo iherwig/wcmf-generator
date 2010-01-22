@@ -72,7 +72,78 @@
 	    <property file="${build.info}"/>
 	</target>
 
-	<target name="redist" depends="buildinfo">
+	<target name="build-cwe-check">
+		<condition property="cwe.build.from.source">
+			<and>
+				<available file="${cwe.source.dir}" property="cwe.source.available"/>
+				<available file="${ChronosLib.source.dir}" property="ChronosLib.source.available"/>
+			</and>
+		</condition>
+
+		<mkdir dir="${build.dir}/wcmf"/>
+	</target>
+	
+	<target name="build-cwe-source" depends="build-cwe-check" if="cwe.build.from.source">
+		<zip destfile="${build.dir}/wcmf/cwe.zip">
+			<zipfileset dir="${cwe.source.dir}" prefix="cwe">
+				<exclude name="**/.svn"/>
+				<exclude name=".project"/>
+				<exclude name=".settings/**"/>
+				<exclude name="jsDoc"/>
+			</zipfileset>
+			<zipfileset dir="${ChronosLib.source.dir}" prefix="ChronosLib">
+				<exclude name="**/.svn"/>
+				<exclude name=".project"/>
+				<exclude name=".settings/**"/>
+				<exclude name="JIT/**"/>
+				<exclude name="draw2d/**"/>
+			</zipfileset>
+		</zip>
+	</target>
+	
+	<target name="build-cwe-copy" depends="build-cwe-check" unless="cwe.build.from.source">
+		<antcall target="copy-zipped-libs"/>
+	</target>
+	
+	<target name="build-cwe" depends="build-cwe-source, build-cwe-copy"/>
+	
+	<target name="copy-zipped-libs" unless="copy-zipped-libs-ran">
+		<copy todir="${build.dir}/" verbose="false">
+			<fileset dir=".">
+				<include name="wcmf/**/*.*"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="build-wcmf-check">
+		<available file="${wcmf.source.dir}" property="wcmf.build.from.source"/>
+
+		<mkdir dir="${build.dir}/wcmf"/>
+	</target>
+	
+	<target name="build-wcmf-source" depends="build-wcmf-check" if="wcmf.build.from.source">
+		<zip destfile="${build.dir}/wcmf/wcmf.zip">
+			<zipfileset dir="${wcmf.source.dir}">
+				<exclude name="**/.svn"/>
+				<exclude name=".*"/>
+				<exclude name=".settings/**"/>
+				<exclude name="blank/include/admin.ini"/>
+				<exclude name="blank/include/config.ini"/>
+			</zipfileset>
+			<zipfileset dir="${res.dir}" prefix="blank/include">
+				<include name="admin.ini"/>
+				<include name="config.ini"/>
+			</zipfileset>
+		</zip>
+	</target>
+	
+	<target name="build-wcmf-copy" depends="build-wcmf-check" unless="wcmf.build.from.source">
+		<antcall target="copy-zipped-libs"/>
+	</target>
+
+	<target name="build-wcmf" depends="build-wcmf-source, build-wcmf-copy"/>
+		
+	<target name="redist" depends="buildinfo, build-cwe, build-wcmf">
 		<!-- copy all libs ... -->
 		<copy todir="${redist.libdir}" verbose="false">
 			<fileset dir="${lib.dir}">
@@ -109,12 +180,16 @@
 			</fileset>
 			<fileset dir=".">
 				<include name="${build.info}"/>
-				<include name="wcmf/**/*.*"/>
 			</fileset>
 			<fileset file="${res.dir}/run.bat" />
 		</copy>
 		<copy todir="${redist.dir}/cartridge" verbose="false">
 			<fileset dir="${cartridge.build.dir}" />
+		</copy>
+		<copy todir="${redist.dir}" verbose="false">
+			<fileset dir="${build.dir}">
+				<include name="wcmf/**/*"/>
+			</fileset>
 		</copy>
 
 		<zip destfile="${zip.dir}/ChronosGenerator-${version}.zip" basedir="${redist.dir}"/>
