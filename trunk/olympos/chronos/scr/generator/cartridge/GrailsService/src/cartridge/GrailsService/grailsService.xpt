@@ -87,6 +87,10 @@ public class «this.asContextName()» extends Context {
 	 * e.g. these constants are set as a the Result of the execute of a rule
 	 */
 	enum RulesetState {
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "ContextRulesetState"» 
+			/* Put additional states here */
+		«ENDPROTECT»
+		
 		BEGIN,
 		END
 	}
@@ -99,6 +103,8 @@ public class «this.asContextName()» extends Context {
 	enum FlowState {
 		«EXPAND flowStates FOR this»			
 	}
+	
+	FlowState selection
 	
 	RulesetState rulesetState = RulesetState.BEGIN
 	
@@ -121,6 +127,8 @@ public class «this.asContextName()» extends Context {
 	enum FlowState {
 		«EXPAND flowStates FOR this»			
 	}
+	
+	FlowState selection
 }
 	«ENDFILE»
 «ENDDEFINE»	
@@ -261,7 +269,7 @@ public class «this.asContextName()» extends Context {
 
 «DEFINE nodeCallResult FOR uml::ActivityNode»
 	«FOREACH this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).select(e|e.outgoing.typeSelect(uml::ObjectFlow).target.outgoing.size == 0) AS currResult»
-		result.«currResult.asVariableName()» = «this.asResultName()».«currResult.asVariableName()»
+		result = «this.asResultName()».«currResult.asVariableName()»
 	«ENDFOREACH»
 «ENDDEFINE»
 
@@ -335,12 +343,64 @@ public class «this.asContextName()» extends Context {
 
 
 «DEFINE nodeMethod FOR Ouranos::ProductionRuleset»
-	protected «this.asMethodName()»(arguments) {
-		«EXPAND nodeMethodInput FOREACH this.getFirstNodes().getInputChiObjects()»
+	protected «this.asContextName()» «this.asMethodName()»(arguments) {
+		JRulesService jrs = new JRulesService()
+		// define a result Map
+		def result = [:]
 		
-		/*
-		TODO: implement JRules call
-		*/
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFilename"» 
+		def rulesetFileName = 'rules/verbrauchsprognoseFuerNaechstenZeitslotPruefen.irl'
+		«ENDPROTECT»
+		println "#### Run ruleset: $rulesetFileName"
+		def ruleSetString = new File(rulesetFileName).getText()
+		def cl = this.getClass().getClassLoader()
+		def a = jrs.parseNewRuleset(ruleSetString, cl)
+		if (!a) {
+			throw new RuntimeException ("Error on parsing ruleset $rulesetFileName");
+			return
+		}
 		
+		// set input
+		// For all ruels, set the input variables and the start state before the while loop
+		
+		«this.asContextName()» context = new «this.asContextName()» (
+			«FOREACH this.getFirstNodes().getInputChiObjects() AS currSource SEPARATOR ", "»
+				«currSource.asVariableName()»: «currSource.asVariableName()-»
+			«ENDFOREACH»
+		)
+
+		def executeResult = ''
+		while (context.rulesetState != «this.asContextName()».RulesetState.END) {
+			jrs.unNamedParameter = [context]
+			
+			executeResult = jrs.execute()
+			
+			if (executeResult.'ilog.rules.firedRulesCount' == 0) {
+				context.rulesetState = «this.asContextName()».RulesetState.END;
+			}
+			
+			switch (context.rulesetState) {
+				«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetSwitch"» 
+				case «this.asContextName()».RulesetState.END:
+					/*
+					Handle result, input and output of rules like:
+					if (context.alphaResult) {
+						result.selection = context.alphaResult
+						result.verbrauchsPrognoseMenge = context.alphaBetaVerbrauchsPrognose.menge
+						result.nextTimeSlotStart = nextTimeSlot.from
+						context.alphaResult = null
+					}
+					if (context.betaResult) {
+						result.selection = context.betaResult
+						result.verbrauchsPrognoseWert = 0.0
+						context.betaResult = null
+					}
+					*/
+					break
+				«ENDPROTECT»
+			}
+		}
+
+		return result
 	}
 «ENDDEFINE»
