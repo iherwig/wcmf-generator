@@ -670,6 +670,7 @@ CREATE TABLE `ChiBusinessPartner` # entityType=ChiBusinessPartner tableId={05187
 (
   `id` INT(11) NOT NULL, # columnId=_nMkygPoHEd6_oo8mh88s2w 
   `fk_package_id` INT(11), # columnId=_nMbBgPoHEd6_oo8mh88s2w referencedTable=Package
+  `fk_chibusinesspartner_id` INT(11), # columnId=_nMbBgPoHEd6_oo8mh88s2w123 referencedTable=ChiBusinessPartner
   `status` VARCHAR(255), # columnId=_nLraqvoHEd6_oo8mh88s2w 
   `alias` VARCHAR(255), # columnId=_nLrasPoHEd6_oo8mh88s2w 
   `author` VARCHAR(255), # columnId=_nL1LpfoHEd6_oo8mh88s2w 
