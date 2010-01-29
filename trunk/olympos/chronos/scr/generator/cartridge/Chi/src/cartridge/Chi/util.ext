@@ -31,7 +31,7 @@ List[uml::Package] getModelPackages(uml::Package this, List[uml::Package] list):
 	?
 		list.add(this)
 	 :
-	 	Void
+		list.add(this)
 	->
 	this.ownedElement.typeSelect(uml::Package).getModelPackages(list) ->
 	list
