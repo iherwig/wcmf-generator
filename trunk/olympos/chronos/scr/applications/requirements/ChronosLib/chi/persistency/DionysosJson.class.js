@@ -81,17 +81,7 @@ chi.persistency.DionysosJson.prototype.readObject = function(data) {
 
 			if (!(attributeValue instanceof Function)) {
 				if (Ext.isArray(attributeValue)) {
-					values[attributeName] = [];
-
-					for ( var i = 0; i < attributeValue.length; i++) {
-						var currArrayEntry = attributeValue[i];
-
-						if (Ext.isObject(currArrayEntry)) {
-							values[attributeName].push(this.readObject(currArrayEntry));
-						} else {
-							values[attributeName] = currArrayEntry;
-						}
-					}
+					values[attributeName] = this.readObjectList(attributeValue);
 				} else if (Ext.isObject(attributeValue)) {
 					values[attributeName] = this.readObject(attributeValue);
 				} else {
@@ -105,6 +95,25 @@ chi.persistency.DionysosJson.prototype.readObject = function(data) {
 		result = new chi.model.ModelReference(oid);
 	}
 
+	return result;
+};
+
+/**
+ * Read an object list from json data and returns them.
+ * @param {Array} list The list of objects from the json response
+ * @return {Array}
+ */
+chi.persistency.DionysosJson.prototype.readObjectList = function(list) {
+	var result = [];
+	for ( var i = 0; i < list.length; i++) {
+		var currArrayEntry = list[i];
+
+		if (Ext.isObject(currArrayEntry)) {
+			result.push(this.readObject(currArrayEntry));
+		} else {
+			result = currArrayEntry;
+		}
+	}
 	return result;
 };
 
@@ -202,6 +211,9 @@ chi.persistency.DionysosJson.prototype.update = function(oid, attributes, succes
 chi.persistency.DionysosJson.prototype.convertUpdateFormats = function(attributes) {
 	for ( var key in attributes) {
 		var val = attributes[key];
+		
+		// replace "
+		attributes[key] = val.replace(/"/g, '\\"');
 
 		if (val instanceof Date) {
 			attributes[key] = val.format("Y-m-d H:i:s");

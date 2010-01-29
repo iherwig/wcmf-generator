@@ -29,7 +29,7 @@ chi.persistency.LongTask = function(call, iFrameId) {
 	this.processHandler = null;
 	this.successHandler = null;
 	this.errorHandler = null;
-}
+};
 
 /**
  * Run the task. The task will do the required server calls and call the given handlers.
@@ -51,7 +51,7 @@ chi.persistency.LongTask.prototype.run = function(processHandler, successHandler
 	if (this.call instanceof Function) {
 		this.call(this.jsonSuccess.createDelegate(this), this.jsonError.createDelegate(this));
 	}
-}
+};
 
 chi.persistency.LongTask.prototype.jsonSuccess = function(data) {
 	
@@ -91,7 +91,7 @@ chi.persistency.LongTask.prototype.jsonSuccess = function(data) {
 		}
 		chi.persistency.Persistency.getInstance().doContinue(controller, this.jsonSuccess.createDelegate(this), this.jsonError.createDelegate(this));
 	}
-}
+};
 
 chi.persistency.LongTask.prototype.jsonError = function(data) {
 
@@ -99,7 +99,7 @@ chi.persistency.LongTask.prototype.jsonError = function(data) {
 	if (this.errorHandler instanceof Function) {
 		this.errorHandler(data);
 	}
-}
+};
 
 chi.persistency.LongTask.prototype.onDownload = function(iFrame) {
 
@@ -113,4 +113,4 @@ chi.persistency.LongTask.prototype.onDownload = function(iFrame) {
 	} catch (e) {
 		//do nothing, successful download of a file
 	}
-}
+};
