@@ -34,17 +34,9 @@ package «fullQualifiedPackage»
 «ENDREM»
 package com.eenergy.meregio.domain
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlTransient;
-
 /**
  * «this.getComment("\n * ")»
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace="http://somthing.different")
 «REM» avoiding abstract bug in Grails«IF this.isAbstract»abstract «ENDIF-»«ENDREM-»
 class «name-» 
 «IF !this.superClass.select(e|!e.isLibraryClass()).isEmpty» extends «this.superClass.first().name»«ENDIF»
@@ -53,7 +45,7 @@ class «name-»
 «EXPAND Attribute FOREACH this.getOwnChiAttributes()-»
 
 	«REM» Every property where e reference for navigation is stored «ENDREM-»
-«EXPAND ReferenceProperties FOR this-»
+«REM»EXPAND ReferenceProperties FOR this-«ENDREM»
 
 	«REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM-»
 «EXPAND ManyToOneParents FOR this-»
@@ -128,7 +120,6 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	/**
 	 * «((uml::Property) other).getComment("\n	 * ")»
 	 */
-	@XmlElement
 	«((uml::Property) other).type.name.sanitizeType()» «((uml::Property) other).getRoleName().toFirstLower().sanitizeType()»
 «ENDFOREACH-»
 «ENDIF-»
@@ -145,7 +136,6 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
  AS parents -»
 «IF parents.size > 0-»
 	«FOREACH parents AS parent»
-	@XmlTransient
 	«((uml::Property) parent).type.name.sanitizeType()» «((uml::Property) parent).getRoleName().toFirstLower()»
 	«ENDFOREACH»
 
@@ -163,7 +153,6 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «LET this.getNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
 «IF children.size > 0»
 «FOREACH children AS child-»
-	@XmlElement
 	Set<«child.type.name.sanitizeType()»> «child.getRoleName().toFirstLower()»
 «ENDFOREACH-»
 
@@ -208,7 +197,6 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	/**
 	 * «this.getComment("\n	 * ")»
 	 */
-	@XmlElement«IF this.lowerBound() > 0»(required = true)«ENDIF»
 	«this.type.name.sanitizeType()»«IF this.isMultivalued()»[]«ENDIF» «name»«IF !this.^default.isNullOrEmpty()» = «this.type.getValuePrefix()»«this.^default»«this.type.getValuePostfix()»«ENDIF»
 	
 «ENDDEFINE»
@@ -232,16 +220,9 @@ th protected region «ENDREM»
 	«FILE this.name +".groovy"-»
 package com.eenergy.meregio.domain
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-
 /**
  * «this.getComment("\n * ")»
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace="http://somthing.different")
 enum «name-» {
 	«FOREACH this.ownedLiteral.select(e|e == this.ownedLiteral.select(f|f.name.normalizeMemberName() == e.name.normalizeMemberName()).first()) AS currLiteral SEPARATOR ",\n"»«currLiteral.name.normalizeMemberName()»«ENDFOREACH»
 }
