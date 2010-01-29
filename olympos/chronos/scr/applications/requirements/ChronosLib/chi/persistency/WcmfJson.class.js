@@ -20,7 +20,7 @@ Ext.namespace("chi.persistency");
 chi.persistency.WcmfJson = function() {
 	this.baseUrl = chi.Config.getInstance().jsonUrl;
 	this.timeout = 180000;
-}
+};
 
 Ext.extend(chi.persistency.WcmfJson, chi.persistency.Persistency);
 
@@ -53,7 +53,7 @@ chi.persistency.WcmfJson.prototype.jsonRequest = function(params, successHandler
 			}
 		}
 	});
-}
+};
 
 chi.persistency.WcmfJson.prototype.array2CommaList = function(array) {
 	var result = array;
@@ -73,7 +73,7 @@ chi.persistency.WcmfJson.prototype.array2CommaList = function(array) {
 	}
 	
 	return result;
-}
+};
 
 chi.persistency.WcmfJson.prototype.getSid = function() {
 	if (!this.sid) {
@@ -81,7 +81,7 @@ chi.persistency.WcmfJson.prototype.getSid = function() {
 	}
 	
 	return this.sid;
-}
+};
 
 chi.persistency.WcmfJson.prototype.readObject = function(data) {
 	var chiModelElementId = data.type;
@@ -108,7 +108,7 @@ chi.persistency.WcmfJson.prototype.readObject = function(data) {
 	
 	return record;
 	
-}
+};
 
 chi.persistency.WcmfJson.prototype.groupOidList = function(list) {
 	var result = {};
@@ -127,7 +127,7 @@ chi.persistency.WcmfJson.prototype.groupOidList = function(list) {
 	}
 	
 	return result;
-}
+};
 
 chi.persistency.WcmfJson.prototype.createReferences = function(prefix, list, data) {
 	
@@ -148,11 +148,11 @@ chi.persistency.WcmfJson.prototype.createReferences = function(prefix, list, dat
 	}
 	
 	return data;
-}
+};
 
 chi.persistency.WcmfJson.prototype.cancelRequest = function(transactionId) {
 	Ext.Ajax.abort(transactionId);
-}
+};
 
 chi.persistency.WcmfJson.prototype.login = function(user, password, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -160,7 +160,7 @@ chi.persistency.WcmfJson.prototype.login = function(user, password, successHandl
 		login : user,
 		password : password
 	}, successHandler, errorHandler, this.loginRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.loginRecordHandler = function(handler, options, data) {
 	return {
@@ -168,17 +168,17 @@ chi.persistency.WcmfJson.prototype.loginRecordHandler = function(handler, option
 		password : options.params.password,
 		sid : data.sid
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.logout = function(successHandler, errorHandler) {
 	return this.jsonRequest( {
 		usr_action : "logout"
 	}, successHandler, errorHandler, this.logoutRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.logoutRecordHandler = function(handler, options, data) {
 	return {};
-}
+};
 
 chi.persistency.WcmfJson.prototype.list = function(chiModelElementId, limit, offset, sortAttributeName, sortDirection, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -190,7 +190,7 @@ chi.persistency.WcmfJson.prototype.list = function(chiModelElementId, limit, off
 		dir : sortDirection,
 		completeObjects: true
 	}, successHandler, errorHandler, this.listRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.listRecordHandler = function(handler, options, data) {
 	return {
@@ -202,7 +202,7 @@ chi.persistency.WcmfJson.prototype.listRecordHandler = function(handler, options
 		records : this.createListRecords(data),
 		totalCount : data.totalCount
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.createListRecords = function(data) {
 	var records = [];
@@ -212,7 +212,7 @@ chi.persistency.WcmfJson.prototype.createListRecords = function(data) {
 	}
 	
 	return records;
-}
+};
 
 chi.persistency.WcmfJson.prototype.load = function(oid, depth, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -222,7 +222,7 @@ chi.persistency.WcmfJson.prototype.load = function(oid, depth, successHandler, e
 		omitMetaData : true,
 		translateValues : false
 	}, successHandler, errorHandler, this.loadRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.loadRecordHandler = function(handler, options, data) {
 	return {
@@ -230,7 +230,7 @@ chi.persistency.WcmfJson.prototype.loadRecordHandler = function(handler, options
 		depth : options.params.depth,
 		records : this.createLoadRecords(data)
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.createLoadRecords = function(data) {
 	var records = {};
@@ -265,7 +265,7 @@ chi.persistency.WcmfJson.prototype.createLoadRecords = function(data) {
 	}
 	
 	return records;
-}
+};
 
 chi.persistency.WcmfJson.prototype.save = function(oid, values, successHandler, errorHandler) {
 	
@@ -295,14 +295,14 @@ chi.persistency.WcmfJson.prototype.save = function(oid, values, successHandler, 
 	}
 	
 	return this.jsonRequest(data, successHandler, errorHandler, this.saveRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.saveRecordHandler = function(handler, options, data) {
 	return {
 	// oid : options.params.oid,
 	// values : options.params.values[1]
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.create = function(chiModelElementId, values, successHandler, errorHandler) {
 	var data = {
@@ -318,27 +318,27 @@ chi.persistency.WcmfJson.prototype.create = function(chiModelElementId, values, 
 			self.processSuccessHandler(successHandler, innerData);
 		}, errorHandler);
 	}, errorHandler, this.createRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.createRecordHandler = function(handler, options, data) {
 	return {
 		chiModelElementId : options.params.newtype,
 		newOid : data.oid
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.destroy = function(oid, successHandler, errorHandler) {
 	return this.jsonRequest( {
 		usr_action : "delete",
 		deleteoids : oid
 	}, successHandler, errorHandler, this.destroyRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.destroyRecordHandler = function(handler, options, data) {
 	return {
 		oid : options.params.deleteoids
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.associate = function(parentOid, childOid, role, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -348,7 +348,7 @@ chi.persistency.WcmfJson.prototype.associate = function(parentOid, childOid, rol
 		associateAs : "child",
 		role : role
 	}, successHandler, errorHandler, this.associateRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.associateRecordHandler = function(handler, options, data) {
 	return {
@@ -356,7 +356,7 @@ chi.persistency.WcmfJson.prototype.associateRecordHandler = function(handler, op
 		childOid : options.params.associateoids,
 		role : options.params.role
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.disassociate = function(parentOid, childOid, role, successHandler, errorHandler) {
 	return this.jsonRequest( {
@@ -365,7 +365,7 @@ chi.persistency.WcmfJson.prototype.disassociate = function(parentOid, childOid, 
 		associateoids : childOid,
 		role : role
 	}, successHandler, errorHandler, this.disassociateRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.disassociateRecordHandler = function(handler, options, data) {
 	return {
@@ -373,33 +373,33 @@ chi.persistency.WcmfJson.prototype.disassociateRecordHandler = function(handler,
 		childOid : options.params.associateoids,
 		role : options.params.role
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.lock = function(oid, successHandler, errorHandler) {
 	return this.jsonRequest( {
 		usr_action : "lock",
 		oid : oid
 	}, successHandler, errorHandler, this.lockRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.lockRecordHandler = function(handler, options, data) {
 	return {
 		oid : options.params.oid
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.unlock = function(oid, successHandler, errorHandler) {
 	return this.jsonRequest( {
 		usr_action : "unlock",
 		oid : oid
 	}, successHandler, errorHandler, this.unlockRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.unlockRecordHandler = function(handler, options, data) {
 	return {
 		oid : options.params.oid
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.log = function(logtype, message, successHandler, errorHandler) {
 	var self = this;
@@ -415,14 +415,14 @@ chi.persistency.WcmfJson.prototype.log = function(logtype, message, successHandl
 			self.processErrorHandler(errorHandler, request, data);
 		}
 	}, this.logRecordHandler);
-}
+};
 
 chi.persistency.WcmfJson.prototype.logRecordHandler = function(handler, options, data) {
 	return {
 		logtype : options.params.logtype,
 		message : options.params.msg
 	};
-}
+};
 
 chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 	var data = {};
@@ -612,7 +612,7 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 	
 	var responseHandler = function(data, actionName) {
 		return data.data[actionName];
-	}
+	};
 
 	return this.jsonRequest( {
 		controller : "TerminateController",
@@ -630,12 +630,12 @@ chi.persistency.WcmfJson.prototype.executeActionSet = function(actionSet) {
 		return {
 			request : options,
 			data : data
-		}
+		};
 	});
-}
+};
 
 chi.persistency.WcmfJson.Handler = {
 	SUCCESS : 0,
 	SUCCESS_ERROR : 1,
 	ERROR : 2
-}
+};

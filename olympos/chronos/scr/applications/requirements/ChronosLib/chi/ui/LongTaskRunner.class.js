@@ -48,12 +48,7 @@ chi.ui.LongTaskRunner = function(config) {
 		anchor: '100%'
 	});
 	if (this.autoAnimate) {
-		this.pbar.wait({
-			interval: 100,
-			duration: 5000,
-			increment: 15,
-			scope: this
-		});
+		this.pbar.wait();
 	}
 	
 	this.okButton = new Ext.Button({
@@ -68,7 +63,7 @@ chi.ui.LongTaskRunner = function(config) {
 	}
 	
 	this.iFrame = new Ext.Panel({
-		html: '<iframe id="'+this.iFrameId+'" src=""></iframe>', 
+		html: '<iframe id="'+this.iFrameId+'" src=""></iframe>' 
 	});
 	this.iFrame.setVisible(false);
 	
@@ -148,13 +143,13 @@ chi.ui.LongTaskRunner = function(config) {
       ]);
 		}, 250);
 	});
-}
+};
 
 /**
  * Close the popup window
  */
 chi.ui.LongTaskRunner.prototype.close = function() {
 	this.destroy();
-}
+};
 
 Ext.extend(chi.ui.LongTaskRunner, Ext.Window);
