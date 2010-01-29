@@ -63,7 +63,9 @@ class ChiBusinessPartnerRDBMapper extends NodeUnifiedRDBMapper
   {
   	// start from the most specific
     if ($this->getType() == 'ChiBusinessPartner' && $parentType == 'Package') return 'fk_package_id';
+    if ($this->getType() == 'ChiBusinessPartner' && $parentType == 'ChiBusinessPartner') return 'fk_chibusinesspartner_id';
     if ($parentType == 'Package') return 'fk_package_id';
+    if ($parentType == 'ChiBusinessPartner') return 'fk_chibusinesspartner_id';
     return '';
   }
   /**
@@ -96,6 +98,10 @@ class ChiBusinessPartnerRDBMapper extends NodeUnifiedRDBMapper
       * Value description: 
       */
       array('name' => 'fk_package_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_package_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
+     /* 
+      * Value description: 
+      */
+      array('name' => 'fk_chibusinesspartner_id', 'app_data_type' => DATATYPE_IGNORE, 'column_name' => 'fk_chibusinesspartner_id', 'db_data_type' => 'INT(11)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => false, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: 
       */
@@ -144,10 +150,12 @@ class ChiBusinessPartnerRDBMapper extends NodeUnifiedRDBMapper
     );
     $nodeDef['_parents'] = array
     (
+      array('type' => 'ChiBusinessPartner', 'is_navigable' => true, 'table_name' => 'ChiBusinessPartner', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chibusinesspartner_id'),
       array('type' => 'Package', 'is_navigable' => true, 'table_name' => 'Package', 'pk_columns' => array('id'), 'fk_columns' => 'fk_package_id')
     );
     $nodeDef['_children'] = array
     (
+      array('type' => 'ChiBusinessPartner', 'minOccurs' => 0, 'maxOccurs' => 'unbounded', 'aggregation' => false, 'composition' => true, 'is_navigable' => true, 'table_name' => 'ChiBusinessPartner', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chibusinesspartner_id', 'order_by' => array('sortkey')),
       array('type' => 'Figure', 'minOccurs' => 0, 'maxOccurs' => 'unbounded', 'aggregation' => false, 'composition' => true, 'is_navigable' => true, 'table_name' => 'Figure', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chibusinesspartner_id', 'order_by' => array()),
       array('type' => 'NMUCActor', 'minOccurs' => 0, 'maxOccurs' => 'unbounded', 'aggregation' => false, 'composition' => true, 'is_navigable' => true, 'table_name' => 'NMUCActor', 'pk_columns' => array('id'), 'fk_columns' => 'fk_chibusinesspartner_id', 'order_by' => array())
     );
