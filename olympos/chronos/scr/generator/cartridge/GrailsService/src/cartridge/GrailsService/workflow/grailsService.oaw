@@ -23,14 +23,55 @@
 		<outputSlot value="sourceModel"/>
 	 </component>
 
+	<!-- normalize names -->
+	<if cond="${normalizeNames}">
+		<component class="oaw.xtend.XtendComponent">
+			<metaModel idRef="uml2" />
+			<invoke value="common/nameNormalizer::normalizeName(sourceModel)" />
+		</component>
+	</if>
+	
+	<if cond="${preprocessRuleSets}">
+		<component class="oaw.emf.XmiReader">
+			<modelFile value="${chronosProfileUri}"/>
+			<outputSlot value="chronosModel"/>
+		 </component>
+		
+		<component class="oaw.emf.XmiReader">
+			<modelFile value="${ouranosProfileUri}"/>
+			<outputSlot value="ouranosModel"/>
+		 </component>
+
+		<component class="oaw.xtend.XtendComponent">
+			<metaModel idRef="chronos"/>
+			<metaModel idRef="ouranos"/>
+			<metaModel idRef="uml2" />
+			<invoke value="cartridge::GrailsService::preprocessRuleSet::applyProfiles(sourceModel, chronosModel, ouranosModel)" />
+		</component>
+
+		<component class="oaw.xtend.XtendComponent">
+			<metaModel idRef="chronos"/>
+			<metaModel idRef="ouranos"/>
+			<metaModel idRef="uml2" />
+			<invoke value="cartridge::GrailsService::preprocessRuleSet::preprocess(sourceModel)" />
+		</component>
+		
+		<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
+			<inputSlot value="sourceModel" />
+			<outPath value="${processedModelDir}" />
+		</component>
+	</if>
+
 	<!-- check model -->
-	<component class="org.openarchitectureware.check.CheckComponent">
-		<metaModel idRef="chronos"/>
-		<metaModel idRef="ouranos"/>
-		<metaModel idRef="uml2"/>
-		<checkFile value="cartridge::GrailsService::grailsService"/>
-		<emfAllChildrenSlot value="sourceModel"/>		
-	</component>
+	<if cond="${checkModel}">
+		<component class="org.openarchitectureware.check.CheckComponent">
+			<metaModel idRef="chronos"/>
+			<metaModel idRef="ouranos"/>
+			<metaModel idRef="uml2"/>
+			<checkFile value="cartridge::GrailsService::grailsService"/>
+			<emfAllChildrenSlot value="sourceModel"/>		
+		</component>
+	</if>
 	
 	<!-- generate service and context classes -->
 	<component class="org.openarchitectureware.xpand2.Generator">
@@ -40,10 +81,20 @@
 		<fileEncoding value="utf-8"/>
 
 		<expand value="cartridge::GrailsService::grailsService::root FOR sourceModel"/>
+		
+		<globalVarDef name="contextPackage" value="'${contextPackage}'"/>
+		<globalVarDef name="servicePackage" value="'${servicePackage}'"/>
+		<globalVarDef name="fileHeader" value="'${fileHeader}'"/>
 
 		<beautifier class="net.sourceforge.olympos.oaw.workflow.BlankLineRemover"/>
 
-		<prSrcPaths value="${generationTarget}"/>	
-		<outlet path="${generationTarget}"/>
+		<outlet path="${contextTarget}" name="CONTEXT"/>
+		<prSrcPaths value="${contextTarget}"/>
+
+		<outlet path="${serviceTarget}" name="SERVICE"/>
+		<prSrcPaths value="${serviceTarget}"/>
+
+		<outlet path="${rulesetTarget}" name="RULESET"/>
+		<prSrcPaths value="${rulesetTarget}"/>
 	</component>
 </workflow>

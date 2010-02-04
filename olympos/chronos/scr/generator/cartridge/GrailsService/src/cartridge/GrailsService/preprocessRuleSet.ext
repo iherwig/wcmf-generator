@@ -1,0 +1,101 @@
+import uml;
+import Chronos;
+import Ouranos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::GrailsService::grailsService;
+
+uml::Model applyProfiles(uml::Model this, uml::Profile chronosProfile, uml::Profile ouranosProfile):
+	this.getAllAppliedProfiles().select(e|e.name == "Chronos").size == 0 ? (
+		this.applyProfile(chronosProfile)
+	) : (
+		Void
+	) ->
+	
+	this.getAllAppliedProfiles().select(e|e.name == "Ouranos").size == 0 ? (
+		this.applyProfile(ouranosProfile)
+	) : (
+		Void
+	) ->
+	
+	this
+;
+
+uml::Model preprocess(uml::Model this):
+	info("preprocessing for RuleSet: " + this.name) ->
+
+	this.allOwnedElements().typeSelect(uml::DecisionNode).select(e|e.outgoing.select(f|f.name == "LoopStart").size > 0).addLoopRuleSet() ->
+	this.allOwnedElements().typeSelect(uml::Activity).select(e|e.isActivitySet()).findNamedRuleSets() ->
+	
+	this
+;
+
+Void addLoopRuleSet(uml::DecisionNode this):
+	let ruleSet = new uml::Activity:
+	let evaluator = this.getPreviousEdges().selectFirst(e|e.name != "LoopContinue").source:
+	let listCreator = evaluator.getPreviousNode():
+	let elementSelector = this.outgoing.selectFirst(e|e.name == "LoopStart").target:
+	
+	info("Adding LoopRuleSet to " + this.name) ->
+		
+	this.activity.ownedBehavior.add(ruleSet) ->
+	ruleSet.applyStereotype("Ouranos::ProductionRuleset") ->
+	ruleSet.setName("LoopRuleSet" + this.name) ->
+	
+	listCreator.assignToRuleSet(ruleSet) ->
+	evaluator.assignToRuleSet(ruleSet) ->
+	this.assignToRuleSet(ruleSet) ->
+	elementSelector.assignToRuleSet(ruleSet) ->
+	
+	Void
+;
+
+uml::Realization assignToRuleSet(uml::ActivityNode this, uml::Activity ruleSet):
+	let result = new uml::Realization:
+	
+	result.client.add(this) ->
+	result.supplier.add(ruleSet) ->
+	
+	this.getNearestPackage().packagedElement.add(result) ->
+	
+	result
+;
+
+Void findNamedRuleSets(uml::Activity this):
+	this.node.select(e|e.name.matches(".*\\[RS[0-9]+\\]$")).assignToNamedRuleSet()
+;
+
+Void assignToNamedRuleSet(uml::ActivityNode this):
+	let ruleSetNumber = this.name.getRuleSetNumber():
+	let ruleSet = this.activity.getOrCreateNumberedRuleSet(ruleSetNumber):
+	
+	info("Adding named RuleSet to " + this.name) ->
+	
+	this.assignToRuleSet(ruleSet) ->
+	
+	Void
+;
+
+int getRuleSetNumber(String name):
+	JAVA net.sourceforge.olympos.oaw.extend.GrailsService.getRuleSetNumber(java.lang.String)
+;
+
+uml::Activity getOrCreateNumberedRuleSet(uml::Activity this, int ruleSetNumber):
+	let ruleSet = this.ownedBehavior.typeSelect(uml::Activity).selectFirst(e|e.name == "NamedRuleset" + ruleSetNumber):
+	
+	ruleSet != null ? (
+		ruleSet
+	) : (
+		let newRuleSet = new uml::Activity:
+		
+		this.ownedBehavior.add(newRuleSet) ->
+		newRuleSet.applyStereotype("Ouranos::ProductionRuleset") ->
+		newRuleSet.setName("NamedRuleset" + ruleSetNumber) ->
+		
+		newRuleSet
+	)
+;

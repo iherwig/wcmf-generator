@@ -21,7 +21,17 @@ String asConstructorCall(uml::Activity this):
 ;
 
 String asRequestName(uml::Activity this):
-	this.getFirstNode().incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).first().getGrailsTypeName()
+	let grailsTypeName = this.getFirstNode().incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).first().getGrailsTypeName():
+	
+	grailsTypeName != "def" ? (
+		grailsTypeName
+	) : (
+		""
+	)
+;
+
+String asPackageName(uml::Activity this):
+	this.name.normalizePackageName()
 ;
 
 String asMainMethodName(uml::Activity this):
@@ -129,6 +139,14 @@ String asMethodName(Ouranos::ProductionRuleset this):
 	this.name.asMethod()
 ;
 
+String asRuleFileName(Ouranos::ProductionRuleset this):
+	this.name.normalizeMemberName()
+;
+
+String asFullRuleFilePath(Ouranos::ProductionRuleset this):
+	this.getActivity().asClassName() + "/" + this.asRuleFileName() + ".irl"
+;
+
 uml::ActivityNode getNextNode(uml::ActivityNode this):
 	this.getNextNodes().first()
 ;
@@ -165,7 +183,7 @@ List[uml::ActivityEdge] getFlowStates(uml::DecisionNode this):
 
 String asFlowName(uml::ActivityEdge this):
 	!this.name.isNullOrEmpty() ? (
-		this.name.toUpperCase()
+		this.name.normalizeConstantName()
 	) : (
 		"FLOW_STATE_" + this.source.outgoing.indexOf(this)
 	)
@@ -252,3 +270,43 @@ List[uml::ActivityNode] getNextWithSameProductionRuleset(uml::ActivityNode this)
 		.add(this)
 		.addAll(this.getNextNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getNextWithSameProductionRuleset())
 ;
+
+boolean isActivitySet(uml::Activity this):
+	this.getAppliedStereotypes().size == 0
+;
+
+boolean isActivitySet(Ouranos::ProductionRuleset this):
+	false
+;
+
+List[uml::DecisionNode] getDecisionsWithContext(uml::Activity this):
+	this.getMethodNodes().typeSelect(uml::DecisionNode).select(e|e.getProductionRuleset() == null)
+;
+
+String asFullPackageName(Ouranos::ProductionRuleset this):
+	CONTEXT_PACKAGE() + "." + this.getActivity().asPackageName()
+;
+
+String asFullPackageName(uml::DecisionNode this):
+	CONTEXT_PACKAGE() + "." + this.activity.asPackageName()
+;
+
+uml::Activity getActivity(Ouranos::ProductionRuleset this):
+	this.owner
+;
+
+String groovyFileHeader():
+	genericFileHeader()
+;
+
+String jrulesFileHeader():
+	genericFileHeader()
+;
+
+String genericFileHeader():
+	"/*\n * " + FILE_HEADER().replaceAll("\n", "\n * ") + "\n */\n"
+;  
+
+String CONTEXT_PACKAGE(): GLOBALVAR contextPackage;
+String SERVICE_PACKAGE(): GLOBALVAR servicePackage;
+String FILE_HEADER(): GLOBALVAR fileHeader;
