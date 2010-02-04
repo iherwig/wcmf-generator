@@ -1,0 +1,82 @@
+«IMPORT uml»
+«IMPORT Chronos»
+«IMPORT Ouranos»
+
+«EXTENSION common::util»
+«EXTENSION common::umlutils»
+
+«EXTENSION cartridge::GrailsService::grailsService»
+
+«DEFINE ruleSet FOR Ouranos::ProductionRuleset»
+	«FILE this.asFullRuleFilePath() RULESET»
+«jrulesFileHeader()»
+
+/* «generatorSignature()» */	
+
+import com.eenergy.meregio.domain.*;
+
+import «this.asFullPackageName()».«this.asContextName()»;
+
+«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileImport"» 
+/* Place additional imports here */
+«ENDPROTECT»
+
+ruleset «this.asMethodName()»Ruleset {
+	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileNamedParameters"» 
+	/* Put named parameters here
+	 * e.g.
+	 * in Integer myParameter;
+	 */
+	«ENDPROTECT»
+}
+
+«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileRuleDescription"» 
+/**
+ * Rule description
+ */
+«ENDPROTECT»
+rule «this.asMethodName()» {
+	property status = "new";
+	when {
+		?context: «this.asContextName()»(
+			«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFilenRuleSelectionCriteria"» 
+			/* Put context selection criteria here
+	 		 * e.g.
+	 		 * rulesetState == NamedRuleset1Context.RulesetState.BEGIN;
+	 		 */
+			«ENDPROTECT»
+		);
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileRuleCondition"» 
+		/* Put condition code here. 
+		 * NOTE: since this rule contains an 'else' action clause, it is required
+		 * to have an evaluation at the end of the condition (use 'evaluate(true)', if
+		 * you want to ignore the 'else' action clause) 
+	 	 * e.g.
+	 	 * ?aktuellerMesswert: Reading() from ?context.aktuellerMesswert;
+	 	 * evaluate(?aktuellerMesswert.value > ?myParameter);
+	 	 */
+		«ENDPROTECT»
+	}
+	then {
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileRuleBody"» 
+		/* Put code, that should be executed if the condition evaluates true, here
+	 	 * e.g.
+	 	 * context.selection = NamedRuleset1Context.FlowState.JA;
+	 	 * context.rulesetState = NamedRuleset1Context.RulesetState.END;
+	 	 * update context;
+	 	 */
+		«ENDPROTECT»
+	}
+	else {
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileRuleElse"» 
+		/* Put code, that should be executed if the condition evaluates false, here
+	 	 * e.g.
+	 	 * context.selection = NamedRuleset1Context.FlowState.NEIN;
+	 	 * context.rulesetState = NamedRuleset1Context.RulesetState.END;
+	 	 * update context;
+	 	 */
+		«ENDPROTECT»
+	}
+}
+	«ENDFILE»
+«ENDDEFINE»
