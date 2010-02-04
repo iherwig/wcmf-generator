@@ -51,6 +51,7 @@ cwm.ChiRequirementClass = function() {
 		"ChiRequirement": {
 			label: "contains",
 			invert: false,
+			invertBackendRelation: false,
 			connectionType: 'composition',
 			cardinality: -1
 		},
