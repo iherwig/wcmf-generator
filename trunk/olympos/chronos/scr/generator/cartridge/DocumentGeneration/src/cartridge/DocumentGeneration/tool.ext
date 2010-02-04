@@ -53,7 +53,7 @@ String sanitizeHtml(String source) :
 ;
 
 String datePublished() : 
-	JAVA net.sourceforge.olympos.oaw.extend.DateFormatter.now()
+	currentDateTime()
 ;
 
 String replaceXmlChars(String org) :
