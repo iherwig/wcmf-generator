@@ -1,6 +1,5 @@
 import uml;
 // FIXME: Investigate why normalizeName(Choronos::ChiValue) is required 
-import Chronos;
 
 Void normalizeName(uml::Model this):
 	this.allOwnedElements().typeSelect(uml::Class).normalizeName() ->
@@ -23,10 +22,6 @@ Void normalizeName(uml::Property this):
 	this.setName(normalizeMemberName(this.name))
 ;
 
-Void normalizeName(Chronos::ChiValue this):
-	this.setName(normalizeMemberName(this.name))
-;
-
 Void normalizeName(uml::Operation this):
 	this.setName(normalizeMemberName(this.name))
 ;
@@ -45,4 +40,8 @@ String normalizeMemberName(String this):
 
 String normalizePackageName(String this):
 	JAVA net.sourceforge.olympos.oaw.extend.NameNormalizer.normalizePackageName(java.lang.String)
+;
+
+String normalizeConstantName(String this):
+	JAVA net.sourceforge.olympos.oaw.extend.NameNormalizer.normalizeConstantName(java.lang.String)
 ;

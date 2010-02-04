@@ -86,4 +86,27 @@ public class TestNameNormalizer {
 		assertEquals("", NameNormalizer.normalizePackageName(""));
 		assertNull(NameNormalizer.normalizePackageName(null));
 	}
+
+	@Test
+	public void testNormalizeConstantName() throws Exception {
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constantName"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("ConstantName"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constant Name"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constant name"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constant-Name"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constant-name"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constant_Name"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constant_name"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constantName"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constant  Name"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constant--name"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constant - name"));
+		assertEquals("CONSTANT_NAEME", NameNormalizer.normalizeConstantName("constantNäme"));
+		assertEquals("CONSTANT_NME", NameNormalizer.normalizeConstantName("constantNáme"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName(" constantName"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName(" ConstantName"));
+		assertEquals("CONSTANT_NAME", NameNormalizer.normalizeConstantName("constantName "));
+		assertEquals("", NameNormalizer.normalizeConstantName(""));
+		assertNull(NameNormalizer.normalizeConstantName(null));
+	}
 }

@@ -30,33 +30,45 @@ public class NameNormalizer {
 
 	public static String normalizeClassName(String orgName) {
 		String result = null;
-		
+
 		if (orgName != null) {
 			result = firstToUpper(normalizeName(new StringBuffer(orgName)))
-				.toString();
+					.toString();
 		}
-		
+
 		return result;
 	}
 
 	public static String normalizeMemberName(String orgName) {
 		String result = null;
-		
+
 		if (orgName != null) {
 			result = firstToLower(normalizeName(new StringBuffer(orgName)))
-				.toString();
+					.toString();
 		}
-		
+
 		return result;
 	}
-	
+
 	public static String normalizePackageName(String orgName) {
 		String result = null;
-		
+
 		if (orgName != null) {
-			result = normalizeName(new StringBuffer(orgName)).toString().toLowerCase();
+			result = normalizeName(new StringBuffer(orgName)).toString()
+					.toLowerCase();
 		}
-		
+
+		return result;
+	}
+
+	public static String normalizeConstantName(String orgName) {
+		String result = null;
+
+		if (orgName != null) {
+			result = separateWordsByUnderscore(new StringBuffer(orgName))
+					.toString().toUpperCase();
+		}
+
 		return result;
 	}
 
@@ -74,7 +86,7 @@ public class NameNormalizer {
 
 		return org;
 	}
-	
+
 	private static StringBuffer normalizeName(StringBuffer org) {
 		return removeNonEnglishChar(removeWordDelimiters(org));
 	}
@@ -132,6 +144,56 @@ public class NameNormalizer {
 
 		if (result == null) {
 			result = "";
+		}
+
+		return result;
+	}
+
+	/**
+	 * Separates the words of <code>org</code> by underscore and removes all
+	 * non-english characters.
+	 * 
+	 * @param org
+	 *            The identifier to manipulate.
+	 * @return The filtered identifier.
+	 */
+	private static StringBuffer separateWordsByUnderscore(StringBuffer org) {
+		StringBuffer result = new StringBuffer();
+
+		boolean previousUpperCase = true;
+		boolean addedUnderscore = false;
+
+		Pattern pattern = Pattern.compile("[a-zA-Z0-9]");
+
+		for (int i = 0; i < org.length(); i++) {
+			char currChar = org.charAt(i);
+
+			Matcher matcher = pattern.matcher(org.subSequence(i, i + 1));
+
+			if (((!previousUpperCase && Character.isUpperCase(currChar)) || (currChar == ' '
+					|| currChar == '_' || currChar == '-'))
+					&& !addedUnderscore) {
+				addedUnderscore = true;
+			}
+
+			if (matcher.matches()) {
+				if (addedUnderscore && result.length() > 0) {
+					result.append('_');
+				}
+				result.append(org.charAt(i));
+				addedUnderscore = false;
+			} else {
+				String replacement = replaceNonEnglishChar(org.charAt(i));
+				if (replacement != null && replacement.length() > 0) {
+					if (addedUnderscore && result.length() > 0) {
+						result.append('_');
+					}
+					result.append(replacement);
+					addedUnderscore = false;
+				}
+			}
+
+			previousUpperCase = Character.isUpperCase(currChar);
 		}
 
 		return result;
