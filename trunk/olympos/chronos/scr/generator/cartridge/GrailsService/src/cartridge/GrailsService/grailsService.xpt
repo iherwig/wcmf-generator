@@ -37,6 +37,10 @@ import «currProductionRuleset.asFullPackageName()».«currProductionRuleset.asC
 import «currDecision.asFullPackageName()».«currDecision.asContextName()»
 	«ENDFOREACH»
 
+«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+/* put additional imports here */
+«ENDPROTECT»
+
 /**
  * «this.owner.getComment("\n * ")»
  */
@@ -105,6 +109,10 @@ package «this.asFullPackageName()»
 
 import com.eenergy.jrules.Context;
 
+«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+/* put additional imports here */
+«ENDPROTECT»
+
 public class «this.asContextName()» extends Context {
 	/**
 	 * contains constants that define a level of a flow within a ruleset
@@ -152,6 +160,10 @@ public class «this.asContextName()» extends Context {
 package «this.asFullPackageName()»
 
 import com.eenergy.service.Context
+
+«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+/* put additional imports here */
+«ENDPROTECT»
 
 public class «this.asContextName()» extends Context {
 	/**
