@@ -72,7 +72,7 @@ uml::ActivityNode getLastNode(uml::Activity this):
 
 List[uml::ActivityNode] getMethodNodes(uml::Activity this):
 	((List[uml::ActivityNode]) {}
-		.addAll(this.node.typeSelect(uml::OpaqueAction))
+		.addAll(this.node.typeSelect(uml::OpaqueAction).select(e|!uml::DecisionNode.isInstance(e.getNextNode())))
 		.addAll(this.node.typeSelect(uml::DecisionNode))
 	)
 	.select(e|e.getProductionRuleset() == null || (e.getProductionRuleset().getLastNodes().contains(e) && !e.getProductionRuleset().getRulesetParents().typeSelect(uml::DecisionNode).first().isLoop()))

@@ -216,7 +216,7 @@ public class «this.asContextName()» extends Context {
 					«ENDIF»
 				«ENDLET»
 			«ELSE»
-				«EXPAND nodeCallDecision(this.getInputChiObjects()) FOR ((uml::DecisionNode) this.getNextNode())»
+				«EXPAND nodeCallDecision(this.getInputChiObjects().info()) FOR ((uml::DecisionNode) this.getNextNode())»
 			«ENDIF» 
 		«ELSE»
 			«EXPAND nodeCall FOR this.getProductionRuleset()»
@@ -321,11 +321,11 @@ public class «this.asContextName()» extends Context {
 «ENDDEFINE»
 
 «DEFINE nodeCallDefault(List[uml::DataStoreNode] params) FOR uml::ActivityNode»
-	«this.asResultName()» = «this.asMethodName()»(«EXPAND nodeCallParameter FOREACH params»)
+	«this.asResultName()» = «this.asMethodName()»(«EXPAND nodeCallParameter FOREACH params SEPARATOR ","»)
 «ENDDEFINE»
 
-«DEFINE nodeCallParameter FOR uml::DataStoreNode»
-	«this.asVariableName()»: «this.getSourceVariableName()»
+«DEFINE nodeCallParameter FOR uml::DataStoreNode-»
+	«this.asVariableName()»: «this.getSourceVariableName()-»
 «ENDDEFINE»
 
 «DEFINE nodeCallResult FOR uml::ActivityNode»
@@ -357,13 +357,13 @@ public class «this.asContextName()» extends Context {
 «ENDDEFINE»
 
 «DEFINE nodeMethod FOR uml::OpaqueAction»
-	«EXPAND nodeMethodHeader FOR this»
+	«EXPAND nodeMethodHeader(this.getInputChiObjects()) FOR this»
 	
 	«EXPAND nodeMethodFooter FOR this»
 «ENDDEFINE»
 
 «DEFINE nodeMethod FOR uml::DecisionNode»
-	«EXPAND nodeMethodHeader FOR this»
+	«EXPAND nodeMethodHeader(this.getPreviousNode().getInputChiObjects()) FOR this»
 	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Decision"» 
 		/* TODO: Required selection criteria */
 		result.selection = «this.asContextName()».FlowState.«this.getFlowStates().first().asFlowName()»
@@ -373,9 +373,9 @@ public class «this.asContextName()» extends Context {
 
 «DEFINE nodeMethod FOR uml::ActivityNode»«REM»Dummy for unhandled cases«ENDREM»«ENDDEFINE»
 
-«DEFINE nodeMethodHeader FOR uml::ActivityNode»
+«DEFINE nodeMethodHeader(List[uml::DataStoreNode] params) FOR uml::ActivityNode»
 	protected «this.asMethodName()»(arguments) {
-		«EXPAND nodeMethodInput FOREACH this.getInputChiObjects()»
+		«EXPAND nodeMethodInput FOREACH params»
 	
 		def result = [:]
 		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Implementation"» 
