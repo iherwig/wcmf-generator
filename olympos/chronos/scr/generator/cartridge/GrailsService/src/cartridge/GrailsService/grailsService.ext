@@ -295,18 +295,9 @@ uml::Activity getActivity(Ouranos::ProductionRuleset this):
 	this.owner
 ;
 
-String groovyFileHeader():
-	genericFileHeader()
-;
-
 String jrulesFileHeader():
 	genericFileHeader()
 ;
 
-String genericFileHeader():
-	"/*\n * " + FILE_HEADER().replaceAll("\n", "\n * ") + "\n */\n"
-;  
-
 String CONTEXT_PACKAGE(): GLOBALVAR contextPackage;
 String SERVICE_PACKAGE(): GLOBALVAR servicePackage;
-String FILE_HEADER(): GLOBALVAR fileHeader;
