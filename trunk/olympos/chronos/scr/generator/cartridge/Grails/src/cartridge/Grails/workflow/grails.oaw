@@ -14,14 +14,10 @@
 	<bean id="mmUml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
 
 	<!-- read profile as model -->
-	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
-		<modelUrl value='${chronosProfileUri}'/>
-		<outputSlot value="chronosProfileModel"/>
-	</component>
-	<!--component class="oaw.emf.XmiReader">
+	<component class="oaw.emf.XmiReader">
 		<modelFile value="${chronosProfileUri}" />
 		<outputSlot value="chronosProfileModel" />
-	</component-->
+	</component>
 
 	<!-- read source model -->
 	<component class="oaw.emf.XmiReader">
@@ -123,6 +119,7 @@
 	<component class="org.openarchitectureware.xpand2.Generator">
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+		<globalVarDef name="fileHeader" value="'${fileHeader}'"/>
 
 		<metaModel idRef="mmChronos"/>
 		<metaModel idRef="mmUml2"/>
