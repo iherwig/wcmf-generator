@@ -25,6 +25,10 @@
 	«FILE (!fullQualifiedPackage.isNullOrEmpty() ? fullQualifiedPackage.asPath() + "/" : "") + this.name +".groovy"-»
 	«ENDREM»
 	«FILE this.name +".groovy"-»
+«groovyFileHeader()»
+
+/* «generatorSignature()» */
+
 «REM»
 «IF !fullQualifiedPackage.isNullOrEmpty()-»
 package «fullQualifiedPackage»
@@ -34,15 +38,30 @@ package «fullQualifiedPackage»
 «ENDREM»
 package com.eenergy.meregio.domain
 
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlTransient;
+
+«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+/* put additional imports here */
+«ENDPROTECT»
+
 /**
  * «this.getComment("\n * ")»
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 «REM» avoiding abstract bug in Grails«IF this.isAbstract»abstract «ENDIF-»«ENDREM-»
 class «name-» 
 «IF !this.superClass.select(e|!e.isLibraryClass()).isEmpty» extends «this.superClass.first().name»«ENDIF»
 {
 	«REM» Attributes «ENDREM-»
 «EXPAND Attribute FOREACH this.getOwnChiAttributes()-»
+
+	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Attributes"» 
+	/* put additional attributes here */
+	«ENDPROTECT»
 
 	«REM» Every property where e reference for navigation is stored «ENDREM-»
 «REM»EXPAND ReferenceProperties FOR this-«ENDREM»
@@ -64,6 +83,10 @@ class «name-»
 
 	«REM» Methods «ENDREM-»
 «EXPAND Method(this) FOREACH ownedOperation-»
+
+	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Methods"» 
+	/* put additional methods here */
+	«ENDPROTECT»
 }
 	«ENDFILE»
 	«REM»«ENDLET»«ENDREM»
@@ -89,6 +112,10 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «FOREACH relatives AS relative SEPARATOR ","»
 		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»"«""-»
 «ENDFOREACH»
+
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "MappedBy"» 
+		/* put additional mappings here */
+		«ENDPROTECT»
 	]
 «ENDIF-»
 «ENDLET-»
@@ -109,6 +136,10 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «ENDIF-»
 «ENDLET-»
 «ENDFOREACH-»
+
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Mappings"» 
+		/* put additional mappings here */
+		«ENDPROTECT»
 	}
 «ENDDEFINE»	
 
@@ -120,6 +151,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	/**
 	 * «((uml::Property) other).getComment("\n	 * ")»
 	 */
+	@XmlElement
 	«((uml::Property) other).type.name.sanitizeType()» «((uml::Property) other).getRoleName().toFirstLower().sanitizeType()»
 «ENDFOREACH-»
 «ENDIF-»
@@ -128,23 +160,54 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM»
 «DEFINE ManyToOneParents FOR ChiNode-»
-«LET {}
-	.addAll(this.getNavigableParentNodes()) //.select(e|!e.association.isOneToOneAssociation()))
-	.addAll(this.getNavigableChildNodes().select(e|
-		{}.addAll(((Chronos::ChiNode) e.type).getSuperClassesRecursive()).add(e.type).contains(this.getFirstManyToManyChild((Chronos::ChiNode) e.type))
-	))
- AS parents -»
+«LET ((List[uml::Property]) {}
+		.addAll(this.getNavigableParentNodes()) //.select(e|!e.association.isOneToOneAssociation()))
+		.addAll(this.getNavigableChildNodes().select(e|
+			{}.addAll(((Chronos::ChiNode) e.type).getSuperClassesRecursive()).add(e.type).contains(this.getFirstManyToManyChild((Chronos::ChiNode) e.type))
+		))
+	)
+	AS parents -»
+«LET ((List[Chronos::ChiNode]) {}
+		.addAll(this.getModel().allOwnedElements().typeSelect(Chronos::ChiValue).select(e|e.type == this).class.toSet())
+	)
+	AS owners -»
+«parents.size > 0 && owners.size > 0 ? (
+	warn("Both parents and owners exist for " + this.name) ->
+	""
+) : (
+	""
+)-»
 «IF parents.size > 0-»
 	«FOREACH parents AS parent»
-	«((uml::Property) parent).type.name.sanitizeType()» «((uml::Property) parent).getRoleName().toFirstLower()»
+	@XmlTransient
+	«parent.type.name.sanitizeType()» «parent.getRoleName().toFirstLower()»
 	«ENDFOREACH»
+	
+	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "belongsToLists"» 
+	/* put additional lists here */
+	«ENDPROTECT»
 
 	static belongsTo = [
 	«FOREACH parents AS parent SEPARATOR ","»
-		«((uml::Property) parent).getRoleName().toFirstLower()»: «((uml::Property) parent).type.name.sanitizeType()-»
+		«parent.getRoleName().toFirstLower()»: «parent.type.name.sanitizeType()-»
 	«ENDFOREACH»
+	
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "belongsToParents"» 
+		/* put additional belongsTo here */
+		«ENDPROTECT»
+	]
+«ELSEIF owners.size > 0-»
+	static belongsTo = [
+	«FOREACH owners AS owner SEPARATOR ","»
+		«owner.name.sanitizeType()-»
+	«ENDFOREACH»
+	
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "belongsToOwners"» 
+		/* put additional owners here */
+		«ENDPROTECT»
 	]
 «ENDIF-»
+«ENDLET-»
 «ENDLET-»
 «ENDDEFINE»
 
@@ -153,6 +216,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «LET this.getNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
 «IF children.size > 0»
 «FOREACH children AS child-»
+	@XmlElement
 	Set<«child.type.name.sanitizeType()»> «child.getRoleName().toFirstLower()»
 «ENDFOREACH-»
 
@@ -160,6 +224,10 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «FOREACH children AS child SEPARATOR ","»
 		«child.getRoleName().toFirstLower()»: «child.type.name.sanitizeType()-»
 «ENDFOREACH»
+
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "hasMany"» 
+		/* put additional hasMany here */
+		«ENDPROTECT»
 	]
 «ENDIF-»
 «ENDLET-»
@@ -187,6 +255,10 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 			)
 		«ENDLET-»
 	«ENDFOREACH-»
+
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "constraints"» 
+		/* put additional constraints here */
+		«ENDPROTECT»
 	}
 «ENDIF-»
 «ENDLET-»
@@ -197,6 +269,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	/**
 	 * «this.getComment("\n	 * ")»
 	 */
+	@XmlElement«IF this.lowerBound() > 0»(required = true)«ENDIF»
 	«this.type.name.sanitizeType()»«IF this.isMultivalued()»[]«ENDIF» «name»«IF !this.^default.isNullOrEmpty()» = «this.type.getValuePrefix()»«this.^default»«this.type.getValuePostfix()»«ENDIF»
 	
 «ENDDEFINE»
@@ -218,13 +291,32 @@ th protected region «ENDREM»
 «DEFINE domainEnum FOR uml::Enumeration»
 «info("Generating enumeration " + this.name)»
 	«FILE this.name +".groovy"-»
+«groovyFileHeader()»
+
+/* «generatorSignature()» */
+
 package com.eenergy.meregio.domain
+
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlTransient;
+
+«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+/* put additional imports here */
+«ENDPROTECT»
 
 /**
  * «this.getComment("\n * ")»
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 enum «name-» {
-	«FOREACH this.ownedLiteral.select(e|e == this.ownedLiteral.select(f|f.name.normalizeMemberName() == e.name.normalizeMemberName()).first()) AS currLiteral SEPARATOR ",\n"»«currLiteral.name.normalizeMemberName()»«ENDFOREACH»
+	«FOREACH this.ownedLiteral.select(e|e == this.ownedLiteral.select(f|f.name.normalizeMemberName() == e.name.normalizeMemberName()).first()) AS currLiteral SEPARATOR ",\n\t"»«currLiteral.name.normalizeMemberName()»«ENDFOREACH»
+
+	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Body"» 
+	/* put additional attributes and methods here */
+	«ENDPROTECT»
 }
 	«ENDFILE»
 «ENDDEFINE»
