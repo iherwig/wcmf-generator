@@ -199,7 +199,7 @@ public class «this.asContextName()» extends Context {
 «DEFINE nodeCall FOR uml::OpaqueAction»
 	«IF !this.isAlreadyProcessed()»
 		«IF this.getProductionRuleset() == null»
-			«IF !uml::DecisionNode.isInstance(this.getNextNode())»
+			«IF !this.isDecisionPredecessor()»
 				«EXPAND nodeCallDefault FOR this»
 				
 				«EXPAND nodeCallResult FOR this»

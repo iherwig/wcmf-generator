@@ -72,7 +72,7 @@ uml::ActivityNode getLastNode(uml::Activity this):
 
 List[uml::ActivityNode] getMethodNodes(uml::Activity this):
 	((List[uml::ActivityNode]) {}
-		.addAll(this.node.typeSelect(uml::OpaqueAction).select(e|!uml::DecisionNode.isInstance(e.getNextNode())))
+		.addAll(this.node.typeSelect(uml::OpaqueAction).select(e|!e.isDecisionPredecessor()))
 		.addAll(this.node.typeSelect(uml::DecisionNode))
 	)
 	.select(e|e.getProductionRuleset() == null || (e.getProductionRuleset().getLastNodes().contains(e) && !e.getProductionRuleset().getRulesetParents().typeSelect(uml::DecisionNode).first().isLoop()))
@@ -289,6 +289,10 @@ String asFullPackageName(Ouranos::ProductionRuleset this):
 
 String asFullPackageName(uml::DecisionNode this):
 	CONTEXT_PACKAGE() + "." + this.activity.asPackageName()
+;
+
+boolean isDecisionPredecessor(uml::OpaqueAction this):
+	uml::DecisionNode.isInstance(this.getNextNode()) && this.getNextNode().getProductionRuleset() == null
 ;
 
 uml::Activity getActivity(Ouranos::ProductionRuleset this):
