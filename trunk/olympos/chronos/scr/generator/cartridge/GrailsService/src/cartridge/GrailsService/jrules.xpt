@@ -15,7 +15,7 @@
 
 import com.eenergy.meregio.domain.*;
 
-import «this.asFullPackageName()».«this.asContextName()»;
+import «this.asFullPackageName()».*;
 
 «PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileImport"» 
 /* Place additional imports here */

@@ -53,6 +53,10 @@ class «this.asClassName()» {
 		
 		«this.asResultName()» result = «this.asConstructorCall()»
 		
+		«FOREACH this.node.typeSelect(uml::DataStoreNode).select(e|e == this.node.typeSelect(uml::DataStoreNode).selectFirst(f|e.name == f.name)).select(e|e.incoming.source.incoming.name.first() != "LoopStart") AS currChiObject»
+			«currChiObject.getGrailsTypeName()» «currChiObject.asVariableName()»
+		«ENDFOREACH»
+				
 		«LET this.getFirstNode() AS firstNode»
 			«IF firstNode != null»
 				«EXPAND nodeCall FOR this.getFirstNode()»
@@ -288,7 +292,7 @@ public class «this.asContextName()» extends Context {
 «DEFINE nodeCallRulesetLoop FOR uml::DecisionNode»
 	«IF !this.isAlreadyProcessed()»
 		«LET this.getLoopPredecessor().incoming.source.typeSelect(uml::DataStoreNode).first() AS listStore»
-			«listStore.getGrailsTypeName()» «listStore.asVariableName()» = «this.getProductionRuleset().asMethodName()»(«EXPAND nodeCallParameter FOREACH this.getLoopPredecessor().getPreviousNode().getInputChiObjects()»)
+			«listStore.asVariableName()» = «this.getProductionRuleset().asMethodName()»(«EXPAND nodeCallParameter FOREACH this.getLoopPredecessor().getPreviousNode().getInputChiObjects()»)
 			
 			«LET this.getLoopStart().outgoing.target.typeSelect(uml::DataStoreNode).first() AS listElement»
 				«listElement.addKeyword(LIST_ELEMENT_KEYWORD()) -> ""»
@@ -322,6 +326,9 @@ public class «this.asContextName()» extends Context {
 
 «DEFINE nodeCallDefault(List[uml::DataStoreNode] params) FOR uml::ActivityNode»
 	«this.asResultName()» = «this.asMethodName()»(«EXPAND nodeCallParameter FOREACH params SEPARATOR ","»)
+	«FOREACH ((List[uml::DataStoreNode]) this.outgoing.typeSelect(uml::ObjectFlow).target) AS currTargetChiObject»
+		«currTargetChiObject.asVariableName()» = «this.asResultName()».«currTargetChiObject.asVariableName()»
+	«ENDFOREACH»
 «ENDDEFINE»
 
 «DEFINE nodeCallParameter FOR uml::DataStoreNode-»
@@ -414,7 +421,7 @@ public class «this.asContextName()» extends Context {
 		// set input
 		«this.asContextName()» context = new «this.asContextName()» (
 			«FOREACH this.getFirstNodes().getInputChiObjects() AS currSource SEPARATOR ", "»
-				«currSource.asVariableName()»: «currSource.asVariableName()-»
+				«currSource.asVariableName()»: arguments.«currSource.asVariableName()-»
 			«ENDFOREACH»
 			«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetVariables"»
 			/* Put additional variables here */
