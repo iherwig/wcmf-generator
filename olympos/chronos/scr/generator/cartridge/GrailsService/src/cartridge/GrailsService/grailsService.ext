@@ -92,15 +92,15 @@ String asVariableName(uml::DataStoreNode this):
 ;
 
 String getSourceVariableName(uml::DataStoreNode this):
-	this.hasKeyword(LIST_ELEMENT_KEYWORD()) ? (
+	//this.hasKeyword(LIST_ELEMENT_KEYWORD()) ? (
 		this.asVariableName()
-	) : (
-		this.incoming.size > 0 ? (
-			this.incoming.first().source.asResultName() + "." + this.asVariableName()
-		) : (
-			"request"
-		)
-	)
+	//) : (
+	//	this.incoming.size > 0 ? (
+	//		this.incoming.first().source.asResultName() + "." + this.asVariableName()
+	//	) : (
+	//		"request"
+	//	)
+	//)
 ;
 
 String asClassName(uml::ActivityNode this):

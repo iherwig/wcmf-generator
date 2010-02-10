@@ -170,10 +170,13 @@ context uml::DataStoreNode ERROR
 	this.isNameNotEmpty()
 ;
 
+/*
+Removed due to different variable handling style
 context uml::DataStoreNode if !this.isOutputChiObject() ERROR
 	"ChiObject must have a unique name within its ActivitySet: " + this.fullQualifiedName():
 	this.isNameUniqueWithinActivity()
 ;
+*/
 
 context uml::DataStoreNode if !this.isOutputChiObject() ERROR
 	"ChiObject must have at least one outgoing arrow: " + this.fullQualifiedName():
@@ -198,6 +201,11 @@ context uml::DataStoreNode if this.isOutputChiObject() ERROR
 context uml::DataStoreNode WARNING
 	"ChiObject has no associated type: " + this.fullQualifiedName():
 	this.type != null
+;
+
+context uml::DataStoreNode ERROR
+	"All ChiObjects of the same name must have the same type: " + this.fullQualifiedName():
+	this.activity.node.typeSelect(uml::DataStoreNode).select(e|e.name == this.name).forAll(e|e.type == this.type)
 ;
 
 //ActivityInitial
