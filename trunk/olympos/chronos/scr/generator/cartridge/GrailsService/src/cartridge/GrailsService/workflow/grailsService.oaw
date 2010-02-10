@@ -89,12 +89,8 @@
 		<beautifier class="net.sourceforge.olympos.oaw.workflow.BlankLineRemover"/>
 
 		<outlet path="${contextTarget}" name="CONTEXT"/>
-		<prSrcPaths value="${contextTarget}"/>
-
 		<outlet path="${serviceTarget}" name="SERVICE"/>
-		<prSrcPaths value="${serviceTarget}"/>
-
 		<outlet path="${rulesetTarget}" name="RULESET"/>
-		<prSrcPaths value="${rulesetTarget}"/>
+		<prSrcPaths value="${contextTarget},${serviceTarget},${rulesetTarget}"/>
 	</component>
 </workflow>
