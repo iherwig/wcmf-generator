@@ -1,0 +1,58 @@
+import Chronos;
+import Ouranos;
+import uml;
+
+extension common::util;
+extension common::umlutils;
+
+context Chronos::ChiBusinessUseCase WARNING
+	"ChiBusinessUseCase should have a Scope: " + this.fullQualifiedName():
+	!this.Scope.isNullOrEmpty()
+;
+
+context Chronos::ChiBusinessUseCase WARNING
+	"ChiBusinessUseCase should have a GoalInContext: " + this.fullQualifiedName():
+	!this.GoalInContext.isNullOrEmpty()
+;
+
+uml::InitialNode getInitial(Chronos::ChiBusinessUseCase this):
+	((List[uml::Activity]) this.ownedBehavior).node.typeSelect(uml::InitialNode).first()
+;
+
+context Chronos::ChiBusinessUseCase if this.getInitial() != null WARNING
+	"ActivityIntial must have the same name as the “trigger” field in the corresponding use case: " + this.getInitial().fullQualifiedName():
+	this.getInitial().name == this.Trigger
+;
+
+List[uml::ActivityFinalNode] getFinals(Chronos::ChiBusinessUseCase this):
+	((List[uml::Activity]) this.ownedBehavior).node.typeSelect(uml::ActivityFinalNode)
+;
+
+context Chronos::ChiBusinessUseCase if this.getFinals().size > 0 WARNING
+	"At least one ActivityFinal must have the same name as the “main success scenario” field in the corresponding use case: " + this.fullQualifiedName():
+	this.getFinals().exists(e|e.name == this.MainSuccessScenario)
+;
+
+uml::Actor getPrimaryActor(Chronos::ChiBusinessUseCase this):
+	this.getModel().allOwnedElements().typeSelect(uml::Actor).selectFirst(e|e.name == this.PrimaryActor)
+;
+
+context Chronos::ChiBusinessUseCase if !this.PrimaryActor.isNullOrEmpty() WARNING
+	"A ChiBusinessPartnerPassive Cannot be a primary actor: " + this.getPrimaryActor().fullQualifiedName():
+	!Chronos::ChiBusinessPartnerPassive.isInstance(this.getPrimaryActor())
+;
+
+context Chronos::ChiBusinessUseCase ERROR
+	"ChiBusinessUseCase MUST have a Trigger: " + this.fullQualifiedName():
+	!this.Trigger.isNullOrEmpty()
+;
+
+context Chronos::ChiBusinessUseCase ERROR
+	"ChiBusinessUseCase MUST have a MainSuccessScenario: " + this.fullQualifiedName():
+	!this.MainSuccessScenario.isNullOrEmpty()
+;
+
+context Chronos::ChiBusinessUseCase ERROR
+	"ChiBusinessUseCase MUST have a PrimaryActor: " + this.fullQualifiedName():
+	this.getPrimaryActor() != null
+;
