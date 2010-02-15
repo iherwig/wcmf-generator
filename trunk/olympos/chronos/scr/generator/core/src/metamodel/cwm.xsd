@@ -627,6 +627,7 @@
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
+		<xsd:attribute name="fk_chibusinesspartner_id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
 		<xsd:attribute name="fk_package_id" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
