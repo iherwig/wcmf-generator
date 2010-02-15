@@ -73,4 +73,17 @@ String generatorVersion():
 String generatorBuild():
 	JAVA net.sourceforge.olympos.oaw.extend.GeneratorInfo.getBuild()
 ;
- 
+
+String groovyFileHeader():
+	genericFileHeader()
+;
+
+String javaFileHeader():
+	genericFileHeader()
+;
+
+String genericFileHeader():
+	"/*\n * " + FILE_HEADER().replaceAll("\n", "\n * ") + "\n */\n"
+;  
+
+String FILE_HEADER(): GLOBALVAR fileHeader;
