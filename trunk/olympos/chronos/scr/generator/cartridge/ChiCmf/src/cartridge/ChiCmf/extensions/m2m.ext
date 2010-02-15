@@ -99,7 +99,7 @@ Void renameUnique(uml::Property this, Collection[uml::Property] otherProperties,
 		)
 		->
 
-		info("Old name: " + this.name + ", owning class: " + this.owner.name) ->
+		info("Old name: " + this.name + ", owning class: " + ((uml::NamedElement) this.owner).name) ->
 		otherProperties.select(e|e.name == this.name).size > 1 ? (
 			this.setName(this.name.replaceFirst("[0-9]*$", (counter).toString()))
 			->
@@ -107,14 +107,14 @@ Void renameUnique(uml::Property this, Collection[uml::Property] otherProperties,
 		) : (
 			Void
 		) ->
-		info("New name: " + this.name + ", owning class: " + this.owner.name)
+		info("New name: " + this.name + ", owning class: " + ((uml::NamedElement) this.owner).name)
 	) : (
 		Void
 	)
 ;
 
 String getTrailingNumber(String this):
-	this.replaceAll(".*?([0-9]+)$", "$1")
+	this.replaceAll("^.*?([0-9]*)$", "$1")
 ;
 
 int getTrailingInt(String this):
