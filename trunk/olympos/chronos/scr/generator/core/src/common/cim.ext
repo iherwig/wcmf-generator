@@ -1,0 +1,11 @@
+import uml;
+import Chronos;
+
+List[Chronos::ChiNode] removeCommonClasses(List[Chronos::ChiNode] this):
+	this.reject(e|
+		e.name == "String"
+		|| e.name == "Integer"
+		|| e.name == "Float"
+		|| e.name == "Boolean"
+	)
+;
