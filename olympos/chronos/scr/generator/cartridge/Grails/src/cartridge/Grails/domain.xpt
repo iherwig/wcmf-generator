@@ -5,13 +5,14 @@
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
 «EXTENSION common::nameNormalizer»
+«EXTENSION common::cim»
 
 «EXTENSION cartridge::ChiCmf::extensions::ChiNode»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 «EXTENSION cartridge::Grails::classtools»
 
 «DEFINE root FOR uml::Model»
-	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(ChiNode).select(e|!e.isManyToMany() && !e.isLibraryClass())»
+	«EXPAND domainClass FOREACH this.allOwnedElements().typeSelect(ChiNode).select(e|!e.isManyToMany() && !e.isLibraryClass()).removeCommonClasses()»
 	«EXPAND domainEnum FOREACH this.allOwnedElements().typeSelect(uml::Enumeration)»
 «ENDDEFINE»
 
