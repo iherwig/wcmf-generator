@@ -242,7 +242,7 @@ FALSE for all other
  	otherNode.name != this.name
 	&& this.getSuperClassesRecursive().add(this).select(
 		e|otherNode.getSuperClassesRecursive().add(otherNode).contains(e)
-	).select(
+	).typeSelect(Chronos::ChiNode).select(
 		e|((Chronos::ChiNode) e).getChildNodes().select(
 			f|f.type == nm
 		).size > 0

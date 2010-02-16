@@ -184,7 +184,7 @@ FALSE for all other
  	otherNode.name != this.name
 	&& this.getSuperClassesRecursive().add(this).select(
 		e|otherNode.getSuperClassesRecursive().add(otherNode).contains(e)
-	).select(
+	).typeSelect(WCMFNode).select(
 		e|e.getChildNodes().select(
 			f|f.type == nm
 		).size > 0
@@ -195,7 +195,7 @@ FALSE for all other
  curChildParent.type.name != name
 			&& this.getSuperClassesRecursive().select(
 				e|curChildParent.type.getSuperClassesRecursive().add(curChildParent.type).contains(e)
-			).select(
+			).typeSelect(WCMFNode).select(
 				e|e.getChildNodes().select(
 					f|f.type == curChild.type
 				).size > 0
