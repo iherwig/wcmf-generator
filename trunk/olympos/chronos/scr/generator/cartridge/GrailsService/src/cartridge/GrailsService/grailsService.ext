@@ -8,19 +8,24 @@ String asClassName(uml::Activity this):
 	this.name.normalizeClassName() + "Service"
 ;
 
-String asResultName(uml::Activity this):
+String asResultType(uml::Activity this):
 	this.getLastNode().outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).first().getGrailsTypeName()
 ;
 
-String asConstructorCall(uml::Activity this):
-	this.asResultName() != "def" ? (
-		"new " + this.asResultName() + "()"
+String asTypeOrMap(String typeName):
+	!typeName.isNullOrEmpty() && typeName != "def" ? (
+		"new " + typeName + "()"
 	) : (
 		"[:]"
 	)
 ;
 
-String asRequestName(uml::Activity this):
+
+String asResultConstructorCall(uml::Activity this):
+	this.asResultType().asTypeOrMap()
+;
+
+String asRequestType(uml::Activity this):
 	let grailsTypeName = this.getFirstNode().incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).first().getGrailsTypeName():
 	
 	grailsTypeName != "def" ? (
@@ -28,6 +33,10 @@ String asRequestName(uml::Activity this):
 	) : (
 		""
 	)
+;
+
+String asRequestConstructorCall(uml::Activity this):
+	this.asRequestType().asTypeOrMap()
 ;
 
 String asPackageName(uml::Activity this):
@@ -115,8 +124,8 @@ String asMethodName(uml::ActivityNode this):
 	this.name.asMethod()
 ;
 
-String asContextName(uml::DecisionNode this):
-	this.asClassName() + "Context"
+String asSelectionName(uml::DecisionNode this):
+	this.asClassName() + "Selection"
 ;
 
 String asContextName(Ouranos::ProductionRuleset this):
@@ -279,7 +288,7 @@ boolean isActivitySet(Ouranos::ProductionRuleset this):
 	false
 ;
 
-List[uml::DecisionNode] getDecisionsWithContext(uml::Activity this):
+List[uml::DecisionNode] getDecisionsWithSelection(uml::Activity this):
 	this.getMethodNodes().typeSelect(uml::DecisionNode).select(e|e.getProductionRuleset() == null)
 ;
 
