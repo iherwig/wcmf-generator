@@ -195,9 +195,14 @@ public enum «this.asSelectionName()» {
 			«this.asResultName()» = «this.asMethodName()»()
 			
 			«IF !this.isLoop()»
-				switch («this.asResultName()») {
-					«EXPAND nodeCallSelection(this.asSelectionName(), false) FOREACH this.getFlowStates()»
-				}
+				«LET this.getMergeNode() AS mergeNode»
+					switch («this.asResultName()») {
+						«EXPAND nodeCallSelection(this.asSelectionName(), false) FOREACH this.getFlowStates()»
+					}
+					«IF mergeNode != null»
+						«EXPAND nodeCall FOR mergeNode.unmarkProcessed()»
+					«ENDIF»
+				«ENDLET»
 			«ELSE»
 				«LET this.getLoopPredecessor().incoming.source.typeSelect(uml::DataStoreNode).first() AS listStore»
 					«this.getLoopPredecessor().asMethodName()»()
@@ -271,9 +276,14 @@ public enum «this.asSelectionName()» {
 	«LET this.getFirstNodes().first() AS firstNode»
 		«firstNode.asResultName()» = «this.asMethodName()»()
 
-		switch («firstNode.asResultName()») {
-			«EXPAND nodeCallSelection(this.asContextName(), true) FOREACH this.getFlowStates()»
-		}
+		«LET this.getRulesetParents().typeSelect(uml::DecisionNode).first().getMergeNode() AS mergeNode»
+			switch («firstNode.asResultName()») {
+				«EXPAND nodeCallSelection(this.asContextName(), true) FOREACH this.getFlowStates()»
+			}
+			«IF mergeNode != null»
+				«EXPAND nodeCall FOR mergeNode.unmarkProcessed()»
+			«ENDIF»
+		«ENDLET»
 	«ENDLET»
 «ENDDEFINE»
 
