@@ -189,7 +189,7 @@ uwm.diagram.UwmWorkflow.prototype.showMenu = function(menu, xPos, yPos) {
 uwm.diagram.UwmWorkflow.prototype.getDiagram = function() {
 	return this.diagram;
 }
-
+/*
 uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x, y) {
 	this.oldX = x;
 	this.oldY = y;
@@ -214,6 +214,7 @@ uwm.diagram.UwmWorkflow.prototype.onMouseMove = function(x, y) {
 		this.scrollTo(this.getScrollLeft() - deltaX, this.getScrollTop() - deltaY, true);
 	}
 }
+*/
 /**
  * The id of menu item "Snap to Objects".
  * 
