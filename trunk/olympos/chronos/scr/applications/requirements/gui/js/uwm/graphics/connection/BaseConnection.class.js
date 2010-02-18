@@ -74,31 +74,6 @@ uwm.graphics.connection.BaseConnection.prototype.type = "uwm.graphics.connection
  */
 uwm.graphics.connection.BaseConnection.prototype.setWorkflow = function(workflow) {
 	draw2d.Connection.prototype.setWorkflow.call(this, workflow);
-	
-	var htmlElement = this.getHTMLElement();
-	if (htmlElement) {
-	
-		var contextMenu = this.uwmContextMenu;
-		var self = this;
-		
-		this.tmpContextMenu = function(e) {
-			//var position = workflow.getDiagram().getContextMenuPosition(e.xy[0], e.xy[1]);
-			var position = e.getXY();
-			
-			contextMenu.showAt(position);
-			
-			e.preventDefault();
-			
-			return false;
-		}
-		
-		var event = "mousedown";
-		if (Ext.isWindows) {
-			event = "mouseup";
-		}
-		Ext.fly(htmlElement).on(event, this.tmpContextMenu);
-		
-	}
 }
 
 /**
@@ -148,6 +123,21 @@ uwm.graphics.connection.BaseConnection.prototype.buildContextMenu = function() {
 			}
 		})]
 	});
+}
+
+/**
+ * The draw2d context menu handler.
+ *
+ * @private
+ * @param {int} x X position where to show the context menu.
+ * @param {int} y Y position where to show the context menu.
+ */
+uwm.graphics.connection.BaseConnection.prototype.onContextMenu = function(x, y) {
+	var workflow = this.getWorkflow();
+	var scroll = {left:workflow.getScrollLeft(), top:workflow.getScrollTop()};
+	var xy = [workflow.getAbsoluteX(), workflow.getAbsoluteY()];
+	
+	this.uwmContextMenu.showAt([ x - scroll.left + xy[0] + 2, y - scroll.top + xy[1] + 2 ]);
 }
 
 /**
