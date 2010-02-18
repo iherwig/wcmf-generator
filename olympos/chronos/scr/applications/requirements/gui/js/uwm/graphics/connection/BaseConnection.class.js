@@ -48,10 +48,20 @@ uwm.graphics.connection.BaseConnection = function(label, decorators) {
 		this.label.setBackgroundColor(new draw2d.Color(255, 255, 255));
 		this.label.setFontSize(8);
 		
-		this.createHTMLElement();
-		this.html = this.getHTMLElement();
-		
 		this.addFigure(this.label, new uwm.graphics.connection.MidpointLocator(this));
+
+		// define the label context menu
+		var htmlElement = this.label.getHTMLElement();
+		if (htmlElement) {
+			self = this;
+			Ext.fly(htmlElement).on("contextmenu", function(e) {
+				var position = e.getXY();				
+				self.uwmContextMenu.showAt(position);
+				e.preventDefault();
+				e.stopPropagation();
+				return false;
+			});		
+		}		
 	}
 	
 	this.setDeleteable(true);
