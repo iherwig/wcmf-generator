@@ -164,11 +164,30 @@ List[uml::ActivityNode] getNextNodes(uml::ActivityNode this):
 	this.getNextEdges().target
 ;
 
+cached List[uml::ActivityNode] getAllNextNodes(uml::ActivityNode this, List[uml::ActivityNode] stoppers):
+	this.getAllNextNodesInternal({}, stoppers)
+;
+
+private List[uml::ActivityNode] getAllNextNodesInternal(uml::ActivityNode this, List[uml::ActivityNode] list, List[uml::ActivityNode] stoppers):
+	!stoppers.contains(this) && !list.contains(this) ? (
+		list.add(this) ->
+		this.getNextNodes().getAllNextNodesInternal(list, stoppers)
+	) : (
+		Void
+	) ->
+	
+	list
+;
+
 List[uml::ActivityEdge] getNextEdges(uml::ActivityNode this):
-	{}
-		.addAll(this.outgoing.typeSelect(uml::ControlFlow))
-		//Jump over one DataStore for flows like Action --> DataStore --> Action
-		.addAll(this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow))
+	this != null ? (
+		{}
+			.addAll(this.outgoing.typeSelect(uml::ControlFlow))
+			//Jump over one DataStore for flows like Action --> DataStore --> Action
+			.addAll(this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow))
+	) : (
+		{}
+	)
 ;
 
 uml::ActivityNode getPreviousNode(uml::ActivityNode this):
@@ -197,8 +216,6 @@ String asFlowName(uml::ActivityEdge this):
 		"FLOW_STATE_" + this.source.outgoing.indexOf(this)
 	)
 ;
-
-String PROCESSED_KEYWORD(): "GrailsServiceProcessed";
 
 boolean isAlreadyProcessed(uml::ActivityNode this):
 	let result = this.hasKeyword(PROCESSED_KEYWORD()):
@@ -235,8 +252,6 @@ uml::OpaqueAction getLoopPredecessor(uml::DecisionNode this):
 uml::OpaqueAction getLoopStart(uml::DecisionNode this):
 	this.outgoing.selectFirst(e|e.name == "LoopStart").target
 ;
-
-String LIST_ELEMENT_KEYWORD(): "GrailsListElement";
 
 List[uml::ActivityNode] getLastNodes(Ouranos::ProductionRuleset this):
 	this.getRulesetParents().select(e|e.getNextNode().getProductionRuleset() != this)
@@ -312,5 +327,32 @@ String jrulesFileHeader():
 	genericFileHeader()
 ;
 
+uml::ActivityNode getMergeNode(uml::DecisionNode this):
+	let allPaths = this.getNextNodes().toSet().toList():
+	let result = allPaths.selectFirst(e|e.findMergeNode(allPaths, {this}) != null).findMergeNode(allPaths, {this}):
+	
+	result.addKeyword(PROCESSED_KEYWORD()) ->
+	
+	result
+;
+
+private uml::ActivityNode findMergeNode(uml::ActivityNode this, List[uml::ActivityNode] allPaths, List[uml::ActivityNode] stoppers):
+	let otherPaths = allPaths.reject(this):
+	let localStoppers = ((List[uml::ActivityNode]) {}
+		.addAll(stoppers)
+		.add(this)):
+	
+	this.getAllNextNodes(stoppers).selectFirst(e|otherPaths.getAllNextNodes(localStoppers).contains(e))
+;
+
+uml::ActivityNode unmarkProcessed(uml::ActivityNode this):
+	this.removeKeyword(PROCESSED_KEYWORD()) ->
+	this
+;
+
 String CONTEXT_PACKAGE(): GLOBALVAR contextPackage;
 String SERVICE_PACKAGE(): GLOBALVAR servicePackage;
+
+String LIST_ELEMENT_KEYWORD(): "GrailsListElement";
+String PROCESSED_KEYWORD(): "GrailsServiceProcessed";
+
