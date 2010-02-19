@@ -167,7 +167,7 @@ class ObjectHistorySaveController extends SaveController
 		$this->changelist = array ();
 		$this->changelist['id'] = null;
 		$this->changelist['data'] = serialize($this->data);
-		$this->changelist['duplicate'] = 'tbd';
+		$this->changelist['duplicate'] = false;
 		$this->changelist['eventtype'] = 'changeProperty';
 		$this->changelist['affectedoid'] = $oid;
 		$this->changelist['otheroid'] = 'tbd';
