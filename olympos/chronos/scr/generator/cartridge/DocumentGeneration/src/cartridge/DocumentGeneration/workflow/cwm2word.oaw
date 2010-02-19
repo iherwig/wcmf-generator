@@ -24,27 +24,35 @@
 		</metaModel>
 	</component>
 
+	<!--
 	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
 		<modelUrl value='http://cwm.nikostotz.de/chronos.profile.uml'/>
 		<outputSlot value="chronosProfile"/>
 	</component>
+	-->
 	
-	<!--
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="${basePath}/metamodel/chronos.profile.uml"/>
 		<outputSlot value="chronosProfile"/>
 	 </component>
-	-->
+
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${basePath}/metamodel/ouranos.profile.uml"/>
+		<outputSlot value="ouranosProfile"/>
+	 </component>
 
 	<component class="oaw.xtend.XtendComponent">
 		<metaModel idRef="cwm" />
+		<metaModel id="Chronos" class="oaw.uml2.profile.ProfileMetaModel">
+			<!--profile value="http://cwm.nikostotz.de/chronos.profile.uml"/-->
+			<profile value="${basePath}/metamodel/chronos.profile.uml"/>
+		</metaModel>
+		<metaModel id="Ouranos" class="oaw.uml2.profile.ProfileMetaModel">
+			<profile value="${basePath}/metamodel/ouranos.profile.uml"/>
+		</metaModel>
 		<metaModel id="uml"
 			class="oaw.uml2.UML2MetaModel" />
-		<metaModel id="Chronos" class="oaw.uml2.profile.ProfileMetaModel">
-			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
-			<!--profile value="${basePath}/metamodel/chronos.profile.uml"/-->
-		</metaModel>
-		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfile)" />
+		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfile, ouranosProfile)" />
 		<outputSlot value="uml2model" />
 		<globalVarDef name="basePath" value="'${basePath}'" />
 	</component>
@@ -109,8 +117,9 @@
 			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
 		</metaModel>
 -->
-		<metaModel idRef="uml" />
 		<metaModel idRef="Chronos" />
+		<metaModel idRef="Ouranos" />
+		<metaModel idRef="uml" />
 		<metaModel idRef="diagramXsd" />
 		
 		<expand value="cartridge::DocumentGeneration::template::${templateName}::content::file FOR uml2model"/>
@@ -147,8 +156,9 @@
 
 		<fileEncoding value="utf-8"/>
 		
-		<metaModel idRef="uml" />
 		<metaModel idRef="Chronos" />
+		<metaModel idRef="Ouranos" />
+		<metaModel idRef="uml" />
 		<metaModel idRef="diagramXsd" />
 		
 		<expand value="cartridge::DocumentGeneration::template::${templateName}::styles::file FOR uml2model"/>
@@ -185,8 +195,9 @@
 
 		<fileEncoding value="utf-8"/>
 		
-		<metaModel idRef="uml" />
 		<metaModel idRef="Chronos" />
+		<metaModel idRef="Ouranos" />
+		<metaModel idRef="uml" />
 		<metaModel idRef="diagramXsd" />
 		
 		<expand value="cartridge::DocumentGeneration::template::${templateName}::manifest::file FOR uml2model"/>
