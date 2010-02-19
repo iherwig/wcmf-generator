@@ -356,3 +356,8 @@ String SERVICE_PACKAGE(): GLOBALVAR servicePackage;
 String LIST_ELEMENT_KEYWORD(): "GrailsListElement";
 String PROCESSED_KEYWORD(): "GrailsServiceProcessed";
 
+String localDebug(uml::NamedElement this, String msg):
+	info(msg + ": " + this.name) ->
+	
+	""
+;

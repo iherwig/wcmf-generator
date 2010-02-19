@@ -45,7 +45,7 @@ class «this.asClassName()» {
 	protected «this.asRequestType()» request = «this.asRequestConstructorCall()»
 	protected «this.asResultType()» result = «this.asResultConstructorCall()»
 
-	«FOREACH this.node.typeSelect(uml::DataStoreNode).select(e|e == this.node.typeSelect(uml::DataStoreNode).selectFirst(f|e.name == f.name)).select(e|e.incoming.source.incoming.name.first() != "LoopStart") AS currChiObject»
+	«FOREACH this.node.typeSelect(uml::DataStoreNode) AS currChiObject»
 	protected «currChiObject.getGrailsTypeName()» «currChiObject.asVariableName()»
 	«ENDFOREACH»
 
@@ -187,6 +187,10 @@ public enum «this.asSelectionName()» {
 			«EXPAND nodeCall FOR this.getProductionRuleset()»
 		«ENDIF»
 	«ENDIF»
+«ENDDEFINE»
+
+«DEFINE nodeCall FOR uml::DecisionNode»
+	«EXPAND nodeCallDecision FOR this»
 «ENDDEFINE»
 
 «DEFINE nodeCallDecision FOR uml::DecisionNode»
