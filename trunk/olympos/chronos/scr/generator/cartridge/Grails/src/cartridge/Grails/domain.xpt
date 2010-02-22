@@ -70,8 +70,7 @@ class «name-»
 	«REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM-»
 «EXPAND ManyToOneParents FOR this-»
 
-	«REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM-»
-«EXPAND OneToManyChildren FOR this-»					
+«EXPAND ToManyChildren FOR this-»					
 
 	«REM» MappedBy for handling multiple relations between the same Classes «ENDREM-»
 «EXPAND MappedBy FOR this-»
@@ -126,17 +125,21 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	static mapping = {
 		tablePerHierarchy false
 		tablePerSubclass true
-«FOREACH this.getNavigableChildNodes() AS child-»
-«LET child.getRoleName().toFirstLower() AS name-»
-«IF child.aggregation == AggregationKind::composite-»
-			«name»: "create,save-update"
-«ELSEIF child.aggregation == AggregationKind::shared-»
-			«name»: "save-update"
+«LET this.getNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
+«LET this.getNavigableParentNodes().select(e|e.isMultivalued() && e.getOtherEnd().isMultivalued()) AS parents-»
+«LET ((List[uml::Property]) {}.addAll(children).addAll(parents)) AS relatives-»
+«FOREACH relatives AS relative»
+«LET relative.getRoleName().toFirstLower() AS name-»
+«IF relative.aggregation == AggregationKind::shared-»
+			«name» cascade: "create,save-update"
 «ELSE-»
-			«name»: "none"
+			«name» cascade: "none"
 «ENDIF-»
 «ENDLET-»
-«ENDFOREACH-»
+«ENDFOREACH»
+«ENDLET-»
+«ENDLET-»
+«ENDLET-»
 
 		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Mappings"» 
 		/* put additional mappings here */
@@ -179,7 +182,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	""
 )-»
 «IF parents.size > 0-»
-	«FOREACH parents AS parent»
+	«FOREACH parents.select(e|e.upperBound() == 1 || e.getOtherEnd().upperBound() == 1) AS parent»
 	@XmlTransient
 	«parent.type.name.sanitizeType()» «parent.getRoleName().toFirstLower()»
 	«ENDFOREACH»
@@ -213,17 +216,24 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «ENDDEFINE»
 
 «REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM»
-«DEFINE OneToManyChildren FOR ChiNode-»
+«DEFINE ToManyChildren FOR ChiNode-»
 «LET this.getNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
-«IF children.size > 0»
+«LET this.getNavigableParentNodes().select(e|e.isMultivalued() && e.getOtherEnd().isMultivalued()) AS parents-»
+«LET ((List[uml::Property]) {}.addAll(children).addAll(parents)) AS relatives-»
+«IF relatives.size > 0»
 «FOREACH children AS child-»
 	@XmlElement
 	Set<«child.type.name.sanitizeType()»> «child.getRoleName().toFirstLower()»
 «ENDFOREACH-»
 
+«FOREACH parents AS parent-»
+	@XmlTransient
+	Set<«parent.type.name.sanitizeType()»> «parent.getRoleName().toFirstLower()»
+«ENDFOREACH»
+
 	static hasMany = [
-«FOREACH children AS child SEPARATOR ","»
-		«child.getRoleName().toFirstLower()»: «child.type.name.sanitizeType()-»
+«FOREACH relatives AS relative SEPARATOR ","»
+		«relative.getRoleName().toFirstLower()»: «relative.type.name.sanitizeType()-»
 «ENDFOREACH»
 
 		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "hasMany"» 
@@ -231,6 +241,8 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 		«ENDPROTECT»
 	]
 «ENDIF-»
+«ENDLET-»
+«ENDLET-»
 «ENDLET-»
 «ENDDEFINE»
 
