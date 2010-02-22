@@ -44,7 +44,6 @@
 
 	<!-- normalize names -->
 	<component class="oaw.xtend.XtendComponent">
-		<metaModel idRef="${profilename}MM"/>
 		<metaModel idRef="UmlMM" />
 		<invoke value="common/nameNormalizer::normalizeNameWithoutPackage(model)" />
 	</component>
