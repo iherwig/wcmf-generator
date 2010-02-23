@@ -75,7 +75,7 @@ uwm.ui.Login = function(config){
 			}]
 		});
 		
-		if (!Ext.isGecko3) {
+		if (!Ext.isGecko3 && !Ext.isChrome) {
 		this.form.add(new Ext.Panel({
 			cls: "uwm-browserWarning",
 				html: "<div>" +
