@@ -4,8 +4,25 @@
 	<property name="propertyFile" value="${basePath}/cartridge/BrowserStatistics/workflow/statistics.properties" />
 	<property file="${propertyFile}" />
 
+	<property name="chronosProfileUri" value="${basePath}/metamodel/chronos.profile.uml"/>
+	<property name="ouranosProfileUri" value="${basePath}/metamodel/ouranos.profile.uml"/>
+
+	<!-- UML2 Setup -->
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
 
+	<!-- load metamodels -->
+	<bean id="uml2" class="oaw.uml2.UML2MetaModel" />
+	<bean id="cwm" class="org.openarchitectureware.xsd.XSDMetaModel">
+		<schemaFile value="metamodel/cwm.xsd" />
+	</bean>
+	<bean id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${chronosProfileUri}"/>
+	</bean>
+	<bean id="ouranos" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${ouranosProfileUri}"/>
+	</bean>
+
+	<!-- load model -->
 	<component class="org.openarchitectureware.xsd.XMLReader">
 		<modelSlot value="uwmmodel" />
 		<uri value="${inputUri}" />
@@ -15,21 +32,26 @@
 		</metaModel>
 	</component>
 
-	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
-		<modelUrl value='http://cwm.nikostotz.de/chronos.profile.uml'/>
-		<outputSlot value="chronosProfile"/>
+	<!-- load profiles as model (for applying to real model) -->
+	<component class="org.eclipse.mwe.emf.Reader">
+		<uri value="${chronosProfileUri}" />
+		<modelSlot value="chronosProfile" />
+	</component>
+	<component class="org.eclipse.mwe.emf.Reader">
+		<uri value="${ouranosProfileUri}" />
+		<modelSlot value="ouranosProfile" />
 	</component>
 
 	<component class="oaw.xtend.XtendComponent">
-		<metaModel idRef="cwm" />
-		<metaModel id="uml2"
-			class="oaw.uml2.UML2MetaModel" />
-		<metaModel id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
-			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
-		</metaModel>
-		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfile)" />
-		<outputSlot value="uml2model" />
 		<globalVarDef name="basePath" value="'${basePath}'" />
+
+		<metaModel idRef="cwm" />
+		<metaModel idRef="uml2" />
+		<metaModel idRef="chronos" />
+		<metaModel idRef="ouranos" />
+
+		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfile, ouranosProfile)" />
+		<outputSlot value="uml2model" />
 	</component>
 
 	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
