@@ -4,8 +4,25 @@
 	<property name="propertyFile" value="${basePath}/cartridge/BrowserStatistics/workflow/statistics.properties" />
 	<property file="${propertyFile}" />
 
+	<property name="chronosProfileUri" value="${basePath}/metamodel/chronos.profile.uml"/>
+	<property name="ouranosProfileUri" value="${basePath}/metamodel/ouranos.profile.uml"/>
+
+	<!-- UML2 Setup -->
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
 
+	<!-- load metamodels -->
+	<bean id="uml2" class="oaw.uml2.UML2MetaModel" />
+	<bean id="cwm" class="org.openarchitectureware.xsd.XSDMetaModel">
+		<schemaFile value="metamodel/cwm.xsd" />
+	</bean>
+	<bean id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${chronosProfileUri}"/>
+	</bean>
+	<bean id="ouranos" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${ouranosProfileUri}"/>
+	</bean>
+
+	<!-- load model -->
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="${outputRelativePath}/uml-generated.uml"/>
 		<outputSlot value="uml2model"/>
@@ -14,13 +31,11 @@
 	<component class="oaw.xpand2.Generator" skipOnErrors="true">
 		<fileEncoding value="utf-8"/>
 		
-		<metaModel id="uml2"
-			class="oaw.uml2.UML2MetaModel" />
-		<metaModel id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
-			<profile value="http://cwm.nikostotz.de/chronos.profile.uml"/>
-		</metaModel>
+		<metaModel idRef="uml2" />
+		<metaModel idRef="chronos" />
+		<metaModel idRef="ouranos" />
+
 		<expand value="cartridge::BrowserStatistics::piechart::file FOR uml2model"/>
-		
 		<outlet path="${outputRelativePath}/piechart" />
 	</component>
 </workflow>
