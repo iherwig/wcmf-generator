@@ -96,7 +96,7 @@ chi.Login = function(config) {
 	    } ]
 	});
 
-	if (!Ext.isGecko3) {
+	if (!Ext.isGecko3 && !Ext.isChrome) {
 		this.form.add(new Ext.Panel( {
 		    cls : "chi-browserWarning",
 		    html : "<div>" + "<p class='nonLast'><b>Attention:</b> You're using an unsupported browser. If you continue, the application may behave strangely or work not at all.</p>"
