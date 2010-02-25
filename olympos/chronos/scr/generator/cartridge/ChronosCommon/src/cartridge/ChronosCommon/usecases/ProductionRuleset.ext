@@ -1,0 +1,12 @@
+import uml;
+import Chronos;
+import Ouranos;
+
+boolean isActivitySet(Ouranos::ProductionRuleset this):
+	false
+;
+
+List[uml::ActivityNode] getRulesetParents(Ouranos::ProductionRuleset this):
+	this.getRelationships().typeSelect(uml::Realization).source
+;
+

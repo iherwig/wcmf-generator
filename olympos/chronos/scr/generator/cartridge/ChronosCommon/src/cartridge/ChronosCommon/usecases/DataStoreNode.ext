@@ -1,0 +1,6 @@
+import uml;
+
+boolean isOutputChiObject(uml::DataStoreNode this):
+	this.incoming.source.outgoing.target.typeSelect(uml::FinalNode).size > 0
+;
+

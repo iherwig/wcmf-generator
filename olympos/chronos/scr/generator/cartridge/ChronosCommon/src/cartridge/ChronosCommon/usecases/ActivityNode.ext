@@ -1,0 +1,80 @@
+import uml;
+import Chronos;
+import Ouranos;
+
+extension common::util;
+
+boolean isNameNotEmpty(uml::ActivityNode this):
+	!this.name.isNullOrEmpty()
+;
+
+boolean isNameUniqueWithinActivity(uml::ActivityNode this):
+	this.activity.allOwnedElements().typeSelect(uml::ActivityNode).select(e|e.name == this.name).size == 1
+;
+
+boolean isAtMostOneProductionRuleset(uml::ActivityNode this):
+	this.getRelationships().typeSelect(uml::Realization).size <= 1
+;
+
+List[uml::DataStoreNode] getInputChiObjects(uml::ActivityNode this):
+	this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode)
+;
+
+Ouranos::ProductionRuleset getProductionRuleset(uml::ActivityNode this):
+	this.getRelationships().typeSelect(uml::Realization).target.first()
+;
+
+uml::ActivityNode getNextNode(uml::ActivityNode this):
+	this.getNextNodes().first()
+;
+
+List[uml::ActivityNode] getNextNodes(uml::ActivityNode this):
+	this.getNextEdges().target
+;
+
+uml::ActivityNode getPreviousNode(uml::ActivityNode this):
+	this.getPreviousNodes().first()
+;
+
+List[uml::ActivityNode] getPreviousNodes(uml::ActivityNode this):
+	this.getPreviousEdges().source
+;
+
+List[uml::ActivityEdge] getPreviousEdges(uml::ActivityNode this):
+	{}
+		.addAll(this.incoming.typeSelect(uml::ControlFlow))
+		//Jump over one DataStore for flows like Action --> DataStore --> Action
+		.addAll(this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).incoming.typeSelect(uml::ObjectFlow))
+;
+
+List[uml::ActivityEdge] getNextEdges(uml::ActivityNode this):
+	this != null ? (
+		{}
+			.addAll(this.outgoing.typeSelect(uml::ControlFlow))
+			//Jump over one DataStore for flows like Action --> DataStore --> Action
+			.addAll(this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow))
+	) : (
+		{}
+	)
+;
+
+List[uml::ActivityNode] getConsecutiveWithSameProductionRuleset(uml::ActivityNode this):
+	{}
+		.add(this)
+		.addAll(this.getPreviousWithSameProductionRuleset())
+		.addAll(this.getNextWithSameProductionRuleset())
+		.toSet()
+;
+
+List[uml::ActivityNode] getPreviousWithSameProductionRuleset(uml::ActivityNode this):
+	{}
+		.add(this)
+		.addAll(this.getPreviousNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getPreviousWithSameProductionRuleset())
+;
+
+List[uml::ActivityNode] getNextWithSameProductionRuleset(uml::ActivityNode this):
+	{}
+		.add(this)
+		.addAll(this.getNextNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getNextWithSameProductionRuleset())
+;
+

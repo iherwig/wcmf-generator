@@ -1,0 +1,28 @@
+import uml;
+import Chronos;
+import Ouranos;
+
+boolean isActivitySet(uml::Activity this):
+	this.getAppliedStereotypes().size == 0
+;
+
+List[uml::DataStoreNode] getInputVariables(uml::Activity this):
+	this.getFirstNode().incoming.typeSelect(uml::ObjectFlow).source
+;
+
+List[uml::DataStoreNode] getOutputVariables(uml::Activity this):
+	this.getLastNodes().outgoing.typeSelect(uml::ObjectFlow).target
+;
+
+uml::ActivityNode getFirstNode(uml::Activity this):
+	this.getInitialNode().outgoing.typeSelect(uml::ControlFlow).target.first()
+;
+
+List[uml::ActivityNode] getLastNodes(uml::Activity this):
+	this.node.typeSelect(uml::FinalNode).first().incoming.typeSelect(uml::ControlFlow).source
+;
+
+uml::ActivityNode getLastNode(uml::Activity this):
+	this.getLastNodes().first()
+;
+
