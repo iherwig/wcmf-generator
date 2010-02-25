@@ -788,8 +788,86 @@
         </script>
 
         <!--End include CWM-->
+        <!--Start include CWB-->
+		<link type="text/css" rel="stylesheet" href="../Browser/css/browser.css" />
+		<link type="text/css" rel="stylesheet" href="../Browser/css/Treemap.css" />
+		<link type="text/css" rel="stylesheet" href="../Browser/css/spacetree.css" /> 
+
+		<script type="text/javascript" src="../ChronosLib/JIT/mootools-1.2.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/JIT/Treemap.js" >
+		</script>
+		<script type="text/javascript" src="../ChronosLib/JIT/Spacetree.js" >
+		</script>
+		<script type="text/javascript" src="../Browser/lib/ofc/js/swfobject.js">
+		</script>
+
+        <script type="text/javascript" src="../Browser/js/cwb/Cwb.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/Constants.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/Util.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/Session.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/Config.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/Dict.js">
+        </script>
+		<script type="text/javascript" src="../Browser/js/cwb/ObjectContainer.class.js">
+        </script>
+		<script type="text/javascript" src="../Browser/js/cwb/ObjectsListGrid.class.js">
+        </script>
+		<script type="text/javascript" src="../Browser/js/cwb/ObjectsListProxy.class.js">
+        </script>
+
+        <script type="text/javascript" src="../Browser/js/cwb/persistency/Persistency.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/persistency/Json.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/persistency/ActionSet.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/persistency/LongTask.class.js">
+        </script>
+        
+        <script type="text/javascript" src="../Browser/js/cwb/ui/ModelChooser.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/ui/DiagramPanel.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/ui/LastEditedGrid.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/ui/LastEditedProxy.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/ui/StructureTabPanel.class.js">
+        </script>
+		<script type="text/javascript" src="../Browser/js/cwb/ui/Treemap.class.js" >
+		</script>
+		<script type="text/javascript" src="../Browser/js/cwb/ui/Spacetree.class.js" >
+		</script>
+        <script type="text/javascript" src="../Browser/js/cwb/ui/Workbench.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/ui/Login.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/ui/LongTaskRunner.class.js">
+        </script>
+
+        <script type="text/javascript" src="../Browser/js/cwb/statistics/OverviewProxy.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/statistics/Overview.class.js">
+        </script>
+        <script type="text/javascript" src="../Browser/js/cwb/statistics/HitsGrid.class.js">
+        </script>
+		<script type="text/javascript" src="../Browser/js/cwb/statistics/HitsProxy.class.js">
+        </script>
+        <!--End include CWB-->
         <script type="text/javascript">
             Ext.onReady(function() {
+                // integrate CWB into tab panel
+            	Ext.extend(cwb.ui.Workbench, Ext.Panel, {
+                	showMask: cwb.ui.Workbench.prototype.showMask
+            	});
+            	cwb.Config.baseHref = "../Browser/";
+            	
             	Ext.BLANK_IMAGE_URL = "img/s.gif";
             	Ext.QuickTips.init();
             	uwm.Uwm.getInstance().startApplication();

@@ -38,7 +38,7 @@ uwm.property.StaticComboBox = function(config) {
 				name: "val",
 				mapping: "val"
 			}],
-			data: config.data
+			data: config.data || []
 		}),
 		displayField: 'val',
 		valueField: 'key',
