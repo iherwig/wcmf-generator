@@ -1,0 +1,20 @@
+import uml;
+
+extension cartridge::ChronosCommon::usecases::ActivityNode;
+
+List[uml::ActivityEdge] getFlowStates(uml::DecisionNode this):
+	this.getNextEdges()
+;
+
+boolean isLoop(uml::DecisionNode this):
+	this.outgoing.select(e|e.name == "LoopStart").size > 0
+;
+
+uml::OpaqueAction getLoopPredecessor(uml::DecisionNode this):
+	this.incoming.selectFirst(e|e.name != "LoopContinue").source
+;
+
+uml::OpaqueAction getLoopStart(uml::DecisionNode this):
+	this.outgoing.selectFirst(e|e.name == "LoopStart").target
+;
+

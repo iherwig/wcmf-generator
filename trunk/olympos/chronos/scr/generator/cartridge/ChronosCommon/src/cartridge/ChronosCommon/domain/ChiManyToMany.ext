@@ -1,0 +1,22 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension cartridge::ChronosCommon::domain::ChiNode;
+
+String STEREOTYPE_CHI_MANY_TO_MANY() : "Chronos::ChiManyToMany";
+
+/**
+ * Set the primary key tagged value
+ */
+Void setPKName(ChiManyToMany this, String name) :
+	this.setTaggedValue(STEREOTYPE_CHI_MANY_TO_MANY(), "pk_name", name)
+;
+
+List[uml::Property] getOtherEnd(Chronos::ChiManyToMany this, Chronos::ChiNode sourceNode, boolean includeAbstract):
+	let result = this.getParentNodes().select(e|(!((Chronos::ChiNode) e.type).isAbstract || includeAbstract) && sourceNode.isAtOtherNmEnd((Chronos::ChiNode) e.type, this) && e.type != sourceNode):
+	result.setUpper(-1) ->
+	
+	result
+;
