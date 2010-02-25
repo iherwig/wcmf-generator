@@ -5,6 +5,7 @@
 	<projects>
 		<project>generator</project>
 		<project>generator.cartridge.ChiCmf</project>
+		<project>generator.cartridge.ChronosCommon</project>
 		<project>generator.cartridge.UmlConnector</project>
 	</projects>
 	<buildSpec>

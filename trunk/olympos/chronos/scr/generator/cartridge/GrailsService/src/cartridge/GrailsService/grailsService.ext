@@ -4,6 +4,11 @@ import Chronos;
 extension common::util;
 extension common::nameNormalizer;
 
+extension cartridge::ChronosCommon::usecases::Activity;
+extension cartridge::ChronosCommon::usecases::ActivityNode;
+extension cartridge::ChronosCommon::usecases::ProductionRuleset;
+extension cartridge::ChronosCommon::usecases::DecisionNode;
+
 String asClassName(uml::Activity this):
 	this.name.normalizeClassName() + "Service"
 ;
@@ -51,32 +56,12 @@ uml::InitialNode getInitialNode(uml::Activity this):
 	this.node.typeSelect(uml::InitialNode).first()
 ;
 
-List[uml::DataStoreNode] getInputVariables(uml::Activity this):
-	this.getFirstNode().incoming.typeSelect(uml::ObjectFlow).source
-;
-
-List[uml::DataStoreNode] getOutputVariables(uml::Activity this):
-	this.getLastNodes().outgoing.typeSelect(uml::ObjectFlow).target
-;
-
 uml::DataStoreNode getInputVariable(uml::Activity this):
 	this.getInputVariables().first()
 ;
 
 uml::DataStoreNode getOutputVariable(uml::Activity this):
 	this.getOutputVariables().first()
-;
-
-uml::ActivityNode getFirstNode(uml::Activity this):
-	this.getInitialNode().outgoing.typeSelect(uml::ControlFlow).target.first()
-;
-
-List[uml::ActivityNode] getLastNodes(uml::Activity this):
-	this.node.typeSelect(uml::FinalNode).first().incoming.typeSelect(uml::ControlFlow).source
-;
-
-uml::ActivityNode getLastNode(uml::Activity this):
-	this.getLastNodes().first()
 ;
 
 List[uml::ActivityNode] getMethodNodes(uml::Activity this):
@@ -156,14 +141,6 @@ String asFullRuleFilePath(Ouranos::ProductionRuleset this):
 	this.getActivity().asClassName() + "/" + this.asRuleFileName() + ".irl"
 ;
 
-uml::ActivityNode getNextNode(uml::ActivityNode this):
-	this.getNextNodes().first()
-;
-
-List[uml::ActivityNode] getNextNodes(uml::ActivityNode this):
-	this.getNextEdges().target
-;
-
 cached List[uml::ActivityNode] getAllNextNodes(uml::ActivityNode this, List[uml::ActivityNode] stoppers):
 	this.getAllNextNodesInternal({}, stoppers)
 ;
@@ -177,36 +154,6 @@ private List[uml::ActivityNode] getAllNextNodesInternal(uml::ActivityNode this, 
 	) ->
 	
 	list
-;
-
-List[uml::ActivityEdge] getNextEdges(uml::ActivityNode this):
-	this != null ? (
-		{}
-			.addAll(this.outgoing.typeSelect(uml::ControlFlow))
-			//Jump over one DataStore for flows like Action --> DataStore --> Action
-			.addAll(this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow))
-	) : (
-		{}
-	)
-;
-
-uml::ActivityNode getPreviousNode(uml::ActivityNode this):
-	this.getPreviousNodes().first()
-;
-
-List[uml::ActivityNode] getPreviousNodes(uml::ActivityNode this):
-	this.getPreviousEdges().source
-;
-
-List[uml::ActivityEdge] getPreviousEdges(uml::ActivityNode this):
-	{}
-		.addAll(this.incoming.typeSelect(uml::ControlFlow))
-		//Jump over one DataStore for flows like Action --> DataStore --> Action
-		.addAll(this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).incoming.typeSelect(uml::ObjectFlow))
-;
-
-List[uml::ActivityEdge] getFlowStates(uml::DecisionNode this):
-	this.getNextEdges()
 ;
 
 String asFlowName(uml::ActivityEdge this):
@@ -229,30 +176,6 @@ boolean isAlreadyProcessed(uml::ActivityNode this):
 	result
 ;
 
-Ouranos::ProductionRuleset getProductionRuleset(uml::ActivityNode this):
-	this.getRelationships().typeSelect(uml::Realization).target.first()
-;
-
-List[uml::ActivityNode] getRulesetParents(Ouranos::ProductionRuleset this):
-	this.getRelationships().typeSelect(uml::Realization).source
-;
-
-List[uml::DataStoreNode] getInputChiObjects(uml::ActivityNode this):
-	this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode)
-;
-
-boolean isLoop(uml::DecisionNode this):
-	this.outgoing.select(e|e.name == "LoopStart").size > 0
-;
-
-uml::OpaqueAction getLoopPredecessor(uml::DecisionNode this):
-	this.incoming.selectFirst(e|e.name != "LoopContinue").source
-;
-
-uml::OpaqueAction getLoopStart(uml::DecisionNode this):
-	this.outgoing.selectFirst(e|e.name == "LoopStart").target
-;
-
 List[uml::ActivityNode] getLastNodes(Ouranos::ProductionRuleset this):
 	this.getRulesetParents().select(e|e.getNextNode().getProductionRuleset() != this)
 ;
@@ -273,34 +196,6 @@ List[uml::ActivityEdge] getFlowStates(Ouranos::ProductionRuleset this):
 	) : (
 		{}
 	)
-;
-
-List[uml::ActivityNode] getConsecutiveWithSameProductionRuleset(uml::ActivityNode this):
-	{}
-		.add(this)
-		.addAll(this.getPreviousWithSameProductionRuleset())
-		.addAll(this.getNextWithSameProductionRuleset())
-		.toSet()
-;
-
-List[uml::ActivityNode] getPreviousWithSameProductionRuleset(uml::ActivityNode this):
-	{}
-		.add(this)
-		.addAll(this.getPreviousNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getPreviousWithSameProductionRuleset())
-;
-
-List[uml::ActivityNode] getNextWithSameProductionRuleset(uml::ActivityNode this):
-	{}
-		.add(this)
-		.addAll(this.getNextNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getNextWithSameProductionRuleset())
-;
-
-boolean isActivitySet(uml::Activity this):
-	this.getAppliedStereotypes().size == 0
-;
-
-boolean isActivitySet(Ouranos::ProductionRuleset this):
-	false
 ;
 
 List[uml::DecisionNode] getDecisionsWithSelection(uml::Activity this):

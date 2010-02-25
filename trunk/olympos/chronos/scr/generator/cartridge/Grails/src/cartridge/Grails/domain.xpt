@@ -7,7 +7,7 @@
 «EXTENSION common::nameNormalizer»
 «EXTENSION common::cim»
 
-«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 «EXTENSION cartridge::Grails::classtools»
 

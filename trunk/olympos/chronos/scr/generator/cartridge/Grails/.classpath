@@ -7,5 +7,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/generator"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/generator.cartridge.UmlConnector"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/generator.cartridge.ChiCmf"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/generator.cartridge.ChronosCommon"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
