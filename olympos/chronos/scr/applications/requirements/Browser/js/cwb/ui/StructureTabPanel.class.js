@@ -22,6 +22,9 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 	initComponent : function() {
 		
 		var self = this;
+
+		this.packageWeight = new cwb.ui.Treemap();
+		this.packageTree = new cwb.ui.Spacetree();
 		
 		/**
 		 * Tab containing treemap (package weight).
@@ -29,7 +32,7 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		this.weightPanel = new Ext.Panel( {
 		    title : cwb.Dict.translate('Package weight'),
 		    tabTip : cwb.Dict.translate('Left-click to enter a package or object, right-click to leave it.'),
-		    html : '<iframe id="' + cwb.ui.StructureTabPanel.WEIGHT_ID + '" style="height: 100%;width:100%;"/>'
+		    html : '<div id="' + cwb.ui.StructureTabPanel.WEIGHT_ID + '" style="height: 100%;width:100%;"></div>'
 		});
 		
 		/**
@@ -38,13 +41,8 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		this.treePanel = new Ext.Panel( {
 		    title : cwb.Dict.translate('Package tree'),
 		    tabTip : cwb.Dict.translate('Click on an object to see its children.'),
-		    cls : "cwb-treePanel",
-		    listeners : {
-			    render : function(self) {
-				    self.getEl().dom.innerHTML = "<div id='" + cwb.ui.StructureTabPanel.PACKAGE_ID + "' style='overflow: auto; width: 100%; height: 100%;'></div>";
-				    init();
-			    }
-		    }
+		    html : '<div id="' + cwb.ui.StructureTabPanel.PACKAGE_ID + '" style="overflow: auto; width: 100%; height: 100%;"></div>',
+		    cls : "cwb-treePanel"
 		});
 		
 		this.lastEditedPanel = new cwb.ui.LastEditedGrid( {});
@@ -106,15 +104,12 @@ cwb.ui.StructureTabPanel.prototype.removeHitsGrid = function(hitsGrid) {
 }
 
 cwb.ui.StructureTabPanel.prototype.showDiagrams = function() {
-	/**
-	 * Reloads treemap window.
-	 */
+
 	cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
-	Ext.get(cwb.ui.StructureTabPanel.WEIGHT_ID).dom.contentWindow.location = "html/Treemap.html";
+	cwb.Util.showDiv(cwb.ui.StructureTabPanel.PACKAGE_ID);
 	
-	cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
-	
-	start();
+	this.packageWeight.show();
+	this.packageTree.show();
 }
 
 cwb.ui.StructureTabPanel.prototype.createHitsGrid = function(id, tabTitle, tabContentOids) {

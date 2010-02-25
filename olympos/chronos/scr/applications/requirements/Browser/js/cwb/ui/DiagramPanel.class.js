@@ -115,8 +115,8 @@ cwb.ui.DiagramPanel.prototype.clear = function() {
 }
 
 cwb.ui.DiagramPanel.prototype.showFlash = function(divId, action, modelId) {
-	swfobject.embedSWF("lib/ofc/open-flash-chart.swf", divId, "100%", "100%", "9.0.0", "expressInstall.swf", {
-		"data-file" : "../application/main.php?usr_action=" + action + "&response_format=JSON&modelOid=" + encodeURI(modelId)
+	swfobject.embedSWF(cwb.Config.baseHref+"lib/ofc/open-flash-chart.swf", divId, "100%", "100%", "9.0.0", "expressInstall.swf", {
+		"data-file" : cwb.Config.jsonUrl+"?usr_action=" + action + "&response_format=JSON&modelOid=" + encodeURI(modelId)
 	}, {
 		"wmode" : "transparent"
 	});

@@ -35,30 +35,32 @@ cwb.ObjectsListProxy.prototype.loadResponse = function(options, data, callback, 
 		var currNode = data.list[currIndex];
 		
 		if (!(currNode instanceof Function)) {
-			var tempData = [];
-			
-			tempData.uwmClassName = currNode.type;
-			
-			for ( var currValueIndex in currNode.values[1]) {
-				var currValue = currNode.values[1][currValueIndex];
+			if (currNode.type) {
+
+				var tempData = [];
+				tempData.uwmClassName = currNode.type;
 				
-				if (!(currValue instanceof Function)) {
-					tempData[currValueIndex] = currValue;
+				for ( var currValueIndex in currNode.values[1]) {
+					var currValue = currNode.values[1][currValueIndex];
 					
-					var columnExists = false;
-					for ( var j = 0; j < this.columns.length; j++) {
-						if (this.columns[j] == currValueIndex) {
-							columnExists = true;
-							break;
+					if (!(currValue instanceof Function)) {
+						tempData[currValueIndex] = currValue;
+						
+						var columnExists = false;
+						for ( var j = 0; j < this.columns.length; j++) {
+							if (this.columns[j] == currValueIndex) {
+								columnExists = true;
+								break;
+							}
+						}
+						if (!(columnExists)) {
+							this.columns.push(currValueIndex);
 						}
 					}
-					if (!(columnExists)) {
-						this.columns.push(currValueIndex);
-					}
 				}
+				
+				this.record.push(new Ext.data.Record(tempData));
 			}
-			
-			this.record.push(new Ext.data.Record(tempData));
 		}
 	}
 	

@@ -46,5 +46,5 @@ cwb.ObjectsListGrid.prototype.setColumns = function(columns) {
 }
 
 cwb.ObjectsListGrid.prototype.iconRenderer = function(uwmClassName) {
-	return "<img src='img/icons/" + uwmClassName + ".png' width='16' height='16' title='" + uwmClassName + "' />";
+	return "<img src='"+cwb.Config.baseHref+"img/icons/" + uwmClassName + ".png' width='16' height='16' title='" + uwmClassName + "' />";
 }
