@@ -1,0 +1,33 @@
+import uml;
+import Chronos;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::ChiCmf::extensions::util;
+extension cartridge::ChiCmf::extensions::globals;
+extension cartridge::ChiCmf::extensions::naming;
+
+extension cartridge::ChronosCommon::domain::ChiValueRef;
+
+/**
+ * Check if referenced type exists
+ */
+/*
+commented out becaus of missing reference_type
+context ChiValueRef ERROR
+	"Type '"+this.reference_type+"' referenced in '"+this.getOwningClass().name+"' not found or not related as parent/child." :
+	this.getReferencedNode() != null
+;
+
+/**
+ * Check if the referenced value exists in the referenced type
+ */
+/*
+commented out becaus of missing reference_type
+context ChiValueRef ERROR
+	"Value '"+this.reference_value+"' referenced in '"+this.getOwningClass().name+"' not found in type '"+this.reference_type+"'" :
+	//only check if node exists 
+	this.getReferencedNode() == null || this.getReferencedValue() != null
+;
+*/

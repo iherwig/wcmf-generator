@@ -1,0 +1,6 @@
+import uml;
+
+context uml::Package ERROR
+	"Package name may not be NULL or empty: Parent Package " + ((uml::Package) this.owner).name:
+	this.name != null && ((String) this.name).length > 0
+;

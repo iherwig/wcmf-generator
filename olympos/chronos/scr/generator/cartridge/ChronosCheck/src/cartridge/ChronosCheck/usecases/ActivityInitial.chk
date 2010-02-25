@@ -1,0 +1,11 @@
+import Chronos;
+import Ouranos;
+import uml;
+
+extension common::util;
+extension common::umlutils;
+
+context uml::InitialNode ERROR
+	"ActivityIntial must have at least one outgoing arrow: " + this.fullQualifiedName():
+	this.outgoing.size >= 1
+;

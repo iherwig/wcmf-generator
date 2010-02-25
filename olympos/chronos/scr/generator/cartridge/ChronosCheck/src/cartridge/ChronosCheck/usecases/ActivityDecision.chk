@@ -1,0 +1,80 @@
+import Chronos;
+import Ouranos;
+import uml;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::ChronosCommon::usecases::ActivityNode;
+extension cartridge::ChronosCommon::usecases::DecisionNode;
+extension cartridge::ChronosCommon::usecases::ProductionRuleset;
+
+context uml::DecisionNode ERROR
+	"ActivityDecision must have a non-empty name: " + this.fullQualifiedName():
+	this.isNameNotEmpty()
+;
+
+context uml::DecisionNode ERROR
+	"ActivityDecision must have a unique name within its ActivitySet: " + this.fullQualifiedName():
+	this.isNameUniqueWithinActivity()
+;
+
+context uml::DecisionNode ERROR
+	"ActivityDecision must have at least one incoming and two outgoing arrows: " + this.fullQualifiedName():
+	this.incoming.size >= 1 && this.outgoing.size >= 2
+;
+
+context uml::DecisionNode ERROR
+	"All arrows exiting from an ActivityDecision must have unique names: " + this.fullQualifiedName():
+	this.getFlowStates().select(e|this.getFlowStates().select(f|e.name == f.name).size != 1).size == 0
+;
+
+context uml::DecisionNode ERROR
+	"ActivityDecision must have at most one ProductionRuleSet:" + this.fullQualifiedName():
+	this.isAtMostOneProductionRuleset()
+;
+
+context uml::DecisionNode if this.getProductionRuleset() == null ERROR
+	"An ActivityDecision with no ProductionRuleSet must be preceded by an Activity: " + this.fullQualifiedName():
+	uml::OpaqueAction.isInstance(this.getPreviousNode())
+;
+
+context uml::DecisionNode if this.getProductionRuleset() != null ERROR
+	"All ActivityDecision associated with the same ProductionRuleSet must be consecutive: " + this.fullQualifiedName():
+	this.getProductionRuleset().getRulesetParents().containsAll(this.getConsecutiveWithSameProductionRuleset())	
+;
+
+context uml::DecisionNode if this.getProductionRuleset() != null ERROR
+	"At most one ActivityDecision may be associated with the same ProductionRuleSet: " + this.fullQualifiedName():
+	this.getProductionRuleset().getRulesetParents().typeSelect(uml::DecisionNode).size == 1
+;
+
+context uml::DecisionNode if this.isLoop() ERROR
+	"Loop type ActivityDecision must have at least one incoming LoopContinue and exactly one outgoing LoopStart arrow: " + this.fullQualifiedName():
+	this.incoming.select(e|e.name == "LoopContinue").size >= 1
+	&& this.outgoing.select(e|e.name == "LoopStart").size == 1
+;
+
+context uml::DecisionNode if this.isLoop() ERROR
+	"Loop type ActivityDecision must have the following predecessors: Activity('get list') -> ChiObject('list') -> Activity('evaluate list') -> ActivityDecision: " + this.fullQualifiedName():
+	uml::OpaqueAction.isInstance(this.getLoopPredecessor())
+	&& uml::DataStoreNode.isInstance(this.getLoopPredecessor().incoming.source.first())
+	&& uml::OpaqueAction.isInstance(this.getLoopPredecessor().incoming.source.incoming.source.first())
+;
+
+context uml::DecisionNode if this.isLoop() ERROR
+	"Loop type ActivityDecision must have the following successors: ActivityDecision -> Activity('get list element') -> ChiObject('list element'): " + this.fullQualifiedName():
+	uml::OpaqueAction.isInstance(this.getLoopStart())
+	&& uml::DataStoreNode.isInstance(this.getLoopStart().outgoing.target.first())
+;
+
+context uml::DecisionNode if this.isLoop() ERROR
+	"Loop type ActivityDecision must be in same ProductionRuleSet as its required predecessors and successors: Activity('get list') -> ChiObject('list') -> Activity('evaluate list') -> ActivityDecision -> Activity('get list element'): " + this.fullQualifiedName():
+	let rulesets = ((List[uml::ActivityNode]) {}
+		.add(this.getLoopPredecessor())
+		.add(this.getLoopPredecessor().getPreviousNode())
+		.add(this.getLoopStart()))
+		
+		.getProductionRuleset().toSet():
+	rulesets.size == 1 && rulesets.toList().first() == this.getProductionRuleset() && rulesets.toList().first() != null
+;

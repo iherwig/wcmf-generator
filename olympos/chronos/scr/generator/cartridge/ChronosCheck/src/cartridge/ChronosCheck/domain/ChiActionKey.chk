@@ -1,0 +1,19 @@
+import uml;
+import Chronos;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::ChiCmf::extensions::util;
+extension cartridge::ChiCmf::extensions::globals;
+extension cartridge::ChiCmf::extensions::naming;
+
+extension cartridge::ChronosCommon::domain::ChiActionKey;
+
+/**
+ * ActionKey checks
+ */
+context ChiActionKey ERROR
+	"Association '"+this.name+"' between '"+this.getSourceController().name+"' and '"+this.getTargetController().name+"' has an empty config tag" :
+	!this.config.isNullOrEmpty()
+;

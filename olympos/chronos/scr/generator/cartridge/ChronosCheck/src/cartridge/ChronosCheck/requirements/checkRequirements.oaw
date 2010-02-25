@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+	<!--
+	required specific parameters:
+	
+	* basePath - Path to root of cartridges
+	
+	* uml2 - Reference to UML2 metamodel
+	* Chronos - Reference to Chronos metamodel
+	* Ouranos - Reference to Ouranos metamodel
+	
+	* modelToCheck - Name of slot of model to check
+
+	additionally, several configurable properties may be required.
+	-->
+	
+	<component class="org.openarchitectureware.check.CheckComponent">
+		<metaModel idRef="Chronos"/>
+		<metaModel idRef="uml2"/>
+
+		<checkFile value="cartridge::ChronosCheck::requirements::ChiFeature"/>
+		<checkFile value="cartridge::ChronosCheck::requirements::ChiGoal"/>
+		<checkFile value="cartridge::ChronosCheck::requirements::ChiIssue"/>
+		<checkFile value="cartridge::ChronosCheck::requirements::ChiRequirement"/>
+
+		<emfAllChildrenSlot value="${modelToCheck}"/>		
+	</component>
+</workflow>
