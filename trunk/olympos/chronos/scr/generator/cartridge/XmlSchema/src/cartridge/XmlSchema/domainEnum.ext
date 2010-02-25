@@ -1,0 +1,35 @@
+import uml;
+import xmlSchema;
+
+extension org::openarchitectureware::xsd::lib::qname;
+
+extension common::util;
+
+xmlSchema::TopLevelSimpleType convertToXsd(uml::Enumeration this, String targetNamespace):
+	//(new xmlSchema::TopLevelSimpleType).r
+
+	let result = new xmlSchema::TopLevelSimpleType:
+	let restriction = new xmlSchema::RestrictionType1:
+	
+	info("Converting Enumeration " + this.name) ->
+	
+	result.setName(this.name) ->
+	
+	restriction.setBase(parseToQName("XMLSchema:string")) ->
+	restriction.enumeration.addAll(this.ownedLiteral.convertToXsd()) ->
+	result.setRestriction(restriction) ->
+	
+	result
+;
+
+xmlSchema::NoFixedFacet convertToXsd(uml::EnumerationLiteral this):
+	//(new xmlSchema::NoFixedFacet).s
+
+	let result = new xmlSchema::NoFixedFacet:
+	
+	info("	Converting EnumerationLiteral " + this.name) ->
+	
+	result.setValue(this.name) ->
+	
+	result
+;

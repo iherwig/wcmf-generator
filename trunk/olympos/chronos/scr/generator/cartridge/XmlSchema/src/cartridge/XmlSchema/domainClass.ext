@@ -1,0 +1,81 @@
+import uml;
+import xmlSchema;
+
+extension org::openarchitectureware::xsd::lib::qname;
+
+extension common::util;
+
+extension cartridge::XmlSchema::common;
+
+xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamespace):
+	//(new xmlSchema::TopLevelComplexType).sequence.e
+	//(new xmlSchema::ComplexContentType).exten
+
+	let result = new xmlSchema::TopLevelComplexType:
+	let sequence = new xmlSchema::ExplicitGroup:
+	
+	info("Converting Class " + this.name) ->
+	
+	result.setName(this.name) ->
+	result.setAbstract(this.isAbstract) ->
+	
+	sequence.element.addAll(this.attribute.convertProperty(targetNamespace)) ->
+	
+	this.superClass.size > 0 ? (
+		let complex = new xmlSchema::ComplexContentType:
+		let ext = new xmlSchema::ExtensionType:
+		
+		ext.setBase(createQName(targetNamespace, this.superClass.first().name)) ->
+		ext.setSequence(sequence) ->
+		
+		complex.setExtension(ext) ->
+		
+		result.setComplexContent(complex)
+	) : (
+		result.setSequence(sequence)
+	) -> 
+	
+	result
+;
+
+xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespace):
+	//(new xmlSchema::LocalElement).t
+	
+	let result = new xmlSchema::LocalElement:
+	
+	info("	Converting Property " + this.name) ->
+	
+	result.setMinOccurs(this.getLower()) ->
+	result.setMaxOccurs(this.getUpper() != -1 ? this.getUpper() : parseToQName("unbounded")) ->
+	result.setName(this.nameOrType()) ->
+	result.setType(this.type.sanitizeXsdTypes(targetNamespace)) ->
+	
+	result
+;
+
+xmlSchema::QName sanitizeXsdTypes(uml::Type this, String targetNamespace):
+	let result = switch(this.name.toLowerCase()) {
+		case "string": "XMLSchema:string"
+		case "integer": "XMLSchema:int"
+		case "long": "XMLSchema:long"
+		case "boolean": "XMLSchema:boolean"
+		case "bool": "XMLSchema:boolean"
+		case "float": "XMLSchema:float"
+		case null: "XMLSchema:anyType"
+		default: null
+	}:
+	
+	result == null ? (
+		createQName(targetNamespace, this.name)
+	) : (
+		parseToQName(result)
+	)
+;
+
+String nameOrType(uml::Property this):
+	!this.name.isNullOrEmpty() ? (
+		this.name
+	) : (
+		this.type.name.toFirstLower()
+	)
+;

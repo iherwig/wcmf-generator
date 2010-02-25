@@ -1,0 +1,33 @@
+<workflow>
+	<!-- metamodel setup -->
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<bean id="uml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
+	
+	<bean id="Chronos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
+		<profile value="/home/nist/Desktop/meregio-ea/chronos.profile.uml"/>
+	</bean>
+	
+	<bean id="xmlSchema" class="org.openarchitectureware.xsd.XSDMetaModel">
+		<schemaFile value="${basePath}/metamodel/XMLSchema.xsd" />
+	</bean>
+	
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="/home/nist/Desktop/meregio-ea/meregio-part.uml" />
+		<outputSlot value="localModel" />
+	</component>
+	
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="uml2" />
+		<metaModel idRef="xmlSchema" /> 
+
+		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, 'IdentifiedObject', 'http://com.ibm.eenergy/cim')" />
+		<outputSlot value="schema" />
+	</component>
+
+	<component class="org.openarchitectureware.xsd.XMLWriter">
+		<metaModel idRef="xmlSchema" />
+		<modelSlot value="schema" />
+		<uri value="target/schema.xsd" />
+	</component>
+</workflow>

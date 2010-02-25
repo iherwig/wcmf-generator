@@ -1,0 +1,34 @@
+import uml;
+import xmlSchema;
+
+extension org::openarchitectureware::xsd::lib::qname;
+
+extension common::cimUml;
+
+extension cartridge::XmlSchema::domainClass;
+extension cartridge::XmlSchema::domainEnum;
+
+xmlSchema::SchemaType xmlSchema(uml::Model this, String rootClassName, String targetNamespace):
+	//(new xmlSchema::SchemaType).a
+	//(new xmlSchema::TopLevelAttribute).setN
+
+	let xsd = new xmlSchema::SchemaType:
+
+	xsd.setTargetNamespace(targetNamespace) ->
+	
+	xsd.complexType.addAll(this.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().convertToXsd(targetNamespace)) ->
+	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::Enumeration).convertToXsd(targetNamespace)) ->
+	
+	xsd.element.add(getRootElement(rootClassName, targetNamespace)) ->
+		
+	xsd
+;
+
+xmlSchema::TopLevelElement getRootElement(String rootClassName, String targetNamespace):
+	let e = new xmlSchema::TopLevelElement:
+	
+	e.setName(rootClassName) ->
+	e.setType(createQName(targetNamespace, rootClassName)) ->
+	
+	e
+;
