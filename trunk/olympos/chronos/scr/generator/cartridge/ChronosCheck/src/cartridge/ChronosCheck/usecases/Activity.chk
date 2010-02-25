@@ -1,0 +1,34 @@
+import Chronos;
+import Ouranos;
+import uml;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::ChronosCommon::usecases::ActivityNode;
+
+//Activity
+context uml::OpaqueAction ERROR
+	"Activity must have a non-empty name: " + this.fullQualifiedName():
+	this.isNameNotEmpty()
+;
+
+context uml::OpaqueAction ERROR
+	"Activity must have a unique name within its ActivitySet: " + this.fullQualifiedName():
+	this.isNameUniqueWithinActivity()
+;
+
+context uml::OpaqueAction ERROR
+	"Activity must have at least one incoming and one outgoing arrow: " + this.fullQualifiedName():
+	this.incoming.size >= 1 && this.outgoing.size >= 1
+;
+
+context uml::OpaqueAction ERROR
+	"Activity must have at most one ProductionRuleSet: " + this.fullQualifiedName():
+	this.isAtMostOneProductionRuleset()
+;
+
+context uml::OpaqueAction if this.getProductionRuleset() != null ERROR
+	"All Activites associated with the same ProductionRuleSet must be consecutive: " + this.fullQualifiedName():
+	this.getProductionRuleset().getRelationships().typeSelect(uml::Realization).source.containsAll(this.getConsecutiveWithSameProductionRuleset())	
+;

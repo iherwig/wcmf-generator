@@ -1,0 +1,11 @@
+import Chronos;
+import Ouranos;
+import uml;
+
+extension common::util;
+extension common::umlutils;
+
+context uml::FinalNode ERROR
+	"ActivityFinal must have at least one incoming arrow: " + this.fullQualifiedName():
+	this.incoming.size >= 1
+;

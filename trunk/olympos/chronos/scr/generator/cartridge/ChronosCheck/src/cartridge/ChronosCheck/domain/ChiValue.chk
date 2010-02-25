@@ -1,0 +1,23 @@
+import uml;
+import Chronos;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::ChiCmf::extensions::util;
+extension cartridge::ChiCmf::extensions::globals;
+extension cartridge::ChiCmf::extensions::naming;
+
+/**
+ * Check for invalid names
+ */
+context ChiValue if ChiNode.isInstance(this.owner) ERROR
+	"Found not allowed value name '"+this.name+"' in class "+this.getOwningClass().name :
+	this.name.toLowerCase() != "type" && this.name.toLowerCase() != "state" &&  this.name.toLowerCase() != "oid" &&
+	this.name.toLowerCase() != "value" && this.name.toLowerCase() != "none" &&  this.name.toLowerCase() != "sortkey"
+;
+
+context uml::Property if this.owner.metaType == uml::Class && this.association == null ERROR
+	"Class attribute name may not be NULL or empty: Class " + ((uml::Class) this.owner).name:
+	this.name != null && ((String) this.name).length > 0
+;

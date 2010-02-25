@@ -1,0 +1,22 @@
+<workflow>
+	<!-- metamodel setup -->
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<bean id="uml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
+	
+	<bean id="Chronos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
+		<profile value="/home/nist/Desktop/meregio-ea/chronos.profile.uml"/>
+	</bean>
+	
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="/home/nist/Desktop/meregio-ea/meregio-part.uml" />
+		<outputSlot value="localModel" />
+	</component>
+	
+	<component file="cartridge/ChiCmf/checks/checkAll.oaw">
+		<uml2 idRef="uml2"/>
+		<Chronos idRef="Chronos"/>
+		<Ouranos idRef="Chronos"/>
+		<modelToCheck value="localModel"/>
+	</component>
+</workflow>

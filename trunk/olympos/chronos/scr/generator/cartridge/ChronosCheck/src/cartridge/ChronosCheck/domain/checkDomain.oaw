@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+	<!--
+	required specific parameters:
+	
+	* basePath - Path to root of cartridges
+	
+	* uml2 - Reference to UML2 metamodel
+	* Chronos - Reference to Chronos metamodel
+	
+	* modelToCheck - Name of slot of model to check
+
+	additionally, several configurable properties may be required.
+	-->
+	
+	<component class="org.openarchitectureware.check.CheckComponent">
+		<metaModel idRef="Chronos"/>
+		<metaModel idRef="uml2"/>
+
+		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+		<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
+		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+
+		<checkFile value="cartridge::ChronosCheck::domain::ChiNode"/>
+		<checkFile value="cartridge::ChronosCheck::domain::ChiValue"/>
+		<checkFile value="cartridge::ChronosCheck::domain::ChiValueRef"/>
+		<checkFile value="cartridge::ChronosCheck::domain::Operation"/>
+		<checkFile value="cartridge::ChronosCheck::domain::ChiController"/>
+		<checkFile value="cartridge::ChronosCheck::domain::ChiActionKey"/>
+		<checkFile value="cartridge::ChronosCheck::domain::ChiView"/>
+		<checkFile value="cartridge::ChronosCheck::domain::ChiManyToMany"/>
+		<checkFile value="cartridge::ChronosCheck::domain::ChiSystem"/>
+
+		<emfAllChildrenSlot value="${modelToCheck}"/>		
+	</component>
+</workflow>
