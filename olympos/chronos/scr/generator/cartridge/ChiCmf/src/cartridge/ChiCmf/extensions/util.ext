@@ -16,7 +16,6 @@ extension cartridge::ChiCmf::extensions::globals;
 String STEREOTYPE_CHI_NODE() : "Chronos::ChiNode";
 //Not used
 //String STEREOTYPE_CHI_VALUE() : "Chronos::ChiValue";
-String STEREOTYPE_CHI_MANY_TO_MANY() : "Chronos::ChiManyToMany";
 //TODO: Which Type?
 String STEREOTYPE_CHI_ASSOCIATION() : "Chronos::ChiAssociation";
 
@@ -87,3 +86,10 @@ Set[String] getConfigurationFiles(uml::Model this) :
  * Check if a configuation file is the default one
  */
 boolean isDefaultConfig(String config) : config == DefaultConfigFile();
+
+/**
+ * Get the primary key tagged value or default pk name if not set
+ */
+String getPKName(ChiManyToMany this) : 
+	this.pk_name == null || this.pk_name.length == 0 ? defaultPKName(this) : this.pk_name
+;

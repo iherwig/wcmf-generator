@@ -9,8 +9,8 @@
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 
-«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
-«EXTENSION cartridge::ChiCmf::extensions::ChiActionKey»
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiActionKey»
 
 «REM» This template expands the configuration files (*.ini) ------«ENDREM»
 

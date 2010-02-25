@@ -9,8 +9,8 @@
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 
-«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
-«EXTENSION cartridge::ChiCmf::extensions::ChiView»
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiView»
 
 «REM» This template expands the view files -----------------------«ENDREM»
 «DEFINE file FOR ChiView-»

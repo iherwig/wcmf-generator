@@ -11,10 +11,10 @@ extension cartridge::ChiCmf::extensions::naming;
 extension cartridge::ChiCmf::extensions::umlutils;
 extension cartridge::ChiCmf::extensions::util;
 
-extension cartridge::ChiCmf::extensions::ChiNode;
-extension cartridge::ChiCmf::extensions::ChiValue;
-extension cartridge::ChiCmf::extensions::ChiValueRef;
-extension cartridge::ChiCmf::extensions::ChiActionKey;
+extension cartridge::ChronosCommon::domain::ChiNode;
+extension cartridge::ChronosCommon::domain::ChiValue;
+extension cartridge::ChronosCommon::domain::ChiValueRef;
+extension cartridge::ChronosCommon::domain::ChiActionKey;
 
 /**
  * Model checks
@@ -75,18 +75,23 @@ context ChiValue if ChiNode.isInstance(this.owner) ERROR
 /**
  * Check if referenced type exists
  */
+/* 
 context ChiValueRef ERROR
 	"Type '"+this.reference_type+"' referenced in '"+this.getOwningClass().name+"' not found or not related as parent/child." :
 	this.getReferencedNode() != null
 ;
+*/
 
 /**
  * Check if the referenced value exists in the referenced type
  */
+/*
 context ChiValueRef ERROR
 	"Value '"+this.reference_value+"' referenced in '"+this.getOwningClass().name+"' not found in type '"+this.reference_type+"'" :
-	this.getReferencedNode() == null /*only check if node exists*/ || this.getReferencedValue() != null
+	//only check if node exists
+	this.getReferencedNode() == null || this.getReferencedValue() != null
 ;
+*/
     
 /**
  * Controller checks
