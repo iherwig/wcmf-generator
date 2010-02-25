@@ -1,0 +1,10 @@
+import uml;
+
+List[uml::Class] removeCommonClasses(List[uml::Class] this):
+	this.reject(e|
+		e.name == "String"
+		|| e.name == "Integer"
+		|| e.name == "Float"
+		|| e.name == "Boolean"
+	)
+;
