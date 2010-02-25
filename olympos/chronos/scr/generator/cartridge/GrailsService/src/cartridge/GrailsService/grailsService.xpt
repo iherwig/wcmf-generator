@@ -4,6 +4,11 @@
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
 
+«EXTENSION cartridge::ChronosCommon::usecases::Activity»
+«EXTENSION cartridge::ChronosCommon::usecases::ActivityNode»
+«EXTENSION cartridge::ChronosCommon::usecases::DecisionNode»
+«EXTENSION cartridge::ChronosCommon::usecases::ProductionRuleset»
+
 «EXTENSION cartridge::GrailsService::grailsService»
 
 «DEFINE root FOR uml::Model»

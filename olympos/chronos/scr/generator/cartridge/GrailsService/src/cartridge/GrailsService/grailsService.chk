@@ -7,6 +7,11 @@ extension org::openarchitectureware::uml2::profile::profiling;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCommon::usecases::Activity;
+extension cartridge::ChronosCommon::usecases::ActivityNode;
+extension cartridge::ChronosCommon::usecases::DecisionNode;
+extension cartridge::ChronosCommon::usecases::ProductionRuleset;
+
 extension cartridge::GrailsService::grailsService;
 
 //ActivitySet

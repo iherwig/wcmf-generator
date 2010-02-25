@@ -7,6 +7,9 @@ extension org::openarchitectureware::uml2::profile::profiling;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCommon::usecases::Activity;
+extension cartridge::ChronosCommon::usecases::ActivityNode;
+
 extension cartridge::GrailsService::grailsService;
 
 uml::Model applyProfiles(uml::Model this, uml::Profile chronosProfile, uml::Profile ouranosProfile):

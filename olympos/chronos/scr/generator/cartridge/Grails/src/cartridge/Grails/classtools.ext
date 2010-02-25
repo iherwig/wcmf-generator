@@ -4,7 +4,7 @@ import Chronos;
 extension common::util;
 extension common::umlutils;
 
-extension cartridge::ChiCmf::extensions::ChiNode;
+extension cartridge::ChronosCommon::domain::ChiNode;
 
 String getNameOfAssociationClass(Association assoc):
 	assoc.getFirstOfManyToMany().type.name.toFirstUpper() + "To" + assoc.getFirstOfManyToMany().getOtherEnd().type.name.toFirstUpper();
