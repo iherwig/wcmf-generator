@@ -421,9 +421,10 @@ cwb.ObjectContainer.prototype.setModelOid = function(modelOid){
  * Currently only shows dummy data.
  */
 cwb.ObjectContainer.prototype.loadReport = function(modelOid){
-	Workbench.getInstance().objectDataTable.reload(modelOid);
-	Workbench.getInstance().objectDataTable.getEl().unmask();
-	Workbench.getInstance().diagramPanel.getEl().unmask();
+	var objectDataTable = cwb.statistics.Overview.getInstance();
+	objectDataTable.reload(modelOid);
+	objectDataTable.getEl().unmask();
+	cwb.ui.DiagramPanel.getInstance().getEl().unmask();
 }
 
 /**

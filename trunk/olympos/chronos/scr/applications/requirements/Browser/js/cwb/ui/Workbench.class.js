@@ -21,32 +21,25 @@ cwb.ui.Workbench = function(config) {
 	
 	this.modelChooser = new cwb.ui.ModelChooser();
 	
-	/**
-	 * Panel containing two diagrams.
-	 */
-	this.diagramPanel = cwb.ui.DiagramPanel.getInstance();
-	
-	/**
-	 * TabPanel containing package weight, package tree and InfoGrid tabs
-	 */
-	this.structureTabPanel = cwb.ui.StructureTabPanel.getInstance();
-	
-	this.objectDataTable = cwb.statistics.Overview.getInstance();
-	
 	cwb.ui.Workbench.superclass.constructor.call(this, Ext.apply(this, {
 	    layout : "border",
 	    items : [ {
 	        region : 'west',
 	        width : 307,
 	        layout : 'border',
-	        items : [ this.modelChooser, this.objectDataTable ]
+	        items : [ 
+	                 this.modelChooser, 
+	                 cwb.statistics.Overview.getInstance()
+	        ]
 	    }, {
 	        region : 'center',
 	        layout : 'border',
-	        items : [ this.diagramPanel, this.structureTabPanel ]
+	        items : [ 
+				cwb.ui.DiagramPanel.getInstance(),
+				cwb.ui.StructureTabPanel.getInstance() 
+	        ]
 	    } ]
 	}));
-	
 }
 
 Ext.extend(cwb.ui.Workbench, Ext.Viewport);
@@ -83,8 +76,9 @@ cwb.ui.Workbench.prototype.addInformationTab = function(id, store, columnList) {
 	    columns : columnList,
 	    closable : true
 	});
-	this.structureTabPanel.add(newTab);
-	this.structureTabPanel.activate(newTab);
+	var structureTabPanel = cwb.ui.StructureTabPanel.getInstance()
+	structureTabPanel.add(newTab);
+	structureTabPanel.activate(newTab);
 	this.doLayout();
 }
 

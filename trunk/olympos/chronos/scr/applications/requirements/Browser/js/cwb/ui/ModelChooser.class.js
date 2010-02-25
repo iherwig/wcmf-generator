@@ -32,7 +32,9 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 		    valueField : "oid",
 		    editable : false,
 		    mode : "local",
-		    forceSelection : true,
+			// removed because it caused an exception, when calling 
+			// an undefined listener function in extjs: p.fireFn is undefined
+		    /*forceSelection : true,*/
 		    triggerAction : 'all',
 		    emptyText : cwb.Dict.translate('Select a model...'),
 		    selectOnFocus : true

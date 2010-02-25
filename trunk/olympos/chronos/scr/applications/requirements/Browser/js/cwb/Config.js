@@ -49,4 +49,13 @@ cwb.Config.defaultLogin = "admin";
  */
 cwb.Config.defaultPassword = "admin";
 
+/**
+ * The base location for resources like images and iframe content
+ * Set it to the path to this application, if the browser should be integrated 
+ * into another application
+ * 
+ * @type String
+ */
+cwb.Config.baseHref = "";
+
 cwb.Cwb.getInstance().processConfig();

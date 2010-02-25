@@ -1,49 +1,32 @@
-/**
- * Hand tool for scrolling
+/*
+ * Copyright (c) 2010 The Olympos Development Team.
  * 
- * @param {Event}
- *            e
+ * http://sourceforge.net/projects/olympos/
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
  */
-startDragScroll = function(e) {
-	this.scrolling = true;
-	this.oldPosition = e.screenY;
-	document.body.style.cursor = "pointer";
+
+Ext.namespace("cwb.ui");
+
+/**
+ * Spacetree containing the package tree
+ */
+cwb.ui.Spacetree = function() {
+	this.spacetreeCounter = 0;
+	this.spacetreeCanvas = 0;
 }
 
-dragScroll = function(e) {
-	if (this.scrolling) {
-		if (this.oldPosition) {
-			window.scrollBy(0, this.oldPosition - e.screenY);
-			this.oldPosition = e.screenY;
-		}
-	}
-}
-
-stopDragScroll = function(e) {
-	this.scrolling = false;
-	this.oldPosition = null;
-	document.body.style.cursor = "default";
-}
-
-init = function() {
-	if (cwb.ObjectContainer.getInstance().modelLoaded) {
-		start();
-	} else {
-		Ext.get(cwb.ui.StructureTabPanel.PACKAGE_ID).innerHTML = cwb.Dict.translate('Please select a model.');
-	}
-}
-
-var spacetreeCounter = 0;
-var spacetreeCanvas = null;
-
-function start() {
+cwb.ui.Spacetree.prototype.show = function() {
 	var json = cwb.ObjectContainer.getInstance().objectsForSpacetree;
-	// var json = ObjectContainer.getInstance().objectsForSpacetree;
 	
 	// Containers for fillStyle, strokeStyle and lineWith canvas properties.
 	var fStyle, sStyle, lineWidth;
 	// Create a new canvas instance.
-	spacetreeCanvas = spacetreeCanvas || new Canvas('mycanvas', {
+	this.spacetreeCanvas = this.spacetreeCanvas || new Canvas('mycanvas', {
 	    //Where to inject canvas. Any HTML container will do.
 	    'injectInto' : cwb.ui.StructureTabPanel.PACKAGE_ID,
 	    //Set width and height, default's to 200.
@@ -68,7 +51,8 @@ function start() {
 	cwb.Util.showDiv("mycanvas-label");
 	
 	// Create a new ST instance
-	var st = new ST(spacetreeCanvas, {
+	var self = this;
+	var st = new ST(this.spacetreeCanvas, {
 	    //Add an event handler to the node when creating it.
 	    onCreateLabel : function(label, node) {
 		    label.id = node.id;
@@ -82,7 +66,7 @@ function start() {
 	    },
 	    //Set color as selected if the node is selected.
 	    onBeforePlotNode : function(node) {
-		    var ctx = spacetreeCanvas.getCtx();
+		    var ctx = self.spacetreeCanvas.getCtx();
 		    fStyle = ctx.fillStyle;
 		    sStyle = ctx.strokeStyle;
 		    if (node.selected) {
@@ -92,13 +76,13 @@ function start() {
 	    },
 	    //Restore color.
 	    onAfterPlotNode : function(node) {
-		    var ctx = spacetreeCanvas.getCtx();
+		    var ctx = self.spacetreeCanvas.getCtx();
 		    ctx.fillStyle = fStyle;
 		    ctx.stroleStyle = sStyle;
 	    },
 	    //Set color as selected if the edge belongs to the path.
 	    onBeforePlotLine : function(adj) {
-		    var ctx = spacetreeCanvas.getCtx();
+		    var ctx = self.spacetreeCanvas.getCtx();
 		    lineWidth = ctx.lineWidth;
 		    sStyle = ctx.strokeStyle;
 		    if (adj.nodeFrom.selected && adj.nodeTo.selected) {
@@ -108,7 +92,7 @@ function start() {
 	    },
 	    //Restore color and line width
 	    onAfterPlotLine : function(adj) {
-		    var ctx = spacetreeCanvas.getCtx();
+		    var ctx = self.spacetreeCanvas.getCtx();
 		    ctx.lineWidth = lineWidth;
 		    ctx.stroleStyle = sStyle;
 	    },
@@ -124,7 +108,7 @@ function start() {
 	    
 	    loadFromDisplay : function(currNode) {
 		    var result = {
-		        id : currNode.oid + "_" + spacetreeCounter,
+		        id : currNode.oid + "_" + this.spacetreeCounter,
 		        name : currNode.values[1].Name,
 		        data : [ {
 		            key : 'content',
@@ -137,7 +121,7 @@ function start() {
 		        uwmClassName : currNode.type
 		    };
 		    
-		    spacetreeCounter++;
+		    this.spacetreeCounter++;
 		    
 		    for ( var currType in currNode) {
 			    var currTypeData = currNode[currType];

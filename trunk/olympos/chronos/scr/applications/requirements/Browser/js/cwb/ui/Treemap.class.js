@@ -1,19 +1,32 @@
-init = function() {
-	document.getElementById("infovis").style.width = (window.innerWidth - 80) + "px";
-	document.getElementById("infovis").style.height = (window.innerHeight - 20) + "px";
-	if (parent.cwb.ObjectContainer.getInstance().modelLoaded) {
-		start();
-	} else {
-		document.write(parent.cwb.Dict.translate('Please select a model.'));
-	}
+/*
+ * Copyright (c) 2010 The Olympos Development Team.
+ * 
+ * http://sourceforge.net/projects/olympos/
+ * 
+ * All rights reserved. This program and the accompanying materials are made
+ * available under the terms of the Eclipse Public License v1.0 which
+ * accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code, this
+ * entire header must remain intact.
+ */
+
+Ext.namespace("cwb.ui");
+
+/**
+ * Treemap containing the package weight
+ */
+cwb.ui.Treemap = function() {
 }
 
-function start() {
+cwb.ui.Treemap.prototype.show = function() {
+	Ext.get(cwb.ui.StructureTabPanel.WEIGHT_ID).dom.style.width = (window.innerWidth - 80) + "px";
+	Ext.get(cwb.ui.StructureTabPanel.WEIGHT_ID).dom.style.height = (window.innerHeight - 20) + "px";
+
 	var json = parent.cwb.ObjectContainer.getInstance().objectsForTreemap;
 	
 	var tm = new TM.Squarified( {
 	    //main container id.
-	    rootId : 'infovis',
+	    rootId : cwb.ui.StructureTabPanel.WEIGHT_ID,
 	    //orientation
 	    orientation : "v",
 	    
@@ -36,7 +49,8 @@ function start() {
 	    },
 	    onAfterCompute : function() {
 		    var that = this, parent;
-		    $$('#infovis .leaf', '#infovis .head').each( function(elem, i) {
+		    var cssId = '#'+cwb.ui.StructureTabPanel.WEIGHT_ID;
+		    $$(cssId+' .leaf', cssId+' .head').each( function(elem, i) {
 			    //get the JSON tree node element having the same id
 			        // as the dom element queried and makeTip.
 			        if (p = elem.getParent()) {
