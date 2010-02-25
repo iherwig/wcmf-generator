@@ -9,7 +9,7 @@
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 
-«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
 
 «REM» This template expands the soap service definitions ---------«ENDREM»
 

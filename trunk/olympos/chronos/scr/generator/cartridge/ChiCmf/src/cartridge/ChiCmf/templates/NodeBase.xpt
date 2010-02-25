@@ -9,7 +9,7 @@
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 
-«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
 
 «REM» template expands the node base class files -----------------«ENDREM»
 «DEFINE file FOR ChiNode»
@@ -250,7 +250,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
       }
 «IF curChild.type.metaType.toString().contains("ChiManyToMany")-»
   «FOREACH ((ChiNode)curChild.type).getParentNodes() AS curChildParent-»
-    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+    «IF isAtOtherNmEnd(this, (ChiNode) curChildParent.type, (ChiManyToMany) curChild.type)-»
       if ($name == '«curChildParent.type.name.asGetter()»List')
       {
         Log::warn("use of deprecated method «curChildParent.type.name.asGetter()»List. use «curChildParent.type.name.asGetter()»Children() instead.\n".WCMFException::getStackTrace(), __CLASS__);
@@ -278,7 +278,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
   «FOREACH this.getChildNodesRecursive() AS curChild-»
 «IF curChild.type.metaType.toString().contains("ChiManyToMany")-»
   «FOREACH ((ChiNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
-    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+    «IF isAtOtherNmEnd(this, (ChiNode) curChildParent.type, (ChiManyToMany) curChild.type)-»
       // handle «curChild.type.name» as many-to-many type
       if ($type == '«curChildParent.type.name»')
       {
@@ -323,7 +323,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
   «FOREACH getChildNodesRecursive() AS curChild-»
 «IF curChild.type.metaType.toString().contains("ChiManyToMany")-»
   «FOREACH ((ChiNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
-    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+    «IF isAtOtherNmEnd(this, (ChiNode) curChildParent.type, (ChiManyToMany) curChild.type)-»
       // handle «curChild.type.name» as many-to-many type
       if ($type == '«curChildParent.type.name»' || PersistenceFacade::getOIDParameter($oid, 'type') == '«curChildParent.type.name»')
       {
@@ -373,7 +373,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
   «FOREACH this.getChildNodesRecursive() AS curChild-»
 «IF curChild.type.metaType.toString().contains("ChiManyToMany")-»
   «FOREACH ((ChiNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
-    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+    «IF isAtOtherNmEnd(this, (ChiNode) curChildParent.type, (ChiManyToMany) curChild.type)-»
       if ($child != null && $child->getType() == '«curChildParent.type.name»')
       {
         // for every «curChildParent.type.name» we have to insert a «curChild.type.name»
@@ -415,7 +415,7 @@ class «curRoleName»Base«IF curRoleName == this.name»«IF this.hasSuperClass()» ex
   «FOREACH this.getChildNodesRecursive() AS curChild-»
 «IF curChild.type.metaType.toString().contains("ChiManyToMany")-»
   «FOREACH ((ChiNode)curChild.type).getParentNodesRecursive() AS curChildParent-»
-    «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
+    «IF isAtOtherNmEnd(this, (ChiNode) curChildParent.type, (ChiManyToMany) curChild.type)-»
       if (PersistenceFacade::isValidOID($childOID) && PersistenceFacade::getOIDParameter($childOID, 'type') == '«curChildParent.type.name»')
       {
         // for every «curChildParent.type.name» we have to delete the «curChild.type.name»

@@ -9,9 +9,9 @@
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 
-«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
-«EXTENSION cartridge::ChiCmf::extensions::ChiValue»
-«EXTENSION cartridge::ChiCmf::extensions::ChiValueRef»
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiValue»
+«EXTENSION cartridge::ChronosCommon::domain::ChiValueRef»
 
 «REM» This template expands the mapper files ---------------------«ENDREM»
 
