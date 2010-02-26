@@ -18,8 +18,6 @@
  require_once(BASE."wcmf/lib/presentation/class.Controller.php");
 // PROTECTED REGION ID(application/include/controller/class.BrowserStatisticsController.php/Import) ENABLED START
 require_once (BASE.'wcmf/lib/util/class.SessionData.php');
-
-//require_once ('class.BrowserUtil.php');
 // PROTECTED REGION END
 
 /**
@@ -45,40 +43,11 @@ require_once (BASE.'wcmf/lib/util/class.SessionData.php');
 class BrowserStatisticsController extends Controller
 {
 // PROTECTED REGION ID(application/include/controller/class.BrowserStatisticsController.php/Body) ENABLED START
- 	private $lastTime = 0;
-
-	private function check($msg)
-	{
-		$newTime = microtime(true);
-		Log::debug(($newTime-$this->lastTime).": $msg", __CLASS__);
-		$this->lastTime = $newTime;
-	}
-
 	public function executeKernel()
 	{
-/*
-		$this->check("start");
-	
-		$modelOid = $this->_request->getValue('modelOid');
-		$templateParam = $this->_request->getValue('template');
-	
-		$exportFile = BrowserUtil::runGenerator($modelOid, $templateParam);
-
-		$this->check("exportFile: $exportFile");
-	
-		//header('Content-type: text/plain');
-		header('Content-type: text/json');
-	
-		readfile($exportFile);
-	
-		$this->check('File written to output');
-	
-		BrowserUtil::cleanup();
-*/
-
 		$session = &SessionData::getInstance();
 		$statisticsData = $session->get('statistics');
-		
+		Log::debug($statisticsData, __CLASS__);
 		$this->_response->setValue('statistics', $statisticsData); 
 	
 		// success
@@ -91,7 +60,6 @@ class BrowserStatisticsController extends Controller
 	{
 		return false;
 	}
-
 // PROTECTED REGION END
 
 }

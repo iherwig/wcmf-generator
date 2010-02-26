@@ -17,10 +17,8 @@
  */
  require_once(BASE."wcmf/application/controller/class.BatchController.php");
 // PROTECTED REGION ID(application/include/controller/class.AllBrowserStatisticsController.php/Import) ENABLED START
-
 require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
-
 // PROTECTED REGION END
 
 /**
@@ -245,7 +243,6 @@ class AllBrowserStatisticsController extends BatchController
 		OawUtil::setupExecutable();
 		
 		// create the configuration file
-		$workingDir = $session->get($this->TEMP_WORKING_DIR);
 		$tmpPropertiesPath = $session->get($this->TEMP_PROPERTIES_PATH);
 	
 		// run the generator
@@ -257,16 +254,6 @@ class AllBrowserStatisticsController extends BatchController
 			$report = "There were problems during generation:\n".$result['stderr']."\n";
 			$session->set($this->PROBLEM_REPORT, $report);
 		}
-
-		// set the result in the session
-		include($workingDir.'/statistics/browser.dat');
-		include($workingDir.'/barchart/browser.dat');
-		include($workingDir.'/piechart/browser.dat');
-
-		$session->set('statistics', $statisticsData);
-		$session->set('barchart', $barchartData);
-		$session->set('piechart', $piechartData);
-
 		ExportShutdownHandler::success();
 	}
 	/**
@@ -276,8 +263,19 @@ class AllBrowserStatisticsController extends BatchController
 	 */
 	function finish($oids)
 	{
-		// cleanup
 		$session = &SessionData::getInstance();
+
+		// set the result in the session
+		$workingDir = $session->get($this->TEMP_WORKING_DIR);
+		include($workingDir.'/statistics/browser.dat');
+		include($workingDir.'/barchart/browser.dat');
+		include($workingDir.'/piechart/browser.dat');
+
+		$session->set('statistics', $statisticsData);
+		$session->set('barchart', $barchartData);
+		$session->set('piechart', $piechartData);
+
+		// cleanup
 		unlink($session->get($this->TEMP_PROPERTIES_PATH));
 		$workingDir = $session->get($this->TEMP_WORKING_DIR);
 		FileUtil::emptyDir($workingDir);

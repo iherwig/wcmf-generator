@@ -17,14 +17,8 @@
  */
  require_once(BASE."wcmf/lib/presentation/class.Controller.php");
 // PROTECTED REGION ID(application/include/controller/class.BarDataController.php/Import) ENABLED START
-
-require_once (BASE.'wcmf/lib/persistence/class.PersistenceFacade.php');
 require_once (BASE.'wcmf/lib/util/class.SessionData.php');
-
-//require_once ('class.BrowserUtil.php');
-
 require_once('php-ofc-library/open-flash-chart.php');
-
 // PROTECTED REGION END
 
 /**
@@ -49,12 +43,8 @@ require_once('php-ofc-library/open-flash-chart.php');
 class BarDataController extends Controller
 {
 // PROTECTED REGION ID(application/include/controller/class.BarDataController.php/Body) ENABLED START
-	public function execute() {
-		//$modelOid = $this->_request->getValue('modelOid');
-	
-		//$exportFile = BrowserUtil::runGenerator($modelOid, 'barchart');
-
-		//include($exportFile);
+	public function execute()
+	{
 		$session = &SessionData::getInstance();
 		$barchartData = $session->get('barchart'); 
 	
@@ -64,7 +54,6 @@ class BarDataController extends Controller
 			new bar_stack_key('#00ff00', 'Conform', 12),
 			new bar_stack_key('#ff0000', 'Non-Conform', 12)
 		));
-		
 		
 		$labels = array();
 		$max = 0;
@@ -93,7 +82,7 @@ class BarDataController extends Controller
 		$chart->set_x_axis($xAxis);
 		$chart->set_y_axis($yAxis);
 		$chart->set_tooltip($tooltip);
-
+		Log::debug($chart->toPrettyString(), __CLASS__);
 		echo $chart->toPrettyString();
 	
 		return false;
@@ -103,7 +92,6 @@ class BarDataController extends Controller
 	{
 		return false;
 	}
-
 // PROTECTED REGION END
 
 }
