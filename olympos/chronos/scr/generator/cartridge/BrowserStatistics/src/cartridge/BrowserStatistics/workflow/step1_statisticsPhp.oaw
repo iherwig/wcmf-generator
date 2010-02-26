@@ -23,9 +23,9 @@
 	</bean>
 
 	<!-- load model -->
-	<component class="oaw.emf.XmiReader">
-		<modelFile value="${outputRelativePath}/uml-generated.uml"/>
-		<outputSlot value="uml2model"/>
+	<component class="org.eclipse.mwe.emf.Reader">
+		<uri value="${outputRelativePath}/uml-generated.uml"/>
+		<modelSlot value="uml2model"/>
 	</component>
 
 	<component class="oaw.xpand2.Generator" skipOnErrors="true">
