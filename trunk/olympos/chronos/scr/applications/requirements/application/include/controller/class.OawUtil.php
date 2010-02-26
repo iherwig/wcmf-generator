@@ -12,7 +12,7 @@
  */
 
 /**
- * @class BrowserUtil
+ * @class OawUtil
  * @brief Provides methods common to OpenArchitectureWare functionality. 
  * 
  * @author 	Niko <enikao@users.sourceforge.net>

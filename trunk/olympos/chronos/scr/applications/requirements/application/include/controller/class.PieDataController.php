@@ -17,14 +17,8 @@
  */
  require_once(BASE."wcmf/lib/presentation/class.Controller.php");
 // PROTECTED REGION ID(application/include/controller/class.PieDataController.php/Import) ENABLED START
-
-require_once (BASE.'wcmf/lib/persistence/class.PersistenceFacade.php');
 require_once (BASE.'wcmf/lib/util/class.SessionData.php');
-
-//require_once ('class.BrowserUtil.php');
-
 require_once('php-ofc-library/open-flash-chart.php');
-
 // PROTECTED REGION END
 
 /**
@@ -49,12 +43,8 @@ require_once('php-ofc-library/open-flash-chart.php');
 class PieDataController extends Controller
 {
 // PROTECTED REGION ID(application/include/controller/class.PieDataController.php/Body) ENABLED START
-	public function execute() {
-		//$modelOid = $this->_request->getValue('modelOid');
-	
-		//$exportFile = BrowserUtil::runGenerator($modelOid, 'barchart');
-
-		//include($exportFile);
+	public function execute()
+	{
 		$session = &SessionData::getInstance();
 		$piechartData = $session->get('piechart'); 
 	
@@ -80,7 +70,7 @@ class PieDataController extends Controller
 
 		$chart->set_bg_colour('#ffffff');
 		$chart->set_tooltip($tooltip);
-
+		Log::debug($chart->toPrettyString(), __CLASS__);
 		echo $chart->toPrettyString();
 	
 		return false;
@@ -90,7 +80,6 @@ class PieDataController extends Controller
 	{
 		return false;
 	}
-
 // PROTECTED REGION END
 
 }
