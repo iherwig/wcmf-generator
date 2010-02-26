@@ -16,10 +16,10 @@ Ext.namespace("cwb.ui");
  * TabPanel containing package weight, package tree and InfoGrid tabs
  */
 cwb.ui.StructureTabPanel = function() {
-}
+};
 
 cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
-	initComponent : function() {
+	initComponent: function() {
 		
 		var self = this;
 
@@ -30,28 +30,37 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		 * Tab containing treemap (package weight).
 		 */
 		this.weightPanel = new Ext.Panel( {
-		    title : cwb.Dict.translate('Package weight'),
-		    tabTip : cwb.Dict.translate('Left-click to enter a package or object, right-click to leave it.'),
-		    html : '<div id="' + cwb.ui.StructureTabPanel.WEIGHT_ID + '" style="height: 100%;width:100%;"></div>'
+		    title: cwb.Dict.translate('Package weight'),
+		    tabTip: cwb.Dict.translate('Left-click to enter a package or object, right-click to leave it.'),
+		    html: '<div id="' + cwb.ui.StructureTabPanel.WEIGHT_ID + '"></div>',
+		    listeners: {
+				"resize": function() {
+					self.showDiagrams();
+				}
+			}
 		});
 		
 		/**
 		 * Tab containing spacetree (package tree).
 		 */
 		this.treePanel = new Ext.Panel( {
-		    title : cwb.Dict.translate('Package tree'),
-		    tabTip : cwb.Dict.translate('Click on an object to see its children.'),
-		    html : '<div id="' + cwb.ui.StructureTabPanel.PACKAGE_ID + '" style="overflow: auto; width: 100%; height: 100%;"></div>',
-		    cls : "cwb-treePanel"
+		    title: cwb.Dict.translate('Package tree'),
+		    tabTip: cwb.Dict.translate('Click on an object to see its children.'),
+		    html: '<div id="' + cwb.ui.StructureTabPanel.PACKAGE_ID + '"></div>',
+		    listeners: {
+				"resize": function() {
+					self.showDiagrams();
+				}
+			}
 		});
 		
 		this.lastEditedPanel = new cwb.ui.LastEditedGrid( {});
 		
 		Ext.apply(this, {
-		    region : 'center',
-		    activeTab : 0,
-		    deferredRender : false,
-		    items : [ this.weightPanel, this.treePanel, this.lastEditedPanel ]
+		    region: 'center',
+		    activeTab: 0,
+		    deferredRender: false,
+		    items: [ this.weightPanel, this.treePanel, this.lastEditedPanel ]
 		});
 		
 		cwb.ui.StructureTabPanel.superclass.initComponent.apply(this, arguments);
@@ -66,7 +75,7 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		this.hitsGrids = new Ext.util.MixedCollection();
 	}
 
-})
+});
 
 /**
  * Sets scroll position to middle of the frame when spacetree is activated.
@@ -83,7 +92,8 @@ cwb.ui.StructureTabPanel.prototype.handleTabChange = function(tabPanel, tab) {
 		scrollArea.scrollTo("left", scrollArea.dom.scrollWidth / 2 - scrollArea.getWidth() / 2);
 		scrollArea.scrollTo("top", scrollArea.dom.scrollHeight / 2 - scrollArea.getHeight() / 2);
 	}
-}
+	this.showDiagrams();
+};
 
 cwb.ui.StructureTabPanel.prototype.clear = function() {
 	var tabCount = this.items.getCount();
@@ -97,11 +107,11 @@ cwb.ui.StructureTabPanel.prototype.clear = function() {
 	cwb.Util.emptyDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
 	
 	this.setActiveTab(0);
-}
+};
 
 cwb.ui.StructureTabPanel.prototype.removeHitsGrid = function(hitsGrid) {
 	this.hitsGrids.remove(hitsGrid);
-}
+};
 
 cwb.ui.StructureTabPanel.prototype.showDiagrams = function() {
 
@@ -110,29 +120,28 @@ cwb.ui.StructureTabPanel.prototype.showDiagrams = function() {
 	
 	this.packageWeight.show();
 	this.packageTree.show();
-}
+};
 
 cwb.ui.StructureTabPanel.prototype.createHitsGrid = function(id, tabTitle, tabContentOids) {
 	var tab = this.hitsGrids.get(id);
 	
 	if (!tab) {
 		var tab = new cwb.statistics.HitsGrid( {
-		    title : tabTitle,
-		    objectList : tabContentOids
+		    title: tabTitle,
+		    objectList: tabContentOids
 		});
 		this.hitsGrids.add(id, tab);
 		this.add(tab);
 	}
-	
 	tab.show();
-}
+};
 
 cwb.ui.StructureTabPanel.getInstance = function() {
 	if (!(cwb.ui.StructureTabPanel.instance)) {
 		cwb.ui.StructureTabPanel.instance = new cwb.ui.StructureTabPanel();
 	}
 	return cwb.ui.StructureTabPanel.instance;
-}
+};
 
 cwb.ui.StructureTabPanel.WEIGHT_ID = "cwb-weight-id";
 cwb.ui.StructureTabPanel.PACKAGE_ID = "cwb-package-id";
