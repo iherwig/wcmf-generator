@@ -26,7 +26,7 @@ cwb.ObjectsListProxy = function(config) {
 	this.grid = config.grid;
 	this.objectList = config.objectList;
 	this.iconRenderer = config.iconRenderer;
-}
+};
 
 Ext.extend(cwb.ObjectsListProxy, Ext.data.DataProxy);
 
@@ -39,6 +39,7 @@ cwb.ObjectsListProxy.prototype.loadResponse = function(options, data, callback, 
 
 				var tempData = [];
 				tempData.uwmClassName = currNode.type;
+				tempData.oid = currNode.oid;
 				
 				for ( var currValueIndex in currNode.values[1]) {
 					var currValue = currNode.values[1][currValueIndex];
@@ -75,14 +76,14 @@ cwb.ObjectsListProxy.prototype.loadResponse = function(options, data, callback, 
 	if (callback instanceof Function) {
 		callback.call(scope, result, arg, true);
 	}
-}
+};
 
 cwb.ObjectsListProxy.prototype.loadFailed = function(options, data, errorMsg, callback, scope, arg) {
 	this.fireEvent("loadexception", this, options, data);
 	if (callback instanceof Function) {
 		callback.call(scope, null, arg, false);
 	}
-}
+};
 
 /**
  * Creates a column list from the incoming property data.
@@ -145,4 +146,4 @@ cwb.ObjectsListProxy.prototype.getColumns = function() {
 	});
 	
 	return result;
-}
+};

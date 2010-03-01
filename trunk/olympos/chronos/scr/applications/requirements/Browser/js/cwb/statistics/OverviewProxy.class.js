@@ -19,7 +19,7 @@ Ext.namespace("cwb.statistics");
 
 cwb.statistics.OverviewProxy = function(config) {
 	cwb.statistics.OverviewProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
-}
+};
 
 Ext.extend(cwb.statistics.OverviewProxy, Ext.data.DataProxy);
 
@@ -30,12 +30,12 @@ cwb.statistics.OverviewProxy.prototype.load = function(params, reader, callback,
 		cwb.persistency.Persistency.getInstance().loadStatisticsOverview(arg.modelOid, 'statistics', function(options, data) {
 			self.loadResponse(options, data, callback, scope, arg);
 		}, function(options, data, errorMsg) {
-			self.loadFailed(options, data, errorMsg, callback, scope, arg)
+			self.loadFailed(options, data, errorMsg, callback, scope, arg);
 		});
 	} else {
 		callback.call(scope || this, null, arg, false);
 	}
-}
+};
 
 cwb.statistics.OverviewProxy.prototype.loadResponse = function(options, data, callback, scope, arg) {
 	var records = [];
@@ -43,21 +43,28 @@ cwb.statistics.OverviewProxy.prototype.loadResponse = function(options, data, ca
 	for ( var i in data.statistics) {
 		var val = data.statistics[i];
 		
-		if (!(val instanceof Function)) {
-			records.push(new Ext.data.Record(val));
+		if (!(val instanceof Function) && val._id) {
+			var record = new Ext.data.Record(val, val._id);
+			// convert empty _parent string to null, otherwise 
+			// the tree structure will not be recognized
+			if (record.get('_parent') == "") {
+				record.set('_parent', null);
+			}
+			records.push(record);
 		}
 	}
 	
 	var result = {
-	    success : true,
-	    records : records
+	    success: true,
+	    records: records,
+	    totalRecords: records.length
 	};
-	
+
 	this.fireEvent("load", this, options, arg);
 	callback.call(scope, result, arg, true);
-}
+};
 
 cwb.statistics.OverviewProxy.prototype.loadFailed = function(options, data, errorMsg, callback, scope, arg) {
 	this.fireEvent("loadexception", this, options, data);
 	callback.call(scope, null, arg, false);
-}
+};

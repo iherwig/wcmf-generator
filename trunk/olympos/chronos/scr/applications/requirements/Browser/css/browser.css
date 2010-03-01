@@ -11,3 +11,10 @@ iframe.flashDoc {
 	height:100%;
 	overflow:hidden;
 }
+
+.noSelectionNote {
+	position:relative !important;
+	text-align:center;
+	line-height:50px;
+	font-style:italic;
+}

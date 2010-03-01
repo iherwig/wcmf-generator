@@ -16,7 +16,7 @@ Ext.namespace("cwb.ui");
  * Treemap containing the package weight
  */
 cwb.ui.Treemap = function() {
-}
+};
 
 cwb.ui.Treemap.prototype.show = function() {
 	var json = parent.cwb.ObjectContainer.getInstance().objectsForTreemap;
@@ -74,4 +74,4 @@ cwb.ui.Treemap.prototype.show = function() {
 		});
 		tm.loadFromJSON(json);
 	}
-}
+};

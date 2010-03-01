@@ -33,6 +33,14 @@ cwb.statistics.HitsGrid = function(config) {
 	cwb.statistics.HitsGrid.superclass.constructor.call(this, Ext.apply(this, {
 		closable : true
 	}, config));
-}
+	
+	// create the objectSelected event, if a row is clicked
+	this.on('rowclick', function(grid, rowIndex, e) {
+		var selectedItem = self.getStore().getAt(rowIndex);
+		if (selectedItem) {
+			self.fireEvent('objectSelected', selectedItem.get('oid'));
+		}
+	});
+};
 
 Ext.extend(cwb.statistics.HitsGrid, cwb.ObjectsListGrid);
