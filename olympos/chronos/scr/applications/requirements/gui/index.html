@@ -232,6 +232,8 @@
         </script>
         <script type="text/javascript" src="js/uwm/Uwm.class.js">
         </script>
+        <script type="text/javascript" src="js/uwm/Cwb.class.js">
+        </script>
         <script type="text/javascript" src="js/uwm/Constants.js">
         </script>
         <script type="text/javascript" src="js/uwm/Util.js">
@@ -789,10 +791,13 @@
 
         <!--End include CWM-->
         <!--Start include CWB-->
+		<link rel="stylesheet" type="text/css" href="../ChronosLib/ext/ux/css/TreeGrid.css" />
 		<link type="text/css" rel="stylesheet" href="../Browser/css/browser.css" />
 		<link type="text/css" rel="stylesheet" href="../Browser/css/Treemap.css" />
 		<link type="text/css" rel="stylesheet" href="../Browser/css/spacetree.css" /> 
 
+        <script type="text/javascript" src="../ChronosLib/ext/ux/TreeGrid.js">
+        </script>
 		<script type="text/javascript" src="../ChronosLib/JIT/mootools-1.2.js">
 		</script>
 		<script type="text/javascript" src="../ChronosLib/JIT/Treemap.js" >
@@ -862,13 +867,6 @@
         <!--End include CWB-->
         <script type="text/javascript">
             Ext.onReady(function() {
-                // integrate CWB into tab panel
-            	Ext.extend(cwb.ui.Workbench, Ext.Panel, {
-                	showMask: cwb.ui.Workbench.prototype.showMask
-            	});
-            	cwb.Config.baseHref = "../Browser/";
-            	document.title = "Chronos Web Modeller";
-            	
             	Ext.BLANK_IMAGE_URL = "img/s.gif";
             	Ext.QuickTips.init();
             	uwm.Uwm.getInstance().startApplication();
