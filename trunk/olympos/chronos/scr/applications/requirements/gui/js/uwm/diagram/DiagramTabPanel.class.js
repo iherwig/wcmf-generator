@@ -28,17 +28,13 @@ uwm.diagram.DiagramTabPanel = function() {
 uwm.diagram.DiagramTabPanel = Ext.extend(Ext.TabPanel, {
 	initComponent: function() {
 	
-		// instanciate Chronos Web Browser
-		var cwbInstance = cwb.ui.Workbench.getInstance();
-		cwbInstance.setTitle(uwm.Dict.translate('Chronos Web Browser'));
-			
 		Ext.apply(this, {
 			region: "center",
 			xtype: "tabpanel",
 			enableTabScroll: true,
 			activeTab: 0,
 			id: uwm.diagram.DiagramTabPanel.COMPONENT_ID,
-			items: [uwm.ui.HelpViewer.getInstance(), cwbInstance]
+			items: [uwm.ui.HelpViewer.getInstance(), uwm.Cwb.getInstance()]
 		})
 		
 		uwm.diagram.DiagramTabPanel.superclass.initComponent.apply(this, arguments);
