@@ -40,7 +40,7 @@ cwb.ui.Workbench = function(config) {
 	        ]
 	    } ]
 	}));
-}
+};
 
 Ext.extend(cwb.ui.Workbench, Ext.Viewport);
 
@@ -61,7 +61,7 @@ cwb.ui.Workbench.prototype.createInformationTab = function(id, objectList) {
 	
 	proxy['store'] = store;
 	store.load();
-}
+};
 
 /**
  * Creates InfoGrid and adds it to structureTabPanel AFTER loading all objects.
@@ -80,17 +80,17 @@ cwb.ui.Workbench.prototype.addInformationTab = function(id, store, columnList) {
 	structureTabPanel.add(newTab);
 	structureTabPanel.activate(newTab);
 	this.doLayout();
-}
+};
 
 cwb.ui.Workbench.prototype.showMask = function() {
 	//Ext.WindowMgr.zseed = 25000;
 	
 	Ext.Msg.progress(cwb.Dict.translate("Loading"), cwb.Dict.translate("Loading report ..."), cwb.Dict.translate("Generating UML export"));
-}
+};
 
 cwb.ui.Workbench.getInstance = function() {
 	if (!(cwb.ui.Workbench.instance)) {
 		cwb.ui.Workbench.instance = new cwb.ui.Workbench();
 	}
 	return cwb.ui.Workbench.instance;
-}
+};

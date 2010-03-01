@@ -32,7 +32,8 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		this.weightPanel = new Ext.Panel( {
 		    title: cwb.Dict.translate('Package weight'),
 		    tabTip: cwb.Dict.translate('Left-click to enter a package or object, right-click to leave it.'),
-		    html: '<div id="' + cwb.ui.StructureTabPanel.WEIGHT_ID + '"></div>',
+		    html: '<div id="'+cwb.ui.StructureTabPanel.WEIGHT_ID+'">'+
+	    		'<div class="noSelectionNote">No model selected</div></div>',
 		    listeners: {
 				"resize": function() {
 					self.showDiagrams();
@@ -46,7 +47,8 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		this.treePanel = new Ext.Panel( {
 		    title: cwb.Dict.translate('Package tree'),
 		    tabTip: cwb.Dict.translate('Click on an object to see its children.'),
-		    html: '<div id="' + cwb.ui.StructureTabPanel.PACKAGE_ID + '"></div>',
+		    html: '<div id="'+cwb.ui.StructureTabPanel.PACKAGE_ID+'">'+
+    			'<div class="noSelectionNote">No model selected</div></div>',
 		    listeners: {
 				"resize": function() {
 					self.showDiagrams();
@@ -58,7 +60,7 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		
 		Ext.apply(this, {
 		    region: 'center',
-		    activeTab: 0,
+		    activeTab: 2,
 		    deferredRender: false,
 		    items: [ this.weightPanel, this.treePanel, this.lastEditedPanel ]
 		});
@@ -114,21 +116,33 @@ cwb.ui.StructureTabPanel.prototype.removeHitsGrid = function(hitsGrid) {
 };
 
 cwb.ui.StructureTabPanel.prototype.showDiagrams = function() {
-
-	cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
-	cwb.Util.showDiv(cwb.ui.StructureTabPanel.PACKAGE_ID);
-	
-	this.packageWeight.show();
-	this.packageTree.show();
+	var modelOid = cwb.ObjectContainer.getInstance().getCurrModelOid();
+	if (modelOid) {
+		cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
+		cwb.Util.showDiv(cwb.ui.StructureTabPanel.PACKAGE_ID);
+		
+		this.packageWeight.show();
+		this.packageTree.show();
+	}
 };
 
 cwb.ui.StructureTabPanel.prototype.createHitsGrid = function(id, tabTitle, tabContentOids) {
 	var tab = this.hitsGrids.get(id);
+	var self = this;
 	
 	if (!tab) {
 		var tab = new cwb.statistics.HitsGrid( {
 		    title: tabTitle,
-		    objectList: tabContentOids
+		    objectList: tabContentOids,
+			listeners: {
+				// publish the objectSelected event from the hits grid
+				// in order to allow other applications to react to 
+				// object selection
+				'objectSelected': function(oid) {
+					self.fireEvent('objectSelected', oid);
+				}
+			}
+		    
 		});
 		this.hitsGrids.add(id, tab);
 		this.add(tab);

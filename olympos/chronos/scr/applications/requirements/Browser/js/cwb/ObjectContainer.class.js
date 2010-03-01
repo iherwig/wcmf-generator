@@ -41,7 +41,7 @@ cwb.ObjectContainer = function(){
 	 * The number of objects in the biggest package of the current model
 	 */
 	this.maxTreeContent = 1;
-}
+};
 
 
 /**
@@ -54,7 +54,7 @@ cwb.ObjectContainer.prototype.loadModelList = function(dropdown){
 		self.handleLoadedModelList(options, data, dropdown);
 	}, function(){
 	});
-}
+};
 
 cwb.ObjectContainer.prototype.handleLoadedModelList = function(options, data, dropdown){
 	for (i in data.objects) {
@@ -69,7 +69,7 @@ cwb.ObjectContainer.prototype.handleLoadedModelList = function(options, data, dr
 	}
 
 	dropdown.store.loadData(this.models);
-}
+};
 
 cwb.ObjectContainer.prototype.loadModel = function(modelOid, callback){
 	this.currModelOid = modelOid;
@@ -90,7 +90,7 @@ cwb.ObjectContainer.prototype.loadModel = function(modelOid, callback){
 			},
 			isReturningDocument : false
 	}).show();
-}
+};
 
 cwb.ObjectContainer.prototype.modelUmlGenerated = function(callback) {
 	this.modelLoaded = true;
@@ -98,7 +98,7 @@ cwb.ObjectContainer.prototype.modelUmlGenerated = function(callback) {
 	callback('generated');
 	
 	this.loadJitData(this.currModelOid, callback);
-}
+};
 
 /**
  * Loads a model by its oid into two identical variables.
@@ -139,7 +139,7 @@ cwb.ObjectContainer.prototype.loadJitData = function(oid, callback){
 		'value': 1
 	}];
 	this.loadJitObject(oid, callback);
-}
+};
 
 /**
  * Recursively loads the objects of the current model.
@@ -157,7 +157,7 @@ cwb.ObjectContainer.prototype.loadJitObject = function(oid, callback){
 	cwb.persistency.Persistency.getInstance().loadChildren(oid, function(options, data){
 		self.handleLoadedJitObject(options, data, oid, callback)
 	});
-}
+};
 
 /**
  * Replacement for the upper load method which does only one JSON call and uses display. 
@@ -172,7 +172,7 @@ cwb.ObjectContainer.prototype.loadOBJECT=function(oid){
 	cwb.persistency.Persistency.getInstance().display(oid,-1,function(options, data){
 		self.handleLoadedObject(options, data, oid)
 	});
-}
+};
 
 cwb.ObjectContainer.prototype.handleLoadedJitObject = function(options, data, oid, callback){
 	for (var i = 0; i < data.objects.length; i++) {
@@ -221,7 +221,7 @@ cwb.ObjectContainer.prototype.handleLoadedJitObject = function(options, data, oi
 		
 		callback('jit');
 	}
-}
+};
 
 /**
  * Inserts image information and creates hierarchical structure inthe spacetree data.
@@ -234,8 +234,6 @@ cwb.ObjectContainer.prototype.arrangeTreeList = function(rootOid){
 	for (var i = 0; i < objects.length; i++) {
 		if (!(objects[i] instanceof Function)) {
 		
-			objects[i]['name'] = '<img align="left" hspace=6 vspace=6 src="../img/icons/' + objects[i]['uwmClassName'] + '.png">' + objects[i]['name'];
-			
 			var parentOid = objects[i]['parentOid'];
 			if (!(parentOid == 'root')) {
 				objects[this.getObjectPosition(parentOid, this.objectsForSpacetree)]['children'].push(objects[i]);
@@ -247,7 +245,7 @@ cwb.ObjectContainer.prototype.arrangeTreeList = function(rootOid){
 	}
 	objects = objects[arrayPosition];
 	this.objectsForSpacetree = objects;
-}
+};
 
 /**
  * Creates hierarchical structure in treemap data.
@@ -274,7 +272,7 @@ cwb.ObjectContainer.prototype.arrangeWeightList = function(rootOid){
 	
 	this.setContentData(this.objectsForTreemap);
 	this.setWeightColors(this.objectsForTreemap);
-}
+};
 
 /**
  * Recursively inserts content information in treemap data.
@@ -296,7 +294,7 @@ cwb.ObjectContainer.prototype.setContentData = function(objectList){
 		objectList['data'][0]['value'] = result;
 	}
 	return result;
-}
+};
 
 /**
  * Inserts color information in data for treemap.
@@ -306,7 +304,7 @@ cwb.ObjectContainer.prototype.setWeightColors = function(){
 	this.getMaxContent(this.objectsForTreemap);
 	
 	this.setColor(this.objectsForTreemap);
-}
+};
 
 /**
  * Recursively calculates the size of the biggest package which contains only leaves.
@@ -325,7 +323,7 @@ cwb.ObjectContainer.prototype.getMaxContent = function(objectList){
 			}
 		}
 	}
-}
+};
 
 /**
  * Checks if a subtree contains only leaves.
@@ -343,7 +341,7 @@ cwb.ObjectContainer.prototype.containsLeaves = function(objectList){
 		}
 	}
 	return result;
-}
+};
 
 /**
  * Recursively determines which color an object and its children have by comparing their size to the size of the biggest package.
@@ -380,9 +378,7 @@ cwb.ObjectContainer.prototype.setColor = function(objectList, parentLength){
 	for (var j = 0; j < objectList.children.length; j++) {
 		this.setColor(objectList.children[j], objectList.children.length);
 	}
-	
-	
-}
+};
 
 /**
  * Checks which position an object has in an array by its oid.
@@ -399,11 +395,11 @@ cwb.ObjectContainer.prototype.getObjectPosition = function(oid, objectList){
 			}
 		}
 	}
-}
+};
 
 cwb.ObjectContainer.prototype.getModels = function(){
 	return this.models;
-}
+};
 
 /**
  * Gets the oid of the model which was selected in navigation
@@ -414,7 +410,7 @@ cwb.ObjectContainer.prototype.setModelOid = function(modelOid){
 	this.selectedModel = modelOid;
 
 	return true;
-}
+};
 
 /**
  * Should load the ObjectDataTable when backend generator for that is finished. 
@@ -425,7 +421,7 @@ cwb.ObjectContainer.prototype.loadReport = function(modelOid){
 	objectDataTable.reload(modelOid);
 	objectDataTable.getEl().unmask();
 	cwb.ui.DiagramPanel.getInstance().getEl().unmask();
-}
+};
 
 /**
  * Supposed to load the report data for the ObjectDataTable. Currently only shows the dummy data.
@@ -461,15 +457,15 @@ cwb.ObjectContainer.prototype.getTableData = function(){
 		result=[['','',uwm.Dict.translate('Please select a model.'),'','']];
 	}
 	return result;
-}
+};
 
 cwb.ObjectContainer.prototype.getCurrModelOid = function() {
 	return this.currModelOid;
-}
+};
  
 cwb.ObjectContainer.getInstance = function(){
 	if (!cwb.ObjectContainer.instance) {
 		cwb.ObjectContainer.instance = new cwb.ObjectContainer();
 	}
 	return cwb.ObjectContainer.instance;
-}
+};

@@ -16,54 +16,53 @@ Ext.namespace("cwb.ui");
  * TabPanel containing package weight, package tree and InfoGrid tabs
  */
 cwb.ui.ModelChooser = function() {
-}
+};
 
 cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
-	initComponent : function() {
+	initComponent: function() {
 		
 		var self = this;
 	
 		this.selectModelBox = new Ext.form.ComboBox( {
-		    store : new Ext.data.SimpleStore( {
-		        fields : [ "oid", "name" ],
-		        data : []
+		    store: new Ext.data.SimpleStore( {
+		        fields: [ "oid", "name" ],
+		        data: []
 		    }),
-		    displayField : "name",
-		    valueField : "oid",
-		    editable : false,
-		    mode : "local",
+		    displayField: "name",
+		    valueField: "oid",
+		    editable: false,
+		    mode: "local",
 			// removed because it caused an exception, when calling 
 			// an undefined listener function in extjs: p.fireFn is undefined
-		    /*forceSelection : true,*/
-		    triggerAction : 'all',
-		    emptyText : cwb.Dict.translate('Select a model...'),
-		    selectOnFocus : true
+		    /*forceSelection: true,*/
+		    triggerAction: 'all',
+		    emptyText: cwb.Dict.translate('Select a model...'),
+		    selectOnFocus: true
 		});
 		
 		cwb.ObjectContainer.getInstance().loadModelList(this.selectModelBox);
 		
 		this.loadModelButton = new Ext.Button( {
-		    text : cwb.Dict.translate('Report'),
-		    type : 'submit',
-		    handler : function() {
+		    text: cwb.Dict.translate('Report'),
+		    type: 'submit',
+		    handler: function() {
 			    self.loadModel();
 		    }
 		});
 		
 		Ext.apply(this, {
-		    region : 'north',
-		    height : 150,
-		    buttonAlign : 'right',
-		    bodyStyle : 'background-color:#DFE8F6;',
-		    items : [ {
-			    html : '<img src="img/logo3.png">'
+		    region: 'north',
+		    height: 150,
+		    buttonAlign: 'right',
+		    bodyStyle: 'background-color:#DFE8F6;',
+		    items: [ {
+			    html: '<img src="'+cwb.Config.baseHref+'img/logo3.png">'
 		    }, this.selectModelBox, this.loadModelButton ]
-		
 		});
 		
 		cwb.ui.ModelChooser.superclass.initComponent.apply(this, arguments);
 	}
-})
+});
 
 /**
  * Starts loading actions.
@@ -87,7 +86,7 @@ cwb.ui.ModelChooser.prototype.loadModel = function() {
 	} else {
 		Ext.Msg.alert(cwb.Dict.translate("Error"), cwb.Dict.translate("Please select a model."));
 	}
-}
+};
 
 cwb.ui.ModelChooser.prototype.handleLoadCallback = function(state) {
 	switch (state) {
@@ -102,4 +101,4 @@ cwb.ui.ModelChooser.prototype.handleLoadCallback = function(state) {
 			Ext.Msg.hide();
 			break;
 	}
-}
+};

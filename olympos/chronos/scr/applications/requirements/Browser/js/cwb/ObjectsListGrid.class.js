@@ -22,29 +22,27 @@ cwb.ObjectsListGrid = function(config) {
 	var self = this;
 	
 	cwb.ObjectsListGrid.superclass.constructor.call(this, Ext.apply(this, {
-	    layout : "fit",
-	    viewConfig : {
-		    forceFit : true
+	    layout: "fit",
+	    viewConfig: {
+		    forceFit: true
 	    },
-	    sm : new Ext.grid.RowSelectionModel( {
-		    singleSelect : true
+	    sm: new Ext.grid.RowSelectionModel( {
+		    singleSelect: true
 	    }),
-	    stripeRows : true,
-	    store : this.store,
-	    columns : [ {
-	        header : "loading",
-	        width : 9999,
-	        sortable : false
-	    } ]
+	    stripeRows: true,
+	    store: this.store,
+	    columns: [],
+	    loadMask: true
 	}, config));
-}
+};
 
 Ext.extend(cwb.ObjectsListGrid, Ext.grid.GridPanel);
 
 cwb.ObjectsListGrid.prototype.setColumns = function(columns) {
 	this.getColumnModel().setConfig(columns);
-}
+};
 
 cwb.ObjectsListGrid.prototype.iconRenderer = function(uwmClassName) {
-	return "<img src='"+cwb.Config.baseHref+"img/icons/" + uwmClassName + ".png' width='16' height='16' title='" + uwmClassName + "' />";
-}
+	return "<img src='"+cwb.Config.baseHref+"img/icons/"+uwmClassName+
+		".png' width='16' height='16' title='"+uwmClassName+"' />";
+};

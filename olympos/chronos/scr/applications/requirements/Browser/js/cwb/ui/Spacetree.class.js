@@ -18,7 +18,7 @@ Ext.namespace("cwb.ui");
 cwb.ui.Spacetree = function() {
 	this.spacetreeCounter = 0;
 	this.spacetreeCanvas = 0;
-}
+};
 
 cwb.ui.Spacetree.prototype.show = function() {
 	var json = cwb.ObjectContainer.getInstance().objectsForSpacetree;
@@ -56,7 +56,8 @@ cwb.ui.Spacetree.prototype.show = function() {
 		    //Add an event handler to the node when creating it.
 		    onCreateLabel : function(label, node) {
 			    label.id = node.id;
-			    label.innerHTML = "<div class='outer'><div class='inner'><img src=\"img/icons/" + node.uwmClassName + ".png\" />" + node.name + "</div></div>";
+			    label.innerHTML = "<div class='outer'><div class='inner'><img src='"+cwb.Config.baseHref+"img/icons/"+
+			    	node.uwmClassName+".png' />"+node.name+"</div></div>";
 			    // if (node.data[2]){
 			    // canvas.setColor(node.data[2].value);
 			    // }
@@ -161,4 +162,4 @@ cwb.ui.Spacetree.prototype.show = function() {
 		// Emulate a click on the root node.
 		st.onClick(st.tree.id);
 	}
-}
+};

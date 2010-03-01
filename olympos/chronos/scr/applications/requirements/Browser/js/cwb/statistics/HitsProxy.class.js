@@ -19,7 +19,7 @@ Ext.namespace("cwb.statistics");
 
 cwb.statistics.HitsProxy = function(config) {
 	cwb.statistics.HitsProxy.superclass.constructor.call(this, Ext.apply(this, {}, config));
-}
+};
 
 Ext.extend(cwb.statistics.HitsProxy, cwb.ObjectsListProxy);
 
@@ -34,4 +34,4 @@ cwb.statistics.HitsProxy.prototype.load = function(params, reader, callback, sco
 	} else {
 		callback.call(scope || this, null, arg, false);
 	}
-}
+};
