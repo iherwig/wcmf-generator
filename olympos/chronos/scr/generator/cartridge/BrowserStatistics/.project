@@ -4,6 +4,8 @@
 	<comment></comment>
 	<projects>
 		<project>generator</project>
+		<project>generator.cartridge.ChronosCheck</project>
+		<project>generator.cartridge.ChronosCommon</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

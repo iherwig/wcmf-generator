@@ -1,0 +1,26 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION org::openarchitectureware::uml2::profile::profiling»
+
+«EXTENSION cartridge::BrowserStatistics::statistics»
+
+«DEFINE file FOR uml::Model»
+«FILE "browser.dat"»
+<?php
+$piechartData = array(
+	«EXPAND rowTemplate("Goal", this.getGoalsAll())»,
+	«EXPAND rowTemplate("Requirement", this.getRequirementsAll())»,
+	«EXPAND rowTemplate("Feature", this.getFeaturesAll())»,
+	«EXPAND rowTemplate("Issue", this.getIssuesAll())»,
+	«EXPAND rowTemplate("BusinessUseCase", this.getBusinessUcAll())» 
+);
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE rowTemplate(String label, List elements) FOR uml::Model»
+	array (
+		'label' => '«label»',
+		'count' => «elements.size»
+	)
+«ENDDEFINE»

@@ -1,0 +1,138 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION org::openarchitectureware::uml2::profile::profiling»
+
+«EXTENSION cartridge::BrowserStatistics::statistics»
+
+«DEFINE file FOR uml::Model»
+«FILE "browser.dat"»
+<?php
+$statisticsData = array(
+	«EXPAND header(1, 0, false, "Requirements", "Requirements") FOR this»,
+
+	«EXPAND rowTemplate(11, 1, false, "ChiGoals", "All ChiGoals", -1) FOR this.getGoalsAll()», 
+	«EXPAND rowTemplate(1011, 11, true, "valid child", "ChiGoals that do not have a ChiRequirement or a ChiGoal", 1 - (E() + this.getGoalsNoValidChild().size) / this.getGoalsAll().size) FOR this.getGoalsNoValidChild()»,
+	«EXPAND rowTemplate(2011, 11, true, "has Priority", "ChiGoals that do not have a priority > 0", 1 - (E() + this.getGoalsNoPriority().size) / this.getGoalsAll().size) FOR this.getGoalsNoPriority()»,
+	«EXPAND rowTemplate(3011, 11, true, "Value_Goal is integer", "ChiGoals that do not have a Value_Goal of type integer", 1 - (E() + this.getGoalsNoValueGoalInt().size) / this.getGoalsAll().size) FOR this.getGoalsNoValueGoalInt()»,
+	«EXPAND rowTemplate(4011, 11, true, "only one type of children", "ChiGoals that have both a ChiGoal and a ChiRequirement as child", 1 - (E() + this.getGoalsBothTypesOfChildren().size) / this.getGoalsAll().size) FOR this.getGoalsBothTypesOfChildren()», 
+	«EXPAND rowTemplate(5011, 11, true, "achieved", "ChiGoals that do not have a ChiRequirement that have a ChiFeature", 1 - (E() + this.getGoalsNonAchieved().size) / this.getGoalsAll().size) FOR this.getGoalsNonAchieved()»,
+	
+	«EXPAND rowTemplate(21, 1, false, "ChiRequirements", "All ChiRequirements", -1) FOR this.getRequirementsAll()»,
+	«EXPAND rowTemplate(1021, 21, true, "with parent", "ChiRequirements that do not have a ChiRequirement or ChiGoal as parent", 1 - (E() + this.getRequirementsWithoutParent().size) / this.getRequirementsAll().size) FOR this.getRequirementsWithoutParent()»,
+	«EXPAND rowTemplate(2021, 21, true, "with child", "ChiRequirements that do not have any ChiFeature or ChiIssue", 1 - (E() + this.getRequirementsNoChildren().size) / this.getRequirementsAll().size) FOR this.getRequirementsNoChildren()»,
+	«EXPAND rowTemplate(3021, 21, true, "only one feature", "ChiRequirements that have more than one ChiFeature", 1 - (E() + this.getRequirementsMoreThanOneFeature().size) / this.getRequirementsAll().size) FOR this.getRequirementsMoreThanOneFeature()»,
+	«EXPAND rowTemplate(4021, 21, true, "only one type of children", "ChiRequirements that have both a ChiRequirement and a ChiFeature/ChiIssue as child", 1 - (E() + this.getRequirementsBothTypesOfChildren().size) / this.getRequirementsAll().size) FOR this.getRequirementsBothTypesOfChildren()»,
+	«EXPAND rowTemplate(5021, 21, true, "either ChiFeature or ChiIssue", "ChiRequirements that have both a ChiFeature and a ChiIssue", 1 - (E() + this.getRequirementsBothFeatureIssue().size) / this.getRequirementsAll().size) FOR this.getRequirementsBothFeatureIssue()»,
+
+	«EXPAND rowTemplate(31, 1, false, "ChiFeatures", "All ChiFeatures", -1) FOR this.getFeaturesAll()»,
+	«EXPAND rowTemplate(1031, 31, true, "with Parent", "ChiFeatures not connected to a ChiRequirement",  1 - (E() + this.getFeaturesWithoutParent().size) / this.getFeaturesAll().size) FOR this.getFeaturesWithoutParent()»,
+	«EXPAND rowTemplate(2031, 31, true, "fully implemented", "ChiFeature with Status = 'implemented' MUST have a ChiBusinessUseCase", 1 - (E() + this.getFeaturesImplementedIncomplete().size) / this.getFeaturesAll().size) FOR this.getFeaturesImplementedIncomplete()»,
+
+	«EXPAND rowTemplate(41, 1, false, "ChiIssues", "All ChiIssues", -1) FOR this.getIssuesAll()»,
+	«EXPAND rowTemplate(1041, 41, true, "with parent", "ChiIssues that do not have a ChiRequirement", 1 - (E() + this.getIssuesWithoutParent().size) / this.getIssuesAll().size) FOR this.getIssuesWithoutParent()»,
+
+	«EXPAND header(2, 0, false, "Use Cases", "Use Cases") FOR this»,
+
+	«EXPAND rowTemplate(12, 2, false, "ChiBusinessProcess", "All ChiBusinessProcesses", -1) FOR this.getBusinessProcessesAll()»,
+	«EXPAND rowTemplate(1012, 12, true, "with ChiBusinessUseCase", "ChiBusinessProcesss that have no ChiBusinessUseCase", 1 - (E() + this.getBusinessProcessesWithoutUc().size) / this.getBusinessProcessesAll().size) FOR this.getBusinessProcessesWithoutUc()»,
+	
+	«EXPAND rowTemplate(22, 2, false, "ChiBusinessUseCase", "All ChiBusinessUseCases", -1) FOR this.getBusinessUcAll()»,
+	«EXPAND rowTemplate(1022, 22, true, "with Feature", "ChiBusinessUseCases that have no ChiFeature", 1 - (E() + this.getBusinessUcWithoutFeature().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutFeature()»,
+	«EXPAND rowTemplate(2022, 22, true, "with Scope", "ChiBusinessUseCases that have no Scope", 1 - (E() + this.getBusinessUcWithoutScope().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutScope()»,
+	«EXPAND rowTemplate(3022, 22, true, "with GoalInContext", "ChiBusinessUseCases that have no GoalInContext", 1 - (E() + this.getBusinessUcWithoutGoalInContext().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutGoalInContext()»,
+	«EXPAND rowTemplate(4022, 22, true, "with Trigger = AcitvityInitial", "ChiBusinessUseCases that have no ActivityInitial with the same name as Trigger", 1 - (E() + this.getBusinessUcWithoutTriggerEqInitial().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutTriggerEqInitial()»,
+	«EXPAND rowTemplate(5022, 22, true, "with MainSuccessScenario = ActivityFinal", "ChiBusinessUseCases that have no ActivityFinal with the same name as MainSuccessScenario", 1 - (E() + this.getBusinessUcWithoutMainSuccessScenarioEqFinal().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutMainSuccessScenarioEqFinal()»,
+	«EXPAND rowTemplate(6022, 22, true, "with active PrimaryActor", "ChiBusinessUseCases that have a ChiBusinessPartnerPassive as PrimaryActor", 1 - (E() + this.getBusinessUcWithPrimaryActorPassive().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithPrimaryActorPassive()»,
+	«EXPAND rowTemplate(7022, 22, true, "with ActivitySet", "ChiBusinessUseCases that have no ActivitySet", 1 - (E() + this.getBusinessUcWithoutActivitySet().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutActivitySet()»,
+	«EXPAND rowTemplate(8022, 22, true, "with Actor", "ChiBusinessUseCases that have no Actor", 1 - (E() + this.getBusinessUcWithoutActor().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutActor()»,
+	«EXPAND rowTemplate(9022, 22, true, "with Trigger", "ChiBusinessUseCases that have no Trigger", 1 - (E() + this.getBusinessUcWithoutTrigger().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutTrigger()»,
+	«EXPAND rowTemplate(10022, 22, true, "with MainSuccessScenario", "ChiBusinessUseCases that have no MainSuccessScenario", 1 - (E() + this.getBusinessUcWithoutMainSuccessScenario().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutMainSuccessScenario()»,
+	«EXPAND rowTemplate(11022, 22, true, "with PrimaryActor", "ChiBusinessUseCases that have no PrimaryActor", 1 - (E() + this.getBusinessUcWithoutPrimaryActor().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutPrimaryActor()»,
+	
+	«EXPAND rowTemplateBasic(32, 2, false, "ActivitySet", "All ActivitySets", -1) FOR this.getActivitySetsAll()»,
+	«EXPAND rowTemplateBasic(1032, 32, true, "unique name", "ActivitySets that have no globally unique name", 1 - (E() + this.getActivitySetsDuplicateName().size) / this.getActivitySetsAll().size) FOR this.getActivitySetsDuplicateName()»,
+	«EXPAND rowTemplateBasic(2032, 32, true, "with name", "ActivitySets that have no name", 1 - (E() + this.getActivitySetsWithoutName().size) / this.getActivitySetsAll().size) FOR this.getActivitySetsWithoutName()»,
+	«EXPAND rowTemplateBasic(3032, 32, true, "with ActivityInitial", "ActivitySets that have not exactly one ActivityInitial ", 1 - (E() + this.getActivitySetsWitoutOneInitial().size) / this.getActivitySetsAll().size) FOR this.getActivitySetsWitoutOneInitial()»,
+	«EXPAND rowTemplateBasic(4032, 32, true, "with ActivityFinal", "ActivitySets that have no ActivityFinal", 1 - (E() + this.getActivitySetsWithoutFinal().size) / this.getActivitySetsAll().size) FOR this.getActivitySetsWithoutFinal()»,
+	«EXPAND rowTemplateBasic(5032, 32, true, "with one input ChiObject", "ActivitySets that have not exactly one input ChiObject ", 1 - (E() + this.getActivitySetsWithoutOneInputChiObject().size) / this.getActivitySetsAll().size) FOR this.getActivitySetsWithoutOneInputChiObject()»,
+	«EXPAND rowTemplateBasic(6032, 32, true, "with output ChiObject", "ActivitySets that have no output ChiObject", 1 - (E() + this.getActivitySetsWithoutOutputChiObject().size) / this.getActivitySetsAll().size) FOR this.getActivitySetsWithoutOutputChiObject()»,
+
+	«EXPAND rowTemplateBasic(42, 2, false, "Activity", "All Activities", -1) FOR this.getActivitiesAll()»,
+	«EXPAND rowTemplateBasic(1042, 42, true, "with name", "Activities that have no name", 1 - (E() + this.getActivitiesWithoutName().size) / this.getActivitiesAll().size) FOR this.getActivitiesWithoutName()»,
+	«EXPAND rowTemplateBasic(2042, 42, true, "with incoming/outgoing arrow", "Activities that have no incoming or no outgoing arrow", 1 - (E() + this.getActivitiesWithoutIncomingOutgoing().size) / this.getActivitiesAll().size) FOR this.getActivitiesWithoutIncomingOutgoing()»,
+	«EXPAND rowTemplateBasic(3042, 42, true, "unique name", "Activities that have no unique name within its ActivitySet", 1 - (E() + this.getActivitiesDuplicateName().size) / this.getActivitiesAll().size) FOR this.getActivitiesDuplicateName()»,
+	«EXPAND rowTemplateBasic(4042, 42, true, "one ProductionRuleset", "Activities that have more than one ProductionRuleset ", 1 - (E() + this.getActivitiesGtOneProductionRulesets().size) / this.getActivitiesAll().size) FOR this.getActivitiesGtOneProductionRulesets()»,
+	«EXPAND rowTemplateBasic(5042, 42, true, "consecutive", "Activities that are not consecutive within one ProductionRuleset", 1 - (E() + this.getActivitiesProductionRulesetNonConsecutive().size) / this.getActivitiesAll().size) FOR this.getActivitiesProductionRulesetNonConsecutive()»,
+
+	«EXPAND rowTemplateBasic(52, 2, false, "ActivityInitial", "All ActivityInitials", -1) FOR this.getInitialsAll()»,
+	«EXPAND rowTemplateBasic(1052, 52, true, "with outgoing arrow", "ActivityInitials that have no outgoing arrow", 1 - (E() + this.getInitialsWithoutOutgoing().size) / this.getInitialsAll().size) FOR this.getInitialsWithoutOutgoing()»,
+
+	«EXPAND rowTemplateBasic(62, 2, false, "ActivityFinal", "All ActivityFinals", -1) FOR this.getFinalsAll()»,
+	«EXPAND rowTemplateBasic(1062, 62, true, "with incoming arrow", "ActivityFinals that have no incoming arrow", 1 - (E() + this.getFinalsWithoutIncoming().size) / this.getFinalsAll().size) FOR this.getFinalsWithoutIncoming()»,
+
+	«EXPAND rowTemplateBasic(72, 2, false, "ActivityDecision", "All ActivityDecisions", -1) FOR this.getDecisionsAll()»,
+	«EXPAND rowTemplateBasic(1072, 72, true, "with name", "ActivityDecisions that have no name", 1 - (E() + this.getDecisionsWithoutName().size) / this.getDecisionsAll().size) FOR this.getDecisionsWithoutName()»,
+	«EXPAND rowTemplateBasic(2072, 72, true, "unique name", "ActivityDecisions that have no unique name within its ActivitySet", 1 - (E() + this.getDecisionsDuplicateName().size) / this.getDecisionsAll().size) FOR this.getDecisionsDuplicateName()»,
+	«EXPAND rowTemplateBasic(3072, 72, true, "one incoming, two outgoing arrows", "ActivityDecisions that have no incoming or less than two outgoing arrows", 1 - (E() + this.getDecisionsNoIncomingLt2Outgoing().size) / this.getDecisionsAll().size) FOR this.getDecisionsNoIncomingLt2Outgoing()»,
+	«EXPAND rowTemplateBasic(4072, 72, true, "outgoing arrows unique name", "ActivityDecisions that have no unique names at its outgoing arrows", 1 - (E() + this.getDecisionsDuplicateOutgoing().size) / this.getDecisionsAll().size) FOR this.getDecisionsDuplicateOutgoing()»,
+	«EXPAND rowTemplateBasic(5072, 72, true, "one ProductionRuleset", "ActivityDecisions that have more than one ProductionRuleset", 1 - (E() + this.getDecisionsGtOneProductionRulesets().size) / this.getDecisionsAll().size) FOR this.getDecisionsGtOneProductionRulesets()»,
+	«EXPAND rowTemplateBasic(6072, 72, true, "prepended Activity", "ActivityDecisions that have no ProductionRuleset and are not prepended by an Activity", 1 - (E() + this.getDecisionsWithoutPreActivity().size) / this.getDecisionsAll().size) FOR this.getDecisionsWithoutPreActivity()»,
+	«EXPAND rowTemplateBasic(7072, 72, true, "consecutive", "ActivityDecisions that are not consecutive within one ProductionRuleset", 1 - (E() + this.getDecisionsProductionRulesetNonConsecutive().size) / this.getDecisionsAll().size) FOR this.getDecisionsProductionRulesetNonConsecutive()»,
+	«EXPAND rowTemplateBasic(8072, 72, true, "one per ProductionRuleset", "ActivityDecisions that are not the only ActivityDecisions within a ProductionRuleset", 1 - (E() + this.getDecisionsMultipleWithinProductionRuleset().size) / this.getDecisionsAll().size) FOR this.getDecisionsMultipleWithinProductionRuleset()»,
+	«EXPAND rowTemplateBasic(9072, 72, false, "loop style", "All loop stlye ActivityDecisions", -1) FOR this.getDecisionsLoopsAll()»,
+	«EXPAND rowTemplateBasic(109072, 9072, true, "required arrow names", "Loop style ActivityDecisions that have no LoopStart outgoing arrow or LoopContinue incoming arrow", 1 - (E() + this.getDecisionsLoopsWithoutRequiredArrows().size) / this.getDecisionsLoopsAll().size) FOR this.getDecisionsLoopsWithoutRequiredArrows()»,
+	«EXPAND rowTemplateBasic(209072, 9072, true, "required predecessors", "ActivityDecisions that have no predecessors like Activity('get list') -> ChiObject('list') -> Activity('evaluate list') -> ActivityDecision", 1 - (E() + this.getDecisionsLoopsWithoutRequiredPredecessors().size) / this.getDecisionsLoopsAll().size) FOR this.getDecisionsLoopsWithoutRequiredPredecessors()»,
+	«EXPAND rowTemplateBasic(309072, 9072, true, "required successors", "ActivityDecisions that have no successors like ActivityDecision -> Activity('get list element') -> ChiObject('list element')", 1 - (E() + this.getDecisionsLoopsWithoutRequiredSuccessors().size) / this.getDecisionsLoopsAll().size) FOR this.getDecisionsLoopsWithoutRequiredSuccessors()»,
+	«EXPAND rowTemplateBasic(409072, 9072, true, "other parts same ProductionRuleset", "ActivityDecisions that have not the same ProductionRuleset as the required predecessors/successors ", 1 - (E() + this.getDecisionsLoopsWithoutRequiredProductionRuleset().size) / this.getDecisionsLoopsAll().size) FOR this.getDecisionsLoopsWithoutRequiredProductionRuleset()»
+
+
+«REM»
+	«EXPAND rowTemplate("activitySets", "", "ActivitySets that have no ", 1 - (E() + this.getActivitySets().size) / this.getActivitySetAll().size) FOR this.getActivitySets()»,
+«ENDREM»
+);
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE rowTemplate(int id, int parentId, boolean isLeaf, String text, String toolTip, Real status) FOR List[Chronos::ChiBase]»
+	array(
+		"id" => «id»,
+		"objectList" => array(
+			«FOREACH this AS currElem SEPARATOR ","»
+				"«currElem.getAppliedStereotypes().first().name»::«currElem.Alias»"
+			«ENDFOREACH»
+		),
+		"object" => "«text»",
+		"toolTip" => "«toolTip»",
+		"quantity" => «this.size»,
+		"status" => «calculateTrafficLight(status)»,
+		"_parent" => «parentId.filterNull()»,
+		"_is_leaf" => «isLeaf ? "true" : "false"»
+	)
+«ENDDEFINE»
+
+«DEFINE rowTemplateBasic(int id, int parentId, boolean isLeaf, String text, String toolTip, Real status) FOR List[uml::NamedElement]»
+	array(
+		"id" => «id»,
+		"objectList" => array(),
+		"object" => "«text»",
+		"toolTip" => "«toolTip»",
+		"quantity" => «this.size»,
+		"status" => «calculateTrafficLight(status)»,
+		"_parent" => «parentId.filterNull()»,
+		"_is_leaf" => «isLeaf ? "true" : "false"»
+	)
+«ENDDEFINE»
+
+«DEFINE header(int id, int parentId, boolean isLeaf, String text, String toolTip) FOR uml::Model»
+	array(
+		"id" => «id»,
+		"objectList" => array(),
+		"object" => "«text»",
+		"toolTip" => "«toolTip»",
+		"quantity" => 0,
+		"status" => -1,
+		"_parent" => «parentId.filterNull()»,
+		"_is_leaf" => «isLeaf ? "true" : "false"»
+	)
+«ENDDEFINE»
