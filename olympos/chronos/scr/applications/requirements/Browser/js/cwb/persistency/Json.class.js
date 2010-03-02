@@ -20,7 +20,7 @@ Ext.namespace("cwb.persistency");
 cwb.persistency.Json = function() {
 	this.sid = cwb.Session.getInstance().getSid();
 	this.jsonUrl = cwb.Session.getInstance().getJsonUrl();
-}
+};
 
 cwb.persistency.Json.prototype = new cwb.persistency.Persistency;
 
@@ -49,7 +49,7 @@ cwb.persistency.Json.prototype.jsonRequest = function(params, successHandler, er
 			}
 		}
 	});
-}
+};
 
 cwb.persistency.Json.prototype.array2CommaList = function(array) {
 	var result = array;
@@ -69,7 +69,7 @@ cwb.persistency.Json.prototype.array2CommaList = function(array) {
 	}
 	
 	return result;
-}
+};
 
 cwb.persistency.Json.prototype.doLogin = function(login, password, successHandler, errorHandler) {
 	this.jsonRequest({
@@ -77,64 +77,13 @@ cwb.persistency.Json.prototype.doLogin = function(login, password, successHandle
 		login: login,
 		password: password
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.logout = function(successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "logout"
 	}, successHandler, errorHandler);
-}
-
-cwb.persistency.Json.prototype.newObject = function(uwmClassName, successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: "new",
-		newtype: uwmClassName
-	}, successHandler, errorHandler);
-}
-
-cwb.persistency.Json.prototype.deleteObject = function(oid, successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: "delete",
-		deleteoids: this.array2CommaList(oid)
-	}, successHandler, errorHandler);
-}
-
-cwb.persistency.Json.prototype.associate = function(parentOid, childOid, invert, successHandler, errorHandler) {
-	var direction = "child";
-	
-	if (invert) {
-		direction = "parent";
-	}
-	
-	this.jsonRequest({
-		usr_action: "associate",
-		oid: parentOid,
-		associateoids: this.array2CommaList(childOid),
-		associateAs: direction
-	}, successHandler, errorHandler);
-}
-
-cwb.persistency.Json.prototype.disassociate = function(parentOid, childOid, successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: "disassociate",
-		oid: parentOid,
-		associateoids: this.array2CommaList(childOid)
-	}, successHandler, errorHandler);
-}
-
-cwb.persistency.Json.prototype.save = function(oid, values, successHandler, errorHandler) {
-	var data = {
-		usr_action: "save"
-	};
-	
-	for (var i in values) {
-		if (!(values[i] instanceof Function)) {
-			data["value--" + i + "-" + oid] = values[i];
-		}
-	}
-	
-	this.jsonRequest(data, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.display = function(oid, depth, successHandler, errorHandler) {
 	this.jsonRequest({
@@ -144,55 +93,14 @@ cwb.persistency.Json.prototype.display = function(oid, depth, successHandler, er
 		omitMetaData: true,
 		translateValues: true
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.list = function(uwmClassName, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "list",
 		type: uwmClassName
 	}, successHandler, errorHandler);
-}
-
-cwb.persistency.Json.prototype.listbox = function(type, successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: "listbox",
-		type: type
-	}, successHandler, errorHandler);
-}
-
-cwb.persistency.Json.prototype.autocomplete = function(query, successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: 'autocomplete',
-		query: query
-	}, successHandler, errorHandler);
-	
-}
-
-cwb.persistency.Json.prototype.histlist = function(oid,start,limit, successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: 'histlist',
-		oid:oid,
-		start: start,
-		limit:limit
-	}, successHandler, errorHandler);
-	
-}
-
-cwb.persistency.Json.prototype.restorehistliststate = function(id, successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: 'restorehistliststate',
-		ids:id
-	}, successHandler, errorHandler);
-	
-}
-
-cwb.persistency.Json.prototype.restorehistlistfields = function(ids, successHandler, errorHandler) {
-	this.jsonRequest({
-		usr_action: 'restorehistlistfields',
-		ids:ids
-	}, successHandler, errorHandler);
-	
-}
+};
 
 cwb.persistency.Json.prototype.loadChildren = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
@@ -200,21 +108,21 @@ cwb.persistency.Json.prototype.loadChildren = function(oid, successHandler, erro
 		usr_action: "loadChildren",
 		node: oid
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.lock = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "lock",
 		oid: oid
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.unlock = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "unlock",
 		oid: oid
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.log = function(logtype, msg, successHandler, errorHandler) {
 	var self = this;
@@ -230,14 +138,14 @@ cwb.persistency.Json.prototype.log = function(logtype, msg, successHandler, erro
 			self.processErrorHandler(errorHandler, request, data);
 		}
 	});
-}
+};
 
 cwb.persistency.Json.prototype.doContinue = function(controller, successHandler, errorHandler) {
 	this.jsonRequest({
 		controller: controller,
 		usr_action: 'continue'
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	var data = {};
@@ -261,56 +169,6 @@ cwb.persistency.Json.prototype.executeActionSet = function(actionSet) {
 			case "dologout":
 				break;
 				
-			case "new":
-				jsonRequest.newtype = currRequest.uwmClassName;
-				break;
-				
-			case "delete":
-				jsonRequest.deleteoids = this.array2CommaList(currRequest.oid);
-				break;
-				
-			case "associate":
-				var direction = "child";
-				
-				if (currRequest.invert) {
-					direction = "parent";
-				}
-				
-				jsonRequest.oid = currRequest.parentOid;
-				jsonRequest.associateoids = this.array2CommaList(currRequest.childOid);
-				jsonRequest.associateAs = direction;
-				break;
-				
-			case "disassociate":
-				jsonRequest.oid = currRequest.parentOid;
-				jsonRequest.associateoids = this.array2CommaList(currRequest.childOid);
-				break;
-				
-			case "save":
-				/*
-				for (var i in currRequest.values) {
-					if (!(currRequest.values[i] instanceof Function)) {
-						jsonRequest["value--" + i + "-" + currRequest.oid] = currRequest.values[i];
-					}
-				}
-				*/
-					
-				var changeNode = {};
-				
-				changeNode.oid = currRequest.oid;
-				changeNode.type = cwb.Util.getUwmClassNameFromOid(currRequest.oid);
-				changeNode.values = {};
-				changeNode.values[1] = {};
-				
-				for (var i in currRequest.values) {
-					if (!(currRequest.values[i] instanceof Function)) {
-						changeNode.values[1][i] = currRequest.values[i];
-					}
-				}
-				
-				jsonRequest[currRequest.oid] = changeNode;
-				break;
-				
 			case "display":
 				jsonRequest.oid = currRequest.oid;
 				jsonRequest.depth = currRequest.depth;
@@ -320,14 +178,6 @@ cwb.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				
 			case "list":
 				jsonRequest.type = currRequest.uwmClassName;
-				break;
-				
-			case "listbox":
-				jsonRequest.type = currRequest.type;
-				break;
-				
-			case "autocomplete":
-				jsonRequest.query = currRequest.query;
 				break;
 				
 			case "loadChildren":
@@ -366,7 +216,7 @@ cwb.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	}, function(request, data, errorMessage) {
 		request.params.actionSet.errorHandler(request, data, errorMessage);
 	});
-}
+};
 
 cwb.persistency.Json.prototype.loadStatisticsOverview = function(modelOid, template, successHandler, errorHandler) {
 	this.jsonRequest({
@@ -374,7 +224,7 @@ cwb.persistency.Json.prototype.loadStatisticsOverview = function(modelOid, templ
 		modelOid: modelOid,
 		template: template
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.displayByAlias = function(aliasList, successHandler, errorHandler) {
 	this.jsonRequest({
@@ -382,24 +232,24 @@ cwb.persistency.Json.prototype.displayByAlias = function(aliasList, successHandl
 		aliasList: this.array2CommaList(aliasList),
 		translateValues: true
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.generateUml = function(modelOid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "generateUml",
-		modelOid: modelOid,
+		modelOid: modelOid
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.loadAllStatisticsOverview = function(modelOid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "loadAllStatisticsOverview",
-		modelOid: modelOid,
+		modelOid: modelOid
 	}, successHandler, errorHandler);
-}
+};
 
 cwb.persistency.Json.prototype.lastEdited = function(successHandler, errorHandler) {
 	this.jsonRequest({
-		usr_action: "lastEdited",
+		usr_action: "lastEdited"
 	}, successHandler, errorHandler);
-}
+};
