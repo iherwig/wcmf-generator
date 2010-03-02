@@ -1,6 +1,10 @@
 import uml;
 
 List[uml::Class] removeCommonClasses(List[uml::Class] this):
+	this.removeCommonClassesInternal()
+;
+
+List[uml::Class] removeCommonClassesInternal(List[uml::Class] this):
 	this.reject(e|
 		e.name == "String"
 		|| e.name == "Integer"
