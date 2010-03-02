@@ -4,5 +4,5 @@ import Chronos;
 extension common::cimUml;
 
 List[Chronos::ChiNode] removeCommonClasses(List[Chronos::ChiNode] this):
-	this.removeCommonClasses((List[uml::Class]) this)
+	this.removeCommonClassesInternal()
 ;

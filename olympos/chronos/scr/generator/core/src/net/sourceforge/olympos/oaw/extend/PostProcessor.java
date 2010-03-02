@@ -263,7 +263,7 @@ public class PostProcessor {
 
 		// use extend facade for Chronos helper methods
 		Profile chronosProfile = clazz.getModel().getAppliedProfile(Constants.PROFILE_CHRONOS);
-		XtendFacade chiExt = Generator.createXtendFacade("cartridge::ChiCmf::extensions::ChiNode", new Profile[] { chronosProfile });
+		XtendFacade chiExt = Generator.createXtendFacade("cartridge::ChronosCommon::domain::ChiNode", new Profile[] { chronosProfile });
 
 		// 1. values from base classes (the persistence mappers
 		// use the "Concrete Table Inheritance" pattern)
