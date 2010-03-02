@@ -96,7 +96,7 @@ $statisticsData = array(
 
 «DEFINE rowTemplate(int id, int parentId, boolean isLeaf, String text, String toolTip, Real status) FOR List[Chronos::ChiBase]»
 	array(
-		"id" => «id»,
+		"_id" => «id»,
 		"objectList" => array(
 			«FOREACH this AS currElem SEPARATOR ","»
 				"«currElem.getAppliedStereotypes().first().name»::«currElem.Alias»"
@@ -113,7 +113,7 @@ $statisticsData = array(
 
 «DEFINE rowTemplateBasic(int id, int parentId, boolean isLeaf, String text, String toolTip, Real status) FOR List[uml::NamedElement]»
 	array(
-		"id" => «id»,
+		"_id" => «id»,
 		"objectList" => array(),
 		"object" => "«text»",
 		"toolTip" => "«toolTip»",
@@ -126,7 +126,7 @@ $statisticsData = array(
 
 «DEFINE header(int id, int parentId, boolean isLeaf, String text, String toolTip) FOR uml::Model»
 	array(
-		"id" => «id»,
+		"_id" => «id»,
 		"objectList" => array(),
 		"object" => "«text»",
 		"toolTip" => "«toolTip»",
