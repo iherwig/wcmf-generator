@@ -1,0 +1,16 @@
+import uml;
+import Chronos;
+
+extension cartridge::ChronosCommon::requirements::ChiFeature;
+
+boolean hasParent(Chronos::ChiFeature this):
+	this.getParents().size == 0
+;
+
+boolean isCompletelyImplemented(Chronos::ChiFeature this):
+	this.Status == "Implemented" ? (
+		this.getBusinessUseCases().size > 0
+	) : (
+		true
+	)
+;

@@ -1,0 +1,8 @@
+import uml;
+import Chronos;
+
+extension cartridge::ChronosCommon::requirements::ChiIssue;
+
+boolean hasParent(Chronos::ChiIssue this):
+	this.getParents().size == 0
+;

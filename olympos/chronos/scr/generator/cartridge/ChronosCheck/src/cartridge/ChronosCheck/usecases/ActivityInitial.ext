@@ -1,0 +1,6 @@
+import uml;
+import Chronos;
+
+boolean hasOutgoing(uml::InitialNode this):
+	this.outgoing.size >= 1
+;

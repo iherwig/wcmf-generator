@@ -5,7 +5,9 @@ import uml;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCheck::usecases::ActivityFinal;
+
 context uml::FinalNode ERROR
 	"ActivityFinal must have at least one incoming arrow: " + this.fullQualifiedName():
-	this.incoming.size >= 1
+	this.hasIncoming()
 ;

@@ -4,3 +4,11 @@ import Chronos;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCheck::requirements::ChiGoal;
+
+context Chronos::ChiGoal WARNING
+	"ChiGoal is not achieved":
+	this.isAchieved()
+;
+
+

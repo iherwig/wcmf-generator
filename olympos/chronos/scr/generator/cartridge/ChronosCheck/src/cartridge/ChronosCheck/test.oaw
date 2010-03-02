@@ -8,15 +8,24 @@
 		<profile value="/home/nist/Desktop/meregio-ea/chronos.profile.uml"/>
 	</bean>
 	
+	<bean id="Ouranos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
+		<profile value="/home/nist/Desktop/meregio-ea/ouranos.profile.uml"/>
+	</bean>
+
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="/home/nist/Desktop/meregio-ea/meregio-part.uml" />
 		<outputSlot value="localModel" />
 	</component>
 	
-	<component file="cartridge/ChiCmf/checks/checkAll.oaw">
+	<property name="rootPackage" value="" />
+	<property name="libraryPackage" value="" />
+	<property name="requiredControllerSuperclass" value="" />
+	<property name="requiredNodeSuperclass" value="" />
+	
+	<component file="cartridge/ChronosCheck/checkAll.oaw" inheritAll="true">
 		<uml2 idRef="uml2"/>
 		<Chronos idRef="Chronos"/>
-		<Ouranos idRef="Chronos"/>
+		<Ouranos idRef="Ouranos"/>
 		<modelToCheck value="localModel"/>
 	</component>
 </workflow>
