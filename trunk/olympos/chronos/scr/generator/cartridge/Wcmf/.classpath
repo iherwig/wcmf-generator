@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="lib/ea/ea_com_interface-1.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/ea/ea_toolsupport-1.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/ea/eaapi.jar"/>
+	<classpathentry kind="lib" path="/generator/lib/org.eclipse.uml2.uml_2.2.1.v200808251630.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -325,7 +325,7 @@ String getFKName(Property parent) :
 	//(new String).subString(0, 3)
 	let association = parent.association :
 	association != null ? 
-		(let fk_name = association.getTaggedValue(STEREOTYPE_WCMF_ASSOCIATION(), "fk_name") :
+		(let fk_name = (String) association.getTaggedValue(STEREOTYPE_WCMF_ASSOCIATION(), "fk_name") :
 			fk_name == null || fk_name.toString().length == 0 || fk_name.subString(0, 3) != "fk_" ? defaultFKName(parent.type) : fk_name) : 
 		defaultFKName(parent.type) 
 ;
