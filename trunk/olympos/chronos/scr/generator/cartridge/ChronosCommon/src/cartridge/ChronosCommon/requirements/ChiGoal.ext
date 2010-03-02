@@ -1,0 +1,10 @@
+import uml;
+import Chronos;
+
+List[Chronos::ChiRequirement] getRequirements(Chronos::ChiGoal this):
+	this.getAssociations().memberEnd.select(e|e.type == this).getOtherEnd().type.typeSelect(Chronos::ChiRequirement)
+;
+
+List[Chronos::ChiGoal] getChildGoals(Chronos::ChiGoal this):
+	this.getAssociations().memberEnd.select(e|e.type == this && e.aggregation == uml::AggregationKind::composite).getOtherEnd().type.typeSelect(Chronos::ChiGoal)
+;

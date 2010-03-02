@@ -1,0 +1,6 @@
+import uml;
+import Chronos;
+
+List[Chronos::ChiRequirement] getParents(Chronos::ChiIssue this):
+	this.getRelationships().typeSelect(uml::Dependency).supplier.typeSelect(Chronos::ChiRequirement)
+;
