@@ -4,12 +4,12 @@
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
 
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiValue»
+
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 «EXTENSION cartridge::ChiCmf::extensions::naming»
 «EXTENSION cartridge::ChiCmf::extensions::util»
-
-«EXTENSION cartridge::ChiCmf::extensions::ChiNode»
-«EXTENSION cartridge::ChiCmf::extensions::ChiValue»
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 
 «EXTENSION cartridge::Chi::util»
