@@ -1,0 +1,68 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+
+«EXTENSION cartridge::ChiCmf::extensions::util»
+
+«DEFINE root FOR Model»
+	«info('Expand Model')»
+	«EXPAND cartridge::ChiCmf::templates::DataDefinition::file»
+	«EXPAND cartridge::ChiCmf::templates::Soap::file»
+	«EXPAND cartridge::ChiCmf::templates::Development::file»
+	«EXPAND cartridge::ChiCmf::templates::Configuration::file»
+	«EXPAND node FOREACH this.allOwnedElements().typeSelect(ChiNode)»
+	«EXPAND manyToMany FOREACH this.allOwnedElements().typeSelect(ChiManyToMany)»
+	«EXPAND controller FOREACH this.allOwnedElements().typeSelect(ChiController)»
+	«EXPAND view FOREACH this.allOwnedElements().typeSelect(ChiView)»
+	«REM»«EXPAND class FOREACH this.allOwnedElements().typeSelect(uml::Class)»«ENDREM»
+«ENDDEFINE»
+
+«REM» mapper/node ------------------------------------------------«ENDREM»
+«DEFINE node FOR ChiManyToMany»«ENDDEFINE»
+«DEFINE node FOR ChiNode»
+	«IF !this.isLibraryClass()»
+		«info('Expand ChiNode '+this.name)»
+		«IF !this.isAbstract»
+			«EXPAND cartridge::ChiCmf::templates::RDBMapper::file FOR this»
+		«ENDIF»
+		«EXPAND cartridge::ChiCmf::templates::NodeBase::file FOR this»
+		«EXPAND cartridge::ChiCmf::templates::Node::file FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+«REM» mapper/node ------------------------------------------------«ENDREM»
+«DEFINE manyToMany FOR ChiManyToMany»
+	«IF !this.isLibraryClass()»
+		«info('Expand ChiManyToMany '+this.name)»
+		«IF !this.isAbstract»
+			«EXPAND cartridge::ChiCmf::templates::RDBMapper::file FOR this»
+		«ENDIF»
+		«EXPAND cartridge::ChiCmf::templates::NodeBase::file FOR this»
+		«EXPAND cartridge::ChiCmf::templates::Node::file FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+«REM» class ------------------------------------------------------«ENDREM»
+«DEFINE class FOR uml::Class»
+	«IF !this.isLibraryClass() && this.isApplicationClass()»
+		«info('Expand Class '+this.name)»
+		«EXPAND cartridge::ChiCmf::templates::Class::file FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+«REM» controller -------------------------------------------------«ENDREM»
+«DEFINE controller FOR ChiController»
+	«IF !this.isLibraryClass()»
+		«info('Expand ChiController '+this.name)»
+		«EXPAND cartridge::ChiCmf::templates::Controller::file FOR this»
+	«ENDIF»
+«ENDDEFINE»
+
+«REM» views ------------------------------------------------------«ENDREM»
+«DEFINE view FOR ChiView»
+	«IF !this.isLibraryClass()»
+		«info('Expand ChiView '+this.name)»
+		«EXPAND cartridge::ChiCmf::templates::View::file FOR this»
+	«ENDIF»
+«ENDDEFINE»
