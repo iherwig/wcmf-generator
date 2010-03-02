@@ -75,12 +75,7 @@ class OawUtil {
 	public static function createPropertyFile($uwmPath, $umlPath) {
 		self::setupExecutable();
 		
-		$numSlashes = substr_count(str_replace('\\', '/', self::$cwd), '/');
-		$relativeCwdPath = '';
-		for ($i = 0; $i < $numSlashes; $i++) {
-			$relativeCwdPath .= '../';
-		}
-		$umlRelativePath = $relativeCwdPath . preg_replace('/^[a-zA-Z]:\\\\/', '', $umlPath);
+		$umlRelativePath = FileUtil::getRelativePath(self::$cwd, $umlPath);
 		
 		$propertiesPath = self::tempName();
 		$propertiesFile = fopen($propertiesPath, 'w');

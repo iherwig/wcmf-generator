@@ -17,6 +17,7 @@
  */
  require_once(BASE."wcmf/application/controller/class.BatchController.php");
 // PROTECTED REGION ID(application/include/controller/class.AllBrowserStatisticsController.php/Import) ENABLED START
+require_once(BASE."wcmf/lib/util/class.FileUtil.php");
 require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
 // PROTECTED REGION END
@@ -145,25 +146,25 @@ class AllBrowserStatisticsController extends BatchController
 		$session = &SessionData::getInstance();
 
 		// set the export path
-		$workingDir = OawUtil::tempName();
-		$session->set($this->TEMP_WORKING_DIR, $workingDir);
-		mkdir($workingDir);
+		$startOid = $session->get($this->PARAM_START_OID);
+		$tmpWorkingDir = self::getWorkingDir($startOid).'/tmp';
+		$session->set($this->TEMP_WORKING_DIR, $tmpWorkingDir);
+		mkdir($tmpWorkingDir);
 
-		$statisticsDir = $workingDir.'/statistics';
-		$barchartDir = $workingDir.'/barchart';
-		$piechartDir = $workingDir.'/piechart';
+		$statisticsDir = $tmpWorkingDir.'/statistics';
+		$barchartDir = $tmpWorkingDir.'/barchart';
+		$piechartDir = $tmpWorkingDir.'/piechart';
 
 		mkdir($statisticsDir);
 		mkdir($barchartDir);
 		mkdir($piechartDir);
 
 		// do the export
-		$tmpUwmExportPath = "$workingDir/cwm-source.xml";
+		$tmpUwmExportPath = "$tmpWorkingDir/cwm-source.xml";
 		$session->set($this->TEMP_UWM_EXPORT_PATH, $tmpUwmExportPath);
 		touch($tmpUwmExportPath);
 
 		// do the export
-		$startOid = $session->get($this->PARAM_START_OID);
 		$this->check("start exportXML: node:".$startOid);
 
 		$problemReport = UwmUtil::exportXml($tmpUwmExportPath, $startOid);
@@ -185,15 +186,15 @@ class AllBrowserStatisticsController extends BatchController
 	function initOAW($oids)
 	{
 		$session = &SessionData::getInstance();
-		$workingDir = $session->get($this->TEMP_WORKING_DIR);
+		$tmpWorkingDir = $session->get($this->TEMP_WORKING_DIR);
 		$tmpUwmExportPath = $session->get($this->TEMP_UWM_EXPORT_PATH);
-		$tmpPropertiesPath = OawUtil::createPropertyFile('file://'.$tmpUwmExportPath, $workingDir);
+		$tmpPropertiesPath = OawUtil::createPropertyFile('file://'.$tmpUwmExportPath, $tmpWorkingDir);
 		$session->set($this->TEMP_PROPERTIES_PATH, $tmpPropertiesPath);
 	
 		// create the result files
-		OawUtil::createTempFile($workingDir.'/statistics/browser.dat');
-		OawUtil::createTempFile($workingDir.'/barchart/browser.dat');
-		OawUtil::createTempFile($workingDir.'/piechart/browser.dat');
+		OawUtil::createTempFile($tmpWorkingDir.'/statistics/browser.dat');
+		OawUtil::createTempFile($tmpWorkingDir.'/barchart/browser.dat');
+		OawUtil::createTempFile($tmpWorkingDir.'/piechart/browser.dat');
 	}
 	/**
 	 * Run the gererator step 0
@@ -266,20 +267,35 @@ class AllBrowserStatisticsController extends BatchController
 		$session = &SessionData::getInstance();
 
 		// set the result in the session
-		$workingDir = $session->get($this->TEMP_WORKING_DIR);
-		include($workingDir.'/statistics/browser.dat');
-		include($workingDir.'/barchart/browser.dat');
-		include($workingDir.'/piechart/browser.dat');
+		$tmpWorkingDir = $session->get($this->TEMP_WORKING_DIR);
+		include($tmpWorkingDir.'/statistics/browser.dat');
+		include($tmpWorkingDir.'/barchart/browser.dat');
+		include($tmpWorkingDir.'/piechart/browser.dat');
 
 		$session->set('statistics', $statisticsData);
 		$session->set('barchart', $barchartData);
 		$session->set('piechart', $piechartData);
 
 		// cleanup
+		$startOid = $session->get($this->PARAM_START_OID);
+		FileUtil::copyRec($tmpWorkingDir, self::getWorkingDir($startOid));
 		unlink($session->get($this->TEMP_PROPERTIES_PATH));
-		$workingDir = $session->get($this->TEMP_WORKING_DIR);
-		FileUtil::emptyDir($workingDir);
-		rmdir($workingDir);
+		$tmpWorkingDir = $session->get($this->TEMP_WORKING_DIR);
+		FileUtil::emptyDir($tmpWorkingDir);
+		rmdir($tmpWorkingDir);
+	}
+	/**
+	 * Get the working directory for this export
+	 * @param modelOid The oid of the model
+	 */
+	public static function getWorkingDir($modelOid)
+	{
+		$ids = PersistenceFacade::getOIDParameter($modelOid, 'id');
+		$dir = dirname($_SERVER['SCRIPT_FILENAME']).'/statistics/model'.$ids[0];
+		if (!file_exists($dir)) {
+			FileUtil::mkdirRec($dir);
+		}
+		return $dir;
 	}
 // PROTECTED REGION END
 
