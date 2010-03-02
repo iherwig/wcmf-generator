@@ -9,7 +9,7 @@
 «FILE "browser.dat"»
 <?php
 $statisticsData = array(
-	«EXPAND header(1, 0, false, "Requirements", "Requirements") FOR this»,
+	«EXPAND header(1, 0, false, "Requirements", "Requirements", this.getGoalsAll().size + this.getRequirementsAll().size + this.getFeaturesAll().size + this.getIssuesAll().size) FOR this»,
 
 	«EXPAND rowTemplate(11, 1, false, "ChiGoals", "All ChiGoals", -1) FOR this.getGoalsAll()», 
 	«EXPAND rowTemplate(1011, 11, true, "valid child", "ChiGoals that do not have a ChiRequirement or a ChiGoal", 1 - (E() + this.getGoalsNoValidChild().size) / this.getGoalsAll().size) FOR this.getGoalsNoValidChild()»,
@@ -32,7 +32,7 @@ $statisticsData = array(
 	«EXPAND rowTemplate(41, 1, false, "ChiIssues", "All ChiIssues", -1) FOR this.getIssuesAll()»,
 	«EXPAND rowTemplate(1041, 41, true, "with parent", "ChiIssues that do not have a ChiRequirement", 1 - (E() + this.getIssuesWithoutParent().size) / this.getIssuesAll().size) FOR this.getIssuesWithoutParent()»,
 
-	«EXPAND header(2, 0, false, "Use Cases", "Use Cases") FOR this»,
+	«EXPAND header(2, 0, false, "Use Cases", "Use Cases", this.getBusinessProcessesAll().size + this.getBusinessUcAll().size + this.getActivitySetsAll().size + this.getActivitiesAll().size + this.getInitialsAll().size + this.getFinalsAll().size + this.getDecisionsAll().size) FOR this»,
 
 	«EXPAND rowTemplate(12, 2, false, "ChiBusinessProcess", "All ChiBusinessProcesses", -1) FOR this.getBusinessProcessesAll()»,
 	«EXPAND rowTemplate(1012, 12, true, "with ChiBusinessUseCase", "ChiBusinessProcesss that have no ChiBusinessUseCase", 1 - (E() + this.getBusinessProcessesWithoutUc().size) / this.getBusinessProcessesAll().size) FOR this.getBusinessProcessesWithoutUc()»,
@@ -124,13 +124,13 @@ $statisticsData = array(
 	)
 «ENDDEFINE»
 
-«DEFINE header(int id, int parentId, boolean isLeaf, String text, String toolTip) FOR uml::Model»
+«DEFINE header(int id, int parentId, boolean isLeaf, String text, String toolTip, int quantity) FOR uml::Model»
 	array(
 		"_id" => «id»,
 		"objectList" => array(),
 		"object" => "«text»",
 		"toolTip" => "«toolTip»",
-		"quantity" => 0,
+		"quantity" => «quantity»,
 		"status" => -1,
 		"_parent" => «parentId.filterNull()»,
 		"_is_leaf" => «isLeaf ? "true" : "false"»
