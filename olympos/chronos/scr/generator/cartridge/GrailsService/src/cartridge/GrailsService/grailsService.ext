@@ -52,10 +52,6 @@ String asMainMethodName(uml::Activity this):
 	this.getInitialNode().name.normalizeMemberName()
 ;
 	
-uml::InitialNode getInitialNode(uml::Activity this):
-	this.node.typeSelect(uml::InitialNode).first()
-;
-
 uml::DataStoreNode getInputVariable(uml::Activity this):
 	this.getInputVariables().first()
 ;
