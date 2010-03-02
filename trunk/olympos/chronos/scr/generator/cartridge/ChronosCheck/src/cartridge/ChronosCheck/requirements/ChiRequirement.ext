@@ -1,0 +1,26 @@
+import uml;
+import Chronos;
+
+extension cartridge::ChronosCommon::requirements::ChiRequirement;
+
+boolean hasParent(Chronos::ChiRequirement this):
+	this.getParents().size != 0
+;
+
+boolean hasChild(Chronos::ChiRequirement this):
+	this.getFeatures().size > 0 || this.getIssues().size > 0
+;
+
+boolean hasOnlyOneFeature(Chronos::ChiRequirement this):
+	this.getFeatures().size <= 1
+;
+
+boolean hasOnlyOneTypeOfChildren(Chronos::ChiRequirement this):
+	let leafChildren = {}.addAll(this.getFeatures()).addAll(this.getIssues()):
+	
+	this.getChildRequirements().size == 0 || leafChildren.size == 0
+;
+
+boolean hasEitherFeatureOrIssue(Chronos::ChiRequirement this):
+	this.getFeatures().size == 0 || this.getIssues().size == 0
+;

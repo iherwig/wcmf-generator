@@ -5,7 +5,9 @@ import uml;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCheck::usecases::ActivityInitial;
+
 context uml::InitialNode ERROR
 	"ActivityIntial must have at least one outgoing arrow: " + this.fullQualifiedName():
-	this.outgoing.size >= 1
+	this.hasOutgoing()
 ;

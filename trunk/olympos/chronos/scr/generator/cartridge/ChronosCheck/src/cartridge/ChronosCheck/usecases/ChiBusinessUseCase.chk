@@ -5,54 +5,55 @@ import uml;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCheck::usecases::ChiBusinessUseCase;
+extension cartridge::ChronosCommon::usecases::ChiBusinessUseCase;
+
 context Chronos::ChiBusinessUseCase WARNING
 	"ChiBusinessUseCase should have a Scope: " + this.fullQualifiedName():
-	!this.Scope.isNullOrEmpty()
+	this.hasScope()
 ;
 
 context Chronos::ChiBusinessUseCase WARNING
 	"ChiBusinessUseCase should have a GoalInContext: " + this.fullQualifiedName():
-	!this.GoalInContext.isNullOrEmpty()
-;
-
-uml::InitialNode getInitial(Chronos::ChiBusinessUseCase this):
-	((List[uml::Activity]) this.ownedBehavior).node.typeSelect(uml::InitialNode).first()
+	this.hasGoalInContext()
 ;
 
 context Chronos::ChiBusinessUseCase if this.getInitial() != null WARNING
 	"ActivityIntial must have the same name as the “trigger” field in the corresponding use case: " + this.getInitial().fullQualifiedName():
-	this.getInitial().name == this.Trigger
-;
-
-List[uml::ActivityFinalNode] getFinals(Chronos::ChiBusinessUseCase this):
-	((List[uml::Activity]) this.ownedBehavior).node.typeSelect(uml::ActivityFinalNode)
+	this.hasTriggerEqInitial()
 ;
 
 context Chronos::ChiBusinessUseCase if this.getFinals().size > 0 WARNING
 	"At least one ActivityFinal must have the same name as the “main success scenario” field in the corresponding use case: " + this.fullQualifiedName():
-	this.getFinals().exists(e|e.name == this.MainSuccessScenario)
-;
-
-uml::Actor getPrimaryActor(Chronos::ChiBusinessUseCase this):
-	this.getModel().allOwnedElements().typeSelect(uml::Actor).selectFirst(e|e.name == this.PrimaryActor)
+	this.hasMainSuccessScenarioEqFinal()
 ;
 
 context Chronos::ChiBusinessUseCase if !this.PrimaryActor.isNullOrEmpty() WARNING
 	"A ChiBusinessPartnerPassive Cannot be a primary actor: " + this.getPrimaryActor().fullQualifiedName():
-	!Chronos::ChiBusinessPartnerPassive.isInstance(this.getPrimaryActor())
+	this.isPrimaryActorActive()
+;
+
+context Chronos::ChiBusinessUseCase WARNING
+	"A ChiBusinessUseCase SHOULD have an ActivitySet: " + this.fullQualifiedName():
+	this.hasActivitySet()
+;
+
+context Chronos::ChiBusinessUseCase WARNING
+	"A ChiBusinessUseCase SHOULD have an Actor: " + this.fullQualifiedName():
+	this.hasActor()
 ;
 
 context Chronos::ChiBusinessUseCase ERROR
 	"ChiBusinessUseCase MUST have a Trigger: " + this.fullQualifiedName():
-	!this.Trigger.isNullOrEmpty()
+	this.hasTrigger()
 ;
 
 context Chronos::ChiBusinessUseCase ERROR
 	"ChiBusinessUseCase MUST have a MainSuccessScenario: " + this.fullQualifiedName():
-	!this.MainSuccessScenario.isNullOrEmpty()
+	this.hasMainSuccessScenario()
 ;
 
 context Chronos::ChiBusinessUseCase ERROR
 	"ChiBusinessUseCase MUST have a PrimaryActor: " + this.fullQualifiedName():
-	this.getPrimaryActor() != null
+	this.hasPrimaryActor()
 ;
