@@ -56,7 +56,16 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 			}
 		});
 		
-		this.lastEditedPanel = new cwb.ui.LastEditedGrid( {});
+		this.lastEditedPanel = new cwb.ui.LastEditedGrid({
+			listeners: {
+				// publish the objectSelected event from the hits grid
+				// in order to allow other applications to react to 
+				// object selection
+				'objectSelected': function(oid) {
+					self.onObjectSelected(oid);
+				}
+			}
+		});
 		
 		Ext.apply(this, {
 		    region: 'center',
@@ -141,15 +150,18 @@ cwb.ui.StructureTabPanel.prototype.createHitsGrid = function(id, tabTitle, tabCo
 				// in order to allow other applications to react to 
 				// object selection
 				'objectSelected': function(oid) {
-					self.fireEvent('objectSelected', oid);
+					self.onObjectSelected(oid);
 				}
 			}
-		    
 		});
 		this.hitsGrids.add(id, tab);
 		this.add(tab);
 	}
 	tab.show();
+};
+
+cwb.ui.StructureTabPanel.prototype.onObjectSelected = function(oid) {
+	this.fireEvent('objectSelected', oid);
 };
 
 cwb.ui.StructureTabPanel.getInstance = function() {
