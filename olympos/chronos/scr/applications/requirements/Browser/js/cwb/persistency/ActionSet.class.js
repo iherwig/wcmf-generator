@@ -20,7 +20,7 @@ Ext.namespace("cwb.persistency");
 cwb.persistency.ActionSet = function() {
 	this.requests = {};
 	this.currentId = 0;
-}
+};
 
 cwb.persistency.ActionSet.prototype.addLogin = function(login, password,
 		successHandler, errorHandler, errorLevel) {
@@ -32,7 +32,7 @@ cwb.persistency.ActionSet.prototype.addLogin = function(login, password,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
 	};
-}
+};
 
 cwb.persistency.ActionSet.prototype.addLogout = function(successHandler,
 		errorHandler, errorLevel) {
@@ -42,66 +42,7 @@ cwb.persistency.ActionSet.prototype.addLogout = function(successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
 	};
-}
-
-cwb.persistency.ActionSet.prototype.addNewObject = function(uwmClassName,
-		successHandler, errorHandler, errorLevel) {
-	this.requests[this.getNextId()] = {
-		action :"new",
-		uwmClassName :uwmClassName,
-		successHandler :successHandler,
-		errorHandler :errorHandler,
-		errorLevel :errorLevel
-	};
-}
-
-cwb.persistency.ActionSet.prototype.addDeleteObject = function(oid,
-		successHandler, errorHandler, errorLevel) {
-	this.requests[this.getNextId()] = {
-		action :"delete",
-		oid :oid,
-		successHandler :successHandler,
-		errorHandler :errorHandler,
-		errorLevel :errorLevel
-	};
-}
-
-cwb.persistency.ActionSet.prototype.addAssociate = function(parentOid,
-		childOid, invert, successHandler, errorHandler, errorLevel) {
-	this.requests[this.getNextId()] = {
-		action :"associate",
-		parentOid :parentOid,
-		childOid :childOid,
-		invert :invert,
-		successHandler :successHandler,
-		errorHandler :errorHandler,
-		errorLevel :errorLevel
-	};
-}
-
-cwb.persistency.ActionSet.prototype.addDisassociate = function(parentOid,
-		childOid, successHandler, errorHandler, errorLevel) {
-	this.requests[this.getNextId()] = {
-		action :"disassociate",
-		parentOid :parentOid,
-		childOid :childOid,
-		successHandler :successHandler,
-		errorHandler :errorHandler,
-		errorLevel :errorLevel
-	};
-}
-
-cwb.persistency.ActionSet.prototype.addSave = function(oid, values,
-		successHandler, errorHandler, errorLevel) {
-	this.requests[this.getNextId()] = {
-		action :"save",
-		oid :oid,
-		values :values,
-		successHandler :successHandler,
-		errorHandler :errorHandler,
-		errorLevel :errorLevel
-	};
-}
+};
 
 cwb.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
 		successHandler, errorHandler, errorLevel) {
@@ -113,7 +54,7 @@ cwb.persistency.ActionSet.prototype.addDisplay = function(oid, depth,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
 	};
-}
+};
 
 cwb.persistency.ActionSet.prototype.addList = function(uwmClassName,
 		successHandler, errorHandler, errorLevel) {
@@ -124,29 +65,7 @@ cwb.persistency.ActionSet.prototype.addList = function(uwmClassName,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
 	};
-}
-
-cwb.persistency.ActionSet.prototype.addListbox = function(type, successHandler,
-		errorHandler, errorLevel) {
-	this.requests[this.getNextId()] = {
-		action :"listbox",
-		type :type,
-		successHandler :successHandler,
-		errorHandler :errorHandler,
-		errorLevel :errorLevel
-	};
-}
-
-cwb.persistency.ActionSet.prototype.addAutocomplete = function(query,
-		successHandler, errorHandler, errorLevel) {
-	this.requests[this.getNextId()] = {
-		action :"autocomplete",
-		query :query,
-		successHandler :successHandler,
-		errorHandler :errorHandler,
-		errorLevel :errorLevel
-	};
-}
+};
 
 cwb.persistency.ActionSet.prototype.addLoadChildren = function(oid,
 		successHandler, errorHandler, errorLevel) {
@@ -157,7 +76,7 @@ cwb.persistency.ActionSet.prototype.addLoadChildren = function(oid,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
 	};
-}
+};
 
 cwb.persistency.ActionSet.prototype.addLock = function(oid, successHandler,
 		errorHandler, errorLevel) {
@@ -168,7 +87,7 @@ cwb.persistency.ActionSet.prototype.addLock = function(oid, successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
 	};
-}
+};
 
 cwb.persistency.ActionSet.prototype.addUnlock = function(oid, successHandler,
 		errorHandler, errorLevel) {
@@ -179,7 +98,7 @@ cwb.persistency.ActionSet.prototype.addUnlock = function(oid, successHandler,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
 	};
-}
+};
 
 cwb.persistency.ActionSet.prototype.addLog = function(logtype, msg,
 		successHandler, errorHandler, errorLevel) {
@@ -191,7 +110,7 @@ cwb.persistency.ActionSet.prototype.addLog = function(logtype, msg,
 		errorHandler :errorHandler,
 		errorLevel :errorLevel
 	};
-}
+};
 
 cwb.persistency.ActionSet.prototype.commit = function(successHandler,
 		errorHandler) {
@@ -209,7 +128,7 @@ cwb.persistency.ActionSet.prototype.commit = function(successHandler,
 	this.savedErrorHandler = errorHandler;
 
 	cwb.persistency.Persistency.getInstance().executeActionSet(this);
-}
+};
 
 cwb.persistency.ActionSet.prototype.getNextId = function() {
 	var result = cwb.persistency.ActionSet.ACTION_PREFIX + this.currentId;
@@ -217,11 +136,11 @@ cwb.persistency.ActionSet.prototype.getNextId = function() {
 	this.currentId++;
 
 	return result;
-}
+};
 
 cwb.persistency.ActionSet.prototype.getRequests = function() {
 	return this.requests;
-}
+};
 
 cwb.persistency.ActionSet.prototype.successHandler = function(request, data) {
 	var errorLevel = null;
@@ -257,19 +176,19 @@ cwb.persistency.ActionSet.prototype.successHandler = function(request, data) {
 	// currently, we do not react globally on errorLevels
 
 	persistency.processSuccessHandler(this.savedSuccessHandler, request, data);
-}
+};
 
 cwb.persistency.ActionSet.prototype.errorHandler = function(request, data,
 		errorMessage) {
 	cwb.persistency.Persistency.getInstance().processErrorHandler(
 			this.savedErrorHandler, request, data, errorMessage);
-}
+};
 
 cwb.persistency.ActionSet.errorLevels = {
 	IGNORE :1,
 	WARN :2,
 	ERROR :3
-}
+};
 
 cwb.persistency.ActionSet.DEFAULT_ERROR_LEVEL = cwb.persistency.ActionSet.errorLevels.WARN;
 

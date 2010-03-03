@@ -24,6 +24,8 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 		var self = this;
 	
 		this.selectModelBox = new Ext.form.ComboBox( {
+			x: 2,
+			y: 105,
 		    store: new Ext.data.SimpleStore( {
 		        fields: [ "oid", "name" ],
 		        data: []
@@ -43,21 +45,36 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 		cwb.ObjectContainer.getInstance().loadModelList(this.selectModelBox);
 		
 		this.loadModelButton = new Ext.Button( {
+			x: 170,
+			y: 105,
 		    text: cwb.Dict.translate('Report'),
 		    type: 'submit',
 		    handler: function() {
 			    self.loadModel();
 		    }
 		});
+
+		this.useCacheCheckbox = new Ext.form.Checkbox( {
+			x: 2,
+			y: 132,
+			boxLabel: cwb.Dict.translate('Use cached data'),
+		    checked: true
+		});
 		
 		Ext.apply(this, {
 		    region: 'north',
-		    height: 150,
-		    buttonAlign: 'right',
+		    layout: 'absolute',
+		    height: 155,
 		    bodyStyle: 'background-color:#DFE8F6;',
-		    items: [ {
-			    html: '<img src="'+cwb.Config.baseHref+'img/logo3.png">'
-		    }, this.selectModelBox, this.loadModelButton ]
+		    items: [{
+		    		x: 0,
+		    		y: 0,
+			    	html: '<img src="'+cwb.Config.baseHref+'img/logo3.png">'
+		    	}, 
+		    	this.selectModelBox, 
+		    	this.loadModelButton,
+		    	this.useCacheCheckbox
+		    ]
 		});
 		
 		cwb.ui.ModelChooser.superclass.initComponent.apply(this, arguments);
@@ -69,6 +86,7 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
  */
 cwb.ui.ModelChooser.prototype.loadModel = function() {
 	var modelOid = this.selectModelBox.getValue();
+	var useCache = this.useCacheCheckbox.getValue();
 
 	var container = cwb.ObjectContainer.getInstance();
 	
@@ -80,7 +98,7 @@ cwb.ui.ModelChooser.prototype.loadModel = function() {
 		
 		var self = this;
 		
-		container.loadModel(modelOid, function(state) {
+		container.loadModel(modelOid, useCache, function(state) {
 			self.handleLoadCallback(state);
 		});
 	} else {
