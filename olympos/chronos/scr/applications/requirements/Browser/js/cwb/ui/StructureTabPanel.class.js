@@ -24,7 +24,7 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		var self = this;
 
 		this.packageWeight = new cwb.ui.Treemap();
-		this.packageTree = new cwb.ui.Spacetree();
+		//this.packageTree = new cwb.ui.Spacetree();
 		
 		/**
 		 * Tab containing treemap (package weight).
@@ -60,9 +60,9 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		
 		Ext.apply(this, {
 		    region: 'center',
-		    activeTab: 2,
+		    activeTab: 0,
 		    deferredRender: false,
-		    items: [ this.weightPanel, this.treePanel, this.lastEditedPanel ]
+		    items: [ this.lastEditedPanel, this.weightPanel/*, this.treePanel*/ ]
 		});
 		
 		cwb.ui.StructureTabPanel.superclass.initComponent.apply(this, arguments);
@@ -88,12 +88,14 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
  *            tab The Tab which is being activated.
  */
 cwb.ui.StructureTabPanel.prototype.handleTabChange = function(tabPanel, tab) {
+	/*
 	var scrollArea = Ext.get(cwb.ui.StructureTabPanel.PACKAGE_ID);
 	var scroll = scrollArea.getScroll();
 	if (scroll.left == 0 && scroll.top == 0) {
 		scrollArea.scrollTo("left", scrollArea.dom.scrollWidth / 2 - scrollArea.getWidth() / 2);
 		scrollArea.scrollTo("top", scrollArea.dom.scrollHeight / 2 - scrollArea.getHeight() / 2);
 	}
+	*/
 	this.showDiagrams();
 };
 
@@ -119,10 +121,10 @@ cwb.ui.StructureTabPanel.prototype.showDiagrams = function() {
 	var modelOid = cwb.ObjectContainer.getInstance().getCurrModelOid();
 	if (modelOid) {
 		cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
-		cwb.Util.showDiv(cwb.ui.StructureTabPanel.PACKAGE_ID);
+		//cwb.Util.showDiv(cwb.ui.StructureTabPanel.PACKAGE_ID);
 		
 		this.packageWeight.show();
-		this.packageTree.show();
+		//this.packageTree.show();
 	}
 };
 

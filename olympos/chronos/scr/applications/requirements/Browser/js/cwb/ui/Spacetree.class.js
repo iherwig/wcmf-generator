@@ -28,20 +28,20 @@ cwb.ui.Spacetree.prototype.show = function() {
 		// Create a new canvas instance.
 		this.spacetreeCanvas = this.spacetreeCanvas || new Canvas('mycanvas', {
 		    //Where to inject canvas. Any HTML container will do.
-		    'injectInto' : cwb.ui.StructureTabPanel.PACKAGE_ID,
+		    'injectInto': cwb.ui.StructureTabPanel.PACKAGE_ID,
 		    //Set width and height, default's to 200.
-		    'width' : 2000,
-		    'height' : 2000,
+		    'width': 2000,
+		    'height': 2000,
 		    
 		    //Set a background color in case the browser
 		    // does not support clearing a specific area.
-		    'backgroundColor' : '#fff',
+		    'backgroundColor': '#fff',
 		    //Set canvas styles.
-		    'styles' : {
-		        'fillStyle' : '#eee',
-		        'strokeStyle' : '#111'
+		    'styles': {
+		        'fillStyle': '#eee',
+		        'strokeStyle': '#111'
 		    },
-		    setColor : function(color) {
+		    setColor: function(color) {
 			    this.styles.fillStyle = color;
 		    }
 		});
@@ -54,7 +54,7 @@ cwb.ui.Spacetree.prototype.show = function() {
 		var self = this;
 		var st = new ST(this.spacetreeCanvas, {
 		    //Add an event handler to the node when creating it.
-		    onCreateLabel : function(label, node) {
+		    onCreateLabel: function(label, node) {
 			    label.id = node.id;
 			    label.innerHTML = "<div class='outer'><div class='inner'><img src='"+cwb.Config.baseHref+"img/icons/"+
 			    	node.uwmClassName+".png' />"+node.name+"</div></div>";
@@ -66,7 +66,7 @@ cwb.ui.Spacetree.prototype.show = function() {
 			    };
 		    },
 		    //Set color as selected if the node is selected.
-		    onBeforePlotNode : function(node) {
+		    onBeforePlotNode: function(node) {
 			    var ctx = self.spacetreeCanvas.getCtx();
 			    fStyle = ctx.fillStyle;
 			    sStyle = ctx.strokeStyle;
@@ -76,13 +76,13 @@ cwb.ui.Spacetree.prototype.show = function() {
 			    }
 		    },
 		    //Restore color.
-		    onAfterPlotNode : function(node) {
+		    onAfterPlotNode: function(node) {
 			    var ctx = self.spacetreeCanvas.getCtx();
 			    ctx.fillStyle = fStyle;
 			    ctx.stroleStyle = sStyle;
 		    },
 		    //Set color as selected if the edge belongs to the path.
-		    onBeforePlotLine : function(adj) {
+		    onBeforePlotLine: function(adj) {
 			    var ctx = self.spacetreeCanvas.getCtx();
 			    lineWidth = ctx.lineWidth;
 			    sStyle = ctx.strokeStyle;
@@ -92,34 +92,34 @@ cwb.ui.Spacetree.prototype.show = function() {
 			    }
 		    },
 		    //Restore color and line width
-		    onAfterPlotLine : function(adj) {
+		    onAfterPlotLine: function(adj) {
 			    var ctx = self.spacetreeCanvas.getCtx();
 			    ctx.lineWidth = lineWidth;
 			    ctx.stroleStyle = sStyle;
 		    },
-		    request : function(nodeId, level, onComplete) {
+		    request: function(nodeId, level, onComplete) {
 			    var self = this;
 			    
-			    cwb.persistency.Persistency.getInstance().display(nodeId.indexOf("_") > 0 ? nodeId.substring(0, nodeId.indexOf("_")) : nodeId, 2, function(options, data) {
+			    cwb.persistency.Persistency.getInstance().display(nodeId.indexOf("_") > 0 ? nodeId.substring(0, nodeId.indexOf("_")): nodeId, 2, function(options, data) {
 				    var result = self.loadFromDisplay(data.node);
 				    
 				    onComplete.onComplete(nodeId, result);
 			    });
 		    },
 		    
-		    loadFromDisplay : function(currNode) {
+		    loadFromDisplay: function(currNode) {
 			    var result = {
-			        id : currNode.oid + "_" + this.spacetreeCounter,
-			        name : currNode.values[1].Name,
-			        data : [ {
-			            key : 'content',
-			            value : 0
+			        id: currNode.oid + "_" + this.spacetreeCounter,
+			        name: currNode.values[1].Name,
+			        data: [ {
+			            key: 'content',
+			            value: 0
 			        }, {
-			            key : 'color',
-			            value : 1
+			            key: 'color',
+			            value: 1
 			        } ],
-			        children : [],
-			        uwmClassName : currNode.type
+			        children: [],
+			        uwmClassName: currNode.type
 			    };
 			    
 			    this.spacetreeCounter++;
@@ -154,7 +154,7 @@ cwb.ui.Spacetree.prototype.show = function() {
 		    }
 		});
 		// load json data
-		st.loadFromJSON(json);
+		st.loadJSON(json);
 		// compute node positions and layout
 		st.compute();
 		// optional: make a translation of the tree

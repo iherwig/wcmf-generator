@@ -79,9 +79,11 @@ cwb.ui.DiagramPanel.prototype.clear = function() {
 	cwb.Util.emptyDiv(cwb.ui.DiagramPanel.BARCHART_ID);
 };
 
-cwb.ui.DiagramPanel.prototype.showFlash = function(divId, action, modelId) {
+cwb.ui.DiagramPanel.prototype.showFlash = function(divId, action, modelOid) {
+	// NOTE: the colon in modelOid is replaced by _ because encoding does not seem to work
+	var url = cwb.Config.jsonUrl+"?usr_action=" + action + "%26response_format=JSON%26modelOid=" + modelOid.replace(/:/, '_');
 	swfobject.embedSWF(cwb.Config.baseHref+"lib/ofc/open-flash-chart.swf", divId, "100%", "100%", "9.0.0", "expressInstall.swf", {
-		"data-file": cwb.Config.jsonUrl+"?usr_action=" + action + "&response_format=JSON&modelOid=" + encodeURI(modelId)
+		"data-file": url
 	}, {
 		"wmode": "transparent"
 	});

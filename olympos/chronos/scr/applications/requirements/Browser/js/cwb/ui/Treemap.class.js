@@ -19,59 +19,72 @@ cwb.ui.Treemap = function() {
 };
 
 cwb.ui.Treemap.prototype.show = function() {
-	var json = parent.cwb.ObjectContainer.getInstance().objectsForTreemap;
-	if (json.data) {
+	var objContainer = cwb.ObjectContainer.getInstance();
+	if (objContainer.modelLoaded) {
+		
+		var json = objContainer.objectsForTreemap;
 		var tm = new TM.Squarified( {
-		    //main container id.
-		    rootId : cwb.ui.StructureTabPanel.WEIGHT_ID,
-		    //orientation
-		    orientation : "v",
-		    
-		    Color : {
-		        //Allow coloring
-		        allow : true,
-		        // <irrelevant, colors are now calculated differently>
-		        // Set min value and max value for
-		        // the second *dataset* object values.
-		        // Default's to -100 and 100.
-		        minValue : 0,
-		        maxValue : 2,
-		        tips : true,
-		        //Set color range. Default's to reddish and
-		        // greenish. It takes an array of three
-		        // integers as R, G and B values.
-		        maxColorValue : [ 0, 255, 50 ],
-		        minColorValue : [ 255, 0, 50 ]
-		    // </irrelevant>
-		    },
-		    onAfterCompute : function() {
-			    var that = this, parent;
-			    var cssId = '#'+cwb.ui.StructureTabPanel.WEIGHT_ID;
-			    $$(cssId+' .leaf', cssId+' .head').each( function(elem, i) {
-				    //get the JSON tree node element having the same id
-				        // as the dom element queried and makeTip.
-				        if (p = elem.getParent()) {
-					        var sTree = TreeUtil.getSubtree(tm.tree, p.id);
-					        if (sTree)
-						        that.makeTip(elem, sTree);
-				        }
-			        });
-		    },
-		    //Tooltip content is setted by setting the *title* of the element to be *tooltiped*.
-		    // Read the mootools docs for further understanding.
-		    makeTip : function(elem, json) {
-			    var title = json.name;
-			    var html = this.makeHTMLFromData(json.data);
-			    elem.store('tip:title', title).store('tip:text', html);
-		    },
-		    //Take each dataset object key and value and make an HTML from it.
-		    makeHTMLFromData : function(data) {
-			    var html = '';
-			    html += parent.cwb.Dict.translate('Content') + ': ' + data[0].value + '<br />';
-			    // Insert further tooltip information here.
-			    return html;
-		    }
+			// Where to inject the treemap.
+			rootId : cwb.ui.StructureTabPanel.WEIGHT_ID,
+
+			// Add click handlers for
+			// zooming the Treemap in and out
+			addLeftClickHandler : true,
+			addRightClickHandler : true,
+
+			// When hovering a node highlight the nodes
+			// between the root node and the hovered node. This
+			// is done by adding the 'in-path' CSS class to each node.
+			selectPathOnHover : true,
+
+			Color : {
+				// Allow coloring
+				allow : true,
+				// <irrelevant, colors are now calculated differently>
+				// Set min value and max value constraints
+				// for the *$color* property value.
+				// Default's to -100 and 100.
+				minValue : 0,
+				maxValue : 5,
+				tips : true,
+				// Set color range. Default's to reddish and greenish.
+				// It takes an array of three
+				// integers as R, G and B values.
+				maxColorValue : [ 0, 255, 50 ],
+				minColorValue : [ 255, 0, 50 ]
+				// </irrelevant>
+			},
+			Tips : {
+				// Allow tips
+				allow : true,
+				// add positioning offsets
+				offsetX : 20,
+				offsetY : 20,
+				// implement the onShow method to
+				// add content to the tooltip when a node
+				// is hovered
+				onShow : function(tip, node, isLeaf, domElement) {
+					tip.innerHTML = "<div class=\"tip-title\">" + node.name
+							+ "</div>" + "<div class=\"tip-text\">"
+							+ this.makeHTMLFromData(node.data) + "</div>";
+				},
+
+				// Build the tooltip inner html by taking each node data
+				// property
+				makeHTMLFromData : function(data) {
+					var html = '';
+					html += parent.cwb.Dict.translate('Content') + ': '
+							+ data.$area + '<br />';
+					// Insert further tooltip information here.
+					return html;
+				}
+			},
+			// Remove all element events before destroying it.
+			onDestroyElement : function(content, tree, isLeaf, leaf) {
+				if (leaf.clearAttributes)
+					leaf.clearAttributes();
+			}
 		});
-		tm.loadFromJSON(json);
+		tm.loadJSON(json);
 	}
 };
