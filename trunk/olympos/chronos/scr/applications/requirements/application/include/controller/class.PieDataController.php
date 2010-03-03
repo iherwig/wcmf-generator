@@ -17,8 +17,8 @@
  */
  require_once(BASE."wcmf/lib/presentation/class.Controller.php");
 // PROTECTED REGION ID(application/include/controller/class.PieDataController.php/Import) ENABLED START
-require_once (BASE.'wcmf/lib/util/class.SessionData.php');
-require_once('php-ofc-library/open-flash-chart.php');
+ require_once(BASE."application/include/controller/class.AllBrowserStatisticsController.php");
+ require_once('php-ofc-library/open-flash-chart.php');
 // PROTECTED REGION END
 
 /**
@@ -26,10 +26,12 @@ require_once('php-ofc-library/open-flash-chart.php');
  * @ingroup Controller
  * @brief @class PieDataController
  * @ingroup Controller
- * @brief Feeds data taken from the current session to the CWB pie chart. 
+ * @brief Feeds data taken from a previous run of AllBrowserStatisticsController
+ * into the CWB pie chart. 
  * <b>Input actions:</b> - @em pieData Feeds the CWB pie chart. 
  * <b>Output actions:</b> - none 
- * 
+ * @param[in] modelOid The OID of the model to generate statistical Data for. 
+ *
  * The following configuration settings are defined for this controller:
  *
  * [actionmapping]
@@ -45,9 +47,15 @@ class PieDataController extends Controller
 // PROTECTED REGION ID(application/include/controller/class.PieDataController.php/Body) ENABLED START
 	public function execute()
 	{
-		$session = &SessionData::getInstance();
-		$piechartData = $session->get('piechart'); 
-	
+		// get the working directory for the model 
+		// (the model oid contains '_' instead of ':')
+		$modelOid = str_replace('_', ':', $this->_request->getValue('modelOid'));
+		$workingDir = AllBrowserStatisticsController::getWorkingDir($modelOid);
+		
+		// load the generated data form the working directory
+		// defines $piechartData
+		include($workingDir.'/piechart/browser.dat');
+			
 		$pie = new pie();
 		
 		$values = array();
