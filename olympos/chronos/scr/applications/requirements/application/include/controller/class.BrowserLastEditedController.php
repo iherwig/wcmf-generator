@@ -64,18 +64,12 @@ class BrowserLastEditedController extends Controller
 		$objlist = array ();
 		$orderby = array ('timestamp DESC');
 	
-		// history table
+		// search history table
 		$persistenceFacade = PersistenceFacade::getInstance();
 		$objQuery = $persistenceFacade->createObjectQuery(self::TABLENAME);
-		// searchlimit if needed
-		//	$pagingInfo = new PagingInfo($limit);
-		//	$pagingInfo->setIndex($strt);
-		//	$objlist = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby, $pagingInfo);
-		// search
-		$objlist = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby);
+		$pagingInfo = new PagingInfo(self::LIMIT);
+		$objlist = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby, $pagingInfo);
 	
-		//start/limit (index of paging info not working properly)
-		
 		$resultList = array ();
 		$resultOids = array ();
 	
