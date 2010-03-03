@@ -436,9 +436,10 @@ uwm.modeltree.ModelTree.prototype.markNodeByOid = function(oid) {
 	
 	if (parents.length == 1) {
 		var parentNode = node.parentNode;
-		parentNode.ensureVisible();
-		parentNode.expand();
-		
+		if (!parentNode.isRoot) {
+			parentNode.ensureVisible();
+			parentNode.expand();
+		}
 		node.select();
 	} else {
 		this.expandListAsync(parents);
@@ -461,17 +462,20 @@ uwm.modeltree.ModelTree.prototype.expandListAsync = function(parents, currNode) 
 		}
 		
 		var node = this.getNodeById(oid);
-		node.ensureVisible();
-		
-		var self = this;
-		
-		node.expand(false, true, function(currNode) {
-			self.expandListAsync(parents, currNode);
-		});
+		if (node) {
+			node.ensureVisible();
+	
+			var self = this;
+			node.expand(false, true, function(currNode) {
+				self.expandListAsync(parents, currNode);
+			});
+		}
 	} else {
 		var node = this.getNodeById(oid);
-		node.ensureVisible();
-		node.select();
+		if (node) {
+			node.ensureVisible();
+			node.select();
+		}
 	}
 }
 
