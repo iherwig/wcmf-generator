@@ -71,7 +71,7 @@ cwb.ObjectContainer.prototype.handleLoadedModelList = function(options, data, dr
 	dropdown.store.loadData(this.models);
 };
 
-cwb.ObjectContainer.prototype.loadModel = function(modelOid, callback){
+cwb.ObjectContainer.prototype.loadModel = function(modelOid, useCache, callback){
 	this.currModelOid = modelOid;
 	
 	var self = this;
@@ -79,7 +79,7 @@ cwb.ObjectContainer.prototype.loadModel = function(modelOid, callback){
 	var longTaskRunner = new cwb.ui.LongTaskRunner( {
 			title : cwb.Dict.translate('Generating Data ...'),
 			call : function(successHandler, errorHandler) {
-				cwb.persistency.Persistency.getInstance().loadAllStatisticsOverview(modelOid, successHandler, errorHandler);
+				cwb.persistency.Persistency.getInstance().loadAllStatisticsOverview(modelOid, useCache, successHandler, errorHandler);
 			},
 			successHandler : function(data) {
 				longTaskRunner.close();
