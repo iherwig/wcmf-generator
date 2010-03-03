@@ -17,7 +17,8 @@
  */
  require_once(BASE."wcmf/lib/presentation/class.Controller.php");
 // PROTECTED REGION ID(application/include/controller/class.BrowserStatisticsController.php/Import) ENABLED START
-require_once (BASE.'wcmf/lib/util/class.SessionData.php');
+ require_once(BASE."application/include/controller/class.AllBrowserStatisticsController.php");
+ require_once (BASE.'wcmf/lib/util/class.SessionData.php');
 // PROTECTED REGION END
 
 /**
@@ -25,9 +26,10 @@ require_once (BASE.'wcmf/lib/util/class.SessionData.php');
  * @ingroup Controller
  * @brief @class BrowserStatisticsController
  * @ingroup Controller
- * @brief Returns CWB statistics data from the current session. 
+ * @brief Returns CWB statistics data a previous run of AllBrowserStatisticsController. 
  * <b>Input actions:</b> - @em loadStatisticsOverview Returns CWB statistics data. 
  * <b>Output actions:</b> - @em failure If a fatal error occurs - @em ok In any other case 
+ * @param[in] modelOid The OID of the model to generate statistical Data for. 
  * @param[out] statistics The statistics data from the current session. 
  * 
  * The following configuration settings are defined for this controller:
@@ -45,8 +47,14 @@ class BrowserStatisticsController extends Controller
 // PROTECTED REGION ID(application/include/controller/class.BrowserStatisticsController.php/Body) ENABLED START
 	public function executeKernel()
 	{
-		$session = &SessionData::getInstance();
-		$statisticsData = $session->get('statistics');
+		// get the working directory for the model
+		$modelOid = $this->_request->getValue('modelOid');
+		$workingDir = AllBrowserStatisticsController::getWorkingDir($modelOid);
+		
+		// load the generated data form the working directory
+		// defines $statisticsData
+		include($workingDir.'/statistics/browser.dat');
+		
 		Log::debug($statisticsData, __CLASS__);
 		$this->_response->setValue('statistics', $statisticsData); 
 	

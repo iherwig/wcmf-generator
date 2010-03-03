@@ -17,8 +17,8 @@
  */
  require_once(BASE."wcmf/lib/presentation/class.Controller.php");
 // PROTECTED REGION ID(application/include/controller/class.BarDataController.php/Import) ENABLED START
-require_once (BASE.'wcmf/lib/util/class.SessionData.php');
-require_once('php-ofc-library/open-flash-chart.php');
+ require_once(BASE."application/include/controller/class.AllBrowserStatisticsController.php");
+ require_once('php-ofc-library/open-flash-chart.php');
 // PROTECTED REGION END
 
 /**
@@ -26,9 +26,11 @@ require_once('php-ofc-library/open-flash-chart.php');
  * @ingroup Controller
  * @brief @class BarDataController
  * @ingroup Controller
- * @brief Feeds data taken from the current session to the CWB bar chart. 
+ * @brief Feeds data taken from a previous run of AllBrowserStatisticsController
+ * into the CWB bar chart. 
  * <b>Input actions:</b> - @em barData Feeds the CWB bar chart. 
  * <b>Output actions:</b> - none 
+ * @param[in] modelOid The OID of the model to generate statistical Data for. 
  * 
  * The following configuration settings are defined for this controller:
  *
@@ -45,9 +47,15 @@ class BarDataController extends Controller
 // PROTECTED REGION ID(application/include/controller/class.BarDataController.php/Body) ENABLED START
 	public function execute()
 	{
-		$session = &SessionData::getInstance();
-		$barchartData = $session->get('barchart'); 
-	
+		// get the working directory for the model 
+		// (the model oid contains '_' instead of ':')
+		$modelOid = str_replace('_', ':', $this->_request->getValue('modelOid'));
+		$workingDir = AllBrowserStatisticsController::getWorkingDir($modelOid);
+		
+		// load the generated data form the working directory
+		// defines $barchartData
+		include($workingDir.'/barchart/browser.dat');
+		
 		$bars = new bar_stack();
 		$bars->set_colours(array('#00ff00', '#ff0000'));
 		$bars->set_keys(array(

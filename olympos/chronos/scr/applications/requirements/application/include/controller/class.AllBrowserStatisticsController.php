@@ -31,6 +31,7 @@ require_once ('class.UwmUtil.php');
  * <b>Input actions:</b> - @em loadAllStatisticsOverview Loads all statistics data into the current session. 
  * <b>Output actions:</b> - @em failure If a fatal error occurs - @em ok In any other case 
  * @param[in] modelOid The OID of the model to generate statistical Data for. 
+ * @param[in] useCache True/False wether to use chached data, if existing or not 
  * 
  * The following configuration settings are defined for this controller:
  *
@@ -46,8 +47,9 @@ class AllBrowserStatisticsController extends BatchController
 {
 // PROTECTED REGION ID(application/include/controller/class.AllBrowserStatisticsController.php/Body) ENABLED START
 	// session name constants
-	private $PARAM_START_OID = 'AllBrowserStatisticsController.startOid';
-
+	private $PARAM_MODEL_OID = 'AllBrowserStatisticsController.modelOid';
+	private $PARAM_USE_CACHE = 'AllBrowserStatisticsController.useCache';
+	
 	private $TEMP_WORKING_DIR = 'AllBrowserStatisticsController.tmpWorkingDir';
 	private $TEMP_UWM_EXPORT_PATH = 'AllBrowserStatisticsController.tmpUwmExportPath';
 	private $TEMP_PROPERTIES_PATH = 'AllBrowserStatisticsController.tmpPropertiesPath';
@@ -67,18 +69,18 @@ class AllBrowserStatisticsController extends BatchController
 	 */
 	function initialize(&$request, &$response)
 	{
-		parent::initialize($request, $response);
-
 		// get initial request parameters
 		if ($request->getAction() != 'continue')
 		{
 			$session = &SessionData::getInstance();
-			$session->set($this->PARAM_START_OID, $request->getValue('modelOid'));
-
+			$session->set($this->PARAM_MODEL_OID, $request->getValue('modelOid'));
+			$session->set($this->PARAM_USE_CACHE, $request->getValue('useCache'));
+			
 			// clear the problem report
 			$report = '';
 			$session->set($this->PROBLEM_REPORT, $report);
 		}
+		parent::initialize($request, $response);
 	}
 
 	/**
@@ -95,36 +97,58 @@ class AllBrowserStatisticsController extends BatchController
 	 */
 	function getWorkPackage($number)
 	{
-		if ($number == 0)
-		{
-			return array('name' => 'Export the model to XML', 'size' => 1, 'oids' => array(0), 'callback' => 'exportXML');
-		}
-		elseif ($number == 1)
-		{
-			return array('name' => 'Initialize the generator', 'size' => 1, 'oids' => array(0), 'callback' => 'initOAW');
-		}
-		elseif ($number == 2)
-		{
-			return array('name' => 'Run the generator step 1', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep0');
-		}
-		elseif ($number == 3)
-		{
-			return array('name' => 'Run the generator step 2', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep1');
-		}
-		elseif ($number == 4)
-		{
-			return array('name' => 'Run the generator step 3', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep2');
-		}
-		elseif ($number == 5)
-		{
-			return array('name' => 'Run the generator step 4', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep3');
-		}
-		elseif ($number == 6)
-		{
-			return array('name' => 'Clean up', 'size' => 1, 'oids' => array(0), 'callback' => 'finish');
+		$session = &SessionData::getInstance();
+		$modelOid = $session->get($this->PARAM_MODEL_OID);
+		$useCache = ('true' == $session->get($this->PARAM_USE_CACHE));
+		if ($useCache && $this->isGenerated($modelOid)) {
+
+			// reuse data, if already existing
+			if ($number == 0)
+			{
+				// at least one package has to be defined
+				return array('name' => '', 'size' => 1, 'oids' => array(0), 'callback' => 'doNothing');
+			}
+			else
+			{
+				return null;
+			}
 		}
 		else {
-		  return null;
+			
+			// in case that the statistics for the current model are
+			// not generated, we have to generate them
+			
+			if ($number == 0)
+			{
+				return array('name' => 'Export the model to XML', 'size' => 1, 'oids' => array(0), 'callback' => 'exportXML');
+			}
+			elseif ($number == 1)
+			{
+				return array('name' => 'Initialize the generator', 'size' => 1, 'oids' => array(0), 'callback' => 'initOAW');
+			}
+			elseif ($number == 2)
+			{
+				return array('name' => 'Run the generator step 1', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep0');
+			}
+			elseif ($number == 3)
+			{
+				return array('name' => 'Run the generator step 2', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep1');
+			}
+			elseif ($number == 4)
+			{
+				return array('name' => 'Run the generator step 3', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep2');
+			}
+			elseif ($number == 5)
+			{
+				return array('name' => 'Run the generator step 4', 'size' => 1, 'oids' => array(0), 'callback' => 'runOAWStep3');
+			}
+			elseif ($number == 6)
+			{
+				return array('name' => 'Clean up', 'size' => 1, 'oids' => array(0), 'callback' => 'finish');
+			}
+			else {
+			  return null;
+			}
 		}
 	}
 	/**
@@ -136,6 +160,12 @@ class AllBrowserStatisticsController extends BatchController
 		return $session->get($this->PROBLEM_REPORT);
 	}
 	/**
+	 * Do nothing
+	 * @param oids The oids to process
+	 * @note This is a callback method called on a matching work package @see BatchController::addWorkPackage()
+	 */
+	function doNothing($oids) {}
+	/**
 	 * Export the given model to XML
 	 * @param oids The oids to process
 	 * @note This is a callback method called on a matching work package @see BatchController::addWorkPackage()
@@ -146,8 +176,8 @@ class AllBrowserStatisticsController extends BatchController
 		$session = &SessionData::getInstance();
 
 		// set the export path
-		$startOid = $session->get($this->PARAM_START_OID);
-		$tmpWorkingDir = self::getWorkingDir($startOid).'/tmp';
+		$modelOid = $session->get($this->PARAM_MODEL_OID);
+		$tmpWorkingDir = self::getWorkingDir($modelOid).'/tmp';
 		$session->set($this->TEMP_WORKING_DIR, $tmpWorkingDir);
 		mkdir($tmpWorkingDir);
 
@@ -165,9 +195,9 @@ class AllBrowserStatisticsController extends BatchController
 		touch($tmpUwmExportPath);
 
 		// do the export
-		$this->check("start exportXML: node:".$startOid);
+		$this->check("start exportXML: node:".$modelOid);
 
-		$problemReport = UwmUtil::exportXml($tmpUwmExportPath, $startOid);
+		$problemReport = UwmUtil::exportXml($tmpUwmExportPath, $modelOid);
 		$this->check("finished exportXML");
 
 		// update the problem report
@@ -265,28 +295,21 @@ class AllBrowserStatisticsController extends BatchController
 	function finish($oids)
 	{
 		$session = &SessionData::getInstance();
-
-		// set the result in the session
 		$tmpWorkingDir = $session->get($this->TEMP_WORKING_DIR);
-		include($tmpWorkingDir.'/statistics/browser.dat');
-		include($tmpWorkingDir.'/barchart/browser.dat');
-		include($tmpWorkingDir.'/piechart/browser.dat');
-
-		$session->set('statistics', $statisticsData);
-		$session->set('barchart', $barchartData);
-		$session->set('piechart', $piechartData);
-
-		// cleanup
-		$startOid = $session->get($this->PARAM_START_OID);
-		FileUtil::copyRec($tmpWorkingDir, self::getWorkingDir($startOid));
+		
+		// copy generated files to cache destination
+		$modelOid = $session->get($this->PARAM_MODEL_OID);
+		FileUtil::copyRec($tmpWorkingDir, self::getWorkingDir($modelOid));
+		
+		// remove generated files
 		unlink($session->get($this->TEMP_PROPERTIES_PATH));
-		$tmpWorkingDir = $session->get($this->TEMP_WORKING_DIR);
 		FileUtil::emptyDir($tmpWorkingDir);
 		rmdir($tmpWorkingDir);
 	}
 	/**
 	 * Get the working directory for this export
 	 * @param modelOid The oid of the model
+	 * @return The directory
 	 */
 	public static function getWorkingDir($modelOid)
 	{
@@ -296,6 +319,18 @@ class AllBrowserStatisticsController extends BatchController
 			FileUtil::mkdirRec($dir);
 		}
 		return $dir;
+	}
+
+	/**
+	 * Check if statistics for a model are generated already
+	 * @param modelOid The oid of the model
+	 * @return Boolean
+	 */
+	private function isGenerated($modelOid)
+	{
+		$workingDir = self::getWorkingDir($modelOid);
+		$files = FileUtil::getFiles($workingDir, '/\.uml$/');
+		return sizeof($files) > 0;
 	}
 // PROTECTED REGION END
 
