@@ -67,6 +67,10 @@ class BrowserLastEditedController extends Controller
 		// search history table
 		$persistenceFacade = PersistenceFacade::getInstance();
 		$objQuery = $persistenceFacade->createObjectQuery(self::TABLENAME);
+		foreach (self::$INVALID_TYPES as $invalidType) {
+			$tpl = $objQuery->getObjectTemplate(self::TABLENAME);
+			$tpl->setValue("affectedoid", "NOT LIKE '".$invalidType.":%'", DATATYPE_ATTRIBUTE);
+		}
 		$pagingInfo = new PagingInfo(self::LIMIT);
 		$objlist = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby, $pagingInfo);
 	
