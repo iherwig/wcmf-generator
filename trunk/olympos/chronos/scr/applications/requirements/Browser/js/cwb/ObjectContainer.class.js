@@ -107,37 +107,33 @@ cwb.ObjectContainer.prototype.modelUmlGenerated = function(callback) {
  * @param {String} oid The oid of the model which is to be loaded.
  */
 cwb.ObjectContainer.prototype.loadJitData = function(oid, callback){
-	var uwmClass = 'Model';
-	this.objectsForTreemap = null;
+
 	this.objectsForTreemap = [];
-	this.objectsForTreemap[0] = [];
-	this.objectsForTreemap[0]['parentOid'] = 'root';
-	this.objectsForTreemap[0]['children'] = [];
-	this.objectsForTreemap[0]['id'] = oid;
-	this.objectsForTreemap[0]['uwmClassName'] = uwmClass;
-	this.objectsForTreemap[0]['name'] = this.selectedModelName;
-	this.objectsForTreemap[0]['data'] = [{
-		'key': 'content',
-		'value': 0
-	}, {
-		'key': 'color',
-		'value': 1
-	}];
-	this.objectsForSpacetree = null;
+	this.objectsForTreemap[0] = {  
+		id: oid,  
+		name: this.selectedModelName,  
+		data: {  
+			$area: 0,
+			$color: 1
+		},  
+		children: [],
+		parentOid: 'root',
+		uwmClassName: 'Model'
+	};
+
 	this.objectsForSpacetree = [];
-	this.objectsForSpacetree[0] = [];
-	this.objectsForSpacetree[0]['parentOid'] = 'root';
-	this.objectsForSpacetree[0]['children'] = [];
-	this.objectsForSpacetree[0]['id'] = oid;
-	this.objectsForSpacetree[0]['uwmClassName'] = uwmClass;
-	this.objectsForSpacetree[0]['name'] = this.selectedModelName;
-	this.objectsForSpacetree[0]['data'] = [{
-		'key': 'content',
-		'value': 0
-	}, {
-		'key': 'color',
-		'value': 1
-	}];
+	this.objectsForSpacetree[0] = {  
+		id: oid,  
+		name: this.selectedModelName,  
+		data: {  
+			$area: 0,
+			$color: 1
+		},  
+		children: [],
+		parentOid: 'root',
+		uwmClassName: 'Model'
+	};
+
 	this.loadJitObject(oid, callback);
 };
 
@@ -155,22 +151,7 @@ cwb.ObjectContainer.prototype.loadJitObject = function(oid, callback){
 	this.objectsToLoad++;
 	
 	cwb.persistency.Persistency.getInstance().loadChildren(oid, function(options, data){
-		self.handleLoadedJitObject(options, data, oid, callback)
-	});
-};
-
-/**
- * Replacement for the upper load method which does only one JSON call and uses display. 
- * Is much faster, but currently has no working successhandler.
- * 
- * @param {String} oid The oid of the object which is to be loaded.
- */
-cwb.ObjectContainer.prototype.loadOBJECT=function(oid){
-	var self = this;
-	
-	var oid = oid;
-	cwb.persistency.Persistency.getInstance().display(oid,-1,function(options, data){
-		self.handleLoadedObject(options, data, oid)
+		self.handleLoadedJitObject(options, data, oid, callback);
 	});
 };
 
@@ -181,32 +162,30 @@ cwb.ObjectContainer.prototype.handleLoadedJitObject = function(options, data, oi
 			var arrayPosition = this.objectsForTreemap.length;
 			
 			var uwmClass = cwb.Util.getUwmClassNameFromOid(childOid);
-			this.objectsForTreemap[arrayPosition] = [];
-			this.objectsForTreemap[arrayPosition]['uwmClassName'] = uwmClass;
-			this.objectsForTreemap[arrayPosition]['children'] = [];
-			this.objectsForTreemap[arrayPosition]['parentOid'] = oid;
-			this.objectsForTreemap[arrayPosition]['id'] = childOid;
-			this.objectsForTreemap[arrayPosition]['name'] = data.objects[i].text;
-			this.objectsForTreemap[arrayPosition]['data'] = [{
-				'key': 'content',
-				'value': 0
-			}, {
-				'key': 'color',
-				'value': 1
-			}];
-			this.objectsForSpacetree[arrayPosition] = [];
-			this.objectsForSpacetree[arrayPosition]['uwmClassName'] = uwmClass;
-			this.objectsForSpacetree[arrayPosition]['children'] = [];
-			this.objectsForSpacetree[arrayPosition]['parentOid'] = oid;
-			this.objectsForSpacetree[arrayPosition]['id'] = childOid;
-			this.objectsForSpacetree[arrayPosition]['name'] = data.objects[i].text;
-			this.objectsForSpacetree[arrayPosition]['data'] = [{
-				'key': 'content',
-				'value': 0
-			}, {
-				'key': 'color',
-				'value': 1
-			}];
+
+			this.objectsForTreemap[arrayPosition] = {  
+				id: childOid,  
+				name: data.objects[i].text,  
+				data: {  
+					$area: 0,
+					$color: 1
+				},  
+				children: [],
+				parentOid: oid,
+				uwmClassName: uwmClass
+			};
+			this.objectsForSpacetree[arrayPosition] = {  
+				id: childOid,  
+				name: data.objects[i].text,  
+				data: {  
+					$area: 0,
+					$color: 1
+				},  
+				children: [],
+				parentOid: oid,
+				uwmClassName: uwmClass
+			};
+
 			if (uwmClass == "Package") {
 				this.loadJitObject(childOid, callback);
 			}
@@ -216,82 +195,54 @@ cwb.ObjectContainer.prototype.handleLoadedJitObject = function(options, data, oi
 	this.objectsToLoad--;
 	
 	if (this.objectsToLoad == 0) {
-		this.arrangeTreeList(this.currModelOid);
-		this.arrangeWeightList(this.currModelOid);
+		this.objectsForSpacetree = this.arrangeTree(this.objectsForSpacetree);
+		this.objectsForTreemap = this.arrangeTree(this.objectsForTreemap);
+		
+		this.setAreaData(this.objectsForTreemap);
+		this.setWeightColors(this.objectsForTreemap);
 		
 		callback('jit');
 	}
 };
 
 /**
- * Inserts image information and creates hierarchical structure inthe spacetree data.
- *
- * @param {String} rootOid The oid of the object which is to be the root of the tree.
+ * Creates a hierarchical structure from a list of objects with attributes
+ * children and parentOid.
  */
-cwb.ObjectContainer.prototype.arrangeTreeList = function(rootOid){
-	var objects = this.objectsForSpacetree;
+cwb.ObjectContainer.prototype.arrangeTree = function(objects) {
 	var arrayPosition;
 	for (var i = 0; i < objects.length; i++) {
 		if (!(objects[i] instanceof Function)) {
-		
-			var parentOid = objects[i]['parentOid'];
+			var parentOid = objects[i].parentOid;
 			if (!(parentOid == 'root')) {
-				objects[this.getObjectPosition(parentOid, this.objectsForSpacetree)]['children'].push(objects[i]);
+				objects[this.getObjectPosition(parentOid, objects)].children.push(objects[i]);
 			}
 			else {
 				arrayPosition = i;
 			}
 		}
 	}
-	objects = objects[arrayPosition];
-	this.objectsForSpacetree = objects;
+	return objects[arrayPosition];
 };
 
 /**
- * Creates hierarchical structure in treemap data.
- *
- * @param {Object} rootOid The oid of the object which is to be the root of the tree.
- */
-cwb.ObjectContainer.prototype.arrangeWeightList = function(rootOid){
-	var objects = this.objectsForTreemap;
-	var arrayPosition;
-	for (var i = 0; i < objects.length; i++) {
-		if (!(objects[i] instanceof Function)) {
-			var parentOid = objects[i]['parentOid'];
-			if (!(parentOid == 'root')) {
-				objects[this.getObjectPosition(parentOid, this.objectsForTreemap)]['children'].push(objects[i]);
-			}
-			else {
-				arrayPosition = i;
-			}
-		}
-	}
-	objects = objects[arrayPosition];
-	
-	this.objectsForTreemap = objects;
-	
-	this.setContentData(this.objectsForTreemap);
-	this.setWeightColors(this.objectsForTreemap);
-};
-
-/**
- * Recursively inserts content information in treemap data.
+ * Recursively inserts area information in treemap data.
  * @param {Array} objectList A sublist of this.objectsForTreemap.
  */
-cwb.ObjectContainer.prototype.setContentData = function(objectList){
+cwb.ObjectContainer.prototype.setAreaData = function(objectList){
 	var result = 0;
 	
-	if (objectList['children'].length == 0) {
-		objectList['data'][0]['value'] = 1;
+	if (objectList.children.length == 0) {
+		objectList.data.$area = 1;
 		result = 1;
 	}
 	else {
-		for (var j = 0; j < objectList['children'].length; j++) {
-			if (!(objectList['children'][j] instanceof Function)) {
-				result += this.setContentData(objectList['children'][j]);
+		for (var j = 0; j < objectList.children.length; j++) {
+			if (!(objectList.children[j] instanceof Function)) {
+				result += this.setAreaData(objectList.children[j]);
 			}
 		}
-		objectList['data'][0]['value'] = result;
+		objectList.data.$area = result;
 	}
 	return result;
 };
@@ -311,9 +262,9 @@ cwb.ObjectContainer.prototype.setWeightColors = function(){
  * @param {Array} objectList A sublist of this.objectsForTreemap.
  */
 cwb.ObjectContainer.prototype.getMaxContent = function(objectList){
-	if (objectList.data[0].value == objectList.children.length) {
+	if (objectList.data.$area == objectList.children.length) {
 		if (objectList.children.length > this.maxTreeContent && this.containsLeaves(objectList.children)) {
-			this.maxTreeContent = objectList.children.length
+			this.maxTreeContent = objectList.children.length;
 		}
 	}
 	else {
@@ -373,7 +324,7 @@ cwb.ObjectContainer.prototype.setColor = function(objectList, parentLength){
 					colorValue = 4;
 				}
 	
-	objectList.data[1]['value'] = colorValue;
+	objectList.data.$color = colorValue;
 	
 	for (var j = 0; j < objectList.children.length; j++) {
 		this.setColor(objectList.children[j], objectList.children.length);
@@ -410,53 +361,6 @@ cwb.ObjectContainer.prototype.setModelOid = function(modelOid){
 	this.selectedModel = modelOid;
 
 	return true;
-};
-
-/**
- * Should load the ObjectDataTable when backend generator for that is finished. 
- * Currently only shows dummy data.
- */
-cwb.ObjectContainer.prototype.loadReport = function(modelOid){
-	var objectDataTable = cwb.statistics.Overview.getInstance();
-	objectDataTable.reload(modelOid);
-	objectDataTable.getEl().unmask();
-	cwb.ui.DiagramPanel.getInstance().getEl().unmask();
-};
-
-/**
- * Supposed to load the report data for the ObjectDataTable. Currently only shows the dummy data.
- */
-cwb.ObjectContainer.prototype.getTableData = function(){
-	var result;
-	if (this.modelLoaded){
-		result=[
-	['Goals',["ChiGoal:15270","ChiGoal:21669"],'Goals', '<u>4</u>', '<img src="img/signal2.png">'],  
-	['Achieved Goals',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;achieved', '<u>1</u>', '<img src="img/signal5.png">'], 
-	['Not achieved Goals',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not achieved', '<u>3</u>', '<img src="img/signal1.png">'], 
-	['Goals without Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirements', '<u>1</u>', '<img src="img/signal3.png">'],
-	['Goals without valid priority',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without valid priority', '<u>2</u>','<img src="img/signal2.png">'],
-	['Requirements',["ChiGoal:15270","ChiGoal:21669"],'Requirements', '<u>6</u>', '<img src="img/signal4.png">'], 
-	['Satisfied Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;satisfied', '<u>2</u>', '<img src="img/signal4.png">'], 
-	['Not satisfied Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not satisfied', '<u>4</u>', '<img src="img/signal2.png">'], 
-	['Requirements without Goal',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Goal', '<u>0</u>', '<img src="img/signal5.png">'], 
-	['Requirements without Feature',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Feature', '<u>1</u>', '<img src="img/signal3.png">'], 
-	['Requirements with Issue',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with Issue', '<u>2</u>', '<img src="img/signal1.png">'],
-	['Requirements without Proofreader',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Proofreader', '<u>0</u>','<img src="img/signal2.png">'],
-	['Not validated Requirements',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not validated', '<u>1</u>', '<img src="img/signal2.png">'],
-	['Features',["ChiGoal:15270","ChiGoal:21669"],'Features', '<u>10</u>','<img src="img/signal5.png">'],
-	['Features without Requirement',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Requirement','<u>1</u>','<img src="img/signal1.png">'],
-	['Implemented Features',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;implemented','<u>6</u>','<img src="img/signal5.png">'],
-	['Implemented Features without UseCase',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without UseCase','<u>1','<img src="img/signal2.png">'],
-	['Not implemented Features',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;not implemented', '<u>4</u>','<img src="img/signal3.png">'],
-	['Issues',["ChiGoal:15270","ChiGoal:21669"],'Issues', '<u>5</u>', '<img src="img/signal2.png">'],
-	['UseCases',["ChiGoal:15270","ChiGoal:21669"],'UseCases', '<u>8</u>','<img src="img/signal4.png">'],
-	['UseCases without Actors',["ChiGoal:15270","ChiGoal:21669"],'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;without Actors', '<u>2</u>','<img src="img/signal2.png">'],
-	['Actors',["ChiGoal:15270","ChiGoal:21669"],'Actors', '<u>7</u>','<img src="img/signal5.png">']
-	];
-	}else{
-		result=[['','',uwm.Dict.translate('Please select a model.'),'','']];
-	}
-	return result;
 };
 
 cwb.ObjectContainer.prototype.getCurrModelOid = function() {
