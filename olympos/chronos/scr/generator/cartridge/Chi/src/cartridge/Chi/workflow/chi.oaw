@@ -155,7 +155,7 @@
 		<globalVarDef name="DefaultConfigFile" value="'${configFileDefault}'"/>
 		<globalVarDef name="ProjectName" value="'${projectname}'"/>
 		<globalVarDef name="TargetDirectory" value="'${targetDir}'"/>
-		<globalVarDef name="HeaderText" value="${headerText}"/>
+		<globalVarDef name="HeaderText" value="'${headerText}'"/>
 		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
 
 		<metaModel idRef="EmfMM"/>
