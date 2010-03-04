@@ -57,7 +57,7 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 		this.useCacheCheckbox = new Ext.form.Checkbox( {
 			x: 2,
 			y: 132,
-			boxLabel: cwb.Dict.translate('Use cached data'),
+			boxLabel: cwb.Dict.translate('Use cached model'),
 		    checked: true
 		});
 		
