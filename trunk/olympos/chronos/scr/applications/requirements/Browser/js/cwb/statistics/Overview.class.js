@@ -35,7 +35,8 @@ cwb.statistics.Overview = Ext.extend(Ext.ux.maximgb.tg.EditorGridPanel, {
 				_id: 0,
 				_parent: null,
 				_is_leaf: true,
-				object: '<div class="noSelectionNote">No model selected</div>'
+				object: '<div class="noSelectionNote">No model selected</div>',
+				status: -1
 			}, 0)
 		]);
 
