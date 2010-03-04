@@ -95,22 +95,27 @@ cwb.ObjectsListProxy.prototype.getColumns = function() {
 	    dataIndex : 'uwmClassName',
 	    renderer : this.iconRenderer,
 	    sortable : false,
-	    resizable : false
+	    resizable : false,
+	    hidden : false
 	}, {
 	    header : 'Name',
 	    width : 100,
-	    dataIndex : 'Name'
+	    dataIndex : 'Name',
+	    hidden : false
 	}, {
 	    header : 'Notes',
 	    width : 300,
-	    dataIndex : 'Notes'
+	    dataIndex : 'Notes',
+	    hidden : false
 	}, {
 	    header : 'Alias',
 	    width : 50,
-	    dataIndex : 'Alias'
+	    dataIndex : 'Alias',
+	    hidden : true
 	} ];
 	for ( var i = 0; i < this.columns.length; i++) {
-		if (this.columns[i] != 'Name' && this.columns[i] != 'Notes' && this.columns[i] != 'Alias' && this.columns[i] != 'creator' && this.columns[i] != 'created' && this.columns[i] != 'last_editor'
+		if (this.columns[i] != 'Name' && this.columns[i] != 'Notes' && this.columns[i] != 'Alias' && this.columns[i] != 'Author' && 
+				this.columns[i] != 'creator' && this.columns[i] != 'created' && this.columns[i] != 'last_editor'
 		        && this.columns[i] != 'modified') {
 			result.push( {
 			    header : this.columns[i],
@@ -121,26 +126,32 @@ cwb.ObjectsListProxy.prototype.getColumns = function() {
 		}
 	}
 	result.push( {
+	    header : 'Author',
+	    width : 70,
+	    dataIndex : 'Author',
+	    hidden : false
+	});
+	result.push( {
 	    header : 'Creator',
-	    width : 31,
+	    width : 70,
 	    dataIndex : 'creator',
 	    hidden : true
 	});
 	result.push( {
 	    header : 'Created',
-	    width : 31,
+	    width : 60,
 	    dataIndex : 'created',
-	    hidden : true
+	    hidden : false
 	});
 	result.push( {
 	    header : 'Last editor',
-	    width : 31,
+	    width : 70,
 	    dataIndex : 'last_editor',
 	    hidden : true
 	});
 	result.push( {
 	    header : 'Modified',
-	    width : 31,
+	    width : 60,
 	    dataIndex : 'modified',
 	    hidden : true
 	});
