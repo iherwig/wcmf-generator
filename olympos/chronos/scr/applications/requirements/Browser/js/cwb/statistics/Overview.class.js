@@ -49,7 +49,11 @@ cwb.statistics.Overview = Ext.extend(Ext.ux.maximgb.tg.EditorGridPanel, {
 		        header: "Object",
 		        width: 170,
 		        sortable: false,
-		        dataIndex: 'object'
+		        dataIndex: 'object',
+		        renderer: function(value, metadata, record, rowIndex, colIndex, store) {
+		            metadata.attr = 'ext:qtip="' + record.get('toolTip') + '"';
+		            return value;
+		        }
 		    }, {
 		        header: "Quantity",
 		        width: 50,
@@ -86,7 +90,7 @@ cwb.statistics.Overview = Ext.extend(Ext.ux.maximgb.tg.EditorGridPanel, {
 
 cwb.statistics.Overview.prototype.statusRenderer = function(value) {
 	var result = "";
-	if (value !== null && value !== '') {
+	if (value !== null && value !== '' && value !== -1) {
 		result = "<img src='"+cwb.Config.baseHref+"img/signal"+value+".png' />";
 	}
 	
