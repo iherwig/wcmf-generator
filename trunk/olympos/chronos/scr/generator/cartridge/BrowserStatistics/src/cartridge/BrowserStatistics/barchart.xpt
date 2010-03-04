@@ -9,11 +9,39 @@
 «FILE "browser.dat"»
 <?php
 $barchartData = array(
-	«EXPAND rowTemplate("Goal", this.getGoalsAll().removeAll(this.getGoalsNonAchieved()), this.getGoalsNonAchieved())»,
-	«EXPAND rowTemplate("Requirement", this.getRequirementsAll().removeAll(this.getRequirementsWithoutParent()), this.getRequirementsWithoutParent())»,
-	«EXPAND rowTemplate("Feature", this.getFeaturesAll().removeAll(this.getFeaturesWithoutParent()), this.getFeaturesWithoutParent())»,
-	«EXPAND rowTemplate("Issue", this.getIssuesAll().removeAll(this.getIssuesWithoutParent()), this.getIssuesWithoutParent())»,
-	«EXPAND rowTemplate("BusinessUseCase", this.getBusinessUcAll().removeAll(this.getBusinessUcWithoutActor()), this.getBusinessUcWithoutActor())» 
+	«EXPAND rowTemplate("Requirements",
+		{}
+			.addAll(this.getGoalsAll())
+			.addAll(this.getRequirementsAll())
+			.addAll(this.getFeaturesAll())
+			.addAll(this.getIssuesAll())
+			.removeAll(this.failedRequirements())
+		,
+		this.failedRequirements()
+	)»,
+	«EXPAND rowTemplate("Use Cases",
+		{}
+			.addAll(this.getBusinessProcessesAll())
+			.addAll(this.getBusinessUcAll())
+			.addAll(this.getActivitySetsAll())
+			.addAll(this.getActivitiesAll())
+			.addAll(this.getInitialsAll())
+			.addAll(this.getFinalsAll())
+			.addAll(this.getDecisionsAll())
+			.addAll(this.getObjectsAll())
+			.removeAll(this.failedUseCases())
+		,
+		this.failedUseCases()
+	)»,
+	«EXPAND rowTemplate("Domain",
+		{}
+			.addAll(this.getNodesAll())
+			.addAll(this.getValuesAll())
+			.addAll(this.getActionKeysAll())
+			.removeAll(this.failedDomain())
+		,
+		this.failedDomain() 
+	)»
 );
 «ENDFILE»
 «ENDDEFINE»
