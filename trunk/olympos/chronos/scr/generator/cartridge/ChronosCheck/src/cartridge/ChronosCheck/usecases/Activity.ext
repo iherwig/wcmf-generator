@@ -20,5 +20,9 @@ boolean hasLeOneProductionRuleset(uml::OpaqueAction this):
 ;
 
 boolean isProductionRulesetConsecutive(uml::OpaqueAction this):
-	this.getProductionRuleset().getRelationships().typeSelect(uml::Realization).source.containsAll(this.getConsecutiveWithSameProductionRuleset())
+	this.getProductionRuleset() != null ? (
+		this.getProductionRuleset().getRelationships().typeSelect(uml::Realization).source.containsAll(this.getConsecutiveWithSameProductionRuleset())
+	) : (
+		true
+	)
 ;

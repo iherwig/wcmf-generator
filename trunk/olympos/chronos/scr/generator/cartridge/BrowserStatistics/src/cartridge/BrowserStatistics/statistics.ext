@@ -17,6 +17,10 @@ extension cartridge::ChronosCheck::usecases::Activity;
 extension cartridge::ChronosCheck::usecases::ActivityInitial;
 extension cartridge::ChronosCheck::usecases::ActivityFinal;
 extension cartridge::ChronosCheck::usecases::ActivityDecision;
+extension cartridge::ChronosCheck::usecases::ChiObject;
+extension cartridge::ChronosCheck::domain::ChiNode;
+extension cartridge::ChronosCheck::domain::ChiValue;
+extension cartridge::ChronosCheck::domain::ChiActionKey;
 
 cached E():
 	1.11111 - 1.1111
@@ -289,6 +293,82 @@ cached List[uml::DecisionNode] getDecisionsLoopsWithoutRequiredSuccessors(uml::M
 
 cached List[uml::DecisionNode] getDecisionsLoopsWithoutRequiredProductionRuleset(uml::Model this):
 	this.getDecisionsLoopsAll().select(e|!e.hasRequiredLoopProductionRuleset())
+;
+
+//ChiObject
+cached List[uml::DataStoreNode] getObjectsAll(uml::Model this):
+	this.allOwnedElements().typeSelect(uml::DataStoreNode)
+;
+
+cached List[uml::DataStoreNode] getObjectsWithoutName(uml::Model this):
+	this.getObjectsAll().select(e|!e.hasName())
+;
+
+cached List[uml::DataStoreNode] getObjectsWithoutIncoming(uml::Model this):
+	this.getObjectsAll().select(e|!e.hasIncoming())
+;
+
+cached List[uml::DataStoreNode] getObjectsWithoutOutgoing(uml::Model this):
+	this.getObjectsAll().select(e|!e.hasOutgoing())
+;
+
+cached List[uml::DataStoreNode] getObjectsRequestWithoutOutgoing(uml::Model this):
+	this.getObjectsAll().select(e|!e.requestHasOutgoing())
+;
+
+cached List[uml::DataStoreNode] getObjectsResponseWithoutIncoming(uml::Model this):
+	this.getObjectsAll().select(e|!e.responseHasIncoming())
+;
+
+cached List[uml::DataStoreNode] getObjectsResponseDifferentNode(uml::Model this):
+	this.getObjectsAll().select(e|!e.responseSameNode())
+;
+
+cached List[uml::DataStoreNode] getObjectsWithoutNode(uml::Model this):
+	this.getObjectsAll().select(e|!e.hasNode())
+;
+
+cached List[uml::DataStoreNode] getObjectsSameNameDifferentNode(uml::Model this):
+	this.getObjectsAll().select(e|!e.sameNameSameNode())
+;
+
+//ChiNode
+cached List[Chronos::ChiNode] getNodesAll(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiNode)
+;
+
+cached List[Chronos::ChiNode] getNodesWithoutName(uml::Model this):
+	this.getNodesAll().select(e|!e.hasName())
+;
+
+cached List[Chronos::ChiNode] getNodesWithoutOrderby(uml::Model this):
+	this.getNodesAll().select(e|!e.hasOrderby())
+;
+
+cached List[Chronos::ChiNode] getNodesWithoutInitparams(uml::Model this):
+	this.getNodesAll().select(e|!e.hasInitparams())
+;
+
+//ChiValue
+
+cached List[Chronos::ChiValue] getValuesAll(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiValue)
+;
+cached List[Chronos::ChiValue] getValuesWithoutName(uml::Model this):
+	this.getValuesAll().select(e|!e.hasName())
+;
+
+cached List[Chronos::ChiValue] getValuesInvalidName(uml::Model this):
+	this.getValuesAll().select(e|!e.hasValidName())
+;
+
+//ChiActionKey
+cached List[Chronos::ChiActionKey] getActionKeysAll(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiActionKey)
+;
+
+cached List[Chronos::ChiActionKey] getActionKeysWithoutConfig(uml::Model this):
+	this.getActionKeysAll().select(e|!e.hasConfig())
 ;
 
 //Package

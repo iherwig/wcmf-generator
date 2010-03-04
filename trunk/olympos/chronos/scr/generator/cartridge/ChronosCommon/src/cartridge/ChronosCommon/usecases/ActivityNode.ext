@@ -42,17 +42,32 @@ List[uml::ActivityNode] getPreviousNodes(uml::ActivityNode this):
 
 List[uml::ActivityEdge] getPreviousEdges(uml::ActivityNode this):
 	{}
-		.addAll(this.incoming.typeSelect(uml::ControlFlow))
+		.addAll(
+			this.incoming.typeSelect(uml::ControlFlow) != null
+			? this.incoming.typeSelect(uml::ControlFlow)
+			: {}
+		)
 		//Jump over one DataStore for flows like Action --> DataStore --> Action
-		.addAll(this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).incoming.typeSelect(uml::ObjectFlow))
+		.addAll(this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).incoming.typeSelect(uml::ObjectFlow) != null
+			? this.incoming.typeSelect(uml::ObjectFlow).source.typeSelect(uml::DataStoreNode).incoming.typeSelect(uml::ObjectFlow)
+			: {}
+		)
 ;
 
 List[uml::ActivityEdge] getNextEdges(uml::ActivityNode this):
 	this != null ? (
 		{}
-			.addAll(this.outgoing.typeSelect(uml::ControlFlow))
+			.addAll(
+				this.outgoing.typeSelect(uml::ControlFlow) != null
+				? this.outgoing.typeSelect(uml::ControlFlow)
+				: {}
+			)
 			//Jump over one DataStore for flows like Action --> DataStore --> Action
-			.addAll(this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow))
+			.addAll(
+				this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow) != null
+				? this.outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).outgoing.typeSelect(uml::ObjectFlow)
+				: {}
+			)
 	) : (
 		{}
 	)
@@ -69,12 +84,20 @@ List[uml::ActivityNode] getConsecutiveWithSameProductionRuleset(uml::ActivityNod
 List[uml::ActivityNode] getPreviousWithSameProductionRuleset(uml::ActivityNode this):
 	{}
 		.add(this)
-		.addAll(this.getPreviousNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getPreviousWithSameProductionRuleset())
+		.addAll(
+			this.getPreviousNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getPreviousWithSameProductionRuleset() != null
+			? this.getPreviousNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getPreviousWithSameProductionRuleset()
+			: {}
+		)
 ;
 
 List[uml::ActivityNode] getNextWithSameProductionRuleset(uml::ActivityNode this):
 	{}
 		.add(this)
-		.addAll(this.getNextNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getNextWithSameProductionRuleset())
+		.addAll(
+			this.getNextNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getNextWithSameProductionRuleset() != null
+			? this.getNextNodes().select(e|e.getProductionRuleset() != null && e.getProductionRuleset() == this.getProductionRuleset()).getNextWithSameProductionRuleset()
+			: {}
+		)
 ;
 

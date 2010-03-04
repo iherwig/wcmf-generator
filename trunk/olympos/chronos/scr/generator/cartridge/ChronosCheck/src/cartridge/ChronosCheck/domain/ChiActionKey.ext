@@ -1,0 +1,8 @@
+import uml;
+import Chronos;
+
+extension common::util;
+
+boolean hasConfig(Chronos::ChiActionKey this):
+	!this.config.isNullOrEmpty()
+;

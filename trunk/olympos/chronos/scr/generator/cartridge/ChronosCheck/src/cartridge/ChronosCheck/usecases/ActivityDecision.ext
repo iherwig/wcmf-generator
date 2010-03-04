@@ -26,35 +26,55 @@ boolean hasOneProductionRuleset(uml::DecisionNode this):
 ;
 
 boolean hasPreActivity(uml::DecisionNode this):
-	this.getProductionRuleset() == null && uml::OpaqueAction.isInstance(this.getPreviousNode())
+	this.getProductionRuleset() == null ? (
+		uml::OpaqueAction.isInstance(this.getPreviousNode())
+	) : (
+		true
+	)
 ;
 
 boolean isProductionRulesetConsecutive(uml::DecisionNode this):
-	this.getProductionRuleset() != null && this.getProductionRuleset().getRulesetParents().containsAll(this.getConsecutiveWithSameProductionRuleset())
+	this.getProductionRuleset() == null ? (
+		this.getProductionRuleset().getRulesetParents().containsAll(this.getConsecutiveWithSameProductionRuleset())
+	) : (
+		true
+	)
 ;
 
 boolean isSingleWithingProductionRuleset(uml::DecisionNode this):
-	this.getProductionRuleset() != null && this.getProductionRuleset().getRulesetParents().typeSelect(uml::DecisionNode).size == 1
+	this.getProductionRuleset() == null ? (
+		this.getProductionRuleset().getRulesetParents().typeSelect(uml::DecisionNode).size == 1
+	) : (
+		true
+	)
 ;
 
 boolean hasRequiredLoopArrows(uml::DecisionNode this):
-	this.isLoop()
-	&& this.incoming.select(e|e.name == "LoopContinue").size >= 1
-	&& this.outgoing.select(e|e.name == "LoopStart").size == 1
-	
+	this.isLoop() ? (
+		this.incoming.select(e|e.name == "LoopContinue").size >= 1
+		&& this.outgoing.select(e|e.name == "LoopStart").size == 1
+	) : (
+		true
+	)
 ;
 
 boolean hasRequiredLoopPredecessors(uml::DecisionNode this):
-	this.isLoop()
-	&& uml::OpaqueAction.isInstance(this.getLoopPredecessor())
-	&& uml::DataStoreNode.isInstance(this.getLoopPredecessor().incoming.source.first())
-	&& uml::OpaqueAction.isInstance(this.getLoopPredecessor().incoming.source.incoming.source.first())
+	this.isLoop() ? (
+		uml::OpaqueAction.isInstance(this.getLoopPredecessor())
+		&& uml::DataStoreNode.isInstance(this.getLoopPredecessor().incoming.source.first())
+		&& uml::OpaqueAction.isInstance(this.getLoopPredecessor().incoming.source.incoming.source.first())
+	) : (
+		true
+	)
 ;
 
 boolean hasRequiredLoopSuccessors(uml::DecisionNode this):
-	this.isLoop()
-	&& uml::OpaqueAction.isInstance(this.getLoopStart())
-	&& uml::DataStoreNode.isInstance(this.getLoopStart().outgoing.target.first())
+	this.isLoop() ? (
+		uml::OpaqueAction.isInstance(this.getLoopStart())
+		&& uml::DataStoreNode.isInstance(this.getLoopStart().outgoing.target.first())
+	) : (
+		true
+	)
 ;
 
 boolean hasRequiredLoopProductionRuleset(uml::DecisionNode this):
@@ -65,6 +85,9 @@ boolean hasRequiredLoopProductionRuleset(uml::DecisionNode this):
 		
 		.getProductionRuleset().toSet():
 
-	this.isLoop() &&
-	rulesets.size == 1 && rulesets.toList().first() == this.getProductionRuleset() && rulesets.toList().first() != null
+	this.isLoop() ? (
+		rulesets.size == 1 && rulesets.toList().first() == this.getProductionRuleset() && rulesets.toList().first() != null
+	) : (
+		true
+	)
 ;
