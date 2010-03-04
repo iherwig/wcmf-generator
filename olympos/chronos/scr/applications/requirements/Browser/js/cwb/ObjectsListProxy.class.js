@@ -129,7 +129,7 @@ cwb.ObjectsListProxy.prototype.getColumns = function() {
 	    header : 'Author',
 	    width : 70,
 	    dataIndex : 'Author',
-	    hidden : false
+	    hidden : true
 	});
 	result.push( {
 	    header : 'Creator',
@@ -141,19 +141,19 @@ cwb.ObjectsListProxy.prototype.getColumns = function() {
 	    header : 'Created',
 	    width : 60,
 	    dataIndex : 'created',
-	    hidden : false
+	    hidden : true
 	});
 	result.push( {
 	    header : 'Last editor',
 	    width : 70,
 	    dataIndex : 'last_editor',
-	    hidden : true
+	    hidden : false
 	});
 	result.push( {
 	    header : 'Modified',
 	    width : 60,
 	    dataIndex : 'modified',
-	    hidden : true
+	    hidden : false
 	});
 	
 	return result;
