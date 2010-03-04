@@ -26,6 +26,7 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 		this.selectModelBox = new Ext.form.ComboBox( {
 			x: 2,
 			y: 105,
+			width: 163,
 		    store: new Ext.data.SimpleStore( {
 		        fields: [ "oid", "name" ],
 		        data: []
