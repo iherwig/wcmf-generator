@@ -18,3 +18,12 @@ iframe.flashDoc {
 	line-height:50px;
 	font-style:italic;
 }
+
+.clickableRow {
+	cursor: pointer;
+}
+
+.clickableRow:hover {
+	text-decoration: underline !important;
+	color: #0000FF;
+}

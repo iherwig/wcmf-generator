@@ -67,8 +67,14 @@ cwb.statistics.Overview = Ext.extend(Ext.ux.maximgb.tg.EditorGridPanel, {
 		        renderer: self.statusRenderer
 		    } ],
 		    viewConfig: {
-			    forceFit: true
-		    },
+			    forceFit: true,
+		        getRowClass: function(record, index) {
+					var objectList = record.get('objectList');
+					if (objectList instanceof Array && objectList.length > 0) {
+		                return 'clickableRow';
+		            }
+		        }		    
+			},
 		    sm: new Ext.grid.RowSelectionModel( {
 			    singleSelect: true
 		    }),
@@ -78,11 +84,11 @@ cwb.statistics.Overview = Ext.extend(Ext.ux.maximgb.tg.EditorGridPanel, {
 		cwb.statistics.Overview.superclass.initComponent.apply(this, arguments);
 		
 		this.on('rowclick', function(grid, rowIndex, e) {
-			var selectedItem = self.getStore().getAt(rowIndex);
-			
-			if (selectedItem.data.objectList instanceof Array &&
-					selectedItem.data.objectList.length > 0) {
-				cwb.ui.StructureTabPanel.getInstance().createHitsGrid(selectedItem.data.id, selectedItem.data.object, selectedItem.data.objectList);
+			var record = self.getStore().getAt(rowIndex);
+			var objectList = record.get('objectList');
+			if (objectList instanceof Array && objectList.length > 0) {
+				cwb.ui.StructureTabPanel.getInstance().createHitsGrid(record.get('id'), 
+						record.get('object'), record.get('objectList'));
 			}
 		});
 	}
