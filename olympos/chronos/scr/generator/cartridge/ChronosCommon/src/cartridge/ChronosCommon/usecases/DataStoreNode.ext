@@ -1,6 +1,11 @@
 import uml;
 
+extension cartridge::ChronosCommon::usecases::Activity;
+
+boolean isInputChiObject(uml::DataStoreNode this):
+	this.outgoing.target.contains(this.activity.getFirstNode())
+;
+
 boolean isOutputChiObject(uml::DataStoreNode this):
 	this.incoming.source.outgoing.target.typeSelect(uml::FinalNode).size > 0
 ;
-

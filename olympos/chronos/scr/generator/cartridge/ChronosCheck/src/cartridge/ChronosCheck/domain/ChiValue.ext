@@ -1,0 +1,20 @@
+import uml;
+import Chronos;
+
+extension common::util;
+
+boolean hasName(Chronos::ChiValue this):
+	!this.name.isNullOrEmpty()
+;
+
+boolean hasValidName(Chronos::ChiValue this):
+	switch(this.name) {
+		case "type": false
+		case "state": false
+		case "oid": false
+		case "value": false
+		case "none": false
+		case "sortkey": false
+		default: true
+	}
+;

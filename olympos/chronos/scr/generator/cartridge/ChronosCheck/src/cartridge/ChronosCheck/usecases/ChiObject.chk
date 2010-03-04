@@ -7,16 +7,10 @@ extension common::umlutils;
 
 extension cartridge::ChiCmf::extensions::util;
 
-extension cartridge::ChronosCommon::usecases::Activity;
 extension cartridge::ChronosCommon::usecases::ActivityNode;
+extension cartridge::ChronosCommon::usecases::DataStoreNode;
 
-boolean isInputChiObject(uml::DataStoreNode this):
-	this.outgoing.target.contains(this.activity.getFirstNode())
-;
-
-boolean isOutputChiObject(uml::DataStoreNode this):
-	this.incoming.source.outgoing.target.typeSelect(uml::FinalNode).size > 0
-;
+extension cartridge::ChronosCheck::usecases::ChiObject;
 
 context uml::DataStoreNode ERROR
 	"ChiObject must have a non-empty name: " + this.fullQualifiedName():
@@ -30,25 +24,25 @@ context uml::DataStoreNode if !this.isOutputChiObject() ERROR
 
 context uml::DataStoreNode if !this.isInputChiObject() ERROR
 	"ChiObject must have at least one incoming arrow: " + this.fullQualifiedName():
-	this.incoming.size >= 1
+	this.hasIncoming()
 ;
 
 context uml::DataStoreNode if this.isInputChiObject() ERROR
 	"Input ChiObject must have at least one outgoing arrow: " + this.fullQualifiedName():
-	this.outgoing.size >= 1
+	this.requestHasOutgoing()
 ;
 
 context uml::DataStoreNode if this.isOutputChiObject() ERROR
 	"Output ChiObject must have at least one incoming arrow: " + this.fullQualifiedName():
-	this.incoming.size >= 1
+	this.responseHasIncoming()
 ;
 
 context uml::DataStoreNode WARNING
 	"ChiObject has no associated type: " + this.fullQualifiedName():
-	this.type != null
+	this.hasNode()
 ;
 
 context uml::DataStoreNode ERROR
 	"All ChiObjects of the same name must have the same type: " + this.fullQualifiedName():
-	this.activity.node.typeSelect(uml::DataStoreNode).select(e|e.name == this.name).forAll(e|e.type == this.type)
+	this.sameNameSameNode()
 ;
