@@ -382,6 +382,93 @@ cached List[uml::Package] getPackagesWithBothSubpackagesAndElements(uml::Model t
 ;
 
 
+List failedRequirements(uml::Model this):
+	{}
+		.addAll(this.getGoalsBothTypesOfChildren())
+		.addAll(this.getGoalsNoPriority())
+		.addAll(this.getGoalsNoValidChild())
+		.addAll(this.getGoalsNoValueGoalInt())
+		.addAll(this.getGoalsNonAchieved())
+
+		.addAll(this.getRequirementsBothFeatureIssue())
+		.addAll(this.getRequirementsBothTypesOfChildren())
+		.addAll(this.getRequirementsMoreThanOneFeature())
+		.addAll(this.getRequirementsNoChildren())
+		.addAll(this.getRequirementsWithoutParent())
+
+		.addAll(this.getFeaturesImplementedIncomplete())
+		.addAll(this.getFeaturesWithoutParent())
+
+		.addAll(this.getIssuesWithoutParent())
+;
+
+List failedUseCases(uml::Model this):
+	{}
+		.addAll(this.getBusinessProcessesWithoutUc())
+
+		.addAll(this.getBusinessUcWithPrimaryActorPassive())
+		.addAll(this.getBusinessUcWithoutActivitySet())
+		.addAll(this.getBusinessUcWithoutActor())
+		.addAll(this.getBusinessUcWithoutFeature())
+		.addAll(this.getBusinessUcWithoutGoalInContext())
+		.addAll(this.getBusinessUcWithoutMainSuccessScenario())
+		.addAll(this.getBusinessUcWithoutMainSuccessScenarioEqFinal())
+		.addAll(this.getBusinessUcWithoutPrimaryActor())
+		.addAll(this.getBusinessUcWithoutScope())
+		.addAll(this.getBusinessUcWithoutTrigger())
+		.addAll(this.getBusinessUcWithoutTriggerEqInitial())
+
+		.addAll(this.getActivitySetsDuplicateName())
+		.addAll(this.getActivitySetsWithoutFinal())
+		.addAll(this.getActivitySetsWithoutName())
+		.addAll(this.getActivitySetsWithoutOneInputChiObject())
+		.addAll(this.getActivitySetsWithoutOutputChiObject())
+		.addAll(this.getActivitySetsWitoutOneInitial())
+
+		.addAll(this.getActivitiesDuplicateName())
+		.addAll(this.getActivitiesGtOneProductionRulesets())
+		.addAll(this.getActivitiesProductionRulesetNonConsecutive())
+		.addAll(this.getActivitiesWithoutIncomingOutgoing())
+		.addAll(this.getActivitiesWithoutName())
+
+		.addAll(this.getInitialsWithoutOutgoing())
+
+		.addAll(this.getFinalsWithoutIncoming())
+
+		.addAll(this.getDecisionsDuplicateName())
+		.addAll(this.getDecisionsDuplicateOutgoing())
+		.addAll(this.getDecisionsGtOneProductionRulesets())
+		.addAll(this.getDecisionsLoopsWithoutRequiredArrows())
+		.addAll(this.getDecisionsLoopsWithoutRequiredPredecessors())
+		.addAll(this.getDecisionsLoopsWithoutRequiredProductionRuleset())
+		.addAll(this.getDecisionsLoopsWithoutRequiredSuccessors())
+		.addAll(this.getDecisionsMultipleWithinProductionRuleset())
+		.addAll(this.getDecisionsNoIncomingLt2Outgoing())
+		.addAll(this.getDecisionsProductionRulesetNonConsecutive())
+		.addAll(this.getDecisionsWithoutName())
+		.addAll(this.getDecisionsWithoutPreActivity())
+
+		.addAll(this.getObjectsRequestWithoutOutgoing())
+		.addAll(this.getObjectsResponseDifferentNode())
+		.addAll(this.getObjectsResponseWithoutIncoming())
+		.addAll(this.getObjectsSameNameDifferentNode())
+		.addAll(this.getObjectsWithoutIncoming())
+		.addAll(this.getObjectsWithoutName())
+		.addAll(this.getObjectsWithoutNode())
+		.addAll(this.getObjectsWithoutOutgoing())
+;
+
+List failedDomain(uml::Model this):
+	{}
+		.addAll(this.getNodesWithoutInitparams())
+		.addAll(this.getNodesWithoutName())
+		.addAll(this.getNodesWithoutOrderby())
+		
+		.addAll(this.getValuesInvalidName())
+		.addAll(this.getValuesWithoutName())
+		
+		.addAll(this.getActionKeysWithoutConfig())
+;
 
 String calculateTrafficLight(Real this):
 	(this == -1) ?
