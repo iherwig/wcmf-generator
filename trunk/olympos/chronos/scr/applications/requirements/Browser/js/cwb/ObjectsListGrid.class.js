@@ -32,7 +32,12 @@ cwb.ObjectsListGrid = function(config) {
 	    stripeRows: true,
 	    store: this.store,
 	    columns: [],
-	    loadMask: true
+	    loadMask: true,
+	    viewConfig: {
+	        getRowClass: function(record, index) {
+	    		return 'clickableRow';
+	        }		    
+		}
 	}, config));
 };
 
