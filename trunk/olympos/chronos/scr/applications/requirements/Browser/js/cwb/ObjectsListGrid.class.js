@@ -34,6 +34,7 @@ cwb.ObjectsListGrid = function(config) {
 	    columns: [],
 	    loadMask: true,
 	    viewConfig: {
+		    forceFit: true,
 	        getRowClass: function(record, index) {
 	    		return 'clickableRow';
 	        }		    
