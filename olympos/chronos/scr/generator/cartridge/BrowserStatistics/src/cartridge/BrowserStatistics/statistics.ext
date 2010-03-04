@@ -400,6 +400,7 @@ List failedRequirements(uml::Model this):
 		.addAll(this.getFeaturesWithoutParent())
 
 		.addAll(this.getIssuesWithoutParent())
+	.toSet().toList()
 ;
 
 List failedUseCases(uml::Model this):
@@ -456,6 +457,7 @@ List failedUseCases(uml::Model this):
 		.addAll(this.getObjectsWithoutName())
 		.addAll(this.getObjectsWithoutNode())
 		.addAll(this.getObjectsWithoutOutgoing())
+	.toSet().toList()
 ;
 
 List failedDomain(uml::Model this):
@@ -468,6 +470,7 @@ List failedDomain(uml::Model this):
 		.addAll(this.getValuesWithoutName())
 		
 		.addAll(this.getActionKeysWithoutConfig())
+	.toSet().toList()
 ;
 
 String calculateTrafficLight(Real this):
