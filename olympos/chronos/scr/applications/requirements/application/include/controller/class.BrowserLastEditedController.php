@@ -49,7 +49,7 @@ require_once (BASE."wcmf/lib/security/class.RightsManager.php");
 class BrowserLastEditedController extends Controller
 {
 // PROTECTED REGION ID(application/include/controller/class.BrowserLastEditedController.php/Body) ENABLED START
-	const LIMIT = 10;
+	const LIMIT = 25;
 	const TABLENAME = 'History';
 	private static $INVALID_TYPES = array('Figure', 'Diagram');
 
