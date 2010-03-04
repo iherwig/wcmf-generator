@@ -393,6 +393,9 @@ uwm.modeltree.ModelTree.prototype.createModel = function() {
  * @param {oid} oid The oid to mark.
  */
 uwm.modeltree.ModelTree.prototype.markNodeByOid = function(oid) {
+	var loadMask = new Ext.LoadMask(this.getEl(), {msg:uwm.Dict.translate('Please wait...')});
+	loadMask.show();
+	
 	var node = null;
 	var currOid = oid;
 	
@@ -432,6 +435,7 @@ uwm.modeltree.ModelTree.prototype.markNodeByOid = function(oid) {
 		}
 	} while (node == null);
 	
+	loadMask.hide();
 	this.show();
 	
 	if (parents.length == 1) {
