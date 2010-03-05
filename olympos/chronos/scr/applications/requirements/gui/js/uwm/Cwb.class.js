@@ -30,7 +30,6 @@ uwm.Cwb.getInstance = function() {
 	    	showMask: cwb.ui.Workbench.prototype.showMask
 		});
 		cwb.Config.baseHref = "../Browser/";
-		document.title = "Chronos Web Modeller";
 		
 		// listen to object selection on browser panels
 		cwb.ui.StructureTabPanel.getInstance().on('objectSelected', function(oid) {

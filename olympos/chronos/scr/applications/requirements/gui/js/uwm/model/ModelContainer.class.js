@@ -350,15 +350,18 @@ uwm.model.ModelContainer.prototype.deleteObject = function(modelNode) {
 	});
 }
 
-uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentNode) {
+uwm.model.ModelContainer.prototype.duplicateObject = function(modelNode, parentNode, recursive) {
 	var uwmClassName = modelNode.getModelNodeClass().getUwmClassName();
 	var packageNode = this.getNode("Package", parentNode.getOid());
 	var self = this;
+	if (recursive == undefined) {
+		recursive = false;
+	}
 
 	var longTaskRunner = new uwm.ui.LongTaskRunner( {
 			title : uwm.Dict.translate('Copying Object ...'),
 			call : function(successHandler, errorHandler) {
-				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), parentNode.getOid(), false, successHandler, errorHandler);
+				uwm.persistency.Persistency.getInstance().copy(modelNode.getOid(), parentNode.getOid(), recursive, successHandler, errorHandler);
 			},
 			successHandler : function(data) {
 				uwm.persistency.Persistency.getInstance().display(data.oid, 0, 
