@@ -276,7 +276,7 @@ cached List[uml::DecisionNode] getDecisionsMultipleWithinProductionRuleset(uml::
 ;
 
 cached List[uml::DecisionNode] getDecisionsLoopsAll(uml::Model this):
-	this.getDecisionsAll().select(e|!e.isLoop())
+	this.getDecisionsAll().select(e|e.isLoop())
 ;
 
 cached List[uml::DecisionNode] getDecisionsLoopsWithoutRequiredArrows(uml::Model this):
@@ -474,7 +474,7 @@ List failedDomain(uml::Model this):
 ;
 
 String calculateTrafficLight(Real this):
-	(this == -1) ?
+	(this < 0) ?
 		"null"
 	: (
 		(this < 0.2) ?
