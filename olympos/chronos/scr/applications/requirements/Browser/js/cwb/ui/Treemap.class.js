@@ -12,6 +12,41 @@
 
 Ext.namespace("cwb.ui");
 
+/*
+ * JIT Treemap overrides
+ */
+TM.Squarified.implement({
+	/*
+	 * Override setColor method to use our own scheme
+	 */
+	'setColor': function(json) {
+		var x = json.data.$color;
+		var switchColors=function(dataValue){
+			switch(dataValue){
+				case 1:
+				return '#e42217';
+				break;
+				case 2:
+				return '#f87217';
+				break;
+				case 3:
+				return '#fffa40';
+				break;
+				case 4:
+				return '#b1fb17';
+				break;
+				case 5:
+				default:
+				return '#6cc217';
+				break;
+			}
+		}
+		return switchColors(x);
+	}
+});
+
+
+
 /**
  * Treemap containing the package weight
  */
@@ -40,7 +75,7 @@ cwb.ui.Treemap.prototype.show = function() {
 			Color : {
 				// Allow coloring
 				allow : true,
-				// <irrelevant, colors are now calculated differently>
+				// <irrelevant, colors are now calculated differently, see above>
 				// Set min value and max value constraints
 				// for the *$color* property value.
 				// Default's to -100 and 100.
