@@ -77,6 +77,11 @@ uwm.modeltree.UseCaseNode.prototype.buildContextMenu = function() {
 				self.reload();
 			}
 		}, {
+			text: uwm.Dict.translate('Duplicate'),
+			handler: function(item, e) {
+				self.duplicate(item, e);
+			}
+		}, {
 			text: uwm.Dict.translate('Show object history'),
 			handler: function(item, e) {
 				self.showObjectHistory(item, e);
@@ -150,6 +155,10 @@ uwm.modeltree.UseCaseNode.prototype.showHelp = function(self, e) {
 
 uwm.modeltree.UseCaseNode.prototype.showObjectHistory = function(self, e) {
 	new uwm.ui.History(this.modelNode);
+}
+
+uwm.modeltree.UseCaseNode.prototype.duplicate = function(self, e) {
+	uwm.model.ModelContainer.getInstance().duplicateObject(this.modelNode, this.parentNode.modelNode, true);
 }
 
 uwm.modeltree.UseCaseNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID = "showInDiagram";
