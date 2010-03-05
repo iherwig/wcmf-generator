@@ -22,7 +22,7 @@ uwm.Constants.DD_GROUP = "uwmDDGroup";
  *
  * @type String
  */
-uwm.Constants.SVN_REVISION ="1594";
+uwm.Constants.SVN_REVISION ="1598";
 
 /**
  * Timeout of AJAX requests, in milliseconds.
