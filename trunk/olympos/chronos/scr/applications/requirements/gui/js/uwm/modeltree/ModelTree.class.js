@@ -444,6 +444,7 @@ uwm.modeltree.ModelTree.prototype.markNodeByOid = function(oid) {
 			parentNode.ensureVisible();
 			parentNode.expand();
 		}
+		node.ensureVisible();
 		node.select();
 	} else {
 		this.expandListAsync(parents);
