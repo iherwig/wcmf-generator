@@ -29,4 +29,4 @@ cwb.Constants.SVN_REVISION ="513";
  * 
  * @type int
  */
-cwb.Constants.AJAX_TIMEOUT = 1800000;
+cwb.Constants.AJAX_TIMEOUT = 7200000;
