@@ -68,6 +68,11 @@ uwm.modeltree.PackageNode.prototype.buildContextMenu = function() {
 				self.reload();
 			}
 		}, {
+			text: uwm.Dict.translate('Duplicate'),
+			handler: function(item, e) {
+				self.duplicate(item, e);
+			}
+		}, {
 			text: uwm.Dict.translate('Export as UML'),
 			handler: function(item, e) {
 			var localization = uwm.i18n.Localization.getInstance();
@@ -110,6 +115,10 @@ uwm.modeltree.PackageNode.prototype.selectAsScope = function(self, e) {
 
 uwm.modeltree.PackageNode.prototype.addDiagramFromPackageAndReload = function(self, e, menuEntry, addDiagramFromPackage) {
 	menuEntry.reload();
+}
+
+uwm.modeltree.PackageNode.prototype.duplicate = function(self, e) {
+	uwm.model.ModelContainer.getInstance().duplicateObject(this.modelNode, this.parentNode.modelNode, true);
 }
 
 uwm.modeltree.PackageNode.prototype.addDiagramFromPackage = function(self, e) {
