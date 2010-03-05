@@ -49,6 +49,12 @@ $statisticsData = array(
 	«EXPAND rowTemplate(9022, 22, true, "without Trigger", "ChiBusinessUseCases that have no Trigger", 1 - (E() + this.getBusinessUcWithoutTrigger().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutTrigger()»,
 	«EXPAND rowTemplate(10022, 22, true, "without MainSuccessScenario", "ChiBusinessUseCases that have no MainSuccessScenario", 1 - (E() + this.getBusinessUcWithoutMainSuccessScenario().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutMainSuccessScenario()»,
 	«EXPAND rowTemplate(11022, 22, true, "without PrimaryActor", "ChiBusinessUseCases that have no PrimaryActor", 1 - (E() + this.getBusinessUcWithoutPrimaryActor().size) / this.getBusinessUcAll().size) FOR this.getBusinessUcWithoutPrimaryActor()»,
+	«EXPAND rowTemplate(12022, 22, false, "with Status", "ChiBusinessUseCases that have a Status", -1) FOR this.getBusinessUcStatus()»,
+	«EXPAND rowTemplate(112022, 12022, true, "Proposed", "ChiBusinessUseCases that have a Status = Proposed", -1) FOR this.getBusinessUcStatusProposed()»,
+	«EXPAND rowTemplate(212022, 12022, true, "Approved", "ChiBusinessUseCases that have a Status = Approved", -1) FOR this.getBusinessUcStatusApproved()»,
+	«EXPAND rowTemplate(312022, 12022, true, "Rejected", "ChiBusinessUseCases that have a Status = Rejected", -1) FOR this.getBusinessUcStatusRejected()»,
+	«EXPAND rowTemplate(412022, 12022, true, "Validated", "ChiBusinessUseCases that have a Status = Validated", -1) FOR this.getBusinessUcStatusValidated()»,
+	«EXPAND rowTemplate(512022, 12022, true, "Released", "ChiBusinessUseCases that have a Status = Released", -1) FOR this.getBusinessUcStatusReleased()»,
 	
 	«EXPAND rowTemplateBasic(32, 2, false, "ActivitySet", "All ActivitySets", -1) FOR this.getActivitySetsAll()»,
 	«EXPAND rowTemplateBasic(1032, 32, true, "duplicate name", "ActivitySets that have no globally unique name", 1 - (E() + this.getActivitySetsDuplicateName().size) / this.getActivitySetsAll().size) FOR this.getActivitySetsDuplicateName()»,
