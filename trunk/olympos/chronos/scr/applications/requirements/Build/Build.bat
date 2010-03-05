@@ -37,9 +37,9 @@ REM %SUBVERSION%\svn.exe export ..\cwe c:\temp\cwm\cwe
 %SUBVERSION%\svn.exe export ..\browser c:\temp\cwm\browser
 
 REM Build Generator
-call "%ANT_HOME%\bin\ant" -f ..\generator\build.xml
+call "%ANT_HOME%\bin\ant" -f ..\generator\build\build.xml
 md c:\temp\cwm\generator
-xcopy /e ..\dist\*.* c:\temp\cwm\generator
+xcopy /e ..\generator\dist\*.* c:\temp\cwm\generator
 
 REM Create generator build folder
 md c:\temp\cwm\generated\wcmf
