@@ -3,6 +3,8 @@ import Chronos;
 
 extension org::openarchitectureware::uml2::profile::profiling;
 
+extension common::util;
+
 extension cartridge::ChronosCommon::usecases::Activity;
 extension cartridge::ChronosCommon::usecases::DecisionNode;
 
@@ -159,6 +161,31 @@ cached List[Chronos::ChiBusinessUseCase] getBusinessUcWithoutMainSuccessScenario
 
 cached List[Chronos::ChiBusinessUseCase] getBusinessUcWithoutPrimaryActor(uml::Model this):
 	this.getBusinessUcAll().select(e|!e.hasPrimaryActor())
+;
+
+//Status
+cached List[Chronos::ChiBusinessUseCase] getBusinessUcStatus(uml::Model this):
+	this.getBusinessUcAll().select(e|!e.Status.isNullOrEmpty())
+;
+
+cached List[Chronos::ChiBusinessUseCase] getBusinessUcStatusProposed(uml::Model this):
+	this.getBusinessUcStatus().select(e|e.Status == "Proposed")
+;
+
+cached List[Chronos::ChiBusinessUseCase] getBusinessUcStatusApproved(uml::Model this):
+	this.getBusinessUcStatus().select(e|e.Status == "Approved")
+;
+
+cached List[Chronos::ChiBusinessUseCase] getBusinessUcStatusRejected(uml::Model this):
+	this.getBusinessUcStatus().select(e|e.Status == "Rejected")
+;
+
+cached List[Chronos::ChiBusinessUseCase] getBusinessUcStatusValidated(uml::Model this):
+	this.getBusinessUcStatus().select(e|e.Status == "Validated")
+;
+
+cached List[Chronos::ChiBusinessUseCase] getBusinessUcStatusReleased(uml::Model this):
+	this.getBusinessUcStatus().select(e|e.Status == "Released")
 ;
 
 //ActivitySet
