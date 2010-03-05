@@ -32,7 +32,7 @@ uwm.diagram.DiagramTabPanel = Ext.extend(Ext.TabPanel, {
 			region: "center",
 			xtype: "tabpanel",
 			enableTabScroll: true,
-			activeTab: 0,
+			activeTab: 1,
 			id: uwm.diagram.DiagramTabPanel.COMPONENT_ID,
 			items: [uwm.ui.HelpViewer.getInstance(), uwm.Cwb.getInstance()]
 		})
