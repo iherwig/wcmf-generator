@@ -29,4 +29,4 @@ uwm.Constants.SVN_REVISION ="$WCREV$";
  * 
  * @type int
  */
-uwm.Constants.AJAX_TIMEOUT = 1800000;
+uwm.Constants.AJAX_TIMEOUT = 3600000;

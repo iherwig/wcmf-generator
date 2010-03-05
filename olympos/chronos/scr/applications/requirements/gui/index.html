@@ -863,6 +863,10 @@
         <!--End include CWB-->
         <script type="text/javascript">
             Ext.onReady(function() {
+				// init cwb (necessary at this point, because otherwise
+				// it overrides the window title)
+				uwm.Cwb.getInstance();
+                
             	Ext.BLANK_IMAGE_URL = "img/s.gif";
             	Ext.QuickTips.init();
             	uwm.Uwm.getInstance().startApplication();
