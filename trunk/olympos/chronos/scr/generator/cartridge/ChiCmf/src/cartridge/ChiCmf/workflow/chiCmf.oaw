@@ -33,9 +33,9 @@
 	</component>
 
 	<!-- read profile as model -->
-	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
-		<modelUrl value='${profileUmlFile}'/>
-		<outputSlot value="chronosProfileModel"/>
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${profileUmlFile}" />
+		<outputSlot value="chronosProfileModel" />
 	</component>
 
 	<!-- Check constraints before model 2 model transformation -->
