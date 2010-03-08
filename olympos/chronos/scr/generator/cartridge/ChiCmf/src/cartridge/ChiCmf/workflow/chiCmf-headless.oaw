@@ -28,9 +28,9 @@
 	</component>
 
 	<!-- read profile as model -->
-	<component class='net.sourceforge.olympos.oaw.workflow.XmiUrlReader'>
-		<modelUrl value='${profileUri}'/>
-		<outputSlot value="chronosProfileModel"/>
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${profileUri}" />
+		<outputSlot value="chronosProfileModel" />
 	</component>
 
 	<!-- transform XML to UML -->
