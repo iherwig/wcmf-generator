@@ -5,3 +5,9 @@ import uml;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCheck::usecases::ChiBusinessProcess;
+
+context Chronos::ChiBusinessProcess WARNING
+	"ChiBusinessProcess has no ChiBusinessUseCase":
+	this.hasUc()
+;
