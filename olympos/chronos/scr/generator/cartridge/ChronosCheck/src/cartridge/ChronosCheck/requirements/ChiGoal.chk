@@ -11,4 +11,22 @@ context Chronos::ChiGoal WARNING
 	this.isAchieved()
 ;
 
+context Chronos::ChiGoal WARNING
+	"ChiGoal has no valid child":
+	this.hasValidChild()
+;
 
+context Chronos::ChiGoal WARNING
+	"ChiGoal has no Priority":
+	this.hasPriority()
+;
+
+context Chronos::ChiGoal WARNING
+	"ChiGoal Value_Goal is no integer":
+	this.isValueGoalInt()
+;
+
+context Chronos::ChiGoal WARNING
+	"ChiGoal has both ChiGoals and ChiRequiremnts as Children":
+	this.hasOnlyOneTypeOfChildren()
+;

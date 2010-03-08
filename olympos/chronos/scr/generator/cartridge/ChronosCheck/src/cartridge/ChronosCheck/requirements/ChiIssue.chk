@@ -4,3 +4,9 @@ import Chronos;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCheck::requirements::ChiIssue;
+
+context Chronos::ChiIssue WARNING
+	"ChiIssue has no parent":
+	this.hasParent()
+;

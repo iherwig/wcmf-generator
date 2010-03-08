@@ -4,3 +4,29 @@ import Chronos;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCheck::requirements::ChiRequirement;
+
+context Chronos::ChiRequirement WARNING
+	"ChiRequirement has no parent":
+	this.hasParent()
+;
+
+context Chronos::ChiRequirement WARNING
+	"ChiRequirement has no child":
+	this.hasChild()
+;
+
+context Chronos::ChiRequirement WARNING
+	"ChiRequirement has more than one feature":
+	this.hasOnlyOneFeature()
+;
+
+context Chronos::ChiRequirement WARNING
+	"ChiRequirement has more than one type of children":
+	this.hasOnlyOneTypeOfChildren()
+;
+
+context Chronos::ChiRequirement WARNING
+	"ChiRequirement has both ChiFeature and ChiIssue":
+	this.hasEitherFeatureOrIssue()
+;

@@ -4,3 +4,14 @@ import Chronos;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCheck::requirements::ChiFeature;
+
+context Chronos::ChiFeature WARNING
+	"ChiFeature has no parent":
+	this.hasParent()
+;
+
+context Chronos::ChiFeature WARNING
+	"ChiFeature is not implemented completely":
+	this.isCompletelyImplemented()
+;
