@@ -53,7 +53,7 @@ uwm.graphics.connection.BaseConnection = function(label, decorators) {
 		// define the label context menu
 		var htmlElement = this.label.getHTMLElement();
 		if (htmlElement) {
-			self = this;
+			var self = this;
 			Ext.fly(htmlElement).on("contextmenu", function(e) {
 				var position = e.getXY();				
 				self.uwmContextMenu.showAt(position);
