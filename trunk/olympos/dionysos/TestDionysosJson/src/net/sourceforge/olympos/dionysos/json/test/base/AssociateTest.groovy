@@ -15,7 +15,7 @@ public class AssociateTest extends DionysosTest {
 	@Test
 	public void simple() {
 		ensureLogin()
-
+		disassociate()
 		request(
 			[
 			 	action: 'associate',
@@ -179,6 +179,24 @@ public class AssociateTest extends DionysosTest {
 		)
 	}*/
 
+	private void disassociate() {
+
+		request(
+			[
+			 	action: 'disassociate',
+			 	sourceOid: Cfg.associateSourceOid,
+			 	targetOid: Cfg.associateTargetOid,
+			 	role: Cfg.associateRelation
+			],
+			{req, json ->
+					
+			},
+			this.method
+		)
+		
+	}
+
+	
 	private void assertObject(json, oid, boolean isReference) {
 		assertNotNull(json)
 		assertEquals(oid, json.oid)

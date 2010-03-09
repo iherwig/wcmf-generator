@@ -83,7 +83,7 @@ public class ExecuteActionSetTest extends DionysosTest {
 					
 					assertTrue(json.resultSet.action1.success)
 					assertEquals(json.resultSet.action0.oid,json.resultSet.action1.oid)
-					assertEquals(Cfg.executeActionSetAttributes.groundBreaking,json.resultSet.action1.attributes.groundBreaking)
+					//assertEquals(Cfg.executeActionSetAttributes.groundBreaking,json.resultSet.action1.attributes.groundBreaking)
 					assertEquals('update',json.resultSet.action1.action)
 						
 				},
@@ -97,32 +97,40 @@ public class ExecuteActionSetTest extends DionysosTest {
 	public void createParentAndChild() {
 		ensureLogin()
 		
+	//static EAScreateParentClassName = 'CompositeParent'
+	//static EAScreateChildClassName = 'CompositeParent'
+	//static EASupdateParentClassNameOid = '{CompositeParent:?}'
+	//static EASupdateChildClassNameOid = '{CompositeParent:?}'
+	//static EASParentAttributes = '{"name": "Parent1"}'
+	//static EASChildAttributes = '{"name": "Child1"}'
+		
 		request(
 				[
 				action: 'executeActionSet',
 				actionSet: [
 				            action0: [
 				                      action: 'create',
-				                      className: Cfg.executeActionSetcreateClassName
+				                      className: Cfg.EAScreateParentClassName
 				                      ],
 				            action1: [
 				                      action: 'update',
-				                      oid: Cfg.executeActionSetUpdateOid,
-				                      attributes: Cfg.executeActionSetAttributes
+				                      oid: Cfg.EASupdateParentClassNameOid,
+				                      attributes: Cfg.EASParentAttributes
 				                      ],
 				            action2: [
 				                      action: 'create',
-				                      className: Cfg.executeActionSetcreateClassName
+				                      className: Cfg.EAScreateChildClassName
 				                      ],
 				            action3: [
 				                      action: 'update',
-				                      oid: Cfg.executeActionSetUpdateOid,
-				                      attributes: Cfg.executeActionSetAttributes
+				                      oid: Cfg.EASupdateChildClassNameOid,
+				                      attributes: Cfg.EASChildAttributes
 				                      ],
 				            action4: [
-				                      action: 'update',
-				                      oid: Cfg.executeActionSetUpdateOid,
-				                      attributes: Cfg.executeActionSetAttributes
+				                      action: 'associate',
+				                      sourceOid: Cfg.EASupdateParentClassNameOid,
+					      			  targetOid: Cfg.EASupdateChildClassNameOid,
+					      			  role: Cfg.EASassociateRelation
 	                      ]
 				                     
 				]	

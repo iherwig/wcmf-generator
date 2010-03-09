@@ -20,7 +20,7 @@ public class Cfg {
 	/**
 	 * The base URL according to spec.
 	 */
-	static baseUrl = 'http://localhost:8080/JsonTest/json/index'
+	static baseUrl = 'http://localhost:8080/SolarPanel/json/index'
 	//static baseUrl = 'http://localhost/httptest/index.php'
 
 	/**
@@ -128,11 +128,18 @@ public class Cfg {
 	/**
 	 * attributes for executeActionSet operation
 	 */
-
 	static executeActionSetcreateClassName = 'Movie'	
 	static executeActionSetUpdateOid = '{Movie:?}'
 	static executeActionSetAttributes = '{"title": "Matrix The Original","groundbreaking": true}'
-	
+
+	static EAScreateParentClassName = 'CompositeParent'
+	static EAScreateChildClassName = 'CompositeChild'
+	static EASupdateParentClassNameOid = 'CompositeParent:1'
+	static EASupdateChildClassNameOid = 'CompositeChild:1'
+	static EASParentAttributes = '{"name": "Parent1"}'
+	static EASChildAttributes = '{"name": "Child1"}'
+	static EASassociateRelation = 'childrenComp'
+		
 	/**
 	 * attributes for associate and diassociate operation
 	 */
