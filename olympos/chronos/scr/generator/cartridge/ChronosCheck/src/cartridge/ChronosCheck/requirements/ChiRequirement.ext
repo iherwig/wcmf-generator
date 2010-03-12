@@ -4,7 +4,7 @@ import Chronos;
 extension cartridge::ChronosCommon::requirements::ChiRequirement;
 
 boolean hasParent(Chronos::ChiRequirement this):
-	this.getParents().size != 0
+	this.getParents().size > 0
 ;
 
 boolean hasChild(Chronos::ChiRequirement this):

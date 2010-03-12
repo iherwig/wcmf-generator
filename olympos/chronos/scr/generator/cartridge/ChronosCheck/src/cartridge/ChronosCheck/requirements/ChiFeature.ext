@@ -4,7 +4,7 @@ import Chronos;
 extension cartridge::ChronosCommon::requirements::ChiFeature;
 
 boolean hasParent(Chronos::ChiFeature this):
-	this.getParents().size == 0
+	this.getParents().size > 0
 ;
 
 boolean isCompletelyImplemented(Chronos::ChiFeature this):
