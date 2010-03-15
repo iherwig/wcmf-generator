@@ -65,7 +65,7 @@ class «name-»
 	«ENDPROTECT»
 
 	«REM» Every property where e reference for navigation is stored «ENDREM-»
-«REM»EXPAND ReferenceProperties FOR this-«ENDREM»
+«EXPAND ReferenceProperties FOR this-»
 
 	«REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM-»
 «EXPAND ManyToOneParents FOR this-»
@@ -131,7 +131,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «FOREACH relatives AS relative»
 «LET relative.getRoleName().toFirstLower() AS name-»
 «IF relative.aggregation == AggregationKind::shared-»
-			«name» cascade: "create,save-update"
+			«name» cascade: "persist,save-update"
 «ELSE-»
 			«name» cascade: "none"
 «ENDIF-»
@@ -149,7 +149,10 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 
 «REM» simple reference «ENDREM»
 «DEFINE ReferenceProperties FOR ChiNode-»
-«LET {}.addAll(this.getNavigableParentNodes()).addAll(this.getNavigableChildNodes()).select(e|((uml::Property) e).association.isOneToOneAssociation()) AS others-»
+«LET {}
+	.addAll(this.getNavigableParentNodes())
+	.addAll(this.getNavigableChildNodes())
+	.select(e|((uml::Property) e).association.isOneToOneAssociation()) AS others-»
 «IF others.size > 0»
 «FOREACH others AS other-»
 	/**
