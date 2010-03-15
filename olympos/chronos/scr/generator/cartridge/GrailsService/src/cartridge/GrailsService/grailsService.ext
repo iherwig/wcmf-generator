@@ -13,6 +13,10 @@ String asClassName(uml::Activity this):
 	this.name.normalizeClassName() + "Service"
 ;
 
+String asWebServiceName(uml::Activity this):
+	this.name.normalizeMemberName()
+;
+
 String asResultType(uml::Activity this):
 	this.getLastNode().outgoing.typeSelect(uml::ObjectFlow).target.typeSelect(uml::DataStoreNode).first().getGrailsTypeName()
 ;

@@ -28,6 +28,9 @@
 	
 package «SERVICE_PACKAGE()»
 
+import javax.jws.WebMethod 
+import javax.jws.WebResult 
+
 	«FOREACH this.getProductionRulesets() AS currProductionRuleset»
 import «currProductionRuleset.asFullPackageName()».«currProductionRuleset.asContextName()»
 	«ENDFOREACH»
@@ -58,6 +61,10 @@ class «this.asClassName()» {
 	/* put additional cross-Activity variables here */
 	«ENDPROTECT»
 
+	static expose = ['cxfjax']
+	
+	@WebResult(name="response")
+	@WebMethod(operationName="«this.asWebServiceName()»")
 	public «this.asResultType()» «this.asMainMethodName()»(«this.asRequestType()» request) {
 		this.request = request
 		
