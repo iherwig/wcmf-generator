@@ -533,7 +533,8 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 						relationOid = relationObject.getOid();
 					}
 					if (this.getContainedConnection(sourceOid, targetOid, relationOid) == null) {
-						if (connectionInfo.nmSelf && connectionInfo.invertBackendRelation) {
+						if ((connectionInfo.nmSelf && connectionInfo.invertBackendRelation) || 
+							(listtype == 'parent' && connectedObject.getUwmClassName() == newObject.getUwmClassName() && !connectionInfo.nmSelf)) {
 							var newFigure = this.figures.get(connectedObject.getOid());
 							var connectedFigure = this.figures.get(newObject.getOid());
 						}
