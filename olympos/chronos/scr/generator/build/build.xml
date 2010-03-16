@@ -1,5 +1,4 @@
 <project name="Chronos Generator" default="redist" basedir=".">
-
 	<property file="build.properties"/>
 	<property name="cartridge.absolute.build.dir" location="${cartridge.build.dir}"/>
 	<property name="template.absolute.build.dir" location="${template.build.dir}"/>
@@ -28,26 +27,14 @@
 	</target>
 
 	<target name="build-cartridges" depends="create-dirs">
-		<subant antfile="build.xml" inheritrefs="true">
-			<propertyset>
-				<propertyset negate="true">
-					<propertyref name="basedir"/>
-				</propertyset>
-				<propertyref name="*"/>
-			</propertyset>
-			<fileset dir="${cartridge.dir}" includes="*/build.xml"/>
+		<subant antfile="build.xml" inheritall="true" inheritrefs="true" genericantfile="cartridge.xml">
+			<dirset dir="${cartridge.dir}" includes="*"/>
 		</subant>
 	</target>
 	
 	<target name="build-templates" depends="build-cartridges">
-		<subant antfile="build.xml" inheritrefs="true">
-			<propertyset>
-				<propertyset negate="true">
-					<propertyref name="basedir"/>
-				</propertyset>
-				<propertyref name="*"/>
-			</propertyset>
-			<fileset dir="${template.dir}" includes="*/build.xml"/>
+		<subant antfile="build.xml" inheritall="true" inheritrefs="true" genericantfile="template.xml">
+			<dirset dir="${template.dir}" includes="*"/>
 		</subant>
 	</target>
 	

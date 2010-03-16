@@ -1,8 +1,22 @@
-<project name="Chronos Generator template" default="build" basedir=".">
-	<target name="build">
+<project name="Chronos Generator template" default="buildchoice">
+	<available property="build.xml.available" file="build.xml" />
+
+	<target name="build2">
 		<copy todir="${template.absolute.build.dir}">
 			<fileset dir="src/cartridge/DocumentGeneration/template" includes="**/*">
 			</fileset>
 		</copy>
+	</target>
+	
+	<target name="build" unless="build.xml.available">
+		<antcall target="build2" inheritall="true" inheritrefs="true"/>
+	</target>
+	
+	<target name="buildlocal" if="build.xml.available">
+		<ant antfile="build.xml" inheritall="true" inheritrefs="true" />
+	</target>
+
+	<target name="buildchoice" depends="build, buildlocal">
+
 	</target>
 </project>
