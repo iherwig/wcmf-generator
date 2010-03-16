@@ -1,4 +1,6 @@
-<project name="Chronos Generator Cartridge" default="build">
+<project name="Chronos Generator Cartridge" default="buildchoice">
+	<available property="build.xml.available" file="build.xml" />
+	
 	<target name="compile">
 		<tstamp/>
 		<javac encoding="utf-8" srcdir="./src" destdir="${build.absolute.dir}" debug="${debug}" excludesfile="compile-excludes">
@@ -22,7 +24,18 @@
 		</copy>
 	</target>
 
-	<target name="build" depends="compile,copy,copylibs">
+	<target name="build2" depends="compile,copy,copylibs">
+	</target>
+	
+	<target name="build" unless="build.xml.available">
+		<antcall target="build2" inheritall="true" inheritrefs="true"/>
+	</target>
+	
+	<target name="buildlocal" if="build.xml.available">
+		<ant antfile="build.xml" inheritall="true" inheritrefs="true" />
+	</target>
+
+	<target name="buildchoice" depends="build, buildlocal">
 
 	</target>
 </project>
