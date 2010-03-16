@@ -156,6 +156,9 @@ uwm.hierarchytree.Loader.prototype.attachFollowersList = function(currNode, mode
 					}
 				}
 			}
+			else if (connectionInfo.connection) {
+				connectionType = connectionInfo.connection.label;
+			}
 			else {
 				connectionType = connectionInfo.label;
 			}

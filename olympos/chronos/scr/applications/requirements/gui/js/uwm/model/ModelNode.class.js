@@ -356,7 +356,8 @@ uwm.model.ModelNode.prototype.disassociate = function(otherModelObject, connecti
 	var childOid = this.getOid();
 	var parentOid = otherModelObject.getOid();
 	
-	if (this.getModelNodeClass() == otherModelObject.getModelNodeClass() || (connectionInfo.nmSelf && connectionInfo.invertBackendRelation)) {
+	if (this.getModelNodeClass() == otherModelObject.getModelNodeClass() || 
+		(connectionInfo && connectionInfo.nmSelf && connectionInfo.invertBackendRelation)) {
 		childOid = otherModelObject.getOid();
 		parentOid = this.getOid();
 	}

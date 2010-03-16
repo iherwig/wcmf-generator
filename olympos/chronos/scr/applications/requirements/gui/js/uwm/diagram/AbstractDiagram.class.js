@@ -533,11 +533,15 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 						relationOid = relationObject.getOid();
 					}
 					if (this.getContainedConnection(sourceOid, targetOid, relationOid) == null) {
+						// swap the direction if the following conditions are true
 						if ((connectionInfo.nmSelf && connectionInfo.invertBackendRelation) || 
-							(listtype == 'parent' && connectedObject.getUwmClassName() == newObject.getUwmClassName() && !connectionInfo.nmSelf)) {
+							((connectedObject.getUwmClassName() == newObject.getUwmClassName() && !connectionInfo.nmSelf) &&
+								(listtype == 'parent' && !connectionInfo.invert) || (listtype == 'child' && connectionInfo.invert))
+						) {
 							var newFigure = this.figures.get(connectedObject.getOid());
 							var connectedFigure = this.figures.get(newObject.getOid());
 						}
+						// use the original direction
 						else {
 							var newFigure = this.figures.get(newObject.getOid());
 							var connectedFigure = this.figures.get(connectedObject.getOid());
