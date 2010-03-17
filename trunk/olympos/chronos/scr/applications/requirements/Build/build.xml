@@ -4,7 +4,7 @@
 	<taskdef name="extractJsLinks" classname="net.sourceforge.olympos.ant.ExtractJsLinks" classpath="lib/ChronosBuildAnt.jar" />
 	<taskdef name="replaceSectionsByLinks" classname="net.sourceforge.olympos.ant.ReplaceSectionsByLinks" classpath="lib/ChronosBuildAnt.jar" />
 	<taskdef name="jsmin" classname="net.matthaynes.jsmin.JSMin_Task" classpath="lib/jsmin.0.2.4.jar" />
-	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpath="lib/svnant/svnant.jar:lib/svnant/svnClientAdapter.jar:lib/svnant/svnjavahl.jar" /> 
+	<typedef resource="org/tigris/subversion/svnant/svnantlib.xml" classpath="lib/svnant/svnant.jar:lib/svnant/svnClientAdapter.jar:lib/svnant/svnjavahl.jar:lib/svnant/svnkit.jar" /> 
 
 	<target name="checkDirs">
 		<available property="guiAvailable" file="${gui.dir}" type="dir" />
@@ -104,7 +104,7 @@
 	</target>
 	
 	<target name="setRevision.gui" depends="export">
-		<svn>
+		<svn svnkit="true">
 			<wcversion path="${gui.dir}" prefix="gui."/>
 		</svn>
 		
