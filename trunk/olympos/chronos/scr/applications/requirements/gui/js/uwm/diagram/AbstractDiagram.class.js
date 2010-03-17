@@ -361,7 +361,7 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 			for ( var j in parentOids) {
 				var parentOid = parentOids[j];
 				
-				if (!(parentOid instanceof Function) && parentOid != this.getOid() && figure instanceof uwm.diagram.Figure) {
+				if (!(parentOid instanceof Function) && parentOid != this.getOid() && figure instanceof uwm.diagram.Figure && figure.hasValidGeometry()) {
 					this.figures.add(parentOid, figure);
 					modelContainer.loadByOid(parentOid, this.actionSet, 2);
 				}
