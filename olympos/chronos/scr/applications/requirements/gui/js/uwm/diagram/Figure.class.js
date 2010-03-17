@@ -163,6 +163,19 @@ uwm.diagram.Figure.prototype.getGraphics = function() {
 	return this.graphics;
 }
 
+/**
+ * Checks if x, y, width and height properties are valid.
+ *
+ * @return True, if the geometry is valid.
+ * @type Boolean
+ */
+uwm.diagram.Figure.prototype.hasValidGeometry = function() {
+	if (isNaN(this.getPositionX()) || isNaN(this.getPositionY()) || isNaN(this.getWidth()) || isNaN(this.getHeight())) {
+		return false;
+	}
+	return true;
+}
+
 uwm.diagram.Figure.prototype.getPositionX = function() {
 	return parseInt(this.data.PositionX);
 }
