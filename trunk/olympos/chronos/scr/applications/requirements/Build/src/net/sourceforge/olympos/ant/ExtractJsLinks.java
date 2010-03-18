@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
-import org.apache.tools.ant.types.FileSet;
+import org.apache.tools.ant.types.FileList;
 
 /**
  * Extracts all JavaScript links out of an HTML file section marked by specific
@@ -32,7 +32,7 @@ import org.apache.tools.ant.types.FileSet;
  * comment like <code>&lt;!--Start include <i>sectionName</i>--&gt;</code>. Once
  * this is found, all following
  * <code>&lt;script type="text/javascript" src="<i>some/path/to/file.js</i>"&gt;</code>
- * are parsed into a <i>FileSet</i> named <code>jsFileSet</code>. It stops at
+ * are parsed into a <i>FileList</i> named <code>jsFileList</code>. It stops at
  * the occurence of <code>&lt;!--End include <i>sectionName</i>--&gt;</code>.
  * </p>
  * 
@@ -42,7 +42,7 @@ import org.apache.tools.ant.types.FileSet;
 public class ExtractJsLinks extends Task {
 
 	private String htmlFilePath;
-	private String jsFileSetName;
+	private String jsFileListName;
 	private String sectionName;
 
 	public void setHtmlFile(String htmlFilePath) {
@@ -53,12 +53,12 @@ public class ExtractJsLinks extends Task {
 		return this.htmlFilePath;
 	}
 
-	public void setJsFileSet(String jsFileSetName) {
-		this.jsFileSetName = jsFileSetName;
+	public void setJsFileList(String jsFileListName) {
+		this.jsFileListName = jsFileListName;
 	}
 
-	public String getJsFileSet() {
-		return this.jsFileSetName;
+	public String getJsFileList() {
+		return this.jsFileListName;
 	}
 
 	public void setSectionName(String sectionName) {
@@ -86,7 +86,9 @@ public class ExtractJsLinks extends Task {
 			String currLine;
 			boolean insideSection = false;
 
-			FileSet result = new FileSet();
+			StringBuffer fileList = new StringBuffer();
+			FileList result = new FileList();
+			
 			result.setProject(this.getProject());
 
 			File htmlFile = new File(this.htmlFilePath);
@@ -120,12 +122,13 @@ public class ExtractJsLinks extends Task {
 							filePath = htmlDir.getName() + "/" + filePath;
 						}
 
-						result.appendIncludes(new String[] { filePath });
+						fileList.append(filePath).append(",");
 					}
 				}
 			}
 
-			this.getProject().addReference(this.jsFileSetName, result);
+			result.setFiles(fileList.toString());
+			this.getProject().addReference(this.jsFileListName, result);
 		} catch (FileNotFoundException e) {
 			throw new BuildException("Cannot find htmlFile: ", e);
 		} catch (IOException e) {

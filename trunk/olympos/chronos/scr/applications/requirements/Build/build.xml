@@ -119,26 +119,26 @@
 		<property name="index.html" value="${build.dir}/gui/index.html"/>
 
 		<property name="cwm-large.js" value="${build.dir}/gui/js/cwm-large.js"/>
-		<extractJsLinks htmlfile="${index.html}" sectionname="CWM" jsfileset="cwmFileSet" />
+		<extractJsLinks htmlfile="${index.html}" sectionname="CWM" jsfilelist="cwmFileList" />
 		<concat fixlastline="true" destfile="${cwm-large.js}">
-			<fileset refid="cwmFileSet">
-			</fileset>
+			<filelist refid="cwmFileList">
+			</filelist>
 		</concat>
 		<jsmin srcfile="${cwm-large.js}" destfile="${build.dir}/gui/js/cwm.js" />
 	
 		<property name="uwm-large.js" value="${build.dir}/gui/js/uwm-large.js"/>
-		<extractJsLinks htmlfile="${index.html}" sectionname="UWM" jsfileset="uwmFileSet" />
+		<extractJsLinks htmlfile="${index.html}" sectionname="UWM" jsfilelist="uwmFileList" />
 		<concat fixlastline="true" destfile="${uwm-large.js}">
-			<fileset refid="uwmFileSet">
-			</fileset>
+			<filelist refid="uwmFileList">
+			</filelist>
 		</concat>
 		<jsmin srcfile="${uwm-large.js}" destfile="${build.dir}/gui/js/uwm.js" />
 	
 		<property name="cwb-large.js" value="${build.dir}/gui/js/cwb-large.js"/>
-		<extractJsLinks htmlfile="${index.html}" sectionname="CWB" jsfileset="cwbFileSet" />
+		<extractJsLinks htmlfile="${index.html}" sectionname="CWB" jsfilelist="cwbFileList" />
 		<concat fixlastline="true" destfile="${cwb-large.js}">
-			<fileset refid="cwbFileSet">
-			</fileset>
+			<filelist refid="cwbFileList">
+			</filelist>
 		</concat>
 		<jsmin srcfile="${cwb-large.js}" destfile="${build.dir}/gui/js/cwb.js" />
 	
