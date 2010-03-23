@@ -22,6 +22,7 @@ Ext.namespace("chi.ui");
  *              bar, false, if no text should be displayed
  * @config autoAnimate True if the text returned from the backend should be displayed on the progress
  *              bar, false, if no text should be displayed
+ * @config contentPanel An optional panel to show inside the progress bar window (e.g. a slideshow).
  * @config canCancel True if the process can be cancelled, false, if not
  * @config call A function with parameters successHandler and errorHandler (these will be used by LongTask)
  *              Typically a call to a Persistency method. See also {LongTask}.
@@ -44,6 +45,7 @@ chi.ui.LongTaskRunner = function(config) {
 		text: this.showText ? chi.Dict.translate('Initializing ...') : '',
 		id: 'pbar',
 		cls: 'left-align',
+		width: 320,
 		height: 20,
 		anchor: '100%'
 	});
@@ -67,11 +69,16 @@ chi.ui.LongTaskRunner = function(config) {
 	});
 	this.iFrame.setVisible(false);
 	
+	// create a dummy content panel, if none is configured
+	if (!config.contentPanel) {
+		config.contentPanel = new Ext.Panel({
+			width: 0,
+			height: 0
+		});
+	}
 	chi.ui.LongTaskRunner.superclass.constructor.call(this, Ext.apply(this, {
 		layout: 'anchor',
-		width:320,
-		height:87,
-		items: [this.pbar, 
+		items: [config.contentPanel, this.pbar, 
 			this.iFrame
 		],
 		buttons: [this.okButton],
