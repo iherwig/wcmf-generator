@@ -12,7 +12,9 @@
 Ext.namespace("chi.ui");
 
 /**
- * @class A slideshow component.
+ * @class A slideshow component. After configuring the image store, the slideshow is started 
+ * using the start method. An alternative way of setting up the store manually is using the
+ * static chi.ui.ImageSlideshow.createFromConfig method, which returns a slideshow instance.
  * Based on code from http://www.extjs.com/forum/showthread.php?t=36229
  * 
  * @extends Ext.Container
@@ -32,6 +34,7 @@ chi.ui.ImageSlideshow = Ext.extend(Ext.Container, {
 		this.easing = config.easing || 'easeNone';
 		this.imageDuration = config.imageDuration || 5000;
 		
+		// this css class is necessary for centering the images
 		/*
 		.slideshow {
 			display: table-cell;
@@ -39,7 +42,6 @@ chi.ui.ImageSlideshow = Ext.extend(Ext.Container, {
 			text-align: center;
 		}
 		*/
-		// this css class is necessary for centering the images
 		this.baseCls = 'slideshow';
 
 		this.imageIndex = 0;
@@ -68,7 +70,6 @@ chi.ui.ImageSlideshow = Ext.extend(Ext.Container, {
 		chi.ui.ImageSlideshow.superclass.constructor.call(this, Ext.apply(this, {}, config));
 		
 		this.store = Ext.StoreMgr.lookup(this.store);
-		this.store.on('load', this.preload, this);
 	},
 
 	onRender: function(ct, position) {
@@ -81,10 +82,16 @@ chi.ui.ImageSlideshow = Ext.extend(Ext.Container, {
 		this.el.setHeight(this.height);
 	},
 
-	load: function() {
-		this.store.load();
+	/**
+	 * Start the slideshow.
+	 */
+	start: function() {
+		this.preload();
 	},
 		
+	/**
+	 * Preload images by creating hidden image layers.
+	 */
 	preload: function() {
 		if (this.el) {
 			var count = this.store.getCount();
@@ -96,6 +103,9 @@ chi.ui.ImageSlideshow = Ext.extend(Ext.Container, {
 		this.loop();
 	},
 		
+	/**
+	 * Slideshow loop.
+	 */
 	loop: function() {
 		// clear the timeout
 		if (this.timeoutId != undefined) {
@@ -142,3 +152,34 @@ chi.ui.ImageSlideshow = Ext.extend(Ext.Container, {
 		}
 	}
 });
+
+/**
+ * Create a slideshow instance from a configuration.
+ * @param {Object} config A configuration object with properties width, height, images (see below)
+ * @return {chi.ui.ImageSlideshow} A slideshow instance
+ *
+ * A configuration example:
+ * wmm.Slides.CREATE_PROJECT = {
+ * 	width: 900,
+ * 	height: 700,
+ * 	images: [
+ * 		['img/slides/img1.jpg', 1000],
+ * 		['img/slides/img2.jpg', 4000]
+ * 	]
+ * };
+ */
+chi.ui.ImageSlideshow.createFromConfig = function(config) {
+	var store = new Ext.data.SimpleStore({
+		fields: [
+			{name: 'url', type: 'string'},
+			{name: 'duration', type: 'int'}
+		]
+	});
+	var slideshow = new chi.ui.ImageSlideshow({
+		store: store,
+		width: config.width,
+		height: config.height
+	});
+	store.loadData(config.images);
+	return slideshow;
+}
