@@ -13,6 +13,7 @@
 
 require_once (BASE."wcmf/lib/model/class.NodeUtil.php");
 require_once (BASE.'wcmf/lib/util/class.EncodingUtil.php');
+require_once BASE . 'application/include/controller/iface.UwmExporterReferenceStrategy.php';
 
 /**
  * @class UwmUtil
@@ -43,6 +44,11 @@ class UwmUtil {
 	private static $lastTime = 0;
 
 	private static $processVirtualPackages = true;
+	
+	/**
+	 * @var UwmExporterReferenceStrategy
+	 */
+	private static $referenceStrategy = null;
 
 	private static function check($msg)
 	{
@@ -54,13 +60,14 @@ class UwmUtil {
 	/**
 	 * Export a model/package to the intern xml format
 	 * @param tmpUwmExportPath The name of the xml file
-	 * @param startOid The object id of the instance to start with
+	 * @param startOid The object id of the instance to start with; may also be an array of start oids
 	 * @param language The language to translate to. Optional [default: null]
 	 * @param virtualPackages True/False wether to export diagrams as packages or not. If yes,
 	 * all other package content will be ignored. Optional [default: false].
+	 * @param referenceStrategy Strategy deciding which objects should be loaded if they are referenced [default: null]. 
 	 * @return A problem report (should be empty if no problems occured).
 	 */
-	public static function exportXml($tmpUwmExportPath, $startOid, $language = null, $virtualPackages = false) {
+	public static function exportXml($tmpUwmExportPath, $startOid, $language = null, $virtualPackages = false, UwmExporterReferenceStrategy $referenceStrategy = null) {
 		if ($startOid == null) {
 			Log::error("No id given\n".WCMFException::getStackTrace(), __CLASS__);
 			return;
@@ -70,6 +77,7 @@ class UwmUtil {
 		self::$exportedNodes = array();
 		self::$oidNameMap = array();
 		self::$referencedNodes = array();
+		self::$referenceStrategy = $referenceStrategy;
 
 		self::$dom = new XMLWriter();
 		//self::$dom->setIndent(true);
@@ -82,38 +90,43 @@ class UwmUtil {
 		self::$persistenceFacade = PersistenceFacade::getInstance();
 		self::$encodingUtil = new EncodingUtil();
 
-		$rootType = PersistenceFacade::getOIDParameter($startOid, 'type');
-		if ($rootType == 'Model') {
-			$currModel = self::$persistenceFacade->load($startOid);
-			if ($currModel) {
-				self::processModel($currModel);
+		$startOidList = is_array($startOid) ? $startOid : array($startOid);
+
+		foreach ($startOidList as $currStartOid) {
+			$rootType = PersistenceFacade::getOIDParameter($currStartOid, 'type');
+			if ($rootType == 'Model') {
+				$currModel = self::$persistenceFacade->load($currStartOid);
+				if ($currModel) {
+					self::processModel($currModel);
+				} else {
+					Log::error('Unknown model id ' . $currStartOid, __CLASS__);
+				}
+			} else if ($rootType == 'Package' || ($rootType == 'Diagram' && self::$processVirtualPackages)) {
+				$currPackage = self::$persistenceFacade->load($currStartOid);
+				if ($currPackage) {
+					self::$dom->startElement('Model');
+					self::processPackage($currPackage);
+					self::processReferencedNodes();
+					self::$dom->endElement();
+				} else {
+					Log::error('Unknown package id ' . $currStartOid, __CLASS__);
+				}
+			} else if ($rootType == 'Diagram') {
+				$currDiagram = self::$persistenceFacade->load($currStartOid);
+				if ($currDiagram) {
+					self::$dom->startElement('Model');
+					self::$dom->startElement('Package');
+					self::processDiagram($currDiagram);
+					// add the referenced nodes
+					self::$dom->endElement();
+					self::processReferencedNodes();
+					self::$dom->endElement();
+				} else {
+					Log::error('Unknown diagram id ' . $currStartOid, __CLASS__);
+				}
 			} else {
-				Log::error('Unknown model id ' . $startOid, __CLASS__);
+				self::processModels();
 			}
-		} else if ($rootType == 'Package' || ($rootType == 'Diagram' && self::$processVirtualPackages)) {
-			$currPackage = self::$persistenceFacade->load($startOid);
-			if ($currPackage) {
-				self::$dom->startElement('Model');
-				self::processPackage($currPackage);
-				self::$dom->endElement();
-			} else {
-				Log::error('Unknown package id ' . $startOid, __CLASS__);
-			}
-		} else if ($rootType == 'Diagram') {
-			$currDiagram = self::$persistenceFacade->load($startOid);
-			if ($currDiagram) {
-				self::$dom->startElement('Model');
-				self::$dom->startElement('Package');
-				self::processDiagram($currDiagram);
-				// add the referenced nodes
-				self::processReferencedNodes();
-				self::$dom->endElement();
-				self::$dom->endElement();
-			} else {
-				Log::error('Unknown diagram id ' . $startOid, __CLASS__);
-			}
-		} else {
-			self::processModels();
 		}
 
 		self::$dom->endElement();
@@ -172,7 +185,17 @@ class UwmUtil {
 			$oid = $node->getOID();
 			self::$exportedNodes[] = $oid;
 			self::$oidNameMap[$oid] = $node->getDisplayValue();
+			
+			if (self::$referenceStrategy) {
+				self::registerReference(self::$referenceStrategy->getReferences($node));
+			}
 		}
+	}
+	
+	private static function registerReference($referenceOid) {
+		$list = is_array($referenceOid) ? $referenceOid : array($referenceOid);
+		
+		array_merge(self::$referencedNodes, $list);
 	}
 
 	/**
@@ -222,6 +245,7 @@ class UwmUtil {
 
 		unset ($currModel);
 		self::$dom->endElement();
+		self::processReferencedNodes();
 		self::$dom->endElement();
 	}
 
@@ -484,7 +508,7 @@ class UwmUtil {
 					$alias = $obj->getValue('Alias', DATATYPE_ATTRIBUTE);
 				}
 				// store the referenced node in order to make sure that it is included in the export
-				array_push(self::$referencedNodes, $poid);
+				self::registerReference($poid);
 				break;
 			}
 		}
@@ -505,19 +529,19 @@ class UwmUtil {
 	private static function processProductionRuleSet($currNode) {
 		self::check($currNode->getId());
 		self::$dom->startEleent($currNode->getBaseType());
-		
+
 		self::appendAttributes($currNode);
 		self::registerExportedNode($currNode);
-		
+
 		$currNode->loadChildren();
 		$children = $currNode->getChildren();
 		foreach ($children as $currChild) {
 			self::processChild($currChild);
 		}
-		
+
 		self::$dom->endElement();
 	}
-	
+
 	private static function processProductionRule($currNode) {
 		self::check($currNode->getId());
 		self::$dom->startElement($currNode->getType());
@@ -647,7 +671,7 @@ class UwmUtil {
 		$package = &$persistenceFacade->create('Package', BUILDDEPTH_SINGLE);
 		$package->setOID(PersistenceFacade::composeOID(array('type' => 'Package', 'id' => array(0))));
 		$package->setName('Referenced Nodes');
-
+		
 		// add the referenced nodes to the package
 		foreach (self::$referencedNodes as $oid) {
 			if (!self::isExportedNode($oid)) {
