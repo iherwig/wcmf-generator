@@ -17,22 +17,22 @@ Ext.namespace("chi.ui");
  * @extends Ext.Window
  * @constructor
  * @param {Object} config The configuration object.
- * @config title The window title
- * @config showText True if the text returned from the backend should be displayed on the progress
+ * @config {String} title The window title
+ * @config {Boolean} showText True if the text returned from the backend should be displayed on the progress
  *              bar, false, if no text should be displayed
- * @config autoAnimate True if the text returned from the backend should be displayed on the progress
+ * @config {Boolean} autoAnimate True if the text returned from the backend should be displayed on the progress
  *              bar, false, if no text should be displayed
- * @config contentPanel An optional panel to show inside the progress bar window (e.g. a slideshow).
- * @config canCancel True if the process can be cancelled, false, if not
- * @config call A function with parameters successHandler and errorHandler (these will be used by LongTask)
+ * @config {Ext.Panel} contentPanel An optional panel to show inside the progress bar window (e.g. a slideshow).
+ * @config {Boolean} canCancel True if the process can be cancelled, false, if not
+ * @config {Function} call A function with parameters successHandler and errorHandler (these will be used by LongTask)
  *              Typically a call to a Persistency method. See also {LongTask}.
- * @config progressHandler The function to call on each processing step.
+ * @config {Function} progressHandler The function to call on each processing step.
  *          Parameters: data The data returned from the last server call
- * @config successHandler The function to call after the LongTask finished
+ * @config {Function} successHandler The function to call after the LongTask finished
  *          Parameters: data The data returned from the last server call
- * @config errorHandler The function to call when an error occurs
+ * @config {Function} errorHandler The function to call when an error occurs
  *          Parameters: data The data returned from the last server call
- * @config isReturningDocument Boolean, true if the last call returns a document to be downloaded
+ * @config {Boolean} isReturningDocument Boolean, true if the last call returns a document to be downloaded
  */
 chi.ui.LongTaskRunner = function(config) {
 	var self = this;
@@ -45,9 +45,6 @@ chi.ui.LongTaskRunner = function(config) {
 		text: this.showText ? chi.Dict.translate('Initializing ...') : '',
 		id: 'pbar',
 		cls: 'left-align',
-		width: 320,
-		height: 20,
-		anchor: '100%'
 	});
 	if (this.autoAnimate) {
 		this.pbar.wait();
@@ -69,20 +66,36 @@ chi.ui.LongTaskRunner = function(config) {
 	});
 	this.iFrame.setVisible(false);
 	
-	// create a dummy content panel, if none is configured
 	if (!config.contentPanel) {
+		// create a dummy content panel, if none is configured
 		config.contentPanel = new Ext.Panel({
-			width: 0,
+			width: 320,
 			height: 0
 		});
 	}
+	else {
+		// wrap the content into a panel to get a border
+		config.contentPanel.setPosition(10, 10);
+		config.contentPanel = new Ext.Panel({
+			layout: 'absolute',
+			width: config.contentPanel.width+20,
+			height: config.contentPanel.height+20,
+			bodyStyle: {
+				backgroundColor: 'transparent'
+			},
+			border: false,
+			items: config.contentPanel
+		});
+	}
 	chi.ui.LongTaskRunner.superclass.constructor.call(this, Ext.apply(this, {
-		layout: 'anchor',
-		items: [config.contentPanel, this.pbar, 
-			this.iFrame
+		hideBorders: true,
+		items: [config.contentPanel, {
+				height: 20,
+				width: config.contentPanel.width,
+				items: this.pbar
+			}, this.iFrame
 		],
 		buttons: [this.okButton],
-		bodyBorder: false,
 		border: false,
 		closable: false,
 		resizable: false,
