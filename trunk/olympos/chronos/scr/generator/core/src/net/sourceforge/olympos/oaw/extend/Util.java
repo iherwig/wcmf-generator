@@ -37,12 +37,18 @@ public class Util {
 	 * @return String
 	 */
 	public static String join(AbstractCollection<String> s, String delimiter) {
-		if (s.isEmpty())
+		if (s == null || s.isEmpty())
 			return "";
 		Iterator<String> iter = s.iterator();
 		StringBuffer buffer = new StringBuffer(iter.next());
-		while (iter.hasNext())
+		
+		if (delimiter == null) {
+			delimiter = "";
+		}
+		
+		while (iter.hasNext()) {
 			buffer.append(delimiter).append(iter.next());
+		}
 		return buffer.toString();
 	}
 

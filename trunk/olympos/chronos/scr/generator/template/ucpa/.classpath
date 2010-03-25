@@ -6,5 +6,6 @@
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/generator"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/generator.cartridge.DocumentGeneration"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/generator.cartridge.ChronosCommon"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

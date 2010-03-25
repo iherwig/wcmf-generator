@@ -11,6 +11,8 @@
 «EXTENSION cartridge::DocumentGeneration::template::ucpa::constants»
 «EXTENSION cartridge::DocumentGeneration::template::ucpa::useCase»
 
+«EXTENSION cartridge::ChronosCommon::requirements::ChiRequirement»
+
 «DEFINE file FOR uml::Model»
 	«FILE "content.xml"-»
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1763,11 +1765,11 @@
 						<text:p>«this.name.replaceXmlChars()»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22"
-						office:value-type="float" office:value="3">
-						<text:p>3</text:p>
+						office:value-type="float" office:value="«this.getFeatures().first().getComment().asInteger()»">
+						<text:p>«this.getFeatures().first().getComment().asInteger()»</text:p>
 					</table:table-cell>
-					<table:table-cell table:style-name="ce22" office:value-type="float" office:value="1">
-						<text:p>1</text:p>
+					<table:table-cell table:style-name="ce22" office:value-type="float" office:value="«this.Priority»">
+						<text:p>«this.Priority»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce30"
 						table:formula="of:=([.C«getTechnicalRow()»]*[.D«getTechnicalRow()»])" office:value-type="float">
@@ -1778,7 +1780,7 @@
 					</table:table-cell>
 					<table:table-cell table:style-name="ce34"
 						office:value-type="string">
-						<text:p>«this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiFeature).first().name.replaceXmlChars()»</text:p>
+						<text:p>«this.getFeatures().first().name.replaceXmlChars()»</text:p>
 					</table:table-cell>
 				</table:table-row>
 «ENDDEFINE»
@@ -1796,12 +1798,12 @@
 						<text:p>«this.name.replaceXmlChars()»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22"
-						office:value-type="float" office:value="3">
-						<text:p>3</text:p>
+						office:value-type="float" office:value="«this.getFeatures().first().getComment().asInteger()»">
+						<text:p>«this.getFeatures().first().getComment().asInteger()»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22"
-						office:value-type="float" office:value="1">
-						<text:p>1</text:p>
+						office:value-type="float" office:value="«this.Priority»">
+						<text:p>«this.Priority»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce30"
 						table:formula="of:=([.C«getEnvironmentalRow()»]*[.D«getEnvironmentalRow()»])" office:value-type="float">
@@ -1812,7 +1814,7 @@
 					</table:table-cell>
 					<table:table-cell table:style-name="ce34"
 						office:value-type="string">
-						<text:p>«this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiFeature).first().name.replaceXmlChars()»</text:p>
+						<text:p>«this.getFeatures().first().name.replaceXmlChars()»</text:p>
 					</table:table-cell>
 				</table:table-row>
 «ENDDEFINE»
