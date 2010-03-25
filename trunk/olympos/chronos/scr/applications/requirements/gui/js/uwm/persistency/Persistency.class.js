@@ -145,3 +145,6 @@ uwm.persistency.Persistency.prototype.generateCode = function(codeId, modelOid, 
 
 uwm.persistency.Persistency.prototype.doContinue = function(controller, successHandler, errorHandler ) {
 }
+
+uwm.persistency.Persistency.prototype.exportUcDomain = function(startOid, language, successHandler, errorHandler ) {
+}
