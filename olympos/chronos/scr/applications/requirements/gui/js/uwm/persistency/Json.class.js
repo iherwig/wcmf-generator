@@ -146,7 +146,7 @@ uwm.persistency.Json.prototype.copy = function(oid, targetOid, recursive, succes
 		usr_action: "copy",
 		oid: oid,
 		targetoid: targetOid,
-    recursive: recursive,
+    recursive: recursive
 	}, successHandler, errorHandler);
 }
 
@@ -348,6 +348,14 @@ uwm.persistency.Json.prototype.doContinue = function(controller, successHandler,
 	this.jsonRequest({
 		controller: controller,
 		usr_action: 'continue'
+	}, successHandler, errorHandler);
+}
+
+uwm.persistency.Json.prototype.exportUcDomain = function(startOid, language, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'exportUcDomain',
+		startOid: startOid,
+		language: language
 	}, successHandler, errorHandler);
 }
 
