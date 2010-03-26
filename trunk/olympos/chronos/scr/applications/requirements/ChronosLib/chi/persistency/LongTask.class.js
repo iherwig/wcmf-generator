@@ -78,7 +78,7 @@ chi.persistency.LongTask.prototype.jsonSuccess = function(data) {
 				self.onDownload.defer(10, self, [iFrame]);
 			});
 			var url = chi.Config.getInstance().jsonUrl;
-			iFrame.set({src:url+'?response_format=HTML&usr_action=continue&controller='+controller+'&sid='+chi.Session.getInstance().getSid()});
+			iFrame.set({src:url+'?response_format=HTML&usr_action=continue&action=continue&controller='+controller+'&sid='+chi.Session.getInstance().getSid()});
 			if (this.successHandler instanceof Function) {
 				this.successHandler(data);
 			}
