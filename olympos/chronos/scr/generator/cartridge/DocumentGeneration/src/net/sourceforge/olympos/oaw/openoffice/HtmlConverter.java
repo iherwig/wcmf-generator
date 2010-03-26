@@ -33,8 +33,10 @@ public class HtmlConverter extends DefaultHandler {
 
 	private boolean paragraphOpen = false;
 	private boolean spanOpen = false;
-	
+
 	private boolean firstOlLi = false;
+
+	private boolean directlyBehindTag = true;
 
 	private Stack<String> paragraphClassStack = new Stack<String>();
 	private String paragraphClass;
@@ -108,31 +110,42 @@ public class HtmlConverter extends DefaultHandler {
 	@Override
 	public void characters(char[] ch, int start, int length)
 			throws SAXException {
-		openSpan();
+		int j = start;
 
-		for (int i = start; i < start + length; i++) {
-			char c = ch[i];
+		while (directlyBehindTag && j < start + length
+				&& Character.isWhitespace(ch[j])) {
+			j++;
+		}
 
-			switch (c) {
-			case '<':
-				output.append("&lt;");
-				break;
+		if (j < start + length) {
+			openSpan();
 
-			case '>':
-				output.append("&gt;");
-				break;
+			for (int i = start; i < start + length; i++) {
+				char c = ch[i];
 
-			case '&':
-				output.append("&amp;");
-				break;
+				switch (c) {
+				case '<':
+					output.append("&lt;");
+					break;
 
-			case '"':
-				output.append("&quot;");
-				break;
+				case '>':
+					output.append("&gt;");
+					break;
 
-			default:
-				output.append(c);
+				case '&':
+					output.append("&amp;");
+					break;
+
+				case '"':
+					output.append("&quot;");
+					break;
+
+				default:
+					output.append(c);
+				}
 			}
+
+			directlyBehindTag = false;
 		}
 	}
 
@@ -192,6 +205,8 @@ public class HtmlConverter extends DefaultHandler {
 				|| nameLower.equals("u")) {
 			closeSpan();
 		}
+
+		directlyBehindTag = true;
 	}
 
 	private void setFlags(String nameLower, boolean state) {
@@ -252,6 +267,8 @@ public class HtmlConverter extends DefaultHandler {
 				|| nameLower.equals("u")) {
 			openSpan();
 		}
+
+		directlyBehindTag = true;
 	}
 
 	private String getCurrentStyle() {
