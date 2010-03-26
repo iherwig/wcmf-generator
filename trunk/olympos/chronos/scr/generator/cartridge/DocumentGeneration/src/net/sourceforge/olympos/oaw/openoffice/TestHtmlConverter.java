@@ -196,7 +196,7 @@ public class TestHtmlConverter {
 	public void testParagraph() throws Exception {
 		String result = HtmlConverter.html2openoffice("<p> </p>");
 		
-		assertEquals("<text:p text:style-name=\"uwmStandard\"><text:span text:style-name=\"uwmDefault\"> </text:span></text:p>", result);
+		assertEquals("<text:p text:style-name=\"uwmStandard\"></text:p>", result);
 	}
 	
 	@Test
@@ -210,6 +210,13 @@ public class TestHtmlConverter {
 	public void testBrNl() throws Exception {
 		String result = HtmlConverter.html2openoffice("<p><br>\n</p>");
 		
-		assertEquals("<text:p text:style-name=\"uwmStandard\"><text:span text:style-name=\"uwmDefault\"><text:line-break/>\n</text:span></text:p>", result);
+		assertEquals("<text:p text:style-name=\"uwmStandard\"><text:span text:style-name=\"uwmDefault\"><text:line-break/></text:span></text:p>", result);
+	}
+
+	@Test
+	public void testWhitespace() throws Exception {
+		String result = HtmlConverter.html2openoffice("<p>a<br> <ul> <li><p>b</p></li></ul></p>");
+		
+		assertEquals("<text:p text:style-name=\"uwmStandard\"><text:span text:style-name=\"uwmDefault\">a<text:line-break/></text:span></text:p><text:list xml:id=\"id001\" text:style-name=\"uwmUl\"><text:list-item><text:p text:style-name=\"uwmUlP\"><text:span text:style-name=\"uwmDefault\">b</text:span></text:p></text:list-item></text:list>", result);
 	}
 }
