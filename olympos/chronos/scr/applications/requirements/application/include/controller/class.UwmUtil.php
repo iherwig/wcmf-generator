@@ -238,11 +238,9 @@ class UwmUtil {
 		private static function registerReference($referenceOid) {
 			$list = is_array($referenceOid) ? $referenceOid : array($referenceOid);
 
-			Log::error(var_export($list, true), __CLASS__);
-
+			Log::debug(var_export($list, true), __CLASS__);
 			self::$referencedNodes = array_merge(self::$referencedNodes, $list);
-
-			Log::error(var_export(self::$referencedNodes, true), __CLASS__);
+			Log::debug(var_export(self::$referencedNodes, true), __CLASS__);
 		}
 
 		/**
