@@ -90,7 +90,8 @@ chi.Login = function(config) {
 	    buttons : [ {
 	        text : chi.Dict.translate('Login'),
 	        type : 'submit',
-	        handler : function() {
+	        handler : function(btn) {
+		        btn.disable();
 		        self.initSession();
 	        }
 	    } ]

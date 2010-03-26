@@ -69,7 +69,8 @@ uwm.ui.Login = function(config){
 			buttons: [{
 				text: uwm.Dict.translate('Login'),
 				type: 'submit',
-				handler: function(){
+				handler: function(btn){
+						btn.disable();
 						self.initSession();
 				}
 			}]
