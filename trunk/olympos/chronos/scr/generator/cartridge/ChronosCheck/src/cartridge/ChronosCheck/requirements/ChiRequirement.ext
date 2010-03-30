@@ -8,7 +8,7 @@ boolean hasParent(Chronos::ChiRequirement this):
 ;
 
 boolean hasChild(Chronos::ChiRequirement this):
-	this.getFeatures().size > 0 || this.getIssues().size > 0
+	this.getFeatures().size > 0 || this.getIssues().size > 0 || this.getChildRequirements().size > 0
 ;
 
 boolean hasOnlyOneFeature(Chronos::ChiRequirement this):
