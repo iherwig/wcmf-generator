@@ -13,6 +13,11 @@ List[Chronos::ChiRequirement] getChildRequirements(Chronos::ChiRequirement this)
 	this.getAssociations().memberEnd.select(e|e.type == this && e.aggregation == uml::AggregationKind::composite).getOtherEnd().type.typeSelect(Chronos::ChiRequirement)
 ;
 
+List[Chronos::ChiRequirement] getChildRequirementsRecursive(Chronos::ChiRequirement this):
+	this.getChildRequirements()
+	.addAll(this.getChildRequirements().getChildRequirementsRecursive())
+;
+
 List[Chronos::ChiBase] getParents(Chronos::ChiRequirement this):
 	this.getAssociations().memberEnd.select(e|e.type == this).getOtherEnd().type
 		.select(f|f.getAppliedStereotypes().first().name == "ChiRequirement" || f.getAppliedStereotypes().first().name == "ChiGoal")

@@ -1765,8 +1765,8 @@
 						<text:p>«this.name.replaceXmlChars()»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22"
-						office:value-type="float" office:value="«this.getFeatures().first().getComment().asInteger()»">
-						<text:p>«this.getFeatures().first().getComment().asInteger()»</text:p>
+						office:value-type="float" office:value="«this.getFeatures().first().getComment().split("[^0-9.]").first()»">
+						<text:p>«this.getFeatures().first().getComment().split("[^0-9.]").first()»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22" office:value-type="float" office:value="«this.Priority»">
 						<text:p>«this.Priority»</text:p>
@@ -1798,8 +1798,8 @@
 						<text:p>«this.name.replaceXmlChars()»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22"
-						office:value-type="float" office:value="«this.getFeatures().first().getComment().asInteger()»">
-						<text:p>«this.getFeatures().first().getComment().asInteger()»</text:p>
+						office:value-type="float" office:value="«this.getFeatures().first().getComment().split("[^0-9.]").first()»">
+						<text:p>«this.getFeatures().first().getComment().split("[^0-9.]").first()»</text:p>
 					</table:table-cell>
 					<table:table-cell table:style-name="ce22"
 						office:value-type="float" office:value="«this.Priority»">
