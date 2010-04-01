@@ -84,7 +84,7 @@ uwm.Uwm.prototype.createViewport = function() {
 uwm.Uwm.prototype.switchWorkbench = function(newWorkbench) {
 	switch (newWorkbench) {
 		case "admin":
-			if (!(uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().isHelpViewer)) {
+			if (uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().saveScrollPosition) {
 				uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().saveScrollPosition();
 			}
 			this.viewport.getLayout().setActiveItem(1);
@@ -93,7 +93,7 @@ uwm.Uwm.prototype.switchWorkbench = function(newWorkbench) {
 		case "default":
 		default:
 			this.viewport.getLayout().setActiveItem(0);
-			if (!(uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().isHelpViewer)) {
+			if (uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().restoreScrollPosition) {
 				uwm.diagram.DiagramContainer.getInstance().getTabPanel().getActiveTab().restoreScrollPosition();
 			}
 			break;
