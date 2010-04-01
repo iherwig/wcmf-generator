@@ -145,7 +145,7 @@ class ObjectHistorySaveController extends SaveController
 	private function prepareWriteToTable() {
 		$this->tablename = 'History';
 		$this->persistenceFacade = & PersistenceFacade::getInstance();
-		$this->objQuery = & $this->persistenceFacade->createObjectQuery($this->tablename);
+		$this->objQuery = & PersistenceFacade::createObjectQuery($this->tablename);
 	}
 
 	private function writeToTable() {

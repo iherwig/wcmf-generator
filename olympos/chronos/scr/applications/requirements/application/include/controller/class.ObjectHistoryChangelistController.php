@@ -68,8 +68,7 @@ class ObjectHistoryChangelistController extends Controller
 			$orderby = array ('timestamp DESC');
 			
 			// history table
-			$persistenceFacade = & PersistenceFacade::getInstance();
-			$objQuery = & $persistenceFacade->createObjectQuery($tablename);
+			$objQuery = & PersistenceFacade::createObjectQuery($tablename);
 			// only for object oid
 			$objTpl = & $objQuery->getObjectTemplate($tablename);
 			$objTpl->setValue("affectedoid", $affectedoid, DATATYPE_ATTRIBUTE);

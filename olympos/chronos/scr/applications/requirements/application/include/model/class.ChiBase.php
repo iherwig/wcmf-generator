@@ -58,8 +58,7 @@ class ChiBase extends ChiBaseBase
 		{
 			$praefix = 'Chi';
 			$countertype = $this->_type;
-			$persistenceFacade = & PersistenceFacade::getInstance(); 
-			$objQuery = &$persistenceFacade->createObjectQuery('Counter');
+			$objQuery = &PersistenceFacade::createObjectQuery('Counter');
 			$objTpl = & $objQuery->getObjectTemplate('Counter');
 			$objlistpart = $objQuery->execute(BUILDDEPTH_SINGLE, null);
 			if (sizeof($objlistpart) == 0) {
