@@ -433,7 +433,7 @@ class UWMImporterController extends Controller
 						$firstDisplayType = $displayType;
 					}
 						
-					$query = $this->persistenceFacade->createObjectQuery($displayType);
+					$query = PersistenceFacade::createObjectQuery($displayType);
 						
 					$displayTypeTpl = $query->getObjectTemplate($displayType);
 					$displayValueString = $displayTypeTpl->getProperty('display_value');

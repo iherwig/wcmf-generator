@@ -109,7 +109,7 @@ class ActivitySetDiagramController extends Controller
 					$ObjCurVal = $persistenceFacade->load($v);
 					// e.g. Goal echo '<br/> chldtype: '.$chldtype;
 					//create figure and set fk_activityset_id to actsid and fk_activity_id to $chldid
-					$objQueryFigureWrite = & $persistenceFacade->createObjectQuery('Figure');
+					$objQueryFigureWrite = &PersistenceFacade::createObjectQuery('Figure');
 					$objTplFigureWrite = & $objQueryFigureWrite->getObjectTemplate('Figure'); //new row
 					$objTplFigureWrite->setValue('fk_activityset_id', $actsid , DATATYPE_IGNORE);
 					$objTplFigureWrite->setValue('fk_'.strtolower($chldtype).'_id', $chldid , DATATYPE_IGNORE);

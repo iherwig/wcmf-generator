@@ -89,7 +89,7 @@ class PackageDiagramController extends Controller
 			//echo '<br/> packagename: '; print_r($ObjPackage->getName());
 			
 			// create new diagram entry
-			$objQueryDiagrWrite = & $persistenceFacade->createObjectQuery('Diagram');
+			$objQueryDiagrWrite = & PersistenceFacade::createObjectQuery('Diagram');
 			$objTplDiagrWrite = & $objQueryDiagrWrite->getObjectTemplate('Diagram'); //new row
 			$objTplDiagrWrite->setValue('Name', $ObjPackage->getName(), DATATYPE_ATTRIBUTE);
 			$objTplDiagrWrite->setValue('fk_package_id', $packageid , DATATYPE_IGNORE);
@@ -123,7 +123,7 @@ class PackageDiagramController extends Controller
 					$ObjCurVal = $persistenceFacade->load($v);
 					// e.g. Goal echo '<br/> chldtype: '.$chldtype;
 					//create figure and set fk_diagram_id to diagramid
-					$objQueryFigureWrite = & $persistenceFacade->createObjectQuery('Figure');
+					$objQueryFigureWrite = & PersistenceFacade::createObjectQuery('Figure');
 					$objTplFigureWrite = & $objQueryFigureWrite->getObjectTemplate('Figure'); //new row
 					$objTplFigureWrite->setValue('fk_diagram_id', $diagramid , DATATYPE_IGNORE);
 					$objTplFigureWrite->setValue('fk_'.strtolower($chldtype).'_id', $chldid , DATATYPE_IGNORE);

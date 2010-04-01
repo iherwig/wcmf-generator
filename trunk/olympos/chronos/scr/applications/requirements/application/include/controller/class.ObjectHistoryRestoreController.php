@@ -275,7 +275,7 @@ private function curValOfObjToValArray() {
 private function getObjHistListSince() {
 
 	// get history entries with affectedoid and since timstamp from History Table
-	$this->objQueryHistList = & $this->persistenceFacade->createObjectQuery($this->histtable);
+	$this->objQueryHistList = & PersistenceFacade::createObjectQuery($this->histtable);
 	$this->objTplHistList = & $this->objQueryHistList->getObjectTemplate($this->histtable);
 	$this->objTplHistList->setValue("affectedoid", "= '".$this->affectedoid."'", DATATYPE_ATTRIBUTE);
 	$this->objTplHistList->setValue("timestamp", '> '.$this->timestamp, DATATYPE_ATTRIBUTE);
@@ -288,7 +288,7 @@ private function getObjHistListSince() {
 private function getHistoryFromTable($tmpid) {
 
 	// get history entry from History Table
-	$this->objQueryHistEntry = & $this->persistenceFacade->createObjectQuery($this->histtable);
+	$this->objQueryHistEntry = & PersistenceFacade::createObjectQuery($this->histtable);
 	$this->objTplHistEntry = & $this->objQueryHistEntry->getObjectTemplate($this->histtable);
 	$this->objTplHistEntry->setValue("id", "= ".$tmpid, DATATYPE_IGNORE);
 	$this->objlistHistEntry = $this->objQueryHistEntry->execute(BUILDDEPTH_SINGLE, null);

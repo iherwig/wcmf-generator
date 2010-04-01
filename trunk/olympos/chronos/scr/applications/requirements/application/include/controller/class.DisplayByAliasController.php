@@ -92,7 +92,7 @@ class DisplayByAliasController extends Controller
 		$foundObjects = array ();
 	
 		foreach ($aliasTypes as $currType=>$currAliasList) {
-			$query = $persistenceFacade->createObjectQuery($currType);
+			$query = PersistenceFacade::createObjectQuery($currType);
 		
 			foreach ($currAliasList as $currAlias) {
 				$currTemplate = $query->getObjectTemplate($currType, QUERYOP_OR);
