@@ -21,7 +21,7 @@
 		<metaModel idRef="uml2" />
 		<metaModel idRef="xmlSchema" /> 
 
-		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, 'IdentifiedObject', 'http://com.ibm.eenergy/cim')" />
+		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, 'LesungErfassenRequest', 'http://com.ibm.eenergy/cim')" />
 		<outputSlot value="schema" />
 	</component>
 

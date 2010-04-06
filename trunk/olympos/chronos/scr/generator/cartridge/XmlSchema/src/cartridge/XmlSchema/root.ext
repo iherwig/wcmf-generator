@@ -16,7 +16,7 @@ xmlSchema::SchemaType xmlSchema(uml::Model this, String rootClassName, String ta
 
 	xsd.setTargetNamespace(targetNamespace) ->
 	
-	xsd.complexType.addAll(this.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().convertToXsd(targetNamespace)) ->
+	xsd.complexType.addAll(this.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().convertToXsd(targetNamespace, rootClassName)) ->
 	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::Enumeration).convertToXsd(targetNamespace)) ->
 	
 	xsd.element.add(getRootElement(rootClassName, targetNamespace)) ->
