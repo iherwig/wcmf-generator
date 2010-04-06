@@ -166,3 +166,12 @@ uml::Property getFirstManyToManyChild(Chronos::ChiNode this, Chronos::ChiNode ot
 	:
 		Void
 ;
+
+Boolean isContainer(Chronos::ChiNode this):
+	(this.qualifiedName == CONTAINER_NODE()) ||
+	this.general.exists(e|e.isContainer())
+;
+
+String CONTAINER_NODE():
+	GLOBALVAR containerNode
+;

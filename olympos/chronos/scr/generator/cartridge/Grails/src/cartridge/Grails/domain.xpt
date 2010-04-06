@@ -39,11 +39,13 @@ package «fullQualifiedPackage»
 «ENDREM»
 package com.eenergy.meregio.domain
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.XmlTransient
+import javax.xml.bind.annotation.XmlID
+import javax.xml.bind.annotation.XmlIDREF
 
 «PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
 /* put additional imports here */
@@ -159,6 +161,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	 * «((uml::Property) other).getComment("\n	 * ")»
 	 */
 	@XmlElement
+	«IF !this.isContainer()»@XmlIDREF«ENDIF»
 	«((uml::Property) other).type.name.sanitizeType()» «((uml::Property) other).getRoleName().toFirstLower().sanitizeType()»
 «ENDFOREACH-»
 «ENDIF-»
@@ -186,7 +189,8 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 )-»
 «IF parents.size > 0-»
 	«FOREACH parents.select(e|e.upperBound() == 1 || e.getOtherEnd().upperBound() == 1) AS parent»
-	@XmlTransient
+	@XmlElement
+	«IF !this.isContainer()»@XmlIDREF«ENDIF»
 	«parent.type.name.sanitizeType()» «parent.getRoleName().toFirstLower()»
 	«ENDFOREACH»
 	
@@ -226,11 +230,13 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 «IF relatives.size > 0»
 «FOREACH children AS child-»
 	@XmlElement
+	«IF !this.isContainer()»@XmlIDREF«ENDIF»
 	Set<«child.type.name.sanitizeType()»> «child.getRoleName().toFirstLower()»
 «ENDFOREACH-»
 
 «FOREACH parents AS parent-»
-	@XmlTransient
+	@XmlElement
+	«IF !this.isContainer()»@XmlIDREF«ENDIF»
 	Set<«parent.type.name.sanitizeType()»> «parent.getRoleName().toFirstLower()»
 «ENDFOREACH»
 
@@ -286,6 +292,7 @@ import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«impo
 	 * «this.getComment("\n	 * ")»
 	 */
 	@XmlElement«IF this.lowerBound() > 0»(required = true)«ENDIF»
+	«IF this.name == "mRID"»@XmlID«ENDIF»
 	«this.type.name.sanitizeType()»«IF this.isMultivalued()»[]«ENDIF» «name»«IF !this.^default.isNullOrEmpty()» = «this.type.getValuePrefix()»«this.^default»«this.type.getValuePostfix()»«ENDIF»
 	
 «ENDDEFINE»
@@ -313,11 +320,13 @@ th protected region «ENDREM»
 
 package com.eenergy.meregio.domain
 
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlAccessorType
+import javax.xml.bind.annotation.XmlAccessType
+import javax.xml.bind.annotation.XmlElement
+import javax.xml.bind.annotation.XmlType
+import javax.xml.bind.annotation.XmlTransient
+import javax.xml.bind.annotation.XmlID
+import javax.xml.bind.annotation.XmlIDREF
 
 «PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
 /* put additional imports here */
