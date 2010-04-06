@@ -16,7 +16,7 @@
  *
  * $Id: main.php 1054 2009-08-21 17:26:09Z iherwig $
  */
-error_reporting(E_ALL | E_NOTICE);
+error_reporting(E_ERROR | E_PARSE);
 
 require_once("base_dir.php");  
 require_once(BASE."wcmf/lib/util/class.Log.php");
