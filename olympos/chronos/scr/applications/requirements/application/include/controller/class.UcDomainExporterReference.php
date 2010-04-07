@@ -82,8 +82,22 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 					}
 				}
 			}
+		} else if ($node instanceof ChiBusinessUseCase) {
+			$node->loadChildren('NMUCActor');
+			$children = $node->getChildren();
+			foreach($children as $child) {
+				if ($child instanceof NMUCActor) {
+					$child->loadParents();
+					$parents = $child->getParents();
+					foreach($parents as $parent) {
+						if ($parent instanceof Actor) {
+							$result[] = $parent->getOid();
+						}
+					}
+				}
+			}
 		}
-
+			
 		return $result;
 	}
 }
