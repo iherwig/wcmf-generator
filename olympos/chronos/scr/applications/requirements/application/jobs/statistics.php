@@ -20,8 +20,8 @@ error_reporting(E_ALL | E_PARSE);
 require_once(BASE."wcmf/lib/util/class.InifileParser.php");
 require_once(BASE."wcmf/lib/util/class.Log.php");
 
-set_include_path(get_include_path().PATH_SEPARATOR.'lib');
-require_once('lib/Zend/Http/Client.php');
+set_include_path(get_include_path().PATH_SEPARATOR.BASE.'wcmf/3rdparty/zend');
+require_once BASE.'wcmf/3rdparty/zend/Zend/Http/Client.php';
 
 // get configuration from file
 $parser = InifileParser::getInstance();
