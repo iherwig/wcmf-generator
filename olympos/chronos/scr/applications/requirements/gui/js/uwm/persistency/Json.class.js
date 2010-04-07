@@ -359,6 +359,14 @@ uwm.persistency.Json.prototype.exportUcDomain = function(startOid, language, suc
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.exportUcDocumentation = function(startOid, language, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: 'exportUcDocumentation',
+		startOid: startOid,
+		language: language
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 	var data = {};
 	

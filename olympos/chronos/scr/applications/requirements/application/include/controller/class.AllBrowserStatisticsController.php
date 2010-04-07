@@ -251,7 +251,7 @@ class AllBrowserStatisticsController extends BatchController
 	 */
 	function runOAWStep2($oids)
 	{
-		$this->runOAW('cartridge/BrowserStatistics/workflow/step2_barchart.oaw');
+		//$this->runOAW('cartridge/BrowserStatistics/workflow/step2_barchart.oaw');
 	}
 	/**
 	 * Run the gererator step 3
@@ -260,7 +260,7 @@ class AllBrowserStatisticsController extends BatchController
 	 */
 	function runOAWStep3($oids)
 	{
-		$this->runOAW('cartridge/BrowserStatistics/workflow/step3_piechart.oaw');
+		//$this->runOAW('cartridge/BrowserStatistics/workflow/step3_piechart.oaw');
 	}
 	/**
 	 * Run the gererator with the given workflow
