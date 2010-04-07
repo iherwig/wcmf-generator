@@ -54,6 +54,31 @@ function setVariable(_name, _val) { getForm()[_name].value = _val; }
 function getVariable(_name) { return getForm()[_name].value; }
 function setTarget(_target) { getForm().target=_target; }
 
+modifiedData = false;
+function setDirty()
+{
+  modifiedData = true;
+}
+
+function canLeavePage()
+{
+  // save reminder
+  if (modifiedData)
+  {
+    if (typeof(_confirm)=="undefined") _confirm = true;
+    if (_confirm)
+    {
+      _text = "There's possibly unsaved data and you're about to leave this edit mask. If you continue, all unsaved data will be lost. Do you really want to continue?";
+      check = confirm(_text);
+    }
+    else
+      check = true;
+    
+    return check;
+  }
+  return true;
+}
+
 // -------------------------------------------------------------------------
 // CMS functions.
 //
@@ -145,9 +170,13 @@ function doSave()
 //
 function submitAction(_action)
 {
-  setAction(_action);
-  getForm().submit();
-  getForm().target = '';
+  // display save reminder if necessary
+  if (_action == 'dologin' || _action.toLowerCase().indexOf('save') >= 0 || canLeavePage())
+  {
+    setAction(_action);
+    getForm().submit();
+    getForm().target = '';
+  }
 }
 
 // -------------------------------------------------------------------------
