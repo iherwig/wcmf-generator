@@ -148,3 +148,6 @@ uwm.persistency.Persistency.prototype.doContinue = function(controller, successH
 
 uwm.persistency.Persistency.prototype.exportUcDomain = function(startOid, language, successHandler, errorHandler ) {
 }
+
+uwm.persistency.Persistency.prototype.exportUcDocumentation = function(startOid, language, successHandler, errorHandler ) {
+}
