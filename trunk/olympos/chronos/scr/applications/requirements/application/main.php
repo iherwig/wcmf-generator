@@ -44,7 +44,7 @@ $request->setFormat($callParams['requestFormat']);
 $request->setResponseFormat($callParams['responseFormat']);
 $result = ActionMapper::processAction($request);
 
-exitSearchUtil();
+//exitSearchUtil();
 exit;
 
 /**
