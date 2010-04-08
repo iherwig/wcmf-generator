@@ -81,7 +81,7 @@ class LocktableRDBMapper extends NodeUnifiedRDBMapper
     $nodeDef = array();
     $nodeDef['_properties'] = array
     (
-      array('name' => 'is_searchable', 'value' => true),
+      array('name' => 'is_searchable', 'value' => false),
 // PROTECTED REGION ID(application/include/model/wcmf/class.LocktableRDBMapper.php/Properties) ENABLED START
 // PROTECTED REGION END
     );

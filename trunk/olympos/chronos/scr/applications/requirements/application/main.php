@@ -44,7 +44,7 @@ $request->setFormat($callParams['requestFormat']);
 $request->setResponseFormat($callParams['responseFormat']);
 $result = ActionMapper::processAction($request);
 
-//exitSearchUtil();
+exitSearchUtil();
 exit;
 
 /**
@@ -103,9 +103,6 @@ function onError($message, $file='', $line='')
 
 function exitSearchUtil() 
 {
-  $index = SearchUtil::getIndex(false);
-  if ($index) {
-    $index->commit();
-  }
+  SearchUtil::commitIndex();
 }
 ?>
