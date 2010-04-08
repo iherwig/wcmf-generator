@@ -21,6 +21,14 @@ Ext.namespace("uwm.ui");
 uwm.ui.Login = function(config){
 		var self = this;
     
+		this.loginBtn = new Ext.Button({
+			text: uwm.Dict.translate('Login'),
+			type: 'submit',
+			handler: function(btn){
+					self.loginBtn.disable();
+					self.initSession();
+			}
+		});
 		this.form = new Ext.FormPanel({
 			labelWidth: 100,
 			frame: true,
@@ -33,6 +41,7 @@ uwm.ui.Login = function(config){
 			keys: [{
 					key: [10, 13],
 					handler: function(){
+							self.loginBtn.disable();
 							self.initSession();
 					}
 			}],
@@ -66,14 +75,7 @@ uwm.ui.Login = function(config){
 							html: "<p>" + uwm.Dict.translate("Revision") + ": " + uwm.Constants.SVN_REVISION + "</p>"
 						})
 			],
-			buttons: [{
-				text: uwm.Dict.translate('Login'),
-				type: 'submit',
-				handler: function(btn){
-						btn.disable();
-						self.initSession();
-				}
-			}]
+			buttons: [this.loginBtn]
 		});
 		
 		if (!Ext.isGecko3 && !Ext.isChrome) {
@@ -116,6 +118,7 @@ uwm.ui.Login = function(config){
 					this.form.getForm().findField("password").getValue(), function(options, data) {
 						self.handleLogin(options, data);
 				}, function(options, data, errorMsg){
+						self.loginBtn.enable();
 						self.handleLoginFailure(options, data, errorMsg);
 				});
 		}
