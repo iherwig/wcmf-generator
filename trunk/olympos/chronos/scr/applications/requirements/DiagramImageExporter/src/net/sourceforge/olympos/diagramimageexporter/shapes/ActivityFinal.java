@@ -16,16 +16,16 @@ import net.sourceforge.olympos.diagramimageexporter.SVGGenerator;
 @SuppressWarnings("serial")
 public class ActivityFinal extends Figure{
 
-	private InfoCoordinateSize circle1 = new InfoCoordinateSize(10, 10, 37, 37);
-	private InfoCoordinateSize circle2 = new InfoCoordinateSize(19, 19, 18, 18);
+	private InfoCoordinateSize circle1 = new InfoCoordinateSize(0, 0, 40, 40);
+	private InfoCoordinateSize circle2 = new InfoCoordinateSize(10, 10, 20, 20);
 	
-	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 37, 37);
+	private InfoCoordinateSize figureInfo = new InfoCoordinateSize(0, 0, 40, 40);
 
 
 	public void draw(Graphics2D g2d,InfoFigureParameter createFig, ArrayList<InfoFigureParameter> children, SVGGenerator svg, ArrayList<String> existLine) {
 		
 		drawScaleEllipse(g2d, createFig, figureInfo, circle1);
-		drawScaleEllipse(g2d, createFig, figureInfo, circle2);
+		drawScaleEllipse(g2d, createFig, figureInfo, circle2, true);
 		drawCenterLabelUnder(g2d, createFig);
 		
 		for(InfoFigureParameter currChild : children){
@@ -33,11 +33,13 @@ public class ActivityFinal extends Figure{
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+			String key = createFig.getTypeId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
 			if (!existLine.contains(key)) {
 				String comment = allowedConnection.getLineLabel();
 				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
 				existLine.add(key);
+				String key2 = currChild.getTypeId() + currChild.getAlias() + createFig.getTypeId() + createFig.getAlias();
+				existLine.add(key2);
 			}
 		}
 	}

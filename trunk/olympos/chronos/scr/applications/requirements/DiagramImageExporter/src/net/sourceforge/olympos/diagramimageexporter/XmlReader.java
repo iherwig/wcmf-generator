@@ -75,7 +75,7 @@ public class XmlReader {
 		try {
 			List<Element> figur = element.getChildren();
 			for (Element currFigure : figur) {
-				if (currFigure instanceof Element) {
+				if (currFigure.getName().equals("Figure")) {
 					dia.addFigure(figure((Element) currFigure));
 				}
 			}
@@ -277,6 +277,10 @@ public class XmlReader {
 			String relationType = currChild.getAttributeValue("relationType");
 			InfoXmlConnection con = new InfoXmlConnection(type, targetType, targetOid, targetRole, relationType);
 			fig.addChildX(con);
+			
+			if (!"ActivitySet".equals(targetType)) {
+				fig.setTypeId(targetOid);
+			}
 		}	
 		return fig;
 	}

@@ -37,11 +37,13 @@ public class ActivityReceive extends Figure{
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+			String key = createFig.getTypeId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
 			if (!existLine.contains(key)) {
 				String comment = allowedConnection.getLineLabel();
 				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
 				existLine.add(key);
+				String key2 = currChild.getTypeId() + currChild.getAlias() + createFig.getTypeId() + createFig.getAlias();
+				existLine.add(key2);
 			}
 		}
 	}

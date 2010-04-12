@@ -277,6 +277,10 @@ public abstract class Figure extends JPanel {
 	// Ellipse
 	// ///////////////////////////////////////////////////////
 	protected void drawScaleEllipse(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse) {
+		this.drawScaleEllipse(g2d, createFig, figureInfo, ellipse, false);
+	}
+
+	protected void drawScaleEllipse(Graphics2D g2d, InfoFigureParameter createFig, InfoCoordinateSize figureInfo, InfoCoordinateSize ellipse, boolean filled) {
 		float scaleY = (createFig.getHeight() / figureInfo.getHeight());
 		float scaleX = (createFig.getWidth() / figureInfo.getWidth());
 
@@ -285,7 +289,7 @@ public abstract class Figure extends JPanel {
 		g2d.setPaint(Color.black);
 		Shape ellip = new Ellipse2D.Double(x, y, ellipse.getHeight() * scaleX, ellipse.getWidth() * scaleY);
 		g2d.draw(ellip);
-		g2d.setPaint(Color.white);
+		g2d.setPaint(filled ? Color.black : Color.white);
 		Shape ellipFill = new Ellipse2D.Double(x + 1, y + 1, ellipse.getHeight() * scaleX - 2, ellipse.getWidth() * scaleY - 1);
 		g2d.fill(ellipFill);
 	}
@@ -356,7 +360,7 @@ public abstract class Figure extends JPanel {
 		
 		g2d.setPaint(Color.black);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2d.draw(new Arc2D.Double(arc1.getX() * scaleX , arc1.getY() * scaleY, arc1.getW() * scaleX, arc1.getH() * scaleY, arc1.getStart(), arc1.getExtend(), Arc2D.OPEN));
+		g2d.draw(new Arc2D.Double(createFig.getX() + arc1.getX() * scaleX , createFig.getY() + arc1.getY() * scaleY, arc1.getW() * scaleX, arc1.getH() * scaleY, arc1.getStart(), arc1.getExtend(), Arc2D.OPEN));
 	}
 
 	// image

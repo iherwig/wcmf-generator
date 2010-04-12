@@ -39,11 +39,13 @@ public class ChiController extends Figure{
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getAlias() + currChild.getTypeId();
+			String key = createFig.getTypeId() + createFig.getAlias() + currChild.getAlias() + currChild.getTypeId();
 			if (!existLine.contains(key) && allowedConnection != null) {
 				String comment = allowedConnection.getLineLabel();
 				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
 				existLine.add(key);
+				String key2 = currChild.getTypeId() + currChild.getAlias() + createFig.getTypeId() + createFig.getAlias();
+				existLine.add(key2);
 			}
 		}
 	}
