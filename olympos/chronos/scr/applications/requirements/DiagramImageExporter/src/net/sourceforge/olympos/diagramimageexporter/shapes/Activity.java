@@ -33,20 +33,21 @@ public class Activity extends Figure{
 		drawArc(g2d, createFig, figureInfo, arc3);
 		drawArc(g2d, createFig, figureInfo, arc4);
 		
-		drawCenterLabelUnder(g2d, createFig);
+		drawCenterLabel(g2d, createFig, figureInfo, new InfoCoordinateSize(0, 0, figureInfo.getWidth(), figureInfo.getHeight() - 15), new InfoLine(0, 0, 0, 0));
 		
 		for(InfoFigureParameter currChild : children){
 			ElementDiagram elem = ElementDiagram.getCatalogEntry(createFig.getType());
 			HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 			InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-			String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+			String key = createFig.getTypeId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
 			if (allowedConnection != null && !existLine.contains(key)) {
 
 				String comment = allowedConnection.getLineLabel();
 				drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
 				existLine.add(key);
-
+				String key2 = currChild.getTypeId() + currChild.getAlias() + createFig.getTypeId() + createFig.getAlias();
+				existLine.add(key2);
 			}
 		}
 	}

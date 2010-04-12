@@ -40,24 +40,28 @@ public class ChiNode extends Figure {
 				HashMap<EnumConnection, InfoAllowedConnection> manyToManyCatalog = catalogManyToMany.getConnections();
 				InfoAllowedConnection manyToManyValues = manyToManyCatalog.get(EnumConnection.valueOf(currChild.getRelationType()));
 
-				String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+				String key = createFig.getTypeId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
 				if (manyToManyValues != null && !existLine.contains(key)) {
 					String comment = manyToManyValues.getLineLabel();
 
 					drawCon.drawConnection(g2d, createFig, currChild, comment, manyToManyValues.getSourceConnectionArrow(), manyToManyValues.getTargetConnectionArrow(), svg);
 					existLine.add(key);
+					String key2 = currChild.getTypeId() + currChild.getAlias() + createFig.getTypeId() + createFig.getAlias();
+					existLine.add(key2);
 				}
 			}
 			else if (currChild.getType() == EnumFigureType.CHI_NODE){
 				HashMap<EnumConnection, InfoAllowedConnection> manyToManyCatalog = catalogManyToMany.getConnections();
 				InfoAllowedConnection manyToManyConnection = manyToManyCatalog.get(EnumConnection.valueOf(currChild.getRelationType()));
 
-				String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+				String key = createFig.getTypeId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
 				if (manyToManyConnection != null) {
 					String comment = manyToManyConnection.getLineLabel();
 
 					drawCon.drawConnection(g2d, createFig, currChild, comment, manyToManyConnection.getSourceConnectionArrow(), manyToManyConnection.getTargetConnectionArrow(), svg);
 					existLine.add(key);
+					String key2 = currChild.getTypeId() + currChild.getAlias() + createFig.getTypeId() + createFig.getAlias();
+					existLine.add(key2);
 				}
 			}
 			else {
@@ -65,11 +69,13 @@ public class ChiNode extends Figure {
 				HashMap<EnumFigureType, InfoAllowedConnection> figAllowedCatal1 = elem.getAllowedConnection();
 				InfoAllowedConnection allowedConnection = figAllowedCatal1.get(currChild.getType());
 
-				String key = createFig.getFigureId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
+				String key = createFig.getTypeId() + createFig.getAlias() + currChild.getTypeId() + currChild.getAlias();
 				if (!existLine.contains(key) && allowedConnection != null) {
 					String comment = allowedConnection.getLineLabel();
 					drawCon.drawConnection(g2d, createFig, currChild, comment, allowedConnection.getSourceConnectionArrow(), allowedConnection.getTargetConnectionArrow(), svg);
 					existLine.add(key);
+					String key2 = currChild.getTypeId() + currChild.getAlias() + createFig.getTypeId() + createFig.getAlias();
+					existLine.add(key2);
 				}
 			}
 		}

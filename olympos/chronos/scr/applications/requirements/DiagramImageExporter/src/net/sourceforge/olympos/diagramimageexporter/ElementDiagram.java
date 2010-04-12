@@ -19,6 +19,8 @@ public class ElementDiagram {
 	private final static String ASSOCIATION = "association";
 	private final static String ACTIONKEY = "ActionKey";
 	private final static String INSTANCE = "is instance of";
+	private final static String ACTIVITY_FLOW = "associates";
+	private static final String PRECEDES = "Precedes";
 	
 	private final static String NOTIMPLEMENTET = "Not implementet jet";
 	
@@ -148,8 +150,12 @@ public class ElementDiagram {
 	private static ElementDiagram initChiBusiUseCase() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 		
-		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(NOTIMPLEMENTET, EnumConnectionEnd.NONE, EnumConnectionEnd.NONE));
-		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(NOTIMPLEMENTET, EnumConnectionEnd.NONE, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PRECEDES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PRECEDES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_PROCESS, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
 		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
 		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER_ACTIVE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
@@ -165,8 +171,12 @@ public class ElementDiagram {
 	private static ElementDiagram initChiBusiUseCaseCore() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 		
-		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(NOTIMPLEMENTET, EnumConnectionEnd.NONE, EnumConnectionEnd.NONE));
-		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(NOTIMPLEMENTET, EnumConnectionEnd.NONE, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(PRECEDES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(PRECEDES, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_BUSINESS_USE_CASE_CORE, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 		connections.put(EnumFigureType.CHI_BUSINESS_PROCESS, new InfoAllowedConnection(CONTAINS, EnumConnectionEnd.ARROW, EnumConnectionEnd.CLOSED_DIAMOND));
 		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
 		connections.put(EnumFigureType.CHI_BUSINESS_PARTNER_ACTIVE, new InfoAllowedConnection(PARTICIPATES, EnumConnectionEnd.NONE, EnumConnectionEnd.ARROW));
@@ -318,21 +328,32 @@ public class ElementDiagram {
 	//Activity
 	private static ElementDiagram initActivity() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
-
-//		connections.put(EnumFigureType.CHI_WORKER_INTERN, new InfoAllowedConnection(GENERALISATION, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
 		
-		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_SET, "ActivitySet", null , connections);
+		connections.put(EnumFigureType.ACTIVITY, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY_DECISION, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY_FINAL, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY_SEND, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.CHI_OBJECT, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY, "Activity", null , connections);
 		return result;
 	}
 	private static ElementDiagram initActiviReceive() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_RECEIVE, "ActiviRec", null , connections);
+		connections.put(EnumFigureType.ACTIVITY, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY_FINAL, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_RECEIVE, "ActivityReceive", null , connections);
 		return result;
 	}
 	
 	private static ElementDiagram initActivityInitial() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+
+		connections.put(EnumFigureType.ACTIVITY, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY_DECISION, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY_SEND, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 
 		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_INITIAL, "ActivityInitial", null , connections);
 		return result;
@@ -341,12 +362,19 @@ public class ElementDiagram {
 	private static ElementDiagram initActivityDecision() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 
-		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_DECISION, "ActiviDec", null , connections);
+		connections.put(EnumFigureType.ACTIVITY, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY_DECISION, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY_FINAL, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY_SEND, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
+		
+		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_DECISION, "ActivityDecision", null , connections);
 		return result;
 	}
 	
 	private static ElementDiagram initActivityFinal() {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
+
+		connections.put(EnumFigureType.ACTIVITY, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 
 		ElementDiagram result = new ElementDiagram(EnumFigureType.ACTIVITY_FINAL, "ActivityFinal", null , connections);
 		return result;
@@ -356,6 +384,7 @@ public class ElementDiagram {
 		HashMap<EnumFigureType, InfoAllowedConnection> connections = new HashMap<EnumFigureType, InfoAllowedConnection>();
 		
 		connections.put(EnumFigureType.CHI_NODE, new InfoAllowedConnection(INSTANCE, EnumConnectionEnd.ARROW_TRIANGLE, EnumConnectionEnd.NONE));
+		connections.put(EnumFigureType.ACTIVITY, new InfoAllowedConnection(ACTIVITY_FLOW, EnumConnectionEnd.ARROW, EnumConnectionEnd.NONE));
 
 		ElementDiagram result = new ElementDiagram(EnumFigureType.CHI_OBJECT, "ChiObject", null , connections);
 		return result;
