@@ -54,7 +54,7 @@ import javax.xml.bind.annotation.XmlIDREF
 /**
  * «this.getComment("\n * ")»
  */
-@XmlAccessorType(XmlAccessType.FIELD)
+@XmlAccessorType(XmlAccessType.NONE)
 «REM» avoiding abstract bug in Grails«IF this.isAbstract»abstract «ENDIF-»«ENDREM-»
 class «name-» 
 «IF !this.superClass.select(e|!e.isLibraryClass()).isEmpty» extends «this.superClass.first().name»«ENDIF»
