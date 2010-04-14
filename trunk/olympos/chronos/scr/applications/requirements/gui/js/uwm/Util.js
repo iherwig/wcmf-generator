@@ -19,12 +19,13 @@ Ext.namespace("uwm.Util");
  * @return {String} The UWM Class Name of the OID.
  */
 uwm.Util.getUwmClassNameFromOid = function(oid) {
-	var result = oid.match(/^[^:]+/)[0];
-	
+	var result = '';
 	if (oid.charAt(0) == "{") {
 		result = oid.match(/:([^}]+)/)[1];
 	}
-	
+	else {
+		result = oid.match(/([^:]+):[0-9]+/)[1];
+	}
 	return result;
 }
 
