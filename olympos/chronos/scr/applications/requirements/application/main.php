@@ -44,7 +44,7 @@ $request->setFormat($callParams['requestFormat']);
 $request->setResponseFormat($callParams['responseFormat']);
 $result = ActionMapper::processAction($request);
 
-exitSearchUtil();
+register_shutdown_function('shutdown');
 exit;
 
 /**
@@ -97,12 +97,21 @@ function onError($message, $file='', $line='')
     $request->setResponseFormat($responseFormat);
     ActionMapper::processAction($request);
   }
-  exitSearchUtil();
   exit;
 }
 
-function exitSearchUtil() 
+function shutdown()
 {
   SearchUtil::commitIndex();
+  
+  $error = error_get_last();
+  if ($error !== NULL) {
+    $info = "[SHUTDOWN] file:".$error['file']." | ln:".$error['line']." | msg:".$error['message'] .PHP_EOL;
+    //Log::error($info, "main");
+  }
+  else{
+    Log::debug("SHUTDOWN", "main");
+  }
 }
+
 ?>
