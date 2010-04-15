@@ -66,7 +66,8 @@ $application->initialize('include/', 'config.ini', 'LoginController', '', 'login
 // process the requested action
 $serializedRequest = base64_decode($arguments[0]);
 $request = unserialize($serializedRequest);
-Log::debug("Process remote request:\n".$request->toString(), "rpc_call");
+Log::debug("Process remote request:\n".$request->toString(), "cli");
 
-ActionMapper::processAction($request);
+$response = ActionMapper::processAction($request);
+Log::debug("Response:\n".$response->toString(), "cli");
 ?>
