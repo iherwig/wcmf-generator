@@ -151,3 +151,6 @@ uwm.persistency.Persistency.prototype.exportUcDomain = function(startOid, langua
 
 uwm.persistency.Persistency.prototype.exportUcDocumentation = function(startOid, language, successHandler, errorHandler ) {
 }
+
+uwm.persistency.Persistency.prototype.exportUcTestData = function(startOid, language, successHandler, errorHandler ) {
+}
