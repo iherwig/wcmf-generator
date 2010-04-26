@@ -1,6 +1,7 @@
 <workflow>
 	<property name="basePath" value="src" />
 
+	<property name="importMultiplicity" value="false" />
 	<property name="propertyFile" value="${basePath}/cartridge/UmlConnector/workflow/cwm2uml.properties" />
 	<property file="${propertyFile}" />
 
@@ -39,7 +40,15 @@
 		<modelSlot value="uwmmodel" />
 		<metaModel idRef="cwm" />
 	</component>
-
+	
+	<if cond="${importMultiplicity}">
+		<!-- load CIM reference model -->
+		<component class="oaw.emf.XmiReader">
+			<modelFile value="${basePath}/metamodel/cim.uml"/>
+			<outputSlot value="cimmodel"/>
+		</component>
+	</if>
+		
 	<!-- transform XML to UML -->
 	<component class="oaw.xtend.XtendComponent">
 		<globalVarDef name="basePath" value="'${basePath}'" />
@@ -53,6 +62,20 @@
 
 		<outputSlot value="uml2model" />
 	</component>
+
+	<if cond="${importMultiplicity}">
+		<!-- apply multiplicities from CIM reference model-->
+		<component class="oaw.xtend.XtendComponent">
+			<metaModel idRef="cwm" />
+			<metaModel idRef="uml2" />
+			<metaModel idRef="chronos" />
+			<metaModel idRef="ouranos" />
+			
+			<invoke value="cartridge/UmlConnector/importMultiplicity::importMultiplicity(uml2model, cimmodel)" />
+	
+			<outputSlot value="uml2model" />
+		</component>
+	</if>
 
 	<!-- fix resource (profile) paths, so they refer to files in the same directory -->
 	<component class="net.sourceforge.olympos.oaw.workflow.ResourcePathRemover">
