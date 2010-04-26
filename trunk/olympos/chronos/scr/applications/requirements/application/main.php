@@ -113,5 +113,4 @@ function shutdown()
     Log::debug("SHUTDOWN", "main");
   }
 }
-
 ?>
