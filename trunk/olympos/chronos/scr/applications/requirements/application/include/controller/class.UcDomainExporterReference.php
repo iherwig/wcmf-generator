@@ -18,6 +18,8 @@ require_once BASE . 'application/include/controller/iface.UwmExporterReferenceSt
 require_once BASE . 'application/include/model/activity/class.ChiObject.php';
 require_once BASE . 'application/include/model/domain/class.ChiNode.php';
 require_once BASE . 'application/include/model/domain/class.ChiAssociation.php';
+require_once BASE . 'application/include/model/UseCases/class.ChiBusinessUseCase.php';
+require_once BASE . 'application/include/model/UseCases/class.ChiBusinessProcess.php';
 
 class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 	private $containers = array();
@@ -67,6 +69,7 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 				}
 			} else {
 				$node->loadChildren('NodeSourceEnd');
+				$node->loadChildren('ChiValue');
 
 				$children = $node->getChildren();
 				foreach($children as $child) {
@@ -78,6 +81,18 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 							$result[] = $otherEndOid;
 
 							$this->superclasses[] = $otherEndOid;
+						}
+					} else if ($child instanceof ChiValue) {
+						$name = $child->getPropertyType();
+
+						$query = PersistenceFacade::createObjectQuery('ChiNode');
+						$nodeTemplate = $query->getObjectTemplate('ChiNode');
+						$nodeTemplate->setValue('Name', $name, DATATYPE_ATTRIBUTE);
+
+						$foundNodes = $query->execute(BUILDDEPTH_SINGLE);
+						
+						if (count($foundNodes) > 0) {
+							$result[] = $foundNodes[0]->getOid();
 						}
 					}
 				}
@@ -96,6 +111,14 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 					}
 				}
 			}
+			//may be of use later (export gets much longer, as all children of the process are exported)
+//			$node->loadParents('ChiBusinessProcess');
+//			$parents = $node->getParents();
+//			foreach($parents as $parent) {
+//				if ($parent instanceof ChiBusinessProcess) {
+//					$result[] = $parent->getOid();
+//				}
+//			}
 		}
 			
 		return $result;

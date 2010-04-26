@@ -32,13 +32,15 @@ class UwmUtil {
 	private static $METHOD_NAME_SEARCH = array(
 		'ChiBusinessUseCase',
 		'ChiBusinessUseCaseCore',
-		'ChiNode'
+		'ChiNode',
+		'ChiBusinessProcess'
 		);
 
 		private static $METHOD_NAME_REPLACE = array(
 		'UseCase',
 		'UseCase',
-		'Class'
+		'Class',
+		'BusinessProcess'
 		);
 
 		private static $dom;
@@ -710,7 +712,7 @@ class UwmUtil {
 		 * Add a package including all referenced nodes that were not exported yet.
 		 */
 		private static function processReferencedNodes() {
-			$persistenceFacade = &PersistenceFacade::getInstance();
+			$persistenceFacade = PersistenceFacade::getInstance();
 
 			// create the enclosing package
 			$package = &$persistenceFacade->create('Package', BUILDDEPTH_SINGLE);
@@ -722,7 +724,7 @@ class UwmUtil {
 				$oid = self::$referencedNodes[0];
 
 				if (!self::isExportedNode($oid)) {
-					$node = &$persistenceFacade->load($oid, BUILDDEPTH_SINGLE);
+					$node = $persistenceFacade->load($oid, BUILDDEPTH_SINGLE);
 					$package->addChild($node);
 					self::registerExportedNode($node);
 				}
@@ -740,7 +742,7 @@ class UwmUtil {
 		private static function translateNode(&$node) {
 			$nodes = array ($node);
 			if (self::$language) {
-				$localization = &Localization::getInstance();
+				$localization = Localization::getInstance();
 				$localization->loadTranslation($node, self::$language, true, false);
 				NodeUtil::translateValues($nodes, self::$language);
 			}
