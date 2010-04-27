@@ -27,6 +27,22 @@ class CWMControllerDelegate
 	 */
 	function postInitialize(&$controller)
 	{
+		$request = $controller->getRequest();
+		if ($request->getAction() == 'associate' || $request->getAction() == 'disassociate')
+		{
+			// replace remote oids by proxy oids
+			$oid = $request->getValue('oid');
+			$oids = $this->replaceRemoteOIDs(array($oid));
+			$request->setValue('oid', join(',', $oids));
+			$associateOIDs = split(',', $request->getValue('associateoids'));
+			$associateOIDs = $this->replaceRemoteOIDs($associateOIDs);
+			$request->setValue('associateoids', join(',', $associateOIDs));
+			// tell the PersistenceFacade to not resolve proxies
+			$persistenceFacade = PersistenceFacade::getInstance();
+			if ($persistenceFacade instanceof RemoteCapablePersistenceFacadeImpl) {
+				$persistenceFacade->setResolveProxies(false);
+			}
+		}
 	}
 	/**
 	 * @see ControllerDelegate::validate()
@@ -63,6 +79,15 @@ class CWMControllerDelegate
 	 */
 	function postExecute(&$controller, $result)
 	{
+		$request = $controller->getRequest();
+		if ($request->getAction() == 'associate' || $request->getAction() == 'disassociate')
+		{
+			// reset PersistenceFacade state
+			$persistenceFacade = PersistenceFacade::getInstance();
+			if ($persistenceFacade instanceof RemoteCapablePersistenceFacadeImpl) {
+				$persistenceFacade->setResolveProxies(true);
+			}
+		}
 		return $result;
 	}
 	/**
@@ -78,8 +103,10 @@ class CWMControllerDelegate
 	 */
 	function containsRemoteOID($oids)
 	{
-		foreach ($oids as $oid) {
-			if (PersistenceFacade::isValidOID($oid)) {
+		foreach ($oids as $oid)
+		{
+			if (PersistenceFacade::isValidOID($oid))
+			{
 				$prefix = PersistenceFacade::getOIDParameter($oid, 'prefix');
 				if (strlen($prefix) > 0) {
 					return true;
@@ -87,6 +114,29 @@ class CWMControllerDelegate
 			}
 		}
 		return false;
+	}
+	/**
+	 * Replace all remote object ids in a list by it's local proxy's oid
+	 * @param $oids The list of object ids
+	 * @return A list of local object ids
+	 */
+	function replaceRemoteOIDs($oids)
+	{
+		// check if the PersistenceFacade implementation is capable of 
+		// resolving remote object ids
+		$persistenceFacade = PersistenceFacade::getInstance();
+		if (!($persistenceFacade instanceof RemoteCapablePersistenceFacadeImpl)) {
+			return $oids;
+		}
+		// result the object ids
+		$result = array();
+		foreach ($oids as $oid)
+		{
+			if (PersistenceFacade::isValidOID($oid)) {
+				$result[] = $persistenceFacade->getProxyOID($oid);
+			}
+		}
+		return $result;
 	}
 }
 ?>
