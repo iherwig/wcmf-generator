@@ -66,8 +66,13 @@ $application->initialize('include/', 'config.ini', 'LoginController', '', 'login
 // process the requested action
 $serializedRequest = base64_decode($arguments[0]);
 $request = unserialize($serializedRequest);
-Log::debug("Process remote request:\n".$request->toString(), "cli");
+if ($request) {
+  Log::debug("Process remote request:\n".$request->toString(), "cli");
 
-$response = ActionMapper::processAction($request);
-Log::debug("Response:\n".$response->toString(), "cli");
+  $response = ActionMapper::processAction($request);
+  Log::debug("Response:\n".$response->toString(), "cli");
+}
+else {
+  echo "Error: Invalid request.";
+}
 ?>
