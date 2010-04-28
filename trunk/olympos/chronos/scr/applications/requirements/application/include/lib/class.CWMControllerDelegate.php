@@ -133,7 +133,13 @@ class CWMControllerDelegate
 		foreach ($oids as $oid)
 		{
 			if (PersistenceFacade::isValidOID($oid)) {
-				$result[] = $persistenceFacade->getProxyOID($oid);
+				$proxy = $persistenceFacade->getProxyObject($oid);
+				if ($proxy) {
+					$result[] = $proxy->getOID();
+				}
+				else {
+					$result[] = $oid;
+				}
 			}
 		}
 		return $result;
