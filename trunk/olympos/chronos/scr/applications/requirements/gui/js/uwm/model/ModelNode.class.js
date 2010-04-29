@@ -136,6 +136,21 @@ uwm.model.ModelNode.prototype.getOid = function() {
 	return this.oid;
 }
 
+/**
+ * Get the proxy object's oid, if the object is a remote object.
+ * If the object is local, the oid will be returned.
+ * @note The server sends a property _proxyOid for each remote object.
+ * @return oid
+ */
+uwm.model.ModelNode.prototype.getProxyOid = function() {
+	if (this.data._proxyOid) {
+		return this.data._proxyOid;
+	}
+	else {
+		return this.oid;
+	}
+}
+
 uwm.model.ModelNode.prototype.getName = function() {
 	var result = this.data.Name;
 	
