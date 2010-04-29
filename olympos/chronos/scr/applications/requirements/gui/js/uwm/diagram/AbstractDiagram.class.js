@@ -407,6 +407,11 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObjects = function() {
 
 uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject) {
 	var figure = this.figures.get(modelObject.getOid());
+	if (figure == undefined) {
+		// maybe the object is a remote object.
+		// in this case the figure was stored under the proxy object's oid
+		figure = this.figures.get(modelObject.getProxyOid());
+	}
 	
 	figure.load(modelObject, this);
 	
