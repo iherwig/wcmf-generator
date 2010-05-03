@@ -580,18 +580,20 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 
 uwm.diagram.AbstractDiagram.prototype.reestablishExistingClass = function(newObject) {
 	var childOids = newObject.getChildOids();
-	var modelContainer = uwm.model.ModelContainer.getInstance();
-	var figure = this.figures.get(newObject.getOid());
-	
-	for ( var i = 0; i < childOids.length; i++) {
-		var currChild = modelContainer.getByOid(childOids[i]);
+	if (childOids) {
+		var modelContainer = uwm.model.ModelContainer.getInstance();
+		var figure = this.figures.get(newObject.getOid());
 		
-		if (currChild instanceof uwm.model.AttributeObject) {
-			var propertyGraphics = new uwm.graphics.figure.Attribute(currChild.getLabel(), currChild);
-			figure.getGraphics().addChildElement(propertyGraphics, true);
-		} else if (currChild instanceof uwm.model.OperationObject) {
-			var operationGraphics = new uwm.graphics.figure.Operation(currChild.getLabel(), currChild);
-			figure.getGraphics().addChildElement(operationGraphics, true);
+		for ( var i = 0; i < childOids.length; i++) {
+			var currChild = modelContainer.getByOid(childOids[i]);
+			
+			if (currChild instanceof uwm.model.AttributeObject) {
+				var propertyGraphics = new uwm.graphics.figure.Attribute(currChild.getLabel(), currChild);
+				figure.getGraphics().addChildElement(propertyGraphics, true);
+			} else if (currChild instanceof uwm.model.OperationObject) {
+				var operationGraphics = new uwm.graphics.figure.Operation(currChild.getLabel(), currChild);
+				figure.getGraphics().addChildElement(operationGraphics, true);
+			}
 		}
 	}
 }
