@@ -1,11 +1,13 @@
 <workflow>
+	<property file="${propertyFile}"/>
+
 	<!-- metamodel setup -->
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
 
 	<bean id="uml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
 	
 	<bean id="Chronos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
-		<profile value="/home/nist/Desktop/meregio-ea/chronos.profile.uml"/>
+		<profile value="${profileUmlFile}"/>
 	</bean>
 	
 	<bean id="xmlSchema" class="org.openarchitectureware.xsd.XSDMetaModel">
@@ -13,7 +15,7 @@
 	</bean>
 	
 	<component class="oaw.emf.XmiReader">
-		<modelFile value="/home/nist/Desktop/meregio-ea/meregio-part.uml" />
+		<modelFile value="${modelUmlFile}" />
 		<outputSlot value="localModel" />
 	</component>
 	
@@ -28,6 +30,6 @@
 	<component class="org.openarchitectureware.xsd.XMLWriter">
 		<metaModel idRef="xmlSchema" />
 		<modelSlot value="schema" />
-		<uri value="target/schema.xsd" />
+		<uri value="${targetDir}/schema.xsd" />
 	</component>
 </workflow>
