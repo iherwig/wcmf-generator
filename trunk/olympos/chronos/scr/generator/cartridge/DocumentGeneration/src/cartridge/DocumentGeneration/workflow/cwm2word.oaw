@@ -5,6 +5,7 @@
 	<property name="inputType" value="odt" />
 	<property name="exportFormat" value="doc" />
 	<property name="exportImages" value="true" />
+	<property name="importMultiplicity" value="true" />
 
 	<property file="${basePath}/cartridge/DocumentGeneration/workflow/cwm2word.default.properties" />
 
@@ -34,6 +35,14 @@
 		<outputSlot value="ouranosProfile"/>
 	 </component>
 
+	<if cond="${importMultiplicity}">
+		<!-- load CIM reference model -->
+		<component class="oaw.emf.XmiReader">
+			<modelFile value="${basePath}/metamodel/cim.uml"/>
+			<outputSlot value="cimmodel"/>
+		</component>
+	</if>
+
 	<component class="oaw.xtend.XtendComponent">
 		<metaModel idRef="cwm" />
 		<metaModel id="Chronos" class="oaw.uml2.profile.ProfileMetaModel">
@@ -48,6 +57,20 @@
 		<outputSlot value="uml2model" />
 		<globalVarDef name="basePath" value="'${basePath}'" />
 	</component>
+
+	<if cond="${importMultiplicity}">
+		<!-- apply multiplicities from CIM reference model-->
+		<component class="oaw.xtend.XtendComponent">
+			<metaModel idRef="cwm" />
+			<metaModel idRef="uml" />
+			<metaModel idRef="Chronos" />
+			<metaModel idRef="Ouranos" />
+			
+			<invoke value="cartridge/UmlConnector/importMultiplicity::importMultiplicity(uml2model, cimmodel)" />
+	
+			<outputSlot value="uml2model" />
+		</component>
+	</if>
 
 <!--
 	<component class="oaw.emf.XmiReader">
