@@ -37,11 +37,32 @@ Void addDefaults(uml::Model this) :
 ;
 
 Void doTransformations(uml::Model this):
-	this.allOwnedElements().typeSelect(ChiNode).select(e|e.superClass.isEmpty).addNodeSuperClass() ->
-	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.association == null).addStereotype() ->
-	this.allOwnedElements().typeSelect(uml::Association).select(e|e.memberEnd.forAll(f|f.isNavigable() == false)).addNavigability() ->
+	this.addSuperclass() ->
+	this.addStereotype() ->
+	this.addNavigability() ->
 	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
 		postProcessNodes(ApplicationPackageAbsolute(this))
+;
+
+Void addSuperclassStereotypeNavigability(uml::Model this):
+	this.addSuperclass() ->
+	this.addStereotype() ->
+	this.addNavigability()
+;
+
+Void addSuperclass(uml::Model this):
+	info("Adding superclass ...") ->
+	this.allOwnedElements().typeSelect(ChiNode).select(e|e.superClass.isEmpty).addNodeSuperClass()
+;
+
+Void addStereotype(uml::Model this):
+	info("Adding stereotype ...") ->
+	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.association == null).addStereotype()
+;
+
+Void addNavigability(uml::Model this):
+	info("Adding navigability ...") ->
+	this.allOwnedElements().typeSelect(uml::Association).select(e|e.memberEnd.forAll(f|f.isNavigable() == false)).addNavigability()
 ;
 
 /**
@@ -55,7 +76,7 @@ Void addNodeSuperClass(ChiNode this) :
 	let superClass = this.getModel().allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first():
 	superClass != this ? (
 		let generalization = new uml::Generalization:
-		info("Add superClass " + superClass.name + " to: " + this.name) ->
+		info("Adding SuperClass " + superClass.name + " to: " + this.name) ->
 		
 		generalization.setGeneral(superClass) ->
 		generalization.setSpecific(this)
@@ -70,6 +91,7 @@ Void addStereotype(uml::Property this):
 ;
 
 Void addNavigability(uml::Association this):
+	info("Adding navigability to " + this.memberEnd.first().type.name + " - " + this.memberEnd.last().type.name) ->
 	this.memberEnd.setIsNavigable(true)
 ;
 
