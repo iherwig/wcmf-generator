@@ -35,7 +35,7 @@
 package «fullQualifiedPackage»
 «ENDIF-»
 
-	«EXPAND Import FOR this-»
+	«EXPAND imports FOR this-»
 «ENDREM»
 package com.eenergy.meregio.domain
 
@@ -55,260 +55,249 @@ import javax.xml.bind.annotation.XmlIDREF
  * «this.getComment("\n * ")»
  */
 @XmlAccessorType(XmlAccessType.NONE)
-«REM» avoiding abstract bug in Grails«IF this.isAbstract»abstract «ENDIF-»«ENDREM-»
+«REM» avoiding abstract bug in Grails«IF this.isAbstract»abstract «ENDIF-»«ENDREM»
 class «name-» 
 «IF !this.superClass.select(e|!e.isLibraryClass()).isEmpty» extends «this.superClass.first().name»«ENDIF»
 {
-	«REM» Attributes «ENDREM-»
-«EXPAND Attribute FOREACH this.getOwnChiAttributes()-»
+«EXPAND attributes FOR this-»
 
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Attributes"» 
-	/* put additional attributes here */
-	«ENDPROTECT»
+«EXPAND complexAttributes FOR this-»
 
-	«REM» Every property where e reference for navigation is stored «ENDREM-»
-«EXPAND ReferenceProperties FOR this-»
+«EXPAND associations FOR this-»
 
-	«REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM-»
-«EXPAND ManyToOneParents FOR this-»
+«EXPAND belongsTo FOR this-»
 
-«EXPAND ToManyChildren FOR this-»					
+«EXPAND hasMany FOR this-»
 
-	«REM» MappedBy for handling multiple relations between the same Classes «ENDREM-»
-«EXPAND MappedBy FOR this-»
+«EXPAND mappedBy FOR this-»
 					
-	«REM» Mapping «ENDREM-»
-«EXPAND Mapping FOR this-»
+«EXPAND mapping FOR this-»
 
-	«REM» Constraints «ENDREM-»
-«EXPAND Constraints FOR this-»
+«EXPAND constraints FOR this-»
 
-	«REM» Methods «ENDREM-»
-«EXPAND Method(this) FOREACH ownedOperation-»
+«EXPAND methods FOR this-»
 
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Methods"» 
-	/* put additional methods here */
-	«ENDPROTECT»
 }
 	«ENDFILE»
 	«REM»«ENDLET»«ENDREM»
 «ENDDEFINE»	
 
-«DEFINE Import FOR Chronos::ChiNode-»
-	«FOREACH this.getImportedClasses() AS import-»
-import «IF !import.getNearestPackage().getPackageName().isNullOrEmpty()»«import.getNearestPackage().getPackageName()».«ENDIF-»
-«import.name»;
+«DEFINE imports FOR Chronos::ChiNode-»
+	«FOREACH this.getImportedClasses() AS currImport-»
+import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«currImport.getNearestPackage().getPackageName()».«ENDIF-»
+«currImport.name»;
 	«ENDFOREACH-»
 «ENDDEFINE»
 
-«DEFINE MappedBy FOR ChiNode-»
-«LET ((List[uml::Property]) {}
-	.addAll(this.getNavigableParentNodes())
-	.addAll(this.getNavigableChildNodes())
-	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNavigableParentNodes())
-	.addAll(((List[Chronos::ChiNode]) this.getSuperClassesRecursive()).getNavigableChildNodes())
-	).select(e|e.isNavigable() && e.getOtherEnd().isNavigable())
-	AS relatives-»
-«IF relatives.size > 0-»
-	static mappedBy = [
-«FOREACH relatives AS relative SEPARATOR ","»
-		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»"«""-»
-«ENDFOREACH»
-
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "MappedBy"» 
-		/* put additional mappings here */
-		«ENDPROTECT»
-	]
-«ENDIF-»
-«ENDLET-»
-«ENDDEFINE»
-
-«DEFINE Mapping FOR ChiNode-»
-	static mapping = {
-		tablePerHierarchy false
-		tablePerSubclass true
-«LET this.getNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
-«LET this.getNavigableParentNodes().select(e|e.isMultivalued() && e.getOtherEnd().isMultivalued()) AS parents-»
-«LET ((List[uml::Property]) {}.addAll(children).addAll(parents)) AS relatives-»
-«FOREACH relatives AS relative»
-«LET relative.getRoleName().toFirstLower() AS name-»
-«IF relative.aggregation == AggregationKind::shared-»
-			«name» cascade: "persist,save-update"
-«ELSE-»
-			«name» cascade: "none"
-«ENDIF-»
-«ENDLET-»
-«ENDFOREACH»
-«ENDLET-»
-«ENDLET-»
-«ENDLET-»
-
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Mappings"» 
-		/* put additional mappings here */
-		«ENDPROTECT»
-	}
-«ENDDEFINE»	
-
-«REM» simple reference «ENDREM»
-«DEFINE ReferenceProperties FOR ChiNode-»
-«LET {}
-	.addAll(this.getNavigableParentNodes())
-	.addAll(this.getNavigableChildNodes())
-	.select(e|((uml::Property) e).association.isOneToOneAssociation()) AS others-»
-«IF others.size > 0»
-«FOREACH others AS other-»
+«DEFINE attributes FOR Chronos::ChiNode-»
+	«FOREACH this.getOwnChiAttributes() AS currAttribute-»
 	/**
-	 * «((uml::Property) other).getComment("\n	 * ")»
+	 * «currAttribute.getComment("\n	 * ")»
 	 */
-	@XmlElement
-	«IF !this.isContainer()»@XmlIDREF«ENDIF»
-	«((uml::Property) other).type.name.sanitizeType()» «((uml::Property) other).getRoleName().toFirstLower().sanitizeType()»
-«ENDFOREACH-»
-«ENDIF-»
-«ENDLET-»
-«ENDDEFINE»
+	@XmlElement«IF currAttribute.lowerBound() > 0»(required = true)«ENDIF»
+	«IF currAttribute.name == "mRID"»@XmlID«ENDIF»
+	«currAttribute.type.name.sanitizeType()»«IF currAttribute.isMultivalued()»[]«ENDIF» «currAttribute.name»«IF !currAttribute.^default.isNullOrEmpty()» = «currAttribute.type.getValuePrefix()»«currAttribute.^default»«currAttribute.type.getValuePostfix()»«ENDIF»
+	«ENDFOREACH»	
 
-«REM» many-to-one parents (1:1 relations are handled as ReferenceProperty)«ENDREM»
-«DEFINE ManyToOneParents FOR ChiNode-»
-«LET ((List[uml::Property]) {}
-		.addAll(this.getNavigableParentNodes()) //.select(e|!e.association.isOneToOneAssociation()))
-		.addAll(this.getNavigableChildNodes().select(e|
-			{}.addAll(((Chronos::ChiNode) e.type).getSuperClassesRecursive()).add(e.type).contains(this.getFirstManyToManyChild((Chronos::ChiNode) e.type))
-		))
-	)
-	AS parents -»
-«LET ((List[Chronos::ChiNode]) {}
-		.addAll(this.getModel().allOwnedElements().typeSelect(Chronos::ChiValue).select(e|e.type == this).class.toSet())
-	)
-	AS owners -»
-«parents.size > 0 && owners.size > 0 ? (
-	warn("Both parents and owners exist for " + this.name) ->
-	""
-) : (
-	""
-)-»
-«IF parents.size > 0-»
-	«FOREACH parents.select(e|e.upperBound() == 1 || e.getOtherEnd().upperBound() == 1) AS parent»
-	@XmlElement
-	«IF !this.isContainer()»@XmlIDREF«ENDIF»
-	«parent.type.name.sanitizeType()» «parent.getRoleName().toFirstLower()»
-	«ENDFOREACH»
-	
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "belongsToLists"» 
-	/* put additional lists here */
+	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Attributes"» 
+	/* put additional attributes here */
 	«ENDPROTECT»
-
-	static belongsTo = [
-	«FOREACH parents AS parent SEPARATOR ","»
-		«parent.getRoleName().toFirstLower()»: «parent.type.name.sanitizeType()-»
-	«ENDFOREACH»
-	
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "belongsToParents"» 
-		/* put additional belongsTo here */
-		«ENDPROTECT»
-	]
-«ELSEIF owners.size > 0-»
-	static belongsTo = [
-	«FOREACH owners AS owner SEPARATOR ","»
-		«owner.name.sanitizeType()-»
-	«ENDFOREACH»
-	
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "belongsToOwners"» 
-		/* put additional owners here */
-		«ENDPROTECT»
-	]
-«ENDIF-»
-«ENDLET-»
-«ENDLET-»
 «ENDDEFINE»
 
-«REM» one-to-many children (1:1 relations are handled as ReferenceProperty)«ENDREM»
-«DEFINE ToManyChildren FOR ChiNode-»
-«LET this.getNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
-«LET this.getNavigableParentNodes().select(e|e.isMultivalued() && e.getOtherEnd().isMultivalued()) AS parents-»
-«LET ((List[uml::Property]) {}.addAll(children).addAll(parents)) AS relatives-»
-«IF relatives.size > 0»
-«FOREACH children AS child-»
-	@XmlElement
-	«IF !this.isContainer()»@XmlIDREF«ENDIF»
-	Set<«child.type.name.sanitizeType()»> «child.getRoleName().toFirstLower()»
-«ENDFOREACH-»
+«DEFINE complexAttributes FOR Chronos::ChiNode-»
+	«LET (
+		(List[uml::Property]) {}
+		.addAll(this.attribute.select(e|e.association == null))
+		.removeAll(this.getOwnChiAttributes())
+	)
+	AS attributes-»
+	«FOREACH attributes AS currAttribute-»
+	/**
+	 * «currAttribute.getComment("\n	* ")»
+	 */
+	@XmlElement«IF currAttribute.lowerBound() > 0»(required = true)«ENDIF»
+	«currAttribute.type.name.sanitizeType()»«IF currAttribute.isMultivalued()»[]«ENDIF» «currAttribute.name»
+	«ENDFOREACH»
+	«ENDLET-»
+«ENDDEFINE»
 
-«FOREACH parents AS parent-»
-	@XmlElement
+«DEFINE associations FOR Chronos::ChiNode-»
+	«LET (
+		(List[uml::Property]) {}
+		.addAll(this.getOwnAssociationEnds())
+	).select(e|e.isNavigable())
+	AS associations-»
+	«FOREACH associations AS currAssociation-»
+	/**
+	 * «currAssociation.getComment("\n	* ")»
+	 */
+	@XmlElement«IF currAssociation.lowerBound() > 0»(required = true)«ENDIF»
 	«IF !this.isContainer()»@XmlIDREF«ENDIF»
-	Set<«parent.type.name.sanitizeType()»> «parent.getRoleName().toFirstLower()»
-«ENDFOREACH»
+	«IF currAssociation.isMultivalued()»Set<«currAssociation.type.name.sanitizeType()»>«ELSE»«currAssociation.type.name.sanitizeType()»«ENDIF» «currAssociation.getRoleName().toFirstLower()»
+	
+	«ENDFOREACH»
+	«ENDLET-»
+«ENDDEFINE»
 
+«DEFINE hasMany FOR Chronos::ChiNode-»
+	«LET (
+		(List[uml::Property]) {}
+		.addAll(this.getOwnAssociationEnds())
+	).select(e|e.isNavigable() && e.isMultivalued())
+	AS associations-»
+	«IF associations.size > 0»
 	static hasMany = [
-«FOREACH relatives AS relative SEPARATOR ","»
-		«relative.getRoleName().toFirstLower()»: «relative.type.name.sanitizeType()-»
-«ENDFOREACH»
+	«FOREACH associations AS currAssociation SEPARATOR ", "»
+		«currAssociation.getRoleName().toFirstLower()»: «currAssociation.type.name.sanitizeType()-» 
+	«ENDFOREACH»
 
 		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "hasMany"» 
 		/* put additional hasMany here */
 		«ENDPROTECT»
 	]
-«ENDIF-»
-«ENDLET-»
-«ENDLET-»
-«ENDLET-»
+	«ENDIF»
+
+	«ENDLET-»
 «ENDDEFINE»
 
-«REM» fill constraints for attributes  «ENDREM»
-«DEFINE Constraints FOR ChiNode-»
-«LET ((List[uml::Property]) {}
-	.addAll(this.getNavigableParentNodes())
-	.addAll(this.getNavigableChildNodes())
-	.addAll(this.getOwnChiAttributes()))
- AS constraintAttributes-»
-«IF constraintAttributes.size > 0-»
+«DEFINE belongsTo FOR Chronos::ChiNode-»
+	«LET ((List[uml::Property]) {}
+		.addAll(this.getNavigableParentNodes())
+		.addAll(this.getOwnAssociationEnds().select(e|
+			{}
+				.addAll(((Chronos::ChiNode) e.type).getSuperClassesRecursive())
+				.add(e.type)
+			.contains(this.getFirstManyToManyChild((Chronos::ChiNode) e.type))
+			|| e.aggregation != uml::AggregationKind::none
+		))
+	)
+	AS parents -»
+	«LET ((List[Chronos::ChiNode]) {}
+		.addAll(this.getModel().allOwnedElements().typeSelect(Chronos::ChiValue).select(e|e.type == this).class.toSet())
+	)
+	AS owners -»
+	«parents.size > 0 && owners.size > 0 ? (
+		warn("Both parents and owners exist for " + this.name) ->
+		""
+	) : (
+		""
+	)-»
+	«IF parents.size > 0 || owners.size > 0»
+	static belongsTo = [
+	«IF parents.size > 0-»
+		«FOREACH parents AS parent SEPARATOR ","»
+		«parent.getRoleName().toFirstLower()»: «parent.type.name.sanitizeType()-»
+		«ENDFOREACH»
+	«ELSEIF owners.size > 0-»
+		«FOREACH owners AS owner SEPARATOR ","»
+		«owner.name.sanitizeType()-»
+		«ENDFOREACH»
+	«ENDIF-»
+	
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "belongsTo"» 
+		/* put additional belongsTo here */
+		«ENDPROTECT»
+	]
+	«ENDIF»
+	«ENDLET-»
+	«ENDLET-»
+«ENDDEFINE»»		
+	
+«DEFINE mappedBy FOR ChiNode-»
+	«LET (
+		(List[uml::Property]) {}
+		.addAll(this.getOwnAssociationEnds())
+		).select(e|e.isNavigable() && e.getOtherEnd().isNavigable())
+	AS relatives-»
+	«IF relatives.size > 0-»
+	static mappedBy = [
+		«FOREACH relatives AS relative SEPARATOR ","»
+		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»"«""-»
+		«ENDFOREACH»
+
+		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "MappedBy"» 
+		/* put additional mappings here */
+		«ENDPROTECT»
+	]
+	«ENDIF-»
+	«ENDLET-»
+«ENDDEFINE»
+
+«DEFINE mapping FOR Chronos::ChiNode-»
+	static mapping = {
+		tablePerHierarchy false
+		tablePerSubclass true
+	«LET this.getNavigableChildNodes().select(e|!e.association.isOneToOneAssociation()) AS children-»
+		«LET this.getNavigableParentNodes().select(e|e.isMultivalued() && e.getOtherEnd().isMultivalued()) AS parents-»
+			«LET ((List[uml::Property]) {}.addAll(children).addAll(parents)) AS relatives-»
+				«FOREACH relatives AS relative»
+					«LET relative.getRoleName().toFirstLower() AS name-»
+						«IF relative.aggregation == AggregationKind::shared-»
+			«name» cascade: "persist,save-update"
+						«ELSE-»
+			«name» cascade: "none"
+						«ENDIF-»
+					«ENDLET-»
+				«ENDFOREACH»
+			«ENDLET-»
+		«ENDLET-»
+	«ENDLET-»
+
+	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Mappings"» 
+		/* put additional mappings here */
+	«ENDPROTECT»
+	}
+«ENDDEFINE»	
+
+«DEFINE constraints FOR Chronos::ChiNode-»
+	«LET (
+		(List[uml::Property]) {}
+		.addAll(this.getNavigableParentNodes())
+		.addAll(this.getNavigableChildNodes())
+		.addAll(this.getOwnChiAttributes())
+		.addAll(this.attribute)
+	).toSet().toList()
+	AS constraintAttributes-»
+	«IF constraintAttributes.size > 0-»
 	static constraints = {
-	«FOREACH constraintAttributes AS c-»
-		«LET {
-			c.hasRestrictionsMatch() ? "matches: \"" + c.getTaggedValue("Chronos::ChiValue", "restrictions_match") + "\"" : null,
-			c.isNullable()? "nullable: true" : "nullable: true" /*TODO: temporary reset, second one should be false*/,
-			c.association != null && c.lowerBound() > 0 ? "minSize: " + c.lowerBound() : null,
-			c.association != null && c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
-		}.select(e|e != null)
-		AS constraints»
+		«FOREACH constraintAttributes AS c-»
+			«LET {
+				c.hasRestrictionsMatch() ? "matches: \"" + c.getTaggedValue("Chronos::ChiValue", "restrictions_match") + "\"" : null,
+				c.isNullable()? "nullable: true" : "nullable: true" /*TODO: temporary reset, second one should be false*/,
+				c.association != null && c.lowerBound() > 0 ? "minSize: " + c.lowerBound() : null,
+				c.association != null && c.upperBound() >= 0 ? "maxSize: " + c.upperBound() : null
+			}.select(e|e != null)
+			AS constraints»
 			«c.getPropertyName()»(
 				«FOREACH constraints AS constraint SEPARATOR ", "»«constraint»«ENDFOREACH»
 			)
-		«ENDLET-»
-	«ENDFOREACH-»
+			«ENDLET-»
+		«ENDFOREACH-»
 
 		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "constraints"» 
 		/* put additional constraints here */
 		«ENDPROTECT»
 	}
-«ENDIF-»
-«ENDLET-»
+	«ENDIF-»
+	«ENDLET-»
 «ENDDEFINE»
 
-«REM» simply attribute «ENDREM»
-«DEFINE Attribute FOR ChiValue-»
+«DEFINE methods FOR Chronos::ChiNode-»
+	«FOREACH this.getOperations() AS currOperation-»
 	/**
-	 * «this.getComment("\n	 * ")»
+	 * «currOperation.getComment("\n	 * ")»
 	 */
-	@XmlElement«IF this.lowerBound() > 0»(required = true)«ENDIF»
-	«IF this.name == "mRID"»@XmlID«ENDIF»
-	«this.type.name.sanitizeType()»«IF this.isMultivalued()»[]«ENDIF» «name»«IF !this.^default.isNullOrEmpty()» = «this.type.getValuePrefix()»«this.^default»«this.type.getValuePostfix()»«ENDIF»
-	
-«ENDDEFINE»
-
-«REM» simple method wiequired=true)
-th protected region «ENDREM»
-«DEFINE Method(Class clazz) FOR Operation-»
-	/**
-	 * «this.getComment("\n	 * ")»
-	 */
-	«this.returnResult().first().type.name.sanitizeType()» «name»() {
+	«currOperation.returnResult().first().type.name.sanitizeType()» «currOperation.name»() {
 		// Here you are able to implement your own code
 		«PROTECT CSTART '/*' CEND '*/' ID this.getId()»
 					
 		«ENDPROTECT»
-	} 
+	}
+	«ENDFOREACH» 
+
+	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Methods"» 
+	/* put additional methods here */
+	«ENDPROTECT»
 «ENDDEFINE»
 
 «DEFINE domainEnum FOR uml::Enumeration»

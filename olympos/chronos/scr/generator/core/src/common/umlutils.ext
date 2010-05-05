@@ -184,3 +184,7 @@ String getHash(uml::Element this):
 List[uml::Property] getOwnEnds(uml::Type this):
 	this.getAssociations().memberEnd.select(e|e.type == this)
 ;
+
+List[uml::Property] getOwnAssociationEnds(uml::Classifier this):
+	this.getAssociations().memberEnd.select(e|e.type == this).getOtherEnd()
+;

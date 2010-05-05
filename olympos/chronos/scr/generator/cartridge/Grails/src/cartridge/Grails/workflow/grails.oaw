@@ -39,26 +39,6 @@
 		<invoke value="common/nameNormalizer::normalizeNameWithoutPackage(sourceModel)" />
 	</component>
 
-	<!-- Check constraints before model 2 model transformation -->
-	<if cond="${doCheck}">
-		<component class="oaw.check.CheckComponent">
-		
-			<!-- Global variables used by the check -->
-			<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
-			<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
-			<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
-			<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
-			<globalVarDef name="containerNode" value="'${containerNode}'"/>
-
-			<metaModel idRef="mmUml2"/>
-			<metaModel idRef="mmChronos"/>
-			<checkFile value="${preCheckFile}"/>
-			<emfAllChildrenSlot value="sourceModel"/>
-			<abortOnError value="true"/>
-		</component>
-	</if>
-
-	<!-- Prepare the model for Chronos and store it into a slot named 'transformedModel' -->
 	<component id="m2m" class="oaw.xtend.XtendComponent">
 
 		<!-- Global variables used by the transformation -->
@@ -72,53 +52,12 @@
 
 		<metaModel idRef="mmUml2"/>
 		<metaModel idRef="mmChronos"/>
-		<invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(sourceModel, chronosProfileModel)"/>
-
-		<outputSlot value="transformedModel"/>
-	</component>
-		
-	<component id="renameProperties" class="oaw.xtend.XtendComponent">
-
-		<!-- Global variables used by the transformation -->
-		<globalVarDef name="ModelFile" value="'${sourceModelFile}'"/>
-		<globalVarDef name="ProfileFile" value="'${chronosProfileUri}'"/>
-		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
-		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
-		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
-		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
-		<globalVarDef name="containerNode" value="'${containerNode}'"/>
-
-		<metaModel idRef="mmUml2"/>
-		<metaModel idRef="mmChronos"/>
-		<invoke value="cartridge::ChiCmf::extensions::m2m::renameProperties(sourceModel)"/>
+		<invoke value="cartridge::ChiCmf::extensions::m2m::addSuperclassStereotypeNavigability(sourceModel)"/>
 
 		<outputSlot value="transformedModel"/>
 	</component>
 
-	<!-- Check constraints after model 2 model transformation -->
-	<if cond="${doCheck}">
-		<component class="oaw.check.CheckComponent">
-		
-			<!-- Global variables used by the check -->
-			<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
-			<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
-			<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
-			<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
-			<globalVarDef name="containerNode" value="'${containerNode}'"/>
 
-			<metaModel idRef="mmUml2"/>
-			<metaModel idRef="mmChronos"/>
-			<checkFile value="${postCheckFile}"/>
-			<emfAllChildrenSlot value="transformedModel"/>
-			<abortOnError value="true"/>
-		</component>
-	</if>
-
-	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
-		<inputSlot value="sourceModel" />
-		<outPath value="${normalizedModelPath}" />
-	</component>
-	
 	<!-- generate domain classes -->
 	<component class="org.openarchitectureware.xpand2.Generator">
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
