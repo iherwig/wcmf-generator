@@ -12,7 +12,7 @@
 		<javac encoding="utf-8" srcdir="./src" destdir="${build.absolute.dir}" debug="${debug}" excludesfile="compile-excludes">
 			<classpath>
 				<path refid="lib.path"/>
-				<fileset dir="${imageexporter.redist.libdir}" includes="**/*.jar"/>
+				<fileset dir="${imageexporter.libdir}" includes="**/*.jar"/>
 				<fileset dir="${imageexporter.redist.dir}/" includes="**/*.jar"/>
 			</classpath>
 		</javac>
