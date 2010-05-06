@@ -7,19 +7,22 @@ extension common::cimUml;
 
 extension cartridge::XmlSchema::domainClass;
 extension cartridge::XmlSchema::domainEnum;
+extension cartridge::XmlSchema::domainSimple;
 
-xmlSchema::SchemaType xmlSchema(uml::Model this, String rootClassName, String targetNamespace):
+xmlSchema::SchemaType xmlSchema(uml::Model this, String rootElements, String targetNamespace):
 	//(new xmlSchema::SchemaType).a
 	//(new xmlSchema::TopLevelAttribute).setN
 
 	let xsd = new xmlSchema::SchemaType:
+	let rootElementList = rootElements.split(","):
 
 	xsd.setTargetNamespace(targetNamespace) ->
 	
-	xsd.complexType.addAll(this.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().convertToXsd(targetNamespace, rootClassName)) ->
+	xsd.complexType.addAll(this.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().convertToXsd(targetNamespace, rootElementList)) ->
 	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::Enumeration).convertToXsd(targetNamespace)) ->
+	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::PrimitiveType).select(e|e.name.matches("[a-zA-Z0-9-]+")).convertToXsd(targetNamespace)) ->
 	
-	xsd.element.add(getRootElement(rootClassName, targetNamespace)) ->
+	xsd.element.addAll(rootElementList.getRootElement(targetNamespace)) ->
 		
 	xsd
 ;
