@@ -24,7 +24,7 @@
 			</fileset>
 		</copy>
 		<copy todir="${imageexporter.cartridge}/" verbose="false">
-			<fileset dir="${imageexporter.redist.dir}/">
+			<fileset dir="${imageexporter.dir}/">
 				<include name="Images/**/*.*"/>
 			</fileset>
 		</copy>
@@ -32,11 +32,8 @@
 	
 	<target name="copylibs">
 		<copy todir="${lib.absolute.build.dir}">
-			<fileset dir="${imageexporter.redist.dir}/">
+			<fileset dir="${imageexporter.dir}/">
 				<include name="*.jar"/>
-			</fileset>
-			<fileset dir="${imageexporter.libdir}/">
-				<include name="**/*.jar"/>
 			</fileset>
 		</copy>
 	</target>
