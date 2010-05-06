@@ -13,7 +13,7 @@
 			<classpath>
 				<path refid="lib.path"/>
 				<fileset dir="${imageexporter.libdir}" includes="**/*.jar"/>
-				<fileset dir="${imageexporter.redist.dir}/" includes="**/*.jar"/>
+				<fileset dir="${imageexporter.dir}/" includes="**/*.jar"/>
 			</classpath>
 		</javac>
 	</target>
