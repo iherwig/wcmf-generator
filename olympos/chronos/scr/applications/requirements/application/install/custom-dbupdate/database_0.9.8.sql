@@ -29,6 +29,7 @@ INSERT INTO `ControlFlow` (`fk_adcontrolflowtarget_id`, `fk_acontrolflowsource_i
 UPDATE `NMActivityActivityDecision` SET `fk_activity_id` = NULL WHERE `fk_activity_id` IS NOT NULL;
 
 # Activity -> ChiObject (ChiObject -> Activity not possible), Table NMActivityChiObject is already renamed to ObjectFlow !!!!
-UPDATE `ObjectFlow` SET `fk_chiobjectobjectflowtarget_id` = `fk_chiobject_id`, `fk_aobjectflowsource_id` = `fk_activity_id`;
+UPDATE `ObjectFlow` SET `fk_chiobjectobjectflowtarget_id` = `fk_chiobject_id` WHERE `fk_chiobject_id` IS NOT NULL;
+UPDATE `ObjectFlow` SET `fk_aobjectflowsource_id` = `fk_activity_id` WHERE `fk_activity_id` IS NOT NULL;
 
 ALTER TABLE `ControlFlow` CHANGE `id` `id` INT( 11 ) NOT NULL;
