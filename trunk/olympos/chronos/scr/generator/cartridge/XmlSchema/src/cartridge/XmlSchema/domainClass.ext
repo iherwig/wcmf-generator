@@ -7,7 +7,7 @@ extension common::util;
 
 extension cartridge::XmlSchema::common;
 
-xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamespace, String rootClassName):
+xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamespace, List[String] rootElements):
 	//(new xmlSchema::TopLevelComplexType).sequence.e
 	//(new xmlSchema::ComplexContentType).exten
 
@@ -19,7 +19,7 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 	result.setName(this.name) ->
 	result.setAbstract(this.isAbstract) ->
 	
-	sequence.element.addAll(this.attribute.convertProperty(targetNamespace, rootClassName)) ->
+	sequence.element.addAll(this.attribute.convertProperty(targetNamespace, rootElements)) ->
 	
 	this.superClass.size > 0 ? (
 		let complex = new xmlSchema::ComplexContentType:
@@ -38,7 +38,7 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 	result
 ;
 
-xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespace, String rootClassName):
+xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespace, List[String] rootElements):
 	//(new xmlSchema::LocalElement).t
 	
 	let result = new xmlSchema::LocalElement:
@@ -48,7 +48,7 @@ xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespa
 	result.setMinOccurs(this.getLower()) ->
 	result.setMaxOccurs(this.getUpper() != -1 ? this.getUpper() : parseToQName("unbounded")) ->
 	result.setName(this.nameOrType()) ->
-	result.setType(((this.association == null) || (this.class.name == rootClassName)) ? (
+	result.setType(((this.association == null) || (rootElements.contains(this.class.name))) ? (
 		this.name != "mRID" ? (
 			this.type.sanitizeXsdTypes(targetNamespace)
 		) : (
