@@ -77,4 +77,11 @@ uwm.Config.languages = [
 	['de', 'Deutsch']
 ];
 
+/**
+ * Enable custom features.
+ * 
+ * @type Boolean
+ */
+uwm.Config.enableCustomFeatures = true;
+
 uwm.Uwm.getInstance().processConfig();
