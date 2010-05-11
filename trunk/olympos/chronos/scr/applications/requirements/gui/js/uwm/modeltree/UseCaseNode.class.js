@@ -36,64 +36,66 @@ Ext.extend(uwm.modeltree.UseCaseNode, uwm.objecttree.Node);
 uwm.modeltree.UseCaseNode.prototype.buildContextMenu = function() {
 	var self = this;
 	
-	this.contextMenu = new Ext.menu.Menu({
-		items: [{
-			// use itemId instead of id, because this has to be only locally unique
-			itemId: uwm.modeltree.UseCaseNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
-			text: uwm.Dict.translate('Show in diagram'),
-			handler: function(item, e) {
-				self.showInDiagram(item, e);
-			}
-		}, {
-			text: uwm.Dict.translate('Show in hierarchy'),
-			handler: function(item, e) {
-				self.showInHierarchy(item, e);
-			}
-		}, {
-			// use itemId instead of id, because this has to be only locally unique
-			itemId: uwm.modeltree.UseCaseNode.CONTEXTMENU_SHOW_IN_GRID_ID,
-			text: uwm.Dict.translate('Show in grid'),
-			handler: function(item, e) {
-				self.showInGrid(item.e);
-			}
-		}, {
-			text: uwm.Dict.translate('Add activity set'),
-			handler: function(item, e) {
-				self.addActivitySet(item, e);
-			}
-		}, {
-			text: uwm.Dict.translate('Generate controller'),
-			handler: function(item, e) {
-				self.createController(item, e);
-			}
-		}, {
-			text: uwm.Dict.translate('Delete from model'),
-			handler: function(item, e) {
-				self.deleteFromModel(item, e);
-			}
-		}, {
-			text: uwm.Dict.translate("Reload"),
-			handler: function(item, e) {
-				self.reload();
-			}
-		}, {
-			text: uwm.Dict.translate('Duplicate'),
-			handler: function(item, e) {
-				self.duplicate(item, e);
-			}
-		}, {
-			text: uwm.Dict.translate('Show object history'),
-			handler: function(item, e) {
-				self.showObjectHistory(item, e);
-			}
-			
-		}, {
-			text: uwm.Dict.translate('Help'),
-			//iconCls: "uwm-help-icon",
-			handler: function(item, e) {
-				self.showHelp(item, e);
-			}
-		}, {
+	var items = [{
+		// use itemId instead of id, because this has to be only locally unique
+		itemId: uwm.modeltree.UseCaseNode.CONTEXTMENU_SHOW_IN_DIAGRAM_ID,
+		text: uwm.Dict.translate('Show in diagram'),
+		handler: function(item, e) {
+			self.showInDiagram(item, e);
+		}
+	}, {
+		text: uwm.Dict.translate('Show in hierarchy'),
+		handler: function(item, e) {
+			self.showInHierarchy(item, e);
+		}
+	}, {
+		// use itemId instead of id, because this has to be only locally unique
+		itemId: uwm.modeltree.UseCaseNode.CONTEXTMENU_SHOW_IN_GRID_ID,
+		text: uwm.Dict.translate('Show in grid'),
+		handler: function(item, e) {
+			self.showInGrid(item.e);
+		}
+	}, {
+		text: uwm.Dict.translate('Add activity set'),
+		handler: function(item, e) {
+			self.addActivitySet(item, e);
+		}
+	}, {
+		text: uwm.Dict.translate('Generate controller'),
+		handler: function(item, e) {
+			self.createController(item, e);
+		}
+	}, {
+		text: uwm.Dict.translate('Delete from model'),
+		handler: function(item, e) {
+			self.deleteFromModel(item, e);
+		}
+	}, {
+		text: uwm.Dict.translate("Reload"),
+		handler: function(item, e) {
+			self.reload();
+		}
+	}, {
+		text: uwm.Dict.translate('Duplicate'),
+		handler: function(item, e) {
+			self.duplicate(item, e);
+		}
+	}, {
+		text: uwm.Dict.translate('Show object history'),
+		handler: function(item, e) {
+			self.showObjectHistory(item, e);
+		}
+		
+	}, {
+		text: uwm.Dict.translate('Help'),
+		//iconCls: "uwm-help-icon",
+		handler: function(item, e) {
+			self.showHelp(item, e);
+		}
+	}];
+	
+	if (uwm.Config.enableCustomFeatures) {
+		items.push({
 			text: uwm.Dict.translate('Export as Use Case Domain UML'),
 			handler: function(item, e) {
 			var localization = uwm.i18n.Localization.getInstance();
@@ -111,7 +113,8 @@ uwm.modeltree.UseCaseNode.prototype.buildContextMenu = function() {
 						isReturningDocument : true
 				}).show();
 			}
-		}, {
+		});
+		items.push({
 			text: uwm.Dict.translate('Export as Use Case Documentation'),
 			handler: function(item, e) {
 			var localization = uwm.i18n.Localization.getInstance();
@@ -129,7 +132,8 @@ uwm.modeltree.UseCaseNode.prototype.buildContextMenu = function() {
 						isReturningDocument : true
 				}).show();
 			}
-		}, {
+		});
+		items.push({
 			text: uwm.Dict.translate('Export as Use Case Test Data'),
 			handler: function(item, e) {
 			var localization = uwm.i18n.Localization.getInstance();
@@ -147,7 +151,11 @@ uwm.modeltree.UseCaseNode.prototype.buildContextMenu = function() {
 						isReturningDocument : true
 				}).show();
 			}
-		}]
+		});
+	};
+	
+	this.contextMenu = new Ext.menu.Menu({
+		items: items
 	});
 	
 	return this.contextMenu;
