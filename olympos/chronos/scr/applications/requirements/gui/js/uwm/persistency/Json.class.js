@@ -296,18 +296,19 @@ uwm.persistency.Json.prototype.log = function(logtype, msg, successHandler, erro
 	});
 }
 
-uwm.persistency.Json.prototype.templatelist = function( successHandler, errorHandler) {
+uwm.persistency.Json.prototype.templatelist = function(scope, successHandler, errorHandler) {
 	this.jsonRequest({
-		usr_action: 'templatelist'
+		usr_action: 'templatelist',
+		scope: scope
 	}, successHandler, errorHandler);
 	
 }
 
-uwm.persistency.Json.prototype.exportDoc = function(templateName, startOid, exportFormat, diagramFormat, language, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.exportDoc = function(startOid, language, templateName, exportFormat, diagramFormat, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'exportDoc',
-		templateName: templateName,
 		startOid: startOid,
+		templateName: templateName,
 		exportFormat: exportFormat,
 		diagramFormat: diagramFormat,
 		language: language
@@ -526,6 +527,7 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				
 			case "templatelist":
 				jsonRequest.controller = "TemplateListController";
+				jsonRequest.scope = currRequest.scope;
 				break;
 				
 			default:

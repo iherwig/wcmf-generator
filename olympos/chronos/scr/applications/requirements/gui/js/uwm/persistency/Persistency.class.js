@@ -125,10 +125,10 @@ uwm.persistency.Persistency.prototype.createControllerFromUseCase = function(oid
 uwm.persistency.Persistency.prototype.putChildnodesToActivitySetDiagram = function(oid, successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.templatelist = function( successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.templatelist = function(scope, successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.exportDoc = function(templateName, startOid, exportFormat, diagramFormat, language, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.exportDoc = function(startOid, language, exportFormat, templateName, diagramFormat, successHandler, errorHandler ) {
 }
 
 uwm.persistency.Persistency.prototype.exportUwm = function(startOid, language, successHandler, errorHandler ) {

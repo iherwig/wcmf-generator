@@ -27,7 +27,7 @@ uwm.ui.ExportAssistent = function(uwmClassName, oid) {
 	this.oid = oid;
 	this.exportButton = null;
 	
-	uwm.persistency.Persistency.getInstance().templatelist(function(options, data) {
+	uwm.persistency.Persistency.getInstance().templatelist(this.uwmClassName, function(options, data) {
 		self.JsonSuccess(options, data);
 	}, function(options, data, errorMessage) {
 		Ext.MessageBox.alert('Error', errorMessage);
@@ -126,7 +126,8 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 			'technName' : currTemplate.technicalName,
 			'templateName' : currTemplate.title,
 			'description' : currTemplate.description,
-			'forcedResultType': currTemplate.forcedResultType
+			'forcedResultType' : currTemplate.forcedResultType,
+			'action' : currTemplate.action
 		});
 		}
 	}
@@ -143,6 +144,9 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 	}, {
 			name : 'forcedResultType',
 			mapping:'forcedResultType'
+	}, {
+			name : 'action',
+			mapping:'action'
 	});
 	
 	var eastore = new Ext.data.SimpleStore( {
@@ -231,7 +235,9 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 				// export format unknown
 				return;
 			}
-			var templateSelected = grid.getStore().getAt(gridSelectedIndex).get("technName");
+			var templateRecord = grid.getStore().getAt(gridSelectedIndex);
+			var templateName = templateRecord.get("technName");
+			var templateAction = templateRecord.get("action");
 			
 			assistant.close();
 			
@@ -239,10 +245,24 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 			var localization = uwm.i18n.Localization.getInstance();
 			var userLanguage = localization.getModelLanguage();
 			
+			// define the persistency action to be called and collect the parameters
+			var params = [startOid, userLanguage];
+			var persistency = uwm.persistency.Persistency.getInstance();
+			if (!(persistency[templateAction] instanceof Function)) {
+				templateAction = 'exportDoc';
+			}
+			if (templateAction == 'exportDoc') {
+				params.push(templateName);
+				params.push(doctypeSelected);
+				params.push(diagramSelected);
+			}
+
 			new uwm.ui.LongTaskRunner( {
 					title : uwm.Dict.translate('Exporting Documentation ...'),
 					call : function(successHandler, errorHandler) {
-						uwm.persistency.Persistency.getInstance().exportDoc(templateSelected, startOid, doctypeSelected, diagramSelected, userLanguage, successHandler, errorHandler);
+						params.push(successHandler);
+						params.push(errorHandler);
+						persistency[templateAction].apply(persistency, params);
 					},
 					successHandler : function(data) {},
 					errorHandler : function(data) {

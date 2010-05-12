@@ -2,4 +2,5 @@
 <templateinfo>
 	<title>Standard</title>
 	<description>The default CWM template.</description>
+	<scope>Model,Package</scope>
 </templateinfo>

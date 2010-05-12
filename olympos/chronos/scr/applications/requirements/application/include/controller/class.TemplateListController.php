@@ -22,7 +22,8 @@
 /**
  * @class TemplateListController
  * @ingroup Controller
- * @brief Reads out server.ini generator section to get path and reads out path to get templateinfo.xml files.
+ * @brief Reads out server.ini generator section to get path and reads out path to get templateinfo.xml files
+ * for the given domain classes.
  * 
  * <b>Input actions:</b> 
  * - @em templatelist to list templatenames, titles and descriptions
@@ -30,10 +31,8 @@
  * <b>Output actions:</b> 
  * - @em ok in every case
  * 
- * @param[in]
- * @param[out] technicalNames
- * @param[out] titles
- * @param[out] descriptions
+ * @param[in] scope A domain class name for which the template infos should be retrieved. Optional, if empty, all template infos will be retrieved. 
+ * @param[out] templates An array of template infos with keys: 'technicalName', 'title', 'description', 'exportImages', 'inputType', 'forcedResultType', 'scope', 'action' 
  * 
  * The following configuration settings are defined for this controller:
  *
@@ -55,7 +54,11 @@ class TemplateListController extends Controller
 
 	function executeKernel()
 	{
-		$result = self::getContent();
+		$scope = null;
+		if ($this->_request->hasValue('scope')) {
+			$scope = $this->_request->getValue('scope');
+		}
+		$result = self::getContent($scope);
 
 		//	Set the next action
 		$this->_response->setAction('ok');
@@ -67,7 +70,15 @@ class TemplateListController extends Controller
 		return false;
 	}
 
-	public static function getContent() {
+	/**
+	 * Get the template infos for a given scope
+	 * @param scope A domain class name for which templates should be retrieved, optional.
+	 * If not given, all tmeplate infos will be retrieved.
+	 * @return An array of associative arrays
+	 * @note The scope name must be contained in the comma separated list inside the scope 
+	 * element of the template info
+	 */
+	public static function getContent($scope=null) {
 		$result = array();
 
 		$templatespath = self::getTemplatesPath();
@@ -78,23 +89,36 @@ class TemplateListController extends Controller
 		$titles = array ();
 		$descriptions = array ();
 
-		foreach ($templates as $Verz) {
-			$txt = file_get_contents("$templatespath/$Verz/$templateinfodatname");
+		foreach ($templates as $name) {
+			$txt = file_get_contents("$templatespath/$name/$templateinfodatname");
 			$xml = simplexml_load_string($txt);
 			$title = $xml->title;
 			$descr = self::getNodeInnerXml($xml->description);
 			$exportImages = !($xml->exportImages == 'false');
 			$inputType = $xml->inputType;
 			$forcedResultType = $xml->forcedResultType;
-
-			$result[$Verz] = array(
-				'technicalName' => $Verz,
-				'title' => utf8_decode($title),
-				'description' => utf8_decode($descr),
-				'exportImages' => $exportImages,
-				'inputType' => '' . $inputType,
-				'forcedResultType' => '' . $forcedResultType
-			);
+			$availableScopes = $xml->scope;
+			$action = $xml->action;
+			
+			if (strlen($availableScopes) > 0) {
+				$scopeList = split(',', $availableScopes);
+			}
+			else {
+				$scopeList = array();
+			}
+			if ($scope == null || sizeof($scopeList) == 0 || 
+				($scope != null && sizeof($scopeList) > 0 && in_array($scope, $scopeList))) {
+				$result[$name] = array(
+					'technicalName' => $name,
+					'title' => utf8_decode($title),
+					'description' => utf8_decode($descr),
+					'exportImages' => $exportImages,
+					'inputType' => '' . $inputType,
+					'forcedResultType' => '' . $forcedResultType,
+					'scope' => '' . $availableScopes,
+					'action' => '' . $action
+				);
+			}
 		}
 
 		return $result;
