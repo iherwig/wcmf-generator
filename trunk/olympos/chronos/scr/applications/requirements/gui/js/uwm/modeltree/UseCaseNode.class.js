@@ -115,41 +115,9 @@ uwm.modeltree.UseCaseNode.prototype.buildContextMenu = function() {
 			}
 		});
 		items.push({
-			text: uwm.Dict.translate('Export as Use Case Documentation'),
-			handler: function(item, e) {
-			var localization = uwm.i18n.Localization.getInstance();
-			var userLanguage = localization.getModelLanguage();
-		
-				new uwm.ui.LongTaskRunner( {
-						title : uwm.Dict.translate('Exporting Use Case Documentation ...'),
-						call : function(successHandler, errorHandler) {
-							uwm.persistency.Persistency.getInstance().exportUcDocumentation(self.getModelNode().getOid(), userLanguage, successHandler, errorHandler);
-						},
-						successHandler : function(data) {},
-						errorHandler : function(data) {
-							uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
-						},
-						isReturningDocument : true
-				}).show();
-			}
-		});
-		items.push({
-			text: uwm.Dict.translate('Export as Use Case Test Data'),
-			handler: function(item, e) {
-			var localization = uwm.i18n.Localization.getInstance();
-			var userLanguage = localization.getModelLanguage();
-		
-				new uwm.ui.LongTaskRunner( {
-						title : uwm.Dict.translate('Exporting Use Case Test Data ...'),
-						call : function(successHandler, errorHandler) {
-							uwm.persistency.Persistency.getInstance().exportUcTestData(self.getModelNode().getOid(), userLanguage, successHandler, errorHandler);
-						},
-						successHandler : function(data) {},
-						errorHandler : function(data) {
-							uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
-						},
-						isReturningDocument : true
-				}).show();
+			text: uwm.Dict.translate('Export Documentation'),
+			handler : function(item, e) {
+					new uwm.ui.ExportAssistent("UseCase", self.getModelNode().getOid());
 			}
 		});
 	};

@@ -1,5 +1,6 @@
 <workflow>
 	<property file="${propertyFile}"/>
+	<property name="importMultiplicity" value="true" />
 
 	<!-- metamodel setup -->
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
@@ -19,6 +20,14 @@
 		<outputSlot value="localModel" />
 	</component>
 	
+	<if cond="${importMultiplicity}">
+		<!-- load CIM reference model -->
+		<component class="oaw.emf.XmiReader">
+			<modelFile value="${basePath}/metamodel/cim.uml"/>
+			<outputSlot value="cimmodel"/>
+		</component>
+	</if>
+
 	<component class="oaw.xtend.XtendComponent">
 		<metaModel idRef="uml2" />
 		<metaModel idRef="xmlSchema" /> 
@@ -26,6 +35,18 @@
 		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, '${rootElements}', 'http://com.ibm.eenergy/cim')" />
 		<outputSlot value="schema" />
 	</component>
+
+ 	<if cond="${importMultiplicity}">
+		<!-- apply multiplicities from CIM reference model-->
+		<component class="oaw.xtend.XtendComponent">
+			<metaModel id="uml" class="oaw.uml2.UML2MetaModel" />
+			<metaModel idRef="Chronos" />
+			
+			<invoke value="cartridge/UmlConnector/importMultiplicity::importMultiplicity(localModel, cimmodel)" />
+	
+			<outputSlot value="localModel" />
+		</component>
+	</if>
 
 	<component class="org.openarchitectureware.xsd.XMLWriter">
 		<metaModel idRef="xmlSchema" />

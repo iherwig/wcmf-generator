@@ -16,4 +16,5 @@
 	<inputType>ods</inputType>
 	<forcedResultType>ods</forcedResultType>
 	<exportImages>false</exportImages>
+	<scope>Model,Package</scope>
 </templateinfo>
