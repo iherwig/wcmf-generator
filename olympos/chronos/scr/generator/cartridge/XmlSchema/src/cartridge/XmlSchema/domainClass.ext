@@ -4,6 +4,7 @@ import xmlSchema;
 extension org::openarchitectureware::xsd::lib::qname;
 
 extension common::util;
+extension common::umlutils;
 
 extension cartridge::XmlSchema::common;
 
@@ -13,13 +14,23 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 
 	let result = new xmlSchema::TopLevelComplexType:
 	let sequence = new xmlSchema::ExplicitGroup:
+	let allProperties = ((List[uml::Property]) {}
+		.addAll(this.getAllAttributes())
+		.addAll(this.getOwnAssociationEnds())
+		.addAll(this.getSuperClassesRecursive().getOwnAssociationEnds())
+	).toSet().toList():
 	
 	info("Converting Class " + this.name) ->
 	
 	result.setName(this.name) ->
 	result.setAbstract(this.isAbstract) ->
 	
-	sequence.element.addAll(this.attribute.convertProperty(targetNamespace, rootElements)) ->
+	//allProperties.exists(e|e.class == this) ? (
+		sequence.element.addAll(allProperties.convertProperty(targetNamespace, rootElements))
+	//) : (
+	//	Void
+	//) ->
+	->
 	
 	this.superClass.size > 0 ? (
 		let complex = new xmlSchema::ComplexContentType:
@@ -45,7 +56,8 @@ xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespa
 	
 	info("	Converting Property " + this.name) ->
 	
-	result.setMinOccurs(this.getLower()) ->
+	//result.setMinOccurs(this.getLower()) ->
+	result.setMinOccurs(0) ->
 	result.setMaxOccurs(this.getUpper() != -1 ? this.getUpper() : parseToQName("unbounded")) ->
 	result.setName(this.nameOrType()) ->
 	result.setType(((this.association == null) || (rootElements.contains(this.class.name))) ? (
