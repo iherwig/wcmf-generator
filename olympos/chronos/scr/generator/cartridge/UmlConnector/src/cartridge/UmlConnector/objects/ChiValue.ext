@@ -15,7 +15,7 @@ uml::Property convert(cwm::ChiValue o):
 ;
 
 Void transferValues(cwm::ChiValue c, uml::Model um):
-	//(new Chronos::boolean::true).setT
+	//(new cwm::ChiValue).eRootContainer
 	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiValue") ->
@@ -32,7 +32,10 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 			uc.setTaggedValue("Chronos::ChiValue", "column_name", c.columnName) ->
 			//uc.setTaggedValue("Chronos::ChiValue", "Alias", c.alias) ->
 			//uc.setTaggedValue("Chronos::ChiValue", "Version", c.version) ->
-			uc.setType(getType(c.propertyType, um)) ->
+
+			//The target type may not be converted yet with its new name, so we misuse keywords
+			uc.addKeyword(TYPE_KEYWORD() + c.propertyType) ->
+
 			uc.setName(c.name) ->
 			c.notes != null ? (
 				comment.setBody(c.notes) ->
@@ -46,6 +49,16 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 		)
 	)
 ;
+
+Void propagateAttributeTypes(uml::Property this):
+	let typeKeyword = this.getKeywords().selectFirst(e|e.startsWith(TYPE_KEYWORD())):
+	
+	this.setType(getType(typeKeyword.subString(TYPE_KEYWORD().length, typeKeyword.length), this.getModel()))
+;
+
+String TYPE_KEYWORD():
+	"CHRONOS_TYPE_KEYWORD_"
+;	
 
 cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	//(new cwm::ChiValue).set
@@ -76,7 +89,7 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	un
 ;
 
-uml::PrimitiveType getType(String typeName, uml::Model um):
+uml::Type getType(String typeName, uml::Model um):
 	let primitiveTypes = um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes") == null ? (
 			let tempPackage = new uml::Package:
 			tempPackage.setName("PrimitiveTypes") ->
@@ -87,17 +100,15 @@ uml::PrimitiveType getType(String typeName, uml::Model um):
 			um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes")
 	:
 	
-	let result = primitiveTypes.ownedType.selectFirst(e|e.name == typeName) == null ? (
+	let result = um.allOwnedElements().typeSelect(uml::Type).selectFirst(e|e.name == typeName) == null ? (
 			let tempType = new uml::PrimitiveType:
 			tempType.setName(typeName) ->
 			((uml::Package) primitiveTypes).ownedType.add(tempType) ->
 			info("Added Primitive Type \"" + typeName + "\"") ->
 			tempType
 		) :
-			primitiveTypes.ownedType.selectFirst(e|e.name == typeName)
+			um.allOwnedElements().typeSelect(uml::Type).selectFirst(e|e.name == typeName)
 	:
-
-	
 	
 	result
 ;

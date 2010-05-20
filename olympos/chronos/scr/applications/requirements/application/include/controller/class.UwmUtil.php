@@ -477,6 +477,10 @@ class UwmUtil {
 
 			$currNode->loadChildren();
 			$children = $currNode->getChildren();
+			
+			//Fix for doubled aggregations
+			$processedM2m = array();
+					
 			foreach ($children as $currChild)
 			{
 				$childType = self::getRealType($currChild);
@@ -485,7 +489,7 @@ class UwmUtil {
 					//				if ($childType == 'NMChiControllerActionKeyChiController' || $childType == 'NMChiControllerActionKeyChiView') {
 					//					self::processNode($currChild);
 					//				} else if (self::processManyToMany($currChild, $currNode)) {
-					if (self::processManyToMany($currChild, $currNode)) {
+					if (self::processManyToMany($currChild, $currNode, &$processedM2m)) {
 						//do nothing
 					} else if ($childType == 'ChiValue' || $childType == 'Operation') {
 						self::processNode($currChild);
@@ -654,7 +658,7 @@ class UwmUtil {
 
 		private static $specialChildren = array('ChiNode' => array('NodeSourceEnd'), 'ChiController' => array('SourceEnd', 'SourceActionKeyEnd', 'NMChiControllerActionKeyChiView'), 'ChiNodeManyToMany' => array('NMChiNodeChiMany2ManyChiNodeEnd'));
 
-		private static function processManyToMany($currChild, $parent) {
+		private static function processManyToMany($currChild, $parent, $processedM2m = array()) {
 			$result = false;
 
 			if ($currChild->isManyToManyObject())
@@ -674,9 +678,10 @@ class UwmUtil {
 				if ($processThisManyToMany) {
 					$currChild->loadParents();
 					$parents = $currChild->getParents();
+					
 					foreach ($parents as $currParent)
 					{
-						if ($currParent->getId() != $parent->getId())
+						if ($currParent->getId() != $parent->getId() && array_search($currParent->getOid(), $processedM2m) === false)
 						{
 							$className = self::getRealType($currParent);
 
@@ -701,11 +706,14 @@ class UwmUtil {
 
 
 							self::$dom->endElement();
+							
+							$processedM2m[] = $currParent->getOid();
 						}
 					}
-				}		}
+				}
+			}
 
-				return $result;
+			return $result;
 		}
 
 		/**

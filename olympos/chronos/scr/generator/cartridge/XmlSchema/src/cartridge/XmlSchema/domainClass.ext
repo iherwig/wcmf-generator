@@ -14,11 +14,14 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 
 	let result = new xmlSchema::TopLevelComplexType:
 	let sequence = new xmlSchema::ExplicitGroup:
-	let allProperties = ((List[uml::Property]) {}
-		.addAll(this.getAllAttributes())
-		.addAll(this.getOwnAssociationEnds())
-		.addAll(this.getSuperClassesRecursive().getOwnAssociationEnds())
-	).toSet().toList():
+	let allPropertiesCollection = (List[uml::Property]) {}:
+	let allProperties = (List[uml::Property]) {}:
+	
+	allPropertiesCollection.addAll(this.getAllAttributes()) ->
+	allPropertiesCollection.addAll(this.getOwnAssociationEnds().select(e|!allPropertiesCollection.exists(f|e.name == f.name))) ->
+	allPropertiesCollection.addAll(this.getSuperClassesRecursive().getOwnAssociationEnds().select(e|!allPropertiesCollection.exists(f|e.name == f.name))) ->
+	
+	allProperties.addAll(allPropertiesCollection.toSet().select(e|e.isNavigable())) ->
 	
 	info("Converting Class " + this.name) ->
 	
@@ -48,6 +51,7 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 	
 	result
 ;
+
 
 xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespace, List[String] rootElements):
 	//(new xmlSchema::LocalElement).t

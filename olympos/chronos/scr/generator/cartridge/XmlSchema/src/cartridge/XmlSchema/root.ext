@@ -3,6 +3,7 @@ import xmlSchema;
 
 extension org::openarchitectureware::xsd::lib::qname;
 
+extension common::util;
 extension common::cimUml;
 
 extension cartridge::XmlSchema::domainClass;
@@ -18,7 +19,7 @@ xmlSchema::SchemaType xmlSchema(uml::Model this, String rootElements, String tar
 
 	xsd.setTargetNamespace(targetNamespace) ->
 	
-	xsd.complexType.addAll(this.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().convertToXsd(targetNamespace, rootElementList)) ->
+	xsd.complexType.addAll(this.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().select(e|!e.name.isNullOrEmpty()).convertToXsd(targetNamespace, rootElementList)) ->
 	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::Enumeration).convertToXsd(targetNamespace)) ->
 	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::PrimitiveType).select(e|e.name.matches("[a-zA-Z0-9-]+")).convertToXsd(targetNamespace)) ->
 	
