@@ -72,6 +72,10 @@ Void transferValues(cwm::ChiNode c, uml::Model um):
 	)
 ;
 
+Void propagateAttributeTypes(uml::Class this):
+	this.attribute.select(e|e.isStereotypeApplied(e.getApplicableStereotype("Chronos::ChiValue"))).propagateAttributeTypes()
+;
+
 cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 	let un = new cwm::ChiNode : (
 		let attributes = c.attribute.typeSelect(Chronos::ChiValue):

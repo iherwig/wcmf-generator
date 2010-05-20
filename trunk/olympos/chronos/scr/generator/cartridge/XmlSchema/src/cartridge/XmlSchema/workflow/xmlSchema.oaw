@@ -28,14 +28,6 @@
 		</component>
 	</if>
 
-	<component class="oaw.xtend.XtendComponent">
-		<metaModel idRef="uml2" />
-		<metaModel idRef="xmlSchema" /> 
-
-		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, '${rootElements}', 'http://com.ibm.eenergy/cim')" />
-		<outputSlot value="schema" />
-	</component>
-
  	<if cond="${importMultiplicity}">
 		<!-- apply multiplicities from CIM reference model-->
 		<component class="oaw.xtend.XtendComponent">
@@ -47,6 +39,14 @@
 			<outputSlot value="localModel" />
 		</component>
 	</if>
+
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="uml2" />
+		<metaModel idRef="xmlSchema" /> 
+
+		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, '${rootElements}', 'http://com.ibm.eenergy/cim')" />
+		<outputSlot value="schema" />
+	</component>
 
 	<component class="org.openarchitectureware.xsd.XMLWriter">
 		<metaModel idRef="xmlSchema" />
