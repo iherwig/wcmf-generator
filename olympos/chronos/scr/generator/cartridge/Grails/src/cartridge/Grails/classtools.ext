@@ -82,6 +82,7 @@ String sanitizeType(String orgTypeName):
 		case "string": "String"
 		case "float": "float"
 		case "double": "double"
+		case "decimal": "double"
 		case "int": "int"
 		case "integer": "int"
 		case "long": "long"
