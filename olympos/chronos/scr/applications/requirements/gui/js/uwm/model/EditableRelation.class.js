@@ -28,8 +28,10 @@ Ext.extend(uwm.model.EditableRelation, uwm.model.Relation);
 
 uwm.model.EditableRelation.prototype.initByDisplayResult = function(node) {
 	uwm.model.EditableRelation.superclass.initByDisplayResult.call(this, node);
+	this.data.sourceName = node.values[1].sourceName;
 	this.data.sourceMultiplicity = node.values[1].sourceMultiplicity;
 	this.data.sourceNavigability = node.values[1].sourceNavigability;
+	this.data.targetName = node.values[1].targetName;
 	this.data.targetMultiplicity = node.values[1].targetMultiplicity;
 	this.data.targetNavigability = node.values[1].targetNavigability;
 	this.data.Name = node.values[1].Name;
@@ -42,8 +44,10 @@ uwm.model.EditableRelation.prototype.initByDisplayResult = function(node) {
 
 uwm.model.EditableRelation.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
+	realForm.findField("sourceName").loadValue(this.data.sourceName);
 	realForm.findField("sourceMultiplicity").loadValue(this.data.sourceMultiplicity);
 	realForm.findField("sourceNavigability").loadValue(this.data.sourceNavigability);
+	realForm.findField("targetName").loadValue(this.data.targetName);
 	realForm.findField("targetMultiplicity").loadValue(this.data.targetMultiplicity);
 	realForm.findField("targetNavigability").loadValue(this.data.targetNavigability);
 	realForm.findField("Name").loadValue(this.data.Name);

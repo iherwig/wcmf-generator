@@ -46,6 +46,12 @@ uwm.model.EditableRelationClass.prototype.getPropertyForm = function(modelNode, 
 		    modelNode : modelNode,
 		    
 		    readOnly : isLockedByOtherUser
+		}), new uwm.property.TextField( {
+		    fieldLabel : 'sourceName',
+		    toolTip : "the name of the source end",
+		    name : 'sourceName',
+		    modelNode : modelNode,
+		    readOnly : isLockedByOtherUser
 		}), new uwm.property.ComboBox( {
 		    fieldLabel : 'sourceMultiplicity',
 		    toolTip : "",
@@ -66,6 +72,12 @@ uwm.model.EditableRelationClass.prototype.getPropertyForm = function(modelNode, 
 		    } ],
 		    modelNode : modelNode,
 		    disabled : isLockedByOtherUser
+		}), new uwm.property.TextField( {
+		    fieldLabel : 'targetName',
+		    toolTip : "the name of the target end",
+		    name : 'targetName',
+		    modelNode : modelNode,
+		    readOnly : isLockedByOtherUser
 		}), new uwm.property.ComboBox( {
 		    fieldLabel : 'targetMultiplicity',
 		    toolTip : "",
