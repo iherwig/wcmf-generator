@@ -212,7 +212,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 	«IF relatives.size > 0-»
 	static mappedBy = [
 		«FOREACH relatives AS relative SEPARATOR ","»
-		«relative.getRoleName().toFirstLower().sanitizeType()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower().sanitizeType()»"«""-»
+		«relative.getRoleName().toFirstLower()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower()»"«""-»
 		«ENDFOREACH»
 
 		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "MappedBy"» 
