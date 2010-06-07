@@ -87,8 +87,8 @@ String sanitizeType(String orgTypeName):
 		case "integer": "int"
 		case "long": "long"
 		case "boolean": "boolean"
-		case "date": "Date"
-		case "datetime": "Date"
+		case "date": "java.util.Date"
+		case "datetime": "java.util.Date"
 		case "": "def"
 		case null: "def"
 		case "<undefined>": "def"
@@ -101,8 +101,8 @@ String getValuePrefix(uml::Type this):
 	switch(this.name) {
 		case "string": "\""
 		case "String": "\""
-		case "Date": "Date.parse(\"yyyy-MM-dd z\", \""
-		case "date": "Date.parse(\"yyyy-MM-dd z\", \""
+		case "Date": "java.util.Date.parse(\"yyyy-MM-dd z\", \""
+		case "date": "java.util.Date.parse(\"yyyy-MM-dd z\", \""
 		default: ""
 	}
 ;
