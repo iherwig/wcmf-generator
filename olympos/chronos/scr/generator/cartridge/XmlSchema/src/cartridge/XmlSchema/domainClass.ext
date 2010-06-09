@@ -17,9 +17,13 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 	let allPropertiesCollection = (List[uml::Property]) {}:
 	let allProperties = (List[uml::Property]) {}:
 	
-	allPropertiesCollection.addAll(this.getAllAttributes()) ->
-	allPropertiesCollection.addAll(this.getOwnAssociationEnds().select(e|!allPropertiesCollection.exists(f|e.name == f.name))) ->
-	allPropertiesCollection.addAll(this.getSuperClassesRecursive().getOwnAssociationEnds().select(e|!allPropertiesCollection.exists(f|e.name == f.name))) ->
+	!this.isAbstract ? (
+		allPropertiesCollection.addAll(this.getAllAttributes()) ->
+		allPropertiesCollection.addAll(this.getOwnAssociationEnds().select(e|!allPropertiesCollection.exists(f|e.name == f.name))) ->
+		allPropertiesCollection.addAll(this.getSuperClassesRecursive().select(e|e.isAbstract).getOwnAssociationEnds().select(e|!allPropertiesCollection.exists(f|e.name == f.name)))
+	) : (
+		Void
+	) ->
 	
 	allProperties.addAll(allPropertiesCollection.toSet().select(e|e.isNavigable())) ->
 	
