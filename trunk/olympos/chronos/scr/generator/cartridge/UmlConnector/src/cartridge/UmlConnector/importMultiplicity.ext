@@ -3,8 +3,12 @@ import Chronos;
 
 extension common::util;
 
+extension cartridge::ChiCmf::extensions::m2m;
+
 uml::Model importMultiplicity(uml::Model source, uml::Model cim):
 	source.allOwnedElements().typeSelect(Chronos::ChiNode).importMultiplicity(cim) ->
+	
+	source.addNavigability() ->
 	
 	source
 ;
