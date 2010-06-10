@@ -44,7 +44,7 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 	//) ->
 	->
 	
-	this.superClass.size > 0 ? (
+	this.superClass.size > 0 && this.superClass.forAll(e|!e.isAbstract) ? (
 		let complex = new xmlSchema::ComplexContentType:
 		let ext = new xmlSchema::ExtensionType:
 		
