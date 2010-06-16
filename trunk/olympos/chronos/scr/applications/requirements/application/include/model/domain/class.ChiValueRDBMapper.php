@@ -163,7 +163,7 @@ class ChiValueRDBMapper extends NodeUnifiedRDBMapper
      /* 
       * Value description: this is the type of this property (e.g. string. int, etc.). not necessary
       */
-      array('name' => 'PropertyType', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'propertytype', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
+      array('name' => 'PropertyType', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'propertytype', 'db_data_type' => 'VARCHAR(255)', 'default' => 'String', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'text', 'display_type' => 'text'),
      /* 
       * Value description: 
       */
