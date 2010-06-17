@@ -51,7 +51,9 @@ uwm.property.Checkbox.prototype.render = function(container, position) {
 }
 
 uwm.property.Checkbox.prototype.fieldChecked = function(field, checked) {
-	this.persistValue(checked);
+	if (field.checked != checked) {
+		this.persistValue(checked);
+	}
 }
 
 uwm.property.Checkbox.prototype.handleDestroy = function(field) {

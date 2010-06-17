@@ -207,7 +207,7 @@ uwm.property.PropertyContainer.prototype.displayForm = function() {
 	
 	modelNode.populatePropertyForm(this.form);
 	
-	if (this.isTranslationPanelOpen()) {
+	if (this.isTranslationPanelOpen() || modelNode.isRemoteNode()) {
 		this.lockControls();
 	}
 
