@@ -28,20 +28,25 @@ class UwmUtil {
 
 	const INI_SECTION = 'generator';
 	const INI_UML_FILE_STORAGE = 'umlFileStorage';
+  
+	private static $IGNORED_ATTRIBUTES = array(
+		'id',
+		'_proxyOid'
+	);
 
 	private static $METHOD_NAME_SEARCH = array(
 		'ChiBusinessUseCase',
 		'ChiBusinessUseCaseCore',
 		'ChiNode',
 		'ChiBusinessProcess'
-		);
+	);
 
 		private static $METHOD_NAME_REPLACE = array(
 		'UseCase',
 		'UseCase',
 		'Class',
 		'BusinessProcess'
-		);
+	);
 
 		private static $dom;
 		private static $persistenceFacade;
@@ -206,16 +211,19 @@ class UwmUtil {
 		private static function appendAttributes($node)
 		{
 			self::translateNode($node);
+			self::$dom->writeAttribute('id', $node->getBaseOID());
 
 			$valueNames = $node->getValueNames();
 
 			foreach ($valueNames as $currValueName)
 			{
-				$value = self::$encodingUtil->convertIsoToCp1252Utf8($node->getValue($currValueName));
-				if ($value !== null && $value !== '') {
-					self::$dom->writeAttribute($currValueName, $value);
+				if (!in_array($currValueName, self::$IGNORED_ATTRIBUTES)) {      
+					$value = self::$encodingUtil->convertIsoToCp1252Utf8($node->getValue($currValueName));
+					if ($value !== null && $value !== '') {
+						self::$dom->writeAttribute($currValueName, $value);
+					}
 				}
-			}
+			}      
 		}
 
 		/**
@@ -226,7 +234,7 @@ class UwmUtil {
 		{
 			if ($node)
 			{
-				$oid = $node->getOID();
+				$oid = $node->getBaseOID();
 				self::$exportedNodes[] = $oid;
 				self::$oidNameMap[$oid] = $node->getDisplayValue();
 
@@ -241,7 +249,7 @@ class UwmUtil {
 			$list = is_array($referenceOid) ? $referenceOid : array($referenceOid);
 
 			Log::debug(var_export($list, true), __CLASS__);
-			self::$referencedNodes = array_merge(self::$referencedNodes, $list);
+			self::$referencedNodes = array_unique(array_merge(self::$referencedNodes, $list));
 			Log::debug(var_export(self::$referencedNodes, true), __CLASS__);
 		}
 
@@ -645,20 +653,21 @@ class UwmUtil {
 		private static function processParent($currParent) {
 			self::$dom->startElement('Parent');
 			self::$dom->writeAttribute('targetType', $currParent->getType());
-			self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
+			self::$dom->writeAttribute('targetOid', $currParent->getBaseOID());
 			self::$dom->endElement();
 		}
 
 		private static function processChild($currChild) {
 			self::$dom->startElement('Child');
 			self::$dom->writeAttribute('targetType', $currChild->getType());
-			self::$dom->writeAttribute('targetOid', $currChild->getValue('id'));
+			self::$dom->writeAttribute('targetOid', $currChild->getBaseOID());
 			self::$dom->endElement();
 		}
 
 		private static $specialChildren = array('ChiNode' => array('NodeSourceEnd'), 'ChiController' => array('SourceEnd', 'SourceActionKeyEnd', 'NMChiControllerActionKeyChiView'), 'ChiNodeManyToMany' => array('NMChiNodeChiMany2ManyChiNodeEnd'));
 
 		private static function processManyToMany($currChild, $parent, $processedM2m = array()) {
+    
 			$result = false;
 
 			if ($currChild->isManyToManyObject())
@@ -687,7 +696,7 @@ class UwmUtil {
 
 							self::$dom->startElement('ManyToMany');
 							self::$dom->writeAttribute('targetType', $className);
-							self::$dom->writeAttribute('targetOid', $currParent->getValue('id'));
+							self::$dom->writeAttribute('targetOid', $currParent->getBaseOID());
 							self::$dom->writeAttribute('targetRole', $currParent->getType());
 
 							$currChildArray = array($currChild);
