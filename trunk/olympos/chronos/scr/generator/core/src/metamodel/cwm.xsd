@@ -1061,6 +1061,8 @@
 			</xsd:element>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiObject" type="ChiObject">
 			</xsd:element>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Figure" type="Figure">
+			</xsd:element>
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
