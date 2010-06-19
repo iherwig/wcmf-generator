@@ -38,15 +38,15 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 				$parents = $node->getParents();
 				foreach($parents as $parent) {
 					if ($parent instanceof ChiNode) {
-						$result[] = $parent->getOid();
-						$this->containers[] = $parent->getOid();
+						$result[] = $parent->getBaseOID();
+						$this->containers[] = $parent->getBaseOID();
 					}
 				}
 			}
 		} else if ($node instanceof ChiNode) {
 			$persistenceFacade = PersistenceFacade::getInstance();
 				
-			if (array_search($node->getOid(), $this->containers, true) !== false) {
+			if (array_search($node->getBaseOID(), $this->containers, true) !== false) {
 				//found a container
 				$node->loadChildren('NodeTargetEnd', 1);
 				$node->loadChildren('NodeSourceEnd', 1);
@@ -59,7 +59,8 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 						} else {
 							$otherEndId = $child->getFkChinodetargetId();
 						}
-						$otherEndOid = PersistenceFacade::composeOid(array('type' => 'ChiNode', 'id' => $otherEndId));
+						$otherEndOid = $this->getParentOidFromParentId($child, $otherEndId);
+						//$otherEndOid = PersistenceFacade::composeOid(array('type' => 'ChiNode', 'id' => $otherEndId));
 
 						if ($child->getRelationType() == 'generalization') {
 							$this->superclasses[] = $otherEndOid;
@@ -70,13 +71,14 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 			} else {
 				$node->loadChildren('NodeSourceEnd');
 				$node->loadChildren('ChiValue');
-
+				
 				$children = $node->getChildren();
 				foreach($children as $child) {
 					if ($child instanceof ChiAssociation) {
 						if ($child->getRelationType() == 'generalization') {
 							$otherEndId = $child->getFkChinodetargetId();
-							$otherEndOid = PersistenceFacade::composeOid(array('type' => 'ChiNode', 'id' => $otherEndId));
+							$otherEndOid = $this->getParentOidFromParentId($child, $otherEndId);
+							//$otherEndOid = PersistenceFacade::composeOid(array('type' => 'ChiNode', 'id' => $otherEndId));
 								
 							$result[] = $otherEndOid;
 
@@ -89,10 +91,12 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 						$nodeTemplate = $query->getObjectTemplate('ChiNode');
 						$nodeTemplate->setValue('Name', $name, DATATYPE_ATTRIBUTE);
 
-						$foundNodes = $query->execute(BUILDDEPTH_SINGLE);
+						// TODO: Since ObjectQuery does not search on remote servers, we are not
+						// able to resolve non-primitive types
+						$foundNodes = array(); //$query->execute(BUILDDEPTH_SINGLE);
 						
 						if (count($foundNodes) > 0) {
-							$result[] = $foundNodes[0]->getOid();
+							$result[] = $foundNodes[0]->getBaseOID();
 						}
 					}
 				}
@@ -106,7 +110,7 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 					$parents = $child->getParents();
 					foreach($parents as $parent) {
 						if ($parent instanceof Actor) {
-							$result[] = $parent->getOid();
+							$result[] = $parent->getBaseOID();
 						}
 					}
 				}
@@ -116,11 +120,21 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 //			$parents = $node->getParents();
 //			foreach($parents as $parent) {
 //				if ($parent instanceof ChiBusinessProcess) {
-//					$result[] = $parent->getOid();
+//					$result[] = $parent->getBaseOID();
 //				}
 //			}
 		}
 			
 		return $result;
+	}
+	
+	function getParentOidFromParentId($child, $parentId)
+	{
+		$parentOids = $child->getProperty('parentoids');
+		foreach ($parentOids as $parentOid) {
+			if (preg_match('/:'.$parentId.'$/', $parentOid)) {
+				return PersistenceFacade::getBaseOID($parentOid);
+			}
+		}
 	}
 }
