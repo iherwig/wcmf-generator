@@ -42,6 +42,7 @@ class CWMControllerDelegate
 			if ($persistenceFacade instanceof RemoteCapablePersistenceFacadeImpl) {
 				$persistenceFacade->setResolveProxies(false);
 			}
+			$controller->_request = &$request;
 		}
 	}
 	/**
