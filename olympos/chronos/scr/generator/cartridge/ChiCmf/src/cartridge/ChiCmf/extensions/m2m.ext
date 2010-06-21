@@ -50,14 +50,36 @@ Void addSuperclassStereotypeNavigability(uml::Model this):
 	this.addNavigability()
 ;
 
+Void addChiNodeSuperclassStereotypeNavigability(uml::Model this):
+	this.addChiNodeStereotype() ->
+	this.addSuperclassClass() ->
+	this.addStereotypeClass() ->
+	this.addNavigability()
+;
+
+Void addChiNodeStereotype(uml::Model this):
+	info("Adding ChiNode stereotype ...") ->
+	this.allOwnedElements().typeSelect(uml::Class).addChiNodeStereotype()
+;
+
 Void addSuperclass(uml::Model this):
 	info("Adding superclass ...") ->
 	this.allOwnedElements().typeSelect(ChiNode).select(e|e.superClass.isEmpty).addNodeSuperClass()
 ;
 
+Void addSuperclassClass(uml::Model this):
+	info("Adding superclass ...") ->
+	this.allOwnedElements().typeSelect(uml::Class).select(e|e.superClass.isEmpty).addNodeSuperClass()
+;
+
 Void addStereotype(uml::Model this):
 	info("Adding stereotype ...") ->
 	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.association == null).addStereotype()
+;
+
+Void addStereotypeClass(uml::Model this):
+	info("Adding stereotype ...") ->
+	this.allOwnedElements().typeSelect(uml::Class).attribute.select(e|e.association == null).addStereotype()
 ;
 
 Void addNavigability(uml::Model this):
@@ -72,8 +94,8 @@ ChiNode postProcessNodes(ChiNode root, String package) :
 	JAVA net.sourceforge.olympos.oaw.extend.PostProcessor.postProcessNodes(org.eclipse.uml2.uml.Class, java.lang.String)
 ;
 
-Void addNodeSuperClass(ChiNode this) :
-	let superClass = this.getModel().allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first():
+Void addNodeSuperClass(uml::Class this) :
+	let superClass = this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|e.qualifiedName == RequiredNodeSuperClass()).first():
 	superClass != this ? (
 		let generalization = new uml::Generalization:
 		info("Adding SuperClass " + superClass.name + " to: " + this.name) ->
@@ -82,6 +104,11 @@ Void addNodeSuperClass(ChiNode this) :
 		generalization.setSpecific(this)
 	) :
 		Void
+;
+
+Void addChiNodeStereotype(uml::Class this):
+	info("Adding Stereotype ChiNode to " + this.name) ->
+	this.applyStereotype("Chronos::ChiNode")
 ;
 
 Void addStereotype(uml::Property this):
