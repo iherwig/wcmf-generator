@@ -100,7 +100,17 @@ uwm.diagram.DropZone.prototype.onNodeDrop = function(nodeData, source, e, data) 
 		var y = e.xy[1] - yOffset + scrollTop;
 		
 		if (modelData instanceof uwm.model.ModelObject) {
-			this.diagram.addExistingObject(modelData, x, y, dropWindowId);
+			// make sure to pass the complete data
+			modelData = uwm.model.ModelContainer.getInstance().getByOid(modelData.oid);
+			if (Ext.util.JSON.encode(modelData.data) == "{}") {
+				var self = this;
+				uwm.model.ModelContainer.getInstance().loadByOid(modelData.oid, function(modelData) {
+					self.diagram.addExistingObject(modelData, x, y, dropWindowId);
+				}, 0);
+			}
+			else {
+				this.diagram.addExistingObject(modelData, x, y, dropWindowId);
+			}
 		} else {
 			this.diagram.createNewObject(modelData, x, y, dropWindowId);
 		}

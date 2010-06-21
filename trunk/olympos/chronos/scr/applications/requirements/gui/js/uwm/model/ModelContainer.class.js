@@ -60,9 +60,9 @@ uwm.model.ModelContainer.prototype.createByDisplayResult = function(displayResul
 		newModelNode.oid = oid;
 		
 		this.items.add(oid, newModelNode);
-		// also register the node under the proxy object's oid
+		// also register the node under the remote oid
 		if (newModelNode.isRemoteNode()) {
-			this.items.add(newModelNode.getProxyOid(), newModelNode);
+			this.items.add(node.oid, newModelNode);
 		}
 		
 		if (!firstModelNode) {
