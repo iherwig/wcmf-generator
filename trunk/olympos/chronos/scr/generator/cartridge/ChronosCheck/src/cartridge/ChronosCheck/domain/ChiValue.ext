@@ -15,6 +15,9 @@ boolean hasValidName(Chronos::ChiValue this):
 		case "value": false
 		case "none": false
 		case "sortkey": false
+		case "null": false
+		case "Null": false
+		case "NULL": false
 		default: true
 	}
 ;
