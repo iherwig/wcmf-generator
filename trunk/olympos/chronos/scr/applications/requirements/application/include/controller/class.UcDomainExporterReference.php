@@ -93,7 +93,8 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 
 						// TODO: Since ObjectQuery does not search on remote servers, we are not
 						// able to resolve non-primitive types
-						$foundNodes = array(); //$query->execute(BUILDDEPTH_SINGLE);
+						//$foundNodes = array();
+						$foundNodes = $query->execute(BUILDDEPTH_SINGLE);
 						
 						if (count($foundNodes) > 0) {
 							$result[] = $foundNodes[0]->getBaseOID();
