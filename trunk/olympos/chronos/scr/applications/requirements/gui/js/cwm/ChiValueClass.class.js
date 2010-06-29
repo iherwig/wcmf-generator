@@ -82,14 +82,13 @@ cwm.ChiValueClass.prototype.getPropertyForm = function(modelNode, isLockedByOthe
 		    modelNode : modelNode,
 		    
 		    readOnly : isLockedByOtherUser
-		}), new uwm.property.TextField( {
-		    fieldLabel : 'PropertyType',
-		    toolTip : "this is the type of this property (e.g. string. int, etc.). not necessary",
-		    name : 'PropertyType',
-		    
-		    modelNode : modelNode,
-		    
-		    readOnly : isLockedByOtherUser
+		}), new uwm.property.ComboBox({
+		    fieldLabel: 'PropertyType',
+		    toolTip: "this is the type of this property (e.g. string. int, etc.). not necessary",
+		    name: 'PropertyType',
+		    listType: "ChiNode",
+		    modelNode: modelNode,
+		    disabled : isLockedByOtherUser
 		}), new uwm.property.ComboBox( {
 		    fieldLabel : 'display_type',
 		    toolTip : "The HTML display type for the attribute e.g. image<sup>11</sup>The interpretation of the display_type is done by DefaultValueRenderer or its subclasses..",
