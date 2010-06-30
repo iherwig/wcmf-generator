@@ -41,6 +41,17 @@ uwm.Util.getNumericFromOid = function(oid) {
 }
 
 /**
+ * Chek if an OID is an UMI.
+ * 
+ * @param {String}
+ *            oid The OID to check.
+ * @return {boolean} True if the oid is an umi
+ */
+uwm.Util.isUmi = function(oid) {
+	return oid.match(/^urn:umi:/);
+}
+
+/**
  * Displays a message to the user.
  * 
  * @param {String}

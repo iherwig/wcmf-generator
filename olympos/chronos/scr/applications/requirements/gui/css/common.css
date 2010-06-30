@@ -21,6 +21,17 @@
 	min-width: 4px;
 }
 
+.uwmFigure {
+}
+
+.uwmRemoteFigure {
+	border: 2px dashed #000000 !important;
+}
+
+.RemoteTreeNode a span {
+	color: #0000FF !important;
+}
+
 .TreeTab {
 	min-height: 24px;
 	min-width: 4px;

@@ -119,6 +119,14 @@ uwm.modeltree.Loader.prototype.reformatData = function(self, node, callback, dat
 				break;
 		}
 		if (newNode) {
+			// mark remote nodes
+			if (newNode.modelNode && newNode.modelNode.isRemoteNode()) {
+				newNode.cls = "RemoteTreeNode";
+				if (node.getDepth() == 0) {
+					newNode.iconCls = "FigureModelRemote";
+				}
+			}
+	
 			node.appendChild(newNode);
 		}
 	}

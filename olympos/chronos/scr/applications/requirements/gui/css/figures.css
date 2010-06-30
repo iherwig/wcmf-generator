@@ -11,6 +11,9 @@
 } 
 */
 
+.FigureModelRemote {
+	background-image: url("../img/ModelRemote.png") !important;
+} 
 .FigureModel {
 	background-image: url("../img/Model.png") !important;
 } 

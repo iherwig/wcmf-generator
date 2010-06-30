@@ -153,11 +153,10 @@ uwm.model.ModelNode.prototype.getProxyOid = function() {
 
 /**
  * Check, if the object is a remote object.
- * @note The server sends a property _proxyOid for each remote object.
  * @return Boolean
  */
 uwm.model.ModelNode.prototype.isRemoteNode = function() {
-	return (this.data._proxyOid != undefined);
+	return uwm.Util.isUmi(this.oid);
 }
 
 uwm.model.ModelNode.prototype.getName = function() {
