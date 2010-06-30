@@ -254,6 +254,21 @@ uwm.Uwm.prototype.installOverrides = function() {
 			this.originalValue = this.getValue();
 		}
 	});
+	
+	draw2d.Graphics.prototype.drawString=function(text, x, y) {
+		var _x = this.xt+x*this.cosRadian-y*this.sinRadian;
+		var _y = this.yt+x*this.sinRadian+y*this.cosRadian;
+
+		if (this.sinRadian == -1) {
+			_y -= parseInt(this.jsGraphics.ftSz);
+		}
+		
+		if (this.cosRadian == -1 || this.cosRadian == 1) {
+			_y -= parseInt(this.jsGraphics.ftSz) / 2;
+		}
+	   
+		this.jsGraphics.drawString(text, _x,_y);
+	}
 }
 
 uwm.Uwm.getInstance = function() {

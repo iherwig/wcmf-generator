@@ -40,4 +40,12 @@ uwm.graphics.connection.FilledDiamondDecorator.prototype.paint = function(g) {
 	g.setColor(this.backgroundColor);
 	g.setStroke(1);
 	g.fillPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
+
+	if (this.roleName) {
+		g.drawString(this.roleName, 42, 16);
+	}
+	
+	if (this.multiplicity) {
+		g.drawString(this.multiplicity, 23, -16);
+	}
 }

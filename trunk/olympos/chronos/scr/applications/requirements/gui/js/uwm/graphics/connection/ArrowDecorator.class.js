@@ -40,4 +40,12 @@ uwm.graphics.connection.ArrowDecorator.prototype.paint = function(g) {
 	g.setStroke(1);
 	g.drawLine(12, 8, 0, 0);
 	g.drawLine(0, 0, 12, -8);
+	
+	if (this.roleName) {
+		g.drawString(this.roleName, 42, 16);
+	}
+	
+	if (this.multiplicity) {
+		g.drawString(this.multiplicity, 23, -16);
+	}
 }
