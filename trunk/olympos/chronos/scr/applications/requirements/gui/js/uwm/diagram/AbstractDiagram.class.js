@@ -660,12 +660,16 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 	if (relationObject && relationObject.getOid() != relationObject.getLabel()) {
 		label = relationObject.getLabel();
 		
-		decorators.source.roleName = relationObject.getProperty("sourceName");
-		decorators.source.multiplicity = relationObject.getProperty("sourceMultiplicity");
+		if (decorators.source) {
+			decorators.source.roleName = relationObject.getProperty("sourceName");
+			decorators.source.multiplicity = relationObject.getProperty("sourceMultiplicity");
+		}
 
-		decorators.target.roleName = relationObject.getProperty("targetName");
-		decorators.target.multiplicity = relationObject.getProperty("targetMultiplicity");
-}
+		if (decorators.target) {
+			decorators.target.roleName = relationObject.getProperty("targetName");
+			decorators.target.multiplicity = relationObject.getProperty("targetMultiplicity");
+		}
+	}
 	
 	var connection = new uwm.graphics.connection.BaseConnection(label, decorators);
 	
