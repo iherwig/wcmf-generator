@@ -659,7 +659,13 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 	var label = connectionInfo.label;
 	if (relationObject && relationObject.getOid() != relationObject.getLabel()) {
 		label = relationObject.getLabel();
-	}
+		
+		decorators.source.roleName = relationObject.getProperty("sourceName");
+		decorators.source.multiplicity = relationObject.getProperty("sourceMultiplicity");
+
+		decorators.target.roleName = relationObject.getProperty("targetName");
+		decorators.target.multiplicity = relationObject.getProperty("targetMultiplicity");
+}
 	
 	var connection = new uwm.graphics.connection.BaseConnection(label, decorators);
 	

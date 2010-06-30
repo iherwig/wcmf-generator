@@ -41,4 +41,12 @@ uwm.graphics.connection.OpenDiamondDecorator.prototype.paint = function(g){
     g.fillPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
     g.setColor(this.color);
     g.drawPolygon([0, 12, 24, 12], [0, 8, 0, -8]);
+
+	if (this.roleName) {
+		g.drawString(this.roleName, 42, 16);
+	}
+	
+	if (this.multiplicity) {
+		g.drawString(this.multiplicity, 23, -16);
+	}
 }
