@@ -156,7 +156,7 @@ uwm.model.ModelNode.prototype.getProxyOid = function() {
  * @return Boolean
  */
 uwm.model.ModelNode.prototype.isRemoteNode = function() {
-	return uwm.Util.isUmi(this.oid);
+	return (uwm.Util.isUmi(this.oid) || this.data._proxyOid != undefined);
 }
 
 uwm.model.ModelNode.prototype.getName = function() {
