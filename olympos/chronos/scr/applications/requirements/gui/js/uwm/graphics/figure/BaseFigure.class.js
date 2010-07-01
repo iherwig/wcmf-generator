@@ -216,14 +216,23 @@ uwm.graphics.figure.BaseFigure.prototype.setDimension = function(width, height) 
 }
 
 /**
- * Deactivates text selection on this figure.
+ * Set the appearance of the figure.
  *
  * @private
  */
 uwm.graphics.figure.BaseFigure.prototype.createHTMLElement = function() {
 	var item = draw2d.Figure.prototype.createHTMLElement.call(this);
-	item.className = "uwmFigure";
+
+	// create remote object border
+	var modelObject = this.getFigure().getModelObject();
+	if (modelObject && modelObject.isRemoteNode()) {
+		item.className = "uwmRemoteFigure";
+	}
+	else {
+		item.className = "uwmFigure";
+	}
 	
+	// deactivate text selection
 	uwm.Util.setElementUnselectable(item);
 	
 	return item;

@@ -188,6 +188,10 @@ uwm.hierarchytree.Loader.prototype.attachFollowersList = function(currNode, mode
 					parent: modelNode,
 					modelNode: childModelNode
 				});
+				// mark remote nodes
+				if (subNode.modelNode && subNode.modelNode.isRemoteNode()) {
+					subNode.cls = "RemoteTreeNode";
+				}
 				
 				connectionNode.appendChild(subNode);
 			}
