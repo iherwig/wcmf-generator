@@ -32,7 +32,7 @@
 	
 	<target name="copylibs">
 		<copy todir="${lib.absolute.build.dir}">
-			<fileset dir="${imageexporter.dir}/">
+			<fileset dir="${imageexporter.redist.dir}/">
 				<include name="*.jar"/>
 			</fileset>
 		</copy>
