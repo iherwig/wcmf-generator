@@ -1,10 +1,14 @@
 <project default="build">
 	<property file="build.properties"/>
+	<echoproperties></echoproperties>
 	
 	<target name="build-diagram-exporter">
+		<property name="imageexporter.absolute.lib.dir" location="${imageexporter.lib.dir}"/>
+		<property name="imageexporter.absolute.redist.dir" location="${imageexporter.redist.dir}"/>
 		<ant antfile="${imageexporter.build.file}" target="redist"
 			dir="${imageexporter.dir}" inheritAll="false">
-  			<property file="${imageexporter.build.properties}"/>
+  			<property name="lib.dir" value="${imageexporter.absolute.lib.dir}"/>
+			<property name="redist.dir" value="${imageexporter.absolute.redist.dir}"/>
 		</ant>
 	</target>
 	
@@ -12,7 +16,7 @@
 		<javac encoding="utf-8" srcdir="./src" destdir="${build.absolute.dir}" debug="${debug}" excludesfile="compile-excludes">
 			<classpath>
 				<path refid="lib.path"/>
-				<fileset dir="${imageexporter.libdir}" includes="**/*.jar"/>
+				<fileset dir="${imageexporter.lib.dir}" includes="**/*.jar"/>
 				<dirset dir="${imageexporter.bin}"/>
 			</classpath>
 		</javac>
@@ -39,6 +43,5 @@
 	</target>
 
 	<target name="build" depends="compile,copy,copylibs">
-
 	</target>
 </project>
