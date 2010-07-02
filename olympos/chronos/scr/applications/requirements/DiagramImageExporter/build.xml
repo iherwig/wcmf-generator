@@ -1,6 +1,7 @@
 <project name="DiagramImageExporter" default="redist" basedir=".">
 
 	<property file="build.properties"/>
+	<echoproperties></echoproperties>
 
 	<fileset id="lib.jars" dir="${lib.dir}">
 		<include name="**/*.jar"/>
