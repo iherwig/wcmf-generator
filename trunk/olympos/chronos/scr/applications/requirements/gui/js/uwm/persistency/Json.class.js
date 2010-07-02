@@ -333,7 +333,7 @@ uwm.persistency.Json.prototype.exportImage = function(diagramOid, language, succ
  
 uwm.persistency.Json.prototype.getCodeGeneratorList = function(successHandler, errorHandler) {
 	this.jsonRequest({
-		usr_action: 'generatorlist'
+		usr_action: 'generatorList'
 	}, successHandler, errorHandler);
 }
 
