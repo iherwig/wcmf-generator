@@ -44,15 +44,23 @@ Void addLoopRuleSet(uml::DecisionNode this):
 	let elementSelector = this.outgoing.selectFirst(e|e.name == "LoopStart").target:
 	
 	info("Adding LoopRuleSet to " + this.name) ->
-		
-	this.activity.ownedBehavior.add(ruleSet) ->
-	ruleSet.applyStereotype("Ouranos::ProductionRuleset") ->
-	ruleSet.setName("LoopRuleSet" + this.name) ->
-	
-	listCreator.assignToRuleSet(ruleSet) ->
-	evaluator.assignToRuleSet(ruleSet) ->
-	this.assignToRuleSet(ruleSet) ->
-	elementSelector.assignToRuleSet(ruleSet) ->
+
+	evaluator != null ? (
+		listCreator != null ? (
+			this.activity.ownedBehavior.add(ruleSet) ->
+			ruleSet.applyStereotype("Ouranos::ProductionRuleset") ->
+			ruleSet.setName("LoopRuleSet" + this.name) ->
+			
+			listCreator.assignToRuleSet(ruleSet) ->
+			evaluator.assignToRuleSet(ruleSet) ->
+			this.assignToRuleSet(ruleSet) ->
+			elementSelector.assignToRuleSet(ruleSet)
+		) : (
+			error("No listCreator (predecessor of predecessor of 'LoopContinue') found!")
+		)
+	) : (
+		error("No evaluator (predecessor of 'LoopContinue') found!")
+	) ->
 	
 	Void
 ;
