@@ -1,5 +1,6 @@
 import uml;
 import xmlSchema;
+import jaxb;
 
 extension org::openarchitectureware::xsd::lib::qname;
 
@@ -10,12 +11,14 @@ extension cartridge::XmlSchema::domainClass;
 extension cartridge::XmlSchema::domainEnum;
 extension cartridge::XmlSchema::domainSimple;
 
-xmlSchema::SchemaType xmlSchema(uml::Model this, String rootElements, String targetNamespace):
-	//(new xmlSchema::SchemaType).a
-	//(new xmlSchema::TopLevelAttribute).setN
-
+xmlSchema::XmlSchemaDocumentRoot xmlSchema(uml::Model this, String rootElements, String targetNamespace):
+	let targetRoot = new xmlSchema::XmlSchemaDocumentRoot:
 	let xsd = new xmlSchema::SchemaType:
 	let rootElementList = rootElements.split(","):
+	
+	//targetRoot.xMLNSPrefixMap.put("jaxb", "http://java.sun.com/xml/ns/jaxb") ->
+	//targetRoot.xSISchemaLocation.put("http://java.sun.com/xml/ns/jaxb", "/home/nist/eclipse-3.5-workspace/generator/core/src/metamodel/jaxb.xsd") ->
+	targetRoot.setSchema(xsd) ->
 
 	xsd.setTargetNamespace(targetNamespace) ->
 	
@@ -23,9 +26,13 @@ xmlSchema::SchemaType xmlSchema(uml::Model this, String rootElements, String tar
 	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::Enumeration).convertToXsd(targetNamespace)) ->
 	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::PrimitiveType).select(e|e.name.matches("[a-zA-Z0-9-]+")).convertToXsd(targetNamespace)) ->
 	
-	xsd.element.addAll(rootElementList.getRootElement(targetNamespace)) ->
+	rootElements.trim().length > 0 && rootElementList.size > 0 ? (
+		xsd.element.addAll(rootElementList.getRootElement(targetNamespace))
+	) : (
+		Void
+	) ->
 		
-	xsd
+	targetRoot
 ;
 
 xmlSchema::TopLevelElement getRootElement(String rootClassName, String targetNamespace):
@@ -35,4 +42,22 @@ xmlSchema::TopLevelElement getRootElement(String rootClassName, String targetNam
 	e.setType(createQName(targetNamespace, rootClassName)) ->
 	
 	e
+;
+
+jaxb::JaxbDocumentRoot jaxb(uml::Model this, String rootElements, String targetNamespace):
+	let targetRoot = new jaxb::JaxbDocumentRoot:
+	let root = new jaxb::BindingsType:
+	let schema = new jaxb::BindingsType:
+	
+	targetRoot.xMLNSPrefixMap.put("xs", "http://www.w3.org/2001/XMLSchema") ->
+	
+	root.setVersion("2.0") ->
+	targetRoot.setBindings(root) ->
+	
+	schema.setSchemaLocation("schema.xsd") ->
+	root.bindings.add(schema) ->
+	
+	schema.bindings.addAll(this.allOwnedElements().typeSelect(uml::Enumeration).ownedLiteral.convertToJaxb(targetNamespace)) ->
+	
+	targetRoot
 ;

@@ -13,6 +13,8 @@
 	
 	<bean id="xmlSchema" class="org.openarchitectureware.xsd.XSDMetaModel">
 		<schemaFile value="${basePath}/metamodel/XMLSchema.xsd" />
+		<schemaFile value="${basePath}/metamodel/jaxb.xsd" />
+	    <registerPackagesGlobally value="true" />
 	</bean>
 	
 	<component class="oaw.emf.XmiReader">
@@ -20,21 +22,19 @@
 		<outputSlot value="localModel" />
 	</component>
 	
-	<if cond="${importMultiplicity}">
-		<!-- load CIM reference model -->
-		<component class="oaw.emf.XmiReader">
-			<modelFile value="${basePath}/metamodel/cim.uml"/>
-			<outputSlot value="cimmodel"/>
-		</component>
-	</if>
+	<!-- load CIM reference model -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${basePath}/metamodel/cim.uml"/>
+		<outputSlot value="cimmodel"/>
+	</component>
 
  	<if cond="${importMultiplicity}">
 		<!-- apply multiplicities from CIM reference model-->
 		<component class="oaw.xtend.XtendComponent">
-			<metaModel id="uml" class="oaw.uml2.UML2MetaModel" />
+			<metaModel idRef="uml2" />
 			<metaModel idRef="Chronos" />
 			
-			<invoke value="cartridge/UmlConnector/importMultiplicity::importMultiplicity(localModel, cimmodel)" />
+			<invoke value="${basePath}/cartridge/UmlConnector/importMultiplicity::importMultiplicity(localModel, cimmodel)" />
 	
 			<outputSlot value="localModel" />
 		</component>
@@ -42,15 +42,41 @@
 
 	<component class="oaw.xtend.XtendComponent">
 		<metaModel idRef="uml2" />
+		<metaModel idRef="Chronos" />
+
+		<invoke value="${basePath}/cartridge/UmlConnector/importEnumerations::importEnumerations(localModel, cimmodel)" />
+		<outputSlot value="localModel" />
+	</component>
+
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="uml2" />
 		<metaModel idRef="xmlSchema" /> 
 
-		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, '${rootElements}', 'http://com.ibm.eenergy/cim')" />
+		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, '${rootElements}', 'http://eenergy.ibm.com/cim')" />
 		<outputSlot value="schema" />
 	</component>
 
 	<component class="org.openarchitectureware.xsd.XMLWriter">
 		<metaModel idRef="xmlSchema" />
+
 		<modelSlot value="schema" />
 		<uri value="${targetDir}/schema.xsd" />
 	</component>
+
+<!--
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="uml2" />
+		<metaModel idRef="xmlSchema" /> 
+
+		<invoke value="${basePath}/cartridge/XmlSchema/root::jaxb(localModel, '${rootElements}', 'http://eenergy.ibm.com/cim')" />
+		<outputSlot value="jaxb" />
+	</component>
+
+	<component class="org.openarchitectureware.xsd.XMLWriter">
+		<metaModel idRef="xmlSchema" />
+
+		<modelSlot value="jaxb" />
+		<uri value="${targetDir}/schema.jaxb" />
+	</component>
+-->
 </workflow>
