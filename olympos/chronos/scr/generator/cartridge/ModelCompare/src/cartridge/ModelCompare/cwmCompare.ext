@@ -1,0 +1,38 @@
+import cwm;
+import ecore;
+
+extension common::util;
+
+cwm::CwmExport referenceModel():
+	GLOBALVAR referenceModel
+;
+
+cached Object findAllByType(CwmExport this, String type):
+	this.eAllContents.select(e|e.metaType.name == type)
+;
+
+Boolean isAssociation(cwm::ManyToMany this):
+	let associationTypes = {
+		"association",
+		"aggregation",
+		"composition"
+	}:
+	
+	associationTypes.contains(this.relationType)
+;
+
+cached findChiNodeById(CwmExport this, String id):
+	let allChiNodes = ((List[cwm::ChiNode]) this.findAllByType("ChiNode")):
+	
+	allChiNodes.selectFirst(e|e.id == id)
+;
+
+cached cwm::ManyToMany findMirror(cwm::ManyToMany this):
+	//(new cwm::ManyToMany).eRootContainer
+	let thisSourceType == ((cwm::ChiNode) e.eContainer).name:
+	let thisTargetType == ((cwm::CwmExport) this.eRootContainer).findChiNodeById(this.targetOid).name: 
+
+	let allOfMyType = ((List[cwm::ManyToMany]) referenceModel().findAllByType("ManyToMany")):
+	
+	allOfMyType.selectFirst(e|((cwm::ChiNode) e.eContainer).name == thisSourceType && referenceModel().findChiNodeById(e.targetOid).name == thisTargetName)
+;
