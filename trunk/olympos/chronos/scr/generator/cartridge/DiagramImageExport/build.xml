@@ -39,6 +39,9 @@
 			<fileset dir="${imageexporter.redist.dir}/">
 				<include name="*.jar"/>
 			</fileset>
+			<fileset dir="${imageexporter.lib.dir}">
+				<include name="**/*.jar"/>
+			</fileset>
 		</copy>
 	</target>
 
