@@ -10,11 +10,18 @@
 	
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
 
+	<component class="net.sourceforge.olympos.oaw.workflow.AntRunner">
+		<Param name="outputRelativePath" value="${outputRelativePath}"/>
+		<Param name="chronos.file" value="${basePath}/metamodel/chronos.profile.uml"/>
+		<Param name="ouranos.file" value="${basePath}/metamodel/ouranos.profile.uml"/>
+		<antFile value="${basePath}/cartridge/UmlConnector/workflow/copyProfiles.xml"/>
+	</component>
+
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="${outputRelativePath}"/>
 		<outputSlot value="umlModel"/>
-	 </component>
-
+	</component>
+	 
 	<component class="oaw.xtend.XtendComponent">
 		<metaModel id="uml2" class="oaw.uml2.UML2MetaModel" />
 		<metaModel id="chronos" class="oaw.uml2.profile.ProfileMetaModel">

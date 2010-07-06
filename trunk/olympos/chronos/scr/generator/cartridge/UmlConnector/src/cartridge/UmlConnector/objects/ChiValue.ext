@@ -67,7 +67,7 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 		un.setId(c.getId()) ->
 		
 		c.^default != null ? un.setDefault((String) c.^default) : Void ->
-		un.setPropertyType(c.type.name) ->
+		un.setPropertyType(c.type.getId()) ->
 		un.setAppDataType((String) c.getTaggedValue("Chronos::ChiValue", "app_data_type")) ->
 		un.setDbDataType((String) c.getTaggedValue("Chronos::ChiValue", "db_data_type")) ->
 		un.setIsEditable(c.getTaggedValue("Chronos::ChiValue", "is_editable") == Chronos::boolean::^true) ->
@@ -100,16 +100,19 @@ uml::Type getType(String typeName, uml::Model um):
 			um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes")
 	:
 	
-	let result = um.allOwnedElements().typeSelect(uml::Type).selectFirst(e|e.name == typeName) == null ? (
+	let result = um.findTypeByName(typeName) == null ? (
 			let tempType = new uml::PrimitiveType:
 			tempType.setName(typeName) ->
 			((uml::Package) primitiveTypes).ownedType.add(tempType) ->
 			info("Added Primitive Type \"" + typeName + "\"") ->
 			tempType
 		) :
-			um.allOwnedElements().typeSelect(uml::Type).selectFirst(e|e.name == typeName)
+			um.findTypeByName(typeName)
 	:
 	
 	result
 ;
-	
+
+cached uml::Type findTypeByName(uml::Model this, String typeName):
+	this.allOwnedElements().typeSelect(uml::Type).selectFirst(e|e.name == typeName)
+;

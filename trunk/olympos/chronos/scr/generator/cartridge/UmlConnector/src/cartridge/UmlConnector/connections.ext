@@ -53,24 +53,16 @@ Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml
 	let childClass = um.allOwnedElements().typeSelect(uml::Class).selectFirst(e|e.name == ch.targetType + ":" + ch.targetOid): (
 		childClass != null
 		? (
-			let parentLower = getLowerMultiplicity(ch.sourceMultiplicity):
-			let parentUpper = getUpperMultiplicity(ch.sourceMultiplicity):
-			let parentNav = getNavigability(ch.sourceNavigability):
-			let childLower = getLowerMultiplicity(ch.targetMultiplicity):
-			let childUpper = getUpperMultiplicity(ch.targetMultiplicity):
-			let childNav = getNavigability(ch.targetNavigability):
-
-			let isManyToMany = childClass.name.split(":").first() == "ChiNodeManyToMany":
-			let realParentLower = isManyToMany ? childLower : childLower:
-			let realParentUpper = isManyToMany ? childUpper : childUpper:
-			let realChildLower = isManyToMany ? parentLower : parentLower:
-			let realChildUpper = isManyToMany ? parentUpper : parentUpper:
-			let realParentAK = isManyToMany ? parentAK : parentAK:
-			let realChildAK = isManyToMany ? childAK : childAK:
-			let realParentNav = isManyToMany ? parentNav : parentNav:
-			let realChildNav = isManyToMany ? childNav : childNav:
-
-			let conn = parentClass.createAssociation(realParentNav, realParentAK, "", realParentLower, realParentUpper, childClass, realChildNav, realChildAK, "", realChildLower, realChildUpper):
+			let parentLower = getLowerMultiplicity(ch.targetMultiplicity):
+			let parentUpper = getUpperMultiplicity(ch.targetMultiplicity):
+			let parentNav = getNavigability(ch.targetNavigability):
+			let parentName = getEndName(ch.targetName):
+			let childLower = getLowerMultiplicity(ch.sourceMultiplicity):
+			let childUpper = getUpperMultiplicity(ch.sourceMultiplicity):
+			let childNav = getNavigability(ch.sourceNavigability):
+			let childName = getEndName(ch.sourceName):
+			
+			let conn = parentClass.createAssociation(parentNav, parentAK, parentName, parentLower, parentUpper, childClass, childNav, childAK, childName, childLower, childUpper):
 				conn.applyStereotype("Chronos::ChiAssociation") ->
 				conn.setName(ch.name)
 		) : (
@@ -89,6 +81,13 @@ Integer getUpperMultiplicity(String multiplicity):
 
 Boolean getNavigability(String navigability):
 	navigability.trim().toLowerCase() == "true" || navigability.trim().toLowerCase() == "navigable" ? true : false
+;
+
+String getEndName(String endName):
+	endName.isNullOrEmpty() ?
+		""
+	:
+		endName
 ;
 
 Void establishConnectionsToClass(cwm::Child ch, uml::Class parentClass, uml::Model um):
