@@ -1157,8 +1157,10 @@
 		<xsd:attribute name="targetOid" type="xsd:string"/>
 		<xsd:attribute name="targetRole" type="xsd:string"/>
 		<xsd:attribute name="relationType" type="xsd:string"/>
+		<xsd:attribute name="sourceName" type="xsd:string"/>
 		<xsd:attribute name="sourceMultiplicity" type="xsd:string"/>
 		<xsd:attribute name="sourceNavigability" type="xsd:string"/>
+		<xsd:attribute name="targetName" type="xsd:string"/>
 		<xsd:attribute name="targetMultiplicity" type="xsd:string"/>
 		<xsd:attribute name="targetNavigability" type="xsd:string"/>
 		<xsd:attribute name="action" type="xsd:string"/>
