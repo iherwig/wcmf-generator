@@ -223,3 +223,36 @@ FIXES
 0.9.8.4
 FIXES
 - fixed smarty pre filter for php 5.3
+
+0.9.9
+Structure of the CWM version 0.9.8.3 including the Chronos_Default and Eurocom Models 
+fixed php tags for 5.3
+CWm DB 0.9.8.4 structure + data. Linux aware
+Changed CWM UML export to use local profiles; export zip file including all required profiles
+Added export of ProductionRuleSet to UmlConnector
+added alias counter for rule entities (will work after re-generating the application), removed unused includes from cwm index.html
+updated Dionysos interface
+updated Dionysos interface pt2
+remove elimination of 'controller' parameter in Dionysos responses in order to make LongTaskController work
+modified ChiBusinessPartner to allow self-connections. NOTE: needs to be added in the model too
+modified ChiBusinessPartner to allow self-connections pt2. NOTE: needs to be added in the model too
+fixed "tbd" for History.duplicate column
+some cleanup in browser controllers
+moved generated statistics files to application directory for reuse
+Added some changed project files
+optimized LastEdited loading (limit query)
+make sure that exactly LIMIT objects are shown in LastEdited
+added parameter for reusing cached data, implemented reuse
+added statistic job, increased list of last edited objects (25)
+refactored Browser (replaced iframes by classes), other improvements to allow integration into other applications
+more cleanup, resice diagrams on size change
+added TreePanel for structured statistics, selectedObject event for grid row listeners, minor changes
+removed unused methods, fixed more semicolon warnings
+Added some changed project files
+replaced browser libs with current versions, removed mootools dependency (fixes diagram display bug), removed package diagram, fixed flash parameters
+allow to mark last edited nodes in model tree
+added checkbox/parameter for reusing cached data
+added tooltips for statistics grid, fixed broken images in chrome
+changed columns in object lists
+changed cache text
+set fixed with on model listbox
