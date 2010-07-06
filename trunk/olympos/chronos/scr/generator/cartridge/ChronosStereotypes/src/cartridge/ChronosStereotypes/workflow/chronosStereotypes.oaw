@@ -1,0 +1,49 @@
+<workflow>
+	<property name="basePath" value="src" />
+
+	<property name="propertyFile" value="${basePath}/cartridge/ChronosStereotypes/workflow/chronosStereotypes.properties" />
+	<property file="${propertyFile}" />
+
+	<!-- metamodel setup -->
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<bean id="mmChronos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
+		<profile value="${chronosProfileUri}"/>
+	</bean>
+	
+	<bean id="mmUml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
+
+	<!-- read profile as model -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${chronosProfileUri}"/>
+		<outputSlot value="chronosModel"/>
+	 </component>
+
+	<!-- read source model -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${sourceModelFile}"/>
+		<outputSlot value="sourceModel"/>
+	 </component>
+
+	<!-- add Stereotypes -->
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="mmUml2" />
+		<metaModel idRef="mmChronos" />
+		
+		<invoke value="cartridge/ChronosStereotypes/chronosStereotypes::root(sourceModel, chronosModel)" />
+
+		<outputSlot value="targetModel" />
+	</component>
+	
+	<!-- fix resource (profile) paths, so they refer to files in the same directory -->
+	<component class="net.sourceforge.olympos.oaw.workflow.ResourcePathRemover">
+		<modelSlot value="chronosModel" />
+	</component>
+
+	<!-- write out UML model. The file will be named like the model (first parameter of createUmlModel call above) -->
+	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
+		<inputSlot value="targetModel" />
+		<outPath value="${targetModelPath}" />
+	</component>
+	
+</workflow>
