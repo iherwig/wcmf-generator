@@ -23,12 +23,12 @@ require_once ('class.OawUtil.php');
 // PROTECTED REGION END
 
 /**
- * @class UWMImporterController
+ * @class UwmMergerController
  * @ingroup Controller
- * @brief Imports a UML file.
+ * @brief Imports a UML file and merges it with the repository.
  *
  * <b>Input actions:</b>
- * - @em importUWM Imports a UML file.
+ * - @em mergeUwm Imports a UML file.
  *
  * <b>Output actions:</b>
  * - @em failure If a fatal error occurs
@@ -39,14 +39,14 @@ require_once ('class.OawUtil.php');
  * The following configuration settings are defined for this controller:
  *
  * [actionmapping]
- * ??importUWM = UWMImporterController
+ * ??mergeUwm = UwmMergerController
  *
  * [views]
  *
- * @author
+ * @author Niko
  * @version 1.0
  */
-class UWMImporterController extends Controller
+class UwmMergerController extends Controller
 {
 	// PROTECTED REGION ID(application/include/controller/class.UWMImporterController.php/Body) ENABLED START
 	const UPLOAD_NAME = 'modelFile';
@@ -66,6 +66,8 @@ class UWMImporterController extends Controller
 
 	private $idMap = array ();
 
+	private $asyncCache = array();
+
 	private $errorMsg = '';
 	private $errorOccured = false;
 
@@ -78,7 +80,7 @@ class UWMImporterController extends Controller
 	private function check($msg)
 	{
 		$newTime = microtime(true);
-		Log::debug(($newTime-$this->lastTime).": $msg", __CLASS__);
+		Log::error(($newTime-$this->lastTime).": $msg", __CLASS__);
 		$this->lastTime = $newTime;
 	}
 
@@ -97,11 +99,11 @@ class UWMImporterController extends Controller
 
 				//$this->importUwm($umlFilePath);
 
-				unlink($uwmFilePath);
+				//unlink($uwmFilePath);
 			}
 
-			unlink($this->propertyFilePath);
-			unlink($umlFilePath);
+			//unlink($this->propertyFilePath);
+			//unlink($umlFilePath);
 		}
 
 		if (!$this->errorOccured) {
@@ -175,7 +177,7 @@ class UWMImporterController extends Controller
 					$elementName = $this->dom->name;
 
 					if ($elementName != 'CwmExport' && $elementName != 'Child' && $elementName != 'Parent' && $elementName != 'ManyToMany' && $elementName != 'Diagram') {
-						$this->createAndSaveDisplayValues($elementName);
+						$this->findExisting($elementName);
 					}
 				}
 			}
@@ -199,11 +201,11 @@ class UWMImporterController extends Controller
 							break;
 
 						case 'Child':
-							$this->associateChild($elementName);
+							$this->updateChild($elementName);
 							break;
 
 						case 'ManyToMany':
-							$this->associateManyToMany($elementName);
+							$this->updateManyToMany($elementName);
 							break;
 
 						case 'Model':
@@ -211,7 +213,7 @@ class UWMImporterController extends Controller
 							break;
 
 						default:
-							$this->associateTreeAndSaveValues($elmentName);
+							$this->updateTreeAndValues($elmentName);
 							break;
 					}
 				}
@@ -244,52 +246,34 @@ class UWMImporterController extends Controller
 		$this->check("import finished");
 	}
 
-	private function createAndSaveDisplayValues($elementName) {
-		$newObj = $this->persistenceFacade->create($elementName);
-		$id = $this->dom->getAttribute('id');
+	private function findExisting($elementName) {
+		$query = PersistenceFacade::createObjectQuery($elementName);
+			
+		$elementTpl = $query->getObjectTemplate($elementName);
 
-		$displayValuesString = $newObj->getProperty('display_value');
-		$displayValues = explode('|', $displayValuesString);
+		$name = $this->dom->getAttribute('Name');
 
-		$this->dom->moveToFirstAttribute();
-		while ($this->dom->moveToNextAttribute()) {
-			$attrName = $this->dom->name;
+		$elementTpl->setValue('Name', "= '".mysql_escape_string($name)."'", DATATYPE_ATTRIBUTE);
 
-			if ($attrName != 'id' && in_array($attrName, $displayValues)) {
-				$value = utf8_decode(trim($this->dom->value));
-					
-				if ($value != '') {
-					$newObj->setValue($attrName, $value);
-				}
+		$elementResultList = $query->execute(1);
+
+		if (count($elementResultList) > 0) {
+			$foundObj = $elementResultList[0];
+			if (count($elementResultList) > 1) {
+				$oid = $foundObj->getBaseOID();
+
+				Log::warn("Found more than one match for $name, using first ($oid)", __CLASS__);
 			}
+
+			$id = $this->dom->getAttribute('id');
+
+			$this->idMap[$id] = $foundObj;
+			$this->check('ID mapping: '.$id.' -- '.$foundObj->getBaseOID());
 		}
-
-		$newObj->save();
-
-		$this->idMap[$id] = $newObj->getOID();
-		$this->check('ID mapping: '.$id.' -- '.$newObj->getOID());
 	}
 
-	private function associateChild($elementName) {
+	private function updateChild($elementName) {
 		$this->check("child targetOid: ".$this->dom->getAttribute('targetOid'));
-		$childObj = $this->load($this->dom->getAttribute('targetOid'));
-
-		if ($childObj) {
-			$parentObj = array_pop($this->parentObjs);
-
-			if ($parentObj) {
-				$this->check("parent: ".$parentObj->getOID());
-				$parentObj->addChild($childObj);
-				$parentObj->save();
-				$parentObj = $this->persistenceFacade->load($parentObj->getOID(), BUILDTYPE_SINGLE);
-					
-				$childObj->save();
-					
-				array_push($this->parentObjs, $parentObj);
-			} else {
-				$this->check('No Parent Child: '.$this->dom->getAttribute('targetOid'));
-			}
-		}
 	}
 
 	private static $roleTargetToSourceMapper = array(
@@ -299,120 +283,110 @@ class UWMImporterController extends Controller
 		'NodeManyToManySource' => 'NMChiNodeChiMany2ManyChiNodeEnd'
 		);
 
-		private function associateManyToMany($elementName) {
+		private function updateManyToMany($elementName) {
 			$this->check("manyToMany targetOid: ".$this->dom->getAttribute('targetOid'));
-			$childObj = $this->load($this->dom->getAttribute('targetOid'));
-
-			if ($childObj) {
-				$this->check("target: ".$childObj->getOID());
-				$parentObj = array_pop($this->parentObjs);
-
-				if ($parentObj) {
-					$this->check("source: ".$parentObj->getOID());
-
-					// get the source and target roles for the relation
-					$targetRole = $this->dom->getAttribute('targetRole');
-					if (!$targetRole) {
-						$targetRole = $this->dom->getAttribute('targetType');
-					}
-					$sourceRole = $parentObj->getType();
-					if (array_key_exists($targetRole, self::$roleTargetToSourceMapper)) {
-						$sourceRole = self::$roleTargetToSourceMapper[$targetRole];
-					}
-
-					// create templates of the role types and copy the values of
-					// source and target to them (this is necessary in order to
-					// have the correct source and target types)
-					$parentTemplate = $this->persistenceFacade->create($sourceRole, 1);
-					$parentObj->copyValues($parentTemplate);
-					$childTemplate = $this->persistenceFacade->create($targetRole, 1);
-					$childObj->copyValues($childTemplate);
-
-					// create the nm instance
-					$linkType = $this->findAssociationType($parentTemplate, $childTemplate);
-					if (!$linkType) {
-						$this->addErrorMsg("Cannot find linkType: $sourceRole => $targetRole");
-					}
-					$this->check('manyToMany linkType: '.$linkType);
-					$link = $this->persistenceFacade->create($linkType, BUILDTYPE_SINGLE);
-
-					// set the attributes to the nm instance
-					$valueNames = array('Name', 'relationType', 'sourceName', 'sourceMultiplicity', 'sourceNavigability', 'targetName', 'targetMultiplicity', 'targetNavigability', 'action', 'config', 'context');
-					foreach ($valueNames as $currValueName)	{
-						$attrValue = $this->dom->getAttribute($currValueName);
-
-						if ($attrValue) {
-							$foundLink->setValue($currValueName, $this->resolveValue($foundLink, $currValueName, $attrValue));
+			
+			$relationType = $this->dom->getAttribute('relationType');
+			if (
+				$relationType == 'aggregation' ||
+				$relationType == 'association' ||
+				$relationType == 'composition'
+			) {
+				$childObj = $this->load($this->dom->getAttribute('targetOid'));
+	
+				if ($childObj) {
+					$this->check("target: ".$childObj->getOID());
+					$parentObj = array_pop($this->parentObjs);
+	
+					if ($parentObj) {
+						$this->check("source: ".$parentObj->getOID());
+	
+						// get the source and target roles for the relation
+						$targetRole = $this->dom->getAttribute('targetRole');
+						if (!$targetRole) {
+							$targetRole = $this->dom->getAttribute('targetType');
 						}
+						$sourceRole = $parentObj->getType();
+						if (array_key_exists($targetRole, self::$roleTargetToSourceMapper)) {
+							$sourceRole = self::$roleTargetToSourceMapper[$targetRole];
+						}
+	
+						// create templates of the role types and copy the values of
+						// source and target to them (this is necessary in order to
+						// have the correct source and target types)
+						$parentTemplate = $this->persistenceFacade->create($sourceRole, 1);
+						$parentObj->copyValues($parentTemplate);
+						$childTemplate = $this->persistenceFacade->create($targetRole, 1);
+						$childObj->copyValues($childTemplate);
+	
+						// create the nm instance
+						$linkType = $this->findAssociationType($parentTemplate, $childTemplate);
+						if (!$linkType) {
+							$this->addErrorMsg("Cannot find linkType: $sourceRole => $targetRole");
+						}
+						$this->check('manyToMany linkType: '.$linkType);
+	
+						$childChildren = $childObj->getChildren();
+						$parentChildren = $parentObj->getChildren();
+	
+						$foundLink = null;
+						
+						$assocName = $this->dom->getAttribute('Name');
+	
+						foreach($childChildren as $currChildChild) {
+							$this->check('currParentChild type: ' . $currChildChild->getType());
+	
+							if ($currChildChild->getType() == $linkType) {
+								$this->check("Found right linkType");
+
+								$this->check("assocName: $assocName");
+								
+								foreach($parentChildren as $currParentChild) {
+									if (
+										($currChildChild->getBaseOID() == $currParentChild->getBaseOID()) &&
+										(trim($assocName) == '' || $assocName == $currChildChild->getName())
+									) {
+										
+										$this->check('found link: ' . $currChildChild->getBaseOID() . ' sourceName: ' . $currChildChild->getSourceName() . ' targetName: ' . $currChildChild->getTargetName());
+										$foundLink = $currChildChild;
+	
+										if ($currChildChild->getSourceName() != '' && $currChildChild->getTargetName() != '') {
+											break;
+										}
+									}
+								}
+							}
+						}
+	
+						if ($foundLink) {
+							$this->check('selected link: ' . $foundLink->getBaseOID());
+							
+							$valueNames = array('Name', 'relationType', 'sourceName', 'sourceMultiplicity', 'sourceNavigability', 'targetName', 'targetMultiplicity', 'targetNavigability', 'action', 'config', 'context');
+							foreach ($valueNames as $currValueName)	{
+								$attrValue = $this->dom->getAttribute($currValueName);
+	
+								if ($attrValue) {
+									$foundLink->setValue($currValueName, $this->resolveValue($foundLink, $currValueName, $attrValue));
+								}
+							}
+	
+							$foundLink->save();
+						}
+	
+						array_push($this->parentObjs, $parentObj);
+					} else {
+						$this->addErrorMsg('No Parent ManyToMany: '.$this->dom->getAttribute('targetOid'));
 					}
-
-					// establish the source connection
-					$parentTemplate->addChild($link);
-					$link->save();
-
-					// establish the target connection
-					$childTemplate->addChild($link);
-					$link->save();
-
-					$this->check('link oid: '.$link->getOID());
-
-					array_push($this->parentObjs, $parentObj);
-				} else {
-					$this->addErrorMsg('No Parent ManyToMany: '.$this->dom->getAttribute('targetOid'));
 				}
 			}
 		}
 
-		private function associateTreeAndSaveValues($elmentName) {
+		private function updateTreeAndValues($elmentName) {
 			$this->check("newChild id: ".$this->dom->getAttribute('id'));
-
+				
 			$newChild = $this->load($this->dom->getAttribute('id'));
-
-			$this->saveValues($newChild);
-
-			$parentObj = array_pop($this->parentObjs);
-			if ($parentObj) {
-				$this->check("parent: ".$parentObj->getOID());
-				$parentObj->addChild($newChild);
-				$parentObj->save();
-				$parentObj = $this->persistenceFacade->load($parentObj->getOID(), BUILDTYPE_SINGLE);
-
-				array_push($this->parentObjs, $parentObj);
-
-				$newChild->save();
-				$newChild = $this->persistenceFacade->load($newChild->getOID(), BUILDTYPE_SINGLE);
-			} else {
-				$this->addErrorMsg('No Parent Default: '.$this->dom->getAttribute('id'));
-				;
-			}
+				
 			array_push($this->parentObjs, $newChild);
-		}
-
-		private function saveValues($newObj) {
-			$newObjDisplayValuesString = $newObj->getProperty('display_value');
-			$newObjDisplayValues = explode('|', $newObjDisplayValuesString);
-
-			$this->dom->moveToFirstAttribute();
-			while ($this->dom->moveToNextAttribute()) {
-				$attrName = $this->dom->name;
-
-				if ($attrName != 'id' && !in_array($attrName, $newObjDisplayValues)) {
-					$value = $this->dom->value;
-					if ($value != null) {
-						$value = utf8_decode(trim($this->dom->value));
-
-						if ($value != '') {
-							$value = $this->resolveValue($newObj, $attrName, $value);
-
-							$newObj->setValue($attrName, $value);
-						}
-					}
-				}
-			}
-
-			$this->dom->moveToElement();
-
-			$newObj->save();
 		}
 
 		private function resolveValue($newObj, $attrName, $value) {
@@ -437,7 +411,7 @@ class UWMImporterController extends Controller
 					if (!$fistDisplayType) {
 						$firstDisplayType = $displayType;
 					}
-						
+
 					//Resolve external ids to internal OIDs
 					if ($displayType == 'ChiNode') {
 						$oid = $this->idMap[$value];
@@ -445,56 +419,71 @@ class UWMImporterController extends Controller
 						if (PersistenceFacade::isValidOID($oid)) {
 							$foundMatchingNode = $this->persistenceFacade->load($oid);
 							$this->check("Found ChiNode value: $oid");
-								
+
+							break;
+						}
+					}
+
+					if (array_key_exists($displayType, $this->asyncCache)) {
+						$typeCache = $this->asyncCache[$displayType];
+						if (array_key_exists($value, $typeCache)) {
+							$foundMatchingNode = $typeCache[$value];
+							$this->check('Found cached object: ' . $foundMatchingNode->getRealOID());
+
 							break;
 						}
 					} else {
-						$query = PersistenceFacade::createObjectQuery($displayType);
-							
-						$displayTypeTpl = $query->getObjectTemplate($displayType);
-						$displayValueString = $displayTypeTpl->getProperty('display_value');
-							
-						$displayValues = explode('|', $displayValueString);
-						if (!$firstDisplayValues) {
-							$firstDisplayValues = $displayValues;
+						$this->asyncCache[$displayType] == array();
+					}
+
+
+					$query = PersistenceFacade::createObjectQuery($displayType);
+
+					$displayTypeTpl = $query->getObjectTemplate($displayType);
+					$displayValueString = $displayTypeTpl->getProperty('display_value');
+
+					$displayValues = explode('|', $displayValueString);
+					if (!$firstDisplayValues) {
+						$firstDisplayValues = $displayValues;
+					}
+
+					$computedValue = '';
+					$firstCompute = true;
+
+					foreach ($displayValues as $index=>$displayValue) {
+						if (trim($valueParts[$index]) != '') {
+							$displayTypeTpl->setValue($displayValue, "= '".mysql_escape_string($valueParts[$index])."'", DATATYPE_ATTRIBUTE);
+							if (!$firstCompute) {
+								$computedValue .= ' - ';
+							} else {
+								$firstCompute = false;
+							}
+
+							$computedValue .= $valueParts[$index];
 						}
-							
-						$computedValue = '';
-						$firstCompute = true;
-							
-						foreach ($displayValues as $index=>$displayValue) {
-							if (trim($valueParts[$index]) != '') {
-								$displayTypeTpl->setValue($displayValue, "= '".mysql_escape_string($valueParts[$index])."'", DATATYPE_ATTRIBUTE);
-								if (!$firstCompute) {
-									$computedValue .= ' - ';
-								} else {
-									$firstCompute = false;
-								}
-									
-								$computedValue .= $valueParts[$index];
-							}
+					}
+
+					$displayResultList = $query->execute(BUILDDEPTH_SINGLE);
+
+					if (count($displayResultList) > 0) {
+						if (!$foundMatchingNode) {
+							$foundMatchingNode = $displayResultList[0];
+
+							$this->asyncCache[$displayType][$value] = $foundMatchingNode;
 						}
-							
-						$displayResultList = $query->execute(BUILDDEPTH_SINGLE);
-							
-						if (count($displayResultList) > 0) {
-							if (!$foundMatchingNode) {
-								$foundMatchingNode = $displayResultList[0];
-							}
 
-							foreach ($displayResultList as $currResult) {
-								if (in_array($currResult->getOID(), $this->idMap)) {
-									$foundMatchingNode = $currResult;
+						foreach ($displayResultList as $currResult) {
+							if (in_array($currResult->getOID(), $this->idMap)) {
+								$foundMatchingNode = $currResult;
 
-									$foundTargetType = true;
+								$foundTargetType = true;
 
-									break;
-								}
-							}
-
-							if ($foundTargetType) {
 								break;
 							}
+						}
+
+						if ($foundTargetType) {
+							break;
 						}
 					}
 				}
@@ -554,10 +543,7 @@ class UWMImporterController extends Controller
 		private function load($xmlId) {
 			$result = null;
 
-			$oid = $this->idMap[$xmlId];
-			if ($oid) {
-				$result = $this->persistenceFacade->load($oid, BUILDTYPE_SINGLE);
-			}
+			$result = $this->idMap[$xmlId];
 
 			return $result;
 		}
