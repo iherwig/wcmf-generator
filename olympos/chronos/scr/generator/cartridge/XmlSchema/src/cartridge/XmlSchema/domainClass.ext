@@ -14,25 +14,12 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 
 	let result = new xmlSchema::TopLevelComplexType:
 	let sequence = new xmlSchema::ExplicitGroup:
-	let allPropertiesCollection = (List[uml::Property]) {}:
-	let allProperties = (List[uml::Property]) {}:
-	
-	!this.isAbstract ? (
-		allPropertiesCollection.addAll(this.attribute) ->
-		allPropertiesCollection.addAll(this.getOwnAssociationEnds().select(e|!allPropertiesCollection.exists(f|e.name == f.name))) ->
-		this.getSuperClass().isAbstract ? (
-			allPropertiesCollection.addAll(this.getSuperClass().getOwnAssociationEnds().select(e|!allPropertiesCollection.exists(f|e.name == f.name))) ->
-			allPropertiesCollection.addAll(this.getSuperClass().attribute)
-		) : (
-			Void
-		)
-	) : (
-		Void
-	) ->
-	
-	allProperties.addAll(allPropertiesCollection.toSet().select(e|e.isNavigable())) ->
+	let allProperties = this.getAllProperties():
+	let parentProperties = this.getSuperClass().getAllProperties():
 	
 	info("Converting Class " + this.name) ->
+	
+	allProperties.removeAll(allProperties.select(e|!e.name.isNullOrEmpty() && parentProperties.exists(f|e.name == f.name))) ->
 	
 	result.setName(this.name) ->
 	result.setAbstract(this.isAbstract) ->
@@ -77,10 +64,10 @@ xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespa
 		this.name != "mRID" ? (
 			this.type.sanitizeXsdTypes(targetNamespace)
 		) : (
-			parseToQName("XMLSchema:ID")
+			parseToQName("schema:ID")
 		)
 	) : (
-		parseToQName("XMLSchema:IDREF")
+		parseToQName("schema:IDREF")
 	)) ->
 	
 	result
@@ -88,13 +75,13 @@ xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespa
 
 xmlSchema::QName sanitizeXsdTypes(uml::Type this, String targetNamespace):
 	let result = switch(this.name.toLowerCase()) {
-		case "string": "XMLSchema:string"
-		case "integer": "XMLSchema:int"
-		case "long": "XMLSchema:long"
-		case "boolean": "XMLSchema:boolean"
-		case "bool": "XMLSchema:boolean"
-		case "float": "XMLSchema:float"
-		case null: "XMLSchema:anyType"
+		case "string": "schema:string"
+		case "integer": "schema:int"
+		case "long": "schema:long"
+		case "boolean": "schema:boolean"
+		case "bool": "schema:boolean"
+		case "float": "schema:float"
+		case null: "schema:anyType"
 		default: null
 	}:
 	
@@ -111,4 +98,33 @@ String nameOrType(uml::Property this):
 	) : (
 		this.type.name.toFirstLower()
 	)
+;
+
+List[uml::Property] getAllProperties(uml::Class this):
+	let result = (List[uml::Property]) {}:
+	
+	//info("Class:" + this.name) ->
+	//info("ownAssociationEnds: " + this.getOwnAssociationEnds().type) ->
+
+	!this.isAbstract ? (
+		result.addAll(this.attribute) ->
+		//info("filtered: " + this.getOwnAssociationEnds().removeDuplicates(result).type) ->
+		result.addAll(this.getOwnAssociationEnds().removeDuplicates(result)) ->
+		this.getSuperClass().isAbstract ? (
+			result.addAll(this.getSuperClass().getOwnAssociationEnds().removeDuplicates(result)) ->
+			result.addAll(this.getSuperClass().attribute)
+		) : (
+			Void
+		)
+	) : (
+		Void
+	) ->
+	
+	//info("result: " + result.type) ->
+	//info("result filtered: " + result.toSet().select(e|e.isNavigable()).toList().type) ->
+	result.toSet().select(e|e.isNavigable()).toList()
+;
+
+List[uml::Property] removeDuplicates(List[uml::Property] this, List[uml::Property] list):
+	this.select(e|e.name.isNullOrEmpty() || !list.exists(f|e.name == f.name))
 ;

@@ -1,5 +1,6 @@
 import uml;
 import xmlSchema;
+import jaxb;
 
 extension org::openarchitectureware::xsd::lib::qname;
 
@@ -15,7 +16,7 @@ xmlSchema::TopLevelSimpleType convertToXsd(uml::Enumeration this, String targetN
 	
 	result.setName(this.name) ->
 	
-	restriction.setBase(parseToQName("XMLSchema:string")) ->
+	restriction.setBase(parseToQName("schema:string")) ->
 	restriction.enumeration.addAll(this.ownedLiteral.convertToXsd()) ->
 	result.setRestriction(restriction) ->
 	
@@ -23,13 +24,58 @@ xmlSchema::TopLevelSimpleType convertToXsd(uml::Enumeration this, String targetN
 ;
 
 xmlSchema::NoFixedFacet convertToXsd(uml::EnumerationLiteral this):
-	//(new xmlSchema::NoFixedFacet).s
-
 	let result = new xmlSchema::NoFixedFacet:
 	
 	info("	Converting EnumerationLiteral " + this.name) ->
 	
 	result.setValue(this.name) ->
 	
+	/*
+	this.enumeration.ownedLiteral.exists(e|e.name.toLowerCase() == this.name.toLowerCase() && e != this) ? (
+		let annotation = new xmlSchema::AnnotationType:
+		let appinfo = new xmlSchema::AppinfoType:
+		let typesafe = new jaxb::TypesafeEnumMemberType:
+		let newName = this.name.toUpperCase() + "_" + this.enumeration.ownedLiteral.indexOf(this):
+		
+		warn("	Adding disambiguous information to " + this.enumeration.name + "." + this.name + " (" + newName + ")") ->
+		
+		result.setAnnotation(annotation) ->
+		annotation.appinfo.add(appinfo) ->
+		info(appinfo.any.add(jaxb::JaxbDocumentRoot::typesafeEnumMember, typesafe)) ->
+		info(typesafe) ->
+		info(typesafe == null ? "NULL" : "NOT NULL") ->
+		info("AFTER")
+	) : (
+		Void
+	) ->
+	*/
+	
 	result
+;
+
+jaxb::BindingsType convertToJaxb(uml::EnumerationLiteral this, String targetNamespace):
+	//(new jaxb::TypesafeEnumMemberType).
+	let result = new jaxb::BindingsType:
+	let typesafe = new jaxb::TypesafeEnumMemberType:
+	
+	result.setNode("//xs:simpleType[@name='" + this.enumeration.name + "']//xs:enumeration[@value='" + this.name + "']") ->
+
+	this.enumeration.ownedLiteral.exists(e|e.name.toLowerCase() == this.name.toLowerCase() && e != this) ? (
+		let newName = this.name.toUpperCase() + "_" + this.enumeration.ownedLiteral.indexOf(this):
+		warn("	Adding disambiguous information to " + this.enumeration.name + "." + this.name + " (" + newName + ")") ->
+		typesafe.setName(newName.toJavaIdentifierType()) ->
+		result.typesafeEnumMember.add(typesafe)
+	) : (
+		Void
+	) ->
+	
+	result
+;
+
+private Void addTypesafe(Object map, Object value):
+	JAVA org.sourceforge.olympos.xmlschema.JaxbHelper.addTypesafe(org.eclipse.emf.ecore.util.FeatureMap, java.lang.Object)
+;
+
+private jaxb::JavaIdentifierType toJavaIdentifierType(String str):
+	JAVA org.sourceforge.olympos.xmlschema.JaxbHelper.toJavaIdentifierType(java.lang.String)
 ;
