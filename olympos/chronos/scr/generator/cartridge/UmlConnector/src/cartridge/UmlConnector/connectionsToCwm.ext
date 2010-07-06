@@ -105,15 +105,19 @@ cwm::ManyToMany convertToMany(uml::Association this, uml::Class source) :
 	result.setTargetOid(otherEnd.type.getId()) ->
 	
 	(
+		let realSourceName = isManyToMany ? otherEnd.name : ownEnd.name:
 		let realSourceMultiplicity = isManyToMany ? otherEnd.getUwmMultiplicity() : ownEnd.getUwmMultiplicity():
-		let realSourceNavigability = isManyToMany ? ownEnd.getUwmNavigability() : otherEnd.getUwmNavigability():
+		let realSourceNavigability = isManyToMany ? otherEnd.getUwmNavigability() : ownEnd.getUwmNavigability():
 		
+		let realTargetName = isManyToMany ? ownEnd.name : otherEnd.name:
 		let realTargetMultiplicity = isManyToMany ? ownEnd.getUwmMultiplicity() : otherEnd.getUwmMultiplicity():
-		let realTargetNavigability = isManyToMany ? otherEnd.getUwmNavigability() : ownEnd.getUwmNavigability():	
+		let realTargetNavigability = isManyToMany ? ownEnd.getUwmNavigability() : otherEnd.getUwmNavigability():	
 
+		result.setSourceName(realSourceName) ->
 		result.setSourceMultiplicity(realSourceMultiplicity) ->
 		result.setSourceNavigability(realSourceNavigability) ->
 			
+		result.setTargetName(realTargetName) ->
 		result.setTargetMultiplicity(realTargetMultiplicity) ->
 		result.setTargetNavigability(realTargetNavigability)
 	) ->
@@ -156,7 +160,7 @@ String getTargetRole(String otherEnd, String ownEnd):
 	switch (otherEnd) {
 		case "ChiNode": (
 			switch(ownEnd) {
-				case "ChiNode": "ChiNodeSource"
+				case "ChiNode": "ChiNodeTarget"
 				case "ChiManyToMany": "NMChiNodeChiMany2ManyChiNodeEnd"
 				default: "UNKNOWN"
 			}
