@@ -1,0 +1,35 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+
+uml::Model root(uml::Model source, uml::Profile profile):
+	source.applyProfile(profile) ->
+	
+	source.allOwnedElements().typeSelect(uml::Class).addStereotype() ->
+	source.allOwnedElements().typeSelect(uml::Property).select(e|e.association == null).addStereotype() ->
+	source.allOwnedElements().typeSelect(uml::Association).addStereotype() ->
+	
+	source
+;
+
+Void addStereotype(uml::Class this):
+	info("Adding Stereotype ChiNode to " + this.name) ->
+	this.applyStereotype("Chronos::ChiNode")
+;
+
+Void addStereotype(uml::AssociationClass this):
+	info("Ignoring AssociationClass " + this.name)
+;
+
+Void addStereotype(uml::Property this):
+	info("Adding Stereotype ChiValue to " + this.name) ->
+	this.applyStereotype("Chronos::ChiValue")
+;
+
+Void addStereotype(uml::Association this):
+	info("Adding Stereotype ChiAssociation to " + this.name) ->
+	this.applyStereotype("Chronos::ChiAssociation")
+;
