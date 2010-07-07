@@ -25,7 +25,7 @@ uml::Model createUmlModel(String modelName, cwm::CwmExport export, uml::Profile 
 	export.model.package.establishConnections(um) ->
 	export.model.package.transferValues(um) ->
 	((List[Chronos::ChiNode]) um.allOwnedElements().typeSelect(uml::Class).select(e|e.isStereotypeApplied(e.getApplicableStereotype("Chronos::ChiNode")))).propagateNames() ->
-	((List[Chronos::ChiNode]) um.allOwnedElements().typeSelect(uml::Class).select(e|e.isStereotypeApplied(e.getApplicableStereotype("Chronos::ChiNode")))).propagateAttributeTypes() ->
+	//((List[Chronos::ChiNode]) um.allOwnedElements().typeSelect(uml::Class).select(e|e.isStereotypeApplied(e.getApplicableStereotype("Chronos::ChiNode")))).propagateAttributeTypes() ->
 	((List[Chronos::ChiManyToMany]) um.allOwnedElements().typeSelect(uml::Class).select(e|e.isStereotypeApplied(e.getApplicableStereotype("Chronos::ChiManyToMany")))).propagateNames() ->
 	um
 ;
