@@ -19,7 +19,10 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 	
 	info("Converting Class " + this.name) ->
 	
-	allProperties.removeAll(allProperties.select(e|!e.name.isNullOrEmpty() && parentProperties.exists(f|e.name == f.name))) ->
+	allProperties.removeAll(allProperties.select(e|
+		(!e.name.isNullOrEmpty() && parentProperties.exists(f|e.name == f.name)) ||
+		(e.association != null && parentProperties.exists(f|e.type == f.type))
+	)) ->
 	
 	result.setName(this.name) ->
 	result.setAbstract(this.isAbstract) ->

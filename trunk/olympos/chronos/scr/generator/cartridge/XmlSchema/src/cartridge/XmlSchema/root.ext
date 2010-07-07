@@ -13,26 +13,28 @@ extension cartridge::XmlSchema::domainSimple;
 
 xmlSchema::XmlSchemaDocumentRoot xmlSchema(uml::Model this, String rootElements, String targetNamespace):
 	let targetRoot = new xmlSchema::XmlSchemaDocumentRoot:
-	let xsd = new xmlSchema::SchemaType:
-	let rootElementList = rootElements.split(","):
 	
 	//targetRoot.xMLNSPrefixMap.put("jaxb", "http://java.sun.com/xml/ns/jaxb") ->
 	//targetRoot.xSISchemaLocation.put("http://java.sun.com/xml/ns/jaxb", "/home/nist/eclipse-3.5-workspace/generator/core/src/metamodel/jaxb.xsd") ->
-	targetRoot.setSchema(xsd) ->
-
-	xsd.setTargetNamespace(targetNamespace) ->
-	
-	xsd.complexType.addAll(this.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().select(e|!e.name.isNullOrEmpty() && !e.isAbstract).convertToXsd(targetNamespace, rootElementList)) ->
-	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::Enumeration).convertToXsd(targetNamespace)) ->
-	xsd.simpleType.addAll(this.allOwnedElements().typeSelect(uml::PrimitiveType).select(e|e.name.matches("[a-zA-Z0-9-]+")).convertToXsd(targetNamespace)) ->
-	
-	rootElements.trim().length > 0 && rootElementList.size > 0 ? (
-		xsd.element.addAll(rootElementList.getRootElement(targetNamespace))
-	) : (
-		Void
-	) ->
+	targetRoot.setSchema(createSchema(this, rootElements, targetNamespace)) ->
 		
 	targetRoot
+;
+
+create xmlSchema::SchemaType createSchema(uml::Model umlModel, String rootElements, String targetNamespace):
+	let rootElementList = rootElements.split(","):
+
+	this.setTargetNamespace(targetNamespace) ->
+	
+	this.complexType.addAll(umlModel.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().select(e|!e.name.isNullOrEmpty() && !e.isAbstract).convertToXsd(targetNamespace, rootElementList)) ->
+	this.simpleType.addAll(umlModel.allOwnedElements().typeSelect(uml::Enumeration).convertToXsd(targetNamespace)) ->
+	this.simpleType.addAll(umlModel.allOwnedElements().typeSelect(uml::PrimitiveType).select(e|e.name.matches("[a-zA-Z0-9-]+")).convertToXsd(targetNamespace)) ->
+	
+	rootElements.trim().length > 0 && rootElementList.size > 0 ? (
+		this.element.addAll(rootElementList.getRootElement(targetNamespace))
+	) : (
+		Void
+	)
 ;
 
 xmlSchema::TopLevelElement getRootElement(String rootClassName, String targetNamespace):

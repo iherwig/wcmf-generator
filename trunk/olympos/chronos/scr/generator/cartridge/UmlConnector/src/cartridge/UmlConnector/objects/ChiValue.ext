@@ -33,8 +33,7 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 			//uc.setTaggedValue("Chronos::ChiValue", "Alias", c.alias) ->
 			//uc.setTaggedValue("Chronos::ChiValue", "Version", c.version) ->
 
-			//The target type may not be converted yet with its new name, so we misuse keywords
-			uc.addKeyword(TYPE_KEYWORD() + c.propertyType) ->
+			uc.setType(getType(c.propertyType, um)) ->
 
 			uc.setName(c.name) ->
 			c.notes != null ? (
@@ -101,13 +100,18 @@ uml::Type getType(String typeName, uml::Model um):
 	:
 	
 	let result = um.findTypeByName(typeName) == null ? (
-			let tempType = new uml::PrimitiveType:
-			tempType.setName(typeName) ->
-			((uml::Package) primitiveTypes).ownedType.add(tempType) ->
-			info("Added Primitive Type \"" + typeName + "\"") ->
-			tempType
-		) :
+			primitiveTypes.ownedType.selectFirst(e|e.name == typeName) == null ? (
+				let tempType = new uml::PrimitiveType:
+				tempType.setName(typeName) ->
+				((uml::Package) primitiveTypes).ownedType.add(tempType) ->
+				info("Added Primitive Type \"" + typeName + "\"") ->
+				tempType
+			) : (
+				primitiveTypes.ownedType.selectFirst(e|e.name == typeName)
+			)
+		) : (
 			um.findTypeByName(typeName)
+		)
 	:
 	
 	result
