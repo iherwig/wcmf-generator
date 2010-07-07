@@ -1,0 +1,24 @@
+import xmlSchema;
+import soap;
+import wsdl;
+import uml;
+
+extension cartridge::Wsdl::wsdl;
+
+create wsdl::WsdlDocumentRoot wsdl(uml::Model umlModel, String rootElements, String targetNamespaceSuffix, String locationPrefix):
+	let root = new wsdl::TDefinitions:
+	let targetNamespace = "http://" + umlModel.ucName().toFirstLower() + "." + targetNamespaceSuffix:
+	
+	this.xMLNSPrefixMap.put("soapHttp", "http://schemas.xmlsoap.org/wsdl/soap/http") ->
+	
+	this.setDefinitions(root) ->
+	
+	root.setTargetNamespace(targetNamespace) ->
+	
+	root.types.add(createType(umlModel, rootElements, targetNamespace)) ->
+	root.message.addAll(createMessages(umlModel, targetNamespace)) ->
+	root.portType.add(createPortType(umlModel, targetNamespace)) ->
+	root.binding.add(createBinding(umlModel, targetNamespace)) ->
+	root.service.add(createService(umlModel, targetNamespace, locationPrefix))
+;
+
