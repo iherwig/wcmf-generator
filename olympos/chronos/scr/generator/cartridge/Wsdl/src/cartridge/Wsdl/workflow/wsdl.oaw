@@ -1,0 +1,66 @@
+<workflow>
+	<property file="${propertyFile}"/>
+	<property name="importMultiplicity" value="true" />
+
+	<!-- metamodel setup -->
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<bean id="uml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
+	
+	<bean id="Chronos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
+		<profile value="${profileUmlFile}"/>
+	</bean>
+	
+	<bean id="xmlSchema" class="org.openarchitectureware.xsd.XSDMetaModel">
+		<schemaFile value="${basePath}/metamodel/XMLSchema.xsd" />
+		<schemaFile value="${basePath}/metamodel/soap.xsd" />
+		<schemaFile value="${basePath}/metamodel/wsdl.xsd" />
+	    <registerPackagesGlobally value="true" />
+	</bean>
+	
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${modelUmlFile}" />
+		<outputSlot value="localModel" />
+	</component>
+	
+	<!-- load CIM reference model -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${basePath}/metamodel/cim.uml"/>
+		<outputSlot value="cimmodel"/>
+	</component>
+
+ 	<if cond="${importMultiplicity}">
+		<!-- apply multiplicities from CIM reference model-->
+		<component class="oaw.xtend.XtendComponent">
+			<metaModel idRef="uml2" />
+			<metaModel idRef="Chronos" />
+			
+			<invoke value="${basePath}/cartridge/UmlConnector/importMultiplicity::importMultiplicity(localModel, cimmodel)" />
+	
+			<outputSlot value="localModel" />
+		</component>
+	</if>
+
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="uml2" />
+		<metaModel idRef="Chronos" />
+
+		<invoke value="${basePath}/cartridge/UmlConnector/importEnumerations::importEnumerations(localModel, cimmodel)" />
+		<outputSlot value="localModel" />
+	</component>
+
+	<component class="oaw.xtend.XtendComponent">
+		<metaModel idRef="uml2" />
+		<metaModel idRef="xmlSchema" /> 
+
+		<invoke value="${basePath}/cartridge/Wsdl/root::wsdl(localModel, '${rootElements}', '${targetNamespace}', '${serviceLocationPrefix}')" />
+		<outputSlot value="schema" />
+	</component>
+
+	<component class="org.openarchitectureware.xsd.XMLWriter">
+		<metaModel idRef="xmlSchema" />
+
+		<modelSlot value="schema" />
+		<uri value="${targetDir}/wsdl.wsdl" />
+	</component>
+</workflow>
