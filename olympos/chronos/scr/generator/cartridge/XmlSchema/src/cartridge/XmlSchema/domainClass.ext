@@ -24,7 +24,7 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 		(e.association != null && parentProperties.exists(f|e.type == f.type))
 	)) ->
 	
-	result.setName(this.name) ->
+	result.setName(this.name.toFirstLower()) ->
 	result.setAbstract(this.isAbstract) ->
 	
 	//allProperties.exists(e|e.class == this) ? (

@@ -26,7 +26,7 @@ create xmlSchema::SchemaType createSchema(uml::Model umlModel, String rootElemen
 
 	this.setTargetNamespace(targetNamespace) ->
 	
-	this.complexType.addAll(umlModel.allOwnedElements().typeSelect(uml::Class).removeCommonClasses().select(e|!e.name.isNullOrEmpty() && !e.isAbstract).convertToXsd(targetNamespace, rootElementList)) ->
+	this.complexType.addAll(umlModel.allOwnedElements().select(e|e.metaType == uml::Class).removeCommonClasses().select(e|!e.name.isNullOrEmpty() && !e.isAbstract).convertToXsd(targetNamespace, rootElementList)) ->
 	this.simpleType.addAll(umlModel.allOwnedElements().typeSelect(uml::Enumeration).convertToXsd(targetNamespace)) ->
 	this.simpleType.addAll(umlModel.allOwnedElements().typeSelect(uml::PrimitiveType).select(e|e.name.matches("[a-zA-Z0-9-]+")).convertToXsd(targetNamespace)) ->
 	
