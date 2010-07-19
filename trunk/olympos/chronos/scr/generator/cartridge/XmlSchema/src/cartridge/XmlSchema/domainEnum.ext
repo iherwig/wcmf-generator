@@ -6,6 +6,8 @@ extension org::openarchitectureware::xsd::lib::qname;
 
 extension common::util;
 
+extension common::nameNormalizer;
+
 xmlSchema::TopLevelSimpleType convertToXsd(uml::Enumeration this, String targetNamespace):
 	//(new xmlSchema::TopLevelSimpleType).r
 
@@ -17,7 +19,7 @@ xmlSchema::TopLevelSimpleType convertToXsd(uml::Enumeration this, String targetN
 	result.setName(this.name) ->
 	
 	restriction.setBase(parseToQName("schema:string")) ->
-	restriction.enumeration.addAll(this.ownedLiteral.convertToXsd()) ->
+	restriction.enumeration.addAll(this.ownedLiteral.select(e|e == this.ownedLiteral.selectFirst(f|f.name.normalizeMemberName() == e.name.normalizeMemberName())).convertToXsd()) ->
 	result.setRestriction(restriction) ->
 	
 	result
@@ -28,7 +30,7 @@ xmlSchema::NoFixedFacet convertToXsd(uml::EnumerationLiteral this):
 	
 	info("	Converting EnumerationLiteral " + this.name) ->
 	
-	result.setValue(this.name) ->
+	result.setValue(this.name.normalizeMemberName()) ->
 	
 	/*
 	this.enumeration.ownedLiteral.exists(e|e.name.toLowerCase() == this.name.toLowerCase() && e != this) ? (
