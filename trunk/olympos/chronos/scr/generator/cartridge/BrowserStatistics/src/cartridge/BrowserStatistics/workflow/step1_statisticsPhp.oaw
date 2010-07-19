@@ -12,9 +12,6 @@
 
 	<!-- load metamodels -->
 	<bean id="uml2" class="oaw.uml2.UML2MetaModel" />
-	<bean id="cwm" class="org.openarchitectureware.xsd.XSDMetaModel">
-		<schemaFile value="metamodel/cwm.xsd" />
-	</bean>
 	<bean id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
 		<profile value="${chronosProfileUri}"/>
 	</bean>
