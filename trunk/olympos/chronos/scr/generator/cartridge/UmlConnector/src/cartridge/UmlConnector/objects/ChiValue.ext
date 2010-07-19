@@ -7,6 +7,8 @@ extension org::openarchitectureware::uml2::profile::profiling;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::UmlConnector::chronosId;
+
 uml::Property convert(cwm::ChiValue o):
 	let uc = new uml::Property : {
 		uc.setName("ChiValue:" + o.id)
@@ -19,7 +21,11 @@ Void transferValues(cwm::ChiValue c, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiValue") ->
-			uc.setDefault(c.^default) ->
+			!c.^default.isNullOrEmpty() ? (
+				uc.setDefault(c.^default)
+			) : (
+				Void
+			) ->
 			
 			uc.setTaggedValue("Chronos::ChiValue", "app_data_type", c.appDataType) ->
 			uc.setTaggedValue("Chronos::ChiValue", "db_data_type", c.dbDataType) ->
@@ -89,34 +95,44 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 ;
 
 uml::Type getType(String typeName, uml::Model um):
-	let primitiveTypes = um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes") == null ? (
-			let tempPackage = new uml::Package:
-			tempPackage.setName("PrimitiveTypes") ->
-			um.nestedPackage.add(tempPackage) ->
-			info("Added PrimitiveTypes package") ->
-			tempPackage
-		) :
-			um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes")
-	:
-	
-	let result = um.findTypeByName(typeName) == null ? (
-			primitiveTypes.ownedType.selectFirst(e|e.name == typeName) == null ? (
-				let tempType = new uml::PrimitiveType:
-				tempType.setName(typeName) ->
-				((uml::Package) primitiveTypes).ownedType.add(tempType) ->
-				info("Added Primitive Type \"" + typeName + "\"") ->
-				tempType
+	!typeName.isNullOrEmpty() ? (
+		let primitiveTypes = um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes") == null ? (
+				let tempPackage = new uml::Package:
+				tempPackage.setName("PrimitiveTypes") ->
+				um.nestedPackage.add(tempPackage) ->
+				info("Added PrimitiveTypes package") ->
+				tempPackage
+			) :
+				um.nestedPackage.selectFirst(e|e.name == "PrimitiveTypes")
+		:
+		
+		let result = um.findTypeByName(typeName) == null ? (
+				primitiveTypes.ownedType.selectFirst(e|e.name == typeName) == null ? (
+					let tempType = new uml::PrimitiveType:
+					tempType.setName(typeName) ->
+					((uml::Package) primitiveTypes).ownedType.add(tempType) ->
+					info("Added Primitive Type \"" + typeName + "\"") ->
+					tempType
+				) : (
+					primitiveTypes.ownedType.selectFirst(e|e.name == typeName)
+				)
 			) : (
-				primitiveTypes.ownedType.selectFirst(e|e.name == typeName)
+				um.findTypeByName(typeName)
 			)
-		) : (
-			um.findTypeByName(typeName)
-		)
-	:
-	
-	result
+		:
+		
+		result
+	) : (
+		null
+	)
 ;
 
 cached uml::Type findTypeByName(uml::Model this, String typeName):
-	this.allOwnedElements().typeSelect(uml::Type).selectFirst(e|e.name == typeName)
+	let result = this.allOwnedElements().typeSelect(uml::Type).selectFirst(e|e.getChronosId() == typeName):
+
+	result != null ? (
+		result
+	) : (
+		this.allOwnedElements().typeSelect(uml::Type).selectFirst(e|e.name == typeName)
+	)
 ;

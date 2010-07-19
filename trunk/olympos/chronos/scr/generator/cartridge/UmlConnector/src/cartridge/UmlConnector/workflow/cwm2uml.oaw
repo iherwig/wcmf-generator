@@ -1,7 +1,7 @@
 <workflow>
 	<property name="basePath" value="src" />
 
-	<property name="importMultiplicity" value="false" />
+	<property name="importEnums" value="true" />
 	<property name="propertyFile" value="${basePath}/cartridge/UmlConnector/workflow/cwm2uml.properties" />
 	<property file="${propertyFile}" />
 
@@ -41,7 +41,7 @@
 		<metaModel idRef="cwm" />
 	</component>
 	
-	<if cond="${importMultiplicity}">
+	<if cond="${importEnums}">
 		<!-- load CIM reference model -->
 		<component class="oaw.emf.XmiReader">
 			<modelFile value="${basePath}/metamodel/cim.uml"/>
@@ -63,15 +63,15 @@
 		<outputSlot value="uml2model" />
 	</component>
 
-	<if cond="${importMultiplicity}">
-		<!-- apply multiplicities from CIM reference model-->
+	<if cond="${importEnums}">
+		<!-- import enumerations from CIM reference model-->
 		<component class="oaw.xtend.XtendComponent">
 			<metaModel idRef="cwm" />
 			<metaModel idRef="uml2" />
 			<metaModel idRef="chronos" />
 			<metaModel idRef="ouranos" />
 			
-			<invoke value="cartridge/UmlConnector/importMultiplicity::importMultiplicity(uml2model, cimmodel)" />
+			<invoke value="cartridge/UmlConnector/importEnumerations::importEnumerations(uml2model, cimmodel)" />
 	
 			<outputSlot value="uml2model" />
 		</component>
