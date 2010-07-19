@@ -9,14 +9,16 @@ extension common::util;
 
 extension cartridge::UmlConnector::connections;
 extension cartridge::UmlConnector::connectionsToCwm;
+extension cartridge::UmlConnector::chronosId;
 
 extension cartridge::UmlConnector::objects::Operation;
 extension cartridge::UmlConnector::objects::ChiValue;
 
 uml::Class convert(cwm::ChiNode n):
-	//(new uml::Class).owned
+	//(new uml::Class).
 	let uc = new uml::Class : {
 		uc.setName("ChiNode:" + n.id) ->
+		uc.addKeyword(CHRONOS_ID_KEYWORD() + n.id) ->
 		uc.ownedOperation.addAll(n.operation.convert()) ->
 		uc.ownedAttribute.addAll(n.chiValue.convert())
 	} ->
