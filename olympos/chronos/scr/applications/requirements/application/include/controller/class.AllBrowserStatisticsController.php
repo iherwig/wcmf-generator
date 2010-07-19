@@ -318,7 +318,7 @@ class AllBrowserStatisticsController extends BatchController
 	public static function getWorkingDir($modelOid)
 	{
 		$ids = PersistenceFacade::getOIDParameter($modelOid, 'id');
-		$dir = dirname($_SERVER['SCRIPT_FILENAME']).'/statistics/model'.$ids[0];
+		$dir = dirname(realpath($_SERVER['SCRIPT_FILENAME'])).'/statistics/model'.$ids[0];
 		if (!file_exists($dir)) {
 			FileUtil::mkdirRec($dir);
 		}
