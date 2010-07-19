@@ -80,7 +80,7 @@ class UwmMergerController extends Controller
 	private function check($msg)
 	{
 		$newTime = microtime(true);
-		Log::error(($newTime-$this->lastTime).": $msg", __CLASS__);
+		Log::debug(($newTime-$this->lastTime).": $msg", __CLASS__);
 		$this->lastTime = $newTime;
 	}
 
@@ -385,6 +385,46 @@ class UwmMergerController extends Controller
 			$this->check("newChild id: ".$this->dom->getAttribute('id'));
 				
 			$newChild = $this->load($this->dom->getAttribute('id'));
+			
+			if ($newChild instanceof ChiValue) {
+				
+				//secure for ambigious ChiValue names
+				$parent = array_pop($this->parentObjs);
+				
+				$newChildName = $newChild->getName();
+				
+				$parent->loadChildren();
+				$children = $parent->getChildren();
+				foreach($children as $currChild) {
+					if ($currChild instanceof ChiValue) {
+						if ($newChildName == $currChild->getName()) {
+							$newChild = $currChild;
+							
+							break;
+						}
+					}
+				}
+				
+				$this->check('found ChiValue: ' . $newChild->getBaseOID() . ' PropertyType ' . $this->dom->getAttribute('PropertyType'));
+				$target = $this->load($this->dom->getAttribute('PropertyType'));
+				
+				if ($target) {
+					$this->check('found target ' . $target->getBaseOID());
+					$targetOidParts = PersistenceFacade::decomposeOID($target->getBaseOID());
+					
+					$id = $targetOidParts['id'][0];
+					
+					$this->check("extracted id: $id");
+					if ($id) {
+						$newChild->setPropertyType($id);
+						$this->check("Setting PropertyType of " . $newChild->getName() . " to $id");
+						
+						$newChild->save();
+					}
+				}
+				
+				array_push($this->parentObjs, $parent);
+			}
 				
 			array_push($this->parentObjs, $newChild);
 		}

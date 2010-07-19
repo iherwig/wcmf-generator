@@ -28,25 +28,25 @@ class UwmUtil {
 
 	const INI_SECTION = 'generator';
 	const INI_UML_FILE_STORAGE = 'umlFileStorage';
-  
+
 	private static $IGNORED_ATTRIBUTES = array(
 		'id',
 		'_proxyOid'
-	);
+		);
 
-	private static $METHOD_NAME_SEARCH = array(
+		private static $METHOD_NAME_SEARCH = array(
 		'ChiBusinessUseCase',
 		'ChiBusinessUseCaseCore',
 		'ChiNode',
 		'ChiBusinessProcess'
-	);
+		);
 
 		private static $METHOD_NAME_REPLACE = array(
 		'UseCase',
 		'UseCase',
 		'Class',
 		'BusinessProcess'
-	);
+		);
 
 		private static $dom;
 		private static $persistenceFacade;
@@ -135,6 +135,7 @@ class UwmUtil {
 					if ($currNode) {
 						self::$dom->startElement('Model');
 						self::$dom->startElement('Package');
+						self::$dom->writeAttribute('Name', 'Main Package');
 						$success = self::callProcessing($currNode);
 						// add the referenced nodes
 						self::$dom->endElement();
@@ -208,7 +209,7 @@ class UwmUtil {
 		 * Write all node attributes to the xml file.
 		 * @param node The node whose attributes to write
 		 */
-		private static function appendAttributes($node)
+		private static function appendAttributes($node, $ignoredAttributes = array())
 		{
 			self::translateNode($node);
 			self::$dom->writeAttribute('id', $node->getBaseOID());
@@ -217,13 +218,16 @@ class UwmUtil {
 
 			foreach ($valueNames as $currValueName)
 			{
-				if (!in_array($currValueName, self::$IGNORED_ATTRIBUTES)) {      
+				if (
+					!in_array($currValueName, self::$IGNORED_ATTRIBUTES) &&
+					!in_array($currValueName, $ignoredAttributes)
+				) {
 					$value = self::$encodingUtil->convertIsoToCp1252Utf8($node->getValue($currValueName));
 					if ($value !== null && $value !== '') {
 						self::$dom->writeAttribute($currValueName, $value);
 					}
 				}
-			}      
+			}
 		}
 
 		/**
@@ -483,12 +487,17 @@ class UwmUtil {
 			self::appendAttributes($currNode);
 			self::registerExportedNode($currNode);
 
+			Log::debug("Processing class " . $currNode->getBaseOID() . ' (' . $currNode->getName() . ')');
+
 			$currNode->loadChildren();
 			$children = $currNode->getChildren();
-			
+
+			Log::error('loaded ' . count($children) . ' children');
+
+
 			//Fix for doubled aggregations
 			$processedM2m = array();
-					
+
 			foreach ($children as $currChild)
 			{
 				$childType = self::getRealType($currChild);
@@ -500,7 +509,7 @@ class UwmUtil {
 					if (self::processManyToMany($currChild, $currNode, &$processedM2m)) {
 						//do nothing
 					} else if ($childType == 'ChiValue' || $childType == 'Operation') {
-						self::processNode($currChild);
+						self::processAttribute($currChild);
 					} else {
 						self::processChild($currChild);
 					}
@@ -650,6 +659,39 @@ class UwmUtil {
 			self::$dom->endElement();
 		}
 
+		private static function processAttribute($currNode)
+		{
+			self::check($currNode->getId());
+			self::$dom->startElement($currNode->getBaseType());
+
+			//Rewriting PropertyType attribute
+			$propertyType = self::extractPropertyType($currNode->getPropertyType(), $currNode->getBaseOID());
+
+			self::appendAttributes($currNode, array('PropertyType'));
+			self::$dom->writeAttribute('PropertyType', $propertyType);
+			
+			self::registerExportedNode($currNode);
+
+			$currNode->loadChildren();
+			$children = $currNode->getChildren();
+			foreach ($children as $currChild)
+			{
+				if (self::processManyToMany($currChild, $currNode)) {
+					//do nothing
+				}
+				else {
+					self::processChild($currChild);
+				}
+			}
+
+			$parents = $currNode->getParents();
+			foreach ($parents as $currParent) {
+				self::processParent($currParent);
+			}
+
+			self::$dom->endElement();
+		}
+
 		private static function processParent($currParent) {
 			self::$dom->startElement('Parent');
 			self::$dom->writeAttribute('targetType', $currParent->getType());
@@ -667,7 +709,7 @@ class UwmUtil {
 		private static $specialChildren = array('ChiNode' => array('NodeSourceEnd'), 'ChiController' => array('SourceEnd', 'SourceActionKeyEnd', 'NMChiControllerActionKeyChiView'), 'ChiNodeManyToMany' => array('NMChiNodeChiMany2ManyChiNodeEnd'));
 
 		private static function processManyToMany($currChild, $parent, $processedM2m = array()) {
-    
+
 			$result = false;
 
 			if ($currChild->isManyToManyObject())
@@ -687,7 +729,7 @@ class UwmUtil {
 				if ($processThisManyToMany) {
 					$currChild->loadParents();
 					$parents = $currChild->getParents();
-					
+
 					foreach ($parents as $currParent)
 					{
 						if ($currParent->getId() != $parent->getId() && array_search($currParent->getOid(), $processedM2m) === false)
@@ -715,7 +757,7 @@ class UwmUtil {
 
 
 							self::$dom->endElement();
-							
+
 							$processedM2m[] = $currParent->getOid();
 						}
 					}
@@ -783,5 +825,27 @@ class UwmUtil {
 			}
 
 			return $result;
+		}
+
+		public static function extractPropertyType($propertyType, $parentOid) {
+			$result = $propertyType;
+
+			$oidParts = PersistenceFacade::decomposeOID($parentOid);
+
+			Log::error("ChiValue decomposed: " . print_r($oidParts, true), __CLASS__);
+
+			$oidParts['type'] = 'ChiNode';
+			$oidParts['id'] = $propertyType;
+
+			$typeOid = PersistenceFacade::composeOID($oidParts);
+
+			Log::error("found ChiValue type: $typeOid", __CLASS__);
+
+			if (PersistenceFacade::isValidOID($typeOid)) {
+				Log::error('found valid oid', __CLASS__);
+				$result = $typeOid;
+			}
+			
+			return $result;	
 		}
 }
