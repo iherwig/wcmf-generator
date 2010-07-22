@@ -27,7 +27,6 @@
 		<modelSlot value="uwmmodel" />
 		<uri value="${inputUri}" />
 		<metaModel idRef="cwm" />
-		</metaModel>
 	</component>
 
 	<!-- load profiles as model (for applying to real model) -->
