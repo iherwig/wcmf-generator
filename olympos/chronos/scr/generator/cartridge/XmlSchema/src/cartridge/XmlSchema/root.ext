@@ -40,8 +40,8 @@ create xmlSchema::SchemaType createSchema(uml::Model umlModel, String rootElemen
 xmlSchema::TopLevelElement getRootElement(String rootClassName, String targetNamespace):
 	let e = new xmlSchema::TopLevelElement:
 	
-	e.setName(rootClassName) ->
-	e.setType(createQName(targetNamespace, rootClassName)) ->
+	e.setName(rootClassName.toFirstLower()) ->
+	e.setType(createQName(targetNamespace, rootClassName.toFirstLower())) ->
 	
 	e
 ;
