@@ -52,7 +52,7 @@
 		<metaModel idRef="uml2" />
 		<metaModel idRef="xmlSchema" /> 
 
-		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, '${rootElements}', 'http://eenergy.ibm.com/cim')" />
+		<invoke value="${basePath}/cartridge/XmlSchema/root::xmlSchema(localModel, '${rootElements}', '${targetNamespace}')" />
 		<outputSlot value="schema" />
 	</component>
 
@@ -63,12 +63,11 @@
 		<uri value="${targetDir}/schema.xsd" />
 	</component>
 
-<!--
 	<component class="oaw.xtend.XtendComponent">
 		<metaModel idRef="uml2" />
 		<metaModel idRef="xmlSchema" /> 
 
-		<invoke value="${basePath}/cartridge/XmlSchema/root::jaxb(localModel, '${rootElements}', 'http://eenergy.ibm.com/cim')" />
+		<invoke value="${basePath}/cartridge/XmlSchema/root::jaxb(localModel, '${rootElements}', '${targetNamespace}')" />
 		<outputSlot value="jaxb" />
 	</component>
 
@@ -78,5 +77,4 @@
 		<modelSlot value="jaxb" />
 		<uri value="${targetDir}/schema.jaxb" />
 	</component>
--->
 </workflow>

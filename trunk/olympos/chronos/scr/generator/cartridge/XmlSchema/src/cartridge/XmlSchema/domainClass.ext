@@ -38,7 +38,7 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 		let complex = new xmlSchema::ComplexContentType:
 		let ext = new xmlSchema::ExtensionType:
 		
-		ext.setBase(createQName(targetNamespace, this.superClass.first().name)) ->
+		ext.setBase(createQName(targetNamespace, this.superClass.first().name.toFirstLower())) ->
 		ext.setSequence(sequence) ->
 		
 		complex.setExtension(ext) ->
@@ -84,12 +84,13 @@ xmlSchema::QName sanitizeXsdTypes(uml::Type this, String targetNamespace):
 		case "boolean": "schema:boolean"
 		case "bool": "schema:boolean"
 		case "float": "schema:float"
+		case "decimal": "schema:decimal"
 		case null: "schema:anyType"
 		default: null
 	}:
 	
 	result == null ? (
-		createQName(targetNamespace, this.name)
+		createQName(targetNamespace, this.name.toFirstLower())
 	) : (
 		parseToQName(result)
 	)
@@ -110,24 +111,35 @@ List[uml::Property] getAllProperties(uml::Class this):
 	//info("ownAssociationEnds: " + this.getOwnAssociationEnds().type) ->
 
 	!this.isAbstract ? (
-		result.addAll(this.attribute) ->
-		//info("filtered: " + this.getOwnAssociationEnds().removeDuplicates(result).type) ->
-		result.addAll(this.getOwnAssociationEnds().removeDuplicates(result)) ->
+		let superProperties = (List[uml::Property]) {}:
+		let thisProperties = (List[uml::Property]) {}:
 		this.getSuperClass().isAbstract ? (
-			result.addAll(this.getSuperClass().getOwnAssociationEnds().removeDuplicates(result)) ->
-			result.addAll(this.getSuperClass().attribute)
+			superProperties.addAll(this.getSuperClass().getOwnAssociationEnds()) ->
+			superProperties.addAll(this.getSuperClass().attribute)
 		) : (
 			Void
-		)
+		) ->
+		result.addAll(superProperties.sortBy(e|e.nameOrType())) ->
+		
+		thisProperties.addAll(this.attribute) ->
+		//info("filtered: " + this.getOwnAssociationEnds().removeDuplicates(result).type) ->
+		thisProperties.addAll(this.getOwnAssociationEnds()) ->
+		
+		result.removeDuplicates(thisProperties) ->
+		result.addAll(thisProperties.sortBy(e|e.nameOrType()))
 	) : (
 		Void
 	) ->
 	
 	//info("result: " + result.type) ->
 	//info("result filtered: " + result.toSet().select(e|e.isNavigable()).toList().type) ->
-	result.toSet().select(e|e.isNavigable()).toList()
+	result.unique().select(e|((uml::Property) e).isNavigable())
 ;
 
 List[uml::Property] removeDuplicates(List[uml::Property] this, List[uml::Property] list):
 	this.select(e|e.name.isNullOrEmpty() || !list.exists(f|e.name == f.name))
+;
+
+List unique(List this):
+	JAVA org.sourceforge.olympos.xmlschema.ListHelper.unique(java.util.List)
 ;
