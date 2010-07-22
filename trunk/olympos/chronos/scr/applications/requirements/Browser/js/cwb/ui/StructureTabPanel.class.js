@@ -32,9 +32,12 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		this.weightPanel = new Ext.Panel( {
 		    title: cwb.Dict.translate('Package weight'),
 		    tabTip: cwb.Dict.translate('Left-click to enter a package or object, right-click to leave it.'),
-		    html: '<div id="'+cwb.ui.StructureTabPanel.WEIGHT_ID+'">'+
-	    		'<div class="noSelectionNote">No model selected</div></div>',
+		    html: '<div id="'+cwb.ui.StructureTabPanel.WEIGHT_ID+'" style="width: 100%; height: 100%;">'+
+	    		'<div class="noSelectionNote">No model selected or calculating package weight</div></div>',
 		    listeners: {
+				"show" : function() {
+					self.packageWeight.show();
+				},
 				"resize": function() {
 					self.showDiagrams();
 				}
@@ -48,8 +51,11 @@ cwb.ui.StructureTabPanel = Ext.extend(Ext.TabPanel, {
 		    title: cwb.Dict.translate('Package tree'),
 		    tabTip: cwb.Dict.translate('Click on an object to see its children.'),
 		    html: '<div id="'+cwb.ui.StructureTabPanel.PACKAGE_ID+'">'+
-    			'<div class="noSelectionNote">No model selected</div></div>',
+    			'<div class="noSelectionNote">No model selected or calculating package tree</div></div>',
 		    listeners: {
+				"show": function() {
+					self.packageTree.show();
+				},
 				"resize": function() {
 					self.showDiagrams();
 				}
@@ -132,7 +138,7 @@ cwb.ui.StructureTabPanel.prototype.showDiagrams = function() {
 		cwb.Util.showDiv(cwb.ui.StructureTabPanel.WEIGHT_ID);
 		//cwb.Util.showDiv(cwb.ui.StructureTabPanel.PACKAGE_ID);
 		
-		this.packageWeight.show();
+		//this.packageWeight.show();
 		//this.packageTree.show();
 	}
 };

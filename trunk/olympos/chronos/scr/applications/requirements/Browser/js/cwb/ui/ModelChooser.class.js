@@ -113,6 +113,8 @@ cwb.ui.ModelChooser.prototype.handleLoadCallback = function(state) {
 			cwb.ui.DiagramPanel.getInstance().showDiagrams();
 			cwb.statistics.Overview.getInstance().loadData();
 			Ext.Msg.updateProgress(0.5, cwb.Dict.translate("Loading diagrams and statistics"));
+			cwb.ui.StructureTabPanel.getInstance().showDiagrams();
+			Ext.Msg.hide();
 			break;
 		
 		case 'jit':
