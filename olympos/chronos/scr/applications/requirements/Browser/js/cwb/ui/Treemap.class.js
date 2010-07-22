@@ -55,6 +55,17 @@ cwb.ui.Treemap = function() {
 
 cwb.ui.Treemap.prototype.show = function() {
 	var objContainer = cwb.ObjectContainer.getInstance();
+	
+	var self = this;
+	
+	objContainer.loadJitData(objContainer.currModelOid, function() {
+		self.showTreemap();
+	});
+};
+
+cwb.ui.Treemap.prototype.showTreemap = function() {
+	var objContainer = cwb.ObjectContainer.getInstance();
+	
 	if (objContainer.modelLoaded) {
 		
 		var json = objContainer.objectsForTreemap;

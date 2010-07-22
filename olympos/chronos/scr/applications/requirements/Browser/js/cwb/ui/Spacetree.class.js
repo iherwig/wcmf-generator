@@ -21,6 +21,16 @@ cwb.ui.Spacetree = function() {
 };
 
 cwb.ui.Spacetree.prototype.show = function() {
+	var objContainer = cwb.ObjectContainer.getInstance();
+	
+	var self = this;
+	
+	objContainer.loadJitData(objContainer.currModelOid, function() {
+		self.showSpacetree();
+	});
+};
+
+cwb.ui.Spacetree.prototype.showSpacetree = function() {
 	var json = cwb.ObjectContainer.getInstance().objectsForSpacetree;
 	if (json.data) {
 		// Containers for fillStyle, strokeStyle and lineWith canvas properties.

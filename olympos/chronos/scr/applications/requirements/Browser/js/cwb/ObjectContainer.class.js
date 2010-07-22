@@ -36,6 +36,7 @@ cwb.ObjectContainer = function(){
 	
 	this.objectsToLoad = 0;
 	this.modelLoaded = false;
+	this.jitLoaded = false;
 	
 	/**
 	 * The number of objects in the biggest package of the current model
@@ -72,6 +73,8 @@ cwb.ObjectContainer.prototype.handleLoadedModelList = function(options, data, dr
 };
 
 cwb.ObjectContainer.prototype.loadModel = function(modelOid, useCache, callback){
+	this.modelLoaded = false;
+	this.jitLoaded = false;
 	this.currModelOid = modelOid;
 	
 	var self = this;
@@ -96,8 +99,6 @@ cwb.ObjectContainer.prototype.modelUmlGenerated = function(callback) {
 	this.modelLoaded = true;
 
 	callback('generated');
-	
-	this.loadJitData(this.currModelOid, callback);
 };
 
 /**
@@ -107,34 +108,37 @@ cwb.ObjectContainer.prototype.modelUmlGenerated = function(callback) {
  * @param {String} oid The oid of the model which is to be loaded.
  */
 cwb.ObjectContainer.prototype.loadJitData = function(oid, callback){
-
-	this.objectsForTreemap = [];
-	this.objectsForTreemap[0] = {  
-		id: oid,  
-		name: this.selectedModelName,  
-		data: {  
-			$area: 0,
-			$color: 1
-		},  
-		children: [],
-		parentOid: 'root',
-		uwmClassName: 'Model'
-	};
-
-	this.objectsForSpacetree = [];
-	this.objectsForSpacetree[0] = {  
-		id: oid,  
-		name: this.selectedModelName,  
-		data: {  
-			$area: 0,
-			$color: 1
-		},  
-		children: [],
-		parentOid: 'root',
-		uwmClassName: 'Model'
-	};
-
-	this.loadJitObject(oid, callback);
+	if (!this.jitLoaded) {
+		this.objectsForTreemap = [];
+		this.objectsForTreemap[0] = {  
+			id: oid,  
+			name: this.selectedModelName,  
+			data: {  
+				$area: 0,
+				$color: 1
+			},  
+			children: [],
+			parentOid: 'root',
+			uwmClassName: 'Model'
+		};
+	
+		this.objectsForSpacetree = [];
+		this.objectsForSpacetree[0] = {  
+			id: oid,  
+			name: this.selectedModelName,  
+			data: {  
+				$area: 0,
+				$color: 1
+			},  
+			children: [],
+			parentOid: 'root',
+			uwmClassName: 'Model'
+		};
+	
+		this.loadJitObject(oid, callback);
+	} else {
+		callback("jit");
+	}
 };
 
 /**
@@ -202,6 +206,7 @@ cwb.ObjectContainer.prototype.handleLoadedJitObject = function(options, data, oi
 		this.setWeightColors(this.objectsForTreemap);
 		
 		callback('jit');
+		this.jitLoaded = true;
 	}
 };
 
