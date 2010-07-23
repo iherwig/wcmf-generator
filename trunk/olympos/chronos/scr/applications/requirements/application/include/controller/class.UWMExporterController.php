@@ -35,7 +35,8 @@ require_once ('class.UwmUtil.php');
  * - @em failure If a fatal error occurs
  * 
  * @param[in] startOid The OID of the node to generate UML for.
- * 
+ * @param[in] diagramFormat The format for exporting diagram content (normal, virtual)
+ *
  * @author Niko &lt;enikao@users.sourceforge.net&gt;
  * 
  * The following configuration settings are defined for this controller:
@@ -56,7 +57,8 @@ class UWMExporterController extends BatchController
 	// session name constants
 	private $PARAM_START_OID = 'UWMExporterController.startOid';
 	private $PARAM_LANGUAGE = 'UWMExporterController.language';
-
+	private $PARAM_DIAGRAM_FORMAT = 'UWMExporterController.diagramFormat';
+	
 	private $TEMP_UWM_EXPORT_PATH = 'UWMExporterController.tmpUwmExportPath';
 	private $TEMP_PROPERTIES_PATH = 'UWMExporterController.tmpPropertiesPath';
 	private $TEMP_UML_EXPORT_PATH = 'UWMExporterController.tmpUmlPath';
@@ -83,6 +85,7 @@ class UWMExporterController extends BatchController
 		{
 			$session = &SessionData::getInstance();
 			$session->set($this->PARAM_START_OID, $request->getValue('startOid'));
+			$session->set($this->PARAM_DIAGRAM_FORMAT, $request->getValue('diagramFormat'));
 			if ($this->isLocalizedRequest()) {
 				$session->set($this->PARAM_LANGUAGE, $request->getValue('language'));
 			}
@@ -147,11 +150,12 @@ class UWMExporterController extends BatchController
 
 		// do the export
 		$startOid = $session->get($this->PARAM_START_OID);
-
 		$language = $session->get($this->PARAM_LANGUAGE);
-
+		$diagramFormat = $session->get($this->PARAM_DIAGRAM_FORMAT);
+		$virtualPackages = ($diagramFormat == 'virtual');
+		
 		$this->check("start exportXML: node:".$startOid);
-		UwmUtil::exportXml($tmpUwmExportPath, $startOid, $language);
+		UwmUtil::exportXml($tmpUwmExportPath, $startOid, $language, $virtualPackages);
 		$this->check("finished exportXML");
 
 		ExportShutdownHandler::success();

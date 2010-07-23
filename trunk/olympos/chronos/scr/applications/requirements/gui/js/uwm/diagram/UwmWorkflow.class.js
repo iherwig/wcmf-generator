@@ -92,7 +92,14 @@ uwm.diagram.UwmWorkflow.prototype.buildContextMenu = function() {
 						self.printDiagram();
 					}
 				}
-		})
+		}), new Ext.menu.Item( {
+			text : uwm.Dict.translate("Export as UML"),
+			listeners : {
+				click : function() {
+					self.exportDiagram();
+				}
+			}
+	})
 		]
 	});
 }
@@ -162,6 +169,13 @@ uwm.diagram.UwmWorkflow.prototype.reloadDiagram = function() {
  */
 uwm.diagram.UwmWorkflow.prototype.printDiagram = function() {
 	this.diagram.printDiagram();
+}
+
+/**
+ * Exports the diagram.
+ */
+uwm.diagram.UwmWorkflow.prototype.exportDiagram = function() {
+	this.diagram.exportDiagram();
 }
 
 /**

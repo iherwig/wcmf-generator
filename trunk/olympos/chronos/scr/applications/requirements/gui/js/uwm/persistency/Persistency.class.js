@@ -131,7 +131,7 @@ uwm.persistency.Persistency.prototype.templatelist = function(scope, successHand
 uwm.persistency.Persistency.prototype.exportDoc = function(startOid, language, exportFormat, templateName, diagramFormat, successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.exportUwm = function(startOid, language, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.exportUwm = function(startOid, language, diagramFormat, successHandler, errorHandler ) {
 }
 
 uwm.persistency.Persistency.prototype.exportImage = function(diagramOid, language, successHandler, errorHandler ) {
