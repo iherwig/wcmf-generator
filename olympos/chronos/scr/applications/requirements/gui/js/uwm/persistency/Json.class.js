@@ -315,11 +315,12 @@ uwm.persistency.Json.prototype.exportDoc = function(startOid, language, template
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.exportUwm = function(startOid, language, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.exportUwm = function(startOid, language, diagramFormat, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'exportUWM',
 		startOid: startOid,
-		language: language
+		language: language,
+		diagramFormat: diagramFormat
 	}, successHandler, errorHandler);
 }
  

@@ -73,7 +73,7 @@ class ChiNodeRDBMapper extends NodeUnifiedRDBMapper
    */
   function getOrderBy()
   {
-    return array('sortkey');
+    return array('name');
   }
   /**
    * @see NodeUnifiedRDBMapper::getObjectDefinitionImpl()

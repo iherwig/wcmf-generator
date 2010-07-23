@@ -827,6 +827,26 @@ uwm.diagram.AbstractDiagram.prototype.printDiagram = function() {
 }
 
 /**
+ * Exports the diagram.
+ */
+uwm.diagram.AbstractDiagram.prototype.exportDiagram = function() {
+	var oid = this.getOid();
+	var localization = uwm.i18n.Localization.getInstance();
+	var userLanguage = localization.getModelLanguage();
+	new uwm.ui.LongTaskRunner( {
+		title : uwm.Dict.translate('Exporting Diagram ...'),
+		call : function(successHandler, errorHandler) {
+			uwm.persistency.Persistency.getInstance().exportUwm(oid, userLanguage, 'virtual', successHandler, errorHandler);
+		},
+		successHandler : function(data) {},
+		errorHandler : function(data) {
+			uwm.Util.showMessage(uwm.Dict.translate("Error while exporting"), uwm.Dict.translate("The export was unsuccessful. Please try again."), uwm.Util.messageType.ERROR);
+		},
+		isReturningDocument : true
+	}).show();
+}
+
+/**
  * Starts the auto-layouter.
  */
 uwm.diagram.AbstractDiagram.prototype.doLayout = function() {
