@@ -176,3 +176,15 @@ Boolean isContainer(Chronos::ChiNode this):
 String CONTAINER_NODE():
 	GLOBALVAR containerNode
 ;
+
+List[uml::Property] getOwnAndSuperAssociationEnds(Chronos::ChiNode this):
+	{}
+		.addAll(this.getSuperClassesRecursive().getOwnAssociationEnds())
+		.addAll(this.getOwnAssociationEnds())
+;
+
+List[Chronos::ChiNode] selfAndSuperClasses(Chronos::ChiNode this):
+	{}
+		.addAll(this.getSuperClassesRecursive())
+		.add(this)
+;
