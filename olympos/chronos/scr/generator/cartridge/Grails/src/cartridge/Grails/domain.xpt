@@ -142,7 +142,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 «DEFINE hasMany FOR Chronos::ChiNode-»
 	«LET (
 		(List[uml::Property]) {}
-		.addAll(this.getOwnAssociationEnds())
+		.addAll(this.getOwnAndSuperAssociationEnds())
 	).select(e|e.isNavigable() && e.isMultivalued())
 	AS associations-»
 	«IF associations.size > 0»
@@ -162,13 +162,8 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 
 «DEFINE belongsTo FOR Chronos::ChiNode-»
 	«LET ((List[uml::Property]) {}
-		.addAll(this.getNavigableParentNodes())
-		.addAll(this.getOwnAssociationEnds().select(e|
-			{}
-				.addAll(((Chronos::ChiNode) e.type).getSuperClassesRecursive())
-				.add(e.type)
-			.contains(this.getFirstManyToManyChild((Chronos::ChiNode) e.type))
-			|| e.aggregation != uml::AggregationKind::none
+		.addAll(this.getOwnAndSuperAssociationEnds().select(e|
+			e.aggregation != uml::AggregationKind::none
 		))
 	)
 	AS parents -»
@@ -206,7 +201,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 «DEFINE mappedBy FOR ChiNode-»
 	«LET (
 		(List[uml::Property]) {}
-		.addAll(this.getOwnAssociationEnds())
+		.addAll(this.getOwnAndSuperAssociationEnds())
 		).select(e|e.isNavigable() && e.getOtherEnd().isNavigable())
 	AS relatives-»
 	«IF relatives.size > 0-»
