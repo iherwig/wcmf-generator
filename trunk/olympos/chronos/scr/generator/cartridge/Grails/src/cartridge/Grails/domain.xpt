@@ -37,7 +37,7 @@ package «fullQualifiedPackage»
 
 	«EXPAND imports FOR this-»
 «ENDREM»
-package com.eenergy.meregio.domain
+package com.ibm.eenergy.common.domain.cim
 
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAccessType
@@ -94,7 +94,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 	/**
 	 * «currAttribute.getComment("\n	 * ")»
 	 */
-	@XmlElement«IF currAttribute.lowerBound() > 0»(required = true)«ENDIF»
+	@XmlElement
 	«IF currAttribute.name == "mRID"»@XmlID«ENDIF»
 	«currAttribute.type.name.sanitizeType()»«IF currAttribute.isMultivalued()»[]«ENDIF» «currAttribute.name»«IF !currAttribute.^default.isNullOrEmpty()» = «currAttribute.type.getValuePrefix()»«currAttribute.^default»«currAttribute.type.getValuePostfix()»«ENDIF»
 	«ENDFOREACH»	
@@ -115,7 +115,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 	/**
 	 * «currAttribute.getComment("\n	* ")»
 	 */
-	@XmlElement«IF currAttribute.lowerBound() > 0»(required = true)«ENDIF»
+	@XmlElement
 	«currAttribute.type.name.sanitizeType()»«IF currAttribute.isMultivalued()»[]«ENDIF» «currAttribute.name»
 	«ENDFOREACH»
 	«ENDLET-»
@@ -131,7 +131,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 	/**
 	 * «currAssociation.getComment("\n	* ")»
 	 */
-	@XmlElement«IF currAssociation.lowerBound() > 0»(required = true)«ENDIF»
+	@XmlElement
 	«IF !this.isContainer()»@XmlIDREF«ENDIF»
 	«IF currAssociation.isMultivalued()»Set<«currAssociation.type.name.sanitizeType()»>«ELSE»«currAssociation.type.name.sanitizeType()»«ENDIF» «currAssociation.getRoleName().toFirstLower()»
 	
@@ -307,7 +307,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 
 /* «generatorSignature()» */
 
-package com.eenergy.meregio.domain
+package com.ibm.eenergy.common.domain.cim
 
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAccessType
