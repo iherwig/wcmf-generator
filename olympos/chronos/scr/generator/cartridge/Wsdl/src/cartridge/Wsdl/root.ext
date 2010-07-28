@@ -7,13 +7,15 @@ extension cartridge::Wsdl::wsdl;
 
 create wsdl::WsdlDocumentRoot wsdl(uml::Model umlModel, String rootElements, String targetNamespaceSuffix, String locationPrefix):
 	let root = new wsdl::TDefinitions:
-	let targetNamespace = "http://" + umlModel.ucName().toFirstLower() + "." + targetNamespaceSuffix:
+	let targetNamespace = "http://" + umlModel.ucName().toLowerCase() + "." + targetNamespaceSuffix:
 	
 	this.xMLNSPrefixMap.put("soapHttp", "http://schemas.xmlsoap.org/wsdl/soap/http") ->
 	
 	this.setDefinitions(root) ->
 	
 	root.setTargetNamespace(targetNamespace) ->
+	
+	root.setName(umlModel.ucName() + "ServiceService") ->
 	
 	root.types.add(createType(umlModel, rootElements, targetNamespace)) ->
 	root.message.addAll(createMessages(umlModel, targetNamespace)) ->
