@@ -16,10 +16,10 @@ xmlSchema::TopLevelSimpleType convertToXsd(uml::Enumeration this, String targetN
 	
 	info("Converting Enumeration " + this.name) ->
 	
-	result.setName(this.name.toFirstLower()) ->
+	result.setName(this.name) ->
 	
 	restriction.setBase(parseToQName("schema:string")) ->
-	restriction.enumeration.addAll(this.ownedLiteral.select(e|e == this.ownedLiteral.selectFirst(f|f.name.normalizeMemberName() == e.name.normalizeMemberName())).convertToXsd()) ->
+	restriction.enumeration.addAll(this.ownedLiteral.convertToXsd()) ->
 	result.setRestriction(restriction) ->
 	
 	result
@@ -30,7 +30,7 @@ xmlSchema::NoFixedFacet convertToXsd(uml::EnumerationLiteral this):
 	
 	info("	Converting EnumerationLiteral " + this.name) ->
 	
-	result.setValue(this.name.normalizeMemberName()) ->
+	result.setValue(this.name) ->
 	
 	result
 ;
