@@ -27,8 +27,8 @@ create xmlSchema::SchemaType createSchema(uml::Model umlModel, String rootElemen
 	this.setTargetNamespace(targetNamespace) ->
 	
 	this.complexType.addAll(umlModel.allOwnedElements().select(e|e.metaType == uml::Class).removeCommonClasses().select(e|!e.name.isNullOrEmpty() && !e.isAbstract).convertToXsd(targetNamespace, rootElementList)) ->
-	this.simpleType.addAll(umlModel.allOwnedElements().typeSelect(uml::Enumeration).convertToXsd(targetNamespace)) ->
-	this.simpleType.addAll(umlModel.allOwnedElements().typeSelect(uml::PrimitiveType).select(e|e.name.matches("[a-zA-Z0-9-]+")).convertToXsd(targetNamespace)) ->
+	this.simpleType.addAll(((List[uml::Enumeration])umlModel.allOwnedElements().typeSelect(uml::Enumeration).removeCommonTypes()).convertToXsd(targetNamespace)) ->
+	this.simpleType.addAll(((List[uml::PrimitiveType])umlModel.allOwnedElements().typeSelect(uml::PrimitiveType).select(e|e.name.matches("[a-zA-Z0-9-]+")).removeCommonTypes()).convertToXsd(targetNamespace)) ->
 	
 	rootElements.trim().length > 0 && rootElementList.size > 0 ? (
 		this.element.addAll(rootElementList.getRootElement(targetNamespace))
@@ -41,7 +41,7 @@ xmlSchema::TopLevelElement getRootElement(String rootClassName, String targetNam
 	let e = new xmlSchema::TopLevelElement:
 	
 	e.setName(rootClassName.toFirstLower()) ->
-	e.setType(createQName(targetNamespace, rootClassName.toFirstLower())) ->
+	e.setType(createQName(targetNamespace, rootClassName)) ->
 	
 	e
 ;

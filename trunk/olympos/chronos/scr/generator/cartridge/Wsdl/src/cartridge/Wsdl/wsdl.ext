@@ -55,7 +55,7 @@ create xmlSchema::TopLevelComplexType createComplexType(String name, String elem
 	sequence.element.add(element) ->
 	element.setName(elementName) ->
 	element.setMinOccurs(0) ->
-	element.setType(createQName(namespace, type.toFirstLower()))
+	element.setType(createQName(namespace, type))
 ;
 
 create xmlSchema::TopLevelElement createElement(String name, String namespace):
