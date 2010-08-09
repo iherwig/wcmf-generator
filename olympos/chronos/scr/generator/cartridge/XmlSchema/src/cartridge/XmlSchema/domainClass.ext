@@ -24,7 +24,7 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 		(e.association != null && parentProperties.exists(f|e.type == f.type))
 	)) ->
 	
-	result.setName(this.name.toFirstLower()) ->
+	result.setName(this.name) ->
 	result.setAbstract(this.isAbstract) ->
 	
 	//allProperties.exists(e|e.class == this) ? (
@@ -38,7 +38,7 @@ xmlSchema::TopLevelComplexType convertToXsd(uml::Class this, String targetNamesp
 		let complex = new xmlSchema::ComplexContentType:
 		let ext = new xmlSchema::ExtensionType:
 		
-		ext.setBase(createQName(targetNamespace, this.superClass.first().name.toFirstLower())) ->
+		ext.setBase(createQName(targetNamespace, this.superClass.first().name)) ->
 		ext.setSequence(sequence) ->
 		
 		complex.setExtension(ext) ->
@@ -98,7 +98,7 @@ xmlSchema::QName sanitizeXsdTypes(uml::Type this, String targetNamespace):
 
 String nameOrType(uml::Property this):
 	!this.name.isNullOrEmpty() ? (
-		this.name.toFirstLower()
+		this.name
 	) : (
 		this.type.name.toFirstLower()
 	)
