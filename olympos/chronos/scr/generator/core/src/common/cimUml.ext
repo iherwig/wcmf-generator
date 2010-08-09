@@ -5,10 +5,19 @@ List[uml::Class] removeCommonClasses(List[uml::Class] this):
 ;
 
 List[uml::Class] removeCommonClassesInternal(List[uml::Class] this):
-	this.reject(e|
-		e.name == "String"
-		|| e.name == "Integer"
-		|| e.name == "Float"
-		|| e.name == "Boolean"
-	)
+	this.reject(e|e.name.isCommon())
+;
+
+List[uml::Type] removeCommonTypes(List[uml::Type] this):
+	this.reject(e|e.name.isCommon())
+;
+
+boolean isCommon(String this):
+	switch (this) {
+		case "String": true
+		case "Integer": true
+		case "Float": true
+		case "Boolean": true
+		default: false
+	}
 ;
