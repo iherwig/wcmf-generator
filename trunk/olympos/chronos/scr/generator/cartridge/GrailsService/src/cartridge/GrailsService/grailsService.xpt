@@ -21,23 +21,22 @@
 	
 	«EXPAND cartridge::GrailsService::jrules::ruleSet FOREACH this.getProductionRulesets()»
 
-	«FILE SERVICE_PACKAGE().packageToPath() + "/" + this.asClassName() + ".groovy" SERVICE»
+	«FILE this.asFullPackageName().packageToPath() + "/" + this.asClassName() + ".groovy" SERVICE»
 «groovyFileHeader()»
 
 /* «generatorSignature()» */	
 	
-package «SERVICE_PACKAGE()»
+package «this.asFullPackageName()»
 
 import javax.jws.WebMethod 
-import javax.jws.WebResult 
+import javax.jws.WebResult
+import javax.jws.WebParam
 
-	«FOREACH this.getProductionRulesets() AS currProductionRuleset»
-import «currProductionRuleset.asFullPackageName()».«currProductionRuleset.asContextName()»
-	«ENDFOREACH»
-	
-	«FOREACH this.getDecisionsWithSelection() AS currDecision»
-import «currDecision.asFullPackageName()».«currDecision.asSelectionName()»
-	«ENDFOREACH»
+import com.ibm.eenergy.common.usecases.RequestValidationException
+import com.ibm.eenergy.common.usecases.ServiceBase
+import com.ibm.eenergy.aphrodite.AphroditeService
+
+import com.ibm.eenergy.common.domain.cim.*
 
 «PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
 /* put additional imports here */
@@ -46,12 +45,10 @@ import «currDecision.asFullPackageName()».«currDecision.asSelectionName()»
 /**
  * «this.owner.getComment("\n * ")»
  */
-class «this.asClassName()» {
+class «this.asClassName()» extends ServiceBase {
 			
-	boolean transactional = true
-	
-	protected «this.asRequestType()» request = «this.asRequestConstructorCall()»
-	protected «this.asResultType()» result = «this.asResultConstructorCall()»
+	protected «this.asRequestType()» request
+	protected «this.asResultType()» response
 
 	«FOREACH this.node.typeSelect(uml::DataStoreNode) AS currChiObject»
 	protected «currChiObject.getGrailsTypeName()» «currChiObject.asVariableName()»
@@ -63,18 +60,22 @@ class «this.asClassName()» {
 
 	static expose = ['cxfjax']
 	
-	@WebResult(name="response")
-	@WebMethod(operationName="«this.asWebServiceName()»")
-	public «this.asResultType()» «this.asMainMethodName()»(«this.asRequestType()» request) {
-		this.request = request
-		
-		«LET this.getFirstNode() AS firstNode»
-			«IF firstNode != null»
-				«EXPAND nodeCall FOR this.getFirstNode()»
-			«ENDIF»
-		«ENDLET»
-		
-		return this.result
+	@WebMethod
+	@WebResult(name = "response")
+	public «this.asResultType()» «this.asMainMethodName()»(
+		@WebParam(name = "request") «this.asRequestType()» request
+	) throws RequestValidationException {
+		establishUcEnvironment(«this.asRequestType()», request) {
+			this.request = request
+			
+			«LET this.getFirstNode() AS firstNode»
+				«IF firstNode != null»
+					«EXPAND nodeCall FOR this.getFirstNode()»
+				«ENDIF»
+			«ENDLET»
+			
+			return this.response
+		}
 	}
 	
 	«EXPAND nodeMethod FOREACH this.getMethodNodes().select(e|e.getProductionRuleset() == null)»
@@ -92,7 +93,7 @@ class «this.asClassName()» {
 	
 package «this.asFullPackageName()»
 
-import com.eenergy.jrules.Context;
+import com.ibm.eenergy.common.jrules.Context;
 
 «PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
 /* put additional imports here */
@@ -356,6 +357,8 @@ public enum «this.asSelectionName()» {
 			«ENDFOREACH»
 			 */
 		«ENDIF»
+
+		log.debug "«this.asMethodName()»()"
 	
 		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Implementation"» 
 			/*
@@ -380,7 +383,9 @@ public enum «this.asSelectionName()» {
 
 «DEFINE nodeMethod FOR Ouranos::ProductionRuleset»
 	protected «this.asContextName()» «this.asMethodName()»() {
-		com.eenergy.jrules.JRulesService jrs = com.eenergy.jrules.JRulesService.getInstance();
+		log.debug "«this.asMethodName()»()"
+
+		com.ibm.eenergy.common.jrules.JRulesService jrs = com.ibm.eenergy.common.jrules.JRulesService.getInstance();
 		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFilename"» 
 		def rulesetFileName = 'rules/«this.asFullRuleFilePath()»'
 		«ENDPROTECT»
