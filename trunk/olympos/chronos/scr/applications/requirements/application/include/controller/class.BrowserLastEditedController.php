@@ -65,7 +65,6 @@ class BrowserLastEditedController extends Controller
 	function executeKernel()
 	{
 		//get history table as objectlist
-		$objlist = array ();
 		$orderby = array ('timestamp DESC');
 	
 		// search history table
@@ -75,25 +74,32 @@ class BrowserLastEditedController extends Controller
 			$tpl = $objQuery->getObjectTemplate(self::TABLENAME);
 			$tpl->setValue("affectedoid", "NOT LIKE '".$invalidType.":%'", DATATYPE_ATTRIBUTE);
 		}
-		$pagingInfo = new PagingInfo(self::LIMIT);
-		$objlist = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby, $pagingInfo);
-	
-		$resultList = array ();
-		$resultOids = array ();
-	
-		foreach ($objlist as $objKey=>$currObj) {
-			$currOid = $currObj->getAffectedOid();
-			if ($this->isValidType($currOid) && array_search($currOid, $resultOids) === false) {
-				$node = $persistenceFacade->load($currOid);
-				if ($node) {
-					$resultList[] = $node;
-					$resultOids[] = $currOid;
-				}
-			}
 		
-			if (count($resultOids) >= self::LIMIT) {
+		$resultList = array ();
+		$numResults = 0;
+		$pagingInfo = new PagingInfo(self::LIMIT);
+		$page = 1;
+		while ($numResults < self::LIMIT) {
+			$objectList = $objQuery->execute(BUILDDEPTH_SINGLE, $orderby, $pagingInfo);
+			if (count($objectList) == 0) {
 				break;
 			}
+	
+			foreach ($objectList as $objKey=>$currObj) {
+				$currOid = $currObj->getAffectedOid();
+				if ($this->isValidType($currOid) && array_search($currOid, array_keys($resultList)) === false) {
+					$node = $persistenceFacade->load($currOid);
+					if ($node) {
+						$resultList[$currOid] = $node;
+						$numResults = count(array_keys($resultList));
+					}
+				}
+			
+				if ($numResults >= self::LIMIT) {
+					break;
+				}
+			}
+			$pagingInfo->setPage(++$page);
 		}
 	
 		// write new array with unserialized data tab
@@ -103,8 +109,8 @@ class BrowserLastEditedController extends Controller
 		$this->_response->setAction('ok');
 	
 		//	Response
-		$this->_response->setValue('list', $resultList);
-		$this->_response->setValue('count', count($resultList));
+		$this->_response->setValue('list', array_values($resultList));
+		$this->_response->setValue('count', $numResults);
 	
 		return false;
 	}
