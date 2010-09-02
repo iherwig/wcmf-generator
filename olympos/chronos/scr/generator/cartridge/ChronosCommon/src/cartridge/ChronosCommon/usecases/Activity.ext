@@ -14,6 +14,10 @@ List[uml::DataStoreNode] getOutputVariables(uml::Activity this):
 	this.getLastNodes().outgoing.typeSelect(uml::ObjectFlow).target
 ;
 
+List[uml::DataStoreNode] getVariables(uml::Activity this):
+	this.node.typeSelect(uml::ObjectFlow)
+;
+
 uml::ActivityNode getFirstNode(uml::Activity this):
 	this.getInitialNode().outgoing.typeSelect(uml::ControlFlow).target.first()
 ;

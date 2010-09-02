@@ -10,7 +10,7 @@ extension cartridge::ChronosCommon::usecases::ProductionRuleset;
 extension cartridge::ChronosCommon::usecases::DecisionNode;
 
 String asClassName(uml::Activity this):
-	this.name.normalizeClassName() + "Service"
+	((uml::UseCase) this.owner).name.normalizeClassName() + "Service"
 ;
 
 String asWebServiceName(uml::Activity this):
@@ -48,12 +48,16 @@ String asRequestConstructorCall(uml::Activity this):
 	this.asRequestType().asTypeOrMap()
 ;
 
+String asFullPackageName(uml::Activity this):
+	SERVICE_PACKAGE() + "." + this.asPackageName()
+;
+
 String asPackageName(uml::Activity this):
-	this.name.normalizePackageName()
+	((uml::UseCase) this.owner).name.normalizePackageName()
 ;
 
 String asMainMethodName(uml::Activity this):
-	this.getInitialNode().name.normalizeMemberName()
+	("execute" + ((uml::UseCase) this.owner).name.toFirstUpper()).normalizeMemberName()
 ;
 	
 uml::DataStoreNode getInputVariable(uml::Activity this):
@@ -203,11 +207,11 @@ List[uml::DecisionNode] getDecisionsWithSelection(uml::Activity this):
 ;
 
 String asFullPackageName(Ouranos::ProductionRuleset this):
-	CONTEXT_PACKAGE() + "." + this.getActivity().asPackageName()
+	this.getActivity().asFullPackageName()
 ;
 
 String asFullPackageName(uml::DecisionNode this):
-	CONTEXT_PACKAGE() + "." + this.activity.asPackageName()
+	this.activity.asFullPackageName()
 ;
 
 boolean isDecisionPredecessor(uml::OpaqueAction this):
