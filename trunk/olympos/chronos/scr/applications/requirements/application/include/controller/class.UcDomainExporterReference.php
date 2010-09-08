@@ -54,19 +54,27 @@ class UcDomainExporterReference implements UwmExporterReferenceStrategy {
 
 				$children = $node->getChildren();
 				foreach($children as $child) {
+					$sourceEnd = false;
+					
 					if ($child instanceof ChiAssociation) {
 						if ($child->getType() == 'NodeTargetEnd') {
 							$otherEndId = $child->getFkChinodesourceId();
 						} else {
 							$otherEndId = $child->getFkChinodetargetId();
+							$sourceEnd = true;
 						}
 						$otherEndOid = $this->getParentOidFromParentId($child, $otherEndId);
 						//$otherEndOid = PersistenceFacade::composeOid(array('type' => 'ChiNode', 'id' => $otherEndId));
 
 						if ($child->getRelationType() == 'generalization') {
-							$this->superclasses[] = $otherEndOid;
+							if ($sourceEnd) {
+								$this->superclasses[] = $otherEndOid;
+								$this->containers[] = $otherEndOid;
+								$result[] = $otherEndOid;
+							}
+						} else {
+							$result[] = $otherEndOid;
 						}
-						$result[] = $otherEndOid;
 					}
 				}
 			} else {
