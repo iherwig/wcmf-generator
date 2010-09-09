@@ -163,7 +163,7 @@ public class AssociateTest extends DionysosTest {
 			[
 			 	action: 'associate',
 			 	sourceOid: Cfg.associateSourceOid,
-			 	targetOid: 'com.ibm.eenergy.core.moma.objects.Preis:12520543019684',  
+			 	targetOid: 'net.sourceforge.olympos.dionysos.json.test.Preis:12520543019684',  
 			 	role: Cfg.Cfg.associateRealation
 			],
 			{req, json ->
