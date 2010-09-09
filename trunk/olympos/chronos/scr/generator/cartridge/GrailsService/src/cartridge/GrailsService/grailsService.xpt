@@ -32,11 +32,7 @@ import javax.jws.WebMethod
 import javax.jws.WebResult
 import javax.jws.WebParam
 
-import com.ibm.eenergy.common.usecases.RequestValidationException
-import com.ibm.eenergy.common.usecases.ServiceBase
-import com.ibm.eenergy.aphrodite.AphroditeService
-
-import com.ibm.eenergy.common.domain.cim.*
+«REM» TODO: Expand service imports «ENDREM»
 
 «PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
 /* put additional imports here */
@@ -93,7 +89,7 @@ class «this.asClassName()» extends ServiceBase {
 	
 package «this.asFullPackageName()»
 
-import com.ibm.eenergy.common.jrules.Context;
+«REM» TODO: Expand context imports «ENDREM»
 
 «PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
 /* put additional imports here */
@@ -385,7 +381,7 @@ public enum «this.asSelectionName()» {
 	protected «this.asContextName()» «this.asMethodName()»() {
 		log.debug "«this.asMethodName()»()"
 
-		com.ibm.eenergy.common.jrules.JRulesService jrs = com.ibm.eenergy.common.jrules.JRulesService.getInstance();
+		JRulesService jrs = JRulesService.getInstance();
 		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFilename"» 
 		def rulesetFileName = 'rules/«this.asFullRuleFilePath()»'
 		«ENDPROTECT»

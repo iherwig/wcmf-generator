@@ -251,6 +251,8 @@ uml::ActivityNode unmarkProcessed(uml::ActivityNode this):
 
 String CONTEXT_PACKAGE(): GLOBALVAR contextPackage;
 String SERVICE_PACKAGE(): GLOBALVAR servicePackage;
+String SERVICE_IMPORTS(): GLOBALVAR serviceImports;
+String CONTEXT_IMPORTS(): GLOBALVAR contextImports;
 
 String LIST_ELEMENT_KEYWORD(): "GrailsListElement";
 String PROCESSED_KEYWORD(): "GrailsServiceProcessed";

@@ -84,6 +84,8 @@
 		
 		<globalVarDef name="contextPackage" value="'${contextPackage}'"/>
 		<globalVarDef name="servicePackage" value="'${servicePackage}'"/>
+		<globalVarDef name="contextImports" value="'${contextImports}'"/>
+		<globalVarDef name="serviceImports" value="'${serviceImports}'"/>
 		<globalVarDef name="fileHeader" value="'${fileHeader}'"/>
 
 		<beautifier class="net.sourceforge.olympos.oaw.workflow.BlankLineRemover"/>

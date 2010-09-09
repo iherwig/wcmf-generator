@@ -49,6 +49,7 @@
 		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
 		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
 		<globalVarDef name="containerNode" value="'${containerNode}'"/>
+		<globalVarDef name="domainPackage" value="'${domainPackage}'"/>
 
 		<metaModel idRef="mmUml2"/>
 		<metaModel idRef="mmChronos"/>
@@ -64,6 +65,7 @@
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
 		<globalVarDef name="fileHeader" value="'${fileHeader}'"/>
 		<globalVarDef name="containerNode" value="'${containerNode}'"/>
+		<globalVarDef name="domainPackage" value="'${domainPackage}'"/>
 
 		<metaModel idRef="mmChronos"/>
 		<metaModel idRef="mmUml2"/>

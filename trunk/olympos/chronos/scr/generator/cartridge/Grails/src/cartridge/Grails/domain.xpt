@@ -37,7 +37,7 @@ package «fullQualifiedPackage»
 
 	«EXPAND imports FOR this-»
 «ENDREM»
-package com.ibm.eenergy.common.domain.cim
+package «DOMAIN_PACKAGE()»
 
 import javax.xml.bind.annotation.XmlAccessorType
 import javax.xml.bind.annotation.XmlAccessType

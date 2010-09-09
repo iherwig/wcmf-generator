@@ -177,6 +177,10 @@ String CONTAINER_NODE():
 	GLOBALVAR containerNode
 ;
 
+String DOMAIN_PACKAGE():
+	GLOBALVAR domainPackage
+;
+
 List[uml::Property] getOwnAndSuperAssociationEnds(Chronos::ChiNode this):
 	{}
 		.addAll(this.getSuperClassesRecursive().getOwnAssociationEnds())
