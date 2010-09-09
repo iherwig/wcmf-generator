@@ -104,18 +104,6 @@
 			<Column name="GlossaryID" value="18"/>
 		</DataRow>
 		<DataRow>
-			<Column name="Term" value="Creative Common Licenses"/>
-			<Column name="Type" value="Business"/>
-			<Column name="Meaning" value="Protects Concept, not implementation.&#xA;No official IBM position&#xA;"/>
-			<Column name="GlossaryID" value="19"/>
-		</DataRow>
-		<DataRow>
-			<Column name="Term" value="Open Source Licences &amp; IBM"/>
-			<Column name="Type" value="Business"/>
-			<Column name="Meaning" value="GPL: Not usable inside IBM&#xA;LGPL: Not modifiable code,  usable inside IBM&#xA;Eclipse:  usable inside IBM&#xA;Apache: usable inside IBM&#xA;&#xA;&#xA;"/>
-			<Column name="GlossaryID" value="20"/>
-		</DataRow>
-		<DataRow>
 			<Column name="Term" value="Cartridge"/>
 			<Column name="Type" value="Business"/>
 			<Column name="Meaning" value="A collection of ready-to-go PSM, Rules and transformations to Code (M2T) that leverage a special technology.&#xA;e.g. the &quot;design model&quot; part of R4SC is a typical cartridge ."/>
