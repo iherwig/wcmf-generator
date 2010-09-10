@@ -5,15 +5,15 @@
 	<bean id="uml2" class="org.openarchitectureware.uml2.UML2MetaModel"/>
 	
 	<bean id="Chronos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
-		<profile value="/home/nist/Desktop/meregio-ea/chronos.profile.uml"/>
+		<profile value="/home/nist/Desktop/project-ea/chronos.profile.uml"/>
 	</bean>
 	
 	<bean id="Ouranos" class="org.openarchitectureware.uml2.profile.ProfileMetaModel">
-		<profile value="/home/nist/Desktop/meregio-ea/ouranos.profile.uml"/>
+		<profile value="/home/nist/Desktop/project-ea/ouranos.profile.uml"/>
 	</bean>
 
 	<component class="oaw.emf.XmiReader">
-		<modelFile value="/home/nist/Desktop/meregio-ea/meregio-part.uml" />
+		<modelFile value="/home/nist/Desktop/project-ea/project-part.uml" />
 		<outputSlot value="localModel" />
 	</component>
 	

@@ -13,7 +13,11 @@
 
 /* «generatorSignature()» */	
 
-import com.eenergy.meregio.domain.*;
+«LET ((List[String]) DOMAIN_IMPORTS().split(",")) AS imports»
+«FOREACH imports AS currImport»
+import «currImport»
+«ENDFOREACH»
+«ENDLET»
 
 import «this.asFullPackageName()».*;
 
