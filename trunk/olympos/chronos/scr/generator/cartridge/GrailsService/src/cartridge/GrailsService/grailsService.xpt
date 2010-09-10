@@ -32,7 +32,16 @@ import javax.jws.WebMethod
 import javax.jws.WebResult
 import javax.jws.WebParam
 
-«REM» TODO: Expand service imports «ENDREM»
+«LET ((List[String]) SERVICE_IMPORTS().split(",")) AS imports»
+«FOREACH imports AS currImport»
+import «currImport»
+«ENDFOREACH»
+«ENDLET»
+«LET ((List[String]) DOMAIN_IMPORTS().split(",")) AS imports»
+«FOREACH imports AS currImport»
+import «currImport»
+«ENDFOREACH»
+«ENDLET»
 
 «PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
 /* put additional imports here */
@@ -89,7 +98,11 @@ class «this.asClassName()» extends ServiceBase {
 	
 package «this.asFullPackageName()»
 
-«REM» TODO: Expand context imports «ENDREM»
+«LET ((List[String]) CONTEXT_IMPORTS().split(",")) AS imports»
+«FOREACH imports AS currImport»
+import «currImport»
+«ENDFOREACH»
+«ENDLET»
 
 «PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
 /* put additional imports here */
