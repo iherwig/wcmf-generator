@@ -35,8 +35,8 @@ public class Cfg {
 	/**
 	 * attributes for executeActionSet operation
 	 */
-	static executeActionSetcreateClassName = 'com.eenergy.meregio.domain.AbsoluteDateTime'	
-	static executeActionSetUpdateOid = '{com.eenergy.meregio.domain.AbsoluteDateTime:?}'
+	static executeActionSetcreateClassName = 'net.souceforge.olympos.domain.AbsoluteDateTime'	
+	static executeActionSetUpdateOid = '{net.souceforge.olympos.domain.AbsoluteDateTime:?}'
 	static executeActionSetAttributes = '{"title": "Matrix The Original","groundbreaking": true}'
 
 	static EAScreateParentClassName = 'CompositeParent'
