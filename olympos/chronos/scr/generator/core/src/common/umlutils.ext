@@ -52,6 +52,21 @@ String getRoleName(uml::Property this) :
 cached List[uml::Class] getSubClasses(uml::Class this) : 
 	this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|uml::Class.isInstance(e) && e.getGenerals().contains(this));
 
+cached List[uml::Class] getSubClassesRecursive(uml::Class this):
+	let result = {}:
+	let subClasses = this.getSubClasses():
+
+
+	subClasses != null && subClasses.size > 0 ? (
+	  result.addAll(subClasses) ->
+	  result.addAll(subClasses.getSubClassesRecursive())
+	) : (
+	  Void
+	) ->
+
+	result
+;
+
 
 /**
  * Get all superclasses of a class
