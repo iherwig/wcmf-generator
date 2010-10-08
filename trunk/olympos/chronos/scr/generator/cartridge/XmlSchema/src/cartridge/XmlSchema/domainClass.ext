@@ -56,6 +56,10 @@ xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespa
 	//(new xmlSchema::LocalElement).t
 	
 	let result = new xmlSchema::LocalElement:
+	let superClasses = this.class.getSuperClassesRecursive():
+	let subClasses = this.class.getSubClassesRecursive():
+	let relatedClasses = {}.addAll(superClasses).addAll(subClasses):
+	let isRootRelated = relatedClasses.exists(e|rootElements.contains(e.name)):
 	
 	info("	Converting Property " + this.name) ->
 	
@@ -63,7 +67,7 @@ xmlSchema::LocalElement convertProperty(uml::Property this, String targetNamespa
 	result.setMinOccurs(0) ->
 	result.setMaxOccurs(this.getUpper() != -1 ? this.getUpper() : parseToQName("unbounded")) ->
 	result.setName(this.nameOrType()) ->
-	result.setType(((this.association == null) || (rootElements.contains(this.class.name))) ? (
+	result.setType(((this.association == null) || (rootElements.contains(this.class.name)) || isRootRelated) ? (
 		this.name != "mRID" ? (
 			this.type.sanitizeXsdTypes(targetNamespace)
 		) : (
