@@ -45,6 +45,7 @@
 		<metaModel idRef="cwmMM" />
 		<metaModel idRef="UmlMM" />
 		<metaModel idRef="${profilename}MM" />
+		<metaModel idRef="ouranos" />
 		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfileModel, ouranosProfileModel)" />
 		<outputSlot value="model" />
 		<globalVarDef name="basePath" value="'${basePath}'" />
@@ -59,7 +60,7 @@
 			<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
 			<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
 			<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
-
+			
 			<metaModel idRef="UmlMM"/>
 			<metaModel idRef="${profilename}MM"/>
 			<checkFile value="${preCheckFile}"/>
@@ -78,6 +79,7 @@
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
 		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
 		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+		<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
 
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>

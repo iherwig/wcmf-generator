@@ -35,7 +35,7 @@ context Model ERROR
  * Check the base class
  */
 context ChiNode ERROR
-	this.name+" does not inherit from '"+RequiredNodeSuperClass()+"', but from "+this.superClass.name :
+	this.getQualifiedName()+" being not a defined as library in "+LibraryPackageAbsolute(this.getModel())+" does not inherit from '"+RequiredNodeSuperClass()+"', but from "+this.superClass.name :
 	let requiredSuperClass = this.getModel().allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first() :
  		!this.isLibraryClass() ? this.isInheritingFrom(requiredSuperClass) : true
 ;
