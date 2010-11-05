@@ -38,6 +38,7 @@ Void addDefaults(uml::Model this) :
 
 Void doTransformations(uml::Model this):
 	this.addSuperclass() ->
+	this.addSuperclassController() ->
 	this.addStereotype() ->
 	this.addNavigability() ->
 	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
@@ -71,6 +72,12 @@ Void addSuperclassClass(uml::Model this):
 	info("Adding superclass ...") ->
 	this.allOwnedElements().typeSelect(uml::Class).select(e|e.superClass.isEmpty).addNodeSuperClass()
 ;
+
+Void addSuperclassController(uml::Model this):
+	info("Adding Controller superclass ...") ->
+	this.allOwnedElements().typeSelect(ChiController).select(e|e.superClass.isEmpty).addControllerSuperClass()
+;
+
 
 Void addStereotype(uml::Model this):
 	info("Adding stereotype ...") ->
