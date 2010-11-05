@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cartridgeinfo system="false">
-	<name>Chi Content Managment Framework</name>
-	<description>The wCMF (wemove Content Management Framework) cartridge, adapted to Chronos profile.</description>
+	<name>Chi CMF</name>
+	<description>The Chi Content management Framework contains  the wCMF (wemove Content Management Framework) cartridge, adapted to Chronos profile.</description>
 	<dependencies>
 		<dependency>UmlConnector</dependency>
 	</dependencies>

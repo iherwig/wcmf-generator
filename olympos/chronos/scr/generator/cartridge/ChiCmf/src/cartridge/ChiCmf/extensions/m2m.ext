@@ -117,7 +117,7 @@ Void addControllerSuperClass(uml::Class this) :
 	let superClass = this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|e.qualifiedName == RequiredControllerSuperClass()).first():
 	superClass != this ? (
 		let generalization = new uml::Generalization:
-		info("Adding SuperClass " + superClass.name + " to: " + this.name) ->
+		info("Adding controller SuperClass " + superClass.name + " to: " + this.name) ->
 		
 		generalization.setGeneral(superClass) ->
 		generalization.setSpecific(this)
