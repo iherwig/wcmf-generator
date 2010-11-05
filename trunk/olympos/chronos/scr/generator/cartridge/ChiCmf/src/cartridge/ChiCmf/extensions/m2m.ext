@@ -106,6 +106,18 @@ Void addNodeSuperClass(uml::Class this) :
 		Void
 ;
 
+Void addControllerSuperClass(uml::Class this) :
+	let superClass = this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|e.qualifiedName == RequiredControllerSuperClass()).first():
+	superClass != this ? (
+		let generalization = new uml::Generalization:
+		info("Adding SuperClass " + superClass.name + " to: " + this.name) ->
+		
+		generalization.setGeneral(superClass) ->
+		generalization.setSpecific(this)
+	) :
+		Void
+;
+
 Void addChiNodeStereotype(uml::Class this):
 	info("Adding Stereotype ChiNode to " + this.name) ->
 	this.applyStereotype("Chronos::ChiNode")
