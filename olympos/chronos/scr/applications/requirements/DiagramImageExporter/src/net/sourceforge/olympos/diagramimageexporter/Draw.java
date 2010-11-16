@@ -43,7 +43,7 @@ public class Draw {
 		DrawFigure drawF = new DrawFigure();
 		// DrawConnection drawC = new DrawConnection();
 		FigureDiagram editDia = new FigureDiagram();
-		String imagePathSvg = imagePath + id + ".svg";
+		String imagePathSvg = imagePath + svg.sanitizeFilename(id) + ".svg";
 		InfoCoordinate maxCor = new InfoCoordinate(300, 60);
 
 		// Create the document on which the different elements will be put
@@ -103,7 +103,7 @@ public class Draw {
 			String fileImagePath = "file:///" + imagePathSvg;
 			TranscoderInput input = new TranscoderInput(fileImagePath);
 			try {
-				OutputStream ostream = new FileOutputStream(imagePath + id + ".png");
+				OutputStream ostream = new FileOutputStream(imagePath + svg.sanitizeFilename(id) + ".png");
 				t.addTranscodingHint(t.KEY_WIDTH, new Float(maxCor.getX()));
 				t.addTranscodingHint(t.KEY_HEIGHT, new Float(maxCor.getY()));
 

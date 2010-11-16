@@ -47,6 +47,11 @@ public class SVGGenerator {
 	public void xmlFigNull(){
 		xmlFigure = null;
 	}
+	
+	public String sanitizeFilename(String filename) {
+		filename = filename.replace(':', '_');
+		return filename;
+	}	
 	public static void generateImages(String sourceFile, String targetDir, String iconDir, String usedImageFormat) throws Exception {
 
 		//we don't require an X11 server on Unix
@@ -94,7 +99,7 @@ public class SVGGenerator {
 				int widthInt = (int) maxCor.getX();
 				int heightInt = (int) maxCor.getY();
 				Element image = new Element("image");
-				String filename = currDia.getId() + "." + usedImageFormat;
+				String filename = svg.sanitizeFilename(currDia.getId()) + "." + usedImageFormat;
 				image.setAttribute("filename", filename);
 				String width = Integer.toString(widthInt);
 				image.setAttribute("width", width);
