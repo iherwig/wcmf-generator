@@ -6,11 +6,15 @@
 «EXTENSION cartridge::ChronosCommon::domain::ChiNode»
 «EXTENSION cartridge::ChronosCommon::requirements::ChiGoal»
 «EXTENSION extensions::util»
+«EXTENSION extensions::globals»
 
 «DEFINE root FOR Model»
 	«info('Expand Model')»
+	«FILE projectName()+".mm"-»
 	«EXPAND templates::freemind::printHeader FOR this»	
 	«EXPAND templates::freemind::printChiGoal FOREACH this.allOwnedElements().typeSelect(Chronos::ChiGoal)»
+	«EXPAND templates::freemind::printFooter FOR this»
+	«ENDFILE»
 «ENDDEFINE»
 
 
