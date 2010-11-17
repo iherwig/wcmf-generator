@@ -70,7 +70,7 @@ uwm.modeltree.ModelNode.prototype.buildContextMenu = function() {
 			    new uwm.ui.LongTaskRunner( {
 			        title : uwm.Dict.translate('Exporting UML ...'),
 			        call : function(successHandler, errorHandler) {
-				        uwm.persistency.Persistency.getInstance().exportUwm(self.getModelNode().getOid(), userLanguage, successHandler, errorHandler);
+				        uwm.persistency.Persistency.getInstance().exportUwm(self.getModelNode().getOid(), userLanguage, 'normal', successHandler, errorHandler);
 			        },
 			        successHandler : function(data) {},
 			        errorHandler : function(data) {
