@@ -3,6 +3,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::ChronosCommon::usecases::Activity»
 «EXTENSION cartridge::ChronosCommon::usecases::ActivityNode»
@@ -43,7 +44,7 @@ import «currImport»
 «ENDFOREACH»
 «ENDLET»
 
-«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Imports").asProtectedRegionId()» 
 /* put additional imports here */
 «ENDPROTECT»
 
@@ -59,7 +60,7 @@ class «this.asClassName()» extends ServiceBase {
 	protected «currChiObject.getGrailsTypeName()» «currChiObject.asVariableName()»
 	«ENDFOREACH»
 
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "UndefinedVariables"» 
+	«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "UndefinedVariables").asProtectedRegionId()» 
 	/* put additional cross-Activity variables here */
 	«ENDPROTECT»
 
@@ -86,6 +87,10 @@ class «this.asClassName()» extends ServiceBase {
 	«EXPAND nodeMethod FOREACH this.getMethodNodes().select(e|e.getProductionRuleset() == null)»
 	
 	«EXPAND nodeMethod FOREACH this.getProductionRulesets()»
+
+«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "CustomMethods").asProtectedRegionId()» 
+	/* put additional methods here */
+«ENDPROTECT»
 }
 	«ENDFILE»
 «ENDDEFINE»
@@ -104,7 +109,7 @@ import «currImport»
 «ENDFOREACH»
 «ENDLET»
 
-«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Imports").asProtectedRegionId()» 
 /* put additional imports here */
 «ENDPROTECT»
 
@@ -114,7 +119,7 @@ public class «this.asContextName()» extends Context {
 	 * e.g. these constants are set as a the Result of the execute of a rule
 	 */
 	enum RulesetState {
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "ContextRulesetState"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "ContextRulesetState").asProtectedRegionId()» 
 		/* Put additional states here */
 		«ENDPROTECT»
 		BEGIN,
@@ -139,7 +144,7 @@ public class «this.asContextName()» extends Context {
 	«FOREACH this.getFirstNodes().getInputChiObjects() AS currSource»
 		«currSource.getGrailsTypeName()» «currSource.asVariableName()»
 	«ENDFOREACH»
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "ContextVariables"» 
+	«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "ContextVariables").asProtectedRegionId()» 
 	/* Put additional variables here */
 	«ENDPROTECT»
 }
@@ -154,7 +159,7 @@ public class «this.asContextName()» extends Context {
 	
 package «this.asFullPackageName()»
 
-«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Imports").asProtectedRegionId()» 
 /* put additional imports here */
 «ENDPROTECT»
 
@@ -347,7 +352,7 @@ public enum «this.asSelectionName()» {
 
 «DEFINE nodeMethod FOR uml::DecisionNode»
 	«EXPAND nodeMethodHeader(this.getPreviousNode().getInputChiObjects()) FOR this»
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Decision"» 
+	«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Decision").asProtectedRegionId()» 
 		/* TODO: Required selection criteria */
 		result = «this.asSelectionName()».«this.getFlowStates().first().asFlowName()»
 	«ENDPROTECT»	
@@ -369,7 +374,7 @@ public enum «this.asSelectionName()» {
 
 		log.debug "«this.asMethodName()»()"
 	
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Implementation"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Implementation").asProtectedRegionId()» 
 			/*
 			 TODO: Implement method according to comment below
 			 «this.getComment()»
@@ -395,7 +400,7 @@ public enum «this.asSelectionName()» {
 		log.debug "«this.asMethodName()»()"
 
 		JRulesService jrs = JRulesService.getInstance();
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFilename"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetFilename").asProtectedRegionId()» 
 		def rulesetFileName = 'rules/«this.asFullRuleFilePath()»'
 		«ENDPROTECT»
 		
@@ -411,14 +416,14 @@ public enum «this.asSelectionName()» {
 					 */
 				«ENDIF»
 			«ENDLET»
-			«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetVariables"»
+			«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetVariables").asProtectedRegionId()»
 			/* Put additional variables here */
 			«ENDPROTECT» 
 		)
 
 		def unNamedParameters = []
 		def namedInParameters = [:]
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "AdditionalParameters"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "AdditionalParameters").asProtectedRegionId()» 
 		/* Add named and unnamed parameters here
 		 * e.g.
 		 * unNamedParameters.add(arguments.myValue)
@@ -435,7 +440,7 @@ public enum «this.asSelectionName()» {
 				context.rulesetState = «this.asContextName()».RulesetState.END;
 			}
 			switch (context.rulesetState) {
-				«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetSwitch"» 
+				«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetSwitch").asProtectedRegionId()» 
 				/* Put code for additional states here */
 				case «this.asContextName()».RulesetState.END:
 					/* Put code for setting the result here */

@@ -3,6 +3,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::Wcmf::extensions::globals»
 «EXTENSION cartridge::Wcmf::extensions::naming»
@@ -20,7 +21,7 @@
  * Manual modifications should be placed inside the protected regions.
  */
 require_once(BASE."«this.getFullPackageName().asPath()»/«curRoleName.asBaseClassFile()»");
-«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+curRoleName.asClassFile()+"/Import"»
+«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+curRoleName.asClassFile()+"/Import").asProtectedRegionId()»
 «ENDPROTECT»
 
 /**
@@ -32,7 +33,7 @@ require_once(BASE."«this.getFullPackageName().asPath()»/«curRoleName.asBaseClass
  */
 class «curRoleName» extends «curRoleName»Base
 {
-«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+curRoleName.asClassFile()+"/Body"»
+«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+curRoleName.asClassFile()+"/Body").asProtectedRegionId()»
 «ENDPROTECT»
 «EXPAND operation(this) FOREACH this.ownedOperation-»
 }
@@ -55,7 +56,7 @@ class «curRoleName» extends «curRoleName»Base
   */  
   function «name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»«IF p.direction.toString() != "return"»$«p.name»«ENDIF»«ENDFOREACH») 
   {
-«PROTECT CSTART "// " CEND "" ID class.getFullPackageName().asPath()+"/"+ class.name.asClassFile()+"/Methods/"+this.name»
+«PROTECT CSTART "// " CEND "" ID (class.getFullPackageName().asPath()+"/"+ class.name.asClassFile()+"/Methods/"+this.name).asProtectedRegionId()»
 «ENDPROTECT»
   }   
 «ENDDEFINE»

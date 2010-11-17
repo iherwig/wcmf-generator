@@ -3,6 +3,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::Wcmf::extensions::globals»
 «EXTENSION cartridge::Wcmf::extensions::naming»
@@ -19,7 +20,7 @@
 ; Manual modifications should be placed inside the protected regions.
 ;
 «EXPAND sections(curConfig) FOREACH this.getModel().allOwnedElements().typeSelect(WCMFSystem)-»
-«PROTECT CSTART "; " CEND "" ID ApplicationPath()+"/include/"+curConfig+"/Section"»
+«PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/include/"+curConfig+"/Section").asProtectedRegionId()»
 ; put additional config keys here
 «ENDPROTECT»
 «ENDFILE-»
@@ -31,7 +32,7 @@
 	«IF this.plattform == "wcmf"-»
 		«IF this.config == curConfig || this.name.toLowerCase() == "actionmapping" || this.name.toLowerCase() == "views"-»
 [«this.name.toLowerCase()»]
-«PROTECT CSTART "; " CEND "" ID ApplicationPath()+"/include/"+curConfig+"/"+this.name+"SectionBegin"»
+«PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/include/"+curConfig+"/"+this.name+"SectionBegin").asProtectedRegionId()»
 ; put additional config keys here
 «ENDPROTECT»
 		«IF curConfig.isDefaultConfig()-»
@@ -56,7 +57,7 @@
 «curAttribute.name» = «curAttribute.defaultValue.stringValue()»
 			«ENDFOREACH-»
 		«ENDIF-»
-«PROTECT CSTART "; " CEND "" ID ApplicationPath()+"/include/"+curConfig+"/"+this.name+"Section"»
+«PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/include/"+curConfig+"/"+this.name+"Section").asProtectedRegionId()»
 ; put additional config keys here
 «ENDPROTECT»
 

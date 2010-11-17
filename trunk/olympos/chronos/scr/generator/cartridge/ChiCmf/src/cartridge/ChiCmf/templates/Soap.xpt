@@ -3,6 +3,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 «EXTENSION cartridge::ChiCmf::extensions::naming»
@@ -30,7 +31,7 @@ require_once(BASE."wcmf/lib/core/class.WCMFException.php");
 require_once(BASE."wcmf/lib/util/class.Log.php");
 require_once(BASE."wcmf/lib/presentation/class.ActionMapper.php");
 require_once(BASE."wcmf/lib/presentation/class.Request.php");
-«PROTECT CSTART "// " CEND "" ID "/soap/Import"»
+«PROTECT CSTART "// " CEND "" ID ("/soap/Import").asProtectedRegionId()»
 «ENDPROTECT»
 
 $NAMESPACE = 'http://wcmf.sourceforge.net';
@@ -247,7 +248,7 @@ $server->register('delete«this.name.asType()»',
 function get«this.name.asType()»List($login, $password)  
 {
 	$_GET = array_merge($_GET, array('login' => $login, 'password' => $password, 'usr_action' => 'list', 'type' => '«this.name.asType()»'));
-«PROTECT CSTART "// " CEND "" ID "soap/Methods/get"+this.name.asType()+"List"»
+«PROTECT CSTART "// " CEND "" ID ("soap/Methods/get"+this.name.asType()+"List").asProtectedRegionId()»
 	$result = doSoapCall();
 	return $result->getValue('objects');
 «ENDPROTECT»
@@ -264,7 +265,7 @@ function get«this.name.asType()»List($login, $password)
 function create«this.name.asType()»($login, $password, $«this.name», $parentoid)  
 {
 	$_GET = array_merge($_GET, array('login' => $login, 'password' => $password, 'usr_action' => 'new', 'newtype' => '«this.name.asType()»',  PersistenceFacade::composeOID(array('type' => '«this.name.asType()»')) => $«this.name», 'poid' => $parentoid));
-«PROTECT CSTART "// " CEND "" ID "soap/Methods/create"+this.name.asType()»
+«PROTECT CSTART "// " CEND "" ID ("soap/Methods/create"+this.name.asType()).asProtectedRegionId()»
 	$result = doSoapCall();
 	return $result->getValue('oid');
 «ENDPROTECT»
@@ -281,7 +282,7 @@ function create«this.name.asType()»($login, $password, $«this.name», $parentoid)
 function read«this.name.asType()»($login, $password, $oid, $depth)  
 {
 	$_GET = array_merge($_GET, array('login' => $login, 'password' => $password, 'usr_action' => 'display', 'oid' => $oid, 'depth' => $depth));
-«PROTECT CSTART "// " CEND "" ID "soap/Methods/read"+this.name.asType()»
+«PROTECT CSTART "// " CEND "" ID ("soap/Methods/read"+this.name.asType()).asProtectedRegionId()»
 	$result = doSoapCall();
 	return $result->getValue('node');
 «ENDPROTECT»
@@ -298,7 +299,7 @@ function read«this.name.asType()»($login, $password, $oid, $depth)
 function update«this.name.asType()»($login, $password, $«this.name», $oid)  
 {
 	$_GET = array_merge($_GET, array('login' => $login, 'password' => $password, 'usr_action' => 'save', $oid => $«this.name», 'oid' => $oid));
-«PROTECT CSTART "// " CEND "" ID "soap/Methods/update"+this.name.asType()»
+«PROTECT CSTART "// " CEND "" ID ("soap/Methods/update"+this.name.asType()).asProtectedRegionId()»
 	$result = doSoapCall();
 	return $result;
 «ENDPROTECT»
@@ -314,7 +315,7 @@ function update«this.name.asType()»($login, $password, $«this.name», $oid)
 function delete«this.name.asType()»($login, $password, $oid)  
 {
 	$_GET = array_merge($_GET, array('login' => $login, 'password' => $password, 'usr_action' => 'delete', 'deleteoids' => $oid));
-«PROTECT CSTART "// " CEND "" ID "soap/Methods/delete"+this.name.asType()»
+«PROTECT CSTART "// " CEND "" ID ("soap/Methods/delete"+this.name.asType()).asProtectedRegionId()»
 	$result = doSoapCall();
 	return $result;
 «ENDPROTECT»

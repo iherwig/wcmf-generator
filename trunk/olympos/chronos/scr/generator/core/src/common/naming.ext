@@ -12,3 +12,10 @@ String asPackageName(String name) :
 String asPath(String name) : 
 	name.replaceAll("\\.", "/")
 ;
+
+/**
+ * Escape the string to be used as a PR id
+ */
+String asProtectedRegionId(String name) :
+	name.replaceAll("\\(", "[").replaceAll("\\)", "]")
+;
