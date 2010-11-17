@@ -4,6 +4,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::GrailsService::grailsService»
 
@@ -21,12 +22,12 @@ import «currImport»
 
 import «this.asFullPackageName()».*;
 
-«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileImport"» 
+«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetFileImport").asProtectedRegionId()» 
 /* Place additional imports here */
 «ENDPROTECT»
 
 ruleset «this.asMethodName()»Ruleset {
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileNamedParameters"» 
+	«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetFileNamedParameters").asProtectedRegionId()» 
 	/* Put named parameters here
 	 * e.g.
 	 * in Integer myParameter;
@@ -34,7 +35,7 @@ ruleset «this.asMethodName()»Ruleset {
 	«ENDPROTECT»
 }
 
-«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileRuleDescription"» 
+«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetFileRuleDescription").asProtectedRegionId()» 
 /**
  * Rule description
  */
@@ -43,14 +44,14 @@ rule «this.asMethodName()» {
 	property status = "new";
 	when {
 		?context: «this.asContextName()»(
-			«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFilenRuleSelectionCriteria"» 
+			«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetFilenRuleSelectionCriteria").asProtectedRegionId()» 
 			/* Put context selection criteria here
 	 		 * e.g.
 	 		 * rulesetState == NamedRuleset1Context.RulesetState.BEGIN;
 	 		 */
 			«ENDPROTECT»
 		);
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileRuleCondition"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetFileRuleCondition").asProtectedRegionId()» 
 		/* Put condition code here. 
 		 * NOTE: since this rule contains an 'else' action clause, it is required
 		 * to have an evaluation at the end of the condition (use 'evaluate(true)', if
@@ -62,7 +63,7 @@ rule «this.asMethodName()» {
 		«ENDPROTECT»
 	}
 	then {
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileRuleBody"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetFileRuleBody").asProtectedRegionId()» 
 		/* Put code, that should be executed if the condition evaluates true, here
 	 	 * e.g.
 	 	 * context.selection = NamedRuleset1Context.FlowState.JA;
@@ -72,7 +73,7 @@ rule «this.asMethodName()» {
 		«ENDPROTECT»
 	}
 	else {
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "RulesetFileRuleElse"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "RulesetFileRuleElse").asProtectedRegionId()» 
 		/* Put code, that should be executed if the condition evaluates false, here
 	 	 * e.g.
 	 	 * context.selection = NamedRuleset1Context.FlowState.NEIN;

@@ -4,6 +4,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::GenerateUmlConnector::util»
 
@@ -43,7 +44,7 @@ extension common::umlutils;
 extension cartridge::UmlConnector::connections;
 extension cartridge::UmlConnector::connectionsToCwm;
 
-«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".header.extensions"»
+«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + this.name + ".header.extensions").asProtectedRegionId()»
 	//Additional extensions go here
 «ENDPROTECT»
 «ENDDEFINE»
@@ -52,7 +53,7 @@ extension cartridge::UmlConnector::connectionsToCwm;
 uml::«this.getMetaClass().name» convert(cwm::«this.getCwmName()» c):
 	let uc = new uml::«this.getMetaClass().name» : (
 		uc.setName("«this.getCwmName()»:" + c.id)
-		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convert.misc"»
+		«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + this.name + ".convert.misc").asProtectedRegionId()»
 			//Additional code goes here
 		«ENDPROTECT»
 	) ->
@@ -102,7 +103,7 @@ Void establishConnections(cwm::«this.getCwmName()» c, uml::Model um):
 		«ENDFOREACH»
 «ENDREM»
 
-		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".establishConnections.connections"»
+		«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + this.name + ".establishConnections.connections").asProtectedRegionId()»
 			//Insert connections here
 			// e. g. c.child.select(e|e.targetType == "ChiBusinessUseCase").establishRealizationToUseCase(uc, um, "refines") ->
 			Void
@@ -124,7 +125,7 @@ Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::«this.name»") ->
 
-			«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".transferValues.comment"»
+			«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + this.name + ".transferValues.comment").asProtectedRegionId()»
 				//Delete this content if object has no notes
 				c.notes != null ? (
 					comment.setBody(c.notes) ->
@@ -139,7 +140,7 @@ Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
 
 			«EXPAND transferValuesTaggedValues(this) FOREACH this.allTaggedValueNames() SEPARATOR "->"»
 			
-			«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".transferValues.misc"»
+			«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + this.name + ".transferValues.misc").asProtectedRegionId()»
 				//Additional code goes here
 			«ENDPROTECT»
 		)
@@ -149,7 +150,7 @@ Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
 
 «DEFINE transferValuesTaggedValues(uml::Class st) FOR String»
 	«LET st.getTaggedValueType(this) AS type»
-		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".transferValues.taggedValue." + this»
+		«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + st.name + ".transferValues.taggedValue." + this).asProtectedRegionId()»
 			«IF !uml::Enumeration.isInstance(type)»
 				uc.setTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»", c.«this.getCwmPropertyName()»)
 			«ELSE»
@@ -168,7 +169,7 @@ Void transferValues(cwm::«this.getCwmName()» c, uml::Model um):
 	switch(source.toLowerCase()) {
 		«FOREACH this.ownedElement.typeSelect(uml::EnumerationLiteral) AS l»
 			case "«l.name.toLowerCase()»":
-				«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".enumeration." + this.name + ".convertEnum.literal." + l.name»
+				«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + st.name + ".enumeration." + this.name + ".convertEnum.literal." + l.name).asProtectedRegionId()»
 					«this.name»::«l.name»
 				«ENDPROTECT»
 		«ENDFOREACH»
@@ -184,13 +185,13 @@ cwm::«this.getCwmName()» convertToCwm(Chronos::«this.name» uc):
 	let c = new cwm::«this.getCwmName()»: (
 		c.setId(uc.getId()) ->
 
-		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.name"»
+		«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + this.name + ".convertToCwm.name").asProtectedRegionId()»
 			//Empty this region if name should not be transferred
 			c.setName(uc.name) ->
 		«ENDPROTECT»
 
 
-		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.notes"»
+		«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + this.name + ".convertToCwm.notes").asProtectedRegionId()»
 			//Empty this region if notes should not be transferred
 			c.setNotes(uc.getComment())
 		«ENDPROTECT»
@@ -207,7 +208,7 @@ cwm::«this.getCwmName()» convertToCwm(Chronos::«this.name» uc):
 			«ENDLET»
 		«ENDFOREACH»
 
-		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + this.name + ".convertToCwm.relations"»
+		«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + this.name + ".convertToCwm.relations").asProtectedRegionId()»
 			Void
 		«ENDPROTECT»
 	) ->
@@ -217,7 +218,7 @@ cwm::«this.getCwmName()» convertToCwm(Chronos::«this.name» uc):
 
 «DEFINE convertToCwmTaggedValues(uml::Class st) FOR String»
 	«LET st.getTaggedValueType(this) AS type»
-		«PROTECT CSTART "/*" CEND "*/" ID "stereotype." + st.name + ".convertToCwm.taggedValue." + this»
+		«PROTECT CSTART "/*" CEND "*/" ID ("stereotype." + st.name + ".convertToCwm.taggedValue." + this).asProtectedRegionId()»
 			«IF !uml::Enumeration.isInstance(type)»
 				c.set«this.getCwmPropertyName().toFirstUpper()»((«type.name») uc.getTaggedValue("Chronos::«st.name»", "«this.getTaggedValueName()»"))
 			«ELSE»

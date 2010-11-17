@@ -4,6 +4,7 @@
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
 «EXTENSION common::nameNormalizer»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::ChronosCommon::domain::ChiNode»
 «EXTENSION cartridge::ChronosCommon::domain::ChiValue»
@@ -109,7 +110,7 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new applic
 
 «DEFINE getGridColumns FOR Chronos::ChiNode»
 application.«this.getFullPackageName()».«this.name»Description.prototype.getGridColumns = function() {
-«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getGridColumns"»
+«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getGridColumns").asProtectedRegionId()»
 	return [
 	«IF this.getChiAttributes().size > 0»
 		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
@@ -130,7 +131,7 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 
 «DEFINE getLabelColumns FOR Chronos::ChiNode»
 application.«this.getFullPackageName()».«this.name»Description.prototype.getLabelColumns = function() {
-«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getLabelColumns"»
+«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getLabelColumns").asProtectedRegionId()»
 	return [
 	«IF this.getChiAttributes().size > 0»
 		«FOREACH this.getChiAttributes().select(e|e.isDisplayValue(this)) AS currValue SEPARATOR ", "»
@@ -187,7 +188,7 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 
 «DEFINE getEditorItems FOR Chronos::ChiNode»
 application.«this.getFullPackageName()».«this.name»Description.prototype.getEditorItems = function() {
-«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getEditorItems"»
+«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getEditorItems").asProtectedRegionId()»
 	return [
 	«IF this.getChiAttributes().size > 0»
 		new cwe.editor.control.PropertiesFieldSet({

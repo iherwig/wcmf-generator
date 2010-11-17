@@ -6,6 +6,7 @@
 «EXTENSION common::umlutils»
 «EXTENSION common::nameNormalizer»
 «EXTENSION common::cim»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::ChronosCommon::domain::ChiNode»
 «EXTENSION cartridge::ChiCmf::extensions::util»
@@ -47,7 +48,7 @@ import javax.xml.bind.annotation.XmlTransient
 import javax.xml.bind.annotation.XmlID
 import javax.xml.bind.annotation.XmlIDREF
 
-«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Imports").asProtectedRegionId()» 
 /* put additional imports here */
 «ENDPROTECT»
 
@@ -99,7 +100,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 	«currAttribute.type.name.sanitizeType()»«IF currAttribute.isMultivalued()»[]«ENDIF» «currAttribute.name»«IF !currAttribute.^default.isNullOrEmpty()» = «currAttribute.type.getValuePrefix()»«currAttribute.^default»«currAttribute.type.getValuePostfix()»«ENDIF»
 	«ENDFOREACH»	
 
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Attributes"» 
+	«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Attributes").asProtectedRegionId()» 
 	/* put additional attributes here */
 	«ENDPROTECT»
 «ENDDEFINE»
@@ -151,7 +152,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 		«currAssociation.getRoleName().toFirstLower()»: «currAssociation.type.name.sanitizeType()-» 
 	«ENDFOREACH»
 
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "hasMany"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "hasMany").asProtectedRegionId()» 
 		/* put additional hasMany here */
 		«ENDPROTECT»
 	]
@@ -189,7 +190,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 		«ENDFOREACH»
 	«ENDIF-»
 	
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "belongsTo"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "belongsTo").asProtectedRegionId()» 
 		/* put additional belongsTo here */
 		«ENDPROTECT»
 	]
@@ -210,7 +211,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 		«relative.getRoleName().toFirstLower()»«this.getHierarchyRole(relative)»: "«relative.getOtherEnd().getRoleName().toFirstLower()»"«""-»
 		«ENDFOREACH»
 
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "MappedBy"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "MappedBy").asProtectedRegionId()» 
 		/* put additional mappings here */
 		«ENDPROTECT»
 	]
@@ -238,7 +239,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 		«ENDLET-»
 	«ENDLET-»
 
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Mappings"» 
+	«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Mappings").asProtectedRegionId()» 
 		/* put additional mappings here */
 	«ENDPROTECT»
 	}
@@ -269,7 +270,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 			«ENDLET-»
 		«ENDFOREACH-»
 
-		«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "constraints"» 
+		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "constraints").asProtectedRegionId()» 
 		/* put additional constraints here */
 		«ENDPROTECT»
 	}
@@ -284,13 +285,13 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 	 */
 	«currOperation.returnResult().first().type.name.sanitizeType()» «currOperation.name»() {
 		// Here you are able to implement your own code
-		«PROTECT CSTART '/*' CEND '*/' ID this.getId()»
+		«PROTECT CSTART '/*' CEND '*/' ID (this.getId()).asProtectedRegionId()»
 					
 		«ENDPROTECT»
 	}
 	«ENDFOREACH» 
 
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Methods"» 
+	«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Methods").asProtectedRegionId()» 
 	/* put additional methods here */
 	«ENDPROTECT»
 «ENDDEFINE»
@@ -312,7 +313,7 @@ import javax.xml.bind.annotation.XmlTransient
 import javax.xml.bind.annotation.XmlID
 import javax.xml.bind.annotation.XmlIDREF
 
-«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Imports"» 
+«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Imports").asProtectedRegionId()» 
 /* put additional imports here */
 «ENDPROTECT»
 
@@ -323,7 +324,7 @@ import javax.xml.bind.annotation.XmlIDREF
 enum «name-» {
 	«FOREACH this.ownedLiteral.select(e|e == this.ownedLiteral.select(f|f.name.normalizeMemberName() == e.name.normalizeMemberName()).first()) AS currLiteral SEPARATOR ",\n\t"»«currLiteral.name.normalizeMemberName()»«ENDFOREACH»
 
-	«PROTECT CSTART "/*" CEND "*/" ID this.fullQualifiedName() + "Body"» 
+	«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Body").asProtectedRegionId()» 
 	/* put additional attributes and methods here */
 	«ENDPROTECT»
 }

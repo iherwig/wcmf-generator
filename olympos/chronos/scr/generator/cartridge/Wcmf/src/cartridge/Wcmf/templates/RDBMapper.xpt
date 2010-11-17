@@ -3,6 +3,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::Wcmf::extensions::globals»
 «EXTENSION cartridge::Wcmf::extensions::naming»
@@ -118,7 +119,7 @@ class «curRoleName.asMapper()» extends «IF curRoleName == this.name»NodeUnifiedR
 «IF this.child_order != ""-»
       array('name' => 'child_order', 'value' => '«this.child_order»'),
 «ENDIF-»
-«PROTECT CSTART "// " CEND "" ID this.getFullPackageName().asPath()+"/"+this.name.asMapper().asClassFile()+"/Properties"»
+«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asMapper().asClassFile()+"/Properties").asProtectedRegionId()»
 «ENDPROTECT»
     );
     $nodeDef['_datadef'] = array
