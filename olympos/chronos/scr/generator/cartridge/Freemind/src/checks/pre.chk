@@ -1,0 +1,12 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+extension common::umlutils;
+
+//check if a Goal name is Null or empty and return an error is true
+context Chronos::ChiGoal ERROR
+	"ChiGoal name may not be NULL or empty: in Package " + ((uml::Package) this.owner).name:
+	this.name != null && ((String) this.name).length > 0

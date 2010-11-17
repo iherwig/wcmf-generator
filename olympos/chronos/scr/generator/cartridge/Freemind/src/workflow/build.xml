@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="freemind" default="packageZip">
+	<target name="packageZip">
+		<copy file="${zip.template}" tofile="${zip.target.file}" overwrite="true"/>
+		
+		<zip 
+			update="yes"
+			whenempty="create"
+			keepcompression="true"
+			destfile="${zip.target.file}">
+			<zipfileset dir="${working.dir}">
+				<include name="${content.file}"/>
+				<include name="${styles.file}"/>
+			</zipfileset>
+			<zipfileset dir="${working.dir}" prefix="META-INF/">
+				<include name="${manifest.file}"/>
+			</zipfileset>
+			<zipfileset dir="${working.dir}" includes="*.png" prefix="Pictures/" />
+		</zip>
+	</target>
+</project>
