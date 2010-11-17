@@ -1,0 +1,17 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiGoal»
+«EXTENSION extensions::util»
+
+«DEFINE root FOR Model»
+	«info('Expand Model')»
+	«EXPAND templates::freemind::printHeader FOR this»	
+	«EXPAND templates::freemind::printChiGoal FOREACH this.allOwnedElements().typeSelect(Chronos::ChiGoal)»
+«ENDDEFINE»
+
+
+

@@ -1,0 +1,13 @@
+/**
+ * metamodel import
+ */
+import uml;
+/**
+ *extension import
+ */
+extension common::util;
+
+/**
+ * Properties from the workflow definition
+ */
+String GeneratorVersion() : GLOBALVAR GeneratorVersion;

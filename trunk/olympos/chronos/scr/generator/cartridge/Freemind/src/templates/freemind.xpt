@@ -1,0 +1,103 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+«EXTENSION common::umlutils»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiRequirement»
+
+«DEFINE printHeader FOR Model»
+<map version="0.9.0">
+<!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
+<attribute_registry>
+<attribute_name NAME="Fea. Status" RESTRICTED="true">
+<attribute_value VALUE=""/>
+<attribute_value VALUE="Implemented "/>
+<attribute_value VALUE="Proposed "/>
+<attribute_value VALUE="Rejected "/>
+<attribute_value VALUE="Validated "/>
+</attribute_name>
+<attribute_name NAME="Req. Status" RESTRICTED="true">
+<attribute_value VALUE=""/>
+<attribute_value VALUE="Mandatory"/>
+<attribute_value VALUE="Proposed"/>
+<attribute_value VALUE="Satisfied"/>
+<attribute_value VALUE="Validated"/>
+</attribute_name>
+<attribute_name NAME="Type" RESTRICTED="true">
+<attribute_value VALUE=""/>
+<attribute_value VALUE="ChiBusinessUseCase"/>
+<attribute_value VALUE="ChiFeature"/>
+<attribute_value VALUE="ChiGoal"/>
+<attribute_value VALUE="ChiIssue"/>
+<attribute_value VALUE="ChiRequirement"/>
+</attribute_name>
+</attribute_registry>
+«ENDDEFINE»
+
+«DEFINE printChiGoal FOR ChiGoal»
+<node CREATED="1228144960531" HGAP="97" ID="ID_451956133" MODIFIED="1228149662000" POSITION="right" VSHIFT="-4">
+<richcontent TYPE="NODE"><html>
+  <head>
+    <style type="text/css">
+      <!--
+        p { margin-top: 0 }
+      -->
+    </style>
+    
+  </head>
+  <body>
+    <p>
+      <img src="ChiGoal.png"/>
+      «this.name»
+    </p>
+  </body>
+</html></richcontent>
+<richcontent TYPE="NOTE"><html>
+  <head></head>
+  <body>
+    <p>
+      «this.getComment()»
+    </p>
+  </body>
+</html>
+</richcontent>
+<font NAME="SansSerif" SIZE="12"/>
+<attribute_layout NAME_WIDTH="109"/>
+<attribute NAME="Type" VALUE="ChiGoal"/>
+<attribute NAME="Priority" VALUE="«this.Priority»"/>
+<attribute NAME="Value Name" VALUE="«this.Value_Name»"/>
+<attribute NAME="Value ammount" VALUE="«this.Value_ammount»"/>
+<attribute NAME="Value Goal" VALUE="«this.Value_Goal»"/>
+
+</node> 
+«ENDDEFINE»
+
+«DEFINE printChiRequirement FOR Chronos::ChiRequirement »
+<node CREATED="1228144432312" HGAP="56" ID="ID_787646724" MODIFIED="1228148095734" VSHIFT="3">
+<richcontent TYPE="NODE"><html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      <img src="ChiRequirement.png"/>
+      mein Szenario
+    </p>
+  </body>
+</html></richcontent>
+<arrowlink DESTINATION="ID_787646724" ENDARROW="Default" ENDINCLINATION="0;0;" ID="Arrow_ID_512851619" STARTARROW="None" STARTINCLINATION="0;0;"/>
+<font NAME="SansSerif" SIZE="12"/>
+<attribute NAME="Type" VALUE="ChiRequirement"/>
+<attribute NAME="Priority" VALUE="«this.Priority»"/>
+<attribute NAME="Author" VALUE="«this.Author»"/>
+<attribute NAME="Proofreader" VALUE="«this.Proofreader»"/>
+<attribute NAME="Req. Status" VALUE="«this.Status»"/>
+<attribute NAME="Req. Type" VALUE="«this.Type»"/>
+</node>
+«ENDDEFINE»
+
+«DEFINE printChiFeature FOR ChiFeature»
+«ENDDEFINE»
+
+«DEFINE printChiIssue FOR ChiIssue»
+«ENDDEFINE»
