@@ -664,12 +664,14 @@ class UwmUtil {
 			self::check($currNode->getId());
 			self::$dom->startElement($currNode->getBaseType());
 
-			//Rewriting PropertyType attribute
-			$propertyType = self::extractPropertyType($currNode->getPropertyType(), $currNode->getBaseOID());
+			if ($currNode->getType() == 'ChiValue')
+			{
+				//Rewriting PropertyType attribute
+				$propertyType = self::extractPropertyType($currNode->getPropertyType(), $currNode->getBaseOID());
 
-			self::appendAttributes($currNode, array('PropertyType'));
-			self::$dom->writeAttribute('PropertyType', $propertyType);
-			
+				self::appendAttributes($currNode, array('PropertyType'));
+				self::$dom->writeAttribute('PropertyType', $propertyType);
+			}
 			self::registerExportedNode($currNode);
 
 			$currNode->loadChildren();
