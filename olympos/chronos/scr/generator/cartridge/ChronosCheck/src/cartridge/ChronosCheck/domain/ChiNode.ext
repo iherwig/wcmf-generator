@@ -5,7 +5,7 @@ extension common::util;
 
 extension cartridge::ChronosCommon::domain::ChiNode;
 
-extension cartridge::ChiCmf::extensions::naming;
+extension cartridge::ChronosCommon::naming;
 
 boolean hasName(Chronos::ChiNode this):
 	!this.name.isNullOrEmpty()

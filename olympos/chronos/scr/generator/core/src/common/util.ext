@@ -87,3 +87,7 @@ String genericFileHeader():
 ;  
 
 String FILE_HEADER(): GLOBALVAR fileHeader;
+
+toBigInteger(Integer i):
+	JAVA net.sourceforge.olympos.oaw.extend.Util.toBigInteger(java.math.BigInteger)
+;

@@ -6,10 +6,13 @@ extension org::openarchitectureware::uml2::profile::profiling;
 extension common::util;
 extension common::umlutils;
 
-extension cartridge::ChiCmf::extensions::util;
-extension cartridge::ChiCmf::extensions::naming;
+extension cartridge::ChronosCommon::naming;
+extension cartridge::ChronosCommon::util;
+
 extension cartridge::ChronosCommon::domain::ChiValue;
 extension cartridge::ChronosCommon::domain::ChiManyToMany;
+
+String STEREOTYPE_CHI_NODE() : "Chronos::ChiNode";
 
 /**
  * ChiNode extensions
@@ -117,12 +120,7 @@ private Boolean isChildNode(ChiNode this, ChiNode other, Boolean recursive) :
 cached List[ChiValue] getChiValuesRecursive(ChiNode this): 
 	this.attribute.typeSelect(ChiValue)
 ;
-/**
- * Get all attributes
- */
-cached List[ChiValue] getChiValues(ChiNode this): 
-	this.attribute.typeSelect(ChiValue).select(v|!v.isGeneratorInherited())
-;
+
 /**
  * Get all references
  */
@@ -291,18 +289,17 @@ List[uml::Property] resolveManyToMany(ChiNode this, List[uml::Property] list, bo
 	result
 ;
 
-List[Chronos::ChiValue] getChiAttributes(Chronos::ChiNode this):
-	this.getChiValuesRecursive().select(e|!e.isGeneratorAdded() || e.isGeneratorInherited())
-;
-
-List[Chronos::ChiValue] getOwnChiAttributes(Chronos::ChiNode this):
-	this.getChiAttributes().select(e|!e.isGeneratorAdded())
-;
-
 boolean isDisplayValue(Chronos::ChiValue this, Chronos::ChiNode node):
 	!node.display_value.isNullOrEmpty() ? (
 		node.display_value.toLowerCase().contains(this.name.toLowerCase())
 	) : (
 		false
 	)
+;
+
+/**
+ * Check if an element is added by the generator
+ */
+boolean isNode(uml::Element this) : 
+	this.getAppliedStereotype(STEREOTYPE_CHI_NODE()) != null || this.getAppliedStereotype(STEREOTYPE_CHI_MANY_TO_MANY()) != null
 ;

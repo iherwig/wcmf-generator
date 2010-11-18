@@ -5,11 +5,11 @@ extension cartridge::ChronosCommon::requirements::ChiGoal;
 extension cartridge::ChronosCommon::requirements::ChiRequirement;
 
 boolean isAchieved(Chronos::ChiGoal this):
-	let requirements = ((Chronos::ChiRequirements) {}
+	let requirements = ((List[Chronos::ChiRequirement]) {}
 		.addAll(this.getRequirements())
 		.addAll(this.getRequirements().getChildRequirementsRecursive())
 		.addAll(this.getChildGoalsRecursive().getRequirements())
-		.addAll(this.getChildGoalsRecursive().getRequirements().getRequirementsRecursive())
+		.addAll(this.getChildGoalsRecursive().getRequirements().getChildRequirementsRecursive())
 	):
 	
 	requirements.getFeatures().size > 0

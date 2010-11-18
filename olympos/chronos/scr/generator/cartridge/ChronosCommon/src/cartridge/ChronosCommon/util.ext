@@ -1,0 +1,4 @@
+import uml;
+import Chronos;
+
+String STEREOTYPE_CHI_ASSOCIATION() : "Chronos::ChiAssociation";

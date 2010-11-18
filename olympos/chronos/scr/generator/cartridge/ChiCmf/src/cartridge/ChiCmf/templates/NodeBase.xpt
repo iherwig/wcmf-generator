@@ -5,7 +5,7 @@
 «EXTENSION common::umlutils»
 
 «EXTENSION cartridge::ChiCmf::extensions::globals»
-«EXTENSION cartridge::ChiCmf::extensions::naming»
+«EXTENSION cartridge::ChronosCommon::naming»
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 

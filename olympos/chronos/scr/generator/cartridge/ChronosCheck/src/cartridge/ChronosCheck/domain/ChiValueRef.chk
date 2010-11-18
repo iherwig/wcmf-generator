@@ -6,7 +6,7 @@ extension common::umlutils;
 
 extension cartridge::ChiCmf::extensions::util;
 extension cartridge::ChiCmf::extensions::globals;
-extension cartridge::ChiCmf::extensions::naming;
+extension cartridge::ChronosCommon::naming;
 
 extension cartridge::ChronosCommon::domain::ChiValueRef;
 
