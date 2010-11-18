@@ -95,15 +95,12 @@
 	</component-->
 
 	<!-- unzip the images in the target directory-->
-	<!--component id="Ant Runner" class="net.sourceforge.olympos.oaw.workflow.AntRunner">
-		<Param name="zip.template" value="${basePath}/cartridge/Freemind/template/${templateName}/empty-shell.${inputType}"/>
-		<Param name="content.file" value="content.xml"/>
-		<Param name="styles.file" value="styles.xml"/>
-		<Param name="manifest.file" value="manifest.xml"/>
+	<component id="Ant Runner" class="net.sourceforge.olympos.oaw.workflow.AntRunner">
+		<Param name="zip.template" value="${basePath}/cartridge/Freemind/template/chronosFreeMindTemplate.zip"/>
 		<Param name="zip.target.file" value="${workingDir}/document-tmp.${inputType}"/>
 		<Param name="working.dir" value="${workingDir}"/>
 		<antFile value="${basePath}/cartridge/Freemind/workflow/build.xml"/>
-	</component-->
+	</component>
 
 
 	<!-- Expand the model into the templates -->
