@@ -4,6 +4,7 @@
 package net.sourceforge.olympos.oaw.extend;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.AbstractCollection;
@@ -117,5 +118,9 @@ public class Util {
 			result.add(s.substring(m.start(1), m.end(1)));
 		}
 		return result;
+	}
+	
+	public static Integer toBigInteger(BigInteger i) {
+		return i.intValue();
 	}
 }

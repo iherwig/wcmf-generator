@@ -90,7 +90,7 @@ Chronos::ChiRequirementStatus translateChiRequirementStatus(String source):
 			Chronos::ChiRequirementStatus::Mandatory
 			
 		case "proposed":
-			(Chronos::ChiRequirementStatus::Proposed).asEnumerationLiteral()
+			Chronos::ChiRequirementStatus::Proposed
 			
 		default:
 			null

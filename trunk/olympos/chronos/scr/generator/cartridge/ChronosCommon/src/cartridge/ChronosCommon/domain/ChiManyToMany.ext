@@ -20,3 +20,7 @@ List[uml::Property] getOtherEnd(Chronos::ChiManyToMany this, Chronos::ChiNode so
 	
 	result
 ;
+
+Boolean isManyToMany(uml::Class this):
+	this.getAppliedStereotype(STEREOTYPE_CHI_MANY_TO_MANY()) != null
+;

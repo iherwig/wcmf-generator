@@ -9,7 +9,7 @@
 «EXTENSION common::naming»
 
 «EXTENSION cartridge::ChiCmf::extensions::globals»
-«EXTENSION cartridge::ChiCmf::extensions::naming»
+«EXTENSION cartridge::ChronosCommon::naming»
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
 
 «REM» This template expands the class files ----------------------«ENDREM»

@@ -873,6 +873,7 @@
 		<xsd:attribute name="fk_chinode_id" type="xsd:string"/>
 		<xsd:attribute name="fk_chicontroller_id" type="xsd:string"/>
 		<xsd:attribute name="ReturnType" type="xsd:string"/>
+		<xsd:attribute name="PropertyType" type="xsd:string"/>
 		<xsd:attribute name="Parameters" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>

@@ -6,15 +6,16 @@ extension org::openarchitectureware::uml2::profile::profiling;
 extension common::util;
 extension common::umlutils;
 
-extension cartridge::ChiCmf::extensions::globals;
-extension cartridge::ChiCmf::extensions::naming;
-extension cartridge::ChiCmf::extensions::umlutils;
-extension cartridge::ChiCmf::extensions::util;
-
+extension cartridge::ChronosCommon::naming;
 extension cartridge::ChronosCommon::domain::ChiNode;
 extension cartridge::ChronosCommon::domain::ChiValue;
 extension cartridge::ChronosCommon::domain::ChiValueRef;
 extension cartridge::ChronosCommon::domain::ChiActionKey;
+
+extension cartridge::ChiCmf::extensions::globals;
+extension cartridge::ChiCmf::extensions::umlutils;
+extension cartridge::ChiCmf::extensions::util;
+
 
 /**
  * Model checks

@@ -6,8 +6,9 @@ extension org::openarchitectureware::uml2::profile::profiling;
 extension common::util;
 extension common::umlutils;
 
+extension cartridge::ChronosCommon::domain::ChiNode;
+
 extension cartridge::ChiCmf::extensions::globals;
-extension cartridge::ChiCmf::extensions::naming;
 extension cartridge::ChiCmf::extensions::umlutils;
 extension cartridge::ChiCmf::extensions::util;
 

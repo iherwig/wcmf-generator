@@ -29,9 +29,8 @@ cached findChiNodeById(CwmExport this, String id):
 
 cached cwm::ManyToMany findMirror(cwm::ManyToMany this):
 	//(new cwm::ManyToMany).eRootContainer
-	let thisSourceType == ((cwm::ChiNode) e.eContainer).name:
-	let thisTargetType == ((cwm::CwmExport) this.eRootContainer).findChiNodeById(this.targetOid).name: 
-
+	let thisSourceType = ((cwm::ChiNode) this.eContainer).name:
+	let thisTargetName = ((cwm::CwmExport) this.eRootContainer).findChiNodeById(this.targetOid).name: 
 	let allOfMyType = ((List[cwm::ManyToMany]) referenceModel().findAllByType("ManyToMany")):
 	
 	allOfMyType.selectFirst(e|((cwm::ChiNode) e.eContainer).name == thisSourceType && referenceModel().findChiNodeById(e.targetOid).name == thisTargetName)

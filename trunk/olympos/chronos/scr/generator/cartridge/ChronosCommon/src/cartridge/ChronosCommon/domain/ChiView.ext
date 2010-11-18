@@ -1,8 +1,6 @@
 import uml;
 import Chronos;
 
-extension cartridge::ChiCmf::extensions::util;
-
 /**
  * View related methods
  */
