@@ -4,7 +4,7 @@
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='3'/>
 	<property name='basePath' value='src'/>
-	<property name='propertyFile' value='${basePath}/cartridge/freeMind/workflow/freeMind.properties'/>
+	<property name='propertyFile' value='${basePath}/cartridge/Freemind/workflow/freeMind.properties'/>
 	<property file="${propertyFile}"/>
 	
 	<bean id="UML2Setup" class="oaw.uml2.Setup" standardUML2Setup="true"/>
@@ -57,9 +57,9 @@
 	</if>
 
 	<!-- Prepare the model for Chronos and store it into a slot named 'transformedModel' -->
-	<component id="m2m" class="oaw.xtend.XtendComponent">
+	<!--component id="m2m" class="oaw.xtend.XtendComponent">
 
-		<!-- Global variables used by the transformation -->
+		<! Global variables used by the transformation >
 		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
 		<globalVarDef name="ProfileFile" value="'${profileUmlFile}'"/>
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
@@ -70,7 +70,7 @@
  	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model, chronosProfileModel)"/>
 
 		<outputSlot value="transformedModel"/>
-	</component>
+	</component-->
 		
 	<!-- Check constraints after model 2 model transformation -->
 	<if cond="${doCheck}">
@@ -89,21 +89,21 @@
 	</if>
 
 	<!-- Write out transformed model for manual cross-check -->
-	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
+	<!--component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
 		<inputSlot value="transformedModel" />
 		<outPath value="${transformedModelUmlFile}" />
-	</component>
+	</component-->
 
 	<!-- unzip the images in the target directory-->
-	<component id="Ant Runner" class="net.sourceforge.olympos.oaw.workflow.AntRunner">
-		<Param name="zip.template" value="${basePath}/cartridge/DocumentGeneration/template/${templateName}/empty-shell.${inputType}"/>
+	<!--component id="Ant Runner" class="net.sourceforge.olympos.oaw.workflow.AntRunner">
+		<Param name="zip.template" value="${basePath}/cartridge/Freemind/template/${templateName}/empty-shell.${inputType}"/>
 		<Param name="content.file" value="content.xml"/>
 		<Param name="styles.file" value="styles.xml"/>
 		<Param name="manifest.file" value="manifest.xml"/>
 		<Param name="zip.target.file" value="${workingDir}/document-tmp.${inputType}"/>
 		<Param name="working.dir" value="${workingDir}"/>
-		<antFile value="${basePath}/cartridge/DocumentGeneration/workflow/build.xml"/>
-	</component>
+		<antFile value="${basePath}/cartridge/Freemind/workflow/build.xml"/>
+	</component-->
 
 
 	<!-- Expand the model into the templates -->
@@ -125,7 +125,7 @@
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
 		
-		<expand value="${expand} FOR transformedModel"/>
+		<expand value="${expand} FOR model"/>
 		
 		<outlet path="${targetDir}">
 			<postprocessor class="oaw.xpand2.output.JavaBeautifier"/>
