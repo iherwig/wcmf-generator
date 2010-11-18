@@ -11,7 +11,7 @@ context Chronos::ChiGoal ERROR
 	"ChiGoal name may not be NULL or empty: in Package " + ((uml::Package) this.owner).name:
 	this.name != null && ((String) this.name).length > 0;
 
-//check if a Goal name is very short
-context Chronos::ChiGoal ERROR
+//check if a Goal name is very short in this case return a warning only
+context Chronos::ChiGoal WARNING
    "Names must be more than one char long" :
    this.name.length > 1;
