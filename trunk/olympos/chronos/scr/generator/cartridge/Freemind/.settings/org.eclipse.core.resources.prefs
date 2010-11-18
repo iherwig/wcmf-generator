@@ -1,4 +1,4 @@
-#Mon Nov 15 08:06:10 AST 2010
+#Thu Nov 18 14:03:01 CET 2010
 eclipse.preferences.version=1
-encoding//src/templates/Root.xpt=iso-8859-1
-encoding//src/templates/freemind.xpt=iso-8859-1
+encoding//src/cartridge/Freemind/templates/Root.xpt=iso-8859-1
+encoding//src/cartridge/Freemind/templates/freemind.xpt=iso-8859-1

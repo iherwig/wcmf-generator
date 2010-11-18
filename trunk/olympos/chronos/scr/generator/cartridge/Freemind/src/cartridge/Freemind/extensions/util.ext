@@ -9,7 +9,7 @@ extension common::umlutils;
 
 
 
-extension extensions::globals;
+extension cartridge::Freemind::extensions::globals;
 
 /**
  * Chronos Stereotypes
