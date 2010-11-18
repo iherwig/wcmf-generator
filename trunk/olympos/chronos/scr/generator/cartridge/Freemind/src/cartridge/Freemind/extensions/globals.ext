@@ -11,4 +11,4 @@ extension common::util;
  * Properties from the workflow definition
  */
 String GeneratorVersion() : GLOBALVAR GeneratorVersion;
-String projectName() : GLOBALVAR projectname;
+String projectName() : GLOBALVAR ProjectName;
