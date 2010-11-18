@@ -56,43 +56,7 @@
 		</component>
 	</if>
 
-	<!-- Prepare the model for Chronos and store it into a slot named 'transformedModel' -->
-	<!--component id="m2m" class="oaw.xtend.XtendComponent">
-
-		<! Global variables used by the transformation >
-		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
-		<globalVarDef name="ProfileFile" value="'${profileUmlFile}'"/>
-		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 		
-		<metaModel idRef="EmfMM"/>
-		<metaModel idRef="UmlMM"/>
-		<metaModel idRef="${profilename}MM"/>
- 	    <invoke value="cartridge::ChiCmf::extensions::m2m::addDefaults(model, chronosProfileModel)"/>
-
-		<outputSlot value="transformedModel"/>
-	</component-->
-		
-	<!-- Check constraints after model 2 model transformation -->
-	<if cond="${doCheck}">
-		<component class="oaw.check.CheckComponent">
-		
-			<!-- Global variables used by the check -->
-			<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
-
-			<metaModel idRef="EmfMM"/>
-			<metaModel idRef="UmlMM"/>
-			<metaModel idRef="${profilename}MM"/>
-			<checkFile value="${postCheckFile}"/>
-			<emfAllChildrenSlot value="model"/>
-			<abortOnError value="true"/>
-		</component>
-	</if>
-
-	<!-- Write out transformed model for manual cross-check -->
-	<!--component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
-		<inputSlot value="transformedModel" />
-		<outPath value="${transformedModelUmlFile}" />
-	</component-->
 
 	<!-- unzip the images in the target directory-->
 	<component id="Ant Runner" class="net.sourceforge.olympos.oaw.workflow.AntRunner">
