@@ -4,17 +4,17 @@
 «EXTENSION common::util»
 
 «EXTENSION cartridge::ChronosCommon::requirements::ChiGoal»
-«EXTENSION extensions::util»
-«EXTENSION extensions::globals»
+«EXTENSION cartridge::Freemind::extensions::util»
+«EXTENSION cartridge::Freemind::extensions::globals»
 «REM»main definition evaluate the model elemen «ENDREM»
 «DEFINE root FOR Model»
 	«info('Expand Model')»
 	«REM»creates a file with the file name coming from freeMind.Property«ENDREM»
 	«FILE projectName()+".mm"-»
 	«REM»jump to the next XPand«ENDREM»
-	«EXPAND templates::freemind::printHeader FOR this»	
-	«EXPAND templates::freemind::printChiGoal FOREACH this.allOwnedElements().typeSelect(Chronos::ChiGoal)»
-	«EXPAND templates::freemind::printFooter FOR this»
+	«EXPAND cartridge::Freemind::templates::freemind::printHeader FOR this»	
+	«EXPAND cartridge::Freemind::templates::freemind::printChiGoal FOREACH this.allOwnedElements().typeSelect(Chronos::ChiGoal)»
+	«EXPAND cartridge::Freemind::templates::freemind::printFooter FOR this»
 	«ENDFILE»
 «ENDDEFINE»
 
