@@ -97,8 +97,7 @@
 	<!-- unzip the images in the target directory-->
 	<component id="Ant Runner" class="net.sourceforge.olympos.oaw.workflow.AntRunner">
 		<Param name="zip.template" value="${basePath}/cartridge/Freemind/template/chronosFreeMindTemplate.zip"/>
-		<Param name="zip.target.file" value="${workingDir}/document-tmp.${inputType}"/>
-		<Param name="working.dir" value="${workingDir}"/>
+		<Param name="target.dir" value="${targetDir}"/>
 		<antFile value="${basePath}/cartridge/Freemind/workflow/build.xml"/>
 	</component>
 
