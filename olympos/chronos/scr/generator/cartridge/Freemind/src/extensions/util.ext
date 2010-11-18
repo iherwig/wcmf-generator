@@ -36,25 +36,3 @@ boolean isGeneratorInherited(uml::Element this) :
 	JAVA net.sourceforge.olympos.oaw.extend.Generator.isGeneratorInherited(org.eclipse.uml2.uml.Element)
 ;
 
-
-
-/**
- * Configuration related methods
- */
- 
-/**
- * Check if a model contains a application configuration
- */
-boolean hasSystemConfig(uml::Model this) :
-	this.allOwnedElements().typeSelect(ChiSystem).size > 0
-;
-/**
- * Get all configuration file names that are referenced in the model
- */
-Set[String] getConfigurationFiles(uml::Model this) :
-	let fromKeys = this.allOwnedElements().typeSelect(ChiActionKey).config :
-		let fromSystem = this.allOwnedElements().typeSelect(ChiSystem).config :
-			fromKeys.addAll(fromSystem).toSet()
-;
-
-

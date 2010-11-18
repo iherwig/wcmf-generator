@@ -9,4 +9,9 @@ extension common::umlutils;
 //check if a Goal name is Null or empty and return an error is true
 context Chronos::ChiGoal ERROR
 	"ChiGoal name may not be NULL or empty: in Package " + ((uml::Package) this.owner).name:
-	this.name != null && ((String) this.name).length > 0
+	this.name != null && ((String) this.name).length > 0;
+
+//check if a Goal name is very short
+context Chronos::ChiGoal ERROR
+   "Names must be more than one char long" :
+   this.name.length > 1;
