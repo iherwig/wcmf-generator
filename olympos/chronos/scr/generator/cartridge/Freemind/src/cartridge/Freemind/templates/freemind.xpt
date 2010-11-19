@@ -126,6 +126,7 @@
 «ENDIF»
 «IF  this.getIssues() != null -»
 «EXPAND printChiIssue(this.Alias) FOREACH this.getIssues()-»
+«info('completed Expanding ' + this.name) -»
 «ENDIF»
 
 </node>
