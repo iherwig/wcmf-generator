@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workflow>
-
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='3'/>
 	<property name='basePath' value='src'/>
@@ -40,13 +39,11 @@
 		<outputSlot value="chronosProfileModel" />
 	</component>
 
-	<!-- Check constraints before model 2 model transformation -->
+	<!-- Check constraints  -->
 	<if cond="${doCheck}">
 		<component class="oaw.check.CheckComponent">
 		
 			<!-- Global variables used by the check -->
-	
-
 			<metaModel idRef="EmfMM"/>
 			<metaModel idRef="UmlMM"/>
 			<metaModel idRef="${profilename}MM"/>
@@ -56,15 +53,12 @@
 		</component>
 	</if>
 
-		
-
 	<!-- unzip the images in the target directory-->
 	<component id="Ant Runner" class="net.sourceforge.olympos.oaw.workflow.AntRunner">
 		<Param name="zip.template" value="${basePath}/cartridge/Freemind/template/chronosFreeMindTemplate.zip"/>
 		<Param name="target.dir" value="${targetDir}"/>
 		<antFile value="${basePath}/cartridge/Freemind/workflow/build.xml"/>
 	</component>
-
 
 	<!-- Expand the model into the templates -->
 	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="true">
@@ -74,9 +68,6 @@
 		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
 		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
-		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
-		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
-		<globalVarDef name="DefaultConfigFile" value="'${configFileDefault}'"/>
 		<globalVarDef name="ProjectName" value="'${projectname}'"/>
 		<globalVarDef name="TargetDirectory" value="'${targetDir}'"/>
 		<globalVarDef name="HeaderText" value="${headerText}"/>
@@ -93,9 +84,8 @@
 		</outlet>
 		
 		<!-- Protected regions configuration -->
-		<prSrcPaths value="${targetDir}/${applicationPackage}"/>	
+		<prSrcPaths value="${targetDir}/"/>	
 		<prDefaultExcludes value="false"/>
 		<prExcludes value="*.svn-base"/>
 	</component>
-
 </workflow>
