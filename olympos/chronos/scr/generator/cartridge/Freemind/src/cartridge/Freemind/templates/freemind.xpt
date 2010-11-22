@@ -46,19 +46,33 @@
 </map> 
 «ENDDEFINE»
 
-«DEFINE Copyright FOR Model»
-«info('Expanding copyright ...')»
+«DEFINE Copyright FOR Model -»
+«info('Expanding copyright ...') -»
 <node CREATED="1228144317281" ID="ID_1823873164" MODIFIED="1289855583935" TEXT="«projectName()»">
 <font NAME="SansSerif" SIZE="12"/>
 <hook NAME="accessories/plugins/HierarchicalIcons.properties"/>
 <attribute_layout NAME_WIDTH="132" VALUE_WIDTH="141"/>
-<node CREATED="1289855562192" HGAP="16" ID="Chi287Req" LINK="http://garr.dl.sourceforge.net/sourceforge/olympos/Chronos_Profile_Documentation.pdf" MODIFIED="1290093666784" POSITION="left" TEXT="Help" VSHIFT="-18">
+<node CREATED="1289855562192" HGAP="16" ID="Chi287Req" LINK="http://garr.dl.sourceforge.net/sourceforge/olympos/Chronos_Profile_Documentation.pdf" MODIFIED="1290093666784" POSITION="left"  VSHIFT="-18">
 <icon BUILTIN="help"/>
+<richcontent TYPE="NOTE"><html>
+  <head>
+    <style type="text/css">
+      <!--
+        p { margin-top: 0 }
+      -->
+    </style>
+    
+  </head>
+  <body>
+    <p> «headerText()»</p>
+  </body>
+</html></richcontent>
 <attribute_layout NAME_WIDTH="132" VALUE_WIDTH="141"/>
+</node>
 «ENDDEFINE»
-
+«REM»this definition print the code for the goals«ENDREM»
 «DEFINE printChiGoal FOR ChiGoal»
-«info('Expanding goal ' + this.name + " alias:" + this.Alias)»
+«info('Expanding goal ' + this.name + " alias:" + this.Alias) -»
 <node CREATED="1228144960531" HGAP="97" ID="«this.Alias»" MODIFIED="1228149662000" POSITION="right" VSHIFT="-4">
 <richcontent TYPE="NODE"><html>
   <head>
@@ -92,12 +106,12 @@
 <attribute NAME="Value Name" VALUE="«this.Value_Name»"/>
 <attribute NAME="Value ammount" VALUE="«this.Value_ammount»"/>
 <attribute NAME="Value Goal" VALUE="«this.Value_Goal»"/>
-«EXPAND printChiGoal FOREACH this.getChildGoals()»
-«EXPAND printChiRequirement(this.Alias) FOREACH this.getRequirements()»
+«EXPAND printChiGoal FOREACH this.getChildGoals()-»
+«EXPAND printChiRequirement(this.Alias) FOREACH this.getRequirements() -»
 </node> 
 «ENDDEFINE»
-
-«DEFINE printChiRequirement(string parentID) FOR Chronos::ChiRequirement »
+«REM»this definition print the code for the requirement«ENDREM»
+«DEFINE printChiRequirement(string parentID) FOR Chronos::ChiRequirement -»
 «info('Expanding requirement ' + this.name + " alias:" + this.Alias + ' attached to ' + parentID)»
 <node CREATED="1228144432312" HGAP="56" ID="«this.Alias»" MODIFIED="1228148095734" VSHIFT="3">
 <richcontent TYPE="NODE"><html>
@@ -132,7 +146,7 @@
 <attribute NAME="Req. Type" VALUE="«this.Type»"/>
 «REM»look for children requirement or features or issue«ENDREM»
 «IF  this.getChildRequirementsRecursive().size != 0 -»
-«info('**** Expanding children of '+this.name+' that is requirement ' + this.getChildRequirementsRecursive().first().Alias)»
+«info('**** Expanding children of '+this.name+' that is requirement ' + this.getChildRequirementsRecursive().first().Alias) -»
 «EXPAND printChiRequirement(this.Alias) FOREACH this.getChildRequirementsRecursive()-»
 «ENDIF»
 «IF  this.getFeatures().size != 0 -»
@@ -147,7 +161,7 @@
 
 «ENDDEFINE»
 
-«DEFINE printChiFeature(string parentID) FOR ChiFeature»
+«DEFINE printChiFeature(string parentID) FOR ChiFeature-»
 «info('Expanding ChiFeature ' + this.name + " alias:" + this.Alias + " parent is" + parentID)»
 <node CREATED="1228144657578" HGAP="65" ID="«this.Alias»" MODIFIED="1228149635234" VSHIFT="-4">
 <richcontent TYPE="NODE"><html>
@@ -173,8 +187,8 @@
 «EXPAND printChiBusinessUseCases(this.Alias) FOREACH this.getBusinessUseCases()-»
 </node>
 «ENDDEFINE»
-
-«DEFINE printChiIssue(string parentID) FOR ChiIssue»
+«REM»this definition print the code for the Issues«ENDREM»
+«DEFINE printChiIssue(string parentID) FOR ChiIssue -»
 «info('Expanding issue ' + this.name + " alias:" + this.Alias + "parent is" + parentID)»
 <node CREATED="1228144362937" HGAP="83" ID="«this.Alias»" MODIFIED="1228149645562" VSHIFT="-34">
 <richcontent TYPE="NODE"><html>
@@ -198,8 +212,8 @@
 <attribute NAME="Responsible" VALUE="«this.Responsible»"/>
 </node>
 «ENDDEFINE»
-
-«DEFINE printChiBusinessUseCases(string parentID) FOR ChiBusinessUseCase»
+«REM»this definition print the code for the Use case«ENDREM»
+«DEFINE printChiBusinessUseCases(string parentID) FOR ChiBusinessUseCase -»
 «info('Expanding UC ' + this.name + " alias:" + this.Alias + " parent is" + parentID )»
 <node CREATED="1228148660484" HGAP="172" ID="«this.Alias»" MODIFIED="1290093675817" VSHIFT="7">
 <richcontent TYPE="NODE"><html>

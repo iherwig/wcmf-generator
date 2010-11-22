@@ -13,3 +13,4 @@ extension common::util;
  */
 String GeneratorVersion() : GLOBALVAR GeneratorVersion;
 String projectName() : GLOBALVAR ProjectName;
+String headerText() : GLOBALVAR HeaderText;
