@@ -12,11 +12,9 @@
 	«REM»creates a file with the file name coming from freeMind.Property«ENDREM»
 	«FILE projectName()+".mm"-»
 	«REM»jump to the next XPand«ENDREM»
-	«EXPAND cartridge::Freemind::templates::freemind::printHeader FOR this»	
-	«EXPAND cartridge::Freemind::templates::freemind::printChiGoal FOREACH this.allOwnedElements().typeSelect(Chronos::ChiGoal)»
+	«EXPAND cartridge::Freemind::templates::freemind::printHeader FOR this»
+	«EXPAND cartridge::Freemind::templates::freemind::Copyright FOR this»	
+	«EXPAND cartridge::Freemind::templates::freemind::printChiGoal FOREACH this.allOwnedElements().typeSelect(Chronos::ChiGoal)»	
 	«EXPAND cartridge::Freemind::templates::freemind::printFooter FOR this»
 	«ENDFILE»
 «ENDDEFINE»
-
-
-

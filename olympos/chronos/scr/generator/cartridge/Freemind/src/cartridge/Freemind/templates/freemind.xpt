@@ -3,6 +3,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION cartridge::Freemind::extensions::globals»
 «EXTENSION cartridge::ChronosCommon::requirements::ChiGoal»
 «EXTENSION cartridge::ChronosCommon::requirements::ChiRequirement»
 «EXTENSION cartridge::ChronosCommon::requirements::ChiFeature»
@@ -39,8 +40,21 @@
 </attribute_name>
 </attribute_registry>
 «ENDDEFINE»
+
 «DEFINE printFooter FOR Model-»
-</map>
+</node>
+</map> 
+«ENDDEFINE»
+
+«DEFINE Copyright FOR Model»
+«info('Expanding copyright ...')»
+<node CREATED="1228144317281" ID="ID_1823873164" MODIFIED="1289855583935" TEXT="«projectName()»">
+<font NAME="SansSerif" SIZE="12"/>
+<hook NAME="accessories/plugins/HierarchicalIcons.properties"/>
+<attribute_layout NAME_WIDTH="132" VALUE_WIDTH="141"/>
+<node CREATED="1289855562192" HGAP="16" ID="Chi287Req" LINK="http://garr.dl.sourceforge.net/sourceforge/olympos/Chronos_Profile_Documentation.pdf" MODIFIED="1290093666784" POSITION="left" TEXT="Help" VSHIFT="-18">
+<icon BUILTIN="help"/>
+<attribute_layout NAME_WIDTH="132" VALUE_WIDTH="141"/>
 «ENDDEFINE»
 
 «DEFINE printChiGoal FOR ChiGoal»
@@ -117,14 +131,14 @@
 <attribute NAME="Req. Status" VALUE="«this.Status»"/>
 <attribute NAME="Req. Type" VALUE="«this.Type»"/>
 «REM»look for children requirement or features or issue«ENDREM»
-«IF  this.getChildRequirementsRecursive() != null -»
-«info('Expanding children of '+this.name+' that is requirement ' + this.getChildRequirementsRecursive().first().Alias)»
+«IF  this.getChildRequirementsRecursive().size != 0 -»
+«info('**** Expanding children of '+this.name+' that is requirement ' + this.getChildRequirementsRecursive().first().Alias)»
 «EXPAND printChiRequirement(this.Alias) FOREACH this.getChildRequirementsRecursive()-»
 «ENDIF»
-«IF  this.getFeatures() != null -»
+«IF  this.getFeatures().size != 0 -»
 «EXPAND printChiFeature(this.Alias) FOREACH this.getFeatures()-»
 «ENDIF»
-«IF  this.getIssues() != null -»
+«IF  this.getIssues().size != 0 -»
 «EXPAND printChiIssue(this.Alias) FOREACH this.getIssues()-»
 «info('completed Expanding ' + this.name) -»
 «ENDIF»
