@@ -2338,13 +2338,13 @@
       <style:paragraph-properties fo:margin-left="-0.0102in" fo:margin-right="0in" fo:margin-top="0in" fo:margin-bottom="0in" fo:text-align="center" style:justify-single-word="false" fo:text-indent="0in" style:auto-text-indent="false" fo:padding="0in" fo:border="none">
         <style:tab-stops/>
       </style:paragraph-properties>
-      <style:text-properties fo:color="#000000" style:font-name="Times New Roman" fo:font-size="14pt" fo:language="en" fo:country="GB" fo:font-weight="bold" style:font-size-asian="14pt" style:font-weight-asian="bold" style:font-name-complex="Arial" style:font-size-complex="14pt" style:language-complex="ar" style:country-complex="SA" style:font-weight-complex="bold"/>
+      <style:text-properties fo:color="#000000" style:font-name="Times New Roman" fo:font-size="14pt" fo:language="en" fo:country="GB" fo:font-weight="normal" style:font-size-asian="2pt" style:font-weight-asian="bold" style:font-name-complex="Arial" style:font-size-complex="2pt" style:language-complex="ar" style:country-complex="SA" style:font-weight-complex="bold"/>
     </style:style>
     <style:style style:name="MP2" style:family="paragraph" style:parent-style-name="Header">
       <style:paragraph-properties fo:margin-left="-0.0102in" fo:margin-right="0in" fo:margin-top="0in" fo:margin-bottom="0in" fo:text-align="center" style:justify-single-word="false" fo:text-indent="0in" style:auto-text-indent="false" fo:padding="0in" fo:border="none">
         <style:tab-stops/>
       </style:paragraph-properties>
-      <style:text-properties fo:color="#000000" style:font-name="Times New Roman" fo:font-size="1pt" fo:language="en" fo:country="GB" fo:font-weight="bold" style:font-size-asian="1pt" style:font-weight-asian="bold" style:font-name-complex="Times New Roman" style:font-size-complex="1pt" style:font-weight-complex="bold"/>
+      <style:text-properties fo:color="#000000" style:font-name="Times New Roman" fo:font-size="14pt" fo:language="en" fo:country="GB" fo:font-weight="normal" style:font-size-asian="2pt" style:font-weight-asian="bold" style:font-name-complex="Times New Roman" style:font-size-complex="2pt" style:font-weight-complex="bold"/>
     </style:style>
     <style:style style:name="MP3" style:family="paragraph" style:parent-style-name="Footer">
       <style:paragraph-properties fo:padding="0in" fo:border="none" style:snap-to-layout-grid="false">
@@ -2361,15 +2361,9 @@
       <style:text-properties fo:color="#000000"/>
     </style:style>
     <style:style style:name="MT1" style:family="text">
-      <style:text-properties fo:font-weight="normal" style:font-size-asian="2pt" style:font-size-complex="2pt"/>
-    </style:style>
-    <style:style style:name="MT2" style:family="text">
-      <style:text-properties fo:font-size="14pt" fo:font-weight="normal" style:font-size-asian="2pt" style:font-size-complex="2pt"/>
-    </style:style>
-    <style:style style:name="MT3" style:family="text">
       <style:text-properties fo:color="#000000"/>
     </style:style>
-    <style:style style:name="MT4" style:family="text">
+    <style:style style:name="MT2" style:family="text">
       <style:text-properties fo:color="#000000" fo:language="en" fo:country="GB"/>
     </style:style>
     <style:style style:name="Mfr1" style:family="graphic" style:parent-style-name="Graphics">
@@ -2412,38 +2406,29 @@
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="Mpm1">
       <style:header>
-        <text:p text:style-name="MP1">
-          <draw:frame draw:style-name="Mfr1" draw:name="Grafik9" text:anchor-type="paragraph" svg:x="5.2346in" svg:width="0.5291in" svg:height="0.5291in" draw:z-index="8">
-            <draw:image xlink:href="Pictures/100002000000003000000030813FE820.png" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/>
-          </draw:frame>
-          <text:span text:style-name="MT1">«this.getFirstPackageName()»</text:span>
-        </text:p>
-        <text:p text:style-name="MP1">
-          <text:span text:style-name="MT1">Project Documentation</text:span>
-        </text:p>
-        <text:p text:style-name="MP2">
-          <text:span text:style-name="MT2"/>
-        </text:p>
+        <text:p text:style-name="MP1"><draw:frame draw:style-name="Mfr1" draw:name="Grafik9" text:anchor-type="paragraph" svg:x="5.2346in" svg:width="0.5291in" svg:height="0.5291in" draw:z-index="8"><draw:image xlink:href="Pictures/100002000000003000000030813FE820.png" xlink:type="simple" xlink:show="embed" xlink:actuate="onLoad"/></draw:frame>«this.getFirstPackageName()»</text:p>
+        <text:p text:style-name="MP1">Project Documentation</text:p>
+        <text:p text:style-name="MP2"/>
       </style:header>
       <style:footer>
         <text:p text:style-name="MP3"><text:bookmark-start text:name="LDocument"/>Document:<text:bookmark-end text:name="LDocument"/><text:tab/><text:tab/><text:file-name text:display="name-and-extension">ChronosDefault.odt</text:file-name></text:p>
         <text:p text:style-name="MP4">
-          <text:span text:style-name="MT3">Date: </text:span>
-          <text:span text:style-name="MT3">
-            <text:date style:data-style-name="N81" text:date-value="2010-11-19T09:39:32">19. November 2010</text:date>
+          <text:span text:style-name="MT1">Date: </text:span>
+          <text:span text:style-name="MT1">
+            <text:date style:data-style-name="N81" text:date-value="2010-11-23T15:48:31.99">23. November 2010</text:date>
           </text:span>
-          <text:span text:style-name="MT3"><text:tab/>Generated from «this.getFirstPackageName()» UML Model</text:span>
+          <text:span text:style-name="MT1"><text:tab/>Generated from «this.getFirstPackageName()» UML Model</text:span>
         </text:p>
         <text:p text:style-name="MP5"><text:bookmark-start text:name="LArchive1"/><text:bookmark-start text:name="LDate1"/><text:tab/><text:bookmark-end text:name="LArchive1"/><text:bookmark-end text:name="LDate1"/><text:bookmark text:name="prop_Author"/><text:bookmark text:name="LAuthor"/><text:bookmark text:name="prop_Archive"/><text:tab/><text:bookmark text:name="LStatus"/>Status: <text:bookmark text:name="prop_Status"/>Draft</text:p>
         <text:p text:style-name="Footer">
           <text:bookmark-start text:name="LArchive"/>
           <text:bookmark-start text:name="LDate"/>
-          <text:span text:style-name="MT4"><text:tab/><text:tab/>Page </text:span>
-          <text:span text:style-name="MT4">
-            <text:page-number text:select-page="current">1</text:page-number>
+          <text:span text:style-name="MT2"><text:tab/><text:tab/>Page </text:span>
+          <text:span text:style-name="MT2">
+            <text:page-number text:select-page="current">7</text:page-number>
           </text:span>
-          <text:span text:style-name="MT4"> of </text:span>
-          <text:span text:style-name="MT4">
+          <text:span text:style-name="MT2"> of </text:span>
+          <text:span text:style-name="MT2">
             <text:page-count style:num-format="1">7</text:page-count>
           </text:span>
           <text:bookmark-end text:name="LArchive"/>
