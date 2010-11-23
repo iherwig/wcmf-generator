@@ -83,7 +83,7 @@
 			<postprocessor class="oaw.xpand2.output.XmlBeautifier"/>
 		</outlet>
 		
-		<!-- Protected regions configuration -->
+		<!-- Protected regions configuration not used -->
 		<prSrcPaths value="${targetDir}/"/>	
 		<prDefaultExcludes value="false"/>
 		<prExcludes value="*.svn-base"/>

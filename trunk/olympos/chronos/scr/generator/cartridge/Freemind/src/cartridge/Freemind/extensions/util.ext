@@ -1,3 +1,8 @@
+/**
+* this file actually don't do nothing useful. But future operations should be placed here. 
+*
+ * metamodel import
+ */
 import uml;
 import Chronos;
 
@@ -10,29 +15,4 @@ extension common::umlutils;
 
 
 extension cartridge::Freemind::extensions::globals;
-
-/**
- * Chronos Stereotypes
- */
-String STEREOTYPE_CHI_NODE() : "Chronos::ChiNode";
-//Not used
-//String STEREOTYPE_CHI_VALUE() : "Chronos::ChiValue";
-//TODO: Which Type?
-String STEREOTYPE_CHI_ASSOCIATION() : "Chronos::ChiAssociation";
-
-
-
-/**
- * Check if an element is added by the generator
- */
-boolean isGeneratorAdded(uml::Element this) : 
-	JAVA net.sourceforge.olympos.oaw.extend.Generator.isGeneratorAdded(org.eclipse.uml2.uml.Element)
-;
-
-/**
- * Check if an element is inherited by the generator
- */
-boolean isGeneratorInherited(uml::Element this) : 
-	JAVA net.sourceforge.olympos.oaw.extend.Generator.isGeneratorInherited(org.eclipse.uml2.uml.Element)
-;
 
