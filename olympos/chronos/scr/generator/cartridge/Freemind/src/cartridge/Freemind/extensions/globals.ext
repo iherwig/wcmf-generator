@@ -1,5 +1,6 @@
 /**
-* this file reads the variable from properties file and made it available trouch Extend 
+* this file reads the variable from properties file and made it available trough Extend 
+*
  * metamodel import
  */
 import uml;
