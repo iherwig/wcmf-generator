@@ -45,7 +45,7 @@ function newWindowEx(_controller, _context, _action, _name, _windowDef, _additio
             "&context="+_context+
             "&usr_action="+_action+_additionalQueryString, 
             _name, _windowDef);
-	if (window.focus) {_name.focus()}
+  if (window.focus) {_name.focus()}
 }
 function setController(_controller) { getForm().controller.value=_controller; }
 function setContext(_context) { getForm().context.value=_context; }
@@ -54,21 +54,40 @@ function setVariable(_name, _val) { getForm()[_name].value = _val; }
 function getVariable(_name) { return getForm()[_name].value; }
 function setTarget(_target) { getForm().target=_target; }
 
-modifiedData = false;
-function setDirty()
+modifiedFields = [];
+function setDirty(fieldName)
 {
-  modifiedData = true;
+  if (fieldName) {
+    modifiedFields[fieldName] = true;
+  }
+}
+function setClean(fieldName)
+{
+  if (fieldName) {
+    modifiedFields[fieldName] = false;
+  }
 }
 
 function canLeavePage()
 {
+  var modified = false;
+  for (var field in modifiedFields) {
+    // ignore fields with class ignoreDirty
+    var formField = getFormField(field);
+    if (formField && formField.className.indexOf('ignoreDirty') == -1) {
+      if (modifiedFields[field] == true) {
+        modified = true;
+        break;
+      }
+    }
+  }
   // save reminder
-  if (modifiedData)
+  if (modified)
   {
     if (typeof(_confirm)=="undefined") _confirm = true;
     if (_confirm)
     {
-      _text = "There's possibly unsaved data and you're about to leave this edit mask. If you continue, all unsaved data will be lost. Do you really want to continue?";
+      _text = "There's possibly unsaved data in field '"+field+"' and you're about to leave this edit mask. If you continue, all unsaved data will be lost. Do you really want to continue?";
       check = confirm(_text);
     }
     else
@@ -78,7 +97,15 @@ function canLeavePage()
   }
   return true;
 }
-
+function getFormField(name)
+{ 
+  var form = getForm();
+  for (var i = 0; i < form.elements.length; i++) {
+    if (form.elements[i].name == name) {
+      return form.elements[i];
+    }
+  }
+} 
 // -------------------------------------------------------------------------
 // CMS functions.
 //
@@ -186,9 +213,9 @@ function displayMsg()
 {
   var layer = document.getElementById("msg");
   if (!layer.style.display || layer.style.display == "none")
-  	layer.style.display = "block";
+    layer.style.display = "block";
   else
-  	layer.style.display = "none";
+    layer.style.display = "none";
 }
 function adjustIFrameSize(iframeId) 
 {

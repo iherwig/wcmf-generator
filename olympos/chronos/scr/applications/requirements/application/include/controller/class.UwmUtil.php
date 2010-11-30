@@ -672,6 +672,11 @@ class UwmUtil {
 				self::appendAttributes($currNode, array('PropertyType'));
 				self::$dom->writeAttribute('PropertyType', $propertyType);
 			}
+			else
+			{
+				self::appendAttributes($currNode);
+			}
+
 			self::registerExportedNode($currNode);
 
 			$currNode->loadChildren();
