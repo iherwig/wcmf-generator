@@ -35,7 +35,7 @@ class «curRoleName» extends «curRoleName»Base
 {
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+curRoleName.asClassFile()+"/Body").asProtectedRegionId()»
 «ENDPROTECT»
-«EXPAND operation(this) FOREACH this.ownedOperation-»
+«EXPAND operation(this) FOREACH this.getOperations()-»
 }
 ?>
 «ENDFILE-»
@@ -43,9 +43,9 @@ class «curRoleName» extends «curRoleName»Base
 «ENDDEFINE»
 
 «REM» operation --------------------------------------------------«ENDREM»
-«DEFINE operation(uml::Class class) FOR uml::Operation»  
+«DEFINE operation(Chronos::ChiNode class) FOR uml::Operation»  
   /**  
-   * Method «this.name» 
+   * Method «this.name»
    * description: «this.getComment("\n   * ")»
 	«FOREACH this.ownedParameter AS p-»  
 		«IF p.direction.toString() != "return"-»
@@ -54,7 +54,7 @@ class «curRoleName» extends «curRoleName»Base
 	«ENDFOREACH-»
   * @return 
   */  
-  function «name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»«IF p.direction.toString() != "return"»$«p.name»«ENDIF»«ENDFOREACH») 
+  function «this.name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»«IF p.direction.toString() != "return"»$«p.name»«ENDIF»«ENDFOREACH») 
   {
 «PROTECT CSTART "// " CEND "" ID (class.getFullPackageName().asPath()+"/"+ class.name.asClassFile()+"/Methods/"+this.name).asProtectedRegionId()»
 «ENDPROTECT»

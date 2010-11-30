@@ -33,7 +33,8 @@ public class InstallComponent extends BaseComponent {
 	}
 
 	public void setLibraryPath(String libraryPath) {
-		this.libraryPath = libraryPath;
+		// convert package notation, if necessary
+		this.libraryPath = libraryPath.replace("::", "/");
 	}
 
 	public String getApplicationPath() {
@@ -41,7 +42,8 @@ public class InstallComponent extends BaseComponent {
 	}
 
 	public void setApplicationPath(String applicationPath) {
-		this.applicationPath = applicationPath;
+		// convert package notation, if necessary
+		this.applicationPath = applicationPath.replace("::", "/");
 	}
 
 	@Override

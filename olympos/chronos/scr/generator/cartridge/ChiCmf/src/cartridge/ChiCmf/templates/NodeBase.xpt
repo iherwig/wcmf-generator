@@ -3,6 +3,7 @@
 
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 «EXTENSION cartridge::ChronosCommon::naming»

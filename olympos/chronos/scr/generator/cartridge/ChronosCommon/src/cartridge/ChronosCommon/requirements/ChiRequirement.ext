@@ -1,6 +1,8 @@
 import uml;
 import Chronos;
 
+extension common::util;
+
 List[Chronos::ChiFeature] getFeatures(Chronos::ChiRequirement this):
 	this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiFeature)
 ;
@@ -10,7 +12,7 @@ List[Chronos::ChiIssue] getIssues(Chronos::ChiRequirement this):
 ;
 
 List[Chronos::ChiRequirement] getChildRequirements(Chronos::ChiRequirement this):
-	this.getAssociations().memberEnd.select(e|e.type == this && e.aggregation == uml::AggregationKind::composite).getOtherEnd().type.typeSelect(Chronos::ChiRequirement)
+	this.getAssociations().memberEnd.select(e|e.type == this && e.aggregation != uml::AggregationKind::composite).getOtherEnd().type.typeSelect(Chronos::ChiRequirement)
 ;
 
 List[Chronos::ChiRequirement] getChildRequirementsRecursive(Chronos::ChiRequirement this):
