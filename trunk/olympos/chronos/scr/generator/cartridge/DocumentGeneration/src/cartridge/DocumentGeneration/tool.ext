@@ -6,6 +6,10 @@ extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::util;
 
+String getFirstPackageName(uml::Model this):
+	this.allOwnedElements().typeSelect(uml::Package).first().name
+;
+
 Boolean hasAnalysisContent(uml::Package this) :
 	(this.allOwnedElements().select(e|
 		e.getAppliedStereotype("Chronos::ChiGoal") != null

@@ -34,11 +34,6 @@ String defaultOrderByName() : "sortkey";
  */
  
 /**
- * Convert a package name into a path
- */
-String asPath(String package) : package.replaceAll("\\.", "/");
-
-/**
  * Get the php class file name for a class
  */
 String asType(String string) :

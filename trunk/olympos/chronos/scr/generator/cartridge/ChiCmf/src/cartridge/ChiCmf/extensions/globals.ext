@@ -1,8 +1,7 @@
 import uml;
 
 extension common::util;
-
-extension cartridge::ChronosCommon::naming;
+extension common::naming;
 
 /**
  * Properties from the workflow definition

@@ -7,10 +7,10 @@ String asPackageName(String name) :
 ;
 
 /**
- * Replace . by /
+ * Replace :: and . by /
  */
 String asPath(String name) : 
-	name.replaceAll("\\.", "/")
+	name.replaceAll("::", ".").replaceAll("\\.", "/")
 ;
 
 /**
