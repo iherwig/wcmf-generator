@@ -58,6 +58,7 @@ class GenerateCodeController extends BatchController
 	// session name constants
 	const PARAM_START_OID = 'GenerateCodeController.startOid';
 	const PARAM_CODE_ID = 'GenerateCodeController.codeId';
+	const PARAM_MODEL_NAME = 'GenerateCodeController.modelName';
 
 	const TEMP_UWM_EXPORT_PATH = 'GenerateCodeController.tmpUwmExportPath';
 	const TEMP_PROPERTIES_PATH = 'GenerateCodeController.tmpPropertiesPath';
@@ -85,6 +86,18 @@ class GenerateCodeController extends BatchController
 			$session = &SessionData::getInstance();
 			$session->set(self::PARAM_START_OID, $request->getValue('modelOid'));
 			$session->set(self::PARAM_CODE_ID, $request->getValue('codeId'));
+
+			// get the mode name
+			$persistenceFacade = &PersistenceFacade::getInstance();
+			$model = &$persistenceFacade->load($request->getValue('modelOid'), BUILDDEPTH_SINGLE);
+			if ($model != null) {
+				$modelName = $model->getName();
+			}
+			else {
+				$modelName = 'Chronos_default2';
+			}
+			$session->set(self::PARAM_MODEL_NAME, $modelName);
+
 			// clear the problem report
 			$report = '';
 			$session->set(self::PROBLEM_REPORT, $report);
@@ -162,9 +175,11 @@ class GenerateCodeController extends BatchController
 
 		// create the configuration file
 		$tmpUwmExportPath = $session->get(self::TEMP_UWM_EXPORT_PATH);
+		$modelName = $session->get(self::PARAM_MODEL_NAME);
 		$tmpPropertiesPath = OawUtil::tempName();
 		$propertiesFile = fopen($tmpPropertiesPath, "w");
 		fwrite($propertiesFile, "modelXmlFile = $tmpUwmExportPath\n");
+		fwrite($propertiesFile, "modelName = $modelName\n");
 		fclose($propertiesFile);
 
 		$session->set(self::TEMP_PROPERTIES_PATH, $tmpPropertiesPath);
