@@ -4,9 +4,12 @@
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='3'/>
 	<property name='basePath' value='src'/>
-	<property file="${basePath}/cartridge/ChiCmf/workflow/chiCmf-headless.properties"/>
-
 	<property name='propertyFile' value='${basePath}/cartridge/ChiCmf/workflow/chiCmf.properties'/>
+	<!-- allow to insert generated properties before ... -->
+	<property file="${propertyFile}"/>
+	<!-- default property file -->
+	<property file="${basePath}/cartridge/ChiCmf/workflow/chiCmf-headless.properties"/>
+	<!-- ... and after the default property file -->
 	<property file="${propertyFile}"/>
 	
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
