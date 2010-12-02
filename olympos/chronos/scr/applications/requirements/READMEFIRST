@@ -3,10 +3,10 @@ this is the readme for the Chronos Web Tools (CWT).
 this file is contained in a zip file where you should addional find:
 - cwm.zip: containing the installation package itself
 - Chronos_Web_Modeller_Installation.pdf: containing the installation instructions
-- cwm.sql.gz containing the stanbdard models
+- cwm.sql.gz containing the standard models
 
 LICENCE
- * Copyright (c) 2009 The Olympos Development Team.
+ * Copyright (c) 2010 The Olympos Development Team.
  *
  * http://sourceforge.net/projects/olympos/
  *
@@ -256,3 +256,7 @@ added tooltips for statistics grid, fixed broken images in chrome
 changed columns in object lists
 changed cache text
 set fixed with on model listbox
+
+0.9.9.3
+- default model fix
+- ChiCMF Generator fix
