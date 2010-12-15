@@ -232,6 +232,39 @@ uwm.diagram.UwmWorkflow.prototype.onMouseMove = function(x, y) {
 }
 
 /**
+ * Overwritten in order to take node ports into account. 
+ * TODO: This method seems to be a bottleneck if there are many figures on the diagram
+ * @type draw2d.Figure
+ **/
+uwm.diagram.UwmWorkflow.prototype.getBestFigure=function(/*:int*/ x, /*:int*/ y, /*:draw2d.Figure*/ figureToIgnore)
+{
+	var result = null;
+	for(var i=0;i<this.figures.getSize();i++) {
+		var figure = this.figures.get(i);
+		// check ports
+		var isOverPort = false;
+		if (figure.getPorts) {
+			var ports = figure.getPorts();
+			for(var j=0;j<ports.getSize();j++) {
+				var port = ports.get(j);
+				if(port.isOver(x,y)==true) {
+					isOverPort = true;
+				}
+			}
+		}
+		if((isOverPort || figure.isOver(x,y)==true) && figure!=figureToIgnore) {
+			if(result==null) {
+				result = figure;
+			}
+			else if(result.getZOrder() < figure.getZOrder()) {
+				result = figure;
+			}
+		}
+	}
+	return result;
+}
+
+/**
  * The id of menu item "Snap to Objects".
  * 
  * @private

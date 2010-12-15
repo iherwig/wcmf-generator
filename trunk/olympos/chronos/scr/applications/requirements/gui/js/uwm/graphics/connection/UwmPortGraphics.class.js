@@ -16,11 +16,15 @@ Ext.namespace("uwm.graphics.connection");
  * 
  * @extends draw2d.VectorFigure
  * @constructor
+ * @param {String} orientation IN or OUT depending in which direction the arrow should point (defaults to OUT).
  */
-uwm.graphics.connection.UwmPortGraphics = function(){
+uwm.graphics.connection.UwmPortGraphics = function(orientation) {
     draw2d.VectorFigure.call(this);
-    
-    this.setDimension(10, 10);
+
+    if (orientation != 'IN' && orientation != 'OUT') {
+    	orientation = 'OUT';
+    }
+    this.orientation = orientation;
 }
 
 Ext.extend(uwm.graphics.connection.UwmPortGraphics, draw2d.VectorFigure);
@@ -41,9 +45,15 @@ uwm.graphics.connection.UwmPortGraphics.prototype.paint = function(){
     var width = this.getWidth();
     var height = this.getHeight();
     
-    this.graphics.drawLine(0, height / 2, width, height / 2);
-    this.graphics.drawLine(width / 2, 0, width, height / 2);
-    this.graphics.drawLine(width / 2, height, width, height / 2);
+    this.graphics.drawLine(0, height/2, width, height/2);
+    if (this.orientation == 'OUT') {
+    	this.graphics.drawLine(width/2, 0, width, height/2);
+    	this.graphics.drawLine(width/2, height, width, height/2);
+    }
+    else {
+    	this.graphics.drawLine(0, height/2, width/2, height);
+    	this.graphics.drawLine(0, height/2, width/2, 0);
+    }
     
     this.graphics.paint();
 }

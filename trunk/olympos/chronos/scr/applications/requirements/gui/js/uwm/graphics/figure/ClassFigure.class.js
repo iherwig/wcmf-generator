@@ -69,6 +69,19 @@ Ext.extend(uwm.graphics.figure.ClassFigure, draw2d.CompartmentFigure);
  *            workflow The workflow containing this figure.
  */
 uwm.graphics.figure.ClassFigure.prototype.setWorkflow = function(workflow) {
+	if (workflow != null && this.inPort == null) {
+		/**
+		 * The input port of this figure.
+		 *
+		 * @private
+		 * @type uwm.graphics.connection.UwmPort
+		 */
+		this.inPort = new uwm.graphics.connection.UwmPort('IN');
+		this.inPort.setWorkflow(workflow);
+		this.addPort(this.inPort, this.width + 8, 15);
+		this.inPort.setAlpha(0);
+	}
+
 	return uwm.graphics.figure.BaseFigure.prototype.setWorkflow.call(this, workflow);
 }
 
@@ -214,6 +227,10 @@ uwm.graphics.figure.ClassFigure.prototype.getMinHeight = function() {
  */
 uwm.graphics.figure.ClassFigure.prototype.setDimension = function(width, height) {
 	uwm.graphics.figure.BaseFigure.prototype.setDimension.call(this, width, height);
+
+	if (this.inPort != null) {
+		this.inPort.setPosition(this.getWidth() + 8, 15);
+	}
 	
 	var children = this.getChildren();
 	if (children) {
@@ -224,7 +241,7 @@ uwm.graphics.figure.ClassFigure.prototype.setDimension = function(width, height)
 			
 			currChild.setDimension(childWidth, currChild.getHeight());
 		}
-	}
+	}	
 }
 
 /**
@@ -428,6 +445,38 @@ uwm.graphics.figure.ClassFigure.prototype.paint = function() {
 	this.html.appendChild(this.label);
     this.html.appendChild(this.image);
 }
+
+/**
+ * Show the figure tools (ports etc).
+ **/
+uwm.graphics.figure.ClassFigure.prototype.showTools=function() {
+	uwm.graphics.figure.BaseFigure.prototype.showTools.call(this);
+};
+
+/**
+ * Hide the figure tools (ports etc).
+ **/
+uwm.graphics.figure.ClassFigure.prototype.hideTools=function() {
+	uwm.graphics.figure.BaseFigure.prototype.hideTools.call(this);
+};
+
+/**
+ * Callback method for the mouse enter event. Usefull for mouse hover-effects.
+ * Sub classes can override this method to implement their own behaviour.
+ **/
+uwm.graphics.figure.ClassFigure.prototype.onMouseEnter=function() {
+	draw2d.CompartmentFigure.prototype.onMouseEnter();
+	uwm.graphics.figure.BaseFigure.prototype.showTools.call(this);
+};
+
+/**
+ * Callback method for the mouse leave event. Usefull for mouse hover-effects.
+ * 
+ **/
+uwm.graphics.figure.ClassFigure.prototype.onMouseLeave=function() {
+	draw2d.CompartmentFigure.prototype.onMouseLeave();
+	uwm.graphics.figure.BaseFigure.prototype.hideTools.call(this);
+};
 
 uwm.graphics.figure.ClassFigure.LABEL_HEIGHT = 45;
 

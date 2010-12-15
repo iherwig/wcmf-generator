@@ -16,10 +16,15 @@ Ext.namespace("uwm.graphics.connection");
  *
  * @extends draw2d.Port
  * @constructor
+ * @param {String} orientation IN or OUT depending in which direction the arrow should point (defaults to OUT).
  */
-uwm.graphics.connection.UwmPort = function(){
-    draw2d.Port.call(this, new uwm.graphics.connection.UwmPortGraphics());
+uwm.graphics.connection.UwmPort = function(orientation){
+    if (orientation != 'IN' && orientation != 'OUT') {
+    	orientation = 'OUT';
+    }
+    draw2d.Port.call(this, new uwm.graphics.connection.UwmPortGraphics(orientation));
 
+    this.orientation = orientation;
     this.setDimension(10, 10);
 }
 
@@ -51,6 +56,29 @@ uwm.graphics.connection.UwmPort.prototype.onDragEnter = function(port){
     }
     if (port.parentNode.getFigure().getModelObject().connectableWith(this.parentNode.getFigure().getModelObject())) {
         draw2d.Port.prototype.onDragEnter.call(this, port);
+        if (this.parentNode) {
+        	this.parentNode.showTools();
+        }
+    }
+}
+
+/**
+ * @param {uwm.graphics.connection.UwmPort} port The other end port.
+ */
+uwm.graphics.connection.UwmPort.prototype.onDragLeave = function(port){
+    draw2d.Port.prototype.onDragLeave.call(this, port);
+    if (this.parentNode) {
+    	this.parentNode.hideTools();
+    }
+}
+
+/**
+ * @param {uwm.graphics.connection.UwmPort} port The other end port.
+ */
+uwm.graphics.connection.UwmPort.prototype.onDragend = function(port){
+    draw2d.Port.prototype.onDragend.call(this, port);
+    if (this.parentNode) {
+    	this.parentNode.hideTools();
     }
 }
 
@@ -64,10 +92,11 @@ uwm.graphics.connection.UwmPort.prototype.onDrop = function(port){
         // remote object -> do nothing
         return;
     }
+    /*
     if (this.parentNode.id == port.parentNode.id) {
         // same parentNode -> do nothing
         return;
-    }
+    }*/
 
     var portModelObject = port.parentNode.getFigure().getModelObject();
     var thisModelObject = this.parentNode.getFigure().getModelObject();
