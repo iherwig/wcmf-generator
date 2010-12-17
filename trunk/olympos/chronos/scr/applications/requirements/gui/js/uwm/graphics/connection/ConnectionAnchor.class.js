@@ -36,61 +36,61 @@ uwm.graphics.connection.ConnectionAnchor.prototype.type = "uwm.graphics.connecti
  * @return The anchor's location
  */
 uwm.graphics.connection.ConnectionAnchor.prototype.getLocation=function(/*:draw2d.Point*/ reference)
-{
-	var owner = this.getOwner(); // draw2d.Port
+{	
+	// default calculation of parent class
+	var defaultLocation = draw2d.ChopboxConnectionAnchor.prototype.getLocation.call(this, reference);
 	
-	// count the connections
-	var lines = owner.getConnections();
-	if (lines.getSize()>1) {
-		var conn = this.getConnection();
-		var connections = new draw2d.ArrayList();
-		var index=0;
-		for (var i=0;i<lines.getSize();i++)
+	// multiple connections support:	
+	var owner = this.getOwner(); // draw2d.Port
+	var myConnection = this.getConnection();
+	var isOnVerticalEdge = this.IsOnVerticalEdge(defaultLocation);
+	
+	// get the connections with same source or target
+	// and determine the position of myConnection in this set
+	var ownerConnections = owner.getConnections();
+	if (ownerConnections.getSize() > 1) {
+		var sameConnections = new draw2d.ArrayList();
+		var index = 0;
+		for (var i=0; i<ownerConnections.getSize(); i++)
 		{
-			var figure = lines.get(i);
-			if (figure.getTarget()==conn.getTarget() || figure.getSource()==conn.getTarget())
+			var curConnection = ownerConnections.get(i);
+			if (curConnection.getTarget() == myConnection.getTarget() || curConnection.getSource() == myConnection.getTarget())
 			{
-				connections.add(figure);
-				if (conn==figure)
-					index=connections.getSize();
+				sameConnections.add(curConnection);
+				if (myConnection == curConnection) {
+					index = sameConnections.getSize();
+				}
 			}
 		}
 	}
 
-	var r = new draw2d.Dimension();
-	r.setBounds(this.getBox());
-	r.translate(-1, -1);
-	r.resize(1, 1);
-	
-	var centerX = r.x + r.w/2;
-	var centerY = r.y + r.h/2;
-	
-	if (r.isEmpty() || (reference.x == centerX && reference.y == centerY)) {
-		return new /*NAMESPACE*/Point(centerX, centerY);  //This avoids divide-by-zero
-	}
-	var dx = reference.x - centerX;
-	var dy = reference.y - centerY;
-	
-	//r.width, r.height, dx, and dy are guaranteed to be non-zero. 
-	var scale = 0.5 / Math.max(Math.abs(dx) / r.w, Math.abs(dy) / r.h);
-	
-	dx *= scale;
-	dy *= scale;
-	centerX += dx;
-	centerY += dy;
-
-	if (connections && connections.getSize()>1) {
+	// spread anchors along the owner in case of multiple selections
+	if (sameConnections && sameConnections.getSize() > 1) {
 		var dist = 20;
-		var w = (lines.getSize()-1)*dist;
-		// determine the spread direction (x or y)
-		if (Math.abs(dx/dy) > 1) {
-			centerY += -w/2 + (index-1)*dist;
+		var w = (ownerConnections.getSize()-1)*dist;
+		if (isOnVerticalEdge) {
+			defaultLocation.y += Math.round(-w/2 + (index-1)*dist);
 		}
 		else {
-			centerX += -w/2 + (index-1)*dist;
+			defaultLocation.x += Math.round(-w/2 + (index-1)*dist);
 		}
 	}
-	return new draw2d.Point(Math.round(centerX), Math.round(centerY));
+
+	// move target anchor in case of self relation
+	var owningFigure = owner.parentNode;
+	if (myConnection.sourceAnchor.getOwner().parentNode == owningFigure && 
+			myConnection.targetAnchor.getOwner().parentNode == owningFigure) {
+		if (myConnection.targetAnchor == this) {
+			if (isOnVerticalEdge) {
+				defaultLocation.y += 20;
+			}
+			else {
+				defaultLocation.x += 20;
+			}
+		}
+	}
+
+	return defaultLocation;
 }
 
 /**
@@ -99,15 +99,30 @@ uwm.graphics.connection.ConnectionAnchor.prototype.getLocation=function(/*:draw2
  */
 uwm.graphics.connection.ConnectionAnchor.prototype.getConnection=function()
 {
-	var owner = this.getOwner();
-	if (owner) {
-		var connections = owner.getConnections();
-		for (var i=0;i<connections.getSize();i++) {
-			var conn = connections.get(i);
-			if (conn.sourceAnchor == this || conn.targetAnchor == this) {
-				return conn;
+	if (this.connection == null) {
+		var owner = this.getOwner();
+		if (owner) {
+			var connections = owner.getConnections();
+			for (var i=0;i<connections.getSize();i++) {
+				var conn = connections.get(i);
+				if (conn.sourceAnchor == this || conn.targetAnchor == this) {
+					this.connection = conn;
+				}
 			}
 		}
 	}
-	return null;
+	return this.connection;
+}
+
+/**
+ * Check if the givn point is on a vertical edge of the owning figure's bounding box 
+ * @return Boolean
+ */
+uwm.graphics.connection.ConnectionAnchor.prototype.IsOnVerticalEdge=function(p)
+{
+	var bounds = this.getBox();
+	// check if the point is nearer to a vertical of to a horizontal edge
+	var minVerticalDistance = Math.min(Math.abs(p.x-bounds.x), Math.abs(p.x-(bounds.x+bounds.w)));
+	var minHorizontalDistance = Math.min(Math.abs(p.y-bounds.y), Math.abs(p.y-(bounds.y+bounds.h)));
+	return minVerticalDistance < minHorizontalDistance;
 }

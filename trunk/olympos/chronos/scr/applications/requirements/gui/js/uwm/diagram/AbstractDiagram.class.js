@@ -495,15 +495,19 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					
 					var parentOids = childObject.getParentOids();
 					nmtype = true;
-					
-					// FIXME: workaround from parentOids.length to 2 parent
-					// oids, due to wCMF error (Bug id )
-					for ( var j = 0; j < Math.min(2, parentOids.length); j++) {
-						var currParentOid = parentOids[j];
-						
-						if (currParentOid != newObject.getOid()) {
-							connectedObject = this.getConnectedObject(currParentOid);
-							break;
+
+					// we expect 2 parentOids (wCMF returns 3 due to a bug)
+					if (parentOids[0] == parentOids[1]) {
+						// self relation -> connectedObject is the same as newObject
+						connectedObject = this.getConnectedObject(parentOids[0]);
+					}
+					else {
+						// relation to other object
+						if (parentOids[0] != newObject.getOid()) {
+							connectedObject = this.getConnectedObject(parentOids[0]);
+						}
+						else {
+							connectedObject = this.getConnectedObject(parentOids[1]);
 						}
 					}
 				}
@@ -519,7 +523,7 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 					if (connectionInfo.nmUwmClassName && relationObject) {
 						var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
 						maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
-						if (((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "target")
+						if (((maskedClass instanceof uwm.model.RelationEndClass) && maskedClass.getConnnectionEndRole() == "source")
 							|| maskedClass instanceof uwm.model.RelationClass) {
 							if (connectionInfo.connection) {
 								connectionInfo = connectionInfo.connection;
@@ -566,8 +570,10 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 						}
 						
 						if (connectedFigure) {
-							var newPort = newFigure.getGraphics().getPorts().get(0);
-							var connectedPort = connectedFigure.getGraphics().getPorts().get(0);
+							var sourcePortIndex = 0;
+							var targetPortIndex = (newFigure == connectedFigure) ? 1 : 0;
+							var newPort = newFigure.getGraphics().getPorts().get(sourcePortIndex);
+							var connectedPort = connectedFigure.getGraphics().getPorts().get(targetPortIndex);
 
 							this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true, undefined, relationObject);
 						}
