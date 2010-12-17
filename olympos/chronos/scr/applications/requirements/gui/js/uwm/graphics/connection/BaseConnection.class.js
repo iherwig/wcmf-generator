@@ -33,7 +33,7 @@ uwm.graphics.connection.BaseConnection = function(label, decorators) {
 	
 	this.setSourceAnchor(new uwm.graphics.connection.ConnectionAnchor(this));
 	this.setTargetAnchor(new uwm.graphics.connection.ConnectionAnchor(this));
-	this.setRouter(new draw2d.ManhattanConnectionRouter());
+	this.setRouter(new uwm.graphics.connection.ConnectionRouter());
 	
 	this.stroke = jsgStroke.DOTTED;
 	
