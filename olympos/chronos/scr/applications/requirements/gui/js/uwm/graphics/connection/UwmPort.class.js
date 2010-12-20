@@ -18,7 +18,7 @@ Ext.namespace("uwm.graphics.connection");
  * @constructor
  * @param {String} orientation IN or OUT depending in which direction the arrow should point (defaults to OUT).
  */
-uwm.graphics.connection.UwmPort = function(orientation){
+uwm.graphics.connection.UwmPort = function(orientation) {
     if (orientation != 'IN' && orientation != 'OUT') {
     	orientation = 'OUT';
     }
@@ -38,8 +38,9 @@ uwm.graphics.connection.UwmPort.prototype.type = "uwm.graphics.connection.UwmPor
 /**
  * Checks model constraints for allowing or disallowing connection attempts.
  */
-uwm.graphics.connection.UwmPort.prototype.onDrag = function(){
-    if (!this.parentNode.getFigure().getModelObject().isRemoteNode()) {
+uwm.graphics.connection.UwmPort.prototype.onDrag = function() {
+    var thisModelObject = this.getModelObject();
+    if (!thisModelObject.isRemoteNode()) {
         draw2d.Port.prototype.onDrag.call(this);
     }
 }
@@ -49,12 +50,13 @@ uwm.graphics.connection.UwmPort.prototype.onDrag = function(){
  *
  * @param {uwm.graphics.connection.UwmPort} port The other end port.
  */
-uwm.graphics.connection.UwmPort.prototype.onDragEnter = function(port){
-    if (port.parentNode.getFigure().getModelObject().isRemoteNode()) {
+uwm.graphics.connection.UwmPort.prototype.onDragEnter = function(port) {
+    var portModelObject = port.getModelObject();
+    if (portModelObject.isRemoteNode()) {
         // coming from remote object -> do nothing
         return;
     }
-    if (port.parentNode.getFigure().getModelObject().connectableWith(this.parentNode.getFigure().getModelObject())) {
+    if (portModelObject.connectableWith(this.getModelObject())) {
         draw2d.Port.prototype.onDragEnter.call(this, port);
         if (this.parentNode) {
         	this.parentNode.showTools();
@@ -65,7 +67,7 @@ uwm.graphics.connection.UwmPort.prototype.onDragEnter = function(port){
 /**
  * @param {uwm.graphics.connection.UwmPort} port The other end port.
  */
-uwm.graphics.connection.UwmPort.prototype.onDragLeave = function(port){
+uwm.graphics.connection.UwmPort.prototype.onDragLeave = function(port) {
     draw2d.Port.prototype.onDragLeave.call(this, port);
     if (this.parentNode) {
     	this.parentNode.hideTools();
@@ -75,7 +77,7 @@ uwm.graphics.connection.UwmPort.prototype.onDragLeave = function(port){
 /**
  * @param {uwm.graphics.connection.UwmPort} port The other end port.
  */
-uwm.graphics.connection.UwmPort.prototype.onDragend = function(port){
+uwm.graphics.connection.UwmPort.prototype.onDragend = function(port) {
     draw2d.Port.prototype.onDragend.call(this, port);
     if (this.parentNode) {
     	this.parentNode.hideTools();
@@ -87,19 +89,36 @@ uwm.graphics.connection.UwmPort.prototype.onDragend = function(port){
  *
  * @param {uwm.graphics.connection.UwmPort} port The other end port.
  */
-uwm.graphics.connection.UwmPort.prototype.onDrop = function(port){
-    if (this.parentNode.getFigure().getModelObject().isRemoteNode()) {
+uwm.graphics.connection.UwmPort.prototype.onDrop = function(port) {
+    var thisModelObject = this.getModelObject();	
+    if (thisModelObject.isRemoteNode()) {
         // remote object -> do nothing
         return;
     }
-    /*
-    if (this.parentNode.id == port.parentNode.id) {
-        // same parentNode -> do nothing
-        return;
-    }*/
 
-    var portModelObject = port.parentNode.getFigure().getModelObject();
-    var thisModelObject = this.parentNode.getFigure().getModelObject();
-        
-    this.parentNode.getFigure().getDiagram().createConnection(thisModelObject, portModelObject, this, port, port.parentNode.x, port.parentNode.y);
+    var portModelObject = port.getModelObject();        
+    if (portModelObject.connectableWith(thisModelObject)) {
+    	this.getDiagram().createConnection(thisModelObject, portModelObject, this, port, port.parentNode.x, port.parentNode.y);
+    }
+}
+
+/**
+ * Get the ModelObject whose representation owns this port.
+ *
+ * @return The ModelObject associated with this port.
+ * @type uwm.model.ModelObject
+ */
+uwm.graphics.connection.UwmPort.prototype.getModelObject = function() {
+	return this.parentNode.getModelObject();
+}
+
+
+/**
+ * Get the Diagram to which the port owner belongs.
+ *
+ * @return The Diagram associated with the owner.
+ * @type uwm.diagram.Diagram
+ */
+uwm.graphics.connection.UwmPort.prototype.getDiagram = function() {
+	return this.parentNode.getWorkflow().getDiagram();
 }

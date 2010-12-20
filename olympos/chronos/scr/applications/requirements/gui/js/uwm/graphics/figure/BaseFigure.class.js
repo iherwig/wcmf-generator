@@ -202,7 +202,7 @@ uwm.graphics.figure.BaseFigure.prototype.getMinHeight = function() {
 }
 
 /**
- * Repositions the label.
+ * Set the dimension.
  *
  * @private
  * @param {int} width New width of the figure.

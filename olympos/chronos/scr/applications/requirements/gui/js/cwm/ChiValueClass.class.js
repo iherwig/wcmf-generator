@@ -45,16 +45,16 @@ cwm.ChiValueClass = function() {
 	} ];
 	
 	this.connectionInfo = {
-		"ChiNode" : {
-		    label : "has properties",
-		    invert : true,
-		    connectionType : "Composition"
-		}
-	
+	    "ChiValue" : {
+	        label : "mapped by",
+	        invert : false,
+	        connectionType : "Association",
+	        cardinality : 1
+	    }
 	};
 }
 
-Ext.extend(cwm.ChiValueClass, uwm.model.ModelNodeClass);
+Ext.extend(cwm.ChiValueClass, uwm.model.ModelClass);
 
 cwm.ChiValueClass.prototype.getPropertyForm = function(modelNode, isLockedByOtherUser) {
 	return new uwm.property.PropertyForm( {

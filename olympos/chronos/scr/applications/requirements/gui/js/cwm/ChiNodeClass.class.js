@@ -52,35 +52,14 @@ cwm.ChiNodeClass = function() {
 	        invert : true,
 	        connectionType : "Association",
 	        cardinality : 1
-	    }
-
-	    ,
-	    
+	    },
 		"ChiObject": {
 			label: "is instantiated by",
 			invert: false,
 			invertBackendRelation: false,
 			connectionType: "instantiation",
 			cardinality: -1
-		}
-
-	    ,
-	    
-	    "ChiValue" : {
-	        label : "has properties",
-	        invert : false,
-	        connectionType : "Composition",
-	        cardinality : -1
-	    }
-
-	    ,
-	    
-	    "Operation" : {
-	        label : "Contains",
-	        invert : false,
-	        connectionType : "Composition",
-	        cardinality : -1
-	    },
+		},
 	    "ChiNode" : {
 	        nmUwmClassName : "NodeSourceEnd",
 	        connections : [ {
