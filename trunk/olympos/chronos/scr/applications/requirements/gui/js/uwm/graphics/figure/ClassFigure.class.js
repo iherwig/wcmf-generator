@@ -195,6 +195,16 @@ uwm.graphics.figure.ClassFigure.prototype.getFigure = function() {
 }
 
 /**
+ * Returns the associated ModelObject.
+ * 
+ * @return The associated model object.
+ * @type uwm.mode.ModelObject
+ */
+uwm.graphics.figure.ClassFigure.prototype.getModelObject = function() {
+	return this.getFigure().getModelObject();
+}
+
+/**
  * Returns the minimum width of this figure.
  * 
  * @return The minimum width of this figure.

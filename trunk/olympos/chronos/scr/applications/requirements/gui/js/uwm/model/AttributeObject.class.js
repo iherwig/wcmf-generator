@@ -26,4 +26,4 @@ uwm.model.AttributeObject = function(modelNodeClass) {
 	uwm.model.AttributeObject.superclass.constructor.call(this, modelNodeClass);
 }
 
-Ext.extend(uwm.model.AttributeObject, uwm.model.ModelNode);
+Ext.extend(uwm.model.AttributeObject, uwm.model.ModelObject);

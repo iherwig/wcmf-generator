@@ -44,8 +44,8 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 			var command = stackEvent.getCommand();
 			
 			if (command instanceof draw2d.CommandConnect) {
-				var source = command.source.getParent().getFigure().getModelObject();
-				var target = command.target.getParent().getFigure().getModelObject();
+				var source = command.source.getParent().getModelObject();
+				var target = command.target.getParent().getModelObject();
 				
 				var connectionInfo = command.connectionInfo;
 				var nmUwmClassName = command.nmUwmClassName;
@@ -91,8 +91,8 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 					this.diagram.removeFigureFromCache(figure.getFigure());
 				} else if (figure instanceof uwm.graphics.connection.BaseConnection){
 					this.diagram.removeConnectionFromCache(figure);
-					var source = figure.getSource().getParent().getFigure().getModelObject();
-					var target = figure.getTarget().getParent().getFigure().getModelObject();
+					var source = figure.getSource().getParent().getModelObject();
+					var target = figure.getTarget().getParent().getModelObject();
 					
 					var connectionInfo = source.getModelNodeClass().getConnectionInfo(target.getModelNodeClass());
 					var relationObject = null;

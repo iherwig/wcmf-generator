@@ -44,14 +44,7 @@ cwm.OperationClass = function() {
 	    sortable : true
 	} ];
 	
-	this.connectionInfo = {
-		"ChiNode" : {
-		    label : "Contains",
-		    invert : true,
-		    connectionType : "Composition"
-		}
-	
-	};
+	this.connectionInfo = {};
 }
 
 Ext.extend(cwm.OperationClass, uwm.model.ModelNodeClass);

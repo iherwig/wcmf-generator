@@ -679,7 +679,13 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 		}
 	}
 	
-	var connection = new uwm.graphics.connection.BaseConnection(label, decorators);
+	var connection = null;
+	if (sourceObject instanceof uwm.model.AttributeObject && targetObject instanceof uwm.model.AttributeObject) {
+		connection = new uwm.graphics.connection.MappingConnection(label, decorators);
+	}
+	else {
+		connection = new uwm.graphics.connection.BaseConnection(label, decorators);
+	}
 	
 	if (!noCommand) {
 		var command = new draw2d.CommandConnect(this.workflow, startPort, endPort);
