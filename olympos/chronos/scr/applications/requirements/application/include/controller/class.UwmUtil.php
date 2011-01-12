@@ -688,6 +688,14 @@ class UwmUtil {
 				}
 				else {
 					self::processChild($currChild);
+
+					if ($currChild->getType() == 'ChiValueRef') {
+						// store the references in order to make sure that it is included in the export
+						self::registerReference($currChild->getOID());
+						self::registerReference($currChild->getReferenceType());
+						self::registerReference($currChild->getReferenceValue());
+					}
+					
 				}
 			}
 
