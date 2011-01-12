@@ -273,6 +273,22 @@ uwm.persistency.Json.prototype.createControllerFromUseCase = function(oid, succe
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.createMapping = function(sourceOid, targetOid, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "createMapping",
+		sourceoid: sourceOid,
+		targetoid: targetOid
+	}, successHandler, errorHandler);
+}
+
+uwm.persistency.Json.prototype.deleteMapping = function(sourceOid, targetOid, successHandler, errorHandler) {
+	this.jsonRequest({
+		usr_action: "deleteMapping",
+		sourceoid: sourceOid,
+		targetoid: targetOid
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.putChildnodesToActivitySetDiagram = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "actsdiagr",
@@ -505,6 +521,16 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				
 			case "unlock":
 				jsonRequest.oid = currRequest.oid;
+				break;
+				
+			case "createMapping":
+				jsonRequest.sourceOid = currRequest.sourceOid;
+				jsonRequest.targetOid = currRequest.targetOid;
+				break;
+				
+			case "deleteMapping":
+				jsonRequest.sourceOid = currRequest.sourceOid;
+				jsonRequest.targetOid = currRequest.targetOid;
 				break;
 				
 			case "log":

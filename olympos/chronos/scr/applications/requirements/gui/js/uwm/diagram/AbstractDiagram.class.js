@@ -214,8 +214,54 @@ uwm.diagram.AbstractDiagram.prototype.containsObject = function(modelObject) {
 	return this.objects.containsKey(modelObject.getOid());
 }
 
-uwm.diagram.AbstractDiagram.prototype.getContainedFigure = function(oid) {
+/**
+ * Get the persisted figure object for a model object contained in this diagram.
+ * Note that not all model objects in the diagram have a corresponding figure instance 
+ * (e.g. class attributes and operations)
+ * @param {String} oid The object id of a model object
+ * @return The {uwm.diagram.Figure}
+ */
+uwm.diagram.AbstractDiagram.prototype.getContainedFigureObject = function(oid) {
 	return this.figures.get(oid);
+}
+
+/**
+ * Get the figure graphic for a model object contained in this diagram.
+ * @param {String} oid The object id of a model object that is displayed in the diagram
+ * @return An instance of a class from the {uwm.graphics.figure} namespace
+ */
+uwm.diagram.AbstractDiagram.prototype.getContainedFigureGraphic = function(modelObject) {
+	var figureGraphic = null;
+	var figureObject = this.getContainedFigureObject(modelObject.getOid());
+
+	// if the figure object does not exist, the object could be part
+	// of a uwm.graphics.figure.ClassFigure
+	if (!figureObject) {
+		var parentOids = modelObject.getParentOids();
+		if (parentOids) {
+			for (var i=0, countI=parentOids.length; i<countI; i++) {
+				var parentFigureObject = this.getContainedFigureObject(parentOids[i]);
+				if (parentFigureObject) {
+					var parentFigureGraphic = parentFigureObject.getGraphics();
+					if (parentFigureGraphic instanceof uwm.graphics.figure.ClassFigure) {
+						var childFigureGraphics = parentFigureGraphic.getChildElements();
+						if (childFigureGraphics) {
+							for (var j=0, countJ=childFigureGraphics.length; j<countJ; j++) {
+								if (childFigureGraphics[j].getModelObject() == modelObject) {
+									figureGraphic = childFigureGraphics[j];
+									break;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	else {
+		figureGraphic = figureObject.getGraphics();
+	}
+	return figureGraphic;
 }
 
 uwm.diagram.AbstractDiagram.prototype.getContainedConnection = function(sourceOid, targetOid, relationOid) {
@@ -242,7 +288,7 @@ uwm.diagram.AbstractDiagram.prototype.registerConnection = function(sourceOid, t
 }
 
 uwm.diagram.AbstractDiagram.prototype.scrollToObject = function(modelObject) {
-	var figure = this.figures.get(modelObject.getOid());
+	var figure = this.getContainedFigureObject(modelObject.getOid());
 	var graphics = figure.getGraphics();
 	var canvas = this.viewPort.getSize();
 	
@@ -406,11 +452,11 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObjects = function() {
 }
 
 uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject) {
-	var figure = this.figures.get(modelObject.getOid());
+	var figure = this.getContainedFigureObject(modelObject.getOid());
 	if (figure == undefined) {
 		// maybe the object is a remote object.
 		// in this case the figure was stored under the proxy object's oid
-		figure = this.figures.get(modelObject.getProxyOid());
+		figure = this.getContainedFigureObject(modelObject.getProxyOid());
 	}
 	
 	figure.load(modelObject, this);
@@ -511,6 +557,17 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 						}
 					}
 				}
+				if (childObject instanceof uwm.model.AttributeObject) {
+					var childOids = childObject.getChildOids();
+					if (childOids.length == 1) {
+						// we expect a mapping relation (realized by a ChiValueRef)
+						var mappingObject = uwm.model.ModelContainer.getInstance().getByOid(childOids[0]);
+						// determine the connected ChiValues
+						connectedObjectOid = mappingObject.getProperty("reference_value");
+						connectedObject = uwm.model.ModelContainer.getInstance().getByOid(connectedObjectOid);
+						newObject = childObject;
+					}
+				}
 			}
 			
 			if (connectedObject) {
@@ -555,25 +612,29 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 						relationOid = relationObject.getOid();
 					}
 					if (this.getContainedConnection(sourceOid, targetOid, relationOid) == null) {
+						// retrieve the figures (maybe swapped later)
+						var newFigureTmp = this.getContainedFigureGraphic(newObject);
+						var connectedFigureTmp = this.getContainedFigureGraphic(connectedObject);
+						
 						// swap the direction if the following conditions are true
 						if ((connectionInfo.nmSelf && connectionInfo.invertBackendRelation) || 
 							((connectedObject.getUwmClassName() == newObject.getUwmClassName() && !connectionInfo.nmSelf) &&
 								(listtype == 'parent' && !connectionInfo.invert) || (listtype == 'child' && connectionInfo.invert))
 						) {
-							var newFigure = this.figures.get(connectedObject.getOid());
-							var connectedFigure = this.figures.get(newObject.getOid());
+							var newFigure = connectedFigureTmp;
+							var connectedFigure = newFigureTmp;
 						}
 						// use the original direction
 						else {
-							var newFigure = this.figures.get(newObject.getOid());
-							var connectedFigure = this.figures.get(connectedObject.getOid());
+							var newFigure = newFigureTmp;
+							var connectedFigure = connectedFigureTmp;
 						}
 						
 						if (connectedFigure) {
 							var sourcePortIndex = 0;
 							var targetPortIndex = (newFigure == connectedFigure) ? 1 : 0;
-							var newPort = newFigure.getGraphics().getPorts().get(sourcePortIndex);
-							var connectedPort = connectedFigure.getGraphics().getPorts().get(targetPortIndex);
+							var newPort = newFigure.getPorts().get(sourcePortIndex);
+							var connectedPort = connectedFigure.getPorts().get(targetPortIndex);
 
 							this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true, undefined, relationObject);
 						}
@@ -588,7 +649,7 @@ uwm.diagram.AbstractDiagram.prototype.reestablishExistingClass = function(newObj
 	var childOids = newObject.getChildOids();
 	if (childOids) {
 		var modelContainer = uwm.model.ModelContainer.getInstance();
-		var figure = this.figures.get(newObject.getOid());
+		var figure = this.getContainedFigureObject(newObject.getOid());
 		
 		for ( var i = 0; i < childOids.length; i++) {
 			var currChild = modelContainer.getByOid(childOids[i]);
@@ -1073,10 +1134,10 @@ uwm.diagram.AbstractDiagram.prototype.handleDeleteEvent = function(modelNode) {
 		var parentModelNode = uwm.model.ModelContainer.getInstance().getByOid(modelNode.getParentOids()[0]);
 		
 		if (this.containsObject(parentModelNode)) {
-			parentModelNode.removeChild(modelNode, this.figures.get(parentModelNode.getOid()));
+			parentModelNode.removeChild(modelNode, this.getContainedFigureObject(parentModelNode.getOid()));
 		}
 	} else {
-		var figure = this.figures.get(modelNode.getOid());
+		var figure = this.getContainedFigureObject(modelNode.getOid());
 		
 		if (figure) {
 			this.removeFigureFromCache(figure);
@@ -1096,7 +1157,7 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNod
 			this.tab.setTitle(this.getLabel());
 		}
 	} else if (this.containsObject(modelNode)) {
-		var figure = this.figures.get(modelNode.getOid());
+		var figure = this.getContainedFigureObject(modelNode.getOid());
 		
 		if (figure) {
 			if (!newLabel) {
@@ -1112,7 +1173,7 @@ uwm.diagram.AbstractDiagram.prototype.handleChangeLabelEvent = function(modelNod
 			var parentModelNode = uwm.model.ModelContainer.getInstance().getByOid(parentOids[0]);
 			
 			if (this.containsObject(parentModelNode)) {
-				parentModelNode.updateChildLabel(modelNode, this.figures.get(parentModelNode.getOid()));
+				parentModelNode.updateChildLabel(modelNode, this.getContainedFigureObject(parentModelNode.getOid()));
 			}
 		}
 	} else if (modelNode instanceof uwm.model.Relation) {
@@ -1131,7 +1192,7 @@ uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentMode
 	if (parentModelNode instanceof uwm.model.builtin.Package && childModelNode == this) {
 		uwm.diagram.DiagramContainer.getInstance().loadDiagram(this);
 	} else if (childModelNode instanceof uwm.model.AttributeObject) {
-		var figure = this.figures.get(parentModelNode.getOid());
+		var figure = this.getContainedFigureObject(parentModelNode.getOid());
 		
 		if (figure) {
 			var graphics = figure.getGraphics();
@@ -1140,7 +1201,7 @@ uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentMode
 			graphics.addChildElement(propertyGraphics, true);
 		}
 	} else if (childModelNode instanceof uwm.model.OperationObject) {
-		var figure = this.figures.get(parentModelNode.getOid());
+		var figure = this.getContainedFigureObject(parentModelNode.getOid());
 		
 		if (figure) {
 			var graphics = figure.getGraphics();

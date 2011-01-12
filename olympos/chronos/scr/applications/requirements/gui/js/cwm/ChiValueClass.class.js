@@ -46,7 +46,7 @@ cwm.ChiValueClass = function() {
 	
 	this.connectionInfo = {
 	    "ChiValue" : {
-	        label : "mapped by",
+	        label : "is mapping",
 	        invert : false,
 	        connectionType : "Association",
 	        cardinality : 1
