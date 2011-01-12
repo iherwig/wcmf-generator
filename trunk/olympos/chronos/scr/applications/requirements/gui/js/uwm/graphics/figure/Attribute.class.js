@@ -41,9 +41,9 @@ uwm.graphics.figure.Attribute.prototype.setWorkflow = function(workflow) {
 		 * @private
 		 * @type uwm.graphics.connection.UwmPort
 		 */
-		this.outPort = new uwm.graphics.connection.UwmPort('OUT');
+		this.outPort = new uwm.graphics.connection.UwmPort('IN');
 		this.outPort.setWorkflow(workflow);
-		this.addPort(this.outPort, this.width + 11, 0);
+		this.addPort(this.outPort, -11, this.height/2);
 		this.outPort.setAlpha(0);
 	}
 }
@@ -59,7 +59,7 @@ uwm.graphics.figure.Attribute.prototype.setDimension = function(width, height) {
 	uwm.graphics.figure.AbstractClassPart.prototype.setDimension.call(this, width, height);
 	
 	if (this.outPort != null) {
-		this.outPort.setPosition(this.getWidth() + 11, 0);
+		this.outPort.setPosition(-11, this.height/2);
 	}
 }
 

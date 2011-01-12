@@ -122,6 +122,12 @@ uwm.persistency.Persistency.prototype.createDiagramFromPackage = function(oid, s
 uwm.persistency.Persistency.prototype.createControllerFromUseCase = function(oid, successHandler, errorHandler ) {
 }
 
+uwm.persistency.Persistency.prototype.createMapping = function(sourceOid, targetOid, successHandler, errorHandler ) {
+}
+
+uwm.persistency.Persistency.prototype.deleteMapping = function(sourceOid, targetOid, successHandler, errorHandler ) {
+}
+
 uwm.persistency.Persistency.prototype.putChildnodesToActivitySetDiagram = function(oid, successHandler, errorHandler ) {
 }
 

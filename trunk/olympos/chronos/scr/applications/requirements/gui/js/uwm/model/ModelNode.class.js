@@ -298,17 +298,25 @@ uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionI
 	}
 	
 	if (!nmUwmClassName) {
-		uwm.persistency.Persistency.getInstance().associate(parentOid, childOid, false, function(request, data) {
-			self.fillInRelationObject(connection, data);
-			uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self, null, connection);
-		});
-
-		// update parent/child oids
-		if (this.parentOids) {
-			this.parentOids.push(otherModelObject.getOid());
+		if (uwm.Util.getUwmClassNameFromOid(parentOid) == "ChiValue" && 
+				uwm.Util.getUwmClassNameFromOid(childOid) == "ChiValue") {
+			// ChiValue mapping connection
+			uwm.persistency.Persistency.getInstance().createMapping(childOid, parentOid);
 		}
-		if (otherModelObject.childOids) {
-			otherModelObject.childOids.push(this.getOid());
+		else {
+			// normal connection
+			uwm.persistency.Persistency.getInstance().associate(parentOid, childOid, false, function(request, data) {
+				self.fillInRelationObject(connection, data);
+				uwm.event.EventBroker.getInstance().fireEvent("associate", otherModelObject, self, null, connection);
+			});
+	
+			// update parent/child oids
+			if (this.parentOids) {
+				this.parentOids.push(otherModelObject.getOid());
+			}
+			if (otherModelObject.childOids) {
+				otherModelObject.childOids.push(this.getOid());
+			}
 		}
 	} else {
 		var actionSet = new uwm.persistency.ActionSet();
@@ -399,9 +407,17 @@ uwm.model.ModelNode.prototype.disassociate = function(otherModelObject, connecti
 		uwm.model.ModelContainer.getInstance().deleteObject(relationObject);
 	}
 	else {
-		uwm.persistency.Persistency.getInstance().disassociate(parentOid, childOid, function(request, data) {
-			uwm.event.EventBroker.getInstance().fireEvent("disassociate", otherModelObject, self);
-		});
+		if (uwm.Util.getUwmClassNameFromOid(parentOid) == "ChiValue" && 
+				uwm.Util.getUwmClassNameFromOid(childOid) == "ChiValue") {
+			// ChiValue mapping connection
+			uwm.persistency.Persistency.getInstance().deleteMapping(childOid, parentOid);
+		}
+		else {
+			// normal association
+			uwm.persistency.Persistency.getInstance().disassociate(parentOid, childOid, function(request, data) {
+				uwm.event.EventBroker.getInstance().fireEvent("disassociate", otherModelObject, self);
+			});
+		}
 	}
 }
 
