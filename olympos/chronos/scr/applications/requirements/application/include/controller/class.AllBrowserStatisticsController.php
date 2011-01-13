@@ -17,6 +17,7 @@
  */
  require_once(BASE."wcmf/application/controller/class.BatchController.php");
 // PROTECTED REGION ID(application/include/controller/class.AllBrowserStatisticsController.php/Import) ENABLED START
+require_once(BASE."application/include/model/wcmf/class.UserConfig.php");
 require_once(BASE."wcmf/lib/util/class.FileUtil.php");
 require_once ('class.OawUtil.php');
 require_once ('class.UwmUtil.php');
@@ -76,6 +77,21 @@ class AllBrowserStatisticsController extends BatchController
 		// get initial request parameters
 		if ($request->getAction() != 'continue')
 		{
+			// initial call
+			$configEntry = UserConfig::getConfigEntry('last_browser_model');
+
+			// check if a model is requested
+			if (!$request->hasValue('modelOid')) {
+				// no model requested -> use stored user preference
+				$request->setValue('modelOid', $configEntry->getVal());
+				$request->setValue('useCache', true);
+			}
+			else {
+				// update user preference with the requested model
+				$configEntry->setVal($request->getValue('modelOid'));
+				$configEntry->save();
+			}
+
 			$session = &SessionData::getInstance();
 			$session->set($this->PARAM_MODEL_OID, $request->getValue('modelOid'));
 			$session->set($this->PARAM_USE_CACHE, $request->getValue('useCache'));

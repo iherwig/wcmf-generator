@@ -17,6 +17,10 @@
  */
 require_once(BASE."application/include/model/wcmf/class.UserConfigBase.php");
 // PROTECTED REGION ID(application/include/model/wcmf/class.UserConfig.php/Import) ENABLED START
+require_once(BASE."wcmf/lib/persistence/class.PersistenceFacade.php");
+require_once(BASE."wcmf/lib/persistence/class.ObjectQuery.php");
+require_once(BASE."wcmf/lib/security/class.RightsManager.php");
+require_once(BASE."wcmf/lib/security/class.UserManager.php");
 // PROTECTED REGION END
 
 /**
@@ -29,6 +33,40 @@ require_once(BASE."application/include/model/wcmf/class.UserConfigBase.php");
 class UserConfig extends UserConfigBase
 {
 // PROTECTED REGION ID(application/include/model/wcmf/class.UserConfig.php/Body) ENABLED START
+  /**
+   * Retrieve a UserConfig instance with a given key
+   * @param key The key of the config entry to get
+   * @param createIfNotExisting True/False wether to create a new entry if the requested does not exist
+   *    (must be persisted later)
+   * @return A UserConfig instance or null
+   */
+  public static function getConfigEntry($key, $createIfNotExisting=true)
+  {
+  	$configEntry = null;
+  	
+    $persistenceFacade = PersistenceFacade::getInstance();
+    $rightsManager = RightsManager::getInstance();
+    $authUser = $rightsManager->getAuthUser();
+      
+    // load user preferences
+    $query = PersistenceFacade::createObjectQuery('UserConfig');
+    $configTpl = $query->getObjectTemplate('UserConfig');
+    $configTpl->setKey($key);
+    $userTpl = $query->getObjectTemplate(UserManager::getUserClassName());
+    $userTpl->setOID($authUser->getOID());
+    $userTpl->addChild($configTpl);
+    
+    $configList = $query->execute(BUILDDEPTH_SINGLE);
+    if (sizeof($configList) > 0) {
+      $configEntry = $configList[0];
+    }
+    elseif ($createIfNotExisting) {
+      $configEntry = $persistenceFacade->create('UserConfig', BUILDDEPTH_SINGLE);
+      $configEntry->setKey($key);
+      $authUser->addChild($configEntry);
+    }
+    return $configEntry;
+  }
 // PROTECTED REGION END
 }
 ?>
