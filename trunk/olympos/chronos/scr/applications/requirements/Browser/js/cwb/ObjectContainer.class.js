@@ -86,7 +86,9 @@ cwb.ObjectContainer.prototype.loadModel = function(modelOid, useCache, callback)
 			},
 			successHandler : function(data) {
 				longTaskRunner.close();
-				self.modelUmlGenerated(callback);
+				self.currModelOid = data.modelOid;
+				self.selectedModel = data.modelOid;
+				self.modelUmlGenerated(callback, data);
 			},
 			errorHandler : function(data) {
 				cwb.Util.showMessage(cwb.Dict.translate("Error while copying"), cwb.Dict.translate("The process was unsuccessful. Please try again."), cwb.Util.messageType.ERROR);
@@ -95,10 +97,10 @@ cwb.ObjectContainer.prototype.loadModel = function(modelOid, useCache, callback)
 	}).show();
 };
 
-cwb.ObjectContainer.prototype.modelUmlGenerated = function(callback) {
+cwb.ObjectContainer.prototype.modelUmlGenerated = function(callback, data) {
 	this.modelLoaded = true;
 
-	callback('generated');
+	callback('generated', data);
 };
 
 /**
@@ -137,7 +139,7 @@ cwb.ObjectContainer.prototype.loadJitData = function(oid, callback){
 	
 		this.loadJitObject(oid, callback);
 	} else {
-		callback("jit");
+		callback("jit", {});
 	}
 };
 
@@ -205,7 +207,7 @@ cwb.ObjectContainer.prototype.handleLoadedJitObject = function(options, data, oi
 		this.setAreaData(this.objectsForTreemap);
 		this.setWeightColors(this.objectsForTreemap);
 		
-		callback('jit');
+		callback('jit', data);
 		this.jitLoaded = true;
 	}
 };
@@ -358,7 +360,7 @@ cwb.ObjectContainer.prototype.getModels = function(){
 };
 
 /**
- * Gets the oid of the model which was selected in navigation
+ * Sets the oid of the model which was selected in navigation
  * @return The oid of the selected object.
  * @type String
  */

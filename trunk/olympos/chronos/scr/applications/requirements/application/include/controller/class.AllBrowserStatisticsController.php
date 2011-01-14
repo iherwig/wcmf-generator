@@ -37,6 +37,7 @@ require_once ('class.UwmUtil.php');
  * 
  * @param[in] modelOid The OID of the model to generate statistical Data for. 
  * @param[in] useCache True/False wether to use chached data, if existing or not 
+ * @param[out] modelOid The OID of the model whose statistical Data were generated. 
  * 
  * The following configuration settings are defined for this controller:
  *
@@ -81,7 +82,8 @@ class AllBrowserStatisticsController extends BatchController
 			$configEntry = UserConfig::getConfigEntry('last_browser_model');
 
 			// check if a model is requested
-			if (!$request->hasValue('modelOid')) {
+			$modelOid = $request->getValue('modelOid');
+			if (!PersistenceFacade::isValidOid($modelOid)) {
 				// no model requested -> use stored user preference
 				$request->setValue('modelOid', $configEntry->getVal());
 				$request->setValue('useCache', true);
@@ -91,7 +93,7 @@ class AllBrowserStatisticsController extends BatchController
 				$configEntry->setVal($request->getValue('modelOid'));
 				$configEntry->save();
 			}
-
+			
 			$session = &SessionData::getInstance();
 			$session->set($this->PARAM_MODEL_OID, $request->getValue('modelOid'));
 			$session->set($this->PARAM_USE_CACHE, $request->getValue('useCache'));
@@ -120,8 +122,7 @@ class AllBrowserStatisticsController extends BatchController
 		$session = &SessionData::getInstance();
 		$modelOid = $session->get($this->PARAM_MODEL_OID);
 		$useCache = ('true' == $session->get($this->PARAM_USE_CACHE));
-		if ($useCache && $this->isGenerated($modelOid)) {
-
+		if (strlen($modelOid) == 0 || ($useCache && $this->isGenerated($modelOid))) {
 			// reuse data, if already existing
 			if ($number == 0)
 			{
@@ -177,6 +178,10 @@ class AllBrowserStatisticsController extends BatchController
 	function getSummaryText()
 	{
 		$session = &SessionData::getInstance();
+		// we also set the modelOid for the response here
+		$modelOid = $session->get($this->PARAM_MODEL_OID);
+		$this->_response->setValue('modelOid', $modelOid);
+		
 		return $session->get($this->PROBLEM_REPORT);
 	}
 	/**
@@ -340,7 +345,6 @@ class AllBrowserStatisticsController extends BatchController
 		}
 		return $dir;
 	}
-
 	/**
 	 * Check if statistics for a model are generated already
 	 * @param modelOid The oid of the model

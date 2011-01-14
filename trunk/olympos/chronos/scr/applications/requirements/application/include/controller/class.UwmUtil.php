@@ -492,7 +492,7 @@ class UwmUtil {
 			$currNode->loadChildren();
 			$children = $currNode->getChildren();
 
-			Log::error('loaded ' . count($children) . ' children');
+			Log::debug('loaded ' . count($children) . ' children');
 
 
 			//Fix for doubled aggregations
@@ -847,17 +847,17 @@ class UwmUtil {
 
 			$oidParts = PersistenceFacade::decomposeOID($parentOid);
 
-			Log::error("ChiValue decomposed: " . print_r($oidParts, true), __CLASS__);
+			Log::debug("ChiValue decomposed: " . print_r($oidParts, true), __CLASS__);
 
 			$oidParts['type'] = 'ChiNode';
 			$oidParts['id'] = $propertyType;
 
 			$typeOid = PersistenceFacade::composeOID($oidParts);
 
-			Log::error("found ChiValue type: $typeOid", __CLASS__);
+			Log::debug("found ChiValue type: $typeOid", __CLASS__);
 
 			if (PersistenceFacade::isValidOID($typeOid)) {
-				Log::error('found valid oid', __CLASS__);
+				Log::debug('found valid oid', __CLASS__);
 				$result = $typeOid;
 			}
 			
