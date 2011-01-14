@@ -29,7 +29,15 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 			width: 163,
 		    store: new Ext.data.SimpleStore( {
 		        fields: [ "oid", "name" ],
-		        data: []
+		        data: [],
+		    	listeners: {
+		    		'load': function() {
+		    			if (this.data.length > 0) {
+		    				// load the last used model
+		    				self.loadModel(true);
+		    			}
+		    		}
+				}
 		    }),
 		    displayField: "name",
 		    valueField: "oid",
@@ -51,7 +59,7 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 		    text: cwb.Dict.translate('Report'),
 		    type: 'submit',
 		    handler: function() {
-			    self.loadModel();
+			    self.loadModel(false);
 		    }
 		});
 
@@ -84,14 +92,15 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 
 /**
  * Starts loading actions.
+ * @param forceLoad True/False wether to force loading even if no model is selected or not
  */
-cwb.ui.ModelChooser.prototype.loadModel = function() {
+cwb.ui.ModelChooser.prototype.loadModel = function(forceLoad) {
 	var modelOid = this.selectModelBox.getValue();
 	var useCache = this.useCacheCheckbox.getValue();
 
 	var container = cwb.ObjectContainer.getInstance();
 	
-	if (modelOid) {
+	if (modelOid || forceLoad) {
 		cwb.ui.Workbench.getInstance().showMask();
 		cwb.statistics.Overview.getInstance().clear();
 		cwb.ui.DiagramPanel.getInstance().clear();
@@ -99,17 +108,24 @@ cwb.ui.ModelChooser.prototype.loadModel = function() {
 		
 		var self = this;
 		
-		container.loadModel(modelOid, useCache, function(state) {
-			self.handleLoadCallback(state);
+		container.loadModel(modelOid, useCache, function(state, data) {
+			self.handleLoadCallback(state, data);
 		});
 	} else {
 		Ext.Msg.alert(cwb.Dict.translate("Error"), cwb.Dict.translate("Please select a model."));
 	}
 };
 
-cwb.ui.ModelChooser.prototype.handleLoadCallback = function(state) {
+/**
+ * This method is called to signal different states while ObjectContainer loads the model
+ * statistics.
+ * @param state A string identifying the state (e.g. generated, jit)
+ * @param data Optional data returned from a corresponding server call
+ */
+cwb.ui.ModelChooser.prototype.handleLoadCallback = function(state, data) {
 	switch (state) {
 		case 'generated':
+			this.selectModelBox.setValue(data.modelOid);
 			cwb.ui.DiagramPanel.getInstance().showDiagrams();
 			cwb.statistics.Overview.getInstance().loadData();
 			Ext.Msg.updateProgress(0.5, cwb.Dict.translate("Loading diagrams and statistics"));
