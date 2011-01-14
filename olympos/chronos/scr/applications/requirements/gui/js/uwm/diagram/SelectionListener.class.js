@@ -26,6 +26,10 @@ uwm.diagram.SelectionListener = function(diagram) {
 	 * @type uwm.diagram.Diagram
 	 */
 	this.diagram = diagram;
+	/**
+	 * Indicates if any figures are faded in the diagram
+	 */
+	this.hasFadedFigures = false;
 }
 
 /**
@@ -34,6 +38,8 @@ uwm.diagram.SelectionListener = function(diagram) {
  * @param {uwm.graphics.figure.BaseFigure} figure The graphical figure the user clicked on.
  */
 uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
+	
+	// show property dialog
 	if (figure) {
 		if (figure instanceof uwm.graphics.figure.BaseFigure || figure instanceof uwm.graphics.figure.ClassFigure) {
 			if (this.diagram.isPropertyDisplay()) {
@@ -51,4 +57,97 @@ uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
 			}
 		}
 	}
+	
+	// show property dialog
+	var doc = this.diagram.getWorkflow().getDocument();
+	if (figure instanceof uwm.graphics.connection.MappingConnection) {
+
+		// fade all figures ...
+		var figures = doc.getFigures();
+		for (var i=0, count=figures.getSize(); i<count; i++) {
+			this.fadeFigure(figures.get(i));
+		}
+		var lines = doc.getLines();
+		for (var i=0, count=lines.getSize(); i<count; i++) {
+			this.fadeFigure(lines.get(i));
+		}
+		// ... except for the mapping connection and its attributes
+		this.unfadeFigure(figure);
+		this.unfadeFigure(figure.sourceAnchor.owner.parentNode);
+		this.unfadeFigure(figure.targetAnchor.owner.parentNode);
+		
+		this.hasFadedFigures = true;
+	}
+	else {
+		if (this.hasFadedFigures) {
+			// unfade all elements
+			var figures = doc.getFigures();
+			for (var i=0, count=figures.getSize(); i<count; i++) {
+				this.unfadeFigure(figures.get(i));
+			}
+			var lines = doc.getLines();
+			for (var i=0, count=lines.getSize(); i<count; i++) {
+				if (lines.get(i) != figure)
+				this.unfadeFigure(lines.get(i));
+			}
+
+			this.hasFadedFigures = false;
+		}
+	}
+}
+
+/**
+ * Fade a figure.
+ * 
+ * @param figure A figure on the diagram.
+ */
+uwm.diagram.SelectionListener.prototype.fadeFigure = function(figure) {
+	if (figure instanceof draw2d.Connection) {
+		this.setConnectionColor(figure, new draw2d.Color(200,200,200));
+		figure.getLabel().setAlpha(0.2);
+	}
+	else {
+		figure.setAlpha(0.2);
+		if (figure instanceof draw2d.CompartmentFigure && figure.childElements) {
+			for (var i=0, count=figure.childElements.length; i<count; i++) {
+				figure.childElements[i].setAlpha(0.2);
+			}
+		}
+	}
+}
+
+/**
+ * Unfade a figure.
+ * 
+ * @param figure A figure on the diagram.
+ */
+uwm.diagram.SelectionListener.prototype.unfadeFigure = function(figure) {
+	if (figure instanceof draw2d.Connection) {
+		this.setConnectionColor(figure, new draw2d.Color(0,0,0));
+		figure.getLabel().setAlpha(1.0);
+	}
+	else {
+		figure.setAlpha(1.0);
+		if (figure instanceof draw2d.CompartmentFigure && figure.childElements) {
+			for (var i=0, count=figure.childElements.length; i<count; i++) {
+				figure.childElements[i].setAlpha(1.0);
+			}
+		}
+	}
+}
+
+/**
+ * Change the color of a connection
+ * @param connection The connection
+ * @param color The color
+ */
+uwm.diagram.SelectionListener.prototype.setConnectionColor = function(connection, color) {
+	connection.setColor(color);
+	if (connection.sourceDecorator) {
+		connection.sourceDecorator.setColor(color);
+	}
+	if (connection.targetDecorator) {
+		connection.targetDecorator.setColor(color);
+	}
+	connection.paint();
 }
