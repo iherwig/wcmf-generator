@@ -29,8 +29,43 @@ uwm.diagram.UwmWorkflow = function(id, diagram) {
 	 * @type uwm.diagram.Diagram
 	 */
 	this.diagram = diagram;
+	/**
+	 * Indicates wether the ctrl key is pressed
+	 * 
+	 * @private
+	 * @type Boolean
+	 */
+	this.isCtrlPressed = false;
+	/**
+	 * The multiple selection
+	 * 
+	 * @private
+	 * @type {uwm.diagram.MultiSelection}
+	 */
+	this.multiSelection = new uwm.diagram.MultiSelection(this);
 	
 	this.buildContextMenu();
+	
+	var self = this;
+	if (this.html) {
+        // add the keyup event listener
+        var keyUp=function(event)
+        {
+          var ctrl = event.ctrlKey;
+          self.onKeyUp(event.keyCode, ctrl);
+        }
+
+	    if (this.html.addEventListener) {
+	        this.html.addEventListener("keyup", keyUp, false);
+	    }
+	    else if (this.html.attachEvent) {
+	        this.html.attachEvent("onkeyup", keyUp);
+	    }
+	    else {
+	        throw "Open-jACOB Draw2D not supported in this browser.";
+	    }
+	}
+	this.focus();
 }
 
 Ext.extend(uwm.diagram.UwmWorkflow, draw2d.Workflow);
@@ -147,6 +182,13 @@ uwm.diagram.UwmWorkflow.prototype.doLayout = function() {
 }
 
 /**
+ * Set the focus on the workspace.
+ */
+uwm.diagram.UwmWorkflow.prototype.focus = function() {
+	this.html.focus();
+}
+
+/**
  * Shows the Diagram in Model Tree.
  * 
  * @see uwm.modeltree.ModelTree
@@ -204,31 +246,81 @@ uwm.diagram.UwmWorkflow.prototype.getDiagram = function() {
 }
 
 uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x, y) {
-	this.oldX = x;
-	this.oldY = y;
+	if (!this.isSelecting()) {
+		this.multiSelection.clearSelection();
+		this.oldX = x;
+		this.oldY = y;
+	}
+	else {
+		// show the selection frame
+		this.multiSelection.showFrame(x, y);
+	}
 	this.html.style.cursor = "pointer";
 	uwm.diagram.UwmWorkflow.superclass.onMouseDown.call(this, x, y);
 }
 
 uwm.diagram.UwmWorkflow.prototype.onMouseUp = function(x, y) {
-	if (this.oldX) {
-		var deltaX = x - this.oldX;
-		var deltaY = y - this.oldY;
-		this.scrollTo(this.getScrollLeft() - deltaX, this.getScrollTop() - deltaY, true);
-		this.oldX = null;
-		this.oldY = null;
+	if (!this.isSelecting()) {
+		if (this.oldX) {
+			var deltaX = x - this.oldX;
+			var deltaY = y - this.oldY;
+			this.scrollTo(this.getScrollLeft() - deltaX, this.getScrollTop() - deltaY, true);
+			this.oldX = null;
+			this.oldY = null;
+		}
+	}
+	else {
+		// hide the selection frame
+		this.multiSelection.hideFrame();
 	}
 	this.html.style.cursor = "default";
 	uwm.diagram.UwmWorkflow.superclass.onMouseUp.call(this, x, y);
 }
 
 uwm.diagram.UwmWorkflow.prototype.onMouseMove = function(x, y) {
-	if (this.oldX) {
-		var deltaX = x - this.oldX;
-		var deltaY = y - this.oldY;
-		this.scrollTo(this.getScrollLeft() - deltaX, this.getScrollTop() - deltaY, true);
+	if (this.dragging) {
+		if (!this.isSelecting()) {
+			if (this.oldX) {
+				var deltaX = x - this.oldX;
+				var deltaY = y - this.oldY;
+				this.scrollTo(this.getScrollLeft() - deltaX, this.getScrollTop() - deltaY, true);
+			}
+		}
+		else {
+			// resize the selection frame
+			this.multiSelection.updateFrame(x, y);
+		}
 	}
 	uwm.diagram.UwmWorkflow.superclass.onMouseMove.call(this, x, y);
+}
+
+uwm.diagram.UwmWorkflow.prototype.onKeyDown=function(keyCode, ctrl) {
+	if (keyCode == 17) {
+		this.isCtrlPressed = true;
+		if (this.dragging) {
+			// show the selection frame
+			this.multiSelection.showFrame(this.oldX, this.oldY);
+		}
+		this.html.style.cursor = "pointer";
+	}
+	uwm.diagram.UwmWorkflow.superclass.onKeyDown.call(this, keyCode, ctrl);
+}
+
+uwm.diagram.UwmWorkflow.prototype.onKeyUp=function(keyCode, ctrl) {
+	if (keyCode == 17) {
+		this.isCtrlPressed = false;
+		if (this.dragging) {
+			// hide the selection frame
+			this.multiSelection.hideFrame();
+		}
+		this.html.style.cursor = "default";
+	}
+	// the parent class does not define this method, so there is not need to call the
+	// parent class method
+}
+
+uwm.diagram.UwmWorkflow.prototype.isSelecting=function() {
+	return this.isCtrlPressed;
 }
 
 /**
@@ -258,6 +350,30 @@ uwm.diagram.UwmWorkflow.prototype.getBestFigure=function(/*:int*/ x, /*:int*/ y,
 			}
 			else if(result.getZOrder() < figure.getZOrder()) {
 				result = figure;
+			}
+		}
+	}
+	return result;
+}
+
+/**
+ * Get all figures contained in a given rectangle
+ * @param {draw2d.Rectangle} rectangle  
+ * @type Array
+ **/
+uwm.diagram.UwmWorkflow.prototype.getContainedFigures=function(/*:draw2d.Rectangle*/ rectangle)
+{
+	var result = [];
+	for(var i=0;i<this.figures.getSize();i++) {
+		var figure = this.figures.get(i);
+		if (figure instanceof draw2d.CompartmentFigure || 
+				figure instanceof uwm.graphics.figure.BaseFigure) {
+			var x0 = figure.getX();
+			var y0 = figure.getY();
+			var x1 = x0+figure.getWidth();
+			var y1 = y0+figure.getHeight();
+			if (rectangle.isOver(x0, y0) || rectangle.isOver(x1, y1)) {
+				result.push(figure);
 			}
 		}
 	}
