@@ -72,6 +72,7 @@ uwm.diagram.DiagramTabPanel.prototype.tabChange = function(tabPanel, tab) {
 	
 	if (tab instanceof uwm.diagram.DiagramTab) {
 		diagram = tab.getDiagram();
+		diagram.getWorkflow().focus();
 	}
 	
 	this.diagramContainer.setCurrentDiagram(diagram);
