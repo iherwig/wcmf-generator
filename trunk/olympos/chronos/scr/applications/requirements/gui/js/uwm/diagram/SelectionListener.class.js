@@ -39,6 +39,22 @@ uwm.diagram.SelectionListener = function(diagram) {
  */
 uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
 	
+	// clear existing multi selection, if one object is selected
+	// and the workflow is not in multi selection mode
+	var workflow = this.diagram.getWorkflow();
+	var multiSelection = workflow.getMultiSelection();
+	if (!workflow.isMultiSelecting()) {
+		multiSelection.clearSelection();
+	}
+	else {
+		// prevent default selection behaviour
+		// and include/exclude the object in/from the multi selection
+		if (workflow.getCurrentSelection()) {
+			workflow.setCurrentSelection(null);
+			multiSelection.toggleSelection(figure);
+		}
+	}
+	
 	// show property dialog
 	if (figure) {
 		if (figure instanceof uwm.graphics.figure.BaseFigure || figure instanceof uwm.graphics.figure.ClassFigure) {
@@ -58,7 +74,7 @@ uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
 		}
 	}
 	
-	// show property dialog
+	// highlight the selected ChiValue mapping if selected
 	var doc = this.diagram.getWorkflow().getDocument();
 	if (figure instanceof uwm.graphics.connection.MappingConnection) {
 
@@ -100,6 +116,7 @@ uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
  * Fade a figure.
  * 
  * @param figure A figure on the diagram.
+ * @private
  */
 uwm.diagram.SelectionListener.prototype.fadeFigure = function(figure) {
 	if (figure instanceof draw2d.Connection) {
@@ -120,6 +137,7 @@ uwm.diagram.SelectionListener.prototype.fadeFigure = function(figure) {
  * Unfade a figure.
  * 
  * @param figure A figure on the diagram.
+ * @private
  */
 uwm.diagram.SelectionListener.prototype.unfadeFigure = function(figure) {
 	if (figure instanceof draw2d.Connection) {
@@ -140,6 +158,7 @@ uwm.diagram.SelectionListener.prototype.unfadeFigure = function(figure) {
  * Change the color of a connection
  * @param connection The connection
  * @param color The color
+ * @private
  */
 uwm.diagram.SelectionListener.prototype.setConnectionColor = function(connection, color) {
 	connection.setColor(color);
