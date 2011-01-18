@@ -33,7 +33,7 @@ uwm.diagram.MultiSelection = function(workflow) {
 	 * @private
 	 * @type {draw2d.Rectangle}
 	 */
-	this.selectionFrame = new draw2d.Rectangle(1, 1);
+	this.selectionFrame = new draw2d.Rectangle(0, 0);
 	this.selectionFrame.setColor(new draw2d.Color(128, 128, 128)); 
 	/**
 	 * The point from which the selection frame is resized
@@ -48,7 +48,8 @@ uwm.diagram.MultiSelection = function(workflow) {
 	 * @private
 	 * @type {Array}
 	 */
-	this.selectedObjects = [];
+	this.selectedFigures = [];
+	this.selectionFigures = [];
 	
 	// add the frame to the workflow
 	this.workflow.addFigure(this.selectionFrame, -10, -10);
@@ -62,11 +63,9 @@ uwm.diagram.MultiSelection = function(workflow) {
  * @param y The y coordinate
  */
 uwm.diagram.MultiSelection.prototype.showFrame = function(x, y) {
-	this.clearSelection();
-
-	this.fixPoint = new draw2d.Point(x-1, y-1);
-	this.selectionFrame.setDimension(1, 1);
-	this.selectionFrame.setPosition(x-1, y-1);
+	this.fixPoint = new draw2d.Point(x, y);
+	this.selectionFrame.setDimension(0, 0);
+	this.selectionFrame.setPosition(x, y);
 }
 
 /**
@@ -76,7 +75,7 @@ uwm.diagram.MultiSelection.prototype.hideFrame = function() {
 	this.setSelectionFromFrame();
 
 	this.fixPoint = null;
-	this.selectionFrame.setDimension(1, 1);
+	this.selectionFrame.setDimension(0, 0);
 	this.selectionFrame.setPosition(-10, -10);
 }
 
@@ -124,25 +123,116 @@ uwm.diagram.MultiSelection.prototype.updateFrame = function(x, y) {
 	this.selectionFrame.setDimension(width, height);
 }
 
+/**
+ * Clear the selection
+ */
 uwm.diagram.MultiSelection.prototype.clearSelection = function() {
 	this.unmarkSelection();
-	this.selectedObjects = [];
+	this.selectedFigures = [];
 }
 
+/**
+ * Check if there are selected figures
+ * @return {Boolean}
+ */
+uwm.diagram.MultiSelection.prototype.hasSelection = function() {
+	return this.selectedFigures.length > 0;
+}
+
+/**
+ * Add/Remove a figure from the selection, if it's not/already included in 
+ * the selection
+ * @param {draw2d.Figure} figure The figure to change the selection state
+ */
+uwm.diagram.MultiSelection.prototype.toggleSelection = function(figure) {
+	var newSelection = [];
+	var wasSelected = false;
+	// copy all figures to a temporary list except for the given one
+	for(var i=0, count=this.selectedFigures.length; i<count; i++) {
+		var curFigure = this.selectedFigures[i];
+		if (curFigure != figure) {
+			newSelection.push(curFigure);
+		}
+		else {
+			wasSelected = true;
+			this.unmarkFigure(figure);
+		}
+	}
+	// the figure is not copied in the temporary list,
+	// so we just have to added in the case it was not contained
+	if (!wasSelected) {
+		newSelection.push(figure);
+		this.markFigure(figure);
+	}
+}
+
+/**
+ * Find the selected figures included in the selection frame
+ * @private
+ */
 uwm.diagram.MultiSelection.prototype.setSelectionFromFrame = function() {
-	this.selectedObjects = this.workflow.getContainedFigures(this.selectionFrame);
-	this.markSelection();
-	console.log("selected figures: "+this.selectedObjects.length);
+	// we assume that the user only attempts to select figures, if the frame size
+	// is bigger than the minimal size. 7 seems to be the minimal width/height 
+	// that is assigned to a rectangle
+	if (this.selectionFrame.getWidth() > 7 || this.selectionFrame.getHeight() > 7) {
+		this.selectedFigures = this.workflow.getContainedFigures(this.selectionFrame);
+		this.markSelection();
+	}
 }
 
+/**
+ * Mark the selected figures
+ * @private
+ */
 uwm.diagram.MultiSelection.prototype.markSelection = function() {
-	for(var i=0, count=this.selectedObjects.length; i<count; i++) {
-		this.selectedObjects[i].setAlpha(0.5);
+	this.unmarkSelection();
+	for(var i=0, count=this.selectedFigures.length; i<count; i++) {
+		var curFigure = this.selectedFigures[i];
+		this.markFigure(curFigure);
 	}
 }
 
+/**
+ * Unmark the selected figures
+ * @private
+ */
 uwm.diagram.MultiSelection.prototype.unmarkSelection = function() {
-	for(var i=0, count=this.selectedObjects.length; i<count; i++) {
-		this.selectedObjects[i].setAlpha(1);
+	// we don't use unmarkFigure here, because it would be slower than
+	// just removing all selectionFigures
+	for (var i=0, count=this.selectionFigures.length; i<count; i++) {
+		this.workflow.removeFigure(this.selectionFigures[i]);
+		delete this.selectionFigures[i];
 	}
+	this.selectionFigures = [];
+}
+
+/**
+ * Add a SelectionFigure to a given figure
+ * @param figure The figure to mark
+ * @private
+ */
+uwm.diagram.MultiSelection.prototype.markFigure = function(figure) {
+	var selectionFigure = new uwm.graphics.figure.SelectionFigure(figure);
+	this.workflow.addFigure(selectionFigure, figure.getX(), figure.getY());
+	this.selectionFigures.push(selectionFigure);
+}
+
+/**
+ * Remove the SelectionFigure from a given figure
+ * @param figure The figure to unmark
+ * @private
+ */
+uwm.diagram.MultiSelection.prototype.unmarkFigure = function(figure) {
+	var newSelectionFigures = [];
+	for (var i=0, count=this.selectionFigures.length; i<count; i++) {
+		var curSelectionFigure = this.selectionFigures[i];
+		if (curSelectionFigure.getFigure() == figure) {
+			this.workflow.removeFigure(curSelectionFigure);
+			delete curSelectionFigure;
+		}
+		else {
+			newSelectionFigures.push(curSelectionFigure);
+		}
+	}
+	this.selectionFigures = newSelectionFigures;
 }

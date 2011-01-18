@@ -232,7 +232,6 @@ uwm.diagram.UwmWorkflow.prototype.exportDiagram = function() {
  *            yPos
  */
 uwm.diagram.UwmWorkflow.prototype.showMenu = function(menu, xPos, yPos) {
-	
 }
 
 /**
@@ -245,8 +244,24 @@ uwm.diagram.UwmWorkflow.prototype.getDiagram = function() {
 	return this.diagram;
 }
 
+/**
+ * Determine if the workflow is in multi selection mode
+ * @return {Boolean}
+ */
+uwm.diagram.UwmWorkflow.prototype.isMultiSelecting=function() {
+	return this.isCtrlPressed;
+}
+
+/**
+ * Get the multi selection object.
+ * @return {uwm.diagram.MultiSelection}
+ */
+uwm.diagram.UwmWorkflow.prototype.getMultiSelection = function() {
+	return this.multiSelection;
+}
+
 uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x, y) {
-	if (!this.isSelecting()) {
+	if (!this.isMultiSelecting()) {
 		this.multiSelection.clearSelection();
 		this.oldX = x;
 		this.oldY = y;
@@ -260,7 +275,7 @@ uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x, y) {
 }
 
 uwm.diagram.UwmWorkflow.prototype.onMouseUp = function(x, y) {
-	if (!this.isSelecting()) {
+	if (!this.isMultiSelecting()) {
 		if (this.oldX) {
 			var deltaX = x - this.oldX;
 			var deltaY = y - this.oldY;
@@ -279,7 +294,7 @@ uwm.diagram.UwmWorkflow.prototype.onMouseUp = function(x, y) {
 
 uwm.diagram.UwmWorkflow.prototype.onMouseMove = function(x, y) {
 	if (this.dragging) {
-		if (!this.isSelecting()) {
+		if (!this.isMultiSelecting()) {
 			if (this.oldX) {
 				var deltaX = x - this.oldX;
 				var deltaY = y - this.oldY;
@@ -317,10 +332,6 @@ uwm.diagram.UwmWorkflow.prototype.onKeyUp=function(keyCode, ctrl) {
 	}
 	// the parent class does not define this method, so there is not need to call the
 	// parent class method
-}
-
-uwm.diagram.UwmWorkflow.prototype.isSelecting=function() {
-	return this.isCtrlPressed;
 }
 
 /**
