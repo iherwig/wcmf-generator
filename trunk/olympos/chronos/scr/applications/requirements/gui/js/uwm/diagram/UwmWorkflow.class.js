@@ -43,14 +43,20 @@ uwm.diagram.UwmWorkflow = function(id, diagram) {
 	 * @type {uwm.diagram.MultiSelection}
 	 */
 	this.multiSelection = new uwm.diagram.MultiSelection(this);
+	/**
+	 * The position of the last clicked figure
+	 * 
+	 * @private
+	 * @type {draw2d.Point}
+	 */
+	this.lastClickedFigurePosition = null;
 	
 	this.buildContextMenu();
 	
 	var self = this;
 	if (this.html) {
         // add the keyup event listener
-        var keyUp=function(event)
-        {
+        var keyUp = function(event) {
           var ctrl = event.ctrlKey;
           self.onKeyUp(event.keyCode, ctrl);
         }
@@ -245,6 +251,15 @@ uwm.diagram.UwmWorkflow.prototype.getDiagram = function() {
 }
 
 /**
+ * Called by {uwm.diagram.SelectionListener} when a figure is clicked
+ * @param figure A {draw2d.Figure} instance
+ */
+uwm.diagram.UwmWorkflow.prototype.figureClicked = function(figure) {
+	// store the figure position for later reference
+	this.lastClickedFigurePosition = figure.getPosition();
+}
+
+/**
  * Determine if the workflow is in multi selection mode
  * @return {Boolean}
  */
@@ -260,6 +275,9 @@ uwm.diagram.UwmWorkflow.prototype.getMultiSelection = function() {
 	return this.multiSelection;
 }
 
+/**
+ * OnMouseDown event handler
+ */
 uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x, y) {
 	if (!this.isMultiSelecting()) {
 		this.multiSelection.clearSelection();
@@ -274,6 +292,9 @@ uwm.diagram.UwmWorkflow.prototype.onMouseDown = function(x, y) {
 	uwm.diagram.UwmWorkflow.superclass.onMouseDown.call(this, x, y);
 }
 
+/**
+ * OnMouseUp event handler
+ */
 uwm.diagram.UwmWorkflow.prototype.onMouseUp = function(x, y) {
 	if (!this.isMultiSelecting()) {
 		if (this.oldX) {
@@ -287,11 +308,24 @@ uwm.diagram.UwmWorkflow.prototype.onMouseUp = function(x, y) {
 	else {
 		// hide the selection frame
 		this.multiSelection.hideFrame();
+		// check if a figure was clicked with control clicked and toggle it's selection
+		// NOTE: we don't do this in the SelectionListener, since that only gets the MouseDown event
+		var figure = this.getBestFigure(x, y, null);
+		if (figure instanceof draw2d.CompartmentFigure || figure instanceof uwm.graphics.figure.BaseFigure) {
+			// prevent deselecting the figure after drag'n'drop
+			if (this.lastClickedFigurePosition.getX() == figure.getX() &&
+					this.lastClickedFigurePosition.getY() == figure.getY()) {
+				this.multiSelection.toggleSelection(figure);
+			}
+		}
 	}
 	this.html.style.cursor = "default";
 	uwm.diagram.UwmWorkflow.superclass.onMouseUp.call(this, x, y);
 }
 
+/**
+ * OnMouseMove event handler
+ */
 uwm.diagram.UwmWorkflow.prototype.onMouseMove = function(x, y) {
 	if (this.dragging) {
 		if (!this.isMultiSelecting()) {
@@ -309,6 +343,9 @@ uwm.diagram.UwmWorkflow.prototype.onMouseMove = function(x, y) {
 	uwm.diagram.UwmWorkflow.superclass.onMouseMove.call(this, x, y);
 }
 
+/**
+ * OnKeyDown event handler
+ */
 uwm.diagram.UwmWorkflow.prototype.onKeyDown=function(keyCode, ctrl) {
 	if (keyCode == 17) {
 		this.isCtrlPressed = true;
@@ -321,6 +358,9 @@ uwm.diagram.UwmWorkflow.prototype.onKeyDown=function(keyCode, ctrl) {
 	uwm.diagram.UwmWorkflow.superclass.onKeyDown.call(this, keyCode, ctrl);
 }
 
+/**
+ * OnKeyUp event handler
+ */
 uwm.diagram.UwmWorkflow.prototype.onKeyUp=function(keyCode, ctrl) {
 	if (keyCode == 17) {
 		this.isCtrlPressed = false;
@@ -377,8 +417,7 @@ uwm.diagram.UwmWorkflow.prototype.getContainedFigures=function(/*:draw2d.Rectang
 	var result = [];
 	for(var i=0;i<this.figures.getSize();i++) {
 		var figure = this.figures.get(i);
-		if (figure instanceof draw2d.CompartmentFigure || 
-				figure instanceof uwm.graphics.figure.BaseFigure) {
+		if (figure instanceof draw2d.CompartmentFigure || figure instanceof uwm.graphics.figure.BaseFigure) {
 			var x0 = figure.getX();
 			var y0 = figure.getY();
 			var x1 = x0+figure.getWidth();
