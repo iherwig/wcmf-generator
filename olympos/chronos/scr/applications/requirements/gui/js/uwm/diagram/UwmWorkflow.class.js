@@ -256,15 +256,46 @@ uwm.diagram.UwmWorkflow.prototype.getDiagram = function() {
  */
 uwm.diagram.UwmWorkflow.prototype.figureClicked = function(figure) {
 	// store the figure position for later reference
-	this.lastClickedFigurePosition = figure.getPosition();
+	if (figure instanceof draw2d.CompartmentFigure || figure instanceof uwm.graphics.figure.BaseFigure) {
+		this.lastClickedFigurePosition = figure.getPosition();
+	}
 }
 
 /**
  * Determine if the workflow is in multi selection mode
  * @return {Boolean}
  */
-uwm.diagram.UwmWorkflow.prototype.isMultiSelecting=function() {
+uwm.diagram.UwmWorkflow.prototype.isMultiSelecting = function() {
 	return this.isCtrlPressed;
+}
+
+/**
+ * Delete the objects contained in the multi selection from the diagram
+ */
+uwm.diagram.UwmWorkflow.prototype.deleteSelectedObjectsFromDiagram = function() {
+	var figures = this.multiSelection.getSelectedFigures();
+	for (var i=0, count=figures.length; i<count; i++) {
+		var curFigure = figures[i].getFigure();
+		if (curFigure) {
+			curFigure.deleteFromDiagram();
+		}
+	}
+}
+
+/**
+ * Delete the objects contained in the multi selection from the model
+ */
+uwm.diagram.UwmWorkflow.prototype.deleteSelectedObjectsFromModel = function() {
+	var self = this;
+	Ext.MessageBox.confirm('Delete', 'Are you sure you want to delete all selected objects?', function(btn) {
+		if (btn == "yes") {
+			var figures = self.multiSelection.getSelectedFigures();
+			for (var i=0, count=figures.length; i<count; i++) {
+				var curFigure = figures[i].getFigure();
+				uwm.model.ModelContainer.getInstance().deleteObject(curFigure.getModelObject());
+			}
+		}
+	});
 }
 
 /**

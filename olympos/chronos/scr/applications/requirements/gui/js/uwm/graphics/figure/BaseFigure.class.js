@@ -94,6 +94,7 @@ uwm.graphics.figure.BaseFigure.prototype.setWorkflow = function(workflow) {
  */
 uwm.graphics.figure.BaseFigure.prototype.buildContextMenu = function() {
 	var figure = this.getFigure();
+	var self = this;
 	
 	/**
 	 * The context menu of this figure.
@@ -140,6 +141,18 @@ uwm.graphics.figure.BaseFigure.prototype.buildContextMenu = function() {
 			handler: function(item, e) {
 				figure.showHelp(item, e);
 			}
+		}), "-", new Ext.menu.Item({
+			itemId: uwm.graphics.figure.BaseFigure.CONTEXTMENU_DELETE_SELECTED_OBJECTS_FROM_DIAGRAM_ID,
+			text: uwm.Dict.translate('Delete selected objects from diagram'),
+			handler: function(item, e) {
+				self.workflow.deleteSelectedObjectsFromDiagram();
+			}
+		}), new Ext.menu.Item({
+			itemId: uwm.graphics.figure.BaseFigure.CONTEXTMENU_DELETE_SELECTED_OBJECTS_FROM_MODEL_ID,
+			text: uwm.Dict.translate('Delete selected objects from model'),
+			handler: function(item, e) {
+				self.workflow.deleteSelectedObjectsFromModel();
+			}
 		})]
 	});
 }
@@ -152,10 +165,22 @@ uwm.graphics.figure.BaseFigure.prototype.buildContextMenu = function() {
  * @param {int} y Y position where to show the context menu.
  */
 uwm.graphics.figure.BaseFigure.prototype.onContextMenu = function(x, y) {
-	var showInGrid = this.uwmContextMenu.items.get(uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID);
-	
+	// enable/disable showInGrid action 
 	var isGridAvailable = this.figure.gridAvailable();
+	var showInGrid = this.uwmContextMenu.items.get(uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID);
 	showInGrid.setDisabled(!isGridAvailable);
+	
+	// enable/disable multi selection actions
+	var multiSelection = this.workflow.getMultiSelection();
+	var isContainedInMultiSelection = multiSelection.includesFigure(this);
+	var deleteSelectionFromDiagram = this.uwmContextMenu.items.get(uwm.graphics.figure.BaseFigure.CONTEXTMENU_DELETE_SELECTED_OBJECTS_FROM_DIAGRAM_ID);
+	if (deleteSelectionFromDiagram) {
+		deleteSelectionFromDiagram.setDisabled(!isContainedInMultiSelection);
+	}
+	var deleteSelectionFromModel = this.uwmContextMenu.items.get(uwm.graphics.figure.BaseFigure.CONTEXTMENU_DELETE_SELECTED_OBJECTS_FROM_MODEL_ID);
+	if (deleteSelectionFromModel) {
+		deleteSelectionFromModel.setDisabled(!isContainedInMultiSelection);
+	}
 	
 	this.uwmContextMenu.showAt(this.figure.getDiagram().getContextMenuPosition(x, y));
 }
@@ -313,3 +338,5 @@ uwm.graphics.figure.BaseFigure.prototype.onMouseLeave=function() {
 };
 
 uwm.graphics.figure.BaseFigure.CONTEXTMENU_SHOW_IN_GRID_ID = "showInGrid";
+uwm.graphics.figure.BaseFigure.CONTEXTMENU_DELETE_SELECTED_OBJECTS_FROM_DIAGRAM_ID = "deleteSelectedObjectsFromDiagram";
+uwm.graphics.figure.BaseFigure.CONTEXTMENU_DELETE_SELECTED_OBJECTS_FROM_MODEL_ID = "deleteSelectedObjectsFromModel";

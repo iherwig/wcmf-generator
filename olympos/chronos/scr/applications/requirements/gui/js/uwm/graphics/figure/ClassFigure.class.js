@@ -92,6 +92,7 @@ uwm.graphics.figure.ClassFigure.prototype.setWorkflow = function(workflow) {
  */
 uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 	var figure = this.getFigure();
+	var self = this;
 	
 	var items = [];
 	
@@ -157,6 +158,21 @@ uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 			// iconCls: "uwm-help-icon",
 			handler : function(item, e) {
 				figure.showHelp(item, e);
+			}
+	}));
+	items.push("-");
+	items.push(new Ext.menu.Item( {
+			itemId: uwm.graphics.figure.BaseFigure.CONTEXTMENU_DELETE_SELECTED_OBJECTS_FROM_DIAGRAM_ID,
+			text : uwm.Dict.translate('Delete selected objects from diagram'),
+			handler : function(item, e) {
+				self.workflow.deleteSelectedObjectsFromDiagram();
+			}
+	}));
+	items.push(new Ext.menu.Item( {
+			itemId: uwm.graphics.figure.BaseFigure.CONTEXTMENU_DELETE_SELECTED_OBJECTS_FROM_MODEL_ID,
+			text : uwm.Dict.translate('Delete selected objects from model'),
+			handler : function(tiem, e) {
+				self.workflow.deleteSelectedObjectsFromModel();
 			}
 	}));
 	
