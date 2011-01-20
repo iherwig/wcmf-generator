@@ -965,7 +965,7 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 	
 	var actionSet = new uwm.persistency.ActionSet();
 	
-	uwm.model.ModelContainer.getInstance().loadByOid(modelObject.getOid(), actionSet, 1);
+	uwm.model.ModelContainer.getInstance().loadByOid(modelObject.getOid(), actionSet, 2);
 	
 	uwm.model.ModelContainer.getInstance().createFigure(this, modelObject, actionSet, function(newFigureNode) {
 		newFigureNode.init(modelObject, x, y);
