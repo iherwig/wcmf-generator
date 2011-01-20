@@ -31,7 +31,8 @@ uwm.graphics.figure.SelectionFigure = function(figure){
     this.setPosition(figure.getX(), figure.getY());
     this.setDimension(figure.getWidth(), figure.getHeight());
     this.setSelectable(false);
-    this.setZOrder(figure.getZOrder()-1);
+    this.setZOrder(figure.getZOrder()-100);
+    this.figure.attachMoveListener(this);
 }
 
 Ext.extend(uwm.graphics.figure.SelectionFigure, draw2d.VectorFigure);
@@ -62,3 +63,16 @@ uwm.graphics.figure.SelectionFigure.prototype.paint = function() {
     
     this.graphics.paint();
 }
+
+/**
+ * Callback method of the movemoent of a figure
+ * @see draw2d.Figure#attachMoveListener
+ * @param {draw2d.Figure} figure The figure which has been moved
+ **/
+uwm.graphics.figure.SelectionFigure.prototype.onOtherFigureMoved=function(/*:draw2d.Figure*/ figure)
+{
+	this.setPosition(figure.getX(), figure.getY());
+	if (this.graphics!==null) {
+		this.paint();
+	}
+};

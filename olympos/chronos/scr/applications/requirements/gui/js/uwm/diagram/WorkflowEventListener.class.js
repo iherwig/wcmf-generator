@@ -43,6 +43,9 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 		if (stackEvent.isPostChangeEvent()) {
 			var command = stackEvent.getCommand();
 			
+			/*
+			 * Connect command
+			 */
 			if (command instanceof draw2d.CommandConnect) {
 				var source = command.source.getParent().getModelObject();
 				var target = command.target.getParent().getModelObject();
@@ -60,25 +63,54 @@ uwm.diagram.WorkflowEventListener.prototype.stackChanged = function(stackEvent) 
 				
 				newTarget.associate(newSource, connectionInfo, nmUwmClassName, command.connection);
 			
-			} else if (command instanceof draw2d.CommandMove) {
+			}
+			/*
+			 * Move command (multiselection aware)
+			 */
+			else if (command instanceof draw2d.CommandMove) {
 				var figure = command.figure;
-				
-				if (figure instanceof uwm.graphics.figure.BaseFigure || figure instanceof uwm.graphics.figure.ClassFigure) {
-					var modelObject = command.figure.getFigure();
-					
-					modelObject.changeProperties({
-						PositionX: command.newX,
-						PositionY: command.newY
-					});
+				var figuresToMove = [];
+
+				var workflow = this.diagram.getWorkflow();
+				var multiSelection = workflow.getMultiSelection();
+				if (multiSelection.includesFigure(figure)) {
+					var selectedFigures = multiSelection.getSelectedFigures();
+					for (var i=0, count=selectedFigures.length; i<count; i++) {
+						figuresToMove.push(selectedFigures[i]);
+					}
 				}
-			} else if (command instanceof draw2d.CommandResize) {
+				else {
+					figuresToMove.push(figure);
+				}
+				
+				// move all figures
+				for (var i=0, count=figuresToMove.length; i<count; i++) {
+					var curFigure = figuresToMove[i];
+					if (curFigure instanceof uwm.graphics.figure.BaseFigure || curFigure instanceof uwm.graphics.figure.ClassFigure) {
+						var modelObject = curFigure.getFigure();
+						
+						modelObject.changeProperties({
+							PositionX: curFigure.getX(),
+							PositionY: curFigure.getY()
+						});
+					}
+				}
+			}
+			/*
+			 * Resize command
+			 */
+			else if (command instanceof draw2d.CommandResize) {
 				var modelObject = command.figure.getFigure();
 				
 				modelObject.changeProperties({
 					Width: command.newWidth,
 					Height: command.newHeight
 				});
-			} else if (command instanceof draw2d.CommandDelete) {
+			}
+			/*
+			 * Delete command
+			 */
+			else if (command instanceof draw2d.CommandDelete) {
 				var figure = command.figure;
 				
 				if (figure instanceof uwm.graphics.figure.BaseFigure || figure instanceof uwm.graphics.figure.ClassFigure) {

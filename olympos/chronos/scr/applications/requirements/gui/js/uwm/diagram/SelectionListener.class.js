@@ -39,75 +39,79 @@ uwm.diagram.SelectionListener = function(diagram) {
  */
 uwm.diagram.SelectionListener.prototype.onSelectionChanged = function(figure) {
 	
-	// clear existing multi selection, if one object is selected
-	// and the workflow is not in multi selection mode
 	var workflow = this.diagram.getWorkflow();
 	var multiSelection = workflow.getMultiSelection();
 	if (!workflow.isMultiSelecting()) {
+		// clear existing multi selection, if one object is selected
+		// and the workflow is not in multi selection mode
 		multiSelection.clearSelection();
 	}
 	else {
-		// prevent default selection behaviour
-		// and include/exclude the object in/from the multi selection
+		// prevent default selection behaviour in multi selection mode
 		if (workflow.getCurrentSelection()) {
 			workflow.setCurrentSelection(null);
-			multiSelection.toggleSelection(figure);
 		}
 	}
-	
-	// show property dialog
+	// notify workflow
 	if (figure) {
-		if (figure instanceof uwm.graphics.figure.BaseFigure || figure instanceof uwm.graphics.figure.ClassFigure) {
-			if (this.diagram.isPropertyDisplay()) {
-				uwm.property.PropertyContainer.getInstance().showProperty(figure.getFigure().getModelObject());
-			}
-		} else if (figure instanceof uwm.graphics.figure.AbstractClassPart) {
-			if (this.diagram.isPropertyDisplay()) {
-				uwm.property.PropertyContainer.getInstance().showProperty(figure.getModelObject());
-			}
-		} else if (figure instanceof uwm.graphics.connection.BaseConnection) {
-			var relationObject = figure.getRelationObject();
-			
-			if (relationObject instanceof uwm.model.EditableRelation) {
-				uwm.property.PropertyContainer.getInstance().showProperty(relationObject);
-			}
-		}
+		workflow.figureClicked(figure);
 	}
 	
-	// highlight the selected ChiValue mapping if selected
-	var doc = this.diagram.getWorkflow().getDocument();
-	if (figure instanceof uwm.graphics.connection.MappingConnection) {
-
-		// fade all figures ...
-		var figures = doc.getFigures();
-		for (var i=0, count=figures.getSize(); i<count; i++) {
-			this.fadeFigure(figures.get(i));
+	if (!workflow.isMultiSelecting()) {
+		// show property dialog for the selected figure
+		if (figure) {
+			if (figure instanceof uwm.graphics.figure.BaseFigure || figure instanceof uwm.graphics.figure.ClassFigure) {
+				if (this.diagram.isPropertyDisplay()) {
+					uwm.property.PropertyContainer.getInstance().showProperty(figure.getFigure().getModelObject());
+				}
+			} else if (figure instanceof uwm.graphics.figure.AbstractClassPart) {
+				if (this.diagram.isPropertyDisplay()) {
+					uwm.property.PropertyContainer.getInstance().showProperty(figure.getModelObject());
+				}
+			} else if (figure instanceof uwm.graphics.connection.BaseConnection) {
+				var relationObject = figure.getRelationObject();
+				
+				if (relationObject instanceof uwm.model.EditableRelation) {
+					uwm.property.PropertyContainer.getInstance().showProperty(relationObject);
+				}
+			}
 		}
-		var lines = doc.getLines();
-		for (var i=0, count=lines.getSize(); i<count; i++) {
-			this.fadeFigure(lines.get(i));
-		}
-		// ... except for the mapping connection and its attributes
-		this.unfadeFigure(figure);
-		this.unfadeFigure(figure.sourceAnchor.owner.parentNode);
-		this.unfadeFigure(figure.targetAnchor.owner.parentNode);
 		
-		this.hasFadedFigures = true;
-	}
-	else {
-		if (this.hasFadedFigures) {
-			// unfade all elements
+		// highlight the selected ChiValue mapping if selected
+		var doc = this.diagram.getWorkflow().getDocument();
+		if (figure instanceof uwm.graphics.connection.MappingConnection) {
+	
+			// fade all figures ...
 			var figures = doc.getFigures();
 			for (var i=0, count=figures.getSize(); i<count; i++) {
-				this.unfadeFigure(figures.get(i));
+				this.fadeFigure(figures.get(i));
 			}
 			var lines = doc.getLines();
 			for (var i=0, count=lines.getSize(); i<count; i++) {
-				if (lines.get(i) != figure)
-				this.unfadeFigure(lines.get(i));
+				this.fadeFigure(lines.get(i));
 			}
-
-			this.hasFadedFigures = false;
+			// ... except for the mapping connection and its attributes
+			this.unfadeFigure(figure);
+			this.unfadeFigure(figure.sourceAnchor.owner.parentNode);
+			this.unfadeFigure(figure.targetAnchor.owner.parentNode);
+			
+			this.hasFadedFigures = true;
+		}
+		else {
+			if (this.hasFadedFigures) {
+				// unfade all elements
+				var figures = doc.getFigures();
+				for (var i=0, count=figures.getSize(); i<count; i++) {
+					this.unfadeFigure(figures.get(i));
+				}
+				var lines = doc.getLines();
+				for (var i=0, count=lines.getSize(); i<count; i++) {
+					if (lines.get(i) != figure)
+					this.unfadeFigure(lines.get(i));
+				}
+	
+				this.hasFadedFigures = false;
+			}
 		}
 	}
 }
