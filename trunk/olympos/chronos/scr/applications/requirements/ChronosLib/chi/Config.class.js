@@ -53,9 +53,9 @@ chi.Config = function() {
 	/**
 	 * The log level for frontend logging.
 	 * <p>
-	 * All calls to uwm.Log.log that have a log level greater or equal than this
-	 * are passed through. Possible values are uwm.Log.DEBUG, uwm.Log.INFO,
-	 * uwm.Log.WARN, uwm.Log.ERROR
+	 * All calls to chi.Log.log that have a log level greater or equal than this
+	 * are passed through. Possible values are chi.Log.DEBUG, chi.Log.INFO,
+	 * chi.Log.WARN, chi.Log.ERROR
 	 * </p>
 	 * 
 	 * @type Integer
