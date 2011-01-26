@@ -6,7 +6,6 @@
 
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
-«EXTENSION cartridge::ChiCmf::extensions::naming»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 
 «EXTENSION cartridge::Chi::util»
@@ -17,16 +16,16 @@
 
 «DEFINE modelPackage FOR uml::Package»
 	«info("Creating package " + this.name)»
-	«FILE "js/" + this.getFileName()»
+	«FILE "js/" + this.getChiPackageFileName()»
 «HeaderText()»
-Ext.namespace("application.«this.getFullPackageName()»");
+Ext.namespace("«this.getChiFullPackageName()»");
 
 «this.getChiPackageName()» = function() {
 	«this.getChiPackageName()».superclass.constructor.call(this, arguments);
 	
 	this.chiModelElementId = "«this.getChiPackageName()»";
 	this.name = "«this.name»";
-	this.owningPackageId = «IF ((uml::Package) this.owner).getQualifiedName() != ApplicationPackageAbsolute(this.getModel())»"«((uml::Package) this.owner).getChiPackageName()»"«ELSE»chi.model.RootPackage.ROOT_PACKAGE_ID«ENDIF»;
+	this.owningPackageId = «IF (this.getQualifiedName() != ApplicationPackageAbsolute(this.getModel()))»"«((uml::Package) this.owner).getChiPackageName()»"«ELSE»chi.model.RootPackage.ROOT_PACKAGE_ID«ENDIF»;
 	this.startExpanded = true;
 };
 

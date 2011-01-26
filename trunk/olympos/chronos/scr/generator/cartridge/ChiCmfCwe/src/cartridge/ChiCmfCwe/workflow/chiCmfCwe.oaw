@@ -154,7 +154,7 @@
 	</component>
 
 	<component class="net.sourceforge.olympos.oaw.workflow.AntRunner">
-		<Param name="folderName" value="${targetDir}/cwe/js/cwe"/>
+		<Param name="folderName" value="${targetDirCwe}/js/cwe"/>
 		<Param name="fileName" value="Config.js"/>
 		<Param name="url" value="${dionysosURL}"/>
 		<antFile value="${basePath}/cartridge/Chi/workflow/build.xml"/>
@@ -192,6 +192,6 @@
 		<!-- Protected regions configuration -->
 		<prSrcPaths value="${targetDirCwe}"/>	
 		<prDefaultExcludes value="false"/>
-		<prExcludes value=""/>
+		<prExcludes value="*.svn-base"/>
 	</component>
 </workflow>

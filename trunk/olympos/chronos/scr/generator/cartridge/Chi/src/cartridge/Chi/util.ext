@@ -4,6 +4,7 @@ import Chronos;
 extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::util;
+extension common::naming;
 
 extension cartridge::ChronosCommon::naming;
 extension cartridge::ChronosCommon::domain::ChiNode;
@@ -39,12 +40,25 @@ List[uml::Package] getModelPackages(uml::Package this, List[uml::Package] list):
 	list
 ;
 
-String getFileName(uml::Package this):
-	"application/" + this.getFullPackageName().asPath() + "/" + this.name.toFirstUpper() + "_package.class.js"
+/**
+ * Get the full package name for cwe (includes application/ prefix and sanitizing)
+ */
+String getChiFullPackageName(uml::PackageableElement this):
+	("application." + this.getFullPackageName()).replaceAll(" ", "_")
 ;
 
+/**
+ * Get the filename of a cwe package
+ */
+String getChiPackageFileName(uml::Package this):
+	(this.getChiPackageName().asPath() + ".class.js")
+;
+
+/**
+ * Get the fully qualified name of a cwe package
+ */
 String getChiPackageName(uml::Package this):
-	"application." + this.getFullPackageName() + "." + this.name.toFirstUpper() + "_package"
+	(this.getChiFullPackageName() + "." + this.name.toFirstUpper() + "_package").replaceAll(" ", "_")
 ;
 
 String sanitizeJsString(String input):

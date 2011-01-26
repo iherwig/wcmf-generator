@@ -2,10 +2,10 @@
 «IMPORT Chronos»
 
 «EXTENSION common::util»
+«EXTENSION common::naming»
 
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
-«EXTENSION cartridge::ChiCmf::extensions::naming»
 
 «EXTENSION cartridge::Chi::util»
 
@@ -195,13 +195,13 @@
 «ENDDEFINE»
 
 «DEFINE scriptPackage FOR uml::Package»
-		<script type="text/javascript" src="js/«this.getFileName()»">
+		<script type="text/javascript" src="js/«this.getChiPackageFileName()»">
 		</script>
 «ENDDEFINE»
 
 «DEFINE scriptClass FOR Chronos::ChiNode»
-		<script type="text/javascript" src="js/application/«this.getFullPackageName().asPath()»/«this.name»Description.class.js">
+		<script type="text/javascript" src="js/«this.getChiFullPackageName().asPath()»/«this.name»Description.class.js">
 		</script>
-		<script type="text/javascript" src="js/application/«this.getFullPackageName().asPath()»/«this.name».class.js">
+		<script type="text/javascript" src="js/«this.getChiFullPackageName().asPath()»/«this.name».class.js">
 		</script>
 «ENDDEFINE»

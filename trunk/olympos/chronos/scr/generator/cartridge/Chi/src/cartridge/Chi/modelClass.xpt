@@ -9,7 +9,6 @@
 «EXTENSION cartridge::ChronosCommon::domain::ChiValue»
 
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
-«EXTENSION cartridge::ChiCmf::extensions::naming»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 
@@ -21,9 +20,9 @@
 
 «DEFINE modelClass FOR Chronos::ChiNode»
 	«info("Creating class " + this.name)-»
-	«FILE "js/application/" + this.getFullPackageName().asPath() + "/" + this.name + ".class.js"-»
+	«FILE "js/" + this.getChiFullPackageName().asPath() + "/" + this.name + ".class.js"-»
 «HeaderText()-»
-Ext.namespace("application.«this.getFullPackageName()»");
+Ext.namespace("«this.getChiFullPackageName()»");
 
 /**
  * @class «this.name»
@@ -31,15 +30,15 @@ Ext.namespace("application.«this.getFullPackageName()»");
  *
  * @constructor
  */
-application.«this.getFullPackageName()».«this.name» = function(oid, data) {
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+"class.js/Constructor").asProtectedRegionId()»
+«this.getChiFullPackageName()».«this.name» = function(oid, data) {
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"class.js/Constructor").asProtectedRegionId()»
 «ENDPROTECT»
 	var modelDescription = chi.model.ModelDescriptionContainer.getInstance().getDescription('«this.name»');
-	return application.«this.getFullPackageName()».«this.name».superclass.constructor.call(this, modelDescription, oid, data);
+	return «this.getChiFullPackageName()».«this.name».superclass.constructor.call(this, modelDescription, oid, data);
 };
-Ext.extend(application.«this.getFullPackageName()».«this.name», chi.model.ModelRecord);
+Ext.extend(«this.getChiFullPackageName()».«this.name», chi.model.ModelRecord);
 
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+"class.js/Body").asProtectedRegionId()»
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"class.js/Body").asProtectedRegionId()»
 «ENDPROTECT»
 
 /**
@@ -48,8 +47,8 @@ Ext.extend(application.«this.getFullPackageName()».«this.name», chi.model.Mo
  * @return The label of this record.
  * @type String
  */
-application.«this.getFullPackageName()».«this.name».prototype.getLabel = function() {
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+"class.js/getLabel").asProtectedRegionId()»
+«this.getChiFullPackageName()».«this.name».prototype.getLabel = function() {
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"class.js/getLabel").asProtectedRegionId()»
 	var label = this.get("«this.display_value.replaceAll('\\|', '") + " - " + this.get("')»");
 	if (label == undefined || label.length == 0) {
 		label = this.getOid(); 
