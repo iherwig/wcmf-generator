@@ -155,7 +155,7 @@ class ChiValueRDBMapper extends NodeUnifiedRDBMapper
      /* 
       * Value description: Declares, if the attribute is editable in the UI. The backend can always edit atributes
       */
-      array('name' => 'is_editable', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'is_editable', 'db_data_type' => 'VARCHAR(255)', 'default' => '', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'select#fix:true[true]|false[false]', 'display_type' => 'text'),
+      array('name' => 'is_editable', 'app_data_type' => DATATYPE_ATTRIBUTE, 'column_name' => 'is_editable', 'db_data_type' => 'VARCHAR(255)', 'default' => 'false', 'restrictions_match' => '', 'restrictions_not_match' => '', 'restrictions_description' => '', 'is_editable' => true, 'input_type' => 'select#fix:true[true]|false[false]', 'display_type' => 'text'),
      /* 
       * Value description: his reppresent the default value that a property takes automagically.
       */
