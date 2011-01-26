@@ -830,10 +830,13 @@
 		<xsd:attribute name="creator" type="xsd:string"/>
 		<xsd:attribute name="last_editor" type="xsd:string"/>
 		<xsd:attribute name="modified" type="xsd:string"/>
+		<xsd:attribute name="reference_type" type="xsd:string"/>
+		<xsd:attribute name="reference_value" type="xsd:string"/>
 	</xsd:complexType>
 	<xsd:complexType name="ChiValue">
 		<xsd:sequence>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
