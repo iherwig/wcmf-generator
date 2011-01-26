@@ -4,17 +4,26 @@
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='3'/>
 	<property name='basePath' value='src'/>
-	<property file="${basePath}/cartridge/ChiCmfCwe/workflow/chiCmfCwe-headless.properties"/>
-
 	<property name='propertyFile' value='${basePath}/cartridge/ChiCmfCwe/workflow/chiCmfCwe.properties'/>
+	<!-- allow to insert generated properties before ... -->
+	<property file="${propertyFile}"/>
+	<!-- default property file -->
+	<property file="${basePath}/cartridge/ChiCmfCwe/workflow/chiCmfCwe-headless.properties"/>
+	<!-- ... and after the default property file -->
 	<property file="${propertyFile}"/>
 	
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
 	
-	<!-- Metamodel-Definition -->
+	<!-- load metamodels -->
+	<bean id="EmfMM" class="oaw.type.emf.EmfMetaModel">
+		<metaModelPackage value="org.eclipse.emf.ecore.EcorePackage"/>
+	</bean>
 	<bean id="UmlMM" class="oaw.uml2.UML2MetaModel"/>
 	<bean id="${profilename}MM" class="oaw.uml2.profile.ProfileMetaModel">
 		<profile value="${profileUri}"/>
+	</bean>
+	<bean id="ouranos" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${ouranosProfileUri}"/>
 	</bean>
 
 	<!-- read model XML -->
@@ -27,10 +36,14 @@
 		</metaModel>
 	</component>
 
-	<!-- read profile as model -->
+	<!-- read profiles as models -->
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="${profileUri}" />
 		<outputSlot value="chronosProfileModel" />
+	</component>
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${ouranosProfileUri}" />
+		<outputSlot value="ouranosProfileModel" />
 	</component>
 
 	<!-- transform XML to UML -->
@@ -38,7 +51,8 @@
 		<metaModel idRef="cwmMM" />
 		<metaModel idRef="UmlMM" />
 		<metaModel idRef="${profilename}MM" />
-		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfileModel)" />
+		<metaModel idRef="ouranos" />
+		<invoke value="cartridge/UmlConnector/cwm2uml::createUmlModel('uml-generated', uwmmodel, chronosProfileModel, ouranosProfileModel)" />
 		<outputSlot value="model" />
 		<globalVarDef name="basePath" value="'${basePath}'" />
 	</component>
@@ -71,6 +85,7 @@
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
 		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
 		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+		<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
 
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
@@ -139,8 +154,15 @@
 		<targetPath value="${targetDirCwe}/.."/>
 	</component>
 
-	<!-- Expand the model into the CWE templates -->
-	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="true">
+	<component class="net.sourceforge.olympos.oaw.workflow.AntRunner">
+		<Param name="folderName" value="${targetDirCwe}/js/cwe"/>
+		<Param name="fileName" value="Config.js"/>
+		<Param name="url" value="${dionysosURL}"/>
+		<antFile value="${basePath}/cartridge/Chi/workflow/build.xml"/>
+	</component>
+
+	<!-- Expand the model into the Cwe templates -->
+	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="false">
 		<fileEncoding value="utf-8"/>
 		
 		<!-- Global variables used by the generator -->
@@ -155,11 +177,16 @@
 		<globalVarDef name="HeaderText" value="${headerText}"/>
 		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
 
+		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
 		
 		<expand value="${expandCwe} FOR transformedModel"/>
 		
+		<beautifier class="net.sourceforge.olympos.oaw.workflow.BlankLineRemover">
+			<acceptedBlankLines value="1" />
+		</beautifier>
+
 		<outlet path="${targetDirCwe}">
 		</outlet>
 		

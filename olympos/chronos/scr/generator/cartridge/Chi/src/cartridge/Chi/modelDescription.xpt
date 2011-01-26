@@ -8,9 +8,9 @@
 
 «EXTENSION cartridge::ChronosCommon::domain::ChiNode»
 «EXTENSION cartridge::ChronosCommon::domain::ChiValue»
+«EXTENSION cartridge::ChronosCommon::naming»
 
 «EXTENSION cartridge::ChiCmf::extensions::umlutils»
-«EXTENSION cartridge::ChiCmf::extensions::naming»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 «EXTENSION cartridge::ChiCmf::extensions::globals»
 
@@ -22,12 +22,12 @@
 
 «DEFINE modelDescription FOR Chronos::ChiNode»
 	«info("Creating description " + this.name)-»
-	«FILE "js/application/" + this.getFullPackageName().asPath() + "/" + this.name + "Description.class.js"-»
+	«FILE "js/" + this.getChiFullPackageName().asPath() + "/" + this.name + "Description.class.js"-»
 «HeaderText()-»
-Ext.namespace("application.«this.getFullPackageName()»");
+Ext.namespace("«this.getChiFullPackageName()»");
 
-application.«this.getFullPackageName()».«this.name»Description = function() {
-	application.«this.getFullPackageName()».«this.name»Description.superclass.constructor.call(this, arguments);
+«this.getChiFullPackageName()».«this.name»Description = function() {
+	«this.getChiFullPackageName()».«this.name»Description.superclass.constructor.call(this, arguments);
 	
 	this.chiModelElementId = "«this.name»";
 	this.name = "«this.name»";
@@ -39,7 +39,7 @@ application.«this.getFullPackageName()».«this.name»Description = function() 
 	«EXPAND relations FOR this»
 };
 
-Ext.extend(application.«this.getFullPackageName()».«this.name»Description, chi.model.ModelDescription);
+Ext.extend(«this.getChiFullPackageName()».«this.name»Description, chi.model.ModelDescription);
 
 «EXPAND getGridColumns FOR this»
 
@@ -49,7 +49,7 @@ Ext.extend(application.«this.getFullPackageName()».«this.name»Description, c
 
 «EXPAND createInstance FOR this»
 
-chi.model.ModelDescriptionContainer.getInstance().registerDescription(new application.«this.getFullPackageName()».«this.name»Description());
+chi.model.ModelDescriptionContainer.getInstance().registerDescription(new «this.getChiFullPackageName()».«this.name»Description());
 	«ENDFILE»
 «ENDDEFINE»
 
@@ -109,8 +109,8 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new applic
 «ENDDEFINE»
 
 «DEFINE getGridColumns FOR Chronos::ChiNode»
-application.«this.getFullPackageName()».«this.name»Description.prototype.getGridColumns = function() {
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getGridColumns").asProtectedRegionId()»
+«this.getChiFullPackageName()».«this.name»Description.prototype.getGridColumns = function() {
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"Description.js/getGridColumns").asProtectedRegionId()»
 	return [
 	«IF this.getChiAttributes().size > 0»
 		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
@@ -130,8 +130,8 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 «ENDDEFINE»
 
 «DEFINE getLabelColumns FOR Chronos::ChiNode»
-application.«this.getFullPackageName()».«this.name»Description.prototype.getLabelColumns = function() {
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getLabelColumns").asProtectedRegionId()»
+«this.getChiFullPackageName()».«this.name»Description.prototype.getLabelColumns = function() {
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"Description.js/getLabelColumns").asProtectedRegionId()»
 	return [
 	«IF this.getChiAttributes().size > 0»
 		«FOREACH this.getChiAttributes().select(e|e.isDisplayValue(this)) AS currValue SEPARATOR ", "»
@@ -187,8 +187,8 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
 «ENDDEFINE»
 
 «DEFINE getEditorItems FOR Chronos::ChiNode»
-application.«this.getFullPackageName()».«this.name»Description.prototype.getEditorItems = function() {
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+"Description.js/getEditorItems").asProtectedRegionId()»
+«this.getChiFullPackageName()».«this.name»Description.prototype.getEditorItems = function() {
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"Description.js/getEditorItems").asProtectedRegionId()»
 	return [
 	«IF this.getChiAttributes().size > 0»
 		new cwe.editor.control.PropertiesFieldSet({
@@ -271,7 +271,7 @@ application.«this.getFullPackageName()».«this.name»Description.prototype.get
  * @return The instance of the Model Class.
  * @type {chi.model.ModelRecord}
  */
-application.«this.getFullPackageName()».«this.name»Description.prototype.createInstance = function(oid, data) {
-	return new application.«this.getFullPackageName()».«this.name»(oid, data);
+«this.getChiFullPackageName()».«this.name»Description.prototype.createInstance = function(oid, data) {
+	return new application.«this.getChiFullPackageName()».«this.name»(oid, data);
 };
 «ENDDEFINE»
