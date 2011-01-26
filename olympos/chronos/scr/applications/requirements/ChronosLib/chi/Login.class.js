@@ -25,7 +25,7 @@ chi.Login = function(config) {
 	var appConfig = chi.Config.getInstance();
 
 	this.loginBtn = new Ext.Button({
-		text: uwm.Dict.translate('Login'),
+		text: chi.Dict.translate('Login'),
 		type: 'submit',
 		handler: function(btn){
 				self.loginBtn.disable();
