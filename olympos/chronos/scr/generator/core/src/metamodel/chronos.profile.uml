@@ -1266,6 +1266,10 @@ Delete  (Destroy)</body>
     <ownedAttribute xmi:id="_i_FSws-nEd6fypAGO026Fw" name="base_Property" association="8bf1537a-cfa7-11de-9e87-d74203c08737">
       <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
     </ownedAttribute>
+    <ownedAttribute xmi:id="_vSAIcCk6EeCSJrdTVcR-Cw" name="chiValueRef" visibility="private" type="{2C925856-F61D-4e5d-BC20-75ECC7E20DAF}" association="_vR9sMCk6EeCSJrdTVcR-Cw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vSCksCk6EeCSJrdTVcR-Cw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vSBWkCk6EeCSJrdTVcR-Cw" value="1"/>
+    </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Stereotype" xmi:id="{99861427-93A7-48d5-AED2-44B16BE235D9}" name="ChiSystem">
     <ownedComment xmi:id="_ix-Dwc-nEd6fypAGO026Fw">
@@ -1490,6 +1494,12 @@ Delete  (Destroy)</body>
     <ownedEnd xmi:id="8bf39d74-cfa7-11de-9e87-d74203c08737" name="" visibility="public" type="{ADD449B8-782B-4039-BA02-BE5CFE19ACBF}" association="{33841C5E-5631-44b3-950C-78032091DCB5}">
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_i_OctM-nEd6fypAGO026Fw" value="1"/>
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_i_Ocs8-nEd6fypAGO026Fw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_vR9sMCk6EeCSJrdTVcR-Cw" name="has" memberEnd="_vSAIcCk6EeCSJrdTVcR-Cw _vSDy0Ck6EeCSJrdTVcR-Cw">
+    <ownedEnd xmi:id="_vSDy0Ck6EeCSJrdTVcR-Cw" name="chiValue" visibility="private" type="{B6022402-0B86-47c7-BE5A-375652A97BE5}" association="_vR9sMCk6EeCSJrdTVcR-Cw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_vSEZ4Sk6EeCSJrdTVcR-Cw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vSEZ4Ck6EeCSJrdTVcR-Cw" value="1"/>
     </ownedEnd>
   </packagedElement>
 </uml:Profile>
