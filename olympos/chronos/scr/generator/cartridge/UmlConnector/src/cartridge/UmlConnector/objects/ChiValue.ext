@@ -72,7 +72,7 @@ cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 		un.setId(c.getId()) ->
 		
 		c.^default != null ? un.setDefault((String) c.^default) : Void ->
-		un.setPropertyType(c.type.getId()) ->
+		c.type != null ? un.setPropertyType(c.type.getId()) : Void ->
 		un.setAppDataType((String) c.getTaggedValue("Chronos::ChiValue", "app_data_type")) ->
 		un.setDbDataType((String) c.getTaggedValue("Chronos::ChiValue", "db_data_type")) ->
 		un.setIsEditable(c.getTaggedValue("Chronos::ChiValue", "is_editable") == Chronos::boolean::^true) ->

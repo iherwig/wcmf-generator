@@ -27,6 +27,9 @@
 		<metaModel id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
 			<profile value="${basePath}/metamodel/chronos.profile.uml"/>
 		</metaModel>
+		<metaModel id="ouranos" class="oaw.uml2.profile.ProfileMetaModel">
+			<profile value="${basePath}/metamodel/ouranos.profile.uml"/>
+		</metaModel>
 		<metaModel idRef="cwm" /> 
 		<invoke value="${basePath}/cartridge/UmlConnector/uml2cwm::applyStereotypes(umlModel)" />
 		<globalVarDef name="basePath" value="'${basePath}'" />
@@ -36,6 +39,9 @@
 		<metaModel id="uml2" class="oaw.uml2.UML2MetaModel" />
 		<metaModel id="chronos" class="oaw.uml2.profile.ProfileMetaModel">
 			<profile value="${basePath}/metamodel/chronos.profile.uml"/>
+		</metaModel>
+		<metaModel id="ouranos" class="oaw.uml2.profile.ProfileMetaModel">
+			<profile value="${basePath}/metamodel/ouranos.profile.uml"/>
 		</metaModel>
 		<metaModel idRef="cwm" /> 
 		<invoke value="${basePath}/cartridge/UmlConnector/uml2cwm::createCwmModel('Imported Model', umlModel)" />
