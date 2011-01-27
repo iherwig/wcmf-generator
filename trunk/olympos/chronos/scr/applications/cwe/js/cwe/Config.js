@@ -30,7 +30,7 @@ cwe.Config.persistencyClass = "chi.persistency.DionysosJson";
  *
  * @type String
  */
-cwe.Config.appTitle = "Chronos Web Editor";
+cwe.Config.appTitle = "@appTitle";
 
 /**
  * Debug mode switch.
