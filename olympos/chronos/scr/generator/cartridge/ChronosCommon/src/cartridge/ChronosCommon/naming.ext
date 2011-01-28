@@ -85,7 +85,7 @@ String asBaseJSClassFile(String name): name+".class.js";
 String asJSClassFile(String name): name+"Class.class.js";
 
 String getExtJsInputType(String str):
-	str.contains("fckeditor") ?
+	str.startsWith("fckeditor") || str.startsWith("RichText") ?
 		"HtmlEditor"
 	:
 		switch (str) {

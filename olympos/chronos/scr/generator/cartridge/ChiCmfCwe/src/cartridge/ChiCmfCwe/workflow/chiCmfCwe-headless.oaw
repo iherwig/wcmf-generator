@@ -112,6 +112,14 @@
 		</component>
 	</if>
 
+	<!-- Write out transformed model for manual cross-check -->
+	<!--
+	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
+		<inputSlot value="transformedModel" />
+		<outPath value="${transformedModelUmlFile}" />
+	</component>
+	-->
+
 	<!-- Install the wCMF framework -->
 	<component class="com.wemove.wcmf.generator.workflow.InstallComponent">
 		<frameworkFile value="${frameworkFile}"/>
@@ -158,6 +166,7 @@
 		<Param name="folderName" value="${targetDirCwe}/js/cwe"/>
 		<Param name="fileName" value="Config.js"/>
 		<Param name="url" value="${dionysosURL}"/>
+		<Param name="title" value="${projectname}"/>
 		<antFile value="${basePath}/cartridge/Chi/workflow/build.xml"/>
 	</component>
 
@@ -167,7 +176,7 @@
 		
 		<!-- Global variables used by the generator -->
 		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
-		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
+		<globalVarDef name="ModelFile" value="'temporary'"/>
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
 		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>

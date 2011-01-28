@@ -157,6 +157,7 @@
 		<Param name="folderName" value="${targetDirCwe}/js/cwe"/>
 		<Param name="fileName" value="Config.js"/>
 		<Param name="url" value="${dionysosURL}"/>
+		<Param name="title" value="${projectname}"/>
 		<antFile value="${basePath}/cartridge/Chi/workflow/build.xml"/>
 	</component>
 
