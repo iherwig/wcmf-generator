@@ -24,7 +24,7 @@ cwm.OperationClass = function() {
 	this.description = " ";
 	this.helpUrl = "help/index.html#Operation|outline";
 	this.defaultLabel = "New Operation";
-	this.semanticGroup = "domain";
+	this.semanticGroup = "domain_feature";
 	this.labelProperties = {
 		Name : true
 	};
