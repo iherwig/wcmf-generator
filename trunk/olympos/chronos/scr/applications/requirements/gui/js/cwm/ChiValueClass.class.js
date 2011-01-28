@@ -24,7 +24,7 @@ cwm.ChiValueClass = function() {
 	this.description = " ";
 	this.helpUrl = "help/index.html#ChiValue|outline";
 	this.defaultLabel = "New ChiValue";
-	this.semanticGroup = "domain";
+	this.semanticGroup = "domain_feature";
 	this.labelProperties = {
 		Name : true
 	};
