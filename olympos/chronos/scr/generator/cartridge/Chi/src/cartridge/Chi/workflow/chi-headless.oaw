@@ -120,6 +120,7 @@
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
 		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
+		<globalVarDef name="DomainPackage" value="'${domainPackage}'"/>
 		<globalVarDef name="DefaultConfigFile" value="'${configFileDefault}'"/>
 		<globalVarDef name="ProjectName" value="'${projectname}'"/>
 		<globalVarDef name="TargetDirectory" value="'${targetDir}'"/>

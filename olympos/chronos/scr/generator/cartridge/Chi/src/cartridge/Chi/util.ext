@@ -25,7 +25,7 @@ List[Chronos::ChiNode] getModelClasses(uml::Package this):
 ;
 
 List[uml::Package] getModelPackages(uml::Model this):
-	this.allOwnedElements().typeSelect(uml::Package).selectFirst(e|e.getQualifiedName().startsWith(ApplicationPackageAbsolute(this))).getModelPackages({})
+	this.allOwnedElements().typeSelect(uml::Package).selectFirst(e|e.getQualifiedName().startsWith(DomainPackageAbsolute(this))).getModelPackages({})
 ;
 
 List[uml::Package] getModelPackages(Chronos::ChiDiagram this, List[uml::Package] list):
@@ -33,7 +33,7 @@ List[uml::Package] getModelPackages(Chronos::ChiDiagram this, List[uml::Package]
 ;
 
 List[uml::Package] getModelPackages(uml::Package this, List[uml::Package] list):
-	this.getQualifiedName().startsWith(ApplicationPackageAbsolute(this.getModel()))
+	this.getQualifiedName().startsWith(DomainPackageAbsolute(this.getModel()))
 	// only add packages that contain model classes or other packages (this.ownedElement seems to contain 'this' too)
 	&& (this.getModelClasses().size > 0 || this.ownedElement.typeSelect(uml::Package).size > 1)
 	?
