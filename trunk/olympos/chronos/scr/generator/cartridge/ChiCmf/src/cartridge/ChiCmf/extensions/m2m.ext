@@ -132,8 +132,7 @@ Void addChiNodeStereotype(uml::Class this):
 
 Void addStereotype(uml::Property this):
 	info("Adding Stereotype ChiValue to " + this.name) ->
-	this.applyStereotype("Chronos::ChiValue") ->
-	this.setTaggedValue("Chronos::ChiValue", "is_editable", Chronos::boolean::^true)
+	this.applyStereotype("Chronos::ChiValue")
 ;
 
 Void addNavigability(uml::Association this):

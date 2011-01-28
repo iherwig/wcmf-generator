@@ -57,7 +57,7 @@ public class UMLHelper {
 	}
 
 	/**
-	 * Check if an element has the given stereotype. e.g. UMLUtil.hasStereotype(clazz, "Chrnos::ChiNode")
+	 * Check if an element has the given stereotype. e.g. UMLUtil.hasStereotype(clazz, "Chronos::ChiNode")
 	 * @param e The element to check the stereotype for.
 	 * @param stereotypeName The qualified stereotype name. <code>[ProfileName]::[StereotypeName]
 	 * @return boolean

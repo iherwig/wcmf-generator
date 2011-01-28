@@ -16,6 +16,7 @@
 	«ENDFILE»
 «ENDDEFINE»
 
+«REM»Define images for model classes. They must be provided separatly«ENDREM»
 «DEFINE treeIcon16x16 FOR Chronos::ChiNode»
   «IF this.name != "Package"-»
 .«this.name»TreeIcon16x16 {

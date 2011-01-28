@@ -110,8 +110,7 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new «this
 
 «DEFINE getGridColumns FOR Chronos::ChiNode»
 «this.getChiFullPackageName()».«this.name»Description.prototype.getGridColumns = function() {
-«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"Description.js/getGridColumns").asProtectedRegionId()»
-	return [
+	var columns = [
 	«IF this.getChiAttributes().size > 0»
 		«FOREACH this.getChiAttributes() AS currValue SEPARATOR ", "»
 			{
@@ -125,14 +124,15 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new «this
 		«ENDFOREACH»
 	«ENDIF»
 	];
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"Description.js/getGridColumns").asProtectedRegionId()»
 «ENDPROTECT»
+	return columns;
 };
 «ENDDEFINE»
 
 «DEFINE getLabelColumns FOR Chronos::ChiNode»
 «this.getChiFullPackageName()».«this.name»Description.prototype.getLabelColumns = function() {
-«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"Description.js/getLabelColumns").asProtectedRegionId()»
-	return [
+	var columns = [
 	«IF this.getChiAttributes().size > 0»
 		«FOREACH this.getChiAttributes().select(e|e.isDisplayValue(this)) AS currValue SEPARATOR ", "»
 			{
@@ -144,7 +144,9 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new «this
 		«ENDFOREACH»
 	«ENDIF»
 	];
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"Description.js/getLabelColumns").asProtectedRegionId()»
 «ENDPROTECT»
+	return columns;
 };
 «ENDDEFINE»
 
@@ -175,7 +177,8 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new «this
 					«ELSEIF listType == "fix"»
 						data: [
 							«FOREACH listDef.split("\\|") AS currEntry SEPARATOR ", "»
-								["«currEntry»", "«currEntry»"]
+								«REM»We expect the format 'key[value]' in currEntry and split it into key and value«ENDREM»
+								["«currEntry.replaceAll("\\[.*\\]$", "")»", "«currEntry.replaceAll("^.*\\[|\\]$", "")»"]
 							«ENDFOREACH»
 						]
 					«ELSE»
@@ -188,8 +191,7 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new «this
 
 «DEFINE getEditorItems FOR Chronos::ChiNode»
 «this.getChiFullPackageName()».«this.name»Description.prototype.getEditorItems = function() {
-«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"Description.js/getEditorItems").asProtectedRegionId()»
-	return [
+	var editors = [
 	«IF this.getChiAttributes().size > 0»
 		new cwe.editor.control.PropertiesFieldSet({
 			items: [
@@ -221,7 +223,9 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new «this
 		]})
 	«ENDIF»
 	];
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"Description.js/getEditorItems").asProtectedRegionId()»
 «ENDPROTECT»
+	return editors;
 };
 «ENDDEFINE»
 
@@ -272,6 +276,6 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new «this
  * @type {chi.model.ModelRecord}
  */
 «this.getChiFullPackageName()».«this.name»Description.prototype.createInstance = function(oid, data) {
-	return new application.«this.getChiFullPackageName()».«this.name»(oid, data);
+	return new «this.getChiFullPackageName()».«this.name»(oid, data);
 };
 «ENDDEFINE»

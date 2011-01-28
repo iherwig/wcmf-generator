@@ -14,9 +14,9 @@
 	«FILE "index.html"»<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 	<head>
+		<title id="title">«ProjectName()»</title>
 «PROTECT CSTART "<!-- " CEND " -->" ID "index.html/Includes"»
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title id="title">«ProjectName()»</title>
 		<link rel="shortcut icon" href="favicon.ico" /> 
 		<link rel="stylesheet" type="text/css" href="../ChronosLib/ext/resources/css/ext-all.css" />
 		<link rel="stylesheet" type="text/css" href="../ChronosLib/ext/ux/css/RowEditor.css" />
@@ -96,6 +96,8 @@
 		<script type="text/javascript" src="../ChronosLib/chi/editor/control/Checkbox.class.js">
 		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/editor/control/ComboBox.class.js">
+		</script>
+		<script type="text/javascript" src="../ChronosLib/chi/editor/control/ComboBoxBase.class.js">
 		</script>
 		<script type="text/javascript" src="../ChronosLib/chi/editor/control/ComboBoxProxy.class.js">
 		</script>

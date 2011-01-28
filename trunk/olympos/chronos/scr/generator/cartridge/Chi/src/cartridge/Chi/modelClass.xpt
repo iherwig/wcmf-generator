@@ -48,13 +48,13 @@ Ext.extend(«this.getChiFullPackageName()».«this.name», chi.model.ModelRecord
  * @type String
  */
 «this.getChiFullPackageName()».«this.name».prototype.getLabel = function() {
-«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"class.js/getLabel").asProtectedRegionId()»
 	var label = this.get("«this.display_value.replaceAll('\\|', '") + " - " + this.get("')»");
 	if (label == undefined || label.length == 0) {
 		label = this.getOid(); 
 	}
-	return label;
+«PROTECT CSTART "// " CEND "" ID (this.getChiFullPackageName().asPath()+"/"+this.name+"class.js/getLabel").asProtectedRegionId()»
 «ENDPROTECT»
+	return label;
 };
 	«ENDFILE»
 «ENDDEFINE»
