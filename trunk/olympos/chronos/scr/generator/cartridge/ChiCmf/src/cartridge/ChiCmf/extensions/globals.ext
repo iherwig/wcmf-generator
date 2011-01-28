@@ -12,6 +12,7 @@ String ProfileFile() : GLOBALVAR ProfileFile;
 String RootPackage() : GLOBALVAR RootPackage;
 String LibraryPackage() : GLOBALVAR LibraryPackage;
 String ApplicationPackage() : GLOBALVAR ApplicationPackage;
+String DomainPackage() : GLOBALVAR DomainPackage;
 String DefaultConfigFile() : GLOBALVAR DefaultConfigFile;
 String TargetDirectory() : GLOBALVAR TargetDirectory;
 String ProjectName() : GLOBALVAR ProjectName;
@@ -35,6 +36,13 @@ String LibraryPackageAbsolute(uml::Model this):
 String ApplicationPackageAbsolute(uml::Model this):
 	!RootPackage().isNullOrEmpty() ?
 		this.name+"::"+RootPackage()+"::"+ApplicationPackage()
+	:
+		this.name
+;
+
+String DomainPackageAbsolute(uml::Model this):
+	!DomainPackage().isNullOrEmpty() ?
+		this.name+"::"+RootPackage()+"::"+DomainPackage()
 	:
 		this.name
 ;

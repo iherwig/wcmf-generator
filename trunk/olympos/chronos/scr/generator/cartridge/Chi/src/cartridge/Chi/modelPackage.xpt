@@ -25,7 +25,7 @@ Ext.namespace("«this.getChiFullPackageName()»");
 	
 	this.chiModelElementId = "«this.getChiPackageName()»";
 	this.name = "«this.name»";
-	this.owningPackageId = «IF (this.getQualifiedName() != ApplicationPackageAbsolute(this.getModel()))»"«((uml::Package) this.owner).getChiPackageName()»"«ELSE»chi.model.RootPackage.ROOT_PACKAGE_ID«ENDIF»;
+	this.owningPackageId = «IF (this.getQualifiedName() != DomainPackageAbsolute(this.getModel()))»"«((uml::Package) this.owner).getChiPackageName()»"«ELSE»chi.model.RootPackage.ROOT_PACKAGE_ID«ENDIF»;
 	this.startExpanded = true;
 };
 
