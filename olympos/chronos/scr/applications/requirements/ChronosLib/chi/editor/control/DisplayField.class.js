@@ -39,13 +39,3 @@ chi.editor.control.DisplayField.prototype.render = function(container, position)
 		});
 	}
 };
-
-chi.editor.control.DisplayField.prototype.getValue = function(returnValue) {
-	var result = undefined;
-	
-	if (returnValue) {
-		result = chi.editor.control.DisplayField.superclass.getValue.call(this);
-	}
-	
-	return result;
-};

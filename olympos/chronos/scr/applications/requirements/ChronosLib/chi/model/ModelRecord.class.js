@@ -160,7 +160,7 @@ chi.model.ModelRecord.prototype.commit = function(actionSet) {
 			var currValue = changedFields[currField];
 			var currType = this.fields.get(currField).type;
 			
-			if (currValue && currValue.commit instanceof Function) {
+			if (currValue && currValue.commit instanceof Function && currValue.dirty) {
 				foundField = currValue.commit(self, actionSet) || foundField;
 			} else {
 				if (!(currValue instanceof Function)) {

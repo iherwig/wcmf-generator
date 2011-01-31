@@ -212,14 +212,14 @@ chi.persistency.DionysosJson.prototype.convertUpdateFormats = function(attribute
 	for ( var key in attributes) {
 		var val = attributes[key];
 		
-		// replace "
-		attributes[key] = val.replace(/"/g, '\\"');
-
 		if (val instanceof Date) {
 			attributes[key] = val.format("Y-m-d H:i:s");
 		}
+		else {
+			// replace "
+			attributes[key] = val.replace(/"/g, '\\"');
+		}
 	}
-
 	return attributes;
 };
 
