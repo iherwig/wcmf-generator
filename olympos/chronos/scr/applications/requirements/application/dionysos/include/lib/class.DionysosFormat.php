@@ -35,6 +35,13 @@ function gPrintDionysosResult()
     $data = $GLOBALS['gDionysosData'];
     if ($data != null)
     {
+      // set role names to lowercase
+      if (Log::isDebugEnabled('DionysosFormat')) {
+        Log::debug("data before dionysos post processing: ".StringUtil::getDump($data), 'DionysosFormat');
+      }
+      foreach ($data as $key => $value) {
+        $data[$key] = gPostProcessDionysosResult($key, $value);
+      }
       $encoded = JSONUtil::encode($data);
       if (Log::isDebugEnabled('DionysosFormat'))
       {
@@ -44,6 +51,40 @@ function gPrintDionysosResult()
       print($encoded);
     }
   }
+}
+function gPostProcessDionysosResult($key, $item)
+{
+  // change role names to first char lower
+  if (is_array($item)) {
+    if (Log::isDebugEnabled('DionysosFormat')) {
+      Log::error("process array item: ".$key." ".StringUtil::getDump($item), 'DionysosFormat');
+    }
+    foreach ($item as $name => $value) {
+      $value = gPostProcessDionysosResult($name, $value);
+      $item[$name] = $value;
+      if (Log::isDebugEnabled('DionysosFormat')) {
+        Log::debug("check attribute: ".$name." => ".StringUtil::getDump($value), 'DionysosFormat');
+      }
+      // search for relation attributes
+      if (is_array($value) && is_string($name) && (
+           (gIsSerializedNode($value)) // single valued relation
+        || (sizeof($value) > 0 && gIsSerializedNode($value[0])) // multi valued relation
+      ))
+      {
+	    $newRolename = lcfirst($name);
+        if (Log::isDebugEnabled('DionysosFormat')) {
+          Log::debug($name." is relation -> change rolename: ".$newRolename, 'DionysosFormat');
+        }
+	    $item[$newRolename] = $value;
+        unset($item[$name]);
+      }
+    }
+  }
+  return $item;
+}
+function gIsSerializedNode($array)
+{
+  return isset($array['oid']) && isset($array['className']) && !isset($array['action']);
 }
 register_shutdown_function('gPrintDionysosResult');
 
@@ -114,9 +155,13 @@ class DionysosFormat extends HierarchicalFormat
    */
   function isSerializedNode($key, &$value)
   {
-    $syntaxOk = ((is_object($value) || is_array($value)) && isset($value['oid']) && isset($value['attributes']));
+    $tmpValue = $value;
+    if (is_object($tmpValue)) {
+      $tmpValue = (array)$tmpValue;
+    }
+    $syntaxOk = (is_array($tmpValue) && isset($tmpValue['oid']) && isset($tmpValue['attributes']));
     // check for oid variables
-    if ($syntaxOk && preg_match('/^\{.+\}$/', $value['oid'])) {
+    if ($syntaxOk && preg_match('/^\{.+\}$/', $tmpValue['oid'])) {
       return false;
     }
     return $syntaxOk;
@@ -128,7 +173,8 @@ class DionysosFormat extends HierarchicalFormat
   function serializeNode($key, &$value)
   {
     // use DionysosNodeSerializer to serialize
-    return DionysosNodeSerializer::serializeNode($value, false);
+    $serializedNode = DionysosNodeSerializer::serializeNode($value);
+    return $serializedNode;
   }
 
   /**
