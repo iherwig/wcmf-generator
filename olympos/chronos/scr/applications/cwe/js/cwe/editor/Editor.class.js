@@ -168,29 +168,32 @@ cwe.editor.Editor.prototype.propagateEditor = function(items) {
  * @private
  */
 cwe.editor.Editor.prototype.save = function() {
-	if (!this.newObject) {
-		var record = this.getRecord();
-		
-		this.getForm().updateRecord(record);
-		this.setTitle(record.getLabel());
-		record.commit();
-	} else {
-		var record = new chi.model.ModelRecord(this.modelDescription);
-		
-		this.getForm().updateRecord(record);
-		
-		var self = this;
-		
-		var actionSet = new chi.persistency.ActionSet();
-		
-		actionSet.addCreate(this.modelDescription.getId());
-		
-		record.commit(actionSet);
-		
-		actionSet.commit(function(data) {
-			self.loadRecord(record);
-			self.newObject = false;
-		});
+	if (this.getForm().isValid())
+	{
+		if (!this.newObject) {
+			var record = this.getRecord();
+			
+			this.getForm().updateRecord(record);
+			this.setTitle(record.getLabel());
+			record.commit();
+		} else {
+			var record = new chi.model.ModelRecord(this.modelDescription);
+			
+			this.getForm().updateRecord(record);
+			
+			var self = this;
+			
+			var actionSet = new chi.persistency.ActionSet();
+			
+			actionSet.addCreate(this.modelDescription.getId());
+			
+			record.commit(actionSet);
+			
+			actionSet.commit(function(data) {
+				self.loadRecord(record);
+				self.newObject = false;
+			});
+		}
 	}
 };
 
