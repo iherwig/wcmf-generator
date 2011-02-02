@@ -78,8 +78,9 @@ function onError($message, $file='', $line='')
   else if ($numCalled == 3)
   {
     // make sure that no error can happen in this stage
+    $msg = 'See log for details.';
     if ($responseFormat == MSG_FORMAT_JSON)
-      print JSONUtil::encode(array('success' => false, 'errorMsg' => "The remote object '".$key."' is immutable."));
+      print JSONUtil::encode(array('success' => false, 'errorMsg' => $msg));
     else
       Log::fatal($message, 'main');
   }

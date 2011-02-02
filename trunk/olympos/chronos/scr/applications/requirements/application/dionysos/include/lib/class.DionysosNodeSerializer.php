@@ -30,6 +30,8 @@ require_once(BASE."wcmf/lib/model/class.NodeProcessor.php");
  */
 class DionysosNodeSerializer
 {
+  static $_serializedOIDs = array();
+
   /**
    * Deserialize a Node from serialized data. Only values given in data are be set.
    * @param type The type the data belong to
@@ -82,112 +84,84 @@ class DionysosNodeSerializer
   }
   /**
    * Serialize a Node into an array
-   * @param obj A reference to the node to serialize
+   * @param node A reference to the node to serialize
    * @return The node serialized into an associated array
    */
-  function serializeNode(&$obj)
+  function serializeNode(&$node)
   {
-    $result = array();
-    $rightsManager = &RightsManager::getInstance();
-    $serializedOids = array();
+    self::$_serializedOIDs = array();
+    $serializedNode = self::serializeNodeImpl($node);
+    return $serializedNode;
+  }
 
-    $iter = new NodeIterator($obj);
-    while (!$iter->isEnd())
+  /**
+   * Serialize a Node into an array
+   * @param node A reference to the node to serialize
+   * @return The node serialized into an associated array
+   */
+  function serializeNodeImpl(&$node)
+  {
+    $curResult = array();
+    $curResult['className'] = $node->getBaseType();
+    $curResult['oid'] = $node->getBaseOID();
+    $curResult['lastChange'] = strtotime($node->getValue('modified', DATATYPE_ATTRIBUTE));
+
+    $oid = $node->getOID();
+    if (in_array($oid, self::$_serializedOIDs))
     {
-      $curNode = &$iter->getCurrentObject();
-      $curResult = &DionysosNodeSerializer::getArray();
-
-      // add className, oid, isReference, lastChange
-      $curResult['className'] = $curNode->getBaseType();
-      $curResult['oid'] = $curNode->getBaseOID();
+      // the node is serialized already
+      $curResult['isReference'] = true;
+    }
+    else
+    {
+      // the node is not serialized yet
       $curResult['isReference'] = false;
-      $curResult['lastChange'] = strtotime($curNode->getValue('modified', DATATYPE_ATTRIBUTE));
+      self::$_serializedOIDs[] = $node->getOID();
 
+      // serialize attributes
+      $curResult['attributes'] = array();
       // use NodeProcessor to iterate over all Node values
       // and call the global convert function on each
-      $values = &DionysosNodeSerializer::getArray();
-      $processor = new NodeProcessor('serializeAttribute', array(&$values), new DionysosNodeSerializer());
-      $processor->run($curNode, false);
-      $curResult['attributes'] = $values;
-      $serializedOids[] = $curNode->getOID();
+      $processor = new NodeProcessor('serializeAttribute', array(&$curResult['attributes']), new DionysosNodeSerializer());
+      $processor->run($node, false);
 
-      // resolve parentoids as references (they are all loaded and serialized already)
-      $parentOIDs = $curNode->getProperty('parentoids');
-      foreach($parentOIDs as $oid)
+      // add related objects by creating an attribute that is named as the role of the object
+      // multivalued relations will be serialized into an array
+      $lastRole = null;
+      $relatedOIDs = array_merge((array)$node->getProperty('parentoids'), (array)$node->getProperty('childoids'));
+      $relatedObjects = array_merge((array)$node->getChildren(), (array)$node->getParents());
+      foreach($relatedOIDs as $oid)
       {
-        $ref = DionysosNodeSerializer::serializeAsReference($oid);
-        if ($ref != null)
-        {
-          // references to parents are single valued
-          $type = $ref['type'];
-          $nodeRef = array('className' => $ref['baseType'], 'oid' => $ref['baseOID'], 'isReference' => true);
-          $curResult['attributes'][$type] = $nodeRef;
-        }
-      }
+        // get the oid serialized as reference
+        $ref = self::serializeOid($oid, $node->getType());
+        $role = $ref['type'];
 
-      // resolve childoids as references (if they are not loaded)
-      $childOIDs = $curNode->getProperty('childoids');
-      $children = $curNode->getChildren();
-      foreach($childOIDs as $oid)
-      {
-        // add only if no child object with this oid is loaded and will be serialized as full object later
-        $ignoreChild = false;
-        $child = &PersistenceFacade::getInstance()->create(PersistenceFacade::getOIDParameter($oid, 'type'), BUILDDEPTH_SINGLE);
-        if (in_array($oid, $serializedOids) || $child->isManyToManyObject()) {
-          $ignoreChild = true;
-        }
-        else
-        {
-          foreach($children as $child)
-          {
-            if ($child->getOID() == $oid) {
-              $ignoreChild = true;
-              break;
-            }
+        // create the relation attribute on first appearance
+        if ($role != $lastRole) {
+          if ($ref['isMultiValued']) {
+            $curResult['attributes'][$role] = array();
           }
         }
-        if (!$ignoreChild)
-        {
-          $ref = DionysosNodeSerializer::serializeAsReference($oid, $curNode->getType());
-          if ($ref != null)
-          {
-            $type = $ref['type'];
-            $nodeRef = array('className' => $ref['baseType'], 'oid' => $ref['baseOID'], 'isReference' => true);
-            if ($ref['isMultiValued'])
-            {
-              if (!isset($curResult['attributes'][$type])) {
-                $curResult['attributes'][$type] = array();
-              }
-              $curResult['attributes'][$type][] = $nodeRef;
-            }
-            else {
-              $curResult['attributes'][$type] = $nodeRef;
-            }
-          }
-        }
-      }
 
-      // add current result to result
-      $path = split('/', $curNode->getPath());
-      if (sizeof($path) == 1)
-      {
-        $result = &$curResult;
-      }
-      else
-      {
-        $isMultiValued = DionysosNodeSerializer::isMultiValued($path[0], $path[1]);
-        $array = &DionysosNodeSerializer::getPathArray($result, $path, 1);
-        if ($isMultiValued) {
-          $array[] = $curResult;
+        // serialize the node as complete object or as reference
+        $relatedNode = self::getFromNodelist($relatedObjects, $oid);
+		if ($relatedNode && !in_array($oid, self::$_serializedOIDs)) {
+          $data = self::serializeNodeImpl($relatedNode);
+		}
+        else {
+          $data = array('className' => $ref['baseType'], 'oid' => $oid, 'isReference' => true);
+        }
+
+        // add the data to the relation attribute
+        if ($ref['isMultiValued']) {
+          $curResult['attributes'][$role][] = $data;
         }
         else {
-          $array = $curResult;
+          $curResult['attributes'][$role] = $data;
         }
       }
-      $iter->proceed();
     }
-
-    return $result;
+    return $curResult;
   }
   /**
    * Callback function for NodeProcessor (see NodeProcessor).
@@ -203,44 +177,62 @@ class DionysosNodeSerializer
    * @return An associative array with keys 'baseType', 'baseOID', 'type', 'isMultiValued' or null,
    * if the oid is a dummy id
    */
-  function serializeAsReference($oid, $parentType=null)
+  function serializeOid($oid, $parentType=null)
   {
     $oidParts = PersistenceFacade::decomposeOID($oid);
     if (!PersistenceFacade::isDummyId(join('', $oidParts['id'])))
     {
       $type = $oidParts['type'];
       $persistenceFacade = &PersistenceFacade::getInstance();
-      $relativeNode = &$persistenceFacade->create($type, BUILDDEPTH_SINGLE);
-      $baseType = $relativeNode->getBaseType();
+      $node = &$persistenceFacade->create($type, BUILDDEPTH_SINGLE);
+      $baseType = $node->getBaseType();
       $baseOID = PersistenceFacade::composeOID(array('type' => $baseType, 'id' => $oidParts['id']));
 
       $isMultiValued = false;
       if ($parentType) {
         $isMultiValued = DionysosNodeSerializer::isMultiValued($parentType, $type);
       }
-      return array('baseType' => $baseType, 'baseOID' => $baseOID, 'type' => $type, 'isMultiValued' => $isMultiValued);
+      return array('baseType' => $baseType, 'baseOID' => $baseOID, 'type' => $type, 
+        'isMultiValued' => $isMultiValued);
     }
     else {
       return null;
     }
   }
-  function isMultiValued($parentType, $childType)
+  /**
+   * Check if a releation can hold one or more than one objects.
+   * @param parentType The parent type in the relation 
+   * @param childType The child type in the relation 
+   * @return True if the relation can hold more than one objects, false else
+   */
+  function isMultiValued($thisType, $otherType)
   {
     $isMultiValued = false;
     $persistenceFacade = &PersistenceFacade::getInstance();
-    $parentNode = &$persistenceFacade->create($parentType, BUILDDEPTH_SINGLE);
-    if ($parentNode)
+    $node = &$persistenceFacade->create($thisType, BUILDDEPTH_SINGLE);
+    if ($node)
     {
-      $mapper = $parentNode->getMapper();
-      $objectData = $mapper->getObjectDefinition();
+      $mapper = $node->getMapper();
+      $objectDef = $mapper->getObjectDefinition();
       $found = false;
-      foreach ($objectData['_children'] as $childData)
+      // check if otherType is a child of thisType
+      foreach ($objectDef['_children'] as $childDef)
       {
-        if ($childData['type'] == $childType) {
+        if ($childDef['type'] == $otherType) {
           $found = true;
-          if ($childData['maxOccurs'] > 1 || $childData['maxOccurs'] == 'unbounded') {
+          // check multiplicity
+          if ($childDef['maxOccurs'] > 1 || $childDef['maxOccurs'] == 'unbounded') {
             $isMultiValued = true;
           }
+        }
+      }
+      // check if otherType is a parent of thisType
+      foreach ($objectDef['_parents'] as $parentDef)
+      {
+        if ($parentDef['type'] == $otherType) {
+          // parents are single valued
+          $found = true;
+          $isMultiValued = false;
         }
       }
       if (!$found) {
@@ -251,40 +243,19 @@ class DionysosNodeSerializer
     return $isMultiValued;
   }
   /**
-   * Get the array, to which an object with the given path should be added.
-   * @param array A reference to the current result array
-   * @param path An array of path elements, describing the location of the object to add
-   * @param curDepth The depth to start searching for
-   * @return A reference to the array to which the object should be added
+   * Get the node with oid from a list of nodes.
+   * @param nodes An array of nodes
+   * @param oid The oid to look for
+   * @return The node or null, if not found
    */
-  function &getPathArray(&$array, $path, $curDepth)
+  function getFromNodelist($nodes, $oid)
   {
-    $isMultiValued = false;
-    if ($curDepth > 0) {
-      $isMultiValued = DionysosNodeSerializer::isMultiValued($path[$curDepth-1], $path[$curDepth]);
-    }
-
-    // if there is no entry for the current type in the attributes array, create it
-    if (!isset($array['attributes'][$path[$curDepth]])) {
-      $array['attributes'][$path[$curDepth]] = array();
-    }
-    if ($curDepth < sizeof($path)-1) {
-      if ($isMultiValued) {
-        return DionysosNodeSerializer::getPathArray($array['attributes'][$path[$curDepth]][0], $path, ++$curDepth);
-      }
-      else {
-        return DionysosNodeSerializer::getPathArray($array['attributes'][$path[$curDepth]], $path, ++$curDepth);
+    foreach($nodes as $node) {
+      if ($node->getOID() == $oid) {
+        return $node;
       }
     }
-    else {
-      return $array['attributes'][$path[$curDepth]];
-    }
-  }
-  /**
-   */
-  function &getArray()
-  {
-    return array();
+    return null;
   }
 }
 ?>
