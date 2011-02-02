@@ -243,6 +243,15 @@ chi.model.ModelDescriptionContainer.getInstance().registerDescription(new «this
 		name: "«this.name»",
 		dataIndex: "«this.name»",
 		toolTip: "«this.getComment().sanitizeJsString()»"
+		«IF this.restrictions_match.length > 0-»
+		,validator: function(value) {
+			var regex = /«this.restrictions_match-»/;
+	        if (!regex.test(value)) {
+	        	return "«this.restrictions_description-»";
+	        }
+            return true;
+        }
+	 	«ENDIF-»
 	}) 
 	«ENDLET»
 «ENDDEFINE»
