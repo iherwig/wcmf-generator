@@ -106,8 +106,9 @@ chi.Main.prototype.startApplication = function() {
 chi.Main.prototype.startSession = function(sid, lang) {
 	chi.Session.getInstance().init(sid, lang);
 
-	this.login.destroy();
-
+	if (this.login) {
+		this.login.destroy();
+	}
 	this.startWorkbench();
 };
 
