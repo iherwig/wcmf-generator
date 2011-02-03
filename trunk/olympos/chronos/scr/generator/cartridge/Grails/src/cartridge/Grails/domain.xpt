@@ -9,6 +9,7 @@
 «EXTENSION common::naming»
 
 «EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiManyToMany»
 «EXTENSION cartridge::ChiCmf::extensions::util»
 «EXTENSION cartridge::Grails::classtools»
 
