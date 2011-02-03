@@ -46,12 +46,13 @@ uwm.newobjects.Accordion = Ext.extend(Ext.Panel, {
 			
 			if (currClass instanceof uwm.model.ModelClass) {
 				var semanticGroup = currClass.getSemanticGroup();
-				
-				if (!Ext.isArray(semanticGroup)) {
-					this.addSemanticGroup(semanticGroup);
-				} else {
-					for (var j = 0; j < semanticGroup.length; j++) {
-						this.addSemanticGroup(semanticGroup[j]);
+				if (semanticGroup) {
+					if (!Ext.isArray(semanticGroup)) {
+						this.addSemanticGroup(semanticGroup);
+					} else {
+						for (var j = 0; j < semanticGroup.length; j++) {
+							this.addSemanticGroup(semanticGroup[j]);
+						}
 					}
 				}
 			}

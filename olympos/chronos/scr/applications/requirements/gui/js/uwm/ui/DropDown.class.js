@@ -47,13 +47,14 @@ uwm.ui.DropDown = Ext.extend(Ext.Toolbar.SplitButton, {
 			if (currContent instanceof uwm.objectgrid.ObjectGrid) {
 				var uwmClass = modelClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(currContent.getUwmClassName());
 				var semanticGroup = uwmClass.getSemanticGroup();
-				
-				for ( var j = 0; j < groupArray.length; j++) {
-					if (!Ext.isArray(semanticGroup)) {
-						subMenus = this.addSemanticGroup(subMenus, currContent, semanticGroup, groupArray[j]);
-					} else {
-						for ( var k = 0; k < semanticGroup.length; k++) {
-							subMenus = this.addSemanticGroup(subMenus, currContent, semanticGroup[k], groupArray[j]);
+				if (semanticGroup) {
+					for ( var j = 0; j < groupArray.length; j++) {
+						if (!Ext.isArray(semanticGroup)) {
+							subMenus = this.addSemanticGroup(subMenus, currContent, semanticGroup, groupArray[j]);
+						} else {
+							for ( var k = 0; k < semanticGroup.length; k++) {
+								subMenus = this.addSemanticGroup(subMenus, currContent, semanticGroup[k], groupArray[j]);
+							}
 						}
 					}
 				}

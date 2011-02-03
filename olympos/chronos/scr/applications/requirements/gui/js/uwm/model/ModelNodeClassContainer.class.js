@@ -29,12 +29,13 @@ uwm.model.ModelNodeClassContainer.prototype.registerClass = function(
 
 	if (modelNodeClass instanceof uwm.model.ModelClass) {
 		var semanticGroup = modelNodeClass.getSemanticGroup();
-
-		if (!Ext.isArray(semanticGroup)) {
-			this.addSemanticGroup(semanticGroup, modelNodeClass);
-		} else {
-			for(var i = 0; i < semanticGroup.length; i++) {
-				this.addSemanticGroup(semanticGroup[i], modelNodeClass);
+		if (semanticGroup) {
+			if (!Ext.isArray(semanticGroup)) {
+				this.addSemanticGroup(semanticGroup, modelNodeClass);
+			} else {
+				for(var i = 0; i < semanticGroup.length; i++) {
+					this.addSemanticGroup(semanticGroup[i], modelNodeClass);
+				}
 			}
 		}
 	}
