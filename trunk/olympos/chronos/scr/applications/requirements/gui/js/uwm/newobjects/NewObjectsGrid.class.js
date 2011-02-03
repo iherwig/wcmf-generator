@@ -99,12 +99,13 @@ uwm.newobjects.NewObjectsGrid.prototype.getStore = function() {
 		
 		if (currClass instanceof uwm.model.ModelClass) {
 			var semanticGroup = currClass.semanticGroup;
-			
-			if (!Ext.isArray(semanticGroup)) {
-				data = this.addSemanticGroup(data, currClass, semanticGroup);
-			} else {
-				for (var j = 0; j < semanticGroup.length; j++) {
-					data = this.addSemanticGroup(data, currClass, semanticGroup[j]);
+			if (semanticGroup) {
+				if (!Ext.isArray(semanticGroup)) {
+					data = this.addSemanticGroup(data, currClass, semanticGroup);
+				} else {
+					for (var j = 0; j < semanticGroup.length; j++) {
+						data = this.addSemanticGroup(data, currClass, semanticGroup[j]);
+					}
 				}
 			}
 		}
