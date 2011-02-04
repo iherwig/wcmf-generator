@@ -228,12 +228,13 @@ class UcDomainExporterController extends BatchController
 		$this->check('File written to output');
 
 		// cleanup
-		unlink($session->get(self::TEMP_UWM_EXPORT_PATH));
-		unlink($session->get(self::TEMP_PROPERTIES_PATH));
-		unlink("$tmpUmlExportPath/uml-generated.uml");
-		unlink($exportFile);
-		rmdir($session->get(self::TEMP_UML_EXPORT_PATH));
-
+		if (!Log::isDebugEnabled(__CLASS__)) {
+			unlink($session->get(self::TEMP_UWM_EXPORT_PATH));
+			unlink($session->get(self::TEMP_PROPERTIES_PATH));
+			unlink("$tmpUmlExportPath/uml-generated.uml");
+			unlink($exportFile);
+			rmdir($session->get(self::TEMP_UML_EXPORT_PATH));
+		}
 		ExportShutdownHandler::success();
 	}
 // PROTECTED REGION END

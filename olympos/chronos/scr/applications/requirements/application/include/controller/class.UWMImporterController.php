@@ -297,286 +297,285 @@ class UWMImporterController extends Controller
 		'ChiNodeTarget' => 'ChiNodeSource',
 		'NMChiNodeChiMany2ManyChiNodeEnd' => 'NodeManyToManySource',
 		'NodeManyToManySource' => 'NMChiNodeChiMany2ManyChiNodeEnd'
-		);
+	);
 
-		private function associateManyToMany($elementName) {
-			$this->check("manyToMany targetOid: ".$this->dom->getAttribute('targetOid'));
-			$childObj = $this->load($this->dom->getAttribute('targetOid'));
+	private function associateManyToMany($elementName) {
+		$this->check("manyToMany targetOid: ".$this->dom->getAttribute('targetOid'));
+		$childObj = $this->load($this->dom->getAttribute('targetOid'));
 
-			if ($childObj) {
-				$this->check("target: ".$childObj->getOID());
-				$parentObj = array_pop($this->parentObjs);
-
-				if ($parentObj) {
-					$this->check("source: ".$parentObj->getOID());
-
-					// get the source and target roles for the relation
-					$targetRole = $this->dom->getAttribute('targetRole');
-					if (!$targetRole) {
-						$targetRole = $this->dom->getAttribute('targetType');
-					}
-					$sourceRole = $parentObj->getType();
-					if (array_key_exists($targetRole, self::$roleTargetToSourceMapper)) {
-						$sourceRole = self::$roleTargetToSourceMapper[$targetRole];
-					}
-
-					// create templates of the role types and copy the values of
-					// source and target to them (this is necessary in order to
-					// have the correct source and target types)
-					$parentTemplate = $this->persistenceFacade->create($sourceRole, 1);
-					$parentObj->copyValues($parentTemplate);
-					$childTemplate = $this->persistenceFacade->create($targetRole, 1);
-					$childObj->copyValues($childTemplate);
-
-					// create the nm instance
-					$linkType = $this->findAssociationType($parentTemplate, $childTemplate);
-					if (!$linkType) {
-						$this->addErrorMsg("Cannot find linkType: $sourceRole => $targetRole");
-					}
-					$this->check('manyToMany linkType: '.$linkType);
-					$link = $this->persistenceFacade->create($linkType, BUILDTYPE_SINGLE);
-
-					// set the attributes to the nm instance
-					$valueNames = array('Name', 'relationType', 'sourceName', 'sourceMultiplicity', 'sourceNavigability', 'targetName', 'targetMultiplicity', 'targetNavigability', 'action', 'config', 'context');
-					foreach ($valueNames as $currValueName)	{
-						$attrValue = $this->dom->getAttribute($currValueName);
-
-						if ($attrValue) {
-							$link->setValue($currValueName, $this->resolveValue($link, $currValueName, $attrValue));
-						}
-					}
-
-					// establish the source connection
-					$parentTemplate->addChild($link);
-					$link->save();
-
-					// establish the target connection
-					$childTemplate->addChild($link);
-					$link->save();
-
-					$this->check('link oid: '.$link->getOID());
-
-					array_push($this->parentObjs, $parentObj);
-				} else {
-					$this->addErrorMsg('No Parent ManyToMany: '.$this->dom->getAttribute('targetOid'));
-				}
-			}
-		}
-
-		private function associateTreeAndSaveValues($elmentName) {
-			$this->check("newChild id: ".$this->dom->getAttribute('id'));
-
-			$newChild = $this->load($this->dom->getAttribute('id'));
-
-			$this->saveValues($newChild);
-
+		if ($childObj) {
+			$this->check("target: ".$childObj->getOID());
 			$parentObj = array_pop($this->parentObjs);
+
 			if ($parentObj) {
-				$this->check("parent: ".$parentObj->getOID());
-				$parentObj->addChild($newChild);
-				$parentObj->save();
-				$parentObj = $this->persistenceFacade->load($parentObj->getOID(), BUILDTYPE_SINGLE);
+				$this->check("source: ".$parentObj->getOID());
+
+				// get the source and target roles for the relation
+				$targetRole = $this->dom->getAttribute('targetRole');
+				if (!$targetRole) {
+					$targetRole = $this->dom->getAttribute('targetType');
+				}
+				$sourceRole = $parentObj->getType();
+				if (array_key_exists($targetRole, self::$roleTargetToSourceMapper)) {
+					$sourceRole = self::$roleTargetToSourceMapper[$targetRole];
+				}
+
+				// create templates of the role types and copy the values of
+				// source and target to them (this is necessary in order to
+				// have the correct source and target types)
+				$parentTemplate = $this->persistenceFacade->create($sourceRole, 1);
+				$parentObj->copyValues($parentTemplate);
+				$childTemplate = $this->persistenceFacade->create($targetRole, 1);
+				$childObj->copyValues($childTemplate);
+
+				// create the nm instance
+				$linkType = $this->findAssociationType($parentTemplate, $childTemplate);
+				if (!$linkType) {
+					$this->addErrorMsg("Cannot find linkType: $sourceRole => $targetRole");
+				}
+				$this->check('manyToMany linkType: '.$linkType);
+				$link = $this->persistenceFacade->create($linkType, BUILDTYPE_SINGLE);
+
+				// set the attributes to the nm instance
+				$valueNames = array('Name', 'relationType', 'sourceName', 'sourceMultiplicity', 'sourceNavigability', 'targetName', 'targetMultiplicity', 'targetNavigability', 'action', 'config', 'context');
+				foreach ($valueNames as $currValueName)	{
+					$attrValue = $this->dom->getAttribute($currValueName);
+
+					if ($attrValue) {
+						$link->setValue($currValueName, $this->resolveValue($link, $currValueName, $attrValue));
+					}
+				}
+
+				// establish the source connection
+				$parentTemplate->addChild($link);
+				$link->save();
+
+				// establish the target connection
+				$childTemplate->addChild($link);
+				$link->save();
+
+				$this->check('link oid: '.$link->getOID());
 
 				array_push($this->parentObjs, $parentObj);
-
-				$newChild->save();
-				$newChild = $this->persistenceFacade->load($newChild->getOID(), BUILDTYPE_SINGLE);
 			} else {
-				$this->addErrorMsg('No Parent Default: '.$this->dom->getAttribute('id'));
-				;
+				$this->addErrorMsg('No Parent ManyToMany: '.$this->dom->getAttribute('targetOid'));
 			}
-			array_push($this->parentObjs, $newChild);
 		}
+	}
 
-		private function saveValues($newObj) {
-			$newObjDisplayValuesString = $newObj->getProperty('display_value');
-			$newObjDisplayValues = explode('|', $newObjDisplayValuesString);
+	private function associateTreeAndSaveValues($elmentName) {
+		$this->check("newChild id: ".$this->dom->getAttribute('id'));
 
-			$this->dom->moveToFirstAttribute();
-			while ($this->dom->moveToNextAttribute()) {
-				$attrName = $this->dom->name;
+		$newChild = $this->load($this->dom->getAttribute('id'));
 
-				if ($attrName != 'id' && !in_array($attrName, $newObjDisplayValues)) {
-					$value = $this->dom->value;
-					if ($value != null) {
-						$value = utf8_decode(trim($this->dom->value));
+		$this->saveValues($newChild);
 
-						if ($value != '') {
-							$value = $this->resolveValue($newObj, $attrName, $value);
+		$parentObj = array_pop($this->parentObjs);
+		if ($parentObj) {
+			$this->check("parent: ".$parentObj->getOID());
+			$parentObj->addChild($newChild);
+			$parentObj->save();
+			$parentObj = $this->persistenceFacade->load($parentObj->getOID(), BUILDTYPE_SINGLE);
 
-							$newObj->setValue($attrName, $value);
-						}
+			array_push($this->parentObjs, $parentObj);
+
+			$newChild->save();
+			$newChild = $this->persistenceFacade->load($newChild->getOID(), BUILDTYPE_SINGLE);
+		} else {
+			$this->addErrorMsg('No Parent Default: '.$this->dom->getAttribute('id'));
+			;
+		}
+		array_push($this->parentObjs, $newChild);
+	}
+
+	private function saveValues($newObj) {
+		$newObjDisplayValuesString = $newObj->getProperty('display_value');
+		$newObjDisplayValues = explode('|', $newObjDisplayValuesString);
+
+		$this->dom->moveToFirstAttribute();
+		while ($this->dom->moveToNextAttribute()) {
+			$attrName = $this->dom->name;
+
+			if ($attrName != 'id' && !in_array($attrName, $newObjDisplayValues)) {
+				$value = $this->dom->value;
+				if ($value != null) {
+					$value = utf8_decode(trim($this->dom->value));
+
+					if ($value != '') {
+						$value = $this->resolveValue($newObj, $attrName, $value);
+
+						$newObj->setValue($attrName, $value);
 					}
 				}
 			}
-
-			$this->dom->moveToElement();
-
-			$newObj->save();
 		}
 
-		private function resolveValue($newObj, $attrName, $value) {
-			$properties = $newObj->getValueProperties($attrName);
+		$this->dom->moveToElement();
 
-			$inputType = $properties['input_type'];
+		$newObj->save();
+	}
 
-			if (strpos($inputType, 'async') !== false) {
-				list (, $displayTypesString) = explode(':', $inputType);
-				$displayTypes = explode('|', $displayTypesString);
+	private function resolveValue($newObj, $attrName, $value) {
+		$properties = $newObj->getValueProperties($attrName);
 
-				$foundTargetType = false;
-				$fistDisplayType = null;
-				$firstDisplayValues = null;
-				$valueParts = explode(' - ', $value);
-				$computedValue = '';
-				$foundMatchingNode = null;
+		$inputType = $properties['input_type'];
 
-				foreach ($displayTypes as $displayType) {
-					$this->check("Found async: attrName: $attrName value: $value displayType: $displayType");
+		if (strpos($inputType, 'async') !== false) {
+			list (, $displayTypesString) = explode(':', $inputType);
+			$displayTypes = explode('|', $displayTypesString);
 
-					if (!$fistDisplayType) {
-						$firstDisplayType = $displayType;
+			$foundTargetType = false;
+			$fistDisplayType = null;
+			$firstDisplayValues = null;
+			$valueParts = explode(' - ', $value);
+			$computedValue = '';
+			$foundMatchingNode = null;
+
+			foreach ($displayTypes as $displayType) {
+				$this->check("Found async: attrName: $attrName value: $value displayType: $displayType");
+
+				if (!$fistDisplayType) {
+					$firstDisplayType = $displayType;
+				}
+					
+				//Resolve external ids to internal OIDs
+				if ($displayType == 'ChiNode') {
+					$oid = $this->idMap[$value];
+
+					if (PersistenceFacade::isValidOID($oid)) {
+						$foundMatchingNode = $this->persistenceFacade->load($oid);
+						$this->check("Found ChiNode value: $oid");
+							
+						break;
+					}
+				} else {
+					$query = PersistenceFacade::createObjectQuery($displayType);
+						
+					$displayTypeTpl = $query->getObjectTemplate($displayType);
+					$displayValueString = $displayTypeTpl->getProperty('display_value');
+						
+					$displayValues = explode('|', $displayValueString);
+					if (!$firstDisplayValues) {
+						$firstDisplayValues = $displayValues;
 					}
 						
-					//Resolve external ids to internal OIDs
-					if ($displayType == 'ChiNode') {
-						$oid = $this->idMap[$value];
-
-						if (PersistenceFacade::isValidOID($oid)) {
-							$foundMatchingNode = $this->persistenceFacade->load($oid);
-							$this->check("Found ChiNode value: $oid");
+					$computedValue = '';
+					$firstCompute = true;
+						
+					foreach ($displayValues as $index=>$displayValue) {
+						if (trim($valueParts[$index]) != '') {
+							$displayTypeTpl->setValue($displayValue, "= '".mysql_escape_string($valueParts[$index])."'", DATATYPE_ATTRIBUTE);
+							if (!$firstCompute) {
+								$computedValue .= ' - ';
+							} else {
+								$firstCompute = false;
+							}
 								
-							break;
+							$computedValue .= $valueParts[$index];
 						}
-					} else {
-						$query = PersistenceFacade::createObjectQuery($displayType);
-							
-						$displayTypeTpl = $query->getObjectTemplate($displayType);
-						$displayValueString = $displayTypeTpl->getProperty('display_value');
-							
-						$displayValues = explode('|', $displayValueString);
-						if (!$firstDisplayValues) {
-							$firstDisplayValues = $displayValues;
+					}
+						
+					$displayResultList = $query->execute(BUILDDEPTH_SINGLE);
+						
+					if (count($displayResultList) > 0) {
+						if (!$foundMatchingNode) {
+							$foundMatchingNode = $displayResultList[0];
 						}
-							
-						$computedValue = '';
-						$firstCompute = true;
-							
-						foreach ($displayValues as $index=>$displayValue) {
-							if (trim($valueParts[$index]) != '') {
-								$displayTypeTpl->setValue($displayValue, "= '".mysql_escape_string($valueParts[$index])."'", DATATYPE_ATTRIBUTE);
-								if (!$firstCompute) {
-									$computedValue .= ' - ';
-								} else {
-									$firstCompute = false;
-								}
-									
-								$computedValue .= $valueParts[$index];
-							}
-						}
-							
-						$displayResultList = $query->execute(BUILDDEPTH_SINGLE);
-							
-						if (count($displayResultList) > 0) {
-							if (!$foundMatchingNode) {
-								$foundMatchingNode = $displayResultList[0];
-							}
 
-							foreach ($displayResultList as $currResult) {
-								if (in_array($currResult->getOID(), $this->idMap)) {
-									$foundMatchingNode = $currResult;
+						foreach ($displayResultList as $currResult) {
+							if (in_array($currResult->getOID(), $this->idMap)) {
+								$foundMatchingNode = $currResult;
 
-									$foundTargetType = true;
+								$foundTargetType = true;
 
-									break;
-								}
-							}
-
-							if ($foundTargetType) {
 								break;
 							}
 						}
+
+						if ($foundTargetType) {
+							break;
+						}
 					}
 				}
-
-				if ($foundMatchingNode) {
-					$value = $foundMatchingNode->getValue('id');
-
-					$foundTargetType = true;
-				}
-
-				if (!$foundTargetType) {
-					$displayObj = $this->persistenceFacade->create($firstDisplayType);
-
-					foreach ($firstDisplayValues as $index=>$displayValue) {
-						$displayObj->setValue($displayValue, $valueParts[$index]);
-					}
-
-					$displayObj->save();
-
-					$value = $displayObj->getValue('id');
-				}
 			}
 
-			return $value;
+			if ($foundMatchingNode) {
+				$value = $foundMatchingNode->getValue('id');
+
+				$foundTargetType = true;
+			}
+
+			if (!$foundTargetType) {
+				$displayObj = $this->persistenceFacade->create($firstDisplayType);
+
+				foreach ($firstDisplayValues as $index=>$displayValue) {
+					$displayObj->setValue($displayValue, $valueParts[$index]);
+				}
+
+				$displayObj->save();
+
+				$value = $displayObj->getValue('id');
+			}
 		}
 
-		/**
-		 * Search for an child type of parent that establishes the association between a given
-		 * parent and child or vice versa.
-		 * @param parent A template of the parent object (with children attached)
-		 * @param child The child to check
-		 * @return The type
-		 */
-		private function findAssociationType( & $parent, & $child)
+		return $value;
+	}
+
+	/**
+	 * Search for an child type of parent that establishes the association between a given
+	 * parent and child or vice versa.
+	 * @param parent A template of the parent object (with children attached)
+	 * @param child The child to check
+	 * @return The type
+	 */
+	private function findAssociationType( & $parent, & $child)
+	{
+		foreach ($parent->getChildren() as $possibleChild)
 		{
-			foreach ($parent->getChildren() as $possibleChild)
+			if (in_array('manyToMany', $possibleChild->getPropertyNames()))
 			{
-				if (in_array('manyToMany', $possibleChild->getPropertyNames()))
-				{
-					$associationEnds = $possibleChild->getProperty('manyToMany');
-					if (in_array($child->getType(), $associationEnds))
-					return $possibleChild->getType();
-				}
+				$associationEnds = $possibleChild->getProperty('manyToMany');
+				if (in_array($child->getType(), $associationEnds))
+				return $possibleChild->getType();
 			}
-			foreach ($child->getChildren() as $possibleChild)
-			{
-				if (in_array('manyToMany', $possibleChild->getPropertyNames()))
-				{
-					$associationEnds = $possibleChild->getProperty('manyToMany');
-					if (in_array($parent->getType(), $associationEnds))
-					return $possibleChild->getType();
-				}
-			}
-			return null;
 		}
-
-		private function load($xmlId) {
-			$result = null;
-
-			$oid = $this->idMap[$xmlId];
-			if ($oid) {
-				$result = $this->persistenceFacade->load($oid, BUILDTYPE_SINGLE);
-			}
-
-			return $result;
-		}
-
-		private function addErrorMsg($msg) {
-			$this->errorMsg .= "$msg<br />\n";
-			$this->errorOccured = true;
-		}
-
-		public function hasView()
+		foreach ($child->getChildren() as $possibleChild)
 		{
-			return false;
+			if (in_array('manyToMany', $possibleChild->getPropertyNames()))
+			{
+				$associationEnds = $possibleChild->getProperty('manyToMany');
+				if (in_array($parent->getType(), $associationEnds))
+				return $possibleChild->getType();
+			}
+		}
+		return null;
+	}
+
+	private function load($xmlId) {
+		$result = null;
+
+		$oid = $this->idMap[$xmlId];
+		if ($oid) {
+			$result = $this->persistenceFacade->load($oid, BUILDTYPE_SINGLE);
 		}
 
-		private function last($arr) {
-			return $arr[count($arr)-1];
-		}
+		return $result;
+	}
 
-		// PROTECTED REGION END
+	private function addErrorMsg($msg) {
+		$this->errorMsg .= "$msg<br />\n";
+		$this->errorOccured = true;
+	}
 
+	public function hasView()
+	{
+		return false;
+	}
+
+	private function last($arr) {
+		return $arr[count($arr)-1];
+	}
+
+	// PROTECTED REGION END
 }
 ?>

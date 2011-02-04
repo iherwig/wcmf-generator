@@ -226,7 +226,7 @@ class UcDocumentationExporterController extends BatchController
 	 */
 	function finish($oids)
 	{
-Log::error("Finish called", __CLASS__);
+		Log::debug("Finish called", __CLASS__);
 		require_once BASE . 'application/include/controller/class.ExportShutdownHandler.php';
 		$session = SessionData::getInstance();
 
@@ -244,10 +244,12 @@ Log::error("Finish called", __CLASS__);
 		readfile($exportFile);
 
 		// cleanup
-		unlink($exportFile);
-		$workingDir = $session->get(self::TEMP_WORKING_DIR);
-		FileUtil::emptyDir($workingDir);
-		rmdir($workingDir);
+		if (!Log::isDebugEnabled(__CLASS__)) {
+			unlink($exportFile);
+			$workingDir = $session->get(self::TEMP_WORKING_DIR);
+			FileUtil::emptyDir($workingDir);
+			rmdir($workingDir);
+		}
 		ExportShutdownHandler::success();
 	}
 

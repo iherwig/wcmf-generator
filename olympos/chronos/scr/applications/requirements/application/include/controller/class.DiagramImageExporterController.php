@@ -219,10 +219,11 @@ class DiagramImageExporterController extends BatchController
 		$this->check('File written to output');
 
 		// cleanup
-		unlink($session->get($this->TEMP_UWM_EXPORT_PATH));
-		unlink($session->get($this->TEMP_PROPERTIES_PATH));
-		unlink($exportFile);
-
+		if (!Log::isDebugEnabled(__CLASS__)) {
+			unlink($session->get($this->TEMP_UWM_EXPORT_PATH));
+			unlink($session->get($this->TEMP_PROPERTIES_PATH));
+			unlink($exportFile);
+		}
 		ExportShutdownHandler::success();
 	}
 // PROTECTED REGION END
