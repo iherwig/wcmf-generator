@@ -27,7 +27,7 @@
 	«LET this.getNearestPackage().getPackageName() AS fullQualifiedPackage»
 	«FILE (!fullQualifiedPackage.isNullOrEmpty() ? fullQualifiedPackage.asPath() + "/" : "") + this.name +".groovy"-»
 	«ENDREM»
-	«FILE this.name +".groovy"-»
+	«FILE DOMAIN_PACKAGE().packageToPath() + "/" + this.name +".groovy"-»
 «groovyFileHeader()»
 
 /* «generatorSignature()» */
