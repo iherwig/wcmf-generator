@@ -342,7 +342,7 @@ class UWMImporterController extends Controller
 						$attrValue = $this->dom->getAttribute($currValueName);
 
 						if ($attrValue) {
-							$foundLink->setValue($currValueName, $this->resolveValue($foundLink, $currValueName, $attrValue));
+							$link->setValue($currValueName, $this->resolveValue($link, $currValueName, $attrValue));
 						}
 					}
 
