@@ -24,7 +24,9 @@ Void establishConnections(cwm::ChiController b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiController:" + b.id).first(): (
 		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "generalization").establishGeneralizationToClass(uc, um) ->
 		b.manyToMany.select(e|e.targetType == "ChiController" && e.relationType == "association").establishActionKey(uc, um, false) ->
-		b.manyToMany.select(e|e.targetType == "ChiView" && e.relationType == "association").establishActionKey(uc, um, true)
+		b.manyToMany.select(e|e.targetType == "ChiView" && e.relationType == "association").establishActionKey(uc, um, true) ->
+		b.child.select(e|e.targetType == "ChiNode").establishConnectionsToClass(uc, um, "instantiates", uml::AggregationKind::none, uml::AggregationKind::none, true, false) 
+		
 //		b.nmChiControllerActionKeyChiController.addAllActionKeys(uc) ->
 //		b.nmChiControllerActionKeyChiView.addAllActionKeys(uc)
 		//Duplicate in connection list
