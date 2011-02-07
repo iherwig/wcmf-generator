@@ -20,7 +20,7 @@ Ext.namespace("chi.persistency");
  */
 chi.persistency.DionysosJson = function() {
 	this.baseUrl = chi.Config.getInstance().jsonUrl;
-	this.timeout = 180000;
+	this.timeout = chi.Config.getInstance().ajaxTimeout;
 };
 
 Ext.extend(chi.persistency.DionysosJson, chi.persistency.Persistency);
