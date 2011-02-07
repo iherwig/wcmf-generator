@@ -33,6 +33,13 @@ chi.Config = function() {
 	this.persistencyClass = "chi.persistency.DionysosJson";
 
 	/**
+	 * Timeout of AJAX requests, in milliseconds.
+	 * 
+	 * @type String
+	 */
+	this.ajaxTimeout = 180000;
+
+	/**
 	 * Title of this application.
 	 * 
 	 * @type String
