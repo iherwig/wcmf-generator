@@ -695,7 +695,7 @@ class UwmUtil {
 						self::registerReference($currChild->getReferenceType());
 						self::registerReference($currChild->getReferenceValue());
 					}
-					
+
 				}
 			}
 
@@ -745,9 +745,18 @@ class UwmUtil {
 					$currChild->loadParents();
 					$parents = $currChild->getParents();
 
+          // check if the association is a self-relation
+          $isSelfRelation = true;
+					foreach ($parents as $currParent) {
+            if ($currParent->getBaseOID() != $parent->getBaseOID()) {
+              $isSelfRelation = false;
+            }
+          }
+
 					foreach ($parents as $currParent)
 					{
-						if ($currParent->getId() != $parent->getId() && array_search($currParent->getOid(), $processedM2m) === false)
+						if (($currParent->getBaseOID() != $parent->getBaseOID() || $isSelfRelation) &&
+                    array_search($currChild->getBaseOID(), $processedM2m) === false)
 						{
 							$className = self::getRealType($currParent);
 
@@ -773,7 +782,7 @@ class UwmUtil {
 
 							self::$dom->endElement();
 
-							$processedM2m[] = $currParent->getOid();
+							$processedM2m[] = $currChild->getBaseOID();
 						}
 					}
 				}
@@ -802,7 +811,7 @@ class UwmUtil {
 					$package->addChild($node);
 					self::registerExportedNode($node);
 				}
-					
+
 				unset(self::$referencedNodes[0]);
 				self::$referencedNodes = array_values(self::$referencedNodes);
 			}
@@ -860,7 +869,7 @@ class UwmUtil {
 				Log::debug('found valid oid', __CLASS__);
 				$result = $typeOid;
 			}
-			
-			return $result;	
+
+			return $result;
 		}
 }
