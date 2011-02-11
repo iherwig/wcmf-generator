@@ -583,7 +583,7 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 						var maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
             var connectionEndRole = maskedClass.getConnnectionEndRole();
 						if ( ((maskedClass instanceof uwm.model.RelationEndClass) &&
-									(connectionEndRole == "target" || isSelfRelation && connectionEndRole == "source"))
+									(connectionEndRole == "target" || isSelfRelation && connectionEndRole == "source")) /* at this point we only get the source end for self relations */
 									|| maskedClass instanceof uwm.model.RelationClass ) {
 							if (connectionInfo.connection) {
 								connectionInfo = connectionInfo.connection;
