@@ -161,12 +161,12 @@ uwm.diagram.DropZone.prototype.checkSemanticGroup = function(modelData) {
 		for (var i = 0; i < this.diagram.supportedGroups.length; i++) {
 			var semanticGroup = modelData.semanticGroup;
 			if (Ext.isArray(semanticGroup)) {
-				if (this.diagram.supportedGroups[i] == semanticGroup) {
+				if (semanticGroup.indexOf(this.diagram.supportedGroups[i]) != -1) {
 					result = true;
 					break;
 				}
 			} else {
-				if (semanticGroup.indexOf(this.diagram.supportedGroups[i]) != -1) {
+				if (this.diagram.supportedGroups[i] == semanticGroup) {
 					result = true;
 					break;
 				}
