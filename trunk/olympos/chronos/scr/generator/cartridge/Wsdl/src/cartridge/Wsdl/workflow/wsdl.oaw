@@ -25,7 +25,7 @@
 	
 	<!-- load CIM reference model -->
 	<component class="oaw.emf.XmiReader">
-		<modelFile value="${basePath}/metamodel/cim.uml"/>
+		<modelFile value="${basePath}/metamodel/cim13.uml"/>
 		<outputSlot value="cimmodel"/>
 	</component>
 
