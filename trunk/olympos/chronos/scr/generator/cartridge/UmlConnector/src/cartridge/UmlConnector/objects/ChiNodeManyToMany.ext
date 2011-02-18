@@ -22,6 +22,7 @@ uml::Class convert(cwm::ChiNodeManyToMany n):
 ;
 
 Void establishConnections(cwm::ChiNodeManyToMany b, uml::Model um):
+// TODO: why is this code not used?
 /*
 	let uc = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNodeManyToMany:" + b.id).first(): (
 		b.manyToMany.select(e|e.targetType == "ChiNode" && e.relationType == "aggregation").establishConnectionsToClass(uc, um, null, uml::AggregationKind::shared, uml::AggregationKind::none) ->
