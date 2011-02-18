@@ -111,11 +111,19 @@ cwm::ChiNode convertToCwm(Chronos::ChiNode c) :
 		un.child.addAll(c.getAssociations().memberEnd.select(e|e.type != c).type.typeSelect(Chronos::ChiView).convertToChild())
 		 ->
 		
-		un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization", "ChiNodeTarget")) ->
+		un.manyToMany.addAll(((List[uml::Class]) c.getGenerals()).convertToMany("generalization", "ChiNodeTarget")) -> 
+
+		// all ChiNode to ChiNode Associations ??
 		un.manyToMany.addAll(c.getAssociations().memberEnd.select(e|e.type == c)
 			.select(e|e.aggregation == uml::AggregationKind::none && 
 				(e.getOtherEnd().aggregation != uml::AggregationKind::none || (e.association.memberEnd.get(0) == e))
 		).association.convertToMany(c).typeSelect(cwm::ManyToMany))
+		
+		
+		// TODO: Associations to ChiNodeManyToMany
+		//c.getAssociations().memberEnd.select(e| info("*****  c.getAssociations().memberEnd.select(): " + c.name + "->" + e.type.name)) ->
+		//c.getGenerals().select(e| info("*****  c.getGenerals(): " + c.name + "->>" + e.type.name)) 
+		
 	) ->
 	un
 ;
