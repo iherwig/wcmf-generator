@@ -260,3 +260,8 @@ set fixed with on model listbox
 0.9.9.3
 - default model fix
 - ChiCMF Generator fix
+
+0.9.9.5
+ADDITIONS
+- Multiple selection
+- Mapping of chiNodes
