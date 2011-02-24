@@ -51,14 +51,14 @@ uwm.Config.logLevel = uwm.Log.ERROR;
  * 
  * @type String
  */
-uwm.Config.defaultLogin = "admin";
+uwm.Config.defaultLogin = "";
 
 /**
  * Default value of password.
  * 
  * @type String
  */
-uwm.Config.defaultPassword = "admin";
+uwm.Config.defaultPassword = "";
 
 /**
  * The default modelling.
