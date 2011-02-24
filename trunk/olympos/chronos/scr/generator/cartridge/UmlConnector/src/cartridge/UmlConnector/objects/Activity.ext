@@ -5,6 +5,7 @@ import uml;
 extension org::openarchitectureware::uml2::profile::profiling;
 
 extension common::umlutils;
+extension common::util;
 
 extension cartridge::UmlConnector::connections;
 extension cartridge::UmlConnector::connectionsToCwm;
@@ -72,8 +73,12 @@ cwm::Activity convertToCwm(uml::OpaqueAction c) :
 		un.setLastEditor(c.getTaggedValue("Chronos::Activity", "last_editor").toString()) ->
 		un.setModified(c.getTaggedValue("Chronos::Activity", "modified").toString())
 */
-		un.child.addAll(c.outgoing.target.typeSelect(uml::ActivityFinalNode).convertToChild()) ->
-		un.child.addAll(c.outgoing.target.typeSelect(uml::OpaqueAction).convertToChild()) ->
+		//un.child.addAll(c.outgoing.target.typeSelect(uml::ActivityFinalNode).convertToChild()) ->
+		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::ActivityFinalNode).convertToMany()) ->
+
+		//un.child.addAll(c.outgoing.target.typeSelect(uml::OpaqueAction).convertToChild()) ->
+		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::OpaqueAction).convertToMany()) ->
+
 		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::DecisionNode).convertToMany()) ->
 		un.child.addAll(c.outgoing.target.typeSelect(uml::SendSignalAction).convertToChild()) ->
 		un.child.addAll(c.outgoing.target.typeSelect(uml::AcceptEventAction).convertToChild()) ->

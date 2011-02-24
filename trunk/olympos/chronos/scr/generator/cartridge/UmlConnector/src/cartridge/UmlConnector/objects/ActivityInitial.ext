@@ -65,7 +65,8 @@ cwm::ActivityInitial convertToCwm(uml::InitialNode c) :
 		un.setLastEditor(c.getTaggedValue("Chronos::ActivityInitial", "last_editor").toString()) ->
 		un.setModified(c.getTaggedValue("Chronos::ActivityInitial", "modified").toString())
 */
-		un.child.addAll(c.outgoing.target.typeSelect(uml::OpaqueAction).convertToChild())
+		//un.child.addAll(c.outgoing.target.typeSelect(uml::OpaqueAction).convertToChild())
+		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::OpaqueAction).convertToMany())
 	) ->
 	un
 ;
