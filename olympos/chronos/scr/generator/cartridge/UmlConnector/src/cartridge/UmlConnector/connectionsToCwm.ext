@@ -1,9 +1,27 @@
+/*
+ * Copyright (c) 2011 The Olympos Development Team.
+ * 
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+
+
 import cwm;
 import Chronos;
 import uml;
 
 extension common::util;
 extension common::umlutils;
+
+// TODO: remove all convertToChild for Activities
+
+
+// convert functions for uml::Class
 
 cwm::Child convertToChild(uml::Class otherClass) :
 	let result = new cwm::Child : (
@@ -17,54 +35,6 @@ cwm::ManyToMany convertToMany(uml::Class other) :
 	let result = new cwm::ManyToMany : (
 		result.setTargetType(other.metaType.name.split("::").last()) ->
 		result.setTargetOid(other.getId())
-	) ->
-	result
-;
-
-cwm::Child convertToChild(uml::ActivityFinalNode otherClass) :
-	let result = new cwm::Child : (
-		result.setTargetType("ActivityFinal") ->
-		result.setTargetOid(otherClass.getId())
-	) ->
-	result
-;
-
-cwm::Child convertToChild(uml::OpaqueAction otherClass) :
-	let result = new cwm::Child : (
-		result.setTargetType("Activity") ->
-		result.setTargetOid(otherClass.getId())
-	) ->
-	result
-;
-
-cwm::ManyToMany convertToMany(uml::DecisionNode other) :
-	let result = new cwm::ManyToMany : (
-		result.setTargetType("ActivityDecision") ->
-		result.setTargetOid(other.getId())
-	) ->
-	result
-;
-
-cwm::Child convertToChild(uml::SendSignalAction otherClass) :
-	let result = new cwm::Child : (
-		result.setTargetType("ActivitySend") ->
-		result.setTargetOid(otherClass.getId())
-	) ->
-	result
-;
-
-cwm::ManyToMany convertToMany(uml::OpaqueAction other) :
-	let result = new cwm::ManyToMany : (
-		result.setTargetType("Activity") ->
-		result.setTargetOid(other.getId())
-	) ->
-	result
-;
-
-cwm::Child convertToChild(uml::AcceptEventAction otherClass) :
-	let result = new cwm::Child : (
-		result.setTargetType("ActivityReceive") ->
-		result.setTargetOid(otherClass.getId())
 	) ->
 	result
 ;
@@ -191,4 +161,66 @@ String getUwmNavigability(uml::Property this):
 		"Navigable"
 	:
 		"Non-Navigable"
+;
+
+// convert functions for Activity Elements
+// TODO: Target Roles are missing -> check if they are needed for import
+// TODO: convertToChild functions for Activity Elements should be deleted after complete change to convertToMany
+
+
+cwm::Child convertToChild(uml::ActivityFinalNode otherClass) :
+	let result = new cwm::Child : (
+		result.setTargetType("ActivityFinal") ->
+		result.setTargetOid(otherClass.getId())
+	) ->
+	result
+;
+
+cwm::Child convertToChild(uml::OpaqueAction otherClass) :
+	let result = new cwm::Child : (
+		result.setTargetType("Activity") ->
+		result.setTargetOid(otherClass.getId())
+	) ->
+	result
+;
+
+cwm::ManyToMany convertToMany(uml::DecisionNode other) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType("ActivityDecision") ->
+		result.setTargetOid(other.getId())
+	) ->
+	result
+;
+
+cwm::Child convertToChild(uml::SendSignalAction otherClass) :
+	let result = new cwm::Child : (
+		result.setTargetType("ActivitySend") ->
+		result.setTargetOid(otherClass.getId())
+	) ->
+	result
+;
+
+cwm::ManyToMany convertToMany(uml::OpaqueAction other) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType("Activity") ->
+		result.setTargetOid(other.getId())
+	) ->
+	result
+;
+
+cwm::ManyToMany convertToMany(uml::ActivityFinalNode other) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType("ActivityFinal") ->
+		result.setTargetOid(other.getId())
+	) ->
+	result
+;
+
+
+cwm::Child convertToChild(uml::AcceptEventAction otherClass) :
+	let result = new cwm::Child : (
+		result.setTargetType("ActivityReceive") ->
+		result.setTargetOid(otherClass.getId())
+	) ->
+	result
 ;
