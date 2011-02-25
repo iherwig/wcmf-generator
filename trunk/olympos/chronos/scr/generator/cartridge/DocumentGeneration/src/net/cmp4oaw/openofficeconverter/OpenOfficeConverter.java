@@ -1,6 +1,11 @@
 package net.cmp4oaw.openofficeconverter;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 import org.openarchitectureware.workflow.WfCHelper;
 import org.openarchitectureware.workflow.WorkflowContext;
@@ -41,13 +46,56 @@ public class OpenOfficeConverter extends AbstractWorkflowComponent {
 	}
 
 	public void invoke(WorkflowContext arg0, ProgressMonitor arg1, Issues arg2) {
-		OpenOfficeConnection connection = new SocketOpenOfficeConnection();
-		OpenOfficeDocumentConverter converter = new OpenOfficeDocumentConverter(
-				connection);
-
-		converter.convert(new File(getInputFile()), new File(getOutputFile()));
 		
-		connection.disconnect();
+		File inputFile = new File(getInputFile());
+		File outputFile = new File(getOutputFile());
+		
+		// Only start the Converter if a file conversion is necassery (Currently only for Word Export)
+		if(!getFileExtension(getInputFile()).equalsIgnoreCase(getFileExtension(getOutputFile()))) {
+			
+			OpenOfficeConnection connection = new SocketOpenOfficeConnection();
+			OpenOfficeDocumentConverter converter = new OpenOfficeDocumentConverter(
+					connection);
+	
+			converter.convert(inputFile, outputFile);
+			
+			connection.disconnect();
+			
+		}
+		else {
+			FileChannel inputChannel = null;
+			FileChannel outputChannel = null;
+			try {
+				inputChannel = new FileInputStream(inputFile).getChannel();
+				outputChannel = new FileOutputStream(outputFile).getChannel();
+				outputChannel.transferFrom(inputChannel, 0, inputChannel.size());
+			} catch (FileNotFoundException e) {
+				arg2.addError("File not found: " + e.getMessage());
+			} catch (IOException e) {
+				arg2.addError("Could npt copy file: " + e.getMessage());
+			}
+			finally {
+				if (inputChannel != null) {
+					try {
+						inputChannel.close();
+					} catch (IOException e) {
+						arg2.addError("Could not close input channel: " + e.getMessage());
+					}
+				}
+				if (outputChannel != null) {
+					try {
+						outputChannel.close();
+					} catch (IOException e) {
+						arg2.addError("Could not close input channel: " + e.getMessage());
+					}
+				}
+			}
+		}
+		
 	}
-
+	
+	private String getFileExtension(String filename) {
+		return filename.substring(filename.lastIndexOf("."));
+	}
+	
 }
