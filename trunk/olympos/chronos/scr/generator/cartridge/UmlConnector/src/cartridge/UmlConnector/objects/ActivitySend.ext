@@ -30,8 +30,8 @@ Void transferValues(cwm::ActivitySend c, uml::Model um):
 			c.notes != null ? (
 				comment.setBody(c.notes) ->
 				comment.annotatedElement.add(uc) ->
-				uc.ownedComment.add(comment)
-			) : Void
+				uc.ownedComment.add(comment) 
+			) : Void ->
 	/*
 			uc.applyStereotype("Chronos::ActivitySend") ->
 			uc.setTaggedValue("Chronos::ActivitySend", "Author", c.author) ->
@@ -44,6 +44,8 @@ Void transferValues(cwm::ActivitySend c, uml::Model um):
 			uc.setTaggedValue("Chronos::ActivitySend", "last_editor", c.lastEditor) ->
 			uc.setTaggedValue("Chronos::ActivitySend", "modified", c.modified)
 	*/
+			un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::SendSignalAction).convertToMany())
+			
 		)
 	)
 ;

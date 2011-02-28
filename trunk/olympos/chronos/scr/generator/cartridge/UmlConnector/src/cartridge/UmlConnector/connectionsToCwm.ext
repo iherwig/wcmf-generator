@@ -168,34 +168,11 @@ String getUwmNavigability(uml::Property this):
 // TODO: convertToChild functions for Activity Elements should be deleted after complete change to convertToMany
 
 
-cwm::Child convertToChild(uml::ActivityFinalNode otherClass) :
-	let result = new cwm::Child : (
-		result.setTargetType("ActivityFinal") ->
-		result.setTargetOid(otherClass.getId())
-	) ->
-	result
-;
-
-cwm::Child convertToChild(uml::OpaqueAction otherClass) :
-	let result = new cwm::Child : (
-		result.setTargetType("Activity") ->
-		result.setTargetOid(otherClass.getId())
-	) ->
-	result
-;
-
-cwm::ManyToMany convertToMany(uml::DecisionNode other) :
+cwm::ManyToMany convertToMany(uml::ActivityFinalNode other) :
 	let result = new cwm::ManyToMany : (
-		result.setTargetType("ActivityDecision") ->
+		result.setTargetType("ActivityFinal") ->
+		result.setTargetRole("ActivityFinal") ->
 		result.setTargetOid(other.getId())
-	) ->
-	result
-;
-
-cwm::Child convertToChild(uml::SendSignalAction otherClass) :
-	let result = new cwm::Child : (
-		result.setTargetType("ActivitySend") ->
-		result.setTargetOid(otherClass.getId())
 	) ->
 	result
 ;
@@ -203,24 +180,38 @@ cwm::Child convertToChild(uml::SendSignalAction otherClass) :
 cwm::ManyToMany convertToMany(uml::OpaqueAction other) :
 	let result = new cwm::ManyToMany : (
 		result.setTargetType("Activity") ->
+		result.setTargetRole("AControlFlowTarget") ->
 		result.setTargetOid(other.getId())
 	) ->
 	result
 ;
 
-cwm::ManyToMany convertToMany(uml::ActivityFinalNode other) :
+cwm::ManyToMany convertToMany(uml::DecisionNode other) :
 	let result = new cwm::ManyToMany : (
-		result.setTargetType("ActivityFinal") ->
+		result.setTargetType("ActivityDecision") ->
+		result.setTargetType("ADControlFlowTarget") ->
 		result.setTargetOid(other.getId())
 	) ->
 	result
 ;
 
 
-cwm::Child convertToChild(uml::AcceptEventAction otherClass) :
-	let result = new cwm::Child : (
-		result.setTargetType("ActivityReceive") ->
-		result.setTargetOid(otherClass.getId())
+cwm::ManyToMany convertToMany(uml::SendSignalAction other) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType("ActivitySend") ->
+		result.setTargetType("ASControlFlowTarget") ->
+		result.setTargetOid(other.getId())
 	) ->
 	result
 ;
+
+cwm::ManyToMany convertToMany(uml::AcceptEventAction other) :
+	let result = new cwm::ManyToMany : (
+		result.setTargetType("ActivityReceive") ->
+		result.setTargetType("ARControlFlowTarget") ->
+		result.setTargetOid(other.getId())
+	) ->
+	result
+;
+
+

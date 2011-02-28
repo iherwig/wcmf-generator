@@ -21,6 +21,7 @@ uml::OpaqueAction convert(cwm::ChiObject a):
 
 Void establishConnections(cwm::ChiObject b, uml::Model um):
 	let uc = um.allOwnedElements().typeSelect(uml::DataStoreNode).select(e|e.name == "ChiObject:" + b.id).first(): (
+		// TODO: fix Object Flow 
 		b.manyToMany.select(e|e.targetRole == "AObjectFlowTarget").establishConnectionsToOpaqueAction(uc, um, null)
 	)
 ;
