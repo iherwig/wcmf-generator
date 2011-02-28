@@ -25,7 +25,12 @@ Void establishConnections(cwm::Activity b, uml::Model um):
 		b.manyToMany.select(e|e.targetRole == "AControlFlowTarget").establishConnectionsToOpaqueAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
 		b.manyToMany.select(e|e.targetRole == "ADControlFlowTarget").establishConnectionsToDecisionNode(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
 		b.manyToMany.select(e|e.targetRole == "ASControlFlowTarget").establishConnectionsToSendSignalAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+
+		//TODO: why was this implemented as ARControlFlowSource? 
 		//b.manyToMany.select(e|e.targetRole == "ARControlFlowSource").establishConnectionsToAcceptEventAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		b.manyToMany.select(e|e.targetRole == "ARControlFlowTarget").establishConnectionsToAcceptEventAction(uc, um, null, uml::AggregationKind::none, uml::AggregationKind::none, false, true) ->
+		
+		//TODO: add ChiObjectObjectFlowTarget again
 		b.manyToMany.select(e|e.targetRole == "ChiObjectObjectFlowTarget").establishConnectionsToDataStore(uc, um, null)
 	)
 ;
@@ -80,9 +85,17 @@ cwm::Activity convertToCwm(uml::OpaqueAction c) :
 		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::OpaqueAction).convertToMany()) ->
 
 		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::DecisionNode).convertToMany()) ->
-		un.child.addAll(c.outgoing.target.typeSelect(uml::SendSignalAction).convertToChild()) ->
-		un.child.addAll(c.outgoing.target.typeSelect(uml::AcceptEventAction).convertToChild()) ->
-		un.child.addAll(c.outgoing.target.typeSelect(uml::Class).convertToChild())
+		
+		//un.child.addAll(c.outgoing.target.typeSelect(uml::SendSignalAction).convertToChild()) ->
+		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::SendSignalAction).convertToMany()) ->
+
+		//un.child.addAll(c.outgoing.target.typeSelect(uml::AcceptEventAction).convertToChild()) ->
+		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::AcceptEventAction).convertToMany())
+
+		// TODO: check why relation to uml::Class is needed -> in the export (establishConnections) there is no such thing
+		//un.child.addAll(c.outgoing.target.typeSelect(uml::Class).convertToChild())
+		
+		// TODO: ChiObjectObjectFlowTarget is missing (Relation to ChiObject)
 	) ->
 	un
 ;

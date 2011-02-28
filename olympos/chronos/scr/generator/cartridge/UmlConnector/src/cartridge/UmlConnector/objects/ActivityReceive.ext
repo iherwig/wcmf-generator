@@ -51,7 +51,7 @@ cwm::ActivityReceive convertToCwm(uml::AcceptEventAction c) :
 	let un = new cwm::ActivityReceive : (
 		un.setId(c.getId()) ->
 		un.setName(c.name) ->
-		un.setNotes(c.getComment())
+		un.setNotes(c.getComment()) ->
 /*
 		un.setAuthor(c.getTaggedValue("Chronos::ActivityReceive", "Author").toString()) ->
 		un.setStatus(c.getTaggedValue("Chronos::ActivityReceive", "Status").toString()) ->
@@ -63,6 +63,8 @@ cwm::ActivityReceive convertToCwm(uml::AcceptEventAction c) :
 		un.setLastEditor(c.getTaggedValue("Chronos::ActivityReceive", "last_editor").toString()) ->
 		un.setModified(c.getTaggedValue("Chronos::ActivityReceive", "modified").toString())
 */
+		un.manyToMany.addAll(c.outgoing.target.typeSelect(uml::AcceptEventAction).convertToMany())
+
 	) ->
 	un
 ;

@@ -56,6 +56,8 @@ cwm::ActivityFinal convertToCwm(uml::ActivityFinalNode c) :
 		un.setLastEditor(c.getTaggedValue("Chronos::ActivityFinal", "last_editor").toString()) ->
 		un.setModified(c.getTaggedValue("Chronos::ActivityFinal", "modified").toString())
 */
+
+		// cwm::ActivityFinal has no outgoing connections
 	) ->
 	un
 ;
