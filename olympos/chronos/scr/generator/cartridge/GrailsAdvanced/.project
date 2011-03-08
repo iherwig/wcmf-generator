@@ -35,11 +35,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.openarchitectureware.xsd.plugin.xsdBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.openarchitectureware.base.oawBuilder</name>
 			<arguments>
 			</arguments>
