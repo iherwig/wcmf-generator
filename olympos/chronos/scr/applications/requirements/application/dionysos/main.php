@@ -67,6 +67,7 @@ try {
 }
 catch (ApplicationException $ex)
 {
+  Log::error($ex->__toString(), 'main');
   $response = $ex->getResponse();
   if ($response == null) {
     $response = new Response('', '', $action, array());
@@ -79,6 +80,10 @@ catch (ApplicationException $ex)
   $response->setValue('success', false);
   $response->setValue('errorCode', $ex->getCodeString());
   Formatter::serialize($response);
+}
+catch (Exception $ex)
+{
+  Log::error($ex->__toString(), 'main');
 }
 
 exitSearchUtil();
