@@ -3,6 +3,8 @@ import soap;
 import wsdl;
 import uml::Model;
 
+extension common::util;
+
 extension org::openarchitectureware::xsd::lib::qname;
 
 extension cartridge::XmlSchema::root;
@@ -10,7 +12,7 @@ extension cartridge::XmlSchema::root;
 create wsdl::TTypes createType(uml::Model umlModel, String rootElements, String targetNamespace):
 	let schema = xmlSchema(umlModel, rootElements, targetNamespace):
 	let rootElementList = rootElements.split(","):
-	
+
 	schema.schema.complexType.addAll(createServiceInterfaceTypes(umlModel, rootElements, targetNamespace)) ->
 	
 	schema.schema.element.removeAll(schema.schema.element.select(e|rootElementList.contains(e.name))) ->
