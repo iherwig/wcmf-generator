@@ -1,4 +1,4 @@
-#Tue Mar 08 17:52:54 CET 2011
-metamodelContributor=org.openarchitectureware.uml2.Uml2MetamodelContributor,org.openarchitectureware.EmfMetamodelContributor,org.openarchitectureware.xsd.plugin.XSDMetamodelContributor
+#Wed Mar 09 21:39:04 CET 2011
+metamodelContributor=org.openarchitectureware.uml2.Uml2MetamodelContributor,org.openarchitectureware.xsd.plugin.XSDMetamodelContributor,org.openarchitectureware.EmfMetamodelContributor
 eclipse.preferences.version=1
 project.specific.metamodel=true
