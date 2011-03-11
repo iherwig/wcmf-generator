@@ -1,5 +1,7 @@
 digraph DataFlow {
 
+	node[shape=ellipse, style=empty, color=black];
+
 	PHP[label="Backend:PHP"];
 	UMLConnector[label="Cartridge:UMLConnector"];
 	ApplyChonos[label="Cartridge:ApplyChronos"];
@@ -38,7 +40,7 @@ digraph DataFlow {
 
 	subgraph clusterLegend {
 		label="Legend";
-		Transformation;
+		Transformation[shape=ellipse, style=empty, color=black];
 		Result[shape=box, style=filled, color=lightgrey];
   	}
 
