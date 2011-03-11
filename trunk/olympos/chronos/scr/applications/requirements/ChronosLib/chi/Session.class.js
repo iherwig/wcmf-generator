@@ -30,7 +30,7 @@ chi.Session = function() {
 	 * 
 	 * @type String
 	 */
-	this.lang = "en";
+	this.lang = chi.Config.getInstance().defaultLang;
 
 	/**
 	 * The URL of the help file.
