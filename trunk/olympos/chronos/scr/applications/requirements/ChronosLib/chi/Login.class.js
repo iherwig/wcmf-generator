@@ -133,6 +133,8 @@ chi.Login.prototype.render = function() {
 	var y = viewportSize.height / 2 - formSize.height / 2;
 
 	this.form.setPosition(x, y);
+    
+    this.form.getForm().findField("Language").setValue(chi.Config.getInstance().defaultLang);
 	this.form.getForm().findField("login").focus();
 };
 
