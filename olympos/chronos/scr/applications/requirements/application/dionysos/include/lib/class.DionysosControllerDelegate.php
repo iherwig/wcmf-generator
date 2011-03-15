@@ -219,8 +219,7 @@ class DionysosControllerDelegate
             throw new DionysosException($request, $response, DionysosException::SEARCH_NOT_SUPPORTED, DionysosException::SEARCH_NOT_SUPPORTED);
           }
         }
-
-
+        
         $request->setValue('type', $request->getValue('className'));
         $request->setValue('start', $request->getValue('offset'));
         $request->setValue('sort', $request->getValue('sortFieldName'));
@@ -255,6 +254,17 @@ class DionysosControllerDelegate
     $ignoreValues = array(/*'controller'*/);
     foreach ($ignoreValues as $key) {
       $response->clearValue($key);
+    }
+    
+    // convert error messages to real errors
+    if ($response->hasValue('errorMsg'))
+    {
+      $response->setValue('errorMessage', $response->getValue('errorMsg'));
+      $response->setValue('errorCode', 2); // GENERAL_ERROR
+      $response->setValue('success', false);
+      // don't remove the default error message, because it is used to
+      // signal errors to the controller base class
+      //$response->clearValue('errorMsg');
     }
 
     // do controller/action specific value mappings
