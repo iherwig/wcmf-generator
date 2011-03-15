@@ -239,7 +239,7 @@ chi.persistency.DionysosJson.prototype.create = function(chiModelElementId, succ
 
 chi.persistency.DionysosJson.prototype.createRecordHandler = function(handler, options, data) {
 	return {
-	    chiModelElementId : options.localParams.className,
+	    chiModelElementId : options.localParams.chiModelElementId,
 	    oid : data.oid
 	};
 };
@@ -455,17 +455,19 @@ chi.persistency.DionysosJson.prototype.executeActionSet = function(actionSet) {
 	}
 
 	var responseHandler = function(data, actionName) {
-		return data.resultSet[actionName];
+    	if (data.resultSet) {
+			return data.resultSet[actionName];
+    	}
+    	return null;
 	};
 
 	return this.jsonRequest( {
 	    action : "executeActionSet",
 	    actionSet : data
 	}, function(data) {
-		data.request.recordHandlers = data.request.recordHandlers;
 		data.request.actionSet.successHandler(data.request, data.data, responseHandler);
 	}, function(data, errorMessage) {
-		data.request.params.actionSet.errorHandler(data, errorMessage);
+		data.request.actionSet.errorHandler(data.request, data.data, responseHandler, errorMessage);
 	}, function(handler, options, data) {
 		return {
 		    request : options,

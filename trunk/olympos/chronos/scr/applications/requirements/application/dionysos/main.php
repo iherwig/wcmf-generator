@@ -79,6 +79,7 @@ catch (ApplicationException $ex)
   }
   $response->setValue('success', false);
   $response->setValue('errorCode', $ex->getCodeString());
+  $response->setValue('errorMessage', $ex->getMessage());
   Formatter::serialize($response);
 }
 catch (Exception $ex)

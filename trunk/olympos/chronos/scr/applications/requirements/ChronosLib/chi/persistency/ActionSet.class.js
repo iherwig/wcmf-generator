@@ -161,7 +161,7 @@ chi.persistency.ActionSet.prototype.commit = function(successHandler, errorHandl
 		var val = this.requests[i];
 
 		if (!(val instanceof Function)) {
-			if (val.errorLevel) {
+			if (!val.errorLevel) {
 				val.errorLevel = chi.persistency.ActionSet.DEFAULT_ERROR_LEVEL;
 			}
 		}
@@ -185,7 +185,7 @@ chi.persistency.ActionSet.prototype.getRequests = function() {
 	return this.requests;
 };
 
-chi.persistency.ActionSet.prototype.successHandler = function(request, data, getResponseHandler) {
+chi.persistency.ActionSet.prototype.resultHandler = function(request, data, getResponseHandler) {
 	var errorLevel = null;
 
 	var persistency = chi.persistency.Persistency.getInstance();
@@ -196,37 +196,46 @@ chi.persistency.ActionSet.prototype.successHandler = function(request, data, get
 
 		if (!(currRequest instanceof Function)) {
 			var currResponse = getResponseHandler(data, currActionName);
-
 			if (currResponse) {
-				persistency.processSuccessHandler.call(persistency, currRequest.successHandler, request.recordHandlers[currActionName].call(persistency, "SUCCESS", currRequest, currResponse));
-			} else {
-				if (currRequest.errorLevel > errorLevel) {
-					errorLevel = currRequest.errorLevel;
-				}
+				if (!currResponse.errorCode) {
+					persistency.processSuccessHandler.call(persistency, currRequest.successHandler, request.recordHandlers[currActionName].call(persistency, "SUCCESS", currRequest, currResponse));
+				} else {
+					if (currRequest.errorLevel > errorLevel) {
+						errorLevel = currRequest.errorLevel;
+					}
 
-				persistency.processErrorHandler.call(persistency, currRequest.errorHandler, request.recordHandlers[currActionName].call(persistency, "ERROR", currRequest, currResponse),
-				        currResponse.errorMsg);
+					persistency.processErrorHandler.call(persistency, currRequest.errorHandler, request.recordHandlers[currActionName].call(persistency, "ERROR", currRequest, currResponse),
+							currResponse.errorMessage);
 
-				if (currRequest.errorLevel == chi.persistency.ActionSet.errorLevels.ERROR) {
-					throw new Error(chi.Dict.translate("Critical Persistency Error") + ": " + currResponse.errorMsg);
+					if (currRequest.errorLevel == chi.persistency.ActionSet.errorLevels.ERROR) {
+						throw new Error(chi.Dict.translate("Critical Persistency Error") + ": " + currResponse.errorMessage);
+					}
 				}
 			}
 		}
 	}
 
 	// currently, we do not react globally on errorLevels
-
-	persistency.processSuccessHandler(this.savedSuccessHandler, data);
 };
 
-chi.persistency.ActionSet.prototype.errorHandler = function(data, errorMessage) {
+chi.persistency.ActionSet.prototype.successHandler = function(request, data, getResponseHandler) {
+	// process result handlers of each action
+	this.resultHandler(request, data, getResponseHandler);
+	// process actionSet success handler
+	chi.persistency.Persistency.getInstance().processSuccessHandler(this.savedSuccessHandler, data);
+};
+
+chi.persistency.ActionSet.prototype.errorHandler = function(request, data, getResponseHandler, errorMessage) {
+	// process result handlers of each action
+	this.resultHandler(request, data, getResponseHandler);
+	// process actionSet error handler
 	chi.persistency.Persistency.getInstance().processErrorHandler(this.savedErrorHandler, data, errorMessage);
 };
 
 chi.persistency.ActionSet.errorLevels = {
-    IGNORE : 1,
-    WARN : 2,
-    ERROR : 3
+	IGNORE : 1,
+	WARN : 2,
+	ERROR : 3
 };
 
 chi.persistency.ActionSet.DEFAULT_ERROR_LEVEL = chi.persistency.ActionSet.errorLevels.WARN;
