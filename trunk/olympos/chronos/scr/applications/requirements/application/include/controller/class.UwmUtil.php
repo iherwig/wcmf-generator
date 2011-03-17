@@ -808,8 +808,13 @@ class UwmUtil {
 
 				if (!self::isExportedNode($oid)) {
 					$node = $persistenceFacade->load($oid, BUILDDEPTH_SINGLE);
-					$package->addChild($node);
-					self::registerExportedNode($node);
+					if ($node) {
+						$package->addChild($node);
+						self::registerExportedNode($node);
+					}
+					else {
+						Log::error("Object for referenced oid: ".$oid." does not exist", __CLASS__);
+					}
 				}
 
 				unset(self::$referencedNodes[0]);
@@ -853,23 +858,25 @@ class UwmUtil {
 
 		public static function extractPropertyType($propertyType, $parentOid) {
 			$result = $propertyType;
+			if (strlen($propertyType) > 0)
+			{
+				$oidParts = PersistenceFacade::decomposeOID($parentOid);
 
-			$oidParts = PersistenceFacade::decomposeOID($parentOid);
+				Log::debug("ChiValue decomposed: " . print_r($oidParts, true), __CLASS__);
 
-			Log::debug("ChiValue decomposed: " . print_r($oidParts, true), __CLASS__);
+				$oidParts['type'] = 'ChiNode';
+				$oidParts['id'] = $propertyType;
 
-			$oidParts['type'] = 'ChiNode';
-			$oidParts['id'] = $propertyType;
-
-			$typeOid = PersistenceFacade::composeOID($oidParts);
-
-			Log::debug("found ChiValue type: $typeOid", __CLASS__);
-
-			if (PersistenceFacade::isValidOID($typeOid)) {
-				Log::debug('found valid oid', __CLASS__);
-				$result = $typeOid;
+				$typeOid = PersistenceFacade::composeOID($oidParts);
+				Log::debug("found ChiValue type: $typeOid", __CLASS__);
+				if (PersistenceFacade::isValidOID($typeOid)) {
+					Log::debug('found valid oid', __CLASS__);
+					$result = $typeOid;
+				}
 			}
-
+			else {
+				Log::error("ChiValue : ".$parentOid." does not have a PropertyType assigned", __CLASS__);
+			}
 			return $result;
 		}
 }
