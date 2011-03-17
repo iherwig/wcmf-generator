@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Chronos="http:///schemas/Chronos/_jAH0gM-nEd6fypAGO026Fw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/Chronos/_jAH0gM-nEd6fypAGO026Fw/0 chronos.profile.uml#_jARlgc-nEd6fypAGO026Fw">
+  <uml:Model xmi:id="_pBjacFDAEeCRN8kIYEE5bw" name="uml-generated">
+    <packagedElement xmi:type="uml:Package" xmi:id="_pBjacVDAEeCRN8kIYEE5bw" name="Main Package">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_pBjaclDAEeCRN8kIYEE5bw" name="insert a new movie with API">
+        <ownedComment xmi:id="_pBjac1DAEeCRN8kIYEE5bw" annotatedElement="_pBjaclDAEeCRN8kIYEE5bw">
+          <body>&lt;span >this use case describes how a complete movie is created using the API.&lt;/span>&lt;ul>&lt;li>&lt;span>a insertANewMovieWithAPIRequest arrives&lt;/span>&lt;/li>&lt;li>&lt;span>Iterate in the Container&lt;/span>&lt;/li>&lt;li>&lt;span>&lt;br>&lt;/span>&lt;/li>&lt;li>&lt;span>check if the director exists&lt;/span>&lt;/li>&lt;/ul></body>
+        </ownedComment>
+        <ownedBehavior xmi:type="uml:Activity" xmi:id="_pBjadFDAEeCRN8kIYEE5bw" name="insert a new movie with API ActivitySet">
+          <ownedComment xmi:id="_pBjadVDAEeCRN8kIYEE5bw" annotatedElement="_pBjadFDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_pBjadlDAEeCRN8kIYEE5bw" name="check if the director exists" outgoing="_pBjajFDAEeCRN8kIYEE5bw" incoming="_pBjajVDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjad1DAEeCRN8kIYEE5bw" annotatedElement="_pBjadlDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_pBjaeFDAEeCRN8kIYEE5bw" name="Read request" outgoing="_pBjajVDAEeCRN8kIYEE5bw" incoming="_pBjalFDAEeCRN8kIYEE5bw _pBjalVDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjaeVDAEeCRN8kIYEE5bw" annotatedElement="_pBjaeFDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_pBjaelDAEeCRN8kIYEE5bw" name="create insertANewMovieWithAPIResponse success" outgoing="_pBjajlDAEeCRN8kIYEE5bw _pBjaj1DAEeCRN8kIYEE5bw" incoming="_pBjaklDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjae1DAEeCRN8kIYEE5bw" annotatedElement="_pBjaelDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:OpaqueAction" xmi:id="_pBjafFDAEeCRN8kIYEE5bw" name="create insertANewMovieWithAPIResponse failure" outgoing="_pBjakFDAEeCRN8kIYEE5bw _pBjakVDAEeCRN8kIYEE5bw" incoming="_pBjak1DAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjafVDAEeCRN8kIYEE5bw" annotatedElement="_pBjafFDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:DecisionNode" xmi:id="_pBjaflDAEeCRN8kIYEE5bw" name="Movie stored?" outgoing="_pBjaklDAEeCRN8kIYEE5bw _pBjak1DAEeCRN8kIYEE5bw" incoming="_pBjajFDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjaf1DAEeCRN8kIYEE5bw" annotatedElement="_pBjaflDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:InitialNode" xmi:id="_pBjagFDAEeCRN8kIYEE5bw" name="request service" outgoing="_pBjalFDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjagVDAEeCRN8kIYEE5bw" annotatedElement="_pBjagFDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:ActivityFinalNode" xmi:id="_pBjaglDAEeCRN8kIYEE5bw" name="Movie stored" incoming="_pBjajlDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjag1DAEeCRN8kIYEE5bw" annotatedElement="_pBjaglDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:ActivityFinalNode" xmi:id="_pBjahFDAEeCRN8kIYEE5bw" name="New ActivityFinal" incoming="_pBjakFDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjahVDAEeCRN8kIYEE5bw" annotatedElement="_pBjahFDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:DataStoreNode" xmi:id="_pBjahlDAEeCRN8kIYEE5bw" name="insertANewMovieWithAPIRequest " outgoing="_pBjalVDAEeCRN8kIYEE5bw" type="_pBja6lDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjah1DAEeCRN8kIYEE5bw" annotatedElement="_pBjahlDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:DataStoreNode" xmi:id="_pBjaiFDAEeCRN8kIYEE5bw" name="insertANewMovieWithAPIResponse" incoming="_pBjaj1DAEeCRN8kIYEE5bw" type="_pBja5lDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjaiVDAEeCRN8kIYEE5bw" annotatedElement="_pBjaiFDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <node xmi:type="uml:DataStoreNode" xmi:id="_pBjailDAEeCRN8kIYEE5bw" name="insertANewMovieWithAPIResponse" incoming="_pBjakVDAEeCRN8kIYEE5bw" type="_pBja5lDAEeCRN8kIYEE5bw">
+            <ownedComment xmi:id="_pBjai1DAEeCRN8kIYEE5bw" annotatedElement="_pBjailDAEeCRN8kIYEE5bw">
+              <body>?</body>
+            </ownedComment>
+          </node>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_pBjajFDAEeCRN8kIYEE5bw" name="Associates" source="_pBjadlDAEeCRN8kIYEE5bw" target="_pBjaflDAEeCRN8kIYEE5bw"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_pBjajVDAEeCRN8kIYEE5bw" name="Associates" source="_pBjaeFDAEeCRN8kIYEE5bw" target="_pBjadlDAEeCRN8kIYEE5bw"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_pBjajlDAEeCRN8kIYEE5bw" name="Associates" source="_pBjaelDAEeCRN8kIYEE5bw" target="_pBjaglDAEeCRN8kIYEE5bw"/>
+          <edge xmi:type="uml:ObjectFlow" xmi:id="_pBjaj1DAEeCRN8kIYEE5bw" source="_pBjaelDAEeCRN8kIYEE5bw" target="_pBjaiFDAEeCRN8kIYEE5bw">
+            <name xsi:nil="true"/>
+          </edge>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_pBjakFDAEeCRN8kIYEE5bw" name="Associates" source="_pBjafFDAEeCRN8kIYEE5bw" target="_pBjahFDAEeCRN8kIYEE5bw"/>
+          <edge xmi:type="uml:ObjectFlow" xmi:id="_pBjakVDAEeCRN8kIYEE5bw" source="_pBjafFDAEeCRN8kIYEE5bw" target="_pBjailDAEeCRN8kIYEE5bw">
+            <name xsi:nil="true"/>
+          </edge>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_pBjaklDAEeCRN8kIYEE5bw" name="Associates" source="_pBjaflDAEeCRN8kIYEE5bw" target="_pBjaelDAEeCRN8kIYEE5bw"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_pBjak1DAEeCRN8kIYEE5bw" name="Associates" source="_pBjaflDAEeCRN8kIYEE5bw" target="_pBjafFDAEeCRN8kIYEE5bw"/>
+          <edge xmi:type="uml:ControlFlow" xmi:id="_pBjalFDAEeCRN8kIYEE5bw" name="Associates" source="_pBjagFDAEeCRN8kIYEE5bw" target="_pBjaeFDAEeCRN8kIYEE5bw"/>
+          <edge xmi:type="uml:ObjectFlow" xmi:id="_pBjalVDAEeCRN8kIYEE5bw" source="_pBjahlDAEeCRN8kIYEE5bw" target="_pBjaeFDAEeCRN8kIYEE5bw">
+            <name xsi:nil="true"/>
+          </edge>
+        </ownedBehavior>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_pBjallDAEeCRN8kIYEE5bw" name="Referenced Nodes">
+      <packagedElement xmi:type="uml:Actor" xmi:id="_pBjal1DAEeCRN8kIYEE5bw" name="API user">
+        <ownedComment xmi:id="_pBjamFDAEeCRN8kIYEE5bw" annotatedElement="_pBjal1DAEeCRN8kIYEE5bw">
+          <body>?this actor describes any user that use the filmology application trough his public services.</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pBjamVDAEeCRN8kIYEE5bw" name="EntityBase" isAbstract="true">
+        <eAnnotations xmi:id="_pBjamlDAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_pBjam1DAEeCRN8kIYEE5bw" key="CHRONOS_ID_KEYWORD_ChiNode:79648"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_pBjanFDAEeCRN8kIYEE5bw" annotatedElement="_pBjamVDAEeCRN8kIYEE5bw">
+          <body>?</body>
+        </ownedComment>
+        <ownedAttribute xmi:id="_pBjanVDAEeCRN8kIYEE5bw" name="created" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBjanlDAEeCRN8kIYEE5bw" annotatedElement="_pBjanVDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBjan1DAEeCRN8kIYEE5bw" name="creator" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBjaoFDAEeCRN8kIYEE5bw" annotatedElement="_pBjan1DAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBjaoVDAEeCRN8kIYEE5bw" name="last_editor" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBjaolDAEeCRN8kIYEE5bw" annotatedElement="_pBjaoVDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBjao1DAEeCRN8kIYEE5bw" name="modified" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBjapFDAEeCRN8kIYEE5bw" annotatedElement="_pBjao1DAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pBjapVDAEeCRN8kIYEE5bw" name="Person" isAbstract="true">
+        <eAnnotations xmi:id="_pBjaplDAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_pBjap1DAEeCRN8kIYEE5bw" key="CHRONOS_ID_KEYWORD_ChiNode:79671"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_pBjaqFDAEeCRN8kIYEE5bw" annotatedElement="_pBjapVDAEeCRN8kIYEE5bw">
+          <body>this abstract Classrepresents any Human being present in this domain.</body>
+        </ownedComment>
+        <generalization xmi:id="_pBjaqVDAEeCRN8kIYEE5bw" general="_pBjatFDAEeCRN8kIYEE5bw"/>
+        <ownedAttribute xmi:id="_pBjaqlDAEeCRN8kIYEE5bw" name="surname" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBjaq1DAEeCRN8kIYEE5bw" annotatedElement="_pBjaqlDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBjarFDAEeCRN8kIYEE5bw" name="birth" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBjarVDAEeCRN8kIYEE5bw" annotatedElement="_pBjarFDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBjarlDAEeCRN8kIYEE5bw" name="nationality" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBjar1DAEeCRN8kIYEE5bw" annotatedElement="_pBjarlDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pBjasFDAEeCRN8kIYEE5bw" name="String">
+        <eAnnotations xmi:id="_pBjasVDAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_pBjaslDAEeCRN8kIYEE5bw" key="CHRONOS_ID_KEYWORD_ChiNode:95856"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_pBjas1DAEeCRN8kIYEE5bw" annotatedElement="_pBjasFDAEeCRN8kIYEE5bw">
+          <body>?</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pBjatFDAEeCRN8kIYEE5bw" name="EntityBaseExtended" isAbstract="true">
+        <eAnnotations xmi:id="_pBjatVDAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_pBjatlDAEeCRN8kIYEE5bw" key="CHRONOS_ID_KEYWORD_ChiNode:79653"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_pBjat1DAEeCRN8kIYEE5bw" annotatedElement="_pBjatFDAEeCRN8kIYEE5bw">
+          <body>this is an abstract class with the fields name and description.</body>
+        </ownedComment>
+        <generalization xmi:id="_pBjauFDAEeCRN8kIYEE5bw" general="_pBjamVDAEeCRN8kIYEE5bw"/>
+        <ownedAttribute xmi:id="_pBjauVDAEeCRN8kIYEE5bw" name="name" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBjaulDAEeCRN8kIYEE5bw" annotatedElement="_pBjauVDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBjau1DAEeCRN8kIYEE5bw" name="description" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBjavFDAEeCRN8kIYEE5bw" annotatedElement="_pBjau1DAEeCRN8kIYEE5bw">
+            <body>Description of this object</body>
+          </ownedComment>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pBjavVDAEeCRN8kIYEE5bw" name="Actor">
+        <eAnnotations xmi:id="_pBjavlDAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_pBjav1DAEeCRN8kIYEE5bw" key="CHRONOS_ID_KEYWORD_ChiNode:79644"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_pBjawFDAEeCRN8kIYEE5bw" annotatedElement="_pBjavVDAEeCRN8kIYEE5bw">
+          <body>?</body>
+        </ownedComment>
+        <generalization xmi:id="_pBjawVDAEeCRN8kIYEE5bw" general="_pBjapVDAEeCRN8kIYEE5bw"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pBjawlDAEeCRN8kIYEE5bw" name="Director">
+        <eAnnotations xmi:id="_pBjaw1DAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_pBjaxFDAEeCRN8kIYEE5bw" key="CHRONOS_ID_KEYWORD_ChiNode:79647"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_pBjaxVDAEeCRN8kIYEE5bw" annotatedElement="_pBjawlDAEeCRN8kIYEE5bw">
+          <body>A director is the person that cohordinates the Movie.&lt;br>&lt;br></body>
+        </ownedComment>
+        <generalization xmi:id="_pBjaxlDAEeCRN8kIYEE5bw" general="_pBjapVDAEeCRN8kIYEE5bw"/>
+        <ownedAttribute xmi:id="_pBjax1DAEeCRN8kIYEE5bw" name="b" type="_pBjaylDAEeCRN8kIYEE5bw" aggregation="shared" association="_pBja9VDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBjayFDAEeCRN8kIYEE5bw" value="*"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBjayVDAEeCRN8kIYEE5bw"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pBjaylDAEeCRN8kIYEE5bw" name="Movie">
+        <eAnnotations xmi:id="_pBjay1DAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_pBjazFDAEeCRN8kIYEE5bw" key="CHRONOS_ID_KEYWORD_ChiNode:79661"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_pBjazVDAEeCRN8kIYEE5bw" annotatedElement="_pBjaylDAEeCRN8kIYEE5bw">
+          <body>A movie is a visual reppresentation made in a special date where actors play.</body>
+        </ownedComment>
+        <generalization xmi:id="_pBjazlDAEeCRN8kIYEE5bw" general="_pBjatFDAEeCRN8kIYEE5bw"/>
+        <ownedAttribute xmi:id="_pBjaz1DAEeCRN8kIYEE5bw" name="alias" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBja0FDAEeCRN8kIYEE5bw" annotatedElement="_pBjaz1DAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBja0VDAEeCRN8kIYEE5bw" name="color" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBja0lDAEeCRN8kIYEE5bw" annotatedElement="_pBja0VDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBja01DAEeCRN8kIYEE5bw" name="country" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBja1FDAEeCRN8kIYEE5bw" annotatedElement="_pBja01DAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_pBja1VDAEeCRN8kIYEE5bw" value="US"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBja1lDAEeCRN8kIYEE5bw" name="genre" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBja11DAEeCRN8kIYEE5bw" annotatedElement="_pBja1lDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBja2FDAEeCRN8kIYEE5bw" name="URL" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBja2VDAEeCRN8kIYEE5bw" annotatedElement="_pBja2FDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBja2lDAEeCRN8kIYEE5bw" name="language" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBja21DAEeCRN8kIYEE5bw" annotatedElement="_pBja2lDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBja3FDAEeCRN8kIYEE5bw" name="plot" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBja3VDAEeCRN8kIYEE5bw" annotatedElement="_pBja3FDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBja3lDAEeCRN8kIYEE5bw" name="runtime" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBja31DAEeCRN8kIYEE5bw" annotatedElement="_pBja3lDAEeCRN8kIYEE5bw">
+            <body>this is the runtime in minutes(e.g. 144are 2 hours and 24 minutes)</body>
+          </ownedComment>
+          <defaultValue xmi:type="uml:LiteralString" xmi:id="_pBja4FDAEeCRN8kIYEE5bw" value="120"/>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBja4VDAEeCRN8kIYEE5bw" name="date" type="_pBjasFDAEeCRN8kIYEE5bw">
+          <ownedComment xmi:id="_pBja4lDAEeCRN8kIYEE5bw" annotatedElement="_pBja4VDAEeCRN8kIYEE5bw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_pBja41DAEeCRN8kIYEE5bw" name="a" type="_pBjawlDAEeCRN8kIYEE5bw" association="_pBja9VDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBja5FDAEeCRN8kIYEE5bw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBja5VDAEeCRN8kIYEE5bw" value="1"/>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pBja5lDAEeCRN8kIYEE5bw" name="insertANewMovieWithAPIResponse">
+        <eAnnotations xmi:id="_pBja51DAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_pBja6FDAEeCRN8kIYEE5bw" key="CHRONOS_ID_KEYWORD_ChiNode:86322"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_pBja6VDAEeCRN8kIYEE5bw" annotatedElement="_pBja5lDAEeCRN8kIYEE5bw">
+          <body>?</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_pBja6lDAEeCRN8kIYEE5bw" name="insertANewMovieWithAPIRequest ">
+        <eAnnotations xmi:id="_pBja61DAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_pBja7FDAEeCRN8kIYEE5bw" key="CHRONOS_ID_KEYWORD_ChiNode:81838"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_pBja7VDAEeCRN8kIYEE5bw" annotatedElement="_pBja6lDAEeCRN8kIYEE5bw">
+          <body>?</body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_pBja7lDAEeCRN8kIYEE5bw" memberEnd="_pBja71DAEeCRN8kIYEE5bw _pBja8lDAEeCRN8kIYEE5bw" navigableOwnedEnd="_pBja71DAEeCRN8kIYEE5bw">
+        <name xsi:nil="true"/>
+        <ownedEnd xmi:id="_pBja71DAEeCRN8kIYEE5bw" name="" type="_pBjaclDAEeCRN8kIYEE5bw" association="_pBja7lDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBja8FDAEeCRN8kIYEE5bw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBja8VDAEeCRN8kIYEE5bw" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_pBja8lDAEeCRN8kIYEE5bw" name="" type="_pBjal1DAEeCRN8kIYEE5bw" association="_pBja7lDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBja81DAEeCRN8kIYEE5bw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBja9FDAEeCRN8kIYEE5bw" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_pBja9VDAEeCRN8kIYEE5bw" name="Aggregation" memberEnd="_pBjax1DAEeCRN8kIYEE5bw _pBja41DAEeCRN8kIYEE5bw"/>
+      <packagedElement xmi:type="uml:Association" xmi:id="_pBja9lDAEeCRN8kIYEE5bw" name="Association" memberEnd="_pBja91DAEeCRN8kIYEE5bw _pBja-lDAEeCRN8kIYEE5bw">
+        <ownedEnd xmi:id="_pBja91DAEeCRN8kIYEE5bw" name="" type="_pBjaylDAEeCRN8kIYEE5bw" association="_pBja9lDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBja-FDAEeCRN8kIYEE5bw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBja-VDAEeCRN8kIYEE5bw" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_pBja-lDAEeCRN8kIYEE5bw" name="" type="_pBja6lDAEeCRN8kIYEE5bw" association="_pBja9lDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBja-1DAEeCRN8kIYEE5bw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBja_FDAEeCRN8kIYEE5bw" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_pBja_VDAEeCRN8kIYEE5bw" name="Association" memberEnd="_pBja_lDAEeCRN8kIYEE5bw _pBjbAVDAEeCRN8kIYEE5bw">
+        <ownedEnd xmi:id="_pBja_lDAEeCRN8kIYEE5bw" name="" type="_pBjawlDAEeCRN8kIYEE5bw" association="_pBja_VDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBja_1DAEeCRN8kIYEE5bw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBjbAFDAEeCRN8kIYEE5bw" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_pBjbAVDAEeCRN8kIYEE5bw" name="" type="_pBja6lDAEeCRN8kIYEE5bw" association="_pBja_VDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBjbAlDAEeCRN8kIYEE5bw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBjbA1DAEeCRN8kIYEE5bw" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_pBjbBFDAEeCRN8kIYEE5bw" name="Association" memberEnd="_pBjbBVDAEeCRN8kIYEE5bw _pBjbCFDAEeCRN8kIYEE5bw">
+        <ownedEnd xmi:id="_pBjbBVDAEeCRN8kIYEE5bw" name="" type="_pBjavVDAEeCRN8kIYEE5bw" association="_pBjbBFDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBjbBlDAEeCRN8kIYEE5bw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBjbB1DAEeCRN8kIYEE5bw" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:id="_pBjbCFDAEeCRN8kIYEE5bw" name="" type="_pBja6lDAEeCRN8kIYEE5bw" association="_pBjbBFDAEeCRN8kIYEE5bw">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pBjbCVDAEeCRN8kIYEE5bw" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pBjbClDAEeCRN8kIYEE5bw" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_pBjbC1DAEeCRN8kIYEE5bw" name="PrimitiveTypes"/>
+    <profileApplication xmi:id="_pBjbDFDAEeCRN8kIYEE5bw">
+      <eAnnotations xmi:id="_pBjbDVDAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="chronos.profile.uml#_jARlgc-nEd6fypAGO026Fw"/>
+      </eAnnotations>
+      <appliedProfile href="chronos.profile.uml#873fb1a3-cfa7-11de-9e87-d74203c08737"/>
+    </profileApplication>
+    <profileApplication xmi:id="_pBjbDlDAEeCRN8kIYEE5bw">
+      <eAnnotations xmi:id="_pBjbD1DAEeCRN8kIYEE5bw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="ouranos.profile.uml#_fmnPK1vpEd6-GfKcCJahig"/>
+      </eAnnotations>
+      <appliedProfile href="ouranos.profile.uml#_fmnPKVvpEd6-GfKcCJahig"/>
+    </profileApplication>
+  </uml:Model>
+  <Chronos:ChiBusinessUseCase xmi:id="_pBjbEFDAEeCRN8kIYEE5bw" Alias="Chi646BUC" Author="Giuseppe Platania - Architect" created="2011-02-16 15:25:12" creator="admin" last_editor="admin" modified="2011-03-02 12:26:41" Status="Proposed" GoalInContext="insert a movie with the API" Precondition="user is Autenticated" Trigger="request service" Scope="wcmf" PrimaryActor="API user" MainSuccessScenario="movie stored" base_UseCase="_pBjaclDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiBusinessPartnerActive xmi:id="_pBkokFDAEeCRN8kIYEE5bw" Alias="Chi018BPA" created="2011-02-16 15:22:17" creator="admin" last_editor="admin" modified="2011-02-16 15:23:32" Status="Proposed" base_Actor="_pBjal1DAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiNode xmi:id="_pBkokVDAEeCRN8kIYEE5bw" Alias="Chi1848Nod" created="2010-12-06 20:49:33" creator="admin" last_editor="admin" modified="2011-03-09 10:14:55" Status="Proposed" base_Class="_pBjamVDAEeCRN8kIYEE5bw" display_value="name"/>
+  <Chronos:ChiValue xmi:id="_pBlPoFDAEeCRN8kIYEE5bw" input_type="date" base_Property="_pBjanVDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBlPoVDAEeCRN8kIYEE5bw" base_Property="_pBjan1DAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBlPolDAEeCRN8kIYEE5bw" base_Property="_pBjaoVDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBlPo1DAEeCRN8kIYEE5bw" input_type="date" base_Property="_pBjao1DAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiNode xmi:id="_pBlPpFDAEeCRN8kIYEE5bw" Alias="Chi1854Nod" created="2010-12-06 20:49:35" creator="admin" last_editor="admin" modified="2011-03-09 10:14:55" Status="Proposed" base_Class="_pBjapVDAEeCRN8kIYEE5bw" display_value="name"/>
+  <Chronos:ChiValue xmi:id="_pBlPpVDAEeCRN8kIYEE5bw" base_Property="_pBjaqlDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBl2sFDAEeCRN8kIYEE5bw" base_Property="_pBjarFDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBl2sVDAEeCRN8kIYEE5bw" base_Property="_pBjarlDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiNode xmi:id="_pBl2slDAEeCRN8kIYEE5bw" Alias="Chi3944Nod" created="2011-03-17 13:41:55" creator="admin" last_editor="admin" modified="2011-03-17 13:42:09" Status="Proposed" base_Class="_pBjasFDAEeCRN8kIYEE5bw" display_value="name" is_searchable="true"/>
+  <Chronos:ChiNode xmi:id="_pBl2s1DAEeCRN8kIYEE5bw" Alias="Chi1849Nod" created="2010-12-06 20:49:34" creator="admin" last_editor="admin" modified="2011-03-09 10:14:55" Status="Proposed" base_Class="_pBjatFDAEeCRN8kIYEE5bw" display_value="name"/>
+  <Chronos:ChiValue xmi:id="_pBl2tFDAEeCRN8kIYEE5bw" base_Property="_pBjauVDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBmdwFDAEeCRN8kIYEE5bw" input_type="fckeditor" base_Property="_pBjau1DAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiNode xmi:id="_pBmdwVDAEeCRN8kIYEE5bw" Alias="Chi1845Nod" created="2010-12-06 20:54:14" creator="admin" last_editor="admin" modified="2011-03-09 10:14:55" Status="Proposed" base_Class="_pBjavVDAEeCRN8kIYEE5bw" display_value="name"/>
+  <Chronos:ChiNode xmi:id="_pBmdwlDAEeCRN8kIYEE5bw" Alias="Chi1847Nod" created="2010-12-06 20:54:17" creator="admin" last_editor="admin" modified="2011-03-09 10:14:55" Status="Proposed" base_Class="_pBjawlDAEeCRN8kIYEE5bw" display_value="name"/>
+  <Chronos:ChiNode xmi:id="_pBmdw1DAEeCRN8kIYEE5bw" Alias="Chi1853Nod" created="2010-12-06 20:56:08" creator="admin" last_editor="admin" modified="2011-03-09 10:14:53" Status="Proposed" base_Class="_pBjaylDAEeCRN8kIYEE5bw" display_value="title|year"/>
+  <Chronos:ChiValue xmi:id="_pBnE0FDAEeCRN8kIYEE5bw" base_Property="_pBjaz1DAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBnE0VDAEeCRN8kIYEE5bw" input_type="radio#fix:Color|BW" base_Property="_pBja0VDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBnE0lDAEeCRN8kIYEE5bw" restrictions_match="[A-Z][A-Z]" restrictions_description="2 letter country code (eg US)." base_Property="_pBja01DAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBnE01DAEeCRN8kIYEE5bw" input_type="select#fkt:g_getOIDs|Genre" base_Property="_pBja1lDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBnE1FDAEeCRN8kIYEE5bw" display_type="link" base_Property="_pBja2FDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBnE1VDAEeCRN8kIYEE5bw" input_type="select#async:Language" base_Property="_pBja2lDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBnE1lDAEeCRN8kIYEE5bw" input_type="fckeditor" base_Property="_pBja3FDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBnr4FDAEeCRN8kIYEE5bw" restrictions_match="[0-9][0-9][0-9]" restrictions_description="time in minutes (eg 090)" base_Property="_pBja3lDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiValue xmi:id="_pBnr4VDAEeCRN8kIYEE5bw" input_type="linkbrowser" base_Property="_pBja4VDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiNode xmi:id="_pBnr4lDAEeCRN8kIYEE5bw" Alias="Chi2726Nod" created="2011-02-18 14:40:04" creator="admin" last_editor="admin" modified="2011-03-02 12:12:41" Status="Proposed" base_Class="_pBja5lDAEeCRN8kIYEE5bw" display_value="name" is_searchable="true"/>
+  <Chronos:ChiNode xmi:id="_pBnr41DAEeCRN8kIYEE5bw" Alias="Chi1864Nod" created="2011-02-16 18:00:11" creator="admin" last_editor="admin" modified="2011-02-28 18:39:35" Status="Proposed" base_Class="_pBja6lDAEeCRN8kIYEE5bw" display_value="name" is_searchable="true"/>
+  <Chronos:ChiAssociation xmi:id="_pBoS8FDAEeCRN8kIYEE5bw" base_Association="_pBja9VDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiAssociation xmi:id="_pBoS8VDAEeCRN8kIYEE5bw" base_Association="_pBja9lDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiAssociation xmi:id="_pBoS8lDAEeCRN8kIYEE5bw" base_Association="_pBja_VDAEeCRN8kIYEE5bw"/>
+  <Chronos:ChiAssociation xmi:id="_pBo6AFDAEeCRN8kIYEE5bw" base_Association="_pBjbBFDAEeCRN8kIYEE5bw"/>
+</xmi:XMI>
