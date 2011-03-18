@@ -255,6 +255,19 @@ uwm.Uwm.prototype.installOverrides = function() {
 		}
 	});
 	
+	// Fix bug: #3204229
+	// Reordering nodes in the ModelTree throw a NPE in ColorAnim
+	Ext.override(Ext.lib.ColorAnim, {
+		doMethod : function(attr, start, end) {
+			if (end != null) {
+				return doMethod.call(this);
+			}
+			else {
+				uwm.Log.log("ColorAnimation received null value for end color", uwm.Log.WARN);
+			}
+		}
+	});
+    
 	draw2d.Graphics.prototype.drawString=function(text, x, y) {
 		var _x = this.xt+x*this.cosRadian-y*this.sinRadian;
 		var _y = this.yt+x*this.sinRadian+y*this.cosRadian;
