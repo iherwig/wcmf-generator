@@ -35,9 +35,12 @@ require_once ('class.UwmUtil.php');
  * - @em failure If a fatal error occurs 
  * - @em ok In any other case 
  * 
- * @param[in] modelOid The OID of the model to generate statistical Data for. 
- * @param[in] useCache True/False wether to use chached data, if existing or not 
+ * @param[in] modelOid The OID of the model to generate statistical data for. 
+ * @param[in] useCache True if cached data should be used if existing, false if not 
+ *                     if the cache does not exist, it will be created unless dontGenerate is set to true
+ * @param[in] dontGenerate True to prevent generating statistic data if they don't exist
  * @param[out] modelOid The OID of the model whose statistical Data were generated. 
+ * @param[out] isGenerated True/False wether statistical data are generated or not.
  * 
  * The following configuration settings are defined for this controller:
  *
@@ -55,6 +58,7 @@ class AllBrowserStatisticsController extends BatchController
 	// session name constants
 	private $PARAM_MODEL_OID = 'AllBrowserStatisticsController.modelOid';
 	private $PARAM_USE_CACHE = 'AllBrowserStatisticsController.useCache';
+	private $PARAM_DONT_GENERATE = 'AllBrowserStatisticsController.dontGenerate';
 	
 	private $TEMP_WORKING_DIR = 'AllBrowserStatisticsController.tmpWorkingDir';
 	private $TEMP_UWM_EXPORT_PATH = 'AllBrowserStatisticsController.tmpUwmExportPath';
@@ -87,6 +91,7 @@ class AllBrowserStatisticsController extends BatchController
 				// no model requested -> use stored user preference
 				$request->setValue('modelOid', $configEntry->getVal());
 				$request->setValue('useCache', true);
+				$request->setValue('dontGenerate', true);
 			}
 			else {
 				// update user preference with the requested model
@@ -97,6 +102,7 @@ class AllBrowserStatisticsController extends BatchController
 			$session = &SessionData::getInstance();
 			$session->set($this->PARAM_MODEL_OID, $request->getValue('modelOid'));
 			$session->set($this->PARAM_USE_CACHE, $request->getValue('useCache'));
+			$session->set($this->PARAM_DONT_GENERATE, $request->getValue('dontGenerate'));
 			
 			// clear the problem report
 			$report = '';
@@ -122,7 +128,8 @@ class AllBrowserStatisticsController extends BatchController
 		$session = &SessionData::getInstance();
 		$modelOid = $session->get($this->PARAM_MODEL_OID);
 		$useCache = ('true' == $session->get($this->PARAM_USE_CACHE));
-		if (strlen($modelOid) == 0 || ($useCache && $this->isGenerated($modelOid))) {
+		$dontGenerate = ('true' == $session->get($this->PARAM_DONT_GENERATE));
+		if (strlen($modelOid) == 0 || ($useCache && $this->isGenerated($modelOid)) || $dontGenerate) {
 			// reuse data, if already existing
 			if ($number == 0)
 			{
@@ -181,6 +188,7 @@ class AllBrowserStatisticsController extends BatchController
 		// we also set the modelOid for the response here
 		$modelOid = $session->get($this->PARAM_MODEL_OID);
 		$this->_response->setValue('modelOid', $modelOid);
+		$this->_response->setValue('isGenerated', $this->isGenerated($modelOid));
 		
 		return $session->get($this->PROBLEM_REPORT);
 	}
@@ -339,7 +347,7 @@ class AllBrowserStatisticsController extends BatchController
 	public static function getWorkingDir($modelOid)
 	{
 		$ids = PersistenceFacade::getOIDParameter($modelOid, 'id');
-		$dir = dirname(realpath($_SERVER['SCRIPT_FILENAME'])).'/statistics/model'.$ids[0];
+		$dir = str_replace('\\', '/', dirname(realpath($_SERVER['SCRIPT_FILENAME'])).'/statistics/model'.$ids[0]);
 		if (!file_exists($dir)) {
 			FileUtil::mkdirRec($dir);
 		}

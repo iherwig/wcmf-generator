@@ -241,11 +241,12 @@ cwb.persistency.Json.prototype.generateUml = function(modelOid, successHandler, 
 	}, successHandler, errorHandler);
 };
 
-cwb.persistency.Json.prototype.loadAllStatisticsOverview = function(modelOid, useCache, successHandler, errorHandler) {
+cwb.persistency.Json.prototype.loadAllStatisticsOverview = function(modelOid, useCache, dontGenerate, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "loadAllStatisticsOverview",
 		modelOid: modelOid,
-		useCache: useCache
+		useCache: useCache,
+		dontGenerate: dontGenerate
 	}, successHandler, errorHandler);
 };
 

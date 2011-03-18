@@ -86,7 +86,7 @@ cwb.persistency.Persistency.prototype.displayByAlias = function(aliasList, succe
 cwb.persistency.Persistency.prototype.generateUml = function(modelOid, successHandler, errorHandler) {
 };
 
-cwb.persistency.Persistency.prototype.loadAllStatisticsOverview = function(modelOid, useCache, successHandler, errorHandler) {
+cwb.persistency.Persistency.prototype.loadAllStatisticsOverview = function(modelOid, useCache, dontGenerate, successHandler, errorHandler) {
 };
 
 cwb.persistency.Persistency.prototype.lastEdited = function(successHandler, errorHandler) {

@@ -34,7 +34,7 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 		    		'load': function() {
 		    			if (this.data.length > 0) {
 		    				// load the last used model
-		    				self.loadModel(true);
+		    				self.loadModel(true, true);
 		    			}
 		    		}
 				}
@@ -59,7 +59,7 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 		    text: cwb.Dict.translate('Report'),
 		    type: 'submit',
 		    handler: function() {
-			    self.loadModel(false);
+			    self.loadModel(false, false);
 		    }
 		});
 
@@ -93,8 +93,9 @@ cwb.ui.ModelChooser = Ext.extend(Ext.Panel, {
 /**
  * Starts loading actions.
  * @param forceLoad True/False wether to force loading even if no model is selected or not
+ * @param dontGenerate True/False wether to prevent generating data if not existting or not
  */
-cwb.ui.ModelChooser.prototype.loadModel = function(forceLoad) {
+cwb.ui.ModelChooser.prototype.loadModel = function(forceLoad, dontGenerate) {
 	var modelOid = this.selectModelBox.getValue();
 	var useCache = this.useCacheCheckbox.getValue();
 
@@ -108,7 +109,7 @@ cwb.ui.ModelChooser.prototype.loadModel = function(forceLoad) {
 		
 		var self = this;
 		
-		container.loadModel(modelOid, useCache, function(state, data) {
+		container.loadModel(modelOid, useCache, dontGenerate, function(state, data) {
 			self.handleLoadCallback(state, data);
 		});
 	} else {
@@ -125,11 +126,13 @@ cwb.ui.ModelChooser.prototype.loadModel = function(forceLoad) {
 cwb.ui.ModelChooser.prototype.handleLoadCallback = function(state, data) {
 	switch (state) {
 		case 'generated':
-			this.selectModelBox.setValue(data.modelOid);
-			cwb.ui.DiagramPanel.getInstance().showDiagrams();
-			cwb.statistics.Overview.getInstance().loadData();
-			Ext.Msg.updateProgress(0.5, cwb.Dict.translate("Loading diagrams and statistics"));
-			cwb.ui.StructureTabPanel.getInstance().showDiagrams();
+			if (data.isGenerated) {
+				this.selectModelBox.setValue(data.modelOid);
+				cwb.ui.DiagramPanel.getInstance().showDiagrams();
+				cwb.statistics.Overview.getInstance().loadData();
+				Ext.Msg.updateProgress(0.5, cwb.Dict.translate("Loading diagrams and statistics"));
+				cwb.ui.StructureTabPanel.getInstance().showDiagrams();
+			}
 			Ext.Msg.hide();
 			break;
 		
