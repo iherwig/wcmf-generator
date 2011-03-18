@@ -78,7 +78,8 @@ uwm.tabadmin.ImportPanel.prototype.successHandler = function(form, action) {
 		})],
 		buttons: [{
 			text: uwm.Dict.translate('OK'),
-			handler: function() {
+			handler: function(btn) {
+				btn.disable();
 				uwm.Uwm.getInstance().reload();
 			}
 		}]

@@ -41,12 +41,16 @@ chi.persistency.WcmfJson.prototype.jsonRequest = function(params, successHandler
 		params : params,
 		callback : function(options, success, response) {
 			if (success) {
-				var data = Ext.util.JSON.decode(response.responseText);
-				
-				if (!data.errorMsg) {
-					self.processSuccessHandler(successHandler, getRecordHandler.call(self, chi.persistency.WcmfJson.Handler.SUCCESS, options, data));
-				} else {
-					self.processErrorHandler(errorHandler, getRecordHandler.call(self, chi.persistency.WcmfJson.Handler.SUCCESS_ERROR, options, data), data.errorMsg);
+				try {
+					var data = Ext.util.JSON.decode(response.responseText);
+					if (!data.errorMsg) {
+						self.processSuccessHandler(successHandler, getRecordHandler.call(self, chi.persistency.WcmfJson.Handler.SUCCESS, options, data));
+					} else {
+						self.processErrorHandler(errorHandler, getRecordHandler.call(self, chi.persistency.WcmfJson.Handler.SUCCESS_ERROR, options, data), data.errorMsg);
+					}
+				}
+				catch (ex) {
+					chi.Log.log("JSON response expected, but received: "+response.responseText, chi.Log.ERROR);
 				}
 			} else {
 				self.processErrorHandler(errorHandler, getRecordHandler.call(self, chi.persistency.WcmfJson.Handler.ERROR, options, data));
