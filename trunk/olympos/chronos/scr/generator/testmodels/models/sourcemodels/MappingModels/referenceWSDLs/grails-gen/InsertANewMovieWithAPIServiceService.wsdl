@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions name="InsertANewMovieWithAPIServiceService" targetNamespace="http://unknown.namespace/" xmlns:ns1="http://schemas.xmlsoap.org/wsdl/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://unknown.namespace/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+<xs:schema elementFormDefault="unqualified" targetNamespace="http://unknown.namespace/" version="1.0" xmlns:tns="http://unknown.namespace/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:element name="executeInsertANewMovieWithAPI" type="tns:executeInsertANewMovieWithAPI" />
+<xs:element name="executeInsertANewMovieWithAPIResponse" type="tns:executeInsertANewMovieWithAPIResponse" />
+<xs:complexType name="executeInsertANewMovieWithAPI">
+<xs:sequence>
+<xs:element minOccurs="0" name="request" type="tns:insertANewMovieWithAPIRequest" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="insertANewMovieWithAPIRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="movie" type="tns:movie" />
+<xs:element minOccurs="0" name="director" type="tns:director" />
+<xs:element minOccurs="0" name="actor" type="tns:actor" />
+<xs:element minOccurs="0" name="id" type="xs:long" />
+
+<xs:element minOccurs="0" name="version" type="xs:long" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="movie">
+<xs:complexContent>
+<xs:extension base="tns:entityBaseExtended">
+<xs:sequence>
+<xs:element minOccurs="0" name="alias" type="xs:string" />
+<xs:element minOccurs="0" name="color" type="xs:string" />
+<xs:element minOccurs="0" name="country" type="xs:string" />
+<xs:element minOccurs="0" name="genre" type="xs:string" />
+<xs:element minOccurs="0" name="uRL" type="xs:string" />
+<xs:element minOccurs="0" name="language" type="xs:string" />
+<xs:element minOccurs="0" name="plot" type="xs:string" />
+<xs:element minOccurs="0" name="runtime" type="xs:string" />
+<xs:element minOccurs="0" name="date" type="xs:string" />
+<xs:element minOccurs="0" name="a" type="xs:IDREF" />
+
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="entityBaseExtended">
+<xs:complexContent>
+<xs:extension base="tns:entityBase">
+<xs:sequence>
+<xs:element minOccurs="0" name="name" type="xs:string" />
+<xs:element minOccurs="0" name="description" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="entityBase">
+<xs:sequence>
+<xs:element minOccurs="0" name="mRID" type="xs:ID" />
+
+<xs:element minOccurs="0" name="created" type="xs:string" />
+<xs:element minOccurs="0" name="creator" type="xs:string" />
+<xs:element minOccurs="0" name="lastEditor" type="xs:string" />
+<xs:element minOccurs="0" name="modified" type="xs:string" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="director">
+<xs:complexContent>
+<xs:extension base="tns:person">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="b" type="xs:IDREF" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="person">
+<xs:complexContent>
+
+<xs:extension base="tns:entityBaseExtended">
+<xs:sequence>
+<xs:element minOccurs="0" name="surname" type="xs:string" />
+<xs:element minOccurs="0" name="birth" type="xs:string" />
+<xs:element minOccurs="0" name="nationality" type="xs:string" />
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="actor">
+<xs:complexContent>
+<xs:extension base="tns:person">
+<xs:sequence />
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="executeInsertANewMovieWithAPIResponse">
+
+<xs:sequence>
+<xs:element minOccurs="0" name="response" type="tns:insertANewMovieWithAPIResponse" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="insertANewMovieWithAPIResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long" />
+<xs:element minOccurs="0" name="version" type="xs:long" />
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="executeInsertANewMovieWithAPIResponse">
+    <wsdl:part element="tns:executeInsertANewMovieWithAPIResponse" name="parameters">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeInsertANewMovieWithAPI">
+    <wsdl:part element="tns:executeInsertANewMovieWithAPI" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="InsertANewMovieWithAPIService">
+    <wsdl:operation name="executeInsertANewMovieWithAPI">
+      <wsdl:input message="tns:executeInsertANewMovieWithAPI" name="executeInsertANewMovieWithAPI">
+
+    </wsdl:input>
+      <wsdl:output message="tns:executeInsertANewMovieWithAPIResponse" name="executeInsertANewMovieWithAPIResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InsertANewMovieWithAPIServiceServiceSoapBinding" type="tns:InsertANewMovieWithAPIService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="executeInsertANewMovieWithAPI">
+      <soap:operation soapAction="" style="document" />
+
+      <wsdl:input name="executeInsertANewMovieWithAPI">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="executeInsertANewMovieWithAPIResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InsertANewMovieWithAPIServiceService">
+
+    <wsdl:port binding="tns:InsertANewMovieWithAPIServiceServiceSoapBinding" name="InsertANewMovieWithAPIServicePort">
+      <soap:address location="http://localhost:8080/movies/services/insertANewMovieWithAPI" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
