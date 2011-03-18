@@ -41,12 +41,16 @@ chi.persistency.DionysosJson.prototype.jsonRequest = function(params, successHan
 	request.jsonData = Ext.util.JSON.encode(params);
 	request.callback = function(options, success, response) {
 		if (success) {
-			var data = Ext.util.JSON.decode(response.responseText);
-
-			if (!data.errorCode) {
-				self.processSuccessHandler(successHandler, getRecordHandler.call(self, chi.persistency.DionysosJson.Handler.SUCCESS, options, data));
-			} else {
-				self.processErrorHandler(errorHandler, getRecordHandler.call(self, chi.persistency.DionysosJson.Handler.ERROR, options, data), data.errorMessage);
+			try {
+				var data = Ext.util.JSON.decode(response.responseText);
+				if (!data.errorCode) {
+					self.processSuccessHandler(successHandler, getRecordHandler.call(self, chi.persistency.DionysosJson.Handler.SUCCESS, options, data));
+				} else {
+					self.processErrorHandler(errorHandler, getRecordHandler.call(self, chi.persistency.DionysosJson.Handler.ERROR, options, data), data.errorMessage);
+				}
+			}
+			catch (ex) {
+				chi.Log.log("JSON response expected, but received: "+response.responseText, chi.Log.ERROR);
 			}
 		} else {
 			self.processErrorHandler(errorHandler, getRecordHandler.call(self, chi.persistency.DionysosJson.Handler.ERROR_STATUS, options, data));

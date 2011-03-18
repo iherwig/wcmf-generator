@@ -41,12 +41,16 @@ uwm.persistency.Json.prototype.jsonRequest = function(params, successHandler, er
 		params: params,
 		callback: function(options, success, response) {
 			if (success) {
-				var data = Ext.util.JSON.decode(response.responseText);
-				
-				if (!data.errorMsg) {
-					self.processSuccessHandler(successHandler, options, data);
-				} else {
-					self.processErrorHandler(errorHandler, options, data, data.errorMsg);
+				try {
+					var data = Ext.util.JSON.decode(response.responseText);
+					if (!data.errorMsg) {
+						self.processSuccessHandler(successHandler, options, data);
+					} else {
+						self.processErrorHandler(errorHandler, options, data, data.errorMsg);
+					}
+				}
+				catch (ex) {
+					uwm.Log.log("JSON response expected, but received: "+response.responseText, uwm.Log.ERROR);
 				}
 			} else {
 				self.processErrorHandler(errorHandler, options, data);
