@@ -27,3 +27,20 @@ uwm.model.AttributeObject = function(modelNodeClass) {
 }
 
 Ext.extend(uwm.model.AttributeObject, uwm.model.ModelObject);
+
+
+uwm.model.AttributeObject.prototype.validateMapping = function(mappingObject) {
+	var connectedObjectOid = mappingObject.getProperty("reference_value");
+	var connectedObjectParentOid = mappingObject.getProperty("reference_type");
+	
+	var self = this;
+	uwm.persistency.Persistency.getInstance().doesClassContainAttribute(connectedObjectParentOid, connectedObjectOid, function (request, data) {
+			self.handleValidateMapping(data);
+		});
+}
+
+uwm.model.AttributeObject.prototype.handleValidateMapping = function(data) {
+	if (!data.attributeFound) {
+		uwm.event.EventBroker.getInstance().fireEvent("mappingBroken", this);
+	}
+}

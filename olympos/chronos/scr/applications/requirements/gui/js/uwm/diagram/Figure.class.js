@@ -21,6 +21,10 @@ Ext.namespace("uwm.diagram");
  *            modelNodeClass The instance of {@link uwm.diagram.FigureClass}.
  */
 uwm.diagram.Figure = function(modelNodeClass) {
+	this.inheritedChilds = [];
+	this.inheritedChildsLoaded = false;
+	this.showInherited = false;
+	
 	uwm.model.ModelNode.call(this, modelNodeClass);
 }
 
@@ -111,11 +115,17 @@ uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
 
 	this.graphics = this.getFigure(modelObject.getModelNodeClass(), modelObject
 			.getLabel());
+	
 	this.graphics.setWorkflow(workflow);
 	this.graphics.setDimension(this.getWidth(), this.getHeight());
 
 	workflow.getCommandStack().execute(
 			new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
+	
+	// Add inherited children. Currently only attributes are supported.
+	if (this.showInherited) {
+		this.updateGraphicsForInheritedAttributes();
+	}
 }
 
 /**
@@ -126,7 +136,7 @@ uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
  *            The ModelClass to create a ModelObject from.
  * @param {String}
  *            label Label of the new ModelObject.
- * @return The created ModelObject.
+ * @return The created draw2d.Figure subclass.
  * @type uwm.model.ModelObject
  */
 uwm.diagram.Figure.prototype.getFigure = function(modelClass, label) {
@@ -141,6 +151,46 @@ uwm.diagram.Figure.prototype.getFigure = function(modelClass, label) {
  */
 uwm.diagram.Figure.prototype.getModelObject = function() {
 	return this.modelObject;
+}
+
+/**
+ * Returns an array of inherited childs. The array is only loaded if showInheritedAttributes is set to true.
+ * 
+ * @return The array of inherited childs.
+ */
+uwm.diagram.Figure.prototype.getInheritedChilds = function() {
+	return this.inheritedChilds;
+}
+
+/**
+ * Returns if the inherited childs have already been loaded for this object
+ * 
+ * @return true if the inheritedChilds have previously been loaded
+ */
+uwm.diagram.Figure.prototype.areInheritedChildsLoaded = function() {
+	return this.inheritedChildsLoaded;
+}
+
+/**
+ * Adds a model object for an inherited child. Currently only attributes are supported.
+ * 
+ */
+uwm.diagram.Figure.prototype.addInheritedChild = function(child) {
+	this.inheritedChilds.push(child);
+}
+
+/**
+ * Set if inherited attributes should be displayed for the class
+ */
+uwm.diagram.Figure.prototype.setShowInherited = function(showInheritedParam) {
+	this.showInherited = showInheritedParam;
+}
+
+/**
+ * Returns if inherited attributes should be displayed for the class
+ */
+uwm.diagram.Figure.prototype.isShowInherited = function() {
+	return this.showInherited;
 }
 
 /**
@@ -256,3 +306,86 @@ uwm.diagram.Figure.prototype.showObjectHistory = function(self, e) {
 	new uwm.ui.History(this.modelObject);
 }
 
+uwm.diagram.Figure.prototype.showInheritedAttributes = function() {
+	this.setShowInherited(true);
+	this.loadInheritedAttributes(false, true);
+	this.getGraphics().buildContextMenu();
+}
+
+uwm.diagram.Figure.prototype.hideInheritedAttributes = function() {
+	this.setShowInherited(false);
+	this.updateGraphicsForInheritedAttributes();
+	this.getGraphics().buildContextMenu();
+}
+
+uwm.diagram.Figure.prototype.loadInheritedAttributes = function(forceReload, updateGraphics, callback) {
+	if (this.inheritedChilds.length == 0 || forceReload) {
+		this.inheritedChilds = [];
+		var self = this;
+		
+		var persistency = uwm.persistency.Persistency.getInstance();
+		persistency.loadInheritedAttributes(this.getModelObject().getOid(), function (request, data) {
+			self.handleLoadedInheritedAttributes(data, updateGraphics, callback);
+		});
+	}
+	else {
+		if (callback) {
+			callback(this);
+		}
+	}
+}
+
+uwm.diagram.Figure.prototype.handleLoadedInheritedAttributes = function(data, updateGraphics, callback) {
+	for (var i in data.inheritedAttributes) {
+		if (!(data.inheritedAttributes[i] instanceof Function)) {
+			var modelContainer = uwm.model.ModelContainer.getInstance();
+			var inheritedAttribute = modelContainer.createNodeFromData(data.inheritedAttributes[i].ChiValue[0]);
+			this.addInheritedChild(inheritedAttribute);
+		}
+	}
+	this.inheritedChildsLoaded = true;
+	if (updateGraphics) {
+		this.updateGraphicsForInheritedAttributes();
+	}
+	if (callback) {
+		callback(this);
+	}
+}
+
+uwm.diagram.Figure.prototype.updateGraphicsForInheritedAttributes = function() {
+	
+	// Get model objects for currently displayed child attributes
+	var graphicsChildElements = this.graphics.getChildElements();
+	var graphicsChildModelObjects = [];
+	var graphicsChildElementsToRemove = [];
+	for (var i = 0; i < graphicsChildElements.length; i++) {
+		if (graphicsChildElements[i] instanceof uwm.graphics.figure.Attribute) {
+			var graphicsChildModelObject = graphicsChildElements[i].getModelObject();
+			// If the model object of the graphics child element is not a child of the figure model object it might have to be removed
+			if (this.getModelObject().getChildOids().indexOf(graphicsChildModelObject.getOid()) == -1) {
+				// If the inherited attributes should not be displayed or the model object is also not an inherited attribute it is removed
+				if (!this.isShowInherited() || this.inheritedChilds.indexOf(graphicsChildModelObject) == -1) {
+					graphicsChildElementsToRemove.push(graphicsChildElements[i]);
+					continue;
+				}
+			}
+			// Otherwise it is added to the list of child model objects for the following check that all model objects are displayed
+			graphicsChildModelObjects.push(graphicsChildModelObject);
+		}
+	}
+	
+	// Remove the objects that were marked for removal
+	for (var i = 0; i < graphicsChildElementsToRemove.length; i++) {
+		this.graphics.removeChildElement(graphicsChildElementsToRemove[i], true);
+	}
+	
+	// Make sure that all inheritedChilds are in the list if the inherited attributes should be displayed
+	if (this.isShowInherited()) {
+		for (var i = 0; i < this.inheritedChilds.length; i++) {
+			if(graphicsChildModelObjects.indexOf(this.inheritedChilds[i]) == -1) {
+				var inheritedAttributeGraphic = new uwm.graphics.figure.InheritedAttribute(this.inheritedChilds[i].getName(), this.inheritedChilds[i]);
+				this.graphics.addChildElement(inheritedAttributeGraphic, true);
+			}
+		}
+	}
+}

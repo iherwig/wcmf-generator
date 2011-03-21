@@ -23,6 +23,8 @@ Ext.namespace("uwm.event");
  * 	<li><b>changeProperty:</b> When a property of an ModelNode was changed.</li>
  * 	<li><b>associate:</b> When a ModelNode was associated to another modelNode.</li>
  * 	<li><b>disassociate:</b> When a ModelNode was disassociated from another modelNode.</li>
+ *  <li><b>mappingBroken:</b> When a mapping for an AttributeObject was found to be broken.</li>
+ *  <li><b>reloadDiagram:</b> When a diagram is reloaded.</li>
  * </ul>
  * 
  * <p>This class is a <i>Singleton</i>.</p>
@@ -40,7 +42,9 @@ uwm.event.EventBroker = function() {
 		"changeLabel": true,
 		"changeProperty": true,
 		"associate": true, /* parameters: parentObject, childObject, relationObject, connection */
-		"disassociate": true
+		"disassociate": true,
+		"mappingBroken": true, /* parameters: attributeModelObject */
+		"reloadDiagram": true /* parameters: diagram */
 	});
 }
 

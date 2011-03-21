@@ -94,6 +94,13 @@ uwm.graphics.figure.Attribute.prototype.hideTools=function() {
 };
 
 /**
+ * Marks an attribute with a broken mapping (ChiValueRef) as broken by adding a CSS class.
+ */
+uwm.graphics.figure.Attribute.prototype.markBrokenMapping = function() {
+	this.label.className = this.label.className + " BrokenMapping";
+}
+
+/**
  * Callback method for the mouse enter event. Usefull for mouse hover-effects.
  * Sub classes can override this method to implement their own behaviour.
  **/

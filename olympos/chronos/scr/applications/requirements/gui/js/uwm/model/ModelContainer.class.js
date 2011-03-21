@@ -28,6 +28,13 @@ Ext.namespace("uwm.model");
  */
 uwm.model.ModelContainer = function() {
 	this.items = new Ext.util.MixedCollection();
+	
+	var self = this;
+	uwm.event.EventBroker.getInstance().addListener( {
+	    "reloadDiagram" : function(diagram) {
+		    self.handleReload(diagram);
+	    }
+	});
 }
 
 uwm.model.ModelContainer.prototype.getByOid = function(oid) {
@@ -35,9 +42,12 @@ uwm.model.ModelContainer.prototype.getByOid = function(oid) {
 }
 
 uwm.model.ModelContainer.prototype.createByDisplayResult = function(displayResult) {
-	var firstModelNode = null;
 	var node = displayResult.node;
-	
+	return this.createNodeFromData(node);
+}
+
+uwm.model.ModelContainer.prototype.createNodeFromData = function(node) {
+	var firstModelNode = null;
 	var furtherElements = true;
 	
 	var outstandingNodes = new Ext.util.MixedCollection();
@@ -440,6 +450,22 @@ uwm.model.ModelContainer.prototype.createNodeInstance = function(uwmClassName) {
 	var realModelClass = modelClass.getRealModelClass();
 	var newModelNode = eval("new " + modelClass.getInstanceClassName() + "(realModelClass)");
 	return newModelNode;
+}
+
+uwm.model.ModelContainer.prototype.handleReload = function(diagram) {
+	var itemsToRemoveFromCache = [];
+	for (var i = 0; i < this.items.length; i++) {
+		var currFigure = this.items.get(i);
+		if (currFigure instanceof uwm.diagram.Figure) {
+			if (diagram.containsFigure(currFigure)) {
+				itemsToRemoveFromCache.push(currFigure);
+			}
+		}
+	}
+	
+	for (var i = 0; i < itemsToRemoveFromCache.length; i++) {
+		this.items.remove(itemsToRemoveFromCache[i]);
+	}
 }
 
 uwm.model.ModelContainer.getInstance = function() {

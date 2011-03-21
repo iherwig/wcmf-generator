@@ -143,7 +143,7 @@ uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 	}));
 	items.push(new Ext.menu.Item( {
 			text : uwm.Dict.translate('Delete from model'),
-			handler : function(tiem, e) {
+			handler : function(item, e) {
 				figure.deleteFromModel();
 			}
 	}));
@@ -153,6 +153,22 @@ uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 				figure.showObjectHistory(item, e);
 			}
 	}));
+	if (!figure.isShowInherited()) {
+		items.push(new Ext.menu.Item( {
+			text : uwm.Dict.translate('Show inherited attributes'),
+			handler : function(item, e) {
+				figure.showInheritedAttributes(item, e);
+			}
+		}));
+	}
+	if (figure.isShowInherited()) {
+		items.push(new Ext.menu.Item( {
+			text : uwm.Dict.translate('Hide inherited attributes'),
+			handler : function(item, e) {
+				figure.hideInheritedAttributes(item, e);
+			}
+		}));
+	}
 	items.push(new Ext.menu.Item( {
 			text : "Help",
 			// iconCls: "uwm-help-icon",
