@@ -225,6 +225,14 @@
 	background-image: url("../img/16x16/ChiValue.png") !important;
 }
 
+.InheritedFigureAttribute {
+	color: #999999;
+}
+
+.BrokenMapping {
+	color: #FF0000 !important;
+}
+
 .FigureOperation {
 	background-image: url("../img/16x16/Operation.png") !important;
 }
