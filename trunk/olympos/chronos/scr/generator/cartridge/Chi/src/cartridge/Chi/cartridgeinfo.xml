@@ -8,7 +8,7 @@
 	</dependencies>
 	<properties>
 		<property name="codeGenerator">true</property>
-		<property name="workflow">workflow/cwe-headless.oaw</property>
+		<property name="workflow">workflow/chi-headless.oaw</property>
 		<property name="targetPlatform">ExtJS on JavaScript in a Browser</property>
 	</properties>
 </cartridgeinfo>

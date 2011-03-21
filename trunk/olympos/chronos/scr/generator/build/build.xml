@@ -67,11 +67,11 @@
 			</and>
 		</condition>
 
-		<mkdir dir="${build.dir}/wcmf"/>
+		<mkdir dir="${build.dir}/frameworks"/>
 	</target>
 	
 	<target name="build-cwe-source" depends="build-cwe-check" if="cwe.build.from.source">
-		<zip destfile="${build.dir}/wcmf/cwe.zip">
+		<zip destfile="${build.dir}/frameworks/cwe.zip">
 			<zipfileset dir="${cwe.source.dir}" prefix="cwe">
 				<exclude name="**/.svn"/>
 				<exclude name=".project"/>
@@ -97,7 +97,7 @@
 	<target name="copy-zipped-libs" unless="copy-zipped-libs-ran">
 		<copy todir="${build.dir}/" verbose="false">
 			<fileset dir=".">
-				<include name="wcmf/**/*.*"/>
+				<include name="frameworks/**/*.*"/>
 			</fileset>
 		</copy>
 	</target>
@@ -105,11 +105,11 @@
 	<target name="build-wcmf-check">
 		<available file="${wcmf.source.dir}" property="wcmf.build.from.source"/>
 
-		<mkdir dir="${build.dir}/wcmf"/>
+		<mkdir dir="${build.dir}/frameworks"/>
 	</target>
 	
 	<target name="build-wcmf-source" depends="build-wcmf-check" if="wcmf.build.from.source">
-		<zip destfile="${build.dir}/wcmf/wcmf.zip">
+		<zip destfile="${build.dir}/frameworks/wcmf.zip">
 			<zipfileset dir="${wcmf.source.dir}">
 				<exclude name="**/.svn"/>
 				<exclude name=".*"/>
@@ -175,7 +175,7 @@
 		</copy>
 		<copy todir="${redist.dir}" verbose="false">
 			<fileset dir="${build.dir}">
-				<include name="wcmf/**/*"/>
+				<include name="frameworks/**/*"/>
 			</fileset>
 		</copy>
 
