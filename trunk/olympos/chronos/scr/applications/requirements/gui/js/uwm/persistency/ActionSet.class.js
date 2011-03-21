@@ -242,6 +242,17 @@ uwm.persistency.ActionSet.prototype.addLog = function(logtype, msg,
 	};
 }
 
+uwm.persistency.ActionSet.prototype.addLoadInheritedAttributes = function(oid,
+		successHandler, errorHandler, errorLevel) {
+	this.requests[this.getNextId()] = {
+		action :"loadInheritedAttributes",
+		node :oid,
+		successHandler :successHandler,
+		errorHandler :errorHandler,
+		errorLevel :errorLevel
+	};
+}
+
 uwm.persistency.ActionSet.prototype.commit = function(successHandler,
 		errorHandler) {
 	for ( var i in this.requests) {

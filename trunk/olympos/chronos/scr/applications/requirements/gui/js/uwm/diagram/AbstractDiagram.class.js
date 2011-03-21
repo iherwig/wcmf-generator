@@ -14,13 +14,13 @@ Ext.namespace("uwm.diagram");
 /**
  * @class A Diagram displaying graphic depiction of a subset of a model. Serves
  *        as base for ActivitySet or Diagram.
- *
+ * 
  * <p>
  * A Diagram or ActivitySet consists of a drawing area and figures on the
  * drawing area. It contains an auto-layouter, the panel for its tab, and two
  * lists for both the contained figures and the contained Model Objects.
  * </p>
- *
+ * 
  * @extends uwm.diagram.DiagramBase
  * @constructor
  * @param {uwm.model.ModelNodeClass}
@@ -52,6 +52,9 @@ uwm.diagram.AbstractDiagram = function(modelNodeClass) {
 	    },
 	    "associate" : function(parentModelObject, childModelObject, relationObject, connection) {
 		    self.handleAssociateEvent(parentModelObject, childModelObject, relationObject, connection);
+	    },
+	    "mappingBroken" : function(attributeModelObject) {
+	    	self.handleBrokenMapping(attributeModelObject);
 	    }
 	});
 }
@@ -76,7 +79,7 @@ uwm.diagram.AbstractDiagram.prototype.setContainedPackage = function(packageMode
 
 /**
  * Initiates a new diagram.
- *
+ * 
  * <p>
  * Creates a new panel for the tab, initiates internal state to default values.
  * </p>
@@ -86,7 +89,7 @@ uwm.diagram.AbstractDiagram.prototype.init = function() {
 
 	/**
 	 * The panel for the tab of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type uwm.diagram.DiagramTab
 	 */
@@ -97,7 +100,7 @@ uwm.diagram.AbstractDiagram.prototype.init = function() {
 
 	/**
 	 * Whether Objects should snap to other objects when moving.
-	 *
+	 * 
 	 * @private
 	 * @type boolean
 	 */
@@ -105,7 +108,7 @@ uwm.diagram.AbstractDiagram.prototype.init = function() {
 
 	/**
 	 * The width of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type int
 	 */
@@ -113,7 +116,7 @@ uwm.diagram.AbstractDiagram.prototype.init = function() {
 
 	/**
 	 * The height of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type int
 	 */
@@ -128,13 +131,13 @@ uwm.diagram.AbstractDiagram.prototype.init = function() {
 
 /**
  * Initiates the draw2d elements of this diagram.
- *
+ * 
  * @private
  */
 uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 	/**
 	 * The viewport of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type Ext.Element
 	 */
@@ -157,7 +160,7 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 
 	/**
 	 * The draw2d workflow of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type uwm.diagram.UwmWorkflow
 	 */
@@ -174,7 +177,7 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 
 	/**
 	 * The Selection Lister of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type uwm.diagram.SelectionListener
 	 */
@@ -183,7 +186,7 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 
 	/**
 	 * The Workflow Event Listener of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type uwm.diagram.WorkflowEventListener
 	 */
@@ -192,7 +195,7 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 
 	/**
 	 * The auto-layouter of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type uwm.diagram.autolayout.Layouter
 	 */
@@ -201,9 +204,9 @@ uwm.diagram.AbstractDiagram.prototype.initWorkflow = function() {
 
 /**
  * Checks whether an object is contained in the diagram
- *
+ * 
  * @link{uwm.model.ModelObject} with the given oid is contained in this diagram.
- *
+ * 
  * @param {modelObject}
  *            modelObject The ModelObject to check.
  * @return <code>true</code> if a Model Object with <code>oid</code> is
@@ -215,10 +218,25 @@ uwm.diagram.AbstractDiagram.prototype.containsObject = function(modelObject) {
 }
 
 /**
+ * Checks whether a figure is contained in the diagram
+ * 
+ * @param {figure}
+ *            figure The Figure to check.
+ * @return <code>true</code> if the Figure is
+ *         contained in this diagram. <code>false</code> otherwise.
+ * @type boolean
+ */
+uwm.diagram.AbstractDiagram.prototype.containsFigure = function(figure) {
+	return this.figures.contains(figure);
+}
+
+/**
  * Get the persisted figure object for a model object contained in this diagram.
- * Note that not all model objects in the diagram have a corresponding figure instance
- * (e.g. class attributes and operations)
- * @param {String} oid The object id of a model object
+ * Note that not all model objects in the diagram have a corresponding figure
+ * instance (e.g. class attributes and operations)
+ * 
+ * @param {String}
+ *            oid The object id of a model object
  * @return The {uwm.diagram.Figure}
  */
 uwm.diagram.AbstractDiagram.prototype.getContainedFigureObject = function(oid) {
@@ -227,29 +245,74 @@ uwm.diagram.AbstractDiagram.prototype.getContainedFigureObject = function(oid) {
 
 /**
  * Get the figure graphic for a model object contained in this diagram.
- * @param {String} oid The object id of a model object that is displayed in the diagram
+ * 
+ * @param {String}
+ *            oid The object id of a model object that is displayed in the
+ *            diagram
+ * @param {String}
+ *            parentClassOid The object that should contain the graphics object
+ *            for the given model class. If it does not exist it will be created
+ *            based on the modelObject and added to parentClass. This is used
+ *            for inherited attributes that are mapped but have not been loaded.
+ *            The caller must make sure that the attribute is an inherited attribute 
+ *            of the given class. This can be done by calling 
+ *            'doesClassContainAttribute' in 'InheritanceController'
  * @return An instance of a class from the {uwm.graphics.figure} namespace
  */
-uwm.diagram.AbstractDiagram.prototype.getContainedFigureGraphic = function(modelObject) {
+uwm.diagram.AbstractDiagram.prototype.getContainedFigureGraphic = function(modelObject, parentClass) {
 	var figureGraphic = null;
-	var figureObject = this.getContainedFigureObject(modelObject.getOid());
-
-	// if the figure object does not exist, the object could be part
-	// of a uwm.graphics.figure.ClassFigure
-	if (!figureObject) {
-		var parentOids = modelObject.getParentOids();
-		if (parentOids) {
-			for (var i=0, countI=parentOids.length; i<countI; i++) {
-				var parentFigureObject = this.getContainedFigureObject(parentOids[i]);
-				if (parentFigureObject) {
-					var parentFigureGraphic = parentFigureObject.getGraphics();
-					if (parentFigureGraphic instanceof uwm.graphics.figure.ClassFigure) {
-						var childFigureGraphics = parentFigureGraphic.getChildElements();
-						if (childFigureGraphics) {
-							for (var j=0, countJ=childFigureGraphics.length; j<countJ; j++) {
-								if (childFigureGraphics[j].getModelObject() == modelObject) {
-									figureGraphic = childFigureGraphics[j];
-									break;
+	
+	// If parentClass is set we only look in the parentClass. If the modelObject
+	// graphics object does not exist it is created
+	if (parentClass) {
+		var parentClassFigureGraphic = this.getContainedFigureGraphic(parentClass);
+		// If the parentClass is not found in the diagram then null is returned
+		if (parentClassFigureGraphic) {
+			var parentClassFigureGraphicChilds = parentClassFigureGraphic.getChildElements();
+			for (var i = 0; i < parentClassFigureGraphicChilds.length; i++) {
+				if (parentClassFigureGraphicChilds[i].getModelObject() == modelObject) {
+					figureGraphic = parentClassFigureGraphicChilds[i];
+					break;
+				}
+			}
+			// If the figureGraphic was not found, it will be created
+			if (!figureGraphic) {
+				// TODO Replace new InheritedAttribute with more general approach to find
+				// graphics object
+				figureGraphic = new uwm.graphics.figure.InheritedAttribute(modelObject.getName(), modelObject);
+				
+				// To check if the attribute we added really exists we load the
+				// inherited attributes for the figure and provide a callback
+				// handler that will check the attributes after they are loaded.
+				var parentFigureObject = this.getContainedFigureObject(parentClass.getOid());
+				parentClassFigureGraphic.addChildElement(figureGraphic, true);
+				var self = this;
+				parentFigureObject.loadInheritedAttributes(false, false, function (figure) {
+						self.isInheritedAttributeValid(figureGraphic, parentFigureObject);
+					});
+			}
+		}
+	}
+	else {
+		var figureObject = this.getContainedFigureObject(modelObject.getOid());
+		// If the figure
+		// object does not exist, the object could be part
+		// of a uwm.graphics.figure.ClassFigure
+		if (!figureObject) {
+			var parentOids = modelObject.getParentOids();
+			if (parentOids) {
+				for (var i=0, countI=parentOids.length; i<countI; i++) {
+					var parentFigureObject = this.getContainedFigureObject(parentOids[i]);
+					if (parentFigureObject) {
+						var parentFigureGraphic = parentFigureObject.getGraphics();
+						if (parentFigureGraphic instanceof uwm.graphics.figure.ClassFigure) {
+							var childFigureGraphics = parentFigureGraphic.getChildElements();
+							if (childFigureGraphics) {
+								for (var j=0, countJ=childFigureGraphics.length; j<countJ; j++) {
+									if (childFigureGraphics[j].getModelObject() == modelObject) {
+										figureGraphic = childFigureGraphics[j];
+										break;
+									}
 								}
 							}
 						}
@@ -257,11 +320,19 @@ uwm.diagram.AbstractDiagram.prototype.getContainedFigureGraphic = function(model
 				}
 			}
 		}
+		else {
+			figureGraphic = figureObject.getGraphics();
+		}
 	}
-	else {
-		figureGraphic = figureObject.getGraphics();
-	}
+
+	
 	return figureGraphic;
+}
+
+uwm.diagram.AbstractDiagram.prototype.isInheritedAttributeValid = function(figureGraphic, parentFigureObject) {
+	if (parentFigureObject.getInheritedChilds().indexOf(figureGraphic.getModelObject()) == -1) {
+		figureGraphic.label.className = figureGraphic.label.className + " BrokenChild";
+	}
 }
 
 uwm.diagram.AbstractDiagram.prototype.getContainedConnection = function(sourceOid, targetOid, relationOid) {
@@ -317,7 +388,7 @@ uwm.diagram.AbstractDiagram.prototype.scrollToCenter = function() {
 
 /**
  * Return the tab of this diagram.
- *
+ * 
  * @return The tab of this diagram.
  * @type uwm.diagram.DiagramTab
  */
@@ -327,7 +398,7 @@ uwm.diagram.AbstractDiagram.prototype.getTab = function() {
 
 /**
  * Initiates the drop zone of this diagram.
- *
+ * 
  * @private
  */
 uwm.diagram.AbstractDiagram.prototype.initDropZone = function() {
@@ -335,7 +406,7 @@ uwm.diagram.AbstractDiagram.prototype.initDropZone = function() {
 
 	/**
 	 * The drop zone of this diagram.
-	 *
+	 * 
 	 * @private
 	 * @type uwm.diagram.DropZone
 	 */
@@ -346,7 +417,7 @@ uwm.diagram.AbstractDiagram.prototype.initDropZone = function() {
 
 /**
  * Loads saved figures.
- *
+ * 
  * @private
  */
 uwm.diagram.AbstractDiagram.prototype.loadFigures = function(forceReload) {
@@ -423,6 +494,11 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 					}
 					this.figures.add(parentOid, figure);
 					modelContainer.loadByOid(parentOid, this.actionSet, 2);
+					if (figure.isShowInherited()) {
+						this.actionSet.addLoadInheritedAttributes(parentOid, function(request, data) {
+								figure.handleLoadedInheritedAttributes(data, true);
+							});
+					}
 				}
 			}
 		}
@@ -458,7 +534,6 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject)
 		// in this case the figure was stored under the proxy object's oid
 		figure = this.getContainedFigureObject(modelObject.getProxyOid());
 	}
-
 	figure.load(modelObject, this);
 
 	this.objects.add(modelObject.getOid(), modelObject);
@@ -529,127 +604,209 @@ uwm.diagram.AbstractDiagram.prototype.establishExistingConnections = function(ne
 
 	if (list) {
 		for ( var i = 0; i < list.length; i++) {
-			var connectedObject = this.getConnectedObject(list[i]);
+			this.establishSpecificExistingConnection(newObject, list[i], listtype);
+		}
+	}
+}
 
-			var relationObject = null;
-			var isSelfRelation = false;
+uwm.diagram.AbstractDiagram.prototype.establishSpecificExistingConnection = function(newObject, connection, connectiontype) {
+	var connectedObject = this.getConnectedObject(connection);
 
-			if (!connectedObject) {
-				var nmtype = false;
-				var childObject = uwm.model.ModelContainer.getInstance().getByOid(list[i]);
-				if (childObject instanceof uwm.model.Relation) {
-					relationObject = childObject;
+	var relationObject = null;
+	var isSelfRelation = false;
 
-					var parentOids = childObject.getParentOids();
-					nmtype = true;
+	if (!connectedObject) {
+		var nmtype = false;
+		var childObject = uwm.model.ModelContainer.getInstance().getByOid(connection);
+		if (childObject instanceof uwm.model.Relation) {
+			relationObject = childObject;
 
-					// we expect 2 parentOids (wCMF returns 3 due to a bug)
-					if (parentOids[0] == parentOids[1]) {
-						// self relation -> connectedObject is the same as newObject
-						connectedObject = this.getConnectedObject(parentOids[0]);
-            isSelfRelation = true;
-					}
-					else {
-						// relation to other object
-						if (parentOids[0] != newObject.getOid()) {
-							connectedObject = this.getConnectedObject(parentOids[0]);
-						}
-						else {
-							connectedObject = this.getConnectedObject(parentOids[1]);
-						}
-					}
+			var parentOids = childObject.getParentOids();
+			nmtype = true;
+
+			// we expect 2 parentOids (wCMF returns 3 due to a bug)
+			if (parentOids[0] == parentOids[1]) {
+				// self relation -> connectedObject is the same as newObject
+				connectedObject = this.getConnectedObject(parentOids[0]);
+    isSelfRelation = true;
+			}
+			else {
+				// relation to other object
+				if (parentOids[0] != newObject.getOid()) {
+					connectedObject = this.getConnectedObject(parentOids[0]);
 				}
-				if (childObject instanceof uwm.model.AttributeObject) {
-					var childOids = childObject.getChildOids();
-					if (childOids.length == 1) {
-						// we expect a mapping relation (realized by a ChiValueRef)
-						var mappingObject = uwm.model.ModelContainer.getInstance().getByOid(childOids[0]);
-						// determine the connected ChiValues
-						connectedObjectOid = mappingObject.getProperty("reference_value");
-						connectedObject = uwm.model.ModelContainer.getInstance().getByOid(connectedObjectOid);
-						newObject = childObject;
-					}
+				else {
+					connectedObject = this.getConnectedObject(parentOids[1]);
 				}
 			}
-
-			if (connectedObject) {
-
-				var connectionInfo = newObject.getModelNodeClass().getConnectionInfo(connectedObject.getModelNodeClass());
-				var createConnection = true;
-
-				if (connectionInfo) {
-					if (connectionInfo.nmUwmClassName && relationObject) {
-						var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
-						var maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
-
-						if ( ((maskedClass instanceof uwm.model.RelationEndClass) &&
-									(maskedClass.getConnnectionEndRole() == "target" || isSelfRelation && maskedClass.getConnnectionEndRole() == "source")) /* at this point we only get the source end for self relations */
-									|| maskedClass instanceof uwm.model.RelationClass ) {
-							if (connectionInfo.connection) {
-								connectionInfo = connectionInfo.connection;
-							} else {
-								var relationType = relationObject.getProperty("relationType");
-
-								for ( var j = 0; j < connectionInfo.connections.length; j++) {
-									var currConnectionInfo = connectionInfo.connections[j];
-
-									if (currConnectionInfo.connectionType == relationType) {
-										connectionInfo = currConnectionInfo;
-										break;
-									}
-								}
+		}
+		if (childObject instanceof uwm.model.AttributeObject) {
+			var childOids = childObject.getChildOids();
+			if (childOids.length == 1) {
+				// we expect a mapping relation (realized by a ChiValueRef)
+				var mappingObject = uwm.model.ModelContainer.getInstance().getByOid(childOids[0]);
+				// determine the connected ChiValues
+				var connectedObjectOid = mappingObject.getProperty("reference_value");
+				var connectedObjectParentOid = mappingObject.getProperty("reference_type");
+				
+				var connectedObjectParent = uwm.model.ModelContainer.getInstance().getByOid(connectedObjectParentOid);
+				var connectedObjectParentFigure = this.getContainedFigureObject(connectedObjectParentOid);
+				if (connectedObjectParentFigure) {
+					connectedObject = uwm.model.ModelContainer.getInstance().getByOid(connectedObjectOid);
+					
+					// The target class exists in the diagram, so the mapping
+					// connection should be displayed
+					if (connectedObjectParentFigure.getModelObject().getChildOids().indexOf(connectedObjectOid) == -1) {
+						// The target attribute is not part of the target class.
+						// It might be an inherited attribute.
+						// Otherwise the target attribute is part of the target class, so
+						// the mapping can be drawn.
+						if (connectedObjectParentFigure.areInheritedChildsLoaded()) {
+							// The inherited attributes are already loaded, so
+							// we just need to check if the target attribute is
+							// in the list
+							if (!connectedObject || connectedObjectParentFigure.getInheritedChilds().indexOf(connectedObject) == -1) {
+								// The target attribute is not part of the
+								// target class. The mapping will be marked as
+								// broken.
+								// Otherwise the attribute is part of the target class.
+								// The mapping can be drawn.
+								this.getContainedFigureGraphic(childObject).markBrokenMapping();
+								// Since the mapping is not valid we set the connectedObject to null so that no connection is drawm in the next step
+								connectedObject = null;
 							}
-						} else {
-							createConnection = false;
+						}
+						else {
+							// The inherited attributes for the target class
+							// have not been loaded, so we load the attributes
+							// and come back later to this connection
+							
+							// Since we do not want to create the connection at this time we set the connectedObject to null
+							connectedObject = null;
+							
+							var self = this;
+							connectedObjectParentFigure.loadInheritedAttributes(false, false, function(figure) {
+									self.establishSpecificExistingConnection(newObject, connection, connectiontype);
+								});
+						}
+					}
+				}
+				else {
+					// The target class does not exist in the diagram, so we
+					// will not display any mappings, but we still need to check
+					// if the mapping is valid
+					childObject.validateMapping(mappingObject);
+				}
+				
+				
+				var connectedObjectParent = uwm.model.ModelContainer.getInstance().getByOid(connectedObjectParentOid);
+				newObject = childObject;
+			}
+		}
+	}
+
+	if (connectedObject) {
+
+		var connectionInfo = newObject.getModelNodeClass().getConnectionInfo(connectedObject.getModelNodeClass());
+		var createConnection = true;
+
+		if (connectionInfo) {
+			if (connectionInfo.nmUwmClassName && relationObject) {
+				var maskedRelatedOid = newObject.getMaskedRelatedOid(relationObject.getOid());
+				var maskedClass = uwm.model.ModelNodeClassContainer.getInstance().getClass(uwm.Util.getUwmClassNameFromOid(maskedRelatedOid));
+
+				if ( ((maskedClass instanceof uwm.model.RelationEndClass) &&
+							(maskedClass.getConnnectionEndRole() == "target" || isSelfRelation && maskedClass.getConnnectionEndRole() == "source")) /*
+																																					 * at
+																																					 * this
+																																					 * point
+																																					 * we
+																																					 * only
+																																					 * get
+																																					 * the
+																																					 * source
+																																					 * end
+																																					 * for
+																																					 * self
+																																					 * relations
+																																					 */
+							|| maskedClass instanceof uwm.model.RelationClass ) {
+					if (connectionInfo.connection) {
+						connectionInfo = connectionInfo.connection;
+					} else {
+						var relationType = relationObject.getProperty("relationType");
+
+						for ( var j = 0; j < connectionInfo.connections.length; j++) {
+							var currConnectionInfo = connectionInfo.connections[j];
+
+							if (currConnectionInfo.connectionType == relationType) {
+								connectionInfo = currConnectionInfo;
+								break;
+							}
 						}
 					}
 				} else {
 					createConnection = false;
 				}
+			}
+		} else {
+			createConnection = false;
+		}
 
-				if (createConnection) {
-					var sourceOid = newObject.getOid();
-					var targetOid = connectedObject.getOid();
-					var relationOid = "";
-					if (relationObject) {
-						relationOid = relationObject.getOid();
-					}
-					if (this.getContainedConnection(sourceOid, targetOid, relationOid) == null) {
-						// retrieve the figures (maybe swapped later)
-						var newFigureTmp = this.getContainedFigureGraphic(newObject);
-						var connectedFigureTmp = this.getContainedFigureGraphic(connectedObject);
+		if (createConnection) {
+			var sourceOid = newObject.getOid();
+			var targetOid = connectedObject.getOid();
+			var relationOid = "";
+			if (relationObject) {
+				relationOid = relationObject.getOid();
+			}
+			if (this.getContainedConnection(sourceOid, targetOid, relationOid) == null) {
+				// retrieve the figures (maybe swapped later)
+				var newFigureTmp = this.getContainedFigureGraphic(newObject);
+				var connectedFigureTmp = this.getContainedFigureGraphic(connectedObject, connectedObjectParent);
 
-						// swap the direction if the following conditions are true
-						if ((connectionInfo.nmSelf && connectionInfo.invertBackendRelation) ||
-							((connectedObject.getUwmClassName() == newObject.getUwmClassName() && !connectionInfo.nmSelf) &&
-								(listtype == 'parent' && !connectionInfo.invert) || (listtype == 'child' && connectionInfo.invert))
-						) {
-							var newFigure = connectedFigureTmp;
-							var connectedFigure = newFigureTmp;
-						}
-						// use the original direction
-						else {
-							var newFigure = newFigureTmp;
-							var connectedFigure = connectedFigureTmp;
-						}
+				// swap the direction if the following conditions are true
+				if ((connectionInfo.nmSelf && connectionInfo.invertBackendRelation) ||
+					((connectedObject.getUwmClassName() == newObject.getUwmClassName() && !connectionInfo.nmSelf) &&
+						(connectiontype == 'parent' && !connectionInfo.invert) || (connectiontype == 'child' && connectionInfo.invert))
+				) {
+					var newFigure = connectedFigureTmp;
+					var connectedFigure = newFigureTmp;
+				}
+				// use the original direction
+				else {
+					var newFigure = newFigureTmp;
+					var connectedFigure = connectedFigureTmp;
+				}
 
-						if (connectedFigure) {
-							var sourcePortIndex = 0;
-							var targetPortIndex = (newFigure == connectedFigure) ? 1 : 0;
-							var newPort = newFigure.getPorts().get(sourcePortIndex);
-							var connectedPort = connectedFigure.getPorts().get(targetPortIndex);
+				if (connectedFigure) {
+					var sourcePortIndex = 0;
+					var targetPortIndex = (newFigure == connectedFigure) ? 1 : 0;
+					var newPort = newFigure.getPorts().get(sourcePortIndex);
+					var connectedPort = connectedFigure.getPorts().get(targetPortIndex);
 
-							this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true, undefined, relationObject);
-						}
-					}
+					this.createSpecificConnection(newObject, connectedObject, newPort, connectedPort, connectionInfo, true, undefined, relationObject);
 				}
 			}
 		}
 	}
 }
 
+/**
+ * Handler for the mappingBroken event. This will check if the mapping that was
+ * found to be broken is part of this diagram and will mark it as broken if it
+ * is part.
+ */
+uwm.diagram.AbstractDiagram.prototype.handleBrokenMapping = function(attributeModelObject) {
+	var attributeGraphicsObject = this.getContainedFigureGraphic(attributeModelObject);
+	if (attributeGraphicsObject) {
+		attributeGraphicsObject.markBrokenMapping();
+	}
+}
+
 uwm.diagram.AbstractDiagram.prototype.reestablishExistingClass = function(newObject) {
 	var childOids = newObject.getChildOids();
+	
 	if (childOids) {
 		var modelContainer = uwm.model.ModelContainer.getInstance();
 		var figure = this.getContainedFigureObject(newObject.getOid());
@@ -775,7 +932,7 @@ uwm.diagram.AbstractDiagram.prototype.createSpecificConnection = function(source
 
 /**
  * Assigns proper graphical representations according to connection type.
- *
+ * 
  * @param {String}
  *            connectionType The type of connection. Currently supported are
  *            <code>aggregation</code> and <code>composition</code>.
@@ -825,7 +982,7 @@ uwm.diagram.AbstractDiagram.prototype.getConnectionTypeDecorators = function(con
 
 /**
  * Returns the draw2d workflow of this diagram.
- *
+ * 
  * @return The draw2d workflow of this diagram.
  * @type uwm.diagram.UwmWorkflow
  */
@@ -835,7 +992,7 @@ uwm.diagram.AbstractDiagram.prototype.getWorkflow = function() {
 
 /**
  * Returns the {Ext.Element} representing the canvas layer.
- *
+ * 
  * @return The {Ext.Element} representing the canvas layer.
  * @type String
  */
@@ -845,7 +1002,7 @@ uwm.diagram.AbstractDiagram.prototype.getCanvas = function() {
 
 /**
  * Returns whether snap to objects is activated for this diagram.
- *
+ * 
  * @return <code>true</code> if snap to objects is activated for this diagram,
  *         <code>false</code> otherwise.
  * @type boolean
@@ -856,7 +1013,7 @@ uwm.diagram.AbstractDiagram.prototype.isSnapToObjects = function() {
 
 /**
  * Sets snap to objects for this diagram.
- *
+ * 
  * @param {boolean}
  *            snapToObjects <code>true</code> if object should snap to other
  *            objects, <code>false</code> if objects should not snap to other
@@ -869,7 +1026,7 @@ uwm.diagram.AbstractDiagram.prototype.setSnapToObjects = function(snapToObjects)
 
 /**
  * Shows the Diagram in Model Tree.
- *
+ * 
  * @see uwm.modeltree.ModelTree
  */
 uwm.diagram.AbstractDiagram.prototype.showInModelTree = function() {
@@ -878,12 +1035,15 @@ uwm.diagram.AbstractDiagram.prototype.showInModelTree = function() {
 
 /**
  * Reloads the diagram.
- *
+ * 
  * @see uwm.modeltree.ModelTree
  */
 uwm.diagram.AbstractDiagram.prototype.reloadDiagram = function() {
 	var container = uwm.diagram.DiagramContainer.getInstance();
 	container.getTabPanel().remove(this.tab);
+	
+	// Inform all figures of the reload, that need to dismiss data
+	uwm.event.EventBroker.getInstance().fireEvent("reloadDiagram", this);
 
 	uwm.diagram.DiagramContainer.getInstance().loadDiagram(this);
 }
@@ -931,7 +1091,7 @@ uwm.diagram.AbstractDiagram.prototype.doLayout = function() {
 
 /**
  * Returns the position a context menu should be shown at.
- *
+ * 
  * @param {int}
  *            x The draw2d event x position.
  * @param {int}
@@ -948,7 +1108,7 @@ uwm.diagram.AbstractDiagram.prototype.getContextMenuPosition = function(x, y) {
 
 /**
  * Adds an existing object to this diagram.
- *
+ * 
  * @param {uwm.model.ModelObject}
  *            modelObject The ModelObject to add to the diagram.
  * @param {int}
@@ -956,7 +1116,8 @@ uwm.diagram.AbstractDiagram.prototype.getContextMenuPosition = function(x, y) {
  * @param {int}
  *            y The draw2d x position to add the ModelObject at.
  * @param {string}
- *            dropWindowId The id of the drop window to close after the process finished (optional).
+ *            dropWindowId The id of the drop window to close after the process
+ *            finished (optional).
  */
 uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, x, y, dropWindowId) {
 
@@ -1009,11 +1170,11 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
 
 /**
  * Creates a new object on this diagram.
- *
+ * 
  * <p>
  * The new ModelObject is added to the package this diagram is contained in.
  * </p>
- *
+ * 
  * @param {uwm.model.ModelClass}
  *            modelClass The ModelClass of which a new ModelObject should be
  *            created.
@@ -1022,7 +1183,8 @@ uwm.diagram.AbstractDiagram.prototype.addExistingObject = function(modelObject, 
  * @param {int}
  *            y The draw2d x position to add the ModelObject at.
  * @param {string}
- *            dropWindowId The id of the drop window to close after the process finished (optional).
+ *            dropWindowId The id of the drop window to close after the process
+ *            finished (optional).
  */
 uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, y, dropWindowId) {
 	var self = this;
@@ -1064,12 +1226,9 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, 
 	});
 
 	/*
-	 actionSet.addSave("{last_created_oid:Figure}", {
-	 PositionX :x,
-	 PositionY :y,
-	 Width :modelClass.getInitialWidth(),
-	 Height :modelClass.getInitialHeight()
-	 });
+	 * actionSet.addSave("{last_created_oid:Figure}", { PositionX :x, PositionY
+	 * :y, Width :modelClass.getInitialWidth(), Height
+	 * :modelClass.getInitialHeight() });
 	 */
 	actionSet.addAssociate("{last_created_oid:Figure}", "{last_created_oid:" + modelClass.getUwmClassName() + "}", function(request, data) {
 		uwm.event.EventBroker.getInstance().fireEvent("associate", savedFigureNode, savedObjectNode);
@@ -1080,7 +1239,7 @@ uwm.diagram.AbstractDiagram.prototype.createNewObject = function(modelClass, x, 
 
 /**
  * Creates a new Figure.
- *
+ * 
  * @private
  * @return the new Figure.
  * @type uwm.diagram.Figure
@@ -1091,7 +1250,9 @@ uwm.diagram.AbstractDiagram.prototype.getFigure = function() {
 
 /**
  * Remove a figure from internal registries
- * @param figure A {uwm.diagram.Figure} instance
+ * 
+ * @param figure
+ *            A {uwm.diagram.Figure} instance
  */
 uwm.diagram.AbstractDiagram.prototype.removeFigureFromCache = function(figure) {
 	if (figure) {
@@ -1116,7 +1277,9 @@ uwm.diagram.AbstractDiagram.prototype.removeFigureFromCache = function(figure) {
 
 /**
  * Remove a connection from internal registries
- * @param connection A {uwm.graphics.connection.BaseConnection} instance
+ * 
+ * @param connection
+ *            A {uwm.graphics.connection.BaseConnection} instance
  */
 uwm.diagram.AbstractDiagram.prototype.removeConnectionFromCache = function(connection) {
 	var doomedKeys = [];
@@ -1226,7 +1389,8 @@ uwm.diagram.AbstractDiagram.prototype.handleAssociateEvent = function(parentMode
 
 /**
  * Show a drop progress window and associate it with an id for later reference
- * The id is optional, if none is given, the function will create one and return it.
+ * The id is optional, if none is given, the function will create one and return
+ * it.
  */
 uwm.diagram.AbstractDiagram.prototype.showDropWindow = function(x, y, id) {
 	var dropWindow = new Ext.Window({

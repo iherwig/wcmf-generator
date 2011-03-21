@@ -301,7 +301,13 @@ uwm.model.ModelNode.prototype.associate = function(otherModelObject, connectionI
 		if (uwm.Util.getUwmClassNameFromOid(parentOid) == "ChiValue" && 
 				uwm.Util.getUwmClassNameFromOid(childOid) == "ChiValue") {
 			// ChiValue mapping connection
-			uwm.persistency.Persistency.getInstance().createMapping(childOid, parentOid);
+			
+			// Get the Oid of the ChiNode that contains the attribute graphics
+			// object where the connection was released (for inherited
+			// attributes this can be different from the ChiNode model object
+			// that contains the attribute model object)
+			var parentNodeOid = connection.getTarget().getParent().getParent().getModelObject().getOid();
+			uwm.persistency.Persistency.getInstance().createMapping(childOid, parentNodeOid, parentOid);
 		}
 		else {
 			// normal connection
@@ -410,7 +416,7 @@ uwm.model.ModelNode.prototype.disassociate = function(otherModelObject, connecti
 		if (uwm.Util.getUwmClassNameFromOid(parentOid) == "ChiValue" && 
 				uwm.Util.getUwmClassNameFromOid(childOid) == "ChiValue") {
 			// ChiValue mapping connection
-			uwm.persistency.Persistency.getInstance().deleteMapping(childOid, parentOid);
+			uwm.persistency.Persistency.getInstance().deleteMapping(parentOid);
 		}
 		else {
 			// normal association

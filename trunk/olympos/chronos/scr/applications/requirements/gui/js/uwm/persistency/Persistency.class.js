@@ -104,6 +104,12 @@ uwm.persistency.Persistency.prototype.restorehistlistfields = function(ids, succ
 uwm.persistency.Persistency.prototype.loadChildren = function(oid, successHandler, errorHandler) {
 }
 
+uwm.persistency.Persistency.prototype.loadInheritedAttributes = function(oid, successHandler, errorHandler) {
+}
+
+uwm.persistency.Persistency.prototype.doesClassContainAttribute = function(nodeOid, attributeOid, successHandler, errorHandler) {
+}
+
 uwm.persistency.Persistency.prototype.lock = function(oid, successHandler, errorHandler) {
 }
 
@@ -122,10 +128,10 @@ uwm.persistency.Persistency.prototype.createDiagramFromPackage = function(oid, s
 uwm.persistency.Persistency.prototype.createControllerFromUseCase = function(oid, successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.createMapping = function(sourceOid, targetOid, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.createMapping = function(sourceOid, sourceNodeOid, targetOid, successHandler, errorHandler ) {
 }
 
-uwm.persistency.Persistency.prototype.deleteMapping = function(sourceOid, targetOid, successHandler, errorHandler ) {
+uwm.persistency.Persistency.prototype.deleteMapping = function(targetOid, successHandler, errorHandler ) {
 }
 
 uwm.persistency.Persistency.prototype.putChildnodesToActivitySetDiagram = function(oid, successHandler, errorHandler ) {

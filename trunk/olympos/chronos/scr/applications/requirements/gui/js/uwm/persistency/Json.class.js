@@ -249,6 +249,23 @@ uwm.persistency.Json.prototype.loadChildren = function(oid, successHandler, erro
 	}, successHandler, errorHandler);
 }
 
+uwm.persistency.Json.prototype.loadInheritedAttributes = function(oid, successHandler, errorHandler) {
+	this.jsonRequest({
+		controller: "InheritanceController",
+		usr_action: "loadInheritedAttributes",
+		node: oid
+	}, successHandler, errorHandler);
+}
+
+uwm.persistency.Json.prototype.doesClassContainAttribute = function(nodeOid, attributeOid, successHandler, errorHandler) {
+	this.jsonRequest({
+		controller: "InheritanceController",
+		usr_action: "doesClassContainAttribute",
+		node: nodeOid,
+		attribute: attributeOid
+	}, successHandler, errorHandler);
+}
+
 uwm.persistency.Json.prototype.lock = function(oid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "lock",
@@ -277,18 +294,18 @@ uwm.persistency.Json.prototype.createControllerFromUseCase = function(oid, succe
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.createMapping = function(sourceOid, targetOid, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.createMapping = function(sourceOid, sourceNodeOid, targetOid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "createMapping",
 		sourceoid: sourceOid,
+		sourcenodeoid: sourceNodeOid,
 		targetoid: targetOid
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.deleteMapping = function(sourceOid, targetOid, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.deleteMapping = function(targetOid, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: "deleteMapping",
-		sourceoid: sourceOid,
 		targetoid: targetOid
 	}, successHandler, errorHandler);
 }
@@ -529,11 +546,11 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 				
 			case "createMapping":
 				jsonRequest.sourceOid = currRequest.sourceOid;
+				jsonRequest.sourceNodeOid = currRequest.sourceNodeOid;
 				jsonRequest.targetOid = currRequest.targetOid;
 				break;
 				
 			case "deleteMapping":
-				jsonRequest.sourceOid = currRequest.sourceOid;
 				jsonRequest.targetOid = currRequest.targetOid;
 				break;
 				
@@ -559,6 +576,17 @@ uwm.persistency.Json.prototype.executeActionSet = function(actionSet) {
 			case "templatelist":
 				jsonRequest.controller = "TemplateListController";
 				jsonRequest.scope = currRequest.scope;
+				break;
+				
+			case "loadInheritedAttributes":
+				jsonRequest.controller = "InheritanceController";
+				jsonRequest.node = currRequest.node;
+				break;
+				
+			case "doesClassContainAttribute":
+				jsonRequest.controller = "InheritanceController";
+				jsonRequest.node = currRequest.node;
+				jsonRequest.attribute = currRequest.attribute;
 				break;
 				
 			default:
