@@ -146,6 +146,7 @@ class InheritanceController extends Controller
 
 		// Load all children. We are only interested in the ChiNodeSource children which might be part of a generalization association
 		Log::debug("Retrieving children for ChiNode:".$chiNode->getId(), __CLASS__);
+		
 		$chiNode->loadChildren();
 		$nodeChildren = $chiNode->getChildren();
 		// Search for ChiAssociation of subclass NodeSourceEnd (we only search for associations to the superclass and not to subclasses)
@@ -164,7 +165,11 @@ class InheritanceController extends Controller
 							$superclass = $persistenceFacade->create("ChiNode");
 							$nodeChildParent->copyValues($superclass);
 							$superclass->setProperty("parentoids", $nodeChildParent->getProperty("parentoids"));
-							$superclass->setProperty("childoids", $nodeChildParent->getProperty("childoids"));
+							
+							// Workaround for child with wrong role
+							$childoids = $nodeChildParent->getProperty("childoids");
+							array_splice($childoids, array_search($nodeChild->getOid(), $childoids), 1);
+							$superclass->setProperty("childoids", $childoids);
 							$superclasses[] = $superclass;
 						}
 					}
