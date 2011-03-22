@@ -5,41 +5,40 @@
     xmlns:soapHttp="http://schemas.xmlsoap.org/wsdl/soap/http" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="InsertanewmoviewithnoncompilantAPIServiceService"
     targetNamespace="http://insertanewmoviewithnoncompilantapi.olympos.sourceforge.net/">
   <wsdl:types>
-    <wsdl:schema targetNamespace="http://insertanewmoviewithnoncompilantapi.olympos.sourceforge.net/">
-      <wsdl:complexType abstract="false" name="Film">
-        <wsdl:sequence>
-          <wsdl:element maxOccurs="1" minOccurs="0" name="director" type="schema:string" />
-          <wsdl:element maxOccurs="1" minOccurs="0" name="filmType" type="schema:string" />
-          <wsdl:element maxOccurs="1" minOccurs="0" name="insertANewMovieWithnoncompilantAPIRequest" type="schema:IDREF" />
-          <wsdl:element maxOccurs="1" minOccurs="0" name="insertANewMovieWithnoncompilantAPIRequest" type="schema:IDREF" />
-          <wsdl:element maxOccurs="1" minOccurs="0" name="lenght" type="schema:string" />
-          <wsdl:element maxOccurs="1" minOccurs="0" name="nation" type="schema:string" />
-          <wsdl:element maxOccurs="1" minOccurs="0" name="titel" type="schema:string" />
-        </wsdl:sequence>
-      </wsdl:complexType>
-      <wsdl:complexType abstract="false" name="insertANewMovieWithnoncompilantAPIResponse">
-        <wsdl:sequence />
-      </wsdl:complexType>
-      <wsdl:complexType abstract="false" name="insertANewMovieWithnoncompilantAPIRequest">
-        <wsdl:sequence>
-          <wsdl:element maxOccurs="1" minOccurs="1" name="film" type="schema:IDREF" />
-        </wsdl:sequence>
-      </wsdl:complexType>
-      <wsdl:complexType name="executeInsertanewmoviewithnoncompilantAPI">
-        <wsdl:sequence>
-          <wsdl:element minOccurs="0" name="request" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:insertANewMovieWithnoncompilantAPIRequest" />
-        </wsdl:sequence>
-      </wsdl:complexType>
-      <wsdl:complexType name="executeInsertanewmoviewithnoncompilantAPIResponse">
-        <wsdl:sequence>
-          <wsdl:element minOccurs="0" name="response" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:insertANewMovieWithnoncompilantAPiResponse" />
-        </wsdl:sequence>
-      </wsdl:complexType>
-      <wsdl:complexType name="RequestValidationException" />
-      <wsdl:element name="executeInsertanewmoviewithnoncompilantAPI" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:executeInsertanewmoviewithnoncompilantAPI" />
-      <wsdl:element name="executeInsertanewmoviewithnoncompilantAPIResponse" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:executeInsertanewmoviewithnoncompilantAPIResponse" />
-      <wsdl:element name="RequestValidationException" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:RequestValidationException" />
-    </wsdl:schema>
+    <schema:schema targetNamespace="http://insertanewmoviewithnoncompilantapi.olympos.sourceforge.net/">
+      <schema:complexType abstract="false" name="Film">
+        <schema:sequence>
+          <schema:element maxOccurs="1" minOccurs="0" name="director" type="schema:string" />
+          <schema:element maxOccurs="1" minOccurs="0" name="filmType" type="schema:string" />
+          <schema:element maxOccurs="1" minOccurs="0" name="insertANewMovieWithnoncompilantAPIRequest" type="schema:IDREF" />
+          <schema:element maxOccurs="1" minOccurs="0" name="lenght" type="schema:string" />
+          <schema:element maxOccurs="1" minOccurs="0" name="nation" type="schema:string" />
+          <schema:element maxOccurs="1" minOccurs="0" name="titel" type="schema:string" />
+        </schema:sequence>
+      </schema:complexType>
+      <schema:complexType abstract="false" name="insertANewMovieWithnoncompilantAPIResponse">
+        <schema:sequence />
+      </schema:complexType>
+      <schema:complexType abstract="false" name="insertANewMovieWithnoncompilantAPIRequest">
+        <schema:sequence>
+          <schema:element maxOccurs="1" minOccurs="1" name="film" type="schema:IDREF" />
+        </schema:sequence>
+      </schema:complexType>
+      <schema:complexType name="executeInsertanewmoviewithnoncompilantAPI">
+        <schema:sequence>
+          <schema:element minOccurs="0" name="request" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:insertANewMovieWithnoncompilantAPIRequest" />
+        </schema:sequence>
+      </schema:complexType>
+      <schema:complexType name="executeInsertanewmoviewithnoncompilantAPIResponse">
+        <schema:sequence>
+          <schema:element minOccurs="0" name="response" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:executeInsertanewmoviewithnoncompilantAPIResponse" />
+        </schema:sequence>
+      </schema:complexType>
+      <schema:complexType name="RequestValidationException" />
+      <schema:element name="executeInsertanewmoviewithnoncompilantAPI" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:executeInsertanewmoviewithnoncompilantAPI" />
+      <schema:element name="executeInsertanewmoviewithnoncompilantAPIResponse" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:executeInsertanewmoviewithnoncompilantAPIResponse" />
+      <schema:element name="RequestValidationException" type="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:RequestValidationException" />
+    </schema:schema>
   </wsdl:types>
   <wsdl:message name="executeInsertanewmoviewithnoncompilantAPI">
     <wsdl:part element="insertanewmoviewithnoncompilantapi.olympos.sourceforge.net:executeInsertanewmoviewithnoncompilantAPI"
