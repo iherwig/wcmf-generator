@@ -184,6 +184,9 @@ uwm.diagram.Figure.prototype.addInheritedChild = function(child) {
  */
 uwm.diagram.Figure.prototype.setShowInherited = function(showInheritedParam) {
 	this.showInherited = showInheritedParam;
+	this.changeProperties( {
+	    showInheritedAttributes : showInheritedParam
+	});
 }
 
 /**
@@ -308,7 +311,12 @@ uwm.diagram.Figure.prototype.showObjectHistory = function(self, e) {
 
 uwm.diagram.Figure.prototype.showInheritedAttributes = function() {
 	this.setShowInherited(true);
-	this.loadInheritedAttributes(false, true);
+	if (!this.areInheritedChildsLoaded()) {
+		this.loadInheritedAttributes(false, true);
+	}
+	else {
+		this.updateGraphicsForInheritedAttributes();
+	}
 	this.getGraphics().buildContextMenu();
 }
 
@@ -363,10 +371,33 @@ uwm.diagram.Figure.prototype.updateGraphicsForInheritedAttributes = function() {
 			var graphicsChildModelObject = graphicsChildElements[i].getModelObject();
 			// If the model object of the graphics child element is not a child of the figure model object it might have to be removed
 			if (this.getModelObject().getChildOids().indexOf(graphicsChildModelObject.getOid()) == -1) {
-				// If the inherited attributes should not be displayed or the model object is also not an inherited attribute it is removed
-				if (!this.isShowInherited() || this.inheritedChilds.indexOf(graphicsChildModelObject) == -1) {
+				// If the model object is also not an inherited attribute it is removed
+				if (this.inheritedChilds.indexOf(graphicsChildModelObject) == -1) {
 					graphicsChildElementsToRemove.push(graphicsChildElements[i]);
 					continue;
+				}
+				// If the inherited attributes should not be displayed we first hve to check that there are no mapping connections to the attribute
+				if (!this.isShowInherited()) {
+					var diagramConnections = this.diagram.connections;
+					var removeElement = true;
+					for (var n = 0; n < diagramConnections.length; n++) {
+						// MappingConnections are currently the only connections between attributes
+						var currDiagramConnection = diagramConnections.get(n);
+						if (currDiagramConnection instanceof uwm.graphics.connection.MappingConnection) {
+							// Get target graphics object of mapping connection (inherited attributes cannot be the source for a mapping)
+							var targetGraphicsObject = currDiagramConnection.getTarget().getParent();
+							if (graphicsChildElements[i] == targetGraphicsObject) {
+								// We found a mapping connection, so we will not remove the element
+								removeElement = false;
+								break;
+							}
+						}
+					}
+					// If no mapping connection was found the element will be removed
+					if (removeElement) {
+						graphicsChildElementsToRemove.push(graphicsChildElements[i]);
+						continue;
+					}
 				}
 			}
 			// Otherwise it is added to the list of child model objects for the following check that all model objects are displayed
