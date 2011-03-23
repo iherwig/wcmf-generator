@@ -280,16 +280,8 @@ uwm.diagram.AbstractDiagram.prototype.getContainedFigureGraphic = function(model
 				// TODO Replace new InheritedAttribute with more general approach to find
 				// graphics object
 				figureGraphic = new uwm.graphics.figure.InheritedAttribute(modelObject.getName(), modelObject);
-				
-				// To check if the attribute we added really exists we load the
-				// inherited attributes for the figure and provide a callback
-				// handler that will check the attributes after they are loaded.
 				var parentFigureObject = this.getContainedFigureObject(parentClass.getOid());
 				parentClassFigureGraphic.addChildElement(figureGraphic, true);
-				var self = this;
-				parentFigureObject.loadInheritedAttributes(false, false, function (figure) {
-						self.isInheritedAttributeValid(figureGraphic, parentFigureObject);
-					});
 			}
 		}
 	}
@@ -327,12 +319,6 @@ uwm.diagram.AbstractDiagram.prototype.getContainedFigureGraphic = function(model
 
 	
 	return figureGraphic;
-}
-
-uwm.diagram.AbstractDiagram.prototype.isInheritedAttributeValid = function(figureGraphic, parentFigureObject) {
-	if (parentFigureObject.getInheritedChilds().indexOf(figureGraphic.getModelObject()) == -1) {
-		figureGraphic.label.className = figureGraphic.label.className + " BrokenChild";
-	}
 }
 
 uwm.diagram.AbstractDiagram.prototype.getContainedConnection = function(sourceOid, targetOid, relationOid) {
