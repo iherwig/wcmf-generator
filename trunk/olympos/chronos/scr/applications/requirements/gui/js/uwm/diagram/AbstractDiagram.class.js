@@ -222,8 +222,8 @@ uwm.diagram.AbstractDiagram.prototype.containsObject = function(modelObject) {
  * 
  * @param {figure}
  *            figure The Figure to check.
- * @return <code>true</code> if the Figure is
- *         contained in this diagram. <code>false</code> otherwise.
+ * @return <code>true</code> if the Figure is contained in this diagram.
+ *         <code>false</code> otherwise.
  * @type boolean
  */
 uwm.diagram.AbstractDiagram.prototype.containsFigure = function(figure) {
@@ -254,8 +254,8 @@ uwm.diagram.AbstractDiagram.prototype.getContainedFigureObject = function(oid) {
  *            for the given model class. If it does not exist it will be created
  *            based on the modelObject and added to parentClass. This is used
  *            for inherited attributes that are mapped but have not been loaded.
- *            The caller must make sure that the attribute is an inherited attribute 
- *            of the given class. This can be done by calling 
+ *            The caller must make sure that the attribute is an inherited
+ *            attribute of the given class. This can be done by calling
  *            'doesClassContainAttribute' in 'InheritanceController'
  * @return An instance of a class from the {uwm.graphics.figure} namespace
  */
@@ -277,7 +277,8 @@ uwm.diagram.AbstractDiagram.prototype.getContainedFigureGraphic = function(model
 			}
 			// If the figureGraphic was not found, it will be created
 			if (!figureGraphic) {
-				// TODO Replace new InheritedAttribute with more general approach to find
+				// TODO Replace new InheritedAttribute with more general
+				// approach to find
 				// graphics object
 				figureGraphic = new uwm.graphics.figure.InheritedAttribute(modelObject.getName(), modelObject);
 				var parentFigureObject = this.getContainedFigureObject(parentClass.getOid());
@@ -482,7 +483,7 @@ uwm.diagram.AbstractDiagram.prototype.handleLoaded = function() {
 					modelContainer.loadByOid(parentOid, this.actionSet, 2);
 					if (figure.isShowInherited()) {
 						this.actionSet.addLoadInheritedAttributes(parentOid, function(request, data) {
-								figure.handleLoadedInheritedAttributes(data, true);
+								self.getContainedFigureObject(request.node).handleLoadedInheritedAttributes(data, false);
 							});
 					}
 				}
@@ -521,6 +522,11 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject)
 		figure = this.getContainedFigureObject(modelObject.getProxyOid());
 	}
 	figure.load(modelObject, this);
+	
+	// The inherited attribute graphics can only be updated after the figure was
+	// loaded (They were already loaded with the commit of the action set in
+	// handleLoaded)
+	figure.updateGraphicsForInheritedAttributes();
 
 	this.objects.add(modelObject.getOid(), modelObject);
 
@@ -645,7 +651,8 @@ uwm.diagram.AbstractDiagram.prototype.establishSpecificExistingConnection = func
 					if (connectedObjectParentFigure.getModelObject().getChildOids().indexOf(connectedObjectOid) == -1) {
 						// The target attribute is not part of the target class.
 						// It might be an inherited attribute.
-						// Otherwise the target attribute is part of the target class, so
+						// Otherwise the target attribute is part of the target
+						// class, so
 						// the mapping can be drawn.
 						if (connectedObjectParentFigure.areInheritedChildsLoaded()) {
 							// The inherited attributes are already loaded, so
@@ -655,10 +662,13 @@ uwm.diagram.AbstractDiagram.prototype.establishSpecificExistingConnection = func
 								// The target attribute is not part of the
 								// target class. The mapping will be marked as
 								// broken.
-								// Otherwise the attribute is part of the target class.
+								// Otherwise the attribute is part of the target
+								// class.
 								// The mapping can be drawn.
 								this.getContainedFigureGraphic(childObject).markBrokenMapping();
-								// Since the mapping is not valid we set the connectedObject to null so that no connection is drawm in the next step
+								// Since the mapping is not valid we set the
+								// connectedObject to null so that no connection
+								// is drawm in the next step
 								connectedObject = null;
 							}
 						}
@@ -667,7 +677,8 @@ uwm.diagram.AbstractDiagram.prototype.establishSpecificExistingConnection = func
 							// have not been loaded, so we load the attributes
 							// and come back later to this connection
 							
-							// Since we do not want to create the connection at this time we set the connectedObject to null
+							// Since we do not want to create the connection at
+							// this time we set the connectedObject to null
 							connectedObject = null;
 							
 							var self = this;
