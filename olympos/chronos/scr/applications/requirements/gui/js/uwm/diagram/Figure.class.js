@@ -23,7 +23,6 @@ Ext.namespace("uwm.diagram");
 uwm.diagram.Figure = function(modelNodeClass) {
 	this.inheritedChilds = [];
 	this.inheritedChildsLoaded = false;
-	this.showInherited = false;
 	
 	uwm.model.ModelNode.call(this, modelNodeClass);
 }
@@ -123,7 +122,7 @@ uwm.diagram.Figure.prototype.load = function(modelObject, diagram) {
 			new draw2d.CommandAdd(workflow, this.graphics, x, y, compartment));
 	
 	// Add inherited children. Currently only attributes are supported.
-	if (this.showInherited) {
+	if (this.isShowInherited()) {
 		this.updateGraphicsForInheritedAttributes();
 	}
 }
@@ -183,9 +182,10 @@ uwm.diagram.Figure.prototype.addInheritedChild = function(child) {
  * Set if inherited attributes should be displayed for the class
  */
 uwm.diagram.Figure.prototype.setShowInherited = function(showInheritedParam) {
-	this.showInherited = showInheritedParam;
+	this.data.showInheritedAttributes = showInheritedParam?'true':'false';
+	// Persist change to figure attribute
 	this.changeProperties( {
-	    showInheritedAttributes : showInheritedParam
+	    showInheritedAttributes : this.data.showInheritedAttributes
 	});
 }
 
@@ -193,7 +193,9 @@ uwm.diagram.Figure.prototype.setShowInherited = function(showInheritedParam) {
  * Returns if inherited attributes should be displayed for the class
  */
 uwm.diagram.Figure.prototype.isShowInherited = function() {
-	return this.showInherited;
+	//TODO remove
+	var test = (this.data.showInheritedAttributes == 'true');
+	return (this.data.showInheritedAttributes == 'true');
 }
 
 /**
@@ -309,7 +311,7 @@ uwm.diagram.Figure.prototype.showObjectHistory = function(self, e) {
 	new uwm.ui.History(this.modelObject);
 }
 
-uwm.diagram.Figure.prototype.showInheritedAttributes = function() {
+uwm.diagram.Figure.prototype.showInherited = function() {
 	this.setShowInherited(true);
 	if (!this.areInheritedChildsLoaded()) {
 		this.loadInheritedAttributes(false, true);
@@ -320,7 +322,7 @@ uwm.diagram.Figure.prototype.showInheritedAttributes = function() {
 	this.getGraphics().buildContextMenu();
 }
 
-uwm.diagram.Figure.prototype.hideInheritedAttributes = function() {
+uwm.diagram.Figure.prototype.hideInherited = function() {
 	this.setShowInherited(false);
 	this.updateGraphicsForInheritedAttributes();
 	this.getGraphics().buildContextMenu();
@@ -328,7 +330,6 @@ uwm.diagram.Figure.prototype.hideInheritedAttributes = function() {
 
 uwm.diagram.Figure.prototype.loadInheritedAttributes = function(forceReload, updateGraphics, callback) {
 	if (this.inheritedChilds.length == 0 || forceReload) {
-		this.inheritedChilds = [];
 		var self = this;
 		
 		var persistency = uwm.persistency.Persistency.getInstance();
@@ -344,6 +345,7 @@ uwm.diagram.Figure.prototype.loadInheritedAttributes = function(forceReload, upd
 }
 
 uwm.diagram.Figure.prototype.handleLoadedInheritedAttributes = function(data, updateGraphics, callback) {
+	this.inheritedChilds = [];
 	for (var i in data.inheritedAttributes) {
 		if (!(data.inheritedAttributes[i] instanceof Function)) {
 			var modelContainer = uwm.model.ModelContainer.getInstance();

@@ -157,7 +157,7 @@ uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 		items.push(new Ext.menu.Item( {
 			text : uwm.Dict.translate('Show inherited attributes'),
 			handler : function(item, e) {
-				figure.showInheritedAttributes(item, e);
+				figure.showInherited(item, e);
 			}
 		}));
 	}
@@ -165,7 +165,7 @@ uwm.graphics.figure.ClassFigure.prototype.buildContextMenu = function() {
 		items.push(new Ext.menu.Item( {
 			text : uwm.Dict.translate('Hide inherited attributes'),
 			handler : function(item, e) {
-				figure.hideInheritedAttributes(item, e);
+				figure.hideInherited(item, e);
 			}
 		}));
 	}
