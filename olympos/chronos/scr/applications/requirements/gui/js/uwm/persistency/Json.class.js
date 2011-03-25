@@ -402,10 +402,13 @@ uwm.persistency.Json.prototype.exportUcDomain = function(startOid, language, suc
 	}, successHandler, errorHandler);
 }
 
-uwm.persistency.Json.prototype.exportUcDocumentation = function(startOid, language, successHandler, errorHandler) {
+uwm.persistency.Json.prototype.exportUcDocumentation = function(startOid, language, templateName, exportFormat, diagramFormat, successHandler, errorHandler) {
 	this.jsonRequest({
 		usr_action: 'exportUcDocumentation',
 		startOid: startOid,
+		templateName: templateName,
+		exportFormat: exportFormat,
+		diagramFormat: diagramFormat,
 		language: language
 	}, successHandler, errorHandler);
 }

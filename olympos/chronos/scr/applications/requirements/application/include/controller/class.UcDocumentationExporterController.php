@@ -57,6 +57,10 @@ class UcDocumentationExporterController extends BatchController
 	const TEMP_EXPORT_FILE = 'UcDocumentationExporterController.exportFile';
 	const UC_OID = 'UcDocumentationExporterController.ucOid';
 	const PARAM_LANGUAGE = 'UcDocumentationExporterController.language';
+	const PARAM_EXPORT_FORMAT = 'UcDocumentationExporterController.exportFormat';
+	const DEFAULT_EXPORT_FORMAT = 'pdf';
+	
+	private $availableFormats = array('doc', 'odt', 'pdf');
 
 	/**
 	 * @see Controller::initialize()
@@ -70,6 +74,7 @@ class UcDocumentationExporterController extends BatchController
 		{
 			$session = SessionData::getInstance();
 			$session->set(self::UC_OID, $request->getValue('startOid'));
+			$session->set(self::PARAM_EXPORT_FORMAT, $request->getValue('exportFormat'));
 			if ($this->isLocalizedRequest()) {
 				$session->set(self::PARAM_LANGUAGE, $request->getValue('language'));
 			}
@@ -174,7 +179,17 @@ class UcDocumentationExporterController extends BatchController
 		$inputType = 'odt';
 
 		// select the export format
-		$exportFormat = 'pdf';
+		if (!$templateInfo['forcedResultType']) {
+			$exportFormatParam = $session->get(self::PARAM_EXPORT_FORMAT);
+			if (array_search($exportFormatParam, $this->availableFormats) !== false) {
+				$exportFormat = $exportFormatParam;
+			} else {
+				$exportFormat = self::DEFAULT_EXPORT_FORMAT;
+			}
+		} else {
+			$exportFormat = $templateInfo['forcedResultType'];
+		}
+		$session->set($this->PARAM_EXPORT_FORMAT, $exportFormat);
 
 		// create the configuration file
 		$workingDir = $session->get(self::TEMP_WORKING_DIR);
@@ -239,7 +254,7 @@ class UcDocumentationExporterController extends BatchController
 
 		//header('Content-type: text/plain');
 		header('Content-type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="useCase-documentation.pdf"');
+		header('Content-Disposition: attachment; filename="useCase-documentation.'.$session->get($this->PARAM_EXPORT_FORMAT).'"');
 
 		readfile($exportFile);
 
