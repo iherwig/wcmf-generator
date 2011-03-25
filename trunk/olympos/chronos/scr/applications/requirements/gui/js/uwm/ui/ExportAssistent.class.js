@@ -251,7 +251,7 @@ uwm.ui.ExportAssistent.prototype.JsonSuccess = function(options, data) {
 			if (!(persistency[templateAction] instanceof Function)) {
 				templateAction = 'exportDoc';
 			}
-			if (templateAction == 'exportDoc') {
+			if (templateAction == 'exportDoc' || templateAction == 'exportUcDocumentation') {
 				params.push(templateName);
 				params.push(doctypeSelected);
 				params.push(diagramSelected);
