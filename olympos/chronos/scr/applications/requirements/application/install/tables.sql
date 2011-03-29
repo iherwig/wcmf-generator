@@ -592,7 +592,7 @@ CREATE TABLE `user_config` # entityType=UserConfig tableId={64185B6F-3928-4aae-9
   `val` VARCHAR(255), # columnId={B724E946-0703-4036-86FA-AE784D10398D} 
   PRIMARY KEY (`id`)
   ,KEY `fk_user_id` (`fk_user_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `user`
 # 
@@ -609,7 +609,7 @@ CREATE TABLE `user` # entityType=UserRDB tableId={B8AEA9E2-2228-42b9-9121-FDA1DF
   `firstname` VARCHAR(50), # columnId={7AA15204-4902-45a5-AF96-599B511B4812} 
   `config` VARCHAR(255), # columnId={F0758E3B-E9D4-4dd9-A108-472A2CBE8CDA} 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `NMChiUseCaseChiUseCase`
 # 
@@ -643,7 +643,7 @@ CREATE TABLE `NMChiUseCaseChiUseCase` # entityType=NMChiUseCaseChiUseCase tableI
   ,KEY `fk_chiusecasecoretarget_id` (`fk_chiusecasecoretarget_id`)
   ,KEY `fk_chiusecasetarget_id` (`fk_chiusecasetarget_id`)
   ,KEY `fk_chiusecasesource_id` (`fk_chiusecasesource_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Actor`
 # this class reppresent a generic actor.
@@ -669,7 +669,7 @@ CREATE TABLE `Actor` # entityType=Actor tableId={1134220A-E3FE-4daf-BC34-1DBA7BB
   `sortkey` INT(11),
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiWorker`
 # A ChiWorker is a special actor that works within the enterprise. 
@@ -695,7 +695,7 @@ CREATE TABLE `ChiWorker` # entityType=ChiWorker tableId={43750BBC-629B-4e5c-8ACB
   `sortkey` INT(11),
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiBusinessPartner`
 # A ChiBusinesPartner is an external person that has a Business relation with the enterprise.
@@ -727,7 +727,7 @@ CREATE TABLE `ChiBusinessPartner` # entityType=ChiBusinessPartner tableId={05187
   ,KEY `fk_chibusinesspartnerpassive_id` (`fk_chibusinesspartnerpassive_id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chibusinesspartner_id` (`fk_chibusinesspartner_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiBusinessProcess`
 # A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases.
@@ -753,7 +753,7 @@ CREATE TABLE `ChiBusinessProcess` # entityType=ChiBusinessProcess tableId={CF3A0
   `sortkey` INT(11),
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiBusinessUseCase`
 # A Business Use Case is part of a business process that produces an advantage to the enterprise.
@@ -793,7 +793,7 @@ CREATE TABLE `ChiBusinessUseCase` # entityType=ChiBusinessUseCase tableId={A59A1
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chifeature_id` (`fk_chifeature_id`)
   ,KEY `fk_chibusinessprocess_id` (`fk_chibusinessprocess_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiBusinessUseCaseCore`
 # A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money).
@@ -833,7 +833,7 @@ CREATE TABLE `ChiBusinessUseCaseCore` # entityType=ChiBusinessUseCaseCore tableI
   ,KEY `fk_chibusinessprocess_id` (`fk_chibusinessprocess_id`)
   ,KEY `fk_chifeature_id` (`fk_chifeature_id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiBusinessPartnerActive`
 # A ChiBusinesPartnerActive is a direct customer of the enterprise.
@@ -865,7 +865,7 @@ CREATE TABLE `ChiBusinessPartnerActive` # entityType=ChiBusinessPartnerActive ta
   ,KEY `fk_chibusinesspartner_id` (`fk_chibusinesspartner_id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chibusinesspartneractive_id` (`fk_chibusinesspartneractive_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiBusinessPartnerPassive`
 # A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise.
@@ -897,7 +897,7 @@ CREATE TABLE `ChiBusinessPartnerPassive` # entityType=ChiBusinessPartnerPassive 
   ,KEY `fk_chibusinesspartner_id` (`fk_chibusinesspartner_id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chibusinesspartnerpassive_id` (`fk_chibusinesspartnerpassive_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiWorkerExternal`
 # A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise.
@@ -926,7 +926,7 @@ CREATE TABLE `ChiWorkerExternal` # entityType=ChiWorkerExternal tableId={52B75F6
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chiworkerexternal_id` (`fk_chiworkerexternal_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiWorkerInternal`
 # A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners.
@@ -954,7 +954,7 @@ CREATE TABLE `ChiWorkerInternal` # entityType=ChiWorkerInternal tableId={2A793A1
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chiworkerinternal_id` (`fk_chiworkerinternal_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `NMUCActor`
 # 
@@ -984,7 +984,7 @@ CREATE TABLE `NMUCActor` # entityType=NMUCActor tableId={0863D9E9-ADE5-4c27-9118
   ,KEY `fk_chibusinessusecasecore_id` (`fk_chibusinessusecasecore_id`)
   ,KEY `fk_chibusinessusecase_id` (`fk_chibusinessusecase_id`)
   ,KEY `fk_actor_id` (`fk_actor_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiGoal`
 # a Measurable scope that the enterprise wants to achieve. 
@@ -1017,7 +1017,7 @@ CREATE TABLE `ChiGoal` # entityType=ChiGoal tableId={C78BC7DD-DA11-463c-A937-F5B
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chigoal_id` (`fk_chigoal_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiRequirement`
 # A Business guide line about the Enterprise or the project.
@@ -1050,7 +1050,7 @@ CREATE TABLE `ChiRequirement` # entityType=ChiRequirement tableId={1169EE51-B124
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chirequirement_id` (`fk_chirequirement_id`)
   ,KEY `fk_chigoal_id` (`fk_chigoal_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiFeature`
 # 
@@ -1077,7 +1077,7 @@ CREATE TABLE `ChiFeature` # entityType=ChiFeature tableId={81FDBF74-10F8-403a-A8
   `sortkey` INT(11),
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiIssue`
 # 
@@ -1106,7 +1106,7 @@ CREATE TABLE `ChiIssue` # entityType=ChiIssue tableId={E7461E91-24F7-4be8-9913-0
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chirequirement_id` (`fk_chirequirement_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiFeatureStatus`
 # 
@@ -1125,7 +1125,7 @@ CREATE TABLE `ChiFeatureStatus` # entityType=ChiFeatureStatus tableId={4EFCA1BF-
   `modified` VARCHAR(255), # columnId=_paWCplVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_paWCrVVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiGoalType`
 # the type of Goal (eg. Strategic, Operational, Vision, etc).
@@ -1144,7 +1144,7 @@ CREATE TABLE `ChiGoalType` # entityType=ChiGoalType tableId={099D0E49-5969-4f74-
   `modified` VARCHAR(255), # columnId=_pZcq2lVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_pZcq4VVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiRequirementStatus`
 # 
@@ -1163,7 +1163,7 @@ CREATE TABLE `ChiRequirementStatus` # entityType=ChiRequirementStatus tableId={2
   `modified` VARCHAR(255), # columnId=_pRtEGlVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_pRtEIVVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiRequirementType`
 # Type of requirement
@@ -1182,7 +1182,7 @@ CREATE TABLE `ChiRequirementType` # entityType=ChiRequirementType tableId={B4D8C
   `modified` VARCHAR(255), # columnId=_pRGnKlVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_pRGnMVVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `NMFeatureRequirements`
 # 
@@ -1198,7 +1198,7 @@ CREATE TABLE `NMFeatureRequirements` # entityType=NMFeatureRequirements tableId=
   PRIMARY KEY (`id`)
   ,KEY `fk_chifeature_id` (`fk_chifeature_id`)
   ,KEY `fk_chirequirement_id` (`fk_chirequirement_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiActionKey`
 # An action key used in Chronos. An action key associates two controllers (to define a control flow) or a view with a controller (to define a view attachment). Controller, Views and Associations define the application flow.
@@ -1227,7 +1227,7 @@ CREATE TABLE `ChiActionKey` # entityType=ChiActionKey tableId={2C8F5231-26C9-4b3
   `modified` VARCHAR(255), # columnId=_o_0p61VaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_o_9zxVVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `NMChiControllerActionKeyChiController`
 # this class defines a control flow.
@@ -1260,7 +1260,7 @@ CREATE TABLE `NMChiControllerActionKeyChiController` # entityType=NMChiControlle
   PRIMARY KEY (`id`)
   ,KEY `fk_chicontrolleractionkeysource_id` (`fk_chicontrolleractionkeysource_id`)
   ,KEY `fk_chicontrolleractionkeytarget_id` (`fk_chicontrolleractionkeytarget_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `NMChiControllerActionKeyChiView`
 # 
@@ -1293,7 +1293,7 @@ CREATE TABLE `NMChiControllerActionKeyChiView` # entityType=NMChiControllerActio
   PRIMARY KEY (`id`)
   ,KEY `fk_chiview_id` (`fk_chiview_id`)
   ,KEY `fk_chicontroller_id` (`fk_chicontroller_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `NMChiNodeChiMany2Many`
 # 
@@ -1323,7 +1323,7 @@ CREATE TABLE `NMChiNodeChiMany2Many` # entityType=NMChiNodeChiMany2Many tableId=
   PRIMARY KEY (`id`)
   ,KEY `fk_chinode_id` (`fk_chinode_id`)
   ,KEY `fk_chinodemanytomany_id` (`fk_chinodemanytomany_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `NMChiControllerChiController`
 # this class handle all the relationships between ChiControllers.
@@ -1353,7 +1353,7 @@ CREATE TABLE `NMChiControllerChiController` # entityType=NMChiControllerChiContr
   PRIMARY KEY (`id`)
   ,KEY `fk_chicontrollersource_id` (`fk_chicontrollersource_id`)
   ,KEY `fk_chicontrollertarget_id` (`fk_chicontrollertarget_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiNodeManyToMany`
 # A many to many node used in Chronos. It is used to realize a many to many relation between two ChiNodes.
@@ -1393,7 +1393,7 @@ CREATE TABLE `ChiNodeManyToMany` # entityType=ChiNodeManyToMany tableId={8C3C829
   PRIMARY KEY (`id`)
   ,KEY `fk_chicontroller_id` (`fk_chicontroller_id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiValueRef`
 # 
@@ -1421,7 +1421,7 @@ CREATE TABLE `ChiValueRef` # entityType=ChiValueRef tableId={7C839F4A-38A4-487c-
   ,KEY `fk_chinodemanytomany_id` (`fk_chinodemanytomany_id`)
   ,KEY `fk_chivalue_id` (`fk_chivalue_id`)
   ,KEY `fk_chinode_id` (`fk_chinode_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Property`
 # this class reppresent an UML property
@@ -1453,7 +1453,7 @@ CREATE TABLE `Property` # entityType=Property tableId={C91AB5D8-147C-4830-9A9A-B
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chicontroller_id` (`fk_chicontroller_id`)
   ,KEY `fk_chisystem_id` (`fk_chisystem_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiNode`
 # A Domain Object type used in Chronos. ChiNodes and ChiValues define the application data model.
@@ -1493,7 +1493,7 @@ CREATE TABLE `ChiNode` # entityType=ChiNode tableId={8AFE696D-2AAD-4e0d-A928-303
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chicontroller_id` (`fk_chicontroller_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiController`
 # A ChiController, Views and Associations define the application flow. A controller represent the Business logic where a certain flow is physical implemented.
@@ -1525,7 +1525,7 @@ CREATE TABLE `ChiController` # entityType=ChiController tableId={AF6EF41B-69E6-4
   ,KEY `fk_chibusinessusecasecore_id` (`fk_chibusinessusecasecore_id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chibusinessusecase_id` (`fk_chibusinessusecase_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiView`
 # A ChiView is a logical class used to display a ChiNode
@@ -1557,7 +1557,7 @@ CREATE TABLE `ChiView` # entityType=ChiView tableId={8DC5A1D2-AA2C-4d96-9B47-B1C
   ,KEY `fk_chinodemanytomany_id` (`fk_chinodemanytomany_id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chinode_id` (`fk_chinode_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiAuthors`
 # This class host all the actors actively involved in the project.
@@ -1577,7 +1577,7 @@ CREATE TABLE `ChiAuthors` # entityType=ChiAuthors tableId={5FE413E3-1A62-481e-BA
   `modified` VARCHAR(255), # columnId=_pObGjFVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_pObGk1VaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiValue`
 # 
@@ -1622,7 +1622,7 @@ CREATE TABLE `ChiValue` # entityType=ChiValue tableId={75A961F2-4EE3-452e-B190-A
   ,KEY `fk_chinodemanytomany_id` (`fk_chinodemanytomany_id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chinode_id` (`fk_chinode_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `DisplayType`
 # list all the allowed display types (e.g image, text, links)
@@ -1641,7 +1641,7 @@ CREATE TABLE `DisplayType` # entityType=DisplayType tableId={F8F7E11B-5F40-4c0e-
   `modified` VARCHAR(255), # columnId=_pN1QplVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_pN1QrVVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `InputType`
 # this class hosts all the allowed input types like text, password, textarea, select, radio, checkbox, file, fileex, fckeditor, filebrowser, linkbrowser, date ...
@@ -1660,7 +1660,7 @@ CREATE TABLE `InputType` # entityType=InputType tableId={63AAFE45-872D-47ea-B68D
   `modified` VARCHAR(255), # columnId=_pNOzsFVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_pNOzt1VaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiAssociation`
 # this class handle all the relationships between ChiNodes.
@@ -1695,7 +1695,7 @@ CREATE TABLE `ChiAssociation` # entityType=ChiAssociation tableId={405DFC7B-B07F
   ,KEY `fk_chinodesource_id` (`fk_chinodesource_id`)
   ,KEY `fk_chinodemanytomanytarget_id` (`fk_chinodemanytomanytarget_id`)
   ,KEY `fk_chinodemanytomanysource_id` (`fk_chinodemanytomanysource_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Operation`
 # 
@@ -1731,7 +1731,7 @@ CREATE TABLE `Operation` # entityType=Operation tableId={451BF687-0FE7-46f8-8D36
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chicontroller_id` (`fk_chicontroller_id`)
   ,KEY `fk_chinode_id` (`fk_chinode_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Relation`
 # 
@@ -1757,7 +1757,7 @@ CREATE TABLE `Relation` # entityType=Relation tableId={20323138-F43B-4773-BB96-4
   `modified` VARCHAR(255), # columnId=_o7DenFVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_o7Deo1VaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `RelationMultiplicity`
 # this class contains all the multiplicities that are supported by a relation.
@@ -1776,7 +1776,7 @@ CREATE TABLE `RelationMultiplicity` # entityType=RelationMultiplicity tableId={1
   `modified` VARCHAR(255), # columnId=_o5af1VVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_o5af3FVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `RelationType`
 # this class host all the relations type hosted by relation. Like Generalizzation, realization, aggregation, composition, etc.
@@ -1795,7 +1795,7 @@ CREATE TABLE `RelationType` # entityType=RelationType tableId={CB8E5BEF-5029-4d5
   `modified` VARCHAR(255), # columnId=_o4q49VVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_o4q4_FVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiClass`
 # this object reppresent a UML::class
@@ -1823,7 +1823,7 @@ CREATE TABLE `ChiClass` # entityType=ChiClass tableId={D4660360-1AAB-4a88-97A3-0
   `sortkey` INT(11),
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiBaseStatus`
 # this classes describes stati that are general valid for all ChiObjects. Special stati enumeration are describes in separates enumeration entities.
@@ -1842,7 +1842,7 @@ CREATE TABLE `ChiBaseStatus` # entityType=ChiBaseStatus tableId={5C537B68-52B7-4
   `modified` VARCHAR(255), # columnId=_o4EcDlVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_o4EcFVVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Counter`
 # the class counter hosts counter properties for all the objects actually supportedby the system.
@@ -1893,7 +1893,7 @@ CREATE TABLE `Counter` # entityType=Counter tableId={F256DAC9-7123-4b7c-B39E-6D2
   `modified` VARCHAR(255), # columnId=_pb1QdVVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_pkCKIFVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `History`
 # 
@@ -1912,7 +1912,7 @@ CREATE TABLE `History` # entityType=History tableId={7215C188-C704-4563-9F4B-A33
   `timestamp` BIGINT, # columnId={EB97A920-A00F-4e6f-9FE7-D8DF7FB7108A} 
   `user` VARCHAR(255), # columnId={79BB85A7-A52F-409e-8AFE-ACD87F90D5C7} 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Language`
 # A llanguage for which a translation of the model can be created. The code is arbitrary but it is recommended to use the ISO language codes (en, de, it, ...).
@@ -1932,7 +1932,7 @@ CREATE TABLE `Language` # entityType=Language tableId={279AE4E5-852E-4b71-A8B4-C
   `modified` VARCHAR(255), # columnId=_o3U1JVVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_o3U1LFVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Visibility`
 # this classes describes stati that are general valid for all ChiObjects. Special stati enumeration are describes in separates enumeration entities.
@@ -1951,7 +1951,7 @@ CREATE TABLE `Visibility` # entityType=Visibility tableId={22764911-9C59-435d-97
   `modified` VARCHAR(255), # columnId=_o2u_RlVaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_o2u_TVVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Figure`
 # A figure is the graphical reppresentation of a node can be linked with manies diagrams.
@@ -2058,7 +2058,7 @@ CREATE TABLE `Figure` # entityType=Figure tableId={7A186367-446B-4fab-9CA9-20ADC
   ,KEY `fk_diagram_id` (`fk_diagram_id`)
   ,KEY `fk_chibase_id` (`fk_chibase_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Model`
 # a model is the start of the Chronos onthology tree.
@@ -2078,7 +2078,7 @@ CREATE TABLE `Model` # entityType=Model tableId={B92F55CA-30CA-468d-9088-A188048
   `modified` VARCHAR(255), # columnId=_mzvz0FVaEeCs-oMhDEevLw 
   `sortkey` INT(11),
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Package`
 # a package is a class that contains other classes including packages sef
@@ -2102,7 +2102,7 @@ CREATE TABLE `Package` # entityType=Package tableId={05C9EAF6-8B0B-44f9-AED7-CBC
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_model_id` (`fk_model_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Diagram`
 # 
@@ -2130,7 +2130,7 @@ CREATE TABLE `Diagram` # entityType=Diagram tableId={F6E80A6E-A203-4fb4-9DD0-FE2
   `sortkey` INT(11),
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Glossary`
 # 
@@ -2156,7 +2156,7 @@ CREATE TABLE `Glossary` # entityType=Glossary tableId={12BB51F6-4466-4348-A07B-A
   `umi` VARCHAR(255), # columnId=_nAt41VVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `NMFiguresDiagram`
 # 
@@ -2173,4 +2173,4 @@ CREATE TABLE `NMFiguresDiagram` # entityType=NMFiguresDiagram tableId={466BBC51-
   `modified` VARCHAR(255), # columnId=_l1A6w1VaEeCs-oMhDEevLw 
   `umi` VARCHAR(255), # columnId=_l1KrtlVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
