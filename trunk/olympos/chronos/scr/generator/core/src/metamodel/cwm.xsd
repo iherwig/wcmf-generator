@@ -148,6 +148,7 @@
 		<xsd:attribute name="creator" type="xsd:string"/>
 		<xsd:attribute name="last_editor" type="xsd:string"/>
 		<xsd:attribute name="modified" type="xsd:string"/>
+		<xsd:attribute name="showInheritedAttributes" type="xsd:boolean"/>
 	</xsd:complexType>
 	<xsd:complexType name="ChiIssue">
 		<xsd:sequence>
