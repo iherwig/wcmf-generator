@@ -526,7 +526,9 @@ uwm.diagram.AbstractDiagram.prototype.handleLoadedObject = function(modelObject)
 	// The inherited attribute graphics can only be updated after the figure was
 	// loaded (They were already loaded with the commit of the action set in
 	// handleLoaded)
-	figure.updateGraphicsForInheritedAttributes();
+	if (figure.isShowInherited()) {
+		figure.updateGraphicsForInheritedAttributes();
+	}
 
 	this.objects.add(modelObject.getOid(), modelObject);
 
