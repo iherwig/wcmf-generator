@@ -1,0 +1,1177 @@
+
+<?php
+$statisticsData = array(
+	
+	array(
+		"_id" => 1,
+		"objectList" => array(),
+		"object" => "Requirements",
+		"toolTip" => "Requirements",
+		"quantity" => 0,
+		"status" => -1,
+		"_parent" => null,
+		"_is_leaf" => false
+	)
+,
+
+	
+	array(
+		"_id" => 11,
+		"objectList" => array(
+			
+		),
+		"object" => "ChiGoals",
+		"toolTip" => "All ChiGoals",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 1,
+		"_is_leaf" => false
+	)
+, 
+	
+	array(
+		"_id" => 1011,
+		"objectList" => array(
+			
+		),
+		"object" => "invalid child",
+		"toolTip" => "ChiGoals that do not have a ChiRequirement or a ChiGoal",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 11,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2011,
+		"objectList" => array(
+			
+		),
+		"object" => "without Priority",
+		"toolTip" => "ChiGoals that do not have a priority > 0",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 11,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 3011,
+		"objectList" => array(
+			
+		),
+		"object" => "Value_Goal is no integer",
+		"toolTip" => "ChiGoals that do not have a Value_Goal of type integer",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 11,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 4011,
+		"objectList" => array(
+			
+		),
+		"object" => "multiple children types",
+		"toolTip" => "ChiGoals that have both a ChiGoal and a ChiRequirement as child",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 11,
+		"_is_leaf" => true
+	)
+, 
+	
+	array(
+		"_id" => 5011,
+		"objectList" => array(
+			
+		),
+		"object" => "not achieved",
+		"toolTip" => "ChiGoals that do not have a ChiRequirement that have a ChiFeature",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 11,
+		"_is_leaf" => true
+	)
+,
+	
+	
+	array(
+		"_id" => 21,
+		"objectList" => array(
+			
+		),
+		"object" => "ChiRequirements",
+		"toolTip" => "All ChiRequirements",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 1,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1021,
+		"objectList" => array(
+			
+		),
+		"object" => "without parent",
+		"toolTip" => "ChiRequirements that do not have a ChiRequirement or ChiGoal as parent",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 21,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2021,
+		"objectList" => array(
+			
+		),
+		"object" => "without child",
+		"toolTip" => "ChiRequirements that do not have any ChiFeature or ChiIssue",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 21,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 3021,
+		"objectList" => array(
+			
+		),
+		"object" => "more than one feature",
+		"toolTip" => "ChiRequirements that have more than one ChiFeature",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 21,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 4021,
+		"objectList" => array(
+			
+		),
+		"object" => "multiple children types",
+		"toolTip" => "ChiRequirements that have both a ChiRequirement and a ChiFeature/ChiIssue as child",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 21,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 5021,
+		"objectList" => array(
+			
+		),
+		"object" => "both ChiFeature and ChiIssue",
+		"toolTip" => "ChiRequirements that have both a ChiFeature and a ChiIssue",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 21,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 31,
+		"objectList" => array(
+			
+		),
+		"object" => "ChiFeatures",
+		"toolTip" => "All ChiFeatures",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 1,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1031,
+		"objectList" => array(
+			
+		),
+		"object" => "without Parent",
+		"toolTip" => "ChiFeatures not connected to a ChiRequirement",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 31,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2031,
+		"objectList" => array(
+			
+		),
+		"object" => "not fully implemented",
+		"toolTip" => "ChiFeature with Status = 'implemented' MUST have a ChiBusinessUseCase",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 31,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 41,
+		"objectList" => array(
+			
+		),
+		"object" => "ChiIssues",
+		"toolTip" => "All ChiIssues",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 1,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1041,
+		"objectList" => array(
+			
+		),
+		"object" => "without parent",
+		"toolTip" => "ChiIssues that do not have a ChiRequirement",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 41,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 2,
+		"objectList" => array(),
+		"object" => "Use Cases",
+		"toolTip" => "Use Cases",
+		"quantity" => 80,
+		"status" => -1,
+		"_parent" => null,
+		"_is_leaf" => false
+	)
+,
+
+	
+	array(
+		"_id" => 12,
+		"objectList" => array(
+			
+		),
+		"object" => "ChiBusinessProcess",
+		"toolTip" => "All ChiBusinessProcesses",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 2,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1012,
+		"objectList" => array(
+			
+		),
+		"object" => "without ChiBusinessUseCase",
+		"toolTip" => "ChiBusinessProcesss that have no ChiBusinessUseCase",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 12,
+		"_is_leaf" => true
+	)
+,
+	
+	
+	array(
+		"_id" => 22,
+		"objectList" => array(
+			
+		),
+		"object" => "ChiBusinessUseCase",
+		"toolTip" => "All ChiBusinessUseCases",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 2,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1022,
+		"objectList" => array(
+			
+		),
+		"object" => "without Feature",
+		"toolTip" => "ChiBusinessUseCases that have no ChiFeature",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2022,
+		"objectList" => array(
+			
+		),
+		"object" => "without Scope",
+		"toolTip" => "ChiBusinessUseCases that have no Scope",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 3022,
+		"objectList" => array(
+			
+		),
+		"object" => "without GoalInContext",
+		"toolTip" => "ChiBusinessUseCases that have no GoalInContext",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 4022,
+		"objectList" => array(
+			
+		),
+		"object" => "without Trigger = AcitvityInitial",
+		"toolTip" => "ChiBusinessUseCases that have no ActivityInitial with the same name as Trigger",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 5022,
+		"objectList" => array(
+			
+		),
+		"object" => "without MainSuccessScenario = ActivityFinal",
+		"toolTip" => "ChiBusinessUseCases that have no ActivityFinal with the same name as MainSuccessScenario",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 6022,
+		"objectList" => array(
+			
+		),
+		"object" => "without active PrimaryActor",
+		"toolTip" => "ChiBusinessUseCases that have a ChiBusinessPartnerPassive as PrimaryActor",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 7022,
+		"objectList" => array(
+			
+		),
+		"object" => "without ActivitySet",
+		"toolTip" => "ChiBusinessUseCases that have no ActivitySet",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 8022,
+		"objectList" => array(
+			
+		),
+		"object" => "without Actor",
+		"toolTip" => "ChiBusinessUseCases that have no Actor",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 9022,
+		"objectList" => array(
+			
+		),
+		"object" => "without Trigger",
+		"toolTip" => "ChiBusinessUseCases that have no Trigger",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 10022,
+		"objectList" => array(
+			
+		),
+		"object" => "without MainSuccessScenario",
+		"toolTip" => "ChiBusinessUseCases that have no MainSuccessScenario",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 11022,
+		"objectList" => array(
+			
+		),
+		"object" => "without PrimaryActor",
+		"toolTip" => "ChiBusinessUseCases that have no PrimaryActor",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 12022,
+		"objectList" => array(
+			
+		),
+		"object" => "with Status",
+		"toolTip" => "ChiBusinessUseCases that have a Status",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 22,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 112022,
+		"objectList" => array(
+			
+		),
+		"object" => "Proposed",
+		"toolTip" => "ChiBusinessUseCases that have a Status = Proposed",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 12022,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 212022,
+		"objectList" => array(
+			
+		),
+		"object" => "Approved",
+		"toolTip" => "ChiBusinessUseCases that have a Status = Approved",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 12022,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 312022,
+		"objectList" => array(
+			
+		),
+		"object" => "Rejected",
+		"toolTip" => "ChiBusinessUseCases that have a Status = Rejected",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 12022,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 412022,
+		"objectList" => array(
+			
+		),
+		"object" => "Validated",
+		"toolTip" => "ChiBusinessUseCases that have a Status = Validated",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 12022,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 512022,
+		"objectList" => array(
+			
+		),
+		"object" => "Released",
+		"toolTip" => "ChiBusinessUseCases that have a Status = Released",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 12022,
+		"_is_leaf" => true
+	)
+,
+	
+	
+	array(
+		"_id" => 32,
+		"objectList" => array(),
+		"object" => "ActivitySet",
+		"toolTip" => "All ActivitySets",
+		"quantity" => 10,
+		"status" => null,
+		"_parent" => 2,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1032,
+		"objectList" => array(),
+		"object" => "duplicate name",
+		"toolTip" => "ActivitySets that have no globally unique name",
+		"quantity" => 6,
+		"status" => 2,
+		"_parent" => 32,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2032,
+		"objectList" => array(),
+		"object" => "without name",
+		"toolTip" => "ActivitySets that have no name",
+		"quantity" => 2,
+		"status" => 4,
+		"_parent" => 32,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 3032,
+		"objectList" => array(),
+		"object" => "without ActivityInitial",
+		"toolTip" => "ActivitySets that have not exactly one ActivityInitial ",
+		"quantity" => 3,
+		"status" => 4,
+		"_parent" => 32,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 4032,
+		"objectList" => array(),
+		"object" => "without ActivityFinal",
+		"toolTip" => "ActivitySets that have no ActivityFinal",
+		"quantity" => 3,
+		"status" => 4,
+		"_parent" => 32,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 5032,
+		"objectList" => array(),
+		"object" => "without one input ChiObject",
+		"toolTip" => "ActivitySets that have not exactly one input ChiObject ",
+		"quantity" => 10,
+		"status" => null,
+		"_parent" => 32,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 6032,
+		"objectList" => array(),
+		"object" => "without output ChiObject",
+		"toolTip" => "ActivitySets that have no output ChiObject",
+		"quantity" => 10,
+		"status" => null,
+		"_parent" => 32,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 42,
+		"objectList" => array(),
+		"object" => "Activity",
+		"toolTip" => "All Activities",
+		"quantity" => 34,
+		"status" => null,
+		"_parent" => 2,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1042,
+		"objectList" => array(),
+		"object" => "without name",
+		"toolTip" => "Activities that have no name",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 42,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2042,
+		"objectList" => array(),
+		"object" => "without incoming/outgoing arrow",
+		"toolTip" => "Activities that have no incoming or no outgoing arrow",
+		"quantity" => 11,
+		"status" => 4,
+		"_parent" => 42,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 3042,
+		"objectList" => array(),
+		"object" => "duplicate name",
+		"toolTip" => "Activities that have no unique name within its ActivitySet",
+		"quantity" => 8,
+		"status" => 4,
+		"_parent" => 42,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 4042,
+		"objectList" => array(),
+		"object" => "several ProductionRulesets",
+		"toolTip" => "Activities that have more than one ProductionRuleset ",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 42,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 5042,
+		"objectList" => array(),
+		"object" => "non-consecutive",
+		"toolTip" => "Activities that are not consecutive within one ProductionRuleset",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 42,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 52,
+		"objectList" => array(),
+		"object" => "ActivityInitial",
+		"toolTip" => "All ActivityInitials",
+		"quantity" => 7,
+		"status" => null,
+		"_parent" => 2,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1052,
+		"objectList" => array(),
+		"object" => "without outgoing arrow",
+		"toolTip" => "ActivityInitials that have no outgoing arrow",
+		"quantity" => 1,
+		"status" => 5,
+		"_parent" => 52,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 62,
+		"objectList" => array(),
+		"object" => "ActivityFinal",
+		"toolTip" => "All ActivityFinals",
+		"quantity" => 11,
+		"status" => null,
+		"_parent" => 2,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1062,
+		"objectList" => array(),
+		"object" => "without incoming arrow",
+		"toolTip" => "ActivityFinals that have no incoming arrow",
+		"quantity" => 4,
+		"status" => 4,
+		"_parent" => 62,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 72,
+		"objectList" => array(),
+		"object" => "ActivityDecision",
+		"toolTip" => "All ActivityDecisions",
+		"quantity" => 9,
+		"status" => null,
+		"_parent" => 2,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1072,
+		"objectList" => array(),
+		"object" => "without name",
+		"toolTip" => "ActivityDecisions that have no name",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 72,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2072,
+		"objectList" => array(),
+		"object" => "duplicate name",
+		"toolTip" => "ActivityDecisions that have no unique name within its ActivitySet",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 72,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 3072,
+		"objectList" => array(),
+		"object" => "not one incoming, two outgoing arrows",
+		"toolTip" => "ActivityDecisions that have no incoming or less than two outgoing arrows",
+		"quantity" => 4,
+		"status" => 3,
+		"_parent" => 72,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 4072,
+		"objectList" => array(),
+		"object" => "outgoing arrows duplicate name",
+		"toolTip" => "ActivityDecisions that have no unique names at its outgoing arrows",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 72,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 5072,
+		"objectList" => array(),
+		"object" => "several ProductionRulesets",
+		"toolTip" => "ActivityDecisions that have more than one ProductionRuleset",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 72,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 6072,
+		"objectList" => array(),
+		"object" => "no prepended Activity",
+		"toolTip" => "ActivityDecisions that have no ProductionRuleset and are not prepended by an Activity",
+		"quantity" => 1,
+		"status" => 5,
+		"_parent" => 72,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 7072,
+		"objectList" => array(),
+		"object" => "non-consecutive",
+		"toolTip" => "ActivityDecisions that are not consecutive within one ProductionRuleset",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 72,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 8072,
+		"objectList" => array(),
+		"object" => "several per ProductionRuleset",
+		"toolTip" => "ActivityDecisions that are not the only ActivityDecisions within a ProductionRuleset",
+		"quantity" => 9,
+		"status" => null,
+		"_parent" => 72,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 9072,
+		"objectList" => array(),
+		"object" => "loop style",
+		"toolTip" => "All loop style ActivityDecisions",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 72,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 109072,
+		"objectList" => array(),
+		"object" => "not all required arrow names",
+		"toolTip" => "Loop style ActivityDecisions that have no LoopStart outgoing arrow or LoopContinue incoming arrow",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 9072,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 209072,
+		"objectList" => array(),
+		"object" => "not all required predecessors",
+		"toolTip" => "ActivityDecisions that have no predecessors like Activity('get list') -> ChiObject('list') -> Activity('evaluate list') -> ActivityDecision",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 9072,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 309072,
+		"objectList" => array(),
+		"object" => "not all required successors",
+		"toolTip" => "ActivityDecisions that have no successors like ActivityDecision -> Activity('get list element') -> ChiObject('list element')",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 9072,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 409072,
+		"objectList" => array(),
+		"object" => "other parts not in same ProductionRuleset",
+		"toolTip" => "ActivityDecisions that have not the same ProductionRuleset as the required predecessors/successors ",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 9072,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 82,
+		"objectList" => array(),
+		"object" => "ChiObject",
+		"toolTip" => "All ChiObjects",
+		"quantity" => 9,
+		"status" => null,
+		"_parent" => 2,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1082,
+		"objectList" => array(),
+		"object" => "without name",
+		"toolTip" => "ChiObjects that have no name",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 82,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2082,
+		"objectList" => array(),
+		"object" => "no incoming arrow",
+		"toolTip" => "ChiObjects that have no incoming arrow",
+		"quantity" => 9,
+		"status" => null,
+		"_parent" => 82,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 3082,
+		"objectList" => array(),
+		"object" => "no outgoing arrow",
+		"toolTip" => "ChiObjects that have no outgoing arrow",
+		"quantity" => 4,
+		"status" => 3,
+		"_parent" => 82,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 4082,
+		"objectList" => array(),
+		"object" => "request no outgoing arrow",
+		"toolTip" => "Request ChiObjects that have no outgoing arrow",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 82,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 5082,
+		"objectList" => array(),
+		"object" => "response no incoming arrow",
+		"toolTip" => "Response ChiObjects that have no incoming arrow",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 82,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 6082,
+		"objectList" => array(),
+		"object" => "response different type",
+		"toolTip" => "Response ChiObjects that have not the same ChiNode as other response ChiObjects ",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 82,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 7082,
+		"objectList" => array(),
+		"object" => "without ChiNode",
+		"toolTip" => "ChiObjects that have no ChiNode",
+		"quantity" => 7,
+		"status" => 2,
+		"_parent" => 82,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 8082,
+		"objectList" => array(),
+		"object" => "same name, different ChiNode",
+		"toolTip" => "ChiObjects that have the same name but different ChiNodes ",
+		"quantity" => 0,
+		"status" => 5,
+		"_parent" => 82,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 3,
+		"objectList" => array(),
+		"object" => "Domain",
+		"toolTip" => "Domain",
+		"quantity" => 0,
+		"status" => -1,
+		"_parent" => null,
+		"_is_leaf" => false
+	)
+,
+
+	
+	array(
+		"_id" => 13,
+		"objectList" => array(
+			
+		),
+		"object" => "ChiNode",
+		"toolTip" => "All ChiNodes",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 3,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1013,
+		"objectList" => array(
+			
+		),
+		"object" => "without name",
+		"toolTip" => "ChiNodes that have no name",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 13,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2013,
+		"objectList" => array(
+			
+		),
+		"object" => "without orderby",
+		"toolTip" => "ChiNodes that have no orderby as 'none', 'sortkey' or attribute name",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 13,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 3013,
+		"objectList" => array(
+			
+		),
+		"object" => "without initparams",
+		"toolTip" => "ChiNodes that have no initparams as a ChiSystem name",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 13,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 23,
+		"objectList" => array(
+			
+		),
+		"object" => "ChiValue",
+		"toolTip" => "All ChiValues",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 3,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1023,
+		"objectList" => array(
+			
+		),
+		"object" => "without name",
+		"toolTip" => "ChiValues that have no name",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 23,
+		"_is_leaf" => true
+	)
+,
+	
+	array(
+		"_id" => 2023,
+		"objectList" => array(
+			
+		),
+		"object" => "without valid name",
+		"toolTip" => "ChiValues with the name 'type', 'state', 'oid', 'value', 'none' or 'sortkey'",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 23,
+		"_is_leaf" => true
+	)
+,
+
+	
+	array(
+		"_id" => 33,
+		"objectList" => array(),
+		"object" => "ChiActionKey",
+		"toolTip" => "All ChiActionKeys",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 3,
+		"_is_leaf" => false
+	)
+,
+	
+	array(
+		"_id" => 1033,
+		"objectList" => array(),
+		"object" => "without config",
+		"toolTip" => "ChiActionKeys that have no config",
+		"quantity" => 0,
+		"status" => null,
+		"_parent" => 33,
+		"_is_leaf" => true
+	)
+
+);

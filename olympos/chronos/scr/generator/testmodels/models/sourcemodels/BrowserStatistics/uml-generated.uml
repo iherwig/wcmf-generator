@@ -1,0 +1,1981 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Chronos="http:///schemas/Chronos/_jAH0gM-nEd6fypAGO026Fw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/Chronos/_jAH0gM-nEd6fypAGO026Fw/0 src/metamodel/chronos.profile.uml#_jARlgc-nEd6fypAGO026Fw">
+  <uml:Model xmi:id="_igTmIFnjEeCk9JeqiHj1aA" name="uml-generated">
+    <packagedElement xmi:type="uml:Package" xmi:id="_igTmIVnjEeCk9JeqiHj1aA" name="eurocom">
+      <packagedElement xmi:type="uml:Package" xmi:id="_igTmIlnjEeCk9JeqiHj1aA" name="Analysis">
+        <ownedComment xmi:id="_igTmI1njEeCk9JeqiHj1aA" annotatedElement="_igTmIlnjEeCk9JeqiHj1aA">
+          <body>?</body>
+        </ownedComment>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igTmJFnjEeCk9JeqiHj1aA" name="General Overview">
+          <ownedComment xmi:id="_igTmJVnjEeCk9JeqiHj1aA" annotatedElement="_igTmJFnjEeCk9JeqiHj1aA">
+            <body>&lt;br></body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igTmJlnjEeCk9JeqiHj1aA" name="Goals">
+          <ownedComment xmi:id="_igTmJ1njEeCk9JeqiHj1aA" annotatedElement="_igTmJlnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmKFnjEeCk9JeqiHj1aA" name="Reduce reaction time">
+            <ownedComment xmi:id="_igTmKVnjEeCk9JeqiHj1aA" annotatedElement="_igTmKFnjEeCk9JeqiHj1aA">
+              <body>The reaction time to incoming TroubleCallsmust be reduced.inordertoincreasecustomer           
+satisfactionandofferacompetitive advantage           
+tostandoutfromthecrowdof           
+competitorsinthefield.&lt;p>&lt;br>           
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmKlnjEeCk9JeqiHj1aA" name="Increase 'closed tasks per activity' ratio">
+            <ownedComment xmi:id="_igTmK1njEeCk9JeqiHj1aA" annotatedElement="_igTmKlnjEeCk9JeqiHj1aA">
+              <body>Increase number oftasksputintostatus 'closed'           
+after performing anactivityonsite.&lt;p>&lt;br>           
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmLFnjEeCk9JeqiHj1aA" name="Gain market share by winning contracts for newly erected transmitter generations">
+            <ownedComment xmi:id="_igTmLVnjEeCk9JeqiHj1aA" annotatedElement="_igTmLFnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmLlnjEeCk9JeqiHj1aA" name="Constantly providing high-quality services for our partners in the mobile telecommunications sector">
+            <ownedComment xmi:id="_igTmL1njEeCk9JeqiHj1aA" annotatedElement="_igTmLlnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmMFnjEeCk9JeqiHj1aA" name="Reduce costs per task">
+            <ownedComment xmi:id="_igTmMVnjEeCk9JeqiHj1aA" annotatedElement="_igTmMFnjEeCk9JeqiHj1aA">
+              <body>Reduce costs per task from 61,50 to below 58,50 EUR</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmMlnjEeCk9JeqiHj1aA" name="Increase 'Activities per Field Worker per Day' ratio">
+            <ownedComment xmi:id="_igTmM1njEeCk9JeqiHj1aA" annotatedElement="_igTmMlnjEeCk9JeqiHj1aA">
+              <body>Increase 'Activities per Field Worker per Day' ratio by 5&lt;br> </body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmNFnjEeCk9JeqiHj1aA" name="Improve customer satisfaction">
+            <ownedComment xmi:id="_igTmNVnjEeCk9JeqiHj1aA" annotatedElement="_igTmNFnjEeCk9JeqiHj1aA">
+              <body>Improve percentage of 'satisfied' or 'very satisfied' customers by 10%</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmNlnjEeCk9JeqiHj1aA" name="Reduce Travel costs">
+            <ownedComment xmi:id="_igTmN1njEeCk9JeqiHj1aA" annotatedElement="_igTmNlnjEeCk9JeqiHj1aA">
+              <body>Reduce average travel costs by 5%</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igTmOFnjEeCk9JeqiHj1aA" name="vision mission">
+            <ownedComment xmi:id="_igTmOVnjEeCk9JeqiHj1aA" annotatedElement="_igTmOFnjEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igTmOlnjEeCk9JeqiHj1aA" name="Goals Overview">
+            <ownedComment xmi:id="_igTmO1njEeCk9JeqiHj1aA" annotatedElement="_igTmOlnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igTmPFnjEeCk9JeqiHj1aA" name="vision mission"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmPVnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmPlnjEeCk9JeqiHj1aA _igTmQVnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmPlnjEeCk9JeqiHj1aA" name="" type="_igTmqFnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmPVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmP1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmQFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmQVnjEeCk9JeqiHj1aA" name="" type="_igTmKFnjEeCk9JeqiHj1aA" association="_igTmPVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmQlnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmQ1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmRFnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmRVnjEeCk9JeqiHj1aA _igTmSFnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmRVnjEeCk9JeqiHj1aA" name="" type="_igTmKFnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmRFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmRlnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmR1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmSFnjEeCk9JeqiHj1aA" name="" type="_igTmLFnjEeCk9JeqiHj1aA" association="_igTmRFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmSVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmSlnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmS1njEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmTFnjEeCk9JeqiHj1aA _igTmT1njEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmTFnjEeCk9JeqiHj1aA" name="" type="_igTmKlnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmS1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmTVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmTlnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmT1njEeCk9JeqiHj1aA" name="" type="_igTmLFnjEeCk9JeqiHj1aA" association="_igTmS1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmUFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmUVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmUlnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmU1njEeCk9JeqiHj1aA _igTmVlnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmU1njEeCk9JeqiHj1aA" name="" type="_igTmLlnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmUlnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmVFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmVVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmVlnjEeCk9JeqiHj1aA" name="" type="_igTmLFnjEeCk9JeqiHj1aA" association="_igTmUlnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmV1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmWFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmWVnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmWlnjEeCk9JeqiHj1aA _igTmXVnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmWlnjEeCk9JeqiHj1aA" name="" type="_igTmMFnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmWVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmW1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmXFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmXVnjEeCk9JeqiHj1aA" name="" type="_igTmLFnjEeCk9JeqiHj1aA" association="_igTmWVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmXlnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmX1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmYFnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmYVnjEeCk9JeqiHj1aA _igTmZFnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmYVnjEeCk9JeqiHj1aA" name="" type="_igTmMlnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmYFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmYlnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmY1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmZFnjEeCk9JeqiHj1aA" name="" type="_igTmLFnjEeCk9JeqiHj1aA" association="_igTmYFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmZVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmZlnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmZ1njEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmaFnjEeCk9JeqiHj1aA _igTma1njEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmaFnjEeCk9JeqiHj1aA" name="" type="_igTmNFnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmZ1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmaVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmalnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTma1njEeCk9JeqiHj1aA" name="" type="_igTmLFnjEeCk9JeqiHj1aA" association="_igTmZ1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmbFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmbVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmblnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmb1njEeCk9JeqiHj1aA _igTmclnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmb1njEeCk9JeqiHj1aA" name="" type="_igTmLFnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmblnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmcFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmcVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmclnjEeCk9JeqiHj1aA" name="" type="_igTmMlnjEeCk9JeqiHj1aA" association="_igTmblnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmc1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmdFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmdVnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmdlnjEeCk9JeqiHj1aA _igTmeVnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmdlnjEeCk9JeqiHj1aA" name="" type="_igTmr1njEeCk9JeqiHj1aA" aggregation="composite" association="_igTmdVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmd1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmeFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmeVnjEeCk9JeqiHj1aA" name="" type="_igTmMlnjEeCk9JeqiHj1aA" association="_igTmdVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmelnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTme1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmfFnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmfVnjEeCk9JeqiHj1aA _igTmgFnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmfVnjEeCk9JeqiHj1aA" name="" type="_igTmnFnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmfFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmflnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmf1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmgFnjEeCk9JeqiHj1aA" name="" type="_igTmNFnjEeCk9JeqiHj1aA" association="_igTmfFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmgVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmglnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmg1njEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmhFnjEeCk9JeqiHj1aA _igTmh1njEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmhFnjEeCk9JeqiHj1aA" name="" type="_igTmoFnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmg1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmhVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmhlnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmh1njEeCk9JeqiHj1aA" name="" type="_igTmNFnjEeCk9JeqiHj1aA" association="_igTmg1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmiFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmiVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmilnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmi1njEeCk9JeqiHj1aA _igTmjlnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmi1njEeCk9JeqiHj1aA" name="" type="_igTmt1njEeCk9JeqiHj1aA" aggregation="composite" association="_igTmilnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmjFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmjVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmjlnjEeCk9JeqiHj1aA" name="" type="_igTmNlnjEeCk9JeqiHj1aA" association="_igTmilnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmj1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmkFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmkVnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmklnjEeCk9JeqiHj1aA _igTmlVnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmklnjEeCk9JeqiHj1aA" name="" type="_igTmnlnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmkVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmk1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTmlFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igTmlVnjEeCk9JeqiHj1aA" name="" type="_igTmNlnjEeCk9JeqiHj1aA" association="_igTmkVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmllnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igTml1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igTmmFnjEeCk9JeqiHj1aA" name="Requirements">
+          <ownedComment xmi:id="_igTmmVnjEeCk9JeqiHj1aA" annotatedElement="_igTmmFnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmmlnjEeCk9JeqiHj1aA" name="Dashboard must be implemented">
+            <ownedComment xmi:id="_igTmm1njEeCk9JeqiHj1aA" annotatedElement="_igTmmlnjEeCk9JeqiHj1aA">
+              <body>A dashboard must be implemented as a &quot;homepage&quot; in the CRM that lists the most frequent actions and objects accessed by a worker. Dashboards vary according to roles of workers who access the CRM. Different dashboards must be implemented for the roles of a Field Worker, Call Center Agent and System Administrator.</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmnFnjEeCk9JeqiHj1aA" name="Backoffice support must be linked with frontoffice service">
+            <ownedComment xmi:id="_igTmnVnjEeCk9JeqiHj1aA" annotatedElement="_igTmnFnjEeCk9JeqiHj1aA">
+              <body>       
+&lt;p>Backoffice       
+supportmustbelinkedwithfrontoffice       
+servicetoexchangeinformationaboutTrouble       
+CallsandVisitReports.       
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmnlnjEeCk9JeqiHj1aA" name="Travel connections in task and trouble management should be optimized">
+            <ownedComment xmi:id="_igTmn1njEeCk9JeqiHj1aA" annotatedElement="_igTmnlnjEeCk9JeqiHj1aA">
+              <body>Travelling           
+salesmanoptimizationofthependingtasks           
+offieldworkers.Tasksshouldbe           
+distributedinanoptimalwaysothat           
+travelconnectionsareoptimizedandthe           
+maximumamountoftransmittersperdaycan           
+beprocessed.           
+</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmoFnjEeCk9JeqiHj1aA" name="Manage task information on mobile device">
+            <ownedComment xmi:id="_igTmoVnjEeCk9JeqiHj1aA" annotatedElement="_igTmoFnjEeCk9JeqiHj1aA">
+              <body>Provide          
+anoptiontofieldworkerstoviewand          
+editowntasks.Fieldworkersmustbe          
+abletoenterinformationaboutajust          
+processedtaskandattachthisinformation          
+tothetask,contract,customeror          
+transmitter.          
+</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igTmolnjEeCk9JeqiHj1aA" name="Display transmitter manual on mobile device">
+            <ownedComment xmi:id="_igTmo1njEeCk9JeqiHj1aA" annotatedElement="_igTmolnjEeCk9JeqiHj1aA">
+              <body>         
+&lt;p>Display         
+arequestedtransmittermanualonthemobile         
+device,providingthefieldworkerwith         
+importanttechnicaldataneededtomaintain         
+orrepairaspecifictransmittermodel.The         
+manualshouldbereadablewithnomajor         
+constraintsincomparisontoapapermanual.         
+Asearchfunction,dynamicallylinkedtable         
+ofcontentsandindexshouldbeprovided.&lt;br>         
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igTmpFnjEeCk9JeqiHj1aA" name="Requirements Overview">
+            <ownedComment xmi:id="_igTmpVnjEeCk9JeqiHj1aA" annotatedElement="_igTmpFnjEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igTmplnjEeCk9JeqiHj1aA" name="goals - Requirements"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igTmp1njEeCk9JeqiHj1aA" name="Non functional">
+            <packagedElement xmi:type="uml:Class" xmi:id="_igTmqFnjEeCk9JeqiHj1aA" name="Short time frame to open manual">
+              <ownedComment xmi:id="_igTmqVnjEeCk9JeqiHj1aA" annotatedElement="_igTmqFnjEeCk9JeqiHj1aA">
+                <body>         
+&lt;p>The         
+timeframetoopenmanualsshouldnot         
+exceed30secondsfromthepointofa         
+Fieldworkerrequestingamanualtothe         
+pointtheycanfirstaccessapagein         
+thedocument.         
+&lt;/p></body>
+              </ownedComment>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_igTmqlnjEeCk9JeqiHj1aA" name="Mobile device usability should be assured">
+              <ownedComment xmi:id="_igTmq1njEeCk9JeqiHj1aA" annotatedElement="_igTmqlnjEeCk9JeqiHj1aA">
+                <body>Working           
+withthemobiledeviceshouldbeeasy,           
+straight-forwardandfast.Well-knownsoftware           
+standardsaretobeimplementedandan           
+intuitiveuseofthesystemshouldbe           
+possible.Thedeviceshouldberesistantto           
+errorsandfastinresponsetouser           
+input.&lt;br>Graphical           
+featuresmaybeminimized.           
+</body>
+              </ownedComment>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmrFnjEeCk9JeqiHj1aA" supplier="_igTmqFnjEeCk9JeqiHj1aA" client="_igUNWVnjEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmrVnjEeCk9JeqiHj1aA" supplier="_igTmqlnjEeCk9JeqiHj1aA" client="_igUNW1njEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igTmrlnjEeCk9JeqiHj1aA" name="Functional">
+            <packagedElement xmi:type="uml:Class" xmi:id="_igTmr1njEeCk9JeqiHj1aA" name="A new CRM system must be implemented">
+              <ownedComment xmi:id="_igTmsFnjEeCk9JeqiHj1aA" annotatedElement="_igTmr1njEeCk9JeqiHj1aA">
+                <body>Implement               
+a&amp;#160;new&amp;#160;CRM&amp;#160;system&amp;#160;that&amp;#160;allows&amp;#160;the               
+management&amp;#160;of&amp;#160;current&amp;#160;customers,&amp;#160;tasks,&amp;#160;contracts               
+and&amp;#160;employees.&amp;#160;The&amp;#160;CRM&amp;#160;system&amp;#160;should&amp;#160;include               
+interfaces&amp;#160;for&amp;#160;internal&amp;#160;workers&amp;#160;as&amp;#160;well&amp;#160;as               
+external&amp;#160;workers&amp;#160;and&amp;#160;administrators.&amp;#160;The&amp;#160;CRM               
+system&amp;#160;is&amp;#160;to&amp;#160;manage&amp;#160;business&amp;#160;tasks,               
+activities,&amp;#160;customers,&amp;#160;transmitters&amp;#160;and&amp;#160;employees.               
+</body>
+              </ownedComment>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_igTmsVnjEeCk9JeqiHj1aA" name="Display pending activities on mobile device">
+              <ownedComment xmi:id="_igTmslnjEeCk9JeqiHj1aA" annotatedElement="_igTmsVnjEeCk9JeqiHj1aA">
+                <body>        
+&lt;p>Display        
+a&amp;#160;worker's&amp;#160;pending&amp;#160;activities&amp;#160;on&amp;#160;the        
+mobile&amp;#160;device&amp;#160;in&amp;#160;a&amp;#160;clearly&amp;#160;arranged&amp;#160;and        
+comprehensible&amp;#160;way.&amp;#160;Replace&amp;#160;manual&amp;#160;activity        
+management&amp;#160;by&amp;#160;computer-aided&amp;#160;methods.        
+&lt;/p></body>
+              </ownedComment>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_igTms1njEeCk9JeqiHj1aA" name="Call Center must know the current status of Trouble Call in real-time">
+              <ownedComment xmi:id="_igTmtFnjEeCk9JeqiHj1aA" annotatedElement="_igTms1njEeCk9JeqiHj1aA">
+                <body>Call     
+Center&amp;#160;Agents&amp;#160;must&amp;#160;be&amp;#160;able&amp;#160;to&amp;#160;view&amp;#160;the     
+history&amp;#160;and&amp;#160;current&amp;#160;status&amp;#160;of&amp;#160;a&amp;#160;Trouble     
+Call.&amp;#160;He&amp;#160;can&amp;#160;also&amp;#160;change&amp;#160;the&amp;#160;status&amp;#160;or     
+add&amp;#160;additional&amp;#160;information&amp;#160;about&amp;#160;the&amp;#160;Trouble     
+Call&amp;#160;coming&amp;#160;from&amp;#160;the&amp;#160;Customer&amp;#160;or&amp;#160;other     
+sources.&lt;p>&lt;br>     
+&lt;/p></body>
+              </ownedComment>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_igTmtVnjEeCk9JeqiHj1aA" name="Existing ERP system must be integrated">
+              <ownedComment xmi:id="_igTmtlnjEeCk9JeqiHj1aA" annotatedElement="_igTmtVnjEeCk9JeqiHj1aA">
+                <body>           
+&lt;p>The           
+existingERPsystemthatiscurrentlyused           
+mustbeintegratedintothenewsolution.           
+Existingdatamustbeextractedfromthe           
+ERPsystemtobeavailable.Thesolution           
+mayreaddatabutchangesonmaster           
+datamayonlyoccurfromwithintheERP           
+system.&lt;/p>&lt;p>&lt;br>           
+&lt;/p></body>
+              </ownedComment>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_igTmt1njEeCk9JeqiHj1aA" name="Provide Field Worker with additional information">
+              <ownedComment xmi:id="_igTmuFnjEeCk9JeqiHj1aA" annotatedElement="_igTmt1njEeCk9JeqiHj1aA">
+                <body>              
+&lt;p>Unnecessary              
+travel andinappropriateworkerassignmentsdue              
+tomissingtaskskillsshouldbeeliminated.              
+Increaseeffectivenessonthejobby              
+providingadditionalinformationaboutknown              
+issuesorbestpractices.Eliminatetheneed              
+tocallforspecialistsasaresultof              
+afieldworkernotbeingableto              
+successfullyfinishatask.              
+&lt;/p></body>
+              </ownedComment>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Class" xmi:id="_igTmuVnjEeCk9JeqiHj1aA" name="Manage transmitter issues on mobile device">
+              <ownedComment xmi:id="_igTmulnjEeCk9JeqiHj1aA" annotatedElement="_igTmuVnjEeCk9JeqiHj1aA">
+                <body>         
+&lt;p>Provide         
+anoptiontoview,edit,createand         
+deleteinformationaboutissuestoatype         
+oftransmitter.Theideabehindthis         
+requirementistodistributeknowledgeand         
+knownissuesthatafieldworkerhas         
+encounteredseveraltimesbeforetoother         
+colleagues,providinghintstosolvinga         
+fairlyrareissue.&lt;br>         
+&lt;/p></body>
+              </ownedComment>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmu1njEeCk9JeqiHj1aA" supplier="_igTmr1njEeCk9JeqiHj1aA" client="_igUNV1njEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmvFnjEeCk9JeqiHj1aA" supplier="_igTmsVnjEeCk9JeqiHj1aA" client="_igUNW1njEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmvVnjEeCk9JeqiHj1aA" supplier="_igTmsVnjEeCk9JeqiHj1aA" client="_igUNWVnjEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmvlnjEeCk9JeqiHj1aA" supplier="_igTmsVnjEeCk9JeqiHj1aA" client="_igUNXVnjEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmv1njEeCk9JeqiHj1aA" supplier="_igTmsVnjEeCk9JeqiHj1aA" client="_igUNV1njEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmwFnjEeCk9JeqiHj1aA" supplier="_igTms1njEeCk9JeqiHj1aA" client="_igUNV1njEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmwVnjEeCk9JeqiHj1aA" supplier="_igTmtVnjEeCk9JeqiHj1aA" client="_igVbl1njEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmwlnjEeCk9JeqiHj1aA" supplier="_igTmt1njEeCk9JeqiHj1aA" client="_igUNUVnjEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmw1njEeCk9JeqiHj1aA" supplier="_igTmt1njEeCk9JeqiHj1aA" client="_igUNVVnjEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmxFnjEeCk9JeqiHj1aA" supplier="_igTmuVnjEeCk9JeqiHj1aA" client="_igUNWVnjEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmxVnjEeCk9JeqiHj1aA" supplier="_igTmuVnjEeCk9JeqiHj1aA" client="_igUNXVnjEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmxlnjEeCk9JeqiHj1aA" supplier="_igTmuVnjEeCk9JeqiHj1aA" client="_igUNV1njEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:Realization" xmi:id="_igTmx1njEeCk9JeqiHj1aA" supplier="_igTmuVnjEeCk9JeqiHj1aA" client="_igUNUVnjEeCk9JeqiHj1aA">
+              <name xsi:nil="true"/>
+            </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igTmyFnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igTmyVnjEeCk9JeqiHj1aA _igUNMVnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igTmyVnjEeCk9JeqiHj1aA" name="" type="_igTmoFnjEeCk9JeqiHj1aA" aggregation="composite" association="_igTmyFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igTmylnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNMFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNMVnjEeCk9JeqiHj1aA" name="" type="_igTmmlnjEeCk9JeqiHj1aA" association="_igTmyFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNMlnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNM1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNNFnjEeCk9JeqiHj1aA" supplier="_igTmmlnjEeCk9JeqiHj1aA" client="_igUNV1njEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNNVnjEeCk9JeqiHj1aA" supplier="_igTmnFnjEeCk9JeqiHj1aA" client="_igUNV1njEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNNlnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igUNN1njEeCk9JeqiHj1aA _igUNOlnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igUNN1njEeCk9JeqiHj1aA" name="" type="_igTmsVnjEeCk9JeqiHj1aA" aggregation="composite" association="_igUNNlnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNOFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNOVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNOlnjEeCk9JeqiHj1aA" name="" type="_igTmoFnjEeCk9JeqiHj1aA" association="_igUNNlnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNO1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNPFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNPVnjEeCk9JeqiHj1aA" name="contains" memberEnd="_igUNPlnjEeCk9JeqiHj1aA _igUNQVnjEeCk9JeqiHj1aA">
+            <ownedEnd xmi:id="_igUNPlnjEeCk9JeqiHj1aA" name="" type="_igTmtVnjEeCk9JeqiHj1aA" aggregation="composite" association="_igUNPVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNP1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNQFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNQVnjEeCk9JeqiHj1aA" name="" type="_igTmoFnjEeCk9JeqiHj1aA" association="_igUNPVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNQlnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNQ1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNRFnjEeCk9JeqiHj1aA" supplier="_igTmoFnjEeCk9JeqiHj1aA" client="_igUNXVnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNRVnjEeCk9JeqiHj1aA" supplier="_igTmoFnjEeCk9JeqiHj1aA" client="_igVblVnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNRlnjEeCk9JeqiHj1aA" supplier="_igTmoFnjEeCk9JeqiHj1aA" client="_igUNV1njEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNR1njEeCk9JeqiHj1aA" supplier="_igTmolnjEeCk9JeqiHj1aA" client="_igUNW1njEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNSFnjEeCk9JeqiHj1aA" supplier="_igTmolnjEeCk9JeqiHj1aA" client="_igUNWVnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNSVnjEeCk9JeqiHj1aA" supplier="_igTmolnjEeCk9JeqiHj1aA" client="_igUNXVnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNSlnjEeCk9JeqiHj1aA" supplier="_igTmolnjEeCk9JeqiHj1aA" client="_igUNV1njEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNS1njEeCk9JeqiHj1aA" supplier="_igTmolnjEeCk9JeqiHj1aA" client="_igUNVVnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igUNTFnjEeCk9JeqiHj1aA" name="Features">
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNTVnjEeCk9JeqiHj1aA" name="Trouble Calls will be assigned instantly">
+            <ownedComment xmi:id="_igUNTlnjEeCk9JeqiHj1aA" annotatedElement="_igUNTVnjEeCk9JeqiHj1aA">
+              <body>    
+&lt;p>Trouble    
+Calls&amp;#160;will&amp;#160;be&amp;#160;assigned&amp;#160;instantly&amp;#160;via&amp;#160;a    
+Push-technique&amp;#160;and&amp;#160;be&amp;#160;displayed&amp;#160;on&amp;#160;a&amp;#160;chosen    
+field&amp;#160;worker?s&amp;#160;UMPC.&amp;#160;The&amp;#160;worker&amp;#160;will&amp;#160;then    
+be&amp;#160;given&amp;#160;the&amp;#160;possibility&amp;#160;to&amp;#160;decide&amp;#160;whether    
+he&amp;#160;wants&amp;#160;to&amp;#160;accept&amp;#160;the&amp;#160;activity&amp;#160;or    
+decline&amp;#160;it,&amp;#160;stating&amp;#160;a&amp;#160;reason&amp;#160;for&amp;#160;the    
+decline.&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNT1njEeCk9JeqiHj1aA" name="Docking stations will be placed inside of workers' cars">
+            <ownedComment xmi:id="_igUNUFnjEeCk9JeqiHj1aA" annotatedElement="_igUNT1njEeCk9JeqiHj1aA">
+              <body>          
+&lt;p>Docking          
+stationsfortheUMPCswillbeplaced          
+insideoftheworkers' cars,providinga          
+possibilitytorechargethebatterythatis          
+poweringtheUMPCwhileatacustomer's          
+site.          
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNUVnjEeCk9JeqiHj1aA" name="Known-issues database will be realized" clientDependency="_igTmwlnjEeCk9JeqiHj1aA _igTmx1njEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igUNUlnjEeCk9JeqiHj1aA" annotatedElement="_igUNUVnjEeCk9JeqiHj1aA">
+              <body>         
+&lt;p>A         
+newdatabasewillbesetupona         
+centralserver.Thisdatabasewillbe         
+accessibleviaVPNdial-inandprovide         
+informationaboutknownissuestotransmitters.         
+Entriesandcontributionstothisdatabase         
+maybedonefromwithinthefieldby         
+fieldworkersaswellasbyinternal         
+workers.Thedatabasewillprovideasearch         
+functionandwillbeabletodisplay         
+entriessortedbytransmittertype.         
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNU1njEeCk9JeqiHj1aA" name="Dynamic Travelling salesman optimization of activities may be realized">
+            <ownedComment xmi:id="_igUNVFnjEeCk9JeqiHj1aA" annotatedElement="_igUNU1njEeCk9JeqiHj1aA">
+              <body>        
+&lt;p>Dynamic        
+Travellingsalesmanoptimizationisindentedto        
+beimplemented.        
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNVVnjEeCk9JeqiHj1aA" name="Up-to-date manuals will be accessible via UMPC" clientDependency="_igUNS1njEeCk9JeqiHj1aA _igTmw1njEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igUNVlnjEeCk9JeqiHj1aA" annotatedElement="_igUNVVnjEeCk9JeqiHj1aA">
+              <body>        
+&lt;p>Field        
+workerswillbeabletoaccessmanuals        
+fromEUROCOM?scentralserversviaVPN.&lt;br>Manuals        
+willbestoredonacentralfileserver        
+managedbyaversioningsystem(SVN-subversion)        
+alwaysprovidingthemostrecentversionto        
+atransmitter?smanualwhenastaticlink        
+willbeaccessed.Oldversionsofa        
+manualwillbekeptandstoredfor        
+versioningreasons,trackingdocumenthistory.        
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNV1njEeCk9JeqiHj1aA" name="SVNCRM will be implemented" clientDependency="_igUNNFnjEeCk9JeqiHj1aA _igUNNVnjEeCk9JeqiHj1aA _igUNRlnjEeCk9JeqiHj1aA _igUNSlnjEeCk9JeqiHj1aA _igTmu1njEeCk9JeqiHj1aA _igTmv1njEeCk9JeqiHj1aA _igTmwFnjEeCk9JeqiHj1aA _igTmxlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igUNWFnjEeCk9JeqiHj1aA" annotatedElement="_igUNV1njEeCk9JeqiHj1aA">
+              <body>          
+&lt;p>SVNCRM          
+willbeimplementedandcustomizedtofit          
+EUROCOM?sneedsandworkaccordingto          
+theirbusinessprocesses.SVNCRMwillconsist          
+oftheChronosbusinessmodel,anAphrodite          
+serverandDionysosclients.&lt;br>SVNCRM          
+isanopensourceCRMsystemsimilarto          
+SugarCRMthatisbasedonanMDA-approach.          
+BasedonaUMLbusinessprocessmodel          
+theapplicationisgeneratedandtherefore          
+flexibletochangeswithinthemodeland          
+thebusinessoperationstructure.&lt;/p>&lt;p>SVNCRM          
+willimplementadashboardasa?homepage?          
+inSVNCRMthatliststhemostfrequent          
+actionsandobjectsaccessedbyaworker.          
+Dashboardsvaryaccordingtorolesof          
+workerswhoaccessSVNCRM.Differentdashboards          
+willbeimplementedfortherolesField          
+Worker,CallCenterAgentandSystem          
+Administrator.          
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNWVnjEeCk9JeqiHj1aA" name="UMTS / GPRS internet connection will be provided" clientDependency="_igUNSFnjEeCk9JeqiHj1aA _igTmrFnjEeCk9JeqiHj1aA _igTmvVnjEeCk9JeqiHj1aA _igTmxFnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igUNWlnjEeCk9JeqiHj1aA" annotatedElement="_igUNWVnjEeCk9JeqiHj1aA">
+              <body>       
+&lt;p>Each       
+UMP C will have a UMTS cardp ut into       
+an available PCMCIA slot. An external       
+antenna will be supplied whichcanbe       
+usedtoimprovesignalstrengthinareas       
+withlowUMTScoverage.EachUMTScard       
+willbecoveredunderaframeworkagreement       
+flatratetariff.Thecardautomatically       
+selectsthebestnetworkandwillfall       
+backtotheGRPS-systemifnoUMTS       
+coverageispresent.&lt;/p>&lt;p>UMTS       
+availabilityisestimatedtoanextentof       
+80%inthefield?sarea.Settingswill       
+becustomizedsothatanautomaticreconnect       
+occursifaconnectionislost.&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNW1njEeCk9JeqiHj1aA" name="Each field worker will be equipped with a UMPC" clientDependency="_igUNR1njEeCk9JeqiHj1aA _igTmrVnjEeCk9JeqiHj1aA _igTmvFnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igUNXFnjEeCk9JeqiHj1aA" annotatedElement="_igUNW1njEeCk9JeqiHj1aA">
+              <body>       
+&lt;p>Each       
+fieldworkerwillbeequippedwitha       
+UMPC.900/1000MHzCPU,512MBRAM,running       
+WindowsXP.Thesettingswillbeconfigured       
+tominimizegraphicalfeaturesandoptimize       
+performance.&lt;/p>&lt;p>Each       
+UMPCwillhaveFirefox2.0.0.2installed,as       
+alightweightbutsecureweb-browserthat       
+updatesitselfautomaticallyshouldsecurity       
+fixesbeavailable.&lt;/p>&lt;p>&lt;br>       
+&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNXVnjEeCk9JeqiHj1aA" name="Encrypted VPN connection to intranet will be realized" clientDependency="_igUNRFnjEeCk9JeqiHj1aA _igUNSVnjEeCk9JeqiHj1aA _igTmvlnjEeCk9JeqiHj1aA _igTmxVnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igUNXlnjEeCk9JeqiHj1aA" annotatedElement="_igUNXVnjEeCk9JeqiHj1aA">
+              <body>        
+&lt;p>When        
+connectedtotheinternet,theUMPCwill        
+establishanencryptedVPNtunnellingconnection        
+toEUROCOM?sintranet,grantingaccessto        
+livedata.&lt;/p>&lt;p>The        
+encryptionmethodusedwillbeIPSec.&lt;/p>&lt;p>Settings        
+willbecustomizedsothatanautomatic        
+reconnectoccursifaconnectionislost        
+andinternetconnectionwasre-established.&lt;/p></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igUNX1njEeCk9JeqiHj1aA" name="New ChiFeature"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUNYFnjEeCk9JeqiHj1aA" name="Features Overview">
+            <ownedComment xmi:id="_igUNYVnjEeCk9JeqiHj1aA" annotatedElement="_igUNYFnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUNYlnjEeCk9JeqiHj1aA" name=" Field Worker perform Maint. call Inheritance">
+            <ownedComment xmi:id="_igUNY1njEeCk9JeqiHj1aA" annotatedElement="_igUNYlnjEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNZFnjEeCk9JeqiHj1aA" name="refines" supplier="_igUNWVnjEeCk9JeqiHj1aA" client="_igUOg1njEeCk9JeqiHj1aA"/>
+          <packagedElement xmi:type="uml:Realization" xmi:id="_igUNZVnjEeCk9JeqiHj1aA" name="refines" supplier="_igUNW1njEeCk9JeqiHj1aA" client="_igUOQFnjEeCk9JeqiHj1aA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igUNZlnjEeCk9JeqiHj1aA" name="Issues">
+          <ownedComment xmi:id="_igUNZ1njEeCk9JeqiHj1aA" annotatedElement="_igUNZlnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUNaFnjEeCk9JeqiHj1aA" name="Issues Overview">
+            <ownedComment xmi:id="_igUNaVnjEeCk9JeqiHj1aA" annotatedElement="_igUNaFnjEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igUNalnjEeCk9JeqiHj1aA" name="UK Pilot">
+          <ownedComment xmi:id="_igUNa1njEeCk9JeqiHj1aA" annotatedElement="_igUNalnjEeCk9JeqiHj1aA">
+            <body>&lt;span > &lt;br>&lt;/span></body>
+          </ownedComment>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUNbFnjEeCk9JeqiHj1aA" name="New Diagram">
+            <ownedComment xmi:id="_igUNbVnjEeCk9JeqiHj1aA" annotatedElement="_igUNbFnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUNblnjEeCk9JeqiHj1aA" name="New Diagram">
+            <ownedComment xmi:id="_igUNb1njEeCk9JeqiHj1aA" annotatedElement="_igUNblnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUNcFnjEeCk9JeqiHj1aA" name="New Diagram">
+            <ownedComment xmi:id="_igUNcVnjEeCk9JeqiHj1aA" annotatedElement="_igUNcFnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUNclnjEeCk9JeqiHj1aA" name="Goals">
+            <ownedComment xmi:id="_igUNc1njEeCk9JeqiHj1aA" annotatedElement="_igUNclnjEeCk9JeqiHj1aA">
+              <body>jj</body>
+            </ownedComment>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_igUNdFnjEeCk9JeqiHj1aA" name="Processes">
+        <packagedElement xmi:type="uml:Package" xmi:id="_igUNdVnjEeCk9JeqiHj1aA" name="Processes Overview">
+          <ownedComment xmi:id="_igUNdlnjEeCk9JeqiHj1aA" annotatedElement="_igUNdVnjEeCk9JeqiHj1aA">
+            <body>&lt;br></body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igUNd1njEeCk9JeqiHj1aA" name="Actors">
+          <packagedElement xmi:type="uml:Actor" xmi:id="_igUNeFnjEeCk9JeqiHj1aA" name="Specialist"/>
+          <packagedElement xmi:type="uml:Actor" xmi:id="_igUNeVnjEeCk9JeqiHj1aA" name="Allocator"/>
+          <packagedElement xmi:type="uml:Actor" xmi:id="_igUNelnjEeCk9JeqiHj1aA" name="Call center agent"/>
+          <packagedElement xmi:type="uml:Actor" xmi:id="_igUNe1njEeCk9JeqiHj1aA" name="Technician"/>
+          <packagedElement xmi:type="uml:Actor" xmi:id="_igUNfFnjEeCk9JeqiHj1aA" name="Field Worker">
+            <ownedComment xmi:id="_igUNfVnjEeCk9JeqiHj1aA" annotatedElement="_igUNfFnjEeCk9JeqiHj1aA">
+              <body>the field worker is an employee that goes to the client side to support the client either with sales or services.&lt;br></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Actor" xmi:id="_igUNflnjEeCk9JeqiHj1aA" name="Area Manager">
+            <ownedComment xmi:id="_igUNf1njEeCk9JeqiHj1aA" annotatedElement="_igUNflnjEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Actor" xmi:id="_igUNgFnjEeCk9JeqiHj1aA" name="Customer"/>
+          <packagedElement xmi:type="uml:Actor" xmi:id="_igUNgVnjEeCk9JeqiHj1aA" name="ERP system">
+            <ownedComment xmi:id="_igUNglnjEeCk9JeqiHj1aA" annotatedElement="_igUNgVnjEeCk9JeqiHj1aA">
+              <body>&amp;#160;this is a technical system that hold billing information.&lt;br></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUNg1njEeCk9JeqiHj1aA" name="Actors Overview"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNhFnjEeCk9JeqiHj1aA" memberEnd="_igUNhVnjEeCk9JeqiHj1aA _igUNiFnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNhVnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNhVnjEeCk9JeqiHj1aA" name="" type="_igUOjlnjEeCk9JeqiHj1aA" association="_igUNhFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNhlnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNh1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNiFnjEeCk9JeqiHj1aA" name="" type="_igUNeFnjEeCk9JeqiHj1aA" association="_igUNhFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNiVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNilnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNi1njEeCk9JeqiHj1aA" memberEnd="_igUNjFnjEeCk9JeqiHj1aA _igUNj1njEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNjFnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNjFnjEeCk9JeqiHj1aA" name="" type="_igUOkVnjEeCk9JeqiHj1aA" association="_igUNi1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNjVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNjlnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNj1njEeCk9JeqiHj1aA" name="" type="_igUNeFnjEeCk9JeqiHj1aA" association="_igUNi1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNkFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNkVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNklnjEeCk9JeqiHj1aA" memberEnd="_igUNk1njEeCk9JeqiHj1aA _igUNllnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNk1njEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNk1njEeCk9JeqiHj1aA" name="" type="_igUOkVnjEeCk9JeqiHj1aA" association="_igUNklnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNlFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNlVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNllnjEeCk9JeqiHj1aA" name="" type="_igUNeFnjEeCk9JeqiHj1aA" association="_igUNklnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNl1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNmFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNmVnjEeCk9JeqiHj1aA" memberEnd="_igUNmlnjEeCk9JeqiHj1aA _igUNnVnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNmlnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNmlnjEeCk9JeqiHj1aA" name="" type="_igU0QFnjEeCk9JeqiHj1aA" association="_igUNmVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNm1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNnFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNnVnjEeCk9JeqiHj1aA" name="" type="_igUNeVnjEeCk9JeqiHj1aA" association="_igUNmVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNnlnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNn1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNoFnjEeCk9JeqiHj1aA" memberEnd="_igUNoVnjEeCk9JeqiHj1aA _igUNpFnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNoVnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNoVnjEeCk9JeqiHj1aA" name="" type="_igUOlVnjEeCk9JeqiHj1aA" association="_igUNoFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNolnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNo1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNpFnjEeCk9JeqiHj1aA" name="" type="_igUNeVnjEeCk9JeqiHj1aA" association="_igUNoFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNpVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNplnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNp1njEeCk9JeqiHj1aA" memberEnd="_igUNqFnjEeCk9JeqiHj1aA _igUNq1njEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNqFnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNqFnjEeCk9JeqiHj1aA" name="" type="_igUOllnjEeCk9JeqiHj1aA" association="_igUNp1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNqVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNqlnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNq1njEeCk9JeqiHj1aA" name="" type="_igUNelnjEeCk9JeqiHj1aA" association="_igUNp1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNrFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNrVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNrlnjEeCk9JeqiHj1aA" memberEnd="_igUNr1njEeCk9JeqiHj1aA _igUNslnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNr1njEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNr1njEeCk9JeqiHj1aA" name="" type="_igUOVVnjEeCk9JeqiHj1aA" association="_igUNrlnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNsFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNsVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNslnjEeCk9JeqiHj1aA" name="" type="_igUNe1njEeCk9JeqiHj1aA" association="_igUNrlnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNs1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNtFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNtVnjEeCk9JeqiHj1aA" memberEnd="_igUNtlnjEeCk9JeqiHj1aA _igUNuVnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNtlnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNtlnjEeCk9JeqiHj1aA" name="" type="_igVblFnjEeCk9JeqiHj1aA" association="_igUNtVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNt1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNuFnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNuVnjEeCk9JeqiHj1aA" name="" type="_igUNe1njEeCk9JeqiHj1aA" association="_igUNtVnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNulnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNu1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNvFnjEeCk9JeqiHj1aA" memberEnd="_igUNvVnjEeCk9JeqiHj1aA _igUNwFnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNvVnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNvVnjEeCk9JeqiHj1aA" name="" type="_igUOg1njEeCk9JeqiHj1aA" association="_igUNvFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNvlnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNv1njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNwFnjEeCk9JeqiHj1aA" name="" type="_igUNfFnjEeCk9JeqiHj1aA" association="_igUNvFnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNwVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNwlnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNw1njEeCk9JeqiHj1aA" memberEnd="_igUNxFnjEeCk9JeqiHj1aA _igUNx1njEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNxFnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNxFnjEeCk9JeqiHj1aA" name="" type="_igUOEVnjEeCk9JeqiHj1aA" association="_igUNw1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNxVnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNxlnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNx1njEeCk9JeqiHj1aA" name="" type="_igUNfFnjEeCk9JeqiHj1aA" association="_igUNw1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNyFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNyVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUNylnjEeCk9JeqiHj1aA" memberEnd="_igUNy1njEeCk9JeqiHj1aA _igUNzlnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUNy1njEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUNy1njEeCk9JeqiHj1aA" name="" type="_igUOQFnjEeCk9JeqiHj1aA" association="_igUNylnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNzFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUNzVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUNzlnjEeCk9JeqiHj1aA" name="" type="_igUNfFnjEeCk9JeqiHj1aA" association="_igUNylnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUNz1njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN0FnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUN0VnjEeCk9JeqiHj1aA" memberEnd="_igUN0lnjEeCk9JeqiHj1aA _igUN1VnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUN0lnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUN0lnjEeCk9JeqiHj1aA" name="" type="_igUOjFnjEeCk9JeqiHj1aA" association="_igUN0VnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN01njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN1FnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUN1VnjEeCk9JeqiHj1aA" name="" type="_igUNfFnjEeCk9JeqiHj1aA" association="_igUN0VnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN1lnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN11njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUN2FnjEeCk9JeqiHj1aA" memberEnd="_igUN2VnjEeCk9JeqiHj1aA _igUN3FnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUN2VnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUN2VnjEeCk9JeqiHj1aA" name="" type="_igUOjlnjEeCk9JeqiHj1aA" association="_igUN2FnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN2lnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN21njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUN3FnjEeCk9JeqiHj1aA" name="" type="_igUNfFnjEeCk9JeqiHj1aA" association="_igUN2FnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN3VnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN3lnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUN31njEeCk9JeqiHj1aA" memberEnd="_igUN4FnjEeCk9JeqiHj1aA _igUN41njEeCk9JeqiHj1aA" navigableOwnedEnd="_igUN4FnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUN4FnjEeCk9JeqiHj1aA" name="" type="_igUOg1njEeCk9JeqiHj1aA" association="_igUN31njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN4VnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN4lnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUN41njEeCk9JeqiHj1aA" name="" type="_igUNfFnjEeCk9JeqiHj1aA" association="_igUN31njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN5FnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN5VnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUN5lnjEeCk9JeqiHj1aA" memberEnd="_igUN51njEeCk9JeqiHj1aA _igUN6lnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUN51njEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUN51njEeCk9JeqiHj1aA" name="" type="_igUOElnjEeCk9JeqiHj1aA" association="_igUN5lnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN6FnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN6VnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUN6lnjEeCk9JeqiHj1aA" name="" type="_igUNfFnjEeCk9JeqiHj1aA" association="_igUN5lnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN61njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN7FnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUN7VnjEeCk9JeqiHj1aA" memberEnd="_igUN7lnjEeCk9JeqiHj1aA _igUN8VnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUN7lnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUN7lnjEeCk9JeqiHj1aA" name="" type="_igUOElnjEeCk9JeqiHj1aA" association="_igUN7VnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN71njEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN8FnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUN8VnjEeCk9JeqiHj1aA" name="" type="_igUNfFnjEeCk9JeqiHj1aA" association="_igUN7VnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN8lnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN81njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUN9FnjEeCk9JeqiHj1aA" memberEnd="_igUN9VnjEeCk9JeqiHj1aA _igUN-FnjEeCk9JeqiHj1aA" navigableOwnedEnd="_igUN9VnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUN9VnjEeCk9JeqiHj1aA" name="" type="_igUOElnjEeCk9JeqiHj1aA" association="_igUN9FnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN9lnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN91njEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUN-FnjEeCk9JeqiHj1aA" name="" type="_igUNfFnjEeCk9JeqiHj1aA" association="_igUN9FnjEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN-VnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN-lnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_igUN-1njEeCk9JeqiHj1aA" memberEnd="_igUN_FnjEeCk9JeqiHj1aA _igUN_1njEeCk9JeqiHj1aA" navigableOwnedEnd="_igUN_FnjEeCk9JeqiHj1aA">
+            <name xsi:nil="true"/>
+            <ownedEnd xmi:id="_igUN_FnjEeCk9JeqiHj1aA" name="" type="_igUOElnjEeCk9JeqiHj1aA" association="_igUN-1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUN_VnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUN_lnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+            <ownedEnd xmi:id="_igUN_1njEeCk9JeqiHj1aA" name="" type="_igUNgVnjEeCk9JeqiHj1aA" association="_igUN-1njEeCk9JeqiHj1aA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igUOAFnjEeCk9JeqiHj1aA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igUOAVnjEeCk9JeqiHj1aA" value="1"/>
+            </ownedEnd>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igUOAlnjEeCk9JeqiHj1aA" name="Use Cases">
+          <ownedComment xmi:id="_igUOA1njEeCk9JeqiHj1aA" annotatedElement="_igUOAlnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOBFnjEeCk9JeqiHj1aA" name="Interface specification"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOBVnjEeCk9JeqiHj1aA" name="Use Cases Overview"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOBlnjEeCk9JeqiHj1aA" name="Use cases candidates"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOB1njEeCk9JeqiHj1aA" name="Field Worker requests Specialist diagram"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOCFnjEeCk9JeqiHj1aA" name="chain overview">
+            <ownedComment xmi:id="_igUOCVnjEeCk9JeqiHj1aA" annotatedElement="_igUOCFnjEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOClnjEeCk9JeqiHj1aA" name="Use Cases features"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOC1njEeCk9JeqiHj1aA" name="Use cases seguence"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUODFnjEeCk9JeqiHj1aA" name="New Diagram"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igUODVnjEeCk9JeqiHj1aA" name="Processes">
+          <ownedComment xmi:id="_igUODlnjEeCk9JeqiHj1aA" annotatedElement="_igUODVnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOD1njEeCk9JeqiHj1aA" name="Order Management">
+            <ownedComment xmi:id="_igUOEFnjEeCk9JeqiHj1aA" annotatedElement="_igUOD1njEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOEVnjEeCk9JeqiHj1aA" name="Field Worker orders Repair parts (monthly)"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOElnjEeCk9JeqiHj1aA" name="Field Worker orders Repair parts (urgent)">
+              <ownedComment xmi:id="_igUOE1njEeCk9JeqiHj1aA" annotatedElement="_igUOElnjEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igUOFFnjEeCk9JeqiHj1aA" name="activity Field Worker orders Repair parts (urgent)">
+                <ownedComment xmi:id="_igUOFVnjEeCk9JeqiHj1aA" annotatedElement="_igUOFFnjEeCk9JeqiHj1aA">
+                  <body>?</body>
+                </ownedComment>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOFlnjEeCk9JeqiHj1aA" name="New Activity" outgoing="_igUOK1njEeCk9JeqiHj1aA" incoming="_igUOL1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOF1njEeCk9JeqiHj1aA" annotatedElement="_igUOFlnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOGFnjEeCk9JeqiHj1aA" name="New Activity" incoming="_igUOLVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOGVnjEeCk9JeqiHj1aA" annotatedElement="_igUOGFnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOGlnjEeCk9JeqiHj1aA" name="New Activity" incoming="_igUOLlnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOG1njEeCk9JeqiHj1aA" annotatedElement="_igUOGlnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOHFnjEeCk9JeqiHj1aA" name="New Activity" outgoing="_igUOLFnjEeCk9JeqiHj1aA" incoming="_igUOMFnjEeCk9JeqiHj1aA _igUOMVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOHVnjEeCk9JeqiHj1aA" annotatedElement="_igUOHFnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DecisionNode" xmi:id="_igUOHlnjEeCk9JeqiHj1aA" name="New ActivityDecision" outgoing="_igUOLVnjEeCk9JeqiHj1aA _igUOLlnjEeCk9JeqiHj1aA" incoming="_igUOK1njEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:InitialNode" xmi:id="_igUOH1njEeCk9JeqiHj1aA" name="New ActivityInitial" outgoing="_igUOL1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOIFnjEeCk9JeqiHj1aA" annotatedElement="_igUOH1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOIVnjEeCk9JeqiHj1aA" name="Repair parts successfully delivered in time" incoming="_igUOLFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOIlnjEeCk9JeqiHj1aA" annotatedElement="_igUOIVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DataStoreNode" xmi:id="_igUOI1njEeCk9JeqiHj1aA" name="Transmitter">
+                  <ownedComment xmi:id="_igUOJFnjEeCk9JeqiHj1aA" annotatedElement="_igUOI1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DataStoreNode" xmi:id="_igUOJVnjEeCk9JeqiHj1aA" name="Field Worker">
+                  <ownedComment xmi:id="_igUOJlnjEeCk9JeqiHj1aA" annotatedElement="_igUOJVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DataStoreNode" xmi:id="_igUOJ1njEeCk9JeqiHj1aA" name="Regional Storage Center" outgoing="_igUOMFnjEeCk9JeqiHj1aA _igUOMVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOKFnjEeCk9JeqiHj1aA" annotatedElement="_igUOJ1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DataStoreNode" xmi:id="_igUOKVnjEeCk9JeqiHj1aA" name="car stock">
+                  <ownedComment xmi:id="_igUOKlnjEeCk9JeqiHj1aA" annotatedElement="_igUOKVnjEeCk9JeqiHj1aA">
+                    <body>&lt;br></body>
+                  </ownedComment>
+                </node>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOK1njEeCk9JeqiHj1aA" name="Associates" source="_igUOFlnjEeCk9JeqiHj1aA" target="_igUOHlnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOLFnjEeCk9JeqiHj1aA" name="Associates" source="_igUOHFnjEeCk9JeqiHj1aA" target="_igUOIVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOLVnjEeCk9JeqiHj1aA" name="no" source="_igUOHlnjEeCk9JeqiHj1aA" target="_igUOGFnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOLlnjEeCk9JeqiHj1aA" name="yes" source="_igUOHlnjEeCk9JeqiHj1aA" target="_igUOGlnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOL1njEeCk9JeqiHj1aA" name="Associates" source="_igUOH1njEeCk9JeqiHj1aA" target="_igUOFlnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ObjectFlow" xmi:id="_igUOMFnjEeCk9JeqiHj1aA" source="_igUOJ1njEeCk9JeqiHj1aA" target="_igUOHFnjEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+                <edge xmi:type="uml:ObjectFlow" xmi:id="_igUOMVnjEeCk9JeqiHj1aA" source="_igUOJ1njEeCk9JeqiHj1aA" target="_igUOHFnjEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+              </ownedBehavior>
+            </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOMlnjEeCk9JeqiHj1aA" name="administration">
+            <ownedComment xmi:id="_igUOM1njEeCk9JeqiHj1aA" annotatedElement="_igUOMlnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUONFnjEeCk9JeqiHj1aA" name="Administrator updates Manual">
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igUONVnjEeCk9JeqiHj1aA" name="New ActivitySet">
+                <ownedComment xmi:id="_igUONlnjEeCk9JeqiHj1aA" annotatedElement="_igUONVnjEeCk9JeqiHj1aA">
+                  <body>?</body>
+                </ownedComment>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUON1njEeCk9JeqiHj1aA" name="New Activity" incoming="_igUOPFnjEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOOFnjEeCk9JeqiHj1aA" name="New Activity" outgoing="_igUOO1njEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:InitialNode" xmi:id="_igUOOVnjEeCk9JeqiHj1aA" name="New ActivityInitial" outgoing="_igUOPFnjEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOOlnjEeCk9JeqiHj1aA" name="New ActivityFinal" incoming="_igUOO1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOO1njEeCk9JeqiHj1aA" name="Associates" source="_igUOOFnjEeCk9JeqiHj1aA" target="_igUOOlnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOPFnjEeCk9JeqiHj1aA" name="Associates" source="_igUOOVnjEeCk9JeqiHj1aA" target="_igUON1njEeCk9JeqiHj1aA"/>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igUOPVnjEeCk9JeqiHj1aA" name="New ActivitySet"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOPlnjEeCk9JeqiHj1aA" name="Administrator inserts Transmitter type"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOP1njEeCk9JeqiHj1aA" name="manage time">
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOQFnjEeCk9JeqiHj1aA" name="Field Worker organizes Week" clientDependency="_igUNZVnjEeCk9JeqiHj1aA">
+              <ownedComment xmi:id="_igUOQVnjEeCk9JeqiHj1aA" annotatedElement="_igUOQFnjEeCk9JeqiHj1aA">
+                <body>&lt;ul>&lt;li>&lt;span lang=&quot;EN-CA&quot;>Field Worker plans ?Silver?   
+Trouble Calls to be processed at least 2 days before expiration of reaction   
+time.&lt;/span>&lt;/li>&lt;li>&lt;span lang=&quot;EN-CA&quot;>He checks if it is meaningful to   
+check up all Transmitters in the faulty Transmitter?s Subdomain. If so, plan   
+maintenance of whole Subdomain on that day.&lt;/span>&lt;/li>&lt;li>&lt;span lang=&quot;EN-CA&quot;>Check if there are still any   
+single postponed or open tasks to be planned and organize them in a meaningful   
+way.&lt;/span>&lt;/li>&lt;li>&lt;span style=&quot;font-size: 12pt; line-height: 150%; font-family: Arial;&quot;>For the remaining days   
+plan maintenance of Transmitters of a whole Subdomain.&lt;/span>&lt;/li>&lt;/ul>   
+   
+   
+   
+   
+   
+   
+   
+</body>
+              </ownedComment>
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igUOQlnjEeCk9JeqiHj1aA" name="Field Worker organizes Week">
+                <ownedComment xmi:id="_igUOQ1njEeCk9JeqiHj1aA" annotatedElement="_igUOQlnjEeCk9JeqiHj1aA">
+                  <body>?</body>
+                </ownedComment>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUORFnjEeCk9JeqiHj1aA" name="He checks if it is meaningful to check up all Transmitters in the faulty Transmitter?s Subdomain" outgoing="_igUOTlnjEeCk9JeqiHj1aA" incoming="_igUOUVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUORVnjEeCk9JeqiHj1aA" annotatedElement="_igUORFnjEeCk9JeqiHj1aA">
+                    <body>&lt;span lang=&quot;EN-CA&quot;> If so, plan    
+maintenance of whole &lt;/span>&lt;span >Subdomain on that day.&lt;/span></body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUORlnjEeCk9JeqiHj1aA" name="For the remaining days plan maintenance of Transmitters of a whole Subdomain." outgoing="_igUOT1njEeCk9JeqiHj1aA" incoming="_igUOUFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOR1njEeCk9JeqiHj1aA" annotatedElement="_igUORlnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOSFnjEeCk9JeqiHj1aA" name="Check if there are still any single postponed or open tasks" outgoing="_igUOUFnjEeCk9JeqiHj1aA" incoming="_igUOTlnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOSVnjEeCk9JeqiHj1aA" annotatedElement="_igUOSFnjEeCk9JeqiHj1aA">
+                    <body>&lt;span lang=&quot;EN-CA&quot;>Check if there are still any   
+single postponed or open tasks to be planned and organize them in a meaningful   
+way.&lt;/span> &lt;br></body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:InitialNode" xmi:id="_igUOSlnjEeCk9JeqiHj1aA" name="New ActivityInitial" outgoing="_igUOUVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOS1njEeCk9JeqiHj1aA" annotatedElement="_igUOSlnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOTFnjEeCk9JeqiHj1aA" name="end" incoming="_igUOT1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOTVnjEeCk9JeqiHj1aA" annotatedElement="_igUOTFnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOTlnjEeCk9JeqiHj1aA" name="Associates" source="_igUORFnjEeCk9JeqiHj1aA" target="_igUOSFnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOT1njEeCk9JeqiHj1aA" name="Associates" source="_igUORlnjEeCk9JeqiHj1aA" target="_igUOTFnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOUFnjEeCk9JeqiHj1aA" name="Associates" source="_igUOSFnjEeCk9JeqiHj1aA" target="_igUORlnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOUVnjEeCk9JeqiHj1aA" source="_igUOSlnjEeCk9JeqiHj1aA" target="_igUORFnjEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+              </ownedBehavior>
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igUOUlnjEeCk9JeqiHj1aA" name="New ActivitySet"/>
+            </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOU1njEeCk9JeqiHj1aA" name="field service">
+            <ownedComment xmi:id="_igUOVFnjEeCk9JeqiHj1aA" annotatedElement="_igUOU1njEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOVVnjEeCk9JeqiHj1aA" name="Technician performs Maintenance Call">
+              <ownedComment xmi:id="_igUOVlnjEeCk9JeqiHj1aA" annotatedElement="_igUOVVnjEeCk9JeqiHj1aA">
+                <body>Field Worker arrives at Transmitter.&lt;br>He checks in â€œSVNCRM â€“ Transmitterâ€ where he must go to, who&lt;br>he must call or what he must do in order to gain access. He sets&lt;br>the last visit date to today.&lt;br>If the Transmitter is not accessible, create a self-assigned ECTask&lt;br>with reminder to return.&lt;br>He checks â€œSVNCRM â€“ Transmitterâ€ which Modules are present&lt;br>at this  and which checking devices he must bring along in addition to his regular equipment.&lt;br>He enters site and runs checks with appropriate checking devices&lt;br>on all Modules that are present.&lt;br>He fills out â€œSVNCRM â€“ Visit Reportâ€ and documents the maintenance&lt;br>results.&lt;br>Repeat checks for all present &lt;b>Modules&lt;/b>.&lt;br>Finally, check site for newly erected Transmitters, take down&lt;br>model numbers, get information from Facility Manager who the&lt;br>Transmitter belongs to and create a â€œSVNCRM â€“ Opportunityâ€.&lt;br></body>
+              </ownedComment>
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igUOV1njEeCk9JeqiHj1aA" name="Technician performs Maintenance Call">
+                <ownedComment xmi:id="_igUOWFnjEeCk9JeqiHj1aA" annotatedElement="_igUOV1njEeCk9JeqiHj1aA">
+                  <body>?</body>
+                </ownedComment>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOWVnjEeCk9JeqiHj1aA" name="Check Location" outgoing="_igUOdlnjEeCk9JeqiHj1aA" incoming="_igUOgFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOWlnjEeCk9JeqiHj1aA" annotatedElement="_igUOWVnjEeCk9JeqiHj1aA">
+                    <body>He checks in â€œSVNCRM â€“ Transmitterâ€ where he must go to, who he must call or what he must do in order to gain access</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOW1njEeCk9JeqiHj1aA" name="set date" outgoing="_igUOd1njEeCk9JeqiHj1aA" incoming="_igUOdlnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOXFnjEeCk9JeqiHj1aA" annotatedElement="_igUOW1njEeCk9JeqiHj1aA">
+                    <body>He sets the last visit date to today.</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOXVnjEeCk9JeqiHj1aA" name="get modules List" incoming="_igUOfVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOXlnjEeCk9JeqiHj1aA" annotatedElement="_igUOXVnjEeCk9JeqiHj1aA">
+                    <body> 
+ 
+ 
+ 
+&lt;p>&lt;span style=&quot;&quot; lang=&quot;EN-GB&quot;>He checks 
+â€œSVNCRM â€“ Transmitterâ€ which Modules are present at this and which checking 
+devices he must bring along in addition to his regular equipment.&lt;/span>&lt;/p> 
+ 
+</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOX1njEeCk9JeqiHj1aA" name="create  ECTask  for self" incoming="_igUOfFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOYFnjEeCk9JeqiHj1aA" annotatedElement="_igUOX1njEeCk9JeqiHj1aA">
+                    <body> 
+ 
+ 
+ 
+&lt;p>&lt;span style=&quot;&quot; lang=&quot;EN-GB&quot;>&lt;span >&lt;/span>If the Transmitter is not accessible, create a 
+self-assigned ECTask with reminder to return.&lt;/span>&lt;/p> 
+ 
+</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOYVnjEeCk9JeqiHj1aA" name="create opportunity" outgoing="_igUOeFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOYlnjEeCk9JeqiHj1aA" annotatedElement="_igUOYVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOY1njEeCk9JeqiHj1aA" name="Test Module" incoming="_igUOf1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOZFnjEeCk9JeqiHj1aA" annotatedElement="_igUOY1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOZVnjEeCk9JeqiHj1aA" name="Create Visit Reports " outgoing="_igUOeVnjEeCk9JeqiHj1aA" incoming="_igUOflnjEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOZlnjEeCk9JeqiHj1aA" name="write test report" outgoing="_igUOelnjEeCk9JeqiHj1aA" incoming="_igUOglnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOZ1njEeCk9JeqiHj1aA" annotatedElement="_igUOZlnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOaFnjEeCk9JeqiHj1aA" name="Evaluate list" outgoing="_igUOe1njEeCk9JeqiHj1aA" incoming="_igUOgVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOaVnjEeCk9JeqiHj1aA" annotatedElement="_igUOaFnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DecisionNode" xmi:id="_igUOalnjEeCk9JeqiHj1aA" name="Transmitter accessible?" outgoing="_igUOfFnjEeCk9JeqiHj1aA _igUOfVnjEeCk9JeqiHj1aA" incoming="_igUOd1njEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:DecisionNode" xmi:id="_igUOa1njEeCk9JeqiHj1aA" name="Other Modules?" outgoing="_igUOflnjEeCk9JeqiHj1aA _igUOf1njEeCk9JeqiHj1aA" incoming="_igUOelnjEeCk9JeqiHj1aA _igUOe1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUObFnjEeCk9JeqiHj1aA" annotatedElement="_igUOa1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:InitialNode" xmi:id="_igUObVnjEeCk9JeqiHj1aA" name="Maintenance Call next in schedule" outgoing="_igUOgFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOblnjEeCk9JeqiHj1aA" annotatedElement="_igUObVnjEeCk9JeqiHj1aA">
+                    <body>&lt;ul>&lt;li>&lt;br>&lt;/li>&lt;/ul></body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOb1njEeCk9JeqiHj1aA" name="Create self-assigned ECTask with reminder to return" incoming="_igUOeFnjEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOcFnjEeCk9JeqiHj1aA" name="Close Maintenance Call" incoming="_igUOeVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOcVnjEeCk9JeqiHj1aA" annotatedElement="_igUOcFnjEeCk9JeqiHj1aA">
+                    <body>-</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DataStoreNode" xmi:id="_igUOclnjEeCk9JeqiHj1aA" name="Modules" outgoing="_igUOgVnjEeCk9JeqiHj1aA" type="_igU0l1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOc1njEeCk9JeqiHj1aA" annotatedElement="_igUOclnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DataStoreNode" xmi:id="_igUOdFnjEeCk9JeqiHj1aA" name="Module" outgoing="_igUOglnjEeCk9JeqiHj1aA" type="_igU0l1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOdVnjEeCk9JeqiHj1aA" annotatedElement="_igUOdFnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOdlnjEeCk9JeqiHj1aA" name="Associates" source="_igUOWVnjEeCk9JeqiHj1aA" target="_igUOW1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOd1njEeCk9JeqiHj1aA" name="Associates" source="_igUOW1njEeCk9JeqiHj1aA" target="_igUOalnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOeFnjEeCk9JeqiHj1aA" name="Associates" source="_igUOYVnjEeCk9JeqiHj1aA" target="_igUOb1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOeVnjEeCk9JeqiHj1aA" name="Associates" source="_igUOZVnjEeCk9JeqiHj1aA" target="_igUOcFnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOelnjEeCk9JeqiHj1aA" name="Associates" source="_igUOZlnjEeCk9JeqiHj1aA" target="_igUOa1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOe1njEeCk9JeqiHj1aA" name="Associates" source="_igUOaFnjEeCk9JeqiHj1aA" target="_igUOa1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOfFnjEeCk9JeqiHj1aA" name="[no]" source="_igUOalnjEeCk9JeqiHj1aA" target="_igUOX1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOfVnjEeCk9JeqiHj1aA" name="[yes]" source="_igUOalnjEeCk9JeqiHj1aA" target="_igUOXVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOflnjEeCk9JeqiHj1aA" name="[no]" source="_igUOa1njEeCk9JeqiHj1aA" target="_igUOZVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOf1njEeCk9JeqiHj1aA" name="[Yes]" source="_igUOa1njEeCk9JeqiHj1aA" target="_igUOY1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOgFnjEeCk9JeqiHj1aA" name="Associates" source="_igUObVnjEeCk9JeqiHj1aA" target="_igUOWVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ObjectFlow" xmi:id="_igUOgVnjEeCk9JeqiHj1aA" source="_igUOclnjEeCk9JeqiHj1aA" target="_igUOaFnjEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+                <edge xmi:type="uml:ObjectFlow" xmi:id="_igUOglnjEeCk9JeqiHj1aA" source="_igUOdFnjEeCk9JeqiHj1aA" target="_igUOZlnjEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+              </ownedBehavior>
+            </packagedElement>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOg1njEeCk9JeqiHj1aA" name="Field Worker performs Maintenance Call" clientDependency="_igUNZFnjEeCk9JeqiHj1aA">
+              <ownedComment xmi:id="_igUOhFnjEeCk9JeqiHj1aA" annotatedElement="_igUOg1njEeCk9JeqiHj1aA">
+                <body>&lt;ul>&lt;li>a&lt;br>&lt;/li>&lt;/ul></body>
+              </ownedComment>
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igUOhVnjEeCk9JeqiHj1aA">
+                <ownedComment xmi:id="_igUOhlnjEeCk9JeqiHj1aA" annotatedElement="_igUOhVnjEeCk9JeqiHj1aA">
+                  <body>?</body>
+                </ownedComment>
+                <name xsi:nil="true"/>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOh1njEeCk9JeqiHj1aA" name="New Activity" outgoing="_igUOilnjEeCk9JeqiHj1aA" incoming="_igUOi1njEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:InitialNode" xmi:id="_igUOiFnjEeCk9JeqiHj1aA" name="New ActivityInitial" outgoing="_igUOi1njEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOiVnjEeCk9JeqiHj1aA" name="New ActivityFinal" incoming="_igUOilnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOilnjEeCk9JeqiHj1aA" source="_igUOh1njEeCk9JeqiHj1aA" target="_igUOiVnjEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOi1njEeCk9JeqiHj1aA" source="_igUOiFnjEeCk9JeqiHj1aA" target="_igUOh1njEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+              </ownedBehavior>
+            </packagedElement>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOjFnjEeCk9JeqiHj1aA" name="Field Worker repairs Transmitter">
+              <ownedComment xmi:id="_igUOjVnjEeCk9JeqiHj1aA" annotatedElement="_igUOjFnjEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+            </packagedElement>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOjlnjEeCk9JeqiHj1aA" name="Field Worker requests Specialist">
+              <ownedComment xmi:id="_igUOj1njEeCk9JeqiHj1aA" annotatedElement="_igUOjlnjEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igUOkFnjEeCk9JeqiHj1aA" name="New ActivitySet"/>
+            </packagedElement>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOkVnjEeCk9JeqiHj1aA" name="Specialist repairs Transmitter">
+              <ownedComment xmi:id="_igUOklnjEeCk9JeqiHj1aA" annotatedElement="_igUOkVnjEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+            </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igUOk1njEeCk9JeqiHj1aA" name="call center management">
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOlFnjEeCk9JeqiHj1aA" name="New ChiBusinessUseCase"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOlVnjEeCk9JeqiHj1aA" name="Allocator assigns escalated Trouble Call"/>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igUOllnjEeCk9JeqiHj1aA" name="Call Center Agent takes Trouble Call">
+              <ownedComment xmi:id="_igUOl1njEeCk9JeqiHj1aA" annotatedElement="_igUOllnjEeCk9JeqiHj1aA">
+                <body>?Customerâ€™s Region Manager calls EUROCOMâ€™s Call CenterAgent stating an issue.The Call Center Agent checks â€œSVNCRM â€“ Customerâ€.He gets a list of all Contracts this Customer has entered into withEUROCOM.He asks which Module is affected.He looks up the Module in the Contract.If a Trouble Call has already been entered before, he informs theCustomer of the current status.He creates a new Trouble Call by filling out â€œSVNCRM â€“ TroubleCallâ€ taking down the Customerâ€™s name, the faulty Module, theprobably cause of the issue, hints, indications and the currenttime.Call Center Agent ends call.GoTo: â€œCall Center Agent assigns Trouble Callâ€</body>
+              </ownedComment>
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igUOmFnjEeCk9JeqiHj1aA">
+                <ownedComment xmi:id="_igUOmVnjEeCk9JeqiHj1aA" annotatedElement="_igUOmFnjEeCk9JeqiHj1aA">
+                  <body>?</body>
+                </ownedComment>
+                <name xsi:nil="true"/>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOmlnjEeCk9JeqiHj1aA" name="check Contract" outgoing="_igUOslnjEeCk9JeqiHj1aA" incoming="_igUOtlnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOm1njEeCk9JeqiHj1aA" annotatedElement="_igUOmlnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOnFnjEeCk9JeqiHj1aA" name="New Activity"/>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOnVnjEeCk9JeqiHj1aA" name="He asks which Module is affected" outgoing="_igUOs1njEeCk9JeqiHj1aA" incoming="_igUOslnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOnlnjEeCk9JeqiHj1aA" annotatedElement="_igUOnVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOn1njEeCk9JeqiHj1aA" name="creates a new Trouble Call" outgoing="_igUOtFnjEeCk9JeqiHj1aA" incoming="_igUOuVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOoFnjEeCk9JeqiHj1aA" annotatedElement="_igUOn1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOoVnjEeCk9JeqiHj1aA" name=" he informs the Customer of the current status." outgoing="_igUOtVnjEeCk9JeqiHj1aA" incoming="_igUOuFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOolnjEeCk9JeqiHj1aA" annotatedElement="_igUOoVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOo1njEeCk9JeqiHj1aA" name="Identity Customer" outgoing="_igUOtlnjEeCk9JeqiHj1aA" incoming="_igUOu1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOpFnjEeCk9JeqiHj1aA" annotatedElement="_igUOo1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igUOpVnjEeCk9JeqiHj1aA" name="New Activity" outgoing="_igUOt1njEeCk9JeqiHj1aA" incoming="_igUOulnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOplnjEeCk9JeqiHj1aA" annotatedElement="_igUOpVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DecisionNode" xmi:id="_igUOp1njEeCk9JeqiHj1aA" name="Trouble Call has already been entered before," outgoing="_igUOuFnjEeCk9JeqiHj1aA _igUOuVnjEeCk9JeqiHj1aA" incoming="_igUOs1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOqFnjEeCk9JeqiHj1aA" annotatedElement="_igUOp1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DecisionNode" xmi:id="_igUOqVnjEeCk9JeqiHj1aA" name="Join" outgoing="_igUOulnjEeCk9JeqiHj1aA" incoming="_igUOtFnjEeCk9JeqiHj1aA _igUOtVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOqlnjEeCk9JeqiHj1aA" annotatedElement="_igUOqVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:InitialNode" xmi:id="_igUOq1njEeCk9JeqiHj1aA" name="Customer calls with an issue" outgoing="_igUOu1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOrFnjEeCk9JeqiHj1aA" annotatedElement="_igUOq1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOrVnjEeCk9JeqiHj1aA" name="Call Center Agent ends call." incoming="_igUOt1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igUOrlnjEeCk9JeqiHj1aA" annotatedElement="_igUOrVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOr1njEeCk9JeqiHj1aA" name="New ActivityFinal"/>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOsFnjEeCk9JeqiHj1aA" name="New ActivityFinal"/>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igUOsVnjEeCk9JeqiHj1aA" name="New ActivityFinal"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOslnjEeCk9JeqiHj1aA" source="_igUOmlnjEeCk9JeqiHj1aA" target="_igUOnVnjEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOs1njEeCk9JeqiHj1aA" name="Associates" source="_igUOnVnjEeCk9JeqiHj1aA" target="_igUOp1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOtFnjEeCk9JeqiHj1aA" name="Associates" source="_igUOn1njEeCk9JeqiHj1aA" target="_igUOqVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOtVnjEeCk9JeqiHj1aA" name="Associates" source="_igUOoVnjEeCk9JeqiHj1aA" target="_igUOqVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOtlnjEeCk9JeqiHj1aA" source="_igUOo1njEeCk9JeqiHj1aA" target="_igUOmlnjEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOt1njEeCk9JeqiHj1aA" name="Associates" source="_igUOpVnjEeCk9JeqiHj1aA" target="_igUOrVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOuFnjEeCk9JeqiHj1aA" name="[Ja]" source="_igUOp1njEeCk9JeqiHj1aA" target="_igUOoVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOuVnjEeCk9JeqiHj1aA" name="[No]" source="_igUOp1njEeCk9JeqiHj1aA" target="_igUOn1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOulnjEeCk9JeqiHj1aA" name="Associates" source="_igUOqVnjEeCk9JeqiHj1aA" target="_igUOpVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igUOu1njEeCk9JeqiHj1aA" source="_igUOq1njEeCk9JeqiHj1aA" target="_igUOo1njEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+              </ownedBehavior>
+            </packagedElement>
+            <packagedElement xmi:type="uml:UseCase" xmi:id="_igU0QFnjEeCk9JeqiHj1aA" name="Allocator assigns Trouble Call">
+              <ownedComment xmi:id="_igU0QVnjEeCk9JeqiHj1aA" annotatedElement="_igU0QFnjEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+              <ownedBehavior xmi:type="uml:Activity" xmi:id="_igU0QlnjEeCk9JeqiHj1aA" name="Call Center Agent assigns Trouble Call">
+                <ownedComment xmi:id="_igU0Q1njEeCk9JeqiHj1aA" annotatedElement="_igU0QlnjEeCk9JeqiHj1aA">
+                  <body>?</body>
+                </ownedComment>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igU0RFnjEeCk9JeqiHj1aA" name="Check in Transmitter's Domain: responsible Technician" outgoing="_igU0ZVnjEeCk9JeqiHj1aA" incoming="_igU0bFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0RVnjEeCk9JeqiHj1aA" annotatedElement="_igU0RFnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igU0RlnjEeCk9JeqiHj1aA" name="read contract.type" outgoing="_igU0ZlnjEeCk9JeqiHj1aA" incoming="_igU0b1njEeCk9JeqiHj1aA"/>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igU0R1njEeCk9JeqiHj1aA" name="Check in Transmitter's Area: responsible Specialist" outgoing="_igU0Z1njEeCk9JeqiHj1aA" incoming="_igU0a1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0SFnjEeCk9JeqiHj1aA" annotatedElement="_igU0R1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igU0SVnjEeCk9JeqiHj1aA" name="Assign task to Technician responsible for Transmitter's Domain" outgoing="_igU0aFnjEeCk9JeqiHj1aA" incoming="_igU0ZVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0SlnjEeCk9JeqiHj1aA" annotatedElement="_igU0SVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igU0S1njEeCk9JeqiHj1aA" name="Assign Trouble Call to Specialist responsible for Transmitter's Area" outgoing="_igU0aVnjEeCk9JeqiHj1aA" incoming="_igU0Z1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0TFnjEeCk9JeqiHj1aA" annotatedElement="_igU0S1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igU0TVnjEeCk9JeqiHj1aA" name="New Activity" incoming="_igU0bVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0TlnjEeCk9JeqiHj1aA" annotatedElement="_igU0TVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igU0T1njEeCk9JeqiHj1aA" name="read TroubleCall.sparePart" outgoing="_igU0alnjEeCk9JeqiHj1aA" incoming="_igU0cFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0UFnjEeCk9JeqiHj1aA" annotatedElement="_igU0T1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:OpaqueAction" xmi:id="_igU0UVnjEeCk9JeqiHj1aA" name="Check Field Worker's Car stock" incoming="_igU0blnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0UlnjEeCk9JeqiHj1aA" annotatedElement="_igU0UVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DecisionNode" xmi:id="_igU0U1njEeCk9JeqiHj1aA" name="is Contract.Type = gold?" outgoing="_igU0a1njEeCk9JeqiHj1aA _igU0bFnjEeCk9JeqiHj1aA" incoming="_igU0ZlnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0VFnjEeCk9JeqiHj1aA" annotatedElement="_igU0U1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DecisionNode" xmi:id="_igU0VVnjEeCk9JeqiHj1aA" name="Join" outgoing="_igU0bVnjEeCk9JeqiHj1aA" incoming="_igU0aFnjEeCk9JeqiHj1aA _igU0aVnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0VlnjEeCk9JeqiHj1aA" annotatedElement="_igU0VVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DecisionNode" xmi:id="_igU0V1njEeCk9JeqiHj1aA" name="Spare part Number?" outgoing="_igU0blnjEeCk9JeqiHj1aA" incoming="_igU0alnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0WFnjEeCk9JeqiHj1aA" annotatedElement="_igU0V1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DecisionNode" xmi:id="_igU0WVnjEeCk9JeqiHj1aA" name="Field Worker has spare parts in car?">
+                  <ownedComment xmi:id="_igU0WlnjEeCk9JeqiHj1aA" annotatedElement="_igU0WVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:InitialNode" xmi:id="_igU0W1njEeCk9JeqiHj1aA" name="Call Center Agent creates Trouble Call">
+                  <ownedComment xmi:id="_igU0XFnjEeCk9JeqiHj1aA" annotatedElement="_igU0W1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:ActivityFinalNode" xmi:id="_igU0XVnjEeCk9JeqiHj1aA" name="New ActivityFinal">
+                  <ownedComment xmi:id="_igU0XlnjEeCk9JeqiHj1aA" annotatedElement="_igU0XVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DataStoreNode" xmi:id="_igU0X1njEeCk9JeqiHj1aA" name="Contract" outgoing="_igU0b1njEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0YFnjEeCk9JeqiHj1aA" annotatedElement="_igU0X1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DataStoreNode" xmi:id="_igU0YVnjEeCk9JeqiHj1aA" name="TroubleCall" outgoing="_igU0cFnjEeCk9JeqiHj1aA">
+                  <ownedComment xmi:id="_igU0YlnjEeCk9JeqiHj1aA" annotatedElement="_igU0YVnjEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <node xmi:type="uml:DataStoreNode" xmi:id="_igU0Y1njEeCk9JeqiHj1aA" name="SparePart">
+                  <ownedComment xmi:id="_igU0ZFnjEeCk9JeqiHj1aA" annotatedElement="_igU0Y1njEeCk9JeqiHj1aA">
+                    <body>?</body>
+                  </ownedComment>
+                </node>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0ZVnjEeCk9JeqiHj1aA" name="Associates" source="_igU0RFnjEeCk9JeqiHj1aA" target="_igU0SVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0ZlnjEeCk9JeqiHj1aA" name="Associates" source="_igU0RlnjEeCk9JeqiHj1aA" target="_igU0U1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0Z1njEeCk9JeqiHj1aA" name="Associates" source="_igU0R1njEeCk9JeqiHj1aA" target="_igU0S1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0aFnjEeCk9JeqiHj1aA" name="Associates" source="_igU0SVnjEeCk9JeqiHj1aA" target="_igU0VVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0aVnjEeCk9JeqiHj1aA" name="Associates" source="_igU0S1njEeCk9JeqiHj1aA" target="_igU0VVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0alnjEeCk9JeqiHj1aA" name="Associates" source="_igU0T1njEeCk9JeqiHj1aA" target="_igU0V1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0a1njEeCk9JeqiHj1aA" name="[Platinum / Gold]" source="_igU0U1njEeCk9JeqiHj1aA" target="_igU0R1njEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0bFnjEeCk9JeqiHj1aA" name="[Silver]" source="_igU0U1njEeCk9JeqiHj1aA" target="_igU0RFnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0bVnjEeCk9JeqiHj1aA" name="Associates" source="_igU0VVnjEeCk9JeqiHj1aA" target="_igU0TVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ControlFlow" xmi:id="_igU0blnjEeCk9JeqiHj1aA" name="[Yes, the trouble call contains a spare part number]" source="_igU0V1njEeCk9JeqiHj1aA" target="_igU0UVnjEeCk9JeqiHj1aA"/>
+                <edge xmi:type="uml:ObjectFlow" xmi:id="_igU0b1njEeCk9JeqiHj1aA" source="_igU0X1njEeCk9JeqiHj1aA" target="_igU0RlnjEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+                <edge xmi:type="uml:ObjectFlow" xmi:id="_igU0cFnjEeCk9JeqiHj1aA" source="_igU0YVnjEeCk9JeqiHj1aA" target="_igU0T1njEeCk9JeqiHj1aA">
+                  <name xsi:nil="true"/>
+                </edge>
+              </ownedBehavior>
+            </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igU0cVnjEeCk9JeqiHj1aA" name="processes overview"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igU0clnjEeCk9JeqiHj1aA" name="objects catalogue">
+          <packagedElement xmi:type="uml:Package" xmi:id="_igU0c1njEeCk9JeqiHj1aA" name="objects catalogue"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_igU0dFnjEeCk9JeqiHj1aA" name="Domain">
+        <ownedComment xmi:id="_igU0dVnjEeCk9JeqiHj1aA" annotatedElement="_igU0dFnjEeCk9JeqiHj1aA">
+          <body>?</body>
+        </ownedComment>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0dlnjEeCk9JeqiHj1aA" name="New ChiController"/>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0d1njEeCk9JeqiHj1aA" name="Device">
+          <eAnnotations xmi:id="_igU0eFnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0eVnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:24830"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0elnjEeCk9JeqiHj1aA" annotatedElement="_igU0d1njEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_igU0e1njEeCk9JeqiHj1aA" name="aaa" type="_igVbmlnjEeCk9JeqiHj1aA"/>
+          <ownedAttribute xmi:id="_igU0fFnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0fVnjEeCk9JeqiHj1aA" annotatedElement="_igU0fFnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_igU0flnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0f1njEeCk9JeqiHj1aA" annotatedElement="_igU0flnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_igU0gFnjEeCk9JeqiHj1aA" name="alpha" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0gVnjEeCk9JeqiHj1aA" annotatedElement="_igU0gFnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedOperation xmi:id="_igU0glnjEeCk9JeqiHj1aA" name="bbb">
+            <ownedComment xmi:id="_igU0g1njEeCk9JeqiHj1aA" annotatedElement="_igU0glnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0hFnjEeCk9JeqiHj1aA" name="Domain">
+          <eAnnotations xmi:id="_igU0hVnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0hlnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:24328"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0h1njEeCk9JeqiHj1aA" annotatedElement="_igU0hFnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_igU0iFnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0iVnjEeCk9JeqiHj1aA" annotatedElement="_igU0iFnjEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0ilnjEeCk9JeqiHj1aA" name="entity base">
+          <eAnnotations xmi:id="_igU0i1njEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0jFnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:24952"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0jVnjEeCk9JeqiHj1aA" annotatedElement="_igU0ilnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <generalization xmi:id="_igU0jlnjEeCk9JeqiHj1aA" general="_igVbUlnjEeCk9JeqiHj1aA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0j1njEeCk9JeqiHj1aA" name="Example domain diagram">
+          <eAnnotations xmi:id="_igU0kFnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0kVnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:24861"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0klnjEeCk9JeqiHj1aA" annotatedElement="_igU0j1njEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0k1njEeCk9JeqiHj1aA" name="Location">
+          <eAnnotations xmi:id="_igU0lFnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0lVnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:27396"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0llnjEeCk9JeqiHj1aA" annotatedElement="_igU0k1njEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0l1njEeCk9JeqiHj1aA" name="Module">
+          <eAnnotations xmi:id="_igU0mFnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0mVnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:27374"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0mlnjEeCk9JeqiHj1aA" annotatedElement="_igU0l1njEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0m1njEeCk9JeqiHj1aA" name="MwWorker">
+          <eAnnotations xmi:id="_igU0nFnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0nVnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:82098"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0nlnjEeCk9JeqiHj1aA" annotatedElement="_igU0m1njEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_igU0n1njEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0oFnjEeCk9JeqiHj1aA" annotatedElement="_igU0n1njEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0oVnjEeCk9JeqiHj1aA" name="myclass">
+          <eAnnotations xmi:id="_igU0olnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0o1njEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:77562"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0pFnjEeCk9JeqiHj1aA" annotatedElement="_igU0oVnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <generalization xmi:id="_igU0pVnjEeCk9JeqiHj1aA" general="_igVbYVnjEeCk9JeqiHj1aA"/>
+          <ownedAttribute xmi:id="_igU0plnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0p1njEeCk9JeqiHj1aA" annotatedElement="_igU0plnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0qFnjEeCk9JeqiHj1aA" name="New ChiNode">
+          <eAnnotations xmi:id="_igU0qVnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0qlnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:81983"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0q1njEeCk9JeqiHj1aA" annotatedElement="_igU0qFnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0rFnjEeCk9JeqiHj1aA" name="New ChiNode">
+          <eAnnotations xmi:id="_igU0rVnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0rlnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:81991"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0r1njEeCk9JeqiHj1aA" annotatedElement="_igU0rFnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0sFnjEeCk9JeqiHj1aA" name="Node">
+          <eAnnotations xmi:id="_igU0sVnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0slnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:24853"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0s1njEeCk9JeqiHj1aA" annotatedElement="_igU0sFnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <generalization xmi:id="_igU0tFnjEeCk9JeqiHj1aA" general="_igU0d1njEeCk9JeqiHj1aA"/>
+          <generalization xmi:id="_igU0tVnjEeCk9JeqiHj1aA" general="_igU0ilnjEeCk9JeqiHj1aA"/>
+          <ownedAttribute xmi:id="_igU0tlnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0t1njEeCk9JeqiHj1aA" annotatedElement="_igU0tlnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0uFnjEeCk9JeqiHj1aA" name="Region">
+          <eAnnotations xmi:id="_igU0uVnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0ulnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:25730"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0u1njEeCk9JeqiHj1aA" annotatedElement="_igU0uFnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_igU0vFnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0vVnjEeCk9JeqiHj1aA" name="transmitter">
+          <eAnnotations xmi:id="_igU0vlnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0v1njEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:24824"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0wFnjEeCk9JeqiHj1aA" annotatedElement="_igU0vVnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_igU0wVnjEeCk9JeqiHj1aA" name="beta" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0wlnjEeCk9JeqiHj1aA" annotatedElement="_igU0wVnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_igU0w1njEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA"/>
+          <ownedAttribute xmi:id="_igU0xFnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0xVnjEeCk9JeqiHj1aA" annotatedElement="_igU0xFnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_igU0xlnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0x1njEeCk9JeqiHj1aA" annotatedElement="_igU0xlnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0yFnjEeCk9JeqiHj1aA" name="UMTS device">
+          <eAnnotations xmi:id="_igU0yVnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU0ylnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:24348"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU0y1njEeCk9JeqiHj1aA" annotatedElement="_igU0yFnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_igU0zFnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU0zVnjEeCk9JeqiHj1aA" annotatedElement="_igU0zFnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU0zlnjEeCk9JeqiHj1aA" name="Worker">
+          <eAnnotations xmi:id="_igU0z1njEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+            <details xmi:id="_igU00FnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:24338"/>
+          </eAnnotations>
+          <ownedComment xmi:id="_igU00VnjEeCk9JeqiHj1aA" annotatedElement="_igU0zlnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <ownedAttribute xmi:id="_igU00lnjEeCk9JeqiHj1aA" name="Role" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU001njEeCk9JeqiHj1aA" annotatedElement="_igU00lnjEeCk9JeqiHj1aA">
+              <body>the role of this worker&lt;br></body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedAttribute xmi:id="_igU01FnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+            <ownedComment xmi:id="_igU01VnjEeCk9JeqiHj1aA" annotatedElement="_igU01FnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedAttribute>
+          <ownedOperation xmi:id="_igU01lnjEeCk9JeqiHj1aA" name="New Operation">
+            <ownedComment xmi:id="_igU011njEeCk9JeqiHj1aA" annotatedElement="_igU01lnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU02FnjEeCk9JeqiHj1aA" name="New ChiNodeManyToMany">
+          <ownedComment xmi:id="_igU02VnjEeCk9JeqiHj1aA" annotatedElement="_igU02FnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_igU02lnjEeCk9JeqiHj1aA" name="New ChiView">
+          <ownedComment xmi:id="_igU021njEeCk9JeqiHj1aA" annotatedElement="_igU02lnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igU03FnjEeCk9JeqiHj1aA" name="Node device">
+          <ownedComment xmi:id="_igU03VnjEeCk9JeqiHj1aA" annotatedElement="_igU03FnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igU03lnjEeCk9JeqiHj1aA" name="New Diagram">
+          <ownedComment xmi:id="_igU031njEeCk9JeqiHj1aA" annotatedElement="_igU03lnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igU04FnjEeCk9JeqiHj1aA" name="mapping">
+          <ownedComment xmi:id="_igU04VnjEeCk9JeqiHj1aA" annotatedElement="_igU04FnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igU04lnjEeCk9JeqiHj1aA" name="mapping  Diagram"/>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igU041njEeCk9JeqiHj1aA" name="Controllers overview">
+          <ownedComment xmi:id="_igU05FnjEeCk9JeqiHj1aA" annotatedElement="_igU041njEeCk9JeqiHj1aA">
+            <body>&amp;#160;THis is an overview of all controllers object in the model&lt;br></body>
+          </ownedComment>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igU05VnjEeCk9JeqiHj1aA" name="New ChiController"/>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igU05lnjEeCk9JeqiHj1aA" name="New ChiController">
+            <ownedComment xmi:id="_igU051njEeCk9JeqiHj1aA" annotatedElement="_igU05lnjEeCk9JeqiHj1aA">
+              <body>&lt;br></body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igU06FnjEeCk9JeqiHj1aA" name="Controllers"/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igU06VnjEeCk9JeqiHj1aA" name="use case controllers "/>
+          <packagedElement xmi:type="uml:Package" xmi:id="_igU06lnjEeCk9JeqiHj1aA" name="services"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igVbUFnjEeCk9JeqiHj1aA" name="Cim 14">
+          <ownedComment xmi:id="_igVbUVnjEeCk9JeqiHj1aA" annotatedElement="_igVbUFnjEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igVbUlnjEeCk9JeqiHj1aA" name="enterprise">
+            <eAnnotations xmi:id="_igVbU1njEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+              <details xmi:id="_igVbVFnjEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:24916"/>
+            </eAnnotations>
+            <ownedComment xmi:id="_igVbVVnjEeCk9JeqiHj1aA" annotatedElement="_igVbUlnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+            <ownedAttribute xmi:id="_igVbVlnjEeCk9JeqiHj1aA" name="Name" type="_igVbmlnjEeCk9JeqiHj1aA"/>
+            <ownedAttribute xmi:id="_igVbV1njEeCk9JeqiHj1aA" name="Notes" type="_igVbmlnjEeCk9JeqiHj1aA">
+              <ownedComment xmi:id="_igVbWFnjEeCk9JeqiHj1aA" annotatedElement="_igVbV1njEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_igVbWVnjEeCk9JeqiHj1aA" name="New ChiValue" type="_igVbmlnjEeCk9JeqiHj1aA">
+              <ownedComment xmi:id="_igVbWlnjEeCk9JeqiHj1aA" annotatedElement="_igVbWVnjEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_igVbW1njEeCk9JeqiHj1aA" name="New Operation"/>
+            <ownedOperation xmi:id="_igVbXFnjEeCk9JeqiHj1aA" name="New Operation"/>
+            <ownedOperation xmi:id="_igVbXVnjEeCk9JeqiHj1aA" name="New Operation">
+              <ownedComment xmi:id="_igVbXlnjEeCk9JeqiHj1aA" annotatedElement="_igVbXVnjEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+            </ownedOperation>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_igVbX1njEeCk9JeqiHj1aA" name="CIM 13">
+          <ownedComment xmi:id="_igVbYFnjEeCk9JeqiHj1aA" annotatedElement="_igVbX1njEeCk9JeqiHj1aA">
+            <body>?</body>
+          </ownedComment>
+          <packagedElement xmi:type="uml:Class" xmi:id="_igVbYVnjEeCk9JeqiHj1aA" name="Company">
+            <eAnnotations xmi:id="_igVbYlnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+              <details xmi:id="_igVbY1njEeCk9JeqiHj1aA" key="CHRONOS_ID_KEYWORD_ChiNode:77480"/>
+            </eAnnotations>
+            <ownedComment xmi:id="_igVbZFnjEeCk9JeqiHj1aA" annotatedElement="_igVbYVnjEeCk9JeqiHj1aA">
+              <body>?</body>
+            </ownedComment>
+            <ownedAttribute xmi:id="_igVbZVnjEeCk9JeqiHj1aA" name="Logo" type="_igVbmlnjEeCk9JeqiHj1aA">
+              <ownedComment xmi:id="_igVbZlnjEeCk9JeqiHj1aA" annotatedElement="_igVbZVnjEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_igVbZ1njEeCk9JeqiHj1aA" name="mission" type="_igVbmlnjEeCk9JeqiHj1aA">
+              <ownedComment xmi:id="_igVbaFnjEeCk9JeqiHj1aA" annotatedElement="_igVbZ1njEeCk9JeqiHj1aA">
+                <body>?</body>
+              </ownedComment>
+            </ownedAttribute>
+          </packagedElement>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_igVbaVnjEeCk9JeqiHj1aA" name="Association" memberEnd="_igVbalnjEeCk9JeqiHj1aA _igVbbVnjEeCk9JeqiHj1aA">
+          <ownedEnd xmi:id="_igVbalnjEeCk9JeqiHj1aA" name="" type="_igU0j1njEeCk9JeqiHj1aA" association="_igVbaVnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVba1njEeCk9JeqiHj1aA" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbbFnjEeCk9JeqiHj1aA" value="1"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_igVbbVnjEeCk9JeqiHj1aA" name="" type="_igU0d1njEeCk9JeqiHj1aA" association="_igVbaVnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbblnjEeCk9JeqiHj1aA" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbb1njEeCk9JeqiHj1aA" value="1"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_igVbcFnjEeCk9JeqiHj1aA" name="Composition" memberEnd="_igVbcVnjEeCk9JeqiHj1aA _igVbdFnjEeCk9JeqiHj1aA">
+          <ownedEnd xmi:id="_igVbcVnjEeCk9JeqiHj1aA" name="" type="_igU02FnjEeCk9JeqiHj1aA" aggregation="composite" association="_igVbcFnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbclnjEeCk9JeqiHj1aA" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbc1njEeCk9JeqiHj1aA"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_igVbdFnjEeCk9JeqiHj1aA" name="" type="_igU0qFnjEeCk9JeqiHj1aA" association="_igVbcFnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbdVnjEeCk9JeqiHj1aA" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbdlnjEeCk9JeqiHj1aA" value="1"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_igVbd1njEeCk9JeqiHj1aA" name="Composition" memberEnd="_igVbeFnjEeCk9JeqiHj1aA _igVbe1njEeCk9JeqiHj1aA">
+          <ownedEnd xmi:id="_igVbeFnjEeCk9JeqiHj1aA" name="" type="_igU02FnjEeCk9JeqiHj1aA" aggregation="composite" association="_igVbd1njEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbeVnjEeCk9JeqiHj1aA" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbelnjEeCk9JeqiHj1aA"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_igVbe1njEeCk9JeqiHj1aA" name="" type="_igU0rFnjEeCk9JeqiHj1aA" association="_igVbd1njEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbfFnjEeCk9JeqiHj1aA" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbfVnjEeCk9JeqiHj1aA"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_igVbflnjEeCk9JeqiHj1aA" name="Composition" memberEnd="_igVbf1njEeCk9JeqiHj1aA _igVbglnjEeCk9JeqiHj1aA">
+          <ownedEnd xmi:id="_igVbf1njEeCk9JeqiHj1aA" name="" type="_igU0d1njEeCk9JeqiHj1aA" aggregation="composite" association="_igVbflnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbgFnjEeCk9JeqiHj1aA" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbgVnjEeCk9JeqiHj1aA" value="1"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_igVbglnjEeCk9JeqiHj1aA" name="" type="_igU0vVnjEeCk9JeqiHj1aA" association="_igVbflnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbg1njEeCk9JeqiHj1aA" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbhFnjEeCk9JeqiHj1aA" value="1"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_igVbhVnjEeCk9JeqiHj1aA" name="Composition" memberEnd="_igVbhlnjEeCk9JeqiHj1aA _igVbiVnjEeCk9JeqiHj1aA">
+          <ownedEnd xmi:id="_igVbhlnjEeCk9JeqiHj1aA" name="" type="_igU0vVnjEeCk9JeqiHj1aA" aggregation="composite" association="_igVbhVnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbh1njEeCk9JeqiHj1aA" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbiFnjEeCk9JeqiHj1aA" value="1"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_igVbiVnjEeCk9JeqiHj1aA" name="" type="_igU0yFnjEeCk9JeqiHj1aA" association="_igVbhVnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbilnjEeCk9JeqiHj1aA" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbi1njEeCk9JeqiHj1aA" value="1"/>
+          </ownedEnd>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_igVbjFnjEeCk9JeqiHj1aA" name="Composition" memberEnd="_igVbjVnjEeCk9JeqiHj1aA _igVbkFnjEeCk9JeqiHj1aA">
+          <ownedEnd xmi:id="_igVbjVnjEeCk9JeqiHj1aA" name="" type="_igVbUlnjEeCk9JeqiHj1aA" aggregation="composite" association="_igVbjFnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbjlnjEeCk9JeqiHj1aA" value="*"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbj1njEeCk9JeqiHj1aA"/>
+          </ownedEnd>
+          <ownedEnd xmi:id="_igVbkFnjEeCk9JeqiHj1aA" name="" type="_igU0zlnjEeCk9JeqiHj1aA" association="_igVbjFnjEeCk9JeqiHj1aA">
+            <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_igVbkVnjEeCk9JeqiHj1aA" value="1"/>
+            <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_igVbklnjEeCk9JeqiHj1aA"/>
+          </ownedEnd>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_igVbk1njEeCk9JeqiHj1aA" name="Referenced Nodes">
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_igVblFnjEeCk9JeqiHj1aA" name="Technician repairs module"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="_igVblVnjEeCk9JeqiHj1aA" name="Task management will be updated in real-time" clientDependency="_igUNRVnjEeCk9JeqiHj1aA">
+        <ownedComment xmi:id="_igVbllnjEeCk9JeqiHj1aA" annotatedElement="_igVblVnjEeCk9JeqiHj1aA">
+          <body>       
+&lt;p>       
+&lt;/p>&lt;p>Tasks       
+can&amp;#160;be&amp;#160;updated&amp;#160;dynamically&amp;#160;in&amp;#160;real-time.       
+There&amp;#160;no&amp;#160;longer&amp;#160;is&amp;#160;a&amp;#160;deadline&amp;#160;after       
+which&amp;#160;incoming&amp;#160;tasks&amp;#160;cannot&amp;#160;be&amp;#160;regarded.       
+Incoming&amp;#160;Trouble&amp;#160;Calls&amp;#160;may&amp;#160;supersede&amp;#160;currently       
+pending&amp;#160;tasks.&lt;/p></body>
+        </ownedComment>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_igVbl1njEeCk9JeqiHj1aA" name="SVNCRM will have a read-only interface to existing ERP-system" clientDependency="_igTmwVnjEeCk9JeqiHj1aA">
+        <ownedComment xmi:id="_igVbmFnjEeCk9JeqiHj1aA" annotatedElement="_igVbl1njEeCk9JeqiHj1aA">
+          <body>       
+&lt;p>     
+&lt;/p>&lt;p>SVNCRM     
+will&amp;#160;have&amp;#160;a&amp;#160;read-only&amp;#160;interface&amp;#160;to&amp;#160;existing     
+ERP-system.     
+&lt;/p></body>
+        </ownedComment>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_igVbmVnjEeCk9JeqiHj1aA" name="PrimitiveTypes">
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_igVbmlnjEeCk9JeqiHj1aA" name="ChiNode:"/>
+    </packagedElement>
+    <profileApplication xmi:id="_igVbm1njEeCk9JeqiHj1aA">
+      <eAnnotations xmi:id="_igVbnFnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="src/metamodel/chronos.profile.uml#_jARlgc-nEd6fypAGO026Fw"/>
+      </eAnnotations>
+      <appliedProfile href="src/metamodel/chronos.profile.uml#873fb1a3-cfa7-11de-9e87-d74203c08737"/>
+    </profileApplication>
+    <profileApplication xmi:id="_igVbnVnjEeCk9JeqiHj1aA">
+      <eAnnotations xmi:id="_igVbnlnjEeCk9JeqiHj1aA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="src/metamodel/ouranos.profile.uml#_fmnPK1vpEd6-GfKcCJahig"/>
+      </eAnnotations>
+      <appliedProfile href="src/metamodel/ouranos.profile.uml#_fmnPKVvpEd6-GfKcCJahig"/>
+    </profileApplication>
+  </uml:Model>
+  <Chronos:ChiDiagram xmi:id="_igVbn1njEeCk9JeqiHj1aA" Alias="Chi001Dia" base_Package="_igTmJFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiGoal xmi:id="_igVboFnjEeCk9JeqiHj1aA" Alias="ChiGoal06" created="2009-02-04 10:51:14" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-17 11:33:21" base_Class="_igTmKFnjEeCk9JeqiHj1aA" Value_ammount="40" Value_Goal="35" Value_Name="Reaction time in day  reduction"/>
+  <Chronos:ChiGoal xmi:id="_igWCYFnjEeCk9JeqiHj1aA" Alias="ChiGoal05" created="2009-02-04 10:51:08" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-17 11:33:21" base_Class="_igTmKlnjEeCk9JeqiHj1aA" Value_Goal="Increase by 6%" Value_Name="'Closed tasks per activity'"/>
+  <Chronos:ChiGoal xmi:id="_igWCYVnjEeCk9JeqiHj1aA" Alias="Chi035Goa" created="2009-03-05 13:29:16" creator="pgiuseppe" last_editor="pgiuseppe" modified="2009-09-22 17:33:49" base_Class="_igTmLFnjEeCk9JeqiHj1aA" Priority="99"/>
+  <Chronos:ChiGoal xmi:id="_igWCYlnjEeCk9JeqiHj1aA" Alias="Chi036Goa" created="2009-03-05 13:29:50" creator="pgiuseppe" last_editor="pgiuseppe" modified="2009-09-17 11:33:21" base_Class="_igTmLlnjEeCk9JeqiHj1aA" Priority="0"/>
+  <Chronos:ChiGoal xmi:id="_igWCY1njEeCk9JeqiHj1aA" Alias="ChiGoal04" created="2009-02-04 10:49:08" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-17 11:33:21" base_Class="_igTmMFnjEeCk9JeqiHj1aA" Value_ammount="61,50" Value_Goal="-3 EUR/task" Value_Name="Cost reduction"/>
+  <Chronos:ChiGoal xmi:id="_igWCZFnjEeCk9JeqiHj1aA" Alias="ChiGoal03" created="2009-02-04 10:47:30" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-17 11:33:21" base_Class="_igTmMlnjEeCk9JeqiHj1aA" Value_ammount="fdsgdfgfd" Value_Goal="5" Value_Name="Effectiveness in %"/>
+  <Chronos:ChiGoal xmi:id="_igWCZVnjEeCk9JeqiHj1aA" Alias="ChiGoal01" created="2009-02-04 10:34:08" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-17 11:33:21" base_Class="_igTmNFnjEeCk9JeqiHj1aA" Value_ammount="dsfsdfdsf" Value_Goal="60" Value_Name="Customer Satisfaction"/>
+  <Chronos:ChiGoal xmi:id="_igWCZlnjEeCk9JeqiHj1aA" Alias="ChiGoal02" created="2009-02-04 10:41:48" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-17 11:33:21" base_Class="_igTmNlnjEeCk9JeqiHj1aA" Value_Goal="-5%" Value_Name="Travel Costs"/>
+  <Chronos:ChiDiagram xmi:id="_igWCZ1njEeCk9JeqiHj1aA" Alias="Chi002Dia" base_Package="_igTmOFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igWCaFnjEeCk9JeqiHj1aA" Alias="Chi003Dia" base_Package="_igTmOlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiRequirement xmi:id="_igZFsFnjEeCk9JeqiHj1aA" Alias="ChiReq017" created="2009-02-04 11:24:55" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:43:30" Status="Agreed" base_Class="_igTmmlnjEeCk9JeqiHj1aA" Type="Functional"/>
+  <Chronos:ChiRequirement xmi:id="_igZFsVnjEeCk9JeqiHj1aA" Alias="ChiReq019" created="2009-02-04 14:01:53" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:43:30" Status="Approved" base_Class="_igTmnFnjEeCk9JeqiHj1aA" Priority="100" Type="Functional"/>
+  <Chronos:ChiRequirement xmi:id="_igZFslnjEeCk9JeqiHj1aA" Alias="ChiReq010" created="2009-02-04 11:13:31" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:43:32" base_Class="_igTmnlnjEeCk9JeqiHj1aA" Type="Functional"/>
+  <Chronos:ChiRequirement xmi:id="_igZFs1njEeCk9JeqiHj1aA" Alias="ChiReq005" Author="T. Hoffmann -  " created="2009-02-04 11:02:01" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:43:32" Status="Agreed" base_Class="_igTmoFnjEeCk9JeqiHj1aA" Type="Functional"/>
+  <Chronos:ChiRequirement xmi:id="_igZFtFnjEeCk9JeqiHj1aA" Alias="ChiReq006" Author="T. Hoffmann -  " created="2009-02-04 11:02:05" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:43:32" Status="Agreed" base_Class="_igTmolnjEeCk9JeqiHj1aA" Type="Functional"/>
+  <Chronos:ChiDiagram xmi:id="_igZFtVnjEeCk9JeqiHj1aA" Alias="Chi008Dia" base_Package="_igTmpFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igZFtlnjEeCk9JeqiHj1aA" Alias="Chi009Dia" base_Package="_igTmplnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiRequirement xmi:id="_igZswFnjEeCk9JeqiHj1aA" Alias="ChiReq013" created="2009-02-04 11:19:23" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:44:23" Status="Proposed" base_Class="_igTmqFnjEeCk9JeqiHj1aA" Priority="20" Type="performance"/>
+  <Chronos:ChiRequirement xmi:id="_igZswVnjEeCk9JeqiHj1aA" Alias="ChiReq011" created="2009-02-04 11:13:38" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:45:26" base_Class="_igTmqlnjEeCk9JeqiHj1aA" Type="performance"/>
+  <Chronos:ChiRequirement xmi:id="_igZswlnjEeCk9JeqiHj1aA" Alias="ChiReq003" created="2009-02-04 11:01:52" creator="marco.eilers" last_editor="marco.eilers" modified="2009-03-23 18:12:28" Status="Agreed" base_Class="_igTmr1njEeCk9JeqiHj1aA" Priority="100" Type="Functional"/>
+  <Chronos:ChiRequirement xmi:id="_igZsw1njEeCk9JeqiHj1aA" Alias="ChiReq008" Author="T. Hoffmann -  " created="2009-02-04 11:02:15" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-05-18 11:56:07" Status="Agreed" base_Class="_igTmsVnjEeCk9JeqiHj1aA" Type="Functional"/>
+  <Chronos:ChiRequirement xmi:id="_igZsxFnjEeCk9JeqiHj1aA" Alias="ChiReq018" created="2009-02-04 14:01:07" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-05-18 11:56:15" Status="Agreed" base_Class="_igTms1njEeCk9JeqiHj1aA" Priority="100" Type="Functional"/>
+  <Chronos:ChiRequirement xmi:id="_igZsxVnjEeCk9JeqiHj1aA" Alias="ChiReq016" created="2009-02-04 11:20:35" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:46:58" Status="Agreed" base_Class="_igTmtVnjEeCk9JeqiHj1aA" Priority="100" Type="Functional"/>
+  <Chronos:ChiRequirement xmi:id="_igZsxlnjEeCk9JeqiHj1aA" Alias="ChiReq001" Author="T. Hoffmann -  " created="2009-02-04 13:54:09" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:46:33" Status="Validated" base_Class="_igTmt1njEeCk9JeqiHj1aA" Type="Functional"/>
+  <Chronos:ChiRequirement xmi:id="_igZsx1njEeCk9JeqiHj1aA" Alias="ChiReq009" Author="T. Hoffmann -  " created="2009-02-04 11:02:21" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-22 17:46:03" Status="Proposed" base_Class="_igTmuVnjEeCk9JeqiHj1aA" Proofreader=", " Type="Functional"/>
+  <Chronos:ChiFeature xmi:id="_iga64FnjEeCk9JeqiHj1aA" Alias="ChiFeat007" created="2009-02-04 14:24:05" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-08 11:23:07" Status="tbd" base_Class="_igUNTVnjEeCk9JeqiHj1aA" Proofreader=", "/>
+  <Chronos:ChiFeature xmi:id="_iga64VnjEeCk9JeqiHj1aA" Alias="ChiFeat008" created="2009-02-04 14:24:09" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-08 11:23:07" Status="tbd" base_Class="_igUNT1njEeCk9JeqiHj1aA" Proofreader=", "/>
+  <Chronos:ChiFeature xmi:id="_iga64lnjEeCk9JeqiHj1aA" Alias="ChiFeat009" created="2009-02-04 14:24:10" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-08 11:23:07" Status="tbd" base_Class="_igUNUVnjEeCk9JeqiHj1aA" Proofreader=", "/>
+  <Chronos:ChiFeature xmi:id="_iga641njEeCk9JeqiHj1aA" Alias="ChiFeat010" created="2009-02-04 14:25:35" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-08 11:23:07" Status="Proposed" base_Class="_igUNU1njEeCk9JeqiHj1aA" Proofreader=", "/>
+  <Chronos:ChiFeature xmi:id="_iga65FnjEeCk9JeqiHj1aA" Alias="ChiFeat005" created="2009-02-04 14:21:45" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-08 11:23:07" base_Class="_igUNVVnjEeCk9JeqiHj1aA" Proofreader=", "/>
+  <Chronos:ChiFeature xmi:id="_iga65VnjEeCk9JeqiHj1aA" Alias="ChiFeat004" created="2009-02-04 14:21:42" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-08 11:23:07" Status="tbd" base_Class="_igUNV1njEeCk9JeqiHj1aA" Proofreader=", "/>
+  <Chronos:ChiFeature xmi:id="_iga65lnjEeCk9JeqiHj1aA" Alias="ChiFeat002" created="2009-02-04 14:19:58" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-17 11:34:29" Status="Approved" base_Class="_igUNWVnjEeCk9JeqiHj1aA" Proofreader="T. Hoffmann -  "/>
+  <Chronos:ChiFeature xmi:id="_iga651njEeCk9JeqiHj1aA" Alias="ChiFeat001" created="2009-02-04 12:12:46" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-09-08 11:23:07" Status="tbd" base_Class="_igUNW1njEeCk9JeqiHj1aA" Proofreader=", "/>
+  <Chronos:ChiFeature xmi:id="_iga66FnjEeCk9JeqiHj1aA" Alias="ChiFeat003" Author="Christian Schiller - BumBum Architect" created="2009-02-04 14:20:51" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 16:12:11" Status="under review" base_Class="_igUNXVnjEeCk9JeqiHj1aA" Proofreader="Giuseppe Platania - Architect"/>
+  <Chronos:ChiFeature xmi:id="_iga66VnjEeCk9JeqiHj1aA" Alias="Chi086Fea" Author=", " created="2009-09-08 11:21:49" creator="pgiuseppe" last_editor="pgiuseppe" modified="2009-09-08 11:23:08" base_Class="_igUNX1njEeCk9JeqiHj1aA" Proofreader=", "/>
+  <Chronos:ChiDiagram xmi:id="_iga66lnjEeCk9JeqiHj1aA" Alias="Chi010Dia" base_Package="_igUNYFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igbh8FnjEeCk9JeqiHj1aA" Alias="Chi011Dia" base_Package="_igUNYlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igbh8VnjEeCk9JeqiHj1aA" Alias="Chi012Dia" base_Package="_igUNaFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igbh8lnjEeCk9JeqiHj1aA" Alias="Chi007Dia" base_Package="_igUNbFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igcJAFnjEeCk9JeqiHj1aA" Alias="Chi013Dia" base_Package="_igUNblnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igcJAVnjEeCk9JeqiHj1aA" Alias="Chi014Dia" base_Package="_igUNcFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igcJAlnjEeCk9JeqiHj1aA" Alias="Chi015Dia" base_Package="_igUNdVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiWorkerExternal xmi:id="_igcwEFnjEeCk9JeqiHj1aA" Alias="Chi036WorE" created="2009-02-05 10:39:18" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 16:20:16" base_Actor="_igUNeFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiWorkerExternal xmi:id="_igcwEVnjEeCk9JeqiHj1aA" Alias="Chi018WorE" created="2009-03-23 18:40:51" creator="pgiuseppe" last_editor="pgiuseppe" modified="2009-11-11 16:20:16" base_Actor="_igUNeVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiWorkerExternal xmi:id="_igcwElnjEeCk9JeqiHj1aA" Alias="Chi019WorE" created="2009-03-23 18:44:42" creator="pgiuseppe" last_editor="pgiuseppe" modified="2009-11-11 16:20:16" base_Actor="_igUNelnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiWorkerExternal xmi:id="_igcwE1njEeCk9JeqiHj1aA" Alias="Chi037WorE" created="2009-02-05 10:39:14" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 17:20:08" base_Actor="_igUNe1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiWorkerExternal xmi:id="_igcwFFnjEeCk9JeqiHj1aA" Alias="Chi035WorE" created="2009-02-04 16:26:42" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 16:20:16" base_Actor="_igUNfFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiWorkerExternal xmi:id="_igdXIFnjEeCk9JeqiHj1aA" Alias="Chi038WorE" created="2009-02-05 10:39:10" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 17:20:08" base_Actor="_igUNflnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessPartnerActive xmi:id="_igdXIVnjEeCk9JeqiHj1aA" Alias="Chi007BPA" created="2009-03-23 18:41:25" creator="pgiuseppe" last_editor="pgiuseppe" modified="2009-11-11 16:20:16" base_Actor="_igUNgFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiWorkerInternal xmi:id="_igdXIlnjEeCk9JeqiHj1aA" Alias="Chi008WorI" created="2009-03-04 16:59:04" creator="pgiuseppe" last_editor="pgiuseppe" modified="2009-11-11 16:20:16" base_Actor="_igUNgVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igdXI1njEeCk9JeqiHj1aA" Alias="Chi016Dia" base_Package="_igUNg1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ighBgFnjEeCk9JeqiHj1aA" Alias="Chi017Dia" base_Package="_igUOBFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ighBgVnjEeCk9JeqiHj1aA" Alias="Chi018Dia" base_Package="_igUOBVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ighBglnjEeCk9JeqiHj1aA" Alias="Chi019Dia" base_Package="_igUOBlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ighBg1njEeCk9JeqiHj1aA" Alias="Chi020Dia" base_Package="_igUOB1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ighokFnjEeCk9JeqiHj1aA" Alias="Chi021Dia" base_Package="_igUOCFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ighokVnjEeCk9JeqiHj1aA" Alias="Chi022Dia" base_Package="_igUOClnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ighoklnjEeCk9JeqiHj1aA" Alias="Chi103Dia" Status="Proposed" base_Package="_igUOC1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ighok1njEeCk9JeqiHj1aA" Alias="Chi185Dia" Status="Proposed" base_Package="_igUODFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessProcess xmi:id="_igholFnjEeCk9JeqiHj1aA" Alias="Chi006BPr" Author="F. Czicholl - - Business analyst" created="2009-03-04 16:38:32" creator="pgiuseppe" last_editor="admin" modified="2010-03-29 22:32:24" Status="Solved" base_Package="_igUOD1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_igholVnjEeCk9JeqiHj1aA" Alias="Chi053BUCC" created="2009-02-05 11:10:34" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 16:01:12" Status="Solved" GoalInContext="Replenish Field Worker car stock" Precondition="SVNCRM online availability" Trigger="Field Worker needs to replenish car stock" Level="RWU (Car stock, RSC Stock); R (Field Worker, Regional Storage Center)" OtherActors="SVNCRM" MainSuccessScenario="Field Worker car stock successfully replenished" base_UseCase="_igUOEVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_ighollnjEeCk9JeqiHj1aA" Alias="CHIUC00023" Author="Marco Eilers - BA Student" created="2009-02-05 11:12:43" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 16:03:53" Status="Approved" GoalInContext="Replenish Field Worker car stock" Precondition="SVNCRM online availability" Trigger="Field Worker needs repair parts urgently" Scope="svnCRM" Level="RWU (car stock, RSC Sock); R (Field Worker, Regional Storage Center, Transmitter)" PrimaryActor="Field Worker" OtherActors="ERP system" Stakeholders="Customer" MainSuccessScenario="Repair parts successfully delivered in time" Extensions="Field Worker picks up repair parts; Courier service delivers to Transmitter Site" base_UseCase="_igUOElnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessProcess xmi:id="_igi2sFnjEeCk9JeqiHj1aA" Alias="Chi010BPr" Author="F. Czicholl - - Business analyst" created="2009-03-23 18:16:18" creator="pgiuseppe" last_editor="admin" modified="2010-03-29 22:32:24" base_Package="_igUOMlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCase xmi:id="_igi2sVnjEeCk9JeqiHj1aA" Alias="Use Case 1" created="2009-02-05 11:26:32" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-03-23 18:23:01" GoalInContext="Update existing Transmitter manual" Precondition="Existing manual" Trigger="Manual is outdated, new information needs to be included" Scope="Olympos" Level="RWU" Stakeholders="Administrator, RM" MainSuccessScenario="Manual has been successfully updated" base_UseCase="_igUONFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCase xmi:id="_igi2slnjEeCk9JeqiHj1aA" Alias="Use Case 2" created="2009-02-05 11:26:36" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-03-23 18:22:46" GoalInContext="Insert a new Transmitter type" Precondition="Existing manual" Trigger="Non-existing transmitter has been taken under contract" Scope="Olympos" Level="W" Stakeholders="Administrator, RM" MainSuccessScenario="Transmitter type has been successfully inserted" base_UseCase="_igUOPlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessProcess xmi:id="_igi2s1njEeCk9JeqiHj1aA" Alias="Chi005BPr" Author="F. Czicholl - - Business analyst" created="2009-03-04 16:37:17" creator="pgiuseppe" last_editor="admin" modified="2010-03-29 22:32:24" Status="Rejected" base_Package="_igUOP1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_igi2tFnjEeCk9JeqiHj1aA" Alias="Chi055BUCC" created="2009-02-05 11:17:30" creator="marco.eilers" last_editor="pgiuseppe" modified="2010-01-07 15:46:44" GoalInContext="Organize Week" Precondition="SVNCRM online availability" Trigger="Field Worker needs to plan the next week; Field Worker is assigned Trouble Call" Scope="SVNCRM" Level="RWU (Trouble Call, Schedule); R (Transmitter Site, Transmitter, Transmitter Module, Support Contract, Car Stock)" PrimaryActor="Field Worker" OtherActors="SVNCRM" Stakeholders="Management" MainSuccessScenario="Week is saved in the system" Extensions="Field Worker orders Repair parts (monthly)" base_UseCase="_igUOQFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessProcess xmi:id="_igjdwFnjEeCk9JeqiHj1aA" Alias="Chi009BPr" created="2009-03-23 17:28:39" creator="pgiuseppe" last_editor="admin" modified="2010-03-29 22:32:24" base_Package="_igUOU1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCase xmi:id="_igjdwVnjEeCk9JeqiHj1aA" Alias="Chi084BUC" Author="Marco Eilers - BA Student" created="2009-11-11 19:20:08" creator="pgiuseppe" last_editor="pgiuseppe" modified="2009-11-12 11:15:19" Status="Approved" GoalInContext="Close Maintenance Call, create Visit Report" Precondition="SVNCRM online availability, Technician available, Module covered by Maintenance Contract" Trigger="Maintenance Call next in schedule" Scope="SVNCRM Dionysos" Level="CRUD (Day), CRU (Module, Visit Report, ECTask, Opportunity) R (Transmitter, Manual)" PrimaryActor="Technician" Stakeholders="Customer" MainSuccessScenario="Access Transmitter - Test Modules - Create Visit Reports - Close Maintenance Call" Extensions="Create self-assigned ECTask with reminder to return, Create new Opportunity" base_UseCase="_igUOVVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_igkr4FnjEeCk9JeqiHj1aA" Alias="Chi054BUCC" created="2009-02-05 10:41:31" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 17:19:56" GoalInContext="Perform regular Transmitter Call" Precondition="Field worker available" Trigger="Field Worker checks schedule" Scope="SVNcrm Dionysos" Level="RWU (Schedule); W (Visit Report, Opportunity); R (Transmitter, Module, Transmitter Module, Transmitter Module Manual)" PrimaryActor="Field Worker" OtherActors=", " Stakeholders="Customer, RM" MainSuccessScenario="Transmitter has been successfully checked, no problems have been found" Extensions="Field worker repairs transmitter; Field worker creates opportunity" base_UseCase="_igUOg1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_iglS8FnjEeCk9JeqiHj1aA" Alias="Chi061BUCC" created="2009-02-05 10:41:48" creator="marco.eilers" last_editor="pgiuseppe" modified="2010-01-08 16:04:17" GoalInContext="Repair faulty Transmitter" Precondition="SVNCRM online availability" Trigger="Field Worker receives Trouble Call or checks  schedule" Level="RWU (Trouble Call, Schedule, Knowledge Base); W (Visit Report, Opportunity); R (Transmitter Site, Transmitter, Transmitter Module, Transmitter Module Manual, Customer, Transmitter History)" OtherActors=", , " Stakeholders="Customer, RM" MainSuccessScenario="Transmitter is successfully repaired" Extensions="Field Worker requests Specialist; Field Worker orders Repair parts (urgent); Field Worker adds an item to the Knowledge Base; Field Worker creates opportunity" base_UseCase="_igUOjFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_iglS8VnjEeCk9JeqiHj1aA" Alias="Chi052BUCC" created="2009-02-05 11:05:58" creator="marco.eilers" last_editor="pgiuseppe" modified="2010-01-08 16:04:36" GoalInContext="Escalate task to specialist" Precondition="SVNCRM online availability" Trigger="Field Worker cannot resolve an issue" Level="RWU (Trouble Call, Schedule); W (Escalate Task)" PrimaryActor="Field Worker" OtherActors="Specialist" Stakeholders="Customer, RM" MainSuccessScenario="Trouble Call is successfully escalated" base_UseCase="_igUOjlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_iglS8lnjEeCk9JeqiHj1aA" Alias="Chi056BUCC" created="2009-02-05 11:17:32" creator="marco.eilers" last_editor="pgiuseppe" modified="2010-01-08 16:04:04" GoalInContext="Repair faulty Transmitter" Precondition="SVNCRM online availability" Trigger="Specialist receives Trouble Call or checks schedule" Level="RWU (Trouble Call, Schedule, Knowledge Base); W (Visit Report, Opportunity); R (Transmitter Site, Transmitter, Transmitter Module, Transmitter Module Manual, Customer, Transmitter History)" OtherActors=", " Stakeholders="Customer, CM" MainSuccessScenario="Transmitter is successfully repaired" Extensions="Specialist orders Repair parts (urgent); Specialist adds an item to the Knowledge Base; Specialist creates opportunity" base_UseCase="_igUOkVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessProcess xmi:id="_iglS81njEeCk9JeqiHj1aA" Alias="Chi011BPr" Author="F. Czicholl - - Business analyst" created="2009-03-23 18:24:19" creator="pgiuseppe" last_editor="admin" modified="2010-03-29 22:32:24" base_Package="_igUOk1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCase xmi:id="_iglS9FnjEeCk9JeqiHj1aA" Alias="Chi045BUC" created="2009-04-30 07:32:41" creator="pgiuseppe" last_editor="admin" modified="2010-03-29 22:32:39" base_UseCase="_igUOlFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_iglS9VnjEeCk9JeqiHj1aA" Alias="Chi058BUCC" created="2009-02-05 11:08:25" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 17:20:10" GoalInContext="Escalate task to Specialist" Precondition="SVNCRM online availability" Trigger="Allocator receives ?SVNCRM ? Escalate task?" Level="RWU (Trouble Call, Schedule, Escalate Task); R (Transmitter Site, Transmitter, Transmitter Module, Car Stock)" OtherActors="SVNCRM" Stakeholders="Customer, CM" MainSuccessScenario="Trouble Call is successfully escalated" Extensions="Specialist stocks up at Regional Storage Center" base_UseCase="_igUOlVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_iglS9lnjEeCk9JeqiHj1aA" Alias="Chi059BUCC" created="2009-02-05 11:14:20" creator="marco.eilers" last_editor="pgiuseppe" modified="2010-01-11 18:59:44" GoalInContext="Create new Trouble Call" Precondition="SVNCRM online availability" Trigger="Customer?s RM calls to state an issue" Level="RWU (Transmitter, Trouble Call); R (Customer, Support Contract)" OtherActors=", " Stakeholders="Customer, Call Center Manager" MainSuccessScenario="New Trouble Call is created" Extensions="Trouble Call already created / Inform Customer about status" base_UseCase="_igUOllnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_igl6AFnjEeCk9JeqiHj1aA" Alias="Chi057BUCC" created="2009-02-05 11:16:58" creator="marco.eilers" last_editor="pgiuseppe" modified="2010-01-11 18:53:35" GoalInContext="Assign Task to Field Worker" Precondition="SVNCRM online availability" Trigger="Allocator receives Trouble Call" Level="RWU (Trouble Call, Schedule); R (Transmitter Site, Transmitter, Transmitter Module, Support Contract, Car Stock)" OtherActors="SVNCRM" Stakeholders="Customer, RM, CM" MainSuccessScenario="Trouble Call is successfully assigned" Extensions="Field Worker stocks up at Regional Storage Center; Allocator assigns escalated Trouble Call; Field Worker repairs Transmitter" base_UseCase="_igU0QFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ignIIFnjEeCk9JeqiHj1aA" Alias="Chi023Dia" base_Package="_igU0cVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_ignIIVnjEeCk9JeqiHj1aA" Alias="Chi105Dia" Status="Proposed" base_Package="_igU0c1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiController xmi:id="_ignvMFnjEeCk9JeqiHj1aA" base_Class="_igU0dlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_ignvMVnjEeCk9JeqiHj1aA" Alias="Chi021Nod" created="2009-04-21 17:15:42" creator="pgiuseppe" last_editor="admin" modified="2011-02-16 18:06:36" base_Class="_igU0d1njEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_ignvMlnjEeCk9JeqiHj1aA" base_Property="_igU0e1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_ignvM1njEeCk9JeqiHj1aA" base_Property="_igU0fFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_ignvNFnjEeCk9JeqiHj1aA" base_Property="_igU0flnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_ignvNVnjEeCk9JeqiHj1aA" base_Property="_igU0gFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_ignvNlnjEeCk9JeqiHj1aA" Alias="Chi014Nod" created="2009-04-20 19:15:52" creator="pgiuseppe" last_editor="admin" modified="2011-02-03 16:55:42" base_Class="_igU0hFnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_ignvN1njEeCk9JeqiHj1aA" base_Property="_igU0iFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_ignvOFnjEeCk9JeqiHj1aA" Alias="Chi025Nod" created="2009-04-21 19:32:46" creator="pgiuseppe" last_editor="admin" modified="2011-02-03 16:55:42" base_Class="_igU0ilnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiNode xmi:id="_ignvOVnjEeCk9JeqiHj1aA" Alias="Chi023Nod" created="2009-04-21 17:17:42" creator="pgiuseppe" last_editor="admin" modified="2011-02-16 18:06:49" base_Class="_igU0j1njEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiNode xmi:id="_ignvOlnjEeCk9JeqiHj1aA" Alias="Chi041Nod" created="2009-07-02 19:05:08" creator="pgiuseppe" last_editor="admin" modified="2011-02-03 16:55:42" base_Class="_igU0k1njEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiNode xmi:id="_ignvO1njEeCk9JeqiHj1aA" Alias="Chi040Nod" created="2009-07-02 19:03:20" creator="admin" last_editor="admin" modified="2011-02-03 16:55:42" base_Class="_igU0l1njEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiNode xmi:id="_ignvPFnjEeCk9JeqiHj1aA" Alias="Chi1867Nod" Author="Giuseppe Platania - Architect" created="2011-02-17 10:19:32" creator="admin" last_editor="admin" modified="2011-02-17 10:19:42" Status="Proposed" base_Class="_igU0m1njEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_ignvPVnjEeCk9JeqiHj1aA" base_Property="_igU0n1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_ignvPlnjEeCk9JeqiHj1aA" Alias="Chi1739Nod" created="2011-02-02 16:42:01" creator="admin" last_editor="admin" modified="2011-02-03 17:01:19" Status="Proposed" base_Class="_igU0oVnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_igoWQFnjEeCk9JeqiHj1aA" base_Property="_igU0plnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_igoWQVnjEeCk9JeqiHj1aA" Alias="Chi1865Nod" created="2011-02-16 18:07:36" creator="admin" last_editor="admin" modified="2011-02-16 18:07:40" Status="Proposed" base_Class="_igU0qFnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiNode xmi:id="_igoWQlnjEeCk9JeqiHj1aA" Alias="Chi1866Nod" created="2011-02-16 18:07:39" creator="admin" last_editor="admin" modified="2011-02-16 18:07:55" Status="Proposed" base_Class="_igU0rFnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiNode xmi:id="_igoWQ1njEeCk9JeqiHj1aA" Alias="Chi022Nod" created="2009-04-21 17:17:29" creator="pgiuseppe" last_editor="admin" modified="2011-02-03 16:55:42" base_Class="_igU0sFnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_igoWRFnjEeCk9JeqiHj1aA" base_Property="_igU0tlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_igoWRVnjEeCk9JeqiHj1aA" Alias="Chi036Nod" created="2009-04-30 07:30:35" creator="pgiuseppe" last_editor="admin" modified="2011-02-03 16:55:42" base_Class="_igU0uFnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_igoWRlnjEeCk9JeqiHj1aA" base_Property="_igU0vFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_igoWR1njEeCk9JeqiHj1aA" Alias="Chi020Nod" created="2009-04-21 17:15:39" creator="pgiuseppe" last_editor="admin" modified="2011-02-17 16:25:05" base_Class="_igU0vVnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_igoWSFnjEeCk9JeqiHj1aA" base_Property="_igU0wVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_igoWSVnjEeCk9JeqiHj1aA" base_Property="_igU0w1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_igoWSlnjEeCk9JeqiHj1aA" base_Property="_igU0xFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_igoWS1njEeCk9JeqiHj1aA" base_Property="_igU0xlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_igoWTFnjEeCk9JeqiHj1aA" Alias="Chi016Nod" created="2009-04-20 19:16:40" creator="pgiuseppe" last_editor="admin" modified="2011-02-16 18:07:30" base_Class="_igU0yFnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_igo9UFnjEeCk9JeqiHj1aA" base_Property="_igU0zFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_igo9UVnjEeCk9JeqiHj1aA" Alias="Chi015Nod" Author="Giuseppe Platania - Architect" created="2009-04-20 19:16:10" creator="pgiuseppe" last_editor="admin" modified="2011-02-03 16:55:42" base_Class="_igU0zlnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_igo9UlnjEeCk9JeqiHj1aA" input_type="fckeditor" display_type="link" base_Property="_igU00lnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_igo9U1njEeCk9JeqiHj1aA" base_Property="_igU01FnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiManyToMany xmi:id="_igo9VFnjEeCk9JeqiHj1aA" Alias="Chi001" created="2011-02-16 18:07:29" creator="admin" last_editor="admin" modified="2011-02-16 18:07:37" Status="Proposed" base_Class="_igU02FnjEeCk9JeqiHj1aA" display_value="name"/>
+  <Chronos:ChiView xmi:id="_igo9VVnjEeCk9JeqiHj1aA" base_Class="_igU02lnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igo9VlnjEeCk9JeqiHj1aA" Alias="Chi024Dia" base_Package="_igU03FnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igo9V1njEeCk9JeqiHj1aA" Alias="Chi025Dia" base_Package="_igU03lnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igo9WFnjEeCk9JeqiHj1aA" Alias="Chi026Dia" base_Package="_igU04FnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igo9WVnjEeCk9JeqiHj1aA" Alias="Chi355Dia" Status="Proposed" base_Package="_igU04lnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiController xmi:id="_igo9WlnjEeCk9JeqiHj1aA" base_Class="_igU05VnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiController xmi:id="_igpkYFnjEeCk9JeqiHj1aA" base_Class="_igU05lnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igpkYVnjEeCk9JeqiHj1aA" Alias="Chi027Dia" base_Package="_igU06FnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igpkYlnjEeCk9JeqiHj1aA" Alias="Chi029Dia" base_Package="_igU06VnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiDiagram xmi:id="_igpkY1njEeCk9JeqiHj1aA" Alias="Chi028Dia" base_Package="_igU06lnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_igpkZFnjEeCk9JeqiHj1aA" Alias="Chi024Nod" created="2009-04-21 19:32:09" creator="pgiuseppe" last_editor="admin" modified="2011-02-02 16:38:14" base_Class="_igVbUlnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_igpkZVnjEeCk9JeqiHj1aA" input_type="RichText" base_Property="_igVbVlnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_igpkZlnjEeCk9JeqiHj1aA" base_Property="_igVbV1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_igpkZ1njEeCk9JeqiHj1aA" base_Property="_igVbWVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiNode xmi:id="_igpkaFnjEeCk9JeqiHj1aA" Alias="Chi1738Nod" created="2011-02-02 16:35:11" creator="admin" last_editor="admin" modified="2011-02-02 16:38:44" Status="Proposed" base_Class="_igVbYVnjEeCk9JeqiHj1aA" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_igpkaVnjEeCk9JeqiHj1aA" base_Property="_igVbZVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiValue xmi:id="_igpkalnjEeCk9JeqiHj1aA" base_Property="_igVbZ1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiAssociation xmi:id="_igpka1njEeCk9JeqiHj1aA" base_Association="_igVbaVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiAssociation xmi:id="_igqLcFnjEeCk9JeqiHj1aA" base_Association="_igVbcFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiAssociation xmi:id="_igqLcVnjEeCk9JeqiHj1aA" base_Association="_igVbd1njEeCk9JeqiHj1aA"/>
+  <Chronos:ChiAssociation xmi:id="_igqLclnjEeCk9JeqiHj1aA" base_Association="_igVbflnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiAssociation xmi:id="_igqLc1njEeCk9JeqiHj1aA" base_Association="_igVbhVnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiAssociation xmi:id="_igqLdFnjEeCk9JeqiHj1aA" base_Association="_igVbjFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiBusinessUseCaseCore xmi:id="_igqLdVnjEeCk9JeqiHj1aA" Alias="Chi060BUCC" created="2009-02-05 11:01:19" creator="marco.eilers" last_editor="pgiuseppe" modified="2009-11-11 17:20:11" GoalInContext="Repair faulty Module" Precondition="SVNCRM is available" Trigger="Module is not working properly" Scope="SVNCRM" Level="RWU (Trouble Call, Schedule, Knowledge Base); W (Visit Report); R (Transmitter, Module, Manual, Visit Report, Trouble Call)" OtherActors=", " Stakeholders="Customer, Technician" MainSuccessScenario="Module is successfully repaired" Extensions="Technician requests Specialist; Technician orders Repair parts (urgent); Technician adds an item to the Knowledge Base" base_UseCase="_igVblFnjEeCk9JeqiHj1aA"/>
+  <Chronos:ChiFeature xmi:id="_igqLdlnjEeCk9JeqiHj1aA" Alias="ChiFeat006" created="2009-02-04 14:21:46" creator="marco.eilers" last_editor="marco.eilers" modified="2009-03-23 18:15:39" Status="Approved" base_Class="_igVblVnjEeCk9JeqiHj1aA" Proofreader=", "/>
+  <Chronos:ChiFeature xmi:id="_igqygFnjEeCk9JeqiHj1aA" Alias="ChiFeat011" created="2009-02-04 14:25:37" creator="marco.eilers" last_editor="marco.eilers" modified="2009-03-23 17:42:52" Status="tbd" base_Class="_igVbl1njEeCk9JeqiHj1aA" Proofreader=", "/>
+</xmi:XMI>
