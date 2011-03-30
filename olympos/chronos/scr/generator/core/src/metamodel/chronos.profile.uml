@@ -357,7 +357,7 @@
       <eClassifiers xmi:type="ecore:EClass" xmi:id="_jARml8-nEd6fypAGO026Fw" name="ChiValueRef">
         <eAnnotations xmi:id="_jARmmM-nEd6fypAGO026Fw" source="http://www.eclipse.org/uml2/2.0.0/UML" references="{2C925856-F61D-4e5d-BC20-75ECC7E20DAF}"/>
         <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_jARmmc-nEd6fypAGO026Fw" name="reference_value" ordered="false" unique="false" lowerBound="1" eType="_jARmn8-nEd6fypAGO026Fw"/>
-        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_jARmm8-nEd6fypAGO026Fw" name="_" ordered="false" upperBound="-1" eType="_jARmYc-nEd6fypAGO026Fw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_jARmm8-nEd6fypAGO026Fw" name="reference_type" ordered="false" lowerBound="1" eType="_jARmYc-nEd6fypAGO026Fw"/>
         <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_jARmnc-nEd6fypAGO026Fw" name="base_Property" ordered="false" lowerBound="1">
           <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/2.1.0/UML#//Property"/>
         </eStructuralFeatures>
