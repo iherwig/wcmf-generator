@@ -31,7 +31,7 @@ CREATE TABLE `ActivitySet` # entityType=ActivitySet tableId={05754823-0E5A-49ba-
   ,KEY `fk_chibusinessusecasecore_id` (`fk_chibusinessusecasecore_id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_chibusinessusecase_id` (`fk_chibusinessusecase_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiObject`
 # a chiObject reppresent an instance of a ChiNode or a Chivalue.
@@ -66,7 +66,7 @@ CREATE TABLE `ChiObject` # entityType=ChiObject tableId={F1792FA4-5A7E-4820-8126
   ,KEY `fk_chinode_id` (`fk_chinode_id`)
   ,KEY `fk_productionruleset_id` (`fk_productionruleset_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ControlFlow`
 # 
@@ -106,7 +106,7 @@ CREATE TABLE `ControlFlow` # entityType=ControlFlow tableId={EBEABCC7-F466-4c4b-
   ,KEY `fk_adcontrolflowsource_id` (`fk_adcontrolflowsource_id`)
   ,KEY `fk_acontrolflowsource_id` (`fk_acontrolflowsource_id`)
   ,KEY `fk_acontrolflowtarget_id` (`fk_acontrolflowtarget_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ObjectFlow`
 # 
@@ -126,7 +126,7 @@ CREATE TABLE `ObjectFlow` # entityType=ObjectFlow tableId={582AC351-7317-4967-86
   ,KEY `fk_aobjectflowsource_id` (`fk_aobjectflowsource_id`)
   ,KEY `fk_chiobjectobjectflowsource_id` (`fk_chiobjectobjectflowsource_id`)
   ,KEY `fk_chiobjectobjectflowtarget_id` (`fk_chiobjectobjectflowtarget_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Activity`
 # An activity is the specification of a parameterized sequence of behaviour. An activity is shown as a round-cornered rectangle enclosing all the actions, control flows and other elements that make up the activity.
@@ -156,7 +156,7 @@ CREATE TABLE `Activity` # entityType=Activity tableId={409978A0-453D-48d2-BBA7-F
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionruleset_id` (`fk_productionruleset_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ActivityDecision`
 # A Decision is used to represent a choice amongst several possibilities.  Each transition usually is labeled with a text describing the response to the question posed by the Decision point.
@@ -186,7 +186,7 @@ CREATE TABLE `ActivityDecision` # entityType=ActivityDecision tableId={31C3DADE-
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionruleset_id` (`fk_productionruleset_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ActivityReceive`
 # this element indicates that a previous sended messages has been received.
@@ -216,7 +216,7 @@ CREATE TABLE `ActivityReceive` # entityType=ActivityReceive tableId={620EF852-04
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionruleset_id` (`fk_productionruleset_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ActivitySend`
 # This eslement indicates the sending of a message.
@@ -246,7 +246,7 @@ CREATE TABLE `ActivitySend` # entityType=ActivitySend tableId={2A96B8F4-371B-4a9
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionruleset_id` (`fk_productionruleset_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ActivityInitial`
 # An initial or start node is depicted by a large black spot.
@@ -276,7 +276,7 @@ CREATE TABLE `ActivityInitial` # entityType=ActivityInitial tableId={0BA733C1-27
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionruleset_id` (`fk_productionruleset_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ActivityFinal`
 # An final t node is depicted by a cirlcled small black spot.
@@ -306,7 +306,7 @@ CREATE TABLE `ActivityFinal` # entityType=ActivityFinal tableId={445AA747-5297-4
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionruleset_id` (`fk_productionruleset_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ChiSystem`
 # a ChiSystem is a entity for the configuration of a specific technology. it is transformed in a section within a configuration file.
@@ -334,7 +334,7 @@ CREATE TABLE `ChiSystem` # entityType=ChiSystem tableId={4C688225-1C73-42b8-80FF
   `sortkey` INT(11),
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ProductionRule`
 # 
@@ -362,7 +362,7 @@ CREATE TABLE `ProductionRule` # entityType=ProductionRule tableId={729D41EE-7B1D
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionruleset_id` (`fk_productionruleset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `ProductionRuleSet`
 # 
@@ -389,7 +389,7 @@ CREATE TABLE `ProductionRuleSet` # entityType=ProductionRuleSet tableId={FC234BD
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_activityset_id` (`fk_activityset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `RuleAction`
 # 
@@ -416,7 +416,7 @@ CREATE TABLE `RuleAction` # entityType=RuleAction tableId={AF95276B-DDD1-4801-95
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionrule_id` (`fk_productionrule_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `RuleCondition`
 # 
@@ -443,7 +443,7 @@ CREATE TABLE `RuleCondition` # entityType=RuleCondition tableId={FB99A861-FF96-4
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionrule_id` (`fk_productionrule_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `RuleSetVariable`
 # 
@@ -474,7 +474,7 @@ CREATE TABLE `RuleSetVariable` # entityType=RuleSetVariable tableId={F5551861-86
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionruleset_id` (`fk_productionruleset_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `RuleVariable`
 # 
@@ -505,7 +505,7 @@ CREATE TABLE `RuleVariable` # entityType=RuleVariable tableId={EBAFA7BD-86D5-4c2
   PRIMARY KEY (`id`)
   ,KEY `fk_package_id` (`fk_package_id`)
   ,KEY `fk_productionrule_id` (`fk_productionrule_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `Translation`
 # Instances of this class are used to localize entity attributes. Each instance defines a translation of one attribute of one entity into one language.
@@ -521,7 +521,7 @@ CREATE TABLE `Translation` # entityType=Translation tableId={09F69DF1-0E20-4135-
   `translation` TEXT, # columnId={C91D5D0C-5188-4bcb-8B44-53FA82ECE470} 
   `language` VARCHAR(255), # columnId={710A1A8E-F609-4cb3-95DE-76FA5A8D0A25} 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `adodbseq`
 # 
@@ -533,7 +533,7 @@ CREATE TABLE `adodbseq` # entityType=Adodbseq tableId={3C3FC8F0-DD8A-4ad9-BB10-4
 (
   `id` INT(11) NOT NULL, # columnId=_popkYFVaEeCs-oMhDEevLw 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `locktable`
 # 
@@ -550,7 +550,7 @@ CREATE TABLE `locktable` # entityType=Locktable tableId={ADC6F227-2E89-41a1-8EA3
   `since` VARCHAR(255), # columnId={436EB7C1-122C-42c2-81F2-D519B950E934} 
   PRIMARY KEY (`id`)
   ,KEY `fk_user_id` (`fk_user_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `nm_user_role`
 # 
@@ -563,7 +563,7 @@ CREATE TABLE `nm_user_role` # entityType=NMUserRole tableId={4AB7C88E-CE09-4fba-
   `fk_user_id` INT(11), # columnId=_pmtqtVVaEeCs-oMhDEevLw referencedTable=UserRDB
   `fk_role_id` INT(11), # columnId=_pmtqsFVaEeCs-oMhDEevLw referencedTable=RoleRDB
   PRIMARY KEY (`fk_user_id`,`fk_role_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `role`
 # 
@@ -576,7 +576,7 @@ CREATE TABLE `role` # entityType=RoleRDB tableId={74CB3FF5-27C7-435e-BECA-F3511F
   `id` INT(11) NOT NULL, # columnId=_pqSjIFVaEeCs-oMhDEevLw 
   `name` VARCHAR(50), # columnId={451E3B0C-4DF2-4f43-9F9E-88306EFE8D68} 
   PRIMARY KEY (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 #
 # Structure of Table `user_config`
 # 
