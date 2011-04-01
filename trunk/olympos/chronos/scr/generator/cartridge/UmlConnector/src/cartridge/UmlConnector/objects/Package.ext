@@ -21,6 +21,7 @@ extension cartridge::UmlConnector::objects::ChiBusinessPartnerPassive;
 extension cartridge::UmlConnector::objects::ChiController;
 extension cartridge::UmlConnector::objects::ChiManyToMany;
 extension cartridge::UmlConnector::objects::ChiNode;
+extension cartridge::UmlConnector::objects::ChiValueRef;
 extension cartridge::UmlConnector::objects::ChiNodeManyToMany;
 extension cartridge::UmlConnector::objects::ChiOpinion;
 extension cartridge::UmlConnector::objects::ChiOpinionInner;
@@ -51,6 +52,7 @@ uml::Package convert(cwm::Package p):
 		up.ownedType.addAll(p.chiController.convert()) ->
 		up.ownedType.addAll(p.chiManyToMany.convert()) ->
 		up.ownedType.addAll(p.chiNode.convert()) ->
+		//p.chiNode.convert() -> // no convert for ChiValueRef needed
 		up.ownedType.addAll(p.chiNodeManyToMany.convert()) ->
 		up.ownedType.addAll(p.chiOpinion.convert()) ->
 		up.ownedType.addAll(p.chiOpinionInner.convert()) ->
@@ -81,6 +83,7 @@ Void establishConnections(cwm::Package p, uml::Model um):
 	p.chiWorkerExternal.establishConnections(um) ->
 	p.chiWorkerInternal.establishConnections(um) ->
 	p.chiNode.establishConnections(um) ->
+	p.chiValueRef.establishConnections(um) ->
 	p.chiNodeManyToMany.establishConnections(um) ->
 	p.chiController.establishConnections(um) ->
 	p.diagram.establishConnections(um) ->
@@ -109,6 +112,7 @@ Void transferValues(cwm::Package p, uml::Model um):
 			p.chiWorker.transferValues(um) ->
 			p.chiWorkerInternal.transferValues(um) ->
 			p.chiNode.transferValues(um) ->
+			// not values to transfer for ChiValueRef
 			p.chiNodeManyToMany.transferValues(um) ->
 			p.chiSystem.transferValues(um) ->
 			p.chiController.transferValues(um) ->

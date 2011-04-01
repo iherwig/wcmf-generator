@@ -1,0 +1,87 @@
+/*
+ * Copyright (c) 2011 The Olympos Development Team.
+ * 
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+
+
+import cwm;
+import Chronos;
+import uml;
+
+extension common::util;
+extension common::umlutils;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension cartridge::UmlConnector::chronosId;
+
+// Function convert is not needed since ChiValueRef is always the second stereotype of an already existing ChiValue
+
+Void establishConnections(cwm::ChiValueRef this, uml::Model um):
+	// since the ChiValueRef is always the second stereotype of an existing ChiValue, the id begins with ChiValue:
+	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:ChiValue:" + this.fkChivalueId).first(): (
+		//um.allOwnedElements().typeSelect(uml::Property).forAll(e|info(" / " + e.name) -> true) ->
+		info("******************* " + uc.name) ->
+		info("******************* " + this.referenceValue) ->
+		info("******************* " + this.referenceType) ->
+		// the second stereotype has to be applied here, because later the search value (ChiValue:######) 
+		// is overwritten in ChiValue.transferValues (setName)   
+		uc.applyStereotype("Chronos::ChiValueRef") -> 
+
+		// set tagged values
+		uc.setTaggedValue("Chronos::ChiValueRef", "reference_value", this.referenceValue) ->
+		uc.setTaggedValue("Chronos::ChiValueRef", "reference_type", this.referenceType)
+				
+
+		// TODO: cleanup experiments
+		//uc.setReferenceType1(um, this.referenceType)
+		//uc.setReferenceType2(um, this.referenceType)
+		
+	)
+;
+
+
+// TODO: cleanup experiments
+
+/*
+Void t(Chronos::ChiValueRef v):
+	v.getId() 
+;
+*/
+/*
+Void setReferenceType1(uml::Property value_ref, uml::Model um, String targetOid):
+	let target = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNode:" + targetOid).first(): (
+		info("******************* targetOid=" + targetOid)-> 
+		info("******************* target.name=" + target.name) ->
+		value_ref.setTaggedValue("Chronos::ChiNode", "reference_type", target.getId() ) ->
+		info ("**** target.getId():" + target.getId()) ->
+ 		info("value_ref.getTaggedValue" + value_ref.getTaggedValue("Chronos::ChiNode", "reference_type"))
+	)
+;
+*/
+
+/*
+Void setReferenceType2(uml::Property value_ref, uml::Model um, String targetOid):
+	let ref = ((Chronos::ChiValueRef) value_ref) : (
+		let target = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == "ChiNode:" + targetOid).first(): (
+			info("******************* targetOid=" + targetOid)-> 
+			info("******************* target.name=" + target.name) ->
+			ref.reference_type =  (Chronos::ChiNode) target 
+			//info("reference_type" + ((Chronos::ChiValueRef) value_ref).reference_type)
+			//value_ref.setTaggedValue("Chronos::ChiNode", "reference_type", target) ->
+			//info("value_ref.getTaggedValue" + value_ref.getTaggedValue("Chronos::ChiNode", "reference_type"))
+			// ((Chronos::ChiValueRef) value_ref).reference_type = (Chronos::ChiNode) target
+		)
+	)
+;
+*/
+
+
+ 
