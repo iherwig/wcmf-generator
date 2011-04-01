@@ -1,3 +1,16 @@
+/*
+ * Copyright (c) 2011 The Olympos Development Team.
+ * 
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+
+
 import cwm;
 import Chronos;
 import uml;
@@ -17,7 +30,6 @@ uml::Property convert(cwm::ChiValue o):
 ;
 
 Void transferValues(cwm::ChiValue c, uml::Model um):
-	//(new cwm::ChiValue).eRootContainer
 	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValue:" + c.id).first(): (
 		let comment = new uml::Comment : (
 			uc.applyStereotype("Chronos::ChiValue") ->
@@ -65,6 +77,10 @@ String TYPE_KEYWORD():
 	"CHRONOS_TYPE_KEYWORD_"
 ;	
 
+
+
+
+// UML -> CWM
 cwm::ChiValue convertToCwm(Chronos::ChiValue c) :
 	//(new cwm::ChiValue).set
 	let un = new cwm::ChiValue : (
