@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Chronos="http:///schemas/Chronos/_jAH0gM-nEd6fypAGO026Fw/0" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.1.0/UML" xsi:schemaLocation="http:///schemas/Chronos/_jAH0gM-nEd6fypAGO026Fw/0 chronos.profile.uml#_jARlgc-nEd6fypAGO026Fw">
+  <uml:Model xmi:id="_qJciwFxJEeCWmLxMKyIAOw" name="uml-generated">
+    <packagedElement xmi:type="uml:Package" xmi:id="_qJciwVxJEeCWmLxMKyIAOw" name="MappingExport">
+      <ownedComment xmi:id="_qJciwlxJEeCWmLxMKyIAOw" annotatedElement="_qJciwVxJEeCWmLxMKyIAOw">
+        <body>?</body>
+      </ownedComment>
+      <packagedElement xmi:type="uml:Class" xmi:id="_qJciw1xJEeCWmLxMKyIAOw" name="SourceNode">
+        <eAnnotations xmi:id="_qJcixFxJEeCWmLxMKyIAOw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_qJcixVxJEeCWmLxMKyIAOw" key="CHRONOS_ID_KEYWORD_ChiNode:103381"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_qJcixlxJEeCWmLxMKyIAOw" annotatedElement="_qJciw1xJEeCWmLxMKyIAOw">
+          <body>?</body>
+        </ownedComment>
+        <ownedAttribute xmi:id="_qJcix1xJEeCWmLxMKyIAOw" name="SourceValue1">
+          <ownedComment xmi:id="_qJciyFxJEeCWmLxMKyIAOw" annotatedElement="_qJcix1xJEeCWmLxMKyIAOw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:id="_qJciyVxJEeCWmLxMKyIAOw" name="SourceValue2">
+          <ownedComment xmi:id="_qJciylxJEeCWmLxMKyIAOw" annotatedElement="_qJciyVxJEeCWmLxMKyIAOw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_qJciy1xJEeCWmLxMKyIAOw" name="TargetNode">
+        <eAnnotations xmi:id="_qJcizFxJEeCWmLxMKyIAOw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_qJcizVxJEeCWmLxMKyIAOw" key="CHRONOS_ID_KEYWORD_ChiNode:103389"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_qJcizlxJEeCWmLxMKyIAOw" annotatedElement="_qJciy1xJEeCWmLxMKyIAOw">
+          <body>?</body>
+        </ownedComment>
+        <generalization xmi:id="_qJciz1xJEeCWmLxMKyIAOw" general="_qJci0lxJEeCWmLxMKyIAOw"/>
+        <ownedAttribute xmi:id="_qJci0FxJEeCWmLxMKyIAOw" name="TargetValue">
+          <ownedComment xmi:id="_qJci0VxJEeCWmLxMKyIAOw" annotatedElement="_qJci0FxJEeCWmLxMKyIAOw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" xmi:id="_qJci0lxJEeCWmLxMKyIAOw" name="NodeBase">
+        <eAnnotations xmi:id="_qJci01xJEeCWmLxMKyIAOw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+          <details xmi:id="_qJci1FxJEeCWmLxMKyIAOw" key="CHRONOS_ID_KEYWORD_ChiNode:103416"/>
+        </eAnnotations>
+        <ownedComment xmi:id="_qJci1VxJEeCWmLxMKyIAOw" annotatedElement="_qJci0lxJEeCWmLxMKyIAOw">
+          <body>?</body>
+        </ownedComment>
+        <ownedAttribute xmi:id="_qJci1lxJEeCWmLxMKyIAOw" name="BaseValue">
+          <ownedComment xmi:id="_qJci11xJEeCWmLxMKyIAOw" annotatedElement="_qJci1lxJEeCWmLxMKyIAOw">
+            <body>?</body>
+          </ownedComment>
+        </ownedAttribute>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_qJci2FxJEeCWmLxMKyIAOw" name="MappingDiagram">
+        <ownedComment xmi:id="_qJci2VxJEeCWmLxMKyIAOw" annotatedElement="_qJci2FxJEeCWmLxMKyIAOw">
+          <body>?</body>
+        </ownedComment>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_qJci2lxJEeCWmLxMKyIAOw" name="Referenced Nodes"/>
+    <profileApplication xmi:id="_qJci21xJEeCWmLxMKyIAOw">
+      <eAnnotations xmi:id="_qJci3FxJEeCWmLxMKyIAOw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="chronos.profile.uml#_jARlgc-nEd6fypAGO026Fw"/>
+      </eAnnotations>
+      <appliedProfile href="chronos.profile.uml#873fb1a3-cfa7-11de-9e87-d74203c08737"/>
+    </profileApplication>
+    <profileApplication xmi:id="_qJci3VxJEeCWmLxMKyIAOw">
+      <eAnnotations xmi:id="_qJci3lxJEeCWmLxMKyIAOw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="ouranos.profile.uml#_fmnPK1vpEd6-GfKcCJahig"/>
+      </eAnnotations>
+      <appliedProfile href="ouranos.profile.uml#_fmnPKVvpEd6-GfKcCJahig"/>
+    </profileApplication>
+  </uml:Model>
+  <Chronos:ChiNode xmi:id="_qJdJ0FxJEeCWmLxMKyIAOw" Alias="Chi5298Nod" created="2011-03-30 15:56:19" creator="admin" last_editor="admin" modified="2011-03-30 15:57:40" Status="Proposed" base_Class="_qJciw1xJEeCWmLxMKyIAOw" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValueRef xmi:id="_qJdJ0VxJEeCWmLxMKyIAOw" base_Property="_qJcix1xJEeCWmLxMKyIAOw" reference_value="ChiValue:103449" reference_type="ChiNode:103389"/>
+  <Chronos:ChiValue xmi:id="_qJdJ0lxJEeCWmLxMKyIAOw" base_Property="_qJcix1xJEeCWmLxMKyIAOw"/>
+  <Chronos:ChiValueRef xmi:id="_qJdJ01xJEeCWmLxMKyIAOw" base_Property="_qJciyVxJEeCWmLxMKyIAOw" reference_value="ChiValue:103444" reference_type="ChiNode:103389"/>
+  <Chronos:ChiValue xmi:id="_qJdJ1FxJEeCWmLxMKyIAOw" base_Property="_qJciyVxJEeCWmLxMKyIAOw"/>
+  <Chronos:ChiNode xmi:id="_qJdJ1VxJEeCWmLxMKyIAOw" Alias="Chi5299Nod" created="2011-03-30 15:56:22" creator="admin" last_editor="admin" modified="2011-03-30 15:57:14" Status="Proposed" base_Class="_qJciy1xJEeCWmLxMKyIAOw" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_qJdJ1lxJEeCWmLxMKyIAOw" base_Property="_qJci0FxJEeCWmLxMKyIAOw"/>
+  <Chronos:ChiNode xmi:id="_qJdJ11xJEeCWmLxMKyIAOw" Alias="Chi5300Nod" created="2011-03-30 15:56:43" creator="admin" last_editor="admin" modified="2011-03-30 15:57:05" Status="Proposed" base_Class="_qJci0lxJEeCWmLxMKyIAOw" display_value="name" is_searchable="true"/>
+  <Chronos:ChiValue xmi:id="_qJdJ2FxJEeCWmLxMKyIAOw" base_Property="_qJci1lxJEeCWmLxMKyIAOw"/>
+  <Chronos:ChiDiagram xmi:id="_qJdJ2VxJEeCWmLxMKyIAOw" Alias="Chi345Dia" Status="Proposed" base_Package="_qJci2FxJEeCWmLxMKyIAOw"/>
+</xmi:XMI>
