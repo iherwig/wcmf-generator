@@ -265,3 +265,11 @@ set fixed with on model listbox
 ADDITIONS
 - Multiple selection
 - Mapping of chiNodes
+
+0.9.9.6
+ADDITIONS
+- Show inherited attributes for subclasses
+- Mapping of inherited attributes in subclasses
+FIXES
+- Export of Use Case Documentation considers chosen document format
+- Fix of issue with sorting in model tree
