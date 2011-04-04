@@ -273,3 +273,8 @@ ADDITIONS
 FIXES
 - Export of Use Case Documentation considers chosen document format
 - Fix of issue with sorting in model tree
+
+0.9.9.6b
+FIXES
+- Added workaround in Chronos Generator for UCPA Export Bug in CWT VM
+- no functional modifications
