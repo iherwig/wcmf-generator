@@ -56,7 +56,7 @@ public class OpenOfficeConverter extends AbstractWorkflowComponent {
 		// which occurs when trying to convert an ODS file.
 		if (!getFileExtension(getInputFile()).equalsIgnoreCase(
 				getFileExtension(getOutputFile()))
-				&& getFileExtension(getInputFile()).equalsIgnoreCase(
+				|| !getFileExtension(getInputFile()).equalsIgnoreCase(
 						OO_CALC_EXTENSION)) {
 
 			OpenOfficeConnection connection = new SocketOpenOfficeConnection();
