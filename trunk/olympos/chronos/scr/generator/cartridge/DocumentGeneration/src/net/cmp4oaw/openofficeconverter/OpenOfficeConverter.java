@@ -102,7 +102,7 @@ public class OpenOfficeConverter extends AbstractWorkflowComponent {
 	}
 
 	private String getFileExtension(String filename) {
-		return filename.substring(filename.lastIndexOf("."));
+		return filename.substring(filename.lastIndexOf(".") + 1);
 	}
 
 }
