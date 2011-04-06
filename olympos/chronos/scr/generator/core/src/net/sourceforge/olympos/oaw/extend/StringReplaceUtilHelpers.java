@@ -62,23 +62,25 @@ public class StringReplaceUtilHelpers {
 		ChangeSet changeSet = new ChangeSet();
 		
 		changeSet.addChangeSet(createRegexForHtmlStartTag("p"),""); // <p>
+		changeSet.addChangeSet(createRegexForHtmlStartTag("span"),""); // <span>
 		changeSet.addChangeSet(createRegexForHtmlCloseTag("p"),"\n"); // </p>
+		changeSet.addChangeSet(createRegexForHtmlCloseTag("span"),"\n"); // </span>
 		changeSet.addChangeSet(createRegexForHtmlStartTag("br"),"\n"); // <br>
 		changeSet.addChangeSet(createRegexForHtmlStartTag("li"),"-- "); // <li>
 		changeSet.addChangeSet(createRegexForHtmlCloseTag("li"),"\n"); // </li>
 
 		changeSet.addChangeList(createChangeListStripHtml()); // strip all other tags
+		changeSet.addChangeList(createChangeSetCommentCleanup());
 		
 		return changeSet;
 	}
 	
-/*	TODOTS: does not work yet
 	private static ChangeSet createChangeSetCommentCleanup(){
 		ChangeSet changeSet = new ChangeSet();
-		changeSet.addChangeSet("/(\\s+)\\/\\*([^\\/]*)\\*\\/(\\s+)/s",""); // delete all empty lines in comments
+		changeSet.addChangeSet("\n+","\n"); // delete all empty lines in comments
+		changeSet.addChangeSet("\n","\n * "); // add leading * for every line for proper formatting
 		return changeSet;
 	}
-*/
 	
 	private static String createRegexForHtmlStartTag(String tag){
 		return "<\\s*" + tag + "(\\s|.)*?>";
