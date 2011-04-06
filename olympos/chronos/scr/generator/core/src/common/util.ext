@@ -103,3 +103,7 @@ String FILE_HEADER(): GLOBALVAR fileHeader;
 toBigInteger(Integer i):
 	JAVA net.sourceforge.olympos.oaw.extend.Util.toBigInteger(java.math.BigInteger)
 ;
+
+String htmlToAscii(String html):
+	JAVA net.sourceforge.olympos.oaw.extend.StringReplaceUtilHelpers.htmlToAscii(java.lang.String)
+;
