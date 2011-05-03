@@ -104,6 +104,18 @@ toBigInteger(Integer i):
 	JAVA net.sourceforge.olympos.oaw.extend.Util.toBigInteger(java.math.BigInteger)
 ;
 
+/**
+ * converting HTML Tags to simple ASCII Format
+ */
 String htmlToAscii(String html):
 	JAVA net.sourceforge.olympos.oaw.extend.StringReplaceUtilHelpers.htmlToAscii(java.lang.String)
 ;
+
+/**
+ * converting HTML Tags to simple ASCII Format, delete empty lines and add * at the beginning of each line
+ * -> should only be used to clean up comments
+ */
+String htmlToAsciiForComments(String html):
+	JAVA net.sourceforge.olympos.oaw.extend.StringReplaceUtilHelpers.htmlToAsciiForComments(java.lang.String)
+;
+
