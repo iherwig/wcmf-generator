@@ -49,7 +49,7 @@ import «currImport»
 «ENDPROTECT»
 
 /**
- * «this.owner.getComment("\n * ")»
+ * «this.owner.getComment("\n * ").htmlToAscii()»
  */
 class «this.asClassName()» extends ServiceBase {
 			
@@ -377,7 +377,7 @@ public enum «this.asSelectionName()» {
 		«PROTECT CSTART "/*" CEND "*/" ID (this.fullQualifiedName() + "Implementation").asProtectedRegionId()» 
 			/*
 			 TODO: Implement method according to comment below
-			 «this.getComment()»
+			 «this.getComment().htmlToAscii()»
 			 */
 			
 			«IF this.outgoing.typeSelect(uml::ObjectFlow).size > 0»
