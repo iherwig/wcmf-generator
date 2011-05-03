@@ -1,0 +1,22 @@
+«IMPORT uml»
+«IMPORT Chronos»
+«REM»Import the extension used in this xpand file.«ENDREM»
+«EXTENSION common::util»
+«EXTENSION cartridge::ChronosCommon::usecases::ChiBusinessUseCase»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiRequirement»
+«EXTENSION cartridge::projectplan::extensions::util»
+«EXTENSION cartridge::projectplan::extensions::globals»
+«REM»main definition evaluate the model elemen «ENDREM»
+«DEFINE root FOR Model» 
+«info('Expand Model')»
+«REM»creates a file with the file name coming from projectplan.Property«ENDREM»
+«FILE projectName()+".xml"-»
+«REM»jump to the next XPand«ENDREM-»
+«EXPAND cartridge::projectplan::templates::projectplan::printHeader FOR this»
+«EXPAND cartridge::projectplan::templates::projectplan::Copyright FOR this»	
+«EXPAND cartridge::projectplan::templates::projectplan::printChiBusinessUseCase FOREACH this.allOwnedElements().typeSelect(Chronos::ChiBusinessUseCase)»
+«EXPAND cartridge::projectplan::templates::projectplan::printActor FOREACH this.allOwnedElements().typeSelect(uml::Actor)»
+«EXPAND cartridge::projectplan::templates::projectplan::printChiFeature FOREACH this.getTechnicals().getFeatures()»
+«EXPAND cartridge::projectplan::templates::projectplan::printFooter FOR this»
+«ENDFILE»
+«ENDDEFINE»

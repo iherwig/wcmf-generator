@@ -1,0 +1,24 @@
+
+/**
+* this file actually don't do nothing useful. But future operations should be placed here. 
+*
+ * metamodel import
+ */
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+extension org::openarchitectureware::util::stdlib::io;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::projectplan::extensions::globals;
+
+List[Chronos::ChiRequirement] getTechnicals(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiRequirement).select(e|e.Type == TECHNICAL_TYPE())
+;
+
+List[Chronos::ChiRequirement] getEnvironmentals(uml::Model this):
+	this.allOwnedElements().typeSelect(Chronos::ChiRequirement).select(e|e.Type == ENVIRONMENTAL_TYPE())
+;
