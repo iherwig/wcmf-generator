@@ -37,7 +37,10 @@ uwm.diagram.print.Printer.prototype.print = function(diagram, callback) {
 	var workflowFigures = diagram.getWorkflow().getFigures();
 	
 	// calculate the minimum upper left position of all diagram figures
-	for (var i = 0; i < workflowFigures.getSize(); i++) {
+	
+	// Workaround: i is set to 1 in order to ignore the draw2d.Rectangle that is 
+	// the first element of the list and which does not belong to the diagram
+	for (var i = 1; i < workflowFigures.getSize(); i++) {
 		var currFigure = workflowFigures.get(i);
 		minX = Math.min(minX, currFigure.getAbsoluteX());
 		minY = Math.min(minY, currFigure.getAbsoluteY());
@@ -46,7 +49,7 @@ uwm.diagram.print.Printer.prototype.print = function(diagram, callback) {
 	var deltaY = minY;
 
 	// move all figures temporary to the upper left corner
-	for (var i = 0; i < workflowFigures.getSize(); i++) {
+	for (var i = 1; i < workflowFigures.getSize(); i++) {
 		var currFigure = workflowFigures.get(i);
 		if (currFigure.getParent() == null)
 			currFigure.setPosition(parseInt(currFigure.getAbsoluteX()-deltaX+BORDER), 
