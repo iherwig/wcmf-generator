@@ -82,6 +82,8 @@ public class StringReplaceUtilHelpers {
 	private static ChangeSet createChangeListHtmlToAscii(){
 		ChangeSet changeSet = new ChangeSet();
 		
+		changeSet.addChangeSet("\n", ""); // Remove all line breaks as those are not displayed in HTML
+		changeSet.addChangeSet(" +", " "); // Replace multiple whitespace characters with one space character
 		changeSet.addChangeSet(createRegexForHtmlStartTag("p"),""); // <p>
 		changeSet.addChangeSet(createRegexForHtmlStartTag("span"),""); // <span>
 		changeSet.addChangeSet(createRegexForHtmlCloseTag("p"),"\n"); // </p>
