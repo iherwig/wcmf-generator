@@ -35,6 +35,16 @@ public class StringReplaceUtilHelpers {
 	}
 	
 	/**
+	 *  convert often used Html tags from input string to a simple Ascii Format and erase all other tags
+	 *  also deletes empty lines and adds a * at the beginning of each line
+	 *  -> should only be used for comments
+	 * @return changed String
+	 */
+	public static String htmlToAsciiForComments(String input){
+		return StringReplaceUtil.executeChangeSet(input, createChangeListHtmlToAsciiForComments());
+	}
+
+	/**
 	 *  erase all Html tags from input string
 	 * @return changed String
 	 */
@@ -42,11 +52,13 @@ public class StringReplaceUtilHelpers {
 		return StringReplaceUtil.executeChangeSet(input, createChangeListStripHtml());
 	}
 
-	/*	TODOTS
+	/**
+	 *  erase all empty lines from comments
+	 * @return changed String
+	 */
 	public static String commentCleanup(String input){
 		return StringReplaceUtil.executeChangeSet(input, createChangeSetCommentCleanup());
 	}
-	*/
 	
 	
 	private static ChangeSet createChangeListStripHtml(){
@@ -58,6 +70,15 @@ public class StringReplaceUtilHelpers {
 		return changeSet;
 	}
 
+	private static ChangeSet createChangeListHtmlToAsciiForComments(){
+		ChangeSet changeSet = new ChangeSet();
+		changeSet.addChangeList(createChangeListHtmlToAscii()); // convert HTML to ASCII
+		
+		changeSet.addChangeList(createChangeSetCommentCleanup());
+
+		return changeSet;
+	}
+	
 	private static ChangeSet createChangeListHtmlToAscii(){
 		ChangeSet changeSet = new ChangeSet();
 		
@@ -68,10 +89,9 @@ public class StringReplaceUtilHelpers {
 		changeSet.addChangeSet(createRegexForHtmlStartTag("br"),"\n"); // <br>
 		changeSet.addChangeSet(createRegexForHtmlStartTag("li"),"-- "); // <li>
 		changeSet.addChangeSet(createRegexForHtmlCloseTag("li"),"\n"); // </li>
-
-		changeSet.addChangeList(createChangeListStripHtml()); // strip all other tags
-		changeSet.addChangeList(createChangeSetCommentCleanup());
 		
+		changeSet.addChangeList(createChangeListStripHtml()); // strip all other tags
+
 		return changeSet;
 	}
 	
