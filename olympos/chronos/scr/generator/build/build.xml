@@ -169,6 +169,7 @@
 				<include name="${build.info}"/>
 			</fileset>
 			<fileset file="${res.dir}/run.bat" />
+			<fileset file="${res.dir}/generateGrails.xml" />
 		</copy>
 		<copy todir="${redist.dir}/cartridge" verbose="false">
 			<fileset dir="${cartridge.build.dir}" />
