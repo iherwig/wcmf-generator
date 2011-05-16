@@ -1,0 +1,38 @@
+<project name="generateGrails" default="generate-all" basedir="./">
+	<description>
+		Generating Grails domain and service classes running the ChronosGenerator
+	</description>
+
+	<!-- BEGIN apply to your local environment -->
+	<property name="generator.directory" value="${basedir}" />
+	<property name="grails.domain.properties" value="./cartridge/Grails/workflow/grails.properties" />
+	<property name="grails.service.properties" value="./cartridge/GrailsService/workflow/grailsService.properties" />
+	<!-- END apply to your local environment -->
+
+	<property name="generator.jar" value="${generator.directory}/ChronosGenerator.jar" />
+	<property name="cartridge.grails.domain" value="./cartridge/Grails/workflow/grails.oaw" />
+	<property name="cartridge.grails.service" value="./cartridge/GrailsService/workflow/grailsService.oaw" />
+
+	<!-- generate domain AND service classes -->
+	<target name="generate-all">
+		<antcall target="generate-domain-classes-only" />
+		<antcall target="generate-service-classes-only" />
+	</target>
+
+	<!-- generate-domain-classes-only -->
+	<target name="generate-domain-classes-only">
+		<java jar="${generator.jar}" fork="true">
+			<arg line="${cartridge.grails.domain}" />
+			<arg line="-propertyFile=${grails.domain.properties}" />
+		</java>
+	</target>
+
+	<!-- generate-service-classes-only -->
+	<target name="generate-service-classes-only">
+		<java jar="${generator.jar}" fork="true">
+			<arg line="${cartridge.grails.service}" />
+			<arg line="-propertyFile=${grails.service.properties}" />
+		</java>
+	</target>
+
+</project>
