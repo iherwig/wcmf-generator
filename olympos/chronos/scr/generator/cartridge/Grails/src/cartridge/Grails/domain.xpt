@@ -221,6 +221,9 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 «ENDDEFINE»
 
 «DEFINE mapping FOR Chronos::ChiNode-»
+	«IF this.isContainer()-»
+	static mapWith = "none"
+	«ELSE-»
 	static mapping = {
 		tablePerHierarchy false
 		tablePerSubclass true
@@ -244,6 +247,7 @@ import «IF !currImport.getNearestPackage().getPackageName().isNullOrEmpty()»«
 		/* put additional mappings here */
 	«ENDPROTECT»
 	}
+	«ENDIF-»
 «ENDDEFINE»	
 
 «DEFINE constraints FOR Chronos::ChiNode-»
