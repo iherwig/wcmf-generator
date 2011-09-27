@@ -5,6 +5,7 @@
  * NOTE: This file was created in the application root directory to 
  *       ensure that everything is working correctly
  */
+error_reporting(E_ERROR | E_PARSE);
 require_once("base_dir.php");  
 require_once(BASE."wcmf/lib/presentation/class.Application.php");
 require_once(BASE."wcmf/lib/security/class.AuthUser.php");
