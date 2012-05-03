@@ -146,13 +146,39 @@ String getTableName(ChiNode this) :
 ;
 
 /**
- * Get the order column from the orderby tagged value
+ * Get the order column and direction from the orderby tagged value
  */
 String getOrderByColumn(ChiNode this) : 
 	let col = this.orderby.split(" ").first().trim() : 
-    let dir = this.orderby.split(" ").last().trim() : 
-      let orderVal = this.getChiValuesRecursive().select(v|v.name == col).first() :
-        orderVal != null ? (dir != col ? orderVal.getColumnName()+" "+dir : orderVal.getColumnName()) : (col == defaultOrderByName() ? col : "")
+	let dir = this.orderby.split(" ").last().trim() : 
+		let orderVal = this.getChiValuesRecursive().select(v|v.name == col).first() :
+			orderVal != null ? (dir != col ? orderVal.getColumnName()+" "+dir : orderVal.getColumnName()) : (col == defaultOrderByName() ? col : "")
+;
+
+/**
+ * Get the order column from the orderby tagged value
+ */
+String getOrderByName(ChiNode this) : 
+	let name = this.orderby.split(" ").first().trim() : 
+		let orderVal = this.getChiValuesRecursive().select(v|v.name == name).first() :
+			orderVal != null ? orderVal.name : (name == defaultOrderByName() ? name : null)
+;
+
+/**
+ * Get the order direction from the orderby tagged value (ASC or DESC, defaults to ASC)
+ */
+String getOrderByDirection(ChiNode this) : 
+	let dir = this.orderby.split(" ").last().trim() : 
+		dir.toUpperCase() == "ASC" || dir.toUpperCase() == "DESC" ? dir.toUpperCase() : "ASC"
+;
+
+/**
+ * Get the order column that should be used in relation to a given parent.
+ * It will only contain a value, if getOrderByName returns the defaultOrderByName
+ */
+String getOrderByNameForParent(ChiNode this, Property parent) : 
+	let orderByName = this.getOrderByName() :
+		orderByName == defaultOrderByName() ? orderByName+"_"+parent.type.name.toLowerCase() : null
 ;
 
 /**
@@ -205,7 +231,7 @@ Class getFKClass(ChiValue this) :
 ;
 
 /**
- * Checks whether a WCMFNode is at the other end of an N:M relation.
+ * Checks whether a ChiNode is at the other end of an N:M relation.
  */
  Boolean isAtOtherNmEnd(ChiNode this, ChiNode otherNode, ChiManyToMany nm) :
 /*
