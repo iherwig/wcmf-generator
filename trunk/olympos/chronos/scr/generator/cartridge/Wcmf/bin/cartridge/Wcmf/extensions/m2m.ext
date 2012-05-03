@@ -1,0 +1,195 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::Wcmf::extensions::globals;
+
+/**
+ * Add inherited values and associations to all nodes
+ */
+Void addDefaults(uml::Model this, uml::Profile profile) :
+	info("--------------------------") ->
+	info("M2M Start") ->
+	info("--------------------------") ->
+	info("Apply Chronos profile to "+this.name) ->
+	this.applyProfile(profile) ->
+	this.doTransformations() ->
+	info("--------------------------") ->
+	info("M2M End") ->
+	info("--------------------------") ->
+	this
+;
+
+Void addDefaults(uml::Model this) :
+	info("--------------------------") ->
+	info("M2M Start") ->
+	info("--------------------------") ->
+	info("Apply Chronos profile to "+this.name) ->
+	this.applyProfile(ProfileFile()) ->
+	this.doTransformations() ->
+	info("--------------------------") ->
+	info("M2M End") ->
+	info("--------------------------") ->
+	this
+;
+
+Void doTransformations(uml::Model this):
+	this.addSuperclass() ->
+	this.addSuperclassController() ->
+	this.addStereotype() ->
+	this.addNavigability() ->
+	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
+		postProcessNodes(ApplicationPackageAbsolute(this))
+;
+
+Void addSuperclassStereotypeNavigability(uml::Model this):
+	this.addSuperclass() ->
+	this.addStereotype() ->
+	this.addNavigability()
+;
+
+Void addChiNodeSuperclassStereotypeNavigability(uml::Model this):
+	this.addChiNodeStereotype() ->
+	this.addSuperclassClass() ->
+	this.addStereotypeClass() ->
+	this.addNavigability()
+;
+
+Void addChiNodeStereotype(uml::Model this):
+	info("Adding ChiNode stereotype ...") ->
+	this.allOwnedElements().typeSelect(uml::Class).addChiNodeStereotype()
+;
+
+Void addSuperclass(uml::Model this):
+	info("Adding superclass ...") ->
+	this.allOwnedElements().typeSelect(ChiNode).select(e|e.superClass.isEmpty).addNodeSuperClass()
+;
+
+Void addSuperclassClass(uml::Model this):
+	info("Adding superclass ...") ->
+	this.allOwnedElements().typeSelect(uml::Class).select(e|e.superClass.isEmpty).addNodeSuperClass()
+;
+
+Void addSuperclassController(uml::Model this):
+	info("Adding Controller superclass ...") ->
+	this.allOwnedElements().typeSelect(ChiController).select(e|e.superClass.isEmpty).addControllerSuperClass()
+;
+
+Void addStereotype(uml::Model this):
+	info("Adding stereotype ...") ->
+	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.association == null).addStereotype()
+;
+
+Void addStereotypeClass(uml::Model this):
+	info("Adding stereotype ...") ->
+	this.allOwnedElements().typeSelect(uml::Class).attribute.select(e|e.association == null).addStereotype()
+;
+
+Void addNavigability(uml::Model this):
+	info("Adding navigability ...") ->
+	this.allOwnedElements().typeSelect(uml::Association).select(e|e.memberEnd.forAll(f|f.isNavigable() == false)).addNavigability()
+;
+
+/**
+ * PostProcessor delegates
+ */
+ChiNode postProcessNodes(ChiNode root, String package) :
+	JAVA net.sourceforge.olympos.oaw.extend.PostProcessor.postProcessNodes(org.eclipse.uml2.uml.Class, java.lang.String)
+;
+
+Void addNodeSuperClass(uml::Class this) :
+	let superClass = this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|e.qualifiedName == RequiredNodeSuperClass()).first():
+	superClass != this ? (
+		let generalization = new uml::Generalization:
+		info("Adding SuperClass " + superClass.name + " to: " + this.name) ->
+		
+		generalization.setGeneral(superClass) ->
+		generalization.setSpecific(this)
+	) :
+		Void
+;
+
+Void addControllerSuperClass(uml::Class this) :
+	let superClass = this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|e.qualifiedName == RequiredControllerSuperClass()).first():
+	superClass != this ? (
+		let generalization = new uml::Generalization:
+		info("Adding controller SuperClass " + superClass.name + " to: " + this.name) ->
+		
+		generalization.setGeneral(superClass) ->
+		generalization.setSpecific(this)
+	) :
+		Void
+;
+
+Void addChiNodeStereotype(uml::Class this):
+	info("Adding Stereotype ChiNode to " + this.name) ->
+	this.applyStereotype("Chronos::ChiNode")
+;
+
+Void addStereotype(uml::Property this):
+	info("Adding Stereotype ChiValue to " + this.getOwningClass().name + "." + this.name) ->
+	this.applyStereotype("Chronos::ChiValue")
+;
+
+Void addNavigability(uml::Association this):
+	info("Adding navigability to " + this.memberEnd.first().type.name + " - " + this.memberEnd.last().type.name) ->
+	this.memberEnd.setIsNavigable(true)
+;
+
+Void renameProperties(uml::Model this):
+	let ends = this.allOwnedElements().typeSelect(uml::Association).memberEnd:
+	let doubleEnds = ends.select(e|ends.select(f|e.name == f.name).size >= 2):
+	
+	doubleEnds.renameUnique(doubleEnds, 0)
+//	this.allOwnedElements().typeSelect(Chronos::ChiNode).renameProperties()
+;
+
+Void renameProperties(Chronos::ChiNode this):
+	let ends = this.getAssociations().memberEnd:
+	let doubleEnds = ends.select(e|ends.select(f|e.name == f.name).size >= 2):
+	
+	doubleEnds.renameUnique(doubleEnds, 0)
+;
+
+Void renameUnique(uml::Property this, Collection[uml::Property] otherProperties, int counter):
+	!this.name.isNullOrEmpty() ? (
+		let postfix = otherProperties.sortBy(e|e.name.getTrailingInt()).last().name.getTrailingInt():
+		(postfix != null) && (postfix > counter) ? (
+			info("Resetting counter to postfix " + postfix) ->
+			this.renameUnique(otherProperties, postfix)
+		) : (
+			Void
+		)
+		->
+
+		info("Old name: " + this.name + ", owning class: " + ((uml::NamedElement) this.owner).name) ->
+		otherProperties.select(e|e.name == this.name).size > 1 ? (
+			this.setName(this.name.replaceFirst("[0-9]*$", (counter).toString()))
+			->
+			this.renameUnique(otherProperties, counter + 1)
+		) : (
+			Void
+		) ->
+		info("New name: " + this.name + ", owning class: " + ((uml::NamedElement) this.owner).name)
+	) : (
+		Void
+	)
+;
+
+String getTrailingNumber(String this):
+	this.replaceAll("^.*?([0-9]*)$", "$1")
+;
+
+int getTrailingInt(String this):
+	let numberString = this.getTrailingNumber():
+	
+	!numberString.isNullOrEmpty() ? (
+		numberString.asInteger()
+	) : (
+		null
+	)
+;

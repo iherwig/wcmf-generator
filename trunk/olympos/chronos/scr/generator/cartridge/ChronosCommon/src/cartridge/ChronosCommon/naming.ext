@@ -34,6 +34,11 @@ String defaultOrderByName() : "sortkey";
  */
  
 /**
+ * Convert a package name into a php package
+ */
+String asPhpPackage(String package) : package.replaceAll("\\.", "\\\\");
+
+/**
  * Get the php class file name for a class
  */
 String asType(String string) :
@@ -43,12 +48,12 @@ String asType(String string) :
 /**
  * Get the php class file name for a class
  */
-String asClassFile(String name): "class."+name+".php";
+String asPhpClassFile(String name): name+".php";
 
 /**
  * Get the php base class file name for a class
  */
-String asBaseClassFile(String name): "class."+name+"Base.php";
+String asBaseClass(String name): name+"Base";
 
 /**
  * Get the php mapper class name for a class
