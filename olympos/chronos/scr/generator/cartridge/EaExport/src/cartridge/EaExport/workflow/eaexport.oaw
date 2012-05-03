@@ -19,6 +19,8 @@
     <EapFile value="${modelEaFile}"/>
     <ModelFile value="${modelUmlFile}"/>
     <PackageName value="${modelPkg}"/>
+    <profile value="${profileUmlFile}"/>
+    <PackageProfile name="${applyPkg}" value="${profilename}"/>
     <Cleanup value="true"/>
     <!--DEBUG value="true"/-->
   </component>
