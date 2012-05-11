@@ -81,7 +81,7 @@ Void addSuperclassController(uml::Model this):
 
 Void addStereotype(uml::Model this):
 	info("Adding stereotype ...") ->
-	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.association == null).addStereotype()
+	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.getAppliedStereotype("Chronos::ChiValueRef") == null && e.association == null).addStereotype()
 ;
 
 Void addStereotypeClass(uml::Model this):

@@ -49,7 +49,7 @@
 	<component class="net.sourceforge.olympos.oaw.workflow.AntRunner">
 		<Param name="srcFile" value="./Model.uml"/>
 		<Param name="destFile" value="${modelUmlFile}"/>
-		<antFile value="${basePath}/cartridge/Wcmf/workflow/build_ea_post.xml"/>
+		<antFile value="${basePath}/cartridge/EaExport/workflow/build_ea_post.xml"/>
 	</component>
 
 </workflow>
