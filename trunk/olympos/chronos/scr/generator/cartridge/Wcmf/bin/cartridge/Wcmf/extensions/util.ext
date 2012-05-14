@@ -80,17 +80,8 @@ String getPKName(ChiManyToMany this) :
 ;
 
 /**
- * Get all attributes
+ * Get all attributes without the inherited ones
  */
 cached List[ChiValue] getChiValues(ChiNode this): 
 	this.attribute.typeSelect(ChiValue).select(v|!v.isGeneratorInherited())
 ;
-
-List[Chronos::ChiValue] getChiAttributes(Chronos::ChiNode this):
-	this.getChiValuesRecursive().select(e|!e.isGeneratorAdded() || e.isGeneratorInherited())
-;
-
-List[Chronos::ChiValue] getOwnChiAttributes(Chronos::ChiNode this):
-	this.getChiAttributes().select(e|!e.isGeneratorAdded())
-;
-
