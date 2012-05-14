@@ -41,6 +41,7 @@ Void doTransformations(uml::Model this):
 	this.addSuperclass() ->
 	this.addSuperclassController() ->
 	this.addStereotype() ->
+	this.addStereotypeClass() ->
 	this.addNavigability() ->
 	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
 		postProcessNodes(ApplicationPackageAbsolute(this))
@@ -86,7 +87,7 @@ Void addStereotype(uml::Model this):
 
 Void addStereotypeClass(uml::Model this):
 	info("Adding stereotype ...") ->
-	this.allOwnedElements().typeSelect(uml::Class).attribute.select(e|e.association == null).addStereotype()
+	this.allOwnedElements().typeSelect(uml::Class).ownedAttribute.select(e|e.getAppliedStereotype("Chronos::ChiValueRef") == null && e.association == null).addStereotype()
 ;
 
 Void addNavigability(uml::Model this):
