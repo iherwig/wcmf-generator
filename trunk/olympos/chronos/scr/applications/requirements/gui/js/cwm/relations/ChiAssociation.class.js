@@ -16,3 +16,13 @@ cwm.relations.ChiAssociation = function(modelNodeClass) {
 }
 
 Ext.extend(cwm.relations.ChiAssociation, uwm.model.EditableRelation);
+
+cwm.relations.ChiAssociation.prototype.initByDisplayResult = function(node) {
+	cwm.relations.ChiAssociation.superclass.initByDisplayResult.call(this, node);
+	this.data.fk_name = node.values[1].fk_name;
+}
+
+cwm.relations.ChiAssociation.prototype.populatePropertyForm = function(form) {
+	var realForm = form.getForm();
+	realForm.findField("fk_name").loadValue(this.data.fk_name);
+}

@@ -16,3 +16,13 @@ cwm.relations.NMChiNodeChiMany2Many = function(modelNodeClass) {
 }
 
 Ext.extend(cwm.relations.NMChiNodeChiMany2Many, uwm.model.EditableRelation);
+
+cwm.relations.NMChiNodeChiMany2Many.prototype.initByDisplayResult = function(node) {
+	cwm.relations.NMChiNodeChiMany2Many.superclass.initByDisplayResult.call(this, node);
+	this.data.fk_name = node.values[1].fk_name;
+}
+
+cwm.relations.NMChiNodeChiMany2Many.prototype.populatePropertyForm = function(form) {
+	var realForm = form.getForm();
+	realForm.findField("fk_name").loadValue(this.data.fk_name);
+}
