@@ -44,6 +44,7 @@ class NMChiNodeChiMany2ManyBase extends Relation
       if ($name == 'id') $displayName = Message::get("id");
       if ($name == 'fk_chinode_id') $displayName = Message::get("fk_chinode_id");
       if ($name == 'fk_chinodemanytomany_id') $displayName = Message::get("fk_chinodemanytomany_id");
+      if ($name == 'fk_name') $displayName = Message::get("fk_name");
       if ($name == 'sourceName') $displayName = Message::get("sourceName");
       if ($name == 'sourceMultiplicity') $displayName = Message::get("sourceMultiplicity");
       if ($name == 'sourceNavigability') $displayName = Message::get("sourceNavigability");
@@ -69,6 +70,7 @@ class NMChiNodeChiMany2ManyBase extends Relation
       if ($name == 'id') $description = Message::get("");
       if ($name == 'fk_chinode_id') $description = Message::get("");
       if ($name == 'fk_chinodemanytomany_id') $description = Message::get("");
+      if ($name == 'fk_name') $description = Message::get("");
       if ($name == 'sourceName') $description = Message::get("");
       if ($name == 'sourceMultiplicity') $description = Message::get("");
       if ($name == 'sourceNavigability') $description = Message::get("");
@@ -127,6 +129,17 @@ class NMChiNodeChiMany2ManyBase extends Relation
     function setFkChinodemanytomanyId($fk_chinodemanytomany_id)
     {
       return $this->setValue('fk_chinodemanytomany_id', $fk_chinodemanytomany_id, DATATYPE_IGNORE);
+    }
+    function getFkName($unconverted=false)
+    {
+      if ($unconverted)
+        return $this->getUnconvertedValue('fk_name', DATATYPE_ATTRIBUTE);
+      else
+        return $this->getValue('fk_name', DATATYPE_ATTRIBUTE);
+    }
+    function setFkName($fk_name)
+    {
+      return $this->setValue('fk_name', $fk_name, DATATYPE_ATTRIBUTE);
     }
     /**
      * Getter/Setter for related objects
