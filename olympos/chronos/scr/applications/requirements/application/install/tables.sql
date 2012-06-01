@@ -1306,6 +1306,7 @@ CREATE TABLE `NMChiNodeChiMany2Many` # entityType=NMChiNodeChiMany2Many tableId=
   `id` INT(11) NOT NULL, # columnId=_o_OM6lVaEeCs-oMhDEevLw 
   `fk_chinode_id` INT(11), # columnId=_o_OM5VVaEeCs-oMhDEevLw referencedTable=ChiNode
   `fk_chinodemanytomany_id` INT(11), # columnId=_o_OM4FVaEeCs-oMhDEevLw referencedTable=ChiNodeManyToMany
+  `fk_name` VARCHAR(255), # columnId= 
   `sourcename` VARCHAR(255), # columnId=_o9lOIFVaEeCs-oMhDEevLw 
   `sourcemultiplicity` VARCHAR(255), # columnId=_o9u_JFVaEeCs-oMhDEevLw 
   `sourcenavigability` VARCHAR(255), # columnId=_o9u_KlVaEeCs-oMhDEevLw 
