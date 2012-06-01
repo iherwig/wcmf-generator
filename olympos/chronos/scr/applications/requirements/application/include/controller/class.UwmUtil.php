@@ -767,7 +767,7 @@ class UwmUtil {
 
 							$currChildArray = array($currChild);
 
-							$valueNames = array('Name', 'relationType', 'sourceName', 'sourceMultiplicity', 'sourceNavigability', 'targetName', 'targetMultiplicity', 'targetNavigability', 'action', 'config', 'context');
+							$valueNames = array('Name', 'relationType', 'sourceName', 'sourceMultiplicity', 'sourceNavigability', 'targetName', 'targetMultiplicity', 'targetNavigability', 'fk_name', 'action', 'config', 'context');
 
 							self::translateNode($currChild);
 

@@ -1168,6 +1168,7 @@
 		<xsd:attribute name="targetName" type="xsd:string"/>
 		<xsd:attribute name="targetMultiplicity" type="xsd:string"/>
 		<xsd:attribute name="targetNavigability" type="xsd:string"/>
+		<xsd:attribute name="fk_name" type="xsd:string"/>
 		<xsd:attribute name="action" type="xsd:string"/>
 		<xsd:attribute name="config" type="xsd:string"/>
 		<xsd:attribute name="context" type="xsd:string"/>
