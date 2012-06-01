@@ -64,7 +64,8 @@ Void establishConnectionsToClass(cwm::ManyToMany ch, uml::Class parentClass, uml
 			
 			let conn = parentClass.createAssociation(parentNav, parentAK, parentName, parentLower, parentUpper, childClass, childNav, childAK, childName, childLower, childUpper):
 				conn.applyStereotype("Chronos::ChiAssociation") ->
-				conn.setName(ch.name)
+				conn.setName(ch.name) ->
+				conn.setTaggedValue("Chronos::ChiAssociation", "fk_name", ch.fkName)
 		) : (
 			Void
 		)
