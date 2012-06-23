@@ -114,6 +114,14 @@ cwm.relations.NMChiNodeChiMany2ManyClass.prototype.getPropertyForm = function(mo
 		    modelNode : modelNode,
 		    readOnly : isLockedByOtherUser
 		}), new uwm.property.TextField( {
+		    fieldLabel : 'created',
+		    toolTip : "the creation date of this object",
+		    name : 'created',
+
+		    modelNode : modelNode,
+
+		    readOnly : true
+		}), new uwm.property.TextField( {
 		    fieldLabel : 'creator',
 		    toolTip : "the user that created this object",
 		    name : 'creator',

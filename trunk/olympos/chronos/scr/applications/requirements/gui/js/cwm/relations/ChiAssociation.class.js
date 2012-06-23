@@ -24,5 +24,17 @@ cwm.relations.ChiAssociation.prototype.initByDisplayResult = function(node) {
 
 cwm.relations.ChiAssociation.prototype.populatePropertyForm = function(form) {
 	var realForm = form.getForm();
+	realForm.findField("sourceName").loadValue(this.data.sourceName);
+	realForm.findField("sourceMultiplicity").loadValue(this.data.sourceMultiplicity);
+	realForm.findField("sourceNavigability").loadValue(this.data.sourceNavigability);
+	realForm.findField("targetName").loadValue(this.data.targetName);
+	realForm.findField("targetMultiplicity").loadValue(this.data.targetMultiplicity);
+	realForm.findField("targetNavigability").loadValue(this.data.targetNavigability);
+	realForm.findField("Name").loadValue(this.data.Name);
+	realForm.findField("Notes").loadValue(this.data.Notes);
 	realForm.findField("fk_name").loadValue(this.data.fk_name);
+	realForm.findField("created").loadValue(this.data.created);
+	realForm.findField("creator").loadValue(this.data.creator);
+	realForm.findField("last_editor").loadValue(this.data.last_editor);
+	realForm.findField("modified").loadValue(this.data.modified);
 }
