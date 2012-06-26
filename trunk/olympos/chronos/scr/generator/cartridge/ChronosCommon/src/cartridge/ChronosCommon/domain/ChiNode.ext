@@ -178,7 +178,7 @@ String getOrderByDirection(ChiNode this) :
  */
 String getOrderByNameForParent(ChiNode this, Property parent) : 
 	let orderByName = this.getOrderByName() :
-		orderByName == defaultOrderByName() ? orderByName+"_"+parent.type.name.toLowerCase() : null
+		orderByName == defaultOrderByName() ? orderByName+"_"+parent.getRoleName().toLowerCase() : null
 ;
 
 /**
