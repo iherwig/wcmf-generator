@@ -26,6 +26,11 @@
 		</component>
 	</if>
 
+	<!-- Import from Enterprise Architect -->
+	<if cond="${doModelEaExport}">
+		<component file="${basePath}/cartridge/EaExport/workflow/eaexport.oaw" inheritAll="true"/>
+	</if>
+
 	<!-- Read the UML model and store it into a slot named 'model' -->
 	<component class="oaw.emf.XmiReader">
 		<modelFile value="${modelUmlFile}"/>
