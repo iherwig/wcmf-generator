@@ -102,12 +102,6 @@ cwm.relations.ChiAssociationClass.prototype.getPropertyForm = function(modelNode
 		    modelNode : modelNode,
 		    disabled : isLockedByOtherUser
 		}), new uwm.property.TextField( {
-		    fieldLabel : 'targetName',
-		    toolTip : "the name of the target end",
-		    name : 'targetName',
-		    modelNode : modelNode,
-		    readOnly : isLockedByOtherUser
-		}), new uwm.property.TextField( {
 		    fieldLabel : 'fk_name',
 		    toolTip : "the name of the foreign key in this relation",
 		    name : 'fk_name',
