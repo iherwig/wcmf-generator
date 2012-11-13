@@ -506,7 +506,7 @@ class UwmUtil {
 					//				if ($childType == 'NMChiControllerActionKeyChiController' || $childType == 'NMChiControllerActionKeyChiView') {
 					//					self::processNode($currChild);
 					//				} else if (self::processManyToMany($currChild, $currNode)) {
-					if (self::processManyToMany($currChild, $currNode, &$processedM2m)) {
+					if (self::processManyToMany($currChild, $currNode, $processedM2m)) {
 						//do nothing
 					} else if ($childType == 'ChiValue' || $childType == 'Operation') {
 						self::processAttribute($currChild);
@@ -723,7 +723,7 @@ class UwmUtil {
 
 		private static $specialChildren = array('ChiNode' => array('NodeSourceEnd'), 'ChiController' => array('SourceEnd', 'SourceActionKeyEnd', 'NMChiControllerActionKeyChiView'), 'ChiNodeManyToMany' => array('NMChiNodeChiMany2ManyChiNodeEnd'));
 
-		private static function processManyToMany($currChild, $parent, $processedM2m = array()) {
+		private static function processManyToMany($currChild, $parent, &$processedM2m = array()) {
 
 			$result = false;
 
