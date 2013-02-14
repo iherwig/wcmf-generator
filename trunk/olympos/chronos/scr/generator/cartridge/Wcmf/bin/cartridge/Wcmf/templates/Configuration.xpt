@@ -39,7 +39,7 @@
   «IF this.plattform == "wcmf"-»
     «IF this.config == curConfig || this.name.toLowerCase() == "actionmapping" || this.name.toLowerCase() == "views"-»
 [«this.name.toLowerCase()»]
-«PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/include/"+curConfig+"/"+this.name+"SectionBegin").asProtectedRegionId()»
+«PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/config/"+curConfig+"/"+this.name+"SectionBegin").asProtectedRegionId()»
 «ENDPROTECT»
     «IF curConfig.isDefaultConfig()-»
       «IF this.name.toLowerCase() == "typemapping"-»
@@ -57,7 +57,7 @@
 «curAttribute.name» = «curAttribute.defaultValue.stringValue()»
       «ENDFOREACH-»
     «ENDIF-»
-«PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/include/"+curConfig+"/"+this.name+"SectionEnd").asProtectedRegionId()»
+«PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/config/"+curConfig+"/"+this.name+"SectionEnd").asProtectedRegionId()»
 «ENDPROTECT»
 
     «ENDIF-»

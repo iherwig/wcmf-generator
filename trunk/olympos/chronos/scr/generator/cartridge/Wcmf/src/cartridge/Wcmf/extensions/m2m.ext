@@ -37,57 +37,35 @@ Void addDefaults(uml::Model this) :
 	this
 ;
 
-Void doTransformations(uml::Model this):
-	this.addSuperclass() ->
-	this.addSuperclassController() ->
-	this.addStereotype() ->
-	this.addStereotypeClass() ->
-	this.addNavigability() ->
-	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
-		postProcessNodes(ApplicationPackageAbsolute(this))
-;
-
-Void addSuperclassStereotypeNavigability(uml::Model this):
-	this.addSuperclass() ->
-	this.addStereotype() ->
-	this.addNavigability()
-;
-
-Void addChiNodeSuperclassStereotypeNavigability(uml::Model this):
-	this.addChiNodeStereotype() ->
-	this.addSuperclassClass() ->
-	this.addStereotypeClass() ->
-	this.addNavigability()
-;
-
 Void addChiNodeStereotype(uml::Model this):
 	info("Adding ChiNode stereotype ...") ->
 	this.allOwnedElements().typeSelect(uml::Class).addChiNodeStereotype()
 ;
 
-Void addSuperclass(uml::Model this):
-	info("Adding superclass ...") ->
-	this.allOwnedElements().typeSelect(ChiNode).select(e|e.superClass.isEmpty).addNodeSuperClass()
+Void addChiValueStereotype(uml::Model this):
+	info("Adding ChiValue stereotype ...") ->
+	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.getAppliedStereotype("Chronos::ChiValueRef") == null && e.getAppliedStereotype("Chronos::ChiValue") == null && e.association == null).addChiValueStereotype()
 ;
 
-Void addSuperclassClass(uml::Model this):
-	info("Adding superclass ...") ->
-	this.allOwnedElements().typeSelect(uml::Class).select(e|e.superClass.isEmpty).addNodeSuperClass()
+/**
+ * Default transformations
+ */
+Void doTransformations(uml::Model this):
+	this.addSuperclassNode() ->
+	this.addSuperclassController() ->
+	this.addNavigability() ->
+	this.allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first().
+		postProcessNodes(ApplicationPackageAbsolute(this))
+;
+
+Void addSuperclassNode(uml::Model this):
+	info("Adding Node superclass ...") ->
+	this.allOwnedElements().typeSelect(ChiNode).select(e|e.superClass.isEmpty).addNodeSuperClass()
 ;
 
 Void addSuperclassController(uml::Model this):
 	info("Adding Controller superclass ...") ->
 	this.allOwnedElements().typeSelect(ChiController).select(e|e.superClass.isEmpty).addControllerSuperClass()
-;
-
-Void addStereotype(uml::Model this):
-	info("Adding stereotype ...") ->
-	this.allOwnedElements().typeSelect(ChiNode).attribute.select(e|e.getAppliedStereotype("Chronos::ChiValueRef") == null && e.association == null).addStereotype()
-;
-
-Void addStereotypeClass(uml::Model this):
-	info("Adding stereotype ...") ->
-	this.allOwnedElements().typeSelect(uml::Class).ownedAttribute.select(e|e.getAppliedStereotype("Chronos::ChiValueRef") == null && e.association == null).addStereotype()
 ;
 
 Void addNavigability(uml::Model this):
@@ -106,7 +84,7 @@ Void addNodeSuperClass(uml::Class this) :
 	let superClass = this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|e.qualifiedName == RequiredNodeSuperClass()).first():
 	superClass != this ? (
 		let generalization = new uml::Generalization:
-		info("Adding SuperClass " + superClass.name + " to: " + this.name) ->
+		info("Adding superclass " + superClass.name + " to: " + this.name) ->
 		
 		generalization.setGeneral(superClass) ->
 		generalization.setSpecific(this)
@@ -118,7 +96,7 @@ Void addControllerSuperClass(uml::Class this) :
 	let superClass = this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|e.qualifiedName == RequiredControllerSuperClass()).first():
 	superClass != this ? (
 		let generalization = new uml::Generalization:
-		info("Adding controller SuperClass " + superClass.name + " to: " + this.name) ->
+		info("Adding superclass " + superClass.name + " to: " + this.name) ->
 		
 		generalization.setGeneral(superClass) ->
 		generalization.setSpecific(this)
@@ -131,7 +109,7 @@ Void addChiNodeStereotype(uml::Class this):
 	this.applyStereotype("Chronos::ChiNode")
 ;
 
-Void addStereotype(uml::Property this):
+Void addChiValueStereotype(uml::Property this):
 	info("Adding Stereotype ChiValue to " + this.getOwningClass().name + "." + this.name) ->
 	this.applyStereotype("Chronos::ChiValue")
 ;

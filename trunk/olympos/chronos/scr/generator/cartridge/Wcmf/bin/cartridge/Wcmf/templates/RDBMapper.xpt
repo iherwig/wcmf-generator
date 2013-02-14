@@ -194,7 +194,7 @@ array(«FOREACH this.getPKValues() AS curPk SEPARATOR ', '»'«curPk.name»'«ENDFORE
 «REM» one-to-many ---------------------------------------------------«ENDREM»
 «DEFINE oneToManyRelation(uml::Property child) FOR ChiNode-»
 new RDBOneToManyRelationDescription('«this.name»', '«child.getOtherEnd().getRoleName()»', '«child.type.name»', '«child.getRoleName()»', «REM»NOBR«ENDREM-»
-'«child.getOtherEnd().getLower()»', '«IF child.getOtherEnd().getUpper() == -1»unbounded«ELSE»«child.getOtherEnd().getUpper()»«ENDIF-»', «REM»NOBR«ENDREM-»
+'«child.getOtherEnd().getLower()»', '1', «REM»NOBR«ENDREM-»
 '«child.getLower()»', '«IF child.getUpper() == -1»unbounded«ELSE»«child.getUpper()»«ENDIF-»', «REM»NOBR«ENDREM-»
 '«child.getOtherEnd().aggregation»', '«child.aggregation»', '«child.getOtherEnd().isNavigable()»', '«child.isNavigable()»', 'child', «REM»NOBR«ENDREM-»
 '«this.getPKValues().first().name»', '«child.getOtherEnd().getFKName()»')«REM»NOBR«ENDREM-»
@@ -204,7 +204,7 @@ new RDBOneToManyRelationDescription('«this.name»', '«child.getOtherEnd().getRole
 «DEFINE manyToOneRelation(uml::Property parent) FOR ChiNode-»
 new RDBManyToOneRelationDescription('«this.name»', '«parent.getOtherEnd().getRoleName()»', '«parent.type.name»', '«parent.getRoleName()»', «REM»NOBR«ENDREM-»
 '«parent.getOtherEnd().getLower()»', '«IF parent.getOtherEnd().getUpper() == -1»unbounded«ELSE»«parent.getOtherEnd().getUpper()»«ENDIF-»', «REM»NOBR«ENDREM-»
-'«parent.getLower()»', '«IF parent.getUpper() == -1»unbounded«ELSE»«parent.getUpper()»«ENDIF-»', «REM»NOBR«ENDREM-»
+'«parent.getLower()»', '1', «REM»NOBR«ENDREM-»
 '«parent.getOtherEnd().aggregation»', '«parent.aggregation»', '«parent.getOtherEnd().isNavigable()»', '«parent.isNavigable()»', 'parent', «REM»NOBR«ENDREM-»
 '«parent.type.getPKValues().first().name»', '«parent.getFKName()»')«REM»NOBR«ENDREM-»
 «ENDDEFINE»
