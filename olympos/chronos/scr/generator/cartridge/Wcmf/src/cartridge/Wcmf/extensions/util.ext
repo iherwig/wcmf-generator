@@ -82,6 +82,6 @@ String getPKName(ChiManyToMany this) :
 /**
  * Get all attributes without the inherited ones
  */
-cached List[hiValue] getChiValues(ChiNode this): 
+cached List[ChiValue] getChiValues(ChiNode this): 
 	this.attribute.typeSelect(ChiValue).select(v|!v.isGeneratorInherited())
 ;
