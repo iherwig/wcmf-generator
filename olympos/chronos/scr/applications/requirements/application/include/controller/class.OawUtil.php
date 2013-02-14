@@ -103,6 +103,8 @@ class OawUtil {
 		);
 	
 		$cmd = 'java -Xmx1G -Djava.library.path=./lib/ -jar ' . self::$executable . " $relativeWorkflowPath -basePath=. \"-propertyFile=$propertyFilePath\"";
+		Log::debug("running generator: ".$cmd, __CLASS__);
+		Log::debug("working directory: ".self::$cwd, __CLASS__);
 
 		$process = proc_open($cmd, $descriptorspec, $pipes, self::$cwd, $_ENV, array('bypass_shell' => true));
 	
@@ -125,6 +127,7 @@ class OawUtil {
 			// proc_close in order to avoid a deadlock
 			$returnCode = proc_close($process);
 			$result['returncode'] = $returnCode;
+			Log::debug("oAW returned: ".$result['returncode'], __CLASS__);
 
 			if ($returnCode > 0) {
 				Log::error("oAW run\nstdout: ".$result['stdout'], __CLASS__);
@@ -137,6 +140,9 @@ class OawUtil {
 			else {
 				Log::info("oAW run\nstdout: ".$result['stdout'], __CLASS__);
 			}
+		}
+		else {
+			Log::error("proc_open failed", __CLASS__);
 		}
 		
 		return $result;
