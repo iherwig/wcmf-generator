@@ -22,7 +22,61 @@ extension org::openarchitectureware::uml2::profile::profiling;
 
 extension cartridge::UmlConnector::chronosId;
 
-// Function convert is not needed since ChiValueRef is always the second stereotype of an already existing ChiValue
+uml::Property convert(cwm::ChiValueRef o):
+	let uc = new uml::Property : {
+		uc.setName("ChiValueRef:" + o.id)
+	} ->
+	uc
+;
+
+Void transferValues(cwm::ChiValueRef c, uml::Model um):
+	let uc = um.allOwnedElements().typeSelect(uml::Property).select(e|e.name == "ChiValueRef:" + c.id).first(): (
+		let comment = new uml::Comment : (
+			uc.applyStereotype("Chronos::ChiValueRef") ->
+			
+			uc.setTaggedValue("Chronos::ChiValueRef", "reference_type", c.referenceType) ->
+			uc.setTaggedValue("Chronos::ChiValueRef", "reference_value", c.referenceValue) ->
+			//uc.setTaggedValue("Chronos::ChiValueRef", "Alias", c.alias) ->
+			//uc.setTaggedValue("Chronos::ChiValueRef", "Version", c.version) ->
+
+			uc.setName(c.name) ->
+			c.notes != null ? (
+				comment.setBody(c.notes) ->
+				comment.annotatedElement.add(uc) ->
+				uc.ownedComment.add(comment)
+			) : Void //->
+			//uc.setTaggedValue("Chronos::ChiValueRef", "created", c.created) ->
+			//uc.setTaggedValue("Chronos::ChiValueRef", "creator", c.creator) ->
+			//uc.setTaggedValue("Chronos::ChiValueRef", "last_editor", c.lastEditor) ->
+			//uc.setTaggedValue("Chronos::ChiValueRef", "modified", c.modified)
+		)
+	)
+;
+
+// UML -> CWM
+cwm::ChiValue convertToCwm(Chronos::ChiValueRef c) :
+	//(new cwm::ChiValueRef).set
+	let un = new cwm::ChiValueRef : (
+		info("Converting ChiValueRef " + c.name) ->
+		un.setId(c.getId()) ->
+		
+		un.setReferenceType((String) c.getTaggedValue("Chronos::ChiValueRef", "reference_type")) ->
+		un.setReferenceValue((String) c.getTaggedValue("Chronos::ChiValueRef", "reference_value")) ->
+		//un.setAlias(c.getTaggedValue("Chronos::ChiValueRef", "Alias").toString()) ->
+		//un.setVersion(c.getTaggedValue("Chronos::ChiValueRef", "Version").toString()) ->
+		un.setName(c.name) ->
+		un.setNotes(c.getComment()) // ->
+		//un.setCreated(c.getTaggedValue("Chronos::ChiValueRef", "created").toString()) ->
+		//un.setCreator(c.getTaggedValue("Chronos::ChiValueRef", "creator").toString()) ->
+		//un.setLastEditor(c.getTaggedValue("Chronos::ChiValueRef", "last_editor").toString()) ->
+		//un.setModified(c.getTaggedValue("Chronos::ChiValueRef", "modified").toString())
+	) ->
+	un
+;
+
+
+
+// TODO: cleanup experiments
 
 Void establishConnections(cwm::ChiValueRef this, uml::Model um):
 	// since the ChiValueRef is always the second stereotype of an existing ChiValue, the id begins with ChiValue:
@@ -46,9 +100,6 @@ Void establishConnections(cwm::ChiValueRef this, uml::Model um):
 		
 	)
 ;
-
-
-// TODO: cleanup experiments
 
 /*
 Void t(Chronos::ChiValueRef v):
