@@ -749,6 +749,7 @@
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiValue" type="ChiValue"/>
+			<xsd:element maxOccurs="unbounded" minOccurs="0" name="ChiValueRef" type="ChiValueRef"/>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Operation" type="Operation"/>
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
@@ -820,7 +821,7 @@
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>
-		<xsd:attribute name="fk_chivalue_id" type="xsd:string"/>
+		<xsd:attribute name="fk_chinode_id" type="xsd:string"/>
 		<xsd:attribute name="Status" type="xsd:string"/>
 		<xsd:attribute name="Alias" type="xsd:string"/>
 		<xsd:attribute name="Author" type="xsd:string"/>
@@ -837,7 +838,6 @@
 	<xsd:complexType name="ChiValue">
 		<xsd:sequence>
 			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Parent" type="Parent"/>
-			<xsd:element maxOccurs="unbounded" minOccurs="0" name="Child" type="Child"/>
 		</xsd:sequence>
 		<xsd:attribute name="id" type="xsd:string"/>
 		<xsd:attribute name="sortkey" type="xsd:int"/>

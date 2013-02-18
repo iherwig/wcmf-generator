@@ -508,7 +508,7 @@ class UwmUtil {
 					//				} else if (self::processManyToMany($currChild, $currNode)) {
 					if (self::processManyToMany($currChild, $currNode, $processedM2m)) {
 						//do nothing
-					} else if ($childType == 'ChiValue' || $childType == 'Operation') {
+					} else if ($childType == 'ChiValue' || $childType == 'ChiValueRef' || $childType == 'Operation') {
 						self::processAttribute($currChild);
 					} else {
 						self::processChild($currChild);
