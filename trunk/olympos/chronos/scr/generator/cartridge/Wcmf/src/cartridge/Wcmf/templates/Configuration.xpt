@@ -67,7 +67,7 @@
 «REM» typeMapping -----------------------------------------------«ENDREM»
 «DEFINE typeMapping(String curConfig) FOR uml::Class»«ENDDEFINE»
 «DEFINE typeMapping(String curConfig) FOR ChiNode-»
-  «IF !this.isLibraryClass() && !this.isAbstract-»
+  «IF this.isApplicationClass() && !this.isAbstract-»
 «this.name» = $«this.name.asMapper()»
   «ENDIF-»
 «ENDDEFINE»
@@ -75,7 +75,7 @@
 «REM» mapper -----------------------------------------------------«ENDREM»
 «DEFINE mapper(String curConfig) FOR uml::Class»«ENDDEFINE»
 «DEFINE mapper(String curConfig) FOR ChiNode-»
-  «IF !this.isLibraryClass() && !this.isAbstract-»
+  «IF this.isApplicationClass() && !this.isAbstract-»
 [«this.name.asMapper().toLowerCase()»]
 __class = «this.getFullPackageName().asPhpPackage()»\«this.name.asMapper()»
 connectionParams = $«this.getInitparams()»

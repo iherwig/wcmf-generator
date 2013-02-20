@@ -36,7 +36,7 @@
 
 «REM» table ------------------------------------------------------«ENDREM»
 «DEFINE table FOR ChiNode-»
-  «IF !this.isLibraryClass() && !this.isAbstract-»
+  «IF this.isApplicationClass() && !this.isAbstract-»
 #
 # Structure of Table `«this.getTableName()»`
 # «this.getComment("\n# ")»
