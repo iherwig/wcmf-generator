@@ -21,7 +21,7 @@
 «REM» mapper/node ------------------------------------------------«ENDREM»
 «DEFINE node FOR ChiManyToMany»«ENDDEFINE»
 «DEFINE node FOR ChiNode»
-  «IF !this.isLibraryClass()»
+  «IF this.isApplicationClass()»
     «info('Expand ChiNode '+this.name)»
     «IF !this.isAbstract»
       «EXPAND cartridge::Wcmf::templates::RDBMapper::file FOR this»
@@ -33,7 +33,7 @@
 
 «REM» mapper/node ------------------------------------------------«ENDREM»
 «DEFINE manyToMany FOR ChiManyToMany»
-  «IF !this.isLibraryClass()»
+  «IF this.isApplicationClass()»
     «info('Expand ChiManyToMany '+this.name)»
     «IF !this.isAbstract»
       «EXPAND cartridge::Wcmf::templates::RDBMapper::file FOR this»
@@ -45,7 +45,7 @@
 
 «REM» class ------------------------------------------------------«ENDREM»
 «DEFINE class FOR uml::Class»
-  «IF !this.isLibraryClass() && this.isApplicationClass()»
+  «IF this.isApplicationClass() && this.isApplicationClass()»
     «info('Expand Class '+this.name)»
     «EXPAND cartridge::Wcmf::templates::Class::file FOR this»
   «ENDIF»
@@ -53,7 +53,7 @@
 
 «REM» controller -------------------------------------------------«ENDREM»
 «DEFINE controller FOR ChiController»
-  «IF !this.isLibraryClass()»
+  «IF this.isApplicationClass()»
     «info('Expand ChiController '+this.name)»
     «EXPAND cartridge::Wcmf::templates::Controller::file FOR this»
   «ENDIF»
@@ -61,7 +61,7 @@
 
 «REM» views ------------------------------------------------------«ENDREM»
 «DEFINE view FOR ChiView»
-  «IF !this.isLibraryClass()»
+  «IF this.isApplicationClass()»
     «info('Expand ChiView '+this.name)»
     «EXPAND cartridge::Wcmf::templates::View::file FOR this»
   «ENDIF»
