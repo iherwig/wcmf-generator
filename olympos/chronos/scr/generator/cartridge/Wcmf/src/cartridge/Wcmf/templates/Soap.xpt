@@ -184,7 +184,7 @@ function onError($message, $file='', $line='')
 
 «REM» wsdl -------------------------------------------------------«ENDREM»
 «DEFINE wsdl FOR ChiNode-»
-  «IF !this.isLibraryClass()-»
+  «IF this.isApplicationClass()-»
 
 /**
  * WSDL definition for «this.name.asType()»
@@ -237,7 +237,7 @@ $server->register('delete«this.name.asType()»',
 
 «REM» methodImpl -------------------------------------------------«ENDREM»
 «DEFINE methodImpl FOR ChiNode-»
-  «IF !this.isLibraryClass() && !this.is_soap.isNullOrFalse()-»
+  «IF this.isApplicationClass() && !this.is_soap.isNullOrFalse()-»
 
 /**  
  * SOAP Method get«this.name.asType()»List 

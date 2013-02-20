@@ -9,7 +9,6 @@
   «info('Expand Model')»
   «EXPAND cartridge::Wcmf::templates::DataDefinition::file»
   «EXPAND cartridge::Wcmf::templates::Soap::file»
-  «EXPAND cartridge::Wcmf::templates::Development::file»
   «EXPAND cartridge::Wcmf::templates::Configuration::file»
   «EXPAND node FOREACH this.allOwnedElements().typeSelect(ChiNode)»
   «EXPAND manyToMany FOREACH this.allOwnedElements().typeSelect(ChiManyToMany)»
