@@ -92,7 +92,7 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
   «FOREACH this.getParentNodesRecursive() AS curParent-»
     if ($roleName == '«curParent.getRoleName()»') {
       return array('sortFieldName' => '«this.getOrderByNameForParent(curParent)»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
-  }
+    }
   «ENDFOREACH-»
     return array('sortFieldName' => '«this.getOrderByName()»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
 «ELSEIF getOrderByName() != null-»
