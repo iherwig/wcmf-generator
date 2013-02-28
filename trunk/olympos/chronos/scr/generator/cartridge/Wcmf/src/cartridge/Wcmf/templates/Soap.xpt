@@ -123,18 +123,18 @@ $server->service($HTTP_RAW_POST_DATA);
 function doSoapCall()
 {
   // initialize the application
-  $application = Application::getInstance();
+  $application = new Application;
   $application->setErrorHandler();
-  $callParams = $application->initialize('include/', 'config.ini', 'ExitController', '', $_GET['action'], MSG_FORMAT_SOAP);
+  $callParams = $application->initialize('config/', 'config.ini', 'ExitController', '', $_GET['action'], MSG_FORMAT_SOAP);
 
   // process the requested action
   $request = new Request(
-    $callParams['controller'], 
-    $callParams['context'], 
-    $callParams['action'], 
+    $callParams['controller'],
+    $callParams['context'],
+    $callParams['action'],
     $callParams['data']
   );
-  
+
   // login with the data given in the request
   $session = &SessionData::getInstance();
   $objectFactory = &ObjectFactory::getInstance();
@@ -143,37 +143,38 @@ function doSoapCall()
   {
     // login succeeded, store the user in the session
     $session->set('auth_user', $authUser);
-  
+
     $request->setFormat(MSG_FORMAT_SOAP);
     $request->setResponseFormat(MSG_FORMAT_SOAP);
-    $response = ActionMapper::processAction($request);
+    $response = ObjectFactory::getInstance('actionMapper')->processAction($request);
     $error = $response->getValue('errorMessage');
     if (strlen($error) > 0) {
-      throw new ApplicationException($request, $response, 
+      throw new ApplicationException($request, $response,
         ApplicationError::get('GENERAL_ERROR', array('message' => $error)));
     }
   }
   else {
-    throw new ApplicationException($request, null, 
+    throw new ApplicationException($request, null,
       ApplicationError::get('AUTHENTICATION_FAILED'));
   }
   // cleanup
   $lockManager = LockManager::getInstance();
   $lockManager->releaseAllLocks();
   $session->destroy();
-      
+
   return $response;
 }
 
 /**
- * Global error handling function.
+ * Global error handling function. Assigned to EXCEPTION_HANDLER
+ * which means it is called by WCMFException::trow()
  * @param message The error message
  * @param file The php file in which the error occured (optional)
  * @param line The line in the php file in which the error occured (optional)
  * @return The value
  */
-function onError($message, $file='', $line='') 
-{ 
+function onError($message, $file='', $line='')
+{
   global $server;
   $server->fault('SOAP-ENV:SERVER', $message, '', Log::getStackTrace());
   Log::error($message." (".$file.", ".$line.").\n".Log::getStackTrace());

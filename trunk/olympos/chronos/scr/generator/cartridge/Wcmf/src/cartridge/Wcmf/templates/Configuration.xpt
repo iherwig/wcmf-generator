@@ -38,7 +38,7 @@
 «DEFINE sections(String curConfig) FOR ChiSystem-»
   «IF this.plattform == "wcmf"-»
     «IF this.config == curConfig || this.name.toLowerCase() == "actionmapping" || this.name.toLowerCase() == "views"-»
-[«this.name.toLowerCase()»]
+[«this.name»]
 «PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/config/"+curConfig+"/"+this.name+"SectionBegin").asProtectedRegionId()»
 «ENDPROTECT»
     «IF curConfig.isDefaultConfig()-»
@@ -76,7 +76,7 @@
 «DEFINE mapper(String curConfig) FOR uml::Class»«ENDDEFINE»
 «DEFINE mapper(String curConfig) FOR ChiNode-»
   «IF this.isApplicationClass() && !this.isAbstract-»
-[«this.name.asMapper().toLowerCase()»]
+[«this.name.asMapper()»]
 __class = «this.getFullPackageName().asPhpPackage()»\«this.name.asMapper()»
 connectionParams = $«this.getInitparams()»
 
