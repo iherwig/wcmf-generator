@@ -1738,7 +1738,7 @@
 
 «DEFINE printChiBusinessUseCase FOR ChiBusinessUseCase»
 «incrementCounter(COUNTER_USE_CASE()) -> null-»
-«info('Expand usecase'+ this.name)-»
+«info('Expand usecase '+ this.name)-»
 <Task>
             <UID>«getCounter(COUNTER_USE_CASE())»</UID>
             <ID>«getCounter(COUNTER_USE_CASE())»</ID>
@@ -1803,13 +1803,20 @@
             <BCWS>0</BCWS>
             <BCWP>0</BCWP>
             <EarnedValueMethod>0</EarnedValueMethod>
+            <PredecessorLink>
+				<PredecessorUID>«getValueMinusOne(COUNTER_USE_CASE())»</PredecessorUID>
+				<Type>1</Type>
+				<CrossProject>0</CrossProject>
+				<LinkLag>0</LinkLag>
+				<LagFormat>7</LagFormat>
+			</PredecessorLink>
             <ActualWorkProtected>PT0H0M0S</ActualWorkProtected>
             <ActualOvertimeWorkProtected>PT0H0M0S</ActualOvertimeWorkProtected>
         </Task>
 «ENDDEFINE»
 
 «DEFINE printChiFeature FOR ChiFeature»
-«info('Expand Feature'+ this.name)-»
+«info('Expand Feature '+ this.name + 'ID: ' + getCounter(COUNTER_USE_CASE()) )-»
 «incrementCounter(COUNTER_USE_CASE()) -> null-»
 <Task>
             <UID>«getCounter(COUNTER_USE_CASE())»</UID>
@@ -1875,13 +1882,20 @@
             <BCWS>0</BCWS>
             <BCWP>0</BCWP>
             <EarnedValueMethod>0</EarnedValueMethod>
+               <PredecessorLink>
+				<PredecessorUID>«getValueMinusOne(COUNTER_USE_CASE())»</PredecessorUID>
+				<Type>1</Type>
+				<CrossProject>0</CrossProject>
+				<LinkLag>0</LinkLag>
+				<LagFormat>7</LagFormat>
+			</PredecessorLink>
             <ActualWorkProtected>PT0H0M0S</ActualWorkProtected>
             <ActualOvertimeWorkProtected>PT0H0M0S</ActualOvertimeWorkProtected>
         </Task>
 «ENDDEFINE»
 
 «DEFINE printActor FOR uml::Actor»
-«info('Expand Feature'+ this.name)-»
+«info('Expand Feature '+ this.name)-»
 «incrementCounter(COUNTER_USE_CASE()) -> null-»
 <Task>
             <UID>«getCounter(COUNTER_USE_CASE())»</UID>
@@ -1947,6 +1961,13 @@
             <BCWS>0</BCWS>
             <BCWP>0</BCWP>
             <EarnedValueMethod>0</EarnedValueMethod>
+             <PredecessorLink>
+				<PredecessorUID>«getValueMinusOne(COUNTER_USE_CASE())»</PredecessorUID>
+				<Type>1</Type>
+				<CrossProject>0</CrossProject>
+				<LinkLag>0</LinkLag>
+				<LagFormat>7</LagFormat>
+			</PredecessorLink>
             <ActualWorkProtected>PT0H0M0S</ActualWorkProtected>
             <ActualOvertimeWorkProtected>PT0H0M0S</ActualOvertimeWorkProtected>
         </Task>
@@ -2091,6 +2112,13 @@
             <BCWS>0</BCWS>
             <BCWP>0</BCWP>
             <EarnedValueMethod>0</EarnedValueMethod>
+             <PredecessorLink>
+				<PredecessorUID>«getValueMinusOne(COUNTER_USE_CASE())»</PredecessorUID>
+				<Type>1</Type>
+				<CrossProject>0</CrossProject>
+				<LinkLag>0</LinkLag>
+				<LagFormat>7</LagFormat>
+			</PredecessorLink>
             <ActualWorkProtected>PT0H0M0S</ActualWorkProtected>
             <ActualOvertimeWorkProtected>PT0H0M0S</ActualOvertimeWorkProtected>
         </Task>
@@ -2241,7 +2269,7 @@
 «ENDDEFINE»
 
 «DEFINE printActor FOR Chronos::ChiBusinessPartnerActive»
-«info('Expand Bussspartn activ '+ this.name)-»
+«info('Expand Buss partn activ '+ this.name)-»
 «incrementCounter(COUNTER_USE_CASE()) -> null-»
 <Task>
             <UID>«getCounter(COUNTER_USE_CASE())»</UID>
@@ -2385,6 +2413,6 @@
 «ENDDEFINE»
 
 «DEFINE debugRequirements FOR ChiRequirement»
-«info('requirement' + this.name)»
+«info('requirement ' + this.name)»
 «ENDDEFINE»
 «ENDDEFINE»

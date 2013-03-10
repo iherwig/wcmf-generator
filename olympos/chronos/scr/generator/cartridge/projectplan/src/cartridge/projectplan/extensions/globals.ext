@@ -20,3 +20,5 @@ String ENVIRONMENTAL_TYPE(): GLOBALVAR environmentalType;
 String COUNTER_USE_CASE(): "counter-useCase";
 String projectStartDate(): GLOBALVAR projectStartDate;
 String projectFinishDate(): GLOBALVAR projectFinishDate;
+int ACTION_COUNT_SIMPLE(): GLOBALVAR actionCountSimple;
+int ACTION_COUNT_AVERAGE(): GLOBALVAR actionCountAverage;
