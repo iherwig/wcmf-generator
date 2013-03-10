@@ -26,4 +26,17 @@ public class Counter {
 
 		return result;
 	}
+	
+	public static int getValueMinusOne(String counterId)
+	{
+	int result = 0;
+
+	if (counters.containsKey(counterId)) {
+		result = counters.get(counterId)-1;
+	} else {
+		counters.put(counterId, 0);
+	}
+
+	return result;
+}
 }

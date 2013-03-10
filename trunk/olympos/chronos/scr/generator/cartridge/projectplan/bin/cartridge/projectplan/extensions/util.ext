@@ -22,3 +22,29 @@ List[Chronos::ChiRequirement] getTechnicals(uml::Model this):
 List[Chronos::ChiRequirement] getEnvironmentals(uml::Model this):
 	this.allOwnedElements().typeSelect(Chronos::ChiRequirement).select(e|e.Type == ENVIRONMENTAL_TYPE())
 ;
+
+String getComplexity(uml::UseCase this):
+	let value = this.getComplexityValue():
+	
+	value == 5 ?
+		"simple"
+	: (
+		value == 10 ?
+			"average"
+		:
+			"complex"
+	)
+;
+
+int getComplexityValue(uml::UseCase this):
+	let count = this.allOwnedElements().typeSelect(uml::Action).size:
+	
+	count <= ACTION_COUNT_SIMPLE() ?
+		5
+	: (
+		count <= ACTION_COUNT_AVERAGE() ?
+			10
+		:
+			15
+	)
+;
