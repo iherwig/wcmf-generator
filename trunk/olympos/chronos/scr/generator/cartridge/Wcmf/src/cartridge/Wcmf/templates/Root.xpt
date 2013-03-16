@@ -14,6 +14,10 @@
   «EXPAND manyToMany FOREACH this.allOwnedElements().typeSelect(ChiManyToMany)»
   «EXPAND controller FOREACH this.allOwnedElements().typeSelect(ChiController)»
   «EXPAND view FOREACH this.allOwnedElements().typeSelect(ChiView)»
+
+  «EXPAND cartridge::Wcmf::templates::client::TypeList::file»
+  «EXPAND client FOREACH this.allOwnedElements().typeSelect(ChiNode)»
+  
   «REM»«EXPAND class FOREACH this.allOwnedElements().typeSelect(uml::Class)»«ENDREM»
 «ENDDEFINE»
 
@@ -44,7 +48,7 @@
 
 «REM» class ------------------------------------------------------«ENDREM»
 «DEFINE class FOR uml::Class»
-  «IF this.isApplicationClass() && this.isApplicationClass()»
+  «IF this.isApplicationClass()»
     «info('Expand Class '+this.name)»
     «EXPAND cartridge::Wcmf::templates::Class::file FOR this»
   «ENDIF»
@@ -64,4 +68,17 @@
     «info('Expand ChiView '+this.name)»
     «EXPAND cartridge::Wcmf::templates::View::file FOR this»
   «ENDIF»
+«ENDDEFINE»
+
+«REM» client -----------------------------------------------------«ENDREM»
+«DEFINE client FOR ChiNode»
+  «IF this.isApplicationClass()»
+    «info('Expand ChiNode (JS) '+this.name)»
+    «IF !this.isAbstract»
+      «EXPAND cartridge::Wcmf::templates::client::Class::file FOR this»
+    «ENDIF»
+  «ENDIF»
+«ENDDEFINE»
+
+«DEFINE client FOR ChiManyToMany»
 «ENDDEFINE»
