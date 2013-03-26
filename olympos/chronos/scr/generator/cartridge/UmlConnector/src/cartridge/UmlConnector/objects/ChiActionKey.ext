@@ -11,7 +11,7 @@ establishActionKey(cwm::ManyToMany this, uml::Class parentClass, uml::Model um, 
 	let childClass = um.allOwnedElements().typeSelect(uml::Class).select(e|e.name == this.targetType + ":" + this.targetOid).first(): (
 		childClass != null
 		? (
-			let conn = parentClass.createAssociation(forwardRelation, uml::AggregationKind::none, "", 1, 1, childClass, !forwardRelation, uml::AggregationKind::none, "", 1, 1):
+			let conn = childClass.createAssociation(forwardRelation, uml::AggregationKind::none, "", 1, 1, parentClass, !forwardRelation, uml::AggregationKind::none, "", 1, 1):
 				conn.applyStereotype("Chronos::ChiActionKey") ->
 				conn.setTaggedValue("Chronos::ChiActionKey", "action", this.action) ->
 				conn.setTaggedValue("Chronos::ChiActionKey", "config", this.config) ->
