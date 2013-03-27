@@ -32,16 +32,16 @@
 
 define([
 «FOREACH nodes AS type SEPARATOR ","-»
-    "../«type.name»Class"
+    "../types/«type.getFullPackageName().asPath()»/«type.name»Class"
 «ENDFOREACH-»
 ], function(
 «FOREACH nodes AS type SEPARATOR ","-»
-    «type.name»
+    «type.getFullPackageName().asPackageName().replaceAll("\\.", "_")»_«type.name»
 «ENDFOREACH-»
 ) {
     return [
 «FOREACH nodes AS type SEPARATOR ","-»
-        «type.name»
+        new «type.getFullPackageName().asPackageName().replaceAll("\\.", "_")»_«type.name»()
 «ENDFOREACH»
     ];
 });

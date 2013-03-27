@@ -51,7 +51,7 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
    * @see RDBMapper::getType()
    */
   public function getType() {
-    return '«this.name»';
+    return '«this.getFullPackageName().asPhpPackage()»\«this.name»';
   }
 
   /**
