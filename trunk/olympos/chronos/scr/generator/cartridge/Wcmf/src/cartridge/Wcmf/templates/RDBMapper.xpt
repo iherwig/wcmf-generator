@@ -175,8 +175,8 @@ array(«FOREACH this.getPKValues() AS curPk SEPARATOR ', '»'«curPk.name»'«ENDFORE
       «IF curChild.type.metaType.toString().contains("ChiManyToMany") && curChild.type.getOtherEnd(this, false).size == 1-»
         «LET curChild.type.getOtherEnd(this, false).first() AS otherNmEnd-»
       '«otherNmEnd.getRoleName()»' => new RDBManyToManyRelationDescription(
-        /* this -> nm  */ «EXPAND oneToManyRelation(curChild)»,
-        /* nm -> other */ «EXPAND manyToOneRelation(otherNmEnd) FOR curChild.type»
+      /* this -> nm  */ «EXPAND oneToManyRelation(curChild)»,
+      /* nm -> other */ «EXPAND manyToOneRelation(otherNmEnd) FOR curChild.type»
       ),
         «ENDLET-»
       «ELSE-»
@@ -193,20 +193,22 @@ array(«FOREACH this.getPKValues() AS curPk SEPARATOR ', '»'«curPk.name»'«ENDFORE
 
 «REM» one-to-many ---------------------------------------------------«ENDREM»
 «DEFINE oneToManyRelation(uml::Property child) FOR ChiNode-»
-new RDBOneToManyRelationDescription('«this.name»', '«child.getOtherEnd().getRoleName()»', '«child.type.name»', '«child.getRoleName()»', «REM»NOBR«ENDREM-»
-'«child.getOtherEnd().getLower()»', '1', «REM»NOBR«ENDREM-»
-'«child.getLower()»', '«IF child.getUpper() == -1»unbounded«ELSE»«child.getUpper()»«ENDIF-»', «REM»NOBR«ENDREM-»
+new RDBOneToManyRelationDescription(
+        '«this.getFullPackageName().asPhpPackage()»\«this.name»', '«child.getOtherEnd().getRoleName()»', '«this.getFullPackageName().asPhpPackage()»\«child.type.name»', '«child.getRoleName()»',
+        '«child.getOtherEnd().getLower()»', '1', '«child.getLower()»', '«IF child.getUpper() == -1»unbounded«ELSE»«child.getUpper()»«ENDIF-»', «REM»NOBR«ENDREM-»
 '«child.getOtherEnd().aggregation»', '«child.aggregation»', '«child.getOtherEnd().isNavigable()»', '«child.isNavigable()»', 'child', «REM»NOBR«ENDREM-»
-'«this.getPKValues().first().name»', '«child.getOtherEnd().getFKName()»')«REM»NOBR«ENDREM-»
+'«this.getPKValues().first().name»', '«child.getOtherEnd().getFKName()»'
+      )«REM»NOBR«ENDREM-»
 «ENDDEFINE»
 
 «REM» many-to-one ---------------------------------------------------«ENDREM»
 «DEFINE manyToOneRelation(uml::Property parent) FOR ChiNode-»
-new RDBManyToOneRelationDescription('«this.name»', '«parent.getOtherEnd().getRoleName()»', '«parent.type.name»', '«parent.getRoleName()»', «REM»NOBR«ENDREM-»
-'«parent.getOtherEnd().getLower()»', '«IF parent.getOtherEnd().getUpper() == -1»unbounded«ELSE»«parent.getOtherEnd().getUpper()»«ENDIF-»', «REM»NOBR«ENDREM-»
-'«parent.getLower()»', '1', «REM»NOBR«ENDREM-»
+new RDBManyToOneRelationDescription(
+        '«this.getFullPackageName().asPhpPackage()»\«this.name»', '«parent.getOtherEnd().getRoleName()»', '«this.getFullPackageName().asPhpPackage()»\«parent.type.name»', '«parent.getRoleName()»',
+        '«parent.getOtherEnd().getLower()»', '«IF parent.getOtherEnd().getUpper() == -1»unbounded«ELSE»«parent.getOtherEnd().getUpper()»«ENDIF-»', '«parent.getLower()»', '1', «REM»NOBR«ENDREM-»
 '«parent.getOtherEnd().aggregation»', '«parent.aggregation»', '«parent.getOtherEnd().isNavigable()»', '«parent.isNavigable()»', 'parent', «REM»NOBR«ENDREM-»
-'«parent.type.getPKValues().first().name»', '«parent.getFKName()»')«REM»NOBR«ENDREM-»
+'«parent.type.getPKValues().first().name»', '«parent.getFKName()»'
+      )«REM»NOBR«ENDREM-»
 «ENDDEFINE»
 
 «REM» attributes ---------------------------------------------------«ENDREM»
