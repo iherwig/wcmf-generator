@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Defines if this cartridge is part of the basic ChiGen-->
+<cartridgeinfo system="false">
+<!-- the name of the cartridge, will appear in the web front end -->
+	<name>Eclipse Process Framework</name>
+<!-- a verbose description of the cartridge-->
+	<description>
+		this cartridge generates a EPF plugin using usecases, actors and objects.
+	</description>
+<!-- additional cartridges required by this-->	
+	<dependencies>
+		<dependency>ChronosCommon</dependency>
+	</dependencies>
+	<properties>
+		<!--codeGenerator: true will appear in the list of available generators in the CWM -->	
+		<property name="codeGenerator">true</property>
+			<!--Name of the file that contains the workflow -->	
+		<property name="workflow">workflow/epf.oaw</property>
+		<property name="targetPlatform">EPF</property>
+	</properties>
+</cartridgeinfo>

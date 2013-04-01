@@ -1,0 +1,26 @@
+«IMPORT uml»
+«IMPORT Chronos»
+«REM»Import the extension used in this xpand file.«ENDREM»
+«EXTENSION common::util»
+
+«EXTENSION cartridge::ChronosCommon::requirements::ChiGoal»
+«EXTENSION cartridge::epf::extensions::util»
+«EXTENSION cartridge::epf::extensions::globals»
+«REM»main definition evaluate the model elemen «ENDREM»
+«DEFINE root FOR Model»
+	«info('performing M2m trnasformation')»
+	«createpackage("CapabilityPatterns", this)»
+	«info('created package is ' + this.allOwningPackages().selectFirst(e|getPackageByName(this, "CapabilityPatterns")).name)»
+	«info('Expand Model')»
+	«REM»creates the plugin file «ENDREM»
+	«FILE "plugin.xml"-»
+	«REM»jump to the next XPand«ENDREM»
+	«EXPAND cartridge::epf::templates::epf::printHeader FOR this»
+	«EXPAND cartridge::epf::templates::epf::Copyright FOR this»	
+	«EXPAND cartridge::epf::templates::epf::printResourceManagerRole FOREACH this.allOwnedElements().typeSelect(uml::Actor)»
+	«EXPAND cartridge::epf::templates::epf::printResourceManagerTask FOREACH this.allOwnedElements().typeSelect(Chronos::ChiBusinessUseCase)»
+	«EXPAND cartridge::epf::templates::epf::printSecondHeader FOR this»
+	«EXPAND cartridge::epf::templates::epf::printRole FOREACH this.allOwnedElements().typeSelect(uml::Actor)»
+	«EXPAND cartridge::epf::templates::epf::printFooter FOR this»
+	«ENDFILE»
+«ENDDEFINE»
