@@ -1,0 +1,108 @@
+«IMPORT uml»
+«IMPORT Chronos»
+
+«EXTENSION common::util»
+«EXTENSION common::umlutils»
+«EXTENSION cartridge::ChronosCommon::naming»
+«EXTENSION cartridge::epf::extensions::globals»
+«EXTENSION cartridge::epf::extensions::util»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiGoal»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiRequirement»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiFeature»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiIssue»
+«EXTENSION cartridge::ChronosCommon::usecases::ChiBusinessUseCase»
+«REM»this file generates a plugin file for the EPF«ENDREM»
+
+«DEFINE printHeader FOR Model-»
+«info('Expanding header')-»
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:org.eclipse.epf.uma.resourcemanager="http:///org/eclipse/epf/uma/resourcemanager.ecore" xmlns:epf="http://www.eclipse.org/epf" epf:version="1.5.1">
+  <org.eclipse.epf.uma.resourcemanager:ResourceManager xmi:id="_CR5JAIvZEeKJyeb5JJVKzA" guid="_CR5JAIvZEeKJyeb5JJVKzA">
+«ENDDEFINE»
+
+«DEFINE printSecondHeader FOR Model-»
+«info('Expanding next header') -»
+  </org.eclipse.epf.uma.resourcemanager:ResourceManager>
+  <org.eclipse.epf.uma:MethodPlugin xmi:id="«this.getId()»" name="«this.name»" guid="«this.getId()»" presentationName="test Name" briefDescription="this plugin isa reference implementation for the generation of contents from UML." authors="author">
+    <methodElementProperty xmi:id="_CSC6AIvZEeKJyeb5JJVKzA" name="plugin_synFree" value="true"/>
+    <methodElementProperty xmi:id="_Gdql4IvZEeKJyeb5JJVKzA" name="me_edited" value="true"/>
+    <methodPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiIYvZEeKJyeb5JJVKzA" name="Content" guid="_CRJiIYvZEeKJyeb5JJVKzA">
+      <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiIovZEeKJyeb5JJVKzA" name="Categories" guid="_CRJiIovZEeKJyeb5JJVKzA">
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiI4vZEeKJyeb5JJVKzA" name="Domains" guid="_CRJiI4vZEeKJyeb5JJVKzA"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiJIvZEeKJyeb5JJVKzA" name="Disciplines" guid="_CRJiJIvZEeKJyeb5JJVKzA"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiJYvZEeKJyeb5JJVKzA" name="RoleSets" guid="_CRJiJYvZEeKJyeb5JJVKzA"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiJovZEeKJyeb5JJVKzA" name="WP Types" guid="_CRJiJovZEeKJyeb5JJVKzA"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiJ4vZEeKJyeb5JJVKzA" name="Tools" guid="_CRJiJ4vZEeKJyeb5JJVKzA"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiKIvZEeKJyeb5JJVKzA" name="StandardCategories" guid="_CRJiKIvZEeKJyeb5JJVKzA"/>
+        <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiKYvZEeKJyeb5JJVKzA" name="CustomCategories" guid="_CRJiKYvZEeKJyeb5JJVKzA">
+          <childPackages xsi:type="org.eclipse.epf.uma:ContentPackage" xmi:id="_CRJiKovZEeKJyeb5JJVKzA" name="Hidden" guid="_CRJiKovZEeKJyeb5JJVKzA">
+            <contentElements xsi:type="org.eclipse.epf.uma:CustomCategory" xmi:id="_CRJiK4vZEeKJyeb5JJVKzA" name="Custom Categories" guid="_CRJiK4vZEeKJyeb5JJVKzA"/>
+          </childPackages>
+        </childPackages>
+      </childPackages>
+«ENDDEFINE»
+
+«DEFINE printFooter FOR Model-»
+«info('Expanding Footer') -»
+     <childPackages xsi:type="org.eclipse.epf.uma:ProcessPackage" xmi:id="" name="«this.allOwningPackages().selectFirst(e|getPackageByName(this, "CapabilityPatterns")).name»" guid=""/>
+    </methodPackages>
+    <methodPackages xsi:type="org.eclipse.epf.uma:ProcessPackage" xmi:id="_CRJiLovZEeKJyeb5JJVKzA" name="DeliveryProcesses" guid="_CRJiLovZEeKJyeb5JJVKzA"/>
+    <methodPackages xsi:type="org.eclipse.epf.uma:ProcessPackage" xmi:id="_CRJiL4vZEeKJyeb5JJVKzA" name="ProcessContributions" guid="_CRJiL4vZEeKJyeb5JJVKzA"/>
+  </org.eclipse.epf.uma:MethodPlugin>
+</xmi:XMI>
+«ENDDEFINE»
+
+«DEFINE printResourceManagerTask FOR Chronos::ChiBusinessUseCase-»
+<resourceDescriptors xmi:id="«this.Alias»" id="«this.Alias»" uri="tasks/«this.name.asType()».xmi"/>
+«ENDDEFINE»
+
+«DEFINE printResourceManagerRole FOR uml::Actor-»
+«ENDDEFINE»
+
+«DEFINE printResourceManagerRole FOR Chronos::ChiWorker-»
+<resourceDescriptors xmi:id="«this.getId()»«this.Alias»" id="«this.getId()»" uri="roles/«this.name.asType()».xmi"/>
+«ENDDEFINE»
+
+«DEFINE printRole FOR uml::Actor-»
+«info('Expanding Role ' + this.name ) -»
+«ENDDEFINE»
+
+
+«DEFINE printRole FOR Chronos::ChiWorker-»
+ <contentElements xsi:type="org.eclipse.epf.uma:Role" xmi:id="«this.Alias»" name="«this.name.asType()»" guid="«this.Alias»" presentationName="«this.name»" briefDescription="«this.getComment()»">
+            <methodElementProperty xmi:id="«this.name.getExtJsInputType()»" name="me_edited" value="true"/>
+            <presentation xmi:id="«this.getId()»" href="uma://«this.getId()»#«this.getId()»"/>
+          </contentElements>
+«ENDDEFINE»
+
+
+«DEFINE Copyright FOR Model -»
+«info('Expanding copyright ...') -»
+«ENDDEFINE»
+«REM»this definition print the code for the goals«ENDREM»
+«DEFINE printChiGoal FOR ChiGoal»
+«info('Expanding goal ' + this.name + " alias:" + this.Alias) -»
+
+«ENDDEFINE»
+«REM»this definition print the code for the requirement«ENDREM»
+«DEFINE printChiRequirement(string parentID) FOR Chronos::ChiRequirement -»
+
+«ENDDEFINE»
+
+«DEFINE printChiFeature(string parentID) FOR ChiFeature-»
+«info('Expanding ChiFeature ' + this.name + " alias:" + this.Alias + " parent is" + parentID)»
+
+«REM»call ChiUCs«ENDREM»
+«EXPAND printChiBusinessUseCases(this.Alias) FOREACH this.getBusinessUseCases()-»
+
+«ENDDEFINE»
+«REM»this definition print the code for the Issues«ENDREM»
+«DEFINE printChiIssue(string parentID) FOR ChiIssue -»
+«info('Expanding issue ' + this.name + " alias:" + this.Alias + "parent is" + parentID)»
+
+«ENDDEFINE»
+«REM»this definition print the code for the Use case«ENDREM»
+«DEFINE printChiBusinessUseCases(string parentID) FOR ChiBusinessUseCase -»
+«info('Expanding UC ' + this.name + " alias:" + this.Alias + " parent is" + parentID )»
+
+«ENDDEFINE»

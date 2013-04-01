@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xmi:XMI xmlns:xmi="http://www.omg.org/XMI" xmlns:epf="http://www.eclipse.org/epf" xmlns:org.eclipse.epf.uma="http://www.eclipse.org/epf/uma/1.0.6/uma.ecore" xmlns:org.eclipse.epf.uma.resourcemanager="http:///org/eclipse/epf/uma/resourcemanager.ecore" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" epf:version="1.5.1" xmi:version="2.0">
+  <org.eclipse.epf.uma.resourcemanager:ResourceManager guid="_CR5JAIvZEeKJyeb5JJVKzA" xmi:id="_CR5JAIvZEeKJyeb5JJVKzA">
+
+	
+<resourceDescriptors id="_YE-IgHTMEeC6BJVq2iXpNA" uri="roles/Filmology user.xmi" xmi:id="_YE-IgHTMEeC6BJVq2iXpNAChi048WorE"/>
+
+<resourceDescriptors id="Chi643BUC" uri="tasks/Insert a new movie.xmi" xmi:id="Chi643BUC"/>
+<resourceDescriptors id="Chi646BUC" uri="tasks/Insert a new movie with API.xmi" xmi:id="Chi646BUC"/>
+<resourceDescriptors id="Chi647BUC" uri="tasks/Insert a new movie with non compilant API.xmi" xmi:id="Chi647BUC"/>
+<resourceDescriptors id="Chi649BUC" uri="tasks/Insert a new movie with non compilant API.xmi" xmi:id="Chi649BUC"/>
+
+  </org.eclipse.epf.uma.resourcemanager:ResourceManager>
+  <org.eclipse.epf.uma:MethodPlugin authors="author" briefDescription="this plugin isa reference implementation for the generation of contents from UML." guid="_YE9gQHTMEeC6BJVq2iXpNA" name="uml-generated" presentationName="test Name" xmi:id="_YE9gQHTMEeC6BJVq2iXpNA">
+    <methodElementProperty name="plugin_synFree" value="true" xmi:id="_CSC6AIvZEeKJyeb5JJVKzA"/>
+    <methodElementProperty name="me_edited" value="true" xmi:id="_Gdql4IvZEeKJyeb5JJVKzA"/>
+    <methodPackages guid="_CRJiIYvZEeKJyeb5JJVKzA" name="Content" xmi:id="_CRJiIYvZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage">
+      <childPackages guid="_CRJiIovZEeKJyeb5JJVKzA" name="Categories" xmi:id="_CRJiIovZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage">
+        <childPackages guid="_CRJiI4vZEeKJyeb5JJVKzA" name="Domains" xmi:id="_CRJiI4vZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage"/>
+        <childPackages guid="_CRJiJIvZEeKJyeb5JJVKzA" name="Disciplines" xmi:id="_CRJiJIvZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage"/>
+        <childPackages guid="_CRJiJYvZEeKJyeb5JJVKzA" name="RoleSets" xmi:id="_CRJiJYvZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage"/>
+        <childPackages guid="_CRJiJovZEeKJyeb5JJVKzA" name="WP Types" xmi:id="_CRJiJovZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage"/>
+        <childPackages guid="_CRJiJ4vZEeKJyeb5JJVKzA" name="Tools" xmi:id="_CRJiJ4vZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage"/>
+        <childPackages guid="_CRJiKIvZEeKJyeb5JJVKzA" name="StandardCategories" xmi:id="_CRJiKIvZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage"/>
+        <childPackages guid="_CRJiKYvZEeKJyeb5JJVKzA" name="CustomCategories" xmi:id="_CRJiKYvZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage">
+          <childPackages guid="_CRJiKovZEeKJyeb5JJVKzA" name="Hidden" xmi:id="_CRJiKovZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ContentPackage">
+            <contentElements guid="_CRJiK4vZEeKJyeb5JJVKzA" name="Custom Categories" xmi:id="_CRJiK4vZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:CustomCategory"/>
+          </childPackages>
+        </childPackages>
+      </childPackages>
+
+ <contentElements briefDescription="?" guid="Chi048WorE" name="Filmology user" presentationName="filmology user" xmi:id="Chi048WorE" xsi:type="org.eclipse.epf.uma:Role">
+            <methodElementProperty name="me_edited" value="true" xmi:id="_n4hMEIvZEeKJyeb5JJVKzA"/>
+            <presentation href="uma://_YE-IgHTMEeC6BJVq2iXpNA#_YE-IgHTMEeC6BJVq2iXpNA" xmi:id="_YE-IgHTMEeC6BJVq2iXpNA"/>
+          </contentElements>
+
+     <childPackages guid="" name="" xmi:id="" xsi:type="org.eclipse.epf.uma:ProcessPackage"/>
+    </methodPackages>
+    <methodPackages guid="_CRJiLovZEeKJyeb5JJVKzA" name="DeliveryProcesses" xmi:id="_CRJiLovZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ProcessPackage"/>
+    <methodPackages guid="_CRJiL4vZEeKJyeb5JJVKzA" name="ProcessContributions" xmi:id="_CRJiL4vZEeKJyeb5JJVKzA" xsi:type="org.eclipse.epf.uma:ProcessPackage"/>
+  </org.eclipse.epf.uma:MethodPlugin>
+</xmi:XMI>

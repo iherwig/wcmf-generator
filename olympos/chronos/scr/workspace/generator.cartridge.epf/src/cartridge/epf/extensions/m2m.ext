@@ -1,0 +1,27 @@
+/**
+* this file transform the model in one suitable for epf
+ */
+import uml;
+import Chronos;
+extension common::util;
+extension common::umlutils;
+extension org::openarchitectureware::uml2::profile::profiling;
+extension org::openarchitectureware::util::stdlib::io;
+
+
+extension cartridge::epf::extensions::globals;
+
+Void m2mTransform (uml::Model this):
+this
+;
+
+
+uml::Model createpackage(String packageName, uml::Model this):
+let p = new uml::Package :(
+p.setName(packageName))->
+//p.(p.getId())->
+this.packagedElement.add(p);
+
+uml::Package getPackageByName(uml::Model this, String packageName):
+	this.allOwnedElements().typeSelect(uml::Package).select(e|e.name == packageName)
+;

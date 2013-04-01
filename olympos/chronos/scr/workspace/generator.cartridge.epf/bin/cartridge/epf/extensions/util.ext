@@ -1,0 +1,34 @@
+/**
+* this file actually don't do nothing useful. But future operations should be placed here. 
+*
+ * metamodel import
+ */
+import uml;
+import Chronos;
+extension common::util;
+extension common::umlutils;
+extension org::openarchitectureware::uml2::profile::profiling;
+extension org::openarchitectureware::util::stdlib::io;
+
+extension cartridge::epf::extensions::globals;
+
+Void createpackage(String packageName, uml::Model this):
+let p = new uml::Package :(
+p.setName(packageName))->
+//p.(p.getId())-> 
+//this.packagedElement.
+this.nestedPackage.add(p);
+
+uml::Package getPackageByName(uml::Model this, String packageName):
+	!this.allOwnedElements().typeSelect(uml::Package).select(e|e.name == packageName).first().name.isNullOrEmpty()?
+	(this.allOwnedElements().typeSelect(uml::Package).select(e|e.name == packageName)).first()
+	: (
+			Void
+		)
+;
+
+String getXmiFakeId(String s):
+let p = new uml::Class ->
+s= p.getId():
+
+
