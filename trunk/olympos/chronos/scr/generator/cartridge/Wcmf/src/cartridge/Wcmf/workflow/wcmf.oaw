@@ -132,7 +132,7 @@
 		<!-- Protected regions configuration -->
 		<prSrcPaths value="${targetDir}/${applicationPackage}"/>	
 		<prDefaultExcludes value="false"/>
-		<prExcludes value="*.svn-base"/>
+		<prExcludes value="${prExcludes}"/>
 	</component>
 
 </workflow>
