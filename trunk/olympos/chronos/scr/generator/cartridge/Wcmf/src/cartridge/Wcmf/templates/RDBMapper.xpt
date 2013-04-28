@@ -51,7 +51,7 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
    * @see RDBMapper::getType()
    */
   public function getType() {
-    return '«this.getFullPackageName().asPhpPackage()»\«this.name»';
+    return '«this.getFullPackageName().asPackageName()».«this.name»';
   }
 
   /**
@@ -194,7 +194,7 @@ array(«FOREACH this.getPKValues() AS curPk SEPARATOR ', '»'«curPk.name»'«ENDFORE
 «REM» one-to-many ---------------------------------------------------«ENDREM»
 «DEFINE oneToManyRelation(uml::Property child) FOR ChiNode-»
 new RDBOneToManyRelationDescription(
-        '«this.getFullPackageName().asPhpPackage()»\«this.name»', '«child.getOtherEnd().getRoleName()»', '«this.getFullPackageName().asPhpPackage()»\«child.type.name»', '«child.getRoleName()»',
+        '«this.getFullPackageName().asPackageName()».«this.name»', '«child.getOtherEnd().getRoleName()»', '«this.getFullPackageName().asPackageName()».«child.type.name»', '«child.getRoleName()»',
         '«child.getOtherEnd().getLower()»', '1', '«child.getLower()»', '«IF child.getUpper() == -1»unbounded«ELSE»«child.getUpper()»«ENDIF-»', «REM»NOBR«ENDREM-»
 '«child.getOtherEnd().aggregation»', '«child.aggregation»', '«child.getOtherEnd().isNavigable()»', '«child.isNavigable()»', 'child', «REM»NOBR«ENDREM-»
 '«this.getPKValues().first().name»', '«child.getOtherEnd().getFKName()»'
@@ -204,7 +204,7 @@ new RDBOneToManyRelationDescription(
 «REM» many-to-one ---------------------------------------------------«ENDREM»
 «DEFINE manyToOneRelation(uml::Property parent) FOR ChiNode-»
 new RDBManyToOneRelationDescription(
-        '«this.getFullPackageName().asPhpPackage()»\«this.name»', '«parent.getOtherEnd().getRoleName()»', '«this.getFullPackageName().asPhpPackage()»\«parent.type.name»', '«parent.getRoleName()»',
+        '«this.getFullPackageName().asPackageName()».«this.name»', '«parent.getOtherEnd().getRoleName()»', '«this.getFullPackageName().asPackageName()».«parent.type.name»', '«parent.getRoleName()»',
         '«parent.getOtherEnd().getLower()»', '«IF parent.getOtherEnd().getUpper() == -1»unbounded«ELSE»«parent.getOtherEnd().getUpper()»«ENDIF-»', '«parent.getLower()»', '1', «REM»NOBR«ENDREM-»
 '«parent.getOtherEnd().aggregation»', '«parent.aggregation»', '«parent.getOtherEnd().isNavigable()»', '«parent.isNavigable()»', 'parent', «REM»NOBR«ENDREM-»
 '«parent.type.getPKValues().first().name»', '«parent.getFKName()»'
