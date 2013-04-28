@@ -39,7 +39,7 @@ define([
 «PROTECT CSTART "// " CEND "" ID (ApplicationPath().asPath()+"/public/js/model/types/"+this.getFullPackageName().asPath()+"/"+this.name+"Class.js/Declare").asProtectedRegionId()»
 «ENDPROTECT»
     ], {
-        typeName: '«this.getFullPackageName().asPhpPackage().replaceAll("\\\\", "\\\\\\\\")»\\«this.name»',
+        typeName: '«this.getFullPackageName().asPackageName()».«this.name»',
         isSortable: «IF getOrderByName() == defaultOrderByName()-»true«ELSE-»false«ENDIF-»,
         displayValues: [
 «FOREACH this.display_value.split("\\|") AS curValue SEPARATOR ", "-»

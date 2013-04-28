@@ -68,7 +68,7 @@
 «DEFINE typeMapping(String curConfig) FOR uml::Class»«ENDDEFINE»
 «DEFINE typeMapping(String curConfig) FOR ChiNode-»
   «IF this.isApplicationClass() && !this.isAbstract-»
-«this.getFullPackageName().asPhpPackage()»\«this.name» = $«this.getFullPackageName().asPackageName().replaceAll("\\.", "_")»_«this.name.asMapper()»
+«this.getFullPackageName().asPackageName()».«this.name» = $«this.getFullPackageName().asPackageName().replaceAll("\\.", "_")»_«this.name.asMapper()»
   «ENDIF-»
 «ENDDEFINE»
 
