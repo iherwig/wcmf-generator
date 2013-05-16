@@ -46,6 +46,11 @@ define([
             "«curValue»"
 «ENDFOREACH-»
         ],
+        pkNames: [
+«FOREACH this.getPKValues() AS curPk SEPARATOR ', '-»
+            "«curPk.name»"
+«ENDFOREACH-»
+        ],
 
 «LET this.getChiValuesRecursive() AS values-»
 «LET this.getChiValueRefs() AS references-»
