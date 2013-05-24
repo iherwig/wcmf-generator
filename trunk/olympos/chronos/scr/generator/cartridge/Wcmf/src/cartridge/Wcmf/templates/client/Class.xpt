@@ -60,6 +60,7 @@ define([
             type: "«curValue.type.name»",
             isEditable: «curValue.is_editable.boolString()»,
             inputType: '«curValue.input_type»',
+            displayType: '«curValue.display_type»',
             regexp: '«curValue.restrictions_match»',
             regexpDesc: '«curValue.restrictions_description»',
             tags: ['«curValue.app_data_type»'],
