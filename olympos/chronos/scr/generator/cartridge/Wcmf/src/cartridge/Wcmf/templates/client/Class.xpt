@@ -40,7 +40,6 @@ define([
 «ENDPROTECT»
     ], {
         typeName: '«this.getFullPackageName().asPackageName()».«this.name»',
-        view: 'js/ui/data/widget/EntityFormWidget',
         isSortable: «IF getOrderByName() == defaultOrderByName()-»true«ELSE-»false«ENDIF-»,
         displayValues: [
 «FOREACH this.display_value.split("\\|") AS curValue SEPARATOR ", "-»
@@ -106,6 +105,8 @@ define([
 «ENDLET-»
 
 «PROTECT CSTART "// " CEND "" ID (ApplicationPath().asPath()+"/public/js/model/types/"+this.getFullPackageName().asPath()+"/"+this.name+"Class.js/Body").asProtectedRegionId()»
+        , listView: 'js/ui/data/widget/EntityListWidget'
+        , detailView: 'js/ui/data/widget/EntityFormWidget'
 «ENDPROTECT»
     });
 «PROTECT CSTART "// " CEND "" ID (ApplicationPath().asPath()+"/public/js/model/types/"+this.getFullPackageName().asPath()+"/"+this.name+"Class.js/Static").asProtectedRegionId()»
