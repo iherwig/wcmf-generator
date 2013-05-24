@@ -40,6 +40,7 @@ define([
 «ENDPROTECT»
     ], {
         typeName: '«this.getFullPackageName().asPackageName()».«this.name»',
+        view: 'js/ui/data/widget/EntityFormWidget',
         isSortable: «IF getOrderByName() == defaultOrderByName()-»true«ELSE-»false«ENDIF-»,
         displayValues: [
 «FOREACH this.display_value.split("\\|") AS curValue SEPARATOR ", "-»
