@@ -26,7 +26,7 @@
  */
 define([
     "dojo/_base/declare",
-    "app/model/meta/Node"
+    "app/js/model/meta/Node"
 «PROTECT CSTART "// " CEND "" ID (ApplicationPath().asPath()+"/public/js/model/types/"+this.getFullPackageName().asPath()+"/"+this.name+"Class.js/Define").asProtectedRegionId()»
 «ENDPROTECT»
 ], function(
@@ -106,8 +106,8 @@ define([
 «ENDLET-»
 
 «PROTECT CSTART "// " CEND "" ID (ApplicationPath().asPath()+"/public/js/model/types/"+this.getFullPackageName().asPath()+"/"+this.name+"Class.js/Body").asProtectedRegionId()»
-        , listView: 'js/ui/data/widget/EntityListWidget'
-        , detailView: 'js/ui/data/widget/EntityFormWidget'
+        , listView: 'app/js/ui/data/widget/EntityListWidget'
+        , detailView: 'app/js/ui/data/widget/EntityFormWidget'
 «ENDPROTECT»
     });
 «PROTECT CSTART "// " CEND "" ID (ApplicationPath().asPath()+"/public/js/model/types/"+this.getFullPackageName().asPath()+"/"+this.name+"Class.js/Static").asProtectedRegionId()»
