@@ -2,7 +2,7 @@
 <workflow>
 
 	<!-- the following properties property maybe overriden from the command line -->
-	<property name='generatorVersion' value='3'/>
+	<property name='generatorVersion' value='4'/>
 	<property name='basePath' value='src'/>
 	<property name='propertyFile' value='${basePath}/cartridge/Wcmf/workflow/wcmf.properties'/>
 	<property file="${propertyFile}"/>

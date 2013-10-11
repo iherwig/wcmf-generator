@@ -7,6 +7,7 @@ extension common::naming;
  * Properties from the workflow definition
  */
 String GeneratorVersion() : GLOBALVAR GeneratorVersion;
+String PrintGenerateDateStr() : GLOBALVAR PrintGenerateDate;
 String ModelFile() : GLOBALVAR ModelFile;
 String ProfileFile() : GLOBALVAR ProfileFile;
 String RootPackage() : GLOBALVAR RootPackage;
@@ -46,3 +47,5 @@ String DomainPackageAbsolute(uml::Model this):
 	:
 		this.name
 ;
+
+Boolean PrintGenerateDate(): PrintGenerateDateStr() == "true" ? true : false;
