@@ -1,7 +1,7 @@
 <?php
 /*
  * Copyright (c) 2008 The Olympos Development Team.
- * 
+ *
  * http://sourceforge.net/projects/olympos/
  *
  * All rights reserved. This program and the accompanying materials
@@ -13,8 +13,8 @@
 
 /**
  * @class OawUtil
- * @brief Provides methods common to OpenArchitectureWare functionality. 
- * 
+ * @brief Provides methods common to OpenArchitectureWare functionality.
+ *
  * @author 	Niko <enikao@users.sourceforge.net>
  */
 class OawUtil {
@@ -24,15 +24,15 @@ class OawUtil {
 	private static $TEMP_PATHS = array('/tmp', '/temp', '/var/tmp', '/var/temp', 'C:/temp', 'C:/tmp', 'C:/windows/temp');
 	const TEMP_FALLBACK = '/tmp';
 	private static $tempPath;
-	
+
 	private static $cwd;
 	private static $executable;
 
 	public static function tempName() {
 		$tempPath = self::getTempPath();
-		
+
 		$result = '';
-		
+
 		do {
 			$rand = rand(0, 0xffffff);
 			$result = "$tempPath/oaw$rand.tmp";
@@ -40,12 +40,13 @@ class OawUtil {
 
 		return $result;
 	}
-	
+
 	private static function getTempPath() {
 		if (!self::$tempPath) {
+			$driveLetter = self::getCurrentDriveLetter();
 			for ($i = 0; $i < count(self::$TEMP_PATHS); $i++) {
-				$currPath = self::$TEMP_PATHS[$i];
-				
+				$currPath = preg_replace('/^C:/', $driveLetter.':', self::$TEMP_PATHS[$i]);
+
 				if (is_dir($currPath)) {
 					self::$tempPath = $currPath;
 					break;
@@ -55,10 +56,14 @@ class OawUtil {
 		if (!self::$tempPath) {
 			self::$tempPath = self::TEMP_FALLBACK;
 		}
-		
+
 		return self::$tempPath;
 	}
-	
+
+	private static function getCurrentDriveLetter() {
+		return (preg_match('/^[A-Z]:/i', $path = realpath(__FILE__))) ? $path[0] : null;
+	}
+
 	public static function setupExecutable() {
 	    $parser = InifileParser::getInstance();
 	    if (($params = $parser->getSection(self::INI_SECTION)) === false) {
@@ -67,25 +72,25 @@ class OawUtil {
 			$logger->error($parser->getErrorMsg(), __FILE__, __LINE__);
 		}
 		$executablePath = $params[self::INI_EXECUTABLE];
-	
+
 		self::$cwd = dirname(realpath($executablePath));
 		self::$executable = basename($executablePath);
 	}
 
 	public static function createPropertyFile($uwmPath, $umlPath) {
 		self::setupExecutable();
-		
+
 		$umlRelativePath = FileUtil::getRelativePath(self::$cwd, $umlPath);
-		
+
 		$propertiesPath = self::tempName();
 		$propertiesFile = fopen($propertiesPath, 'w');
 		fwrite($propertiesFile, "inputUri = $uwmPath\n");
 		fwrite($propertiesFile, "outputRelativePath = $umlRelativePath\n");
 		fclose($propertiesFile);
-		
+
 		return $propertiesPath;
 	}
-	
+
 	/**
 	 * Run the generator
 	 * @param propertyFilePath The property file
@@ -101,28 +106,28 @@ class OawUtil {
 			1=> array ('pipe', 'w'), // stdout is a pipe that the child will write to
 			2=> array ('pipe', 'w')
 		);
-	
+
 		$cmd = 'java -Xmx1G -Djava.library.path=./lib/ -jar ' . self::$executable . " $relativeWorkflowPath -basePath=. \"-propertyFile=$propertyFilePath\"";
 		Log::debug("running generator: ".$cmd, __CLASS__);
 		Log::debug("working directory: ".self::$cwd, __CLASS__);
 
 		$process = proc_open($cmd, $descriptorspec, $pipes, self::$cwd, $_ENV, array('bypass_shell' => true));
-	
+
 
 		if (is_resource($process)) {
 			$result = array();
 			// $pipes now looks like this:
 			// 0 => writeable handle connected to child stdin
 			// 1 => readable handle connected to child stdout
-			
+
 			fclose($pipes[0]);
-		
+
 			$result['stdout'] = trim(stream_get_contents($pipes[1]));
 			fclose($pipes[1]);
-		
+
 			$result['stderr'] = trim(stream_get_contents($pipes[2]));
 			fclose($pipes[2]);
-		
+
 			// It is important that you close any pipes before calling
 			// proc_close in order to avoid a deadlock
 			$returnCode = proc_close($process);
@@ -144,14 +149,14 @@ class OawUtil {
 		else {
 			Log::error("proc_open failed", __CLASS__);
 		}
-		
+
 		return $result;
 	}
 
 	public static function createTempFile($path) {
 		touch($path);
 		chmod($path, 0777);
-	
+
 		return $path;
 	}
 }
