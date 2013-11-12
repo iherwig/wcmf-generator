@@ -168,7 +168,7 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
 «REM» valueDescription -------------------------------------------«ENDREM»
 «DEFINE valueDescription FOR ChiNode-»
   «FOREACH this.getChiValuesRecursive() AS curValue-»
-      if ($name == '«curValue.name»') { $description = Message::get("«curValue.getComment(" ")»"); }
+      if ($name == '«curValue.name»') { $description = Message::get("«curValue.getComment(" ").replaceAll('\\"', '\\\\"')»"); }
   «ENDFOREACH-»
 «ENDDEFINE»
 

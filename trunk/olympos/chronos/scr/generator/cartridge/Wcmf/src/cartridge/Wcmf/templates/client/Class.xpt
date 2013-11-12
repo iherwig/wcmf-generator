@@ -39,7 +39,8 @@ define([
 «PROTECT CSTART "// " CEND "" ID (ApplicationPath().asPath()+"/public/js/model/types/"+this.getFullPackageName().asPath()+"/"+this.name+"Class.js/Declare").asProtectedRegionId()»
 «ENDPROTECT»
     ], {
-        typeName: '«this.getFullPackageName().asPackageName()».«this.name»',
+        typeName: "«this.getFullPackageName().asPackageName()».«this.name»",
+        description: "«this.getComment(" ").replaceAll('\\"', '\\\\"')»",
         isSortable: «IF getOrderByName() == defaultOrderByName()-»true«ELSE-»false«ENDIF-»,
         displayValues: [
 «FOREACH this.display_value.split("\\|") AS curValue SEPARATOR ", "-»
@@ -58,6 +59,7 @@ define([
 «FOREACH values AS curValue SEPARATOR "        }, {"»
             name: "«curValue.name»",
             type: "«curValue.type.name»",
+            description: "«curValue.getComment(" ").replaceAll('\\"', '\\\\"')»",
             isEditable: «curValue.is_editable.boolString()»,
             inputType: '«curValue.input_type»',
             displayType: '«curValue.display_type»',
