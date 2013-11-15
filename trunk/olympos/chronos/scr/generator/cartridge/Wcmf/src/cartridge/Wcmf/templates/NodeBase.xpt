@@ -63,7 +63,7 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
      * @see PersistentObject::getObjectDescription()
      */
     public function getObjectDescription() {
-      return Message::get("«this.getComment(" ").replaceAll('\\"', '\\\\"')»");
+      return Message::get("«this.getComment("\\\\n").replaceAll('\\"', '\\\\"')»");
     }
 
     /**
@@ -168,7 +168,7 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
 «REM» valueDescription -------------------------------------------«ENDREM»
 «DEFINE valueDescription FOR ChiNode-»
   «FOREACH this.getChiValuesRecursive() AS curValue-»
-      if ($name == '«curValue.name»') { $description = Message::get("«curValue.getComment(" ").replaceAll('\\"', '\\\\"')»"); }
+      if ($name == '«curValue.name»') { $description = Message::get("«curValue.getComment("\\\\n").replaceAll('\\"', '\\\\"')»"); }
   «ENDFOREACH-»
 «ENDDEFINE»
 
