@@ -96,7 +96,7 @@ define([
             thisEndName: "«curChild.getOtherEnd().getRoleName()»",
             relationType: "child"
 «ENDFOREACH-»«IF children.size > 0 && parents.size > 0-»        }, {«ENDIF-»
-«FOREACH parents AS curParent SEPARATOR "    }, {"»
+«FOREACH parents AS curParent SEPARATOR "        }, {"»
             name: "«curParent.getRoleName()»",
             type: "«curParent.type.name»",
             aggregationKind: "«curParent.aggregation»",

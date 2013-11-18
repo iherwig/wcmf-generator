@@ -18,9 +18,10 @@ import org.openarchitectureware.workflow.monitor.ProgressMonitor;
 import org.openarchitectureware.xpand2.output.FileHandle;
 import org.openarchitectureware.xpand2.output.PostProcessor;
 
-import com.wemove.wcmf.generator.FileUtil;
-import com.wemove.wcmf.generator.Logger;
-import com.wemove.wcmf.generator.Util;
+import com.wemove.wcmf.generator.workflow.FileUtil;
+
+import net.sourceforge.olympos.oaw.extend.Logger;
+import net.sourceforge.olympos.oaw.extend.Util;
 
 /**
  * @author ingo herwig <ingo@wemove.com>
