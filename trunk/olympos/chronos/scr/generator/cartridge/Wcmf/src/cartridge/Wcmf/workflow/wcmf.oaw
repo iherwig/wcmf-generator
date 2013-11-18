@@ -4,6 +4,7 @@
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='4'/>
 	<property name='basePath' value='src'/>
+	<property name='outputEncoding' value='ISO-8859-1'/>
 	<property name='propertyFile' value='${basePath}/cartridge/Wcmf/workflow/wcmf.properties'/>
 	<property file="${propertyFile}"/>
 	
@@ -128,6 +129,9 @@
 		<outlet path="${targetDir}">
 			<postprocessor class="oaw.xpand2.output.JavaBeautifier"/>
 			<postprocessor class="oaw.xpand2.output.XmlBeautifier"/>
+			<postprocessor class="com.wemove.wcmf.generator.workflow.OutputEncoder">
+				<targetEncoding value="${outputEncoding}"/>
+			</postprocessor>
 		</outlet>
 		
 		<!-- Protected regions configuration -->
