@@ -45,8 +45,7 @@ context ChiNode ERROR
  */
 context ChiNode ERROR
 	this.name+" does not contain an attribute called '"+this.orderby.split(" ").get(0).trim()+"', which should be used for sorting" :
-	let orderCol = this.orderby.split(" ").get(0).trim() :
-		orderCol == defaultOrderByName() || orderCol == "none" ? true : this.getChiValuesRecursive().name.contains(orderCol)
+	this.getOrderByNames().forAll(v|v == defaultOrderByName() || v == "none" ? true : this.getChiValuesRecursive().name.contains(v))
 ;
 /**
  * Check the initparams

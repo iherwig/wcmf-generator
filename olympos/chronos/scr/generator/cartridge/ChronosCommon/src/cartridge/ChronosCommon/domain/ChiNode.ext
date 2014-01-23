@@ -146,30 +146,45 @@ String getTableName(ChiNode this) :
 ;
 
 /**
- * Get the order column and direction from the orderby tagged value
+ * Get all order attribute names from the orderby tagged value
  */
-String getOrderByColumn(ChiNode this) : 
-	let col = this.orderby.split(" ").first().trim() : 
-	let dir = this.orderby.split(" ").last().trim() : 
-		let orderVal = this.getChiValuesRecursive().select(v|v.name == col).first() :
-			orderVal != null ? (dir != col ? orderVal.getColumnName()+" "+dir : orderVal.getColumnName()) : (col == defaultOrderByName() ? col : "")
+String getOrderByNames(ChiNode this) : 
+	this.orderby.split(",").trim().collect(v|v.split(" ").first().trim())
 ;
 
 /**
- * Get the order column from the orderby tagged value
+ * Get the first order column and direction from the orderby tagged value
+ */
+String getOrderByColumn(ChiNode this) : 
+	let name = this.getOrderByNames().first() : 
+	let dir = this.getOrderByDirection(name) : 
+		let orderVal = this.getChiValuesRecursive().select(v|v.name == name).first() :
+			orderVal != null ? orderVal.getColumnName()+" "+dir : (name == defaultOrderByName() ? name : "")
+;
+
+/**
+ * Get the first order attribute from the orderby tagged value
  */
 String getOrderByName(ChiNode this) : 
-	let name = this.orderby.split(" ").first().trim() : 
+	let name = this.getOrderByNames().first() : 
 		let orderVal = this.getChiValuesRecursive().select(v|v.name == name).first() :
 			orderVal != null ? orderVal.name : (name == defaultOrderByName() ? name : null)
 ;
 
 /**
- * Get the order direction from the orderby tagged value (ASC or DESC, defaults to ASC)
+ * Get the order direction for the given order attribute from the orderby tagged value (ASC or DESC, defaults to ASC)
+ */
+String getOrderByDirection(ChiNode this, String name) : 
+	let dir = this.orderby.split(",").trim().select(v|v.split(" ").first().trim() == name).split(" ").last().trim() :
+		dir.toUpperCase() == "ASC" || dir.toUpperCase() == "DESC" ? dir.toUpperCase() : "ASC"
+;
+
+/**
+ * Get the first order direction from the orderby tagged value (ASC or DESC, defaults to ASC)
  */
 String getOrderByDirection(ChiNode this) : 
-	let dir = this.orderby.split(" ").last().trim() : 
-		dir.toUpperCase() == "ASC" || dir.toUpperCase() == "DESC" ? dir.toUpperCase() : "ASC"
+	let name = this.getOrderByNames().first() : 
+		this.getOrderByDirection(name)
 ;
 
 /**
