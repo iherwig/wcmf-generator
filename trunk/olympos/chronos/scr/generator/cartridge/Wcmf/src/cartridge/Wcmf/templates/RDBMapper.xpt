@@ -88,18 +88,20 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
    * @see RDBMapper::getOwnDefaultOrder()
    */
   public function getOwnDefaultOrder($roleName=null) {
+    $orderDefs = array();
 «IF getOrderByName() == defaultOrderByName()-»
   «FOREACH this.getParentNodesRecursive() AS curParent-»
     if ($roleName == '«curParent.getRoleName()»') {
-      return array('sortFieldName' => '«this.getOrderByNameForParent(curParent)»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
+      $orderDefs[] = array('sortFieldName' => '«this.getOrderByNameForParent(curParent)»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
     }
   «ENDFOREACH-»
-    return array('sortFieldName' => '«this.getOrderByName()»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
-«ELSEIF getOrderByName() != null-»
-    return array('sortFieldName' => '«this.getOrderByName()»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => false);
+    $orderDefs[] = array('sortFieldName' => '«this.getOrderByName()»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
 «ELSE-»
-    return null;
+  «FOREACH this.getOrderByNames() AS orderByName-»
+    $orderDefs[] = array('sortFieldName' => '«orderByName»', 'sortDirection' => '«this.getOrderByDirection(orderByName)»', 'isSortkey' => false);
+  «ENDFOREACH-»
 «ENDIF-»
+    return $orderDefs;
   }
 
   /**
