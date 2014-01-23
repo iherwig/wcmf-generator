@@ -95,7 +95,9 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
       $orderDefs[] = array('sortFieldName' => '«this.getOrderByNameForParent(curParent)»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
     }
   «ENDFOREACH-»
-    $orderDefs[] = array('sortFieldName' => '«this.getOrderByName()»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
+    if ($roleName == null) {
+      $orderDefs[] = array('sortFieldName' => '«this.getOrderByName()»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
+    }
 «ELSE-»
   «FOREACH this.getOrderByNames() AS orderByName-»
     $orderDefs[] = array('sortFieldName' => '«orderByName»', 'sortDirection' => '«this.getOrderByDirection(orderByName)»', 'isSortkey' => false);

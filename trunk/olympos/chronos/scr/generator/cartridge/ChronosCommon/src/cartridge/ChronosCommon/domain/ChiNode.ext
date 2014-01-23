@@ -149,7 +149,7 @@ String getTableName(ChiNode this) :
  * Get all order attribute names from the orderby tagged value
  */
 String getOrderByNames(ChiNode this) : 
-	this.orderby.split(",").trim().collect(v|v.split(" ").first().trim())
+	this.orderby.split("\\|").trim().collect(v|v.split(" ").first().trim()).select(v|v != "none")
 ;
 
 /**
@@ -175,7 +175,7 @@ String getOrderByName(ChiNode this) :
  * Get the order direction for the given order attribute from the orderby tagged value (ASC or DESC, defaults to ASC)
  */
 String getOrderByDirection(ChiNode this, String name) : 
-	let dir = this.orderby.split(",").trim().select(v|v.split(" ").first().trim() == name).split(" ").last().trim() :
+	let dir = this.orderby.split("\\|").trim().select(v|v.split(" ").first().trim() == name).split(" ").last().trim() :
 		dir.toUpperCase() == "ASC" || dir.toUpperCase() == "DESC" ? dir.toUpperCase() : "ASC"
 ;
 
