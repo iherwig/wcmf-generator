@@ -90,10 +90,10 @@ $server->wsdl->addComplexType('«this.name»', 'complexType', 'struct', 'sequence'
         'sortkey' => array('name' => 'sortkey', 'type' => 'xsd:string'),
     «ENDIF-»
     «FOREACH this.getNotAbstractNavigableParentNodes() AS curParent-»
-        '«curParent.type.name.asType()»' => array('name' => '«curParent.type.name.asType()»', 'type' => 'tns:OidList'),
+        '«curParent.type.name.asType()»' => array('name' => '«curParent.type.name.asType()»', 'type' => 'tns:«curParent.type.name.asType()»List'),
     «ENDFOREACH-»
     «FOREACH this.getNotAbstractNavigableChildNodes() AS curChild-»
-        '«curChild.type.name.asType()»' => array('name' => '«curChild.type.name.asType()»', 'type' => 'tns:OidList'),
+        '«curChild.type.name.asType()»' => array('name' => '«curChild.type.name.asType()»', 'type' => 'tns:«curChild.type.name.asType()»List'),
     «ENDFOREACH-»
     )
 );
@@ -117,15 +117,15 @@ $server->register('get«this.name.asType()»List',
   
 $server->register('create«this.name.asType()»',
   array('«this.name»' => 'tns:«this.name.asType()»'),
-  array('return' => 'xsd:string'), $server::TNS, $server->wsdl->endpoint.'#create«this.name.asType()»', 'document', 'literal');
+  array('return' => 'tns:«this.name.asType()»'), $server::TNS, $server->wsdl->endpoint.'#create«this.name.asType()»', 'document', 'literal');
   
 $server->register('read«this.name.asType()»',
   array('oid' => 'xsd:string', 'depth' => 'xsd:integer'),
   array('return' => 'tns:«this.name.asType()»'), $server::TNS, $server->wsdl->endpoint.'#read«this.name.asType()»', 'document', 'literal');
   
 $server->register('update«this.name.asType()»',
-  array('«this.name»' => 'tns:«this.name.asType()»', 'oid' => 'xsd:string'),
-  array('return' => 'xsd:string'), $server::TNS, $server->wsdl->endpoint.'#update«this.name.asType()»', 'document', 'literal');
+  array('«this.name»' => 'tns:«this.name.asType()»'),
+  array('return' => 'tns:«this.name.asType()»'), $server::TNS, $server->wsdl->endpoint.'#update«this.name.asType()»', 'document', 'literal');
   
 $server->register('delete«this.name.asType()»',
   array('oid' => 'xsd:string'),
@@ -164,8 +164,10 @@ function get«this.name.asType()»List($limit, $offset, $sortFieldName, $sortDirec
 function create«this.name.asType()»($«this.name») {
   global $server;
 «PROTECT CSTART "// " CEND "" ID ("soap/Methods/create"+this.name.asType()).asProtectedRegionId()»
-  $response = $server->doCall('create', array($server->getDummyOid('«this.name.asType()»') => $«this.name»));
-  return array('return' => $response->getValue('oid')->__toString());
+  $oidStr = $server->getDummyOid('«this.name.asType()»')->__toString();
+  $«this.name»['oid'] = $oidStr;
+  $response = $server->doCall('create', array($oidStr => $«this.name»));
+  return array('return' => $response->getValues());
 «ENDPROTECT»
 }  
   
@@ -193,9 +195,8 @@ function read«this.name.asType()»($oid, $depth) {
 function update«this.name.asType()»($«this.name») {
   global $server;
 «PROTECT CSTART "// " CEND "" ID ("soap/Methods/update"+this.name.asType()).asProtectedRegionId()»
-  $oid = $«this.name»['oid'];
-  $response = $server->doCall('update', array($oid => $«this.name»));
-  return array('return' => $response->getValue($oid));
+  $response = $server->doCall('update', array($«this.name»['oid'] => $«this.name»));
+  return array('return' => $response->getValues());
 «ENDPROTECT»
 }  
   
