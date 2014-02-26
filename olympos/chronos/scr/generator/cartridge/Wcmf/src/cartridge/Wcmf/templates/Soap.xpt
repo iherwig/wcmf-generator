@@ -48,13 +48,11 @@ $server->register('search',
 function search($query) {
   global $server;
   $response = $server->doCall('search', array('query' => $query));
-  if ($response) {
-    $result = array();
-    foreach ($response->getValue('list') as $item) {
-      $result[] = array('type' => $item->getType(), 'oid' => $item->getOID()->__toString(),
-        'displayValue' => $item->getValue('displayValue'), 'summary' => $item->getValue('summary')
-      );
-    }
+  $result = array();
+  foreach ($response->getValue('list') as $item) {
+    $result[] = array('type' => $item['type'], 'oid' => $item['oid'],
+      'displayValue' => $item['displayValue'], 'summary' => $item['summary']
+    );
   }
   return array('return' => $result);
 }
@@ -180,7 +178,9 @@ function create«this.name.asType()»($«this.name») {
 function read«this.name.asType()»($oid, $depth) {
   global $server;
 «PROTECT CSTART "// " CEND "" ID ("soap/Methods/read"+this.name.asType()).asProtectedRegionId()»
-  $response = $server->doCall('read', array('oid' => $oid, 'depth' => $depth));
+  $params = array('oid' => $oid);
+  if ($depth) { $params['depth'] = $depth; }
+  $response = $server->doCall('read', $params);
   return array('return' => $response->getValue('object'));
 «ENDPROTECT»
 }  
@@ -188,12 +188,12 @@ function read«this.name.asType()»($oid, $depth) {
 /**  
  * SOAP Method update«this.name.asType()» 
  * @param «this.name» The serialized object data
- * @param oid The object id of the object to update
  * @return tns:«this.name.asType()» on success
  */  
-function update«this.name.asType()»($«this.name», $oid) {
+function update«this.name.asType()»($«this.name») {
   global $server;
 «PROTECT CSTART "// " CEND "" ID ("soap/Methods/update"+this.name.asType()).asProtectedRegionId()»
+  $oid = $«this.name»['oid'];
   $response = $server->doCall('update', array($oid => $«this.name»));
   return array('return' => $response->getValue($oid));
 «ENDPROTECT»
