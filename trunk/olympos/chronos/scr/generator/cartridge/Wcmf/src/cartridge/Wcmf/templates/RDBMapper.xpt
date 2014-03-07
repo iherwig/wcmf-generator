@@ -223,7 +223,7 @@ new RDBManyToOneRelationDescription(
       */
       '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', array('«curValue.app_data_type»'), «REM»NOBR«ENDREM-»
 «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue()»'«ENDIF», '«curValue.restrictions_match»', «REM»NOBR«ENDREM-»
-'«curValue.restrictions_not_match»', '«curValue.restrictions_description»', «curValue.is_editable.boolString()», '«curValue.input_type»', «REM»NOBR«ENDREM-»
+'«curValue.restrictions_description»', «curValue.is_editable.boolString()», '«curValue.input_type»', «REM»NOBR«ENDREM-»
 '«curValue.display_type»', '«getTableName()»', '«curValue.getColumnName()»'),
   «ENDFOREACH-»
 «ENDDEFINE»
