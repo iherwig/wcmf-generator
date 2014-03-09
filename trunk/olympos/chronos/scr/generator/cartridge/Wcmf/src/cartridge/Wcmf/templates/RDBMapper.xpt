@@ -127,13 +127,13 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
        * Value description: Sort key for ordering in relation to «curParent.getRoleName()»
        */
       '«this.getOrderByNameForParent(curParent)»' => new RDBAttributeDescription('«this.getOrderByNameForParent(curParent)»', 'integer', array('DATATYPE_IGNORE'), null, «REM»NOBR«ENDREM-»
-'[0-9]*', '', '', true, 'text[class="tiny"]', 'text', '«getTableName()»', '«this.getOrderByNameForParent(curParent)»'),
+'regexp:[0-9]*', '', true, 'text[class="tiny"]', 'text', '«getTableName()»', '«this.getOrderByNameForParent(curParent)»'),
     «ENDFOREACH-»
       /**
        * Value description: Sort key for ordering
        */
       '«this.getOrderByName()»' => new RDBAttributeDescription('«this.getOrderByName()»', 'integer', array('DATATYPE_IGNORE'), null, «REM»NOBR«ENDREM-»
-'[0-9]*', '', '', true, 'text[class="tiny"]', 'text', '«getTableName()»', '«this.getOrderByName()»'),
+'regexp:[0-9]*', '', true, 'text[class="tiny"]', 'text', '«getTableName()»', '«this.getOrderByName()»'),
         «ENDIF-»
 «EXPAND references-»
     );
