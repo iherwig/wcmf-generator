@@ -115,6 +115,7 @@
 		
 		<!-- Global variables used by the generator -->
 		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
+		<globalVarDef name="PrintGenerateDate" value="'${printGenerateDate}'"/>
 		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
@@ -141,7 +142,7 @@
 		<!-- Protected regions configuration -->
 		<prSrcPaths value="${targetDir}/${applicationPackage}"/>	
 		<prDefaultExcludes value="false"/>
-		<prExcludes value="*.svn-base"/>
+		<prExcludes value="${prExcludes}"/>
 	</component>
 
 </workflow>
