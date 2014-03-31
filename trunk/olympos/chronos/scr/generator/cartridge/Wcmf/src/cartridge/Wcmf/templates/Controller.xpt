@@ -25,9 +25,9 @@
  */
 namespace «this.getFullPackageName().asPhpPackage()»;
 
-«IF this.hasSuperClass()»
+«IF this.hasSuperClass()-»
 use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuperClass().name»;
-«ENDIF»
+«ENDIF-»
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Import").asProtectedRegionId()»
 «ENDPROTECT»
 
@@ -49,16 +49,6 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuperCla
  */
 class «name» «IF this.hasSuperClass()»extends «this.getSuperClass().name»«ENDIF» {
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Body").asProtectedRegionId()»
-  /**
-   * @see Controller::hasView()
-   */
-  public function hasView() {
-  «IF this.getViews().size == 0-»
-    return false;
-  «ELSE-»
-    return true;
-  «ENDIF-»
-  }
   /**
    * @see Controller::executeKernel()
    */
@@ -84,9 +74,9 @@ class «name» «IF this.hasSuperClass()»extends «this.getSuperClass().name»«ENDIF»
 «DEFINE actionMapping FOR ChiActionKey-»
   «IF this.hasSourceController() && this.hasTargetController()-»
     «IF this.getSourceController().name == "Controller"-»
- * ?«this.context»?«this.action» = «this.getTargetController().name»
+ * ?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»
     «ELSE-»
- * «this.getSourceController().name»?«this.context»?«this.action» = «this.getTargetController().name»
+ * «this.getSourceController().getFullPackageName().asPhpPackage()»\«this.getSourceController().name»?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»
     «ENDIF-»
   «ENDIF-»
 «ENDDEFINE»
