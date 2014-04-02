@@ -41,6 +41,13 @@ context ChiNode ERROR
  		!this.isLibraryClass() ? this.isInheritingFrom(requiredSuperClass) : true
 ;
 /**
+ * Check the display_value value
+ */
+context ChiNode ERROR
+	this.name+" does not contain one or more of the attributes '"+this.display_value+"', which should be used for sorting" :
+	this.display_value.split("\\|").forAll(v|this.getChiValuesRecursive().name.contains(v))
+;
+/**
  * Check the orderby value
  */
 context ChiNode ERROR

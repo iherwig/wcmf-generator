@@ -66,6 +66,7 @@ define([
             validateType: '«curValue.restrictions_match»',
             validateDesc: '«curValue.restrictions_description»',
             tags: ['«curValue.app_data_type»'],
+            defaultValue: «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue()»'«ENDIF»,
             isReference: false
 «ENDFOREACH-»«IF values.size > 0 && references.size > 0-»        }, {«ENDIF-»
 «FOREACH references AS curReference SEPARATOR "        }, {"»
