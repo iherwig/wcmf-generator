@@ -84,46 +84,6 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
       return Message::get($description);
     }
 
-  «EXPAND values FOR this-»
-  «IF this.getOrderByName() == defaultOrderByName()-»
-    «FOREACH this.getParentNodesRecursive() AS curParent-»
-    /**
-     * Get the sortkey for the «curParent.getRoleName()» relation
-     * @return Number
-     */
-    public function «this.getOrderByNameForParent(curParent).asGetter()»() {
-      return $this->getValue('«this.getOrderByNameForParent(curParent)»');
-    }
-
-    /**
-     * Set the sortkey for the «curParent.getRoleName()» relation
-     * @param sortkey The sortkey value
-     */
-    public function «this.getOrderByNameForParent(curParent).asSetter()»($sortkey) {
-      return $this->setValue('«this.getOrderByNameForParent(curParent)»', $sortkey);
-    }
-    «ENDFOREACH-»
-
-    /**
-     * Get the default sortkey
-     * @return Number
-     */
-    public function «this.getOrderByName().asGetter()»() {
-      return $this->getValue('«this.getOrderByName()»');
-    }
-
-    /**
-     * Set the default sortkey
-     * @param sortkey The sortkey value
-     */
-    public function «this.getOrderByName().asSetter()»($sortkey) {
-      return $this->setValue('«this.getOrderByName()»', $sortkey);
-    }
-  «ENDIF-»
-     
-  «IF this.getChiValueRefs().size > 0-»
-    «EXPAND references FOR this-»
-  «ENDIF-»
   «IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0 -»
     «EXPAND parents FOR this-»
     «EXPAND children FOR this-»
@@ -131,31 +91,6 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
 }
 ?>
 «ENDFILE-»
-«ENDDEFINE»
-
-«REM» values -----------------------------------------------------«ENDREM»
-«DEFINE values FOR ChiNode-»
-  «FOREACH this.getChiValues() AS curValue-»
-    /**
-     * Get the value of the «curValue.name» attribute
-     * @param unconverted Boolean wether to get the converted or stored value (default: false)
-     * @return Mixed
-     */
-    public function «curValue.name.asGetter()»($unconverted=false) {
-      $value = null;
-      if ($unconverted) { $value = $this->getUnconvertedValue('«curValue.name»'); }
-      else { $value = $this->getValue('«curValue.name»'); }
-      return $value;
-    }
-
-    /**
-     * Set the value of the «curValue.name» attribute
-     * @param «curValue.name» The value to set
-     */
-    public function «curValue.name.asSetter()»($«curValue.name») {
-      return $this->setValue('«curValue.name»', $«curValue.name»);
-    }
-  «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» valueDisplayNames ------------------------------------------«ENDREM»
@@ -172,19 +107,6 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
   «ENDFOREACH-»
 «ENDDEFINE»
 
-«REM» references -------------------------------------------------«ENDREM»
-«DEFINE references FOR ChiNode-»
-  «FOREACH this.getChiValueRefs() AS curReference-»
-    /**
-     * Get the value of the «curReference.name» reference attribute
-     * @return Mixed
-     */
-    public function «curReference.name.asGetter()»() {
-      return $this->getValue('«curReference.name»');
-    }
-  «ENDFOREACH-»
-«ENDDEFINE»
-
 «REM» parents ----------------------------------------------------«ENDREM»
 «DEFINE parents FOR ChiNode-»
   «FOREACH this.getParentNodesRecursive() AS curParent-»
@@ -194,7 +116,7 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
      */
     public function «curParent.getRoleName().asGetter()»List() {
       return $this->getParentsEx(null, '«curParent.getRoleName()»');
-        }
+    }
 
     /**
      * Set the «curParent.type.name» instances in the «curParent.getRoleName()» relation
@@ -205,7 +127,7 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
       foreach ($nodeList as $node) {
         $this->addNode($node, '«curParent.getRoleName()»');
       }
-      }
+    }
   «ENDFOREACH-»
 «ENDDEFINE»
 
@@ -231,8 +153,8 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
       $this->setValue('«curChildParent.type.name»', null);
       foreach ($nodeList as $node) {
         $this->addNode($node, '«curChildParent.type.name»');
-        }
       }
+    }
     «ENDIF-»
   «ENDFOREACH-»
     «ELSE-»
@@ -252,8 +174,8 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
       $this->setValue('«curChild.getRoleName()»', null);
       foreach ($nodeList as $node) {
         $this->addNode($node, '«curChild.getRoleName()»');
-        }
       }
+    }
     «ENDIF-»
   «ENDFOREACH-»
 «ENDDEFINE»
