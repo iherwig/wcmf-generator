@@ -115,7 +115,7 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
      * @return Array of «curParent.type.name» instances
      */
     public function «curParent.getRoleName().asGetter()»List() {
-      return $this->getParentsEx(null, '«curParent.getRoleName()»');
+      return $this->getValue('«curParent.getRoleName()»');
     }
 
     /**
@@ -142,7 +142,7 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
      * @return Array of «curChildParent.type.name» instances
      */
     public function «curChildParent.type.name.asGetter()»List() {
-      return $this->getChildrenEx(null, '«curChildParent.type.name»', null, null, null, false);
+      return $this->getValue('«curChildParent.type.name»');
     }
 
     /**
@@ -155,15 +155,15 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
         $this->addNode($node, '«curChildParent.type.name»');
       }
     }
-    «ENDIF-»
-  «ENDFOREACH-»
+        «ENDIF-»
+      «ENDFOREACH-»
     «ELSE-»
     /**
      * Get the «curChild.type.name» instances in the «curChild.getRoleName()» relation
      * @return Array of «curChild.type.name» instances
      */
     public function «curChild.getRoleName().asGetter()»List() {
-      return $this->getChildrenEx(null, '«curChild.getRoleName()»', null, null, null, false);
+      return $this->getValue('«curChild.getRoleName()»');
     }
 
     /**
