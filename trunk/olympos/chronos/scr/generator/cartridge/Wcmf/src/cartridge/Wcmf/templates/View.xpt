@@ -21,7 +21,7 @@
   Manual modifications should be placed inside the protected regions.
 -->
 «PROTECT CSTART "<!-- " CEND " -->" ID (this.getFullPackageName().asPath()+"/"+name.asTemplateFile()+"/Body").asProtectedRegionId()»
-«this.name.asTemplateFile()-»
+«this.name.asTemplateFile()»
 «ENDPROTECT»
 «ENDFILE-»
 «ENDDEFINE»
