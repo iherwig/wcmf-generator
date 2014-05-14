@@ -71,8 +71,9 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
      */
     public function getValueDisplayName($name) {
       $displayName = $name;
+      if (false) {}
   «EXPAND valueDisplayNames FOR this-»
-      return Message::get($displayName);
+      return $displayName;
     }
 
     /**
@@ -80,8 +81,9 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
      */
     public function getValueDescription($name) {
       $description = $name;
+      if (false) {}
   «EXPAND valueDescription FOR this-»
-      return Message::get($description);
+      return $description;
     }
 
   «IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0 -»
@@ -96,14 +98,20 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperC
 «REM» valueDisplayNames ------------------------------------------«ENDREM»
 «DEFINE valueDisplayNames FOR ChiNode-»
   «FOREACH this.getChiValuesRecursive() AS curValue-»
-      if ($name == '«curValue.name»') { $displayName = Message::get("«curValue.name»"); }
+      elseif ($name == '«curValue.name»') { $displayName = Message::get("«curValue.name»"); }
+  «ENDFOREACH-»
+  «FOREACH this.getChiValueRefs() AS curReference-»
+      elseif ($name == '«curReference.name»') { $displayName = Message::get("«curReference.name»"); }
   «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» valueDescription -------------------------------------------«ENDREM»
 «DEFINE valueDescription FOR ChiNode-»
   «FOREACH this.getChiValuesRecursive() AS curValue-»
-      if ($name == '«curValue.name»') { $description = Message::get("«curValue.getComment("\\\\n").replaceAll('\\"', '\\\\"')»"); }
+      elseif ($name == '«curValue.name»') { $description = Message::get("«curValue.getComment("\\\\n").replaceAll('\\"', '\\\\"')»"); }
+  «ENDFOREACH-»
+  «FOREACH this.getChiValueRefs() AS curReference-»
+      elseif ($name == '«curReference.name»') { $description = Message::get("«curReference.getComment("\\\\n").replaceAll('\\"', '\\\\"')»"); }
   «ENDFOREACH-»
 «ENDDEFINE»
 
