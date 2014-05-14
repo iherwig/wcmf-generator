@@ -44,15 +44,15 @@ context ChiNode ERROR
  * Check the display_value value
  */
 context ChiNode ERROR
-	this.name+" does not contain one or more of the attributes '"+this.display_value+"', which should be used for sorting" :
-	this.display_value.split("\\|").forAll(v|this.getChiValuesRecursive().name.contains(v))
+	this.name+" does not contain one or more of the attributes '"+this.display_value+"', which should be used as display value" :
+	this.display_value.split("\\|").forAll(v|this.getChiValuesRecursive().name.contains(v) || this.getChiValueRefs().name.contains(v))
 ;
 /**
  * Check the orderby value
  */
 context ChiNode ERROR
 	this.name+" does not contain one or more of the attributes '"+this.getOrderByNames()+"', which should be used for sorting" :
-	this.getOrderByNames().forAll(v|v == defaultOrderByName() || v == "none" ? true : this.getChiValuesRecursive().name.contains(v))
+	this.getOrderByNames().forAll(v|v == defaultOrderByName() || v == "none" ? true : (this.getChiValuesRecursive().name.contains(v) || this.getChiValueRefs().name.contains(v)))
 ;
 /**
  * Check the initparams
