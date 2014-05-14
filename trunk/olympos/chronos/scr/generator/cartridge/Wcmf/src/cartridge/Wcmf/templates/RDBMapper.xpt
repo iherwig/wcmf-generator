@@ -29,6 +29,7 @@ namespace «this.getFullPackageName().asPhpPackage()»;
 
 use «this.getFullPackageName().asPhpPackage()»\«this.name»;
 
+use wcmf\lib\i18n\Message;
 use wcmf\lib\model\mapper\NodeUnifiedRDBMapper;
 use wcmf\lib\model\mapper\RDBAttributeDescription;
 use wcmf\lib\model\mapper\RDBManyToManyRelationDescription;
@@ -223,7 +224,7 @@ new RDBManyToOneRelationDescription(
       */
       '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', array('«curValue.app_data_type»'), «REM»NOBR«ENDREM-»
 «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue()»'«ENDIF», '«curValue.restrictions_match»', «REM»NOBR«ENDREM-»
-'«curValue.restrictions_description»', «curValue.is_editable.boolString()», '«curValue.input_type»', «REM»NOBR«ENDREM-»
+«IF !curValue.restrictions_description.isNullOrEmpty()-»Message::get('«curValue.restrictions_description»')«ELSE-»''«ENDIF-», «curValue.is_editable.boolString()», '«curValue.input_type»', «REM»NOBR«ENDREM-»
 '«curValue.display_type»', '«getTableName()»', '«curValue.getColumnName()»'),
   «ENDFOREACH-»
 «ENDDEFINE»
