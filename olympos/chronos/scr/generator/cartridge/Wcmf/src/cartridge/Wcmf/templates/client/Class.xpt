@@ -42,16 +42,8 @@ define([
         typeName: "«this.getFullPackageName().asPackageName()».«this.name»",
         description: "«this.getComment(" ").replaceAll('\\"', '\\\\"')»",
         isSortable: «IF getOrderByName() == defaultOrderByName()-»true«ELSE-»false«ENDIF-»,
-        displayValues: [
-«FOREACH this.display_value.split("\\|") AS curValue SEPARATOR ", "-»
-            "«curValue»"
-«ENDFOREACH-»
-        ],
-        pkNames: [
-«FOREACH this.getPKValues() AS curPk SEPARATOR ', '-»
-            "«curPk.name»"
-«ENDFOREACH-»
-        ],
+        displayValues: [«FOREACH this.display_value.split("\\|") AS curValue SEPARATOR ", "-»"«curValue»"«ENDFOREACH-»],
+        pkNames: [«FOREACH this.getPKValues() AS curPk SEPARATOR ', '-»"«curPk.name»"«ENDFOREACH-»],
 
 «LET this.getChiValuesRecursive() AS values-»
 «LET this.getChiValueRefs() AS references-»
