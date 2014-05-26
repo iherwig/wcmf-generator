@@ -1,84 +1,84 @@
-«IMPORT uml»
-«IMPORT Chronos»
+Â«IMPORT umlÂ»
+Â«IMPORT ChronosÂ»
 
-«EXTENSION common::util»
+Â«EXTENSION common::utilÂ»
 
-«EXTENSION cartridge::Wcmf::extensions::util»
+Â«EXTENSION cartridge::Wcmf::extensions::utilÂ»
 
-«DEFINE root FOR Model»
-  «info('Expand Model')»
-  «EXPAND cartridge::Wcmf::templates::DataDefinition::file»
-  «EXPAND cartridge::Wcmf::templates::Soap::file»
-  «EXPAND cartridge::Wcmf::templates::Configuration::file»
-  «EXPAND node FOREACH this.allOwnedElements().typeSelect(ChiNode)»
-  «EXPAND manyToMany FOREACH this.allOwnedElements().typeSelect(ChiManyToMany)»
-  «EXPAND controller FOREACH this.allOwnedElements().typeSelect(ChiController)»
-  «EXPAND view FOREACH this.allOwnedElements().typeSelect(ChiView)»
+Â«DEFINE root FOR ModelÂ»
+  Â«info('Expand Model')Â»
+  Â«EXPAND cartridge::Wcmf::templates::DataDefinition::fileÂ»
+  Â«EXPAND cartridge::Wcmf::templates::Soap::fileÂ»
+  Â«EXPAND cartridge::Wcmf::templates::Configuration::fileÂ»
+  Â«EXPAND node FOREACH this.allOwnedElements().typeSelect(ChiNode)Â»
+  Â«EXPAND manyToMany FOREACH this.allOwnedElements().typeSelect(ChiManyToMany)Â»
+  Â«EXPAND controller FOREACH this.allOwnedElements().typeSelect(ChiController)Â»
+  Â«EXPAND view FOREACH this.allOwnedElements().typeSelect(ChiView)Â»
 
-  «EXPAND cartridge::Wcmf::templates::client::TypeList::file»
-  «EXPAND client FOREACH this.allOwnedElements().typeSelect(ChiNode)»
+  Â«EXPAND cartridge::Wcmf::templates::client::TypeList::fileÂ»
+  Â«EXPAND client FOREACH this.allOwnedElements().typeSelect(ChiNode)Â»
   
-  «REM»«EXPAND class FOREACH this.allOwnedElements().typeSelect(uml::Class)»«ENDREM»
-«ENDDEFINE»
+  Â«REMÂ»Â«EXPAND class FOREACH this.allOwnedElements().typeSelect(uml::Class)Â»Â«ENDREMÂ»
+Â«ENDDEFINEÂ»
 
-«REM» mapper/node ------------------------------------------------«ENDREM»
-«DEFINE node FOR ChiManyToMany»«ENDDEFINE»
-«DEFINE node FOR ChiNode»
-  «IF this.isApplicationClass()»
-    «info('Expand ChiNode '+this.name)»
-    «IF !this.isAbstract»
-      «EXPAND cartridge::Wcmf::templates::RDBMapper::file FOR this»
-    «ENDIF»
-    «EXPAND cartridge::Wcmf::templates::NodeBase::file FOR this»
-    «EXPAND cartridge::Wcmf::templates::Node::file FOR this»
-  «ENDIF»
-«ENDDEFINE»
+Â«REMÂ» mapper/node ------------------------------------------------Â«ENDREMÂ»
+Â«DEFINE node FOR ChiManyToManyÂ»Â«ENDDEFINEÂ»
+Â«DEFINE node FOR ChiNodeÂ»
+  Â«IF this.isApplicationClass()Â»
+    Â«info('Expand ChiNode '+this.name)Â»
+    Â«IF !this.isAbstractÂ»
+      Â«EXPAND cartridge::Wcmf::templates::RDBMapper::file FOR thisÂ»
+    Â«ENDIFÂ»
+    Â«EXPAND cartridge::Wcmf::templates::NodeBase::file FOR thisÂ»
+    Â«EXPAND cartridge::Wcmf::templates::Node::file FOR thisÂ»
+  Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«REM» mapper/node ------------------------------------------------«ENDREM»
-«DEFINE manyToMany FOR ChiManyToMany»
-  «IF this.isApplicationClass()»
-    «info('Expand ChiManyToMany '+this.name)»
-    «IF !this.isAbstract»
-      «EXPAND cartridge::Wcmf::templates::RDBMapper::file FOR this»
-    «ENDIF»
-    «EXPAND cartridge::Wcmf::templates::NodeBase::file FOR this»
-    «EXPAND cartridge::Wcmf::templates::Node::file FOR this»
-  «ENDIF»
-«ENDDEFINE»
+Â«REMÂ» mapper/node ------------------------------------------------Â«ENDREMÂ»
+Â«DEFINE manyToMany FOR ChiManyToManyÂ»
+  Â«IF this.isApplicationClass()Â»
+    Â«info('Expand ChiManyToMany '+this.name)Â»
+    Â«IF !this.isAbstractÂ»
+      Â«EXPAND cartridge::Wcmf::templates::RDBMapper::file FOR thisÂ»
+    Â«ENDIFÂ»
+    Â«EXPAND cartridge::Wcmf::templates::NodeBase::file FOR thisÂ»
+    Â«EXPAND cartridge::Wcmf::templates::Node::file FOR thisÂ»
+  Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«REM» class ------------------------------------------------------«ENDREM»
-«DEFINE class FOR uml::Class»
-  «IF this.isApplicationClass()»
-    «info('Expand Class '+this.name)»
-    «EXPAND cartridge::Wcmf::templates::Class::file FOR this»
-  «ENDIF»
-«ENDDEFINE»
+Â«REMÂ» class ------------------------------------------------------Â«ENDREMÂ»
+Â«DEFINE class FOR uml::ClassÂ»
+  Â«IF this.isApplicationClass()Â»
+    Â«info('Expand Class '+this.name)Â»
+    Â«EXPAND cartridge::Wcmf::templates::Class::file FOR thisÂ»
+  Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«REM» controller -------------------------------------------------«ENDREM»
-«DEFINE controller FOR ChiController»
-  «IF this.isApplicationClass()»
-    «info('Expand ChiController '+this.name)»
-    «EXPAND cartridge::Wcmf::templates::Controller::file FOR this»
-  «ENDIF»
-«ENDDEFINE»
+Â«REMÂ» controller -------------------------------------------------Â«ENDREMÂ»
+Â«DEFINE controller FOR ChiControllerÂ»
+  Â«IF this.isApplicationClass()Â»
+    Â«info('Expand ChiController '+this.name)Â»
+    Â«EXPAND cartridge::Wcmf::templates::Controller::file FOR thisÂ»
+  Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«REM» views ------------------------------------------------------«ENDREM»
-«DEFINE view FOR ChiView»
-  «IF this.isApplicationClass()»
-    «info('Expand ChiView '+this.name)»
-    «EXPAND cartridge::Wcmf::templates::View::file FOR this»
-  «ENDIF»
-«ENDDEFINE»
+Â«REMÂ» views ------------------------------------------------------Â«ENDREMÂ»
+Â«DEFINE view FOR ChiViewÂ»
+  Â«IF this.isApplicationClass()Â»
+    Â«info('Expand ChiView '+this.name)Â»
+    Â«EXPAND cartridge::Wcmf::templates::View::file FOR thisÂ»
+  Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«REM» client -----------------------------------------------------«ENDREM»
-«DEFINE client FOR ChiNode»
-  «IF this.isApplicationClass()»
-    «info('Expand ChiNode (JS) '+this.name)»
-    «IF !this.isAbstract»
-      «EXPAND cartridge::Wcmf::templates::client::Class::file FOR this»
-    «ENDIF»
-  «ENDIF»
-«ENDDEFINE»
+Â«REMÂ» client -----------------------------------------------------Â«ENDREMÂ»
+Â«DEFINE client FOR ChiNodeÂ»
+  Â«IF this.isApplicationClass()Â»
+    Â«info('Expand ChiNode (JS) '+this.name)Â»
+    Â«IF !this.isAbstractÂ»
+      Â«EXPAND cartridge::Wcmf::templates::client::Class::file FOR thisÂ»
+    Â«ENDIFÂ»
+  Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE client FOR ChiManyToMany»
-«ENDDEFINE»
+Â«DEFINE client FOR ChiManyToManyÂ»
+Â«ENDDEFINEÂ»

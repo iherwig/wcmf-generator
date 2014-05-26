@@ -4,7 +4,7 @@
 	<!-- the following properties property maybe overriden from the command line -->
 	<property name='generatorVersion' value='4'/>
 	<property name='basePath' value='src'/>
-	<property name='outputEncoding' value='ISO-8859-1'/>
+	<property name='outputEncoding' value='UTF-8'/>
 	<property name='propertyFile' value='${basePath}/cartridge/Wcmf/workflow/wcmf.properties'/>
 	<property file="${propertyFile}"/>
 	
@@ -111,7 +111,7 @@
 
 	<!-- Expand the model into the templates -->
 	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="false">
-		<fileEncoding value="ISO-8859-1"/>
+		<fileEncoding value="${outputEncoding}"/>
 		
 		<!-- Global variables used by the generator -->
 		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
