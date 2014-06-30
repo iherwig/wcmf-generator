@@ -129,6 +129,7 @@
 		<outlet path="${targetDir}">
 			<postprocessor class="oaw.xpand2.output.JavaBeautifier"/>
 			<postprocessor class="oaw.xpand2.output.XmlBeautifier"/>
+			<postprocessor class="com.wemove.wcmf.generator.workflow.WhitespaceRemover"/>
 			<postprocessor class="com.wemove.wcmf.generator.workflow.OutputEncoder">
 				<targetEncoding value="${outputEncoding}"/>
 			</postprocessor>
