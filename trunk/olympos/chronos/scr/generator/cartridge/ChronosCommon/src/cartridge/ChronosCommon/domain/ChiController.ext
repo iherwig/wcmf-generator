@@ -9,7 +9,7 @@ import Chronos;
  * Get the views that are attached to a controller
  */
 cached List[ChiView] getViews(ChiController this) :
-	this.getAssociations().typeSelect(ChiActionKey).memberEnd.class.typeSelect(ChiView)
+	this.getAssociations().typeSelect(ChiActionKey).getEndTypes().typeSelect(ChiView)
 ;
 /**
  * Get all action keys that are attached to a controller
