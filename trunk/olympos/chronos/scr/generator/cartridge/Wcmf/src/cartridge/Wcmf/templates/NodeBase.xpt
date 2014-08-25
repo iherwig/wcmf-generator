@@ -31,7 +31,6 @@ use wcmf\lib\i18n\Message;
 use wcmf\lib\persistence\ObjectId;
 
 /**
- * @class «this.name»
  * «this.name» description: «this.getComment("\n * ")»
  *
  * @author «this.getAuthor()»

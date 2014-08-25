@@ -32,9 +32,7 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 «ENDPROTECT»
 
 /**
- * @class «this.name»
- * @ingroup Controller
- * @brief «this.getComment("\n * ")»
+ * «this.name» description: «this.getComment("\n * ")»
  * 
  * The following configuration settings are defined for this controller:
  *
@@ -50,18 +48,12 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 «IF this.isAbstract»abstract «ENDIF»class «name» «IF this.hasSuperClass()»extends «this.getSuperClass().name»«ENDIF» {
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Body").asProtectedRegionId()»
   /**
-   * @see Controller::executeKernel()
+   * @see Controller::doExecute()
    */
-  protected function executeKernel() {
-  «IF this.getViews().size > 0-»
-    return false;
-  «ELSE-»
+  protected function doExecute() {
     «IF this.hasSuperClass() && this.getSuperClass().name != "Controller"-»
-    return parent::executeKernel();
-    «ELSE-»
-    return true;
+    parent::doExecute();
     «ENDIF-»
-  «ENDIF-»
   }
 «ENDPROTECT»
 «EXPAND operation(this) FOREACH this.ownedOperation»

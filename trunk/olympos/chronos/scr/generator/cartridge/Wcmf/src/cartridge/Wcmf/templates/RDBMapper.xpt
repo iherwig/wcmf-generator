@@ -39,9 +39,8 @@ use wcmf\lib\persistence\ReferenceDescription;
 use wcmf\lib\persistence\ObjectId;
 
 /**
- * @class «this.name.asMapper()»
  * «this.name.asMapper()» maps «this.name» Nodes to the database.
- * «this.name» description: «this.getComment("\n * ")»
+ * «this.name.asMapper()» description: «this.getComment("\n * ")»
  *
  * @author «this.getAuthor()»
  * @version «this.getVersion()»
