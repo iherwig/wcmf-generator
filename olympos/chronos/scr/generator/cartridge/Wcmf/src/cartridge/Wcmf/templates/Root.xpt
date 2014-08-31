@@ -7,7 +7,8 @@
 
 «DEFINE root FOR Model»
   «info('Expand Model')»
-  «EXPAND cartridge::Wcmf::templates::DataDefinition::file»
+  «EXPAND cartridge::Wcmf::templates::DataDefinitionMySql::file»
+  «EXPAND cartridge::Wcmf::templates::DataDefinitionSqlite::file»
   «EXPAND cartridge::Wcmf::templates::Soap::file»
   «EXPAND cartridge::Wcmf::templates::Configuration::file»
   «EXPAND node FOREACH this.allOwnedElements().typeSelect(ChiNode)»
