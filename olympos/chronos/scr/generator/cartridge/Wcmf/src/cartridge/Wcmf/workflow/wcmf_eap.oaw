@@ -7,9 +7,9 @@
 	<property name='outputEncoding' value='UTF-8'/>
 	<property name='propertyFile' value='${basePath}/cartridge/Wcmf/workflow/wcmf.properties'/>
 	<property file="${propertyFile}"/>
-	
+
 	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
-	
+
 	<!-- Metamodel-Definition -->
 	<bean id="EmfMM" class="oaw.type.emf.EmfMetaModel">
 		<metaModelPackage value="org.eclipse.emf.ecore.EcorePackage"/>
@@ -41,7 +41,7 @@
 	<!-- Check constraints before model 2 model transformation -->
 	<if cond="${doCheck}">
 		<component class="oaw.check.CheckComponent">
-		
+
 			<!-- Global variables used by the check -->
 			<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 			<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
@@ -76,11 +76,11 @@
 
 		<outputSlot value="transformedModel"/>
 	</component>
-		
+
 	<!-- Check constraints after model 2 model transformation -->
 	<if cond="${doCheck}">
 		<component class="oaw.check.CheckComponent">
-		
+
 			<!-- Global variables used by the check -->
 			<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 			<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
@@ -102,17 +102,10 @@
 		<outPath value="${transformedModelUmlFile}" />
 	</component>
 
-	<!-- Install the framework -->
-	<component class="com.wemove.wcmf.generator.workflow.InstallComponent">
-		<frameworkFile value="${frameworkFile}"/>
-		<libraryPath value="${targetDir}/${libraryPackage}"/>
-		<applicationPath value="${targetDir}/${applicationPackage}"/>
-	</component>
-
 	<!-- Expand the model into the templates -->
 	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="false">
 		<fileEncoding value="${outputEncoding}"/>
-		
+
 		<!-- Global variables used by the generator -->
 		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
 		<globalVarDef name="PrintGenerateDate" value="'${printGenerateDate}'"/>
@@ -128,9 +121,9 @@
 		<metaModel idRef="EmfMM"/>
 		<metaModel idRef="UmlMM"/>
 		<metaModel idRef="${profilename}MM"/>
-		
+
 		<expand value="${expand} FOR transformedModel"/>
-		
+
 		<outlet path="${targetDir}">
 			<postprocessor class="oaw.xpand2.output.JavaBeautifier"/>
 			<postprocessor class="oaw.xpand2.output.XmlBeautifier"/>
@@ -139,9 +132,9 @@
 				<targetEncoding value="${outputEncoding}"/>
 			</postprocessor>
 		</outlet>
-		
+
 		<!-- Protected regions configuration -->
-		<prSrcPaths value="${targetDir}/${applicationPackage}"/>	
+		<prSrcPaths value="${targetDir}/${applicationPackage}"/>
 		<prDefaultExcludes value="false"/>
 		<prExcludes value="${prExcludes}"/>
 	</component>
