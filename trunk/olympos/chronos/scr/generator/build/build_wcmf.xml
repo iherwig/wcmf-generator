@@ -101,7 +101,7 @@
       <fileset dir="${cartridge.build.dir}" />
     </copy>
 
-    <zip destfile="${zip.dir}/ChronosGenerator-${version}.zip" basedir="${redist.dir}"/>
+    <zip destfile="${zip.dir}/ChronosGenerator-${version}-wCMF.zip" basedir="${redist.dir}"/>
   </target>
 
 </project>

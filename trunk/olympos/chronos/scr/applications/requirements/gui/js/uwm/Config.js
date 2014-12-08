@@ -44,21 +44,21 @@ uwm.Config.debug = true;
  * 
  * @type Integer
  */
-uwm.Config.logLevel = uwm.Log.ERROR;
+uwm.Config.logLevel = uwm.Log.DEBUG;
 
 /**
  * Default value of login.
  * 
  * @type String
  */
-uwm.Config.defaultLogin = "";
+uwm.Config.defaultLogin = "admin";
 
 /**
  * Default value of password.
  * 
  * @type String
  */
-uwm.Config.defaultPassword = "";
+uwm.Config.defaultPassword = "admin";
 
 /**
  * The default modelling.
