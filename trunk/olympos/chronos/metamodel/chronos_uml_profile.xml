@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1252"?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="E232EAF0-2" name="Chronos" version="1.0" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
+	<Documentation id="E232EAF0-2" name="Chronos" version="2.6.3f" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="ChiDiagram" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
@@ -241,7 +241,7 @@ dHIuZGF0VVQFAAf7/chUUEsFBgAAAAABAAEAPgAAAKkAAAAAAA==</Image>
 					<Tag name="fk_name" type="String" description="The name of the foreign key column. The generator will add this if there is no appropriate attribute. If not given the generator will add 'fk_[parent]_id'" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="ChiBusinessPartner" notes="A ChiBusinesPartner is an external person that has a Business relation with the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase" metafile="ChiBusinessPartner.emf">
+			<Stereotype name="ChiBusinessPartner" notes="A ChiBusinesPartner is an external person that has a Business relation with the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase" metafile="ChiBusinessPartner">
 				<AppliesTo>
 					<Apply type="Actor"/>
 				</AppliesTo>
@@ -331,10 +331,10 @@ AAeNvMhUUEsFBgAAAAABAAEAPgAAAKAAAAAAAA==</Image>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="ChiView" notes="A View used in Chronos. Controller, Views and Associations define the application flow" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFZVPEZykErHZQAAAKIAAAAHABEAc3RyLmRhdFVUDQAHE73IVBO9yFQTvchU
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIANR+PEYzJ2d4ZQAAAKAAAAAHABEAc3RyLmRhdFVUDQAHUgbJVFIGyVRSBslU
 S2FIZUhmyGcoYkhkKGHIBLLyGBQYchkqGVKgMrwMXAzVYJITrC4TKJ4HVItQb8ugxODH4Aok
-raHqPIEmJDKkA1VqAEWdGTKAKsPAOsuBfB2gDUYMBkBaF0obAkkErQk1pxZMAgBQSwECFwsU
-AAAACABWVTxGcpBKx2UAAACiAAAABwAJAAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHE73I
+raHqPIEmJDKkA1VqAEWdGTKAKsPAOsuBfB2gDUYMBkBaF0waAkkErQk1pRZMAgBQSwECFwsU
+AAAACADUfjxGMydneGUAAACgAAAABwAJAAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHUgbJ
 VFBLBQYAAAAAAQABAD4AAACbAAAAAAA=</Image>
 				<AppliesTo>
 					<Apply type="Class">
