@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1252"?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="E232EAF0-2" name="Chronos" version="2.6.3H" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
+	<Documentation id="E232EAF0-2" name="Chronos" version="2.6" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="ChiDiagram" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
@@ -50,6 +50,14 @@
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="ChiStakeHolder" notes="Any person or force that have an interest in the considered domain." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIABZnRUZiNtFQCAEAAKACAAAHABEAc3RyLmRhdFVUDQAHm2jTVJto01SbaNNU
+lZJPa8JAEMXftYV+B0kuFjxowVP/QBGLPVgEvYvWoNJ0LcmGUqTfvb/dGE039lAeuzts3nsz
+s5NcGy30oUQtjYm2MrrSpfZ+bx1htNPUc1dEn7pXJKtMBcpItwE7hfcFr4AzI3L+TrHkLsMh
+YW+qHvmyIksBr8zldG2YhvjdZ+rAi/ga6bqhn8KweqKHFAzIlfp8bd2oDzrBWTlcgFI7YTf/
+ULqsv2t4ps6F1oe6B3Sxxdty98bdyDtX/bteurW9x1mPqixu5bU5Va8RzijERnOYKRWs0bj3
+f/X92T/eP8QElvsfLB7G93MHYmopHRK6sYfpxnoA56YSouka64XZjzUkOjl8+/UDUEsBAhcL
+FAAAAAgAFmdFRmI20VAIAQAAoAIAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAB5to
+01RQSwUGAAAAAAEAAQA+AAAAPgEAAAAA</Image>
 				<AppliesTo>
 					<Apply type="Actor"/>
 				</AppliesTo>
@@ -61,6 +69,16 @@
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiOpinionInner" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAEJmRUbP6KW8awEAAOgDAAAHABEAc3RyLmRhdFVUDQAH+WbTVPlm01T5ZtNU
+lZNbS8NAEIXPawT/Q2lfKhTUgqB4gVoi+KAUq88S21iLMS1Nooj0v/vNpjEhKaIM2Z1szjlz
+2UmiFwVaKlRLN3hzxdrVjr7c2vqxWAuNHXaK96FztZVqpQxmW6c1dATuE1wG5h7P9I3xxNkK
+hZC1yRrwZUqUDFwey3hdkDH+m4vUA9fWUL5uUfZ1x9teQ2kMNtUV1UTYkKiRi9xVX0dYr7YX
+Ch6Wc0es8b+YY1gByBSWcTJqGXGSUkl3S453RJg4TqwZDKv0AF17DlnLvYzhg92m6ul5U6up
+TZW4u1noFdVlA13msI9d09mADPJOD0HOdUn2iZuFkD3RA0/It2CzW0eK27A8i7XIu/CqfbV4
+22LlKseOZ309cV6/wk4qM1pMQn0+6+bBeQQbEWEGy6Zv4u40VXX6LDNP73/C1mOUNgJl3UrR
+iF1tZ1jH3YMphHQs3fwHHV1g26a2bk3VDlM/4D/18X5TWNfO1/oGUEsBAhcLFAAAAAgAQmZF
+Rs/opbxrAQAA6AMAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAB/lm01RQSwUGAAAA
+AAEAAQA+AAAAoQEAAAAA</Image>
 				<AppliesTo>
 					<Apply type="Activity">
 						<Property name="isReadOnly" value="false"/>
@@ -72,6 +90,15 @@
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="ChiOpinion" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAMJmRUZmz6FJRQEAAGQDAAAHABEAc3RyLmRhdFVUDQAHCWjTVAlo01QJaNNU
+jZPdSsNAEIXPbQTfoSQ3EQpqQVD8gRoieKFIq9cS21ALMUqTKCJ9d7/dNCZuisghO5PNmTMz
+u5NCz0r0plQD3eAtlWtXO/qy6+AHuV41tdw53ofO5avUShWRvk4ddgbvE14F5x7P6JuIJ/ZW
+KKSs/agxX+ZkqeDVuUxcCDPHf7GZhvB8RYp1i3KsCW97PaUp3FJXdJOBiKyZzRxqpCMwdGyj
+4IGJrTunkgkqM3RCHcA0zyGrsYOON7LWrK1Kt5p253eN++CarhItNl1G9LzUJdkLew8pttAD
+T8q3ZGNNH81J1BW4FdVetyeTb1uuWuXYxpnTOOn1UnTmo7kFdzZceMQ8ws3IsCDK3PyMuJyz
+7N68qczT+7+4bo4Wd7DMaZVo5La3MxBQea2QcmLlZgYDXYBtE+OirxowcWP+kRjvL4W1s7/W
+N1BLAQIXCxQAAAAIAMJmRUZmz6FJRQEAAGQDAAAHAAkAAAAAAAAAAAAAgAAAAABzdHIuZGF0
+VVQFAAcJaNNUUEsFBgAAAAABAAEAPgAAAHsBAAAAAA==</Image>
 				<AppliesTo>
 					<Apply type="Activity">
 						<Property name="isReadOnly" value="false"/>
@@ -208,11 +235,30 @@ dHIuZGF0VVQFAAf7/chUUEsFBgAAAAABAAEAPgAAAKkAAAAAAA==</Image>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="ChiBusinessProcess" notes="A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGhfRUaTFYmIXwEAALQDAAAHABEAc3RyLmRhdFVUDQAHKFvTVChb01QoW9NU
+lZNbS8NAEIXPawX/Q2hfKhRsBZ+8QC0VfVDE9l1iG20hrqVJFRH/u9/sdm1MRZRhZye7Z85c
+dlJoplQLZUp0hTWX06529O518iVOzxp57BTrVSdqqtRSKzybOqqhc3Bv4FZgxljGbx73nC1h
+yNDbXn1upkRZgQuxzK8N0mE/+UgdcE0NNNQ1zEPd8rW3xTQCW+qcanJkQNTcR27rQIdIp7ZH
+hgYSfG/Q7h+eMfI+kpBVpgksKRyPMFgVXXxs9dCbve6f6JJKU7xC5RP6MNcZPSn822TsBdkt
+yWqy/gpdMc6oY4xoVev7zj/w/IHBqrLVW9e38SsqUxLfoj4hVQldWJBlpgf/2mZNdYGeE3tG
+bxImwmJ2K7k1uLmDP/co52fGqnTgqzMTsC9/wtZz24h10XpawuF8N46RFtUGhowel+vpbekU
++WnW6rLN2mJW+/xdQ6zfGD78eVxWYTwLdpRPUEsBAhcLFAAAAAgAaF9FRpMViYhfAQAAtAMA
+AAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAByhb01RQSwUGAAAAAAEAAQA+AAAAlQEA
+AAAA</Image>
 				<AppliesTo>
 					<Apply type="Package"/>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="ChiBusinessUseCase" notes="A Business Use Case is part of a business process that produces an advantage to the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIADZgRUZ0QyLKQgEAAHADAAAHABEAc3RyLmRhdFVUDQAHh1vTVIdb01SHW9NU
+lZNPS8NAEMXfNYLfoaSXCgW12JN/oIYIHpTS6lliGmohRmkSRcTv7m93jWk3Isoju5PkvTeZ
+2UmpByV6VqaerohWKrSrHb3btfeNQk+aW+6C6FWnClVprRplqGOPncN7g1fDuSEy/kZxz7M1
+DhlrVzXhzYIsNTyXy+gGMAviR5tpCC9UpFjXOMeacbfXcZrDrXRBNTmIyJrbzAONNAZDb28c
+AuC0U9biH8o29z6YoU5xSfBY4mCqOEBjrkPWdu/qL6k0QeUqT+nDSuf0pLRnk7GXuuXK+LrE
+7q4rxrNZmxxN1NbXzRDZDM7jyKpMdWMbjTa05cakNOfhT8k2AhR3MHP8l2jMBKS2r9XWBJiu
+B3r5E9fP0WIKy3SowqOwlZ2APt/tHDLOsfqaxb7OwE+T46Pr2mfyJvwrMdFvDh/ec3f/CVBL
+AQIXCxQAAAAIADZgRUZ0QyLKQgEAAHADAAAHAAkAAAAAAAAAAAAAgAAAAABzdHIuZGF0VVQF
+AAeHW9NUUEsFBgAAAAABAAEAPgAAAHgBAAAAAA==</Image>
 				<AppliesTo>
 					<Apply type="UseCase"/>
 				</AppliesTo>
@@ -229,7 +275,17 @@ dHIuZGF0VVQFAAf7/chUUEsFBgAAAAABAAEAPgAAAKkAAAAAAA==</Image>
 					<Tag name="Trigger" type="String" description="Event that is responsible for invocation of the use case." unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="ChiBusinessUseCaseCore" notes="A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money)." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessUseCase" baseStereotypes="ChiBusinessUseCase"/>
+			<Stereotype name="ChiBusinessUseCaseCore" notes="A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money)." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessUseCase" baseStereotypes="ChiBusinessUseCase">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAKhlRUYAvssjQwEAAH4DAAAHABEAc3RyLmRhdFVUDQAH0GXTVNBl01TQZdNU
+lZNPS8NAEMXfNQW/Q0kuFQpqsSf/QA0RPCilrWeJbaiFGKVJFBG/u7/dNCZsVJRHdifJe292
+JpNcD4r1rER9XRNtlGlPPb3btf+FTE+aW+6K6FVn8lVoqxKlrxOHncJ7g1fCWRAZf6O459kW
+h4S1q5rwZkWWEl6Vy+gGMDPiR5tpCM9XqEg3OEeacbffcZrDLXRJNSkIyZrazAONNAZDZ68d
+PFBpp6zZP5RN7gMwQ73EJcZjjYOp4hCNuY5Ym72rv6LSGFVVeUgfNrqgJ7n9Ngl7rluuhHfx
+bjcnrLtjvOu1zlVH7Tp/ylW5HFudqXNso1FLnbdmpv4y7ry48NDcwU3JsEZlpmFpe1yoPQ3m
+ZJ5e/sR1czSYwjLdKvDIbG2nIODklUNCx4rdXAY6B99NkYuua8AUTvhvIqLfHD6c59V9T59Q
+SwECFwsUAAAACACoZUVGAL7LI0MBAAB+AwAABwAJAAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVU
+BQAH0GXTVFBLBQYAAAAAAQABAD4AAAB5AQAAAAA=</Image>
+			</Stereotype>
 			<Stereotype name="ChiManyToMany" notes="A many to many node used in Chronos. It is used to realize a many to many relation between two ChiNodes." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiNode" baseStereotypes="ChiNode"/>
 			<Stereotype name="ChiRelationEnd" notes="An association end used in Chronos" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
@@ -242,79 +298,80 @@ dHIuZGF0VVQFAAf7/chUUEsFBgAAAAABAAEAPgAAAKkAAAAAAA==</Image>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiBusinessPartner" notes="A ChiBusinesPartner is an external person that has a Business relation with the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGSEREazXq3HEwEAAMQCAAAHABEAc3RyLmRhdFVUDQAHRkrSVEZK0lRGStJU
-fZFNSwMxEIbfs+B/KLuXFnqogie1oMWCh0qx3mVtl7awRtkPRMT/7jNZo5IUGZJMkvdjkmm0
-U6FXlRpoQbaX07GO9OHnwU84vWjlsRuyN10qU6taHcxM5xG6AvcOrgPzQGb6xnjirEahZE5Z
-V9xscOnA9V7GG4J05M/eaQwu4zbTKOGvQLSa84aKmOFVeb+hTnVGjKM1VbhHYY1GgeMWtrlP
-wNs4Yf5dU+4tFRaw+opn1L/XNW9p/J+WrI2WIGr0bW8/YK8xzTAHj5AFFxvNn06F/4i7FMdO
-jyArKtjCsQ6sYTkqONyBOJagrPoWDeffdUHk1NIrlPxv+93fXFPiUF/iSFVz3dH9hW7I/lP4
-jM77/RdQSwECFwsUAAAACABkhERGs16txxMBAADEAgAABwAJAAAAAAAAAAAAAIAAAAAAc3Ry
-LmRhdFVUBQAHRkrSVFBLBQYAAAAAAQABAD4AAABJAQAAAAA=</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIALKFREZcUWegHwEAAPwCAAAHABEAc3RyLmRhdFVUDQAHtUzSVLVM0lS1TNJU
+lZJLS8NAFIXPVsH/UJJNC12o4MoH1KLgolKse4ltaAtxlGaCiPjf/e6kY2Wiglxy5yY559zX
+1Fqp0ItK9TQhWsvpQPt6D773ZU7PmgXsguhV58rktVEDM9Npgq7AvYFrwNwTmb4xHvm2QaHE
+d1kj/izI0oBrcxmvD9IRP4VMQ3AZfzMNOvwZCK9reqiwMbmqkK+vY51gw+SMCntb5hTv/sHb
+Zb6DOUehgL+EbVUfgrfnCL87u9wbOitgtZ2O6XutS2ZQh12UnDWVFdTjw7tNzqZgmtHHHDGK
+Weypv204zjHdbmorPYCsqGAJxzY3D7Pxv2wutSkoq96j4UJfZ1hOLa1CyXz99l7kusB+2mdq
+XdVct9yaia6I/lL4SL63759QSwECFwsUAAAACACyhURGXFFnoB8BAAD8AgAABwAJAAAAAAAA
+AAAAAIAAAAAAc3RyLmRhdFVUBQAHtUzSVFBLBQYAAAAAAQABAD4AAABVAQAAAAA=</Image>
 				<AppliesTo>
 					<Apply type="Actor"/>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="ChiBusinessPartnerActive" notes="A ChiBusinesPartnerActive is a direct customer of the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAEqEREbG1ml/GAEAANACAAAHABEAc3RyLmRhdFVUDQAHHUrSVB1K0lQdStJU
-fZFNS8NAEIbfs+B/KMmlQg8qePIDtCh4qBTrXWIb2kBcJR+KiP/dZzZuld0iQ3ZnN+/HzE6r
-jQq9qtRIM7JKTvva06dfR9twetHCY1dk7zpXpk6NepiZTiN0De4DXA/mgcz0jfHEXYNCyZqy
-LvmzwqUHN3gZbwzSkT97pwm4jL+ZDhL+AkSnG3qoiSletfcb61gnxCTaU4V7FJZoFDiuYZv7
-IXj7jlh/95R7S4UFrKHiKfVXuqKX1r9pyd5qDqJB384N/ZpXpbdtZ6Yf1uAXsuBoX/tnauFt
-4onFsdEjyBq/NRybxhKWo4Ld04hjDso66dBwvsczIqeWQaHkrbufWee6IHbNKI5UNdcdLzPT
-Ndl/Cl/R/XD+BlBLAQIXCxQAAAAIAEqEREbG1ml/GAEAANACAAAHAAkAAAAAAAAAAAAAgAAA
-AABzdHIuZGF0VVQFAAcdStJUUEsFBgAAAAABAAEAPgAAAE4BAAAAAA==</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIALKFREY8REDgJQEAAAoDAAAHABEAc3RyLmRhdFVUDQAHxUzSVMVM0lTFTNJU
+lZJPSwMxEMXfVcHvUHYvFXpQwZN/QIuCh0qx3mXbLu3CGmU3q4j43f0lMa1kVZAhk8nmvXmZ
+mW21VqFnlRpoQlTJaE+7evd+sDGjJ808dkn0qjNlsmrUwcx0kqBrcG/gOjD3RC6/Y8z51pCh
+xPdZF9wsUenABS3HG4I0xI9eaQQu4zbTfo8/A2F1TQ01Nkar9npDHekYGyV7zLCDBe4Ub/7B
+3GrfwVyQoYC/gu3efQDerUP8du9zb6itgBVqHVN5pUu60PpplOwtLyt4j/Xnhk45rUovm564
+/NFHvRhFRbfab/OOXU1nndpaDyBr9FZw3BwXvk/2lzmmNgXlKrHkML7GUyznLSFDSa/t11+S
+6xz7abqp9bPmuqUzE10R/ZXhI/kezp9QSwECFwsUAAAACACyhURGPERA4CUBAAAKAwAABwAJ
+AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHxUzSVFBLBQYAAAAAAQABAD4AAABbAQAA
+AAA=</Image>
 			</Stereotype>
 			<Stereotype name="ChiBusinessPartnerPassive" notes="A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGCEREazXq3HEwEAAMQCAAAHABEAc3RyLmRhdFVUDQAHVErSVFRK0lRUStJU
-fZFNSwMxEIbfs+B/KLuXFnqogie1oMWCh0qx3mVtl7awRtkPRMT/7jNZo5IUGZJMkvdjkmm0
-U6FXlRpoQbaX07GO9OHnwU84vWjlsRuyN10qU6taHcxM5xG6AvcOrgPzQGb6xnjirEahZE5Z
-V9xscOnA9V7GG4J05M/eaQwu4zbTKOGvQLSa84aKmOFVeb+hTnVGjKM1VbhHYY1GgeMWtrlP
-wNs4Yf5dU+4tFRaw+opn1L/XNW9p/J+WrI2WIGr0bW8/YK8xzTAHj5AFFxvNn06F/4i7FMdO
-jyArKtjCsQ6sYTkqONyBOJagrPoWDeffdUHk1NIrlPxv+93fXFPiUF/iSFVz3dH9hW7I/lP4
-jM77/RdQSwECFwsUAAAACABghERGs16txxMBAADEAgAABwAJAAAAAAAAAAAAAIAAAAAAc3Ry
-LmRhdFVUBQAHVErSVFBLBQYAAAAAAQABAD4AAABJAQAAAAA=</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIANSFREZipvT3IAEAAP4CAAAHABEAc3RyLmRhdFVUDQAH0kzSVNJM0lTSTNJU
+lZJPS8NAEMXfVcHvUJJLhR5U8KQWalHwUCnWu8Q2tIUYpdkgIn53f7PrWtlUQYbMTpL33vzb
+RisVelGpniZEa9U60L7eve99W61nzTx2QfSqC2Vy2qiFmeksQVfg3sC1YO6JTN8Yj3zboFDi
+u6wRfxZkacGFXMbrg6yJn3ymAbiMv5kOO/wZCKdreqiwMbkqn6+vE51ig+SMCntY4E7x9T+Y
+29x3MOcoFPCXsK3uI/D2HOO3Z5d7Q28FrNDrmM7XumQKjd9GydlQWUE9zr/b7GwOphl9zBGj
+mMWe5seO4yTT/aa20gPIigqWcGx3cz8b98vuUpuCsuodGrXv6xzLqSUolMzXfd2MXENs10ZT
+66rmuuXeTHRF9JfCR/I9vH8CUEsBAhcLFAAAAAgA1IVERmKm9PcgAQAA/gIAAAcACQAAAAAA
+AAAAAACAAAAAAHN0ci5kYXRVVAUAB9JM0lRQSwUGAAAAAAEAAQA+AAAAVgEAAAAA</Image>
 			</Stereotype>
 			<Stereotype name="ChiWorker" notes="A ChiWorker is a special actor that works within the enterprise. " cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAKKEREbKQJEeCwEAALICAAAHABEAc3RyLmRhdFVUDQAHvUrSVL1K0lS9StJU
-fZFNSwMxEIbfs+B/KLuXCj1YwZNWKEWhh4pYwaNs26UtXaO0u4iI/91nso1KUsqQZHbzfsxk
-dlqp0LtKdTQhW8vpVCf68nvnN5zeNPXYBdmHBspUa6sGZqarCF2B+wTXgHkiM31jzPi3RaFk
-T1lDbha4NOBaL+N1QTryV+/UA5dxm+ks4U9B1Lqjh4oY4VV5v64udEn0ojNVeERhjkaB4xK2
-uZ+Dt9Vn/ztT7pgKC1htxSPqX+vZ+2/2/VrtphD2oBiyoGlr928uoft4JnGs9AKywncJx957
-DsvRz+H3juMBlM2/RsP5Lq6JnFpahZJu6v00c90Qh6YQR6qa655ZT3RLdkzhO/rffv8AUEsB
-AhcLFAAAAAgAooRERspAkR4LAQAAsgIAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUA
-B71K0lRQSwUGAAAAAAEAAQA+AAAAQQEAAAAA</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAP6FREZXkLjPFwEAAOwCAAAHABEAc3RyLmRhdFVUDQAHM03SVDNN0lQzTdJU
+lZJBS8NAEIXfVcH/UJJLhR5U8KQWSlHwUClW8ChpG9piXKXdICL+d7/ZdK1sVJDHTibJe292
+dnajpQq9qFRHI7KVnA60r/cQO19wetYkcOdkr7pQJq+1apSZzhJ2Be8NXg3njsz8TTHl2xqH
+kthWDfgzp0oNr6llui5MR/4UKvXgZfzNdNjST2B4XdFDBYbUqkK9rk50CnrJMzrsgUY7Jrp/
+KHe1b1HOcCjQL1Dbvo/g2zom7p5t7TW9FaiaXod0vtJ9qP+4PSnr2hxijI4xi562Nt8mGs8t
+nWaKpR5gVtRdoLFJzcJJ+F8mlWIMy26Ox8OFLs5Bzl4ah5Ju/PYe5OqDn+aXou2a64ZbMtIl
+2V8OH8n35v0TUEsBAhcLFAAAAAgA/oVERleQuM8XAQAA7AIAAAcACQAAAAAAAAAAAACAAAAA
+AHN0ci5kYXRVVAUABzNN0lRQSwUGAAAAAAEAAQA+AAAATQEAAAAA</Image>
 				<AppliesTo>
 					<Apply type="Actor"/>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="ChiWorkerExternal" notes="A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker" baseStereotypes="ChiWorker">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAJSEREY129RlFAEAAMQCAAAHABEAc3RyLmRhdFVUDQAHqkrSVKpK0lSqStJU
-fZJNS8NAEIbfc8H/UJJLhR5U8OQHlKLgoSJW8ChpG9pgXKVNUBH/u89ssiq7IkM2k933Y2Yn
-O21U6EWlhpqRVXLa00Affh1+h9Oz5h67InvVmTI12qqFmekkQtfg3sG1YO7ITN8YC/a2KJSs
-KWvCyQqXFlznZbwRSEf+5J3G4DJOM+0n/DmIRpf0UBNTvGrvN9KRjolx9E4VblFYolHguIZt
-7gfg7Tlk/Xmn3CsqLGB1FU+pv9K993/0/V7oDWXLrJu678UUwxocQhY87Nn9mlO4jXhGcWz0
-4J0qqnL+/pewXF9Fev9x3ICy/6FBw/muTomcWjqFku6afrq5zom/phJHqprrmtnPuKH8X4XP
-aL/7HugLUEsBAhcLFAAAAAgAlIRERjXb1GUUAQAAxAIAAAcACQAAAAAAAAAAAACAAAAAAHN0
-ci5kYXRVVAUAB6pK0lRQSwUGAAAAAAEAAQA+AAAASgEAAAAA</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAOxmRUbkI41VIAEAAP4CAAAHABEAc3RyLmRhdFVUDQAHOmjTVDpo01Q6aNNU
+lZJNS8NAEIbfqwX/Q0kuFXpQwZMfIEXBQ6VYwaPENthgXKVNUBH/u8/sdm3ZiCBDNpPs+7Ez
+systVOhVpfoak1Vy2lVPn37t/4TTi6YeOyd706kyNVqqhZnpOEHX4D7AtWBuyUzfGA/8W6JQ
+snZZ5+zMcWnBBS/jDUA68mfvNASXsZtpr8Ofgmh0SQ01McKr9n4DHeqIGCbvqLBDBO6E1f2D
+ufG+gTlDoYD/CNvOvQ/engPWzbvLvaK2AlaodUTlle68/5Pv1IXeUbbM+lCvu2CKcY0OMYse
+9qy2Jhz7mE43jYXuvVPFqZyf3Mx3JpyiO7k0JqDsJjVoOF/VCZFzlqBQUl2zvhe5zojf5plG
+VzXXNbdmTIfyPxW+kv/hu6dvUEsBAhcLFAAAAAgA7GZFRuQjjVUgAQAA/gIAAAcACQAAAAAA
+AAAAAACAAAAAAHN0ci5kYXRVVAUABzpo01RQSwUGAAAAAAEAAQA+AAAAVgEAAAAA</Image>
 				<TaggedValues>
 					<Tag name="is_OfflineUser" type="bool" description="" unit="" values="true,false" default="true"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiWorkerInternal" notes="A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker" baseStereotypes="ChiWorker">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIALiEREajuO7MEAEAAL4CAAAHABEAc3RyLmRhdFVUDQAH2ErSVNhK0lTYStJU
-fZJNSwMxEIbfs+B/KLuXCj2o4MkPkKLQQ0Ws4FG27WIX1yhtFhHpf/fJbKOSiAxJhuz7MZPZ
-jVaq9KZaA03JGjnta0+ftg++w+lVM8Muyd51rkJea3UwC50m6BbcB7gOzD1Z0A+MOXdrFGr2
-nHXJlyUuHbjeK/CGIB35izmNwBV8LXSQ8WcgvK7poSXGeLXmN9SxTohRcuYKdygs0KhwfIId
-3A/Bh3XE/nPm3AkVVrD6isfU3+jB/J+t3wma3rLQTbvrJSjGPTrELHqEtfk1p/ga6YzSWOnR
-nBqqcvb+C1ixivz907gFFf4Hj4azrs6Iklp6hZru/G66pS6Iv6aSRq5a6obZT3VF9p/CNrnf
-6gtQSwECFwsUAAAACAC4hERGo7juzBABAAC+AgAABwAJAAAAAAAAAAAAAIAAAAAAc3RyLmRh
-dFVUBQAH2ErSVFBLBQYAAAAAAQABAD4AAABGAQAAAAA=</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAMCFREaKrvWBHQEAAPgCAAAHABEAc3RyLmRhdFVUDQAH+EzSVPhM0lT4TNJU
+lZJNS8NAEIbfq4L/oSSXCj2o4MkPkKLQQ6VYwaOkbbDBuEqbICL97z476VrZFUGGTIbk/diZ
+2bWWKvSmUj2NqSo5HWhfn5Z73+H0qqlhF1TvulCmRiu1MDOdRega3Ae4Fsw9ldf3jBnfViiU
+5JR1xZ8FLi24zsvz+iAd9Ys5DcBl/M10mPCnIBrd0ENNDPGqza+vE50Sg+gdFPaIjjshu38w
+d953MOcoFPCfYPtzH4H3zzF59065I3orYHW9Dum80oP5P9ukRmg2Vvk51NspeMWQg0Oogod/
+1j82HOYYbzeOpR7NqeJUzjY3t8l0p0g3F8cElL9JDRrOujoncs7SKZR012zvRa5L4rd9xpGq
+5rrl1ox1TfWXwib6vtEXUEsBAhcLFAAAAAgAwIVERoqu9YEdAQAA+AIAAAcACQAAAAAAAAAA
+AACAAAAAAHN0ci5kYXRVVAUAB/hM0lRQSwUGAAAAAAEAAQA+AAAAUwEAAAAA</Image>
 			</Stereotype>
 			<Stereotype name="ChiNode" notes="A Node type used in Chronos. Nodes and Values define the application data model" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIADRTPEZfw4CLYwAAAKIAAAAHABEAc3RyLmRhdFVUDQAHJrnIVCa5yFQmuchU
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAPBeRUZfw4CLYwAAAKIAAAAHABEAc3RyLmRhdFVUDQAHLFrTVCxa01QsWtNU
 RYyxCkBgFEbPSnkHmSgKq0wyWLyDEAaULJJ39/kTy3du9577dfS0rGw07EyaFlxmDrr34mBz
 mnysSdtF5m/neNSUysxYFpX+GwaZvrYFo8xa7tPoEao/JRajl4nyZ/D1XIY3UEsBAhcLFAAA
-AAgANFM8Rl/DgItjAAAAogAAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUABya5yFRQ
+AAgA8F5FRl/DgItjAAAAogAAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAByxa01RQ
 SwUGAAAAAAEAAQA+AAAAmQAAAAAA</Image>
 				<AppliesTo>
 					<Apply type="Class">

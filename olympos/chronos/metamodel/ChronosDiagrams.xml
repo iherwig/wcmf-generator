@@ -30,6 +30,15 @@
 					</Apply>
 				</AppliesTo>
 			</Stereotype>
+			<Stereotype name="Chronos Stakeholders" notes="Goal of the interest analysis is to list the stakeholder and display their relative positions and conflicts." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+				<AppliesTo>
+					<Apply type="Diagram_Custom">
+						<Property name="alias" value="interest analysis"/>
+						<Property name="diagramID" value="interest analysis"/>
+						<Property name="toolbox" value="Chronos"/>
+					</Apply>
+				</AppliesTo>
+			</Stereotype>
 		</Stereotypes>
 		<TaggedValueTypes/>
 	</Content>
