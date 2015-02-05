@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="windows-1252"?>
 <UMLProfile profiletype="uml2">
-	<Documentation id="E232EAF0-2" name="Chronos" version="2.6.3f" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
+	<Documentation id="E232EAF0-2" name="Chronos" version="2.6.3H" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
 	<Content>
 		<Stereotypes>
 			<Stereotype name="ChiDiagram" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
@@ -104,12 +104,12 @@
 				</AppliesTo>
 				<TaggedValues>
 					<Tag name="Alias" type="String" description="the Project Id of this object." unit="" values="" default=""/>
-					<Tag name="Author" type="String" description="this is the original author, in sense of idea, of the object, distingued from this technical creator in sense of phisical creation." unit="" values="" default=""/>
+					<Tag name="Author" type="String" description="this is the original author, in sense of idea, of the object, distinguished from this technical creator in sense of physical creation." unit="" values="" default="aName, aRole"/>
 					<Tag name="Created" type="String" description="the creation date of this object" unit="" values="" default=""/>
-					<Tag name="Creator" type="String" description="the user that created this object" unit="" values="" default=""/>
+					<Tag name="Creator" type="String" description="the user that created this object" unit="" values="" default="aName, aRole"/>
 					<Tag name="Last_editor" type="String" description="the last user that edited this object" unit="" values="" default=""/>
 					<Tag name="Modified" type="String" description="the date when this object was modified" unit="" values="" default=""/>
-					<Tag name="Status" type="String" description="this describes the actal status in the Chronos workflow" unit="" values="" default=""/>
+					<Tag name="Status" type="enumeration" description="this describes the actual status in the Chronos methodology workflow" unit="" values="Proposed,Validated,Approved,Rejected,Solved,Released,Modified" default="Proposed"/>
 					<Tag name="Version" type="String" description="the model version of this object" unit="" values="" default="1.0"/>
 				</TaggedValues>
 			</Stereotype>
@@ -142,7 +142,7 @@ YXRVVAUAB7T9yFRQSwUGAAAAAAEAAQA+AAAApQAAAAAA</Image>
 					<Tag name="Author" type="String" description="This requirement's author's name and role in the project" unit="" values="" default="myName, Analyst"/>
 					<Tag name="Priority" type="Integer" description="A priority in %. Requirements are ordered by priority." unit="" values="" default="50"/>
 					<Tag name="Proofreader" type="String" description="Each requirement needs to be confirmed.&#xA;This requirement's proofreader	's name and role in the project" unit="" values="" default="aName, Client"/>
-					<Tag name="Status" type="String" description="" unit="" values="" default=""/>
+					<Tag name="Status" type="enumeration" description="" unit="" values="Proposed,Validated,Approved,Rejected,Solved,Released,Modified" default=""/>
 					<Tag name="Type" type="String" description="" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
@@ -158,9 +158,9 @@ AAAAc3RyLmRhdFVUBQAHlLfIVFBLBQYAAAAAAQABAD4AAACtAAAAAAA=</Image>
 					</Apply>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="Author" type="String" description="This feature's author's name and role in the project" unit="" values="" default="myName, Analyst"/>
-					<Tag name="Proofreader" type="String" description="This feature's revisor's name and role in the project" unit="" values="" default="aName, Client"/>
-					<Tag name="Status" type="String" description="This feature's status" unit="" values="" default=""/>
+					<Tag name="Author" type="String" description="This feature's author's name and role in the project" unit="" values="" default="aName, aRole"/>
+					<Tag name="Proofreader" type="String" description="This feature's proofreader name and role in the project" unit="" values="" default="aName, aRole"/>
+					<Tag name="Status" type="enumeration" description="This feature's status" unit="" values="Proposed,Validated,Rejected,Implemented" default=""/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiIssue" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
@@ -173,8 +173,8 @@ dHIuZGF0VVQFAAf7/chUUEsFBgAAAAABAAEAPgAAAKkAAAAAAA==</Image>
 					<Apply type="Issue"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="Author" type="String" description="This issue's author's name and role in the project" unit="" values="" default=""/>
-					<Tag name="Responsible" type="String" description="The responsible to close the present issue" unit="" values="" default="none"/>
+					<Tag name="Author" type="String" description="This issue's author's name and role in the project" unit="" values="" default="aName, aRole"/>
+					<Tag name="Responsible" type="String" description="The responsible to close the present issue" unit="" values="" default="aName, aRole"/>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiAction" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -241,24 +241,75 @@ dHIuZGF0VVQFAAf7/chUUEsFBgAAAAABAAEAPgAAAKkAAAAAAA==</Image>
 					<Tag name="fk_name" type="String" description="The name of the foreign key column. The generator will add this if there is no appropriate attribute. If not given the generator will add 'fk_[parent]_id'" unit="" values="" default=""/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="ChiBusinessPartner" notes="A ChiBusinesPartner is an external person that has a Business relation with the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase" metafile="ChiBusinessPartner">
+			<Stereotype name="ChiBusinessPartner" notes="A ChiBusinesPartner is an external person that has a Business relation with the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGSEREazXq3HEwEAAMQCAAAHABEAc3RyLmRhdFVUDQAHRkrSVEZK0lRGStJU
+fZFNSwMxEIbfs+B/KLuXFnqogie1oMWCh0qx3mVtl7awRtkPRMT/7jNZo5IUGZJMkvdjkmm0
+U6FXlRpoQbaX07GO9OHnwU84vWjlsRuyN10qU6taHcxM5xG6AvcOrgPzQGb6xnjirEahZE5Z
+V9xscOnA9V7GG4J05M/eaQwu4zbTKOGvQLSa84aKmOFVeb+hTnVGjKM1VbhHYY1GgeMWtrlP
+wNs4Yf5dU+4tFRaw+opn1L/XNW9p/J+WrI2WIGr0bW8/YK8xzTAHj5AFFxvNn06F/4i7FMdO
+jyArKtjCsQ6sYTkqONyBOJagrPoWDeffdUHk1NIrlPxv+93fXFPiUF/iSFVz3dH9hW7I/lP4
+jM77/RdQSwECFwsUAAAACABkhERGs16txxMBAADEAgAABwAJAAAAAAAAAAAAAIAAAAAAc3Ry
+LmRhdFVUBQAHRkrSVFBLBQYAAAAAAQABAD4AAABJAQAAAAA=</Image>
 				<AppliesTo>
 					<Apply type="Actor"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="ChiBusinessPartnerActive" notes="A ChiBusinesPartnerActive is a direct customer of the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner"/>
-			<Stereotype name="ChiBusinessPartnerPassive" notes="A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner"/>
+			<Stereotype name="ChiBusinessPartnerActive" notes="A ChiBusinesPartnerActive is a direct customer of the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAEqEREbG1ml/GAEAANACAAAHABEAc3RyLmRhdFVUDQAHHUrSVB1K0lQdStJU
+fZFNS8NAEIbfs+B/KMmlQg8qePIDtCh4qBTrXWIb2kBcJR+KiP/dZzZuld0iQ3ZnN+/HzE6r
+jQq9qtRIM7JKTvva06dfR9twetHCY1dk7zpXpk6NepiZTiN0De4DXA/mgcz0jfHEXYNCyZqy
+LvmzwqUHN3gZbwzSkT97pwm4jL+ZDhL+AkSnG3qoiSletfcb61gnxCTaU4V7FJZoFDiuYZv7
+IXj7jlh/95R7S4UFrKHiKfVXuqKX1r9pyd5qDqJB384N/ZpXpbdtZ6Yf1uAXsuBoX/tnauFt
+4onFsdEjyBq/NRybxhKWo4Ld04hjDso66dBwvsczIqeWQaHkrbufWee6IHbNKI5UNdcdLzPT
+Ndl/Cl/R/XD+BlBLAQIXCxQAAAAIAEqEREbG1ml/GAEAANACAAAHAAkAAAAAAAAAAAAAgAAA
+AABzdHIuZGF0VVQFAAcdStJUUEsFBgAAAAABAAEAPgAAAE4BAAAAAA==</Image>
+			</Stereotype>
+			<Stereotype name="ChiBusinessPartnerPassive" notes="A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGCEREazXq3HEwEAAMQCAAAHABEAc3RyLmRhdFVUDQAHVErSVFRK0lRUStJU
+fZFNSwMxEIbfs+B/KLuXFnqogie1oMWCh0qx3mVtl7awRtkPRMT/7jNZo5IUGZJMkvdjkmm0
+U6FXlRpoQbaX07GO9OHnwU84vWjlsRuyN10qU6taHcxM5xG6AvcOrgPzQGb6xnjirEahZE5Z
+V9xscOnA9V7GG4J05M/eaQwu4zbTKOGvQLSa84aKmOFVeb+hTnVGjKM1VbhHYY1GgeMWtrlP
+wNs4Yf5dU+4tFRaw+opn1L/XNW9p/J+WrI2WIGr0bW8/YK8xzTAHj5AFFxvNn06F/4i7FMdO
+jyArKtjCsQ6sYTkqONyBOJagrPoWDeffdUHk1NIrlPxv+93fXFPiUF/iSFVz3dH9hW7I/lP4
+jM77/RdQSwECFwsUAAAACABghERGs16txxMBAADEAgAABwAJAAAAAAAAAAAAAIAAAAAAc3Ry
+LmRhdFVUBQAHVErSVFBLBQYAAAAAAQABAD4AAABJAQAAAAA=</Image>
+			</Stereotype>
 			<Stereotype name="ChiWorker" notes="A ChiWorker is a special actor that works within the enterprise. " cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAKKEREbKQJEeCwEAALICAAAHABEAc3RyLmRhdFVUDQAHvUrSVL1K0lS9StJU
+fZFNSwMxEIbfs+B/KLuXCj1YwZNWKEWhh4pYwaNs26UtXaO0u4iI/91nso1KUsqQZHbzfsxk
+dlqp0LtKdTQhW8vpVCf68nvnN5zeNPXYBdmHBspUa6sGZqarCF2B+wTXgHkiM31jzPi3RaFk
+T1lDbha4NOBaL+N1QTryV+/UA5dxm+ks4U9B1Lqjh4oY4VV5v64udEn0ojNVeERhjkaB4xK2
+uZ+Dt9Vn/ztT7pgKC1htxSPqX+vZ+2/2/VrtphD2oBiyoGlr928uoft4JnGs9AKywncJx957
+DsvRz+H3juMBlM2/RsP5Lq6JnFpahZJu6v00c90Qh6YQR6qa655ZT3RLdkzhO/rffv8AUEsB
+AhcLFAAAAAgAooRERspAkR4LAQAAsgIAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUA
+B71K0lRQSwUGAAAAAAEAAQA+AAAAQQEAAAAA</Image>
 				<AppliesTo>
 					<Apply type="Actor"/>
 				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="ChiWorkerExternal" notes="A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker" baseStereotypes="ChiWorker">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAJSEREY129RlFAEAAMQCAAAHABEAc3RyLmRhdFVUDQAHqkrSVKpK0lSqStJU
+fZJNS8NAEIbfc8H/UJJLhR5U8OQHlKLgoSJW8ChpG9pgXKVNUBH/u89ssiq7IkM2k933Y2Yn
+O21U6EWlhpqRVXLa00Affh1+h9Oz5h67InvVmTI12qqFmekkQtfg3sG1YO7ITN8YC/a2KJSs
+KWvCyQqXFlznZbwRSEf+5J3G4DJOM+0n/DmIRpf0UBNTvGrvN9KRjolx9E4VblFYolHguIZt
+7gfg7Tlk/Xmn3CsqLGB1FU+pv9K993/0/V7oDWXLrJu678UUwxocQhY87Nn9mlO4jXhGcWz0
+4J0qqnL+/pewXF9Fev9x3ICy/6FBw/muTomcWjqFku6afrq5zom/phJHqprrmtnPuKH8X4XP
+aL/7HugLUEsBAhcLFAAAAAgAlIRERjXb1GUUAQAAxAIAAAcACQAAAAAAAAAAAACAAAAAAHN0
+ci5kYXRVVAUAB6pK0lRQSwUGAAAAAAEAAQA+AAAASgEAAAAA</Image>
 				<TaggedValues>
 					<Tag name="is_OfflineUser" type="bool" description="" unit="" values="true,false" default="true"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="ChiWorkerInternal" notes="A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker" baseStereotypes="ChiWorker"/>
+			<Stereotype name="ChiWorkerInternal" notes="A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker" baseStereotypes="ChiWorker">
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIALiEREajuO7MEAEAAL4CAAAHABEAc3RyLmRhdFVUDQAH2ErSVNhK0lTYStJU
+fZJNSwMxEIbfs+B/KLuXCj2o4MkPkKLQQ0Ws4FG27WIX1yhtFhHpf/fJbKOSiAxJhuz7MZPZ
+jVaq9KZaA03JGjnta0+ftg++w+lVM8Muyd51rkJea3UwC50m6BbcB7gOzD1Z0A+MOXdrFGr2
+nHXJlyUuHbjeK/CGIB35izmNwBV8LXSQ8WcgvK7poSXGeLXmN9SxTohRcuYKdygs0KhwfIId
+3A/Bh3XE/nPm3AkVVrD6isfU3+jB/J+t3wma3rLQTbvrJSjGPTrELHqEtfk1p/ga6YzSWOnR
+nBqqcvb+C1ixivz907gFFf4Hj4azrs6Iklp6hZru/G66pS6Iv6aSRq5a6obZT3VF9p/CNrnf
+6gtQSwECFwsUAAAACAC4hERGo7juzBABAAC+AgAABwAJAAAAAAAAAAAAAIAAAAAAc3RyLmRh
+dFVUBQAH2ErSVFBLBQYAAAAAAQABAD4AAABGAQAAAAA=</Image>
+			</Stereotype>
 			<Stereotype name="ChiNode" notes="A Node type used in Chronos. Nodes and Values define the application data model" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIADRTPEZfw4CLYwAAAKIAAAAHABEAc3RyLmRhdFVUDQAHJrnIVCa5yFQmuchU
 RYyxCkBgFEbPSnkHmSgKq0wyWLyDEAaULJJ39/kTy3du9577dfS0rGw07EyaFlxmDrr34mBz
