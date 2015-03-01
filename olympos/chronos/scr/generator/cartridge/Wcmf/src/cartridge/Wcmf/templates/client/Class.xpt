@@ -53,12 +53,12 @@ define([
             type: "«curValue.type.name»",
             description: "«curValue.getComment(" ").replaceAll('\\"', '\\\\"')»",
             isEditable: «curValue.is_editable.boolString()»,
-            inputType: '«curValue.input_type»',
-            displayType: '«curValue.display_type»',
-            validateType: '«curValue.restrictions_match»',
-            validateDesc: '«curValue.restrictions_description»',
-            tags: ['«curValue.app_data_type»'],
-            defaultValue: «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue()»'«ENDIF»,
+            inputType: "«curValue.input_type»",
+            displayType: "«curValue.display_type»",
+            validateType: "«curValue.restrictions_match»",
+            validateDesc: "«curValue.restrictions_description»",
+            tags: [«FOREACH curValue.app_data_type.split("\\|") AS curTag SEPARATOR ", "-»"«curTag»"«ENDFOREACH-»],
+            defaultValue: «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»"«curValue.defaultValue.stringValue()»"«ENDIF»,
             isReference: false
 «ENDFOREACH-»«IF values.size > 0 && references.size > 0-»        }, {«ENDIF-»
 «FOREACH references AS curReference SEPARATOR "        }, {"»
