@@ -1,4 +1,4 @@
-<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos" version="2.6.3M" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
+<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos" version="2.6.3M1" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -9577,7 +9577,7 @@ AAAAAIAAAAAAc3RyLmRhdFVUBQAHwRDWVFBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiBusinessProcess" notes="A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiBusinessProcess" notes="A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="TOGAF::Process" baseStereotypes="TOGAF::Process">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAAaCRUYy88mgZQEAAMYDAAAHABEAc3RyLmRhdFVUDQAHY5fTVGOX01Rjl9NU
 lZNbS8NAEIXPawX/Q2hfKhRsBV+8QS0VfVDE+i61jTYQY2lSRcT/7je72TYkIsphN5PNmTOX
 neRaaKqlYkW6xkqUaVc7+nR7tEGmV00cd471rlO1VWilNZ5tHdfYKbwPeGs491imbx6PnK1Q
@@ -9588,9 +9588,6 @@ LuXutmKeOfkaa1a++T5ZlLCHqMGqVtyMmJQKVqetQVnx1i+vzE24nfrMVOH7siTLWE/u/s2a
 uCjnuaMz8NP01dFU7TC9Q/63MdZvCl/uPCyrMJx5O+AbUEsBAhcLFAAAAAgABoJFRjLzyaBl
 AQAAxgMAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAB2OX01RQSwUGAAAAAAEAAQA+
 AAAAmwEAAAAA</Image>
-						<AppliesTo>
-							<Apply type="Package"/>
-						</AppliesTo>
 					</Stereotype>
 					<Stereotype name="ChiBusinessUseCase" notes="A Business Use Case is part of a business process that produces an advantage to the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGaCRUYZTNDKSQEAAJQDAAAHABEAc3RyLmRhdFVUDQAH95fTVPeX01T3l9NU
