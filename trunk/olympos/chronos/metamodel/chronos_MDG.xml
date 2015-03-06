@@ -1,4 +1,4 @@
-<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos" version="2.6.3L" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
+<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos" version="2.6.3M" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -9342,7 +9342,7 @@ CQ0REhYaAAEFvr/A////////////////////SEtOFRkcGR0gGBwg////////////////Vlla
 BgoOFBgbFBgbAAQHioyO////////////////////////6OjpAAACFBgbAQUInJ2f////////
 ////////iYuNZGdpYmVnn6Gi////////////////////////////////g4WHZWhqZmlraGtu
 ////////</Image></Icon><UMLProfiles><UMLProfile profiletype="uml2">
-			<Documentation id="E232EAF0-2" name="Chronos" version="2.3.6" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
+			<Documentation id="E232EAF0-2" name="Chronos" version="3.6" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
 			<Content>
 				<Stereotypes>
 					<Stereotype name="ChiDiagram" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
@@ -9411,16 +9411,16 @@ FAAAAAgAFmdFRmI20VAIAQAAoAIAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAB5to
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiOpinionInner" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAEJmRUbP6KW8awEAAOgDAAAHABEAc3RyLmRhdFVUDQAH+WbTVPlm01T5ZtNU
-lZNbS8NAEIXPawT/Q2lfKhTUgqB4gVoi+KAUq88S21iLMS1Nooj0v/vNpjEhKaIM2Z1szjlz
-2UmiFwVaKlRLN3hzxdrVjr7c2vqxWAuNHXaK96FztZVqpQxmW6c1dATuE1wG5h7P9I3xxNkK
-hZC1yRrwZUqUDFwey3hdkDH+m4vUA9fWUL5uUfZ1x9teQ2kMNtUV1UTYkKiRi9xVX0dYr7YX
-Ch6Wc0es8b+YY1gByBSWcTJqGXGSUkl3S453RJg4TqwZDKv0AF17DlnLvYzhg92m6ul5U6up
-TZW4u1noFdVlA13msI9d09mADPJOD0HOdUn2iZuFkD3RA0/It2CzW0eK27A8i7XIu/CqfbV4
-22LlKseOZ309cV6/wk4qM1pMQn0+6+bBeQQbEWEGy6Zv4u40VXX6LDNP73/C1mOUNgJl3UrR
-iF1tZ1jH3YMphHQs3fwHHV1g26a2bk3VDlM/4D/18X5TWNfO1/oGUEsBAhcLFAAAAAgAQmZF
-Rs/opbxrAQAA6AMAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAB/lm01RQSwUGAAAA
-AAEAAQA+AAAAoQEAAAAA</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAJRrR0azU83RbgEAANwDAAAHABEAc3RyLmRhdFVUDQAH6hLWVOoS1lTqEtZU
+jZPdSsNAEIXPbQTfobQ3FQpqQVD8gVoieKGUtl5LbGMtxrQ0iSLSd/fbTdfEJIgM2Z3unnNm
+dmaa6EWB1grV0h3eUrH2tacvu7Z+LNZKE4ud433oUm2l2iiD2dZ5BR2B+wSXgZniGX3DeOJs
+g0LIWmcNuJkTJQOXxzK8LsgY/81G6oFrayhf9yj7GvProKY0AZvqhtdE2JCokY3cVV8nWK+y
+OwUPy7kj1vgX8wh0/hXoCciA2xSkwWXkP+IkJftuQ15jVGeWE2sBw7zO6R6zFnsRwwfbpOrp
+efc+ozZXYvux0iuq6xq6yOEQu6WaARnk1R2CXOqa7BPb/5A90QNfyF2w200VXAdMnm51eTuv
+XEsTrylWrnJqeaYLZ9brl9hJaS5d96szWTUPziPYiAgLWGbiZraPqcoTZzLz9P4vbDVGYSNQ
+plopGrF92wXWsX0wCiEVS3ez39EV1jSpVaurdpj0Af9NH+8vhW3lfKtvUEsBAhcLFAAAAAgA
+lGtHRrNTzdFuAQAA3AMAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAB+oS1lRQSwUG
+AAAAAAEAAQA+AAAApAEAAAAA</Image>
 						<AppliesTo>
 							<Apply type="Activity">
 								<Property name="isReadOnly" value="false"/>
@@ -9483,11 +9483,11 @@ VVQFAAcJaNNUUEsFBgAAAAABAAEAPgAAAHsBAAAAAA==</Image>
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiGoal" notes="a Measurable scope that the enterprise wants to achieve. " cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAJ6OO0ZVkL3bdQAAALYAAAAHABEAc3RyLmRhdFVUDQAHT9DHVE/Qx1RP0MdU
-S2FIZUhmyGcoYkhkKGHIBLLyGBQYchkqGVKgMrwMXAzVYBKkKhMomgdUiVBty6DE4MfgCiSt
-wao4GTyB+hMZ0oEqNYCizgwZQJVBQF4hQymQVQRk5UJNcQeakMiQA1SlA7TViMEASOtCaUMg
-iaA14abXAkkAUEsBAhcLFAAAAAgAno47RlWQvdt1AAAAtgAAAAcACQAAAAAAAAAAAACAAAAA
-AHN0ci5kYXRVVAUAB0/Qx1RQSwUGAAAAAAEAAQA+AAAAqwAAAAAA</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAIhpR0bXldMCfgAAAMgAAAAHABEAc3RyLmRhdFVUDQAHRA/WVEQP1lRED9ZU
+RY4xCsJAFERfq+AdxEpBQS0VKxGxsfAGSyK6YBKMWoh4d1/CYliYGea/v7s5ZzIqagJPoqlk
+SMGbPE0G9Pm02lDRtpTs6A0jjuzUdUv1OLgfuEiObTOu7jVkxYOVZ2sTOTm/8zLVpiLdu5cK
+3Nyb+o8lc32WfKF2Pvm/91V/UEsBAhcLFAAAAAgAiGlHRteV0wJ+AAAAyAAAAAcACQAAAAAA
+AAAAAACAAAAAAHN0ci5kYXRVVAUAB0QP1lRQSwUGAAAAAAEAAQA+AAAAtAAAAAAA</Image>
 						<AppliesTo>
 							<Apply type="Requirement"/>
 						</AppliesTo>
@@ -9499,11 +9499,11 @@ AHN0ci5kYXRVVAUAB0/Qx1RQSwUGAAAAAAEAAQA+AAAAqwAAAAAA</Image>
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiRequirement" notes="A Business guide line about the Enterprise or the project." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFh6PEbhR28PbwAAAK4AAAAHABEAc3RyLmRhdFVUDQAHtP3IVLT9yFS0/chU
-S2FIZUhmyGcoYkhkKGHIBLLyGBQYchkqGVKgMrwMXAzVYBKkKhMomgdUiVBty6DE4MfgCiSt
-wao4GTyB+hMZ0oEqNYCizgwZQJVBQF4hQymQVQRk5UJNUWLQAdpmxGAApHXBpCGQRNCacDNr
-wTQAUEsBAhcLFAAAAAgAWHo8RuFHbw9vAAAArgAAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5k
-YXRVVAUAB7T9yFRQSwUGAAAAAAEAAQA+AAAApQAAAAAA</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFBqR0btA1IsegAAAMAAAAAHABEAc3RyLmRhdFVUDQAHsBDWVLAQ1lSwENZU
+RY0xCoNAFERfm0DuEKwiREgslVRiYWPhDURD3EJFo4WId3dcRFmYGea/v7/kS0FLT86AUWq4
+UzNR7pMbV2arG2XUNiJP+oNDSiwNLXUh0X7OT+RDbUGlvY1s+RPoRWoMmeYdo1KvVO//Ojx1
+3+cl96y+pae7x5XF+gpQSwECFwsUAAAACABQakdG7QNSLHoAAADAAAAABwAJAAAAAAAAAAAA
+AIAAAAAAc3RyLmRhdFVUBQAHsBDWVFBLBQYAAAAAAQABAD4AAACwAAAAAAA=</Image>
 						<AppliesTo>
 							<Apply type="Requirement"/>
 						</AppliesTo>
@@ -9516,11 +9516,12 @@ YXRVVAUAB7T9yFRQSwUGAAAAAAEAAQA+AAAApQAAAAAA</Image>
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiFeature" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGBSPEYOV7JZdwAAAL4AAAAHABEAc3RyLmRhdFVUDQAHlLfIVJS3yFSUt8hU
-S2FIZUhmyGcoYkhkKGHIBLLyGBQYchkqGVKgMrwMXAzVYBKkKhMomgdUiVBty6DE4MfgCiSt
-wao4GTyB+hMZ0oEqNYCizgwZQJVBQF4hQymQVQRk5UJNcQPSIJNKwaJKDDpAu40YDIC0LpQ2
-BJIIWhNuRy2YBgBQSwECFwsUAAAACABgUjxGDleyWXcAAAC+AAAABwAJAAAAAAAAAAAAAIAA
-AAAAc3RyLmRhdFVUBQAHlLfIVFBLBQYAAAAAAQABAD4AAACtAAAAAAA=</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAKhpR0YMiY+sggAAANAAAAAHABEAc3RyLmRhdFVUDQAHYA/WVGAP1lRgD9ZU
+RY7BCoJAFEXP1qB/EFcFCepSaRUFbVz4B6KRs1DRchHSv3dnGJKBdy/3nffetDxoGJmpeWPk
+BkJ6PrS+s2fH6qqljNJB5EafiSi5qhaOCrhrvuYp8qC0odOcJUde5HoXJYZK/YlFbpbr/d6b
+1O5eXBpx0m8yEmnsNVXd9Pi/+nX6A1BLAQIXCxQAAAAIAKhpR0YMiY+sggAAANAAAAAHAAkA
+AAAAAAAAAAAAgAAAAABzdHIuZGF0VVQFAAdgD9ZUUEsFBgAAAAABAAEAPgAAALgAAAAA
+AA==</Image>
 						<AppliesTo>
 							<Apply type="Feature">
 								<Property name="isStatic" value="false"/>
@@ -9533,11 +9534,11 @@ AAAAc3RyLmRhdFVUBQAHlLfIVFBLBQYAAAAAAQABAD4AAACtAAAAAAA=</Image>
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiIssue" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAG56PEZN2YFYcwAAALQAAAAHABEAc3RyLmRhdFVUDQAH+/3IVPv9yFT7/chU
-S2FIZUhmyGcoYkhkKGHIBLLyGBQYchkqGVKgMrwMXAzVYBKkKhMomgdUiVBty6DE4MfgCiSt
-wao4GTyB+hMZ0oEqNYCizgwZQJVBQF4hQymQVQRk5UJN8WQoBsJSIE+JQQdorxGDAZA2hJMI
-WhNuei0DAFBLAQIXCxQAAAAIAG56PEZN2YFYcwAAALQAAAAHAAkAAAAAAAAAAAAAgAAAAABz
-dHIuZGF0VVQFAAf7/chUUEsFBgAAAAABAAEAPgAAAKkAAAAAAA==</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFJqR0Z6P3q6fQAAAMYAAAAHABEAc3RyLmRhdFVUDQAHwRDWVMEQ1lTBENZU
+RY7BCoJAFEXPtqB/iFYFLapl0UpauGnRH4hKzUIlrYVI/95RRBm473LfuTOTkZNSUZPwIehK
+1hS0ZONmxZJu0J4KpqXkTF/ZcOemXgZqQWw/4Sm5NU152evJioazJzIJPNy/+epqXTHeG8s0
+prnNvT85cXAeJ53nbnrvxx9QSwECFwsUAAAACABSakdGej96un0AAADGAAAABwAJAAAAAAAA
+AAAAAIAAAAAAc3RyLmRhdFVUBQAHwRDWVFBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
 						<AppliesTo>
 							<Apply type="Issue"/>
 						</AppliesTo>
@@ -9618,15 +9619,15 @@ LmRhdFVUBQAH95fTVFBLBQYAAAAAAQABAD4AAAB/AQAAAAA=</Image>
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiBusinessUseCaseCore" notes="A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money)." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessUseCase" baseStereotypes="ChiBusinessUseCase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAOSCRUZImD52TQEAAKIDAAAHABEAc3RyLmRhdFVUDQAH9pjTVPaY01T2mNNU
-lZNPS8NAEMXftQW/Q2kuFQpqsRf/QS0VPCil1bPENtRCjNIkiojf3d9sGhM2IpUhs5PNe292
-ZiepnhTqVZE6uiFaK9Ge2vp0vvNjiV40d9gl0bvO1VWmjXKYXZ166BjcB7gczB2R6Rvjkb0N
-ChG+yRrxZUmWHFyRy3g9kAnxs8vUB9fVWBPdojzRjLf9htIcbKYrqomxMVljl7mngYZY31tL
-hRZWcKf45B/MKvcBNoO9QCVEY4WCVXEIx54jfLU2+ddUGsIqKh/Thw0nsP6nOsFsZ61LupS6
-24pYU93zRHwLt6udueyXZSt9mb2M6pXvnr3QPXZK1ouhiwY1vbQ2V+Xt+TPlWwvOA9iYDCtY
-NjELdw+Z6hNjZ23pbSesn6OyKSjrX4ZG4qo9wwJOXihE1JxtZzfQBfbbpPnWVA2Y1BH/1oTo
-L4Uvb794b+sbUEsBAhcLFAAAAAgA5IJFRkiYPnZNAQAAogMAAAcACQAAAAAAAAAAAACAAAAA
-AHN0ci5kYXRVVAUAB/aY01RQSwUGAAAAAAEAAQA+AAAAgwEAAAAA</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAABrR0aCqO3gUAEAAJ4DAAAHABEAc3RyLmRhdFVUDQAHABLWVAAS1lQAEtZU
+lZNbS8NAEIXPawv+h9K+VCioxb54g1oq+KCUVp8lpqEWYpQmUUT8736zSWzYiBcO2Z1szzmz
+M5mmelCgZ0Xq6IporUQ7auvdrZ0vJHrSwnGXRK86VVeZNspRdnXssWN4b/ByODdE5m+Ke842
+OESsTdWYX5ZkyeEVuUzXh5kQP7pMA3hdTTTVNc5TzXnbbTgt4Ga6oJoYTMgau8x9DTUCA2+v
+HFqg0M5Yk38ot7n3wBx1iEuAxwoHq2IfjT0HrNu9qb+k0gBVUfmEPmy4gfU/1REIOVnrnC6l
+7mtF7KlueSLYQbnbnat+WbZqrbJXUb3y3zLbybr0PHQu1oeRi4Y1r7Q2U9WX8+fJRwvNHdyY
+DCtUNi2h+waZ6tNi92zp5U9cP8cWM1jWuwyPxFV7AnrcvHCIqDkr57anM/DdlPlouvaY0jH/
+qynRTw4f3nnx3tYnUEsBAhcLFAAAAAgAAGtHRoKo7eBQAQAAngMAAAcACQAAAAAAAAAAAACA
+AAAAAHN0ci5kYXRVVAUABwAS1lRQSwUGAAAAAAEAAQA+AAAAhgEAAAAA</Image>
 					</Stereotype>
 					<Stereotype name="ChiManyToMany" notes="A many to many node used in Chronos. It is used to realize a many to many relation between two ChiNodes." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiNode" baseStereotypes="ChiNode"/>
 					<Stereotype name="ChiRelationEnd" notes="An association end used in Chronos" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
@@ -9796,6 +9797,7 @@ VFBLBQYAAAAAAQABAD4AAACbAAAAAAA=</Image>
 				<TaggedValueTypes>
 					<TaggedValueType property="reference_type" description="" notes="Type=Classifier;Stereotypes=ChiValueRef;"/>
 				</TaggedValueTypes>
+				<QuickLink data="Class,ChiController,UseCase,ChiBusinessUseCaseCore,,UseCase,ChiBusinessUseCaseCore,Composition,,to,is composed of,,TRUE,,TRUE,TRUE,Use Case,0,,,,,0&#xA;"/>
 			</Content>
 		</UMLProfile>
 	</UMLProfiles><Images><RefData version="1.0" exporter="EA.25">
