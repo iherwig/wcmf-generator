@@ -1,4 +1,4 @@
-<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos" version="2.6.3M1" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
+<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos" version="2.6.3M3" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -9342,20 +9342,20 @@ CQ0REhYaAAEFvr/A////////////////////SEtOFRkcGR0gGBwg////////////////Vlla
 BgoOFBgbFBgbAAQHioyO////////////////////////6OjpAAACFBgbAQUInJ2f////////
 ////////iYuNZGdpYmVnn6Gi////////////////////////////////g4WHZWhqZmlraGtu
 ////////</Image></Icon><UMLProfiles><UMLProfile profiletype="uml2">
-			<Documentation id="E232EAF0-2" name="Chronos" version="3.6" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
+			<Documentation id="E232EAF0-2" name="Chronos" version="1.0" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. &#xA;It is created to use a Model Driven Architecture approach.&#xA;It is divided in 3 parts:&#xA;- Requirements&#xA;- Analysis&#xA;- Implementation&#xA;"/>
 			<Content>
 				<Stereotypes>
-					<Stereotype name="ChiDiagram" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiDiagram" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<AppliesTo>
 							<Apply type="Package"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Diagram" notes="A figure is the graphical reppresentation of a node can be linked with manies diagrams." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="Diagram" notes="A figure is the graphical reppresentation of a node can be linked with manies diagrams." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Package"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Figure" notes="A figure is the graphical reppresentation of a node, is linked with a diagram." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="Figure" notes="A figure is the graphical reppresentation of a node, is linked with a diagram." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Class">
 								<Property name="isActive" value=""/>
@@ -9364,13 +9364,13 @@ BgoOFBgbFBgbAAQHioyO////////////////////////6OjpAAACFBgbAQUInJ2f////////
 						<TaggedValues>
 							<Tag name="BackgroundColor" type="" description="the background color in RBG" unit="" values="" default=""/>
 							<Tag name="ForegroundColor" type="" description="the foreground color in RBG" unit="" values="" default=""/>
-							<Tag name="PositionY" type="" description="the horizontal position of this object" unit="" values="" default=""/>
-							<Tag name="PositionX" type="" description="the vertical position of this object" unit="" values="" default=""/>
 							<Tag name="Height" type="" description="" unit="" values="" default=""/>
+							<Tag name="PositionX" type="" description="the vertical position of this object" unit="" values="" default=""/>
+							<Tag name="PositionY" type="" description="the horizontal position of this object" unit="" values="" default=""/>
 							<Tag name="Width" type="" description="" unit="" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiAssociation" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiAssociation" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Association">
 								<Property name="direction" value="Source -&gt; Destination"/>
@@ -9380,7 +9380,7 @@ BgoOFBgbFBgbAAQHioyO////////////////////////6OjpAAACFBgbAQUInJ2f////////
 							<Tag name="fk_name" type="String" description="" unit="" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiObject" notes="a ChiObject is a candidate for a ChiNode repppresented in an activity diagr" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiObject" notes="a ChiObject is a candidate for a ChiNode repppresented in an activity diagr" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<AppliesTo>
 							<Apply type="Activity">
 								<Property name="isReadOnly" value="false"/>
@@ -9391,7 +9391,7 @@ BgoOFBgbFBgbAAQHioyO////////////////////////6OjpAAACFBgbAQUInJ2f////////
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiStakeHolder" notes="Any person or force that have an interest in the considered domain." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiStakeHolder" notes="Any person or force that have an interest in the considered domain." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIABZnRUZiNtFQCAEAAKACAAAHABEAc3RyLmRhdFVUDQAHm2jTVJto01SbaNNU
 lZJPa8JAEMXftYV+B0kuFjxowVP/QBGLPVgEvYvWoNJ0LcmGUqTfvb/dGE039lAeuzts3nsz
 s5NcGy30oUQtjYm2MrrSpfZ+bx1htNPUc1dEn7pXJKtMBcpItwE7hfcFr4AzI3L+TrHkLsMh
@@ -9410,7 +9410,7 @@ FAAAAAgAFmdFRmI20VAIAQAAoAIAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAB5to
 							<Tag name="Urgency" type="enumeration" description="" unit="" values="Low,Medium,High" default="medium"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiOpinionInner" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiOpinionInner" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAJRrR0azU83RbgEAANwDAAAHABEAc3RyLmRhdFVUDQAH6hLWVOoS1lTqEtZU
 jZPdSsNAEIXPbQTfobQ3FQpqQVD8gVoieKGUtl5LbGMtxrQ0iSLSd/fbTdfEJIgM2Z3unnNm
 dmaa6EWB1grV0h3eUrH2tacvu7Z+LNZKE4ud433oUm2l2iiD2dZ5BR2B+wSXgZniGX3DeOJs
@@ -9431,7 +9431,7 @@ AAAAAAEAAQA+AAAApAEAAAAA</Image>
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiOpinion" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiOpinion" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAMJmRUZmz6FJRQEAAGQDAAAHABEAc3RyLmRhdFVUDQAHCWjTVAlo01QJaNNU
 jZPdSsNAEIXPbQTfoSQ3EQpqQVD8gRoieKFIq9cS21ALMUqTKCJ9d7/dNCZuisghO5PNmTMz
 u5NCz0r0plQD3eAtlWtXO/qy6+AHuV41tdw53ofO5avUShWRvk4ddgbvE14F5x7P6JuIJ/ZW
@@ -9451,21 +9451,21 @@ VVQFAAcJaNNUUEsFBgAAAAABAAEAPgAAAHsBAAAAAA==</Image>
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiAccord" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiAccord" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Association">
 								<Property name="direction" value="Source -&gt; Destination"/>
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiDiscord" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiDiscord" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Association">
 								<Property name="direction" value="Source -&gt; Destination"/>
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiBase" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" isAbstract="true">
+					<Stereotype name="ChiBase" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" isAbstract="true">
 						<AppliesTo>
 							<Apply type="Class">
 								<Property name="isActive" value=""/>
@@ -9482,7 +9482,7 @@ VVQFAAcJaNNUUEsFBgAAAAABAAEAPgAAAHsBAAAAAA==</Image>
 							<Tag name="Version" type="String" description="the model version of this object" unit="" values="" default="1.0"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiGoal" notes="a Measurable scope that the enterprise wants to achieve. " cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiGoal" notes="a Measurable scope that the enterprise wants to achieve. " cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAIhpR0bXldMCfgAAAMgAAAAHABEAc3RyLmRhdFVUDQAHRA/WVEQP1lRED9ZU
 RY4xCsJAFERfq+AdxEpBQS0VKxGxsfAGSyK6YBKMWoh4d1/CYliYGea/v7s5ZzIqagJPoqlk
 SMGbPE0G9Pm02lDRtpTs6A0jjuzUdUv1OLgfuEiObTOu7jVkxYOVZ2sTOTm/8zLVpiLdu5cK
@@ -9498,7 +9498,7 @@ AAAAAACAAAAAAHN0ci5kYXRVVAUAB0QP1lRQSwUGAAAAAAEAAQA+AAAAtAAAAAAA</Image>
 							<Tag name="Value_Name" type="String" description="The name of the value this goal intends to alter" unit="" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiRequirement" notes="A Business guide line about the Enterprise or the project." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiRequirement" notes="A Business guide line about the Enterprise or the project." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFBqR0btA1IsegAAAMAAAAAHABEAc3RyLmRhdFVUDQAHsBDWVLAQ1lSwENZU
 RY0xCoNAFERfm0DuEKwiREgslVRiYWPhDURD3EJFo4WId3dcRFmYGea/v7/kS0FLT86AUWq4
 UzNR7pMbV2arG2XUNiJP+oNDSiwNLXUh0X7OT+RDbUGlvY1s+RPoRWoMmeYdo1KvVO//Ojx1
@@ -9515,7 +9515,7 @@ AIAAAAAAc3RyLmRhdFVUBQAHsBDWVFBLBQYAAAAAAQABAD4AAACwAAAAAAA=</Image>
 							<Tag name="Type" type="String" description="" unit="" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiFeature" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiFeature" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAKhpR0YMiY+sggAAANAAAAAHABEAc3RyLmRhdFVUDQAHYA/WVGAP1lRgD9ZU
 RY7BCoJAFEXP1qB/EFcFCepSaRUFbVz4B6KRs1DRchHSv3dnGJKBdy/3nffetDxoGJmpeWPk
 BkJ6PrS+s2fH6qqljNJB5EafiSi5qhaOCrhrvuYp8qC0odOcJUde5HoXJYZK/YlFbpbr/d6b
@@ -9533,7 +9533,7 @@ AA==</Image>
 							<Tag name="Status" type="enumeration" description="This feature's status" unit="" values="Proposed,Validated,Rejected,Implemented" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiIssue" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiIssue" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFJqR0Z6P3q6fQAAAMYAAAAHABEAc3RyLmRhdFVUDQAHwRDWVMEQ1lTBENZU
 RY7BCoJAFEXPtqB/iFYFLapl0UpauGnRH4hKzUIlrYVI/95RRBm473LfuTOTkZNSUZPwIehK
 1hS0ZONmxZJu0J4KpqXkTF/ZcOemXgZqQWw/4Sm5NU152evJioazJzIJPNy/+epqXTHeG8s0
@@ -9547,14 +9547,14 @@ AAAAAIAAAAAAc3RyLmRhdFVUBQAHwRDWVFBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
 							<Tag name="Responsible" type="String" description="The responsible to close the present issue" unit="" values="" default="aName, aRole"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiAction" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiAction" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Association">
 								<Property name="direction" value="Source -&gt; Destination"/>
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiActionKey" notes="An action key used in Chronos. An action key associates two controllers (to define a control flow) or a view with a controller (to define a view attachment). Controller, Views and Associations define the application flow" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiActionKey" notes="An action key used in Chronos. An action key associates two controllers (to define a control flow) or a view with a controller (to define a view attachment). Controller, Views and Associations define the application flow" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Association">
 								<Property name="direction" value="Source -&gt; Destination"/>
@@ -9562,11 +9562,11 @@ AAAAAIAAAAAAc3RyLmRhdFVUBQAHwRDWVFBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
 						</AppliesTo>
 						<TaggedValues>
 							<Tag name="action" type="String" description="The Action which triggeres this association" unit="" values="" default=""/>
-							<Tag name="context" type="String" description="The Context in which this association is valid" unit="" values="" default=""/>
 							<Tag name="config" type="String" description="The configuration file in which this association will be placed" unit="" values="" default="config.ini"/>
+							<Tag name="context" type="String" description="The Context in which this association is valid" unit="" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiActivity" notes="" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiActivity" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Activity">
 								<Property name="isReadOnly" value="false"/>
@@ -9577,7 +9577,7 @@ AAAAAIAAAAAAc3RyLmRhdFVUBQAHwRDWVFBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiBusinessProcess" notes="A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="TOGAF::Process" baseStereotypes="TOGAF::Process">
+					<Stereotype name="ChiBusinessProcess" notes="A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="TOGAF::Process" baseStereotypes="TOGAF::Process">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAAaCRUYy88mgZQEAAMYDAAAHABEAc3RyLmRhdFVUDQAHY5fTVGOX01Rjl9NU
 lZNbS8NAEIXPawX/Q2hfKhRsBV+8QS0VfVDE+i61jTYQY2lSRcT/7je72TYkIsphN5PNmTOX
 neRaaKqlYkW6xkqUaVc7+nR7tEGmV00cd471rlO1VWilNZ5tHdfYKbwPeGs491imbx6PnK1Q
@@ -9589,7 +9589,7 @@ uCjnuaMz8NP01dFU7TC9Q/63MdZvCl/uPCyrMJx5O+AbUEsBAhcLFAAAAAgABoJFRjLzyaBl
 AQAAxgMAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAB2OX01RQSwUGAAAAAAEAAQA+
 AAAAmwEAAAAA</Image>
 					</Stereotype>
-					<Stereotype name="ChiBusinessUseCase" notes="A Business Use Case is part of a business process that produces an advantage to the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiBusinessUseCase" notes="A Business Use Case is part of a business process that produces an advantage to the enterprise." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGaCRUYZTNDKSQEAAJQDAAAHABEAc3RyLmRhdFVUDQAH95fTVPeX01T3l9NU
 lZNbS8NAEIXPawT/Q0leKhTUYl+8QQ0RfFBKq88S21ALMUouioj/3W93jWkTkcohu5PknDOZ
 2UmhR8V6UaKerolWyrSrHX3YtfeDTM+aWe6C6E1n8lUqV4XS10mLncJ7h1fBuSUy/kbxwLMc
@@ -9603,19 +9603,19 @@ LmRhdFVUBQAH95fTVFBLBQYAAAAAAQABAD4AAAB/AQAAAAA=</Image>
 							<Apply type="UseCase"/>
 						</AppliesTo>
 						<TaggedValues>
-							<Tag name="GoalInContext" type="String" description="The goal should implicitly express the actor's intent or purpose of the use case, such as &quot;Enrol Student in Seminar.&quot;" unit="" values="" default=""/>
-							<Tag name="Precondition" type="String" description="A list of the conditions, if any, that must be met before a use case may be invoked. Can be a previous Use case or self the presence of the system in Scope." unit="" values="" default=""/>
-							<Tag name="Trigger" type="String" description="Event that is responsible for invocation of the use case." unit="" values="" default=""/>
-							<Tag name="Scope" type="String" description="Boundaries in which the use case is operated when invoked (E.g. CMS)" unit="" values="" default=""/>
-							<Tag name="Level" type="String" description="Authorizations for operations/actions to be performed against the Chi business objects in scope. Against every object/process 4 CRUD basic operations are possible:&#xA;Create (Write)&#xA;Read (Open)&#xA;Update (Change)&#xA;Delete  (Destroy)" unit="" values="" default=""/>
-							<Tag name="PrimaryActor" type="String" description="the main actor of this use case" unit="" values="" default=""/>
-							<Tag name="OtherActors" type="String" description="The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable." unit="" values="" default=""/>
-							<Tag name="MainSuccessScenario" type="String" description="The main path of logic an actor follows through a use case. Often referred to as the &quot;happy path&quot; or the &quot;main path&quot; because it describes how the use case works when everything works as it normally should." unit="" values="" default=""/>
 							<Tag name="Extensions" type="String" description="" unit="" values="" default=""/>
+							<Tag name="GoalInContext" type="String" description="The goal should implicitly express the actor's intent or purpose of the use case, such as &quot;Enrol Student in Seminar.&quot;" unit="" values="" default=""/>
+							<Tag name="Level" type="String" description="Authorizations for operations/actions to be performed against the Chi business objects in scope. Against every object/process 4 CRUD basic operations are possible:&#xA;Create (Write)&#xA;Read (Open)&#xA;Update (Change)&#xA;Delete  (Destroy)" unit="" values="" default=""/>
+							<Tag name="MainSuccessScenario" type="String" description="The main path of logic an actor follows through a use case. Often referred to as the &quot;happy path&quot; or the &quot;main path&quot; because it describes how the use case works when everything works as it normally should." unit="" values="" default=""/>
+							<Tag name="OtherActors" type="String" description="The list of actors associated with the use case. Although this information is contained in the use case itself, it helps to increase the understandability of the use case when the diagram is unavailable." unit="" values="" default=""/>
+							<Tag name="Precondition" type="String" description="A list of the conditions, if any, that must be met before a use case may be invoked. Can be a previous Use case or self the presence of the system in Scope." unit="" values="" default=""/>
+							<Tag name="PrimaryActor" type="String" description="the main actor of this use case" unit="" values="" default=""/>
+							<Tag name="Scope" type="String" description="Boundaries in which the use case is operated when invoked (E.g. CMS)" unit="" values="" default=""/>
 							<Tag name="Stakeholders" type="String" description="List of actors that have a special interest (i.e. to be informed every time) in completion of the use case" unit="" values="" default=""/>
+							<Tag name="Trigger" type="String" description="Event that is responsible for invocation of the use case." unit="" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiBusinessUseCaseCore" notes="A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money)." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessUseCase" baseStereotypes="ChiBusinessUseCase">
+					<Stereotype name="ChiBusinessUseCaseCore" notes="A Core Use Case generates a value for an active business partner and is directly connected to the objectives (ChiGoals) of a company or the process of his existence (typically making money)." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessUseCase" baseStereotypes="ChiBusinessUseCase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAABrR0aCqO3gUAEAAJ4DAAAHABEAc3RyLmRhdFVUDQAHABLWVAAS1lQAEtZU
 lZNbS8NAEIXPawv+h9K+VCioxb54g1oq+KCUVp8lpqEWYpQmUUT8736zSWzYiBcO2Z1szzmz
 M5mmelCgZ0Xq6IporUQ7auvdrZ0vJHrSwnGXRK86VVeZNspRdnXssWN4b/ByODdE5m+Ke842
@@ -9626,8 +9626,8 @@ DCtUNi2h+waZ6tNi92zp5U9cP8cWM1jWuwyPxFV7AnrcvHCIqDkr57anM/DdlPlouvaY0jH/
 qynRTw4f3nnx3tYnUEsBAhcLFAAAAAgAAGtHRoKo7eBQAQAAngMAAAcACQAAAAAAAAAAAACA
 AAAAAHN0ci5kYXRVVAUABwAS1lRQSwUGAAAAAAEAAQA+AAAAhgEAAAAA</Image>
 					</Stereotype>
-					<Stereotype name="ChiManyToMany" notes="A many to many node used in Chronos. It is used to realize a many to many relation between two ChiNodes." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiNode" baseStereotypes="ChiNode"/>
-					<Stereotype name="ChiRelationEnd" notes="An association end used in Chronos" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiManyToMany" notes="A many to many node used in Chronos. It is used to realize a many to many relation between two ChiNodes." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiNode" baseStereotypes="ChiNode"/>
+					<Stereotype name="ChiRelationEnd" notes="An association end used in Chronos" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Association">
 								<Property name="direction" value="Source -&gt; Destination"/>
@@ -9637,7 +9637,7 @@ AAAAAHN0ci5kYXRVVAUABwAS1lRQSwUGAAAAAAEAAQA+AAAAhgEAAAAA</Image>
 							<Tag name="fk_name" type="String" description="The name of the foreign key column. The generator will add this if there is no appropriate attribute. If not given the generator will add 'fk_[parent]_id'" unit="" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiBusinessPartner" notes="A ChiBusinesPartner is an external person that has a Business relation with the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiBusinessPartner" notes="A ChiBusinesPartner is an external person that has a Business relation with the enterprise." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIABKARUZcUWegHwEAAPwCAAAHABEAc3RyLmRhdFVUDQAHuZPTVLmT01S5k9NU
 lZJLS8NAFIXPVsH/UJJNC12o4MoH1KLgolKse4ltaAtxlGaCiPjf/e6kY2Wiglxy5yY559zX
 1Fqp0ItK9TQhWsvpQPt6D773ZU7PmgXsguhV58rktVEDM9Npgq7AvYFrwNwTmb4xHvm2QaHE
@@ -9650,7 +9650,7 @@ AAAAAIAAAAAAc3RyLmRhdFVUBQAHuZPTVFBLBQYAAAAAAQABAD4AAABVAQAAAAA=</Image>
 							<Apply type="Actor"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiBusinessPartnerActive" notes="A ChiBusinesPartnerActive is a direct customer of the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner">
+					<Stereotype name="ChiBusinessPartnerActive" notes="A ChiBusinesPartnerActive is a direct customer of the enterprise." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIALKFREY8REDgJQEAAAoDAAAHABEAc3RyLmRhdFVUDQAHxUzSVMVM0lTFTNJU
 lZJPSwMxEMXfVcHvUHYvFXpQwZN/QIuCh0qx3mXbLu3CGmU3q4j43f0lMa1kVZAhk8nmvXmZ
 mW21VqFnlRpoQlTJaE+7evd+sDGjJ808dkn0qjNlsmrUwcx0kqBrcG/gOjD3RC6/Y8z51pCh
@@ -9661,7 +9661,7 @@ xPdZF9wsUenABS3HG4I0xI9eaQQu4zbTfo8/A2F1TQ01Nkar9npDHekYGyV7zLCDBe4Ub/7B
 AAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHxUzSVFBLBQYAAAAAAQABAD4AAABbAQAA
 AAA=</Image>
 					</Stereotype>
-					<Stereotype name="ChiBusinessPartnerPassive" notes="A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner">
+					<Stereotype name="ChiBusinessPartnerPassive" notes="A ChiBusinesPartnerPassive is an indirect customer (typically a supplier) of the enterprise." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBusinessPartner" baseStereotypes="ChiBusinessPartner">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIANSFREZipvT3IAEAAP4CAAAHABEAc3RyLmRhdFVUDQAH0kzSVNJM0lTSTNJU
 lZJPS8NAEMXfVcHvUJJLhR5U8KQWalHwUCnWu8Q2tIUYpdkgIn53f7PrWtlUQYbMTpL33vzb
 RisVelGpniZEa9U60L7eve99W61nzTx2QfSqC2Vy2qiFmeksQVfg3sC1YO6JTN8Yj3zboFDi
@@ -9671,7 +9671,7 @@ mMWe5seO4yTT/aa20gPIigqWcGx3cz8b98vuUpuCsuodGrXv6xzLqSUolMzXfd2MXENs10ZT
 66rmuuXeTHRF9JfCR/I9vH8CUEsBAhcLFAAAAAgA1IVERmKm9PcgAQAA/gIAAAcACQAAAAAA
 AAAAAACAAAAAAHN0ci5kYXRVVAUAB9JM0lRQSwUGAAAAAAEAAQA+AAAAVgEAAAAA</Image>
 					</Stereotype>
-					<Stereotype name="ChiWorker" notes="A ChiWorker is a special actor that works within the enterprise. " cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiWorker" notes="A ChiWorker is a special actor that works within the enterprise. " cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAP6FREZXkLjPFwEAAOwCAAAHABEAc3RyLmRhdFVUDQAHM03SVDNN0lQzTdJU
 lZJBS8NAEIXfVcH/UJJLhR5U8KQWSlHwUClW8ChpG9piXKXdICL+d7/ZdK1sVJDHTibJe292
 dnajpQq9qFRHI7KVnA60r/cQO19wetYkcOdkr7pQJq+1apSZzhJ2Be8NXg3njsz8TTHl2xqH
@@ -9684,7 +9684,7 @@ AHN0ci5kYXRVVAUABzNN0lRQSwUGAAAAAAEAAQA+AAAATQEAAAAA</Image>
 							<Apply type="Actor"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiWorkerExternal" notes="A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker" baseStereotypes="ChiWorker">
+					<Stereotype name="ChiWorkerExternal" notes="A Chi External Worker is an employee that interacts directly with ChiBusinesPartner outside the enterprise." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker" baseStereotypes="ChiWorker">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAOxmRUbkI41VIAEAAP4CAAAHABEAc3RyLmRhdFVUDQAHOmjTVDpo01Q6aNNU
 lZJNS8NAEIbfqwX/Q0kuFXpQwZMfIEXBQ6VYwaPENthgXKVNUBH/u8/sdm3ZiCBDNpPs+7Ez
 systVOhVpfoak1Vy2lVPn37t/4TTi6YeOyd706kyNVqqhZnpOEHX4D7AtWBuyUzfGA/8W6JQ
@@ -9697,7 +9697,7 @@ AAAAAACAAAAAAHN0ci5kYXRVVAUABzpo01RQSwUGAAAAAAEAAQA+AAAAVgEAAAAA</Image>
 							<Tag name="is_OfflineUser" type="bool" description="" unit="" values="true,false" default="true"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiWorkerInternal" notes="A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners." cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker" baseStereotypes="ChiWorker">
+					<Stereotype name="ChiWorkerInternal" notes="A Chi  Worker Internal is an employee of the enterprise that has no contact with Business partners." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiWorker" baseStereotypes="ChiWorker">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAMCFREaKrvWBHQEAAPgCAAAHABEAc3RyLmRhdFVUDQAH+EzSVPhM0lT4TNJU
 lZJNS8NAEIbfq4L/oSSXCj2o4MkPkKLQQ6VYwaOkbbDBuEqbICL97z476VrZFUGGTIbk/diZ
 2bWWKvSmUj2NqSo5HWhfn5Z73+H0qqlhF1TvulCmRiu1MDOdRega3Ae4Fsw9ldf3jBnfViiU
@@ -9707,7 +9707,7 @@ d953MOcoFPCfYPtzH4H3zzF59065I3orYHW9Dum80oP5P9ukRmg2Vvk51NspeMWQg0Oogod/
 5rrl1ox1TfWXwib6vtEXUEsBAhcLFAAAAAgAwIVERoqu9YEdAQAA+AIAAAcACQAAAAAAAAAA
 AACAAAAAAHN0ci5kYXRVVAUAB/hM0lRQSwUGAAAAAAEAAQA+AAAAUwEAAAAA</Image>
 					</Stereotype>
-					<Stereotype name="ChiNode" notes="A Node type used in Chronos. Nodes and Values define the application data model" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiNode" notes="A Node type used in Chronos. Nodes and Values define the application data model" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAPBeRUZfw4CLYwAAAKIAAAAHABEAc3RyLmRhdFVUDQAHLFrTVCxa01QsWtNU
 RYyxCkBgFEbPSnkHmSgKq0wyWLyDEAaULJJ39/kTy3du9577dfS0rGw07EyaFlxmDrr34mBz
 mnysSdtF5m/neNSUysxYFpX+GwaZvrYFo8xa7tPoEao/JRajl4nyZ/D1XIY3UEsBAhcLFAAA
@@ -9731,7 +9731,7 @@ SwUGAAAAAAEAAQA+AAAAmQAAAAAA</Image>
 							<Tag name="reference_type"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiValueRef" notes="A Node value type used in Chronos. These values reference values of other Node types and are not persistent" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiValueRef" notes="A Node value type used in Chronos. These values reference values of other Node types and are not persistent" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Attribute"/>
 						</AppliesTo>
@@ -9739,23 +9739,23 @@ SwUGAAAAAAEAAQA+AAAAmQAAAAAA</Image>
 							<Tag name="reference_value" type="Classifier:reference_value" description="The referenced attribute" unit="ChiValue" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiValue" notes="A Node value type used in Chronos. These values are persistent" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
+					<Stereotype name="ChiValue" notes="A Node value type used in Chronos. These values are persistent" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 						<AppliesTo>
 							<Apply type="Attribute"/>
 						</AppliesTo>
 						<TaggedValues>
 							<Tag name="app_data_type" type="String" description="The datatype used in the application e.g. DATATYPE_DONTCARE, DATATYPE_ATTRIBUTE, DATATYPE_ELEMENT or DATATYPE_IGNORE" unit="" values="" default="DATATYPE_ATTRIBUTE"/>
+							<Tag name="column_name" type="String" description="The name of the database column. If not given the name will be taken" unit="" values="" default=""/>
 							<Tag name="db_data_type" type="String" description="The datatype used in the database" unit="" values="" default="VARCHAR(255)"/>
-							<Tag name="is_editable" type="enumeration" description="Whether the attribute is editable or not" unit="" values="true,false" default="true"/>
-							<Tag name="input_type" type="String" description="The HTML input type for the attribute e.g. select#fix:key1[val1]|key2[val2]" unit="" values="" default="text"/>
 							<Tag name="display_type" type="String" description="The HTML display type for the attribute e.g. image" unit="" values="" default="text"/>
+							<Tag name="input_type" type="String" description="The HTML input type for the attribute e.g. select#fix:key1[val1]|key2[val2]" unit="" values="" default="text"/>
+							<Tag name="is_editable" type="enumeration" description="Whether the attribute is editable or not" unit="" values="true,false" default="true"/>
+							<Tag name="restrictions_description" type="String" description="A text describing the restrictions" unit="" values="" default=""/>
 							<Tag name="restrictions_match" type="String" description="A regular expression that the value must match (e.g. '[0-3][0-9]\.[0-1][0-9]\.[0-9][0-9][0-9][0-9]' for date values)" unit="" values="" default=""/>
 							<Tag name="restrictions_not_match" type="String" description="A regular expression that the value must NOT match" unit="" values="" default=""/>
-							<Tag name="restrictions_description" type="String" description="A text describing the restrictions" unit="" values="" default=""/>
-							<Tag name="column_name" type="String" description="The name of the database column. If not given the name will be taken" unit="" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiSystem" notes="A system configuration. Settings are modelled as attributes with default values" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiSystem" notes="A system configuration. Settings are modelled as attributes with default values" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="Class">
 								<Property name="isActive" value=""/>
@@ -9766,7 +9766,7 @@ SwUGAAAAAAEAAQA+AAAAmQAAAAAA</Image>
 							<Tag name="plattform" type="String" description="The plattform to which the configuration settings apply." unit="" values="" default=""/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="ChiController" notes="A Controller type used in Chronos. Controller, Views and Associations define the application flow" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiController" notes="A Controller type used in Chronos. Controller, Views and Associations define the application flow" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIABpVPEYwbKK9agAAAK4AAAAHABEAc3RyLmRhdFVUDQAHjbzIVI28yFSNvMhU
 RY3NCkBQFIS/LeUdZEVR2MpKFjbeQQjlp2QjeXfT7ZZOzUznfM0ZGOk5OOm4WJR2fDZuBnvx
 cHmMOoZbtN/F/nxJQEstLSzXqKFjEhlqWzGLrAx7qeFg1YxKAbG+5aTyxHom/T2yna/RD1BL
@@ -9778,7 +9778,7 @@ AAeNvMhUUEsFBgAAAAABAAEAPgAAAKAAAAAAAA==</Image>
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiView" notes="A View used in Chronos. Controller, Views and Associations define the application flow" cx="95" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="ChiView" notes="A View used in Chronos. Controller, Views and Associations define the application flow" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIANR+PEYzJ2d4ZQAAAKAAAAAHABEAc3RyLmRhdFVUDQAHUgbJVFIGyVRSBslU
 S2FIZUhmyGcoYkhkKGHIBLLyGBQYchkqGVKgMrwMXAzVYJITrC4TKJ4HVItQb8ugxODH4Aok
 raHqPIEmJDKkA1VqAEWdGTKAKsPAOsuBfB2gDUYMBkBaF0waAkkErQk1pRZMAgBQSwECFwsU
@@ -9794,7 +9794,7 @@ VFBLBQYAAAAAAQABAD4AAACbAAAAAAA=</Image>
 				<TaggedValueTypes>
 					<TaggedValueType property="reference_type" description="" notes="Type=Classifier;Stereotypes=ChiValueRef;"/>
 				</TaggedValueTypes>
-				<QuickLink data="Class,ChiController,UseCase,ChiBusinessUseCaseCore,,UseCase,ChiBusinessUseCaseCore,Composition,,to,is composed of,,TRUE,,TRUE,TRUE,Use Case,0,,,,,0&#xA;"/>
+				<QuickLink data="Actor,ChiWorkerExternal,UseCase,ChiBusinessUseCase,,UseCase,ChiBusinessUseCase,Association,,to,participates in,,TRUE,,TRUE,TRUE,Use Case,0,,,,,0&#xA;Class,ChiController,UseCase,ChiBusinessUseCaseCore,,UseCase,ChiBusinessUseCaseCore,Composition,,to,is composed of,,TRUE,,TRUE,TRUE,Use Case,0,,,,,0&#xA;&#xA;"/>
 			</Content>
 		</UMLProfile>
 	</UMLProfiles><Images><RefData version="1.0" exporter="EA.25">
