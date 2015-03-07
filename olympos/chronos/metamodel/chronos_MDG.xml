@@ -1,4 +1,4 @@
-<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos" version="2.6.3M3" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
+<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos" version="2.6.3M5" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -11782,18 +11782,18 @@ FAAAAAAAAAAQAAAAFAAAAA==</Column></DataRow></DataSet></RefData></Images><Diagram
 							<Apply type="ToolboxPage"/>
 						</AppliesTo>
 						<TaggedValues>
-							<Tag name="Chronos::ChiBusinessPartner(UML::Actor)" type="" description="" unit="" values="" default="Business Partner"/>
-							<Tag name="Chronos::ChiBusinessPartnerActive(UML::Actor)" type="" description="" unit="" values="" default="Active Bus. Partner"/>
-							<Tag name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" type="" description="" unit="" values="" default="Passive Bus. Partner"/>
-							<Tag name="Chronos::ChiBusinessProcess(UML::Package)" type="" description="" unit="" values="" default="Bus Process"/>
-							<Tag name="Chronos::ChiBusinessUseCase(UML::UseCase)" type="" description="" unit="" values="" default="Bus. Use Case"/>
-							<Tag name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" type="" description="" unit="" values="" default="Core Bus. Use Case"/>
+							<Tag name="Chronos::ChiBusinessPartnerActive(UML::Actor)" type="" description="" unit="" values="" default="Active BizPartner"/>
+							<Tag name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" type="" description="" unit="" values="" default="Passive Biz Partner"/>
+							<Tag name="Chronos::ChiBusinessUseCase(UML::UseCase)" type="" description="" unit="" values="" default="Biz Use Case"/>
+							<Tag name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" type="" description="" unit="" values="" default="Core Biz Use Case"/>
 							<Tag name="Chronos::ChiWorker(UML::Actor)" type="" description="" unit="" values="" default="Worker"/>
 							<Tag name="Chronos::ChiWorkerExternal(UML::Actor)" type="" description="" unit="" values="" default="External Worker"/>
 							<Tag name="Chronos::ChiWorkerInternal(UML::Actor)" type="" description="" unit="" values="" default="Internal Worker"/>
+							<Tag name="Chronos::ChiBusinessProcess(TOGAF::Process)" type="" description="" unit="" values="" default="Biz Process"/>
+							<Tag name="Chronos::ChiBusinessPartner(UML::Actor)" type="" description="" unit="" values="" default="Biz Partner"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiBusinessProcess(UML::Package)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
+					<Stereotype name="Chronos::ChiBusinessProcess(TOGAF::Process)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -11809,10 +11809,10 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -11834,10 +11834,10 @@ zcvJycfFraqoq6ilxMC+2NbU7Ovq+/v6////////////////zcvM2NfV6uvp////////////
 ////////////////////9PX15eXk3dvZ////////////////+/v78/Ly5ubl4eHg4eDg4N/f
 4ODf4eHg4eHh6+vr9fT0/f39////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -11859,10 +11859,10 @@ zcvJ0M7Nwr+9uLWyxMC/19TT7Orq+/v6////////////////1dbS1tTV6Ofl////////////
 ////////////////////9vb35eXk3dva////////////////+/v78/Ly5ubl4eHg4eHg4eDf
 4eDf4eHg4eHg6+rq9fT0/f39////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -11884,10 +11884,10 @@ qaim////////qaim////////////urm3o6KfdnRxo6Kfo6Kf6+vq////////////qaim////
 lJORycnJrKqoxcTD/////v7+mpmX8fHw////////////////////xMPCqKak+Pj49vb2vby6
 trWz////5eTkl5WT6Ojo////////////////////////////7e3so6KgoqGegoB9dnRxoZ+d
 tbSy/Pz8////////////////////////////////////////////6Ojnsa+u////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -11909,10 +11909,10 @@ oKCfm5qZ////////////////39/fnp2blZSRxMTC////////////////7u7t1NTTtrW1kpGQ
 trW0o6KgsLCur66s+Pj4////8vLxlJOS9fX1////r6+u////////z8/PhYSC1dXU/v794eHg
 3Nzb+vr59vb1t7a1vb28/Pz8////////0M/P////////////+vr6urm5nZybsbCuubi2r62s
 rayr2dnZ////////////////////////////////////////////6Ojnsa+u////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -11934,10 +11934,10 @@ nJuY////////////9vb1sK6tsK6te3l2r62ssK6t09LS////////////+/v7n56cmZiV/v7+
 8/Pytbi67uzrmZeV////////////wL++yMfG////////9/b2jYuJ8PDv////8fHwjIuItLOy
 m5mXvr28////////yMjGrKup////////////////9/f3mZeVt7W0/Pz8/Pz82dnY8O/v////
 7u3tnJuYu7q4////////////////////////////2trZnJqYnJqYiYeFkI6LnJqYp6ak8vLy
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -11959,10 +11959,10 @@ aGZizMvK////////////////////////////////////////////////////////iYeE////
 u7q5/P3+pqWl////jYuI+vr6////////////////////////////////////5eTkmpiW5ufo
 mJma+vj3gH57/v7+////////////////////////////////////////mJaUoZ+dzczLjIqI
 u7q4////////////////////////////////////////////////1dTTs7Kw5OPj////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -11984,10 +11984,10 @@ hYOA////////////////////////////////////////////////////////wL++xsbE////
 ////qKuu+PXz7u7tmZeV////////////////////////////////////////hIJ/+vr6u72/
 wL69zc3LsbCu////////////////////////////////////////2trZfHt3xsbFuLe1e3l2
 +vr6////////////////////////////////////////////7u7ts7KwwcC+/Pz8////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12009,10 +12009,10 @@ goB9////////////////////////////////////////////////////////t7a0yMjG////
 ////o6Wo+fj19PTzjoyK////////////////////////////////////////fHp3/v7+t7m7
 wL691dXUpaSi////////////////////////////////////////xsXEhIOAz8/Ovr68d3Vy
 9fX1////////////////////////////////////////////5ublq6qnurq4+vr5////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12044,10 +12044,10 @@ i42Oi42Oi42Oi42Oi42Oi42Oi42Oi42Oi42Oi42O1dbWZGdGhYeJ////////////////////
 ////////////////////////////////////ZGdGV1pcmpydmpydmpydmpydmpydmpydmpyd
 mpydmpydmpydmpydmpydmpydmpydUlU1////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12069,10 +12069,10 @@ u7u7iomG////////////////////2traICAgwcHB////////////////dXRx////////cnBt
 mJiY4ODg////3t7e0tLS////0tLReXd1////////////////srKxbWto4N/f////////////
 ////////////xcTDcG5rvb29////////////////////uLi4dHNwhoWCw8LA4ODf3d3ct7a1
 e3l2hIOB////////////////////////////////////t7e3lZSSf358g4KAmpmYvLy8////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12094,10 +12094,10 @@ qaim////////29vbfHx8a2tr////enp6i4uL////////mJaUdXV0////////gYGBXlxZ3Nzb
 ////////+vr6/////v7+urq4XVxZg4OD////////////////////gYGBY2JfcXBtqqmntLOx
 W1lVo6KgbWtoamhn////////////////////////////////////////dHRzXlxaPzw4d3d2
 gIB/////////////////////////////////////////////////////gYGB////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12130,10 +12130,10 @@ lJS9////////////////////////+vr7SUnWIiKXlJSKvb28qKilrKyrLy/aKyu08PDx////
 9PT5NzfYHh694uLk////////////////////////////////////////////////////v7/g
 lpaz////////////////////////////////////////////////////dHRzXlxaPzw4d3d2
 gIB/////////////////////////////////////////////////////gYGB////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12155,10 +12155,10 @@ Ai7ZrbzisrCn4ODh1dbWQUVI6urr////////pbnyRnHs/f3+////q6+9ATjgEk71p7TTYWBV
 ioyO/v7+////c3Z4oqOj////09z5LmHwytHk////////////h5GzEUbsoLj/8PDw///6////
 ///////76+vrobbzM2b3pLHV////////////////////qa/DJ03VMmX5d5f2orj1obf0f530
 R3HzTXTousHU////////////////////////////7Ozuj5zHQGfXGEveJ1feVnjapLDR6enq
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12180,10 +12180,10 @@ gWFA/5oz/5oz/5kz/5oz/50z/50yp39XxcbGnZSK+Zcy/5s0/5kz/5kz/5ov0ZZaj4iC6owv
 npOIn2Ys/6I04ZZLkn5qz34t/58z/5w1tJ+L/v7+////////o5F/9pcy/6A1/50z/5sz/500
 /5kz/5sy/540/5ow/Zo1w6KA7u7u////////////////vK6h041E/5w0/500/5sz/5oy/5oy
 /pkz5ZhKyrSf8/Py////////////////////////6ebkuqOMyY9U4ZFA348/0pVXx6uQ29bS
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12205,10 +12205,10 @@ y97LfZ19N3M3ibCJ////SolKebp49Ov0Pmo+AIEAf6h/////////////WYFZAIIAGooai7OL
 ocWh/v7+////5+bnl6uWPms+AHAASaNJ5ufm////////////9fb1VJBUAH0AAH8AOIs4YZVh
 Z5JnRXxFCmYKAHkAVrNW1t3W////////////////////////mbyZL4ovA3wDAHcAAHYAAH4A
 MJowkMiQ6/Xr////////////////////////////////+vz61eTVsdSxstey1OnU8vjy////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12242,10 +12242,10 @@ ETh0eJO1irfkZ5PDETVbFTlfHDlZEDJV+Pn6////////////////////////////N1J5D0mP
 DD52DD5zDj5zET9wDzZhFTFR////////////////////////////////r7G0KE19D0mKD0mI
 DkWBDD5zGz1go6Wo////////////////////////////////////oqWsEz96DT59DDx2Ejlp
 kpef////////////////////////////////////////////////////////////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12267,10 +12267,10 @@ BUO8H1rAgpzOw5ly////////0rOW6tvMzKiGu41g+vfy+vPs+PHp+PDn9+/m9+7k9uzi9+/n
 +fPs+fLr+vXv9u/q0rOV////////////////////zauK+/j1+/jz+/fy+/by+/bw+/Xw+vXv
 +/jz9u/q0rOV////////////////////17ug693P+/j1+/j1+/j1+/j1+/j1+/j0+PTv5dPC
 28Or////////////////////9Ozl17yizqyLzqyLzqyLzqyLzqyLzqyL0K+Q49C+9/Hr////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
@@ -12292,10 +12292,10 @@ wJVs/////vHo/vDm/u/j/u3g/uzd/erb/ejX/ebV////zaqJ6tzO/////////Pn3uYha/v79
 ////////////////////////38m0wphw/fz7////////////+vfz0bGTuopcuIdYuIdYuIdY
 uIdYuIdYuIdYuIdYy6eF9e7n////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-////////////////dQBwAHAAQwBvAG4AbgBlAGMAdABvAHIATABhAGIAZQBsAHMAPQAwADsA
-UAByAGkAbgB0AFAAYQBnAGUASABlAGEAZABGAG8AbwB0AD0AMAA7AFMAaABvAHcAQQBzAEwA
-aQBzAHQAPQAwADsAUwB1AHAAcAByAGUAcwBzAGUAZABDAG8AbQBwAGEAcgB0AG0AZQBuAHQA
-cwA9ADsAUwBhAHYAZQBUAGEAZwA9AEYAQQA5ADUAMgBFADUAMwA7AAAAAAAAAAAAAAAA
+////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
+ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
+bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
