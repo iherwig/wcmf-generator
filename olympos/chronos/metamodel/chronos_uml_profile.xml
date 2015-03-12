@@ -158,11 +158,12 @@ AAAAAACAAAAAAHN0ci5kYXRVVAUABw0l/1RQSwUGAAAAAAEAAQA+AAAAtAAAAAAA</Image>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiRequirement" notes="A Business guide line about the Enterprise or the project." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAAKJakZm4AUdegAAAMAAAAAHABEAc3RyLmRhdFVUDQAHASX/VAEl/1QBJf9U
-RY0xCoNAFERfa8A7BKsIComlkkosbFLkBqISt1CJmiJI7u7sIpGFmWH++/sbWmpGJioWjNLA
-mZ4vzT7xObE6tZRRO4g86DsBDwpp5iiPUvsVL5EXtTmd9iw5MpPq2cbw1PzNR2lS6vd/AyLd
-T7jKY6c36eHh/8rP+QZQSwECFwsUAAAACAACiWpGZuAFHXoAAADAAAAABwAJAAAAAAAAAAAA
-AIAAAAAAc3RyLmRhdFVUBQAHASX/VFBLBQYAAAAAAQABAD4AAACwAAAAAAA=</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAICAbEakfB4HiQAAAOoAAAAHABEAc3RyLmRhdFVUDQAHILkBVSC5AVUguQFV
+RY2xCsJAEERfq+A/SCoFRWNpsBILGwvxB8RIcsUleGoh4r87ezkSFmaH3dm3JXdutASuvHBy
+DVM8H8q0mTDmG3XESnWhVu6pVKeWNe9FqHRjSeM5+UbMgbsj48RBWiTesb+aaboXOcRkK/JW
+ZRPHWfsHb7kg5xM3Y6G/G9bqy6i5dOjz/ssv9j9QSwECFwsUAAAACACAgGxGpHweB4kAAADq
+AAAABwAJAAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHILkBVVBLBQYAAAAAAQABAD4AAAC/
+AAAAAAA=</Image>
 				<AppliesTo>
 					<Apply type="Requirement"/>
 				</AppliesTo>
@@ -247,15 +248,6 @@ LuXutmKeOfkaa1a++T5ZlLCHqMGqVtyMmJQKVqetQVnx1i+vzE24nfrMVOH7siTLWE/u/s2a
 uCjnuaMz8NP01dFU7TC9Q/63MdZvCl/uPCyrMJx5O+AbUEsBAhcLFAAAAAgABoJFRjLzyaBl
 AQAAxgMAAAcACQAAAAAAAAAAAACAAAAAAHN0ci5kYXRVVAUAB2OX01RQSwUGAAAAAAEAAQA+
 AAAAmwEAAAAA</Image>
-				<AppliesTo>
-					<Apply type="Activity">
-						<Property name="isReadOnly" value="false"/>
-						<Property name="isSingleExecution" value=""/>
-						<Property name="parameterName" value=""/>
-						<Property name="postcondition" value=""/>
-						<Property name="precondition" value=""/>
-					</Apply>
-				</AppliesTo>
 			</Stereotype>
 			<Stereotype name="ChiBusinessUseCase" notes="A Business Use Case is part of a business process that produces an advantage to the enterprise." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
 				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAGaCRUYZTNDKSQEAAJQDAAAHABEAc3RyLmRhdFVUDQAH95fTVPeX01T3l9NU
