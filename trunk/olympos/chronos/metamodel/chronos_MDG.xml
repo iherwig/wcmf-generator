@@ -1,4 +1,4 @@
-<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos " version="2.6.3Q" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
+<MDG.Technology version="1.0"><Documentation id="Chronos2015" name="Chronos" version="2.6.3M3" notes="The Chronos (Chi) Metamodel is a UML profile which defines the notation for all elements used in the different stages of the project life cycle from the requirement to the application. Chronos is made to use a Model Driven Enterprise approach (MDE).&#xA;The aim of the MDE is to hold the business knowledge of the enterprise in a single place: the model.&#xA;All the products of this knowledge (text documents or code) are generated from the model rather that produced, managed and stored separately.&#xA;" infoURI="https://sourceforge.net/projects/olympos/"/><Logo><Image type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0KrAcAAAAAADYAAAAoAAAAewEAALkBAAABABgAAAAAANSrBwDEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -9484,11 +9484,11 @@ VVQFAAcJaNNUUEsFBgAAAAABAAEAPgAAAHsBAAAAAA==</Image>
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiGoal" notes="a Measurable scope that the enterprise wants to achieve. " cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIABqJakaoGQCzfgAAAMgAAAAHABEAc3RyLmRhdFVUDQAHDSX/VA0l/1QNJf9U
-RY4xCsJAFERfq+AdxEpBQS2VVCJiY+ENFiMaMAlGLUS8u2/DYliYGea/v7s5Z07UNASeFKaK
-ISVv8jQZ0OfTaqQK20qyozNGHNiq65bqsXc/cJEc2264uhfJmgcrT2wKjs7vvEyNqUz37qQC
-N/em/mPJXJ8lX6idT/7vfdUfUEsBAhcLFAAAAAgAGolqRqgZALN+AAAAyAAAAAcACQAAAAAA
-AAAAAACAAAAAAHN0ci5kYXRVVAUABw0l/1RQSwUGAAAAAAEAAQA+AAAAtAAAAAAA</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAIhpR0bXldMCfgAAAMgAAAAHABEAc3RyLmRhdFVUDQAHRA/WVEQP1lRED9ZU
+RY4xCsJAFERfq+AdxEpBQS0VKxGxsfAGSyK6YBKMWoh4d1/CYliYGea/v7s5ZzIqagJPoqlk
+SMGbPE0G9Pm02lDRtpTs6A0jjuzUdUv1OLgfuEiObTOu7jVkxYOVZ2sTOTm/8zLVpiLdu5cK
+3Nyb+o8lc32WfKF2Pvm/91V/UEsBAhcLFAAAAAgAiGlHRteV0wJ+AAAAyAAAAAcACQAAAAAA
+AAAAAACAAAAAAHN0ci5kYXRVVAUAB0QP1lRQSwUGAAAAAAEAAQA+AAAAtAAAAAAA</Image>
 						<AppliesTo>
 							<Apply type="Requirement"/>
 						</AppliesTo>
@@ -9500,12 +9500,11 @@ AAAAAACAAAAAAHN0ci5kYXRVVAUABw0l/1RQSwUGAAAAAAEAAQA+AAAAtAAAAAAA</Image>
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiRequirement" notes="A Business guide line about the Enterprise or the project." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAICAbEakfB4HiQAAAOoAAAAHABEAc3RyLmRhdFVUDQAHILkBVSC5AVUguQFV
-RY2xCsJAEERfq+A/SCoFRWNpsBILGwvxB8RIcsUleGoh4r87ezkSFmaH3dm3JXdutASuvHBy
-DVM8H8q0mTDmG3XESnWhVu6pVKeWNe9FqHRjSeM5+UbMgbsj48RBWiTesb+aaboXOcRkK/JW
-ZRPHWfsHb7kg5xM3Y6G/G9bqy6i5dOjz/ssv9j9QSwECFwsUAAAACACAgGxGpHweB4kAAADq
-AAAABwAJAAAAAAAAAAAAAIAAAAAAc3RyLmRhdFVUBQAHILkBVVBLBQYAAAAAAQABAD4AAAC/
-AAAAAAA=</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFBqR0btA1IsegAAAMAAAAAHABEAc3RyLmRhdFVUDQAHsBDWVLAQ1lSwENZU
+RY0xCoNAFERfm0DuEKwiREgslVRiYWPhDURD3EJFo4WId3dcRFmYGea/v7/kS0FLT86AUWq4
+UzNR7pMbV2arG2XUNiJP+oNDSiwNLXUh0X7OT+RDbUGlvY1s+RPoRWoMmeYdo1KvVO//Ojx1
+3+cl96y+pae7x5XF+gpQSwECFwsUAAAACABQakdG7QNSLHoAAADAAAAABwAJAAAAAAAAAAAA
+AIAAAAAAc3RyLmRhdFVUBQAHsBDWVFBLBQYAAAAAAQABAD4AAACwAAAAAAA=</Image>
 						<AppliesTo>
 							<Apply type="Requirement"/>
 						</AppliesTo>
@@ -9518,12 +9517,12 @@ AAAAAAA=</Image>
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiFeature" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIABaJakaTxUQvgQAAANAAAAAHABEAc3RyLmRhdFVUDQAHGyX/VBsl/1QbJf9U
-RY7BCoJAFEXP1qB/EFcFCelSaRUGbVr4B6KRs1DJdCHSv3dnGJKBdy/3nffeNDypGRipmDBy
-PSEdC43v7Nmxumopo7QXudEXIh4UqrmjAu6ar3iJPCi90mrOkgMfMj2bGEr138xyo1zn996k
-dvfs0oiTfpNylsZeE9VNj/+rX6c/UEsBAhcLFAAAAAgAFolqRpPFRC+BAAAA0AAAAAcACQAA
-AAAAAAAAAACAAAAAAHN0ci5kYXRVVAUABxsl/1RQSwUGAAAAAAEAAQA+AAAAtwAAAAAA
-</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAKhpR0YMiY+sggAAANAAAAAHABEAc3RyLmRhdFVUDQAHYA/WVGAP1lRgD9ZU
+RY7BCoJAFEXP1qB/EFcFCepSaRUFbVz4B6KRs1DRchHSv3dnGJKBdy/3nffetDxoGJmpeWPk
+BkJ6PrS+s2fH6qqljNJB5EafiSi5qhaOCrhrvuYp8qC0odOcJUde5HoXJYZK/YlFbpbr/d6b
+1O5eXBpx0m8yEmnsNVXd9Pi/+nX6A1BLAQIXCxQAAAAIAKhpR0YMiY+sggAAANAAAAAHAAkA
+AAAAAAAAAAAAgAAAAABzdHIuZGF0VVQFAAdgD9ZUUEsFBgAAAAABAAEAPgAAALgAAAAA
+AA==</Image>
 						<AppliesTo>
 							<Apply type="Feature">
 								<Property name="isStatic" value="false"/>
@@ -9536,11 +9535,11 @@ AAAAAAAAAACAAAAAAHN0ci5kYXRVVAUABxsl/1RQSwUGAAAAAAEAAQA+AAAAtwAAAAAA
 						</TaggedValues>
 					</Stereotype>
 					<Stereotype name="ChiIssue" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAAiJakbS3grSfQAAAMYAAAAHABEAc3RyLmRhdFVUDQAHJCX/VCQl/1QkJf9U
-RY4xCsJAFERfq+AdxErBQi0VK7FIk8IbBBN0iySYmELEu/s2hISF+cP8N7ubU3CnpiHjTdBV
-LCn5kA+bBXO+vUYqmFaSE31mRcpVPfXUjMR+xkNybXrhaS+SNS1HT0wCN/cvOl2jK4d7E5nW
-tLC59ScHds79qNPcjO/9+ANQSwECFwsUAAAACAAIiWpG0t4K0n0AAADGAAAABwAJAAAAAAAA
-AAAAAIAAAAAAc3RyLmRhdFVUBQAHJCX/VFBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
+						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFJqR0Z6P3q6fQAAAMYAAAAHABEAc3RyLmRhdFVUDQAHwRDWVMEQ1lTBENZU
+RY7BCoJAFEXPtqB/iFYFLapl0UpauGnRH4hKzUIlrYVI/95RRBm473LfuTOTkZNSUZPwIehK
+1hS0ZONmxZJu0J4KpqXkTF/ZcOemXgZqQWw/4Sm5NU152evJioazJzIJPNy/+epqXTHeG8s0
+prnNvT85cXAeJ53nbnrvxx9QSwECFwsUAAAACABSakdGej96un0AAADGAAAABwAJAAAAAAAA
+AAAAAIAAAAAAc3RyLmRhdFVUBQAHwRDWVFBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
 						<AppliesTo>
 							<Apply type="Issue"/>
 						</AppliesTo>
@@ -9579,7 +9578,7 @@ AAAAAIAAAAAAc3RyLmRhdFVUBQAHJCX/VFBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
 							</Apply>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="ChiBusinessProcess" notes="A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="TOGAF::Process" baseStereotypes="TOGAF::Process">
+					<Stereotype name="ChiBusinessProcess" notes="A Business Process is a sum of actions that produces a business advantage to the enterprise. It is composed by one or many ChiBusinessUseCases." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAAaCRUYy88mgZQEAAMYDAAAHABEAc3RyLmRhdFVUDQAHY5fTVGOX01Rjl9NU
 lZNbS8NAEIXPawX/Q2hfKhRsBV+8QS0VfVDE+i61jTYQY2lSRcT/7je72TYkIsphN5PNmTOX
 neRaaKqlYkW6xkqUaVc7+nR7tEGmV00cd471rlO1VWilNZ5tHdfYKbwPeGs491imbx6PnK1Q
@@ -9797,7 +9796,7 @@ VFBLBQYAAAAAAQABAD4AAACbAAAAAAA=</Image>
 				<TaggedValueTypes>
 					<TaggedValueType property="reference_type" description="" notes="Type=Classifier;Stereotypes=ChiValueRef;"/>
 				</TaggedValueTypes>
-				<QuickLink data="//Source Element Type,Source Stereotype Filter,Target Element Type,Target Stereotype Filter,Diagram Filter,New Element Type,New Element Stereotype,New Link Type,New Link Stereotype,New Link Direction,New Link Caption,New Link &amp; Element Caption,Create Link,Create Element,Disallow Self Connector,Exclusive Stereotype Filter + No Inherit from Metatype,Menu Group,Complexity Level,Target Must be Parent,Embed Element,Precedes Separator LEAF,Precedes Separator GROUP,Dummy&#xA;Class,ChiBusinessProcess,UseCase,ChiBusinessUseCase,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiBusinessProcess,UseCase,ChiBusinessUseCaseCore,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerExternal,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerInternal,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerExternal,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerInternal,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorker,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorker,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartner,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartner,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerActive,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerActive,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerPassive,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerPassive,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Class,ChiController,,,,Realization,Realizes,from,Realizes,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Feature,ChiFeature,,,,Realization,RefinedBy,directed,RefinedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Feature,ChiFeature,,,,Realization,RefinedBy,directed,RefinedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Class,ChiController,,,,Realization,Realizes,from,Realizes,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiWorkerExternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiWorkerInternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiWorkerExternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiWorkerInternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiWorker,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiWorker,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartner,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartner,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiBusinessPartnerActive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiBusinessPartnerActive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartnerPassive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartnerPassive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Feature,ChiFeature,Requirement,ChiRequirement,,,,Realization,Realizes,directed,Realizes,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,Feature,ChiFeature,,,,Realization,Realizes,from,Realizes,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,Requirement,ChiGoal,,,,Composition,SpecifiedBy,directed,SpecifiedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,Issue,ChiIssue,,,,Association,NegatedBy,directed,NegatedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiGoal,Requirement,ChiRequirement,,,,Composition,SpecifiedBy,from,SpecifiedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Class,ChiController,UseCase,ChiBusinessUseCase,,,,Realization,Realizes,directed,Realizes,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiController,UseCase,ChiBusinessUseCaseCore,,,,Realization,Realizes,directed,Realizes,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiController,Class,ChiNode,,,,Association,Instantiates,directed,Instantiates,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiController,Class ,ChiView,,,,Association,ActionKey,directed,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiNode,Class,ChiController,,,,Association,Instantiates,from,Instantiates,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiNode,Class,ChiView,,,,Association,ActionKey,directed,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiView,Class,ChiController,,,,Association,ActionKey,from,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiView,Class,ChiNode,,,,Association,ActionKey,from,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Requirement,ChiGoal,Requirement,ChiGoal,,,,Composition,Contains,directed,Contains,,TRUE,,,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Feature,ChiFeature,,,,UseCase,ChiBusinessUseCase,Realization,RefinedBy,from,RefinedBy,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Feature,ChiFeature,,,,UseCase,ChiBusinessUseCaseCore,Realization,RefinedBy,from,RefinedBy,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerInternal,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerExternal,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerInternal,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerExternal,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorker,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartner,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorker,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartner,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerPassive,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerActive,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerPassive,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerActive,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCase,Composition,Contains,directed,Contains,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCaseCore,Composition,Contains,directed,Contains,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiWorkerExternal,Association,ParticipatesIn,from,ParticipatesIn,Create External Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorkerExternal,Association,ParticipatesIn,from,ParticipatesIn,Create External Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiWorkerInternal,Association,ParticipatesIn,from,ParticipatesIn,Create Internal Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorkerInternal,Association,ParticipatesIn,from,ParticipatesIn,Create Internal Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiBusinessPartner,Association,ParticipatesIn,from,ParticipatesIn,Create Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiBusinessPartner,Association,ParticipatesIn,from,ParticipatesIn,Create Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiBusinessPartnerActive,Association,ParticipatesIn,from,ParticipatesIn,Create Active Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiBusinessPartnerActive,Association,ParticipatesIn,from,ParticipatesIn,Create Active Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiBusinessPartnerPassive,Association,ParticipatesIn,from,ParticipatesIn,Create Passive Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiBusinessPartnerPassive,Association,ParticipatesIn,from,ParticipatesIn,Create Passive Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Class,,Realization,Realizes,from,Realizes,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Feature,ChiFeature,Realization,RefinedBy,directed,Realizes,Create Feature,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Class,ChiController,Composition,RefinedBy,from,RefinedBy,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Feature,ChiFeature,Realization,RefinedBy,directed,Realizes,Create Feature,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Feature,ChiFeature,,,,Requirement,ChiRequirement,Realization,Realizes,directed,Realizes,Create Requirement,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,,,,Feature,ChiFeature,Realization,Realizes,from,Realizes,Create Feature,TRUE,TRUE,,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,,,,Requirement,ChiGoal,Composition,SpecifiedBy,directed,SpecifiedBy,Create Goal,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,,,,Issue,ChiIssue,Association,NegatedBy,directed,NegatedBy,Create Issue,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiGoal,,,,Requirement,ChiRequirement,Composition,SpecifiedBy,from,SpecifiedBy,Create Requirement,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Class,ChiController,,,,UseCase,ChiBusinessUseCase,Realization,Realizes,directed,Realizes,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiController,,,,UseCase,ChiBusinessUseCaseCore,Realization,Realizes,directed,Realizes,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiController,,,,Class,ChiNode,Association,Instantiates,directed,Instantiates,Create Model,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiController,,,,Class ,ChiView,Association,ActionKey,directed,ActionKey,Create View,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiNode,,,,Class,ChiController,Association,Instantiates,from,Instantiates,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiNode,,,,Class,ChiView,Association,ActionKey,directed,ActionKey,Create View,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiView,,,,Class,ChiController,Association,ActionKey,from,ActionKey,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiView,,,,Class,ChiNode,Association,ActionKey,from,ActionKey,Create Node,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Requirement,ChiGoal,,,,Requirement,ChiGoal,Composition,Contains,directed,Contains,Create Goal,TRUE,TRUE,,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;&#xA;"/>
+				<QuickLink data="Class,ChiBusinessProcess,UseCase,ChiBusinessUseCase,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiBusinessProcess,UseCase,ChiBusinessUseCaseCore,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerExternal,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerInternal,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerExternal,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerInternal,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorker,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorker,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartner,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartner,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerActive,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerActive,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerPassive,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerPassive,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Class,ChiController,,,,Realization,Realizes,from,Realizes,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Feature,ChiFeature,,,,Realization,RefinedBy,directed,RefinedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Feature,ChiFeature,,,,Realization,RefinedBy,directed,RefinedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Class,ChiController,,,,Realization,Realizes,from,Realizes,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiWorkerExternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiWorkerInternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiWorkerExternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiWorkerInternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiWorker,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiWorker,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartner,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartner,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiBusinessPartnerActive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,Actor,ChiBusinessPartnerActive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartnerPassive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartnerPassive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Feature,ChiFeature,Requirement,ChiRequirement,,,,Realization,Realizes,directed,Realizes,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,Feature,ChiFeature,,,,Realization,Realizes,from,Realizes,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,Requirement,ChiGoal,,,,Composition,SpecifiedBy,directed,SpecifiedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,Issue,ChiIssue,,,,Association,NegatedBy,directed,NegatedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiGoal,Requirement,ChiRequirement,,,,Composition,SpecifiedBy,from,SpecifiedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Class,ChiController,UseCase,ChiBusinessUseCase,,,,Realization,Realizes,directed,Realizes,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiController,UseCase,ChiBusinessUseCaseCore,,,,Realization,Realizes,directed,Realizes,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiController,Class,ChiNode,,,,Association,Instantiates,directed,Instantiates,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiController,Class ,ChiView,,,,Association,ActionKey,directed,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiNode,Class,ChiController,,,,Association,Instantiates,from,Instantiates,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiNode,Class,ChiView,,,,Association,ActionKey,directed,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiView,Class,ChiController,,,,Association,ActionKey,from,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiView,Class,ChiNode,,,,Association,ActionKey,from,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Requirement,ChiGoal,Requirement,ChiGoal,,,,Composition,Contains,directed,Contains,,TRUE,,,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Feature,ChiFeature,,,,UseCase,ChiBusinessUseCase,Realization,RefinedBy,from,RefinedBy,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Feature,ChiFeature,,,,UseCase,ChiBusinessUseCaseCore,Realization,RefinedBy,from,RefinedBy,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerInternal,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerExternal,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerInternal,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorkerExternal,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorker,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartner,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiWorker,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartner,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerPassive,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerActive,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerPassive,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Actor,ChiBusinessPartnerActive,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCase,Composition,Contains,directed,Contains,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCaseCore,Composition,Contains,directed,Contains,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiWorkerExternal,Association,ParticipatesIn,from,ParticipatesIn,Create External Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorkerExternal,Association,ParticipatesIn,from,ParticipatesIn,Create External Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiWorkerInternal,Association,ParticipatesIn,from,ParticipatesIn,Create Internal Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorkerInternal,Association,ParticipatesIn,from,ParticipatesIn,Create Internal Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiBusinessPartner,Association,ParticipatesIn,from,ParticipatesIn,Create Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiBusinessPartner,Association,ParticipatesIn,from,ParticipatesIn,Create Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiBusinessPartnerActive,Association,ParticipatesIn,from,ParticipatesIn,Create Active Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiBusinessPartnerActive,Association,ParticipatesIn,from,ParticipatesIn,Create Active Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Actor,ChiBusinessPartnerPassive,Association,ParticipatesIn,from,ParticipatesIn,Create Passive Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiBusinessPartnerPassive,Association,ParticipatesIn,from,ParticipatesIn,Create Passive Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Class,ChiController,Realization,Realizes,from,Realizes,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCase,,,,Feature,ChiFeature,Realization,RefinedBy,directed,Realizes,Create Feature,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Class,ChiController,Composition,RefinedBy,from,RefinedBy,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;UseCase,ChiBusinessUseCaseCore,,,,Feature,ChiFeature,Realization,RefinedBy,directed,Realizes,Create Feature,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Feature,ChiFeature,,,,Requirement,ChiRequirement,Realization,Realizes,directed,Realizes,Create Requirement,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,,,,Feature,ChiFeature,Realization,Realizes,from,Realizes,Create Feature,TRUE,TRUE,,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,,,,Requirement,ChiGoal,Composition,SpecifiedBy,directed,SpecifiedBy,Create Goal,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiRequirement,,,,Issue,ChiIssue,Association,NegatedBy,directed,NegatedBy,Create Issue,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Requirement,ChiGoal,,,,Requirement,ChiRequirement,Composition,SpecifiedBy,from,SpecifiedBy,Create Requirement,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;Class,ChiController,,,,UseCase,ChiBusinessUseCase,Realization,Realizes,directed,Realizes,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiController,,,,UseCase,ChiBusinessUseCaseCore,Realization,Realizes,directed,Realizes,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0&#xA;Class,ChiController,,,,Class,ChiNode,Association,Instantiates,directed,Instantiates,Create Model,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiController,,,,Class ,ChiView,Association,ActionKey,directed,ActionKey,Create View,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiNode,,,,Class,ChiController,Association,Instantiates,from,Instantiates,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiNode,,,,Class,ChiView,Association,ActionKey,directed,ActionKey,Create View,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiView,,,,Class,ChiController,Association,ActionKey,from,ActionKey,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Class,ChiView,,,,Class,ChiNode,Association,ActionKey,from,ActionKey,Create Node,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0&#xA;Requirement,ChiGoal,,,,Requirement,ChiGoal,Composition,Contains,directed,Contains,Create Goal,TRUE,TRUE,,TRUE,ChiRequirements,0,,,,TRUE,0&#xA;"/>
 			</Content>
 		</UMLProfile>
 	</UMLProfiles><Images><RefData version="1.0" exporter="EA.25">
@@ -11780,23 +11779,23 @@ FAAAAAAAAAAQAAAAFAAAAA==</Column></DataRow></DataSet></RefData></Images><Diagram
 			<Documentation id="258D2A3B-6" name="Chronos" version="1.0" notes="Chronos"/>
 			<Content>
 				<Stereotypes>
-					<Stereotype name="Analysis" notes="tools for the Chronos analysis">
+					<Stereotype name="Analysis" notes="tools for the Chronos analysis" cx="361" cy="187" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="ToolboxPage"/>
 						</AppliesTo>
 						<TaggedValues>
-							<Tag name="Chronos::ChiBusinessUseCase(UML::UseCase)" type="" description="" unit="" values="" default="Bus. Use Case"/>
-							<Tag name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" type="" description="" unit="" values="" default="Core Bus. Use Case"/>
+							<Tag name="Chronos::ChiBusinessPartnerActive(UML::Actor)" type="" description="" unit="" values="" default="Active BizPartner"/>
+							<Tag name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" type="" description="" unit="" values="" default="Passive Biz Partner"/>
+							<Tag name="Chronos::ChiBusinessUseCase(UML::UseCase)" type="" description="" unit="" values="" default="Biz Use Case"/>
+							<Tag name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" type="" description="" unit="" values="" default="Core Biz Use Case"/>
 							<Tag name="Chronos::ChiWorker(UML::Actor)" type="" description="" unit="" values="" default="Worker"/>
 							<Tag name="Chronos::ChiWorkerExternal(UML::Actor)" type="" description="" unit="" values="" default="External Worker"/>
 							<Tag name="Chronos::ChiWorkerInternal(UML::Actor)" type="" description="" unit="" values="" default="Internal Worker"/>
-							<Tag name="Chronos::ChiBusinessPartner(UML::Actor)" type="" description="" unit="" values="" default="Business Partner"/>
-							<Tag name="Chronos::ChiBusinessPartnerActive(UML::Actor)" type="" description="" unit="" values="" default="Active Bus. Partner"/>
-							<Tag name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" type="" description="" unit="" values="" default="Passive Bus. Partner"/>
-							<Tag name="Chronos::ChiBusinessProcess(TOGAF::Process)" type="" description="" unit="" values="" default="Bus Process"/>
+							<Tag name="Chronos::ChiBusinessProcess(TOGAF::Process)" type="" description="" unit="" values="" default="Biz Process"/>
+							<Tag name="Chronos::ChiBusinessPartner(UML::Actor)" type="" description="" unit="" values="" default="Biz Partner"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiBusinessProcess(TOGAF::Process)" notes="">
+					<Stereotype name="Chronos::ChiBusinessProcess(TOGAF::Process)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -11815,13 +11814,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////////////////////////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" notes="">
+					<Stereotype name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -11840,13 +11839,13 @@ zcvJycfFraqoq6ilxMC+2NbU7Ovq+/v6////////////////zcvM2NfV6uvp////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiBusinessUseCase(UML::UseCase)" notes="">
+					<Stereotype name="Chronos::ChiBusinessUseCase(UML::UseCase)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -11865,13 +11864,13 @@ zcvJ0M7Nwr+9uLWyxMC/19TT7Orq+/v6////////////////1dbS1tTV6Ofl////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiWorkerInternal(UML::Actor)" notes="">
+					<Stereotype name="Chronos::ChiWorkerInternal(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 /////////////////v7+xcTDoqGeo6Kfo6KfpaOh4eHg////////////////////////////
 ////4+Lil5WT19bV////////////+/v7uLe2oqCe+vr6////////////////////4eDfpKOh
@@ -11890,13 +11889,13 @@ tbSy/Pz8////////////////////////////////////////////6Ojnsa+u////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiWorkerExternal(UML::Actor)" notes="">
+					<Stereotype name="Chronos::ChiWorkerExternal(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0GAwAAAAAAADYAAAAoAAAAEAAAAA8AAAABABgAAAAAANACAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////+fn5u7q6m5qZpqakrayqoaGfoaCf19fW////////////////x8fG////
 ////z8/PgoKA1dTT////////////////9vX1qainqamo/Pz8////////qKin////v7+/paSi
@@ -11915,13 +11914,13 @@ rayr2dnZ////////////////////////////////////////////6Ojnsa+u////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiWorker(UML::Actor)" notes="">
+					<Stereotype name="Chronos::ChiWorker(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////9fX0srGvnJqYnZuZnZuZnZuZy8rJ////////////////////////////
 ////r66snJuY5uXl/////////////v7+ycjHkI+M2djX/////////////////v7+l5WT2tnZ
@@ -11940,13 +11939,13 @@ m5mXvr28////////yMjGrKup////////////////9/f3mZeVt7W0/Pz8/Pz82dnY8O/v////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" notes="">
+					<Stereotype name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" notes="" cx="167" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 /////////////////v7+3dzc8vLy////////////////2djY////////////////////////
 ////////////6enokZCN////////////lZSR5OPj////////////////////////////////
@@ -11965,13 +11964,13 @@ u7q4////////////////////////////////////////////////1dTTs7Kw5OPj////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiBusinessPartnerActive(UML::Actor)" notes="">
+					<Stereotype name="Chronos::ChiBusinessPartnerActive(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 /////////////////v7+z87N////////////////zs3M////////////////////////////
 ////////////jYyJ7Ozs////////5eXklJOQ////////////////////////////////////
@@ -11990,13 +11989,13 @@ wL69zc3LsbCu////////////////////////////////////////2trZfHt3xsbFuLe1e3l2
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiBusinessPartner(UML::Actor)" notes="">
+					<Stereotype name="Chronos::ChiBusinessPartner(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////+Pj42NfX////////////////0tHQ/v7+////////////////////////
 ////////////fnx59/f3////////6urqiYiF////////////////////////////////////
@@ -12015,13 +12014,13 @@ wL691dXUpaSi////////////////////////////////////////xsXEhIOAz8/Ovr68d3Vy
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Model" notes="Tools for creating the Model">
+					<Stereotype name="Model" notes="Tools for creating the Model" cx="249" cy="109" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="ToolboxPage"/>
 						</AppliesTo>
@@ -12031,7 +12030,7 @@ AA==</Icon>
 							<Tag name="Chronos::ChiView(UML::Class)" type="" description="" unit="" values="" default="View"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiView(UML::Class)" notes="">
+					<Stereotype name="Chronos::ChiView(UML::Class)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////Wl0nZ2kz
 Z2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kza24dhYeJzs/Qn6Gin6Gi
@@ -12050,13 +12049,13 @@ mpydmpydmpydmpydmpydmpydmpydUlU1////////////////////////////////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiNode(UML::Class)" notes="">
+					<Stereotype name="Chronos::ChiNode(UML::Class)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////kJCOiomHjIuJi4qIi4qIi4qIi4qIi4qIi4qIi4qIi4qIi4qImJeW////////////p6am
 pKOipKOipKOimpmXbWtpNjMvYF5bdXNxmJeWm5qZm5qZpKOj////////////////////ubi4
@@ -12075,13 +12074,13 @@ e3l2hIOB////////////////////////////////////t7e3lZSSf358g4KAmpmYvLy8////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiController(UML::Class)" notes="">
+					<Stereotype name="Chronos::ChiController(UML::Class)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////enp5ZGNhWFZUWFZUaGdlfX19////////////////////////////
 ////f39/Xl1ajYuJzc3M7Ovr6urqycnHhYSBXl1afn59////////////////////eXl5Y2Fe
@@ -12100,13 +12099,13 @@ gIB/////////////////////////////////////////////////////gYGB////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Requirement" notes="Tools for the requirement analysis">
+					<Stereotype name="Requirement" notes="Tools for the requirement analysis" cx="316" cy="122" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="ToolboxPage"/>
 						</AppliesTo>
@@ -12117,7 +12116,7 @@ AA==</Icon>
 							<Tag name="Chronos::ChiRequirement(UML::Requirement)" type="" description="" unit="" values="" default="Requirement"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiRequirement(UML::Requirement)" notes="">
+					<Stereotype name="Chronos::ChiRequirement(UML::Requirement)" notes="" cx="172" cy="66" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk3WAgAAAAAAADYAAAAoAAAAEAAAAA4AAAABABgAAAAAAKACAADEDgAAxA4AAAAAAAAAAAAA
 t7e/b2+Ob2+NbGyNbGyNbGyNbGyNbGyNbGyNbGyNbGyNbGyNbGyNbm6Nb2+Mo6Omvr7eEBDO
 DAzNIiLRHh7PHh7PJyfYHx/QJSXWJibXHh7PHh7PIyPQDQ3OEBDRkJCi+Pj3bW3aGxu65ubw
@@ -12136,13 +12135,13 @@ gIB/////////////////////////////////////////////////////gYGB////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiIssue(UML::Issue)" notes="">
+					<Stereotype name="Chronos::ChiIssue(UML::Issue)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////29vceH6cMEagDzS0DDbELEe2b3yx0dPY////////////////////////
 ////jpGiFTuvPGrsgaD3pbv4rMD4i6n7RnT5EUXgf469/v7+////////////////bnSTH07a
@@ -12161,13 +12160,13 @@ R3HzTXTousHU////////////////////////////7Ozuj5zHQGfXGEveJ1feVnjapLDR6enq
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiFeature(UML::Feature)" notes="">
+					<Stereotype name="Chronos::ChiFeature(UML::Feature)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////uLa0hHFdoG04ynwv2YQwx4I8r4plyMC3////////////////////////
 7Ozrem9lsm4n/5sz/6A1/501/5w0/540/6E185Uyu5Nq7Ovq////////////7u7ua1pK5Ywv
@@ -12186,13 +12185,13 @@ npOIn2Ys/6I04ZZLkn5qz34t/58z/5w1tJ+L/v7+////////o5F/9pcy/6A1/50z/5sz/500
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiGoal(UML::Requirement)" notes="">
+					<Stereotype name="Chronos::ChiGoal(UML::Requirement)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////w8jDfYt9R3BHQHRAcItwtsG2/P38////////////////////////
 ////2OLYUG9QBGMEAHkAAH4AAH4AAH4AAHgAOoI6w9jD////////////////////y8vLHFYc
@@ -12211,13 +12210,13 @@ MJowkMiQ6/Xr////////////////////////////////+vz61eTVsdSxstey1OnU8vjy////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Stakeholders" notes="Tools for interests analysis">
+					<Stereotype name="Stakeholders" notes="Tools for interests analysis" cx="294" cy="135" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<AppliesTo>
 							<Apply type="ToolboxPage"/>
 						</AppliesTo>
@@ -12229,7 +12228,7 @@ AA==</Icon>
 							<Tag name="Chronos::ChiStakeHolder(UML::Actor)" type="" description="" unit="" values="" default="Stakeholder"/>
 						</TaggedValues>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiStakeHolder(UML::Actor)" notes="">
+					<Stereotype name="Chronos::ChiStakeHolder(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 9/v97ejkpXdLr3tCrnk9rXg8rXg8qnU5qnY9mGg76+Xg9/v9////////////utPqKHvOwI5U
@@ -12248,13 +12247,13 @@ kpef////////////////////////////////////////////////////////////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiOpinionInner(UML::Activity)" notes="">
+					<Stereotype name="Chronos::ChiOpinionInner(UML::Activity)" notes="" cx="275" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////lbDjI1zCBUO8H1nBhqbd////////////
 ////////////////9/Ltz62N8+rijKvhKGbKIXfmBXnqAWTdB0++hqbd////////////////
@@ -12273,13 +12272,13 @@ BUO8H1rAgpzOw5ly////////0rOW6tvMzKiGu41g+vfy+vPs+PHp+PDn9+/m9+7k9uzi9+/n
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
 						</AppliesTo>
 					</Stereotype>
-					<Stereotype name="Chronos::ChiOpinion(UML::Activity)" notes="">
+					<Stereotype name="Chronos::ChiOpinion(UML::Activity)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 						<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -12298,7 +12297,7 @@ uIdYuIdYuIdYuIdYy6eF9e7n////////////////////////////////////////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 						<AppliesTo>
 							<Apply type="ToolboxItemImage"/>
