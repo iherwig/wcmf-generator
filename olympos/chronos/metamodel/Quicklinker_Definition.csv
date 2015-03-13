@@ -1,2 +1,91 @@
 //Source Element Type,Source Stereotype Filter,Target Element Type,Target Stereotype Filter,Diagram Filter,New Element Type,New Element Stereotype,New Link Type,New Link Stereotype,New Link Direction,New Link Caption,New Link & Element Caption,Create Link,Create Element,Disallow Self Connector,Exclusive Stereotype Filter + No Inherit from Metatype,Menu Group,Complexity Level,Target Must be Parent,Embed Element,Precedes Separator LEAF,Precedes Separator GROUP,Dummy
-Class,ChiController,UseCase,ChiBusinessUseCaseCore,,UseCase,ChiBusinessUseCaseCore,Composition,,to,is composed of,,TRUE,,TRUE,TRUE,Use Case,0,,,,,0
+Class,ChiBusinessProcess,UseCase,ChiBusinessUseCase,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Class,ChiBusinessProcess,UseCase,ChiBusinessUseCaseCore,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorkerExternal,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorkerInternal,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorkerExternal,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorkerInternal,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorker,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorker,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartner,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartner,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartnerActive,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartnerActive,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartnerPassive,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartnerPassive,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,Class,ChiController,,,,Realization,Realizes,from,Realizes,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,Feature,ChiFeature,,,,Realization,RefinedBy,directed,RefinedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,Feature,ChiFeature,,,,Realization,RefinedBy,directed,RefinedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,Class,ChiController,,,,Realization,Realizes,from,Realizes,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,Actor,ChiWorkerExternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,Actor,ChiWorkerInternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,Actor,ChiWorkerExternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,Actor,ChiWorkerInternal,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,Actor,ChiWorker,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,Actor,ChiWorker,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartner,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartner,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,Actor,ChiBusinessPartnerActive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,Actor,ChiBusinessPartnerActive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartnerPassive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,Actor,ChiBusinessPartnerPassive,,,,Association,ParticipatesIn,from,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Feature,ChiFeature,Requirement,ChiRequirement,,,,Realization,Realizes,directed,Realizes,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiRequirement,Feature,ChiFeature,,,,Realization,Realizes,from,Realizes,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiRequirement,Requirement,ChiGoal,,,,Composition,SpecifiedBy,directed,SpecifiedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiRequirement,Issue,ChiIssue,,,,Association,NegatedBy,directed,NegatedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiGoal,Requirement,ChiRequirement,,,,Composition,SpecifiedBy,from,SpecifiedBy,,TRUE,,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Class,ChiController,UseCase,ChiBusinessUseCase,,,,Realization,Realizes,directed,Realizes,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Class,ChiController,UseCase,ChiBusinessUseCaseCore,,,,Realization,Realizes,directed,Realizes,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Class,ChiController,Class,ChiNode,,,,Association,Instantiates,directed,Instantiates,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiController,Class ,ChiView,,,,Association,ActionKey,directed,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiNode,Class,ChiController,,,,Association,Instantiates,from,Instantiates,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiNode,Class,ChiView,,,,Association,ActionKey,directed,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiView,Class,ChiController,,,,Association,ActionKey,from,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiView,Class,ChiNode,,,,Association,ActionKey,from,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Requirement,ChiGoal,Requirement,ChiGoal,,,,Composition,Contains,directed,Contains,,TRUE,,,TRUE,ChiRequirements,0,,,,TRUE,0
+Feature,ChiFeature,,,,UseCase,ChiBusinessUseCase,Realization,RefinedBy,from,RefinedBy,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Feature,ChiFeature,,,,UseCase,ChiBusinessUseCaseCore,Realization,RefinedBy,from,RefinedBy,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorkerInternal,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorkerExternal,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorkerInternal,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorkerExternal,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorker,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartner,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiWorker,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartner,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartnerPassive,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartnerActive,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartnerPassive,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Actor,ChiBusinessPartnerActive,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Class,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCase,Composition,Contains,directed,Contains,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Class,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCaseCore,Composition,Contains,directed,Contains,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Actor,ChiWorkerExternal,Association,ParticipatesIn,from,ParticipatesIn,Create External Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorkerExternal,Association,ParticipatesIn,from,ParticipatesIn,Create External Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Actor,ChiWorkerInternal,Association,ParticipatesIn,from,ParticipatesIn,Create Internal Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorkerInternal,Association,ParticipatesIn,from,ParticipatesIn,Create Internal Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Actor,ChiBusinessPartner,Association,ParticipatesIn,from,ParticipatesIn,Create Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiBusinessPartner,Association,ParticipatesIn,from,ParticipatesIn,Create Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Actor,ChiBusinessPartnerActive,Association,ParticipatesIn,from,ParticipatesIn,Create Active Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiBusinessPartnerActive,Association,ParticipatesIn,from,ParticipatesIn,Create Active Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Actor,ChiBusinessPartnerPassive,Association,ParticipatesIn,from,ParticipatesIn,Create Passive Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiBusinessPartnerPassive,Association,ParticipatesIn,from,ParticipatesIn,Create Passive Business Partner,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Class,ChiController,Realization,Realizes,from,Realizes,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Feature,ChiFeature,Realization,RefinedBy,directed,Realizes,Create Feature,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Class,ChiController,Composition,RefinedBy,from,RefinedBy,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Feature,ChiFeature,Realization,RefinedBy,directed,Realizes,Create Feature,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Feature,ChiFeature,,,,Requirement,ChiRequirement,Realization,Realizes,directed,Realizes,Create Requirement,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiRequirement,,,,Feature,ChiFeature,Realization,Realizes,from,Realizes,Create Feature,TRUE,TRUE,,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiRequirement,,,,Requirement,ChiGoal,Composition,SpecifiedBy,directed,SpecifiedBy,Create Goal,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiRequirement,,,,Issue,ChiIssue,Association,NegatedBy,directed,NegatedBy,Create Issue,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiGoal,,,,Requirement,ChiRequirement,Composition,SpecifiedBy,from,SpecifiedBy,Create Requirement,TRUE,TRUE,TRUE,TRUE,ChiRequirements,0,,,,TRUE,0
+Class,ChiController,,,,UseCase,ChiBusinessUseCase,Realization,Realizes,directed,Realizes,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Class,ChiController,,,,UseCase,ChiBusinessUseCaseCore,Realization,Realizes,directed,Realizes,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Class,ChiController,,,,Class,ChiNode,Association,Instantiates,directed,Instantiates,Create Model,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiController,,,,Class ,ChiView,Association,ActionKey,directed,ActionKey,Create View,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiNode,,,,Class,ChiController,Association,Instantiates,from,Instantiates,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiNode,,,,Class,ChiView,Association,ActionKey,directed,ActionKey,Create View,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiView,,,,Class,ChiController,Association,ActionKey,from,ActionKey,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Class,ChiView,,,,Class,ChiNode,Association,ActionKey,from,ActionKey,Create Node,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
+Requirement,ChiGoal,,,,Requirement,ChiGoal,Composition,Contains,directed,Contains,Create Goal,TRUE,TRUE,,TRUE,ChiRequirements,0,,,,TRUE,0
