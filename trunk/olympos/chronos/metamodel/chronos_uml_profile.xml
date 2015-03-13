@@ -142,11 +142,11 @@ VVQFAAcJaNNUUEsFBgAAAAABAAEAPgAAAHsBAAAAAA==</Image>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiGoal" notes="a Measurable scope that the enterprise wants to achieve. " cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAIhpR0bXldMCfgAAAMgAAAAHABEAc3RyLmRhdFVUDQAHRA/WVEQP1lRED9ZU
-RY4xCsJAFERfq+AdxEpBQS0VKxGxsfAGSyK6YBKMWoh4d1/CYliYGea/v7s5ZzIqagJPoqlk
-SMGbPE0G9Pm02lDRtpTs6A0jjuzUdUv1OLgfuEiObTOu7jVkxYOVZ2sTOTm/8zLVpiLdu5cK
-3Nyb+o8lc32WfKF2Pvm/91V/UEsBAhcLFAAAAAgAiGlHRteV0wJ+AAAAyAAAAAcACQAAAAAA
-AAAAAACAAAAAAHN0ci5kYXRVVAUAB0QP1lRQSwUGAAAAAAEAAQA+AAAAtAAAAAAA</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIADJrbUaoGQCzfgAAAMgAAAAHABEAc3RyLmRhdFVUDQAHReUCVUXlAlVF5QJV
+RY4xCsJAFERfq+AdxEpBQS2VVCJiY+ENFiMaMAlGLUS8u2/DYliYGea/v7s5Z07UNASeFKaK
+ISVv8jQZ0OfTaqQK20qyozNGHNiq65bqsXc/cJEc2264uhfJmgcrT2wKjs7vvEyNqUz37qQC
+N/em/mPJXJ8lX6idT/7vfdUfUEsBAhcLFAAAAAgAMmttRqgZALN+AAAAyAAAAAcACQAAAAAA
+AAAAAACAAAAAAHN0ci5kYXRVVAUAB0XlAlVQSwUGAAAAAAEAAQA+AAAAtAAAAAAA</Image>
 				<AppliesTo>
 					<Apply type="Requirement"/>
 				</AppliesTo>
@@ -158,11 +158,11 @@ AAAAAACAAAAAAHN0ci5kYXRVVAUAB0QP1lRQSwUGAAAAAAEAAQA+AAAAtAAAAAAA</Image>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiRequirement" notes="A Business guide line about the Enterprise or the project." cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFBqR0btA1IsegAAAMAAAAAHABEAc3RyLmRhdFVUDQAHsBDWVLAQ1lSwENZU
-RY0xCoNAFERfm0DuEKwiREgslVRiYWPhDURD3EJFo4WId3dcRFmYGea/v7/kS0FLT86AUWq4
-UzNR7pMbV2arG2XUNiJP+oNDSiwNLXUh0X7OT+RDbUGlvY1s+RPoRWoMmeYdo1KvVO//Ojx1
-3+cl96y+pae7x5XF+gpQSwECFwsUAAAACABQakdG7QNSLHoAAADAAAAABwAJAAAAAAAAAAAA
-AIAAAAAAc3RyLmRhdFVUBQAHsBDWVFBLBQYAAAAAAQABAD4AAACwAAAAAAA=</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIACxrbUZm4AUdegAAAMAAAAAHABEAc3RyLmRhdFVUDQAHUuUCVVLlAlVS5QJV
+RY0xCoNAFERfa8A7BKsIComlkkosbFLkBqISt1CJmiJI7u7sIpGFmWH++/sbWmpGJioWjNLA
+mZ4vzT7xObE6tZRRO4g86DsBDwpp5iiPUvsVL5EXtTmd9iw5MpPq2cbw1PzNR2lS6vd/AyLd
+T7jKY6c36eHh/8rP+QZQSwECFwsUAAAACAAsa21GZuAFHXoAAADAAAAABwAJAAAAAAAAAAAA
+AIAAAAAAc3RyLmRhdFVUBQAHUuUCVVBLBQYAAAAAAQABAD4AAACwAAAAAAA=</Image>
 				<AppliesTo>
 					<Apply type="Requirement"/>
 				</AppliesTo>
@@ -175,12 +175,12 @@ AIAAAAAAc3RyLmRhdFVUBQAHsBDWVFBLBQYAAAAAAQABAD4AAACwAAAAAAA=</Image>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiFeature" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAKhpR0YMiY+sggAAANAAAAAHABEAc3RyLmRhdFVUDQAHYA/WVGAP1lRgD9ZU
-RY7BCoJAFEXP1qB/EFcFCepSaRUFbVz4B6KRs1DRchHSv3dnGJKBdy/3nffetDxoGJmpeWPk
-BkJ6PrS+s2fH6qqljNJB5EafiSi5qhaOCrhrvuYp8qC0odOcJUde5HoXJYZK/YlFbpbr/d6b
-1O5eXBpx0m8yEmnsNVXd9Pi/+nX6A1BLAQIXCxQAAAAIAKhpR0YMiY+sggAAANAAAAAHAAkA
-AAAAAAAAAAAAgAAAAABzdHIuZGF0VVQFAAdgD9ZUUEsFBgAAAAABAAEAPgAAALgAAAAA
-AA==</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIADRrbUaTxUQvgQAAANAAAAAHABEAc3RyLmRhdFVUDQAHNuUCVTblAlU25QJV
+RY7BCoJAFEXP1qB/EFcFCelSaRUGbVr4B6KRs1DJdCHSv3dnGJKBdy/3nffeNDypGRipmDBy
+PSEdC43v7Nmxumopo7QXudEXIh4UqrmjAu6ar3iJPCi90mrOkgMfMj2bGEr138xyo1zn996k
+dvfs0oiTfpNylsZeE9VNj/+rX6c/UEsBAhcLFAAAAAgANGttRpPFRC+BAAAA0AAAAAcACQAA
+AAAAAAAAAACAAAAAAHN0ci5kYXRVVAUABzblAlVQSwUGAAAAAAEAAQA+AAAAtwAAAAAA
+</Image>
 				<AppliesTo>
 					<Apply type="Feature">
 						<Property name="isStatic" value="false"/>
@@ -193,11 +193,11 @@ AA==</Image>
 				</TaggedValues>
 			</Stereotype>
 			<Stereotype name="ChiIssue" notes="" cx="90" cy="70" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0" generalizes="ChiBase" baseStereotypes="ChiBase">
-				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIAFJqR0Z6P3q6fQAAAMYAAAAHABEAc3RyLmRhdFVUDQAHwRDWVMEQ1lTBENZU
-RY7BCoJAFEXPtqB/iFYFLapl0UpauGnRH4hKzUIlrYVI/95RRBm473LfuTOTkZNSUZPwIehK
-1hS0ZONmxZJu0J4KpqXkTF/ZcOemXgZqQWw/4Sm5NU152evJioazJzIJPNy/+epqXTHeG8s0
-prnNvT85cXAeJ53nbnrvxx9QSwECFwsUAAAACABSakdGej96un0AAADGAAAABwAJAAAAAAAA
-AAAAAIAAAAAAc3RyLmRhdFVUBQAHwRDWVFBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
+				<Image type="EAShapeScript 1.0" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">UEsDBBQAAAAIACBrbUbS3grSfQAAAMYAAAAHABEAc3RyLmRhdFVUDQAHXOUCVVzlAlVc5QJV
+RY4xCsJAFERfq+AdxErBQi0VK7FIk8IbBBN0iySYmELEu/s2hISF+cP8N7ubU3CnpiHjTdBV
+LCn5kA+bBXO+vUYqmFaSE31mRcpVPfXUjMR+xkNybXrhaS+SNS1HT0wCN/cvOl2jK4d7E5nW
+tLC59ScHds79qNPcjO/9+ANQSwECFwsUAAAACAAga21G0t4K0n0AAADGAAAABwAJAAAAAAAA
+AAAAAIAAAAAAc3RyLmRhdFVUBQAHXOUCVVBLBQYAAAAAAQABAD4AAACzAAAAAAA=</Image>
 				<AppliesTo>
 					<Apply type="Issue"/>
 				</AppliesTo>
