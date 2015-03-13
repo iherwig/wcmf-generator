@@ -3,23 +3,23 @@
 	<Documentation id="258D2A3B-6" name="Chronos" version="1.0" notes="Chronos"/>
 	<Content>
 		<Stereotypes>
-			<Stereotype name="Analysis" notes="tools for the Chronos analysis">
+			<Stereotype name="Analysis" notes="tools for the Chronos analysis" cx="361" cy="187" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
 				<TaggedValues>
-					<Tag name="Chronos::ChiBusinessUseCase(UML::UseCase)" type="" description="" unit="" values="" default="Bus. Use Case"/>
-					<Tag name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" type="" description="" unit="" values="" default="Core Bus. Use Case"/>
+					<Tag name="Chronos::ChiBusinessPartnerActive(UML::Actor)" type="" description="" unit="" values="" default="Active BizPartner"/>
+					<Tag name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" type="" description="" unit="" values="" default="Passive Biz Partner"/>
+					<Tag name="Chronos::ChiBusinessUseCase(UML::UseCase)" type="" description="" unit="" values="" default="Biz Use Case"/>
+					<Tag name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" type="" description="" unit="" values="" default="Core Biz Use Case"/>
 					<Tag name="Chronos::ChiWorker(UML::Actor)" type="" description="" unit="" values="" default="Worker"/>
 					<Tag name="Chronos::ChiWorkerExternal(UML::Actor)" type="" description="" unit="" values="" default="External Worker"/>
 					<Tag name="Chronos::ChiWorkerInternal(UML::Actor)" type="" description="" unit="" values="" default="Internal Worker"/>
-					<Tag name="Chronos::ChiBusinessPartner(UML::Actor)" type="" description="" unit="" values="" default="Business Partner"/>
-					<Tag name="Chronos::ChiBusinessPartnerActive(UML::Actor)" type="" description="" unit="" values="" default="Active Bus. Partner"/>
-					<Tag name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" type="" description="" unit="" values="" default="Passive Bus. Partner"/>
-					<Tag name="Chronos::ChiBusinessProcess(TOGAF::Process)" type="" description="" unit="" values="" default="Bus Process"/>
+					<Tag name="Chronos::ChiBusinessProcess(TOGAF::Process)" type="" description="" unit="" values="" default="Biz Process"/>
+					<Tag name="Chronos::ChiBusinessPartner(UML::Actor)" type="" description="" unit="" values="" default="Biz Partner"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiBusinessProcess(TOGAF::Process)" notes="">
+			<Stereotype name="Chronos::ChiBusinessProcess(TOGAF::Process)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -38,13 +38,13 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////////////////////////////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" notes="">
+			<Stereotype name="Chronos::ChiBusinessUseCaseCore(UML::UseCase)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -63,13 +63,13 @@ zcvJycfFraqoq6ilxMC+2NbU7Ovq+/v6////////////////zcvM2NfV6uvp////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiBusinessUseCase(UML::UseCase)" notes="">
+			<Stereotype name="Chronos::ChiBusinessUseCase(UML::UseCase)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -88,13 +88,13 @@ zcvJ0M7Nwr+9uLWyxMC/19TT7Orq+/v6////////////////1dbS1tTV6Ofl////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiWorkerInternal(UML::Actor)" notes="">
+			<Stereotype name="Chronos::ChiWorkerInternal(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 /////////////////v7+xcTDoqGeo6Kfo6KfpaOh4eHg////////////////////////////
 ////4+Lil5WT19bV////////////+/v7uLe2oqCe+vr6////////////////////4eDfpKOh
@@ -113,13 +113,13 @@ tbSy/Pz8////////////////////////////////////////////6Ojnsa+u////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiWorkerExternal(UML::Actor)" notes="">
+			<Stereotype name="Chronos::ChiWorkerExternal(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk0GAwAAAAAAADYAAAAoAAAAEAAAAA8AAAABABgAAAAAANACAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////+fn5u7q6m5qZpqakrayqoaGfoaCf19fW////////////////x8fG////
 ////z8/PgoKA1dTT////////////////9vX1qainqamo/Pz8////////qKin////v7+/paSi
@@ -138,13 +138,13 @@ rayr2dnZ////////////////////////////////////////////6Ojnsa+u////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiWorker(UML::Actor)" notes="">
+			<Stereotype name="Chronos::ChiWorker(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////9fX0srGvnJqYnZuZnZuZnZuZy8rJ////////////////////////////
 ////r66snJuY5uXl/////////////v7+ycjHkI+M2djX/////////////////v7+l5WT2tnZ
@@ -163,13 +163,13 @@ m5mXvr28////////yMjGrKup////////////////9/f3mZeVt7W0/Pz8/Pz82dnY8O/v////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" notes="">
+			<Stereotype name="Chronos::ChiBusinessPartnerPassive(UML::Actor)" notes="" cx="167" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 /////////////////v7+3dzc8vLy////////////////2djY////////////////////////
 ////////////6enokZCN////////////lZSR5OPj////////////////////////////////
@@ -188,13 +188,13 @@ u7q4////////////////////////////////////////////////1dTTs7Kw5OPj////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiBusinessPartnerActive(UML::Actor)" notes="">
+			<Stereotype name="Chronos::ChiBusinessPartnerActive(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 /////////////////v7+z87N////////////////zs3M////////////////////////////
 ////////////jYyJ7Ozs////////5eXklJOQ////////////////////////////////////
@@ -213,13 +213,13 @@ wL69zc3LsbCu////////////////////////////////////////2trZfHt3xsbFuLe1e3l2
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiBusinessPartner(UML::Actor)" notes="">
+			<Stereotype name="Chronos::ChiBusinessPartner(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////+Pj42NfX////////////////0tHQ/v7+////////////////////////
 ////////////fnx59/f3////////6urqiYiF////////////////////////////////////
@@ -238,13 +238,13 @@ wL691dXUpaSi////////////////////////////////////////xsXEhIOAz8/Ovr68d3Vy
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Model" notes="Tools for creating the Model">
+			<Stereotype name="Model" notes="Tools for creating the Model" cx="249" cy="109" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -254,7 +254,7 @@ AA==</Icon>
 					<Tag name="Chronos::ChiView(UML::Class)" type="" description="" unit="" values="" default="View"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiView(UML::Class)" notes="">
+			<Stereotype name="Chronos::ChiView(UML::Class)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////Wl0nZ2kz
 Z2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kzZ2kza24dhYeJzs/Qn6Gin6Gi
@@ -273,13 +273,13 @@ mpydmpydmpydmpydmpydmpydmpydUlU1////////////////////////////////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiNode(UML::Class)" notes="">
+			<Stereotype name="Chronos::ChiNode(UML::Class)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////kJCOiomHjIuJi4qIi4qIi4qIi4qIi4qIi4qIi4qIi4qIi4qImJeW////////////p6am
 pKOipKOipKOimpmXbWtpNjMvYF5bdXNxmJeWm5qZm5qZpKOj////////////////////ubi4
@@ -298,13 +298,13 @@ e3l2hIOB////////////////////////////////////t7e3lZSSf358g4KAmpmYvLy8////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiController(UML::Class)" notes="">
+			<Stereotype name="Chronos::ChiController(UML::Class)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////enp5ZGNhWFZUWFZUaGdlfX19////////////////////////////
 ////f39/Xl1ajYuJzc3M7Ovr6urqycnHhYSBXl1afn59////////////////////eXl5Y2Fe
@@ -323,13 +323,13 @@ gIB/////////////////////////////////////////////////////gYGB////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Requirement" notes="Tools for the requirement analysis">
+			<Stereotype name="Requirement" notes="Tools for the requirement analysis" cx="316" cy="122" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -340,7 +340,7 @@ AA==</Icon>
 					<Tag name="Chronos::ChiRequirement(UML::Requirement)" type="" description="" unit="" values="" default="Requirement"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiRequirement(UML::Requirement)" notes="">
+			<Stereotype name="Chronos::ChiRequirement(UML::Requirement)" notes="" cx="172" cy="66" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk3WAgAAAAAAADYAAAAoAAAAEAAAAA4AAAABABgAAAAAAKACAADEDgAAxA4AAAAAAAAAAAAA
 t7e/b2+Ob2+NbGyNbGyNbGyNbGyNbGyNbGyNbGyNbGyNbGyNbGyNbm6Nb2+Mo6Omvr7eEBDO
 DAzNIiLRHh7PHh7PJyfYHx/QJSXWJibXHh7PHh7PIyPQDQ3OEBDRkJCi+Pj3bW3aGxu65ubw
@@ -359,13 +359,13 @@ gIB/////////////////////////////////////////////////////gYGB////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiIssue(UML::Issue)" notes="">
+			<Stereotype name="Chronos::ChiIssue(UML::Issue)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////29vceH6cMEagDzS0DDbELEe2b3yx0dPY////////////////////////
 ////jpGiFTuvPGrsgaD3pbv4rMD4i6n7RnT5EUXgf469/v7+////////////////bnSTH07a
@@ -384,13 +384,13 @@ R3HzTXTousHU////////////////////////////7Ozuj5zHQGfXGEveJ1feVnjapLDR6enq
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiFeature(UML::Feature)" notes="">
+			<Stereotype name="Chronos::ChiFeature(UML::Feature)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////uLa0hHFdoG04ynwv2YQwx4I8r4plyMC3////////////////////////
 7Ozrem9lsm4n/5sz/6A1/501/5w0/540/6E185Uyu5Nq7Ovq////////////7u7ua1pK5Ywv
@@ -409,13 +409,13 @@ npOIn2Ys/6I04ZZLkn5qz34t/58z/5w1tJ+L/v7+////////o5F/9pcy/6A1/50z/5sz/500
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiGoal(UML::Requirement)" notes="">
+			<Stereotype name="Chronos::ChiGoal(UML::Requirement)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////w8jDfYt9R3BHQHRAcItwtsG2/P38////////////////////////
 ////2OLYUG9QBGMEAHkAAH4AAH4AAH4AAHgAOoI6w9jD////////////////////y8vLHFYc
@@ -434,13 +434,13 @@ MJowkMiQ6/Xr////////////////////////////////+vz61eTVsdSxstey1OnU8vjy////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Stakeholders" notes="Tools for interests analysis">
+			<Stereotype name="Stakeholders" notes="Tools for interests analysis" cx="294" cy="135" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<AppliesTo>
 					<Apply type="ToolboxPage"/>
 				</AppliesTo>
@@ -452,7 +452,7 @@ AA==</Icon>
 					<Tag name="Chronos::ChiStakeHolder(UML::Actor)" type="" description="" unit="" values="" default="Stakeholder"/>
 				</TaggedValues>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiStakeHolder(UML::Actor)" notes="">
+			<Stereotype name="Chronos::ChiStakeHolder(UML::Actor)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 9/v97ejkpXdLr3tCrnk9rXg8rXg8qnU5qnY9mGg76+Xg9/v9////////////utPqKHvOwI5U
@@ -471,13 +471,13 @@ kpef////////////////////////////////////////////////////////////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiOpinionInner(UML::Activity)" notes="">
+			<Stereotype name="Chronos::ChiOpinionInner(UML::Activity)" notes="" cx="275" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////lbDjI1zCBUO8H1nBhqbd////////////
 ////////////////9/Ltz62N8+rijKvhKGbKIXfmBXnqAWTdB0++hqbd////////////////
@@ -496,13 +496,13 @@ BUO8H1rAgpzOw5ly////////0rOW6tvMzKiGu41g+vfy+vPs+PHp+PDn9+/m9+7k9uzi9+/n
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
 				</AppliesTo>
 			</Stereotype>
-			<Stereotype name="Chronos::ChiOpinion(UML::Activity)" notes="">
+			<Stereotype name="Chronos::ChiOpinion(UML::Activity)" notes="" cx="172" cy="75" bgcolor="-1" fontcolor="-1" bordercolor="-1" borderwidth="-1" hideicon="0">
 				<Icon type="bitmap" xmlns:dt="urn:schemas-microsoft-com:datatypes" dt:dt="bin.base64">Qk02AwAAAAAAADYAAAAoAAAAEAAAABAAAAABABgAAAAAAAADAADEDgAAxA4AAAAAAAAAAAAA
 ////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
@@ -521,7 +521,7 @@ uIdYuIdYuIdYuIdYy6eF9e7n////////////////////////////////////////////////
 ////////////////dABWAGkAcwBpAGIAbABlACAAIgBTAGMAcgBpAHAAdAAiAAoACgAJAFMA
 ZQBzAHMAaQBvAG4ALgBPAHUAdABwAHUAdAAoACAAIgBWAEIAUwBjAHIAaQBwAHQAIABQAHIA
 bwBqAGUAYwB0ACAAQgByAG8AdwBzAGUAcgAgAE0AdQBsAHQAaQAgAFMAZQBsAGUAYwB0AGkA
-bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAYwB4AFgARwBKAHkAWgBIAEoAagBa
+bwBuACAARQB4AGEAbQBwAGwAZQAiACAAKQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AA==</Icon>
 				<AppliesTo>
 					<Apply type="ToolboxItemImage"/>
