@@ -61,8 +61,8 @@ Actor,ChiBusinessPartnerPassive,,,,UseCase,ChiBusinessUseCaseCore,Association,Pa
 Actor,ChiBusinessPartnerActive,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 Activity,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCase,Composition,Contains,from,Contains,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 Activity,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCaseCore,Composition,Contains,from,Contains,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
-UseCase,ChiBusinessUseCase,,,,Activity,ChiBusinessProcess,Composition,Contains,directed,Contains,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
-UseCase,ChiBusinessUseCaseCore,,,,Activity,ChiBusinessProcess,Composition,Contains,directed,Contains,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Activity,ChiBusinessProcess,Composition,Contains,directed,Contains,Create Business Process,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Activity,ChiBusinessProcess,Composition,Contains,directed,Contains,Create Business Process,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 UseCase,ChiBusinessUseCase,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 UseCase,ChiBusinessUseCase,,,,Actor,ChiWorkerExternal,Association,ParticipatesIn,from,ParticipatesIn,Create External Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
