@@ -44,7 +44,7 @@ Class,ChiNode,Class,ChiController,,,,Association,Instantiates,from,Instantiates,
 Class,ChiNode,Class,ChiView,,,,Association,ActionKey,directed,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
 Class,ChiView,Class,ChiController,,,,Association,ActionKey,from,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
 Class,ChiView,Class,ChiNode,,,,Association,ActionKey,from,ActionKey,,TRUE,,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
-Requirement,ChiGoal,Requirement,ChiGoal,,,,Composition,Contains,directed,Contains,,TRUE,,,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiGoal,Requirement,ChiGoal,,,,Composition,Contains,from,Contains,,TRUE,,,TRUE,ChiRequirements,0,,,,TRUE,0
 Feature,ChiFeature,,,,UseCase,ChiBusinessUseCase,Realization,RefinedBy,from,RefinedBy,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 Feature,ChiFeature,,,,UseCase,ChiBusinessUseCaseCore,Realization,RefinedBy,from,RefinedBy,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 Actor,ChiWorkerInternal,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
@@ -92,4 +92,4 @@ Class,ChiNode,,,,Class,ChiController,Association,Instantiates,from,Instantiates,
 Class,ChiNode,,,,Class,ChiView,Association,ActionKey,directed,ActionKey,Create View,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
 Class,ChiView,,,,Class,ChiController,Association,ActionKey,from,ActionKey,Create Controller,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
 Class,ChiView,,,,Class,ChiNode,Association,ActionKey,from,ActionKey,Create Node,TRUE,TRUE,TRUE,TRUE,ChiDomain,0,,,,TRUE,0
-Requirement,ChiGoal,,,,Requirement,ChiGoal,Composition,Contains,directed,Contains,Create Goal,TRUE,TRUE,,TRUE,ChiRequirements,0,,,,TRUE,0
+Requirement,ChiGoal,,,,Requirement,ChiGoal,Composition,Contains,from,Contains,Create Goal,TRUE,TRUE,,TRUE,ChiRequirements,0,,,,TRUE,0
