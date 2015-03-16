@@ -1,6 +1,8 @@
 //Source Element Type,Source Stereotype Filter,Target Element Type,Target Stereotype Filter,Diagram Filter,New Element Type,New Element Stereotype,New Link Type,New Link Stereotype,New Link Direction,New Link Caption,New Link & Element Caption,Create Link,Create Element,Disallow Self Connector,Exclusive Stereotype Filter + No Inherit from Metatype,Menu Group,Complexity Level,Target Must be Parent,Embed Element,Precedes Separator LEAF,Precedes Separator GROUP,Dummy
-Class,ChiBusinessProcess,UseCase,ChiBusinessUseCase,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
-Class,ChiBusinessProcess,UseCase,ChiBusinessUseCaseCore,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Activity,ChiBusinessProcess,UseCase,ChiBusinessUseCase,,,,Composition,Contains,from,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Activity,ChiBusinessProcess,UseCase,ChiBusinessUseCaseCore,,,,Composition,Contains,from,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,Activity,ChiBusinessProcess,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,Activity,ChiBusinessProcess,,,,Composition,Contains,directed,Contains,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 Actor,ChiWorkerExternal,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 Actor,ChiWorkerInternal,UseCase,ChiBusinessUseCase,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 Actor,ChiWorkerExternal,UseCase,ChiBusinessUseCaseCore,,,,Association,ParticipatesIn,directed,ParticipatesIn,,TRUE,,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
@@ -57,8 +59,10 @@ Actor,ChiBusinessPartnerPassive,,,,UseCase,ChiBusinessUseCase,Association,Partic
 Actor,ChiBusinessPartnerActive,,,,UseCase,ChiBusinessUseCase,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 Actor,ChiBusinessPartnerPassive,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 Actor,ChiBusinessPartnerActive,,,,UseCase,ChiBusinessUseCaseCore,Association,ParticipatesIn,directed,ParticipatesIn,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
-Class,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCase,Composition,Contains,directed,Contains,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
-Class,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCaseCore,Composition,Contains,directed,Contains,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Activity,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCase,Composition,Contains,from,Contains,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+Activity,ChiBusinessProcess,,,,UseCase,ChiBusinessUseCaseCore,Composition,Contains,from,Contains,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCase,,,,Activity,ChiBusinessProcess,Composition,Contains,directed,Contains,Create Business Use Case,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
+UseCase,ChiBusinessUseCaseCore,,,,Activity,ChiBusinessProcess,Composition,Contains,directed,Contains,Create Business Use Case Core,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 UseCase,ChiBusinessUseCase,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 UseCase,ChiBusinessUseCaseCore,,,,Actor,ChiWorker,Association,ParticipatesIn,from,ParticipatesIn,Create Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
 UseCase,ChiBusinessUseCase,,,,Actor,ChiWorkerExternal,Association,ParticipatesIn,from,ParticipatesIn,Create External Worker,TRUE,TRUE,TRUE,TRUE,ChiAnalysis,0,,,,TRUE,0
