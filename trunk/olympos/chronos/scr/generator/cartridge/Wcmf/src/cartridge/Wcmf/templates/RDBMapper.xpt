@@ -165,8 +165,8 @@ array(«FOREACH this.getPKValues() AS curPk SEPARATOR ', '»'«curPk.name»'«EN
 «REM» references -------------------------------------------------«ENDREM»
 «DEFINE references FOR ChiNode-»
   «FOREACH this.getChiValueRefs() AS curReference ITERATOR Index1-»
-     /* 
-      * Value description: «this.getComment(" ")» 
+     /*
+      * Value description: «this.getComment(" ")»
       */
       '«curReference.name»' => new ReferenceDescription('«curReference.name»', '«curReference.getReferencedNode().name»', '«curReference.getReferencedValue().name»'),
   «ENDFOREACH-»
@@ -222,8 +222,8 @@ new RDBManyToOneRelationDescription(
       * Value description: «curValue.getComment(" ")»
       */
       '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', array(«FOREACH curValue.app_data_type.split("\\|") AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»), «REM»NOBR«ENDREM-»
-«IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue()»'«ENDIF», '«curValue.restrictions_match»', «REM»NOBR«ENDREM-»
-«IF !curValue.restrictions_description.isNullOrEmpty()-»Message::get('«curValue.restrictions_description»')«ELSE-»''«ENDIF-», «curValue.is_editable.boolString()», '«curValue.input_type»', «REM»NOBR«ENDREM-»
+«IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue().replaceAll("'", "\\\\'")»'«ENDIF», '«curValue.restrictions_match.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
+«IF !curValue.restrictions_description.isNullOrEmpty()-»Message::get('«curValue.restrictions_description.replaceAll("'", "\\\\'")»')«ELSE-»''«ENDIF-», «curValue.is_editable.boolString()», '«curValue.input_type.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 '«curValue.display_type»', '«getTableName()»', '«curValue.getColumnName()»'),
   «ENDFOREACH-»
 «ENDDEFINE»
