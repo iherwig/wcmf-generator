@@ -78,11 +78,13 @@ define([
     «LET curChild.type.getOtherEnd(this, false).first() AS otherNmEnd-»
             name: "«otherNmEnd.getRoleName()»",
             type: "«otherNmEnd.type.name»",
+            fkName: "«otherNmEnd.getFKName()»",
             aggregationKind: "«otherNmEnd.aggregation»",
     «ENDLET-»
   «ELSE-»
             name: "«curChild.getRoleName()»",
             type: "«curChild.type.name»",
+            fkName: "«curChild.getFKName()»",
             aggregationKind: "«curChild.aggregation»",
   «ENDIF-»
             maxMultiplicity: "«IF curChild.getUpper() == -1»unbounded«ELSE»«curChild.getUpper()»«ENDIF-»",
@@ -92,6 +94,7 @@ define([
 «FOREACH parents AS curParent SEPARATOR "        }, {"»
             name: "«curParent.getRoleName()»",
             type: "«curParent.type.name»",
+            fkName: "«curParent.getFKName()»",
             aggregationKind: "«curParent.aggregation»",
             maxMultiplicity: "«IF curParent.getUpper() == -1»unbounded«ELSE»«curParent.getUpper()»«ENDIF-»",
             thisEndName: "«curParent.getOtherEnd().getRoleName()»",
