@@ -46,7 +46,7 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getS
 «IF this.hasSuperClass()-»
       if ($oid == null) {
         $oid = new ObjectId('«this.name»');
-    }
+      }
       parent::__construct($oid);
 «ENDIF-»
     }
@@ -90,6 +90,19 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getS
     «EXPAND children FOR this-»
   «ENDIF-»
 }
+
+/**
+ * Additional names to be included by l10n tools ([Pl.]: plural forms)
+ * - Message::get("«this.name» [Pl.]")
+«FOREACH this.getParentNodesRecursive() AS curParent-»
+ * - Message::get("«curParent.getRoleName()»")
+ * - Message::get("«curParent.getRoleName()» [Pl.]")
+«ENDFOREACH-»
+«FOREACH this.getChildNodesRecursive() AS curChild-»
+ * - Message::get("«curChild.getRoleName()»")
+ * - Message::get("«curChild.getRoleName()» [Pl.]")
+«ENDFOREACH-»
+ */
 ?>
 «ENDFILE-»
 «ENDDEFINE»
