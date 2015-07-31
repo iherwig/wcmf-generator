@@ -27,7 +27,6 @@ namespace «this.getFullPackageName().asPhpPackage()»;
 use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuperClass().name»;
 «ENDIF-»
 
-use wcmf\lib\i18n\Message;
 use wcmf\lib\persistence\ObjectId;
 
 /**
@@ -51,80 +50,13 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getS
 «ENDIF-»
     }
 
-    /**
-     * @see PersistentObject::getObjectDisplayName()
-     */
-    public function getObjectDisplayName() {
-      return Message::get("«this.name»");
-    }
-
-    /**
-     * @see PersistentObject::getObjectDescription()
-     */
-    public function getObjectDescription() {
-      return Message::get("«this.getComment("\\\\n").replaceAll('\\"', '\\\\"')»");
-    }
-
-    /**
-     * @see PersistentObject::getValueDisplayName()
-     */
-    public function getValueDisplayName($name) {
-      $displayName = $name;
-      if (false) {}
-  «EXPAND valueDisplayNames FOR this-»
-      return $displayName;
-    }
-
-    /**
-     * @see PersistentObject::getValueDescription()
-     */
-    public function getValueDescription($name) {
-      $description = $name;
-      if (false) {}
-  «EXPAND valueDescription FOR this-»
-      return $description;
-    }
-
   «IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0 -»
     «EXPAND parents FOR this-»
     «EXPAND children FOR this-»
   «ENDIF-»
 }
-
-/**
- * Additional names to be included by l10n tools ([Pl.]: plural forms)
- * - Message::get("«this.name» [Pl.]")
-«FOREACH this.getParentNodesRecursive() AS curParent-»
- * - Message::get("«curParent.getRoleName()»")
- * - Message::get("«curParent.getRoleName()» [Pl.]")
-«ENDFOREACH-»
-«FOREACH this.getChildNodesRecursive() AS curChild-»
- * - Message::get("«curChild.getRoleName()»")
- * - Message::get("«curChild.getRoleName()» [Pl.]")
-«ENDFOREACH-»
- */
 ?>
 «ENDFILE-»
-«ENDDEFINE»
-
-«REM» valueDisplayNames ------------------------------------------«ENDREM»
-«DEFINE valueDisplayNames FOR ChiNode-»
-  «FOREACH this.getChiValuesRecursive() AS curValue-»
-      elseif ($name == '«curValue.name»') { $displayName = Message::get("«curValue.name»"); }
-  «ENDFOREACH-»
-  «FOREACH this.getChiValueRefs() AS curReference-»
-      elseif ($name == '«curReference.name»') { $displayName = Message::get("«curReference.name»"); }
-  «ENDFOREACH-»
-«ENDDEFINE»
-
-«REM» valueDescription -------------------------------------------«ENDREM»
-«DEFINE valueDescription FOR ChiNode-»
-  «FOREACH this.getChiValuesRecursive() AS curValue-»
-      elseif ($name == '«curValue.name»') { $description = Message::get("«curValue.getComment("\\\\n").replaceAll('\\"', '\\\\"')»"); }
-  «ENDFOREACH-»
-  «FOREACH this.getChiValueRefs() AS curReference-»
-      elseif ($name == '«curReference.name»') { $description = Message::get("«curReference.getComment("\\\\n").replaceAll('\\"', '\\\\"')»"); }
-  «ENDFOREACH-»
 «ENDDEFINE»
 
 «REM» parents ----------------------------------------------------«ENDREM»

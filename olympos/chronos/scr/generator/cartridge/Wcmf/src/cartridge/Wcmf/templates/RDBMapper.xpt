@@ -55,6 +55,40 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
   }
 
   /**
+   * @see PersistenceMapper::getTypeDisplayName()
+   */
+  public function getTypeDisplayName(Message $message) {
+    return $message->getText("«this.name»");
+  }
+
+  /**
+   * @see PersistenceMapper::getTypeDescription()
+   */
+  public function getTypeDescription(Message $message) {
+    return $message->getText("«this.getComment("\\\\n").replaceAll('\\"', '\\\\"')»");
+  }
+
+  /**
+   * @see PersistenceMapper::getAttributeDisplayName()
+   */
+  public function getAttributeDisplayName($name, Message $message) {
+    $displayName = $name;
+    if (false) {}
+«EXPAND attributeDisplayNames FOR this-»
+    return $displayName;
+  }
+
+  /**
+   * @see PersistenceMapper::getAttributeDescription()
+   */
+  public function getAttributeDescription($name, Message $message) {
+    $description = $name;
+    if (false) {}
+«EXPAND attributeDescription FOR this-»
+    return $description;
+  }
+
+  /**
    * @see PersistenceMapper::getPkNames()
    */
   public function getPkNames() {
@@ -153,6 +187,22 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
     return '«getTableName()»';
   }
 }
+/**
+ * Additional names to be included by l10n tools ([Pl.]: plural forms)
+ * - $message->getText("«this.name» [Pl.]")
+«FOREACH this.getParentNodesRecursive() AS curParent-»
+ * - $message->getText("«curParent.getRoleName()»")
+ * - $message->getText("«curParent.getRoleName()» [Pl.]")
+«ENDFOREACH-»
+«FOREACH this.getChildNodesRecursive() AS curChild-»
+ * - $message->getText("«curChild.getRoleName()»")
+ * - $message->getText("«curChild.getRoleName()» [Pl.]")
+«ENDFOREACH-»
+ * Restrictions descriptions to be included by l10n tools
+«FOREACH this.getChiValuesRecursive() AS curValue-»
+ * - $message->getText("«curValue.restrictions_description»")
+«ENDFOREACH-»
+ */
 ?>
 «ENDFILE-»
 «ENDDEFINE»
@@ -223,7 +273,27 @@ new RDBManyToOneRelationDescription(
       */
       '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', array(«FOREACH curValue.app_data_type.split("\\|") AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»), «REM»NOBR«ENDREM-»
 «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue().replaceAll("'", "\\\\'")»'«ENDIF», '«curValue.restrictions_match.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
-«IF !curValue.restrictions_description.isNullOrEmpty()-»Message::get('«curValue.restrictions_description.replaceAll("'", "\\\\'")»')«ELSE-»''«ENDIF-», «curValue.is_editable.boolString()», '«curValue.input_type.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
+«IF !curValue.restrictions_description.isNullOrEmpty()-»'«curValue.restrictions_description.replaceAll("'", "\\\\'")»'«ELSE-»''«ENDIF-», «curValue.is_editable.boolString()», '«curValue.input_type.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 '«curValue.display_type»', '«getTableName()»', '«curValue.getColumnName()»'),
+  «ENDFOREACH-»
+«ENDDEFINE»
+
+«REM» attributeDisplayNames ------------------------------------------«ENDREM»
+«DEFINE attributeDisplayNames FOR ChiNode-»
+  «FOREACH this.getChiValuesRecursive() AS curValue-»
+      elseif ($name == '«curValue.name»') { $displayName = $message->getText("«curValue.name»"); }
+  «ENDFOREACH-»
+  «FOREACH this.getChiValueRefs() AS curReference-»
+      elseif ($name == '«curReference.name»') { $displayName = $message->getText("«curReference.name»"); }
+  «ENDFOREACH-»
+«ENDDEFINE»
+
+«REM» attributeDescription -------------------------------------------«ENDREM»
+«DEFINE attributeDescription FOR ChiNode-»
+  «FOREACH this.getChiValuesRecursive() AS curValue-»
+      elseif ($name == '«curValue.name»') { $description = $message->getText("«curValue.getComment("\\\\n").replaceAll('\\"', '\\\\"')»"); }
+  «ENDFOREACH-»
+  «FOREACH this.getChiValueRefs() AS curReference-»
+      elseif ($name == '«curReference.name»') { $description = $message->getText("«curReference.getComment("\\\\n").replaceAll('\\"', '\\\\"')»"); }
   «ENDFOREACH-»
 «ENDDEFINE»
