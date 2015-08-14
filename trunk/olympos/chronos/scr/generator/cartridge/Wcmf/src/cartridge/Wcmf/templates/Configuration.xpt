@@ -37,7 +37,9 @@
 «REM» sections ---------------------------------------------------«ENDREM»
 «DEFINE sections(String curConfig) FOR ChiSystem-»
   «IF this.plattform == "wcmf"-»
-    «IF this.config == curConfig-»
+    «IF this.config == curConfig ||
+      (this.name.toLowerCase() == "actionmapping"  && this.getModel().allOwnedElements().typeSelect(ChiActionKey).select(e|e.config == curConfig).size > 0) ||
+      (this.name.toLowerCase() == "views" && this.getModel().allOwnedElements().typeSelect(ChiActionKey).select(e|e.config == curConfig).size > 0)-»
 [«this.name»]
 «PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/config/"+curConfig+"/"+this.name+"SectionBegin").asProtectedRegionId()»
 «ENDPROTECT»
@@ -47,10 +49,10 @@
       «ENDIF-»
     «ENDIF-»
     «IF this.name.toLowerCase() == "actionmapping"-»
-      «EXPAND actionMapping(curConfig) FOREACH this.getModel().allOwnedElements().typeSelect(ChiActionKey)-»
+      «EXPAND actionMapping(curConfig) FOREACH this.getModel().allOwnedElements().typeSelect(ChiActionKey).select(e|e.config == curConfig)-»
     «ENDIF-»
     «IF this.name.toLowerCase() == "views"-»
-      «EXPAND views(curConfig) FOREACH this.getModel().allOwnedElements().typeSelect(ChiActionKey)-»
+      «EXPAND views(curConfig) FOREACH this.getModel().allOwnedElements().typeSelect(ChiActionKey).select(e|e.config == curConfig)-»
     «ENDIF-»
     «IF this.config == curConfig-»
       «FOREACH this.ownedAttribute AS curAttribute-»
@@ -85,7 +87,7 @@ connectionParams = $«this.getInitparams()»
 
 «REM» actionMapping ----------------------------------------------«ENDREM»
 «DEFINE actionMapping(String curConfig) FOR ChiActionKey-»
-  «IF this.config == curConfig && this.hasSourceController() && this.hasTargetController()-»
+  «IF this.hasSourceController() && this.hasTargetController()-»
     «IF this.getSourceController().name == "Controller"-»
 ?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»
     «ELSE-»
@@ -96,7 +98,7 @@ connectionParams = $«this.getInitparams()»
 
 «REM» views ------------------------------------------------------«ENDREM»
 «DEFINE views(String curConfig) FOR ChiActionKey-»
-  «IF this.config == curConfig && this.hasSourceController() && this.hasTargetView()-»
+  «IF this.hasSourceController() && this.hasTargetView()-»
 «this.getSourceController().getFullPackageName().asPhpPackage()»\«this.getSourceController().name»?«this.context»?«this.action» = «this.getTargetView().getFullPackageName().asPath()-»
 /«this.getTargetView().name.asTemplateFile()»
   «ENDIF-»
