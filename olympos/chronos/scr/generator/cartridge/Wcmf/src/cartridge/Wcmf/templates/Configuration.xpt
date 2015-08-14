@@ -37,7 +37,7 @@
 «REM» sections ---------------------------------------------------«ENDREM»
 «DEFINE sections(String curConfig) FOR ChiSystem-»
   «IF this.plattform == "wcmf"-»
-    «IF this.config == curConfig || this.name.toLowerCase() == "actionmapping" || this.name.toLowerCase() == "views"-»
+    «IF this.config == curConfig-»
 [«this.name»]
 «PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/config/"+curConfig+"/"+this.name+"SectionBegin").asProtectedRegionId()»
 «ENDPROTECT»
