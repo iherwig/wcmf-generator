@@ -1,5 +1,5 @@
 <project name="Chronos Generator" default="redist" basedir=".">
-  <property file="build.properties"/>
+  <property file="build_wcmf.properties"/>
   <property name="cartridge.absolute.build.dir" location="${cartridge.build.dir}"/>
   <property name="lib.absolute.build.dir" location="${lib.build.dir}"/>
   <property name="build.absolute.dir" location="${build.dir}"/>
@@ -52,7 +52,7 @@
          type="int" default="0000"
          operation="+" pattern="0000"/>
     </propertyfile>
-      <property file="${build.info}"/>
+    <property file="${build.info}"/>
   </target>
 
   <target name="redist" depends="buildinfo">
@@ -101,7 +101,7 @@
       <fileset dir="${cartridge.build.dir}" />
     </copy>
 
-    <zip destfile="${zip.dir}/ChronosGenerator-${version}-wCMF.zip" basedir="${redist.dir}"/>
+    <zip destfile="${zip.dir}/ChronosGenerator-wCMF-${version}.zip" basedir="${redist.dir}"/>
   </target>
 
 </project>
