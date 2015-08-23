@@ -89,6 +89,7 @@ define([
   «ENDIF-»
             maxMultiplicity: "«IF curChild.getUpper() == -1»unbounded«ELSE»«curChild.getUpper()»«ENDIF-»",
             thisEndName: "«curChild.getOtherEnd().getRoleName()»",
+            isSortable: «IF getOrderByName(curChild.type) == defaultOrderByName()-»true«ELSE-»false«ENDIF-»,
             relationType: "child"
 «ENDFOREACH-»«IF children.size > 0 && parents.size > 0-»        }, {«ENDIF-»
 «FOREACH parents AS curParent SEPARATOR "        }, {"»
@@ -98,6 +99,7 @@ define([
             aggregationKind: "«curParent.aggregation»",
             maxMultiplicity: "«IF curParent.getUpper() == -1»unbounded«ELSE»«curParent.getUpper()»«ENDIF-»",
             thisEndName: "«curParent.getOtherEnd().getRoleName()»",
+            isSortable: false,
             relationType: "parent"
 «ENDFOREACH-»«IF children.size > 0 || parents.size > 0-»        }«ENDIF-»]
 «ENDLET-»
