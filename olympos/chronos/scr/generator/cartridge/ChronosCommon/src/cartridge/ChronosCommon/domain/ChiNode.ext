@@ -19,54 +19,54 @@ String STEREOTYPE_CHI_NODE() : "Chronos::ChiNode";
  */
 
 /**
- * Methods for retrieving parent nodes. Parents are at the composite or shared end (uml::Property) or the one 
+ * Methods for retrieving parent nodes. Parents are at the composite or shared end (uml::Property) or the one
  * that is navigable in an association with the node.
  */
- 
+
 /**
  * Check if a node has parent nodes (including associations added by the generator)
  */
 Boolean hasParentNodesRecursive(ChiNode this):
-	this.getParentNodesRecursive().size >= 0 ? true : false 
+	this.getParentNodesRecursive().size >= 0 ? true : false
 ;
 /**
  * Get all parent nodes (including associations added by the generator)
  */
-cached List[uml::Property] getParentNodesRecursive(ChiNode this) : 
+cached List[uml::Property] getParentNodesRecursive(ChiNode this) :
 	this.getParentNodes(true).select(e|e.type.isNode())
 ;
 /**
  * Check if a node has parent nodes
  */
 Boolean hasParentNodes(ChiNode this):
-	this.getParentNodes().size >= 0 ? true : false 
+	this.getParentNodes().size >= 0 ? true : false
 ;
 /**
  * Get all parent nodes
  */
-cached List[uml::Property] getParentNodes(ChiNode this) : 
+cached List[uml::Property] getParentNodes(ChiNode this) :
 	this.getParentNodes(false).select(e|e.type.isNode())
 ;
 /**
  * Check if a node is a parent node
  */
-Boolean isParentNode(ChiNode this, ChiNode other) : 
+Boolean isParentNode(ChiNode this, ChiNode other) :
 	this.isParentNode(other, false)
 ;
 /**
  * Private calls to JAVA extensions
  */
-private List[uml::Property] getParentNodes(ChiNode this, boolean recursive) : 
+private List[uml::Property] getParentNodes(ChiNode this, boolean recursive) :
 	JAVA net.sourceforge.olympos.oaw.extend.NodeHelper.getParents(org.eclipse.uml2.uml.Class, java.lang.Boolean)
 ;
-private Boolean isParentNode(ChiNode this, ChiNode other, Boolean recursive) : 
+private Boolean isParentNode(ChiNode this, ChiNode other, Boolean recursive) :
 	JAVA net.sourceforge.olympos.oaw.extend.NodeHelper.isParent(org.eclipse.uml2.uml.Class, org.eclipse.uml2.uml.Class, java.lang.Boolean)
 ;
 
 /**
  * Methods for retrieving child nodes. Children are at otherEnd (uml::Property) of parent ends.
  */
- 
+
 /**
  * Check if a node has child nodes (including associations added by the generator)
  */
@@ -76,7 +76,7 @@ Boolean hasChildNodesRecursive(ChiNode this):
 /**
  * Get all child nodes (including associations added by the generator)
  */
-cached List[uml::Property] getChildNodesRecursive(ChiNode this) : 
+cached List[uml::Property] getChildNodesRecursive(ChiNode this) :
 	this.getChildNodes(true).select(e|e.type.isNode())
 ;
 /**
@@ -88,7 +88,7 @@ Boolean hasChildNodes(ChiNode this):
 /**
  * Get all child nodes
  */
-cached List[uml::Property] getChildNodes(ChiNode this) : 
+cached List[uml::Property] getChildNodes(ChiNode this) :
 	this != null ?
 		this.getChildNodes(false).select(e|e.type.isNode())
 	:
@@ -97,16 +97,16 @@ cached List[uml::Property] getChildNodes(ChiNode this) :
 /**
  * Check if a node is a child node
  */
-Boolean isChildNode(ChiNode this, ChiNode other) : 
+Boolean isChildNode(ChiNode this, ChiNode other) :
 	this.isChildNode(other, false)
 ;
 /**
  * Private calls to JAVA extensions
  */
-private List[Property] getChildNodes(ChiNode this, boolean recursive) : 
+private List[Property] getChildNodes(ChiNode this, boolean recursive) :
 	JAVA net.sourceforge.olympos.oaw.extend.NodeHelper.getChildren(org.eclipse.uml2.uml.Class, java.lang.Boolean)
 ;
-private Boolean isChildNode(ChiNode this, ChiNode other, Boolean recursive) : 
+private Boolean isChildNode(ChiNode this, ChiNode other, Boolean recursive) :
 	JAVA net.sourceforge.olympos.oaw.extend.NodeHelper.isChild(org.eclipse.uml2.uml.Class, org.eclipse.uml2.uml.Class, java.lang.Boolean)
 ;
 
@@ -117,14 +117,14 @@ private Boolean isChildNode(ChiNode this, ChiNode other, Boolean recursive) :
 /**
  * Get all attributes (including attributes added by the generator)
  */
-cached List[ChiValue] getChiValuesRecursive(ChiNode this): 
+cached List[ChiValue] getChiValuesRecursive(ChiNode this):
 	this.attribute.typeSelect(ChiValue)
 ;
 
 /**
  * Get all references
  */
-cached List[ChiValueRef] getChiValueRefs(ChiNode this): 
+cached List[ChiValueRef] getChiValueRefs(ChiNode this):
 	this.attribute.typeSelect(ChiValueRef)
 ;
 
@@ -141,23 +141,23 @@ String getInitparams(ChiNode this) :
 /**
  * Get the table name
  */
-String getTableName(ChiNode this) : 
+String getTableName(ChiNode this) :
 	this.table_name.length > 0 ? this.table_name : this.name
 ;
 
 /**
  * Get all order attribute names from the orderby tagged value
  */
-String getOrderByNames(ChiNode this) : 
+String getOrderByNames(ChiNode this) :
 	this.orderby.split("\\|").trim().collect(v|v.split(" ").first().trim()).select(v|v != "none")
 ;
 
 /**
  * Get the first order column and direction from the orderby tagged value
  */
-String getOrderByColumn(ChiNode this) : 
-	let name = this.getOrderByNames().first() : 
-	let dir = this.getOrderByDirection(name) : 
+String getOrderByColumn(ChiNode this) :
+	let name = this.getOrderByNames().first() :
+	let dir = this.getOrderByDirection(name) :
 		let orderVal = this.getChiValuesRecursive().select(v|v.name == name).first() :
 			orderVal != null ? orderVal.getColumnName()+" "+dir : (name == defaultOrderByName() ? name : "")
 ;
@@ -165,8 +165,8 @@ String getOrderByColumn(ChiNode this) :
 /**
  * Get the first order attribute from the orderby tagged value
  */
-String getOrderByName(ChiNode this) : 
-	let name = this.getOrderByNames().first() : 
+String getOrderByName(ChiNode this) :
+	let name = this.getOrderByNames().first() :
 		let orderVal = this.getChiValuesRecursive().select(v|v.name == name).first() :
 			orderVal != null ? orderVal.name : (name == defaultOrderByName() ? name : null)
 ;
@@ -174,7 +174,7 @@ String getOrderByName(ChiNode this) :
 /**
  * Get the order direction for the given order attribute from the orderby tagged value (ASC or DESC, defaults to ASC)
  */
-String getOrderByDirection(ChiNode this, String name) : 
+String getOrderByDirection(ChiNode this, String name) :
 	let dir = this.orderby.split("\\|").trim().select(v|v.split(" ").first().trim() == name).split(" ").last().trim() :
 		dir.toUpperCase() == "ASC" || dir.toUpperCase() == "DESC" ? dir.toUpperCase() : "ASC"
 ;
@@ -182,8 +182,8 @@ String getOrderByDirection(ChiNode this, String name) :
 /**
  * Get the first order direction from the orderby tagged value (ASC or DESC, defaults to ASC)
  */
-String getOrderByDirection(ChiNode this) : 
-	let name = this.getOrderByNames().first() : 
+String getOrderByDirection(ChiNode this) :
+	let name = this.getOrderByNames().first() :
 		this.getOrderByDirection(name)
 ;
 
@@ -191,7 +191,7 @@ String getOrderByDirection(ChiNode this) :
  * Get the order column that should be used in relation to a given parent.
  * It will only contain a value, if getOrderByName returns the defaultOrderByName
  */
-String getOrderByNameForParent(ChiNode this, Property parent) : 
+String getOrderByNameForParent(ChiNode this, Property parent) :
 	let orderByName = this.getOrderByName() :
 		orderByName == defaultOrderByName() ? orderByName+"_"+parent.getRoleName().toLowerCase() : null
 ;
@@ -199,7 +199,7 @@ String getOrderByNameForParent(ChiNode this, Property parent) :
 /**
  * Get the primary key tagged value or default pk name if not set
  */
-String getPKName(ChiNode this) : 
+String getPKName(ChiNode this) :
 	this.pk_name == null || this.pk_name.length == 0 ? defaultPKName(this) : this.pk_name
 ;
 
@@ -215,17 +215,17 @@ Void setPKName(ChiNode this, String name) :
  */
 String getFKName(Property parent) :
 	let association = parent.association :
-	association != null ? 
+	association != null ?
 		(let fk_name = association.getTaggedValue(STEREOTYPE_CHI_ASSOCIATION(), "fk_name") :
-			fk_name == null || fk_name.toString().length == 0 ? defaultFKName(parent.type) : fk_name) : 
-		defaultFKName(parent.type) 
+			fk_name == null || fk_name.toString().length == 0 ? defaultFKName(parent) : fk_name) :
+		defaultFKName(parent)
 ;
 
 /**
  * Get the primary keys (from the tagged value)
  */
-List[ChiValue] getPKValues(ChiNode this) : 
-	let pkNameStr = this.pk_name.split("\\|") : 
+List[ChiValue] getPKValues(ChiNode this) :
+	let pkNameStr = this.pk_name.split("\\|") :
 		this.getChiValuesRecursive().select(v|pkNameStr.contains(v.name))
 ;
 
@@ -233,15 +233,15 @@ List[ChiValue] getPKValues(ChiNode this) :
  * Check if an attribute is a fk value
  * (this is delegated to the generator, because the result was calcualted during post processing)
  */
-boolean isFKValue(ChiValue this) : 
+boolean isFKValue(ChiValue this) :
 	JAVA net.sourceforge.olympos.oaw.extend.Generator.isFKValue(org.eclipse.uml2.uml.Property)
 ;
 
 /**
- * Get the class that is referenced by a fk value 
+ * Get the class that is referenced by a fk value
  * (this is delegated to the generator, because the result was calcualted during post processing)
- */ 
-Class getFKClass(ChiValue this) : 
+ */
+Class getFKClass(ChiValue this) :
 	JAVA net.sourceforge.olympos.oaw.extend.Generator.getFKClass(org.eclipse.uml2.uml.Property)
 ;
 
@@ -267,7 +267,7 @@ ChiBase
 			ChiWorkerExternal
 		ChiBusinessPartner
 			ChiBusinessPartnerActive
-			
+
 Relations:
 ChiBusinessUseCase ---NMUCActor--- Actor
 
@@ -288,7 +288,7 @@ FALSE for all other
 	).size == 0
  ;
 
- 
+
 List[uml::Property] getManyToManyResolvedParentNodes(ChiNode this):
 	this.resolveManyToMany(this.getParentNodesRecursive(), true)
 ;
@@ -323,10 +323,10 @@ List[uml::Property] getNavigableChildNodes(ChiNode this):
 
 List[uml::Property] resolveManyToMany(ChiNode this, List[uml::Property] list, boolean includeAbstract):
 	let result = (List[uml::Property]) {}:
-	
+
 	result.addAll(list.select(e|!((Chronos::ChiNode) e.type).isManyToMany())) ->
 	result.addAll(((List[Chronos::ChiManyToMany]) list.select(e|((Chronos::ChiNode) e.type).isManyToMany()).type).getOtherEnd(this, includeAbstract)) ->
-	
+
 	result
 ;
 
@@ -341,6 +341,6 @@ boolean isDisplayValue(Chronos::ChiValue this, Chronos::ChiNode node):
 /**
  * Check if an element is added by the generator
  */
-boolean isNode(uml::Element this) : 
+boolean isNode(uml::Element this) :
 	this.getAppliedStereotype(STEREOTYPE_CHI_NODE()) != null || this.getAppliedStereotype(STEREOTYPE_CHI_MANY_TO_MANY()) != null
 ;

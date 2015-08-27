@@ -1,9 +1,11 @@
 import uml;
 
+extension common::util;
+
 /**
  * Database related
  */
- 
+
 /**
  * Convert a string sql friendly
  */
@@ -17,7 +19,7 @@ String asSqlMultilineComment(String str) : str.replaceAll("(\\n)", "$1# ");
 /**
  * The default foreign key column name
  */
-String defaultFKName(uml::Type parent) : "fk_"+parent.name.asSql()+"_id";
+String defaultFKName(uml::Property parent) : "fk_"+(parent.name.isNullOrEmpty() ? parent.type.name : parent.name).asSql()+"_id";
 
 /**
  * The default primary key column name
@@ -32,7 +34,7 @@ String defaultOrderByName() : "sortkey";
 /**
  * PHP related
  */
- 
+
 /**
  * Convert a package name into a php package
  */
@@ -78,7 +80,7 @@ String asSetter(String name) : "set"+name.asType();
 /**
  * JS related
  */
- 
+
 /**
  * Get the JS  base class file name for a class
  */

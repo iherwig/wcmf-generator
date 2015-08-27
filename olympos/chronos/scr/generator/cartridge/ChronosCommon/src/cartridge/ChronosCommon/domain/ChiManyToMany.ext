@@ -4,6 +4,7 @@ import Chronos;
 extension org::openarchitectureware::uml2::profile::profiling;
 
 extension cartridge::ChronosCommon::domain::ChiNode;
+extension cartridge::ChronosCommon::domain::ChiValue;
 
 String STEREOTYPE_CHI_MANY_TO_MANY() : "Chronos::ChiManyToMany";
 
@@ -14,10 +15,23 @@ Void setPKName(ChiManyToMany this, String name) :
 	this.setTaggedValue(STEREOTYPE_CHI_MANY_TO_MANY(), "pk_name", name)
 ;
 
+/**
+ * Get the other ends in a many to many relation excluding nodes of the same type as sourceNode
+ */
 List[uml::Property] getOtherEnd(Chronos::ChiManyToMany this, Chronos::ChiNode sourceNode, boolean includeAbstract):
 	let result = this.getParentNodes().select(e|(!((Chronos::ChiNode) e.type).isAbstract || includeAbstract) && sourceNode.isAtOtherNmEnd((Chronos::ChiNode) e.type, this) && e.type != sourceNode):
 	result.setUpper(-1) ->
-	
+
+	result
+;
+
+/**
+ * Get the other ends in a many to many relation including nodes of the same type as the type of sourceEnd, but different role
+ */
+List[uml::Property] getOtherEndAllowSourceType(Chronos::ChiManyToMany this, uml::Property sourceEnd, boolean includeAbstract):
+	let result = this.getParentNodes().select(e|(!((Chronos::ChiNode) e.type).isAbstract || includeAbstract) && e.getRoleName() != sourceEnd.getRoleName()):
+	result.setUpper(-1) ->
+
 	result
 ;
 
