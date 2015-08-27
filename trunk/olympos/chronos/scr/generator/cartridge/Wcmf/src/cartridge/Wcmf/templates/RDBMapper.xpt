@@ -226,8 +226,8 @@ array(«FOREACH this.getPKValues() AS curPk SEPARATOR ', '»'«curPk.name»'«EN
 «DEFINE relations FOR ChiNode-»
   «FOREACH this.getChildNodesRecursive() AS curChild ITERATOR Index1-»
     «IF !((ChiNode)curChild.type).isAbstract-»
-      «IF curChild.type.metaType.toString().contains("ChiManyToMany") && curChild.type.getOtherEnd(this, false).size == 1-»
-        «LET curChild.type.getOtherEnd(this, false).first() AS otherNmEnd-»
+      «IF curChild.type.metaType.toString().contains("ChiManyToMany") && curChild.type.getOtherEndAllowSourceType(curChild.getOtherEnd(), false).size == 1-»
+        «LET curChild.type.getOtherEndAllowSourceType(curChild.getOtherEnd(), false).first() AS otherNmEnd-»
       '«otherNmEnd.getRoleName()»' => new RDBManyToManyRelationDescription(
       /* this -> nm  */ «EXPAND oneToManyRelation(curChild)»,
       /* nm -> other */ «EXPAND manyToOneRelation(otherNmEnd) FOR curChild.type»
