@@ -18,7 +18,7 @@
 
   «EXPAND cartridge::Wcmf::templates::client::TypeList::file»
   «EXPAND client FOREACH this.allOwnedElements().typeSelect(ChiNode)»
-  
+
   «REM»«EXPAND class FOREACH this.allOwnedElements().typeSelect(uml::Class)»«ENDREM»
 «ENDDEFINE»
 

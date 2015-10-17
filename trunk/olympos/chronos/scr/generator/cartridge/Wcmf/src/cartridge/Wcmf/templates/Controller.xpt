@@ -33,7 +33,7 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 
 /**
  * «this.name» description: «this.getComment("\n * ")»
- * 
+ *
  * The following configuration settings are defined for this controller:
  *
  * [actionmapping]
@@ -41,7 +41,7 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
  *
  * [views]
 «EXPAND views FOREACH this.getChiActionKeys()-»
- * 
+ *
  * @author «this.getAuthor()»
  * @version «this.getVersion()»
  */
@@ -66,9 +66,9 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 «DEFINE actionMapping FOR ChiActionKey-»
   «IF this.hasSourceController() && this.hasTargetController()-»
     «IF this.getSourceController().name == "Controller"-»
- * ?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»
+ * ?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»«IF this.hasTargetMethod()»::«this.getTargetMethod().name»«ENDIF»
     «ELSE-»
- * «this.getSourceController().getFullPackageName().asPhpPackage()»\«this.getSourceController().name»?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»
+ * «this.getSourceController().getFullPackageName().asPhpPackage()»\«this.getSourceController().name»?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»«IF this.hasTargetMethod()»::«this.getTargetMethod().name»«ENDIF»
     «ENDIF-»
   «ENDIF-»
 «ENDDEFINE»
@@ -82,18 +82,18 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 
 «REM» operation --------------------------------------------------«ENDREM»
 «DEFINE operation(uml::Class class) FOR uml::Operation»
-  /**  
-   * Method «this.name» 
+  /**
+   * Method «this.name»
    * description: «this.getComment("\n   * ")»
-  «FOREACH this.ownedParameter AS p-»  
+  «FOREACH this.ownedParameter AS p-»
     «IF p.direction.toString() != "return"-»
    * @param «p.name»
     «ENDIF-»
   «ENDFOREACH-»
-  * @return 
-  */  
+   * @return
+   */
   function «name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»«IF p.direction.toString() != "return"»$«p.name»«ENDIF»«ENDFOREACH») {
 «PROTECT CSTART "// " CEND "" ID (class.getFullPackageName().asPath()+"/"+class.name.asPhpClassFile()+"/Methods/"+this.name).asProtectedRegionId()»
 «ENDPROTECT»
-  }   
+  }
 «ENDDEFINE»

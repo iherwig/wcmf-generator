@@ -41,19 +41,19 @@ class «this.name» extends «this.name»Base {
 «ENDDEFINE»
 
 «REM» operation --------------------------------------------------«ENDREM»
-«DEFINE operation(Chronos::ChiNode class) FOR uml::Operation»  
-  /**  
+«DEFINE operation(Chronos::ChiNode class) FOR uml::Operation»
+  /**
    * Method «this.name»
    * description: «this.getComment("\n   * ")»
-  «FOREACH this.ownedParameter AS p-»  
+  «FOREACH this.ownedParameter AS p-»
     «IF p.direction.toString() != "return"-»
    * @param «p.name»
     «ENDIF-»
   «ENDFOREACH-»
-  * @return 
-  */  
+   * @return
+   */
   function «this.name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»«IF p.direction.toString() != "return"»$«p.name»«ENDIF»«ENDFOREACH») {
 «PROTECT CSTART "// " CEND "" ID (class.getFullPackageName().asPath()+"/"+ class.name.asPhpClassFile()+"/Methods/"+this.name).asProtectedRegionId()»
 «ENDPROTECT»
-  }   
+  }
 «ENDDEFINE»
