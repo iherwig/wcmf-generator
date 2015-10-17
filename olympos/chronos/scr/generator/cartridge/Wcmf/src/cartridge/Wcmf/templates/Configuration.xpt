@@ -89,9 +89,9 @@ connectionParams = $«this.getInitparams()»
 «DEFINE actionMapping(String curConfig) FOR ChiActionKey-»
   «IF this.hasSourceController() && this.hasTargetController()-»
     «IF this.getSourceController().name == "Controller"-»
-?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»
+?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»«IF this.hasTargetMethod()»::«this.getTargetMethod().name»«ENDIF»
     «ELSE-»
-«this.getSourceController().getFullPackageName().asPhpPackage()»\«this.getSourceController().name»?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»
+«this.getSourceController().getFullPackageName().asPhpPackage()»\«this.getSourceController().name»?«this.context»?«this.action» = «this.getTargetController().getFullPackageName().asPhpPackage()»\«this.getTargetController().name»«IF this.hasTargetMethod()»::«this.getTargetMethod().name»«ENDIF»
     «ENDIF-»
   «ENDIF-»
 «ENDDEFINE»
