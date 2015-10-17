@@ -52,7 +52,7 @@ class «this.name» extends «this.name»Base {
   «ENDFOREACH-»
    * @return
    */
-  function «this.name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»«IF p.direction.toString() != "return"»$«p.name»«ENDIF»«ENDFOREACH») {
+  «this.visibility» function «this.name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»«IF p.direction.toString() != "return"»$«p.name»«ENDIF»«ENDFOREACH») {
 «PROTECT CSTART "// " CEND "" ID (class.getFullPackageName().asPath()+"/"+ class.name.asPhpClassFile()+"/Methods/"+this.name).asProtectedRegionId()»
 «ENDPROTECT»
   }
