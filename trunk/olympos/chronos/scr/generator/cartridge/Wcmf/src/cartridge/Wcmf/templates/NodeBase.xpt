@@ -37,19 +37,18 @@ use wcmf\lib\persistence\ObjectId;
  */
 class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperClass().name»«ENDIF» {
 
-    /**
-     * Constructor
-     * @param oid ObjectId instance (optional)
-     */
-    public function __construct($oid=null) {
+  /**
+   * Constructor
+   * @param oid ObjectId instance (optional)
+   */
+  public function __construct($oid=null) {
 «IF this.hasSuperClass()-»
-      if ($oid == null) {
-        $oid = new ObjectId('«this.name»');
-      }
-      parent::__construct($oid);
-«ENDIF-»
+    if ($oid == null) {
+      $oid = new ObjectId('«this.name»');
     }
-
+    parent::__construct($oid);
+«ENDIF-»
+  }
   «IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0 -»
     «EXPAND parents FOR this-»
     «EXPAND children FOR this-»
@@ -62,24 +61,25 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getS
 «REM» parents ----------------------------------------------------«ENDREM»
 «DEFINE parents FOR ChiNode-»
   «FOREACH this.getParentNodesRecursive() AS curParent-»
-    /**
-     * Get the «curParent.type.name» instances in the «curParent.getRoleName()» relation
-     * @return Array of «curParent.type.name» instances
-     */
-    public function «curParent.getRoleName().asGetter()»List() {
-      return $this->getValue('«curParent.getRoleName()»');
-    }
 
-    /**
-     * Set the «curParent.type.name» instances in the «curParent.getRoleName()» relation
-     * @param nodeList Array of «curParent.type.name» instances
-     */
-    public function «curParent.getRoleName().asSetter()»List(array $nodeList) {
-      $this->setValue('«curParent.getRoleName()»', null);
-      foreach ($nodeList as $node) {
-        $this->addNode($node, '«curParent.getRoleName()»');
-      }
+  /**
+   * Get the «curParent.type.name» instances in the «curParent.getRoleName()» relation
+   * @return Array of «curParent.type.name» instances
+   */
+  public function «curParent.getRoleName().asGetter()»List() {
+    return $this->getValue('«curParent.getRoleName()»');
+  }
+
+  /**
+   * Set the «curParent.type.name» instances in the «curParent.getRoleName()» relation
+   * @param nodeList Array of «curParent.type.name» instances
+   */
+  public function «curParent.getRoleName().asSetter()»List(array $nodeList) {
+    $this->setValue('«curParent.getRoleName()»', null);
+    foreach ($nodeList as $node) {
+      $this->addNode($node, '«curParent.getRoleName()»');
     }
+  }
   «ENDFOREACH-»
 «ENDDEFINE»
 
@@ -89,45 +89,47 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getS
     «IF curChild.type.metaType.toString().contains("ChiManyToMany")-»
       «FOREACH ((ChiNode)curChild.type).getParentNodes() AS curChildParent-»
         «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
-    /**
-     * Get the «curChildParent.type.name» instances in the «curChildParent.type.name» relation
-     * @return Array of «curChildParent.type.name» instances
-     */
-    public function «curChildParent.type.name.asGetter()»List() {
-      return $this->getValue('«curChildParent.type.name»');
-    }
 
-    /**
-     * Set the «curChildParent.type.name» instances in the «curChildParent.type.name» relation
-     * @param nodeList Array of «curChildParent.type.name» instances
-     */
-    public function «curChildParent.type.name.asSetter()»List(array $nodeList) {
-      $this->setValue('«curChildParent.type.name»', null);
-      foreach ($nodeList as $node) {
-        $this->addNode($node, '«curChildParent.type.name»');
-      }
+  /**
+   * Get the «curChildParent.type.name» instances in the «curChildParent.type.name» relation
+   * @return Array of «curChildParent.type.name» instances
+   */
+  public function «curChildParent.type.name.asGetter()»List() {
+    return $this->getValue('«curChildParent.type.name»');
+  }
+
+  /**
+   * Set the «curChildParent.type.name» instances in the «curChildParent.type.name» relation
+   * @param nodeList Array of «curChildParent.type.name» instances
+   */
+  public function «curChildParent.type.name.asSetter()»List(array $nodeList) {
+    $this->setValue('«curChildParent.type.name»', null);
+    foreach ($nodeList as $node) {
+      $this->addNode($node, '«curChildParent.type.name»');
     }
+  }
         «ENDIF-»
       «ENDFOREACH-»
     «ELSE-»
-    /**
-     * Get the «curChild.type.name» instances in the «curChild.getRoleName()» relation
-     * @return Array of «curChild.type.name» instances
-     */
-    public function «curChild.getRoleName().asGetter()»List() {
-      return $this->getValue('«curChild.getRoleName()»');
-    }
 
-    /**
-     * Set the «curChild.type.name» instances in the «curChild.getRoleName()» relation
-     * @param nodeList Array of «curChild.type.name» instances
-     */
-    public function «curChild.getRoleName().asSetter()»List(array $nodeList) {
-      $this->setValue('«curChild.getRoleName()»', null);
-      foreach ($nodeList as $node) {
-        $this->addNode($node, '«curChild.getRoleName()»');
-      }
+  /**
+   * Get the «curChild.type.name» instances in the «curChild.getRoleName()» relation
+   * @return Array of «curChild.type.name» instances
+   */
+  public function «curChild.getRoleName().asGetter()»List() {
+    return $this->getValue('«curChild.getRoleName()»');
+  }
+
+  /**
+   * Set the «curChild.type.name» instances in the «curChild.getRoleName()» relation
+   * @param nodeList Array of «curChild.type.name» instances
+   */
+  public function «curChild.getRoleName().asSetter()»List(array $nodeList) {
+    $this->setValue('«curChild.getRoleName()»', null);
+    foreach ($nodeList as $node) {
+      $this->addNode($node, '«curChild.getRoleName()»');
     }
+  }
     «ENDIF-»
   «ENDFOREACH-»
 «ENDDEFINE»
