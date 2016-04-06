@@ -40,10 +40,7 @@ use wcmf\lib\persistence\ObjectId;
 
 /**
  * «this.name.asMapper()» maps «this.name» Nodes to the database.
- * «this.name.asMapper()» description: «this.getComment("\n * ")»
- *
- * @author «this.getAuthor()»
- * @version «this.getVersion()»
+«IF this.getComment("\n * ") != ""» * «this.getComment("\n * ")»«ENDIF-»
  */
 class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
 
@@ -158,13 +155,13 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
   «IF getOrderByName() == defaultOrderByName()-»
   «FOREACH this.getParentNodesRecursive() AS curParent-»
       /**
-       * Value description: Sort key for ordering in relation to «curParent.getRoleName()»
+       * Sort key for ordering in relation to «curParent.getRoleName()»
        */
       '«this.getOrderByNameForParent(curParent)»' => new RDBAttributeDescription('«this.getOrderByNameForParent(curParent)»', 'integer', array('DATATYPE_IGNORE'), null, «REM»NOBR«ENDREM-»
 'regexp:{"pattern":"^[0-9]*$"}', '', true, 'text[class="tiny"]', 'text', '«getTableName()»', '«this.getOrderByNameForParent(curParent)»'),
     «ENDFOREACH-»
       /**
-       * Value description: Sort key for ordering
+       * Sort key for ordering
        */
       '«this.getOrderByName()»' => new RDBAttributeDescription('«this.getOrderByName()»', 'integer', array('DATATYPE_IGNORE'), null, «REM»NOBR«ENDREM-»
 'regexp:{"pattern":"^[0-9]*$"}', '', true, 'text[class="tiny"]', 'text', '«getTableName()»', '«this.getOrderByName()»'),
@@ -216,7 +213,7 @@ array(«FOREACH this.getPKValues() AS curPk SEPARATOR ', '»'«curPk.name»'«EN
 «DEFINE references FOR ChiNode-»
   «FOREACH this.getChiValueRefs() AS curReference ITERATOR Index1-»
      /*
-      * Value description: «this.getComment(" ")»
+      * «this.getComment(" ")»
       */
       '«curReference.name»' => new ReferenceDescription('«curReference.name»', '«curReference.getReferencedNode().name»', '«curReference.getReferencedValue().name»'),
   «ENDFOREACH-»
@@ -269,7 +266,7 @@ new RDBManyToOneRelationDescription(
 «DEFINE attributes FOR ChiNode-»
   «FOREACH this.getChiValuesRecursive() AS curValue ITERATOR Index1-»
      /**
-      * Value description: «curValue.getComment(" ")»
+      * «curValue.getComment(" ")»
       */
       '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', array(«FOREACH curValue.app_data_type.split("\\|") AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»), «REM»NOBR«ENDREM-»
 «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue().replaceAll("'", "\\\\'")»'«ENDIF», '«curValue.restrictions_match.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
