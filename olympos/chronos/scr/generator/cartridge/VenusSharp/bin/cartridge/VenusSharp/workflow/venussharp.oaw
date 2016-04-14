@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflow>
+
+	<!-- the following properties property maybe overriden from the command line -->
+	<property name='generatorVersion' value='4'/>
+	<property name='basePath' value='src'/>
+	<property name='outputEncoding' value='UTF-8'/>
+	<property name='propertyFile' value='${basePath}/cartridge/Wcmf/workflow/venussharp.properties'/>
+	<property file="${propertyFile}"/>
+
+	<bean class="oaw.uml2.Setup" standardUML2Setup="true"/>
+
+	<!-- Metamodel-Definition -->
+	<bean id="EmfMM" class="oaw.type.emf.EmfMetaModel">
+		<metaModelPackage value="org.eclipse.emf.ecore.EcorePackage"/>
+	</bean>
+	<bean id="UmlMM" class="oaw.uml2.UML2MetaModel"/>
+	<bean id="${profilename}MM" class="oaw.uml2.profile.ProfileMetaModel">
+		<profile value="${profileUmlFile}"/>
+	</bean>
+
+	<!-- Backup -->
+	<if cond="${doBackup}">
+		<component class="com.wemove.wcmf.generator.workflow.BackupComponent">
+			<sourcePath value="${targetDir}/${applicationPackage}"/>
+			<targetPath value="${backupDir}"/>
+		</component>
+	</if>
+
+	<!-- Read the UML model and store it into a slot named 'model' -->
+	<component class="oaw.emf.XmiReader">
+		<modelFile value="${modelUmlFile}"/>
+		<outputSlot value="model"/>
+	</component>
+
+	<!-- Check constraints before model 2 model transformation -->
+	<if cond="${doCheck}">
+		<component class="oaw.check.CheckComponent">
+
+			<!-- Global variables used by the check -->
+			<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+			<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+			<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
+			<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+
+			<metaModel idRef="EmfMM"/>
+			<metaModel idRef="UmlMM"/>
+			<metaModel idRef="${profilename}MM"/>
+			<checkFile value="${preCheckFile}"/>
+			<emfAllChildrenSlot value="model"/>
+			<abortOnError value="false"/>
+		</component>
+	</if>
+
+	<!-- Prepare the model for VenusSharp and store it into a slot named 'transformedModel' -->
+	<component id="m2m" class="oaw.xtend.XtendComponent">
+
+		<!-- Global variables used by the transformation -->
+		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
+		<globalVarDef name="ProfileFile" value="'${profileUmlFile}'"/>
+		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
+		<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
+		<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+
+		<metaModel idRef="EmfMM"/>
+		<metaModel idRef="UmlMM"/>
+		<metaModel idRef="${profilename}MM"/>
+		<invoke value="cartridge::Wcmf::extensions::m2m::addDefaults(model)"/>
+
+		<outputSlot value="transformedModel"/>
+	</component>
+
+	<!-- Check constraints after model 2 model transformation -->
+	<if cond="${doCheck}">
+		<component class="oaw.check.CheckComponent">
+
+			<!-- Global variables used by the check -->
+			<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+			<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+			<globalVarDef name="RequiredNodeSuperClass" value="'${requiredNodeSuperclass}'"/>
+			<globalVarDef name="RequiredControllerSuperClass" value="'${requiredControllerSuperclass}'"/>
+
+			<metaModel idRef="EmfMM"/>
+			<metaModel idRef="UmlMM"/>
+			<metaModel idRef="${profilename}MM"/>
+			<checkFile value="${postCheckFile}"/>
+			<emfAllChildrenSlot value="model"/>
+			<abortOnError value="false"/>
+		</component>
+	</if>
+
+	<!-- Write out transformed model for manual cross-check -->
+	<component id="UML2Writer" class="org.openarchitectureware.uml2.UML2Writer">
+		<inputSlot value="transformedModel" />
+		<outPath value="${transformedModelUmlFile}" />
+	</component>
+
+	<!-- Expand the model into the templates -->
+	<component id="generator" class="oaw.xpand2.Generator" skipOnErrors="false">
+		<fileEncoding value="${outputEncoding}"/>
+
+		<!-- Global variables used by the generator -->
+		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
+		<globalVarDef name="PrintGenerateDate" value="'${printGenerateDate}'"/>
+		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
+		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
+		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
+		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>
+		<globalVarDef name="DefaultConfigFile" value="'${configFileDefault}'"/>
+		<globalVarDef name="ProjectName" value="'${projectname}'"/>
+		<globalVarDef name="TargetDirectory" value="'${targetDir}'"/>
+		<globalVarDef name="HeaderText" value="${headerText}"/>
+
+		<metaModel idRef="EmfMM"/>
+		<metaModel idRef="UmlMM"/>
+		<metaModel idRef="${profilename}MM"/>
+
+		<expand value="${expand} FOR transformedModel"/>
+
+		<outlet path="${targetDir}">
+			<postprocessor class="oaw.xpand2.output.JavaBeautifier"/>
+			<postprocessor class="oaw.xpand2.output.XmlBeautifier"/>
+			<postprocessor class="com.wemove.wcmf.generator.workflow.WhitespaceRemover"/>
+			<postprocessor class="com.wemove.wcmf.generator.workflow.OutputEncoder">
+				<targetEncoding value="${outputEncoding}"/>
+			</postprocessor>
+		</outlet>
+
+		<!-- Protected regions configuration -->
+		<prSrcPaths value="${targetDir}/${applicationPackage}"/>
+		<prDefaultExcludes value="false"/>
+		<prExcludes value="${prExcludes}"/>
+	</component>
+
+</workflow>
