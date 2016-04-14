@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: generator.cartridge.VenusSharp
+Bundle-SymbolicName: generator.cartridge.VenusSharp; singleton:=true
+Bundle-Version: 1.0.0
+Require-Bundle:  org.openarchitectureware.dependencies
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
