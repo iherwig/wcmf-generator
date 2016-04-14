@@ -53,19 +53,20 @@ String asType(String string) :
 String asPhpClassFile(String name): name+".php";
 
 /**
- * Get the php base class file name for a class
- */
-String asBaseClass(String name): name+"Base";
-
-/**
- * Get the php mapper class name for a class
- */
-String asMapper(String name): name+"RDBMapper";
-
-/**
  * Get the smarty file name for a class
  */
 String asTemplateFile(String name): name+".tpl";
+
+
+/**
+ * Get the php mapper class name for a class */
+ 
+String asMapper(String name): name+"RDBMapper";
+
+/**
+ * Get the  base class file name for a class
+ */
+String asBaseClass(String name): name+"Base";
 
 /**
  * Get the getter method name for a property
@@ -76,6 +77,14 @@ String asGetter(String name) : "get"+name.asType();
  * Get the setter method name for a property
  */
 String asSetter(String name) : "set"+name.asType();
+
+
+
+/**
+ * Get the php base class file name for a class
+ */
+String asPhpBaseClass(String name): name+"Base"+".php";
+
 
 /**
  * JS related
@@ -91,6 +100,9 @@ String asBaseJSClassFile(String name): name+".class.js";
  */
 String asJSClassFile(String name): name+"Class.class.js";
 
+/**
+ * Get the input type for fie;ld
+ */
 String getExtJsInputType(String str):
 	str.startsWith("fckeditor") || str.startsWith("RichText") ?
 		"HtmlEditor"
