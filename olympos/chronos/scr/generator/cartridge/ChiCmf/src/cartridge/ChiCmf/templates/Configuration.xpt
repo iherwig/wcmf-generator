@@ -71,14 +71,14 @@
 «REM» classMapping -----------------------------------------------«ENDREM»
 «DEFINE classMapping(String curConfig) FOR uml::Class»«ENDDEFINE»
 «DEFINE classMapping(String curConfig) FOR ChiController-»
-«this.name» = «this.getFullPackageName().asPath()»/«this.name.asClassFile()»
+«this.name» = «this.getFullPackageName().asPath()»/«this.name.asPhpClassFile()»
 «ENDDEFINE»
 «DEFINE classMapping(String curConfig) FOR ChiNode-»
 	«IF !this.isLibraryClass()-»
 		«FOREACH this.getRoleNames() AS curRoleName-»
-«curRoleName» = «this.getFullPackageName().asPath()»/«curRoleName.asClassFile()»
+«curRoleName» = «this.getFullPackageName().asPath()»/«curRoleName.asPhpClassFile()»
 			«IF !this.isAbstract-»
-«curRoleName.asMapper()» = «this.getFullPackageName().asPath()»/«curRoleName.asMapper().asClassFile()»
+«curRoleName.asMapper()» = «this.getFullPackageName().asPath()»/«curRoleName.asMapper().asPhpClassFile()»
 			«ENDIF-»
 		«ENDFOREACH-»
 	«ENDIF-»

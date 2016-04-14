@@ -18,7 +18,7 @@
 
 «DEFINE file FOR ChiNode»
 	«FOREACH this.getRoleNames() AS curRoleName-»
-		«FILE this.getFullPackageName().asPath()+"/"+curRoleName.asMapper().asClassFile()-»
+		«FILE this.getFullPackageName().asPath()+"/"+curRoleName.asMapper().asPhpClassFile()-»
 <?php
 «HeaderText()»
 /**
@@ -28,9 +28,9 @@
 «IF curRoleName == this.name-»
 require_once(BASE."wcmf/lib/model/mapper/class.NodeUnifiedRDBMapper.php");
 «ELSE-»
-require_once(BASE."«this.getFullPackageName().asPath()»/«this.name.asMapper().asClassFile()»");
+require_once(BASE."«this.getFullPackageName().asPath()»/«this.name.asMapper().asPhpClassFile()»");
 «ENDIF-»
-require_once(BASE."«this.getFullPackageName().asPath()»/«curRoleName.asClassFile()»");
+require_once(BASE."«this.getFullPackageName().asPath()»/«curRoleName.asPhpClassFile()»");
 
 /**
  * @class «curRoleName.asMapper()»
@@ -123,7 +123,7 @@ class «curRoleName.asMapper()» extends «IF curRoleName == this.name»NodeUnifiedR
 «IF this.child_order != ""-»
       array('name' => 'child_order', 'value' => '«this.child_order»'),
 «ENDIF-»
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asMapper().asClassFile()+"/Properties").asProtectedRegionId()»
+«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asMapper().asPhpClassFile()+"/Properties").asProtectedRegionId()»
 «ENDPROTECT»
     );
     $nodeDef['_datadef'] = array
