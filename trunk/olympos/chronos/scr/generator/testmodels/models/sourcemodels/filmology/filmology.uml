@@ -1976,14 +1976,6 @@ be modelled in a view.&lt;/span></body>
               <ownedComment xmi:id="_YE-wNXTMEeC6BJVq2iXpNA" annotatedElement="_YE-wNHTMEeC6BJVq2iXpNA">
                 <body>&lt;br></body>
               </ownedComment>
-              <packagedElement xmi:type="uml:Class" xmi:id="_YE-wNnTMEeC6BJVq2iXpNA" name="Node">
-                <eAnnotations xmi:id="_YE_VcHTMEeC6BJVq2iXpNA" source="http://www.eclipse.org/uml2/2.0.0/UML">
-                  <details xmi:id="_YE_VcXTMEeC6BJVq2iXpNA" key="CHRONOS_ID_KEYWORD_ChiNode:78021"/>
-                </eAnnotations>
-                <ownedComment xmi:id="_YE_VcnTMEeC6BJVq2iXpNA" annotatedElement="_YE-wNnTMEeC6BJVq2iXpNA">
-                  <body>?</body>
-                </ownedComment>
-              </packagedElement>
               <packagedElement xmi:type="uml:Package" xmi:id="_YE_Vc3TMEeC6BJVq2iXpNA" name="model">
                 <ownedComment xmi:id="_YE_VdHTMEeC6BJVq2iXpNA" annotatedElement="_YE_Vc3TMEeC6BJVq2iXpNA">
                   <body>&lt;br></body>
@@ -1994,95 +1986,6 @@ be modelled in a view.&lt;/span></body>
               <ownedComment xmi:id="_YE_VdnTMEeC6BJVq2iXpNA" annotatedElement="_YE_VdXTMEeC6BJVq2iXpNA">
                 <body>&lt;br></body>
               </ownedComment>
-              <packagedElement xmi:type="uml:Class" xmi:id="_YE_Vd3TMEeC6BJVq2iXpNA" name="Controller">
-                <ownedComment xmi:id="_YE_VeHTMEeC6BJVq2iXpNA" annotatedElement="_YE_Vd3TMEeC6BJVq2iXpNA">
-                  <body>?</body>
-                </ownedComment>
-                <ownedAttribute xmi:id="_YE_VeXTMEeC6BJVq2iXpNA" name="" type="_YE-uo3TMEeC6BJVq2iXpNA" association="_YE-vgHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VenTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Ve3TMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VfHTMEeC6BJVq2iXpNA" name="" type="_YE-uqHTMEeC6BJVq2iXpNA" association="_YE-viHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VfXTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VfnTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_Vf3TMEeC6BJVq2iXpNA" name="" type="_YE-urnTMEeC6BJVq2iXpNA" association="_YE-vjHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VgHTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VgXTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VgnTMEeC6BJVq2iXpNA" name="" type="_YE-usHTMEeC6BJVq2iXpNA" association="_YE-vkHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vg3TMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VhHTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VhXTMEeC6BJVq2iXpNA" name="" type="_YE-usnTMEeC6BJVq2iXpNA" association="_YE-vlHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VhnTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vh3TMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_ViHTMEeC6BJVq2iXpNA" name="" type="_YE-utHTMEeC6BJVq2iXpNA" association="_YE-vmHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_ViXTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VinTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_Vi3TMEeC6BJVq2iXpNA" name="" type="_YE-utHTMEeC6BJVq2iXpNA" association="_YE-voHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VjHTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VjXTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VjnTMEeC6BJVq2iXpNA" name="" type="_YE-uzHTMEeC6BJVq2iXpNA" association="_YE-vtHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vj3TMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VkHTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VkXTMEeC6BJVq2iXpNA" name="" type="_YE-uznTMEeC6BJVq2iXpNA" association="_YE-vuHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VknTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vk3TMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VlHTMEeC6BJVq2iXpNA" name="" type="_YE-u0HTMEeC6BJVq2iXpNA" association="_YE-vvHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VlXTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VlnTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_Vl3TMEeC6BJVq2iXpNA" name="" type="_YE-u2nTMEeC6BJVq2iXpNA" association="_YE-vxHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VmHTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VmXTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VmnTMEeC6BJVq2iXpNA" name="" type="_YE-u4nTMEeC6BJVq2iXpNA" association="_YE-vyHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vm3TMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VnHTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VnXTMEeC6BJVq2iXpNA" name="" type="_YE-u53TMEeC6BJVq2iXpNA" association="_YE-v0HTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VnnTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vn3TMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VoHTMEeC6BJVq2iXpNA" name="" type="_YE-u7HTMEeC6BJVq2iXpNA" association="_YE-v2HTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VoXTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VonTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_Vo3TMEeC6BJVq2iXpNA" name="" type="_YE-u7nTMEeC6BJVq2iXpNA" association="_YE-v3HTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VpHTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VpXTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VpnTMEeC6BJVq2iXpNA" name="" type="_YE-u_nTMEeC6BJVq2iXpNA" association="_YE-v7HTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vp3TMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VqHTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VqXTMEeC6BJVq2iXpNA" name="" type="_YE-vDnTMEeC6BJVq2iXpNA" association="_YE-wAHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VqnTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vq3TMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VrHTMEeC6BJVq2iXpNA" name="" type="_YE-vGnTMEeC6BJVq2iXpNA" association="_YE-vTHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VrXTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VrnTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_Vr3TMEeC6BJVq2iXpNA" name="" type="_YE-vLHTMEeC6BJVq2iXpNA" association="_YE-vXHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VsHTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VsXTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VsnTMEeC6BJVq2iXpNA" name="" type="_YE-vNHTMEeC6BJVq2iXpNA" association="_YE-vZHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vs3TMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VtHTMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-                <ownedAttribute xmi:id="_YE_VtXTMEeC6BJVq2iXpNA" name="" type="_YE-vQXTMEeC6BJVq2iXpNA" association="_YE-veHTMEeC6BJVq2iXpNA">
-                  <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VtnTMEeC6BJVq2iXpNA" value="1"/>
-                  <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vt3TMEeC6BJVq2iXpNA" value="1"/>
-                </ownedAttribute>
-              </packagedElement>
               <packagedElement xmi:type="uml:Package" xmi:id="_YE_VuHTMEeC6BJVq2iXpNA" name="presentation">
                 <ownedComment xmi:id="_YE_VuXTMEeC6BJVq2iXpNA" annotatedElement="_YE_VuHTMEeC6BJVq2iXpNA">
                   <body>&lt;br></body>
@@ -2117,6 +2020,103 @@ be modelled in a view.&lt;/span></body>
                 </ownedComment>
               </packagedElement>
             </packagedElement>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_YE-wNnTMEeC6BJVq2iXpNA" name="Node">
+            <eAnnotations xmi:id="_YE_VcHTMEeC6BJVq2iXpNA" source="http://www.eclipse.org/uml2/2.0.0/UML">
+              <details xmi:id="_YE_VcXTMEeC6BJVq2iXpNA" key="CHRONOS_ID_KEYWORD_ChiNode:78021"/>
+            </eAnnotations>
+            <ownedComment xmi:id="_YE_VcnTMEeC6BJVq2iXpNA" annotatedElement="_YE-wNnTMEeC6BJVq2iXpNA">
+              <body>?</body>
+            </ownedComment>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_YE_Vd3TMEeC6BJVq2iXpNA" name="Controller">
+            <ownedComment xmi:id="_YE_VeHTMEeC6BJVq2iXpNA" annotatedElement="_YE_Vd3TMEeC6BJVq2iXpNA">
+              <body>?</body>
+            </ownedComment>
+            <ownedAttribute xmi:id="_YE_VeXTMEeC6BJVq2iXpNA" name="" type="_YE-uo3TMEeC6BJVq2iXpNA" association="_YE-vgHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VenTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Ve3TMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VfHTMEeC6BJVq2iXpNA" name="" type="_YE-uqHTMEeC6BJVq2iXpNA" association="_YE-viHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VfXTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VfnTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_Vf3TMEeC6BJVq2iXpNA" name="" type="_YE-urnTMEeC6BJVq2iXpNA" association="_YE-vjHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VgHTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VgXTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VgnTMEeC6BJVq2iXpNA" name="" type="_YE-usHTMEeC6BJVq2iXpNA" association="_YE-vkHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vg3TMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VhHTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VhXTMEeC6BJVq2iXpNA" name="" type="_YE-usnTMEeC6BJVq2iXpNA" association="_YE-vlHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VhnTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vh3TMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_ViHTMEeC6BJVq2iXpNA" name="" type="_YE-utHTMEeC6BJVq2iXpNA" association="_YE-vmHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_ViXTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VinTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_Vi3TMEeC6BJVq2iXpNA" name="" type="_YE-utHTMEeC6BJVq2iXpNA" association="_YE-voHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VjHTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VjXTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VjnTMEeC6BJVq2iXpNA" name="" type="_YE-uzHTMEeC6BJVq2iXpNA" association="_YE-vtHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vj3TMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VkHTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VkXTMEeC6BJVq2iXpNA" name="" type="_YE-uznTMEeC6BJVq2iXpNA" association="_YE-vuHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VknTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vk3TMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VlHTMEeC6BJVq2iXpNA" name="" type="_YE-u0HTMEeC6BJVq2iXpNA" association="_YE-vvHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VlXTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VlnTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_Vl3TMEeC6BJVq2iXpNA" name="" type="_YE-u2nTMEeC6BJVq2iXpNA" association="_YE-vxHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VmHTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VmXTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VmnTMEeC6BJVq2iXpNA" name="" type="_YE-u4nTMEeC6BJVq2iXpNA" association="_YE-vyHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vm3TMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VnHTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VnXTMEeC6BJVq2iXpNA" name="" type="_YE-u53TMEeC6BJVq2iXpNA" association="_YE-v0HTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VnnTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vn3TMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VoHTMEeC6BJVq2iXpNA" name="" type="_YE-u7HTMEeC6BJVq2iXpNA" association="_YE-v2HTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VoXTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VonTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_Vo3TMEeC6BJVq2iXpNA" name="" type="_YE-u7nTMEeC6BJVq2iXpNA" association="_YE-v3HTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VpHTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VpXTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VpnTMEeC6BJVq2iXpNA" name="" type="_YE-u_nTMEeC6BJVq2iXpNA" association="_YE-v7HTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vp3TMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VqHTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VqXTMEeC6BJVq2iXpNA" name="" type="_YE-vDnTMEeC6BJVq2iXpNA" association="_YE-wAHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VqnTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vq3TMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VrHTMEeC6BJVq2iXpNA" name="" type="_YE-vGnTMEeC6BJVq2iXpNA" association="_YE-vTHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VrXTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VrnTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_Vr3TMEeC6BJVq2iXpNA" name="" type="_YE-vLHTMEeC6BJVq2iXpNA" association="_YE-vXHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VsHTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VsXTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VsnTMEeC6BJVq2iXpNA" name="" type="_YE-vNHTMEeC6BJVq2iXpNA" association="_YE-vZHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_Vs3TMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_VtHTMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_YE_VtXTMEeC6BJVq2iXpNA" name="" type="_YE-vQXTMEeC6BJVq2iXpNA" association="_YE-veHTMEeC6BJVq2iXpNA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YE_VtnTMEeC6BJVq2iXpNA" value="1"/>
+              <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YE_Vt3TMEeC6BJVq2iXpNA" value="1"/>
+            </ownedAttribute>
           </packagedElement>
         </packagedElement>
         <packagedElement xmi:type="uml:Package" xmi:id="_YE_VyHTMEeC6BJVq2iXpNA" name="application">
@@ -3626,7 +3626,7 @@ be modelled in a view.&lt;/span></body>
   <Chronos:ChiView xmi:id="_YFKUnXTMEeC6BJVq2iXpNA" base_Class="_YE-wLHTMEeC6BJVq2iXpNA"/>
   <Chronos:ChiView xmi:id="_YFKUnnTMEeC6BJVq2iXpNA" base_Class="_YE-wLnTMEeC6BJVq2iXpNA"/>
   <Chronos:ChiDiagram xmi:id="_YFKUn3TMEeC6BJVq2iXpNA" Alias="Chi325Dia" Status="Proposed" base_Package="_YE-wMHTMEeC6BJVq2iXpNA"/>
-  <Chronos:ChiNode xmi:id="_YFKUoHTMEeC6BJVq2iXpNA" Alias="Chi1740Nod" created="2011-02-03 17:09:40" creator="admin" last_editor="admin" modified="2011-02-03 17:10:07" Status="Proposed" base_Class="_YE-wNnTMEeC6BJVq2iXpNA" display_value="name" is_searchable="true" is_soap="true"/>
+  <Chronos:ChiNode xmi:id="_YFKUoHTMEeC6BJVq2iXpNA" Alias="Chi1740Nod" Author="Ingo" created="2011-02-03 17:09:40" creator="admin" last_editor="admin" modified="2011-02-03 17:10:07" Status="Proposed" base_Class="_YE-wNnTMEeC6BJVq2iXpNA" child_order="none" display_value="name" is_searchable="true" is_soap="true" parent_order="none"/>
   <Chronos:ChiDiagram xmi:id="_YFKUoXTMEeC6BJVq2iXpNA" Alias="Chi327Dia" Status="Proposed" base_Package="_YE_Vc3TMEeC6BJVq2iXpNA"/>
   <Chronos:ChiController xmi:id="_YFKUonTMEeC6BJVq2iXpNA" base_Class="_YE_Vd3TMEeC6BJVq2iXpNA"/>
   <Chronos:ChiDiagram xmi:id="_YFK7oHTMEeC6BJVq2iXpNA" Alias="Chi328Dia" Status="Proposed" base_Package="_YE_VuHTMEeC6BJVq2iXpNA"/>
@@ -3708,15 +3708,15 @@ be modelled in a view.&lt;/span></body>
   <Chronos:ChiDiagram xmi:id="_YFNX4nTMEeC6BJVq2iXpNA" Alias="Chi359Dia" Status="Proposed" base_Package="_YE_W1HTMEeC6BJVq2iXpNA"/>
   <Chronos:ChiDiagram xmi:id="_YFNX43TMEeC6BJVq2iXpNA" Alias="Chi400Dia" Status="Proposed" base_Package="_YE_W1nTMEeC6BJVq2iXpNA"/>
   <Chronos:ChiNode xmi:id="_YFNX5HTMEeC6BJVq2iXpNA" Alias="Chi2898Nod" created="2011-02-21 14:18:17" creator="admin" last_editor="admin" modified="2011-04-14 12:11:39" Status="Proposed" base_Class="_YE_W2nTMEeC6BJVq2iXpNA" display_value="name" is_searchable="true"/>
-  <Chronos:ChiValueRef xmi:id="_YFNX5XTMEeC6BJVq2iXpNA" base_Property="_YE_W33TMEeC6BJVq2iXpNA" reference_value="ChiValue:79654" reference_type="ChiNode:79661"/>
+  <Chronos:ChiValueRef xmi:id="_YFNX5XTMEeC6BJVq2iXpNA" base_Property="_YE_W33TMEeC6BJVq2iXpNA" reference_type="ChiNode:79661"/>
   <Chronos:ChiValue xmi:id="_YFNX5nTMEeC6BJVq2iXpNA" base_Property="_YE_W33TMEeC6BJVq2iXpNA"/>
-  <Chronos:ChiValueRef xmi:id="_YFNX53TMEeC6BJVq2iXpNA" base_Property="_YE_W4XTMEeC6BJVq2iXpNA" reference_value="ChiValue:79669" reference_type="ChiNode:79661"/>
+  <Chronos:ChiValueRef xmi:id="_YFNX53TMEeC6BJVq2iXpNA" base_Property="_YE_W4XTMEeC6BJVq2iXpNA" reference_type="ChiNode:79661"/>
   <Chronos:ChiValue xmi:id="_YFNX6HTMEeC6BJVq2iXpNA" base_Property="_YE_W4XTMEeC6BJVq2iXpNA"/>
-  <Chronos:ChiValueRef xmi:id="_YFNX6XTMEeC6BJVq2iXpNA" base_Property="_YE_W43TMEeC6BJVq2iXpNA" reference_value="ChiValue:79654" reference_type="ChiNode:79647"/>
+  <Chronos:ChiValueRef xmi:id="_YFNX6XTMEeC6BJVq2iXpNA" base_Property="_YE_W43TMEeC6BJVq2iXpNA" reference_type="ChiNode:79647"/>
   <Chronos:ChiValue xmi:id="_YFNX6nTMEeC6BJVq2iXpNA" base_Property="_YE_W43TMEeC6BJVq2iXpNA"/>
-  <Chronos:ChiValueRef xmi:id="_YFNX63TMEeC6BJVq2iXpNA" base_Property="_YE_8gXTMEeC6BJVq2iXpNA" reference_value="ChiValue:79664" reference_type="ChiNode:79661"/>
+  <Chronos:ChiValueRef xmi:id="_YFNX63TMEeC6BJVq2iXpNA" base_Property="_YE_8gXTMEeC6BJVq2iXpNA" reference_type="ChiNode:79661"/>
   <Chronos:ChiValue xmi:id="_YFNX7HTMEeC6BJVq2iXpNA" base_Property="_YE_8gXTMEeC6BJVq2iXpNA"/>
-  <Chronos:ChiValueRef xmi:id="_YFNX7XTMEeC6BJVq2iXpNA" base_Property="_YE_8g3TMEeC6BJVq2iXpNA" reference_value="ChiValue:79665" reference_type="ChiNode:79661"/>
+  <Chronos:ChiValueRef xmi:id="_YFNX7XTMEeC6BJVq2iXpNA" base_Property="_YE_8g3TMEeC6BJVq2iXpNA" reference_type="ChiNode:79661"/>
   <Chronos:ChiValue xmi:id="_YFNX7nTMEeC6BJVq2iXpNA" base_Property="_YE_8g3TMEeC6BJVq2iXpNA"/>
   <Chronos:ChiNode xmi:id="_YFNX73TMEeC6BJVq2iXpNA" Alias="Chi3942Nod" created="2011-03-02 12:15:46" creator="admin" last_editor="admin" modified="2011-03-23 08:35:35" Status="Proposed" base_Class="_YE_8hXTMEeC6BJVq2iXpNA" display_value="name" is_searchable="true"/>
   <Chronos:ChiNode xmi:id="_YFNX8HTMEeC6BJVq2iXpNA" Alias="Chi3941Nod" created="2011-03-02 12:15:01" creator="admin" last_editor="admin" modified="2011-03-02 12:15:15" Status="Proposed" base_Class="_YE_8iXTMEeC6BJVq2iXpNA" display_value="name" is_searchable="true"/>

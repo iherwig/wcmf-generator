@@ -3325,7 +3325,6 @@ be modelled in a view.&lt;/span></body>
   <Chronos:ChiView xmi:id="_Ur63gl85EeCg0vnEYcx6wQ" base_Class="_UrjsN185EeCg0vnEYcx6wQ"/>
   <Chronos:ChiView xmi:id="_Ur63g185EeCg0vnEYcx6wQ" base_Class="_UrjsOV85EeCg0vnEYcx6wQ"/>
   <Chronos:ChiDiagram xmi:id="_Ur63hF85EeCg0vnEYcx6wQ" Alias="Chi325Dia" Status="Proposed" base_Package="_UrjsO185EeCg0vnEYcx6wQ"/>
-  <Chronos:ChiNode xmi:id="_Ur63hV85EeCg0vnEYcx6wQ" Alias="Chi1740Nod" created="2011-02-03 17:09:40" creator="admin" last_editor="admin" modified="2011-02-03 17:10:07" Status="Proposed" base_Class="_UrjsQV85EeCg0vnEYcx6wQ" display_value="name" is_searchable="true" is_soap="true"/>
   <Chronos:ChiDiagram xmi:id="_Ur63hl85EeCg0vnEYcx6wQ" Alias="Chi327Dia" Status="Proposed" base_Package="_UrjsRV85EeCg0vnEYcx6wQ"/>
   <Chronos:ChiController xmi:id="_UtdIkF85EeCg0vnEYcx6wQ" base_Class="_UrjsSV85EeCg0vnEYcx6wQ"/>
   <Chronos:ChiDiagram xmi:id="_UteWsF85EeCg0vnEYcx6wQ" Alias="Chi328Dia" Status="Proposed" base_Package="_UrkSQl85EeCg0vnEYcx6wQ"/>
@@ -3509,4 +3508,5 @@ be modelled in a view.&lt;/span></body>
   <Chronos:ChiValue xmi:id="_UtmSjF85EeCg0vnEYcx6wQ" base_Property="_Urlgcl85EeCg0vnEYcx6wQ"/>
   <Chronos:ChiValue xmi:id="_UtmSjV85EeCg0vnEYcx6wQ" base_Property="_UrlgdV85EeCg0vnEYcx6wQ"/>
   <Chronos:ChiDiagram xmi:id="_UtmSjl85EeCg0vnEYcx6wQ" Alias="Chi336Dia" Status="Proposed" base_Package="_UrlgeF85EeCg0vnEYcx6wQ"/>
+  <Chronos:ChiNode xmi:id="_HNvkIAG1EeaqwKuuxhSAvA" base_Class="_UrjsQV85EeCg0vnEYcx6wQ"/>
 </xmi:XMI>
