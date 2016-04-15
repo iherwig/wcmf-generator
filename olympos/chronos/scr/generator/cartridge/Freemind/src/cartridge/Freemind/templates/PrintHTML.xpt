@@ -1,0 +1,51 @@
+«IMPORT uml»
+«IMPORT Chronos»
+«EXTENSION common::util»
+«EXTENSION common::umlutils»
+
+«EXTENSION cartridge::ChronosCommon::requirements::ChiGoal»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiRequirement»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiFeature»
+«EXTENSION cartridge::ChronosCommon::requirements::ChiIssue»
+«EXTENSION cartridge::ChronosCommon::usecases::ChiBusinessUseCase»
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+
+
+«DEFINE PrintHTML FOR Model»
+
+<!DOCTYPE html>
+<html>
+«EXPAND Head FOR this»
+«EXPAND Body FOR this»
+«ENDDEFINE»
+
+
+</html>
+«DEFINE Head FOR  uml::Model»
+<head>
+<style>
+div.node {
+    background-color:black;
+    color:white;
+    margin:20px;
+    padding:20px;
+} 
+</style>
+</head>
+«ENDDEFINE»
+
+«DEFINE Body FOR Model»
+<body>
+«EXPAND printElement FOREACH this.allOwnedElements().typeSelect(Chronos::ChiNode)»
+</body>
+«ENDDEFINE»
+
+«DEFINE printElement FOR Chronos::ChiNode»
+«info('html Expanding element' + this.name)-»
+<div class="node">
+<h2>«this.name»</h2>
+<p>«this.getComment()»</p>
+</div>
+«ENDDEFINE»
+«ENDFILE»
+

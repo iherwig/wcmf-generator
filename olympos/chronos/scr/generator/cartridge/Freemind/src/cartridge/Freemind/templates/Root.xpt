@@ -17,4 +17,7 @@
 	«EXPAND cartridge::Freemind::templates::freemind::printChiGoal FOREACH this.allOwnedElements().typeSelect(Chronos::ChiGoal)»	
 	«EXPAND cartridge::Freemind::templates::freemind::printFooter FOR this»
 	«ENDFILE»
+	«FILE projectName() + ".html"»
+	«EXPAND cartridge::Freemind::templates::PrintHTML::PrintHTML FOR this»
+	«ENDFILE»
 «ENDDEFINE»
