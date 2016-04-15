@@ -2,6 +2,8 @@
 «IMPORT Chronos»
 «EXTENSION common::util»
 «EXTENSION common::umlutils»
+«EXTENSION cartridge::Freemind::extensions::util»
+«EXTENSION cartridge::Freemind::extensions::globals»
 
 «EXTENSION cartridge::ChronosCommon::requirements::ChiGoal»
 «EXTENSION cartridge::ChronosCommon::requirements::ChiRequirement»
@@ -36,6 +38,8 @@ div.node {
 
 «DEFINE Body FOR Model»
 <body>
+<h1>«projectName()»</h1>
+
 «EXPAND printElement FOREACH this.allOwnedElements().typeSelect(Chronos::ChiNode)»
 </body>
 «ENDDEFINE»
