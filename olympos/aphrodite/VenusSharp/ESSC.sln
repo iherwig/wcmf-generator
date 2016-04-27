@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESSC.Domain", "ESSC.Domain\ESSC.Domain.csproj", "{F87CC5E9-80F8-47FE-80A9-D0607A84DF4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{CEDA4049-5727-4170-8350-F0A397B84D6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESSC.Domain.Tests", "UnitTests\ESSC.Domain.Tests\ESSC.Domain.Tests.csproj", "{4885D36C-14C2-407F-BCE1-6B3534FC77CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESSC.ApplicationServices", "ESSC.ApplicationServices\ESSC.ApplicationServices.csproj", "{960C6DD7-F232-4E40-B6EE-815901EA5865}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Experiments", "Experiments", "{9857FA23-25C2-4752-8964-DCC412CD86D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ESSC.Experiment.Persistence.DB", "ESSC.Experiment.Persistence.DB\ESSC.Experiment.Persistence.DB.csproj", "{6CF85879-F51D-4310-BF8C-FCDF0B153022}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F87CC5E9-80F8-47FE-80A9-D0607A84DF4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F87CC5E9-80F8-47FE-80A9-D0607A84DF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F87CC5E9-80F8-47FE-80A9-D0607A84DF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F87CC5E9-80F8-47FE-80A9-D0607A84DF4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4885D36C-14C2-407F-BCE1-6B3534FC77CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4885D36C-14C2-407F-BCE1-6B3534FC77CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4885D36C-14C2-407F-BCE1-6B3534FC77CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4885D36C-14C2-407F-BCE1-6B3534FC77CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{960C6DD7-F232-4E40-B6EE-815901EA5865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{960C6DD7-F232-4E40-B6EE-815901EA5865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{960C6DD7-F232-4E40-B6EE-815901EA5865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{960C6DD7-F232-4E40-B6EE-815901EA5865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF85879-F51D-4310-BF8C-FCDF0B153022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF85879-F51D-4310-BF8C-FCDF0B153022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF85879-F51D-4310-BF8C-FCDF0B153022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF85879-F51D-4310-BF8C-FCDF0B153022}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4885D36C-14C2-407F-BCE1-6B3534FC77CB} = {CEDA4049-5727-4170-8350-F0A397B84D6F}
+		{6CF85879-F51D-4310-BF8C-FCDF0B153022} = {9857FA23-25C2-4752-8964-DCC412CD86D9}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://gwtfs01:8080/tfs/coe
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ESSC.Domain\\ESSC.Domain.csproj
+		SccProjectName1 = ESSC.Domain
+		SccLocalPath1 = ESSC.Domain
+		SccProjectUniqueName2 = UnitTests\\ESSC.Domain.Tests\\ESSC.Domain.Tests.csproj
+		SccProjectTopLevelParentUniqueName2 = ESSC.sln
+		SccProjectName2 = UnitTests/ESSC.Domain.Tests
+		SccLocalPath2 = UnitTests\\ESSC.Domain.Tests
+		SccProjectUniqueName3 = ESSC.ApplicationServices\\ESSC.ApplicationServices.csproj
+		SccProjectName3 = ESSC.ApplicationServices
+		SccLocalPath3 = ESSC.ApplicationServices
+		SccProjectUniqueName4 = ESSC.Experiment.Persistence.DB\\ESSC.Experiment.Persistence.DB.csproj
+		SccProjectTopLevelParentUniqueName4 = ESSC.sln
+		SccProjectName4 = ESSC.Experiment.Persistence.DB
+		SccLocalPath4 = ESSC.Experiment.Persistence.DB
+	EndGlobalSection
+EndGlobal
