@@ -32,41 +32,15 @@ String defaultPKName(uml::Type type) : "id";
 String defaultOrderByName() : "sortkey";
 
 /**
- * PHP related
+ * Class related
  */
 
 /**
- * Convert a package name into a php package
- */
-String asPhpPackage(String package) : package.replaceAll("\\.", "\\\\");
-
-/**
- * Get the php class file name for a class
+ * Get the name for a class
  */
 String asType(String string) :
 	JAVA net.sourceforge.olympos.oaw.extend.Util.toCamelCase(java.lang.String)
 ;
-
-/**
- * Get the php class file name for a class
- */
-String asPhpClassFile(String name): name+".php";
-
-/**
- * Get the smarty file name for a class
- */
-String asTemplateFile(String name): name+".tpl";
-
-
-/**
- * Get the php mapper class name for a class */
- 
-String asMapper(String name): name+"RDBMapper";
-
-/**
- * Get the  base class file name for a class
- */
-String asBaseClass(String name): name+"Base";
 
 /**
  * Get the getter method name for a property
@@ -78,13 +52,34 @@ String asGetter(String name) : "get"+name.asType();
  */
 String asSetter(String name) : "set"+name.asType();
 
+/**
+ * PHP related
+ */
 
+/**
+ * Convert a package name into a php package
+ */
+String asPhpPackage(String package) : package.replaceAll("\\.", "\\\\");
+
+/**
+ * Get the php class file name for a class
+ */
+String asPhpClassFile(String name): name+".php";
 
 /**
  * Get the php base class file name for a class
  */
-String asPhpBaseClass(String name): name+"Base"+".php";
+String asBaseClass(String name): name+"Base";
 
+/**
+ * Get the php mapper class name for a class
+ */
+String asMapper(String name): name+"RDBMapper";
+
+/**
+ * Get the smarty file name for a class
+ */
+String asTemplateFile(String name): name+".tpl";
 
 /**
  * JS related
@@ -100,9 +95,6 @@ String asBaseJSClassFile(String name): name+".class.js";
  */
 String asJSClassFile(String name): name+"Class.class.js";
 
-/**
- * Get the input type for fie;ld
- */
 String getExtJsInputType(String str):
 	str.startsWith("fckeditor") || str.startsWith("RichText") ?
 		"HtmlEditor"
