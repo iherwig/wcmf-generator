@@ -15,7 +15,7 @@
 «REM» template expands the node base class files -----------------«ENDREM»
 «DEFINE file FOR ChiNode»
   «FOREACH this.getRoleNames() AS curRoleName»
-    «FILE this.getFullPackageName().asPath()+"/"+curRoleName.asPhpBaseClass()-»
+    «FILE this.getFullPackageName().asPath()+"/"+curRoleName.asBaseClass().asPhpClassFile()-»
 <?php
 «HeaderText()»
 /**
