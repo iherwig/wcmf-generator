@@ -26,7 +26,7 @@ use «this.getFullPackageName().asPhpPackage()»\«this.name.asBaseClass()»;
 «ENDPROTECT»
 
 /**
- * «IF this.getComment("\n * ") != ""»«this.getComment("\n * ")»«ELSE»«this.name»«ENDIF»
+ * «IF !this.getComment("\n * ").isNullOrEmpty()»«this.getComment("\n * ")»«ELSE»«this.name»«ENDIF»
  */
 class «this.name» extends «this.name»Base {
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Body").asProtectedRegionId()»
@@ -40,7 +40,7 @@ class «this.name» extends «this.name»Base {
 «REM» operation --------------------------------------------------«ENDREM»
 «DEFINE operation(Chronos::ChiNode class) FOR uml::Operation»
   /**
-   * «IF this.getComment("\n   * ") != ""»«this.getComment("\n   * ")»«ELSE»«class.name»::«this.name»«ENDIF»
+   * «IF !this.getComment("\n   * ").isNullOrEmpty()»«this.getComment("\n   * ")»«ELSE»«class.name»::«this.name»«ENDIF»
   «FOREACH this.ownedParameter AS p-»
     «IF p.direction.toString() != "return"-»
    * @param «p.name»

@@ -51,9 +51,9 @@ CREATE TABLE `«this.getTableName()»` -- entityType=«name» tableId=«IF !isNu
       «ENDFOREACH-»
     «IF this.getOrderByName() == defaultOrderByName()-»
       «FOREACH this.getParentNodesRecursive() AS curParent-»
-  `«this.getOrderByNameForParent(curParent)»` INT(11), -- columnId=«this.getOrderByNameForParent(curParent)»
+  `«this.getOrderByNameForParent(curParent)»` DECIMAL(41,30), -- columnId=«this.getOrderByNameForParent(curParent)»
       «ENDFOREACH-»
-  `«this.getOrderByName()»` INT(11), -- columnId=«this.getOrderByName()»
+  `«this.getOrderByName()»` DECIMAL(41,30), -- columnId=«this.getOrderByName()»
     «ENDIF-»
   PRIMARY KEY («EXPAND columnName FOREACH this.getPKValues() SEPARATOR ','-»)
 );
