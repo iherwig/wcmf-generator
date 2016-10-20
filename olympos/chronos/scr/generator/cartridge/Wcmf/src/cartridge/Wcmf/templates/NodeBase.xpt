@@ -38,12 +38,12 @@ class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getS
    * Constructor
    * @param oid ObjectId instance (optional)
    */
-  public function __construct($oid=null) {
+  public function __construct(ObjectId $oid=null, array $initialData=null) {
 «IF this.hasSuperClass()-»
     if ($oid == null) {
       $oid = new ObjectId('«this.name»');
     }
-    parent::__construct($oid);
+    parent::__construct($oid, $initialData);
 «ENDIF-»
   }
   «IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0 -»

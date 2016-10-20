@@ -173,8 +173,8 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
   /**
    * @see RDBMapper::createObject()
    */
-  protected function createObject(ObjectId $oid=null) {
-    return new «this.name»($oid);
+  protected function createObject(ObjectId $oid=null, array $initialData=null) {
+    return new «this.name»($oid, $initialData);
   }
 
   /**
