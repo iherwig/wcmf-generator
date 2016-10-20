@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS `«this.getTableName()»`;
 CREATE TABLE `«this.getTableName()»` -- entityType=«name» tableId=«IF !isNullOrEmpty(this.Alias)»«this.Alias»«ELSE»«this.getId()»«ENDIF»
 (
     «FOREACH this.getChiValuesRecursive() AS curValue-»
-  `«curValue.getColumnName()»` «curValue.db_data_type», -- columnId=«IF !isNullOrEmpty(this.Alias)»«this.Alias+"."+curValue.name»«ELSE»«curValue.getId()»«ENDIF» «IF curValue.isFKValue()»referencedTable=«curValue.getFKClass().name»«ENDIF»
+  `«curValue.getColumnName()»` «curValue.db_data_type», -- columnId=«IF isGeneratorAdded(curValue)»_generated_«ELSE»«IF !isNullOrEmpty(this.Alias)»«this.Alias+"."+curValue.name»«ELSE»«curValue.getId()»«ENDIF»«ENDIF» «IF curValue.isFKValue()»referencedTable=«curValue.getFKClass().name»«ENDIF»
       «ENDFOREACH-»
     «IF this.getOrderByName() == defaultOrderByName()-»
       «FOREACH this.getParentNodesRecursive() AS curParent-»
