@@ -29,8 +29,8 @@
     «info('Expand ChiNode '+this.name)»
     «IF !this.isAbstract»
       «EXPAND cartridge::Wcmf::templates::RDBMapper::file FOR this»
+      «EXPAND cartridge::Wcmf::templates::NodeBase::file FOR this»
     «ENDIF»
-    «EXPAND cartridge::Wcmf::templates::NodeBase::file FOR this»
     «EXPAND cartridge::Wcmf::templates::Node::file FOR this»
   «ENDIF»
 «ENDDEFINE»

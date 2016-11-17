@@ -21,14 +21,21 @@
  */
 namespace «this.getFullPackageName().asPhpPackage()»;
 
-use «this.getFullPackageName().asPhpPackage()»\«this.name.asBaseClass()»;
+«IF !this.isAbstract-»
+use «this.getFullPackageName().asPhpPackage()»\_base\«this.name.asBaseClass()»;
+«ELSE-»
+«IF this.hasSuperClass()-»
+use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuperClass().name»;
+«ENDIF-»
+«ENDIF-»
+
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Import").asProtectedRegionId()»
 «ENDPROTECT»
 
 /**
  * «IF !this.getComment("\n * ").isNullOrEmpty()»«this.getComment("\n * ")»«ELSE»«this.name»«ENDIF»
  */
-class «this.name» extends «this.name»Base {
+class «this.name»«IF !this.isAbstract» extends «this.name.asBaseClass()»«ELSE»«IF this.hasSuperClass()» extends «this.getSuperClass().name»«ENDIF»«ENDIF» {
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Body").asProtectedRegionId()»
 «ENDPROTECT»
 «EXPAND operation(this) FOREACH this.getOperations()-»
