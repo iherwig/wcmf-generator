@@ -32,7 +32,7 @@ use wcmf\lib\persistence\ObjectId;
 /**
  * «IF !this.getComment("\n * ").isNullOrEmpty()»«this.getComment("\n * ")»«ELSE»«this.name»«ENDIF»
  */
-class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperClass().name»«ENDIF» {
+abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «this.getSuperClass().name»«ENDIF» {
 
   /**
    * Constructor
