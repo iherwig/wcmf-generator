@@ -79,7 +79,7 @@
 «DEFINE mapper(String curConfig) FOR ChiNode-»
   «IF this.isApplicationClass() && !this.isAbstract-»
 [«this.getFullPackageName().asPackageName().replaceAll("\\.", "_")»_«this.name.asMapper()»]
-__class = «this.getFullPackageName().asPhpPackage()»\«this.name.asMapper()»
+__class = «this.getFullPackageName().asPhpPackage()»\_base\«this.name.asMapper()»
 connectionParams = $«this.getInitparams()»
 
   «ENDIF-»
