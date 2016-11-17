@@ -15,7 +15,11 @@ boolean hasSourceController(ChiActionKey this) :
  * Get the source controller of an action key
  */
 cached ChiController getSourceController(ChiActionKey this) :
-	this.memberEnd.select(e|e.isNavigable()).class.typeSelect(ChiController).first()
+  // the source end is owned by the controller
+	let firstTry = this.memberEnd.select(e|e.isNavigable()).class.typeSelect(ChiController).first() :
+    firstTry != null ? firstTry :
+      // the source end is owned by the association
+      this.memberEnd.select(e|!e.isNavigable()).type.typeSelect(ChiController).first()
 ;
 
 /**
