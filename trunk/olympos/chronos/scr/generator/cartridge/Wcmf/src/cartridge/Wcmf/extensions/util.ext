@@ -49,15 +49,12 @@ boolean isGeneratorInherited(uml::Element this) :
 ;
 
 /**
- * Configuration related methods
- */
- 
-/**
  * Check if a model contains a application configuration
  */
 boolean hasSystemConfig(uml::Model this) :
 	this.allOwnedElements().typeSelect(ChiSystem).size > 0
 ;
+
 /**
  * Get all configuration file names that are referenced in the model
  */
@@ -68,9 +65,30 @@ Set[String] getConfigurationFiles(uml::Model this) :
 ;
 
 /**
+ * Get all configuration sections (ChiSystem instances) from the given config
+ */
+cached List[ChiSystem] getConfigSections(uml::Model this, String config) :
+	this.allOwnedElements().typeSelect(ChiSystem).select(e|e.config == config)
+;
+
+/**
+ * Check if the given configuration file contains the given section
+ */
+boolean hasConfigSection(uml::Model this, String config, String section) :
+	this.getConfigSections(config).select(e|e.name.toLowerCase() == section.toLowerCase()).size > 0
+;
+
+/**
  * Check if a configuation file is the default one
  */
 boolean isDefaultConfig(String config) : config == DefaultConfigFile();
+
+/**
+ * Check all action keys for the given configuration
+ */
+cached List[ActionKey] getActionKeys(uml::Model model, String config) :
+  model.allOwnedElements().typeSelect(ChiActionKey).select(e|e.config == config)
+;
 
 /**
  * Get the primary key tagged value or default pk name if not set

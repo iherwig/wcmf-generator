@@ -1,4 +1,18 @@
 import uml;
 import Chronos;
 
+extension common::util;
+
 String STEREOTYPE_CHI_ASSOCIATION() : "Chronos::ChiAssociation";
+
+/**
+ * Split the given tagged value as into a list of values
+ * (NOTE: values are supposed to be separated by commas, but legacy |-separator is also supported)
+ */
+List[String] taggedValueAsList(String value) :
+	!value.isNullOrEmpty() ? (
+    value.split("\\||,").trim()
+	) : (
+		{}
+	)
+;
