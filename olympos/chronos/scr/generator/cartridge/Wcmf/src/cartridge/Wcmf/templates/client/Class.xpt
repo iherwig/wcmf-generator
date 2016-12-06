@@ -6,6 +6,8 @@
 «EXTENSION common::naming»
 
 «EXTENSION cartridge::ChronosCommon::naming»
+«EXTENSION cartridge::ChronosCommon::util»
+
 «EXTENSION cartridge::Wcmf::extensions::globals»
 «EXTENSION cartridge::Wcmf::extensions::umlutils»
 «EXTENSION cartridge::Wcmf::extensions::util»
@@ -42,8 +44,9 @@ define([
         typeName: "«this.getFullPackageName().asPackageName()».«this.name»",
         description: "«this.getComment(" ").replaceAll('\\"', '\\\\"')»",
         isSortable: «IF getOrderByName() == defaultOrderByName()-»true«ELSE-»false«ENDIF-»,
-        displayValues: [«FOREACH this.display_value.split("\\|") AS curValue SEPARATOR ", "-»"«curValue»"«ENDFOREACH-»],
+        displayValues: [«FOREACH this.display_value.taggedValueAsList() AS curValue SEPARATOR ", "-»"«curValue»"«ENDFOREACH-»],
         pkNames: [«FOREACH this.getPKValues() AS curPk SEPARATOR ', '-»"«curPk.name»"«ENDFOREACH-»],
+        relationOrder: [«FOREACH this.child_order.taggedValueAsList() AS curRelation SEPARATOR ", "-»"«curRelation»"«ENDFOREACH-»],
 
 «LET this.getChiValuesRecursive() AS values-»
 «LET this.getChiValueRefs() AS references-»
@@ -57,7 +60,7 @@ define([
             displayType: "«curValue.display_type»",
             validateType: "«curValue.restrictions_match.replaceAll('\\"', '\\\\"')»",
             validateDesc: "«curValue.restrictions_description.replaceAll('\\"', '\\\\"')»",
-            tags: [«FOREACH curValue.app_data_type.split("\\|") AS curTag SEPARATOR ", "-»"«curTag»"«ENDFOREACH-»],
+            tags: [«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»"«curTag»"«ENDFOREACH-»],
             defaultValue: «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»"«curValue.defaultValue.stringValue().replaceAll('\\"', '\\\\"')»"«ENDIF»,
             isReference: false
 «ENDFOREACH-»«IF values.size > 0 && references.size > 0-»        }, {«ENDIF-»

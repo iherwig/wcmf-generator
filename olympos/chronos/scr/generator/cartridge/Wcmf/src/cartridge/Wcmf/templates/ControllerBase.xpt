@@ -61,7 +61,7 @@ abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «
   «FOREACH this.ownedParameter AS p-»
     «IF p.direction.toString() != "return"-»
       «IF p.type.name.toLowerCase() == 'integer'-»
-        $params[] = $request->getValue('«p.name»', «IF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«p.defaultValue.stringValue()»«ENDIF», FILTER_VALIDATE_INT);
+        $params[] = $request->getValue('«p.name»', «IF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«p.defaultValue.stringValue()»«ENDIF», 'filter:{"type":"number_int"}');
       «ELSE-»
         $params[] = $request->getValue('«p.name»', «IF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«p.defaultValue.stringValue().replaceAll("'", "\\\\'")»'«ENDIF»);
       «ENDIF-»

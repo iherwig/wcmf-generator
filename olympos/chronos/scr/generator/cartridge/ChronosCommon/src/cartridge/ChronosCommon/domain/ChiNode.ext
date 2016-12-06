@@ -149,7 +149,7 @@ String getTableName(ChiNode this) :
  * Get all order attribute names from the orderby tagged value
  */
 String getOrderByNames(ChiNode this) :
-	this.orderby.split("\\|").trim().collect(v|v.split(" ").first().trim()).select(v|v != "none")
+	this.orderby.taggedValueAsList().collect(v|v.split(" ").first().trim()).select(v|v != "none")
 ;
 
 /**
@@ -175,7 +175,7 @@ String getOrderByName(ChiNode this) :
  * Get the order direction for the given order attribute from the orderby tagged value (ASC or DESC, defaults to ASC)
  */
 String getOrderByDirection(ChiNode this, String name) :
-	let dir = this.orderby.split("\\|").trim().select(v|v.split(" ").first().trim() == name).split(" ").last().trim() :
+	let dir = this.orderby.taggedValueAsList().select(v|v.split(" ").first().trim() == name).split(" ").last().trim() :
 		dir.toUpperCase() == "ASC" || dir.toUpperCase() == "DESC" ? dir.toUpperCase() : "ASC"
 ;
 
@@ -225,8 +225,8 @@ String getFKName(Property parent) :
  * Get the primary keys (from the tagged value)
  */
 List[ChiValue] getPKValues(ChiNode this) :
-	let pkNameStr = this.pk_name.split("\\|") :
-		this.getChiValuesRecursive().select(v|pkNameStr.contains(v.name))
+	let pkNames = this.pk_name.taggedValueAsList() :
+		this.getChiValuesRecursive().select(v|pkNames.contains(v.name))
 ;
 
 /**

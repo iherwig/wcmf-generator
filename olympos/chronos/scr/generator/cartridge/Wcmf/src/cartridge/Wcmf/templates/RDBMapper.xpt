@@ -6,6 +6,8 @@
 «EXTENSION common::naming»
 
 «EXTENSION cartridge::ChronosCommon::naming»
+«EXTENSION cartridge::ChronosCommon::util»
+
 «EXTENSION cartridge::Wcmf::extensions::globals»
 «EXTENSION cartridge::Wcmf::extensions::umlutils»
 «EXTENSION cartridge::Wcmf::extensions::util»
@@ -100,15 +102,12 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
 «IF this.metaType.toString().contains("ChiManyToMany")-»
       'manyToMany' => array(«FOREACH this.getParentNodes() AS curParent SEPARATOR ', '»'«curParent.getRoleName()»'«ENDFOREACH»),
 «ENDIF-»
-      'is_searchable' => «this.is_searchable.boolString()»,
+      'isSearchable' => «this.is_searchable.boolString()»,
 «IF !this.display_value.isNullOrEmpty()-»
-      'display_value' => '«this.display_value»',
-«ENDIF-»
-«IF !this.parent_order.isNullOrEmpty()-»
-      'parent_order' => '«this.parent_order»',
+      'displayValues' => array(«FOREACH this.display_value.taggedValueAsList() AS curValue SEPARATOR ', '-»'«curValue»'«ENDFOREACH-»),
 «ENDIF-»
 «IF !this.child_order.isNullOrEmpty()-»
-      'child_order' => '«this.child_order»',
+      'relationOrder' => array(«FOREACH this.child_order.taggedValueAsList() AS curValue SEPARATOR ', '-»'«curValue»'«ENDFOREACH-»),
 «ENDIF-»
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/_base/"+this.name.asMapper().asPhpClassFile()+"/Properties").asProtectedRegionId()»
 «ENDPROTECT»
@@ -270,7 +269,7 @@ new RDBManyToOneRelationDescription(
      /**
       * «curValue.getComment(" ")»
       */
-      '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', array(«FOREACH curValue.app_data_type.split("\\|") AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»), «REM»NOBR«ENDREM-»
+      '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', array(«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»), «REM»NOBR«ENDREM-»
 «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue().replaceAll("'", "\\\\'")»'«ENDIF», '«curValue.restrictions_match.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 «IF !curValue.restrictions_description.isNullOrEmpty()-»'«curValue.restrictions_description.replaceAll("'", "\\\\'")»'«ELSE-»''«ENDIF-», «curValue.is_editable.boolString()», '«curValue.input_type.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 '«curValue.display_type»', '«getTableName()»', '«curValue.getColumnName()»'),

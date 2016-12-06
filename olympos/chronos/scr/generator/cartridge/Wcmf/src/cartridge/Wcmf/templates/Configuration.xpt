@@ -37,32 +37,40 @@
 «REM» sections ---------------------------------------------------«ENDREM»
 «DEFINE sections(String curConfig) FOR ChiSystem-»
   «IF this.plattform == "wcmf"-»
-    «IF this.config == curConfig ||
-      (this.name.toLowerCase() == "actionmapping"  && this.getModel().allOwnedElements().typeSelect(ChiActionKey).select(e|e.config == curConfig).size > 0) ||
-      (this.name.toLowerCase() == "views" && this.getModel().allOwnedElements().typeSelect(ChiActionKey).select(e|e.config == curConfig).size > 0)-»
+  «LET getActionKeys(this.getModel(), curConfig) AS actionKeys-»
+    «IF this.config == curConfig || (actionKeys.size > 0 && !hasConfigSection(this.getModel(), curConfig, this.name) &&
+      (this.name.toLowerCase() == "actionmapping" || this.name.toLowerCase() == "views" || this.name.toLowerCase() == "routes"))-»
 [«this.name»]
+«IF !this.getComment("\n; ").isNullOrEmpty()»; «this.getComment("\n; ")»
+«ENDIF-»
 «PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/config/"+curConfig+"/"+this.name+"SectionBegin").asProtectedRegionId()»
 «ENDPROTECT»
+    «IF this.config == curConfig-»
+      «FOREACH this.ownedAttribute AS curAttribute-»
+«IF !curAttribute.getComment("\n; ").isNullOrEmpty()»; «curAttribute.getComment("\n; ")»
+«ENDIF-»
+«curAttribute.name» = «curAttribute.defaultValue.stringValue()»
+      «ENDFOREACH-»
+    «ENDIF-»
     «IF curConfig.isDefaultConfig()-»
       «IF this.name.toLowerCase() == "typemapping"-»
         «EXPAND typeMapping(curConfig) FOREACH this.getModel().allOwnedElements().typeSelect(uml::Class)-»
       «ENDIF-»
     «ENDIF-»
     «IF this.name.toLowerCase() == "actionmapping"-»
-      «EXPAND actionMapping(curConfig) FOREACH this.getModel().allOwnedElements().typeSelect(ChiActionKey).select(e|e.config == curConfig)-»
+      «EXPAND actionMapping(curConfig) FOREACH actionKeys-»
     «ENDIF-»
     «IF this.name.toLowerCase() == "views"-»
-      «EXPAND views(curConfig) FOREACH this.getModel().allOwnedElements().typeSelect(ChiActionKey).select(e|e.config == curConfig)-»
+      «EXPAND views(curConfig) FOREACH actionKeys-»
     «ENDIF-»
-    «IF this.config == curConfig-»
-      «FOREACH this.ownedAttribute AS curAttribute-»
-«curAttribute.name» = «curAttribute.defaultValue.stringValue()»
-      «ENDFOREACH-»
+    «IF this.name.toLowerCase() == "routes"-»
+      «EXPAND routes(curConfig) FOREACH actionKeys-»
     «ENDIF-»
 «PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/config/"+curConfig+"/"+this.name+"SectionEnd").asProtectedRegionId()»
 «ENDPROTECT»
 
     «ENDIF-»
+  «ENDLET-»
   «ENDIF-»
 «ENDDEFINE»
 
@@ -101,5 +109,12 @@ connectionParams = $«this.getInitparams()»
   «IF this.hasSourceController() && this.hasTargetView()-»
 «this.getSourceController().getFullPackageName().asPhpPackage()»\«this.getSourceController().name»?«this.context»?«this.action» = «this.getTargetView().getFullPackageName().asPath()-»
 /«this.getTargetView().name.asTemplateFile()»
+  «ENDIF-»
+«ENDDEFINE»
+
+«REM» routes ------------------------------------------------------«ENDREM»
+«DEFINE routes(String curConfig) FOR ChiActionKey-»
+  «IF this.hasSourceController() && this.hasTargetController() && this.hasSourceRoute()-»
+«this.getSourceRoute()» = «this.asParams()»
   «ENDIF-»
 «ENDDEFINE»
