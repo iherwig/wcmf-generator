@@ -52,20 +52,18 @@ abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «
   }
 }
 ?>
-«ENDFILE-»
+  «ENDFILE-»
 «ENDDEFINE»
 
 «REM» operation --------------------------------------------------«ENDREM»
 «DEFINE operation(Chronos::ChiController controller) FOR uml::Operation»
+  «IF this.ownedParameter.size > 0-»
       if ($method == '«this.name»') {
-  «FOREACH this.ownedParameter AS p-»
-    «IF p.direction.toString() != "return"-»
-      «IF p.type.name.toLowerCase() == 'integer'-»
-        $params[] = $request->getValue('«p.name»', «IF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«p.defaultValue.stringValue()»«ENDIF», 'filter:{"type":"number_int"}');
-      «ELSE-»
-        $params[] = $request->getValue('«p.name»', «IF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«p.defaultValue.stringValue().replaceAll("'", "\\\\'")»'«ENDIF»);
+    «FOREACH this.ownedParameter AS p-»
+      «IF p.direction.toString() != "return"-»
+        $params[] = $request->getValue('«p.name»', «IF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«p.defaultValue.stringValue().replaceAll("'", "\\\\'")»'«ENDIF», $this->getValidator('«p.name»', '«p.type.name»'));
       «ENDIF-»
-    «ENDIF-»
-  «ENDFOREACH-»
+    «ENDFOREACH-»
       }
+  «ENDIF-»
 «ENDDEFINE»

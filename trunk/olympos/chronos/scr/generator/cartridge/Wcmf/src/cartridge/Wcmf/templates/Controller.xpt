@@ -51,6 +51,22 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 «EXPAND operation(this) FOREACH this.ownedOperation-»
 
   /**
+   * Get the validator description for the given parameter.
+   * @param $parameter The name of the parameter
+   * @param $type The type of the parameter (e.g. String)
+   * @return String to be used as validateDesc parameter in Validator::validate()
+   */
+  protected function getValidator($parameter, $type) {
+«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/getValidator").asProtectedRegionId()»
+  «IF this.hasSuperClass() && !this.getSuperClass().isLibraryClass()-»
+    return parent::getValidator($parameter, $type);
+  «ELSE-»
+    return null;
+  «ENDIF-»
+«ENDPROTECT»
+  }
+
+  /**
    * Fallback method to execute, if no concrete method is defined for the request
    */
   protected function executeFallback() {
