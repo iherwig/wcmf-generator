@@ -61,7 +61,7 @@ define([
             validateType: "«curValue.restrictions_match.replaceAll('\\"', '\\\\"')»",
             validateDesc: "«curValue.restrictions_description.replaceAll('\\"', '\\\\"')»",
             tags: [«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»"«curTag»"«ENDFOREACH-»],
-            defaultValue: «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»"«curValue.defaultValue.stringValue().replaceAll('\\"', '\\\\"')»"«ENDIF»,
+            defaultValue: «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«curValue.defaultValue.quoteValue(curValue.type, "'")»«ENDIF»,
             isReference: false
 «ENDFOREACH-»«IF values.size > 0 && references.size > 0-»        }, {«ENDIF-»
 «FOREACH references AS curReference SEPARATOR "        }, {"»

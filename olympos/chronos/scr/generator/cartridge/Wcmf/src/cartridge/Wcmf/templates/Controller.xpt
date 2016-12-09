@@ -30,6 +30,7 @@ use «this.getFullPackageName().asPhpPackage()»\_base\«this.name.asBaseClass()
 «ELSEIF this.hasSuperClass()-»
 use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuperClass().name»;
 «ENDIF-»
+use wcmf\lib\validation\ValidationException;
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Import").asProtectedRegionId()»
 «ENDPROTECT»
 
@@ -62,6 +63,15 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
   «ELSE-»
     return null;
   «ENDIF-»
+«ENDPROTECT»
+  }
+
+  /**
+   * Handle a validation exception.
+   * @param $ex ValidationException
+   */
+  protected function validationFailed(ValidationException $ex) {
+«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/validationFailed").asProtectedRegionId()»
 «ENDPROTECT»
   }
 
@@ -105,7 +115,7 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
   «ENDFOREACH-»
    * @return
    */
-  «this.visibility» function «name»(«FOREACH this.ownedParameter AS p SEPARATOR ", "»«IF p.direction.toString() != "return"»$«p.name»«ENDIF»«ENDFOREACH») {
+  «this.visibility» function «name»(«FOREACH this.ownedParameter.select(e|e.direction.toString().matches(".*in.*")) AS p SEPARATOR ", "»$«p.name»«ENDFOREACH») {
 «PROTECT CSTART "// " CEND "" ID (class.getFullPackageName().asPath()+"/"+class.name.asPhpClassFile()+"/Methods/"+this.name).asProtectedRegionId()»
 «ENDPROTECT»
   }
