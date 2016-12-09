@@ -62,6 +62,11 @@ String boolString(uml::EnumerationLiteral b) :
 	b == null || b.name.toString().matches("false") ? "false" : "true"
 ;
 
+String quoteValue(Object value, Type type, String quoteChar) :
+  type.name.toLowerCase() == 'string' || type.name.toLowerCase() == 'date' ? quoteChar+value.stringValue().replaceAll(quoteChar, '\\\\'+quoteChar)+quoteChar :
+    value.stringValue()
+;
+
 String md5(String this):
 	JAVA net.sourceforge.olympos.oaw.extend.Util.md5(java.lang.String)
 ;

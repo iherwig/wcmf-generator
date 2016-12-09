@@ -26,6 +26,7 @@ namespace «this.getFullPackageName().asPhpPackage()»\_base;
 «IF this.hasSuperClass()-»
 use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuperClass().name»;
 «ENDIF-»
+use wcmf\lib\validation\ValidationException;
 
 /**
  * «IF !this.getComment("\n * ").isNullOrEmpty()»«this.getComment("\n * ")»«ELSE»«this.name»«ENDIF»
@@ -38,9 +39,9 @@ abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «
   protected function doExecute($method=null) {
     $method = $method != null ? $method : 'executeFallback';
     if (method_exists($this, $method)) {
-
-      // collect request parameters
+      // handle request/response parameters
       $request = $this->getRequest();
+      $response = $this->getResponse();
       $params = array();
       «EXPAND operation(this) FOREACH this.getOperations()-»
 
@@ -58,9 +59,20 @@ abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «
 «DEFINE operation(Chronos::ChiController controller) FOR uml::Operation»
   «IF this.ownedParameter.size > 0-»
       if ($method == '«this.name»') {
-    «FOREACH this.ownedParameter AS p-»
-      «IF p.direction.toString() != "return"-»
-        $params[] = $request->getValue('«p.name»', «IF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«p.defaultValue.stringValue().replaceAll("'", "\\\\'")»'«ENDIF», $this->getValidator('«p.name»', '«p.type.name»'));
+    «FOREACH this.ownedParameter.select(e|e.direction.toString().matches(".*in.*")) AS p-»
+        try {
+          $params['«p.name»'] = $request->getValue('«p.name»', «IF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«p.defaultValue.quoteValue(p.type, "'")»«ENDIF», $this->getValidator('«p.name»', '«p.type.name»'));
+        }
+        catch (ValidationException $ex) {
+          $params['«p.name»'] = null;
+          $this->validationFailed($ex);
+        }
+    «ENDFOREACH-»
+    «FOREACH this.ownedParameter.select(e|e.direction.toString().matches(".*out.*")) AS p-»
+      «IF p.direction.toString() == "inout"-»
+        $response->setValue('«p.name»', $params['«p.name»']);
+      «ELSE-»
+        $response->setValue('«p.name»', «IF p.getUpper() != 1»array()«ELSEIF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«p.defaultValue.quoteValue(p.type, "'")»«ENDIF»);
       «ENDIF-»
     «ENDFOREACH-»
       }

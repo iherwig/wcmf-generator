@@ -270,7 +270,7 @@ new RDBManyToOneRelationDescription(
       * «curValue.getComment(" ")»
       */
       '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', array(«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»), «REM»NOBR«ENDREM-»
-«IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»'«curValue.defaultValue.stringValue().replaceAll("'", "\\\\'")»'«ENDIF», '«curValue.restrictions_match.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
+«IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«curValue.defaultValue.quoteValue(curValue.type, "'")»«ENDIF», '«curValue.restrictions_match.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 «IF !curValue.restrictions_description.isNullOrEmpty()-»'«curValue.restrictions_description.replaceAll("'", "\\\\'")»'«ELSE-»''«ENDIF-», «curValue.is_editable.boolString()», '«curValue.input_type.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 '«curValue.display_type»', '«getTableName()»', '«curValue.getColumnName()»'),
   «ENDFOREACH-»
