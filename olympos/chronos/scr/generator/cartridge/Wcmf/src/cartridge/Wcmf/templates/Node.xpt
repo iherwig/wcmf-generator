@@ -44,10 +44,8 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 «DEFINE operation(Chronos::ChiNode class) FOR uml::Operation»
   /**
    * «IF !this.getComment("\n   * ").isNullOrEmpty()»«this.getComment("\n   * ")»«ELSE»«class.name»::«this.name»«ENDIF»
-  «FOREACH this.ownedParameter AS p-»
-    «IF p.direction.toString() != "return"-»
+  «FOREACH this.ownedParameter.select(e|e.direction.toString().matches(".*in.*")) AS p-»
    * @param «p.name» «p.getComment("")»
-    «ENDIF-»
   «ENDFOREACH-»
    * @return
    */
