@@ -41,7 +41,7 @@ abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «
   public function __construct(ObjectId $oid=null, array $initialData=null) {
 «IF this.hasSuperClass()-»
     if ($oid == null) {
-      $oid = new ObjectId('«this.name»');
+      $oid = new ObjectId('«this.getFullPackageName().asPackageName()».«this.name»');
     }
     parent::__construct($oid, $initialData);
 «ENDIF-»
