@@ -30,7 +30,6 @@ use «this.getFullPackageName().asPhpPackage()»\_base\«this.name.asBaseClass()
 «ELSEIF this.hasSuperClass()-»
 use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuperClass().name»;
 «ENDIF-»
-use wcmf\lib\validation\ValidationException;
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Import").asProtectedRegionId()»
 «ENDPROTECT»
 
