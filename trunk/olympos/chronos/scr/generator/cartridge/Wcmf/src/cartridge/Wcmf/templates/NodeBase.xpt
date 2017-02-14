@@ -13,7 +13,7 @@
 «EXTENSION cartridge::ChronosCommon::domain::ChiNode»
 
 «REM» template expands the node base class files -----------------«ENDREM»
-«DEFINE file FOR ChiNode»
+«DEFINE file FOR ChiNode-»
   «FILE this.getFullPackageName().asPath()+"/_base/"+this.name.asBaseClass().asPhpClassFile()-»
 <?php
 «HeaderText()-»
@@ -26,7 +26,6 @@ namespace «this.getFullPackageName().asPhpPackage()»\_base;
 «IF this.hasSuperClass()-»
 use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuperClass().name»;
 «ENDIF-»
-
 use wcmf\lib\persistence\ObjectId;
 
 /**

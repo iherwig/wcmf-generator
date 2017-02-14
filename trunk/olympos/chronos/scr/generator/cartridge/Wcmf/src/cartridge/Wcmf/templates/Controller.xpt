@@ -15,7 +15,7 @@
 
 «REM» This template expands the controller files -----------------«ENDREM»
 
-«DEFINE file FOR ChiController»
+«DEFINE file FOR ChiController-»
   «FILE this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()-»
 <?php
 «HeaderText()-»
@@ -48,6 +48,7 @@ use wcmf\lib\validation\ValidationException;
 «IF this.isAbstract»abstract «ENDIF»class «this.name»«IF !this.isAbstract» extends «this.name.asBaseClass()»«ELSEIF this.hasSuperClass()» extends «this.getSuperClass().name»«ENDIF» {
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Body").asProtectedRegionId()»
 «ENDPROTECT»
+
 «EXPAND operation(this) FOREACH this.ownedOperation-»
 
   /**
@@ -63,23 +64,6 @@ use wcmf\lib\validation\ValidationException;
   «ELSE-»
     return null;
   «ENDIF-»
-«ENDPROTECT»
-  }
-
-  /**
-   * Handle a validation exception.
-   * @param $ex ValidationException
-   */
-  protected function validationFailed(ValidationException $ex) {
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/validationFailed").asProtectedRegionId()»
-«ENDPROTECT»
-  }
-
-  /**
-   * Fallback method to execute, if no concrete method is defined for the request
-   */
-  protected function executeFallback() {
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/ExecuteFallback").asProtectedRegionId()»
 «ENDPROTECT»
   }
 }
@@ -105,13 +89,12 @@ use wcmf\lib\validation\ValidationException;
 «ENDDEFINE»
 
 «REM» operation --------------------------------------------------«ENDREM»
-«DEFINE operation(uml::Class class) FOR uml::Operation»
+«DEFINE operation(uml::Class class) FOR uml::Operation-»
   /**
    * «IF !this.getComment("\n   * ").isNullOrEmpty()»«this.getComment("\n   * ")»«ELSE»«class.name»::«this.name»«ENDIF»
-  «FOREACH this.ownedParameter.select(e|e.direction.toString().matches(".*in.*")) AS p-»
-   * @param «p.name» «p.getComment("")»
+  «FOREACH this.ownedParameter AS p-»
+   * @param [«p.direction.toString()»] «p.name» «p.getComment("")»
   «ENDFOREACH-»
-   * @return
    */
   «this.visibility» function «name»(«FOREACH this.ownedParameter.select(e|e.direction.toString().matches(".*in.*")) AS p SEPARATOR ", "»$«p.name»«ENDFOREACH») {
 «PROTECT CSTART "// " CEND "" ID (class.getFullPackageName().asPath()+"/"+class.name.asPhpClassFile()+"/Methods/"+this.name).asProtectedRegionId()»

@@ -19,7 +19,7 @@
 
 «REM» This template expands the mapper files ---------------------«ENDREM»
 
-«DEFINE file FOR ChiNode»
+«DEFINE file FOR ChiNode-»
   «FILE this.getFullPackageName().asPath()+"/_base/"+this.name.asMapper().asPhpClassFile()-»
 <?php
 «HeaderText()-»
@@ -98,39 +98,39 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
    * @see PersistenceMapper::getProperties()
    */
   public function getProperties() {
-    return array(
+    return [
 «IF this.metaType.toString().contains("ChiManyToMany")-»
-      'manyToMany' => array(«FOREACH this.getParentNodes() AS curParent SEPARATOR ', '»'«curParent.getRoleName()»'«ENDFOREACH»),
+      'manyToMany' => [«FOREACH this.getParentNodes() AS curParent SEPARATOR ', '»'«curParent.getRoleName()»'«ENDFOREACH»],
 «ENDIF-»
       'isSearchable' => «this.is_searchable.boolString()»,
 «IF !this.display_value.isNullOrEmpty()-»
-      'displayValues' => array(«FOREACH this.display_value.taggedValueAsList() AS curValue SEPARATOR ', '-»'«curValue»'«ENDFOREACH-»),
+      'displayValues' => [«FOREACH this.display_value.taggedValueAsList() AS curValue SEPARATOR ', '-»'«curValue»'«ENDFOREACH-»],
 «ENDIF-»
 «IF !this.child_order.isNullOrEmpty()-»
-      'relationOrder' => array(«FOREACH this.child_order.taggedValueAsList() AS curValue SEPARATOR ', '-»'«curValue»'«ENDFOREACH-»),
+      'relationOrder' => [«FOREACH this.child_order.taggedValueAsList() AS curValue SEPARATOR ', '-»'«curValue»'«ENDFOREACH-»],
 «ENDIF-»
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/_base/"+this.name.asMapper().asPhpClassFile()+"/Properties").asProtectedRegionId()»
 «ENDPROTECT»
-    );
+    ];
   }
 
   /**
    * @see RDBMapper::getOwnDefaultOrder()
    */
   public function getOwnDefaultOrder($roleName=null) {
-    $orderDefs = array();
+    $orderDefs = [];
 «IF getOrderByName() == defaultOrderByName()-»
   «FOREACH this.getParentNodesRecursive() AS curParent-»
     if ($roleName == '«curParent.getRoleName()»') {
-      $orderDefs[] = array('sortFieldName' => '«this.getOrderByNameForParent(curParent)»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
+      $orderDefs[] = ['sortFieldName' => '«this.getOrderByNameForParent(curParent)»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true];
     }
   «ENDFOREACH-»
     if ($roleName == null) {
-      $orderDefs[] = array('sortFieldName' => '«this.getOrderByName()»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true);
+      $orderDefs[] = ['sortFieldName' => '«this.getOrderByName()»', 'sortDirection' => '«this.getOrderByDirection()»', 'isSortkey' => true];
     }
 «ELSE-»
   «FOREACH this.getOrderByNames() AS orderByName-»
-    $orderDefs[] = array('sortFieldName' => '«orderByName»', 'sortDirection' => '«this.getOrderByDirection(orderByName)»', 'isSortkey' => false);
+    $orderDefs[] = ['sortFieldName' => '«orderByName»', 'sortDirection' => '«this.getOrderByDirection(orderByName)»', 'isSortkey' => false];
   «ENDFOREACH-»
 «ENDIF-»
     return $orderDefs;
@@ -140,33 +140,33 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
    * @see RDBMapper::getRelationDescriptions()
    */
   protected function getRelationDescriptions() {
-    return array(
+    return [
 «EXPAND relations-»
-    );
+    ];
   }
 
   /**
    * @see RDBMapper::getAttributeDescriptions()
    */
   protected function getAttributeDescriptions() {
-    return array(
+    return [
 «EXPAND attributes-»
   «IF getOrderByName() == defaultOrderByName()-»
   «FOREACH this.getParentNodesRecursive() AS curParent-»
       /**
        * Sort key for ordering in relation to «curParent.getRoleName()»
        */
-      '«this.getOrderByNameForParent(curParent)»' => new RDBAttributeDescription('«this.getOrderByNameForParent(curParent)»', 'Float', array('DATATYPE_IGNORE'), null, «REM»NOBR«ENDREM-»
+      '«this.getOrderByNameForParent(curParent)»' => new RDBAttributeDescription('«this.getOrderByNameForParent(curParent)»', 'Float', ['DATATYPE_IGNORE'], null, «REM»NOBR«ENDREM-»
 'regexp:{"pattern":"/^[0-9.]*$/"}', '', true, 'text[class="tiny"]', 'text', '«getTableName()»', '«this.getOrderByNameForParent(curParent)»'),
     «ENDFOREACH-»
       /**
        * Sort key for ordering
        */
-      '«this.getOrderByName()»' => new RDBAttributeDescription('«this.getOrderByName()»', 'Float', array('DATATYPE_IGNORE'), null, «REM»NOBR«ENDREM-»
+      '«this.getOrderByName()»' => new RDBAttributeDescription('«this.getOrderByName()»', 'Float', ['DATATYPE_IGNORE'], null, «REM»NOBR«ENDREM-»
 'regexp:{"pattern":"/^[0-9.]*$/"}', '', true, 'text[class="tiny"]', 'text', '«getTableName()»', '«this.getOrderByName()»'),
         «ENDIF-»
 «EXPAND references-»
-    );
+    ];
   }
 
   /**
@@ -207,7 +207,7 @@ class «this.name.asMapper()» extends NodeUnifiedRDBMapper {
 
 «REM» primaryKeyArray --------------------------------------------«ENDREM»
 «DEFINE primaryKeyArray FOR ChiNode-»
-array(«FOREACH this.getPKValues() AS curPk SEPARATOR ', '»'«curPk.name»'«ENDFOREACH»)«REM»NOBR«ENDREM-»
+[«FOREACH this.getPKValues() AS curPk SEPARATOR ', '»'«curPk.name»'«ENDFOREACH»]«REM»NOBR«ENDREM-»
 «ENDDEFINE»
 
 «REM» references -------------------------------------------------«ENDREM»
@@ -269,7 +269,7 @@ new RDBManyToOneRelationDescription(
      /**
       * «curValue.getComment(" ")»
       */
-      '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', array(«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»), «REM»NOBR«ENDREM-»
+      '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', [«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»], «REM»NOBR«ENDREM-»
 «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«curValue.defaultValue.quoteValue(curValue.type, "'")»«ENDIF», '«curValue.restrictions_match.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 «IF !curValue.restrictions_description.isNullOrEmpty()-»'«curValue.restrictions_description.replaceAll("'", "\\\\'")»'«ELSE-»''«ENDIF-», «curValue.is_editable.boolString()», '«curValue.input_type.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 '«curValue.display_type»', '«getTableName()»', '«curValue.getColumnName()»'),

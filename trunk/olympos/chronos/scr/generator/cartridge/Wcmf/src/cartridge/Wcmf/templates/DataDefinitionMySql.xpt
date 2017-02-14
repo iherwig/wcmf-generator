@@ -31,8 +31,8 @@
   «EXPAND table FOREACH (List[ChiNode])ownedType-»
 «ENDDEFINE»
 
-«DEFINE packageTraversion FOR Element»«ENDDEFINE»
-«DEFINE table FOR Element»«ENDDEFINE»
+«DEFINE packageTraversion FOR Element-»«ENDDEFINE»
+«DEFINE table FOR Element-»«ENDDEFINE»
 
 «REM» table ------------------------------------------------------«ENDREM»
 «DEFINE table FOR ChiNode-»
@@ -65,4 +65,4 @@ CREATE TABLE `«this.getTableName()»` -- entityType=«name» tableId=«IF !isNu
 «ENDIF-»
 «ENDDEFINE»
 
-«DEFINE columnName FOR ChiValue»`«this.getColumnName()»`«ENDDEFINE»
+«DEFINE columnName FOR ChiValue-»`«this.getColumnName()»`«ENDDEFINE»
