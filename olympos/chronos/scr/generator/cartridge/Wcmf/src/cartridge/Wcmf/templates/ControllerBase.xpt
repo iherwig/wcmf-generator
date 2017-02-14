@@ -13,7 +13,7 @@
 «EXTENSION cartridge::ChronosCommon::domain::ChiNode»
 
 «REM» template expands the node base class files -----------------«ENDREM»
-«DEFINE file FOR ChiController»
+«DEFINE file FOR ChiController-»
   «FILE this.getFullPackageName().asPath()+"/_base/"+this.name.asBaseClass().asPhpClassFile()-»
 <?php
 «HeaderText()-»
@@ -42,21 +42,37 @@ abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «
       // handle request/response parameters
       $request = $this->getRequest();
       $response = $this->getResponse();
-      $params = array();
+      $params = [];
       «EXPAND operation(this) FOREACH this.getOperations()-»
 
-      call_user_func_array(array($this, $method), $params);
+      call_user_func_array([$this, $method], $params);
     }
     else {
       throw new \Exception("The method '".$method."' is not defined in class ".get_class($this));
     }
+  }
+
+  /**
+   * Handle a validation exception.
+   * NOTE: Subclasses override this method for custom exception handling.
+   * @param $ex ValidationException
+   */
+  protected function validationFailed(ValidationException $ex) {}
+
+  /**
+   * Fallback method to execute, if no concrete method is defined for the request
+   * NOTE: Subclasses implement this method, if they must handle requests
+   * that do not map to a concrete method.
+   */
+  protected function executeFallback() {
+    throw new \Exception(get_class($this).' must implement method executeFallback.');
   }
 }
 «ENDFILE-»
 «ENDDEFINE»
 
 «REM» operation --------------------------------------------------«ENDREM»
-«DEFINE operation(Chronos::ChiController controller) FOR uml::Operation»
+«DEFINE operation(Chronos::ChiController controller) FOR uml::Operation-»
   «IF this.ownedParameter.size > 0-»
       if ($method == '«this.name»') {
     «FOREACH this.ownedParameter.select(e|e.direction.toString().matches(".*in.*")) AS p-»
@@ -72,7 +88,7 @@ abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «
       «IF p.direction.toString() == "inout"-»
         $response->setValue('«p.name»', $params['«p.name»']);
       «ELSE-»
-        $response->setValue('«p.name»', «IF p.getUpper() != 1»array()«ELSEIF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«p.defaultValue.quoteValue(p.type, "'")»«ENDIF»);
+        $response->setValue('«p.name»', «IF p.getUpper() != 1»[]«ELSEIF p.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«p.defaultValue.quoteValue(p.type, "'")»«ENDIF»);
       «ENDIF-»
     «ENDFOREACH-»
       }

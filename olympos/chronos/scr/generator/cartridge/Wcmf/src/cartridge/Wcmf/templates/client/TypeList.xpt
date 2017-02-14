@@ -17,7 +17,7 @@
 
 «REM» This template expands the js client files ------------------«ENDREM»
 
-«DEFINE file FOR Model»
+«DEFINE file FOR Model-»
   «FILE ApplicationPath().asPath()+"/public/js/model/_TypeList.js"-»
 «HeaderText()-»
 /**

@@ -19,7 +19,7 @@
 
 «REM» This template expands the js client files ------------------«ENDREM»
 
-«DEFINE file FOR ChiNode»
+«DEFINE file FOR ChiNode-»
   «FILE ApplicationPath().asPath()+"/public/js/"+this.getFullPackageName().asPath()+"/"+this.name+"Class.js"-»
 «HeaderText()-»
 /**

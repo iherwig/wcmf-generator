@@ -15,7 +15,7 @@
 
 «REM» This template expands the configuration files (*.ini) ------«ENDREM»
 
-«DEFINE file FOR Model»
+«DEFINE file FOR Model-»
   «FOREACH this.getConfigurationFiles() AS curConfig»
     «FILE ApplicationPath().asPath()+"/config/"+curConfig-»
 ;
@@ -75,7 +75,7 @@
 «ENDDEFINE»
 
 «REM» typeMapping -----------------------------------------------«ENDREM»
-«DEFINE typeMapping(String curConfig) FOR uml::Class»«ENDDEFINE»
+«DEFINE typeMapping(String curConfig) FOR uml::Class-»«ENDDEFINE»
 «DEFINE typeMapping(String curConfig) FOR ChiNode-»
   «IF this.isApplicationClass() && !this.isAbstract-»
 «this.getFullPackageName().asPackageName()».«this.name» = $«this.getFullPackageName().asPackageName().replaceAll("\\.", "_")»_«this.name.asMapper()»
@@ -83,7 +83,7 @@
 «ENDDEFINE»
 
 «REM» mapper -----------------------------------------------------«ENDREM»
-«DEFINE mapper(String curConfig) FOR uml::Class»«ENDDEFINE»
+«DEFINE mapper(String curConfig) FOR uml::Class-»«ENDDEFINE»
 «DEFINE mapper(String curConfig) FOR ChiNode-»
   «IF this.isApplicationClass() && !this.isAbstract-»
 [«this.getFullPackageName().asPackageName().replaceAll("\\.", "_")»_«this.name.asMapper()»]

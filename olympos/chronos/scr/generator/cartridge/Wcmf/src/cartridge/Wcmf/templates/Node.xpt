@@ -11,7 +11,7 @@
 «EXTENSION cartridge::Wcmf::extensions::util»
 
 «REM» template expands the node files ----------------------------«ENDREM»
-«DEFINE file FOR ChiNode»
+«DEFINE file FOR ChiNode-»
   «FILE this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()-»
 <?php
 «HeaderText()-»
@@ -41,7 +41,7 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 «ENDDEFINE»
 
 «REM» operation --------------------------------------------------«ENDREM»
-«DEFINE operation(Chronos::ChiNode class) FOR uml::Operation»
+«DEFINE operation(Chronos::ChiNode class) FOR uml::Operation-»
   /**
    * «IF !this.getComment("\n   * ").isNullOrEmpty()»«this.getComment("\n   * ")»«ELSE»«class.name»::«this.name»«ENDIF»
   «FOREACH this.ownedParameter.select(e|e.direction.toString().matches(".*in.*")) AS p-»
