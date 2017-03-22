@@ -10,6 +10,8 @@
 «EXTENSION cartridge::Wcmf::extensions::umlutils»
 «EXTENSION cartridge::Wcmf::extensions::util»
 
+«EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+
 «REM» template expands the node files ----------------------------«ENDREM»
 «DEFINE file FOR ChiNode-»
   «FILE this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()-»
@@ -31,6 +33,8 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 
 /**
  * «IF !this.getComment("\n * ").isNullOrEmpty()»«this.getComment("\n * ")»«ELSE»«this.name»«ENDIF»
+ *
+«EXPAND attributes FOR this-»
  */
 «IF this.isAbstract»abstract «ENDIF»class «this.name»«IF !this.isAbstract» extends «this.name.asBaseClass()»«ELSEIF this.hasSuperClass()» extends «this.getSuperClass().name»«ENDIF» {
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name.asPhpClassFile()+"/Body").asProtectedRegionId()»
@@ -53,4 +57,14 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 «PROTECT CSTART "// " CEND "" ID (class.getFullPackageName().asPath()+"/"+ class.name.asPhpClassFile()+"/Methods/"+this.name).asProtectedRegionId()»
 «ENDPROTECT»
   }
+«ENDDEFINE»
+
+«REM» attributes ---------------------------------------------------«ENDREM»
+«DEFINE attributes FOR ChiNode-»
+  «FOREACH this.getChiValuesRecursive() AS curValue-»
+ * @var «curValue.name» «IF !curValue.type.name.isNullOrEmpty() || !curValue.defaultValue.stringValue().isNullOrEmpty()»(«curValue.type.name»«IF !curValue.defaultValue.stringValue().isNullOrEmpty()», default: «curValue.defaultValue.quoteValue(curValue.type, "'")»«ENDIF»)«ENDIF»
+  «ENDFOREACH-»
+  «FOREACH this.getChiValueRefs() AS curReference-»
+ * @ref «curReference.name» («curReference.getReferencedNode().name».'«curReference.getReferencedValue().name»)
+  «ENDFOREACH-»
 «ENDDEFINE»
