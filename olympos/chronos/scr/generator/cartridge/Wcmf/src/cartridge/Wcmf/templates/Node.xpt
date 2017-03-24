@@ -11,6 +11,7 @@
 «EXTENSION cartridge::Wcmf::extensions::util»
 
 «EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiValueRef»
 
 «REM» template expands the node files ----------------------------«ENDREM»
 «DEFINE file FOR ChiNode-»
