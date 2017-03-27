@@ -66,6 +66,6 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
  * @var «curValue.name» «IF !curValue.type.name.isNullOrEmpty() || !curValue.defaultValue.stringValue().isNullOrEmpty()»(«curValue.type.name»«IF !curValue.defaultValue.stringValue().isNullOrEmpty()», default: «curValue.defaultValue.quoteValue(curValue.type, "'")»«ENDIF»)«ENDIF»
   «ENDFOREACH-»
   «FOREACH this.getChiValueRefs() AS curReference-»
- * @ref «curReference.name» («curReference.getReferencedNode().name».'«curReference.getReferencedValue().name»)
+ * @ref «curReference.name» («curReference.getReferencedNode().name».«curReference.getReferencedValue().name»)
   «ENDFOREACH-»
 «ENDDEFINE»
