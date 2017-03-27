@@ -82,7 +82,7 @@ define([
             name: "«otherNmEnd.getRoleName()»",
             type: "«otherNmEnd.type.name»",
             fkName: "«otherNmEnd.getFKName()»",
-            aggregationKind: "«otherNmEnd.aggregation»",
+            aggregationKind: "«otherNmEnd.getOtherEnd().aggregation»",
     «ENDLET-»
   «ELSE-»
             name: "«curChild.getRoleName()»",
