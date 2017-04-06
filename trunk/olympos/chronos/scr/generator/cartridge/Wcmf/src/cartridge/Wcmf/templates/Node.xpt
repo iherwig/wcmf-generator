@@ -11,7 +11,9 @@
 «EXTENSION cartridge::Wcmf::extensions::util»
 
 «EXTENSION cartridge::ChronosCommon::domain::ChiNode»
+«EXTENSION cartridge::ChronosCommon::domain::ChiValue»
 «EXTENSION cartridge::ChronosCommon::domain::ChiValueRef»
+«EXTENSION cartridge::ChronosCommon::domain::ChiManyToMany»
 
 «REM» template expands the node files ----------------------------«ENDREM»
 «DEFINE file FOR ChiNode-»
@@ -67,5 +69,21 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
   «ENDFOREACH-»
   «FOREACH this.getChiValueRefs() AS curReference-»
  * @ref «curReference.name» («curReference.getReferencedNode().name».«curReference.getReferencedValue().name»)
+  «ENDFOREACH-»
+  «FOREACH this.getChildNodesRecursive() AS curChild ITERATOR Index1-»
+    «IF !((ChiNode)curChild.type).isAbstract-»
+      «IF curChild.type.metaType.toString().contains("ChiManyToMany") && curChild.type.getOtherEndAllowSourceType(curChild.getOtherEnd(), false).size == 1-»
+        «LET curChild.type.getOtherEndAllowSourceType(curChild.getOtherEnd(), false).first() AS otherNmEnd-»
+ * @rel «otherNmEnd.getRoleName()» («otherNmEnd.type.getFullPackageName().asPackageName()».«otherNmEnd.type.name», n:m)
+        «ENDLET-»
+      «ELSE-»
+ * @rel «curChild.getRoleName()» («curChild.type.getFullPackageName().asPackageName()».«curChild.type.name», 1:n)
+      «ENDIF-»
+    «ENDIF-»
+  «ENDFOREACH-»
+  «FOREACH this.getParentNodesRecursive() AS curParent ITERATOR Index1-»
+    «IF !((ChiNode)curParent.type).isAbstract-»
+ * @rel «curParent.getRoleName()» («curParent.type.getFullPackageName().asPackageName()».«curParent.type.name», n:1)
+    «ENDIF-»
   «ENDFOREACH-»
 «ENDDEFINE»
