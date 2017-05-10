@@ -48,12 +48,13 @@ define([
         pkNames: [«FOREACH this.getPKValues() AS curPk SEPARATOR ', '-»"«curPk.name»"«ENDFOREACH-»],
         relationOrder: [«FOREACH this.child_order.taggedValueAsList() AS curRelation SEPARATOR ", "-»"«curRelation»"«ENDFOREACH-»],
 
-«LET this.getChiValuesRecursive() AS values-»
+«LET this.getValues() AS values-»
 «LET this.getChiValueRefs() AS references-»
         attributes: [«IF values.size > 0 || references.size > 0-»{«ENDIF-»
 «FOREACH values AS curValue SEPARATOR "        }, {"»
+  «IF !curValue.isTransientValue()-»
             name: "«curValue.name»",
-            type: "«curValue.type.name»",
+            type: "«IF curValue.isPKValue() || curValue.isFKValue()-»Integer«ELSE»«curValue.type.name»«ENDIF»",
             description: "«curValue.getComment(" ").replaceAll('\\"', '\\\\"')»",
             isEditable: «curValue.is_editable.boolString()»,
             inputType: "«curValue.input_type.replaceAll('\\"', '\\\\"')»",
@@ -63,6 +64,11 @@ define([
             tags: [«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»"«curTag»"«ENDFOREACH-»],
             defaultValue: «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«curValue.defaultValue.quoteValue(curValue.type, '"')»«ENDIF»,
             isReference: false
+  «ELSE-»
+            name: "«curValue.name»",
+            type: "«curValue.type.name»",
+            tags: ["DATATYPE_ATTRIBUTE"],
+  «ENDIF-»
 «ENDFOREACH-»«IF values.size > 0 && references.size > 0-»        }, {«ENDIF-»
 «FOREACH references AS curReference SEPARATOR "        }, {"»
             name: "«curReference.name»",

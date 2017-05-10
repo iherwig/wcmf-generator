@@ -47,7 +47,7 @@ context ChiNode ERROR
  */
 context ChiNode ERROR
 	this.name+" does not contain one or more of the attributes '"+this.display_value+"', which should be used as display value" :
-	this.display_value.taggedValueAsList().forAll(v|this.getChiValuesRecursive().name.contains(v) || this.getChiValueRefs().name.contains(v))
+	this.display_value.taggedValueAsList().forAll(v|this.getValues().name.contains(v))
 ;
 /**
  * Check the orderby value
