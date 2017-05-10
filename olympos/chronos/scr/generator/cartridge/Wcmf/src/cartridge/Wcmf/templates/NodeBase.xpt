@@ -45,12 +45,31 @@ abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «
     parent::__construct($oid, $initialData);
 «ENDIF-»
   }
-  «IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0 -»
+  «IF this.getTransientValues().size > 0-»
+    «EXPAND values FOR this-»
+  «ENDIF-»
+  «IF this.getParentNodesRecursive().size > 0 || this.getChildNodesRecursive().size > 0-»
     «EXPAND parents FOR this-»
     «EXPAND children FOR this-»
   «ENDIF-»
 }
 «ENDFILE-»
+«ENDDEFINE»
+
+«REM» values ----------------------------------------------------«ENDREM»
+«DEFINE values FOR ChiNode-»
+
+  /**
+   * @see PersistentObject::getValue()
+   */
+  public function getValue($name) {
+  «FOREACH this.getTransientValues() AS value-»
+    if ($name == '«value.name»') {
+      return $this->«value.name.asGetter()»();
+    }
+  «ENDFOREACH-»
+    return parent::getValue($name);
+  }
 «ENDDEFINE»
 
 «REM» parents ----------------------------------------------------«ENDREM»

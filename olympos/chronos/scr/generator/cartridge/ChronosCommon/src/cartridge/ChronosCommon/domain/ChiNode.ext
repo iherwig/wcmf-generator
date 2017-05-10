@@ -115,7 +115,14 @@ private Boolean isChildNode(ChiNode this, ChiNode other, Boolean recursive) :
  */
 
 /**
- * Get all attributes (including attributes added by the generator)
+ * Get all persistent attributes (including attributes added by the generator)
+ */
+cached List[uml::Property] getValues(ChiNode this):
+	this.attribute.select(e|e.association == null)
+;
+
+/**
+ * Get all persistent attributes (including attributes added by the generator)
  */
 cached List[ChiValue] getChiValuesRecursive(ChiNode this):
 	this.attribute.typeSelect(ChiValue)
@@ -126,6 +133,20 @@ cached List[ChiValue] getChiValuesRecursive(ChiNode this):
  */
 cached List[ChiValueRef] getChiValueRefs(ChiNode this):
 	this.attribute.typeSelect(ChiValueRef)
+;
+
+/**
+ * Get all transient attributes (no ChiValue, ChiValueRef stereotype)
+ */
+cached List[uml::Property] getTransientValues(ChiNode this):
+	this.attribute.select(e|e.isTransientValue())
+;
+
+/**
+ * Check if an attribute is a transient attributes (no ChiValue, ChiValueRef stereotype)
+ */
+cached List[uml::Property] isTransientValue(uml::Property this):
+	this.getAppliedStereotype("Chronos::ChiValueRef") == null && this.getAppliedStereotype("Chronos::ChiValue") == null && this.association == null
 ;
 
 /**

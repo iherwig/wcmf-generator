@@ -38,6 +38,7 @@ use wcmf\lib\model\mapper\RDBManyToManyRelationDescription;
 use wcmf\lib\model\mapper\RDBManyToOneRelationDescription;
 use wcmf\lib\model\mapper\RDBOneToManyRelationDescription;
 use wcmf\lib\persistence\ReferenceDescription;
+use wcmf\lib\persistence\TransientAttributeDescription;
 use wcmf\lib\persistence\ObjectId;
 
 /**
@@ -265,14 +266,18 @@ new RDBManyToOneRelationDescription(
 
 «REM» attributes ---------------------------------------------------«ENDREM»
 «DEFINE attributes FOR ChiNode-»
-  «FOREACH this.getChiValuesRecursive() AS curValue ITERATOR Index1-»
+  «FOREACH this.getValues() AS curValue ITERATOR Index1-»
      /**
       * «curValue.getComment(" ")»
       */
-      '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«curValue.type.name»', [«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»], «REM»NOBR«ENDREM-»
+    «IF !curValue.isTransientValue()-»
+      '«curValue.name»' => new RDBAttributeDescription('«curValue.name»', '«IF curValue.isPKValue() || curValue.isFKValue()-»Integer«ELSE»«curValue.type.name»«ENDIF»', [«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»'«curTag»'«ENDFOREACH-»], «REM»NOBR«ENDREM-»
 «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«curValue.defaultValue.quoteValue(curValue.type, "'")»«ENDIF», '«curValue.restrictions_match.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 «IF !curValue.restrictions_description.isNullOrEmpty()-»'«curValue.restrictions_description.replaceAll("'", "\\\\'")»'«ELSE-»''«ENDIF-», «curValue.is_editable.boolString()», '«curValue.input_type.replaceAll("'", "\\\\'")»', «REM»NOBR«ENDREM-»
 '«curValue.display_type»', '«getTableName()»', '«curValue.getColumnName()»'),
+    «ELSE-»
+      '«curValue.name»' => new TransientAttributeDescription('«curValue.name»', '«curValue.type.name»'),
+    «ENDIF-»
   «ENDFOREACH-»
 «ENDDEFINE»
 
