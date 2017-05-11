@@ -38,11 +38,8 @@
  */
 $server->wsdl->addComplexType('«this.name»', 'complexType', 'struct', 'sequence', '', [
     'oid' => ['name' => 'oid', 'type' => 'xsd:string'],
-  «FOREACH this.getChiValuesRecursive() AS curValue-»
+  «FOREACH this.getValues() AS curValue-»
     '«curValue.name»' => ['name' => '«curValue.name»', 'type' => 'xsd:string'],
-  «ENDFOREACH-»
-  «FOREACH this.getChiValueRefs() AS curRef-»
-    '«curRef.name»' => ['name' => '«curRef.name»', 'type' => 'xsd:string'],
   «ENDFOREACH-»
   «IF getOrderByName() == "sortkey"-»
     'sortkey' => ['name' => 'sortkey', 'type' => 'xsd:string'],

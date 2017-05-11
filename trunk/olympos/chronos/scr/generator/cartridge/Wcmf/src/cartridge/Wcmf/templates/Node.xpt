@@ -78,10 +78,11 @@ use «this.getSuperClass().getFullPackageName().asPhpPackage()»\«this.getSuper
 «REM» attributes ---------------------------------------------------«ENDREM»
 «DEFINE attributes FOR ChiNode-»
   «FOREACH this.getValues() AS curValue-»
+    «IF curValue.getAppliedStereotype("Chronos::ChiValueRef") != null-»
+ * @ref «curValue.name» («curValue.getReferencedNode().name».«curValue.getReferencedValue().name»)
+    «ELSE-»
  * @var «curValue.name» «IF !curValue.type.name.isNullOrEmpty() || !curValue.defaultValue.stringValue().isNullOrEmpty()»(«curValue.type.name»«IF !curValue.defaultValue.stringValue().isNullOrEmpty()», default: «curValue.defaultValue.quoteValue(curValue.type, "'")»«ENDIF»)«ENDIF»
-  «ENDFOREACH-»
-  «FOREACH this.getChiValueRefs() AS curReference-»
- * @ref «curReference.name» («curReference.getReferencedNode().name».«curReference.getReferencedValue().name»)
+    «ENDIF-»
   «ENDFOREACH-»
   «FOREACH this.getChildNodesRecursive() AS curChild ITERATOR Index1-»
     «IF !((ChiNode)curChild.type).isAbstract-»
