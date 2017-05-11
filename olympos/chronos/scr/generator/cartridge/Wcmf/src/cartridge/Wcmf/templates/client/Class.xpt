@@ -49,10 +49,9 @@ define([
         relationOrder: [«FOREACH this.child_order.taggedValueAsList() AS curRelation SEPARATOR ", "-»"«curRelation»"«ENDFOREACH-»],
 
 «LET this.getValues() AS values-»
-«LET this.getChiValueRefs() AS references-»
-        attributes: [«IF values.size > 0 || references.size > 0-»{«ENDIF-»
+        attributes: [«IF values.size > 0-»{«ENDIF-»
 «FOREACH values AS curValue SEPARATOR "        }, {"»
-  «IF !curValue.isTransientValue()-»
+  «IF curValue.getAppliedStereotype("Chronos::ChiValue") != null-»
             name: "«curValue.name»",
             type: "«IF curValue.isPKValue() || curValue.isFKValue()-»Integer«ELSE»«curValue.type.name»«ENDIF»",
             description: "«curValue.getComment(" ").replaceAll('\\"', '\\\\"')»",
@@ -63,20 +62,21 @@ define([
             validateDesc: "«curValue.restrictions_description.replaceAll('\\"', '\\\\"')»",
             tags: [«FOREACH curValue.app_data_type.taggedValueAsList() AS curTag SEPARATOR ", "-»"«curTag»"«ENDFOREACH-»],
             defaultValue: «IF curValue.defaultValue.stringValue().isNullOrEmpty()»null«ELSE»«curValue.defaultValue.quoteValue(curValue.type, '"')»«ENDIF»,
-            isReference: false
+            isReference: false,
+            isTransient: false
+  «ELSEIF curValue.getAppliedStereotype("Chronos::ChiValueRef") != null-»
+            name: "«curValue.name»",
+            type: "«curValue.getReferencedNode().name»",
+            attribute: "«curValue.getReferencedValue().name»",
+            isReference: true,
+            isTransient: true
   «ELSE-»
             name: "«curValue.name»",
             type: "«curValue.type.name»",
-            tags: ["DATATYPE_ATTRIBUTE"],
+            isReference: false,
+            isTransient: true
   «ENDIF-»
-«ENDFOREACH-»«IF values.size > 0 && references.size > 0-»        }, {«ENDIF-»
-«FOREACH references AS curReference SEPARATOR "        }, {"»
-            name: "«curReference.name»",
-            type: "«curReference.getReferencedNode().name»",
-            attribute: "«curReference.getReferencedValue().name»",
-            isReference: true
-«ENDFOREACH-»«IF values.size > 0 || references.size > 0-»        }«ENDIF-»],
-«ENDLET-»
+«ENDFOREACH-»«IF values.size > 0-»        }«ENDIF-»],
 «ENDLET-»
 
 «LET this.getChildNodesRecursive().select(e|!((Chronos::ChiNode) e.type).isAbstract).select(e|e.isNavigable()) AS children-»

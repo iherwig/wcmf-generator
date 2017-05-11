@@ -115,7 +115,7 @@ private Boolean isChildNode(ChiNode this, ChiNode other, Boolean recursive) :
  */
 
 /**
- * Get all persistent attributes (including attributes added by the generator)
+ * Get all attributes (ChiValue (including attributes added by the generator), ChiValueRef and transient)
  */
 cached List[uml::Property] getValues(ChiNode this):
 	this.attribute.select(e|e.association == null)
