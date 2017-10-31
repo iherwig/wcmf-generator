@@ -68,6 +68,7 @@ define([
             name: "«curValue.name»",
             type: "«curValue.getReferencedNode().name»",
             attribute: "«curValue.getReferencedValue().name»",
+            tags: ["GROUP_REFERENCE"],
             isReference: true,
             isTransient: true
   «ELSE-»
