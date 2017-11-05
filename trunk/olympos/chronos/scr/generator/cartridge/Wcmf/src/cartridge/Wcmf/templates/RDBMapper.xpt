@@ -32,11 +32,11 @@ namespace «this.getFullPackageName().asPhpPackage()»\_base;
 use «this.getFullPackageName().asPhpPackage()»\«this.name»;
 
 use wcmf\lib\i18n\Message;
-use wcmf\lib\model\mapper\NodeUnifiedRDBMapper;
 use wcmf\lib\model\mapper\RDBAttributeDescription;
 use wcmf\lib\model\mapper\RDBManyToManyRelationDescription;
 use wcmf\lib\model\mapper\RDBManyToOneRelationDescription;
 use wcmf\lib\model\mapper\RDBOneToManyRelationDescription;
+use wcmf\lib\model\mapper\impl\NodeUnifiedRDBMapper;
 use wcmf\lib\persistence\ReferenceDescription;
 use wcmf\lib\persistence\TransientAttributeDescription;
 use wcmf\lib\persistence\ObjectId;
