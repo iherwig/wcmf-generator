@@ -105,18 +105,18 @@ abstract class «this.name.asBaseClass()»«IF this.hasSuperClass()» extends «
         «IF isAtOtherNmEnd(this, curChildParent.type, curChild.type)-»
 
   /**
-   * Get the «curChildParent.type.name» instances in the «curChildParent.type.name» relation
+   * Get the «curChildParent.type.name» instances in the «curChildParent.getRoleName()» relation
    * @return Array of «curChildParent.type.name» instances
    */
-  public function «curChildParent.type.name.asGetter()»List() {
+  public function «curChildParent.getRoleName().asGetter()»List() {
     return $this->getValue('«curChildParent.getRoleName()»');
   }
 
   /**
-   * Set the «curChildParent.type.name» instances in the «curChildParent.type.name» relation
+   * Set the «curChildParent.type.name» instances in the «curChildParent.getRoleName()» relation
    * @param nodeList Array of «curChildParent.type.name» instances
    */
-  public function «curChildParent.type.name.asSetter()»List(array $nodeList) {
+  public function «curChildParent.getRoleName().asSetter()»List(array $nodeList) {
     $this->setValue('«curChildParent.getRoleName()»', null);
     foreach ($nodeList as $node) {
       $this->addNode($node, '«curChildParent.getRoleName()»');
