@@ -61,7 +61,7 @@ CREATE TABLE `«this.getTableName()»` -- entityType=«name» tableId=«IF !isNu
   ,KEY `«curValue.getColumnName()»` (`«curValue.getColumnName()»`)
     «ENDIF-»
   «ENDFOREACH-»
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 «ENDIF-»
 «ENDDEFINE»
 
