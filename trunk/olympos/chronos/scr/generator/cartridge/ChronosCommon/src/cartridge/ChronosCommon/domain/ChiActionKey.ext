@@ -85,14 +85,3 @@ boolean hasTargetView(ChiActionKey this) :
 cached ChiView getTargetView(ChiActionKey this) :
 	this.getEndTypes().reject(e|e == this.getSourceController()).typeSelect(ChiView).first()
 ;
-
-/**
- * Print the action key in the GET parameters format
- */
-String asParams(ChiActionKey this) :
-  let controller = this.getSourceController() :
-    ((controller != null && controller.name != "Controller" ? "&controller="+controller : "") +
-      (!this.^context.isNullOrEmpty() ? "&context="+this.^context : "") +
-        (!this.action.isNullOrEmpty() ? "&action="+this.action : "")).replaceFirst("^&", "")
-;
-
