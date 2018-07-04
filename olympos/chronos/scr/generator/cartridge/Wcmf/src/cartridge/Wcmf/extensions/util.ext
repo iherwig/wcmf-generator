@@ -11,8 +11,10 @@ extension cartridge::ChronosCommon::naming;
 
 extension cartridge::ChronosCommon::domain::ChiManyToMany;
 extension cartridge::ChronosCommon::domain::ChiNode;
+extension cartridge::ChronosCommon::domain::ChiActionKey;
 
 extension cartridge::Wcmf::extensions::globals;
+extension cartridge::Wcmf::extensions::umlutils;
 
 /**
  * Check if a given class belongs to the wCMF library
@@ -102,4 +104,14 @@ String getPKName(ChiManyToMany this) :
  */
 cached List[ChiValue] getChiValues(ChiNode this): 
 	this.attribute.typeSelect(ChiValue).select(v|!v.isGeneratorInherited())
+;
+
+/**
+ * Print the action key in the GET parameters format
+ */
+String asParams(ChiActionKey this) :
+  let controller = this.getSourceController() :
+    ((controller != null && controller.name != "Controller" ? "&controller="+controller.getFullPackageName().asPhpPackage()+"\\"+controller.name : "") +
+      (!this.^context.isNullOrEmpty() ? "&context="+this.^context : "") +
+        (!this.action.isNullOrEmpty() ? "&action="+this.action : "")).replaceFirst("^&", "")
 ;
