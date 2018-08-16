@@ -82,7 +82,7 @@ public class NodeHelper {
 											|| aggregationKind.ordinal() == AggregationKind.SHARED
 											|| (aggregationKind.ordinal() == AggregationKind.NONE && prop
 													.getOtherEnd()
-													.getAggregation().ordinal() == AggregationKind.NONE && (prop.getUpper() == -1 || prop.getUpper() > 1))) {
+													.getAggregation().ordinal() == AggregationKind.NONE && (!prop.isNavigable() && prop.getOtherEnd().isNavigable()))) {
 										if (UMLHelper
 												.hasStereotype(
 														prop.getOtherEnd()
@@ -249,7 +249,7 @@ public class NodeHelper {
 											|| aggregationKind.ordinal() == AggregationKind.SHARED
 										|| (aggregationKind.ordinal() == AggregationKind.NONE && prop
 												.getOtherEnd()
-												.getAggregation().ordinal() == AggregationKind.NONE && prop.getOtherEnd().getUpper() == 1)) {
+												.getAggregation().ordinal() == AggregationKind.NONE && (!prop.isNavigable() && prop.getOtherEnd().isNavigable()))) {
 										if (UMLHelper
 												.hasStereotype(
 														prop.getType(),
