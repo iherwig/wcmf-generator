@@ -47,7 +47,7 @@
 [«this.name»]
 «IF !this.getComment("\n; ").isNullOrEmpty()»; «this.getComment("\n; ")»
 «ENDIF-»
-«PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/config/|"+this.config+"|"+this.getFullPackageName().asPackageName()+"|"+curConfig+"/"+this.name+"SectionBegin").asProtectedRegionId()»
+«PROTECT CSTART "; " CEND "" ID (ApplicationPath()+"/config/"+curConfig+"/"+this.name+"SectionBegin").asProtectedRegionId()»
 «ENDPROTECT»
     «IF this.config == curConfig-»
       «FOREACH this.ownedAttribute AS curAttribute-»
