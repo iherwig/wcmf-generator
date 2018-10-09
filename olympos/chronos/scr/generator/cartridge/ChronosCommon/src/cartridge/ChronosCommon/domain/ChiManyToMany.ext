@@ -9,6 +9,13 @@ extension cartridge::ChronosCommon::domain::ChiValue;
 String STEREOTYPE_CHI_MANY_TO_MANY() : "Chronos::ChiManyToMany";
 
 /**
+ * Get the primary key tagged value or default pk name if not set
+ */
+String getPKName(ChiManyToMany this) : 
+  this.pk_name == null || this.pk_name.length == 0 ? defaultPKName(this) : this.pk_name
+;
+
+/**
  * Set the primary key tagged value
  */
 Void setPKName(ChiManyToMany this, String name) :

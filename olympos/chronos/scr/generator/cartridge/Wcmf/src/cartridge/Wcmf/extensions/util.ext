@@ -93,20 +93,6 @@ cached List[ActionKey] getActionKeys(uml::Model model, String config) :
 ;
 
 /**
- * Get the primary key tagged value or default pk name if not set
- */
-String getPKName(ChiManyToMany this) : 
-	this.pk_name == null || this.pk_name.length == 0 ? defaultPKName(this) : this.pk_name
-;
-
-/**
- * Get all attributes without the inherited ones
- */
-cached List[ChiValue] getChiValues(ChiNode this): 
-	this.attribute.typeSelect(ChiValue).select(v|!v.isGeneratorInherited())
-;
-
-/**
  * Print the action key in the GET parameters format
  */
 String asParams(ChiActionKey this) :

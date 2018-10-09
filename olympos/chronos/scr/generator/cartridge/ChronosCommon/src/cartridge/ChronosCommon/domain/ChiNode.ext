@@ -122,6 +122,13 @@ cached List[uml::Property] getValues(ChiNode this):
 ;
 
 /**
+ * Get all attributes without the inherited ones
+ */
+cached List[ChiValue] getChiValues(ChiNode this): 
+  this.attribute.typeSelect(ChiValue).select(v|!v.isGeneratorInherited())
+;
+
+/**
  * Get all persistent attributes (including attributes added by the generator)
  */
 cached List[ChiValue] getChiValuesRecursive(ChiNode this):
