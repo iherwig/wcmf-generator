@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project default="propagateConfig">
-	<target name="propagateConfig">
-		<replace file="${folderName}/${fileName}" token="@dionysosURL" value="${url}" />		 
-		<replace file="${folderName}/${fileName}" token="@appTitle" value="${title}" />		 
-	</target>
-</project>

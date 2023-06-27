@@ -1,4 +1,0 @@
-modelinfo: cim14 model
-
-- profiles fit to cwm-export.uml
-- the cwm-export.xml has been generated with uml2cmw, but has not been verified yet

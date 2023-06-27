@@ -1,5 +1,0 @@
-import uml;
-import xmlSchema;
-
-extension org::openarchitectureware::xsd::lib::qname;
-

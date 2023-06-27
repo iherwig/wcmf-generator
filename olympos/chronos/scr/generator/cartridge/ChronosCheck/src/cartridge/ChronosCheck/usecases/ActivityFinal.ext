@@ -1,6 +1,0 @@
-import uml;
-import Chronos;
-
-boolean hasIncoming(uml::FinalNode this):
-	this.incoming.size >= 1
-;

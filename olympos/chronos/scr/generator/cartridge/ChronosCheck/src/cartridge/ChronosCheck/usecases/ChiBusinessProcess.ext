@@ -1,8 +1,0 @@
-import uml;
-import Chronos;
-
-extension cartridge::ChronosCommon::usecases::ChiBusinessProcess;
-
-boolean hasUc(Chronos::ChiBusinessProcess this):
-	this.getUc().size > 0
-;

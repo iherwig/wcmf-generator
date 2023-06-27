@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project default="move">
-
-	<target name="move">
-		<move file="${srcFile}" tofile="${destFile}"/>
-	</target>
-  
-</project>

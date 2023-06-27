@@ -1,7 +1,0 @@
-import Chronos;
-import Ouranos;
-import uml;
-
-extension common::util;
-extension common::umlutils;
-

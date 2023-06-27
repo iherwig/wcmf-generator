@@ -1,5 +1,0 @@
-import cwm;
-
-extension common::util;
-
-extension cartridge::ModelCompare::cwmCompare;

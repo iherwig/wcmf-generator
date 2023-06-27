@@ -1,0 +1,27 @@
+import uml;
+import Chronos;
+
+extension common::util;
+
+extension cartridge::ChronosCommon::naming;
+
+/**
+ * Get the column name
+ */
+String getColumnName(ChiValue this) : 
+	this.column_name.length > 0 ? this.column_name : this.name.asSql()
+;
+
+/**
+ * Check if an attribute is a pk value
+ */
+boolean isPKValue(ChiValue this) : 
+	JAVA net.sourceforge.olympos.oaw.extend.Generator.isPKValue(org.eclipse.uml2.uml.Property)
+;
+
+/**
+ * Get the role name of a property
+ */
+String getRoleName(uml::Property this) :
+	this.name.isNullOrEmpty() ? this.type.name : this.name
+;

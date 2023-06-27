@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: generator.cartridge.GrailsService
-Bundle-SymbolicName: generator.cartridge.GrailsService; singleton:=true
-Bundle-Version: 1.0.0
-Require-Bundle:  org.openarchitectureware.dependencies
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<project name="freemind" default="packageZip">
-	<target name="packageZip">
-		<unzip dest="${target.dir}">
-			<fileset file="${zip.template}"/>
-		</unzip>
-	</target>
-</project>
