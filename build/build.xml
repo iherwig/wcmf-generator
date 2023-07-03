@@ -67,13 +67,13 @@
       </fileset>
     </copy>
 
-    <manifestclasspath property="lib.list" jarfile="${redist.dir}/${jar.file}">
+    <manifestclasspath property="lib.list" jarfile="${redist.javadir}/${jar.file}">
       <classpath>
         <fileset dir="${redist.libdir}"/>
       </classpath>
     </manifestclasspath>
 
-    <jar jarfile="${redist.dir}/${jar.file}">
+    <jar jarfile="${redist.javadir}/${jar.file}">
       <fileset dir="${build.dir}">
         <include name="**/*.class"/>
       </fileset>
@@ -85,7 +85,7 @@
     </jar>
 
     <!-- copy all files ... -->
-    <copy todir="${redist.dir}/" verbose="false">
+    <copy todir="${redist.javadir}" verbose="false">
       <fileset dir="${source.dir}">
         <include name="common/**/*.*"/>
         <include name="metamodel/chronos.profile.uml"/>
@@ -97,8 +97,12 @@
       <fileset file="${res.dir}/run.bat" />
       <fileset file="${res.dir}/log4j.properties" />
     </copy>
-    <copy todir="${redist.dir}/cartridge" verbose="false">
+    <copy todir="${redist.javadir}/cartridge" verbose="false">
       <fileset dir="${cartridge.build.dir}" />
+    </copy>
+    <copy todir="${redist.dir}" verbose="false">
+      <fileset file="${res.dir}/index.js" />
+      <fileset file="${res.dir}/package.json" />
     </copy>
 
     <zip destfile="${zip.dir}/ChronosGenerator-wCMF-${version}.zip" basedir="${redist.dir}"/>

@@ -1,0 +1,19 @@
+{
+  "name": "wcmf-generator",
+  "version": "1.0.0",
+  "description": "Code generator for the wCMF framework",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iherwig/wcmf-generator.git"
+  },
+  "keywords": [
+    "code-generator"
+  ],
+  "author": "ingo@wemove.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iherwig/wcmf-generator/issues"
+  },
+  "homepage": "https://github.com/iherwig/wcmf-generator#readme"
+}
