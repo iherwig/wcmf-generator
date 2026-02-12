@@ -2,6 +2,19 @@
   "name": "wcmf-generator",
   "version": "1.0.0",
   "description": "Code generator for the wCMF framework",
+  "author": "ingo@wemove.com",
+  "license": "MIT",
+  "homepage": "https://github.com/iherwig/wcmf-generator#readme",
+  "keywords": [
+    "code-generator"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iherwig/wcmf-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iherwig/wcmf-generator/issues"
+  },
   "main": "index.js",
   "types": "index.d.ts",
   "files": [
@@ -9,17 +22,7 @@
     "index.d.ts",
     "dist"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iherwig/wcmf-generator.git"
-  },
-  "keywords": [
-    "code-generator"
-  ],
-  "author": "ingo@wemove.com",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/iherwig/wcmf-generator/issues"
-  },
-  "homepage": "https://github.com/iherwig/wcmf-generator#readme"
+  "engines": {
+    "node": ">=20"
+  }
 }

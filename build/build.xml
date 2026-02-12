@@ -35,7 +35,7 @@
 
   <target name="compile" depends="build-cartridges">
     <tstamp/>
-    <javac encoding="utf-8" srcdir="${source.dir}" destdir="${build.dir}" debug="${debug}" excludesfile="compile-excludes">
+    <javac encoding="utf-8" srcdir="${source.dir}" destdir="${build.dir}" debug="${debug}" excludesfile="compile-excludes" release="8">
       <classpath>
         <path refid="lib.path"/>
       </classpath>
