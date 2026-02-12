@@ -1,0 +1,20 @@
+extension common::naming;
+
+/**
+ * Convert a package name into a path with prefix "backend"
+ */
+String asBackendPath(String name) :
+	asPath(asPackageName("backend") + "." + name)
+;
+
+/**
+ * Convert a package name into a path with prefix "frontend/src"
+ */
+String asFrontendPath(String name) :
+	asPath(asPackageName("frontend/src") + "." + name)
+;
+
+/**
+ * Get the typescript class file name for a class
+ */
+String asTsClassFile(String name): name+".ts";

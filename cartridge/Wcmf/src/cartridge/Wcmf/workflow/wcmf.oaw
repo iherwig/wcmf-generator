@@ -105,6 +105,7 @@
 		<globalVarDef name="GeneratorVersion" value="'${generatorVersion}'"/>
 		<globalVarDef name="PrintGenerateDate" value="'${printGenerateDate}'"/>
 		<globalVarDef name="ModelFile" value="'${modelUmlFile}'"/>
+		<globalVarDef name="ModelVersion" value="'${modelVersion}'"/>
 		<globalVarDef name="RootPackage" value="'${rootPackage}'"/>
 		<globalVarDef name="LibraryPackage" value="'${libraryPackage}'"/>
 		<globalVarDef name="ApplicationPackage" value="'${applicationPackage}'"/>

@@ -9,6 +9,7 @@ extension common::naming;
 String GeneratorVersion() : GLOBALVAR GeneratorVersion;
 String PrintGenerateDateStr() : GLOBALVAR PrintGenerateDate;
 String ModelFile() : GLOBALVAR ModelFile;
+String ModelVersion(): GLOBALVAR ModelVersion;
 String ProfileFile() : GLOBALVAR ProfileFile;
 String RootPackage() : GLOBALVAR RootPackage;
 String LibraryPackage() : GLOBALVAR LibraryPackage;

@@ -9,14 +9,14 @@
   «info('Expand Model')»
   «EXPAND cartridge::Wcmf::templates::DataDefinitionMySql::file»
   «EXPAND cartridge::Wcmf::templates::DataDefinitionSqlite::file»
-  «EXPAND cartridge::Wcmf::templates::Soap::file»
-  «EXPAND cartridge::Wcmf::templates::Configuration::file»
+  «EXPAND cartridge::Wcmf::templates::backend::Soap::file»
+  «EXPAND cartridge::Wcmf::templates::backend::Configuration::file»
   «EXPAND node FOREACH this.allOwnedElements().typeSelect(ChiNode)»
   «EXPAND manyToMany FOREACH this.allOwnedElements().typeSelect(ChiManyToMany)»
   «EXPAND controller FOREACH this.allOwnedElements().typeSelect(ChiController)»
   «EXPAND view FOREACH this.allOwnedElements().typeSelect(ChiView)»
 
-  «EXPAND cartridge::Wcmf::templates::client::TypeList::file»
+  «EXPAND cartridge::Wcmf::templates::frontend::TypeList::file»
   «EXPAND client FOREACH this.allOwnedElements().typeSelect(ChiNode)»
 
   «EXPAND class FOREACH this.allOwnedElements().typeSelect(uml::Class).select(e|e.getAppliedStereotypes().size == 0)»
@@ -28,10 +28,10 @@
   «IF this.isApplicationClass()»
     «info('Expand ChiNode '+this.name)»
     «IF !this.isAbstract»
-      «EXPAND cartridge::Wcmf::templates::RDBMapper::file FOR this»
-      «EXPAND cartridge::Wcmf::templates::NodeBase::file FOR this»
+      «EXPAND cartridge::Wcmf::templates::backend::RDBMapper::file FOR this»
+      «EXPAND cartridge::Wcmf::templates::backend::NodeBase::file FOR this»
     «ENDIF»
-    «EXPAND cartridge::Wcmf::templates::Node::file FOR this»
+    «EXPAND cartridge::Wcmf::templates::backend::Node::file FOR this»
   «ENDIF»
 «ENDDEFINE»
 
@@ -40,10 +40,10 @@
   «IF this.isApplicationClass()»
     «info('Expand ChiManyToMany '+this.name)»
     «IF !this.isAbstract»
-      «EXPAND cartridge::Wcmf::templates::RDBMapper::file FOR this»
-      «EXPAND cartridge::Wcmf::templates::NodeBase::file FOR this»
+      «EXPAND cartridge::Wcmf::templates::backend::RDBMapper::file FOR this»
+      «EXPAND cartridge::Wcmf::templates::backend::NodeBase::file FOR this»
     «ENDIF»
-    «EXPAND cartridge::Wcmf::templates::Node::file FOR this»
+    «EXPAND cartridge::Wcmf::templates::backend::Node::file FOR this»
   «ENDIF»
 «ENDDEFINE»
 
@@ -51,7 +51,7 @@
 «DEFINE class FOR uml::Class»
   «IF this.isApplicationClass()»
     «info('Expand Class '+this.name)»
-    «EXPAND cartridge::Wcmf::templates::Class::file FOR this»
+    «EXPAND cartridge::Wcmf::templates::backend::Class::file FOR this»
   «ENDIF»
 «ENDDEFINE»
 
@@ -60,9 +60,9 @@
   «IF this.isApplicationClass()»
     «info('Expand ChiController '+this.name)»
     «IF !this.isAbstract»
-      «EXPAND cartridge::Wcmf::templates::ControllerBase::file FOR this»
+      «EXPAND cartridge::Wcmf::templates::backend::ControllerBase::file FOR this»
     «ENDIF»
-    «EXPAND cartridge::Wcmf::templates::Controller::file FOR this»
+    «EXPAND cartridge::Wcmf::templates::backend::Controller::file FOR this»
   «ENDIF»
 «ENDDEFINE»
 
@@ -70,7 +70,7 @@
 «DEFINE view FOR ChiView»
   «IF this.isApplicationClass()»
     «info('Expand ChiView '+this.name)»
-    «EXPAND cartridge::Wcmf::templates::View::file FOR this»
+    «EXPAND cartridge::Wcmf::templates::backend::View::file FOR this»
   «ENDIF»
 «ENDDEFINE»
 
@@ -79,7 +79,7 @@
   «IF this.isApplicationClass()»
     «info('Expand ChiNode (JS) '+this.name)»
     «IF !this.isAbstract»
-      «EXPAND cartridge::Wcmf::templates::client::Class::file FOR this»
+      «EXPAND cartridge::Wcmf::templates::frontend::Class::file FOR this»
     «ENDIF»
   «ENDIF»
 «ENDDEFINE»
