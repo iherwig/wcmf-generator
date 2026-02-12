@@ -1,0 +1,10 @@
+import uml;
+import Chronos;
+
+List[Chronos::ChiRequirement] getParents(Chronos::ChiFeature this):
+	this.getRelationships().typeSelect(uml::Realization).supplier.typeSelect(Chronos::ChiRequirement)
+;
+
+List[Chronos::ChiBusinessUseCase] getBusinessUseCases(Chronos::ChiFeature this):
+	this.getRelationships().typeSelect(uml::Realization).client.typeSelect(Chronos::ChiBusinessUseCase)
+;

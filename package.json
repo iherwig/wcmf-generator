@@ -4,6 +4,11 @@
   "description": "Code generator for the wCMF framework",
   "main": "index.js",
   "types": "index.d.ts",
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iherwig/wcmf-generator.git"

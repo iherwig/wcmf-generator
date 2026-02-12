@@ -1,0 +1,123 @@
+import uml;
+import Chronos;
+
+extension org::openarchitectureware::uml2::profile::profiling;
+
+extension common::util;
+extension common::umlutils;
+
+extension cartridge::ChronosCommon::naming;
+extension cartridge::ChronosCommon::util;
+
+extension cartridge::ChronosCommon::domain::ChiNode;
+extension cartridge::ChronosCommon::domain::ChiValue;
+extension cartridge::ChronosCommon::domain::ChiValueRef;
+extension cartridge::ChronosCommon::domain::ChiActionKey;
+
+extension cartridge::Wcmf::extensions::globals;
+extension cartridge::Wcmf::extensions::umlutils;
+extension cartridge::Wcmf::extensions::util;
+
+
+/**
+ * Model checks
+ */
+/**
+ * Check if the Chronos profile is applied to the model, 
+ */
+context Model ERROR
+	"The model does not have the Chronos metamodel attached" :
+	this.getAppliedProfile("Chronos") != null
+;
+
+/**
+ * Node checks
+ */
+
+/**
+ * Check the base class
+ */
+context ChiNode ERROR
+	this.getQualifiedName()+" being not a defined as library in "+LibraryPackageAbsolute(this.getModel())+" does not inherit from '"+RequiredNodeSuperClass()+"', but from "+this.superClass.name :
+	let requiredSuperClass = this.getModel().allOwnedElements().typeSelect(ChiNode).select(e|e.qualifiedName == RequiredNodeSuperClass()).first() :
+ 		!this.isLibraryClass() ? this.isInheritingFrom(requiredSuperClass) : true
+;
+/**
+ * Check the display_value value
+ */
+context ChiNode ERROR
+	this.name+" does not contain one or more of the attributes '"+this.display_value+"', which should be used as display value" :
+	this.display_value.taggedValueAsList().forAll(v|this.getValues().name.contains(v))
+;
+/**
+ * Check the orderby value
+ */
+context ChiNode ERROR
+	this.name+" does not contain one or more of the attributes '"+this.getOrderByNames()+"', which should be used for sorting" :
+	this.getOrderByNames().forAll(v|v == defaultOrderByName() || v == "none" ? true : (this.getChiValuesRecursive().name.contains(v) || this.getChiValueRefs().name.contains(v)))
+;
+/**
+ * Check the initparams
+ */
+context ChiNode ERROR
+	this.name+" references initparams '"+this.initparams+"', which are not defined as configuration class of type ChiSystem" :
+	this.getModel().allOwnedElements().typeSelect(ChiSystem).name.toLowerCase().contains(this.initparams.toLowerCase())
+;
+      
+/**
+ * Value checks
+ */
+
+/**
+ * Check for invalid names
+ */
+context ChiValue if ChiNode.isInstance(this.owner) ERROR
+	"Found not allowed value name '"+this.name+"' in class "+this.getOwningClass().name :
+	this.name.toLowerCase() != defaultOrderByName()
+;
+
+/**
+ * ValueRef checks
+ */
+
+/**
+ * Check if referenced type exists
+ */
+/* 
+context ChiValueRef ERROR
+	"Type '"+this.reference_type+"' referenced in '"+this.getOwningClass().name+"' not found or not related as parent/child." :
+	this.getReferencedNode() != null
+;
+*/
+
+/**
+ * Check if the referenced value exists in the referenced type
+ */
+/*
+context ChiValueRef ERROR
+	"Value '"+this.reference_value+"' referenced in '"+this.getOwningClass().name+"' not found in type '"+this.reference_type+"'" :
+	//only check if node exists
+	this.getReferencedNode() == null || this.getReferencedValue() != null
+;
+*/
+    
+/**
+ * Controller checks
+ */
+
+/**
+ * Check the base class
+ */
+context ChiController ERROR
+	this.name+" does not inherit from '"+RequiredControllerSuperClass()+"', but from "+this.superClass.name :
+	let requiredSuperClass = this.getModel().allOwnedElements().typeSelect(ChiController).select(e|e.qualifiedName == RequiredControllerSuperClass()).first() :
+ 		!this.isLibraryClass() ? this.isInheritingFrom(requiredSuperClass) : true
+;
+
+/**
+ * ActionKey checks
+ */
+context ChiActionKey ERROR
+	"Association '"+this.name+"' between '"+this.getSourceController().name+"' and '"+this.getTargetController().name+"' has an empty config tag" :
+	!this.config.isNullOrEmpty()
+;

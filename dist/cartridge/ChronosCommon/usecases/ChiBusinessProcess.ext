@@ -1,0 +1,6 @@
+import uml;
+import Chronos;
+
+List[Chronos::ChiBusinessUseCase] getUc(Chronos::ChiBusinessProcess this):
+	this.ownedType.typeSelect(Chronos::ChiBusinessUseCase)
+;

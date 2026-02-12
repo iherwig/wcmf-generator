@@ -1,0 +1,217 @@
+/*
+ * Copyright (c) 2011 The Olympos Development Team.
+ * 
+ * http://sourceforge.net/projects/olympos/
+ *
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html. If redistributing this code,
+ * this entire header must remain intact.
+ */
+
+import ecore;
+import uml;
+
+extension org::openarchitectureware::uml2::utils;
+
+extension common::util;
+
+/**
+ * Get the xmi:id of an element
+ */
+String getId(uml::Element this) : this.xmiId();
+
+/**
+ * Get the author of an element
+ * TODO: check if this is supported in a profile / supported by other tools than ea
+ */
+String getAuthor(uml::Element this) : "";
+
+/**
+ * Get the version of an element
+ * TODO: check if this is supported in a profile / supported by other tools than ea
+ */
+String getVersion(uml::Element this) : "1.0";
+
+/**
+ * Get the comment of an element joined with linebreaks
+ */
+String getComment(uml::Element this) : join(this.ownedComment.body, "\\n").replaceAll("(\\r)", "");
+
+/**
+ * Get the comment of an element joined with the given separator
+ */
+String getComment(uml::Element this, String separator) : this.getComment().replaceAll("(\\n)", separator);
+
+/**
+ * Get the role names of a class (names of association ends)
+ */
+cached List[String] getRoleNames(uml::Type this) :
+	this.getAssociations().memberEnd.select(e|e.type == this).name.reject(e|e.length == 0).add(this.name).toSet()
+;
+
+/**
+ * Get the role name of a property
+ */
+String getRoleName(uml::Property this) :
+	this.name.isNullOrEmpty() ? this.type.name : this.name
+;
+
+/**
+ * Get the subclasses of a class
+ */
+cached List[uml::Class] getSubClasses(uml::Class this) : 
+	this.getModel().allOwnedElements().typeSelect(uml::Class).select(e|uml::Class.isInstance(e) && e.getGenerals().contains(this));
+
+cached List[uml::Class] getSubClassesRecursive(uml::Class this):
+	let result = {}:
+	let subClasses = this.getSubClasses():
+
+
+	subClasses != null && subClasses.size > 0 ? (
+	  result.addAll(subClasses) ->
+	  result.addAll(subClasses.getSubClassesRecursive())
+	) : (
+	  Void
+	) ->
+
+	result
+;
+
+
+/**
+ * Get all superclasses of a class
+ */
+List[uml::Class] getSuperClassesRecursive(uml::Class this) :
+	let l = (List[uml::Class]) {} : 
+		this.superClass.size > 0 ?
+			this.superClass.getSuperClassesRecursive().addAll(this.superClass)
+		:
+			l
+;
+
+/**
+ * Check if the given class has a super class
+ */
+boolean hasSuperClass(uml::Class this) : !this.superClass.isEmpty;
+
+/**
+ * Get the (first) superclass of a class
+ */
+uml::Class getSuperClass(uml::Class this) : this.superClass.first();
+
+/**
+ * Check if a class inherits from another
+ */
+Boolean isInheritingFrom(uml::Class this, uml::Class other) :
+	this.superClass.contains(other) ? true : 
+		this.superClass.exists(e|this.isInheritingFrom(e))
+;
+
+/**
+ * Check if an association is bidirectional
+ */	
+boolean isBidirectional(uml::Association assoc) :
+	assoc.memberEnd.size==2 && assoc.memberEnd.forAll(e|e.isNavigable())
+;
+
+/**
+ * Check if an association is a composition
+ */	
+boolean isComposition(uml::Property p) :
+	p.aggregation.compareTo(uml::AggregationKind::composite) == 0
+;
+
+/**
+ * Check if an association is an aggregation
+ */	
+boolean isAggregation(uml::Property p) :
+	p.aggregation.compareTo(uml::AggregationKind::shared) == 0
+;
+
+/**
+ * Get a tagged value
+ */
+Object getTaggedValue(uml::Element this, String stereotypeName, String tagName) :
+//	JAVA net.sourceforge.olympos.oaw.extend.UMLHelper.getTaggedValue(org.eclipse.uml2.uml.Element, java.lang.String, java.lang.String)
+
+	let stereotype = this.getAppliedStereotype(stereotypeName):
+	stereotype != null ? (
+		this.hasValue(stereotype, tagName) ? (
+			this.getValue(stereotype, tagName)
+		) : (
+			null
+		)
+	) : (
+		null
+	)
+;
+
+
+/**
+ * Get the class that owns the given property
+ */
+uml::Class getOwningClass(uml::Property this) : 
+	this.owner
+;
+
+/**
+ * Private functions
+ */ 
+ 
+/**
+ * Get the fully qualified name of the package
+ */
+cached String getPackageName(uml::Package pck) :
+	(pck.nestingPackage != null && !uml::Model.isInstance(pck.nestingPackage)) ?
+		getPackageName(pck.nestingPackage) + "." + pck.name
+	: (
+		!uml::Model.isInstance(pck) ?
+			pck.name
+		:
+			null
+	)
+;
+
+String fullQualifiedName(uml::NamedElement this):
+	this.owner != null ?
+		this.name + "<-" + this.owner.fullQualifiedName()
+	:
+		this.name
+;
+
+String fullQualifiedName(uml::Element this):
+	this.toString()
+;
+
+Collection stereotypedContents(Collection this):
+	JAVA net.sourceforge.olympos.oaw.extend.Stereotype.getListContents(java.util.Collection)
+;
+
+Collection stereotypedContents(uml::Element this, String stereotypeName, String taggedValueName):
+	let taggedValue = this.getTaggedValue(stereotypeName, taggedValueName):
+	Collection.isInstance(taggedValue) ?
+		((Collection) taggedValue).stereotypedContents()
+	:
+		taggedValue
+;
+
+Object getTaggedValueAssociation(uml::Element this, String stereotypeName, String taggedValueName):
+	JAVA net.sourceforge.olympos.oaw.extend.Stereotype.getPropertyContents(org.eclipse.uml2.uml.Element, java.lang.String, java.lang.String)
+;
+
+String getHash(uml::Element this):
+	!this.fullQualifiedName().isNullOrEmpty() ?
+		this.fullQualifiedName().md5()
+	:
+		null
+;
+
+List[uml::Property] getOwnEnds(uml::Type this):
+	this.getAssociations().memberEnd.select(e|e.type == this)
+;
+
+List[uml::Property] getOwnAssociationEnds(uml::Classifier this):
+	this.getAssociations().memberEnd.select(e|e.type == this).getOtherEnd()
+;

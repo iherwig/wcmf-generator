@@ -1,0 +1,26 @@
+import uml;
+import Chronos;
+
+List[Chronos::ChiFeature] getFeature(Chronos::ChiBusinessUseCase this):
+	this.getRelationships().typeSelect(uml::Realization).supplier.typeSelect(Chronos::ChiFeature)
+;
+
+List[uml::Activity] getActivitySets(Chronos::ChiBusinessUseCase this):
+	this.ownedBehavior
+;
+
+uml::InitialNode getInitial(Chronos::ChiBusinessUseCase this):
+	this.getActivitySets().node.typeSelect(uml::InitialNode).first()
+;
+
+List[uml::ActivityFinalNode] getFinals(Chronos::ChiBusinessUseCase this):
+	this.getActivitySets().node.typeSelect(uml::ActivityFinalNode)
+;
+
+uml::Actor getPrimaryActor(Chronos::ChiBusinessUseCase this):
+	this.getModel().allOwnedElements().typeSelect(uml::Actor).selectFirst(e|e.name == this.PrimaryActor)
+;
+
+List[uml::Actor] getActors(Chronos::ChiBusinessUseCase this):
+	this.getAssociations().memberEnd.select(e|e.type == this).getOtherEnd().type.typeSelect(uml::Actor)
+;
