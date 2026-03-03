@@ -107,10 +107,9 @@ export default class «this.name» extends EntityClass implements EntityType {
 «ENDLET-»
 
 «PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+".ts/Body").asProtectedRegionId()»
-  listView: string = '../data/widget/EntityListWidget'
-  detailView: string = '../data/widget/EntityListWidget'
-«ENDPROTECT»
-«PROTECT CSTART "// " CEND "" ID (this.getFullPackageName().asPath()+"/"+this.name+".ts/Static").asProtectedRegionId()»
+  // NOTE use absolute paths
+  listView: string = '/src/components/data/EntityList.vue'
+  detailView: string = '/src/components/data/EntityForm.vue'
 «ENDPROTECT»
 }
 «ENDFILE-»
